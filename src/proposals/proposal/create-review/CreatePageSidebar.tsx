@@ -6,7 +6,10 @@ import { formatJsxTemplate, translate } from '@/i18n';
 import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ProposalReview } from '@/proposals/types';
+import { useCallFixedDuration } from '@/proposals/callQueries';
+import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
+import { Proposal, ProposalReview } from '@/proposals/types';
+import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { isReviewInFinalState } from '@/proposals/utils';
 import { ActionButton } from '@/table/ActionButton';
 
@@ -20,14 +23,22 @@ const tabs = createReviewSteps.map((step) => ({
 
 interface CreatePageSidebarProps {
   review: ProposalReview;
+  /** Whose requests the summary totals. */
+  proposal: Proposal;
   refetch?(): void;
 }
 
 export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
   review,
+  proposal,
   refetch,
 }) => {
   const { openDialog } = useModal();
+  // The applicant sees this total beside their own form; a reviewer weighing
+  // the proposal needs the same figure, and the steps below only show the
+  // per-row costs.
+  const { data: resourceRows } = useProposalResourceRows(proposal?.uuid);
+  const fixedDurationDays = useCallFixedDuration(proposal?.call_uuid);
 
   const rejectMutation = useManagedMutation<any, any, void>({
     mutationFn: () => proposalReviewsReject({ path: { uuid: review.uuid } }),
@@ -52,6 +63,11 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
       <Panel title={translate('Progress')} cardBordered className="mb-5">
         <PageBarTabs tabs={tabs} mode="tabs-left" />
       </Panel>
+      <ProposalCostTotal
+        rows={resourceRows || []}
+        fixedDurationDays={fixedDurationDays}
+        panel
+      />
       {review && !isReviewInFinalState(review.state) && (
         <>
           <ActionButton

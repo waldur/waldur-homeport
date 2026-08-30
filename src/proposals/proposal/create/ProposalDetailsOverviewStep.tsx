@@ -9,6 +9,10 @@ import { EndingField } from '@/proposals/EndingField';
 // call-manager view alike, so the gate is the deployment's presentation
 // policy, never which page it happens to be mounted in.
 import { showsCallContext } from '@/proposals/presentation';
+import {
+  ProjectDurationNote,
+  useProjectDuration,
+} from '@/proposals/ProjectDurationNote';
 import { Proposal } from '@/proposals/types';
 import { Field } from '@/resource/summary';
 import { ActionButton } from '@/table/ActionButton';
@@ -61,6 +65,7 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
   // Only surfaced where reviews are relevant (call-manager proposal view); the
   // backend also scopes review visibility.
   const canViewReviews: boolean = props.params.canViewReviews;
+  const projectDuration = useProjectDuration(proposal);
   return (
     <VStepperFormStepCard
       id={props.id}
@@ -112,6 +117,11 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
               labelCol={5}
               valueCol={7}
             />
+          </Col>
+        )}
+        {projectDuration && (
+          <Col sm={6}>
+            <ProjectDurationNote duration={projectDuration} />
           </Col>
         )}
         <Col sm={6}>

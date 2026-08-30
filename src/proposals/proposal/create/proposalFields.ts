@@ -1,4 +1,3 @@
-import { showsProposalDuration } from '@/proposals/presentation';
 import {
   ProposalFieldConfig,
   ProposalFieldName,
@@ -47,21 +46,15 @@ export const isFieldRequired = (
  * it identifies the proposal and forms the last third of the awarded project's
  * name (see getProposalProjectName).
  *
- * `duration_in_days` is always required *when asked at all*, but it answers to
- * a second axis: it is a question a call asks, so the marketplace-only
- * applicant view drops it (see showsProposalDuration). It is filtered here
- * rather than at each call site so the step's own tracked list and the
- * wizard's `fields`/`requiredFields` cannot disagree — a field listed but not
- * rendered leaves the step permanently short of its total. */
-const durationFields = (): string[] =>
-  showsProposalDuration() ? ['duration_in_days'] : [];
-
+ * The project duration is deliberately absent: it is no longer a question the
+ * form asks. Allocation derives it from the subscriptions requested and the
+ * call's fixed duration (see projectDuration.ts), so a field here would count
+ * towards a total the applicant has no way to fill. */
 export const getTrackedFields = (
   states: Record<ProposalFieldName, ProposalFieldState>,
 ): string[] => [
   'name',
   ...CONFIGURABLE_FIELDS.filter((field) => isFieldVisible(states, field)),
-  ...durationFields(),
 ];
 
 export const getRequiredFields = (
@@ -69,7 +62,6 @@ export const getRequiredFields = (
 ): string[] => [
   'name',
   ...CONFIGURABLE_FIELDS.filter((field) => isFieldRequired(states, field)),
-  ...durationFields(),
 ];
 
 /**

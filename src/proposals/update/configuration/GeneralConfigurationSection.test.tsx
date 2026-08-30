@@ -1,61 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  resolveFixedDurationChange,
-  validateFixedDuration,
-} from './GeneralConfigurationSection';
-
-const call = (fixed_duration_in_days: number | null) =>
-  ({ fixed_duration_in_days }) as any;
-
-describe('resolveFixedDurationChange', () => {
-  it('ignores a payload without the duration', () => {
-    expect(resolveFixedDurationChange(call(30), { name: 'Call' })).toBeNull();
-  });
-
-  it('detects a new value submitted as a string by the number input', () => {
-    expect(
-      resolveFixedDurationChange(call(30), { fixed_duration_in_days: '45' }),
-    ).toBe('set');
-  });
-
-  it('treats an unchanged value as no change', () => {
-    expect(
-      resolveFixedDurationChange(call(30), { fixed_duration_in_days: '30' }),
-    ).toBeNull();
-    expect(
-      resolveFixedDurationChange(call(null), {
-        fixed_duration_in_days: null,
-      }),
-    ).toBeNull();
-  });
-
-  it('detects clearing of an existing value', () => {
-    expect(
-      resolveFixedDurationChange(call(30), { fixed_duration_in_days: null }),
-    ).toBe('clear');
-    expect(
-      resolveFixedDurationChange(call(30), { fixed_duration_in_days: '' }),
-    ).toBe('clear');
-  });
-
-  it('detects setting a value on a call without one', () => {
-    expect(
-      resolveFixedDurationChange(call(null), { fixed_duration_in_days: 45 }),
-    ).toBe('set');
-  });
-
-  // Zero is a submitted value, not an empty one: the backend rejects it, and
-  // announcing it as a clearing would describe the wrong outcome.
-  it('does not treat zero as clearing', () => {
-    expect(
-      resolveFixedDurationChange(call(30), { fixed_duration_in_days: 0 }),
-    ).toBe('set');
-  });
-});
+import { validateFixedDuration } from './GeneralConfigurationSection';
 
 describe('validateFixedDuration', () => {
-  it('accepts an empty value, leaving clearing to the confirmation flow', () => {
+  it('accepts an empty value, which clears the fixed duration', () => {
     expect(validateFixedDuration(null)).toBeUndefined();
     expect(validateFixedDuration('')).toBeUndefined();
     expect(validateFixedDuration(undefined)).toBeUndefined();

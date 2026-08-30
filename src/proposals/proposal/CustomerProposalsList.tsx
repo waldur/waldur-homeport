@@ -84,12 +84,7 @@ export const CustomerProposalsList: FC = () => {
         },
         {
           title: translate('Ending'),
-          render: ({ row }) => (
-            <EndingField
-              endDate={row.round?.cutoff_time}
-              hasFixedDuration={Boolean(row.duration_in_days)}
-            />
-          ),
+          render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
           className: 'text-nowrap',
         },
         {

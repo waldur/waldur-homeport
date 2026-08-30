@@ -19,7 +19,7 @@ import {
  * deadline, a call name) and must agree with the pages they lead to.
  *
  * The helpers below are deliberately separate rather than one `isMarketplace`
- * predicate: at the call site `showsProposalDuration()` says *why* a field is
+ * predicate: at the call site `showsCallContext()` says *why* a block is
  * hidden where a mode check would not, and if these ever need to diverge, this
  * is the only file that changes.
  */
@@ -45,17 +45,6 @@ export const usesCallVocabulary = (): boolean => hasCallVocabulary();
  * ask the call manager.
  */
 export const showsCallContext = (): boolean => usesCallVocabulary();
-
-/**
- * Project duration in days — the input, its required-field entry, the
- * read-only summary row and the list column, as one unit.
- *
- * Nothing downstream reads the value: allocation takes each resource
- * request's own end date, and the proposal-level duration reaches only the
- * state-change notification. It is a question a call asks, not one the
- * marketplace needs answered.
- */
-export const showsProposalDuration = (): boolean => usesCallVocabulary();
 
 /**
  * The per-step evaluation tracker, rather than the coarse

@@ -108,7 +108,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
           </Field>
         )}
         {offering && (
-          <p>
+          <p className="mt-5">
             <strong>{translate('Service provider')}: </strong>
             {offering.provider_name}
           </p>

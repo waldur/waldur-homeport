@@ -148,7 +148,11 @@ export const ProposalReviewCreatePage = () => {
                 ))}
               </SidebarLayout.Body>
               <SidebarLayout.Sidebar transparent>
-                <CreatePageSidebar review={reviewObject} refetch={refetch} />
+                <CreatePageSidebar
+                  review={reviewObject}
+                  proposal={data.proposal}
+                  refetch={refetch}
+                />
               </SidebarLayout.Sidebar>
             </SidebarLayout.Container>
           </form>

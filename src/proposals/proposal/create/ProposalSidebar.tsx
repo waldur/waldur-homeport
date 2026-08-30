@@ -5,6 +5,7 @@ import { FloatingSubmitButton } from '@/form/FloatingSubmitButton';
 import { SidebarProps } from '@/form/SidebarProps';
 import { TosNotification } from '@/form/TosNotification';
 import { translate } from '@/i18n';
+import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
 
@@ -12,6 +13,10 @@ interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;
   isSaving?: boolean;
   editable?: boolean;
+  /** Every requested resource, for the summary. */
+  resourceRows?: any[];
+  /** The call's fixed duration, for the summary's project length. */
+  fixedDurationDays?: number | null;
   /**
    * What the backend says about submitting, and why not when it refuses.
    * The steps below only know whether a section was filled in; this covers
@@ -64,6 +69,13 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
           showRequiredErrors
         />
       </Panel>
+      {/* In view wherever the applicant has scrolled to. Renders nothing when
+          there is nothing to total. */}
+      <ProposalCostTotal
+        rows={props.resourceRows || []}
+        fixedDurationDays={props.fixedDurationDays}
+        panel
+      />
       {props.editable && (
         <>
           <FloatingSubmitButton

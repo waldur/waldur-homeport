@@ -3,6 +3,7 @@ import { useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
+import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { PurchaseOrderFields } from '@/proposals/PurchaseOrderFields';
 import { getPurchaseOrderRequirement } from '@/proposals/purchaseOrderRequirement';
 import { computeRequestedCost } from '@/proposals/requestedResourceCost';
@@ -15,7 +16,7 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
   const { values } = useFormState({
     subscription: { values: true },
   });
-  const { mainOffering, offering, plan, limits } = values;
+  const { mainOffering, offering, plan, limits, attributes } = values;
   const _offering = mainOffering || offering;
 
   const { showPurchaseOrder, isRequired } = getPurchaseOrderRequirement(
@@ -24,13 +25,15 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
   );
   // Shown next to the purchase order on purpose: a PO authorises a sum, so the
   // sum belongs beside it.
-  // The configure step stores the chosen subscription period here; without it
-  // this estimate would disagree with the total shown on that step.
+  // The configure step stores the chosen length here; without it this estimate
+  // would disagree with the total shown on that step. The end date is what
+  // requests saved before the switch carry instead.
   const cost = computeRequestedCost(
     plan,
     limits,
     _offering,
-    values.attributes?.end_date,
+    attributes?.[PREPAID_DURATION_MONTHS],
+    attributes?.end_date,
   );
 
   return (

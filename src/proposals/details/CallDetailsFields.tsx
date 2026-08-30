@@ -3,6 +3,8 @@ import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { CallDurationPolicy } from '../CallDurationPolicy';
+
 export const CallDetailsFields = ({ call }) => {
   return (
     <>
@@ -14,6 +16,11 @@ export const CallDetailsFields = ({ call }) => {
       <Field
         label={translate('Publication date')}
         value={renderFieldOrDash(formatDateTime(call.start_date))}
+      />
+
+      <Field
+        label={translate('Project duration')}
+        value={<CallDurationPolicy call={call} />}
       />
     </>
   );

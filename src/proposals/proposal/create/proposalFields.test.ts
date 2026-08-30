@@ -22,8 +22,8 @@ const setAccessMode = (mode?: string) => {
 };
 
 describe('proposal field states', () => {
-  // The duration is gated on the access mode, so every other case in here
-  // needs the call-managed default rather than whatever ran last.
+  // Every other case in here wants the call-managed default rather than
+  // whatever access mode ran last.
   afterEach(() => setAccessMode(undefined));
 
   it('falls back to the pre-configuration behaviour', () => {
@@ -56,7 +56,7 @@ describe('proposal field states', () => {
     expect(isFieldRequired(states, 'description')).toBe(false);
   });
 
-  it('always keeps name and duration required', () => {
+  it('always keeps the name required', () => {
     const states = getFieldStates({
       field_project_summary: 'hidden',
       field_description: 'hidden',
@@ -64,7 +64,7 @@ describe('proposal field states', () => {
       field_supporting_documentation: 'hidden',
     });
 
-    expect(getRequiredFields(states)).toEqual(['name', 'duration_in_days']);
+    expect(getRequiredFields(states)).toEqual(['name']);
   });
 
   it('tracks only the fields the call asks for', () => {
@@ -79,30 +79,19 @@ describe('proposal field states', () => {
       'name',
       'project_summary',
       'science_sub_domain',
-      'duration_in_days',
     ]);
   });
 
-  it('drops the duration where the deployment does not ask for it', () => {
-    // Second axis: the duration is a question a *call* asks, so the
-    // marketplace-only applicant view has no field to fill. Both lists have to
-    // agree with what the step renders — a field listed but not rendered parks
-    // the applicant on a step it can never report complete.
-    setAccessMode('marketplace');
-    const states = getFieldStates(undefined);
-
-    expect(getTrackedFields(states)).not.toContain('duration_in_days');
-    expect(getRequiredFields(states)).not.toContain('duration_in_days');
-    expect(getRequiredFields(states)).toEqual(['name', 'project_summary']);
-  });
-
-  it('keeps the duration in call-managed modes', () => {
-    for (const mode of ['both', 'calls', undefined]) {
+  it('never asks for the project duration, in any access mode', () => {
+    // Allocation derives the length from the subscriptions requested and the
+    // call's fixed duration; a field listed here would leave the step short of
+    // a total the applicant cannot fill.
+    for (const mode of ['both', 'calls', 'marketplace', undefined]) {
       setAccessMode(mode);
       const states = getFieldStates(undefined);
 
-      expect(getTrackedFields(states)).toContain('duration_in_days');
-      expect(getRequiredFields(states)).toContain('duration_in_days');
+      expect(getTrackedFields(states)).not.toContain('duration_in_days');
+      expect(getRequiredFields(states)).toEqual(['name', 'project_summary']);
     }
   });
 
@@ -114,7 +103,6 @@ describe('proposal field states', () => {
       'name',
       'project_summary',
       'science_sub_domain',
-      'duration_in_days',
     ]);
   });
 });

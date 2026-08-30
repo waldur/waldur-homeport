@@ -20,6 +20,13 @@ const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b));
  * - max = MIN of all maximums (most restrictive)
  * - step = GCD of all steps (largest step that divides evenly into all)
  */
+/**
+ * The order/request attribute that carries the chosen length in whole months.
+ * The backend prices a prepaid component by it and only measures `end_date`
+ * when it is absent.
+ */
+export const PREPAID_DURATION_MONTHS = 'prepaid_duration_months';
+
 export const mergePrepaidConstraints = (
   components: Pick<
     OfferingComponent,
@@ -75,11 +82,14 @@ export const getMonthOptions = (
   const offeringMax = constraints.max_prepaid_duration;
   let trueMaxDuration: number;
 
-  if (offeringMax && maxMonthsAllowedByProject) {
+  // Compared against null, not truthiness: a deadline less than a month away
+  // yields a cap of zero, and treating that as "no cap" offered the offering's
+  // full length — up to a year past the date the subscription has to end on.
+  if (offeringMax && maxMonthsAllowedByProject !== null) {
     trueMaxDuration = Math.min(offeringMax, maxMonthsAllowedByProject);
   } else if (offeringMax) {
     trueMaxDuration = offeringMax;
-  } else if (maxMonthsAllowedByProject) {
+  } else if (maxMonthsAllowedByProject !== null) {
     trueMaxDuration = maxMonthsAllowedByProject;
   } else {
     trueMaxDuration = 12;
@@ -87,6 +97,9 @@ export const getMonthOptions = (
 
   const min = constraints.min_prepaid_duration || 1;
   const stepSize = constraints.prepaid_duration_step || 1;
+  // The offering's minimum is a floor even when the deadline sits below it, so
+  // there is always something to choose. Callers that can say so should tell
+  // the applicant the choice overruns the deadline; see snapToOfferedMonths.
   const max = Math.max(min, trueMaxDuration);
 
   const options = [];
@@ -101,6 +114,36 @@ export const getMonthOptions = (
   }
 
   return options;
+};
+
+/**
+ * Whole months that fit before a deadline — the same measure getMonthOptions
+ * uses to cap its options against a project's end date.
+ */
+export const getMonthsUntil = (endDate: string, startDate?: string): number =>
+  Math.floor(
+    DateTime.fromISO(endDate).diff(
+      DateTime.fromISO(startDate || formatISODate(DateTime.now())),
+      'months',
+    ).months,
+  );
+
+/**
+ * The longest offered duration that does not exceed the wanted one, falling
+ * back to the shortest on offer when even that is too long.
+ *
+ * Snapping down rather than to the first option keeps a subscription as close
+ * as the offer allows to what was chosen: a twelve-month request against an
+ * offer of one, three, six or nine becomes nine, not the offering's minimum.
+ */
+export const snapToOfferedMonths = (
+  offered: number[],
+  wanted: number | undefined,
+): number | undefined => {
+  if (!offered.length) return undefined;
+  if (!wanted || wanted <= 0) return offered[0];
+  const fitting = offered.filter((value) => value <= wanted);
+  return fitting.length ? Math.max(...fitting) : offered[0];
 };
 
 export const calculateMonthsDifference = (

@@ -7,13 +7,18 @@ import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { renderFieldOrDash } from '@/table/utils';
 
 import '@/proposals/flushTable.scss';
 
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 
+import { resourceRequestColumns } from './resource-requests-step/resourceRequestColumns';
 import { ResourceRequestExpandableRow } from './resource-requests-step/ResourceRequestExpandableRow';
+
+// The same columns the applicant filled the table under, so a reviewer or
+// manager weighs the same figures. Provider and category stay in the expanded
+// row.
+const columns = resourceRequestColumns();
 
 interface ResourceRequestsSummaryProps {
   proposal: Proposal;
@@ -25,7 +30,8 @@ export const ResourceRequestsSummary = ({
   reviews,
 }: ResourceRequestsSummaryProps) => {
   const tableProps = useTable({
-    table: 'ProposalResourcesList',
+    // Its own key: the applicant's editable table keeps separate state.
+    table: 'ProposalResourcesSummary',
     fetchData: createFetcher(proposalProposalsResourcesList, {
       path: { uuid: proposal.uuid },
     }),
@@ -70,22 +76,7 @@ export const ResourceRequestsSummary = ({
         cardBordered={false}
         title={null}
         hasActionBar={false}
-        columns={[
-          {
-            title: translate('Offering'),
-            render: ({ row }) => <>{row.requested_offering.offering_name}</>,
-          },
-          {
-            title: translate('Provider'),
-            render: ({ row }) => <>{row.requested_offering.provider_name}</>,
-          },
-          {
-            title: translate('Category'),
-            render: ({ row }) => (
-              <>{renderFieldOrDash(row.requested_offering.category_name)}</>
-            ),
-          },
-        ]}
+        columns={columns}
         hideRefresh
         expandableRow={ResourceRequestExpandableRow}
         minHeight="auto"

@@ -118,14 +118,9 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
         },
         {
           title: translate('Ending'),
-          render: ({ row }) => (
-            <EndingField
-              endDate={row.round?.cutoff_time}
-              hasFixedDuration={Boolean(row.duration_in_days)}
-            />
-          ),
+          render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
           className: 'text-nowrap',
-          keys: ['round', 'duration_in_days'],
+          keys: ['round'],
           id: 'ending',
         },
         {

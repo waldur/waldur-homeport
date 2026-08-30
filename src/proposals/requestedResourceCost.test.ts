@@ -104,7 +104,9 @@ describe('requested resource cost', () => {
     expect(cost.monthly).toBe(0);
   });
 
-  it('charges a prepaid component for the whole requested period', () => {
+  // Requests saved before the period became a length still carry an end date;
+  // it is the only period they have, so it is still priced.
+  it('charges a legacy request for the period its end date names', () => {
     // The configure step multiplies a prepaid component by the chosen period
     // and shows the result; this estimate has to agree with it, or the
     // applicant sees one figure while choosing and a smaller one afterwards.
@@ -130,6 +132,75 @@ describe('requested resource cost', () => {
 
     const { attributes: _period, ...withoutPeriod } = request;
     expect(getRequestedResourceCost(withoutPeriod).oneTime).toBe(2500);
+  });
+
+  // A prepaid component is bought for a number of months, and the backend
+  // multiplies it by that number at allocation. Pricing one period made a
+  // twelve-month request look a twelfth of its size.
+  it('multiplies a prepaid component by the months requested', () => {
+    const prepaidRow = (attributes?: Record<string, any>) =>
+      row({
+        limits: { gpu_hours: 100 },
+        attributes,
+        requested_offering: {
+          offering_type: 'Marketplace.Basic',
+          components: [
+            {
+              type: 'gpu_hours',
+              name: 'GPU hours',
+              billing_type: 'one',
+              is_prepaid: true,
+              measured_unit: 'h',
+            },
+          ],
+          plan_details: plan('month', { gpu_hours: '1' }),
+        },
+      });
+
+    expect(
+      getRequestedResourceCost(prepaidRow({ prepaid_duration_months: 6 }))
+        .oneTime,
+    ).toBe(600);
+    // Without a duration the request is still worth one period, not nothing.
+    expect(getRequestedResourceCost(prepaidRow()).oneTime).toBe(100);
+  });
+
+  it('leaves rows without a prepaid component out of the multiplier', () => {
+    const cost = getRequestedResourceCost(
+      row({ attributes: { prepaid_duration_months: 12 } }),
+    );
+
+    expect(cost.monthly).toBe(20);
+  });
+
+  // "€15,000.00 one-time" next to a twelve-month request reads as a mistake.
+  it('carries the period so the label can name it', () => {
+    const prepaid = (months: number) =>
+      row({
+        limits: { gpu_hours: 100 },
+        attributes: { prepaid_duration_months: months },
+        requested_offering: {
+          offering_type: 'Marketplace.Basic',
+          components: [
+            {
+              type: 'gpu_hours',
+              name: 'GPU hours',
+              billing_type: 'one',
+              is_prepaid: true,
+              measured_unit: 'h',
+            },
+          ],
+          plan_details: plan('month', { gpu_hours: '1' }),
+        },
+      });
+
+    // Per row, which is the only place the label reads it: a sum across rows
+    // of different lengths has no period of its own to name.
+    expect(getRequestedResourceCost(prepaid(6)).prepaidMonths).toBe(6);
+    expect(getRequestedResourceCost(prepaid(12)).prepaidMonths).toBe(12);
+    expect(
+      sumRequestedResourceCosts([prepaid(6), prepaid(12)]).prepaidMonths,
+    ).toBeUndefined();
   });
 
   it('stays unknown only when not one row could be priced', () => {

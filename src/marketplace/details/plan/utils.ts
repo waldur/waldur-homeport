@@ -394,6 +394,12 @@ interface OrderPricesProps {
   order?: any;
   viewMode?: boolean;
   type?: string;
+  /**
+   * Length of a prepaid subscription named in months rather than by an end
+   * date, for the surfaces that have no start date to hang one on (see
+   * PrepaidMonthsMode).
+   */
+  prepaidDurationMonths?: number;
 }
 
 // Prices track the form values (plan/limits/dates). Requires a surrounding
@@ -435,8 +441,13 @@ const usePricesFromFormData = (
     return formData?.limits || props.limits;
   }, [props, formData]);
 
-  const endDate = formData?.attributes?.end_date;
   const startDate = formData?.start_date;
+  // combinePrices takes dates; the month it lands in is irrelevant.
+  const endDate = props.prepaidDurationMonths
+    ? DateTime.fromISO(startDate || DateTime.now().toISODate())
+        .plus({ months: props.prepaidDurationMonths })
+        .toISODate()
+    : formData?.attributes?.end_date;
 
   return useMemo(
     () => combinePrices(plan, limits, {}, props.offering, endDate, startDate),
@@ -472,10 +483,11 @@ export const getPrepaidCostParts = (
   }
 
   const effectiveStartDate = startDate || DateTime.now().toISODate();
-  const durationInMonths = calculateMonthsDifference(
-    effectiveStartDate,
-    endDate,
-  );
+  // The component carries the duration it was priced with — the only figure
+  // available where the period is a length (see PrepaidMonthsMode).
+  const durationInMonths =
+    component.durationInMonths ??
+    calculateMonthsDifference(effectiveStartDate, endDate);
 
   // The component.amount is the total for the whole period.
   // We need the base amount per month for the details string.

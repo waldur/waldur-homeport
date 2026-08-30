@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { SubmittableRound } from '@/marketplace/offerings/apply/eligibleCalls';
+import { prepaidCapLabel } from '@/proposals/CallDurationPolicy';
 import { usesCallVocabulary } from '@/proposals/presentation';
 
 /** One label/value line, omitted entirely when there is no value to show. */
@@ -67,6 +68,12 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
             ? translate('{count} days', { count: call.fixed_duration_in_days })
             : undefined
         }
+      />
+      <Line
+        // The award duration is also the ceiling for prepaid subscriptions;
+        // said here so the cap is known before a length is chosen.
+        label={translate('Prepaid subscriptions')}
+        value={prepaidCapLabel(call)}
       />
       {/* Worth surfacing before the applicant writes anything: it is the one
           field that can mean "do not bother". */}

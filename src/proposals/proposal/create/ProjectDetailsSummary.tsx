@@ -7,7 +7,6 @@ import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
 import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';
 import { publicCallKey } from '@/proposals/callQueries';
-import { showsProposalDuration } from '@/proposals/presentation';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -119,20 +118,6 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
               {/* Dummy spacing to align with other fields. */}
             </div>
           }
-        />
-      )}
-
-      {showsProposalDuration() && (
-        <CommentSection
-          label={translate('Project duration in days')}
-          valueField="duration_in_days"
-          commentField="comment_project_duration"
-          tooltip={translate(
-            'Expected project duration in days once resources have been granted.',
-          )}
-          onAddCommentClick={onAddCommentClick}
-          reviews={reviews}
-          proposal={proposal}
         />
       )}
 

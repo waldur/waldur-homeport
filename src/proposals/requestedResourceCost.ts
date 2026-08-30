@@ -1,8 +1,11 @@
+import { DateTime } from 'luxon';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { filterOfferingComponents } from '@/marketplace/common/registry';
 import { getBillingPeriods } from '@/marketplace/common/utils';
 import { combinePrices } from '@/marketplace/details/plan/utils';
+
+import { getRequestedPrepaidMonths } from './prepaidDuration';
 
 /**
  * What a requested resource is expected to cost once it is provisioned.
@@ -20,6 +23,8 @@ export interface RequestedResourceCost {
    * rendering an unknown estimate as "0.00" would read as "free".
    */
   known: boolean;
+  /** Months the one-time part covers, so the label can name the period. */
+  prepaidMonths?: number;
 }
 
 const EMPTY_COST: RequestedResourceCost = {
@@ -96,24 +101,30 @@ export const hasRequestedAmount = (row: RequestedResourceLike): boolean => {
  *
  * Takes the offering because several plugins filter their component list by
  * type, and pricing the components they hide would overstate the estimate.
+ *
+ * `prepaidDurationMonths` is how long the requested subscription runs for.
+ * Without it a twelve-month prepaid request was priced as a single period,
+ * understating it by a factor of twelve against what Plan.get_estimate computes
+ * at allocation.
+ *
+ * `legacyEndDate` is what requests saved before the switch carry instead.
  */
 export const computeRequestedCost = (
   plan: any,
   limits: Record<string, number> | null | undefined,
   offering: { type?: string; components?: unknown } | undefined,
-  /**
-   * End of the requested subscription period, as the configure step stored it.
-   * Prepaid components are bought per month and charged for the whole period,
-   * so without it a six-month request is priced as one month — and the figure
-   * here contradicts the one the applicant just saw while choosing.
-   */
-  endDate?: string | null,
+  prepaidDurationMonths?: number | null,
+  legacyEndDate?: string | null,
 ): RequestedResourceCost => {
   if (!plan) {
     // A call may accept an offering without pinning a plan; there is then no
     // price list to estimate from.
     return EMPTY_COST;
   }
+  // combinePrices takes dates; measure the length off today.
+  const endDate = prepaidDurationMonths
+    ? DateTime.now().plus({ months: prepaidDurationMonths }).toISODate()
+    : legacyEndDate || undefined;
   const prices = combinePrices(
     plan,
     limits || {},
@@ -122,7 +133,7 @@ export const computeRequestedCost = (
       type: offering?.type,
       components: (offering?.components as any) || [],
     } as Pick<PublicOfferingDetails, 'type' | 'components'>,
-    endDate || undefined,
+    endDate,
   );
   if (!prices.components.length) {
     return EMPTY_COST;
@@ -166,7 +177,12 @@ export const computeRequestedCost = (
     }
   }
 
-  return { monthly, oneTime, known: true };
+  return {
+    monthly,
+    oneTime,
+    known: true,
+    prepaidMonths: prepaidDurationMonths || undefined,
+  };
 };
 
 export const getRequestedResourceCost = (
@@ -186,6 +202,7 @@ export const getRequestedResourceCost = (
       type: requestedOffering?.offering_type,
       components: requestedOffering?.components,
     },
+    getRequestedPrepaidMonths(row as any),
     row?.attributes?.end_date as string | undefined,
   );
 };
@@ -193,8 +210,11 @@ export const getRequestedResourceCost = (
 /** Adds up rows, staying "unknown" only when not a single row could be priced. */
 export const sumRequestedResourceCosts = (
   rows: RequestedResourceLike[],
-): RequestedResourceCost =>
-  rows.map(getRequestedResourceCost).reduce<RequestedResourceCost>(
+): RequestedResourceCost => {
+  // No period on the sum: rows of different lengths have none in common, and
+  // the label only ever names the period of the row it sits in.
+  const costs = rows.map(getRequestedResourceCost);
+  return costs.reduce<RequestedResourceCost>(
     (total, cost) => ({
       monthly: total.monthly + cost.monthly,
       oneTime: total.oneTime + cost.oneTime,
@@ -202,3 +222,4 @@ export const sumRequestedResourceCosts = (
     }),
     EMPTY_COST,
   );
+};

@@ -11,7 +11,6 @@ import {
   requestNoun,
   requestNounPlural,
   showsCallColumns,
-  showsProposalDuration,
 } from '@/proposals/presentation';
 import { getProposalStateOptions } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
@@ -99,14 +98,6 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
     id: 'call',
   };
 
-  const durationColumn: Column<Proposal> = {
-    title: translate('Duration in days'),
-    render: ({ row }) => <>{row.duration_in_days || DASH_ESCAPE_CODE}</>,
-    keys: ['duration_in_days'],
-    optional: true,
-    id: 'duration_in_days',
-  };
-
   const columns: Column<Proposal>[] = [
     {
       title: requestNoun(),
@@ -124,12 +115,7 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
     ...(showsCallColumns() ? [callColumn] : []),
     {
       title: translate('Ending'),
-      render: ({ row }) => (
-        <EndingField
-          endDate={row.round?.cutoff_time}
-          hasFixedDuration={Boolean(row.duration_in_days)}
-        />
-      ),
+      render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
       keys: ['round'],
       id: 'ending',
       className: 'text-nowrap',
@@ -159,7 +145,6 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
       optional: true,
       id: 'created',
     },
-    ...(showsProposalDuration() ? [durationColumn] : []),
   ];
 
   if (isFeatureVisible(ProjectFeatures.science_domain)) {
