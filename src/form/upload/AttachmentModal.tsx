@@ -10,22 +10,27 @@ export const AttachmentModal = ({
   resolve: { attachment },
 }: {
   resolve: { attachment: Attachment };
-}) => (
-  <ModalDialog
-    title={attachment.file_name}
-    subtitle={
-      formatFilesize(attachment.file_size, 'B') +
-      ' - ' +
-      formatDateTime(attachment.created)
-    }
-    actions={
-      <FileDownloader
-        url={attachment.file}
-        name={attachment.file_name}
-        size={30}
-      />
-    }
-  >
-    <ImageFetcher url={attachment.file} name={attachment.file_name} />
-  </ModalDialog>
-);
+}) => {
+  const fileUrl =
+    typeof attachment.file === 'string' ? attachment.file : undefined;
+
+  return (
+    <ModalDialog
+      title={attachment.file_name}
+      subtitle={
+        formatFilesize(attachment.file_size, 'B') +
+        ' - ' +
+        formatDateTime(attachment.created)
+      }
+      actions={
+        fileUrl ? (
+          <FileDownloader url={fileUrl} name={attachment.file_name} size={30} />
+        ) : undefined
+      }
+    >
+      {fileUrl ? (
+        <ImageFetcher url={fileUrl} name={attachment.file_name} />
+      ) : null}
+    </ModalDialog>
+  );
+};

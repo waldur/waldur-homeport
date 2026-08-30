@@ -5,7 +5,6 @@ export {
   fetchResultCount,
   parseSelectData,
   getNextPageUrl,
-  getNextPageNumber,
   parseNextPage,
   getAllPages,
   formDataOptions,
@@ -13,13 +12,4 @@ export {
 } from 'waldur-api-client';
 export type { ProgressCallback } from 'waldur-api-client';
 
-export {
-  getAuthHeader,
-  getHeaders,
-  initApiClient,
-  attachAuthHeader,
-  resetAuthSessionTracking,
-  handleUnauthorizedResponse,
-  get,
-  post,
-} from 'waldur-auth-core';
+export { getHeaders, initApiClient, get, post } from 'waldur-auth-core';
