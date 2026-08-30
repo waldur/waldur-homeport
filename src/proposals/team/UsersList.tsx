@@ -18,6 +18,10 @@ interface UsersListProps {
   hasActionBar?: boolean;
   fullWidth?: boolean;
   expandableRow?: FC<{ row: GenericPermission }> | (({ row }) => ReactNode);
+  /** Extra items rendered in each row's actions dropdown before Remove. */
+  extraRowActions?: FC<{ row: GenericPermission }>;
+  /** Inline hint next to the role badge, e.g. a "Chair" marker. */
+  roleSuffix?: (row: GenericPermission) => ReactNode;
 }
 
 export const UsersList: FC<UsersListProps> = ({
@@ -31,6 +35,8 @@ export const UsersList: FC<UsersListProps> = ({
   hasActionBar,
   fullWidth,
   expandableRow,
+  extraRowActions: ExtraRowActions,
+  roleSuffix,
 }) => {
   return (
     <TeamTableComponent<GenericPermission>
@@ -44,11 +50,13 @@ export const UsersList: FC<UsersListProps> = ({
       hasActionBar={hasActionBar}
       fullWidth={fullWidth}
       minHeight="auto"
+      roleSuffix={roleSuffix}
       rowActions={
         readOnly
           ? null
           : ({ row }) => (
               <ActionsDropdownComponent>
+                {ExtraRowActions ? <ExtraRowActions row={row} /> : null}
                 <UserRemoveButton
                   permission={row}
                   refetch={table.fetch}

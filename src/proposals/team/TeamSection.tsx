@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import {
   proposalProposalsListUsersList,
@@ -14,6 +14,7 @@ import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { GenericInvitationContext } from '@/invitations/types';
 import { RoleEnum } from '@/permissions/enums';
+import { GenericPermission } from '@/permissions/types';
 import { createFetcher } from '@/table/api';
 import { TableTabs } from '@/table/TableTabs';
 import { useTable } from '@/table/useTable';
@@ -37,6 +38,8 @@ export const TeamSection: FC<
     readOnlyMode?: boolean;
     id?: string;
     hasTeamTabs?: boolean;
+    extraRowActions?: FC<{ row: GenericPermission }>;
+    roleSuffix?: (row: GenericPermission) => ReactNode;
   }
 > = (props) => {
   const queryClient = useQueryClient();
@@ -182,6 +185,8 @@ export const TeamSection: FC<
                     ? ReviewerExpandableRow
                     : undefined
                 }
+                extraRowActions={props.extraRowActions}
+                roleSuffix={props.roleSuffix}
               />
             </Tab.Pane>
             <Tab.Pane eventKey="invitations" unmountOnExit={true}>

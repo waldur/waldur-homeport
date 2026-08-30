@@ -5899,6 +5899,11 @@
       "feature_area": "compliance"
     }
   },
+  "Assign in the Team tab": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Assign user": {
     "context": {
       "feature_area": "users"
@@ -8628,6 +8633,11 @@
   "Centered Card": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Chair": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "Challenge code": {
@@ -17823,6 +17833,11 @@
   },
   "Evaluation results": {},
   "Evaluator must confirm absence of conflict of interest.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
+  "Evaluators": {
     "context": {
       "feature_area": "workflow-steps"
     }
@@ -30808,6 +30823,11 @@
       "action_type": "read"
     }
   },
+  "Nobody holds this role yet.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Node": {
     "context": {
       "primary_ui_type": "title",
@@ -34068,6 +34088,18 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "growth"
+    }
+  },
+  "Panel chair has been set.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "team"
+    }
+  },
+  "Panel chair has been unset.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "team"
     }
   },
   "Panel member": {
@@ -46380,6 +46412,11 @@
       "feature_area": "actions"
     }
   },
+  "Set as panel chair": {
+    "context": {
+      "feature_area": "team"
+    }
+  },
   "Set automatically because reported usage reached the limit": {
     "context": {
       "feature_area": "details"
@@ -50056,6 +50093,7 @@
       "feature_area": "announcements"
     }
   },
+  "The applicant of each proposal": {},
   "The assistant is at capacity today. Please try again tomorrow.": {
     "context": {
       "feature_area": "anonymous"
@@ -57409,6 +57447,12 @@
       "feature_area": "details"
     }
   },
+  "Unable to update panel chair.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "team"
+    }
+  },
   "Unable to update partition QoS allow-list.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -58111,6 +58155,11 @@
   "Unsaved changes": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "Unset panel chair": {
+    "context": {
+      "feature_area": "team"
     }
   },
   "Unsupported JSON format - expected export format with \"data\" property": {

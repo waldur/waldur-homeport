@@ -1,6 +1,9 @@
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { CallWorkflowStep, ResponsibleRoleEnum } from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { AllocationTime } from '@/proposals/types';
 import { formatAllocationTime } from '@/proposals/utils';
@@ -41,6 +44,47 @@ const renderCriteria = (row: CallWorkflowStep) => {
   );
 };
 
+// Who will act on the step: the backend resolves the responsible role to
+// users (call roles, or offering managers of offerings accepted into the
+// call), so the call manager sees names instead of a role label.
+const renderEvaluators = (row: CallWorkflowStep) => {
+  if (row.responsible_role === 'applicant') {
+    return translate('The applicant of each proposal');
+  }
+  const users = row.responsible_users ?? [];
+  if (users.length === 0) {
+    return (
+      <span className="text-warning d-inline-flex align-items-center gap-1">
+        {}
+        <WarningCircleIcon weight="bold" />
+        {translate('Nobody holds this role yet.')}{' '}
+        <Link
+          state="protected-call.main"
+          params={{ tab: 'team' }}
+          label={translate('Assign in the Team tab')}
+        />
+      </span>
+    );
+  }
+  return (
+    <ul className="list-unstyled mb-0">
+      {users.map((user) => (
+        <li key={user.uuid} className="d-flex align-items-center gap-2">
+          <span>{user.full_name || user.username}</span>
+          <span className="text-muted">
+            {user.username} · {user.email}
+          </span>
+          {user.is_panel_chair && (
+            <Badge variant="primary" size="sm" pill outline>
+              {translate('Chair')}
+            </Badge>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 export const WorkflowStepExpandableRow: FC<OwnProps> = ({ row }) => {
   const optionsValue = renderOptions(row);
   const criteriaValue = renderCriteria(row);
@@ -58,6 +102,7 @@ export const WorkflowStepExpandableRow: FC<OwnProps> = ({ row }) => {
           ),
         )}
       />
+      <Field label={translate('Evaluators')} value={renderEvaluators(row)} />
       <Field
         label={translate('Transition mode')}
         value={labelOrUndefined(transitionModeLabel(row.transition_mode))}

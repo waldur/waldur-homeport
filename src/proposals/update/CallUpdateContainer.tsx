@@ -4,6 +4,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
+import { Badge } from '@/core/Badge';
 import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
@@ -16,6 +17,7 @@ import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { RoleEnum } from '@/permissions/enums';
 
 import { CallTabs } from '../details/CallTabs';
+import { SetPanelChairButton } from '../team/SetPanelChairButton';
 import { TeamSection } from '../team/TeamSection';
 import { useCallBreadcrumbItems } from '../utils';
 
@@ -150,12 +152,27 @@ const Body = ({ call, refetch, loading }) => {
         {
           key: 'team',
           title: translate('Team'),
-          component: ({ call }) => (
+          component: ({ call, refetch }) => (
             <TeamSection
               scope={call}
               roles={[RoleEnum.CALL_MANAGER, RoleEnum.CALL_PANEL_MEMBER]}
               roleTypes={['call', 'call_organizer']}
               title={translate('Call team')}
+              extraRowActions={({ row }) => (
+                <SetPanelChairButton
+                  permission={row}
+                  call={call}
+                  refetch={refetch}
+                />
+              )}
+              roleSuffix={(row) =>
+                call.panel_chair_uuid &&
+                row.user_uuid === call.panel_chair_uuid ? (
+                  <Badge variant="primary" size="sm" pill outline>
+                    {translate('Chair')}
+                  </Badge>
+                ) : null
+              }
             />
           ),
         },
