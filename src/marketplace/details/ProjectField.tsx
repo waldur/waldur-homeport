@@ -70,6 +70,10 @@ export const ProjectField: FC<ProjectFieldProps> = ({
       }
       noOptionsMessage={() => translate('No projects found')}
       loadOptions={loadOptions}
+      // react-select-async-paginate caches loaded pages per search string
+      // and keeps serving them after loadOptions changes; the key makes it
+      // drop the cache when the organization (or role filter) changes.
+      cacheUniqs={[customer?.uuid, offering?.uuid, user?.uuid]}
       onChange={onChange}
       getOptionValue={(option) => option.url}
       getOptionLabel={(option) => option.name}

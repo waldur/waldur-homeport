@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -65,6 +65,50 @@ describe('ProjectField', () => {
         }),
       );
     });
+  });
+
+  it('refetches projects after the organization changes', async () => {
+    let setCustomer: (value: any) => void;
+    renderWithProviders(
+      <Form
+        onSubmit={vi.fn()}
+        initialValues={{ customer: { uuid: 'customer-a' } }}
+        render={({ form }) => {
+          setCustomer = (value) => form.change('customer', value);
+          return <ProjectField />;
+        }}
+      />,
+    );
+
+    vi.mocked(projectsList).mockResolvedValue(
+      mockListResponse([
+        { uuid: 'project-a', name: 'Project A', url: 'project-a-url' },
+      ]),
+    );
+    await user.click(screen.getByLabelText(/Project/i));
+    await screen.findByText('Project A');
+    expect(projectsList).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        query: expect.objectContaining({ customer: ['customer-a'] }),
+      }),
+    );
+
+    vi.mocked(projectsList).mockResolvedValue(
+      mockListResponse([
+        { uuid: 'project-b', name: 'Project B', url: 'project-b-url' },
+      ]),
+    );
+    await user.keyboard('{Escape}');
+    act(() => setCustomer!({ uuid: 'customer-b' }));
+
+    await user.click(screen.getByLabelText(/Project/i));
+    await screen.findByText('Project B');
+    expect(screen.queryByText('Project A')).not.toBeInTheDocument();
+    expect(projectsList).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        query: expect.objectContaining({ customer: ['customer-b'] }),
+      }),
+    );
   });
 
   it('shows validation error if project is missing', async () => {

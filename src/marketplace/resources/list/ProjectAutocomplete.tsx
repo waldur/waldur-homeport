@@ -46,6 +46,7 @@ export const ProjectAutocomplete: React.FC<ProjectAutocompleteProps> = (
       <AsyncSelect
         placeholder={placeholder || translate('Select project...')}
         loadOptions={loadProjects}
+        cacheUniqs={[customer_uuid]}
         defaultOptions
         getOptionValue={getOptionValue}
         getOptionLabel={getOptionLabel as any}
