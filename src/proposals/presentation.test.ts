@@ -9,7 +9,6 @@ import {
   requestViewLabel,
   showsCallColumns,
   showsCallContext,
-  showsProposalDuration,
   showsWorkflowSteps,
 } from './presentation';
 
@@ -23,12 +22,7 @@ const setMode = (mode?: string) => {
   };
 };
 
-const blocks = [
-  showsCallContext,
-  showsProposalDuration,
-  showsWorkflowSteps,
-  showsCallColumns,
-];
+const blocks = [showsCallContext, showsWorkflowSteps, showsCallColumns];
 
 describe('request presentation', () => {
   beforeEach(() => {

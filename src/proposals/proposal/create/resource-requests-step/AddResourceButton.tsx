@@ -1,11 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
+import { BaseButton } from '@/core/buttons/BaseButton';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';
 import { Proposal } from '@/proposals/types';
-import { ActionButton } from '@/table/ActionButton';
 
 const ResourceRequestFormDialog = lazyComponent(() =>
   import('./ResourceRequestFormDialog').then((module) => ({
@@ -33,10 +33,13 @@ export const AddResourceButton = ({
   );
 
   return (
-    <ActionButton
-      title={translate('Add resource')}
+    // Medium: the card's title row, like the team block's, is not the page's
+    // primary action bar.
+    <BaseButton
+      label={translate('Add resource')}
       iconNode={<PlusCircleIcon weight="bold" />}
-      action={openAddResourceDialog}
+      onClick={openAddResourceDialog}
+      variant="tertiary"
     />
   );
 };

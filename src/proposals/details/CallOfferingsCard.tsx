@@ -7,6 +7,7 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { prepaidCapLabel } from '../CallDurationPolicy';
 import { CallOffering, Call } from '../types';
 
 interface CallOfferingsCardProps {
@@ -39,6 +40,21 @@ export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
         {
           title: translate('Category'),
           render: ({ row }) => <>{row.category_name}</>,
+        },
+        {
+          // Only offerings sold by the month have a length to state, and the
+          // call's fixed duration is the ceiling on it.
+          title: translate('Prepaid subscriptions'),
+          render: ({ row }) => {
+            const prepaid = Array.isArray(row.components)
+              ? row.components.some((component) => component.is_prepaid)
+              : false;
+            if (!prepaid) {
+              return <>{renderFieldOrDash(null)}</>;
+            }
+            const cap = prepaidCapLabel(props.call);
+            return <>{cap ?? translate('any length the offering allows')}</>;
+          },
         },
       ]}
       title={translate('Offerings')}

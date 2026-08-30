@@ -97,11 +97,14 @@ export const ReadOnlyFormControl: FunctionComponent<
           children
         )
       ) : (
+        // Controlled, not `defaultValue`: a read-only field whose value is
+        // derived (a project duration, a computed total) must follow the
+        // prop when it resolves, not keep whatever the first render held.
         <Form.Control
           readOnly
           plaintext={plaintext}
           className={classNames(!plaintext && 'form-control-solid')}
-          defaultValue={value}
+          value={value ?? ''}
           disabled={disabled}
         />
       )}

@@ -14,38 +14,10 @@ import {
 import FormTable from '@/form/FormTable';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { CallDurationPolicy } from '@/proposals/CallDurationPolicy';
 import { Call } from '@/proposals/types';
 import { getCallReadOnlyReason } from '@/proposals/utils';
-
-/**
- * Compares the submitted fixed duration with the stored one. The number input
- * yields a string, the call carries a number, and a cleared field arrives as
- * null, so both sides are normalized before comparing.
- *
- * Returns null when the duration is absent from the payload or unchanged — the
- * backend only rewrites proposal durations when the value actually changes.
- */
-export const resolveFixedDurationChange = (
-  call: Pick<Call, 'fixed_duration_in_days'>,
-  formData: Record<string, any>,
-): 'set' | 'clear' | null => {
-  if (!('fixed_duration_in_days' in formData)) {
-    return null;
-  }
-  const submitted = formData.fixed_duration_in_days;
-  const next =
-    submitted === null || submitted === '' || submitted === undefined
-      ? null
-      : Number(submitted);
-  const current = call.fixed_duration_in_days ?? null;
-
-  if (next === current) {
-    return null;
-  }
-  return next === null ? 'clear' : 'set';
-};
 
 /**
  * The backend accepts a positive number of days only. Validation lives here
@@ -73,7 +45,6 @@ export const GeneralConfigurationSection: FC<
   GeneralConfigurationSectionProps
 > = (props) => {
   const queryClient = useQueryClient();
-  const { confirm } = useModal();
 
   const { mutateAsync: updateCall } = useManagedMutation({
     mutationFn: (body: any) =>
@@ -92,7 +63,7 @@ export const GeneralConfigurationSection: FC<
     closeModal: false,
   });
 
-  const handleSubmit = async (formData: Record<string, any>) => {
+  const handleSubmit = (formData: Record<string, any>) => {
     const body = { ...formData };
     if ('compliance_checklist' in body) {
       body.compliance_checklist =
@@ -101,30 +72,9 @@ export const GeneralConfigurationSection: FC<
         null;
     }
 
-    const durationChange = resolveFixedDurationChange(props.call, body);
-    if (durationChange) {
-      // Prompt only when there is something to rewrite, but send the flag on
-      // every change: the cached flag may be stale by the time this lands.
-      if (props.call.has_proposals) {
-        try {
-          await confirm(
-            translate('Confirmation'),
-            durationChange === 'set'
-              ? translate(
-                  'This will also update the duration of connected proposals which have not been allocated yet. Continue?',
-                )
-              : translate(
-                  'This will clear the duration of connected proposals which have not been allocated yet, so applicants will be able to choose it themselves. Continue?',
-                ),
-          );
-        } catch {
-          return Promise.reject();
-        }
-      }
-      // The backend refuses to rewrite proposal durations without it.
-      body.confirm_duration_propagation = true;
-    }
-
+    // No confirmation for a changed fixed duration: allocation reads it from
+    // the call when the project is created, so unallocated proposals follow
+    // it without any of their rows being rewritten.
     return updateCall(body);
   };
 
@@ -157,10 +107,17 @@ export const GeneralConfigurationSection: FC<
           <NumberEditField
             name="fixed_duration_in_days"
             label={translate('Fixed duration for granted projects (in days)')}
+            description={translate(
+              'Every granted project lasts exactly this long, and no prepaid subscription requested under the call may run past it. Leave empty to let the longest subscription requested decide.',
+            )}
             disabled={props.isReadOnly}
             validate={validateFixedDuration}
             renderValue={(value) =>
-              value ? translate('{n} days', { n: value }) : 'N/A'
+              value ? (
+                <CallDurationPolicy call={{ fixed_duration_in_days: value }} />
+              ) : (
+                translate('Not fixed')
+              )
             }
           />
           <AsyncSelectEditField

@@ -1,3 +1,5 @@
+import { PREPAID_DURATION_MONTHS } from '@/marketplace/details/plan/prepaidConstraints';
+
 const SELECT_SINGLE_VALUE_TYPES = [
   'select_string',
   'select_openstack_tenant',
@@ -23,6 +25,12 @@ export const serializer = (attributes, offering) => {
     payload.name = attributes.name;
     payload.description = attributes.description;
     payload.end_date = attributes.end_date;
+    // The chosen subscription length, beside the date it comes to. The backend
+    // prices a prepaid component by it; measured from the date alone the count
+    // is off by one whenever the browser's day and the server's differ.
+    if (attributes[PREPAID_DURATION_MONTHS] !== undefined) {
+      payload[PREPAID_DURATION_MONTHS] = attributes[PREPAID_DURATION_MONTHS];
+    }
   }
   if (offering.options.order) {
     offering.options.order.forEach((key) => {

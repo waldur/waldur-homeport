@@ -20,8 +20,10 @@ import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { evaluateCondition } from '@/marketplace-checklist/questionDependencies';
 import { useModal } from '@/modal/actions';
+import { useCallFixedDuration } from '@/proposals/callQueries';
 import { usesCallVocabulary, requestListState } from '@/proposals/presentation';
 import { hasRequestedAmount } from '@/proposals/requestedResourceCost';
+import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { useNotify } from '@/store/notify';
 
 import {
@@ -176,7 +178,6 @@ export const ProposalSubmissionStep: FC<{
             name: proposal.science_sub_domain_name,
           }
         : null,
-      duration_in_days: proposal.duration_in_days,
       resources: [],
       resources_init: [], // Temporary field to hold current resource requests
       users: [],
@@ -282,6 +283,11 @@ export const ProposalSubmissionStep: FC<{
       }
     });
   }, [checklistData]);
+
+  // Every request, not the page the table shows: the duration is the longest
+  // of all of them.
+  const { data: resourceRows } = useProposalResourceRows(proposal_uuid);
+  const fixedDurationDays = useCallFixedDuration(proposal.call_uuid);
 
   const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
     mutationFn: async (formValues: any) => {
@@ -414,6 +420,8 @@ export const ProposalSubmissionStep: FC<{
               <SidebarLayout.Sidebar transparent>
                 <ProposalSidebar
                   steps={formSteps}
+                  resourceRows={resourceRows as any}
+                  fixedDurationDays={fixedDurationDays}
                   saveAsDraft={() => saveAsDraft(values)}
                   isSaving={isSaving}
                   editable={proposal.state === 'draft'}

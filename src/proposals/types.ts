@@ -20,9 +20,9 @@ export {
  * Generated from the backend's single ProposalFieldStates choice set. */
 export type ProposalFieldState = ProposalFieldStateEnum;
 
-/** Configurable Project details fields. `name` and `duration_in_days` are not
- * configurable: the first names the proposal and forms part of the awarded
- * project's name, the second states the length of the award.
+/** Configurable Project details fields. `name` is not configurable: it names
+ * the proposal and forms part of the awarded project's name. The project
+ * duration is not a field at all — allocation derives it (see projectDuration.ts).
  *
  * Narrower than the SDK's `field: string`, which OpenAPI cannot express: the
  * label maps in the UI are keyed on exactly these four. */

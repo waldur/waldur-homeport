@@ -2,6 +2,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { getRequestedPrepaidMonths } from '@/proposals/prepaidDuration';
 import { ProposalResource } from '@/proposals/types';
 import { Field } from '@/resource/summary';
 import { BooleanField } from '@/table/BooleanField';
@@ -51,6 +52,10 @@ export const ResourceRequestExpandableRow = ({
       ? row.limits
       : row.attributes?.limits;
   const optionsValues = row.attributes;
+  // Makes the prices below cover the whole subscription, as the table does —
+  // including for requests that name it as an end date rather than a length,
+  // which getRequestedPrepaidMonths measures for both.
+  const prepaidMonths = getRequestedPrepaidMonths(row);
 
   return (
     <ExpandableContainer className="fluid">
@@ -81,6 +86,7 @@ export const ResourceRequestExpandableRow = ({
         offering={row.requested_offering as any}
         plan={row.requested_offering.plan_details}
         limits={limits}
+        prepaidDurationMonths={prepaidMonths}
         viewMode
         extraTabs={
           row.requested_offering.options?.order?.length > 0 && [

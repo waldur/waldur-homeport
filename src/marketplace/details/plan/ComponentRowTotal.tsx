@@ -33,7 +33,7 @@ export const ComponentRowTotal = (props: {
               }
             />
           )}
-          <span className="fs-4 text-gray-700 min-w-150px text-start">
+          <span className="fs-4 text-gray-700 min-w-150px text-end">
             {!props.isFloor
               ? amount
               : // Nothing in the plan has a known quantity, so there is no

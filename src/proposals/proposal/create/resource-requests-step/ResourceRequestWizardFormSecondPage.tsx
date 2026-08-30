@@ -1,16 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
+import { DateTime } from 'luxon';
 import { FunctionComponent, useEffect, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
-import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
+import {
+  marketplacePublicOfferingsRetrieve,
+  proposalPublicCallsRetrieve,
+} from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@/core/constants';
+import { SHORT_STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
+import { PrepaidMonthsModeProvider } from '@/marketplace/details/plan/prepaidDurationMode';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { WizardForm, WizardFormStepProps } from '@/wizard';
+
+const PREPAID_MONTHS_FIELD = `attributes.${PREPAID_DURATION_MONTHS}`;
 
 export const ResourceRequestWizardFormSecondPage: FunctionComponent<
   WizardFormStepProps
@@ -19,7 +27,29 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
     subscription: { values: true },
   });
   const form = useForm();
-  const { offering, mainOffering, plan, limits } = values;
+  const { offering, mainOffering, plan, limits, attributes } = values;
+
+  // A call that fixes the duration caps the subscription inside it.
+  const { data: call } = useQuery({
+    queryKey: ['publicCall', props.data.call.uuid],
+    queryFn: () =>
+      proposalPublicCallsRetrieve({
+        path: { uuid: props.data.call.uuid },
+      }).then((r) => r.data),
+    refetchOnWindowFocus: false,
+    staleTime: SHORT_STALE_TIME,
+  });
+
+  const prepaidMonthsMode = useMemo(
+    () => ({
+      name: PREPAID_MONTHS_FIELD,
+      maxEndDate: call?.fixed_duration_in_days
+        ? DateTime.now().plus({ days: call.fixed_duration_in_days }).toISODate()
+        : undefined,
+      maxMonths: call?.max_prepaid_duration_months,
+    }),
+    [call?.fixed_duration_in_days, call?.max_prepaid_duration_months],
+  );
 
   const queryData = useQuery({
     queryKey: ['offering', offering?.offering_uuid || offering?.uuid],
@@ -80,27 +110,30 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
         <LoadingSpinner />
       ) : offeringDetails ? (
         <div className="size-lg">
-          <p>
+          <p className="mb-2">
             <strong>{translate('Offering')}: </strong>
             {offeringDetails.category_title} / {offeringDetails.name}
           </p>
           {typeof plan === 'object' && (
             <>
-              <div className="d-flex gap-6 pb-6 border-bottom mb-7">
+              <div className="d-flex gap-6 border-bottom mb-5">
                 <div className="flex-grow-1">
-                  <p>
+                  <p className="mb-0">
                     <strong>{translate('Plan')}: </strong>
                     {plan?.name}
                   </p>
                 </div>
                 <PlanDescriptionButton />
               </div>
-              <TabbedPlanComponents
-                offering={offeringDetails}
-                plan={plan}
-                limits={limits}
-                customer={{ url: mainOffering?.customer_uuid }}
-              />
+              <PrepaidMonthsModeProvider value={prepaidMonthsMode}>
+                <TabbedPlanComponents
+                  offering={offeringDetails}
+                  plan={plan}
+                  limits={limits}
+                  customer={{ url: mainOffering?.customer_uuid }}
+                  prepaidDurationMonths={attributes?.[PREPAID_DURATION_MONTHS]}
+                />
+              </PrepaidMonthsModeProvider>
             </>
           )}
         </div>

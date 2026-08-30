@@ -38,8 +38,10 @@
         font-weight: 400;
       }
     }
-    tr:not(.total) .col-actions {
-      text-align: start;
+    // Every price on one right-hand axis: a row total, the table total and the
+    // yearly estimate are the same kind of figure and are read down a column.
+    .col-actions {
+      text-align: end;
     }
   }
 }

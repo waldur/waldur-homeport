@@ -12,7 +12,9 @@ import { FieldReviewComments } from '../create-review/FieldReviewComments';
 interface CommentSectionProps {
   proposal: Proposal;
   reviews?: ProposalReview[];
-  valueField: string;
+  valueField?: string;
+  /** Shown instead of the proposal's own field, when the value is derived. */
+  value?: any;
   commentField: string;
   label?: string;
   tooltip?: string;
@@ -25,6 +27,7 @@ interface CommentSectionProps {
 export const CommentSection: FC<CommentSectionProps> = ({
   proposal,
   valueField,
+  value,
   commentField,
   label,
   tooltip,
@@ -37,7 +40,7 @@ export const CommentSection: FC<CommentSectionProps> = ({
   <>
     <ReadOnlyFormControl
       label={label}
-      value={proposal[valueField]}
+      value={value !== undefined ? value : proposal[valueField]}
       inline={inline}
       spaceless={spaceless}
       tooltip={tooltip}

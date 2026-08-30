@@ -47,12 +47,15 @@ const BaseFlatpickrField: FC<BaseFlatpickrFieldProps> = ({
     <div style={{ position: 'relative' }}>
       <Flatpickr
         id={id}
+        // Empty string, never undefined: react-flatpickr skips its sync when
+        // the value prop is undefined (`n !== void 0 && ...`), so clearing the
+        // field left the old date on screen while the form held null.
         value={
           value
             ? typeof value === 'string'
               ? DateTime.fromISO(value).toJSDate()
               : value
-            : options?.defaultDate
+            : (options?.defaultDate ?? '')
         }
         onChange={(dates) => {
           const selected = dates[0];

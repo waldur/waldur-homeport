@@ -5,6 +5,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 
+import { CallDurationPolicy } from '../CallDurationPolicy';
 import { Call } from '../types';
 import { getRoundsWithStatus } from '../utils';
 
@@ -38,6 +39,14 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
                 {formatDateTime(nextRound.cutoff_time)}
               </td>
             </tr>
+            <tr>
+              <th className="fw-bold w-125px p-0 pe-3 pt-1 text-nowrap">
+                {translate('Project duration')}:
+              </th>
+              <td className="text-muted p-0 pt-1">
+                <CallDurationPolicy call={props.call} />
+              </td>
+            </tr>
           </tbody>
         </Table>
       )}
@@ -63,6 +72,14 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
               </th>
               <td className="text-muted p-0">
                 {formatDateTime(nextRound.cutoff_time)}
+              </td>
+            </tr>
+            <tr>
+              <th className="fw-bold w-125px p-0 pe-3 pt-1 text-nowrap">
+                {translate('Project duration')}:
+              </th>
+              <td className="text-muted p-0 pt-1">
+                <CallDurationPolicy call={props.call} />
               </td>
             </tr>
           </tbody>

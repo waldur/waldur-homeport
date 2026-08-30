@@ -192,6 +192,8 @@ interface TabbedPlanComponents {
   viewMode?: boolean;
   concealBillingInfo?: boolean;
   customer?: Pick<Customer, 'url'>;
+  /** Prepaid subscription length, where it is named in months (see PrepaidMonthsMode). */
+  prepaidDurationMonths?: number;
   extraTabs?: Array<{
     title: ReactNode;
     eventKey: string | number;

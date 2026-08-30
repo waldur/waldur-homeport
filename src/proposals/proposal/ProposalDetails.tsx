@@ -12,6 +12,9 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission, userHasRole } from '@/permissions/hasPermission';
+import { useCallFixedDuration } from '@/proposals/callQueries';
+import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
+import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { isReviewInFinalState } from '@/proposals/utils';
 import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
@@ -79,6 +82,11 @@ export const ProposalDetails = ({
   const canCreateReview = useCanCreateReview(proposal);
 
   const isCallManagerView = state.name?.startsWith('call-management');
+
+  // The figures the applicant saw beside their form: the person deciding the
+  // allocation needs the same total and the same project length.
+  const { data: resourceRows } = useProposalResourceRows(proposal.uuid);
+  const fixedDurationDays = useCallFixedDuration(proposal.call_uuid);
 
   // Proposal decisions are made by completing the per-proposal workflow steps
   // (see WorkflowStepActions) — the single decision/provisioning path. The
@@ -175,6 +183,11 @@ export const ProposalDetails = ({
         <Panel title={translate('Progress')} cardBordered className="mb-5">
           <FormSteps steps={formSteps} hideStatusIcons />
         </Panel>
+        <ProposalCostTotal
+          rows={resourceRows || []}
+          fixedDurationDays={fixedDurationDays}
+          panel
+        />
         {isCallManagerView && review && !isReviewInFinalState(review.state) && (
           <ActionButton
             variant="primary"

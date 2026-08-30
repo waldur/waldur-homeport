@@ -1,3 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
+import { proposalPublicCallsRetrieve } from 'waldur-js-client';
+
+import { Call } from './types';
+
 /**
  * Cache key for a partial call fetch.
  *
@@ -17,3 +22,26 @@
  */
 export const publicCallKey = (uuid: string, fields: readonly string[]) =>
   ['Call', uuid, [...fields].sort().join(',')] as const;
+
+const FIXED_DURATION_FIELDS = ['fixed_duration_in_days'] as const;
+
+/**
+ * The call's fixed duration, for the surfaces that state how long the awarded
+ * project will run (see projectDuration.ts). One query, shared by every panel
+ * on the page that names it.
+ */
+export const useCallFixedDuration = (callUuid?: string) => {
+  const { data } = useQuery({
+    queryKey: publicCallKey(callUuid, FIXED_DURATION_FIELDS),
+    queryFn: () =>
+      proposalPublicCallsRetrieve({
+        path: { uuid: callUuid },
+        query: { field: FIXED_DURATION_FIELDS },
+      }).then(
+        (response) => response.data as Pick<Call, 'fixed_duration_in_days'>,
+      ),
+    enabled: Boolean(callUuid),
+    refetchOnWindowFocus: false,
+  });
+  return data?.fixed_duration_in_days ?? null;
+};

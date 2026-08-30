@@ -74,4 +74,27 @@ describe('support order serializer', () => {
 
     expect(payload.desired_tenant).toBe('legacy-id');
   });
+
+  // The backend prices a prepaid component by the stated length and only
+  // measures end_date when it is absent — from the day the order was created,
+  // in UTC, which is not always the browser's day.
+  it('carries the chosen subscription length beside the end date', () => {
+    const offering = makeOffering({ order: [], options: {} });
+
+    const payload = serializer(
+      { name: 'x', end_date: '2026-11-29', prepaid_duration_months: 3 },
+      offering,
+    );
+
+    expect(payload.end_date).toBe('2026-11-29');
+    expect(payload.prepaid_duration_months).toBe(3);
+  });
+
+  it('sends no length when none was chosen', () => {
+    const offering = makeOffering({ order: [], options: {} });
+
+    const payload = serializer({ name: 'x' }, offering);
+
+    expect(payload).not.toHaveProperty('prepaid_duration_months');
+  });
 });

@@ -1,5 +1,5 @@
 import { CheckCircleIcon, CubeIcon, QuestionIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { startCase } from 'lodash-es';
 import { FC, useEffect, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
@@ -158,6 +158,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
     staleTime: SHORT_STALE_TIME,
   });
   const initialResources = data ?? [];
+  const queryClient = useQueryClient();
 
   // Keep the parent form's `resources_init` — which gates this step's completion
   // — aligned with the saved resource requests. Templates mode never wrote this
@@ -169,7 +170,13 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
     if (change && data) {
       change('resources_init', data);
     }
-  }, [data, change]);
+    // The summary panel reads every request through a query of its own. This
+    // list is the only thing that reloads on a template-based call, so it is
+    // the only place that knows the summary has fallen behind.
+    queryClient.invalidateQueries({
+      queryKey: ['ProposalResourcesSummary', proposal.uuid],
+    });
+  }, [data, change, queryClient, proposal.uuid]);
 
   const tableProps = useTable({
     table: TABLE_ID,

@@ -693,10 +693,20 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 .modal {
   .table-responsive {
     border: 1px solid $border-color;
+  }
 
-    .table {
-      margin-bottom: 0;
-    }
+  // Except a FormTable that has opted out of cell borders (`bordered={false}`):
+  // it already sits inside a framed panel, and the wrapper border reads as a
+  // second box drawn around plain rows. Keyed on .form-table rather than on the
+  // absence of .table-bordered alone, because plain modal tables carry no such
+  // class either and excluding them stripped the border this rule exists to add.
+  .plan-details-container
+    .table-responsive:has(> .form-table:not(.table-bordered)) {
+    border: 0;
+  }
+
+  .table-responsive .table {
+    margin-bottom: 0;
   }
 }
 

@@ -41,7 +41,7 @@ export const OneTimeTab = ({
 
   return (
     <section className="plan-details-section">
-      <FormTable>
+      <FormTable bordered={false}>
         {/* One */}
         {oneTime.initialRows.length > 0 && (
           <FixedRows
@@ -86,11 +86,13 @@ export const OneTimeTab = ({
               'If not set, the order is processed immediately after approval.',
             )}
             value={
-              <Field name="start_date">
-                {({ input, meta }) => (
-                  <DateField input={input} meta={meta} {...dateFieldProps} />
-                )}
-              </Field>
+              <div className="mw-200px">
+                <Field name="start_date">
+                  {({ input, meta }) => (
+                    <DateField input={input} meta={meta} {...dateFieldProps} />
+                  )}
+                </Field>
+              </div>
             }
           />
         )}

@@ -27,8 +27,8 @@ interface BaseButtonProps {
   variant?: ButtonVariant;
   /** Loading/pending state - shows spinner and disables button */
   pending?: boolean;
-  /** Button size */
-  size: 'sm' | 'lg';
+  /** Button size; omit for the default medium. */
+  size?: 'sm' | 'lg';
   /** Button type */
   type?: 'button' | 'submit';
   /** Button ID attribute */

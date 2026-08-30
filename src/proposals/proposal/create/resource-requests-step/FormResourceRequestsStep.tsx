@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { useCallback, useEffect, useState, useMemo, FC } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useEffect, useMemo, useRef, useState, FC } from 'react';
 import { Form, useFormState } from 'react-final-form';
 import {
   proposalProposalsResourcesList,
@@ -9,13 +9,7 @@ import {
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { SHORT_STALE_TIME } from '@/core/constants';
-import { LoadingErred } from '@/core/LoadingErred';
-import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
-import { PurchaseOrderCell } from '@/proposals/PurchaseOrderCell';
-import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
-import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -27,31 +21,47 @@ import { FieldReviewComments } from '../../create-review/FieldReviewComments';
 import { StepHeaderContent } from '../StepHeaderContent';
 
 import { AddResourceButton } from './AddResourceButton';
-import { ProposalResourcesFilter, FORM_ID } from './ProposalResourcesFilter';
+import { FORM_ID, ProposalResourcesFilter } from './ProposalResourcesFilter';
+import { resourceRequestColumns } from './resourceRequestColumns';
 import { ResourceRequestExpandableRow } from './ResourceRequestExpandableRow';
 import { ResourceRequestItemActions } from './ResourceRequestItemActions';
 import { ResourceRequestTemplates } from './ResourceRequestTemplates';
 
-const ProposalResourcesTableComponent: FC<any> = ({
+// Stable identity so the inert filter form does not reinitialise on every render.
+const NOOP_SUBMIT = () => undefined;
+const columns = resourceRequestColumns({ offeringFilter: true });
+
+interface ProposalResourcesTableProps {
+  proposal: Proposal;
+  /** Supplies the offerings the filter can choose between. */
+  call?: { offerings?: any[] };
+  handleFetch(rows: RequestedResource[]): void;
+  readOnlyMode?: boolean;
+  reviews?: ProposalReview[];
+  onTableReady(fetch: () => void): void;
+  /** Reloads the table and the summary the sidebar totals from. */
+  refetchTable(): void;
+}
+
+const ProposalResourcesTableComponent: FC<ProposalResourcesTableProps> = ({
   proposal,
   call,
-  stepProps,
   handleFetch,
-  isLoading,
-  error,
-  refetchCall,
   readOnlyMode,
   reviews,
-  onAddCommentClick,
+  onTableReady,
+  refetchTable,
 }) => {
+  // The filter form lives in the surrounding <Form id={FORM_ID}>; its selected
+  // offering narrows the query the table runs.
   const { values } = useFormState();
-  const filter = useMemo(() => {
-    const res: any = {};
-    if (values?.offering) {
-      res.offering_uuid = values.offering.offering_uuid;
-    }
-    return res;
-  }, [values]);
+  const filter = useMemo(
+    () =>
+      values?.offering
+        ? { offering_uuid: values.offering.offering_uuid }
+        : undefined,
+    [values],
+  );
 
   const tableProps = useTable({
     table: 'ProposalResourcesList',
@@ -62,6 +72,12 @@ const ProposalResourcesTableComponent: FC<any> = ({
     onFetch: handleFetch,
   });
 
+  // The Add button sits on the card's title row, outside this component, so it
+  // is handed the reload the table would otherwise keep to itself.
+  useEffect(() => {
+    onTableReady?.(tableProps.fetch);
+  }, [onTableReady, tableProps.fetch]);
+
   return (
     <Table<ProposalResource>
       {...tableProps}
@@ -69,42 +85,25 @@ const ProposalResourcesTableComponent: FC<any> = ({
       // rail narrows this panel, and six columns pushed estimated cost and
       // purchase order — what a reviewer is here for — behind a sideways
       // scroll.
-      columns={[
-        {
-          title: translate('Offering'),
-          render: ({ row }) => <>{row.requested_offering.offering_name}</>,
-          filter: 'offering',
-          inlineFilter: (row) => ({
-            offering_name: row.requested_offering.offering_name,
-            offering_uuid: row.requested_offering.offering_uuid,
-          }),
-        },
-        {
-          // Estimated, not billed: computed here from the plan's price list,
-          // while the amount actually charged is recomputed by the backend at
-          // allocation.
-          title: translate('Estimated cost'),
-          render: ({ row }) => (
-            <RequestedResourceCostLabel
-              cost={getRequestedResourceCost(row)}
-              stacked
-            />
-          ),
-        },
-        {
-          title: translate('Purchase order'),
-          render: ({ row }) => <PurchaseOrderCell row={row} />,
-        },
-      ]}
+      columns={columns}
       // The step card above already carries this heading and its own border;
       // repeating both gave the panel a second "Resource requests" title inside
       // a nested box. Same treatment the project team step gives its table.
       hideTitle
       cardBordered={false}
-      // Drop the nested card's own insets too, so the toolbar and the table
-      // line up with the step's heading instead of stepping in from it.
-      bodyClassName="px-0"
+      // The step is already a card: this table adds no card and no insets of
+      // its own, so it sits flush inside the step rather than reading as a
+      // second panel nested in the first.
+      className="border-0 shadow-none"
+      bodyClassName="p-0"
       headerClassName="mx-0"
+      fullWidth
+      filters={
+        readOnlyMode ? null : (
+          <ProposalResourcesFilter offerings={call?.offerings} />
+        )
+      }
+      formId={FORM_ID}
       verboseName={translate('Resources')}
       emptyMessage={
         readOnlyMode
@@ -114,64 +113,30 @@ const ProposalResourcesTableComponent: FC<any> = ({
             )
       }
       minHeight="auto"
-      filters={
-        readOnlyMode ? null : isLoading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          <LoadingErred loadData={refetchCall} />
-        ) : (
-          <ProposalResourcesFilter offerings={call?.offerings} />
-        )
-      }
-      tableActions={
-        !readOnlyMode ? (
-          <AddResourceButton proposal={proposal} refetch={tableProps.fetch} />
-        ) : onAddCommentClick ? (
-          <AddCommentButton
-            review={reviews?.[0]}
-            onClick={() =>
-              onAddCommentClick({
-                commentField: 'comment_resource_requests',
-                label: stepProps.title,
-              })
-            }
-          />
-        ) : null
-      }
       expandableRow={ResourceRequestExpandableRow}
-      rowActions={({ row, fetch }) =>
+      // The step's own reload, not the table's: an edit or a delete changes
+      // what the summary totals just as much as an add does, and only the
+      // former reloads both.
+      rowActions={({ row }) =>
         !readOnlyMode ? (
           <ResourceRequestItemActions
             row={row}
             proposal={proposal}
-            refetch={fetch}
+            refetch={refetchTable}
           />
         ) : null
       }
       footer={
-        <>
-          <ProposalCostTotal
-            rows={tableProps.rows}
-            resultCount={tableProps.pagination?.resultCount}
-          />
-          <FieldReviewComments
-            reviews={reviews}
-            fieldName="comment_resource_requests"
-            space={0}
-            className="mt-5"
-          />
-        </>
+        <FieldReviewComments
+          reviews={reviews}
+          fieldName="comment_resource_requests"
+          space={0}
+          className="mt-5"
+        />
       }
-      formId={FORM_ID}
     />
   );
 };
-
-const ProposalResourcesTable: FC<any> = (props) => (
-  <Form id={FORM_ID} onSubmit={() => {}} subscription={{ values: true }}>
-    {() => <ProposalResourcesTableComponent {...props} />}
-  </Form>
-);
 
 export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params.proposal;
@@ -191,13 +156,27 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   const [resourceRequests, setResourceRequests] = useState<RequestedResource[]>(
     [],
   );
+  // A ref, not state: passing the table's own fetch through setState would run
+  // it as an updater, and the button needs a handle that never goes stale.
+  const reloadTableRef = useRef<() => void>(undefined);
+  const handleTableReady = useCallback((fetch: () => void) => {
+    reloadTableRef.current = fetch;
+  }, []);
+  const queryClient = useQueryClient();
+  // Every add, edit and delete comes through here — the one place that knows
+  // the summary's list has moved on. Invalidating from the table's onFetch
+  // instead fired on the first load and on every page change, so each visit
+  // paged through the whole list twice before showing a total.
+  const refetchTable = useCallback(() => {
+    reloadTableRef.current?.();
+    queryClient.invalidateQueries({
+      queryKey: ['ProposalResourcesSummary', proposal.uuid],
+    });
+  }, [queryClient, proposal.uuid]);
 
-  const {
-    data: call,
-    isLoading,
-    error,
-    refetch: refetchCall,
-  } = useQuery({
+  // Only the templates branch and the Add button read this; the table below
+  // renders from the proposal's own resources.
+  const { data: call } = useQuery({
     queryKey: ['publicCall', proposal.call_uuid],
 
     queryFn: () =>
@@ -242,19 +221,38 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
       isOpen={isOpen}
       onToggle={onToggle}
       actions={
-        <StepHeaderContent
-          isCompleted={isCompleted}
-          isRequired={isRequired}
-          metadata={
-            resourceCount > 0
-              ? // Whole strings per form rather than a noun after a number:
-                // inflected languages do not take "{count} resource(s)".
-                resourceCount === 1
-                ? translate('{count} resource', { count: resourceCount })
-                : translate('{count} resources', { count: resourceCount })
-              : undefined
-          }
-        />
+        // On the title row rather than in a toolbar of its own: the step is one
+        // card, and a second bar under the divider only pushed the table down.
+        <div className="d-flex align-items-center gap-4">
+          {readOnlyMode ? (
+            onAddCommentClick ? (
+              <AddCommentButton
+                review={reviews?.[0]}
+                onClick={() =>
+                  onAddCommentClick({
+                    commentField: 'comment_resource_requests',
+                    label: props.title,
+                  })
+                }
+              />
+            ) : null
+          ) : call?.resource_templates?.length ? null : (
+            <AddResourceButton proposal={proposal} refetch={refetchTable} />
+          )}
+          <StepHeaderContent
+            isCompleted={isCompleted}
+            isRequired={isRequired}
+            metadata={
+              resourceCount > 0
+                ? // Whole strings per form rather than a noun after a number:
+                  // inflected languages do not take "{count} resource(s)".
+                  resourceCount === 1
+                  ? translate('{count} resource', { count: resourceCount })
+                  : translate('{count} resources', { count: resourceCount })
+                : undefined
+            }
+          />
+        </div>
       }
     >
       {call?.resource_templates?.length && !readOnlyMode ? (
@@ -265,18 +263,23 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           reviews={reviews}
         />
       ) : (
-        <ProposalResourcesTable
-          proposal={proposal}
-          call={call}
-          stepProps={props}
-          handleFetch={handleFetch}
-          isLoading={isLoading}
-          error={error}
-          refetchCall={refetchCall}
-          readOnlyMode={readOnlyMode}
-          reviews={reviews}
-          onAddCommentClick={onAddCommentClick}
-        />
+        <Form
+          id={FORM_ID}
+          onSubmit={NOOP_SUBMIT}
+          subscription={{ values: true }}
+        >
+          {() => (
+            <ProposalResourcesTableComponent
+              proposal={proposal}
+              call={call}
+              handleFetch={handleFetch}
+              readOnlyMode={readOnlyMode}
+              reviews={reviews}
+              onTableReady={handleTableReady}
+              refetchTable={refetchTable}
+            />
+          )}
+        </Form>
       )}
     </AccordionCard>
   );

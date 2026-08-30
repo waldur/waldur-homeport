@@ -24,6 +24,11 @@
       "feature_area": "plan"
     }
   },
+  " for 1 month": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
   " for remaining {count} months": {
     "context": {
       "variables": {
@@ -32,6 +37,16 @@
         }
       },
       "feature_area": "change-limits"
+    }
+  },
+  " for {count} months": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "proposals"
     }
   },
   " one-time": {
@@ -404,6 +419,7 @@
       "feature_area": "project-templates"
     }
   },
+  "1 day": {},
   "1 day ago": {
     "context": {
       "feature_area": "usage-monitoring"
@@ -2059,7 +2075,6 @@
   },
   "Add resource": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "landing"
     }
   },
@@ -11340,6 +11355,11 @@
       "feature_area": "integration"
     }
   },
+  "Counted from the day the resource is granted.": {
+    "context": {
+      "feature_area": "plan"
+    }
+  },
   "Countries": {
     "context": {
       "primary_ui_type": "label",
@@ -15615,12 +15635,6 @@
       "feature_area": "workflow-steps"
     }
   },
-  "Duration in days": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "proposal"
-    }
-  },
   "Duration in seconds of delay between pull user attempts.": {},
   "Duration step": {
     "context": {
@@ -17345,11 +17359,6 @@
       "feature_area": "reviewer"
     }
   },
-  "Enter number of days...": {
-    "context": {
-      "feature_area": "create"
-    }
-  },
   "Enter private IPv4 CIDR.": {},
   "Enter reason for rejection": {
     "context": {
@@ -17757,11 +17766,6 @@
       "primary_ui_type": "title"
     }
   },
-  "Estimated total": {
-    "context": {
-      "feature_area": "proposals"
-    }
-  },
   "Estonia": {},
   "Estonian Business Register (Äriregister)": {
     "context": {
@@ -17896,6 +17900,11 @@
   "Every call ends in an allocation decision.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Every granted project lasts exactly this long, and no prepaid subscription requested under the call may run past it. Leave empty to let the longest subscription requested decide.": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Every month service provider can report up to the amount requested by user.": {
@@ -18128,11 +18137,6 @@
         }
       },
       "feature_area": "details"
-    }
-  },
-  "Expected project duration in days once resources have been granted.": {
-    "context": {
-      "feature_area": "create"
     }
   },
   "Expected resource growth pattern": {},
@@ -30966,6 +30970,21 @@
       "feature_area": "access"
     }
   },
+  "Not fixed": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
+  "Not fixed: access lasts as long as the longest subscription requested.": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
+  "Not fixed: each project lasts as long as the longest subscription it requests.": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
   "Not helpful": {
     "context": {
       "feature_area": "shared"
@@ -32273,6 +32292,16 @@
   "Only draft offerings can be deleted": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Only lengths that fit inside the fixed project duration are offered ({cap}).": {
+    "context": {
+      "variables": {
+        "cap": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "plan"
     }
   },
   "Only lowercase letters, numbers, and @/./+/-/_ characters are allowed.": {},
@@ -36304,6 +36333,22 @@
       "feature_area": "change-limits"
     }
   },
+  "Prepaid subscriptions": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "access"
+    }
+  },
+  "Prepaid subscriptions {cap}.": {
+    "context": {
+      "variables": {
+        "cap": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposals"
+    }
+  },
   "Preparing Excel — sheet {current} of {total}…": {
     "context": {
       "variables": {
@@ -37199,7 +37244,7 @@
   },
   "Project duration in days": {
     "context": {
-      "feature_area": "create"
+      "feature_area": "configuration"
     }
   },
   "Project end date": {
@@ -39538,6 +39583,16 @@
   "Recovery timeout": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Recurring": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Recurring total": {
+    "context": {
+      "feature_area": "proposals"
     }
   },
   "Recusal": {
@@ -46349,6 +46404,7 @@
     }
   },
   "Set both the minimum and maximum, or neither.": {},
+  "Set by the longest subscription requested.": {},
   "Set columns in {name} category": {
     "context": {
       "variables": {
@@ -48382,6 +48438,7 @@
   },
   "Subscription": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "billing"
     }
   },
@@ -48400,9 +48457,19 @@
       "feature_area": "plan"
     }
   },
+  "Subscription period (months)": {
+    "context": {
+      "feature_area": "plan"
+    }
+  },
   "Subscription subtotal": {
     "context": {
       "feature_area": "renew-allocation"
+    }
+  },
+  "Subscriptions and one-time": {
+    "context": {
+      "feature_area": "proposals"
     }
   },
   "Substring to find...": {
@@ -51531,6 +51598,16 @@
       "feature_area": "roles"
     }
   },
+  "This offering cannot be subscribed to for less than {count} months, which is longer than the call allows.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "plan"
+    }
+  },
   "This offering has been archived.": {
     "context": {
       "feature_area": "details"
@@ -51881,11 +51958,6 @@
       "feature_area": "create"
     }
   },
-  "This will also update the duration of connected proposals which have not been allocated yet. Continue?": {
-    "context": {
-      "feature_area": "configuration"
-    }
-  },
   "This will automatically create a broadcast message and portal announcement when scheduled.": {
     "context": {
       "feature_area": "create"
@@ -51894,11 +51966,6 @@
   "This will be used to check your company representative rights.": {
     "context": {
       "feature_area": "organization-create"
-    }
-  },
-  "This will clear the duration of connected proposals which have not been allocated yet, so applicants will be able to choose it themselves. Continue?": {
-    "context": {
-      "feature_area": "configuration"
     }
   },
   "This will delete all existing questions and replace them with predefined {type} questions.": {
@@ -52371,6 +52438,11 @@
       "feature_area": "thread"
     }
   },
+  "Toggle": {
+    "context": {
+      "feature_area": "core"
+    }
+  },
   "Toggle camera": {
     "context": {
       "feature_area": "call"
@@ -52506,6 +52578,11 @@
   "Too many empty fields": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Too short for a prepaid subscription.": {
+    "context": {
+      "feature_area": "proposals"
     }
   },
   "Too slow or failed": {
@@ -62581,6 +62658,7 @@
       "feature_area": "footer"
     }
   },
+  "Your access lasts as long as the longest subscription requested.": {},
   "Your account is not part of any organization. Your view will be restricted.": {
     "context": {
       "feature_area": "auth"
@@ -62909,6 +62987,11 @@
   "another room": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "any length the offering allows": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "application": {
@@ -64420,6 +64503,7 @@
       "feature_area": "administration"
     }
   },
+  "too short for a prepaid subscription": {},
   "tool call data": {
     "context": {
       "feature_area": "shared"
@@ -64458,6 +64542,16 @@
         }
       },
       "feature_area": "mass-actions"
+    }
+  },
+  "up to 1 month": {},
+  "up to {count} months": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "updated": {
@@ -64689,16 +64783,6 @@
         }
       },
       "feature_area": "usage"
-    }
-  },
-  "{amount} one-time": {
-    "context": {
-      "variables": {
-        "amount": {
-          "type": "number"
-        }
-      },
-      "feature_area": "proposals"
     }
   },
   "{answered} of {total} answered": {
@@ -66347,8 +66431,7 @@
         "n": {
           "type": "unknown"
         }
-      },
-      "feature_area": "configuration"
+      }
     }
   },
   "{n} entries": {
