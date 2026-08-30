@@ -16,11 +16,34 @@ describe('FileDownloader', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:file');
+    vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined);
   });
 
   it('renders download button with icon', () => {
     render(<FileDownloader url={mockUrl} name={mockName} />);
     expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('renders custom children instead of the default icon', () => {
+    render(
+      <FileDownloader url={mockUrl} name={mockName}>
+        Download PDF
+      </FileDownloader>,
+    );
+    expect(
+      screen.getByRole('button', { name: 'Download PDF' }),
+    ).toBeInTheDocument();
+  });
+
+  it('downloads via authenticated GET instead of navigating to the file URL', async () => {
+    const user = userEvent.setup();
+    vi.spyOn(api, 'get').mockResolvedValue(mockBlob as any);
+
+    render(<FileDownloader url={mockUrl} name={mockName} />);
+    await user.click(screen.getByRole('button'));
+
+    expect(api.get).toHaveBeenCalledWith(mockUrl);
   });
 
   it('shows loading spinner while downloading', async () => {

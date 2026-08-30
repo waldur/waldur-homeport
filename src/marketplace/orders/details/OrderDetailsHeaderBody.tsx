@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from '@/core/Badge';
 import { Link } from '@/core/Link';
+import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { Field } from '@/resource/summary';
@@ -17,11 +18,10 @@ const PurchaseOrderBadge = ({ order, offering }) => {
 
   if (order.attachment) {
     return (
-      <a
-        href={order.attachment}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="d-inline-flex align-items-center gap-1 text-decoration-none"
+      <FileDownloader
+        url={order.attachment}
+        name={translate('PDF file')}
+        className="text-btn d-inline-flex align-items-center gap-1 text-decoration-none"
       >
         <Badge
           variant="success"
@@ -32,7 +32,7 @@ const PurchaseOrderBadge = ({ order, offering }) => {
         >
           {translate('Download')}
         </Badge>
-      </a>
+      </FileDownloader>
     );
   }
 

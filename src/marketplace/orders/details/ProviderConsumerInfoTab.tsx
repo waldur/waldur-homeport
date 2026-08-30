@@ -5,6 +5,7 @@ import { Offering, OrderDetails } from 'waldur-js-client';
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
+import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
@@ -96,14 +97,14 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
             <FormTable.Item
               label={translate('Attachment')}
               value={
-                <a
-                  href={order.provider_message_attachment}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <FileDownloader
+                  url={order.provider_message_attachment}
+                  name={translate('PDF file')}
+                  className="text-btn text-hover-primary d-inline-flex align-items-center"
                 >
                   <DownloadSimpleIcon weight="bold" className="me-1" />
                   {translate('Download PDF')}
-                </a>
+                </FileDownloader>
               }
             />
           )}
@@ -123,14 +124,14 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
               <FormTable.Item
                 label={translate('Attachment')}
                 value={
-                  <a
-                    href={order.consumer_message_attachment}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <FileDownloader
+                    url={order.consumer_message_attachment}
+                    name={translate('PDF file')}
+                    className="text-btn text-hover-primary d-inline-flex align-items-center"
                   >
                     <DownloadSimpleIcon weight="bold" className="me-1" />
                     {translate('Download PDF')}
-                  </a>
+                  </FileDownloader>
                 }
               />
             )}
