@@ -6,10 +6,14 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -72,6 +76,31 @@ export const BaseOfferingsList: FunctionComponent<{
         ]
       : [];
 
+  const costColumn: Column<ProviderOfferingDetails>[] = isFeatureVisible(
+    MarketplaceFeatures.conceal_prices,
+  )
+    ? []
+    : [
+        {
+          title: translate('Cost (previous month)'),
+          render: ({ row }) =>
+            row.total_cost == null ? (
+              <>{DASH_ESCAPE_CODE}</>
+            ) : (
+              <>{defaultCurrency(row.total_cost)}</>
+            ),
+          orderField: 'total_cost',
+          export: (row) =>
+            row.total_cost == null
+              ? DASH_ESCAPE_CODE
+              : defaultCurrency(row.total_cost),
+          exportKeys: ['total_cost'],
+          keys: ['total_cost'],
+          id: 'total_cost',
+          optional: true,
+        },
+      ];
+
   const columns: Column<ProviderOfferingDetails>[] = [
     {
       title: translate('Name'),
@@ -123,6 +152,16 @@ export const BaseOfferingsList: FunctionComponent<{
       keys: ['type'],
       id: 'type',
     },
+    {
+      title: translate('Customers'),
+      render: ({ row }) => <>{row.total_customers ?? DASH_ESCAPE_CODE}</>,
+      orderField: 'total_customers',
+      export: 'total_customers',
+      keys: ['total_customers'],
+      id: 'total_customers',
+      optional: true,
+    },
+    ...costColumn,
     {
       title: translate('Shared'),
       render: ({ row }) => <BooleanField value={row.shared} />,
