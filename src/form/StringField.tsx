@@ -50,5 +50,6 @@ export const StringField: FC<StringFieldProps> = ({ input, meta, ...rest }) => (
     isInvalid={meta.touched && meta.error}
     {...rest}
     {...input}
+    onChange={(e) => input.onChange(e.target.value)}
   />
 );
