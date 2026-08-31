@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { describe, it, expect, vi } from 'vitest';
 import {
   marketplaceResourcesRetrieve,
@@ -96,13 +97,15 @@ describe('Change resource limits', () => {
 
   it('getRemainingMonths calculates months correctly', async () => {
     const { getRemainingMonths } = await import('./utils');
-    const futureDate = new Date();
-    futureDate.setMonth(futureDate.getMonth() + 3);
-    expect(getRemainingMonths(futureDate.toISOString())).toBe(3);
+    // Luxon, like the function under test, clamps to the last day of a
+    // shorter month; Date.setMonth overflows into the next one instead, so
+    // on the 31st it asked for three months *and a day* and the ceiling in
+    // getRemainingMonths correctly answered 4.
+    const futureDate = DateTime.now().plus({ months: 3 });
+    expect(getRemainingMonths(futureDate.toISO())).toBe(3);
 
-    const pastDate = new Date();
-    pastDate.setMonth(pastDate.getMonth() - 1);
-    expect(getRemainingMonths(pastDate.toISOString())).toBe(0);
+    const pastDate = DateTime.now().minus({ months: 1 });
+    expect(getRemainingMonths(pastDate.toISO())).toBe(0);
   });
 
   it('getLimitChangeRequirements extracts correct data', async () => {
