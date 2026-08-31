@@ -98,6 +98,23 @@ export function attachTransitions() {
         }
         return transition.router.stateService.target(target.toState);
       } catch {
+        // No token any more: the request answered 401 and the response
+        // interceptor has already logged out and started its own transition
+        // to `login` (onSessionExpired in core/authCoreSetup.ts). A redirect
+        // from here would enter `login` a second time — ui-router builds a
+        // redirect from this transition's original `from` path, unaware that
+        // the interceptor's transition already finished — and the login view
+        // config registered twice is only unregistered once on the next
+        // login, so the landing page stays on screen while the address bar
+        // already shows the destination. Remember where the user was going
+        // and let the interceptor's transition land alone.
+        if (!AuthService.isAuthenticated()) {
+          RedirectStorage.set({
+            toState: toStateName,
+            toParams: cleanObject(transition.params()),
+          });
+          return false;
+        }
         return transition.router.stateService.target('errorPage.serverError');
       }
     },

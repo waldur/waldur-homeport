@@ -200,6 +200,30 @@ describe('Profile validity transition guard', () => {
       expect(mockTarget).toHaveBeenCalledWith('errorPage.serverError');
       expect(result).toBe('error-redirect');
     });
+
+    // An expired token answers the user request with 401. The response
+    // interceptor logs out and navigates to `login` itself; a redirect from
+    // this hook on top of that enters `login` twice, and the surplus view
+    // config keeps the landing page on screen after the next successful
+    // login. The hook must abort and only remember the destination.
+    it('aborts without redirecting when the token was cleared during the request', async () => {
+      mockGetCurrentUser.mockImplementation(() => {
+        mockIsAuthenticated.mockReturnValue(false);
+        return Promise.reject(new Error('401'));
+      });
+      const transition = createMockTransition('organization.dashboard', {
+        uuid: 'abc',
+      });
+
+      const result = await profileValidityHook.callback(transition);
+
+      expect(result).toBe(false);
+      expect(mockTarget).not.toHaveBeenCalled();
+      expect(mockRedirectStorageSet).toHaveBeenCalledWith({
+        toState: 'organization.dashboard',
+        toParams: { uuid: 'abc' },
+      });
+    });
   });
 
   describe('passkey enforcement guard', () => {
