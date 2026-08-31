@@ -9,6 +9,46 @@
           pointer-events: none;
         }
       }
+
+      // Add resource CTA — lives here (not co-located with the component) so it
+      // stays inside @layer bootstrap with the rest of Metronic. Unlayered
+      // component SCSS would outrank the collapsed-aside rules below and hide
+      // the plus icon when the sidebar is minimized.
+      //
+      // Layout only. Colours belong to the $custom-aside loop at the bottom of
+      // this file, which themes border-color and the hover/idle title+icon
+      // colour per sidebar style. The component SCSS this block replaced also
+      // hardcoded `--bs-primary-300` for both; that was an unlayered override
+      // silently flattening all five styles to one colour, so it is
+      // deliberately not carried over — don't reintroduce it.
+      &.add-resource-toggle {
+        margin-bottom: 1.85rem;
+
+        .menu-link {
+          border-width: 2px;
+          padding-top: 0.6rem;
+          padding-bottom: 0.6rem;
+          justify-content: center;
+
+          .menu-title {
+            flex-grow: 0;
+          }
+
+          .menu-icon {
+            width: auto;
+
+            .svg-icon {
+              margin-right: 0;
+
+              svg {
+                height: 1.55rem !important;
+                width: 1.55rem !important;
+              }
+            }
+          }
+        }
+      }
+
       &.menu-accordion {
         &.hover {
           background: if(isDarkMode(), $gray-300, $primary-700);

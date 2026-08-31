@@ -47,6 +47,16 @@
   border-right: get($aside-config, border-right);
 
   .hover-scroll-overlay-y {
+    // Reserve the scrollbar gutter permanently. core/components/_scroll.scss
+    // flips this container from `overflow-y: hidden` to `overlay` on hover;
+    // `overlay` is a dead alias for `auto` in current Chrome, so the scrollbar
+    // starts taking layout width on hover and shoves the Add resource / filter
+    // icons ~14px left. A stable gutter applies to `overflow: hidden` too, so
+    // the shift goes away while the scrollbar stays hidden until hover —
+    // don't "fix" this by forcing `overflow-y: auto`, which only makes the
+    // scrollbar permanently visible. (Headless Chrome uses overlay scrollbars
+    // and reproduces none of this; test headed.)
+    scrollbar-gutter: stable;
     --scrollbar-space: 0.4rem;
 
     @include scrollbar-color(
