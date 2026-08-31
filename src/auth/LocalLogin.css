@@ -26,15 +26,19 @@
   margin: 0 18px;
 }
 
-/* Sits directly under the identity-provider buttons, which are sized by their
-   30px logo rather than by their text (see .login-button in LoginButton.css).
-   Pin the same height and centre the label so the stack does not step. */
+/* Deliberately subordinate to the identity-provider buttons above it: local
+   accounts are the fallback path, not the primary one, and the form itself stays
+   collapsed until this is clicked. Styling it as a filled primary CTA inverts
+   that hierarchy. */
 .login-with-local-account-button {
-  min-height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration: underline;
+  color: var(--waldur-brand-color);
   margin-bottom: 1rem;
+  border: 0;
+  background: transparent;
 }
 
 .login-submit-button {
