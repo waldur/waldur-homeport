@@ -23,6 +23,7 @@ import { buildCreditBreakdown } from './creditBreakdown';
 import { buildCreditEvents } from './creditEvents';
 import { creditableCostThisMonth } from './creditPacing';
 import { projectCreditRunway, safeNumber } from './creditRunway';
+import { costPolicyMetrics } from './policyEta';
 import {
   CreditBreakdown,
   CreditRunway,
@@ -351,40 +352,18 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     const policies: PolicySaturation[] = [];
 
     for (const p of projectPolicies) {
-      // `current_cost` is the figure the policy itself compares against
-      // limit_cost: the cost over its own period (1, 3 or 12 months), less the
-      // credit already applied and the credit still to be drawn — the last of
-      // which only the server can simulate. Prefer it over the price estimate,
-      // which covers the current month only and knows nothing of the pending
-      // draw. The fallback keeps older backends working.
-      const currentTotal = safeNumber(
-        p.current_cost ?? p.billing_price_estimate?.total,
-      );
-      const limit = safeNumber(p.limit_cost);
-      const sat = limit > 0 ? (currentTotal / limit) * 100 : 0;
-      const remaining = limit - currentTotal;
-      const dailyCostBurn = burnPerDay;
-      const etaDays =
-        dailyCostBurn > 0 && remaining > 0
-          ? Math.floor(remaining / dailyCostBurn)
-          : remaining <= 0
-            ? 0
-            : null;
-      const etaDate =
-        etaDays !== null ? isoDate(addDays(today, etaDays)) : null;
+      // Every figure comes from the policy alone. Notably not from the credit
+      // burn rate, which is the compensating side of the very subtraction
+      // `current_cost` is the result of — see policyEta.ts.
       policies.push({
         policyUuid: p.uuid,
         policyKind: 'project-cost',
         scopeName: p.scope_name,
         scopeUuid: p.scope_uuid,
         thresholdLabel: translate('Project cost cap'),
-        thresholdValue: limit,
-        currentValue: currentTotal,
-        saturationPct: sat,
+        ...costPolicyMetrics(p, today),
         action: p.actions,
         actionLabel: formatPolicyAction(p.actions),
-        etaDays,
-        etaDate,
         hasFired: p.has_fired,
         firedDatetime: p.fired_datetime || null,
         affectedResourcesCount: p.affected_resources_count || 0,
@@ -392,38 +371,18 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
     }
 
     for (const p of customerPolicies) {
-      const limit = safeNumber(p.limit_cost);
-      const currentTotal = safeNumber(
-        p.current_cost ??
-          (p as { billing_price_estimate?: { total?: string } })
-            .billing_price_estimate?.total,
-      );
-      const sat = limit > 0 ? (currentTotal / limit) * 100 : 0;
-      // Same projection as the project cost policy. Without it an organization
-      // cap can only ever be reported after it fires, and it never reaches the
-      // dated list of what happens next. The rate is this project's draw, so
-      // the estimate is a ceiling: sibling projects spending against the same
-      // cap bring the date closer, never further out.
-      const remaining = limit - currentTotal;
-      const etaDays =
-        burnPerDay > 0 && remaining > 0
-          ? Math.floor(remaining / burnPerDay)
-          : remaining <= 0
-            ? 0
-            : null;
+      // Same reasoning as the project cost policy, and one more on top: an
+      // organization cap is measured across every project under it, so this
+      // project's draw was never the right rate for it even in principle.
       policies.push({
         policyUuid: p.uuid,
         policyKind: 'customer-cost',
         scopeName: p.scope_name,
         scopeUuid: p.scope_uuid,
         thresholdLabel: translate('Organization cost cap'),
-        thresholdValue: limit,
-        currentValue: currentTotal,
-        saturationPct: sat,
+        ...costPolicyMetrics(p, today),
         action: p.actions,
         actionLabel: formatPolicyAction(p.actions),
-        etaDays,
-        etaDate: etaDays !== null ? isoDate(addDays(today, etaDays)) : null,
         hasFired: p.has_fired,
         firedDatetime: p.fired_datetime || null,
         affectedResourcesCount: p.affected_resources_count || 0,
