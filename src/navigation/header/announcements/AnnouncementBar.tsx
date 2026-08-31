@@ -59,7 +59,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
     >
       <div
         className={classNames(
-          'container-fluid w-100 d-flex align-items-center gap-2',
+          'container-fluid w-100 d-flex align-items-center gap-2 py-2',
           ellipsis && 'ellipsis',
         )}
       >
