@@ -15,6 +15,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { RuleForm } from './RuleForm';
+import { toList } from './utils';
 
 interface RuleFormDialogProps {
   resolve: { refetch; rule?: Rule; isDuplicate?: boolean };
@@ -24,8 +25,9 @@ interface AutoProvisioningRuleForm {
   name: string;
   customer?: Pick<Customer, 'name' | 'url'>;
   project_role: string;
-  user_affiliations: string;
-  user_email_patterns: string;
+  // `CommaSeparatedListGroup` seeds these from a string but emits an array.
+  user_affiliations: string | string[];
+  user_email_patterns: string | string[];
   use_user_organization_as_customer_name: boolean;
 }
 
@@ -43,8 +45,9 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
         project_role: resolve.rule.project_role_display_name,
         use_user_organization_as_customer_name:
           resolve.rule.use_user_organization_as_customer_name,
-        user_affiliations: resolve.rule.user_affiliations?.join(', ') || '',
-        user_email_patterns: resolve.rule.user_email_patterns?.join(' ') || '',
+        // Seed the list fields with the shape the control itself emits.
+        user_affiliations: resolve.rule.user_affiliations ?? [],
+        user_email_patterns: resolve.rule.user_email_patterns ?? [],
       }
     : undefined;
 
@@ -61,22 +64,8 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
         creates_resource: false,
         use_user_organization_as_customer_name:
           formData.use_user_organization_as_customer_name,
-        user_affiliations: formData.user_affiliations
-          ? Array.isArray(formData.user_affiliations)
-            ? formData.user_affiliations.filter(Boolean)
-            : formData.user_affiliations
-                .split(',')
-                .map((item) => item.trim())
-                .filter(Boolean)
-          : [],
-        user_email_patterns: formData.user_email_patterns
-          ? Array.isArray(formData.user_email_patterns)
-            ? formData.user_email_patterns.filter(Boolean)
-            : formData.user_email_patterns
-                .split(' ')
-                .map((item) => item.trim())
-                .filter(Boolean)
-          : [],
+        user_affiliations: toList(formData.user_affiliations),
+        user_email_patterns: toList(formData.user_email_patterns, ' '),
       };
 
       if (isEdit) {
@@ -98,7 +87,8 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
 
   const handleSubmit = async (values: AutoProvisioningRuleForm) => {
     const noFilters =
-      !values.user_email_patterns?.trim() && !values.user_affiliations?.trim();
+      toList(values.user_email_patterns, ' ').length === 0 &&
+      toList(values.user_affiliations).length === 0;
     if (values.use_user_organization_as_customer_name && noFilters) {
       try {
         await confirm(
