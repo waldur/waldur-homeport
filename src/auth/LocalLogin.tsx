@@ -18,7 +18,7 @@ interface LocalLoginFormProps {
 export const LocalLoginButton: FC<LocalLoginButtonProps> = ({ onClick }) => (
   <button
     type="button"
-    className="btn btn-primary btn-lg w-100 login-with-local-account-button"
+    className="btn btn-link login-with-local-account-button"
     onClick={onClick}
   >
     {translate('Sign in with local account')}
