@@ -1,10 +1,24 @@
 import { translate } from '@/i18n';
 
+/**
+ * Normalise a value coming from `CommaSeparatedListGroup` into an array.
+ *
+ * The control emits an array as soon as the user types into it, while a field
+ * left untouched still holds the string the dialog seeded it with, so both
+ * shapes reach the submit handler. Treating one as the other throws and the
+ * form silently refuses to submit.
+ */
+export const toList = (
+  value: string | string[] | undefined | null,
+  separator: ',' | ' ' = ',',
+): string[] => {
+  if (!value) return [];
+  const items = Array.isArray(value) ? value : value.split(separator);
+  return items.map((item) => item.trim()).filter(Boolean);
+};
+
 export const validateEmailPatterns = (value) => {
-  if (!value) return undefined;
-  const patterns = Array.isArray(value)
-    ? value.filter(Boolean)
-    : value.split(' ').filter(Boolean);
+  const patterns = toList(value, ' ');
 
   const emailLikeRegex = /@.+\..+/;
 
