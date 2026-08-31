@@ -219,6 +219,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-email-health',
+    url: 'email/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./email/EmailHealthPage').then((module) => ({
+        default: module.EmailHealthPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Email configuration'),
+      permissions: [isStaff],
+    },
+  },
+
+  {
     name: 'admin-pubsub-health',
     url: 'pubsub-health/',
     parent: 'admin-system-management',

@@ -6959,7 +6959,7 @@
   "Backend": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "issues"
+      "feature_area": "email"
     }
   },
   "Backend ID": {
@@ -8915,6 +8915,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Checking the outgoing mail configuration...": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "Checking...": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -8993,6 +8998,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "compliance"
+    }
+  },
+  "Checks": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Chemical engineering": {
@@ -16403,6 +16413,11 @@
       "feature_area": "database-stats"
     }
   },
+  "Effective configuration": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "Effective routes": {
     "context": {
       "feature_area": "openstack-tenant"
@@ -16461,6 +16476,26 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "support"
+    }
+  },
+  "Email configuration": {
+    "context": {
+      "feature_area": "administration"
+    }
+  },
+  "Email delivery is broken": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Email delivery looks correctly configured": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
+  "Email delivery may not work": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Email field": {
@@ -16898,6 +16933,11 @@
   "Enabled display of experimental or mocked components in marketplace.": {
     "context": {
       "feature_area": "features"
+    }
+  },
+  "Enabled notifications": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Enables downscaling operations for resources created from this offering": {
@@ -22229,6 +22269,11 @@
       "feature_area": "support"
     }
   },
+  "Implicit TLS (EMAIL_USE_SSL)": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "Import": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -23891,6 +23936,16 @@
   "It is used to automatically assign floating IP to your virtual machine.": {
     "context": {
       "feature_area": "openstack"
+    }
+  },
+  "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
+    "context": {
+      "variables": {
+        "email": {
+          "type": "email"
+        }
+      },
+      "feature_area": "email"
     }
   },
   "Italy": {},
@@ -26185,6 +26240,11 @@
       "feature_area": "roles"
     }
   },
+  "Manage notifications": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "Manage offerings username": {
     "context": {
       "primary_ui_type": "label",
@@ -27531,6 +27591,11 @@
   "Messages sent": {
     "context": {
       "feature_area": "celery"
+    }
+  },
+  "Messages sent in the last week": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Messages skipped": {
@@ -30278,6 +30343,11 @@
       "feature_area": "openstack-lbaas"
     }
   },
+  "No problems detected": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "No processing log entries.": {
     "context": {
       "feature_area": "issues"
@@ -30384,6 +30454,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "rabbitmq"
+    }
+  },
+  "No relay configured": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "No remote identifier provided.": {
@@ -34259,6 +34334,11 @@
     }
   },
   "Password of FreeIPA user with administrative privileges": {},
+  "Password set": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "Password will be removed when you save.": {
     "context": {
       "feature_area": "create-user-steps"
@@ -36085,7 +36165,7 @@
   "Port": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-lbaas"
+      "feature_area": "email"
     }
   },
   "Port count": {
@@ -39263,6 +39343,16 @@
       "feature_area": "dashboard"
     }
   },
+  "Rate limit reached: these checks are limited to 20 per hour. Try again in {minutes} minutes.": {
+    "context": {
+      "variables": {
+        "minutes": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Rate limit reached: these checks are limited to 20 per hour. Try again later.": {},
   "Rate limiter rejections": {
     "context": {
       "feature_area": "pubsub"
@@ -39503,7 +39593,7 @@
   "Recipient": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "broadcasts"
+      "feature_area": "email"
     }
   },
   "Recipients": {
@@ -39980,6 +40070,11 @@
   "Relative (Family)": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Relay host": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Release floating IPs": {
@@ -40725,6 +40820,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Reply-to address": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Report": {
@@ -43986,6 +44086,11 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "STARTTLS (EMAIL_USE_TLS)": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "SVG, PNG, JPG or GIF (max. 800x400px)": {
     "context": {
       "feature_area": "attachments"
@@ -45818,7 +45923,7 @@
   "Send": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "shared",
+      "feature_area": "email",
       "action_type": "create"
     }
   },
@@ -45931,13 +46036,18 @@
   "Send test email": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "project-digest",
+      "feature_area": "email",
       "action_type": "create"
     }
   },
   "Send voice message": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "Sender address": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Sending is disabled in logs.": {
@@ -49899,6 +50009,13 @@
       "feature_area": "user"
     }
   },
+  "Test connection": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "email",
+      "action_type": "create"
+    }
+  },
   "Test digest email has been sent to your email address.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -50200,6 +50317,21 @@
   "The conflict will be marked as a false positive and removed from active review.": {
     "context": {
       "feature_area": "coi-review"
+    }
+  },
+  "The connection test could not be run": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
+  "The connection was opened in {latency} ms. This proves the API service reaches the relay; notifications are sent by the Celery workers, which may reach the network differently.": {
+    "context": {
+      "variables": {
+        "latency": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "email"
     }
   },
   "The consumer has not filled in any project metadata answers.": {
@@ -50549,8 +50681,23 @@
       "feature_area": "rule-editor"
     }
   },
+  "The message could not be sent": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
+  "The message goes through the same code path as a real notification, so it fails in the same way a real notification would.": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
   "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
+  "The message was not sent": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "The minimum port number should not exceed the maximum port number.": {
     "context": {
       "feature_area": "rule-editor"
@@ -50727,11 +50874,27 @@
       "feature_area": "offerings"
     }
   },
+  "The relay accepted the message": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
+  "The relay answered": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
+  "The relay could not be reached": {
+    "context": {
+      "feature_area": "email"
+    }
+  },
   "The renewal cost will be calculated based on the extension period selected in the next step.": {
     "context": {
       "feature_area": "renew-allocation"
     }
   },
+  "The request failed. Please try again.": {},
   "The request is being processed": {
     "context": {
       "primary_ui_type": "action_button",
@@ -51298,6 +51461,11 @@
   "These scopes are recommended based on the discovered claim mappings.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "These settings come from the deployment configuration and cannot be changed here. Edit override.conf.py — the Helm values or the docker-compose .env file — and restart the services.": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "These values are required to generate a working appservice registration. They will be saved to Matrix settings.": {
@@ -52247,6 +52415,11 @@
   "Timeline": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "Timeout": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Timeout (s)": {
@@ -53274,6 +53447,11 @@
   "Tuple statistics": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "Two independent things must both be right before anything is sent: a relay that accepts mail from this installation, and at least one enabled notification type.": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Two shared secrets generated during setup. The AS token authenticates Waldur when calling the homeserver API. The HS token authenticates the homeserver when sending events to Waldur via webhook.": {},
@@ -55633,6 +55811,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "access"
+    }
+  },
+  "Unable to load the email configuration": {
+    "context": {
+      "feature_area": "email"
     }
   },
   "Unable to load the review details.": {
@@ -65415,6 +65598,16 @@
       "feature_area": "options"
     }
   },
+  "{count} problems detected": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "email"
+    }
+  },
   "{count} project": {
     "context": {
       "variables": {
@@ -65715,6 +65908,16 @@
       "feature_area": "review"
     }
   },
+  "{count} seconds": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "email"
+    }
+  },
   "{count} selected": {
     "context": {
       "variables": {
@@ -66013,6 +66216,19 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "{enabled} of {total}": {
+    "context": {
+      "variables": {
+        "enabled": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "email"
     }
   },
   "{filled}/{total} fields filled": {
