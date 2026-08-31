@@ -42,6 +42,35 @@ instead of the identically-named Tailwind utilities for exactly this
 reason — those two collide with Bootstrap's `!important` classes; nothing
 else needed the workaround once layering was in place.
 
+**The `@layer bootstrap` wrapper is not Storybook-only.** `src/tailwind.css`
+is, but the wrapper lives in `style.scss`/`style.dark.scss`, so it ships in
+the real app — and unlayered CSS beats layered CSS *regardless of
+specificity*. That silently promoted every one of the ~99 component
+stylesheets imported from a `.tsx` (`import './Foo.scss'`, which Vite injects
+unlayered) above all of Metronic, including where Metronic previously won on
+specificity.
+
+Only one file was actually affected, and it shows the shape to avoid.
+`MarketplaceTrigger.scss` scoped itself under a Metronic layout root:
+
+```scss
+/* specificity 0,4,0 — used to lose, now wins unconditionally */
+.aside .menu-item.add-resource-toggle .menu-link { justify-content: center; }
+```
+
+against `custom/_aside.scss`'s collapsed-sidebar rule (0,5,0), which needs
+`justify-content: start` inside a 43px box. The result was the Add resource
+plus icon pushed out of view whenever the sidebar was minimized. The fix was
+to move the block into `custom/_aside.scss` so it shares the layer.
+
+So: **component SCSS must be scoped under its own class, never under a
+Metronic layout root** (`.aside`, `.header`, `.toolbar`, …). Anything that
+genuinely needs to override Metronic layout belongs in
+`src/metronic/sass/custom/`, inside the layer. Nesting a Metronic class
+*inside* your own class is fine — that is what every other component
+stylesheet does, and it already outranks Metronic on specificity, so the
+layer change is a no-op for them.
+
 ### Root font-size override
 
 Metronic forces `html, body { font-size: 13px !important }` (12px below

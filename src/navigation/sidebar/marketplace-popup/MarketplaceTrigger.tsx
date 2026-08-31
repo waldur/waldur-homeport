@@ -7,7 +7,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import './MarketplaceTrigger.scss';
 
 const MarketplacePopup = lazyComponent(() =>
   import('./MarketplacePopup').then((module) => ({
