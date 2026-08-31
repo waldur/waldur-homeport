@@ -23000,7 +23000,7 @@
   "Instances": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-tenant"
+      "feature_area": "openstack-security-groups"
     }
   },
   "Instances and cores": {
@@ -63727,7 +63727,7 @@
   },
   "instances": {
     "context": {
-      "feature_area": "openstack-server-groups"
+      "feature_area": "openstack-security-groups"
     }
   },
   "intent data": {

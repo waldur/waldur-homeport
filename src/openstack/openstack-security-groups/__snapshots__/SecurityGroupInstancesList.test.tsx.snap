@@ -1,0 +1,314 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SecurityGroupInstancesList > renders instance with its internal and external IPs 1`] = `
+<div>
+  <div
+    class="card-table card-bordered card"
+  >
+    <div
+      class="card-body"
+    >
+      <div
+        class="table-responsive dataTables_wrapper"
+        style="min-height: auto;"
+      >
+        <div
+          class="table-loading-overlay"
+        >
+          <h1
+            class="mb-0"
+          >
+            <span
+              class="animation-spin text-primary"
+              data-testid="SpinnerIcon"
+              role="status"
+              weight="bold"
+            />
+          </h1>
+        </div>
+        <div
+          class="table-container table-hover-shadow table-content-refetching"
+          data-testid="table-container"
+        >
+          <table
+            class="table align-middle table-row-bordered fs-6 gy-0 gx-8px no-footer"
+          >
+            <colgroup>
+              <col
+                style="width: 50%; min-width: 200px;"
+              />
+              <col
+                style="width: 16.666666666666668%; min-width: 150px;"
+              />
+              <col
+                style="width: 16.666666666666668%; min-width: 150px;"
+              />
+              <col
+                style="width: 16.666666666666668%; min-width: 150px;"
+              />
+            </colgroup>
+            <thead>
+              <tr
+                class="text-start text-muted fw-bolder fs-7 gs-0 align-middle"
+              >
+                <th
+                  data-pin-key="column-0"
+                >
+                  <div
+                    class="th-content"
+                  >
+                    <div
+                      class="th-main"
+                    >
+                      <span>
+                        Name
+                      </span>
+                    </div>
+                    <button
+                      aria-label="Pin column"
+                      class="text-btn pin-toggle"
+                      data-testid="pin-toggle-column-0"
+                      type="button"
+                    >
+                      <span>
+                        <span
+                          data-testid="PushPinIcon"
+                          size="16"
+                          weight="bold"
+                        />
+                      </span>
+                    </button>
+                  </div>
+                </th>
+                <th
+                  data-pin-key="column-1"
+                >
+                  <div
+                    class="th-content"
+                  >
+                    <div
+                      class="th-main"
+                    >
+                      <span>
+                        Internal IPs
+                      </span>
+                    </div>
+                    <button
+                      aria-label="Pin column"
+                      class="text-btn pin-toggle"
+                      data-testid="pin-toggle-column-1"
+                      type="button"
+                    >
+                      <span>
+                        <span
+                          data-testid="PushPinIcon"
+                          size="16"
+                          weight="bold"
+                        />
+                      </span>
+                    </button>
+                  </div>
+                </th>
+                <th
+                  data-pin-key="column-2"
+                >
+                  <div
+                    class="th-content"
+                  >
+                    <div
+                      class="th-main"
+                    >
+                      <span>
+                        External IPs
+                      </span>
+                    </div>
+                    <button
+                      aria-label="Pin column"
+                      class="text-btn pin-toggle"
+                      data-testid="pin-toggle-column-2"
+                      type="button"
+                    >
+                      <span>
+                        <span
+                          data-testid="PushPinIcon"
+                          size="16"
+                          weight="bold"
+                        />
+                      </span>
+                    </button>
+                  </div>
+                </th>
+                <th
+                  data-pin-key="column-3"
+                >
+                  <div
+                    class="th-content"
+                  >
+                    <div
+                      class="th-main"
+                    >
+                      <span>
+                        State
+                      </span>
+                    </div>
+                    <button
+                      aria-label="Pin column"
+                      class="text-btn pin-toggle"
+                      data-testid="pin-toggle-column-3"
+                      type="button"
+                    >
+                      <span>
+                        <span
+                          data-testid="PushPinIcon"
+                          size="16"
+                          weight="bold"
+                        />
+                      </span>
+                    </button>
+                  </div>
+                </th>
+                <th
+                  class="header-actions pinned pinned-end"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  class="ellipsis"
+                >
+                  <div
+                    class="with-copy d-flex align-items-center gap-1"
+                  >
+                    <div
+                      class="td-data"
+                    >
+                      <a
+                        class="text-anchor"
+                        href="marketplace-resource-details{"resource_uuid":"9a4b8e1c0d2f4a7b8c3d5e6f7a8b9c01"}"
+                      >
+                        vm1
+                      </a>
+                    </div>
+                    <div
+                      class="my-1"
+                    >
+                      <button
+                        class="text-btn"
+                        type="button"
+                      >
+                        <span>
+                          <span
+                            data-testid="CopyIcon"
+                            weight="bold"
+                          />
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+                <td
+                  class="ellipsis"
+                >
+                  <div>
+                    <span
+                      class="text-nowrap"
+                    >
+                      192.168.42.14
+                      <div
+                        class="my-1 mx-2 text-hover-primary cursor-pointer d-inline z-index-1 position-relative"
+                      >
+                        <button
+                          class="text-btn"
+                          type="button"
+                        >
+                          <span>
+                            <span
+                              data-testid="CopyIcon"
+                              size="17"
+                              weight="bold"
+                            />
+                          </span>
+                        </button>
+                      </div>
+                    </span>
+                    <span
+                      class="text-muted ms-1 text-nowrap"
+                    >
+                      theses-and-papers-on-mach-sub-net (192.168.42.0/24)
+                    </span>
+                  </div>
+                </td>
+                <td
+                  class="ellipsis"
+                >
+                  <span
+                    class="text-nowrap"
+                  >
+                    10.10.10.5
+                    <div
+                      class="my-1 mx-2 text-hover-primary cursor-pointer d-inline z-index-1 position-relative"
+                    >
+                      <button
+                        class="text-btn"
+                        type="button"
+                      >
+                        <span>
+                          <span
+                            data-testid="CopyIcon"
+                            size="17"
+                            weight="bold"
+                          />
+                        </span>
+                      </button>
+                    </div>
+                  </span>
+                </td>
+                <td
+                  class="ellipsis"
+                >
+                  <span>
+                    <span
+                      class="badge-outline-primary badge-pill badge"
+                      data-testid="default-state-indicator"
+                      label="ACTIVE"
+                    >
+                      Active
+                    </span>
+                  </span>
+                </td>
+                <td
+                  class="row-actions pinned pinned-end"
+                >
+                  <div
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="dropdown"
+                    >
+                      <button
+                        aria-expanded="false"
+                        class="btn-icon no-arrow dropdown-toggle btn btn-text-secondary btn-lg"
+                        id="react-aria-:r0:"
+                        type="button"
+                      >
+                        <span
+                          data-testid="DotsThreeVerticalIcon"
+                          size="22"
+                          weight="bold"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

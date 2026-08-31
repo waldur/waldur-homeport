@@ -14,7 +14,7 @@ import {
   formatSecurityGroupRulePortRange,
 } from './utils';
 
-export const SecurityGroupRulesList = ({
+export const SecurityGroupRulesTable = ({
   row,
 }: {
   row: OpenStackSecurityGroup;
@@ -29,45 +29,51 @@ export const SecurityGroupRulesList = ({
   }, [row]);
 
   return (
-    <ExpandableContainer>
-      <Table
-        {...tableProps}
-        columns={[
-          {
-            title: translate('Ethernet type'),
-            render: ({ row }) => <>{row.ethertype}</>,
-          },
-          {
-            title: translate('Direction'),
-            render: ({ row }) => <>{formatSecurityGroupRuleDirection(row)}</>,
-          },
-          {
-            title: translate('IP protocol'),
-            render: ({ row }) => <>{formatSecurityGroupProtocol(row)}</>,
-          },
-          {
-            title: translate('Port range'),
-            render: ({ row }) => <>{formatSecurityGroupRulePortRange(row)}</>,
-          },
-          {
-            title: translate('Remote CIDR'),
-            render: ({ row }) => <>{row.cidr || DASH_ESCAPE_CODE}</>,
-          },
-          {
-            title: translate('Remote security group'),
-            render: ({ row }) => (
-              <>{row.remote_group_name || DASH_ESCAPE_CODE}</>
-            ),
-          },
-          {
-            title: translate('Description'),
-            render: ({ row }) => <>{row.description || DASH_ESCAPE_CODE}</>,
-          },
-        ]}
-        verboseName={translate('Rules')}
-        hasActionBar={false}
-        minHeight="auto"
-      />
-    </ExpandableContainer>
+    <Table
+      {...tableProps}
+      columns={[
+        {
+          title: translate('Ethernet type'),
+          render: ({ row }) => <>{row.ethertype}</>,
+        },
+        {
+          title: translate('Direction'),
+          render: ({ row }) => <>{formatSecurityGroupRuleDirection(row)}</>,
+        },
+        {
+          title: translate('IP protocol'),
+          render: ({ row }) => <>{formatSecurityGroupProtocol(row)}</>,
+        },
+        {
+          title: translate('Port range'),
+          render: ({ row }) => <>{formatSecurityGroupRulePortRange(row)}</>,
+        },
+        {
+          title: translate('Remote CIDR'),
+          render: ({ row }) => <>{row.cidr || DASH_ESCAPE_CODE}</>,
+        },
+        {
+          title: translate('Remote security group'),
+          render: ({ row }) => <>{row.remote_group_name || DASH_ESCAPE_CODE}</>,
+        },
+        {
+          title: translate('Description'),
+          render: ({ row }) => <>{row.description || DASH_ESCAPE_CODE}</>,
+        },
+      ]}
+      verboseName={translate('Rules')}
+      hasActionBar={false}
+      minHeight="auto"
+    />
   );
 };
+
+export const SecurityGroupRulesList = ({
+  row,
+}: {
+  row: OpenStackSecurityGroup;
+}) => (
+  <ExpandableContainer>
+    <SecurityGroupRulesTable row={row} />
+  </ExpandableContainer>
+);
