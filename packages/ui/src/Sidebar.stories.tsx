@@ -22,6 +22,7 @@ import {
   SidebarProvider,
   SidebarSection,
 } from './Sidebar';
+import { WaldurLogo } from './WaldurLogo';
 
 const meta: Meta<typeof Sidebar> = {
   title: 'Dashboard/Sidebar',
@@ -38,22 +39,13 @@ export default meta;
 
 type Story = StoryObj<typeof Sidebar>;
 
-const WaldurMark = () => (
-  <span className="flex items-center gap-2 text-2xl leading-none font-bold tracking-wide">
-    <svg viewBox="0 10 10 10.02" width="20" height="20" fill="currentColor">
-      <path d="m 2,10.04 v 7.98 h 1.98 v 2 H 0 v -9.98 z m 7.96,0 v 9.98 H 5.98 v -2 h 1.98 v -7.98 z m -3.98,3.98 v 4 h -2 v -4 z" />
-    </svg>
-    WALDUR
-  </span>
-);
-
 /** Reconstructs the mockup's "Finance & reporting" mode nav as one example configuration. */
 export const FinanceReportingExample: Story = {
   render: () => (
     <SidebarProvider className="h-[600px]">
       <Sidebar>
         <SidebarHeader className="gap-4">
-          <SidebarBrand logo={<WaldurMark />} />
+          <SidebarBrand logo={<WaldurLogo />} />
           <SidebarModeCard
             icon={<IdentificationCardIcon size={22} weight="bold" />}
             title="Finance & reporting"

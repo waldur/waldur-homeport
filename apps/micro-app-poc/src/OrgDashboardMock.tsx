@@ -13,12 +13,12 @@ import {
   SidebarModeCard,
   StatCard,
   StatusPill,
+  WaldurLogo,
 } from 'waldur-ui';
 
 import { ModeNav } from './ModeNav';
 import { OrgSwitcherMenu } from './OrgSwitcherMenu';
 import { ProjectRow, useDashboardData } from './useDashboardData';
-import { WaldurLogo } from './WaldurLogo';
 import { getModeSubtitle, getWorkspaceModes } from './workspaceModes';
 
 /**
@@ -31,7 +31,7 @@ import { getModeSubtitle, getWorkspaceModes } from './workspaceModes';
  * right-side Apps/Help/Notifications/UserMenu cluster, current user,
  * theme, language) is entirely waldur-shell's <AppShell> — this file
  * doesn't touch any of those three. It passes the brand row's one
- * app-owned slot, the logo (see WaldurLogo.tsx).
+ * app-owned slot, the logo (waldur-ui's WaldurLogo).
  *
  * The sidebar's mode card opens the workspace picker (waldur-ui's
  * ModePickerDialog, filled from workspaceModes.tsx) and really does

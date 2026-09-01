@@ -4,13 +4,10 @@ import { FC, SVGProps } from 'react';
  * The collapse/expand glyph in the sidebar's brand row — a panel outline
  * with its nav column filled and an arrow pointing back into it.
  *
- * Ported verbatim from waldur-homeport's own
- * src/core/SidebarToggleGraphic.tsx, which its real Metronic aside header
- * (src/navigation/sidebar/BrandName.tsx's #kt_aside_toggle) already uses
- * for exactly this control — not a new drawing, and not Phosphor's
- * SidebarSimple, which has no arrow. Kept as a standalone SVG rather than
- * an icon-font/Phosphor lookalike so the two apps' toggles stay visually
- * identical.
+ * Defined as the single canonical implementation in waldur-ui;
+ * src/core/SidebarToggleGraphic.tsx re-exports this for root app consumers.
+ * Kept as a standalone SVG rather than an icon-font/Phosphor lookalike so
+ * the sidebar toggles stay visually identical across apps.
  */
 export const SidebarToggleGraphic: FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg viewBox="0 0 24 25" fill="none" width="100%" height="100%" {...props}>

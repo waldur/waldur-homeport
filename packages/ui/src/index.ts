@@ -106,6 +106,9 @@ export type {
 
 export { SidebarToggleGraphic } from './SidebarToggleGraphic';
 
+export { WaldurLogo } from './WaldurLogo';
+export type { WaldurLogoProps } from './WaldurLogo';
+
 export {
   Sheet,
   SheetClose,
