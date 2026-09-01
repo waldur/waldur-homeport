@@ -1,17 +1,20 @@
 import {
-  BuildingsIcon,
-  FolderIcon,
-  GaugeIcon,
+  CardsThreeIcon,
+  CoinsIcon,
+  FileTextIcon,
   GearIcon,
-  ListBulletsIcon,
+  HandCoinsIcon,
+  IdentificationCardIcon,
   ReceiptIcon,
   SquaresFourIcon,
-  UsersIcon,
+  UsersThreeIcon,
+  WrenchIcon,
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import {
   Sidebar,
+  SidebarBrand,
   SidebarContent,
   SidebarHeader,
   SidebarModeCard,
@@ -26,7 +29,7 @@ const meta: Meta<typeof Sidebar> = {
     docs: {
       description: {
         component:
-          "shadcn Sidebar recipe (collapsible, mobile Sheet, Cmd/Ctrl+B shortcut) — see Sidebar.tsx. SidebarNavItem/SidebarSection/SidebarModeCard are this app's own convenience layer, generic (not hardcoded to one mode).",
+          "shadcn Sidebar recipe (collapsible, mobile Sheet, Cmd/Ctrl+B shortcut) — see Sidebar.tsx. SidebarBrand/SidebarNavItem/SidebarSection/SidebarModeCard are this app's own convenience layer, generic (not hardcoded to one mode).",
       },
     },
   },
@@ -35,54 +38,70 @@ export default meta;
 
 type Story = StoryObj<typeof Sidebar>;
 
-/** Reconstructs the mockup's "Organisation admin" mode nav as one example configuration. */
-export const OrganisationAdminExample: Story = {
+const WaldurMark = () => (
+  <span className="flex items-center gap-2 text-2xl leading-none font-bold tracking-wide">
+    <svg viewBox="0 10 10 10.02" width="20" height="20" fill="currentColor">
+      <path d="m 2,10.04 v 7.98 h 1.98 v 2 H 0 v -9.98 z m 7.96,0 v 9.98 H 5.98 v -2 h 1.98 v -7.98 z m -3.98,3.98 v 4 h -2 v -4 z" />
+    </svg>
+    WALDUR
+  </span>
+);
+
+/** Reconstructs the mockup's "Finance & reporting" mode nav as one example configuration. */
+export const FinanceReportingExample: Story = {
   render: () => (
     <SidebarProvider className="h-[600px]">
       <Sidebar>
-        <SidebarHeader>
+        <SidebarHeader className="gap-4">
+          <SidebarBrand logo={<WaldurMark />} />
           <SidebarModeCard
-            eyebrow="CURRENT MODE"
-            icon={<BuildingsIcon size={18} weight="bold" />}
-            title="Organisation admin"
-            subtitle="Projects, members, invoices"
+            icon={<IdentificationCardIcon size={22} weight="bold" />}
+            title="Finance & reporting"
+            subtitle="Invoices, cost analytics"
           />
         </SidebarHeader>
         <SidebarContent>
-          <SidebarSection label="ORGANISATION">
+          <SidebarSection>
             <SidebarNavItem
               icon={<SquaresFourIcon size={20} weight="bold" />}
               label="Overview"
-            />
-            <SidebarNavItem
-              icon={<FolderIcon size={20} weight="bold" />}
-              label="Projects"
-              count={12}
-            />
-            <SidebarNavItem
-              icon={<UsersIcon size={20} weight="bold" />}
-              label="Members"
               active
             />
           </SidebarSection>
           <SidebarSection label="FINANCE">
             <SidebarNavItem
-              icon={<ReceiptIcon size={20} weight="bold" />}
-              label="Invoices"
+              icon={<HandCoinsIcon size={20} weight="bold" />}
+              label="Revenue"
             />
             <SidebarNavItem
-              icon={<GaugeIcon size={20} weight="bold" />}
-              label="Quotas"
+              icon={<CoinsIcon size={20} weight="bold" />}
+              label="Costs"
+            />
+            <SidebarNavItem
+              icon={<ReceiptIcon size={20} weight="bold" />}
+              label="Pricelist"
             />
           </SidebarSection>
-          <SidebarSection label="ADMIN">
+          <SidebarSection label="REPORTS">
             <SidebarNavItem
-              icon={<GearIcon size={20} weight="bold" />}
-              label="Settings"
+              icon={<CardsThreeIcon size={20} weight="bold" />}
+              label="Resources"
             />
             <SidebarNavItem
-              icon={<ListBulletsIcon size={20} weight="bold" />}
-              label="Audit log"
+              icon={<WrenchIcon size={20} weight="bold" />}
+              label="Providers"
+            />
+            <SidebarNavItem
+              icon={<UsersThreeIcon size={20} weight="bold" />}
+              label="Users"
+            />
+            <SidebarNavItem
+              icon={<GearIcon size={20} weight="bold" />}
+              label="Operations"
+            />
+            <SidebarNavItem
+              icon={<FileTextIcon size={20} weight="bold" />}
+              label="Proposals"
             />
           </SidebarSection>
         </SidebarContent>

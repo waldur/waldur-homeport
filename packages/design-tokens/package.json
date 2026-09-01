@@ -11,6 +11,7 @@
     "./buttonColors.css": "./src/buttonColors.css",
     "./surfaceColors.css": "./src/surfaceColors.css",
     "./badgeColors.css": "./src/badgeColors.css",
+    "./animations.css": "./src/animations.css",
     "./fonts.css": "./src/fonts.css"
   },
   "dependencies": {
