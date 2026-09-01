@@ -38,16 +38,43 @@ export interface CreditEventInput {
   creditEndDate: string | null;
   project: ProjectEndDates | null;
   resources: ResourceEndDates[];
-  /** Policies that have not fired yet, with their estimated time to firing. */
+  /** Policies and when they fire. `etaDays === 0` is a threshold already
+   *  reached, which the server reports only when the policy is genuinely
+   *  triggered — not merely when the cost is over the cap. */
   policies?: {
     actionLabel: string;
     etaDays: number | null;
     kind?: 'project-cost' | 'customer-cost' | 'slurm-periodic';
     scopeName?: string;
+    /** Raw action list, to tell an action that stops resources from one that
+     *  only notifies — the credit rows claim resources keep running. */
+    action?: string;
+    hasFired?: boolean;
   }[];
 }
 
 const isoDate = formatISODate;
+
+/** Actions that stop resources, as opposed to shrinking or merely reporting on
+ *  them. The credit rows tell the reader resources keep running, which is true
+ *  of credit exhaustion on its own and false once one of these is in effect. */
+const STOPPING_ACTIONS = [
+  'request_pausing',
+  'terminate_resources',
+  // A different action name, not a variant of the one above: substring
+  // matching missed it, because 'request_slurm_resource_pausing' does not
+  // contain 'request_pausing'.
+  'request_slurm_resource_pausing',
+];
+
+const stopsResources = (policy: { action?: string; etaDays: number | null }) =>
+  policy.etaDays === 0 &&
+  // Split rather than substring-match: `actions` is a comma-separated list, and
+  // matching loosely would let a longer action name containing one of these
+  // count as the action itself.
+  (policy.action || '')
+    .split(',')
+    .some((a) => STOPPING_ACTIONS.includes(a.trim()));
 
 /**
  * Everything that ends, each carrying what it does.
@@ -74,6 +101,16 @@ export const buildCreditEvents = (
 ): CreditEvent[] => {
   const todayIso = isoDate(today);
   const events: CreditEvent[] = [];
+  // Whether anything is actually stopping the work right now. The credit rows
+  // below each say "resources keep running", which is true of what that row
+  // describes and false of the project as a whole once a pausing policy has
+  // fired — and the two rows are the most prominent on the card, so between
+  // them they told a project being paused that nothing was stopping.
+  const resourcesStopping = (input.policies || []).some(stopsResources);
+  const stoppingEvents = new Set<CreditEvent>();
+  // Each row states this in full rather than appending a shared clause:
+  // concatenating translated fragments fixes English word order onto every
+  // other language, which `waldur-custom/no-template-in-translate` forbids.
 
   if (input.isLimitedByOrganizationCredit) {
     // Already in effect, so it is dated today rather than projected. A partly
@@ -130,10 +167,15 @@ export const buildCreditEvents = (
               burn: defaultCurrency(input.burnPerDay.toFixed(2)),
             },
           )
-        : translate(
-            'At {burn}/day. Compensation stops and costs start landing on the invoice; resources keep running.',
-            { burn: defaultCurrency(input.burnPerDay.toFixed(2)) },
-          ),
+        : resourcesStopping
+          ? translate(
+              'At {burn}/day. Compensation stops and costs start landing on the invoice. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.',
+              { burn: defaultCurrency(input.burnPerDay.toFixed(2)) },
+            )
+          : translate(
+              'At {burn}/day. Compensation stops and costs start landing on the invoice; resources keep running.',
+              { burn: defaultCurrency(input.burnPerDay.toFixed(2)) },
+            ),
       tone: 'warning',
       isBinding: false,
     });
@@ -163,18 +205,32 @@ export const buildCreditEvents = (
         ? translate('Credit has expired')
         : translate('Credit expires'),
       consequence: expired
-        ? translate(
-            '{month} was the last month this credit compensated. Nothing spent since has been drawn against it, and the {balance} still shown is written off at the month-end run on {writtenOff}. Resources keep running, uncompensated.',
-            {
-              month: finalMonth,
-              balance: defaultCurrency(input.balance),
-              writtenOff,
-            },
-          )
-        : translate(
-            '{month} is the last month this credit compensates, and it waives the grace coefficient — the minimum draw is the full expected consumption. Nothing spent after that is compensated, and whatever is left is written off at the month-end run on {writtenOff}. Resources keep running.',
-            { month: finalMonth, writtenOff },
-          ),
+        ? resourcesStopping
+          ? translate(
+              '{month} was the last month this credit compensated. Nothing spent since has been drawn against it, and the {balance} still shown is written off at the month-end run on {writtenOff}. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.',
+              {
+                month: finalMonth,
+                balance: defaultCurrency(input.balance),
+                writtenOff,
+              },
+            )
+          : translate(
+              '{month} was the last month this credit compensated. Nothing spent since has been drawn against it, and the {balance} still shown is written off at the month-end run on {writtenOff}. Resources keep running, uncompensated.',
+              {
+                month: finalMonth,
+                balance: defaultCurrency(input.balance),
+                writtenOff,
+              },
+            )
+        : resourcesStopping
+          ? translate(
+              '{month} is the last month this credit compensates, and it waives the grace coefficient — the minimum draw is the full expected consumption. Nothing spent after that is compensated, and whatever is left is written off at the month-end run on {writtenOff}. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.',
+              { month: finalMonth, writtenOff },
+            )
+          : translate(
+              '{month} is the last month this credit compensates, and it waives the grace coefficient — the minimum draw is the full expected consumption. Nothing spent after that is compensated, and whatever is left is written off at the month-end run on {writtenOff}. Resources keep running.',
+              { month: finalMonth, writtenOff },
+            ),
       tone: 'danger',
       isBinding: false,
     });
@@ -241,27 +297,50 @@ export const buildCreditEvents = (
   // against the dated events — "~45 days" placed next to absolute dates cannot
   // be ordered by the reader, and puts a sooner event below a later one.
   for (const policy of input.policies || []) {
-    if (policy.etaDays === null || policy.etaDays <= 0) {
+    if (policy.etaDays === null || policy.etaDays < 0) {
       continue;
     }
-    events.push({
+    // 0 is not a projection that rounded down — the server reports it only when
+    // the threshold is crossed *and* the policy is genuinely triggered, which
+    // for a cost policy also requires the credit balance to have fallen to the
+    // limit. Bundling it with "no estimate" and skipping both is what left a
+    // project being paused with nothing on this card at all.
+    const reached = policy.etaDays === 0;
+    const event: CreditEvent = {
       kind: 'policy',
-      date: isoDate(parseDate(today).plus({ days: policy.etaDays })),
+      date: reached
+        ? todayIso
+        : isoDate(parseDate(today).plus({ days: policy.etaDays })),
       title: policy.actionLabel,
       // An organization-wide cap is measured against every project under it,
       // so the reader has to know the action is not driven by this project
       // alone — and that other projects can bring the date forward.
-      consequence:
-        policy.kind === 'customer-cost'
+      consequence: reached
+        ? policy.hasFired
           ? translate(
-              "Organization-wide cap on {scope}, measured across every project under it. Estimated from this project's draw, so spending elsewhere brings it closer.",
+              'The threshold is reached and this action has been applied.',
+            )
+          : translate(
+              'The threshold is reached. This action is applied at the next policy evaluation.',
+            )
+        : policy.kind === 'customer-cost'
+          ? translate(
+              'Organization-wide cap on {scope}, measured across every project under it. Other projects spending against the same cap bring it closer.',
               { scope: policy.scopeName || translate('the organization') },
             )
           : translate('Fires if the current usage trend holds.'),
-      tone: 'warning',
+      // Danger is reserved for a threshold that actually stops something:
+      // `HealthView` turns a danger-toned binding event into a critical card,
+      // and a notify-only policy reaching its threshold must not do that while
+      // the rows beside it correctly say resources keep running.
+      tone: reached && stopsResources(policy) ? 'danger' : 'warning',
       isBinding: false,
-      approximate: true,
-    });
+      approximate: !reached,
+    };
+    events.push(event);
+    if (stopsResources(policy)) {
+      stoppingEvents.add(event);
+    }
   }
 
   events.sort((a, b) => a.date.localeCompare(b.date));
@@ -269,8 +348,16 @@ export const buildCreditEvents = (
   // The binding event is the soonest one that stops something. An empty balance
   // does not: it changes who pays, not whether the work runs. Neither does a
   // policy on its own — it is an estimate, and its action is stated in the row.
+  // A policy binds only when it stops something. An estimate does not — it is a
+  // projection, and its action is stated in the row — and neither does a
+  // notify-only policy at its threshold, which would otherwise turn the whole
+  // card critical while the rows beside it correctly say nothing is stopping.
+  // Matched by identity rather than by date: several policies can be dated
+  // today, and only some of them stop anything.
   const binding = events.find(
-    (event) => event.kind !== 'exhaustion' && event.kind !== 'policy',
+    (event) =>
+      event.kind !== 'exhaustion' &&
+      (event.kind !== 'policy' || stoppingEvents.has(event)),
   );
   if (binding) {
     binding.isBinding = true;

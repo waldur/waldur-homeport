@@ -78,13 +78,27 @@ const CARRY_THRESHOLDS: Partial<
   seconds: ['minutes', 60],
 };
 
+/** A calendar date carries no time, so `2026-09-10` is the whole of that day
+ *  rather than the instant it begins. Measuring it from the current *instant*
+ *  loses most of today: a date nine days out reads as "in 8 days" for all but
+ *  the first moments of the morning. Whole days are therefore measured between
+ *  start-of-day and start-of-day, and only sub-day units are dropped with them
+ *  — a date has no hours to report. Timestamps keep instant precision. */
+const DATE_ONLY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+const WHOLE_DAY_UNITS: ToRelativeUnit[] = ['years', 'months', 'days'];
+
 export const formatRelative: DateFormatter = (date) => {
   const target = parseDate(date);
-  const now = DateTime.fromObject({}, { zone: target.zone });
+  const isWholeDay = typeof date === 'string' && DATE_ONLY_PATTERN.test(date);
+  const now = isWholeDay
+    ? DateTime.fromObject({}, { zone: target.zone }).startOf('day')
+    : DateTime.fromObject({}, { zone: target.zone });
+  const units = isWholeDay ? WHOLE_DAY_UNITS : RELATIVE_UNITS;
 
-  for (const [index, unit] of RELATIVE_UNITS.entries()) {
+  for (const [index, unit] of units.entries()) {
     const rawCount = target.diff(now, unit).get(unit);
-    const isLastUnit = index === RELATIVE_UNITS.length - 1;
+    const isLastUnit = index === units.length - 1;
 
     if (Math.abs(rawCount) >= 1 || isLastUnit) {
       const carry = CARRY_THRESHOLDS[unit];
@@ -92,11 +106,26 @@ export const formatRelative: DateFormatter = (date) => {
         carry && Math.abs(Math.round(rawCount)) >= carry[1];
       const displayUnit = crossesIntoNextUnit ? carry[0] : unit;
 
-      return target.toRelative({ unit: displayUnit, rounding: 'round' });
+      // A whole day that rounds to zero is today, and "in 0 days" is worse
+      // than the hours count it replaced. `toRelativeCalendar` is the call that
+      // words it — `toRelative` has no `numeric` option to pass through, it
+      // always formats numerically. Only this case uses it: applying it
+      // generally would render every "in 1 day" as "tomorrow" across the app.
+      if (isWholeDay && displayUnit === 'days' && Math.round(rawCount) === 0) {
+        return target.toRelativeCalendar({ base: now, unit: 'days' });
+      }
+      // `base` matters as much as the loop above: without it Luxon measures
+      // from the real current instant, so the unit would be chosen from one
+      // reference and the number rendered from another.
+      return target.toRelative({
+        base: now,
+        unit: displayUnit,
+        rounding: 'round',
+      });
     }
   }
 
-  return target.toRelative({ rounding: 'round' });
+  return target.toRelative({ base: now, rounding: 'round' });
 };
 
 export const formatRelativeWithHour: DateFormatter = (date) => {

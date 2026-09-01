@@ -6105,6 +6105,16 @@
       "feature_area": "policy-watch"
     }
   },
+  "At {burn}/day. Compensation stops and costs start landing on the invoice. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.": {
+    "context": {
+      "variables": {
+        "burn": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "policy-watch"
+    }
+  },
   "At {burn}/day. Compensation stops and costs start landing on the invoice; resources keep running.": {
     "context": {
       "variables": {
@@ -33783,7 +33793,7 @@
       "feature_area": "details"
     }
   },
-  "Organization-wide cap on {scope}, measured across every project under it. Estimated from this project's draw, so spending elsewhere brings it closer.": {
+  "Organization-wide cap on {scope}, measured across every project under it. Other projects spending against the same cap bring it closer.": {
     "context": {
       "variables": {
         "scope": {
@@ -51212,6 +51222,16 @@
       "feature_area": "admin"
     }
   },
+  "The threshold is reached and this action has been applied.": {
+    "context": {
+      "feature_area": "policy-watch"
+    }
+  },
+  "The threshold is reached. This action is applied at the next policy evaluation.": {
+    "context": {
+      "feature_area": "policy-watch"
+    }
+  },
   "The time period over which usage is accumulated and limits are applied.": {
     "context": {
       "feature_area": "policies"
@@ -66571,6 +66591,19 @@
       "feature_area": "chat"
     }
   },
+  "{month} is the last month this credit compensates, and it waives the grace coefficient — the minimum draw is the full expected consumption. Nothing spent after that is compensated, and whatever is left is written off at the month-end run on {writtenOff}. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        },
+        "writtenOff": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "policy-watch"
+    }
+  },
   "{month} is the last month this credit compensates, and it waives the grace coefficient — the minimum draw is the full expected consumption. Nothing spent after that is compensated, and whatever is left is written off at the month-end run on {writtenOff}. Resources keep running.": {
     "context": {
       "variables": {
@@ -66593,6 +66626,22 @@
         }
       },
       "feature_area": "usage"
+    }
+  },
+  "{month} was the last month this credit compensated. Nothing spent since has been drawn against it, and the {balance} still shown is written off at the month-end run on {writtenOff}. Resources are not left running: a cost policy has reached its threshold, and its action applies to them.": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        },
+        "balance": {
+          "type": "unknown"
+        },
+        "writtenOff": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "policy-watch"
     }
   },
   "{month} was the last month this credit compensated. Nothing spent since has been drawn against it, and the {balance} still shown is written off at the month-end run on {writtenOff}. Resources keep running, uncompensated.": {

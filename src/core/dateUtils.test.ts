@@ -52,4 +52,43 @@ describe('formatRelative', () => {
 
     expect(formatRelative('2027-04-04')).toBe('in 8 months');
   });
+  it('counts whole days for a calendar date, not from the current instant', () => {
+    // A date carries no time, so it is that whole day. Measured from the
+    // current instant it lost most of today and read one day short — and now
+    // that these dates come from an authoritative server field (`eta_days` in
+    // waldur/waldur-mastermind#332), an API saying 9 beside a UI saying 8 is a
+    // discrepancy someone has to chase down.
+    const fixedNow = DateTime.fromISO('2026-09-01T14:00:00').toMillis();
+    Settings.now = () => fixedNow;
+
+    expect(formatRelative('2026-09-10')).toBe('in 9 days');
+    expect(formatRelative('2026-09-02')).toBe('in 1 day');
+    expect(formatRelative('2026-08-31')).toBe('1 day ago');
+  });
+
+  it('calls a calendar date of today "today", not "in 0 days"', () => {
+    const fixedNow = DateTime.fromISO('2026-09-01T14:00:00').toMillis();
+    Settings.now = () => fixedNow;
+
+    expect(formatRelative('2026-09-01')).toBe('today');
+    // Only the zero case takes the worded form; turning it on generally would
+    // render every "in 1 day" as "tomorrow" across the app.
+    expect(formatRelative('2026-09-02')).toBe('in 1 day');
+  });
+
+  it('holds at every hour of the day, not just at midnight', () => {
+    for (const hour of ['00:01', '09:30', '14:00', '23:59']) {
+      const fixedNow = DateTime.fromISO(`2026-09-01T${hour}:00`).toMillis();
+      Settings.now = () => fixedNow;
+      expect(formatRelative('2026-09-10')).toBe('in 9 days');
+    }
+  });
+
+  it('keeps instant precision for a timestamp', () => {
+    // Only dates are whole days; a timestamp still reports hours.
+    const fixedNow = DateTime.fromISO('2026-09-01T14:00:00').toMillis();
+    Settings.now = () => fixedNow;
+
+    expect(formatRelative('2026-09-01T09:00:00')).toBe('5 hours ago');
+  });
 });

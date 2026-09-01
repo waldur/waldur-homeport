@@ -192,15 +192,148 @@ describe('buildCreditEvents', () => {
     expect(events[0].approximate).toBe(true);
   });
 
-  it('ignores policies with no estimate and those already fired', () => {
+  it('ignores a policy with no estimate, but not one already at its threshold', () => {
+    // These were bundled together and both dropped, which is what left a
+    // project whose resources were being paused with nothing on this card.
+    // `etaDays: 0` is not a missing estimate: the server reports it only when
+    // the policy is genuinely triggered.
     const events = build({
       exhaustionDate: null,
       policies: [
         { actionLabel: 'No estimate', etaDays: null },
-        { actionLabel: 'Threshold reached', etaDays: 0 },
+        {
+          actionLabel: 'Pause resources',
+          etaDays: 0,
+          action: 'request_pausing',
+        },
       ],
     });
-    expect(kinds(events)).toEqual([]);
+    expect(kinds(events)).toEqual(['policy']);
+    const [event] = events;
+    expect(event.title).toBe('Pause resources');
+    expect(event.date).toBe('2026-08-14');
+    expect(event.tone).toBe('danger');
+    expect(event.approximate).toBeFalsy();
+    expect(event.consequence).toContain('next policy evaluation');
+  });
+
+  it('does not bind, or claim anything is stopping, for a notify-only policy', () => {
+    // It reaches its threshold like any other, but nothing is done to the
+    // resources — so it must not turn the card critical while the row beside
+    // it correctly says they keep running.
+    const events = build({
+      policies: [
+        {
+          actionLabel: 'Notify owners',
+          etaDays: 0,
+          action: 'notify_organization_owners',
+        },
+      ],
+    });
+    const policyRow = events.find((e) => e.kind === 'policy');
+    expect(policyRow).toBeDefined();
+    // Tone is what HealthView turns into a critical card, so that is the
+    // assertion that matters; the soonest-event fallback may still mark it.
+    expect(policyRow!.tone).toBe('warning');
+  });
+
+  it('binds the policy that stops resources, not one merely dated today', () => {
+    const events = build({
+      exhaustionDate: null,
+      policies: [
+        {
+          actionLabel: 'Notify owners',
+          etaDays: 0,
+          action: 'notify_organization_owners',
+        },
+        {
+          actionLabel: 'Pause resources',
+          etaDays: 0,
+          action: 'request_pausing',
+        },
+      ],
+    });
+    const bound = events.filter((e) => e.isBinding);
+    expect(bound).toHaveLength(1);
+    expect(bound[0].title).toBe('Pause resources');
+  });
+
+  it('treats the SLURM pausing action as stopping resources', () => {
+    // A different action name, not a variant: substring matching missed it.
+    const events = build({
+      policies: [
+        {
+          actionLabel: 'Pause SLURM allocations',
+          etaDays: 0,
+          action: 'notify_organization_owners,request_slurm_resource_pausing',
+        },
+      ],
+    });
+    expect(events.find((e) => e.kind === 'exhaustion')?.consequence).toContain(
+      'not left running',
+    );
+  });
+
+  it('binds on a threshold already reached, unlike an estimate', () => {
+    const [event] = build({
+      exhaustionDate: null,
+      policies: [
+        {
+          actionLabel: 'Pause resources',
+          etaDays: 0,
+          action: 'request_pausing',
+        },
+      ],
+    });
+    expect(event.isBinding).toBe(true);
+  });
+
+  it('says an applied action has been applied', () => {
+    const [event] = build({
+      exhaustionDate: null,
+      policies: [
+        {
+          actionLabel: 'Pause resources',
+          etaDays: 0,
+          action: 'request_pausing',
+          hasFired: true,
+        },
+      ],
+    });
+    expect(event.consequence).toContain('has been applied');
+  });
+
+  it('stops the credit rows claiming resources keep running', () => {
+    // The two most prominent rows on the card said so, unopposed, at exactly
+    // the moment a pausing policy was acting on those resources.
+    const withPause = build({
+      policies: [
+        {
+          actionLabel: 'Pause resources',
+          etaDays: 0,
+          action: 'request_pausing',
+        },
+      ],
+    });
+    const exhaustion = withPause.find((e) => e.kind === 'exhaustion');
+    expect(exhaustion?.consequence).not.toContain('resources keep running');
+    expect(exhaustion?.consequence).toContain('not left running');
+    // No positional reference: sorting can put the policy row below this one.
+    expect(exhaustion?.consequence).not.toContain('above');
+
+    // A notify-only policy stops nothing, so the claim stands.
+    const withNotify = build({
+      policies: [
+        {
+          actionLabel: 'Notify owners',
+          etaDays: 0,
+          action: 'notify_organization_owners',
+        },
+      ],
+    });
+    expect(
+      withNotify.find((e) => e.kind === 'exhaustion')?.consequence,
+    ).toContain('resources keep running');
   });
 
   it('says an organization-wide cap is not driven by this project alone', () => {
