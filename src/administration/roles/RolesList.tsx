@@ -20,6 +20,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { RoleActions } from './RoleActions';
 import { RoleCreateButton } from './RoleCreateButton';
+import { RolePermissionDelta } from './RolePermissionDelta';
 
 export const RolesList = () => {
   const filterValues = useFilterValues('RolesList');
@@ -45,6 +46,8 @@ export const RolesList = () => {
           'is_system_role',
           'customer_uuid',
           'customer_name',
+          'template_uuid',
+          'template_name',
         ],
       },
     }),
@@ -82,16 +85,22 @@ export const RolesList = () => {
           // or a staff-created custom one.
           title: translate('Type'),
           orderField: 'is_system_role',
-          render: ({ row }) =>
-            row.is_system_role ? (
-              <Badge variant="secondary" pill outline>
-                {translate('System')}
-              </Badge>
-            ) : (
-              <Badge variant="primary" pill outline>
-                {translate('Custom')}
-              </Badge>
-            ),
+          render: ({ row }) => (
+            <>
+              {row.is_system_role ? (
+                <Badge variant="secondary" pill outline>
+                  {translate('System')}
+                </Badge>
+              ) : (
+                <Badge variant="primary" pill outline>
+                  {translate('Custom')}
+                </Badge>
+              )}
+              {/* What a clone changed relative to its template; the full
+                  comparison is a row action. */}{' '}
+              <RolePermissionDelta row={row} />
+            </>
+          ),
         },
         {
           // Where the role can be used: everywhere, or only within one

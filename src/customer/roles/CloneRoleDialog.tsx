@@ -2,7 +2,9 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { rolesCloneToCustomer } from 'waldur-js-client';
 
+import { getRoles as fetchRoles } from '@/administration/roles/utils';
 import { Badge } from '@/core/Badge';
+import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { BooleanGroup, FormGroup, SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -42,6 +44,11 @@ export const CloneRoleDialog: FC<{ resolve: CloneRoleDialogResolve }> = ({
           conceal_template: values.conceal_template,
         },
       }),
+    // The clone is compared against its template wherever roles are listed, so
+    // the cache those diffs read has to include it.
+    onSuccess: async () => {
+      ENV.roles = await fetchRoles();
+    },
     successMessage: translate('Role has been cloned into the organization.'),
     errorMessage: translate('Unable to clone role.'),
     refetch: resolve.refetch,

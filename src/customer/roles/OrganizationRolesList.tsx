@@ -16,6 +16,8 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
+import { RoleCompareButton } from '@/administration/roles/RoleCompareButton';
+import { RolePermissionDelta } from '@/administration/roles/RolePermissionDelta';
 import { getAllPages } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -104,11 +106,24 @@ const ConcealRoleAction: FC<{
     errorMessage: translate('Unable to conceal role.'),
     confirmation: {
       title: translate('Confirmation'),
-      body: translate(
-        'Conceal role {name}? It will no longer be grantable in this organization; existing assignments are kept.',
-        { name: <strong>{row.description || row.name}</strong> },
-        formatJsxTemplate,
-      ),
+      body: row.users_count
+        ? translate(
+            'Conceal role {name}? {count} users keep it, but it can no longer be granted to anyone new in this organization.',
+            {
+              name: <strong>{row.description || row.name}</strong>,
+              count: row.users_count,
+            },
+            formatJsxTemplate,
+          )
+        : translate(
+            'Conceal role {name}? It can no longer be granted in this organization.',
+            { name: <strong>{row.description || row.name}</strong> },
+            formatJsxTemplate,
+          ),
+      options: {
+        positiveButton: translate('Confirm'),
+        negativeButton: translate('Cancel'),
+      },
     },
     refetch,
     // Refresh the scoped role lists used by the Add member / Invite pickers.
@@ -301,9 +316,16 @@ export const OrganizationRolesList: FC = () => {
           title: translate('Origin'),
           orderField: 'origin',
           render: ({ row }) =>
-            row.template_name
-              ? translate('Cloned from {name}', { name: row.template_name })
-              : translate('System'),
+            row.template_name ? (
+              <>
+                {translate('Cloned from {name}', { name: row.template_name })}
+                {/* What the clone changed relative to that role; the full
+                    comparison is a row action. */}{' '}
+                <RolePermissionDelta row={row} />
+              </>
+            ) : (
+              translate('System')
+            ),
         },
       ]}
       verboseName={translate('roles')}
@@ -318,6 +340,7 @@ export const OrganizationRolesList: FC = () => {
           row.content_type === 'customer' || row.content_type === 'project';
         return (
           <ActionsDropdown row={row} refetch={refetchAll}>
+            <RoleCompareButton row={row} />
             {concealmentUuid ? (
               <RevealRoleAction
                 concealmentUuid={concealmentUuid}
