@@ -827,6 +827,7 @@ overrides:
   support_issues:
     filters:
       - status
+      - is_open
       - is_routed
     status:
       enumOverrides:
@@ -834,6 +835,17 @@ overrides:
         Open: Open
         Resolved: Resolved
         'Waiting for support': Waiting for support
+    is_open:
+      # A Select rather than a boolean checkbox: the dashboard's "Closed issues"
+      # card links to is_open=false, and the generated boolean filter drops a
+      # falsy value.
+      label: Open or closed
+      component: Select
+      options:
+        - value: true
+          label: Open
+        - value: false
+          label: Closed
     is_routed:
       label: Routed to provider
 

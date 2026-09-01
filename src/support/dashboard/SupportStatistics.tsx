@@ -7,14 +7,18 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StatisticsCard } from '@/core/StatisticsCard';
 import { translate } from '@/i18n';
-import { StatusOptions } from '@/table/generated/SupportIssuesFilter';
+import { IsOpenOptions } from '@/table/generated/SupportIssuesFilter';
 
-const getIssueState = (states: string[]) => ({
+/**
+ * Link to the request list under the same open/closed definition the counter
+ * above it uses. This used to serialise an *array* of status options into the
+ * single-select status filter, which keeps only the first of them — so the
+ * "Open issues" card landed on a "Waiting for support" filter showing nothing.
+ */
+const getIssueState = (isOpen: boolean) => ({
   state: 'support-list',
   params: {
-    status: JSON.stringify(
-      states.map((state) => StatusOptions.find((op) => op.value === state)),
-    ),
+    is_open: JSON.stringify(IsOpenOptions.find((op) => op.value === isOpen)),
   },
 });
 
@@ -40,14 +44,14 @@ export const SupportStatistics = () => {
             <StatisticsCard
               title={translate('Open issues')}
               value={data.open_issues_count}
-              to={getIssueState(['Waiting for support', 'Open'])}
+              to={getIssueState(true)}
             />
           </Col>
           <Col md={6} lg={4}>
             <StatisticsCard
               title={translate('Closed issues (this month)')}
               value={data.closed_this_month_count}
-              to={getIssueState(['Resolved', 'Closed'])}
+              to={getIssueState(false)}
             />
           </Col>
           <Col md={6} lg={4}>

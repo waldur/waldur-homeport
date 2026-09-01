@@ -8746,7 +8746,8 @@
   },
   "Change status": {
     "context": {
-      "feature_area": "checklists"
+      "primary_ui_type": "action_button",
+      "feature_area": "issues"
     }
   },
   "Change storage mode": {
@@ -29120,6 +29121,12 @@
       "feature_area": "actions"
     }
   },
+  "New status": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "issues"
+    }
+  },
   "New this month": {
     "context": {
       "primary_ui_type": "label",
@@ -32562,6 +32569,11 @@
   "Open issues": {
     "context": {
       "feature_area": "dashboard"
+    }
+  },
+  "Open or closed": {
+    "context": {
+      "feature_area": "generated"
     }
   },
   "Open playground": {
@@ -41093,6 +41105,12 @@
   "Request review": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Request status has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "issues"
     }
   },
   "Request submitted": {
@@ -52035,6 +52053,12 @@
       "feature_area": "common"
     }
   },
+  "This request cannot be updated in its current state.": {
+    "context": {
+      "primary_ui_type": "action_button",
+      "feature_area": "issues"
+    }
+  },
   "This resource request has no attributes.": {
     "context": {
       "feature_area": "resource-requests-step"
@@ -57730,6 +57754,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "remote-offering-sync"
+    }
+  },
+  "Unable to update request status.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "issues"
     }
   },
   "Unable to update request type.": {

@@ -20,7 +20,10 @@ export const SupportDashboard: FC = () => {
         <IssuesList
           className="mb-5"
           title={translate('Open issues')}
-          filter={{ status: 'Open' }}
+          // `is_open` is the same definition the statistics card above counts
+          // with. Filtering on the literal status "Open" left the card saying 1
+          // while the table below it said none.
+          filter={{ is_open: true }}
           initialPageSize={PAGE_SIZE_COMPACT}
           showPageSizeSelector={false}
           scope={user}
