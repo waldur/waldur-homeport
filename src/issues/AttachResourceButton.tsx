@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { Issue, supportIssuesAttachResource } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { useModal } from '@/modal/actions';
@@ -54,6 +55,7 @@ const AttachResourceDialog: FC<{
           loadOptions: loadResources,
           getOptionLabel: ({ name }) => name,
           required: true,
+          validate: required,
         },
       ]}
       submitForm={(formData) =>
