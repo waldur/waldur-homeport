@@ -17,9 +17,10 @@ import { useUser } from '@/workspace/hooks';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
 import { AttachResourceButton } from './AttachResourceButton';
+import { ChangeStatusButton } from './ChangeStatusButton';
 import { IssueCommentsContainer } from './comments/IssueCommentsContainer';
 import { EscalateButton } from './EscalateButton';
-import { hasProviderRouting } from './hooks';
+import { hasProviderRouting, isBasicSupportBackend } from './hooks';
 import { IssueLogButton, IssueSyncButton } from './IssueInfo';
 import { IssueSlaBadge } from './IssueSlaBadge';
 import { IssueStatus } from './IssueStatus';
@@ -70,7 +71,14 @@ export const IssueDetailsContent: FunctionComponent<
             renderActions?.(issue, refetch)
           ) : (
             <>
-              <IssueSyncButton issue={issue} refetch={refetch} />
+              {staffOrSupport && (
+                <ChangeStatusButton issue={issue} refetch={refetch} />
+              )}
+              {/* Nothing to pull for the built-in helpdesk: its sync_issues is
+                  a no-op because Waldur is already the source of truth. */}
+              {!isBasicSupportBackend() && (
+                <IssueSyncButton issue={issue} refetch={refetch} />
+              )}
               <IssueLogButton issue={issue} />
               {staffOrSupport && hasProviderRouting() && (
                 <>

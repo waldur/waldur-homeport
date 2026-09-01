@@ -6,6 +6,21 @@ import { SupportIssuesListData } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { BooleanFilter, SelectFilter } from '@/table';
 
+export const IsOpenOptions: IsOpenOption[] = [
+  {
+    value: false,
+    label: translate('Closed'),
+  },
+  {
+    value: true,
+    label: translate('Open'),
+  },
+];
+export interface IsOpenOption {
+  label: string;
+  value: boolean;
+}
+
 export const StatusOptions: StatusOption[] = [
   {
     label: translate('Closed'),
@@ -41,6 +56,16 @@ export const SupportIssuesFilter: FunctionComponent<{}> = () => (
       isClearable={true}
       placeholder={translate('Status')}
     />
+    <SelectFilter
+      title={translate('Open or closed')}
+      name="is_open"
+      getValueLabel={(value: IsOpenOption) => value?.label}
+      options={IsOpenOptions}
+      getOptionValue={(option: IsOpenOption) => String(option.value)}
+      getOptionLabel={(option: IsOpenOption) => option.label}
+      isClearable={true}
+      placeholder={translate('Open or closed')}
+    />
     <BooleanFilter
       title={translate('Routed to provider')}
       name="is_routed"
@@ -57,6 +82,7 @@ export const SupportIssuesFilterFormId = 'SupportIssuesFilter';
 
 export interface SupportIssuesFilterFormData {
   status: StatusOption;
+  is_open: IsOpenOption;
   is_routed: boolean;
 }
 
@@ -69,6 +95,9 @@ export const selectSupportIssuesFilter = (
   if (values) {
     if (values.status) {
       filter.status = values.status.value;
+    }
+    if (values.is_open) {
+      filter.is_open = values.is_open.value;
     }
     if (values.is_routed) {
       filter.is_routed = values.is_routed;

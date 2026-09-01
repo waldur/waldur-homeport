@@ -111,7 +111,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'support-list',
-    url: 'list/?{status}',
+    url: 'list/?{status}&{is_open}',
     parent: 'support-communication',
     component: lazyComponent(() =>
       import('@/issues/SupportIssues').then((module) => ({
