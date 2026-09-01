@@ -34,6 +34,21 @@ export const required = (value) =>
     ? undefined
     : translate('This field is required.');
 
+/**
+ * `required`, skipped while `predicate(allValues)` holds.
+ *
+ * Prefer this over swapping the `validate` prop between `required` and
+ * `undefined`: final-form reads the validator lazily but only *runs* validation
+ * when a value actually changes, so dropping the validator leaves the error it
+ * already produced in the form state. The toggle that disables the field is
+ * usually a no-op change on the field itself, so nothing re-runs validation and
+ * the form stays invalid. One stable validator reading `allValues` is re-run by
+ * the toggle's own change.
+ */
+export const requiredUnless =
+  (predicate: (allValues: any) => boolean) => (value, allValues?) =>
+    predicate(allValues || {}) ? undefined : required(value);
+
 export const requiredArray = (value) =>
   Array.isArray(value) && value.length
     ? undefined

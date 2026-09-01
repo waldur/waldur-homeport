@@ -1,9 +1,12 @@
 import { useMemo } from 'react';
 
-import { required } from '@/core/validators';
+import { requiredUnless } from '@/core/validators';
 import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+
+/** A standalone issue has no organization, so the field is not required then. */
+const validateCustomer = requiredUnless((values) => values.standaloneIssue);
 
 export const OrganizationGroup = ({ disabled }) => {
   const loadOrganizations = useMemo(
@@ -19,7 +22,7 @@ export const OrganizationGroup = ({ disabled }) => {
     <AsyncSelectGroup
       name="customer"
       label={translate('Organization')}
-      validate={!disabled ? required : undefined}
+      validate={validateCustomer}
       containerClassName="flex-equal"
       defaultOptions
       loadOptions={loadOrganizations}
