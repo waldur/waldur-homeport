@@ -280,6 +280,46 @@ describe('IssueCreateDialog Component', () => {
     expect(orgCombobox).toBeDisabled();
   });
 
+  // A user who belongs to no organization has nothing to pick in the
+  // Organization dropdown, so the standalone toggle is their only way through
+  // the wizard. It used to leave the required-field error from before the
+  // toggle behind, which kept Next disabled for good.
+  it('lets a standalone issue proceed without an organization', async () => {
+    renderComponent({ scopeType: null, scope: null });
+
+    const checkbox = await screen.findByLabelText(
+      'Issue is general and not tied to any specific organization, project, or resource',
+    );
+    await waitFor(() => expect(checkbox).not.toBeDisabled());
+    expect(screen.getByTestId('next-button-step-0')).toBeDisabled();
+
+    await user.click(checkbox);
+
+    await waitFor(() =>
+      expect(screen.getByTestId('next-button-step-0')).not.toBeDisabled(),
+    );
+  });
+
+  it('requires an organization again once the standalone toggle is cleared', async () => {
+    renderComponent({ scopeType: null, scope: null });
+
+    const checkbox = await screen.findByLabelText(
+      'Issue is general and not tied to any specific organization, project, or resource',
+    );
+    await waitFor(() => expect(checkbox).not.toBeDisabled());
+
+    await user.click(checkbox);
+    await waitFor(() =>
+      expect(screen.getByTestId('next-button-step-0')).not.toBeDisabled(),
+    );
+
+    await user.click(checkbox);
+
+    await waitFor(() =>
+      expect(screen.getByTestId('next-button-step-0')).toBeDisabled(),
+    );
+  });
+
   it('auto-fills and resets form on template selection and clear', async () => {
     vi.mocked(supportTemplatesList).mockResolvedValue({
       data: [
