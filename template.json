@@ -2228,7 +2228,7 @@
   "Added": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "passkeys"
+      "feature_area": "roles"
     }
   },
   "Added by staff. It cannot be changed here.": {
@@ -7535,6 +7535,11 @@
       "feature_area": "matrix"
     }
   },
+  "Both roles carry exactly the same permissions.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "Bottom Sheet": {
     "context": {
       "primary_ui_type": "label"
@@ -9776,6 +9781,56 @@
       "feature_area": "organizations"
     }
   },
+  "Compare permissions": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
+  "Compare permissions of {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "roles"
+    }
+  },
+  "Compare with": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
+  "Compared with {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "roles"
+    }
+  },
+  "Compared with {name}: {added} added, {removed} removed, {kept} held by both.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "added": {
+          "type": "unknown"
+        },
+        "removed": {
+          "type": "unknown"
+        },
+        "kept": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "roles",
+      "action_type": "create"
+    }
+  },
   "Compatibility": {
     "context": {
       "feature_area": "inference"
@@ -10085,11 +10140,24 @@
       "feature_area": "features"
     }
   },
-  "Conceal role {name}? It will no longer be grantable in this organization; existing assignments are kept.": {
+  "Conceal role {name}? It can no longer be granted in this organization.": {
     "context": {
       "variables": {
         "name": {
           "type": "string"
+        }
+      },
+      "feature_area": "roles"
+    }
+  },
+  "Conceal role {name}? {count} users keep it, but it can no longer be granted to anyone new in this organization.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
         }
       },
       "feature_area": "roles"
@@ -14925,6 +14993,29 @@
   "Disable user termination in user workspace.": {
     "context": {
       "feature_area": "features"
+    }
+  },
+  "Disable {name}? It can no longer be granted to anyone.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "roles"
+    }
+  },
+  "Disable {name}? {count} users keep the role, but it can no longer be granted to anyone new.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "roles"
     }
   },
   "Disable {step}?": {
@@ -21885,6 +21976,7 @@
       "feature_area": "policy-watch"
     }
   },
+  "Identical": {},
   "Identification": {
     "context": {
       "primary_ui_type": "label",
@@ -32459,6 +32551,11 @@
       "feature_area": "matching"
     }
   },
+  "Only roles of the same scope can be compared.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "Only show this question based on previous answers": {
     "context": {
       "feature_area": "questions"
@@ -34934,6 +35031,11 @@
   "Permanently remove Longhorn.": {
     "context": {
       "feature_area": "cluster"
+    }
+  },
+  "Permission": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Permission expires at": {
@@ -40571,7 +40673,7 @@
   "Removed": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "projects"
+      "feature_area": "roles"
     }
   },
   "Removed organizations cannot be restored!": {
@@ -45003,6 +45105,16 @@
   "Select a resource to use its actual limits and usage for the preview.": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Select a role to compare this one with.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
+  "Select a role...": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "Select a start and end date/time.": {},
@@ -63467,6 +63579,11 @@
       "feature_area": "openstack"
     }
   },
+  "differences": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "disabled": {
     "context": {
       "primary_ui_type": "text_content",
@@ -65626,6 +65743,26 @@
         }
       },
       "feature_area": "options"
+    }
+  },
+  "{count} permissions this role adds": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "roles"
+    }
+  },
+  "{count} permissions this role drops": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "roles"
     }
   },
   "{count} problems detected": {
