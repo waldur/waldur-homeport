@@ -5,10 +5,18 @@ Reference for the Bootstrap/Metronic → Tailwind/shadcn migration
 architecture and the non-obvious decisions behind it — the things a
 source comment can point to instead of re-explaining inline.
 
-**Status**: Phase 0/1 spike work, not wired into production.
-`BaseButton` (the Tailwind rebuild) is reachable only via Storybook
-(`yarn storybook`); `src/index.tsx` has zero migration footprint and
-always renders `<Application />`.
+**Status**: Tailwind is enabled in the real app bundle.
+`vite.config.ts` registers `@tailwindcss/vite` and `src/index.tsx`
+imports `src/tailwind.css`, so anything under `src/` can now use
+Tailwind classes and `packages/ui`'s Radix primitives. That was the
+prerequisite for the Metronic-dropdown → Radix-dropdown migration; see
+"Enabling Tailwind app-wide" below for what shipped with it.
+
+No component has been *switched over* yet: the app still renders every
+dropdown, button and table through Bootstrap/Metronic exactly as before,
+and this change is verified to be visually inert (see the parity
+verification below). `BaseButton` (the Tailwind rebuild) is still
+reachable only via Storybook.
 
 ## Architecture
 
@@ -70,6 +78,123 @@ genuinely needs to override Metronic layout belongs in
 *inside* your own class is fine — that is what every other component
 stylesheet does, and it already outranks Metronic on specificity, so the
 layer change is a no-op for them.
+
+### Enabling Tailwind app-wide
+
+Two lines turn it on — `tailwindcss()` in `vite.config.ts`'s `plugins`
+and `import './tailwind.css'` in `src/index.tsx`. `.storybook/main.ts`
+keeps its own separate instance of the plugin; the two are independent
+and both are needed. `src/tailwind.css` is now shared by the app and
+Storybook so a story and the running app cannot drift on layer order,
+the px `@theme` overrides or the brand-token bridge.
+
+**`tailwind.css` must be imported from the entry module**, not pulled in
+by whichever component first wants a Tailwind class. The Metronic
+stylesheet is injected at runtime as its own `<link>` (`loadTheme()`),
+and layer order is fixed by the first `@layer` occurrence in the
+document — importing eagerly at the entry guarantees the ordering
+statement lands first.
+
+#### The preflight shim
+
+With the layer order in place, preflight loses to Bootstrap for
+essentially everything — but only where Bootstrap has a competing
+declaration. Two preflight rules have no Bootstrap counterpart and so
+reached the app:
+
+```css
+img, svg, video, canvas, audio, iframe, embed, object { display: block }
+img, video { max-width: 100%; height: auto }
+ol, ul, menu { list-style: none; margin: 0; padding: 0 }
+```
+
+Reboot only sets `vertical-align: middle` on img/svg, and has its own
+list `margin`/`padding-left` but no `list-style`. So every one of the
+app's ~61 `<img>` tags and every inline Phosphor `<svg>` flipped from
+inline to block (dropping out of the text baseline they were laid out
+against), and every bare `<ul>`/`<ol>` lost its bullets — including
+every list in Markdown the app renders as user content (`SafeMarkdown` /
+`TruncatedMarkdown`: offering descriptions, announcements, terms of
+service, user agreements), none of which carry a class to style back.
+
+`src/tailwind.css` ends with a small `@layer bootstrap { … }` block that
+reverts exactly those properties, and nothing else. Three things about
+it that are deliberate:
+
+- **`revert`, not explicit values.** It rolls back to the UA origin, so
+  each element gets its real initial display without the rule hardcoding
+  one per tag — notably Chrome's own `audio:not([controls]) { display:
+  none }`, which a blanket `display: inline` would override and make
+  hidden audio elements visible.
+- **Only `list-style`, not the whole list rule.** Reboot's own
+  `margin`/`padding-left` already win on layer order; `list-style` is
+  the single property that needed reverting. Metronic's list-based
+  components (`.menu`, `.menu-sub`, `.nav`, `.pagination`) set
+  `list-style: none` themselves at class specificity and stay
+  bulletless.
+- **It lives in `bootstrap`**, giving the precedence chain
+  `preflight (base) < shim < Tailwind utilities < component .scss`. New
+  Tailwind markup that wants block media or unstyled lists asks
+  explicitly (`block`, `max-w-full`, `list-none`), and unlayered
+  component stylesheets keep winning as they always did.
+
+`packages/ui` needed no opt-in: every `<img>`/`<svg>` it renders
+(`AvatarImage`, `WaldurLogo`'s wordmark, `SidebarToggleGraphic`) is a
+flex item of its own wrapper — `AvatarRoot`, `WaldurLogo`'s span, and
+`ICON_BUTTON_BASE_CLASSNAME` respectively — so it is blockified by its
+parent and never depended on preflight's rule. Re-check that before
+moving one of them into an inline-flow context.
+
+#### What preflight still changes, and why it was left alone
+
+After the shim, removing all 34 preflight rules from the live CSSOM and
+re-reading every computed style produces **no differences at all** on a
+real app page, and only these three on a synthetic page exercising every
+element preflight targets:
+
+- `border-style: none → solid` on `*` — preflight's `border: 0 solid`.
+  Width stays `0`, so it renders nothing. It would only become visible
+  for CSS that sets `border-width` with no `border-style`; the codebase
+  has exactly two such rules (`BookingResourcesCalendar.scss`,
+  `CategoryCard.scss`) and both already resolve a style (an explicit
+  `border-style: solid` and Bootstrap's `.card` respectively). Left as
+  is — reverting `border` globally would undo the reset shadcn
+  components in `packages/ui` are built against.
+- `option { padding-left: 2px → 0 }` and `input { color }` inheriting
+  the app's text color — both inside native form-control chrome, both
+  invisible in practice.
+
+#### Verifying parity after a change here
+
+The check that produced the above is worth repeating whenever this area
+changes, because it isolates preflight instead of comparing against
+browser defaults (comparing to UA defaults just re-discovers that
+Bootstrap exists, which was the first, wrong version of this test):
+find the `@layer base` block in `document.styleSheets`, snapshot
+`getComputedStyle` for every element, `deleteRule` the whole layer,
+snapshot again, then re-`insertRule` the saved `cssText` and confirm the
+restored snapshot matches the first. Any property that differs between
+the two snapshots is something preflight is actively changing in the
+real app.
+
+#### The layer statement is dropped in production builds
+
+`src/tailwind.css` declares `@layer theme, base, bootstrap, utilities;`
+up front, and that statement survives in dev. The production optimizer
+**removes it**, because the four layer blocks happen to be emitted into
+`dist/assets/index-*.css` in exactly that order and the statement is
+then redundant *within that file*.
+
+That is still correct today: `index-*.css` is a `<link>` in the built
+`index.html`, no other emitted stylesheet declares a layer at all, and
+Metronic's own `@layer bootstrap { … }` sheet is injected by JS strictly
+after the initial head is parsed — so `index-*.css` always establishes
+the order. But the explicit safety net is gone in prod, so if the
+Metronic stylesheet ever becomes a static `<link>` ahead of
+`index-*.css`, `bootstrap` would register first and rank *below*
+preflight, which is the one arrangement that breaks the whole app. Worth
+re-checking the emitted order (`grep -o '@layer [a-z]*{' dist/assets/index-*.css`)
+if the CSS chunking or the theme-loading strategy changes.
 
 ### Root font-size override
 
