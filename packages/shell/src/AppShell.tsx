@@ -5,11 +5,11 @@ import {
   IconButton,
   SearchField,
   Sidebar,
+  SidebarBrand,
   SidebarContent,
   SidebarHeader,
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
   TopBar,
 } from 'waldur-ui';
 
@@ -20,6 +20,12 @@ import { ShellLanguageProvider } from './useShellLanguage';
 import { ShellThemeProvider } from './useShellTheme';
 
 export interface AppShellProps {
+  /** Rendered centered in the sidebar's brand row (SidebarBrand), above
+   * sidebarHeader — the app's or tenant's own logo, so it stays a slot
+   * rather than a hardcoded Waldur mark. The row itself, and with it the
+   * sidebar's collapse toggle, renders either way. */
+  logo?: ReactNode;
+  onShortcutsClick?: () => void;
   /** SidebarHeader content — e.g. a SidebarModeCard. App-specific: each
    * micro-app names and describes its own "current mode". */
   sidebarHeader?: ReactNode;
@@ -64,6 +70,16 @@ export interface AppShellProps {
  * work the same way for any other page content nested inside children,
  * since they're all real descendants of these providers.
  *
+ * The sidebar's brand row (SidebarBrand: quick-shortcuts button, logo
+ * slot, collapse toggle) is part of that chrome and always renders, even
+ * for an app that passes no logo and no sidebarHeader — it carries the
+ * only collapse toggle now, so an app can't end up with a collapsed rail
+ * it has no control to reopen. That toggle used to sit in the TopBar's
+ * left slot instead; it moved next to the thing it collapses, matching
+ * both the sidebar mockup and waldur-homeport's own real Metronic aside
+ * (src/navigation/sidebar/BrandName.tsx), whose header row has the same
+ * three controls.
+ *
  * Nav content, the sidebar's own header, the org switcher, and all page
  * content stay the caller's responsibility — see each remaining prop's own
  * comment for why those genuinely can't move in here the same way.
@@ -90,6 +106,8 @@ export function AppShell(props: AppShellProps) {
 }
 
 function AppShellContent({
+  logo,
+  onShortcutsClick,
   sidebarHeader,
   sidebarContent,
   orgSwitcher,
@@ -107,18 +125,20 @@ function AppShellContent({
       style={{ backgroundColor: 'var(--surface-page-bg)' }}
     >
       <Sidebar>
-        {sidebarHeader && <SidebarHeader>{sidebarHeader}</SidebarHeader>}
+        <SidebarHeader className="gap-4">
+          <SidebarBrand
+            logo={logo}
+            onShortcutsClick={onShortcutsClick}
+            shortcutsLabel={translate('Quick shortcuts')}
+          />
+          {sidebarHeader}
+        </SidebarHeader>
         <SidebarContent>{sidebarContent}</SidebarContent>
       </Sidebar>
 
       <SidebarInset className="min-h-0">
         <TopBar
-          left={
-            <>
-              <SidebarTrigger />
-              {orgSwitcher}
-            </>
-          }
+          left={orgSwitcher}
           center={
             topBarCenter === null
               ? undefined

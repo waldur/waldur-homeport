@@ -1,0 +1,84 @@
+/**
+ * Modal enter/exit keyframes, matching what waldur-homeport's own real
+ * Bootstrap modal does — the exact source values, not an approximation:
+ *
+ * - dialog:   `transform: translate(0, -50px)` → `none` over
+ *             `.3s ease-out` ($modal-fade-transform/$modal-show-transform/
+ *             $modal-transition, none of which this app overrides), while
+ *             the modal container itself fades opacity over `.15s linear`
+ *             ($transition-fade, applied via Bootstrap's own `.fade`).
+ *             Both live in one keyframe rather than two stacked
+ *             animations: opacity simply finishes at the 50% mark of the
+ *             .3s run, which *is* .15s. Radix's Presence tracks a single
+ *             animationName per node to decide when an exiting node may
+ *             unmount, so one animation is also the safe shape.
+ * - backdrop: opacity 0 → 1 over `.15s linear`, Bootstrap's
+ *             `.modal-backdrop.fade`/`.show` pair. The alpha stays in
+ *             --modal-backdrop-bg rather than in this animation's end
+ *             state — see surfaceColors.css's comment on why that
+ *             separation matters for the blur.
+ *
+ * Keyframes, not CSS transitions: Radix's Presence detects an exit
+ * animation by reading the node's computed animationName and waiting for
+ * animationend. A pure transition leaves animationName 'none', so the
+ * node unmounts on the spot and no exit is ever seen (and, on enter, Radix
+ * sets data-state="open" before first paint, so there's no closed state
+ * for a transition to start from either).
+ *
+ * The reduced-motion block is Bootstrap's own behavior too — its
+ * transition() mixin emits `transition: none` under
+ * prefers-reduced-motion. animation-duration is collapsed rather than set
+ * to `none` so animationend still fires and Radix still unmounts.
+ */
+
+@keyframes waldur-modal-enter {
+  from {
+    opacity: 0;
+    transform: translate(0, -50px);
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes waldur-modal-exit {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, -50px);
+  }
+}
+
+@keyframes waldur-backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes waldur-backdrop-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-waldur-animated] {
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -82,7 +82,8 @@ at all.
 ## Dashboard mock
 
 The app's only page — `OrgDashboardMock.tsx` composes `waldur-shell`'s
-`<AppShell>` (the Sidebar/TopBar layout skeleton, plus the TopBar's
+`<AppShell>` (the Sidebar/TopBar layout skeleton, the sidebar's brand row
+— shortcuts button, logo slot, collapse toggle — plus the TopBar's
 Apps/Help/Notifications/`UserMenu` cluster, and an error boundary around
 page content — see `ShellErrorBoundary.tsx`) with `packages/ui`
 primitives (`StatCard`, `StatusPill`, `DataTable`) for its own page
@@ -91,7 +92,19 @@ content, wired to real Waldur data via `waldur-js-client`
 Nav items, the org switcher's data, and all page content stay this app's
 own responsibility — current user, theme, language, and the error
 boundary all come from `AppShell` itself; this file doesn't call any of
-those hooks directly. Supports both light and dark themes, toggled via
+those hooks directly. The sidebar's mode card opens `waldur-ui`'s `ModePickerDialog` — the
+"Choose your workspace" picker, whose eight modes live in this app's own
+`workspaceModes.tsx` (the mockup's titles, descriptions and order; icon
+tints mapped onto `badgeColors.css`'s existing Badge variants rather than
+a new pastel palette). Picking a mode really switches the sidebar: the
+mode card, the nav under it (`ModeNav.tsx`) and the page breadcrumb all
+follow. Only two of the eight modes have a nav mockup — `finance-reporting`
+and `organisation-admin` — so the other six render Overview alone rather
+than borrowing another mode's sections; see `ModeNav.tsx`'s comment. The
+selection is component state: persisting it per user needs a backend
+field that doesn't exist yet.
+
+Supports both light and dark themes, toggled via
 the user-menu dropdown in the TopBar (not a standalone TopBar icon —
 matches `waldur-homeport`'s own real `UserDropdownMenu.tsx`) —
 `waldur-design-tokens/theme.ts` reads/writes the same shared

@@ -1,13 +1,4 @@
-import {
-  BuildingsIcon,
-  FolderIcon,
-  GaugeIcon,
-  GearIcon,
-  ListBulletsIcon,
-  ReceiptIcon,
-  SquaresFourIcon,
-  UsersIcon,
-} from '@phosphor-icons/react';
+import { useState } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 import { AppShell } from 'waldur-shell';
 import {
@@ -17,62 +8,41 @@ import {
   CardHeader,
   DataTable,
   DataTableColumn,
+  ModePickerDialog,
   OrgSwitcher,
   SidebarModeCard,
-  SidebarNavItem,
-  SidebarSection,
   StatCard,
   StatusPill,
+  WaldurLogo,
 } from 'waldur-ui';
 
+import { ModeNav } from './ModeNav';
 import { OrgSwitcherMenu } from './OrgSwitcherMenu';
 import { ProjectRow, useDashboardData } from './useDashboardData';
+import { getModeSubtitle, getWorkspaceModes } from './workspaceModes';
 
 /**
  * A real standalone app composing the Dashboard/* primitives — the thing
  * micro-app-poc exists to prove for every packages/* export. Each
  * primitive still has its own isolated story in packages/ui; this file is
  * composition only: nav item content, the org switcher's data wiring, and
- * the page content. The chrome itself (Sidebar/TopBar layout, the TopBar's
+ * the page content. The chrome itself (Sidebar/TopBar layout, the sidebar
+ * brand row with its shortcuts button and collapse toggle, the TopBar's
  * right-side Apps/Help/Notifications/UserMenu cluster, current user,
  * theme, language) is entirely waldur-shell's <AppShell> — this file
- * doesn't touch any of those three.
+ * doesn't touch any of those three. It passes the brand row's one
+ * app-owned slot, the logo (waldur-ui's WaldurLogo).
  *
- * OrgSwitcher is a real Radix DropdownMenu (see waldur-ui's
- * DropdownMenu.tsx), wired to an actual switchable list: useDashboardData()
- * fetches the first page of customers (page_size: 10), and picking one in
- * the menu re-fetches that organisation's projects/invoice — see
- * selectCustomer() below. With no backend/no customers, the menu falls
- * back to a single non-interactive "No organisation" item — an honest
- * placeholder, not an illustrative mock name, since an org switcher
- * showing a fabricated org would look like a real one to pick from.
+ * The sidebar's mode card opens the workspace picker (waldur-ui's
+ * ModePickerDialog, filled from workspaceModes.tsx) and really does
+ * switch modes: the card, the nav below it (ModeNav.tsx) and this page's
+ * breadcrumb all follow the choice, which is what the picker's "a
+ * tailored view of Waldur for a specific job" has to mean to be worth
+ * showing. The selection is component state — persisting it per user
+ * needs a backend field that doesn't exist yet. Individual nav items,
+ * though, route nowhere: this app has one page, and a link that silently
+ * goes nowhere would be worse than an obviously inert one.
  *
- * Stat tiles and the Projects table below attempt a real SDK fetch for
- * whichever organisation is currently selected — see useDashboardData().
- * orgName/projectsCount/usersCount come straight off the selected Customer
- * record (no extra fetch, so switching orgs updates them instantly);
- * invoiceTotal/invoiceHint/rows depend on a second, per-organisation fetch
- * that re-runs on switch, so those three briefly show a loading/empty
- * state while it's in flight rather than holding the previous
- * organisation's numbers under the new one's name. None of these four
- * fall back to illustrative mock numbers when there's no backend/no
- * customers to show — a dash is what's actually true, not a fabricated
- * number that would look like a real one. "Quota health" is never live:
- * /api/customer-quotas/ returns one row per customer for a single
- * quota_name at a time ({customer_name, value}), no limit to compare
- * against, so it can't honestly produce a Good/Warning verdict the way the
- * mockup implies — computing one anyway would be fabricating data, not
- * surfacing it.
- *
- * Static UI copy below is wrapped in translate() (see App.tsx for
- * LanguageUtilsService wiring) — same shared `waldur/i18n/lang` key and
- * dictionary-lookup mechanism the main app uses, so a language already
- * chosen there applies here too. There's no forced re-render when the
- * dictionary finishes loading (LanguageUtilsService's dictionary is a
- * plain mutable property, not React state) — translated text appears
- * whenever this component next re-renders for any other reason (e.g.
- * useDashboardData()'s own fetches), same eventual consistency the main
- * app relies on via its own incidental re-renders.
  */
 
 export const OrgDashboardMock = () => {
@@ -100,6 +70,18 @@ export const OrgDashboardMock = () => {
 
   const { customers, selectedUuid, selectCustomer, data } = useDashboardData();
 
+  // The mode the sidebar is currently showing, and whether the picker
+  // that switches it is open. Local state only — a real deployment would
+  // persist this per user, which needs a backend field this app has no
+  // endpoint for yet.
+  const [mode, setMode] = useState('finance-reporting');
+  const [pickerOpen, setPickerOpen] = useState(false);
+  // Rebuilt every render, not memoized: its translate() calls have to
+  // re-resolve once the dictionary loads, same reason `columns` above is
+  // not a module constant.
+  const modes = getWorkspaceModes();
+  const currentMode = modes.find((item) => item.key === mode);
+
   // Dashes, not mock-number fallbacks, when there's no backend/no
   // customers — see the file header comment. renderFieldOrDash() lives in
   // @/table/utils — this app is deliberately decoupled from src/table/*
@@ -116,54 +98,16 @@ export const OrgDashboardMock = () => {
 
   return (
     <AppShell
+      logo={<WaldurLogo />}
       sidebarHeader={
         <SidebarModeCard
-          eyebrow={translate('CURRENT MODE')}
-          icon={<BuildingsIcon size={18} weight="bold" />}
-          title={translate('Organisation admin')}
-          subtitle={translate('Projects, members, invoices')}
+          icon={currentMode?.icon}
+          title={currentMode?.title ?? ''}
+          subtitle={getModeSubtitle(mode)}
+          onClick={() => setPickerOpen(true)}
         />
       }
-      sidebarContent={
-        <>
-          <SidebarSection label={translate('ORGANISATION')}>
-            <SidebarNavItem
-              icon={<SquaresFourIcon size={20} weight="bold" />}
-              label={translate('Overview')}
-            />
-            <SidebarNavItem
-              icon={<FolderIcon size={20} weight="bold" />}
-              label={translate('Projects')}
-              count={projectsCount}
-              active
-            />
-            <SidebarNavItem
-              icon={<UsersIcon size={20} weight="bold" />}
-              label={translate('Members')}
-            />
-          </SidebarSection>
-          <SidebarSection label={translate('FINANCE')}>
-            <SidebarNavItem
-              icon={<ReceiptIcon size={20} weight="bold" />}
-              label={translate('Invoices')}
-            />
-            <SidebarNavItem
-              icon={<GaugeIcon size={20} weight="bold" />}
-              label={translate('Quotas')}
-            />
-          </SidebarSection>
-          <SidebarSection label={translate('ADMIN')}>
-            <SidebarNavItem
-              icon={<GearIcon size={20} weight="bold" />}
-              label={translate('Settings')}
-            />
-            <SidebarNavItem
-              icon={<ListBulletsIcon size={20} weight="bold" />}
-              label={translate('Audit log')}
-            />
-          </SidebarSection>
-        </>
-      }
+      sidebarContent={<ModeNav mode={mode} projectsCount={projectsCount} />}
       orgSwitcher={
         <OrgSwitcher badge="NO" name={orgName}>
           <OrgSwitcherMenu
@@ -175,16 +119,32 @@ export const OrgDashboardMock = () => {
         </OrgSwitcher>
       }
     >
+      <ModePickerDialog
+        open={pickerOpen}
+        onOpenChange={setPickerOpen}
+        title={translate('Choose your workspace')}
+        description={translate(
+          'You have access to multiple modes. Each gives you a tailored view of Waldur for a specific job. You can switch anytime from the sidebar.',
+        )}
+        modes={modes}
+        value={mode}
+        onSelect={(key) => {
+          setMode(key);
+          setPickerOpen(false);
+        }}
+      />
       <div className="flex flex-1 flex-col gap-6 p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
+            {/* Breadcrumb/heading track the sidebar: the mode card's own
+                title, then whichever nav item is active. */}
             <div className="text-sm text-[var(--surface-text-muted)]">
-              {translate('Organisation admin')} &gt; {translate('Members')}
+              {currentMode?.title} &gt; {translate('Overview')}
             </div>
-            <h1 className="text-2xl font-semibold">{translate('Members')}</h1>
+            <h1 className="text-2xl font-semibold">{translate('Overview')}</h1>
             <p className="mt-1 text-sm text-[var(--surface-text-secondary)]">
               {translate(
-                'For organisation administrators managing projects, members, quotas and invoices.',
+                'Invoices and cost analytics for the selected organisation.',
               )}
             </p>
           </div>

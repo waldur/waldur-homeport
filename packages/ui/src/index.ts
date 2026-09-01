@@ -28,6 +28,23 @@ export {
 
 export { AvatarFallback, AvatarImage, AvatarRoot } from './Avatar';
 
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from './Dialog';
+export type { DialogContentProps } from './Dialog';
+
+export { ModePickerDialog } from './ModePicker';
+export type { ModeOption, ModePickerDialogProps } from './ModePicker';
+
 export { StatCard } from './StatCard';
 export type { StatCardProps } from './StatCard';
 
@@ -56,6 +73,7 @@ export type { DropdownMenuItemProps } from './DropdownMenu';
 
 export {
   Sidebar,
+  SidebarBrand,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
@@ -76,13 +94,20 @@ export {
   useSidebar,
 } from './Sidebar';
 export type {
+  SidebarBrandProps,
   SidebarMenuButtonProps,
   SidebarModeCardProps,
   SidebarNavItemProps,
   SidebarProviderProps,
   SidebarRootProps,
   SidebarSectionProps,
+  SidebarTriggerProps,
 } from './Sidebar';
+
+export { SidebarToggleGraphic } from './SidebarToggleGraphic';
+
+export { WaldurLogo } from './WaldurLogo';
+export type { WaldurLogoProps } from './WaldurLogo';
 
 export {
   Sheet,

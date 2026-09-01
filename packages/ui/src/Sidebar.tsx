@@ -1,4 +1,8 @@
-import { SidebarSimpleIcon } from '@phosphor-icons/react';
+import {
+  CaretUpDownIcon,
+  SidebarSimpleIcon,
+  SquaresFourIcon,
+} from '@phosphor-icons/react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
@@ -16,6 +20,7 @@ import {
 import { cn } from './cn';
 import { ICON_BUTTON_BASE_CLASSNAME } from './iconButtonStyles';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from './Sheet';
+import { SidebarToggleGraphic } from './SidebarToggleGraphic';
 import { Tooltip } from './Tooltip';
 import { useIsMobile } from './useIsMobile';
 
@@ -36,9 +41,9 @@ import { useIsMobile } from './useIsMobile';
  * upstream recipe, if a real consumer needs them rather than guessing the
  * shape upfront.
  *
- * SidebarModeCard/SidebarNavItem/SidebarSection below are this package's
- * own convenience layer on top of the primitives above — no shadcn
- * equivalent for SidebarModeCard specifically.
+ * SidebarBrand/SidebarModeCard/SidebarNavItem/SidebarSection below are
+ * this package's own convenience layer on top of the primitives above —
+ * shadcn has no equivalent of either SidebarBrand or SidebarModeCard.
  */
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
@@ -258,20 +263,28 @@ export function Sidebar({
   );
 }
 
+export interface SidebarTriggerProps extends ComponentProps<'button'> {
+  /** Defaults to Phosphor's SidebarSimple. SidebarBrand passes
+   * SidebarToggleGraphic instead — see its own comment. */
+  icon?: ReactNode;
+}
+
 export function SidebarTrigger({
   className,
+  icon,
   onClick,
   ...props
-}: ComponentProps<'button'>) {
+}: SidebarTriggerProps) {
   const { toggleSidebar } = useSidebar();
   return (
     <button
       type="button"
       aria-label="Toggle sidebar"
-      // Same ICON_BUTTON_BASE_CLASSNAME as TopBar.tsx's IconButton —
-      // despite living in this file, SidebarTrigger itself is rendered in
-      // the TopBar, not inside <Sidebar>, so it's genuinely the same kind
-      // of button, not a coincidence.
+      // Same size/shape as TopBar.tsx's IconButton via
+      // ICON_BUTTON_BASE_CLASSNAME. Its --surface-* colors are the right
+      // default for a trigger rendered outside the sidebar; SidebarBrand,
+      // which renders one *inside* it, overrides them with the
+      // --nav-item-* pair (twMerge keeps the later className winning).
       className={cn(ICON_BUTTON_BASE_CLASSNAME, className)}
       onClick={(event) => {
         onClick?.(event);
@@ -279,7 +292,7 @@ export function SidebarTrigger({
       }}
       {...props}
     >
-      <SidebarSimpleIcon size={18} weight="bold" />
+      {icon ?? <SidebarSimpleIcon size={18} weight="bold" />}
     </button>
   );
 }
@@ -475,7 +488,74 @@ export function SidebarMenuBadge({
 }
 
 // --- Convenience layer specific to this dashboard's mockup, built on the
-// primitives above. Public API unchanged from before this migration. ---
+// primitives above. ---
+
+// The two icon-only buttons in SidebarBrand sit *inside* the sidebar, so
+// unlike ICON_BUTTON_BASE_CLASSNAME's --surface-* pair they take the
+// --nav-item-* colors the nav items beside them already use — otherwise
+// they'd render gray-on-dark-green under any non-light SIDEBAR_STYLE.
+const SIDEBAR_ICON_BUTTON_CLASSNAME =
+  'shrink-0 text-[var(--nav-item-icon)] hover:bg-[var(--nav-item-hover-bg)]';
+
+export interface SidebarBrandProps {
+  /** The tenant/app logo, centered between the two buttons. Hidden in the
+   * collapsed icon rail, which has no room for it. */
+  logo?: ReactNode;
+  onShortcutsClick?: () => void;
+  /** English default, matching SidebarTrigger's own hardcoded aria-label —
+   * this package has no i18n dependency, so a translating consumer passes
+   * its own string (see waldur-shell's AppShell). */
+  shortcutsLabel?: string;
+}
+
+/**
+ * The sidebar's top row: quick-shortcuts launcher, logo, collapse toggle
+ * — the same three controls, in the same order, as waldur-homeport's own
+ * real Metronic aside header (src/navigation/sidebar/BrandName.tsx's
+ * .aside-logo), and what the sidebar mockup shows.
+ *
+ * The collapse toggle lives here rather than in the TopBar so it stays
+ * next to the thing it collapses. It's the only part of this row that
+ * survives into the collapsed icon rail, so the rail is never a dead end
+ * with no way back — the shortcuts button and the logo both hide there,
+ * since neither fits 36px.
+ *
+ * The shortcuts button renders whether or not onShortcutsClick is passed,
+ * the same way TopBar's own Apps/Help/Notifications IconButtons do.
+ */
+export const SidebarBrand = ({
+  logo,
+  onShortcutsClick,
+  shortcutsLabel = 'Quick shortcuts',
+}: SidebarBrandProps) => (
+  <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
+    <button
+      type="button"
+      aria-label={shortcutsLabel}
+      onClick={onShortcutsClick}
+      className={cn(
+        ICON_BUTTON_BASE_CLASSNAME,
+        SIDEBAR_ICON_BUTTON_CLASSNAME,
+        'group-data-[collapsible=icon]:hidden',
+      )}
+    >
+      <SquaresFourIcon size={20} weight="bold" />
+    </button>
+    {logo && (
+      <div className="flex min-w-0 flex-1 justify-center overflow-hidden text-[var(--nav-item-text)] group-data-[collapsible=icon]:hidden">
+        {logo}
+      </div>
+    )}
+    {/* ml-auto keeps the toggle against the right edge for an app that
+        passes no logo — a no-op when the logo's own flex-1 wrapper has
+        already eaten the free space, and in the collapsed rail, whose
+        content box is exactly one button wide. */}
+    <SidebarTrigger
+      className={cn(SIDEBAR_ICON_BUTTON_CLASSNAME, 'ml-auto')}
+      icon={<SidebarToggleGraphic width={20} height={21} />}
+    />
+  </div>
+);
 
 export interface SidebarNavItemProps {
   icon?: ReactNode;
@@ -552,43 +632,61 @@ export interface SidebarModeCardProps {
   icon?: ReactNode;
   title: string;
   subtitle?: string;
-  eyebrow?: string;
   onClick?: () => void;
 }
 
+/**
+ * The current-mode card directly under SidebarBrand: a page-surface card
+ * (--surface-card-bg, so it reads as a raised panel against whatever
+ * SIDEBAR_STYLE background is behind it, and follows the light/dark theme
+ * rather than the sidebar's own palette) carrying an outlined icon tile,
+ * the mode's name and description, and a caret-up-down affordance.
+ *
+ * That caret is the mockup's own switcher affordance and renders
+ * unconditionally, like the rest of the card's chrome — onClick stays
+ * optional, matching every other control in this convenience layer
+ * (SidebarNavItem, SidebarBrand's shortcuts button), which a consumer can
+ * likewise mount before wiring a handler to it.
+ *
+ * Collapsed, it shrinks to just the icon tile filling the 36px rail — the
+ * title/subtitle and caret drop out, and the tile loses its own border so
+ * only one square outline remains.
+ */
 export const SidebarModeCard = ({
   icon,
   title,
   subtitle,
-  eyebrow,
   onClick,
 }: SidebarModeCardProps) => (
-  <div className="flex flex-col gap-1.5">
-    {eyebrow && (
-      <div className="px-1 text-xs font-medium tracking-wide text-[var(--nav-section-label)] group-data-[collapsible=icon]:hidden">
-        {eyebrow}
-      </div>
+  <button
+    type="button"
+    onClick={onClick}
+    // rounded-[20px], not the nearest scale step: the mockup's card is
+    // visibly rounder than rounded-xl and flatter than rounded-3xl. Keep
+    // the arbitrary form even if 16px would do — enforce-border-radius-
+    // tokens' /rounded-\d+/ pattern (aimed at Bootstrap's rounded-1..5)
+    // also matches Tailwind's rounded-2xl/3xl, so those fail the hook.
+    className="flex w-full items-center gap-3 rounded-[20px] bg-[var(--surface-card-bg)] p-3 text-left group-data-[collapsible=icon]:size-9 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:rounded-lg group-data-[collapsible=icon]:p-0"
+  >
+    {icon && (
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-[var(--surface-card-border)] text-[var(--surface-text-primary)] group-data-[collapsible=icon]:size-full group-data-[collapsible=icon]:rounded-lg group-data-[collapsible=icon]:border-0">
+        {icon}
+      </span>
     )}
-    <button
-      type="button"
-      onClick={onClick}
-      className="flex items-center gap-3 rounded-lg border border-[var(--surface-card-border)] bg-[var(--surface-hover-bg)] p-3 text-left group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:border-0 group-data-[collapsible=icon]:bg-transparent group-data-[collapsible=icon]:p-0"
-    >
-      {icon && (
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-[var(--badge-brand-bg)] text-[var(--badge-brand-text)]">
-          {icon}
+    <span className="flex min-w-0 flex-1 flex-col group-data-[collapsible=icon]:hidden">
+      <span className="truncate font-semibold text-[var(--surface-text-primary)]">
+        {title}
+      </span>
+      {subtitle && (
+        <span className="truncate text-sm text-[var(--surface-text-secondary)]">
+          {subtitle}
         </span>
       )}
-      <span className="flex flex-col group-data-[collapsible=icon]:hidden">
-        <span className="text-sm font-semibold text-[var(--surface-text-primary)]">
-          {title}
-        </span>
-        {subtitle && (
-          <span className="text-xs text-[var(--surface-text-muted)]">
-            {subtitle}
-          </span>
-        )}
-      </span>
-    </button>
-  </div>
+    </span>
+    <CaretUpDownIcon
+      size={18}
+      weight="bold"
+      className="shrink-0 text-[var(--surface-text-muted)] group-data-[collapsible=icon]:hidden"
+    />
+  </button>
 );

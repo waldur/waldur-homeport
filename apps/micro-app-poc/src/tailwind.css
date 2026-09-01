@@ -10,6 +10,11 @@
 @import 'tailwindcss';
 @import 'waldur-design-tokens/buttonColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
+/* Modal enter/exit keyframes waldur-ui's Dialog references by name — see
+   that file's own comment on why Radix's Presence needs keyframes rather
+   than transitions. Values are waldur-homeport's real Bootstrap modal
+   motion. */
+@import 'waldur-design-tokens/animations.css';
 @import 'waldur-design-tokens/badgeColors.css';
 
 /* Same override as the main app's own src/tailwind.css: OrgDashboardMock.tsx

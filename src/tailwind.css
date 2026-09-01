@@ -17,6 +17,11 @@
 @import 'tailwindcss/utilities.css' layer(utilities);
 @import 'waldur-design-tokens/buttonColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
+/* Not used by the main app's own Bootstrap modals, which bring their own
+   motion — this is here for Storybook, which loads this file and renders
+   packages/ui's Dialog-based stories. Keyframe names are namespaced, so
+   nothing else picks them up. */
+@import 'waldur-design-tokens/animations.css';
 @import 'waldur-design-tokens/badgeColors.css';
 
 /* Metronic forces a 13px root font-size !important; Tailwind's rem-based
