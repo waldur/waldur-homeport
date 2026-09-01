@@ -361,7 +361,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         scopeName: p.scope_name,
         scopeUuid: p.scope_uuid,
         thresholdLabel: translate('Project cost cap'),
-        ...costPolicyMetrics(p, today),
+        ...costPolicyMetrics(p),
         action: p.actions,
         actionLabel: formatPolicyAction(p.actions),
         hasFired: p.has_fired,
@@ -380,7 +380,7 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         scopeName: p.scope_name,
         scopeUuid: p.scope_uuid,
         thresholdLabel: translate('Organization cost cap'),
-        ...costPolicyMetrics(p, today),
+        ...costPolicyMetrics(p),
         action: p.actions,
         actionLabel: formatPolicyAction(p.actions),
         hasFired: p.has_fired,
@@ -406,12 +406,19 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
       }
       const remaining = totalAlloc - totalUsage;
       const dailyUsageRate = totalUsage / 30;
+      // No allocation is no threshold, so there is nothing to have reached.
+      // `computeSlurmSaturation` reports a zero allocation for any resource
+      // whose limits are unset or weigh out to zero, which made `remaining`
+      // zero and the policy read as fired — a red card on a project sitting at
+      // 0% saturation.
       const etaDays =
-        dailyUsageRate > 0 && remaining > 0
-          ? Math.floor(remaining / dailyUsageRate)
-          : remaining <= 0
-            ? 0
-            : null;
+        totalAlloc <= 0
+          ? null
+          : dailyUsageRate > 0 && remaining > 0
+            ? Math.floor(remaining / dailyUsageRate)
+            : remaining <= 0
+              ? 0
+              : null;
       const etaDate =
         etaDays !== null ? isoDate(addDays(today, etaDays)) : null;
       policies.push({
@@ -448,14 +455,18 @@ export const usePolicyWatchData = (project: Project): PolicyWatchData => {
         resources,
         // Policies fire on an estimate, but the estimate still has to sort
         // against the dated events, so it is carried as a date too.
-        policies: policies
-          .filter((p) => !p.hasFired)
-          .map((p) => ({
-            actionLabel: p.actionLabel,
-            etaDays: p.etaDays,
-            kind: p.policyKind,
-            scopeName: p.scopeName,
-          })),
+        // Fired policies are kept, not filtered out. Excluding them removed
+        // the one row a reader most needs — an action already applied to their
+        // resources — and left the credit rows to state, unopposed, that
+        // everything keeps running.
+        policies: policies.map((p) => ({
+          actionLabel: p.actionLabel,
+          etaDays: p.etaDays,
+          kind: p.policyKind,
+          scopeName: p.scopeName,
+          action: p.action,
+          hasFired: p.hasFired,
+        })),
       },
       today,
     );

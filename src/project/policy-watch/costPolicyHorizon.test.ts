@@ -44,7 +44,9 @@ const horizon = (etaDays: number | null) => {
 };
 
 describe('a credit-covered project reaches no cost cap', () => {
-  // The derivation this replaced, kept as the regression it guards against.
+  // The derivation this replaced. The client no longer computes anything —
+  // waldur/waldur-mastermind#332 moved it to the server — so this stands as the
+  // record of what the wrong answer looked like.
   it('the credit burn rate would have put a pause 3 days out', () => {
     const { burnPerDay } = projectCreditRunway(CREDIT, TODAY);
     expect(burnPerDay).toBe(600); // 18000 / 30
@@ -58,13 +60,13 @@ describe('a credit-covered project reaches no cost cap', () => {
   // Through the mapping the hook actually calls, so re-introducing a rate at
   // the call site has to get past this, not merely past the helper's own test.
   it('the mapping gives no date, so no pause row reaches the horizon', () => {
-    const { etaDays } = costPolicyMetrics(POLICY, TODAY);
+    const { etaDays } = costPolicyMetrics(POLICY);
     expect(etaDays).toBeNull();
     expect(horizon(etaDays).find((e) => e.kind === 'policy')).toBeUndefined();
   });
 
   it('and the credit rows themselves are untouched', () => {
-    const { etaDays } = costPolicyMetrics(POLICY, TODAY);
+    const { etaDays } = costPolicyMetrics(POLICY);
     expect(horizon(etaDays).map((e) => [e.kind, e.date])).toEqual([
       ['exhaustion', '2027-03-04'], // floor(111100*30/18000) = 185 days out
       ['credit-expiry', '2027-07-01'],

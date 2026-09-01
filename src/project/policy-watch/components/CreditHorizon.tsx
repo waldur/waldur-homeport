@@ -72,7 +72,13 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
       events.map((event, index) => {
         const isLast = index === events.length - 1;
         return (
-          <div className="d-flex gap-4" key={`${event.kind}-${event.date}`}>
+          // Index is part of the key, not kind+date alone: every reached policy
+          // is dated today, so a project with both a project cap and an
+          // organization cap at their thresholds produced two identical keys.
+          <div
+            className="d-flex gap-4"
+            key={`${event.kind}-${event.date}-${index}`}
+          >
             <div className="d-flex flex-column align-items-center">
               {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
               <FeaturedIcon
