@@ -8,6 +8,7 @@ import {
   supportIssuesRetrieve,
 } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
@@ -109,6 +110,7 @@ const RerouteDialog: FC<{
           loadOptions: loadHelpdesks,
           getOptionLabel: ({ service_provider_name }) => service_provider_name,
           required: true,
+          validate: required,
         },
         {
           name: 'confirm',

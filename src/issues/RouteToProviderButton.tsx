@@ -6,6 +6,8 @@ import {
   supportIssuesRouteToProvider,
 } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
+import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
@@ -32,14 +34,14 @@ const RouteToProviderDialog: FC<{
   });
 
   // Provider list is small, so load all active helpdesks and let the select
-  // filter client-side; there is no server-side name search on this endpoint.
+  // filter client-side; there is no server-side name search on this endpoint,
+  // hence the 'none' search field.
+  //
+  // This must go through createLoadOptions: the select is backed by
+  // react-select-async-paginate, which expects `{ options, hasMore }` rather
+  // than a bare array. Returning the array left the dropdown permanently empty.
   const loadHelpdesks = useMemo(
-    () => async () => {
-      const response = await providerHelpdesksList({
-        query: { is_active: true, page_size: 100 },
-      });
-      return response.data ?? [];
-    },
+    () => createLoadOptions(providerHelpdesksList, 'none', { is_active: true }),
     [],
   );
 
@@ -59,7 +61,9 @@ const RouteToProviderDialog: FC<{
           type: 'async_select',
           loadOptions: loadHelpdesks,
           getOptionLabel: ({ service_provider_name }) => service_provider_name,
+          getOptionValue: ({ uuid }) => uuid,
           required: true,
+          validate: required,
           help_text: translate(
             'The selected provider will receive a new ticket and be notified.',
           ),
