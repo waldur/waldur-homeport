@@ -363,6 +363,80 @@ outrank `hover:bg-[...]`. Their pressed text color splits three ways:
   background to sit on, so the contrast math differs from the solid
   variants above.
 
+## Menu vs. popover, and the `asChild` composition rule
+
+### Which primitive a Metronic dropdown maps to
+
+A Radix `DropdownMenu` is a *menu*: it owns focus with a roving tabindex
+and treats plain keystrokes as typeahead. That is right for a list of
+commands and actively wrong for anything holding a form control — typing
+into a text input inside one either moves the menu selection or never
+reaches the input.
+
+Many of waldur-homeport's Metronic `menu-sub-dropdown` popups are not
+menus in that sense. They hold filter fields, selects, date pickers,
+search boxes and Cancel/Apply footers: `TableFiltersMenu` /
+`TableFilterItem`, `AsyncSearchBox`, `MarketplaceLandingFilter`,
+`BoxRadioField`, `RoleAndProjectSelectField`. `TableColumnsButton` is
+already a react-bootstrap `Popover` (an `OverlayTrigger`, not a
+`Dropdown`) and holds a search box plus dnd-kit drag handles.
+
+**The rule: if it contains anything the user types into or drags, it is a
+`Popover`; if every child is a command row, it is a `DropdownMenu`.**
+Forcing the first group through `DropdownMenu` is the most likely way to
+derail this migration.
+
+`packages/ui/src/Popover.tsx` is the shadcn Popover recipe for that first
+group. Metronic sets `$popover-box-shadow: $dropdown-box-shadow` and
+`$popover-border-radius: $border-radius`, so a popover and a dropdown are
+deliberately the same floating surface here and the two files share those
+token values — but not one exported class constant, because the menu
+panel also carries menu-only concerns (`p-1` item gutter, `min-w-40`, the
+Metronic menu entrance) that a popover holding arbitrary content must not
+inherit. Motion is Bootstrap's own `.fade` (opacity .15s linear), which
+is what the react-bootstrap popovers being replaced actually use.
+
+There is deliberately **no `DropdownMenuCheckboxItem`**. It looks like an
+obvious gap, but nothing in the app is a checkbox inside a *menu*: the
+only checkbox-bearing popup is `TableColumnsButton`, which is a popover.
+Add it when a real consumer appears, not before.
+
+### Every trigger in an `asChild` chain must forward refs and props
+
+Radix's `Slot` clones its immediate child, attaches the ref the popper
+positions against, and merges in `aria-haspopup`/`aria-expanded`/
+`data-state` plus its own pointer and keyboard handlers. Any component in
+that chain that does not forward both breaks it — usually silently, as a
+button that looks correct and does nothing.
+
+Two fixes this required, both prerequisites for migrating any real
+dropdown:
+
+- **`BaseButton` is now `forwardRef`**, and `...rest` reaches the
+  `<button>`. It previously filtered `rest` down to `data-*` props only,
+  which would have swallowed exactly the ARIA and handlers Radix injects.
+  (`data-state` alone would have survived — so the button would even have
+  styled correctly while remaining inert.)
+- **`Tooltip` is now `forwardRef` and relays `...rest`** to its
+  `TooltipPrimitive.Trigger` (already `asChild`, so anything given to it
+  lands on the real element). This matters because a tooltipped button
+  puts `Tooltip` *between* the outer trigger and the `<button>`, so
+  `Slot` clones `Tooltip`, not the button. Its no-label early return uses
+  `Slot` rather than a bare fragment for the same reason — a fragment
+  takes neither ref nor props, so an optional tooltip would otherwise
+  break composition precisely when it is absent.
+
+`TopBar.tsx`'s `IconButton` documents the same requirement at the point
+where getting it wrong once crashed the whole dashboard.
+
+Verified in Storybook (`Core/Popover`) rather than assumed: the trigger
+`<button>` really receives `aria-haspopup="dialog"`/`"menu"`,
+`aria-expanded` and `data-state`; both a plain and a tooltipped
+`BaseButton` open their surface; and real typed keystrokes reach an
+`<input>` inside a `PopoverContent` with the popover staying open and the
+input keeping focus. The 288-case BaseButton visual parity suite still
+passes unchanged, so the `forwardRef` rewrite altered no rendering.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

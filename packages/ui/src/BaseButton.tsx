@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import { cn } from './cn';
 import { LoadingSpinner } from './LoadingSpinner';
@@ -310,63 +310,79 @@ const wrapTooltip = (
   return <Tooltip label={tooltip}>{trigger}</Tooltip>;
 };
 
-export const BaseButton: FC<BaseButtonProps> = ({
-  label,
-  onClick,
-  iconNode,
-  iconRight = false,
-  className,
-  disabled,
-  tooltip,
-  disabledReason,
-  variant,
-  pending,
-  size,
-  type = 'button',
-  id,
-  form,
-  ...rest
-}) => {
-  const isDisabled = disabled || pending;
-  const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
-  const isIconOnly = !label && !!iconNode;
+/**
+ * forwardRef, and `...rest` reaching the <button>, are both requirements
+ * for this to work as a Radix `asChild` trigger (DropdownMenuTrigger,
+ * PopoverTrigger) — the composition every migrated dropdown depends on.
+ * Radix's Slot clones its child, attaches a ref the popper positions
+ * against, and merges in aria-haspopup/aria-expanded/data-state plus its
+ * own pointer/keyboard handlers. A plain FC drops the ref (React's
+ * "Function components cannot be given refs"), and the previous
+ * data-*-only filter on `rest` silently swallowed the ARIA and the
+ * handlers, leaving a button that looks right and does nothing. See
+ * TopBar.tsx's IconButton for the same requirement stated at that
+ * component.
+ */
+export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
+  (
+    {
+      label,
+      onClick,
+      iconNode,
+      iconRight = false,
+      className,
+      disabled,
+      tooltip,
+      disabledReason,
+      variant,
+      pending,
+      size,
+      type = 'button',
+      id,
+      form,
+      ...rest
+    },
+    ref,
+  ) => {
+    const isDisabled = disabled || pending;
+    const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
+    const isIconOnly = !label && !!iconNode;
 
-  const iconSizeClass = size === 'sm' ? 'size-4' : 'size-5';
-  const iconElement = iconNode && (
-    <span className={cn('inline-flex shrink-0', iconSizeClass)}>
-      {iconNode}
-    </span>
-  );
+    const iconSizeClass = size === 'sm' ? 'size-4' : 'size-5';
+    const iconElement = iconNode && (
+      <span className={cn('inline-flex shrink-0', iconSizeClass)}>
+        {iconNode}
+      </span>
+    );
 
-  const dataProps = Object.fromEntries(
-    Object.entries(rest).filter(([key]) => key.startsWith('data-')),
-  );
-
-  return wrapTooltip(
-    effectiveTooltip,
-    <button
-      id={id}
-      type={type}
-      className={cn(
-        buttonVariants({ variant, size, iconOnly: isIconOnly }),
-        className,
-      )}
-      onClick={onClick}
-      disabled={isDisabled}
-      form={form}
-      aria-label={
-        !label && typeof effectiveTooltip === 'string'
-          ? effectiveTooltip
-          : undefined
-      }
-      {...dataProps}
-    >
-      {pending && <LoadingSpinner className={label ? 'me-1' : undefined} />}
-      {!pending && !iconRight && iconElement}
-      {label}
-      {!pending && iconRight && iconElement}
-    </button>,
-    isDisabled,
-    typeof className === 'string' && /\bw-100\b/.test(className),
-  );
-};
+    return wrapTooltip(
+      effectiveTooltip,
+      <button
+        ref={ref}
+        id={id}
+        type={type}
+        className={cn(
+          buttonVariants({ variant, size, iconOnly: isIconOnly }),
+          className,
+        )}
+        onClick={onClick}
+        disabled={isDisabled}
+        form={form}
+        aria-label={
+          !label && typeof effectiveTooltip === 'string'
+            ? effectiveTooltip
+            : undefined
+        }
+        {...rest}
+      >
+        {pending && <LoadingSpinner className={label ? 'me-1' : undefined} />}
+        {!pending && !iconRight && iconElement}
+        {label}
+        {!pending && iconRight && iconElement}
+      </button>,
+      isDisabled,
+      typeof className === 'string' && /\bw-100\b/.test(className),
+    );
+  },
+);
+BaseButton.displayName = 'BaseButton';
