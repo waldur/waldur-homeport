@@ -1336,6 +1336,135 @@ have been unset/`"all 0s ease 0s"`), confirming the reverse animation now
 has something to animate with. Full suite: 528 test files / 3519 tests
 pass (0 flaky this run), 0 lint errors, tsc clean, build passes.
 
+## Migrating the remaining Metronic menus
+
+The last real cluster of `data-kt-menu-trigger`/`MenuComponent`-driven
+floating menus in the app, requested directly ("migrate remaining
+metronic menu to radix") rather than surfaced by a live bug report like
+the fixes above. Five files, in increasing order of coupling:
+
+- `src/core/async/AsyncSearchBox.tsx` — a search input that opens a
+  results dropdown as the user types.
+- `src/marketplace/deploy/steps/BoxRadioField.tsx` — a per-choice
+  "version" options dropdown nested inside a radio card.
+- `src/invitations/actions/create/RoleAndProjectSelectField.tsx` — a
+  two-level role→project picker with its own search input.
+- `src/table/TableFiltersMenu.tsx` / `TableFilterItem.tsx` /
+  `TableBody.tsx`'s `InlineFilterButton` — the table filters subsystem:
+  three files sharing `TableFilterContext` and, previously, global
+  `MenuComponent.hideDropdowns(null)`/`.reinitialization()`/`.getInstance()`
+  calls, converted together as one unit rather than incrementally (asked
+  and confirmed with the user first, given the coupling).
+
+### Why Popover, not DropdownMenu, for all five
+
+Every one of these panels holds a real form control — a search input,
+`WindowedSelect`, a `Select`, a filter's own arbitrary field — so all
+five use `RadixPopover`, never `RadixDropdownMenu`. This is the same
+reasoning as `ActionsPopoverComponent` earlier in this migration: a
+DropdownMenu owns focus with a roving tabindex and treats keys as
+typeahead over its own item collection, which steals keystrokes from a
+focused text input the moment one matches a sibling row's label. Every
+one of these five files' tests deliberately re-runs that adversarial
+check — type a full word into the panel's own input, assert every
+character landed — rather than just asserting the panel opens, since
+"opens correctly" alone doesn't catch this class of bug.
+
+### `TableFiltersMenu`'s nested nature: `FlyoutRow`
+
+`SaveFilterItems`'s "Current filters"/"Saved filters" rows, and every
+individual `TableFilterItem`, fly out a sub-panel to the *right* of the
+outer list — core's own `.menu-sub` flyout shape. Radix's Popover has no
+built-in "Sub" the way DropdownMenu does, but nesting one Popover inside
+another's Content works fine (each has its own independent open state),
+so `FlyoutRow` (`TableFiltersMenu.tsx`) is that pattern factored out:
+`RadixPopover.Root` + `Trigger asChild` on the row + `Content` on the
+flyout, reusing `.menu-sub menu-sub-dropdown show` exactly like every
+other Radix-driven panel in this migration.
+
+### The `apply`/`hideMenu` → `setOpen` translation
+
+`TableFiltersMenu`'s own `apply(hideMenu)` used to close via the global
+`MenuComponent.hideDropdowns(null)` — closes *whatever* Metronic menu is
+currently open, anywhere. That doesn't exist for Radix; each menu is its
+own component with its own state. `TableFiltersMenu` now owns `open`
+itself and its `apply` override calls `setOpen(false)` directly, and
+`TableFilterItem`'s own "Cancel" button (for `instantApply={false}`
+filters) now closes only *that filter's own* flyout via its own local
+`setOpen(false)` rather than the outer menu — arguably a **behavior
+improvement**, not just a faithful port: the original global close would
+have closed the *entire* filters menu on Cancel, not just backed out to
+the filter list, which was never clearly the intent (a Metronic default
+side effect of "close whatever's open" being the only tool available,
+not a deliberate design choice).
+
+### `openMenuName`/`menuIsOpen`: the auto-open-a-specific-filter feature
+
+Clicking a column header's own funnel icon should jump straight to that
+column's filter, not the general list — Metronic's version did this
+imperatively, firing `menuInstance.show(item)` from a listener on the
+*outer* menu's own `kt.menu.dropdown.shown` event. Both are threaded
+through `TableFilterContext` now: `openMenuName` (which filter, from
+`TableFiltersMenu`'s own `openName` prop) and `menuIsOpen` (whether the
+outer Popover is currently open). `TableFilterItem` reacts to
+`menuIsOpen` transitioning to `true` by opening its own flyout if its
+name matches — keyed off *visibility*, not mount, for a reason covered
+next.
+
+### A real regression caught before shipping: `hasFilterMenu()`'s DOM query
+
+`TableBody.tsx`'s `hasFilterMenu(column.filter)` decides whether to
+render a cell's inline-filter shortcut by directly querying the DOM —
+`document.querySelector('#kt_content_container .table-filters-menu
+#filter-item-' + key)` — for a filter row with that id. Metronic's own
+`.menu-sub-dropdown` was *always* mounted (just CSS-hidden via
+`display: none` until `.show`), so this worked regardless of whether the
+menu had ever been opened. Radix's Popover.Content, by default, doesn't
+render its children at all until first opened — swapping to Radix as-is
+would have made `hasFilterMenu()` wrongly return false (hiding the
+inline-filter shortcut) any time the "Add filter"/column-toggle menu
+happened to be closed, which is most of the time. Caught by writing a
+regression test for it (`TableFiltersMenu.test.tsx`), not by inspection —
+worth calling out because it's exactly the kind of silent breakage this
+migration's "exhaustive consumer audit" habit exists to catch, in a
+place a straightforward per-file audit wouldn't have looked (a *different
+file*, `TableBody.tsx`, reading a DOM side effect of this one).
+
+Fixed with `forceMount` on both `Popover.Content` and its `Portal`, plus
+threading the `show` class through conditionally on the `open` state
+instead of hardcoding it — restoring the original "always mounted,
+CSS-hidden" shape exactly. This is also *why* `menuIsOpen` (previous
+section) has to be a separate signal from mount: with `forceMount`,
+`TableFilterItem` now mounts immediately on page load rather than only
+once its menu opens, so the "auto-open the matching filter" effect can no
+longer key off its own mount — it must key off the menu becoming
+*visible*, which happens later and possibly more than once.
+
+### Deliberately left alone: the sidebar accordion tree
+
+`MenuAccordion.tsx`, `ResourcesMenu.tsx`'s `CustomToggle`, and
+`MenuItem.tsx` still carry `data-kt-menu-trigger`/`MenuComponent` calls
+(as does `MasterInit.tsx`'s global `MenuComponent.bootstrap()`, still
+needed to keep this working). Confirmed by reading, not assumed: these
+render `.menu-sub-accordion` — Metronic's *in-flow* expand/collapse
+navigation tree, not a floating popup at all, and per `NavMenu.tsx`'s own
+top-of-file comment from earlier in this migration, deliberately out of
+scope — it belongs to a different Radix primitive entirely
+(Collapsible/Accordion), not `DropdownMenu`/`Popover`. Grepping for every
+`data-kt-menu-trigger`/`MenuComponent` reference after this batch
+confirms nothing outside this tree remains.
+
+### Verification
+
+Added a permanent regression test per file (six new test files/additions
+total, including the `hasFilterMenu()` one above), each exercising the
+real component chain unmocked — `StringFilter` → `withTableFilter` →
+`TableFilterItem`, `RoleAndProjectSelectField` → `Form` → the real
+two-level popup, etc. — matching this migration's established "test the
+real host, don't mock the thing you just changed" discipline. Full
+suite: 532 test files / 3532 tests pass (0 flaky), 0 lint errors, tsc
+clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

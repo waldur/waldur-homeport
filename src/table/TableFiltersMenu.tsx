@@ -5,17 +5,9 @@ import {
   PlusIcon,
   StarIcon,
 } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
-import { throttle } from 'lodash-es';
-import {
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { FC, useCallback, useContext, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,7 +15,6 @@ import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { MenuComponent } from '@/metronic/components';
 import { useModal } from '@/modal/actions';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
@@ -43,6 +34,48 @@ const SaveFilterDialog = lazyComponent(() =>
   import('./SaveFilterDialog').then((module) => ({
     default: module.SaveFilterDialog,
   })),
+);
+
+/**
+ * A row that flies out a sub-panel to the right on click — the same shape
+ * as core's own `.menu-sub` flyout, but on a Radix Popover (its own
+ * independent open state) rather than DropdownMenu.Sub: the flyouts here
+ * hold real form controls (SavedFilterSelect's WindowedSelect below, and
+ * every individual filter's own input in TableFilterItem.tsx), and a
+ * DropdownMenu's roving-tabindex/typeahead collection steals keystrokes
+ * from a focused text input the moment one matches a sibling item's label
+ * (confirmed empirically for ScriptEditorHeader.tsx's search box earlier
+ * in this migration — see ActionsPopoverComponent's own comment in
+ * ActionsDropdown.tsx). Popover has no such collection, so nesting one
+ * inside another's Content is safe.
+ */
+const FlyoutRow: FC<
+  React.PropsWithChildren<{
+    label: string;
+    icon: React.ReactNode;
+    content: React.ReactNode;
+    onOpenChange?(open: boolean): void;
+  }>
+> = ({ label, icon, content, onOpenChange }) => (
+  <RadixPopover.Root modal={false} onOpenChange={onOpenChange}>
+    <RadixPopover.Trigger asChild>
+      <span className="menu-link" role="button">
+        <span className="menu-title">{label}</span>
+        {icon}
+      </span>
+    </RadixPopover.Trigger>
+    <RadixPopover.Portal>
+      <RadixPopover.Content
+        side="right"
+        align="start"
+        sideOffset={2}
+        data-popper-placement="right-start"
+        className="menu-sub menu-sub-dropdown show w-250px py-3 shadow-sm"
+      >
+        {content}
+      </RadixPopover.Content>
+    </RadixPopover.Portal>
+  </RadixPopover.Root>
 );
 
 const SaveFilterItems = ({ table, formId, apply }) => {
@@ -115,80 +148,66 @@ const SaveFilterItems = ({ table, formId, apply }) => {
   return (
     <>
       {(hasFiltersApplied || selectedSavedFilter) && (
-        <div
-          className="menu-item"
-          data-kt-menu-trigger="click"
-          data-kt-menu-placement="right-start"
-        >
-          <span className="menu-link" aria-hidden="true">
-            <span className="menu-title">{translate('Current filters')}</span>
-            <CaretRightIcon size={20} className="ms-auto" weight="bold" />
-          </span>
-
-          <div className="menu-sub menu-sub-dropdown w-250px py-3 shadow-sm">
-            <span
-              className="menu-link"
-              aria-hidden="true"
-              onClick={onSaveFilter}
-            >
-              <span className="menu-title">{translate('Save as')}</span>
-              <StarIcon size={20} className="ms-auto" weight="bold" />
-            </span>
-            {selectedSavedFilter ? (
-              <span
-                className="menu-link"
-                aria-hidden="true"
-                onClick={(e) => onSaveFilter(e, true)}
-              >
-                {translate('Update')}
-                <ArrowsClockwiseIcon
-                  size={20}
-                  className="ms-auto"
-                  weight="bold"
-                />
-              </span>
-            ) : null}
-          </div>
+        <div className="menu-item">
+          <FlyoutRow
+            label={translate('Current filters')}
+            icon={
+              <CaretRightIcon size={20} className="ms-auto" weight="bold" />
+            }
+            content={
+              <>
+                <span
+                  className="menu-link"
+                  aria-hidden="true"
+                  onClick={onSaveFilter}
+                >
+                  <span className="menu-title">{translate('Save as')}</span>
+                  <StarIcon size={20} className="ms-auto" weight="bold" />
+                </span>
+                {selectedSavedFilter ? (
+                  <span
+                    className="menu-link"
+                    aria-hidden="true"
+                    onClick={(e) => onSaveFilter(e, true)}
+                  >
+                    {translate('Update')}
+                    <ArrowsClockwiseIcon
+                      size={20}
+                      className="ms-auto"
+                      weight="bold"
+                    />
+                  </span>
+                ) : null}
+              </>
+            }
+          />
         </div>
       )}
-      <div
-        className="menu-item"
-        data-kt-menu-trigger="click"
-        data-kt-menu-placement="right-start"
-      >
-        <span className="menu-link" aria-hidden="true">
-          <span className="menu-title">
-            {translate('Saved filters ({count})', { count: list.length })}
-          </span>
-          <CaretRightIcon size={20} className="ms-auto" weight="bold" />
-        </span>
-
-        <div className="menu-sub menu-sub-dropdown w-250px py-3 shadow-sm">
-          <div className="menu-item">
-            <div
-              className="menu-content filter-field"
-              onClick={(e) => e.stopPropagation()}
-              aria-hidden="true"
-            >
-              <SavedFilterSelect
-                table={table}
-                formId={formId}
-                filterPosition="menu"
-                onSelect={apply}
-              />
+      <div className="menu-item">
+        <FlyoutRow
+          label={translate('Saved filters ({count})', { count: list.length })}
+          icon={<CaretRightIcon size={20} className="ms-auto" weight="bold" />}
+          content={
+            <div className="menu-item">
+              <div
+                className="menu-content filter-field"
+                onClick={(e) => e.stopPropagation()}
+                aria-hidden="true"
+              >
+                <SavedFilterSelect
+                  table={table}
+                  formId={formId}
+                  filterPosition="menu"
+                  onSelect={apply}
+                />
+              </div>
             </div>
-          </div>
-        </div>
+          }
+        />
       </div>
     </>
   );
 };
-
-const openSubmenu = throttle(
-  (menuInstance, item) => menuInstance.show(item),
-  100,
-  { leading: false },
-);
 
 interface TableFiltersMenuProps extends Pick<
   TableProps,
@@ -207,110 +226,131 @@ interface TableFiltersMenuProps extends Pick<
 
 export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
   const context = useContext(TableFilterContext);
-
-  const menuEl = useRef<HTMLDivElement>(null);
-  const menuInstance = useRef(null);
-
-  useEffect(() => {
-    MenuComponent.reinitialization();
-  }, []);
-
-  // Add show event listener on menu
-  useEffect(() => {
-    if (menuEl?.current) {
-      menuInstance.current = MenuComponent.getInstance(menuEl.current);
-      if (menuInstance.current) {
-        menuInstance.current.on('kt.menu.dropdown.shown', () => {
-          props.applyFiltersFn(false);
-          if (props.openName) {
-            const item = menuEl.current.querySelector(
-              '#filter-item-' + props.openName,
-            );
-            openSubmenu(menuInstance.current, item);
-          }
-        });
-      }
-    }
-  }, [menuEl?.current]);
+  const [open, setOpen] = useState(false);
 
   const apply = useCallback(
     (hideMenu = true) => {
       props.applyFiltersFn(true);
       if (hideMenu) {
-        // A small delay is needed for the popup listener to be updated with new filters data and then fired
-        setTimeout(() => {
-          MenuComponent.hideDropdowns(null);
-        }, 100);
+        setOpen(false);
       }
       if (props.toggleFilterMenu) props.toggleFilterMenu(true);
     },
     [props.applyFiltersFn, props.toggleFilterMenu],
   );
 
-  const [existed, setExisted] = useState(true);
-  useEffect(() => {
-    if (props.openName && menuEl?.current) {
-      const item = menuEl.current.querySelector(
-        '#filter-item-' + props.openName,
-      );
-      if (!item) setExisted(false);
-    }
-  }, [menuEl?.current, props.openName, setExisted]);
-
+  // The column-filter toggle only makes sense if a filter with this exact
+  // name is actually among `props.filters` — otherwise it opened an empty
+  // menu for a column whose filter was removed/renamed. The previous
+  // Metronic version checked this by querying the *always-mounted*
+  // (CSS-hidden) content div, which Radix's conditional mounting doesn't
+  // allow before the first open; checking the filters themselves instead
+  // works whether or not the menu has ever opened.
+  const existed =
+    !props.openName ||
+    React.Children.toArray(props.filters).some(
+      (child: any) => child?.props?.name === props.openName,
+    );
   if (!existed) return null;
 
   return (
-    <TableFilterContext.Provider value={{ ...context, apply }}>
-      {props.openName ? (
-        <>
-          <button
-            type="button"
-            className={classNames(COLUMN_FILTER_TOGGLE_CLASS, 'text-btn')}
-            data-kt-menu-trigger="click"
-            data-kt-menu-attach="parent"
-            data-kt-menu-placement="bottom"
-            data-kt-menu-flip="bottom"
-          >
-            <FunnelSimpleIcon size={16} weight="bold" />
-          </button>
-          <div
-            ref={menuEl}
-            className="table-filters-menu column-filter menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold fs-6"
-            data-kt-menu="true"
-          >
-            {props.filters}
-          </div>
-        </>
-      ) : (
-        <Tip id="table-add-filter-tip" label={translate('Add filter')}>
-          <Button
-            variant="secondary"
-            size="sm"
-            className="btn-icon btn-add-filter"
-            data-kt-menu-trigger="click"
-            data-kt-menu-attach="parent"
-            data-kt-menu-placement="bottom-start"
-          >
-            <span className="svg-icon svg-icon-4">
-              <PlusIcon weight="bold" />
-            </span>
-          </Button>
-          <div
-            ref={menuEl}
-            className="table-filters-menu menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-gray fw-bold py-1 fs-6 w-250px"
-            data-kt-menu="true"
-          >
-            <SaveFilterItems
-              table={props.table}
-              formId={context.form}
-              apply={() => props.applyFiltersFn(true)}
-            />
+    <TableFilterContext.Provider
+      value={{
+        ...context,
+        apply,
+        openMenuName: props.openName,
+        menuIsOpen: open,
+      }}
+    >
+      <RadixPopover.Root
+        open={open}
+        onOpenChange={(next) => {
+          setOpen(next);
+          if (next) props.applyFiltersFn(false);
+        }}
+        modal={false}
+      >
+        {props.openName ? (
+          <>
+            <RadixPopover.Trigger asChild>
+              <button
+                type="button"
+                aria-label={translate('Filter by column')}
+                className={classNames(COLUMN_FILTER_TOGGLE_CLASS, 'text-btn')}
+              >
+                <FunnelSimpleIcon size={16} weight="bold" />
+              </button>
+            </RadixPopover.Trigger>
+            <RadixPopover.Portal forceMount>
+              {/* forceMount + a conditional `show` class, rather than
+                  letting Radix unmount this while closed (its default):
+                  TableBody.tsx's hasFilterMenu() decides whether to show
+                  a cell's inline-filter shortcut by directly querying the
+                  DOM for `#filter-item-{name}` inside `.table-filters-menu`
+                  — a check that assumed Metronic's own always-mounted,
+                  CSS-hidden markup, and would wrongly find nothing (hiding
+                  the shortcut) whenever this menu just happens to be
+                  closed, which is most of the time. */}
+              <RadixPopover.Content
+                forceMount
+                side="bottom"
+                align="start"
+                sideOffset={2}
+                data-popper-placement="bottom"
+                className={classNames(
+                  'table-filters-menu column-filter menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold fs-6',
+                  open && 'show',
+                )}
+              >
+                {props.filters}
+              </RadixPopover.Content>
+            </RadixPopover.Portal>
+          </>
+        ) : (
+          <>
+            <RadixPopover.Trigger asChild>
+              <Tip id="table-add-filter-tip" label={translate('Add filter')}>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  aria-label={translate('Add filter')}
+                  className="btn-icon btn-add-filter"
+                >
+                  <span className="svg-icon svg-icon-4">
+                    <PlusIcon weight="bold" />
+                  </span>
+                </Button>
+              </Tip>
+            </RadixPopover.Trigger>
+            {/* forceMount + conditional `show` — same reasoning as the
+                column-filter toggle's Content above. */}
+            <RadixPopover.Portal forceMount>
+              <RadixPopover.Content
+                forceMount
+                side="bottom"
+                align="start"
+                sideOffset={2}
+                data-popper-placement="bottom-start"
+                className={classNames(
+                  'table-filters-menu menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-gray fw-bold py-1 fs-6 w-250px',
+                  open && 'show',
+                )}
+              >
+                <SaveFilterItems
+                  table={props.table}
+                  formId={context.form}
+                  apply={() => props.applyFiltersFn(true)}
+                />
 
-            <div className="separator" />
-            {props.filters}
-          </div>
-        </Tip>
-      )}
+                <div className="separator" />
+                {props.filters}
+              </RadixPopover.Content>
+            </RadixPopover.Portal>
+          </>
+        )}
+      </RadixPopover.Root>
     </TableFilterContext.Provider>
   );
 };
+
+export { FlyoutRow };

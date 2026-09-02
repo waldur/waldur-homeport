@@ -4,14 +4,15 @@ import {
   SquareLogoIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import React, {
   Fragment,
   FunctionComponent,
   memo,
   useCallback,
-  useEffect,
   useMemo,
+  useState,
 } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
@@ -20,7 +21,6 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Tip } from '@/core/Tooltip';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { translate } from '@/i18n';
-import { MenuComponent } from '@/metronic/components';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
@@ -73,6 +73,7 @@ interface TableCellsProps {
 const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
   const { filterComponents, apply, changeFilterValue } =
     React.useContext(TableFilterContext);
+  const [open, setOpen] = useState(false);
 
   const callback = useCallback(() => {
     const filterConfig = filterComponents.find(
@@ -82,42 +83,53 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
     filterConfig.setFilter(value);
     changeFilterValue(column.filter, value);
     apply();
+    // Metronic's own dropdown closed on any non-trigger row click by
+    // default; the context `apply` this calls (FilterContextProvider's
+    // base one, not TableFiltersMenu's override — this button isn't
+    // nested inside that menu) does no closing of its own, so it's done
+    // explicitly here instead.
+    setOpen(false);
   }, [filterComponents, column, row, changeFilterValue, apply]);
 
   return (
-    <>
-      <button
-        type="button"
-        className="inline-filter btn btn-icon btn-sm btn-tertiary icon-align"
-        data-kt-menu-trigger="click"
-        data-kt-menu-placement="bottom"
-      >
-        <Tip
-          id={'tip-filter-' + column.title.toString().slice(0, 2) + row.uuid}
-          label={translate('Add filter')}
-          delay={{ show: 1000, hide: 0 }}
+    <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
+      <RadixPopover.Trigger asChild>
+        <button
+          type="button"
+          className="inline-filter btn btn-icon btn-sm btn-tertiary icon-align"
         >
-          <FunnelSimpleIcon weight="bold" size={20} />
-        </Tip>
-      </button>
-      <div
-        className="menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
-        data-kt-menu="true"
-      >
-        <div className="menu-item">
-          <span
-            className="menu-link px-5 py-3"
-            aria-hidden="true"
-            onClick={callback}
+          <Tip
+            id={'tip-filter-' + column.title.toString().slice(0, 2) + row.uuid}
+            label={translate('Add filter')}
+            delay={{ show: 1000, hide: 0 }}
           >
-            <span className="menu-icon w-auto me-4">
-              <SquareLogoIcon weight="bold" size={20} />
+            <FunnelSimpleIcon weight="bold" size={20} />
+          </Tip>
+        </button>
+      </RadixPopover.Trigger>
+      <RadixPopover.Portal>
+        <RadixPopover.Content
+          side="bottom"
+          align="start"
+          sideOffset={2}
+          data-popper-placement="bottom"
+          className="menu menu-sub menu-sub-dropdown show menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
+        >
+          <div className="menu-item">
+            <span
+              className="menu-link px-5 py-3"
+              aria-hidden="true"
+              onClick={callback}
+            >
+              <span className="menu-icon w-auto me-4">
+                <SquareLogoIcon weight="bold" size={20} />
+              </span>
+              <span className="menu-title">{translate('Filter by')}</span>
             </span>
-            <span className="menu-title">{translate('Filter by')}</span>
-          </span>
-        </div>
-      </div>
-    </>
+          </div>
+        </RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
   );
 });
 
@@ -658,11 +670,6 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
       },
       [fieldType, rowKey],
     );
-
-    // Re-initialize menu popups when the rows are changed, so that the cell-filter popups works properly.
-    useEffect(() => {
-      MenuComponent.reinitialization();
-    }, [rows?.length]);
 
     const renderRow = useCallback(
       (

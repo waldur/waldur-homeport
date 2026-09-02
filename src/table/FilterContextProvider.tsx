@@ -17,6 +17,17 @@ interface ITableFilterContext {
   changeFilterValue?: (name: string, value: any) => void;
   setFilter: (item: FilterItem) => void;
   apply?: (hideMenu?: boolean) => void;
+  /** The filter name TableFiltersMenu's column-filter toggle should
+   * auto-open once its own menu becomes visible (its own `openName`
+   * prop, threaded through context so TableFilterItem's per-filter row
+   * can read it without further prop drilling). Paired with
+   * `menuIsOpen` below — TableFiltersMenu's content is force-mounted
+   * (see its own comment for why), so a filter's row exists in the DOM
+   * well before its enclosing menu is ever opened; the auto-open must
+   * key off visibility, not mount. */
+  openMenuName?: string;
+  /** Whether TableFiltersMenu's own Popover is currently open. */
+  menuIsOpen?: boolean;
   columnFilter?: boolean;
   selectedSavedFilter?: TableState['selectedSavedFilter'];
   filterComponents?: any[];

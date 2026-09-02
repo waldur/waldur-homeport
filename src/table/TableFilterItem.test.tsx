@@ -1,6 +1,12 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { combineReducers, legacy_createStore as createStore } from 'redux';
 import { describe, it, expect, vi } from 'vitest';
 
+import { TableFilterContext } from './FilterContextProvider';
+import { StringFilter } from './filters';
+import { tableInitialReducer } from './store';
 import { TableSidebarFilterValues } from './TableFilterItem';
 
 describe('TableSidebarFilterValues', () => {
@@ -118,5 +124,68 @@ describe('TableSidebarFilterValues', () => {
       />,
     );
     expect(screen.getByText('Custom Badge')).toBeInTheDocument();
+  });
+});
+
+/**
+ * Regression coverage for the Radix conversion: TableMenuFilterItem
+ * (filterPosition="menu") used to rely on Metronic's own
+ * data-kt-menu-trigger flyout and a MutationObserver watching for its
+ * `.show` class. Both are gone now — this exercises the real
+ * StringFilter -> withTableFilter -> TableFilterItem chain, unmocked,
+ * the same way ActionsPopoverComponent's own typeahead fix was verified
+ * earlier in this migration: type a full word into the flyout's input
+ * and confirm every keystroke lands, not just enough to prove it opens.
+ */
+describe('TableMenuFilterItem (filterPosition="menu")', () => {
+  const renderMenuFilter = (apply = vi.fn()) => {
+    const table = 'MenuFilterRegressionTable';
+    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    render(
+      <Provider store={store}>
+        <TableFilterContext.Provider
+          value={{
+            table,
+            filterPosition: 'menu',
+            form: 'MenuFilterRegressionForm',
+            setFilter: () => undefined,
+            registerFilterComponent: () => undefined,
+            apply,
+          }}
+        >
+          <StringFilter
+            title="Catalog"
+            name="catalog_name"
+            placeholder="Catalog"
+            instantApply={false}
+          />
+        </TableFilterContext.Provider>
+      </Provider>,
+    );
+    return { apply };
+  };
+
+  it('opens the flyout on click and the input accepts a full word', async () => {
+    const user = userEvent.setup();
+    renderMenuFilter();
+
+    expect(() => screen.getByRole('button', { name: 'Catalog' })).not.toThrow();
+    await user.click(screen.getByRole('button', { name: 'Catalog' }));
+
+    const input = await screen.findByPlaceholderText('Catalog');
+    await user.type(input, 'eessi');
+    expect(input).toHaveValue('eessi');
+  });
+
+  it('Cancel closes only this flyout without calling apply', async () => {
+    const user = userEvent.setup();
+    const { apply } = renderMenuFilter();
+
+    await user.click(screen.getByRole('button', { name: 'Catalog' }));
+    await screen.findByPlaceholderText('Catalog');
+    await user.click(screen.getByRole('button', { name: 'Cancel' }));
+
+    expect(screen.queryByPlaceholderText('Catalog')).not.toBeInTheDocument();
+    expect(apply).not.toHaveBeenCalled();
   });
 });

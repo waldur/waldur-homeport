@@ -1,4 +1,5 @@
 import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import React, {
@@ -17,7 +18,6 @@ import { Badge } from '@/core/Badge';
 import { RemoveFilterBadgeButton } from '@/core/RemoveFilterBadgeButton';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { MenuComponent } from '@/metronic/components';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { selectFilterValues } from './selectors';
@@ -296,6 +296,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     columnFilter,
     selectedSavedFilter,
     registerFilterComponent,
+    openMenuName,
+    menuIsOpen,
   } = React.useContext(TableFilterContext);
   const values = useSelector(selectFilterValues(table));
 
@@ -394,91 +396,87 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     apply(hideMenu);
   };
 
-  const [shown, setShown] = useState(false);
-  const menuEl = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
 
-  // Use MutationObserver to detect when menu-sub gets 'show' class added/removed
+  // The column-filter toggle's funnel icon (TableFiltersMenu.tsx) opens
+  // this exact filter's flyout directly rather than the outer filter
+  // list — Metronic's own version imperatively called
+  // `menuInstance.show(item)` from a listener on the *outer* menu's own
+  // "shown" event, so this keys off `menuIsOpen` (TableFiltersMenu's own
+  // Popover state) rather than this component's mount: its own content
+  // is force-mounted (see that file's comment) well before the outer
+  // menu is ever opened, precisely so a filter's row exists in the DOM
+  // for TableBody.tsx's hasFilterMenu() check regardless of visibility —
+  // auto-opening on mount would fire immediately on page load instead of
+  // when the user actually opens the menu.
   useEffect(() => {
-    if (!menuEl.current) return;
-
-    const observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.attributeName === 'class') {
-          const hasShow = menuEl.current?.classList.contains('show') ?? false;
-          setShown(hasShow);
-        }
-      }
-    });
-
-    observer.observe(menuEl.current, { attributes: true });
-
-    // Check initial state
-    setShown(menuEl.current.classList.contains('show'));
-
-    return () => observer.disconnect();
-  }, []);
+    if (menuIsOpen && openMenuName === props.name) setOpen(true);
+  }, [menuIsOpen, openMenuName, props.name]);
 
   useEffect(() => {
-    if (shown && instantApply) {
+    if (open && instantApply) {
       // Don't hide menu when value changes (e.g., during typing)
       onApply(false);
     }
   }, [itemValue]);
 
   return (
-    <div
-      id={`filter-item-${props.name}`}
-      className="menu-item"
-      data-kt-menu-trigger="click"
-      data-kt-menu-placement={columnFilter ? 'bottom' : 'right-start'}
-    >
-      <span className="menu-link" aria-hidden="true">
-        <span className="menu-title">{props.title}</span>
-        <CaretRightIcon size={20} className="ms-auto" weight="bold" />
-      </span>
-
-      <div
-        ref={menuEl}
-        className="menu-sub menu-sub-dropdown w-375px py-3 shadow-sm"
-      >
-        <div className="menu-item">
-          <div
-            className="menu-content filter-field"
-            onClick={(e) => e.stopPropagation()}
-            aria-hidden="true"
+    <div id={`filter-item-${props.name}`} className="menu-item">
+      <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
+        <RadixPopover.Trigger asChild>
+          <span className="menu-link" role="button">
+            <span className="menu-title">{props.title}</span>
+            <CaretRightIcon size={20} className="ms-auto" weight="bold" />
+          </span>
+        </RadixPopover.Trigger>
+        <RadixPopover.Portal>
+          <RadixPopover.Content
+            side={columnFilter ? 'bottom' : 'right'}
+            align="start"
+            sideOffset={2}
+            data-popper-placement={columnFilter ? 'bottom' : 'right-start'}
+            className="menu-sub menu-sub-dropdown show w-375px py-3 shadow-sm"
           >
-            {shown && props.children}
-          </div>
-        </div>
-        {!instantApply && (
-          <>
-            <div className="separator" />
             <div className="menu-item">
-              {shown && (
-                <div className="menu-content filter-footer pb-0">
-                  <div className="d-flex gap-4">
-                    <SubmitButton
-                      submitting={false}
-                      variant="tertiary"
-                      className="flex-grow-1 w-50"
-                      onClick={() => MenuComponent.hideDropdowns(null)}
-                      type="button"
-                      label={translate('Cancel')}
-                    />
-                    <SubmitButton
-                      submitting={false}
-                      className="flex-grow-1 w-50"
-                      onClick={() => onApply()}
-                      type="button"
-                      label={translate('Apply')}
-                    />
-                  </div>
-                </div>
-              )}
+              <div
+                className="menu-content filter-field"
+                onClick={(e) => e.stopPropagation()}
+                aria-hidden="true"
+              >
+                {open && props.children}
+              </div>
             </div>
-          </>
-        )}
-      </div>
+            {!instantApply && (
+              <>
+                <div className="separator" />
+                <div className="menu-item">
+                  {open && (
+                    <div className="menu-content filter-footer pb-0">
+                      <div className="d-flex gap-4">
+                        <SubmitButton
+                          submitting={false}
+                          variant="tertiary"
+                          className="flex-grow-1 w-50"
+                          onClick={() => setOpen(false)}
+                          type="button"
+                          label={translate('Cancel')}
+                        />
+                        <SubmitButton
+                          submitting={false}
+                          className="flex-grow-1 w-50"
+                          onClick={() => onApply()}
+                          type="button"
+                          label={translate('Apply')}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+          </RadixPopover.Content>
+        </RadixPopover.Portal>
+      </RadixPopover.Root>
     </div>
   );
 };

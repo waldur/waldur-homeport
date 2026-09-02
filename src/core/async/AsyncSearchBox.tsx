@@ -1,16 +1,15 @@
+import * as RadixPopover from '@radix-ui/react-popover';
 import {
   InfiniteData,
   QueryFunction,
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { DataPage, processApiResponse, SdkFunction } from '@/table/api';
-
-import useOnScreen from '../useOnScreen';
 
 import { InfiniteList } from './InfiniteList';
 import { BaseAsyncListProps, RowData } from './types';
@@ -44,6 +43,8 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
     [setQuery],
   );
 
+  const [open, setOpen] = useState(false);
+
   type TypedPage = DataPage<RowData<Fetcher>>;
 
   const queryFn: QueryFunction<TypedPage, unknown[], number> = async ({
@@ -71,41 +72,63 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
     enabled,
   });
 
-  const refPopup = useRef<HTMLInputElement>();
-  const isVisible = useOnScreen(refPopup);
-  // Start fetching data when popup is visible
-  useEffect(() => {
-    if (isVisible) setEnabled(true);
-  }, [isVisible]);
-
   return (
     <div id="search-box-wrapper" className={wrapperClassName}>
-      <div
-        data-kt-menu-trigger="click"
-        data-kt-menu-attach="parent"
-        data-kt-menu-placement="bottom"
-        aria-hidden="true"
+      <RadixPopover.Root
+        open={open}
+        onOpenChange={(next) => {
+          setOpen(next);
+          // Radix only mounts Content once open, which already gives this
+          // the same "don't fetch until visible" laziness the old
+          // IntersectionObserver-based useOnScreen provided — no need to
+          // keep that separate mechanism (and its ref would sit unattached
+          // until first open anyway, since Content isn't in the DOM before
+          // then).
+          if (next) setEnabled(true);
+        }}
+        modal={false}
       >
-        <FilterBox
-          type="search"
-          placeholder={placeholder}
-          onChange={(e) => applyQuery(e.target.value)}
-          className={className}
-        />
-      </div>
-      <div
-        ref={refPopup}
-        className="search-results-dropdown menu menu-sub menu-sub-dropdown menu-column border mw-400px mh-300px py-2"
-        data-kt-menu="true"
-      >
-        <div className="overflow-auto">
-          <InfiniteList
-            RowComponent={RowComponent}
-            context={context}
-            emptyMessage={emptyMessage}
-          />
-        </div>
-      </div>
+        <RadixPopover.Anchor asChild>
+          <div aria-hidden="true">
+            <FilterBox
+              type="search"
+              placeholder={placeholder}
+              onFocus={() => setOpen(true)}
+              onChange={(e) => {
+                applyQuery(e.target.value);
+                setOpen(true);
+              }}
+              className={className}
+            />
+          </div>
+        </RadixPopover.Anchor>
+        <RadixPopover.Portal>
+          <RadixPopover.Content
+            // Keeps focus in the search input instead of Radix's default
+            // of moving it into the panel on open — the user is mid-typing.
+            onOpenAutoFocus={(e) => e.preventDefault()}
+            side="bottom"
+            align="start"
+            sideOffset={2}
+            // data-popper-placement isn't decorative: core's own
+            // .menu-sub-dropdown.show[data-popper-placement] rule
+            // (core/components/menu/_base.scss) gates display:flex behind
+            // its mere presence — see NavMenu.tsx's own top-of-file
+            // comment for the full reasoning, which applies identically
+            // here since this reuses the same Metronic menu classes.
+            data-popper-placement="bottom"
+            className="search-results-dropdown menu menu-sub menu-sub-dropdown show menu-column border mw-400px mh-300px py-2"
+          >
+            <div className="overflow-auto">
+              <InfiniteList
+                RowComponent={RowComponent}
+                context={context}
+                emptyMessage={emptyMessage}
+              />
+            </div>
+          </RadixPopover.Content>
+        </RadixPopover.Portal>
+      </RadixPopover.Root>
     </div>
   );
 };
