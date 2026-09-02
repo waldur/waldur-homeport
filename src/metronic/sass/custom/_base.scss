@@ -71,10 +71,23 @@ body {
   @include svg-icon-color(transparent);
 }
 
+// Named `rotate-toggle-180`, not the more obvious `rotate-180`: Tailwind
+// (enabled app-wide since it's now part of the same bundle) content-scans
+// every source file for class-name-shaped strings and generates a
+// utility for anything matching `rotate-<number>`, regardless of whether
+// the file meant it as a Tailwind class at all. A bare `.rotate-180` here
+// collided with Tailwind's own `.rotate-180 { rotate: 180deg }` utility,
+// which — living in the `utilities` layer, declared last — wins over
+// this rule regardless of specificity or the `.show`/`.active` gating
+// below, unconditionally rotating the icon any time the class is merely
+// present in the DOM (confirmed live: an "Add ▾" toggle stuck rotated
+// while its menu was closed). `rotate-active-90` (FooterDropdown.tsx's
+// arrow) already used this same escape — doesn't parse as a Tailwind
+// rotate value, so it was never affected.
 .collapsible:not(.collapsed),
 .show,
 .active {
-  > .rotate-180 {
+  > .rotate-toggle-180 {
     transform: rotateZ(180deg);
     transition: transform 0.3s ease;
   }

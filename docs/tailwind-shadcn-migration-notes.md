@@ -1075,48 +1075,94 @@ session, that the flicker is gone. Full suite: 526 test files / 3513 tests
 pass (2 pre-existing, unrelated flaky tests confirmed by re-running in
 isolation), 0 lint errors on the changed files, tsc clean, build passes.
 
-## Fix: `ActionsDropdown`'s labeled-toggle caret didn't rotate on open
+## Fix: `ActionsDropdown` toggle carets didn't rotate correctly — two rounds
 
 Reported live via screenshot, right after the animation-stutter fix
 above was confirmed: the "Actions" button's caret (`TableDropdownToggle`
-in labeled mode, `src/table/ActionsDropdown.tsx`) stays pointing down
-while the menu is open, instead of flipping to point up.
+in labeled mode, `src/table/ActionsDropdown.tsx`) stayed pointing down
+while the menu was open, instead of flipping to point up.
 
-Root cause: the caret's rotation comes from a *generic*, non-menu-specific
-rule in `custom/_base.scss` — `.show, .active, .collapsible:not(.collapsed)
-> .rotate-180 { transform: rotateZ(180deg); … }` — which requires the
-*parent* element to carry one of those three classes. A react-bootstrap
-`<Dropdown.Toggle>` added `.show` to the toggle button itself while open,
-satisfying this; `RadixDropdownMenu.Trigger asChild` sets
-`data-state="open"` on that same button instead, which the rule never
-checked for, so the caret was permanently stuck in its closed orientation
-once react-bootstrap's `<Dropdown>` was replaced with
+**Round 1 — the `.show`/`data-state` gap.** The caret's rotation comes
+from a *generic*, non-menu-specific rule in `custom/_base.scss` —
+`.show, .active, .collapsible:not(.collapsed) > .rotate-180 { transform:
+rotateZ(180deg); … }` — which requires the *parent* element to carry one
+of those three classes. A react-bootstrap `<Dropdown.Toggle>` added
+`.show` to the toggle button itself while open, satisfying this;
+`RadixDropdownMenu.Trigger asChild` sets `data-state="open"` on that same
+button instead, which the rule never checked for, so the caret was stuck
+closed once react-bootstrap's `<Dropdown>` was replaced with
 `ActionsDropdownComponent`. Same category of bug as the two entries
 above (`.show`-class styling silently orphaned by a Radix conversion that
-sets `data-state` instead) — this is the third distinct place it's shown
-up, which suggests it's worth grepping for `> .rotate-180`-style parent
-selectors before any *future* Bootstrap/Metronic-menu-to-Radix conversion,
-rather than waiting for each one to surface live.
-
-Fixed in `custom/_dropdown.scss` with a narrowly-scoped bridge —
-`.dropdown-toggle[data-state='open'] > .rotate-180` — rather than adding
-`[data-state='open']` to the shared `_base.scss` rule itself: `.rotate-180`
+sets `data-state` instead). Fixed with a narrowly-scoped bridge in
+`custom/_dropdown.scss` — `.dropdown-toggle[data-state='open'] >
+.rotate-180` — rather than widening the shared `_base.scss` rule, which
 also drives real, unrelated non-Radix collapsibles (`AccordionCard`,
-sidebar menus) that already work correctly off `.show`/`.active`, and
-widening the shared rule risked matching some future unrelated element
-that happens to carry `data-state="open"` for its own reasons.
-`ActionDropdownButton.tsx`'s own toggle was checked too — already correct,
-since it applies `rotate-180` directly as a conditional class from JS
-state (`isOpen && 'rotate-180'`) rather than relying on a parent class at
-all, so no fix needed there.
+sidebar menus) that already worked correctly off `.show`/`.active`.
+Verified in Storybook against the *open* state only — caret correctly
+read `matrix(-1, 0, 0, -1, 0, 0)` (`rotate(180deg)`) — and shipped.
 
-Verified in Storybook: dispatched a real pointer-down/up sequence at the
-trigger (a plain `.click()` doesn't reliably trigger Radix's open state)
-and read the caret's computed `transform` with CSS transitions disabled —
-`matrix(-1, 0, 0, -1, 0, 0)`, exactly `rotate(180deg)`, confirming the
-bridge applies. Full suite: 526 test files / 3514 tests pass (1
-pre-existing, unrelated flaky test confirmed by re-running in isolation),
-0 lint errors on the changed file, tsc clean, build passes.
+**Round 2 — the real, larger bug this masked.** The user then reported a
+second, opposite-looking symptom: an unrelated "+ Add ▾" toggle
+(`AddDropdownToggle`, same file) showed its caret stuck pointing *up*
+while its menu was *closed*. Re-verifying round 1's "Actions" button
+against its own closed state (never actually checked — round 1 only
+tested open) found the identical thing: `data-state="closed"` yet the
+caret computed `rotate(180deg)` anyway. Root cause: Tailwind (enabled
+app-wide since "Enable Tailwind in the app bundle") content-scans every
+source file for class-name-shaped strings and generates a real utility
+for anything matching `rotate-<number>` — including a bare `.rotate-180`
+used as a *Metronic* class name, with no idea that's what it was. Its
+generated `.rotate-180 { rotate: 180deg }` utility lives in the
+`utilities` layer, declared last in `theme, base, bootstrap, utilities`
+— `@layer` ordering beats specificity across layers entirely, so it won
+unconditionally over both `_base.scss`'s gated rule *and* round 1's new
+bridge, rotating the icon any time the class was merely present in the
+DOM, regardless of `.show`/`.active`/`data-state`. This affected every
+static (always-present, parent-class-gated) use of the literal
+`rotate-180` class app-wide, not just the two reported: `AccordionCard`,
+`TableHeader`, `TableBody`, `ActionsDropdown` (both toggles),
+`ResourcesMenu`, `MarketplaceLandingFilter`, `RoleAndProjectSelectField`,
+`ResourceAccessButton`. `ActionDropdownButton.tsx` was the one exception
+(checked in round 1 and still correct): it applies the class
+*conditionally* from JS state (`isOpen && 'rotate-180'`), so Tailwind's
+unconditional rule only ever fires exactly when the app already wants it
+to — an accidental match, not evidence the collision wasn't real there
+too. `aui-icon-rotate-180` (Matrix chat sidebar, a different, already
+app-prefixed class) was never affected — the substring just happens to
+contain "rotate-180".
+
+Fixed by renaming the Metronic class everywhere: `rotate-180` →
+`rotate-toggle-180`, across both `custom/_base.scss` and
+`custom/_dropdown.scss` and all nine real TSX usage sites. First attempt
+at this rename picked `rotate-active-180` — which turned out to itself
+collide with a *pre-existing, differently-scoped* Metronic utility
+(`core/components/_rotate.scss`'s `@each $value in (90, 180, 270)` loop
+generates `.rotate-#{$value}` conditional, `.rotate-n#{$value}` negative
+conditional, *and* `.rotate-active-#{$value}` — the last one
+unconditional, always-rotated, unrelated to open/closed state at all).
+That's also what `rotate-active-90` (`FooterDropdown.tsx`'s arrow) really
+is — a real, meaningful utility, not the dead code an earlier CSSOM-walk
+check in this same document mistakenly concluded (that check's own
+matching bug, corrected here). `rotate-toggle-180` avoids both
+collisions: not a bare `rotate-<number>` Tailwind can parse, and not one
+of core's own three generated `rotate-*-<number>` families.
+
+Verified in Storybook, this time checking *both* states with real
+pointer-down/up sequences (a plain `.click()` doesn't reliably trigger
+Radix's open state) and CSS transitions disabled: closed reads
+`transform: none` (down), open reads `matrix(-1, 0, 0, -1, 0, 0)` (up),
+confirmed on both the "Actions" and "Add" toggles. Full suite: 526 test
+files / 3514 tests pass (1 pre-existing, unrelated flaky test confirmed
+by re-running in isolation), 0 lint errors on the changed files (one
+Prettier line-length wrap from the longer class name, auto-fixed), tsc
+clean, build passes.
+
+The lesson for any *future* Bootstrap/Metronic-to-Radix conversion:
+grep for `> .rotate-180`-style parent-gated selectors before shipping,
+not after — and, now that Tailwind shares the bundle, treat any bare
+short/numeric-looking custom class name as a name Tailwind might also
+generate a utility for, not just a name Bootstrap/Metronic happens to
+already use.
 
 ## `packages/ui`: portable Tailwind/Radix primitives
 

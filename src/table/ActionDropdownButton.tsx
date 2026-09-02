@@ -60,7 +60,7 @@ const Toggle = forwardRef<
     <span
       className={classNames(
         `svg-icon svg-icon-${size === 'sm' ? '4' : '2'} ms-2`,
-        isOpen && 'rotate-180',
+        isOpen && 'rotate-toggle-180',
       )}
     >
       <CaretDownIcon weight="bold" />

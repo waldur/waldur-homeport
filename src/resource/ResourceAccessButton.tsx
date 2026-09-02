@@ -70,7 +70,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     <Dropdown placement="bottom-end">
       <Dropdown.Toggle variant="tertiary" className="no-arrow btn-icon-right">
         {translate('Access resource')}
-        <span className="svg-icon svg-icon-2 rotate-180">
+        <span className="svg-icon svg-icon-2 rotate-toggle-180">
           <CaretDownIcon weight="bold" />
         </span>
       </Dropdown.Toggle>

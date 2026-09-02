@@ -79,7 +79,7 @@ const CustomToggle = ({
         <button
           type="button"
           // Bare on purpose: a tooltip on every caret in the app would be
-          // noise. `.active > .rotate-180` turns the caret, so the class rides
+          // noise. `.active > .rotate-toggle-180` turns the caret, so the class rides
           // on the element that now holds it.
           className={classNames(
             'border-0 bg-transparent p-0 d-flex',
@@ -89,7 +89,11 @@ const CustomToggle = ({
           aria-expanded={isOpen}
           onClick={decoratedOnClick}
         >
-          <CaretDownIcon weight="bold" size={20} className="rotate-180" />
+          <CaretDownIcon
+            weight="bold"
+            size={20}
+            className="rotate-toggle-180"
+          />
         </button>
       </div>
     </Card.Header>

@@ -107,7 +107,7 @@ export const MarketplaceLandingFilter = () => {
             {translate('Organization')} & {translate('Project')}
             <CaretDownIcon
               size={18}
-              className="svg-icon rotate-180 ms-2 me-0"
+              className="svg-icon rotate-toggle-180 ms-2 me-0"
               weight="bold"
             />
           </Dropdown.Toggle>

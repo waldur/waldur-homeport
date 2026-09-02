@@ -58,7 +58,7 @@ const CustomToggle = ({
         </div>
       </span>
       <span className={classNames('menu-badge rotate', expanded && 'active')}>
-        <span className="svg-icon svg-icon-3 svg-icon-primary-300 rotate-180">
+        <span className="svg-icon svg-icon-3 svg-icon-primary-300 rotate-toggle-180">
           <CaretDownIcon weight="bold" />
         </span>
       </span>

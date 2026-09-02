@@ -261,7 +261,11 @@ const TableCell = memo(
                 data-testid="row-expander"
                 className={classNames({ active: expander.isExpanded })}
               >
-                <CaretDownIcon size={20} weight="bold" className="rotate-180" />
+                <CaretDownIcon
+                  size={20}
+                  weight="bold"
+                  className="rotate-toggle-180"
+                />
               </span>
             )}
             <div style={{ minWidth: 0, flex: '1 1 auto' }}>{content}</div>

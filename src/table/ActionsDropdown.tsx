@@ -160,7 +160,7 @@ export const TableDropdownToggle = forwardRef<
       >
         {label || translate('Actions')}
         <span
-          className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
+          className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-toggle-180`}
         >
           <CaretDownIcon weight="bold" />
         </span>
@@ -239,7 +239,7 @@ export const AddDropdownToggle = forwardRef<
     </span>
     {translate('Add')}
     <span
-      className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
+      className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-toggle-180`}
     >
       <CaretDownIcon weight="bold" />
     </span>
