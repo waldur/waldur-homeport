@@ -32,11 +32,15 @@ import { GRID_BREAKPOINTS } from '@/core/constants';
  * *value* only matters for one animation-direction branch — see below).
  * `NavMenuContent`/`NavMenuSubContent` add `.show` and a
  * `data-popper-placement` attribute themselves, so Metronic's own
- * `.menu-sub-dropdown.show[data-popper-placement] { display: flex;
- * animation: menu-sub-dropdown-animation-fade-in …, …-move-up … }` rule
- * fires exactly as compiled — no new CSS needed for the base entrance
- * animation, shadow, radius, background, or z-index; all of that already
- * lives in the existing stylesheet and is being reused, not replicated.
+ * `.menu-sub-dropdown.show[data-popper-placement] { display: flex; … }`
+ * rule fires exactly as compiled for shadow, radius, background, and
+ * z-index — no new CSS needed there, reused as-is. The entrance
+ * *animation* is the one piece that isn't reused unmodified: core's own
+ * keyframes slide the panel in via margin-top/margin-bottom, which fights
+ * Radix's own ResizeObserver-driven repositioning frame-for-frame and
+ * visibly stutters — `custom/_menu.scss` overrides it for Radix content
+ * only (scoped off the `data-side` attribute below) with a
+ * `translate`-based equivalent, see that file's own comment.
  *
  * `data-popper-placement`'s value here is *not* meant to reflect Radix's
  * real resolved side after collision-avoidance flips it (Radix doesn't

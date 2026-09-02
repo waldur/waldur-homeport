@@ -1025,6 +1025,57 @@ matching Metronic's original `.show`-keyed rotation exactly). Full suite:
 527 test files / 3517 tests pass, 0 lint errors on the changed files, tsc
 clean, build passes.
 
+## Fix: `NavMenuSub` entrance animation stutter (Language flyout)
+
+Reported live via screencast, after the arrow/colour fix above landed:
+the language submenu (`LanguageSelectorDropdown`, opened from
+`UserDropdownMenu`) "opens fine, but flickers visually" — a visible
+jump/stutter during the slide-in, not a functional failure (confirmed by
+isolated Storybook reproduction: the underlying `NavMenuSub`/hover-intent
+mechanism opens reliably and stays open with no flicker in isolation, so
+the bug had to be about the animation itself, not Radix's hover logic).
+
+Root cause: `.menu-sub-dropdown.show[data-popper-placement]`'s entrance
+animation (core's `menu-sub-dropdown-animation-move-up`/`-down`,
+`core/components/menu/_base.scss`) animates `margin-top`/`margin-bottom`
+— a layout-affecting property. Radix's positioning (Floating UI) watches
+the content element with a `ResizeObserver` and repositions on any size
+change, so every animation frame is itself a resize the observer reacts
+to — the CSS keyframe and Radix's own repositioning fight over the same
+box on every frame, producing the reported jitter. This is specific to
+Radix content: the still-Popper.js-driven menus elsewhere in the app
+(`TableFiltersMenu`, `AsyncSearchBox`, etc. — not yet migrated to
+`NavMenu`) don't hit it, since Popper.js's own reposition cycle isn't
+wired to a `ResizeObserver` the same way.
+
+Fixed in `custom/_menu.scss` with a `translate`-based replacement
+(`menu-sub-dropdown-radix-move-up`/`-down`), scoped to Radix content only
+via the `[data-side]` attribute (Radix-exclusive — Popper.js never sets
+it) alongside the existing `data-popper-placement` requirement. `translate`
+was chosen deliberately over `transform`: Radix's own inline style already
+uses `transform` for positioning, and animating that same property via a
+CSS keyframe would have overridden it entirely for the animation's
+duration (a worse bug — the popup would render at the wrong position,
+snapping back only when the animation ended). `translate` is a separate,
+composable CSS property that doesn't affect layout and doesn't touch
+Radix's own `transform`, so it removes the `ResizeObserver` fight without
+that risk. The fade half of the animation is untouched (reuses core's own
+`menu-sub-dropdown-animation-fade-in` — opacity never affects layout, so
+it was never part of the problem).
+
+Verified in Storybook: the compiled `animationName` on the open
+`SubContent` switched from the core (margin-based) keyframes to the new
+`translate`-based ones, and the panel's `getBoundingClientRect()` stayed
+at the correct, stable position throughout — no jump from the `translate`
+addition. (Live login on the local dev stack to confirm the *visual*
+smoothness directly wasn't possible — the seeded `staff`/`demo`
+credentials didn't match this instance, and repeated guesses risk a
+django-axes lockout — so this was verified structurally rather than by
+eye; ask if the flicker persists after this fix.) Full suite: 526 test
+files / 3513 tests pass (2 pre-existing, unrelated flaky tests confirmed
+by re-running in isolation), 0 lint errors on the changed files, tsc
+clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

@@ -65,11 +65,11 @@
 // system, migrated off Metronic's imperative MenuComponent/data-kt-menu-*
 // JS onto Radix. NavMenuContent/NavMenuSubContent already reuse Metronic's
 // own compiled .menu-sub-dropdown.show[data-popper-placement] rule for
-// display/shadow/radius/background/z-index and the default fade+move-up
-// entrance animation unmodified — see that file's own top-of-file comment
-// for why. Two small gaps remain, both because Radix's own attributes
-// don't exactly line up with what Metronic's Popper.js-driven original
-// used to set.
+// display/shadow/radius/background/z-index unmodified — see that file's
+// own top-of-file comment for why. A few gaps remain, all because Radix's
+// own attributes/behaviour don't exactly line up with what Metronic's
+// Popper.js-driven original used to set — including the entrance
+// animation itself, overridden further below for Radix content only.
 
 // Keyboard highlight. `.menu-link:hover` (menu/_theme.scss's
 // menu-link-hover-state mixin) is a plain CSS pseudo-class, so mouse hover
@@ -125,21 +125,67 @@ $menu-link-highlight-exclude: ':not(.disabled):not(.active):not(.here)';
   @include menu-link-theme($primary-700, null, null, null, null);
 }
 
-// Entrance animation direction. Metronic's own rule picks the "move down"
-// variant (instead of the "move up" default) by matching
-// [data-popper-placement^='top'] — a real Popper.js placement string,
-// which NavMenuContent's own data-popper-placement is NOT (it only ever
-// carries the *requested* placement, never Radix's actual post-collision
-// resolved one — Radix exposes that as data-side instead, on the same
-// element, and unlike data-popper-placement it DOES reflect any
-// collision-driven flip). Bridge the same "top" case onto that real
-// attribute so a menu Radix actually flipped upward still gets the
-// correct move-down entrance, not just one Metronic itself would have
-// requested "top" for.
-.menu-sub-dropdown.show[data-side='top'] {
+// Entrance animation, Radix-driven content. Two gaps to bridge against
+// core's own keyframes (menu-sub-dropdown-animation-move-up/-down,
+// core/components/menu/_base.scss) — both written for the old Popper.js
+// system and not fully right for Radix.
+//
+// Direction: Metronic's own rule picks the "move down" variant (instead
+// of the "move up" default) by matching [data-popper-placement^='top'] —
+// a real Popper.js placement string, which NavMenuContent's own
+// data-popper-placement is NOT (it only ever carries the *requested*
+// placement, never Radix's actual post-collision resolved one — Radix
+// exposes that as data-side instead, on the same element, and unlike
+// data-popper-placement it DOES reflect any collision-driven flip).
+// [data-side] is also a reliable "this element is Radix-driven" marker
+// on its own — only Radix sets it — so scoping both variants below to
+// its presence at all leaves the still-Popper.js-driven menus elsewhere
+// in this app (TableFiltersMenu, AsyncSearchBox, etc. — not yet migrated
+// to NavMenu) on core's own untouched keyframes.
+//
+// Jank: core's move keyframes animate margin-top/margin-bottom — a
+// layout-affecting property. Radix's positioning (Floating UI) watches
+// the content element with a ResizeObserver and repositions on any size
+// change, so every animation frame is itself a resize the observer
+// reacts to, fighting the CSS keyframe for the same box each frame —
+// reported live as a visible flicker/stutter on open
+// (LanguageSelectorDropdown's flyout, TabsList's TabWithChildren). The
+// `translate` property doesn't affect layout — unlike `transform`, which
+// Radix's own inline style already uses for positioning and would
+// conflict with directly if animated — so a translate-based equivalent
+// removes the fight without touching Radix's own transform. The fade
+// half has no such issue (opacity never affects layout), so it keeps
+// reusing core's own menu-sub-dropdown-animation-fade-in unchanged.
+.menu-sub-dropdown.show[data-popper-placement][data-side] {
   animation:
     menu-sub-dropdown-animation-fade-in #{get($menu, dropdown, animation-speed)}
       ease 1,
-    menu-sub-dropdown-animation-move-down
-      #{get($menu, dropdown, animation-speed)} ease 1 !important;
+    menu-sub-dropdown-radix-move-up #{get($menu, dropdown, animation-speed)}
+      ease 1 !important;
+}
+
+.menu-sub-dropdown.show[data-popper-placement][data-side='top'] {
+  animation:
+    menu-sub-dropdown-animation-fade-in #{get($menu, dropdown, animation-speed)}
+      ease 1,
+    menu-sub-dropdown-radix-move-down #{get($menu, dropdown, animation-speed)}
+      ease 1 !important;
+}
+
+@keyframes menu-sub-dropdown-radix-move-up {
+  from {
+    translate: 0 #{get($menu, dropdown, animation-move-offset)};
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+@keyframes menu-sub-dropdown-radix-move-down {
+  from {
+    translate: 0 -#{get($menu, dropdown, animation-move-offset)};
+  }
+  to {
+    translate: 0 0;
+  }
 }
