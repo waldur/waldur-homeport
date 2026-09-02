@@ -4,6 +4,12 @@ import { FunctionComponent } from 'react';
 import { CountryFlagIcon } from '@/core/CountryFlagIcon';
 import { translate } from '@/i18n';
 import { useLanguageSelector } from '@/i18n/useLanguageSelector';
+import {
+  NavMenuItem,
+  NavMenuSub,
+  NavMenuSubContent,
+  NavMenuSubTrigger,
+} from '@/navigation/NavMenu';
 
 export const LanguageCountry = {
   ar: 'sa',
@@ -39,13 +45,8 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
   }
 
   return (
-    <div
-      className="menu-item"
-      data-kt-menu-trigger="hover"
-      data-kt-menu-placement="left-start"
-      data-kt-menu-flip="bottom"
-    >
-      <div className="menu-link">
+    <NavMenuSub>
+      <NavMenuSubTrigger>
         <span className="menu-title position-relative">
           {translate('Language')}
           <span className="d-flex flex-center gap-2 fs-8 rounded bg-light px-3 py-1 position-absolute translate-middle-y top-50 end-0">
@@ -56,32 +57,24 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
             />
           </span>
         </span>
-      </div>
+      </NavMenuSubTrigger>
 
-      <div className="menu-sub menu-sub-dropdown w-175px py-4">
+      <NavMenuSubContent placement="left-start" className="w-175px py-4">
         {languageChoices.map((language) => (
-          <div
-            className="menu-item"
+          <NavMenuItem
             key={language.code}
-            data-kt-menu-trigger="click"
-            aria-hidden="true"
-            onClick={() => {
-              setLanguage(language);
-            }}
+            className={classNames('d-flex', {
+              active: language.code === currentLanguage.code,
+            })}
+            onSelect={() => setLanguage(language)}
           >
-            <div
-              className={classNames('menu-link d-flex', {
-                active: language.code === currentLanguage.code,
-              })}
-            >
-              <span className="symbol symbol-20px me-4">
-                <CountryFlagIcon countryCode={LanguageCountry[language.code]} />
-              </span>
-              {language.label}
-            </div>
-          </div>
+            <span className="symbol symbol-20px me-4">
+              <CountryFlagIcon countryCode={LanguageCountry[language.code]} />
+            </span>
+            {language.label}
+          </NavMenuItem>
         ))}
-      </div>
-    </div>
+      </NavMenuSubContent>
+    </NavMenuSub>
   );
 };

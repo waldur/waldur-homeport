@@ -35,3 +35,87 @@
     @include menu-link-arrow-rotate(270deg, -270deg);
   }
 }
+
+// Radix-driven menus (src/navigation/NavMenu.tsx) — the header/footer/
+// sidebar-popup dropdowns built on Metronic's own .menu/.menu-sub-dropdown
+// system, migrated off Metronic's imperative MenuComponent/data-kt-menu-*
+// JS onto Radix. NavMenuContent/NavMenuSubContent already reuse Metronic's
+// own compiled .menu-sub-dropdown.show[data-popper-placement] rule for
+// display/shadow/radius/background/z-index and the default fade+move-up
+// entrance animation unmodified — see that file's own top-of-file comment
+// for why. Two small gaps remain, both because Radix's own attributes
+// don't exactly line up with what Metronic's Popper.js-driven original
+// used to set.
+
+// Keyboard highlight. `.menu-link:hover` (menu/_theme.scss's
+// menu-link-hover-state mixin) is a plain CSS pseudo-class, so mouse hover
+// needs no bridge at all. Radix's keyboard navigation instead marks the
+// focused row with [data-highlighted] — never :hover, and :focus only
+// while the *document* itself has focus, which keyboard nav inside an
+// open menu doesn't guarantee — so arrow-key navigation is invisible
+// without this. Same gap, same fix shape as ActionsDropdown's own
+// .dropdown-item[data-highlighted] rule.
+//
+// Unlike Bootstrap's single dropdown theme, Metronic's own .menu-state-*
+// classes give every menu a *different* hover color/background (gray-700
+// on gray-50 for menu-state-bg-gray, gray-700 on light/gray-100 for
+// menu-state-bg-light, primary-700 with no background for
+// menu-state-title-primary) — the only three actually used anywhere in
+// this app (grepped, not assumed). A single bridge color the way
+// ActionsDropdown's Bootstrap one uses would be wrong for at least two of
+// these three. Each reuses menu-link-theme directly with literally the
+// same color arguments menu-link-hover-state already passes it for :hover
+// (menu/_theme.scss), just retargeted from :hover/.hover onto
+// [data-highlighted] — core/ itself is left untouched; add a block here
+// for any further menu-state-* class this app starts using.
+$menu-link-highlight-exclude: ':not(.disabled):not(.active):not(.here)';
+
+.menu-state-bg-gray .menu-link[data-highlighted]#{$menu-link-highlight-exclude},
+.menu-sub.menu-state-bg-gray
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
+  transition: $transition-link;
+  @include menu-link-theme(
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    $gray-50
+  );
+}
+
+.menu-state-bg-light
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
+  transition: $transition-link;
+  @include menu-link-theme(
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    if(isDarkMode(), $gray-100, $light)
+  );
+}
+
+.menu-state-title-primary
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
+  transition: $transition-link;
+  @include menu-link-theme($primary-700, null, null, null, null);
+}
+
+// Entrance animation direction. Metronic's own rule picks the "move down"
+// variant (instead of the "move up" default) by matching
+// [data-popper-placement^='top'] — a real Popper.js placement string,
+// which NavMenuContent's own data-popper-placement is NOT (it only ever
+// carries the *requested* placement, never Radix's actual post-collision
+// resolved one — Radix exposes that as data-side instead, on the same
+// element, and unlike data-popper-placement it DOES reflect any
+// collision-driven flip). Bridge the same "top" case onto that real
+// attribute so a menu Radix actually flipped upward still gets the
+// correct move-down entrance, not just one Metronic itself would have
+// requested "top" for.
+.menu-sub-dropdown.show[data-side='top'] {
+  animation:
+    menu-sub-dropdown-animation-fade-in #{get($menu, dropdown, animation-speed)}
+      ease 1,
+    menu-sub-dropdown-animation-move-down
+      #{get($menu, dropdown, animation-speed)} ease 1 !important;
+}

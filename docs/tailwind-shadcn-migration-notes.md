@@ -691,6 +691,141 @@ imports that changed. Verified end-to-end with the adversarial case
 itself: typing `API_KEY` while an `API_SECRET` row sits nearby now
 reaches the search input intact and filters correctly.
 
+## `NavMenu`: Metronic's own menu system on Radix
+
+A *third* dropdown family, distinct from both `ActionsDropdown.tsx`
+(replaces react-bootstrap's `<Dropdown>`, wears Bootstrap's
+`.dropdown-menu`/`.dropdown-item` classes) and `packages/ui`'s Tailwind
+`DropdownMenu`. The header/footer/sidebar-popup menus were never built on
+react-bootstrap at all — they're driven by Metronic's own imperative
+`MenuComponent`/`data-kt-menu-*` system (`src/metronic/components/
+MenuComponent.ts`, a hand-rolled Popper.js wrapper) and wear Metronic's
+own `.menu`/`.menu-sub`/`.menu-sub-dropdown`/`.menu-item`/`.menu-link`
+classes (`src/metronic/sass/core/components/menu/`).
+
+**Out of scope, deliberately**: the sidebar's *accordion* tree
+(`.menu-sub-accordion`, `MenuAccordion.tsx`) shares this same stylesheet
+and the same `MenuComponent`, but it is static in-flow expand/collapse
+navigation, not a floating popup — a fundamentally different UI pattern
+that belongs to Radix Collapsible/Accordion, not DropdownMenu. Converting
+it is a separate task. A handful of other `data-kt-menu-*` attributes
+across the sidebar (`Sidebar.tsx`'s root `data-kt-menu="true"`,
+`ResourcesMenu.tsx`'s "show more" toggle, `OfferingsPanel.tsx`'s
+dismiss marker) turned out to be vestigial — no sibling `.menu-sub` for
+them to control, meaning Metronic's own JS already did nothing with them
+today — and were left untouched rather than guessed at.
+
+### `src/navigation/NavMenu.tsx`
+
+Same "one axis at a time" principle as `ActionsDropdown.tsx`: Radix
+supplies behaviour/positioning/accessibility, the *existing compiled*
+Metronic CSS keeps supplying 100% of the appearance — no new visual
+styling anywhere in this primitive.
+
+`.menu-sub-dropdown`'s visibility and entrance animation are gated by
+Metronic's own compiled `&.show[data-popper-placement] { display: flex;
+animation: … }` rule — Popper.js's own attribute, whose *presence* alone
+(not its value) is what the display-toggle actually checks.
+`NavMenuContent`/`NavMenuSubContent` add that same `.show` class and a
+`data-popper-placement` attribute themselves, so this rule fires exactly
+as already compiled — shadow, radius, background, z-index, and the
+default fade+move-up entrance animation are all reused unmodified, not
+reimplemented. `data-popper-placement`'s *value* here is only a
+"requested" placement string (`"bottom-start"`, `"left-start"`, …,
+mirroring the `data-kt-menu-placement` values the original markup used) —
+it does not track Radix's real post-collision-flip position, which Radix
+doesn't expose in that string shape. The one place the *value* actually
+matters — Metronic's animation picks "move down" instead of "move up"
+when `[data-popper-placement^='top']` — is bridged in
+`custom/_menu.scss` against Radix's own `data-side` attribute instead,
+which *does* reflect any collision-driven flip, exactly the technique
+`packages/ui`'s Tailwind `DropdownMenuContent` already documented using
+for the identical animation.
+
+**Keyboard highlight, harder than Bootstrap's version**: `.menu-link:hover`
+is a plain CSS pseudo-class (mouse hover needs zero changes), but
+Radix's `[data-highlighted]` needs a bridge — same gap as
+`ActionsDropdown.tsx`'s `.dropdown-item[data-highlighted]`. Metronic is
+harder here because, unlike Bootstrap's one dropdown theme, it ships
+*many* `.menu-state-*` color themes (grays, bg-light, title-primary, …),
+each with its own hover color/background compiled from
+`menu-link-hover-state`. A single guessed bridge color the way
+`ActionsDropdown` uses would be wrong for most of them. The fix greps for
+which theme classes the app *actually* uses (three, not the full
+10+-variant set: `menu-state-bg-gray`, `menu-state-bg-light`,
+`menu-state-title-primary`) and, for each, calls `menu-link-theme`
+directly with the *same literal color arguments* `menu/_theme.scss`
+already passes it for `:hover` — retargeted from `:hover`/`.hover` onto
+`[data-highlighted]`, without touching `core/` (`_theme.scss`,
+`mixins/_menu.scss` stay vendor-pristine) and without duplicating
+variants nothing in this app uses.
+
+### The `.menu-item` / `.menu-link` split
+
+Metronic's markup convention nests a real interactive element
+(`.menu-link` — an `<a>`, `<Link>`, or plain `<div>`) inside a
+non-interactive layout wrapper (`.menu-item`). `NavMenuItem` (and
+`NavMenuSubTrigger`) attach Radix's Item/SubTrigger behaviour directly to
+the *inner* `.menu-link` element — matching how `ActionsDropdownItem`
+attaches Bootstrap's `.dropdown-item` class directly to the Radix Item
+rather than to a separate wrapper — and render the outer `.menu-item` as
+a plain, non-Radix `<div>` purely for layout parity.
+
+`NavMenuSubTrigger`'s `.menu-arrow` chevron is opt-in (`arrow` prop,
+default `false`), not automatic: neither of this migration's two real
+submenu call sites (`LanguageSelectorDropdown`, `UserDropdownMenuItems`)
+rendered that element in their original markup, so defaulting it on
+would have silently added a visual element that wasn't there before —
+checked per call site, not assumed from the primitive's own name.
+
+### Plain (non-`NavMenuItem`) content is a first-class case, not a gap
+
+`UserDropdown.tsx`'s account menu mixes real command rows (profile
+tabs, language picker, logout — need `NavMenuItem`/`NavMenuSub`) with
+persistent interactive widgets that must *not* auto-close the menu on
+interaction: `ThemeSwitcher`'s checkbox, `UserToken`'s readonly field +
+Copy button, `UserIpAddress`'s Copy button. Wrapping any of these in
+`NavMenuItem` would trigger Radix's default select-and-close behaviour —
+exactly wrong for a settings toggle or a copy action the user expects to
+keep the menu open through. They're rendered as plain children of
+`NavMenuContent` instead — never registered with Radix's menu machinery
+at all, so their own click handlers fire completely undisturbed. This
+mirrors how `ActionsDropdown.tsx`'s Popover twin exists for "needs a real
+text input"; here the equivalent case is "needs to survive its own
+click" — plain content, not a special primitive, is the shell's built-in
+answer to it. Confirmed with a real interaction test, not assumed: click
+each and assert the menu is still open afterward.
+
+### `DropdownMenuSub` selection only closes the submenu, not the root
+
+Radix's own deliberate default: selecting an item nested inside a
+`DropdownMenuSub` closes that `Sub` but leaves the root `DropdownMenu`
+open. Found while testing `LanguageSelectorDropdown` — picking a language
+left the account menu itself open. Not treated as a bug to route around:
+`setLanguage` already calls `location.reload()` a second later, so the
+whole page (menu included) is gone regardless by the time it would
+matter, and forcing a full-tree close for this one case would mean
+fighting Radix's own considered UX default (a nested submenu selection
+not nuking an unrelated parent menu is often exactly what you want)
+rather than reusing it.
+
+### Verification
+
+No pre-existing test exercised any of this beyond one static data-mapping
+check (`LanguageSelectorDropdown.test.tsx` only tests `LanguageCountry`,
+never renders the component). Verified instead with real interaction
+tests written for this change: the Language submenu opens on hover *and*
+click and lists real entries; picking one calls `setLanguage` and closes
+only that submenu; the theme checkbox toggles the theme without closing
+the menu; the token/IP Copy buttons don't close the menu either;
+arrow-key navigation actually highlights a row
+(`.menu-link[data-highlighted]` present); the logged-out state renders
+Sign-in instead of the profile summary and omits Log out entirely;
+`UserDropdownMenuItems`' own leaf-vs-submenu branching renders a plain
+link row for a childless item and a real, openable submenu for one with
+children. Full suite: 526 test files / 3514 tests pass, 0 lint errors,
+tsc clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

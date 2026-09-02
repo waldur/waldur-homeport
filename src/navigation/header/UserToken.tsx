@@ -6,6 +6,11 @@ import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
+/**
+ * Plain content inside UserDropdown's NavMenuContent, not a NavMenuItem —
+ * see ThemeSwitcher's comment. This row holds a readonly token field and
+ * its own Copy button; selecting either shouldn't dismiss the menu.
+ */
 export const UserToken = ({ token }) => {
   const { showSuccess } = useNotify();
 
@@ -16,7 +21,7 @@ export const UserToken = ({ token }) => {
   }, [token]);
 
   return (
-    <div className="menu-item" data-kt-menu-trigger="click">
+    <div className="menu-item">
       <div className="menu-link bg-transparent">
         <span className="menu-title me-2 text-nowrap">
           {translate('API token')}

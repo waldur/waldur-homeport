@@ -1,8 +1,13 @@
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 
+/**
+ * Plain content inside UserDropdown's NavMenuContent, not a NavMenuItem —
+ * see ThemeSwitcher's comment; this row's own Copy button shouldn't
+ * dismiss the menu on click either.
+ */
 export const UserIpAddress = ({ ip }) => (
-  <div className="menu-item" data-kt-menu-trigger="click">
+  <div className="menu-item">
     <div className="menu-link bg-transparent">
       <div className="menu-title me-2 text-nowrap">
         <div className="flex-grow-1">

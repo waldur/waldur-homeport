@@ -5,11 +5,17 @@ import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { translate } from '@/i18n';
 import { useTheme } from '@/theme/useTheme';
 
+/**
+ * Rendered as plain content inside UserDropdown's NavMenuContent, not
+ * wrapped in NavMenuItem: it holds a real checkbox the user toggles
+ * in place, and Radix's Item defaults to closing the menu on selection —
+ * exactly the opposite of what a persistent settings toggle wants.
+ */
 export const ThemeSwitcher: FunctionComponent = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="menu-item" data-kt-menu-trigger="click">
+    <div className="menu-item">
       <div className="menu-link bg-transparent">
         <AwesomeCheckbox
           label={translate('Dark theme')}
