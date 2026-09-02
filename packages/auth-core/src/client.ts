@@ -114,12 +114,43 @@ export const attachAuthHeader = (request: Request) => {
 
 client.interceptors.request.use(attachAuthHeader);
 
-client.interceptors.error.use((error: Error, response) => {
-  return {
-    ...error,
+// The generated client throws the *raw response body* on a non-2xx --
+// `throw jsonError ?? textError` -- so what reaches a caller is a plain object,
+// or a bare string when the body is not JSON (an ingress controller's HTML
+// error page, a proxy timeout page). It carries no status, and the fetch's
+// `Response` is not attached to it. This interceptor is where that is repaired.
+//
+// Three things matter here, each of which was wrong before:
+//
+//   * A failure with no `response` is the fetch itself rejecting -- a network
+//     error, a CORS block, blocked mixed content, a TLS failure. `error` is
+//     then a real `TypeError` and must be handed through untouched: spreading
+//     it produced a plain object (an Error's `message` and `stack` are
+//     non-enumerable, so the spread copied nothing), which silently destroyed
+//     every `instanceof TypeError` check downstream. That is what reduced a
+//     blocked bootstrap request to "Unable to fetch server configuration." with
+//     no endpoint and no cause.
+//   * Spreading a *string* body indexes it by character, turning an HTML error
+//     page into {0: '<', 1: 'h', ...}. Non-object bodies go under `body`.
+//   * `status` / `statusText` / `url` are lifted to the top level so a caller
+//     can classify an error without reaching into `response`. `response` itself
+//     is kept because much of the app reads `error.response.status`.
+export const attachResponseDetails = (error: unknown, response?: Response) => {
+  if (!response) {
+    return error;
+  }
+  const details = {
     response,
+    status: response.status,
+    statusText: response.statusText,
+    url: response.url,
   };
-});
+  return error !== null && typeof error === 'object'
+    ? { ...error, ...details }
+    : { body: error, ...details };
+};
+
+client.interceptors.error.use(attachResponseDetails);
 
 // Endpoints that are part of *becoming* authenticated. A 401 from any of them
 // means "these credentials did not work", not "your session expired", so it
