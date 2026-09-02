@@ -970,6 +970,61 @@ regression can't reappear silently. Full suite: 527 test files / 3517
 tests pass (527/3517, up from 526/3514 with the new test file), 0 lint
 errors, tsc clean, build passes.
 
+## Fix: `TabWithChildren` arrow animation and item colour regression
+
+Reported live via screenshots, straight after the footer/tabs cluster
+landed: the "Credentials" top-level tab's caret no longer flipped/coloured
+on open, and its dropdown rows rendered brand-green instead of gray. Two
+independent bugs in `src/navigation/TabsList.tsx`'s `TabWithChildren`,
+both pre-existing gaps this migration exposed rather than something the
+Radix conversion itself broke incorrectly:
+
+**Arrow rotation/colour.** `custom/_menu.scss`'s `.header-menu .menu-item`
+block keys its `.menu-arrow` colour+rotation off Metronic's own
+`.show`/`.here`/`.hover` classes, added by the old `MenuComponent.ts`'s
+`_showDropdown` (`item.classList.add('show')`). Nothing adds `.show`
+anymore now that Radix drives open/close, so the caret was permanently
+stuck in its default (closed, gray-500) state. Fixed by adding a parallel
+`[data-state='open']` rule block, bridging onto the attribute
+`RadixDropdownMenu.Trigger asChild` already sets on the same
+`.menu-item`-classed element — no new wiring needed, unlike the
+`[data-highlighted]`/`data-side` bridges elsewhere in this file, since
+`data-state` lands there automatically. See the comment directly above
+the new rule in `custom/_menu.scss` for the full reasoning.
+
+**Item colour.** `TabWithChildren`'s `NavMenuContent` was missing the
+`.menu-gray-600` class that `UserDropdown.tsx`'s identical
+`menu-state-bg-gray` dropdown already carries (`menu-dropdown-default
+menu-column menu-gray-600 menu-state-bg-gray ...`). Without it, nothing
+in the compiled CSS overrode Bootstrap's base `a { color:
+var(--waldur-brand-700) }` rule, so every row rendered brand-green
+regardless of Radix. Confirmed via `MenuComponent.ts`'s `_showDropdown`
+that the *original*, pre-Radix code had the exact same gap — Metronic's
+own JS only ever toggled classes on the trigger/content, never on child
+rows — so this half was a latent bug the conversion surfaced, not one it
+introduced. Fixed by adding `.menu-gray-600` to match `UserDropdown.tsx`'s
+proven pairing.
+
+**Verification.** Both fixes were confirmed against real compiled CSS via
+a temporary Storybook story (`UIRouter`-wrapped, since the vitest router
+mocks don't apply outside vitest), deleted before commit. Simulating a
+Radix open/close toggle with `dispatchEvent(PointerEvent...)` (a plain
+`.click()` doesn't trigger Radix's pointer-based open) and reading
+computed style confirmed: `mask`/`background-color` on the arrow
+correctly switch between transparent (closed) and
+`var(--waldur-brand-600)` (open), and item text is gray-700
+(`rgb(71, 84, 103)`) instead of brand-green in both states. The `transform`
+computed value itself is unreliable to read this way in this specific
+non-composited headless environment — CSS transitions never tick without
+real compositing, freezing `getComputedStyle` mid-animation regardless of
+wait time — confirmed by disabling `transition` entirely (`* {
+transition: none !important }`) and re-reading: with that isolation,
+`data-state="closed"` reads `rotateZ(90deg)` (pointing down, the existing
+default) and `data-state="open"` reads `rotateZ(270deg)` (pointing up,
+matching Metronic's original `.show`-keyed rotation exactly). Full suite:
+527 test files / 3517 tests pass, 0 lint errors on the changed files, tsc
+clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

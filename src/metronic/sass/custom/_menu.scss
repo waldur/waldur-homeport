@@ -34,6 +34,30 @@
   &.show > .menu-link .menu-arrow:after {
     @include menu-link-arrow-rotate(270deg, -270deg);
   }
+
+  // Radix bridge for the same three rules above. TabsList.tsx's
+  // TabWithChildren (src/navigation/TabsList.tsx) is `.header-menu`'s only
+  // Radix-driven trigger with a `.menu-arrow` — Metronic's own JS used to
+  // add `.show`/`.here`/`.hover` classes to this exact `.menu-item` on
+  // open/active/hover (MenuComponent.ts's `_showDropdown`:
+  // `item.classList.add('show')`), which nothing does anymore now that
+  // Radix owns open/close. `RadixDropdownMenu.Trigger asChild` sets
+  // `data-state="open"|"closed"` on this same element automatically (no
+  // wiring needed, unlike `[data-highlighted]`/`[data-side]` elsewhere in
+  // this file), so `[data-state='open']` is the direct, real-time-accurate
+  // equivalent of `.show` — including the entrance/rotation transition,
+  // since the attribute (like the class before it) is simply present or
+  // absent, not toggled via a one-shot animation class.
+  &[data-state='open'] > .menu-link .menu-arrow:after {
+    @include svg-bg-icon(arrow-start, $fg-brand-primary);
+    /*rtl:begin:remove*/
+    @include svg-bg-icon(arrow-end, $fg-brand-primary);
+    /*rtl:end:remove*/
+  }
+
+  &[data-state='open'] > .menu-link .menu-arrow:after {
+    @include menu-link-arrow-rotate(270deg, -270deg);
+  }
 }
 
 // Radix-driven menus (src/navigation/NavMenu.tsx) — the header/footer/

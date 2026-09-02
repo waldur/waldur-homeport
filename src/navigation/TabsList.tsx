@@ -109,7 +109,7 @@ export const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
       </RadixDropdownMenu.Trigger>
       <NavMenuContent
         placement="bottom-start"
-        className="menu-state-bg-gray menu-rounded-0 menu-dropdown-default py-2 w-200px"
+        className="menu-gray-600 menu-state-bg-gray menu-rounded-0 menu-dropdown-default py-2 w-200px"
         {...hoverHandlers}
       >
         {parentTab.children.map((childTab, childIndex) => (
