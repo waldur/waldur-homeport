@@ -12,7 +12,12 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
-import { NavMenu, NavMenuContent, useHoverMenu } from '@/navigation/NavMenu';
+import {
+  NavMenu,
+  NavMenuContent,
+  NavMenuItem,
+  useHoverMenu,
+} from '@/navigation/NavMenu';
 
 import { isDescendantOf, useTabs } from './useTabs';
 
@@ -114,17 +119,11 @@ export const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
       >
         {parentTab.children.map((childTab, childIndex) => (
           <UISrefActive class="showing" key={childIndex}>
-            <RadixDropdownMenu.Item asChild>
-              <Link
-                state={childTab.to}
-                params={childTab.params}
-                className="menu-item"
-              >
-                <span className="menu-link">
-                  <span className="menu-title">{childTab.title}</span>
-                </span>
+            <NavMenuItem asChild>
+              <Link state={childTab.to} params={childTab.params}>
+                <span className="menu-title">{childTab.title}</span>
               </Link>
-            </RadixDropdownMenu.Item>
+            </NavMenuItem>
           </UISrefActive>
         ))}
       </NavMenuContent>

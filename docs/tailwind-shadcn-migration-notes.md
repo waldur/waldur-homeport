@@ -1250,6 +1250,49 @@ compute the identical `font-size` (14.001px), `font-weight` (600), and
 pre-existing, unrelated flaky test), 0 lint errors, tsc clean, build
 passes.
 
+## Fix: `TabWithChildren` rows showed a stray focus outline on hover
+
+Reported live via screenshot: hovering a row in the "Credentials"
+dropdown ("Remote accounts") drew a harsh black rectangle around it —
+same `TabWithChildren` component as the three fixes above, a fourth
+distinct bug in the same handful of lines.
+
+Root cause: unlike every other converted menu in this migration,
+`TabWithChildren`'s children didn't use the shared `NavMenuItem`
+primitive — they hand-rolled `RadixDropdownMenu.Item asChild` around a
+`<Link className="menu-item">` wrapping an *inner* `<span
+className="menu-link">`. That split the two classes core CSS expects
+together: `.menu-link:focus-visible { outline: … }` /
+`:not(:focus-visible) { outline: none }`
+(`core/components/menu/_base.scss`) target `.menu-link` directly, but
+here `.menu-link` was the *inner* span while the *actual* focused
+element — the real `<a role="menuitem">`, Radix's roving-tabindex target
+— only ever carried `.menu-item`. Neither focus rule ever matched the
+real element, so it fell through to the browser's unstyled native focus
+outline instead — and Radix moves roving focus to a row on pointer hover
+too, not just keyboard nav, so the raw outline appeared on mouse hover,
+not only Tab.
+
+`NavMenuItem` (`src/navigation/NavMenu.tsx`) already exists specifically
+to keep these two classes on the right elements — `LogoutMenuItem.tsx`
+and every other converted row in this migration already uses it
+correctly. Fixed by switching `TabWithChildren`'s children to it too:
+`<NavMenuItem asChild><Link>…</Link></NavMenuItem>` puts `.menu-link` via
+Slot directly onto the rendered `<a>`, dropping the now-redundant inner
+span and the manual `className="menu-item"` (`NavMenuItem`'s own
+wrapping `<div>` supplies that instead). No visual change beyond the fix
+itself — same classes end up in the DOM, just on the elements the shared
+CSS actually expects them on.
+
+Verified in Storybook: the rendered row is now `<a class="menu-link"
+role="menuitem">` directly (previously `.menu-item` on the `<a>`,
+`.menu-link` on a nested span) — a real pointer-hover-driven focus
+(`pointerover`/`pointermove`, not `.focus()`) now correctly fails
+`:focus-visible` and computes `outline-style: none`, while item text
+colour (`rgb(71, 84, 103)`, the earlier fix) is unaffected. Full suite:
+528 test files / 3519 tests pass (0 flaky this run), 0 lint errors, tsc
+clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
