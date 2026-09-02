@@ -13,7 +13,15 @@
 //   - default state: $fg-quaternary (gray-500)
 //   - hover / selected / open: $fg-brand-primary
 .header-menu .menu-item {
+  // `transition` lives on this always-present base rule, not only inside
+  // the `[data-state='open']` block below: a transition declared solely
+  // inside that conditional only applies while it matches, so opening
+  // animates (the rule fires, carrying its own transition) but closing
+  // doesn't (the instant data-state flips to closed, this selector stops
+  // matching, transition reverts to unset, and the caret snaps back to
+  // 0deg instead of animating the reverse) — reported live.
   > .menu-link .menu-arrow:after {
+    transition: get($menu, accordion, arrow-transition);
     @include svg-bg-icon(arrow-start, $fg-quaternary);
     /*rtl:begin:remove*/
     @include svg-bg-icon(arrow-end, $fg-quaternary);

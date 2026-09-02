@@ -40,8 +40,10 @@
 // non-Radix collapsibles (AccordionCard, sidebar menus) that still use
 // the real `.show`/`.active` classes correctly on their own. See that
 // rule's own comment for why the class is `rotate-toggle-180`, not the
-// more obvious `rotate-180`.
+// more obvious `rotate-180` — and for why only `transform` is set here,
+// not `transition`: the unconditioned `.rotate-toggle-180` rule already
+// carries that, so it applies whether or not this `[data-state='open']`
+// selector currently matches, animating both directions.
 .dropdown-toggle[data-state='open'] > .rotate-toggle-180 {
   transform: rotateZ(180deg);
-  transition: transform 0.3s ease;
 }

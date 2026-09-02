@@ -84,12 +84,26 @@ body {
 // while its menu was closed). `rotate-active-90` (FooterDropdown.tsx's
 // arrow) already used this same escape — doesn't parse as a Tailwind
 // rotate value, so it was never affected.
+// The transition lives here, on the always-present base class, not inside
+// the conditional block below — matching core's own .rotate-{value}
+// family (core/components/_rotate.scss), which declares `transition` on
+// its own unconditioned `.rotate-#{$value}` rule for exactly this reason.
+// A transition declared only inside `.active > &` only takes effect
+// while `.active` is present: it animates the icon rotating IN as that
+// class is added, but the moment it's removed (collapsing), the element
+// no longer matches that rule at all, `transition` reverts to unset, and
+// the snap back to 0deg happens instantly instead of reversing the
+// animation (reported live: table row expanders and dropdown-toggle
+// carets animated opening but not closing).
+.rotate-toggle-180 {
+  transition: transform 0.3s ease;
+}
+
 .collapsible:not(.collapsed),
 .show,
 .active {
   > .rotate-toggle-180 {
     transform: rotateZ(180deg);
-    transition: transform 0.3s ease;
   }
 }
 

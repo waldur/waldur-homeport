@@ -1293,6 +1293,49 @@ colour (`rgb(71, 84, 103)`, the earlier fix) is unaffected. Full suite:
 528 test files / 3519 tests pass (0 flaky this run), 0 lint errors, tsc
 clean, build passes.
 
+## Fix: caret rotation animated opening but snapped shut on close
+
+Reported live: "when dropdown menu or table expandable is collapsed,
+caret rotation animation is not rendered - but should" — affecting the
+`rotate-toggle-180` family from the previous two fixes (`ActionsDropdown`
+toggles, `TableBody`'s row-expander caret) *and* `TabWithChildren`'s own
+separate `.menu-arrow` rotation, all three sharing the same underlying
+mistake.
+
+Root cause, pre-existing (not introduced by this migration, just never
+fixed): every one of these rules declared `transition: transform 0.3s
+ease` *only inside* the conditional block that also sets the rotated
+`transform` — `.active > .rotate-toggle-180 { transform: …; transition:
+… }`, `.dropdown-toggle[data-state='open'] > .rotate-toggle-180 {
+transform: …; transition: … }`, `.header-menu .menu-item[data-state='open']
+> .menu-link .menu-arrow:after { transform: …; transition: … }`. A CSS
+transition only animates a property change if the *element's current
+computed style* declares `transition` for it — and the instant the
+triggering class/attribute is removed (collapsing), that whole
+conditional selector stops matching, so `transition` reverts to unset
+along with `transform`. The rotation still changes value, just
+instantly: opening animates (the matching rule carries its own
+transition), closing snaps.
+
+Core's own sibling utilities (`core/components/_rotate.scss`'s
+`.rotate-{value}` family) never had this bug — they declare `transition`
+once on the always-present base class, with only `transform` inside the
+conditional block. Fixed the three custom rules the same way: moved
+`transition: transform 0.3s ease` (or `get($menu, accordion,
+arrow-transition)`, the same value) onto each rule's unconditioned base
+selector — `.rotate-toggle-180` itself (`custom/_base.scss`), `.header-menu
+.menu-item > .menu-link .menu-arrow:after` (`custom/_menu.scss`) — leaving
+only `transform` inside the conditional blocks, including the
+`custom/_dropdown.scss` bridge from the caret-rotation fix (now
+redundant to duplicate `transition` there too, so removed).
+
+Verified in Storybook: the *closed* state's computed `transition` — read
+without any interaction, so provably not a leftover from a still-running
+animation — now reads `"transform 0.3s"` on all three (previously would
+have been unset/`"all 0s ease 0s"`), confirming the reverse animation now
+has something to animate with. Full suite: 528 test files / 3519 tests
+pass (0 flaky this run), 0 lint errors, tsc clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
