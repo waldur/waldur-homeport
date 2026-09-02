@@ -1,6 +1,7 @@
 import {
   CaretDownIcon,
   DotsThreeVerticalIcon,
+  PlusCircleIcon,
   SpinnerIcon,
 } from '@phosphor-icons/react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -205,6 +206,46 @@ TableDropdownToggle.displayName = 'TableDropdownToggle';
  * activation, and Radix closes the menu afterwards unless the handler
  * calls `event.preventDefault()`.
  */
+/**
+ * The "+ Add ..." primary-button trigger shared by every team-management
+ * dropdown (invite/add-user/add-organization menus) — six near-identical
+ * copies of this exact markup existed before this component, one per host
+ * file. forwardRef for the same asChild reason as TableDropdownToggle.
+ *
+ * `size` is left genuinely optional (no default): most call sites passed
+ * react-bootstrap's `Dropdown.Toggle size="lg"` explicitly, but
+ * proposals/team/TeamDropdownActions.tsx passed no `size` at all, which
+ * Bootstrap renders as its default (medium) button with no `btn-sm`/`btn-lg`
+ * class — a real, if probably accidental, visual difference from every
+ * other call site that this preserves rather than silently normalizes away.
+ */
+export const AddDropdownToggle = forwardRef<
+  HTMLButtonElement,
+  { size?: 'sm' | 'lg' } & ComponentPropsWithoutRef<'button'>
+>(({ size, className, ...rest }, ref) => (
+  <button
+    ref={ref}
+    type="button"
+    className={classNames(
+      'btn dropdown-toggle btn-primary no-arrow btn-icon-right',
+      size && `btn-${size}`,
+      className,
+    )}
+    {...rest}
+  >
+    <span className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'}`}>
+      <PlusCircleIcon weight="bold" />
+    </span>
+    {translate('Add')}
+    <span
+      className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
+    >
+      <CaretDownIcon weight="bold" />
+    </span>
+  </button>
+));
+AddDropdownToggle.displayName = 'AddDropdownToggle';
+
 export const ActionsDropdownItem = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof RadixDropdownMenu.Item>

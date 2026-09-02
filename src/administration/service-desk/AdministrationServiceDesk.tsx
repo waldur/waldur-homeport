@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
 import { useMemo } from 'react';
-import { Card, Col, Dropdown, Nav, Row, Tab } from 'react-bootstrap';
+import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
 import { ServiceDeskProviderLogo } from '@/administration/service-desk/ServiceDeskProviderLogo';
@@ -14,6 +14,7 @@ import { hasSupport } from '@/issues/hooks';
 import { useModal } from '@/modal/actions';
 import { SettingsDescription } from '@/SettingsDescription';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { FieldRow } from '../settings/FieldRow';
 import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
@@ -88,13 +89,13 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
               variant="primary"
               title={translate('Actions')}
             >
-              <Dropdown.Item onClick={openConfigure}>
+              <ActionsDropdownItem onSelect={openConfigure}>
                 {translate('Configure')}
-              </Dropdown.Item>
+              </ActionsDropdownItem>
               {serviceDeskProvider === 'atlassian' && (
-                <Dropdown.Item onClick={openDiscovery}>
+                <ActionsDropdownItem onSelect={openDiscovery}>
                   {translate('Discovery')}
-                </Dropdown.Item>
+                </ActionsDropdownItem>
               )}
             </ActionDropdownButton>
           </div>
