@@ -5,6 +5,7 @@ import {
   SpinnerIcon,
 } from '@phosphor-icons/react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import {
   ComponentPropsWithoutRef,
@@ -350,6 +351,128 @@ export const ActionsDropdownComponent: FunctionComponent<
       </RadixDropdownMenu.Content>
     </RadixDropdownMenu.Portal>
   </RadixDropdownMenu.Root>
+);
+
+/**
+ * Same trigger/panel shell and Bootstrap classing as ActionsDropdownComponent,
+ * on Radix's Popover instead of its DropdownMenu. Use this, not
+ * ActionsDropdownComponent, when the panel contains anything the user types
+ * into or otherwise interacts with beyond clicking a command row — a search
+ * box, a select, a date picker, a form. A DropdownMenu owns focus with a
+ * roving tabindex and treats character keys as typeahead over its own item
+ * collection; a focused text input sitting in that collection has its
+ * keystrokes intermittently stolen the moment one matches an item's
+ * typeahead prefix (confirmed empirically, not assumed: typing "alpha..."
+ * into a search box next to a menu item literally titled "Alpha" moved focus
+ * to that item after the first character, and every keystroke after was
+ * lost). Popover has no such collection and no typeahead, so a focused input
+ * behaves exactly as it would anywhere else on the page.
+ *
+ * children here are NOT DropdownMenu.Item-shaped, and ActionsDropdownItem
+ * cannot be used inside one: it wraps RadixDropdownMenu.Item, which reads
+ * DropdownMenu's own internal collection context specifically (not just
+ * "any floating Radix panel") and throws that same "`MenuItem` must be
+ * used within `Menu`" error under a Popover too — confirmed empirically,
+ * not assumed, after first (wrongly) documenting here that it would work.
+ * A command row inside a Popover is ActionsPopoverItem instead.
+ */
+export const ActionsPopoverComponent: FunctionComponent<
+  PropsWithChildren<
+    ActionsDropdownShellProps & {
+      menuStyle?: React.CSSProperties;
+      menuClassName?: string;
+    }
+  >
+> = ({
+  onToggle,
+  disabled,
+  children,
+  label,
+  labeled,
+  variant,
+  className,
+  menuStyle,
+  menuClassName,
+  size,
+  tooltip,
+  drop = 'start',
+  align = 'start',
+  ...rest
+}) => (
+  <RadixPopover.Root modal={false} onOpenChange={onToggle}>
+    <RadixPopover.Trigger asChild disabled={disabled}>
+      <TableDropdownToggle
+        label={label}
+        labeled={labeled}
+        disabled={disabled}
+        variant={variant}
+        className={className}
+        size={size}
+        tooltip={tooltip}
+      />
+    </RadixPopover.Trigger>
+
+    <RadixPopover.Portal>
+      <RadixPopover.Content
+        side={DROP_TO_SIDE[drop]}
+        align={align}
+        sideOffset={2}
+        // Same reasoning as ActionsDropdownComponent's Content — see its
+        // own comment on `show`/`position-static`.
+        className={classNames(
+          'dropdown-menu show position-static',
+          menuClassName,
+        )}
+        style={menuStyle}
+        {...rest}
+      >
+        {children}
+      </RadixPopover.Content>
+    </RadixPopover.Portal>
+  </RadixPopover.Root>
+);
+
+/**
+ * A command row inside an ActionsPopoverComponent panel — the Popover
+ * equivalent of ActionsDropdownItem. Popover has no menu/item concept at
+ * all (no roving tabindex, no typeahead, no built-in "activating this
+ * closes the panel" behavior), so this is deliberately NOT a Radix
+ * primitive wrapper the way ActionsDropdownItem is: it is a plain
+ * `.dropdown-item`-classed element, closed on activation via
+ * RadixPopover.Close asChild (confirmed to need no forwardRef on its
+ * child — Close only merges an onClick, it does not position anything the
+ * way Trigger's ref does).
+ *
+ * `as` composes a different element (e.g. a router Link) as the row itself
+ * via RadixPopover.Close's own asChild, the same asChild-composability
+ * ActionsDropdownItem offers via Radix's Slot — pass a component here, not
+ * a string tag.
+ */
+export const ActionsPopoverItem: FunctionComponent<
+  PropsWithChildren<
+    Omit<ComponentPropsWithoutRef<'button'>, 'type'> & {
+      /** Swap the rendered element (e.g. a router Link component) — pass a
+       * component, not a string tag. Extra props (e.g. that Link's own
+       * `state`/`params`) pass through untyped, same latitude ActionItem's
+       * own `as` gives its callers. */
+      as?: React.ElementType;
+      disabled?: boolean;
+      [key: string]: any;
+    }
+  >
+> = ({ as: Component = 'button', className, disabled, ...props }) => (
+  // `disabled` goes on Component only, not Close: a native disabled button
+  // never fires the click Close listens for, so the panel-closing behavior
+  // is already blocked at the DOM level regardless of which layer set it —
+  // no need to duplicate the prop onto Close itself.
+  <RadixPopover.Close asChild>
+    <Component
+      type={Component === 'button' ? 'button' : undefined}
+      className={classNames('dropdown-item', disabled && 'disabled', className)}
+      disabled={disabled}
+      {...props}
+    />
+  </RadixPopover.Close>
 );
 
 export const ActionsDropdown: FunctionComponent<

@@ -584,6 +584,113 @@ Two smaller, real fallout items, not just mechanical fixups:
   `toHaveAttribute('aria-disabled', 'true')` — real semantics assistive
   tech can read, where the old markup only looked disabled.
 
+## Closing the remaining gaps: crash sweep + real Popover shell
+
+Two follow-ups landed after the `ActionsDropdown`/`ActionItem` rewrite,
+both found by systematically re-auditing the change rather than waiting
+for the next bug report.
+
+### The crash sweep: every remaining react-bootstrap `Dropdown` host
+
+`ActionItem`'s default row changed from react-bootstrap's `Dropdown.Item`
+(tolerates missing menu context) to Radix's `ActionsDropdownItem`
+(throws `` `MenuItem` must be used within `Menu` `` outside one). Any
+host still using a raw react-bootstrap `<Dropdown>` — or the separate
+`ActionDropdownButton` host component, which had the identical problem —
+broke the moment its menu opened. Found live in production as
+`AddUserButton` crashing inside `project/team/TeamDropdownActions.tsx`.
+
+Fixed by tracing the full blast radius rather than patching the one
+report: every raw `<Dropdown>` host in the codebase (21) and every
+`ActionDropdownButton` consumer (13), cross-referenced against all
+`ActionItem` importers to find which of their rendered children resolve
+to a Radix row by default. 12 hosts were genuinely affected — the rest
+render only literal Bootstrap content and needed nothing.
+
+`ActionDropdownButton.tsx` (13 consumers) was rewritten onto Radix,
+mirroring `ActionsDropdownComponent` but keeping its own distinct toggle
+markup — its caret rotates only while open, unlike
+`TableDropdownToggle`'s permanently-rotated labeled variant; the two
+triggers have always looked different, and unifying them is a separate,
+visual-risk change from a bugfix. Six of the twelve hosts shared one
+exact "+ Add" trigger (leading icon, label, trailing rotated caret) —
+extracted once as `AddDropdownToggle` rather than copied six times.
+`OfferingStateActions.tsx`'s react-bootstrap `Dropdown.Toggle split` and
+`DeployPageActions.tsx`'s `bsPrefix`-overridden toggle both had their
+*exact* rendered classes confirmed via a throwaway RTL render-and-inspect
+probe rather than reconstructed from reading react-bootstrap's source —
+`bsPrefix` turned out to replace the toggle's base class outright, not
+append to it, which is easy to get backwards by inference alone.
+
+Verified each of the 12 by rendering it under RTL, clicking its trigger,
+and asserting a real `role="menu"`/`role="menuitem"` tree with no thrown
+error. Not exhaustive by construction (a hand-picked list, however
+carefully traced) — the mechanical remainder still worth double-checking
+after any large call-site rewrite: re-grep for `<Dropdown[ >]` and every
+standalone `Dropdown*` export (`DropdownItem`, `DropdownDivider`,
+`DropdownButton`) after the fact, since `import { DropdownItem } from
+'react-bootstrap'` doesn't match a `<Dropdown` or `\bDropdown\b` search
+the way `Dropdown.Item` does. That second-pass grep caught four more
+(non-crashing, since a bare `DropdownItem`/`DropdownDivider` doesn't
+require context) — `ScriptEditorHeader.tsx`, `InvoicePayButton.tsx`,
+`ResourceMultiSelectAction.tsx`, `BatchProjectActions.tsx` — converted
+the same way.
+
+### The real Popover shell: `ActionsPopoverComponent` / `ActionsPopoverItem`
+
+The re-audit surfaced one case the crash sweep couldn't catch, because
+it doesn't crash: `ScriptEditorHeader.tsx` renders a `FilterBox` search
+input inside an `ActionsDropdownComponent` menu, predating this
+migration entirely. `ActionsDropdownComponent` silently changed meaning
+underneath it — from a Bootstrap-hosted panel (no typeahead) to a
+Radix `DropdownMenu` (owns focus, treats character keys as typeahead
+over its item collection) — without the file itself changing at all.
+
+Confirmed empirically before touching anything, per the standing rule
+that a `DropdownMenu` cannot host a text input (see "Menu vs. popover"
+above): a focused `<input>` inside `DropdownMenu.Content` receives
+ordinary keystrokes fine — until one happens to match a sibling item's
+typeahead prefix, at which point focus silently jumps to that item and
+every keystroke after is lost. Typing `alpha search text` next to an
+item literally titled "Alpha" landed exactly `"a"` in the input.
+
+Step 1 built `Popover`/`PopoverContent` in `packages/ui` for this exact
+class of problem, but that primitive is Tailwind-classed — reaching for
+it here would restyle this one menu into a different visual system than
+every other dropdown in the app, exactly the "one axis at a time"
+violation `ActionsDropdownComponent` itself was written to avoid. The
+fix instead is `ActionsDropdownComponent`'s Popover-backed twin, added
+alongside it in `src/table/ActionsDropdown.tsx`:
+
+- **`ActionsPopoverComponent`** — identical shell, trigger and Bootstrap
+  `.dropdown-menu` classing as `ActionsDropdownComponent`, on
+  `@radix-ui/react-popover` instead of `@radix-ui/react-dropdown-menu`.
+  Popover has no roving-tabindex item collection at all, so a focused
+  input's keystrokes are never at risk of being reinterpreted.
+- **`ActionsPopoverItem`** — the necessary companion, not an
+  afterthought: `ActionsDropdownItem` wraps `RadixDropdownMenu.Item`,
+  which reads `DropdownMenu`'s own collection context specifically and
+  throws that identical "must be used within Menu" error under a
+  Popover too (confirmed empirically — the same instinct that said
+  "just reuse ActionsDropdownItem here" was tried and was wrong). A
+  Popover has no item/menu concept to hook into, so this is deliberately
+  a plain `.dropdown-item`-classed element instead, closed on activation
+  via `RadixPopover.Close asChild` — confirmed to need no `forwardRef`
+  on its composed child, since `Close` only merges an `onClick` and
+  never positions anything the way `Trigger`'s ref does.
+
+Root cause, restated as the standing check: **after converting any
+`ActionsDropdownComponent`/`ActionDropdownButton` consumer — or when
+reviewing one that predates this migration — grep its children for
+`<input`, `FilterBox`, `<select`, `Form.Control`, or any other typeable
+control.** A DropdownMenu is unsafe for that content even when nothing
+throws; only a proximity-based re-scan (not a plain "does this file
+mention Dropdown" grep) reliably finds it, since the offending file
+often imports nothing indicating a problem — it is what its neighbor
+imports that changed. Verified end-to-end with the adversarial case
+itself: typing `API_KEY` while an `API_SECRET` row sits nearby now
+reaches the search input intact and filters correctly.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

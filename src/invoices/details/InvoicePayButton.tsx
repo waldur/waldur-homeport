@@ -1,8 +1,8 @@
 import { MoneyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { DropdownItem } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useCustomer } from '@/workspace/hooks';
 
 import { Invoice } from '../types';
@@ -37,15 +37,16 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
       {translate('Pay')}
     </a>
   ) : (
-    <DropdownItem
-      href={row.payment_url}
-      target="_self"
-      rel="noopener noreferrer"
-    >
-      <span className="svg-icon svg-icon-2">
-        <MoneyIcon weight="bold" />
-      </span>
-      {translate('Pay')}
-    </DropdownItem>
+    // asChild: the row *is* the link, same reasoning as every other
+    // link-shaped ActionsDropdownItem in this migration (see
+    // OpenPublicOffering.tsx / MatrixChatHeader.tsx).
+    <ActionsDropdownItem asChild>
+      <a href={row.payment_url} target="_self" rel="noopener noreferrer">
+        <span className="svg-icon svg-icon-2">
+          <MoneyIcon weight="bold" />
+        </span>
+        {translate('Pay')}
+      </a>
+    </ActionsDropdownItem>
   );
 };

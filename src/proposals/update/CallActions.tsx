@@ -1,7 +1,6 @@
 import { ArchiveIcon, CopyIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import {
   proposalProtectedCallsActivate,
   proposalProtectedCallsArchive,
@@ -12,7 +11,10 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownSeparator,
+} from '@/table/ActionsDropdown';
 
 import { Call } from '../types';
 import {
@@ -191,7 +193,7 @@ export const CallActions: FC<CallActionsProps> = ({
         action={handleDuplicate}
         iconNode={<CopyIcon weight="bold" />}
       />
-      <Dropdown.Divider className="border-secondary" />
+      <ActionsDropdownSeparator className="border-secondary" />
       <ActionItem
         title={translate('Archive')}
         action={() => editCallState('archive', translate('Archive'))}
