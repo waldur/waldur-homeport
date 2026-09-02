@@ -13693,6 +13693,7 @@
   },
   "Decision expected by {date}.": {
     "context": {
+      "primary_ui_type": "text_content",
       "variables": {
         "date": {
           "type": "date"
@@ -61073,6 +61074,7 @@
     }
   },
   "Value should not be negative.": {},
+  "Value stored in User.registration_method for accounts created or adopted via Bearer token introspection (OIDCAuthentication). Set to the social IdP provider slug (e.g. 'eduteams') when introspection and OAuth share the same identity provider so IdentityProvider.protected_fields apply.": {},
   "Values are in 8KB pages": {
     "context": {
       "feature_area": "database-stats"
@@ -63458,6 +63460,7 @@
   },
   "Your confirmation is needed before resources are set up.": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "proposal"
     }
   },
@@ -63586,6 +63589,7 @@
   },
   "Your proposal is being reviewed.": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "proposal"
     }
   },
@@ -63611,6 +63615,7 @@
   },
   "Your request is being reviewed.": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "proposal"
     }
   },

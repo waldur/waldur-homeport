@@ -1,6 +1,6 @@
 import { InfoIcon, XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, PropsWithChildren, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { ProposalWorkflowStepInstance } from 'waldur-js-client';
 
 import { formatDate, formatRelative } from '@/core/dateUtils';
@@ -26,22 +26,10 @@ import {
 } from '../workflow/queries';
 
 import { getApplicantTimeline } from './applicantTimeline';
-import { ProgressSteps as ProposalStateSteps } from './create/ProgressSteps';
-
-/**
- * The one sentence under the tracker: whose turn it is, and when to expect
- * news.
- *
- * Centred under the stepper rather than flush left, and a step darker than
- * `text-muted`, because at the muted grey it read as a stray caption beside
- * the tracker it belongs to. Both branches below render it through here — and
- * both render it *inside* the panel, since the coarse tracker owns its own
- * card and an appended note would otherwise sit on the page background under
- * the tracker instead of within it.
- */
-const TrackerNote: FC<PropsWithChildren> = ({ children }) => (
-  <div className="text-center text-gray-700 fs-6 px-4 pb-4">{children}</div>
-);
+import {
+  CurrentStepNote,
+  ProgressSteps as ProposalStateSteps,
+} from './create/ProgressSteps';
 
 interface WorkflowTimelineProps {
   proposal: Proposal;
@@ -94,6 +82,49 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
     }
     return -1;
   }, [visibleStates, proposal.state]);
+
+  // What the applicant actually wants from a tracker: whether it is their
+  // turn, and when to expect news. Both are already in the payload, but the
+  // per-step deadlines below are `showDetails`-only, so without this an
+  // applicant on a call that does expose its steps would see no date at all.
+  //
+  // The applicant's line and no one else's: it is written in the second
+  // person, and the call team has the full per-step detail under every
+  // checkpoint. Handing it to them too would address them as the applicant
+  // and paint their tracker amber for a step that is not waiting on them.
+  const active = (data ?? []).find((s) => s.status === 'active');
+  const statusLine = useMemo<CurrentStepNote | undefined>(() => {
+    if (showDetails || !active) return undefined;
+    if (active.step === 'award_response') {
+      // Not a status report: the step is stalled on the applicant, which is
+      // what the design system's Status=Warning step is for — the same flag
+      // OrderInProgressView raises on a step held up on the user. The sentence
+      // already names the ask, so it carries no badge on top of it.
+      return {
+        variant: 'warning',
+        text: translate(
+          'Your confirmation is needed before resources are set up.',
+        ),
+      };
+    }
+    if (active.deadline) {
+      return {
+        text: translate('Decision expected by {date}.', {
+          date: formatDate(active.deadline),
+        }),
+      };
+    }
+    // `deadline` is computed from started_at plus the step's own
+    // duration_in_days, so a call that sets no per-step duration — the default
+    // — never has one, and the line above would render nothing at all. Say
+    // what is happening instead: knowing the request is moving is most of what
+    // the line was added to convey, and the date is the bonus when set.
+    return {
+      text: usesCallVocabulary()
+        ? translate('Your proposal is being reviewed.')
+        : translate('Your request is being reviewed.'),
+    };
+  }, [active, showDetails]);
 
   const steps = useMemo<ProgressStep[]>(() => {
     // Compact per-step detail: "<status> · <owner> · <date>" on one line, with
@@ -157,15 +188,11 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
       return {
         key: s.step,
         label,
-        // Colour the active step's label with the brand (green) so it reads as
-        // the current step rather than blending in with the pending ones. The
-        // stepper's own `.current` rule only greys the title; a utility class
-        // wins via !important (enable-important-utilities).
-        labelClass: isFailure
-          ? 'text-danger'
-          : s.status === 'active'
-            ? 'text-primary fw-semibold'
-            : undefined,
+        // Only the failure point needs a class of its own. The stepper already
+        // paints the current step per the design system — `text-brand-primary`
+        // at weight 500, and the status colour where a variant is set — so an
+        // override here would just be this view disagreeing with the system.
+        labelClass: isFailure ? 'text-danger' : undefined,
         // A failed step is a terminal red marker; treat it as "completed" so
         // it renders as a solid circle with the ✕ rather than an active dot.
         completed: s.status === 'completed' || isFailure,
@@ -177,48 +204,28 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
           (failureIndex !== -1 && !isFailure && s.status !== 'completed'),
         icon: isFailure ? <XIcon size={16} weight="bold" /> : undefined,
         // Brand colour for done/in-progress (default variant); red for the
-        // failure point; grey for everything past it and for pending steps.
-        variant: isFailure ? 'danger' : undefined,
+        // failure point; amber where the active step is waiting on the
+        // applicant; grey for everything past it and for pending steps.
+        variant: isFailure
+          ? 'danger'
+          : s.status === 'active'
+            ? statusLine?.variant
+            : undefined,
+        // The applicant's one line hangs under the step it is about rather
+        // than under the row as a whole — the stepper's own description slot,
+        // so it is styled and placed like every other thing said about a
+        // checkpoint. The call team gets the full detail there instead.
         description: isAfterFailure
           ? [translate('Not reached')]
           : showDetails
             ? detailLines(s)
-            : undefined,
+            : s.status === 'active' && statusLine
+              ? [statusLine.text]
+              : undefined,
       };
     });
     return [submission, ...rest];
-  }, [visibleStates, showDetails, failureIndex]);
-
-  // What the applicant actually wants from a tracker: whether it is their
-  // turn, and when to expect news. Both are already in the payload; only the
-  // call-manager view rendered them before. Rendered under either tracker: the
-  // per-step deadlines below are `showDetails`-only, so without this an
-  // applicant on a call that does expose its steps would see no date at all.
-  const active = (data ?? []).find((s) => s.status === 'active');
-  const statusLine = useMemo(() => {
-    if (!active) return undefined;
-    if (active.step === 'award_response') {
-      return translate(
-        'Your confirmation is needed before resources are set up.',
-      );
-    }
-    if (active.deadline) {
-      return translate('Decision expected by {date}.', {
-        date: formatDate(active.deadline),
-      });
-    }
-    // `deadline` is computed from started_at plus the step's own
-    // duration_in_days, so a call that sets no per-step duration — the default
-    // — never has one, and the line above would render nothing at all. Say
-    // what is happening instead: knowing the request is moving is most of what
-    // the line was added to convey, and the date is the bonus when set.
-    // Not for the call team: they read the per-step detail below, and the
-    // sentence is addressed to the applicant.
-    if (showDetails) return undefined;
-    return usesCallVocabulary()
-      ? translate('Your proposal is being reviewed.')
-      : translate('Your request is being reviewed.');
-  }, [active, showDetails]);
+  }, [visibleStates, showDetails, failureIndex, statusLine]);
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) {
@@ -236,7 +243,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
       <ProposalStateSteps
         proposal={proposal}
         bgClass="bg-body"
-        footer={statusLine ? <TrackerNote>{statusLine}</TrackerNote> : null}
+        note={statusLine}
       />
     );
   }
@@ -244,7 +251,6 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
   return (
     <Panel cardBordered className="overflow-hidden">
       <ProgressSteps steps={steps} bgClass="bg-body" />
-      {statusLine && <TrackerNote>{statusLine}</TrackerNote>}
       {/* Whether the call team has to press a button is their business, not
           the applicant's: from outside, parked and working both read as
           waiting. */}
