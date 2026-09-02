@@ -9,7 +9,7 @@ import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { ResourceActionMenuContext } from '@/marketplace/resources/actions/ResourceActionMenuContext';
 import { ActionButton } from '@/table/ActionButton';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
+import { ActionsDropdownItem, PlainActionItem } from '@/table/ActionsDropdown';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 export interface ActionItemProps {
@@ -30,8 +30,17 @@ export interface ActionItemProps {
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
-  const Component = props.as || ActionsDropdownItem;
   const actionMenuContext = useContext(ResourceActionMenuContext);
+  // Default to ActionsDropdownItem (a real RadixDropdownMenu.Item, needing
+  // a Menu Root/Content ancestor); ModalActionsDialog's "show all actions"
+  // search results render outside one entirely (a plain react-bootstrap
+  // Modal, not a Radix panel), so notInMenu switches every row in that
+  // tree to PlainActionItem — same appearance, zero Radix dependency.
+  const Component =
+    props.as ||
+    (actionMenuContext?.notInMenu ? PlainActionItem : ActionsDropdownItem);
+  const isMenuRow =
+    Component === ActionsDropdownItem || Component === PlainActionItem;
   if (
     props.actionId &&
     props.resource?.offering_plugin_options?.disabled_resource_actions?.includes(
@@ -56,7 +65,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
   }
 
   // When rendering as a Button (or any non-menu-item), use ActionButton or CompactActionButton
-  if (props.as && Component !== ActionsDropdownItem) {
+  if (props.as && !isMenuRow) {
     const ButtonComponent =
       props.size === 'sm' ? CompactActionButton : ActionButton;
     return (
@@ -75,7 +84,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     );
   }
 
-  return Component === ActionsDropdownItem ? (
+  return isMenuRow ? (
     <div className="d-flex align-items-center">
       <Component
         className={classNames(
@@ -83,14 +92,14 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           props.className,
           props.disabled && 'bg-hover-lighten',
         )}
-        // onSelect, not onClick: it covers keyboard activation (Enter/Space)
-        // as well as pointer, and Radix closes the menu afterwards on its
-        // own. The old implementation's two workarounds are both gone —
-        // `disabled` below is Radix's own, which blocks selection while
-        // leaving the row hoverable so its explanatory tooltip still shows
-        // (previously an early return inside onClick), and the menu no
-        // longer has to blur the toggle by hand after a pointer selection,
-        // because Radix returns focus to the trigger itself on close.
+        // onSelect, not onClick: both Component variants accept it —
+        // ActionsDropdownItem is Radix's own prop, closing the menu and
+        // returning focus to the trigger on its own; PlainActionItem
+        // (notInMenu) has no menu to close, so it just forwards onSelect
+        // as a plain click handler. Either way it covers keyboard
+        // activation (Enter/Space) as well as pointer. `disabled` blocks
+        // selection while leaving the row hoverable so its explanatory
+        // tooltip still shows.
         onSelect={() => props.action()}
         disabled={props.disabled}
       >

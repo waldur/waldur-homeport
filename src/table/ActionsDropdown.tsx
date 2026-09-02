@@ -259,6 +259,38 @@ export const ActionsDropdownItem = forwardRef<
 ));
 ActionsDropdownItem.displayName = 'ActionsDropdownItem';
 
+/**
+ * Same `.dropdown-item` look and `onSelect` API as ActionsDropdownItem,
+ * but with zero Radix dependency — for a row rendered outside any real
+ * Menu/Popover ancestor at all. `RadixDropdownMenu.Item` throws
+ * "`MenuItem` must be used within `Menu`" the moment it renders without a
+ * `Root`/`Content` above it (confirmed live: ModalActionsDialog's "show
+ * all actions" search results, a plain react-bootstrap `Modal`, not a
+ * Radix panel — `ActionItem.tsx` reads `ResourceActionMenuContext`'s
+ * `notInMenu` flag to switch to this here rather than its usual
+ * ActionsDropdownItem default). A native `<button>` gets Enter/Space
+ * activation and `disabled` handling for free, so there is no Radix
+ * behaviour left to replicate by hand.
+ */
+export const PlainActionItem = forwardRef<
+  HTMLButtonElement,
+  ComponentPropsWithoutRef<'button'> & { onSelect?: () => void }
+>(({ className, onSelect, onClick, disabled, ...props }, ref) => (
+  <button
+    ref={ref}
+    type="button"
+    role="menuitem"
+    disabled={disabled}
+    className={classNames('dropdown-item', className)}
+    onClick={(event) => {
+      onClick?.(event);
+      onSelect?.();
+    }}
+    {...props}
+  />
+));
+PlainActionItem.displayName = 'PlainActionItem';
+
 /** Bootstrap's non-interactive menu row, for group captions and messages. */
 export const ActionsDropdownItemText: FunctionComponent<
   PropsWithChildren<{ className?: string }>

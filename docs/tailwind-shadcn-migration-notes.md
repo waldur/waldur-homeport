@@ -1164,6 +1164,57 @@ short/numeric-looking custom class name as a name Tailwind might also
 generate a utility for, not just a name Bootstrap/Metronic happens to
 already use.
 
+## Fix: `ActionItem` crashed inside `ModalActionsDialog`'s "show all" search
+
+Reported live in production, pasted stack trace: `` `MenuItem` must be
+used within `Menu` `` from `ActionsDropdownItem` → `ActionItem` →
+`DialogActionItem` → `ForceDestroyAction`. Same root class of bug as the
+footer `MenuItem` crash earlier in this migration — a shared component
+rendered in a context its default assumes it will never see.
+
+`ActionItem` (`src/resource/actions/ActionItem.tsx`) defaults to
+rendering as `ActionsDropdownItem` — a real `RadixDropdownMenu.Item` —
+unless a caller passes its own `as`. Every resource-type action list
+(`OpenStackInstanceActions` and siblings, registered via
+`ActionsLists.tsx`) is written once and reused in *two* real places:
+
+- `ActionsPopover.tsx`'s inline quick-actions preview, inside
+  `ActionsDropdownComponent` — a real Radix menu. Safe.
+- `ModalActionsDialog.tsx`'s "show all actions" search results, reached
+  via that preview's own "Show all" link — rendered inside
+  `ActionDialogBody`, a plain react-bootstrap `Modal`, no Radix ancestor
+  of any kind. `RadixDropdownMenu.Item` throws immediately outside a
+  Root/Content. Every action in every resource type's list hit this the
+  moment someone opened "show all" — `ForceDestroyAction` is just the one
+  a live stack trace happened to name.
+
+Fixed by teaching `ActionItem` to switch its default `Component` based on
+context, the same way it already reads `ResourceActionMenuContext` for
+`query`/`hideDisabled`/`hideGroupName`/`hideNonImportant`. A new
+`notInMenu` field, set by `ActionDialogBody` (not `ActionsPopover`,
+which stays on the real-menu default), switches `ActionItem` to a new
+`PlainActionItem` (`src/table/ActionsDropdown.tsx`) — same `.dropdown-item`
+appearance and `onSelect` API as `ActionsDropdownItem`, but a plain native
+`<button>` with zero Radix dependency, so it works with no ancestor at
+all. Neither of the two existing non-menu options fit: `ActionButton`/
+`CompactActionButton` (already available via `ActionItem`'s `as` prop)
+render as visually distinct buttons, wrong for a list of search results
+styled as dropdown rows; `ActionsPopoverItem` (built earlier in this
+migration for the same "real row styling, no Menu semantics" need) still
+needs a `RadixPopover.Root`/`Content` ancestor via its own
+`RadixPopover.Close asChild`, which `ActionDialogBody` doesn't have
+either — this modal has no Radix primitive backing it whatsoever.
+
+Added `ActionItem.test.tsx`, a permanent regression test rendering
+`ActionItem` in both real contexts without mocking it — inside a real
+`ActionsDropdownComponent` (asserts the default Radix path still selects
+and closes correctly) and standalone under
+`ResourceActionMenuContext.Provider value={{ notInMenu: true }}` with no
+Radix ancestor at all (asserts it doesn't throw and still fires the
+action on click). Full suite: 527 test files / 3516 tests pass (1
+pre-existing, unrelated flaky test confirmed by re-running in isolation),
+0 lint errors on the changed files, tsc clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

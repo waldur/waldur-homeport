@@ -8,7 +8,10 @@ import { ResourceActionMenuContext } from './ResourceActionMenuContext';
 
 export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
   const [query, setQuery] = useState('');
-  const queryContextValue = useMemo(() => ({ query }), [query]);
+  const queryContextValue = useMemo(
+    () => ({ query, notInMenu: true }),
+    [query],
+  );
 
   return (
     <>
