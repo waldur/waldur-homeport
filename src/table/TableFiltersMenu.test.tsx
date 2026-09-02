@@ -61,6 +61,27 @@ describe('TableFiltersMenu', () => {
     expect(await screen.findByText('Catalog')).toBeInTheDocument();
   });
 
+  it('the "Add filter" button itself carries Radix\'s trigger state, not just Tip\'s wrapper', async () => {
+    // Regression test for a real bug: Tip (src/core/Tooltip.tsx) isn't
+    // forwardRef, so nesting it *inside* Trigger asChild left Radix with
+    // nothing but Tip itself to attach its ref/merged props to — the
+    // button rendered but Popper had no real element to anchor against,
+    // and the button never actually carried aria-expanded/data-state.
+    // jsdom doesn't fail on bad positioning (no real layout), so this
+    // asserts the attributes directly instead — the one part of the bug
+    // a DOM-only test *can* catch.
+    const user = userEvent.setup();
+    renderMenu();
+
+    const button = screen.getByRole('button', { name: 'Add filter' });
+    expect(button).toHaveAttribute('data-state', 'closed');
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+
+    await user.click(button);
+    expect(button).toHaveAttribute('data-state', 'open');
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+  });
+
   it('the column-filter toggle auto-opens the matching filter once clicked', async () => {
     const user = userEvent.setup();
     renderMenu({ openName: 'catalog_name' });

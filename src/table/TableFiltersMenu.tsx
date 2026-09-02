@@ -36,6 +36,23 @@ const SaveFilterDialog = lazyComponent(() =>
   })),
 );
 
+// TableBody.tsx's hasFilterMenu() decides whether to show a cell's inline
+// "filter by this value" shortcut by querying the DOM for
+// `#kt_content_container .table-filters-menu #filter-item-{key}` — a
+// selector that assumes this Content lives *inside* the page's content
+// wrapper, matching Metronic's own pre-Radix markup (never portaled).
+// Radix Popover.Portal defaults to document.body, which moves this
+// Content — and every `#filter-item-*` row inside it — clean outside
+// `#kt_content_container`, so that selector silently stopped matching
+// and the inline shortcut stopped appearing at all (reported live:
+// "inline & column table filters does not work anymore"). Anchoring the
+// portal back inside the content wrapper restores the assumption without
+// touching hasFilterMenu() itself. Falls back to Radix's own default
+// (document.body) wherever the wrapper isn't present — Storybook/tests
+// that don't render the real layout shell.
+const getFilterMenuPortalContainer = () =>
+  document.getElementById('kt_content_container') ?? undefined;
+
 /**
  * A row that flies out a sub-panel to the right on click — the same shape
  * as core's own `.menu-sub` flyout, but on a Radix Popover (its own
@@ -281,7 +298,10 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                 <FunnelSimpleIcon size={16} weight="bold" />
               </button>
             </RadixPopover.Trigger>
-            <RadixPopover.Portal forceMount>
+            <RadixPopover.Portal
+              forceMount
+              container={getFilterMenuPortalContainer()}
+            >
               {/* forceMount + a conditional `show` class, rather than
                   letting Radix unmount this while closed (its default):
                   TableBody.tsx's hasFilterMenu() decides whether to show
@@ -308,8 +328,18 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
           </>
         ) : (
           <>
-            <RadixPopover.Trigger asChild>
-              <Tip id="table-add-filter-tip" label={translate('Add filter')}>
+            {/* Tip wraps the Trigger, not the other way around: Tip
+                (src/core/Tooltip.tsx) is a plain function component, not
+                forwardRef, so nesting it *inside* `Trigger asChild` broke
+                the trigger outright — Radix's Slot had nothing but Tip
+                itself to attach its ref/merged props to, and Tip doesn't
+                forward either to the real <Button> further in. Reported
+                live: the button rendered but didn't open anything.
+                TableDropdownToggle's own disabled-tooltip case
+                (ActionsDropdown.tsx) uses this same wrap-the-trigger,
+                not wrap-inside-it, shape for the same reason. */}
+            <Tip id="table-add-filter-tip" label={translate('Add filter')}>
+              <RadixPopover.Trigger asChild>
                 <Button
                   variant="secondary"
                   size="sm"
@@ -320,11 +350,14 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                     <PlusIcon weight="bold" />
                   </span>
                 </Button>
-              </Tip>
-            </RadixPopover.Trigger>
+              </RadixPopover.Trigger>
+            </Tip>
             {/* forceMount + conditional `show` — same reasoning as the
                 column-filter toggle's Content above. */}
-            <RadixPopover.Portal forceMount>
+            <RadixPopover.Portal
+              forceMount
+              container={getFilterMenuPortalContainer()}
+            >
               <RadixPopover.Content
                 forceMount
                 side="bottom"

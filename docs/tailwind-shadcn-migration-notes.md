@@ -1465,6 +1465,150 @@ real host, don't mock the thing you just changed" discipline. Full
 suite: 532 test files / 3532 tests pass (0 flaky), 0 lint errors, tsc
 clean, build passes.
 
+## Fix: `TableFiltersMenu`'s "Add filter" button stopped opening
+
+Reported live right after the previous migration batch shipped: "Add
+filter button doesn't work at all now!" The button rendered — it just
+didn't open anything. Root cause: `Tip` (`src/core/Tooltip.tsx`) sat
+*inside* `RadixPopover.Trigger asChild`:
+
+```tsx
+// Before — broken
+<RadixPopover.Trigger asChild>
+  <Tip id="table-add-filter-tip" label={translate('Add filter')}>
+    <Button variant="secondary" size="sm" /* ... */>...</Button>
+  </Tip>
+</RadixPopover.Trigger>
+```
+
+`Tip` is a plain function component, not `forwardRef`, and doesn't spread
+`{...rest}` onto its own rendered `<span>` — only `onClick`/`className`
+are explicitly forwarded (confirmed by reading `Tooltip.tsx` in full).
+Radix's `Slot` (what `asChild` uses to merge props/ref onto its child)
+had nothing but `Tip` itself to attach to, and `Tip` forwards neither the
+`ref` nor the rest of Radix's merged props (`aria-expanded`,
+`data-state`, the Popper anchor wiring) down to the real `<Button>`
+further inside. The button rendered — Popper just had no real element to
+position against, and the click never toggled Radix's own state.
+
+**Why the existing jsdom test didn't catch it**: the test asserted
+"clicking opens the filter list," and that assertion *passed* on the
+broken code — `onClick` still fired via ordinary DOM event bubbling
+through `Tip`'s wrapping `<span>`, independent of whatever Radix's ref
+chain was doing. jsdom also has no real layout engine, so a
+`Trigger`/anchor mismatch that would visibly mis-position (or entirely
+fail to open) a real Popper-positioned panel produces no failure at all
+in jsdom. The fix needed a jsdom-checkable proxy for "did the ref chain
+actually reach the button": asserting `data-state`/`aria-expanded`
+directly on the button element, which Radix only ever sets on the
+element it actually captured a ref to.
+
+**Fix**: invert the nesting — `Tip` wraps `Trigger asChild`, not the
+other way around, matching the pre-existing pattern already used by
+`ActionsDropdown.tsx`'s `TableDropdownToggle` (which wraps an
+already-fully-composed toggle from *outside*, never sits inside an
+`asChild` chain):
+
+```tsx
+// After — Tip wraps the trigger
+<Tip id="table-add-filter-tip" label={translate('Add filter')}>
+  <RadixPopover.Trigger asChild>
+    <Button variant="secondary" size="sm" /* ... */>...</Button>
+  </RadixPopover.Trigger>
+</Tip>
+```
+
+Verified two ways: live in Storybook via real pointer events (confirmed
+`data-state="open"`, `aria-expanded="true"`, and a sane real-world panel
+position, not `0,0`/`NaN`), and a new jsdom test asserting those same
+attributes — proven to actually catch the bug via `git stash`/`git stash
+pop` (fails on the pre-fix code, passes after).
+
+**Broader, deliberately-not-fixed risk**: `Tip` not being `forwardRef` is
+a latent hazard for *any* future `asChild` composition that puts `Tip`
+directly inside a `Trigger`/`Anchor`. Making `Tip` itself `forwardRef` is
+a much higher-risk change (it's used everywhere in the app) than fixing
+the one broken call site, so it was deliberately left alone — the
+`TableDropdownToggle`/wrap-the-trigger shape is now the reference pattern
+for anywhere else this comes up.
+
+## Fix: inline and column table filters stopped appearing
+
+Reported live: "inline & column table filters does not work anymore too
+- but should." Unlike the "Add filter" bug above, the triggers involved
+here were structurally fine — no `Tip`-inside-`asChild` anywhere.
+
+Root cause was one level removed: `TableBody.tsx`'s `InlineFilterButton`
+(the per-cell "filter by this value" shortcut) only renders when
+`hasFilterMenu(column.filter)` finds `#kt_content_container
+.table-filters-menu #filter-item-{key}` in the DOM (see the
+`hasFilterMenu()` section above — this selector assumes Metronic's own
+never-portaled markup). `RadixPopover.Portal` defaults to rendering into
+`document.body`, which — once `TableFiltersMenu` moved onto Radix — moved
+its entire force-mounted content subtree, `#filter-item-*` rows included,
+*outside* `#kt_content_container` in the real DOM, even though it's
+nested inside that element in the React tree. The selector silently
+stopped matching, so `hasFilterMenu()` always returned `false` and the
+inline shortcut never rendered at all — for any column, on any table,
+regardless of whether its own menu was open or closed.
+
+The per-column header funnel icon (`TableFiltersMenu`'s `openName`
+branch, "column filters" in the report) isn't gated by `hasFilterMenu()`
+and opens independently of this bug; the report almost certainly refers
+to the same visible feature by both names — the per-cell shortcut *is*
+how you filter by a specific column's value once hovering a row.
+
+**Fix**: anchor the Portal back inside the page's content wrapper instead
+of touching `hasFilterMenu()` itself:
+
+```tsx
+const getFilterMenuPortalContainer = () =>
+  document.getElementById('kt_content_container') ?? undefined;
+// ...
+<RadixPopover.Portal forceMount container={getFilterMenuPortalContainer()}>
+```
+
+Applied to both of `TableFiltersMenu`'s `Portal` instances (column-toggle
+and "Add filter" branches) — the only two whose content `hasFilterMenu()`
+reads. Falls back to Radix's own default (`document.body`) wherever the
+wrapper isn't present, e.g. Storybook/tests that don't render the real
+layout shell.
+
+**A second, sharper timing trap surfaced while writing the regression
+test.** `getFilterMenuPortalContainer()` runs during React's render
+phase, before anything commits — so on the very *first* render of a tree
+where `#kt_content_container` and `TableFiltersMenu` mount together in
+one commit, `document.getElementById('kt_content_container')` still finds
+nothing, and the Portal falls back to `document.body` regardless of the
+fix. This never happens in the real app: `#kt_content_container` lives in
+the persistent page shell (`src/metronic/layout/components/Content.tsx`),
+mounted once, well before any individual table underneath it renders for
+the first time — so by the time any `TableFiltersMenu` instance ever
+renders, the wrapper is already sitting in the DOM from an earlier
+commit. A first attempt at both the live repro (a Storybook debug story)
+and the regression test rendered `#kt_content_container` as a plain JSX
+ancestor of the component under test — committing both in the same pass
+— and consequently kept "reproducing" the bug even after the fix was
+applied, until this ordering mismatch was diagnosed. The corrected repro
+creates `#kt_content_container` as a real DOM node and attaches it to
+`document.body` *before* calling `render()`/mounting the story, matching
+production's actual mount order.
+
+A second, unrelated ordering assumption came up in the same repro: real
+tables populate `rows` asynchronously (a fetch resolves after the filters
+bar has already committed); a synchronous, hard-coded `rows` array skips
+that entirely and — thanks to `TableCell`'s `React.memo` — never gets a
+second render pass to re-evaluate `hasFilterMenu()` against the
+now-current DOM. The regression test populates `rows` from an effect
+(mirroring a real fetch) for the same reason.
+
+Verified live in Storybook (`document.querySelector` for
+`#kt_content_container .table-filters-menu #filter-item-*` before/after
+the fix, plus a real pointer click confirming the shortcut opens with
+sane `data-state`/`aria-expanded`) and with a new jsdom regression test
+in `TableBody.test.tsx` — proven via `git stash`/`git stash pop` to fail
+against the pre-fix code and pass against the fix.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
