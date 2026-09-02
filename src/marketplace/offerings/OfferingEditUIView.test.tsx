@@ -93,4 +93,54 @@ describe('OfferingEditUIView', () => {
     expect(credentialsChild).toBeDefined();
     expect(credentialsChild.title).toBe('Credentials');
   });
+
+  const renderTabsFor = (offering) => {
+    renderWithProviders(
+      <OfferingEditUIView
+        offeringData={{ offering: offering as any }}
+        refetchOffering={vi.fn()}
+        isLoadingOffering={false}
+        isRefetchingOffering={false}
+        errorOffering={null}
+      />,
+    );
+    const calls = (usePageTabsTransmitter as any).mock.calls;
+    return calls[calls.length - 1][0];
+  };
+
+  it('renders accounting tab for a top-level offering', () => {
+    const tabs = renderTabsFor({
+      type: 'Standard',
+      name: 'Test Offering',
+      state: 'Draft',
+      billable: true,
+    });
+
+    expect(tabs.find((t) => t.key === 'accounting')).toBeDefined();
+  });
+
+  it('hides accounting tab for a child offering', () => {
+    const tabs = renderTabsFor({
+      type: 'Standard',
+      name: 'Test Instance Offering',
+      state: 'Draft',
+      billable: true,
+      parent_uuid: 'e7c079a2fab9ea77aecdd9ce8f04ff28',
+    });
+
+    expect(tabs.find((t) => t.key === 'accounting')).toBeUndefined();
+  });
+
+  // A top-level offering that is not invoiced still needs a plan of its own:
+  // activation requires one and there is no parent to inherit it from.
+  it('renders accounting tab for a non-billable top-level offering', () => {
+    const tabs = renderTabsFor({
+      type: 'Standard',
+      name: 'Test Offering',
+      state: 'Draft',
+      billable: false,
+    });
+
+    expect(tabs.find((t) => t.key === 'accounting')).toBeDefined();
+  });
 });

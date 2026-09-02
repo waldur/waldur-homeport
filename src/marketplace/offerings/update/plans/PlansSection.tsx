@@ -16,6 +16,7 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
 
+import { offeringOwnsPricing } from '../../utils';
 import { OfferingSectionProps } from '../types';
 import { useOfferingAccountingTableTabs } from '../utils';
 
@@ -78,6 +79,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
   });
 
   const canCreatePlan =
+    offeringOwnsPricing(props.offering) &&
     !hidePlanAddButton(props.offering.type, props.offering.plans) &&
     hasPermission(user, {
       permission: PermissionEnum.CREATE_OFFERING_PLAN,

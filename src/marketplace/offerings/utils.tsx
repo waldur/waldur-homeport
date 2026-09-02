@@ -167,3 +167,13 @@ export const getOfferingRestrictedRoles = (
 export const parentOfferingFilter = {
   type: 'OpenStack.Tenant',
 };
+
+// Whether plans and prices belong to this offering rather than to its parent.
+// A child offering is an implementation detail of its parent — the OpenStack
+// per-tenant Instance and Volume offerings are the case in point: they carry no
+// components of their own, and both ordering and the API resolve the parent's
+// plans anyway, so plans, prices, quotas and discounts have nothing to act on.
+// Being non-billable is a separate matter and deliberately not covered here: a
+// top-level offering that is not invoiced still needs a plan of its own,
+// because activation requires one and there is no parent to inherit it from.
+export const offeringOwnsPricing = (offering) => !offering.parent_uuid;
