@@ -277,6 +277,16 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         apply,
         openMenuName: props.openName,
         menuIsOpen: open,
+        // TableFilterItem.tsx positions its own flyout `bottom` (under the
+        // trigger) when opened from a column header versus `right` (beside
+        // the row) from the "Add filter" list — but this flag has been
+        // declared and read since it was introduced (Nov 2024,
+        // [WAL-7415]) without ever actually being set anywhere, so every
+        // filter flyout has always positioned as if opened from the "Add
+        // filter" list regardless of which trigger opened it. `openName`
+        // is only ever set on the column-header instance (TableHeader.tsx),
+        // so its presence is exactly the signal TableFilterItem needs.
+        columnFilter: Boolean(props.openName),
       }}
     >
       <RadixPopover.Root

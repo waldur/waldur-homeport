@@ -90,6 +90,32 @@ describe('TableFiltersMenu', () => {
     expect(await screen.findByPlaceholderText('Catalog')).toBeInTheDocument();
   });
 
+  it('positions the auto-opened filter below the column header, not beside it', async () => {
+    // Regression test for a real, long-standing bug: TableFilterItem.tsx
+    // positions its own flyout `bottom` (under the trigger) when opened
+    // from a column header versus `right` (beside the row) from the "Add
+    // filter" list, keyed off TableFilterContext's `columnFilter` flag —
+    // but that flag was declared and read since it was introduced
+    // (Nov 2024, [WAL-7415]) without ever actually being set anywhere in
+    // TableFiltersMenu.tsx, so every filter flyout always positioned as
+    // `right` regardless of which trigger opened it. Caught while
+    // investigating a live report about the column-header filter icon —
+    // the icon itself opened fine, but the flyout landed off to the side
+    // instead of dropping cleanly below the header, as the "Add
+    // filter"-vs-column-header code was clearly meant to distinguish.
+    const user = userEvent.setup();
+    renderMenu({ openName: 'catalog_name' });
+
+    await user.click(screen.getByRole('button', { name: 'Filter by column' }));
+    const input = await screen.findByPlaceholderText('Catalog');
+    // RTL has no "closest ancestor matching a role" query, and this
+    // specifically needs the Radix Content wrapper the input is nested
+    // inside (the one carrying the `data-side` Radix itself computed) —
+    // a direct ancestor lookup is the accurate check here.
+    const flyout = input.closest('[role="dialog"]'); // eslint-disable-line testing-library/no-node-access
+    expect(flyout).toHaveAttribute('data-side', 'bottom');
+  });
+
   it("keeps a filter row in the DOM while its menu is closed, for TableBody.tsx's hasFilterMenu() to find", () => {
     // Metronic's own markup was always mounted (CSS-hidden while closed);
     // Radix's default would unmount this — forceMount restores the

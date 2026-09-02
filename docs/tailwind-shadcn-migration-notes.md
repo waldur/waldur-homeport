@@ -1609,6 +1609,47 @@ sane `data-state`/`aria-expanded`) and with a new jsdom regression test
 in `TableBody.test.tsx` — proven via `git stash`/`git stash pop` to fail
 against the pre-fix code and pass against the fix.
 
+## Fix: column-header filter flyout positioned to the side instead of below
+
+Follow-up to the fix above — a user screenshot showing the column-header
+"State" filter icon open prompted a live re-check of that specific
+trigger. It turned out to open and function correctly end to end
+(clicking it, selecting a multi-select checkbox option, seeing it applied
+as a tag all worked); the first read of that check looked broken purely
+because of a self-inflicted test-methodology bug — checking
+`data-state` *synchronously* in the same script right after `.click()`,
+before Radix's resulting state update had actually committed. A `wait`
+between the click and the check showed the true, already-working state.
+Worth naming because it's the mirror image of the jsdom blind spot from
+earlier fixes in this doc: there it was jsdom passing a test that should
+have failed; here it was a live check reporting a failure that wasn't
+real, from not giving an async update time to land.
+
+While re-verifying, a second, genuinely real bug surfaced: the flyout
+opened from the column header positioned itself `side="right"` (beside
+the row) instead of `side="bottom"` (under the header) — cosmetically
+wrong, though usually saved from looking broken by Radix's own collision
+detection flipping it when there's no room to the right. `git log -S` on
+`columnFilter` (the context flag `TableFilterItem.tsx` reads to choose
+between the two) turned up nothing across the entire history of
+`src/table/` except its own declaration and read sites — the flag has
+been dead code since it was introduced in commit `d96c601b3` (Nov 2024,
+[WAL-7415]), unrelated to this migration; it was simply never wired to
+an actual value by whichever trigger opened the menu. Fixed in
+`TableFiltersMenu.tsx`'s context override:
+
+```tsx
+columnFilter: Boolean(props.openName),
+```
+
+`openName` is only ever set on the column-header instance
+(`TableHeader.tsx` passes it; the "Add filter" list instance in
+`TableFilters.tsx` doesn't), so its presence is exactly the signal
+`TableFilterItem` needs. Verified live (the auto-opened flyout's
+`data-side` flips from `right` to `bottom`) and with a new jsdom
+regression test in `TableFiltersMenu.test.tsx`, proven via a scripted
+stash of just that one line to fail without the fix and pass with it.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
