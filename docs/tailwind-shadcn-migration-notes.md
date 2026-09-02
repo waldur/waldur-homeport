@@ -1067,14 +1067,56 @@ Verified in Storybook: the compiled `animationName` on the open
 `SubContent` switched from the core (margin-based) keyframes to the new
 `translate`-based ones, and the panel's `getBoundingClientRect()` stayed
 at the correct, stable position throughout — no jump from the `translate`
-addition. (Live login on the local dev stack to confirm the *visual*
-smoothness directly wasn't possible — the seeded `staff`/`demo`
-credentials didn't match this instance, and repeated guesses risk a
-django-axes lockout — so this was verified structurally rather than by
-eye; ask if the flicker persists after this fix.) Full suite: 526 test
-files / 3513 tests pass (2 pre-existing, unrelated flaky tests confirmed
-by re-running in isolation), 0 lint errors on the changed files, tsc
-clean, build passes.
+addition. Live login on the local dev stack to confirm the *visual*
+smoothness directly wasn't possible at the time (the seeded `staff`/`demo`
+credentials didn't match this instance), so this was verified structurally
+rather than by eye — user confirmed afterwards, on their own logged-in
+session, that the flicker is gone. Full suite: 526 test files / 3513 tests
+pass (2 pre-existing, unrelated flaky tests confirmed by re-running in
+isolation), 0 lint errors on the changed files, tsc clean, build passes.
+
+## Fix: `ActionsDropdown`'s labeled-toggle caret didn't rotate on open
+
+Reported live via screenshot, right after the animation-stutter fix
+above was confirmed: the "Actions" button's caret (`TableDropdownToggle`
+in labeled mode, `src/table/ActionsDropdown.tsx`) stays pointing down
+while the menu is open, instead of flipping to point up.
+
+Root cause: the caret's rotation comes from a *generic*, non-menu-specific
+rule in `custom/_base.scss` — `.show, .active, .collapsible:not(.collapsed)
+> .rotate-180 { transform: rotateZ(180deg); … }` — which requires the
+*parent* element to carry one of those three classes. A react-bootstrap
+`<Dropdown.Toggle>` added `.show` to the toggle button itself while open,
+satisfying this; `RadixDropdownMenu.Trigger asChild` sets
+`data-state="open"` on that same button instead, which the rule never
+checked for, so the caret was permanently stuck in its closed orientation
+once react-bootstrap's `<Dropdown>` was replaced with
+`ActionsDropdownComponent`. Same category of bug as the two entries
+above (`.show`-class styling silently orphaned by a Radix conversion that
+sets `data-state` instead) — this is the third distinct place it's shown
+up, which suggests it's worth grepping for `> .rotate-180`-style parent
+selectors before any *future* Bootstrap/Metronic-menu-to-Radix conversion,
+rather than waiting for each one to surface live.
+
+Fixed in `custom/_dropdown.scss` with a narrowly-scoped bridge —
+`.dropdown-toggle[data-state='open'] > .rotate-180` — rather than adding
+`[data-state='open']` to the shared `_base.scss` rule itself: `.rotate-180`
+also drives real, unrelated non-Radix collapsibles (`AccordionCard`,
+sidebar menus) that already work correctly off `.show`/`.active`, and
+widening the shared rule risked matching some future unrelated element
+that happens to carry `data-state="open"` for its own reasons.
+`ActionDropdownButton.tsx`'s own toggle was checked too — already correct,
+since it applies `rotate-180` directly as a conditional class from JS
+state (`isOpen && 'rotate-180'`) rather than relying on a parent class at
+all, so no fix needed there.
+
+Verified in Storybook: dispatched a real pointer-down/up sequence at the
+trigger (a plain `.click()` doesn't reliably trigger Radix's open state)
+and read the caret's computed `transform` with CSS transitions disabled —
+`matrix(-1, 0, 0, -1, 0, 0)`, exactly `rotate(180deg)`, confirming the
+bridge applies. Full suite: 526 test files / 3514 tests pass (1
+pre-existing, unrelated flaky test confirmed by re-running in isolation),
+0 lint errors on the changed file, tsc clean, build passes.
 
 ## `packages/ui`: portable Tailwind/Radix primitives
 

@@ -27,3 +27,19 @@
   pointer-events: none;
   background-color: transparent;
 }
+
+// The labeled toggle's caret (TableDropdownToggle/AddDropdownToggle,
+// src/table/ActionsDropdown.tsx) flips via custom/_base.scss's generic
+// `.show, .active, .collapsible:not(.collapsed) > .rotate-180` rule, which
+// requires the *parent* to carry one of those classes — true for a
+// react-bootstrap `<Dropdown.Toggle>` (it adds `.show` to the toggle
+// button itself while open) but never true here, since
+// `RadixDropdownMenu.Trigger asChild` sets `data-state="open"` on the
+// button instead of a class. Bridged narrowly to this one button rather
+// than widening the shared _base.scss rule, which also drives unrelated
+// non-Radix collapsibles (AccordionCard, sidebar menus) that still use
+// the real `.show`/`.active` classes correctly on their own.
+.dropdown-toggle[data-state='open'] > .rotate-180 {
+  transform: rotateZ(180deg);
+  transition: transform 0.3s ease;
+}
