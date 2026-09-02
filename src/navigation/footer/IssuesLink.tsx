@@ -1,3 +1,4 @@
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import React from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -12,6 +13,12 @@ const QuickIssueContainer = lazyComponent(() =>
   ),
 );
 
+/**
+ * Uses RadixDropdownMenu.Item directly rather than NavMenuItem — see
+ * MenuItem.tsx's own comment on the doubled `.menu-item` wrapper this
+ * avoids. Selecting it (opens a drawer) closes the footer dropdown, which
+ * is fine: the drawer covers the same screen area regardless.
+ */
 export const IssuesLink: React.FC = () => {
   const { openDrawer } = useDrawer();
   const user = useUser();
@@ -24,16 +31,13 @@ export const IssuesLink: React.FC = () => {
   };
 
   return showIssues && user ? (
-    <div className="menu-item">
-      <span
+    <li className="menu-item">
+      <RadixDropdownMenu.Item
         className="menu-link px-3"
-        role="button"
-        onKeyDown={handleOpenDrawer}
-        onClick={handleOpenDrawer}
-        tabIndex={-1}
+        onSelect={handleOpenDrawer}
       >
         <span className="menu-title">{translate('Issues')}</span>
-      </span>
-    </div>
+      </RadixDropdownMenu.Item>
+    </li>
   ) : null;
 };

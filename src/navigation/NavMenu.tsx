@@ -1,6 +1,9 @@
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, useRef, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
+
+import { GRID_BREAKPOINTS } from '@/core/constants';
 
 /**
  * Radix-driven replacement for the header/footer/sidebar-popup menus built
@@ -70,6 +73,59 @@ const PLACEMENT_TO_SIDE_ALIGN = (
   ];
   return { side, align: align ?? 'center' };
 };
+
+/**
+ * Metronic's `data-kt-menu-trigger="{default: 'click', lg: 'hover'}"`
+ * pattern — a *top-level* trigger that opens on click below the `lg`
+ * breakpoint and on hover at `lg` and up. Genuinely different from a
+ * Sub's hover-open (which Radix's SubTrigger supports natively): this is
+ * a plain Root/Trigger, and Radix's DropdownMenuTrigger only ever opens
+ * on click/keyboard, with no built-in hover mode. Reproduced by hand
+ * instead: `open` is lifted and controlled, and the returned
+ * `hoverHandlers` need spreading onto *both* the trigger and the content
+ * (leaving off either one closes the menu the instant the pointer
+ * crosses the small visual gap between the button and its panel while
+ * moving toward it), gated to `lg`+ only. The 200ms close-on-leave delay
+ * isn't invented: it's Metronic's own MenuComponent default
+ * (`defaultMenuOptions.dropdown.hoverTimeout`,
+ * src/metronic/components/MenuComponent.ts), ported so a pointer
+ * momentarily leaving the panel while crossing back toward the trigger
+ * doesn't visibly flicker the menu shut. Shared by FooterDropdown.tsx and
+ * TabsList.tsx — both real, independent top-level triggers with this
+ * exact original attribute value, not a coincidence.
+ *
+ * `requireDesktop` (default `true`) gates hover to the `lg`+ breakpoint,
+ * matching that responsive `{default: 'click', lg: 'hover'}` value. Pass
+ * `false` for a trigger whose original `data-kt-menu-trigger` was the
+ * plain string `"hover"` with no responsive variant at all — hover is
+ * then unconditional, at every viewport width (PageBarTabs.tsx's
+ * in-page section tabs).
+ */
+export function useHoverMenu(requireDesktop = true) {
+  const isDesktopQuery = useMediaQuery({ minWidth: GRID_BREAKPOINTS.lg });
+  const isDesktop = requireDesktop ? isDesktopQuery : true;
+  const [open, setOpen] = useState(false);
+  const closeTimeout = useRef<ReturnType<typeof setTimeout>>();
+
+  const cancelClose = () => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+  };
+
+  const hoverHandlers = {
+    onMouseEnter: () => {
+      if (!isDesktop) return;
+      cancelClose();
+      setOpen(true);
+    },
+    onMouseLeave: () => {
+      if (!isDesktop) return;
+      cancelClose();
+      closeTimeout.current = setTimeout(() => setOpen(false), 200);
+    },
+  };
+
+  return { isDesktop, open, setOpen, hoverHandlers };
+}
 
 export const NavMenu = RadixDropdownMenu.Root;
 export const NavMenuTrigger = RadixDropdownMenu.Trigger;

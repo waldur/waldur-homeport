@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import {
   UISrefActive,
   UISrefProps,
@@ -11,6 +12,7 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
+import { NavMenu, NavMenuContent, useHoverMenu } from '@/navigation/NavMenu';
 
 import { isDescendantOf, useTabs } from './useTabs';
 
@@ -54,6 +56,82 @@ const findActiveTab = (tabs, router) => {
   });
 };
 
+/**
+ * The parent-tab-with-children case: a top-level trigger whose original
+ * `data-kt-menu-trigger="{default: 'click', lg: 'hover'}"` opened either
+ * an inline accordion (below `lg`) or a floating dropdown (`lg`+),
+ * per Metronic's own responsive CSS (`.menu-lg-down-accordion`,
+ * `.menu-sub-down-accordion.menu-sub-dropdown`).
+ *
+ * Both modes collapse to the same Radix dropdown here — a deliberate
+ * simplification, not an overlooked one. Metronic's own click handler
+ * never calls `preventDefault()` on this trigger
+ * (`MenuComponent.ts`'s `_click` — the line is commented out, not
+ * missing), and Link's own onClick always fires its state transition
+ * regardless, so clicking this row today already navigates away
+ * immediately in the common case (parentTab always carries its own
+ * `to`/`redirectTo`) — remounting the whole tree and making whatever the
+ * accordion was doing under it invisible in practice. Reproducing a true
+ * inline-accordion mode here would faithfully replicate a mode nothing
+ * can actually observe; a single hover-capable Radix dropdown (matching
+ * FooterDropdown.tsx's own identical original attribute value) is both
+ * simpler and already what `lg`+ users see today.
+ */
+export const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
+  parentTab,
+  active,
+}) => {
+  const { open, setOpen, hoverHandlers } = useHoverMenu();
+
+  return (
+    <NavMenu open={open} onOpenChange={setOpen} modal={false}>
+      <RadixDropdownMenu.Trigger asChild>
+        <span
+          className={classNames('menu-item me-0 me-lg-2', { here: active })}
+          {...hoverHandlers}
+        >
+          <MenuLink
+            to={
+              (typeof parentTab.redirectTo === 'string'
+                ? parentTab.redirectTo
+                : parentTab.redirectTo?.state) || parentTab.to
+            }
+            params={
+              typeof parentTab.redirectTo === 'object'
+                ? parentTab.redirectTo.params
+                : undefined
+            }
+          >
+            <span className="menu-title">{parentTab.title}</span>
+            <span className="menu-arrow" />
+          </MenuLink>
+        </span>
+      </RadixDropdownMenu.Trigger>
+      <NavMenuContent
+        placement="bottom-start"
+        className="menu-state-bg-gray menu-rounded-0 menu-dropdown-default py-2 w-200px"
+        {...hoverHandlers}
+      >
+        {parentTab.children.map((childTab, childIndex) => (
+          <UISrefActive class="showing" key={childIndex}>
+            <RadixDropdownMenu.Item asChild>
+              <Link
+                state={childTab.to}
+                params={childTab.params}
+                className="menu-item"
+              >
+                <span className="menu-link">
+                  <span className="menu-title">{childTab.title}</span>
+                </span>
+              </Link>
+            </RadixDropdownMenu.Item>
+          </UISrefActive>
+        ))}
+      </NavMenuContent>
+    </NavMenu>
+  );
+};
+
 export const TabsList: FC = () => {
   const tabs = useTabs();
   const router = useRouter();
@@ -81,54 +159,17 @@ export const TabsList: FC = () => {
     <>
       {visibleTabs.map((parentTab, parentIndex) =>
         parentTab.children?.length > 0 ? (
-          <span
-            data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-            data-kt-menu-placement="bottom-start"
-            className={classNames(
-              'menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2',
-              { here: isMatch(activeTab, parentTab) },
-            )}
+          <TabWithChildren
             key={parentIndex}
-          >
-            <MenuLink
-              to={
-                (typeof parentTab.redirectTo === 'string'
-                  ? parentTab.redirectTo
-                  : parentTab.redirectTo?.state) || parentTab.to
-              }
-              params={
-                typeof parentTab.redirectTo === 'object'
-                  ? parentTab.redirectTo.params
-                  : undefined
-              }
-            >
-              <span className="menu-title">{parentTab.title}</span>
-              <span className="menu-arrow" />
-            </MenuLink>
-            <div className="menu-sub menu-sub-down-accordion menu-sub-dropdown menu-state-bg-gray menu-rounded-0 menu-dropdown-default py-2 w-200px">
-              {parentTab.children.map((childTab, childIndex) => (
-                <UISrefActive class="showing" key={childIndex}>
-                  <Link
-                    state={childTab.to}
-                    params={childTab.params}
-                    className="menu-item"
-                    data-kt-menu-trigger="click"
-                  >
-                    <span className="menu-link">
-                      <span className="menu-title">{childTab.title}</span>
-                    </span>
-                  </Link>
-                </UISrefActive>
-              ))}
-            </div>
-          </span>
+            parentTab={parentTab}
+            active={isMatch(activeTab, parentTab)}
+          />
         ) : parentTab.to || parentTab.redirectTo ? (
           <span
             key={parentIndex}
             className={classNames('menu-item text-nowrap', {
               here: isMatch(activeTab, parentTab),
             })}
-            data-kt-menu-trigger="click"
           >
             <MenuLink
               to={

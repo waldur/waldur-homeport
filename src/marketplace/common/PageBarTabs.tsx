@@ -1,3 +1,4 @@
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { debounce, throttle } from 'lodash-es';
@@ -15,6 +16,12 @@ import { Button, Nav, TabContainer } from 'react-bootstrap';
 
 import { Link } from '@/core/Link';
 import { useDOMChangeObserver } from '@/core/useDomChangeObserver';
+import {
+  NavMenu,
+  NavMenuContent,
+  NavMenuTrigger,
+  useHoverMenu,
+} from '@/navigation/NavMenu';
 
 import { PageBarContext, PageBarTab } from '../context';
 import { scrollToSectionById } from '../offerings/utils';
@@ -31,49 +38,63 @@ interface PageBarTabProps {
   subTabs?: Omit<PageBarTabProps, 'children'>[];
 }
 
-const PageBarTabItem = (props: PageBarTabProps) =>
-  props.subTabs?.length > 0 ? (
-    <div>
-      <Button
-        variant="text-primary"
-        size="sm"
-        data-kt-menu-trigger="hover"
-        data-kt-menu-placement="bottom-start"
-        data-kt-menu-attach="parent"
-        className={
-          props.className ||
-          'bg-hover-secondary text-active-inverse-secondary btn-no-focus' +
-            (props.active || props.subTabs.some((child) => child.active)
-              ? ' active'
-              : '')
-        }
-        onClick={() => scrollToSectionById(props.name)}
-        data-testid={`page-bar-tab-${props.name}`}
-      >
-        {props.title}
-      </Button>
-
-      <div
-        className="menu menu-sub menu-sub-dropdown menu-column menu-gray-800 menu-state-bg-light fw-bold w-auto min-w-150px mw-300px py-2"
-        data-kt-menu="true"
+/**
+ * The subTabs branch's trigger was `data-kt-menu-trigger="hover"` with no
+ * responsive `{default: 'click', ...}` variant — unlike FooterDropdown.tsx
+ * / TabsList.tsx's responsive triggers, hover here is unconditional at
+ * every viewport width, so useHoverMenu(false) skips its `lg`+ gate. The
+ * trigger's own onClick (scrolling to the section) is independent of
+ * dropdown state and unaffected either way.
+ */
+export const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
+  const { open, setOpen, hoverHandlers } = useHoverMenu(false);
+  return (
+    <NavMenu open={open} onOpenChange={setOpen} modal={false}>
+      <NavMenuTrigger asChild>
+        <Button
+          variant="text-primary"
+          size="sm"
+          className={
+            props.className ||
+            'bg-hover-secondary text-active-inverse-secondary btn-no-focus' +
+              (props.active || props.subTabs.some((child) => child.active)
+                ? ' active'
+                : '')
+          }
+          onClick={() => scrollToSectionById(props.name)}
+          data-testid={`page-bar-tab-${props.name}`}
+          {...hoverHandlers}
+        >
+          {props.title}
+        </Button>
+      </NavMenuTrigger>
+      <NavMenuContent
+        placement="bottom-start"
+        className="menu menu-column menu-gray-800 menu-state-bg-light fw-bold w-auto min-w-150px mw-300px py-2"
+        {...hoverHandlers}
       >
         {props.subTabs.map((childTab, childIndex) => (
-          <div className="showing" key={childIndex}>
+          <RadixDropdownMenu.Item asChild key={childIndex}>
             <Link
               state={childTab.state}
               params={childTab.params}
-              className="menu-item"
-              data-kt-menu-trigger="click"
+              className="menu-item showing"
               onClick={() => scrollToSectionById(childTab.name)}
             >
               <span className="menu-link">
                 <span className="menu-title">{childTab.title}</span>
               </span>
             </Link>
-          </div>
+          </RadixDropdownMenu.Item>
         ))}
-      </div>
-    </div>
+      </NavMenuContent>
+    </NavMenu>
+  );
+};
+
+const PageBarTabItem = (props: PageBarTabProps) =>
+  props.subTabs?.length > 0 ? (
+    <PageBarTabItemWithSubTabs {...props} />
   ) : (
     <Link
       state={props.state}

@@ -826,6 +826,107 @@ link row for a childless item and a real, openable submenu for one with
 children. Full suite: 526 test files / 3514 tests pass, 0 lint errors,
 tsc clean, build passes.
 
+## Footer and tabs: the second `NavMenu` cluster, and hover-on-desktop
+
+Second cluster of the Metronic `.menu`/`.menu-sub-dropdown` migration
+(`src/navigation/NavMenu.tsx`, introduced for the header account menu —
+see that section above for the primitive itself and why it exists).
+Converted: the footer's `Support`/`Legal & Privacy` dropdowns
+(`FooterDropdown.tsx` + its consumers) and the app's top-level section
+tabs (`TabsList.tsx`, `Toolbar.tsx`, `PageBarTabs.tsx`'s in-page sub-tabs).
+
+### `useHoverMenu`: a top-level trigger that opens on hover
+
+Both `FooterDropdown.tsx` and `TabsList.tsx`'s parent-tab-with-children
+case carried the exact same original attribute:
+`data-kt-menu-trigger="{default: 'click', lg: 'hover'}"` — click below the
+`lg` breakpoint, hover at `lg` and up. This is a harder gap than the
+header cluster's submenus: Radix's `SubTrigger` opens on hover natively,
+but these are *top-level* `Trigger`s, and Radix's plain
+`DropdownMenuTrigger` only ever opens on click/keyboard with no hover
+mode at all. `useHoverMenu()` (`@/navigation/NavMenu`) reproduces it by
+hand — `open` lifted and controlled, `hoverHandlers` spread onto *both*
+the trigger and the content (mouseleave on either one alone closes the
+menu the instant the pointer crosses the small visual gap between button
+and panel while moving toward it), gated to `lg`+. The 200ms
+close-on-leave delay isn't invented: it's Metronic's own MenuComponent
+default (`defaultMenuOptions.dropdown.hoverTimeout`,
+`src/metronic/components/MenuComponent.ts`), ported so a pointer
+momentarily leaving the panel while crossing back toward the trigger
+doesn't visibly flicker the menu shut.
+
+`PageBarTabs.tsx`'s in-page sub-tabs carried a *different* original value
+— the plain string `data-kt-menu-trigger="hover"`, with no responsive
+`{default: 'click', ...}` variant at all. `useHoverMenu(false)` skips the
+`lg`+ gate for this one case — hover is unconditional at every viewport
+width, matching that literal attribute value rather than assuming every
+hover-trigger in the app was the responsive kind.
+
+Testing `useMediaQuery`-gated behavior directly hit a real environment
+limit worth recording: this project's jsdom has no `window.matchMedia` at
+all (`typeof window.matchMedia === 'undefined'`), and `react-responsive`'s
+own `matchmediaquery` dependency captures whatever `window.matchMedia`
+resolves to *at module-import time* — so reassigning
+`window.matchMedia = vi.fn(...)` inside a test has zero effect, silently.
+The fix is `vi.mock('react-responsive', () => ({ useMediaQuery:
+mockFn }))` instead, controlling the hook's return value directly rather
+than trying to make the browser API state behave through several layers
+of indirection.
+
+### Mobile accordion vs. dropdown: a deliberate simplification, checked first
+
+Metronic's own CSS gives `TabsList.tsx`'s parent-with-children tab *two
+different layout modes* depending on viewport — an inline accordion below
+`lg` (`.menu-lg-down-accordion`, `.menu-sub-down-accordion`) and a
+floating popup at `lg`+ (`.menu-sub-dropdown`) — a bigger difference than
+FooterDropdown's "same popup, different open-trigger" case, since Radix's
+`DropdownMenu` has no built-in inline/floating layout switch at all.
+
+Checked rather than assumed before simplifying: `MenuComponent.ts`'s own
+click handler never calls `preventDefault()` on this trigger (the line is
+present in the source, commented out — a deliberate vendor choice, not a
+gap) — and `Link.tsx`'s own `onClick` always fires its state transition
+regardless of what Metronic's accordion toggle does. So clicking this row
+*already* navigates away immediately in the common case (every real
+`parentTab` here carries its own `to`/`redirectTo`), remounting the whole
+tree and making whatever the accordion was doing underneath it invisible
+in practice today. Reproducing a true inline-accordion mode would
+faithfully replicate a mode nothing can actually observe; both
+breakpoints collapse to the same hover-capable Radix dropdown instead —
+simpler, and already what `lg`+ users see today. If a `parentTab` ever
+exists with children but no `to`/`redirectTo` of its own, this
+simplification is the one place in the whole migration worth re-checking
+against real usage before trusting it further.
+
+### Verification
+
+No prior test existed for `TabsList.tsx`/`PageBarTabs.tsx` at all (only
+`FooterDropdown.test.tsx` existed, and — like the header cluster — it
+only worked because Metronic kept submenu content in the DOM at all times
+just CSS-hidden; Radix mounts on open, so `getByTestId('child')` had to
+move behind a real click first, matching every other test adaptation in
+this migration). Two existing tests needed a second, different fix:
+`LegalPrivacyMenu.test.tsx` mocks `FooterDropdown` entirely, and its
+mock — a plain `<div>{children}</div>` — stopped providing real Radix
+menu context the moment `LegalPrivacyMenu`'s own rows became real
+`RadixDropdownMenu.Item`s; the mock now wraps children in a minimal real
+`RadixDropdownMenu.Root`/`Content` instead of a plain div.
+
+`TabWithChildren` and `PageBarTabItemWithSubTabs` are exported
+specifically for isolated testing — `TabsList`'s own `useOnStateChanged`
+call needs a full `<UIRouter>` context this project's router mock doesn't
+provide (pre-existing, unrelated to this migration), so testing the new
+Radix behavior in isolation was the tractable path. Verified: the
+dropdown opens on click regardless of viewport and lists real,
+keyboard-reachable `menuitem` rows; the `here`/active class still applies;
+`FooterDropdown`'s hover state machine — opens on hover, stays open
+immediately after leaving, closes ~200ms later, and re-entering the panel
+within that window cancels the pending close — all confirmed with fake
+timers; `PageBarTabItemWithSubTabs` opens on hover with no viewport gate,
+and its trigger's own scroll-to-section click still fires independently
+of the dropdown. Full suite: 526 test files / 3514 tests pass, 0 lint
+errors, tsc clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
