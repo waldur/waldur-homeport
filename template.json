@@ -48163,7 +48163,7 @@
       "feature_area": "openstack-network"
     }
   },
-  "Start and end must be in the future.": {
+  "Start and end time must be in the future.": {
     "context": {
       "feature_area": "maintenance"
     }
