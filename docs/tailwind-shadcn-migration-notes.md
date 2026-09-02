@@ -1215,6 +1215,41 @@ action on click). Full suite: 527 test files / 3516 tests pass (1
 pre-existing, unrelated flaky test confirmed by re-running in isolation),
 0 lint errors on the changed files, tsc clean, build passes.
 
+## Fix: `TabWithChildren` submenu font didn't match its own trigger
+
+Reported live via screenshot: the "Accounting" tab's dropdown ("Invoices",
+"Payment profiles") rendered in a visibly lighter, smaller-looking font
+than "Accounting"/"Policy" themselves — same `TabWithChildren` component
+as the two fixes above (`TabsList.tsx`), this time hit through the
+organization/customer tabs rather than the user-profile ones, since
+`TabsList` is the one shared component behind both (`Toolbar.tsx`'s only
+consumer).
+
+Root cause: `Toolbar.tsx` wraps the whole top-level tab bar in `fs-6
+fw-bolder` (`.menu.menu-row...fs-6.fw-bolder`), but `TabWithChildren`'s
+own dropdown `NavMenuContent` set neither — no font-size or font-weight
+class at all — so it fell back through the cascade to whatever
+`.menu-dropdown-default`/Bootstrap defaults resolve to, visibly lighter
+and marginally smaller than the trigger row above it. `UserDropdownMenu`
+(a sibling dropdown, `src/navigation/header/UserDropdown.tsx`) already
+sets `fw-bold fs-6` on its own content and was never reported with this
+problem — the reference this fix matches, though not literally: this app's
+`_variables.scss` redefines Bootstrap's `$font-weight-bold`/`$font-weight-bolder`
+as absolute values (500 / 600, not Bootstrap's default 700 / the relative
+keyword `bolder`), so `.fw-bold` (500) alone would have been visibly
+lighter than the trigger's own `.fw-bolder` (600) — confirmed by measuring
+both, not assumed. Used `fw-bolder`, matching the trigger's own weight
+exactly rather than the close-but-not-identical `fw-bold` UserDropdownMenu
+uses, since the user asked for the submenu to match "the menu itself"
+specifically, not just look similar.
+
+Verified in Storybook, wrapped in the same `fs-6 fw-bolder` toolbar
+classes `Toolbar.tsx` actually uses: trigger and every dropdown item now
+compute the identical `font-size` (14.001px), `font-weight` (600), and
+`font-family`. Full suite: 527 test files / 3516 tests pass (1
+pre-existing, unrelated flaky test), 0 lint errors, tsc clean, build
+passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
