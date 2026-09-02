@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
-import { Dropdown } from 'react-bootstrap';
-import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 
 import { translate } from '@/i18n';
 import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+} from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { ActionItemType } from './types';
@@ -25,7 +26,7 @@ interface ResourceActionComponentProps {
   marketplaceResource?: any;
   refetch?(): void;
   labeled?: boolean;
-  drop?: DropDirection;
+  drop?: 'up' | 'down' | 'start' | 'end';
   size?: 'sm' | 'lg';
 }
 
@@ -58,13 +59,13 @@ export const ResourceActionComponent: FunctionComponent<
     >
       {props.open ? (
         props.loading ? (
-          <Dropdown.Item eventKey="1">
+          <ActionsDropdownItem disabled>
             {translate('Loading actions')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         ) : props.error ? (
-          <Dropdown.Item eventKey="1">
+          <ActionsDropdownItem disabled>
             {translate('Unable to load actions')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         ) : props.customerResourceActions ||
           props.staffActions ||
           extraAndResourceTypeActions?.length > 0 ? (
@@ -122,9 +123,9 @@ export const ResourceActionComponent: FunctionComponent<
             )}
           </>
         ) : (
-          <Dropdown.Item eventKey="2">
+          <ActionsDropdownItem disabled>
             {translate('There are no actions.')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         )
       ) : null}
     </ActionsDropdownComponent>

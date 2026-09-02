@@ -1,10 +1,12 @@
 import { CheckIcon, ProhibitIcon, SpinnerIcon } from '@phosphor-icons/react';
-import { Dropdown } from 'react-bootstrap';
 import { User, usersPartialUpdate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+} from '@/table/ActionsDropdown';
 
 export const UserBulkActions = ({
   rows,
@@ -62,8 +64,8 @@ export const UserBulkActions = ({
 
   return (
     <ActionsDropdownComponent labeled drop="down">
-      <Dropdown.Item
-        onClick={() => activate()}
+      <ActionsDropdownItem
+        onSelect={() => activate()}
         disabled={isLoading || inactiveUsers.length === 0}
       >
         {isActivating ? (
@@ -76,9 +78,9 @@ export const UserBulkActions = ({
           <CheckIcon size={20} className="me-2" weight="bold" />
         )}
         {translate('Activate')}
-      </Dropdown.Item>
-      <Dropdown.Item
-        onClick={() => deactivate()}
+      </ActionsDropdownItem>
+      <ActionsDropdownItem
+        onSelect={() => deactivate()}
         disabled={isLoading || activeUsers.length === 0}
       >
         {isDeactivating ? (
@@ -91,7 +93,7 @@ export const UserBulkActions = ({
           <ProhibitIcon size={20} className="me-2" weight="bold" />
         )}
         {translate('Deactivate')}
-      </Dropdown.Item>
+      </ActionsDropdownItem>
     </ActionsDropdownComponent>
   );
 };

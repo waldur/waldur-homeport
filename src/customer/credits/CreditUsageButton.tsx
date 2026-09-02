@@ -1,10 +1,10 @@
 import { AddressBookIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Dropdown } from 'react-bootstrap';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 const CreditUsageDialog = lazyComponent(() =>
   import('./CreditUsageDialog').then((module) => ({
@@ -30,11 +30,11 @@ export const CreditUsageButton = ({ row, scope }) => {
     [row],
   );
   return (
-    <Dropdown.Item as="button" onClick={openDialog}>
+    <ActionsDropdownItem onSelect={openDialog}>
       <span className="svg-icon svg-icon-2">
         <AddressBookIcon weight="bold" />
       </span>
       {translate('Credit usage')}
-    </Dropdown.Item>
+    </ActionsDropdownItem>
   );
 };

@@ -7,7 +7,7 @@ import {
   PhoneIcon,
 } from '@phosphor-icons/react';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
 
 import Avatar from '@/core/Avatar';
@@ -16,7 +16,11 @@ import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+  ActionsDropdownSeparator,
+} from '@/table/ActionsDropdown';
 
 import { useMatrixCall } from './call/useMatrixCall';
 import { getChatAvatarColor } from './chatColors';
@@ -136,15 +140,15 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
 
   const kebab = (
     <ActionsDropdownComponent size="sm">
-      <Dropdown.Item onClick={handleMute}>
+      <ActionsDropdownItem onSelect={handleMute}>
         {muted ? (
           <BellIcon size={18} className="me-2" weight="bold" />
         ) : (
           <BellSlashIcon size={18} className="me-2" weight="bold" />
         )}
         {muted ? translate('Unmute') : translate('Mute')}
-      </Dropdown.Item>
-      {(rtcAvailable || matrixUri) && <Dropdown.Divider />}
+      </ActionsDropdownItem>
+      {(rtcAvailable || matrixUri) && <ActionsDropdownSeparator />}
       {rtcAvailable &&
         (blockedByOtherCall ? (
           <Tip
@@ -155,19 +159,15 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
             placement="left"
           >
             <span>
-              <Dropdown.Item
-                onClick={(e) => e.preventDefault()}
-                disabled
-                style={{ pointerEvents: 'none' }}
-              >
+              <ActionsDropdownItem disabled>
                 <PhoneIcon size={18} className="me-2" weight="bold" />
                 {translate('Start call')}
-              </Dropdown.Item>
+              </ActionsDropdownItem>
             </span>
           </Tip>
         ) : (
-          <Dropdown.Item
-            onClick={handleCall}
+          <ActionsDropdownItem
+            onSelect={handleCall}
             disabled={busy}
             className={isThisRoomsCall ? 'text-danger' : undefined}
           >
@@ -177,13 +177,15 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
               <PhoneIcon size={18} className="me-2" weight="bold" />
             )}
             {isThisRoomsCall ? translate('End call') : translate('Start call')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         ))}
       {matrixUri && (
-        <Dropdown.Item href={matrixUri} target="_blank" rel="noreferrer">
-          <ChatsCircleIcon size={18} className="me-2" weight="bold" />
-          {translate('Open in external Matrix client')}
-        </Dropdown.Item>
+        <ActionsDropdownItem asChild>
+          <a href={matrixUri} target="_blank" rel="noreferrer">
+            <ChatsCircleIcon size={18} className="me-2" weight="bold" />
+            {translate('Open in external Matrix client')}
+          </a>
+        </ActionsDropdownItem>
       )}
     </ActionsDropdownComponent>
   );

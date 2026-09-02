@@ -272,22 +272,20 @@ exports[`InternalIpsList > renders list 1`] = `
                   <div
                     aria-hidden="true"
                   >
-                    <div
-                      class="dropstart"
+                    <button
+                      aria-expanded="false"
+                      aria-haspopup="menu"
+                      class="btn dropdown-toggle btn-text-secondary btn-icon no-arrow btn-lg"
+                      data-state="closed"
+                      id="radix-:r0:"
+                      type="button"
                     >
-                      <button
-                        aria-expanded="false"
-                        class="btn-icon no-arrow dropdown-toggle btn btn-text-secondary btn-lg"
-                        id="react-aria-:r0:"
-                        type="button"
-                      >
-                        <span
-                          data-testid="DotsThreeVerticalIcon"
-                          size="22"
-                          weight="bold"
-                        />
-                      </button>
-                    </div>
+                      <span
+                        data-testid="DotsThreeVerticalIcon"
+                        size="22"
+                        weight="bold"
+                      />
+                    </button>
                   </div>
                 </td>
               </tr>

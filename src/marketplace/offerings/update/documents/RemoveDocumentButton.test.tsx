@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceOfferingFilesDestroy } from 'waldur-js-client';
 
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { RemoveDocumentAction } from './RemoveDocumentButton';
 
@@ -27,7 +27,9 @@ const offering = { uuid: 'offering-uuid', name: 'Test offering' } as any;
 const renderAction = () => {
   const refetch = vi.fn();
   const result = renderWithProviders(
-    <RemoveDocumentAction row={row} offering={offering} refetch={refetch} />,
+    inActionsMenu(
+      <RemoveDocumentAction row={row} offering={offering} refetch={refetch} />,
+    ),
   );
   return { ...result, refetch };
 };

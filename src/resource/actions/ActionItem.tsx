@@ -2,7 +2,6 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
 import { FC, ReactNode, useContext } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 
 import { Tip } from '@/core/Tooltip';
@@ -10,6 +9,7 @@ import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { ResourceActionMenuContext } from '@/marketplace/resources/actions/ResourceActionMenuContext';
 import { ActionButton } from '@/table/ActionButton';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 export interface ActionItemProps {
@@ -30,7 +30,7 @@ export interface ActionItemProps {
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
-  const Component = props.as || Dropdown.Item;
+  const Component = props.as || ActionsDropdownItem;
   const actionMenuContext = useContext(ResourceActionMenuContext);
   if (
     props.actionId &&
@@ -55,8 +55,8 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     return null;
   }
 
-  // When rendering as a Button (or any non-Dropdown.Item), use ActionButton or CompactActionButton
-  if (props.as && Component !== Dropdown.Item) {
+  // When rendering as a Button (or any non-menu-item), use ActionButton or CompactActionButton
+  if (props.as && Component !== ActionsDropdownItem) {
     const ButtonComponent =
       props.size === 'sm' ? CompactActionButton : ActionButton;
     return (
@@ -75,7 +75,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     );
   }
 
-  return Component === Dropdown.Item ? (
+  return Component === ActionsDropdownItem ? (
     <div className="d-flex align-items-center">
       <Component
         className={classNames(
@@ -83,26 +83,15 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           props.className,
           props.disabled && 'bg-hover-lighten',
         )}
-        // Workaround for rendering tooltips for disabled dropdown menu items.
-        // See also: https://stackoverflow.com/questions/57349166/
-        onClick={(event) => {
-          if (props.disabled) {
-            return;
-          }
-
-          props.action();
-
-          // Fix: Dropdown toggle may stay focused after pointer selection,
-          // making button state look stuck until next click.
-          if (event.detail > 0) {
-            requestAnimationFrame(() => {
-              const activeElement = document.activeElement;
-              if (activeElement instanceof HTMLElement) {
-                activeElement.blur();
-              }
-            });
-          }
-        }}
+        // onSelect, not onClick: it covers keyboard activation (Enter/Space)
+        // as well as pointer, and Radix closes the menu afterwards on its
+        // own. The old implementation's two workarounds are both gone —
+        // `disabled` below is Radix's own, which blocks selection while
+        // leaving the row hoverable so its explanatory tooltip still shows
+        // (previously an early return inside onClick), and the menu no
+        // longer has to blur the toggle by hand after a pointer selection,
+        // because Radix returns focus to the trigger itself on close.
+        onSelect={() => props.action()}
         disabled={props.disabled}
       >
         <div

@@ -1,11 +1,14 @@
 import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import { TableDropdownToggle } from '@/table/ActionsDropdown';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+  ActionsDropdownSeparator,
+} from '@/table/ActionsDropdown';
 
 import {
   deleteRabbitMQQueues,
@@ -109,19 +112,19 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
   const isPending = isPurging || isDeleting;
 
   return (
-    <Dropdown>
-      <TableDropdownToggle disabled={isPending} />
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={() => handlePurge()}>
-          <EraserIcon size={18} weight="bold" className="me-2" />
-          {translate('Purge messages')}
-        </Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item onClick={() => handleDelete()} className="text-danger">
-          <TrashIcon size={18} weight="bold" className="me-2" />
-          {translate('Delete queue')}
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <ActionsDropdownComponent disabled={isPending}>
+      <ActionsDropdownItem onSelect={() => handlePurge()}>
+        <EraserIcon size={18} weight="bold" className="me-2" />
+        {translate('Purge messages')}
+      </ActionsDropdownItem>
+      <ActionsDropdownSeparator />
+      <ActionsDropdownItem
+        onSelect={() => handleDelete()}
+        className="text-danger"
+      >
+        <TrashIcon size={18} weight="bold" className="me-2" />
+        {translate('Delete queue')}
+      </ActionsDropdownItem>
+    </ActionsDropdownComponent>
   );
 };

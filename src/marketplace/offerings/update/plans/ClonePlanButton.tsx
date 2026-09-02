@@ -1,10 +1,10 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Dropdown } from 'react-bootstrap';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { ADD_PLAN_FORM_ID } from './constants';
 
@@ -28,8 +28,8 @@ export const ClonePlanButton: FunctionComponent<{
     });
   };
   return (
-    <Dropdown.Item onClick={callback}>
+    <ActionsDropdownItem onSelect={callback}>
       <CopyIcon size={18} weight="bold" /> {translate('Clone')}
-    </Dropdown.Item>
+    </ActionsDropdownItem>
   );
 };

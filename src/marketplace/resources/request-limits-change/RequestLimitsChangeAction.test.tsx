@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { RequestLimitsChangeAction } from './RequestLimitsChangeAction';
@@ -14,7 +14,7 @@ vi.mock('@/permissions/hasPermission', () => ({
 
 const renderAction = (resource) => {
   return renderWithProviders(
-    <RequestLimitsChangeAction resource={resource as any} />,
+    inActionsMenu(<RequestLimitsChangeAction resource={resource as any} />),
   );
 };
 

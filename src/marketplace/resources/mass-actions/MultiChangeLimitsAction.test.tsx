@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { hasAllPermissions } from '@/permissions/hasPermission';
+import { inActionsMenu } from '@/test/harness';
 
 import { MultiChangeLimitsAction } from './MultiChangeLimitsAction';
 
@@ -36,50 +37,60 @@ describe('MultiChangeLimitsAction', () => {
 
   it('shows the action when all rows are OK OpenStack tenants with a plan and the user has permission', () => {
     render(
-      <MultiChangeLimitsAction
-        rows={[tenant(), tenant({ uuid: 'r2', name: 'VPC 2' })] as any}
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <MultiChangeLimitsAction
+          rows={[tenant(), tenant({ uuid: 'r2', name: 'VPC 2' })] as any}
+          refetch={vi.fn()}
+        />,
+      ),
     );
     expect(screen.getByText('Change limits')).toBeInTheDocument();
   });
 
   it('shows the action enabled when selected tenants belong to different offerings (uniformity is not gated)', () => {
     render(
-      <MultiChangeLimitsAction
-        rows={[tenant(), tenant({ uuid: 'r2', offering_uuid: 'off-2' })] as any}
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <MultiChangeLimitsAction
+          rows={
+            [tenant(), tenant({ uuid: 'r2', offering_uuid: 'off-2' })] as any
+          }
+          refetch={vi.fn()}
+        />,
+      ),
     );
     expect(screen.getByText('Change limits')).toBeInTheDocument();
   });
 
   it('shows the action (disabled) when a tenant is not associated with a plan', () => {
     render(
-      <MultiChangeLimitsAction
-        rows={[tenant(), tenant({ uuid: 'r2', plan_uuid: undefined })] as any}
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <MultiChangeLimitsAction
+          rows={[tenant(), tenant({ uuid: 'r2', plan_uuid: undefined })] as any}
+          refetch={vi.fn()}
+        />,
+      ),
     );
     expect(screen.getByText('Change limits')).toBeInTheDocument();
   });
 
   it('shows the action disabled when an offering disables the limit change action', () => {
     render(
-      <MultiChangeLimitsAction
-        rows={
-          [
-            tenant(),
-            tenant({
-              uuid: 'r2',
-              offering_plugin_options: {
-                disabled_resource_actions: ['update_limits'],
-              },
-            }),
-          ] as any
-        }
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <MultiChangeLimitsAction
+          rows={
+            [
+              tenant(),
+              tenant({
+                uuid: 'r2',
+                offering_plugin_options: {
+                  disabled_resource_actions: ['update_limits'],
+                },
+              }),
+            ] as any
+          }
+          refetch={vi.fn()}
+        />,
+      ),
     );
     expect(screen.getByText('Change limits')).toBeInTheDocument();
     // ActionItem marks disabled content with opacity-50.
@@ -89,7 +100,9 @@ describe('MultiChangeLimitsAction', () => {
   it('hides the action when the user lacks the change-limits permission', () => {
     vi.mocked(hasAllPermissions).mockReturnValue(false);
     const { container } = render(
-      <MultiChangeLimitsAction rows={[tenant()] as any} refetch={vi.fn()} />,
+      inActionsMenu(
+        <MultiChangeLimitsAction rows={[tenant()] as any} refetch={vi.fn()} />,
+      ),
     );
     expect(container).toBeEmptyDOMElement();
   });
@@ -101,25 +114,29 @@ describe('MultiChangeLimitsAction', () => {
 
   it('shows the action (disabled) when a selected resource is not an OpenStack tenant', () => {
     render(
-      <MultiChangeLimitsAction
-        rows={
-          [
-            tenant(),
-            tenant({ uuid: 'r2', offering_type: 'Support.OfferingTemplate' }),
-          ] as any
-        }
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <MultiChangeLimitsAction
+          rows={
+            [
+              tenant(),
+              tenant({ uuid: 'r2', offering_type: 'Support.OfferingTemplate' }),
+            ] as any
+          }
+          refetch={vi.fn()}
+        />,
+      ),
     );
     expect(screen.getByText('Change limits')).toBeInTheDocument();
   });
 
   it('shows the action (disabled) when a tenant is not in the OK state', () => {
     render(
-      <MultiChangeLimitsAction
-        rows={[tenant({ state: 'Erred' })] as any}
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <MultiChangeLimitsAction
+          rows={[tenant({ state: 'Erred' })] as any}
+          refetch={vi.fn()}
+        />,
+      ),
     );
     expect(screen.getByText('Change limits')).toBeInTheDocument();
   });

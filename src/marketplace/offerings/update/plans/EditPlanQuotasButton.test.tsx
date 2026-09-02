@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { EditPlanQuotasButton } from './EditPlanQuotasButton';
 
@@ -19,11 +19,15 @@ const component = (type, billing_type, is_prepaid = false) => ({
 
 const renderButton = (components) =>
   renderWithProviders(
-    <EditPlanQuotasButton
-      offering={{ components }}
-      plan={{ uuid: 'plan-1', quotas: {} }}
-      refetch={vi.fn()}
-    />,
+    // A menu row cannot render outside a menu now that it is a Radix item —
+    // see inActionsMenu.
+    inActionsMenu(
+      <EditPlanQuotasButton
+        offering={{ components }}
+        plan={{ uuid: 'plan-1', quotas: {} }}
+        refetch={vi.fn()}
+      />,
+    ),
   );
 
 const shownComponents = async () => {

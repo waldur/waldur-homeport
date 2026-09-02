@@ -437,6 +437,153 @@ Verified in Storybook (`Core/Popover`) rather than assumed: the trigger
 input keeping focus. The 288-case BaseButton visual parity suite still
 passes unchanged, so the `forwardRef` rewrite altered no rendering.
 
+## `ActionsDropdown`/`ActionItem`: the row-actions menu on Radix
+
+`src/table/ActionsDropdown.tsx` and `src/resource/actions/ActionItem.tsx`
+are reachable from ~184 and ~520 files respectively, so this was the
+highest-leverage single rewrite in the migration — converting them
+internally moved the bulk of the app's row-action menus onto Radix's
+`DropdownMenu` with **zero call-site edits** at most sites.
+
+### One axis at a time: behavior on Radix, appearance still Bootstrap
+
+The rewrite deliberately keeps `.dropdown-menu`/`.dropdown-item`/
+`.dropdown-toggle` class names on the Radix-driven markup, rather than
+also restyling onto packages/ui's Tailwind `DropdownMenu` in the same
+change. Those classes come from Bootstrap's own `_dropdown.scss`, not
+from Metronic's menu SCSS (`src/metronic/sass/core/components/menu/`), so
+this does not block deleting that ~1345-line stylesheet later — the two
+are unrelated CSS. It does mean the eventual Tailwind restyle is a
+separate, reviewable step with its own diff, instead of one change that
+silently changed both behavior and 184 files' appearance at once.
+
+Verified as a real parity claim, not an assumption: a Storybook story
+(`Table/ActionsDropdown`) opens the real menu, and its measured values —
+panel background/radius/shadow/padding/min-width, item padding/font/
+line-height/gap, even the exact hover fill `rgb(249, 250, 251)` — were
+compared against the live react-bootstrap version at the same route
+before conversion. Every value matched exactly. That baseline is worth
+re-capturing (open `Table/ActionsDropdown` in Storybook, click the
+trigger, read `getComputedStyle`) before the later restyle, so drift is
+caught immediately rather than discovered as a visual regression.
+
+### What Radix replaces outright
+
+Two workarounds in the old `ActionsDropdown` are gone because Radix does
+the job natively: the module-level pub/sub that closed every other open
+instance (Radix dismisses on outside pointer events on its own), and the
+manual `createPortal(children, document.body)` (Radix's own `Portal` does
+the same escape from the table's overflow/stacking context, while also
+keeping the menu tied to its trigger for positioning and focus return).
+`modal={false}` on the Root is a deliberate parity choice, not a
+default — a modal Radix menu blocks outside pointer events and locks body
+scroll, neither of which the Bootstrap dropdown did.
+
+### The one real appearance gap: keyboard highlight
+
+Bootstrap styles `.dropdown-item:hover`/`:focus`. Radix manages focus
+itself and marks the active row with `[data-highlighted]` — set for
+*both* keyboard navigation and pointer hover — so relying on `:focus`
+leaves arrow-key navigation completely unhighlighted (`:focus` also stops
+matching whenever the document itself isn't focused, which is exactly
+the state a driven-but-unfocused test page is in — this is what a naive
+"click and check `:focus`" verification would have missed entirely).
+`src/metronic/sass/custom/_dropdown.scss` (new) maps
+`.dropdown-item[data-highlighted]` to the same hover color, and
+`.dropdown-item[data-disabled]` to the same disabled treatment Bootstrap
+gave `.dropdown-item.disabled`/`:disabled` — necessary because a menu row
+is a `<div role="menuitem">` now, not a `<button>`, so `:disabled` no
+longer matches it at all.
+
+Confirmed behaviorally in Storybook, not just visually: `ArrowDown`
+correctly skips a `disabled` row entirely (lands on the next enabled one,
+not on the disabled row with no highlight), and clicking a disabled row
+does not fire its handler or close the menu.
+
+### `.dropdown-toggle` stays on the trigger buttons
+
+Both trigger button variants in `TableDropdownToggle` keep the
+`.dropdown-toggle` class even though Radix supplies its own
+`aria-haspopup`/`data-state` and has no use for Bootstrap's caret
+pseudo-element (`no-arrow` already suppresses that). Removing it was
+tried first and broke `.disabled-view`'s `table .dropdown-toggle,
+.dropdown-toggle.btn-icon { display: none }`
+(`src/metronic/sass/custom/_content.scss`) — every row-action toggle
+reappeared in every read-only view. Caught by the existing
+`MatrixChatHeader.test.tsx` suite, not by inspection — a reminder that
+"the class only draws a pseudo-element" is exactly the kind of claim
+worth grepping for before trusting it.
+
+### `ActionsDropdownShellProps` vs. `ActionsDropdownProps`
+
+`ActionsDropdownComponent` (the low-level Root+Trigger+Content shell) and
+`ActionsDropdown` (the row-actions convenience wrapper with
+`loading`/`error`/`actions`/`row`/`refetch`/`data`) intentionally have
+different, non-identical prop types — mirroring how the original code
+used react-bootstrap's own `DropdownProps` for the former and a separate,
+wider `ActionsDropdownProps` for the latter. `ActionsDropdownComponent`'s
+`...rest` is spread onto `RadixDropdownMenu.Content`, a real DOM element,
+so if its prop type were widened to include the wrapper-only fields, a
+caller could pass e.g. `data={{}}` straight to the shell and have it land
+as a stray, unrecognized DOM attribute. Keep this split when touching
+either type — collapsing them back into one interface silently reopens
+the gap.
+
+### New menu-only helper exports
+
+Alongside `ActionsDropdown`/`ActionsDropdownComponent`, the file now
+exports `ActionsDropdownItem` (the row itself — `forwardRef`, `onSelect`
+not `onClick`), `ActionsDropdownItemText` (Bootstrap's
+`.dropdown-item-text`, used by `ActionGroup`'s section caption),
+`ActionsDropdownHeader` (`.dropdown-header`) and
+`ActionsDropdownSeparator` (`.dropdown-divider`). Every file that
+previously rendered a bare react-bootstrap `Dropdown.Item`/`.Divider`/
+`.Header` inside an `ActionsDropdown` was converted to these — a plain
+element dropped into a Radix menu renders and is clickable, but is
+invisible to arrow-key navigation and typeahead and does not close the
+menu on activation, so leaving one unconverted is a silent regression,
+not a compile error.
+
+A menu row rendering a link (`DropdownLink`, or a plain external `<a>`)
+uses `<ActionsDropdownItem asChild><DropdownLink .../></ActionsDropdownItem>`
+so the row *is* the anchor rather than nesting one inside a `menuitem`
+div — this requires the link component itself to be `forwardRef`
+(`DropdownLink` needed converting), for the same Slot-cloning reason
+documented under BaseButton/Tooltip above.
+
+### Test fallout: a menu row cannot render standalone anymore
+
+Radix's `Item` reads menu context on render and throws `` `MenuItem`
+must be used within `Menu` `` outside a `DropdownMenu.Root`/`Content` —
+the single largest category of test failures this step produced (38 of
+50 initial failures, across 16 files), since react-bootstrap's
+`Dropdown.Item` had no such requirement and many action-button tests
+rendered the row component directly.
+
+`src/test/harness.tsx` now exports `inActionsMenu(children)`: an
+already-`open`, non-`modal` Root/Portal/Content with **no Trigger** —
+omitting the trigger is deliberate, since it would render a real
+`<button>` into the test container and break "this renders nothing"
+assertions that check for an empty container. Wrap any row-action
+component's render call with it:
+
+```tsx
+renderWithProviders(inActionsMenu(<DeleteCreditButton row={row} />));
+```
+
+Two smaller, real fallout items, not just mechanical fixups:
+
+- **`role="menuitem"`, not `role="button"`.** Rows are Radix menu items
+  now — the more accurate role, since react-bootstrap's `Dropdown.Item`
+  rendered a bare `<button>` with no menu semantics. Tests asserting on
+  rendered actions via `queryAllByRole('button')` needed to switch to
+  `'menuitem'`.
+- **`aria-disabled`, not the `.disabled` class.** A disabled row is a
+  `<div role="menuitem" aria-disabled="true">`, not a disabled
+  `<button>`, so `toHaveClass('disabled')` assertions needed to become
+  `toHaveAttribute('aria-disabled', 'true')` — real semantics assistive
+  tech can read, where the old markup only looked disabled.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

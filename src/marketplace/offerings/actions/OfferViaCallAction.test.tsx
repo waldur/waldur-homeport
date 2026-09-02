@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ServiceAccessMode } from '@/auth/types';
 import { ENV } from '@/core/config';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { OfferViaCallAction } from './OfferViaCallAction';
@@ -17,7 +17,7 @@ const render = ({
   vi.mocked(workspaceHooks.useUser).mockReturnValue(user as any);
   ENV.plugins.WALDUR_CORE.SERVICE_ACCESS_MODE = mode;
   return renderWithProviders(
-    <OfferViaCallAction row={offering} refetch={vi.fn()} />,
+    inActionsMenu(<OfferViaCallAction row={offering} refetch={vi.fn()} />),
   );
 };
 
@@ -55,10 +55,12 @@ describe('OfferViaCallAction', () => {
     } as any);
     ENV.plugins.WALDUR_CORE.SERVICE_ACCESS_MODE = 'marketplace';
     renderWithProviders(
-      <OfferViaCallAction
-        row={{ ...offering, state: 'Draft' }}
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <OfferViaCallAction
+          row={{ ...offering, state: 'Draft' }}
+          refetch={vi.fn()}
+        />,
+      ),
     );
     expect(isVisible()).toBe(false);
   });

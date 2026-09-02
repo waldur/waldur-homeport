@@ -3,30 +3,32 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { DestroyPortAction } from './DestroyPortAction';
 
 const renderAction = (deviceOwner: string | null) =>
   renderWithProviders(
-    <DestroyPortAction
-      resource={
-        {
-          uuid: 'port-uuid',
-          name: 'test-port',
-          state: 'OK',
-          resource_type: 'OpenStack.Port',
-          device_owner: deviceOwner,
-        } as any
-      }
-      refetch={vi.fn()}
-    />,
+    inActionsMenu(
+      <DestroyPortAction
+        resource={
+          {
+            uuid: 'port-uuid',
+            name: 'test-port',
+            state: 'OK',
+            resource_type: 'OpenStack.Port',
+            device_owner: deviceOwner,
+          } as any
+        }
+        refetch={vi.fn()}
+      />,
+    ),
   );
 
 const getConfirmationBody = () => {
   const confirm = vi.mocked(useModal().confirm);
   expect(confirm).toHaveBeenCalled();
-  return render(<>{confirm.mock.calls[0][1]}</>);
+  return render(inActionsMenu(<>{confirm.mock.calls[0][1]}</>));
 };
 
 describe('DestroyPortAction', () => {

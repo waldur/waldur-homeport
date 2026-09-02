@@ -1,0 +1,29 @@
+//
+// Dropdown
+//
+
+// The row-actions menu (src/table/ActionsDropdown.tsx) is driven by Radix's
+// DropdownMenu but still wears Bootstrap's `.dropdown-menu`/`.dropdown-item`
+// classes, so its appearance stays byte-identical to the react-bootstrap
+// version it replaced. Radix's own state attributes need mapping onto the
+// equivalent Bootstrap states, which is all this file does.
+//
+// `[data-highlighted]` is Radix's single hook for "this is the active row",
+// set both for keyboard navigation and for pointer hover. Bootstrap only
+// styles `:hover`/`:focus`, which covers the mouse but is unreliable for the
+// keyboard here: Radix manages focus itself, and `:focus` additionally stops
+// matching whenever the document as a whole is not focused. Without this
+// rule, arrowing through the menu highlights nothing.
+.dropdown-item[data-highlighted] {
+  color: $dropdown-link-hover-color;
+  background-color: $dropdown-link-hover-bg;
+}
+
+// Radix marks a disabled row with `data-disabled` rather than the
+// `.disabled` class or the `:disabled` pseudo-class Bootstrap looks for
+// (the row is a div with role="menuitem", not a <button>).
+.dropdown-item[data-disabled] {
+  color: $dropdown-link-disabled-color;
+  pointer-events: none;
+  background-color: transparent;
+}

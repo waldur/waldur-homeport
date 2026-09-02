@@ -1,9 +1,9 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { Dropdown } from 'react-bootstrap';
 import { marketplacePlansArchive } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 export const ArchivePlanButton = ({ plan, refetch }) => {
   const archiveMutation = useManagedMutation<any, any, void>({
@@ -23,11 +23,11 @@ export const ArchivePlanButton = ({ plan, refetch }) => {
     },
   });
   return (
-    <Dropdown.Item
-      onClick={() => archiveMutation.mutate()}
+    <ActionsDropdownItem
+      onSelect={() => archiveMutation.mutate()}
       disabled={archiveMutation.isPending}
     >
       <TrashIcon size={18} weight="bold" /> {translate('Archive')}
-    </Dropdown.Item>
+    </ActionsDropdownItem>
   );
 };
