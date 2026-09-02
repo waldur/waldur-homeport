@@ -927,6 +927,49 @@ and its trigger's own scroll-to-section click still fires independently
 of the dropdown. Full suite: 526 test files / 3514 tests pass, 0 lint
 errors, tsc clean, build passes.
 
+## Fix: footer `MenuItem` crashed outside `FooterDropdown`
+
+Reported live in production, straight after the footer/tabs cluster
+landed: `` `MenuItem` must be used within `Menu` `` from
+`src/navigation/footer/MenuItem.tsx`. Same root cause as the much larger
+crash sweep earlier in this migration (see "Fix: 'MenuItem must be used
+within Menu' crash on 12 dropdown hosts" above), at much smaller scale —
+worth recording anyway, because the way it slipped through is instructive.
+
+`MenuItem.tsx` has three real call sites, and only *one* of them is
+inside a real Radix menu:
+
+- `MobileMenu.tsx`'s **grouped** case (2+ dynamic items) — nested inside
+  `FooterDropdown.tsx`'s `NavMenuContent`. Real menu context.
+- `FooterLinks.tsx`'s **desktop** layout — renders `MenuItem` directly as
+  a `<ul>` child, no `FooterDropdown` anywhere above it.
+- `MobileMenu.tsx`'s **ungrouped** case (< 2 items) — returns `MenuItem`
+  elements directly, same as above, no menu ancestor.
+
+The conversion had used `RadixDropdownMenu.Item` internally (matching the
+sibling files in that same commit — `IssuesLink.tsx`, `DocsLink.tsx`,
+`LegalPrivacyMenu.tsx`'s `FooterMenuLink` — which all happen to have
+exactly *one* call site, always inside a real menu). `MenuItem.tsx` was
+checked against grep for "does `<MenuItem` appear inside a `FooterDropdown`
+render" and confirmed for the grouped case, but the other two standalone
+paths weren't independently re-verified before commit — a narrower audit
+than the crash-sweep methodology used earlier in this migration, which
+is exactly why it should have been re-run here too: a component's
+default behaviour has to work in *its narrowest real host*, not its
+richest one, and confirming that requires enumerating every host, not
+just the one being actively edited.
+
+Fixed by reverting `MenuItem.tsx` to a plain `<Link>` — no
+`RadixDropdownMenu.Item` at all, safe in all three contexts, at the cost
+of the grouped-mobile case not getting real ARIA `menuitem` semantics
+(a minor, accepted trade against a hard crash in the other two). A new
+`MenuItem.test.tsx` renders all three real host shapes without mocking
+`MenuItem` itself (`FooterLinks.test.tsx`'s existing mock of `MenuItem`
+is exactly why that suite couldn't have caught this) so this specific
+regression can't reappear silently. Full suite: 527 test files / 3517
+tests pass (527/3517, up from 526/3514 with the new test file), 0 lint
+errors, tsc clean, build passes.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

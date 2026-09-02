@@ -1,18 +1,17 @@
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
-
 import { Link } from '@/core/Link';
 
 /**
- * A real page navigation — closing its footer dropdown on click is
- * harmless and expected (the whole page transitions away regardless),
- * matching how UserDropdown.tsx treats every Link-based row.
- *
- * Uses RadixDropdownMenu.Item directly rather than NavMenuItem
- * (@/navigation/NavMenu): NavMenuItem's own `.menu-item` wrapper div
- * would double up with the `<li className="menu-item">` this component
- * already needs for itself (a direct `<li>` child of FooterLinks.tsx's
- * `<ul>` — Metronic styles the row by class, not tag, but the list
- * still needs valid `<li>` children).
+ * Deliberately plain — NOT a Radix menu item, even though it renders
+ * inside a real Radix menu in one of its three call sites
+ * (MobileMenu.tsx's grouped case, nested in FooterDropdown.tsx's
+ * NavMenuContent). The other two — FooterLinks.tsx's desktop layout and
+ * MobileMenu.tsx's own ungrouped case — render this as a *standalone*
+ * top-level footer nav link, with no Root/Content anywhere above it.
+ * A RadixDropdownMenu.Item (tried first, reverted here) throws
+ * "`MenuItem` must be used within `Menu`" the instant it renders outside
+ * one — real production crash, not a hypothetical. A component with
+ * more than one host has to work correctly in *its narrowest* host, not
+ * its richest one.
  */
 export const MenuItem = ({
   label,
@@ -26,11 +25,9 @@ export const MenuItem = ({
   className?: string;
 }) => (
   <li className="menu-item">
-    <RadixDropdownMenu.Item asChild>
-      <Link className={`menu-link ${className}`} state={state}>
-        {icon && <span className="menu-icon">{icon}</span>}
-        <span className="menu-title">{label}</span>
-      </Link>
-    </RadixDropdownMenu.Item>
+    <Link className={`menu-link ${className}`} state={state}>
+      {icon && <span className="menu-icon">{icon}</span>}
+      <span className="menu-title">{label}</span>
+    </Link>
   </li>
 );
