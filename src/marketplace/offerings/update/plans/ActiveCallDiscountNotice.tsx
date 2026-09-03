@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { proposalPublicCallsList } from 'waldur-js-client';
 
+import { AlertItem } from '@/core/AlertItem';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 
@@ -40,18 +41,16 @@ export const ActiveCallDiscountNotice: FC<ActiveCallDiscountNoticeProps> = ({
     return null;
   }
   return (
-    <div className="alert alert-warning d-flex flex-column gap-1 mb-5">
-      <strong>
-        {translate('This offering is open in {count} active call(s)', {
-          count: data.length,
-        })}
-      </strong>
-      <span className="fs-7">
-        {translate(
-          'Applicants to {calls} see prices while writing a proposal. A discount is only shown there when its scope is per-resource and its formula is tier-based — otherwise they plan against the undiscounted price and are billed the discounted one.',
-          { calls: data.map((call) => call.name).join(', ') },
-        )}
-      </span>
-    </div>
+    <AlertItem
+      variant="warning"
+      className="mb-5"
+      title={translate('This offering is open in {count} active call(s)', {
+        count: data.length,
+      })}
+      body={translate(
+        'Applicants to {calls} see prices while writing a proposal. A discount is only shown there when its scope is per-resource and its formula is tier-based — otherwise they plan against the undiscounted price and are billed the discounted one.',
+        { calls: data.map((call) => call.name).join(', ') },
+      )}
+    />
   );
 };

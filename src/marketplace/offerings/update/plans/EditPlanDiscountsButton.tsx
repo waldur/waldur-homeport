@@ -1,10 +1,10 @@
 import { TagIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Dropdown } from 'react-bootstrap';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const EditPlanDiscountsDialog = lazyComponent(() =>
   import('./EditPlanDiscountsDialog').then((module) => ({
@@ -25,8 +25,10 @@ export const EditPlanDiscountsButton: FunctionComponent<{
     });
   };
   return (
-    <Dropdown.Item onClick={callback}>
-      <TagIcon size={18} weight="bold" /> {translate('Edit discounts')}
-    </Dropdown.Item>
+    <ActionItem
+      title={translate('Edit discounts')}
+      action={callback}
+      iconNode={<TagIcon weight="bold" />}
+    />
   );
 };
