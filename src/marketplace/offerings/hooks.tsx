@@ -3,6 +3,8 @@ import { Offering, ServiceProvider } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { IBreadcrumbItem } from '@/navigation/types';
 
+import { getMarketplaceTitle } from '../title';
+
 import { OfferingBreadcrumbPopover } from './OfferingBreadcrumbPopover';
 
 export const getOfferingBreadcrumbItems = (
@@ -13,7 +15,7 @@ export const getOfferingBreadcrumbItems = (
   return [
     {
       key: 'marketplace',
-      text: translate('Marketplace'),
+      text: getMarketplaceTitle(),
       to: 'public.marketplace-landing',
     },
     {

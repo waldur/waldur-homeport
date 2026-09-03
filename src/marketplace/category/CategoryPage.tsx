@@ -21,6 +21,7 @@ import { CardStyleProvider } from '../landing/CardStyleContext';
 import { PageBarFilters } from '../landing/filter/PageBarFilters';
 import { getMarketplaceFilters } from '../landing/filter/store/selectors';
 import { MarketplaceLandingFilter } from '../landing/MarketplaceLandingFilter';
+import { getMarketplaceTitle } from '../title';
 import { useMarketplacePublicTabs } from '../utils';
 
 import { CategoryOfferingsList } from './CategoryOfferingsList';
@@ -55,7 +56,7 @@ export const CategoryPage: FunctionComponent = () => {
     () => [
       {
         key: 'marketplace',
-        text: translate('Marketplace'),
+        text: getMarketplaceTitle(),
         to: 'public.marketplace-landing',
       },
       {

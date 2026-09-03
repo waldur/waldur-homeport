@@ -913,7 +913,11 @@ class EnhancedTranslationExtractor {
 
   // Get all TypeScript files recursively
   getAllTSFiles(dirPath, arrayOfFiles = []) {
-    const files = fs.readdirSync(dirPath);
+    // Sorted: readdir returns filesystem order, which differs between
+    // macOS and the Linux CI runner. Feature area is taken from the first
+    // file a string is seen in, so unsorted walking made template.json
+    // differ per machine and the freshness check fail at random.
+    const files = fs.readdirSync(dirPath).sort();
 
     files.forEach((file) => {
       const fullPath = path.join(dirPath, file);

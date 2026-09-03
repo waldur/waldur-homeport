@@ -1,10 +1,12 @@
 import { translate } from '@/i18n';
 import { IBreadcrumbItem } from '@/navigation/types';
 
+import { getMarketplaceTitle } from '../title';
+
 export const getProviderBreadcrumbItems = (provider): IBreadcrumbItem[] => [
   {
     key: 'marketplace',
-    text: translate('Marketplace'),
+    text: getMarketplaceTitle(),
     to: 'public.marketplace-landing',
   },
   {

@@ -28,7 +28,14 @@ export const useCategories = () => {
             query: {
               page,
               page_size: MAX_PAGE_SIZE,
-              field: ['uuid', 'icon', 'title', 'offering_count', 'group'],
+              field: [
+                'uuid',
+                'icon',
+                'title',
+                'description',
+                'offering_count',
+                'group',
+              ],
               ...contextFilter,
             },
           }),

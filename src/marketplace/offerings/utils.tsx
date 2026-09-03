@@ -8,6 +8,8 @@ import {
   checkIsStaffOrSupport,
 } from '@/workspace/selectors';
 
+import { getMarketplaceTitle } from '../title';
+
 import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';
 
 const ARTICLE_CODE_PATTERN = new RegExp(
@@ -83,7 +85,7 @@ export const getPublicOfferingBreadcrumbItems = (
   return [
     {
       key: 'marketplace',
-      text: translate('Marketplace'),
+      text: getMarketplaceTitle(),
       to: 'public.marketplace-landing',
     },
     {

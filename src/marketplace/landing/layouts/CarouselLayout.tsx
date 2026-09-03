@@ -14,6 +14,7 @@ import {
   useOfferingListFilter,
 } from '@/marketplace/landing/utils';
 import { CategoryLink } from '@/marketplace/links/CategoryLink';
+import { getMarketplaceTitle } from '@/marketplace/title';
 import { Category } from '@/marketplace/types';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
@@ -24,10 +25,9 @@ import { CarouselSection } from './CarouselSection';
 import { CategoryCarouselSection } from './CategoryCarouselSection';
 import { CategoryThumbnail } from './CategoryThumbnail';
 import { MarketplaceLayoutProps } from './types';
-import { useMarketplaceTitle } from './useMarketplaceTitle';
 
 export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
-  const title = useMarketplaceTitle();
+  const title = getMarketplaceTitle();
   const cardStyle = useCardStyle();
   const categories = useCategories();
 
