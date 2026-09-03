@@ -1,10 +1,10 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Dropdown } from 'react-bootstrap';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const EditPlanQuotasDialog = lazyComponent(() =>
   import('./EditPlanQuotasDialog').then((module) => ({
@@ -42,8 +42,10 @@ export const EditPlanQuotasButton: FunctionComponent<{
     });
   };
   return (
-    <Dropdown.Item onClick={callback}>
-      <PencilSimpleIcon size={18} weight="bold" /> {translate('Edit quotas')}
-    </Dropdown.Item>
+    <ActionItem
+      title={translate('Edit quotas')}
+      action={callback}
+      iconNode={<PencilSimpleIcon weight="bold" />}
+    />
   );
 };

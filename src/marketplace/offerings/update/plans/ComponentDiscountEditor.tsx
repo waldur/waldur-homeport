@@ -3,6 +3,8 @@ import { FunctionComponent, useState } from 'react';
 import { Field, useField, useForm } from 'react-final-form';
 import { OfferingComponent } from 'waldur-js-client';
 
+import { BaseButton } from '@/core/buttons/BaseButton';
+import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 
 import {
@@ -78,18 +80,14 @@ export const ComponentDiscountEditor: FunctionComponent<
       </div>
 
       <div className="mb-4" style={{ maxWidth: 400 }}>
-        <label className="form-label mb-1">{translate('Discount scope')}</label>
-        <Field name={`${base}.discount_aggregation`}>
-          {({ input }) => (
-            <select className="form-select" {...input}>
-              {getAggregationOptions().map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          )}
-        </Field>
+        <SelectGroup
+          name={`${base}.discount_aggregation`}
+          label={translate('Discount scope')}
+          options={getAggregationOptions()}
+          simpleValue
+          isClearable={false}
+          spaceless
+        />
       </div>
 
       {mode === 'tiers' ? (
@@ -118,33 +116,35 @@ export const ComponentDiscountEditor: FunctionComponent<
                 onChange={(e) => updateTier(index, 'percent', e.target.value)}
               />
               <span className="text-muted">{translate('% off')}</span>
-              <button
+              <BaseButton
                 type="button"
-                className="btn btn-sm btn-icon btn-danger ms-1"
-                title={translate('Remove tier')}
+                variant="danger"
+                size="sm"
+                className="ms-1"
+                tooltip={translate('Remove tier')}
+                iconNode={<TrashIcon weight="bold" />}
                 onClick={() => commitTiers(tiers.filter((_, i) => i !== index))}
-              >
-                <TrashIcon weight="bold" />
-              </button>
+              />
             </div>
           ))}
           <div className="d-flex align-items-center gap-4 mt-3">
-            <button
+            <BaseButton
               type="button"
-              className="btn btn-sm btn-light-primary"
+              variant="tertiary"
+              size="sm"
+              iconNode={<PlusIcon weight="bold" />}
+              label={translate('Add tier')}
               onClick={() =>
                 commitTiers([...tiers, { threshold: '', percent: '' }])
               }
-            >
-              <PlusIcon weight="bold" /> {translate('Add tier')}
-            </button>
-            <button
+            />
+            <BaseButton
               type="button"
-              className="btn btn-link btn-sm p-0"
+              variant="text-primary"
+              size="sm"
+              label={translate('Advanced: edit formula')}
               onClick={() => setMode('advanced')}
-            >
-              {translate('Advanced: edit formula')}
-            </button>
+            />
           </div>
           {tiers.length > 0 && (
             <div className="d-flex align-items-center gap-2 mt-4 text-muted">
@@ -179,16 +179,16 @@ export const ComponentDiscountEditor: FunctionComponent<
             )}
           </p>
           {canUseTierBuilder && (
-            <button
+            <BaseButton
               type="button"
-              className="btn btn-link btn-sm p-0"
+              variant="text-primary"
+              size="sm"
+              label={translate('Back to tier builder')}
               onClick={() => {
                 setTiers(parseFormulaToTiers(currentFormula) || []);
                 setMode('tiers');
               }}
-            >
-              {translate('Back to tier builder')}
-            </button>
+            />
           )}
         </>
       )}
