@@ -6,6 +6,7 @@ import { ENV } from '@/core/config';
 import { syncFiltersToURL } from '@/core/filters';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { getMarketplaceTitle } from '@/marketplace/title';
 import { useMarketplacePublicTabs } from '@/marketplace/utils';
 import {
   useExtraToolbar,
@@ -24,10 +25,7 @@ import { LAYOUTS, MarketplaceLayoutType } from './layouts';
 import { MarketplaceLandingFilter } from './MarketplaceLandingFilter';
 
 export const LandingPage: FC<{}> = () => {
-  useTitle(
-    ENV.plugins.WALDUR_CORE.MARKETPLACE_LANDING_PAGE ||
-      translate('Marketplace'),
-  );
+  useTitle(getMarketplaceTitle());
   useFullPage();
 
   useMarketplacePublicTabs();

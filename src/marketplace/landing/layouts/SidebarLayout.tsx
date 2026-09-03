@@ -13,6 +13,7 @@ import {
   getOfferingGridSize,
   useOfferingListFilter,
 } from '@/marketplace/landing/utils';
+import { getMarketplaceTitle } from '@/marketplace/title';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -20,10 +21,9 @@ import { useTable } from '@/table/useTable';
 import { CategorySelection, CategorySidebar } from './CategorySidebar';
 import './SidebarLayout.scss';
 import { MarketplaceLayoutProps } from './types';
-import { useMarketplaceTitle } from './useMarketplaceTitle';
 
 export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
-  const title = useMarketplaceTitle();
+  const title = getMarketplaceTitle();
   const cardStyle = useCardStyle();
   const [selectedCategory, setSelectedCategory] =
     useState<CategorySelection | null>(null);

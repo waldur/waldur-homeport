@@ -88,6 +88,12 @@ $bg-height: 232px;
       margin-bottom: 20px;
     }
 
+    .landing-hero__search {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     #search-box-wrapper {
       input {
         color: if(isDarkMode(), $gray-400, $brand-500);

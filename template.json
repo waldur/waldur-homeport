@@ -26756,8 +26756,7 @@
   },
   "Marketplace": {
     "context": {
-      "primary_ui_type": "text_content",
-      "feature_area": "administration"
+      "feature_area": "i18n"
     }
   },
   "Marketplace Branding": {
@@ -30306,6 +30305,11 @@
   "No offerings have been added to this call yet.": {
     "context": {
       "feature_area": "resource-requests-step"
+    }
+  },
+  "No offerings match your search. To find organisations, projects or resources, use the search in the top bar.": {
+    "context": {
+      "feature_area": "landing"
     }
   },
   "No open round available.": {
@@ -51427,7 +51431,7 @@
   },
   "There are no offerings.": {
     "context": {
-      "feature_area": "landing"
+      "feature_area": "offerings"
     }
   },
   "There are no open rounds. The call is closed.": {

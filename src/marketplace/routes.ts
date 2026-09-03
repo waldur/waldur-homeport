@@ -13,6 +13,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { isOwnerOrStaff, isStaff } from '@/workspace/selectors';
 
 import { fetchProvider } from './resolve';
+import { getMarketplaceTitle } from './title';
 
 const canAccessMarketplace = (state) => {
   const hideFromEndUsers = isFeatureVisible(
@@ -365,7 +366,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     url: '',
     data: {
-      breadcrumb: () => translate('Marketplace'),
+      breadcrumb: () => getMarketplaceTitle(),
       priority: 120,
     },
   },
