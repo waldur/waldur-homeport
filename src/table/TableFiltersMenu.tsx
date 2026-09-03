@@ -414,7 +414,14 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                 sideOffset={2}
                 data-popper-placement="bottom"
                 className={classNames(
-                  'table-filters-menu column-filter menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold fs-6',
+                  // w-375px: matches TableFilterItem.tsx's own single-filter
+                  // flyout for the "Add filter" list (same kind of content —
+                  // one filter's field). Without it this falls back to
+                  // Metronic's base `.menu-column` width (175px, compiled
+                  // CSS only, not in repo source), too narrow for an
+                  // AsyncSelect's search box + option list — reported live
+                  // as text clipping/overlapping into neighboring columns.
+                  'table-filters-menu column-filter menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold fs-6 w-375px',
                   open && 'show',
                 )}
               >

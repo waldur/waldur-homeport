@@ -2066,6 +2066,30 @@ would pass or fail independent of the actual bug; the live, cross-checked
 `getComputedStyle` evidence (two different real environments, both
 before and after) is what stands as verification.
 
+## Fix: column-header filter popup too narrow
+
+Reported live, with a screenshot: the column-header filter popup (the
+funnel icon on a column like "Category") clipped/overlapped its
+`AsyncSelectFilter` search box and option list into neighboring columns.
+
+Root cause: `TableFiltersMenu.tsx`'s `RadixPopover.Content` for this
+specific popup (the `props.openName` branch) carried no width utility
+class at all, so it fell back to Metronic's base `.menu-column` CSS
+class — a fixed ~175px, too narrow for a search box plus option list.
+The sibling popup one component over — `TableFilterItem.tsx`'s
+`TableMenuFilterItem`, the "Add filter" list's own per-row flyout,
+showing the exact same kind of content (one filter's field) — already
+uses `w-375px` for this reason. Applied the same class to
+`TableFiltersMenu.tsx`'s column-header `Popover.Content` for
+consistency.
+
+Verified live in Storybook (`TableFiltersMenu` needs an ambient
+`FilterContextProvider` with `filterPosition="menu"` around it — passing
+`filterPosition` directly as a prop on `TableFiltersMenu` itself doesn't
+reach `TableFilterItem`, which reads it from context, not a `props`
+passthrough inside `TableFiltersMenu`): the popup's rendered
+`getBoundingClientRect().width` is 375, up from the unstyled ~175.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
