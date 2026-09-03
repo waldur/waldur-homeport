@@ -20,7 +20,6 @@ import { ConsoleAction } from './actions/ConsoleAction';
 import { ConsoleLogAction } from './actions/ConsoleLogAction';
 import { DestroyAction } from './actions/DestroyAction';
 import { EditAction } from './actions/EditAction';
-import { ForceDestroyAction } from './actions/ForceDestroyAction';
 import { PullInstanceAction } from './actions/PullInstanceAction';
 import { RescueAction } from './actions/RescueAction';
 import { RestartAction } from './actions/RestartAction';
@@ -75,7 +74,6 @@ export const OpenStackInstanceActions = (props) => (
 
     <ActionGroup title={translate('Dangerous actions')}>
       <DestroyAction {...props} />
-      <ForceDestroyAction {...props} />
     </ActionGroup>
   </>
 );
