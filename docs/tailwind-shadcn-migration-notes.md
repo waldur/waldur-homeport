@@ -1836,6 +1836,91 @@ control — no list, no overlap; selecting a checkbox option applies and
 shows as a tag) and with a new regression test asserting a sibling
 filter's label/field never appears when a column-header instance opens.
 
+## Fix: switching between two rows in the "Add filter" list needed two clicks
+
+Direct follow-up: the fix above turned out not to be the whole story
+behind the original "multiple filters open simultaneously" screenshot.
+It explained why the *column-header* popup looked broken; it didn't
+touch the "Add filter" list itself, whose accordion-of-rows shape (each
+row its own nested Radix Popover, unchanged by any of this migration's
+earlier fixes) was where the report's actual screenshot — two rows
+("Offering", "Downscaled") both looking expanded at once — came from.
+
+**A first repro didn't reproduce it.** Two simple `StringFilter` rows,
+switching directly between them, closed the first cleanly every time —
+Radix's own default outside-click dismissal looked sufficient on its
+own, matching this doc's very first read of the situation (see the
+now-superseded "not needed at all" section above, which reached that
+conclusion from the same kind of small repro). **The real, ~12-row list
+proved that wrong.** Rebuilding it exactly — same field names, same mix
+of dropdown (`SelectFilter`) and toggle (`BooleanFilter`) types, live in
+Storybook — switching rows needed a *second* click: the first only
+dismissed the previously-open row, leaving nothing open until clicked
+again. This is the actual mechanism a mid-transition screenshot catches
+as "both open."
+
+**Root cause, traced with a temporary debug event log** (timestamped
+pushes to `window.__debugLog` from every `onOpenChange`/dismiss
+callback, since jsdom can't reproduce this — see below): lifting "which
+row is open" to shared state (`activeItemName`, `setActiveItemName` —
+new context fields, owned by `TableFiltersMenu`'s "Add filter" list
+instance) correctly opens the newly-clicked row immediately. But the
+*previously* open row's close is asynchronous — Radix doesn't unmount it
+synchronously with the state change — and when it finally does unmount,
+its default `onCloseAutoFocus` behavior returns focus to *its own
+trigger*. By then the new row has already opened elsewhere in the DOM;
+that stray focus-return lands on the new row's own `DismissableLayer`,
+which reads "focus just moved to an element outside my Content" as an
+outside interaction and dismisses the new row — moments after it opened.
+The event log's own sequence made this unambiguous: `next: true`
+(explicit open) → `settlingTo` the new name → `onCloseAutoFocus` fires
+for the *old* row → `onFocusOutside`/`onInteractOutside` fire for the
+*new* row with the old row's own trigger element as `e.target` →
+`setOpen(false)` on the new row.
+
+**First attempted fix, discarded**: deferring the shared-state switch
+through an intermediate `undefined` frame (`setTimeout(..., 0)`) before
+landing on the real target — modeled on the same-shaped fix already
+proven for the column-header case. It masked the symptom (a fresh open
+never misfired) but not reliably: in the full 12-row tree it still
+sometimes took a second click, and it added a real timing dependency for
+no longer-necessary reason once the actual cause was identified.
+
+**Actual fix**: suppress both `onOpenAutoFocus` and `onCloseAutoFocus`
+on every row's own `Popover.Content` — `TableFilterItem.tsx`'s
+`TableMenuFilterItem` (the "Add filter" list's per-filter row) and this
+file's `FlyoutRow` (Current filters / Saved filters):
+
+```tsx
+onOpenAutoFocus={(e) => e.preventDefault()}
+onCloseAutoFocus={(e) => e.preventDefault()}
+```
+
+With no auto-focus-driven event for either side to misread, the shared
+`activeItemName` state (kept, since it's still what fixes the "needs a
+second click" symptom on its own) can be a plain `useState` setter with
+no deferral at all — verified by simplifying it back to one and
+confirming the fix still holds.
+
+**A second instance of the same bug**, caught by testing exhaustively
+rather than assuming one fix covered every row type: `FlyoutRow` only
+had `onOpenAutoFocus` suppressed at first (copied from
+`TableMenuFilterItem`'s fix, `onCloseAutoFocus` missed) — switching
+*from* "Saved filters" *to* a filter row failed the exact same way,
+caught by testing that specific direction live rather than only the
+reverse.
+
+Verified live in Storybook: single-click switches confirmed in every
+direction tried (`TableMenuFilterItem` ↔ `TableMenuFilterItem`,
+`FlyoutRow` ↔ `TableMenuFilterItem`, four rows in a row), plus real
+value selection still committing correctly after several switches. The
+new regression test in `TableFiltersMenu.test.tsx` passes identically
+with or without the fix under jsdom (no real focus/layout timing to
+reproduce the race with) — proven via a scripted revert of just the two
+`onOpenAutoFocus`/`onCloseAutoFocus` lines — so it stands as an
+end-to-end behavior lock, not proof; the live Storybook verification is
+what actually proves this one.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

@@ -168,21 +168,37 @@ describe('TableFiltersMenu', () => {
   });
 
   it('switching between two filter rows closes the first and opens only the second', async () => {
-    // Behavior-lock, not a fix: a live report described two filter
-    // flyouts ("Offering" and a State-like one) rendered simultaneously,
-    // stacked on top of each other. Investigating live (Storybook, real
-    // pointer events) against several repros — same list, and separate
-    // TableFiltersMenu instances (a column header's own toggle vs. the
-    // "Add filter" list) — consistently found each row's own Popover
-    // already closes on any outside click via Radix's own default
-    // DismissableLayer behavior, with no extra coordination needed; an
-    // earlier attempt to add explicit shared "only one open" state on
-    // top of that fought Radix's own dismiss-vs-open sequencing and
-    // introduced a real, reproducible race (a newly-opened row
-    // spuriously self-dismissing moments later) that isn't present
-    // without it. Kept as a guard against a *future* regression — e.g.
-    // someone adding `onInteractOutside` prevention — rather than
-    // evidence of anything fixed here.
+    // Regression test for a real, live-reported bug: a screenshot showed
+    // two filter flyouts ("Offering" and "Downscaled") rendered
+    // simultaneously, stacked on top of each other. A short list (2
+    // simple StringFilter rows, what this test alone can exercise)
+    // didn't reproduce it — Radix's own default outside-click dismissal
+    // looked sufficient on its own. The real, ~12-row list (a mix of
+    // dropdown and toggle fields, live-reproduced via Storybook) proved
+    // that wrong: switching rows needed a *second* click — the first
+    // only dismissed the old row. Root cause, traced via a temporary
+    // debug event log: `activeItemName` coordination (added specifically
+    // to fix the "needs a second click" symptom) correctly opens the new
+    // row immediately, but the *old* row's close is asynchronous — by
+    // the time Radix actually unmounts it and, by default, returns
+    // focus to its own trigger (onCloseAutoFocus), the new row has
+    // already opened elsewhere in the DOM; that stray focus-return gets
+    // read by the *new* row's own DismissableLayer as an outside
+    // interaction, and it immediately dismisses itself — which a
+    // screenshot mid-transition catches as "both open." Fixed by
+    // suppressing both onOpenAutoFocus and onCloseAutoFocus on every
+    // row's own Popover.Content (TableFilterItem.tsx and this file's
+    // FlyoutRow) — no more stray focus event for either side to
+    // misinterpret, and activeItemName's own guard (only clear the
+    // shared name if this row is still the one recorded active) no
+    // longer has a legitimate close call left to (correctly) act on.
+    // jsdom has no real focus/layout timing, so — proven via a scripted
+    // revert of just the two onOpenAutoFocus/onCloseAutoFocus lines —
+    // this specific test passes identically with or without the fix; it
+    // exists as an end-to-end behavior lock, not as proof of the fix.
+    // The fix itself was verified live in Storybook against the real
+    // ~12-row, mixed-field-type list this bug actually needed to
+    // reproduce.
     const user = userEvent.setup();
     renderMenu({
       filters: (

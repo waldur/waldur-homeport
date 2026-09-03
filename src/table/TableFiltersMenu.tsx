@@ -71,10 +71,11 @@ const FlyoutRow: FC<
     label: string;
     icon: React.ReactNode;
     content: React.ReactNode;
+    open?: boolean;
     onOpenChange?(open: boolean): void;
   }>
-> = ({ label, icon, content, onOpenChange }) => (
-  <RadixPopover.Root modal={false} onOpenChange={onOpenChange}>
+> = ({ label, icon, content, onOpenChange, open }) => (
+  <RadixPopover.Root open={open} modal={false} onOpenChange={onOpenChange}>
     <RadixPopover.Trigger asChild>
       <span className="menu-link" role="button">
         <span className="menu-title">{label}</span>
@@ -88,6 +89,13 @@ const FlyoutRow: FC<
         sideOffset={2}
         data-popper-placement="right-start"
         className="menu-sub menu-sub-dropdown show w-250px py-3 shadow-sm"
+        // See TableFilterItem.tsx's own onOpenAutoFocus/onCloseAutoFocus
+        // comment: Radix's default auto-focus behaviors, un-suppressed,
+        // cause a sibling row that just opened to misread this row's
+        // *delayed* close-focus-return as an outside interaction and
+        // dismiss itself.
+        onOpenAutoFocus={(e) => e.preventDefault()}
+        onCloseAutoFocus={(e) => e.preventDefault()}
       >
         {content}
       </RadixPopover.Content>
@@ -95,9 +103,17 @@ const FlyoutRow: FC<
   </RadixPopover.Root>
 );
 
+// Synthetic `activeItemName` values for SaveFilterItems' two rows, which
+// aren't real filters (no `name` of their own) but are still siblings in
+// the same list and must participate in the same only-one-open
+// coordination.
+const CURRENT_FILTERS_ITEM_NAME = '__current_filters__';
+const SAVED_FILTERS_ITEM_NAME = '__saved_filters__';
+
 const SaveFilterItems = ({ table, formId, apply }) => {
   const dispatch = useDispatch();
   const { openDialog } = useModal();
+  const { activeItemName, setActiveItemName } = useContext(TableFilterContext);
   const formValues = useSelector(selectFilterValues(table)) || {};
 
   const selectedSavedFilter = useSelector((state: any) =>
@@ -167,6 +183,20 @@ const SaveFilterItems = ({ table, formId, apply }) => {
       {(hasFiltersApplied || selectedSavedFilter) && (
         <div className="menu-item">
           <FlyoutRow
+            open={activeItemName === CURRENT_FILTERS_ITEM_NAME}
+            onOpenChange={(next) =>
+              // See TableFilterItem.tsx's own onOpenChange for why the
+              // `false` branch is guarded rather than an unconditional
+              // `undefined` — a dismiss-outside callback here can race
+              // with (and land after) a sibling row's own open call.
+              setActiveItemName?.((prev) =>
+                next
+                  ? CURRENT_FILTERS_ITEM_NAME
+                  : prev === CURRENT_FILTERS_ITEM_NAME
+                    ? undefined
+                    : prev,
+              )
+            }
             label={translate('Current filters')}
             icon={
               <CaretRightIcon size={20} className="ms-auto" weight="bold" />
@@ -202,6 +232,16 @@ const SaveFilterItems = ({ table, formId, apply }) => {
       )}
       <div className="menu-item">
         <FlyoutRow
+          open={activeItemName === SAVED_FILTERS_ITEM_NAME}
+          onOpenChange={(next) =>
+            setActiveItemName?.((prev) =>
+              next
+                ? SAVED_FILTERS_ITEM_NAME
+                : prev === SAVED_FILTERS_ITEM_NAME
+                  ? undefined
+                  : prev,
+            )
+          }
           label={translate('Saved filters ({count})', { count: list.length })}
           icon={<CaretRightIcon size={20} className="ms-auto" weight="bold" />}
           content={
@@ -244,16 +284,41 @@ interface TableFiltersMenuProps extends Pick<
 export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
   const context = useContext(TableFilterContext);
   const [open, setOpen] = useState(false);
+  // Which row (an individual filter's own name, or one of
+  // SaveFilterItems' synthetic row names) is currently expanded inside
+  // the "Add filter" list — shared across every row so opening one
+  // collapses any previously open sibling. See FilterContextProvider.tsx's
+  // own comment on `activeItemName` for why this exists at all (Radix's
+  // own default outside-click dismissal alone needs a second click to
+  // actually open the new row, not just close the old one).
+  const [activeItemName, setActiveItemNameRaw] = useState<string | undefined>(
+    undefined,
+  );
+  // Plain passthrough: each row's own onOpenAutoFocus/onCloseAutoFocus
+  // are suppressed (TableFilterItem.tsx, FlyoutRow below) specifically
+  // so switching directly between two rows can just flip this value —
+  // no deferred/staged transition needed. An earlier version routed
+  // every switch through an intermediate `undefined` frame on a
+  // setTimeout, worked around one symptom (a newly-opened row needing a
+  // second click) but not the actual cause: Radix's default
+  // onCloseAutoFocus returns focus to the row that's *finishing* its
+  // close, and when that lands after a sibling has already opened, the
+  // sibling's own DismissableLayer reads the focus arriving at that
+  // *other* trigger as an outside interaction and dismisses itself.
+  // Suppressing both auto-focus behaviors removes the stray focus event
+  // this whole chain depended on.
+  const setActiveItemName = setActiveItemNameRaw;
 
   const apply = useCallback(
     (hideMenu = true) => {
       props.applyFiltersFn(true);
       if (hideMenu) {
         setOpen(false);
+        setActiveItemName(undefined);
       }
       if (props.toggleFilterMenu) props.toggleFilterMenu(true);
     },
-    [props.applyFiltersFn, props.toggleFilterMenu],
+    [props.applyFiltersFn, props.toggleFilterMenu, setActiveItemName],
   );
 
   // The column-filter toggle only makes sense if a filter with this exact
@@ -299,13 +364,21 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         openMenuName: props.openName,
         menuIsOpen: open,
         closeMenu: () => setOpen(false),
+        activeItemName,
+        setActiveItemName,
       }}
     >
       <RadixPopover.Root
         open={open}
         onOpenChange={(next) => {
           setOpen(next);
-          if (next) props.applyFiltersFn(false);
+          if (next) {
+            props.applyFiltersFn(false);
+          } else {
+            // Reset so the list starts fully collapsed next time it's
+            // reopened, rather than reshowing whatever was last expanded.
+            setActiveItemName(undefined);
+          }
         }}
         modal={false}
       >

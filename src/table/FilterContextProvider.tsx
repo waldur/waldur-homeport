@@ -45,6 +45,40 @@ interface ITableFilterContext {
    * filter" list instance, where each row still manages its own nested
    * Popover and Cancel just collapses that row locally. */
   closeMenu?(): void;
+  /** Name of the row currently expanded inside the "Add filter" list —
+   * an individual filter's own `name`, or one of the synthetic
+   * "Current filters"/"Saved filters" row names SaveFilterItems uses.
+   * Owned and set by TableFiltersMenu.tsx (its "Add filter"-list
+   * instance only — the column-header instance doesn't use this row
+   * shape at all, see `openMenuName`) so opening one row closes any
+   * previously open sibling. Each row is otherwise an independent Radix
+   * Popover with no shared "only one open" grouping of its own — Radix's
+   * *own* default outside-click dismissal looked, at first, like it
+   * already handled this correctly, confirmed against a short list of
+   * 2 simple rows; a live report with the real ~12-row list (a mix of
+   * dropdown and toggle fields) proved that wrong — switching rows
+   * needed a *second* click, the first only dismissed the old one. Root
+   * cause was Radix's default onCloseAutoFocus: the old row's close is
+   * asynchronous, so by the time it actually unmounts and returns focus
+   * to its own trigger, the new row (already open elsewhere in the DOM)
+   * reads that stray focus event as an outside interaction and
+   * dismisses itself — a screenshot mid-transition catches both looking
+   * open at once. Fixed by suppressing onOpenAutoFocus/onCloseAutoFocus
+   * on every row's own Popover.Content, not by anything in this field —
+   * this coordination alone was never the missing piece. Undefined
+   * outside TableFiltersMenu's own context override, in which case
+   * TableMenuFilterItem falls back to fully independent local state —
+   * correct for a filter rendered standalone, with no siblings to
+   * coordinate with. */
+  activeItemName?: string;
+  /** Accepts a functional updater (`(prev) => next`), not just a plain
+   * value — required for the "only clear if I'm still the active one"
+   * guard each row's own onOpenChange uses (see `activeItemName`'s own
+   * comment for the race this guards against). */
+  setActiveItemName?(
+    update:
+      string | undefined | ((prev: string | undefined) => string | undefined),
+  ): void;
   selectedSavedFilter?: TableState['selectedSavedFilter'];
   filterComponents?: any[];
   registerFilterComponent?(comp): void;

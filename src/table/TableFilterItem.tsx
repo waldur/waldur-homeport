@@ -298,6 +298,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     openMenuName,
     menuIsOpen,
     closeMenu,
+    activeItemName,
+    setActiveItemName,
   } = React.useContext(TableFilterContext);
   const values = useSelector(selectFilterValues(table));
 
@@ -396,7 +398,37 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     apply(hideMenu);
   };
 
-  const [open, setOpen] = useState(false);
+  // Fully independent fallback for standalone usage (no TableFiltersMenu
+  // parent providing `setActiveItemName` — e.g. this component rendered
+  // in isolation in a test), where there are no siblings to coordinate
+  // with.
+  const [localOpen, setLocalOpen] = useState(false);
+  // Sibling-coordinated when a TableFiltersMenu "Add filter" list parent
+  // is present: only one row across the whole list can be `open` at a
+  // time, so opening this one implicitly closes any previously open
+  // sibling — see FilterContextProvider.tsx's own comment on
+  // `activeItemName` for why this exists (Radix's own default
+  // outside-click dismissal alone needs a second click to actually open
+  // a new row once another is already open).
+  const open = setActiveItemName ? activeItemName === props.name : localOpen;
+  const setOpen = useCallback(
+    (next: boolean) => {
+      if (setActiveItemName) {
+        // The `next === false` (dismiss) branch only clears the shared
+        // name if *this* row is still the one recorded active — guards
+        // against a stale dismiss-outside callback (fired because a
+        // sibling's trigger click looks like an "outside click" to
+        // Radix) racing with that sibling's own open call and
+        // clobbering it back to undefined.
+        setActiveItemName((prev) =>
+          next ? props.name : prev === props.name ? undefined : prev,
+        );
+      } else {
+        setLocalOpen(next);
+      }
+    },
+    [setActiveItemName, props.name],
+  );
 
   // The column-header funnel icon (TableFiltersMenu.tsx's `openName`
   // branch) targets exactly one filter — its whole point is "this
@@ -506,6 +538,28 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
             sideOffset={2}
             data-popper-placement="right-start"
             className="menu-sub menu-sub-dropdown show w-375px py-3 shadow-sm"
+            // Radix's default auto-focus-on-open moves focus into this
+            // Content the instant it mounts. Suppressed for the same
+            // reason as onCloseAutoFocus below: this row's `open` is
+            // driven by the shared activeItemName state (see that
+            // context field's own comment), so a switch between two
+            // rows unmounts the old Content shortly *after* the new one
+            // has already opened — Radix's own defaults, un-suppressed,
+            // fight this: onOpenAutoFocus would steal focus into the
+            // freshly-opened row, and onCloseAutoFocus (below) would
+            // return focus to the row that's *finishing* its close —
+            // which, landing after the new row already has focus/is
+            // open, gets read by the new row's own DismissableLayer as
+            // an outside interaction and immediately dismisses it.
+            // Traced via a temporary debug event log: the newly-opened
+            // row's onFocusOutside/onInteractOutside fired with the
+            // *other* row's own trigger element as `e.target`, arriving
+            // right after that other row's onCloseAutoFocus — i.e. the
+            // delayed close returning focus to its trigger is exactly
+            // what the new row misread as "something outside me was
+            // interacted with."
+            onOpenAutoFocus={(e) => e.preventDefault()}
+            onCloseAutoFocus={(e) => e.preventDefault()}
           >
             <div className="menu-item">
               <div
