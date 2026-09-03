@@ -9,8 +9,8 @@ const DARK_COLORS = {
   neutral30: '#4C6351',
   neutral50: '#98b38f',
   neutral80: 'white',
-  primary25: '#4C6351',
-  primary50: '#4C6351',
+  // No primary25/primary50: custom/_select.scss now owns the option
+  // background in both themes, from $bg-secondary / $bg-tertiary.
 };
 
 export const useSelectTheme = (): ThemeConfig => {

@@ -1,16 +1,33 @@
 .metronic-select-container {
   .metronic-select {
     &__control {
-      border-radius: $input-border-radius;
-      border-color: $input-border-color;
+      // Every declaration here has to be forced: react-select ships its own
+      // unlayered emotion styles (4px radius, its own greys, min-height 38px),
+      // and unlayered beats `@layer bootstrap` regardless of specificity.
+      border-radius: $input-border-radius !important;
+      border-color: $input-border-color !important;
+      min-height: $input-height !important;
       font-size: $input-font-size;
       font-weight: $input-font-weight;
       background-color: $input-bg;
 
+      // custom/_forms.scss already asks for this on .metronic-select__control;
+      // it loses the same cascade fight, so repeat it here where it can win.
+      &:hover:not(.metronic-select__control--is-disabled):not(
+          .metronic-select__control--is-focused
+        ) {
+        border-color: var(--bs-primary) !important;
+      }
+
+      // Forced because react-select paints the control from its own emotion
+      // styles, which are UNLAYERED — and an unlayered declaration beats
+      // anything inside `@layer bootstrap` regardless of specificity. Without
+      // the override these rules never applied and the control fell back to
+      // react-select's stock blue.
       &--is-focused,
       &--is-focused:hover {
-        border-color: $input-focus-border-color;
-        box-shadow: $input-focus-box-shadow;
+        border-color: $input-focus-border-color !important;
+        box-shadow: $input-focus-box-shadow !important;
       }
 
       &--is-disabled {
@@ -130,19 +147,28 @@
 
   .metronic-select__menu-list {
     .metronic-select__option {
-      padding: 10px 16px;
-      display: flex;
+      // react-select sets display, padding and color on every option from its
+      // unlayered styles, so all of these lose the cascade unless forced. With
+      // display left as its `block`, the selected row's checkmark drops onto a
+      // second line and that row renders taller than the rest.
+      padding: 10px 16px !important;
+      display: flex !important;
       align-items: center;
       column-gap: 0.5rem;
       font-size: $input-font-size;
-      color: $text-primary;
+      color: $text-primary !important;
 
+      // Forced for the same cascade-layer reason as the control above. The
+      // colour has to come with it: react-select pairs its own blue selected
+      // background with `color: white`, so overriding only the background
+      // leaves white text on a near-white row.
       &--is-selected,
       &--is-focused {
-        background-color: $bg-secondary;
+        background-color: $bg-secondary !important;
+        color: $text-primary !important;
 
         &:active {
-          background-color: $bg-tertiary;
+          background-color: $bg-tertiary !important;
         }
       }
     }
