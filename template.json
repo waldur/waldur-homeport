@@ -32850,6 +32850,11 @@
       "feature_area": "actions"
     }
   },
+  "OpenStack resource events": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "OpenStack resources provisioning": {},
   "OpenStack router has been created.": {
     "context": {

@@ -17,6 +17,10 @@ import { AsyncSelectFilter, SelectFilter } from '@/table';
 
 export const FeatureOptions: FeatureOption[] = [
   {
+    label: translate('OpenStack resource events'),
+    value: 'openstack_resources',
+  },
+  {
     label: translate('Project events'),
     value: 'projects',
   },
@@ -36,23 +40,23 @@ export const EventsFilter: FunctionComponent<{}> = () => (
       title={translate('Organization')}
       name="customer_uuid"
       getValueLabel={(value: Customer) => value?.name}
-      placeholder={translate('Organization')}
       loadOptions={createLoadOptions(customersList, 'query')}
       defaultOptions
       getOptionValue={(option: Customer) => String(option.uuid || '')}
       getOptionLabel={(option: Customer) => String(option.name || '')}
       isClearable={true}
+      placeholder={translate('Organization')}
     />
     <AsyncSelectFilter
       title={translate('Project')}
       name="project_uuid"
       getValueLabel={(value: Project) => value?.name}
-      placeholder={translate('Project')}
       loadOptions={createLoadOptions(projectsList, 'query')}
       defaultOptions
       getOptionValue={(option: Project) => String(option.uuid || '')}
       getOptionLabel={(option: Project) => String(option.name || '')}
       isClearable={true}
+      placeholder={translate('Project')}
     />
     <AsyncSelectFilter
       title={translate('User')}
@@ -60,7 +64,6 @@ export const EventsFilter: FunctionComponent<{}> = () => (
       getValueLabel={(value: User) =>
         value?.full_name || value?.username || value?.email
       }
-      placeholder={translate('User')}
       loadOptions={createLoadOptions(usersList, 'full_name', {
         o: ['full_name'],
       })}
@@ -70,17 +73,18 @@ export const EventsFilter: FunctionComponent<{}> = () => (
         String(option.full_name || option.username || option.email || '')
       }
       isClearable={true}
+      placeholder={translate('User')}
     />
     <SelectFilter
       title={translate('Type')}
       name="feature"
       getValueLabel={(value: FeatureOption) => value?.label}
-      placeholder={translate('Type')}
       options={FeatureOptions}
       getOptionValue={(option: FeatureOption) => String(option.value)}
       getOptionLabel={(option: FeatureOption) => option.label}
       isClearable={true}
       isMulti={true}
+      placeholder={translate('Type')}
     />
   </>
 );

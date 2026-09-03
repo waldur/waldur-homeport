@@ -518,6 +518,7 @@ overrides:
       enumOverrides:
         projects: Project events
         resources: Resource events
+        openstack_resources: OpenStack resource events
 
   system_logs:
     filters:
@@ -621,6 +622,7 @@ overrides:
         customers: Organization events
         projects: Project events
         resources: Resource events
+        openstack_resources: OpenStack resource events
 
   user_group_invitations:
     filters:
