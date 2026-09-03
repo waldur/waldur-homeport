@@ -2090,6 +2090,61 @@ reach `TableFilterItem`, which reads it from context, not a `props`
 passthrough inside `TableFiltersMenu`): the popup's rendered
 `getBoundingClientRect().width` is 375, up from the unstyled ~175.
 
+## Fix: funnel "Set filters" button opened the popup at the wrong position
+
+Reported live, with a screenshot: clicking the funnel icon next to the
+table search box — while filters were already active (a "2" badge on
+the button) — opened the "Add filter" list pinned to the viewport
+origin, overlapping the page's left sidebar nav, instead of anchored
+near the button.
+
+**Root cause**, confirmed via a dispatched investigation then verified
+directly: `TableToolbar.tsx`'s `onClickFilterButton` (and a near-
+identical, currently-unused duplicate in `TableButtons.tsx` — see
+below) is a hack around the funnel button not being a real Popover
+trigger itself. It calls `actions.toggleFilterMenu()` (no argument —
+a bare flip) and then, in the same handler, programmatically
+`.click()`s the *real* Radix trigger (`TableFiltersMenu.tsx`'s own "+"
+`.btn-add-filter` button) so Radix's own open/position machinery takes
+over. `Table.tsx`'s mount effect already sets `showFilterMenuToggle`
+true whenever `filtersStorage.length > 0` — exactly the "2 active
+filters" case in the report — so a *bare flip* on a button click flips
+it back to `false`, which applies `d-none` (`Table.tsx`'s `Card.Header`)
+to the very row containing the trigger this handler is about to click.
+Every other call site of `toggleFilterMenu` in the codebase
+(`FilterContextProvider.tsx`, `TableFiltersMenu.tsx`'s own `apply()`)
+already passes `true` — these two were the only outliers.
+
+**Verified live in Storybook**, with a `MutationObserver` watching every
+class-attribute change during the click (real `getBoundingClientRect()`
+readings, not jsdom): with the bare-toggle bug, the trigger's
+`Card.Header` gains `d-none` in the *same batch* as the popup's own
+`show` class — a real, measured side effect, confirmed absent with the
+fix (only the popup's own `show` class changes; the header's class never
+mutates). This is the actual defect the fix removes. Note for honesty:
+in this specific harness, the popup's *reported position* self-corrected
+to a sane value shortly after, even with the header hidden — likely
+floating-ui falling back to its last good measurement rather than the
+reported (0,0) — so the position-collapse itself wasn't perfectly
+reproduced end-to-end here, but the causal defect (the trigger's
+container going `display:none` mid-open) *was* directly measured and
+is the same mechanism the live report's screenshot is consistent with;
+the fix removes that mutation outright.
+
+**Fix**: `actions.toggleFilterMenu(true)` / `props.toggleFilterMenu(true)`
+at both call sites, matching the convention already used everywhere
+else. `TableButtons.tsx`'s own copy of this handler was first suspected
+dead — a `grep -rln "from './TableButtons'\|from '@/table/TableButtons'"`
+found nothing outside the file itself — but that pattern missed
+`TableToolbar.tsx`'s own relative import, `from '../../TableButtons'`.
+It's live: `TableToolbarActions` renders `TableButtons` whenever
+`showActionsColumn` is true, with `renderFilterButton={isSm ||
+!config.hasQuery}` — the small-viewport/no-search-box complement of
+`TableToolbarActions`' own `showFilterButtonNextToSearch` case above, so
+`TableButtons`' own `onClickFilterButton` is the live path exactly when
+the "next to search" placement doesn't apply. Both copies needed the fix;
+neither is dead.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

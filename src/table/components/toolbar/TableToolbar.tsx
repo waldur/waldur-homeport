@@ -52,7 +52,18 @@ export function TableToolbarActions() {
       if (filterPosition === 'sidebar') {
         actions.openFiltersDrawer(slots.filters, config.formId);
       } else {
-        actions.toggleFilterMenu();
+        // Force `true`, not a bare toggle: when filters are already active,
+        // Table.tsx's mount effect has already flipped showFilterMenuToggle
+        // true, so a plain flip here would set it back to false — hiding
+        // (`d-none`, Table.tsx's Card.Header) the very container holding
+        // the real Add-filter trigger this handler is about to
+        // programmatically click below, in the same React batch. With the
+        // trigger's ancestor display:none at the moment floating-ui reads
+        // its bounding rect, the popup anchors at getBoundingClientRect()'s
+        // all-zero fallback — the viewport origin — reported live as the
+        // filter dropdown rendering over the sidebar nav instead of next to
+        // the funnel button, specifically when filters were already set.
+        actions.toggleFilterMenu(true);
         const parent: HTMLElement = event.currentTarget.closest('.card-table');
         if (!parent) return;
         const btns = parent.getElementsByClassName(
