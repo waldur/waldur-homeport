@@ -258,17 +258,38 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
 
   // The column-filter toggle only makes sense if a filter with this exact
   // name is actually among `props.filters` — otherwise it opened an empty
-  // menu for a column whose filter was removed/renamed. The previous
-  // Metronic version checked this by querying the *always-mounted*
-  // (CSS-hidden) content div, which Radix's conditional mounting doesn't
-  // allow before the first open; checking the filters themselves instead
-  // works whether or not the menu has ever opened.
-  const existed =
-    !props.openName ||
-    React.Children.toArray(props.filters).some(
-      (child: any) => child?.props?.name === props.openName,
-    );
-  if (!existed) return null;
+  // menu for a column whose filter was removed/renamed. This can't be
+  // checked against the *static* `props.filters` element tree
+  // (React.Children.toArray(props.filters).some(child => child.props.name
+  // === ...) was tried and reverted): every real caller passes a single
+  // wrapper component (`filters={<SomeGeneratedFilter />}`, confirmed by
+  // grepping every `filters={` call site in the app — never a bare field
+  // or raw Fragment), so the *actual* named filter is nested inside that
+  // wrapper's own render output, never a direct child of what's passed
+  // here — the static check always saw one childless wrapper element and
+  // always evaluated false, silently hiding the column-filter toggle for
+  // every column, on every page, ever since it was introduced. Checking
+  // the real rendered DOM instead — the same thing the pre-Radix Metronic
+  // version did — works at any nesting depth.
+  //
+  // A callback ref, not `useRef` + `useEffect`: Radix's `Presence` (what
+  // `forceMount` relies on) defers actually mounting Content's real DOM
+  // node by one render pass — a plain ref is still null the first time a
+  // parent-level effect runs, so the check would silently never fire.
+  // The callback ref instead runs exactly when the node itself attaches,
+  // whenever that ends up being.
+  const [existed, setExisted] = useState(true);
+  const checkExisted = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node && props.openName) {
+        const item = node.querySelector('#filter-item-' + props.openName);
+        setExisted(Boolean(item));
+      }
+    },
+    [props.openName],
+  );
+
+  if (props.openName && !existed) return null;
 
   return (
     <TableFilterContext.Provider
@@ -277,16 +298,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         apply,
         openMenuName: props.openName,
         menuIsOpen: open,
-        // TableFilterItem.tsx positions its own flyout `bottom` (under the
-        // trigger) when opened from a column header versus `right` (beside
-        // the row) from the "Add filter" list — but this flag has been
-        // declared and read since it was introduced (Nov 2024,
-        // [WAL-7415]) without ever actually being set anywhere, so every
-        // filter flyout has always positioned as if opened from the "Add
-        // filter" list regardless of which trigger opened it. `openName`
-        // is only ever set on the column-header instance (TableHeader.tsx),
-        // so its presence is exactly the signal TableFilterItem needs.
-        columnFilter: Boolean(props.openName),
+        closeMenu: () => setOpen(false),
       }}
     >
       <RadixPopover.Root
@@ -322,6 +334,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                   the shortcut) whenever this menu just happens to be
                   closed, which is most of the time. */}
               <RadixPopover.Content
+                ref={checkExisted}
                 forceMount
                 side="bottom"
                 align="start"

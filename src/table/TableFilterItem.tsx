@@ -293,11 +293,11 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     setFilter,
     changeFilterValue,
     apply,
-    columnFilter,
     selectedSavedFilter,
     registerFilterComponent,
     openMenuName,
     menuIsOpen,
+    closeMenu,
   } = React.useContext(TableFilterContext);
   const values = useSelector(selectFilterValues(table));
 
@@ -398,28 +398,98 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
 
   const [open, setOpen] = useState(false);
 
-  // The column-filter toggle's funnel icon (TableFiltersMenu.tsx) opens
-  // this exact filter's flyout directly rather than the outer filter
-  // list — Metronic's own version imperatively called
-  // `menuInstance.show(item)` from a listener on the *outer* menu's own
-  // "shown" event, so this keys off `menuIsOpen` (TableFiltersMenu's own
-  // Popover state) rather than this component's mount: its own content
-  // is force-mounted (see that file's comment) well before the outer
-  // menu is ever opened, precisely so a filter's row exists in the DOM
-  // for TableBody.tsx's hasFilterMenu() check regardless of visibility —
-  // auto-opening on mount would fire immediately on page load instead of
-  // when the user actually opens the menu.
-  useEffect(() => {
-    if (menuIsOpen && openMenuName === props.name) setOpen(true);
-  }, [menuIsOpen, openMenuName, props.name]);
+  // The column-header funnel icon (TableFiltersMenu.tsx's `openName`
+  // branch) targets exactly one filter — its whole point is "this
+  // column's own control," not the full filter list — so that one row
+  // renders its field directly below, with no collapsed menu-link/nested
+  // Popover of its own, and every *other* row renders nothing at all
+  // rather than showing a redundant full list alongside it (reported
+  // live: the column icon opened the entire "Add filter"-style list,
+  // with the target's own flyout then overlapping it — "dropdown menu is
+  // not needed in this case").
+  const isColumnMode = Boolean(openMenuName);
+  const isColumnTarget = isColumnMode && openMenuName === props.name;
 
+  // Previously this effect only ever needed `open` as its guard: the
+  // "Add filter" list's own row starts `open === false`, so the effect
+  // is inert until the user actually clicks to expand it — mount-time
+  // firing was never possible. The column-target row breaks that: it's
+  // "open" (visible) from the very first render, no click required, so
+  // without a separate guard this fired instantApply's onApply() — a
+  // real applyFiltersFn()/setFilter() dispatch — during the initial
+  // mount of *every* filterable column at once, well before the user
+  // touched anything. That flood of synchronous cross-component
+  // dispatches, all firing while React was still mid-mount for sibling
+  // columns, is what reproduced a live "Should not already be working"
+  // React invariant violation in Storybook (not caught by the jsdom
+  // suite, which never exercises more than one filterable column
+  // mounting at once). `skipFirstRun` suppresses exactly the mount-time
+  // call — real, later value changes are unaffected.
+  const skipFirstRun = useRef(true);
   useEffect(() => {
-    if (open && instantApply) {
+    if (skipFirstRun.current) {
+      skipFirstRun.current = false;
+      return;
+    }
+    if ((open || (isColumnTarget && menuIsOpen)) && instantApply) {
       // Don't hide menu when value changes (e.g., during typing)
       onApply(false);
     }
   }, [itemValue]);
 
+  if (isColumnMode && !isColumnTarget) {
+    return null;
+  }
+
+  if (isColumnTarget) {
+    return (
+      <div id={`filter-item-${props.name}`} className="menu-item">
+        <div
+          className="menu-content filter-field"
+          onClick={(e) => e.stopPropagation()}
+          aria-hidden="true"
+        >
+          {/* Deferred until the popup itself is open, not mounted the
+              moment this force-mounted row exists — see menuIsOpen's own
+              comment in FilterContextProvider.tsx: mounting react-select
+              (or similar) immediately, for every filterable column at
+              once on page load, let its own auto-focus-on-mount behavior
+              fire simultaneously across all of them. */}
+          {menuIsOpen && props.children}
+        </div>
+        {!instantApply && menuIsOpen && (
+          <>
+            <div className="separator" />
+            <div className="menu-item">
+              <div className="menu-content filter-footer pb-0">
+                <div className="d-flex gap-4">
+                  <SubmitButton
+                    submitting={false}
+                    variant="tertiary"
+                    className="flex-grow-1 w-50"
+                    onClick={closeMenu}
+                    type="button"
+                    label={translate('Cancel')}
+                  />
+                  <SubmitButton
+                    submitting={false}
+                    className="flex-grow-1 w-50"
+                    onClick={() => onApply()}
+                    type="button"
+                    label={translate('Apply')}
+                  />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+
+  // The "Add filter" list (openMenuName undefined): unchanged
+  // accordion-row shape — click to expand this one row's own nested
+  // Popover, coexisting with every other row in the same list.
   return (
     <div id={`filter-item-${props.name}`} className="menu-item">
       <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
@@ -431,10 +501,10 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         </RadixPopover.Trigger>
         <RadixPopover.Portal>
           <RadixPopover.Content
-            side={columnFilter ? 'bottom' : 'right'}
+            side="right"
             align="start"
             sideOffset={2}
-            data-popper-placement={columnFilter ? 'bottom' : 'right-start'}
+            data-popper-placement="right-start"
             className="menu-sub menu-sub-dropdown show w-375px py-3 shadow-sm"
           >
             <div className="menu-item">

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
@@ -91,18 +91,16 @@ describe('TableFiltersMenu', () => {
   });
 
   it('positions the auto-opened filter below the column header, not beside it', async () => {
-    // Regression test for a real, long-standing bug: TableFilterItem.tsx
-    // positions its own flyout `bottom` (under the trigger) when opened
-    // from a column header versus `right` (beside the row) from the "Add
-    // filter" list, keyed off TableFilterContext's `columnFilter` flag —
-    // but that flag was declared and read since it was introduced
-    // (Nov 2024, [WAL-7415]) without ever actually being set anywhere in
-    // TableFiltersMenu.tsx, so every filter flyout always positioned as
-    // `right` regardless of which trigger opened it. Caught while
-    // investigating a live report about the column-header filter icon —
-    // the icon itself opened fine, but the flyout landed off to the side
-    // instead of dropping cleanly below the header, as the "Add
-    // filter"-vs-column-header code was clearly meant to distinguish.
+    // Regression test for a real, long-standing bug — originally fixed by
+    // wiring up a `columnFilter` context flag so TableFilterItem.tsx's own
+    // nested flyout could position itself `bottom` instead of `right`.
+    // That flag no longer exists: a later fix (see the "shows the column's
+    // own control directly" test below) removed the nested flyout for the
+    // column-header case entirely, so positioning is now simply whatever
+    // side the *outer* TableFiltersMenu Content itself renders at
+    // (`side="bottom"`, always, for this branch) — this test still pins
+    // the same externally-observable behavior, just via a different
+    // mechanism than when it was written.
     const user = userEvent.setup();
     renderMenu({ openName: 'catalog_name' });
 
@@ -114,6 +112,44 @@ describe('TableFiltersMenu', () => {
     // a direct ancestor lookup is the accurate check here.
     const flyout = input.closest('[role="dialog"]'); // eslint-disable-line testing-library/no-node-access
     expect(flyout).toHaveAttribute('data-side', 'bottom');
+  });
+
+  it("shows only the target column's own control, not the full filter-name list", async () => {
+    // Regression test for a real, live-reported bug: clicking a column
+    // header's own funnel icon opened the *entire* "Add filter"-style
+    // list of every filter name, with the target filter's own flyout
+    // then overlapping/rendered alongside it — "clicking on filter icon
+    // in table column header leads to dropdown menu rendered for all
+    // fields and filter control itself - this is bug - dropdown menu is
+    // not needed in this case." Fixed in TableFilterItem.tsx: the one
+    // row matching `openName` now renders its field directly (no
+    // collapsed menu-link row, no nested Popover of its own), and every
+    // other row renders nothing at all inside a column-header instance.
+    const user = userEvent.setup();
+    renderMenu({
+      openName: 'catalog_name',
+      filters: (
+        <>
+          <StringFilter
+            title="Catalog"
+            name="catalog_name"
+            placeholder="Catalog"
+          />
+          <StringFilter
+            title="Vendor"
+            name="vendor_name"
+            placeholder="Vendor"
+          />
+        </>
+      ),
+    });
+
+    await user.click(screen.getByRole('button', { name: 'Filter by column' }));
+    expect(await screen.findByPlaceholderText('Catalog')).toBeInTheDocument();
+    // The non-target sibling's own row/label must not appear anywhere —
+    // not as a collapsed menu-link row, not as its own field.
+    expect(screen.queryByText('Vendor')).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Vendor')).not.toBeInTheDocument();
   });
 
   it("keeps a filter row in the DOM while its menu is closed, for TableBody.tsx's hasFilterMenu() to find", () => {
@@ -131,6 +167,77 @@ describe('TableFiltersMenu', () => {
     expect(filterItem).toBeInTheDocument();
   });
 
+  it('switching between two filter rows closes the first and opens only the second', async () => {
+    // Behavior-lock, not a fix: a live report described two filter
+    // flyouts ("Offering" and a State-like one) rendered simultaneously,
+    // stacked on top of each other. Investigating live (Storybook, real
+    // pointer events) against several repros — same list, and separate
+    // TableFiltersMenu instances (a column header's own toggle vs. the
+    // "Add filter" list) — consistently found each row's own Popover
+    // already closes on any outside click via Radix's own default
+    // DismissableLayer behavior, with no extra coordination needed; an
+    // earlier attempt to add explicit shared "only one open" state on
+    // top of that fought Radix's own dismiss-vs-open sequencing and
+    // introduced a real, reproducible race (a newly-opened row
+    // spuriously self-dismissing moments later) that isn't present
+    // without it. Kept as a guard against a *future* regression — e.g.
+    // someone adding `onInteractOutside` prevention — rather than
+    // evidence of anything fixed here.
+    const user = userEvent.setup();
+    renderMenu({
+      filters: (
+        <>
+          <StringFilter
+            title="Catalog"
+            name="catalog_name"
+            placeholder="Catalog"
+          />
+          <StringFilter
+            title="Vendor"
+            name="vendor_name"
+            placeholder="Vendor"
+          />
+        </>
+      ),
+    });
+
+    await user.click(screen.getByRole('button', { name: 'Add filter' }));
+    await user.click(screen.getByRole('button', { name: 'Catalog' }));
+    expect(await screen.findByPlaceholderText('Catalog')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Vendor' }));
+    expect(await screen.findByPlaceholderText('Vendor')).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText('Catalog')).not.toBeInTheDocument();
+  });
+
+  it('shows the column-filter toggle even when `filters` is a wrapper component, not a bare field', async () => {
+    // Regression test for the real, severe bug found while investigating
+    // the report above: `existed` used to check
+    // `React.Children.toArray(props.filters).some(child => child.props.name
+    // === props.openName)` — inspecting only the *static*, unrendered
+    // props.filters element tree. Every real caller in the app passes a
+    // single wrapper component (`filters={<SomeGeneratedFilter />}`,
+    // confirmed by grepping every `filters={` call site — never a bare
+    // field or raw Fragment directly), so the actual named filter is
+    // nested inside that wrapper's own render output, never a direct
+    // child of what's passed to `filters` here. The static check always
+    // saw one childless wrapper element, always evaluated false, and
+    // silently returned null — hiding the column-filter toggle for every
+    // column, on every page, in the whole app, ever since it was
+    // introduced (confirmed live in Storybook: 0 toggle buttons render
+    // for two filterable columns when `filters` is wrapped this way).
+    // Fixed by checking the real rendered DOM instead (matching what the
+    // pre-Radix Metronic version did), which works at any nesting depth.
+    const Wrapper = () => (
+      <StringFilter title="Catalog" name="catalog_name" placeholder="Catalog" />
+    );
+    renderMenu({ openName: 'catalog_name', filters: <Wrapper /> });
+
+    expect(
+      await screen.findByRole('button', { name: 'Filter by column' }),
+    ).toBeInTheDocument();
+  });
+
   it('opens the doubly-nested "Saved filters" flyout without crashing', async () => {
     const user = userEvent.setup();
     renderMenu();
@@ -143,7 +250,16 @@ describe('TableFiltersMenu', () => {
     expect(await screen.findByText('Select saved filter')).toBeInTheDocument();
   });
 
-  it('renders nothing for a column-filter toggle whose filter no longer exists', () => {
+  it('renders nothing for a column-filter toggle whose filter no longer exists', async () => {
+    // Two-pass by necessity, not by choice: `existed` starts `true` (so
+    // the toggle's Content renders and force-mounts on the very first
+    // pass, giving `contentRef` something real to check — see that
+    // file's own comment on why a *static* props.filters check doesn't
+    // work), then an effect checks the actual rendered DOM and — only
+    // for the genuinely-missing case this test covers — flips it to
+    // `false` on a follow-up render. `waitFor` is required here, not
+    // optional; a synchronous check right after `render()` would still
+    // see the first pass.
     const { container } = render(
       <Provider
         store={createStore(combineReducers({ tables: tableInitialReducer }))}
@@ -173,6 +289,6 @@ describe('TableFiltersMenu', () => {
         </TableFilterContext.Provider>
       </Provider>,
     );
-    expect(container).toBeEmptyDOMElement();
+    await waitFor(() => expect(container).toBeEmptyDOMElement());
   });
 });

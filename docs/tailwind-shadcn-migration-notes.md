@@ -1650,6 +1650,192 @@ columnFilter: Boolean(props.openName),
 regression test in `TableFiltersMenu.test.tsx`, proven via a scripted
 stash of just that one line to fail without the fix and pass with it.
 
+> **Superseded** by "Not needed at all: the column-header popup's nested
+> flyout" below — the column-header target row no longer has a nested
+> Popover of its own to position, `columnFilter` no longer exists, and
+> `data-side` now comes from the *outer* TableFiltersMenu Content
+> instead. Left as-is for the history; the positioning problem it
+> describes and the reasoning about `git log -S` finding dead code both
+> still hold, just for code that's since been replaced rather than
+> patched in place.
+
+## Fix: column-header filter toggle never rendered for a wrapped `filters` component
+
+The real bug behind a live report that read, on first glance, like
+several filter flyouts rendering open simultaneously. `TableFiltersMenu`
+gates the column-header toggle behind an `existed` check — "does a
+filter matching `openName` actually exist in `props.filters`, or did the
+column point at one that's since been removed/renamed." The Radix
+conversion earlier in this migration replaced the pre-Radix version's DOM
+query with a check against the *static* `props.filters` element tree:
+
+```tsx
+// Looked reasonable, was broken for every real caller
+const existed =
+  !props.openName ||
+  React.Children.toArray(props.filters).some(
+    (child: any) => child?.props?.name === props.openName,
+  );
+```
+
+Grepping every `filters={` call site in the app (dozens) turned up
+exactly one pattern: `filters={<SomeGeneratedFilterComponent />}` — a
+single wrapper component, never a bare field and never a raw Fragment
+passed directly. The actual named filter (`<SelectFilter name="state"
+.../>`) is nested *inside* that wrapper's own render output, never a
+direct child of what's passed to `filters` — so
+`React.Children.toArray(props.filters)` always saw exactly one childless
+wrapper element, `child.props.name` was always `undefined`, and `existed`
+always evaluated `false`. The column-header funnel icon has silently
+rendered nothing, for every filterable column, on every page in the app,
+ever since this shipped — confirmed live in Storybook with a repro built
+the same way every real page does it (`filters={<Wrapper />}` wrapping
+two `SelectFilter`s): zero toggle buttons in the DOM for two filterable
+columns. The bug hid especially well because it fails silent (`return
+null`, no error) and because every debug repro and regression test
+written *while investigating this exact area* earlier in this session
+happened to pass a bare field directly as `filters` — sidestepping the
+one shape that actually breaks.
+
+Sequence of events, for the record: a screenshot showed what looked like
+two filter flyouts (an "Offering"-style dropdown and a
+checkboxes-and-toggle box) open at once. That read as "opening a second
+filter row doesn't close the first," which doesn't hold up under direct
+testing — clicking a second row consistently closes the first via
+Radix's own default `DismissableLayer` outside-click handling, no
+extra coordination required (confirmed with a same-list repro, a
+cross-instance repro — the "Add filter" list vs. a column header's own
+toggle — and by reverting to the pre-refactor code and testing that
+directly). An attempt at explicit "only one row open" coordination state
+was built, found unnecessary, and discarded — it actively fought Radix's
+own dismiss-vs-open sequencing and introduced a real, reproducible
+self-dismiss race that isn't present without it (kept as a cautionary
+note, not a change). The `existed` bug is the one that actually explains
+the report: before it was fixed, column-header toggles were entirely
+invisible, so whatever the user saw open must have come from *within*
+the "Add filter" list itself, not from a column header at all — and nothing
+in that list's own coordination is broken.
+
+Fix: check the real rendered DOM instead of the static element tree,
+same as the pre-Radix Metronic version did — it works at any wrapper
+nesting depth because it doesn't care how many components sit between
+`props.filters` and the actual `<div id="filter-item-{name}">`:
+
+```tsx
+const [existed, setExisted] = useState(true);
+const checkExisted = useCallback(
+  (node: HTMLDivElement | null) => {
+    if (node && props.openName) {
+      const item = node.querySelector('#filter-item-' + props.openName);
+      setExisted(Boolean(item));
+    }
+  },
+  [props.openName],
+);
+// ...
+if (props.openName && !existed) return null;
+```
+
+A callback ref, not `useRef` + `useEffect` (tried first, didn't work):
+Radix's `Presence` — what `forceMount` relies on to keep Content mounted
+while closed — defers actually attaching Content's real DOM node by one
+render pass. A plain ref read inside a parent-level `useEffect` is still
+`null` the first time that effect runs, so the check silently never
+fires and `existed` never leaves its initial `true`. Confirmed directly:
+logging inside the effect showed `hasRef: false` on every run. A callback
+ref sidesteps the whole question of *which* render pass actually attaches
+the node — it fires exactly when the node itself attaches, whenever that
+turns out to be.
+
+One existing test needed updating as a direct consequence: `existed`
+starting `true` and only resolving after a render means "renders nothing
+for a filter that no longer exists" is no longer synchronously true right
+after `render()` — it takes a `waitFor`, the same two-pass "render then
+possibly hide" shape the original pre-Radix version had.
+
+Verified live in Storybook (0 → 2 column-filter toggle buttons for two
+filterable columns, using the same wrapper-component pattern real pages
+use) and with a new regression test using a wrapper component rather than
+a bare field — proven via a scripted revert to the old `React.Children`
+check to fail without the fix and pass with it.
+
+## Fix: not needed at all — the column-header popup's nested flyout
+
+Direct follow-up, from a live screenshot of the now-*visible* (previous
+fix) column-header toggle: clicking it opened the full "Add filter"-style
+list of every filter name, with the target filter's own flyout then
+rendered alongside/overlapping it. Quoting the report: "clicking on
+filter icon in table column header leads to dropdown menu rendered for
+all fields and filter control itself - this is bug - dropdown menu is
+not needed in this case." Right diagnosis on the first read — the
+column-header instance's whole point is "this one column's own control,"
+and `TableFiltersMenu`'s `openName` branch was rendering `{props.filters}`
+unfiltered (every row), relying on `TableFilterItem.tsx`'s per-row
+`openMenuName === props.name` check to *auto-expand* the matching one
+inside its own nested Popover — but every other row still rendered its
+own collapsed `menu-link`, and the auto-expanded one still flew out to
+the side as its own separate floating panel, layered on top.
+
+Restructured `TableMenuFilterItem` (`TableFilterItem.tsx`) to branch
+three ways on `openMenuName`:
+
+```tsx
+const isColumnMode = Boolean(openMenuName);
+const isColumnTarget = isColumnMode && openMenuName === props.name;
+
+if (isColumnMode && !isColumnTarget) return null;       // every other row: nothing
+if (isColumnTarget) return (/* field rendered directly, no nested Popover */);
+return (/* unchanged: "Add filter" list's own collapsed accordion row */);
+```
+
+The non-target branch renders `null` outright rather than a collapsed
+row — a column-header popup has exactly one thing to show. The target
+branch drops the nested `RadixPopover.Root`/`Trigger`/`Content` shape
+entirely and renders `props.children` straight into the outer
+`TableFiltersMenu` Content, which already supplies its own
+`side="bottom"` positioning (see the now-superseded `columnFilter`
+section above) — nothing left to position twice.
+
+**Two knock-on bugs surfaced while building this, both specific to the
+target row now being visible immediately rather than behind a click:**
+
+1. The `itemValue`-driven "apply while typing" effect used to be gated
+   correctly by accident — the "Add filter" list's own row starts
+   `open === false`, so the effect was inert until a user click, and
+   mount-time firing was never actually possible. The column-target row
+   has no such gate: it's "open" from the very first render. Without a
+   separate guard, this fired a real `applyFiltersFn()`/`setFilter()`
+   dispatch during the *initial mount* of every filterable column at
+   once — a flood of synchronous cross-component dispatches, all firing
+   while React was still mid-mount for sibling columns, reproduced live
+   in Storybook as a React "Should not already be working" crash (not
+   caught by the jsdom suite, which never exercises more than one
+   filterable column mounting simultaneously). Fixed with a `skipFirstRun`
+   ref that suppresses exactly the mount-time firing of that effect.
+2. Rendering `props.children` unconditionally the moment the
+   force-mounted row exists — page load, for every filterable column at
+   once — let components like react-select's own auto-focus-on-mount
+   behavor fire immediately and simultaneously across every column,
+   independently reproducing the same crash (traced via the error's own
+   stack to `Select.focusInput()`). Restored `menuIsOpen` to context
+   (removed earlier in this same investigation as apparently-dead code —
+   turned out to still be needed, just for a new reason) and gated the
+   target row's children on it: `{menuIsOpen && props.children}`. The
+   field now only mounts once the popup is actually opened, matching the
+   "Add filter" list's own row's existing behavior.
+
+A `closeMenu` context function was added for the target row's own
+"Cancel" button (non-instant-apply filters only): since there's no
+nested Popover left for that row to close on its own, `TableFiltersMenu`
+now exposes closing *itself* — `closeMenu: () => setOpen(false)` —
+distinct from `apply`, which always applies before closing.
+
+Verified live end-to-end in Storybook (exactly one column-filter panel
+open at a time, containing only that column's own `SelectFilter`
+control — no list, no overlap; selecting a checkbox option applies and
+shows as a tag) and with a new regression test asserting a sibling
+filter's label/field never appears when a column-header instance opens.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
