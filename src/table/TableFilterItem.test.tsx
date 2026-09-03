@@ -4,9 +4,12 @@ import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
 import { describe, it, expect, vi } from 'vitest';
 
+import { ModalProvider } from '@/modal/ModalContext';
+
 import { TableFilterContext } from './FilterContextProvider';
 import { StringFilter } from './filters';
 import { tableInitialReducer } from './store';
+import { TableFilterContainer } from './TableFilterContainer';
 import { TableSidebarFilterValues } from './TableFilterItem';
 
 describe('TableSidebarFilterValues', () => {
@@ -187,5 +190,68 @@ describe('TableMenuFilterItem (filterPosition="menu")', () => {
 
     expect(screen.queryByPlaceholderText('Catalog')).not.toBeInTheDocument();
     expect(apply).not.toHaveBeenCalled();
+  });
+});
+
+/**
+ * Regression coverage for the mobile/sidebar filter drawer bug: reported
+ * live as filter rows ("Parent offering", "Category", "Organization")
+ * rendering empty and disappearing shortly after the drawer opened.
+ * Root cause was that TableSidebarFilterItem rendered `props.children`
+ * unconditionally inside Accordion.Body — react-bootstrap's underlying
+ * Collapse mounts its children regardless of collapsed state, so with
+ * `alwaysOpen` every sidebar filter row's field mounted at once. For an
+ * AsyncSelectFilter that meant every row's forced `autoFocus: true` (see
+ * useSelect.ts's `tableFilterProps`, which doesn't distinguish sidebar
+ * from menu position) fired simultaneously, starving the main thread —
+ * confirmed live in Storybook, not reproducible under jsdom's simpler
+ * event loop, so this test instead pins the *mounting* contract the fix
+ * relies on: a row's own field must not exist in the DOM until that
+ * row's own accordion section is the expanded one.
+ */
+describe('TableSidebarFilterItem (filterPosition="sidebar")', () => {
+  const renderSidebarFilter = () => {
+    const table = 'SidebarFilterRegressionTable';
+    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    render(
+      <Provider store={store}>
+        <ModalProvider>
+          <TableFilterContainer
+            table={table}
+            formId="SidebarFilterRegressionForm"
+            filterPosition="sidebar"
+            setFilter={() => undefined}
+            filters={
+              <StringFilter
+                title="Catalog"
+                name="catalog_name"
+                placeholder="Catalog"
+              />
+            }
+          />
+        </ModalProvider>
+      </Provider>,
+    );
+  };
+
+  it('does not mount the field until its accordion section is expanded', async () => {
+    const user = userEvent.setup();
+    renderSidebarFilter();
+
+    expect(screen.queryByPlaceholderText('Catalog')).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Catalog' }));
+    expect(await screen.findByPlaceholderText('Catalog')).toBeInTheDocument();
+  });
+
+  it('unmounts the field again when the section is collapsed', async () => {
+    const user = userEvent.setup();
+    renderSidebarFilter();
+
+    await user.click(screen.getByRole('button', { name: 'Catalog' }));
+    await screen.findByPlaceholderText('Catalog');
+
+    await user.click(screen.getByRole('button', { name: 'Catalog' }));
+    expect(screen.queryByPlaceholderText('Catalog')).not.toBeInTheDocument();
   });
 });

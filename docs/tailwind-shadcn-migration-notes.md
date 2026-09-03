@@ -1921,6 +1921,151 @@ reproduce the race with) — proven via a scripted revert of just the two
 end-to-end behavior lock, not proof; the live Storybook verification is
 what actually proves this one.
 
+## Fix: mobile/sidebar filter drawer rows rendered empty and disappeared
+
+Reported live, separately from the two fixes above and confirmed
+pre-existing (not caused by this migration's Radix work): opening the
+mobile "Filters" drawer showed several accordion sections
+("Parent offering", "Category", "Organization") expanded but visibly
+empty, with content flashing briefly before vanishing.
+
+**Ruled out first, by reading**: `SelectHelper.ts`'s
+`reorderOptions`/`reorderAsyncOptions` (both correctly short-circuit on
+`value === null`, and `withTableFilter.tsx`'s `OuterField` guarantees
+`null`, never `undefined`); `createLoadOptions.ts` (degrades gracefully
+on a failed request, doesn't throw); `DrawerRoot.tsx` (the drawer itself
+is driven by Metronic's own imperative `DrawerComponent`, unrelated to
+Radix or to anything touched by the two fixes above).
+
+**Reproduced live** in Storybook with a fast, network-independent stubbed
+`loadOptions` — ruling out backend latency as the cause. Expanding a
+section showed its field fully mounted and auto-focused
+(`metronic-select__control--is-focused metronic-select__control--menu-is-open`)
+while the accordion's own `.accordion-collapse` element hadn't even
+reached its `show` class yet, and the console repeated React's "not
+wrapped in `act(...)`" warning for every async-select field in the
+drawer — not just the one clicked.
+
+**Root cause**: `TableSidebarFilterItem` (`TableFilterItem.tsx`)
+rendered `props.children` unconditionally inside `Accordion.Body`.
+React-bootstrap's underlying `Collapse` mounts its children regardless of
+collapsed state — only a CSS height/opacity transition hides them — and
+the sidebar container renders every row with `alwaysOpen`, so every
+row's field mounted at once. For an `AsyncSelectFilter` that meant every
+row's own forced `autoFocus: true, menuIsOpen: true` (`useSelect.ts`'s
+`tableFilterProps`, set for any `variant="tableFilter"` with no
+distinction between menu and sidebar `filterPosition`) fired
+simultaneously, and N react-select instances racing for
+focus/menu-open at once starved the main thread for over a second before
+any of them settled — the "renders empty, disappears" symptom is that
+block, not an actual crash. Same root shape as `TableMenuFilterItem`'s
+`isColumnTarget` gate (fixed earlier this migration for the
+column-header popup), just triggered by react-bootstrap's `Accordion`
+instead of a force-mounted Radix `Popover`.
+
+**First attempted fix, discarded**: passing `unmountOnExit` to the
+`<Accordion>` wrapping the sidebar's rows. Failed at the type level —
+`Accordion.Body` (what `TableSidebarFilterItem` actually renders through)
+wraps `Accordion.Collapse` but only forwards `eventKey` and the
+`onEnter*`/`onExit*` callbacks, not arbitrary props, and neither
+`AccordionProps` nor `AccordionBodyProps` types `unmountOnExit` at all —
+only the lower-level `Accordion.Collapse`'s props (`CollapseProps`) do.
+
+**Actual fix**: read react-bootstrap's own `AccordionContext` directly
+and gate the mount on whether this row is actually the expanded one —
+the same "defer the mount" shape as `isColumnTarget`, just driven by
+Accordion's `activeEventKey` instead of a Popover's open state:
+
+```tsx
+const { activeEventKey } = React.useContext(AccordionContext);
+const isExpanded = Array.isArray(activeEventKey)
+  ? activeEventKey.includes(props.name)
+  : activeEventKey === props.name;
+// ...
+<div className="filter-field">{isExpanded && props.children}</div>
+```
+
+`activeEventKey` is an array under `alwaysOpen` (multiple rows can be
+open at once), so the check handles both shapes. This reuses the exact
+state that already drives the accordion's own visual open/close — no new
+state, no timing dependency.
+
+Verified live in Storybook: expanding a row now mounts and auto-focuses
+only that row's field (confirmed via `aria-expanded`/`.show` and the
+field's own DOM), a second row can be expanded independently without
+disturbing the first (`alwaysOpen` preserved), collapsing a row unmounts
+its field again, and the console is clean — no more `act()` warnings, no
+multi-second stall. Two new regression tests added to
+`TableFilterItem.test.tsx`, proven to actually catch the bug via a
+scripted revert of the `isExpanded &&` guard (both failed identically
+against the reverted code, both pass against the fix) — pinning the
+mounting contract the fix relies on. The live focus-race itself isn't
+reproducible under jsdom's simpler event loop, matching this migration's
+established pattern for this class of bug.
+
+**This fixed a real bug, but not the one in the report.** Reported back
+live, after the above shipped: still blank, "not only async select but
+ALL fields" — including `BooleanFilter` (a plain checkbox, no
+react-select, no autofocus anywhere near it). My own Storybook check had
+only confirmed the field *mounted* with the right DOM/geometry
+(`scrollHeight`, `offsetHeight`) — never that it actually *painted*.
+Asked the user to inspect a blank row's element in real DevTools: the
+checkbox `<input>` and its `<label>` were genuinely in the DOM with
+correct, non-zero layout boxes — not a mounting problem at all.
+`getComputedStyle` on that input, requested directly from the user, was
+the actual break: `visibility: collapse` on every ancestor from
+`.accordion-collapse` down. Checking the *same* Storybook story for the
+property I'd never actually looked at confirmed it there too — I'd
+verified presence and size, not paint.
+
+**Root cause**: Tailwind ships a `visibility` utility literally named
+`.collapse` (the three-state set `visible`/`invisible`/`collapse`, for
+hiding table rows without reflow). React-bootstrap's `Collapse` /
+`Accordion.Collapse` / `Navbar.Collapse` independently use the bare
+class name `collapse` as their own component marker — unrelated meaning,
+identical name, predating the Tailwind utility by years. This file's own
+deliberate layer order (`utilities` ranked above `bootstrap`, top of
+this file) means Tailwind's rule silently wins on every one of those
+elements. `visibility: collapse` on a non-table element computes exactly
+like `hidden` per spec — the element keeps its normal layout box (which
+is why `.show`, `scrollHeight`, and even the async-select's autofocus
+above all looked correct) but paints nothing. Grepping for react-bootstrap
+`Collapse` usage turned up at least seven affected components
+(`AccordionCard`, `TableHeader`, this file's sidebar drawer,
+`ChatHistorySidebar`, `CategoriesPanel`, `InferenceServiceView`,
+`TwoStageWorkflowCard`) — an app-wide collision, not something specific
+to filters.
+
+**Fix**, in `src/tailwind.css` (shared by the real app and Storybook, so
+one change covers both):
+
+```css
+@layer bootstrap {
+  .collapse {
+    visibility: visible !important;
+  }
+}
+```
+
+Layer order alone can't reclaim this — `bootstrap` ranks *below*
+`utilities` on purpose — so a normal-priority rule here would still
+lose. Cascade Layers order `!important` declarations in *reverse*, and
+rank any `!important` above any normal-priority rule regardless of
+layer, so `!important` reliably beats Tailwind's non-important utility
+without touching that deliberate ordering. Checked first for any
+genuine Tailwind `.collapse` (table-visibility) usage in the app — none
+exists — so reclaiming the name outright is safe.
+
+Verified live in Storybook via `getComputedStyle`: `visibility` on the
+accordion body and its checkbox/select children flips from `collapse` to
+`visible`, both before and after a hard reload, for both the
+`AsyncSelectFilter` and `BooleanFilter` rows. No jsdom regression test
+for this one — jsdom's `getComputedStyle` doesn't evaluate real CSS
+cascade layers/`@import` at all, so a test asserting `visibility` here
+would pass or fail independent of the actual bug; the live, cross-checked
+`getComputedStyle` evidence (two different real environments, both
+before and after) is what stands as verification.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

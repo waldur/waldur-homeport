@@ -10,7 +10,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Accordion } from 'react-bootstrap';
+import { Accordion, AccordionContext } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 
@@ -183,6 +183,27 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     React.useContext(TableFilterContext);
   const values = useSelector(selectFilterValues(table));
 
+  // `Accordion.Body` (via `Accordion.Collapse`) mounts its children as
+  // soon as the accordion renders, regardless of collapsed state — only
+  // the CSS height/opacity animation hides them. With `alwaysOpen` every
+  // sidebar filter row mounts at once, so every AsyncSelectFilter's own
+  // forced `autoFocus: true` (see useSelect.ts's `tableFilterProps`,
+  // which doesn't distinguish sidebar from menu position) fires
+  // simultaneously — reported live as the mobile filter drawer's rows
+  // rendering empty/disappearing: react-select's own focus/menu-open
+  // handling from N fields racing at once starves the main thread for
+  // over a second before any of them settle. Same root shape as
+  // TableMenuFilterItem's `isColumnTarget` gate below, just triggered by
+  // react-bootstrap's Accordion instead of a force-mounted Radix Popover.
+  // Deferring the mount until this item is actually the expanded one
+  // fixes it without needing `unmountOnExit` (which `Accordion.Body`
+  // doesn't type or forward — only the lower-level `Accordion.Collapse`
+  // does).
+  const { activeEventKey } = React.useContext(AccordionContext);
+  const isExpanded = Array.isArray(activeEventKey)
+    ? activeEventKey.includes(props.name)
+    : activeEventKey === props.name;
+
   const _setFilterRef = useRef<any>();
 
   const removeValue = useCallback(
@@ -258,7 +279,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         <div
           className={classNames('filter-field', props.showValueBadge && 'mb-2')}
         >
-          {props.children}
+          {isExpanded && props.children}
         </div>
         {props.showValueBadge && (
           <TableSidebarFilterValues

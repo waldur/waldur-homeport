@@ -111,6 +111,42 @@
   --radius-lg: 8px;
 }
 
+/* Tailwind's `visibility` utility set includes a class literally named
+   `.collapse` (`{ visibility: collapse }` — the third state alongside
+   `visible`/`invisible`, meant for hiding table rows/columns without
+   reflowing the table). React-bootstrap's `Collapse`/`Accordion.Collapse`/
+   `Navbar.Collapse` independently use the exact same bare class name
+   `collapse` as their own component marker (Bootstrap predates this
+   Tailwind utility by years) — an unrelated meaning that happens to share
+   a name. With this file's own deliberate `utilities` > `bootstrap` layer
+   order, Tailwind's rule silently wins on every one of those elements:
+   `visibility: collapse` on a non-table element computes exactly like
+   `visibility: hidden` per spec, so the collapse/accordion body still
+   occupies its normal layout box (`.show`, correct `scrollHeight`, real
+   children mounted and even auto-focused) but paints nothing — "expands
+   but shows empty" with no console error, evidenced live via
+   `getComputedStyle` on both the real app and this file's own Storybook
+   preview (both import this same file, so both had it). At least seven
+   components hit this (`AccordionCard`, `TableFilterItem`'s sidebar
+   drawer, `TableHeader`, `ChatHistorySidebar`, `CategoriesPanel`,
+   `InferenceServiceView`, `TwoStageWorkflowCard`), so this is fixed once
+   here rather than per call site. No genuine Tailwind `.collapse`
+   (table-visibility) usage exists anywhere in the app (checked), so
+   reclaiming the name outright is safe.
+
+   Layer order alone can't win this back — `bootstrap` is ranked *below*
+   `utilities` on purpose (see this file's very first comment), so a
+   normal-priority rule here would still lose. Cascade Layers order
+   `!important` declarations in *reverse*, and rank any `!important`
+   above any normal-priority rule regardless of layer, so `!important`
+   here reliably beats Tailwind's non-important utility without touching
+   that deliberate ordering. */
+@layer bootstrap {
+  .collapse {
+    visibility: visible !important;
+  }
+}
+
 /* No `.dark` class in this app — dark mode swaps compiled stylesheets
    (src/theme/utils.ts). data-theme on <html> gives Tailwind's dark:
    variant a real signal to key off instead of introducing a second toggle. */
