@@ -2145,6 +2145,54 @@ It's live: `TableToolbarActions` renders `TableButtons` whenever
 the "next to search" placement doesn't apply. Both copies needed the fix;
 neither is dead.
 
+## Fix: `ActionDropdownButton`'s toggle did nothing on click
+
+Reported live: on the admin "Identity & Authentication" page's Providers
+tab, every provider card's "Enabled"/"Not configured" dropdown button
+(Keycloak, TARA, MyAccessID, Local identity provider, SAML2, FreeIPA —
+all built on `ActionDropdownButton`) rendered correctly but did nothing
+when clicked.
+
+**Root cause**: `ActionDropdownButton.tsx`'s `Toggle` is rendered under
+`RadixDropdownMenu.Trigger asChild` — Radix's `Slot` clones the child and
+merges in `aria-haspopup`/`aria-expanded`/`data-state` *plus the actual
+open-on-click handling* (`onClick`/`onPointerDown`/`onKeyDown`) as extra
+props on whatever it clones. `Toggle`'s signature destructured only its
+own named props (`title`, `variant`, `size`, `className`, `disabled`,
+`id`, `isOpen`) and never captured or spread a `...rest` onto the
+underlying `<button>` — every prop Slot injected was silently dropped.
+The button looked entirely correct (label, variant, caret) with no
+console error; it just had no handler wired to open anything. Traced by
+diffing against `ActionsDropdown.tsx`'s `TableDropdownToggle`, the
+working sibling under the identical `Trigger asChild` pattern, which
+already spreads `...rest` with a comment stating exactly why.
+
+`ActionDropdownButton` was itself migrated from a react-bootstrap
+`Dropdown`/`Dropdown.Item` onto this Radix component earlier in this
+session's dropdown-host batch (`Fix MenuItem must be used within Menu
+crash on 12 dropdown hosts`) — this `...rest` omission was introduced
+then and had gone unexercised until now.
+
+**Fix**: added `Omit<ComponentPropsWithoutRef<'button'>, 'title'>` to
+`Toggle`'s prop type (`Omit`, not a plain intersection, because this
+component's own `title` prop is `ReactNode` — a dropdown label — which
+collides with the native button `title` attribute's `string` type) and
+spread `...rest` onto the `<button>`, mirroring `TableDropdownToggle`.
+
+New regression test in `ActionDropdownButton.test.tsx` — click the
+toggle, assert a child item becomes visible — proven to actually catch
+the bug via a scripted revert (fails cleanly against the pre-fix code,
+passes against the fix). Live Storybook verification hit a different
+wall: this session's Browser-pane tooling wasn't compositing frames at
+the time, so neither a raw `.click()` nor a full synthetic
+pointerdown/pointerup/click sequence could produce a real "trusted"
+click — but the *same* limitation reproduced identically against
+`TableDropdownToggle` (the known-working control) in the same
+environment, confirming it as a tooling gap rather than evidence against
+the fix. The `aria-haspopup`/`aria-expanded`/`data-state` attributes
+appearing on the button only after the fix (absent before it) is the
+direct, verified evidence Slot's props now reach the DOM element.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap

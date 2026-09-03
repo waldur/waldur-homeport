@@ -1,7 +1,13 @@
 import { CaretDownIcon } from '@phosphor-icons/react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
-import { FC, forwardRef, ReactNode, useState } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  FC,
+  forwardRef,
+  ReactNode,
+  useState,
+} from 'react';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 interface ActionDropdownButtonProps {
@@ -28,8 +34,17 @@ interface ActionDropdownButtonProps {
 /**
  * forwardRef because this is rendered under `RadixDropdownMenu.Trigger
  * asChild` — Slot clones it and attaches the ref the popper positions
- * against. See ActionsDropdown.tsx's TableDropdownToggle for the same
- * requirement stated in more detail.
+ * against, merging in aria-haspopup/aria-expanded/data-state *plus the
+ * open-on-click handling* as extra props on this element. Without
+ * capturing and spreading those (`...rest` below), Slot's injected
+ * onClick/onPointerDown/onKeyDown are silently dropped and the button
+ * renders — title, variant, caret all correct — but never actually opens
+ * the menu: reported live as every provider card's "Enabled"/"Not
+ * configured" toggle on the admin Identity Providers page doing nothing
+ * on click. See ActionsDropdown.tsx's TableDropdownToggle for the same
+ * requirement stated in more detail — it already spreads `...rest`, which
+ * is how this class of bug was diagnosed here (identical Trigger
+ * asChild pattern, working correctly there).
  */
 const Toggle = forwardRef<
   HTMLButtonElement,
@@ -41,8 +56,8 @@ const Toggle = forwardRef<
     disabled?: boolean;
     id?: string;
     isOpen: boolean;
-  }
->(({ title, variant, size, className, disabled, id, isOpen }, ref) => (
+  } & Omit<ComponentPropsWithoutRef<'button'>, 'title'>
+>(({ title, variant, size, className, disabled, id, isOpen, ...rest }, ref) => (
   <button
     ref={ref}
     id={id}
@@ -55,6 +70,7 @@ const Toggle = forwardRef<
       'btn-icon-right no-arrow',
       className,
     )}
+    {...rest}
   >
     {title}
     <span
