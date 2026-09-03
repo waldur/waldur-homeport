@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  height: 100%;
   min-height: 128px;
 
   &:hover {
@@ -50,5 +51,19 @@
     svg {
       flex-shrink: 0;
     }
+  }
+
+  // Two lines of description, then ellipsis — enough to tell two categories
+  // apart without letting one long text stretch the tile out of the row.
+  .category-description {
+    margin: 8px 0 0;
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .category-count {
+    margin-top: 8px;
   }
 }

@@ -104,7 +104,9 @@ export const OfferingsSearchBox = () => {
       params={params}
       RowComponent={OfferingListItem}
       placeholder={translate('Search offerings...')}
-      emptyMessage={translate('There are no offerings.')}
+      emptyMessage={translate(
+        'No offerings match your search. To find organisations, projects or resources, use the search in the top bar.',
+      )}
       className="w-400px"
     />
   );

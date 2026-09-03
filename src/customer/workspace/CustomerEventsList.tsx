@@ -27,7 +27,14 @@ export const CustomerEventsList = () => {
       scope: customer.url,
     };
     if (isEmpty(userFilter.feature)) {
-      result.feature = ['customers', 'projects', 'resources'];
+      result.feature = [
+        'customers',
+        'projects',
+        'resources',
+        // OpenStack resource events live in their own group, so the default
+        // has to name both or this list silently drops them.
+        'openstack_resources',
+      ];
     }
     return result;
   }, [customer, userFilter]);

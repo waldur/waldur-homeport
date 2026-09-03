@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { ADD_PLAN_FORM_ID } from './constants';
 
@@ -28,8 +28,10 @@ export const ClonePlanButton: FunctionComponent<{
     });
   };
   return (
-    <ActionsDropdownItem onSelect={callback}>
-      <CopyIcon size={18} weight="bold" /> {translate('Clone')}
-    </ActionsDropdownItem>
+    <ActionItem
+      title={translate('Clone')}
+      action={callback}
+      iconNode={<CopyIcon weight="bold" />}
+    />
   );
 };

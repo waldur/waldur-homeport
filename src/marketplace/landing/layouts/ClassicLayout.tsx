@@ -5,6 +5,7 @@ import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
 import DefaultDarkImage from '@/dashboard/hero/servers-room-dark.png';
 import DefaultLightImage from '@/dashboard/hero/servers-room-light.png';
 import { translate } from '@/i18n';
+import { getMarketplaceTitle } from '@/marketplace/title';
 import { useTheme } from '@/theme/useTheme';
 
 import { CategoriesList } from '../CategoriesList';
@@ -12,11 +13,10 @@ import { OfferingsGroup } from '../OfferingsGroup';
 import { OfferingsSearchBox } from '../OfferingsSearchBox';
 
 import { MarketplaceLayoutProps } from './types';
-import { useMarketplaceTitle } from './useMarketplaceTitle';
 
 export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
   const { theme } = useTheme();
-  const title = useMarketplaceTitle();
+  const title = getMarketplaceTitle();
 
   const backendImage = getIconUrl('marketplace_hero_image');
   const defaultImage = theme === 'dark' ? DefaultDarkImage : DefaultLightImage;
@@ -29,7 +29,7 @@ export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
         context="marketplace"
         backgroundImage={`url(${backendImage}), url(${defaultImage})`}
       >
-        <div className="d-flex justify-content-center">
+        <div className="landing-hero__search">
           <OfferingsSearchBox />
         </div>
       </LandingHeroSection>

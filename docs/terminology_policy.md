@@ -27,6 +27,23 @@ undeploying is applied to:
 
 Please use "synchronise" instead of "pull" in action title.
 
+## Marketplace
+
+The destination is called **Marketplace**. "Service catalogue", "catalogue" and
+"store" are not synonyms for it in the UI.
+
+A deployment may rename it through the `MARKETPLACE_LANDING_PAGE` setting, and
+then the chosen name replaces "Marketplace" everywhere at once. So never write
+the name as a literal: read it from `getMarketplaceTitle()`
+(`src/marketplace/title.ts`). The sidebar entry, the breadcrumbs, the browser
+title and the landing hero all derive from it — a deployment that sets "Service
+Catalog" must not end up with a sidebar saying "Marketplace" next to a hero
+saying "Welcome to Service Catalog".
+
+What the marketplace lists are **offerings**; what a user has ordered are
+**resources**. Search inputs are named after the scope they cover, so an
+offering search never says just "Search".
+
 ## Units of measurement
 
 Component units (`measured_unit`) are written in the **singular**. They appear

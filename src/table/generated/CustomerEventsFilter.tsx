@@ -12,6 +12,10 @@ export const CustomerEventsFeatureOptions: CustomerEventsFeatureOption[] = [
     value: 'customers',
   },
   {
+    label: translate('OpenStack resource events'),
+    value: 'openstack_resources',
+  },
+  {
     label: translate('Project events'),
     value: 'projects',
   },
@@ -30,7 +34,6 @@ export const CustomerEventsFilter: FunctionComponent<{}> = () => (
     title={translate('Type')}
     name="feature"
     getValueLabel={(value: CustomerEventsFeatureOption) => value?.label}
-    placeholder={translate('Type')}
     options={CustomerEventsFeatureOptions}
     getOptionValue={(option: CustomerEventsFeatureOption) =>
       String(option.value)
@@ -38,6 +41,7 @@ export const CustomerEventsFilter: FunctionComponent<{}> = () => (
     getOptionLabel={(option: CustomerEventsFeatureOption) => option.label}
     isClearable={true}
     isMulti={true}
+    placeholder={translate('Type')}
   />
 );
 

@@ -29,7 +29,8 @@ describe('loadConfig — error wrapping', () => {
     const { loadConfig } = await import('./bootstrap');
 
     await expect(loadConfig()).rejects.toMatchObject({
-      message: 'Unable to fetch server configuration.',
+      message:
+        'Unable to fetch server configuration from http://localhost:8080/.',
       cause: sdkError,
     });
   });
@@ -42,7 +43,8 @@ describe('loadConfig — error wrapping', () => {
 
     await expect(loadConfig()).rejects.toMatchObject({
       message: expect.stringContaining(
-        'Please check if you can connect to http://localhost:8080/',
+        'The request did not complete. Please check that you can open ' +
+          'http://localhost:8080/ directly in this browser',
       ),
       cause: networkError,
     });

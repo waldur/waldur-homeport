@@ -14,6 +14,7 @@ import {
 } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
+import { getMarketplaceTitle } from '@/marketplace/title';
 import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
 export const states: StateDeclaration[] = [
@@ -95,7 +96,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     url: '',
     data: {
-      breadcrumb: () => translate('Marketplace'),
+      breadcrumb: () => getMarketplaceTitle(),
     },
   },
 

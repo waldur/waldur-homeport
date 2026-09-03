@@ -41,6 +41,10 @@ export const OfferingDetailsPage: React.FC = () => {
   } = useQuery({
     queryKey: ['DetailsPage', offering_uuid],
     queryFn: () => loadData(offering_uuid),
+    // Refetching here hands DeployPage a new `offering` object identity,
+    // which resets the in-progress order form back to its initial values
+    // (see the tab-switch data-loss bug reported for VM ordering).
+    refetchOnWindowFocus: false,
   });
 
   // The page heading reads "Add <offering name>"; naming the category here

@@ -39,7 +39,7 @@ export const validateWindow = (
   if (!options.maintenanceUuid) {
     const now = Date.now();
     if (start.getTime() < now || end.getTime() < now) {
-      return translate('Start and end must be in the future.');
+      return translate('Start and end time must be in the future.');
     }
   }
   return undefined;

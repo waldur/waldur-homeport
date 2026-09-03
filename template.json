@@ -26756,8 +26756,7 @@
   },
   "Marketplace": {
     "context": {
-      "primary_ui_type": "text_content",
-      "feature_area": "administration"
+      "feature_area": "i18n"
     }
   },
   "Marketplace Branding": {
@@ -30308,6 +30307,11 @@
       "feature_area": "resource-requests-step"
     }
   },
+  "No offerings match your search. To find organisations, projects or resources, use the search in the top bar.": {
+    "context": {
+      "feature_area": "landing"
+    }
+  },
   "No open round available.": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -32848,6 +32852,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
+    }
+  },
+  "OpenStack resource events": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "OpenStack resources provisioning": {},
@@ -48163,7 +48172,7 @@
       "feature_area": "openstack-network"
     }
   },
-  "Start and end must be in the future.": {
+  "Start and end time must be in the future.": {
     "context": {
       "feature_area": "maintenance"
     }
@@ -51422,7 +51431,7 @@
   },
   "There are no offerings.": {
     "context": {
-      "feature_area": "landing"
+      "feature_area": "offerings"
     }
   },
   "There are no open rounds. The call is closed.": {

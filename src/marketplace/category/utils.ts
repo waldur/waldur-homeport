@@ -73,7 +73,13 @@ export const getCategoryItems = (
 export const getGroupedCategories = (
   categories: Pick<
     Category,
-    'uuid' | 'offering_count' | 'group' | 'icon' | 'title' | 'resource_count'
+    | 'uuid'
+    | 'offering_count'
+    | 'group'
+    | 'icon'
+    | 'title'
+    | 'description'
+    | 'resource_count'
   >[],
   categoryGroups: CategoryGroup[],
 ): CategoryGroup[] => {

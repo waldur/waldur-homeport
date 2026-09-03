@@ -9,6 +9,7 @@ import {
   getServiceAccessMode,
   isMarketplaceVisible,
 } from '@/marketplace/serviceAccessMode';
+import { getMarketplaceTitle } from '@/marketplace/title';
 import { MenuComponent } from '@/metronic/components';
 import { CallPublicMenu } from '@/navigation/sidebar/CallPublicMenu';
 import { PermissionEnum } from '@/permissions/enums';
@@ -148,7 +149,7 @@ export const UnifiedSidebar = () => {
               : undefined
           }
           icon={<ShoppingCartIcon weight="bold" />}
-          title={translate('Marketplace')}
+          title={getMarketplaceTitle()}
           state="public.marketplace-landing"
           child={false}
           disabled={shouldBlockNavigation}

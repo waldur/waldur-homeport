@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const EditPlanPricesDialog = lazyComponent(() =>
   import('./EditPlanPricesDialog').then((module) => ({
@@ -25,8 +25,10 @@ export const EditPlanPricesButton: FunctionComponent<{
     });
   };
   return (
-    <ActionsDropdownItem onSelect={callback}>
-      <CoinsIcon size={18} weight="bold" /> {translate('Edit prices')}
-    </ActionsDropdownItem>
+    <ActionItem
+      title={translate('Edit prices')}
+      action={callback}
+      iconNode={<CoinsIcon weight="bold" />}
+    />
   );
 };

@@ -4,7 +4,7 @@ import { EventGroup } from '@/events/types';
 import { getUserContext, UserContext } from '@/events/utils';
 import { formatJsxTemplate, translate } from '@/i18n';
 
-import { ResourcesEnum } from '../EventsEnums';
+import { Openstack_resourcesEnum } from '../EventsEnums';
 
 interface SecurityGroupRulePayload {
   direction: string;
@@ -311,82 +311,82 @@ export const OpenStackEvents: EventGroup = {
   title: translate('OpenStack security group events'),
   events: [
     {
-      key: ResourcesEnum.openstack_security_group_rules_changed,
+      key: Openstack_resourcesEnum.openstack_security_group_rules_changed,
       title: translate('Security group "{security_group_name}" rules changed.'),
       formatter: formatSecurityGroupRulesChangedEvent,
     },
     {
-      key: ResourcesEnum.openstack_port_security_enabled,
+      key: Openstack_resourcesEnum.openstack_port_security_enabled,
       title: translate('Port security enabled on "{port_name}".'),
       formatter: formatPortSecurityEnabledEvent,
     },
     {
-      key: ResourcesEnum.openstack_port_security_disabled,
+      key: Openstack_resourcesEnum.openstack_port_security_disabled,
       title: translate('Port security disabled on "{port_name}".'),
       formatter: formatPortSecurityDisabledEvent,
     },
     {
-      key: ResourcesEnum.openstack_port_allowed_address_pairs_changed,
+      key: Openstack_resourcesEnum.openstack_port_allowed_address_pairs_changed,
       title: translate('Allowed address pairs on port "{port_name}" changed.'),
       formatter: formatAllowedAddressPairsChangedEvent,
     },
     {
-      key: ResourcesEnum.openstack_load_balancer_created,
+      key: Openstack_resourcesEnum.openstack_load_balancer_created,
       title: translate('Load balancer "{name}" created.'),
       formatter: formatLbaasLifecycle(translate('load balancer'), 'created'),
     },
     {
-      key: ResourcesEnum.openstack_load_balancer_updated,
+      key: Openstack_resourcesEnum.openstack_load_balancer_updated,
       title: translate('Load balancer "{name}" updated.'),
       formatter: formatLbaasLifecycle(translate('load balancer'), 'updated'),
     },
     {
-      key: ResourcesEnum.openstack_load_balancer_deleted,
+      key: Openstack_resourcesEnum.openstack_load_balancer_deleted,
       title: translate('Load balancer "{name}" deleted.'),
       formatter: formatLbaasLifecycle(translate('load balancer'), 'deleted'),
     },
     {
-      key: ResourcesEnum.openstack_listener_created,
+      key: Openstack_resourcesEnum.openstack_listener_created,
       title: translate('Listener "{name}" created.'),
       formatter: formatLbaasLifecycle(translate('listener'), 'created'),
     },
     {
-      key: ResourcesEnum.openstack_listener_updated,
+      key: Openstack_resourcesEnum.openstack_listener_updated,
       title: translate('Listener "{name}" updated.'),
       formatter: formatLbaasLifecycle(translate('listener'), 'updated'),
     },
     {
-      key: ResourcesEnum.openstack_listener_deleted,
+      key: Openstack_resourcesEnum.openstack_listener_deleted,
       title: translate('Listener "{name}" deleted.'),
       formatter: formatLbaasLifecycle(translate('listener'), 'deleted'),
     },
     {
-      key: ResourcesEnum.openstack_pool_created,
+      key: Openstack_resourcesEnum.openstack_pool_created,
       title: translate('Pool "{name}" created.'),
       formatter: formatLbaasLifecycle(translate('pool'), 'created'),
     },
     {
-      key: ResourcesEnum.openstack_pool_updated,
+      key: Openstack_resourcesEnum.openstack_pool_updated,
       title: translate('Pool "{name}" updated.'),
       formatter: formatLbaasLifecycle(translate('pool'), 'updated'),
     },
     {
-      key: ResourcesEnum.openstack_pool_deleted,
+      key: Openstack_resourcesEnum.openstack_pool_deleted,
       title: translate('Pool "{name}" deleted.'),
       formatter: formatLbaasLifecycle(translate('pool'), 'deleted'),
     },
     {
-      key: ResourcesEnum.openstack_pool_member_created,
+      key: Openstack_resourcesEnum.openstack_pool_member_created,
       title: translate('Pool member "{name}" created.'),
       formatter: formatLbaasLifecycle(translate('pool member'), 'created'),
     },
     {
-      key: ResourcesEnum.openstack_pool_member_updated,
+      key: Openstack_resourcesEnum.openstack_pool_member_updated,
       title: translate('Pool member "{name}" updated.'),
       formatter: formatLbaasLifecycle(translate('pool member'), 'updated'),
     },
     {
-      key: ResourcesEnum.openstack_pool_member_deleted,
+      key: Openstack_resourcesEnum.openstack_pool_member_deleted,
       title: translate('Pool member "{name}" deleted.'),
       formatter: formatLbaasLifecycle(translate('pool member'), 'deleted'),
     },

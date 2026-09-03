@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   attachAuthHeader,
+  attachResponseDetails,
   getAuthHeader,
   handleUnauthorizedResponse,
   resetAuthSessionTracking,
@@ -161,5 +162,60 @@ describe('handleUnauthorizedResponse — 401 logout guard', () => {
       url: 'http://localhost:8080/api-auth/password/',
     } as unknown as Response);
     expect(onSessionExpired).not.toHaveBeenCalled();
+  });
+});
+
+describe('attachResponseDetails — error normalisation', () => {
+  const makeResponse = (status: number, statusText: string) =>
+    ({
+      status,
+      statusText,
+      url: 'http://localhost:8080/api/configuration/',
+    }) as Response;
+
+  // The generated client throws the raw body on a non-2xx, so without this the
+  // status never reaches the caller and every backend error looks the same.
+  it('lifts status, statusText and url off the response', () => {
+    const body = { detail: 'Not found' };
+
+    const result: any = attachResponseDetails(
+      body,
+      makeResponse(404, 'Not Found'),
+    );
+
+    expect(result.status).toBe(404);
+    expect(result.statusText).toBe('Not Found');
+    expect(result.url).toBe('http://localhost:8080/api/configuration/');
+    expect(result.detail).toBe('Not found');
+    // Much of the app reads error.response.status; that must keep working.
+    expect(result.response.status).toBe(404);
+  });
+
+  // A fetch that never produced a response is a real Error, and downstream code
+  // distinguishes it with `instanceof TypeError`. Spreading it here silently
+  // erased that — an Error's message and stack are non-enumerable — which is
+  // what reduced a blocked bootstrap request to an unactionable message.
+  it('passes a fetch-level failure through untouched', () => {
+    const networkError = new TypeError('Failed to fetch');
+
+    const result = attachResponseDetails(networkError, undefined);
+
+    expect(result).toBe(networkError);
+    expect(result).toBeInstanceOf(TypeError);
+  });
+
+  // An ingress controller's HTML error page is thrown as a bare string;
+  // spreading it indexed it by character into {0: '<', 1: 'h', ...}.
+  it('parks a non-object body under `body` instead of spreading it', () => {
+    const html = '<html><body>404 page not found</body></html>';
+
+    const result: any = attachResponseDetails(
+      html,
+      makeResponse(404, 'Not Found'),
+    );
+
+    expect(result.body).toBe(html);
+    expect(result[0]).toBeUndefined();
+    expect(result.status).toBe(404);
   });
 });

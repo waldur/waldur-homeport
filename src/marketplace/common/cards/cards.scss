@@ -118,23 +118,6 @@
   }
 }
 
-// Ellipsis utility classes
-.ellipsis-lines-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.ellipsis-lines-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 // Solid footer border for image card
 .offering-card-image .card-footer {
   border-top-style: solid;

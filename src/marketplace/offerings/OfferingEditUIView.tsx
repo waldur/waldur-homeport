@@ -21,6 +21,8 @@ import {
   showComponentsList,
 } from '../common/registry';
 
+import { offeringOwnsPricing } from './utils';
+
 const OverviewSection = lazyComponent(() =>
   import('./update/overview/OverviewSection').then((module) => ({
     default: module.OverviewSection,
@@ -254,7 +256,7 @@ const getTabs = (offering: Offering): PageBarTab[] =>
       component: TosManagementSection,
       title: translate('ToS management'),
     },
-    buildAccountingTab(offering),
+    offeringOwnsPricing(offering) && buildAccountingTab(offering),
   ].filter(Boolean) as PageBarTab[];
 
 export const OfferingEditUIView = ({

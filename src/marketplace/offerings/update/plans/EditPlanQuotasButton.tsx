@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const EditPlanQuotasDialog = lazyComponent(() =>
   import('./EditPlanQuotasDialog').then((module) => ({
@@ -42,8 +42,10 @@ export const EditPlanQuotasButton: FunctionComponent<{
     });
   };
   return (
-    <ActionsDropdownItem onSelect={callback}>
-      <PencilSimpleIcon size={18} weight="bold" /> {translate('Edit quotas')}
-    </ActionsDropdownItem>
+    <ActionItem
+      title={translate('Edit quotas')}
+      action={callback}
+      iconNode={<PencilSimpleIcon weight="bold" />}
+    />
   );
 };

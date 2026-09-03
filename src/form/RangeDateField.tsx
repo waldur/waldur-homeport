@@ -78,7 +78,7 @@ export const RangeDateField: FunctionComponent<RangeDateFieldProps> = ({
       // The backend filters on bare dates, so collecting a time would promise
       // a precision the query throws away.
       enableTime={false}
-      // DateTimeRangeField floors at today because a maintenance window is
+      // DateTimeRangeField floors at now because a maintenance window is
       // never scheduled backwards. A log filter is the opposite — it only ever
       // looks back.
       minDate={null}
