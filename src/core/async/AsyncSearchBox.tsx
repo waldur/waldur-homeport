@@ -33,7 +33,6 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
   className,
   wrapperClassName,
 }: AsyncSearchBoxProps<Fetcher>): JSX.Element => {
-  const [enabled, setEnabled] = useState(false);
   const [query, setQuery] = useState('');
 
   const applyQuery = useCallback(
@@ -69,25 +68,24 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage,
     refetchOnWindowFocus: false,
-    enabled,
+    // Mirrors `open`, not a separately-driven flag: this popover uses
+    // `Popover.Anchor`, not `Popover.Trigger`, so it opens via direct
+    // `setOpen(true)` calls from the search input's own onFocus/onChange
+    // below, never through Radix's own interaction handling — Anchor has
+    // none. `onOpenChange` only fires for changes Radix itself initiates
+    // (Trigger clicks, Escape, outside-click), so a query gated on a
+    // separate `enabled` state set inside `onOpenChange` never actually
+    // turned on: reported live as the search dropdown showing "Loading"
+    // forever, because no request was ever sent (React Query v5 has no
+    // `idle` status — a permanently-disabled query reports `pending`,
+    // rendering the same as a real in-flight one, indistinguishable in
+    // the UI). Enabling directly off `open` removes the indirection.
+    enabled: open,
   });
 
   return (
     <div id="search-box-wrapper" className={wrapperClassName}>
-      <RadixPopover.Root
-        open={open}
-        onOpenChange={(next) => {
-          setOpen(next);
-          // Radix only mounts Content once open, which already gives this
-          // the same "don't fetch until visible" laziness the old
-          // IntersectionObserver-based useOnScreen provided — no need to
-          // keep that separate mechanism (and its ref would sit unattached
-          // until first open anyway, since Content isn't in the DOM before
-          // then).
-          if (next) setEnabled(true);
-        }}
-        modal={false}
-      >
+      <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
         <RadixPopover.Anchor asChild>
           <div aria-hidden="true">
             <FilterBox

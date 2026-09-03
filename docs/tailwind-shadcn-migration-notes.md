@@ -2193,6 +2193,53 @@ the fix. The `aria-haspopup`/`aria-expanded`/`data-state` attributes
 appearing on the button only after the fix (absent before it) is the
 direct, verified evidence Slot's props now reach the DOM element.
 
+## Fix: marketplace search box stuck on "Loading" forever
+
+Reported live: the search box in the marketplace dashboard's hero banner
+showed a "Loading" dropdown that never resolved, no matter what was
+typed.
+
+**Root cause**: `AsyncSearchBox.tsx` gated its `useInfiniteQuery` behind
+a separate `enabled` state, flipped `true` only inside the Radix
+`Popover.Root`'s `onOpenChange` callback. But this component opens via
+`Popover.Anchor`, not `Popover.Trigger` — Anchor is purely a positioning
+reference with no interaction handling of its own. The panel actually
+opens because the search `<input>`'s own `onFocus`/`onChange` call
+`setOpen(true)` directly. `onOpenChange` only fires for changes *Radix
+itself* initiates (a Trigger click, Escape, outside-click) — never for
+an externally-driven `open` prop change — so `setEnabled(true)` never
+ran and the query stayed permanently disabled. React Query v5 removed
+the old `idle` status, so a disabled query reports `pending` — rendered
+identically to a real in-flight request by `InfiniteList.tsx`, with no
+way to tell "never asked" from "still waiting" apart from checking
+whether the mock/network actually saw a request. Introduced when this
+component's dropdown was converted from Metronic's IntersectionObserver-
+based lazy fetch onto Radix (`Migrate the remaining Metronic menus onto
+Radix`, earlier this session) — the old effect fired once the ref
+entered the viewport, unconditionally; the new `onOpenChange`-based
+version assumed Radix would always be the one calling it.
+
+**Fix**: dropped the separate `enabled` state and gated the query on
+`open` directly (`enabled: open`) — the same "don't fetch until the
+panel would show" laziness was the whole point of `enabled` in the first
+place, and `open` already reflects that correctly regardless of what
+opened it.
+
+**Test-coverage gap, closed alongside the fix**: `AsyncSearchBox.test.tsx`
+already had two tests — "opens without throwing" and "accepts a full
+word" — neither of which asserts the fetcher is ever called or results
+ever render, so neither caught this. Added a third test asserting both;
+proven to actually catch the bug via a scripted revert of the `enabled`
+change (fails cleanly against the reverted code — `fetcher` genuinely
+never called — passes against the fix). Writing that test also surfaced
+a second, independent bug in the test fixture itself: the mocked
+fetcher's resolved shape (`{ data: { results, page_count } }`) never
+matched what `waldur-api-client`'s `processApiResponse` actually reads —
+`result.data` as the raw row array directly, plus a real fetch-like
+`result.response.headers` for content-type/result-count/pagination —
+harmless when nothing checked the rendered results, but silently wrong.
+Fixed the shared fixture to match the SDK's real return shape.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
