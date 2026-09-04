@@ -200,7 +200,17 @@ export const TableColumnButton: FC<TableProps> = ({
   };
   return (
     <OverlayTrigger
-      trigger="click"
+      // Empty array, not omitted: react-bootstrap's OverlayTrigger wraps
+      // the outer <span> below, not the disabled <Button> nested two
+      // levels inside it (Tip's own wrapper sits in between) — a
+      // disabled button's `pointer-events: none` (needed so Tip's hover
+      // tooltip can still fire, explaining why it's disabled) makes the
+      // browser's hit-test skip straight past it to that span, so
+      // OverlayTrigger's own click handler on the span fired regardless
+      // of the button's disabled state. Reported live: the column-
+      // visibility popup opened from grid mode, where this toggle has
+      // nothing to act on.
+      trigger={mode === 'table' ? 'click' : []}
       placement="bottom"
       overlay={
         <Popover id="TableColumnButton">

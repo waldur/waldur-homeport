@@ -63,19 +63,30 @@ const buttonVariants = cva(
       // override easy to spot against its neighbors in review — see
       // migration notes for real bugs this shape already caught.
       //
-      // focus:, not focus-visible:: the real Bootstrap button ties its
-      // ring to plain :focus, which fires on every focus method —
-      // including a mouse click, not just keyboard navigation.
-      // focus-visible: (tried first, and normally the better a11y
-      // default — no distracting ring for mouse users) suppresses itself
-      // for pointer-originated focus by design, so after a real
+      // focus:, not focus-visible:: at the time this was written, the
+      // real Bootstrap button tied its ring to plain :focus, firing on
+      // every focus method including a mouse click. focus-visible:
+      // (tried first, and normally the better a11y default — no
+      // distracting ring for mouse users) suppresses itself for
+      // pointer-originated focus by design, so after a real
       // Playwright/browser mouse .click() (not the .focus()/Tab-driven
       // focus this was originally verified against) it silently never
       // applied at all, leaving only whatever :hover happened to set —
-      // a real, user-reported divergence from the old button. Matching
-      // Bootstrap's plain :focus here was a deliberate choice to keep
-      // strict parity at this migration phase over the more modern
-      // pattern. See migration notes.
+      // a real, user-reported divergence from the old button at the
+      // time. Matching Bootstrap's plain :focus here was a deliberate
+      // choice to keep strict parity at that migration phase over the
+      // more modern pattern.
+      //
+      // UPDATE: the real Bootstrap button's own variant-ring mixin
+      // (button-state-focus, core/components/mixins/_buttons.scss) has
+      // since switched to :focus-visible, reported live as a persistent
+      // ring after an ordinary mouse click on a plain toolbar button —
+      // this file's own premise above no longer matches the current
+      // real button. Left as plain :focus here regardless, since this
+      // component isn't live yet and the Playwright-click caveat above
+      // is unverified against the current fix — re-verify against the
+      // real button's new behavior (and this file's own parity test
+      // suite) before switching. See migration notes.
       //
       // active:shadow-none on every variant below: a real mouse press
       // focuses the button too (mousedown fires focus before the click

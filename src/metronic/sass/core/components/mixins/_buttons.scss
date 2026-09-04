@@ -16,9 +16,16 @@
   }
 }
 
+// Pointer focus only; keyboard focus keeps a ring (WCAG 2.4.7) — same
+// convention as core/components/buttons/_base.scss's own baseline
+// `&:focus-visible` ring right next to this file's other users. Plain
+// `&:focus` here (unlike that baseline rule) meant every *variant*-specific
+// colored ring — primary/secondary/tertiary/danger/warning/success, the
+// common case — showed on an ordinary mouse click too, reported live as a
+// green ring persisting after clicking a plain toolbar button.
 @mixin button-state-focus {
-  .btn-check:focus + &,
-  &:focus:not(.btn-active) {
+  .btn-check:focus-visible + &,
+  &:focus-visible:not(.btn-active) {
     @content;
   }
 }
