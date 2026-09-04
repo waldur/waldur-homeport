@@ -360,9 +360,26 @@ export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
     const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
     const isIconOnly = !label && !!iconNode;
 
+    // items-center justify-center, not just inline-flex: Phosphor icons
+    // default to 1em×1em (font-size-relative), not this wrapper's own
+    // size-4/size-5 — at this button's font-size that's 16px inside a
+    // 20px (lg) or 14px inside a 16px (sm) box, a few px short on every
+    // side. Without centering, an inline-flex box's default alignment
+    // (align-items: stretch, justify-content: flex-start) collapses that
+    // shortfall into the top-left corner instead of spreading it evenly,
+    // reading as a visibly off-center icon — most visible in icon-only
+    // buttons, where the icon is the button's only content. Centering the
+    // wrapper fixes this regardless of what size the icon itself renders
+    // at, rather than depending on every call site passing an explicit
+    // `size` prop to its icon.
     const iconSizeClass = size === 'sm' ? 'size-4' : 'size-5';
     const iconElement = iconNode && (
-      <span className={cn('inline-flex shrink-0', iconSizeClass)}>
+      <span
+        className={cn(
+          'inline-flex shrink-0 items-center justify-center',
+          iconSizeClass,
+        )}
+      >
         {iconNode}
       </span>
     );
