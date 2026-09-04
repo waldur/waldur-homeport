@@ -1,0 +1,83 @@
+// Geometry copied from the Figma frame (27996:16369). Lives with the picker
+// rather than the dialog, so the separately lazy-loaded organization role
+// dialog gets it too.
+
+// 16px separates every block, matching the 16px either side of the column
+// divider.
+$role-gap: 16px;
+
+.permission-picker {
+  // Fills the body so the column divider reaches the rule above the footer.
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  &__search {
+    margin-bottom: $role-gap;
+  }
+
+  // No margin: the column divider starts flush against this one, so the gap
+  // below it is the columns' own padding instead.
+  &__divider {
+    margin: 0;
+  }
+
+  &__panes {
+    flex: 1;
+
+    // The frame puts 16px either side of the divider: the groups column ends
+    // at 426, the divider sits at 443, the checkbox group starts at 460.
+    > [class*='col-'] {
+      padding-top: $role-gap;
+    }
+
+    .permission-picker__groups {
+      padding-right: $role-gap;
+    }
+
+    .permission-picker__options {
+      padding-left: $role-gap;
+    }
+  }
+
+  // Text sm/Medium (14/20/500) per the design's type styles.
+  &__heading {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: $role-gap;
+  }
+
+  // 12 tab buttons, 242 x 36 each. The selector carries the extra `.nav` +
+  // `.nav-item` so it outranks PageBarTabs.scss's own padding.
+  .nav.permission-picker__tabs .nav-item .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 36px;
+    // 22px badge + 7px top/bottom = the mock's 36px row.
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+
+    // Colour, height and pill shape come from `size="sm" pill outline`; only
+    // the width is set here, so every state is the same size and the right
+    // edge lines up. "Partial" is the widest label, so it sets it.
+    .badge {
+      flex: 0 0 auto;
+      justify-content: center;
+      min-width: 62px;
+    }
+  }
+
+  // Checkboxes are 22px tall on a 30px pitch; "Select all" reuses this, which
+  // puts it 8px above the divider. Their label font is the library default.
+  &__option {
+    min-height: 22px;
+    margin-bottom: 8px;
+  }
+
+  &__list-divider {
+    margin: 0 0 9px;
+  }
+}

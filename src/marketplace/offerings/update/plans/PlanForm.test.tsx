@@ -32,7 +32,7 @@ describe('PlanForm', () => {
     expect(screen.getByText('Article code')).toBeInTheDocument();
   });
 
-  it('renders form fields with initial values', () => {
+  it('renders form fields with initial values', async () => {
     const initialValues = {
       name: 'Test Plan',
       unit: 'month',
@@ -47,7 +47,7 @@ describe('PlanForm', () => {
     expect(screen.getByDisplayValue('TEST123')).toBeInTheDocument();
     expect(screen.getByText('Per month')).toBeInTheDocument();
     // For markdown editor, check the text content instead of display value
-    expect(screen.getByText('Test description')).toBeInTheDocument();
+    expect(await screen.findByText('Test description')).toBeInTheDocument();
   });
 
   it('allows entering plan name', async () => {
@@ -65,7 +65,7 @@ describe('PlanForm', () => {
     const user = userEvent.setup();
 
     // Using test ID from global markdown mock
-    const editorContent = screen.getByTestId('markdown-editor');
+    const editorContent = await screen.findByTestId('markdown-editor');
     await user.type(editorContent, 'This is a test description');
     expect(editorContent).toHaveValue('This is a test description');
   });

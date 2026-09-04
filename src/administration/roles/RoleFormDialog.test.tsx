@@ -7,6 +7,7 @@ import {
   rolesList,
   rolesRetrieve,
   rolesUpdate,
+  userPermissionsList,
 } from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
@@ -22,68 +23,61 @@ const mockRoleDetails = (role: Partial<RoleDetails>) =>
 describe('RoleFormDialog', () => {
   const mockRefetch = vi.fn();
 
+  const renderDialog = (row?: Partial<RoleDetails>) =>
+    renderWithProviders(
+      <RoleFormDialog
+        resolve={{ row: row as RoleDetails, refetch: mockRefetch }}
+      />,
+    );
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('renders "New role" dialog correctly', () => {
-    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
+  it('renders the "New role" dialog', () => {
+    renderDialog();
     expect(screen.getByText('New role')).toBeInTheDocument();
-    // The human-readable label (`description`) and the technical code (`name`)
-    // are two distinct fields.
-    expect(screen.getByText('Name')).toBeInTheDocument();
-    expect(screen.getByText('Code')).toBeInTheDocument();
+    expect(screen.getByText('Role name')).toBeInTheDocument();
     expect(screen.getByText('Type')).toBeInTheDocument();
+    expect(screen.getByText('Code')).toBeInTheDocument();
   });
 
-  it('renders "Edit role" dialog with initial values', async () => {
-    mockRoleDetails({
-      uuid: 'role-uuid',
-      name: 'Test Role',
-      content_type: 'customer',
-      permissions: ['CALL.APPROVE_AND_REJECT_PROPOSALS'],
-    });
-    renderWithProviders(
-      <RoleFormDialog
-        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
-      />,
-    );
-    expect(await screen.findByDisplayValue('Test Role')).toBeInTheDocument();
-    expect(screen.getByText('Edit role')).toBeInTheDocument();
-    expect(screen.getByText('Organization')).toBeInTheDocument();
-    expect(screen.getByLabelText('Approve and reject proposals')).toBeChecked();
+  it('summarises the whole role in the footer', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+    expect(
+      screen.getByText(/0\/13 groups · 0 permissions/),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByLabelText('Approve and reject proposals'));
+
+    expect(
+      screen.getByText(/1\/13 groups · 1 permissions/),
+    ).toBeInTheDocument();
   });
 
-  it('validates required fields', () => {
-    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
-    const saveButton = screen.getByText('Save');
-    expect(saveButton).toBeDisabled();
+  it('keeps the submit button disabled until the form is valid', () => {
+    renderDialog();
+    expect(screen.getByText('Save')).toBeDisabled();
   });
 
-  it('handles successful role creation', async () => {
+  it('creates a role', async () => {
     const user = userEvent.setup();
     const createSpy = vi.mocked(rolesCreate).mockResolvedValue({} as any);
     vi.mocked(rolesList).mockResolvedValue(mockListResponse([]));
+    renderDialog();
 
-    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
-
-    // Human-readable name, stored in `description`
-    await user.type(screen.getByLabelText(/Name/), 'New role');
-
-    // Technical code, stored in `name`
+    await user.type(screen.getByLabelText(/Role name/), 'New role');
     await user.type(screen.getByLabelText(/Code/), 'CUSTOMER.NEW_ROLE');
 
-    // Type field
-    const typeInput = screen.getByLabelText(/Type/);
-    await user.click(typeInput);
+    await user.click(screen.getByLabelText(/Type/));
     await user.click(screen.getByText('Organization'));
 
-    // Select Permission
     await user.click(screen.getByLabelText('Approve and reject proposals'));
 
-    const saveButton = screen.getByText('Save');
-    await waitFor(() => expect(saveButton).toBeEnabled());
-    await user.click(saveButton);
+    const save = screen.getByText('Save');
+    await waitFor(() => expect(save).toBeEnabled());
+    await user.click(save);
 
     await waitFor(() => {
       expect(createSpy).toHaveBeenCalledWith({
@@ -99,111 +93,174 @@ describe('RoleFormDialog', () => {
     });
   });
 
-  it('rejects a code that does not follow the SCOPE.NAME convention', async () => {
-    const user = userEvent.setup();
-    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
+  it('renders the edit dialog with initial values', async () => {
+    mockRoleDetails({
+      uuid: 'role-uuid',
+      name: 'CUSTOMER.TEST',
+      description: 'Test Role',
+      content_type: 'customer',
+      permissions: ['CALL.APPROVE_AND_REJECT_PROPOSALS'],
+    });
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
 
-    await user.type(screen.getByLabelText(/Name/), 'Researcher');
-    await user.type(
-      screen.getByLabelText(/Code/),
-      'Researcher (project member)',
-    );
-    await user.click(screen.getByLabelText('Approve and reject proposals'));
-
-    await waitFor(() => expect(screen.getByText('Save')).toBeDisabled());
+    expect(await screen.findByDisplayValue('Test Role')).toBeInTheDocument();
+    expect(screen.getByText('Edit role')).toBeInTheDocument();
+    expect(screen.getByText('Organization')).toBeInTheDocument();
+    expect(screen.getByLabelText('Approve and reject proposals')).toBeChecked();
   });
 
-  it('handles successful role update', async () => {
+  it('updates an existing role', async () => {
     const user = userEvent.setup();
     const updateSpy = vi.mocked(rolesUpdate).mockResolvedValue({} as any);
     vi.mocked(rolesList).mockResolvedValue(mockListResponse([]));
     mockRoleDetails({
       uuid: 'role-uuid',
-      name: 'Existing Role',
+      name: 'PROJECT.EXISTING',
+      description: 'Existing role',
       content_type: 'project',
       permissions: ['CALL.CLOSE_ROUNDS'],
     });
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
 
-    renderWithProviders(
-      <RoleFormDialog
-        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
-      />,
-    );
-
-    const nameInput = await screen.findByDisplayValue('Existing Role');
-    await user.clear(nameInput);
-    await user.type(nameInput, 'Updated Role');
-
+    // Name is read-only on edit, so an update is a permission change.
+    await user.click(await screen.findByLabelText('Create call'));
     await user.click(screen.getByText('Save'));
 
     await waitFor(() => {
       expect(updateSpy).toHaveBeenCalledWith({
         path: { uuid: 'role-uuid' },
         body: expect.objectContaining({
-          name: 'Updated Role',
+          name: 'PROJECT.EXISTING',
           content_type: 'project',
-          permissions: ['CALL.CLOSE_ROUNDS'],
+          permissions: ['CALL.CLOSE_ROUNDS', 'CALL.CREATE'],
         }),
       });
     });
   });
 
-  it('keeps a legacy off-convention code editable', async () => {
-    // Roles created before the convention was enforced must stay editable —
-    // the code format is only validated when creating a role. If the validator
-    // ran here too, the form would be invalid and Save permanently disabled.
-    mockRoleDetails({
-      uuid: 'role-uuid',
-      name: 'Researcher (project member)',
-      content_type: 'project',
-      permissions: ['CALL.CLOSE_ROUNDS'],
-    });
+  it('rejects a code that does not follow the SCOPE.NAME convention', async () => {
+    const user = userEvent.setup();
+    renderDialog();
 
-    renderWithProviders(
-      <RoleFormDialog
-        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
-      />,
-    );
+    await user.type(screen.getByLabelText(/Role name/), 'Researcher');
+    await user.type(screen.getByLabelText(/Code/), 'not a code');
 
-    await screen.findByDisplayValue('Researcher (project member)');
-
-    await waitFor(() => expect(screen.getByText('Save')).toBeEnabled());
+    await waitFor(() => expect(screen.getByText('Save')).toBeDisabled());
   });
 
-  it('disables code and type for system roles', async () => {
+  it('locks the code once the role exists', async () => {
+    mockRoleDetails({
+      uuid: 'role-uuid',
+      name: 'CUSTOMER.TEST',
+      description: 'Test Role',
+      content_type: 'customer',
+      permissions: [],
+    });
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
+
+    expect(await screen.findByLabelText(/Code/)).toBeDisabled();
+  });
+
+  it('tells staff how far the role they are editing reaches', async () => {
+    mockRoleDetails({
+      uuid: 'role-uuid',
+      name: 'CUSTOMER.TEST',
+      description: 'Test Role',
+      content_type: 'customer',
+      permissions: [],
+      users_count: 3,
+    });
+    // Three assignments spread over two organizations.
+    vi.mocked(userPermissionsList).mockResolvedValue({
+      data: [
+        { customer_uuid: 'c1' },
+        { customer_uuid: 'c1' },
+        { customer_uuid: 'c2' },
+      ],
+    } as any);
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
+
+    expect(
+      await screen.findByText('Held by 3 users across 2 organizations.'),
+    ).toBeInTheDocument();
+  });
+
+  it('pluralises a role held by one user in one organization', async () => {
+    mockRoleDetails({
+      uuid: 'role-uuid',
+      name: 'CUSTOMER.TEST',
+      content_type: 'customer',
+      permissions: [],
+      users_count: 1,
+    });
+    vi.mocked(userPermissionsList).mockResolvedValue({
+      data: [{ customer_uuid: 'c1' }],
+    } as any);
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
+
+    expect(
+      await screen.findByText('Held by 1 user across 1 organization.'),
+    ).toBeInTheDocument();
+  });
+
+  it('omits the organization count when the grants are not organization-scoped', async () => {
+    mockRoleDetails({
+      uuid: 'role-uuid',
+      name: 'CALL.TEST',
+      content_type: 'call',
+      permissions: [],
+      users_count: 4,
+    });
+    // Call-scoped grants carry no customer_uuid, so it is unanswerable.
+    vi.mocked(userPermissionsList).mockResolvedValue({
+      data: [{ customer_uuid: null }, { customer_uuid: null }],
+    } as any);
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
+
+    expect(await screen.findByText('Held by 4 users.')).toBeInTheDocument();
+  });
+
+  it('omits the organization count when the assignments were not all fetched', async () => {
+    mockRoleDetails({
+      uuid: 'role-uuid',
+      name: 'CUSTOMER.TEST',
+      description: 'Test Role',
+      content_type: 'customer',
+      permissions: [],
+      users_count: 900,
+    });
+    // One page cannot cover 900 assignments, so the count would be a guess.
+    vi.mocked(userPermissionsList).mockResolvedValue({
+      data: [{ customer_uuid: 'c1' }],
+    } as any);
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
+
+    expect(await screen.findByText('Held by 900 users.')).toBeInTheDocument();
+  });
+
+  it('disables the type for system roles', async () => {
     mockRoleDetails({
       uuid: 'system-role-uuid',
-      name: 'System Role',
+      name: 'CUSTOMER.SYSTEM',
       content_type: 'customer',
       permissions: [],
       is_system_role: true,
     });
-    renderWithProviders(
-      <RoleFormDialog
-        resolve={{
-          row: { uuid: 'system-role-uuid' } as any,
-          refetch: mockRefetch,
-        }}
-      />,
-    );
+    renderDialog({ uuid: 'system-role-uuid' } as RoleDetails);
 
-    expect(await screen.findByLabelText(/Code/)).toBeDisabled();
-    expect(screen.getByLabelText(/Type/)).toBeDisabled();
+    expect(await screen.findByLabelText(/Type/)).toBeDisabled();
   });
 
   it('does not fetch role details in create mode', () => {
-    renderWithProviders(<RoleFormDialog resolve={{ refetch: mockRefetch }} />);
+    renderDialog();
     expect(screen.getByText('New role')).toBeInTheDocument();
     expect(rolesRetrieve).not.toHaveBeenCalled();
   });
 
   it('shows an error state instead of a submittable form when the role fails to load', async () => {
     vi.mocked(rolesRetrieve).mockRejectedValue({ response: { status: 404 } });
-    renderWithProviders(
-      <RoleFormDialog
-        resolve={{ row: { uuid: 'role-uuid' } as any, refetch: mockRefetch }}
-      />,
-    );
+    renderDialog({ uuid: 'role-uuid' } as RoleDetails);
+
     expect(await screen.findByText('Unable to load role.')).toBeInTheDocument();
     // The form must not render: a blank fallthrough would submit as an update.
     expect(screen.queryByText('Save')).not.toBeInTheDocument();

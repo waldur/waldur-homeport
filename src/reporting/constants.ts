@@ -16,7 +16,7 @@ import {
 } from '@/workspace/selectors';
 
 import { AnalyticsMode } from './analytics';
-import { isReportingScreenEnabled } from './utils';
+import { isReportingScreenEnabled } from './screens';
 
 export type ReportCategory =
   'resources' | 'provider' | 'financial' | 'proposals' | 'users' | 'operations';
@@ -148,6 +148,14 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
             'Resource usage by creator affiliations and organization type',
           ),
           state: 'reporting-usage-by-creator',
+        },
+        {
+          key: 'projects-by-affiliated-organization',
+          title: translate('Projects by affiliated organization'),
+          description: translate(
+            'Projects, resources and cost per affiliated organization, with an explicit unaffiliated bucket',
+          ),
+          state: 'reporting-projects-by-affiliated-organization',
         },
       ],
     },

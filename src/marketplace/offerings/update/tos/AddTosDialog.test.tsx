@@ -23,11 +23,11 @@ describe('AddTosDialog', () => {
     vi.clearAllMocks();
   });
 
-  it('renders with correct initial values', () => {
+  it('renders with correct initial values', async () => {
     renderDialog();
     expect(screen.getByText('Add Terms of Service')).toBeInTheDocument();
     // Markdown is selected by default, so the editor should be visible
-    expect(screen.getByTestId('markdown-editor')).toBeInTheDocument();
+    expect(await screen.findByTestId('markdown-editor')).toBeInTheDocument();
   });
 
   it('disables submit when version is empty', () => {
@@ -54,7 +54,7 @@ describe('AddTosDialog', () => {
     renderDialog();
 
     await user.type(screen.getByLabelText(/Version/i), '1.0');
-    await user.type(screen.getByTestId('markdown-editor'), '# Terms');
+    await user.type(await screen.findByTestId('markdown-editor'), '# Terms');
 
     const submitBtn = screen.getByRole('button', { name: 'Confirm' });
     await user.click(submitBtn);

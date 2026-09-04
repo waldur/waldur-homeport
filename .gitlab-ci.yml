@@ -114,6 +114,16 @@ Run type checking:
   script:
     - yarn tsgo -b
 
+# Everything statically reachable from src/index.tsx is downloaded before the
+# first paint; scripts/bundle-budget.mjs keeps that set small and free of the
+# packages that are meant to load lazily. Runs on MRs so a regression is
+# caught before it lands on develop.
+Check cold-path budget:
+  <<: *linter-rules
+  script:
+    - yarn build
+    - yarn build:check
+
 # apps/* members aren't covered by the root `yarn tsgo -b` above — see
 # docs/micro-apps.md for the full apps/* pipeline this is one piece of.
 Run apps typecheck and build:

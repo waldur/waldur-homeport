@@ -1,7 +1,14 @@
 $mode: default;
+
+// Config is imported at the top level on purpose: variables declared inside a
+// block become block-locals, and Metronic partials assign to shared names
+// (notably `$border-color`) from within rules, which would then wipe the value
+// for everything imported later. See _init-config.scss.
+@import 'init-config';
+
 // Named cascade layer so Tailwind utilities can outrank this on pages
 // where both are loaded — matches src/tailwind.css's `@layer bootstrap`
 // order. See docs/tailwind-shadcn-migration-notes.md for why.
 @layer bootstrap {
-  @import 'init';
+  @import 'init-styles';
 }

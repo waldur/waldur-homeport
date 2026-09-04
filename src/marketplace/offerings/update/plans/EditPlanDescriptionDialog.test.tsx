@@ -38,7 +38,7 @@ describe('EditPlanDescriptionDialog', () => {
     expect(screen.getByText('Save')).toBeInTheDocument();
   });
 
-  it('initializes form with existing plan data', () => {
+  it('initializes form with existing plan data', async () => {
     renderComponent();
 
     // Check that form is populated with existing plan data
@@ -47,7 +47,9 @@ describe('EditPlanDescriptionDialog', () => {
 
     expect(nameInput).toHaveValue('Test Plan');
     expect(articleCodeInput).toHaveValue('TEST001');
-    expect(screen.getByText('Test plan description')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Test plan description'),
+    ).toBeInTheDocument();
     expect(screen.getByText('Per month')).toBeInTheDocument(); // Selected billing period
   });
 

@@ -7,7 +7,7 @@ import { MarketplaceFeatures, SupportFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
-import { isReportingScreenEnabled } from './utils';
+import { isReportingScreenEnabled } from './screens';
 
 export const states: StateDeclaration[] = [
   {
@@ -271,6 +271,24 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Usage by creator'),
       permissions: [() => isReportingScreenEnabled('usage-by-creator')],
+    },
+  },
+  {
+    name: 'reporting-projects-by-affiliated-organization',
+    url: 'projects-by-affiliated-organization/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./affiliated-organizations/AffiliatedOrganizationsReportPage').then(
+        (m) => ({
+          default: m.AffiliatedOrganizationsReportPage,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Projects by affiliated organization'),
+      permissions: [
+        () => isReportingScreenEnabled('projects-by-affiliated-organization'),
+      ],
     },
   },
 

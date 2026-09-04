@@ -6,7 +6,7 @@ import { RoleDetails, RoleModifyRequest, rolesUpdate } from 'waldur-js-client';
 import { PermissionField } from '@/administration/roles/PermissionField';
 import { getRoles } from '@/administration/roles/utils';
 import { ENV } from '@/core/config';
-import { required } from '@/core/validators';
+import { requiredArray } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -59,7 +59,7 @@ export const EditRolePermissionsDialog: FC<{
 
   return (
     <Form initialValues={{ permissions: row.permissions }} onSubmit={onSubmit}>
-      {({ handleSubmit, submitting }) => (
+      {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             // `name` is the technical code and `description` the human-readable
@@ -74,18 +74,22 @@ export const EditRolePermissionsDialog: FC<{
             }
             footer={
               <>
-                <SubmitButton submitting={submitting}>
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={invalid}
+                  disabledReason={translate('Select at least one permission.')}
+                >
                   {translate('Save')}
                 </SubmitButton>
                 <CloseDialogButton />
               </>
             }
           >
-            <FormGroup label={translate('Permissions')} required>
+            <FormGroup required hideLabel spaceless>
               <Field
                 component={PermissionField}
                 name="permissions"
-                validate={required}
+                validate={requiredArray}
               />
             </FormGroup>
           </ModalDialog>

@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap';
 import Illustration from '@/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 
 import { lazyComponent } from './core/lazyComponent';
-import { SubmitButton } from './form';
+import { SubmitButton } from './form/SubmitButton';
 import { translate } from './i18n';
 import './LoadingScreen.css';
 import { ThemeProvider } from './theme/ThemeProvider';

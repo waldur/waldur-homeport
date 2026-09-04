@@ -3,7 +3,10 @@ import { User, UserMe, usersMeRetrieve } from 'waldur-js-client';
 import { getRoles } from '@/administration/roles/utils';
 import { getHeaders, initApiClient } from '@/core/api';
 import { ENV } from '@/core/config';
-import { ImpersonationStorage } from '@/core/StorageManager';
+import {
+  AuthTokenExpiryStorage,
+  ImpersonationStorage,
+} from '@/core/StorageManager';
 import store from '@/store/store';
 import { getProfileCompleteness } from '@/user/useProfileCompleteness';
 import { setCurrentUser, setImpersonatorUser } from '@/workspace/actions';
@@ -41,6 +44,30 @@ const ensureRoles = (): Promise<void> => {
   return rolesInFlight;
 };
 
+/**
+ * Remember when the stored token expires, so the pre-bundle redirect can treat
+ * a stale token as no session and send the visitor straight to the identity
+ * provider instead of booting the whole app to discover a 401.
+ *
+ * Only recorded when the value describes the token the browser actually holds:
+ * while impersonating, /users/me/ answers for the impersonated account rather
+ * than the token's owner, and in OIDC access-token mode the browser holds the
+ * provider's token while this field still describes Waldur's own. In both
+ * cases the key is dropped, and the boot script falls back to treating any
+ * token as live.
+ */
+const recordTokenExpiry = (user: User) => {
+  if (
+    ImpersonationStorage.get() ||
+    ENV.plugins?.WALDUR_CORE?.OIDC_ACCESS_TOKEN_ENABLED ||
+    !user.token_expires_at
+  ) {
+    AuthTokenExpiryStorage.remove();
+    return;
+  }
+  AuthTokenExpiryStorage.set(user.token_expires_at);
+};
+
 export const getCurrentUser = async (
   options?: Parameters<typeof usersMeRetrieve>[0],
 ) => {
@@ -58,6 +85,7 @@ export const getCurrentUser = async (
     ),
     ensureRoles(),
   ]);
+  recordTokenExpiry(user);
   return user;
 };
 

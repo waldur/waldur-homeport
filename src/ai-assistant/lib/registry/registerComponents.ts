@@ -2,12 +2,21 @@ import { AskUserFormBlock } from '@/ai-assistant/components/blocks/AskUserFormBl
 import { CodeBlock } from '@/ai-assistant/components/blocks/CodeBlock';
 import { HomePortNavBlock } from '@/ai-assistant/components/blocks/HomePortNavBlock';
 import { MarkdownBlock } from '@/ai-assistant/components/blocks/MarkdownBlock';
-import { MermaidBlock } from '@/ai-assistant/components/blocks/MermaidBlock';
 import { ResourceListBlock } from '@/ai-assistant/components/blocks/ResourceListBlock';
 import { ToolLoadingBlock } from '@/ai-assistant/components/blocks/ToolLoadingBlock';
 import { VMOrderBlock } from '@/ai-assistant/components/blocks/VMOrderBlock';
+import { UIBlockProps } from '@/ai-assistant/lib/types';
+import { lazyOnce } from '@/core/lazyOnce';
 
 import { uiRegistry } from './uiRegistry';
+
+// mermaid initialises itself at import time and is only needed once a diagram
+// block actually streams in, so the block is resolved on first render.
+const MermaidBlock = lazyOnce<UIBlockProps>(() =>
+  import('@/ai-assistant/components/blocks/MermaidBlock').then((module) => ({
+    default: module.MermaidBlock,
+  })),
+);
 
 uiRegistry.register({
   key: 'markdown',
