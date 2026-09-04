@@ -7,7 +7,7 @@ import { MarketplaceFeatures, SupportFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
-import { isReportingScreenEnabled } from './utils';
+import { isReportingScreenEnabled } from './screens';
 
 export const states: StateDeclaration[] = [
   {

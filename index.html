@@ -9,6 +9,28 @@
     <title>Waldur | Cloud Service Management</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <meta name="api-url" content="%VITE_API_URL%" />
+    <!-- Deferred like the application module but listed first, so it runs
+         ahead of it: sends anonymous visitors of / and /login/ straight to
+         the default identity provider (see public/boot-redirect.js). -->
+    <script src="boot-redirect.js" defer></script>
+    <link
+      rel="preload"
+      href="%VITE_API_URL%api/configuration/"
+      as="fetch"
+      crossorigin
+    />
+    <style>
+      /* Painted immediately, replaced by React on first render. */
+      .boot-splash {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        font: 600 1.5rem/1 system-ui, -apple-system, 'Segoe UI', sans-serif;
+        color: #676a6c;
+      }
+    </style>
   </head>
   <body class="fixed-sidebar">
     <noscript>
@@ -92,7 +114,9 @@
       </div>
     </noscript>
     <div id="wrapper" class="d-flex flex-column flex-root">
-      <div id="react-root" class="d-flex flex-column flex-root"></div>
+      <div id="react-root" class="d-flex flex-column flex-root">
+        <p class="boot-splash">Loading…</p>
+      </div>
     </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>

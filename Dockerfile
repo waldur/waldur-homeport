@@ -70,6 +70,12 @@ RUN for app_dir in apps/*/; do \
       fi; \
     done
 
+# Precompress once here; nginx serves the .gz siblings through gzip_static
+# (docker/nginx-tpl.conf) instead of running gzip -9 on every response.
+# Source maps are skipped: rarely fetched, and they would double the image.
+RUN find dist -type f \( -name '*.js' -o -name '*.css' -o -name '*.svg' -o -name '*.json' \) \
+      -exec sh -c 'gzip -9 -c "$1" > "$1.gz"' _ {} \;
+
 # production environment
 FROM ${DOCKER_REGISTRY}nginx:stable-alpine
 COPY --from=build /app/dist /usr/share/nginx/html

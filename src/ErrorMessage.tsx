@@ -1,7 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FallbackRender } from '@sentry/react';
 
-import { SubmitButton } from '@/form';
+import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import Illustration from '@/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 import { ImageTablePlaceholder } from '@/table/ImageTablePlaceholder';

@@ -2,20 +2,9 @@ import { EChartsOption, graphic } from 'echarts';
 
 import { hexToRgb } from 'waldur-design-tokens';
 
-import { ENV } from '@/core/config';
 import { formatUsageValue } from '@/core/formatNumber';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { translate } from '@/i18n';
-
-export const isReportingScreenEnabled = (screen: string) => {
-  const enabledScreens = ENV.plugins.WALDUR_CORE?.ENABLED_REPORTING_SCREENS;
-  return Array.isArray(enabledScreens) ? enabledScreens.includes(screen) : true;
-};
-
-export const hasAnyReportingEnabled = () => {
-  const enabledScreens = ENV.plugins.WALDUR_CORE?.ENABLED_REPORTING_SCREENS;
-  return Array.isArray(enabledScreens) ? enabledScreens.length > 0 : true;
-};
 
 export const usageTableTabs = [
   {

@@ -4,7 +4,7 @@ import { FC, useMemo } from 'react';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
-import { hasAnyReportingEnabled } from '../../reporting/utils';
+import { hasAnyReportingEnabled } from '../../reporting/screens';
 
 import { MenuItem } from './MenuItem';
 

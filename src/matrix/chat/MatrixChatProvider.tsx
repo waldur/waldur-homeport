@@ -1,5 +1,4 @@
 import {
-  createContext,
   FC,
   PropsWithChildren,
   useCallback,
@@ -13,8 +12,9 @@ import { matrixCredentialsRetrieve } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
+import { MatrixChatContext } from './MatrixChatContext';
 import { getMatrixErrorMessage } from './matrixErrorMessage';
-import { MatrixChatContextValue, MatrixConnectionState } from './types';
+import { MatrixConnectionState } from './types';
 
 // Logger passed to createClient so the SDK's per-client paths
 // (FetchHttpApi, sync, queue, etc.) don't spam the console.
@@ -89,18 +89,6 @@ async function patchMatrixSdkLoggers() {
     // being reachable, fall back to the per-client logger only.
   }
 }
-
-export const MatrixChatContext = createContext<MatrixChatContextValue>({
-  client: null,
-  connectionState: 'idle',
-  activeRoomId: null,
-  activeRoomUuid: null,
-  userId: null,
-  connect: async () => {},
-  disconnect: () => {},
-  error: null,
-  roomAccessDenied: false,
-});
 
 export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   const clientRef = useRef<any>(null);
