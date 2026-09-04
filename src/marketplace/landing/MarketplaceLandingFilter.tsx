@@ -118,6 +118,12 @@ export const MarketplaceLandingFilter = () => {
             <RadixPopover.Content
               align="end"
               sideOffset={2}
+              // react-bootstrap's Dropdown.Menu auto-generated this pointing
+              // at the Toggle's id; Radix has no equivalent auto-wiring, so
+              // it has to be set explicitly here — both for a11y and because
+              // the E2E suite's MarketplaceFilter.open() page object asserts
+              // on this exact selector.
+              aria-labelledby="marketplace-landing-filter-toggle"
               className="dropdown-menu show p-0 border-0 min-w-400px"
               // Mirrors the original Bootstrap Dropdown's autoClose={false}:
               // OrganizationAutocomplete/ProjectAutocomplete portal their own
