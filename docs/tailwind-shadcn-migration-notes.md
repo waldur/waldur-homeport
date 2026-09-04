@@ -2528,13 +2528,125 @@ one, so it kept working throughout; it read correctly
 fix, just dimmer than the miscoloured accordion background sitting next
 to it made it look by comparison.
 
-**Not migrated, deliberately**: `MenuComponent.ts` itself stays —
-`OfferingsPanel.tsx` (inside the unrelated `MarketplaceTrigger` modal)
-still has a live `data-kt-menu-dismiss="true"` that it actively reads,
-and `MasterInit.tsx`/`MasterLayout.tsx`'s bootstrap/reinit calls stay for
-that reason. `Sidebar.tsx`'s other Metronic widgets — `DrawerComponent`
-(mobile drawer), `ScrollComponent` (custom scrollbar), `ToggleComponent`
-(minimize toggle) — are untouched, a different concern from the menu.
+**Update — `MenuComponent.ts` deleted after all.** The note above ("stays
+— `OfferingsPanel.tsx` ... still has a live `data-kt-menu-dismiss="true"`
+that it actively reads") turned out to be wrong, caught when asked
+directly whether it was safe to remove. Re-checked instead of taken on
+faith from the earlier note: `MenuComponent.bootstrap()`/
+`.createInstances()` only instantiate elements matching
+`[data-kt-menu="true"]` (`MenuComponent.ts`'s own `bootstrap` method),
+and a repo-wide grep turns up *zero* live occurrences of that attribute
+left anywhere — the aside's own `#kt_aside_menu` div (the last one) was
+already removed earlier in this same migration (`Sidebar.tsx`). With no
+`[data-kt-menu="true"]` element left to instantiate, no `MenuComponent`
+instance ever exists at runtime, so `data-kt-menu-dismiss="true"`'s
+handler (`MenuComponent.getInstance(this)`, which walks up via
+`element.closest('.menu')` looking for an *initialized* instance) always
+resolves to nothing and its `.dismiss()` call never fires — dead
+regardless of whether `OfferingsPanel.tsx`'s panel is even structurally
+inside a `.menu` at all (it isn't; it renders inside a modal). Removed
+the dead attribute, `MenuComponent.bootstrap()` from `MasterInit.tsx`,
+both `MenuComponent.reinitialization()` calls from `MasterLayout.tsx`
+(along with the now-fully-unused `useCurrentStateAndParams`/`state` that
+existed only to retrigger them on route change), the barrel export in
+`metronic/components/index.ts`, and the file itself. `Sidebar.tsx`'s
+other Metronic widgets — `DrawerComponent` (mobile drawer),
+`ScrollComponent` (custom scrollbar), `ToggleComponent` (minimize
+toggle) — are untouched, a different concern from the menu, and their
+own `bootstrap()`/`reinitialization()` calls stay.
+
+### A testing-methodology finding: automated Chrome doesn't tick CSS animations between calls
+
+Investigating a live report that the accordion's collapse animation was
+"immediate, not smooth" (height not interpolating) turned up something
+about the tooling itself, not the CSS: neither this session's live
+verification browser (Claude in Chrome, against the real dev server) nor
+a fresh, unauthenticated Storybook tab reliably showed a *running*
+animation via JS polling alone. `content.getAnimations()[0]` returns a
+real `Animation` object with the correct keyframes (`0px` → the right
+measured pixel value) and `playState: "running"` — but `currentTime`
+stays frozen at exactly `0` and `startTime` stays `null` indefinitely,
+even seconds later, even though `document.timeline.currentTime` (the
+page's own clock) is demonstrably still advancing in real time. The
+animation is scheduled but the browser never actually ticks it forward
+between calls. Confirmed this isn't a real CSS bug by testing whether an
+explicit render request unsticks it: a burst of five `computer:
+screenshot` calls fired back-to-back immediately after a click (Storybook,
+`MenuAccordionAnim.debug.stories.tsx`, since deleted) showed the
+accordion's content growing across genuinely distinct intermediate
+states — one item, two items, four items, then settled — a real,
+smooth, multi-frame progression, not a snap. Automated/CDP-driven Chrome
+appears to skip compositing animation frames unless something explicitly
+asks it to render one (a screenshot, in this case); a real, actively-
+viewed browser doesn't have this gap, since the OS is already repainting
+it continuously. Lesson for future live-debugging in this codebase:
+`getAnimations()`/`getBoundingClientRect()` polling via `setTimeout`
+alone is **not sufficient** to verify whether a CSS animation is
+genuinely smooth in an automated tab — a tight screenshot burst (or
+denser, if finer resolution is needed) is the reliable substitute. The
+underlying animation code from earlier in this section was correct all
+along; earlier "it's snapping" readings in this same investigation were
+this same artifact, not a real regression.
+
+## Fix: `MenuComponent.ts` deleted — was safe, an earlier note here was wrong
+
+Asked directly whether `MenuComponent.ts` (the last remaining piece of
+Metronic's imperative menu JS) could be deleted, after the sidebar
+accordion migration above left it with no obvious remaining purpose. An
+earlier note in this same doc had asserted it couldn't — "`OfferingsPanel
+.tsx` ... still has a live `data-kt-menu-dismiss="true"` that it
+actively reads" — written without actually re-checking whether that
+dependency was still real once the aside's own `data-kt-menu="true"` was
+removed by this same migration. It wasn't: re-verified instead of
+trusted, `MenuComponent.bootstrap()`/`.createInstances()` only
+instantiate elements matching `[data-kt-menu="true"]`, a repo-wide grep
+turns up zero live occurrences of that attribute anywhere, and with no
+instance to attach to, `data-kt-menu-dismiss="true"`'s click handler
+(`MenuComponent.getInstance(this)`, walking up via
+`element.closest('.menu')` for an *initialized* instance) always
+resolves to nothing — dead regardless of whether `OfferingsPanel.tsx`'s
+panel is even structurally inside a `.menu` (it isn't; it renders inside
+a modal). Removed the dead attribute, `MenuComponent.bootstrap()` from
+`MasterInit.tsx`, both `MenuComponent.reinitialization()` calls from
+`MasterLayout.tsx` (along with the `useCurrentStateAndParams`/`state`
+that existed only to retrigger them on route change), the barrel export
+in `metronic/components/index.ts`, and the file itself.
+`Sidebar.tsx`'s other Metronic widgets — `DrawerComponent` (mobile
+drawer), `ScrollComponent` (custom scrollbar), `ToggleComponent`
+(minimize toggle) — are untouched, a different concern, and their own
+`bootstrap()`/`reinitialization()` calls stay.
+
+## Fix: `RoleAndProjectSelectField`'s role dropdown didn't open inside the invite-users modal
+
+Reported live as "role dropdown is not working" with a screenshot of the
+"Invite by email" dialog — clicking the Role field's chevron appeared to
+do nothing. It wasn't inert: `RadixPopover.Trigger` correctly flipped to
+`data-state="open"`/`aria-expanded="true"` on click, and the portalled
+`.role-project-select-popup` content rendered with correct position
+(`display: flex`, `opacity: 1`, right x/y coordinates for the trigger).
+It was rendering *behind* the modal. `Popover.Portal` appends its
+content to `document.body`, outside the modal's own DOM subtree, so
+once there it's a sibling of the modal in `document.body`'s stacking
+context — and its class, `.menu-sub-dropdown`, inherits
+`z-index: 105` from `$menu, dropdown, z-index`
+(core/components/_variables.scss), a value from Metronic's own internal
+layering scale that was never meant to compete with a real *Bootstrap*
+modal's z-index (`$zindex-modal: 1055`, confirmed live via
+`getComputedStyle` on the actual `.modal`/`.modal-backdrop` elements —
+this app uses Bootstrap's own Modal component, not a Metronic
+reimplementation). Confirmed the fix mechanism before writing it: Radix's
+Popper mirrors a `Content` element's own CSS `z-index` onto the
+`position: fixed` wrapper it creates for positioning, so a CSS-only
+override on `.role-project-select-popup` is enough — no prop/JS change
+needed. Set it to Bootstrap's own `$zindex-popover` (1070) rather than
+an arbitrary bumped number: this genuinely is a popover-like overlay,
+and reusing the token keeps it correctly ordered against Bootstrap's
+other z-indexed UI (below tooltips at 1080, above the modal it lives in
+here) instead of a value that could silently drift out of sync with
+Bootstrap's own scale later. Unrelated to this session's Radix
+Collapsible sidebar-accordion work above — different component, different
+files, already on Radix Popover before this session touched anything —
+but reported and found in the same working session, so recorded here.
 
 ## `packages/ui`: portable Tailwind/Radix primitives
 

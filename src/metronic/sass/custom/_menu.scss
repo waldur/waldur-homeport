@@ -158,6 +158,29 @@ $menu-link-highlight-exclude: ':not(.disabled):not(.active):not(.here)';
   @include menu-link-theme($primary-700, null, null, null, null);
 }
 
+// RoleAndProjectSelectField.tsx's popup (`.role-project-select-popup`,
+// same file) renders via Radix `Popover.Portal`, which appends it to
+// `document.body` — outside whatever modal it was opened from. Its
+// `.menu-sub-dropdown` class inherits `z-index: 105` from
+// `$menu, dropdown, z-index` (core/components/_variables.scss), a value
+// tuned for Metronic's own layering and never meant to compete with a
+// *Bootstrap* modal's actual z-index (`$zindex-modal: 1055`,
+// `$zindex-modal-backdrop: 1050`), which the invite-users flow that
+// hosts this field opens it inside. Reported live as the dropdown not
+// opening at all — it did open (`data-state="open"`, correct position,
+// `display: flex`, `opacity: 1`), just rendered behind the modal's own
+// surface, invisible and unclickable. Radix's Popper mirrors a Content
+// element's own CSS `z-index` onto the positioned wrapper it creates
+// around it, so overriding it here is enough — no JS/prop change needed.
+// `$zindex-popover`, not a bumped copy of `$menu, dropdown, z-index`:
+// this genuinely is a popover-like overlay, and reusing Bootstrap's own
+// token keeps it correctly ordered against Bootstrap's other z-indexed
+// UI (below tooltips at 1080, above the modal it lives in) instead of
+// picking an arbitrary number that could drift out of sync later.
+.role-project-select-popup {
+  z-index: $zindex-popover;
+}
+
 // Entrance animation, Radix-driven content. Two gaps to bridge against
 // core's own keyframes (menu-sub-dropdown-animation-move-up/-down,
 // core/components/menu/_base.scss) — both written for the old Popper.js
