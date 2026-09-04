@@ -2648,6 +2648,54 @@ Collapsible sidebar-accordion work above — different component, different
 files, already on Radix Popover before this session touched anything —
 but reported and found in the same working session, so recorded here.
 
+## Consolidation: `PopoverMenuContent`, one shell for every ad-hoc `RadixPopover.Content`
+
+Six call sites — `AsyncSearchBox.tsx`, `TableFiltersMenu.tsx`'s `FlyoutRow`,
+`TableBody.tsx`, `TableFilterItem.tsx`, `RoleAndProjectSelectField.tsx` —
+each hand-rolled the exact same `RadixPopover.Portal` +
+`RadixPopover.Content` shape independently: `side`/`align` derived from a
+placement string, `sideOffset={2}`, a `data-popper-placement` attribute
+mirroring that placement, and a `className` always starting with
+`menu-sub menu-sub-dropdown show`. `NavMenu.tsx` already had exactly this
+pattern for `RadixDropdownMenu.Content` (`NavMenuContent`) — this was the
+same shape, just never extracted for `Popover`, because each of these six
+was added independently across different sessions of this migration.
+
+Real duplication, not hypothetical: two *separate* bugs this session
+(the sidebar accordion's `LanguageSelectorDropdown.tsx`/
+`UserDropdownMenuItems.tsx` missing `menu-state-bg-gray`, and
+`RoleAndProjectSelectField.tsx`'s z-index fight) were exactly this shape
+of mistake — a required class or property silently omitted from one
+hand-copied instance of a repeated block. A shared component with one
+documented, easy-to-see-when-missing required prop (`placement`) doesn't
+prevent every possible mistake, but it does turn "six independent copies
+to keep in sync" into "one implementation plus six thin call sites,"
+which is strictly less to get wrong.
+
+Added `PopoverMenuContent` to `NavMenu.tsx` (reusing its existing
+`PLACEMENT_TO_SIDE_ALIGN` helper) and migrated all six simple call sites
+to it. Two *more* `RadixPopover.Content` blocks in `TableFiltersMenu.tsx`
+(the column-filter toggle and the "Add filter" list's own top-level
+content) were deliberately left as direct `RadixPopover` usage: both need
+`forceMount` + a custom `container` prop + (one of them) a callback
+`ref`, none of which the simple wrapper exposes, and both are the most
+heavily bug-fixed code in this entire migration (`TableBody.tsx`'s
+`hasFilterMenu()` DOM query, the `activeItemName` race, the "wrapped
+`filters` element vs. rendered DOM" bug — see this doc's own sections
+above). Widening `PopoverMenuContent`'s API to cover them was possible
+but not worth the added surface for two call sites whose current, direct
+form is already correct and already the most-tested code here — extending
+a shared abstraction to fit an edge case it doesn't need yet is exactly
+how such abstractions rot.
+
+Verified live after conversion, not just via `tsc`/tests: the "Add
+filter" list still opens, `FlyoutRow`'s per-filter flyout still opens to
+the side, switching between two rows still closes the first and opens
+only the second in one click (the exact regression the `activeItemName`
+coordination exists to prevent), and `RoleAndProjectSelectField`'s popup
+still opens correctly above its enclosing modal (the z-index fix from
+the section above, confirmed to survive the conversion).
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
