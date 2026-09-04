@@ -7,9 +7,9 @@ import { GRID_BREAKPOINTS } from '@/core/constants';
 
 /**
  * Radix-driven replacement for the header/footer/sidebar-popup menus built
- * on Metronic's own imperative `MenuComponent`/`data-kt-menu-*` system
- * (`src/metronic/components/MenuComponent.ts`, driven by Popper.js
- * directly) — a *different* system from `ActionsDropdown.tsx`, which
+ * on Metronic's own imperative `data-kt-menu-*` system (driven by
+ * Popper.js directly, now fully removed) — a *different* system from
+ * `ActionsDropdown.tsx`, which
  * replaces react-bootstrap's `<Dropdown>` and wears Bootstrap's
  * `.dropdown-menu`/`.dropdown-item` classes. These wear Metronic's own
  * `.menu`/`.menu-sub`/`.menu-sub-dropdown`/`.menu-item`/`.menu-link`
@@ -90,10 +90,10 @@ const PLACEMENT_TO_SIDE_ALIGN = (
  * (leaving off either one closes the menu the instant the pointer
  * crosses the small visual gap between the button and its panel while
  * moving toward it), gated to `lg`+ only. The 200ms close-on-leave delay
- * isn't invented: it's Metronic's own MenuComponent default
- * (`defaultMenuOptions.dropdown.hoverTimeout`,
- * src/metronic/components/MenuComponent.ts), ported so a pointer
- * momentarily leaving the panel while crossing back toward the trigger
+ * isn't invented: it's Metronic's own imperative menu JS's default
+ * (`defaultMenuOptions.dropdown.hoverTimeout`, from the now-deleted
+ * class that used to drive this), ported so a pointer momentarily
+ * leaving the panel while crossing back toward the trigger
  * doesn't visibly flicker the menu shut. Shared by FooterDropdown.tsx and
  * TabsList.tsx — both real, independent top-level triggers with this
  * exact original attribute value, not a coincidence.

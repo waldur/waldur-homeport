@@ -12,10 +12,10 @@ import { TableFiltersMenu } from './TableFiltersMenu';
 /**
  * Regression coverage for the Radix conversion: TableFiltersMenu used to
  * drive both its own trigger+menu pair and a per-column "jump straight to
- * this filter" auto-open (menuInstance.show(item), fired from a
- * kt.menu.dropdown.shown listener) through Metronic's MenuComponent.
- * It's a controlled Radix Popover now, with the auto-open threaded
- * through TableFilterContext's `openMenuName` instead.
+ * this filter" auto-open through Metronic's own imperative menu JS
+ * (a dropdown-shown listener calling menuInstance.show(item)). It's a
+ * controlled Radix Popover now, with the auto-open threaded through
+ * TableFilterContext's `openMenuName` instead.
  */
 describe('TableFiltersMenu', () => {
   const renderMenu = (props: Record<string, any> = {}) => {

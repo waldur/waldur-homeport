@@ -20,10 +20,10 @@ beforeAll(() => {
 });
 
 /**
- * Regression coverage for the Metronic MenuComponent -> Radix Collapsible
- * conversion: MenuAccordion used to have no React state of its own at
- * all — click/open/close was entirely driven by Metronic's own imperative
- * JS reading `data-kt-menu-trigger`. This pins down that a click on the
+ * Regression coverage for the Metronic -> Radix Collapsible conversion:
+ * MenuAccordion used to have no React state of its own at all —
+ * click/open/close was entirely driven by Metronic's own imperative JS
+ * reading `data-kt-menu-trigger`. This pins down that a click on the
  * header still toggles the submenu's presence, and that the `disabled`
  * case stays fully static (no trigger, no children ever rendered) exactly
  * as before.
@@ -62,13 +62,14 @@ describe('MenuAccordion', () => {
 
 /**
  * Regression coverage for the sibling-exclusivity replacement: Metronic's
- * MenuComponent auto-closed every other open accordion in the tree
- * whenever one opened (`_hideAccordions`, gated behind the app's default
- * `accordion.expand: false`). The Radix Collapsible migration replaces
- * that with a shared `useExclusiveOpen` state passed into each sibling's
- * `open`/`onOpenChange` (see UnifiedSidebar.tsx and ResourcesMenu.tsx) —
- * this pins down that two siblings sharing one hook instance actually do
- * close each other, the way the real component tree relies on.
+ * own imperative menu JS auto-closed every other open accordion in the
+ * tree whenever one opened (`_hideAccordions`, gated behind the app's
+ * default `accordion.expand: false`). The Radix Collapsible migration
+ * replaces that with a shared `useExclusiveOpen` state passed into each
+ * sibling's `open`/`onOpenChange` (see UnifiedSidebar.tsx and
+ * ResourcesMenu.tsx) — this pins down that two siblings sharing one hook
+ * instance actually do close each other, the way the real component tree
+ * relies on.
  */
 describe('useExclusiveOpen sibling coordination', () => {
   const TwoSiblingAccordions = () => {

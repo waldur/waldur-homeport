@@ -33,11 +33,11 @@ export const useOfferingCategories = () => {
 /**
  * Shared "only one sibling open at a time" state for a group of
  * MenuAccordion rows — the Radix-Collapsible replacement for Metronic's
- * `MenuComponent`'s own single-branch-open accordion coordination (see
- * MenuAccordion.tsx's own top comment for why Collapsible, not Accordion,
- * is used here). One call per group of siblings that should collapse each
- * other: the sidebar's own top level (UnifiedSidebar.tsx), and each
- * distinct nesting level inside ResourcesMenu's recursive categories.
+ * own single-branch-open accordion coordination (see MenuAccordion.tsx's
+ * own top comment for why Collapsible, not Accordion, is used here). One
+ * call per group of siblings that should collapse each other: the
+ * sidebar's own top level (UnifiedSidebar.tsx), and each distinct
+ * nesting level inside ResourcesMenu's recursive categories.
  */
 export function useExclusiveOpen(initial?: string) {
   const [openId, setOpenId] = useState<string | undefined>(initial);

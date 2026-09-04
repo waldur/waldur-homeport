@@ -43,9 +43,9 @@ export const UnifiedSidebar = () => {
 
   // Auto-expand the sidebar section matching the current route, so a deep
   // link lands with the active item already visible — the Radix
-  // replacement for Metronic MenuComponent's own imperative
-  // `.getInstance(...).show(item)` calls this used to make. Deliberately a
-  // one-shot "open it" on route match, not a persistent binding: matches
+  // replacement for Metronic's own imperative menu JS
+  // (`.getInstance(...).show(item)` calls) this used to make. Deliberately
+  // a one-shot "open it" on route match, not a persistent binding: matches
   // the original's own behavior of never calling the equivalent of
   // `.hide()`, so the user can still manually collapse a route-active
   // section afterward — it only reopens on the next matching navigation,

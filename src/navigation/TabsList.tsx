@@ -69,14 +69,15 @@ const findActiveTab = (tabs, router) => {
  * `.menu-sub-down-accordion.menu-sub-dropdown`).
  *
  * Both modes collapse to the same Radix dropdown here — a deliberate
- * simplification, not an overlooked one. Metronic's own click handler
- * never calls `preventDefault()` on this trigger
- * (`MenuComponent.ts`'s `_click` — the line is commented out, not
- * missing), and Link's own onClick always fires its state transition
- * regardless, so clicking this row today already navigates away
- * immediately in the common case (parentTab always carries its own
- * `to`/`redirectTo`) — remounting the whole tree and making whatever the
- * accordion was doing under it invisible in practice. Reproducing a true
+ * simplification, not an overlooked one. Metronic's own imperative menu
+ * JS never called `preventDefault()` on this trigger (confirmed in its
+ * `_click` handler before that file was deleted — the line was
+ * commented out, not missing), and Link's own onClick always fires its
+ * state transition regardless, so clicking this row today already
+ * navigates away immediately in the common case (parentTab always
+ * carries its own `to`/`redirectTo`) — remounting the whole tree and
+ * making whatever the accordion was doing under it invisible in
+ * practice. Reproducing a true
  * inline-accordion mode here would faithfully replicate a mode nothing
  * can actually observe; a single hover-capable Radix dropdown (matching
  * FooterDropdown.tsx's own identical original attribute value) is both
