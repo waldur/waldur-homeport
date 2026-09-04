@@ -352,7 +352,11 @@ const pseudoForIconOnlyColumns = () => ({
 
 export const IconOnlyStates: StoryObj<{ size: Size }> = {
   argTypes: { size: { control: 'radio', options: ['sm', 'lg'] } },
-  args: { size: 'sm' },
+  // lg, not sm: real icon-only usage (TableColumnsButton's gear,
+  // TableFilterButton's funnel — see the app's own toolbar) renders at
+  // this size. sm's tighter padding reads as a small circle rather than
+  // the bordered square those buttons actually are.
+  args: { size: 'lg' },
   render: ({ size }) => <IconOnlyGrid size={size} />,
   parameters: { pseudo: pseudoForIconOnlyColumns() },
 };
