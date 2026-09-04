@@ -149,6 +149,14 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           ),
           state: 'reporting-usage-by-creator',
         },
+        {
+          key: 'projects-by-affiliated-organization',
+          title: translate('Projects by affiliated organization'),
+          description: translate(
+            'Projects, resources and cost per affiliated organization, with an explicit unaffiliated bucket',
+          ),
+          state: 'reporting-projects-by-affiliated-organization',
+        },
       ],
     },
     provider: {

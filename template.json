@@ -2562,6 +2562,24 @@
       "feature_area": "affiliates"
     }
   },
+  "Affiliated organization": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "affiliated-organizations"
+    }
+  },
+  "Affiliated organizations": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "affiliated-organizations"
+    }
+  },
+  "Affiliated projects": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "affiliated-organizations"
+    }
+  },
   "Affiliates": {
     "context": {
       "primary_ui_type": "title"
@@ -2571,6 +2589,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "create"
+    }
+  },
+  "Affiliation coverage": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "affiliated-organizations"
     }
   },
   "Affiliation details": {
@@ -7804,7 +7828,7 @@
   "By country": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "charts"
+      "feature_area": "affiliated-organizations"
     }
   },
   "By impact": {
@@ -15828,6 +15852,11 @@
   "Each project can have one chat room. Rooms are created by project owners and automatically populated with project members. Owners can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Each project is counted against the affiliation it carries today. Reassigning a project restates its earlier periods, and projects that have been removed no longer contribute to any organization.": {
+    "context": {
+      "feature_area": "affiliated-organizations"
     }
   },
   "Each project member receives an email summarizing only the projects they belong to.": {
@@ -29544,6 +29573,11 @@
       "feature_area": "create-user-steps"
     }
   },
+  "No affiliated organizations found": {
+    "context": {
+      "feature_area": "affiliated-organizations"
+    }
+  },
   "No affiliations added.": {
     "context": {
       "feature_area": "team"
@@ -30390,6 +30424,11 @@
   "No organization groups found": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "No organization has been registered in the affiliation registry yet.": {
+    "context": {
+      "feature_area": "affiliated-organizations"
     }
   },
   "No organizational access. This user is not a member of any organization or project.": {
@@ -38095,6 +38134,12 @@
       "feature_area": "project-classification"
     }
   },
+  "Projects by affiliated organization": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "reporting"
+    }
+  },
   "Projects by industry classification": {
     "context": {
       "feature_area": "project-classification"
@@ -38118,6 +38163,11 @@
   "Projects with resources": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Projects, resources and cost per affiliated organization, with an explicit unaffiliated bucket": {
+    "context": {
+      "feature_area": "reporting"
     }
   },
   "Proof": {
@@ -58236,6 +58286,12 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Unaffiliated projects": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "affiliated-organizations"
+    }
+  },
   "Unarchive": {
     "context": {
       "feature_area": "ai-assistant"
@@ -63408,6 +63464,11 @@
       "feature_area": "chat"
     }
   },
+  "affiliated organizations": {
+    "context": {
+      "feature_area": "affiliated-organizations"
+    }
+  },
   "affiliations": {
     "context": {
       "feature_area": "team"
@@ -63594,6 +63655,11 @@
   "cost limit": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "countries": {
+    "context": {
+      "feature_area": "affiliated-organizations"
     }
   },
   "created": {
@@ -66246,6 +66312,16 @@
         }
       },
       "feature_area": "roles"
+    }
+  },
+  "{count} with projects": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "affiliated-organizations"
     }
   },
   "{count} {key} reactions — click to {verb} yours": {

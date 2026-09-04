@@ -90,9 +90,7 @@ export const TableDropdownToggle = ({
         disabled={disabled}
       >
         {label || translate('Actions')}
-        <span
-          className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
-        >
+        <span className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'}`}>
           <CaretDownIcon weight="bold" />
         </span>
       </Dropdown.Toggle>
