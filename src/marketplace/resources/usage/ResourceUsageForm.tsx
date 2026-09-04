@@ -3,17 +3,20 @@ import {
   QuestionIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import SelectableContext from '@restart/ui/SelectableContext';
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
 import {
   FunctionComponent,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
-import { Dropdown, Nav, Tab } from 'react-bootstrap';
+import { Nav, Tab } from 'react-bootstrap';
 import { Field, useField, useForm } from 'react-final-form';
 import {
   ComponentUserUsage,
@@ -38,6 +41,7 @@ import {
 } from '@/form';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { getPeriodRange } from './api';
 import {
@@ -86,6 +90,10 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
   const form = useForm();
   const formState = form.getState();
   const errors = formState.errors || {};
+  // Tab.Container below is uncontrolled (defaultActiveKey only), so switching
+  // tabs from this overflow dropdown has to go through the same internal
+  // SelectableContext that Nav.Link's own eventKey taps into.
+  const selectTab = useContext(SelectableContext);
 
   const handleWindowResize = useCallback(
     debounce(() => {
@@ -351,66 +359,75 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
             {wrappedComponents.length > 0 ? (
               <Nav variant="tabs" className="nav-line-tabs mb-4">
                 <Nav.Item>
-                  <Dropdown>
-                    <Dropdown.Toggle
-                      variant="text-secondary"
-                      className="btn-icon no-arrow w-35px h-35px"
-                    >
-                      <DotsThreeIcon size={22} weight="bold" />
-                      {wrappedComponents.some((comp) =>
-                        Boolean(errors.components?.[comp.type]),
-                      ) && (
-                        <HeaderButtonBullet
-                          size={10}
-                          blink={false}
-                          variant="danger"
-                          className="me-n2"
-                        />
-                      )}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <div className="mh-200px overflow-auto">
-                        {wrappedComponents.map((component) => (
-                          <Dropdown.Item
-                            key={component.uuid}
-                            eventKey={component.uuid}
-                            className="d-flex justify-content-between"
-                          >
-                            {Boolean(errors.components?.[component.type]) && (
-                              <Tip
-                                id={`tip-${component.uuid}-error`}
-                                label={
-                                  <FieldError
-                                    error={errors.components[component.type]}
+                  <RadixDropdownMenu.Root>
+                    <RadixDropdownMenu.Trigger asChild>
+                      <button
+                        type="button"
+                        className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px"
+                      >
+                        <DotsThreeIcon size={22} weight="bold" />
+                        {wrappedComponents.some((comp) =>
+                          Boolean(errors.components?.[comp.type]),
+                        ) && (
+                          <HeaderButtonBullet
+                            size={10}
+                            blink={false}
+                            variant="danger"
+                            className="me-n2"
+                          />
+                        )}
+                      </button>
+                    </RadixDropdownMenu.Trigger>
+                    <RadixDropdownMenu.Portal>
+                      <RadixDropdownMenu.Content
+                        sideOffset={2}
+                        className="dropdown-menu show position-static"
+                      >
+                        <div className="mh-200px overflow-auto">
+                          {wrappedComponents.map((component) => (
+                            <ActionsDropdownItem
+                              key={component.uuid}
+                              className="d-flex justify-content-between"
+                              onClick={(event) =>
+                                selectTab?.(component.uuid, event)
+                              }
+                            >
+                              {Boolean(errors.components?.[component.type]) && (
+                                <Tip
+                                  id={`tip-${component.uuid}-error`}
+                                  label={
+                                    <FieldError
+                                      error={errors.components[component.type]}
+                                    />
+                                  }
+                                  autoWidth
+                                >
+                                  <WarningCircleIcon
+                                    size={18}
+                                    weight="bold"
+                                    className="text-danger me-1"
                                   />
-                                }
-                                autoWidth
+                                </Tip>
+                              )}
+                              {component.name}
+                              <Tip
+                                id={`tip-${component.uuid}-type`}
+                                label={getBillingTypeLabel(
+                                  component.billing_type,
+                                )}
                               >
-                                <WarningCircleIcon
+                                <QuestionIcon
                                   size={18}
+                                  className="ms-1"
                                   weight="bold"
-                                  className="text-danger me-1"
                                 />
                               </Tip>
-                            )}
-                            {component.name}
-                            <Tip
-                              id={`tip-${component.uuid}-type`}
-                              label={getBillingTypeLabel(
-                                component.billing_type,
-                              )}
-                            >
-                              <QuestionIcon
-                                size={18}
-                                className="ms-1"
-                                weight="bold"
-                              />
-                            </Tip>
-                          </Dropdown.Item>
-                        ))}
-                      </div>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                            </ActionsDropdownItem>
+                          ))}
+                        </div>
+                      </RadixDropdownMenu.Content>
+                    </RadixDropdownMenu.Portal>
+                  </RadixDropdownMenu.Root>
                 </Nav.Item>
               </Nav>
             ) : (
