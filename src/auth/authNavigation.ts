@@ -7,7 +7,10 @@ import { needsPasskeyEnrollment } from '@/user/passkeys/enforcement';
 import { clearImpersonationData, isUserValid } from '@/user/UsersService';
 import { getUser } from '@/workspace/selectors';
 
-import { RedirectStorage } from '../core/StorageManager';
+import {
+  AuthTokenExpiryStorage,
+  RedirectStorage,
+} from '../core/StorageManager';
 
 import { clearAuthTokens } from './AuthService';
 import { resetSessionState } from './sessionReset';
@@ -100,6 +103,9 @@ export function clearAuthCache() {
   resetSessionState({ queries: false });
   clearImpersonationData();
   clearAuthTokens();
+  // Belongs to the token that has just been dropped; leaving it behind would
+  // describe the next account's session.
+  AuthTokenExpiryStorage.remove();
 }
 
 export function localLogout() {

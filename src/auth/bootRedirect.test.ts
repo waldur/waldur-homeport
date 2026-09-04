@@ -26,6 +26,10 @@ interface Scenario {
 }
 
 const ORIGIN = 'https://portal.example.com';
+const TOKEN = 'waldur/auth/token';
+const EXPIRY = 'waldur/auth/token_expires_at';
+const inHours = (hours: number) =>
+  new Date(Date.now() + hours * 3600_000).toISOString();
 
 const flush = async () => {
   for (let i = 0; i < 3; i++) {
@@ -163,13 +167,46 @@ describe('boot-redirect.js', () => {
     ['the OAuth callback', { pathname: '/oauth_login_completed/keycloak/' }],
     ['disableAutoLogin', { pathname: '/login/', search: '?disableAutoLogin' }],
     ['an invitation', { pathname: '/login/', search: '?_invitation=tok' }],
-    ['a token in localStorage', { local: { 'waldur/auth/token': 'abc' } }],
-    ['a token in sessionStorage', { session: { 'waldur/auth/token': 'abc' } }],
+    ['a token in localStorage', { local: { [TOKEN]: 'abc' } }],
+    ['a token in sessionStorage', { session: { [TOKEN]: 'abc' } }],
+    [
+      'a token whose expiry is still ahead',
+      { local: { [TOKEN]: 'abc', [EXPIRY]: inHours(1) } },
+    ],
+    [
+      'a token whose expiry is unreadable',
+      { local: { [TOKEN]: 'abc', [EXPIRY]: 'not-a-date' } },
+    ],
+    [
+      'a token only just past its expiry',
+      { local: { [TOKEN]: 'abc', [EXPIRY]: inHours(-0.005) } },
+    ],
     ['an unsubstituted API URL', { apiUrl: '__API_URL__' }],
     ['a raw Vite placeholder', { apiUrl: '%VITE_API_URL%' }],
     ['an empty API URL', { apiUrl: '' }],
   ])('does not even probe for %s', async (_label, scenario) => {
     const { replace, fetch } = run(scenario);
+    await flush();
+    expect(fetch).not.toHaveBeenCalled();
+    expect(replace).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['localStorage', 'local'],
+    ['sessionStorage', 'session'],
+  ])('redirects past a token expired in %s', async (_label, where) => {
+    const { replace } = run({
+      [where]: { [TOKEN]: 'abc', [EXPIRY]: inHours(-1) },
+    });
+    await vi.waitFor(() => expect(replace).toHaveBeenCalledWith(expectedUrl()));
+  });
+
+  it('reads the expiry from the storage that holds the token', async () => {
+    // An expiry left behind in the other storage must not condemn the token.
+    const { replace, fetch } = run({
+      session: { [TOKEN]: 'abc' },
+      local: { [EXPIRY]: inHours(-1) },
+    });
     await flush();
     expect(fetch).not.toHaveBeenCalled();
     expect(replace).not.toHaveBeenCalled();
