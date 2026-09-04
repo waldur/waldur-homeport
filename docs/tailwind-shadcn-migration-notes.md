@@ -2696,6 +2696,152 @@ coordination exists to prevent), and `RoleAndProjectSelectField`'s popup
 still opens correctly above its enclosing modal (the z-index fix from
 the section above, confirmed to survive the conversion).
 
+## Converting the last 14 Bootstrap `Dropdown`/`OverlayTrigger`+`Popover` menus
+
+The remaining files still importing `Dropdown` or click-triggered
+`OverlayTrigger`+`Popover` from `react-bootstrap` (found via a full-repo
+survey, not guessed) all fell into one of five shapes, each converted onto
+whichever existing shell fit:
+
+- **Plain row-actions menu, no eventKey.** `WidgetCard.tsx`,
+  `PublicOfferingsList.tsx` — `ActionsDropdownComponent`/
+  `ActionsDropdownItem` where the trigger matched `TableDropdownToggle`'s
+  fixed markup (`PublicOfferingsList.tsx`), or a hand-rolled
+  `RadixDropdownMenu.Root`/`Trigger`/`Content` where it needed exact custom
+  sizing the toggle doesn't expose a prop for (`WidgetCard.tsx`'s
+  `h-25px w-25px`, `FeaturesList.tsx`'s `w-35px h-35px`).
+- **Overflow-tabs menu keyed off `eventKey` against an *uncontrolled*
+  `Tab.Container`.** `FeaturesList.tsx`, `ResourceUsageForm.tsx`,
+  `WrappedTabs.tsx` — `Dropdown.Item eventKey={id}` has no explicit
+  `onClick` in any of these three; the tab switch happens entirely through
+  react-bootstrap's own `SelectableContext` (from `@restart/ui`, not
+  re-exported by `react-bootstrap` itself). A Radix `ActionsDropdownItem`
+  doesn't participate in that context, so each converted item calls
+  `useContext(SelectableContext)` and invokes the callback by hand:
+  `onClick={(e) => selectTab?.(id, e)}`.
+- **Href-based items, not eventKey-based selection.**
+  `ResourceAccessButton.tsx` — `RadixDropdownMenu.Item asChild><a href=.../>`
+  (matching the existing `DocsLink.tsx` precedent), not
+  `ActionsDropdownItem`, so the anchor keeps real `target="_blank"`
+  navigation semantics instead of becoming a `<div role="menuitem">`.
+- **Hand-rolled open state duplicating what Radix already does.**
+  `BrandName.tsx`'s shortcuts panel had its own `useState` +
+  `mousedown`/`contains` outside-click effect around a *context-less*
+  `<Dropdown.Menu show={...}>` (no `<Dropdown>` root at all).
+  `DropdownBreadcrumbItem.tsx` had the identical pattern. Both converted
+  to a Radix `Root` and lost the manual state machinery entirely — Radix's
+  dismissable layer already handles outside-click, Escape, and focus
+  return, so keeping the hand-rolled version alongside it would only be
+  two systems fighting over the same job.
+- **Contains a real form control, so `Popover` not `DropdownMenu`** (see
+  `packages/ui/src/Popover.tsx`'s own rule: arrow-key/typeahead collection
+  behaviour steals keystrokes from anything the user types into).
+  `TableColumnsButton.tsx`/`ExpandableRowToolbar.tsx` (search box +
+  dnd-kit drag-reorder / checkboxes), `MarketplaceLandingFilter.tsx`
+  (two react-select autocompletes), `DropdownBreadcrumbItem.tsx`
+  (caller-supplied content, at least one consumer has a search input),
+  `SearchToggle.tsx` (the global search box), `CallSettingsMenu.tsx`
+  (device `<select>`s), `MatrixChatHeader.tsx`'s members list — all moved
+  to `RadixPopover.Root`/`Trigger`/`Portal`/`Content`, rendered with
+  Bootstrap's own `.popover`/`.popover-body` classes (from Bootstrap's
+  `_popover.scss`, not Metronic's menu stylesheet) since none of these
+  ever used Metronic's `.menu-sub-dropdown` look to begin with.
+
+Three sharp edges worth recording, since they are easy to get wrong on the
+next file like this rather than something obvious from the diff:
+
+- **`TableColumnsButton.tsx`'s disabled-trigger fix got simpler, not just
+  ported.** This session had already patched a live bug here once
+  (`trigger={mode === 'table' ? 'click' : []}`, see the fix note above)
+  because `OverlayTrigger` wrapped an *ancestor* `<span>`, not the disabled
+  `<Button>` two levels inside it — `pointer-events: none` on the disabled
+  button let the click hit-test fall through to that span's own handler.
+  The Radix conversion puts `RadixPopover.Trigger asChild` directly on the
+  `<Button>` itself, so a real `disabled` HTML attribute blocks the click
+  at its source. No trigger-suppression workaround is needed at all; the
+  bug class doesn't exist for this shape.
+- **`MarketplaceLandingFilter.tsx` needed `onInteractOutside` suppressed,
+  not just `open`/`onOpenChange` wiring.** Its `OrganizationAutocomplete`/
+  `ProjectAutocomplete` fields are react-select instances configured
+  (`src/form/select/useSelect.ts`) to portal their own menu to
+  `document.body` — outside this popover's DOM subtree. Radix's default
+  dismiss-on-outside-pointer-down would otherwise close the whole filter
+  the instant either select opened. The original Bootstrap `Dropdown` had
+  the same problem and solved it the same way conceptually
+  (`autoClose={false}`, closing only via the explicit Cancel/Apply
+  handlers) — `onInteractOutside={(e) => e.preventDefault()}` on
+  `RadixPopover.Content` is the direct Radix equivalent, not a new
+  behaviour.
+- **`SearchToggle.tsx` has no single trigger element.** Opening happens
+  from three independent places (the compact button, the mobile button,
+  or focusing the inline desktop `SearchInput`), each already calling
+  `setShow(true)` directly. `RadixPopover.Anchor` (not `Trigger`) wraps the
+  whole cluster — `Anchor` only gives `Content` something to position
+  against; it doesn't wire up any click handling of its own, so the
+  existing three independent `setShow(true)` calls needed no changes.
+
+Verified per file via `tsc --noEmit`, `eslint --fix` (only the pre-existing
+`no-bootstrap-button-markup` warning survives, on hand-rolled trigger
+`<button>`s — the same warning `ActionsDropdown.tsx`'s own canonical
+`TableDropdownToggle` carries, so it is not a regression this migration
+introduces), and the existing test suites for the files that had one
+(`FeaturesList.test.tsx`, `src/table/*`, `MatrixChatHeader.test.tsx` — all
+green). A full-repo grep after conversion turned up no remaining
+`Dropdown` import from `react-bootstrap` anywhere in `src/`; the
+`OverlayTrigger`+`Popover` instances still left are all hover/focus-
+triggered rich tooltips (volume-discount breakdowns, resource-limit
+tables, truncated-value previews) rather than click-toggle menus, which
+this migration was never scoped to touch.
+
+## Dropdown/menu system map — which one to reach for
+
+Four parallel systems now coexist in this codebase, each solving the same
+underlying problem (a floating panel anchored to a trigger) for a
+different visual language or interaction shape. Reaching for the wrong one
+is the single most common way this migration re-introduces the exact bugs
+documented throughout this file, so the choice is recorded here rather
+than left to be re-derived per file:
+
+1. **`src/navigation/NavMenu.tsx`** — `NavMenuContent`/`NavMenuSubContent`
+   (`RadixDropdownMenu`) and `PopoverMenuContent` (`RadixPopover`). Use for
+   anything wearing Metronic's menu skin: `.menu-sub-dropdown`,
+   `.menu-link`, `.menu-item`, the `menu-gray-*`/`menu-state-bg-*` theme
+   classes. This is the header/footer/sidebar chrome's own visual
+   language — reach for it when the surrounding UI already looks like a
+   Metronic menu (user dropdown, language selector, sidebar flyouts, role
+   pickers).
+2. **`src/table/ActionsDropdown.tsx`** — `ActionsDropdownComponent`/
+   `ActionsDropdownItem` (`RadixDropdownMenu`) and
+   `ActionsPopoverComponent`/`ActionsPopoverItem` (`RadixPopover`), plus
+   `PlainActionItem` for the one context that renders row actions outside
+   any real Menu/Popover ancestor at all (`ModalActionsDialog`'s search
+   results). Use for Bootstrap-skinned menus: `.dropdown-menu`,
+   `.dropdown-item`, `.popover`/`.popover-body`. This is what every table
+   row-actions kebab and most of this session's 14 conversions use — reach
+   for it by default for anything new unless the surrounding UI is
+   specifically Metronic-chrome (rule 1) or already on the Tailwind design
+   system (rule 3).
+3. **`packages/ui/src/DropdownMenu.tsx` / `packages/ui/src/Popover.tsx`**
+   — the Tailwind/shadcn design-system primitives, styled with CSS
+   variables rather than either Bootstrap or Metronic classes. Not yet
+   wired into the production app bundle (`packages/ui` is presently
+   consumed only by Storybook — see the section below); do not reach for
+   these in `src/` until that restyle is a deliberate, separately reviewed
+   step. `Popover.tsx`'s own file comment carries the canonical
+   DropdownMenu-vs-Popover rule that rules 1 and 2 both inherit: *if it
+   contains anything the user types into or drags, it is a Popover; if
+   every child is a command row, it is a DropdownMenu.*
+4. **Hover/focus-triggered `OverlayTrigger`+`Popover`/`Tooltip` from
+   `react-bootstrap` directly.** Deliberately untouched by this migration
+   — these are rich-content tooltips (volume-discount math, truncated-list
+   previews, device-config summaries), not click-toggle menus, so none of
+   the CSS-descendant-portal or keyboard-focus problems that motivated
+   converting 1–3 apply to them. Radix's `Popover` has no built-in hover
+   trigger (that is `Tooltip`'s job, not `Popover`'s), so converting one of
+   these would mean hand-rolling mouseenter/mouseleave-with-delay logic to
+   replace behaviour Bootstrap already provides for free — not worth it
+   unless a specific bug forces the question.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
