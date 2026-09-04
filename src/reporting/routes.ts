@@ -273,6 +273,24 @@ export const states: StateDeclaration[] = [
       permissions: [() => isReportingScreenEnabled('usage-by-creator')],
     },
   },
+  {
+    name: 'reporting-projects-by-affiliated-organization',
+    url: 'projects-by-affiliated-organization/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./affiliated-organizations/AffiliatedOrganizationsReportPage').then(
+        (m) => ({
+          default: m.AffiliatedOrganizationsReportPage,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Projects by affiliated organization'),
+      permissions: [
+        () => isReportingScreenEnabled('projects-by-affiliated-organization'),
+      ],
+    },
+  },
 
   // Proposals & Reviews category (feature-based visibility)
   // Requires both call management AND experimental flags since all children use mock data
