@@ -111,7 +111,15 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
           side="bottom"
           align="start"
           sideOffset={2}
-          className="popover"
+          // position-static: Bootstrap's own .popover class hardcodes
+          // `position: absolute; left: 0`, fighting the Radix popper
+          // wrapper for control of this box's placement — see
+          // TableColumnsButton.tsx's own comment on this exact fix. Also
+          // the direct cause of "search panel too narrow": with the panel
+          // taken out of the wrapper's flow, Radix never got a real width
+          // to measure, so #GlobalSearch's own width/max-width rules
+          // (SearchToggle.scss) had nothing correctly-flowing to apply to.
+          className="popover position-static"
         >
           <SearchPopover
             result={result}

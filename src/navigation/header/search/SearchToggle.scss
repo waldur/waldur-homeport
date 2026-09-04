@@ -1,7 +1,14 @@
+// width, not width: 100%: the Radix popper wrapper this now lives inside
+// (see SearchToggle.tsx's own position-static comment) has no explicit
+// width of its own — it shrink-to-fits its content — so a percentage
+// width here resolves against that same shrink-to-fit box, a circular
+// reference browsers resolve back to the content's own intrinsic width
+// rather than actually growing to fill max-width. max-width still caps
+// this against the viewport on narrow screens, same as before.
 #GlobalSearch {
   margin-top: -10px;
-  width: 100%;
-  max-width: 500px;
+  width: 500px;
+  max-width: calc(100vw - 24px);
 
   .popover-arrow {
     display: none;
@@ -10,7 +17,7 @@
 
 @media (min-width: 576px) {
   #GlobalSearch {
-    max-width: 850px;
+    width: 850px;
   }
 }
 @media (width >= 992px) {

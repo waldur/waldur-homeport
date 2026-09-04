@@ -76,7 +76,11 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
         <RadixPopover.Content
           side="top"
           sideOffset={2}
-          className="popover call-device-settings-popover"
+          // position-static: Bootstrap's own .popover class hardcodes
+          // `position: absolute; left: 0`, fighting the Radix popper
+          // wrapper for control of this box's placement — see
+          // TableColumnsButton.tsx's own comment on this exact fix.
+          className="popover call-device-settings-popover position-static"
         >
           <div className="popover-body call-device-settings">
             {kinds.map(({ kind, label }) => (

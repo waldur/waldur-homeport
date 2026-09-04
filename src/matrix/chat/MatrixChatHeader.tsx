@@ -238,7 +238,11 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
                 side="bottom"
                 align="start"
                 sideOffset={2}
-                className="popover tc-members-popover"
+                // position-static: Bootstrap's own .popover class hardcodes
+                // `position: absolute; left: 0`, fighting the Radix popper
+                // wrapper for control of this box's placement — see
+                // TableColumnsButton.tsx's own comment on this exact fix.
+                className="popover tc-members-popover position-static"
               >
                 <div className="popover-body p-0">
                   <MatrixMembersList />

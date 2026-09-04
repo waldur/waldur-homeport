@@ -45,7 +45,11 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
           side="bottom"
           align="start"
           sideOffset={2}
-          className="popover mw-400px min-w-200px pb-2"
+          // position-static: Bootstrap's own .popover class hardcodes
+          // `position: absolute; left: 0`, fighting the Radix popper
+          // wrapper for control of this box's placement — see
+          // TableColumnsButton.tsx's own comment on this exact fix.
+          className="popover mw-400px min-w-200px pb-2 position-static"
         >
           {typeof item.dropdown === 'function'
             ? item.dropdown(() => setShow(false))
