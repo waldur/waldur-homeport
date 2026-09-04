@@ -1,4 +1,9 @@
-import { ArrowRightIcon, CaretRightIcon } from '@phosphor-icons/react';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CaretLeftIcon,
+  CaretRightIcon,
+} from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ComponentProps, ReactNode } from 'react';
 
@@ -10,6 +15,7 @@ const CONTAINED_VARIANTS = [
   'tertiary',
   'danger',
   'warning',
+  'success',
 ] as const;
 
 const TEXT_VARIANTS = [
@@ -17,6 +23,7 @@ const TEXT_VARIANTS = [
   'text-secondary',
   'text-danger',
   'text-warning',
+  'text-success',
 ] as const;
 
 // Design-spec label per variant — "Error", not the prop's own "danger",
@@ -28,11 +35,16 @@ const VARIANT_LABELS: Record<string, string> = {
   tertiary: 'Tertiary',
   danger: 'Error',
   warning: 'Warning',
+  success: 'Success',
   'text-primary': 'Primary',
   'text-secondary': 'Secondary',
   'text-danger': 'Error',
   'text-warning': 'Warning',
+  'text-success': 'Success',
 };
+
+type Size = 'sm' | 'lg';
+type IconSide = 'left' | 'right';
 
 const STATES = [
   'enabled',
@@ -91,6 +103,17 @@ type Story = StoryObj<typeof BaseButton>;
 /** Single button, full controls — for exploring one variant/state combo. */
 export const Playground: Story = {};
 
+const ICONS: Record<IconSide, { arrow: ReactNode; caret: ReactNode }> = {
+  left: {
+    arrow: <ArrowLeftIcon weight="bold" />,
+    caret: <CaretLeftIcon weight="bold" />,
+  },
+  right: {
+    arrow: <ArrowRightIcon weight="bold" />,
+    caret: <CaretRightIcon weight="bold" />,
+  },
+};
+
 /**
  * State × variant grid, matching the design spec (Shared components →
  * Buttons): every color variant across one axis, every interaction state
@@ -103,19 +126,25 @@ export const Playground: Story = {};
  * `parameters.pseudo`, keyed by id, rather than the all-or-nothing
  * `pseudo: { hover: true }` the single-state stories below still use).
  *
- * One icon, not the spec's two (a leading arrow *and* a trailing one):
- * BaseButton takes a single `iconNode` + `iconRight` side toggle, not a
- * pair — the spec's mirrored arrows read as generic directional
- * placeholders rather than a real two-icon button shape, so this matches
- * the component's actual, real-usage API instead of drawing something
- * BaseButton can't render.
+ * Size and icon side are Controls args, not extra grid rows/columns: the
+ * spec shows one icon on *each* side of the label simultaneously, which
+ * BaseButton's real API (a single `iconNode` + `iconRight` toggle) can't
+ * render — doubling every row for left+right, and again for sm+lg, would
+ * quadruple the grid into something worse to scan than the four toggles
+ * in the Controls panel below it. Reach for the Playground story instead
+ * when comparing two fixed combinations side by side matters more than
+ * scanning every state.
  */
 const StateGrid = ({
   variants,
-  icon,
+  size,
+  iconSide,
+  iconShape,
 }: {
   variants: readonly string[];
-  icon: ReactNode;
+  size: Size;
+  iconSide: IconSide;
+  iconShape: 'arrow' | 'caret';
 }) => (
   // Not a data table — a Storybook-only state/variant reference grid, so
   // @/table/Table (paginated, sortable, backed by useTable) doesn't apply.
@@ -147,10 +176,10 @@ const StateGrid = ({
                 variant={
                   variant as ComponentProps<typeof BaseButton>['variant']
                 }
-                size="lg"
+                size={size}
                 label="Label"
-                iconNode={icon}
-                iconRight
+                iconNode={ICONS[iconSide][iconShape]}
+                iconRight={iconSide === 'right'}
                 disabled={state === 'disabled'}
                 disabledReason={
                   state === 'disabled'
@@ -174,21 +203,45 @@ const pseudoForRows = (variants: readonly string[]) => ({
   active: variants.map((variant) => `#${stateId('pressed', variant)}`),
 });
 
-export const ContainedStates: Story = {
-  render: () => (
+// The two grid stories take `size`/`iconSide` args instead of BaseButton's
+// own props (`iconSide` has no such prop at all — it's StateGrid's
+// friendlier stand-in for `iconRight`), so they get their own StoryObj
+// shape rather than reusing `Story` (= StoryObj<typeof BaseButton>) above.
+interface GridArgs {
+  size: Size;
+  iconSide: IconSide;
+}
+type GridStory = StoryObj<GridArgs>;
+
+const gridArgTypes: Meta<GridArgs>['argTypes'] = {
+  size: { control: 'radio', options: ['sm', 'lg'] },
+  iconSide: { control: 'radio', options: ['left', 'right'] },
+};
+const gridArgs: GridArgs = { size: 'lg', iconSide: 'right' };
+
+export const ContainedStates: GridStory = {
+  argTypes: gridArgTypes,
+  args: gridArgs,
+  render: ({ size, iconSide }) => (
     <StateGrid
       variants={CONTAINED_VARIANTS}
-      icon={<ArrowRightIcon weight="bold" />}
+      size={size}
+      iconSide={iconSide}
+      iconShape="arrow"
     />
   ),
   parameters: { pseudo: pseudoForRows(CONTAINED_VARIANTS) },
 };
 
-export const TextStates: Story = {
-  render: () => (
+export const TextStates: GridStory = {
+  argTypes: gridArgTypes,
+  args: gridArgs,
+  render: ({ size, iconSide }) => (
     <StateGrid
       variants={TEXT_VARIANTS}
-      icon={<CaretRightIcon weight="bold" />}
+      size={size}
+      iconSide={iconSide}
+      iconShape="caret"
     />
   ),
   parameters: { pseudo: pseudoForRows(TEXT_VARIANTS) },
