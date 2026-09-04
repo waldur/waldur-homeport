@@ -216,7 +216,7 @@
 
   tfoot > tr {
     background-color: $bg-secondary;
-    border-top: 1px solid $border-color;
+    border-top: 1px solid $border-secondary;
   }
 
   // Pinned columns + Shadow
@@ -274,8 +274,8 @@
 // Shadow hover
 .table-container {
   &.table-hover-shadow > table > tbody > tr:not(.expanded + tr):hover {
-    border-top: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-secondary;
+    border-bottom: 1px solid $border-secondary;
     border-radius: $border-radius-lg;
     box-shadow: if(
       isDarkMode(),
@@ -445,7 +445,7 @@
         position: absolute;
         top: 15px;
         right: 0;
-        background-color: $border-color;
+        background-color: $border-secondary;
       }
     }
   }
@@ -502,7 +502,7 @@
 
   .table-pagination {
     padding-top: $table-pagination-padding-y;
-    border-top: 1px solid $border-color;
+    border-top: 1px solid $border-secondary;
 
     .page-item {
       .page-link {
@@ -598,7 +598,7 @@
       &__control {
         border-radius: 0;
         border: 0;
-        border-bottom: 1px solid $border-color;
+        border-bottom: 1px solid $border-secondary;
         padding-bottom: 0.5rem;
         box-shadow: none;
       }
@@ -692,7 +692,7 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 // Tables inside modals — add outer border
 .modal {
   .table-responsive {
-    border: 1px solid $border-color;
+    border: 1px solid $border-secondary;
   }
 
   // Except a FormTable that has opted out of cell borders (`bordered={false}`):

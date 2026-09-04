@@ -1,5 +1,9 @@
 $mode: dark;
-// See style.scss's header — same @layer bootstrap wrapper, same reasoning.
+
+// See style.scss's header — same top-level config import, same @layer bootstrap
+// wrapper, same reasoning.
+@import 'init-config';
+
 @layer bootstrap {
-  @import 'init';
+  @import 'init-styles';
 }
