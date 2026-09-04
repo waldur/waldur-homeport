@@ -31,7 +31,9 @@
       }
 
       &--is-disabled {
-        background-color: $bg-disabled;
+        // $input-disabled-bg, not $bg-disabled: the fill every other disabled
+        // input in the app carries.
+        background-color: $input-disabled-bg !important;
         .metronic-select__placeholder {
           color: $text-disabled !important;
         }
