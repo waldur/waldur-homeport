@@ -15,9 +15,9 @@ export const RoleCreateButton = ({ refetch }) => {
   const openRoleCreateDialog = useCallback(
     () =>
       openDialog(RoleFormDialog, {
-        resolve: {
-          refetch,
-        },
+        resolve: { refetch },
+        // 932px, the width the design specifies.
+        dialogClassName: 'role-dialog',
       }),
     [openDialog, refetch],
   );

@@ -1,0 +1,77 @@
+// Geometry copied from the Figma frame (27996:16369). The mock is specified in
+// px against a 932px modal, and Bootstrap's spacing utilities are rem-based
+// against Metronic's 13px root, so they cannot land on these values.
+
+// 16px separates every block, matching the 16px either side of the column
+// divider.
+$role-gap: 16px;
+
+// Metronic's own $modal-inner-padding. In rem, like the token, so it tracks the
+// root font size instead of only matching at a 13px root.
+$modal-pad: 1.85rem;
+
+// The design's modal is 932px; Bootstrap's `lg` is 800 and `xl` is 1140.
+.modal-dialog.role-dialog {
+  max-width: 932px;
+
+  // The form element and ModalDialog's own wrapper sit between .modal-content
+  // and .modal-body, so Bootstrap's `.modal-dialog-scrollable` flex chain never
+  // reaches the body: it grows to fit and pushes the footer off a short screen.
+  // `display: contents` lifts both out of the box tree, so the body is a flex
+  // child again and scrolls, keeping Cancel/Save on screen.
+  .modal-content > form,
+  .modal-content > form > div {
+    display: contents;
+  }
+
+  // Stretch the picker down the whole body so the column divider runs to the
+  // bottom edge and meets the rule above the footer, instead of stopping at
+  // the end of the shorter column's content.
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    // No bottom padding: the column divider has to run all the way to the
+    // rule above the footer rather than stopping short of it.
+    padding-bottom: 0;
+
+    > :last-child {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+  }
+
+  // Bootstrap leaves 8px above the footer row against 24px below it, so the
+  // buttons sit high; match the two so the row is centred in the block.
+  .modal-footer {
+    position: relative;
+    padding-top: $modal-pad;
+
+    // The frame closes the content with a rule above the footer. Drawn here
+    // rather than at the end of the body so it stays put when the body
+    // scrolls, and inset to the footer's padding so it lines up with the
+    // divider under the search box. A border would be full-bleed, and
+    // ModalDialog's `.border-0` sets `border: 0 !important` anyway.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: $modal-pad;
+      left: $modal-pad;
+      height: 1px;
+      background-color: var(--bs-border-color);
+    }
+  }
+}
+
+.role-form {
+  // Three 282px inputs with 20px gutters.
+  &__fields {
+    margin-bottom: $role-gap;
+  }
+
+  &__summary {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}

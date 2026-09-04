@@ -61,7 +61,12 @@ const EditRolePermissionsAction: FC<{
 }> = ({ row, refetch }) => {
   const { openDialog } = useModal();
   const open = useCallback(
-    () => openDialog(EditRolePermissionsDialog, { resolve: { row, refetch } }),
+    () =>
+      openDialog(EditRolePermissionsDialog, {
+        resolve: { row, refetch },
+        // Two columns of permissions, same as the role dialog.
+        size: 'lg',
+      }),
     [openDialog, row, refetch],
   );
   return (
