@@ -2240,6 +2240,260 @@ matched what `waldur-api-client`'s `processApiResponse` actually reads —
 harmless when nothing checked the rendered results, but silently wrong.
 Fixed the shared fixture to match the SDK's real return shape.
 
+## Migrating the sidebar navigation accordion off Metronic JS
+
+The one piece of the "Metronic dropdown/menu → Radix" migration
+deliberately deferred earlier — `NavMenu.tsx`'s own top-of-file comment
+flagged `.menu-sub-accordion` (the left sidebar's expand/collapse nav
+tree) as needing "a different Radix primitive — Collapsible/Accordion —
+entirely," since it's in-flow expand/collapse navigation, not a floating
+popup.
+
+### Collapsible, not Accordion
+
+`Accordion.Root` renders its own wrapping DOM element. A nested Root
+(needed to coordinate "only one sibling open" inside `ResourcesMenu`'s
+recursive categories) would insert an extra `<div>` between
+`.menu-sub-accordion` and its `.menu-item` children, breaking the
+indentation mixin's direct-child selector chain
+(`menu-link-indention`, `core/components/mixins/_menu.scss`, 4 levels of
+`.menu-sub > .menu-item > .menu-link`). `@radix-ui/react-collapsible` has
+no group-level Root at all: each `.menu-item.menu-accordion` is its own
+`Collapsible.Root` via `asChild` (zero extra DOM), and "only one sibling
+open" is just a small shared hook (`useExclusiveOpen`, `utils.ts`) —
+`{openId, toggle}`, passed as `open`/`onOpenChange` into each sibling.
+Verified live afterward that indentation genuinely still works
+(`~25px` on nested/leaf items vs `0px` at the top level) — this was the
+whole reason for choosing Collapsible, so it was worth confirming, not
+just trusting the reasoning.
+
+`Collapsible.Trigger` takes `className="menu-link"` directly, not
+wrapped in a `<span>` via `asChild` — making it a real `<button>`, which
+core SCSS was already prepared for (`button.menu-link` reset block,
+`core/components/menu/_base.scss`, added by an earlier commit
+specifically for keyboard-reachable menu triggers). One companion fix
+this required: `ResourcesMenuFilterButton.tsx` renders into
+`MenuAccordion`'s `badge` slot, inside the header — also a `<button>`
+before this — now nested inside another `<button>`, invalid HTML.
+Changed to `<span role="button" tabIndex={0} onKeyDown={...}>`.
+
+Metronic's exact algorithm (`_hideAccordions`, `MenuComponent.ts`) closes
+every open accordion in the *entire* tree when one opens, not just
+immediate siblings, and never actually clears a nested item's own
+`.show` class when its parent collapses — so a collapsed-then-reopened
+category remembers it was expanded. Radix's `Content` unmounts on
+close, resetting nested state instead. Accepted as a minor, deliberate
+deviation: real nesting only ever goes 2 levels deep today
+(`CategoryGroup.categories?: Category[]`, but `Category` itself has no
+`.categories` — verified in `src/marketplace/types.ts`), so it only
+affects re-opening an already-visited, already-collapsed category.
+
+### Route-driven auto-expand
+
+`UnifiedSidebar.tsx` used to imperatively call
+`MenuComponent.getInstance(...).show(item)` on every route change, to
+auto-expand the section matching the current page (so a deep link to a
+resource lands with "Resources" already open). Replaced with a
+`useEffect` that calls the *same* shared `useExclusiveOpen`'s
+`setOpenId` using the same two route-name lists — a one-shot "open it"
+on route match, not a persistent binding, matching the original's own
+behavior of never calling the equivalent of `.hide()`: the user can
+still manually collapse a route-active section afterward, and it only
+reopens on the next matching navigation.
+
+### Six real bugs, found only by testing live — not by reading the code
+
+Both this migration's own investigation and a dispatched planning
+agent's independent research read the relevant SCSS beforehand and
+missed these; they only surfaced once the result was actually clicked
+open and inspected live. Bugs 1–2 surfaced in Storybook with
+`getBoundingClientRect()` checked, not assumed from the CSS source. Bugs
+3–4 surfaced later, against a live user bug report ("layout is bit
+different, animation is gone") that Storybook alone hadn't caught —
+Storybook doesn't load the real app's Tailwind preflight bundle
+(`src/tailwind.css`) the same way the actual dev server does, so the
+cascade-layer conflict in bug 3 wasn't reproducible there at all;
+finding it required live CSSOM inspection of the real app via Claude in
+Chrome, since the sandboxed Browser pane hit a login wall against this
+app's real auth. Bugs 5–6 surfaced in a *second* round of the same live
+user report, once bugs 1–4 were believed fixed and a screenshot showed
+they weren't fully: the row-width/icon-alignment complaint and the caret
+snapping were separate, real regressions this session had (wrongly)
+assumed the earlier fixes already covered.
+
+**1. The accordion never became visible at all.**
+`core/components/menu/_base.scss` has *two* separate `.menu-sub-accordion`
+rules — a simple top-level one, easy to find, and a second, more
+specific one nested inside a breakpoint mixin: `display: none`, flipped
+to `display: flex` only by a `.show` class (on itself or its parent).
+Nothing sets `.show` once `MenuComponent` stops driving this tree, so
+without a matching override the content stayed `display: none`
+*forever* — `[data-state]`, the arrow rotation, all of it looked
+correct, but `getBoundingClientRect().height` stayed 0 no matter what.
+Fixed with `.menu-sub-accordion[data-state] { display: flex; }` in
+`custom/_aside.scss`, applying to both `open` and `closed`: Radix's
+Presence keeps this node mounted with `data-state="closed"` for the
+duration of the closing transition before actually unmounting it (the
+same exit-animation pattern Dialog/Popover use), and `display: none`
+during that window would freeze the close transition before Radix ever
+saw it play.
+
+**2. `transition: height` looked right on disk but never actually
+animated — traced to Radix's own internal implementation, not the CSS.**
+The first attempt at bug 1's fix paired `display: flex !important` with
+`transition: height 250ms ease-out` and `[data-state='open']
+{ height: var(--radix-collapsible-content-height) }`. It rendered
+correctly and *looked* like it should animate, but every open/close
+snapped straight to the final height with no interpolation. Reading
+`@radix-ui/react-collapsible`'s source
+(`node_modules/@radix-ui/react-collapsible/dist/index.mjs`,
+`CollapsibleContentImpl`) explains why: on every open/close it
+synchronously sets `node.style.transitionDuration = '0s'` and
+`node.style.animationName = 'none'`, calls `getBoundingClientRect()` to
+measure the content (this call is also what forces a synchronous reflow
+between disabling and re-enabling — without it the two style writes
+would just coalesce into one, since both happen in the same layout
+effect before paint), then restores both. That disable → forced-reflow →
+restore dance is specifically what makes an `animation` restart reliably
+(a computed `animation-name` going `none` → a named animation after a
+forced reflow reliably (re)starts it, per spec) — which is exactly the
+pattern Radix's own docs use (`animation: slideDown/slideUp` +
+`@keyframes` reading the `--radix-*-content-height` var). A `transition`
+has no equivalent hook here: with no intervening *painted* frame at the
+old value, there's nothing for it to interpolate from, so the browser
+just resolves directly to the new value. The fix was to follow Radix's
+own pattern instead of fighting it — `animation: kt-menu-accordion-down`
+/ `kt-menu-accordion-up`, keyframed from `0` to
+`var(--radix-collapsible-content-height)`, matching the pattern this
+migration's own earlier notes (see revision history) had originally
+tried and prematurely abandoned in favor of `transition` — that earlier
+abandonment was itself chasing a *different* bug (bug 1, the missing
+`display` override) that happened to make both approaches look equally
+broken in Storybook at the time.
+
+**3. `!important` didn't actually beat `[hidden]`, even with higher
+specificity — a cross-layer `!important` ordering issue, not a
+specificity one.** Bug 1's fix (`display: flex !important`) covered
+core's own non-important `display: none`, but the live app kept the
+accordion content permanently invisible whenever `Collapsible.Content`
+set the native `hidden` attribute in its closed resting state. Tailwind
+ships `[hidden]:where(:not([hidden="until-found"]))
+{ display: none !important; }` in its own preflight, inside
+`@layer base`. Confirmed live via `document.styleSheets` CSSOM
+inspection: Tailwind's compiled `<style>` tag declares
+`@layer theme, base, utilities` (and its own small `@layer bootstrap`)
+well before Metronic's compiled `<link>` stylesheet's own, much larger
+`@layer bootstrap` block is parsed — fixing `base` ahead of `bootstrap`
+in the *whole document's* cascade layer order. Cascade layers reverse
+priority specifically for `!important` declarations: an earlier layer's
+`!important` wins over a later layer's `!important`, regardless of
+selector specificity. `.aside .menu .menu-sub-accordion[data-state]`
+easily outranks the bare `[hidden]` on specificity alone, but specificity
+never even gets compared here — layer order decides it first, and
+`bootstrap` (later) always loses to `base` (earlier) on that axis. There
+is no CSS-only way to out-rank it from inside `bootstrap`; the fix had to
+stop trying to win the fight (see bug 4).
+
+**4. The natural-seeming way to dodge bug 3 — `forceMount` — breaks
+Radix's own height measurement instead.** If `Collapsible.Content` never
+sets `hidden` in the first place, there's no `[hidden]` fight to lose.
+Radix's `Content` accepts a `forceMount` prop for exactly this: content
+stays permanently mounted and CSS alone (`[data-state]`) controls
+visibility. Tried live, and it does dodge bug 3 cleanly — but reading
+`CollapsibleContentImpl` further shows the underlying
+`--radix-collapsible-content-height` custom property is refreshed via
+`heightRef.current = rect.height` inside a layout effect gated on
+`[context.open, present]`, and that new value only reaches the rendered
+`style` prop through a `setIsPresent(present)` call in the *same* effect
+— a real state update, but only when `present`'s value actually changes.
+`forceMount` pins `present` to `true` permanently, so after the very
+first mount `setIsPresent(true)` is a no-op bailout on every subsequent
+toggle: no re-render, so the height var is computed once and then never
+refreshed again. Confirmed live: `content.style.getPropertyValue
+('--radix-collapsible-content-height')` under `forceMount` read empty on
+several toggles that should have re-measured it, and the animation from
+bug 2 snapped for a different reason than before. Reverted `forceMount`;
+kept Radix's default hidden-attribute mount/unmount (which does
+genuinely toggle `present` on every open/close, keeping the height var
+fresh) and paid for it with the `!important` from bug 3 instead — a
+narrower, better-understood cost than losing correct height measurement.
+
+**5. The trigger button shrank to fit its content instead of filling the
+row — also explained two other reported symptoms.** Reported live, with
+a screenshot, as "layout is bit different" and "icons are at the right
+side" (meaning: they weren't). `.menu-link`'s width comes from
+`flex: 0 0 100%` (core/components/menu/_base.scss) — but `flex-basis`
+only does anything when the *parent* is a flex container, and
+`.menu-item` is `display: block`. The old `<a class="menu-link">`
+trigger never noticed, because a plain block-level box fills its block
+parent's width by default regardless of flex properties. `button`
+elements don't get that default: form controls keep their own
+fit-content intrinsic sizing even once `display: flex` is set, unless
+something explicitly stretches them (a real flex/grid parent, or a
+literal `width`) — confirmed live via `getComputedStyle`/
+`getBoundingClientRect`: the `<button>` measured 179px inside a 255px-
+wide `.menu-item`. Once `Collapsible.Trigger` became a real `<button>`
+(this migration), the row silently started shrinking to content width.
+That single narrower box is also what the other two symptoms were:
+the open-state background highlight (sized off this same element) not
+spanning the row, and the funnel/caret icons sitting right after the
+title instead of pinned to the row's right edge — `.menu-title`'s
+`flex-grow: 1` (core SCSS) had no extra width to grow into. Fixed with
+one `width: 100%` on `.aside .menu .menu-item .menu-link` — scoped to
+the sidebar specifically, since `button.menu-link` is also reused by
+`FooterDropdown.tsx` for a horizontal (not full-width) footer item.
+
+**6. The arrow's rotation had no `transition` at all — a second instance
+of the exact bug already fixed once for `.header-menu`.** Reported live,
+same round as bug 5, as the caret rotation snapping instead of
+animating. `.menu-arrow:after`'s `transition` declaration
+(core/components/menu/_base.scss) lives inside `&.show { .menu-link {
+.menu-arrow:after { transition: ...; } } }` — gated behind Metronic's
+own `.show` class, which nothing sets anymore under Radix. This
+migration's own `[data-state]` override only ever set `transform`, on
+the (wrong) assumption that core "already carries its own transition" —
+it doesn't, for anything Radix drives. The exact same bug shape, for the
+exact same reason, was already found and fixed for `.header-menu
+.menu-item` earlier in this migration (`custom/_menu.scss`, see its own
+comment there) — missed here because this file's rule was written
+before that fix landed and never revisited. Fixed the same way: added
+`transition: get($menu, accordion, arrow-transition);` to an
+always-present `&:not(.menu-dropdown) > .menu-link .menu-arrow:after`
+base rule in `custom/_aside.scss`, not gated behind any `[data-state]`
+condition.
+
+Also verified live afterward, once all six fixes above were in place —
+this time with stronger evidence than earlier rounds in this same
+session. The Claude-in-Chrome automation tab used throughout reported
+`document.hidden === true` regardless of click/focus activity
+(confirmed via `document.visibilityState`), which made JS-based
+animation-timing diagnostics (`getAnimations()`, `getBoundingClientRect()`
+sampled over `setTimeout`) unreliable — Chrome throttles animation
+rendering for hidden tabs, and those diagnostics kept reporting instant
+snaps even for changes that, per source-level analysis, should animate.
+Screenshots turned out to be the reliable channel instead: CDP forces a
+real paint for each capture regardless of tab visibility. A burst of
+sequential screenshots across an open/close click showed genuinely
+different intermediate heights (one resource item visible, then two,
+then the full three) rather than an instant jump, and a tightly zoomed
+burst on the arrow specifically caught it mid-rotation between its
+closed and open icon shapes — direct visual proof both animations
+genuinely interpolate, not just a plausible reading of the CSS. Also
+confirmed: the open-state background highlight and funnel/caret icon
+alignment now match the reference `Administration` row, sibling-
+exclusivity holds at both the top level (Resources vs. Calls) and nested
+level (Storage vs. Compute inside Resources), and the `disabled` case
+renders fully static markup with no `Collapsible`, no button, no
+`data-state`.
+
+**Not migrated, deliberately**: `MenuComponent.ts` itself stays —
+`OfferingsPanel.tsx` (inside the unrelated `MarketplaceTrigger` modal)
+still has a live `data-kt-menu-dismiss="true"` that it actively reads,
+and `MasterInit.tsx`/`MasterLayout.tsx`'s bootstrap/reinit calls stay for
+that reason. `Sidebar.tsx`'s other Metronic widgets — `DrawerComponent`
+(mobile drawer), `ScrollComponent` (custom scrollbar), `ToggleComponent`
+(minimize toggle) — are untouched, a different concern from the menu.
+
 ## `packages/ui`: portable Tailwind/Radix primitives
 
 Holds the pieces of `BaseButton`'s dependency graph with zero Bootstrap
