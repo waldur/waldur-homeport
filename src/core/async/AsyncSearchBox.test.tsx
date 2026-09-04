@@ -13,7 +13,7 @@ const AnyAsyncSearchBox = AsyncSearchBox as any;
 
 /**
  * Regression coverage for the Radix conversion: the search results panel
- * used to be a Metronic data-kt-menu dropdown, always mounted (hidden via
+ * used to be a Metronic-driven dropdown, always mounted (hidden via
  * CSS) with an IntersectionObserver-based lazy-fetch. It's a Radix
  * Popover now, only mounted once open. The one behaviour worth pinning
  * down is that a Popover (not a DropdownMenu) is the right choice here:

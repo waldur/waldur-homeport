@@ -38,8 +38,8 @@ import { DropdownActionItemType } from './types';
  * That is not a dead end: `.dropdown-menu`/`.dropdown-item` come from
  * Bootstrap's own _dropdown.scss, *not* from Metronic's menu SCSS
  * (src/metronic/sass/core/components/menu/), so keeping them here does not
- * block deleting that ~1345-line menu stylesheet once the `data-kt-menu`
- * popups migrate. The two are unrelated CSS.
+ * block deleting that ~1345-line menu stylesheet once the remaining
+ * Metronic-JS-driven popups migrate. The two are unrelated CSS.
  *
  * The measured Bootstrap values this preserves are recorded in
  * docs/tailwind-shadcn-migration-notes.md, so the eventual restyle has a

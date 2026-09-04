@@ -23,10 +23,10 @@ beforeAll(() => {
  * Regression coverage for the Metronic -> Radix Collapsible conversion:
  * MenuAccordion used to have no React state of its own at all —
  * click/open/close was entirely driven by Metronic's own imperative JS
- * reading `data-kt-menu-trigger`. This pins down that a click on the
- * header still toggles the submenu's presence, and that the `disabled`
- * case stays fully static (no trigger, no children ever rendered) exactly
- * as before.
+ * reading its menu-trigger attribute. This pins down that a click on
+ * the header still toggles the submenu's presence, and that the
+ * `disabled` case stays fully static (no trigger, no children ever
+ * rendered) exactly as before.
  */
 describe('MenuAccordion', () => {
   it('toggles its content open and closed on click', async () => {

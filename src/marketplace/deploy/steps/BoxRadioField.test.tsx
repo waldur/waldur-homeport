@@ -6,9 +6,9 @@ import { BoxRadioField } from './BoxRadioField';
 
 /**
  * Regression coverage for the Radix conversion: the version-options
- * flyout (each choice with `options`) used to be a Metronic
- * data-kt-menu dropdown nested inside a <button> — a real dropdown
- * <div> nested inside another interactive element. It's a NavMenu
+ * flyout (each choice with `options`) used to be a Metronic-driven
+ * dropdown nested inside a <button> — a real dropdown <div> nested
+ * inside another interactive element. It's a NavMenu
  * (Radix DropdownMenu) now, composed via asChild onto the existing
  * inner <div> rather than Radix's own default <button> Trigger, to
  * avoid nesting a button inside a button.

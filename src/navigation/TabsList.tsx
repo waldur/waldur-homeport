@@ -63,9 +63,9 @@ const findActiveTab = (tabs, router) => {
 
 /**
  * The parent-tab-with-children case: a top-level trigger whose original
- * `data-kt-menu-trigger="{default: 'click', lg: 'hover'}"` opened either
- * an inline accordion (below `lg`) or a floating dropdown (`lg`+),
- * per Metronic's own responsive CSS (`.menu-lg-down-accordion`,
+ * Metronic trigger config opened either an inline accordion (below `lg`)
+ * on click or a floating dropdown (`lg`+) on hover, per Metronic's own
+ * responsive CSS (`.menu-lg-down-accordion`,
  * `.menu-sub-down-accordion.menu-sub-dropdown`).
  *
  * Both modes collapse to the same Radix dropdown here — a deliberate

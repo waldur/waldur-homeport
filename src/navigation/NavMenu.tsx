@@ -7,17 +7,16 @@ import { GRID_BREAKPOINTS } from '@/core/constants';
 
 /**
  * Radix-driven replacement for the header/footer/sidebar-popup menus built
- * on Metronic's own imperative `data-kt-menu-*` system (driven by
- * Popper.js directly, now fully removed) — a *different* system from
- * `ActionsDropdown.tsx`, which
- * replaces react-bootstrap's `<Dropdown>` and wears Bootstrap's
- * `.dropdown-menu`/`.dropdown-item` classes. These wear Metronic's own
+ * on Metronic's own imperative menu-trigger system (driven by Popper.js
+ * directly, now fully removed) — a *different* system from
+ * `ActionsDropdown.tsx`, which replaces react-bootstrap's `<Dropdown>`
+ * and wears Bootstrap's `.dropdown-menu`/`.dropdown-item` classes. These
+ * wear Metronic's own
  * `.menu`/`.menu-sub`/`.menu-sub-dropdown`/`.menu-item`/`.menu-link`
  * classes (`src/metronic/sass/core/components/menu/`), which is a
  * separate, larger stylesheet also used by the sidebar's *accordion* tree
- * (`.menu-sub-accordion` — out of scope here; that's static in-flow
- * expand/collapse navigation, not a floating popup, and belongs to a
- * different Radix primitive — Collapsible/Accordion — entirely).
+ * (`.menu-sub-accordion` — a different Radix primitive, Collapsible, not
+ * this file's DropdownMenu; see `src/navigation/sidebar/MenuAccordion.tsx`).
  *
  * Same "one axis at a time" principle as ActionsDropdown.tsx: Radix
  * supplies behaviour/positioning/accessibility, the existing compiled
@@ -79,12 +78,12 @@ const PLACEMENT_TO_SIDE_ALIGN = (
 };
 
 /**
- * Metronic's `data-kt-menu-trigger="{default: 'click', lg: 'hover'}"`
- * pattern — a *top-level* trigger that opens on click below the `lg`
- * breakpoint and on hover at `lg` and up. Genuinely different from a
- * Sub's hover-open (which Radix's SubTrigger supports natively): this is
- * a plain Root/Trigger, and Radix's DropdownMenuTrigger only ever opens
- * on click/keyboard, with no built-in hover mode. Reproduced by hand
+ * Metronic's original responsive trigger config for these rows — click
+ * below the `lg` breakpoint, hover at `lg` and up — reproduced here for
+ * a *top-level* trigger. Genuinely different from a Sub's hover-open
+ * (which Radix's SubTrigger supports natively): this is a plain
+ * Root/Trigger, and Radix's DropdownMenuTrigger only ever opens on
+ * click/keyboard, with no built-in hover mode. Reproduced by hand
  * instead: `open` is lifted and controlled, and the returned
  * `hoverHandlers` need spreading onto *both* the trigger and the content
  * (leaving off either one closes the menu the instant the pointer
@@ -93,17 +92,16 @@ const PLACEMENT_TO_SIDE_ALIGN = (
  * isn't invented: it's Metronic's own imperative menu JS's default
  * (`defaultMenuOptions.dropdown.hoverTimeout`, from the now-deleted
  * class that used to drive this), ported so a pointer momentarily
- * leaving the panel while crossing back toward the trigger
- * doesn't visibly flicker the menu shut. Shared by FooterDropdown.tsx and
+ * leaving the panel while crossing back toward the trigger doesn't
+ * visibly flicker the menu shut. Shared by FooterDropdown.tsx and
  * TabsList.tsx — both real, independent top-level triggers with this
- * exact original attribute value, not a coincidence.
+ * exact original trigger config, not a coincidence.
  *
  * `requireDesktop` (default `true`) gates hover to the `lg`+ breakpoint,
- * matching that responsive `{default: 'click', lg: 'hover'}` value. Pass
- * `false` for a trigger whose original `data-kt-menu-trigger` was the
- * plain string `"hover"` with no responsive variant at all — hover is
- * then unconditional, at every viewport width (PageBarTabs.tsx's
- * in-page section tabs).
+ * matching that click-below/hover-at-`lg`+ config. Pass `false` for a
+ * trigger whose original config was unconditionally hover, no
+ * responsive variant at all — hover is then unconditional, at every
+ * viewport width (PageBarTabs.tsx's in-page section tabs).
  */
 export function useHoverMenu(requireDesktop = true) {
   const isDesktopQuery = useMediaQuery({ minWidth: GRID_BREAKPOINTS.lg });
@@ -165,7 +163,7 @@ export function NavMenuContent({
   sideOffset = 2,
   ...props
 }: ComponentPropsWithoutRef<typeof RadixDropdownMenu.Content> & {
-  /** Same placement strings `data-kt-menu-placement` used, e.g.
+  /** Same placement strings Metronic's own placement config used, e.g.
    * `"bottom-start"`, `"left-start"`, `"top-end"`. */
   placement?: string;
 }) {
@@ -187,10 +185,10 @@ export function NavMenuContent({
 export const NavMenuSub = RadixDropdownMenu.Sub;
 
 /**
- * A row that opens a nested submenu — Metronic's `data-kt-menu-trigger="hover"`
- * pattern (LanguageSelectorDropdown, UserDropdownMenuItems' per-item
- * children). Radix's SubTrigger already opens on hover *or* click by
- * default, matching that behaviour with no extra wiring.
+ * A row that opens a nested submenu — Metronic's original hover-to-open
+ * trigger config (LanguageSelectorDropdown, UserDropdownMenuItems'
+ * per-item children). Radix's SubTrigger already opens on hover *or*
+ * click by default, matching that behaviour with no extra wiring.
  *
  * `arrow` defaults to false: neither of this migration's two real
  * call sites rendered Metronic's `.menu-arrow` chevron in their original

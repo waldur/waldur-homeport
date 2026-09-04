@@ -22,10 +22,11 @@ interface FooterDropdownProps {
  *
  * Each FooterDropdown is its own independent Radix Root — there is no
  * shared parent menu to nest a Sub under; FooterLinks.tsx's own
- * `data-kt-menu="true"` on its wrapping `<ul>` only ever coordinated
- * Metronic's *global* click-outside/hover handling across these
- * independent instances, which Radix does per-instance on its own, so
- * that attribute is dropped there rather than carried forward unused.
+ * "this is a Metronic menu group" marker on its wrapping `<ul>` only
+ * ever coordinated Metronic's *global* click-outside/hover handling
+ * across these independent instances, which Radix does per-instance on
+ * its own, so that attribute is dropped there rather than carried
+ * forward unused.
  *
  * Hover-to-open at `lg`+ is `useHoverMenu` (@/navigation/NavMenu) — see
  * that hook's own comment for why a top-level trigger needs this by hand.

@@ -132,9 +132,9 @@ describe('TableSidebarFilterValues', () => {
 
 /**
  * Regression coverage for the Radix conversion: TableMenuFilterItem
- * (filterPosition="menu") used to rely on Metronic's own
- * data-kt-menu-trigger flyout and a MutationObserver watching for its
- * `.show` class. Both are gone now — this exercises the real
+ * (filterPosition="menu") used to rely on Metronic's own imperative
+ * flyout trigger and a MutationObserver watching for its `.show` class.
+ * Both are gone now — this exercises the real
  * StringFilter -> withTableFilter -> TableFilterItem chain, unmocked,
  * the same way ActionsPopoverComponent's own typeahead fix was verified
  * earlier in this migration: type a full word into the flyout's input

@@ -39,12 +39,12 @@ interface PageBarTabProps {
 }
 
 /**
- * The subTabs branch's trigger was `data-kt-menu-trigger="hover"` with no
- * responsive `{default: 'click', ...}` variant — unlike FooterDropdown.tsx
- * / TabsList.tsx's responsive triggers, hover here is unconditional at
- * every viewport width, so useHoverMenu(false) skips its `lg`+ gate. The
- * trigger's own onClick (scrolling to the section) is independent of
- * dropdown state and unaffected either way.
+ * The subTabs branch's trigger was originally unconditionally
+ * hover-to-open, with no responsive click/hover variant — unlike
+ * FooterDropdown.tsx / TabsList.tsx's responsive triggers, hover here is
+ * unconditional at every viewport width, so useHoverMenu(false) skips
+ * its `lg`+ gate. The trigger's own onClick (scrolling to the section)
+ * is independent of dropdown state and unaffected either way.
  */
 export const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
   const { open, setOpen, hoverHandlers } = useHoverMenu(false);

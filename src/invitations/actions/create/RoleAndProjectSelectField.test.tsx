@@ -9,8 +9,8 @@ import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
  * Regression coverage for the Radix conversion: this popup used
  * Metronic's own imperative menu JS throughout to close (a global
  * "hide all dropdowns" call), and a real search input inside a nested
- * data-kt-menu flyout for the project sub-list. It's a controlled Radix
- * Popover now (open/close threaded through the `close` callback
+ * Metronic-driven flyout for the project sub-list. It's a controlled
+ * Radix Popover now (open/close threaded through the `close` callback
  * instead of that global call), with the project search staying a
  * plain input — no Radix Menu collection anywhere in this tree to steal
  * its keystrokes.
