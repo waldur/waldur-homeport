@@ -1,7 +1,7 @@
 import { useMediaDeviceSelect } from '@livekit/components-react';
 import { GearSixIcon } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import { FC } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 import { Select } from '@/form/select/Select';
 import { translate } from '@/i18n';
@@ -62,18 +62,23 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
   ];
 
   return (
-    <OverlayTrigger
-      trigger="click"
-      rootClose
-      transition={false}
-      placement="top"
-      container={container ?? undefined}
-      overlay={
-        <Popover
-          id="call-device-settings"
-          className="call-device-settings-popover"
+    <RadixPopover.Root modal={false}>
+      <RadixPopover.Trigger asChild>
+        <button
+          type="button"
+          className="lk-button"
+          title={translate('Audio & video settings')}
         >
-          <Popover.Body className="call-device-settings">
+          <GearSixIcon size={20} weight="bold" />
+        </button>
+      </RadixPopover.Trigger>
+      <RadixPopover.Portal container={container ?? undefined}>
+        <RadixPopover.Content
+          side="top"
+          sideOffset={2}
+          className="popover call-device-settings-popover"
+        >
+          <div className="popover-body call-device-settings">
             {kinds.map(({ kind, label }) => (
               <DeviceSelect
                 key={kind}
@@ -82,17 +87,9 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
                 menuTarget={container}
               />
             ))}
-          </Popover.Body>
-        </Popover>
-      }
-    >
-      <button
-        type="button"
-        className="lk-button"
-        title={translate('Audio & video settings')}
-      >
-        <GearSixIcon size={20} weight="bold" />
-      </button>
-    </OverlayTrigger>
+          </div>
+        </RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
   );
 };
