@@ -52,6 +52,14 @@ class JsonStorageManager<T = never> {
 
 export const AuthTokenStorage = new StringStorageManager('waldur/auth/token');
 
+// When the token in AuthTokenStorage stops being accepted, as an ISO 8601
+// string. Recorded from /users/me/ so public/boot-redirect.js can tell a live
+// session from a stale token before the application loads; see
+// UsersService.recordTokenExpiry for when it is written.
+export const AuthTokenExpiryStorage = new StringStorageManager(
+  'waldur/auth/token_expires_at',
+);
+
 export const AuthMethodStorage = new StringStorageManager('waldur/auth/method');
 
 export const RedirectStorage = new JsonStorageManager<{

@@ -31,6 +31,7 @@ vi.mock('@/store/store', () => ({
 
 vi.mock('@/core/StorageManager', () => ({
   ImpersonationStorage: { set: vi.fn(), get: vi.fn(), remove: vi.fn() },
+  AuthTokenExpiryStorage: { set: vi.fn(), get: vi.fn(), remove: vi.fn() },
 }));
 
 vi.mock('@/user/useProfileCompleteness', () => ({
@@ -40,6 +41,10 @@ vi.mock('@/user/useProfileCompleteness', () => ({
 }));
 
 import { ENV } from '@/core/config';
+import {
+  AuthTokenExpiryStorage,
+  ImpersonationStorage,
+} from '@/core/StorageManager';
 
 import {
   isUserValid,
@@ -49,6 +54,7 @@ import {
 } from './UsersService';
 
 const alice = { uuid: 'u1', username: 'alice' };
+const EXPIRES_AT = '2026-09-05T10:00:00Z';
 const roles = [{ uuid: 'r1', name: 'owner' }];
 
 /** A promise the test resolves by hand, to hold a request "in flight". */
@@ -159,6 +165,55 @@ describe('UsersService.refreshCurrentUser', () => {
 
     await Promise.all([plain, impersonated]);
     expect(usersMeRetrieveMock).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('UsersService token expiry', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    resetUserCache();
+    ENV.roles = [];
+    getRolesMock.mockResolvedValue(roles);
+    usersMeRetrieveMock.mockResolvedValue({
+      data: { ...alice, token_expires_at: EXPIRES_AT },
+    });
+  });
+
+  it('records the expiry the backend reports', async () => {
+    await UsersService.refreshCurrentUser();
+    expect(AuthTokenExpiryStorage.set).toHaveBeenCalledWith(EXPIRES_AT);
+  });
+
+  it('drops it when the payload carries none', async () => {
+    usersMeRetrieveMock.mockResolvedValue({ data: alice });
+    await UsersService.refreshCurrentUser();
+    expect(AuthTokenExpiryStorage.set).not.toHaveBeenCalled();
+    expect(AuthTokenExpiryStorage.remove).toHaveBeenCalled();
+  });
+
+  it('drops it while impersonating, when it describes the wrong account', async () => {
+    vi.mocked(ImpersonationStorage.get).mockReturnValue('someone-else');
+    await UsersService.refreshCurrentUser();
+    expect(AuthTokenExpiryStorage.set).not.toHaveBeenCalled();
+    expect(AuthTokenExpiryStorage.remove).toHaveBeenCalled();
+  });
+
+  it('drops it in OIDC access-token mode, where it describes the wrong token', async () => {
+    const plugins = ENV.plugins;
+    ENV.plugins = {
+      ...plugins,
+      WALDUR_CORE: {
+        ...plugins?.WALDUR_CORE,
+        OIDC_ACCESS_TOKEN_ENABLED: true,
+      },
+    } as any;
+    try {
+      await UsersService.refreshCurrentUser();
+      expect(AuthTokenExpiryStorage.set).not.toHaveBeenCalled();
+      expect(AuthTokenExpiryStorage.remove).toHaveBeenCalled();
+    } finally {
+      ENV.plugins = plugins;
+    }
   });
 });
 

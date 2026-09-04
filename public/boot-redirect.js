@@ -17,9 +17,9 @@
 // Whether a session already exists is decided here rather than by the
 // backend, because the token lives in web storage under the same key the
 // application's own isAuthenticated() reads - and the same key in OIDC
-// access-token mode. A token that is present but stale is not detected: the
-// application boots, its first request answers 401, and the usual expiry path
-// takes over, exactly as it does today.
+// access-token mode. A token whose recorded expiry has passed counts as no
+// session, so a visitor returning after one lapsed takes the fast path rather
+// than loading the whole app to be met with a 401.
 //
 // Everything else (deep links, invitations, an existing session) falls
 // through to the application, whose LandingPage keeps the same redirect as a
@@ -35,6 +35,30 @@
       // Blocked cookies and partitioned iframes throw on the accessor itself.
       return null;
     }
+  }
+
+  // A token on its own is not a session: it may have expired while the tab was
+  // closed. The application records the expiry it was told by /users/me/, and
+  // an expired one is treated as no session at all, so the visitor takes the
+  // fast path instead of loading the whole app to be met with a 401.
+  //
+  // No recorded expiry means the value could not be trusted (impersonation,
+  // OIDC access-token mode) or was never written, so any token counts as live.
+  //
+  // A session is only given up on once it is clearly past its expiry, because
+  // the two mistakes are not equal. Believing a dead token costs one slow
+  // load, which is what happens today; believing a live one dead sends a
+  // signed-in visitor to the identity provider for no reason. So a clock up to
+  // a minute fast, and the backend's habit of sliding the expiry forward as
+  // the user browses, both fall on the harmless side.
+  function sessionLooksLive(storageName) {
+    if (!stored(storageName, 'waldur/auth/token')) {
+      return false;
+    }
+    var expiresAt = Date.parse(
+      stored(storageName, 'waldur/auth/token_expires_at') || '',
+    );
+    return isNaN(expiresAt) || Date.now() < expiresAt + 60000;
   }
 
   function attribute(selector, name) {
@@ -57,10 +81,7 @@
     return;
   }
 
-  if (
-    stored('localStorage', 'waldur/auth/token') ||
-    stored('sessionStorage', 'waldur/auth/token')
-  ) {
+  if (sessionLooksLive('localStorage') || sessionLooksLive('sessionStorage')) {
     return;
   }
 
