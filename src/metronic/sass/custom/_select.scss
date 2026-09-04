@@ -33,7 +33,7 @@
       &--is-disabled {
         background-color: $bg-disabled;
         .metronic-select__placeholder {
-          color: $text-disabled;
+          color: $text-disabled !important;
         }
       }
     }
@@ -44,12 +44,17 @@
       padding-left: calc($input-padding-x - 2px);
     }
 
+    // Forced for the same reason as the control above: react-select paints the
+    // placeholder from `neutral50` and the indicator from `neutral20` in its
+    // own unlayered styles, which beat `@layer bootstrap`. Left alone they
+    // render react-select's greys in light mode and the brand-tinted greens
+    // from theme.ts's DARK_COLORS in dark mode, instead of these tokens.
     &__placeholder {
-      color: $text-placeholder;
+      color: $text-placeholder !important;
     }
 
     &__indicator {
-      color: $fg-quinary;
+      color: $fg-quinary !important;
 
       &-separator {
         display: none;

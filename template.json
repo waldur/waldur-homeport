@@ -441,9 +441,19 @@
       "feature_area": "plan"
     }
   },
+  "1 organization": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "1 star": {
     "context": {
       "feature_area": "create-review"
+    }
+  },
+  "1 user": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "10 (light load)": {
@@ -19732,6 +19742,13 @@
       "feature_area": "support"
     }
   },
+  "Fill in the role details and select at least one permission.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "roles",
+      "action_type": "create"
+    }
+  },
   "Fill the template with your organization details, then upload it in the next step.": {
     "context": {
       "feature_area": "import"
@@ -20472,14 +20489,14 @@
       "feature_area": "plan"
     }
   },
-  "Full Hero Overlay": {
+  "Full": {
     "context": {
       "primary_ui_type": "label"
     }
   },
-  "Full access": {
+  "Full Hero Overlay": {
     "context": {
-      "feature_area": "roles"
+      "primary_ui_type": "label"
     }
   },
   "Full description": {
@@ -21322,6 +21339,27 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "provider"
+    }
+  },
+  "Held by {users} across {organizations}.": {
+    "context": {
+      "variables": {
+        "users": {
+          "type": "unknown"
+        },
+        "organizations": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Held by {users}.": {
+    "context": {
+      "variables": {
+        "users": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Hello": {
@@ -29432,11 +29470,6 @@
       "feature_area": "assignments"
     }
   },
-  "No access": {
-    "context": {
-      "feature_area": "roles"
-    }
-  },
   "No access info.": {},
   "No access subnets found.": {
     "context": {
@@ -30421,9 +30454,19 @@
       "feature_area": "views"
     }
   },
+  "No permission matches this search.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "No permissions data.": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "No permissions found": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "No personal identity fields are enabled.": {
@@ -34359,9 +34402,9 @@
       "feature_area": "update"
     }
   },
-  "Partial access": {
+  "Partial": {
     "context": {
-      "feature_area": "roles"
+      "primary_ui_type": "label"
     }
   },
   "Partial outage": {},
@@ -44757,7 +44800,7 @@
   },
   "Search...": {
     "context": {
-      "feature_area": "integration"
+      "feature_area": "roles"
     }
   },
   "Search…": {
@@ -45181,7 +45224,7 @@
   },
   "Select all": {
     "context": {
-      "feature_area": "site-agent"
+      "feature_area": "roles"
     }
   },
   "Select all visible": {
@@ -45262,6 +45305,11 @@
   "Select at least one permission above to enable bindings.": {
     "context": {
       "feature_area": "personal-access-tokens"
+    }
+  },
+  "Select at least one permission.": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "Select available weekdays": {
@@ -50451,11 +50499,6 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "compliance"
-    }
-  },
-  "The code of an organization role is fixed; only its name and permissions can be changed.": {
-    "context": {
-      "feature_area": "roles"
     }
   },
   "The compliance checklist cannot be changed once proposals exist for this call.": {
@@ -63739,11 +63782,6 @@
       "feature_area": "profiles"
     }
   },
-  "e.g. Researcher": {
-    "context": {
-      "feature_area": "roles"
-    }
-  },
   "e.g. SECRET_TOKEN": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -65761,7 +65799,7 @@
           "type": "number"
         }
       },
-      "feature_area": "data-access"
+      "feature_area": "roles"
     }
   },
   "{count} pending changes": {
@@ -66207,7 +66245,7 @@
           "type": "number"
         }
       },
-      "feature_area": "create"
+      "feature_area": "roles"
     }
   },
   "{count} {key} reactions — click to {verb} yours": {
@@ -67959,6 +67997,21 @@
         }
       },
       "feature_area": "database-stats"
+    }
+  },
+  "{touched}/{total} groups · {count} permissions": {
+    "context": {
+      "variables": {
+        "touched": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        },
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{type} script got an error": {
