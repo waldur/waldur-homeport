@@ -288,18 +288,39 @@
       }
     }
 
+    // --menu-accordion-height, not --radix-collapsible-content-height:
+    // the `!important` fix above solves the animation getting suppressed,
+    // but a *second*, separate bug lives one level deeper — Radix's own
+    // height variable is measured into a plain `useRef`, so the
+    // measurement only ever reaches the DOM if something else happens to
+    // re-render the component afterward, which nothing reliably does on
+    // a component's genuine first mount (every open, here, since Content
+    // isn't forceMount'ed — see MenuAccordion.tsx). Animating `to` an
+    // unset custom property is a no-op, which looked identical to the
+    // animation-suppression bug above from the outside: no visible
+    // movement. MenuAccordion.tsx now measures its own
+    // `--menu-accordion-height` (via scrollHeight + ResizeObserver, into
+    // real state) specifically to sidestep this — see its own comment for
+    // the full trace. Radix's own var is kept as a fallback only for the
+    // one-frame gap before that measurement's effect has run.
     @keyframes kt-menu-accordion-down {
       from {
         height: 0;
       }
       to {
-        height: var(--radix-collapsible-content-height);
+        height: var(
+          --menu-accordion-height,
+          var(--radix-collapsible-content-height)
+        );
       }
     }
 
     @keyframes kt-menu-accordion-up {
       from {
-        height: var(--radix-collapsible-content-height);
+        height: var(
+          --menu-accordion-height,
+          var(--radix-collapsible-content-height)
+        );
       }
       to {
         height: 0;

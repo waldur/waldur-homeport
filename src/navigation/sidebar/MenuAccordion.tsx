@@ -1,6 +1,15 @@
 import * as Collapsible from '@radix-ui/react-collapsible';
 import classNames from 'classnames';
-import { FC, PropsWithChildren, ReactNode, useId } from 'react';
+import {
+  CSSProperties,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { Tip } from '@/core/Tooltip';
 
@@ -50,6 +59,27 @@ interface MenuAccordionProps {
  * the slide animation stopped animating. Keeping the default toggling
  * costs an `!important` in the CSS instead (a narrower, better-understood
  * problem) rather than losing correct height measurement altogether.
+ *
+ * `--menu-accordion-height` (below) exists because Radix's own
+ * `--radix-collapsible-content-height` turns out unreliable on exactly
+ * the transition that matters most: the very first open of a given
+ * mount. `CollapsibleContentImpl` (node_modules/@radix-ui/react-collapsible)
+ * measures height into a plain `useRef`, not `useState` — updating a ref
+ * doesn't trigger a re-render, so that measurement only ever reaches the
+ * DOM if *something else* re-renders the component afterward. The only
+ * candidate is its own `setIsPresent(present)` call in that same effect,
+ * which is a no-op bailout the very first time (the state already equals
+ * `present`, since `useState(present)` initialized to it) — so on a
+ * fresh mount, the height var never gets attached to the DOM at all, and
+ * the `@keyframes` below animate to an unset custom property, i.e. no
+ * visible movement. Confirmed live via getAnimations(): a 250ms animation
+ * completing in ~1-2ms on first open, but correctly over the full 250ms
+ * on every open after (once something incidental has forced a second
+ * render). Measuring `scrollHeight` ourselves — which reports the full
+ * content height regardless of the element's own animated/constrained
+ * `height`, so no extra "measure unconstrained" step is needed — into
+ * real `useState` sidesteps the bug entirely, on every open, not just
+ * the second one onward.
  */
 export const MenuAccordion: FC<PropsWithChildren<MenuAccordionProps>> = (
   props,
@@ -57,6 +87,39 @@ export const MenuAccordion: FC<PropsWithChildren<MenuAccordionProps>> = (
   const { disabled = false, disabledTooltip, open, onOpenChange } = props;
   const generatedId = useId();
   const itemId = props.itemId ?? generatedId;
+
+  // See the class-level comment above: bypasses
+  // --radix-collapsible-content-height's unreliable-on-first-open bug by
+  // measuring this ourselves, into real state (which re-renders), rather
+  // than trusting Radix's own ref-based (silently non-re-rendering)
+  // measurement.
+  //
+  // Deps `[open]`, not `[]`: MenuAccordion itself (unlike
+  // Collapsible.Content) stays mounted across the whole open/closed
+  // lifecycle — CallPublicMenu/ResourcesMenu always render it, toggling
+  // just the `open` prop. An empty deps array runs this exactly once, on
+  // *MenuAccordion's* mount, which happens while closed (before the
+  // sidebar's ever been touched) — `contentRef.current` is null at that
+  // one and only run, the early return fires, and the ResizeObserver
+  // this sets up never happens at all, for the component's entire
+  // lifetime. Re-running whenever `open` changes re-attaches it to
+  // whatever real node exists (or bails cleanly when there isn't one).
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState<number>();
+  useLayoutEffect(() => {
+    const node = contentRef.current;
+    if (!node) return;
+    setContentHeight(node.scrollHeight);
+    const observer = new ResizeObserver(() =>
+      setContentHeight(node.scrollHeight),
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [open]);
+  const contentStyle =
+    contentHeight !== undefined
+      ? ({ '--menu-accordion-height': `${contentHeight}px` } as CSSProperties)
+      : undefined;
 
   const headerContent = (
     <>
@@ -92,7 +155,11 @@ export const MenuAccordion: FC<PropsWithChildren<MenuAccordionProps>> = (
         <Collapsible.Trigger className="menu-link">
           {headerContent}
         </Collapsible.Trigger>
-        <Collapsible.Content className="menu-sub menu-sub-accordion menu-rounded-0">
+        <Collapsible.Content
+          ref={contentRef}
+          className="menu-sub menu-sub-accordion menu-rounded-0"
+          style={contentStyle}
+        >
           {props.children}
         </Collapsible.Content>
       </div>
