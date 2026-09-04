@@ -335,6 +335,29 @@ Update to latest version in package.json, then install
 - Optimized asset loading (images, fonts, SVG)
 - Bundle analysis and optimization tools
 
+### Cold-start budget
+
+Everything statically reachable from `src/index.tsx` is downloaded before the
+first paint, so the entry graph is kept deliberately small:
+
+- `public/boot-redirect.js` runs before the module preloads and sends anonymous
+  visitors of `/` and `/login/` to `/api-auth/default/init/`, where the backend
+  resolves `DEFAULT_IDP` itself. It probes that endpoint with `probe=1` first
+  and navigates only on the `204` a probe-aware backend answers, so a backend
+  without a default provider, without the route, or unreachable leaves the
+  visitor on the application's own login page. Whether a session exists is
+  decided from web storage in the script, since only the browser can see it.
+- `yarn build:check` (`scripts/bundle-budget.mjs`, run by the `Check cold-path
+  budget` CI job on every MR) fails when the entry script plus its `modulepreload`s exceed the
+  gzip budget, or when echarts, matrix-js-sdk, livekit-client, monaco-editor,
+  @mdxeditor/editor or mermaid appear in that set. Each of those is loaded
+  lazily on purpose: `reporting/screens.ts` keeps the route flags chart-free,
+  `MatrixRoot` lazy-loads `MatrixProviders`, `MatrixCallHost` lazy-loads the
+  call view, the `@/form` barrel lazy-loads `MonacoGroup`/`MarkdownGroup`, and
+  the assistant registry lazy-loads the mermaid block.
+- `docker/nginx-tpl.conf` serves `assets/` as immutable for a year with
+  build-time precompressed gzip; `index.html` is never cached.
+
 ## Asset Management
 
 - SVG files processed through SVGR 8.1.0 plugin for React components

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { FC, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -104,7 +104,7 @@ describe('MatrixCallHost', () => {
     expect(screen.queryByTestId('call-view')).toBeNull();
   });
 
-  it('portals MatrixCallView into the registered slot when its roomId matches callRoomId', () => {
+  it('portals MatrixCallView into the registered slot when its roomId matches callRoomId', async () => {
     h.callState = 'connected';
     h.callRoomId = '!abc:s';
     h.callRoomUuid = 'uuid-1';
@@ -116,24 +116,29 @@ describe('MatrixCallHost', () => {
       { wrapper },
     );
     const slot = screen.getByTestId('external-slot');
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(slot.querySelector('[data-testid="call-view"]')).not.toBeNull();
+    // The call view is a lazy chunk; it lands after the first paint.
+    await waitFor(() =>
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(slot.querySelector('[data-testid="call-view"]')).not.toBeNull(),
+    );
     // Widget chrome should NOT be visible when slot matches.
     expect(screen.queryByText('Project Alpha')).toBeNull();
   });
 
-  it('portals MatrixCallView into the floating widget when no slot matches', () => {
+  it('portals MatrixCallView into the floating widget when no slot matches', async () => {
     h.callState = 'connected';
     h.callRoomId = '!abc:s';
     h.callRoomUuid = 'uuid-1';
     render(<MatrixCallHost />, { wrapper });
     expect(screen.getByText('Project Alpha')).toBeInTheDocument();
     const target = screen.getByTestId('call-widget-portal-target');
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(target.querySelector('[data-testid="call-view"]')).not.toBeNull();
+    await waitFor(() =>
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(target.querySelector('[data-testid="call-view"]')).not.toBeNull(),
+    );
   });
 
-  it('keeps MatrixCallView mounted across target switches', () => {
+  it('keeps MatrixCallView mounted across target switches', async () => {
     h.callState = 'connected';
     h.callRoomId = '!abc:s';
     h.callRoomUuid = 'uuid-1';
@@ -146,8 +151,9 @@ describe('MatrixCallHost', () => {
       </>
     );
     const { rerender } = render(<Harness withSlot={false} />, { wrapper });
-    expect(h.callViewMountCount).toBe(1);
+    await waitFor(() => expect(h.callViewMountCount).toBe(1));
     rerender(<Harness withSlot={true} />);
+    await act(async () => {});
     expect(h.callViewMountCount).toBe(1);
   });
 });

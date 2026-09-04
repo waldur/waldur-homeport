@@ -1,5 +1,7 @@
 import {
   FC,
+  lazy,
+  Suspense,
   useCallback,
   useContext,
   useEffect,
@@ -15,9 +17,12 @@ import { useAllMatrixRooms } from '../useAllMatrixRooms';
 
 import { MatrixCallFloatingWidget } from './MatrixCallFloatingWidget';
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
-import MatrixCallView from './MatrixCallView';
 import { isCallFullscreenActive } from './useFullscreen';
 import { useMatrixCall } from './useMatrixCall';
+
+// The call view is the only consumer of livekit-client; fetched on the first
+// call rather than shipped to everyone who has chat enabled.
+const MatrixCallView = lazy(() => import('./MatrixCallView'));
 
 // Copy every same-origin stylesheet from the main document into the PiP
 // window so LiveKit and Bootstrap render the way they do in-page. Cross-origin
@@ -197,10 +202,12 @@ export const MatrixCallHost: FC = () => {
         />
       )}
       {createPortal(
-        <MatrixCallView
-          compact={showWidget}
-          fullscreenTarget={containerNode}
-        />,
+        <Suspense fallback={null}>
+          <MatrixCallView
+            compact={showWidget}
+            fullscreenTarget={containerNode}
+          />
+        </Suspense>,
         containerNode,
         'call-view',
       )}

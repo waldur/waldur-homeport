@@ -16,7 +16,7 @@ import {
 } from '@/workspace/selectors';
 
 import { AnalyticsMode } from './analytics';
-import { isReportingScreenEnabled } from './utils';
+import { isReportingScreenEnabled } from './screens';
 
 export type ReportCategory =
   'resources' | 'provider' | 'financial' | 'proposals' | 'users' | 'operations';

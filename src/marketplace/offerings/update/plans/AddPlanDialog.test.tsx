@@ -46,7 +46,7 @@ describe('AddPlanDialog', () => {
     expect(screen.getByLabelText(/Name/)).toHaveValue('Clone of Test Plan');
   });
 
-  it('initializes form with cloned plan data', () => {
+  it('initializes form with cloned plan data', async () => {
     renderComponent(mockResolveWithPlan);
 
     // Check initial values from cloned plan
@@ -54,7 +54,10 @@ describe('AddPlanDialog', () => {
     expect(screen.getByLabelText(/Article code/)).toHaveValue('TEST001');
 
     // For MarkdownEditor, just check that description text appears somewhere
-    expect(screen.getByText('Test plan description')).toBeInTheDocument();
+    // The markdown editor is a lazy chunk, so its content lands after the first render.
+    expect(
+      await screen.findByText('Test plan description'),
+    ).toBeInTheDocument();
   });
 
   it('successfully creates plan when form is submitted', async () => {

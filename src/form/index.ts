@@ -1,4 +1,7 @@
+import { ComponentProps } from 'react';
+
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
+import { lazyOnce } from '@/core/lazyOnce';
 
 import { AwesomeCheckboxField } from './AwesomeCheckboxField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
@@ -8,8 +11,8 @@ import { DateTimeField } from './DateTimeField';
 import { EmailField } from './EmailField';
 import { FileUploadField } from './FileUploadField';
 import { ImageField } from './ImageField';
-import MarkdownEditor from './MarkdownEditor';
-import { MonacoField } from './MonacoField';
+import type MarkdownEditor from './MarkdownEditor';
+import type { MonacoField } from './MonacoField';
 import { NumberField } from './NumberField';
 import { SecretField } from './SecretField';
 import { AsyncSelect } from './select/AsyncSelect';
@@ -52,8 +55,18 @@ export const DateGroup = withFormGroup(DateField);
 export const DateTimeGroup = withFormGroup(DateTimeField);
 export const SliderNumberGroup = withFormGroup(SliderNumberField);
 export const CountrySelectGroup = withFormGroup(CountrySelectField);
-export const MarkdownGroup = withFormGroup(MarkdownEditor);
-export const MonacoGroup = withFormGroup(MonacoField);
+// Monaco and the markdown editor are the two heaviest dependencies in the
+// app; loaded on first use so this barrel stays cheap for everything else.
+// lazyOnce, not lazyComponent: once the chunk is in, later fields must mount
+// synchronously (NotificationForm renders one Monaco field per tab).
+const LazyMarkdownEditor = lazyOnce<ComponentProps<typeof MarkdownEditor>>(
+  () => import('./MarkdownEditor'),
+);
+const LazyMonacoField = lazyOnce<ComponentProps<typeof MonacoField>>(() =>
+  import('./MonacoField').then((module) => ({ default: module.MonacoField })),
+);
+export const MarkdownGroup = withFormGroup(LazyMarkdownEditor);
+export const MonacoGroup = withFormGroup(LazyMonacoField);
 export const TimezoneGroup = withFormGroup(TimezoneField);
 export const SecretGroup = withFormGroup(SecretField);
 export const EmailGroup = withFormGroup(EmailField);
