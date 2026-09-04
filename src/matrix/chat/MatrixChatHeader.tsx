@@ -6,8 +6,8 @@ import {
   PhoneDisconnectIcon,
   PhoneIcon,
 } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
 
 import Avatar from '@/core/Avatar';
@@ -226,24 +226,26 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
           <span className="fw-semibold text-truncate">{roomName}</span>
         )}
         {members.length > 0 && (
-          <OverlayTrigger
-            trigger="click"
-            rootClose
-            transition={false}
-            placement="bottom-start"
-            overlay={
-              <Popover id="tc-members-popover" className="tc-members-popover">
-                <Popover.Body className="p-0">
+          <RadixPopover.Root modal={false}>
+            <RadixPopover.Trigger asChild>
+              <button type="button" className="tc-header-members">
+                {'· '}
+                {translate('{count} members', { count: members.length })}
+              </button>
+            </RadixPopover.Trigger>
+            <RadixPopover.Portal>
+              <RadixPopover.Content
+                side="bottom"
+                align="start"
+                sideOffset={2}
+                className="popover tc-members-popover"
+              >
+                <div className="popover-body p-0">
                   <MatrixMembersList />
-                </Popover.Body>
-              </Popover>
-            }
-          >
-            <button type="button" className="tc-header-members">
-              {'· '}
-              {translate('{count} members', { count: members.length })}
-            </button>
-          </OverlayTrigger>
+                </div>
+              </RadixPopover.Content>
+            </RadixPopover.Portal>
+          </RadixPopover.Root>
         )}
       </div>
 
