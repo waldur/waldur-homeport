@@ -1,13 +1,7 @@
 import { SquaresFourIcon, ArrowSquareOutIcon } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useQuery } from '@tanstack/react-query';
-import {
-  FunctionComponent,
-  useCallback,
-  useState,
-  useEffect,
-  useRef,
-} from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { FunctionComponent, useCallback, useState, useEffect } from 'react';
 import { externalLinksList } from 'waldur-js-client';
 
 import { SHORTCUTS_QUERY_KEY } from '@/administration/quick-shortcuts/utils';
@@ -36,9 +30,7 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
         : 'light'
       : configuredStyle;
   const layout = useLayout();
-  const [showDropdown, setShowDropdown] = useState(false);
   const [userHasToggled, setUserHasToggled] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Auto-minimize sidebar for medium screens (768px - 1399px)
   useEffect(() => {
@@ -88,26 +80,6 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
 
   const shortcuts = shortcutsResponse || [];
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setShowDropdown(false);
-      }
-    };
-
-    if (showDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showDropdown]);
-
   // switch aside.minimized to keep sidebar state between pages
   const toggleSidebar = useCallback(() => {
     setUserHasToggled(true);
@@ -130,74 +102,74 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
         ? sidebarLogoUrl
         : undefined;
 
-  const DropdownMenu = (
-    <Dropdown.Menu
-      show={showDropdown}
-      className="p-0 overflow-hidden"
-      style={{ minWidth: '400px' }}
-    >
-      {shortcuts.map((shortcut: any, index: number) => (
-        <Dropdown.Item
-          key={shortcut.uuid}
-          as="a"
-          href={shortcut.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="d-flex align-items-center py-5 ps-6 pe-2 position-relative"
-        >
-          {/* Show separator line only if there are multiple items and not the last item */}
-          {shortcuts.length > 1 && index < shortcuts.length - 1 && (
-            <div
-              className="position-absolute bottom-0 start-50 translate-middle-x border-bottom"
-              style={{ width: 'calc(100% - 24px)' }}
-            />
-          )}
-          <div className="me-5">
-            <Avatar
-              name={shortcut.name}
-              src={shortcut.image}
-              circle
-              size={42}
-            />
-          </div>
-          <div className="flex-grow-1 fs-4">
-            <div className="fw-bolder">{shortcut.name}</div>
-            {shortcut.description && (
-              <div className="fw-normal text-muted mt-3">
-                {shortcut.description}
-              </div>
-            )}
-          </div>
-          <div className="ms-2">
-            <span className="svg-icon svg-icon-primary svg-icon-1x">
-              <ArrowSquareOutIcon weight="bold" />
-            </span>
-          </div>
-        </Dropdown.Item>
-      ))}
-    </Dropdown.Menu>
-  );
-
   return (
     <div
       className="aside-logo flex-column-auto position-relative"
       id="kt_aside_logo"
     >
       {/* Shortcuts Button */}
-      <div className="position-relative min-w-24px" ref={dropdownRef}>
+      <div className="position-relative min-w-24px">
         {shortcuts.length > 0 &&
           (!layout.config.aside.minimized || isAsideHovered) && (
-            <>
-              <button
-                className="btn btn-icon btn-sm border-0 w-24px"
-                onClick={() => setShowDropdown(!showDropdown)}
-                aria-label={translate('Quick shortcuts')}
-                style={{ outline: 'none', boxShadow: 'none' }}
-              >
-                <SquaresFourIcon size={24} weight="bold" />
-              </button>
-              {DropdownMenu}
-            </>
+            <RadixDropdownMenu.Root modal={false}>
+              <RadixDropdownMenu.Trigger asChild>
+                <button
+                  className="btn btn-icon btn-sm border-0 w-24px"
+                  aria-label={translate('Quick shortcuts')}
+                  style={{ outline: 'none', boxShadow: 'none' }}
+                >
+                  <SquaresFourIcon size={24} weight="bold" />
+                </button>
+              </RadixDropdownMenu.Trigger>
+              <RadixDropdownMenu.Portal>
+                <RadixDropdownMenu.Content
+                  sideOffset={2}
+                  className="dropdown-menu show p-0 overflow-hidden"
+                  style={{ minWidth: '400px' }}
+                >
+                  {shortcuts.map((shortcut: any, index: number) => (
+                    <RadixDropdownMenu.Item key={shortcut.uuid} asChild>
+                      <a
+                        href={shortcut.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="dropdown-item d-flex align-items-center py-5 ps-6 pe-2 position-relative"
+                      >
+                        {/* Show separator line only if there are multiple items and not the last item */}
+                        {shortcuts.length > 1 &&
+                          index < shortcuts.length - 1 && (
+                            <div
+                              className="position-absolute bottom-0 start-50 translate-middle-x border-bottom"
+                              style={{ width: 'calc(100% - 24px)' }}
+                            />
+                          )}
+                        <div className="me-5">
+                          <Avatar
+                            name={shortcut.name}
+                            src={shortcut.image}
+                            circle
+                            size={42}
+                          />
+                        </div>
+                        <div className="flex-grow-1 fs-4">
+                          <div className="fw-bolder">{shortcut.name}</div>
+                          {shortcut.description && (
+                            <div className="fw-normal text-muted mt-3">
+                              {shortcut.description}
+                            </div>
+                          )}
+                        </div>
+                        <div className="ms-2">
+                          <span className="svg-icon svg-icon-primary svg-icon-1x">
+                            <ArrowSquareOutIcon weight="bold" />
+                          </span>
+                        </div>
+                      </a>
+                    </RadixDropdownMenu.Item>
+                  ))}
+                </RadixDropdownMenu.Content>
+              </RadixDropdownMenu.Portal>
+            </RadixDropdownMenu.Root>
           )}
       </div>
       {/* Logo */}
