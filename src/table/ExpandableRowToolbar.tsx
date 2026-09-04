@@ -1,13 +1,8 @@
 import { FunnelSimpleIcon, GearSixIcon, XIcon } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import { useQueryClient } from '@tanstack/react-query';
 import { ComponentType, FC, createElement, useCallback } from 'react';
-import {
-  Button,
-  FormCheck,
-  OverlayTrigger,
-  Popover,
-  Stack,
-} from 'react-bootstrap';
+import { Button, FormCheck, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CompactIconButton, MediumIconButton } from '@/core/buttons/IconButton';
@@ -150,41 +145,41 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
           onClick={() => {}}
         />
         {hasSettings ? (
-          <OverlayTrigger
-            trigger="click"
-            placement="bottom-end"
-            rootClose
-            overlay={
-              <Popover
-                id={`expandable-row-settings-popover-${activeTableKey ?? 'none'}`}
+          <RadixPopover.Root modal={false}>
+            <Tip
+              label={translate('Toggle visible columns')}
+              id="expandable-row-settings-tip"
+            >
+              <span className="d-inline-flex">
+                <RadixPopover.Trigger asChild>
+                  <Button
+                    variant="tertiary"
+                    size="sm"
+                    type="button"
+                    aria-label={translate('Toggle visible columns')}
+                    className="btn-icon btn-icon-md"
+                  >
+                    <span className="svg-icon svg-icon-2">
+                      <GearSixIcon weight="bold" />
+                    </span>
+                  </Button>
+                </RadixPopover.Trigger>
+              </span>
+            </Tip>
+            <RadixPopover.Portal>
+              <RadixPopover.Content
+                align="end"
+                sideOffset={2}
+                className="popover bs-popover-bottom"
               >
                 <ColumnsPopover
                   columns={optionalColumns}
                   activeColumns={activeColumns}
                   onToggle={handleToggleColumn}
                 />
-              </Popover>
-            }
-          >
-            <span className="d-inline-flex">
-              <Tip
-                label={translate('Toggle visible columns')}
-                id="expandable-row-settings-tip"
-              >
-                <Button
-                  variant="tertiary"
-                  size="sm"
-                  type="button"
-                  aria-label={translate('Toggle visible columns')}
-                  className="btn-icon btn-icon-md"
-                >
-                  <span className="svg-icon svg-icon-2">
-                    <GearSixIcon weight="bold" />
-                  </span>
-                </Button>
-              </Tip>
-            </span>
-          </OverlayTrigger>
+              </RadixPopover.Content>
+            </RadixPopover.Portal>
+          </RadixPopover.Root>
         ) : (
           <MediumIconButton
             iconNode={<GearSixIcon weight="bold" />}

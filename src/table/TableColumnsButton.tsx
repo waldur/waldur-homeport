@@ -18,14 +18,9 @@ import {
   DotsSixVerticalIcon,
   GearIcon,
 } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useMemo, useState } from 'react';
-import {
-  Button,
-  Dropdown,
-  FormCheck,
-  OverlayTrigger,
-  Popover,
-} from 'react-bootstrap';
+import { Button, FormCheck } from 'react-bootstrap';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
 import { Tip } from '@/core/Tooltip';
@@ -155,11 +150,12 @@ const ColumnsPopover = ({
         </DndContext>
 
         {hasActions && (
-          <Dropdown.Item
+          <button
+            type="button"
             onClick={() =>
               toggleColumn(COLUMN_ACTIONS_KEY, { keys: [COLUMN_ACTIONS_KEY] })
             }
-            className="d-flex align-items-center"
+            className="dropdown-item d-flex align-items-center"
           >
             <FormCheck
               key={activeColumns[COLUMN_ACTIONS_KEY]}
@@ -168,7 +164,7 @@ const ColumnsPopover = ({
               onChange={(e) => e.preventDefault()}
             />
             {translate('Actions')}
-          </Dropdown.Item>
+          </button>
         )}
       </div>
     </div>
@@ -199,21 +195,38 @@ export const TableColumnButton: FC<TableProps> = ({
     }
   };
   return (
-    <OverlayTrigger
-      // Empty array, not omitted: react-bootstrap's OverlayTrigger wraps
-      // the outer <span> below, not the disabled <Button> nested two
-      // levels inside it (Tip's own wrapper sits in between) — a
-      // disabled button's `pointer-events: none` (needed so Tip's hover
-      // tooltip can still fire, explaining why it's disabled) makes the
-      // browser's hit-test skip straight past it to that span, so
-      // OverlayTrigger's own click handler on the span fired regardless
-      // of the button's disabled state. Reported live: the column-
-      // visibility popup opened from grid mode, where this toggle has
-      // nothing to act on.
-      trigger={mode === 'table' ? 'click' : []}
-      placement="bottom"
-      overlay={
-        <Popover id="TableColumnButton">
+    <RadixPopover.Root modal={false}>
+      <Tip
+        label={translate('Toggle visible columns')}
+        id="table-columns-button-tip"
+      >
+        <span className="d-inline-flex">
+          {/* Trigger wraps the real <Button> (not an ancestor <span>): a
+              disabled HTML button never dispatches click events at all, so
+              unlike the old OverlayTrigger setup this needs no separate
+              trigger-suppression workaround for the grid-mode disabled
+              state. */}
+          <RadixPopover.Trigger asChild disabled={mode !== 'table'}>
+            <Button
+              disabled={mode !== 'table'}
+              variant="tertiary"
+              size="lg"
+              className="btn-icon"
+              aria-label={translate('Toggle visible columns')}
+            >
+              <span className="svg-icon svg-icon-2">
+                <GearIcon weight="bold" />
+              </span>
+            </Button>
+          </RadixPopover.Trigger>
+        </span>
+      </Tip>
+      <RadixPopover.Portal>
+        <RadixPopover.Content
+          side="bottom"
+          sideOffset={2}
+          className="popover bs-popover-bottom"
+        >
           <ColumnsPopover
             columns={columns}
             activeColumns={activeColumns}
@@ -223,28 +236,8 @@ export const TableColumnButton: FC<TableProps> = ({
             hasActions={Boolean(rowActions)}
             resetColumns={handleReset}
           />
-        </Popover>
-      }
-      rootClose
-    >
-      <span className="d-inline-flex">
-        <Tip
-          label={translate('Toggle visible columns')}
-          id="table-columns-button-tip"
-        >
-          <Button
-            disabled={mode !== 'table'}
-            variant="tertiary"
-            size="lg"
-            className="btn-icon"
-            aria-label={translate('Toggle visible columns')}
-          >
-            <span className="svg-icon svg-icon-2">
-              <GearIcon weight="bold" />
-            </span>
-          </Button>
-        </Tip>
-      </span>
-    </OverlayTrigger>
+        </RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
   );
 };
