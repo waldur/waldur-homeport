@@ -1,0 +1,14 @@
+//
+// Rule-emitting half of the theme. Requires `_init-config.scss` to have been
+// imported at the top level first.
+//
+
+@import 'bootstrap/scss/forms/floating-labels';
+
+// Components
+@import './core/components/components';
+@import './custom/style';
+@import './custom/brand/style.scss';
+
+// Layout
+@import 'layout/layout';
