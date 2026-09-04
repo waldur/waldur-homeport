@@ -21,6 +21,7 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Tip } from '@/core/Tooltip';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { translate } from '@/i18n';
+import { PopoverMenuContent } from '@/navigation/NavMenu';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
@@ -107,28 +108,23 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
           </Tip>
         </button>
       </RadixPopover.Trigger>
-      <RadixPopover.Portal>
-        <RadixPopover.Content
-          side="bottom"
-          align="start"
-          sideOffset={2}
-          data-popper-placement="bottom"
-          className="menu menu-sub menu-sub-dropdown show menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
-        >
-          <div className="menu-item">
-            <span
-              className="menu-link px-5 py-3"
-              aria-hidden="true"
-              onClick={callback}
-            >
-              <span className="menu-icon w-auto me-4">
-                <SquareLogoIcon weight="bold" size={20} />
-              </span>
-              <span className="menu-title">{translate('Filter by')}</span>
+      <PopoverMenuContent
+        placement="bottom-start"
+        className="menu menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
+      >
+        <div className="menu-item">
+          <span
+            className="menu-link px-5 py-3"
+            aria-hidden="true"
+            onClick={callback}
+          >
+            <span className="menu-icon w-auto me-4">
+              <SquareLogoIcon weight="bold" size={20} />
             </span>
-          </div>
-        </RadixPopover.Content>
-      </RadixPopover.Portal>
+            <span className="menu-title">{translate('Filter by')}</span>
+          </span>
+        </div>
+      </PopoverMenuContent>
     </RadixPopover.Root>
   );
 });

@@ -9,6 +9,7 @@ import { Project } from 'waldur-js-client';
 import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
+import { PopoverMenuContent } from '@/navigation/NavMenu';
 import { Role } from '@/permissions/types';
 import { getAmbiguousRoleDescriptions } from '@/permissions/utils';
 import { Customer } from '@/workspace/types';
@@ -222,34 +223,25 @@ const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
             </span>
           </FormGroup>
         </RadixPopover.Trigger>
-        <RadixPopover.Portal>
-          <RadixPopover.Content
-            side="bottom"
-            align="start"
-            sideOffset={2}
-            // data-popper-placement gates core's own
-            // .menu-sub-dropdown.show[data-popper-placement] display rule
-            // — see NavMenu.tsx's top-of-file comment for the full
-            // reasoning, which applies identically here.
-            data-popper-placement="bottom-start"
-            className="role-project-select-popup menu-sub menu-sub-dropdown show menu-gray-700 menu-state-bg-light menu-state-primary border fw-bold fs-6 py-1"
-          >
-            <RoleAndProjectSelectPopup
-              roles={roles}
-              customer={customer}
-              currentProject={currentProject}
-              selectedRole={selectedRole}
-              selectedProject={selectedProject}
-              select={(role: Role, project) => {
-                props.input.onChange({
-                  role,
-                  project,
-                });
-              }}
-              close={() => setOpen(false)}
-            />
-          </RadixPopover.Content>
-        </RadixPopover.Portal>
+        <PopoverMenuContent
+          placement="bottom-start"
+          className="role-project-select-popup menu-gray-700 menu-state-bg-light menu-state-primary border fw-bold fs-6 py-1"
+        >
+          <RoleAndProjectSelectPopup
+            roles={roles}
+            customer={customer}
+            currentProject={currentProject}
+            selectedRole={selectedRole}
+            selectedProject={selectedProject}
+            select={(role: Role, project) => {
+              props.input.onChange({
+                role,
+                project,
+              });
+            }}
+            close={() => setOpen(false)}
+          />
+        </PopoverMenuContent>
       </RadixPopover.Root>
     </div>
   );

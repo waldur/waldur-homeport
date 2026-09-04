@@ -1,4 +1,5 @@
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, forwardRef, useRef, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
@@ -179,6 +180,47 @@ export function NavMenuContent({
         {...props}
       />
     </RadixDropdownMenu.Portal>
+  );
+}
+
+/**
+ * The same `data-popper-placement`/`.menu-sub-dropdown.show` shell as
+ * NavMenuContent above, on Radix's Popover instead of its DropdownMenu —
+ * for the same "contains a real form control, not just command rows"
+ * reason `ActionsPopoverComponent` (ActionsDropdown.tsx) exists alongside
+ * `ActionsDropdownComponent`. Six call sites (AsyncSearchBox.tsx,
+ * TableFiltersMenu.tsx ×3, TableBody.tsx, TableFilterItem.tsx,
+ * RoleAndProjectSelectField.tsx) each hand-rolled this exact
+ * Portal/Content/data-popper-placement/className shape independently
+ * before this existed — real, not hypothetical, duplication: two of them
+ * were missing the `menu-state-bg-*` class needed for hover/active
+ * colors to apply at all (LanguageSelectorDropdown.tsx and
+ * UserDropdownMenuItems.tsx hit the equivalent DropdownMenu-side bug the
+ * same week), which a shared component with one documented required
+ * prop makes structurally harder to omit by accident.
+ */
+export function PopoverMenuContent({
+  className,
+  placement = 'bottom-start',
+  sideOffset = 2,
+  ...props
+}: ComponentPropsWithoutRef<typeof RadixPopover.Content> & {
+  /** Same placement strings NavMenuContent's own `placement` takes, e.g.
+   * `"bottom-start"`, `"left-start"`, `"top-end"`. */
+  placement?: string;
+}) {
+  const { side, align } = PLACEMENT_TO_SIDE_ALIGN(placement);
+  return (
+    <RadixPopover.Portal>
+      <RadixPopover.Content
+        side={side}
+        align={align}
+        sideOffset={sideOffset}
+        data-popper-placement={placement}
+        className={classNames('menu-sub menu-sub-dropdown show', className)}
+        {...props}
+      />
+    </RadixPopover.Portal>
   );
 }
 

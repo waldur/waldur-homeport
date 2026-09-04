@@ -16,6 +16,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PopoverMenuContent } from '@/navigation/NavMenu';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
@@ -82,24 +83,19 @@ const FlyoutRow: FC<
         {icon}
       </span>
     </RadixPopover.Trigger>
-    <RadixPopover.Portal>
-      <RadixPopover.Content
-        side="right"
-        align="start"
-        sideOffset={2}
-        data-popper-placement="right-start"
-        className="menu-sub menu-sub-dropdown show w-250px py-3 shadow-sm"
-        // See TableFilterItem.tsx's own onOpenAutoFocus/onCloseAutoFocus
-        // comment: Radix's default auto-focus behaviors, un-suppressed,
-        // cause a sibling row that just opened to misread this row's
-        // *delayed* close-focus-return as an outside interaction and
-        // dismiss itself.
-        onOpenAutoFocus={(e) => e.preventDefault()}
-        onCloseAutoFocus={(e) => e.preventDefault()}
-      >
-        {content}
-      </RadixPopover.Content>
-    </RadixPopover.Portal>
+    <PopoverMenuContent
+      placement="right-start"
+      className="w-250px py-3 shadow-sm"
+      // See TableFilterItem.tsx's own onOpenAutoFocus/onCloseAutoFocus
+      // comment: Radix's default auto-focus behaviors, un-suppressed,
+      // cause a sibling row that just opened to misread this row's
+      // *delayed* close-focus-return as an outside interaction and
+      // dismiss itself.
+      onOpenAutoFocus={(e) => e.preventDefault()}
+      onCloseAutoFocus={(e) => e.preventDefault()}
+    >
+      {content}
+    </PopoverMenuContent>
   </RadixPopover.Root>
 );
 

@@ -18,6 +18,7 @@ import { Badge } from '@/core/Badge';
 import { RemoveFilterBadgeButton } from '@/core/RemoveFilterBadgeButton';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { PopoverMenuContent } from '@/navigation/NavMenu';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { selectFilterValues } from './selectors';
@@ -548,64 +549,59 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
             <CaretRightIcon size={20} className="ms-auto" weight="bold" />
           </span>
         </RadixPopover.Trigger>
-        <RadixPopover.Portal>
-          <RadixPopover.Content
-            side="right"
-            align="start"
-            sideOffset={2}
-            data-popper-placement="right-start"
-            className="menu-sub menu-sub-dropdown show w-375px py-3 shadow-sm"
-            // Both suppressed for the activeItemName race documented on
-            // that context field's own comment (FilterContextProvider.tsx).
-            // Traced here via a temporary debug event log: the
-            // newly-opened row's onFocusOutside/onInteractOutside fired
-            // with the *other* row's own trigger element as `e.target`,
-            // arriving right after that other row's onCloseAutoFocus —
-            // i.e. the delayed close returning focus to its trigger is
-            // exactly what the new row misread as "something outside me
-            // was interacted with."
-            onOpenAutoFocus={(e) => e.preventDefault()}
-            onCloseAutoFocus={(e) => e.preventDefault()}
-          >
-            <div className="menu-item">
-              <div
-                className="menu-content filter-field"
-                onClick={(e) => e.stopPropagation()}
-                aria-hidden="true"
-              >
-                {open && props.children}
-              </div>
+        <PopoverMenuContent
+          placement="right-start"
+          className="w-375px py-3 shadow-sm"
+          // Both suppressed for the activeItemName race documented on
+          // that context field's own comment (FilterContextProvider.tsx).
+          // Traced here via a temporary debug event log: the
+          // newly-opened row's onFocusOutside/onInteractOutside fired
+          // with the *other* row's own trigger element as `e.target`,
+          // arriving right after that other row's onCloseAutoFocus —
+          // i.e. the delayed close returning focus to its trigger is
+          // exactly what the new row misread as "something outside me
+          // was interacted with."
+          onOpenAutoFocus={(e) => e.preventDefault()}
+          onCloseAutoFocus={(e) => e.preventDefault()}
+        >
+          <div className="menu-item">
+            <div
+              className="menu-content filter-field"
+              onClick={(e) => e.stopPropagation()}
+              aria-hidden="true"
+            >
+              {open && props.children}
             </div>
-            {!instantApply && (
-              <>
-                <div className="separator" />
-                <div className="menu-item">
-                  {open && (
-                    <div className="menu-content filter-footer pb-0">
-                      <div className="d-flex gap-4">
-                        <SubmitButton
-                          submitting={false}
-                          variant="tertiary"
-                          className="flex-grow-1 w-50"
-                          onClick={() => setOpen(false)}
-                          type="button"
-                          label={translate('Cancel')}
-                        />
-                        <SubmitButton
-                          submitting={false}
-                          className="flex-grow-1 w-50"
-                          onClick={() => onApply()}
-                          type="button"
-                          label={translate('Apply')}
-                        />
-                      </div>
+          </div>
+          {!instantApply && (
+            <>
+              <div className="separator" />
+              <div className="menu-item">
+                {open && (
+                  <div className="menu-content filter-footer pb-0">
+                    <div className="d-flex gap-4">
+                      <SubmitButton
+                        submitting={false}
+                        variant="tertiary"
+                        className="flex-grow-1 w-50"
+                        onClick={() => setOpen(false)}
+                        type="button"
+                        label={translate('Cancel')}
+                      />
+                      <SubmitButton
+                        submitting={false}
+                        className="flex-grow-1 w-50"
+                        onClick={() => onApply()}
+                        type="button"
+                        label={translate('Apply')}
+                      />
                     </div>
-                  )}
-                </div>
-              </>
-            )}
-          </RadixPopover.Content>
-        </RadixPopover.Portal>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </PopoverMenuContent>
       </RadixPopover.Root>
     </div>
   );

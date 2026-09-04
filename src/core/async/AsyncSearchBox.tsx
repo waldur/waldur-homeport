@@ -9,6 +9,7 @@ import { useCallback, useState } from 'react';
 
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
+import { PopoverMenuContent } from '@/navigation/NavMenu';
 import { DataPage, processApiResponse, SdkFunction } from '@/table/api';
 
 import { InfiniteList } from './InfiniteList';
@@ -100,32 +101,21 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
             />
           </div>
         </RadixPopover.Anchor>
-        <RadixPopover.Portal>
-          <RadixPopover.Content
-            // Keeps focus in the search input instead of Radix's default
-            // of moving it into the panel on open — the user is mid-typing.
-            onOpenAutoFocus={(e) => e.preventDefault()}
-            side="bottom"
-            align="start"
-            sideOffset={2}
-            // data-popper-placement isn't decorative: core's own
-            // .menu-sub-dropdown.show[data-popper-placement] rule
-            // (core/components/menu/_base.scss) gates display:flex behind
-            // its mere presence — see NavMenu.tsx's own top-of-file
-            // comment for the full reasoning, which applies identically
-            // here since this reuses the same Metronic menu classes.
-            data-popper-placement="bottom"
-            className="search-results-dropdown menu menu-sub menu-sub-dropdown show menu-column border mw-400px mh-300px py-2"
-          >
-            <div className="overflow-auto">
-              <InfiniteList
-                RowComponent={RowComponent}
-                context={context}
-                emptyMessage={emptyMessage}
-              />
-            </div>
-          </RadixPopover.Content>
-        </RadixPopover.Portal>
+        <PopoverMenuContent
+          // Keeps focus in the search input instead of Radix's default
+          // of moving it into the panel on open — the user is mid-typing.
+          onOpenAutoFocus={(e) => e.preventDefault()}
+          placement="bottom-start"
+          className="search-results-dropdown menu menu-column border mw-400px mh-300px py-2"
+        >
+          <div className="overflow-auto">
+            <InfiniteList
+              RowComponent={RowComponent}
+              context={context}
+              emptyMessage={emptyMessage}
+            />
+          </div>
+        </PopoverMenuContent>
       </RadixPopover.Root>
     </div>
   );
