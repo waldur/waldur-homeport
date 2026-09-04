@@ -20,7 +20,7 @@ const VARIANTS = [
 const SIZES = ['sm', 'lg'] as const;
 
 const meta: Meta<typeof BaseButton> = {
-  title: 'Core/Buttons/BaseButton',
+  title: 'Migration/BaseButton (Legacy)',
   component: BaseButton,
   parameters: {
     docs: {

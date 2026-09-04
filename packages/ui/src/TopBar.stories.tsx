@@ -17,7 +17,7 @@ import {
 import { Avatar, IconButton, OrgSwitcher, SearchField, TopBar } from './TopBar';
 
 const meta: Meta<typeof TopBar> = {
-  title: 'Dashboard/TopBar',
+  title: 'Navigation/TopBar',
   parameters: {
     docs: {
       description: {

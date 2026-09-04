@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { ModeOption, ModePickerDialog } from './ModePicker';
 
 const meta: Meta<typeof ModePickerDialog> = {
-  title: 'Dashboard/ModePickerDialog',
+  title: 'Navigation/ModePicker',
   parameters: {
     docs: {
       description: {

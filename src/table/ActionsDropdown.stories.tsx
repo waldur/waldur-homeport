@@ -23,7 +23,7 @@ import { ActionsDropdown } from './ActionsDropdown';
  * Bootstrap values recorded in docs/tailwind-shadcn-migration-notes.md.
  */
 const meta: Meta<typeof ActionsDropdown> = {
-  title: 'Table/ActionsDropdown',
+  title: 'Navigation/ActionsDropdown',
   component: ActionsDropdown,
   parameters: {
     docs: {

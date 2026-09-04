@@ -12,7 +12,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from './Popover';
 
 const meta: Meta<typeof Popover> = {
-  title: 'Core/Popover',
+  title: 'Overlays/Popover',
   component: Popover,
   parameters: {
     docs: {

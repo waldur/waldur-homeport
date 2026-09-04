@@ -5,7 +5,7 @@ import { StatusPill, StatusTone } from './StatusPill';
 const TONES: StatusTone[] = ['success', 'warning', 'danger', 'neutral'];
 
 const meta: Meta<typeof StatusPill> = {
-  title: 'Dashboard/StatusPill',
+  title: 'Primitives/StatusPill',
   component: StatusPill,
   argTypes: {
     tone: { control: 'select', options: TONES },

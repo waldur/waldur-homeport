@@ -7,7 +7,6 @@ import { Tooltip } from './Tooltip';
  * — see Tooltip.tsx's header comment for the cross-check methodology.
  */
 const meta: Meta<typeof Tooltip> = {
-  title: 'Migration/Tooltip',
   component: Tooltip,
   args: {
     children: <button>Hover me</button>,
