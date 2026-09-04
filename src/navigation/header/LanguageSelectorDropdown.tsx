@@ -36,6 +36,13 @@ export const LanguageCountry = {
   uk: 'ua',
 };
 
+// NavMenuSubContent's own `menu-gray-600 menu-state-bg-gray` below —
+// not inherited from UserDropdown.tsx's outer NavMenuContent despite the
+// visual JSX nesting: Radix portals this Content to document.body,
+// breaking the CSS descendant-selector chain the menu-state-bg-gray
+// mixins rely on. Without it, hover/[data-highlighted] and .active have
+// no color styling at all here — reported live: the current language
+// never highlighted, even though `active` was already applied correctly.
 export const LanguageSelectorDropdown: FunctionComponent = () => {
   const { currentLanguage, languageChoices, setLanguage } =
     useLanguageSelector();
@@ -59,7 +66,10 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
         </span>
       </NavMenuSubTrigger>
 
-      <NavMenuSubContent placement="left-start" className="w-175px py-4">
+      <NavMenuSubContent
+        placement="left-start"
+        className="menu-gray-600 menu-state-bg-gray w-175px py-4"
+      >
         {languageChoices.map((language) => (
           <NavMenuItem
             key={language.code}
