@@ -107,6 +107,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
       </RadixPopover.Anchor>
       <RadixPopover.Portal>
         <RadixPopover.Content
+          id="GlobalSearch"
           side="bottom"
           align="start"
           sideOffset={2}

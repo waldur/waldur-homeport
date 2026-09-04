@@ -224,6 +224,7 @@ export const TableColumnButton: FC<TableProps> = ({
       <RadixPopover.Portal>
         <RadixPopover.Content
           side="bottom"
+          align="end"
           sideOffset={2}
           className="popover bs-popover-bottom"
         >
