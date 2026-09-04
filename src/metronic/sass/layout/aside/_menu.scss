@@ -216,7 +216,22 @@ $asides: (
         );
 
         &.menu-accordion {
-          &.hover {
+          // `.hover` is Metronic's own JS-set class (MenuComponent's
+          // accordion algorithm) — nothing sets it anymore now that Radix
+          // drives this tree (MenuAccordion.tsx). `[data-state='open']` is
+          // the direct real-time equivalent (Collapsible.Root, via
+          // `asChild`, puts it on this same .menu-item), added alongside
+          // rather than replacing `.hover` so this file stays correct for
+          // any not-yet-migrated Metronic-JS-driven accordion too. Without
+          // this bridge the open accordion's own highlight silently went
+          // dead, and custom/_aside.scss had grown a duplicate hand-rolled
+          // version with the *wrong*, non-per-style-aware colour instead of
+          // reusing this file's own `accordion-active`/`bg-subitem` tokens
+          // — reported live as "row highlight is missing" once the dead
+          // rule's absence was noticed against the `accent` aside style
+          // specifically, where the hand-rolled colour least resembled it.
+          &.hover,
+          &[data-state='open'] {
             background: get($value, accordion-active);
           }
 
@@ -238,7 +253,10 @@ $asides: (
           }
 
           // 2nd level accordion
-          &.hover .menu-sub-accordion > .menu-item.menu-accordion.hover {
+          &.hover .menu-sub-accordion > .menu-item.menu-accordion.hover,
+          &[data-state='open']
+            .menu-sub-accordion
+            > .menu-item.menu-accordion[data-state='open'] {
             background: get($value, sub-accordion-active);
             border-radius: 0;
 

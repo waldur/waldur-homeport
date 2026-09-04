@@ -58,9 +58,18 @@
       // already carries its own `transition` below (core's own
       // components/menu/_base.scss) — flipping the target `transform` via
       // `data-state` is enough to animate.
+      //
+      // The open-state background itself is *not* set here — that's
+      // `layout/aside/_menu.scss`'s `&.hover, &[data-state='open']
+      // { background: get($value, accordion-active); }`, which already
+      // has the correct colour per aside style (primary/accent/dark/...).
+      // An earlier version of this rule hardcoded its own colour here
+      // instead of bridging that file's dead `.hover` selector, which
+      // looked fine by coincidence for whichever style was being tested at
+      // the time and visibly wrong for others — fixed by bridging the
+      // *original* rule instead of shadowing it with a second one.
       &.menu-accordion {
         &[data-state='open'] {
-          background: if(isDarkMode(), $gray-300, $primary-700);
           border-radius: $border-radius;
           overflow: hidden;
 

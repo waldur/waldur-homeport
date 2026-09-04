@@ -2301,7 +2301,7 @@ behavior of never calling the equivalent of `.hide()`: the user can
 still manually collapse a route-active section afterward, and it only
 reopens on the next matching navigation.
 
-### Six real bugs, found only by testing live — not by reading the code
+### Seven real bugs, found only by testing live — not by reading the code
 
 Both this migration's own investigation and a dispatched planning
 agent's independent research read the relevant SCSS beforehand and
@@ -2485,6 +2485,48 @@ exclusivity holds at both the top level (Resources vs. Calls) and nested
 level (Storage vs. Compute inside Resources), and the `disabled` case
 renders fully static markup with no `Collapsible`, no button, no
 `data-state`.
+
+**7. The open accordion's own highlight was a hand-rolled duplicate with
+the *wrong* colour, shadowing a correctly-designed rule this migration
+never touched.** Reported live, a commit later, as "background is not
+the same, row highlight is missing" — comparing two screenshots where a
+route-active leaf item (`Private clouds`) showed a visible highlight in
+one and nothing in the other. Chasing that down live turned up something
+this migration had missed entirely:
+`layout/aside/_menu.scss` already has a complete, per-aside-style colour
+system for exactly this (`$asides` map: `bg-hover`, `bg-active`,
+`bg-subitem`, `accordion-active`, `sub-accordion-active`, one full set
+per style — `primary`/`accent`/`accent-light`/`dark`/`light`), applied
+via `&.menu-accordion { &.hover { background: get($value,
+accordion-active); } }`. `.hover` is Metronic's own JS-set class
+(`MenuComponent`'s accordion algorithm) — dead under Radix, same as
+every other `.hover`/`.show` reference this migration bridged elsewhere.
+This one was missed because the accordion visually still looked "open"
+(border-radius, overflow, arrow rotation all bridged correctly) and
+*something* was rendering a highlight — bug 1's `!important` `display`
+override had originally shipped with `custom/_aside.scss` growing its
+own duplicate rule with a hardcoded, non-per-style colour
+(`if(isDarkMode(), $gray-300, $primary-700)`) rather than reusing this
+file's tokens, which looked plausible enough at a glance to not notice
+it was covering for the real rule being dead underneath. It only stood
+out once tested against the `accent` aside style specifically, where the
+generic `$primary-700` fallback least resembled `accordion-active`'s
+actual brand-derived value (confirmed live:
+`getComputedStyle(...).backgroundColor` on the accordion read
+`rgb(40, 97, 0)` before the fix, against an expected `rgb(31, 80, 0)` —
+different enough to read as "wrong", though similar enough in a
+screenshot to not obviously look broken). Fixed by bridging the
+*original* rule (`&.hover, &[data-state='open'] { background:
+get($value, accordion-active); }`, same pattern for the 2nd-level
+accordion variant just below it) and deleting the duplicate rather than
+maintaining two versions of the same thing. The leaf item's own
+highlight (`Private clouds`, `.here` state) was never actually broken —
+`menu-link-here-state`'s `&.here > .menu-link` selector uses a real
+persistent class MenuItem.tsx sets from React state, not a Metronic-JS
+one, so it kept working throughout; it read correctly
+(`get($value, bg-subitem)`, confirmed live) both before and after this
+fix, just dimmer than the miscoloured accordion background sitting next
+to it made it look by comparison.
 
 **Not migrated, deliberately**: `MenuComponent.ts` itself stays —
 `OfferingsPanel.tsx` (inside the unrelated `MarketplaceTrigger` modal)
