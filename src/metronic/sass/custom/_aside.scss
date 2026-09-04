@@ -249,13 +249,42 @@
         display: flex !important;
       }
 
+      // !important on both: reported live as "collapse isn't animated,
+      // height changes immediately" — traced to
+      // node_modules/@radix-ui/react-collapsible's own CollapsibleContentImpl,
+      // not this stylesheet. Because Content isn't forceMount'ed (see
+      // MenuAccordion.tsx's own comment on why), Presence fully unmounts it
+      // on close and mounts a *fresh* instance on the next open — so every
+      // open is, from this component instance's own perspective, a true
+      // React mount, not a toggle on a long-lived one. Radix's
+      // `isMountAnimationPreventedRef` (index.mjs) exists to skip animating
+      // a Collapsible that mounts *already open* (e.g. server-rendered
+      // open) — it initializes to `true` and only flips to `false` one
+      // requestAnimationFrame after mount. But `useLayoutEffect` (which is
+      // what actually restores `node.style.animationName` from the plain
+      // inline `"none"` Radix forces on it to measure height) runs
+      // synchronously before that rAF ever fires, so on this first run the
+      // ref is still `true` and the restore is skipped — permanently, since
+      // flipping a ref doesn't schedule a re-run. The net effect: every
+      // open of an already-was-closed accordion looks exactly like a
+      // "mounts already open" case to Radix, and the open animation is
+      // silently dropped, every time, not just on real page-load mount.
+      // A plain (non-`!important`) `animation` declaration here can't win
+      // against that inline override — inline styles beat stylesheet rules
+      // regardless of selector specificity. `!important` moves the contest
+      // to specificity instead (same trick as `display: flex !important`
+      // above, fighting a *different* inline/layer conflict), where this
+      // selector safely outranks a bare inline style. Closed doesn't hit
+      // this exact bug (that instance is already past its mount rAF by the
+      // time a close is ever triggered) but gets the same treatment for
+      // consistency and in case of very fast repeated toggles.
       &[data-state='open'] {
-        animation: kt-menu-accordion-down 250ms ease-out;
+        animation: kt-menu-accordion-down 250ms ease-out !important;
       }
 
       &[data-state='closed'] {
         height: 0;
-        animation: kt-menu-accordion-up 250ms ease-out;
+        animation: kt-menu-accordion-up 250ms ease-out !important;
       }
     }
 
