@@ -5,10 +5,12 @@ import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 
 /**
- * Uses RadixDropdownMenu.Item directly rather than NavMenuItem — see
- * footer/MenuItem.tsx's own comment on the doubled `.menu-item` wrapper
- * this avoids (SupportMenu.tsx renders this as a direct child of
- * FooterDropdown's `<ul>`, alongside footer/MenuItem.tsx's own `<li>`s).
+ * Uses RadixDropdownMenu.Item directly rather than NavMenuItem:
+ * SupportMenu.tsx renders this as a direct child of FooterDropdown's
+ * `<ul>`, alongside footer/MenuItem.tsx's own `<li className="menu-item">`
+ * siblings, and NavMenuItem (NavMenu.tsx) wraps its own `<div
+ * className="menu-item">` around Item — stacking the two would double up
+ * `.menu-item`.
  */
 export const DocsLink: FunctionComponent = () => {
   const link = ENV.plugins.WALDUR_CORE.DOCS_URL;

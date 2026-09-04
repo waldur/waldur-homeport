@@ -463,21 +463,17 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   const isColumnMode = Boolean(openMenuName);
   const isColumnTarget = isColumnMode && openMenuName === props.name;
 
-  // Previously this effect only ever needed `open` as its guard: the
-  // "Add filter" list's own row starts `open === false`, so the effect
-  // is inert until the user actually clicks to expand it — mount-time
-  // firing was never possible. The column-target row breaks that: it's
-  // "open" (visible) from the very first render, no click required, so
-  // without a separate guard this fired instantApply's onApply() — a
-  // real applyFiltersFn()/setFilter() dispatch — during the initial
-  // mount of *every* filterable column at once, well before the user
-  // touched anything. That flood of synchronous cross-component
-  // dispatches, all firing while React was still mid-mount for sibling
-  // columns, is what reproduced a live "Should not already be working"
-  // React invariant violation in Storybook (not caught by the jsdom
-  // suite, which never exercises more than one filterable column
-  // mounting at once). `skipFirstRun` suppresses exactly the mount-time
-  // call — real, later value changes are unaffected.
+  // `skipFirstRun` guards against the column-target row: unlike the "Add
+  // filter" list's own row (starts `open === false`, inert until a real
+  // click), a column-target row is "open" from its very first render —
+  // without this guard, instantApply's onApply() (a real
+  // applyFiltersFn()/setFilter() dispatch) would fire during the initial
+  // mount of *every* filterable column at once. That flood of
+  // simultaneous cross-component dispatches, mid-mount for sibling
+  // columns, reproduced a live "Should not already be working" React
+  // invariant violation in Storybook — not caught by the jsdom suite,
+  // which never mounts more than one filterable column at once. Real,
+  // later value changes are unaffected.
   const skipFirstRun = useRef(true);
   useEffect(() => {
     if (skipFirstRun.current) {
@@ -559,26 +555,15 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
             sideOffset={2}
             data-popper-placement="right-start"
             className="menu-sub menu-sub-dropdown show w-375px py-3 shadow-sm"
-            // Radix's default auto-focus-on-open moves focus into this
-            // Content the instant it mounts. Suppressed for the same
-            // reason as onCloseAutoFocus below: this row's `open` is
-            // driven by the shared activeItemName state (see that
-            // context field's own comment), so a switch between two
-            // rows unmounts the old Content shortly *after* the new one
-            // has already opened — Radix's own defaults, un-suppressed,
-            // fight this: onOpenAutoFocus would steal focus into the
-            // freshly-opened row, and onCloseAutoFocus (below) would
-            // return focus to the row that's *finishing* its close —
-            // which, landing after the new row already has focus/is
-            // open, gets read by the new row's own DismissableLayer as
-            // an outside interaction and immediately dismisses it.
-            // Traced via a temporary debug event log: the newly-opened
-            // row's onFocusOutside/onInteractOutside fired with the
-            // *other* row's own trigger element as `e.target`, arriving
-            // right after that other row's onCloseAutoFocus — i.e. the
-            // delayed close returning focus to its trigger is exactly
-            // what the new row misread as "something outside me was
-            // interacted with."
+            // Both suppressed for the activeItemName race documented on
+            // that context field's own comment (FilterContextProvider.tsx).
+            // Traced here via a temporary debug event log: the
+            // newly-opened row's onFocusOutside/onInteractOutside fired
+            // with the *other* row's own trigger element as `e.target`,
+            // arriving right after that other row's onCloseAutoFocus —
+            // i.e. the delayed close returning focus to its trigger is
+            // exactly what the new row misread as "something outside me
+            // was interacted with."
             onOpenAutoFocus={(e) => e.preventDefault()}
             onCloseAutoFocus={(e) => e.preventDefault()}
           >

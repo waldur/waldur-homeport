@@ -41,10 +41,10 @@ interface ActionDropdownButtonProps {
  * renders — title, variant, caret all correct — but never actually opens
  * the menu: reported live as every provider card's "Enabled"/"Not
  * configured" toggle on the admin Identity Providers page doing nothing
- * on click. See ActionsDropdown.tsx's TableDropdownToggle for the same
- * requirement stated in more detail — it already spreads `...rest`, which
- * is how this class of bug was diagnosed here (identical Trigger
- * asChild pattern, working correctly there).
+ * on click. Same underlying `Trigger asChild`/Slot mechanism as
+ * ActionsDropdown.tsx's TableDropdownToggle, which already spreads
+ * `...rest` and works correctly — comparing the two is how this class of
+ * bug was diagnosed here.
  */
 const Toggle = forwardRef<
   HTMLButtonElement,

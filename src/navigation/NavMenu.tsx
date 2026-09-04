@@ -59,7 +59,7 @@ import { GRID_BREAKPOINTS } from '@/core/constants';
  * `.menu-link:hover` is a plain CSS pseudo-class, so mouse hover already
  * works with zero changes. Radix's keyboard navigation instead marks the
  * focused row with `[data-highlighted]` (not `:hover`/`:focus` — same gap
- * documented for `.dropdown-item` in `ActionsDropdown.tsx`), so
+ * documented for `.dropdown-item` in `custom/_dropdown.scss`), so
  * `custom/_menu.scss` maps `.menu-link[data-highlighted]` onto the same
  * hover treatment `.menu-link:hover` already gets.
  */

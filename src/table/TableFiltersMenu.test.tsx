@@ -62,11 +62,9 @@ describe('TableFiltersMenu', () => {
   });
 
   it('the "Add filter" button itself carries Radix\'s trigger state, not just Tip\'s wrapper', async () => {
-    // Regression test for a real bug: Tip (src/core/Tooltip.tsx) isn't
-    // forwardRef, so nesting it *inside* Trigger asChild left Radix with
-    // nothing but Tip itself to attach its ref/merged props to — the
-    // button rendered but Popper had no real element to anchor against,
-    // and the button never actually carried aria-expanded/data-state.
+    // Regression test for the Tip-inside-Trigger-asChild bug documented
+    // on TableFiltersMenu.tsx's own "Tip wraps the Trigger" comment: the
+    // button rendered but never actually carried aria-expanded/data-state.
     // jsdom doesn't fail on bad positioning (no real layout), so this
     // asserts the attributes directly instead — the one part of the bug
     // a DOM-only test *can* catch.
@@ -168,30 +166,11 @@ describe('TableFiltersMenu', () => {
   });
 
   it('switching between two filter rows closes the first and opens only the second', async () => {
-    // Regression test for a real, live-reported bug: a screenshot showed
-    // two filter flyouts ("Offering" and "Downscaled") rendered
-    // simultaneously, stacked on top of each other. A short list (2
-    // simple StringFilter rows, what this test alone can exercise)
-    // didn't reproduce it — Radix's own default outside-click dismissal
-    // looked sufficient on its own. The real, ~12-row list (a mix of
-    // dropdown and toggle fields, live-reproduced via Storybook) proved
-    // that wrong: switching rows needed a *second* click — the first
-    // only dismissed the old row. Root cause, traced via a temporary
-    // debug event log: `activeItemName` coordination (added specifically
-    // to fix the "needs a second click" symptom) correctly opens the new
-    // row immediately, but the *old* row's close is asynchronous — by
-    // the time Radix actually unmounts it and, by default, returns
-    // focus to its own trigger (onCloseAutoFocus), the new row has
-    // already opened elsewhere in the DOM; that stray focus-return gets
-    // read by the *new* row's own DismissableLayer as an outside
-    // interaction, and it immediately dismisses itself — which a
-    // screenshot mid-transition catches as "both open." Fixed by
-    // suppressing both onOpenAutoFocus and onCloseAutoFocus on every
-    // row's own Popover.Content (TableFilterItem.tsx and this file's
-    // FlyoutRow) — no more stray focus event for either side to
-    // misinterpret, and activeItemName's own guard (only clear the
-    // shared name if this row is still the one recorded active) no
-    // longer has a legitimate close call left to (correctly) act on.
+    // Regression test for a real, live-reported bug — two filter flyouts
+    // rendered open simultaneously when switching rows in the real
+    // ~12-row "Add filter" list (didn't reproduce with only 2 simple
+    // rows, which is all this test alone exercises). Root cause and fix:
+    // see FilterContextProvider.tsx's own comment on `activeItemName`.
     // jsdom has no real focus/layout timing, so — proven via a scripted
     // revert of just the two onOpenAutoFocus/onCloseAutoFocus lines —
     // this specific test passes identically with or without the fix; it
@@ -228,22 +207,12 @@ describe('TableFiltersMenu', () => {
 
   it('shows the column-filter toggle even when `filters` is a wrapper component, not a bare field', async () => {
     // Regression test for the real, severe bug found while investigating
-    // the report above: `existed` used to check
-    // `React.Children.toArray(props.filters).some(child => child.props.name
-    // === props.openName)` — inspecting only the *static*, unrendered
-    // props.filters element tree. Every real caller in the app passes a
-    // single wrapper component (`filters={<SomeGeneratedFilter />}`,
-    // confirmed by grepping every `filters={` call site — never a bare
-    // field or raw Fragment directly), so the actual named filter is
-    // nested inside that wrapper's own render output, never a direct
-    // child of what's passed to `filters` here. The static check always
-    // saw one childless wrapper element, always evaluated false, and
-    // silently returned null — hiding the column-filter toggle for every
-    // column, on every page, in the whole app, ever since it was
-    // introduced (confirmed live in Storybook: 0 toggle buttons render
-    // for two filterable columns when `filters` is wrapped this way).
-    // Fixed by checking the real rendered DOM instead (matching what the
-    // pre-Radix Metronic version did), which works at any nesting depth.
+    // the report above — see this file's own comment on why a *static*
+    // props.filters check doesn't work: it silently hid the
+    // column-filter toggle for every column, on every page, in the whole
+    // app, ever since it was introduced (confirmed live in Storybook: 0
+    // toggle buttons render for two filterable columns when `filters` is
+    // wrapped this way, exactly as it always is in real usage).
     const Wrapper = () => (
       <StringFilter title="Catalog" name="catalog_name" placeholder="Catalog" />
     );

@@ -14,9 +14,11 @@ const CookieSettingsDialog = lazyComponent(() =>
 );
 
 /**
- * Uses RadixDropdownMenu.Item directly rather than NavMenuItem — see
- * footer/MenuItem.tsx's own comment on the doubled `.menu-item` wrapper
- * this avoids.
+ * Uses RadixDropdownMenu.Item directly rather than NavMenuItem: the `<li
+ * className="menu-item">` here already matches footer/MenuItem.tsx's own
+ * sibling `<li>`s in the same list, and NavMenuItem (NavMenu.tsx) wraps
+ * its own `<div className="menu-item">` around Item — stacking the two
+ * would double up `.menu-item`.
  */
 const FooterMenuLink = ({ label, state }: { label: string; state: string }) => (
   <li className="menu-item">

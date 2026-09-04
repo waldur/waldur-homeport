@@ -294,19 +294,12 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
   const [activeItemName, setActiveItemNameRaw] = useState<string | undefined>(
     undefined,
   );
-  // Plain passthrough: each row's own onOpenAutoFocus/onCloseAutoFocus
-  // are suppressed (TableFilterItem.tsx, FlyoutRow below) specifically
-  // so switching directly between two rows can just flip this value —
-  // no deferred/staged transition needed. An earlier version routed
-  // every switch through an intermediate `undefined` frame on a
-  // setTimeout, worked around one symptom (a newly-opened row needing a
-  // second click) but not the actual cause: Radix's default
-  // onCloseAutoFocus returns focus to the row that's *finishing* its
-  // close, and when that lands after a sibling has already opened, the
-  // sibling's own DismissableLayer reads the focus arriving at that
-  // *other* trigger as an outside interaction and dismisses itself.
-  // Suppressing both auto-focus behaviors removes the stray focus event
-  // this whole chain depended on.
+  // Plain passthrough, not staged through an intermediate `undefined`
+  // frame on a setTimeout (an earlier version did that): once each row's
+  // own onOpenAutoFocus/onCloseAutoFocus are suppressed (TableFilterItem.tsx,
+  // FlyoutRow below — see the comment above on why), switching directly
+  // between two rows can just flip this value with nothing further to
+  // stage.
   const setActiveItemName = setActiveItemNameRaw;
 
   const apply = useCallback(
@@ -438,9 +431,13 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                 itself to attach its ref/merged props to, and Tip doesn't
                 forward either to the real <Button> further in. Reported
                 live: the button rendered but didn't open anything.
-                TableDropdownToggle's own disabled-tooltip case
-                (ActionsDropdown.tsx) uses this same wrap-the-trigger,
-                not wrap-inside-it, shape for the same reason. */}
+                (ActionsDropdown.tsx's TableDropdownToggle also nests Tip
+                around a disabled trigger, but doesn't need this same
+                fix — there Trigger's asChild child is TableDropdownToggle
+                itself, a real forwardRef component that threads the ref
+                straight to its inner <button> regardless of the Tip/span
+                wrapping in between, so Slot always has a proper ref
+                target no matter where Tip sits.) */}
             <Tip id="table-add-filter-tip" label={translate('Add filter')}>
               <RadixPopover.Trigger asChild>
                 <Button

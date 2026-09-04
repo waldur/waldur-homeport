@@ -197,17 +197,6 @@ export const TableDropdownToggle = forwardRef<
 TableDropdownToggle.displayName = 'TableDropdownToggle';
 
 /**
- * A single row in the menu. Exported so call sites that previously rendered
- * a bare react-bootstrap `<Dropdown.Item>` inside an ActionsDropdown can
- * keep their markup and still get real menu semantics — a plain element
- * dropped into a Radix menu renders and clicks, but is invisible to arrow
- * keys and typeahead and will not close the menu on activation.
- *
- * `onSelect` rather than `onClick`: it fires for pointer *and* keyboard
- * activation, and Radix closes the menu afterwards unless the handler
- * calls `event.preventDefault()`.
- */
-/**
  * The "+ Add ..." primary-button trigger shared by every team-management
  * dropdown (invite/add-user/add-organization menus) — six near-identical
  * copies of this exact markup existed before this component, one per host
@@ -247,6 +236,17 @@ export const AddDropdownToggle = forwardRef<
 ));
 AddDropdownToggle.displayName = 'AddDropdownToggle';
 
+/**
+ * A single row in the menu. Exported so call sites that previously rendered
+ * a bare react-bootstrap `<Dropdown.Item>` inside an ActionsDropdown can
+ * keep their markup and still get real menu semantics — a plain element
+ * dropped into a Radix menu renders and clicks, but is invisible to arrow
+ * keys and typeahead and will not close the menu on activation.
+ *
+ * `onSelect` rather than `onClick`: it fires for pointer *and* keyboard
+ * activation, and Radix closes the menu afterwards unless the handler
+ * calls `event.preventDefault()`.
+ */
 export const ActionsDropdownItem = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<typeof RadixDropdownMenu.Item>
@@ -389,16 +389,12 @@ export const ActionsDropdownComponent: FunctionComponent<
  * Same trigger/panel shell and Bootstrap classing as ActionsDropdownComponent,
  * on Radix's Popover instead of its DropdownMenu. Use this, not
  * ActionsDropdownComponent, when the panel contains anything the user types
- * into or otherwise interacts with beyond clicking a command row — a search
- * box, a select, a date picker, a form. A DropdownMenu owns focus with a
- * roving tabindex and treats character keys as typeahead over its own item
- * collection; a focused text input sitting in that collection has its
- * keystrokes intermittently stolen the moment one matches an item's
- * typeahead prefix (confirmed empirically, not assumed: typing "alpha..."
- * into a search box next to a menu item literally titled "Alpha" moved focus
- * to that item after the first character, and every keystroke after was
- * lost). Popover has no such collection and no typeahead, so a focused input
- * behaves exactly as it would anywhere else on the page.
+ * into or otherwise interacts with beyond clicking a command row — see
+ * packages/ui/src/Popover.tsx's own "Why this exists alongside DropdownMenu"
+ * for the DropdownMenu-vs-Popover rule this follows. Confirmed empirically
+ * here, not assumed: typing "alpha..." into a search box next to a menu
+ * item literally titled "Alpha" moved focus to that item after the first
+ * character, and every keystroke after was lost.
  *
  * children here are NOT DropdownMenu.Item-shaped, and ActionsDropdownItem
  * cannot be used inside one: it wraps RadixDropdownMenu.Item, which reads

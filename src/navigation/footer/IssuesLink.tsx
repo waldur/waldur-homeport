@@ -14,10 +14,13 @@ const QuickIssueContainer = lazyComponent(() =>
 );
 
 /**
- * Uses RadixDropdownMenu.Item directly rather than NavMenuItem — see
- * MenuItem.tsx's own comment on the doubled `.menu-item` wrapper this
- * avoids. Selecting it (opens a drawer) closes the footer dropdown, which
- * is fine: the drawer covers the same screen area regardless.
+ * Uses RadixDropdownMenu.Item directly rather than NavMenuItem: the `<li
+ * className="menu-item">` here already matches footer/MenuItem.tsx's own
+ * sibling `<li>`s in the same list, and NavMenuItem (NavMenu.tsx) wraps
+ * its own `<div className="menu-item">` around Item — stacking the two
+ * would double up `.menu-item`. Selecting it (opens a drawer) closes the
+ * footer dropdown, which is fine: the drawer covers the same screen area
+ * regardless.
  */
 export const IssuesLink: React.FC = () => {
   const { openDrawer } = useDrawer();

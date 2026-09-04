@@ -21,7 +21,7 @@ import { UserToken } from './UserToken';
 
 /**
  * forwardRef so this composes under NavMenuTrigger's `asChild` — see
- * ActionsDropown.tsx's TableDropdownToggle for the general requirement.
+ * ActionsDropdown.tsx's TableDropdownToggle for the general requirement.
  */
 const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
   const user = useUser();

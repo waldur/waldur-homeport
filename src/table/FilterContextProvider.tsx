@@ -51,14 +51,15 @@ interface ITableFilterContext {
    * Owned and set by TableFiltersMenu.tsx (its "Add filter"-list
    * instance only — the column-header instance doesn't use this row
    * shape at all, see `openMenuName`) so opening one row closes any
-   * previously open sibling. Each row is otherwise an independent Radix
-   * Popover with no shared "only one open" grouping of its own — Radix's
-   * *own* default outside-click dismissal looked, at first, like it
-   * already handled this correctly, confirmed against a short list of
-   * 2 simple rows; a live report with the real ~12-row list (a mix of
-   * dropdown and toggle fields) proved that wrong — switching rows
-   * needed a *second* click, the first only dismissed the old one. Root
-   * cause was Radix's default onCloseAutoFocus: the old row's close is
+   * previously open sibling.
+   *
+   * Each row is otherwise an independent Radix Popover with no shared
+   * "only one open" grouping of its own, and Radix's own default
+   * outside-click dismissal alone isn't enough to coordinate that:
+   * switching rows in the real ~12-row list (mixed dropdown/toggle
+   * fields — a short 2-row list doesn't reproduce this) needed a
+   * *second* click, the first only dismissed the old row. Root cause is
+   * Radix's default onCloseAutoFocus: the old row's close is
    * asynchronous, so by the time it actually unmounts and returns focus
    * to its own trigger, the new row (already open elsewhere in the DOM)
    * reads that stray focus event as an outside interaction and
