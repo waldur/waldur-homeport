@@ -1,7 +1,5 @@
-import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import {
   marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
@@ -15,6 +13,10 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+} from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
 import { SLUG_COLUMN } from '@/table/slug';
@@ -50,32 +52,27 @@ const RowActions = ({ row }) => {
   }
 
   return (
-    <Dropdown drop="down" align="start">
-      <Dropdown.Toggle
-        variant="text-secondary"
-        className="btn-icon no-arrow"
+    <ActionsDropdownComponent
+      drop="down"
+      align="start"
+      disabled={!canDeploy}
+      size="sm"
+    >
+      <ActionsDropdownItem
+        onClick={() => {
+          if (canDeploy) {
+            setTimeout(() => {
+              router.stateService.go('marketplace-offering-public', {
+                offering_uuid: row.uuid,
+              });
+            }, 100);
+          }
+        }}
         disabled={!canDeploy}
-        size="sm"
       >
-        <DotsThreeVerticalIcon size={22} weight="bold" />
-      </Dropdown.Toggle>
-      <Dropdown.Menu flip={false}>
-        <Dropdown.Item
-          onClick={() => {
-            if (canDeploy) {
-              setTimeout(() => {
-                router.stateService.go('marketplace-offering-public', {
-                  offering_uuid: row.uuid,
-                });
-              }, 100);
-            }
-          }}
-          disabled={!canDeploy}
-        >
-          {translate('Deploy')}
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+        {translate('Deploy')}
+      </ActionsDropdownItem>
+    </ActionsDropdownComponent>
   );
 };
 
