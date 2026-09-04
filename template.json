@@ -19762,6 +19762,11 @@
       "feature_area": "integration"
     }
   },
+  "Filter by column": {
+    "context": {
+      "feature_area": "table"
+    }
+  },
   "Filter by name...": {
     "context": {
       "feature_area": "article-codes"

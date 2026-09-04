@@ -83,7 +83,7 @@ const findActiveTab = (tabs, router) => {
  * FooterDropdown.tsx's own identical original attribute value) is both
  * simpler and already what `lg`+ users see today.
  */
-export const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
+const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
   parentTab,
   active,
 }) => {

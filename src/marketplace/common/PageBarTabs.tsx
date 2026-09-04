@@ -46,7 +46,7 @@ interface PageBarTabProps {
  * its `lg`+ gate. The trigger's own onClick (scrolling to the section)
  * is independent of dropdown state and unaffected either way.
  */
-export const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
+const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
   const { open, setOpen, hoverHandlers } = useHoverMenu(false);
   return (
     <NavMenu open={open} onOpenChange={setOpen} modal={false}>

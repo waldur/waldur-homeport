@@ -481,5 +481,3 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
     </TableFilterContext.Provider>
   );
 };
-
-export { FlyoutRow };

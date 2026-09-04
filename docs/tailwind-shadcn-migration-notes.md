@@ -1534,8 +1534,8 @@ for anywhere else this comes up.
 
 ## Fix: inline and column table filters stopped appearing
 
-Reported live: "inline & column table filters does not work anymore too
-- but should." Unlike the "Add filter" bug above, the triggers involved
+Reported live: "inline & column table filters does not work anymore too -- but should."
+Unlike the "Add filter" bug above, the triggers involved
 here were structurally fine — no `Tip`-inside-`asChild` anywhere.
 
 Root cause was one level removed: `TableBody.tsx`'s `InlineFilterButton`
