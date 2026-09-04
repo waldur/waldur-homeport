@@ -249,11 +249,24 @@ const buttonVariants = cva(
         sm: 'rounded-md px-[8px] py-[4px] text-sm leading-5',
         lg: 'rounded-lg px-[16px] py-[10px] text-base leading-6',
       },
+      // Not aspect-square: an inline-flex button with px-0 has no definite
+      // width for aspect-ratio's auto-sizing algorithm to size *from* —
+      // height comes from py-*/leading-*, but width comes from content
+      // (the icon span alone), so the two axes size independently and
+      // aspect-ratio never gets a chance to reconcile them. Reported live:
+      // every icon-only button rendered as a narrow vertical pill, not a
+      // square. Explicit width/height per size (below, in compoundVariants)
+      // sidesteps the ambiguity entirely — same 28px/44px totals as the
+      // label buttons' own documented height, just pinned on both axes.
       iconOnly: {
-        true: 'aspect-square px-0',
+        true: 'p-0',
         false: '',
       },
     },
+    compoundVariants: [
+      { size: 'sm', iconOnly: true, class: 'h-[28px] w-[28px]' },
+      { size: 'lg', iconOnly: true, class: 'h-[44px] w-[44px]' },
+    ],
     defaultVariants: {
       variant: 'primary',
       size: 'lg',
