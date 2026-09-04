@@ -3,7 +3,7 @@ import {
   ArrowRightIcon,
   CaretLeftIcon,
   CaretRightIcon,
-  PlusIcon,
+  PlusCircleIcon,
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ComponentProps, ReactNode } from 'react';
@@ -320,7 +320,7 @@ const IconOnlyGrid = ({ size }: { size: Size }) => (
                     variant as ComponentProps<typeof BaseButton>['variant']
                   }
                   size={size}
-                  iconNode={<PlusIcon weight="bold" />}
+                  iconNode={<PlusCircleIcon weight="bold" />}
                   tooltip="Add"
                   disabled={state === 'disabled'}
                   disabledReason={
