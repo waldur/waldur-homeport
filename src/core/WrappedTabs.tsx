@@ -1,7 +1,11 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import SelectableContext from '@restart/ui/SelectableContext';
 import { debounce } from 'lodash-es';
 import React from 'react';
-import { Dropdown, Nav, Tab } from 'react-bootstrap';
+import { Nav, Tab } from 'react-bootstrap';
+
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 interface WrappedTabsProps<T extends { uuid? } = any> {
   defaultActiveKey;
@@ -17,6 +21,10 @@ const WrappedTabs = React.forwardRef(
     props: WrappedTabsProps<T>,
     ref: React.Ref<HTMLDivElement>,
   ) => {
+    // Tab.Container below is uncontrolled (defaultActiveKey only), so
+    // switching tabs from this overflow dropdown has to go through the same
+    // internal SelectableContext that Nav.Link's own eventKey taps into.
+    const selectTab = React.useContext(SelectableContext);
     return (
       <Tab.Container defaultActiveKey={props.defaultActiveKey}>
         <div className="d-flex">
@@ -45,28 +53,35 @@ const WrappedTabs = React.forwardRef(
           {props.wrappedItems.length > 0 ? (
             <Nav variant="tabs" className="nav-line-tabs mb-4">
               <Nav.Item>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="text-secondary"
-                    className="btn-icon no-arrow w-35px h-35px"
-                  >
-                    <DotsThreeVerticalIcon size={22} weight="bold" />
-                    {props.toggleContent}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <div className="mh-200px overflow-auto">
-                      {props.wrappedItems.map((item) => (
-                        <Dropdown.Item
-                          key={item.uuid}
-                          eventKey={item.uuid}
-                          className="d-flex justify-content-between"
-                        >
-                          {React.createElement(props.renderTab, { item })}
-                        </Dropdown.Item>
-                      ))}
-                    </div>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <RadixDropdownMenu.Root>
+                  <RadixDropdownMenu.Trigger asChild>
+                    <button
+                      type="button"
+                      className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px"
+                    >
+                      <DotsThreeVerticalIcon size={22} weight="bold" />
+                      {props.toggleContent}
+                    </button>
+                  </RadixDropdownMenu.Trigger>
+                  <RadixDropdownMenu.Portal>
+                    <RadixDropdownMenu.Content
+                      sideOffset={2}
+                      className="dropdown-menu show position-static"
+                    >
+                      <div className="mh-200px overflow-auto">
+                        {props.wrappedItems.map((item) => (
+                          <ActionsDropdownItem
+                            key={item.uuid}
+                            className="d-flex justify-content-between"
+                            onClick={(event) => selectTab?.(item.uuid, event)}
+                          >
+                            {React.createElement(props.renderTab, { item })}
+                          </ActionsDropdownItem>
+                        ))}
+                      </div>
+                    </RadixDropdownMenu.Content>
+                  </RadixDropdownMenu.Portal>
+                </RadixDropdownMenu.Root>
               </Nav.Item>
             </Nav>
           ) : (
