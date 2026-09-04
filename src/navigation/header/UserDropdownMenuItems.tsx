@@ -24,7 +24,7 @@ export const UserDropdownMenuItems = () => {
     <>
       {items.map((item, index) =>
         item.children?.length > 0 ? (
-          <UISrefActive class="showing" key={index}>
+          <UISrefActive class="active" key={index}>
             <NavMenuSub>
               <NavMenuSubTrigger>
                 {item.to ? (
@@ -45,7 +45,7 @@ export const UserDropdownMenuItems = () => {
             </NavMenuSub>
           </UISrefActive>
         ) : (
-          <UISrefActive class="showing" key={index}>
+          <UISrefActive class="active" key={index}>
             <NavMenuItem asChild={Boolean(item.to)}>
               {item.to ? (
                 <Link state={item.to}>

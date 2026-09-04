@@ -119,7 +119,7 @@ export const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
         {...hoverHandlers}
       >
         {parentTab.children.map((childTab, childIndex) => (
-          <UISrefActive class="showing" key={childIndex}>
+          <UISrefActive class="active" key={childIndex}>
             <NavMenuItem asChild>
               <Link state={childTab.to} params={childTab.params}>
                 <span className="menu-title">{childTab.title}</span>
