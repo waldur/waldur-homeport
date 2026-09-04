@@ -3,6 +3,7 @@ import {
   ArrowRightIcon,
   CaretLeftIcon,
   CaretRightIcon,
+  PlusIcon,
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ComponentProps, ReactNode } from 'react';
@@ -245,4 +246,101 @@ export const TextStates: GridStory = {
     />
   ),
   parameters: { pseudo: pseudoForRows(TEXT_VARIANTS) },
+};
+
+// Icon-only matrix — a separate spec page (Shared components → Buttons,
+// bottom section), not a section of ContainedStates above: it's
+// transposed (variant per row, state per column) and covers a different
+// state set (Enabled/Hover/Focus/Disabled, no Pressed) from the labeled
+// grids, so folding it into StateGrid would mean two incompatible axis
+// orders and state lists fighting over one component. Only the five
+// Contained colors, matching the spec image — Success isn't shown there,
+// so it isn't invented here either.
+const ICON_ONLY_VARIANTS = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'danger',
+  'warning',
+] as const;
+
+const ICON_ONLY_STATES = ['enabled', 'hovered', 'focused', 'disabled'] as const;
+type IconOnlyState = (typeof ICON_ONLY_STATES)[number];
+
+const ICON_ONLY_STATE_LABELS: Record<IconOnlyState, string> = {
+  enabled: 'Unabled',
+  hovered: 'Hover',
+  focused: 'Focus',
+  disabled: 'Disabled',
+};
+
+const iconOnlyId = (state: IconOnlyState, variant: string) =>
+  `icon-only-btn-${state}-${variant}`;
+
+const IconOnlyGrid = ({ size }: { size: Size }) => (
+  // Not a data table — a Storybook-only state/variant reference grid, so
+  // @/table/Table (paginated, sortable, backed by useTable) doesn't apply.
+  // eslint-disable-next-line waldur-custom/no-hand-rolled-table
+  <table className="border-collapse">
+    <thead>
+      <tr>
+        <th className="w-28" />
+        {ICON_ONLY_STATES.map((state) => (
+          <th
+            key={state}
+            className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
+          >
+            {ICON_ONLY_STATE_LABELS[state]}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {ICON_ONLY_VARIANTS.map((variant) => (
+        <tr key={variant}>
+          <th className="whitespace-nowrap px-2 py-2 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+            {VARIANT_LABELS[variant] ?? variant}
+          </th>
+          {ICON_ONLY_STATES.map((state) => (
+            <td key={state} className="p-2">
+              <BaseButton
+                id={iconOnlyId(state, variant)}
+                variant={
+                  variant as ComponentProps<typeof BaseButton>['variant']
+                }
+                size={size}
+                iconNode={<PlusIcon weight="bold" />}
+                tooltip="Add"
+                disabled={state === 'disabled'}
+                disabledReason={
+                  state === 'disabled'
+                    ? 'Disabled for the state matrix'
+                    : undefined
+                }
+              />
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
+
+// Every id from one state's column, across every variant row — mirrors
+// pseudoForRows above but keyed by column (state) instead of row, since
+// this grid's axes are transposed relative to StateGrid's.
+const pseudoForIconOnlyColumns = () => ({
+  hover: ICON_ONLY_VARIANTS.map(
+    (variant) => `#${iconOnlyId('hovered', variant)}`,
+  ),
+  focusVisible: ICON_ONLY_VARIANTS.map(
+    (variant) => `#${iconOnlyId('focused', variant)}`,
+  ),
+});
+
+export const IconOnlyStates: StoryObj<{ size: Size }> = {
+  argTypes: { size: { control: 'radio', options: ['sm', 'lg'] } },
+  args: { size: 'sm' },
+  render: ({ size }) => <IconOnlyGrid size={size} />,
+  parameters: { pseudo: pseudoForIconOnlyColumns() },
 };
