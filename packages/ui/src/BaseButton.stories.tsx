@@ -147,53 +147,60 @@ const StateGrid = ({
   iconSide: IconSide;
   iconShape: 'arrow' | 'caret';
 }) => (
-  // Not a data table — a Storybook-only state/variant reference grid, so
-  // @/table/Table (paginated, sortable, backed by useTable) doesn't apply.
-  // eslint-disable-next-line waldur-custom/no-hand-rolled-table
-  <table className="border-collapse">
-    <thead>
-      <tr>
-        <th className="w-28" />
-        {variants.map((variant) => (
-          <th
-            key={variant}
-            className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
-          >
-            {VARIANT_LABELS[variant] ?? variant}
-          </th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      {STATES.map((state) => (
-        <tr key={state}>
-          <th className="whitespace-nowrap px-2 py-2 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
-            {STATE_LABELS[state]}
-          </th>
+  // p-12 matches this package's other stories (DropdownMenu.stories.tsx,
+  // Popover.stories.tsx) — Storybook's canvas has no built-in page
+  // padding, so a table rendered without its own wrapper sits flush
+  // against the top-left corner instead of reading as a page.
+  <div className="inline-block p-12">
+    {/* Not a data table — a Storybook-only state/variant reference grid,
+        so @/table/Table (paginated, sortable, backed by useTable) doesn't
+        apply. */}
+    {/* eslint-disable-next-line waldur-custom/no-hand-rolled-table */}
+    <table className="border-collapse">
+      <thead>
+        <tr>
+          <th className="w-28" />
           {variants.map((variant) => (
-            <td key={variant} className="p-2">
-              <BaseButton
-                id={stateId(state, variant)}
-                variant={
-                  variant as ComponentProps<typeof BaseButton>['variant']
-                }
-                size={size}
-                label="Label"
-                iconNode={ICONS[iconSide][iconShape]}
-                iconRight={iconSide === 'right'}
-                disabled={state === 'disabled'}
-                disabledReason={
-                  state === 'disabled'
-                    ? 'Disabled for the state matrix'
-                    : undefined
-                }
-              />
-            </td>
+            <th
+              key={variant}
+              className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
+            >
+              {VARIANT_LABELS[variant] ?? variant}
+            </th>
           ))}
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {STATES.map((state) => (
+          <tr key={state}>
+            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+              {STATE_LABELS[state]}
+            </th>
+            {variants.map((variant) => (
+              <td key={variant} className="p-3 text-center align-middle">
+                <BaseButton
+                  id={stateId(state, variant)}
+                  variant={
+                    variant as ComponentProps<typeof BaseButton>['variant']
+                  }
+                  size={size}
+                  label="Label"
+                  iconNode={ICONS[iconSide][iconShape]}
+                  iconRight={iconSide === 'right'}
+                  disabled={state === 'disabled'}
+                  disabledReason={
+                    state === 'disabled'
+                      ? 'Disabled for the state matrix'
+                      : undefined
+                  }
+                />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 );
 
 // Every id from one state's row, across every variant column — the exact
@@ -278,52 +285,57 @@ const iconOnlyId = (state: IconOnlyState, variant: string) =>
   `icon-only-btn-${state}-${variant}`;
 
 const IconOnlyGrid = ({ size }: { size: Size }) => (
-  // Not a data table — a Storybook-only state/variant reference grid, so
-  // @/table/Table (paginated, sortable, backed by useTable) doesn't apply.
-  // eslint-disable-next-line waldur-custom/no-hand-rolled-table
-  <table className="border-collapse">
-    <thead>
-      <tr>
-        <th className="w-28" />
-        {ICON_ONLY_STATES.map((state) => (
-          <th
-            key={state}
-            className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
-          >
-            {ICON_ONLY_STATE_LABELS[state]}
-          </th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      {ICON_ONLY_VARIANTS.map((variant) => (
-        <tr key={variant}>
-          <th className="whitespace-nowrap px-2 py-2 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
-            {VARIANT_LABELS[variant] ?? variant}
-          </th>
+  // p-12 matches this package's other stories (DropdownMenu.stories.tsx,
+  // Popover.stories.tsx) — see StateGrid's own comment above.
+  <div className="inline-block p-12">
+    {/* Not a data table — a Storybook-only state/variant reference grid,
+        so @/table/Table (paginated, sortable, backed by useTable) doesn't
+        apply. */}
+    {/* eslint-disable-next-line waldur-custom/no-hand-rolled-table */}
+    <table className="border-collapse">
+      <thead>
+        <tr>
+          <th className="w-28" />
           {ICON_ONLY_STATES.map((state) => (
-            <td key={state} className="p-2">
-              <BaseButton
-                id={iconOnlyId(state, variant)}
-                variant={
-                  variant as ComponentProps<typeof BaseButton>['variant']
-                }
-                size={size}
-                iconNode={<PlusIcon weight="bold" />}
-                tooltip="Add"
-                disabled={state === 'disabled'}
-                disabledReason={
-                  state === 'disabled'
-                    ? 'Disabled for the state matrix'
-                    : undefined
-                }
-              />
-            </td>
+            <th
+              key={state}
+              className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
+            >
+              {ICON_ONLY_STATE_LABELS[state]}
+            </th>
           ))}
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {ICON_ONLY_VARIANTS.map((variant) => (
+          <tr key={variant}>
+            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+              {VARIANT_LABELS[variant] ?? variant}
+            </th>
+            {ICON_ONLY_STATES.map((state) => (
+              <td key={state} className="p-3 text-center align-middle">
+                <BaseButton
+                  id={iconOnlyId(state, variant)}
+                  variant={
+                    variant as ComponentProps<typeof BaseButton>['variant']
+                  }
+                  size={size}
+                  iconNode={<PlusIcon weight="bold" />}
+                  tooltip="Add"
+                  disabled={state === 'disabled'}
+                  disabledReason={
+                    state === 'disabled'
+                      ? 'Disabled for the state matrix'
+                      : undefined
+                  }
+                />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 );
 
 // Every id from one state's column, across every variant row — mirrors
