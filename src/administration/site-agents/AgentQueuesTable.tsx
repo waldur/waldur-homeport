@@ -9,7 +9,6 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { QueueKindBadge } from '../rabbitmq/QueueKindBadge';
 import { RabbitMQQueueHealthBadge } from '../rabbitmq/RabbitMQQueueHealthBadge';
-import { getQueueKind } from '../rabbitmq/utils';
 
 interface AgentQueuesTableProps {
   agentUuid: string;
@@ -39,13 +38,7 @@ export const AgentQueuesTable: FC<AgentQueuesTableProps> = ({
       {
         title: translate('Kind'),
         render: ({ row }: { row: AgentQueueInfo }) => (
-          <QueueKindBadge
-            kind={getQueueKind({
-              name: row.name,
-              subscription_uuid: row.object_type,
-            })}
-            id={row.name}
-          />
+          <QueueKindBadge kind={row.kind} id={row.name} />
         ),
       },
       {

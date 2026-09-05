@@ -8,8 +8,6 @@ import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
-import { isConsumerQueue } from '../rabbitmq/utils';
-
 import { AgentQueuesTable } from './AgentQueuesTable';
 import { useAgentConnectionStats } from './useAgentConnectionStats';
 
@@ -34,7 +32,7 @@ const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
   const { data, isLoading, isError } = useAgentConnectionStats();
   const agent = data?.agents.find((a) => a.uuid === agentUuid);
   const queues = agent?.queues ?? [];
-  const hasConsumerQueue = queues.some((q) => isConsumerQueue(q.name));
+  const hasConsumerQueue = queues.some((q) => q.kind === 'consumer');
 
   return (
     <>

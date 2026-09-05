@@ -83,7 +83,13 @@ describe('AgentIdentityExpandableRow', () => {
 
   it('shows the unified consumer queue with backlog and connection', async () => {
     const queues = [
-      { name: CONSUMER_QUEUE, messages: 5, consumers: 1, object_type: null },
+      {
+        name: CONSUMER_QUEUE,
+        messages: 5,
+        consumers: 1,
+        object_type: null,
+        kind: 'consumer',
+      },
     ];
     vi.mocked(marketplaceSiteAgentConnectionStatsRetrieve).mockResolvedValue({
       data: agentWith(queues),
@@ -100,7 +106,13 @@ describe('AgentIdentityExpandableRow', () => {
 
   it('flags a queue nobody is draining', async () => {
     const queues = [
-      { name: CONSUMER_QUEUE, messages: 12, consumers: 0, object_type: null },
+      {
+        name: CONSUMER_QUEUE,
+        messages: 12,
+        consumers: 0,
+        object_type: null,
+        kind: 'consumer',
+      },
     ];
     vi.mocked(marketplaceSiteAgentConnectionStatsRetrieve).mockResolvedValue({
       data: agentWith(queues),
