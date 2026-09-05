@@ -1197,3 +1197,17 @@ overrides:
       badgeLabels:
         true: Yes
         false: No
+
+  event_consumers:
+    filters:
+      - is_global
+      - user_uuid
+    is_global:
+      label: Scope
+      placeholder: Any scope
+      enumOverrides:
+        'undefined': All consumers
+        'true': Global (unscoped)
+        'false': Scoped
+    user_uuid:
+      label: Owner

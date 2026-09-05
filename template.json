@@ -2959,6 +2959,11 @@
       "feature_area": "questions"
     }
   },
+  "All consumers": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "All countries": {
     "context": {
       "feature_area": "charts"
@@ -3788,6 +3793,11 @@
   "Any project allocations funded by this credit will still be deleted.": {
     "context": {
       "feature_area": "credits"
+    }
+  },
+  "Any scope": {
+    "context": {
+      "feature_area": "generated"
     }
   },
   "Any status": {
@@ -20859,6 +20869,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Global (unscoped)": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Global federation of identity providers for researchers.": {
     "context": {
       "feature_area": "providers"
@@ -34191,7 +34206,8 @@
   },
   "Owner": {
     "context": {
-      "feature_area": "details"
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
     }
   },
   "PDF": {
@@ -44654,6 +44670,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "administration"
+    }
+  },
+  "Scoped": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Scoped affiliation": {},
