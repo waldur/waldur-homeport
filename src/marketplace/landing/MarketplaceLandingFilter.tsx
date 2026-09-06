@@ -124,7 +124,14 @@ export const MarketplaceLandingFilter = () => {
               // the E2E suite's MarketplaceFilter.open() page object asserts
               // on this exact selector.
               aria-labelledby="marketplace-landing-filter-toggle"
-              className="dropdown-menu show p-0 border-0 min-w-400px"
+              // position-static: the Radix popper wrapper is the positioned
+              // element here, and leaving `.dropdown-menu`'s own
+              // `position: absolute` in place takes this panel out of that
+              // wrapper's flow and collapses its measured size — reported
+              // live as its own contents (Apply button, select clear icon)
+              // landing outside the viewport. Same fix as ActionsDropdown.tsx's
+              // own Content, and the systemic issue described there.
+              className="dropdown-menu show p-0 border-0 min-w-400px position-static"
               // Mirrors the original Bootstrap Dropdown's autoClose={false}:
               // OrganizationAutocomplete/ProjectAutocomplete portal their own
               // react-select menu to document.body, outside this popover's
