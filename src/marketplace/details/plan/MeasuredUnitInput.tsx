@@ -15,6 +15,7 @@ export const MeasuredUnitInput = ({
     <Form.Control
       name={input.name}
       type="number"
+      step="any"
       min={component.min_value || 0}
       max={component.max_value}
       aria-describedby={`basic-addon-${component.type}`}
