@@ -27,6 +27,7 @@ import { IsdBadges } from './IsdBadges';
 import { isProfileAttributeEnabled } from './profileAttributes';
 import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';
 import { UserBulkActions } from './UserBulkActions';
+import { UserDeleteButton } from './UserDeleteButton';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserEditButton } from './UserEditButton';
 import { UserFilter } from './UserFilter';
@@ -147,6 +148,7 @@ const RowActions = ({ row, fetch }: { row: User; fetch? }) => {
         RecalculateUserActionsButton,
         UserImpersonateButton,
         UserDetailsButton,
+        UserDeleteButton,
       ]}
     />
   );

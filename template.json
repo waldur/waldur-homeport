@@ -4991,6 +4991,16 @@
       "feature_area": "request-types"
     }
   },
+  "Are you sure you want to delete {name}? This action cannot be undone.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "support"
+    }
+  },
   "Are you sure you want to delete {name}? This is a synced request type and may be re-created on the next sync.": {
     "context": {
       "variables": {
