@@ -19,6 +19,20 @@
   background-color: $dropdown-link-hover-bg;
 }
 
+// Radix moves real DOM focus onto whichever row is [data-highlighted] --
+// including on plain pointer hover, not just keyboard nav. `.dropdown-item`
+// has no Bootstrap-authored focus-ring styling at all (it was a plain
+// react-bootstrap <button> pre-migration, relying on the browser's own
+// default), so that hover-triggered focus was rendering the raw UA focus
+// outline -- a thick, undesigned rectangle -- on top of the [data-highlighted]
+// background above, reported live on the row-actions menu. Same fix shape as
+// NavMenu's own .menu-link:hover:focus-visible bridge (custom/_menu.scss):
+// suppress the ring specifically while a real pointer is on the row; a
+// genuine keyboard-only focus (no hover) is unaffected.
+.dropdown-item:hover:focus-visible {
+  outline: none;
+}
+
 // Radix marks a disabled row with `data-disabled` rather than the
 // `.disabled` class or the `:disabled` pseudo-class Bootstrap looks for
 // (the row is a div with role="menuitem", not a <button>).
