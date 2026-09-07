@@ -38,11 +38,26 @@ export const UserDeleteButton: FunctionComponent<{
     return null;
   }
 
+  // Another staff account is deletable, but not from a row menu: the deletion
+  // is immediate and unrecoverable, and getting the wrong row here would take
+  // the last administrator with it. The profile's Termination tab still does
+  // it, with the whole account in front of you.
+  const isStaffTarget = Boolean(row.is_staff);
+
   return (
     <RemovalActionItem
       title={translate('Delete')}
       action={mutate}
-      disabled={isPending}
+      disabled={isPending || isStaffTarget}
+      tooltip={
+        isStaffTarget
+          ? translate(
+              'Staff accounts can only be deleted from the user profile.',
+            )
+          : isPending
+            ? translate('Deletion in progress')
+            : undefined
+      }
       staff
       size="sm"
     />

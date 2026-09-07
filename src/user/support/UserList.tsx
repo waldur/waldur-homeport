@@ -501,13 +501,29 @@ export const UserList: FunctionComponent = () => {
     [props.fetch, props.loading],
   );
 
+  // Deleting a row has to clear the selection too: the table keeps
+  // `selectedRows` across a refetch, so a checked user who has just been
+  // deleted would stay in the bulk-action set and the next Activate would fire
+  // against a dead uuid. Only the bulk-action toolbar paired the two before.
+  const refetchAndDeselect = useCallback(() => {
+    props.fetch();
+    props.resetSelection?.();
+  }, [props.fetch, props.resetSelection]);
+
+  const rowActions = useCallback(
+    ({ row }: { row: User }) => (
+      <RowActions row={row} fetch={refetchAndDeselect} />
+    ),
+    [refetchAndDeselect],
+  );
+
   return (
     <Table
       {...props}
       formId="userFilter"
       filters={<UserFilter />}
       columns={columns}
-      rowActions={RowActions}
+      rowActions={rowActions}
       showPageSizeSelector={true}
       hasOptionalColumns
       verboseName={translate('users')}
