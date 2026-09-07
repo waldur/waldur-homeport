@@ -48363,6 +48363,11 @@
       "feature_area": "project"
     }
   },
+  "Staff accounts can only be deleted from the user profile.": {
+    "context": {
+      "feature_area": "support"
+    }
+  },
   "Staff action": {
     "context": {
       "feature_area": "core"
