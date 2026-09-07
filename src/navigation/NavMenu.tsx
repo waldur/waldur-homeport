@@ -262,6 +262,22 @@ export const NavMenuSubTrigger = forwardRef<
 ));
 NavMenuSubTrigger.displayName = 'NavMenuSubTrigger';
 
+// A submenu flyout is visually a continuation of the menu it opens from,
+// not a separate, independently-styled panel — but Radix portals it to
+// document.body, breaking the CSS descendant chain that would otherwise
+// inherit the parent NavMenuContent's own `fw-bold`/`menu-dropdown-default`
+// (item padding + line-height). Both real Sub consumers today
+// (LanguageSelectorDropdown.tsx, UserDropdownMenuItems.tsx) already learned
+// this once for `menu-gray-600 menu-state-bg-gray` — see their own
+// comments — and independently missed this half of the same gap: rows
+// rendered visibly lighter-weight and more tightly padded than their own
+// trigger row's siblings. Baked into the shell here, not left for each call
+// site to duplicate a second time.
+const NAV_MENU_SUB_CONTENT_CLASSNAME = classNames(
+  NAV_MENU_CONTENT_CLASSNAME,
+  'menu-dropdown-default fw-bold',
+);
+
 export function NavMenuSubContent({
   className,
   placement = 'right-start',
@@ -279,7 +295,7 @@ export function NavMenuSubContent({
       <RadixDropdownMenu.SubContent
         align={align}
         data-popper-placement={placement}
-        className={classNames(NAV_MENU_CONTENT_CLASSNAME, className)}
+        className={classNames(NAV_MENU_SUB_CONTENT_CLASSNAME, className)}
         {...props}
       />
     </RadixDropdownMenu.Portal>
