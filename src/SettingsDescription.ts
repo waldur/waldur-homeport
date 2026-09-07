@@ -1476,6 +1476,12 @@ export const SettingsDescription = [
         type: 'integer',
       },
       {
+        key: 'OIDC_REGISTRATION_METHOD',
+        description: translate('Value stored in User.registration_method for accounts created or adopted via Bearer token introspection (OIDCAuthentication). Set to the social IdP provider slug (e.g. \'eduteams\') when introspection and OAuth share the same identity provider so IdentityProvider.protected_fields apply.'),
+        default: 'oidc',
+        type: 'string',
+      },
+      {
         key: 'OIDC_DEFAULT_LOGOUT_URL',
         description: translate('Default logout URL used as fallback when IdentityProvider does not have a logout_url set. This allows configuring a global logout endpoint for OIDC providers that don\'t expose end_session_endpoint in their discovery document.'),
         default: '',
