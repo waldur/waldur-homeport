@@ -10,9 +10,6 @@ export const DefaultLayoutConfig: ILayout = {
     display: true,
     type: 'default', // Set default|spinner-message|spinner-logo to hide or show page loader
   },
-  scrolltop: {
-    display: true,
-  },
   header: {
     display: true, // Set true|false to show or hide Header
     width: 'fluid', // Set fixed|fluid to change width type
@@ -22,9 +19,6 @@ export const DefaultLayoutConfig: ILayout = {
       tabletAndMobile: true, // Set true|false to set fixed Header for tablet and mobile modes
     },
     menuIcon: 'svg',
-  },
-  megaMenu: {
-    display: true, // Set true|false to show or hide Mega Menu
   },
   aside: {
     display: true,

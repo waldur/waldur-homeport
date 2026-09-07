@@ -3,10 +3,6 @@ interface ILoader {
   type: 'default' | 'spinner-message' | 'spinner-logo';
 }
 
-interface IScrollTop {
-  display: boolean;
-}
-
 export interface IHeader {
   display: boolean;
   width: 'fixed' | 'fluid';
@@ -16,10 +12,6 @@ export interface IHeader {
     tabletAndMobile: boolean;
   };
   menuIcon: 'svg' | 'font';
-}
-
-interface IMegaMenu {
-  display: boolean;
 }
 
 export interface IAside {
@@ -122,9 +114,7 @@ interface IMain {
 
 export interface ILayout {
   loader: ILoader;
-  scrolltop: IScrollTop;
   header: IHeader;
-  megaMenu: IMegaMenu;
   aside: IAside;
   content: IContent;
   hero: IHero;
