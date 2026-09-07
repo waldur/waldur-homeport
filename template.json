@@ -61073,6 +61073,7 @@
     }
   },
   "Value should not be negative.": {},
+  "Value stored in User.registration_method for accounts created or adopted via Bearer token introspection (OIDCAuthentication). Set to the social IdP provider slug (e.g. 'eduteams') when introspection and OAuth share the same identity provider so IdentityProvider.protected_fields apply.": {},
   "Values are in 8KB pages": {
     "context": {
       "feature_area": "database-stats"

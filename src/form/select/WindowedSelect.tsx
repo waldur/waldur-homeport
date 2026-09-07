@@ -3,7 +3,6 @@ import { FC, useMemo } from 'react';
 import BaseSelect from 'react-select';
 
 import { composeComponents } from './SelectHelper';
-import { useSelectTheme } from './theme';
 import { CustomSelectProps } from './types';
 import { VirtualMenuList } from './VirtualMenuList';
 
@@ -34,7 +33,6 @@ export const WindowedSelect: FC<WindowedSelectProps> = ({
   windowThreshold = DEFAULT_WINDOW_THRESHOLD,
   ...props
 }) => {
-  const theme = useSelectTheme();
   const composedComponents = composeComponents(
     components,
     (props as any).isMulti,
@@ -51,7 +49,6 @@ export const WindowedSelect: FC<WindowedSelectProps> = ({
 
   return (
     <BaseSelect
-      theme={theme}
       menuPortalTarget={document.body}
       styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
       menuPosition="fixed"
