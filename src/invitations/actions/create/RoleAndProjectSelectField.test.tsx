@@ -94,4 +94,28 @@ describe('RoleAndProjectSelectField', () => {
       screen.queryByPlaceholderText('Search for project'),
     ).not.toBeInTheDocument();
   });
+
+  // A caller (e.g. InviteUserButton.tsx) can hand this field an empty
+  // `roles` array when its own offering-scoped role fetch comes back
+  // empty. Silently rendering nothing there reads as a broken/stuck
+  // popup rather than an empty one -- reported live.
+  it('shows an explanatory message instead of an empty popup when there are no roles', async () => {
+    const user = userEvent.setup();
+    render(
+      <Form
+        onSubmit={vi.fn()}
+        render={() => (
+          <RoleAndProjectSelectField
+            name="assignment"
+            roles={[]}
+            customer={customer}
+            currentProject={undefined}
+          />
+        )}
+      />,
+    );
+
+    await user.click(screen.getByPlaceholderText('Select...'));
+    expect(screen.getByText('No roles available.')).toBeInTheDocument();
+  });
 });

@@ -105,6 +105,16 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
   return (
     <div className="d-flex">
       <div className="w-200px mw-250px">
+        {roles.length === 0 && (
+          // Silently rendering nothing here reads as a broken/loading popup
+          // -- no roles ever means the caller's own role-loading step (e.g.
+          // InviteUserButton.tsx's offering-scoped fetch) came back empty,
+          // which is worth surfacing rather than leaving the picker looking
+          // stuck.
+          <p className="text-center text-muted mb-0 px-3 py-2">
+            {translate('No roles available.')}
+          </p>
+        )}
         {roles.map((role) =>
           hasProject || !showProjects ? (
             <div key={role.uuid} className="menu-item">
