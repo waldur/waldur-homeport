@@ -256,14 +256,41 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
       onSubmit={callback}
       initialValues={props.initialValues}
       render={({ handleSubmit, submitting, invalid, form, values }) => (
-        <ModalDialog
-          title={
-            values?.template
-              ? translate('Update maintenance template')
-              : translate('Create a maintenance template')
-          }
-        >
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              values?.template
+                ? translate('Update maintenance template')
+                : translate('Create a maintenance template')
+            }
+            footer={
+              <>
+                <ActionButton
+                  action={backToMainForm}
+                  title={translate('Back')}
+                  iconNode={<ArrowLeftIcon weight="bold" />}
+                  variant="tertiary"
+                  className="min-w-125px"
+                />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={
+                    invalid || isLoadingOfferings || Boolean(errorOfferings)
+                  }
+                  label={translate('Save')}
+                  className="btn btn-primary min-w-125px"
+                  children={
+                    isLoadingOfferings ? (
+                      <span className="svg-icon svg-icon-2">
+                        {}
+                        <LoadingSpinnerSimple />
+                      </span>
+                    ) : null
+                  }
+                />
+              </>
+            }
+          >
             <FormSpy
               subscription={{ values: true }}
               onChange={(state) => {
@@ -325,35 +352,9 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                 validate={required}
                 disabled={submitting}
               />
-
-              <div className="d-flex justify-content-between">
-                <ActionButton
-                  action={backToMainForm}
-                  title={translate('Back')}
-                  iconNode={<ArrowLeftIcon weight="bold" />}
-                  variant="tertiary"
-                  className="min-w-125px"
-                />
-                <SubmitButton
-                  submitting={submitting}
-                  disabled={
-                    invalid || isLoadingOfferings || Boolean(errorOfferings)
-                  }
-                  label={translate('Save')}
-                  className="btn btn-primary min-w-125px"
-                  children={
-                    isLoadingOfferings ? (
-                      <span className="svg-icon svg-icon-2">
-                        {}
-                        <LoadingSpinnerSimple />
-                      </span>
-                    ) : null
-                  }
-                />
-              </div>
             </div>
-          </form>
-        </ModalDialog>
+          </ModalDialog>
+        </form>
       )}
     />
   );

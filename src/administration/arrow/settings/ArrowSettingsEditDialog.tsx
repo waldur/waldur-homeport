@@ -75,21 +75,37 @@ export const ArrowSettingsEditDialog = ({
     : null;
 
   return (
-    <ModalDialog title={translate('Edit Arrow Settings')}>
-      <Form<FormValues>
-        onSubmit={(values) => submitMutation.mutateAsync(values)}
-        initialValues={{
-          api_url: settings.api_url,
-          api_key: settings.api_key || '',
-          export_type_reference: settings.export_type_reference || '',
-          classification_filter: settings.classification_filter || '',
-          sync_enabled: settings.sync_enabled,
-          invoice_price_source: INVOICE_PRICE_SOURCE_OPTIONS.find(
-            (o) => o.value === (settings.invoice_price_source || 'sell'),
-          ),
-        }}
-        render={({ handleSubmit, invalid }) => (
-          <form onSubmit={handleSubmit}>
+    <Form<FormValues>
+      onSubmit={(values) => submitMutation.mutateAsync(values)}
+      initialValues={{
+        api_url: settings.api_url,
+        api_key: settings.api_key || '',
+        export_type_reference: settings.export_type_reference || '',
+        classification_filter: settings.classification_filter || '',
+        sync_enabled: settings.sync_enabled,
+        invoice_price_source: INVOICE_PRICE_SOURCE_OPTIONS.find(
+          (o) => o.value === (settings.invoice_price_source || 'sell'),
+        ),
+      }}
+      render={({ handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit Arrow Settings')}
+            footer={
+              <>
+                <ActionButton
+                  action={closeDialog}
+                  variant="secondary"
+                  title={translate('Cancel')}
+                />
+                <SubmitButton
+                  submitting={submitMutation.isPending}
+                  disabled={invalid}
+                  label={translate('Save')}
+                />
+              </>
+            }
+          >
             <StringGroup
               name="api_url"
               validate={required}
@@ -140,22 +156,9 @@ export const ArrowSettingsEditDialog = ({
                 {mutationError}
               </Alert>
             )}
-
-            <div className="d-flex justify-content-end gap-2">
-              <ActionButton
-                action={closeDialog}
-                variant="secondary"
-                title={translate('Cancel')}
-              />
-              <SubmitButton
-                submitting={submitMutation.isPending}
-                disabled={invalid}
-                label={translate('Save')}
-              />
-            </div>
-          </form>
-        )}
-      />
-    </ModalDialog>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };

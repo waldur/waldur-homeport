@@ -19,6 +19,7 @@ import noDirectBootstrapDropdownButton from './rules/no-direct-bootstrap-dropdow
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
+import noHandRolledModalFooter from './rules/no-hand-rolled-modal-footer.js';
 import noHandRolledTable from './rules/no-hand-rolled-table.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
@@ -40,6 +41,7 @@ export default {
     'no-direct-bootstrap-button': noDirectBootstrapButton,
     'no-bootstrap-button-markup': noBootstrapButtonMarkup,
     'no-hand-rolled-table': noHandRolledTable,
+    'no-hand-rolled-modal-footer': noHandRolledModalFooter,
     'prefer-alert-item': preferAlertItem,
     'no-direct-bootstrap-dropdown-button': noDirectBootstrapDropdownButton,
     'no-direct-client-usage': noDirectClientUsage,
