@@ -612,6 +612,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'WALDUR_SUPPORT_ISSUE_KEY_PREFIX',
+        description: translate('Prefix of ticket keys created by the built-in service desk, e.g. WLD in WLD-A1B2C3D4. Three to five capital latin letters. Keys of existing tickets are not rewritten.'),
+        default: 'WLD',
+        type: 'issue_key_prefix_field',
+      },
+      {
         key: 'WALDUR_SUPPORT_PROVIDER_ROUTING_ENABLED',
         description: translate('Enable automatic routing of tickets to provider helpdesks.'),
         default: false,
