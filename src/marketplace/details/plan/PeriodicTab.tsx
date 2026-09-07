@@ -123,6 +123,10 @@ export const PeriodicTab = ({
             period={selectedPeriod}
             setPeriod={periods.length > 1 ? setSelectedPeriod : null}
             isFloor={isFloor}
+            hasUsage={
+              (!limitPeriod || limitPeriod === 'month') &&
+              periodic.usageRows.length > 0
+            }
           />
         ) : null}
       </FormTable>

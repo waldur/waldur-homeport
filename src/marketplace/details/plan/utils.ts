@@ -12,10 +12,7 @@ import { ENV } from '@/core/config';
 import { calculateMonthsDifference } from '@/core/dateUtils';
 import { formatCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
-import {
-  filterOfferingComponents,
-  getFormLimitParser,
-} from '@/marketplace/common/registry';
+import { getFormLimitParser } from '@/marketplace/common/registry';
 import { getBillingPeriods } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { Limits } from '@/marketplace/details/types';
@@ -25,6 +22,7 @@ import {
   parseFormulaToTiers,
 } from '@/marketplace/offerings/update/plans/discountFormula';
 
+import { getEffectiveComponents } from './effectiveComponents';
 import { Component, PricesData } from './types';
 
 export const combinePrices = (
@@ -38,7 +36,9 @@ export const combinePrices = (
   if (plan && offering) {
     const { periods, multipliers, periodKeys } = getBillingPeriods(plan.unit);
     const offeringLimits = parseOfferingLimits(offering);
-    const offeringComponents = filterOfferingComponents(offering);
+    // Billing fields come from the plan: a usage plan turns the builtin limit
+    // components of an OpenStack offering into usage rows, for example.
+    const offeringComponents = getEffectiveComponents(offering, plan);
 
     // Calculate the duration multiplier based on the end_date
     const effectiveStartDate = start_date || DateTime.now().toISODate();

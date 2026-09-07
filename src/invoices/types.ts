@@ -12,6 +12,8 @@ export interface InvoiceTableItem {
   service_provider_name: string;
   service_provider_uuid: string;
   plan_name: string;
+  /** Lines of this resource were priced by more than one plan this month. */
+  hasPlanChange?: boolean;
   price: number;
   tax: number;
   total: number;

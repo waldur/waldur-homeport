@@ -12,6 +12,7 @@ export interface PlanFormData {
   quotas: { [key: string]: number };
   description?: string;
   article_code?: string;
+  billing_mode?: Option;
   uuid?: string;
 }
 

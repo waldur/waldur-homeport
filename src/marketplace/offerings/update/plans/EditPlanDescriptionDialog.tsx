@@ -5,6 +5,10 @@ import { marketplacePlansUpdate } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import {
+  getPlanBillingModeOptions,
+  offeringHasBuiltinComponents,
+} from '@/marketplace/details/plan/billingMode';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -27,6 +31,13 @@ export const EditPlanDescriptionDialog: FC<EditPlanDescriptionDialogProps> = ({
   const initialValues = {
     ...resolve.plan,
     unit: getBillingPeriods().find(({ value }) => value === resolve.plan.unit),
+    ...(offeringHasBuiltinComponents(resolve.offering)
+      ? {
+          billing_mode: getPlanBillingModeOptions().find(
+            ({ value }) => value === (resolve.plan.billing_mode || 'inherit'),
+          ),
+        }
+      : {}),
   };
 
   const updatePlanMutation = useManagedMutation<any, any, any>({
@@ -58,7 +69,7 @@ export const EditPlanDescriptionDialog: FC<EditPlanDescriptionDialogProps> = ({
               />
             }
           >
-            <PlanForm />
+            <PlanForm offering={resolve.offering} plan={resolve.plan} />
           </ModalDialog>
         </form>
       )}

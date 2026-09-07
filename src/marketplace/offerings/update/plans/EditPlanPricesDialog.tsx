@@ -9,6 +9,7 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { resolvePlanComponents } from '@/marketplace/details/plan/effectiveComponents';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -54,10 +55,19 @@ const getInitialValues = (plan: Plan, components: OfferingComponent[]) => {
 export const EditPlanPricesDialog: FC<{
   resolve: { plan: Plan; offering: Offering; refetch?(): void };
 }> = (props) => {
-  const initialValues = useMemo(
+  // A usage plan prices core-hours and GB-hours, not the cores and GB the
+  // offering's components are declared in.
+  const components = useMemo(
     () =>
-      getInitialValues(props.resolve.plan, props.resolve.offering.components),
-    [props.resolve.plan, props.resolve.offering.components],
+      resolvePlanComponents(
+        props.resolve.offering.components,
+        props.resolve.plan,
+      ),
+    [props.resolve.offering.components, props.resolve.plan],
+  );
+  const initialValues = useMemo(
+    () => getInitialValues(props.resolve.plan, components),
+    [props.resolve.plan, components],
   );
 
   const updatePricesMutation = useManagedMutation<any, any, any>({
@@ -93,10 +103,7 @@ export const EditPlanPricesDialog: FC<{
               />
             }
           >
-            <PricesTable
-              components={props.resolve.offering.components}
-              plan={props.resolve.plan}
-            />
+            <PricesTable components={components} plan={props.resolve.plan} />
           </ModalDialog>
         </form>
       )}

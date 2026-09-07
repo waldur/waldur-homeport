@@ -2,6 +2,7 @@ import { TimerIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { findResourcePlan } from '@/marketplace/details/plan/effectiveComponents';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasAllPermissions } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -74,7 +75,18 @@ export const ChangeLimitsAction: ActionItemType = ({
   const offering = useResourceOffering(resourceUuid, hasPlan);
 
   // Hide when the offering is intrinsically not configured for editable limits.
-  if (offering && !hasEditableLimitComponents(offering)) {
+  // Resolved for the resource's plan: a usage plan takes no limits even when
+  // the offering's builtin components are stored as limit-based.
+  if (
+    offering &&
+    !hasEditableLimitComponents(
+      offering,
+      findResourcePlan(
+        offering.plans,
+        resource.plan_uuid || resource.marketplace_plan_uuid,
+      ),
+    )
+  ) {
     return null;
   }
 

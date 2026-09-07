@@ -36,9 +36,16 @@ export const ResourceLimitChangeInfo = ({
 
   const userIsRequestor = user.username === order.created_by_username;
 
+  const orderPlan = useMemo(
+    () =>
+      offering.plans.find(
+        (p) => p.uuid === resource.order_in_progress?.plan_uuid,
+      ),
+    [offering.plans, resource.order_in_progress?.plan_uuid],
+  );
   const requirements = useMemo(
-    () => getLimitChangeRequirements(resource, offering),
-    [resource, offering],
+    () => getLimitChangeRequirements(resource, offering, orderPlan),
+    [resource, offering, orderPlan],
   );
   const limitParser = useMemo(
     () => getFormLimitParser(offering.type),
@@ -53,9 +60,7 @@ export const ResourceLimitChangeInfo = ({
   const data = useMemo(() => {
     if (requirements) {
       const newLimits = parsedNewLimits;
-      const plan = offering.plans.find(
-        (p) => p.uuid === resource.order_in_progress.plan_uuid,
-      );
+      const plan = orderPlan;
       const { usages, limits: currentLimits } = requirements;
       return getLimitChangeData(
         plan,
