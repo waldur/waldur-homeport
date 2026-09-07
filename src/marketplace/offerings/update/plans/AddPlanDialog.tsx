@@ -5,6 +5,10 @@ import { marketplacePlansCreate } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import {
+  getPlanBillingModeOptions,
+  offeringHasBuiltinComponents,
+} from '@/marketplace/details/plan/billingMode';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -12,6 +16,11 @@ import { formatPlan } from '../../store/utils';
 
 import { getBillingPeriods } from './constants';
 import { PlanForm } from './PlanForm';
+
+const findBillingModeOption = (value?: string) =>
+  getPlanBillingModeOptions().find(
+    (option) => option.value === (value || 'inherit'),
+  );
 
 interface AddPlanDialogProps {
   resolve: {
@@ -29,8 +38,13 @@ export const AddPlanDialog: FC<AddPlanDialogProps> = ({ resolve }) => {
         unit: getBillingPeriods().find(
           ({ value }) => value === resolve.plan.unit,
         ),
+        ...(offeringHasBuiltinComponents(resolve.offering)
+          ? { billing_mode: findBillingModeOption(resolve.plan.billing_mode) }
+          : {}),
       }
-    : undefined;
+    : offeringHasBuiltinComponents(resolve.offering)
+      ? { billing_mode: findBillingModeOption() }
+      : undefined;
 
   const createPlanMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>
@@ -63,7 +77,7 @@ export const AddPlanDialog: FC<AddPlanDialogProps> = ({ resolve }) => {
             iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
           >
-            <PlanForm />
+            <PlanForm offering={resolve.offering} />
           </ModalDialog>
         </form>
       )}

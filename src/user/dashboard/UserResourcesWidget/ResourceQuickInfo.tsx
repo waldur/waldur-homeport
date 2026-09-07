@@ -17,6 +17,10 @@ import { Link } from '@/core/Link';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
+import {
+  findResourcePlan,
+  resolvePlanComponents,
+} from '@/marketplace/details/plan/effectiveComponents';
 import { getQuotaCellProps } from '@/marketplace/resources/details/ResourceComponentItem';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { getResourceAccessEndpoints, isSshFormat } from '@/resource/utils';
@@ -69,7 +73,10 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
   // Get components with their values
   const components = useMemo(() => {
     if (!offering?.components) return [];
-    return offering.components
+    return resolvePlanComponents(
+      offering.components,
+      findResourcePlan(offering.plans, resource.plan_uuid),
+    )
       .map((component) => ({
         ...component,
         ...getQuotaCellProps(component, resource),

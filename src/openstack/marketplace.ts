@@ -85,7 +85,6 @@ export const OpenStackTenantOffering: OfferingConfiguration = {
   provisioningConfigSection: OpenStackProvisioningConfigSection,
   limitSerializer,
   limitParser,
-  onlyOnePlan: true,
   showComponents: true,
   offeringComponentsFilter,
 };

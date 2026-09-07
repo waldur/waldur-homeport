@@ -6,6 +6,11 @@ import {
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
+import {
+  PlanBilling,
+  toPlanBilling,
+} from '@/marketplace/details/plan/billingMode';
+import { PlanBillingModeBadge } from '@/marketplace/details/plan/PlanBillingModeBadge';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import {
   ComponentsSection,
@@ -25,12 +30,14 @@ const PlanCard = ({
   title,
   planName,
   planDescription,
+  planBillingMode,
   concealBillingInfo,
   ...pricesProps
 }: {
   title: string;
   planName: string;
   planDescription?: string;
+  planBillingMode?: PlanBilling | null;
   concealBillingInfo?: boolean;
   offering: Offering;
   order?: OrderDetails;
@@ -55,7 +62,12 @@ const PlanCard = ({
       <Field
         label={translate('Name')}
         labelWidth={200}
-        value={renderValue(planName)}
+        value={
+          <span className="d-inline-flex align-items-center gap-2">
+            {renderValue(planName)}
+            <PlanBillingModeBadge mode={planBillingMode} />
+          </span>
+        }
       />
       {planDescription && (
         <Field
@@ -166,7 +178,12 @@ export const PlanSection = (props: PlanDetailsProps) => {
           <PlanCard
             title={translate('Old plan')}
             planName={old_plan_name}
-            planDescription={plan_description}
+            planDescription={
+              props.offering.plans?.find(
+                (plan) => plan.uuid === props.order.old_plan_uuid,
+              )?.description
+            }
+            planBillingMode={toPlanBilling(props.order.old_plan_billing_mode)}
             order={props.order}
             offering={props.offering}
             viewMode
@@ -178,6 +195,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
             title={translate('New plan')}
             planName={plan_name}
             planDescription={plan_description}
+            planBillingMode={toPlanBilling(props.order.new_plan_billing_mode)}
             order={props.order}
             offering={props.offering}
             viewMode

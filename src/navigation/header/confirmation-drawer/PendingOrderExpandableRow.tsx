@@ -6,6 +6,10 @@ import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
+import {
+  getPlanBillingModeLabel,
+  toPlanBilling,
+} from '@/marketplace/details/plan/billingMode';
 import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -99,7 +103,16 @@ const MetadataTab: FC<{ order: OrderDetails }> = ({ order }) => (
       value={renderFieldOrDash(order.plan_name)}
     />
     {order.new_plan_name ? (
-      <Field label={translate('New plan')} value={order.new_plan_name} />
+      <Field
+        label={translate('New plan')}
+        value={
+          getPlanBillingModeLabel(toPlanBilling(order.new_plan_billing_mode))
+            ? `${order.new_plan_name} (${getPlanBillingModeLabel(
+                toPlanBilling(order.new_plan_billing_mode),
+              )})`
+            : order.new_plan_name
+        }
+      />
     ) : null}
     {order.start_date ? (
       <Field

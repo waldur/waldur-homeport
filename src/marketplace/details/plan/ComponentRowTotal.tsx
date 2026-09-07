@@ -14,10 +14,20 @@ export const ComponentRowTotal = (props: {
    * lowest the plan can cost rather than its price.
    */
   isFloor?: boolean;
+  /**
+   * Set when usage-based components are part of the plan: their cost is only
+   * known once usage is reported, so the total is a floor plus usage.
+   */
+  hasUsage?: boolean;
 }) => {
   const amount =
     defaultCurrency(props.amount ?? 0) +
     (props.period ? (props.period === 'annual' ? ' /year' : ' /month') : '');
+  const usageAmount = props.hasUsage
+    ? props.amount
+      ? translate('{amount} + usage', { amount })
+      : translate('Billed by usage')
+    : null;
   return (
     <tr className="total">
       <th className="col-md title fs-4 fw-normal">{translate('Total')}</th>
@@ -34,13 +44,15 @@ export const ComponentRowTotal = (props: {
             />
           )}
           <span className="fs-4 text-gray-700 min-w-150px text-end">
-            {!props.isFloor
-              ? amount
-              : // Nothing in the plan has a known quantity, so there is no
-                // floor to quote either — "From 0.00" would read as free.
-                props.amount
-                ? translate('From {amount}', { amount })
-                : DASH_ESCAPE_CODE}
+            {usageAmount
+              ? usageAmount
+              : !props.isFloor
+                ? amount
+                : // Nothing in the plan has a known quantity, so there is no
+                  // floor to quote either — "From 0.00" would read as free.
+                  props.amount
+                  ? translate('From {amount}', { amount })
+                  : DASH_ESCAPE_CODE}
           </span>
         </div>
       </td>

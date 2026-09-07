@@ -16,6 +16,10 @@ import {
   countLexisLinks,
   countRobotAccounts,
 } from '@/marketplace/common/api';
+import {
+  findResourcePlan,
+  resolvePlanComponents,
+} from '@/marketplace/details/plan/effectiveComponents';
 import { hasEditableLimitComponents } from '@/marketplace/resources/change-limits/utils';
 import { isInferenceServiceEnabled } from '@/marketplace/resources/inference';
 import { PageBarTab } from '@/navigation/types';
@@ -56,6 +60,7 @@ export const getResourceTabs = ({
   canManageEndDateRequests?: boolean;
   endDateChangeRequestsCount?: number;
 }) => {
+  const resourcePlan = findResourcePlan(offering.plans, resource.plan_uuid);
   // Generate tabs
   const tabs: PageBarTab<{
     resource: Resource;
@@ -385,7 +390,7 @@ export const getResourceTabs = ({
   // parent offering's limit components but have no plan of their own.
   if (
     canManageLimitRequests &&
-    hasEditableLimitComponents(offering) &&
+    hasEditableLimitComponents(offering, resourcePlan) &&
     Boolean(resource.plan_uuid)
   ) {
     changeRequestTabs.push({
@@ -468,7 +473,12 @@ export const fetchData = async (resource: Resource) => {
   const offering = await marketplaceResourcesOfferingRetrieve({
     path: { uuid: resource.uuid },
   }).then((response) => response.data);
-  const components = offering.components;
+  // Billing fields are resolved for the resource's plan: under a usage plan
+  // the builtin components read as usage-based.
+  const components = resolvePlanComponents(
+    offering.components,
+    findResourcePlan(offering.plans, resource.plan_uuid),
+  );
 
   let lexisLinksCount = 0;
   if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {

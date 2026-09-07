@@ -79,6 +79,16 @@ export const CostChangeField = ({
   shouldConcealPrices,
 }: OrderTypeBasedProps) => {
   const costChange = useMemo(() => {
+    if (order.new_plan_billing_mode === 'usage') {
+      // A usage plan has no fee to compare against; the estimate would read
+      // as a drop to zero.
+      return order.old_plan_billing_mode === 'usage'
+        ? translate('Billed by usage; rates change on the day of the switch')
+        : translate('Billed by usage (previously {amount}{unit})', {
+            amount: defaultCurrency(Number(order.old_cost_estimate) || 0),
+            unit: getPlanUnitAbbr(order.plan_unit),
+          });
+    }
     const amount = defaultCurrency(
       Number(order.new_cost_estimate) - Number(order.old_cost_estimate),
       false,

@@ -12,11 +12,12 @@ import {
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
+import { getEffectiveComponents } from '@/marketplace/details/plan/effectiveComponents';
 
 import { useOrderFormData } from './selectors';
 
 interface OrderAutoApprovalNoticeProps {
-  offering?: Pick<PublicOfferingDetails, 'components'>;
+  offering: Pick<PublicOfferingDetails, 'type' | 'components'>;
   monthlyCost: number;
 }
 
@@ -24,7 +25,7 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
   offering,
   monthlyCost,
 }) => {
-  const { project } = useOrderFormData();
+  const { project, plan } = useOrderFormData();
 
   const { data: rule } = useQuery({
     queryKey: ['ProjectOrderAutoApproval', project?.uuid],
@@ -39,7 +40,9 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
 
   if (!rule || rule.enabled === false) return null;
 
-  const hasUsageComponent = (offering?.components ?? []).some(
+  // Resolve through the selected plan: a limit plan on an offering that also
+  // has a usage plan is still eligible for auto-approval.
+  const hasUsageComponent = getEffectiveComponents(offering, plan).some(
     (c) => c?.billing_type === 'usage',
   );
   const limit = parseFloat(rule.monthly_cost_limit);

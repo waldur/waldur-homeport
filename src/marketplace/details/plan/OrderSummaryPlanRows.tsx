@@ -68,6 +68,12 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
   );
 
   const total = periodic.total + oneTime.oneTimeTotal;
+  const hasUsage = periodic.usageRows.length > 0;
+  const totalLabel = hasUsage
+    ? total
+      ? translate('{amount} + usage', { amount: defaultCurrency(total) })
+      : translate('Billed by usage')
+    : defaultCurrency(total || 0);
 
   return (
     <>
@@ -133,6 +139,24 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
               ))}
         </div>
       )}
+      {hasUsage && (
+        <div className="border-bottom mb-5">
+          {periodic.usageRows.map((row, i) => (
+            <CheckoutPricingRow
+              key={i}
+              label={row.name}
+              value={
+                shouldConcealPrices
+                  ? translate('Usage based')
+                  : translate('{price} per {unit}', {
+                      price: defaultCurrency(row.price),
+                      unit: row.measured_unit,
+                    })
+              }
+            />
+          ))}
+        </div>
+      )}
       {oneTime.hasOneTimeCost && !shouldConcealPrices && (
         <CheckoutPricingRow
           label={translate('One time cost')}
@@ -160,7 +184,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
       {!shouldConcealPrices && props.hasTotal && (
         <CheckoutPricingRow
           label={translate('Total')}
-          value={defaultCurrency(total || 0)}
+          value={totalLabel}
           total
           className="fs-3"
         />

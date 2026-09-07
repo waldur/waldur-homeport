@@ -100,7 +100,10 @@ const ImpactPreview: FC<{
 
 interface SwitchBillingModeDialogProps {
   resolve: {
-    offering: Pick<PublicOfferingDetails, 'uuid' | 'type' | 'components'>;
+    offering: Pick<
+      PublicOfferingDetails,
+      'uuid' | 'type' | 'components' | 'plans'
+    >;
     refetch(): void;
     currentMode: BillingModeEnum;
   };
@@ -110,6 +113,9 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
   props,
 ) => {
   const availableModes = BILLING_MODES;
+  const explicitPlans = (props.resolve.offering.plans ?? []).filter(
+    (plan) => plan.billing_mode && plan.billing_mode !== 'inherit',
+  );
 
   const switchBillingModeMutation = useManagedMutation<
     any,
@@ -148,6 +154,16 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
               {translate(
                 'Switch all infrastructure components between monthly, prepaid, and usage-based billing.',
               )}
+            </p>
+            <p className="text-muted mb-4">
+              {explicitPlans.length
+                ? translate(
+                    'Plans with their own billing mode are not affected: {plans}.',
+                    {
+                      plans: explicitPlans.map((plan) => plan.name).join(', '),
+                    },
+                  )
+                : translate('All plans of this offering inherit this setting.')}
             </p>
             <Field name="billing_mode">
               {({ input }) => (

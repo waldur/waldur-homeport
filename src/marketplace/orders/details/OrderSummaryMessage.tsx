@@ -24,7 +24,10 @@ interface Context {
     | 'new_plan_name'
     | 'old_cost_estimate'
     | 'new_cost_estimate'
-  >;
+  > &
+    Partial<
+      Pick<OrderDetails, 'old_plan_billing_mode' | 'new_plan_billing_mode'>
+    >;
 
   user: string;
   approved?: string;
@@ -101,6 +104,19 @@ export const getUpdateSummary = (ctx: Context) => {
   }
   if (ctx.approved) {
     return msg + ' ' + ctx.approved;
+  } else if (ctx.order.new_plan_billing_mode === 'usage') {
+    const usageMessage =
+      ctx.order.old_plan_billing_mode === 'usage'
+        ? translate(
+            'Both plans are billed by usage; the rates change on the day of the switch. VAT is not included.',
+          )
+        : translate(
+            'The new plan is billed by usage; the fee of {old_estimate} is charged for the current billing period only. VAT is not included.',
+            {
+              old_estimate: defaultCurrency(ctx.order.old_cost_estimate || 0),
+            },
+          );
+    return msg + ' ' + usageMessage;
   } else {
     const EstimatedMessage = translate(
       'Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included.',

@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { Field, Form } from 'react-final-form';
+import React, { useMemo } from 'react';
+import { Field, Form, useFormState } from 'react-final-form';
 import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FormFooter } from '@/form';
 import { ChoicesTable } from '@/form/ChoicesTable';
 import { translate } from '@/i18n';
+import { getPlanBillingMode } from '@/marketplace/details/plan/billingMode';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -14,7 +15,43 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
-import { FetchedData, loadData } from './utils';
+import { PlanSwitchModeExplanation } from './PlanSwitchModeExplanation';
+import { FetchedData, getBilledLimits, loadData } from './utils';
+
+/** Explains the billing consequence of the plan selected in the form. */
+const SelectedPlanExplanation = (props: FetchedData) => {
+  const { values } = useFormState();
+  const plans = props.offering?.plans;
+  const selectedPlan = useMemo(
+    () => plans?.find((plan) => plan.uuid === values.plan?.uuid),
+    [plans, values.plan?.uuid],
+  );
+  const targetMode = useMemo(
+    () => getPlanBillingMode(props.offering, selectedPlan),
+    [props.offering, selectedPlan],
+  );
+  const billedLimits = useMemo(
+    () =>
+      selectedPlan && targetMode === 'limit'
+        ? getBilledLimits(props.offering, selectedPlan, props.resource.limits)
+        : [],
+    [props.offering, selectedPlan, targetMode, props.resource.limits],
+  );
+  if (!selectedPlan || !props.currentPlan || !props.offering) {
+    return null;
+  }
+  return (
+    <PlanSwitchModeExplanation
+      currentMode={props.currentMode}
+      targetMode={targetMode}
+      currentPlanName={props.currentPlan.name}
+      targetPlanName={selectedPlan.name}
+      billedLimits={billedLimits}
+      billingPeriod={selectedPlan.unit}
+      concealPrices={props.shouldConcealPrices}
+    />
+  );
+};
 
 interface ChangePlanDialogProps {
   resolve: {
@@ -98,6 +135,7 @@ const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
                     />
                   )}
                 />
+                <SelectedPlanExplanation {...props} />
               </div>
             ) : (
               <p>{translate('There are no other plans available.')}</p>

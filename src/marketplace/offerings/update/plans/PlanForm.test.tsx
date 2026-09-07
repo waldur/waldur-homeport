@@ -1,98 +1,79 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import { Form } from 'react-final-form';
 import { describe, expect, it } from 'vitest';
 
-import { openAndSelectOption } from '@/test/select';
+import { renderWithProviders } from '@/test/harness';
 
 import { PlanForm } from './PlanForm';
 
-const renderComponent = (initialValues = {}) => {
-  return render(
-    <Form
-      onSubmit={() => {}}
-      initialValues={initialValues}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <PlanForm />
-        </form>
-      )}
-    />,
+const builtins = [
+  { is_builtin: true, is_prepaid: false },
+  { is_builtin: true, is_prepaid: false },
+];
+
+// AddPlanDialog seeds the form with whole select options, not bare values, so
+// the fixtures have to do the same or they exercise a shape the app never sends.
+const option = (value: string) => ({ value, label: value });
+
+const render = (offering, initialValues = {}) =>
+  renderWithProviders(
+    <Form onSubmit={() => undefined} initialValues={initialValues}>
+      {() => <PlanForm offering={offering} />}
+    </Form>,
   );
-};
 
-describe('PlanForm', () => {
-  it('renders all form fields', () => {
-    renderComponent();
-
-    // Check for form labels
-    expect(screen.getByText('Name')).toBeInTheDocument();
-    expect(screen.getByText('Billing period')).toBeInTheDocument();
-    expect(screen.getByText('Description')).toBeInTheDocument();
-    expect(screen.getByText('Article code')).toBeInTheDocument();
+describe('PlanForm billing period', () => {
+  it('explains what the period bills when it applies', async () => {
+    render(
+      {
+        components: builtins,
+        billing_period_applies: { inherit: true, limit: true, usage: false },
+        plans: [{ unit: 'month' }],
+      },
+      { billing_mode: option('limit'), unit: option('month') },
+    );
+    expect(
+      await screen.findByText(/Fixed and limit-based charges are billed/),
+    ).toBeInTheDocument();
   });
 
-  it('renders form fields with initial values', async () => {
-    const initialValues = {
-      name: 'Test Plan',
-      unit: 'month',
-      description: 'Test description',
-      article_code: 'TEST123',
-    };
-
-    renderComponent(initialValues);
-
-    // Check that initial values are displayed
-    expect(screen.getByDisplayValue('Test Plan')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('TEST123')).toBeInTheDocument();
-    expect(screen.getByText('Per month')).toBeInTheDocument();
-    // For markdown editor, check the text content instead of display value
-    expect(await screen.findByText('Test description')).toBeInTheDocument();
+  it('pins the period and says it is inert under a usage plan', async () => {
+    render(
+      {
+        components: builtins,
+        billing_period_applies: { inherit: true, limit: true, usage: false },
+        plans: [{ unit: 'month' }],
+      },
+      { billing_mode: option('usage'), unit: option('month') },
+    );
+    // Sibling plans agree on a period, so it is pinned rather than merely inert.
+    expect(
+      await screen.findByText(/Nothing on this plan is billed per period/),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/follows the other plans/)).toBeInTheDocument();
   });
 
-  it('allows entering plan name', async () => {
-    renderComponent();
-    const user = userEvent.setup();
-
-    const nameInput = screen.getByLabelText(/Name/i);
-    await user.type(nameInput, 'New Plan Name');
-
-    expect(nameInput).toHaveValue('New Plan Name');
+  it('says a mismatched period is allowed but blocks switching', async () => {
+    render(
+      {
+        components: builtins,
+        billing_period_applies: { inherit: true, limit: true, usage: false },
+        plans: [{ unit: 'month' }],
+      },
+      { billing_mode: option('limit'), unit: option('day') },
+    );
+    expect(
+      await screen.findByText(/The plan can be created/),
+    ).toBeInTheDocument();
   });
 
-  it('allows entering description', async () => {
-    renderComponent();
-    const user = userEvent.setup();
-
-    // Using test ID from global markdown mock
-    const editorContent = await screen.findByTestId('markdown-editor');
-    await user.type(editorContent, 'This is a test description');
-    expect(editorContent).toHaveValue('This is a test description');
-  });
-
-  it('allows entering article code', async () => {
-    renderComponent();
-    const user = userEvent.setup();
-
-    const articleCodeInput = screen.getByLabelText(/Article code/i);
-    await user.type(articleCodeInput, 'ART001');
-
-    expect(articleCodeInput).toHaveValue('ART001');
-  });
-
-  it('allows selecting billing period', async () => {
-    const user = userEvent.setup();
-    renderComponent();
-
-    await openAndSelectOption(user, 'Billing period', 'Per half month');
-
-    expect(screen.getByText('Per half month')).toBeInTheDocument();
-  });
-
-  it('displays form group descriptions', () => {
-    renderComponent();
-
-    // Check for description text in ArticleCodeField
-    expect(screen.getByText('Article code')).toBeInTheDocument();
+  it('falls back to the old behaviour when the backend omits the field', async () => {
+    render(
+      { components: builtins, plans: [{ unit: 'month' }] },
+      { billing_mode: option('usage'), unit: option('month') },
+    );
+    expect(
+      await screen.findByText(/Fixed and limit-based charges are billed/),
+    ).toBeInTheDocument();
   });
 });

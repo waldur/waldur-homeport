@@ -373,6 +373,31 @@
       "feature_area": "steps"
     }
   },
+  "/ day": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "/ half month": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "/ hour": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "/ month": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "/ quarter": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "/d": {
     "context": {
       "feature_area": "views"
@@ -3032,6 +3057,11 @@
   "All pages": {
     "context": {
       "feature_area": "table"
+    }
+  },
+  "All plans of this offering inherit this setting.": {
+    "context": {
+      "feature_area": "update"
     }
   },
   "All ports": {
@@ -7280,6 +7310,29 @@
       "primary_ui_type": "label"
     }
   },
+  "Billed by usage": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "Billed by usage (previously {amount}{unit})": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "type-based"
+    }
+  },
+  "Billed by usage; rates change on the day of the switch": {
+    "context": {
+      "feature_area": "type-based"
+    }
+  },
   "Billing": {
     "context": {
       "primary_ui_type": "title",
@@ -7309,6 +7362,11 @@
   "Billing actions": {
     "context": {
       "feature_area": "openstack-instance"
+    }
+  },
+  "Billing changes with this plan": {
+    "context": {
+      "feature_area": "change-plan"
     }
   },
   "Billing component has been created successfully.": {
@@ -7352,7 +7410,8 @@
   },
   "Billing mode": {
     "context": {
-      "feature_area": "update"
+      "primary_ui_type": "title",
+      "feature_area": "plan"
     }
   },
   "Billing mode has been updated.": {
@@ -7365,6 +7424,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "plan"
+    }
+  },
+  "Billing period ({unit}) differs from the current plan.": {
+    "context": {
+      "variables": {
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "change-plan"
     }
   },
   "Billing periods": {
@@ -7589,6 +7658,21 @@
       "feature_area": "matrix"
     }
   },
+  "Both plans are billed by usage; the rates change on the day of the switch. VAT is not included.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "Both plans use the same billing period ({period}).": {
+    "context": {
+      "variables": {
+        "period": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "change-plan"
+    }
+  },
   "Both roles carry exactly the same permissions.": {
     "context": {
       "feature_area": "roles"
@@ -7750,6 +7834,7 @@
       "feature_area": "reviewer-pool"
     }
   },
+  "Builtin components are billed as configured on the Components tab.": {},
   "Bulgaria": {},
   "Bulk import": {
     "context": {
@@ -8423,6 +8508,11 @@
   "Canned responses": {
     "context": {
       "feature_area": "canned-responses"
+    }
+  },
+  "Cannot be changed while resources use this plan.": {
+    "context": {
+      "feature_area": "plans"
     }
   },
   "Cannot change the network ACL of a revoked token.": {
@@ -13133,6 +13223,7 @@
     }
   },
   "Customers are billed based on actual resource usage reported by the service provider.": {},
+  "Customers are billed for actual consumption, for example per core-hour. No limits are requested when ordering.": {},
   "Customers are billed monthly based on reserved limits.": {},
   "Customers can be created only from verified entries": {
     "context": {
@@ -19553,6 +19644,16 @@
       "feature_area": "affiliates"
     }
   },
+  "Fee: {amount}": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "change-plan"
+    }
+  },
   "Feedback": {
     "context": {
       "primary_ui_type": "title"
@@ -20056,6 +20157,16 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Fixed and limit-based charges are billed for this period. The plan can be created, but the other plans of this offering use a different period, and customers can only move between plans that share one.": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
+  "Fixed and limit-based charges are billed for this period. Usage is charged per reported quantity and is unaffected.": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
   "Fixed date": {
     "context": {
       "primary_ui_type": "label"
@@ -20083,7 +20194,8 @@
   },
   "Fixed price": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "plan"
     }
   },
   "Fixed — use common storage quota": {
@@ -23103,6 +23215,11 @@
       "feature_area": "cluster"
     }
   },
+  "Inherit from components": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Initial": {
     "context": {
       "feature_area": "version-history"
@@ -25149,9 +25266,20 @@
       "feature_area": "usage-views"
     }
   },
+  "Limit-based (monthly)": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "plan"
+    }
+  },
   "Limit-based component that defines soft space quota": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Limit-based or usage-based override how the builtin components (cores, RAM, storage) are billed under this plan. Custom components are unaffected.": {
+    "context": {
+      "feature_area": "plans"
     }
   },
   "Limit: {limit} {unit} per month": {
@@ -28171,6 +28299,11 @@
       "feature_area": "views"
     }
   },
+  "Mixed": {
+    "context": {
+      "feature_area": "plan"
+    }
+  },
   "Mobile phone number": {
     "context": {
       "feature_area": "valimo"
@@ -30528,6 +30661,11 @@
       "feature_area": "support"
     }
   },
+  "No plan": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "No plans available": {
     "context": {
       "feature_area": "vendorOfferings"
@@ -31306,6 +31444,11 @@
       "feature_area": "shared"
     }
   },
+  "Not limited": {
+    "context": {
+      "feature_area": "type-based"
+    }
+  },
   "Not managed by this pool — sourced externally.": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -31438,6 +31581,16 @@
   "Nothing is scheduled to end: the credit has no expiry date, and neither the project nor its resources have an end date.": {
     "context": {
       "feature_area": "policy-watch"
+    }
+  },
+  "Nothing on this plan is billed per period — usage is charged per reported quantity — so it follows the other plans of this offering, which lets customers switch between them.": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
+  "Nothing on this plan is billed per period, so this does not change what is invoiced. Customers can only move between plans that share a period, so match the other plans of this offering.": {
+    "context": {
+      "feature_area": "plans"
     }
   },
   "Nothing to disable": {
@@ -35720,6 +35873,16 @@
     }
   },
   "Plans below safety margin": {},
+  "Plans with their own billing mode are not affected: {plans}.": {
+    "context": {
+      "variables": {
+        "plans": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "update"
+    }
+  },
   "Platform administrator": {
     "context": {
       "feature_area": "data-access"
@@ -36642,7 +36805,11 @@
   "Prefix for invoice item names (e.g., \"Arrow consumption\"). Used in both provisional and compensation items.": {},
   "Prefix to be appended to all group names created in FreeIPA by Waldur. It marks which groups are managed by Waldur, so it may not be empty.": {},
   "Prefix to be appended to all usernames created in FreeIPA by Waldur. It marks which accounts are managed by Waldur, so it may not be empty.": {},
-  "Prepaid": {},
+  "Prepaid": {
+    "context": {
+      "feature_area": "plan"
+    }
+  },
   "Prepaid (One-time)": {
     "context": {
       "primary_ui_type": "label"
@@ -49258,6 +49425,34 @@
       "feature_area": "theme"
     }
   },
+  "Switching from limit-based to usage-based billing. The fee of \"{current}\" is charged for its current billing period: a monthly plan keeps this month's fee, a daily plan is charged for the days used. From then on you are billed for actual consumption at the rates of \"{target}\"; nothing is charged in advance. Your quotas stay unchanged and now cap usage instead of being billed.": {
+    "context": {
+      "variables": {
+        "current": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "change-plan",
+      "action_type": "read"
+    }
+  },
+  "Switching from usage-based to limit-based billing. Usage accrued this month before the switch is invoiced at the rates of \"{current}\". From the switch the fee of \"{target}\" applies for its billing period (the whole month for a monthly plan, per day for a daily plan), based on your current quotas:": {
+    "context": {
+      "variables": {
+        "current": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "change-plan",
+      "action_type": "read"
+    }
+  },
   "Switching scripts will discard your changes. Do you want to continue?": {
     "context": {
       "feature_area": "integration"
@@ -50510,6 +50705,20 @@
       "feature_area": "policies"
     }
   },
+  "The billing model changes from {current} to {target} on the day of the switch.": {
+    "context": {
+      "variables": {
+        "current": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "change-plan",
+      "action_type": "read"
+    }
+  },
   "The broadcast {subject} is scheduled. Are you sure you want to force send it?": {
     "context": {
       "variables": {
@@ -50983,6 +51192,21 @@
         }
       },
       "feature_area": "mass-actions"
+    }
+  },
+  "The new plan is billed by usage: the current plan is charged for its current billing period and consumption is invoiced from the switch. Quotas are unchanged by a plan switch.": {
+    "context": {
+      "feature_area": "resource-pending"
+    }
+  },
+  "The new plan is billed by usage; the fee of {old_estimate} is charged for the current billing period only. VAT is not included.": {
+    "context": {
+      "variables": {
+        "old_estimate": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "The notification has been disabled": {
@@ -59568,6 +59792,24 @@
       "feature_area": "usage-views"
     }
   },
+  "Usage-based components are billed on consumption and are not included in the total.": {
+    "context": {
+      "feature_area": "type-based"
+    }
+  },
+  "Usage-based · {price} per {unit}": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "type-based"
+    }
+  },
   "Usages": {
     "context": {
       "feature_area": "resource-usage"
@@ -65299,6 +65541,16 @@
         }
       },
       "feature_area": "node"
+    }
+  },
+  "{amount} + usage": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "{amount} drawn last month ÷ 30 days": {

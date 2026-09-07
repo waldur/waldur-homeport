@@ -4,6 +4,8 @@ import { Resource } from 'waldur-js-client';
 import { Badge } from '@/core/Badge';
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { toPlanBilling } from '@/marketplace/details/plan/billingMode';
+import { PlanBillingModeBadge } from '@/marketplace/details/plan/PlanBillingModeBadge';
 import { OrderDetailsQuickBody } from '@/marketplace/orders/details/OrderDetailsQuickBody';
 import { Field } from '@/resource/summary';
 
@@ -37,39 +39,51 @@ export const ResourcePlanChangeInfo = ({
             <Badge variant="blue" pill outline>
               {order.old_plan_name}
             </Badge>
+            <PlanBillingModeBadge
+              mode={toPlanBilling(order.old_plan_billing_mode)}
+            />
             <ArrowRightIcon weight="bold" />
             <Badge variant="warning" pill outline>
               {order.new_plan_name}
             </Badge>
+            <PlanBillingModeBadge
+              mode={toPlanBilling(order.new_plan_billing_mode)}
+            />
           </>
         }
         space={2}
       />
 
       <p className="text-quaternary my-6">
-        {translate(
-          'Estimated cost impact depends on pricing model of the new plan',
-        )}
+        {order.new_plan_billing_mode === 'usage'
+          ? translate(
+              'The new plan is billed by usage: the current plan is charged for its current billing period and consumption is invoiced from the switch. Quotas are unchanged by a plan switch.',
+            )
+          : translate(
+              'Estimated cost impact depends on pricing model of the new plan',
+            )}
       </p>
 
-      <CostEstimatedChangeView
-        order={order}
-        message={
-          order.plan_unit === 'hour'
-            ? translate('New hourly plan fee')
-            : order.plan_unit === 'day'
-              ? translate('New daily plan fee')
-              : order.plan_unit === 'half_month'
-                ? translate('New half month plan fee')
-                : order.plan_unit === 'month'
-                  ? translate('New monthly plan fee')
-                  : order.plan_unit === 'quarter'
-                    ? translate('New quarterly plan fee')
-                    : translate('New {period} plan fee', {
-                        period: order.plan_unit,
-                      })
-        }
-      />
+      {order.new_plan_billing_mode === 'usage' ? null : (
+        <CostEstimatedChangeView
+          order={order}
+          message={
+            order.plan_unit === 'hour'
+              ? translate('New hourly plan fee')
+              : order.plan_unit === 'day'
+                ? translate('New daily plan fee')
+                : order.plan_unit === 'half_month'
+                  ? translate('New half month plan fee')
+                  : order.plan_unit === 'month'
+                    ? translate('New monthly plan fee')
+                    : order.plan_unit === 'quarter'
+                      ? translate('New quarterly plan fee')
+                      : translate('New {period} plan fee', {
+                          period: order.plan_unit,
+                        })
+          }
+        />
+      )}
     </>
   );
 };
