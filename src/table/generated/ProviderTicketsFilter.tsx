@@ -8,6 +8,10 @@ import { BooleanFilter, SelectFilter } from '@/table';
 
 export const StatusOptions: StatusOption[] = [
   {
+    label: translate('Canceled'),
+    value: 'Canceled',
+  },
+  {
     label: translate('Closed'),
     value: 'Closed',
   },

@@ -23,6 +23,10 @@ export interface IsOpenOption {
 
 export const StatusOptions: StatusOption[] = [
   {
+    label: translate('Canceled'),
+    value: 'Canceled',
+  },
+  {
     label: translate('Closed'),
     value: 'Closed',
   },

@@ -833,6 +833,7 @@ overrides:
       - is_routed
     status:
       enumOverrides:
+        Canceled: Canceled
         Closed: Closed
         Open: Open
         Resolved: Resolved
@@ -858,6 +859,7 @@ overrides:
       - sla_breached
     status:
       enumOverrides:
+        Canceled: Canceled
         Closed: Closed
         Open: Open
         Resolved: Resolved
