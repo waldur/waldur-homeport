@@ -7,7 +7,6 @@ import {
   reorderAsyncOptions,
   reorderOptions,
 } from './SelectHelper';
-import { useSelectTheme } from './theme';
 import {
   CustomAsyncCreatableSelectProps,
   CustomAsyncSelectProps,
@@ -27,7 +26,6 @@ export const useSelect = <
 >(
   props: T,
 ) => {
-  const theme = useSelectTheme();
   const isTableFilter = props.variant === 'tableFilter';
 
   const composedComponents = composeComponents(
@@ -107,7 +105,6 @@ export const useSelect = <
   const isDisabled = props.isDisabled || props.disabled;
 
   return {
-    theme,
     ...defaultPortalingProps,
     ...multiProps,
     ...tableFilterProps,
@@ -130,7 +127,6 @@ export const useAsyncSelect = <
 >(
   props: T,
 ) => {
-  const theme = useSelectTheme();
   const isTableFilter = props.variant === 'tableFilter';
 
   const composedComponents = composeComponents(
@@ -220,7 +216,6 @@ export const useAsyncSelect = <
   const isDisabled = props.isDisabled || props.disabled;
 
   return {
-    theme,
     additional: { page: 1 },
     ...defaultPortalingProps,
     ...multiProps,
