@@ -1,4 +1,3 @@
-import { hidePlanAddButton } from '@/marketplace/common/registry';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
@@ -54,7 +53,6 @@ export const PlanActions = ({ offering, plan, refetch, user }) => {
         </>
       )}
       {offeringOwnsPricing(offering) &&
-        !hidePlanAddButton(offering.type, offering.plans) &&
         hasPermission(user, {
           permission: PermissionEnum.CREATE_OFFERING_PLAN,
           customerId: offering.customer_uuid,

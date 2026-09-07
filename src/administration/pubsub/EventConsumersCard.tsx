@@ -10,7 +10,13 @@ import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
+import {
+  EventConsumersFilter,
+  EventConsumersFilterFormId,
+  selectEventConsumersFilter,
+} from '@/table/generated/EventConsumersFilter';
 import Table from '@/table/Table';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -18,11 +24,6 @@ import { getRabbitMQStats } from '../rabbitmq/api';
 import { getConsumerQueueName } from '../rabbitmq/utils';
 
 import { EventConsumerRowActions } from './EventConsumerRowActions';
-
-// object_types is a JSONField on the backend, so the schema types it as an
-// object; at runtime it is always a list of observable object type names.
-const getObjectTypes = (row: EventConsumer): string[] =>
-  Array.isArray(row.object_types) ? (row.object_types as string[]) : [];
 
 interface QueueStats {
   messages: number;
@@ -53,7 +54,7 @@ const useConsumerQueueStats = (enabled: boolean) => {
 };
 
 const ObjectTypesCell: FC<{ row: EventConsumer }> = ({ row }) => {
-  const types = getObjectTypes(row);
+  const types = row.object_types;
   if (types.length === 0) {
     return (
       <Badge variant="secondary" pill outline>
@@ -92,9 +93,15 @@ const ScopesCell: FC<{ row: EventConsumer }> = ({ row }) => {
 };
 
 const EventConsumersTable: FC = () => {
+  const filterValues = useFilterValues(EventConsumersFilterFormId);
+  const filter = useMemo(
+    () => selectEventConsumersFilter(filterValues),
+    [filterValues],
+  );
   const tableProps = useTable({
     table: 'EventConsumers',
     fetchData: createFetcher(eventConsumersList),
+    filter,
   });
   const { byQueue: queueStats, statsUnavailable } = useConsumerQueueStats(true);
 
@@ -106,6 +113,15 @@ const EventConsumersTable: FC = () => {
           <code className="fs-8">{row.uuid.substring(0, 8)}...</code>
         ),
         copyField: (row: EventConsumer) => row.uuid,
+      },
+      {
+        title: translate('Owner'),
+        render: ({ row }: { row: EventConsumer }) => (
+          <span className="fw-bold">
+            {row.user_full_name || row.user_username}
+          </span>
+        ),
+        copyField: (row: EventConsumer) => row.user_username,
       },
       {
         title: translate('Object types'),
@@ -187,7 +203,9 @@ const EventConsumersTable: FC = () => {
         {...tableProps}
         columns={columns}
         verboseName={translate('event consumers')}
-        hasActionBar={false}
+        formId={EventConsumersFilterFormId}
+        filters={<EventConsumersFilter />}
+        hideTitle
         hoverShadow={false}
         initialPageSize={10}
         minHeight="auto"

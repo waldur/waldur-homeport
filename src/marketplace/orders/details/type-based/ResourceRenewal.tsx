@@ -37,13 +37,14 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
   );
 
   const data = useMemo(() => {
+    const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
     const requirements = getLimitChangeRequirements(
       { limits: attributes.old_limits, current_usages: {} },
       offering,
+      plan,
     );
 
     if (requirements) {
-      const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
       const { usages, limits: currentLimits } = requirements;
       return getLimitChangeData(
         plan,

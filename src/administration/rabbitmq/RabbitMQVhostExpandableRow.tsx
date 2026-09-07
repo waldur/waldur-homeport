@@ -18,12 +18,6 @@ import { QueueKindBadge } from './QueueKindBadge';
 import { RabbitMQQueueActions } from './RabbitMQQueueActions';
 import { RabbitMQQueueConfigPopover } from './RabbitMQQueueConfigPopover';
 import { RabbitMQQueueHealthBadge } from './RabbitMQQueueHealthBadge';
-import {
-  getConsumerUuid,
-  getQueueKind,
-  getRmqQueueType,
-  isConsumerQueue,
-} from './utils';
 
 interface RabbitMQVhostExpandableRowProps {
   row: RmqVhostStats;
@@ -39,10 +33,9 @@ export const RabbitMQVhostExpandableRow: FC<
     isError: agentsUnavailable,
     isLoading: agentsLoading,
   } = useAgentByQueueName();
-  // The stats endpoint currently overwrites x-queue-type with its own
-  // consumer/legacy classification; only show the column when it carries
-  // a real RabbitMQ queue type for at least one queue.
-  const hasRmqQueueType = row.queues.some((queue) => !!getRmqQueueType(queue));
+  // x-queue-type is only set on queues that declare it, so the column is worth
+  // a place only when at least one of them does.
+  const hasRmqQueueType = row.queues.some((queue) => !!queue.queue_type);
 
   const tableProps = useTable({
     table: `RabbitMQQueues-${row.name}`,
@@ -59,7 +52,7 @@ export const RabbitMQVhostExpandableRow: FC<
             // legacy subscription_* names wrap instead of widening the table.
             <code
               className={
-                isConsumerQueue(queue.name)
+                queue.queue_kind === 'consumer'
                   ? 'fs-8 text-nowrap'
                   : 'fs-8 text-break'
               }
@@ -74,7 +67,7 @@ export const RabbitMQVhostExpandableRow: FC<
         {
           title: translate('Kind'),
           render: ({ row: queue }: { row: RmqQueueStats }) => (
-            <QueueKindBadge kind={getQueueKind(queue)} id={queue.name} />
+            <QueueKindBadge kind={queue.queue_kind} id={queue.name} />
           ),
         },
         {
@@ -85,7 +78,7 @@ export const RabbitMQVhostExpandableRow: FC<
         hasRmqQueueType && {
           title: translate('Queue type'),
           render: ({ row: queue }: { row: RmqQueueStats }) => {
-            const queueType = getRmqQueueType(queue);
+            const queueType = queue.queue_type;
             if (!queueType) return renderFieldOrDash(queueType);
             const variant =
               queueType === 'quorum'
@@ -144,7 +137,7 @@ export const RabbitMQVhostExpandableRow: FC<
         {
           title: translate('Consumer / subscription'),
           render: ({ row: queue }: { row: RmqQueueStats }) => {
-            const consumerUuid = getConsumerUuid(queue.name);
+            const consumerUuid = queue.consumer_uuid;
             const owner = consumerUuid ? agentByQueue.get(queue.name) : null;
             if (consumerUuid) {
               return (
@@ -180,7 +173,7 @@ export const RabbitMQVhostExpandableRow: FC<
               : renderFieldOrDash(queue.subscription_uuid);
           },
           copyField: (queue: RmqQueueStats) =>
-            getConsumerUuid(queue.name) || queue.subscription_uuid || '',
+            queue.consumer_uuid || queue.subscription_uuid || '',
         },
         {
           title: translate('Offering'),

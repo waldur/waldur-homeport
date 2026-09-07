@@ -72,8 +72,9 @@ const baseQueue: RmqQueueStats = {
   dead_letter_routing_key: null,
   max_priority: null,
   queue_mode: null,
-  // The backend currently overwrites x-queue-type with its classification.
-  queue_type: 'consumer',
+  queue_type: 'classic',
+  consumer_uuid: CONSUMER_UUID,
+  queue_kind: 'consumer',
 };
 
 const legacyQueue: RmqQueueStats = {
@@ -83,6 +84,8 @@ const legacyQueue: RmqQueueStats = {
   offering_uuid: 'bbbb2222-0000-0000-0000-000000000000',
   object_type: 'order',
   queue_type: 'quorum',
+  consumer_uuid: null,
+  queue_kind: 'legacy',
 };
 
 const vhost = (queues: RmqQueueStats[]): RmqVhostStats =>
@@ -100,7 +103,13 @@ const agentStats = {
       services: [],
       event_subscriptions: [],
       queues: [
-        { name: CONSUMER_QUEUE, messages: 3, consumers: 1, object_type: null },
+        {
+          name: CONSUMER_QUEUE,
+          messages: 3,
+          consumers: 1,
+          object_type: null,
+          kind: 'consumer',
+        },
       ],
     },
   ],
@@ -132,8 +141,8 @@ describe('RabbitMQVhostExpandableRow', () => {
       screen.getByText(`${CONSUMER_UUID.substring(0, 8)}...`),
     ).toBeInTheDocument();
     expect(await screen.findByText('SLURM cluster')).toBeInTheDocument();
-    // The clobbered queue_type must not surface as a RabbitMQ queue type.
-    expect(screen.queryByText('consumer', { exact: true })).toBeNull();
+    // queue_type now carries RabbitMQ's own value, the Kind badge the classification.
+    expect(screen.getByText('classic')).toBeInTheDocument();
   });
 
   it('shows a dash for a consumer queue no agent owns', async () => {

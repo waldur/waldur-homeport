@@ -1,3 +1,8 @@
+// react-select ships its own colour palette and applies it from unlayered
+// emotion styles, which beat anything inside `@layer bootstrap` however
+// specific it is. Rather than keeping a second, hand-written palette in JS to
+// fight it, every colour of the select lives here and comes from the design
+// tokens — which is why the declarations below are forced.
 .metronic-select-container {
   .metronic-select {
     &__control {
@@ -9,7 +14,7 @@
       min-height: $input-height !important;
       font-size: $input-font-size;
       font-weight: $input-font-weight;
-      background-color: $input-bg;
+      background-color: $input-bg !important;
 
       // custom/_forms.scss already asks for this on .metronic-select__control;
       // it loses the same cascade fight, so repeat it here where it can win.
@@ -46,16 +51,38 @@
       padding-left: calc($input-padding-x - 2px);
     }
 
-    // Forced for the same reason as the control above: react-select paints the
-    // placeholder from `neutral50` and the indicator from `neutral20` in its
-    // own unlayered styles, which beat `@layer bootstrap`. Left alone they
-    // render react-select's greys in light mode and the brand-tinted greens
-    // from theme.ts's DARK_COLORS in dark mode, instead of these tokens.
+    &__single-value,
+    &__input-container,
+    &__input {
+      color: $text-primary !important;
+    }
+
+    &__multi-value {
+      background-color: $bg-secondary !important;
+
+      &__label {
+        color: $text-primary !important;
+      }
+
+      // react-select paints the remove button's hover from its own
+      // `dangerLight`/`danger` (a pink chip with red text) in unlayered
+      // styles, so the tokens have to be forced here too.
+      &__remove:hover {
+        background-color: $bg-tertiary !important;
+        color: $text-primary !important;
+      }
+    }
+
     &__placeholder {
+      // Forced for the same cascade-layer reason as the control above:
+      // react-select colours the placeholder from its own unlayered emotion
+      // styles (theme `neutral50`), so the token loses unless it is forced and
+      // the placeholder renders in the theme colour instead of the input one.
       color: $text-placeholder !important;
     }
 
     &__indicator {
+      // Likewise `neutral20`, which react-select uses for the chevron.
       color: $fg-quinary !important;
 
       &-separator {
@@ -65,8 +92,10 @@
     &__clear-indicator {
       padding-right: 4px;
 
+      // Forced only because the rule above now is: an !important declaration
+      // beats a normal one whatever the specificity.
       &:hover {
-        color: $fg-quaternary;
+        color: $fg-quaternary !important;
       }
     }
 
@@ -87,7 +116,7 @@
         }
 
         &:hover {
-          color: $fg-quaternary;
+          color: $fg-quaternary !important;
         }
       }
     }
@@ -150,7 +179,13 @@
 
 // Menu/List
 .metronic-select__menu {
+  background-color: $bg-primary !important;
   border-radius: $border-radius !important;
+
+  .metronic-select__menu-notice,
+  .metronic-select__group-heading {
+    color: $text-tertiary !important;
+  }
 
   .metronic-select__menu-list {
     .metronic-select__option {
@@ -177,6 +212,12 @@
         &:active {
           background-color: $bg-tertiary !important;
         }
+      }
+
+      // react-select greys a disabled option from `neutral20`; after the
+      // forced colour above and the focused rule, this has to win as well.
+      &--is-disabled {
+        color: $text-disabled !important;
       }
     }
 

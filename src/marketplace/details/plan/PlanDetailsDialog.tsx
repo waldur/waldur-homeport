@@ -16,6 +16,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { VersionHistoryButton } from '@/version-history';
 
+import { getPlanBillingMode, getPlanBillingModeLabel } from './billingMode';
 import { PureDetailsTable } from './PlanDetailsTable';
 import { combinePrices } from './utils';
 
@@ -126,6 +127,14 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
             <p>
               <strong>{translate('Plan description')}</strong>:{' '}
               {data.plan.description}
+            </p>
+          )}
+          {getPlanBillingMode(data.offering, data.plan) && (
+            <p>
+              <strong>{translate('Billing mode')}</strong>:{' '}
+              {getPlanBillingModeLabel(
+                getPlanBillingMode(data.offering, data.plan),
+              )}
             </p>
           )}
           {data.plan.unit_price > 0 && !concealBillingInfo && (

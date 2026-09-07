@@ -7,7 +7,8 @@ import {
 import { StateIndicator } from '@/core/StateIndicator';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
-import { hidePlanAddButton } from '@/marketplace/common/registry';
+import { getPlanBillingMode } from '@/marketplace/details/plan/billingMode';
+import { PlanBillingModeBadge } from '@/marketplace/details/plan/PlanBillingModeBadge';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { createFetcher } from '@/table/api';
@@ -42,6 +43,12 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
           outline
           pill
         />
+      ),
+    },
+    {
+      title: translate('Billing mode'),
+      render: ({ row }) => (
+        <PlanBillingModeBadge mode={getPlanBillingMode(props.offering, row)} />
       ),
     },
     {
@@ -80,7 +87,6 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
 
   const canCreatePlan =
     offeringOwnsPricing(props.offering) &&
-    !hidePlanAddButton(props.offering.type, props.offering.plans) &&
     hasPermission(user, {
       permission: PermissionEnum.CREATE_OFFERING_PLAN,
       customerId: props.offering.customer_uuid,

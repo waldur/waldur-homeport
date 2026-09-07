@@ -1,6 +1,8 @@
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { getResourceBillingMode } from '@/marketplace/details/plan/billingMode';
+import { PlanBillingModeBadge } from '@/marketplace/details/plan/PlanBillingModeBadge';
 import { useModal } from '@/modal/actions';
 
 const PlanDetailsDialog = lazyComponent(() =>
@@ -17,6 +19,10 @@ export const PlanDetailsField = ({ resource }) => {
       value={
         <>
           {resource.plan_name}{' '}
+          <PlanBillingModeBadge
+            mode={getResourceBillingMode(resource)}
+            className="me-1"
+          />
           <button
             className="text-link"
             type="button"

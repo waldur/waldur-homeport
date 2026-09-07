@@ -12,6 +12,10 @@ import {
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import {
+  findResourcePlan,
+  resolvePlanComponents,
+} from '@/marketplace/details/plan/effectiveComponents';
 import { ResourceComponentItem } from '@/marketplace/resources/details/ResourceComponentItem';
 
 interface ResourceComponentsSummaryProps {
@@ -31,7 +35,10 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
     error,
     refetch,
   } = useQuery<
-    Pick<ProviderOfferingDetails | PublicOfferingDetails, 'components'>
+    Pick<
+      ProviderOfferingDetails | PublicOfferingDetails,
+      'components' | 'plans'
+    >
   >({
     queryKey: [
       'resource-offering-components',
@@ -42,13 +49,13 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
       if (useProviderEndpoint) {
         return marketplaceProviderOfferingsRetrieve({
           path: { uuid: resource.offering_uuid },
-          query: { field: ['components'] },
+          query: { field: ['components', 'plans'] },
         }).then((response) => response.data);
       }
 
       return marketplaceResourcesOfferingRetrieve({
         path: { uuid: resource.uuid },
-        query: { field: ['components'] },
+        query: { field: ['components', 'plans'] },
       }).then((response) => response.data);
     },
     refetchOnWindowFocus: false,
@@ -67,7 +74,10 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
 
   return (
     <Row className="field-row mb-1">
-      {offering.components.map((component) => (
+      {resolvePlanComponents(
+        offering.components,
+        findResourcePlan(offering.plans, resource.plan_uuid),
+      ).map((component) => (
         <Col key={component.type} xs={2}>
           <ResourceComponentItem resource={resource} component={component} />
         </Col>

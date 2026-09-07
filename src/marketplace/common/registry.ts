@@ -95,14 +95,6 @@ export function getCreatableOfferings(): Option[] {
     .sort((a, b) => a.label.localeCompare(b.label));
 }
 
-export function hidePlanAddButton(offeringType: string, fields: Array<any>) {
-  return (
-    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].onlyOnePlan &&
-    fields.length
-  );
-}
-
 export function isOfferingTypeSchedulable(offeringType: string) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&

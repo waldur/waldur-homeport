@@ -1,13 +1,12 @@
 import { FC } from 'react';
+import type { QueueKindEnum } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
-import type { QueueKind } from './utils';
-
 const KIND_BADGES: Record<
-  QueueKind,
+  QueueKindEnum,
   { variant: string; outline: boolean; label: string; tip: string }
 > = {
   consumer: {
@@ -30,7 +29,7 @@ const KIND_BADGES: Record<
   },
 };
 
-export const QueueKindBadge: FC<{ kind: QueueKind; id: string }> = ({
+export const QueueKindBadge: FC<{ kind: QueueKindEnum; id: string }> = ({
   kind,
   id,
 }) => {

@@ -7,6 +7,12 @@ import { getAllPages } from '@/core/api';
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { Role } from '@/permissions/types';
+import {
+  getOnlyOneProjectManagerTooltip,
+  isProjectManagerRole,
+} from '@/project/team/onlyOneProjectManager';
+import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveManager';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 import { GroupInvitationFormData, InvitationContext } from './types';
@@ -33,12 +39,34 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     staleTime: 5 * 60 * 1000,
   });
 
+  // Only when the invite is pinned to a project can the PM option be greyed
+  // out up front; at organization scope the project is chosen after the role,
+  // so the footer gate handles it there.
+  const { data: projectHasManager } = useProjectHasActiveManager(
+    context.project?.uuid,
+  );
+
   // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
   const roles = useMemo(() => {
+    const disableTakenProjectManager = (_roles: Role[]) =>
+      projectHasManager
+        ? _roles.map((role) =>
+            isProjectManagerRole(role)
+              ? {
+                  ...role,
+                  is_active: false,
+                  tooltip: getOnlyOneProjectManagerTooltip(),
+                }
+              : role,
+          )
+        : _roles;
+
     if (context.rolesOverride) {
       // Scoped caller (e.g. resource invite) supplied a backend-filtered list;
       // use it verbatim and skip ENV.roles + policy filtering.
-      return context.rolesOverride.filter((role) => role.is_active !== false);
+      return disableTakenProjectManager(
+        context.rolesOverride.filter((role) => role.is_active !== false),
+      );
     }
     // Fall back to [] (not ENV.roles) while the scoped fetch is in flight, so
     // no other organization's clones flash into the picker.
@@ -51,14 +79,14 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
             role.is_active,
         );
     if (defaultProject) {
-      return _roles;
+      return disableTakenProjectManager(_roles);
     }
     return _roles.map((role) => ({
       ...role,
       is_active: !role.name.startsWith('PROJECT'),
       tooltip: translate('There are no projects.'),
     }));
-  }, [context, defaultProject, customerUuid, scopedRoles]);
+  }, [context, defaultProject, customerUuid, scopedRoles, projectHasManager]);
 
   const defaultRole = useMemo(
     () => (roles.length > 0 ? roles[0] : null),

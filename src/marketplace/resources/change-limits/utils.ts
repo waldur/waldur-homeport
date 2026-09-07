@@ -6,6 +6,7 @@ import {
   marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesRetrieve,
   Offering,
+  OfferingComponent,
   projectsRetrieve,
   PublicOfferingDetails,
   Resource,
@@ -15,14 +16,19 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import {
-  filterOfferingComponents,
   getFormLimitParser,
   getFormLimitSerializer,
 } from '@/marketplace/common/registry';
 import { LimitParser, Limits } from '@/marketplace/common/types';
 import { getBillingPeriods } from '@/marketplace/common/utils';
+import {
+  getEffectiveComponents,
+  resolvePlanComponents,
+} from '@/marketplace/details/plan/effectiveComponents';
 import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@/marketplace/offerings/store/types';
+
+type PlanWithComponents = Pick<BasePublicPlan, 'components'>;
 
 /**
  * How a component's price is billed for the customer.
@@ -85,13 +91,21 @@ export interface FetchedData {
  * Whether an offering exposes components whose limits a customer can change:
  * limit-based components or prepaid components.
  */
-export const hasEditableLimitComponents = (offering?: {
-  components?: ReadonlyArray<{ billing_type?: string; is_prepaid?: boolean }>;
-}): boolean =>
+export const hasEditableLimitComponents = (
+  offering?: {
+    components?: ReadonlyArray<{
+      type?: string;
+      billing_type?: string;
+      is_prepaid?: boolean;
+    }>;
+  },
+  plan?: PlanWithComponents | null,
+): boolean =>
   Boolean(
-    offering?.components?.some(
-      (c) => c.billing_type === 'limit' || c.is_prepaid,
-    ),
+    resolvePlanComponents(
+      (offering?.components ?? []) as OfferingComponent[],
+      plan,
+    ).some((c) => c.billing_type === 'limit' || c.is_prepaid),
   );
 
 export const getRemainingMonths = (endDate: string): number => {
@@ -103,10 +117,12 @@ export const getRemainingMonths = (endDate: string): number => {
 export const getLimitChangeRequirements = (
   resource: Pick<Resource, 'limits' | 'current_usages'>,
   offering: PublicOfferingDetails | Offering,
+  plan?: PlanWithComponents | null,
 ) => {
   const limitParser = getFormLimitParser(offering.type);
   const limitSerializer = getFormLimitSerializer(offering.type);
-  const components = filterOfferingComponents(offering).filter(
+  // Resolved for the plan: under a usage plan the builtin components take no limits.
+  const components = getEffectiveComponents(offering, plan).filter(
     (component) => component.billing_type === 'limit' || component.is_prepaid,
   );
   const usages = limitParser(resource.current_usages || {});
@@ -152,7 +168,7 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
   }
 
   const { limitSerializer, usages, limits, offeringLimits } =
-    getLimitChangeRequirements(resource, offering);
+    getLimitChangeRequirements(resource, offering, plan);
 
   let concealBillingInfo = false;
   if (resource.project_uuid) {
@@ -280,7 +296,7 @@ export const getLimitChangeData = (
   resourceEndDate?: string,
 ): StateProps => {
   const { multipliers, periodKeys } = getBillingPeriods(plan.unit);
-  const offeringComponents = filterOfferingComponents(offering).filter(
+  const offeringComponents = getEffectiveComponents(offering, plan).filter(
     (component) => component.billing_type === 'limit' || component.is_prepaid,
   );
 

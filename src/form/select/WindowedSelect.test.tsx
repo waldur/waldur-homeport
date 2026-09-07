@@ -1,9 +1,6 @@
 import { render } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
-vi.mock('./theme', () => ({
-  useSelectTheme: () => undefined,
-}));
 vi.mock('./SelectHelper', () => ({
   composeComponents: (components: object | undefined) => components ?? {},
 }));

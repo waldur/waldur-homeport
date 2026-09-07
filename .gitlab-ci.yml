@@ -120,6 +120,14 @@ Run type checking:
 # caught before it lands on develop.
 Check cold-path budget:
   <<: *linter-rules
+  variables:
+    # The production build peaks around 3.4 GB and the runners kill a job near
+    # 4 GB, so it dies part-way through rendering chunks -- before build:check
+    # measures anything. Bounding the heap keeps the peak at ~2.95 GB across
+    # runs and, more to the point, removes the spikes that made it
+    # intermittent. Costs no build time. Sourcemaps have to stay on: the budget
+    # script reads them to find which packages reach the cold path.
+    NODE_OPTIONS: --max-old-space-size=1536
   script:
     - yarn build
     - yarn build:check

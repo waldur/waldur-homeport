@@ -3,6 +3,7 @@ import { createElement, FC } from 'react';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -40,14 +41,16 @@ const OrderCheckout: FC<OrderSummaryProps> = (props) => {
   );
   const monthlyRecurring = periodic.totalPeriods[monthlyPriceIndex] || 0;
   const total = monthlyRecurring + oneTime.oneTimeTotal;
+  const hasUsage = periodic.usageRows.length > 0;
+  const totalLabel = hasUsage
+    ? total
+      ? translate('{amount} + usage', { amount: defaultCurrency(total) })
+      : translate('Billed by usage')
+    : defaultCurrency(total || 0);
 
   return (
     <DeployPageTotalCard
-      total={
-        props.shouldConcealPrices
-          ? DASH_ESCAPE_CODE
-          : defaultCurrency(total || 0)
-      }
+      total={props.shouldConcealPrices ? DASH_ESCAPE_CODE : totalLabel}
       offering={props.offering}
       monthlyRecurringCost={monthlyRecurring}
     >
