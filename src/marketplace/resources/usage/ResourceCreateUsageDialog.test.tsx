@@ -1,7 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
+import {
+  marketplaceComponentUsagesSetUsage,
+  OfferingComponent,
+} from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 
@@ -28,7 +31,11 @@ const mockData = {
       type: 'comp1',
       measured_unit: 'GB',
       description: 'Test component',
-    },
+      offering_uuid: 'test-offering-uuid',
+      billing_type: 'usage',
+      factor: 1,
+      is_builtin: false,
+    } satisfies OfferingComponent,
   ],
 
   periods: [

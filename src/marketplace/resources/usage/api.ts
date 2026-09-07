@@ -37,7 +37,11 @@ const getPeriodLabel = (
 export const getProviderUsageComponents = async (
   params: UsageReportContext,
 ) => {
-  let components = null;
+  // Stays [] (never null) when offering_uuid is absent, so the dialog's own
+  // `value.components.length === 0` empty-state check -- "no usage-based
+  // components" -- can run unconditionally instead of crashing on a null
+  // dereference.
+  let components: OfferingComponent[] = [];
   if (params.offering_uuid) {
     const offering = await marketplaceProviderOfferingsRetrieve({
       path: { uuid: params.offering_uuid },
