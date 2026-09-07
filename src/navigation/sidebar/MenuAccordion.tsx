@@ -106,15 +106,27 @@ export const MenuAccordion: FC<PropsWithChildren<MenuAccordionProps>> = (
   // whatever real node exists (or bails cleanly when there isn't one).
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState<number>();
+  // One ResizeObserver instance for the component's whole lifetime, not a
+  // fresh one per toggle: `[open]` still has to re-run this effect every
+  // time (see above), but the DOM node it needs to watch is the only thing
+  // that actually changes between runs -- re-pointing the same observer at
+  // it with observe()/unobserve() avoids reallocating the observer itself
+  // on every expand/collapse. The callback reads contentRef.current fresh
+  // rather than closing over this run's `node`, so it can't fire against a
+  // stale, already-unmounted target.
+  const resizeObserverRef = useRef<ResizeObserver>(null);
   useLayoutEffect(() => {
     const node = contentRef.current;
     if (!node) return;
     setContentHeight(node.scrollHeight);
-    const observer = new ResizeObserver(() =>
-      setContentHeight(node.scrollHeight),
-    );
+    resizeObserverRef.current ??= new ResizeObserver(() => {
+      if (contentRef.current) {
+        setContentHeight(contentRef.current.scrollHeight);
+      }
+    });
+    const observer = resizeObserverRef.current;
     observer.observe(node);
-    return () => observer.disconnect();
+    return () => observer.unobserve(node);
   }, [open]);
   const contentStyle =
     contentHeight !== undefined

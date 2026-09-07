@@ -56,6 +56,11 @@ const RowActions = ({ row }) => {
       drop="down"
       align="start"
       disabled={!canDeploy}
+      tooltip={
+        !canDeploy
+          ? translate('You do not have access to deploy this offering.')
+          : undefined
+      }
       size="sm"
     >
       <ActionsDropdownItem

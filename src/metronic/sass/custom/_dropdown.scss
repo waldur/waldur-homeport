@@ -47,3 +47,20 @@
 .dropdown-toggle[data-state='open'] > .rotate-toggle-180 {
   transform: rotateZ(180deg);
 }
+
+// Bootstrap's `.dropdown-menu`/`.popover` both hardcode `position: absolute`,
+// which fights the Radix popper wrapper (the actual positioned element,
+// `[data-radix-popper-content-wrapper]`, an ancestor of any Radix
+// Popover.Content/DropdownMenu.Content) for control of the panel's real
+// on-screen position and collapses its measured size against that wrapper
+// instead of the wrapper's own computed placement. Every Radix-driven
+// `.dropdown-menu`/`.popover` in this codebase has so far carried its own
+// per-component `position-static` utility class as a one-off fix for
+// exactly this; this rule makes that unconditionally true instead, so a
+// new component doesn't have to remember to add it (the existing
+// `position-static` classes become redundant, not wrong, and are left in
+// place rather than churned out file by file).
+[data-radix-popper-content-wrapper] .dropdown-menu,
+[data-radix-popper-content-wrapper] .popover {
+  position: static;
+}

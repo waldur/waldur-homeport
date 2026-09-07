@@ -158,6 +158,9 @@ export const NavMenuItem = forwardRef<
 ));
 NavMenuItem.displayName = 'NavMenuItem';
 
+// Shared by NavMenuContent and PopoverMenuContent below.
+const NAV_MENU_CONTENT_CLASSNAME = 'menu-sub menu-sub-dropdown show';
+
 export function NavMenuContent({
   className,
   placement = 'bottom-start',
@@ -176,7 +179,7 @@ export function NavMenuContent({
         align={align}
         sideOffset={sideOffset}
         data-popper-placement={placement}
-        className={classNames('menu-sub menu-sub-dropdown show', className)}
+        className={classNames(NAV_MENU_CONTENT_CLASSNAME, className)}
         {...props}
       />
     </RadixDropdownMenu.Portal>
@@ -217,7 +220,7 @@ export function PopoverMenuContent({
         align={align}
         sideOffset={sideOffset}
         data-popper-placement={placement}
-        className={classNames('menu-sub menu-sub-dropdown show', className)}
+        className={classNames(NAV_MENU_CONTENT_CLASSNAME, className)}
         {...props}
       />
     </RadixPopover.Portal>
@@ -276,7 +279,7 @@ export function NavMenuSubContent({
       <RadixDropdownMenu.SubContent
         align={align}
         data-popper-placement={placement}
-        className={classNames('menu-sub menu-sub-dropdown show', className)}
+        className={classNames(NAV_MENU_CONTENT_CLASSNAME, className)}
         {...props}
       />
     </RadixDropdownMenu.Portal>

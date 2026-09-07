@@ -124,7 +124,12 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
               <RadixDropdownMenu.Portal>
                 <RadixDropdownMenu.Content
                   sideOffset={2}
-                  className="dropdown-menu show p-0 overflow-hidden"
+                  // position-static: same fix as ActionsDropdown.tsx's own
+                  // Content -- Bootstrap's .dropdown-menu hardcodes
+                  // position: absolute, which fights the Radix popper
+                  // wrapper (the actual positioned element here) and
+                  // collapses this panel's measured size.
+                  className="dropdown-menu show p-0 overflow-hidden position-static"
                   style={{ minWidth: '400px' }}
                 >
                   {shortcuts.map((shortcut: any, index: number) => (

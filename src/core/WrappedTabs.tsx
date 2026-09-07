@@ -16,15 +16,41 @@ interface WrappedTabsProps<T extends { uuid? } = any> {
   toggleContent?: React.ReactNode;
 }
 
+// Tab.Container below is uncontrolled (defaultActiveKey only), so switching
+// tabs from the overflow dropdown has to go through the same internal
+// SelectableContext that Nav.Link's own eventKey taps into. That context is
+// only visible to descendants of Tab.Container, so this has to be its own
+// component rendered *inside* Tab.Container's JSX -- reading it in WrappedTabs
+// itself would see whatever (unrelated) SelectableContext sits above
+// WrappedTabs's own call site, not the Tab.Container WrappedTabs renders.
+const WrappedTabsDropdownItems = <T extends { uuid? }>({
+  wrappedItems,
+  renderTab,
+}: {
+  wrappedItems: T[];
+  renderTab: React.ComponentType<{ item: T }>;
+}) => {
+  const selectTab = React.useContext(SelectableContext);
+  return (
+    <>
+      {wrappedItems.map((item) => (
+        <ActionsDropdownItem
+          key={item.uuid}
+          className="d-flex justify-content-between"
+          onClick={(event) => selectTab?.(item.uuid, event)}
+        >
+          {React.createElement(renderTab, { item })}
+        </ActionsDropdownItem>
+      ))}
+    </>
+  );
+};
+
 const WrappedTabs = React.forwardRef(
   <T extends { uuid? }>(
     props: WrappedTabsProps<T>,
     ref: React.Ref<HTMLDivElement>,
   ) => {
-    // Tab.Container below is uncontrolled (defaultActiveKey only), so
-    // switching tabs from this overflow dropdown has to go through the same
-    // internal SelectableContext that Nav.Link's own eventKey taps into.
-    const selectTab = React.useContext(SelectableContext);
     return (
       <Tab.Container defaultActiveKey={props.defaultActiveKey}>
         <div className="d-flex">
@@ -69,15 +95,10 @@ const WrappedTabs = React.forwardRef(
                       className="dropdown-menu show position-static"
                     >
                       <div className="mh-200px overflow-auto">
-                        {props.wrappedItems.map((item) => (
-                          <ActionsDropdownItem
-                            key={item.uuid}
-                            className="d-flex justify-content-between"
-                            onClick={(event) => selectTab?.(item.uuid, event)}
-                          >
-                            {React.createElement(props.renderTab, { item })}
-                          </ActionsDropdownItem>
-                        ))}
+                        <WrappedTabsDropdownItems
+                          wrappedItems={props.wrappedItems}
+                          renderTab={props.renderTab}
+                        />
                       </div>
                     </RadixDropdownMenu.Content>
                   </RadixDropdownMenu.Portal>

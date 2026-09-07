@@ -326,6 +326,16 @@ const DROP_TO_SIDE = {
   end: 'right',
 } as const;
 
+// Shared by ActionsDropdownComponent and ActionsPopoverComponent's Content
+// below -- `show` because Bootstrap's `.dropdown-menu` is display:none until
+// it is present; `position-static` because the Radix popper wrapper is the
+// positioned element here, and leaving `.dropdown-menu`'s own
+// `position: absolute` in place would take the panel out of that wrapper's
+// flow and collapse its measured size (also enforced unconditionally now by
+// custom/_dropdown.scss's own `[data-radix-popper-content-wrapper]` rule,
+// which makes this specific class redundant but harmless).
+const ACTIONS_SHELL_CONTENT_CLASSNAME = 'dropdown-menu show position-static';
+
 export const ActionsDropdownComponent: FunctionComponent<
   PropsWithChildren<
     ActionsDropdownShellProps & {
@@ -367,15 +377,7 @@ export const ActionsDropdownComponent: FunctionComponent<
         side={DROP_TO_SIDE[drop]}
         align={align}
         sideOffset={2}
-        // `show` because Bootstrap's `.dropdown-menu` is display:none until
-        // it is present; `position-static` because the Radix popper wrapper
-        // is the positioned element here, and leaving `.dropdown-menu`'s own
-        // `position: absolute` in place would take the panel out of that
-        // wrapper's flow and collapse its measured size.
-        className={classNames(
-          'dropdown-menu show position-static',
-          menuClassName,
-        )}
+        className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
         style={menuStyle}
         {...rest}
       >
@@ -445,12 +447,7 @@ export const ActionsPopoverComponent: FunctionComponent<
         side={DROP_TO_SIDE[drop]}
         align={align}
         sideOffset={2}
-        // Same reasoning as ActionsDropdownComponent's Content — see its
-        // own comment on `show`/`position-static`.
-        className={classNames(
-          'dropdown-menu show position-static',
-          menuClassName,
-        )}
+        className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
         style={menuStyle}
         {...rest}
       >
