@@ -1,5 +1,5 @@
 import { FORM_ERROR } from 'final-form';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { Form } from 'react-final-form';
 import {
   marketplaceComponentUsagesSetUsage,
@@ -13,6 +13,7 @@ import {
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
 
 import { ResourceUsageForm } from './ResourceUsageForm';
@@ -25,6 +26,7 @@ interface Period {
 }
 
 interface OwnProps {
+  title: ReactNode;
   components: OfferingComponent[];
   periods: Period[];
   params: UsageReportContext;
@@ -120,14 +122,16 @@ export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <ResourceUsageForm
-            components={props.components}
-            periods={props.periods}
-            params={props.params}
-          />
-          <div className="modal-footer">
-            <ResourceUsageSubmitButton params={props.params} />
-          </div>
+          <ModalDialog
+            title={props.title}
+            footer={<ResourceUsageSubmitButton params={props.params} />}
+          >
+            <ResourceUsageForm
+              components={props.components}
+              periods={props.periods}
+              params={props.params}
+            />
+          </ModalDialog>
         </form>
       )}
     />

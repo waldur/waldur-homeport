@@ -118,6 +118,20 @@ describe('ResourceCreateUsageDialog', () => {
     ).toBeInTheDocument();
   });
 
+  it('renders the footer as a sibling of the body, not nested inside it', async () => {
+    vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);
+    renderDialog(props);
+    await waitFor(() => {
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
+    });
+
+    const footer = screen.getByTestId('modal-footer');
+    // eslint-disable-next-line testing-library/no-node-access
+    const body = footer.parentElement.querySelector('.modal-body');
+    expect(body).not.toBeNull();
+    expect(body.contains(footer)).toBe(false);
+  });
+
   it('submits form with usage values', async () => {
     const user = userEvent.setup();
     vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);
