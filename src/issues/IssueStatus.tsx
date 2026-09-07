@@ -6,6 +6,10 @@ const STATUS_COLORS = {
   'Waiting for support': 'warning',
   Closed: 'danger',
   Resolved: 'default',
+  // Terminal like Closed. This is the spelling Waldur seeds and the one its
+  // status-type label uses; a status an operator named something else falls
+  // through to the neutral badge below, as any custom name does.
+  Canceled: 'danger',
 };
 
 export const IssueStatus = ({ status }) => {
