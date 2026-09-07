@@ -363,7 +363,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                     <RadixDropdownMenu.Trigger asChild>
                       <button
                         type="button"
-                        className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px"
+                        className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px position-relative"
                       >
                         <DotsThreeIcon size={22} weight="bold" />
                         {wrappedComponents.some((comp) =>

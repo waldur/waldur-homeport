@@ -132,8 +132,21 @@
       &.has-unit {
         padding-right: 4.8rem;
 
+        // The shared `background-position: right 4.4rem center` below
+        // (tuned for the no-unit case, where the icon just needs to clear
+        // the up-down buttons) puts the invalid icon's right edge only
+        // 57.2px from the input's right edge -- inside the up-down
+        // buttons' own [0, 70px] zone once a unit is also present (unit
+        // text + buttons, flush right with no margin -- see
+        // `.has-unit ~ .input-group-addons .up-down-buttons` below), so
+        // the icon rendered visibly overlapping/behind them. Reported
+        // live. Both values need to move together: padding-right must
+        // reserve enough room for icon + gap + up-down buttons + unit,
+        // and background-position must clear the buttons+unit zone with
+        // a small gap, not just the buttons alone.
         &.is-invalid {
-          padding-right: 6.5rem;
+          padding-right: 7.3rem;
+          background-position: right 5.8rem center;
         }
       }
       &.is-invalid {
