@@ -43,11 +43,13 @@ export const UserDropdownMenuItems = () => {
               </NavMenuSubTrigger>
               <NavMenuSubContent className="menu-gray-600 menu-state-bg-gray w-175px py-2">
                 {item.children.map((child, childIndex) => (
-                  <NavMenuItem key={childIndex} asChild>
-                    <Link state={child.to}>
-                      <span className="menu-title">{child.title}</span>
-                    </Link>
-                  </NavMenuItem>
+                  <UISrefActive class="active" key={childIndex}>
+                    <NavMenuItem asChild>
+                      <Link state={child.to}>
+                        <span className="menu-title">{child.title}</span>
+                      </Link>
+                    </NavMenuItem>
+                  </UISrefActive>
                 ))}
               </NavMenuSubContent>
             </NavMenuSub>
