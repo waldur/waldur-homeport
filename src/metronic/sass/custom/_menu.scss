@@ -79,6 +79,22 @@
 // Popper.js-driven original used to set — including the entrance
 // animation itself, overridden further below for Radix content only.
 
+// Radix moves real DOM focus onto whichever row is [data-highlighted] --
+// including on plain pointer hover, not just keyboard nav (see the
+// [data-highlighted] bridge below). Some browsers' :focus-visible
+// heuristic treats that programmatic .focus() call as keyboard-originated
+// even while the pointer is squarely over the row, so core's keyboard
+// focus ring (menu/_base.scss's `.menu-link:focus-visible`) was drawing on
+// top of an otherwise plain :hover -- reported live on the user dropdown's
+// menu items. A real pointer is on the row at that exact moment, so
+// suppress the ring specifically then; keyboard-only focus (no pointer
+// over the row) is unaffected. `:hover:focus-visible` outranks the bare
+// `:focus-visible` rule on specificity alone, so this wins regardless of
+// source order relative to core/.
+.menu-link:hover:focus-visible {
+  outline: none;
+}
+
 // Keyboard highlight. `.menu-link:hover` (menu/_theme.scss's
 // menu-link-hover-state mixin) is a plain CSS pseudo-class, so mouse hover
 // needs no bridge at all. Radix's keyboard navigation instead marks the
