@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import { cn } from './cn';
 import { LoadingSpinner } from './LoadingSpinner';
@@ -50,8 +50,8 @@ const buttonVariants = cva(
   // No focus:outline-none: each variant's ring below IS an outline now. As a
   // box-shadow it was suppressed by any `box-shadow: none/unset !important`
   // (button groups, .btn-no-focus, elevation utilities, unlayered page CSS)
-  // and never painted in forced-colors mode. Still plain :focus, not
-  // :focus-visible — see the variant-group comment below.
+  // and never painted in forced-colors mode. focus-visible:, not plain
+  // :focus — see the variant-group comment below.
   'inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:pointer-events-none',
   {
     variants: {
@@ -63,36 +63,35 @@ const buttonVariants = cva(
       // override easy to spot against its neighbors in review — see
       // migration notes for real bugs this shape already caught.
       //
-      // focus:, not focus-visible:: the real Bootstrap button ties its
-      // ring to plain :focus, which fires on every focus method —
-      // including a mouse click, not just keyboard navigation.
-      // focus-visible: (tried first, and normally the better a11y
-      // default — no distracting ring for mouse users) suppresses itself
-      // for pointer-originated focus by design, so after a real
-      // Playwright/browser mouse .click() (not the .focus()/Tab-driven
-      // focus this was originally verified against) it silently never
-      // applied at all, leaving only whatever :hover happened to set —
-      // a real, user-reported divergence from the old button. Matching
-      // Bootstrap's plain :focus here was a deliberate choice to keep
-      // strict parity at this migration phase over the more modern
-      // pattern. See migration notes.
+      // focus-visible:, not plain :focus: originally this file matched
+      // Bootstrap's plain :focus deliberately, since at the time the real
+      // button's own ring fired on every focus method including a mouse
+      // click, and focus-visible: — which by design suppresses itself for
+      // pointer-originated focus on a <button> — silently never applied at
+      // all after a real Playwright/browser mouse .click(), a real
+      // divergence from the old button. The real Bootstrap button's own
+      // variant-ring mixin (button-state-focus,
+      // core/components/mixins/_buttons.scss) has since switched to
+      // :focus-visible itself (a persistent ring after an ordinary mouse
+      // click was reported live and fixed), so this file switched to match
+      // — re-verified against this file's own parity test suite. See
+      // migration notes.
       //
-      // active:shadow-none on every variant below: a real mouse press
-      // focuses the button too (mousedown fires focus before the click
-      // completes), so :active and :focus match simultaneously — and
-      // without this, the focus: ring/border shadow above would bleed
+      // active:shadow-none on every variant below: a keyboard-triggered
+      // press (Enter/Space on an already-focus-visible button) still
+      // matches :active and :focus-visible simultaneously, and without
+      // this the focus-visible: ring/border shadow above would bleed
       // through on top of the pressed background. The real Bootstrap
       // button always shows box-shadow: none while :active, ring or no
-      // ring, confirmed empirically across all 12 variants — this was
-      // never visible before the plain-:focus switch above, since
-      // focus-visible: never matched a mouse-originated press at all.
-      // See migration notes.
+      // ring, confirmed empirically across all 12 variants. A mouse press
+      // no longer matches :focus-visible at all (by design, see above), so
+      // this now only matters for the keyboard case. See migration notes.
       variant: {
         primary: [
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)]',
           'hover:bg-[var(--btn-primary-bg-hover)]',
-          'focus:bg-[var(--btn-primary-bg-hover)] focus:[outline:2px_solid_var(--btn-primary-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-primary-bg-hover)] focus-visible:[outline:2px_solid_var(--btn-primary-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[var(--btn-primary-bg-pressed)] active:shadow-none',
           'disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -107,7 +106,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_var(--btn-secondary-border)]',
           'bg-[var(--btn-secondary-bg)] text-[var(--btn-secondary-text)]',
           'hover:bg-[var(--btn-secondary-bg-hover)]',
-          'focus:bg-[var(--btn-secondary-bg-hover)] focus:shadow-[inset_0_0_0_1px_var(--btn-secondary-border)] focus:[outline:2px_solid_var(--btn-secondary-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-secondary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-secondary-border)] focus-visible:[outline:2px_solid_var(--btn-secondary-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[var(--btn-secondary-bg-pressed)] active:shadow-none',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -115,7 +114,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)]',
           'bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)]',
           'hover:bg-[var(--btn-tertiary-bg-hover)]',
-          'focus:bg-[var(--btn-tertiary-bg-hover)] focus:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -135,7 +134,7 @@ const buttonVariants = cva(
           'bg-[transparent] text-[var(--btn-tertiary-text)]',
           'hover:bg-[var(--btn-tertiary-bg-hover)]',
           'active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none',
-          'focus:bg-[var(--btn-tertiary-bg-hover)] focus:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px]',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         // danger/warning/success: focus:bg resets explicitly back to the
@@ -158,7 +157,7 @@ const buttonVariants = cva(
           'bg-[var(--btn-danger-bg)] text-[var(--btn-danger-text)]',
           'hover:bg-[var(--btn-danger-bg-hover)]',
           'active:bg-[var(--btn-danger-bg-pressed)] active:text-[var(--btn-pressed-text-on-vivid)] active:shadow-none',
-          'focus:bg-[var(--btn-danger-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-danger-bg)] focus:[outline:2px_solid_var(--btn-danger-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-danger-bg)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-danger-bg)] focus-visible:[outline:2px_solid_var(--btn-danger-focus-ring)] focus-visible:[outline-offset:0px]',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         warning: [
@@ -168,7 +167,7 @@ const buttonVariants = cva(
           // with danger/success above, confirmed not assumed.
           'hover:bg-[var(--btn-warning-bg-hover)] hover:shadow-[inset_0_0_0_1px_var(--btn-warning-bg-hover)]',
           'active:bg-[var(--btn-warning-bg-pressed)] active:text-[var(--btn-pressed-text-on-vivid)] active:shadow-none',
-          'focus:bg-[var(--btn-warning-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-warning-bg)] focus:[outline:2px_solid_var(--btn-warning-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-warning-bg)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-warning-bg)] focus-visible:[outline:2px_solid_var(--btn-warning-focus-ring)] focus-visible:[outline-offset:0px]',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         success: [
@@ -176,7 +175,7 @@ const buttonVariants = cva(
           'bg-[var(--btn-success-bg)] text-[var(--btn-success-text)]',
           'hover:bg-[var(--btn-success-bg-hover)]',
           'active:bg-[var(--btn-success-bg-pressed)] active:text-[var(--btn-pressed-text-on-vivid)] active:shadow-none',
-          'focus:bg-[var(--btn-success-bg)] focus:shadow-[inset_0_0_0_1px_var(--btn-success-bg)] focus:[outline:2px_solid_var(--btn-success-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-success-bg)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-success-bg)] focus-visible:[outline:2px_solid_var(--btn-success-focus-ring)] focus-visible:[outline-offset:0px]',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         // active:bg-[transparent] on every text-* variant below: without
@@ -189,7 +188,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-primary-color)]',
           'hover:bg-[var(--btn-secondary-bg)]',
-          'focus:bg-[var(--btn-secondary-bg-hover)] focus:[outline:2px_solid_var(--btn-primary-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-secondary-bg-hover)] focus-visible:[outline:2px_solid_var(--btn-primary-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[transparent] active:text-[var(--btn-text-primary-pressed)] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -197,7 +196,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-secondary-color)]',
           'hover:bg-[var(--btn-text-secondary-hover-bg)]',
-          'focus:bg-[var(--btn-text-secondary-hover-bg)] focus:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -212,7 +211,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-danger-color)]',
           'hover:bg-[var(--btn-danger-bg-hover)] hover:text-[var(--btn-danger-text)]',
-          'focus:bg-[var(--btn-danger-bg)] focus:text-[var(--btn-danger-text)] focus:[outline:2px_solid_var(--btn-danger-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-danger-bg)] focus-visible:text-[var(--btn-danger-text)] focus-visible:[outline:2px_solid_var(--btn-danger-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -220,7 +219,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-warning-color)]',
           'hover:bg-[var(--btn-warning-bg-hover)] hover:text-[var(--btn-warning-text)]',
-          'focus:bg-[var(--btn-warning-bg)] focus:text-[var(--btn-warning-text)] focus:[outline:2px_solid_var(--btn-warning-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-warning-bg)] focus-visible:text-[var(--btn-warning-text)] focus-visible:[outline:2px_solid_var(--btn-warning-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -228,7 +227,7 @@ const buttonVariants = cva(
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-success-color)]',
           'hover:bg-[var(--btn-success-bg-hover)] hover:text-[var(--btn-success-text)]',
-          'focus:bg-[var(--btn-success-bg)] focus:text-[var(--btn-success-text)] focus:[outline:2px_solid_var(--btn-success-focus-ring)] focus:[outline-offset:0px]',
+          'focus-visible:bg-[var(--btn-success-bg)] focus-visible:text-[var(--btn-success-text)] focus-visible:[outline:2px_solid_var(--btn-success-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
           'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
@@ -250,11 +249,24 @@ const buttonVariants = cva(
         sm: 'rounded-md px-[8px] py-[4px] text-sm leading-5',
         lg: 'rounded-lg px-[16px] py-[10px] text-base leading-6',
       },
+      // Not aspect-square: an inline-flex button with px-0 has no definite
+      // width for aspect-ratio's auto-sizing algorithm to size *from* —
+      // height comes from py-*/leading-*, but width comes from content
+      // (the icon span alone), so the two axes size independently and
+      // aspect-ratio never gets a chance to reconcile them. Reported live:
+      // every icon-only button rendered as a narrow vertical pill, not a
+      // square. Explicit width/height per size (below, in compoundVariants)
+      // sidesteps the ambiguity entirely — same 28px/44px totals as the
+      // label buttons' own documented height, just pinned on both axes.
       iconOnly: {
-        true: 'aspect-square px-0',
+        true: 'p-0',
         false: '',
       },
     },
+    compoundVariants: [
+      { size: 'sm', iconOnly: true, class: 'h-[28px] w-[28px]' },
+      { size: 'lg', iconOnly: true, class: 'h-[44px] w-[44px]' },
+    ],
     defaultVariants: {
       variant: 'primary',
       size: 'lg',
@@ -310,63 +322,96 @@ const wrapTooltip = (
   return <Tooltip label={tooltip}>{trigger}</Tooltip>;
 };
 
-export const BaseButton: FC<BaseButtonProps> = ({
-  label,
-  onClick,
-  iconNode,
-  iconRight = false,
-  className,
-  disabled,
-  tooltip,
-  disabledReason,
-  variant,
-  pending,
-  size,
-  type = 'button',
-  id,
-  form,
-  ...rest
-}) => {
-  const isDisabled = disabled || pending;
-  const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
-  const isIconOnly = !label && !!iconNode;
+/**
+ * forwardRef, and `...rest` reaching the <button>, are both requirements
+ * for this to work as a Radix `asChild` trigger (DropdownMenuTrigger,
+ * PopoverTrigger) — the composition every migrated dropdown depends on.
+ * Radix's Slot clones its child, attaches a ref the popper positions
+ * against, and merges in aria-haspopup/aria-expanded/data-state plus its
+ * own pointer/keyboard handlers. A plain FC drops the ref (React's
+ * "Function components cannot be given refs"), and the previous
+ * data-*-only filter on `rest` silently swallowed the ARIA and the
+ * handlers, leaving a button that looks right and does nothing. See
+ * TopBar.tsx's IconButton for the same requirement stated at that
+ * component.
+ */
+export const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
+  (
+    {
+      label,
+      onClick,
+      iconNode,
+      iconRight = false,
+      className,
+      disabled,
+      tooltip,
+      disabledReason,
+      variant,
+      pending,
+      size,
+      type = 'button',
+      id,
+      form,
+      ...rest
+    },
+    ref,
+  ) => {
+    const isDisabled = disabled || pending;
+    const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
+    const isIconOnly = !label && !!iconNode;
 
-  const iconSizeClass = size === 'sm' ? 'size-4' : 'size-5';
-  const iconElement = iconNode && (
-    <span className={cn('inline-flex shrink-0', iconSizeClass)}>
-      {iconNode}
-    </span>
-  );
+    // items-center justify-center, not just inline-flex: Phosphor icons
+    // default to 1em×1em (font-size-relative), not this wrapper's own
+    // size-4/size-5 — at this button's font-size that's 16px inside a
+    // 20px (lg) or 14px inside a 16px (sm) box, a few px short on every
+    // side. Without centering, an inline-flex box's default alignment
+    // (align-items: stretch, justify-content: flex-start) collapses that
+    // shortfall into the top-left corner instead of spreading it evenly,
+    // reading as a visibly off-center icon — most visible in icon-only
+    // buttons, where the icon is the button's only content. Centering the
+    // wrapper fixes this regardless of what size the icon itself renders
+    // at, rather than depending on every call site passing an explicit
+    // `size` prop to its icon.
+    const iconSizeClass = size === 'sm' ? 'size-4' : 'size-5';
+    const iconElement = iconNode && (
+      <span
+        className={cn(
+          'inline-flex shrink-0 items-center justify-center',
+          iconSizeClass,
+        )}
+      >
+        {iconNode}
+      </span>
+    );
 
-  const dataProps = Object.fromEntries(
-    Object.entries(rest).filter(([key]) => key.startsWith('data-')),
-  );
-
-  return wrapTooltip(
-    effectiveTooltip,
-    <button
-      id={id}
-      type={type}
-      className={cn(
-        buttonVariants({ variant, size, iconOnly: isIconOnly }),
-        className,
-      )}
-      onClick={onClick}
-      disabled={isDisabled}
-      form={form}
-      aria-label={
-        !label && typeof effectiveTooltip === 'string'
-          ? effectiveTooltip
-          : undefined
-      }
-      {...dataProps}
-    >
-      {pending && <LoadingSpinner className={label ? 'me-1' : undefined} />}
-      {!pending && !iconRight && iconElement}
-      {label}
-      {!pending && iconRight && iconElement}
-    </button>,
-    isDisabled,
-    typeof className === 'string' && /\bw-100\b/.test(className),
-  );
-};
+    return wrapTooltip(
+      effectiveTooltip,
+      <button
+        ref={ref}
+        id={id}
+        type={type}
+        className={cn(
+          buttonVariants({ variant, size, iconOnly: isIconOnly }),
+          className,
+        )}
+        onClick={onClick}
+        disabled={isDisabled}
+        form={form}
+        aria-label={
+          !label && typeof effectiveTooltip === 'string'
+            ? effectiveTooltip
+            : undefined
+        }
+        {...rest}
+      >
+        {pending && <LoadingSpinner className={label ? 'me-1' : undefined} />}
+        {!pending && !iconRight && iconElement}
+        {label}
+        {!pending && iconRight && iconElement}
+      </button>,
+      isDisabled,
+      typeof className === 'string' && /\bw-100\b/.test(className),
+    );
+  },
+);
+BaseButton.displayName = 'BaseButton';

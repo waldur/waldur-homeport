@@ -1,6 +1,5 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useEffect, useRef } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsExportOffering,
   OfferingExportParametersRequest,
@@ -12,6 +11,7 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { ExportOfferingDialog } from './ExportOfferingDialog';
@@ -268,11 +268,11 @@ export const ExportOfferingButton = ({ row }: ExportOfferingButtonProps) => {
   };
 
   return (
-    <Dropdown.Item as="button" onClick={openExportDialog}>
+    <ActionsDropdownItem onSelect={openExportDialog}>
       <span className="svg-icon svg-icon-2">
         <DownloadSimpleIcon weight="bold" />
       </span>
       {translate('Export')}
-    </Dropdown.Item>
+    </ActionsDropdownItem>
   );
 };

@@ -58,7 +58,7 @@ const columns: DataTableColumn<ProjectRow>[] = [
 ];
 
 const meta: Meta<typeof DataTable> = {
-  title: 'Dashboard/DataTable',
+  title: 'Data Display/DataTable',
   parameters: {
     docs: {
       description: {

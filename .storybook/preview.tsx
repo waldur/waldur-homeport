@@ -52,6 +52,67 @@ const preview: Preview = {
       },
     },
 
+    options: {
+      storySort: {
+        order: [
+          'Foundations',
+          ['Colors', 'Typography', 'Elevation'],
+          'Primitives',
+          [
+            'BaseButton',
+            'Badge',
+            'StatusPill',
+            'Avatar',
+            'Tooltip',
+            'Switch',
+            'LoadingSpinner',
+            'CopyButton',
+            'Card',
+          ],
+          'Overlays',
+          ['Popover', 'DropdownMenu', 'Dialog', 'Sheet'],
+          'Data Display',
+          ['Table', 'DataTable', 'StatCard'],
+          'Navigation',
+          [
+            'TopBar',
+            'Sidebar',
+            'ModePicker',
+            'LanguageMenu',
+            'ActionsDropdown',
+          ],
+          'Migration',
+          [
+            'BaseButton (Legacy)',
+            'BaseButton Parity',
+            'Badge Parity',
+            'StatCard Parity',
+          ],
+        ],
+      },
+    },
+
+    viewport: {
+      viewports: {
+        mobile: {
+          name: 'Mobile (xs)',
+          styles: { width: '375px', height: '667px' },
+        },
+        tablet: {
+          name: 'Tablet (md)',
+          styles: { width: '768px', height: '1024px' },
+        },
+        desktop: {
+          name: 'Desktop (lg)',
+          styles: { width: '1024px', height: '768px' },
+        },
+        widescreen: {
+          name: 'Widescreen (xl)',
+          styles: { width: '1440px', height: '900px' },
+        },
+      },
+    },
+
     a11y: {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations

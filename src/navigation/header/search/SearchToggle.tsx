@@ -1,6 +1,6 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import { useEffect } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
@@ -48,12 +48,79 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
   }, [show, setShow]);
 
   return (
-    <OverlayTrigger
-      trigger="click"
-      placement="bottom-start"
-      show={show}
-      overlay={
-        <Popover id="GlobalSearch">
+    <RadixPopover.Root open={show} onOpenChange={setShow} modal={false}>
+      {/*
+        Anchor, not Trigger: opening isn't one clickable element here — it's
+        the compact button, the mobile button, or focusing the inline
+        desktop SearchInput, each already calling setShow(true) directly.
+        Anchor only gives Content something to position against.
+      */}
+      <RadixPopover.Anchor asChild>
+        <div className="d-flex align-items-center" id="searchContainer">
+          {compact ? (
+            <Tip
+              label={translate('Search')}
+              id="search-toggle-tip"
+              placement="bottom"
+            >
+              <button
+                className="btn-nav-item"
+                type="button"
+                onClick={() => setShow(true)}
+                aria-label={translate('Search')}
+              >
+                <span className="svg-icon svg-icon-2">
+                  <MagnifyingGlassIcon weight="bold" />
+                </span>
+              </button>
+            </Tip>
+          ) : (
+            <>
+              <SearchInput
+                result={result}
+                query={query}
+                setQuery={setQuery}
+                show={show}
+                className="d-none d-lg-block"
+                showShortcut={!show}
+                onFocus={() => setShow(true)}
+              />
+              <Tip
+                label={translate('Search')}
+                id="search-toggle-mobile-tip"
+                placement="bottom"
+              >
+                <button
+                  className="btn-nav-item d-lg-none"
+                  type="button"
+                  onClick={() => setShow(true)}
+                  aria-label={translate('Search')}
+                >
+                  <span className="svg-icon svg-icon-2">
+                    <MagnifyingGlassIcon weight="bold" />
+                  </span>
+                </button>
+              </Tip>
+            </>
+          )}
+        </div>
+      </RadixPopover.Anchor>
+      <RadixPopover.Portal>
+        <RadixPopover.Content
+          id="GlobalSearch"
+          side="bottom"
+          align="start"
+          sideOffset={2}
+          // position-static: Bootstrap's own .popover class hardcodes
+          // `position: absolute; left: 0`, fighting the Radix popper
+          // wrapper for control of this box's placement — see
+          // TableColumnsButton.tsx's own comment on this exact fix. Also
+          // the direct cause of "search panel too narrow": with the panel
+          // taken out of the wrapper's flow, Radix never got a real width
+          // to measure, so #GlobalSearch's own width/max-width rules
+          // (SearchToggle.scss) had nothing correctly-flowing to apply to.
+          className="popover position-static"
+        >
           <SearchPopover
             result={result}
             usersResult={usersResult}
@@ -65,58 +132,8 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
             isStaffOrSupportUser={isStaffOrSupportUser}
             close={() => setShow(false)}
           />
-        </Popover>
-      }
-      rootClose={true}
-    >
-      <div className="d-flex align-items-center" id="searchContainer">
-        {compact ? (
-          <Tip
-            label={translate('Search')}
-            id="search-toggle-tip"
-            placement="bottom"
-          >
-            <button
-              className="btn-nav-item"
-              type="button"
-              onClick={() => setShow(true)}
-              aria-label={translate('Search')}
-            >
-              <span className="svg-icon svg-icon-2">
-                <MagnifyingGlassIcon weight="bold" />
-              </span>
-            </button>
-          </Tip>
-        ) : (
-          <>
-            <SearchInput
-              result={result}
-              query={query}
-              setQuery={setQuery}
-              show={show}
-              className="d-none d-lg-block"
-              showShortcut={!show}
-              onFocus={() => setShow(true)}
-            />
-            <Tip
-              label={translate('Search')}
-              id="search-toggle-mobile-tip"
-              placement="bottom"
-            >
-              <button
-                className="btn-nav-item d-lg-none"
-                type="button"
-                onClick={() => setShow(true)}
-                aria-label={translate('Search')}
-              >
-                <span className="svg-icon svg-icon-2">
-                  <MagnifyingGlassIcon weight="bold" />
-                </span>
-              </button>
-            </Tip>
-          </>
-        )}
-      </div>
-    </OverlayTrigger>
+        </RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
   );
 };

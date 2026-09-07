@@ -5,6 +5,7 @@ import { FC } from 'react';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
 import { useModal } from '@/modal/actions';
+import { inActionsMenu } from '@/test/harness';
 
 import { EditModalButton } from './EditModalButton';
 
@@ -37,11 +38,13 @@ describe('EditModalButton', () => {
 
   it('renders action item with default title', () => {
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+        />,
+      ),
     );
 
     expect(screen.getByText('Edit')).toBeInTheDocument();
@@ -49,12 +52,14 @@ describe('EditModalButton', () => {
 
   it('renders with custom title', () => {
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
-        title="Update"
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+          title="Update"
+        />,
+      ),
     );
 
     expect(screen.getByText('Update')).toBeInTheDocument();
@@ -68,11 +73,13 @@ describe('EditModalButton', () => {
     }));
 
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        buildResolve={buildResolve}
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          buildResolve={buildResolve}
+        />,
+      ),
     );
 
     await user.click(screen.getByText('Edit'));
@@ -94,12 +101,14 @@ describe('EditModalButton', () => {
     }));
 
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
-        getInitialValues={getInitialValues}
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+          getInitialValues={getInitialValues}
+        />,
+      ),
     );
 
     await user.click(screen.getByText('Edit'));
@@ -116,12 +125,14 @@ describe('EditModalButton', () => {
   it('opens dialog with correct size', async () => {
     const user = userEvent.setup();
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
-        size="xl"
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+          size="xl"
+        />,
+      ),
     );
 
     await user.click(screen.getByText('Edit'));
@@ -134,12 +145,14 @@ describe('EditModalButton', () => {
 
   it('renders as button when renderAs is button', () => {
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
-        renderAs="button"
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+          renderAs="button"
+        />,
+      ),
     );
 
     const button = screen.getByRole('button');
@@ -149,13 +162,15 @@ describe('EditModalButton', () => {
 
   it('renders disabled when disabled prop is true', () => {
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
-        renderAs="button"
-        disabled
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+          renderAs="button"
+          disabled
+        />,
+      ),
     );
 
     expect(screen.getByRole('button')).toBeDisabled();
@@ -164,11 +179,13 @@ describe('EditModalButton', () => {
   it('uses default size lg when not specified', async () => {
     const user = userEvent.setup();
     render(
-      <EditModalButton
-        dialog={MockDialog}
-        row={mockRow}
-        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
-      />,
+      inActionsMenu(
+        <EditModalButton
+          dialog={MockDialog}
+          row={mockRow}
+          resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+        />,
+      ),
     );
 
     await user.click(screen.getByText('Edit'));

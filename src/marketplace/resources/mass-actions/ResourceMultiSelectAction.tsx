@@ -1,8 +1,8 @@
-import { DropdownDivider } from 'react-bootstrap';
 import { Resource } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { ActionsDropdownSeparator } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { MultiChangeLimitsAction } from './MultiChangeLimitsAction';
@@ -46,11 +46,11 @@ export const ResourceMultiSelectAction = ({
       <MultiRestartAction rows={rows} refetch={refetch} />
       <MultiPullAction rows={rows} refetch={refetch} />
       <MultiMoveAction rows={rows} refetch={refetch} />
-      <DropdownDivider className="border-top m-0" />
+      <ActionsDropdownSeparator className="border-top m-0" />
       <MultiTerminateAction rows={rows} refetch={refetch} />
       {user.is_staff && (
         <>
-          <DropdownDivider className="border-top m-0" />
+          <ActionsDropdownSeparator className="border-top m-0" />
           <MultiPlacementMapAction rows={rows} />
           <MultiSetDownscaledAction rows={rows} refetch={refetch} />
           <MultiSetPausedAction rows={rows} refetch={refetch} />

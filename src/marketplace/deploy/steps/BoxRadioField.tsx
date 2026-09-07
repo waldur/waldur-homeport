@@ -9,7 +9,12 @@ import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
-import { MenuComponent } from '@/metronic/components';
+import {
+  NavMenu,
+  NavMenuContent,
+  NavMenuItem,
+  NavMenuTrigger,
+} from '@/navigation/NavMenu';
 
 import './BoxRadioField.scss';
 
@@ -71,14 +76,12 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
         return prev;
       });
       onChange(option.value);
-      MenuComponent.hideDropdowns(null);
     },
     [onChange, setSelectedVersions],
   );
 
   useEffect(() => {
     setSelectedVersions(getRadioVersions(choices));
-    MenuComponent.reinitialization();
   }, [choices, setSelectedVersions]);
 
   if (vertical) {
@@ -238,48 +241,44 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
               onClick={() => onChange(selectedVersions[index].value)}
             >
               {choice.options?.length ? (
-                <>
-                  {/* Trigger */}
-                  <div
-                    className="version-selector"
-                    data-kt-menu-trigger="click"
-                    data-kt-menu-attach="parent"
-                    data-kt-menu-placement="bottom"
-                  >
-                    <div />
-                    <div>
-                      <div className="form-check-label">{choice.label}</div>
-                      <div className="form-check-metadata">
-                        {selectedVersions[index].label}
+                <NavMenu modal={false}>
+                  {/* Trigger. asChild composes onto the existing <div> —
+                      Radix's own default Trigger element is a <button>,
+                      which can't nest inside the enclosing
+                      "form-check-info" <button> without breaking HTML
+                      validity. */}
+                  <NavMenuTrigger asChild>
+                    <div className="version-selector">
+                      <div />
+                      <div>
+                        <div className="form-check-label">{choice.label}</div>
+                        <div className="form-check-metadata">
+                          {selectedVersions[index].label}
+                        </div>
                       </div>
+                      <span className="fs-1 fw-light">
+                        <CaretDownIcon weight="bold" />
+                      </span>
                     </div>
-                    <span className="fs-1 fw-light">
-                      <CaretDownIcon weight="bold" />
-                    </span>
-                  </div>
+                  </NavMenuTrigger>
 
                   {/* Options menu */}
-                  <div
-                    className="versions menu menu-sub menu-sub-dropdown menu-rounded menu-gray-600 menu-active-bg-light-primary menu-hover-title-primary border fw-bold rounded-0 mw-250px fs-6 py-3"
-                    data-kt-menu="true"
+                  <NavMenuContent
+                    placement="bottom-start"
+                    className="versions menu menu-rounded menu-gray-600 menu-active-bg-light-primary menu-hover-title-primary border fw-bold rounded-0 mw-250px fs-6 py-3"
                   >
                     {choice.options.map((option, i) => (
-                      <div
+                      <NavMenuItem
                         key={i}
-                        className="menu-item px-3"
-                        data-kt-menu-trigger
+                        wrapperClassName="px-3"
+                        className="px-3"
+                        onSelect={() => onChangeSelect(option, index)}
                       >
-                        <span
-                          className="menu-link px-3"
-                          onClick={() => onChangeSelect(option, index)}
-                          aria-hidden="true"
-                        >
-                          <span className="menu-title">{option.label}</span>
-                        </span>
-                      </div>
+                        <span className="menu-title">{option.label}</span>
+                      </NavMenuItem>
                     ))}
-                  </div>
-                </>
+                  </NavMenuContent>
+                </NavMenu>
               ) : (
                 <>
                   <div className="form-check-label">{choice.label}</div>

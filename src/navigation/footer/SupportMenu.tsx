@@ -8,9 +8,16 @@ import { useNotify } from '@/store/notify';
 import { FooterDropdown } from './FooterDropdown';
 import { IssuesLink } from './IssuesLink';
 
+/**
+ * Plain content, not a Radix menu item: this is a repeatable "copy to
+ * clipboard" affordance (the user may copy the same value more than
+ * once, or copy it and then look at another row), so it must not trigger
+ * Radix's default select-and-close behaviour — same reasoning as
+ * UserDropdown.tsx's UserToken/UserIpAddress Copy buttons.
+ */
 const SupportSubMenuItem = ({ title, onCopy }) =>
   title ? (
-    <div className="menu-item">
+    <li className="menu-item">
       <button
         type="button"
         className="menu-link px-3 cursor-pointer overflow-hidden"
@@ -21,7 +28,7 @@ const SupportSubMenuItem = ({ title, onCopy }) =>
           <CopyIcon weight="bold" />
         </span>
       </button>
-    </div>
+    </li>
   ) : null;
 
 export const SupportMenu = () => {

@@ -37,10 +37,26 @@ export const ResourcesMenuFilterButton = () => {
   };
   return (
     <Tip label={translate('Filter resources')} id="resources-menu-filter-tip">
-      <button
-        type="button"
+      {/* A plain <span>, not <button>: this renders inside MenuAccordion's
+          `badge` slot, which sits inside the accordion header's own
+          Collapsible.Trigger — now a real <button> since the Radix
+          migration (see MenuAccordion.tsx). A nested <button> there would
+          be invalid HTML, silently reparented by the browser's parser.
+          `stopPropagation` (already needed regardless, so this button's
+          own click doesn't also toggle the accordion) plus explicit
+          role/tabIndex/onKeyDown restore the same keyboard reachability a
+          native <button> gave for free. */}
+      <span
+        role="button"
+        tabIndex={0}
         className="text-btn menu-btn btn-filter-resources position-relative"
         onClick={callback}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            callback(e);
+          }
+        }}
         aria-label={translate('Filter resources')}
       >
         <FunnelSimpleIcon size={20} weight="bold" />
@@ -52,7 +68,7 @@ export const ResourcesMenuFilterButton = () => {
             className="me-n2 mt-2 border border-2"
           />
         )}
-      </button>
+      </span>
     </Tip>
   );
 };

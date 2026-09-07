@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -28,3 +29,21 @@ export const useOfferingCategories = () => {
   });
   return categories;
 };
+
+/**
+ * Shared "only one sibling open at a time" state for a group of
+ * MenuAccordion rows — the Radix-Collapsible replacement for Metronic's
+ * own single-branch-open accordion coordination (see MenuAccordion.tsx's
+ * own top comment for why Collapsible, not Accordion, is used here). One
+ * call per group of siblings that should collapse each other: the
+ * sidebar's own top level (UnifiedSidebar.tsx), and each distinct
+ * nesting level inside ResourcesMenu's recursive categories.
+ */
+export function useExclusiveOpen(initial?: string) {
+  const [openId, setOpenId] = useState<string | undefined>(initial);
+  return {
+    openId,
+    setOpenId,
+    toggle: (id: string) => (next: boolean) => setOpenId(next ? id : undefined),
+  };
+}

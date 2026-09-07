@@ -1,6 +1,7 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
-import type { MouseEvent } from 'react';
-import { ButtonGroup, Dropdown } from 'react-bootstrap';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import { forwardRef, type MouseEvent } from 'react';
+import { ButtonGroup } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsActivate,
   marketplaceProviderOfferingsDraft,
@@ -55,6 +56,24 @@ const getActivationErrors = (offering): string[] => {
   }
   return errors;
 };
+
+/**
+ * forwardRef for the asChild Trigger below — see ActionsDropdown.tsx's
+ * TableDropdownToggle for the general requirement. Recreates
+ * react-bootstrap's `Dropdown.Toggle split` exactly: a plain Bootstrap
+ * button (`btn btn-{variant} {className}`) with `dropdown-toggle
+ * dropdown-toggle-split` added — no custom Waldur trigger variant covers
+ * a caret-only button glued to a separate primary action button.
+ */
+const SplitToggle = forwardRef<HTMLButtonElement>((props, ref) => (
+  <button
+    ref={ref}
+    type="button"
+    className="btn btn-primary px-4 dropdown-toggle dropdown-toggle-split"
+    {...props}
+  />
+));
+SplitToggle.displayName = 'SplitToggle';
 
 export const OfferingStateActions = ({
   offering,
@@ -182,36 +201,46 @@ export const OfferingStateActions = ({
     );
   }
   return (
-    <Dropdown as={ButtonGroup} className={className}>
-      <ActionButton
-        variant="primary"
-        action={(event) => runActionAndBlurOnPointerClick(event, callback)}
-        title={title}
-        data-testid="offering-primary-state-action"
-      />
-      <Dropdown.Toggle split variant="primary" className="px-4" />
-      <Dropdown.Menu>
-        {offering.state !== DRAFT && (
-          <ActionItem
-            title={draftTitle}
-            action={() => setDraft()}
-            iconNode={<PencilSimpleIcon weight="bold" />}
+    <RadixDropdownMenu.Root modal={false}>
+      <ButtonGroup className={className}>
+        <ActionButton
+          variant="primary"
+          action={(event) => runActionAndBlurOnPointerClick(event, callback)}
+          title={title}
+          data-testid="offering-primary-state-action"
+        />
+        <RadixDropdownMenu.Trigger asChild>
+          <SplitToggle />
+        </RadixDropdownMenu.Trigger>
+      </ButtonGroup>
+      <RadixDropdownMenu.Portal>
+        <RadixDropdownMenu.Content
+          align="start"
+          sideOffset={2}
+          className="dropdown-menu show position-static"
+        >
+          {offering.state !== DRAFT && (
+            <ActionItem
+              title={draftTitle}
+              action={() => setDraft()}
+              iconNode={<PencilSimpleIcon weight="bold" />}
+            />
+          )}
+          <ArchiveOfferingAction
+            offering={offering}
+            refreshOffering={refreshOffering}
           />
-        )}
-        <ArchiveOfferingAction
-          offering={offering}
-          refreshOffering={refreshOffering}
-        />
-        <MakeUnavailableAction
-          offering={offering}
-          refreshOffering={refreshOffering}
-          canManageOfferingLifecycle={canManageOfferingLifecycle}
-        />
-        <DeleteOfferingAction
-          offering={offering}
-          canManageOfferingLifecycle={canManageOfferingLifecycle}
-        />
-      </Dropdown.Menu>
-    </Dropdown>
+          <MakeUnavailableAction
+            offering={offering}
+            refreshOffering={refreshOffering}
+            canManageOfferingLifecycle={canManageOfferingLifecycle}
+          />
+          <DeleteOfferingAction
+            offering={offering}
+            canManageOfferingLifecycle={canManageOfferingLifecycle}
+          />
+        </RadixDropdownMenu.Content>
+      </RadixDropdownMenu.Portal>
+    </RadixDropdownMenu.Root>
   );
 };

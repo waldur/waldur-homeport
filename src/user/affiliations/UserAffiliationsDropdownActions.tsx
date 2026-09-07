@@ -1,11 +1,10 @@
-import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { Dropdown } from 'react-bootstrap';
 
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
-import { translate } from '@/i18n';
 import { isDescendantOf } from '@/navigation/useTabs';
+import { AddDropdownToggle } from '@/table/ActionsDropdown';
 import { AddOrganizationButton } from '@/user/dashboard/AddOrganizationButton';
 
 export const UserAffiliationsDropdownActions = () => {
@@ -24,23 +23,19 @@ export const UserAffiliationsDropdownActions = () => {
   }
 
   return (
-    <Dropdown placement="bottom-end">
-      <Dropdown.Toggle
-        variant="primary"
-        size="lg"
-        className="no-arrow btn-icon-right"
-      >
-        <span className="svg-icon svg-icon-2">
-          <PlusCircleIcon weight="bold" />
-        </span>
-        {translate('Add')}
-        <span className="svg-icon svg-icon-2 rotate-180">
-          <CaretDownIcon weight="bold" />
-        </span>
-      </Dropdown.Toggle>
-      <Dropdown.Menu flip>
-        {showCreateOrganization && <AddOrganizationButton />}
-      </Dropdown.Menu>
-    </Dropdown>
+    <RadixDropdownMenu.Root modal={false}>
+      <RadixDropdownMenu.Trigger asChild>
+        <AddDropdownToggle size="lg" />
+      </RadixDropdownMenu.Trigger>
+      <RadixDropdownMenu.Portal>
+        <RadixDropdownMenu.Content
+          align="start"
+          sideOffset={2}
+          className="dropdown-menu show position-static"
+        >
+          {showCreateOrganization && <AddOrganizationButton />}
+        </RadixDropdownMenu.Content>
+      </RadixDropdownMenu.Portal>
+    </RadixDropdownMenu.Root>
   );
 };

@@ -1,4 +1,6 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import classNames from 'classnames';
 import {
   useCallback,
   useEffect,
@@ -7,7 +9,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Card, Dropdown, Nav, Tab } from 'react-bootstrap';
+import { Card, Nav, Tab } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
@@ -23,6 +25,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useNotify } from '@/store/notify';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
 
 import { useSettingsUrlSync } from './settings/useSettingsUrlSync';
@@ -301,52 +304,59 @@ export const FeaturesList = () => {
                     </Nav>
                   </div>
                   {hiddenTabKeys.size > 0 && (
-                    <Dropdown
-                      className="flex-shrink-0"
-                      style={{ marginBottom: 2 }}
-                      onToggle={updateOverflow}
-                    >
-                      <Dropdown.Toggle
-                        variant="text-secondary"
-                        className="btn-icon no-arrow w-35px h-35px"
-                      >
-                        <DotsThreeVerticalIcon size={22} weight="bold" />
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu align="end">
-                        <div className="mh-200px overflow-auto">
-                          {FEATURES_TABS.filter((tab) =>
-                            hiddenTabKeys.has(tab.key),
-                          ).map((tab) => {
-                            const filteredCount = getFilteredCount(tab.key);
-                            const hasMatches = filteredCount > 0;
-                            return (
-                              <Dropdown.Item
-                                key={tab.key}
-                                active={tab.key === activeKey}
-                                disabled={!hasMatches && !!query}
-                                className="d-flex justify-content-between align-items-center"
-                                onClick={() => {
-                                  handleSelect(tab.key);
-                                  scrollToTab(tab.key);
-                                }}
-                              >
-                                {tab.title}
-                                {query && (
-                                  <Badge
-                                    variant="default"
-                                    size="sm"
-                                    outline
-                                    className="ms-2"
-                                  >
-                                    {filteredCount}
-                                  </Badge>
-                                )}
-                              </Dropdown.Item>
-                            );
-                          })}
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
+                    <RadixDropdownMenu.Root onOpenChange={updateOverflow}>
+                      <RadixDropdownMenu.Trigger asChild>
+                        <button
+                          type="button"
+                          className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px flex-shrink-0"
+                          style={{ marginBottom: 2 }}
+                        >
+                          <DotsThreeVerticalIcon size={22} weight="bold" />
+                        </button>
+                      </RadixDropdownMenu.Trigger>
+                      <RadixDropdownMenu.Portal>
+                        <RadixDropdownMenu.Content
+                          align="end"
+                          sideOffset={2}
+                          className="dropdown-menu show position-static"
+                        >
+                          <div className="mh-200px overflow-auto">
+                            {FEATURES_TABS.filter((tab) =>
+                              hiddenTabKeys.has(tab.key),
+                            ).map((tab) => {
+                              const filteredCount = getFilteredCount(tab.key);
+                              const hasMatches = filteredCount > 0;
+                              return (
+                                <ActionsDropdownItem
+                                  key={tab.key}
+                                  disabled={!hasMatches && !!query}
+                                  className={classNames(
+                                    'd-flex justify-content-between align-items-center',
+                                    { active: tab.key === activeKey },
+                                  )}
+                                  onClick={() => {
+                                    handleSelect(tab.key);
+                                    scrollToTab(tab.key);
+                                  }}
+                                >
+                                  {tab.title}
+                                  {query && (
+                                    <Badge
+                                      variant="default"
+                                      size="sm"
+                                      outline
+                                      className="ms-2"
+                                    >
+                                      {filteredCount}
+                                    </Badge>
+                                  )}
+                                </ActionsDropdownItem>
+                              );
+                            })}
+                          </div>
+                        </RadixDropdownMenu.Content>
+                      </RadixDropdownMenu.Portal>
+                    </RadixDropdownMenu.Root>
                   )}
                 </div>
                 {query && tabsWithMatches.length > 0 && (

@@ -7,7 +7,7 @@ import { eventConsumersDestroy, rabbitmqStatsRetrieve } from 'waldur-js-client';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { EventConsumerDeregisterAction } from './EventConsumerRowActions';
 import { EventConsumersCard } from './EventConsumersCard';
@@ -74,11 +74,13 @@ const store = mockStore({
 
 const renderCard = () =>
   renderWithProviders(
-    <Provider store={store}>
-      <DrawerProvider>
-        <EventConsumersCard />
-      </DrawerProvider>
-    </Provider>,
+    inActionsMenu(
+      <Provider store={store}>
+        <DrawerProvider>
+          <EventConsumersCard />
+        </DrawerProvider>
+      </Provider>,
+    ),
   );
 
 describe('EventConsumersCard', () => {
@@ -126,10 +128,12 @@ describe('EventConsumersCard', () => {
 
   it('wires the deregister action to eventConsumersDestroy', async () => {
     renderWithProviders(
-      <EventConsumerDeregisterAction
-        row={consumers[0] as any}
-        refetch={vi.fn()}
-      />,
+      inActionsMenu(
+        <EventConsumerDeregisterAction
+          row={consumers[0] as any}
+          refetch={vi.fn()}
+        />,
+      ),
     );
 
     const config = vi.mocked(useManagedMutation).mock.calls[0][0] as any;

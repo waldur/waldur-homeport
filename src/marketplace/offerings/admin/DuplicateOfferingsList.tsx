@@ -1,6 +1,5 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC, FunctionComponent, useEffect } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import {
   DuplicateOfferingCandidate,
   DuplicateOfferingGroup,
@@ -12,7 +11,7 @@ import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { ActionsDropdown, ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher, createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -40,16 +39,20 @@ const EditOfferingAction = ({
     return null;
   }
   return (
-    <Dropdown.Item
-      as={DropdownLink}
-      state="admin-marketplace-offering-update"
-      params={{ offering_uuid: row.uuid, uuid: customerUuid }}
-    >
-      <span className="svg-icon svg-icon-2">
-        <PencilSimpleIcon weight="bold" />
-      </span>
-      {translate('Edit offering')}
-    </Dropdown.Item>
+    // asChild so the row *is* the link: Radix merges its menuitem
+    // semantics and keyboard handling onto DropdownLink's own anchor
+    // instead of nesting an anchor inside a menuitem div.
+    <ActionsDropdownItem asChild>
+      <DropdownLink
+        state="admin-marketplace-offering-update"
+        params={{ offering_uuid: row.uuid, uuid: customerUuid }}
+      >
+        <span className="svg-icon svg-icon-2">
+          <PencilSimpleIcon weight="bold" />
+        </span>
+        {translate('Edit offering')}
+      </DropdownLink>
+    </ActionsDropdownItem>
   );
 };
 

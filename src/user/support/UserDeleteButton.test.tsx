@@ -5,7 +5,7 @@ import { usersDestroy } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { UserDeleteButton } from './UserDeleteButton';
@@ -34,7 +34,9 @@ describe('UserDeleteButton', () => {
     vi.mocked(useModal().confirm).mockResolvedValueOnce(null);
     vi.mocked(usersDestroy).mockResolvedValueOnce(null);
 
-    renderWithProviders(<UserDeleteButton row={row} refetch={refetch} />);
+    renderWithProviders(
+      inActionsMenu(<UserDeleteButton row={row} refetch={refetch} />),
+    );
     await user.click(screen.getByText('Delete'));
 
     await waitFor(() => {
@@ -52,7 +54,7 @@ describe('UserDeleteButton', () => {
   it('does nothing when the confirmation is dismissed', async () => {
     vi.mocked(useModal().confirm).mockRejectedValueOnce(null);
 
-    renderWithProviders(<UserDeleteButton row={row} />);
+    renderWithProviders(inActionsMenu(<UserDeleteButton row={row} />));
     await user.click(screen.getByText('Delete'));
 
     await waitFor(() => {
@@ -118,7 +120,7 @@ describe('UserDeleteButton', () => {
       is_staff: false,
     } as any);
 
-    renderWithProviders(<UserDeleteButton row={row} />);
+    renderWithProviders(inActionsMenu(<UserDeleteButton row={row} />));
     expect(screen.queryByText('Delete')).toBeNull();
   });
 
@@ -128,7 +130,7 @@ describe('UserDeleteButton', () => {
       is_staff: true,
     } as any);
 
-    renderWithProviders(<UserDeleteButton row={row} />);
+    renderWithProviders(inActionsMenu(<UserDeleteButton row={row} />));
     expect(screen.queryByText('Delete')).toBeNull();
   });
 });

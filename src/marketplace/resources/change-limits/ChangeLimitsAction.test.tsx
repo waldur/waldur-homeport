@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { ChangeLimitsAction } from './ChangeLimitsAction';
@@ -25,7 +25,9 @@ describe('ChangeLimitsAction', () => {
       state: 'OK',
     };
 
-    renderWithProviders(<ChangeLimitsAction resource={resource as any} />);
+    renderWithProviders(
+      inActionsMenu(<ChangeLimitsAction resource={resource as any} />),
+    );
 
     // We expect that marketplaceResourcesOfferingRetrieve is NOT called
     expect(marketplaceResourcesOfferingRetrieve).not.toHaveBeenCalled();
@@ -43,7 +45,9 @@ describe('ChangeLimitsAction', () => {
       state: 'OK',
     };
 
-    renderWithProviders(<ChangeLimitsAction resource={resource as any} />);
+    renderWithProviders(
+      inActionsMenu(<ChangeLimitsAction resource={resource as any} />),
+    );
 
     expect(marketplaceResourcesOfferingRetrieve).toHaveBeenCalledWith(
       expect.objectContaining({

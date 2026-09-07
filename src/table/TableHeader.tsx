@@ -176,7 +176,7 @@ const TableTh = ({
                   <CaretDownIcon
                     size={20}
                     weight="bold"
-                    className="rotate-180"
+                    className="rotate-toggle-180"
                   />
                 </span>
               )}

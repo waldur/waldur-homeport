@@ -110,6 +110,15 @@ export { WaldurLogo } from './WaldurLogo';
 export type { WaldurLogoProps } from './WaldurLogo';
 
 export {
+  Popover,
+  PopoverAnchor,
+  PopoverClose,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+} from './Popover';
+
+export {
   Sheet,
   SheetClose,
   SheetContent,

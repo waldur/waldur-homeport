@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { Dropdown } from 'react-bootstrap';
+
+import { ActionsDropdownItemText } from '@/table/ActionsDropdown';
 
 import { ResourceActionMenuContext } from './ResourceActionMenuContext';
 
@@ -8,9 +9,9 @@ export const ActionGroup = ({ title, children }) => {
   return (
     <div className="action-group">
       {queryContext?.hideGroupName ? null : (
-        <Dropdown.ItemText className="text-muted fw-bolder fs-7">
+        <ActionsDropdownItemText className="text-muted fw-bolder fs-7">
           {title}
-        </Dropdown.ItemText>
+        </ActionsDropdownItemText>
       )}
       <div className="action-list" data-testid="action-list">
         {children}

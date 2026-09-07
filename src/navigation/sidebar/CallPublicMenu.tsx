@@ -82,11 +82,18 @@ const hasCallRole = (user) =>
 interface CallPublicMenuProps {
   disabled?: boolean;
   disabledTooltip?: string;
+  /** Threaded from UnifiedSidebar's own top-level useExclusiveOpen —
+   * forwarded onto whichever of the three mutually-exclusive
+   * `itemId="calls-menu"` MenuAccordion variants below actually renders. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const CallPublicMenu: FC<CallPublicMenuProps> = ({
   disabled,
   disabledTooltip,
+  open,
+  onOpenChange,
 }) => {
   const { state } = useCurrentStateAndParams();
   const user = useUser();
@@ -154,6 +161,8 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
           icon={<ChatTeardropTextIcon weight="bold" />}
           disabled={disabled}
           disabledTooltip={disabledTooltip}
+          open={open}
+          onOpenChange={onOpenChange}
         >
           {manageCallsItem}
           {browseCallsItem}
@@ -208,6 +217,8 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
         icon={<ChatTeardropTextIcon weight="bold" />}
         disabled={disabled}
         disabledTooltip={disabledTooltip}
+        open={open}
+        onOpenChange={onOpenChange}
       >
         <MenuItem
           title={translate('My proposals')}
@@ -237,6 +248,8 @@ export const CallPublicMenu: FC<CallPublicMenuProps> = ({
       icon={<ChatTeardropTextIcon weight="bold" />}
       disabled={disabled}
       disabledTooltip={disabledTooltip}
+      open={open}
+      onOpenChange={onOpenChange}
     >
       {manageCallsItem}
       {browseCallsItem}

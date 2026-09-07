@@ -1,11 +1,11 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { Dropdown } from 'react-bootstrap';
 import { customerCreditsDestroy } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 const DeleteCreditDialog = lazyComponent(() =>
   import('./DeleteCreditDialog').then((module) => ({
@@ -38,16 +38,15 @@ export const DeleteCreditButton = ({ row, refetch }) => {
     });
 
   return (
-    <Dropdown.Item
-      as="button"
+    <ActionsDropdownItem
       className="text-danger"
       disabled={deleteMutation.isPending}
-      onClick={confirm}
+      onSelect={confirm}
     >
       <span className="svg-icon svg-icon-2 svg-icon-danger">
         <TrashIcon weight="bold" />
       </span>
       {translate('Delete')}
-    </Dropdown.Item>
+    </ActionsDropdownItem>
   );
 };

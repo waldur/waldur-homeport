@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card, Dropdown } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { OIDC_TYPES } from '@/auth/providers/constants';
 import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
@@ -7,6 +7,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 const CreateProviderDialog = lazyComponent(() =>
   import('./CreateProviderDialog').then((module) => ({
@@ -126,34 +127,34 @@ export const ProviderCard: FC<ProviderCardProps> = ({
                 {provider ? (
                   <>
                     {editable && (
-                      <Dropdown.Item onClick={updateProvider}>
+                      <ActionsDropdownItem onSelect={updateProvider}>
                         {translate('Edit')}
-                      </Dropdown.Item>
+                      </ActionsDropdownItem>
                     )}
                     {editable && OIDC_TYPES.includes(type) && (
-                      <Dropdown.Item onClick={openDiscovery}>
+                      <ActionsDropdownItem onSelect={openDiscovery}>
                         {translate('Re-discover')}
-                      </Dropdown.Item>
+                      </ActionsDropdownItem>
                     )}
-                    <Dropdown.Item onClick={showUsers}>
+                    <ActionsDropdownItem onSelect={showUsers}>
                       {translate('Users')}
-                    </Dropdown.Item>
+                    </ActionsDropdownItem>
                     {provider.is_active &&
                       OIDC_TYPES.includes(provider.provider) && (
-                        <Dropdown.Item onClick={showDetails}>
+                        <ActionsDropdownItem onSelect={showDetails}>
                           {translate('Details')}
-                        </Dropdown.Item>
+                        </ActionsDropdownItem>
                       )}
                   </>
                 ) : (
                   <>
-                    <Dropdown.Item onClick={createProvider}>
+                    <ActionsDropdownItem onSelect={createProvider}>
                       {translate('Add identity provider')}
-                    </Dropdown.Item>
+                    </ActionsDropdownItem>
                     {OIDC_TYPES.includes(type) && (
-                      <Dropdown.Item onClick={openDiscovery}>
+                      <ActionsDropdownItem onSelect={openDiscovery}>
                         {translate('Discovery wizard')}
-                      </Dropdown.Item>
+                      </ActionsDropdownItem>
                     )}
                   </>
                 )}

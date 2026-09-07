@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
 import { RoleEnum } from '@/permissions/enums';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { SetPanelChairButton } from './SetPanelChairButton';
 
@@ -28,11 +28,13 @@ const member = {
 const renderButton = (call, permission = member) => {
   const refetch = vi.fn();
   renderWithProviders(
-    <SetPanelChairButton
-      permission={permission}
-      call={call}
-      refetch={refetch}
-    />,
+    inActionsMenu(
+      <SetPanelChairButton
+        permission={permission}
+        call={call}
+        refetch={refetch}
+      />,
+    ),
   );
   return { refetch };
 };

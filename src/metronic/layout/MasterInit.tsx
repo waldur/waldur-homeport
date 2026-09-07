@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 
 import {
-  MenuComponent,
   DrawerComponent,
   ScrollComponent,
   ToggleComponent,
@@ -18,7 +17,6 @@ export function MasterInit() {
     setTimeout(() => {
       ToggleComponent.bootstrap();
       DrawerComponent.bootstrap();
-      MenuComponent.bootstrap();
       ScrollComponent.bootstrap();
       SwapperComponent.bootstrap();
     }, 500);

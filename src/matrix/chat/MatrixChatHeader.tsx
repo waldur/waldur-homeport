@@ -6,8 +6,8 @@ import {
   PhoneDisconnectIcon,
   PhoneIcon,
 } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
-import { Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
 
 import Avatar from '@/core/Avatar';
@@ -16,7 +16,11 @@ import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+  ActionsDropdownSeparator,
+} from '@/table/ActionsDropdown';
 
 import { useMatrixCall } from './call/useMatrixCall';
 import { getChatAvatarColor } from './chatColors';
@@ -136,15 +140,15 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
 
   const kebab = (
     <ActionsDropdownComponent size="sm">
-      <Dropdown.Item onClick={handleMute}>
+      <ActionsDropdownItem onSelect={handleMute}>
         {muted ? (
           <BellIcon size={18} className="me-2" weight="bold" />
         ) : (
           <BellSlashIcon size={18} className="me-2" weight="bold" />
         )}
         {muted ? translate('Unmute') : translate('Mute')}
-      </Dropdown.Item>
-      {(rtcAvailable || matrixUri) && <Dropdown.Divider />}
+      </ActionsDropdownItem>
+      {(rtcAvailable || matrixUri) && <ActionsDropdownSeparator />}
       {rtcAvailable &&
         (blockedByOtherCall ? (
           <Tip
@@ -155,19 +159,15 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
             placement="left"
           >
             <span>
-              <Dropdown.Item
-                onClick={(e) => e.preventDefault()}
-                disabled
-                style={{ pointerEvents: 'none' }}
-              >
+              <ActionsDropdownItem disabled>
                 <PhoneIcon size={18} className="me-2" weight="bold" />
                 {translate('Start call')}
-              </Dropdown.Item>
+              </ActionsDropdownItem>
             </span>
           </Tip>
         ) : (
-          <Dropdown.Item
-            onClick={handleCall}
+          <ActionsDropdownItem
+            onSelect={handleCall}
             disabled={busy}
             className={isThisRoomsCall ? 'text-danger' : undefined}
           >
@@ -177,13 +177,15 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
               <PhoneIcon size={18} className="me-2" weight="bold" />
             )}
             {isThisRoomsCall ? translate('End call') : translate('Start call')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         ))}
       {matrixUri && (
-        <Dropdown.Item href={matrixUri} target="_blank" rel="noreferrer">
-          <ChatsCircleIcon size={18} className="me-2" weight="bold" />
-          {translate('Open in external Matrix client')}
-        </Dropdown.Item>
+        <ActionsDropdownItem asChild>
+          <a href={matrixUri} target="_blank" rel="noreferrer">
+            <ChatsCircleIcon size={18} className="me-2" weight="bold" />
+            {translate('Open in external Matrix client')}
+          </a>
+        </ActionsDropdownItem>
       )}
     </ActionsDropdownComponent>
   );
@@ -224,24 +226,30 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
           <span className="fw-semibold text-truncate">{roomName}</span>
         )}
         {members.length > 0 && (
-          <OverlayTrigger
-            trigger="click"
-            rootClose
-            transition={false}
-            placement="bottom-start"
-            overlay={
-              <Popover id="tc-members-popover" className="tc-members-popover">
-                <Popover.Body className="p-0">
+          <RadixPopover.Root modal={false}>
+            <RadixPopover.Trigger asChild>
+              <button type="button" className="tc-header-members">
+                {'· '}
+                {translate('{count} members', { count: members.length })}
+              </button>
+            </RadixPopover.Trigger>
+            <RadixPopover.Portal>
+              <RadixPopover.Content
+                side="bottom"
+                align="start"
+                sideOffset={2}
+                // position-static: Bootstrap's own .popover class hardcodes
+                // `position: absolute; left: 0`, fighting the Radix popper
+                // wrapper for control of this box's placement — see
+                // TableColumnsButton.tsx's own comment on this exact fix.
+                className="popover tc-members-popover position-static"
+              >
+                <div className="popover-body p-0">
                   <MatrixMembersList />
-                </Popover.Body>
-              </Popover>
-            }
-          >
-            <button type="button" className="tc-header-members">
-              {'· '}
-              {translate('{count} members', { count: members.length })}
-            </button>
-          </OverlayTrigger>
+                </div>
+              </RadixPopover.Content>
+            </RadixPopover.Portal>
+          </RadixPopover.Root>
         )}
       </div>
 

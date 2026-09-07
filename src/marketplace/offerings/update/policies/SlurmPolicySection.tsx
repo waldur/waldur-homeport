@@ -9,7 +9,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
-import { Card, Dropdown, FormCheck } from 'react-bootstrap';
+import { Card, FormCheck } from 'react-bootstrap';
 import { Field, Form, useFormState, useForm } from 'react-final-form';
 import { components } from 'react-select';
 import {
@@ -42,6 +42,10 @@ import { ComponentLimitsField } from '@/marketplace/offerings/details/policies/C
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import {
+  ActionsDropdownItem,
+  ActionsDropdownSeparator,
+} from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { OfferingSectionProps } from '../types';
@@ -177,21 +181,21 @@ const PolicyInfoDropdown: FC<{
 
   return (
     <ActionDropdownButton title={translate('Policy info')}>
-      <Dropdown.Item onClick={openSummary}>
+      <ActionsDropdownItem onSelect={openSummary}>
         <QuestionIcon weight="bold" className="me-2" />
         {translate('How it works')}
-      </Dropdown.Item>
-      <Dropdown.Item onClick={openPreview}>
+      </ActionsDropdownItem>
+      <ActionsDropdownItem onSelect={openPreview}>
         <EyeIcon weight="bold" className="me-2" />
         {translate('Preview impact')}
-      </Dropdown.Item>
+      </ActionsDropdownItem>
       {policyUuid && (
         <>
-          <Dropdown.Divider />
-          <Dropdown.Item onClick={openExecutionLog}>
+          <ActionsDropdownSeparator />
+          <ActionsDropdownItem onSelect={openExecutionLog}>
             <ClockCounterClockwiseIcon weight="bold" className="me-2" />
             {translate('Execution log')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         </>
       )}
     </ActionDropdownButton>

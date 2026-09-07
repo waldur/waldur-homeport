@@ -19929,6 +19929,11 @@
       "feature_area": "integration"
     }
   },
+  "Filter by column": {
+    "context": {
+      "feature_area": "table"
+    }
+  },
   "Filter by name...": {
     "context": {
       "feature_area": "article-codes"
@@ -30965,6 +30970,11 @@
       "feature_area": "team"
     }
   },
+  "No roles available.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "No roles found": {
     "context": {
       "feature_area": "roles"
@@ -31339,6 +31349,16 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "steps"
+    }
+  },
+  "None of the selected users are active.": {
+    "context": {
+      "feature_area": "support"
+    }
+  },
+  "None of the selected users are inactive.": {
+    "context": {
+      "feature_area": "support"
     }
   },
   "None of your {count} resources have a backend_id set. Set the backend_id to the Arrow license reference to enable consumption tracking.": {
@@ -48971,9 +48991,7 @@
   },
   "Submit usage report": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "usage",
-      "action_type": "create"
+      "feature_area": "usage"
     }
   },
   "Submitted": {
@@ -61913,8 +61931,7 @@
         "version": {
           "type": "unknown"
         }
-      },
-      "feature_area": "footer"
+      }
     }
   },
   "Warn": {},
@@ -63102,6 +63119,11 @@
       "feature_area": "reviewer"
     }
   },
+  "You do not have access to deploy this offering.": {
+    "context": {
+      "feature_area": "category"
+    }
+  },
   "You do not have an active payment profile, visit {link} to create a payment profile.": {
     "context": {
       "variables": {
@@ -63440,11 +63462,7 @@
     }
   },
   "Your OpenStack project — the scope that owns all the networks, routers, and instances below.": {},
-  "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:": {
-    "context": {
-      "feature_area": "footer"
-    }
-  },
+  "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:": {},
   "Your access lasts as long as the longest subscription requested.": {},
   "Your account is not part of any organization. Your view will be restricted.": {
     "context": {

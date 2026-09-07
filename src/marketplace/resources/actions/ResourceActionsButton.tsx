@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 import { useBoolean } from 'react-use';
 import { Resource } from 'waldur-js-client';
 
@@ -15,7 +14,7 @@ interface ResourceActionsButtonProps {
   resource: Resource;
   refetch?(): void;
   labeled?: boolean;
-  drop?: DropDirection;
+  drop?: 'up' | 'down' | 'start' | 'end';
   disabled?: boolean;
   size?: 'sm' | 'lg';
 }

@@ -135,8 +135,14 @@ describe('MatrixChatHeader', () => {
     await user.click(container.querySelector('.dropdown-toggle')!);
     const item = await screen.findByText('Start call');
     expect(item).toBeTruthy();
+    // Radix marks a disabled row with aria-disabled/data-disabled rather
+    // than Bootstrap's `.disabled` class — real semantics assistive tech can
+    // read, where the previous markup only looked disabled.
     // eslint-disable-next-line testing-library/no-node-access
-    expect(item.closest('.dropdown-item')).toHaveClass('disabled');
+    expect(item.closest('.dropdown-item')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
   });
 
   it('renders the room name as a link to the project when projectUuid is set', () => {

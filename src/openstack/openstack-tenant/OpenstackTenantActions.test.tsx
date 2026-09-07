@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { ENV } from '@/core/config';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
 import { OpenstackTenantActions } from './OpenstackTenantActions';
@@ -38,20 +38,26 @@ const renderComponent = (userOverrides = {}) => {
     ...userOverrides,
   } as any);
   return renderWithProviders(
-    <OpenstackTenantActions
-      marketplaceResource={mockMarketplaceResource}
-      resource={mockResource}
-      refetch={vi.fn()}
-    />,
+    inActionsMenu(
+      <OpenstackTenantActions
+        marketplaceResource={mockMarketplaceResource}
+        resource={mockResource}
+        refetch={vi.fn()}
+      />,
+    ),
   );
 };
 
+// Rows are queried by role="menuitem", not role="button": an action row is a
+// Radix menu item now, which is the accurate role for a row inside a menu —
+// the react-bootstrap Dropdown.Item this replaced rendered a bare <button>
+// with no menu semantics at all.
 describe('OpenstackTenantActions', () => {
   it('renders action groups with correct titles for staff user', () => {
     renderComponent();
 
     expect(
-      screen.queryAllByRole('button').map((element) => element.textContent),
+      screen.queryAllByRole('menuitem').map((element) => element.textContent),
     ).toEqual([
       'Edit',
       'Replicate',
@@ -77,7 +83,7 @@ describe('OpenstackTenantActions', () => {
     renderComponent({ is_staff: false, permissions: [] });
 
     const buttonLabels = screen
-      .queryAllByRole('button')
+      .queryAllByRole('menuitem')
       .map((el) => el.textContent);
     expect(buttonLabels).not.toContain('Change quotas');
   });

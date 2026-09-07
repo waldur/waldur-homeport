@@ -13,7 +13,15 @@
 //   - default state: $fg-quaternary (gray-500)
 //   - hover / selected / open: $fg-brand-primary
 .header-menu .menu-item {
+  // `transition` lives on this always-present base rule, not only inside
+  // the `[data-state='open']` block below: a transition declared solely
+  // inside that conditional only applies while it matches, so opening
+  // animates (the rule fires, carrying its own transition) but closing
+  // doesn't (the instant data-state flips to closed, this selector stops
+  // matching, transition reverts to unset, and the caret snaps back to
+  // 0deg instead of animating the reverse) — reported live.
   > .menu-link .menu-arrow:after {
+    transition: get($menu, accordion, arrow-transition);
     @include svg-bg-icon(arrow-start, $fg-quaternary);
     /*rtl:begin:remove*/
     @include svg-bg-icon(arrow-end, $fg-quaternary);
@@ -33,5 +41,223 @@
   // Flip the caret to point up while the dropdown list is open (animated).
   &.show > .menu-link .menu-arrow:after {
     @include menu-link-arrow-rotate(270deg, -270deg);
+  }
+
+  // Radix bridge for the same three rules above. TabsList.tsx's
+  // TabWithChildren (src/navigation/TabsList.tsx) is `.header-menu`'s only
+  // Radix-driven trigger with a `.menu-arrow` — Metronic's own JS used to
+  // add `.show`/`.here`/`.hover` classes to this exact `.menu-item` on
+  // open/active/hover (MenuComponent.ts's `_showDropdown`:
+  // `item.classList.add('show')`), which nothing does anymore now that
+  // Radix owns open/close. `RadixDropdownMenu.Trigger asChild` sets
+  // `data-state="open"|"closed"` on this same element automatically (no
+  // wiring needed, unlike `[data-highlighted]`/`[data-side]` elsewhere in
+  // this file), so `[data-state='open']` is the direct, real-time-accurate
+  // equivalent of `.show` — including the entrance/rotation transition,
+  // since the attribute (like the class before it) is simply present or
+  // absent, not toggled via a one-shot animation class.
+  &[data-state='open'] > .menu-link .menu-arrow:after {
+    @include svg-bg-icon(arrow-start, $fg-brand-primary);
+    /*rtl:begin:remove*/
+    @include svg-bg-icon(arrow-end, $fg-brand-primary);
+    /*rtl:end:remove*/
+  }
+
+  &[data-state='open'] > .menu-link .menu-arrow:after {
+    @include menu-link-arrow-rotate(270deg, -270deg);
+  }
+}
+
+// Radix-driven menus (src/navigation/NavMenu.tsx) — the header/footer/
+// sidebar-popup dropdowns built on Metronic's own .menu/.menu-sub-dropdown
+// system, migrated off Metronic's imperative MenuComponent/data-kt-menu-*
+// JS onto Radix. NavMenuContent/NavMenuSubContent already reuse Metronic's
+// own compiled .menu-sub-dropdown.show[data-popper-placement] rule for
+// display/shadow/radius/background/z-index unmodified — see that file's
+// own top-of-file comment for why. A few gaps remain, all because Radix's
+// own attributes/behaviour don't exactly line up with what Metronic's
+// Popper.js-driven original used to set — including the entrance
+// animation itself, overridden further below for Radix content only.
+
+// Radix moves real DOM focus onto whichever row is [data-highlighted] --
+// including on plain pointer hover, not just keyboard nav (see the
+// [data-highlighted] bridge below). Some browsers' :focus-visible
+// heuristic treats that programmatic .focus() call as keyboard-originated
+// even while the pointer is squarely over the row, so core's keyboard
+// focus ring (menu/_base.scss's `.menu-link:focus-visible`) was drawing on
+// top of an otherwise plain :hover -- reported live on the user dropdown's
+// menu items. A real pointer is on the row at that exact moment, so
+// suppress the ring specifically then; keyboard-only focus (no pointer
+// over the row) is unaffected. `:hover:focus-visible` outranks the bare
+// `:focus-visible` rule on specificity alone, so this wins regardless of
+// source order relative to core/.
+.menu-link:hover:focus-visible {
+  outline: none;
+}
+
+// Keyboard highlight. `.menu-link:hover` (menu/_theme.scss's
+// menu-link-hover-state mixin) is a plain CSS pseudo-class, so mouse hover
+// needs no bridge at all. Radix's keyboard navigation instead marks the
+// focused row with [data-highlighted] — never :hover, and :focus only
+// while the *document* itself has focus, which keyboard nav inside an
+// open menu doesn't guarantee — so arrow-key navigation is invisible
+// without this. Same gap, same fix shape as ActionsDropdown's own
+// .dropdown-item[data-highlighted] rule.
+//
+// Unlike Bootstrap's single dropdown theme, Metronic's own .menu-state-*
+// classes give every menu a *different* hover color/background (gray-700
+// on gray-50 for menu-state-bg-gray, gray-700 on light/gray-100 for
+// menu-state-bg-light, primary-700 with no background for
+// menu-state-title-primary) — the only three actually used anywhere in
+// this app (grepped, not assumed). A single bridge color the way
+// ActionsDropdown's Bootstrap one uses would be wrong for at least two of
+// these three. Each reuses menu-link-theme directly with literally the
+// same color arguments menu-link-hover-state already passes it for :hover
+// (menu/_theme.scss), just retargeted from :hover/.hover onto
+// [data-highlighted] — core/ itself is left untouched; add a block here
+// for any further menu-state-* class this app starts using.
+$menu-link-highlight-exclude: ':not(.disabled):not(.active):not(.here)';
+
+.menu-state-bg-gray .menu-link[data-highlighted]#{$menu-link-highlight-exclude},
+.menu-sub.menu-state-bg-gray
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
+  transition: $transition-link;
+  @include menu-link-theme(
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    $gray-50
+  );
+}
+
+.menu-state-bg-light
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
+  transition: $transition-link;
+  @include menu-link-theme(
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    $gray-700,
+    if(isDarkMode(), $gray-100, $light)
+  );
+}
+
+// RoleAndProjectSelectField.tsx's popup combines this with
+// menu-state-bg-light (source order below wins the title colour on
+// :hover the same way — primary-700 over the bg-light block's own
+// gray-700 — so [data-highlighted] keeps that same layering: no
+// background of its own here, since menu-state-bg-light's rule above
+// already supplies it).
+.menu-state-primary
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
+  transition: $transition-link;
+  @include menu-link-theme(
+    $primary-700,
+    $primary-700,
+    $primary-700,
+    $primary-700,
+    null
+  );
+}
+
+// menu-hover-title-primary (BoxRadioField.tsx's version-options menu) is a
+// different Metronic class family — menu/_theme.scss's own generated
+// .menu-hover-title-#{$name} rather than this file's custom
+// menu-state-* ones — but happens to need the exact same title-only
+// primary-700 color, so it shares this rule rather than duplicating it.
+.menu-state-title-primary
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude},
+.menu-hover-title-primary
+  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
+  transition: $transition-link;
+  @include menu-link-theme($primary-700, null, null, null, null);
+}
+
+// RoleAndProjectSelectField.tsx's popup (`.role-project-select-popup`,
+// same file) renders via Radix `Popover.Portal`, which appends it to
+// `document.body` — outside whatever modal it was opened from. Its
+// `.menu-sub-dropdown` class inherits `z-index: 105` from
+// `$menu, dropdown, z-index` (core/components/_variables.scss), a value
+// tuned for Metronic's own layering and never meant to compete with a
+// *Bootstrap* modal's actual z-index (`$zindex-modal: 1055`,
+// `$zindex-modal-backdrop: 1050`), which the invite-users flow that
+// hosts this field opens it inside. Reported live as the dropdown not
+// opening at all — it did open (`data-state="open"`, correct position,
+// `display: flex`, `opacity: 1`), just rendered behind the modal's own
+// surface, invisible and unclickable. Radix's Popper mirrors a Content
+// element's own CSS `z-index` onto the positioned wrapper it creates
+// around it, so overriding it here is enough — no JS/prop change needed.
+// `$zindex-popover`, not a bumped copy of `$menu, dropdown, z-index`:
+// this genuinely is a popover-like overlay, and reusing Bootstrap's own
+// token keeps it correctly ordered against Bootstrap's other z-indexed
+// UI (below tooltips at 1080, above the modal it lives in) instead of
+// picking an arbitrary number that could drift out of sync later.
+.role-project-select-popup {
+  z-index: $zindex-popover;
+}
+
+// Entrance animation, Radix-driven content. Two gaps to bridge against
+// core's own keyframes (menu-sub-dropdown-animation-move-up/-down,
+// core/components/menu/_base.scss) — both written for the old Popper.js
+// system and not fully right for Radix.
+//
+// Direction: Metronic's own rule picks the "move down" variant (instead
+// of the "move up" default) by matching [data-popper-placement^='top'] —
+// a real Popper.js placement string, which NavMenuContent's own
+// data-popper-placement is NOT (it only ever carries the *requested*
+// placement, never Radix's actual post-collision resolved one — Radix
+// exposes that as data-side instead, on the same element, and unlike
+// data-popper-placement it DOES reflect any collision-driven flip).
+// [data-side] is also a reliable "this element is Radix-driven" marker
+// on its own — only Radix sets it — so scoping both variants below to
+// its presence at all leaves the still-Popper.js-driven menus elsewhere
+// in this app (TableFiltersMenu, AsyncSearchBox, etc. — not yet migrated
+// to NavMenu) on core's own untouched keyframes.
+//
+// Jank: core's move keyframes animate margin-top/margin-bottom — a
+// layout-affecting property. Radix's positioning (Floating UI) watches
+// the content element with a ResizeObserver and repositions on any size
+// change, so every animation frame is itself a resize the observer
+// reacts to, fighting the CSS keyframe for the same box each frame —
+// reported live as a visible flicker/stutter on open
+// (LanguageSelectorDropdown's flyout, TabsList's TabWithChildren). The
+// `translate` property doesn't affect layout — unlike `transform`, which
+// Radix's own inline style already uses for positioning and would
+// conflict with directly if animated — so a translate-based equivalent
+// removes the fight without touching Radix's own transform. The fade
+// half has no such issue (opacity never affects layout), so it keeps
+// reusing core's own menu-sub-dropdown-animation-fade-in unchanged.
+.menu-sub-dropdown.show[data-popper-placement][data-side] {
+  animation:
+    menu-sub-dropdown-animation-fade-in #{get($menu, dropdown, animation-speed)}
+      ease 1,
+    menu-sub-dropdown-radix-move-up #{get($menu, dropdown, animation-speed)}
+      ease 1 !important;
+}
+
+.menu-sub-dropdown.show[data-popper-placement][data-side='top'] {
+  animation:
+    menu-sub-dropdown-animation-fade-in #{get($menu, dropdown, animation-speed)}
+      ease 1,
+    menu-sub-dropdown-radix-move-down #{get($menu, dropdown, animation-speed)}
+      ease 1 !important;
+}
+
+@keyframes menu-sub-dropdown-radix-move-up {
+  from {
+    translate: 0 #{get($menu, dropdown, animation-move-offset)};
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+@keyframes menu-sub-dropdown-radix-move-down {
+  from {
+    translate: 0 -#{get($menu, dropdown, animation-move-offset)};
+  }
+  to {
+    translate: 0 0;
   }
 }

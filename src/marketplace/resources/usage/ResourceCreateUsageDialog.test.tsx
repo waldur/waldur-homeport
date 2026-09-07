@@ -1,7 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
+import {
+  marketplaceComponentUsagesSetUsage,
+  OfferingComponent,
+} from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 
@@ -28,7 +31,11 @@ const mockData = {
       type: 'comp1',
       measured_unit: 'GB',
       description: 'Test component',
-    },
+      offering_uuid: 'test-offering-uuid',
+      billing_type: 'usage',
+      factor: 1,
+      is_builtin: false,
+    } satisfies OfferingComponent,
   ],
 
   periods: [
@@ -109,6 +116,20 @@ describe('ResourceCreateUsageDialog', () => {
     expect(
       screen.getByText('Test customer', { exact: false }),
     ).toBeInTheDocument();
+  });
+
+  it('renders the footer as a sibling of the body, not nested inside it', async () => {
+    vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);
+    renderDialog(props);
+    await waitFor(() => {
+      expect(screen.queryByTestId('SpinnerIcon')).not.toBeInTheDocument();
+    });
+
+    const footer = screen.getByTestId('modal-footer');
+    // eslint-disable-next-line testing-library/no-node-access
+    const body = footer.parentElement.querySelector('.modal-body');
+    expect(body).not.toBeNull();
+    expect(body.contains(footer)).toBe(false);
   });
 
   it('submits form with usage values', async () => {

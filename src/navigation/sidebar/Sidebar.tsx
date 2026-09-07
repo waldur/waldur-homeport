@@ -4,7 +4,6 @@ import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { ENV } from '@/core/config';
 import {
   DrawerComponent,
-  MenuComponent,
   ScrollComponent,
   ToggleComponent,
 } from '@/metronic/components';
@@ -24,7 +23,6 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
       ToggleComponent.reinitialization();
       DrawerComponent.reinitialization();
       ScrollComponent.reinitialization();
-      MenuComponent.reinitialization();
     }
   }, [sidebarRef, layout]);
 
@@ -85,7 +83,6 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
               menuClassNames,
             )}
             id="kt_aside_menu"
-            data-kt-menu="true"
           >
             {props.children}
           </div>

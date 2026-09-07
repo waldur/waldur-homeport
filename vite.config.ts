@@ -1,5 +1,6 @@
 import path from 'path';
 
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, PluginOption } from 'vite';
 import { plugin as markdownPlugin, Mode } from 'vite-plugin-markdown';
@@ -7,13 +8,15 @@ import svgr from 'vite-plugin-svgr';
 
 import reactDisplayNamePlugin from './vite-plugin-react-displayname';
 
-// No Tailwind plugin here — nothing the main app bundle reaches imports
-// tailwind.css. BaseButtonTw/tailwind.css only exist in Storybook
-// (.storybook/main.ts has its own, separate Tailwind Vite plugin) and the
-// Playwright parity spec (which runs against Storybook, not this app). See
+// Tailwind ships in the real app bundle now (src/index.tsx imports
+// tailwind.css), not just in Storybook — it is the prerequisite for using
+// packages/ui's Tailwind/Radix primitives anywhere in src/. .storybook/
+// main.ts still registers its own, separate instance of this plugin; the
+// two are independent and both are needed. See
 // docs/tailwind-shadcn-migration-notes.md.
 const plugins: PluginOption[] = [
   react(),
+  tailwindcss(),
   svgr({
     include: '**/*.svg',
     svgrOptions: {

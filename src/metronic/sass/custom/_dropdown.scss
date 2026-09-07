@@ -1,0 +1,80 @@
+//
+// Dropdown
+//
+
+// The row-actions menu (src/table/ActionsDropdown.tsx) is driven by Radix's
+// DropdownMenu but still wears Bootstrap's `.dropdown-menu`/`.dropdown-item`
+// classes, so its appearance stays byte-identical to the react-bootstrap
+// version it replaced. Radix's own state attributes need mapping onto the
+// equivalent Bootstrap states, which is all this file does.
+//
+// `[data-highlighted]` is Radix's single hook for "this is the active row",
+// set both for keyboard navigation and for pointer hover. Bootstrap only
+// styles `:hover`/`:focus`, which covers the mouse but is unreliable for the
+// keyboard here: Radix manages focus itself, and `:focus` additionally stops
+// matching whenever the document as a whole is not focused. Without this
+// rule, arrowing through the menu highlights nothing.
+.dropdown-item[data-highlighted] {
+  color: $dropdown-link-hover-color;
+  background-color: $dropdown-link-hover-bg;
+}
+
+// Radix moves real DOM focus onto whichever row is [data-highlighted] --
+// including on plain pointer hover, not just keyboard nav. `.dropdown-item`
+// has no Bootstrap-authored focus-ring styling at all (it was a plain
+// react-bootstrap <button> pre-migration, relying on the browser's own
+// default), so that hover-triggered focus was rendering the raw UA focus
+// outline -- a thick, undesigned rectangle -- on top of the [data-highlighted]
+// background above, reported live on the row-actions menu. Same fix shape as
+// NavMenu's own .menu-link:hover:focus-visible bridge (custom/_menu.scss):
+// suppress the ring specifically while a real pointer is on the row; a
+// genuine keyboard-only focus (no hover) is unaffected.
+.dropdown-item:hover:focus-visible {
+  outline: none;
+}
+
+// Radix marks a disabled row with `data-disabled` rather than the
+// `.disabled` class or the `:disabled` pseudo-class Bootstrap looks for
+// (the row is a div with role="menuitem", not a <button>).
+.dropdown-item[data-disabled] {
+  color: $dropdown-link-disabled-color;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+// The labeled toggle's caret (TableDropdownToggle/AddDropdownToggle,
+// src/table/ActionsDropdown.tsx) flips via custom/_base.scss's generic
+// `.show, .active, .collapsible:not(.collapsed) > .rotate-toggle-180`
+// rule, which requires the *parent* to carry one of those classes — true
+// for a react-bootstrap `<Dropdown.Toggle>` (it adds `.show` to the
+// toggle button itself while open) but never true here, since
+// `RadixDropdownMenu.Trigger asChild` sets `data-state="open"` on the
+// button instead of a class. Bridged narrowly to this one button rather
+// than widening the shared _base.scss rule, which also drives unrelated
+// non-Radix collapsibles (AccordionCard, sidebar menus) that still use
+// the real `.show`/`.active` classes correctly on their own. See that
+// rule's own comment for why the class is `rotate-toggle-180`, not the
+// more obvious `rotate-180` — and for why only `transform` is set here,
+// not `transition`: the unconditioned `.rotate-toggle-180` rule already
+// carries that, so it applies whether or not this `[data-state='open']`
+// selector currently matches, animating both directions.
+.dropdown-toggle[data-state='open'] > .rotate-toggle-180 {
+  transform: rotateZ(180deg);
+}
+
+// Bootstrap's `.dropdown-menu`/`.popover` both hardcode `position: absolute`,
+// which fights the Radix popper wrapper (the actual positioned element,
+// `[data-radix-popper-content-wrapper]`, an ancestor of any Radix
+// Popover.Content/DropdownMenu.Content) for control of the panel's real
+// on-screen position and collapses its measured size against that wrapper
+// instead of the wrapper's own computed placement. Every Radix-driven
+// `.dropdown-menu`/`.popover` in this codebase has so far carried its own
+// per-component `position-static` utility class as a one-off fix for
+// exactly this; this rule makes that unconditionally true instead, so a
+// new component doesn't have to remember to add it (the existing
+// `position-static` classes become redundant, not wrong, and are left in
+// place rather than churned out file by file).
+[data-radix-popper-content-wrapper] .dropdown-menu,
+[data-radix-popper-content-wrapper] .popover {
+  position: static;
+}

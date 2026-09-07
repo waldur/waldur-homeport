@@ -3,8 +3,8 @@ import {
   CaretDownIcon,
   CopyIcon,
 } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC, useCallback, useMemo } from 'react';
-import { Dropdown } from 'react-bootstrap';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
@@ -67,50 +67,61 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     return null;
   }
   return (
-    <Dropdown placement="bottom-end">
-      <Dropdown.Toggle variant="tertiary" className="no-arrow btn-icon-right">
-        {translate('Access resource')}
-        <span className="svg-icon svg-icon-2 rotate-180">
-          <CaretDownIcon weight="bold" />
-        </span>
-      </Dropdown.Toggle>
-      <Dropdown.Menu flip>
-        {endpoints.map((endpoint, index) => (
-          <Dropdown.Item
-            key={index}
-            eventKey={endpoint.url}
-            href={endpoint.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="d-flex justify-content-between text-anchor text-primary px-5 py-3"
-          >
-            <span className="d-flex flex-center me-6">
-              <span className="svg-icon svg-icon-2 svg-icon-primary">
-                <ArrowSquareOutIcon weight="bold" />
-              </span>
-              {endpoint.name}
-            </span>
-            <Tip
-              id="resource-endpoint-tooltip"
-              label={
-                isSshFormat(endpoint.url) && resource.username
-                  ? extendURLWithUsername(endpoint.url)
-                  : endpoint.url
-              }
-            >
-              <CompactActionButton
-                variant="link"
-                className="h-20px"
-                action={(e) => {
-                  copyText(endpoint.url);
-                  e.preventDefault();
-                }}
-                iconNode={<CopyIcon weight="bold" />}
-              />
-            </Tip>
-          </Dropdown.Item>
-        ))}
-      </Dropdown.Menu>
-    </Dropdown>
+    <RadixDropdownMenu.Root>
+      <RadixDropdownMenu.Trigger asChild>
+        <button
+          type="button"
+          className="btn dropdown-toggle btn-tertiary no-arrow btn-icon-right"
+        >
+          {translate('Access resource')}
+          <span className="svg-icon svg-icon-2 rotate-toggle-180">
+            <CaretDownIcon weight="bold" />
+          </span>
+        </button>
+      </RadixDropdownMenu.Trigger>
+      <RadixDropdownMenu.Portal>
+        <RadixDropdownMenu.Content
+          align="end"
+          sideOffset={2}
+          className="dropdown-menu show position-static"
+        >
+          {endpoints.map((endpoint, index) => (
+            <RadixDropdownMenu.Item key={index} asChild>
+              <a
+                href={endpoint.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dropdown-item d-flex justify-content-between text-anchor text-primary px-5 py-3"
+              >
+                <span className="d-flex flex-center me-6">
+                  <span className="svg-icon svg-icon-2 svg-icon-primary">
+                    <ArrowSquareOutIcon weight="bold" />
+                  </span>
+                  {endpoint.name}
+                </span>
+                <Tip
+                  id="resource-endpoint-tooltip"
+                  label={
+                    isSshFormat(endpoint.url) && resource.username
+                      ? extendURLWithUsername(endpoint.url)
+                      : endpoint.url
+                  }
+                >
+                  <CompactActionButton
+                    variant="link"
+                    className="h-20px"
+                    action={(e) => {
+                      copyText(endpoint.url);
+                      e.preventDefault();
+                    }}
+                    iconNode={<CopyIcon weight="bold" />}
+                  />
+                </Tip>
+              </a>
+            </RadixDropdownMenu.Item>
+          ))}
+        </RadixDropdownMenu.Content>
+      </RadixDropdownMenu.Portal>
+    </RadixDropdownMenu.Root>
   );
 };

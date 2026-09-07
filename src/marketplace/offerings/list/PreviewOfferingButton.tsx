@@ -1,5 +1,4 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { Dropdown } from 'react-bootstrap';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -7,6 +6,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { ACTIVE, PAUSED } from '../store/constants';
 
@@ -29,9 +29,8 @@ export const PreviewOfferingButton = ({
     return null;
   }
   return (
-    <Dropdown.Item
-      as="button"
-      onClick={() => {
+    <ActionsDropdownItem
+      onSelect={() => {
         openDialog(PreviewOfferingDialog, {
           resolve: { offering: row as any },
           size: 'lg',
@@ -42,6 +41,6 @@ export const PreviewOfferingButton = ({
         <EyeIcon weight="bold" />
       </span>
       {translate('Preview order form')}
-    </Dropdown.Item>
+    </ActionsDropdownItem>
   );
 };

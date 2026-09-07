@@ -1,3 +1,4 @@
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, RenderOptions } from '@testing-library/react';
 import { ReactElement, ReactNode } from 'react';
@@ -60,3 +61,28 @@ export const createTestWrapper = ({
   );
   return { wrapper, queryClient: client };
 };
+
+/**
+ * Wraps a row-action component (anything built on ActionsDropdownItem) in an
+ * already-open Radix menu.
+ *
+ * Radix's menu item reads its context on render and throws "`MenuItem` must
+ * be used within `Menu`" outside one, so a menu row cannot be rendered bare
+ * the way a react-bootstrap `Dropdown.Item` could. Rendering it in an open
+ * menu is also closer to how it really runs: the row gets its
+ * role="menuitem", its keyboard handling and its onSelect wiring.
+ *
+ * Usage:
+ *   renderWithProviders(inActionsMenu(<DeleteCreditButton row={row} />));
+ */
+export const inActionsMenu = (children: ReactNode) => (
+  <RadixDropdownMenu.Root open modal={false}>
+    {/* No Trigger: it would render a real <button> into the container and
+        break the "this action renders nothing" assertions that check for an
+        empty container. The Content only needs an anchor for positioning,
+        which is irrelevant in jsdom. */}
+    <RadixDropdownMenu.Portal>
+      <RadixDropdownMenu.Content>{children}</RadixDropdownMenu.Content>
+    </RadixDropdownMenu.Portal>
+  </RadixDropdownMenu.Root>
+);

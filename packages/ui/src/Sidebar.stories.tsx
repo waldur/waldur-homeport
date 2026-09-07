@@ -25,7 +25,7 @@ import {
 import { WaldurLogo } from './WaldurLogo';
 
 const meta: Meta<typeof Sidebar> = {
-  title: 'Dashboard/Sidebar',
+  title: 'Navigation/Sidebar',
   parameters: {
     docs: {
       description: {

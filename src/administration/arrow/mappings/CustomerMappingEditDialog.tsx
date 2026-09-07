@@ -76,24 +76,40 @@ export const CustomerMappingEditDialog = ({
     : null;
 
   return (
-    <ModalDialog title={translate('Edit Customer Mapping')}>
-      <Form<FormValues>
-        onSubmit={(values) =>
-          submitMutation.mutateAsync(values).catch(() => {
-            // Error is handled by useManagedMutation and displayed in the dialog
-          })
-        }
-        initialValues={{
-          arrow_reference: mapping.arrow_reference,
-          arrow_company_name: mapping.arrow_company_name,
-          waldur_customer: {
-            uuid: mapping.waldur_customer_uuid,
-            name: mapping.waldur_customer_name,
-          },
-          is_active: mapping.is_active,
-        }}
-        render={({ handleSubmit, invalid }) => (
-          <form onSubmit={handleSubmit}>
+    <Form<FormValues>
+      onSubmit={(values) =>
+        submitMutation.mutateAsync(values).catch(() => {
+          // Error is handled by useManagedMutation and displayed in the dialog
+        })
+      }
+      initialValues={{
+        arrow_reference: mapping.arrow_reference,
+        arrow_company_name: mapping.arrow_company_name,
+        waldur_customer: {
+          uuid: mapping.waldur_customer_uuid,
+          name: mapping.waldur_customer_name,
+        },
+        is_active: mapping.is_active,
+      }}
+      render={({ handleSubmit, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit Customer Mapping')}
+            footer={
+              <>
+                <ActionButton
+                  action={closeDialog}
+                  variant="secondary"
+                  title={translate('Cancel')}
+                />
+                <SubmitButton
+                  submitting={submitMutation.isPending}
+                  disabled={invalid}
+                  label={translate('Save')}
+                />
+              </>
+            }
+          >
             <StringGroup
               name="arrow_reference"
               validate={required}
@@ -132,22 +148,9 @@ export const CustomerMappingEditDialog = ({
                 {mutationError}
               </Alert>
             )}
-
-            <div className="d-flex justify-content-end gap-2">
-              <ActionButton
-                action={closeDialog}
-                variant="secondary"
-                title={translate('Cancel')}
-              />
-              <SubmitButton
-                submitting={submitMutation.isPending}
-                disabled={invalid}
-                label={translate('Save')}
-              />
-            </div>
-          </form>
-        )}
-      />
-    </ModalDialog>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };

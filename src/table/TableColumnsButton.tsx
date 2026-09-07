@@ -18,14 +18,9 @@ import {
   DotsSixVerticalIcon,
   GearIcon,
 } from '@phosphor-icons/react';
+import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useMemo, useState } from 'react';
-import {
-  Button,
-  Dropdown,
-  FormCheck,
-  OverlayTrigger,
-  Popover,
-} from 'react-bootstrap';
+import { Button, FormCheck } from 'react-bootstrap';
 
 import { CompactIconButton } from '@/core/buttons/IconButton';
 import { Tip } from '@/core/Tooltip';
@@ -155,11 +150,12 @@ const ColumnsPopover = ({
         </DndContext>
 
         {hasActions && (
-          <Dropdown.Item
+          <button
+            type="button"
             onClick={() =>
               toggleColumn(COLUMN_ACTIONS_KEY, { keys: [COLUMN_ACTIONS_KEY] })
             }
-            className="d-flex align-items-center"
+            className="dropdown-item d-flex align-items-center"
           >
             <FormCheck
               key={activeColumns[COLUMN_ACTIONS_KEY]}
@@ -168,7 +164,7 @@ const ColumnsPopover = ({
               onChange={(e) => e.preventDefault()}
             />
             {translate('Actions')}
-          </Dropdown.Item>
+          </button>
         )}
       </div>
     </div>
@@ -199,11 +195,49 @@ export const TableColumnButton: FC<TableProps> = ({
     }
   };
   return (
-    <OverlayTrigger
-      trigger="click"
-      placement="bottom"
-      overlay={
-        <Popover id="TableColumnButton">
+    <RadixPopover.Root modal={false}>
+      <Tip
+        label={translate('Toggle visible columns')}
+        id="table-columns-button-tip"
+      >
+        <span className="d-inline-flex">
+          {/* Trigger wraps the real <Button> (not an ancestor <span>): a
+              disabled HTML button never dispatches click events at all, so
+              unlike the old OverlayTrigger setup this needs no separate
+              trigger-suppression workaround for the grid-mode disabled
+              state. */}
+          <RadixPopover.Trigger asChild disabled={mode !== 'table'}>
+            <Button
+              disabled={mode !== 'table'}
+              variant="tertiary"
+              size="lg"
+              className="btn-icon"
+              aria-label={translate('Toggle visible columns')}
+            >
+              <span className="svg-icon svg-icon-2">
+                <GearIcon weight="bold" />
+              </span>
+            </Button>
+          </RadixPopover.Trigger>
+        </span>
+      </Tip>
+      <RadixPopover.Portal>
+        <RadixPopover.Content
+          side="bottom"
+          align="end"
+          sideOffset={2}
+          // position-static: Bootstrap's own .popover class hardcodes
+          // `position: absolute; left: 0`, which fights the Radix popper
+          // wrapper — the actual positioned element here — for control of
+          // this box's placement. Left in place, that `position: absolute`
+          // takes the panel out of the wrapper's normal flow, so instead of
+          // Radix's own align="end" transform positioning it, the panel
+          // just pins to the wrapper's local (0,0) and grows rightward,
+          // overflowing the viewport for a trigger anywhere near the right
+          // edge. Same fix, same reasoning, as ActionsDropdownComponent's
+          // own `position-static` on `.dropdown-menu` in ActionsDropdown.tsx.
+          className="popover bs-popover-bottom position-static"
+        >
           <ColumnsPopover
             columns={columns}
             activeColumns={activeColumns}
@@ -213,28 +247,8 @@ export const TableColumnButton: FC<TableProps> = ({
             hasActions={Boolean(rowActions)}
             resetColumns={handleReset}
           />
-        </Popover>
-      }
-      rootClose
-    >
-      <span className="d-inline-flex">
-        <Tip
-          label={translate('Toggle visible columns')}
-          id="table-columns-button-tip"
-        >
-          <Button
-            disabled={mode !== 'table'}
-            variant="tertiary"
-            size="lg"
-            className="btn-icon"
-            aria-label={translate('Toggle visible columns')}
-          >
-            <span className="svg-icon svg-icon-2">
-              <GearIcon weight="bold" />
-            </span>
-          </Button>
-        </Tip>
-      </span>
-    </OverlayTrigger>
+        </RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
   );
 };

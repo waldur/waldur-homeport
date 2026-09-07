@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 import { useBoolean } from 'react-use';
 
 import { ModalActionsRouter } from '@/marketplace/resources/actions/ModalActionsRouter';
@@ -20,7 +19,7 @@ interface ResourceActionsProps {
   scope;
   refetch;
   labeled?: boolean;
-  drop?: DropDirection;
+  drop?: 'up' | 'down' | 'start' | 'end';
   disabled?: boolean;
   size?: 'sm' | 'lg';
 }

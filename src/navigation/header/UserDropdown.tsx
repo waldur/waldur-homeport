@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { forwardRef, FunctionComponent } from 'react';
 
 import Avatar from '@/core/Avatar';
 import { Badge } from '@/core/Badge';
@@ -8,61 +8,74 @@ import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { NavMenu, NavMenuContent, NavMenuTrigger } from '@/navigation/NavMenu';
 import { useUser } from '@/workspace/hooks';
 
 import { ThemeSwitcher } from '../../theme/ThemeSwitcher';
 
 import { LanguageSelectorDropdown } from './LanguageSelectorDropdown';
+import { LogoutMenuItem } from './LogoutMenuItem';
 import { UserDropdownMenuItems } from './UserDropdownMenuItems';
 import { UserIpAddress } from './UserIpAddress';
 import { UserToken } from './UserToken';
 
+/**
+ * forwardRef so this composes under NavMenuTrigger's `asChild` — see
+ * ActionsDropdown.tsx's TableDropdownToggle for the general requirement.
+ */
+const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
+  const user = useUser();
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className="btn d-flex align-items-center gap-4 py-2 px-2"
+      aria-label={translate('User menu')}
+      {...props}
+    >
+      <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-content-center">
+        {!user ? (
+          <ImagePlaceholder width="40px" height="40px" circle />
+        ) : (
+          <Avatar src={user.image} name={user.full_name} size={40} circle />
+        )}
+      </div>
+      <div className="d-none d-md-flex flex-column align-items-start justify-content-center">
+        {!user?.is_staff && (
+          <span className="text-muted fs-7 fw-semibold lh-1 mb-2">
+            {translate('Hello')}
+          </span>
+        )}
+        <span className="text-dark fs-base fw-bold lh-1">
+          {user ? user.first_name : translate('Guest')}
+        </span>
+        {user?.is_staff && (
+          <Badge
+            variant="purple"
+            size="sm"
+            pill
+            outline
+            className="align-items-end mt-1"
+          >
+            {translate('Staff')}
+          </Badge>
+        )}
+      </div>
+    </button>
+  );
+});
+UserMenuToggle.displayName = 'UserMenuToggle';
+
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useUser();
   return (
-    <>
-      <button
-        type="button"
-        className="btn d-flex align-items-center gap-4 py-2 px-2"
-        data-kt-menu-trigger="click"
-        data-kt-menu-attach="parent"
-        data-kt-menu-placement="bottom"
-        data-kt-menu-flip="bottom"
-        aria-label={translate('User menu')}
-      >
-        <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-content-center">
-          {!user ? (
-            <ImagePlaceholder width="40px" height="40px" circle />
-          ) : (
-            <Avatar src={user.image} name={user.full_name} size={40} circle />
-          )}
-        </div>
-        <div className="d-none d-md-flex flex-column align-items-start justify-content-center">
-          {!user?.is_staff && (
-            <span className="text-muted fs-7 fw-semibold lh-1 mb-2">
-              {translate('Hello')}
-            </span>
-          )}
-          <span className="text-dark fs-base fw-bold lh-1">
-            {user ? user.first_name : translate('Guest')}
-          </span>
-          {user?.is_staff && (
-            <Badge
-              variant="purple"
-              size="sm"
-              pill
-              outline
-              className="align-items-end mt-1"
-            >
-              {translate('Staff')}
-            </Badge>
-          )}
-        </div>
-      </button>
-      <div
-        className="menu-dropdown-default menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold py-4 fs-6 w-275px"
-        data-kt-menu="true"
-        data-popper-placement="bottom-end"
+    <NavMenu modal={false}>
+      <NavMenuTrigger asChild>
+        <UserMenuToggle />
+      </NavMenuTrigger>
+      <NavMenuContent
+        placement="bottom-end"
+        className="menu-dropdown-default menu-column menu-gray-600 menu-state-bg-gray fw-bold py-4 fs-6 w-275px"
       >
         <div className="menu-item px-3">
           <div className="menu-content d-flex align-items-center px-2">
@@ -116,16 +129,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         <LanguageSelectorDropdown />
 
-        {user && (
-          <div className="menu-item" data-kt-menu-trigger="click">
-            <Link
-              state="logout"
-              className="menu-link"
-              aria-hidden="true"
-              label={translate('Log out')}
-            />
-          </div>
-        )}
+        {user && <LogoutMenuItem />}
 
         {!ENV.plugins.WALDUR_CORE.DISABLE_DARK_THEME && (
           <>
@@ -143,7 +147,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
             <UserIpAddress ip={user.ip_address} />
           </>
         )}
-      </div>
-    </>
+      </NavMenuContent>
+    </NavMenu>
   );
 };

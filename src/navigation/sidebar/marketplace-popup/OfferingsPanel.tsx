@@ -65,7 +65,6 @@ const OfferingListItem: FunctionComponent<{
         item.state === 'Paused' ? item.paused_reason || item.state : undefined
       }
       id={`tip-${item.uuid}`}
-      data-kt-menu-dismiss="true"
     >
       <ListGroupItem
         data-uuid={item.uuid}

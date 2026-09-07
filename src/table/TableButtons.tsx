@@ -11,7 +11,7 @@ import { TableMoreActions } from './TableMoreActions';
 import { TableProps } from './types';
 
 interface TableButtonsProps extends TableProps {
-  toggleFilterMenu?(): void;
+  toggleFilterMenu?(show?: boolean): void;
   showFilterMenuToggle?: boolean;
   renderFilterButton?: boolean;
 }
@@ -28,7 +28,11 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
       if (props.filterPosition === 'sidebar') {
         props.openFiltersDrawer(props.filters, props.formId);
       } else {
-        props.toggleFilterMenu();
+        // Force `true` — see the matching comment in TableToolbar.tsx's
+        // own onClickFilterButton: a bare toggle can hide the real
+        // Add-filter trigger's container in the same batch as the
+        // programmatic click below, mispositioning the popup.
+        props.toggleFilterMenu(true);
         const parent: HTMLElement = event.target.closest('.card-table');
         if (!parent) return;
         const btns = parent.getElementsByClassName(

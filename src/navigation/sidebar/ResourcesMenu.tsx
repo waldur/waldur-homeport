@@ -23,7 +23,7 @@ import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
 import { ResourcesMenuFilterButton } from './resources-filter/ResourcesMenuFilterButton';
 import { ResourcesMenuFilters } from './resources-filter/ResourcesMenuFilters';
-import { useOfferingCategories } from './utils';
+import { useExclusiveOpen, useOfferingCategories } from './utils';
 
 const MAX_COLLAPSE_MENU_COUNT = 5;
 
@@ -35,7 +35,6 @@ const CustomToggle = ({
 }) => (
   <div
     className={classNames('menu-item menu-show-more', expanded && 'active')}
-    data-kt-menu-trigger="trigger"
     aria-hidden="true"
     onClick={onClick}
   >
@@ -58,7 +57,7 @@ const CustomToggle = ({
         </div>
       </span>
       <span className={classNames('menu-badge rotate', expanded && 'active')}>
-        <span className="svg-icon svg-icon-3 svg-icon-primary-300 rotate-180">
+        <span className="svg-icon svg-icon-3 svg-icon-primary-300 rotate-toggle-180">
           <CaretDownIcon weight="bold" />
         </span>
       </span>
@@ -74,11 +73,27 @@ interface RenderMenuItemsProps {
     categories?: Array<any>;
   }>;
   filterParams?: Record<string, string | undefined>;
+  /** Sibling-exclusivity for this level's own MenuAccordion rows — passed
+   * down from ResourcesMenu (whose two sibling calls to this component
+   * must share one scope) or, absent that, a fresh scope of its own so a
+   * genuinely recursive call (category-with-sub-categories; not exercised
+   * by today's data, see MenuAccordion.tsx's own comment) is still
+   * correctly isolated per nesting level. */
+  openId?: string;
+  onToggle?: (id: string) => (open: boolean) => void;
 }
 
-const RenderMenuItems = ({ items, filterParams }: RenderMenuItemsProps) => {
+const RenderMenuItems = ({
+  items,
+  filterParams,
+  openId: openIdProp,
+  onToggle: onToggleProp,
+}: RenderMenuItemsProps) => {
   const { state } = useCurrentStateAndParams();
   const resource = useSelector(getResource);
+  const localExclusiveOpen = useExclusiveOpen();
+  const openId = openIdProp ?? localExclusiveOpen.openId;
+  const onToggle = onToggleProp ?? localExclusiveOpen.toggle;
   return (
     <>
       {items.map((item) =>
@@ -108,6 +123,8 @@ const RenderMenuItems = ({ items, filterParams }: RenderMenuItemsProps) => {
             badge={
               <span className="badge badge-pill">{item.resource_count}</span>
             }
+            open={openId === item.uuid}
+            onOpenChange={onToggle(item.uuid)}
           >
             <RenderMenuItems
               items={item.categories}
@@ -124,14 +141,25 @@ interface ResourcesMenuProps {
   user;
   disabled?: boolean;
   disabledTooltip?: string;
+  /** Threaded from UnifiedSidebar's own top-level useExclusiveOpen — this
+   * accordion competes with CallPublicMenu's for "only one open at a
+   * time" at the sidebar's top level. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const ResourcesMenu = ({
   user,
   disabled,
   disabledTooltip,
+  open,
+  onOpenChange,
 }: ResourcesMenuProps) => {
   const categories = useOfferingCategories();
+  // Shared across both RenderMenuItems calls below (the main slice and the
+  // "show more" slice) — they render into the same .menu-sub-accordion, so
+  // they must share one sibling-exclusivity scope, not get one each.
+  const { openId: openCategoryId, toggle: toggleCategory } = useExclusiveOpen();
 
   const { data: categoryGroups } = useQuery({
     queryKey: ['MarketplaceCategoryGroups'],
@@ -266,6 +294,8 @@ export const ResourcesMenu = ({
       badge={<ResourcesMenuFilterButton />}
       disabled={disabled}
       disabledTooltip={disabledTooltip}
+      open={open}
+      onOpenChange={onOpenChange}
     >
       <ResourcesMenuFilters />
       <MenuItem
@@ -278,6 +308,8 @@ export const ResourcesMenu = ({
       <RenderMenuItems
         items={sortedCategoryGroups.slice(0, MAX_COLLAPSE_MENU_COUNT)}
         filterParams={filterParams}
+        openId={openCategoryId}
+        onToggle={toggleCategory}
       />
 
       {sortedCategoryGroups.length > MAX_COLLAPSE_MENU_COUNT ? (
@@ -286,6 +318,8 @@ export const ResourcesMenu = ({
             <RenderMenuItems
               items={sortedCategoryGroups.slice(MAX_COLLAPSE_MENU_COUNT)}
               filterParams={filterParams}
+              openId={openCategoryId}
+              onToggle={toggleCategory}
             />
           )}
           <CustomToggle

@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsSyncResources,
   ProviderOfferingDetails,
@@ -15,6 +14,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { SITE_AGENT_PLUGIN } from './constants';
@@ -128,18 +128,18 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
               : null
           }
         >
-          <Dropdown.Item
-            onClick={openSiteAgentConfig}
+          <ActionsDropdownItem
+            onSelect={openSiteAgentConfig}
             disabled={!serviceProvider}
           >
             {translate('Generate Site Agent Config')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         </Tip>
       )}
       {showLdapAgentEnv && (
-        <Dropdown.Item onClick={openLdapAgentEnv}>
+        <ActionsDropdownItem onSelect={openLdapAgentEnv}>
           {translate('Generate LDAP Agent Env')}
-        </Dropdown.Item>
+        </ActionsDropdownItem>
       )}
       {showSiteAgentConfig && canSyncResources && (
         <Tip
@@ -150,12 +150,12 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
               : null
           }
         >
-          <Dropdown.Item
-            onClick={() => syncResources()}
+          <ActionsDropdownItem
+            onSelect={() => syncResources()}
             disabled={isSyncPending}
           >
             {translate('Synchronize resources')}
-          </Dropdown.Item>
+          </ActionsDropdownItem>
         </Tip>
       )}
     </ActionDropdownButton>

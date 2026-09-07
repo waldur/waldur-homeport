@@ -1,57 +1,67 @@
 import {
   CaretDownIcon,
   DotsThreeVerticalIcon,
+  PlusCircleIcon,
   SpinnerIcon,
 } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import {
+  ComponentPropsWithoutRef,
+  forwardRef,
   FunctionComponent,
   PropsWithChildren,
   ReactNode,
-  useCallback,
-  useEffect,
-  useState,
 } from 'react';
-import { Dropdown, DropdownProps } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
-import { createPortal } from 'react-dom';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 import { DropdownActionItemType } from './types';
 
-// Module-level coordinator so opening one ActionsDropdownComponent closes
-// any other that's currently open. Plain pub/sub avoids DOM custom events
-// and the global namespace they require. A counter (instead of useId) is
-// used so the React useId sequence is left untouched — useId here would
-// shift downstream nested-component ids and break unrelated snapshot tests.
-type Listener = (openId: number) => void;
-const listeners = new Set<Listener>();
-const announceOpen = (id: number) => listeners.forEach((fn) => fn(id));
-const subscribe = (fn: Listener) => {
-  listeners.add(fn);
-  return () => {
-    listeners.delete(fn);
-  };
-};
-let nextInstanceId = 0;
-
-interface ActionsDropdownProps extends Partial<DropdownProps> {
-  onToggle?: (isOpen: boolean) => void;
-  disabled?: boolean;
-  open?: boolean;
-  labeled?: boolean;
-  loading?: boolean;
-  error?: any;
-  actions?: DropdownActionItemType[];
-  row?: any;
-  refetch?(): void;
-  data?: Record<string, any>;
-  variant?: Variant;
-  size?: 'sm' | 'lg';
-  tooltip?: string | boolean;
-}
+/**
+ * The row-actions menu, on Radix's DropdownMenu rather than
+ * react-bootstrap's.
+ *
+ * ## Why the markup still wears Bootstrap's class names
+ *
+ * This component is reachable from ~184 files (and ActionItem, its usual
+ * child, from ~520), so a rewrite here restyles a large fraction of the
+ * app at once if it also changes the visuals. It deliberately does not:
+ * Radix supplies behaviour, positioning and accessibility, while
+ * `.dropdown-menu`/`.dropdown-item` keep supplying the appearance, exactly
+ * as before. One axis at a time — the design-system restyle onto
+ * packages/ui's Tailwind DropdownMenu is a separate, reviewable step.
+ *
+ * That is not a dead end: `.dropdown-menu`/`.dropdown-item` come from
+ * Bootstrap's own _dropdown.scss, *not* from Metronic's menu SCSS
+ * (src/metronic/sass/core/components/menu/), so keeping them here does not
+ * block deleting that ~1345-line menu stylesheet once the remaining
+ * Metronic-JS-driven popups migrate. The two are unrelated CSS.
+ *
+ * The measured Bootstrap values this preserves are recorded in
+ * docs/tailwind-shadcn-migration-notes.md, so the eventual restyle has a
+ * parity target instead of a guess.
+ *
+ * ## What Radix replaces
+ *
+ * Two workarounds are gone because Radix does the job natively:
+ *
+ * - The module-level pub/sub that closed every other open instance. Radix
+ *   dismisses an open menu on any outside pointer event, so clicking a
+ *   second trigger closes the first on its own.
+ * - The manual `createPortal(children, document.body)` around the menu —
+ *   RadixDropdownMenu.Portal is the same escape from the table's
+ *   overflow/stacking context, and it keeps the menu tied to its trigger
+ *   for positioning and focus return.
+ *
+ * `modal={false}` is a parity choice, not a default: a modal Radix menu
+ * blocks outside pointer events (so the click that opens a second menu is
+ * swallowed rather than opening it) and locks body scroll. A Bootstrap
+ * dropdown does neither.
+ */
 
 interface TableDropdownToggleProps {
   label?: ReactNode;
@@ -63,68 +73,276 @@ interface TableDropdownToggleProps {
   tooltip?: string | boolean;
 }
 
-export const TableDropdownToggle = ({
-  label = '',
-  disabled = false,
-  labeled = false,
-  variant = 'tertiary',
-  className = 'min-w-100px w-100',
-  size = 'lg',
-  tooltip,
-}: TableDropdownToggleProps) => {
-  const getTooltipMessage = () => {
-    if (typeof tooltip === 'string') return tooltip;
-    if (tooltip === true && disabled)
-      return translate('There are no available actions');
-    return undefined;
-  };
+/**
+ * The menu shell's own props — everything ActionsDropdownComponent (the
+ * Root + Trigger + Content wiring) actually consumes or forwards. Kept
+ * deliberately narrower than ActionsDropdownProps below: the remaining
+ * fields there (open/loading/error/actions/row/refetch/data) belong to
+ * ActionsDropdown's row-actions convenience layer, not to the shell, and
+ * `...rest` on ActionsDropdownComponent ends up spread onto
+ * RadixDropdownMenu.Content — a real DOM element. Widening this interface
+ * to include them would let a caller pass e.g. `data={{}}` straight onto
+ * ActionsDropdownComponent and land it as a stray DOM attribute.
+ */
+interface ActionsDropdownShellProps
+  extends
+    Omit<ComponentPropsWithoutRef<'div'>, 'onToggle'>,
+    TableDropdownToggleProps {
+  onToggle?: (isOpen: boolean) => void;
+  drop?: 'up' | 'down' | 'start' | 'end';
+  align?: 'start' | 'end';
+}
 
-  const tooltipMessage = getTooltipMessage();
+interface ActionsDropdownProps extends ActionsDropdownShellProps {
+  open?: boolean;
+  loading?: boolean;
+  error?: any;
+  actions?: DropdownActionItemType[];
+  row?: any;
+  refetch?(): void;
+  data?: Record<string, any>;
+}
 
-  const renderToggle = () =>
-    labeled ? (
-      <Dropdown.Toggle
-        variant={variant}
-        size={size}
-        className={classNames('btn-icon-right no-arrow', className)}
+/**
+ * forwardRef because this is always rendered under
+ * `RadixDropdownMenu.Trigger asChild`: Slot clones it, attaches the ref the
+ * popper anchors against, and merges in aria-haspopup/aria-expanded/
+ * data-state plus the open-on-click handling. Without the ref the menu has
+ * nothing to position against.
+ *
+ * `.dropdown-toggle` stays on both variants even though Radix has no use for
+ * it. It is not only Bootstrap's caret pseudo-element (which `no-arrow`
+ * suppresses anyway): `.disabled-view` hides action toggles wholesale with
+ * `table .dropdown-toggle, .dropdown-toggle.btn-icon { display: none }`
+ * (src/metronic/sass/custom/_content.scss), so dropping the class makes the
+ * row actions reappear in every read-only view. `custom/_table.scss` also
+ * hangs a `:before` reset off it. Both are appearance the migration is meant
+ * to leave untouched.
+ */
+export const TableDropdownToggle = forwardRef<
+  HTMLButtonElement,
+  TableDropdownToggleProps & ComponentPropsWithoutRef<'button'>
+>(
+  (
+    {
+      label = '',
+      disabled = false,
+      labeled = false,
+      variant = 'tertiary',
+      className = 'min-w-100px w-100',
+      size = 'lg',
+      tooltip,
+      ...rest
+    },
+    ref,
+  ) => {
+    const getTooltipMessage = () => {
+      if (typeof tooltip === 'string') return tooltip;
+      if (tooltip === true && disabled)
+        return translate('There are no available actions');
+      return undefined;
+    };
+
+    const tooltipMessage = getTooltipMessage();
+
+    const toggle = labeled ? (
+      <button
+        ref={ref}
+        type="button"
+        className={classNames(
+          'btn dropdown-toggle btn-icon-right no-arrow',
+          `btn-${variant}`,
+          `btn-${size}`,
+          className,
+        )}
         disabled={disabled}
+        {...rest}
       >
         {label || translate('Actions')}
-        <span className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'}`}>
+        <span
+          className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-toggle-180`}
+        >
           <CaretDownIcon weight="bold" />
         </span>
-      </Dropdown.Toggle>
+      </button>
     ) : (
-      <Dropdown.Toggle
-        variant="text-secondary"
-        className="btn-icon no-arrow"
+      <button
+        ref={ref}
+        type="button"
+        className={classNames(
+          'btn dropdown-toggle btn-text-secondary btn-icon no-arrow',
+          `btn-${size}`,
+        )}
         disabled={disabled}
-        size={size}
+        {...rest}
       >
         <DotsThreeVerticalIcon size={22} weight="bold" />
-      </Dropdown.Toggle>
+      </button>
     );
 
-  if (tooltipMessage && disabled) {
-    return (
-      <Tip label={tooltipMessage} id="actions-dropdown-tip">
-        <span className="d-inline-block">{renderToggle()}</span>
-      </Tip>
-    );
-  }
+    if (tooltipMessage && disabled) {
+      // A disabled <button> gets pointer-events: none, so the tooltip only
+      // fires from a live wrapper element — same reason the Bootstrap
+      // version wrapped it.
+      return (
+        <Tip label={tooltipMessage} id="actions-dropdown-tip">
+          <span className="d-inline-block">{toggle}</span>
+        </Tip>
+      );
+    }
 
-  return renderToggle();
-};
+    return toggle;
+  },
+);
+TableDropdownToggle.displayName = 'TableDropdownToggle';
 
-const PortalDropdown = ({ children }) => {
-  return createPortal(children, document.body);
-};
+/**
+ * The "+ Add ..." primary-button trigger shared by every team-management
+ * dropdown (invite/add-user/add-organization menus) — six near-identical
+ * copies of this exact markup existed before this component, one per host
+ * file. forwardRef for the same asChild reason as TableDropdownToggle.
+ *
+ * `size` is left genuinely optional (no default): most call sites passed
+ * react-bootstrap's `Dropdown.Toggle size="lg"` explicitly, but
+ * proposals/team/TeamDropdownActions.tsx passed no `size` at all, which
+ * Bootstrap renders as its default (medium) button with no `btn-sm`/`btn-lg`
+ * class — a real, if probably accidental, visual difference from every
+ * other call site that this preserves rather than silently normalizes away.
+ */
+export const AddDropdownToggle = forwardRef<
+  HTMLButtonElement,
+  { size?: 'sm' | 'lg' } & ComponentPropsWithoutRef<'button'>
+>(({ size, className, ...rest }, ref) => (
+  <button
+    ref={ref}
+    type="button"
+    className={classNames(
+      'btn dropdown-toggle btn-primary no-arrow btn-icon-right',
+      size && `btn-${size}`,
+      className,
+    )}
+    {...rest}
+  >
+    <span className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'}`}>
+      <PlusCircleIcon weight="bold" />
+    </span>
+    {translate('Add')}
+    <span
+      className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-toggle-180`}
+    >
+      <CaretDownIcon weight="bold" />
+    </span>
+  </button>
+));
+AddDropdownToggle.displayName = 'AddDropdownToggle';
+
+/**
+ * A single row in the menu. Exported so call sites that previously rendered
+ * a bare react-bootstrap `<Dropdown.Item>` inside an ActionsDropdown can
+ * keep their markup and still get real menu semantics — a plain element
+ * dropped into a Radix menu renders and clicks, but is invisible to arrow
+ * keys and typeahead and will not close the menu on activation.
+ *
+ * `onSelect` rather than `onClick`: it fires for pointer *and* keyboard
+ * activation, and Radix closes the menu afterwards unless the handler
+ * calls `event.preventDefault()`.
+ */
+export const ActionsDropdownItem = forwardRef<
+  HTMLDivElement,
+  ComponentPropsWithoutRef<typeof RadixDropdownMenu.Item>
+>(({ className, ...props }, ref) => (
+  <RadixDropdownMenu.Item
+    ref={ref}
+    className={classNames('dropdown-item', className)}
+    {...props}
+  />
+));
+ActionsDropdownItem.displayName = 'ActionsDropdownItem';
+
+/**
+ * Same `.dropdown-item` look and `onSelect` API as ActionsDropdownItem,
+ * but with zero Radix dependency — for a row rendered outside any real
+ * Menu/Popover ancestor at all. `RadixDropdownMenu.Item` throws
+ * "`MenuItem` must be used within `Menu`" the moment it renders without a
+ * `Root`/`Content` above it (confirmed live: ModalActionsDialog's "show
+ * all actions" search results, a plain react-bootstrap `Modal`, not a
+ * Radix panel — `ActionItem.tsx` reads `ResourceActionMenuContext`'s
+ * `notInMenu` flag to switch to this here rather than its usual
+ * ActionsDropdownItem default). A native `<button>` gets Enter/Space
+ * activation and `disabled` handling for free, so there is no Radix
+ * behaviour left to replicate by hand.
+ */
+export const PlainActionItem = forwardRef<
+  HTMLButtonElement,
+  ComponentPropsWithoutRef<'button'> & { onSelect?: () => void }
+>(({ className, onSelect, onClick, disabled, ...props }, ref) => (
+  <button
+    ref={ref}
+    type="button"
+    role="menuitem"
+    disabled={disabled}
+    className={classNames('dropdown-item', className)}
+    onClick={(event) => {
+      onClick?.(event);
+      onSelect?.();
+    }}
+    {...props}
+  />
+));
+PlainActionItem.displayName = 'PlainActionItem';
+
+/** Bootstrap's non-interactive menu row, for group captions and messages. */
+export const ActionsDropdownItemText: FunctionComponent<
+  PropsWithChildren<{ className?: string }>
+> = ({ className, children }) => (
+  <span className={classNames('dropdown-item-text', className)}>
+    {children}
+  </span>
+);
+
+/** Bootstrap's menu section caption. */
+export const ActionsDropdownHeader: FunctionComponent<
+  PropsWithChildren<{ className?: string }>
+> = ({ className, children }) => (
+  <RadixDropdownMenu.Label className={classNames('dropdown-header', className)}>
+    {children}
+  </RadixDropdownMenu.Label>
+);
+
+/** Bootstrap's menu rule. Radix marks it aria-hidden so it is skipped in
+ * keyboard navigation, which a bare <hr> inside the menu would not be. */
+export const ActionsDropdownSeparator: FunctionComponent<{
+  className?: string;
+}> = ({ className }) => (
+  <RadixDropdownMenu.Separator
+    className={classNames('dropdown-divider', className)}
+  />
+);
+
+const DROP_TO_SIDE = {
+  up: 'top',
+  down: 'bottom',
+  start: 'left',
+  end: 'right',
+} as const;
+
+// Shared by ActionsDropdownComponent and ActionsPopoverComponent's Content
+// below -- `show` because Bootstrap's `.dropdown-menu` is display:none until
+// it is present; `position-static` because the Radix popper wrapper is the
+// positioned element here, and leaving `.dropdown-menu`'s own
+// `position: absolute` in place would take the panel out of that wrapper's
+// flow and collapse its measured size (also enforced unconditionally now by
+// custom/_dropdown.scss's own `[data-radix-popper-content-wrapper]` rule,
+// which makes this specific class redundant but harmless).
+const ACTIONS_SHELL_CONTENT_CLASSNAME = 'dropdown-menu show position-static';
 
 export const ActionsDropdownComponent: FunctionComponent<
-  PropsWithChildren<DropdownProps & TableDropdownToggleProps> & {
-    menuStyle?: React.CSSProperties;
-    menuClassName?: string;
-  }
+  PropsWithChildren<
+    ActionsDropdownShellProps & {
+      menuStyle?: React.CSSProperties;
+      menuClassName?: string;
+    }
+  >
 > = ({
   onToggle,
   disabled,
@@ -137,30 +355,12 @@ export const ActionsDropdownComponent: FunctionComponent<
   menuClassName,
   size,
   tooltip,
+  drop = 'start',
+  align = 'start',
   ...rest
-}) => {
-  const [id] = useState(() => ++nextInstanceId);
-  const [show, setShow] = useState(false);
-
-  useEffect(
-    () =>
-      subscribe((openId) => {
-        if (openId !== id) setShow(false);
-      }),
-    [id],
-  );
-
-  const handleToggle = useCallback<NonNullable<DropdownProps['onToggle']>>(
-    (nextShow, meta) => {
-      if (nextShow) announceOpen(id);
-      setShow(nextShow);
-      onToggle?.(nextShow, meta);
-    },
-    [id, onToggle],
-  );
-
-  return (
-    <Dropdown drop="start" {...rest} show={show} onToggle={handleToggle}>
+}) => (
+  <RadixDropdownMenu.Root modal={false} onOpenChange={onToggle}>
+    <RadixDropdownMenu.Trigger asChild disabled={disabled}>
       <TableDropdownToggle
         label={label}
         labeled={labeled}
@@ -170,32 +370,135 @@ export const ActionsDropdownComponent: FunctionComponent<
         size={size}
         tooltip={tooltip}
       />
+    </RadixDropdownMenu.Trigger>
 
-      <PortalDropdown>
-        <Dropdown.Menu
-          popperConfig={
-            rest.drop
-              ? undefined
-              : {
-                  modifiers: [
-                    {
-                      name: 'flip',
-                      options: {
-                        fallbackPlacements: ['top', 'left', 'bottom'],
-                      },
-                    },
-                  ],
-                }
-          }
-          style={menuStyle}
-          className={menuClassName}
-        >
-          {children}
-        </Dropdown.Menu>
-      </PortalDropdown>
-    </Dropdown>
-  );
-};
+    <RadixDropdownMenu.Portal>
+      <RadixDropdownMenu.Content
+        side={DROP_TO_SIDE[drop]}
+        align={align}
+        sideOffset={2}
+        className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
+        style={menuStyle}
+        {...rest}
+      >
+        {children}
+      </RadixDropdownMenu.Content>
+    </RadixDropdownMenu.Portal>
+  </RadixDropdownMenu.Root>
+);
+
+/**
+ * Same trigger/panel shell and Bootstrap classing as ActionsDropdownComponent,
+ * on Radix's Popover instead of its DropdownMenu. Use this, not
+ * ActionsDropdownComponent, when the panel contains anything the user types
+ * into or otherwise interacts with beyond clicking a command row — see
+ * packages/ui/src/Popover.tsx's own "Why this exists alongside DropdownMenu"
+ * for the DropdownMenu-vs-Popover rule this follows. Confirmed empirically
+ * here, not assumed: typing "alpha..." into a search box next to a menu
+ * item literally titled "Alpha" moved focus to that item after the first
+ * character, and every keystroke after was lost.
+ *
+ * children here are NOT DropdownMenu.Item-shaped, and ActionsDropdownItem
+ * cannot be used inside one: it wraps RadixDropdownMenu.Item, which reads
+ * DropdownMenu's own internal collection context specifically (not just
+ * "any floating Radix panel") and throws that same "`MenuItem` must be
+ * used within `Menu`" error under a Popover too — confirmed empirically,
+ * not assumed, after first (wrongly) documenting here that it would work.
+ * A command row inside a Popover is ActionsPopoverItem instead.
+ */
+export const ActionsPopoverComponent: FunctionComponent<
+  PropsWithChildren<
+    ActionsDropdownShellProps & {
+      menuStyle?: React.CSSProperties;
+      menuClassName?: string;
+    }
+  >
+> = ({
+  onToggle,
+  disabled,
+  children,
+  label,
+  labeled,
+  variant,
+  className,
+  menuStyle,
+  menuClassName,
+  size,
+  tooltip,
+  drop = 'start',
+  align = 'start',
+  ...rest
+}) => (
+  <RadixPopover.Root modal={false} onOpenChange={onToggle}>
+    <RadixPopover.Trigger asChild disabled={disabled}>
+      <TableDropdownToggle
+        label={label}
+        labeled={labeled}
+        disabled={disabled}
+        variant={variant}
+        className={className}
+        size={size}
+        tooltip={tooltip}
+      />
+    </RadixPopover.Trigger>
+
+    <RadixPopover.Portal>
+      <RadixPopover.Content
+        side={DROP_TO_SIDE[drop]}
+        align={align}
+        sideOffset={2}
+        className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
+        style={menuStyle}
+        {...rest}
+      >
+        {children}
+      </RadixPopover.Content>
+    </RadixPopover.Portal>
+  </RadixPopover.Root>
+);
+
+/**
+ * A command row inside an ActionsPopoverComponent panel — the Popover
+ * equivalent of ActionsDropdownItem. Popover has no menu/item concept at
+ * all (no roving tabindex, no typeahead, no built-in "activating this
+ * closes the panel" behavior), so this is deliberately NOT a Radix
+ * primitive wrapper the way ActionsDropdownItem is: it is a plain
+ * `.dropdown-item`-classed element, closed on activation via
+ * RadixPopover.Close asChild (confirmed to need no forwardRef on its
+ * child — Close only merges an onClick, it does not position anything the
+ * way Trigger's ref does).
+ *
+ * `as` composes a different element (e.g. a router Link) as the row itself
+ * via RadixPopover.Close's own asChild, the same asChild-composability
+ * ActionsDropdownItem offers via Radix's Slot — pass a component here, not
+ * a string tag.
+ */
+export const ActionsPopoverItem: FunctionComponent<
+  PropsWithChildren<
+    Omit<ComponentPropsWithoutRef<'button'>, 'type'> & {
+      /** Swap the rendered element (e.g. a router Link component) — pass a
+       * component, not a string tag. Extra props (e.g. that Link's own
+       * `state`/`params`) pass through untyped, same latitude ActionItem's
+       * own `as` gives its callers. */
+      as?: React.ElementType;
+      disabled?: boolean;
+      [key: string]: any;
+    }
+  >
+> = ({ as: Component = 'button', className, disabled, ...props }) => (
+  // `disabled` goes on Component only, not Close: a native disabled button
+  // never fires the click Close listens for, so the panel-closing behavior
+  // is already blocked at the DOM level regardless of which layer set it —
+  // no need to duplicate the prop onto Close itself.
+  <RadixPopover.Close asChild>
+    <Component
+      type={Component === 'button' ? 'button' : undefined}
+      className={classNames('dropdown-item', disabled && 'disabled', className)}
+      disabled={disabled}
+      {...props}
+    />
+  </RadixPopover.Close>
+);
 
 export const ActionsDropdown: FunctionComponent<
   PropsWithChildren<ActionsDropdownProps>
@@ -214,18 +517,18 @@ export const ActionsDropdown: FunctionComponent<
   <ActionsDropdownComponent tooltip={tooltip} {...rest}>
     {open ? (
       loading ? (
-        <Dropdown.Item eventKey="1">
+        <ActionsDropdownItem disabled>
           <SpinnerIcon
             size={20}
             className="animation-spin me-2"
             weight="bold"
           />
           {translate('Loading actions')}
-        </Dropdown.Item>
+        </ActionsDropdownItem>
       ) : error ? (
-        <Dropdown.Item eventKey="1">
+        <ActionsDropdownItem disabled>
           {translate('Unable to load actions')}
-        </Dropdown.Item>
+        </ActionsDropdownItem>
       ) : children ? (
         children
       ) : actions ? (
@@ -240,9 +543,9 @@ export const ActionsDropdown: FunctionComponent<
           ))}
         </>
       ) : (
-        <Dropdown.Item eventKey="2">
+        <ActionsDropdownItem disabled>
           {translate('There are no actions.')}
-        </Dropdown.Item>
+        </ActionsDropdownItem>
       )
     ) : null}
   </ActionsDropdownComponent>

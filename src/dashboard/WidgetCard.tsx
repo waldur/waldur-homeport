@@ -1,7 +1,10 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
-import { Card, Col, Dropdown, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
+
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 interface WidgetCardAction {
   label: string;
@@ -57,33 +60,36 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
               <div className="p-0 m-0 flex-shrink-0">{cardAction}</div>
             )}
             {actions?.length && (
-              <Dropdown>
-                <Dropdown.Toggle
-                  variant="text-secondary"
-                  size="sm"
-                  bsPrefix="btn-icon"
-                  className="h-25px w-25px"
-                >
-                  <DotsThreeVerticalIcon
-                    size={20}
-                    weight="bold"
-                    className="text-gray-400"
-                  />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {actions.map((action, index) => (
-                    <Dropdown.Item
-                      key={index}
-                      onClick={action.callback}
-                      role="menuitem"
-                      tabIndex={-1}
-                    >
-                      <span className="svg-icon">{action.icon}</span>
-                      {action.label}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+              <RadixDropdownMenu.Root>
+                <RadixDropdownMenu.Trigger asChild>
+                  <button
+                    type="button"
+                    className="btn btn-text-secondary btn-sm btn-icon h-25px w-25px"
+                  >
+                    <DotsThreeVerticalIcon
+                      size={20}
+                      weight="bold"
+                      className="text-gray-400"
+                    />
+                  </button>
+                </RadixDropdownMenu.Trigger>
+                <RadixDropdownMenu.Portal>
+                  <RadixDropdownMenu.Content
+                    sideOffset={2}
+                    className="dropdown-menu show position-static"
+                  >
+                    {actions.map((action, index) => (
+                      <ActionsDropdownItem
+                        key={index}
+                        onClick={action.callback}
+                      >
+                        <span className="svg-icon">{action.icon}</span>
+                        {action.label}
+                      </ActionsDropdownItem>
+                    ))}
+                  </RadixDropdownMenu.Content>
+                </RadixDropdownMenu.Portal>
+              </RadixDropdownMenu.Root>
             )}
           </div>
           {(title || meta || right) && (

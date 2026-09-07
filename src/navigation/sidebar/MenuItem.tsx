@@ -53,7 +53,6 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 
   const menuItem = (
     <div
-      data-kt-menu-trigger="click"
       className={classNames('menu-item', {
         here: isActive,
         'menu-item-disabled': disabled,

@@ -1,9 +1,9 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { Dropdown } from 'react-bootstrap';
 import { projectCreditsDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useCustomer } from '@/workspace/hooks';
 
 export const ProjectDeleteCreditButton = ({ row, refetch }) => {
@@ -29,16 +29,15 @@ export const ProjectDeleteCreditButton = ({ row, refetch }) => {
   });
 
   return (
-    <Dropdown.Item
-      as="button"
+    <ActionsDropdownItem
       className="text-danger"
       disabled={deleteMutation.isPending}
-      onClick={() => deleteMutation.mutate()}
+      onSelect={() => deleteMutation.mutate()}
     >
       <span className="svg-icon svg-icon-2 svg-icon-danger">
         <TrashIcon weight="bold" />
       </span>
       {translate('Delete')}
-    </Dropdown.Item>
+    </ActionsDropdownItem>
   );
 };

@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { proposalProtectedCallsWorkflowStepsPartialUpdate } from 'waldur-js-client';
 
 import { useModal } from '@/modal/actions';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { WorkflowStepToggleAction } from './WorkflowStepToggleAction';
 
@@ -25,12 +25,14 @@ const makeStep = (step: string, is_enabled: boolean) =>
 
 const renderToggle = (row: any, steps: any[], refetch = vi.fn()) =>
   renderWithProviders(
-    <WorkflowStepToggleAction
-      row={row}
-      call={call}
-      steps={steps}
-      refetch={refetch}
-    />,
+    inActionsMenu(
+      <WorkflowStepToggleAction
+        row={row}
+        call={call}
+        steps={steps}
+        refetch={refetch}
+      />,
+    ),
   );
 
 describe('WorkflowStepToggleAction', () => {

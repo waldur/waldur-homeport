@@ -10,7 +10,6 @@ import {
 } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
-import { DropdownItem } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
@@ -22,7 +21,10 @@ import { Select } from '@/form/select';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import {
+  ActionsPopoverComponent,
+  ActionsPopoverItem,
+} from '@/table/ActionsDropdown';
 
 import { SCRIPT_ROWS } from './utils';
 
@@ -167,7 +169,11 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           }
         />
       </div>
-      <ActionsDropdownComponent
+      {/* ActionsPopoverComponent, not ActionsDropdownComponent: the search
+          box below needs its keystrokes to reach it reliably, which a
+          Radix DropdownMenu's typeahead-over-its-item-collection cannot
+          guarantee — see ActionsPopoverComponent's own comment. */}
+      <ActionsPopoverComponent
         label={
           isSmallScr
             ? translate('Env variables')
@@ -188,7 +194,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
 
         {filteredEnvItems.map((option) => {
           return (
-            <DropdownItem
+            <ActionsPopoverItem
               key={option.type + option.value}
               className="d-flex justify-content-between"
               as={option.type === 'link' ? Link : undefined}
@@ -240,10 +246,10 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
                   />
                 </>
               )}
-            </DropdownItem>
+            </ActionsPopoverItem>
           );
         })}
-      </ActionsDropdownComponent>
+      </ActionsPopoverComponent>
     </>
   );
 };

@@ -1,10 +1,13 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import React, { useCallback, useRef } from 'react';
-import { Card, Dropdown } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+} from '@/table/ActionsDropdown';
 import exportAs from '@/table/exporters';
 import { ExportData } from '@/table/exporters/types';
 
@@ -83,18 +86,18 @@ export const ChartCard: React.FC<ChartCardProps> = ({
             }
           >
             {showPNG && (
-              <Dropdown.Item onClick={handleExportPNG}>
+              <ActionsDropdownItem onSelect={handleExportPNG}>
                 {translate('Export as PNG')}
-              </Dropdown.Item>
+              </ActionsDropdownItem>
             )}
             {getExportData && (
               <>
-                <Dropdown.Item onClick={() => handleExportData('csv')}>
+                <ActionsDropdownItem onSelect={() => handleExportData('csv')}>
                   {translate('Export as CSV')}
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => handleExportData('excel')}>
+                </ActionsDropdownItem>
+                <ActionsDropdownItem onSelect={() => handleExportData('excel')}>
                   {translate('Export as XLSX')}
-                </Dropdown.Item>
+                </ActionsDropdownItem>
               </>
             )}
           </ActionsDropdownComponent>

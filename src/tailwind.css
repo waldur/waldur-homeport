@@ -1,7 +1,8 @@
 /**
- * Tailwind entry point — loaded only by .storybook/preview.tsx, never by
- * the main Application (src/index.tsx has no Tailwind-migration footprint
- * at all). Full reasoning for every choice below:
+ * Tailwind entry point for both the real app (imported by src/index.tsx)
+ * and Storybook (.storybook/preview.tsx). One file, so a story and the
+ * running app cannot drift on layer order, the px `@theme` overrides or
+ * the brand-token bridge. Full reasoning for every choice below:
  * docs/tailwind-shadcn-migration-notes.md.
  */
 
@@ -17,12 +18,84 @@
 @import 'tailwindcss/utilities.css' layer(utilities);
 @import 'waldur-design-tokens/buttonColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
-/* Not used by the main app's own Bootstrap modals, which bring their own
-   motion — this is here for Storybook, which loads this file and renders
-   packages/ui's Dialog-based stories. Keyframe names are namespaced, so
-   nothing else picks them up. */
+/* Not used by the app's own Bootstrap modals, which bring their own
+   motion — this is for packages/ui's Radix Dialog/Sheet primitives.
+   Keyframe names are namespaced, so nothing else picks them up. */
 @import 'waldur-design-tokens/animations.css';
 @import 'waldur-design-tokens/badgeColors.css';
+
+/* Preflight's one rule that Bootstrap has no counterpart for, and so the
+   only part of it that actually reaches the app:
+
+     img, svg, video, canvas, audio, iframe, embed, object { display: block }
+     img, video { max-width: 100%; height: auto }
+
+   Bootstrap's reboot only sets `vertical-align: middle` on img/svg, so
+   nothing in the `bootstrap` layer outranks the display change — every one
+   of the app's ~61 <img> tags and every inline Phosphor <svg> silently went
+   from inline to block the moment Tailwind shipped in the app bundle, which
+   drops them out of the text baseline they were laid out against (e.g.
+   QuotaBadge's 15px icon sitting inline beside its label).
+
+   `revert`, not explicit values: it rolls the cascade back to the UA origin,
+   which restores each element's real initial display without this rule
+   having to hardcode one per tag — notably Chrome's own
+   `audio:not([controls]) { display: none }`, which a blanket
+   `display: inline` here would override and make hidden audio elements
+   visible.
+
+   Placed in `bootstrap` deliberately, so the precedence is:
+     preflight (base)  <  this  <  Tailwind utilities  <  component .scss
+   New Tailwind-styled markup that wants block media asks for it explicitly
+   with `block`/`max-w-full`, and unlayered component stylesheets keep
+   winning as they always did.
+
+   packages/ui needed no such opt-in: every <img>/<svg> it renders
+   (AvatarImage, WaldurLogo's wordmark, SidebarToggleGraphic) is a flex item
+   of its own wrapper — AvatarRoot, WaldurLogo's span, and
+   ICON_BUTTON_BASE_CLASSNAME respectively — so it is blockified by its
+   parent and never depended on preflight's rule to begin with. Verify that
+   still holds before moving one of them into an inline-flow context. */
+@layer bootstrap {
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: revert;
+  }
+
+  img,
+  video {
+    max-width: revert;
+    height: revert;
+  }
+
+  /* The other preflight rule Bootstrap only half-covers:
+
+       ol, ul, menu { list-style: none; margin: 0; padding: 0 }
+
+     Reboot has its own `margin`/`padding-left` for lists, so those two win
+     on layer order and are already unaffected — `list-style` is the single
+     property with no Bootstrap counterpart, which is why only it is
+     reverted here rather than the whole rule. Without this, every bare
+     <ul>/<ol> loses its bullets: ~30 in .tsx directly, plus every list in
+     Markdown the app renders as user content (SafeMarkdown /
+     TruncatedMarkdown — offering descriptions, announcements, terms of
+     service, user agreements), none of which carry a class to style back.
+
+     Metronic's own list-based components (.menu, .nav, .pagination) set
+     `list-style: none` themselves at class specificity, so they are
+     untouched by this and stay bulletless. */
+  ol,
+  ul,
+  menu {
+    list-style: revert;
+  }
+}
 
 /* Metronic forces a 13px root font-size !important; Tailwind's rem-based
    scale silently resizes against that instead of the assumed 16px. Cascade
@@ -36,6 +109,42 @@
   --text-base--line-height: 24px;
   --radius-md: 6px;
   --radius-lg: 8px;
+}
+
+/* Tailwind's `visibility` utility set includes a class literally named
+   `.collapse` (`{ visibility: collapse }` — the third state alongside
+   `visible`/`invisible`, meant for hiding table rows/columns without
+   reflowing the table). React-bootstrap's `Collapse`/`Accordion.Collapse`/
+   `Navbar.Collapse` independently use the exact same bare class name
+   `collapse` as their own component marker (Bootstrap predates this
+   Tailwind utility by years) — an unrelated meaning that happens to share
+   a name. With this file's own deliberate `utilities` > `bootstrap` layer
+   order, Tailwind's rule silently wins on every one of those elements:
+   `visibility: collapse` on a non-table element computes exactly like
+   `visibility: hidden` per spec, so the collapse/accordion body still
+   occupies its normal layout box (`.show`, correct `scrollHeight`, real
+   children mounted and even auto-focused) but paints nothing — "expands
+   but shows empty" with no console error, evidenced live via
+   `getComputedStyle` on both the real app and this file's own Storybook
+   preview (both import this same file, so both had it). At least seven
+   components hit this (`AccordionCard`, `TableFilterItem`'s sidebar
+   drawer, `TableHeader`, `ChatHistorySidebar`, `CategoriesPanel`,
+   `InferenceServiceView`, `TwoStageWorkflowCard`), so this is fixed once
+   here rather than per call site. No genuine Tailwind `.collapse`
+   (table-visibility) usage exists anywhere in the app (checked), so
+   reclaiming the name outright is safe.
+
+   Layer order alone can't win this back — `bootstrap` is ranked *below*
+   `utilities` on purpose (see this file's very first comment), so a
+   normal-priority rule here would still lose. Cascade Layers order
+   `!important` declarations in *reverse*, and rank any `!important`
+   above any normal-priority rule regardless of layer, so `!important`
+   here reliably beats Tailwind's non-important utility without touching
+   that deliberate ordering. */
+@layer bootstrap {
+  .collapse {
+    visibility: visible !important;
+  }
 }
 
 /* No `.dark` class in this app — dark mode swaps compiled stylesheets

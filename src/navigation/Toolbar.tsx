@@ -73,10 +73,7 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
           className="d-flex align-items-stretch overflow-auto"
         >
           <div ref={tabsWrapperRef} className="header-menu align-items-stretch">
-            <div
-              className="menu menu-column menu-row menu-rounded menu-gray-500 menu-state-bg-light-primary fs-6 fw-bolder my-5 my-lg-0 align-items-stretch gap-8px"
-              data-kt-menu="true"
-            >
+            <div className="menu menu-column menu-row menu-rounded menu-gray-500 menu-state-bg-light-primary fs-6 fw-bolder my-5 my-lg-0 align-items-stretch gap-8px">
               <TabsList />
             </div>
           </div>

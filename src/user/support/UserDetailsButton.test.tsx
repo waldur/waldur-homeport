@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { useModal } from '@/modal/actions';
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 
 import { UserDetailsButton } from './UserDetailsButton';
 
@@ -27,7 +27,7 @@ describe('UserDetailsButton', () => {
     const row = { uuid: 'user-42', full_name: 'Jane Doe' };
     const user = userEvent.setup();
 
-    renderWithProviders(<UserDetailsButton row={row as any} />);
+    renderWithProviders(inActionsMenu(<UserDetailsButton row={row as any} />));
     await user.click(screen.getByText('Details'));
 
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);

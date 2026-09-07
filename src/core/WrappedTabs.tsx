@@ -1,7 +1,11 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import SelectableContext from '@restart/ui/SelectableContext';
 import { debounce } from 'lodash-es';
 import React from 'react';
-import { Dropdown, Nav, Tab } from 'react-bootstrap';
+import { Nav, Tab } from 'react-bootstrap';
+
+import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 interface WrappedTabsProps<T extends { uuid? } = any> {
   defaultActiveKey;
@@ -11,6 +15,36 @@ interface WrappedTabsProps<T extends { uuid? } = any> {
   renderContent: React.ComponentType<{ item: T }>;
   toggleContent?: React.ReactNode;
 }
+
+// Tab.Container below is uncontrolled (defaultActiveKey only), so switching
+// tabs from the overflow dropdown has to go through the same internal
+// SelectableContext that Nav.Link's own eventKey taps into. That context is
+// only visible to descendants of Tab.Container, so this has to be its own
+// component rendered *inside* Tab.Container's JSX -- reading it in WrappedTabs
+// itself would see whatever (unrelated) SelectableContext sits above
+// WrappedTabs's own call site, not the Tab.Container WrappedTabs renders.
+const WrappedTabsDropdownItems = <T extends { uuid? }>({
+  wrappedItems,
+  renderTab,
+}: {
+  wrappedItems: T[];
+  renderTab: React.ComponentType<{ item: T }>;
+}) => {
+  const selectTab = React.useContext(SelectableContext);
+  return (
+    <>
+      {wrappedItems.map((item) => (
+        <ActionsDropdownItem
+          key={item.uuid}
+          className="d-flex justify-content-between"
+          onClick={(event) => selectTab?.(item.uuid, event)}
+        >
+          {React.createElement(renderTab, { item })}
+        </ActionsDropdownItem>
+      ))}
+    </>
+  );
+};
 
 const WrappedTabs = React.forwardRef(
   <T extends { uuid? }>(
@@ -45,28 +79,30 @@ const WrappedTabs = React.forwardRef(
           {props.wrappedItems.length > 0 ? (
             <Nav variant="tabs" className="nav-line-tabs mb-4">
               <Nav.Item>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="text-secondary"
-                    className="btn-icon no-arrow w-35px h-35px"
-                  >
-                    <DotsThreeVerticalIcon size={22} weight="bold" />
-                    {props.toggleContent}
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <div className="mh-200px overflow-auto">
-                      {props.wrappedItems.map((item) => (
-                        <Dropdown.Item
-                          key={item.uuid}
-                          eventKey={item.uuid}
-                          className="d-flex justify-content-between"
-                        >
-                          {React.createElement(props.renderTab, { item })}
-                        </Dropdown.Item>
-                      ))}
-                    </div>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <RadixDropdownMenu.Root>
+                  <RadixDropdownMenu.Trigger asChild>
+                    <button
+                      type="button"
+                      className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px"
+                    >
+                      <DotsThreeVerticalIcon size={22} weight="bold" />
+                      {props.toggleContent}
+                    </button>
+                  </RadixDropdownMenu.Trigger>
+                  <RadixDropdownMenu.Portal>
+                    <RadixDropdownMenu.Content
+                      sideOffset={2}
+                      className="dropdown-menu show position-static"
+                    >
+                      <div className="mh-200px overflow-auto">
+                        <WrappedTabsDropdownItems
+                          wrappedItems={props.wrappedItems}
+                          renderTab={props.renderTab}
+                        />
+                      </div>
+                    </RadixDropdownMenu.Content>
+                  </RadixDropdownMenu.Portal>
+                </RadixDropdownMenu.Root>
               </Nav.Item>
             </Nav>
           ) : (

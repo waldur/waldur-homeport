@@ -134,47 +134,67 @@ export const CustomerMappingCreateDialog = ({
 
   if (availableError) {
     return (
-      <ModalDialog title={translate('Create Customer Mapping')}>
-        <Alert variant="danger">
-          {translate('Failed to load Arrow customers. Please try again.')}
-        </Alert>
-        <div className="d-flex justify-content-end">
+      <ModalDialog
+        title={translate('Create Customer Mapping')}
+        footer={
           <ActionButton
             action={closeDialog}
             variant="secondary"
             title={translate('Close')}
           />
-        </div>
+        }
+      >
+        <Alert variant="danger">
+          {translate('Failed to load Arrow customers. Please try again.')}
+        </Alert>
       </ModalDialog>
     );
   }
 
   if (arrowCustomers.length === 0) {
     return (
-      <ModalDialog title={translate('Create Customer Mapping')}>
-        <Alert variant="info">
-          {translate(
-            'All Arrow customers have already been mapped to Waldur organizations.',
-          )}
-        </Alert>
-        <div className="d-flex justify-content-end">
+      <ModalDialog
+        title={translate('Create Customer Mapping')}
+        footer={
           <ActionButton
             action={closeDialog}
             variant="secondary"
             title={translate('Close')}
           />
-        </div>
+        }
+      >
+        <Alert variant="info">
+          {translate(
+            'All Arrow customers have already been mapped to Waldur organizations.',
+          )}
+        </Alert>
       </ModalDialog>
     );
   }
 
   return (
-    <ModalDialog title={translate('Create Customer Mapping')}>
-      <Form<FormValues>
-        onSubmit={(values) => createMappingMutation.mutateAsync(values)}
-        decorators={[decorator]}
-        render={({ handleSubmit, invalid, form }) => (
-          <form onSubmit={handleSubmit}>
+    <Form<FormValues>
+      onSubmit={(values) => createMappingMutation.mutateAsync(values)}
+      decorators={[decorator]}
+      render={({ handleSubmit, invalid, form }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Create Customer Mapping')}
+            footer={
+              <>
+                <ActionButton
+                  action={closeDialog}
+                  variant="secondary"
+                  title={translate('Cancel')}
+                />
+                <SubmitButton
+                  submitting={createMappingMutation.isPending}
+                  disabled={invalid}
+                  label={translate('Create')}
+                />
+              </>
+            }
+          >
             <SelectGroup
               name="arrow_customer"
               label={translate('Arrow Customer')}
@@ -283,22 +303,9 @@ export const CustomerMappingCreateDialog = ({
                 {error}
               </Alert>
             )}
-
-            <div className="d-flex justify-content-end gap-2">
-              <ActionButton
-                action={closeDialog}
-                variant="secondary"
-                title={translate('Cancel')}
-              />
-              <SubmitButton
-                submitting={createMappingMutation.isPending}
-                disabled={invalid}
-                label={translate('Create')}
-              />
-            </div>
-          </form>
-        )}
-      />
-    </ModalDialog>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };
