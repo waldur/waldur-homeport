@@ -51,7 +51,19 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
         <NavMenuContent
           asChild
           placement="top-end"
-          className="p-2 min-w-200px"
+          // menu-gray-600/menu-state-bg-gray, the same pairing
+          // UserDropdown.tsx/LanguageSelectorDropdown.tsx use, were missing
+          // here entirely -- so a row backed by a real <a> (DocsLink,
+          // LegalPrivacyMenu's Privacy policy/Terms of service) fell through
+          // to Bootstrap's own `a { color: var(--waldur-brand-700) }` (green)
+          // while a row backed by a plain RadixDropdownMenu.Item or <button>
+          // (IssuesLink, Cookie settings, the email/phone copy rows)
+          // inherited the ambient dark text color instead -- two different
+          // colors in the same menu depending on which element a row
+          // happened to be built from, reported live. Also restores the
+          // [data-highlighted] hover background this app's other Metronic
+          // menus already get from menu-state-bg-gray.
+          className="p-2 min-w-200px menu-gray-600 menu-state-bg-gray"
           {...hoverHandlers}
         >
           <ul>{children}</ul>
