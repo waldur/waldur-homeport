@@ -15651,12 +15651,6 @@
       "feature_area": "site-agent"
     }
   },
-  "Download full price list": {
-    "context": {
-      "primary_ui_type": "action_button",
-      "feature_area": "details"
-    }
-  },
   "Download template": {
     "context": {
       "primary_ui_type": "label",
@@ -18641,6 +18635,12 @@
   "Export offering": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Export price list": {
+    "context": {
+      "primary_ui_type": "action_button",
+      "feature_area": "details"
     }
   },
   "Export report": {
@@ -23048,7 +23048,7 @@
   },
   "Included": {
     "context": {
-      "feature_area": "reviewer"
+      "feature_area": "details"
     }
   },
   "Included Components": {
@@ -27934,6 +27934,11 @@
       "feature_area": "details"
     }
   },
+  "Metered": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Method": {
     "context": {
       "primary_ui_type": "title",
@@ -29861,6 +29866,11 @@
     "context": {
       "primary_ui_type": "action_button",
       "feature_area": "project-digest"
+    }
+  },
+  "No charge": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "No chat history yet": {
@@ -32579,7 +32589,11 @@
       "feature_area": "policy-watch"
     }
   },
-  "On plan switch": {},
+  "On plan switch": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "On subnet / network": {
     "context": {
       "primary_ui_type": "title"
@@ -32714,7 +32728,7 @@
   "One-time": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "renew-allocation"
+      "feature_area": "details"
     }
   },
   "One-time on plan switch": {
@@ -45194,6 +45208,11 @@
       "feature_area": "common"
     }
   },
+  "See all plans": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "See less": {
     "context": {
       "primary_ui_type": "action_button",
@@ -48580,6 +48599,12 @@
   },
   "Starting": {},
   "Starting call…": {},
+  "Starting price": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "details"
+    }
+  },
   "Starting…": {
     "context": {
       "feature_area": "reports"
@@ -51549,6 +51574,11 @@
     }
   },
   "The slug template cannot be changed once proposals exist for this call.": {},
+  "The starting price covers what the plan fixes. Components you size yourself and metered usage are charged on top, at the rates above.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "The support user has been activated.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -63097,6 +63127,11 @@
       "feature_area": "languages"
     }
   },
+  "You choose the amount": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "You do not have a reviewer profile yet.": {
     "context": {
       "feature_area": "reviewer"
@@ -63982,6 +64017,7 @@
       "feature_area": "mappings"
     }
   },
+  "day": {},
   "default": {
     "context": {
       "feature_area": "partitions"
@@ -64409,6 +64445,7 @@
     }
   },
   "h": {},
+  "half-month": {},
   "health monitors": {
     "context": {
       "feature_area": "openstack-lbaas"
@@ -64429,6 +64466,7 @@
       "feature_area": "hpas"
     }
   },
+  "hour": {},
   "hypervisors": {
     "context": {
       "feature_area": "openstack-hypervisors"
@@ -64745,6 +64783,21 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "once": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "once, at order": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
+  "once, on plan switch": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "one row per (offering · component) — bar spans current_period_start → current_period_end": {
     "context": {
       "feature_area": "views"
@@ -64825,6 +64878,49 @@
       "feature_area": "policies"
     }
   },
+  "per {unit} / {period}": {
+    "context": {
+      "variables": {
+        "unit": {
+          "type": "unknown"
+        },
+        "period": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "per {unit}, metered": {
+    "context": {
+      "variables": {
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "per {unit}, on plan switch": {
+    "context": {
+      "variables": {
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "per {unit}, once": {
+    "context": {
+      "variables": {
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
   "permission reviews": {
     "context": {
       "feature_area": "core"
@@ -64837,7 +64933,17 @@
   },
   "plans": {
     "context": {
-      "feature_area": "plans"
+      "feature_area": "details"
+    }
+  },
+  "plus {price} once": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "policy": {
@@ -64905,6 +65011,7 @@
       "feature_area": "settings"
     }
   },
+  "quarter": {},
   "queries": {
     "context": {
       "feature_area": "database-stats"
@@ -65317,6 +65424,7 @@
       "feature_area": "form"
     }
   },
+  "unit": {},
   "units": {
     "context": {
       "feature_area": "policies"
@@ -65591,6 +65699,19 @@
         }
       },
       "feature_area": "usage"
+    }
+  },
+  "{amount} {unit} included": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "{answered} of {total} answered": {

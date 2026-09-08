@@ -338,9 +338,10 @@ export const OfferingPublicUIView = () => {
       isRefetching={isRefetching}
       error={error}
       isPublic
+      concealPricing={data?.concealPricing}
     />,
 
-    [data?.offering, isRefetching, refetch, error, isLoading],
+    [data, isRefetching, refetch, error, isLoading],
   );
 
   const router = useRouter();

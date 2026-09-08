@@ -27,6 +27,7 @@ import { getLabel } from '../common/registry';
 
 import { RequestAccessButton } from './access/RequestAccessButton';
 import { OfferingStateActions } from './actions/OfferingStateActions';
+import { OfferingPriceSummary } from './details/OfferingPriceSummary';
 import { OfferingAccessButton } from './OfferingAccessButton';
 import { OfferingExtraActionsButton } from './OfferingExtraActionsButton';
 import { OfferingStateField } from './OfferingStateField';
@@ -39,6 +40,8 @@ interface OfferingViewHeroProps {
   isRefetching?: boolean;
   isLoading?: boolean;
   error?: any;
+  /** All of the viewer's organizations hide billing information. */
+  concealPricing?: boolean;
 }
 
 export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
@@ -248,6 +251,12 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         }
         actions={
           <>
+            {props.isPublic && (
+              <OfferingPriceSummary
+                offering={offering}
+                concealPricing={props.concealPricing}
+              />
+            )}
             {props.isPublic && (
               <RequestAccessButton
                 offering={offering}
