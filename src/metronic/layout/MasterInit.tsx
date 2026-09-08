@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { DrawerComponent, ScrollComponent } from '../components';
+import { DrawerComponent } from '../components';
 
 import { useLayout } from './core/LayoutProvider';
 
@@ -11,7 +11,6 @@ export function MasterInit() {
     isFirstRun.current = false;
     setTimeout(() => {
       DrawerComponent.bootstrap();
-      ScrollComponent.bootstrap();
     }, 500);
   };
 

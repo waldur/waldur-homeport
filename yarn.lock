@@ -3650,6 +3650,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/number@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@radix-ui/number@npm:1.1.3"
+  checksum: 10c0/da682127b62196a617d30d8b085a0b422b067a6155982aa313d33824cbeae16b95547a41ec74e0cf8cb67b30f5f825b3e9222abf6871b2ae0bf12badad4310d6
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:1.1.4":
   version: 1.1.4
   resolution: "@radix-ui/primitive@npm:1.1.4"
@@ -5237,6 +5244,33 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: 10c0/165fc155caf06655eca4f4c853c7eef145dc1c5cfc6fd1fb3175dc764e5ebfcddc6368e0a470bbcff93c8f33305f641d8d9f6dd10da230695ffc589e7a472f47
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-scroll-area@npm:^1.2.14":
+  version: 1.2.18
+  resolution: "@radix-ui/react-scroll-area@npm:1.2.18"
+  dependencies:
+    "@radix-ui/number": "npm:1.1.3"
+    "@radix-ui/primitive": "npm:1.1.7"
+    "@radix-ui/react-compose-refs": "npm:1.1.5"
+    "@radix-ui/react-context": "npm:1.2.2"
+    "@radix-ui/react-direction": "npm:1.1.4"
+    "@radix-ui/react-presence": "npm:1.1.10"
+    "@radix-ui/react-primitive": "npm:2.1.10"
+    "@radix-ui/react-use-callback-ref": "npm:1.1.4"
+    "@radix-ui/react-use-layout-effect": "npm:1.1.4"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/1b0adc53f6df36e79d78aa828bd00a94101ceb7be1461d0ad67de4e941fc06d05f590f81251bb3efa153bc0f0b6d402f16de5b1d7c3f208d8523feda5b305fb8
   languageName: node
   linkType: hard
 
@@ -19896,6 +19930,7 @@ __metadata:
     "@radix-ui/react-collapsible": "npm:^1.1.20"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.24"
     "@radix-ui/react-popover": "npm:^1.1.19"
+    "@radix-ui/react-scroll-area": "npm:^1.2.14"
     "@radix-ui/react-slot": "npm:^1.3.3"
     "@radix-ui/react-toggle": "npm:^1.1.14"
     "@sentry/react": "npm:^8.55.0"
@@ -20126,6 +20161,7 @@ __metadata:
     "@radix-ui/react-dialog": "npm:^1.1.23"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.24"
     "@radix-ui/react-popover": "npm:^1.1.19"
+    "@radix-ui/react-scroll-area": "npm:^1.2.14"
     "@radix-ui/react-slot": "npm:^1.3.3"
     "@radix-ui/react-tooltip": "npm:^1.2.16"
     class-variance-authority: "npm:^0.7.1"

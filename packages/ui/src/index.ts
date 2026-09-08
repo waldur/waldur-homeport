@@ -150,3 +150,10 @@ export { getLanguageFlag } from './languageFlags';
 
 export { LanguageMenu } from './LanguageMenu';
 export type { LanguageMenuProps, LanguageOption } from './LanguageMenu';
+
+export {
+  ScrollArea,
+  ScrollBar,
+  ScrollAreaViewport,
+  ScrollAreaCorner,
+} from './ScrollArea';
