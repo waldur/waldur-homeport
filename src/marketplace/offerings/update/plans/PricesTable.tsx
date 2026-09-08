@@ -7,6 +7,7 @@ import {
 
 import { composeValidators, required } from '@/core/validators';
 import { translate } from '@/i18n';
+import { BillingTypeBadge } from '@/marketplace/common/billingTypes';
 import { validateNonNegative } from '@/marketplace/common/utils';
 
 interface PricesTableProps {
@@ -20,6 +21,8 @@ const parseInput = (value) => {
   return isNaN(num) ? value : num;
 };
 
+// Exact, not currency-formatted: the shared formatter rounds above 0.05 and
+// would contradict the New price input beside it.
 const formatPrice = (value) => {
   if (value === undefined || value === null || value === '') return '0';
   const num = parseFloat(value);
@@ -31,16 +34,18 @@ export const PricesTable: FC<PricesTableProps> = (props) => (
     <thead>
       <tr>
         <th>{translate('Name')}</th>
+        <th>{translate('Billing type')}</th>
         <th>{translate('Current price')}</th>
         <th>{translate('New price')}</th>
         <th>{translate('Units')}</th>
       </tr>
     </thead>
     <tbody>
-      {props.components.map((component: OfferingComponent, index) => (
-        <tr key={index}>
+      {props.components.map((component: OfferingComponent) => (
+        <tr key={component.type}>
+          <td>{component.name}</td>
           <td>
-            <div className="form-control-static">{component.name}</div>
+            <BillingTypeBadge component={component} />
           </td>
           <td>{formatPrice(props.plan.prices[component.type])}</td>
           <td>
@@ -58,9 +63,7 @@ export const PricesTable: FC<PricesTableProps> = (props) => (
               step="0.0000001"
             />
           </td>
-          <td>
-            <div className="form-control-static">{component.measured_unit}</div>
-          </td>
+          <td>{component.measured_unit}</td>
         </tr>
       ))}
     </tbody>

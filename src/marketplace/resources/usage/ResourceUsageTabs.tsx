@@ -8,7 +8,7 @@ import { ResourceUsageChart } from '@/marketplace/resources/usage/ResourceUsageC
 
 import { ResourceUsageTable } from './ResourceUsageTable';
 import { ComponentUserUsage } from './types';
-import { getBillingTypeLabel } from './utils';
+import { getBillingTypeLabelOrDash } from './utils';
 
 interface ResourceUsageTabsProps {
   resource?: Pick<Resource, 'name' | 'uuid'>;
@@ -41,7 +41,7 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
             <>
               <Tip
                 id={`tab-${index}-tooltip`}
-                label={getBillingTypeLabel(component.billing_type)}
+                label={getBillingTypeLabelOrDash(component.billing_type)}
               >
                 <QuestionIcon size={18} weight="bold" className="text-muted" />
               </Tip>{' '}

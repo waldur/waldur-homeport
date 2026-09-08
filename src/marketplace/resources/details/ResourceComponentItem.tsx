@@ -3,7 +3,7 @@ import { LimitPeriodEnum, OfferingComponent, Resource } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { TENANT_TYPE } from '@/openstack/constants';
 
-import { getBillingTypeLabel } from '../usage/utils';
+import { getBillingTypeLabelOrDash } from '../usage/utils';
 
 import { QuotaCell } from './QuotaCell';
 import { QuotaSingleView } from './QuotaSingleView';
@@ -95,7 +95,7 @@ export const ResourceComponentItem = ({
 }: ResourceComponentItemProps) => {
   const props = getQuotaCellProps(component, resource);
 
-  const billingType = getBillingTypeLabel(component.billing_type);
+  const billingType = getBillingTypeLabelOrDash(component.billing_type);
   const limitPeriod = component.limit_period;
 
   const description = props.displayUnit

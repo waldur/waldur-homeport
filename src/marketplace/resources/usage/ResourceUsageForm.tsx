@@ -49,7 +49,7 @@ import {
   MISSING_USAGE_POLICY_DEFAULT,
 } from './missingUsagePolicy';
 import { UsageReportContext } from './types';
-import { getBillingTypeLabel } from './utils';
+import { getBillingTypeLabelOrDash } from './utils';
 
 interface Period {
   label: string;
@@ -342,7 +342,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                         label={
                           isHidden
                             ? null
-                            : getBillingTypeLabel(component.billing_type)
+                            : getBillingTypeLabelOrDash(component.billing_type)
                         }
                       >
                         <QuestionIcon
@@ -412,7 +412,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                               {component.name}
                               <Tip
                                 id={`tip-${component.uuid}-type`}
-                                label={getBillingTypeLabel(
+                                label={getBillingTypeLabelOrDash(
                                   component.billing_type,
                                 )}
                               >
