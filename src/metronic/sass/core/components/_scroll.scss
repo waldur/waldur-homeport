@@ -149,34 +149,6 @@
   }
 }
 
-// Hover overflow overlay
-.hover-scroll-overlay-y {
-  overflow-y: hidden;
-  position: relative;
-
-  --scrollbar-space: #{get($scrollbar, space)};
-
-  // Webkit
-  &::-webkit-scrollbar {
-    width: calc(#{get($scrollbar, width)} + var(--scrollbar-space));
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-clip: content-box;
-    border-right: var(--scrollbar-space) solid transparent;
-  }
-
-  &:hover {
-    overflow-y: overlay;
-  }
-
-  // Firefox hack
-  @-moz-document url-prefix() {
-    overflow-y: scroll;
-    position: relative;
-  }
-}
-
 // Utility classes
 .scroll-ps {
   padding-left: get($scrollbar, width) !important;

@@ -477,12 +477,12 @@ all).
   route match, never the equivalent of `.hide()`, so a route-active section
   the user manually collapsed doesn't reopen until the next matching
   navigation.
-- **`MenuComponent.ts`, `_SwapperComponent.ts`, and `_ToggleComponent.ts` have been deleted entirely**, along with their
+- **`MenuComponent.ts`, `_SwapperComponent.ts`, `_ToggleComponent.ts`, and `_ScrollComponent.ts` have been deleted entirely**, along with their
   `bootstrap()`/`reinitialization()` calls in `MasterInit.tsx`/`Sidebar.tsx`
   and their barrel exports. The sidebar minimizer toggle in `BrandName.tsx` runs
-  on `@radix-ui/react-toggle`. `Sidebar.tsx`'s remaining Metronic widgets
-  (`DrawerComponent`, `ScrollComponent` — mobile drawer, custom scrollbar)
-  are unrelated and untouched.
+  on `@radix-ui/react-toggle`. The sidebar menu scroll area in `Sidebar.tsx` runs
+  on `@radix-ui/react-scroll-area` (with a shared `ScrollArea` primitive in `packages/ui`).
+  The only remaining Metronic component is `DrawerComponent` (mobile drawer).
 
 ### Testing gotcha: `ResizeObserver` and animation timing
 

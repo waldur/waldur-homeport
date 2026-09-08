@@ -1,8 +1,9 @@
+import * as ScrollArea from '@radix-ui/react-scroll-area';
 import classNames from 'classnames';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import { ENV } from '@/core/config';
-import { DrawerComponent, ScrollComponent } from '@/metronic/components';
+import { DrawerComponent } from '@/metronic/components';
 import { useLayout } from '@/metronic/layout/core';
 import { useTheme } from '@/theme/useTheme';
 
@@ -17,7 +18,6 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   useEffect(() => {
     if (sidebarRef?.current) {
       DrawerComponent.reinitialization();
-      ScrollComponent.reinitialization();
     }
   }, [sidebarRef, layout]);
 
@@ -61,27 +61,32 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
     >
       <BrandName isAsideHovered={isAsideHovered} />
 
-      <div className="aside-menu flex-grow-1 overflow-hidden">
-        <div
-          className="hover-scroll-overlay-y my-4"
-          id="kt_aside_menu_wrapper"
-          data-kt-scroll="true"
-          data-kt-scroll-activate="{default: false, lg: true}"
-          data-kt-scroll-height="auto"
-          data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer"
-          data-kt-scroll-wrappers="#kt_aside_menu"
-          data-kt-scroll-offset="0"
-        >
-          <div
-            className={classNames(
-              'menu menu-column menu-rounded gap-1 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold',
-              menuClassNames,
-            )}
-            id="kt_aside_menu"
+      <div className="aside-menu flex-grow-1 overflow-hidden my-4">
+        <ScrollArea.Root className="aside-scroll-area h-100 w-100" type="hover">
+          <ScrollArea.Viewport
+            className="h-100 w-100"
+            id="kt_aside_menu_wrapper"
+            data-testid="aside-menu-wrapper"
           >
-            {props.children}
-          </div>
-        </div>
+            <div
+              className={classNames(
+                'menu menu-column menu-rounded gap-1 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold',
+                menuClassNames,
+              )}
+              id="kt_aside_menu"
+              data-testid="aside-menu"
+            >
+              {props.children}
+            </div>
+          </ScrollArea.Viewport>
+          <ScrollArea.Scrollbar
+            className="aside-scroll-scrollbar"
+            orientation="vertical"
+          >
+            <ScrollArea.Thumb className="aside-scroll-thumb" />
+          </ScrollArea.Scrollbar>
+          <ScrollArea.Corner />
+        </ScrollArea.Root>
       </div>
       <SidebarFooter menuClassNames={menuClassNames} />
     </nav>
