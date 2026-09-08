@@ -123,6 +123,12 @@ export const FormCloudStep = (props: FormStepProps) => {
         form.change('attributes.flavor', undefined);
         form.change('attributes.image', undefined);
         form.change('attributes.security_groups', undefined);
+        // The limits belong to the offering that was left behind, and this is
+        // the only place an offering is switched without remounting the form.
+        // Clearing them here -- on the event, before the new offering's effects
+        // run -- lets BaseDeployPage seed the new defaults into an empty object
+        // while a step that owns limits still writes after it.
+        form.change('limits', undefined);
       }
     },
     [form.change],

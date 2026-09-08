@@ -14,12 +14,16 @@ const CreateDiskDialog = lazyComponent(() =>
 
 const validators = [validateState('OK')];
 
-export const CreateDiskAction: FC<{ resource }> = ({ resource }) => (
+export const CreateDiskAction: FC<{ resource; refetch?(): void }> = ({
+  resource,
+  refetch,
+}) => (
   <DialogActionButton
     title={translate('Create disk')}
     iconNode={<PlusCircleIcon weight="bold" />}
     modalComponent={CreateDiskDialog}
     resource={resource}
     validators={validators}
+    extraResolve={{ refetch }}
   />
 );

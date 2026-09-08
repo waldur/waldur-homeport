@@ -149,7 +149,18 @@ export const BaseDeployPage = ({
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  // Initialize limits and plan when the offering changes
+  // Seed the offering's defaults, without overwriting what is already there.
+  //
+  // This effect is not the only writer of `values.limits`: a step can fill them
+  // in too -- the vSphere template step sets cpu, ram and disk from the chosen
+  // template -- and the two race. Which one wins used to depend on whether the
+  // template query was served from cache: a plain reassignment blanked the
+  // fields when this effect ran second, and a one-shot guard blanked them when
+  // it ran first, since React flushes a child's effects before its parent's.
+  // Merging the current values on top is invariant to that ordering. Nothing
+  // stale survives an offering switch either: a route-level change remounts the
+  // form (see the `key` on <Form> below), and an in-form change goes through
+  // FormCloudStep, which clears `limits` as it switches.
   useEffect(() => {
     if (isEdit) return;
     if (selectedOffering) {
@@ -171,8 +182,15 @@ export const BaseDeployPage = ({
       form.change('limits', {
         ...getDefaultLimits(selectedOffering),
         ...props.limits,
+        ...form.getState().values.limits,
       });
     }
+  }, [selectedOffering]);
+
+  // The plan has its own trigger: it is assigned once the offering's plans are
+  // known, which is unrelated to seeding the defaults above.
+  useEffect(() => {
+    if (isEdit) return;
     if (hasStepWithField(formSteps, 'plan') && plans) {
       if (props.plan) {
         form.change('plan', props.plan);
@@ -180,7 +198,7 @@ export const BaseDeployPage = ({
         form.change('plan', plans[0]);
       }
     }
-  }, [selectedOffering, plans, project]);
+  }, [plans, props.plan]);
 
   const [lastY, setLastY] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>(
