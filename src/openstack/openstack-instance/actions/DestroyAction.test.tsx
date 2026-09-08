@@ -1,14 +1,16 @@
 import { screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { renderWithProviders } from '@/test/harness';
+import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { DestroyAction } from './DestroyAction';
 
 const renderAction = (resource: Record<string, unknown>) =>
   renderWithProviders(
-    <DestroyAction resource={resource as any} refetch={vi.fn()} />,
+    inActionsMenu(
+      <DestroyAction resource={resource as any} refetch={vi.fn()} />,
+    ),
   );
 
 describe('DestroyAction', () => {

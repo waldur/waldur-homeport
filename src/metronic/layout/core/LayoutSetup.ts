@@ -219,13 +219,6 @@ export class LayoutSetup {
     if (config.responsive) {
       this.classes.pageTitle.push('mb-5');
       this.classes.pageTitle.push('mb-lg-0');
-
-      LayoutSetup.attributes.pageTitle.set('data-kt-swapper', true);
-      LayoutSetup.attributes.pageTitle.set('data-kt-swapper-mode', 'prepend');
-      LayoutSetup.attributes.pageTitle.set(
-        'data-kt-swapper-parent',
-        `{ default: '#kt_content_container', '${config.responsiveBreakpoint}': '${config.responsiveTarget}'}`,
-      );
     }
   }
 
