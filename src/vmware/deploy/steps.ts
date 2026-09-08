@@ -3,6 +3,7 @@ import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
+  PlanStep,
 } from '@/marketplace/deploy/steps/constants';
 import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
@@ -15,6 +16,7 @@ import { FormTemplateStep } from './FormTemplateStep';
 
 export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   DetailsOverviewStep,
+  PlanStep,
   {
     label: translate('Template'),
     id: 'step-template',
