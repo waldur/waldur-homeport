@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { vmwareVirtualMachineCreateDisk } from 'waldur-js-client';
 
+import { greaterThan, required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -14,7 +15,8 @@ export const CreateDiskDialog: FC<ActionDialogProps> = ({
     mutationFn: (formData) =>
       vmwareVirtualMachineCreateDisk({
         path: { uuid: resource.uuid },
-        body: { size: formData.size },
+        // The API takes megabytes, the rest of the VMware UI speaks gigabytes.
+        body: { size: Number(formData.size) * 1024 },
       }),
 
     successMessage: translate('Disk has been created.'),
@@ -33,8 +35,13 @@ export const CreateDiskDialog: FC<ActionDialogProps> = ({
       }
       formFields={[
         {
+          name: 'size',
           label: translate('Size'),
           type: 'integer',
+          unit: translate('GB'),
+          required: true,
+          minValue: 1,
+          validate: [required, greaterThan(0)],
         },
       ]}
       submitForm={mutation.mutateAsync}

@@ -55,7 +55,9 @@ export const DisksList: FunctionComponent<{ resourceScope }> = ({
       verboseName={translate('disks')}
       hasQuery={false}
       showPageSizeSelector
-      tableActions={<CreateDiskAction resource={resourceScope} />}
+      tableActions={
+        <CreateDiskAction resource={resourceScope} refetch={tableProps.fetch} />
+      }
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={tableProps.fetch} />

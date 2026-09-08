@@ -12938,6 +12938,16 @@
       "feature_area": "actions"
     }
   },
+  "Current size: {size}": {
+    "context": {
+      "variables": {
+        "size": {
+          "type": "number"
+        }
+      },
+      "feature_area": "actions"
+    }
+  },
   "Current state": {
     "context": {
       "feature_area": "pubsub"
@@ -29469,6 +29479,7 @@
   },
   "New size": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "actions"
     }
   },

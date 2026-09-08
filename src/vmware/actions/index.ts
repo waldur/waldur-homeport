@@ -1,6 +1,7 @@
 import { ActionConfiguration } from '@/resource/actions/types';
 
 import { ConsoleAction } from './ConsoleAction';
+import { DestroyDiskAction } from './DestroyDiskAction';
 import { DestroyVirtualMachineAction } from './DestroyVirtualMachineAction';
 import { EditAction } from './EditAction';
 import { ExtendDiskAction } from './ExtendDiskAction';
@@ -32,7 +33,7 @@ export const VMwareVirtualMachineActions: ActionConfiguration = {
 
 export const VMwareDiskActions: ActionConfiguration = {
   type: 'VMware.Disk',
-  actions: [PullDiskAction, ExtendDiskAction],
+  actions: [PullDiskAction, ExtendDiskAction, DestroyDiskAction],
 };
 
 export const VMwarePortActions: ActionConfiguration = {

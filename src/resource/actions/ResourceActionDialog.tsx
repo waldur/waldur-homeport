@@ -119,6 +119,7 @@ const ResourceActionDialogInner: FC<any> = ({
             {...props}
             min={field.minValue}
             max={field.maxValue}
+            unit={field.unit}
           />
         );
       } else if (field.type === 'boolean') {
