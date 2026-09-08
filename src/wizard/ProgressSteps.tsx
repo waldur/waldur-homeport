@@ -109,14 +109,10 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         {step.label}
                       </div>
                       {step.description && (
-                        <div
-                          className={classNames(
-                            'stepper-desc',
-                            current &&
-                              variant !== DEFAULT_VARIANT &&
-                              `text-${variant}-600`,
-                          )}
-                        >
+                        // No variant class: the design system keeps supporting
+                        // text neutral whatever status the step wears, and only
+                        // colours the title.
+                        <div className="stepper-desc">
                           {step.description.map((line, i) => (
                             <div key={i}>{line}</div>
                           ))}

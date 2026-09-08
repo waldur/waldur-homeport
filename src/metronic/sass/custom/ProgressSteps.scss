@@ -111,14 +111,11 @@
             margin-bottom: 12px;
           }
 
-          .stepper-label {
-            .stepper-title {
-              color: $text-brand-primary;
-            }
-
-            .stepper-desc {
-              color: $text-brand-tertiary;
-            }
+          // Only the title takes the step's status colour. The supporting text
+          // stays $text-quaternary in every status — current, warning and
+          // error alike — per the design system's step.
+          .stepper-label .stepper-title {
+            color: $text-brand-primary;
           }
         }
 

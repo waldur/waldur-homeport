@@ -13719,6 +13719,7 @@
   },
   "Decision expected by {date}.": {
     "context": {
+      "primary_ui_type": "text_content",
       "variables": {
         "date": {
           "type": "date"
@@ -63534,6 +63535,7 @@
   },
   "Your confirmation is needed before resources are set up.": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "proposal"
     }
   },
@@ -63662,6 +63664,7 @@
   },
   "Your proposal is being reviewed.": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "proposal"
     }
   },
@@ -63687,6 +63690,7 @@
   },
   "Your request is being reviewed.": {
     "context": {
+      "primary_ui_type": "text_content",
       "feature_area": "proposal"
     }
   },

@@ -310,7 +310,11 @@ Run E2E tests:
     - yarn test:e2e
   artifacts:
     expire_in: 1 week
-    when: always
+    # `on_failure`, not `always`: test-results/ is Playwright's failure
+    # diagnostics — traces, screenshots, diffs — and nobody opens it for a
+    # green run. Uploading it anyway turns any coordinator hiccup into a red
+    # job on passing tests, which is how jobs 825167/825168 failed.
+    when: on_failure
     paths:
       - test-results/
 
@@ -369,7 +373,9 @@ Run E2E visual tests:
     - yarn test:e2e:visual base-button-parity --shard=${CI_NODE_INDEX}/${CI_NODE_TOTAL}
   artifacts:
     expire_in: 1 week
-    when: always
+    # See "Run e2e tests" above: screenshot diffs are only worth keeping when
+    # a comparison failed.
+    when: on_failure
     paths:
       - test-results/
 
