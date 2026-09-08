@@ -54,7 +54,10 @@ export const EditPlanQuotasDialog: FC<{
               />
             }
           >
-            <QuotasTable components={props.resolve.components} />
+            <QuotasTable
+              components={props.resolve.components}
+              plan={props.resolve.plan}
+            />
           </ModalDialog>
         </form>
       )}

@@ -6,6 +6,7 @@ import { OfferingComponent } from 'waldur-js-client';
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+import { BillingTypeBadge } from '@/marketplace/common/billingTypes';
 
 import {
   DiscountTier,
@@ -77,6 +78,7 @@ export const ComponentDiscountEditor: FunctionComponent<
         {component.measured_unit && (
           <span className="text-muted ms-2">({component.measured_unit})</span>
         )}
+        <BillingTypeBadge component={component} className="ms-2" />
       </div>
 
       <div className="mb-4" style={{ maxWidth: 400 }}>

@@ -5,21 +5,16 @@ import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
+import { getBillingTypes } from '@/marketplace/common/billingTypes';
 import { renderFieldOrDash } from '@/table/utils';
+
+import { formatOptionWithDescription } from '../formatOptionWithDescription';
 
 interface ComponentAccountingTypeFieldProps {
   removeOfferingQuotas?(): void;
   disabled?: boolean;
   readOnly?: boolean;
 }
-
-export const getAccountingTypeOptions = () => [
-  { label: translate('Usage-based'), value: 'usage' },
-  { label: translate('Limit-based'), value: 'limit' },
-  { label: translate('Fixed price'), value: 'fixed' },
-  { label: translate('One-time'), value: 'one' },
-  { label: translate('One-time on plan switch'), value: 'few' },
-];
 
 export const ComponentAccountingTypeField: React.FC<
   ComponentAccountingTypeFieldProps
@@ -60,7 +55,8 @@ export const ComponentAccountingTypeField: React.FC<
       label={translate('Accounting type')}
       required={true}
       validate={required}
-      options={getAccountingTypeOptions()}
+      options={getBillingTypes()}
+      formatOptionLabel={formatOptionWithDescription}
       isClearable={false}
       isDisabled={props.disabled}
       space={5}

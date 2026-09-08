@@ -8,6 +8,13 @@ import { useUser } from '@/workspace/hooks';
 
 export const parseIntField = (value) => parseInt(value, 10) || 0;
 export const formatIntField = (value) => (value ? value.toString() : 0);
+
+/** Unlike parseIntField, keeps 0 distinct from "not set". */
+export const parseFloatOrNull = (value: unknown): number | null => {
+  if (value === null || value === undefined || value === '') return null;
+  const parsed = parseFloat(String(value));
+  return isNaN(parsed) ? null : parsed;
+};
 export const validateNonNegative = (value) =>
   value < 0 ? translate('Value should not be negative.') : undefined;
 

@@ -2,16 +2,16 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
 import { translate } from '@/i18n';
+import { getBillingTypes } from '@/marketplace/common/billingTypes';
 import {
   showComponentsList,
   getFormLimitParser,
 } from '@/marketplace/common/registry';
 
-import { getAccountingTypeOptions } from './components/ComponentAccountingTypeField';
 import { getLimitPeriods } from './components/ComponentLimitPeriodField';
 
 export const parseComponent = (component, offering) => {
-  const options = getAccountingTypeOptions();
+  const options = getBillingTypes();
   const limitPeriods = getLimitPeriods();
   const limitParser = offering ? getFormLimitParser(offering.type) : (x) => x;
   return {

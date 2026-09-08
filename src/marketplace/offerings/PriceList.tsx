@@ -15,7 +15,7 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { BillingPeriod } from '../common/BillingPeriod';
-import { getBillingTypeLabel } from '../resources/usage/utils';
+import { getBillingTypeLabelOrDash } from '../resources/usage/utils';
 
 export const PriceList = () => {
   const values = useFilterValues('MarketplacePriceList');
@@ -62,7 +62,7 @@ export const PriceList = () => {
     },
     {
       title: translate('Billing type'),
-      render: ({ row }) => getBillingTypeLabel(row.billing_type),
+      render: ({ row }) => getBillingTypeLabelOrDash(row.billing_type),
       export: 'billing_type',
     },
     {

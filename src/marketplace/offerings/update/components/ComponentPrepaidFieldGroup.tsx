@@ -9,6 +9,7 @@ import {
 
 import { BooleanGroup, NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+import { getPrepaidDescription } from '@/marketplace/common/billingTypes';
 
 import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
 import { ComponentMaxValueField } from './ComponentMaxValueField';
@@ -41,7 +42,7 @@ export const ComponentPrepaidFieldGroup: FC<{
       <BooleanGroup
         name="is_prepaid"
         label={translate('Pre-paid component')}
-        alignMiddle
+        help_text={getPrepaidDescription()}
         space={5}
       />
       {isPrepaid ? (

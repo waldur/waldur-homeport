@@ -8,6 +8,7 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
+import { resolvePlanComponents } from '@/marketplace/details/plan/effectiveComponents';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -50,10 +51,13 @@ export const EditPlanDiscountsDialog: FC<EditPlanDiscountsDialogProps> = (
     const planTypes = new Set(
       (props.resolve.plan.components || []).map((pc) => pc.type),
     );
-    return (props.resolve.offering.components || []).filter((component) =>
-      planTypes.has(component.type),
+    return resolvePlanComponents(
+      (props.resolve.offering.components || []).filter((component) =>
+        planTypes.has(component.type),
+      ),
+      props.resolve.plan,
     );
-  }, [props.resolve.plan.components, props.resolve.offering.components]);
+  }, [props.resolve.plan, props.resolve.offering.components]);
 
   const updateDiscountsMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) =>

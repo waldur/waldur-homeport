@@ -8942,6 +8942,11 @@
       "feature_area": "questions"
     }
   },
+  "Charge": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
   "Charged as part of {name}.": {
     "context": {
       "variables": {
@@ -8952,6 +8957,11 @@
       "feature_area": "deploy"
     }
   },
+  "Charged at activation and again on every plan change, at the price of the new plan.": {},
+  "Charged on the limit the customer requests, every billing period.": {},
+  "Charged on the plan's own amount, every billing period.": {},
+  "Charged on the usage the provider reports for each billing period.": {},
+  "Charged once, when the resource is activated.": {},
   "Charset": {
     "context": {
       "feature_area": "sql"
@@ -16376,16 +16386,6 @@
     }
   },
   "Edit prices": {
-    "context": {
-      "feature_area": "plans"
-    }
-  },
-  "Edit prices for current month": {
-    "context": {
-      "feature_area": "plans"
-    }
-  },
-  "Edit prices for next month": {
     "context": {
       "feature_area": "plans"
     }
@@ -29401,6 +29401,16 @@
   "New price": {
     "context": {
       "primary_ui_type": "title",
+      "feature_area": "plans"
+    }
+  },
+  "New prices apply from next month": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
+  "New prices apply immediately": {
+    "context": {
       "feature_area": "plans"
     }
   },
@@ -51408,6 +51418,7 @@
       "feature_area": "offerings"
     }
   },
+  "The quantity is the limit the customer requests multiplied by the length of the subscription in months, not the plan amount.": {},
   "The relay accepted the message": {
     "context": {
       "feature_area": "email"
@@ -52490,6 +52501,11 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "This plan has no resources yet.": {
+    "context": {
+      "feature_area": "plans"
     }
   },
   "This port belongs to a load balancer. Deleting it may break the load balancer; manage it through the load balancer instead.": {
@@ -63867,6 +63883,7 @@
       "feature_area": "assignments"
     }
   },
+  "at activation and on every plan switch": {},
   "attachments": {
     "context": {
       "feature_area": "support-users"
@@ -63885,6 +63902,11 @@
   "beyond connected and default routes": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "billing period": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "billing syncs": {
@@ -64445,6 +64467,7 @@
     }
   },
   "h": {},
+  "half month": {},
   "half-month": {},
   "health monitors": {
     "context": {
@@ -64788,6 +64811,7 @@
       "feature_area": "details"
     }
   },
+  "once at activation": {},
   "once, at order": {
     "context": {
       "feature_area": "details"
@@ -64876,6 +64900,15 @@
   "per day avg": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "per {period}": {
+    "context": {
+      "variables": {
+        "period": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "per {unit} / {period}": {
@@ -65712,6 +65745,21 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "{amount} × {price} = {total}": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        },
+        "price": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
     }
   },
   "{answered} of {total} answered": {
@@ -66559,6 +66607,16 @@
       "feature_area": "details"
     }
   },
+  "{count} resource(s) have been created on this plan. What has already been charged is not changed.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "plans"
+    }
+  },
   "{count} resources": {
     "context": {
       "variables": {
@@ -67093,6 +67151,16 @@
         }
       },
       "feature_area": "policy-watch"
+    }
+  },
+  "{label} · pre-paid": {
+    "context": {
+      "variables": {
+        "label": {
+          "type": "string"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "{limitType} is enforced per account at job submission time. Each offering controls its own account limits independently.": {

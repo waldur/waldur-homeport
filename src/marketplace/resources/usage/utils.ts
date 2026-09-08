@@ -12,7 +12,7 @@ import { parseDate } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { getAccountingTypeOptions } from '@/marketplace/offerings/update/components/ComponentAccountingTypeField';
+import { getBillingTypes } from '@/marketplace/common/billingTypes';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -320,9 +320,9 @@ export const getUsageHistoryPeriodOptions = (
  * for this component when the next billing period passes with no usage report.
  * Built lazily so that the labels pick up the active locale.
  */
-export const getBillingTypeLabel = (value) =>
+export const getBillingTypeLabelOrDash = (value) =>
   renderFieldOrDash(
-    getAccountingTypeOptions().find((option) => option.value === value)?.label,
+    getBillingTypes().find((option) => option.value === value)?.label,
   );
 
 export const getTotalUsagePeriod = (

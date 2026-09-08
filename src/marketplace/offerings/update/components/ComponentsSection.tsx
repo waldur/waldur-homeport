@@ -2,8 +2,8 @@ import { FC, useState } from 'react';
 import { OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { BillingTypeBadge } from '@/marketplace/common/billingTypes';
 import { showComponentsList } from '@/marketplace/common/registry';
-import { getBillingTypeLabel } from '@/marketplace/resources/usage/utils';
 import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@/openstack/constants';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
@@ -85,7 +85,7 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
         },
         {
           title: translate('Billing type'),
-          render: ({ row }) => <>{getBillingTypeLabel(row.billing_type)}</>,
+          render: ({ row }) => <BillingTypeBadge component={row} />,
         },
         {
           title: translate('Limit period'),

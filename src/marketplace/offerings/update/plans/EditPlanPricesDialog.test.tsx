@@ -116,13 +116,13 @@ describe('EditPlanPricesDialog', () => {
     const rows = screen.getAllByRole('row').slice(1); // skip header row
 
     expect(within(rows[0]).getByText('CPU')).toBeInTheDocument();
-    // The current price is in the second cell
+    // Name, billing type, current price, new price, units
     const cpuCells = within(rows[0]).getAllByRole('cell');
-    expect(cpuCells[1]).toHaveTextContent('0');
+    expect(cpuCells[2]).toHaveTextContent('0');
 
     expect(within(rows[1]).getByText('RAM')).toBeInTheDocument();
     const ramCells = within(rows[1]).getAllByRole('cell');
-    expect(ramCells[1]).toHaveTextContent('0');
+    expect(ramCells[2]).toHaveTextContent('0');
 
     // Form inputs should have 0, not "0E-10"
     const inputs = screen.getAllByRole('spinbutton');
@@ -235,11 +235,12 @@ describe('EditPlanPricesDialog', () => {
 
     const rows = screen.getAllByRole('row').slice(1);
 
+    // Name, billing type, current price, new price, units
     const cpuCells = within(rows[0]).getAllByRole('cell');
-    expect(cpuCells[1]).toHaveTextContent('0.0015');
+    expect(cpuCells[2]).toHaveTextContent('0.0015');
 
     const ramCells = within(rows[1]).getAllByRole('cell');
-    expect(ramCells[1]).toHaveTextContent('250');
+    expect(ramCells[2]).toHaveTextContent('250');
 
     const inputs = screen.getAllByRole('spinbutton');
     expect(inputs[0]).toHaveValue(0.0015);
