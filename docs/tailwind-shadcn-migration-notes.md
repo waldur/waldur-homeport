@@ -49,13 +49,13 @@ separate priority tier above all layered rules regardless of layer order.
 identically-named Tailwind utilities for exactly this reason.
 
 **The `@layer bootstrap` wrapper ships in the real app**, not just
-Storybook — and unlayered CSS beats layered CSS *regardless of specificity*.
+Storybook — and unlayered CSS beats layered CSS _regardless of specificity_.
 That means every one of the app's ~99 component stylesheets imported from a
 `.tsx` (`import './Foo.scss'`, Vite injects it unlayered) ranks above all of
 Metronic, including where Metronic previously won on specificity. **Rule:
 component SCSS must be scoped under its own class, never under a Metronic
 layout root** (`.aside`, `.header`, `.toolbar`, …) — nesting a Metronic class
-*inside* your own class is fine (that already outranks Metronic on
+_inside_ your own class is fine (that already outranks Metronic on
 specificity, so the layer change is a no-op), but a rule scoped directly
 under a layout-root class silently wins unconditionally once componentized.
 Anything that genuinely needs to override Metronic layout belongs in
@@ -94,7 +94,7 @@ preflight rules currently produces **zero** differences beyond the shim.
 **The layer statement is dropped in production builds** — Vite's optimizer
 removes `@layer theme, base, bootstrap, utilities;` because the emitted
 `dist/assets/index-*.css` already contains the four blocks in that order,
-making the statement redundant *within that file*. Still correct today
+making the statement redundant _within that file_. Still correct today
 (Metronic's stylesheet is injected by JS strictly after initial parse, so
 `index-*.css` always establishes order first), but the explicit safety net
 is gone — worth re-checking (`grep -o '@layer [a-z]*{' dist/assets/index-*.css`)
@@ -143,7 +143,7 @@ Figma design system, empirical value winning on disagreement.
   visibly thinner than the same border around this component's exact-px
   box — even with identical width/color. `box-shadow` sidesteps layout
   sizing entirely. Consequence: both `size` variants pad 1px extra on
-  *both* axes (`sm`: `px-[8px] py-[4px]`; `lg`: `px-[16px] py-[10px]`),
+  _both_ axes (`sm`: `px-[8px] py-[4px]`; `lg`: `px-[16px] py-[10px]`),
   and any `focus:`/`hover:` state with a visible border + ring combines
   both into one bracket value rather than layering, since `box-shadow` is
   one property.
@@ -249,8 +249,7 @@ single primitive in the app.
   hover/disabled treatment.
 - **`.dropdown-toggle` stays on trigger buttons** even though Radix
   supplies its own `aria-haspopup`/`data-state` — removing it breaks
-  `.disabled-view`'s `table .dropdown-toggle, .dropdown-toggle.btn-icon
-  { display: none }` rule.
+  `.disabled-view`'s `table .dropdown-toggle, .dropdown-toggle.btn-icon { display: none }` rule.
 - **`ActionsDropdownShellProps` vs. `ActionsDropdownProps` are
   deliberately different types.** `ActionsDropdownComponent`'s `...rest`
   spreads onto `RadixDropdownMenu.Content`, a real DOM element — widening
@@ -280,7 +279,7 @@ single primitive in the app.
   search, a plain react-bootstrap `Modal`).
 - **Row-level disabled styling**: a disabled Radix menu item gets
   `pointer-events: none` (`_dropdown.scss`'s `[data-disabled]` rule), so a
-  `Tip`/tooltip explaining *why* a row is disabled must sit on a separate,
+  `Tip`/tooltip explaining _why_ a row is disabled must sit on a separate,
   non-disabled sibling element (e.g. a `QuestionIcon`) rather than wrap the
   disabled item itself — see `UserBulkActions.tsx` for the pattern.
 
@@ -296,7 +295,7 @@ and, pre-migration, were driven by Metronic's imperative `MenuComponent`
   behavior/positioning/accessibility, the existing compiled Metronic CSS
   supplies 100% of appearance. `.menu-sub-dropdown`'s visibility/entrance
   animation is gated by Metronic's own compiled `&.show[data-popper-placement]`
-  rule (Popper.js's attribute — its *presence*, not value, gates
+  rule (Popper.js's attribute — its _presence_, not value, gates
   `display`); `NavMenuContent`/`NavMenuSubContent` set that same class and
   attribute so the rule fires unmodified.
 - **Keyboard highlight bridge is harder than `ActionsDropdown`'s**:
@@ -314,7 +313,7 @@ and, pre-migration, were driven by Metronic's imperative `MenuComponent`
   `.menu-link` specifically — use `NavMenuItem asChild` rather than
   hand-rolling this split.
 - **Plain (non-`NavMenuItem`) content is a first-class case.** Anything
-  that must *not* auto-close the menu on interaction — a settings toggle, a
+  that must _not_ auto-close the menu on interaction — a settings toggle, a
   Copy button — renders as a plain child of `NavMenuContent`, never
   registered with Radix's menu machinery, so its own click handler fires
   undisturbed. This is the header-cluster equivalent of `ActionsPopoverComponent`:
@@ -325,7 +324,7 @@ and, pre-migration, were driven by Metronic's imperative `MenuComponent`
   moment later regardless.
 - **`useHoverMenu()`** reproduces Metronic's
   `data-kt-menu-trigger="{default: 'click', lg: 'hover'}"` (click below
-  `lg`, hover at `lg`+) for *top-level* triggers — Radix's plain
+  `lg`, hover at `lg`+) for _top-level_ triggers — Radix's plain
   `DropdownMenuTrigger` has no hover mode at all (unlike `SubTrigger`,
   which does). `hoverHandlers` are spread onto both trigger and content
   (a `mouseleave` on either alone would close the menu while the pointer
@@ -339,20 +338,20 @@ and, pre-migration, were driven by Metronic's imperative `MenuComponent`
   consolidating what used to be six independently hand-copied
   `side`/`align`/`data-popper-placement`/`className` blocks into one
   implementation. Two `TableFiltersMenu.tsx` call sites are deliberately
-  *not* migrated to it — they need `forceMount` + a custom `container` +
+  _not_ migrated to it — they need `forceMount` + a custom `container` +
   a callback ref, which the simple wrapper doesn't expose, and are already
   the most heavily-tested code in this area; widening the shared shell to
   fit them wasn't worth the added surface.
 - **`useMediaQuery`/`react-responsive` testing gotcha**: this project's
   jsdom has no `window.matchMedia` at all, and `react-responsive` captures
-  whatever it resolves to *at module-import time* — reassigning
+  whatever it resolves to _at module-import time_ — reassigning
   `window.matchMedia` inside a test has no effect. Use `vi.mock('react-responsive',
-  () => ({ useMediaQuery: mockFn }))` instead.
+() => ({ useMediaQuery: mockFn }))` instead.
 
 ### Radix `Popover.Portal` renders outside the local DOM subtree — watch z-index and modal stacking
 
 `Popover.Portal`/`DropdownMenu.Portal` append to `document.body` by default,
-so a portaled panel becomes a *sibling* of whatever DOM ancestor it
+so a portaled panel becomes a _sibling_ of whatever DOM ancestor it
 logically belongs to — not nested under it. Two concrete failure modes to
 check for on any new panel wrapped in a Bootstrap `Modal` or scoped
 container:
@@ -372,7 +371,7 @@ container:
   restore co-location where something outside React depends on it — but
   note the container lookup runs during React's render phase, before
   commit, so it can return `null` on a tree's very first render if the
-  container mounts in the *same* commit as the portaled content.
+  container mounts in the _same_ commit as the portaled content.
 
 ## The sidebar navigation accordion: Collapsible, not Accordion
 
@@ -411,7 +410,7 @@ all).
   var is only re-measured via a real mount/unmount-triggered state update,
   and `forceMount` pins the component permanently "present," turning every
   toggle after the first into a no-op for that measurement. The accepted
-  cost of *not* using `forceMount` is a cross-layer `!important` instead
+  cost of _not_ using `forceMount` is a cross-layer `!important` instead
   (see below) — a narrower, better-understood problem than losing height
   measurement.
 - **Height is measured manually into `useState`, not read from Radix's own
@@ -430,9 +429,9 @@ all).
   exactly once, while `contentRef.current` is still null).
 - **Animate via `animation`/`@keyframes`, not `transition`.** Radix's own
   `CollapsibleContentImpl` synchronously disables (`transitionDuration =
-  '0s'`, `animationName = 'none'`), force-reflows via
+'0s'`, `animationName = 'none'`), force-reflows via
   `getBoundingClientRect()`, then restores — a disable→reflow→restore
-  dance that reliably *restarts* a named `animation` but gives a
+  dance that reliably _restarts_ a named `animation` but gives a
   `transition` nothing to interpolate from (no intervening painted frame
   at the old value). Match Radix's own pattern:
   `animation: kt-menu-accordion-down`/`-up` keyframed against
@@ -451,7 +450,7 @@ all).
     `!important` in `custom/_aside.scss` to win.
   - core's own two `.menu-sub-accordion` `display: none` rules (one
     top-level, one nested inside a breakpoint mixin) also need overriding
-    the same way — apply the override to *both* `open` and `closed`
+    the same way — apply the override to _both_ `open` and `closed`
     states, since Radix's `Presence` keeps the node mounted with
     `data-state="closed"` for the duration of the closing transition
     before actually unmounting, and `display: none` during that window
@@ -459,7 +458,7 @@ all).
 - **Arrow rotation and the open-state highlight key off `[data-state]`,
   not Metronic's `.hover`/`.show` classes** (nothing sets those under
   Radix). Both rules need their own `transition` declared on an
-  *unconditioned* base selector, not only inside the `[data-state='open']`
+  _unconditioned_ base selector, not only inside the `[data-state='open']`
   conditional block — a transition only animates if the element's current
   computed style already declares it, and the moment a conditional
   selector stops matching (closing), `transition` reverts to unset along
@@ -478,13 +477,12 @@ all).
   route match, never the equivalent of `.hide()`, so a route-active section
   the user manually collapsed doesn't reopen until the next matching
   navigation.
-- **`MenuComponent.ts` has been deleted entirely**, along with its
-  `bootstrap()`/`reinitialization()` calls in `MasterInit.tsx`/`MasterLayout.tsx`
-  and its barrel export. Verify before assuming otherwise: a repo-wide grep
-  for `data-kt-menu` should turn up nothing live. `Sidebar.tsx`'s other
-  Metronic widgets (`DrawerComponent`, `ScrollComponent`, `ToggleComponent`
-  — mobile drawer, custom scrollbar, minimize toggle) are unrelated and
-  untouched.
+- **`MenuComponent.ts`, `_SwapperComponent.ts`, and `_ToggleComponent.ts` have been deleted entirely**, along with their
+  `bootstrap()`/`reinitialization()` calls in `MasterInit.tsx`/`Sidebar.tsx`
+  and their barrel exports. The sidebar minimizer toggle in `BrandName.tsx` runs
+  on `@radix-ui/react-toggle`. `Sidebar.tsx`'s remaining Metronic widgets
+  (`DrawerComponent`, `ScrollComponent` — mobile drawer, custom scrollbar)
+  are unrelated and untouched.
 
 ### Testing gotcha: `ResizeObserver` and animation timing
 
@@ -580,7 +578,7 @@ RAM on this machine.)
 3. **Dominant-color chromaticity** (`CHROMATICITY_TOLERANCE = 10`,
    `FOREGROUND_DISTANCE_THRESHOLD = 30`) — closes pixelmatch's blind spot
    on small/text-heavy buttons, where a wrong hue only touches a small pixel
-   fraction. Compares each channel's *share* of brightness (chromaticity),
+   fraction. Compares each channel's _share_ of brightness (chromaticity),
    which cancels uniform antialiasing-driven lighter/darker shifts while
    staying sensitive to an actual hue change.
 

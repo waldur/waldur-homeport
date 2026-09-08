@@ -2,11 +2,7 @@ import classNames from 'classnames';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import { ENV } from '@/core/config';
-import {
-  DrawerComponent,
-  ScrollComponent,
-  ToggleComponent,
-} from '@/metronic/components';
+import { DrawerComponent, ScrollComponent } from '@/metronic/components';
 import { useLayout } from '@/metronic/layout/core';
 import { useTheme } from '@/theme/useTheme';
 
@@ -20,7 +16,6 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
 
   useEffect(() => {
     if (sidebarRef?.current) {
-      ToggleComponent.reinitialization();
       DrawerComponent.reinitialization();
       ScrollComponent.reinitialization();
     }
