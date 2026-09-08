@@ -27,6 +27,7 @@ import { getLabel } from '../common/registry';
 
 import { RequestAccessButton } from './access/RequestAccessButton';
 import { OfferingStateActions } from './actions/OfferingStateActions';
+import { AskAboutOfferingButton } from './AskAboutOfferingButton';
 import { OfferingPriceSummary } from './details/OfferingPriceSummary';
 import { OfferingAccessButton } from './OfferingAccessButton';
 import { OfferingExtraActionsButton } from './OfferingExtraActionsButton';
@@ -265,6 +266,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 }
               />
             )}
+            {props.isPublic && <AskAboutOfferingButton offering={offering} />}
             {props.isPublic && <OfferingSupportButton offering={offering} />}
             <OfferingAccessButton offering={offering} />
             {isEditPage && (

@@ -7,6 +7,7 @@ import {
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
+import { useComposerSeed } from '@/ai-assistant/hooks/useComposerSeed';
 import { AlertItem } from '@/core/AlertItem';
 import { translate } from '@/i18n';
 
@@ -33,6 +34,8 @@ export const AssistantComposer: FC<Props> = ({
   hideDisclaimer,
   disabled,
 }) => {
+  useComposerSeed();
+
   const isEmpty = useAuiState(({ thread }) => thread.messages.length === 0);
   // With no leading actions, right-align Send/Stop so they don't hug the input.
   const alignEnd = !leadingActions;
