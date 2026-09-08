@@ -67,7 +67,7 @@ describe('UserDeleteButton', () => {
     vi.mocked(useModal().confirm).mockResolvedValueOnce(null);
     vi.mocked(usersDestroy).mockResolvedValueOnce(null);
 
-    renderWithProviders(<UserDeleteButton row={row} />);
+    renderWithProviders(inActionsMenu(<UserDeleteButton row={row} />));
     await user.click(screen.getByText('Delete'));
 
     await waitFor(() => expect(useModal().confirm).toHaveBeenCalled());
@@ -81,9 +81,11 @@ describe('UserDeleteButton', () => {
     vi.mocked(usersDestroy).mockResolvedValueOnce(null);
 
     renderWithProviders(
-      <UserDeleteButton
-        row={{ uuid: 'row-uuid', full_name: '', username: 'jdoe' } as any}
-      />,
+      inActionsMenu(
+        <UserDeleteButton
+          row={{ uuid: 'row-uuid', full_name: '', username: 'jdoe' } as any}
+        />,
+      ),
     );
     await user.click(screen.getByText('Delete'));
 
@@ -95,7 +97,7 @@ describe('UserDeleteButton', () => {
     vi.mocked(useModal().confirm).mockResolvedValueOnce(null);
     vi.mocked(usersDestroy).mockRejectedValueOnce(new Error('nope'));
 
-    renderWithProviders(<UserDeleteButton row={row} />);
+    renderWithProviders(inActionsMenu(<UserDeleteButton row={row} />));
     await user.click(screen.getByText('Delete'));
 
     await waitFor(() => {
@@ -105,7 +107,9 @@ describe('UserDeleteButton', () => {
 
   it('does not offer an immediate delete for another staff account', async () => {
     renderWithProviders(
-      <UserDeleteButton row={{ ...row, is_staff: true } as any} />,
+      inActionsMenu(
+        <UserDeleteButton row={{ ...row, is_staff: true } as any} />,
+      ),
     );
 
     await user.click(screen.getByText('Delete'));
