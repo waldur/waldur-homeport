@@ -5,7 +5,7 @@ import { PublicOfferingDetails, Offering } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
-import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { formatIntField, parseNumberField } from '@/marketplace/common/utils';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 
 import { ComponentRow, ComponentRow2 } from './ComponentRow';
@@ -39,6 +39,7 @@ const RowWrapper = (
     ) : (
       <Form.Control
         type="number"
+        step="any"
         min={props.offeringComponent.min_value || 0}
         max={props.offeringComponent.max_value}
         {...props.input}
@@ -57,7 +58,7 @@ export const ComponentEditRow: React.FC<ComponentEditRowProps> = (props) => {
   return (
     <Field
       name={`limits.${props.component.type}`}
-      parse={parseIntField}
+      parse={parseNumberField}
       format={formatIntField}
       validate={validateValue}
       component={RowWrapper}
@@ -109,7 +110,7 @@ export const ComponentEditRow2: React.FC<ComponentEditRowProps> = (props) => {
   return (
     <Field
       name={`limits.${props.component.type}`}
-      parse={parseIntField}
+      parse={parseNumberField}
       format={formatIntField}
       validate={validateValue}
       component={RowWrapper2}

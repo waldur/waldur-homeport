@@ -7,17 +7,30 @@ import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
 export const parseIntField = (value) => parseInt(value, 10) || 0;
+// Component limits can be fractional -- a storage tier measured in TiB may
+// be 0.1 -- so they get their own parser. parseIntField stays integer-only
+// for its other callers: node counts, vCPUs, prepaid durations. A trailing
+// separator is handed straight back, because react-final-form re-parses on
+// every keystroke and collapsing "0." to 0 makes a decimal point impossible
+// to type.
+export const parseNumberField = (value) => {
+  if (value === '' || value === null || value === undefined) return 0;
+  const text = String(value).replace(',', '.');
+  if (text.endsWith('.')) return text;
+  const parsed = parseFloat(text);
+  return Number.isFinite(parsed) ? parsed : 0;
+};
 export const formatIntField = (value) => (value ? value.toString() : 0);
 export const validateNonNegative = (value) =>
   value < 0 ? translate('Value should not be negative.') : undefined;
 
 export const maxAmount = (limit) => (value) =>
-  parseInt(value, 10) > parseInt(limit, 10)
+  parseFloat(value) > parseFloat(limit)
     ? translate('Value should not be greater than {limit}.', { limit })
     : undefined;
 
 export const minAmount = (limit) => (value) =>
-  parseInt(value, 10) < parseInt(limit, 10)
+  parseFloat(value) < parseFloat(limit)
     ? translate('Value should not be lesser than {limit}.', { limit })
     : undefined;
 
