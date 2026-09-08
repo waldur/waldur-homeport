@@ -5935,12 +5935,6 @@
       "feature_area": "anonymous"
     }
   },
-  "Ask about this service": {
-    "context": {
-      "primary_ui_type": "action_button",
-      "feature_area": "offerings"
-    }
-  },
   "Ask for the end date of this resource to be changed. Someone who can change it will review your request.": {
     "context": {
       "feature_area": "request-end-date-change"
@@ -5949,11 +5943,6 @@
   "Ask me anything…": {
     "context": {
       "feature_area": "ai-assistant"
-    }
-  },
-  "Ask the AI assistant": {
-    "context": {
-      "feature_area": "header"
     }
   },
   "Ask the model…": {
@@ -11195,11 +11184,6 @@
       "primary_ui_type": "submit_button",
       "feature_area": "setup",
       "action_type": "create"
-    }
-  },
-  "Continue conversation": {
-    "context": {
-      "feature_area": "header"
     }
   },
   "Continue review": {
@@ -32920,6 +32904,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Open AI assistant": {
+    "context": {
+      "feature_area": "header"
+    }
+  },
   "Open calls": {
     "context": {
       "feature_area": "proposals"
@@ -50198,19 +50187,6 @@
     }
   },
   "Telemetry service version.": {},
-  "Tell me about {offering} by {organization}. Is this service right for me?": {
-    "context": {
-      "variables": {
-        "offering": {
-          "type": "unknown"
-        },
-        "organization": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "offerings"
-    }
-  },
   "Tell me what you need and I will help you find the best offering in the marketplace.": {
     "context": {
       "feature_area": "anonymous"
