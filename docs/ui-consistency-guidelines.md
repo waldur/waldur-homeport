@@ -19,6 +19,7 @@ This document provides comprehensive guidelines for maintaining UI/UX consistenc
 13. [Report Filters](#13-report-filters)
 14. [Chart Composition](#14-chart-composition)
 15. [Report Page Layout](#15-report-page-layout)
+16. [Prices and Computed Totals](#16-prices-and-computed-totals)
 
 ---
 
@@ -1401,6 +1402,77 @@ module.exports = {
 ### State label placement
 
 Use existing label hierarchy from current mocks. Mocks must follow the same placement used in existing pages. Do not introduce new state layouts.
+
+---
+
+## 16. Prices and Computed Totals
+
+### Never make the reader do the arithmetic
+
+If a screen shows charges that add up to something the user cares about, show the
+sum. A list of line items with no total is an unfinished screen.
+
+### Where the total goes, relative to its line items
+
+The job the number does decides the placement:
+
+- **The total drives a choice** — a catalogue price, a plan comparison, anything
+  the user reads in order to pick. The total **leads**: it is the first thing in
+  its column or block, and the line items below explain how it was reached.
+- **The total confirms a calculation** — an order summary, an invoice, a cart.
+  The total **follows**: the user has already read the line items and the sum
+  closes them out.
+
+Either way the total and its line items are on the same screen. A total behind a
+tab, an accordion or a dialog is a total the decision was made without.
+
+```tsx
+// ❌ BAD — line items only; the reader sums four rows to learn the price
+<FormTable>
+  <ComponentRow component={managementFee} />
+  <ComponentRow component={cpu} />
+</FormTable>
+
+// ✅ GOOD — deciding: the total leads its line items
+<Table
+  {...tableProps}
+  columns={[componentColumn, ...planColumns]}
+  // rows = [ totalRow, ...componentRows ]
+/>
+
+// ✅ GOOD — verifying: the total closes the line items
+<FormTable>
+  <ComponentRow component={cpu} />
+  <ComponentRowTotal amount={total} period="monthly" />
+</FormTable>
+```
+
+### A floor must be labelled as a floor
+
+When the figure is only what the user pays before sizing anything, or before
+metered usage, say so **in the label** — `Starting price`, `From €20.00` — not in
+a footnote below the fold. `Price: €20.00` next to components charged per unit is
+a wrong number, not a rounded one.
+
+### Comparable options go side by side
+
+Plans, tiers and any other set of alternatives the user is choosing between are
+laid out in parallel columns, never in tabs. Two options that are never on screen
+together cannot be compared. Reference:
+`src/marketplace/offerings/details/PlanComparison.tsx`.
+
+### Price belongs next to the primary action
+
+A page whose primary call to action is a purchase or a request shows the entry
+price adjacent to that button, with a link into the full breakdown. Reference:
+`src/marketplace/offerings/details/OfferingPriceSummary.tsx`.
+
+### Labels must not undercut what is on screen
+
+Do not name an action in a way that implies the visible content is partial —
+`Download full price list` next to a price list tells the reader that the list
+they are looking at is not the full one. Name the format or the destination
+instead: `Export price list`.
 
 ---
 

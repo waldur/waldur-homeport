@@ -607,7 +607,10 @@ Trigger integration tests:
     - job: Publish latest docker image
       optional: true
   # TRIGGER_SOURCE lets the downstream E2E suite skip backend-only jobs
-  # (ansible, mitogen, SCIM, OIDC, GLAuth) that a frontend change cannot affect.
+  # (ansible, mitogen, terraform, SCIM, GLAuth, OpenPortal, waldur-cli) that
+  # drive the Mastermind API directly and start no browser. The OIDC suite is
+  # NOT among them: it drives the homeport login page in Playwright, so it runs
+  # on our triggers and a frontend change can break it.
   variables:
     TRIGGER_SOURCE: homeport
   # Only run E2E when a change can actually affect the built frontend image.

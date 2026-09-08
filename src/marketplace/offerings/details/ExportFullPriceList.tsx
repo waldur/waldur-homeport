@@ -88,7 +88,7 @@ export const ExportFullPriceList: FunctionComponent<
           variant="tertiary"
           action={() => onExport(offering.name, components)}
           iconNode={<DownloadSimpleIcon weight="bold" />}
-          title={translate('Download full price list')}
+          title={translate('Export price list')}
         />
       ) : null}
     </div>
