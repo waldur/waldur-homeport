@@ -1,10 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import {
-  DrawerComponent,
-  ScrollComponent,
-  ToggleComponent,
-} from '../components';
+import { DrawerComponent, ScrollComponent } from '../components';
 
 import { useLayout } from './core/LayoutProvider';
 
@@ -14,7 +10,6 @@ export function MasterInit() {
   const pluginsInitialization = () => {
     isFirstRun.current = false;
     setTimeout(() => {
-      ToggleComponent.bootstrap();
       DrawerComponent.bootstrap();
       ScrollComponent.bootstrap();
     }, 500);

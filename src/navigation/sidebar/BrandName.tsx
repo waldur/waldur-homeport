@@ -1,5 +1,6 @@
 import { SquaresFourIcon, ArrowSquareOutIcon } from '@phosphor-icons/react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as RadixToggle from '@radix-ui/react-toggle';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useCallback, useState, useEffect } from 'react';
 import { externalLinksList } from 'waldur-js-client';
@@ -81,15 +82,20 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
   const shortcuts = shortcutsResponse || [];
 
   // switch aside.minimized to keep sidebar state between pages
-  const toggleSidebar = useCallback(() => {
-    setUserHasToggled(true);
-    layout.setLayout({
-      aside: {
-        ...layout.config.aside,
-        minimized: !layout.config.aside.minimized,
-      },
-    });
-  }, [layout]);
+  const toggleSidebar = useCallback(
+    (pressed?: boolean) => {
+      setUserHasToggled(true);
+      const nextMinimized =
+        typeof pressed === 'boolean' ? pressed : !layout.config.aside.minimized;
+      layout.setLayout({
+        aside: {
+          ...layout.config.aside,
+          minimized: nextMinimized,
+        },
+      });
+    },
+    [layout],
+  );
 
   const sidebarLogoUrl = getIconUrl('sidebar_logo');
   const sidebarLogoMobileUrl = getIconUrl('sidebar_logo_mobile');
@@ -197,20 +203,22 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
       </Link>
       {/* Minimizer Toggle */}
       <div className="min-w-24px">
-        <div
+        <RadixToggle.Root
           id="kt_aside_toggle"
           className="btn btn-icon btn-sm border-0 w-24px"
-          data-kt-toggle="true"
-          data-kt-toggle-state="active"
-          data-kt-toggle-target="body"
-          data-kt-toggle-name="aside-minimize"
-          aria-hidden="true"
-          onClick={toggleSidebar}
+          pressed={Boolean(layout.config.aside.minimized)}
+          onPressedChange={toggleSidebar}
+          aria-label={
+            layout.config.aside.minimized
+              ? translate('Expand sidebar')
+              : translate('Collapse sidebar')
+          }
+          style={{ outline: 'none', boxShadow: 'none' }}
         >
           <span className="svg-icon svg-icon-1x">
             <SidebarToggleGraphic width={24} height={25} />
           </span>
-        </div>
+        </RadixToggle.Root>
       </div>
     </div>
   );
