@@ -20413,16 +20413,6 @@
       "feature_area": "reviewer-pool"
     }
   },
-  "Force destroy": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
-  "Force destroy instance": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
   "Force import": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -23363,8 +23353,6 @@
       "feature_area": "openstack-instance"
     }
   },
-  "Instance should be OK, or erred. Please contact support.": {},
-  "Instance should be shutoff and OK or erred. Please contact support.": {},
   "Instances": {
     "context": {
       "primary_ui_type": "title",
@@ -36310,7 +36298,6 @@
   },
   "Please start instance first.": {},
   "Please stop the instance before changing its flavor.": {},
-  "Please stop the instance before its removal.": {},
   "Please try again": {
     "context": {
       "feature_area": "search"
@@ -51076,6 +51063,7 @@
       "feature_area": "import"
     }
   },
+  "The instance will be stopped if it is running. Existing backups and volume snapshots will be deleted.": {},
   "The invoice has been marked as paid.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -55673,12 +55661,6 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "pubsub"
-    }
-  },
-  "Unable to destroy instance.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "actions"
     }
   },
   "Unable to detach floating IP.": {

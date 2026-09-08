@@ -192,11 +192,6 @@ $mobile-breadcrumb-height: get(
     .hero-enabled.toolbar-tablet-and-mobile-fixed & {
       position: sticky;
     }
-
-    // Page title
-    .page-title[data-kt-swapper='true'] {
-      display: none !important;
-    }
   }
 
   .extra-toolbar {

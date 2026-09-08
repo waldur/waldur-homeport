@@ -4,7 +4,6 @@ import {
   DrawerComponent,
   ScrollComponent,
   ToggleComponent,
-  SwapperComponent,
 } from '../components';
 
 import { useLayout } from './core/LayoutProvider';
@@ -18,7 +17,6 @@ export function MasterInit() {
       ToggleComponent.bootstrap();
       DrawerComponent.bootstrap();
       ScrollComponent.bootstrap();
-      SwapperComponent.bootstrap();
     }, 500);
   };
 
