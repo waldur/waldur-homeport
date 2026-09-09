@@ -13,6 +13,8 @@ import { hasSupport as hasSupportSelector } from '@/issues/hooks';
 import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
+import { useMobileSidebar } from '../context';
+
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { LLMChatDrawerToggle } from './LLMChatDrawerToggle';
@@ -20,24 +22,29 @@ import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './search/SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
-const AsideMobileToggle: FunctionComponent = () => (
-  <Tip
-    label={translate('Toggle navigation menu')}
-    id="aside-mobile-toggle"
-    placement="bottom"
-  >
-    <button
-      className="btn-nav-item me-1"
-      id="kt_aside_mobile_toggle"
-      type="button"
-      aria-label={translate('Toggle navigation menu')}
+const AsideMobileToggle: FunctionComponent = () => {
+  const { mobileSidebarOpen, setMobileSidebarOpen } = useMobileSidebar();
+  return (
+    <Tip
+      label={translate('Toggle navigation menu')}
+      id="aside-mobile-toggle"
+      placement="bottom"
     >
-      <span className="svg-icon svg-icon-1x">
-        <ListIcon weight="bold" />
-      </span>
-    </button>
-  </Tip>
-);
+      <button
+        className="btn-nav-item me-1"
+        id="kt_aside_mobile_toggle"
+        type="button"
+        aria-label={translate('Toggle navigation menu')}
+        aria-expanded={mobileSidebarOpen}
+        onClick={() => setMobileSidebarOpen?.((prev) => !prev)}
+      >
+        <span className="svg-icon svg-icon-1x">
+          <ListIcon weight="bold" />
+        </span>
+      </button>
+    </Tip>
+  );
+};
 
 interface AppHeaderProps {
   hasBreadcrumbs?: boolean;

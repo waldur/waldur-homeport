@@ -46,6 +46,31 @@
 .aside {
   border-right: get($aside-config, border-right);
 
+  // Radix's ScrollArea.Viewport wraps its children in its own internal
+  // `display: table; min-width: 100%` div (no stable class to target —
+  // this is Radix's own implementation, only reachable as the Viewport's
+  // first child) so wide content can be horizontally scrolled. Nothing in
+  // the sidebar menu is meant to scroll horizontally, but a `display:
+  // table` box grows past an explicit `width` when it holds unsplittable
+  // content (e.g. a `white-space: nowrap` span) — a CSS table-sizing rule
+  // an `!important` width alone can't defeat, so `width: 100% !important`
+  // on its own was not enough. `overflow-x: hidden` on the Viewport then
+  // only clips the *rendered pixels* of that overgrown box rather than
+  // constraining the width `text-overflow: ellipsis` needs to actually
+  // engage — e.g. the resources filter chip's org/project name got
+  // cropped mid-word instead of truncating cleanly, and every sibling
+  // menu item was forced to that same inflated width along with it (both
+  // on the desktop sidebar and the mobile drawer, so this rule must stay
+  // unscoped by breakpoint — it was first added inside a `lg`-and-up-only
+  // block in layout/aside/_base.scss and silently did nothing below `lg`).
+  // Overriding `display` to `block` removes the table-sizing behavior
+  // entirely, so the accompanying `width: 100%` finally holds and the
+  // whole menu column has a real horizontal constraint to shrink against.
+  #kt_aside_menu_wrapper > div {
+    display: block !important;
+    width: 100% !important;
+  }
+
   .aside-scroll-scrollbar {
     display: flex;
     user-select: none;

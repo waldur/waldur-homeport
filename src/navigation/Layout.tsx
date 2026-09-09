@@ -1,6 +1,12 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
-import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useSelector } from 'react-redux';
 
 import { ImpersonationBar } from '@/administration/ImpersonationBar';
@@ -46,6 +52,13 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const [ExtraAnnouncementBar, setExtraAnnouncementBar] =
     useState<React.ReactNode>(null);
   const [ExtraToolbar, setExtraToolbar] = useState<React.ReactNode>(null);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
+
+  useEffect(() => {
+    setMobileSidebarOpen(false);
+  }, [state]);
+
   const context = useMemo<Partial<LayoutContextInterface>>(
     () => ({
       setActions,
@@ -59,6 +72,9 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setBreadcrumbs,
       breadcrumbs,
       setExtraToolbar,
+      mobileSidebarOpen,
+      setMobileSidebarOpen,
+      closeMobileSidebar,
     }),
     [
       setActions,
@@ -72,6 +88,8 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setBreadcrumbs,
       breadcrumbs,
       setExtraToolbar,
+      mobileSidebarOpen,
+      closeMobileSidebar,
     ],
   );
 

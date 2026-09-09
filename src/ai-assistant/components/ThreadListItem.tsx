@@ -40,6 +40,24 @@ const ThreadItemMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => (
 ));
 ThreadItemMenuToggle.displayName = 'ThreadItemMenuToggle';
 
+// @radix-ui/react-dialog and @radix-ui/react-dropdown-menu each bundle
+// their own separate nested copy of @radix-ui/react-focus-scope (different
+// node_modules paths despite matching version numbers), so they don't
+// coordinate focus with each other. This menu only ever renders inside the
+// content drawer's Dialog (ChatHistorySidebar → LLMChatDrawer → #kt_drawer),
+// whose own focus trap is active while the drawer is open — the instant
+// this Trigger's default document.body portal tries to move focus into its
+// portaled Content, the Dialog's focus trap (via a DOM `contains()` check
+// against its own container, which the default portal escapes) snaps focus
+// straight back to whatever was focused before, and DropdownMenu reads that
+// as "focus left me" and closes itself in the same tick — reported live as
+// "opens and instantly closes." Anchoring the portal back inside #kt_drawer
+// keeps the menu's content within the Dialog's own focus boundary. Falls
+// back to Radix's own default (document.body) wherever the drawer isn't
+// present — Storybook/tests that don't render the real layout shell.
+const getThreadItemMenuPortalContainer = () =>
+  document.getElementById('kt_drawer') ?? undefined;
+
 const ThreadItemMenu: FC<ThreadItemMenuProps> = ({
   threadId,
   onAction,
@@ -52,7 +70,9 @@ const ThreadItemMenu: FC<ThreadItemMenuProps> = ({
         <RadixDropdownMenu.Trigger asChild>
           <ThreadItemMenuToggle />
         </RadixDropdownMenu.Trigger>
-        <RadixDropdownMenu.Portal>
+        <RadixDropdownMenu.Portal
+          container={getThreadItemMenuPortalContainer()}
+        >
           <RadixDropdownMenu.Content
             align="end"
             sideOffset={2}

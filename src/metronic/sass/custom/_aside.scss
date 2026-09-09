@@ -154,9 +154,18 @@
         width: 100%;
         padding: 0.55rem get($aside-config, padding-x);
 
+        // Flex items default to `min-width: auto`, which lets `white-space:
+        // nowrap` text (the .ellipsis span) demand its full intrinsic width
+        // regardless of `.filter-item`'s own 100% cap — so `text-overflow:
+        // ellipsis` never actually engages, and this row (and the whole
+        // menu column with it, since they share a flex ancestor) gets
+        // forced wider than the sidebar itself. `min-width: 0` lets the
+        // badge shrink to the row's available space so its own ellipsis
+        // can take effect.
         .badge {
           display: inline-flex;
           align-items: center;
+          min-width: 0;
         }
       }
     }
@@ -498,6 +507,27 @@ $custom-aside: (
           }
         }
       }
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .aside.drawer-mobile {
+    display: flex !important;
+    overflow: auto;
+    z-index: get($drawer, z-index);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 250px;
+    max-width: 80vw;
+    transform: translateX(-100%);
+    transition: transform get($drawer, transition-speed) ease-in-out;
+
+    &.drawer-mobile-on {
+      transform: none;
+      box-shadow: get($drawer, box-shadow);
     }
   }
 }

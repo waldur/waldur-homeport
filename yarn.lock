@@ -19928,6 +19928,7 @@ __metadata:
     "@playwright/test": "npm:^1.58.0"
     "@popperjs/core": "npm:~2.10.1"
     "@radix-ui/react-collapsible": "npm:^1.1.20"
+    "@radix-ui/react-dialog": "npm:^1.1.23"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.24"
     "@radix-ui/react-popover": "npm:^1.1.19"
     "@radix-ui/react-scroll-area": "npm:^1.2.14"

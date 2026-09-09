@@ -3,7 +3,7 @@
 }
 
 .aui-root.aui-thread-root,
-[data-kt-drawer] .aui-root.aui-thread-root {
+#kt_drawer .aui-root.aui-thread-root {
   box-sizing: border-box;
   display: flex !important;
   flex-direction: column !important;
@@ -218,7 +218,7 @@
 }
 
 .aui-composer-wrapper,
-[data-kt-drawer] .aui-composer-wrapper {
+#kt_drawer .aui-composer-wrapper {
   width: 100%;
   margin-top: auto !important;
   padding: 0 16px 16px 16px;
