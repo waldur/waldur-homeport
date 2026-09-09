@@ -207,10 +207,7 @@ const useComposerDraftPersistence = () => {
 
   useEffect(() => {
     const saved = getComposerDraft(currentThreadId);
-    // Only restore into an empty composer. On a remount it always is — except
-    // when an entry point seeded a question (useComposerSeed runs first, in the
-    // child), and that context must win over a stale draft.
-    if (saved && !composerRuntime.getState().text) {
+    if (saved && composerRuntime.getState().text !== saved) {
       composerRuntime.setText(saved);
     }
 
