@@ -19,9 +19,13 @@ const mockRouter = {
   ports: [{ subnet_uuid: 'sub-existing' }],
 };
 
+const refetch = vi.fn();
+
 const renderDialog = () => {
   return renderWithProviders(
-    <AddRouterInterfaceDialog resolve={{ router: mockRouter as any }} />,
+    <AddRouterInterfaceDialog
+      resolve={{ router: mockRouter as any, refetch }}
+    />,
   );
 };
 
@@ -92,6 +96,9 @@ describe('AddRouterInterfaceDialog', () => {
       'Router interface was added.',
     );
     expect(useModal().closeDialog).toHaveBeenCalled();
+    // The new interface adds a fixed IP to the router; without this the table
+    // keeps showing the old value until the page is reloaded.
+    expect(refetch).toHaveBeenCalled();
   });
 
   it('submits correctly when adding port interface', async () => {

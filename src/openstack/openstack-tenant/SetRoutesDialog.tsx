@@ -17,6 +17,7 @@ import { StaticRoutesTable } from './StaticRoutesTable';
 interface OwnProps {
   resolve: {
     router: OpenStackRouter;
+    refetch?: () => void;
   };
 }
 
@@ -33,8 +34,10 @@ export const SetRoutesDialog = ({ resolve }: OwnProps) => {
           routes: formData.routes || [],
         },
       }),
+
     successMessage: translate('Static routes update was scheduled.'),
     errorMessage: translate('Unable to update static routes.'),
+    refetch: resolve.refetch,
   });
 
   return (

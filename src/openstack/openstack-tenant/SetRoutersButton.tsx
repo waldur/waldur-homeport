@@ -15,12 +15,14 @@ const SetRoutesDialog = lazyComponent(() =>
 
 export const SetRoutersButton: ActionItemType<OpenStackRouter> = ({
   resource,
+  refetch,
 }) => {
   const { openDialog: openModal } = useModal();
   const openDialog = () =>
     openModal(SetRoutesDialog, {
       resolve: {
         router: resource,
+        refetch,
       },
     });
   return (

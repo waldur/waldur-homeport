@@ -31051,6 +31051,11 @@
       "feature_area": "proposals"
     }
   },
+  "No routers": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "No routes — attach an interface or set a gateway to populate this table.": {
     "context": {
       "feature_area": "openstack-tenant"
@@ -44222,7 +44227,7 @@
   },
   "Router": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "modal"
     }
   },
@@ -44246,6 +44251,11 @@
   "Router port backend ID": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "Router to attach the subnet to. Leave empty to let Waldur pick one.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Router was removed.": {
@@ -68468,6 +68478,17 @@
         }
       },
       "feature_area": "managed-projects"
+    }
+  },
+  "{router} (disconnected)": {
+    "context": {
+      "variables": {
+        "router": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "openstack-subnet",
+      "action_type": "navigate"
     }
   },
   "{scopeName} credit usage history": {
