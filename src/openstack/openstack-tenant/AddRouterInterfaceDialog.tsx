@@ -18,7 +18,11 @@ const typeChoices = [
   { value: 'port', label: translate('Port') },
 ];
 
-export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
+export const AddRouterInterfaceDialog = ({
+  // refetchTable, not refetch: the dialog already has a react-query refetch of
+  // its own for the subnet/port options below.
+  resolve: { router, refetch: refetchTable },
+}) => {
   const mutation = useManagedMutation<
     any,
     any,
@@ -37,10 +41,14 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
     },
     successMessage: translate('Router interface was added.'),
     errorMessage: translate('Unable to add router interface.'),
+    refetch: refetchTable,
   });
 
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['AddRouterInterface', router.tenant_uuid],
+    // router.uuid, not just the tenant: the port options exclude the subnets
+    // this router already serves, so two routers of one tenant would otherwise
+    // share a cache entry and offer each other's subnets.
+    queryKey: ['AddRouterInterface', router.tenant_uuid, router.uuid],
 
     queryFn: async () => {
       const subnets = (

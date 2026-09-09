@@ -12,6 +12,10 @@ export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
     <>
       <Component label={translate('Network')} value={resource.network_name} />
       <Component
+        label={translate('Router')}
+        value={renderFieldOrDash(resource.router_name)}
+      />
+      <Component
         label={translate('CIDR')}
         value={formatDefault(resource.cidr)}
         valueClass="ellipsis"

@@ -37,6 +37,7 @@ const BodyComponent = (router, setOption) => {
 
 export const RemoveRouterInterfaceButton: ActionItemType<OpenStackRouter> = ({
   resource,
+  refetch,
 }) => {
   const { confirm } = useModal();
   const { showInfo } = useNotify();
@@ -49,6 +50,7 @@ export const RemoveRouterInterfaceButton: ActionItemType<OpenStackRouter> = ({
       }),
     successMessage: translate('Router interface was removed.'),
     errorMessage: translate('Unable to remove router interface.'),
+    refetch,
   });
 
   const removeInterface = async () => {

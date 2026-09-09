@@ -10,6 +10,7 @@ import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
 import { ResourceState } from '@/resource/state/ResourceState';
 import { ResourceSummary } from '@/resource/summary/ResourceSummary';
 import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -45,6 +46,11 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
         'ip_version',
         'project_uuid',
         'backend_id',
+        'router_name',
+        'router_uuid',
+        // Both the summary's "Enabled default gateway" and the Router column
+        // below read this; without it the summary said No for every subnet.
+        'is_connected',
       ],
     }),
     [resourceScope],
@@ -71,6 +77,24 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('CIDR'),
           render: ({ row }) => row.cidr,
+        },
+        {
+          title: translate('Router'),
+          // The router survives a disconnect on purpose -- it is what a
+          // reconnect returns the subnet to -- so the column has to say which
+          // of the two it is showing rather than assert a live attachment.
+          render: ({ row }) =>
+            !row.router_name ? (
+              <>{DASH_ESCAPE_CODE}</>
+            ) : row.is_connected ? (
+              <>{row.router_name}</>
+            ) : (
+              <span className="text-muted">
+                {translate('{router} (disconnected)', {
+                  router: row.router_name,
+                })}
+              </span>
+            ),
         },
         {
           title: translate('State'),
