@@ -15500,6 +15500,11 @@
     }
   },
   "Do not allow user to accept multiple roles within the same scope (project or organization) using invitation. When enabled, users can still accept invitations to different scopes but cannot have multiple roles in the same scope.": {},
+  "Do not attach to a router": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Do not render prices in order details.": {
     "context": {
       "feature_area": "features"
@@ -51610,6 +51615,11 @@
   "The starting price covers what the plan fixes. Components you size yourself and metered usage are charged on top, at the rates above.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "The subnet is created but left unrouted. Attach it later from a router, or connect it from the subnet itself.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "The support user has been activated.": {
