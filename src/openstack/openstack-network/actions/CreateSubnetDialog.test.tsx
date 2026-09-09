@@ -49,6 +49,58 @@ describe('CreateSubnetDialog', () => {
     vi.clearAllMocks();
   });
 
+  it('does not submit while the required fields are empty', async () => {
+    const user = userEvent.setup();
+    renderDialog(fakeResource, true);
+
+    const submit = screen.getByRole('button', { name: /Submit/i });
+    expect(submit).toBeDisabled();
+
+    await user.click(submit);
+    expect(openstackNetworksCreateSubnet).not.toHaveBeenCalled();
+  });
+
+  it('puts a backend validation error under the field it belongs to', async () => {
+    const user = userEvent.setup();
+    // The shape waldur-auth-core's interceptor produces: the response body
+    // spread onto the error, with the envelope alongside it.
+    vi.mocked(openstackNetworksCreateSubnet).mockRejectedValue({
+      cidr: ['Subnet with cidr "192.168.42.0/24" is already registered'],
+      status: 400,
+      statusText: '',
+      response: {},
+    });
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Name/), 'clashing-subnet');
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    expect(
+      await screen.findByText(
+        'Subnet with cidr "192.168.42.0/24" is already registered',
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it('shows a non-field error above the form', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackNetworksCreateSubnet).mockRejectedValue({
+      non_field_errors: ['Internal network cannot have more than one subnet.'],
+      status: 400,
+      response: {},
+    });
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Name/), 'second-subnet');
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    expect(
+      await screen.findByText(
+        'Internal network cannot have more than one subnet.',
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('renders correct title and fields', () => {
     renderDialog();
     expect(screen.getByText('Create subnet')).toBeInTheDocument();
@@ -167,6 +219,51 @@ describe('CreateSubnetDialog', () => {
         }),
       });
     });
+  });
+
+  it('hides the router select while the subnet is created unrouted', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackRoutersList).mockResolvedValue(
+      mockListResponse(fakeRouters),
+    );
+    vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
+    renderDialog();
+
+    expect(screen.getByText('Router')).toBeInTheDocument();
+
+    await user.click(screen.getByLabelText('Do not attach to a router'));
+
+    await waitFor(() => {
+      expect(screen.queryByText('Router')).not.toBeInTheDocument();
+    });
+
+    await user.type(screen.getByLabelText(/Name/), 'unrouted-subnet');
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    await waitFor(() => {
+      expect(openstackNetworksCreateSubnet).toHaveBeenCalledWith({
+        path: { uuid: 'network-uuid' },
+        body: expect.objectContaining({
+          name: 'unrouted-subnet',
+          skip_router_connection: true,
+        }),
+      });
+    });
+  });
+
+  it('does not send the flag when the switch is left alone', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Name/), 'routed-by-default');
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    await waitFor(() => {
+      expect(openstackNetworksCreateSubnet).toHaveBeenCalled();
+    });
+    const body = vi.mocked(openstackNetworksCreateSubnet).mock.calls[0][0].body;
+    expect('skip_router_connection' in (body as object)).toBe(false);
   });
 
   it('hides the router select while the gateway is disabled', async () => {

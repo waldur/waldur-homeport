@@ -1,9 +1,13 @@
+import { FORM_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
 import { FC, useEffect, useMemo } from 'react';
 import { Form, useForm, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { openstackNetworksCreateSubnet } from 'waldur-js-client';
 
+import { DirtyStateReporter } from '@/core/DirtyFormContext';
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
+import { required } from '@/core/validators';
 import {
   AsyncSelectGroup,
   BooleanGroup,
@@ -41,6 +45,38 @@ type CreateSubnetFormData = {
   host_routes?: any[];
   dns_nameservers?: any[];
   router?: { url: string };
+  skip_router_connection?: boolean;
+};
+
+/** Turn a DRF validation body into react-final-form submit errors.
+ *
+ * The API answers a bad create with `{"cidr": ["..."], "non_field_errors":
+ * [...]}`, and every key but the last is a field of this form, so each message
+ * can go under its own control instead of only into a toast. FormGroup already
+ * renders `meta.submitError`; nothing but the mapping was missing.
+ */
+// Module scope, deliberately: react-final-form re-initialises the form whenever
+// the `initialValues` identity changes, so an object literal here wipes whatever
+// the user has typed on any parent re-render -- and the dialog now has one, since
+// reporting dirtiness sets state in ModalRoot.
+const INITIAL_VALUES = {
+  cidr: '192.168.42.0/24',
+  allocation_pools: [{ start: '192.168.42.10', end: '192.168.42.200' }],
+};
+
+const toSubmitErrors = (error: unknown) => {
+  const body = getErrorBody(error);
+  if (!body) return undefined;
+  const errors: Record<string, any> = {};
+  Object.entries(body).forEach(([field, value]) => {
+    const message = Array.isArray(value) ? value.join(' ') : value;
+    if (field === 'non_field_errors' || field === 'detail') {
+      errors[FORM_ERROR] = message;
+    } else {
+      errors[field] = message;
+    }
+  });
+  return Object.keys(errors).length ? errors : undefined;
 };
 
 /** The routers on offer are those of the tenant that owns the *network*, which
@@ -61,7 +97,11 @@ const RouterField: FC<{
   const tenantUuid = showNetworkField
     ? (values.network as any)?.tenant_uuid
     : networkTenantUuid;
-  const gatewayDisabled = Boolean(values.disable_gateway);
+  // Both of these make a router impossible: Neutron cannot attach a subnet with
+  // no gateway IP, and the second says outright not to attach one. The API
+  // rejects either pair, so the field goes away rather than failing on submit.
+  const gatewayDisabled =
+    Boolean(values.disable_gateway) || Boolean(values.skip_router_connection);
   const loadOptions = useMemo(
     () => (tenantUuid ? routerAutocomplete(tenantUuid) : undefined),
     [tenantUuid],
@@ -104,13 +144,23 @@ export const CreateSubnetDialog: FC<
       const networkUuid = showNetworkField
         ? formData.network?.uuid
         : resource.uuid;
-      const { network: _network, router, ...submitData } = formData;
+      const {
+        network: _network,
+        router,
+        skip_router_connection,
+        ...submitData
+      } = formData;
 
       return openstackNetworksCreateSubnet({
         path: { uuid: networkUuid },
         // The API takes the router as a hyperlink, and leaving it out is what
-        // asks Waldur to pick one itself.
-        body: { ...submitData, ...(router ? { router: router.url } : {}) },
+        // asks Waldur to pick one itself; the skip flag defaults to false
+        // server-side, so it too is only worth sending when set.
+        body: {
+          ...submitData,
+          ...(router ? { router: router.url } : {}),
+          ...(skip_router_connection ? { skip_router_connection: true } : {}),
+        },
       });
     },
     successMessage: translate('Subnet has been created.'),
@@ -118,28 +168,22 @@ export const CreateSubnetDialog: FC<
     refetch,
   });
 
-  const initialCidr = '192.168.42.0/24';
-  const defaultPool = {
-    start: '192.168.42.10',
-    end: '192.168.42.200',
-  };
-
   return (
     <Form
-      initialValues={{
-        cidr: initialCidr,
-        allocation_pools: [defaultPool],
-      }}
+      initialValues={INITIAL_VALUES}
       mutators={{ ...arrayMutators }}
       onSubmit={async (values) => {
         try {
           await mutation.mutateAsync(values);
-        } catch {
-          // Handled by useManagedMutation
+        } catch (error) {
+          // useManagedMutation raises the toast; returning the body as submit
+          // errors is what puts each message under the field it belongs to.
+          return toSubmitErrors(error);
         }
       }}
-      render={({ handleSubmit }) => (
+      render={({ handleSubmit, submitError }) => (
         <form onSubmit={handleSubmit}>
+          <DirtyStateReporter />
           <ModalDialog
             title={translate('Create subnet')}
             subtitle={
@@ -150,6 +194,9 @@ export const CreateSubnetDialog: FC<
             }
             footer={<FormFooter />}
           >
+            {submitError && (
+              <div className="text-danger mb-4">{submitError}</div>
+            )}
             {showNetworkField && (
               <AsyncSelectGroup
                 name="network"
@@ -162,9 +209,10 @@ export const CreateSubnetDialog: FC<
                 noOptionsMessage={() => translate('No networks')}
                 isClearable={true}
                 required={true}
+                validate={required}
               />
             )}
-            <NameGroup />
+            <NameGroup validate={required} />
             <TextGroup
               name="description"
               label={translate('Description')}
@@ -187,6 +235,13 @@ export const CreateSubnetDialog: FC<
             <StringGroup
               name="cidr"
               label={translate('Internal network mask (CIDR)')}
+            />
+            <BooleanGroup
+              name="skip_router_connection"
+              label={translate('Do not attach to a router')}
+              description={translate(
+                'The subnet is created but left unrouted. Attach it later from a router, or connect it from the subnet itself.',
+              )}
             />
             <RouterField
               showNetworkField={showNetworkField}
