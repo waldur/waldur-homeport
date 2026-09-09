@@ -21,7 +21,6 @@ import { loadConfig } from './core/bootstrap';
 import { ErrorMessage } from './ErrorMessage';
 import { LoadingScreen } from './LoadingScreen';
 import { LayoutProvider } from './metronic/layout/core';
-import { MasterInit } from './metronic/layout/MasterInit';
 import { ConfirmModalRoot } from './modal/ConfirmModalRoot';
 import { NotificationContainer } from './NotificationContainer';
 import { router } from './router';
@@ -68,7 +67,6 @@ const ApplicationInner: FunctionComponent = () => {
                             <ConfirmModalRoot />
                             <DrawerRoot />
                             <UIView />
-                            <MasterInit />
                           </AnonymousThreadProvider>
                         </ThreadRuntimeProvider>
                       </ThreadProvider>
