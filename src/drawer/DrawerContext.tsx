@@ -6,8 +6,6 @@ import React, {
   useCallback,
 } from 'react';
 
-import { DrawerComponent } from '@/metronic/components';
-
 export interface DrawerProps {
   title?: React.ReactNode;
   subtitle?: string;
@@ -18,6 +16,7 @@ export interface DrawerProps {
 }
 
 interface DrawerContextValue {
+  isOpen: boolean;
   drawerComponent: ComponentType<any> | null;
   drawerProps: any;
   openDrawer: <T>(component: ComponentType<T>, props?: T & DrawerProps) => void;
@@ -43,14 +42,14 @@ const DEFAULT_DRAWER_PROPS: DrawerProps = {
 export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [drawerComponent, setDrawerComponent] =
     useState<ComponentType<any> | null>(null);
   const [drawerProps, setDrawerProps] = useState<any>(DEFAULT_DRAWER_PROPS);
 
   const openDrawer = useCallback(
     <T,>(component: ComponentType<T>, props?: T & DrawerProps) => {
-      const drawer = DrawerComponent.getInstance('kt_drawer');
-      drawer?.show();
+      setIsOpen(true);
       setDrawerComponent(() => component);
       setDrawerProps({ ...DEFAULT_DRAWER_PROPS, ...props });
     },
@@ -58,8 +57,7 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
   );
 
   const closeDrawer = useCallback(() => {
-    const drawer = DrawerComponent.getInstance('kt_drawer');
-    drawer?.hide();
+    setIsOpen(false);
     setDrawerComponent(null);
     setDrawerProps(DEFAULT_DRAWER_PROPS);
   }, []);
@@ -78,6 +76,7 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
   return (
     <DrawerContext.Provider
       value={{
+        isOpen,
         drawerComponent,
         drawerProps,
         openDrawer,

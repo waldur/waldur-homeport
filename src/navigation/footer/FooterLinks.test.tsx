@@ -5,9 +5,6 @@ import { FooterLinks } from './FooterLinks';
 import { useFooterLinks } from './useFooterLinks';
 
 vi.mock('./useFooterLinks');
-vi.mock('@/metronic/components', () => ({
-  DrawerComponent: { getInstance: vi.fn() },
-}));
 vi.mock('./MenuItem', () => ({
   MenuItem: ({ label }: any) => <li data-testid="menu-item">{label}</li>,
 }));

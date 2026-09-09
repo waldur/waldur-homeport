@@ -21,9 +21,21 @@ export interface LayoutContextInterface {
   setExtraAnnouncementBar(component: React.ReactNode);
   breadcrumbs: IBreadcrumbItem[];
   setBreadcrumbs(items: IBreadcrumbItem[]);
+  mobileSidebarOpen: boolean;
+  setMobileSidebarOpen: (open: boolean | ((prev: boolean) => boolean)) => void;
+  closeMobileSidebar: () => void;
 }
 
 export const LayoutContext = createContext<Partial<LayoutContextInterface>>({});
+
+export const useMobileSidebar = () => {
+  const {
+    mobileSidebarOpen = false,
+    setMobileSidebarOpen,
+    closeMobileSidebar,
+  } = useContext(LayoutContext);
+  return { mobileSidebarOpen, setMobileSidebarOpen, closeMobileSidebar };
+};
 
 export const useExtraTabs = (tabs: Tab[]) => {
   const layoutContext = useContext(LayoutContext);

@@ -36,7 +36,7 @@ const DRAWER_WIDTH_DEFAULT = '800px';
 const setDrawerWidth = (width: string) => {
   const drawer = document.getElementById('kt_drawer');
   if (drawer) {
-    drawer.style.width = width;
+    drawer.style.setProperty('--drawer-width', width);
   }
 };
 
@@ -49,7 +49,7 @@ export const resetDrawerDOM = () => {
   drawer.classList.remove(AI_DRAWER_CLASS);
   drawer.removeAttribute('data-expanded');
   drawer.removeAttribute('data-history-open');
-  drawer.style.width = '';
+  drawer.style.removeProperty('--drawer-width');
 };
 
 export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
@@ -221,7 +221,7 @@ export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
           if (!el.classList.contains('drawer-on')) {
             el.removeAttribute('data-expanded');
             el.removeAttribute('data-history-open');
-            el.style.width = '';
+            el.style.removeProperty('--drawer-width');
           }
         }, 350);
       }

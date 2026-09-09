@@ -14,14 +14,14 @@ const getExpandedWidth = () => {
 const setDrawerWidth = (width: string) => {
   const drawer = document.getElementById('kt_drawer');
   if (drawer) {
-    drawer.style.width = width;
+    drawer.style.setProperty('--drawer-width', width);
   }
 };
 
 /**
  * Drives the drawer's expand ("full screen") toggle. State lives both in React
- * (for the toolbar icon) and on `#kt_drawer[data-expanded]`/its inline width,
- * because the panel body reads the DOM attribute and Metronic owns the width.
+ * (for the toolbar icon) and on `#kt_drawer[data-expanded]`/its inline
+ * `--drawer-width`, because the panel body reads the DOM attribute directly.
  */
 export const useDrawerExpand = (): {
   expanded: boolean;
@@ -73,22 +73,21 @@ export const useDrawerExpand = (): {
     };
   }, [expanded]);
 
-  // Metronic's DrawerComponent re-applies its default breakpoint width to
-  // #kt_drawer on every update — window resize, drawerProps change, drawer
-  // re-init — clobbering the imperative expanded width. While expanded that
-  // silently shrinks the drawer back to the panel width even though
-  // `data-expanded` stays true, so the expanded two-pane layout renders
-  // cramped into the narrow drawer. Re-assert the expanded width whenever
-  // Metronic resets it to a fixed (non-calc) value; the calc() guard makes the
-  // observer's own write a no-op so it can't loop, and the data-expanded gate
-  // yields to a deliberate collapse.
+  // DrawerRoot re-declares --drawer-width from drawerProps.width on every
+  // render (open/content swap, etc.), clobbering the imperative expanded
+  // value. While expanded that silently shrinks the drawer back to the panel
+  // width even though `data-expanded` stays true, so the expanded two-pane
+  // layout renders cramped into the narrow drawer. Re-assert the expanded
+  // width whenever it's reset to a fixed (non-calc) value; the calc() guard
+  // makes the observer's own write a no-op so it can't loop, and the
+  // data-expanded gate yields to a deliberate collapse.
   useEffect(() => {
     if (!expanded) return;
     const drawer = document.getElementById('kt_drawer');
     if (!drawer || typeof MutationObserver === 'undefined') return;
     const enforce = () => {
       if (drawer.dataset.expanded !== 'true') return;
-      if (!drawer.style.width.startsWith('calc')) {
+      if (!drawer.style.getPropertyValue('--drawer-width').startsWith('calc')) {
         setDrawerWidth(getExpandedWidth());
       }
     };

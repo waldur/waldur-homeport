@@ -1,3 +1,54 @@
+// Full width below `lg` (matching the old data-kt-drawer-width breakpoint
+// config), drawerProps.width above it — set as a custom property by
+// DrawerRoot/useDrawerExpand rather than a plain inline `width` so this media
+// query can still apply below `lg` regardless of what's inline.
+#kt_drawer {
+  width: 100%;
+
+  @include media-breakpoint-up(lg) {
+    width: var(--drawer-width, 800px);
+  }
+}
+
+// Radix's Presence (which keeps #kt_drawer mounted through the close
+// slide-out — see DrawerRoot.tsx's comment on why forceMount isn't used)
+// detects an *animation*, not the plain CSS `transition` core `_drawer.scss`
+// uses for every other `.drawer` consumer (e.g. SidebarLayout.tsx's wizard
+// sidebar, untouched). Give #kt_drawer specifically a real @keyframes
+// animation-name change between its .drawer-on/non-.drawer-on states so
+// Presence's exit-animation detection has something to see; the declarative
+// transform values below match core _drawer.scss's `.drawer-on`/`.drawer-end`
+// so there's nothing to visually reconcile once the animation ends.
+#kt_drawer {
+  &.drawer-on {
+    animation: kt-drawer-slide-in get($drawer, transition-speed) ease-in-out
+      forwards;
+  }
+
+  &:not(.drawer-on) {
+    animation: kt-drawer-slide-out get($drawer, transition-speed) ease-in-out
+      forwards;
+  }
+}
+
+@keyframes kt-drawer-slide-in {
+  from {
+    transform: translateX(var(--drawer-closed-x, 100%));
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes kt-drawer-slide-out {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(var(--drawer-closed-x, 100%));
+  }
+}
+
 // When the AI chat or support drawer is open, make the card and body fill the
 // drawer height so the content can use flex layout internally.
 #kt_drawer.ai-chat-drawer-active,
@@ -12,21 +63,30 @@
     top: calc(65px + 4px + var(--kt-pagebar-height));
     height: calc(100vh - 65px - 8px - var(--kt-pagebar-height));
   }
-  transition:
-    width 0.3s ease,
-    transform 0.3s ease-in-out;
+  transition: width 0.3s ease;
   box-shadow: $box-shadow-xl;
   border-radius: 20px;
   overflow: hidden;
 
-  &:not(.drawer-on) {
-    transform: translateX(calc(100% + 4px));
-  }
+  // Read by the @keyframes below instead of a plain `&:not(.drawer-on)`
+  // transform override — an animation's fill-forwards end value beats a
+  // same-origin declarative rule regardless of specificity, so a plain
+  // override here would only apply mid-transition and get clobbered the
+  // moment the slide-out animation finishes.
+  --drawer-closed-x: calc(100% + 4px);
 }
 
-body:has(#kt_drawer.ai-chat-drawer-active) > .drawer-overlay,
-body:has(#kt_drawer.support-drawer-active) > .drawer-overlay,
-body:has(#kt_drawer.confirmation-drawer-active) > .drawer-overlay {
+// DrawerRoot.tsx doesn't portal to <body> (see its own comment on why), so
+// this can't be a direct-child `>` selector the way Metronic's old
+// body.append()'d overlay div allowed — match it as a descendant instead.
+// Without this, the overlay stays visible for these floating-card drawer
+// types, and since #kt_drawer.support-drawer-active/.ai-chat-drawer-active
+// deliberately sit BELOW header dropdowns (z-index 100 vs the overlay's
+// 109 — see _history-sidebar.scss), the overlay then paints on top of the
+// drawer's own content and swallows clicks meant for it.
+body:has(#kt_drawer.ai-chat-drawer-active) .drawer-overlay,
+body:has(#kt_drawer.support-drawer-active) .drawer-overlay,
+body:has(#kt_drawer.confirmation-drawer-active) .drawer-overlay {
   display: none;
 }
 
