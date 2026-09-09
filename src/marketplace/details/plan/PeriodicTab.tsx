@@ -20,6 +20,7 @@ export const PeriodicTab = ({
   periodKeys,
   periods,
   viewMode,
+  readOnlyLimits,
   concealBillingInfo = false,
   offering,
 }: {
@@ -28,6 +29,7 @@ export const PeriodicTab = ({
   /** If set, only render components of this period (fixed & usage components are also rendered for monthly period) */
   limitPeriod?: LimitPeriodEnum;
   concealBillingInfo?: boolean;
+  readOnlyLimits?: boolean;
 } & Pick<
   PlanDetailsTableProps,
   'periodKeys' | 'periods' | 'viewMode' | 'offering'
@@ -111,6 +113,7 @@ export const PeriodicTab = ({
             components={limitedRows}
             hidePrices={Boolean(shouldConcealPrices)}
             viewMode={viewMode}
+            readOnlyLimits={readOnlyLimits}
             period={selectedPeriod}
             activePriceIndex={activePriceIndex}
             offering={offering}

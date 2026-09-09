@@ -36,6 +36,8 @@ export interface PricesData {
 export interface PlanDetailsTableProps extends PricesData {
   offering: PublicOfferingDetails | Offering;
   viewMode?: boolean;
+  /** Render the limit quantities without inputs; see ControlRows. */
+  readOnlyLimits?: boolean;
   formGroupClassName?: string;
   columnClassName?: string;
   customer?: Pick<Customer, 'url'>;

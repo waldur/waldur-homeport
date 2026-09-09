@@ -56,14 +56,20 @@
         background-position: right 2rem center;
       }
     }
+    // The mixin centres one button on each side of the box; here the two are
+    // stacked in the right-hand margin instead, so its centring has to be
+    // undone -- both the transform, which otherwise lifts each button half its
+    // own height out of place, and the `top` it pins the lower one to.
     .plus-btn,
     .minus-btn {
       height: 20px !important;
       padding: 0;
       left: unset;
       right: 5px;
+      transform: none;
     }
     .minus-btn {
+      top: auto;
       bottom: 2px;
     }
     .plus-btn {

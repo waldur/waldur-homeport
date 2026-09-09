@@ -77,6 +77,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
                   limitPeriod={period}
                   customer={customer}
                   viewMode={props.viewMode}
+                  readOnlyLimits={props.readOnlyLimits}
                   periodKeys={props.periodKeys}
                   periods={props.periods}
                   concealBillingInfo
@@ -128,6 +129,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
               limitPeriod={period}
               customer={customer}
               viewMode={props.viewMode}
+              readOnlyLimits={props.readOnlyLimits}
               periodKeys={props.periodKeys}
               periods={props.periods}
               concealBillingInfo={props.concealBillingInfo}
@@ -190,6 +192,8 @@ interface TabbedPlanComponents {
   plan?: BasePublicPlan;
   limits?: Limits;
   viewMode?: boolean;
+  /** Render the limit quantities without inputs; see ControlRows. */
+  readOnlyLimits?: boolean;
   concealBillingInfo?: boolean;
   customer?: Pick<Customer, 'url'>;
   /** Prepaid subscription length, where it is named in months (see PrepaidMonthsMode). */
