@@ -49,6 +49,7 @@ export const FormPlanStep = (props: FormStepProps) => {
       <TabbedPlanComponents
         offering={props.offering}
         concealBillingInfo={concealBillingInfo}
+        readOnlyLimits={props.params?.readOnlyLimits}
       />
     </VStepperFormStepCard>
   );
