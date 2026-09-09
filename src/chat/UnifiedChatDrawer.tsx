@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 
 import { AnonymousChatPanel } from '@/ai-assistant/anonymous/AnonymousChatPanel';
 import { LLMChatDrawer } from '@/ai-assistant/components/LLMChatDrawer';
+import { consumePendingAssistantSeed } from '@/ai-assistant/logic/assistantSeed';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isAnonymousVisitor } from '@/ai-assistant/utils';
 import { setChatDrawerPreference } from '@/chat/chatDrawerPreferences';
@@ -12,6 +13,15 @@ interface UnifiedChatDrawerProps {
 }
 
 export const UnifiedChatDrawer: FC<UnifiedChatDrawerProps> = (props) => {
+  // A seed parked by a context-carrying entry point is normally consumed by the
+  // composer on mount — but the composer does not always get there: the AI
+  // disclosure banner stands in front of it on a first visit, and
+  // LLMErrorBoundary can replace it. Drop whatever is still parked when the
+  // drawer goes away, so an unconsumed question cannot surface later in an
+  // unrelated composer (a different offering's drawer, or the resource
+  // playground, which shares AssistantComposer).
+  useEffect(() => () => void consumePendingAssistantSeed(), []);
+
   // Only true visitors (no user) get the standalone offering-finder panel; a
   // logged-in user always gets the full authenticated assistant, even in
   // 'anonymous' mode ("all users including anonymous" is a superset of "all").

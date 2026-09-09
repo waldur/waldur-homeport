@@ -9,9 +9,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { LanguageSelectorBox } from '@/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@/navigation/footer/FooterLinks';
-import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
+import { AuthHeaderControls } from '../AuthHeaderControls';
 import { getHeroBackgroundImage } from '../heroImage';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
@@ -62,7 +62,7 @@ export const CarouselLayout = () => {
       <div className="layout-carousel-login">
         <div className="layout-carousel-header">
           <LanguageSelectorBox />
-          <ThemeSwitcherButton />
+          <AuthHeaderControls />
         </div>
         <div className="layout-carousel-form">
           <div className="login-logo mb-3">
