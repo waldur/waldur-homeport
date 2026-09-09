@@ -55,15 +55,12 @@ const StaticDiskField = (props) => {
 };
 
 export const FormStorageStep = (props: FormStepProps) => {
-  const { limits, isLoading } = useVMwareLimitsLoader(
-    props.offering.scope_uuid,
-  );
+  const { limits } = useVMwareLimitsLoader(props.offering.scope_uuid);
 
   return (
     <VStepperFormStepCard
       title={translate('Storage')}
       id={props.id}
-      loading={isLoading}
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >

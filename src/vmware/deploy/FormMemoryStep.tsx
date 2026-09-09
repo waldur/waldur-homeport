@@ -14,9 +14,7 @@ import { VStepperFormStepCard } from '@/wizard';
 import { minOne, useVMwareLimitsLoader } from './utils';
 
 export const FormMemoryStep = (props: FormStepProps) => {
-  const { limits, isLoading } = useVMwareLimitsLoader(
-    props.offering.scope_uuid,
-  );
+  const { limits } = useVMwareLimitsLoader(props.offering.scope_uuid);
 
   const ramValidator = useMemo(
     () =>
@@ -30,7 +28,6 @@ export const FormMemoryStep = (props: FormStepProps) => {
     <VStepperFormStepCard
       title={translate('Memory')}
       id={props.id}
-      loading={isLoading}
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >

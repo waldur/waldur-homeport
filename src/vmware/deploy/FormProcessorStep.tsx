@@ -24,9 +24,7 @@ const coresPerSocketValidator = (coresPerSocket, values) => {
 };
 
 export const FormProcessorStep = (props: FormStepProps) => {
-  const { limits, isLoading } = useVMwareLimitsLoader(
-    props.offering.scope_uuid,
-  );
+  const { limits } = useVMwareLimitsLoader(props.offering.scope_uuid);
 
   const cpuValidator = useMemo(
     () =>
@@ -48,7 +46,6 @@ export const FormProcessorStep = (props: FormStepProps) => {
     <VStepperFormStepCard
       title={translate('Processor')}
       id={props.id}
-      loading={isLoading}
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
