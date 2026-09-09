@@ -35,7 +35,7 @@ export const ThemeSwitcherButton: FunctionComponent = () => {
   return (
     <button
       type="button"
-      className="btn btn-text-secondary btn-icon"
+      className="btn btn-tertiary btn-icon"
       onClick={toggleTheme}
       title={
         isDark

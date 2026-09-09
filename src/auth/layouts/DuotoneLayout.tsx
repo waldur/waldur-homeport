@@ -9,9 +9,9 @@ import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
 import { LanguageSelectorBox } from '@/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@/navigation/footer/FooterLinks';
-import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
+import { AuthHeaderControls } from '../AuthHeaderControls';
 import { HeroButton } from '../HeroButton';
 import { getHeroBackgroundImage } from '../heroImage';
 import { LoginMethods } from '../LoginMethods';
@@ -36,7 +36,7 @@ export const DuotoneLayout = () => {
       <div className="layout-duotone-login">
         <div className="layout-duotone-header">
           <LanguageSelectorBox />
-          <ThemeSwitcherButton />
+          <AuthHeaderControls />
         </div>
         <div className="layout-duotone-form">
           <div className="login-logo mb-3">

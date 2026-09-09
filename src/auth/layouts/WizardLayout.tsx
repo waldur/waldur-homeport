@@ -10,9 +10,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { LanguageSelectorBox } from '@/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@/navigation/footer/FooterLinks';
-import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
+import { AuthHeaderControls } from '../AuthHeaderControls';
 import { IdentityProviderSelector } from '../IdentityProviderSelector';
 import { PoweredBy } from '../PoweredBy';
 import { SigninForm } from '../SigninForm';
@@ -152,7 +152,7 @@ export const WizardLayout = () => {
     <div className="layout-wizard">
       <div className="layout-wizard-header">
         <LanguageSelectorBox />
-        <ThemeSwitcherButton />
+        <AuthHeaderControls />
       </div>
       <div className="layout-wizard-content">
         <div className="layout-wizard-card">

@@ -8,9 +8,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { LanguageSelectorBox } from '@/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@/navigation/footer/FooterLinks';
-import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
+import { AuthHeaderControls } from '../AuthHeaderControls';
 import { LoginMethods } from '../LoginMethods';
 import { PoweredBy } from '../PoweredBy';
 import { useAuthFeatures } from '../useAuthFeatures';
@@ -33,7 +33,7 @@ export const NewsLayout = () => {
       <div className="layout-news-login">
         <div className="layout-news-header">
           <LanguageSelectorBox />
-          <ThemeSwitcherButton />
+          <AuthHeaderControls />
         </div>
         <div className="layout-news-form">
           <div className="login-logo mb-3">

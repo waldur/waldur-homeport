@@ -9,9 +9,9 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { LanguageSelectorBox } from '@/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@/navigation/footer/FooterLinks';
-import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
+import { AuthHeaderControls } from '../AuthHeaderControls';
 import { IdentityProviderSelector } from '../IdentityProviderSelector';
 import { PoweredBy } from '../PoweredBy';
 import { SigninForm } from '../SigninForm';
@@ -39,7 +39,7 @@ export const TabbedLayout = () => {
     <div className="layout-tabbed">
       <div className="layout-tabbed-header">
         <LanguageSelectorBox />
-        <ThemeSwitcherButton />
+        <AuthHeaderControls />
       </div>
       <div className="layout-tabbed-content">
         <div className="layout-tabbed-card">
