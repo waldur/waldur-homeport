@@ -218,7 +218,7 @@ The backend endpoint behind `callback` must therefore accept partial updates (PA
 ### Common props
 
 - `name` — dotted path into `scope` (e.g. `service_attributes.backend_url`). Reads via `lodash.get`, writes via `lodash.set`.
-- `label`, `description`, `required`, `validate`, `format`, `parse`, `normalize` — passed through to the modal's `<Field>`.
+- `label`, `description`, `required`, `validate`, `format`, `parse` — passed through to the modal's `<Field>`. There is no `normalize`: React Final Form ignores it, so convert the stored value with `format` and the typed value with `parse`.
 - `isStaffOnly` — non-staff users see a `<StaffOnlyIndicator/>` instead of the edit button; the read-only value is still visible.
 - `renderValue(value)` — override the read-only display. May return `null`/`undefined`; the HOC substitutes `DASH_ESCAPE_CODE`, so no manual dash fallback is needed.
 - `tooltip`, `iconNode` — propagate to the compact edit button (e.g. to flag IDP-managed fields with a lock icon).

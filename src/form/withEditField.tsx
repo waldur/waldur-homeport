@@ -43,7 +43,6 @@ export type EditFieldProps<P = object> = Omit<
   validate?: FieldValidator<any>;
   format?: NonNullable<FieldProps<any, any>['format']> | null;
   parse?: NonNullable<FieldProps<any, any>['parse']>;
-  normalize?: (value: any) => any;
   /**
    * Value submitted when the control is cleared. Defaults to `''` (`null` for
    * numeric controls) — override when the API expects a different empty shape.
@@ -110,7 +109,6 @@ export function withEditField<P extends object>(
       validate,
       format,
       parse,
-      normalize,
       emptyValue,
       // Everything else is field-component-specific props
       ...fieldSpecificProps
@@ -151,7 +149,6 @@ export function withEditField<P extends object>(
     if (validate != null) fieldProps.validate = validate;
     if (format != null) fieldProps.format = format;
     if (parse != null) fieldProps.parse = parse;
-    if (normalize != null) fieldProps.normalize = normalize;
 
     const editButton = (
       <FieldEditButton

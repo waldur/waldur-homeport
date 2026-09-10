@@ -10,6 +10,22 @@ import { translate } from '@/i18n';
 import { BaseCredentialsSection } from '@/marketplace/offerings/update/integration/BaseCredentialsSection';
 import { OfferingEditPanelProps } from '@/marketplace/offerings/update/integration/types';
 
+// The plugin stores RAM and disk maximums in MiB; providers read and enter
+// them in GB, in the table as well as in the edit dialog. The conversion into
+// MiB has to happen in `parse`: `format` alone would re-divide every keystroke.
+const mibToGb = (value) => (value ? value / 1024 : null);
+
+const sizeInGbProps = {
+  unit: 'GB',
+  format: (value) => mibToGb(value) ?? '',
+  parse: (value) =>
+    value === '' || value == null ? null : Math.round(Number(value) * 1024),
+  renderValue: (value) => {
+    const gb = mibToGb(value);
+    return gb == null ? null : `${gb} GB`;
+  },
+};
+
 export const VMwareCredentialsSection: FC<OfferingEditPanelProps> = (props) => {
   return (
     <BaseCredentialsSection {...props}>
@@ -44,23 +60,17 @@ export const VMwareCredentialsSection: FC<OfferingEditPanelProps> = (props) => {
       <NumberEditField
         name="service_attributes.max_ram"
         label={translate('Maximum RAM for each VM')}
-        unit="GB"
-        format={(v) => (v ? v / 1024 : '')}
-        normalize={(v) => Number(v) * 1024}
+        {...sizeInGbProps}
       />
       <NumberEditField
         name="service_attributes.max_disk"
         label={translate('Maximum capacity for each disk')}
-        unit="GB"
-        format={(v) => (v ? v / 1024 : '')}
-        normalize={(v) => Number(v) * 1024}
+        {...sizeInGbProps}
       />
       <NumberEditField
         name="service_attributes.max_disk_total"
         label={translate('Maximum total size of the disk space per VM')}
-        unit="GB"
-        format={(v) => (v ? v / 1024 : '')}
-        normalize={(v) => Number(v) * 1024}
+        {...sizeInGbProps}
       />
     </BaseCredentialsSection>
   );
