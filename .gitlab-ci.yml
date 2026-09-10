@@ -207,36 +207,78 @@ Run code duplication detection:
     - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.scss"
     - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.tsx" -k 250
 
+.unit-test-changes: &unit-test-changes
+  - src/**/*.css
+  - src/**/*.scss
+  - src/**/*.ts
+  - src/**/*.tsx
+  - package.json
+  - yarn.lock
+  - tsconfig.json
+  - typings.d.ts
+  - vite.config.ts
+  - vitest.config.ts
+  - test/**/*
+  - .gitlab-ci.yml
+
+# Nearly all of the suite's time is per-file startup (module import, jsdom,
+# setup), not test bodies, and a single runner only gives Vitest a few
+# workers -- so the suite is split into shards that run on separate runners.
+# Each shard writes a blob report; "Merge unit test reports" combines them
+# into the junit and coverage reports GitLab reads.
+#
+# Coverage adds about a fifth to each shard's run time, so it is collected on
+# develop only; MR pipelines leave COVERAGE_FLAG empty.
 Run unit tests:
   stage: test
   interruptible: true
+  parallel: 4
   variables:
     # vitest --coverage runs close to Node's default ~4 GB old-space ceiling and
     # OOMs when the build cache misses. Raise the heap for the test workers.
     NODE_OPTIONS: "--max-old-space-size=8192"
+    COVERAGE_FLAG: ""
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
+      variables:
+        COVERAGE_FLAG: "--coverage"
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      changes:
-        - src/**/*.css
-        - src/**/*.scss
-        - src/**/*.ts
-        - src/**/*.tsx
-        - package.json
-        - yarn.lock
-        - tsconfig.json
-        - typings.d.ts
-        - vite.config.ts
-        - test/*
+      changes: *unit-test-changes
       allow_failure: true
   script:
     # --project=unit: excludes the "storybook" Vitest project (added
     # alongside @storybook/addon-vitest) — that one needs a real browser
     # (Playwright/Chromium), which this job's plain node image doesn't
     # have. See "Run Storybook tests" below.
-    - yarn vitest --project=unit --run --reporter junit --outputFile junit.xml --coverage
+    - yarn vitest --project=unit --run --shard=${CI_NODE_INDEX}/${CI_NODE_TOTAL} --reporter=default --reporter=blob $COVERAGE_FLAG
+  artifacts:
+    when: always
+    expire_in: 1 day
+    paths:
+      - .vitest-reports/
+
+# Runs even when a shard failed, so the MR still shows which tests failed.
+Merge unit test reports:
+  stage: test
+  interruptible: true
+  needs: ["Run unit tests"]
+  variables:
+    COVERAGE_FLAG: ""
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+      when: always
+      variables:
+        COVERAGE_FLAG: "--coverage"
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes: *unit-test-changes
+      when: always
+      allow_failure: true
+  script:
+    - yarn vitest --project=unit --merge-reports --reporter=junit --outputFile=junit.xml $COVERAGE_FLAG
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
     when: always
