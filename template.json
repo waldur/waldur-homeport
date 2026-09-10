@@ -11733,11 +11733,6 @@
       "feature_area": "lexis"
     }
   },
-  "Create Network adapter": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
   "Create POSIX ID pool": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -11978,6 +11973,11 @@
       "feature_area": "rounds"
     }
   },
+  "Create network adapter": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Create network for OpenStack tenant": {
     "context": {
       "feature_area": "actions"
@@ -12121,11 +12121,6 @@
     }
   },
   "Create pool": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
-  "Create port": {
     "context": {
       "feature_area": "actions"
     }
@@ -29156,6 +29151,12 @@
       "feature_area": "actions"
     }
   },
+  "Network adapter has been created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "actions"
+    }
+  },
   "Network adapters": {
     "context": {
       "primary_ui_type": "title",
@@ -36651,12 +36652,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "openstack-instances"
-    }
-  },
-  "Port has been created.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "actions"
     }
   },
   "Port has been disabled.": {
@@ -55071,6 +55066,12 @@
       "feature_area": "actions"
     }
   },
+  "Unable to create network adapter.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "actions"
+    }
+  },
   "Unable to create node.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -55138,12 +55139,6 @@
     }
   },
   "Unable to create pool.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "actions"
-    }
-  },
-  "Unable to create port.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "actions"
