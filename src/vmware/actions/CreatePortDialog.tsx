@@ -17,22 +17,24 @@ import { ActionDialogProps } from '@/resource/actions/types';
 export const CreatePortDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
+  // ResourceActionDialog renders selects with `simpleValue`, so `network` is
+  // the network URL itself, not an option object.
   const mutation = useManagedMutation<
     any,
     any,
-    { name: string; network: { value: string } }
+    { name: string; network: string }
   >({
     mutationFn: (formData) =>
       vmwareVirtualMachineCreatePort({
         path: { uuid: resource.uuid },
         body: {
           description: formData.name,
-          network: formData.network.value,
+          network: formData.network,
         },
       }),
 
-    successMessage: translate('Port has been created.'),
-    errorMessage: translate('Unable to create port.'),
+    successMessage: translate('Network adapter has been created.'),
+    errorMessage: translate('Unable to create network adapter.'),
     refetch: refetch,
   });
 
@@ -78,7 +80,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
 
   return (
     <ResourceActionDialog
-      dialogTitle={translate('Create port')}
+      dialogTitle={translate('Create network adapter')}
       dialogSubtitle={
         <ScopeSubtitle
           label={translate('Virtual machine name')}
