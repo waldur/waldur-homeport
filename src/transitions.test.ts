@@ -1,3 +1,4 @@
+import { RejectType } from '@uirouter/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 const mockIsAuthenticated = vi.fn();
@@ -7,6 +8,7 @@ const mockNeedsPasskeyEnrollment = vi.fn();
 const mockGroupInvitationTokenSet = vi.fn();
 const mockRedirectStorageSet = vi.fn();
 const mockTarget = vi.fn();
+const mockGo = vi.fn();
 
 const onBeforeHandlers: Array<{ criteria: any; callback: any }> = [];
 const onStartHandlers: Array<{ criteria: any; callback: any }> = [];
@@ -97,6 +99,11 @@ function createMockTransition(toStateName: string, params: any = {}) {
     router: {
       stateService: {
         target: (...args) => mockTarget(...args),
+        go: (...args) => {
+          mockGo(...args);
+          // The hook attaches .catch() to whatever go() returns.
+          return Promise.resolve();
+        },
       },
       stateRegistry: { get: vi.fn() },
     },
@@ -365,6 +372,14 @@ describe('Redirect persistence on success', () => {
 describe('Transition error fallback', () => {
   let errorHook: any;
 
+  // UI-Router defines onError with LOG_REJECTED_RESULT, so a TargetState
+  // returned from the hook is discarded and never navigates. The hook has to
+  // call go() itself; these assertions are on go() for that reason.
+  const erred = (detail: any = {}, type = RejectType.ERROR) => ({
+    ...createMockTransition('some-state'),
+    error: () => ({ type, detail }),
+  });
+
   beforeEach(() => {
     vi.clearAllMocks();
     onBeforeHandlers.length = 0;
@@ -379,15 +394,34 @@ describe('Transition error fallback', () => {
   });
 
   it('shows the 404 page without rewriting the address bar', () => {
-    const transition = {
-      ...createMockTransition('some-state'),
-      error: () => ({}),
-    };
+    errorHook.callback(erred());
 
-    errorHook.callback(transition);
-
-    expect(mockTarget).toHaveBeenCalledWith('errorPage.notFound', undefined, {
+    expect(mockGo).toHaveBeenCalledWith('errorPage.notFound', undefined, {
       location: false,
     });
+  });
+
+  it.each([
+    [403, 'errorPage.noPermission'],
+    [428, 'profile-manage'],
+    [500, 'errorPage.serverError'],
+    [503, 'errorPage.serviceNotAvailable'],
+  ])('sends %i to %s', (status, expected) => {
+    errorHook.callback(erred({ status }));
+
+    expect(mockGo).toHaveBeenCalledWith(expected, undefined, undefined);
+  });
+
+  // A transition also "fails" when the user clicks a second link while the
+  // first is still resolving. Redirecting then would cancel the navigation
+  // they actually asked for.
+  it.each([
+    ['superseded', RejectType.SUPERSEDED],
+    ['aborted', RejectType.ABORTED],
+    ['ignored', RejectType.IGNORED],
+  ])('leaves a %s transition alone', (_name, type) => {
+    errorHook.callback(erred({}, type));
+
+    expect(mockGo).not.toHaveBeenCalled();
   });
 });
