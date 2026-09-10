@@ -328,7 +328,8 @@
     "@types/react-dom": "^18.3.0",
     "brace-expansion@^1.1.7": "^1.1.17",
     "brace-expansion@^5.0.5": "^5.0.8",
-    "undici": "^7.29.0"
+    "undici": "^7.29.0",
+    "radix-ui": "1.6.7"
   },
   "packageManager": "yarn@4.18.0+sha512.fcb8716fe7cd0eece141ffc18b92193a9df9204c1ba83189c288835223fc0bbe64af473bab0d5e9927a7daeb5caf2bb07eb2787cc9338ca040ea125f2a1f2f7e"
 }
