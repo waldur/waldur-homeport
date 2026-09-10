@@ -12914,6 +12914,7 @@
   },
   "Current price": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "plans"
     }
   },
@@ -37271,7 +37272,7 @@
   },
   "Price update next month": {
     "context": {
-      "feature_area": "plans"
+      "primary_ui_type": "title"
     }
   },
   "Pricelist": {
@@ -58774,6 +58775,7 @@
   "United States": {},
   "Units": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "plans"
     }
   },
