@@ -1225,7 +1225,7 @@ export const SettingsDescription = [
       },
       {
         key: 'INVITATION_DISABLE_MULTIPLE_ROLES',
-        description: translate('Do not allow user to accept multiple roles within the same scope (project or organization) using invitation. When enabled, users can still accept invitations to different scopes but cannot have multiple roles in the same scope.'),
+        description: translate('Do not allow a user to hold multiple roles within the same scope (project or organization). Applies to invitations, permission requests and direct role assignment. When enabled, users can still get roles in different scopes but cannot have multiple roles in the same scope.'),
         default: false,
         type: 'boolean',
       },
