@@ -4,6 +4,7 @@ build/
 node_modules
 coverage
 junit.xml
+.vitest-reports
 dist/
 yarn-error.log
 .pnp.*
