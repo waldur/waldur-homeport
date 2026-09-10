@@ -16,7 +16,7 @@ const validators = [validateState('OK')];
 
 export const CreatePortAction: FC<{ resource }> = ({ resource }) => (
   <DialogActionButton
-    title={translate('Create Network adapter')}
+    title={translate('Create network adapter')}
     iconNode={<PlusCircleIcon weight="bold" />}
     modalComponent={CreatePortDialog}
     resource={resource}
