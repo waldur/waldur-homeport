@@ -17,12 +17,23 @@ interface DeleteConfirmationDialogProps {
     title: ReactNode;
     body: ReactNode;
     iconNode?: ReactNode;
+    /**
+     * Both labels come from `ConfirmationOptions`, which `confirm` spreads into
+     * `resolve`. They used to be dropped here while `ConfirmationDialog`
+     * honoured them, so every `forDeletion` caller got "Delete" -- including
+     * "Purge queue", which is a different operation, and the OpenStack actions
+     * that remove an interface from a router rather than delete the router.
+     */
+    positiveButton?: string;
+    negativeButton?: string;
   };
 }
 
 export const DeleteConfirmationDialog: React.FC<
   DeleteConfirmationDialogProps
-> = ({ resolve: { title, body, deferred, iconNode } }) => {
+> = ({
+  resolve: { title, body, deferred, iconNode, positiveButton, negativeButton },
+}) => {
   const { closeDialog: closeModal } = useModal();
   const closeDialog = () => closeModal('HIDE_CONFIRM');
 
@@ -44,14 +55,18 @@ export const DeleteConfirmationDialog: React.FC<
       bodyClassName="text-quaternary pt-8px"
       footer={
         <>
-          <CloseDialogButton className="min-w-150px" onClick={handleCancel} />
+          <CloseDialogButton
+            label={negativeButton}
+            className="min-w-150px"
+            onClick={handleCancel}
+          />
           <SubmitButton
             submitting={false}
             variant="danger"
             className="min-w-150px"
             onClick={handleSubmit}
             type="button"
-            label={translate('Delete')}
+            label={positiveButton || translate('Delete')}
           />
         </>
       }
