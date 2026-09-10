@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { OfferingComponent } from 'waldur-js-client';
 
 import { TENANT_TYPE } from '@/openstack/constants';
+import { VMWARE_VM } from '@/vmware/constants';
 
 import { getDisplayUnit, getQuotaCellProps } from './ResourceComponentItem';
 
@@ -60,6 +61,51 @@ describe('getDisplayUnit', () => {
 
   it('should return original unit for unknown factor', () => {
     expect(getDisplayUnit('MB', 512)).toBe('MB');
+  });
+
+  it('should keep the measured unit of OpenStack tenant components', () => {
+    expect(getDisplayUnit('GB', 1024, TENANT_TYPE)).toBe('GB');
+  });
+
+  it('should keep the measured unit of VMware components', () => {
+    expect(getDisplayUnit('GB', 1024, VMWARE_VM)).toBe('GB');
+  });
+});
+
+describe('getQuotaCellProps for a VMware virtual machine', () => {
+  const resource = makeResource({
+    offering_type: VMWARE_VM,
+    limits: { ram: 4096, disk: 46080 },
+    limit_usage: {},
+    current_usages: {},
+  });
+
+  it('should show RAM stored in MiB as GB', () => {
+    const props = getQuotaCellProps(
+      makeComponent({
+        type: 'ram',
+        name: 'RAM',
+        measured_unit: 'GB',
+        factor: 1024,
+      }),
+      resource,
+    );
+    expect(props.limit).toBe('4');
+    expect(props.displayUnit).toBe('GB');
+  });
+
+  it('should show disk stored in MiB as GB', () => {
+    const props = getQuotaCellProps(
+      makeComponent({
+        type: 'disk',
+        name: 'Disk',
+        measured_unit: 'GB',
+        factor: 1024,
+      }),
+      resource,
+    );
+    expect(props.limit).toBe('45');
+    expect(props.displayUnit).toBe('GB');
   });
 });
 

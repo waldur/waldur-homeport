@@ -2,6 +2,7 @@ import { LimitPeriodEnum, OfferingComponent, Resource } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { TENANT_TYPE } from '@/openstack/constants';
+import { VMWARE_VM } from '@/vmware/constants';
 
 import { getBillingTypeLabelOrDash } from '../usage/utils';
 
@@ -25,15 +26,21 @@ const UNIT_CONVERSIONS: Record<string, Record<number, string>> = {
   KB: { 1024: 'MB', 1048576: 'GB' },
 };
 
+// Offering types whose components declare the unit a value is shown in, with
+// `factor` only converting the stored amount into it: VMware and OpenStack
+// tenants store RAM and disk in MiB under measured_unit "GB" and factor 1024.
+// Promoting that unit again would render gigabytes as terabytes.
+const OFFERING_TYPES_WITH_DISPLAY_UNITS = [TENANT_TYPE, VMWARE_VM];
+
 export const getDisplayUnit = (
   measuredUnit: string | undefined,
   factor: number | null | undefined,
   offeringType?: string,
 ): string => {
   if (!measuredUnit) return '';
-  // For tenants, the measured unit is already in human-readable form
-  // The `factor` field is for internal use only
-  if (offeringType === TENANT_TYPE) return measuredUnit;
+  if (OFFERING_TYPES_WITH_DISPLAY_UNITS.includes(offeringType)) {
+    return measuredUnit;
+  }
   if (!factor || factor === 1) return measuredUnit;
   return UNIT_CONVERSIONS[measuredUnit]?.[factor] ?? measuredUnit;
 };
