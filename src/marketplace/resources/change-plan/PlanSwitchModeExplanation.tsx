@@ -91,7 +91,7 @@ export const PlanSwitchModeExplanation: FC<PlanSwitchModeExplanationProps> = ({
             </ul>
           )}
           {billingPeriod && (
-            <p className="mb-0 fs-7">
+            <p className="mb-0">
               {translate('Both plans use the same billing period ({period}).', {
                 period: billingPeriod,
               })}
