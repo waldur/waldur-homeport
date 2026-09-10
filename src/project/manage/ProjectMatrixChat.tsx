@@ -25,6 +25,7 @@ import {
 import { ROOM_STATE_VARIANT } from '@/matrix/MatrixRoomStateBadge';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 import {
   getProject,
@@ -42,31 +43,31 @@ const RoomActions: FC<{
 }> = ({ room, isOwnerOrStaff, staff, refetch }) => (
   <div className="d-flex gap-1 flex-wrap">
     {room.state === 'active' && (
-      <OpenInTeamChatButton row={room} refetch={refetch} />
+      <OpenInTeamChatButton row={room} refetch={refetch} as={ActionButton} />
     )}
     {room.state === 'active' && (
-      <OpenInMatrixButton row={room} refetch={refetch} />
+      <OpenInMatrixButton row={room} refetch={refetch} as={ActionButton} />
     )}
     {isOwnerOrStaff && room.state === 'active' && (
-      <SyncMembersButton row={room} refetch={refetch} />
+      <SyncMembersButton row={room} refetch={refetch} as={ActionButton} />
     )}
     {staff && room.state === 'active' && (
-      <DisableChatButton row={room} refetch={refetch} />
+      <DisableChatButton row={room} refetch={refetch} as={ActionButton} />
     )}
     {staff && room.state === 'creating' && (
-      <RetryRoomButton row={room} refetch={refetch} />
+      <RetryRoomButton row={room} refetch={refetch} as={ActionButton} />
     )}
     {staff && room.state === 'error' && (
       <>
-        <RetryRoomButton row={room} refetch={refetch} />
-        <DisableChatButton row={room} refetch={refetch} />
-        <DeleteRoomButton row={room} refetch={refetch} />
+        <RetryRoomButton row={room} refetch={refetch} as={ActionButton} />
+        <DisableChatButton row={room} refetch={refetch} as={ActionButton} />
+        <DeleteRoomButton row={room} refetch={refetch} as={ActionButton} />
       </>
     )}
     {staff && room.state === 'archived' && (
       <>
-        <ReactivateChatButton row={room} refetch={refetch} />
-        <DeleteRoomButton row={room} refetch={refetch} />
+        <ReactivateChatButton row={room} refetch={refetch} as={ActionButton} />
+        <DeleteRoomButton row={room} refetch={refetch} as={ActionButton} />
       </>
     )}
   </div>
@@ -109,7 +110,11 @@ const HistoryExportsCard: FC<{
             />
           )}
           {isOwnerOrStaff && isActive && (
-            <ExportHistoryButton row={room} refetch={refetch} />
+            <ExportHistoryButton
+              row={room}
+              refetch={refetch}
+              as={ActionButton}
+            />
           )}
         </div>
       }
