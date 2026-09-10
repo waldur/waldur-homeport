@@ -39,15 +39,23 @@ export const checkIsOwner = (
       permission.role_name === RoleEnum.CUSTOMER_OWNER,
   );
 
+/**
+ * "Service provider manager" (CUSTOMER.MANAGER) is granted on the
+ * ServiceProvider object, not on its customer, so the permission's `scope_type`
+ * is 'service_provider' and its `scope_uuid` is the provider's. Matching
+ * `scope_uuid` against a customer therefore never held, and this returned false
+ * for every service provider manager there is. The organisation the provider
+ * belongs to is reported alongside as `customer_uuid`, which is what to match.
+ */
 export const checkIsServiceManager = (
   customer: Customer,
   user: User,
 ): boolean =>
+  !!customer?.uuid &&
   !!user?.permissions?.find(
     (permission) =>
-      permission.scope_type === 'customer' &&
-      permission.scope_uuid === customer?.uuid &&
-      permission.role_name === RoleEnum.CUSTOMER_MANAGER,
+      permission.role_name === RoleEnum.CUSTOMER_MANAGER &&
+      permission.customer_uuid === customer.uuid,
   );
 
 export const checkIsOwnerOrStaff = (
@@ -123,9 +131,11 @@ export const isServiceProviderManager = (state: RootState): boolean => {
   return (
     user.permissions?.some(
       (p) =>
-        p.scope_type === 'customer' &&
-        (p.role_name === RoleEnum.CUSTOMER_OWNER ||
-          p.role_name === RoleEnum.CUSTOMER_MANAGER),
+        // CUSTOMER.MANAGER is scoped to a ServiceProvider, never to a customer
+        // — see checkIsServiceManager.
+        p.role_name === RoleEnum.CUSTOMER_MANAGER ||
+        (p.scope_type === 'customer' &&
+          p.role_name === RoleEnum.CUSTOMER_OWNER),
     ) ?? false
   );
 };

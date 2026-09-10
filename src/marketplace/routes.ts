@@ -4,7 +4,6 @@ import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
 import { userHasCustomerPermission } from '@/customer/utils';
-import { fetchCustomer } from '@/customer/workspace/fetchCustomer';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -12,7 +11,7 @@ import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
 import { PermissionEnum } from '@/permissions/enums';
 import { isOwnerOrStaff, isStaff } from '@/workspace/selectors';
 
-import { fetchProvider } from './resolve';
+import { fetchProvider, fetchProviderCustomer } from './resolve';
 import { getMarketplaceTitle } from './title';
 
 const canAccessMarketplace = (state) => {
@@ -242,7 +241,7 @@ export const states: StateDeclaration[] = [
     resolve: [
       {
         token: 'fetchCustomer',
-        resolveFn: fetchCustomer,
+        resolveFn: fetchProviderCustomer,
         deps: ['$transition$'],
       },
       {
