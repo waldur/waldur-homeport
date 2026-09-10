@@ -1,9 +1,14 @@
+import * as RadixPopover from '@radix-ui/react-popover';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useContext, useEffect } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
+import {
+  ActionsDropdownComponent,
+  ActionsDropdownItem,
+} from '@/table/ActionsDropdown';
 
 import { useDrawer } from './actions';
 import { DrawerProvider } from './DrawerContext';
@@ -24,6 +29,29 @@ const DirtyDrawerContent = () => {
   }, [setIsDirty]);
   return <div data-testid="dirty-drawer-content">Editing…</div>;
 };
+
+/**
+ * A menu and a popover, the two overlay shapes drawer content actually uses.
+ * Both portal outside #kt_drawer, so they only work while Radix can see them
+ * as layers nested inside the drawer's modal Dialog.
+ */
+const OverlayDrawerContent = () => (
+  <div>
+    <ActionsDropdownComponent size="sm">
+      <ActionsDropdownItem onSelect={() => undefined}>
+        Start call
+      </ActionsDropdownItem>
+    </ActionsDropdownComponent>
+    <RadixPopover.Root modal={false}>
+      <RadixPopover.Trigger asChild>
+        <button type="button">3 members</button>
+      </RadixPopover.Trigger>
+      <RadixPopover.Portal>
+        <RadixPopover.Content>Mart Tamm</RadixPopover.Content>
+      </RadixPopover.Portal>
+    </RadixPopover.Root>
+  </div>
+);
 
 const OpenButton = ({
   onOpen,
@@ -46,6 +74,7 @@ const renderDrawer = () => {
   return {
     open: () => openDrawer(DrawerContent, { title: 'Panel' }),
     openDirty: () => openDrawer(DirtyDrawerContent, { title: 'Panel' }),
+    openOverlays: () => openDrawer(OverlayDrawerContent, { title: 'Panel' }),
   };
 };
 
@@ -134,5 +163,41 @@ describe('DrawerRoot', () => {
       ).not.toBeInTheDocument();
     });
     confirmSpy.mockRestore();
+  });
+
+  // The drawer is a *modal* Radix Dialog: it traps focus and disables pointer
+  // events outside itself. Radix only exempts a nested menu/popover from both
+  // because its layer and focus-scope stacks are module-level singletons — so
+  // every Radix primitive has to resolve to one shared copy of
+  // react-dismissable-layer and react-focus-scope. Let the package manager
+  // install a second copy of either (a duplicate the tree once carried, which
+  // is what took out the team-chat header's members and call menus) and the
+  // dialog no longer recognises the overlay as nested: it yanks focus back and
+  // the overlay dismisses itself in the same tick it opened.
+  it('opens a menu nested inside the drawer', async () => {
+    const user = userEvent.setup();
+    const { openOverlays } = renderDrawer();
+    openOverlays();
+    const toggle = await waitFor(() => {
+      // The icon-only kebab has no accessible name to query by.
+      // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+      const el = document.querySelector<HTMLElement>('.dropdown-toggle');
+      expect(el).not.toBeNull();
+      return el!;
+    });
+
+    await user.click(toggle);
+
+    expect(await screen.findByText('Start call')).toBeInTheDocument();
+  });
+
+  it('opens a popover nested inside the drawer', async () => {
+    const user = userEvent.setup();
+    const { openOverlays } = renderDrawer();
+    openOverlays();
+
+    await user.click(await screen.findByRole('button', { name: '3 members' }));
+
+    expect(await screen.findByText('Mart Tamm')).toBeInTheDocument();
   });
 });
