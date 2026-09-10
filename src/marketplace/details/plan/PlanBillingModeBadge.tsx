@@ -19,7 +19,7 @@ export const PlanBillingModeBadge: FC<{
   mode: PlanBilling | null | undefined;
   size?: 'sm' | 'lg';
   className?: string;
-}> = ({ mode, size = 'sm', className }) =>
+}> = ({ mode, size, className }) =>
   mode ? (
     <Badge
       variant={VARIANTS[mode]}
