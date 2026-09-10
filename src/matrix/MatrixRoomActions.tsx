@@ -8,7 +8,7 @@ import {
   SignOutIcon,
   TrashIcon,
 } from '@phosphor-icons/react';
-import { FC, useCallback, useMemo } from 'react';
+import { ComponentType, FC, useCallback, useMemo } from 'react';
 import {
   MatrixRoom,
   matrixRoomsDestroy,
@@ -32,6 +32,12 @@ import { openSupportDrawer } from '@/support/openSupportDrawer';
 interface MatrixRoomActionsProps {
   row: MatrixRoom;
   refetch?(): void;
+  /**
+   * Set by call sites that render these actions outside an ActionsDropdown
+   * (e.g. a card toolbar): ActionItem otherwise defaults to a Radix menu
+   * item, which throws without a Menu ancestor.
+   */
+  as?: ComponentType;
 }
 
 // You can only open a room's conversation if you actually belong to it — the
@@ -41,7 +47,7 @@ const isRoomMember = (row: MatrixRoom) =>
   row.current_user_membership_state === 'joined' ||
   row.current_user_membership_state === 'invited';
 
-export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row }) => {
+export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row, as }) => {
   const { openDialog } = useModal();
 
   const handleJoin = useCallback(() => {
@@ -54,6 +60,7 @@ export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row }) => {
 
   return (
     <ActionItem
+      as={as}
       title={translate('Open in Matrix')}
       action={handleJoin}
       iconNode={<ChatsCircleIcon weight="bold" />}
@@ -72,6 +79,7 @@ export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row }) => {
 export const JoinLeaveRoomButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
+  as,
 }) => {
   const isMember = isRoomMember(row);
 
@@ -97,6 +105,7 @@ export const JoinLeaveRoomButton: FC<MatrixRoomActionsProps> = ({
 
   return (
     <ActionItem
+      as={as}
       title={isMember ? translate('Leave room') : translate('Join room')}
       action={() => (isMember ? leave() : join())}
       iconNode={
@@ -112,7 +121,10 @@ export const JoinLeaveRoomButton: FC<MatrixRoomActionsProps> = ({
   );
 };
 
-export const OpenInTeamChatButton: FC<MatrixRoomActionsProps> = ({ row }) => {
+export const OpenInTeamChatButton: FC<MatrixRoomActionsProps> = ({
+  row,
+  as,
+}) => {
   const { openDrawer } = useDrawer();
 
   const handleOpen = useCallback(() => {
@@ -126,6 +138,7 @@ export const OpenInTeamChatButton: FC<MatrixRoomActionsProps> = ({ row }) => {
 
   return (
     <ActionItem
+      as={as}
       title={translate('Open in team chat')}
       action={handleOpen}
       iconNode={<ChatsCircleIcon weight="bold" />}
@@ -144,6 +157,7 @@ export const OpenInTeamChatButton: FC<MatrixRoomActionsProps> = ({ row }) => {
 export const SyncMembersButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
+  as,
 }) => {
   const { mutate: syncMembers } = useManagedMutation<unknown, unknown, void>({
     mutationFn: () => matrixRoomsSyncMembers({ path: { uuid: row.uuid } }),
@@ -155,6 +169,7 @@ export const SyncMembersButton: FC<MatrixRoomActionsProps> = ({
 
   return (
     <ActionItem
+      as={as}
       title={translate('Sync members')}
       action={() => syncMembers()}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
@@ -171,6 +186,7 @@ export const SyncMembersButton: FC<MatrixRoomActionsProps> = ({
 export const ExportHistoryButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
+  as,
 }) => {
   const { mutate: exportHistory } = useManagedMutation<unknown, unknown, void>({
     mutationFn: () => matrixRoomsExportHistory({ path: { uuid: row.uuid } }),
@@ -183,6 +199,7 @@ export const ExportHistoryButton: FC<MatrixRoomActionsProps> = ({
 
   return (
     <ActionItem
+      as={as}
       title={translate('Export history')}
       action={() => exportHistory()}
       iconNode={<ExportIcon weight="bold" />}
@@ -205,6 +222,7 @@ const IN_PROGRESS_STALL_THRESHOLD_MINUTES = 3;
 export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
+  as,
 }) => {
   const { mutate: retry } = useManagedMutation<unknown, unknown, void>({
     mutationFn: () => matrixRoomsRetry({ path: { uuid: row.uuid } }),
@@ -242,6 +260,7 @@ export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
 
   return (
     <ActionItem
+      as={as}
       title={translate('Retry')}
       action={() => retry()}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
@@ -254,6 +273,7 @@ export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
 export const DisableChatButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
+  as,
 }) => {
   const { openDialog } = useModal();
 
@@ -268,6 +288,7 @@ export const DisableChatButton: FC<MatrixRoomActionsProps> = ({
 
   return (
     <ActionItem
+      as={as}
       title={translate('Disable chat')}
       action={handleDisable}
       iconNode={<PowerIcon weight="bold" />}
@@ -285,6 +306,7 @@ export const DisableChatButton: FC<MatrixRoomActionsProps> = ({
 export const ReactivateChatButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
+  as,
 }) => {
   const reactivateConfirmation = useMemo(
     () => ({
@@ -307,6 +329,7 @@ export const ReactivateChatButton: FC<MatrixRoomActionsProps> = ({
 
   return (
     <ActionItem
+      as={as}
       title={translate('Re-enable chat')}
       action={() => reactivate()}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
@@ -323,6 +346,7 @@ export const ReactivateChatButton: FC<MatrixRoomActionsProps> = ({
 export const DeleteRoomButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
+  as,
 }) => {
   const deleteConfirmation = useMemo(
     () => ({
@@ -345,6 +369,7 @@ export const DeleteRoomButton: FC<MatrixRoomActionsProps> = ({
 
   return (
     <ActionItem
+      as={as}
       title={translate('Delete')}
       action={() => deleteRoom()}
       iconNode={<TrashIcon weight="bold" />}
