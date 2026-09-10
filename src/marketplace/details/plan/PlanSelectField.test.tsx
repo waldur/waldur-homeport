@@ -67,4 +67,16 @@ describe('PlanSelectField billing mode badge', () => {
     expect(await screen.findByText('Reserved')).toBeInTheDocument();
     expect(screen.queryByText('Usage-based')).toBeNull();
   });
+
+  it('renders without an offering when the plans inherit their billing', async () => {
+    // An inheriting plan resolves its billing from the offering's components;
+    // with no offering that must not be attempted at all.
+    renderField(
+      [plan('Small Cloud', 'inherit'), plan('Large Cloud', 'inherit')],
+      undefined,
+    );
+    await openMenu();
+    expect(await screen.findByText('Small Cloud')).toBeInTheDocument();
+    expect(screen.getByText('Large Cloud')).toBeInTheDocument();
+  });
 });

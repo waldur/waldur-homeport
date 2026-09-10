@@ -145,6 +145,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
             <div className="flex-grow-1">
               <PlanSelectField
                 plans={plans}
+                offering={offeringQuery.data}
                 isLoading={offeringQuery.isLoading}
                 isDisabled={!offering}
               />
