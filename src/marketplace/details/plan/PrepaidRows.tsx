@@ -5,7 +5,7 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators } from '@/core/validators';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { formatIntField, getLimitParser } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 
@@ -55,7 +55,7 @@ const PrepaidRow = ({
           ) : (
             <Field
               name={`limits.${component.type}`}
-              parse={parseIntField}
+              parse={getLimitParser(component)}
               format={formatIntField}
               validate={validateValue}
               render={({ input }) => (

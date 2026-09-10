@@ -6,6 +6,7 @@ import { BillingTypeEnum } from 'waldur-js-client';
 import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
 import { ComponentBooleanDefaultLimitField } from './ComponentBooleanDefaultLimitField';
 import { ComponentBooleanLimitField } from './ComponentBooleanLimitField';
+import { ComponentDecimalPlacesField } from './ComponentDecimalPlacesField';
 import { ComponentLimitAmountField } from './ComponentLimitAmountField';
 import { ComponentLimitEnableField } from './ComponentLimitEnableField';
 import {
@@ -46,6 +47,9 @@ export const ComponentLimit: FC<{ readOnly?: boolean }> = (props) => {
             </Col>
             <Col xs>
               <ComponentMaxValueField />
+            </Col>
+            <Col xs>
+              <ComponentDecimalPlacesField />
             </Col>
             <Col xs={5}>
               <ComponentLimitPeriodField

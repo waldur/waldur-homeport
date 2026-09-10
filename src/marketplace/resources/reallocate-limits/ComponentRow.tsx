@@ -9,7 +9,11 @@ import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
-import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import {
+  formatIntField,
+  getLimitParser,
+  getLimitStep,
+} from '@/marketplace/common/utils';
 import { getResourceComponentValidator } from '@/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@/marketplace/offerings/store/types';
 import { ChangedLimitField } from '@/marketplace/resources/change-limits/ChangedLimitField';
@@ -24,6 +28,7 @@ interface ComponentRowProps {
     limit: number;
     usage: number;
     changedLimit: number;
+    limit_decimal_places?: number | null;
   };
   limits: Limits;
   offeringLimits: OfferingLimits;
@@ -33,11 +38,29 @@ interface ComponentRowProps {
 
 const CellWrapper: FC<any> = (props) => {
   const currentLimit = props.currentLimit || 0;
+  const step = getLimitStep(props.offeringComponent);
+  const parse = getLimitParser(props.offeringComponent);
 
+  // This cell clamps to the current limit as the user types, so it cannot hand
+  // the raw text to the Field's own parse -- it has to parse, clamp, and pass a
+  // value back. Doing that with parseInt truncated every fraction here no
+  // matter what precision the component declared, which is why the clamping
+  // goes through the component's own parser instead.
+  const toNumber = (value) => {
+    const parsed = parseFloat(String(parse(value)));
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
+  // Rounded to the step's precision for the same reason BaseNumberField does
+  // it: repeated float addition drifts, and 0.1 + 0.2 landing as
+  // 0.30000000000000004 would be refused by the limit precision check.
+  const stepDecimals = (String(step).split('.')[1] || '').length;
   const adjustValue = (amount: number) => {
-    const currentValue = parseInt(props.input.value, 10) || 0;
-    const newValue = Math.max(0, Math.min(currentLimit, currentValue + amount));
-    props.input.onChange(newValue);
+    const newValue = Math.max(
+      0,
+      Math.min(currentLimit, toNumber(props.input.value) + amount),
+    );
+    props.input.onChange(Number(newValue.toFixed(stepDecimals)));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,10 +69,15 @@ const CellWrapper: FC<any> = (props) => {
       props.input.onChange('');
       return;
     }
-    const numValue = parseInt(inputValue, 10);
-    if (!isNaN(numValue)) {
-      const limitedValue = Math.max(0, Math.min(currentLimit, numValue));
-      props.input.onChange(limitedValue);
+    const parsed = parse(inputValue);
+    // A value still being typed through ("1.", "1.0") is passed along as it
+    // stands: clamping it would parse away the character the user just typed.
+    if (typeof parsed === 'string') {
+      props.input.onChange(parsed);
+      return;
+    }
+    if (Number.isFinite(parsed)) {
+      props.input.onChange(Math.max(0, Math.min(currentLimit, parsed)));
     }
   };
 
@@ -70,6 +98,7 @@ const CellWrapper: FC<any> = (props) => {
               component: props.offeringComponent.name,
             })}
             data-testid={`row-${props.offeringComponent.type}-input`}
+            step={step}
             min={props.limits?.min || 0}
             max={currentLimit}
             value={props.input.value}
@@ -78,8 +107,8 @@ const CellWrapper: FC<any> = (props) => {
           />
           <div className="input-group-addons">
             <CaretUpDownButtons
-              onClickUp={() => adjustValue(1)}
-              onClickDown={() => adjustValue(-1)}
+              onClickUp={() => adjustValue(step)}
+              onClickDown={() => adjustValue(-step)}
             />
           </div>
         </InputGroup>
@@ -100,7 +129,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
 
   const baseValidators = getResourceComponentValidator(limits);
   const currentLimitValidator = (value: number) => {
-    const numValue = parseInt(String(value), 10);
+    const numValue = parseFloat(String(value));
     if (isNaN(numValue)) return undefined;
     if (numValue > component.limit) {
       return translate(
@@ -123,7 +152,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
       <td>{renderFieldOrDash(component.limit)}</td>
       <Field
         name={`limits.${component.type}`}
-        parse={parseIntField}
+        parse={getLimitParser(component)}
         format={formatIntField}
         validate={validate}
         min={0}
