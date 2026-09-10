@@ -23,12 +23,18 @@ export const PlanSelectField: FunctionComponent<PlanSelectFieldProps> = (
   // The badge is there to tell plans apart. When every plan bills the same way
   // it repeats one word down the list and says nothing about the choice being
   // made -- these plans differ by size and price -- so it is left out until
-  // there is something to distinguish.
+  // there is something to distinguish. Without an offering a plan that
+  // inherits its billing has nothing to be resolved against, so there is no
+  // badge at all.
   const distinctModes = new Set(
-    (props.plans ?? []).map((plan) => getPlanBillingMode(props.offering, plan)),
+    props.offering
+      ? (props.plans ?? []).map((plan) =>
+          getPlanBillingMode(props.offering, plan),
+        )
+      : [],
   );
   const formatOptionLabel =
-    props.offering && distinctModes.size > 1
+    distinctModes.size > 1
       ? (plan: BasePublicPlan) => (
           <span className="d-inline-flex align-items-center gap-2">
             {plan.name}
