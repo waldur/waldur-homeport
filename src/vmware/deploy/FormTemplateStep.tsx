@@ -69,13 +69,39 @@ export const FormTemplateStep = (props: FormStepProps) => {
     [form],
   );
 
-  // Initialize template
+  // The hardware fields of the processor and memory steps register with
+  // react-final-form in their own mount effect, and React flushes an earlier
+  // sibling's effects first -- this step is rendered before them. Writing cpu,
+  // ram and disk straight from a mount effect therefore lands between those
+  // fields' render and their registration whenever the templates are served
+  // from cache, and the state a field is handed at registration time is
+  // dropped: react-final-form assumes it matches what the field just
+  // rendered. The field then keeps showing zero for good, since final-form
+  // memoizes the subscriber and never re-delivers a value it believes the
+  // field already has -- re-picking the same template cannot repair it.
+  //
+  // Waiting for a second commit keeps the write out of the commit the fields
+  // mount in. A field that mounts later is not at risk: it reads the value
+  // while rendering.
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    if (data?.length > 0) {
+    setMounted(true);
+  }, []);
+
+  // Initialize template
+  //
+  // The template field is written here too: nothing else selects a first
+  // choice, so without it the hardware steps below would show the first
+  // template's cpu, ram and disk while this card highlights nothing, the
+  // storage step's Guest OS stays empty and this required step counts as
+  // unfinished.
+  useEffect(() => {
+    if (mounted && data?.length > 0) {
       const template = data[0];
+      form.change('attributes.template', template);
       onChangeImage(template);
     }
-  }, [props.offering, data, onChangeImage]);
+  }, [mounted, props.offering, data, onChangeImage, form]);
 
   return (
     <VStepperFormStepCard
