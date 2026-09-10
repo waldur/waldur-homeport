@@ -6,7 +6,11 @@ import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
 import { NumberField } from '@/form';
 import { Limits } from '@/marketplace/common/types';
-import { parseIntField, formatIntField } from '@/marketplace/common/utils';
+import {
+  formatIntField,
+  getLimitParser,
+  getLimitStep,
+} from '@/marketplace/common/utils';
 import { getResourceComponentValidator } from '@/marketplace/offerings/store/limits';
 import { ChangedLimitField } from '@/marketplace/resources/change-limits/ChangedLimitField';
 import { PriceField } from '@/marketplace/resources/change-limits/PriceField';
@@ -37,6 +41,7 @@ const CellWrapper: FC<any> = (props) => (
         unit={props.offeringComponent.measured_unit}
         min={props.limits.min}
         max={props.limits.max}
+        step={getLimitStep(props.offeringComponent)}
       />
     )}
   </Form.Group>
@@ -55,7 +60,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
       <td>{renderFieldOrDash(component.limit)}</td>
       <FinalFormField
         name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
-        parse={parseIntField}
+        parse={getLimitParser(component)}
         format={formatIntField}
         validate={composeValidators(...getResourceComponentValidator(limits))}
         min={0}

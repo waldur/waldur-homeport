@@ -9,7 +9,11 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
-import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import {
+  formatIntField,
+  getLimitParser,
+  getLimitStep,
+} from '@/marketplace/common/utils';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 import { PriceTooltip } from '@/price/PriceTooltip';
 import { renderFieldOrDash } from '@/table/utils';
@@ -64,7 +68,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
                 ) : (
                   <Field
                     name={`limits.${component.type}`}
-                    parse={parseIntField}
+                    parse={getLimitParser(component)}
                     format={formatIntField}
                     validate={validateValue}
                   >
@@ -73,6 +77,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
                         input={input}
                         meta={meta}
                         type="number"
+                        step={getLimitStep(component)}
                         className="px-2"
                       />
                     )}

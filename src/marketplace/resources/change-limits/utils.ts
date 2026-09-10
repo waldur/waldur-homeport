@@ -45,6 +45,8 @@ export interface ComponentRowType {
   is_boolean: boolean;
   limit: number;
   usage: number;
+  /** Decimal places the component accepts; 0 or absent means whole numbers. */
+  limit_decimal_places?: number | null;
   /** Price for the relevant billing period at the new limit. */
   price: number;
   /** Difference vs. current limit, expressed in the same period. */
@@ -326,6 +328,7 @@ export const getLimitChangeData = (
       name: component.name,
       measured_unit: component.measured_unit,
       is_boolean: component.is_boolean,
+      limit_decimal_places: component.limit_decimal_places,
       usage: usages[component.type] || 0,
       limit: currentLimits[component.type],
       subTotal,

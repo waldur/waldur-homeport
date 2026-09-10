@@ -13727,6 +13727,11 @@
       "feature_area": "debug"
     }
   },
+  "Decimal places": {
+    "context": {
+      "feature_area": "update"
+    }
+  },
   "Decision": {
     "context": {
       "primary_ui_type": "title",
@@ -21972,6 +21977,11 @@
     }
   },
   "How maintenance notifications are delivered.": {},
+  "How many decimal places a customer may use for this limit. 0 keeps it a whole number.": {
+    "context": {
+      "feature_area": "update"
+    }
+  },
   "How many minutes before scheduled maintenance users should be notified.": {},
   "How many proposals will I need to review?": {
     "context": {
