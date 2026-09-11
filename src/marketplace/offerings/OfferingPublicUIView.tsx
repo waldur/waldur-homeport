@@ -338,7 +338,6 @@ export const OfferingPublicUIView = () => {
       isRefetching={isRefetching}
       error={error}
       isPublic
-      concealPricing={data?.concealPricing}
     />,
 
     [data, isRefetching, refetch, error, isLoading],

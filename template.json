@@ -45261,11 +45261,6 @@
       "feature_area": "common"
     }
   },
-  "See all plans": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
   "See less": {
     "context": {
       "primary_ui_type": "action_button",
@@ -64861,11 +64856,6 @@
   "on-link": {
     "context": {
       "feature_area": "openstack-tenant"
-    }
-  },
-  "once": {
-    "context": {
-      "feature_area": "details"
     }
   },
   "once at activation": {},
