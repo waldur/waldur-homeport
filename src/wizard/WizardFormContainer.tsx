@@ -24,6 +24,10 @@ interface WizardFormContainerProps<FormValues = any> {
   hideStepper?: boolean;
   validate?: (values: FormValues) => any;
   skipSteps?: number[];
+  /** Extra final-form mutators, e.g. `final-form-arrays` for a step that uses
+   * FieldArray. Without them FieldArray's push/remove are undefined at
+   * runtime, which type-checking does not catch. */
+  mutators?: Record<string, any>;
 }
 
 export const WizardFormContainer = <
@@ -43,6 +47,7 @@ export const WizardFormContainer = <
   hideStepper,
   validate,
   skipSteps = [],
+  mutators,
 }: WizardFormContainerProps<FormValues>) => {
   const [step, setStep] = useState(0);
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
@@ -89,6 +94,7 @@ export const WizardFormContainer = <
       onSubmit={handleSubmitStep}
       initialValues={initialValues}
       validate={validate}
+      mutators={mutators}
       render={({ handleSubmit, submitting, invalid, values, form }) => (
         <form onSubmit={handleSubmit} noValidate>
           {onChange && (

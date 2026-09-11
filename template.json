@@ -632,6 +632,11 @@
       "feature_area": "overview"
     }
   },
+  "A bare \"*\" would match every value the claim carries. Use a prefix such as \"group-*\".": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "A client-accessible domain name override in case OpenStack is returning an internal domain. Leave empty to use the domain returned by OpenStack.": {
     "context": {
       "feature_area": "openstack"
@@ -711,6 +716,7 @@
     }
   },
   "A reserved external IP allocated to the tenant; can be attached to a port to expose an instance.": {},
+  "A rule that does not create a project must grant an organization role.": {},
   "A service-provider pool applies to all offerings by default. An offering pool overrides it for a single offering.": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -1008,6 +1014,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "tos"
+    }
+  },
+  "Accepted values": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Accepted: {count}": {
@@ -1822,6 +1833,11 @@
   "Add canned response": {
     "context": {
       "feature_area": "canned-responses"
+    }
+  },
+  "Add claim": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Add column": {
@@ -2978,6 +2994,7 @@
     }
   },
   "All citizenships": {},
+  "All claims must match; within one claim any value matches. A value ending in \"*\" matches by prefix, e.g. \"urn:mace:example.org:group:hpc-*\". The claim must be listed in the identity provider's extra fields for Waldur to receive it.": {},
   "All conditions match (AND)": {
     "context": {
       "primary_ui_type": "label",
@@ -6109,7 +6126,7 @@
   "Assurance levels": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "restrictions"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "At capacity": {
@@ -6621,6 +6638,7 @@
       "feature_area": "mappings"
     }
   },
+  "Auto-provisioning rule": {},
   "Auto-provisioning rules": {
     "context": {
       "feature_area": "administration"
@@ -9287,6 +9305,7 @@
       "feature_area": "organization-summary"
     }
   },
+  "Choose an organization role, a project role, or both.": {},
   "Choose how to request this offering": {
     "context": {
       "feature_area": "access"
@@ -9379,12 +9398,27 @@
   "Claim": {
     "context": {
       "primary_ui_type": "action_button",
-      "feature_area": "tickets"
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Claim \"{claim}\" is listed twice. Put all of its accepted values in one row.": {
+    "context": {
+      "variables": {
+        "claim": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Claim Mapping": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Claims": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Claims not exposed": {
@@ -11706,6 +11740,11 @@
       "action_type": "create"
     }
   },
+  "Create (or join) a project for each matched user. Disable for a rule that only grants an organization role.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Create Customer Mapping": {
     "context": {
       "feature_area": "mappings"
@@ -11787,6 +11826,11 @@
   "Create a new ticket for the selected provider and notify them.": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "Create a project": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Create a project template": {
@@ -17486,6 +17530,11 @@
   "Ensure this field has no more than 30 characters.": {},
   "Enter IPv4 address.": {},
   "Enter a CIDR address.": {},
+  "Enter a claim name.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Enter a comma separated list of fields of the user profile that would be protected from editing in Waldur.": {
     "context": {
       "feature_area": "providers"
@@ -17586,6 +17635,16 @@
   "Enter allocation value": {
     "context": {
       "feature_area": "project-templates"
+    }
+  },
+  "Enter at least one accepted value for \"{claim}\".": {
+    "context": {
+      "variables": {
+        "claim": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Enter claim name (e.g., preferred_username)": {
@@ -21196,6 +21255,46 @@
       "feature_area": "roles"
     }
   },
+  "Granted automatically from identity provider data ({source}). It may be revoked automatically if the user stops matching.": {
+    "context": {
+      "variables": {
+        "source": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "affiliations"
+    }
+  },
+  "Granted by": {
+    "context": {
+      "feature_area": "affiliations"
+    }
+  },
+  "Granted by a person.": {
+    "context": {
+      "feature_area": "affiliations"
+    }
+  },
+  "Granted on the organization itself. Leave empty to grant no organization-level role.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Grants nothing yet — choose a role on the previous step.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Grants: {grants}.": {
+    "context": {
+      "variables": {
+        "grants": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Greater than": {
     "context": {
       "primary_ui_type": "label"
@@ -22195,6 +22294,11 @@
     }
   },
   "ISD source identifier that is authoritative for FEDERATED_IDENTITY_LOCKED_FIELDS (e.g. 'isd:efp'). When set and present in a user's active ISDs, other identity sources (eduTEAMS, OIDC logins, ...) cannot overwrite the locked fields on sync. Empty disables the protection.": {},
+  "ISO 3166-1 alpha-2 codes. Users with any of these nationalities will match.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Iceland": {},
   "Icon": {
     "context": {
@@ -22295,6 +22399,12 @@
       "feature_area": "support"
     }
   },
+  "Identity provider claims": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "support"
+    }
+  },
   "Identity provider created successfully": {
     "context": {
       "primary_ui_type": "success_message",
@@ -22356,7 +22466,7 @@
   "Identity sources": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "restrictions"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Identity verification is required for business registration": {
@@ -24478,6 +24588,11 @@
   "Keeper": {
     "context": {
       "feature_area": "admin"
+    }
+  },
+  "Keeps roles in step with the identity provider, the way SCIM group membership does.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Kept until": {
@@ -27115,7 +27230,23 @@
       "feature_area": "reviewer-pool"
     }
   },
+  "Matches every authenticated user — no filter is configured.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Matches reviewer expertise keywords against proposal text. Keywords are weighted by proficiency level: Expert (100%), Familiar (70%).": {},
+  "Matches users by: {filters}.": {
+    "context": {
+      "variables": {
+        "filters": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules",
+      "action_type": "filter"
+    }
+  },
   "Matching configuration": {
     "context": {
       "feature_area": "details"
@@ -29062,7 +29193,7 @@
   "Nationalities": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "restrictions"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Nationalities field": {
@@ -31572,6 +31703,16 @@
       "feature_area": "proposal"
     }
   },
+  "Not received from any identity provider: {claims}. Waldur only stores a claim that is listed in the provider's extra fields, so this rule cannot match anyone until it is added there.": {
+    "context": {
+      "variables": {
+        "claims": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Not removed": {
     "context": {
       "primary_ui_type": "label"
@@ -34049,7 +34190,7 @@
   "Organization role": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "roles"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Organization roles": {
@@ -34084,7 +34225,7 @@
   "Organization types": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "restrictions"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Organization updated successfully": {
@@ -43652,6 +43793,11 @@
       "feature_area": "version-history"
     }
   },
+  "Revocation": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Revocation reason": {
     "context": {
       "primary_ui_type": "title",
@@ -43697,6 +43843,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Revoke roles when the user stops matching": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Revoke selected permissions": {
     "context": {
       "feature_area": "affiliations"
@@ -43732,6 +43883,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "tos"
+    }
+  },
+  "Revokes when unmatched": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Revoking it leaves the user with none. If passkeys are required for their account they will be held at the enrolment page until they add another, so make sure they can reach a device first.": {
@@ -44056,6 +44212,11 @@
   "Roles only": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Roles this rule granted will be revoked the next time a user who no longer matches signs in. Roles granted by a person, and roles granted by other rules, are never touched.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Rollback ratio": {
@@ -44383,6 +44544,11 @@
   "SAN storage": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "SCHAC organization type URNs. Users from an organization of any of these types will match.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "SCIM": {
@@ -49395,7 +49561,7 @@
   "Summary": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "providers"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Sunday": {
@@ -52292,7 +52458,7 @@
   },
   "This field is required.": {
     "context": {
-      "feature_area": "auto-provisioning-rules"
+      "feature_area": "project"
     }
   },
   "This file contains CHANGEME placeholder values that must be replaced with actual credentials before use.": {
@@ -60806,6 +60972,11 @@
       "feature_area": "restrictions"
     }
   },
+  "Users authenticated via any of these identity providers will match.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Users by category": {
     "context": {
       "feature_area": "charts"
@@ -60860,6 +61031,11 @@
   "Users must have ALL of these assurance levels to be allowed.": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "Users must hold ALL of these assurance levels to match.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Users over time": {
@@ -62234,6 +62410,11 @@
       "feature_area": "matrix"
     }
   },
+  "What it grants": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "What this proposal produced once it was accepted.": {
     "context": {
       "feature_area": "proposal"
@@ -62486,6 +62667,11 @@
   "Who is included in matching:": {
     "context": {
       "feature_area": "matching"
+    }
+  },
+  "Who it matches": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Why": {
@@ -63859,7 +64045,7 @@
   },
   "affiliations": {
     "context": {
-      "feature_area": "team"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "after the {input1} th of the month, actual daily avg differs from predicted by > {input2} %": {
@@ -63940,6 +64126,11 @@
       "feature_area": "assignments"
     }
   },
+  "assurance level": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "at activation and on every plan switch": {},
   "attachments": {
     "context": {
@@ -64009,6 +64200,16 @@
   "catalogues": {
     "context": {
       "feature_area": "catalog"
+    }
+  },
+  "claims ({claims})": {
+    "context": {
+      "variables": {
+        "claims": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "comments": {
@@ -64457,6 +64658,11 @@
       "primary_ui_type": "label"
     }
   },
+  "email": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "end date change requests": {
     "context": {
       "feature_area": "request-end-date-change"
@@ -64555,6 +64761,11 @@
   "identity provider": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "identity source": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "imported licenses": {
@@ -64762,6 +64973,11 @@
       "feature_area": "livekit"
     }
   },
+  "nationality": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "network": {
     "context": {
       "feature_area": "actions"
@@ -64917,6 +65133,11 @@
   "organization network": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "organization type": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "organizations": {
@@ -68486,6 +68707,26 @@
         }
       },
       "feature_area": "managed-projects"
+    }
+  },
+  "{role} on the organization": {
+    "context": {
+      "variables": {
+        "role": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "{role} on their project": {
+    "context": {
+      "variables": {
+        "role": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "{router} (disconnected)": {
