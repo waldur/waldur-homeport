@@ -3,6 +3,7 @@ import { ProviderTicket, providerTicketsList } from 'waldur-js-client';
 
 import { formatRelative } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
@@ -18,6 +19,8 @@ import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
 import { TicketPriorityBadge, TicketStatusBadge } from '../common/badges';
+import { emptyTableFetcher } from '../common/emptyTableFetcher';
+import { NoHelpdeskConfigured } from '../common/NoHelpdeskConfigured';
 import { SlaIndicator } from '../common/SlaIndicator';
 import { useProviderHelpdesk } from '../common/useProviderHelpdesk';
 
@@ -25,15 +28,23 @@ import { AssigneeCell } from './AssigneeCell';
 import { ProviderTicketsRowActions } from './ProviderTicketsRowActions';
 import { TicketStatsWidgets } from './TicketStatsWidgets';
 
-export const ProviderTicketsList: FC = () => {
-  const customer = useCustomer();
-  const { helpdesk } = useProviderHelpdesk(customer?.service_provider_uuid);
+const TicketsTable: FC<{ helpdeskUuid?: string }> = ({ helpdeskUuid }) => {
   const values = useFilterValues('provider-tickets');
-  const filter = useMemo(() => selectProviderTicketsFilter(values), [values]);
+  // Staff and support see every routed ticket, so the page must ask for its
+  // own helpdesk's tickets explicitly.
+  const filter = useMemo(
+    () => ({
+      ...selectProviderTicketsFilter(values),
+      provider_helpdesk_uuid: helpdeskUuid,
+    }),
+    [values, helpdeskUuid],
+  );
 
   const tableProps = useTable({
     table: 'provider-tickets',
-    fetchData: createFetcher(providerTicketsList),
+    fetchData: helpdeskUuid
+      ? createFetcher(providerTicketsList)
+      : emptyTableFetcher,
     queryField: 'summary',
     filter,
   });
@@ -83,11 +94,7 @@ export const ProviderTicketsList: FC = () => {
       {
         title: translate('Assignee'),
         render: ({ row }) => (
-          <AssigneeCell
-            row={row}
-            refetch={tableProps.fetch}
-            helpdeskUuid={helpdesk?.uuid}
-          />
+          <AssigneeCell row={row} refetch={tableProps.fetch} />
         ),
       },
       {
@@ -95,12 +102,12 @@ export const ProviderTicketsList: FC = () => {
         render: ({ row }) => <>{formatRelative(row.created)}</>,
       },
     ],
-    [helpdesk?.uuid, tableProps.fetch],
+    [tableProps.fetch],
   );
 
   return (
     <>
-      <TicketStatsWidgets />
+      <TicketStatsWidgets helpdeskUuid={helpdeskUuid} />
       <Table
         {...tableProps}
         columns={columns}
@@ -110,7 +117,21 @@ export const ProviderTicketsList: FC = () => {
         hasQuery={true}
         showPageSizeSelector={true}
         rowActions={ProviderTicketsRowActions}
+        placeholderComponent={
+          helpdeskUuid ? undefined : <NoHelpdeskConfigured />
+        }
       />
     </>
   );
+};
+
+export const ProviderTicketsList: FC = () => {
+  const customer = useCustomer();
+  const { helpdesk, isLoading } = useProviderHelpdesk(
+    customer?.service_provider_uuid,
+  );
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  return <TicketsTable helpdeskUuid={helpdesk?.uuid} />;
 };

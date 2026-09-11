@@ -5,10 +5,8 @@ import { Issue, providerTicketsRetrieve } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { IssueDetails } from '@/issues/IssueDetails';
 import { ActionButton } from '@/table/ActionButton';
-import { useCustomer } from '@/workspace/hooks';
 
 import { useClaimTicket, useResolveTicket } from '../api';
-import { useProviderHelpdesk } from '../common/useProviderHelpdesk';
 
 import { AssigneeSelect } from './AssigneeSelect';
 
@@ -16,9 +14,6 @@ const ProviderDetailActions: FC<{ issue: Issue; refetch: () => void }> = ({
   issue,
   refetch,
 }) => {
-  const customer = useCustomer();
-  const { helpdesk } = useProviderHelpdesk(customer?.service_provider_uuid);
-
   const { data: ticket, refetch: refetchTicket } = useQuery({
     queryKey: ['ProviderTicket', issue.uuid],
     queryFn: async () =>
@@ -43,7 +38,7 @@ const ProviderDetailActions: FC<{ issue: Issue; refetch: () => void }> = ({
           status={ticket?.status}
           assignee={ticket?.provider_assignee}
           assigneeName={ticket?.provider_assignee_name}
-          helpdeskUuid={helpdesk?.uuid}
+          helpdeskUuid={ticket?.provider_helpdesk_uuid}
           refetch={refetchAll}
         />
       </div>
