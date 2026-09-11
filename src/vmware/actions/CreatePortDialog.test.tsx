@@ -6,6 +6,7 @@ import {
   vmwareVirtualMachineCreatePort,
 } from 'waldur-js-client';
 
+import { useNotify } from '@/store/notify';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
 import { mockListResponse } from '@/test/utils';
@@ -53,6 +54,10 @@ describe('CreatePortDialog', () => {
           network: 'https://example.com/api/vmware-networks/n1/',
         },
       }),
+    );
+    // The adapter is only scheduled at this point; vCenter can still refuse it.
+    expect(useNotify().showSuccess).toHaveBeenCalledWith(
+      'Network adapter creation has been scheduled.',
     );
   });
 

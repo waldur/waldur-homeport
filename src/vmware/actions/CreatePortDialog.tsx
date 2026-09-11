@@ -33,7 +33,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         },
       }),
 
-    successMessage: translate('Network adapter has been created.'),
+    successMessage: translate('Network adapter creation has been scheduled.'),
     errorMessage: translate('Unable to create network adapter.'),
     refetch: refetch,
   });
