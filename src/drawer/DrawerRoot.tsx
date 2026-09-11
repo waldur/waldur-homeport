@@ -20,6 +20,32 @@ export const DrawerRoot: FunctionComponent = () => {
 
   const { isOpen, drawerComponent, drawerProps, closeDrawer } = context;
   const [isDirtyContext, setIsDirtyContext] = React.useState(false);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const insidePointerDownRef = React.useRef<Event | null>(null);
+
+  // Radix decides whether a pointerdown belongs to the layer from the React
+  // tree, not the DOM: it flags the pointer as inside from an
+  // onPointerDownCapture on the content. Anything portalled in from a tree
+  // outside the dialog therefore reads as outside however deeply the DOM nests
+  // it — which is how the docked Matrix call, owned by MatrixCallHost so it
+  // survives moving between destinations, dismissed the whole drawer on the
+  // first click on its own mic/camera/screen-share controls.
+  //
+  // So record DOM containment ourselves, from a native capture listener that
+  // runs while the event is still travelling down. Testing the target later,
+  // inside onPointerDownOutside, is too late: React has flushed the re-render
+  // the same pointerdown triggered, and the node the pointer hit — the icon
+  // inside the control — is already detached, so contains() says false.
+  React.useEffect(() => {
+    const remember = (event: Event) => {
+      const target = event.target as Node | null;
+      if (target && contentRef.current?.contains(target)) {
+        insidePointerDownRef.current = event;
+      }
+    };
+    document.addEventListener('pointerdown', remember, true);
+    return () => document.removeEventListener('pointerdown', remember, true);
+  }, []);
   const isDirtyForm = isDirtyContext;
   const onHide = () => {
     if (
@@ -57,12 +83,18 @@ export const DrawerRoot: FunctionComponent = () => {
         looked fine, which is why it wasn't caught until real click testing.
       */}
       <Dialog.Content
+        ref={contentRef}
         id="kt_drawer"
         className={classNames('bg-body drawer drawer-end', {
           'drawer-on': isOpen,
         })}
         style={{ '--drawer-width': drawerProps.width } as React.CSSProperties}
         aria-describedby={undefined}
+        onPointerDownOutside={(event) => {
+          if (event.detail.originalEvent === insidePointerDownRef.current) {
+            event.preventDefault();
+          }
+        }}
       >
         <div className="card shadow-none rounded-0 w-100">
           <div className="card-header" id="kt_drawer_header">

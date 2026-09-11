@@ -1,7 +1,8 @@
 import * as RadixPopover from '@radix-ui/react-popover';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useLayoutEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
@@ -76,6 +77,41 @@ const renderDrawer = () => {
     openDirty: () => openDrawer(DirtyDrawerContent, { title: 'Panel' }),
     openOverlays: () => openDrawer(OverlayDrawerContent, { title: 'Panel' }),
   };
+};
+
+/**
+ * The shape MatrixCallHost uses to keep a live call alive while it travels
+ * between destinations: an element owned by a React tree outside the drawer,
+ * appended into a slot inside it. Its DOM parent is #kt_drawer; its React
+ * parent is not.
+ */
+const renderDrawerWithDockedPortal = () => {
+  const container = document.createElement('div');
+
+  const CallHost = () =>
+    createPortal(
+      <button type="button">Toggle microphone</button>,
+      container,
+      'call-view',
+    );
+
+  const DockSlot = () => {
+    const slotRef = useRef<HTMLDivElement>(null);
+    useLayoutEffect(() => {
+      slotRef.current?.appendChild(container);
+    }, []);
+    return <div ref={slotRef} data-testid="dock-slot" />;
+  };
+
+  let openDrawer!: ReturnType<typeof useDrawer>['openDrawer'];
+  render(
+    <DrawerProvider>
+      <OpenButton onOpen={(fn) => (openDrawer = fn)} />
+      <CallHost />
+      <DrawerRoot />
+    </DrawerProvider>,
+  );
+  return { open: () => openDrawer(DockSlot, { title: 'Panel' }) };
 };
 
 describe('DrawerRoot', () => {
@@ -199,5 +235,22 @@ describe('DrawerRoot', () => {
     await user.click(await screen.findByRole('button', { name: '3 members' }));
 
     expect(await screen.findByText('Mart Tamm')).toBeInTheDocument();
+  });
+
+  // Radix decides a pointerdown is "inside" via an onPointerDownCapture on the
+  // layer, which travels the React tree rather than the DOM tree. Content
+  // portalled in from a tree outside the dialog therefore reads as outside
+  // however deeply the DOM nests it, and the drawer dismisses itself on the
+  // first click on the docked call's own controls.
+  it('stays open when a control portalled in from outside is clicked', async () => {
+    const user = userEvent.setup();
+    const { open } = renderDrawerWithDockedPortal();
+    open();
+    await screen.findByTestId('dock-slot');
+
+    await user.click(screen.getByRole('button', { name: 'Toggle microphone' }));
+
+    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
   });
 });
