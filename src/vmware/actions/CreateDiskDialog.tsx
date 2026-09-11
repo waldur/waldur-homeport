@@ -19,7 +19,7 @@ export const CreateDiskDialog: FC<ActionDialogProps> = ({
         body: { size: Number(formData.size) * 1024 },
       }),
 
-    successMessage: translate('Disk has been created.'),
+    successMessage: translate('Disk creation has been scheduled.'),
     errorMessage: translate('Unable to create disk.'),
     refetch: refetch,
   });
