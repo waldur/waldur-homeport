@@ -23,6 +23,9 @@ export const OfferingComponentDialog: FC<{
   resolve: { offering; component?; refetch };
 }> = ({ resolve }) => {
   const isEdit = Boolean(resolve.component);
+  const isBuiltin = isEdit && Boolean(resolve.component.is_builtin);
+  // OpenStack tenant quotas also keep the plugin's name and unit.
+  const labelsLocked = isBuiltin && resolve.offering.type === TENANT_TYPE;
 
   const initialValues = useMemo(
     () => (isEdit ? parseComponent(resolve.component, resolve.offering) : {}),
@@ -33,9 +36,10 @@ export const OfferingComponentDialog: FC<{
     mutationFn: (formData) => {
       const data = formatComponent(formData, resolve.offering);
       if (isEdit) {
-        const payload =
-          resolve.offering.type === TENANT_TYPE && resolve.component.is_builtin
-            ? omit(data, ['name', 'measured_unit', 'type'])
+        const payload = labelsLocked
+          ? omit(data, ['name', 'measured_unit', 'type'])
+          : isBuiltin
+            ? omit(data, ['type'])
             : data;
         return marketplaceProviderOfferingsUpdateOfferingComponent({
           path: { uuid: resolve.offering.uuid },
@@ -84,7 +88,11 @@ export const OfferingComponentDialog: FC<{
               </>
             }
           >
-            <ComponentForm offering={resolve.offering} />
+            <ComponentForm
+              offering={resolve.offering}
+              typeReadOnly={isBuiltin}
+              labelsReadOnly={labelsLocked}
+            />
           </ModalDialog>
         </form>
       )}

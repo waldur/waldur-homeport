@@ -33,7 +33,6 @@ export const COMMON_OPTIONS = {
   detailsComponent: OfferingConfigurationDetails,
   userManagementSection: DefaultUserManagementSection,
   serializer,
-  showComponents: true,
 };
 
 export const SupportOffering: OfferingConfiguration = {

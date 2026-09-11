@@ -3,7 +3,6 @@ import { OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { BillingTypeBadge } from '@/marketplace/common/billingTypes';
-import { showComponentsList } from '@/marketplace/common/registry';
 import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@/openstack/constants';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
@@ -61,11 +60,7 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
     },
   });
 
-  const tableTabs = useOfferingAccountingTableTabs(props.offering);
-
-  if (!showComponentsList(props.offering.type)) {
-    return null;
-  }
+  const tableTabs = useOfferingAccountingTableTabs();
 
   return (
     <Table<OfferingComponent>

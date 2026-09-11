@@ -92,7 +92,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
       customerId: props.offering.customer_uuid,
     });
 
-  const tableTabs = useOfferingAccountingTableTabs(props.offering);
+  const tableTabs = useOfferingAccountingTableTabs();
 
   const ExpandableRow = useCallback(
     ({ row }) => (
