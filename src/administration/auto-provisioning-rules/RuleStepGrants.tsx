@@ -1,34 +1,29 @@
 import { FC, useMemo } from 'react';
+import { useForm, useFormState } from 'react-final-form';
 
 import { ENV } from '@/core/config';
-import { required } from '@/core/validators';
-import {
-  StringGroup,
-  BooleanGroup,
-  SelectGroup,
-  AsyncSelectGroup,
-  CommaSeparatedListGroup,
-} from '@/form';
+import { AsyncSelectGroup, BooleanGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { Role } from '@/permissions/types';
 import {
   formatRoleLabel,
   getAmbiguousRoleDescriptions,
+  getCustomerRoles,
   getProjectRoles,
 } from '@/permissions/utils';
+import { WizardForm, WizardFormStepProps } from '@/wizard';
 
-import { validateEmailPatterns } from './utils';
+import { validateRuleGrant, validateRuleOrganization } from './utils';
 
-export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
+/** Step 2: what a matched user gets, and where. */
+export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
+  const { values } = useFormState({ subscription: { values: true } });
+  const { change } = useForm();
   const protectedMethods =
     ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || [];
   const loadOrganizations = useMemo(
-    () =>
-      organizationAutocomplete({
-        field: ['name', 'url'],
-        o: 'name',
-      }),
+    () => organizationAutocomplete({ field: ['name', 'url'], o: 'name' }),
     [],
   );
   const projectRoles = useMemo(
@@ -39,31 +34,17 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
     () => getAmbiguousRoleDescriptions(projectRoles),
     [projectRoles],
   );
+  const customerRoles = useMemo(
+    () => getCustomerRoles().filter((role) => role.is_system_role),
+    [],
+  );
+  const ambiguousCustomerRoles = useMemo(
+    () => getAmbiguousRoleDescriptions(customerRoles),
+    [customerRoles],
+  );
+
   return (
-    <>
-      <StringGroup
-        name="name"
-        placeholder={translate('e.g. Default users')}
-        validate={required}
-        label={translate('Rule name')}
-        required
-      />
-      <CommaSeparatedListGroup
-        label={translate('Affiliations')}
-        name="user_affiliations"
-        placeholder="student, faculty, researcher (comma-separated)"
-        description={translate('Enter comma-separated affiliation identifiers')}
-      />
-      <CommaSeparatedListGroup
-        label={translate('Email patterns')}
-        name="user_email_patterns"
-        placeholder={translate('e.g. .*@example.com')}
-        description={translate(
-          'Enter space separated regex pattern to match user email',
-        )}
-        separator="space"
-        validate={validateEmailPatterns}
-      />
+    <WizardForm {...props}>
       <BooleanGroup
         name="use_user_organization_as_customer_name"
         label={translate('Use user organization as customer name')}
@@ -106,20 +87,47 @@ export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
         getOptionLabel={(option) => option.name}
         isDisabled={values.use_user_organization_as_customer_name}
         isClearable
+        validate={validateRuleOrganization}
       />
       {/* Only deployment-wide (system) roles are offered: an auto-provisioning
           rule applies across users/organizations, and an organization-specific
           clone would fail to grant outside its owning organization. */}
       <SelectGroup
-        name="project_role"
-        options={projectRoles}
-        getOptionLabel={(role: Role) => formatRoleLabel(role, ambiguousRoles)}
+        name="customer_role"
+        options={customerRoles}
+        getOptionLabel={(role: Role) =>
+          formatRoleLabel(role, ambiguousCustomerRoles)
+        }
         getOptionValue={({ name }) => name}
-        validate={required}
         simpleValue
-        label={translate('Project role')}
-        required
+        isClearable
+        label={translate('Organization role')}
+        description={translate(
+          'Granted on the organization itself. Leave empty to grant no organization-level role.',
+        )}
+        validate={validateRuleGrant}
       />
-    </>
+      <BooleanGroup
+        name="create_project"
+        label={translate('Create a project')}
+        tooltip={translate(
+          'Create (or join) a project for each matched user. Disable for a rule that only grants an organization role.',
+        )}
+        tooltipEnd
+        alignMiddle
+        className="w-100"
+      />
+      {values.create_project !== false && (
+        <SelectGroup
+          name="project_role"
+          options={projectRoles}
+          getOptionLabel={(role: Role) => formatRoleLabel(role, ambiguousRoles)}
+          getOptionValue={({ name }) => name}
+          simpleValue
+          isClearable
+          label={translate('Project role')}
+        />
+      )}
+    </WizardForm>
   );
 };

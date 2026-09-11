@@ -101,6 +101,31 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         value={<FieldWithCopy value={props.user.identity_source} />}
       />
 
+      {/* Raw claims the identity provider asserted, for the claims listed in
+          its extra fields. Auto-provisioning rules match on these to grant
+          roles, so this is the surface for answering "why did (or didn't) a
+          rule fire for this user". Staff and support only — the backend omits
+          the field entirely for everyone else. */}
+      {isVisible && Object.keys(props.user.details ?? {}).length > 0 && (
+        <FormTable.Item
+          label={translate('Identity provider claims')}
+          value={
+            <div className="d-flex flex-column gap-1">
+              {Object.entries(props.user.details).map(([claim, value]) => (
+                <div key={claim}>
+                  <span className="fw-semibold me-2">{claim}</span>
+                  <FieldWithCopy
+                    value={
+                      Array.isArray(value) ? value.join(', ') : String(value)
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          }
+        />
+      )}
+
       {isProfileAttributeEnabled('uid_number') &&
         props.user.uid_number != null && (
           <FormTable.Item

@@ -37,6 +37,20 @@ const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
     if (Array.isArray(value)) {
       return value.length ? value.join(', ') : '—';
     }
+    // The claims filter reports a map; without this it renders as
+    // "[object Object]".
+    if (typeof value === 'object') {
+      const entries = Object.entries(value as Record<string, unknown>);
+      if (!entries.length) return '—';
+      return entries
+        .map(([key, values]) => {
+          const rendered = Array.isArray(values)
+            ? renderFieldOrDash(values.join(', '))
+            : String(values);
+          return `${key}: ${rendered}`;
+        })
+        .join(' · ');
+    }
     return String(value);
   };
   const iconClass = !result.configured
@@ -155,6 +169,19 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
         </>
       )}
 
+      {result.unconfigured_claims?.length > 0 && (
+        <div className="alert alert-warning py-2 px-3 mt-3 mb-0">
+          {translate(
+            "Not received from any identity provider: {claims}. Waldur only stores a claim that is listed in the provider's extra fields, so this rule cannot match anyone until it is added there.",
+            {
+              claims: result.unconfigured_claims
+                .map((claim) => `"${claim}"`)
+                .join(', '),
+            },
+          )}
+        </div>
+      )}
+
       <h6 className="mt-4 mb-2">{translate('User attributes')}</h6>
       <dl className="row mb-0 small">
         <dt className="col-sm-4">{translate('Username')}</dt>
@@ -177,6 +204,19 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
         <dd className="col-sm-8">
           {renderFieldOrDash(result.user_affiliations.join(', '))}
         </dd>
+        {Object.keys(result.user_claims ?? {}).length > 0 && (
+          <>
+            <dt className="col-sm-4">{translate('Claims')}</dt>
+            <dd className="col-sm-8">
+              {Object.entries(result.user_claims).map(([claim, values]) => (
+                <div key={claim}>
+                  <span className="fw-semibold">{claim}</span>:{' '}
+                  {renderFieldOrDash((values as string[]).join(', '))}
+                </div>
+              ))}
+            </dd>
+          </>
+        )}
         <dt className="col-sm-4">{translate('Details protected')}</dt>
         <dd className="col-sm-8">
           {result.user_is_protected ? (

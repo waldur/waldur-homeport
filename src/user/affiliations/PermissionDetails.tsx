@@ -4,6 +4,8 @@ import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 
+import { formatGrantSource } from './GrantSourceIndicator';
+
 export const PermissionDetails = ({
   permission,
 }: {
@@ -13,7 +15,11 @@ export const PermissionDetails = ({
     <Field label={translate('Role')} value={permission.role_description} />
     <Field
       label={translate('Permission granted by')}
-      value={permission.created_by_full_name || permission.created_by_username}
+      value={
+        formatGrantSource(permission.source) ||
+        permission.created_by_full_name ||
+        permission.created_by_username
+      }
     />
 
     <Field
