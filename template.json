@@ -5935,12 +5935,6 @@
       "feature_area": "anonymous"
     }
   },
-  "Ask about this service": {
-    "context": {
-      "primary_ui_type": "action_button",
-      "feature_area": "offerings"
-    }
-  },
   "Ask for the end date of this resource to be changed. Someone who can change it will review your request.": {
     "context": {
       "feature_area": "request-end-date-change"
@@ -15516,7 +15510,7 @@
       "feature_area": "common"
     }
   },
-  "Do not allow user to accept multiple roles within the same scope (project or organization) using invitation. When enabled, users can still accept invitations to different scopes but cannot have multiple roles in the same scope.": {},
+  "Do not allow a user to hold multiple roles within the same scope (project or organization). Applies to invitations, permission requests and direct role assignment. When enabled, users can still get roles in different scopes but cannot have multiple roles in the same scope.": {},
   "Do not attach to a router": {
     "context": {
       "feature_area": "actions"
@@ -50246,29 +50240,6 @@
     }
   },
   "Telemetry service version.": {},
-  "Tell me about {offering} by {organization}. Is this service right for me?": {
-    "context": {
-      "variables": {
-        "offering": {
-          "type": "unknown"
-        },
-        "organization": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "offerings"
-    }
-  },
-  "Tell me about {offering}. Is this service right for me?": {
-    "context": {
-      "variables": {
-        "offering": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "offerings"
-    }
-  },
   "Tell me what you need and I will help you find the best offering in the marketplace.": {
     "context": {
       "feature_area": "anonymous"
