@@ -18,7 +18,6 @@ import {
   getCredentialsSection,
   getProvisioningConfigSection,
   getUserManagementSection,
-  showComponentsList,
 } from '../common/registry';
 
 import { offeringOwnsPricing } from './utils';
@@ -211,24 +210,24 @@ const buildPublicInfoTab = (): PageBarTab => ({
   ].filter(Boolean),
 });
 
-const buildAccountingTab = (offering: Offering): PageBarTab => ({
+const buildAccountingTab = (): PageBarTab => ({
   title: translate('Accounting'),
   key: 'accounting',
-  defaultKey: 'plans',
+  defaultKey: 'components',
   children: [
+    {
+      key: 'components',
+      component: ComponentsSection,
+      title: translate('Accounting components'),
+      visible: false,
+    },
     {
       title: translate('Accounting plans'),
       key: 'plans',
       component: PlansSection,
       visible: false,
     },
-    showComponentsList(offering.type) && {
-      key: 'components',
-      component: ComponentsSection,
-      title: translate('Accounting components'),
-      visible: false,
-    },
-  ].filter(Boolean),
+  ],
 });
 
 const getTabs = (offering: Offering): PageBarTab[] =>
@@ -256,7 +255,7 @@ const getTabs = (offering: Offering): PageBarTab[] =>
       component: TosManagementSection,
       title: translate('ToS management'),
     },
-    offeringOwnsPricing(offering) && buildAccountingTab(offering),
+    offeringOwnsPricing(offering) && buildAccountingTab(),
   ].filter(Boolean) as PageBarTab[];
 
 export const OfferingEditUIView = ({

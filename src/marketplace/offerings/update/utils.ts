@@ -3,10 +3,7 @@ import { useMemo } from 'react';
 
 import { translate } from '@/i18n';
 import { getBillingTypes } from '@/marketplace/common/billingTypes';
-import {
-  showComponentsList,
-  getFormLimitParser,
-} from '@/marketplace/common/registry';
+import { getFormLimitParser } from '@/marketplace/common/registry';
 
 import { getLimitPeriods } from './components/ComponentLimitPeriodField';
 
@@ -34,24 +31,23 @@ export const parseComponent = (component, offering) => {
   };
 };
 
-export const useOfferingAccountingTableTabs = (offering) => {
+export const useOfferingAccountingTableTabs = () => {
   const { state } = useCurrentStateAndParams();
   return useMemo(
-    () =>
-      [
-        showComponentsList(offering.type) && {
-          key: 'components',
-          title: translate('Components'),
-          state: state.name,
-          params: { tab: 'components' },
-        },
-        {
-          key: 'plans',
-          title: translate('Plans'),
-          state: state.name,
-          params: { tab: 'plans' },
-        },
-      ].filter(Boolean),
-    [offering],
+    () => [
+      {
+        key: 'components',
+        title: translate('Components'),
+        state: state.name,
+        params: { tab: 'components' },
+      },
+      {
+        key: 'plans',
+        title: translate('Plans'),
+        state: state.name,
+        params: { tab: 'plans' },
+      },
+    ],
+    [state.name],
   );
 };

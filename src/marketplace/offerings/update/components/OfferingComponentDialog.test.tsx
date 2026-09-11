@@ -297,6 +297,41 @@ describe('OfferingComponentDialog', () => {
         expect(payload).not.toHaveProperty('type');
         expect(payload).toHaveProperty('max_value', 131072);
       });
+      expect(screen.getByLabelText(/Display name/i)).toHaveAttribute(
+        'readonly',
+      );
+      expect(screen.getByLabelText(/Measured unit/i)).toBeDisabled();
+    });
+
+    it('locks only the type of a builtin component on other offering types', async () => {
+      const user = userEvent.setup();
+      const updateMutation = vi.mocked(
+        marketplaceProviderOfferingsUpdateOfferingComponent,
+      );
+      const vmwareOffering = { ...mockOffering, type: 'VMware.VirtualMachine' };
+      const builtinComponent = { ...mockComponent, is_builtin: true };
+
+      renderComponent({
+        offering: vmwareOffering,
+        component: builtinComponent,
+      });
+
+      expect(screen.getByLabelText(/Internal name/i)).toHaveAttribute(
+        'readonly',
+      );
+      const displayNameInput = screen.getByLabelText(/Display name/i);
+      expect(displayNameInput).not.toHaveAttribute('readonly');
+      await user.clear(displayNameInput);
+      await user.type(displayNameInput, 'Fast Memory');
+
+      await user.click(screen.getByRole('button', { name: 'Save' }));
+
+      await waitFor(() => {
+        expect(updateMutation).toHaveBeenCalled();
+        const payload = updateMutation.mock.calls[0][0].body;
+        expect(payload).not.toHaveProperty('type');
+        expect(payload).toHaveProperty('name', 'Fast Memory');
+      });
     });
   });
 });

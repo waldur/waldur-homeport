@@ -78,7 +78,6 @@ export const BookingOffering: OfferingConfiguration = {
   checkoutSummaryComponent: BookingCheckoutSummary,
   userManagementSection: DefaultUserManagementSection,
   detailsComponent: BookingDetails,
-  showComponents: true,
   schedulable: true,
   serializer,
 };

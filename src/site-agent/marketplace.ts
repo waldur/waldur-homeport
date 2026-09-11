@@ -31,6 +31,5 @@ export const SiteAgentOffering: OfferingConfiguration = {
   },
   orderFormComponent: SiteAgentOrderForm,
   userManagementSection: DefaultUserManagementSection,
-  showComponents: true,
   credentialsSection: SiteAgentCredentialsSection,
 };

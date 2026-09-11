@@ -137,13 +137,6 @@ export function getCredentialsSection(offeringType: string) {
   );
 }
 
-export function showComponentsList(offeringType: string) {
-  return (
-    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].showComponents
-  );
-}
-
 export function getLabel(offeringType: string) {
   return (
     (Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&

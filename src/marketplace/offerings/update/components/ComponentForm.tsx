@@ -23,20 +23,29 @@ const componentMeasuredUnitValidator = (value: string) => {
 
 export const ComponentForm = ({
   readOnly,
+  typeReadOnly,
+  labelsReadOnly,
   offering,
 }: {
   readOnly?: boolean;
+  // A built-in component's type is what the plugin looks it up by.
+  typeReadOnly?: boolean;
+  labelsReadOnly?: boolean;
   offering: ProviderOfferingDetails;
 }) => (
   <>
-    <DisplayNameField name="name" readOnly={readOnly} />
-    <InternalNameField name="type" readOnly={readOnly} />
-    <InternalNamePrefill source="name" target="type" disabled={readOnly} />
+    <DisplayNameField name="name" readOnly={readOnly || labelsReadOnly} />
+    <InternalNameField name="type" readOnly={readOnly || typeReadOnly} />
+    <InternalNamePrefill
+      source="name"
+      target="type"
+      disabled={readOnly || typeReadOnly}
+    />
     <StringGroup
       label={translate('Measured unit')}
       name="measured_unit"
       validate={componentMeasuredUnitValidator}
-      disabled={readOnly}
+      disabled={readOnly || labelsReadOnly}
       space={5}
     />
     <ComponentAccountingTypeField readOnly={readOnly} />
