@@ -29,12 +29,15 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 // --- Queries ---
 
-/** Aggregate ticket stats for the current user's provider helpdesk. */
-export const useProviderTicketsStats = () =>
+/** Aggregate ticket stats for one provider helpdesk. */
+export const useProviderTicketsStats = (helpdeskUuid?: string) =>
   useQuery({
-    queryKey: ['ProviderTicketsStats'],
+    queryKey: ['ProviderTicketsStats', helpdeskUuid],
     queryFn: () =>
-      providerTicketsStatsRetrieve().then((response) => response.data),
+      providerTicketsStatsRetrieve({
+        query: { provider_helpdesk_uuid: helpdeskUuid },
+      }).then((response) => response.data),
+    enabled: Boolean(helpdeskUuid),
   });
 
 /** Active support-team members for a helpdesk (assignee options + team page). */

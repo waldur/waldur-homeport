@@ -16,7 +16,8 @@ interface AssigneeSelectProps {
   status?: string | null;
   assignee?: string | null;
   assigneeName?: string | null;
-  helpdeskUuid?: string;
+  /** The ticket's own helpdesk: only its team can be assigned. */
+  helpdeskUuid?: string | null;
   refetch: () => void;
 }
 
@@ -33,7 +34,7 @@ export const AssigneeSelect: FC<AssigneeSelectProps> = ({
   helpdeskUuid,
   refetch,
 }) => {
-  const { data: team = [] } = useProviderTeam(helpdeskUuid);
+  const { data: team = [] } = useProviderTeam(helpdeskUuid ?? undefined);
   const assign = useAssignTicket(refetch);
 
   const options = useMemo<AssigneeOption[]>(

@@ -6,21 +6,16 @@ import { AssigneeSelect } from './AssigneeSelect';
 interface AssigneeCellProps {
   row: ProviderTicket;
   refetch: () => void;
-  helpdeskUuid?: string;
 }
 
 /** Tickets-table cell wrapper around the shared assignee picker. */
-export const AssigneeCell: FC<AssigneeCellProps> = ({
-  row,
-  refetch,
-  helpdeskUuid,
-}) => (
+export const AssigneeCell: FC<AssigneeCellProps> = ({ row, refetch }) => (
   <AssigneeSelect
     ticketUuid={row.uuid}
     status={row.status}
     assignee={row.provider_assignee}
     assigneeName={row.provider_assignee_name}
-    helpdeskUuid={helpdeskUuid}
+    helpdeskUuid={row.provider_helpdesk_uuid}
     refetch={refetch}
   />
 );

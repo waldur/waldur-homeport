@@ -20,8 +20,10 @@ const StatCard: FC<{ label: string; value: ReactNode }> = ({
 );
 
 /** Summary stat cards shown above the provider tickets list. */
-export const TicketStatsWidgets: FC = () => {
-  const { data: stats } = useProviderTicketsStats();
+export const TicketStatsWidgets: FC<{ helpdeskUuid?: string }> = ({
+  helpdeskUuid,
+}) => {
+  const { data: stats } = useProviderTicketsStats(helpdeskUuid);
   if (!stats) {
     return null;
   }
