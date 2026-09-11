@@ -9,6 +9,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 import { ActionButton } from '@/table/ActionButton';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
@@ -74,8 +75,30 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
     );
   }, [team, value]);
 
-  return (resource.is_usage_based || resource.is_limit_based) &&
-    resource.state !== 'Creating' ? (
+  // The tab is offered whenever the resource bills on usage or limits, so this
+  // component must render something for every state it can be opened in.
+  // Returning null left the panel entirely blank while a resource was still
+  // being created -- which is exactly when a customer goes looking for it.
+  if (!resource.is_usage_based && !resource.is_limit_based) {
+    return null;
+  }
+  if (resource.state === 'Creating') {
+    return (
+      <Card className="card-bordered">
+        <Card.Body>
+          <NoResult
+            title={translate('No usage yet')}
+            message={translate(
+              'Usage is recorded once the resource has been created. Come back after provisioning finishes.',
+            )}
+            noAction
+          />
+        </Card.Body>
+      </Card>
+    );
+  }
+
+  return (
     <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
@@ -165,5 +188,5 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
         )}
       </Card.Body>
     </Card>
-  ) : null;
+  );
 };

@@ -31232,6 +31232,11 @@
       "feature_area": "reports"
     }
   },
+  "No usage yet": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "No user submitted fields": {
     "context": {
       "feature_area": "details"
@@ -59802,6 +59807,11 @@
         }
       },
       "feature_area": "usage"
+    }
+  },
+  "Usage is recorded once the resource has been created. Come back after provisioning finishes.": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Usage items": {
