@@ -18,11 +18,11 @@ import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementB
 import { useTitle } from '@/navigation/title';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { TableRefreshButton } from '@/table/TableRefreshButton';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
 
 import { useOfferingAccessibility } from '../common/cards/useOfferingAccessibility';
-import { RefreshButton } from '../common/RefreshButton';
 import { getLabel } from '../common/registry';
 
 import { RequestAccessButton } from './access/RequestAccessButton';
@@ -279,11 +279,12 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 <OfferingExtraActionsButton offering={offering} />
               </div>
             )}
-            <RefreshButton
-              refetch={props.refetch}
-              isLoading={props.isRefetching}
-              className="order-3 flex-sm-column-auto flex-root"
-            />
+            <div className="order-first align-self-center">
+              <TableRefreshButton
+                fetch={() => props.refetch?.()}
+                loading={props.isRefetching}
+              />
+            </div>
           </>
         }
       />
