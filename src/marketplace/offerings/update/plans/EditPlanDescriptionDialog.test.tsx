@@ -1,7 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplacePlansUpdate } from 'waldur-js-client';
+import {
+  marketplacePlansUpdate,
+  marketplacePlansUpdatePrices,
+} from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
@@ -199,5 +202,117 @@ describe('EditPlanDescriptionDialog', () => {
     // Error should be handled by showErrorResponse
     // Component should not crash
     expect(screen.getByText('Edit plan')).toBeInTheDocument();
+  });
+});
+
+const offeringWithComponents = {
+  ...mockOffering,
+  components: [
+    {
+      type: 'cores',
+      name: 'Cores',
+      measured_unit: 'cores',
+      billing_type: 'limit',
+    },
+  ],
+  plans: [],
+};
+
+const pricedPlan = {
+  ...mockPlan,
+  prices: { cores: '5.0000000' },
+  future_prices: {},
+  quotas: {},
+  components: [],
+  resources_count: 0,
+};
+
+describe('EditPlanDescriptionDialog component prices', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(marketplacePlansUpdate).mockResolvedValue({ data: {} } as any);
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
+  });
+
+  it('edits the prices of a plan no resource uses yet', async () => {
+    renderComponent({
+      ...mockResolve,
+      offering: offeringWithComponents,
+      plan: pricedPlan,
+    } as any);
+    const user = userEvent.setup();
+
+    const price = screen.getAllByRole('spinbutton')[0];
+    expect(price).toHaveValue(5);
+
+    await user.clear(price);
+    await user.type(price, '7');
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdatePrices).toHaveBeenCalledWith({
+        path: { uuid: pricedPlan.uuid },
+        body: { prices: { cores: '7' } },
+      });
+    });
+  });
+
+  it('leaves prices alone when only the name changed', async () => {
+    renderComponent({
+      ...mockResolve,
+      offering: offeringWithComponents,
+      plan: pricedPlan,
+    } as any);
+    const user = userEvent.setup();
+
+    await user.type(screen.getByLabelText(/Name/), ' v2');
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdate).toHaveBeenCalled();
+    });
+    expect(marketplacePlansUpdatePrices).not.toHaveBeenCalled();
+  });
+
+  it('renames a plan whose offering gained a component after it was created', async () => {
+    // The backend creates a plan's price rows once, at creation: a component
+    // added later has no row, so `prices` leaves it out.
+    renderComponent({
+      ...mockResolve,
+      offering: {
+        ...offeringWithComponents,
+        components: [
+          ...offeringWithComponents.components,
+          { type: 'gpu', name: 'GPU', measured_unit: 'GPUs' },
+        ],
+      },
+      plan: pricedPlan,
+    } as any);
+    const user = userEvent.setup();
+
+    expect(
+      screen
+        .getAllByRole('spinbutton')
+        .map((input) => (input as HTMLInputElement).value),
+    ).toEqual(['5', '0']);
+
+    await user.type(screen.getByLabelText(/Name/), ' v2');
+    await user.click(screen.getByText('Save'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdate).toHaveBeenCalled();
+    });
+    expect(marketplacePlansUpdatePrices).not.toHaveBeenCalled();
+  });
+
+  it('leaves a plan in use to the Edit prices action and its next-month rules', () => {
+    renderComponent({
+      ...mockResolve,
+      offering: offeringWithComponents,
+      plan: { ...pricedPlan, resources_count: 2 },
+    } as any);
+
+    expect(screen.queryByText('Component prices')).not.toBeInTheDocument();
+    expect(screen.queryAllByRole('spinbutton')).toHaveLength(0);
   });
 });

@@ -56,6 +56,10 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
         ) &&
         !props.offering.plugin_options?.conceal_billing_data &&
         props.offering.plans?.length > 0 &&
+        // Nothing is invoiced for the offering itself -- an OpenStack volume
+        // or instance is billed through its tenant -- so a price list here
+        // would quote plans the customer is not charged by.
+        props.offering.billable !== false &&
         !props.concealBillingInfo,
       title: translate('Pricing'),
       component: () => <PublicOfferingPricing offering={props.offering} />,

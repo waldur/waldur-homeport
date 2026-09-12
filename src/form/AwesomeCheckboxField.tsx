@@ -65,7 +65,10 @@ export const AwesomeCheckboxField: FunctionComponent<
             </Tip>
           )}
           {label}
-          {help_text && <p className="text-muted">{help_text}</p>}
+          {/* mb-0: the paragraph's own bottom margin lands inside the
+              control's box, so the gap below a toggle with help text came out
+              13px larger than the one above it. */}
+          {help_text && <p className="text-muted mb-0">{help_text}</p>}
         </Form.Check.Label>
       )}
       {tooltip && tooltipEnd && (

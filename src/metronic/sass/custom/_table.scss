@@ -693,6 +693,11 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 .modal {
   .table-responsive {
     border: 1px solid $border-secondary;
+    // Rounded like every other box in a dialog. No `overflow: hidden` with it:
+    // that would override .table-responsive's own overflow-x and take the
+    // horizontal scroll away from every wide table in a modal. The scroll
+    // container clips to the radius on its own.
+    border-radius: $border-radius-lg;
   }
 
   // Except a FormTable that has opted out of cell borders (`bordered={false}`):

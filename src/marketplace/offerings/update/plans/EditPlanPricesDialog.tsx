@@ -11,6 +11,7 @@ import { AlertItem } from '@/core/AlertItem';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { resolvePlanComponents } from '@/marketplace/details/plan/effectiveComponents';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -93,14 +94,18 @@ export const EditPlanPricesDialog: FC<{
           <ModalDialog
             title={translate('Edit prices')}
             footer={
-              <SubmitButton
-                disabled={invalid}
-                submitting={submitting}
-                label={translate('Save')}
-              />
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={translate('Save')}
+                />
+              </>
             }
           >
             <AlertItem
+              type="floating"
               className="mb-5"
               title={
                 props.resolve.plan.resources_count > 0

@@ -99,7 +99,7 @@ const PublicOfferingDocumentationAndSupport = lazyComponent(() =>
   })),
 );
 
-const getTabs = (
+export const getTabs = (
   offering?: Offering,
   category?: Category,
   hasActiveTos = false,
@@ -148,6 +148,10 @@ const getTabs = (
       MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
     ) ||
     concealPricing ||
+    // Nothing is invoiced for the offering itself -- an OpenStack volume or
+    // instance is billed through its tenant, whose plans the API hands down
+    // -- so a price list here would quote plans nobody is charged by.
+    offering.billable === false ||
     !offering.plans?.length
       ? null
       : {

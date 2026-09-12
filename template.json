@@ -10254,6 +10254,11 @@
       "feature_area": "component-policies"
     }
   },
+  "Component prices": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
   "Component type": {
     "context": {
       "feature_area": "usage-views"
@@ -13310,6 +13315,11 @@
       "feature_area": "organizations"
     }
   },
+  "Customers can order it at no cost. Nothing is charged for any component.": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
   "Customers pay upfront for the full subscription period. Requires end date.": {},
   "Custom…": {
     "context": {
@@ -15428,13 +15438,13 @@
       "feature_area": "steps"
     }
   },
-  "Disk extension has been scheduled.": {
+  "Disk creation has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
     }
   },
-  "Disk has been created.": {
+  "Disk extension has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
@@ -19973,6 +19983,13 @@
       "feature_area": "create"
     }
   },
+  "Fill in every component price, or leave the plan as it is.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "plans",
+      "action_type": "create"
+    }
+  },
   "Fill in the details to create a new user account.": {
     "context": {
       "feature_area": "support"
@@ -20624,7 +20641,7 @@
   "France": {},
   "Free": {
     "context": {
-      "feature_area": "quotas"
+      "feature_area": "plans"
     }
   },
   "Free-text description of the reviewer's background.": {
@@ -20729,6 +20746,16 @@
         }
       },
       "feature_area": "plan"
+    }
+  },
+  "From {price}": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "plans"
     }
   },
   "Full": {
@@ -29276,7 +29303,7 @@
       "feature_area": "actions"
     }
   },
-  "Network adapter has been created.": {
+  "Network adapter creation has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
@@ -36232,8 +36259,9 @@
   },
   "Please fill in the required fields": {
     "context": {
-      "primary_ui_type": "action_button",
-      "feature_area": "details"
+      "primary_ui_type": "submit_button",
+      "feature_area": "plans",
+      "action_type": "create"
     }
   },
   "Please fix data or skip records with errors": {
@@ -37340,6 +37368,13 @@
       "feature_area": "details"
     }
   },
+  "Price at least one component, or mark the plan as free.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "plans",
+      "action_type": "create"
+    }
+  },
   "Price for consumption": {
     "context": {
       "feature_area": "common",
@@ -37359,6 +37394,16 @@
   "Price is estimated.": {
     "context": {
       "feature_area": "price"
+    }
+  },
+  "Price of {component}": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "plans"
     }
   },
   "Price per 30 days": {
@@ -51585,6 +51630,12 @@
       "feature_area": "passkeys"
     }
   },
+  "The plan has been created, but its prices could not be saved. Set them with the Edit prices action.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "plans"
+    }
+  },
   "The plan name is not specified in one or more resource records.": {
     "context": {
       "feature_area": "import"
@@ -52713,6 +52764,11 @@
     }
   },
   "This plan has no resources yet.": {
+    "context": {
+      "feature_area": "plans"
+    }
+  },
+  "This plan is free": {
     "context": {
       "feature_area": "plans"
     }
@@ -58700,6 +58756,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "actions"
+    }
+  },
+  "Unable to update the prices of this plan.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "plans"
     }
   },
   "Unable to update the project credit.": {
@@ -67605,6 +67667,20 @@
       "feature_area": "project"
     }
   },
+  "{name} {price}": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "plans"
+    }
+  },
   "{name}: {value} h ({percent}%)": {
     "context": {
       "variables": {
@@ -68261,6 +68337,31 @@
         }
       },
       "feature_area": "plan"
+    }
+  },
+  "{price} / {period}": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "period": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "plans"
+    }
+  },
+  "{price} once": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "variables": {
+        "price": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "plans"
     }
   },
   "{price} per {unit}": {

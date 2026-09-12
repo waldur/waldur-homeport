@@ -16,7 +16,7 @@ import { ArticleCodeField } from '../../ArticleCodeField';
 import { getBillingPeriods } from './constants';
 
 /** SelectGroup stores the selected option; other callers may seed a bare value. */
-const optionValue = (v: unknown): string | undefined =>
+export const optionValue = (v: unknown): string | undefined =>
   v && typeof v === 'object' ? (v as { value?: string }).value : (v as string);
 
 interface PlanFormProps {
@@ -97,6 +97,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
   return (
     <>
       <StringGroup
+        space={5}
         name="name"
         validate={required}
         label={translate('Name')}
@@ -104,6 +105,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
       />
       {showBillingMode && (
         <SelectGroup
+          space={5}
           name="billing_mode"
           label={translate('Billing mode')}
           options={getPlanBillingModeOptions()}
@@ -119,6 +121,7 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
         />
       )}
       <SelectGroup
+        space={5}
         name="unit"
         validate={required}
         label={translate('Billing period')}
@@ -128,7 +131,11 @@ export const PlanForm: FC<PlanFormProps> = ({ offering, plan }) => {
         isDisabled={pinned}
         description={periodDescription}
       />
-      <MarkdownGroup name="description" label={translate('Description')} />
+      <MarkdownGroup
+        space={5}
+        name="description"
+        label={translate('Description')}
+      />
       <ArticleCodeField />
     </>
   );
