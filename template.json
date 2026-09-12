@@ -7038,7 +7038,6 @@
       "feature_area": "common"
     }
   },
-  "Azure PostgreSQL database server": {},
   "Azure Virtual Machine": {},
   "Back": {
     "context": {
@@ -8985,11 +8984,6 @@
   "Charged on the plan's own amount, every billing period.": {},
   "Charged on the usage the provider reports for each billing period.": {},
   "Charged once, when the resource is activated.": {},
-  "Charset": {
-    "context": {
-      "feature_area": "sql"
-    }
-  },
   "Chart is empty": {
     "context": {
       "primary_ui_type": "error_message",
@@ -9790,11 +9784,6 @@
       "feature_area": "ai-assistant"
     }
   },
-  "Collation": {
-    "context": {
-      "feature_area": "sql"
-    }
-  },
   "Collection disabled": {
     "context": {
       "feature_area": "support"
@@ -10290,11 +10279,6 @@
   "Compute": {
     "context": {
       "primary_ui_type": "title"
-    }
-  },
-  "Compute generation": {
-    "context": {
-      "feature_area": "sql"
     }
   },
   "Compute usage source": {
@@ -10939,11 +10923,6 @@
   "Connection breakdown": {
     "context": {
       "feature_area": "database-stats"
-    }
-  },
-  "Connection details": {
-    "context": {
-      "feature_area": "sql"
     }
   },
   "Connection error": {
@@ -14669,11 +14648,6 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "service-providers"
-    }
-  },
-  "Deleting PostgreSQL server will cause deletion of all databases created within server.": {
-    "context": {
-      "feature_area": "sql"
     }
   },
   "Deleting...": {
@@ -27977,11 +27951,6 @@
       "feature_area": "partitions"
     }
   },
-  "Memory per vCore": {
-    "context": {
-      "feature_area": "sql"
-    }
-  },
   "Memory settings": {
     "context": {
       "feature_area": "database-stats"
@@ -37488,11 +37457,6 @@
       "feature_area": "single-import"
     }
   },
-  "Pricing tier": {
-    "context": {
-      "feature_area": "sql"
-    }
-  },
   "Primary": {
     "context": {
       "primary_ui_type": "title",
@@ -44721,8 +44685,6 @@
       "feature_area": "openstack-tenant"
     }
   },
-  "SQL server description": {},
-  "SQL server name": {},
   "SSH Key": {
     "context": {
       "feature_area": "blocks"
@@ -46893,8 +46855,7 @@
   },
   "Server": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "sql"
+      "primary_ui_type": "label"
     }
   },
   "Server error": {
@@ -49098,19 +49059,9 @@
       "feature_area": "update"
     }
   },
-  "Storage size": {
-    "context": {
-      "feature_area": "sql"
-    }
-  },
   "Storage size in GiB": {
     "context": {
       "feature_area": "deploy"
-    }
-  },
-  "Storage type": {
-    "context": {
-      "feature_area": "sql"
     }
   },
   "Stores API configuration and partner info. Only one active settings record per deployment.": {
@@ -51482,7 +51433,6 @@
     }
   },
   "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number": {},
-  "The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name.": {},
   "The name must be shorter than 15 characters.": {},
   "The name of the group to which the ticket will be added. If not specified, the first group will be used.": {},
   "The name shown to users for this role, in each language. The role code is edited separately.": {
@@ -65827,11 +65777,6 @@
   "vCPUs per Load Balancer": {
     "context": {
       "feature_area": "options"
-    }
-  },
-  "vCores": {
-    "context": {
-      "feature_area": "sql"
     }
   },
   "vSphere Virtual Machine": {},

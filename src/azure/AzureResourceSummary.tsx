@@ -1,17 +1,11 @@
-import {
-  AzureSqlDatabase,
-  AzureSqlServer,
-  AzureVirtualMachine,
-} from 'waldur-js-client';
+import { AzureVirtualMachine } from 'waldur-js-client';
 
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { Field, ResourceSummaryProps } from '@/resource/summary';
 
 export function PureAzureResourceSummary(
-  props: ResourceSummaryProps<
-    AzureVirtualMachine | AzureSqlDatabase | AzureSqlServer
-  >,
+  props: ResourceSummaryProps<AzureVirtualMachine>,
 ) {
   const { resource } = props;
   const Component = props.formTableItem ? FormTable.Item : Field;

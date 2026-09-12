@@ -12,12 +12,3 @@ export const virtualMachineName = (value: string) =>
           'The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number',
         )
       : undefined;
-
-const SQL_SERVER_NAME_PATTERN = new RegExp('^[a-z0-9][a-z0-9-]+[a-z0-9]$');
-
-export const sqlServerName = (value: string) =>
-  !value.match(SQL_SERVER_NAME_PATTERN)
-    ? translate(
-        'The name can only be made up of lowercase letters, numbers and the hyphen. The hyphen may not lead or trail in the name.',
-      )
-    : undefined;
