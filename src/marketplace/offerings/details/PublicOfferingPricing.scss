@@ -112,3 +112,11 @@
     }
   }
 }
+
+// The plan comparison reuses FormTable's label/description pair for its main
+// column; those rules are scoped to .form-table, so restate the same values.
+.public-offering-pricing {
+  .title {
+    color: var(--bs-gray-700);
+  }
+}

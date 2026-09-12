@@ -2,6 +2,8 @@ import { FunctionComponent } from 'react';
 import { Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { BillingTypeBadge } from '@/marketplace/common/billingTypes';
+import { getLimitPeriods } from '@/marketplace/offerings/update/components/ComponentLimitPeriodField';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -33,14 +35,22 @@ export const PublicOfferingComponentsTable: FunctionComponent<
           title: translate('Unit'),
           render: ({ row }) => <>{row.measured_unit}</>,
         },
+        // Labelled as the provider's own Components list labels them, rather
+        // than the raw values the API stores ("limit", "month").
         {
-          title: translate('Type'),
-          render: ({ row }) => <>{row.billing_type}</>,
+          title: translate('Billing type'),
+          render: ({ row }) => <BillingTypeBadge component={row} />,
         },
         {
-          title: translate('Period'),
+          title: translate('Limit period'),
           render: ({ row }) => (
-            <>{typeof row.limit_period === 'string' ? row.limit_period : '—'}</>
+            <>
+              {renderFieldOrDash(
+                getLimitPeriods().find(
+                  (period) => period.value === row.limit_period,
+                )?.label,
+              )}
+            </>
           ),
         },
         {
