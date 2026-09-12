@@ -81,9 +81,7 @@ export const ExportFullPriceList: FunctionComponent<
     <div className="exportFullPriceList">
       {loading ? (
         <LoadingSpinnerSimple />
-      ) : error ? (
-        <>{translate('Unable to load full price list')}</>
-      ) : components ? (
+      ) : error ? null : components ? (
         <ActionButton
           variant="tertiary"
           action={() => onExport(offering.name, components)}

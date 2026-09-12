@@ -25412,7 +25412,7 @@
   "Limit period": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "update"
+      "feature_area": "details"
     }
   },
   "Limit to resource (optional)": {
@@ -56367,11 +56367,6 @@
     }
   },
   "Unable to load full metadata.": {},
-  "Unable to load full price list": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
   "Unable to load health information": {
     "context": {
       "feature_area": "dashboard"
@@ -65137,16 +65132,6 @@
     }
   },
   "once at activation": {},
-  "once, at order": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
-  "once, on plan switch": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
   "one row per (offering · component) — bar spans current_period_start → current_period_end": {
     "context": {
       "feature_area": "views"
@@ -65241,49 +65226,6 @@
       }
     }
   },
-  "per {unit} / {period}": {
-    "context": {
-      "variables": {
-        "unit": {
-          "type": "unknown"
-        },
-        "period": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "details"
-    }
-  },
-  "per {unit}, metered": {
-    "context": {
-      "variables": {
-        "unit": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "details"
-    }
-  },
-  "per {unit}, on plan switch": {
-    "context": {
-      "variables": {
-        "unit": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "details"
-    }
-  },
-  "per {unit}, once": {
-    "context": {
-      "variables": {
-        "unit": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "details"
-    }
-  },
   "permission reviews": {
     "context": {
       "feature_area": "core"
@@ -65296,16 +65238,6 @@
   },
   "plans": {
     "context": {
-      "feature_area": "details"
-    }
-  },
-  "plus {price} once": {
-    "context": {
-      "variables": {
-        "price": {
-          "type": "unknown"
-        }
-      },
       "feature_area": "details"
     }
   },
@@ -68350,7 +68282,41 @@
           "type": "unknown"
         }
       },
-      "feature_area": "plans"
+      "feature_area": "details"
+    }
+  },
+  "{price} / {period} + {once} once": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "period": {
+          "type": "unknown"
+        },
+        "once": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{price} / {period} for {amount} {unit}": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "period": {
+          "type": "unknown"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
     }
   },
   "{price} once": {
@@ -68375,6 +68341,79 @@
         }
       },
       "feature_area": "plan"
+    }
+  },
+  "{price} per {unit} / {period}": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "unit": {
+          "type": "unknown"
+        },
+        "period": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "{price} per {unit}, metered": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{price} per {unit}, on plan switch": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "{price} per {unit}, once": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        },
+        "unit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "{price}, on plan switch": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "details"
+    }
+  },
+  "{price}, once": {
+    "context": {
+      "variables": {
+        "price": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{projectName} project has been moved to {organizationName} organization.": {

@@ -11,6 +11,7 @@ import { Component } from '@/marketplace/details/plan/types';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { getOrderablePlans, getPlanPricing, PlanPricing } from './planPricing';
 
@@ -31,101 +32,74 @@ interface ComparisonRow {
   byPlan: Record<string, Component>;
 }
 
-const TotalCell = ({ pricing }: { pricing: PlanPricing }) => (
-  <div>
-    <div className="fs-3 fw-bold text-gray-900">
-      {defaultCurrency(pricing.monthlyBase)}
-      <span className="fs-7 fw-normal text-muted">
-        {' / '}
-        {pricing.periodLabel}
-      </span>
-    </div>
-    {pricing.oneTime > 0 && (
-      <div className="fs-8 text-muted">
-        {translate('plus {price} once', {
-          price: defaultCurrency(pricing.oneTime),
-        })}
-      </div>
-    )}
-  </div>
-);
+/**
+ * Plan columns are secondary columns: they render a bare value and let the
+ * table style it. Only the first column carries emphasis, so each cell is a
+ * single line rather than a stacked figure-and-qualifier.
+ */
+const totalText = (pricing: PlanPricing) =>
+  pricing.oneTime > 0
+    ? translate('{price} / {period} + {once} once', {
+        price: defaultCurrency(pricing.monthlyBase),
+        period: pricing.periodLabel,
+        once: defaultCurrency(pricing.oneTime),
+      })
+    : translate('{price} / {period}', {
+        price: defaultCurrency(pricing.monthlyBase),
+        period: pricing.periodLabel,
+      });
 
 /** What the plan commits to, for viewers who may not see the money. */
-const ConcealedCell = ({
-  pricing,
-  component,
-}: {
-  pricing: PlanPricing;
-  component?: Component;
-}) => {
+const concealedText = (pricing: PlanPricing, component?: Component) => {
   if (!component) {
-    return <span className="text-muted">—</span>;
+    return undefined;
   }
   const unit = component.measured_unit;
-  return (
-    <span className="text-muted">
-      {component.billing_type === 'fixed'
-        ? unit === pricing.plan.unit
-          ? translate('Included')
-          : translate('{amount} {unit} included', {
-              amount: component.amount,
-              unit,
-            })
-        : component.billing_type === 'limit'
-          ? translate('You choose the amount')
-          : component.billing_type === 'usage'
-            ? translate('Metered')
-            : component.billing_type === 'few'
-              ? translate('On plan switch')
-              : translate('One-time')}
-    </span>
-  );
+  switch (component.billing_type) {
+    case 'fixed':
+      return unit === pricing.plan.unit
+        ? translate('Included')
+        : translate('{amount} {unit} included', {
+            amount: component.amount,
+            unit,
+          });
+    case 'limit':
+      return translate('You choose the amount');
+    case 'usage':
+      return translate('Metered');
+    case 'few':
+      return translate('On plan switch');
+    default:
+      return translate('One-time');
+  }
 };
 
-const ComponentCell = ({
-  pricing,
-  component,
-}: {
-  pricing: PlanPricing;
-  component?: Component;
-}) => {
+const componentText = (pricing: PlanPricing, component?: Component) => {
   if (!component) {
-    return <span className="text-muted">—</span>;
+    return undefined;
   }
   if (!component.price) {
-    return (
-      <span className="text-muted">
-        {component.billing_type === 'fixed'
-          ? translate('Included')
-          : translate('No charge')}
-      </span>
-    );
+    return component.billing_type === 'fixed'
+      ? translate('Included')
+      : translate('No charge');
   }
   const unit = component.measured_unit;
-  // A fee measured in the billing unit itself is flat; restating "1 month
-  // included" underneath its own monthly price says nothing.
-  const isFlatFee = unit === pricing.plan.unit;
+  const period = pricing.periodLabel;
 
   if (component.billing_type === 'fixed') {
-    return (
-      <div>
-        <div className="fw-semibold text-gray-900">
-          {defaultCurrency(component.subTotal * pricing.monthlyMultiplier)}
-          <span className="fs-8 fw-normal text-muted">
-            {' / '}
-            {pricing.periodLabel}
-          </span>
-        </div>
-        {!isFlatFee && (
-          <div className="fs-8 text-muted">
-            {translate('{amount} {unit} included', {
-              amount: component.amount,
-              unit,
-            })}
-          </div>
-        )}
-      </div>
+    const price = defaultCurrency(
+      component.subTotal * pricing.monthlyMultiplier,
     );
+    // A fee measured in the billing unit itself is flat; restating "1 month"
+    // beside its own monthly price says nothing.
+    return unit === pricing.plan.unit
+      ? translate('{price} / {period}', { price, period })
+      : translate('{price} / {period} for {amount} {unit}', {
+          price,
+          period,
+          amount: component.amount,
+          unit,
+        });
   }
 
   if (component.billing_type === 'limit') {
@@ -134,62 +108,30 @@ const ComponentCell = ({
     // (see combinePrices, and billing_limit._create_invoice_item). A `total`
     // period is billed once rather than per period.
     const isOneOff = component.limit_period === 'total';
-    return (
-      <div>
-        <div className="fw-semibold text-gray-900">
-          {rate(
-            isOneOff
-              ? component.price
-              : component.price * pricing.monthlyMultiplier,
-          )}
-        </div>
-        <div className="fs-8 text-muted">
-          {isOneOff
-            ? translate('per {unit}, once', { unit })
-            : translate('per {unit} / {period}', {
-                unit,
-                period: pricing.periodLabel,
-              })}
-        </div>
-      </div>
+    const price = rate(
+      isOneOff ? component.price : component.price * pricing.monthlyMultiplier,
     );
+    return isOneOff
+      ? translate('{price} per {unit}, once', { price, unit })
+      : translate('{price} per {unit} / {period}', { price, unit, period });
   }
 
+  const price = rate(component.price);
+
   if (component.billing_type === 'usage') {
-    return (
-      <div>
-        <div className="fw-semibold text-gray-900">{rate(component.price)}</div>
-        <div className="fs-8 text-muted">
-          {translate('per {unit}, metered', { unit })}
-        </div>
-      </div>
-    );
+    return translate('{price} per {unit}, metered', { price, unit });
   }
 
   // Charged when the customer switches onto this plan, not when they order it.
   if (component.billing_type === 'few') {
-    return (
-      <div>
-        <div className="fw-semibold text-gray-900">{rate(component.price)}</div>
-        <div className="fs-8 text-muted">
-          {unit
-            ? translate('per {unit}, on plan switch', { unit })
-            : translate('once, on plan switch')}
-        </div>
-      </div>
-    );
+    return unit
+      ? translate('{price} per {unit}, on plan switch', { price, unit })
+      : translate('{price}, on plan switch', { price });
   }
 
-  return (
-    <div>
-      <div className="fw-semibold text-gray-900">{rate(component.price)}</div>
-      <div className="fs-8 text-muted">
-        {unit
-          ? translate('per {unit}, once', { unit })
-          : translate('once, at order')}
-      </div>
-    </div>
-  );
+  return unit
+    ? translate('{price} per {unit}, once', { price, unit })
+    : translate('{price}, once', { price });
 };
 
 const PlanHeader = ({ pricing }: { pricing: PlanPricing }) => (
@@ -198,7 +140,7 @@ const PlanHeader = ({ pricing }: { pricing: PlanPricing }) => (
     id={`plan-${pricing.plan.uuid}`}
     autoWidth
   >
-    <span className="fw-bold text-gray-900">{pricing.plan.name}</span>
+    <span>{pricing.plan.name}</span>
   </Tip>
 );
 
@@ -264,19 +206,13 @@ export const PlanComparison: FC<PlanComparisonProps> = ({ offering }) => {
   const columns = useMemo<Column<ComparisonRow>[]>(
     () => [
       {
+        // The main column: the only one that carries emphasis, and the only
+        // one allowed a second line.
         title: translate('Component'),
         render: ({ row }) => (
-          <div>
-            <div
-              className={
-                row.kind === 'total'
-                  ? 'fw-bold text-gray-900'
-                  : 'fw-semibold text-gray-800'
-              }
-            >
-              {row.label}
-            </div>
-            {row.unit && <div className="fs-8 text-muted">{row.unit}</div>}
+          <div className="d-flex flex-column">
+            <span className="title">{row.label}</span>
+            {row.unit && <span className="description">{row.unit}</span>}
           </div>
         ),
       },
@@ -284,18 +220,12 @@ export const PlanComparison: FC<PlanComparisonProps> = ({ offering }) => {
         id: pricing.plan.uuid,
         title: <PlanHeader pricing={pricing} />,
         render: ({ row }: { row: ComparisonRow }) =>
-          row.kind === 'total' ? (
-            <TotalCell pricing={pricing} />
-          ) : concealPrices ? (
-            <ConcealedCell
-              pricing={pricing}
-              component={row.byPlan[pricing.plan.uuid]}
-            />
-          ) : (
-            <ComponentCell
-              pricing={pricing}
-              component={row.byPlan[pricing.plan.uuid]}
-            />
+          renderFieldOrDash(
+            row.kind === 'total'
+              ? totalText(pricing)
+              : concealPrices
+                ? concealedText(pricing, row.byPlan[pricing.plan.uuid])
+                : componentText(pricing, row.byPlan[pricing.plan.uuid]),
           ),
       })),
     ],
@@ -308,24 +238,19 @@ export const PlanComparison: FC<PlanComparisonProps> = ({ offering }) => {
   });
 
   return (
-    <>
-      <Table<ComparisonRow>
-        {...tableProps}
-        columns={columns}
-        verboseName={translate('plans')}
-        equalColWidth
-        hideTitle
-        hasActionBar={false}
-        hasPagination={false}
-        placeholderHasRetry={false}
-      />
-      {anyVariableCost && (
-        <p className="text-muted fs-7 mt-3 mb-0">
-          {translate(
-            'The starting price covers what the plan fixes. Components you size yourself and metered usage are charged on top, at the rates above.',
-          )}
-        </p>
-      )}
-    </>
+    <Table<ComparisonRow>
+      {...tableProps}
+      columns={columns}
+      verboseName={translate('plans')}
+      equalColWidth
+      hideTitle
+      hasActionBar={false}
+      hasPagination={false}
+      placeholderHasRetry={false}
+      // Already inside the Plans panel: no second card border, and no second
+      // set of padding around it.
+      cardBordered={false}
+      bodyClassName="p-0"
+    />
   );
 };

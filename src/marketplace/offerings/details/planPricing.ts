@@ -123,3 +123,14 @@ export const getOfferingEntryPrice = (
     pricing.monthlyBase < cheapest.monthlyBase ? pricing : cheapest,
   );
 };
+
+/**
+ * True when any orderable plan bills beyond its fixed part, so the headline
+ * figure is a floor rather than the whole price.
+ */
+export const hasVariablePricing = (
+  offering: Pick<PublicOfferingDetails, 'type' | 'components' | 'plans'>,
+): boolean =>
+  getOrderablePlans(offering).some(
+    (plan) => getPlanPricing(offering, plan).hasVariableCost,
+  );
