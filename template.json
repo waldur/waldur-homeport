@@ -2433,20 +2433,10 @@
       "action_type": "read"
     }
   },
-  "Admin password": {
-    "context": {
-      "feature_area": "common"
-    }
-  },
   "Admin state": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "openstack-tenant"
-    }
-  },
-  "Admin username": {
-    "context": {
-      "feature_area": "common"
     }
   },
   "Administration": {
@@ -6735,7 +6725,7 @@
   "Availability zone": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "deploy"
+      "feature_area": "openstack"
     }
   },
   "Availability:": {
@@ -7033,12 +7023,6 @@
       "primary_ui_type": "label"
     }
   },
-  "Azure Active Directory Application Secret": {
-    "context": {
-      "feature_area": "common"
-    }
-  },
-  "Azure Virtual Machine": {},
   "Back": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -18827,7 +18811,7 @@
   },
   "External IP": {
     "context": {
-      "feature_area": "vm"
+      "feature_area": "openstack"
     }
   },
   "External IPs": {
@@ -20198,12 +20182,6 @@
     "context": {
       "primary_ui_type": "action_button",
       "feature_area": "access-subnets"
-    }
-  },
-  "First": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "deploy"
     }
   },
   "First GID of the pool (inclusive).": {
@@ -22598,7 +22576,7 @@
   "Image": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "deploy"
+      "feature_area": "images"
     }
   },
   "Image has been added.": {
@@ -22968,11 +22946,6 @@
       "primary_ui_type": "label",
       "feature_area": "proposals",
       "action_type": "read"
-    }
-  },
-  "In the format of GUID": {
-    "context": {
-      "feature_area": "common"
     }
   },
   "In-depth analysis of organization quota limits and usage projections": {
@@ -23619,7 +23592,7 @@
   },
   "Internal IP": {
     "context": {
-      "feature_area": "vm"
+      "feature_area": "summary"
     }
   },
   "Internal IPs": {
@@ -30451,11 +30424,6 @@
       "feature_area": "blocks"
     }
   },
-  "No images found": {
-    "context": {
-      "feature_area": "deploy"
-    }
-  },
   "No impact": {},
   "No inactive request types selected": {
     "context": {
@@ -31238,11 +31206,6 @@
   "No services registered": {
     "context": {
       "feature_area": "site-agents"
-    }
-  },
-  "No sizes found": {
-    "context": {
-      "feature_area": "deploy"
     }
   },
   "No special import options enabled": {
@@ -36470,16 +36433,6 @@
   "Please select at least one proposal.": {
     "context": {
       "feature_area": "reviewer-discovery"
-    }
-  },
-  "Please select location and availability zone first": {
-    "context": {
-      "feature_area": "deploy"
-    }
-  },
-  "Please select location first": {
-    "context": {
-      "feature_area": "deploy"
     }
   },
   "Please select organization first": {
@@ -42441,11 +42394,6 @@
     }
   },
   "Resource field name.": {},
-  "Resource group": {
-    "context": {
-      "feature_area": "azure"
-    }
-  },
   "Resource has been marked as ERRED.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -43105,8 +43053,7 @@
   },
   "Restart": {
     "context": {
-      "primary_ui_type": "title",
-      "feature_area": "actions"
+      "primary_ui_type": "title"
     }
   },
   "Restart the homeserver — it will begin sending events to the Waldur webhook": {
@@ -45309,12 +45256,6 @@
       "primary_ui_type": "label"
     }
   },
-  "Second": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "deploy"
-    }
-  },
   "Second factor only": {
     "context": {
       "feature_area": "passkeys"
@@ -45346,8 +45287,7 @@
   "Secure authentication through supported Austrian eID methods.": {},
   "Security": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "deploy"
+      "primary_ui_type": "label"
     }
   },
   "Security configuration": {
@@ -49286,11 +49226,6 @@
       "feature_area": "billing"
     }
   },
-  "Subscription ID": {
-    "context": {
-      "feature_area": "common"
-    }
-  },
   "Subscription details": {
     "context": {
       "feature_area": "event-subscriptions"
@@ -50512,11 +50447,6 @@
       "feature_area": "admin"
     }
   },
-  "Tenant ID": {
-    "context": {
-      "feature_area": "common"
-    }
-  },
   "Tenant name": {
     "context": {
       "feature_area": "openstack"
@@ -51432,8 +51362,6 @@
       "feature_area": "rule-editor"
     }
   },
-  "The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number": {},
-  "The name must be shorter than 15 characters.": {},
   "The name of the group to which the ticket will be added. If not specified, the first group will be used.": {},
   "The name shown to users for this role, in each language. The role code is edited separately.": {
     "context": {
@@ -52261,12 +52189,6 @@
   "Thick arrow": {
     "context": {
       "primary_ui_type": "label"
-    }
-  },
-  "Third": {
-    "context": {
-      "primary_ui_type": "label",
-      "feature_area": "deploy"
     }
   },
   "This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.": {

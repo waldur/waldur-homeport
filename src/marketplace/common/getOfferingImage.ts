@@ -1,7 +1,5 @@
 import { Offering } from 'waldur-js-client';
 
-import { AZURE_VM_TYPE } from '@/azure/constants';
-import azureIcon from '@/images/appstore/icon-azure.png';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
 import rancherIcon from '@/images/appstore/icon-rancher.png';
 import vmwareIcon from '@/images/appstore/icon-vmware.png';
@@ -17,9 +15,6 @@ export const getOfferingImage = (offering: Offering) => {
     case VOLUME_TYPE:
     case TENANT_TYPE:
       return openstackIcon;
-
-    case AZURE_VM_TYPE:
-      return azureIcon;
 
     case MARKETPLACE_RANCHER:
       return rancherIcon;

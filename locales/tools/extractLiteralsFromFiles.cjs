@@ -351,7 +351,6 @@ class EnhancedTranslationExtractor {
       rancher: 'infrastructure',
       slurm: 'infrastructure',
       vmware: 'infrastructure',
-      azure: 'infrastructure',
     };
 
     for (const part of pathParts) {

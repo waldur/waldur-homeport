@@ -179,7 +179,6 @@ def generate_tag_summary(tag_stats):
         "support": "Support tickets",
         "vmware": "VMware virtualization",
         "aws": "Amazon Web Services",
-        "azure": "Microsoft Azure",
         "digitalocean": "DigitalOcean",
         "rancher": "Rancher Kubernetes",
         "openportal": "OpenPortal integration",

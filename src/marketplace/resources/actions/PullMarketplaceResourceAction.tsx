@@ -16,7 +16,6 @@ const SUPPORTED_OFFERING_TYPES = [
   'OpenStack.Instance',
   'OpenStack.Volume',
   'Marketplace.Rancher',
-  'Azure.VirtualMachine',
   'VMware.VirtualMachine',
 ];
 
