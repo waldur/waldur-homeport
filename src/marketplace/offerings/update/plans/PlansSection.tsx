@@ -24,6 +24,7 @@ import { useOfferingAccountingTableTabs } from '../utils';
 import { AddPlanButton } from './AddPlanButton';
 import { PlanActions } from './PlanActions';
 import { PlanExpandableRow } from './PlanExpandableRow';
+import { PlanPriceCell } from './PlanPriceCell';
 
 export const PlansSection: FC<OfferingSectionProps> = (props) => {
   const user = useUser();
@@ -42,13 +43,25 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
           variant={row.archived ? 'warning' : 'success'}
           outline
           pill
+          // The other two badges on this row are sm; a status badge that towers
+          // over them reads as a different kind of thing.
+          size="sm"
         />
       ),
     },
     {
       title: translate('Billing mode'),
       render: ({ row }) => (
-        <PlanBillingModeBadge mode={getPlanBillingMode(props.offering, row)} />
+        <PlanBillingModeBadge
+          mode={getPlanBillingMode(props.offering, row)}
+          size="sm"
+        />
+      ),
+    },
+    {
+      title: translate('Price'),
+      render: ({ row }) => (
+        <PlanPriceCell plan={row} offering={props.offering} />
       ),
     },
     {

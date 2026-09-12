@@ -124,6 +124,30 @@ import { renderFieldOrDash } from '@/table/utils';
 {items.length > 0 ? items.join(', ') : DASH_ESCAPE_CODE}
 ```
 
+**What the column holds decides it, not how empty the cell looks.**
+
+An empty cell is rarely a null: a count is 0, a price is 0.0000000, a relation
+is []. Deciding per cell is how one table ends up saying nothing three
+different ways, so decide by type:
+
+| The column holds | Empty renders as | Example |
+|---|---|---|
+| money — a price, a cost, a total | the figure, always: `defaultCurrency(...)` | `€0.00` for a plan whose components are all priced at 0 |
+| a count | the number, or the column's own word for zero | `Not used` for the resources on a plan |
+| an optional list or relation, where empty is the ordinary state | `—` | a plan's organization groups: none assigned means no restriction |
+| a genuinely absent field (`null`/`undefined`) | `—` via `renderFieldOrDash` | a description nobody wrote |
+
+A price, a count or a total is never dashed: `0` is a fact somebody's
+configuration produced and usually one they must act on, while `—` reads as
+"does not apply". Money columns print `defaultCurrency(...)` unconditionally
+for the same reason, and `PlanComponentsTable` spells it out where a plan's
+zero prices are listed.
+
+Where the two conventions collide — the app-wide idiom for an unconfigured
+value is muted text (`FieldRow`, `WaldurResourcesList`), while a neighbouring
+column in the same table states its zero at full weight — match the table.
+Cells read against the ones beside them before they read against the app.
+
 ### 1.4 Empty State Message Templates
 
 ```tsx

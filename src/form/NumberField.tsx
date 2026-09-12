@@ -24,6 +24,12 @@ interface BaseNumberFieldProps {
   readOnly?: boolean;
   id?: string;
   isInvalid?: boolean;
+  /**
+   * The up/down carets. They move by `step`, which a price cannot use: seven
+   * decimals of precision make the caret's move invisible, and raising `step`
+   * would make those decimals invalid.
+   */
+  showSteppers?: boolean;
 }
 
 export const BaseNumberField: FC<BaseNumberFieldProps> = ({
@@ -39,6 +45,7 @@ export const BaseNumberField: FC<BaseNumberFieldProps> = ({
   step,
   id,
   isInvalid,
+  showSteppers = true,
   ...rest
 }) => {
   const minNum = Number(min ?? -Infinity);
@@ -94,10 +101,12 @@ export const BaseNumberField: FC<BaseNumberFieldProps> = ({
         {...rest}
       />
       <div className="input-group-addons">
-        <CaretUpDownButtons
-          onClickUp={() => changeBy(stepNum)}
-          onClickDown={() => changeBy(-stepNum)}
-        />
+        {showSteppers && (
+          <CaretUpDownButtons
+            onClickUp={() => changeBy(stepNum)}
+            onClickDown={() => changeBy(-stepNum)}
+          />
+        )}
         {unit && (
           <InputGroup.Text className="border-0 unit">{unit}</InputGroup.Text>
         )}

@@ -25,6 +25,12 @@ const ALLOWED_FILES = [
   'src/table/',
   'src/core/RichTextEditor',
   'packages/ui/src/Table.tsx',
+  // A grid of form inputs, one per offering component, inside a dialog -- not
+  // a list of data. @/table/Table brings a fetch cycle, an action bar, a
+  // reserved min-height and column sizing meant for a page of rows, all of
+  // which fight a four-row price editor in a modal. Same shape as
+  // SetQuotasDialog's own table.
+  'src/marketplace/offerings/update/plans/PricesTable.tsx',
 ];
 
 export default {

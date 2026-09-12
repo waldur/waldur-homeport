@@ -1,7 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { marketplacePlansCreate } from 'waldur-js-client';
+import {
+  marketplacePlansCreate,
+  marketplacePlansUpdatePrices,
+} from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption } from '@/test/select';
@@ -172,5 +175,88 @@ describe('AddPlanDialog', () => {
     // Resolve the promise to clean up
     resolvePromise!();
     await clickPromise;
+  });
+});
+
+const mockOfferingWithComponents = {
+  ...mockOffering,
+  components: [
+    {
+      type: 'cores',
+      name: 'Cores',
+      measured_unit: 'cores',
+      billing_type: 'limit',
+    },
+    { type: 'ram', name: 'RAM', measured_unit: 'GB', billing_type: 'limit' },
+  ],
+  plans: [],
+};
+
+describe('AddPlanDialog component prices', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(marketplacePlansCreate).mockResolvedValue({
+      data: { uuid: 'new-plan-uuid' },
+    } as any);
+  });
+
+  const fillRequiredFields = async (user) => {
+    await user.type(screen.getByLabelText(/Name/), 'New Plan');
+    await openAndSelectOption(user, /Billing period/, 'Per month');
+  };
+
+  it('prices the components of the offering while the plan is created', async () => {
+    vi.mocked(marketplacePlansUpdatePrices).mockResolvedValue({} as any);
+    renderComponent({
+      ...mockResolve,
+      offering: mockOfferingWithComponents,
+    } as any);
+    const user = userEvent.setup();
+
+    await fillRequiredFields(user);
+    await user.type(screen.getAllByRole('spinbutton')[0], '0.02');
+    await user.click(screen.getByText('Create'));
+
+    await waitFor(() => {
+      expect(marketplacePlansUpdatePrices).toHaveBeenCalledWith({
+        path: { uuid: 'new-plan-uuid' },
+        body: { prices: { cores: '0.02' } },
+      });
+    });
+  });
+
+  it('refuses to create a plan that is neither priced nor marked free', async () => {
+    renderComponent({
+      ...mockResolve,
+      offering: mockOfferingWithComponents,
+    } as any);
+    const user = userEvent.setup();
+
+    await fillRequiredFields(user);
+
+    expect(screen.getByText('Create')).toBeDisabled();
+
+    await user.type(screen.getAllByRole('spinbutton')[0], '0.02');
+
+    await waitFor(() => {
+      expect(screen.getByText('Create')).not.toBeDisabled();
+    });
+  });
+
+  it('creates a plan the provider marked free, without prices', async () => {
+    renderComponent({
+      ...mockResolve,
+      offering: mockOfferingWithComponents,
+    } as any);
+    const user = userEvent.setup();
+
+    await fillRequiredFields(user);
+    await user.click(screen.getByLabelText(/This plan is free/));
+    await user.click(screen.getByText('Create'));
+
+    await waitFor(() => {
+      expect(marketplacePlansCreate).toHaveBeenCalled();
+    });
+    expect(marketplacePlansUpdatePrices).not.toHaveBeenCalled();
   });
 });
