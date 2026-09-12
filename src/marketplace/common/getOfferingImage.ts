@@ -1,6 +1,6 @@
 import { Offering } from 'waldur-js-client';
 
-import { AZURE_SQL_TYPE, AZURE_VM_TYPE } from '@/azure/constants';
+import { AZURE_VM_TYPE } from '@/azure/constants';
 import azureIcon from '@/images/appstore/icon-azure.png';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
 import rancherIcon from '@/images/appstore/icon-rancher.png';
@@ -18,7 +18,6 @@ export const getOfferingImage = (offering: Offering) => {
     case TENANT_TYPE:
       return openstackIcon;
 
-    case AZURE_SQL_TYPE:
     case AZURE_VM_TYPE:
       return azureIcon;
 
