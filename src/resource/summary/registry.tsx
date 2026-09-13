@@ -1,4 +1,3 @@
-import { AzureVirtualMachineSummaryConfiguration } from '@/azure/vm/summary';
 import { OpenStackBackupSummaryConfiguration } from '@/openstack/openstack-backup/summary';
 import { OpenStackFloatingIpSummaryConfiguration } from '@/openstack/openstack-floating-ips/summary';
 import { OpenStackInstanceSummaryConfiguration } from '@/openstack/openstack-instance/summary';
@@ -30,7 +29,6 @@ export const get = (type: string): ResourceSummaryConfiguration => {
   return registry[type];
 };
 
-register(AzureVirtualMachineSummaryConfiguration);
 register(OpenStackBackupSummaryConfiguration);
 register(OpenStackFloatingIpSummaryConfiguration);
 register(OpenStackNetworkSummaryConfiguration);

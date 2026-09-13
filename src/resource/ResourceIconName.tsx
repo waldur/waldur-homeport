@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 
 import { Tip } from '@/core/Tooltip';
-import azureIcon from '@/images/appstore/icon-azure.png';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
 import rancherIcon from '@/images/appstore/icon-rancher.png';
 import vmwareIcon from '@/images/appstore/icon-vmware.png';
@@ -17,7 +16,6 @@ interface ResourceIconProps {
 }
 
 const ICONS = {
-  Azure: azureIcon,
   OpenStack: openstackIcon,
   Rancher: rancherIcon,
   VMware: vmwareIcon,

@@ -281,7 +281,6 @@ rather than an instance of the problem.
 - `src/project/` - Project management and resources
 - `src/auth/` - Authentication and identity provider integration
 - `src/administration/` - Admin panel functionality
-- `src/azure/` - Azure cloud integration
 - `src/booking/` - Resource booking system
 - `src/broadcasts/` - System announcements
 - `src/dashboard/` - Dashboard components

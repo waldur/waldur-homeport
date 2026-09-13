@@ -1,6 +1,5 @@
 import { PublicOfferingDetails, OfferingComponent } from 'waldur-js-client';
 
-import { AzureVirtualMachineOffering } from '@/azure/vm/marketplace';
 import { BookingOffering } from '@/booking/marketplace';
 import { RemoteOffering } from '@/marketplace-remote/marketplace';
 import { ScriptOffering } from '@/marketplace-script/marketplace';
@@ -162,7 +161,6 @@ export const filterOfferingComponents = (
   return offeringComponents;
 };
 
-registerOfferingType(AzureVirtualMachineOffering);
 registerOfferingType(RemoteOffering);
 registerOfferingType(BookingOffering);
 registerOfferingType(ScriptOffering);
