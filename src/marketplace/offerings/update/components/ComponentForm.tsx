@@ -51,6 +51,6 @@ export const ComponentForm = ({
     <ComponentAccountingTypeField readOnly={readOnly} />
     <ArticleCodeField />
     <ComponentPrepaidFieldGroup offering={offering} />
-    <ComponentLimit readOnly={readOnly} />
+    <ComponentLimit readOnly={readOnly} offering={offering} />
   </>
 );

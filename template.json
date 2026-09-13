@@ -50891,6 +50891,11 @@
       "feature_area": "anonymous"
     }
   },
+  "The backend may not keep this precision": {
+    "context": {
+      "feature_area": "update"
+    }
+  },
   "The base allocation for each TRES component is read from the resource limits (set at provisioning time from plan components). Each offering can define multiple components (e.g. cpu, mem, gpu, billing) — the policy evaluates limits per component.": {
     "context": {
       "feature_area": "policies"
