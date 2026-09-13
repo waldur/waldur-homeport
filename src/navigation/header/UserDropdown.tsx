@@ -18,6 +18,7 @@ import { LogoutMenuItem } from './LogoutMenuItem';
 import { UserDropdownMenuItems } from './UserDropdownMenuItems';
 import { UserIpAddress } from './UserIpAddress';
 import { UserToken } from './UserToken';
+import { WebShellMenuItem } from './WebShellMenuItem';
 
 /**
  * forwardRef so this composes under NavMenuTrigger's `asChild` — see
@@ -128,6 +129,8 @@ export const UserDropdownMenu: FunctionComponent = () => {
         <div className="separator my-2" />
 
         <LanguageSelectorDropdown />
+
+        <WebShellMenuItem />
 
         {user && <LogoutMenuItem />}
 

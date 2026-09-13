@@ -56658,6 +56658,12 @@
       "feature_area": "actions"
     }
   },
+  "Unable to open the web shell.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "header"
+    }
+  },
   "Unable to pause offering.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -62208,6 +62214,11 @@
   "Weather": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Web shell": {
+    "context": {
+      "feature_area": "header"
     }
   },
   "Webhook": {
