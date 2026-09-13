@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
-import { BillingTypeEnum } from 'waldur-js-client';
+import { BillingTypeEnum, ProviderOfferingDetails } from 'waldur-js-client';
 
 import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
 import { ComponentBooleanDefaultLimitField } from './ComponentBooleanDefaultLimitField';
@@ -25,7 +25,10 @@ interface Values {
   limit_amount?: number;
 }
 
-export const ComponentLimit: FC<{ readOnly?: boolean }> = (props) => {
+export const ComponentLimit: FC<{
+  readOnly?: boolean;
+  offering?: ProviderOfferingDetails;
+}> = (props) => {
   const { values } = useFormState<Values>();
   const billingType = values.billing_type?.value;
 
@@ -41,6 +44,11 @@ export const ComponentLimit: FC<{ readOnly?: boolean }> = (props) => {
       return (
         <ComponentAccountingTypeWrapper>
           <ComponentBooleanLimitField />
+          {/* Min, max and precision are one line of small numbers; the
+              period is a select with a long label, and the precision field
+              carries a description and may carry a warning. Splitting them
+              over two rows stops the description wrapping to four lines in a
+              column sized for a two-digit number. */}
           <Row className="g-5">
             <Col xs>
               <ComponentMinValueField />
@@ -48,15 +56,17 @@ export const ComponentLimit: FC<{ readOnly?: boolean }> = (props) => {
             <Col xs>
               <ComponentMaxValueField />
             </Col>
-            <Col xs>
-              <ComponentDecimalPlacesField />
-            </Col>
-            <Col xs={5}>
+            <Col xs={6}>
               <ComponentLimitPeriodField
                 limitPeriod={values.limit_period}
                 readOnly={props.readOnly}
                 spaceless
               />
+            </Col>
+          </Row>
+          <Row className="g-5 mt-1">
+            <Col xs={12}>
+              <ComponentDecimalPlacesField offering={props.offering} />
             </Col>
           </Row>
         </ComponentAccountingTypeWrapper>
