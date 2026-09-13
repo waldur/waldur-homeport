@@ -29,14 +29,14 @@ body {
 
     // Aside default enabled and aside fixed modes
     .aside-enabled.aside-fixed & {
-      transition: padding-left get($aside-config, transition-speed) ease;
-      padding-left: get($aside-config, width);
+      // The new Tailwind Sidebar provides a layout spacer div,
+      // so we don't need padding-left here anymore.
     }
 
     // Aside default enabled, aside fixed and aside minimize modes
     .aside-enabled.aside-fixed[data-kt-aside-minimize='on'] & {
-      transition: padding-left get($aside-config, transition-speed) ease;
-      padding-left: get($aside-config, minimized-width);
+      // The new Tailwind Sidebar provides a layout spacer div,
+      // so we don't need padding-left here anymore.
     }
 
     // Fixed header mode

@@ -1,29 +1,27 @@
-import classNames from 'classnames';
+import {
+  SidebarFooter as SidebarFooterSlot,
+  SidebarMenu,
+  SidebarSeparator,
+} from 'waldur-ui';
 
-import { AdminMenu } from '@/navigation/sidebar/AdminMenu';
-import { SupportMenu } from '@/navigation/sidebar/SupportMenu';
 import { useUser } from '@/workspace/hooks';
 
-export const SidebarFooter = ({ menuClassNames }) => {
+import { AdminMenu } from './AdminMenu';
+import { SupportMenu } from './SupportMenu';
+
+export const SidebarFooter = () => {
   const user = useUser();
   const visible = user?.is_staff || user?.is_support;
   if (!visible) {
     return null;
   }
   return (
-    <div
-      className="aside-footer has-divider flex-column-auto pb-4"
-      id="kt_aside_footer"
-    >
-      <div
-        className={classNames(
-          'aside-menu menu menu-column menu-rounded gap-1 fs-4 fw-bold pt-4',
-          menuClassNames,
-        )}
-      >
+    <SidebarFooterSlot className="gap-2">
+      <SidebarSeparator className="mx-0" />
+      <SidebarMenu>
         <SupportMenu />
         <AdminMenu />
-      </div>
-    </div>
+      </SidebarMenu>
+    </SidebarFooterSlot>
   );
 };

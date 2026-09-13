@@ -1,6 +1,6 @@
 /**
  * Layout/surface tokens for dashboard-style micro-apps (stat cards, data
- * tables, sidebar navigation, status pills) — composed from the base ramps
+ * tables, status pills, modals/drawers) — composed from the base ramps
  * in colors.css and the runtime --waldur-brand-* ramp, same pattern as
  * buttonColors.css.
  *
@@ -12,15 +12,14 @@
  * them as a reasonable starting point, not verified-parity values the way
  * buttonColors.css's are.
  *
- * The --nav-item-* and --surface-sidebar-bg tokens are the exception —
- * see the per-[data-sidebar-style] block below, which is real-source
- * Metronic parity, not a guess.
+ * Sidebar tokens (--surface-sidebar-bg, --nav-item-*, etc.) are extracted
+ * into sidebarColors.css, imported below.
  */
 @import './colors.css';
+@import './sidebarColors.css';
 
 :root {
   --surface-page-bg: var(--color-gray-50);
-  --surface-sidebar-border: var(--color-gray-200);
   --surface-card-bg: #ffffff;
   --surface-card-border: var(--color-gray-200);
   --surface-hover-bg: var(--color-gray-50);
@@ -28,8 +27,6 @@
   --surface-text-primary: var(--color-gray-900);
   --surface-text-secondary: var(--color-gray-500);
   --surface-text-muted: var(--color-gray-400);
-
-  --nav-section-label: var(--color-gray-400);
 
   --pill-success-bg: var(--color-success-50);
   --pill-success-text: var(--color-success-700);
@@ -174,117 +171,4 @@
 
   --card-shadow: none;
   --card-border-color: var(--surface-card-border);
-}
-
-/**
- * Sidebar colors — one block per Metronic aside style (src/metronic/sass/
- * layout/aside/_base.scss's backgrounds, _menu.scss's $asides map for
- * title/icon/bg-hover/bg-active), selected via [data-sidebar-style] on
- * <html>. That attribute mirrors ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE
- * (see src/navigation/sidebar/Sidebar.tsx, which maps the same values to
- * real aside-{style} classes) and is applied at runtime by
- * applySidebarStyle() (initSidebarStyle.ts), called from
- * apps/micro-app-poc/src/App.tsx the same way initFontFamily()/
- * applyTheme() are. Values are read straight from that SCSS source, not
- * getComputedStyle-measured — there's no easy unauthenticated page
- * configured with anything but "accent" (the real reference deployment's
- * style: its visibly blue "+Add resource" border in the accent-only
- * $custom-aside map is the tell) to measure the other four from.
- *
- * "dark" and "light" are the two variants whose Metronic source
- * genuinely branches on isDarkMode() — INVERTED, not matched: e.g.
- * .aside-dark's background is `if(isDarkMode(), $gray-25, $gray-950)`,
- * flipping to near-white when the *page* goes dark, to keep contrast
- * against the (also-inverted) content area. The :not([data-sidebar-style])
- * rules are the fallback for markup that never calls applySidebarStyle()
- * (e.g. a Storybook story) — matching Sidebar.tsx's own `|| 'dark'`
- * default, not "accent". "primary"/"accent"/"accent-light" have no such
- * branch at all in Metronic's own source — each is declared once,
- * unconditionally.
- *
- * Nav item text/icon color never changes between default and active/here
- * state in any variant — Metronic's menu-link-default-state()/
- * menu-link-here-state() mixins are called with the identical
- * $title-color/$icon-color for both; only the background does
- * (bg-hover on :hover, bg-active when .here).
- *
- * --nav-section-label is the one token here NOT read from that source.
- * Metronic sets `.menu-section { color: $gray-950 !important; }` once for
- * every aside style (_menu.scss's $asides loop), which is near-black on
- * the four dark-background variants — unreadable, and visibly not what
- * the sidebar mockup shows (its FINANCE/REPORTS labels are the same
- * light tint as the nav icons beside them). Each block below therefore
- * matches its own --nav-item-icon, and the :root default above stays as
- * the fallback for markup that never sets [data-sidebar-style].
- */
-:root:not([data-sidebar-style]),
-[data-sidebar-style='dark'] {
-  --surface-sidebar-bg: var(--color-gray-950);
-  --nav-item-hover-bg: var(--color-gray-900);
-  --nav-item-active-bg: var(--color-gray-800);
-  --nav-item-text: var(--color-gray-100);
-  --nav-item-active-text: var(--color-gray-100);
-  --nav-item-icon: var(--color-gray-300);
-  --nav-section-label: var(--color-gray-400);
-}
-
-:root[data-theme='dark']:not([data-sidebar-style]),
-[data-sidebar-style='dark'][data-theme='dark'] {
-  --surface-sidebar-bg: var(--color-gray-25);
-  --nav-item-hover-bg: var(--color-gray-50);
-  --nav-item-active-bg: var(--color-gray-100);
-  --nav-item-text: var(--color-gray-800);
-  --nav-item-active-text: var(--color-gray-800);
-  --nav-item-icon: var(--color-gray-600);
-  --nav-section-label: var(--color-gray-500);
-}
-
-[data-sidebar-style='light'] {
-  --surface-sidebar-bg: var(--color-gray-25);
-  --nav-item-hover-bg: var(--color-gray-50);
-  --nav-item-active-bg: var(--color-gray-100);
-  --nav-item-text: var(--color-gray-700);
-  --nav-item-active-text: var(--color-gray-700);
-  --nav-item-icon: var(--color-gray-500);
-  --nav-section-label: var(--color-gray-400);
-}
-
-[data-sidebar-style='light'][data-theme='dark'] {
-  --surface-sidebar-bg: var(--color-gray-950);
-  --nav-item-hover-bg: var(--color-gray-900);
-  --nav-item-active-bg: var(--color-gray-800);
-  --nav-item-text: var(--color-gray-200);
-  --nav-item-active-text: var(--color-gray-200);
-  --nav-item-icon: var(--color-gray-400);
-  --nav-section-label: var(--color-gray-500);
-}
-
-[data-sidebar-style='primary'] {
-  --surface-sidebar-bg: var(--waldur-brand-color);
-  --nav-item-hover-bg: rgba(255, 255, 255, 0.1);
-  --nav-item-active-bg: rgba(255, 255, 255, 0.15);
-  --nav-item-text: rgba(255, 255, 255, 0.85);
-  --nav-item-active-text: rgba(255, 255, 255, 0.85);
-  --nav-item-icon: rgba(255, 255, 255, 0.7);
-  --nav-section-label: rgba(255, 255, 255, 0.6);
-}
-
-[data-sidebar-style='accent'] {
-  --surface-sidebar-bg: var(--waldur-brand-950);
-  --nav-item-hover-bg: var(--waldur-brand-900);
-  --nav-item-active-bg: var(--waldur-brand-800);
-  --nav-item-text: var(--waldur-brand-100);
-  --nav-item-active-text: var(--waldur-brand-100);
-  --nav-item-icon: var(--waldur-brand-300);
-  --nav-section-label: var(--waldur-brand-300);
-}
-
-[data-sidebar-style='accent-light'] {
-  --surface-sidebar-bg: var(--waldur-brand-25);
-  --nav-item-hover-bg: var(--waldur-brand-50);
-  --nav-item-active-bg: var(--waldur-brand-100);
-  --nav-item-text: var(--waldur-brand-800);
-  --nav-item-active-text: var(--waldur-brand-800);
-  --nav-item-icon: var(--waldur-brand-600);
-  --nav-section-label: var(--waldur-brand-600);
 }

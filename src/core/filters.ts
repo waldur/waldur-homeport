@@ -108,7 +108,17 @@ export const syncFiltersToURL = (form: any) => {
         searchParams.delete(key);
       }
     }
-    const serialized = searchParams.toString();
+    // URLSearchParams.toString() form-encodes spaces as '+', but ui-router's
+    // own param decoding (used by useIsActive/stateService.includes for
+    // sidebar highlighting) calls plain decodeURIComponent, which leaves '+'
+    // as a literal '+' instead of a space — so a value like an org/project
+    // name never matches the freshly-computed JS string once it round-trips
+    // through the URL, breaking the active-link check. '+' only appears
+    // here as an encoded space (an actual '+' in a value is escaped to
+    // '%2B' by toString()), so blanket-replacing it with '%20' is safe and
+    // makes ui-router's decode match ours (see formatParam's own
+    // .replaceAll('+', ' ') above for the same fix on the read side).
+    const serialized = searchParams.toString().replace(/\+/g, '%20');
     const currentRouterPath = router.urlService.path();
     const newRelativePathQuery =
       currentRouterPath + (serialized ? '?' + serialized : '');

@@ -1,13 +1,8 @@
 import { FC, SVGProps } from 'react';
 
 /**
- * The collapse/expand glyph in the sidebar's brand row — a panel outline
- * with its nav column filled and an arrow pointing back into it.
- *
- * Defined as the single canonical implementation in waldur-ui;
- * src/core/SidebarToggleGraphic.tsx re-exports this for root app consumers.
- * Kept as a standalone SVG rather than an icon-font/Phosphor lookalike so
- * the sidebar toggles stay visually identical across apps.
+ * Custom SVG glyph for the sidebar collapse/expand toggle in the brand row.
+ * Displays a panel outline with filled nav rail and directional arrow.
  */
 export const SidebarToggleGraphic: FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg viewBox="0 0 24 25" fill="none" width="100%" height="100%" {...props}>

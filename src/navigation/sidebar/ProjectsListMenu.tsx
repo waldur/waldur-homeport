@@ -25,7 +25,6 @@ export const ProjectsListMenu: FC<ProjectsListMenuProps> = ({
       state="projects"
       activeState={isDescendantOf('project', state) ? state.name : undefined}
       icon={<ClipboardTextIcon weight="bold" />}
-      child={false}
       disabled={disabled}
       disabledTooltip={disabledTooltip}
     />

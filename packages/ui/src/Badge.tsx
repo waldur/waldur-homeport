@@ -61,9 +61,14 @@ const badgeVariants = cva(
   // 500, same $font-weight-bold override StatCard.tsx's own comment
   // documents (Bootstrap's own default is 700, and even Tailwind's
   // font-semibold's 600 overshoots it).
-  // rounded-[8px], not rounded-md (6px) — Metronic's real
-  // $badge-border-radius is $border-radius, which this app overrides to
-  // 8px in _variables.custom.scss (Tailwind's own default is 6px).
+  // rounded-lg (8px via src/tailwind.css's --radius-lg override), not
+  // rounded-md (6px) — Metronic's real $badge-border-radius is
+  // $border-radius, which this app overrides to 8px in
+  // _variables.custom.scss (Tailwind's own un-overridden default for
+  // rounded-md is 6px, matching this file's own rounded-md usage below;
+  // 8px is Tailwind's default for rounded-lg instead, which is why this
+  // reaches for that name rather than a bare rounded-[8px] repeating the
+  // literal).
   // border-[1px], not the bare `border` utility — Bootstrap (still loaded
   // globally during this migration) ships its own `.border { border: 1px
   // solid #e4e7ec !important; }` utility under the exact same class name.
@@ -74,7 +79,7 @@ const badgeVariants = cva(
   // --badge-border. border-[1px] compiles to a differently-named
   // class, sidestepping the collision entirely rather than depending on
   // layer/specificity order to not lose.
-  'inline-flex items-center rounded-[8px] border-[1px] text-[1.075rem] leading-[20px] py-[1px] px-[9px] font-medium transition-colors bg-[var(--badge-bg)] text-[var(--badge-text)] border-[var(--badge-border)]',
+  'inline-flex items-center rounded-lg border-[1px] text-[1.075rem] leading-[20px] py-[1px] px-[9px] font-medium transition-colors bg-[var(--badge-bg)] text-[var(--badge-text)] border-[var(--badge-border)]',
   {
     variants: {
       size: {

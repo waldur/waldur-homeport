@@ -87,7 +87,7 @@ export const DialogContent = forwardRef<
       data-waldur-animated=""
       className={cn(
         'fixed inset-0 z-50 m-auto flex h-fit w-[calc(100%-2rem)] max-w-lg flex-col gap-6',
-        'max-h-[calc(100vh-4rem)] overflow-y-auto rounded-[20px] bg-[var(--surface-card-bg)] p-6 text-[var(--surface-text-primary)] shadow-[var(--dropdown-shadow)]',
+        'max-h-[calc(100vh-4rem)] overflow-y-auto rounded-modal bg-[var(--surface-card-bg)] p-6 text-[var(--surface-text-primary)] shadow-[var(--dropdown-shadow)]',
         'animate-[waldur-modal-enter_.3s_ease-out] data-[state=closed]:animate-[waldur-modal-exit_.3s_ease-out]',
         className,
       )}

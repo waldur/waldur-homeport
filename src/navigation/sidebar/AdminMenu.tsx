@@ -10,7 +10,6 @@ export const AdminMenu = () => {
       title={translate('Administration')}
       state="admin.dashboard"
       activeState="admin"
-      child={false}
       icon={<GearSixIcon weight="bold" />}
     />
   );

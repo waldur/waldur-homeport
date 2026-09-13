@@ -40961,6 +40961,11 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Remove filter": {
+    "context": {
+      "feature_area": "resources-filter"
+    }
+  },
   "Remove health monitor": {
     "context": {
       "feature_area": "openstack-lbaas"

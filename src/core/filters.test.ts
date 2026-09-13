@@ -37,8 +37,12 @@ describe('filters', () => {
 
       expect(router.urlService.url).toHaveBeenCalled();
       const call = vi.mocked(router.urlService.url).mock.calls[0];
-      // Should be uuid::name format
-      expect(call[0]).toContain('organization=abc-123%3A%3AMy+Org');
+      // Should be uuid::name format. %20, not the '+' URLSearchParams would
+      // normally produce for a space: ui-router's own param decoding (used
+      // for sidebar active-link matching) only understands %20, so a '+'
+      // here would silently break highlighting once a scope with a space
+      // in its name is selected.
+      expect(call[0]).toContain('organization=abc-123%3A%3AMy%20Org');
     });
 
     it('stores object with uuid and title in compact format', () => {
@@ -48,7 +52,7 @@ describe('filters', () => {
 
       expect(router.urlService.url).toHaveBeenCalled();
       const call = vi.mocked(router.urlService.url).mock.calls[0];
-      expect(call[0]).toContain('project=proj-456%3A%3AProject+Title');
+      expect(call[0]).toContain('project=proj-456%3A%3AProject%20Title');
     });
 
     it('stores true boolean values', () => {

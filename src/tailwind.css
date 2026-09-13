@@ -18,6 +18,7 @@
 @import 'tailwindcss/utilities.css' layer(utilities);
 @import 'waldur-design-tokens/buttonColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
+@import 'waldur-design-tokens/sidebarColors.css';
 /* Not used by the app's own Bootstrap modals, which bring their own
    motion — this is for packages/ui's Radix Dialog/Sheet primitives.
    Keyframe names are namespaced, so nothing else picks them up. */
@@ -103,12 +104,51 @@
    rem-relative value computes to) — these are explicit px overrides instead. */
 @theme {
   --spacing: 4px;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
   --text-sm: 14px;
   --text-sm--line-height: 20px;
   --text-base: 16px;
   --text-base--line-height: 24px;
   --radius-md: 6px;
   --radius-lg: 8px;
+  /* Not --radius-xl/2xl/3xl: those are Tailwind's own reserved keys (own
+     defaults ~12/16/24px depending on root font-size), and giving one of
+     them this value would silently change what "rounded-2xl" means for any
+     future non-packages/ui caller expecting Tailwind's real default. This
+     is Dialog's modal content and Sidebar's mode-switcher card specifically
+     (both visibly rounder than rounded-lg's 8px, both pair with
+     bg-[var(--surface-card-bg)]) — a genuinely new, one-off value, not a
+     Tailwind scale step, hence the non-reserved name. */
+  --radius-modal: 20px;
+
+  /* Named z-index scale for values chosen to match a still-present
+     Metronic layer's own z-index (so a still-partially-migrated page keeps
+     the exact stacking it always had) — not a general-purpose z-index
+     scale: components with no such parity requirement (Dialog, Popover,
+     DropdownMenu) keep using Tailwind's own built-in z-50/z-10 as before,
+     since that's already a shared, named value and there's nothing
+     Metronic-specific to anchor to. `--z-index-*` is one of Tailwind's own
+     theme namespaces, so each of these also becomes a real `z-<name>`
+     utility (verified: a throwaway `--z-index-scale-test: 4242` produced a
+     working `z-scale-test` class, computed z-index 4242) — no arbitrary
+     `z-[...]` needed at the call site. */
+  /* Metronic's own $aside-config z-index (layout/_variables.scss) — above
+     its header (100) and toolbar (99). Matched by Sidebar.tsx's desktop
+     panel. */
+  --z-index-sidebar-panel: 105;
+  /* Metronic's mobile drawer (.aside.drawer-mobile-on) — above its own
+     header (100), and deliberately not the same value as sidebar-panel above
+     (a different Metronic element, measured separately). Matched by Sheet.tsx's
+     overlay/panel when used as the sidebar's mobile drawer. */
+  --z-index-mobile-drawer: 110;
+  /* src/core/Tooltip.tsx's Tip default zIndex prop. Not consumed as a
+     `z-tooltip` class: Tooltip.tsx's zIndex prop is typed as a plain
+     number (its *override* case needs a value only known at runtime, which
+     no static Tailwind class can express — see that prop's own comment),
+     so its default is kept as the literal 1180 in Tooltip.tsx rather than
+     this variable, with each side commented to point at the other. */
+  --z-index-tooltip: 1180;
 }
 
 /* Tailwind's `visibility` utility set includes a class literally named

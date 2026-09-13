@@ -82,3 +82,39 @@
     animation-duration: 0.01ms !important;
   }
 }
+
+/**
+ * Sidebar accordion slide, matching Metronic's
+ * kt-menu-accordion-down/-up at the same 250ms ease-out.
+ * Animates a `height` custom property rather than
+ * `height` itself directly against Radix's own
+ * --radix-collapsible-content-height: that var is written into a plain ref
+ * inside Radix's CollapsibleContentImpl (not React state), so it never
+ * reaches the DOM before a component's very first open — waldur-ui's
+ * SidebarMenuAccordion measures scrollHeight itself into real state
+ * instead, and writes it here as --sidebar-accordion-height, falling back
+ * to Radix's var only if that measurement hasn't landed yet.
+ */
+@keyframes waldur-sidebar-accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(
+      --sidebar-accordion-height,
+      var(--radix-collapsible-content-height)
+    );
+  }
+}
+
+@keyframes waldur-sidebar-accordion-up {
+  from {
+    height: var(
+      --sidebar-accordion-height,
+      var(--radix-collapsible-content-height)
+    );
+  }
+  to {
+    height: 0;
+  }
+}

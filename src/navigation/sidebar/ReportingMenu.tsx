@@ -29,7 +29,6 @@ export const ReportingMenu: FC<ReportingMenuProps> = ({
       title={translate('Reporting')}
       state="reporting-dashboard"
       activeState="reporting"
-      child={false}
       icon={<ChartBarIcon weight="bold" />}
       disabled={disabled}
       disabledTooltip={disabledTooltip}

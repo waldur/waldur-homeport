@@ -3,6 +3,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
+import { useSidebar } from 'waldur-ui';
+
 import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { getIconUrl } from '@/core/api';
 import { GRID_BREAKPOINTS } from '@/core/constants';
@@ -13,8 +15,6 @@ import { hasSupport as hasSupportSelector } from '@/issues/hooks';
 import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
-import { useMobileSidebar } from '../context';
-
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { LLMChatDrawerToggle } from './LLMChatDrawerToggle';
@@ -23,7 +23,7 @@ import { SearchToggle } from './search/SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
 const AsideMobileToggle: FunctionComponent = () => {
-  const { mobileSidebarOpen, setMobileSidebarOpen } = useMobileSidebar();
+  const { openMobile, toggleSidebar } = useSidebar();
   return (
     <Tip
       label={translate('Toggle navigation menu')}
@@ -35,8 +35,8 @@ const AsideMobileToggle: FunctionComponent = () => {
         id="kt_aside_mobile_toggle"
         type="button"
         aria-label={translate('Toggle navigation menu')}
-        aria-expanded={mobileSidebarOpen}
-        onClick={() => setMobileSidebarOpen?.((prev) => !prev)}
+        aria-expanded={openMobile}
+        onClick={toggleSidebar}
       >
         <span className="svg-icon svg-icon-1x">
           <ListIcon weight="bold" />

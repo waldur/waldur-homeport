@@ -1,10 +1,9 @@
 import { PlusIcon } from '@phosphor-icons/react';
-import classNames from 'classnames';
 import { FunctionComponent, useCallback } from 'react';
 
-import { ENV } from '@/core/config';
+import { SidebarCallToAction } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
@@ -31,41 +30,15 @@ export const MarketplaceTrigger: FunctionComponent<MarketplaceTriggerProps> = ({
       }),
     [],
   );
-  const sidebarStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
 
-  const trigger = (
-    <div
-      className={classNames('menu-item add-resource-toggle', {
-        'menu-item-disabled': disabled,
-      })}
+  return (
+    <SidebarCallToAction
+      icon={<PlusIcon size={20} weight="bold" />}
+      label={translate('Add resource')}
+      disabled={disabled}
+      disabledTooltip={disabledTooltip}
+      onClick={openFormDialog}
       data-testid="add-resource-toggle"
-    >
-      <span
-        className={classNames('menu-link btn btn-outline', {
-          'btn-outline-white':
-            sidebarStyle === 'dark' || sidebarStyle === 'primary',
-          'btn-outline-primary': sidebarStyle === 'light',
-        })}
-        aria-hidden="true"
-        onClick={disabled ? undefined : openFormDialog}
-      >
-        <span className="menu-icon justify-content-center">
-          <span className="svg-icon svg-icon-2">
-            <PlusIcon weight="bold" />
-          </span>
-        </span>
-        <span className="menu-title">{translate('Add resource')}</span>
-      </span>
-    </div>
+    />
   );
-
-  if (disabled && disabledTooltip) {
-    return (
-      <Tip label={disabledTooltip} id="marketplace-trigger">
-        {trigger}
-      </Tip>
-    );
-  }
-
-  return trigger;
 };

@@ -31,7 +31,6 @@ export const OrganizationsListMenu: FC<OrganizationsListMenuProps> = ({
           : undefined
       }
       icon={<BuildingsIcon weight="bold" />}
-      child={false}
       disabled={disabled}
       disabledTooltip={disabledTooltip}
     />
