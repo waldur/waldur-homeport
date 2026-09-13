@@ -47,9 +47,15 @@ export const UnifiedSidebar = () => {
   // (`.getInstance(...).show(item)` calls) this used to make. Deliberately
   // a one-shot "open it" on route match, not a persistent binding: matches
   // the original's own behavior of never calling the equivalent of
-  // `.hide()`, so the user can still manually collapse a route-active
-  // section afterward — it only reopens on the next matching navigation,
-  // it doesn't force itself back open.
+  // `.hide()` for a route still inside the open section — it only reopens
+  // on the next matching navigation, it doesn't force itself back open
+  // while the user stays there.
+  //
+  // The else branch collapses whichever accordion is open once the route
+  // leaves both sections entirely (Reporting, Marketplace, Projects,
+  // Organizations, ...) — otherwise Resources/Calls stayed expanded
+  // forever after the first visit, wasting space for every unrelated page
+  // visited afterward.
   useEffect(() => {
     if (
       [
@@ -74,6 +80,8 @@ export const UnifiedSidebar = () => {
       ].includes(state.name)
     ) {
       setOpenTopId('calls-menu');
+    } else {
+      setOpenTopId(undefined);
     }
   }, [state.name, params.resource_uuid]);
 
@@ -157,7 +165,6 @@ export const UnifiedSidebar = () => {
           icon={<ShoppingCartIcon weight="bold" />}
           title={getMarketplaceTitle()}
           state="public.marketplace-landing"
-          child={false}
           disabled={shouldBlockNavigation}
           disabledTooltip={disabledTooltip}
         />

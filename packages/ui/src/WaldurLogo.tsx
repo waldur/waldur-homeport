@@ -14,7 +14,8 @@ export interface WaldurLogoProps extends HTMLAttributes<HTMLSpanElement> {
  *
  * Both parts inherit currentColor from SidebarBrand's --nav-item-text, so
  * the wordmark tracks whatever SIDEBAR_STYLE is configured instead of
- * hardcoding white.
+ * hardcoding white. In collapsed icon rail mode, the "WALDUR" word text
+ * hides while the 20x20 SVG mark remains visible.
  */
 export const WaldurLogo: FC<WaldurLogoProps> = ({ className, ...props }) => (
   <span
@@ -33,6 +34,6 @@ export const WaldurLogo: FC<WaldurLogoProps> = ({ className, ...props }) => (
     >
       <path d="m 2,10.04 v 7.98 h 1.98 v 2 H 0 v -9.98 z m 7.96,0 v 9.98 H 5.98 v -2 h 1.98 v -7.98 z m -3.98,3.98 v 4 h -2 v -4 z" />
     </svg>
-    WALDUR
+    <span className="group-data-[collapsible=icon]/panel:hidden">WALDUR</span>
   </span>
 );

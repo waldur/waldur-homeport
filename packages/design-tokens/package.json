@@ -10,6 +10,7 @@
     "./colors.css": "./src/colors.css",
     "./buttonColors.css": "./src/buttonColors.css",
     "./surfaceColors.css": "./src/surfaceColors.css",
+    "./sidebarColors.css": "./src/sidebarColors.css",
     "./badgeColors.css": "./src/badgeColors.css",
     "./animations.css": "./src/animations.css",
     "./fonts.css": "./src/fonts.css"

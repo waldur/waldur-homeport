@@ -65,49 +65,70 @@ export const ShadowsAndRadius: Story = {
         <h3 className="text-base font-semibold text-[var(--surface-text-primary)] mb-4">
           Border Radius Scale
         </h3>
+        <p className="text-[11px] text-[var(--surface-text-secondary)] mb-3 max-w-2xl">
+          <strong>md</strong>/<strong>lg</strong>/<strong>modal</strong> are
+          pinned to an exact px value in src/tailwind.css's{' '}
+          <code className="font-mono">--radius-*</code> theme block, so they
+          render identically everywhere. The rest (<strong>xs</strong>/
+          <strong>sm</strong>/<strong>xl</strong>) are Tailwind's own
+          un-overridden rem-based defaults — accurate here, but this app forces
+          a 13px root font-size in production
+          (waldur-homeport/src/metronic/sass/layout/_variables.scss), which
+          shrinks them below what's shown below; verify against the real app
+          before relying on one of these three for a new pixel-exact design.
+        </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-xs text-center">
             <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              xs (4px)
+              xs
             </span>
             <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Buttons sm
+              Tailwind default
             </span>
           </div>
 
           <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-sm text-center">
             <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              sm (6px)
+              sm
             </span>
             <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Cards, Popovers
+              Tailwind default
             </span>
           </div>
 
           <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-md text-center">
             <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              md (8px)
+              md (6px, pinned)
             </span>
             <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Badges, Rows
+              Cards, buttons sm
             </span>
           </div>
 
           <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-lg text-center">
             <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              lg (12px)
+              lg (8px, pinned)
             </span>
             <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Modals
+              Badges, buttons lg, accordions
             </span>
           </div>
 
           <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-xl text-center">
             <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              xl (16px)
+              xl
             </span>
             <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Dialogs
+              Tailwind default
+            </span>
+          </div>
+
+          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-modal text-center">
+            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
+              modal (20px, pinned)
+            </span>
+            <span className="text-[10px] text-[var(--surface-text-muted)]">
+              Dialog content, sidebar mode card
             </span>
           </div>
 

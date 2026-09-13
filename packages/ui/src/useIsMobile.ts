@@ -23,16 +23,24 @@ import { useEffect, useState } from 'react';
  */
 const MOBILE_BREAKPOINT = 768;
 
-export function useIsMobile() {
+/**
+ * @param breakpoint px width below which isMobile is true. Defaults to
+ * shadcn's own 768. A consumer whose own app draws the desktop/mobile line
+ * elsewhere (e.g. waldur-homeport's 992px) passes its own value here via
+ * SidebarProvider's `mobileBreakpoint` prop, so this hook's split lines up
+ * with the rest of that app's breakpoint-driven chrome instead of
+ * introducing a second, mismatched cutover point.
+ */
+export function useIsMobile(breakpoint: number = MOBILE_BREAKPOINT) {
   const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
     const onChange = () => setIsMobile(mql.matches);
     mql.addEventListener('change', onChange);
     setIsMobile(mql.matches);
     return () => mql.removeEventListener('change', onChange);
-  }, []);
+  }, [breakpoint]);
 
   return !!isMobile;
 }

@@ -10,7 +10,6 @@ export const SupportMenu = () => {
       title={translate('Support')}
       state="support-dashboard"
       activeState="support"
-      child={false}
       icon={<HeadsetIcon weight="bold" />}
     />
   );

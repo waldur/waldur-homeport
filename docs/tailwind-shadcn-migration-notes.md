@@ -10,17 +10,30 @@ files named below. What's here is the state of the system today and the
 reasoning a future change in this area needs to not re-break.
 
 **Status**: Tailwind is enabled app-wide (`vite.config.ts` + `src/index.tsx`,
-see below), and the app's interactive floating-panel UI — dropdowns,
-popovers, the sidebar accordion — now runs on Radix primitives across the
-whole codebase (no `Dropdown`/`OverlayTrigger`+`Popover` import from
-`react-bootstrap` remains, and Metronic's own imperative `MenuComponent.ts`
-has been deleted entirely). **Appearance has not moved**: every one of these
-Radix-driven panels still wears Bootstrap's `.dropdown-menu`/`.popover` or
-Metronic's `.menu-sub-dropdown` classes and renders through the existing
-compiled CSS — only the behavior (open/close, focus, keyboard nav,
-positioning) is on Radix. `BaseButton` (the Tailwind/shadcn rebuild in
-`packages/ui`) is still reachable only via Storybook — no production button
-has been switched over to it yet.
+see below). Two migrations are running at once, on two different axes, and
+it matters which one a given piece of UI is on:
+
+- **Behavior-only Radix, appearance unchanged** — the app's interactive
+  floating-panel UI (dropdowns, popovers, the old `NavMenu`/`ActionsDropdown`
+  menu shells) runs on Radix primitives, but every panel still wears
+  Bootstrap's `.dropdown-menu`/`.popover` or Metronic's `.menu-sub-dropdown`
+  classes and renders through the existing compiled CSS. No
+  `Dropdown`/`OverlayTrigger`+`Popover` import from `react-bootstrap` remains
+  outside `src/core/Tooltip.tsx`'s `Tip` (deliberately untouched — see the
+  dropdown/menu system map below), and Metronic's own imperative
+  `MenuComponent.ts` has been deleted entirely.
+- **Full Tailwind/Radix rebuilds, behavior _and_ appearance replaced** — the
+  left navigation sidebar (`packages/ui/src/Sidebar.tsx` + `Sheet.tsx`,
+  wired in via `src/navigation/sidebar/`) is the first, and so far only,
+  piece of production UI on this path: it no longer wears any
+  Metronic/Bootstrap class at all. `packages/ui/src/Tooltip.tsx` (the
+  `Tip` rebuild) ships in production too, used standalone by the sidebar's
+  resources filter (`ResourcesMenuFilterButton.tsx`) — everything else in
+  `packages/ui` (`BaseButton`, `Dialog`, `DropdownMenu`, `Popover`, `Card`,
+  `Badge`, `Table`, …) is still Storybook-only; no other production call
+  site imports from `waldur-ui` yet. Don't assume one migration's lessons
+  transfer to the other without checking — "appearance hasn't moved" is
+  true for the dropdown/menu work and false for the sidebar.
 
 ## Architecture
 
@@ -42,11 +55,42 @@ Tailwind's `base` and `utilities` — ranking it below `utilities` lets
 Tailwind win ordinary utility-vs-Bootstrap conflicts, while still outranking
 `base`/preflight.
 
-**Layering does not beat `!important`.** Bootstrap 5's utility-API classes
-(`.border`, `.bg-transparent`) generate with `!important`, which sits in a
-separate priority tier above all layered rules regardless of layer order.
-`BaseButton.tsx` uses `border-[1px]`/`bg-[transparent]` instead of the
-identically-named Tailwind utilities for exactly this reason.
+**Layering does not beat `!important`, and Bootstrap 5's utility API shares
+a _lot_ of class names with Tailwind's own.** Both frameworks independently
+generate single-purpose utility classes named after the CSS property they
+set, and for the common ones they land on the identical string: `.border`,
+`.bg-transparent`, `.text-white`, `.text-center`, every `.p-N`/`.m-N`/
+`.px-N`/`.py-N`/`.mx-N`/`.me-N`/… spacing utility, and more. Bootstrap's
+copy always carries `!important`; Tailwind's never does for a plain
+utility, and `!important` sits in a separate priority tier above all
+layered rules regardless of layer order — so on any page where Bootstrap's
+compiled CSS is present (real app pages; not Storybook, which never loads
+it — see the root font-size note below for why that matters when
+comparing a measurement made in one environment against the other),
+Bootstrap's version silently wins every time, no matter which layer either
+one is in. Confirmed in Bootstrap's own compiled output
+(`node_modules/bootstrap/dist/css/bootstrap.css`): e.g. `.text-white {
+color: ... !important }`, `.p-3 { padding: 1rem !important }`.
+
+Two known instances, one fixed and one not:
+
+- `packages/ui/src/Tooltip.tsx`'s adaptive `theme='dark'` variant needs its
+  label to flip between white and near-black text depending on the app's
+  own light/dark mode (`dark:text-[...]`). Using Tailwind's `text-white`
+  for the base case silently never let that override fire — the label
+  rendered permanently white, background correctly inverting underneath
+  it, only visible as unreadably-low-contrast text in dark mode. Fixed by
+  swapping to the arbitrary-value `text-[#fff]`, which compiles to a
+  differently-named class and so never collides.
+- `packages/ui/src/BaseButton.tsx:407` (the loading-spinner margin, `me-1`)
+  still uses the bare, colliding utility — a known, not-yet-fixed
+  inconsistency with this same file's own explicit `border-[1px]`/
+  `bg-[transparent]` policy above. Low-stakes today only because
+  `BaseButton` isn't wired into production yet (see Status) — fix before
+  it is.
+
+`Badge.tsx`'s `border-[1px]` (not the bare `border` utility) is the same
+pattern one more time, independently documented at that call site.
 
 **The `@layer bootstrap` wrapper ships in the real app**, not just
 Storybook — and unlayered CSS beats layered CSS _regardless of specificity_.
@@ -105,11 +149,64 @@ if the CSS chunking or theme-loading strategy ever changes.
 Metronic forces `html, body { font-size: 13px !important }` (12px below
 `lg`). Tailwind's scale is rem-based against a 16px assumption, so
 `src/tailwind.css`'s `@theme` overrides `--spacing`/`--text-sm`/`--text-base`/
-`--radius-md`/`--radius-lg` with explicit px values. **Numbered spacing
-utilities (`p-3`, `mt-1`) don't pick up the override** — Tailwind's compiled
-utilities carry their own `--spacing` inside the higher-priority `utilities`
-layer. Use px arbitrary values (`p-[12px]`) instead, as `BaseButton.tsx`
-does throughout.
+`--radius-md`/`--radius-lg` with explicit px values.
+
+**The override works for `--radius-*` but not for `--spacing`, and the
+spacing failure isn't a clean, predictable ratio.** Verified live via
+`getComputedStyle` (inject a bare `<div class="p-N">`, no other styles):
+`rounded-md`/`rounded-lg` correctly compute 6px/8px, matching the override
+exactly. But the numbered spacing/gap utilities (`p-1`…`gap-96`) don't
+uniformly fall back to Tailwind's un-overridden default either — some steps
+do (`p-1`/`p-2`/`p-3`/`p-5` measured exactly `0.25rem × N` at the current
+root, i.e. the override never reached them), while others land on a value
+that matches _neither_ `4px × N` nor `0.25rem × N` (`p-4` measured
+11.088px; `4 × 4px` = 16, `4 × 0.25rem` at that root = 12). Whatever
+Tailwind v4 is doing internally for those specific steps, it isn't
+reliably steerable via `--spacing`. **Practical rule: never use a numbered
+spacing/gap utility for a value that needs to render at a specific px size
+— use a px arbitrary value (`p-[12px]`) instead**, as `BaseButton.tsx`,
+`Badge.tsx`, and `Tooltip.tsx` all do throughout. `--radius-*` doesn't have
+this problem (`rounded-md`/`rounded-lg`/`rounded-modal` — a custom-named
+addition to the same theme block, see below — are all safe to use
+normally), and neither does Tailwind's own reserved `z-*`/`--z-index-*`
+namespace (see the z-index scale below) — this is specifically a
+`--spacing` quirk, not a general "theme overrides don't work" issue.
+
+**Named scale tokens beyond the font-size/radius ones above, added as this
+migration needed them** (all in `src/tailwind.css`'s `@theme` block, all
+verified live to resolve to the stated value with zero drift from what
+they replaced):
+
+- **z-index** — `--z-index-sidebar-panel: 105` and
+  `--z-index-mobile-drawer: 110`, generating real `z-sidebar-panel`/
+  `z-mobile-drawer` utilities (Tailwind's `--z-index-*` namespace does
+  auto-generate a matching `z-<name>` class — confirmed empirically, not
+  assumed, before relying on it). Named only where a value was chosen to
+  match a still-present Metronic layer's own z-index (`Sidebar.tsx`'s
+  desktop panel, `Sheet.tsx`'s mobile drawer, matching
+  `$aside-config`/the real mobile drawer's measured 110 respectively) —
+  components with no such parity requirement (`Dialog`, `Popover`,
+  `DropdownMenu`) keep Tailwind's own built-in `z-50`/`z-10`, since that's
+  already a shared, named value with nothing Metronic-specific to anchor
+  to. `Tooltip.tsx`'s `zIndex` prop default (1180, matching `Tip`'s own
+  default) stays a plain JS number rather than a class — its _override_
+  case needs a value only known at runtime, which no static class can
+  express — but is commented to point at `--z-index-tooltip`, the same
+  canonical value, so the two don't drift independently.
+- **radius** — `--radius-modal: 20px`, covering `Dialog.tsx`'s modal
+  content and `Sidebar.tsx`'s mode-switcher card (both visibly rounder than
+  `rounded-lg`, both pair with `bg-[var(--surface-card-bg)]`). Deliberately
+  _not_ named `rounded-xl`/`2xl`/`3xl` — those are Tailwind's own reserved
+  keys with their own defaults, and repurposing one would silently change
+  what it means for any future non-`packages/ui` caller expecting
+  Tailwind's real default. A useful side effect of the custom name: it no
+  longer trips `enforce-border-radius-tokens`'s `/rounded-\d+/` pattern
+  (`packages/eslint-plugin-waldur/rules/enforce-border-radius-tokens.js`) —
+  that rule targets Bootstrap's own numbered `rounded-1`…`rounded-5`
+  utility classes, written before Tailwind was in the picture, but the
+  regex incidentally also matches Tailwind's digit-leading `rounded-2xl`/
+  `rounded-3xl`, so those two names can't be used as literal classes
+  anywhere in lint-covered code regardless of this migration.
 
 ### Brand color token bridge
 
@@ -373,122 +470,188 @@ container:
   commit, so it can return `null` on a tree's very first render if the
   container mounts in the _same_ commit as the portaled content.
 
-## The sidebar navigation accordion: Collapsible, not Accordion
+## The sidebar: `packages/ui/src/Sidebar.tsx` + `Sheet.tsx`
 
-`src/navigation/sidebar/MenuAccordion.tsx` and friends — the left sidebar's
-in-flow expand/collapse tree, the one piece of the dropdown/menu migration
-that needed a genuinely different Radix primitive (no floating panel at
-all).
+`MenuComponent.ts`, `_SwapperComponent.ts`, `_ToggleComponent.ts`,
+`_ScrollComponent.ts`, and `DrawerComponent.ts` (Metronic's imperative
+sidebar/drawer machinery) have been deleted entirely, along with their
+`bootstrap()`/`reinitialization()` calls and the entire `src/metronic/_utils/`
+helper directory. The left navigation sidebar — the one piece described in
+Status above as a _full_ rebuild, not just a behavior migration — now runs
+on shadcn's real Sidebar recipe (`SidebarProvider`/`useSidebar`, a
+collapsible desktop sidebar with an icon-only rail mode, a `Sheet`-based
+mobile drawer), colors repointed at `waldur-design-tokens/surfaceColors.css`
+instead of shadcn's own `--sidebar-*` vars. Deliberately not ported:
+`SidebarInput`, `SidebarGroupAction`, `SidebarMenuAction`,
+`SidebarMenuSkeleton`, and shadcn's _static_ `SidebarMenuSub*` family —
+Metronic's `.menu-accordion` always needed a genuinely collapsible submenu
+tree, so that family is a from-scratch accordion instead (below), not a
+port of shadcn's non-collapsing one.
 
-- **`@radix-ui/react-collapsible`, not `react-accordion`.**
-  `Accordion.Root` renders its own wrapping DOM element; a nested Root
-  (needed for "only one sibling open" inside `ResourcesMenu`'s recursive
-  categories) would insert an extra `<div>` between `.menu-sub-accordion`
-  and its `.menu-item` children, breaking the indentation mixin's
-  direct-child selector chain. Collapsible has no group-level Root — each
-  `.menu-item.menu-accordion` is its own `Collapsible.Root` via `asChild`
-  (zero extra DOM), and sibling-exclusivity is a small shared hook,
-  `useExclusiveOpen()` (`sidebar/utils.ts`).
-- **`Collapsible.Trigger` takes `className="menu-link"` directly** (no
-  wrapping `<span>`, no `asChild`), making it a real `<button>` — core SCSS
-  already has a reset block for this (`button.menu-link`,
-  `core/components/menu/_base.scss`). Consequence: anything rendered into
-  the accordion header's `badge` slot must not itself be a `<button>`
-  (invalid nested-button HTML) — `ResourcesMenuFilterButton.tsx` renders
-  `<span role="button" tabIndex={0} onKeyDown={...}>` for this reason. Also
-  consequence: `.menu-link`'s width comes from `flex: 0 0 100%`, which only
-  does anything inside a flex parent — a plain block-level `<a>` fills its
-  parent's width by default regardless, but a `<button>` keeps its own
-  fit-content intrinsic sizing unless something explicitly stretches it.
-  `.aside .menu .menu-item .menu-link { width: 100%; }` in `custom/_aside.scss`
-  is scoped to the sidebar specifically, since `button.menu-link` is also
-  reused by `FooterDropdown.tsx` for a horizontal (not full-width) item.
-- **`Collapsible.Content` uses Radix's default hidden-attribute-driven
-  mount/unmount, deliberately not `forceMount`.** `forceMount` looks like
-  the natural fix for CSS `[hidden]`-fighting (see below), but it silently
-  breaks Radix's own `--radix-collapsible-content-height` freshness: that
-  var is only re-measured via a real mount/unmount-triggered state update,
-  and `forceMount` pins the component permanently "present," turning every
-  toggle after the first into a no-op for that measurement. The accepted
-  cost of _not_ using `forceMount` is a cross-layer `!important` instead
-  (see below) — a narrower, better-understood problem than losing height
-  measurement.
-- **Height is measured manually into `useState`, not read from Radix's own
-  CSS var, for the very first open.** `CollapsibleContentImpl` measures
-  height into a plain `useRef` (not `useState`) — updating a ref doesn't
-  re-render, and the only thing that would otherwise force a second render
-  is a `setIsPresent(present)` call that's a no-op bailout on a component's
-  first-ever open (state already equals `present`). Net effect: the height
-  var never reaches the DOM on a fresh mount's first open, and any
-  `@keyframes` reading it animate to nothing. `MenuAccordion.tsx` sidesteps
-  this by measuring `contentRef.current.scrollHeight` itself into real
-  `useState` (re-renders on every measurement) via a single long-lived
-  `ResizeObserver` per component instance, keyed to re-run on `[open]`
-  changes (not `[]` — `MenuAccordion` itself stays mounted across the whole
-  open/closed lifecycle, so an empty deps array would attach the observer
-  exactly once, while `contentRef.current` is still null).
-- **Animate via `animation`/`@keyframes`, not `transition`.** Radix's own
-  `CollapsibleContentImpl` synchronously disables (`transitionDuration =
-'0s'`, `animationName = 'none'`), force-reflows via
-  `getBoundingClientRect()`, then restores — a disable→reflow→restore
-  dance that reliably _restarts_ a named `animation` but gives a
-  `transition` nothing to interpolate from (no intervening painted frame
-  at the old value). Match Radix's own pattern:
-  `animation: kt-menu-accordion-down`/`-up` keyframed against
-  `var(--radix-collapsible-content-height)` (or the manually-measured
-  `--menu-accordion-height` var above), not a `transition: height` rule.
-- **Two separate cross-layer `!important` gaps to know about**, both from
-  Tailwind's preflight loading in an earlier `@layer` than Metronic's own
-  compiled `bootstrap` layer (cascade layers reverse `!important` priority
-  — an earlier layer's `!important` beats a later layer's regardless of
-  selector specificity, so nothing inside `bootstrap` can out-rank `base`
-  on this axis):
-  - Tailwind's `[hidden]:where(...) { display: none !important }`
-    (preflight, `@layer base`) permanently hides `Collapsible.Content`'s
-    closed resting state even after a matching `[data-state]` override, so
-    `.menu-sub-accordion[data-state] { display: flex; }` needs its own
-    `!important` in `custom/_aside.scss` to win.
-  - core's own two `.menu-sub-accordion` `display: none` rules (one
-    top-level, one nested inside a breakpoint mixin) also need overriding
-    the same way — apply the override to _both_ `open` and `closed`
-    states, since Radix's `Presence` keeps the node mounted with
-    `data-state="closed"` for the duration of the closing transition
-    before actually unmounting, and `display: none` during that window
-    would freeze the transition before it plays.
-- **Arrow rotation and the open-state highlight key off `[data-state]`,
-  not Metronic's `.hover`/`.show` classes** (nothing sets those under
-  Radix). Both rules need their own `transition` declared on an
-  _unconditioned_ base selector, not only inside the `[data-state='open']`
-  conditional block — a transition only animates if the element's current
-  computed style already declares it, and the moment a conditional
-  selector stops matching (closing), `transition` reverts to unset along
-  with `transform`, so the open animation plays but the close snaps. This
-  is a recurring shape across every Radix-driven caret/arrow bridge in this
-  codebase, not unique to the accordion — check for it (`grep` for
-  `transition` living only inside a `[data-state=...]`/`.show`-gated block)
-  on any new one.
-- **Deviation from Metronic's exact algorithm, accepted deliberately**:
-  Metronic's `_hideAccordions` never actually clears a nested item's own
-  `.show` when its parent collapses, so a collapsed-then-reopened category
-  remembers it was expanded. Radix's `Content` unmounts on close, resetting
-  nested state. Accepted since real nesting only goes 2 levels deep today.
-- **Route-driven auto-expand**: a `useEffect` on route change calls the
-  same shared `useExclusiveOpen`'s `setOpenId` — a one-shot "open it" on
-  route match, never the equivalent of `.hide()`, so a route-active section
-  the user manually collapsed doesn't reopen until the next matching
-  navigation.
-- **`MenuComponent.ts`, `_SwapperComponent.ts`, `_ToggleComponent.ts`, `_ScrollComponent.ts`, and `DrawerComponent.ts` have been deleted entirely**, along with their
-  `bootstrap()`/`reinitialization()` calls in `MasterInit.tsx`/`Sidebar.tsx`,
-  `hideAll()` in `Content.tsx`, and the entire `src/metronic/_utils/` helper
-  directory. The sidebar minimizer toggle in `BrandName.tsx` runs
-  on `@radix-ui/react-toggle`. The sidebar menu scroll area in `Sidebar.tsx` runs
-  on `@radix-ui/react-scroll-area` (with a shared `ScrollArea` primitive in `packages/ui`).
-  `Sidebar.tsx`'s mobile responsive drawer below `lg` now runs on declarative React
-  state (`mobileSidebarOpen` in `LayoutContext`, toggled by `AppHeader.tsx`'s hamburger button)
-  with a scoped `.drawer-mobile` CSS transition and portal overlay, closing automatically
-  on route changes and `Escape`. The app's other central drawer use — the shared
-  `#kt_drawer` content panel behind `DrawerContext`/`DrawerRoot` (support, chat, table
-  filters, pending-order confirmations, …) — runs on `@radix-ui/react-dialog`; see below.
+**Desktop/mobile is a full render-tree branch, not a CSS breakpoint.**
+`useIsMobile(mobileBreakpoint)` decides which of two completely different
+trees `Sidebar()` renders. Desktop renders a `group peer hidden md:block`
+wrapper holding an invisible layout "spacer" (reserves horizontal space for
+the real content column, transitions its own `width` on collapse) plus the
+actual `fixed` panel overlaying it — two separate elements so that hovering
+a collapsed rail can widen the visible panel without reflowing the page
+content behind it (the panel's own group is the _named_ `group/panel`,
+deliberately distinct from the spacer's unnamed `group`, for exactly this
+reason). Mobile instead renders the whole subtree inside `Sheet`/
+`SheetContent`, `width` a hardcoded `'250px'` — **not `18rem`**, which this
+project's forced 13px root font-size would shrink to 216px. This is a
+sharper version of the root-font-size gotcha above: Tailwind's own
+`--spacing`-based utilities can at least be pinned back with an override
+(imperfectly — see above); a **plain inline `style={{ width }}`** rem value
+has no such override available at all, since it isn't a Tailwind utility to
+retarget in the first place. Any new inline style expressed in `rem` in
+this codebase is exposed to the identical trap.
+
+**Collapse/hover-expand mechanics**: a `data-collapsible` attribute on the
+fixed panel (empty when expanded, else `"icon"`) drives every descendant via
+`group-data-[collapsible=icon]/panel:*` variants. `canHoverExpand` gates
+Metronic's real `.aside-hoverable:hover` behavior — the rail widening to
+full size plus a `shadow-[5px_0px_10px_rgba(70,78,95,0.075)]` on pointer
+hover — but keyed off **React state** (`isHoverExpanded`, set from
+`onMouseEnter`/`onMouseLeave`), not raw CSS `:hover`: an earlier version
+used a plain `md:hover:w-(--sidebar-width)` class, which desynced from the
+`data-collapsible` clearing logic whenever the sidebar collapsed while the
+pointer was already resting on the toggle (no new `mouseenter` fires, so
+CSS `:hover` unwinds instantly while the React state driving
+`data-collapsible` hasn't caught up yet) — a wide panel briefly rendering
+icon-only collapsed content. Routing both effects off the same state
+variable made them structurally unable to diverge.
+
+**Named z-index tokens**: the desktop panel and the mobile drawer each
+needed a Metronic-parity z-index (`105`/`110`) — see the root font-size
+section above for the tokens and why they're two genuinely different
+measured values, not one reused.
+
+**The accordion is a from-scratch `Collapsible` tree, not `Accordion`.**
+`Accordion.Root` renders its own wrapping DOM element; a nested Root
+(needed for "only one sibling open" inside `ResourcesMenu`'s recursive
+categories) would insert an extra layer between a menu item and its
+children. Collapsible has no group-level Root, so each accordion item is
+its own `Collapsible.Root` via `asChild` (zero extra DOM), with
+sibling-exclusivity as a small shared hook. `Collapsible.Trigger` is styled
+directly with `sidebarMenuButtonVariants` rather than wrapping a
+`SidebarMenuButton` via `asChild` — `SidebarMenuButton` isn't `forwardRef`,
+and Radix's `asChild`/`Slot` needs a ref on the real rendered `<button>`.
+Same nested-button constraint as `NavMenu`'s `.menu-item`/`.menu-link` split
+above: `SidebarMenuAccordion`'s `badge` slot sits inside the accordion
+header's own real `<button>` (`Collapsible.Trigger`), so anything rendered
+there must not itself be a `<button>` —
+`ResourcesMenuFilterButton.tsx` renders `<span role="button" tabIndex={0}
+onKeyDown={...}>` with its own `stopPropagation`, not a nested `<button>`,
+which the browser would silently reparent out as invalid HTML.
+
+**Accordion height is measured manually, deliberately not read from
+Radix's own CSS var.** `--radix-collapsible-content-height` is written into
+a plain ref inside Radix's own `CollapsibleContentImpl`, which doesn't
+force a re-render — on a fresh accordion's very first open, the var never
+reaches the DOM before the slide `@keyframes` animate against it, and
+animate to nothing. `SidebarMenuAccordion` sidesteps this the same way the
+pre-rebuild `MenuAccordion` did: measuring `scrollHeight` into real
+`useState` via a `ResizeObserver`, exposed as its own
+`--sidebar-accordion-height` inline style for the
+`waldur-sidebar-accordion-up`/`-down` keyframes to key off instead.
+
+**The mobile Sheet's entrance animation: `@starting-style`, not
+`forceMount`, and the trap in between.** The natural first instinct —
+`forceMount` on the Sheet's Overlay/Content, so the slide-in transition has
+a real "from" frame to animate away from — creates a chain of problems
+worth knowing by name rather than rediscovering:
+
+- Radix's `DialogPortal` gates its own `Presence` on its **own**
+  `forceMount` prop, independent of its children's — force-mounting
+  Overlay/Content alone still lets the Portal unmount them, so nothing
+  animates until the Portal is force-mounted too.
+- Once genuinely permanent, the invisible closed overlay (`fixed inset-0`)
+  still swallows clicks: Radix's modal `Overlay` sets `style="pointer-events:
+auto"` **inline**, which beats a `data-[state=closed]:pointer-events-none`
+  _class_ regardless of specificity — needs its own trailing `!` to win
+  over the inline style.
+- The real reason to stop: `forceMount` keeps Overlay/Content **permanently
+  mounted** even while closed, so Radix's _mount_-triggered side effects —
+  `hideOthers()` (`aria-hidden` on everything else), scroll lock, outside-
+  pointer suppression — become permanent too, not scoped to genuinely open
+  state. Confirmed live: the sidebar's own toggle button ended up under a
+  permanently `aria-hidden="true"` ancestor from the very first page load,
+  Chromium's console flagging "Blocked aria-hidden on an element because
+  its descendant retained focus" — on some input paths, non-functional.
+
+The fix drops `forceMount` entirely and gives Radix's own `Presence`
+something it can actually detect instead: Tailwind v4's `starting:` variant
+(a real `@starting-style` block) gives a freshly-_mounted_ node a one-time
+"from" frame to transition away from, without needing the node to already
+exist. Overlay/Content now mount/unmount on genuine open/close — `Presence`
+still defers the real unmount until the closing animation finishes, so
+Radix's side effects stay scoped to real open state.
+
+**Specificity ties need a trailing `!` in more than one place.** A
+`group-data-[...]` variant and a plain base utility setting the _same_ CSS
+property land at identical specificity once Tailwind wraps the variant in
+`:where()` — source order (not intent) decides the tie, and the base rule
+usually loses the fight silently. Three independent spots in `Sidebar.tsx`
+hit this (the slot-padding collapse override, the panel-width collapse
+override, the toggle-button reveal-on-hover sizing below) — grep for a
+`group-data-[collapsible=icon]` variant sitting next to a plain class
+setting the same property before assuming either one "just wins."
+
+**Toggle-button reveal-on-hover: a three-step layout-shift fix.**
+`WaldurSidebarBrand`'s collapse toggle is invisible until hovered/focused —
+naively, `opacity-0` → `opacity-100`. That still reserves the button's full
+footprint in the brand row's flex layout even while "invisible": harmless
+in the spacious expanded row, but in the ~75px collapsed icon rail it
+squeezes the logo mark into a visibly wrong sliver. Metronic's real
+`#kt_aside_toggle` is genuinely zero-size until hovered, not just
+transparent, so the fix is `md:size-0` (clipped) →
+`md:group-hover/panel:size-9`/`md:focus-visible:size-9`. That still isn't
+enough: growing **in flow** from 0 to 36px still shrinks the logo's
+`flex-1` sibling box by 36px the instant it grows, shifting the centered
+logo sideways. The real fix takes the button out of flex flow entirely at
+`md:` (`absolute`, anchored to the row's own `relative`), so revealing it
+overlays the row's edge instead of stealing space from anything — the
+logo's box never changes size regardless of hover state. Mobile is
+exempted: the Sheet renders this row unconditionally visible there, with no
+`group/panel` hover ancestor to key off.
+
+**No sidebar-state cookie anymore — a real behavior change, not a swap.**
+shadcn's upstream Sidebar recipe persists collapsed/expanded state via a
+cookie read **server-side** in a Next.js layout, passed in as the initial
+`defaultOpen`. There's no server-side render here, so an earlier version of
+this component read/wrote that cookie client-side instead — now removed
+outright, with no replacement (`localStorage` or otherwise). `open` always
+starts fresh from `defaultOpen` on every load: a user's last collapsed/
+expanded choice is no longer remembered across sessions, on purpose, not as
+an oversight.
+
+**`SidebarCallToAction`** (`Sidebar.tsx`) — the "Add resource" pill at the
+top of the sidebar, rendered as an outlined button rather than a plain nav
+item so it reads as a call to action, not one more list entry, with `mb-6`
+of its own breathing room. Extracted into `packages/ui` because the actual
+consumer (`marketplace-popup/MarketplaceTrigger.tsx`) had hand-rolled its
+own `SidebarMenuItem`/`SidebarMenuButton` pair that had already drifted
+from the Storybook mockup — one shared implementation now backs both the
+real usage and the story, rather than two copies that can silently diverge
+again.
+
+**`useSidebarLayoutShim.ts`** bridges the new primitive's `open`/`state`
+into the legacy Metronic `layout.config.aside.minimized` boolean that
+`AppHeader`/`Toolbar`/content-offset padding and `LLMChatDrawer`'s
+minimize-detection still depend on (`LayoutProvider.setLayout()` rebuilds
+every body class on every call with no memoization of its own, so this
+effect is gated by an equality check to avoid looping). It also owns
+**auto-minimize at medium viewport widths** (768–1399px, ported from the
+pre-rebuild sidebar's own resize effect), permanently disabled for the
+session the moment a user manually toggles the sidebar
+(`markUserToggled()`, wired to `SidebarTrigger`'s `onClick`) — a real user
+choice should never be silently overridden by a resize.
+
+The app's other central drawer use — the shared `#kt_drawer` content panel
+behind `DrawerContext`/`DrawerRoot` (support, chat, table filters,
+pending-order confirmations, …) — is unrelated to this component and runs
+on `@radix-ui/react-dialog` directly; see below.
 
 ### The shared content drawer (`#kt_drawer`): Dialog, real `@keyframes`, and a manual `.drawer-on` class
 
@@ -583,16 +746,38 @@ animation genuinely interpolates rather than snapping.
 
 ## `packages/ui`: portable Tailwind/Radix primitives
 
-Holds `BaseButton`'s dependency graph with zero Bootstrap coupling:
+Zero Bootstrap coupling, published as `waldur-ui`. Started as `BaseButton`'s
+dependency graph; now ~20 components (`Sidebar`, `Sheet`, `Dialog`,
+`DropdownMenu`, `Popover`, `Card`, `Badge`, `Table`, `DataTable`, `TopBar`,
+`ModePicker`, `Switch`, `Avatar`, …), most still Storybook-only — see Status
+above for exactly which ones ship in production today, and the sidebar
+section above for the one full rebuild among them.
 
-- **`cn()`** — class-name merge helper.
+- **`cn()`** — class-name merge helper (`clsx` + `tailwind-merge`).
 - **`LoadingSpinner`** — Tailwind's `animate-spin`; distinct from
   `src/core/LoadingSpinner.tsx`'s `LoadingSpinnerSimple`, which ~385 call
   sites elsewhere still use unchanged.
-- **`Tooltip`** — `@radix-ui/react-tooltip`-based rebuild of
-  `src/core/Tooltip.tsx`'s `Tip`, scoped to `Tip`'s actual usage (`label` +
-  optional `body`, hover/focus trigger, dark bubble theme only) rather than
-  its fuller react-bootstrap-derived API.
+- **`Tooltip`** — `@radix-ui/react-tooltip`/`@radix-ui/react-popover`-based
+  rebuild of `src/core/Tooltip.tsx`'s `Tip`. Started scoped to `Tip`'s
+  then-current usage (`label` + optional `body`, hover/focus trigger, dark
+  bubble theme only); now covers `Tip`'s fuller react-bootstrap-derived
+  API — `theme` (`'dark'` adaptive vs `'light'` fixed, see the theme prop's
+  own doc comment for why the names are the confusing way round),
+  `autoWidth`, `id`, `zIndex`, `delayDuration`, and `trigger="click"`
+  (renders as a `Popover` instead of a `Tooltip`, since Radix's `Tooltip`
+  primitive has no click-only mode — reuses this file's own bubble styling
+  rather than `Popover.tsx`'s card styling, since visually it's still meant
+  to read as a tooltip). `placement`/`container`/a separate `rootClose` prop
+  stay unreplicated — no real call site needs them, and `rootClose` is
+  subsumed by `trigger="click"`. The arrow is a custom polygon (`asChild`),
+  not Radix's default: the default's base sits exactly flush with
+  `Content`'s edge, and even with matching fill and zero gap that's prone to
+  a visible anti-aliasing seam between the SVG and the HTML box's separate
+  rasterizers — the custom one extends 1 viewBox unit (~0.5px) past its own
+  box with `overflow: visible`, an intentional overlap that hides the seam
+  by construction. Kept to the minimum that still works: a larger, earlier
+  overlap visibly enlarged the arrow past Bootstrap's own
+  `$tooltip-arrow-height`.
 - **`BaseButton`** — see above. Internal imports of `cn`/`LoadingSpinner`/
   `Tooltip` are relative (`./cn`), not round-tripped through the package
   name.

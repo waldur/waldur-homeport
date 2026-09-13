@@ -54,6 +54,7 @@ const { mockRouter, mockUIRouterReact } = vi.hoisted(() => {
         href: state + (params ? JSON.stringify(params) : ''),
         onClick: vi.fn(),
       }),
+      useIsActive: vi.fn().mockReturnValue(false),
     },
   };
 });

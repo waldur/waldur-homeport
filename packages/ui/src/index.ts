@@ -72,8 +72,10 @@ export {
 export type { DropdownMenuItemProps } from './DropdownMenu';
 
 export {
+  SIDEBAR_ICON_BUTTON_CLASSNAME,
   Sidebar,
   SidebarBrand,
+  SidebarCallToAction,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
@@ -82,20 +84,38 @@ export {
   SidebarHeader,
   SidebarInset,
   SidebarMenu,
+  SidebarMenuAccordion,
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuItemContent,
+  SidebarMenuLinkItem,
+  SidebarMenuSeparator,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarMenuTree,
   SidebarModeCard,
   SidebarNavItem,
   SidebarProvider,
   SidebarSection,
   SidebarSeparator,
   SidebarTrigger,
+  useExclusiveOpen,
   useSidebar,
+  useSidebarSubDepth,
 } from './Sidebar';
 export type {
   SidebarBrandProps,
+  SidebarCallToActionProps,
+  SidebarContentProps,
+  SidebarMenuAccordionProps,
   SidebarMenuButtonProps,
+  SidebarMenuItemContentProps,
+  SidebarMenuLinkItemProps,
+  SidebarMenuSubButtonProps,
+  SidebarMenuTreeItem,
+  SidebarMenuTreeProps,
   SidebarModeCardProps,
   SidebarNavItemProps,
   SidebarProviderProps,
@@ -104,7 +124,7 @@ export type {
   SidebarTriggerProps,
 } from './Sidebar';
 
-export { SidebarToggleGraphic } from './SidebarToggleGraphic';
+export { SidebarToggleGraphic } from './Sidebar';
 
 export { WaldurLogo } from './WaldurLogo';
 export type { WaldurLogoProps } from './WaldurLogo';

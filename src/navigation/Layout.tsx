@@ -1,18 +1,15 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
-import React, {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+
+import { SidebarProvider, useSidebar } from 'waldur-ui';
 
 import { ImpersonationBar } from '@/administration/ImpersonationBar';
 import * as AuthService from '@/auth/AuthService';
 import { PermissionDataProvider } from '@/auth/PermissionLayout';
 import WarningBar from '@/auth/WarningBar';
+import { GRID_BREAKPOINTS } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvitationCheck } from '@/invitations/InvitationCheck';
 import { DefaultLayoutConfig, useLayout } from '@/metronic/layout/core';
@@ -39,7 +36,17 @@ import { Toolbar } from './Toolbar';
 import { IBreadcrumbItem } from './types';
 import { useTabs } from './useTabs';
 
-export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
+export const Layout: React.FC<PropsWithChildren> = ({ children }) => (
+  <SidebarProvider
+    renderWrapper={false}
+    mobileBreakpoint={GRID_BREAKPOINTS.lg}
+    style={{ '--sidebar-width-icon': '75px' } as React.CSSProperties}
+  >
+    <LayoutContent>{children}</LayoutContent>
+  </SidebarProvider>
+);
+
+const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
   const { state } = useCurrentStateAndParams();
   const currentUser = useUser();
   const impersonatorUser = useSelector(getImpersonatorUser);
@@ -52,12 +59,11 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const [ExtraAnnouncementBar, setExtraAnnouncementBar] =
     useState<React.ReactNode>(null);
   const [ExtraToolbar, setExtraToolbar] = useState<React.ReactNode>(null);
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const closeMobileSidebar = useCallback(() => setMobileSidebarOpen(false), []);
+  const { setOpenMobile } = useSidebar();
 
   useEffect(() => {
-    setMobileSidebarOpen(false);
-  }, [state]);
+    setOpenMobile(false);
+  }, [state, setOpenMobile]);
 
   const context = useMemo<Partial<LayoutContextInterface>>(
     () => ({
@@ -72,9 +78,6 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setBreadcrumbs,
       breadcrumbs,
       setExtraToolbar,
-      mobileSidebarOpen,
-      setMobileSidebarOpen,
-      closeMobileSidebar,
     }),
     [
       setActions,
@@ -88,8 +91,6 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setBreadcrumbs,
       breadcrumbs,
       setExtraToolbar,
-      mobileSidebarOpen,
-      closeMobileSidebar,
     ],
   );
 
@@ -99,8 +100,28 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const showToolbar = Boolean(actions || tabs?.length > 1 || extraTabs?.length);
 
   useEffect(() => {
+    // Preserves aside.minimized rather than resetting it to
+    // DefaultLayoutConfig's own `false` on every run of this effect (which
+    // fires on every navigation, via showToolbar/PageHero/etc. changing) —
+    // that field isn't this effect's to reset, it's useSidebarLayoutShim's
+    // own synced mirror of the real Sidebar's collapsed/expanded state.
+    // Resetting it here raced that shim's own effect (keyed only on
+    // `state`, which doesn't change on navigation) and won, since this
+    // effect fires on every page while the shim's only fires on an actual
+    // toggle — left the legacy Metronic header's own [data-kt-aside-
+    // minimize='on'] content-offset CSS (layout/_header.scss) permanently
+    // stuck un-minimized after the first navigation with the sidebar
+    // collapsed, even though the real sidebar stayed visually collapsed.
+    const previousAside =
+      typeof layout.config.aside === 'object' ? layout.config.aside : null;
     layout.setLayout({
-      aside: currentUser ? DefaultLayoutConfig.aside : false,
+      aside: currentUser
+        ? {
+            ...DefaultLayoutConfig.aside,
+            minimized:
+              previousAside?.minimized ?? DefaultLayoutConfig.aside.minimized,
+          }
+        : false,
       toolbar: showToolbar ? DefaultLayoutConfig.toolbar : false,
       extraToolbar: ExtraToolbar ? DefaultLayoutConfig.extraToolbar : false,
       hero: PageHero ? DefaultLayoutConfig.hero : false,

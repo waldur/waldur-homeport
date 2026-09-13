@@ -56,8 +56,10 @@ The `UnifiedSidebar.tsx` component conditionally renders menu items based on the
 
 ### Key Sidebar Components
 
-- **MenuItem**: A single clickable link with icon and badge.
-- **MenuAccordion**: A collapsible group for nested items.
+- **MenuItem**: A single clickable link with icon and badge (wrapping `SidebarMenuLinkItem`).
+- **MenuAccordion**: A collapsible group for nested items (wrapping `SidebarMenuAccordion`).
+
+> For full component architecture, design token references, and recipes, see [sidebar.md](sidebar.md).
 
 ## Workspaces
 

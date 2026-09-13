@@ -22,6 +22,17 @@ export const TypeScale: Story = {
         <h3 className="text-base font-semibold text-[var(--surface-text-primary)] border-b border-[var(--surface-card-border)] pb-2">
           Headings
         </h3>
+        <p className="text-[11px] text-[var(--surface-text-secondary)] -mt-2">
+          Only <strong>xs</strong>/<strong>sm</strong>/<strong>base</strong> are
+          pinned to an exact px value in src/tailwind.css's{' '}
+          <code className="font-mono">--text-*</code> theme block.{' '}
+          <strong>lg</strong>/<strong>xl</strong>/<strong>2xl</strong>/
+          <strong>3xl</strong> below are Tailwind's own un-overridden rem values
+          (correct at a 16px root) — this app forces a 13px root font-size in
+          production, which renders these four smaller than the px figure shown
+          (e.g. text-lg's 1.125rem is 18px at a 16px root, but 14.625px in the
+          real app).
+        </p>
 
         <div className="flex items-baseline justify-between border-b border-[var(--surface-card-border)] pb-3">
           <span className="font-mono text-xs text-[var(--surface-text-muted)] w-24">
@@ -31,7 +42,7 @@ export const TypeScale: Story = {
             Cloud Resource Management
           </h1>
           <span className="font-mono text-xs text-[var(--surface-text-muted)]">
-            30px / 1.875rem
+            1.875rem (30px @16px root)
           </span>
         </div>
 
@@ -43,7 +54,7 @@ export const TypeScale: Story = {
             Projects and Allocations
           </h1>
           <span className="font-mono text-xs text-[var(--surface-text-muted)]">
-            24px / 1.5rem
+            1.5rem (24px @16px root)
           </span>
         </div>
 
@@ -55,7 +66,7 @@ export const TypeScale: Story = {
             Virtual Machines Overview
           </h2>
           <span className="font-mono text-xs text-[var(--surface-text-muted)]">
-            20px / 1.25rem
+            1.25rem (20px @16px root)
           </span>
         </div>
 
@@ -67,7 +78,7 @@ export const TypeScale: Story = {
             Resource Details & Quotas
           </h3>
           <span className="font-mono text-xs text-[var(--surface-text-muted)]">
-            18px / 1.125rem
+            1.125rem (18px @16px root)
           </span>
         </div>
 
@@ -79,7 +90,7 @@ export const TypeScale: Story = {
             Network Configuration
           </h4>
           <span className="font-mono text-xs text-[var(--surface-text-muted)]">
-            16px / 1rem
+            16px, pinned
           </span>
         </div>
       </div>

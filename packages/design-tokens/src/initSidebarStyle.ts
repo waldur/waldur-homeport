@@ -7,7 +7,7 @@ export type SidebarStyle =
  * The full real ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE value space
  * (src/SettingsDescription.ts's choice_field options) — one more than
  * SidebarStyle. 'auto' ("Match theme") isn't a sixth CSS-level style;
- * surfaceColors.css has no `[data-sidebar-style='auto']` rule, and never
+ * sidebarColors.css has no `[data-sidebar-style='auto']` rule, and never
  * should — see resolveSidebarStyle().
  */
 export type ConfiguredSidebarStyle = SidebarStyle | 'auto';
@@ -29,15 +29,16 @@ export function applySidebarStyle(
 }
 
 /**
- * Same 'auto' logic as the real src/navigation/sidebar/Sidebar.tsx's inline
- * computation: `configuredStyle === 'auto' ? (theme === 'dark' ? 'dark' :
- * 'light') : configuredStyle`. 'auto' isn't its own aside look — it's
- * "follow the page's light/dark toggle", which just picks between the two
- * styles (dark/light) whose Metronic source already flips per theme (see
- * surfaceColors.css's comment on the theme-inverted pair). Extracted as its
- * own function because, unlike the other four styles, this one has to be
- * re-run every time the page theme changes, not just once at config-load
- * time.
+ * 'auto' isn't its own aside look — it's "make the sidebar visually track
+ * the page's light/dark toggle", which just picks whichever of the two
+ * theme-named styles matches. This used to be more complicated: an earlier
+ * version of sidebarColors.css gave 'dark'/'light' a second block that
+ * *inverted* each under `[data-theme='dark']` (a mistaken port of a
+ * Metronic quirk that didn't actually apply here — see that file's own
+ * comment), which made this straightforward mapping select the visually
+ * *wrong* style. Now that sidebarColors.css's five styles are all fixed,
+ * unconditional looks (matching "primary"/"accent"/"accent-light", which
+ * were never inverted), this plain mapping is correct again.
  */
 export function resolveSidebarStyle(
   configured: ConfiguredSidebarStyle,
@@ -47,4 +48,18 @@ export function resolveSidebarStyle(
     return configured;
   }
   return theme === 'dark' ? 'dark' : 'light';
+}
+
+/**
+ * Whether a resolved sidebar style renders a dark background — for a
+ * consumer picking between light/dark logo assets (WaldurSidebarBrand.tsx's
+ * SIDEBAR_LOGO_DARK swap), not just setting the CSS attribute. 'primary'
+ * and 'accent-light' are deliberately excluded, matching this check's
+ * pre-existing scope (the dark-logo swap was never wired up for those two).
+ * No theme parameter: now that sidebarColors.css's styles are all fixed
+ * (see resolveSidebarStyle()'s own comment), which one renders dark no
+ * longer depends on the app's own light/dark theme.
+ */
+export function isSidebarBackgroundDark(resolved: SidebarStyle): boolean {
+  return resolved === 'dark' || resolved === 'accent';
 }
