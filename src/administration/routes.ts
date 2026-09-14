@@ -715,6 +715,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-role-hygiene',
+    url: 'role-hygiene/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./roles/hygiene/RoleHygienePage').then((module) => ({
+        default: module.RoleHygienePage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Role hygiene'),
+      permissions: [isStaff],
+    },
+  },
+
+  {
     name: 'admin-auto-provisioning-rules',
     url: 'auto-provisioning-rules/',
     parent: 'admin-configuration',

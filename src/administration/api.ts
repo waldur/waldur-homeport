@@ -2,6 +2,7 @@ import {
   identityProvidersList,
   marketplaceResourcesCount,
   MarketplaceResourcesListData,
+  rolesHygieneReportRetrieve,
 } from 'waldur-js-client';
 
 import { fetchResultCount, getAllPages } from '@/core/api';
@@ -12,3 +13,6 @@ export const getResourcesCount = (
 
 export const getIdentityProviders = () =>
   getAllPages((page) => identityProvidersList({ query: { page } }));
+
+export const getRoleHygieneReport = () =>
+  rolesHygieneReportRetrieve().then(({ data }) => data);
