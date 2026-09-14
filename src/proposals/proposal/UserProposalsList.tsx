@@ -6,6 +6,7 @@ import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { parseCallFilterParam } from '@/proposals/callFilterParam';
 import {
   requestListTitle,
   requestNoun,
@@ -48,7 +49,8 @@ export const UserProposalsList: FC<UserProposalsListProps> = ({
   const {
     params: { call },
   } = useCurrentStateAndParams();
-  const callObj = call ? JSON.parse(decodeURIComponent(call)) : undefined;
+  // Memoised so the object identity is stable; it seeds initialFilters below.
+  const callObj = useMemo(() => parseCallFilterParam(call), [call]);
 
   const initialFilters = useMemo(
     () => ({
