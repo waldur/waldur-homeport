@@ -262,6 +262,11 @@
       "feature_area": "project"
     }
   },
+  "(no description)": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "(no input)": {
     "context": {
       "feature_area": "ai-assistant"
@@ -1501,6 +1506,11 @@
   "Active alerts": {
     "context": {
       "feature_area": "table-growth"
+    }
+  },
+  "Active assignments": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Active calls": {
@@ -2955,7 +2965,7 @@
   "All": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "credits"
+      "feature_area": "hygiene"
     }
   },
   "All Arrow customers have already been mapped to Waldur organizations.": {
@@ -3199,6 +3209,16 @@
   "All your citizenships": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "All {count} roles carry a machine-readable code, sit on the scope their name claims, and are bound to the organization that owns them.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hygiene"
     }
   },
   "Allocate all free capacity to continue": {
@@ -7720,6 +7740,11 @@
       "feature_area": "pubsub"
     }
   },
+  "Bound to several organizations": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Branch": {
     "context": {
       "feature_area": "catalog"
@@ -11322,6 +11347,11 @@
       "feature_area": "TenantTopology"
     }
   },
+  "Copy name out of sync": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Copy options": {
     "context": {
       "feature_area": "details"
@@ -11386,6 +11416,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "celery"
+    }
+  },
+  "Copy without organization": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Core Components": {
@@ -13113,6 +13148,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Custom role offered everywhere": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Custom rule": {
     "context": {
       "feature_area": "common"
@@ -14807,6 +14847,11 @@
     }
   },
   "Description of the Waldur deployment.": {},
+  "Description repeats the code": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Deselect": {
     "context": {
       "feature_area": "reports"
@@ -17991,6 +18036,7 @@
   },
   "Errors": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "consumption"
     }
   },
@@ -18615,6 +18661,11 @@
   "Expiring resource": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Explanation": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Explanation of the scientific case of the project for which the resources are intended to be used.": {
@@ -20141,6 +20192,11 @@
   "Finding reviewers": {
     "context": {
       "feature_area": "reviewer-pool"
+    }
+  },
+  "Findings": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Fingerprint (MD5)": {
@@ -23290,7 +23346,8 @@
   },
   "Info": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "hygiene"
     }
   },
   "Information": {
@@ -29070,6 +29127,11 @@
       "feature_area": "request-types"
     }
   },
+  "Name claims the wrong scope": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Name for {file}": {
     "context": {
       "variables": {
@@ -29088,6 +29150,11 @@
   "Name is duplicated. Choose other name.": {
     "context": {
       "feature_area": "project"
+    }
+  },
+  "Name is not a code": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Name is required field.": {},
@@ -30229,7 +30296,7 @@
   },
   "No description": {
     "context": {
-      "feature_area": "proposals"
+      "feature_area": "hygiene"
     }
   },
   "No description available": {
@@ -31783,6 +31850,11 @@
   "Nothing on this plan is billed per period, so this does not change what is invoiced. Customers can only move between plans that share a period, so match the other plans of this offering.": {
     "context": {
       "feature_area": "plans"
+    }
+  },
+  "Nothing to clean up": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Nothing to disable": {
@@ -34157,6 +34229,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Organization role without a template": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Organization roles": {
     "context": {
       "primary_ui_type": "title",
@@ -34271,6 +34348,11 @@
     }
   },
   "Organizations above threshold": {},
+  "Organizations holding it": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Organizations owner": {
     "context": {
       "feature_area": "support"
@@ -35589,6 +35671,11 @@
   "Permissions reviews": {
     "context": {
       "feature_area": "project"
+    }
+  },
+  "Permissions that never apply": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Person identifier fields are not configured for this validation method. Please contact administrators.": {
@@ -37555,6 +37642,12 @@
   "Private registry username": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Problem": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "hygiene"
     }
   },
   "Process of comparing Arrow billing amounts with Waldur invoice amounts to ensure they match. Creates compensation items for discrepancies.": {},
@@ -44000,6 +44093,11 @@
       "feature_area": "profiles"
     }
   },
+  "Role code": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Role description": {
     "context": {
       "feature_area": "roles"
@@ -44103,6 +44201,12 @@
       "feature_area": "roles"
     }
   },
+  "Role hygiene": {
+    "context": {
+      "primary_ui_type": "action_button",
+      "feature_area": "roles"
+    }
+  },
   "Role in organization": {
     "context": {
       "primary_ui_type": "title",
@@ -44196,6 +44300,12 @@
   "Roles cannot be granted on a private offering.": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "Roles checked": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "hygiene"
     }
   },
   "Roles for this offering are managed centrally by the service profile \"{profile}\". To edit, manage the profile from the administration panel.": {
@@ -47535,7 +47645,7 @@
   "Severity": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "coi-review"
+      "feature_area": "hygiene"
     }
   },
   "Share": {
@@ -49988,6 +50098,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "System role on the wrong scope": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "System storage": {
@@ -56573,6 +56688,11 @@
       "feature_area": "review"
     }
   },
+  "Unable to load the role hygiene report.": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "Unable to load this offering.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -58952,6 +59072,11 @@
   "Unknown state": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Unknown system role": {
+    "context": {
+      "feature_area": "hygiene"
     }
   },
   "Unknown time": {
@@ -62238,6 +62363,12 @@
       "feature_area": "integration"
     }
   },
+  "Warnings": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "hygiene"
+    }
+  },
   "We apologize for the inconvenience. Try reloading the page.": {},
   "We are experiencing technical difficulties with the AI assistant. Please try again or contact support if the problem persists.": {
     "context": {
@@ -64722,6 +64853,11 @@
       "feature_area": "confirmation-drawer"
     }
   },
+  "findings": {
+    "context": {
+      "feature_area": "hygiene"
+    }
+  },
   "flavors": {
     "context": {
       "feature_area": "common"
@@ -66999,6 +67135,16 @@
         }
       },
       "feature_area": "roles"
+    }
+  },
+  "{count} with findings": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "hygiene"
     }
   },
   "{count} with projects": {

@@ -1,4 +1,7 @@
+import { WarningCircleIcon } from '@phosphor-icons/react';
+import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { RoleDetails, rolesList } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -6,6 +9,7 @@ import { Link } from '@/core/Link';
 import { RoleUsersExpandableRow } from '@/customer/roles/RoleUsersExpandableRow';
 import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
+import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
 import {
@@ -17,12 +21,15 @@ import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { RoleActions } from './RoleActions';
 import { RoleCreateButton } from './RoleCreateButton';
 import { RolePermissionDelta } from './RolePermissionDelta';
 
 export const RolesList = () => {
+  const isStaff = useSelector(isStaffSelector);
+  const router = useRouter();
   const filterValues = useFilterValues('RolesList');
   const filter = useMemo(
     () => selectAdminRolesFilter(filterValues),
@@ -142,7 +149,18 @@ export const RolesList = () => {
         <RoleActions row={row} refetch={tableProps.fetch} />
       )}
       showPageSizeSelector={true}
-      tableActions={<RoleCreateButton refetch={tableProps.fetch} />}
+      tableActions={
+        <>
+          {isStaff && (
+            <ActionButton
+              title={translate('Role hygiene')}
+              iconNode={<WarningCircleIcon weight="bold" />}
+              action={() => router.stateService.go('admin-role-hygiene')}
+            />
+          )}
+          <RoleCreateButton refetch={tableProps.fetch} />
+        </>
+      }
     />
   );
 };
