@@ -43389,6 +43389,11 @@
       "feature_area": "remote-offering-sync"
     }
   },
+  "Resume": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Resume sync": {
     "context": {
       "primary_ui_type": "action_button",
@@ -59173,11 +59178,6 @@
   "Unnamed resource": {
     "context": {
       "feature_area": "project-detail"
-    }
-  },
-  "Unpause": {
-    "context": {
-      "feature_area": "actions"
     }
   },
   "Unpause offering": {

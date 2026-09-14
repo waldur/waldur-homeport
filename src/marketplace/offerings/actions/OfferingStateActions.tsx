@@ -1,7 +1,11 @@
-import { PencilSimpleIcon } from '@phosphor-icons/react';
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
-import { forwardRef, type MouseEvent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
+import {
+  CheckCircleIcon,
+  PauseIcon,
+  PencilSimpleIcon,
+  PlayIcon,
+} from '@phosphor-icons/react';
+import classNames from 'classnames';
+import { type MouseEvent } from 'react';
 import {
   marketplaceProviderOfferingsActivate,
   marketplaceProviderOfferingsDraft,
@@ -57,28 +61,11 @@ const getActivationErrors = (offering): string[] => {
   return errors;
 };
 
-/**
- * forwardRef for the asChild Trigger below — see ActionsDropdown.tsx's
- * TableDropdownToggle for the general requirement. Recreates
- * react-bootstrap's `Dropdown.Toggle split` exactly: a plain Bootstrap
- * button (`btn btn-{variant} {className}`) with `dropdown-toggle
- * dropdown-toggle-split` added — no custom Waldur trigger variant covers
- * a caret-only button glued to a separate primary action button.
- */
-const SplitToggle = forwardRef<HTMLButtonElement>((props, ref) => (
-  <button
-    ref={ref}
-    type="button"
-    className="btn btn-primary px-4 dropdown-toggle dropdown-toggle-split"
-    {...props}
-  />
-));
-SplitToggle.displayName = 'SplitToggle';
-
 export const OfferingStateActions = ({
   offering,
   refreshOffering,
   className = undefined,
+  asMenuItems = false,
 }) => {
   const runActionAndBlurOnPointerClick = (
     event: MouseEvent<HTMLElement>,
@@ -168,7 +155,7 @@ export const OfferingStateActions = ({
   const title = {
     [DRAFT]: activateTitle,
     [ACTIVE]: translate('Pause'),
-    [PAUSED]: translate('Unpause'),
+    [PAUSED]: translate('Resume'),
     [ARCHIVED]: draftTitle,
   }[offering.state];
 
@@ -178,6 +165,33 @@ export const OfferingStateActions = ({
     [PAUSED]: unpause,
     [ARCHIVED]: setDraft,
   }[offering.state];
+
+  if (asMenuItems) {
+    return (
+      <>
+        {offering.state !== DRAFT && (
+          <ActionItem
+            title={draftTitle}
+            action={() => setDraft()}
+            iconNode={<PencilSimpleIcon weight="bold" />}
+          />
+        )}
+        <MakeUnavailableAction
+          offering={offering}
+          refreshOffering={refreshOffering}
+          canManageOfferingLifecycle={canManageOfferingLifecycle}
+        />
+        <ArchiveOfferingAction
+          offering={offering}
+          refreshOffering={refreshOffering}
+        />
+        <DeleteOfferingAction
+          offering={offering}
+          canManageOfferingLifecycle={canManageOfferingLifecycle}
+        />
+      </>
+    );
+  }
 
   if (offering.state == UNAVAILABLE) {
     if (!canManageOfferingLifecycle) return null;
@@ -200,47 +214,20 @@ export const OfferingStateActions = ({
       />
     );
   }
+  const icon = {
+    [DRAFT]: <CheckCircleIcon weight="bold" />,
+    [ACTIVE]: <PauseIcon weight="bold" />,
+    [PAUSED]: <PlayIcon weight="bold" />,
+  }[offering.state];
+
   return (
-    <RadixDropdownMenu.Root modal={false}>
-      <ButtonGroup className={className}>
-        <ActionButton
-          variant="primary"
-          action={(event) => runActionAndBlurOnPointerClick(event, callback)}
-          title={title}
-          data-testid="offering-primary-state-action"
-        />
-        <RadixDropdownMenu.Trigger asChild>
-          <SplitToggle />
-        </RadixDropdownMenu.Trigger>
-      </ButtonGroup>
-      <RadixDropdownMenu.Portal>
-        <RadixDropdownMenu.Content
-          align="start"
-          sideOffset={2}
-          className="dropdown-menu show position-static"
-        >
-          {offering.state !== DRAFT && (
-            <ActionItem
-              title={draftTitle}
-              action={() => setDraft()}
-              iconNode={<PencilSimpleIcon weight="bold" />}
-            />
-          )}
-          <ArchiveOfferingAction
-            offering={offering}
-            refreshOffering={refreshOffering}
-          />
-          <MakeUnavailableAction
-            offering={offering}
-            refreshOffering={refreshOffering}
-            canManageOfferingLifecycle={canManageOfferingLifecycle}
-          />
-          <DeleteOfferingAction
-            offering={offering}
-            canManageOfferingLifecycle={canManageOfferingLifecycle}
-          />
-        </RadixDropdownMenu.Content>
-      </RadixDropdownMenu.Portal>
-    </RadixDropdownMenu.Root>
+    <ActionButton
+      variant={offering.state === DRAFT ? 'primary' : 'secondary'}
+      action={(event) => runActionAndBlurOnPointerClick(event, callback)}
+      className={classNames('min-w-26', className)}
+      title={title}
+      iconNode={icon}
+      data-testid="offering-primary-state-action"
+    />
   );
 };
