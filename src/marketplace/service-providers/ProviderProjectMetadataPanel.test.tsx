@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { ProjectMetadataAnswer } from 'waldur-js-client';
 
+import { formatDateTime } from '@/core/dateUtils';
+
 import { ProviderProjectMetadataPanel } from './ProviderProjectMetadataPanel';
 
 const answers = [
@@ -78,6 +80,27 @@ describe('ProviderProjectMetadataPanel', () => {
     );
     expect(container.textContent).toContain('2 attachments');
     expect(container.textContent).not.toContain('[object Object]');
+  });
+
+  it('shows when each answer was last updated', () => {
+    const dated = [
+      { ...answers[0], modified: '2026-09-14T10:15:00Z' },
+    ] as unknown as ProjectMetadataAnswer[];
+    const { container } = render(
+      <ProviderProjectMetadataPanel answers={dated} />,
+    );
+    expect(container.textContent).toContain('Last updated');
+    expect(container.textContent).toContain(
+      formatDateTime('2026-09-14T10:15:00Z'),
+    );
+  });
+
+  it('shows no timestamp for an answer without modified', () => {
+    const { container } = render(
+      <ProviderProjectMetadataPanel answers={answers} />,
+    );
+    expect(container.textContent).toContain('EXT-2026-042');
+    expect(container.textContent).not.toContain('Last updated');
   });
 
   it('shows an empty state when there are no answers', () => {

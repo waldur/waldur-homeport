@@ -25076,6 +25076,11 @@
       "feature_area": "marketplace"
     }
   },
+  "Last updated:": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
   "Last usage": {
     "context": {
       "feature_area": "provider"
