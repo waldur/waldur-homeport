@@ -1,5 +1,6 @@
 import { Answer, ProjectMetadataAnswer, QuestionAdmin } from 'waldur-js-client';
 
+import { formatDateTime } from '@/core/dateUtils';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -23,18 +24,26 @@ export const ProviderProjectMetadataPanel = ({
               key={item.question_uuid}
               label={item.question}
               value={
-                // Reuse the project-metadata answer renderer (handles files,
-                // multi-file attachments, booleans, etc.). Select-type labels
-                // are already resolved by the backend, so options are omitted.
-                <ParsedAnswer
-                  question={
-                    {
-                      question_type: item.question_type,
-                      question_options: [],
-                    } as unknown as QuestionAdmin
-                  }
-                  answer={{ answer_data: item.answer } as unknown as Answer}
-                />
+                <>
+                  {/* Reuse the project-metadata answer renderer (handles files,
+                      multi-file attachments, booleans, etc.). Select-type labels
+                      are already resolved by the backend, so options are omitted. */}
+                  <ParsedAnswer
+                    question={
+                      {
+                        question_type: item.question_type,
+                        question_options: [],
+                      } as unknown as QuestionAdmin
+                    }
+                    answer={{ answer_data: item.answer } as unknown as Answer}
+                  />
+                  {item.modified && (
+                    <div className="text-muted small">
+                      {translate('Last updated:')}{' '}
+                      {formatDateTime(item.modified)}
+                    </div>
+                  )}
+                </>
               }
             />
           ))}
