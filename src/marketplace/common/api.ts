@@ -8,6 +8,8 @@ import {
   MarketplaceOrdersListData,
   marketplaceResourceEndDateChangeRequestsCount,
   MarketplaceResourceEndDateChangeRequestsListData,
+  marketplaceResourceLimitChangeRequestsCount,
+  MarketplaceResourceLimitChangeRequestsListData,
   marketplaceRobotAccountsCount,
   MarketplaceRobotAccountsListData,
   marketplaceServiceProvidersList,
@@ -50,3 +52,8 @@ export const countEndDateChangeRequests = (
   marketplaceResourceEndDateChangeRequestsCount({ query }).then(
     fetchResultCount,
   );
+
+export const countLimitChangeRequests = (
+  query: MarketplaceResourceLimitChangeRequestsListData['query'],
+) =>
+  marketplaceResourceLimitChangeRequestsCount({ query }).then(fetchResultCount);

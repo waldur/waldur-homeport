@@ -1,4 +1,5 @@
 import { TimerIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -15,6 +16,11 @@ import { useUser } from '@/workspace/hooks';
 import { useResourceOffering } from '../actions/useResourceOffering';
 import { getMarketplaceResourceUuid } from '../actions/utils';
 import { hasEditableLimitComponents } from '../change-limits/utils';
+
+import {
+  isLimitChangeRequestsEnabled,
+  ownPendingLimitChangeRequestsQuery,
+} from './utils';
 
 const RequestLimitsChangeFlowDialog = lazyComponent(() =>
   import('./RequestLimitsChangeFlowDialog').then((module) => ({
@@ -63,10 +69,25 @@ export const RequestLimitsChangeAction: ActionItemType = ({
 
   const hasPlan = Boolean(resource.plan_uuid || resource.marketplace_plan_uuid);
   const resourceUuid = getMarketplaceResourceUuid(resource);
-  const offering = useResourceOffering(
-    resourceUuid,
-    !canUpdateDirectly && hasPlan,
+  // Fetched rather than read from the resource: scope-based menus pass the
+  // scope object, which does not carry the offering's plugin options.
+  const offering = useResourceOffering(resourceUuid, !canUpdateDirectly);
+  const acceptsRequests = isLimitChangeRequestsEnabled(
+    offering?.plugin_options,
   );
+
+  // Once the offering stops accepting requests, the action stays only for
+  // someone who still has one pending, and only to withdraw it.
+  const { data: ownPendingRequests } = useQuery({
+    ...ownPendingLimitChangeRequestsQuery(resourceUuid, user?.uuid),
+    enabled: Boolean(
+      !canUpdateDirectly &&
+      offering &&
+      !acceptsRequests &&
+      resourceUuid &&
+      user?.uuid,
+    ),
+  });
 
   if (canUpdateDirectly) {
     return null;
@@ -74,6 +95,24 @@ export const RequestLimitsChangeAction: ActionItemType = ({
 
   if (!resourceUuid) {
     return null;
+  }
+
+  // An opt-in offering feature; also hidden until the offering has loaded, so
+  // the action never flashes up on offerings that do not accept requests.
+  if (!acceptsRequests) {
+    if (!offering || !ownPendingRequests?.length) {
+      return null;
+    }
+    // The flow dialog finds the pending request and offers only to cancel it.
+    return (
+      <ActionItem
+        title={translate('Cancel limit change request')}
+        action={action}
+        iconNode={<TimerIcon weight="bold" />}
+        resource={resource}
+        {...rest}
+      />
+    );
   }
 
   // Hide when the offering is intrinsically not configured for editable limits.

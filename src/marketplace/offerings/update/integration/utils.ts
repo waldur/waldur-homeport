@@ -93,6 +93,12 @@ export const useUpdateOfferingIntegration = (
     successMessage: translate('Offering has been updated successfully.'),
     errorMessage: translate('Unable to update offering.'),
     refetch,
+    // Plugin options switch resource actions and tabs on and off; drop the
+    // cached copies so resource pages reflect the change straight away.
+    invalidateQueries: [
+      { queryKey: ['resource-offering'] },
+      { queryKey: ['resource-details-page'] },
+    ],
   });
 
   return { update };

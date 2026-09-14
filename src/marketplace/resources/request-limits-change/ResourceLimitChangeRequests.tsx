@@ -4,6 +4,7 @@ import {
   marketplaceResourceLimitChangeRequestsApprove,
   marketplaceResourceLimitChangeRequestsList,
   marketplaceResourceLimitChangeRequestsReject,
+  MergedPluginOptions,
   Resource,
   ResourceLimitChangeRequest,
 } from 'waldur-js-client';
@@ -21,18 +22,35 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
+import {
+  isLimitChangeRequestsEnabled,
+  PENDING_LIMIT_CHANGE_REQUESTS_COUNT_KEY,
+} from './utils';
+
+type OfferingWithOptions = { plugin_options?: MergedPluginOptions };
+
 interface Props {
   resource: Resource;
+  // The offering as the resource page loaded it — for a child offering its
+  // plugin options are the parent's, which is what the backend checks.
+  offering?: OfferingWithOptions;
 }
 
 const isPending = (row: { state: string }) =>
   row.state?.toLowerCase() === 'pending';
 
-const ApproveAction: FC<{
+// Deciding a request changes whether the tab is still needed on an offering
+// that no longer accepts requests.
+const invalidatePendingCount = [
+  { queryKey: [PENDING_LIMIT_CHANGE_REQUESTS_COUNT_KEY] },
+];
+
+export const ApproveAction: FC<{
   row: ResourceLimitChangeRequest;
   resource: Resource;
+  offering?: OfferingWithOptions;
   refetch(): void;
-}> = ({ row, resource, refetch }) => {
+}> = ({ row, resource, offering, refetch }) => {
   const user = useUser();
   const { mutate, isPending: isMutating } = useManagedMutation({
     mutationFn: () =>
@@ -42,6 +60,7 @@ const ApproveAction: FC<{
     successMessage: translate('Limit change request has been approved.'),
     errorMessage: translate('Unable to approve limit change request.'),
     refetch,
+    invalidateQueries: invalidatePendingCount,
     confirmation: {
       title: translate('Confirmation'),
       body: translate('Are you sure you want to approve this request?'),
@@ -49,8 +68,10 @@ const ApproveAction: FC<{
   });
 
   // Approving applies the limits through a marketplace order, so it needs
-  // order creation rights. Rejecting creates nothing and stays available.
+  // order creation rights. Rejecting creates nothing and stays available —
+  // also once the offering stops accepting requests, which refuses approval.
   if (
+    !isLimitChangeRequestsEnabled(offering?.plugin_options) ||
     !hasPermission(user, {
       permission: PermissionEnum.CREATE_ORDER,
       projectId: resource.project_uuid,
@@ -82,6 +103,7 @@ const RejectAction: FC<{
     successMessage: translate('Limit change request has been rejected.'),
     errorMessage: translate('Unable to reject limit change request.'),
     refetch,
+    invalidateQueries: invalidatePendingCount,
     confirmation: {
       title: translate('Confirmation'),
       body: translate('Are you sure you want to reject this request?'),
@@ -100,6 +122,7 @@ const RejectAction: FC<{
 
 export const ResourceLimitChangeRequests: FunctionComponent<Props> = ({
   resource,
+  offering,
 }) => {
   const [activeTab, setActiveTab] = useState<'pending' | 'all'>('pending');
 
@@ -208,7 +231,12 @@ export const ResourceLimitChangeRequests: FunctionComponent<Props> = ({
       rowActions={({ row }) =>
         isPending(row) ? (
           <ActionsDropdown row={row}>
-            <ApproveAction row={row} resource={resource} refetch={refetch} />
+            <ApproveAction
+              row={row}
+              resource={resource}
+              offering={offering}
+              refetch={refetch}
+            />
             <RejectAction row={row} refetch={refetch} />
           </ActionsDropdown>
         ) : null
