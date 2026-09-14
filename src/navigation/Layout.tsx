@@ -59,7 +59,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
   const [ExtraAnnouncementBar, setExtraAnnouncementBar] =
     useState<React.ReactNode>(null);
   const [ExtraToolbar, setExtraToolbar] = useState<React.ReactNode>(null);
-  const { setOpenMobile } = useSidebar();
+  const { state: sidebarState, setOpenMobile } = useSidebar();
 
   useEffect(() => {
     setOpenMobile(false);
@@ -100,26 +100,16 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
   const showToolbar = Boolean(actions || tabs?.length > 1 || extraTabs?.length);
 
   useEffect(() => {
-    // Preserves aside.minimized rather than resetting it to
-    // DefaultLayoutConfig's own `false` on every run of this effect (which
-    // fires on every navigation, via showToolbar/PageHero/etc. changing) —
-    // that field isn't this effect's to reset, it's useSidebarLayoutShim's
-    // own synced mirror of the real Sidebar's collapsed/expanded state.
-    // Resetting it here raced that shim's own effect (keyed only on
-    // `state`, which doesn't change on navigation) and won, since this
-    // effect fires on every page while the shim's only fires on an actual
-    // toggle — left the legacy Metronic header's own [data-kt-aside-
-    // minimize='on'] content-offset CSS (layout/_header.scss) permanently
-    // stuck un-minimized after the first navigation with the sidebar
-    // collapsed, even though the real sidebar stayed visually collapsed.
-    const previousAside =
-      typeof layout.config.aside === 'object' ? layout.config.aside : null;
+    // Synchronize aside.minimized with the real Sidebar's state from useSidebar()
+    // rather than guessing or defaulting to false. This guarantees that whenever
+    // the sidebar is collapsed (on mount, resize, user toggle, or navigation),
+    // layout.config.aside.minimized is true and Metronic's header/toolbar content
+    // offset CSS (data-kt-aside-minimize='on') remains correctly aligned.
     layout.setLayout({
       aside: currentUser
         ? {
             ...DefaultLayoutConfig.aside,
-            minimized:
-              previousAside?.minimized ?? DefaultLayoutConfig.aside.minimized,
+            minimized: sidebarState === 'collapsed',
           }
         : false,
       toolbar: showToolbar ? DefaultLayoutConfig.toolbar : false,
@@ -130,7 +120,15 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
         width: 'fluid',
       },
     });
-  }, [showToolbar, fullPage, PageHero, PageBar, ExtraToolbar, currentUser]);
+  }, [
+    showToolbar,
+    fullPage,
+    PageHero,
+    PageBar,
+    ExtraToolbar,
+    currentUser,
+    sidebarState,
+  ]);
 
   useEffect(() => {
     if (AuthService.isAuthenticated() && !currentUser) {

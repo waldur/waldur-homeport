@@ -44,8 +44,9 @@
     }
 
     // Aside default enabled, aside fixed, header sticky & aside minimize modes
-    .aside-enabled.aside-fixed.header-fixed[data-kt-aside-minimize='on'] & {
-      left: get($aside-config, minimized-width);
+    .aside-enabled.aside-fixed.header-fixed[data-kt-aside-minimize='on'] &,
+    .aside-enabled.aside-fixed.header-fixed:has([data-collapsible='icon']) & {
+      left: var(--sidebar-width-icon, get($aside-config, minimized-width));
       transition: left get($aside-config, transition-speed) ease;
     }
 
