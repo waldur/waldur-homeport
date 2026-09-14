@@ -332,7 +332,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
                       { value: 'ICMP', label: 'ICMP' },
                     ]}
                     simpleValue
-                    className="select-table-cell"
+                    variant="tableCell"
                   />
                 ),
                 width: '16%',
@@ -382,7 +382,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
                       { value: 'egress', label: 'Egress' },
                     ]}
                     simpleValue
-                    className="select-table-cell"
+                    variant="tableCell"
                   />
                 ),
                 width: '16%',

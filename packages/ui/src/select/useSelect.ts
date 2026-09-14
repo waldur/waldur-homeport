@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { useMemo } from 'react';
 
 import { FilterSelectControl } from './components';
@@ -7,6 +6,7 @@ import {
   reorderAsyncOptions,
   reorderOptions,
 } from './SelectHelper';
+import { getSelectTailwindClassNames } from './tailwindStyles';
 import {
   CustomAsyncCreatableSelectProps,
   CustomAsyncSelectProps,
@@ -19,6 +19,12 @@ const defaultPortalingProps = {
   styles: { menuPortal: (base) => ({ ...base, zIndex: 9999 }) },
   menuPosition: 'fixed' as const,
   menuPlacement: 'bottom' as const,
+  // Matches tailwindStyles.ts's `menuList` cap (`max-h-[260px]`). react-select's
+  // own default (300) always wins for `menuList`'s computed `maxHeight` even in
+  // `unstyled` mode — it isn't stripped the way padding/color are — so without
+  // this override a virtualized menu (VirtualMenuList reads this same prop)
+  // renders visibly taller than a non-virtualized one.
+  maxMenuHeight: 260,
 };
 
 export const useSelect = <
@@ -34,12 +40,6 @@ export const useSelect = <
       ...props.components,
     },
     props.isMulti,
-  );
-
-  const className = classNames(
-    'metronic-select-container',
-    props.size === 'sm' && 'select-sm',
-    props.className,
   );
 
   const getOptionValue =
@@ -104,12 +104,24 @@ export const useSelect = <
 
   const isDisabled = props.isDisabled || props.disabled;
 
+  const classNamesConfig = useMemo(
+    () =>
+      getSelectTailwindClassNames({
+        size: props.size,
+        variant: props.variant,
+        hasError: Boolean(props.meta?.touched && props.meta?.error),
+      }),
+    [props.size, props.variant, props.meta?.touched, props.meta?.error],
+  );
+
   return {
     ...defaultPortalingProps,
     ...multiProps,
     ...tableFilterProps,
     components: composedComponents,
     ...props,
+    unstyled: true,
+    classNames: classNamesConfig,
     isDisabled,
     inputId: props.inputId || props.id,
     id: undefined,
@@ -117,8 +129,6 @@ export const useSelect = <
     options,
     onChange,
     onBlur,
-    className,
-    classNamePrefix: 'metronic-select',
   };
 };
 
@@ -135,12 +145,6 @@ export const useAsyncSelect = <
       ...props.components,
     },
     props.isMulti,
-  );
-
-  const className = classNames(
-    'metronic-select-container',
-    props.size === 'sm' && 'select-sm',
-    props.className,
   );
 
   const getOptionValue =
@@ -215,6 +219,16 @@ export const useAsyncSelect = <
 
   const isDisabled = props.isDisabled || props.disabled;
 
+  const classNamesConfig = useMemo(
+    () =>
+      getSelectTailwindClassNames({
+        size: props.size,
+        variant: props.variant,
+        hasError: Boolean(props.meta?.touched && props.meta?.error),
+      }),
+    [props.size, props.variant, props.meta?.touched, props.meta?.error],
+  );
+
   return {
     additional: { page: 1 },
     ...defaultPortalingProps,
@@ -222,14 +236,14 @@ export const useAsyncSelect = <
     ...tableFilterProps,
     components: composedComponents,
     ...props,
+    unstyled: true,
+    classNames: classNamesConfig,
     isDisabled,
     inputId: props.inputId || props.id,
     id: undefined,
     value,
     onChange,
     onBlur,
-    className,
-    classNamePrefix: 'metronic-select',
     loadOptions,
   };
 };

@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { CreatableSelect } from './CreatableSelect';
+import { CreatableSelect } from 'waldur-ui';
+
 import { CreatableSelectFieldProps } from './types';
 
 export const CreatableSelectField: FunctionComponent<

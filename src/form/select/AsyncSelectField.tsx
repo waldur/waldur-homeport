@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
 
+import { AsyncSelect } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
-import { AsyncSelect } from './AsyncSelect';
 import { AsyncSelectFieldProps } from './types';
 
 export const AsyncSelectField: FunctionComponent<AsyncSelectFieldProps> = (

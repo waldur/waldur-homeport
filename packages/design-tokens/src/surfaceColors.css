@@ -123,7 +123,13 @@
   --surface-sidebar-border: var(--color-gray-800);
   --surface-card-bg: var(--color-gray-900);
   --surface-card-border: var(--color-gray-800);
-  --surface-hover-bg: var(--color-gray-900);
+  /* `--color-gray-800`, not `--color-gray-900`: identical to
+     `--surface-card-bg` made every hover/focused row in dark mode invisible
+     against its own menu — confirmed live on the select options dropdown.
+     `--color-gray-800` is the same "one step lighter than card" value
+     already used by `--surface-card-border`/`--surface-sidebar-border`
+     just above, for the same "something drawn on top of a card" purpose. */
+  --surface-hover-bg: var(--color-gray-800);
 
   --surface-text-primary: var(--color-gray-25);
   --surface-text-secondary: var(--color-gray-400);

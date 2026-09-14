@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Select } from '@/form/select/Select';
+import { Select } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { InferenceModelState } from './useInferenceModels';

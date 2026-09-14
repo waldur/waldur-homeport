@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { uniqueId } from 'lodash-es';
 import { FC, useCallback, useMemo } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { components } from 'react-select';
 import {
@@ -12,7 +11,8 @@ import {
   proposalProtectedCallsCreateManualAssignment,
 } from 'waldur-js-client';
 
-import { Tag } from '@/core/Tag';
+import { Tag, Tooltip } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -54,23 +54,16 @@ const FirstChipValueContainer = (props: any) => {
     >
       {visibleValues}
       {hiddenValues.length > 0 && (
-        <OverlayTrigger
-          placement="bottom"
-          overlay={
-            <Popover
-              className="metronic-select-tooltip"
-              id={uniqueId('tip-proposals')}
-            >
-              <Popover.Body>
-                {hiddenValues.map((child) => child.props?.children).join(', ')}
-              </Popover.Body>
-            </Popover>
-          }
+        <Tooltip
+          id={uniqueId('tip-proposals')}
+          label={hiddenValues.map((child) => child.props?.children).join(', ')}
         >
-          <Tag>
-            +{hiddenValues.length} {translate('more')}
-          </Tag>
-        </OverlayTrigger>
+          <div className="inline-block">
+            <Tag>
+              +{hiddenValues.length} {translate('more')}
+            </Tag>
+          </div>
+        </Tooltip>
       )}
       {otherChildren}
     </components.ValueContainer>

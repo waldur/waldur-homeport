@@ -3,7 +3,8 @@ import { GearSixIcon } from '@phosphor-icons/react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { FC } from 'react';
 
-import { Select } from '@/form/select/Select';
+import { Select } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface CallSettingsMenuProps {

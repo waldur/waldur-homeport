@@ -18,12 +18,9 @@
 /* FORM CONTROL (INPUT) */
 .form-control,
 .form-select,
-.form-check-input,
-.metronic-select__control {
+.form-check-input {
   &:hover:not(:disabled):not([readonly]):not(:checked):not(:focus):not(
       .is-invalid
-    ):not(.metronic-select__control--is-disabled):not(
-      .metronic-select__control--is-focused
     ) {
     border-color: var(--bs-primary);
   }
