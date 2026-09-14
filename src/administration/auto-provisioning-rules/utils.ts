@@ -81,6 +81,26 @@ export const validateUserClaims = (rows: ClaimRow[] | undefined) => {
   return undefined;
 };
 
+/**
+ * The regex equivalent of a wildcard pattern such as `*@example.org`, or
+ * undefined if the pattern isn't one: it must have a `*` and no other regex
+ * metacharacter apart from `.`, so a broken regex gets no mangled suggestion.
+ *
+ * Mirrors the backend's suggestion. It ends with `$` so that it covers the
+ * whole address and rejects `alice@example.org.attacker.net`, whichever way
+ * the server anchors the match.
+ */
+export const suggestRegexForWildcard = (pattern: string) => {
+  if (!pattern.includes('*') || /[\\^$+?()[\]{}|]/.test(pattern)) {
+    return undefined;
+  }
+  const regex = pattern
+    .split('*')
+    .map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    .join('.*');
+  return pattern.endsWith('*') ? regex : `${regex}$`;
+};
+
 export const validateEmailPatterns = (value) => {
   const patterns = toList(value, ' ');
 
@@ -93,6 +113,13 @@ export const validateEmailPatterns = (value) => {
     try {
       new RegExp(pattern);
     } catch {
+      const suggestion = suggestRegexForWildcard(pattern);
+      if (suggestion) {
+        return translate(
+          'Patterns are regular expressions, not wildcards: use {suggestion} instead of {pattern}.',
+          { suggestion, pattern },
+        );
+      }
       return translate('Pattern is not a valid regex.');
     }
   }

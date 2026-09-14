@@ -35,6 +35,7 @@ interface AutoProvisioningRuleForm {
   project_role?: string;
   customer_role?: string;
   create_project: boolean;
+  project_name_template?: string;
   revoke_when_unmatched: boolean;
   use_user_organization_as_customer_name: boolean;
   // `CommaSeparatedListGroup` seeds these from a string but emits an array.
@@ -62,6 +63,7 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
         project_role: resolve.rule.project_role_display_name,
         customer_role: resolve.rule.customer_role_display_name,
         create_project: resolve.rule.create_project ?? true,
+        project_name_template: resolve.rule.project_name_template ?? '',
         revoke_when_unmatched: resolve.rule.revoke_when_unmatched ?? false,
         use_user_organization_as_customer_name:
           resolve.rule.use_user_organization_as_customer_name,
@@ -90,6 +92,9 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
           : null,
         customer_role_name: formData.customer_role ?? null,
         create_project: formData.create_project,
+        project_name_template: formData.create_project
+          ? formData.project_name_template || null
+          : null,
         revoke_when_unmatched: formData.revoke_when_unmatched,
         creates_resource: false,
         use_user_organization_as_customer_name:

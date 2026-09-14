@@ -85,6 +85,19 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
           space={2}
         />
         <Field
+          label={translate('Creates project')}
+          value={row.create_project ? translate('Yes') : translate('No')}
+          space={2}
+        />
+        {row.create_project && (
+          <Field
+            label={translate('Project name template')}
+            value={row.project_name_template || translate('Username')}
+            valueClass="ellipsis"
+            space={2}
+          />
+        )}
+        <Field
           label={translate('Revokes when unmatched')}
           value={row.revoke_when_unmatched ? translate('Yes') : translate('No')}
           space={2}
