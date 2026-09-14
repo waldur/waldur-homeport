@@ -267,7 +267,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
             )}
             {!props.isPublic && (
               <div className="order-2 order-sm-2">
-                <OfferingExtraActionsButton offering={offering} />
+                <OfferingExtraActionsButton
+                  offering={offering}
+                  refreshOffering={props.refetch}
+                  showLifecycleActions={isEditPage}
+                />
               </div>
             )}
             <div className="order-first align-self-center">
