@@ -313,6 +313,13 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
             )}
           />
           <BooleanEditField
+            name="plugin_options.enable_resource_limit_change_requests"
+            label={translate('Enable resource limit change requests')}
+            description={translate(
+              'Lets users who may not change resource limits themselves ask for new ones. Holders of the limits permission approve or reject on the resource, and approval submits an update order for the requested limits. When disabled, pending requests can still be rejected or withdrawn, but no longer approved.',
+            )}
+          />
+          <BooleanEditField
             name="plugin_options.enable_resource_projects"
             label={translate('Enable resource projects')}
             description={translate(

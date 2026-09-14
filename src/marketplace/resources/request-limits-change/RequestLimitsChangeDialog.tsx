@@ -43,6 +43,7 @@ export const RequestLimitsChangeDialog: React.FC<
     successMessage: translate('Limit change request has been submitted.'),
     errorMessage: translate('Unable to submit limit change request.'),
     refetch: props.resolve.refetch,
+    invalidateQueries: [{ queryKey: ['resource-limit-change-requests'] }],
   });
 
   return (

@@ -15,7 +15,13 @@ import { goToNotFound } from '@/error/utils';
 import { ErrorView } from '@/ErrorView';
 import { translate } from '@/i18n';
 import { PublicMaintenanceCard } from '@/maintenance/public/PublicMaintenanceCard';
+import { countLimitChangeRequests } from '@/marketplace/common/api';
+import { findResourcePlan } from '@/marketplace/details/plan/effectiveComponents';
 import { hasFreshConsumerResponse } from '@/marketplace/orders/utils';
+import {
+  needsPendingLimitChangeRequestsCount,
+  PENDING_LIMIT_CHANGE_REQUESTS_COUNT_KEY,
+} from '@/marketplace/resources/request-limits-change/utils';
 import { useModal } from '@/modal/actions';
 import {
   useBreadcrumbs,
@@ -188,6 +194,31 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
           customerId: resource.customer_uuid,
         })
       : false);
+  // Only fetched for someone who could see the limit change requests tab on an
+  // offering that has stopped accepting requests: pending ones keep the tab so
+  // they can still be rejected. A failed count only leaves that tab hidden, it
+  // never takes the page down.
+  const needsPendingLimitCount = Boolean(
+    resource &&
+    data?.offering &&
+    needsPendingLimitChangeRequestsCount({
+      canManage: canManageLimitRequests,
+      offering: data.offering,
+      plan: findResourcePlan(data.offering.plans, resource.plan_uuid),
+      hasPlan: Boolean(resource.plan_uuid),
+    }),
+  );
+  const { data: pendingLimitChangeRequestsCount = 0 } = useQuery({
+    queryKey: [PENDING_LIMIT_CHANGE_REQUESTS_COUNT_KEY, resource?.uuid],
+    queryFn: () =>
+      countLimitChangeRequests({
+        resource_uuid: resource.uuid,
+        state: ['pending'],
+      }).catch(() => 0),
+    enabled: needsPendingLimitCount,
+    refetchOnWindowFocus: false,
+  });
+
   const tabs = useMemo(
     () =>
       data
@@ -199,6 +230,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
             isRPOnly,
             canManageLimitRequests,
             canManageEndDateRequests,
+            pendingLimitChangeRequestsCount,
           })
         : [],
     [
@@ -209,6 +241,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
       isRPOnly,
       canManageLimitRequests,
       canManageEndDateRequests,
+      pendingLimitChangeRequestsCount,
     ],
   );
 

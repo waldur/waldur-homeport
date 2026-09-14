@@ -28,6 +28,8 @@ export const RequestLimitsChangePendingDialog: FC<Props> = ({
     successMessage: translate('Limit change request has been canceled.'),
     errorMessage: translate('Unable to cancel limit change request.'),
     refetch,
+    // The action decides between request and cancel from this query.
+    invalidateQueries: [{ queryKey: ['resource-limit-change-requests'] }],
   });
 
   return (

@@ -8472,6 +8472,11 @@
       "feature_area": "invitations"
     }
   },
+  "Cancel limit change request": {
+    "context": {
+      "feature_area": "request-limits-change"
+    }
+  },
   "Cancel maintenance": {
     "context": {
       "primary_ui_type": "title",
@@ -17193,6 +17198,11 @@
       "feature_area": "integration"
     }
   },
+  "Enable resource limit change requests": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Enable resource projects": {
     "context": {
       "feature_area": "integration"
@@ -25282,6 +25292,11 @@
     }
   },
   "Lets users who may not change a resource end date themselves ask for it. Holders of the end date permission approve or reject on the resource, and approval applies the date immediately. Requests are also published as events, so an external approval system can decide instead. Does not apply to prepaid offerings, which extend through renewal instead.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Lets users who may not change resource limits themselves ask for new ones. Holders of the limits permission approve or reject on the resource, and approval submits an update order for the requested limits. When disabled, pending requests can still be rejected or withdrawn, but no longer approved.": {
     "context": {
       "feature_area": "integration"
     }

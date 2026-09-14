@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { marketplaceResourceLimitChangeRequestsList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { useUser } from '@/workspace/hooks';
 
+import { getMarketplaceResourceUuid } from '../actions/utils';
+
 import { RequestLimitsChangeDialog } from './RequestLimitsChangeDialog';
 import { RequestLimitsChangePendingDialog } from './RequestLimitsChangePendingDialog';
+import { ownPendingLimitChangeRequestsQuery } from './utils';
 
 interface Props {
   resolve: {
@@ -19,30 +21,18 @@ export const RequestLimitsChangeFlowDialog: FC<Props> = ({
   resolve: { resource, refetch },
 }) => {
   const user = useUser();
+  const resourceUuid = getMarketplaceResourceUuid(resource);
 
-  const { data: response, isLoading } = useQuery({
-    queryKey: [
-      'resource-limit-change-requests',
-      resource.marketplace_resource_uuid,
-      user?.uuid,
-    ],
-    queryFn: () =>
-      marketplaceResourceLimitChangeRequestsList({
-        query: {
-          resource_uuid: resource.marketplace_resource_uuid,
-          state: ['pending'],
-          created_by_uuid: user?.uuid,
-        },
-      }),
-    enabled: Boolean(resource.marketplace_resource_uuid && user?.uuid),
+  const { data: pendingRequests, isLoading } = useQuery({
+    ...ownPendingLimitChangeRequestsQuery(resourceUuid, user?.uuid),
+    enabled: Boolean(resourceUuid && user?.uuid),
   });
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  const items = Array.isArray(response?.data) ? response.data : [];
-  const pendingRequest = items[0];
+  const pendingRequest = pendingRequests?.[0];
 
   if (pendingRequest) {
     return (

@@ -20,8 +20,8 @@ import {
   findResourcePlan,
   resolvePlanComponents,
 } from '@/marketplace/details/plan/effectiveComponents';
-import { hasEditableLimitComponents } from '@/marketplace/resources/change-limits/utils';
 import { isInferenceServiceEnabled } from '@/marketplace/resources/inference';
+import { shouldShowLimitChangeRequestsTab } from '@/marketplace/resources/request-limits-change/utils';
 import { PageBarTab } from '@/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
@@ -47,6 +47,7 @@ export const getResourceTabs = ({
   canManageLimitRequests = false,
   canManageEndDateRequests = false,
   endDateChangeRequestsCount = 0,
+  pendingLimitChangeRequestsCount = 0,
 }: {
   resource: Resource;
   offering: Offering;
@@ -59,6 +60,7 @@ export const getResourceTabs = ({
   canManageLimitRequests?: boolean;
   canManageEndDateRequests?: boolean;
   endDateChangeRequestsCount?: number;
+  pendingLimitChangeRequestsCount?: number;
 }) => {
   const resourcePlan = findResourcePlan(offering.plans, resource.plan_uuid);
   // Generate tabs
@@ -388,10 +390,17 @@ export const getResourceTabs = ({
   // editable limit components and an associated plan. This hides the tab on
   // child resources (e.g. OpenStack instances/volumes) that merely inherit the
   // parent offering's limit components but have no plan of their own.
+  // Limit change requests are an opt-in offering feature; once an offering
+  // opts out, the tab stays only while requests are pending, so approvers can
+  // still reject them.
   if (
-    canManageLimitRequests &&
-    hasEditableLimitComponents(offering, resourcePlan) &&
-    Boolean(resource.plan_uuid)
+    shouldShowLimitChangeRequestsTab({
+      canManage: canManageLimitRequests,
+      offering,
+      plan: resourcePlan,
+      hasPlan: Boolean(resource.plan_uuid),
+      pendingCount: pendingLimitChangeRequestsCount,
+    })
   ) {
     changeRequestTabs.push({
       key: 'limit-change-requests',
