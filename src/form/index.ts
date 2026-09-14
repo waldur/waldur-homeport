@@ -1,5 +1,7 @@
 import { ComponentProps } from 'react';
 
+import { AsyncSelect } from 'waldur-ui';
+
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { lazyOnce } from '@/core/lazyOnce';
 
@@ -15,7 +17,6 @@ import type MarkdownEditor from './MarkdownEditor';
 import type { MonacoField } from './MonacoField';
 import { NumberField } from './NumberField';
 import { SecretField } from './SecretField';
-import { AsyncSelect } from './select/AsyncSelect';
 import { CreatableSelectField } from './select/CreatableSelectField';
 import { SelectField } from './select/SelectField';
 import { SliderNumberField } from './SliderNumberField';

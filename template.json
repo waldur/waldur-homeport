@@ -46145,11 +46145,6 @@
       "feature_area": "support-users"
     }
   },
-  "Select or type to add a new option...": {
-    "context": {
-      "feature_area": "select"
-    }
-  },
   "Select or type to add tags...": {
     "context": {
       "feature_area": "overview"

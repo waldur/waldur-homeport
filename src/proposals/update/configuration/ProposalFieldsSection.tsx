@@ -2,10 +2,11 @@ import { QuestionIcon, WarningIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
+import { Select } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
-import { Select } from '@/form/select/Select';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import {

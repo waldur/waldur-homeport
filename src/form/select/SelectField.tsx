@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { Select } from './Select';
+import { Select } from 'waldur-ui';
+
 import { SelectFieldProps } from './types';
 
 export const SelectField: FunctionComponent<SelectFieldProps> = (props) => {

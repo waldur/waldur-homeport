@@ -17,8 +17,9 @@ import {
   useState,
 } from 'react';
 
+import { Tag } from 'waldur-ui';
+
 import { Image } from '@/core/Image';
-import { Tag } from '@/core/Tag';
 import { translate } from '@/i18n';
 
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';

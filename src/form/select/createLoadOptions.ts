@@ -1,7 +1,7 @@
+import { AsyncSelectLoader } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
 import { ENV } from '@/core/config';
-
-import { AsyncSelectLoader } from './types';
 
 /**
  * Utility type to extract the `query` parameters type from an SDK list method.

@@ -1,5 +1,6 @@
 import {
   FilterSelectClearIndicator,
+  MetronicInput,
   MultiSelectLimitedValueContainer,
   MultiSelectOption,
   MultiSelectValue,
@@ -73,6 +74,7 @@ export const composeComponents = (components: any, isMulti: boolean) => {
   let defaultComponents: any = {
     ClearIndicator: FilterSelectClearIndicator,
     DropdownIndicator: SelectDropdownIndicator,
+    Input: MetronicInput,
   };
 
   if (isMulti) {

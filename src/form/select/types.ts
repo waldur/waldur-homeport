@@ -1,54 +1,13 @@
-import { FieldMetaState } from 'react-final-form';
-import { GroupBase, Props as SelectProps } from 'react-select';
-import { CreatableProps } from 'react-select/creatable';
-import { AsyncPaginateProps, LoadOptions } from 'react-select-async-paginate';
+import {
+  CustomAsyncSelectProps,
+  CustomCreatableSelectProps,
+  CustomSelectProps,
+} from 'waldur-ui';
 
-interface SelectFieldInputProps {
-  name?: string;
-  value?: any;
-  onChange?: (...args: any[]) => void;
-  onBlur?: (...args: any[]) => void;
-  onFocus?: (...args: any[]) => void;
-}
-
-export type CustomSelectProps = {
-  size?: 'sm';
-  variant?: 'tableFilter';
-  input?: SelectFieldInputProps;
-  meta?: Partial<FieldMetaState<any>>;
-  disabled?: boolean;
-} & SelectProps<any, any, any>;
-
-export type CustomCreatableSelectProps = {
-  size?: 'sm';
-  variant?: 'tableFilter';
-  input?: SelectFieldInputProps;
-  meta?: Partial<FieldMetaState<any>>;
-  disabled?: boolean;
-} & CreatableProps<any, any, any>;
-
-export type CustomAsyncSelectProps = {
-  size?: 'sm';
-  variant?: 'tableFilter';
-  input?: SelectFieldInputProps;
-  meta?: Partial<FieldMetaState<any>>;
-  disabled?: boolean;
-} & AsyncPaginateProps<any, GroupBase<any>, any, any>;
-
-export type CustomAsyncCreatableSelectProps = {
-  size?: 'sm';
-  variant?: 'tableFilter';
-  input?: SelectFieldInputProps;
-  meta?: Partial<FieldMetaState<any>>;
-  disabled?: boolean;
-} & AsyncPaginateProps<any, GroupBase<any>, any, any> &
-  CreatableProps<any, any, any>;
-
-export type AsyncSelectLoader<
-  Option = any,
-  Additional = { page: number },
-> = LoadOptions<Option, GroupBase<Option>, Additional>;
-
+// Field-specific extensions layered on top of waldur-ui's framework-agnostic
+// select props: `simpleValue`/`noUpdateOnBlur` only make sense for a
+// react-final-form `Field`'s `input`/`meta` adapter, which is what
+// SelectField/AsyncSelectField/CreatableSelectField in this directory are.
 export interface SelectFieldProps extends CustomSelectProps {
   simpleValue?: boolean;
   noUpdateOnBlur?: boolean;

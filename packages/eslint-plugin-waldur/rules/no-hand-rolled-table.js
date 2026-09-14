@@ -31,6 +31,10 @@ const ALLOWED_FILES = [
   // which fight a four-row price editor in a modal. Same shape as
   // SetQuotasDialog's own table.
   'src/marketplace/offerings/update/plans/PricesTable.tsx',
+  // Storybook demo of the tableCell select variant embedded in a row -- a
+  // two-cell illustration, not a data table, and packages/ui can't depend on
+  // @/table/Table (app-coupled, see the note above) regardless.
+  'packages/ui/src/select/Select.stories.tsx',
 ];
 
 export default {

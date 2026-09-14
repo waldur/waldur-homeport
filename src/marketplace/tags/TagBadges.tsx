@@ -1,8 +1,9 @@
 import { FC, MouseEvent } from 'react';
 import { NestedTag } from 'waldur-js-client';
 
+import { Tag } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { Tag } from '@/core/Tag';
 import { Tip } from '@/core/Tooltip';
 
 interface TagBadgesProps {

@@ -14,8 +14,9 @@ import { Accordion, AccordionContext } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 
+import { RemoveFilterBadgeButton } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { RemoveFilterBadgeButton } from '@/core/RemoveFilterBadgeButton';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { PopoverMenuContent } from '@/navigation/NavMenu';

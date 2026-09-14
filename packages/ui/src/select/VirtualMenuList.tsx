@@ -17,8 +17,8 @@ import { VariableSizeList } from 'react-window';
 
 // Default falls in line with react-select's default menu maxHeight / option
 // height (35px). Group headings render shorter (25px) per react-select v5.
-const DEFAULT_ITEM_HEIGHT = 35;
-const DEFAULT_GROUP_HEADING_HEIGHT = 25;
+const DEFAULT_ITEM_HEIGHT = 36;
+const DEFAULT_GROUP_HEADING_HEIGHT = 26;
 
 interface StyledHeight {
   height?: number | string;
@@ -125,13 +125,7 @@ const MeasuringRow = ({ node, index, onMeasured }: MeasuringRowProps) => {
 };
 
 export function VirtualMenuList(props: MenuListProps<unknown, boolean>) {
-  const {
-    getStyles,
-    innerRef,
-    innerProps,
-    selectProps,
-    children: rawChildren,
-  } = props;
+  const { getStyles, innerRef, innerProps, children: rawChildren } = props;
 
   const items = useMemo(() => {
     const arr = Children.toArray(rawChildren);
@@ -233,10 +227,20 @@ export function VirtualMenuList(props: MenuListProps<unknown, boolean>) {
     listRef.current?.resetAfterIndex(index);
   };
 
-  const { classNamePrefix, isMulti } = selectProps ?? ({} as any);
-  const className = classNamePrefix
-    ? `${classNamePrefix}__menu-list${isMulti ? ` ${classNamePrefix}__menu-list--is-multi` : ''}`
-    : undefined;
+  // The default MenuList gets its class from `props.classNames.menuList`
+  // via react-select's own `getStyleProps`/`cx` machinery (see
+  // node_modules/react-select's Select component's `getClassNames`). This
+  // component replaces MenuList outright for virtualized menus, so it has
+  // to call that same `classNames` config by hand — falling back to
+  // `classNamePrefix`-built BEM classes (react-select's pre-`unstyled`
+  // convention) would silently drop every Tailwind class the menu needs
+  // (padding, overflow, max-height) since nothing here still sets
+  // `classNamePrefix`.
+  const { getClassNames, className: menuListClassNameProp } = props as any;
+  const className =
+    [getClassNames?.('menuList', props), menuListClassNameProp]
+      .filter(Boolean)
+      .join(' ') || undefined;
 
   // Re-introduce the menuList paddings that react-select would have applied —
   // VariableSizeList doesn't natively support padding so we inflate the inner

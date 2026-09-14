@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import BaseSelect from 'react-select';
-
-import { translate } from '@/i18n';
+import { translate } from 'waldur-i18n-runtime';
 
 import { CustomSelectProps } from './types';
 import { useSelect } from './useSelect';

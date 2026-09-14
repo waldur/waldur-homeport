@@ -177,3 +177,29 @@ export {
   ScrollAreaViewport,
   ScrollAreaCorner,
 } from './ScrollArea';
+
+export { Tag } from './Tag';
+export { RemoveFilterBadgeButton } from './RemoveFilterBadgeButton';
+
+export {
+  AsyncCreatableSelect,
+  AsyncSelect,
+  CreatableSelect,
+  FilterSelectClearIndicator,
+  FilterSelectControl,
+  MultiSelectLimitedValueContainer,
+  MultiSelectOption,
+  MultiSelectValue,
+  Select,
+  SelectDropdownIndicator,
+  useAsyncSelect,
+  useSelect,
+  WindowedSelect,
+} from './select';
+export type {
+  AsyncSelectLoader,
+  CustomAsyncCreatableSelectProps,
+  CustomAsyncSelectProps,
+  CustomCreatableSelectProps,
+  CustomSelectProps,
+} from './select';

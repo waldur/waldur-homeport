@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import CreatableSelectBase from 'react-select/creatable';
-
-import { translate } from '@/i18n';
+import { translate } from 'waldur-i18n-runtime';
 
 import { CustomCreatableSelectProps } from './types';
 import { useSelect } from './useSelect';

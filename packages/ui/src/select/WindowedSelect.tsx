@@ -1,8 +1,8 @@
-import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import BaseSelect from 'react-select';
 
 import { composeComponents } from './SelectHelper';
+import { getSelectTailwindClassNames } from './tailwindStyles';
 import { CustomSelectProps } from './types';
 import { VirtualMenuList } from './VirtualMenuList';
 
@@ -47,16 +47,29 @@ export const WindowedSelect: FC<WindowedSelectProps> = ({
     ? { ...composedComponents, MenuList: VirtualMenuList }
     : composedComponents;
 
+  const classNamesConfig = useMemo(
+    () =>
+      getSelectTailwindClassNames({
+        size: props.size,
+        variant: props.variant,
+        hasError: Boolean(props.meta?.touched && props.meta?.error),
+      }),
+    [props.size, props.variant, props.meta?.touched, props.meta?.error],
+  );
+
   return (
     <BaseSelect
       menuPortalTarget={document.body}
       styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
       menuPosition="fixed"
       menuPlacement="bottom"
+      // Matches tailwindStyles.ts's `menuList` cap (`max-h-[260px]`) — see
+      // the same override/comment in useSelect.ts's `defaultPortalingProps`.
+      maxMenuHeight={260}
       {...(props as any)}
       components={finalComponents}
-      className={classNames('metronic-select-container', props.className)}
-      classNamePrefix="metronic-select"
+      unstyled={true}
+      classNames={classNamesConfig}
     />
   );
 };
