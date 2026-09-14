@@ -2209,7 +2209,7 @@ export const SettingsDescription = [
       },
       {
         key: 'MATRIX_LIVEKIT_KEY',
-        description: translate('LiveKit API key for the Element Call SFU (Calls observability tab).'),
+        description: translate('LiveKit API key for the call SFU (Calls observability tab).'),
         default: '',
         type: 'string',
       },
