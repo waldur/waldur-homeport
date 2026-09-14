@@ -141,4 +141,23 @@ describe('useSidebarLayoutShim', () => {
 
     addEventListenerSpy.mockRestore();
   });
+
+  it('synchronizes data-kt-aside-minimize attribute on document.body', () => {
+    mockSidebarState = 'collapsed';
+    const { rerender } = renderHook(() => useSidebarLayoutShim());
+    expect(document.body.getAttribute('data-kt-aside-minimize')).toBe('on');
+
+    mockSidebarState = 'expanded';
+    rerender();
+    expect(document.body.getAttribute('data-kt-aside-minimize')).toBeNull();
+  });
+
+  it('does not crash or call setLayout when layout.config.aside is false or non-object', () => {
+    // @ts-expect-error simulating aside: false when user is unauthenticated
+    mockLayoutConfig = { aside: false };
+    mockSidebarState = 'collapsed';
+
+    expect(() => renderHook(() => useSidebarLayoutShim())).not.toThrow();
+    expect(setLayout).not.toHaveBeenCalled();
+  });
 });

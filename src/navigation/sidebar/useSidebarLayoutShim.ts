@@ -36,12 +36,29 @@ export function useSidebarLayoutShim() {
 
   useEffect(() => {
     const minimized = state === 'collapsed';
+    if (
+      typeof layout.config.aside !== 'object' ||
+      layout.config.aside === null
+    ) {
+      return;
+    }
     if (layout.config.aside.minimized === minimized) return;
     layout.setLayout({ aside: { ...layout.config.aside, minimized } });
     // layout.config/layout.setLayout are a fresh object/closure every
     // render (LayoutProvider holds no memoization) — depending on `state`
     // alone, with the redundant-write guard above, is what keeps this from
     // looping.
+  }, [state, layout.config.aside]);
+
+  // Keep document.body's data-kt-aside-minimize attribute in immediate sync with
+  // the sidebar's collapsed state so that Metronic header/toolbar content-offset CSS
+  // responds synchronously and doesn't wait for layout.setLayout render cycles.
+  useEffect(() => {
+    if (state === 'collapsed') {
+      document.body.setAttribute('data-kt-aside-minimize', 'on');
+    } else {
+      document.body.removeAttribute('data-kt-aside-minimize');
+    }
   }, [state]);
 
   // Auto-minimize on medium desktop widths (768–1399px), ported from the
