@@ -119,8 +119,10 @@ export const useLiveKitToken = () => {
         const deviceId = getOrCreateDeviceId();
         const userId = client.getUserId() || '';
 
-        // Exchange for LiveKit JWT (SFURequest format)
-        const res = await fetch(`${serviceUrl}/sfu/get`, {
+        // Exchange for LiveKit JWT. The SFURequest shape (room_id/slot_id/member)
+        // is only served on /get_token; /sfu/get is the legacy endpoint and
+        // rejects it from lk-jwt 0.6.0 on.
+        const res = await fetch(`${serviceUrl}/get_token`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
