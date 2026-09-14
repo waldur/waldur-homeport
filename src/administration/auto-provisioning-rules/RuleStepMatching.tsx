@@ -32,9 +32,9 @@ export const RuleStepMatching: FC<WizardFormStepProps> = (props) => (
     <CommaSeparatedListGroup
       label={translate('Email patterns')}
       name="user_email_patterns"
-      placeholder={translate('e.g. .*@example.com')}
+      placeholder={translate('e.g. .*@example\\.com$')}
       description={translate(
-        'Enter space separated regex pattern to match user email',
+        'Space-separated regular expressions matched against the email address. End a pattern with $ so that lookalike domains such as example.com.attacker.net do not match.',
       )}
       separator="space"
       validate={validateEmailPatterns}

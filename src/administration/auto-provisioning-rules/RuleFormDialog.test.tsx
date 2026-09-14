@@ -74,6 +74,11 @@ describe('RuleFormDialog', () => {
 
     await next(user);
     await fillGrantsStep(user);
+    // Braces are userEvent key descriptors, so the template is typed escaped.
+    await user.type(
+      screen.getByLabelText(/Project name template/i),
+      '{{full_name} workspace',
+    );
     await next(user);
 
     await user.click(screen.getByRole('button', { name: /Confirm/i }));
@@ -83,6 +88,7 @@ describe('RuleFormDialog', () => {
         body: expect.objectContaining({
           name: 'Default users',
           project_role_name: 'admin',
+          project_name_template: '{full_name} workspace',
           user_affiliations: ['student', 'faculty'],
           user_email_patterns: ['.*@example.com', '.*@example.org'],
         }),
@@ -123,6 +129,8 @@ describe('RuleFormDialog', () => {
         customer: 'https://example.com/api/customers/1/',
         customer_name: 'Org',
         project_role_display_name: 'admin',
+        create_project: true,
+        project_name_template: '{username}_ws',
         use_user_organization_as_customer_name: false,
         user_affiliations: ['student'],
         user_email_patterns: ['.*@example.com'],
@@ -140,6 +148,7 @@ describe('RuleFormDialog', () => {
       expect(autoprovisioningRulesUpdate).toHaveBeenCalledWith({
         path: { uuid: 'rule-uuid' },
         body: expect.objectContaining({
+          project_name_template: '{username}_ws',
           user_affiliations: ['student'],
           user_email_patterns: ['.*@example.com'],
         }),

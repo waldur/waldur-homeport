@@ -1,6 +1,48 @@
 import { describe, expect, it } from 'vitest';
 
-import { claimsToRows, rowsToClaims, validateUserClaims } from './utils';
+import {
+  claimsToRows,
+  rowsToClaims,
+  suggestRegexForWildcard,
+  validateEmailPatterns,
+  validateUserClaims,
+} from './utils';
+
+describe('validateEmailPatterns', () => {
+  it('suggests an anchored regex for a wildcard pattern', () => {
+    const error = validateEmailPatterns(['*@example.org']);
+    expect(error).toContain('not wildcards');
+    expect(error).toContain('.*@example\\.org$');
+  });
+
+  it('gives the plain message for an invalid regex without a wildcard', () => {
+    expect(validateEmailPatterns(['(unclosed@example.org'])).toBe(
+      'Pattern is not a valid regex.',
+    );
+  });
+
+  it('accepts the suggested regex', () => {
+    expect(
+      validateEmailPatterns([suggestRegexForWildcard('*@example.org')]),
+    ).toBeUndefined();
+  });
+});
+
+describe('suggestRegexForWildcard', () => {
+  it('rejects lookalike domains once anchored', () => {
+    const regex = new RegExp(suggestRegexForWildcard('*@example.org'));
+    expect(regex.test('alice@example.org')).toBe(true);
+    expect(regex.test('alice@example.org.attacker.net')).toBe(false);
+  });
+
+  it('leaves a trailing wildcard unanchored', () => {
+    expect(suggestRegexForWildcard('alice@*')).toBe('alice@.*');
+  });
+
+  it('has no suggestion for a pattern without a wildcard', () => {
+    expect(suggestRegexForWildcard('.*@example\\.org$')).toBeUndefined();
+  });
+});
 
 describe('claims map <-> rows', () => {
   it('round-trips a claims map through rows', () => {

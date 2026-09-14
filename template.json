@@ -12370,6 +12370,11 @@
       "feature_area": "actions"
     }
   },
+  "Creates project": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Creates resource": {
     "context": {
       "primary_ui_type": "title",
@@ -17729,11 +17734,6 @@
   "Enter scope name": {
     "context": {
       "feature_area": "affiliations"
-    }
-  },
-  "Enter space separated regex pattern to match user email": {
-    "context": {
-      "feature_area": "auto-provisioning-rules"
     }
   },
   "Enter space-separated regex patterns. These are applied in addition to any existing restrictions.": {
@@ -25136,6 +25136,11 @@
   "Leave empty to keep the current password unchanged.": {
     "context": {
       "feature_area": "create-user-steps"
+    }
+  },
+  "Leave empty to name the project after the username.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Leave empty to sync all resources. Select a resource to sync only its billing lines.": {
@@ -34961,6 +34966,19 @@
       "feature_area": "project-templates"
     }
   },
+  "Patterns are regular expressions, not wildcards: use {suggestion} instead of {pattern}.": {
+    "context": {
+      "variables": {
+        "suggestion": {
+          "type": "unknown"
+        },
+        "pattern": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Pause": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -37725,6 +37743,26 @@
       "feature_area": "affiliated-organizations"
     }
   },
+  "Project \"{name}\" was provisioned before and has been deleted. It will not be recreated.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Project \"{name}\" will be created at the next login.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Project (GB)": {
     "context": {
       "feature_area": "reports"
@@ -38201,7 +38239,7 @@
   },
   "Project name template": {
     "context": {
-      "feature_area": "invitations"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Project name: {name}": {
@@ -48476,6 +48514,11 @@
   "Space-separated list of scopes to request during authentication. Suggested scopes have been pre-filled.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Space-separated regular expressions matched against the email address. End a pattern with $ so that lookalike domains such as example.com.attacker.net do not match.": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Spack catalog version to load (auto-detect if empty)": {},
@@ -61003,6 +61046,16 @@
       "feature_area": "restrictions"
     }
   },
+  "Uses the existing project \"{name}\".": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
   "Using global defaults. Saving any field will create a custom configuration for this call.": {
     "context": {
       "feature_area": "applicant-visibility"
@@ -64291,6 +64344,11 @@
   },
   "e.g. .*@example.com": {
     "context": {
+      "feature_area": "actions"
+    }
+  },
+  "e.g. .*@example\\.com$": {
+    "context": {
       "feature_area": "auto-provisioning-rules"
     }
   },
@@ -64472,6 +64530,16 @@
         }
       },
       "feature_area": "actions"
+    }
+  },
+  "e.g. {full_name} workspace": {
+    "context": {
+      "variables": {
+        "full_name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "e.g., /etc/waldur/agent.yaml": {

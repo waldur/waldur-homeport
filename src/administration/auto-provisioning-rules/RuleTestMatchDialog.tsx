@@ -77,6 +77,28 @@ const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
   );
 };
 
+// Existing accounts get the project at their next login, new ones at sign-up.
+const projectActionLabel = (
+  action: RuleTestMatchResponse['project_action'],
+  name: string,
+) => {
+  switch (action) {
+    case 'create':
+      return translate('Project "{name}" will be created at the next login.', {
+        name,
+      });
+    case 'existing':
+      return translate('Uses the existing project "{name}".', { name });
+    case 'not_recreated':
+      return translate(
+        'Project "{name}" was provisioned before and has been deleted. It will not be recreated.',
+        { name },
+      );
+    default:
+      return translate('Project name preview: {name}', { name });
+  }
+};
+
 const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
   const verdictClass = result.would_provision ? 'text-success' : 'text-danger';
   return (
@@ -92,11 +114,12 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
             ? translate('Would provision')
             : translate('Blocked')}
         </span>
-        {result.would_provision && result.resolved_project_name && (
+        {result.resolved_project_name && (
           <span className="text-muted">
-            {translate('Project name preview: {name}', {
-              name: result.resolved_project_name,
-            })}
+            {projectActionLabel(
+              result.project_action,
+              result.resolved_project_name,
+            )}
           </span>
         )}
       </div>

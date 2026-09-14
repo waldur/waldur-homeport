@@ -4,7 +4,7 @@ import { required } from '@/core/validators';
 import { BooleanGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 
-const NameTemplateTooltip = () => (
+export const NameTemplateTooltip = () => (
   <div className="text-start py-1">
     <p className="fw-bold mb-2">{translate('Available variables')}</p>
     <ul className="mb-0 list-unstyled">

@@ -2,8 +2,14 @@ import { FC, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 
 import { ENV } from '@/core/config';
-import { AsyncSelectGroup, BooleanGroup, SelectGroup } from '@/form';
+import {
+  AsyncSelectGroup,
+  BooleanGroup,
+  SelectGroup,
+  StringGroup,
+} from '@/form';
 import { translate } from '@/i18n';
+import { NameTemplateTooltip } from '@/invitations/actions/AutoCreateProjectGroup';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { Role } from '@/permissions/types';
 import {
@@ -118,15 +124,28 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
         className="w-100"
       />
       {values.create_project !== false && (
-        <SelectGroup
-          name="project_role"
-          options={projectRoles}
-          getOptionLabel={(role: Role) => formatRoleLabel(role, ambiguousRoles)}
-          getOptionValue={({ name }) => name}
-          simpleValue
-          isClearable
-          label={translate('Project role')}
-        />
+        <>
+          <SelectGroup
+            name="project_role"
+            options={projectRoles}
+            getOptionLabel={(role: Role) =>
+              formatRoleLabel(role, ambiguousRoles)
+            }
+            getOptionValue={({ name }) => name}
+            simpleValue
+            isClearable
+            label={translate('Project role')}
+          />
+          <StringGroup
+            name="project_name_template"
+            label={translate('Project name template')}
+            placeholder={translate('e.g. {full_name} workspace')}
+            description={translate(
+              'Leave empty to name the project after the username.',
+            )}
+            help={<NameTemplateTooltip />}
+          />
+        </>
       )}
     </WizardForm>
   );
