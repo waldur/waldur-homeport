@@ -309,6 +309,11 @@ export const OrganizationRolesList: FC = () => {
                   {translate('Concealed')}
                 </Badge>
               )}
+              {!row.is_active && (
+                <Badge variant="danger" pill outline className="ms-1">
+                  {translate('Inactive')}
+                </Badge>
+              )}
             </>
           ),
         },

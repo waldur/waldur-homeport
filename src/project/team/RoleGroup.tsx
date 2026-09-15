@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
+import { useField } from 'react-final-form';
 import { OptionProps, components } from 'react-select';
 import { User, rolesList } from 'waldur-js-client';
 
@@ -77,7 +78,11 @@ export const RoleGroup: FunctionComponent<{
   // fetched from the backend. Without a customer we fall back to the global
   // ENV.roles list.
   const customerId = scope?.customerId;
-  const { data: scopedRoles } = useQuery({
+  const {
+    data: scopedRoles,
+    isSuccess,
+    isError,
+  } = useQuery({
     queryKey: ['available-roles-for-customer', customerId],
     queryFn: () =>
       getAllPages((page) =>
@@ -86,6 +91,11 @@ export const RoleGroup: FunctionComponent<{
     enabled: Boolean(customerId),
     staleTime: 5 * 60 * 1000,
   });
+  // The initial value, not the live one: a member's deactivated, concealed or
+  // uncached role is missing from the offered roles, and it has to stay
+  // pickable after the user switches away, or saving revokes the grant.
+  const heldRole = useField<Role>('role', { subscription: { initial: true } })
+    .meta.initial;
 
   const sourceRoles = customerId ? (scopedRoles ?? []) : ENV.roles;
   // Grantable-roles filter first (drop roles the backend would 403 on), then
@@ -95,14 +105,43 @@ export const RoleGroup: FunctionComponent<{
   const grantable = user
     ? filterGrantableRoles(typed, user, scope ?? {})
     : typed;
-  const options = roleNames
+  const offered = roleNames
     ? grantable.filter((role) => roleNames.includes(role.name))
     : grantable;
+  const options =
+    heldRole && !offered.some((role) => role.name === heldRole.name)
+      ? [...offered, heldRole]
+      : offered;
   const ambiguousDescriptions = getAmbiguousRoleDescriptions(options);
+  // Counted before the grant and name filters: a user who may not grant the
+  // organization's roles would otherwise be told to reveal or reactivate one.
+  // Waiting for the fetch keeps the message from flashing while roles load.
+  const hasNoOtherRole =
+    Boolean(customerId) &&
+    isSuccess &&
+    typed.every((role) => role.name === heldRole?.name);
+  // The held role stays selected, so "no roles" under it would read as if the
+  // member could not be edited at all.
+  const emptyMessage = heldRole
+    ? translate(
+        'No other roles are available in this organization. Ask staff to reveal a concealed role or reactivate one.',
+      )
+    : translate(
+        'No roles are available in this organization. Ask staff to reveal a concealed role or reactivate one.',
+      );
   return (
     <SelectGroup
       name="role"
       options={options}
+      description={
+        isError ? (
+          <span className="text-danger">
+            {translate('Unable to load roles.')}
+          </span>
+        ) : hasNoOtherRole ? (
+          emptyMessage
+        ) : undefined
+      }
       // Normally just the short description; the machine name is appended only
       // when another offered role shares that description (RoleOption renders
       // the same disambiguation inline in the dropdown).

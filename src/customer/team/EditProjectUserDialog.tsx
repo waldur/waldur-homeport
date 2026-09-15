@@ -15,7 +15,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { type Role } from '@/permissions/types';
-import { getProjectRoles } from '@/permissions/utils';
+import { getHeldRole } from '@/permissions/utils';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import {
   getOnlyOneProjectManagerTooltip,
@@ -158,17 +158,7 @@ export const EditProjectUserDialog: FC<EditProjectUserDialogProps> = ({
 
   const initialValues = useMemo(
     () => ({
-      // Preselect the member's current role by name; it may be an organization
-      // clone absent from the global list, so fall back to a minimal object.
-      role:
-        getProjectRoles().find(
-          ({ name }) => name === resolve.project.role_name,
-        ) ??
-        ({
-          name: resolve.project.role_name,
-          description: resolve.project.role_name,
-          content_type: 'project',
-        } as Role),
+      role: getHeldRole(resolve.project.role_name, 'project'),
       expiration_time: resolve.project.expiration_time,
     }),
     [resolve.project],

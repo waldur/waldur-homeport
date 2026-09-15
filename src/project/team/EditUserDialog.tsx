@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   Project,
@@ -14,7 +14,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { GenericPermission, Role } from '@/permissions/types';
-import { getProjectRoles } from '@/permissions/utils';
+import { getHeldRole } from '@/permissions/utils';
 import { useProject } from '@/workspace/hooks';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
@@ -144,21 +144,17 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
 
   const project = resolve.project || currentProject;
 
-  const initialValues = {
-    // Preselect the member's current role by name. It may be an organization
-    // clone that is not in the global list, so fall back to a minimal role
-    // object carrying the name (the picker matches options by name).
-    role:
-      getProjectRoles().find(
-        ({ name }) => name === resolve.permission.role_name,
-      ) ??
-      ({
-        name: resolve.permission.role_name,
-        description: resolve.permission.role_name,
-        content_type: 'project',
-      } as Role),
-    expiration_time: resolve.permission.expiration_time,
-  };
+  const initialValues = useMemo(
+    () => ({
+      role: getHeldRole(
+        resolve.permission.role_name,
+        'project',
+        resolve.permission.role_description,
+      ),
+      expiration_time: resolve.permission.expiration_time,
+    }),
+    [resolve.permission],
+  );
 
   const saveUserMutation = useManagedMutation<any, any, EditUserDialogFormData>(
     {
