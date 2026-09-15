@@ -3683,6 +3683,11 @@
       "feature_area": "api-keys"
     }
   },
+  "An organization cannot be its own affiliate.": {
+    "context": {
+      "feature_area": "affiliates"
+    }
+  },
   "An organization owner enables digest emails and chooses the frequency (weekly, bi-weekly, or monthly) and the delivery day.": {
     "context": {
       "feature_area": "project-digest"
@@ -18487,6 +18492,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "celery"
+    }
+  },
+  "Existing affiliate links could not be loaded, so organizations that already have an active affiliate are not marked. Saving still checks this.": {
+    "context": {
+      "feature_area": "affiliates"
     }
   },
   "Existing offering with the same name will be overwritten.": {
@@ -67700,6 +67710,29 @@
       "feature_area": "reports"
     }
   },
+  "{name} (already referred by {affiliate})": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "affiliate": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "affiliates"
+    }
+  },
+  "{name} (the referred organization)": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "affiliates"
+    }
+  },
   "{name} has been copied": {
     "context": {
       "primary_ui_type": "success_message",
@@ -67709,6 +67742,19 @@
         }
       },
       "feature_area": "core"
+    }
+  },
+  "{name} is already referred by {affiliate}. Deactivate that link first, or create this one inactive.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "affiliate": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "affiliates"
     }
   },
   "{name} joined the team": {

@@ -1,12 +1,15 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
-import { FC, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   CustomerAffiliate,
   customerAffiliatesCreate,
+  customerAffiliatesList,
   customerAffiliatesPartialUpdate,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@/core/api';
 import { required } from '@/core/validators';
 import {
   AsyncSelectGroup,
@@ -22,43 +25,19 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import {
+  AffiliateLinkFormData,
+  getActiveAffiliateConflict,
+  OrganizationOption,
+  validateAffiliateLinkForm,
+} from './utils';
+
 interface OwnProps {
   resolve: {
     row?: CustomerAffiliate;
     refetch(): void;
   };
 }
-
-interface OrganizationOption {
-  url: string;
-  name: string;
-  uuid: string;
-}
-
-interface AffiliateLinkFormData {
-  // On create these hold the selected organization option object (the raw
-  // AsyncSelect stores the whole option); the backend expects the org URL.
-  customer?: OrganizationOption;
-  affiliate?: OrganizationOption;
-  customer_name?: string;
-  affiliate_name?: string;
-  fee_percent?: number | string;
-  is_active?: boolean;
-  start_date?: string | null;
-  end_date?: string | null;
-}
-
-const validateForm = (values: AffiliateLinkFormData) => {
-  const errors: Record<string, string> = {};
-  if (
-    values.start_date &&
-    values.end_date &&
-    values.end_date <= values.start_date
-  ) {
-    errors.end_date = translate('End date must be after the start date.');
-  }
-  return errors;
-};
 
 export const AffiliateLinkFormDialog: FC<OwnProps> = ({
   resolve: { row, refetch },
@@ -68,6 +47,45 @@ export const AffiliateLinkFormDialog: FC<OwnProps> = ({
   const loadOrganizations = useMemo(
     () => organizationAutocomplete({ field: ['name', 'uuid', 'url'] }),
     [],
+  );
+
+  // An organization has at most one active affiliate, so organizations that
+  // already have one are greyed out in the referred-organization picker.
+  // Maps referred organization UUID to its current affiliate's name.
+  const { data: activeAffiliates, isError: activeAffiliatesFailed } = useQuery({
+    queryKey: ['affiliate-link-form', 'active-affiliates'],
+    queryFn: async () => {
+      const links = await getAllPages((page) =>
+        customerAffiliatesList({
+          query: { page, page_size: 200, is_active: true },
+        }),
+      );
+      return new Map(
+        links.map((link) => [link.customer_uuid, link.affiliate_name]),
+      );
+    },
+    enabled: !isEdit,
+    // Links change from the list behind this dialog; never trust a cached
+    // copy from the previous opening.
+    refetchOnMount: 'always',
+  });
+
+  const getReferredOrganizationLabel = (option: OrganizationOption) => {
+    const affiliateName = activeAffiliates?.get(option.uuid);
+    return affiliateName
+      ? translate('{name} (already referred by {affiliate})', {
+          name: option.name,
+          affiliate: affiliateName,
+        })
+      : option.name;
+  };
+
+  // Re-created when the active links arrive, so final-form re-validates a
+  // referred organization picked before they loaded.
+  const validate = useCallback(
+    (values: AffiliateLinkFormData) =>
+      validateAffiliateLinkForm(values, activeAffiliates),
+    [activeAffiliates],
   );
 
   const initialValues = useMemo<AffiliateLinkFormData>(
@@ -126,8 +144,8 @@ export const AffiliateLinkFormDialog: FC<OwnProps> = ({
     <Form<AffiliateLinkFormData>
       onSubmit={(values) => submitMutation.mutateAsync(values)}
       initialValues={initialValues}
-      validate={validateForm}
-      render={({ handleSubmit, submitting, invalid }) => (
+      validate={validate}
+      render={({ handleSubmit, submitting, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -178,7 +196,23 @@ export const AffiliateLinkFormDialog: FC<OwnProps> = ({
                     validate={required}
                     loadOptions={loadOrganizations}
                     getOptionValue={(option) => option.url}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={getReferredOrganizationLabel}
+                    isOptionDisabled={(option) =>
+                      Boolean(
+                        getActiveAffiliateConflict(
+                          option.uuid,
+                          values.is_active,
+                          activeAffiliates,
+                        ),
+                      )
+                    }
+                    description={
+                      activeAffiliatesFailed
+                        ? translate(
+                            'Existing affiliate links could not be loaded, so organizations that already have an active affiliate are not marked. Saving still checks this.',
+                          )
+                        : undefined
+                    }
                     noOptionsMessage={() => translate('No organizations')}
                     isDisabled={submitting}
                   />
@@ -189,7 +223,16 @@ export const AffiliateLinkFormDialog: FC<OwnProps> = ({
                     validate={required}
                     loadOptions={loadOrganizations}
                     getOptionValue={(option) => option.url}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={(option) =>
+                      option.uuid === values.customer?.uuid
+                        ? translate('{name} (the referred organization)', {
+                            name: option.name,
+                          })
+                        : option.name
+                    }
+                    isOptionDisabled={(option) =>
+                      option.uuid === values.customer?.uuid
+                    }
                     noOptionsMessage={() => translate('No organizations')}
                     isDisabled={submitting}
                   />
