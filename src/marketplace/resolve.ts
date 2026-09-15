@@ -34,9 +34,12 @@ const customerFromProvider = (provider: ServiceProvider): Customer =>
   }) as Customer;
 
 /**
- * "Service provider manager" (CUSTOMER.MANAGER) is granted on the ServiceProvider
- * object, not on its customer, so GET /api/customers/<uuid>/ answers 404 for the
- * people who run the provider even though the provider APIs honour their role.
+ * A service provider role is granted on the ServiceProvider object, not on its
+ * customer. Since waldur/waldur-mastermind#396, GET /api/customers/<uuid>/
+ * answers such a user with the organization's identity fields and
+ * `is_service_provider_manager_only`, so the fallback below no longer fires for
+ * them. It stays as a safety net for Mastermind versions that predate that
+ * change and still answer 404.
  */
 export const fetchProviderCustomer = (transition: Transition) =>
   fetchCustomer(transition, async () => {

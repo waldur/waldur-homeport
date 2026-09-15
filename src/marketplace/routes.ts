@@ -9,7 +9,11 @@ import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
 import { PermissionEnum } from '@/permissions/enums';
-import { isOwnerOrStaff, isStaff } from '@/workspace/selectors';
+import {
+  isOwnerOrStaff,
+  isServiceManagerOnly,
+  isStaff,
+} from '@/workspace/selectors';
 
 import { fetchProvider, fetchProviderCustomer } from './resolve';
 import { getMarketplaceTitle } from './title';
@@ -297,6 +301,11 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Audit logs'),
       priority: 160,
+      // These are the organization's events, which Mastermind does not show a
+      // service provider manager (waldur/waldur-mastermind#396). This only hides
+      // the tab: `data.permissions` is read by useTabs, not by the router, so the
+      // URL still opens the page and the backend refuses its request.
+      permissions: [(state) => !isServiceManagerOnly(state)],
     },
   },
 

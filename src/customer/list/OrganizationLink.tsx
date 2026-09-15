@@ -19,9 +19,18 @@ const PERMISSION_MAP = {
   project: 'marketplace-projects',
   call_organizer: 'call-management.dashboard',
   call: 'call-management.dashboard',
+  // A service provider manager may only read the organization's identity
+  // (waldur/waldur-mastermind#396); their pages are the provider workspace.
+  service_provider: 'marketplace-provider-dashboard',
 };
 
-const PERMISSION_PRIORITY = ['customer', 'project', 'call_organizer', 'call'];
+const PERMISSION_PRIORITY = [
+  'customer',
+  'project',
+  'call_organizer',
+  'call',
+  'service_provider',
+];
 
 const useOrganizationLinkState = (uuid: string) => {
   const user = useUser();

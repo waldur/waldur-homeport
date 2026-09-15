@@ -21,6 +21,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
   checkIsServiceManager,
+  checkIsServiceManagerOnly,
   checkIsOwnerOrStaff,
 } from '@/workspace/selectors';
 
@@ -46,6 +47,8 @@ const PageHero = ({ customer }) => {
 
   const user = useUser();
   const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
+  // The organization's own pages have nothing to show them; see the selector.
+  const isServiceManagerOnly = checkIsServiceManagerOnly(customer);
 
   const showCallManagement =
     customer?.call_managing_organization_uuid &&
@@ -114,11 +117,13 @@ const PageHero = ({ customer }) => {
           className="nav-line-tabs mb-4"
           onSelect={goTo}
         >
-          <Tab
-            eventKey="organization.dashboard"
-            title={translate('Customer')}
-            data-testid="organization-tab-customer"
-          />
+          {!isServiceManagerOnly && (
+            <Tab
+              eventKey="organization.dashboard"
+              title={translate('Customer')}
+              data-testid="organization-tab-customer"
+            />
+          )}
 
           {showCallManagement && (
             <Tab

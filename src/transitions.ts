@@ -10,12 +10,14 @@ import {
   RedirectStorage,
 } from './core/StorageManager';
 import { cleanObject } from './core/utils';
+import { getCustomer } from './customer/utils';
 import { DrawerService } from './drawer/actions';
 import { setPrevParams, setPrevState } from './error/utils';
 import { isFeatureVisible } from './features/connect';
 import { MarketplaceFeatures } from './FeaturesEnums';
 import { translate } from './i18n';
 import { ModalService } from './modal/actions';
+import { isDescendantOf } from './navigation/useTabs';
 import { router } from './router';
 import { NotifyService } from './store/notify';
 import {
@@ -23,6 +25,12 @@ import {
   isResumableState,
 } from './user/blockedNavigation';
 import { UsersService } from './user/UsersService';
+import {
+  checkHasServiceProviderRole,
+  checkIsServiceManagerOnly,
+  checkIsStaffOrSupport,
+  getCustomer as getWorkspaceCustomer,
+} from './workspace/selectors';
 
 export function attachTransitions() {
   router.transitionService.onSuccess({}, function () {
@@ -118,6 +126,48 @@ export function attachTransitions() {
           return false;
         }
         return transition.router.stateService.target('errorPage.serverError');
+      }
+    },
+  );
+
+  // A service provider manager with no other role in the organization may read
+  // only its identity (waldur/waldur-mastermind#396). Whatever led them into
+  // the organization — the Organizations list, header search, a breadcrumb or a
+  // bookmark — they land in the provider workspace instead of an empty page.
+  router.transitionService.onBefore(
+    { to: (state) => isDescendantOf('organization', state.self) },
+    async (transition) => {
+      if (!AuthService.isAuthenticated()) {
+        return;
+      }
+      const uuid = transition.params().uuid;
+      const user = await UsersService.getCurrentUser().catch(() => undefined);
+      // Only a service provider role can lead here, so nobody else pays for the
+      // request below.
+      if (
+        !uuid ||
+        !user ||
+        checkIsStaffOrSupport(user) ||
+        !checkHasServiceProviderRole({ uuid }, user)
+      ) {
+        return;
+      }
+      // Mastermind decides "manager only". Moving within an organization that is
+      // already loaded reads the flag from the store, so only entering one costs
+      // a request; a failed lookup leaves the route to its own resolve, which
+      // shows the right error page.
+      const loaded = getWorkspaceCustomer(store.getState());
+      const customer =
+        loaded?.uuid === uuid
+          ? loaded
+          : await getCustomer(uuid, ['is_service_provider_manager_only']).catch(
+              () => undefined,
+            );
+      if (checkIsServiceManagerOnly(customer)) {
+        return transition.router.stateService.target(
+          'marketplace-provider-dashboard',
+          { uuid },
+        );
       }
     },
   );
