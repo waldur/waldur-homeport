@@ -2,9 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { screen, userEvent, waitFor, within } from 'storybook/test';
 
 import { FilterContextProvider } from './FilterContextProvider';
-import { tableStoryFilters } from './storyFixtures';
+import { tableStoryFilters, tableStorySavedFilters } from './storyFixtures';
 import { withSeededTableStore } from './storyProviders';
-import { TableFiltersGroup } from './TableFilterService';
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { FilterItem } from './types';
 
@@ -41,21 +40,6 @@ const TABLE_ID = 'story-filters-menu';
 const FORM_ID = 'story-filters-form';
 
 const noop = () => undefined;
-
-const savedFilterFixtures: TableFiltersGroup[] = [
-  {
-    id: `${TABLE_ID}-${FORM_ID}-1`,
-    title: 'Erred clusters',
-    date: '2024-02-20T10:00:00.000Z',
-    values: { name: '', active: true },
-  },
-  {
-    id: `${TABLE_ID}-${FORM_ID}-2`,
-    title: 'My production view',
-    date: '2024-01-15T10:00:00.000Z',
-    values: { name: 'production' },
-  },
-];
 
 const appliedFilterFixtures: FilterItem[] = [
   { name: 'name', label: 'Name', value: 'production', component: null },
@@ -118,7 +102,7 @@ export const Open: Story = {
  * Redux state a real save would have written. */
 export const WithSavedFilters: Story = {
   decorators: [
-    withSeededTableStore(TABLE_ID, { savedFilters: savedFilterFixtures }),
+    withSeededTableStore(TABLE_ID, { savedFilters: tableStorySavedFilters }),
   ],
   render: () => <FiltersMenuHarness />,
   play: async ({ canvasElement }) => {

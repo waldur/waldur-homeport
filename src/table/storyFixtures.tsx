@@ -1,14 +1,19 @@
+import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
+
 import { AlertItem } from '@/core/AlertItem';
 import { Badge } from '@/core/Badge';
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { ModelCard1 } from '@/core/ModelCard1';
 import { Field } from '@/resource/summary';
 
+import { CompactActionButton } from './CompactActionButton';
 import { ExpandableContainer } from './ExpandableContainer';
-import { BooleanFilter, StringFilter } from './filters';
+import { BooleanFilter, SelectFilter, StringFilter } from './filters';
+import { RemovalActionButton } from './RemovalActionButton';
 import { tableStoryNoopHandlers } from './storyProviders';
 import Table from './Table';
 import { TableSidebarFilterValues } from './TableFilterItem';
+import { TableFiltersGroup } from './TableFilterService';
 import { Column, FilterItem } from './types';
 
 export interface TableStoryRow {
@@ -191,6 +196,70 @@ export const tableStoryFilters = (
 );
 
 /**
+ * A `SelectFilter` example — a fixed-options dropdown (as opposed to
+ * `AsyncSelectFilter`'s API-backed one), matching the shape real code uses
+ * (see `UserAffiliationsFilter.tsx`'s "Role status" filter). Kept separate
+ * from `tableStoryFilters` rather than folded in, so the `TableFiltersMenu`/
+ * `TableFilterContainer` stories built on the smaller set don't pick up a
+ * third field they're not demonstrating.
+ */
+export const tableStoryFiltersWithSelect = (
+  <SelectFilter
+    title="Status"
+    name="status"
+    options={[
+      { label: 'OK', value: 'OK' },
+      { label: 'Erred', value: 'Erred' },
+      { label: 'Creating', value: 'Creating' },
+    ]}
+  />
+);
+
+/**
+ * `multiSelectActions` example, matching `docs/table/row-actions.md`'s own
+ * `BulkDeleteButton` reference implementation almost verbatim: a bare
+ * `RemovalActionButton` as the entire bulk-action component, not nested in
+ * a dropdown. Simplified from the doc's version by dropping
+ * `useManagedMutation`/a confirmation dialog — both pull in the same
+ * modal/mutation machinery this file otherwise avoids (see
+ * Table.stories.tsx's file comment).
+ */
+export const TableStoryBulkDeleteButton = ({
+  rows,
+}: {
+  rows: TableStoryRow[];
+}) => (
+  <RemovalActionButton
+    title={`Delete (${rows.length})`}
+    action={() => undefined}
+  />
+);
+
+/**
+ * The documented alternative to `ActionsDropdown` for a very short action
+ * list — `CompactActionButton`s rendered directly in the row, not grouped
+ * behind a 3-dots menu (`docs/table/row-actions.md`'s "Inline Row Action
+ * Buttons" section). No current production call site actually uses this
+ * for `rowActions` specifically (`AdminCategoriesPage.tsx`'s own
+ * `CompactActionButton` is a toolbar refresh button, not a row action), but
+ * it's a real, documented, working code path, not a hypothetical one.
+ */
+export const TableStoryInlineRowActions = () => (
+  <div className="d-flex gap-2">
+    <CompactActionButton
+      action={() => undefined}
+      title="Edit"
+      iconNode={<PencilSimpleIcon weight="bold" />}
+    />
+    <CompactActionButton
+      action={() => undefined}
+      title="Delete"
+      iconNode={<TrashIcon weight="bold" />}
+    />
+  </div>
+);
+
+/**
  * A pre-applied "Name" filter chip, for the `WithActiveFilters` story.
  * `component` mirrors what `TableFilterItem.tsx`'s own `_setFilter` builds
  * on a real apply (`TableSidebarFilterValues`, the same chip-plus-remove-
@@ -210,6 +279,27 @@ export const tableStoryActiveFilters: FilterItem[] = [
         remove={() => undefined}
       />
     ),
+  },
+];
+
+/**
+ * Two previously-saved filter groups — shared by `TableFiltersMenu.stories.tsx`
+ * and `TableFilterContainer.stories.tsx` (the "menu"/popover and "sidebar"/
+ * mobile-drawer filter surfaces both read the same `savedFilters` Redux
+ * state via `SavedFilterSelect`).
+ */
+export const tableStorySavedFilters: TableFiltersGroup[] = [
+  {
+    id: 'story-saved-filter-1',
+    title: 'Erred clusters',
+    date: '2024-02-20T10:00:00.000Z',
+    values: { name: '', active: true },
+  },
+  {
+    id: 'story-saved-filter-2',
+    title: 'My production view',
+    date: '2024-01-15T10:00:00.000Z',
+    values: { name: 'production' },
   },
 ];
 

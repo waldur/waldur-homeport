@@ -32,7 +32,7 @@ const Control = (props) => (
       {...props}
       className={classNames('flex-grow-1', props.className)}
     >
-      <span className="svg-icon svg-icon-2 svg-icon-gray-700 ms-3">
+      <span className="svg-icon svg-icon-2 svg-icon-gray-700 ms-3 me-2">
         <FunnelIcon weight="bold" />
       </span>
       {props.children}
