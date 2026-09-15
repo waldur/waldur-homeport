@@ -19,22 +19,26 @@ describe('StringFilter', () => {
         <TableFilterContext.Provider
           value={{
             table,
-            filterPosition: 'header',
+            filterPosition: 'menu',
             form: 'MarketplaceSoftwarePackagesFilter',
             setFilter: () => undefined,
+            registerFilterComponent: () => undefined,
+            apply: () => undefined,
           }}
         >
           <StringFilter
             title="Catalog"
             name="catalog_name"
             placeholder="Catalog"
+            instantApply={false}
           />
         </TableFilterContext.Provider>
       </Provider>,
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Catalog' }));
-    await userEvent.type(screen.getByPlaceholderText('Catalog'), 'eessi');
+    const input = await screen.findByPlaceholderText('Catalog');
+    await userEvent.type(input, 'eessi');
 
     const filterItem = getTableState(table)(
       store.getState() as any,

@@ -219,7 +219,6 @@ describe('TableSidebarFilterItem (filterPosition="sidebar")', () => {
           <TableFilterContainer
             table={table}
             formId="SidebarFilterRegressionForm"
-            filterPosition="sidebar"
             setFilter={() => undefined}
             filters={
               <StringFilter

@@ -19,7 +19,6 @@ import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableProvider } from './context';
 import { FilterContextProvider } from './FilterContextProvider';
 import { HiddenActionsMessage } from './HiddenActionsMessage';
-import { TableFilterContainer } from './TableFilterContainer';
 import { TableFilters } from './TableFilters';
 import { TablePagination } from './TablePagination';
 import { TableRefreshButton } from './TableRefreshButton';
@@ -414,16 +413,6 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
           {props.tabs?.length ? (
             <Card.Header className="table-tabs border-bottom align-items-stretch py-0 min-h-auto">
               <TableTabs tabs={props.tabs} />
-            </Card.Header>
-          ) : null}
-
-          {/* Header filters */}
-          {props.filterPosition === 'header' && props.filters ? (
-            <Card.Header className="table-filter border-bottom align-items-stretch">
-              <TableFilterContainer
-                filters={props.filters}
-                formId={props.formId}
-              />
             </Card.Header>
           ) : null}
 

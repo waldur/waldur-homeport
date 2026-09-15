@@ -200,27 +200,31 @@ const SaveFilterItems = ({ table, formId, apply }) => {
             }
             content={
               <>
-                <span
-                  className="menu-link"
-                  aria-hidden="true"
-                  onClick={onSaveFilter}
-                >
-                  <span className="menu-title">{translate('Save as')}</span>
-                  <StarIcon size={20} className="ms-auto" weight="bold" />
-                </span>
-                {selectedSavedFilter ? (
+                <div className="menu-item">
                   <span
                     className="menu-link"
                     aria-hidden="true"
-                    onClick={(e) => onSaveFilter(e, true)}
+                    onClick={onSaveFilter}
                   >
-                    {translate('Update')}
-                    <ArrowsClockwiseIcon
-                      size={20}
-                      className="ms-auto"
-                      weight="bold"
-                    />
+                    <span className="menu-title">{translate('Save as')}</span>
+                    <StarIcon size={20} className="ms-auto" weight="bold" />
                   </span>
+                </div>
+                {selectedSavedFilter ? (
+                  <div className="menu-item">
+                    <span
+                      className="menu-link"
+                      aria-hidden="true"
+                      onClick={(e) => onSaveFilter(e, true)}
+                    >
+                      {translate('Update')}
+                      <ArrowsClockwiseIcon
+                        size={20}
+                        className="ms-auto"
+                        weight="bold"
+                      />
+                    </span>
+                  </div>
                 ) : null}
               </>
             }

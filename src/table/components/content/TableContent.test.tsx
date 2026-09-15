@@ -18,6 +18,12 @@ describe('TableContent', () => {
       });
 
       expect(screen.getByTestId('table-content-loading')).toBeInTheDocument();
+      // Not just the wrapper: TableLoadingSpinnerContainer's own spinner
+      // (LoadingSpinnerSimple, role="status") must actually render inside
+      // it. Previously it silently never did — TableContent.tsx passed
+      // only `loading`, never `sorting`, and the container's condition
+      // required `sorting` to be truthy even for the plain-loading branch.
+      expect(screen.getByRole('status')).toBeInTheDocument();
     });
 
     it('does not show loading spinner when loading but has rows', () => {

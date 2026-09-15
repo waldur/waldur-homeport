@@ -138,3 +138,18 @@ export const ExpandableRowFluid: Story = {
     />
   ),
 };
+
+/** `isRowExpandable` hides the expand caret on rows that don't qualify —
+ * here, the "Erred" row (matching `ResourceProjectsList.tsx`'s
+ * `(row) => !row.is_removed` shape: a boolean condition on the row itself,
+ * not every row expandable by default just because `expandableRow` is
+ * set). */
+export const ConditionallyExpandable: Story = {
+  render: () => (
+    <Table
+      {...tableStoryBaseProps}
+      isRowExpandable={(row) => row.status !== 'Erred'}
+      expandableRow={({ row }) => <TableStoryExpandableRow row={row} />}
+    />
+  ),
+};

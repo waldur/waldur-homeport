@@ -1,4 +1,4 @@
-import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
+import { CaretRightIcon } from '@phosphor-icons/react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
@@ -38,65 +38,6 @@ export interface TableFilterItemProps {
   /** Set to `false` to show "Apply" and "Cancel" buttons */
   instantApply?: boolean;
 }
-
-const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
-  badgeValue = (value) => {
-    if (value) {
-      if (value instanceof Array) {
-        return value.length;
-      } else {
-        return 1;
-      }
-    } else return null;
-  },
-  ...props
-}) => {
-  const { table } = React.useContext(TableFilterContext);
-  const values = useSelector(selectFilterValues(table));
-  const [open, setOpen] = React.useState(false);
-  const toggleClick = React.useCallback(
-    (value, e) => {
-      // prevent filter to toggle when clicking on inner clickable elements
-      const el = e.target as HTMLElement;
-      const isFieldClicked = el.closest('.filter-field');
-
-      if (isFieldClicked) return;
-      setOpen(value);
-    },
-    [setOpen],
-  );
-
-  const value = values?.[props.name];
-
-  return (
-    <button
-      type="button"
-      className={classNames('filter-toggle btn btn-sm fw-bold bg-hover-light', {
-        active: open,
-      })}
-      onClick={(event) => toggleClick(!open, event)}
-    >
-      {props.title}
-      {open && <div className="filter-field">{props.children}</div>}
-      {!['', undefined].includes(value) ? (
-        <div
-          className="filter-value"
-          style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}
-        >
-          {badgeValue(value) ? (
-            <Badge variant="default" pill outline>
-              {badgeValue(value)}
-            </Badge>
-          ) : null}
-        </div>
-      ) : null}
-
-      <span className="svg-icon svg-icon-3 rotate-90 ms-2 lh-base">
-        <CaretDownIcon size={20} weight="bold" />
-      </span>
-    </button>
-  );
-};
 
 export { RemoveFilterBadgeButton };
 
@@ -608,7 +549,15 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   );
 };
 
-/** Please put only one child in each table filter item. */
+/** Please put only one child in each table filter item.
+ *
+ * `filterPosition` is only ever `'menu'` (`TableFiltersMenu`) or
+ * `'sidebar'` (`TableFilterContainer`, the mobile drawer) by the time a
+ * `TableFilterItem` actually renders — those are the only two components
+ * that ever mount `props.filters` as real children. A third `'header'`
+ * branch (`<Table filterPosition="header">`'s always-visible inline row)
+ * used to live here too, but no real caller ever paired `filterPosition=
+ * "header"` with `filters`, so it was unreachable and has been removed. */
 export const TableFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   ellipsis = true,
   ...props
@@ -616,8 +565,6 @@ export const TableFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   const { filterPosition } = React.useContext(TableFilterContext);
   if (filterPosition === 'menu') {
     return <TableMenuFilterItem ellipsis={ellipsis} {...props} />;
-  } else if (filterPosition === 'sidebar') {
-    return <TableSidebarFilterItem ellipsis={ellipsis} {...props} />;
   }
-  return <TableHeaderFilterItem ellipsis={ellipsis} {...props} />;
+  return <TableSidebarFilterItem ellipsis={ellipsis} {...props} />;
 };

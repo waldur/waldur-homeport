@@ -8,6 +8,8 @@ import {
   tableStoryColumns,
   tableStoryRows,
   tableStoryWideColumns,
+  TableStoryBulkDeleteButton,
+  TableStoryInlineRowActions,
   TableStoryRow,
 } from './storyFixtures';
 import { withTableProviders } from './storyProviders';
@@ -69,13 +71,37 @@ export const DisabledRowAction: Story = {
   ),
 };
 
-/** Multi-select enabled, with one row pre-selected. */
+/** Multi-select enabled, with one row pre-selected. No `multiSelectActions`
+ * — a real, if less common, configuration: `enableMultiSelect` alone is
+ * used where selection itself is the point (e.g. a form-field-style
+ * picker), not every real call site pairs it with a bulk-action toolbar
+ * (see `EditEndDateDialog.tsx`/`Step2SelectOfferings.tsx`). See
+ * `MultiSelectWithBulkActions` below for the toolbar itself. */
 export const MultiSelect: Story = {
   render: () => (
     <Table
       {...tableStoryBaseProps}
       enableMultiSelect
       selectedRows={[tableStoryRows[0]]}
+    />
+  ),
+};
+
+/** The bulk-action toolbar `multiSelectActions` renders — only appears once
+ * `selectedRows.length > 0` (`TableToolbar.tsx`), so `MultiSelect` above,
+ * despite its name, never actually shows it. `TableStoryBulkDeleteButton`
+ * mirrors `docs/table/row-actions.md`'s own `BulkDeleteButton` reference
+ * example almost verbatim — a bare `RemovalActionButton`, not nested in a
+ * dropdown (compare `ActionDropdownButton`-wrapped multi-action menus like
+ * `BatchProjectActions.tsx`, a heavier real pattern this doesn't attempt to
+ * cover). */
+export const MultiSelectWithBulkActions: Story = {
+  render: () => (
+    <Table
+      {...tableStoryBaseProps}
+      enableMultiSelect
+      selectedRows={[tableStoryRows[0], tableStoryRows[2]]}
+      multiSelectActions={TableStoryBulkDeleteButton}
     />
   ),
 };
@@ -115,5 +141,14 @@ export const PinnedColumn: Story = {
       columns={tableStoryWideColumns}
       pinnedColumnKeys={['name']}
     />
+  ),
+};
+
+/** The documented alternative to the `ActionsDropdown` 3-dots menu for a
+ * very short action list — `CompactActionButton`s rendered directly in the
+ * row (`docs/table/row-actions.md`'s "Inline Row Action Buttons"). */
+export const InlineRowActions: Story = {
+  render: () => (
+    <Table {...tableStoryBaseProps} rowActions={TableStoryInlineRowActions} />
   ),
 };
