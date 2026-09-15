@@ -9,6 +9,8 @@ const mockGroupInvitationTokenSet = vi.fn();
 const mockRedirectStorageSet = vi.fn();
 const mockTarget = vi.fn();
 const mockGo = vi.fn();
+const mockGetState = vi.fn();
+const mockGetCustomer = vi.fn();
 
 const onBeforeHandlers: Array<{ criteria: any; callback: any }> = [];
 const onStartHandlers: Array<{ criteria: any; callback: any }> = [];
@@ -16,7 +18,11 @@ const onSuccessHandlers: Array<{ criteria: any; callback: any }> = [];
 const onErrorHandlers: Array<{ criteria: any; callback: any }> = [];
 
 vi.mock('@/store/store', () => ({
-  default: { dispatch: vi.fn(), getState: vi.fn() },
+  default: { dispatch: vi.fn(), getState: (...args) => mockGetState(...args) },
+}));
+
+vi.mock('./customer/utils', () => ({
+  getCustomer: (...args) => mockGetCustomer(...args),
 }));
 
 vi.mock('./core/matomo', () => ({
@@ -423,5 +429,154 @@ describe('Transition error fallback', () => {
     errorHook.callback(erred({}, type));
 
     expect(mockGo).not.toHaveBeenCalled();
+  });
+});
+
+describe('Service provider manager-only redirect', () => {
+  let redirectHook: any;
+
+  const providerManager = {
+    is_staff: false,
+    is_support: false,
+    permissions: [
+      {
+        scope_type: 'service_provider',
+        scope_uuid: 'provider',
+        customer_uuid: 'provider_org',
+        role_name: 'CUSTOMER.MANAGER',
+      },
+    ],
+  };
+
+  const enterOrganization = () =>
+    redirectHook.callback(
+      createMockTransition('organization.dashboard', { uuid: 'provider_org' }),
+    );
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+
+    mockIsAuthenticated.mockReturnValue(true);
+    mockGetCurrentUser.mockResolvedValue(providerManager);
+    mockGetState.mockReturnValue({ workspace: {} });
+    mockTarget.mockImplementation((...args) => ({ target: args }));
+
+    attachTransitions();
+
+    // Registered right after the profile validity hook, the second onBefore
+    // with a `to` criteria function.
+    redirectHook = onBeforeHandlers.filter(
+      (h) => typeof h.criteria.to === 'function',
+    )[1];
+    expect(redirectHook).toBeTruthy();
+  });
+
+  it('matches states inside the organization workspace', () => {
+    expect(
+      redirectHook.criteria.to({
+        self: { name: 'organization.dashboard', parent: 'organization' },
+      }),
+    ).toBeTruthy();
+  });
+
+  it('sends a manager-only user to the provider dashboard', async () => {
+    mockGetCustomer.mockResolvedValue({
+      is_service_provider_manager_only: true,
+    });
+
+    const result = await enterOrganization();
+
+    expect(mockGetCustomer).toHaveBeenCalledWith('provider_org', [
+      'is_service_provider_manager_only',
+    ]);
+    expect(mockTarget).toHaveBeenCalledWith('marketplace-provider-dashboard', {
+      uuid: 'provider_org',
+    });
+    expect(result).toBeTruthy();
+  });
+
+  it('lets a user with another role in the organization through', async () => {
+    mockGetCustomer.mockResolvedValue({
+      is_service_provider_manager_only: false,
+    });
+
+    expect(await enterOrganization()).toBeUndefined();
+    expect(mockTarget).not.toHaveBeenCalled();
+  });
+
+  it('reads the flag from the loaded organization without a request', async () => {
+    mockGetState.mockReturnValue({
+      workspace: {
+        customer: {
+          uuid: 'provider_org',
+          is_service_provider_manager_only: false,
+        },
+      },
+    });
+
+    expect(await enterOrganization()).toBeUndefined();
+    expect(mockGetCustomer).not.toHaveBeenCalled();
+  });
+
+  it('asks Mastermind when the loaded organization is a different one', async () => {
+    mockGetState.mockReturnValue({
+      workspace: { customer: { uuid: 'another_org' } },
+    });
+    mockGetCustomer.mockResolvedValue({
+      is_service_provider_manager_only: true,
+    });
+
+    await enterOrganization();
+
+    expect(mockGetCustomer).toHaveBeenCalledTimes(1);
+    expect(mockTarget).toHaveBeenCalledWith('marketplace-provider-dashboard', {
+      uuid: 'provider_org',
+    });
+  });
+
+  it('leaves the route to its own resolve when the lookup fails', async () => {
+    mockGetCustomer.mockRejectedValue({ status: 500 });
+
+    expect(await enterOrganization()).toBeUndefined();
+    expect(mockTarget).not.toHaveBeenCalled();
+  });
+
+  it('makes no request for a user without a service provider role', async () => {
+    mockGetCurrentUser.mockResolvedValue({
+      is_staff: false,
+      is_support: false,
+      permissions: [
+        {
+          scope_type: 'customer',
+          scope_uuid: 'provider_org',
+          customer_uuid: 'provider_org',
+          role_name: 'CUSTOMER.OWNER',
+        },
+      ],
+    });
+
+    expect(await enterOrganization()).toBeUndefined();
+    expect(mockGetCustomer).not.toHaveBeenCalled();
+  });
+
+  it('makes no request for staff', async () => {
+    mockGetCurrentUser.mockResolvedValue({
+      ...providerManager,
+      is_staff: true,
+    });
+
+    expect(await enterOrganization()).toBeUndefined();
+    expect(mockGetCustomer).not.toHaveBeenCalled();
+  });
+
+  it('does nothing for an anonymous visitor', async () => {
+    mockIsAuthenticated.mockReturnValue(false);
+
+    expect(await enterOrganization()).toBeUndefined();
+    expect(mockGetCurrentUser).not.toHaveBeenCalled();
   });
 });

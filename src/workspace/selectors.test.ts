@@ -4,6 +4,8 @@ import { RoleEnum } from '@/permissions/enums';
 import { type RootState } from '@/store/reducers';
 
 import {
+  checkHasServiceProviderRole,
+  checkIsServiceManagerOnly,
   hasAnyOrganizationAccess,
   isOwnerOrStaff,
   isServiceProviderManager,
@@ -160,5 +162,63 @@ describe('isServiceProviderManager selector', () => {
     };
     const actual = isServiceProviderManager({ workspace } as RootState);
     expect(actual).toBe(false);
+  });
+});
+
+describe('checkIsServiceManagerOnly', () => {
+  it('follows the flag Mastermind sets on the organization', () => {
+    expect(
+      checkIsServiceManagerOnly({ is_service_provider_manager_only: true }),
+    ).toBe(true);
+    expect(
+      checkIsServiceManagerOnly({ is_service_provider_manager_only: false }),
+    ).toBe(false);
+  });
+
+  it('is false while the organization is not loaded', () => {
+    expect(checkIsServiceManagerOnly(undefined)).toBe(false);
+  });
+});
+
+describe('checkHasServiceProviderRole', () => {
+  const user = (permissions) =>
+    ({ is_staff: false, is_support: false, permissions }) as any;
+  const providerPermission = (role_name) => ({
+    scope_type: 'service_provider',
+    scope_uuid: 'provider',
+    customer_uuid: 'provider_org',
+    role_name,
+  });
+
+  it('is true for any role on a provider of the organization', () => {
+    for (const role of [RoleEnum.CUSTOMER_MANAGER, 'CUSTOM.PROVIDER_ROLE']) {
+      expect(
+        checkHasServiceProviderRole(
+          { uuid: 'provider_org' },
+          user([providerPermission(role)]),
+        ),
+      ).toBe(true);
+    }
+  });
+
+  it('is false for another organization or a non-provider role', () => {
+    expect(
+      checkHasServiceProviderRole(
+        { uuid: 'another_org' },
+        user([providerPermission(RoleEnum.CUSTOMER_MANAGER)]),
+      ),
+    ).toBe(false);
+    expect(
+      checkHasServiceProviderRole(
+        { uuid: 'provider_org' },
+        user([
+          {
+            scope_type: 'offering',
+            customer_uuid: 'provider_org',
+            role_name: RoleEnum.OFFERING_MANAGER,
+          },
+        ]),
+      ),
+    ).toBe(false);
   });
 });
