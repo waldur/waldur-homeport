@@ -18,7 +18,7 @@ import {
 } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
 
 interface ReferralTypeIconProps {
   resourceType: string;
@@ -51,8 +51,8 @@ export const ReferralTypeIcon: FunctionComponent<ReferralTypeIconProps> = (
    */
   const Component = Components[props.resourceType] || Components.Default;
   return (
-    <Tip label={props.resourceType} id="resource-type-label">
+    <Tooltip label={props.resourceType}>
       <Component />
-    </Tip>
+    </Tooltip>
   );
 };

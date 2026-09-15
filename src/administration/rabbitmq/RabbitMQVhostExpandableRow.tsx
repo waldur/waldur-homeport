@@ -1,8 +1,9 @@
 import { FC, useMemo } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { StateIndicator } from '@/core/StateIndicator';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -141,7 +142,7 @@ export const RabbitMQVhostExpandableRow: FC<
             const owner = consumerUuid ? agentByQueue.get(queue.name) : null;
             if (consumerUuid) {
               return (
-                <Tip
+                <Tooltip
                   label={
                     owner
                       ? translate(
@@ -156,12 +157,11 @@ export const RabbitMQVhostExpandableRow: FC<
                           ? translate('Site agent connection data unavailable')
                           : translate('Not owned by a site agent')
                   }
-                  id={`queue-consumer-${queue.name}`}
                 >
                   <span className="text-primary">
                     {consumerUuid.substring(0, 8)}...
                   </span>
-                </Tip>
+                </Tooltip>
               );
             }
             return queue.subscription_uuid

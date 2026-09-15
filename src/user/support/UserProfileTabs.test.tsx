@@ -37,13 +37,17 @@ const ALL_ATTRIBUTES = [
 ];
 
 vi.mock('@/features/connect');
-vi.mock('@/core/Tooltip', () => ({
-  Tip: vi.fn(({ label, children }) => (
-    <div title={label as string} data-testid="tip-mock">
-      {children}
-    </div>
-  )),
-}));
+vi.mock('waldur-ui', async () => {
+  const actual = await vi.importActual<any>('waldur-ui');
+  return {
+    ...actual,
+    Tooltip: vi.fn(({ label, children }) => (
+      <div title={label as string} data-testid="tip-mock">
+        {children}
+      </div>
+    )),
+  };
+});
 
 vi.mock('@/marketplace/common/CountryFlag', () => ({
   CountryFlag: vi.fn(({ countryCode }) => (

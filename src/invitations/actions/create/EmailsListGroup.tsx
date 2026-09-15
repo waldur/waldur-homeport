@@ -3,8 +3,9 @@ import { Fragment, useCallback, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { Tip } from '@/core/Tooltip';
 import { usePagination } from '@/core/usePagination';
 import { composeValidators, email, required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
@@ -140,16 +141,14 @@ export const EmailsListGroup = ({
                   ) && (
                     <td className="id-column">
                       {ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
-                        translate('Civil number')}
-                      <Tip
+                        translate('Civil number')}{' '}
+                      <Tooltip
                         label={translate(
                           'Must start with a country prefix ie EE34501234215',
                         )}
-                        id="idTooltip"
                       >
-                        {' '}
                         <QuestionIcon weight="bold" />
-                      </Tip>
+                      </Tooltip>
                     </td>
                   )}
                   <td className="role-column">{translate('Role')}</td>

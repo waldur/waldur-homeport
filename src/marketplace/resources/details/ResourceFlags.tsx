@@ -8,9 +8,10 @@ import {
 } from '@phosphor-icons/react';
 import { Resource } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDate, formatMediumDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 export interface PolicyAttribution {
@@ -64,14 +65,13 @@ const FlagBadge = ({
   variant,
   icon,
   label,
-  tipId,
 }: {
   resource: Resource;
   field: string;
   variant: 'danger';
   icon: React.ReactNode;
   label: string;
-  tipId: string;
+  tipId?: string;
 }) => {
   const attribution = getAttribution(resource, field);
 
@@ -88,9 +88,9 @@ const FlagBadge = ({
       : translate('Manually set');
 
   return (
-    <Tip id={tipId} label={tooltipLabel}>
-      {badge}
-    </Tip>
+    <Tooltip label={tooltipLabel}>
+      <span>{badge}</span>
+    </Tooltip>
   );
 };
 
@@ -99,19 +99,18 @@ const LifecycleBadge = ({
   icon,
   label,
   tooltip,
-  tipId,
 }: {
   variant: 'warning' | 'danger';
   icon: React.ReactNode;
   label: string;
   tooltip: string;
-  tipId: string;
+  tipId?: string;
 }) => (
-  <Tip id={tipId} label={tooltip}>
+  <Tooltip label={tooltip}>
     <Badge variant={variant} size="sm" leftIcon={icon} pill outline>
       {label}
     </Badge>
-  </Tip>
+  </Tooltip>
 );
 
 const TERMINAL_STATES = new Set(['Terminated', 'Terminating']);

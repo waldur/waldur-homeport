@@ -34,9 +34,10 @@ import {
   useState,
 } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
@@ -196,10 +197,6 @@ const CallStage: FC<{
     supported: fullscreenSupported,
     toggle: toggleFullscreen,
   } = useFullscreen(fsRef);
-  // Leave overlay positioning to react-bootstrap's default everywhere except
-  // fullscreen: there, body-portaled overlays are invisible (the Fullscreen API
-  // only paints the fullscreened subtree), so target the call element instead.
-  const overlayContainer = isFullscreen ? containerRef.current : undefined;
   const tracks = useTracks(
     [
       { source: Track.Source.Camera, withPlaceholder: true },
@@ -332,55 +329,44 @@ const CallStage: FC<{
           internally, so the .lk-* styling is unchanged. The four primary
           controls (mic, camera, screen-share, end-call) match the mockup. */}
       <div className="lk-control-bar">
-        <Tip
-          id="call-mic"
-          label={translate('Toggle microphone')}
-          placement="top"
-          container={overlayContainer}
-        >
-          <TrackToggle source={Track.Source.Microphone} />
-        </Tip>
-        <Tip
-          id="call-camera"
-          label={translate('Toggle camera')}
-          placement="top"
-          container={overlayContainer}
-        >
-          <TrackToggle source={Track.Source.Camera} />
-        </Tip>
-        <Tip
-          id="call-screenshare"
-          label={translate('Share your screen')}
-          placement="top"
-          container={overlayContainer}
-        >
-          <TrackToggle source={Track.Source.ScreenShare} />
-        </Tip>
+        <Tooltip label={translate('Toggle microphone')} side="top">
+          <span>
+            <TrackToggle source={Track.Source.Microphone} />
+          </span>
+        </Tooltip>
+        <Tooltip label={translate('Toggle camera')} side="top">
+          <span>
+            <TrackToggle source={Track.Source.Camera} />
+          </span>
+        </Tooltip>
+        <Tooltip label={translate('Share your screen')} side="top">
+          <span>
+            <TrackToggle source={Track.Source.ScreenShare} />
+          </span>
+        </Tooltip>
         {/* Settings / fullscreen / PiP live on the control bar alongside the
             primary controls. Hidden in the cramped floating widget. */}
         {!compact && (
           <>
-            <CallSettingsMenu container={overlayContainer} />
+            <CallSettingsMenu />
             {fullscreenSupported && (
-              <Tip
-                id="call-fullscreen"
+              <Tooltip
                 label={
                   isFullscreen
                     ? translate('Exit fullscreen')
                     : translate('Enter fullscreen')
                 }
-                placement="top"
-                container={overlayContainer}
+                side="top"
               >
                 <button
                   type="button"
-                  className="lk-button"
                   onClick={toggleFullscreen}
                   aria-label={
                     isFullscreen
                       ? translate('Exit fullscreen')
                       : translate('Enter fullscreen')
                   }
+                  className="lk-button"
                 >
                   {isFullscreen ? (
                     <CornersInIcon size={20} weight="bold" />
@@ -388,45 +374,38 @@ const CallStage: FC<{
                     <CornersOutIcon size={20} weight="bold" />
                   )}
                 </button>
-              </Tip>
+              </Tooltip>
             )}
             {pipSupported && (
-              <Tip
-                id="call-pip"
+              <Tooltip
                 label={
                   isInDocumentPiP
                     ? translate('Close Picture-in-Picture')
                     : translate('Open in Picture-in-Picture')
                 }
-                placement="top"
-                container={overlayContainer}
+                side="top"
               >
                 <button
                   type="button"
-                  className="lk-button"
                   onClick={requestTogglePopOut}
                   aria-label={
                     isInDocumentPiP
                       ? translate('Close Picture-in-Picture')
                       : translate('Open in Picture-in-Picture')
                   }
+                  className="lk-button"
                 >
                   <PictureInPictureIcon size={20} weight="bold" />
                 </button>
-              </Tip>
+              </Tooltip>
             )}
           </>
         )}
-        <Tip
-          id="call-leave"
-          label={translate('Leave call')}
-          placement="top"
-          container={overlayContainer}
-        >
+        <Tooltip label={translate('Leave call')} side="top">
           <DisconnectButton>
             <PhoneSlashIcon size={20} weight="bold" />
           </DisconnectButton>
-        </Tip>
+        </Tooltip>
       </div>
     </div>
   );

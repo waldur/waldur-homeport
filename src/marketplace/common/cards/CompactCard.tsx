@@ -2,9 +2,10 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
-import { Tip } from '@/core/Tooltip';
 import { getAbbreviation } from '@/core/utils';
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
@@ -41,42 +42,44 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
 
   return wrapTooltip(
     tooltipMessage,
-    <Tip id={`compact-card-${offering.uuid}`} label={tooltipContent}>
-      <OfferingDetailsLink
-        offering_uuid={offering.uuid}
-        className={classNames(className, 'offering-card-compact', {
-          disabled: isDisabled,
-        })}
-        disabled={!isAllowed}
-      >
-        <Card className="card-bordered h-100 cursor-pointer border-hover-brand">
-          <Card.Body className="p-4 d-flex align-items-center gap-3">
-            {offering.thumbnail ? (
-              <Image src={offering.thumbnail} size={48} isContain circle />
-            ) : (
-              <ImagePlaceholder width="48px" height="48px" circle>
-                {getAbbreviation(offering.name, 2)}
-              </ImagePlaceholder>
-            )}
-            <div className="flex-grow-1 overflow-hidden">
-              <div className="fw-semibold ellipsis" style={{ fontSize: 16 }}>
-                {offering.name}
+    <Tooltip label={tooltipContent}>
+      <span>
+        <OfferingDetailsLink
+          offering_uuid={offering.uuid}
+          className={classNames(className, 'offering-card-compact', {
+            disabled: isDisabled,
+          })}
+          disabled={!isAllowed}
+        >
+          <Card className="card-bordered h-100 cursor-pointer border-hover-brand">
+            <Card.Body className="p-4 d-flex align-items-center gap-3">
+              {offering.thumbnail ? (
+                <Image src={offering.thumbnail} size={48} isContain circle />
+              ) : (
+                <ImagePlaceholder width="48px" height="48px" circle>
+                  {getAbbreviation(offering.name, 2)}
+                </ImagePlaceholder>
+              )}
+              <div className="flex-grow-1 overflow-hidden">
+                <div className="fw-semibold ellipsis" style={{ fontSize: 16 }}>
+                  {offering.name}
+                </div>
+                <div className="text-muted ellipsis" style={{ fontSize: 14 }}>
+                  {offering.customer_name}
+                </div>
               </div>
-              <div className="text-muted ellipsis" style={{ fontSize: 14 }}>
-                {offering.customer_name}
+              <div className="compact-card-hover-action">
+                <CompactSubmitButton
+                  submitting={false}
+                  type="button"
+                  variant="text-primary"
+                  label={translate('View')}
+                />
               </div>
-            </div>
-            <div className="compact-card-hover-action">
-              <CompactSubmitButton
-                submitting={false}
-                type="button"
-                variant="text-primary"
-                label={translate('View')}
-              />
-            </div>
-          </Card.Body>
-        </Card>
-      </OfferingDetailsLink>
-    </Tip>,
+            </Card.Body>
+          </Card>
+        </OfferingDetailsLink>
+      </span>
+    </Tooltip>,
   );
 };

@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { ReactionAggregate } from './types';
@@ -49,17 +50,9 @@ export const MessageReactionChips: FC<Props> = ({
       aria-label={translate('Reactions')}
     >
       {reactions.map((r) => (
-        <Tip
-          key={r.key}
-          id={`tc-msg-reactors-${eventId}-${r.key}`}
-          label={reactorTitles[r.key]}
-          placement="bottom-start"
-        >
+        <Tooltip key={r.key} label={reactorTitles[r.key]} side="bottom">
           <button
             type="button"
-            className={classNames('tc-msg-reactions__chip', {
-              'is-mine': r.reactedByMe,
-            })}
             aria-pressed={r.reactedByMe}
             aria-label={translate(
               '{count} {key} reactions — click to {verb} yours',
@@ -70,11 +63,14 @@ export const MessageReactionChips: FC<Props> = ({
               },
             )}
             onClick={() => (r.reactedByMe ? unreact(r.key) : react(r.key))}
+            className={classNames('tc-msg-reactions__chip', {
+              'is-mine': r.reactedByMe,
+            })}
           >
             <span aria-hidden>{r.key}</span>
             <span className="tc-msg-reactions__count">{r.count}</span>
           </button>
-        </Tip>
+        </Tooltip>
       ))}
     </div>
   );

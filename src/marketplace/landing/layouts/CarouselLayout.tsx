@@ -2,10 +2,11 @@ import { CaretRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useCategories } from '@/marketplace/category/useCategories';
 import { useCardStyle } from '@/marketplace/landing/CardStyleContext';
@@ -69,28 +70,29 @@ export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
           ) : (
             <div className="carousel-items">
               {flatCategories.map((category) => (
-                <Tip
+                <Tooltip
                   key={category.uuid}
-                  id={`category-${category.uuid}`}
                   label={category.title}
-                  placement="bottom"
+                  side="bottom"
                 >
-                  <CategoryLink
-                    item={category}
-                    className="category-carousel-item border-hover-brand"
-                  >
-                    <div className="category-icon-wrapper">
-                      <CategoryThumbnail
-                        title={category.title}
-                        icon={category.icon}
-                        size={32}
-                        fallbackSize={20}
-                        fallbackClassName=""
-                      />
-                    </div>
-                    <span className="category-title">{category.title}</span>
-                  </CategoryLink>
-                </Tip>
+                  <span>
+                    <CategoryLink
+                      item={category}
+                      className="category-carousel-item border-hover-brand"
+                    >
+                      <div className="category-icon-wrapper">
+                        <CategoryThumbnail
+                          title={category.title}
+                          icon={category.icon}
+                          size={32}
+                          fallbackSize={20}
+                          fallbackClassName=""
+                        />
+                      </div>
+                      <span className="category-title">{category.title}</span>
+                    </CategoryLink>
+                  </span>
+                </Tooltip>
               ))}
             </div>
           )}

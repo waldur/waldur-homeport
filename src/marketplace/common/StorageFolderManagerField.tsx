@@ -3,7 +3,8 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
@@ -366,9 +367,9 @@ const QuotaSummaryCard = ({
           <Col md={6}>
             <strong>
               {translate('File/Directory Quotas (Inodes)')}{' '}
-              <Tip id="inode-tooltip" label={inodeTooltip}>
+              <Tooltip label={inodeTooltip}>
                 <QuestionIcon weight="bold" size={16} className="text-muted" />
-              </Tip>
+              </Tooltip>
             </strong>
             <div>
               {translate('Soft')}:{' '}

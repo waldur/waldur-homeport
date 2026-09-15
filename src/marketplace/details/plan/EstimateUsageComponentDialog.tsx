@@ -1,8 +1,9 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -39,14 +40,9 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
           <tr>
             <th>
               {props.resolve.component.name}
-              <Tip
-                label={props.resolve.component.type}
-                id={`componentTypeTooltip-${props.resolve.component.type}`}
-                className="mx-1"
-              >
-                {' '}
-                <QuestionIcon weight="bold" />
-              </Tip>
+              <Tooltip label={props.resolve.component.type}>
+                <QuestionIcon weight="bold" className="mx-1" />
+              </Tooltip>
               <span className="fw-normal fst-italic">
                 (
                 {props.resolve.component.measured_unit

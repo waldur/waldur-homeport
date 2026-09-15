@@ -3,9 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { EndDateField } from './EndDateField';
 
-vi.mock('@/core/Tooltip', () => ({
-  Tip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
 vi.mock('@/core/WarnTip', () => ({ WarnTip: () => null }));
 
 const buildResource = (overrides = {}) =>

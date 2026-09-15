@@ -4,8 +4,9 @@ import { Col, Row } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CodePreview } from '@/core/CodePreview';
-import { Tip } from '@/core/Tooltip';
 import { FormFooter, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -51,19 +52,20 @@ export const EditGettingStartedDialog: FC<{
                       name="template"
                       rows={15}
                       label={
-                        <Tip
+                        <Tooltip
                           label={translate(
                             'The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_key}, {backend_metadata_key}',
                           )}
-                          id="template"
                         >
-                          {translate('Template')}
-                          <InfoIcon
-                            size={16}
-                            weight="fill"
-                            className="text-muted ms-1"
-                          />
-                        </Tip>
+                          <span>
+                            {translate('Template')}
+                            <InfoIcon
+                              size={16}
+                              weight="fill"
+                              className="text-muted ms-1"
+                            />
+                          </span>
+                        </Tooltip>
                       }
                       disabled={submitting}
                     />

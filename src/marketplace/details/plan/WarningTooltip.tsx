@@ -1,7 +1,8 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useFormState } from 'react-final-form';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { FieldError } from '@/form';
@@ -18,9 +19,8 @@ export const WarningTooltip = () => {
   return (
     <>
       {submitErrors && 'plan_entries' in submitErrors && (
-        <Tip
+        <Tooltip
           label={<FieldError error={submitErrors.plan_entries} />}
-          id="order-plan-errors"
           autoWidth
         >
           <WarningCircleIcon
@@ -28,7 +28,7 @@ export const WarningTooltip = () => {
             weight="bold"
             className="ms-2 text-warning mb-1"
           />
-        </Tip>
+        </Tooltip>
       )}
       {!shouldConcealPrices && (
         <div className="ms-auto text-muted">

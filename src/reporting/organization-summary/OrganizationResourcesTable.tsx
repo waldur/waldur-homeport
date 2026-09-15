@@ -2,11 +2,12 @@ import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { createFetcher } from '@/table/api';
@@ -55,13 +56,13 @@ const BooleanIndicator: FC<{ value: boolean | undefined; label?: string }> = ({
 }) => {
   if (value === undefined || value === null) return <span>—</span>;
   return value ? (
-    <Tip id={`bool-${label}`} label={label || translate('Yes')}>
+    <Tooltip label={label || translate('Yes')}>
       <CheckIcon size={16} weight="bold" className="text-success" />
-    </Tip>
+    </Tooltip>
   ) : (
-    <Tip id={`bool-${label}`} label={label || translate('No')}>
+    <Tooltip label={label || translate('No')}>
       <XIcon size={16} weight="bold" className="text-muted" />
-    </Tip>
+    </Tooltip>
   );
 };
 

@@ -2,8 +2,9 @@ import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { Tooltip } from 'waldur-ui';
+
 import { parseDate } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { SubmitButton } from '@/form';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { FloatingButton } from '@/form/FloatingButton';
@@ -62,7 +63,7 @@ export const OrderSubmitButton = () => {
           project disables the button without landing in errorsExist, which
           left it disabled and silent. */}
       {isDisabled ? (
-        <Tip
+        <Tooltip
           label={
             formState.submitting ? (
               translate('Submission in progress')
@@ -70,12 +71,10 @@ export const OrderSubmitButton = () => {
               <FieldErrorMessage error={projectError || errors} />
             )
           }
-          id="offering-button-errors"
           autoWidth
-          className="w-100"
         >
-          {Btn}
-        </Tip>
+          <span className="w-100">{Btn}</span>
+        </Tooltip>
       ) : (
         Btn
       )}

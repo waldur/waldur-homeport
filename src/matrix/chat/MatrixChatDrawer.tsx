@@ -14,8 +14,9 @@ import {
 } from 'react';
 import Dropzone from 'react-dropzone';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
@@ -270,24 +271,23 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                     className="position-absolute"
                     style={{ top: 8, right: 8, zIndex: 2 }}
                   >
-                    <Tip
-                      id="matrix-call-chat-toggle"
+                    <Tooltip
                       label={
                         chatVisible
                           ? translate('Hide chat')
                           : translate('Show chat')
                       }
-                      placement="left"
+                      side="left"
                     >
                       <button
                         type="button"
-                        className="btn btn-icon btn-sm btn-light"
                         onClick={() => setChatVisible((v) => !v)}
                         aria-label={
                           chatVisible
                             ? translate('Hide chat')
                             : translate('Show chat')
                         }
+                        className="btn btn-icon btn-sm btn-light"
                       >
                         {chatVisible ? (
                           <ArrowsOutSimpleIcon weight="bold" />
@@ -295,7 +295,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                           <ArrowsInSimpleIcon weight="bold" />
                         )}
                       </button>
-                    </Tip>
+                    </Tooltip>
                   </div>
                 )}
               </div>

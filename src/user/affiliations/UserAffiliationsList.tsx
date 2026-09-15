@@ -2,9 +2,10 @@ import { CheckCircleIcon, MinusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { RoleEnum } from '@/permissions/enums';
 import { formatRoleType } from '@/permissions/utils';
@@ -204,21 +205,21 @@ export const UserAffiliationsList: FunctionComponent<
             title: translate('Active'),
             render: ({ row }) =>
               row.is_active ? (
-                <Tip label={translate('Active')} id={`active-${row.uuid}`}>
+                <Tooltip label={translate('Active')}>
                   <CheckCircleIcon
                     size={20}
                     weight="fill"
                     className="text-success"
                   />
-                </Tip>
+                </Tooltip>
               ) : (
-                <Tip label={translate('Revoked')} id={`active-${row.uuid}`}>
+                <Tooltip label={translate('Revoked')}>
                   <MinusCircleIcon
                     size={20}
-                    className="text-gray-500"
                     weight="bold"
+                    className="text-gray-500"
                   />
-                </Tip>
+                </Tooltip>
               ),
             filter: 'show_inactive',
           },

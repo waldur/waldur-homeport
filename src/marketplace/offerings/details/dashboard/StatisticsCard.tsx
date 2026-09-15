@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Card, ProgressBar } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatUsageValue } from '@/core/formatNumber';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
@@ -38,19 +39,17 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
             <span className="ms-1 fs-2 fw-bold">{unit}</span>
           </h1>
           {changes ? (
-            <Tip
-              id={title}
-              label={translate('Changes in the last month')}
-              className="mb-1"
-            >
-              <ChangesAmountBadge
-                changes={changes}
-                asBadge
-                badgeOutline
-                badgePill
-                fractionDigits={0}
-              />
-            </Tip>
+            <Tooltip label={translate('Changes in the last month')}>
+              <span className="mb-1">
+                <ChangesAmountBadge
+                  changes={changes}
+                  asBadge
+                  badgeOutline
+                  badgePill
+                  fractionDigits={0}
+                />
+              </span>
+            </Tooltip>
           ) : max ? (
             <ProgressBar
               now={value}

@@ -10,8 +10,9 @@ import classNames from 'classnames';
 import { isMatch } from 'lodash-es';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import {
   NavMenu,
   NavMenuContent,
@@ -188,12 +189,9 @@ export const TabsList: FC = () => {
                   sits inside the link because `.menu-link.disabled` keeps
                   pointer events, so the hover trigger still fires. */}
               {parentTab.disabled && parentTab.disabledReason ? (
-                <Tip
-                  id={`tab-disabled-reason-${parentIndex}`}
-                  label={parentTab.disabledReason}
-                >
+                <Tooltip label={parentTab.disabledReason}>
                   <span className="menu-title">{parentTab.title}</span>
-                </Tip>
+                </Tooltip>
               ) : (
                 <span className="menu-title">{parentTab.title}</span>
               )}

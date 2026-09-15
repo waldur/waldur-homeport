@@ -1,9 +1,10 @@
 import { FC, useMemo } from 'react';
 import { assignmentBatchesList, AssignmentBatchList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
@@ -74,8 +75,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
         title: translate('Items'),
         render: ({ row }: { row: AssignmentBatchList }) => (
           <div className="d-flex gap-1">
-            <Tip
-              id={`pending-${row.uuid}`}
+            <Tooltip
               label={translate('Pending: {count}', {
                 count: row.items_pending_count,
               })}
@@ -83,9 +83,8 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
               <Badge variant="warning" pill outline>
                 {row.items_pending_count}
               </Badge>
-            </Tip>
-            <Tip
-              id={`accepted-${row.uuid}`}
+            </Tooltip>
+            <Tooltip
               label={translate('Accepted: {count}', {
                 count: row.items_accepted_count,
               })}
@@ -93,9 +92,8 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
               <Badge variant="success" pill outline>
                 {row.items_accepted_count}
               </Badge>
-            </Tip>
-            <Tip
-              id={`declined-${row.uuid}`}
+            </Tooltip>
+            <Tooltip
               label={translate('Declined: {count}', {
                 count: row.items_declined_count,
               })}
@@ -103,7 +101,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
               <Badge variant="danger" pill outline>
                 {row.items_declined_count}
               </Badge>
-            </Tip>
+            </Tooltip>
           </div>
         ),
         keys: [

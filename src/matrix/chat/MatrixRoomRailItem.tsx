@@ -2,8 +2,9 @@ import { PhoneIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
-import { Tip } from '@/core/Tooltip';
 
 import { RoomCallState } from './call/useAllRoomCallStates';
 import { getChatAvatarColor } from './chatColors';
@@ -35,12 +36,12 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
   const isUnread = unreadCount > 0;
 
   return (
-    <Tip id={`team-chat-rail-${uuid}`} label={name} placement="right">
+    <Tooltip label={name} side="right">
       <button
         type="button"
         aria-label={name}
-        className={classNames('tc-rail-item', { active })}
         onClick={onClick}
+        className={classNames('tc-rail-item', { active })}
       >
         <Avatar
           name={name}
@@ -62,6 +63,6 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
           </span>
         )}
       </button>
-    </Tip>
+    </Tooltip>
   );
 };

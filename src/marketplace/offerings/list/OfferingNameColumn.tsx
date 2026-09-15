@@ -1,8 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
+import { BackendIdTip } from '@/core/BackendIdTip';
 import { Link } from '@/core/Link';
-import { BackendIdTip } from '@/core/Tooltip';
 import { isDescendantOf } from '@/navigation/useTabs';
 
 export const OfferingNameColumn = ({ row }) => {

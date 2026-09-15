@@ -1,4 +1,5 @@
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n/translate';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExportData } from '@/table/exporters/types';
@@ -88,11 +89,11 @@ export const getId = (row, index) => {
 
 export const formatLongText = (value) =>
   value && value.length > 100 ? (
-    <Tip label={value} id="longText">
-      <span className="ellipsis d-inline-block" style={{ width: 150 }}>
+    <Tooltip label={value}>
+      <span style={{ width: 150 }} className="ellipsis d-inline-block">
         {value}
       </span>
-    </Tip>
+    </Tooltip>
   ) : (
     value
   );

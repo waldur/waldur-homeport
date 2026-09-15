@@ -17,8 +17,9 @@ import React, {
 import { FormCheck } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { Tip } from '@/core/Tooltip';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { translate } from '@/i18n';
 import { PopoverMenuContent } from '@/navigation/NavMenu';
@@ -99,13 +100,9 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
           type="button"
           className="inline-filter btn btn-icon btn-sm btn-tertiary icon-align"
         >
-          <Tip
-            id={'tip-filter-' + column.title.toString().slice(0, 2) + row.uuid}
-            label={translate('Add filter')}
-            delay={{ show: 1000, hide: 0 }}
-          >
+          <Tooltip label={translate('Add filter')} delayDuration={1000}>
             <FunnelSimpleIcon weight="bold" size={20} />
-          </Tip>
+          </Tooltip>
         </button>
       </RadixPopover.Trigger>
       <PopoverMenuContent
@@ -479,24 +476,24 @@ const TableRow = memo<TableRowProps>(
               {fieldType && fieldProps ? (
                 <>
                   {rowError ? (
-                    <Tip
-                      label={<FieldErrorMessage error={rowError} />}
-                      id={`tableErrorTip-${rowIndex}`}
-                      className="error-mark"
-                    >
-                      <WarningCircleIcon weight="bold" size={16} />
-                    </Tip>
+                    <Tooltip label={<FieldErrorMessage error={rowError} />}>
+                      <WarningCircleIcon
+                        weight="bold"
+                        size={16}
+                        className="error-mark"
+                      />
+                    </Tooltip>
                   ) : (
                     isChecked &&
                     fieldProps.meta.touched &&
                     fieldProps.meta.error && (
-                      <Tip
-                        label={fieldProps.meta.error}
-                        id={`tableErrorTip-${rowIndex}`}
-                        className="error-mark"
-                      >
-                        <WarningCircleIcon weight="bold" size={16} />
-                      </Tip>
+                      <Tooltip label={fieldProps.meta.error}>
+                        <WarningCircleIcon
+                          weight="bold"
+                          size={16}
+                          className="error-mark"
+                        />
+                      </Tooltip>
                     )
                   )}
                   <FormCheck

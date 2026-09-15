@@ -1,13 +1,9 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useState, useEffect } from 'react';
-import {
-  Form,
-  InputGroup,
-  OverlayTrigger,
-  Table,
-  Tooltip,
-} from 'react-bootstrap';
+import { Form, InputGroup, Table } from 'react-bootstrap';
+
+import { Tooltip } from 'waldur-ui';
 
 import { Badge } from '@/core/Badge';
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
@@ -129,15 +125,8 @@ const AllocationInputCell: FC<{
               />
               <div className="input-group-addons">
                 {exceedsCapacity && (
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={
-                      <Tooltip id={`warning-${resource.uuid}`}>
-                        {translate('Allocation exceeds freed pool')}
-                      </Tooltip>
-                    }
-                  >
-                    <span
+                  <Tooltip label={translate('Allocation exceeds freed pool')}>
+                    <WarningCircleIcon
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -149,14 +138,11 @@ const AllocationInputCell: FC<{
                       }}
                       role="button"
                       tabIndex={0}
-                    >
-                      <WarningCircleIcon
-                        size={18}
-                        weight="regular"
-                        className="text-danger"
-                      />
-                    </span>
-                  </OverlayTrigger>
+                      size={18}
+                      weight="regular"
+                      className="text-danger"
+                    />
+                  </Tooltip>
                 )}
                 <CaretUpDownButtons
                   onClickUp={() => adjustValue(1)}

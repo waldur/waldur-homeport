@@ -3,8 +3,10 @@ import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
+import { TooltipProps } from 'waldur-ui';
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { Tip, TipProps } from '@/core/Tooltip';
 
 interface IconButtonProps {
   /** Icon to display */
@@ -28,7 +30,7 @@ interface IconButtonProps {
   /** Data test ID */
   'data-testid'?: string;
   /** Tooltip placement */
-  tooltipPlacement?: TipProps['placement'];
+  tooltipPlacement?: TooltipProps['side'];
 }
 
 /**
@@ -59,23 +61,19 @@ export const IconButton: FC<IconButtonProps> = ({
   tooltipPlacement,
 }) => {
   return (
-    <Tip
-      id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`}
-      label={tooltip}
-      placement={tooltipPlacement}
-    >
+    <Tooltip label={tooltip} side={tooltipPlacement}>
       <Button
         variant={variant}
         size="lg"
         style={style}
-        className={classNames('btn-icon', className, {
-          disabled: disabled || pending,
-        })}
         onClick={onClick}
         disabled={disabled || pending}
         type={type}
         data-testid={testId}
         aria-label={tooltip}
+        className={classNames('btn-icon', className, {
+          disabled: disabled || pending,
+        })}
       >
         {pending ? (
           <LoadingSpinnerSimple />
@@ -83,7 +81,7 @@ export const IconButton: FC<IconButtonProps> = ({
           <span className="svg-icon svg-icon-2">{iconNode}</span>
         )}
       </Button>
-    </Tip>
+    </Tooltip>
   );
 };
 
@@ -104,22 +102,18 @@ export const MediumIconButton: FC<IconButtonProps> = ({
   tooltipPlacement,
 }) => {
   return (
-    <Tip
-      id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`}
-      label={tooltip}
-      placement={tooltipPlacement}
-    >
+    <Tooltip label={tooltip} side={tooltipPlacement}>
       <Button
         variant={variant}
         size="sm"
-        className={classNames('btn-icon btn-icon-md', className, {
-          disabled: disabled || pending,
-        })}
         onClick={onClick}
         disabled={disabled || pending}
         type={type}
         data-testid={testId}
         aria-label={tooltip}
+        className={classNames('btn-icon btn-icon-md', className, {
+          disabled: disabled || pending,
+        })}
       >
         {pending ? (
           <LoadingSpinnerSimple />
@@ -127,7 +121,7 @@ export const MediumIconButton: FC<IconButtonProps> = ({
           <span className="svg-icon svg-icon-2">{iconNode}</span>
         )}
       </Button>
-    </Tip>
+    </Tooltip>
   );
 };
 
@@ -148,22 +142,18 @@ export const CompactIconButton: FC<IconButtonProps> = ({
   tooltipPlacement,
 }) => {
   return (
-    <Tip
-      id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`}
-      label={tooltip}
-      placement={tooltipPlacement}
-    >
+    <Tooltip label={tooltip} side={tooltipPlacement}>
       <Button
         variant={variant}
         size="sm"
-        className={classNames('btn-icon', className, {
-          disabled: disabled || pending,
-        })}
         onClick={onClick}
         disabled={disabled || pending}
         type={type}
         data-testid={testId}
         aria-label={tooltip}
+        className={classNames('btn-icon', className, {
+          disabled: disabled || pending,
+        })}
       >
         {pending ? (
           <LoadingSpinnerSimple />
@@ -171,6 +161,6 @@ export const CompactIconButton: FC<IconButtonProps> = ({
           <span className="svg-icon svg-icon-2">{iconNode}</span>
         )}
       </Button>
-    </Tip>
+    </Tooltip>
   );
 };

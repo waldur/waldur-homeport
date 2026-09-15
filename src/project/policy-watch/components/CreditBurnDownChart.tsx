@@ -3,11 +3,11 @@ import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 
 import { generateBrandColors } from 'waldur-design-tokens';
+import { Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { Tip } from '@/core/Tooltip';
 import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -293,16 +293,16 @@ export const CreditBurnDownChart: FC<Props> = ({ data }) => {
 const ChartBlock: FC<{
   title: string;
   hint?: string;
-  id: string;
+  id?: string;
   options: any;
-}> = ({ title, hint, id, options }) => (
+}> = ({ title, hint, options }) => (
   <>
     <div className="d-flex align-items-center gap-2 mb-2">
       <h5 className="mb-0">{title}</h5>
       {hint && (
-        <Tip id={id} label={hint}>
+        <Tooltip label={hint}>
           <QuestionIcon weight="bold" />
-        </Tip>
+        </Tooltip>
       )}
     </div>
     <EChart options={options} height="320px" />

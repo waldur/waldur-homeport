@@ -1,7 +1,8 @@
 import { PublicOfferingDetails } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -28,12 +29,9 @@ export const OfferingDetailsField = ({
       label={translate('Offering name')}
       value={
         <>
-          <Tip
-            label={offering.name?.length > 30 ? offering.name : null}
-            id={offering.uuid}
-          >
-            {truncate(offering.name)}
-          </Tip>{' '}
+          <Tooltip label={offering.name?.length > 30 ? offering.name : null}>
+            <span>{truncate(offering.name)}</span>
+          </Tooltip>{' '}
           <button
             className="text-link"
             type="button"

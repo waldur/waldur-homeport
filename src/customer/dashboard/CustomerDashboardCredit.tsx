@@ -2,13 +2,14 @@ import { EyeIcon, WarningOctagonIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { Col } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
@@ -72,17 +73,13 @@ export const CustomerDashboardCredit = ({
               : {defaultCurrency(credit.value)})
             </small>
             {credit.allocated_to_projects > Number(credit.value) && (
-              <Tip
-                id="tip-credit-warn"
-                label={translate('Credit is overallocated')}
-                className="ms-2"
-              >
+              <Tooltip label={translate('Credit is overallocated')}>
                 <WarningOctagonIcon
-                  className="text-warning"
                   weight="bold"
                   size={16}
+                  className="ms-2 text-warning"
                 />
-              </Tip>
+              </Tooltip>
             )}
           </>
         }

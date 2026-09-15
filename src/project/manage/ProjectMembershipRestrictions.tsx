@@ -7,13 +7,14 @@ import {
   projectsPartialUpdate,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
 import { MembershipRestrictionFormItems } from '@/core/restrictions';
-import { Tip } from '@/core/Tooltip';
 import { EditFieldProvider } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
@@ -108,16 +109,13 @@ export const ProjectMembershipRestrictions: FC<
       title={
         <span className="d-flex align-items-center gap-2">
           {translate('Membership restrictions')}
-          <Tip
-            id="project-restrictions-tooltip"
-            label={getRestrictionsTooltip()}
-          >
+          <Tooltip label={getRestrictionsTooltip()}>
             <QuestionIcon
               size={16}
               weight="bold"
               className="text-muted cursor-pointer"
             />
-          </Tip>
+          </Tooltip>
         </span>
       }
       cardBordered

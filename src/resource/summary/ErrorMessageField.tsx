@@ -1,7 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
@@ -23,9 +24,9 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   }
   return (
     <>
-      <Tip id="error-traceback" label={props.resource.error_traceback}>
+      <Tooltip label={props.resource.error_traceback}>
         <QuestionIcon size={17} weight="bold" />
-      </Tip>{' '}
+      </Tooltip>{' '}
       {props.resource.error_message}
     </>
   );

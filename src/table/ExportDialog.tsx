@@ -2,7 +2,8 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Form } from 'react-final-form';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SubmitButton, SelectGroup, BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -75,15 +76,13 @@ export const ExportDialog = (props: ExportDialogProps) => {
                 label={
                   <>
                     {translate('All pages')}
-                    <Tip
+                    <Tooltip
                       label={translate(
                         'Disable this to export only the rows on the current page',
                       )}
-                      className="ms-2"
-                      id="tip-export-table-all-page"
                     >
-                      <QuestionIcon size={20} weight="bold" />
-                    </Tip>
+                      <QuestionIcon size={20} weight="bold" className="ms-2" />
+                    </Tooltip>
                   </>
                 }
                 hideLabel

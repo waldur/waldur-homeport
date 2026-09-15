@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { RequestedOffering } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -25,13 +26,12 @@ export const CallOfferingPurchaseOrderField: FC<
     return <>{DASH_ESCAPE_CODE}</>;
   }
   return (
-    <Tip
-      id="call-offering-purchase-order-required"
+    <Tooltip
       label={translate(
         'Applicants must give a purchase order reference or attach the document before the proposal can be submitted. The provider sets this on the offering; the call keeps the setting it had when the offering was added.',
       )}
     >
       <span>{translate('Required')}</span>
-    </Tip>
+    </Tooltip>
   );
 };

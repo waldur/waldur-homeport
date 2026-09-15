@@ -1,6 +1,8 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button, ButtonProps, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Button, ButtonProps } from 'react-bootstrap';
+
+import { Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -40,16 +42,9 @@ export const SaveButton: FC<SaveButtonProps> = ({
 
   if (dirty) {
     return (
-      <OverlayTrigger
-        placement="bottom"
-        overlay={
-          <Tooltip id="save-button-tip">
-            {translate('You have unsaved changes')}
-          </Tooltip>
-        }
-      >
+      <Tooltip side="bottom" label={translate('You have unsaved changes')}>
         {button}
-      </OverlayTrigger>
+      </Tooltip>
     );
   }
 

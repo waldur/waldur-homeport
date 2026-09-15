@@ -12,9 +12,10 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { SHORT_STALE_TIME } from '@/core/constants';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { FieldReviewComments } from '@/proposals/proposal/create-review/FieldReviewComments';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
@@ -103,17 +104,15 @@ const TableTitle = () => (
     size="lg"
     leftIcon={<CubeIcon weight="bold" />}
     rightIcon={
-      <Tip
+      <Tooltip
         label={translate(
           'This call uses predefined resource templates. You can only select from the available templates below. Custom resource configurations are not allowed.',
         )}
-        id="tip-resource-templates"
         autoWidth
-        className="w-100"
-        tipClassName="mw-350px"
+        contentClassName="mw-350px"
       >
-        <QuestionIcon weight="bold" size={16} />
-      </Tip>
+        <QuestionIcon weight="bold" size={16} className="w-100" />
+      </Tooltip>
     }
     pill
     outline

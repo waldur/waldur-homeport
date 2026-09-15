@@ -3,9 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { marketplaceProjectUpdateRequestsCount } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { useDrawer } from '@/drawer/actions';
 import { DrawerExpandToolbar } from '@/drawer/DrawerExpandToolbar';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
@@ -88,24 +89,20 @@ export const ConfirmationDrawerToggle: React.FC = () => {
 
   return (
     <div className="d-flex align-items-center ms-1">
-      <Tip
-        label={translate('Pending tasks')}
-        id="pending-confirmations-tip"
-        placement="bottom"
-      >
+      <Tooltip label={translate('Pending tasks')} side="bottom">
         <button
           id="pending-confirmations-toggle"
           type="button"
-          className="position-relative btn-nav-item"
           onClick={handleOpenDrawer}
           aria-label={translate('Pending tasks')}
+          className="position-relative btn-nav-item"
         >
           <span className="svg-icon svg-icon-2">
             <BellIcon weight="bold" />
           </span>
           {showBullet && <HeaderButtonBullet />}
         </button>
-      </Tip>
+      </Tooltip>
     </div>
   );
 };

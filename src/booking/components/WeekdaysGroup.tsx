@@ -1,7 +1,8 @@
 import { Info } from 'luxon';
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { range } from '@/core/utils';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -24,25 +25,22 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
         // but we are assuming in waldur Sunday: 0 -> Monday: 1 (js date rule)
         const jsDateDay = (day + 1) % 7;
         return (
-          <Tip
-            key={index}
-            label={Info.weekdays('long')[day]}
-            id={`weekday-${jsDateDay}`}
-          >
-            <input
-              type="checkbox"
-              id={`weekday-${jsDateDay}`}
-              value={jsDateDay}
-              checked={daysOfWeek.includes(jsDateDay)}
-              onChange={(e) =>
-                setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
-              }
-            />
-
-            <label htmlFor={`weekday-${jsDateDay}`}>
-              {Info.weekdays('narrow')[day]}
-            </label>
-          </Tip>
+          <Tooltip key={index} label={Info.weekdays('long')[day]}>
+            <span>
+              <input
+                type="checkbox"
+                id={`weekday-${jsDateDay}`}
+                value={jsDateDay}
+                checked={daysOfWeek.includes(jsDateDay)}
+                onChange={(e) =>
+                  setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
+                }
+              />
+              <label htmlFor={`weekday-${jsDateDay}`}>
+                {Info.weekdays('narrow')[day]}
+              </label>
+            </span>
+          </Tooltip>
         );
       })}
     </div>

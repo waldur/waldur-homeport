@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { FC, ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import BsBadge, { BadgeProps } from 'react-bootstrap/Badge';
 import type { Variant } from 'react-bootstrap/types';
 
-import { Tip, TipProps } from '@/core/Tooltip';
+import { Tooltip, TooltipProps } from 'waldur-ui';
 
 interface OwnProps extends BadgeProps {
   leftIcon?: ReactNode;
@@ -11,7 +11,7 @@ interface OwnProps extends BadgeProps {
   onlyIcon?: boolean;
   alignIcon?: boolean;
   tooltip?: ReactNode;
-  tooltipProps?: Partial<TipProps>;
+  tooltipProps?: Partial<TooltipProps>;
   variant?:
     | Variant
     | 'pink'
@@ -32,58 +32,65 @@ interface OwnProps extends BadgeProps {
 
 const wrapTooltip = (label, children, props = {}) =>
   label ? (
-    <Tip label={label} id="tip-badge" {...props}>
-      {children}
-    </Tip>
+    <Tooltip label={label} {...props}>
+      <span>{children}</span>
+    </Tooltip>
   ) : (
     children
   );
 
-export const Badge: FC<OwnProps> = ({
-  variant = 'primary',
-  leftIcon,
-  rightIcon,
-  onlyIcon,
-  alignIcon,
-  tooltip,
-  tooltipProps,
-  roundless,
-  light,
-  outline,
-  pill,
-  hasBullet,
-  size,
-  className,
-  children,
-  ...rest
-}) =>
-  wrapTooltip(
-    tooltip,
-    <BsBadge
-      bg={!(light || outline) ? variant : null}
-      className={classNames([
-        'badge-' +
-          (outline
-            ? 'outline-'
-            : light && variant !== 'light'
-              ? 'light-'
-              : '') +
-          variant,
-        size && `badge-${size}`,
-        roundless && 'rounded-0',
-        pill && 'badge-pill',
-        leftIcon && 'has-left-icon',
-        rightIcon && 'has-right-icon',
-        hasBullet && 'has-bullet',
-        onlyIcon && 'badge-icon',
-        alignIcon && 'icon-align',
-        className,
-      ])}
-      {...rest}
-    >
-      {Boolean(leftIcon) && <span className="left-icon">{leftIcon}</span>}
-      {children}
-      {Boolean(rightIcon) && <span className="right-icon">{rightIcon}</span>}
-    </BsBadge>,
-    tooltipProps,
-  );
+export const Badge = forwardRef<HTMLElement, OwnProps>(
+  (
+    {
+      variant = 'primary',
+      leftIcon,
+      rightIcon,
+      onlyIcon,
+      alignIcon,
+      tooltip,
+      tooltipProps,
+      roundless,
+      light,
+      outline,
+      pill,
+      hasBullet,
+      size,
+      className,
+      children,
+      ...rest
+    },
+    ref,
+  ) =>
+    wrapTooltip(
+      tooltip,
+      <BsBadge
+        ref={ref}
+        bg={!(light || outline) ? variant : null}
+        className={classNames([
+          'badge-' +
+            (outline
+              ? 'outline-'
+              : light && variant !== 'light'
+                ? 'light-'
+                : '') +
+            variant,
+          size && `badge-${size}`,
+          roundless && 'rounded-0',
+          pill && 'badge-pill',
+          leftIcon && 'has-left-icon',
+          rightIcon && 'has-right-icon',
+          hasBullet && 'has-bullet',
+          onlyIcon && 'badge-icon',
+          alignIcon && 'icon-align',
+          className,
+        ])}
+        {...rest}
+      >
+        {Boolean(leftIcon) && <span className="left-icon">{leftIcon}</span>}
+        {children}
+        {Boolean(rightIcon) && <span className="right-icon">{rightIcon}</span>}
+      </BsBadge>,
+      tooltipProps,
+    ),
+);
+Badge.displayName = 'Badge';

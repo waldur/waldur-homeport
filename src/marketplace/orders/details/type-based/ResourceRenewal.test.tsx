@@ -13,9 +13,6 @@ vi.mock('./OrderCommonFields', async () => {
     RequestCommentField: () => null,
   };
 });
-vi.mock('@/core/Tooltip', () => ({
-  Tip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
 vi.mock('@/price/PriceTooltip', () => ({
   PriceTooltip: () => null,
 }));

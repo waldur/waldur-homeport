@@ -2,7 +2,8 @@ import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Resource, Offering } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
@@ -56,16 +57,13 @@ const PendingChangeValue: FC<{
       <span>
         <OptionValue option={option} value={newValue} />
       </span>
-      <Tip
-        id={`pending-change-${option.name}`}
-        label={translate('This value was changed in a pending order')}
-      >
+      <Tooltip label={translate('This value was changed in a pending order')}>
         <InfoIcon
           size={16}
           weight="fill"
           className="text-info cursor-pointer"
         />
-      </Tip>
+      </Tooltip>
     </span>
   );
 };

@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -101,9 +102,9 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
             render: ({ row }) => {
               const needsTruncation = row.name.length > 50;
               return needsTruncation ? (
-                <Tip label={row.name} id={`task-type-${row.name}`}>
+                <Tooltip label={row.name}>
                   <code className="fs-7">{truncateTaskType(row.name)}</code>
-                </Tip>
+                </Tooltip>
               ) : (
                 <code className="fs-7">{row.name}</code>
               );

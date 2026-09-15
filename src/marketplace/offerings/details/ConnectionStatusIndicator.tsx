@@ -1,8 +1,9 @@
 import { CircleIcon } from '@phosphor-icons/react';
 import { Col, FormGroup, FormLabel, Row } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 export const ConnectionStatusIndicator = ({ status }) => {
@@ -26,9 +27,8 @@ export const ConnectionStatusIndicator = ({ status }) => {
       </FormLabel>
       <Col>
         {Array.from({ length: status.length }).map((_, i) => (
-          <Tip
+          <Tooltip
             key={i}
-            id="backend-id"
             label={translate('{agent} - {status}. Last request: {time}', {
               agent: status[i].agent_type,
               status: status[i].status,
@@ -36,10 +36,10 @@ export const ConnectionStatusIndicator = ({ status }) => {
             })}
           >
             <CircleIcon
-              className={getStatusClassName(status[i])}
               weight="bold"
+              className={getStatusClassName(status[i])}
             />
-          </Tip>
+          </Tooltip>
         ))}
       </Col>
     </FormGroup>

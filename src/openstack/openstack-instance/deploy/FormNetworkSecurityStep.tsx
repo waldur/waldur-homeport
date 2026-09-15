@@ -24,11 +24,12 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
 import { getAllPages } from '@/core/api';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { UI_STALE_TIME } from '@/core/constants';
-import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
 import { BaseStringField, FieldError, SelectGroup } from '@/form';
 import { Select } from '@/form/select';
@@ -155,8 +156,7 @@ export const SubnetValueContainer = (props) => {
     <components.ValueContainer {...props} className="pe-0">
       <div className="d-flex align-items-center justify-content-between ellipsis">
         {props.children}
-        <Tip
-          id={`tip-subnet-${subnet.uuid}`}
+        <Tooltip
           autoWidth
           label={
             <div className="text-start">
@@ -178,10 +178,8 @@ export const SubnetValueContainer = (props) => {
             </div>
           }
         >
-          <span className="svg-icon svg-icon-2">
-            <QuestionIcon weight="bold" />
-          </span>
-        </Tip>
+          <QuestionIcon weight="bold" className="svg-icon svg-icon-2" />
+        </Tooltip>
       </div>
     </components.ValueContainer>
   );
@@ -291,8 +289,7 @@ const renderNetworkRows = ({
                     fipQuotaExhausted ? (
                       <>
                         {translate('Floating IP')}{' '}
-                        <Tip
-                          id={`fip-quota-tip-${index}`}
+                        <Tooltip
                           label={translate(
                             'Floating IP quota is exhausted; auto-assign is unavailable. Ask the administrator to raise the limit.',
                           )}
@@ -302,7 +299,7 @@ const renderNetworkRows = ({
                             size={14}
                             className="text-warning align-text-bottom ms-1"
                           />
-                        </Tip>
+                        </Tooltip>
                       </>
                     ) : (
                       translate('Floating IP')

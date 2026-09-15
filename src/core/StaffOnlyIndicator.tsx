@@ -1,7 +1,7 @@
 import { IdentificationBadgeIcon } from '@phosphor-icons/react';
-import { uniqueId } from 'lodash-es';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface StaffOnlyIndicatorProps {
@@ -11,11 +11,7 @@ interface StaffOnlyIndicatorProps {
 export const StaffOnlyIndicator = ({
   className = 'text-dark me-1',
 }: StaffOnlyIndicatorProps) => (
-  <Tip
-    label={translate('Staff action')}
-    id={`staff-action-${uniqueId()}`}
-    className={className}
-  >
-    <IdentificationBadgeIcon size={22} weight="bold" />
-  </Tip>
+  <Tooltip label={translate('Staff action')}>
+    <IdentificationBadgeIcon size={22} weight="bold" className={className} />
+  </Tooltip>
 );

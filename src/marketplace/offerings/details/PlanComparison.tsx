@@ -1,9 +1,10 @@
 import { FC, useMemo } from 'react';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { defaultCurrency, formatCurrency } from '@/core/formatCurrency';
-import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -135,13 +136,9 @@ const componentText = (pricing: PlanPricing, component?: Component) => {
 };
 
 const PlanHeader = ({ pricing }: { pricing: PlanPricing }) => (
-  <Tip
-    label={pricing.plan.description}
-    id={`plan-${pricing.plan.uuid}`}
-    autoWidth
-  >
+  <Tooltip label={pricing.plan.description} autoWidth>
     <span>{pricing.plan.name}</span>
-  </Tip>
+  </Tooltip>
 );
 
 interface PlanComparisonProps {

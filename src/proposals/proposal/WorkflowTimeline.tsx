@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { ProposalWorkflowStepInstance } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import {
   usesCallVocabulary,
@@ -171,14 +172,13 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
         label = (
           <span className="d-inline-flex align-items-center gap-1">
             {s.step_name}
-            <Tip
-              id={`rejection-${s.uuid}`}
+            <Tooltip
               label={translate('Proposal was rejected')}
               body={s.rejection_reason ?? ''}
               autoWidth
             >
               <InfoIcon size={16} weight="bold" className="text-gray-600" />
-            </Tip>
+            </Tooltip>
           </span>
         );
       } else {

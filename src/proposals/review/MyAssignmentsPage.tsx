@@ -8,11 +8,12 @@ import {
   MyAssignmentItem,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -151,18 +152,17 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
                       <Badge variant="danger" size="sm" outline>
                         {translate('COI detected')}
                       </Badge>
-                      <Tip
-                        id={`coi-help-${item.uuid}`}
+                      <Tooltip
                         label={translate(
                           'A potential conflict of interest was detected for this proposal. It may be blocked from assignment.',
                         )}
                       >
                         <QuestionIcon
                           size={14}
-                          className="text-muted"
                           weight="bold"
+                          className="text-muted"
                         />
-                      </Tip>
+                      </Tooltip>
                     </span>
                   ) : (
                     <span className="text-muted">-</span>
@@ -287,18 +287,17 @@ export const MyAssignmentsPage: FC = () => {
                     <Badge variant="danger" size="sm" outline>
                       {translate('Expired')}
                     </Badge>
-                    <Tip
-                      id={`expired-help-${row.uuid}`}
+                    <Tooltip
                       label={translate(
                         'The response window for this assignment batch has passed.',
                       )}
                     >
                       <QuestionIcon
                         size={14}
-                        className="text-muted"
                         weight="bold"
+                        className="text-muted"
                       />
-                    </Tip>
+                    </Tooltip>
                   </span>
                 )}
               </>

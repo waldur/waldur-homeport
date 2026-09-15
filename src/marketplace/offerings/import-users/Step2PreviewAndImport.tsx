@@ -8,8 +8,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { deleteDuplicateRecords } from '@/customer/import/utils';
 import { FieldErrorMessage } from '@/form/FieldError';
@@ -50,8 +51,7 @@ const StatusField = ({
   const validate = validateOfferingUserCreation(row);
   const statusMessages = getStatusMessages();
   return status ? (
-    <Tip
-      id={`tip-error-${row.uuid}`}
+    <Tooltip
       label={
         status.status === 'erred' && <FieldErrorMessage error={status.error} />
       }
@@ -59,23 +59,23 @@ const StatusField = ({
       <Badge variant={statusColors[status.status]} pill outline>
         {statusMessages[status.status]}
       </Badge>
-    </Tip>
+    </Tooltip>
   ) : (
-    <Tip id={`tip-error-${row.uuid}`} label={validate.reason[0]}>
+    <Tooltip label={validate.reason[0]}>
       <Badge variant={validate.valid ? 'default' : 'danger'} pill outline>
         {validate.valid
           ? translate('Ready')
           : statusMessages[validate.errors[0]]}
       </Badge>
-    </Tip>
+    </Tooltip>
   );
 };
 
 const WithTooltip = ({ label = '', len = 24 }) =>
   label?.length > len ? (
-    <Tip label={label} id="tip-truncated">
-      {truncate(label, len)}
-    </Tip>
+    <Tooltip label={label}>
+      <span>{truncate(label, len)}</span>
+    </Tooltip>
   ) : (
     label || DASH_ESCAPE_CODE
   );

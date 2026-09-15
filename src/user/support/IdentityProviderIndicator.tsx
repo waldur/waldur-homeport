@@ -1,6 +1,7 @@
+import { Tooltip } from 'waldur-ui';
+
 import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
 import { ExternalLink } from '@/core/ExternalLink';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 interface IdentityProviderIndicatorProps {
@@ -19,13 +20,13 @@ export const IdentityProviderIndicator = ({
   showManagementLink = true,
 }: IdentityProviderIndicatorProps) => (
   <div className="d-flex align-items-center">
-    <Tip label={user.registration_method} id="registration_method_tooltip">
+    <Tooltip label={user.registration_method}>
       <div className="symbol symbol-circle symbol-40px img-wrapper">
         <div className="symbol-label overflow-hidden">
           <IdentityProviderLogo name={user.registration_method} />
         </div>
       </div>
-    </Tip>
+    </Tooltip>
     <div className="ms-5 d-flex flex-column">
       <span className="text-gray-500 text-hover-primary fw-bold">
         {user.identity_provider_label}

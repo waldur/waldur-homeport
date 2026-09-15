@@ -10,7 +10,8 @@ import classNames from 'classnames';
 import { FC, useCallback } from 'react';
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -102,8 +103,7 @@ const ParamInput: FC<{
 
   return (
     <InputGroup size="sm">
-      <Tip
-        id={`${param.id}-dec`}
+      <Tooltip
         label={
           isAtMin
             ? translate('Minimum value reached')
@@ -119,7 +119,7 @@ const ParamInput: FC<{
           iconNode={<CaretDownIcon weight="bold" />}
           label=""
         />
-      </Tip>
+      </Tooltip>
       <Form.Control
         type="number"
         value={numValue}
@@ -130,8 +130,7 @@ const ParamInput: FC<{
         className="text-center"
         style={{ maxWidth: '100px' }}
       />
-      <Tip
-        id={`${param.id}-inc`}
+      <Tooltip
         label={
           isAtMax
             ? translate('Maximum value reached')
@@ -147,7 +146,7 @@ const ParamInput: FC<{
           iconNode={<CaretUpIcon weight="bold" />}
           label=""
         />
-      </Tip>
+      </Tooltip>
       {param.unit && <InputGroup.Text>{param.unit}</InputGroup.Text>}
     </InputGroup>
   );
@@ -220,14 +219,14 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
         <h6 className="mb-0">
           {translate('Scenario parameters')}
           {hasChanges && (
-            <Tip label={translate('Reset to defaults')} id="reset-params">
+            <Tooltip label={translate('Reset to defaults')}>
               <ArrowCounterClockwiseIcon
-                className="ms-2"
                 size={16}
                 weight="bold"
                 onClick={resetParams}
+                className="ms-2"
               />
-            </Tip>
+            </Tooltip>
           )}
         </h6>
       </div>
@@ -240,9 +239,9 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
               <Form.Label className="d-flex align-items-center gap-2 mb-2">
                 {param.label}
                 {param.description && (
-                  <Tip id={`${param.id}-help`} label={param.description}>
+                  <Tooltip label={param.description}>
                     <QuestionIcon size={16} weight="bold" />
-                  </Tip>
+                  </Tooltip>
                 )}
               </Form.Label>
               <ParamInput

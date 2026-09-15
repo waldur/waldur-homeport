@@ -3,7 +3,8 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
@@ -32,17 +33,18 @@ export const CallTabs = ({ call }: { call: Call }) => {
       <Nav variant="tabs" className="nav-line-tabs mb-4">
         {call.state !== 'active' ? (
           <Nav.Item>
-            <Tip
-              id="tip-public-call-disabled"
+            <Tooltip
               label={translate(
                 'The public view is currently inactive as this call is archived or draft.',
               )}
             >
-              <Nav.Link disabled className="text-center min-w-60px d-flex">
-                {translate('Public')}
-                <QuestionIcon size={18} className="ms-1" weight="bold" />
-              </Nav.Link>
-            </Tip>
+              <span>
+                <Nav.Link disabled className="text-center min-w-60px d-flex">
+                  {translate('Public')}
+                  <QuestionIcon size={18} className="ms-1" weight="bold" />
+                </Nav.Link>
+              </span>
+            </Tooltip>
           </Nav.Item>
         ) : (
           <Nav.Item>

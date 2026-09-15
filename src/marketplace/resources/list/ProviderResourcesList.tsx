@@ -7,10 +7,10 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { BackendIdTip } from '@/core/BackendIdTip';
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
-import { BackendIdTip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';

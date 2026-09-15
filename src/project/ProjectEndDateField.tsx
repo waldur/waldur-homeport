@@ -2,10 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { marketplaceResourcesList, Project } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { getAllPages } from '@/core/api';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDate, parseDate } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { WarnTip } from '@/core/WarnTip';
 import { translate } from '@/i18n';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
@@ -71,15 +72,13 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
       {formatDate(projectEndDate)}
       <ProjectLifecycleBadge project={row} className="ms-1" />
       {showGraceDuration && (
-        <Tip
-          id={`grace-${row.uuid}`}
-          className="ms-1 fs-8 text-muted"
+        <Tooltip
           label={translate('Grace period until {date}', {
             date: formatDate(row.effective_end_date),
           })}
         >
-          +{graceDays}d
-        </Tip>
+          <span className="ms-1 fs-8 text-muted">+{graceDays}d</span>
+        </Tooltip>
       )}
       {endDates?.length
         ? endDates.some((date) => parseDate(date) > projectEndDate) && (
@@ -91,7 +90,7 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
               hasSpace
               autoWidth
               className="w-100"
-              tipClassName="mw-300px"
+              contentClassName="mw-300px"
             />
           )
         : null}

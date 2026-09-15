@@ -1,7 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatUsageValue } from '@/core/formatNumber';
-import { Tip } from '@/core/Tooltip';
 
 import { QuotaProgressBar } from './QuotaProgressBar';
 
@@ -36,9 +37,9 @@ const CellDescription = ({
       {description && (
         <>
           {' '}
-          <Tip id="quota" label={description} className="aligned-tip">
-            <QuestionIcon weight="bold" />
-          </Tip>
+          <Tooltip label={description}>
+            <QuestionIcon weight="bold" className="aligned-tip" />
+          </Tooltip>
         </>
       )}
     </span>

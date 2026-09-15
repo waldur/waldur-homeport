@@ -3,10 +3,11 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
-import { Tip } from '@/core/Tooltip';
 import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
 import Placeholder from '@/images/logo_w.svg';
@@ -109,8 +110,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
               </Badge>
             )}
             {isRestricted && (
-              <Tip
-                id={`tip-restricted-detailed-${offering.uuid}`}
+              <Tooltip
                 label={
                   offering.project_name
                     ? translate(
@@ -133,11 +133,10 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
                 >
                   {translate('Restricted')}
                 </Badge>
-              </Tip>
+              </Tooltip>
             )}
             {isInaccessible && (
-              <Tip
-                id={`tip-inaccessible-detailed-${offering.uuid}`}
+              <Tooltip
                 label={translate(
                   'This offering is not accessible to your organization',
                 )}
@@ -150,7 +149,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
                 >
                   {translate('Inaccessible')}
                 </Badge>
-              </Tip>
+              </Tooltip>
             )}
             <TagBadges
               tags={offering.tags}

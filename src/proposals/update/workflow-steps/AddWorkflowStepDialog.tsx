@@ -11,7 +11,8 @@ import {
   WorkflowCriterionRequest,
 } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import {
   BooleanGroup,
@@ -108,15 +109,14 @@ const formatStepOption = (
     {meta.context === 'menu' && option.description && (
       // Portal to body and sit above the portaled select menu (z-index 9999),
       // otherwise the menu paints over the tooltip.
-      <Tip
-        id={`step-option-${option.value}`}
+      <Tooltip
         label={option.description}
-        placement="top"
-        container={document.body}
+        side="top"
+
         zIndex={10000}
       >
         <QuestionIcon weight="regular" size={16} className="text-muted" />
-      </Tip>
+      </Tooltip>
     )}
   </div>
 );
@@ -334,8 +334,7 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
                     label={
                       <span className="d-inline-flex align-items-center gap-2">
                         {translate('Include Award response')}
-                        <Tip
-                          id="include-award-response-tip"
+                        <Tooltip
                           label={translate(
                             'Activate this step if applicants must explicitly accept or reject the awarded resources after the allocation decision.',
                           )}
@@ -345,7 +344,7 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
                             size={16}
                             className="text-muted"
                           />
-                        </Tip>
+                        </Tooltip>
                       </span>
                     }
                   />

@@ -1,8 +1,9 @@
 import { OpenStackNestedVolume } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
@@ -50,18 +51,16 @@ export const OpenStackInstanceVolumeBadge = ({
   resourceName,
 }: VolumeBadgeProps) => {
   return (
-    <Tip
+    <Tooltip
       label={<VolumeBadgeTipView volume={volume} resourceName={resourceName} />}
-      id={`volume-${volume.uuid}`}
-      placement="bottom"
+      side="bottom"
       trigger="click"
       autoWidth
-      rootClose
     >
       <Badge variant="default" outline className="cursor-pointer me-3 mb-1">
         <img src={openstackIcon} alt="openstack" width={15} className="me-2" />
-        {volume.name} ({formatFilesize(volume.size)}, {volume.type_name})
+        {volume.name}({formatFilesize(volume.size)}, {volume.type_name})
       </Badge>
-    </Tip>
+    </Tooltip>
   );
 };

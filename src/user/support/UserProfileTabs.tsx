@@ -1,9 +1,10 @@
 import { Fragment, ReactNode, useCallback, useMemo } from 'react';
 import { User } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
@@ -100,22 +101,21 @@ const computeStats = (fields: ProfileField[]): TabStats => {
   };
 };
 
-const TabBadge = ({ stats, tabKey }: { stats: TabStats; tabKey: string }) => {
+const TabBadge = ({ stats }: { stats: TabStats; tabKey?: string }) => {
   if (stats.missingMandatory > 0) {
     return (
-      <Tip
+      <Tooltip
         label={translate('Missing required fields: {fields}', {
           fields: stats.missingMandatoryFields.join(', '),
         })}
-        id={`tab-badge-${tabKey}`}
       >
         <span
-          className="badge badge-sm badge-circle badge-danger ms-2"
           data-testid="tab-badge-danger"
+          className="badge badge-sm badge-circle badge-danger ms-2"
         >
           {stats.missingMandatory}
         </span>
-      </Tip>
+      </Tooltip>
     );
   }
   return (

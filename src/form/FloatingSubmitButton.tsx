@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { FieldErrorMessage } from './FieldError';
@@ -26,21 +27,19 @@ export const FloatingSubmitButton: FC<OwnProps> = ({
   const errorsExist = errors && Object.keys(errors).length > 0;
   return (
     <FloatingButton>
-      <Tip
+      <Tooltip
         label={errorsExist ? <FieldErrorMessage error={errors} center /> : null}
-        id="floating-button-errors"
         autoWidth
-        className="w-100"
-        tipClassName="mw-225px"
+        contentClassName="mw-225px"
       >
         <SubmitButton
           submitting={submitting}
           variant={variant}
           disabled={disabled || errorsExist}
-          className="w-100"
           label={label || translate('Submit')}
+          className="w-100 w-100"
         />
-      </Tip>
+      </Tooltip>
     </FloatingButton>
   );
 };

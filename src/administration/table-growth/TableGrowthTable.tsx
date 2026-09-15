@@ -1,5 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
-import { Tooltip } from 'react-bootstrap';
+
+import { Tooltip } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -53,10 +54,8 @@ export const TableGrowthTable: FC<TableGrowthTableProps> = ({
       {
         title: translate('Total size'),
         render: ({ row }: { row: TableGrowthStats }) => (
-          <Tooltip id={`total-${row.table_name}`}>
-            <span title={`${row.current_total_size} B`}>
-              {formatFilesize(row.current_total_size, 'B')}
-            </span>
+          <Tooltip label={`${row.current_total_size} B`}>
+            <span>{formatFilesize(row.current_total_size, 'B')}</span>
           </Tooltip>
         ),
         orderField: 'current_total_size',

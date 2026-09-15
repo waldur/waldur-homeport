@@ -7,9 +7,10 @@ import {
   openstackServerGroupsList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
 import { UI_STALE_TIME } from '@/core/constants';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -61,61 +62,63 @@ export const FormSchedulingStep = (props: FormStepProps) => {
   }
 
   return (
-    <Tip id={`tip-${props.id}`} label={props.disabledTooltip}>
-      <AccordionCard
-        title={translate('Scheduling')}
-        subtitle={translate(
-          'Server groups control how instances are placed on physical hosts.',
-        )}
-        id={props.id}
-        className={classNames('step-card', props.disabled && 'step-disabled')}
-      >
-        <Table<OpenStackServerGroup>
-          {...tableProps}
-          className="mt-n4"
-          columns={[
-            {
-              title: translate('Name'),
-              render: ({ row }) => row.name,
-            },
-            {
-              title: translate('Policy'),
-              render: ({ row }) => {
-                if (!row.policy) return DASH_ESCAPE_CODE;
-                const tooltip = policyTooltips[row.policy];
-                return tooltip ? (
-                  <Tip id={`policy-${row.uuid}`} label={tooltip}>
-                    <span style={{ borderBottom: '1px dotted currentColor' }}>
-                      {row.policy}
-                    </span>
-                  </Tip>
-                ) : (
-                  row.policy
-                );
+    <Tooltip label={props.disabledTooltip}>
+      <span>
+        <AccordionCard
+          title={translate('Scheduling')}
+          subtitle={translate(
+            'Server groups control how instances are placed on physical hosts.',
+          )}
+          id={props.id}
+          className={classNames('step-card', props.disabled && 'step-disabled')}
+        >
+          <Table<OpenStackServerGroup>
+            {...tableProps}
+            className="mt-n4"
+            columns={[
+              {
+                title: translate('Name'),
+                render: ({ row }) => row.name,
               },
-            },
-          ]}
-          title={translate('Server group')}
-          verboseName={translate('server groups')}
-          tableActions={
-            serverGroup ? (
-              <ActionButton
-                action={clearSelection}
-                title={translate('Clear')}
-                iconNode={<XIcon weight="bold" />}
-                variant="text-primary"
-              />
-            ) : null
-          }
-          hoverable
-          fieldType="radio"
-          fieldName="attributes.server_group"
-          cardBordered={false}
-          minHeight="auto"
-          headerClassName="mx-0"
-          titleClassName="fs-6 text-gray-700"
-        />
-      </AccordionCard>
-    </Tip>
+              {
+                title: translate('Policy'),
+                render: ({ row }) => {
+                  if (!row.policy) return DASH_ESCAPE_CODE;
+                  const tooltip = policyTooltips[row.policy];
+                  return tooltip ? (
+                    <Tooltip label={tooltip}>
+                      <span style={{ borderBottom: '1px dotted currentColor' }}>
+                        {row.policy}
+                      </span>
+                    </Tooltip>
+                  ) : (
+                    row.policy
+                  );
+                },
+              },
+            ]}
+            title={translate('Server group')}
+            verboseName={translate('server groups')}
+            tableActions={
+              serverGroup ? (
+                <ActionButton
+                  action={clearSelection}
+                  title={translate('Clear')}
+                  iconNode={<XIcon weight="bold" />}
+                  variant="text-primary"
+                />
+              ) : null
+            }
+            hoverable
+            fieldType="radio"
+            fieldName="attributes.server_group"
+            cardBordered={false}
+            minHeight="auto"
+            headerClassName="mx-0"
+            titleClassName="fs-6 text-gray-700"
+          />
+        </AccordionCard>
+      </span>
+    </Tooltip>
   );
 };

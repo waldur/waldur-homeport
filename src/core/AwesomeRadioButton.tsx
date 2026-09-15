@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Form, FormLabel } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { FormField } from '@/form/types';
 import { Choice } from '@/marketplace/offerings/types';
-
-import { Tip } from './Tooltip';
 
 interface AwesomeRadioButtonProps extends FormField {
   choices: Choice[];
@@ -37,13 +37,9 @@ export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
         >
           {props.label}
           {props.tooltip && (
-            <Tip
-              id={'tip-radio-' + groupName}
-              label={props.tooltip}
-              className="ms-2"
-            >
-              <QuestionIcon weight="bold" size={16} />
-            </Tip>
+            <Tooltip label={props.tooltip}>
+              <QuestionIcon weight="bold" size={16} className="ms-2" />
+            </Tooltip>
           )}
         </FormLabel>
       )}
@@ -85,13 +81,13 @@ export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
                 <span className="d-flex align-items-center gap-2">
                   <span>{choice.label}</span>
                   {Boolean(choice.tooltip) && (
-                    <Tip
-                      id={`${choiceId}-tip`}
-                      label={choice.tooltip}
-                      className="text-muted"
-                    >
-                      <QuestionIcon weight="regular" size={16} />
-                    </Tip>
+                    <Tooltip label={choice.tooltip}>
+                      <QuestionIcon
+                        weight="regular"
+                        size={16}
+                        className="text-muted"
+                      />
+                    </Tooltip>
                   )}
                 </span>
                 {Boolean(choice.description) && (

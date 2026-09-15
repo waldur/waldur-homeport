@@ -6,7 +6,8 @@ import {
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC, useCallback, useMemo } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import { CompactActionButton } from '@/table/CompactActionButton';
@@ -99,8 +100,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                   </span>
                   {endpoint.name}
                 </span>
-                <Tip
-                  id="resource-endpoint-tooltip"
+                <Tooltip
                   label={
                     isSshFormat(endpoint.url) && resource.username
                       ? extendURLWithUsername(endpoint.url)
@@ -109,14 +109,14 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                 >
                   <CompactActionButton
                     variant="link"
-                    className="h-20px"
                     action={(e) => {
                       copyText(endpoint.url);
                       e.preventDefault();
                     }}
                     iconNode={<CopyIcon weight="bold" />}
+                    className="h-20px"
                   />
-                </Tip>
+                </Tooltip>
               </a>
             </RadixDropdownMenu.Item>
           ))}

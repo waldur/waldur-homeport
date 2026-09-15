@@ -1,15 +1,16 @@
 import { FC, ReactNode } from 'react';
 import MediaQuery from 'react-responsive';
 
+import { Tooltip } from 'waldur-ui';
+
 import { BaseButton } from '@/core/buttons/BaseButton';
-import { Tip } from '@/core/Tooltip';
 
 /** @deprecated Use BaseButton or a button component with built-in tooltip support */
 export const wrapTooltip = (label, children, rest?) =>
   label ? (
-    <Tip label={label} id="button-tooltip" {...rest}>
-      {children}
-    </Tip>
+    <Tooltip label={label} {...rest}>
+      <span>{children}</span>
+    </Tooltip>
   ) : (
     children
   );

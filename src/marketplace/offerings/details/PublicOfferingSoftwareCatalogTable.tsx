@@ -1,8 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { marketplaceSoftwarePackagesList, Offering } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
@@ -124,9 +125,9 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
           title: translate('Description'),
           render: ({ row }) =>
             row.description ? (
-              <Tip id={`desc-${row.uuid}`} label={row.description} autoWidth>
+              <Tooltip label={row.description} autoWidth>
                 <span>{row.description}</span>
-              </Tip>
+              </Tooltip>
             ) : (
               renderFieldOrDash(row.description)
             ),

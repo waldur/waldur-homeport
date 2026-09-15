@@ -5,8 +5,9 @@ import { ComponentType, FC, createElement, useCallback } from 'react';
 import { Button, FormCheck, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CompactIconButton, MediumIconButton } from '@/core/buttons/IconButton';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { resetSelection, setFilterQuery, toggleColumn } from '@/table/actions';
 import { getTableState, selectSelectedRows } from '@/table/selectors';
@@ -146,10 +147,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
         />
         {hasSettings ? (
           <RadixPopover.Root modal={false}>
-            <Tip
-              label={translate('Toggle visible columns')}
-              id="expandable-row-settings-tip"
-            >
+            <Tooltip label={translate('Toggle visible columns')}>
               <span className="d-inline-flex">
                 <RadixPopover.Trigger asChild>
                   <Button
@@ -165,7 +163,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
                   </Button>
                 </RadixPopover.Trigger>
               </span>
-            </Tip>
+            </Tooltip>
             <RadixPopover.Portal>
               <RadixPopover.Content
                 align="end"

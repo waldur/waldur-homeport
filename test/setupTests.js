@@ -5,6 +5,14 @@ import { afterAll } from 'vitest';
 
 configure({ asyncUtilTimeout: 5000 });
 
+if (typeof globalThis.ResizeObserver === 'undefined') {
+  globalThis.ResizeObserver = class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+}
+
 // react-bootstrap transitions (Collapse, Fade, Modal) end on a fallback timer
 // from dom-helpers that fires ~5 ms after they start. When a file's last test
 // ends mid-transition, that timer can fire after jsdom is torn down and fail

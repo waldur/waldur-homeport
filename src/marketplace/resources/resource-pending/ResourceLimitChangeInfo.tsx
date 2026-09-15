@@ -3,9 +3,10 @@ import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { Offering, Resource } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { getFormLimitParser } from '@/marketplace/common/registry';
 import { OrderDetailsQuickBody } from '@/marketplace/orders/details/OrderDetailsQuickBody';
@@ -139,13 +140,9 @@ export const ResourceLimitChangeInfo = ({
                     <tr key={index}>
                       <td className="text-nowrap icon-align">
                         {component.name}
-                        <Tip
-                          label={component.type}
-                          id={'tip-' + component.type}
-                          className="ms-1"
-                        >
-                          <QuestionIcon weight="bold" />
-                        </Tip>
+                        <Tooltip label={component.type}>
+                          <QuestionIcon weight="bold" className="ms-1" />
+                        </Tooltip>
                       </td>
                       <td>
                         {component.limit ?? 0} {component.measured_unit}

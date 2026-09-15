@@ -9,11 +9,12 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { required, requiredArray } from '@/core/validators';
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
@@ -44,8 +45,7 @@ const FieldsListMapping = ({
               <tr key={component}>
                 <td className="text-dark">
                   {fields.value[i].remote_category}
-                  <Tip
-                    id={`tip-offerings-${component}`}
+                  <Tooltip
                     label={
                       <>
                         <p className="fw-bold text-start mb-1">
@@ -67,10 +67,10 @@ const FieldsListMapping = ({
                   >
                     <QuestionIcon
                       size={20}
-                      className="text-gray-500 cursor-pointer text-hover-muted ms-2"
                       weight="bold"
+                      className="text-gray-500 cursor-pointer text-hover-muted ms-2"
                     />
-                  </Tip>
+                  </Tooltip>
                 </td>
                 <td>
                   <Field

@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 export const ROOM_STATE_VARIANT: Record<string, string> = {
@@ -46,9 +47,9 @@ export const MatrixRoomStateBadge: FC<MatrixRoomStateBadgeProps> = ({
   );
   if (state === 'error' && errorMessage) {
     return (
-      <Tip id="matrix-room-error" label={errorMessage}>
-        {badge}
-      </Tip>
+      <Tooltip label={errorMessage}>
+        <span>{badge}</span>
+      </Tooltip>
     );
   }
   return badge;

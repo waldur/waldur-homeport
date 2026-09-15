@@ -22,8 +22,9 @@ import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useMemo, useState } from 'react';
 import { Button, FormCheck } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CompactIconButton } from '@/core/buttons/IconButton';
-import { Tip } from '@/core/Tooltip';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 
@@ -196,16 +197,13 @@ export const TableColumnButton: FC<TableProps> = ({
   };
   return (
     <RadixPopover.Root modal={false}>
-      <Tip
-        label={translate('Toggle visible columns')}
-        id="table-columns-button-tip"
-      >
+      <Tooltip label={translate('Toggle visible columns')}>
         <span className="d-inline-flex">
           {/* Trigger wraps the real <Button> (not an ancestor <span>): a
-              disabled HTML button never dispatches click events at all, so
-              unlike the old OverlayTrigger setup this needs no separate
-              trigger-suppression workaround for the grid-mode disabled
-              state. */}
+                                      disabled HTML button never dispatches click events at all, so
+                                      unlike the old OverlayTrigger setup this needs no separate
+                                      trigger-suppression workaround for the grid-mode disabled
+                                      state. */}
           <RadixPopover.Trigger asChild disabled={mode !== 'table'}>
             <Button
               disabled={mode !== 'table'}
@@ -220,7 +218,7 @@ export const TableColumnButton: FC<TableProps> = ({
             </Button>
           </RadixPopover.Trigger>
         </span>
-      </Tip>
+      </Tooltip>
       <RadixPopover.Portal>
         <RadixPopover.Content
           side="bottom"

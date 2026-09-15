@@ -7,13 +7,14 @@ import { DateTime } from 'luxon';
 import { Col } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
@@ -93,18 +94,17 @@ export const ProjectDashboardCredit = ({
                 Number(credit.value) > 0 &&
                 Number(credit.value) <= p.limit_cost * 0.2,
             ) && (
-              <Tip
-                id="credit-policy-warning"
+              <Tooltip
                 label={translate(
                   'Credit balance is low. A cost policy may trigger soon, affecting resources in this project.',
                 )}
               >
                 <WarningOctagonIcon
-                  className="text-warning ms-2"
                   weight="bold"
                   size={16}
+                  className="text-warning ms-2"
                 />
-              </Tip>
+              </Tooltip>
             )}
           </>
         }

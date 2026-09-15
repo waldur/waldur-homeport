@@ -1,6 +1,7 @@
 import { FC, useEffect, useMemo } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -42,13 +43,13 @@ export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
       {
         title: translate('Vhost'),
         render: ({ row }: { row: RmqVhostStats }) => (
-          <Tip label={row.name} id={`vhost-${row.name}`}>
+          <Tooltip label={row.name}>
             <code className="fs-8">
               {row.name.length > 20
                 ? `${row.name.substring(0, 20)}...`
                 : row.name}
             </code>
-          </Tip>
+          </Tooltip>
         ),
         copyField: (row: RmqVhostStats) => row.name,
       },

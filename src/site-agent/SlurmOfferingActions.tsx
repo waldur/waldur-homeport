@@ -5,8 +5,9 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { getServiceProviderByCustomer } from '@/marketplace/common/api';
 import { useModal } from '@/modal/actions';
@@ -120,21 +121,22 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
       align="end"
     >
       {showSiteAgentConfig && (
-        <Tip
-          id="site-agent-config-item"
+        <Tooltip
           label={
             !serviceProvider
               ? translate('Service provider not found for this offering.')
               : null
           }
         >
-          <ActionsDropdownItem
-            onSelect={openSiteAgentConfig}
-            disabled={!serviceProvider}
-          >
-            {translate('Generate Site Agent Config')}
-          </ActionsDropdownItem>
-        </Tip>
+          <span>
+            <ActionsDropdownItem
+              onSelect={openSiteAgentConfig}
+              disabled={!serviceProvider}
+            >
+              {translate('Generate Site Agent Config')}
+            </ActionsDropdownItem>
+          </span>
+        </Tooltip>
       )}
       {showLdapAgentEnv && (
         <ActionsDropdownItem onSelect={openLdapAgentEnv}>
@@ -142,21 +144,22 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
         </ActionsDropdownItem>
       )}
       {showSiteAgentConfig && canSyncResources && (
-        <Tip
-          id="sync-resources-item"
+        <Tooltip
           label={
             isSyncPending
               ? translate('Resource synchronization is in progress…')
               : null
           }
         >
-          <ActionsDropdownItem
-            onSelect={() => syncResources()}
-            disabled={isSyncPending}
-          >
-            {translate('Synchronize resources')}
-          </ActionsDropdownItem>
-        </Tip>
+          <span>
+            <ActionsDropdownItem
+              onSelect={() => syncResources()}
+              disabled={isSyncPending}
+            >
+              {translate('Synchronize resources')}
+            </ActionsDropdownItem>
+          </span>
+        </Tooltip>
       )}
     </ActionDropdownButton>
   );

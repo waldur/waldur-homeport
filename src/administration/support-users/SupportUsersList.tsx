@@ -8,7 +8,8 @@ import classNames from 'classnames';
 import { useMemo } from 'react';
 import { SupportUser, supportUsersList } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
@@ -60,11 +61,7 @@ const ConnectionCounts = ({ row }: { row: SupportUser }) => {
   return (
     <div className="d-flex gap-3 text-nowrap">
       {counts.map((item) => (
-        <Tip
-          key={item.key}
-          id={`support-user-${item.key}-${row.uuid}`}
-          label={item.label}
-        >
+        <Tooltip key={item.key} label={item.label}>
           <span
             className={classNames(
               'd-inline-flex align-items-center gap-1',
@@ -74,7 +71,7 @@ const ConnectionCounts = ({ row }: { row: SupportUser }) => {
             {item.icon}
             {item.value || 0}
           </span>
-        </Tip>
+        </Tooltip>
       ))}
     </div>
   );

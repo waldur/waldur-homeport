@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import type { QueueKindEnum } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 const KIND_BADGES: Record<
@@ -31,14 +32,13 @@ const KIND_BADGES: Record<
 
 export const QueueKindBadge: FC<{ kind: QueueKindEnum; id: string }> = ({
   kind,
-  id,
 }) => {
   const config = KIND_BADGES[kind];
   return (
-    <Tip label={config.tip} id={`queue-kind-${id}`}>
+    <Tooltip label={config.tip}>
       <Badge variant={config.variant} pill outline={config.outline}>
         {config.label}
       </Badge>
-    </Tip>
+    </Tooltip>
   );
 };

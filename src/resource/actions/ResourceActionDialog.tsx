@@ -2,8 +2,9 @@ import arrayMutators from 'final-form-arrays';
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { Form, useForm, useFormState } from 'react-final-form';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
-import { Tip } from '@/core/Tooltip';
 import { composeValidators } from '@/core/validators';
 import {
   AsyncSelectGroup,
@@ -203,13 +204,9 @@ const ResourceActionDialogInner: FC<any> = ({
               : field.validate,
           };
           return field.disabled && props.disabled_tooltip ? (
-            <Tip
-              key={index}
-              label={props.disabled_tooltip}
-              id="resource-action-dialog-disabled-tooltip"
-            >
-              {getFieldComponent(field, index, props)}
-            </Tip>
+            <Tooltip key={index} label={props.disabled_tooltip}>
+              <span>{getFieldComponent(field, index, props)}</span>
+            </Tooltip>
           ) : (
             getFieldComponent(field, index, props)
           );

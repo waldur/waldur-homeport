@@ -1,6 +1,7 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, Fragment } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+
+import { Tooltip } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -97,11 +98,10 @@ const InvoiceItemLine: FC<{
     >
       <td>
         {isDiscount ? (
-          <OverlayTrigger
-            trigger={['hover', 'focus']}
-            placement="top"
-            overlay={
-              <Popover id={'InvoiceDiscount-' + item.uuid} className="p-4">
+          <Tooltip
+            autoWidth={true}
+            label={
+              <>
                 <div className="mb-1 fw-bold">
                   {translate('Volume discount')}
                   {componentLabel ? ` — ${componentLabel}` : ''}
@@ -120,7 +120,7 @@ const InvoiceItemLine: FC<{
                     {translate('Formula')}: {dd.discount_formula}
                   </div>
                 )}
-              </Popover>
+              </>
             }
           >
             <span className="text-success ps-5">
@@ -135,7 +135,7 @@ const InvoiceItemLine: FC<{
                 className="text-gray-400"
               />
             </span>
-          </OverlayTrigger>
+          </Tooltip>
         ) : isCompensation ? (
           <span className="text-muted ps-5">
             ↳ {translate('Credit compensation')}
@@ -164,16 +164,13 @@ const InvoiceItemLine: FC<{
         )}
       </td>
       {item.details.resource_limit_periods ? (
-        <OverlayTrigger
-          trigger={['hover', 'focus']}
-          placement="top"
-          overlay={
-            <Popover id={'InvoiceItem-' + item.uuid} className="p-4">
-              <ResourceLimitPeriodsTable
-                periods={item.details.resource_limit_periods}
-                unit={item.unit}
-              />
-            </Popover>
+        <Tooltip
+          autoWidth={true}
+          label={
+            <ResourceLimitPeriodsTable
+              periods={item.details.resource_limit_periods}
+              unit={item.unit}
+            />
           }
         >
           <td>
@@ -184,7 +181,7 @@ const InvoiceItemLine: FC<{
               className="text-gray-400"
             />
           </td>
-        </OverlayTrigger>
+        </Tooltip>
       ) : (
         <td>{Number(item.factor || item.quantity)}</td>
       )}

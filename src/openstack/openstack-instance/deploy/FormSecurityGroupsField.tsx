@@ -6,9 +6,10 @@ import {
   openstackSecurityGroupsList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -138,18 +139,17 @@ export const FormSecurityGroupsField = ({ offering, ...props }: OwnProps) => {
             <>
               {row.name}{' '}
               {row.name === 'default' && (
-                <Tip
+                <Tooltip
                   label={translate(
                     'Removing default security group can remove egress access from the VM and block communication with Openstack metadata service.',
                   )}
-                  id="default_security_group_tooltip"
                 >
                   <WarningCircleIcon
                     size={20}
                     weight="bold"
                     className="text-warning"
                   />
-                </Tip>
+                </Tooltip>
               )}
             </>
           ),

@@ -4,6 +4,7 @@ export { CopyButton } from './CopyButton';
 export type { CopyButtonProps } from './CopyButton';
 export { LoadingSpinner } from './LoadingSpinner';
 export { Tooltip } from './Tooltip';
+export type { TooltipProps } from './Tooltip';
 
 export { Badge } from './Badge';
 export type { BadgeProps, BadgeTone, BadgeVariant } from './Badge';

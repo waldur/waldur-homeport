@@ -2,8 +2,9 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card, Tab, Tabs } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CopyToClipboard } from '@/core/CopyToClipboard';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
@@ -29,13 +30,12 @@ export const NotificationExpandableRow: FunctionComponent<{
                   {template.is_content_overridden ? (
                     <div>
                       {formatHeader(template.path)}
-                      <Tip
-                        id={'tip-notif-overridden-' + index}
-                        label={translate('Content is overridden')}
-                        className="svg-icon svg-icon-5 ms-3"
-                      >
-                        <PencilSimpleIcon weight="bold" />
-                      </Tip>
+                      <Tooltip label={translate('Content is overridden')}>
+                        <PencilSimpleIcon
+                          weight="bold"
+                          className="svg-icon svg-icon-5 ms-3"
+                        />
+                      </Tooltip>
                     </div>
                   ) : (
                     formatHeader(template.path)

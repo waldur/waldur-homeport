@@ -28,27 +28,26 @@ exports[`InternalIpsList > renders list 1`] = `
                 Ports
               </span>
             </div>
-            <span>
-              <button
-                aria-label="Loading"
-                class="btn-icon disabled btn btn-flush btn-lg"
-                disabled=""
-                type="button"
+            <button
+              aria-label="Loading"
+              class="btn-icon disabled btn btn-flush btn-lg"
+              data-state="closed"
+              disabled=""
+              type="button"
+            >
+              <span
+                class="svg-icon svg-icon-2"
               >
                 <span
-                  class="svg-icon svg-icon-2"
+                  class="animation-spin"
                 >
                   <span
-                    class="animation-spin"
-                  >
-                    <span
-                      data-testid="ArrowsClockwiseIcon"
-                      weight="bold"
-                    />
-                  </span>
+                    data-testid="ArrowsClockwiseIcon"
+                    weight="bold"
+                  />
                 </span>
-              </button>
-            </span>
+              </span>
+            </button>
           </div>
         </div>
         <div
@@ -140,13 +139,13 @@ exports[`InternalIpsList > renders list 1`] = `
                       data-testid="pin-toggle-column-0"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -169,13 +168,13 @@ exports[`InternalIpsList > renders list 1`] = `
                       data-testid="pin-toggle-column-1"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -198,13 +197,13 @@ exports[`InternalIpsList > renders list 1`] = `
                       data-testid="pin-toggle-column-2"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -227,13 +226,13 @@ exports[`InternalIpsList > renders list 1`] = `
                       data-testid="pin-toggle-column-3"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -277,7 +276,7 @@ exports[`InternalIpsList > renders list 1`] = `
                       aria-haspopup="menu"
                       class="btn dropdown-toggle btn-text-secondary btn-icon no-arrow btn-lg"
                       data-state="closed"
-                      id="radix-:r0:"
+                      id="radix-:r5:"
                       type="button"
                     >
                       <span

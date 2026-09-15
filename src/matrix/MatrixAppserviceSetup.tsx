@@ -7,9 +7,10 @@ import {
   overrideSettingsRetrieve,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
 import { SecretGroup, StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -175,8 +176,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   />
                 )}
                 {step === 'main' && (
-                  <Tip
-                    id="setup-appservice-warning"
+                  <Tooltip
                     label={
                       tokensConfigured
                         ? translate(
@@ -189,7 +189,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                       submitting={submitting}
                       label={translate('Setup')}
                     />
-                  </Tip>
+                  </Tooltip>
                 )}
               </>
             }

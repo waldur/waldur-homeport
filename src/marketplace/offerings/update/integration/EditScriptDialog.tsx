@@ -9,8 +9,9 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Tip } from '@/core/Tooltip';
 import { wait } from '@/core/utils';
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
@@ -247,8 +248,7 @@ export const EditScriptDialog = ({
               extraClassName="editor-header gap-4 py-5"
               extra={
                 !language ? (
-                  <Tip
-                    id="resource-action-dialog-disabled-tooltip"
+                  <Tooltip
                     label={translate(
                       'Please select a script language to use dry-run',
                     )}
@@ -260,7 +260,7 @@ export const EditScriptDialog = ({
                       action={() => {}}
                       title={translate('Save & dry run script')}
                     />
-                  </Tip>
+                  </Tooltip>
                 ) : (
                   <ScriptEditorHeader
                     offering={resolve.offering}

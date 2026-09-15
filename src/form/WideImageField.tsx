@@ -9,13 +9,15 @@ import {
   useRef,
 } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
-import { Tip } from '@/core/Tooltip';
 import { formatFilesize } from '@/core/utils';
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 
 import { FormField } from './types';
+
 import './ImageField.scss';
 
 type ImageType = File | string;
@@ -112,33 +114,31 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
         <div className="d-flex gap-2 mb-4">
           {/* `.btn.disabled` drops pointer events, so the tooltip trigger has
               to wrap the label rather than sit inside it. */}
-          <Tip
-            id="wide-image-field-change"
-            label={props.disabled ? props.disabledReason : null}
-            className="d-inline-block"
-          >
-            <label
-              className={classNames(
-                'btn btn-tertiary btn-sm btn-icon-right',
-                props.disabled && 'disabled',
-              )}
-              data-image-input-action="change"
-            >
-              {translate('Change')}
-              <span className="svg-icon svg-icon-5">
-                <PencilSimpleIcon weight="bold" />
-              </span>
-              <input
-                ref={inputRef}
-                type="file"
-                name={input.name}
-                accept=".png, .jpg, .jpeg"
-                onChange={(event) => changeImage(event.target.files[0])}
-                className="d-none"
-                disabled={props.disabled}
-              />
-            </label>
-          </Tip>
+          <Tooltip label={props.disabled ? props.disabledReason : null}>
+            <span className="d-inline-block">
+              <label
+                className={classNames(
+                  'btn btn-tertiary btn-sm btn-icon-right',
+                  props.disabled && 'disabled',
+                )}
+                data-image-input-action="change"
+              >
+                {translate('Change')}
+                <span className="svg-icon svg-icon-5">
+                  <PencilSimpleIcon weight="bold" />
+                </span>
+                <input
+                  ref={inputRef}
+                  type="file"
+                  name={input.name}
+                  accept=".png, .jpg, .jpeg"
+                  onChange={(event) => changeImage(event.target.files[0])}
+                  className="d-none"
+                  disabled={props.disabled}
+                />
+              </label>
+            </span>
+          </Tooltip>
           <CompactSubmitButton
             submitting={false}
             variant="tertiary"

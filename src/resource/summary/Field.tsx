@@ -3,8 +3,9 @@ import classNames from 'classnames';
 import React, { FunctionComponent, ReactNode, useMemo } from 'react';
 import { Col, ColProps, Row } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { Tip } from '@/core/Tooltip';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import './Field.css';
@@ -57,9 +58,9 @@ export const Field: FunctionComponent<FieldProps> = ({
       >
         {typeof props.label === 'string' ? (
           labelTooltipLen && props.label.length > labelTooltipLen ? (
-            <Tip label={props.label} id="fieldLabel">
-              {props.label}:
-            </Tip>
+            <Tooltip label={props.label}>
+              <span>{props.label}:</span>
+            </Tooltip>
           ) : (
             props.label + ':'
           )
@@ -74,10 +75,13 @@ export const Field: FunctionComponent<FieldProps> = ({
       >
         {props.value || props.children || DASH_ESCAPE_CODE}
         {props.tooltip && (
-          <Tip label={props.tooltip} id="fieldHelpText">
-            {' '}
-            <QuestionIcon size={16} weight="bold" className="text-gray-400" />
-          </Tip>
+          <Tooltip label={props.tooltip}>
+            <QuestionIcon
+              size={16}
+              weight="bold"
+              className="text-gray-400 ms-1"
+            />
+          </Tooltip>
         )}
         {props.hasCopy && (
           <CopyToClipboardButton
