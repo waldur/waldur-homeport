@@ -10,6 +10,8 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
+import { getMatrixRoomUrl } from './utils';
+
 interface MatrixCredentialsDialogProps {
   resolve: {
     roomAlias: string;
@@ -35,9 +37,7 @@ const CredentialsContent: FC<{
   credentials: MatrixCredentials;
   roomAlias: string;
 }> = ({ credentials, roomAlias }) => {
-  const matrixUri = roomAlias
-    ? `matrix:r/${roomAlias.replace(/^#/, '')}`
-    : null;
+  const matrixRoomUrl = getMatrixRoomUrl(roomAlias);
 
   return (
     <div>
@@ -79,10 +79,10 @@ const CredentialsContent: FC<{
         </div>
       )}
 
-      {matrixUri && (
+      {matrixRoomUrl && (
         <div className="mt-4">
           <a
-            href={matrixUri}
+            href={matrixRoomUrl}
             className="btn btn-primary w-100"
             target="_blank"
             rel="noreferrer"
@@ -91,7 +91,9 @@ const CredentialsContent: FC<{
             {translate('Open in Matrix client')}
           </a>
           <small className="text-muted d-block text-center mt-1">
-            {translate('Opens in your default Matrix client if configured.')}
+            {translate(
+              'Opens matrix.to, which hands the room over to your Matrix client.',
+            )}
           </small>
         </div>
       )}

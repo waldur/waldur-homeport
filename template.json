@@ -25901,7 +25901,7 @@
       "feature_area": "steps"
     }
   },
-  "LiveKit API key for the Element Call SFU (Calls observability tab).": {},
+  "LiveKit API key for the call SFU (Calls observability tab).": {},
   "LiveKit API secret used to mint the admin token.": {},
   "LiveKit is not configured.": {
     "context": {
@@ -33480,7 +33480,7 @@
       "feature_area": "proposal"
     }
   },
-  "Opens in your default Matrix client if configured.": {
+  "Opens matrix.to, which hands the room over to your Matrix client.": {
     "context": {
       "feature_area": "matrix"
     }

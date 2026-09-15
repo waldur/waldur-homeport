@@ -14,6 +14,8 @@ import Avatar from '@/core/Avatar';
 import { Link } from '@/core/Link';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
+import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
+import { useModal } from '@/modal/actions';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useNotify } from '@/store/notify';
 import {
@@ -57,6 +59,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   const { client, activeRoomId, activeRoomUuid, connectionState } =
     useMatrixClient();
   const { showSuccess, showError } = useNotify();
+  const { openDialog } = useModal();
 
   // Compact view hides the room list behind the back button, so flag when any
   // other room has unread the user can't currently see.
@@ -92,9 +95,6 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   // user hangs up the active one.
   const blockedByOtherCall = inCall && !isThisRoomsCall;
   const busy = callState === 'discovering' || callState === 'connecting';
-  const matrixUri = roomAlias
-    ? `matrix:r/${roomAlias.replace(/^#/, '')}`
-    : null;
   // Mute reads push rules, which only exist once the initial sync completes;
   // gate on 'connected' so a pre-sync client (e.g. mid-impersonation reconnect)
   // can't trigger the SDK's "SyncApi.sync() must be done" throw. The
@@ -126,6 +126,11 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
     else startCall();
   };
 
+  // Waldur provisioned the user's Matrix account, so they have no login of
+  // their own for an external client; show it before handing the room over.
+  const handleOpenExternal = () =>
+    openDialog(MatrixCredentialsDialog, { resolve: { roomAlias, roomUuid } });
+
   const handleMute = async () => {
     if (!muteReady || !client || !activeRoomId) return;
     const next = !muted;
@@ -148,7 +153,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         )}
         {muted ? translate('Unmute') : translate('Mute')}
       </ActionsDropdownItem>
-      {(rtcAvailable || matrixUri) && <ActionsDropdownSeparator />}
+      {(rtcAvailable || roomAlias) && <ActionsDropdownSeparator />}
       {rtcAvailable &&
         (blockedByOtherCall ? (
           <Tip
@@ -179,12 +184,10 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
             {isThisRoomsCall ? translate('End call') : translate('Start call')}
           </ActionsDropdownItem>
         ))}
-      {matrixUri && (
-        <ActionsDropdownItem asChild>
-          <a href={matrixUri} target="_blank" rel="noreferrer">
-            <ChatsCircleIcon size={18} className="me-2" weight="bold" />
-            {translate('Open in external Matrix client')}
-          </a>
+      {roomAlias && (
+        <ActionsDropdownItem onSelect={handleOpenExternal}>
+          <ChatsCircleIcon size={18} className="me-2" weight="bold" />
+          {translate('Open in external Matrix client')}
         </ActionsDropdownItem>
       )}
     </ActionsDropdownComponent>
