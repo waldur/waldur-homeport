@@ -53,6 +53,7 @@ export enum MarketplaceFeatures {
   show_experimental_ui_components = 'marketplace.show_experimental_ui_components',
   show_openstack_duplicate_offerings = 'marketplace.show_openstack_duplicate_offerings',
   show_posix_id_pools = 'marketplace.show_posix_id_pools',
+  show_provider_accounts = 'marketplace.show_provider_accounts',
   show_resource_end_date = 'marketplace.show_resource_end_date',
 }
 

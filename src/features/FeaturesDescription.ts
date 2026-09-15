@@ -189,6 +189,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Render POSIX ID pool management UI for service providers.'),
       },
       {
+        key: 'show_provider_accounts',
+        description: translate('Render service provider account management UI: provider accounts, username conflicts, the shared GLAuth directory and provider account settings.'),
+      },
+      {
         key: 'show_resource_end_date',
         description: translate('Show resource end date as a non optional column in resources list.'),
       },
