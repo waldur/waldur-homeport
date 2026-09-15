@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { memo } from 'react';
-import { useFormState } from 'react-final-form';
 import { invoicesList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -9,9 +8,12 @@ import { translate } from '@/i18n';
 import { AgreementInfo } from '@/invoices/list/AgreementInfo';
 import { InvoicesStatsList } from '@/invoices/list/InvoicesStatsList';
 import { FinancialReportsFilterFormData } from '@/table/generated/FinancialReportsFilter';
+import { useFilterValues } from '@/table/useFilterValues';
 
 export const CustomerExpandableRow = memo((props: any) => {
-  const { values } = useFormState<FinancialReportsFilterFormData>();
+  const values = useFilterValues(
+    'customerList',
+  ) as FinancialReportsFilterFormData;
   const accountingPeriod = values?.accounting_period;
   const now = DateTime.now().startOf('month');
   const {
