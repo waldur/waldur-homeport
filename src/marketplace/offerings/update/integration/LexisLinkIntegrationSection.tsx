@@ -57,6 +57,14 @@ export const LexisLinkIntegrationSection: FC<OfferingEditPanelProps> = (
             name="plugin_options.heappe_local_base_path"
             label={translate('HEAppE local base path')}
           />
+          <StringEditField
+            name="plugin_options.heappe_identifier"
+            label={translate('HEAppE instance identifier')}
+            description={translate(
+              'Which HEAppE deployment this offering targets. Not the same as the cluster ID.',
+            )}
+            renderValue={(v) => v || undefined}
+          />
           <SecretEditField
             name="secret_options.heappe_password"
             label={translate('HEAppE password')}
