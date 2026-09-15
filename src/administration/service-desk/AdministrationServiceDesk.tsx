@@ -20,6 +20,12 @@ import { FieldRow } from '../settings/FieldRow';
 import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
 import { SupportUsersList } from '../support-users/SupportUsersList';
 
+import {
+  getAtlassianAuthMethod,
+  getAtlassianAuthMethodLabel,
+  getAtlassianSiteName,
+  getConfiguredValue,
+} from './atlassianAuth';
 import { IssueStatusList } from './issue-statuses';
 
 const AdministrationServiceDeskUpdateDialog = lazyComponent(() =>
@@ -39,8 +45,39 @@ const INTEGRATION_SETTINGS = SettingsDescription.find(
     group.description === translate('Service desk integration settings'),
 );
 
+// A provider counts as configured once its API URL is set; Atlassian also
+// needs credentials, and its URL default is a placeholder.
+const isProviderConfigured = (provider: string, settings) =>
+  provider === 'atlassian'
+    ? Boolean(
+        getAtlassianAuthMethod(settings) &&
+        getConfiguredValue(settings, 'ATLASSIAN_API_URL'),
+      )
+    : Boolean(settings[`${provider.toUpperCase()}_API_URL`]);
+
+const AtlassianSummary = ({ settings }) => {
+  const apiUrl = getConfiguredValue(settings, 'ATLASSIAN_API_URL') as string;
+  return (
+    <p className="fs-6 text-dark">
+      {settings.ATLASSIAN_PROJECT_ID
+        ? translate('{site}, service desk {project}', {
+            site: getAtlassianSiteName(apiUrl),
+            project: settings.ATLASSIAN_PROJECT_ID,
+          })
+        : getAtlassianSiteName(apiUrl)}
+      <br />
+      {getAtlassianAuthMethodLabel(getAtlassianAuthMethod(settings))}
+    </p>
+  );
+};
+
 const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   const { openDialog } = useModal();
+  const isAtlassian = serviceDeskProvider === 'atlassian';
+  const isConfigured = isProviderConfigured(serviceDeskProvider, initialValues);
+  const isActive =
+    Boolean(initialValues.WALDUR_SUPPORT_ENABLED) &&
+    initialValues.WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE === serviceDeskProvider;
 
   const openConfigure = () => {
     openDialog(AdministrationServiceDeskUpdateDialog, {
@@ -55,49 +92,72 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   const openDiscovery = () => {
     openDialog(AtlassianDiscoveryDialog, {
       size: 'xl',
+      resolve: { settings: initialValues },
     });
   };
 
+  // Same states, colours and wording as the identity provider cards. An
+  // unconfigured desk is never shown as enabled, even when it is the default
+  // active backend.
+  const state = !isConfigured
+    ? { variant: 'dark', title: translate('Not configured') }
+    : isActive
+      ? { variant: 'primary', title: translate('Enabled') }
+      : { variant: 'warning', title: translate('Disabled') };
+
   return (
-    <Card className="card-bordered min-h-150px">
-      <Card.Body className="pe-5">
-        <div className="d-flex align-items-center h-100">
-          <div className="d-flex flex-row justify-content-between h-100 flex-grow-1">
+    // Cards in a row share its height; the menu sits at the bottom so the
+    // buttons line up however long the description is.
+    <Card className="bg-light min-h-150px h-100 border border-secondary border-hover">
+      <Card.Body className="pe-5 d-flex">
+        <div className="d-flex flex-grow-1">
+          <div className="d-flex flex-row justify-content-between flex-grow-1">
             <div
               style={{
-                width: 70,
+                width: 50,
                 marginRight: 17,
               }}
             >
               <ServiceDeskProviderLogo name={serviceDeskProvider} />
             </div>
-          </div>
-          <div className="flex-grow-1">
-            <h1 className="fs-2 text-nowrap fw-boldest">
-              {capitalize(serviceDeskProvider)}
-            </h1>
-            <p className="fs-6 text-dark">
-              {translate(
-                '{supportServiceProvider} service desk.',
-                {
-                  supportServiceProvider: capitalize(serviceDeskProvider),
-                },
-                formatJsxTemplate,
+            <div className="flex-grow-1 d-flex flex-column">
+              <h1 className="fs-2 text-nowrap fw-boldest">
+                {capitalize(serviceDeskProvider)}
+              </h1>
+              {isAtlassian && isConfigured ? (
+                <AtlassianSummary settings={initialValues} />
+              ) : (
+                <p className="fs-6 text-dark">
+                  {translate(
+                    '{supportServiceProvider} service desk.',
+                    {
+                      supportServiceProvider: capitalize(serviceDeskProvider),
+                    },
+                    formatJsxTemplate,
+                  )}
+                </p>
               )}
-            </p>
-            <ActionDropdownButton
-              variant="primary"
-              title={translate('Actions')}
-            >
-              <ActionsDropdownItem onSelect={openConfigure}>
-                {translate('Configure')}
-              </ActionsDropdownItem>
-              {serviceDeskProvider === 'atlassian' && (
-                <ActionsDropdownItem onSelect={openDiscovery}>
-                  {translate('Discovery')}
-                </ActionsDropdownItem>
-              )}
-            </ActionDropdownButton>
+              <div className="mt-auto">
+                <ActionDropdownButton
+                  variant={state.variant}
+                  title={state.title}
+                >
+                  {isAtlassian && !isConfigured && (
+                    <ActionsDropdownItem onSelect={openDiscovery}>
+                      {translate('Discovery wizard')}
+                    </ActionsDropdownItem>
+                  )}
+                  <ActionsDropdownItem onSelect={openConfigure}>
+                    {translate('Edit')}
+                  </ActionsDropdownItem>
+                  {isAtlassian && isConfigured && (
+                    <ActionsDropdownItem onSelect={openDiscovery}>
+                      {translate('Re-discover')}
+                    </ActionsDropdownItem>
+                  )}
+                </ActionDropdownButton>
+              </div>
+            </div>
           </div>
         </div>
       </Card.Body>

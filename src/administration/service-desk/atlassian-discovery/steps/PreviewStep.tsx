@@ -10,7 +10,8 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
-import type { AtlassianFormValues } from '../types';
+import { getAtlassianAuthMethodLabel } from '../../atlassianAuth';
+import { AtlassianFormValues, extractCredentials } from '../types';
 
 /**
  * Step 5: Preview and Save
@@ -32,14 +33,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
     mutationFn: () =>
       supportSettingsAtlassianSaveSettings({
         body: {
-          api_url: values.api_url,
-          auth_method: values.auth_method,
-          email: values.email,
-          token: values.token,
-          personal_access_token: values.personal_access_token,
-          username: values.username,
-          password: values.password,
-          verify_ssl: values.verify_ssl,
+          ...extractCredentials(values),
           project_id: values.selectedProjectId || '',
           issue_types: selectedRequestTypes.map((rt) => rt.name),
           reporter_field: values.fieldMappings?.reporter_field,
@@ -112,15 +106,23 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                   {translate('API URL')}
                 </td>
                 <td>
-                  <code>{values.api_url}</code>
+                  <code>{values.resolvedApiUrl || values.api_url}</code>
                 </td>
               </tr>
               <tr>
                 <td className="text-muted">
                   {translate('Authentication Method')}
                 </td>
-                <td>{values.auth_method}</td>
+                <td>{getAtlassianAuthMethodLabel(values.auth_method)}</td>
               </tr>
+              {values.auth_method === 'oauth2_client_credentials' && (
+                <tr>
+                  <td className="text-muted">{translate('Client ID')}</td>
+                  <td>
+                    <code>{values.client_id}</code>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </Card.Body>

@@ -4,28 +4,24 @@ import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianValidateCredentials } from 'waldur-js-client';
 
 import { url } from '@/core/validators';
-import { StringGroup, SelectGroup, BooleanGroup, SecretGroup } from '@/form';
+import { StringGroup, RadioGroup, BooleanGroup, SecretGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
-import type { AtlassianFormValues } from '../types';
+import { getAtlassianAuthMethodChoices } from '../../atlassianAuth';
+import { AtlassianFormValues, extractCredentials } from '../types';
 
-const AUTH_METHODS = [
-  {
-    value: 'api_token',
-    label: translate('API Token (Atlassian Cloud)'),
-  },
-  {
-    value: 'personal_access_token',
-    label: translate('Personal Access Token (Server/Data Center)'),
-  },
-  {
-    value: 'basic',
-    label: translate('Basic Authentication'),
-  },
-];
+const REQUIRED_CREDENTIALS: Record<
+  AtlassianFormValues['auth_method'],
+  (keyof AtlassianFormValues)[]
+> = {
+  oauth2_client_credentials: ['client_id', 'client_secret'],
+  api_token: ['email', 'token'],
+  personal_access_token: ['personal_access_token'],
+  basic: ['username', 'password'],
+};
 
 /**
  * Step 1: Credentials
@@ -49,24 +45,14 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
     setServerInfo(null);
 
     try {
-      const credentials = {
-        api_url: values.api_url,
-        auth_method: values.auth_method,
-        email: values.email,
-        token: values.token,
-        personal_access_token: values.personal_access_token,
-        username: values.username,
-        password: values.password,
-        verify_ssl: values.verify_ssl,
-      };
-
       const response = await supportSettingsAtlassianValidateCredentials({
-        body: credentials,
+        body: extractCredentials(values),
       });
 
       const data = response.data as any;
       if (data.valid) {
         setServerInfo(data.server_info);
+        form.change('resolvedApiUrl', data.api_url || values.api_url);
         form.change('credentialsValid', true);
         // Advance to next step via form submission
         props.handleSubmit();
@@ -84,20 +70,13 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
     }
   };
 
-  const isFormValid = () => {
-    if (!values.api_url || !values.auth_method) return false;
+  const isFormValid = () =>
+    Boolean(values.api_url && values.auth_method) &&
+    (REQUIRED_CREDENTIALS[values.auth_method] || []).every((field) =>
+      Boolean(values[field]),
+    );
 
-    if (values.auth_method === 'api_token') {
-      return Boolean(values.email && values.token);
-    }
-    if (values.auth_method === 'personal_access_token') {
-      return Boolean(values.personal_access_token);
-    }
-    if (values.auth_method === 'basic') {
-      return Boolean(values.username && values.password);
-    }
-    return false;
-  };
+  const isServiceAccount = values.auth_method === 'oauth2_client_credentials';
 
   // Custom footer for this step
   const renderFooter = () => (
@@ -116,23 +95,33 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <div className="mb-6">
+        <h4 className="mb-4">{translate('Sign-in method')}</h4>
+        <RadioGroup
+          name="auth_method"
+          label={translate('Authentication method')}
+          choices={getAtlassianAuthMethodChoices()}
+          gap={3}
+          required
+        />
+      </div>
+      <div className="mb-6">
         <h4 className="mb-4">{translate('Connection Settings')}</h4>
 
         <StringGroup
           name="api_url"
           validate={url}
-          label={translate('API URL')}
-          description={translate(
-            'e.g., https://your-domain.atlassian.net or https://jira.example.com',
-          )}
-          required
-        />
-
-        <SelectGroup
-          name="auth_method"
-          options={AUTH_METHODS}
-          simpleValue
-          label={translate('Authentication Method')}
+          label={
+            isServiceAccount ? translate('Site URL') : translate('API URL')
+          }
+          description={
+            isServiceAccount
+              ? translate(
+                  'Your Atlassian Cloud site, e.g. https://your-domain.atlassian.net. Waldur looks up its cloud ID and connects through the Atlassian API gateway.',
+                )
+              : translate(
+                  'e.g., https://your-domain.atlassian.net or https://jira.example.com',
+                )
+          }
           required
         />
 
@@ -141,6 +130,30 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           label={translate('Verify SSL Certificate')}
         />
       </div>
+      {isServiceAccount && (
+        <div className="mb-6">
+          <h4 className="mb-4">{translate('Service account credential')}</h4>
+          <p className="text-muted mb-4">
+            {translate(
+              'In Atlassian Administration, open Directory, then Service accounts, and create an OAuth 2.0 credential for the service account with the scopes read:servicedesk-request, write:servicedesk-request, manage:servicedesk-customer, read:jira-work, write:jira-work and read:jira-user. The service account needs a Jira Service Management agent licence and the Service Desk Team role on the project.',
+            )}
+          </p>
+
+          <StringGroup
+            name="client_id"
+            label={translate('Client ID')}
+            help={translate('ID of application used for OAuth authentication.')}
+            required
+          />
+
+          <SecretGroup
+            name="client_secret"
+            label={translate('Client secret')}
+            help={translate('Application secret key.')}
+            required
+          />
+        </div>
+      )}
       {values.auth_method === 'api_token' && (
         <div className="mb-6">
           <h4 className="mb-4">{translate('API Token Authentication')}</h4>

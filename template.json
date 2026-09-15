@@ -782,11 +782,6 @@
       "feature_area": "steps"
     }
   },
-  "API Token (Atlassian Cloud)": {
-    "context": {
-      "primary_ui_type": "label"
-    }
-  },
   "API Token Authentication": {
     "context": {
       "feature_area": "steps"
@@ -851,6 +846,11 @@
   "API token": {
     "context": {
       "feature_area": "service-accounts"
+    }
+  },
+  "API token (Atlassian Cloud)": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "API token authentication": {},
@@ -6247,12 +6247,12 @@
     }
   },
   "Atlassian API server URL": {},
-  "Atlassian Service Desk": {},
-  "Atlassian Settings Discovery": {
+  "Atlassian Cloud (API gateway)": {
     "context": {
-      "feature_area": "atlassian-discovery"
+      "feature_area": "service-desk"
     }
   },
+  "Atlassian Service Desk": {},
   "Atlassian settings": {},
   "Atlassian settings saved successfully": {
     "context": {
@@ -6501,7 +6501,7 @@
   },
   "Authentication method": {
     "context": {
-      "feature_area": "charts",
+      "feature_area": "service-desk",
       "action_type": "read"
     }
   },
@@ -7247,7 +7247,6 @@
   },
   "Basic Authentication": {
     "context": {
-      "primary_ui_type": "label",
       "feature_area": "steps"
     }
   },
@@ -9552,6 +9551,7 @@
   },
   "Client ID": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "providers"
     }
   },
@@ -9575,6 +9575,7 @@
   },
   "Client secret": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "providers"
     }
   },
@@ -9860,7 +9861,7 @@
       "feature_area": "questions"
     }
   },
-  "Comma-separated list of file extenstions not allowed for attachment.": {},
+  "Comma-separated list of file extensions not allowed for attachment.": {},
   "Comma-separated list of regular expressions matched against the user email, e.g. '.*@example.com'. Only has an effect when OIDC_BLOCK_CREATION_OF_UNINVITED_USERS is enabled. When non-empty, a user whose email matches any of the patterns may sign up without an invitation, and existing users must keep matching in order to log in - except staff and support users, users holding at least one unexpired role, users with a pending invitation and users matching an autoprovisioning rule, which are always allowed. Only interactive logins are gated; background identity synchronisation is not. Patterns must match the whole email and are case-insensitive. Note: values are split on commas, so a pattern cannot contain a comma - '{n,m}' quantifiers are not supported, repeat the expression instead.": {
     "context": {
       "variables": {
@@ -10513,12 +10514,7 @@
   "Configure": {
     "context": {
       "primary_ui_type": "action_button",
-      "feature_area": "service-desk"
-    }
-  },
-  "Configure Atlassian Jira Service Desk integration": {
-    "context": {
-      "feature_area": "atlassian-discovery"
+      "feature_area": "update-internal-ips"
     }
   },
   "Configure OIDC identity provider settings": {
@@ -10829,6 +10825,11 @@
       "feature_area": "coi-review"
     }
   },
+  "Connect Jira Service Management, then pick the project, request types and fields": {
+    "context": {
+      "feature_area": "atlassian-discovery"
+    }
+  },
   "Connect ORCID": {
     "context": {
       "feature_area": "reviewer"
@@ -10932,6 +10933,11 @@
   "Connection Settings": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Connection and sign-in": {
+    "context": {
+      "feature_area": "service-desk"
     }
   },
   "Connection breakdown": {
@@ -13128,6 +13134,11 @@
       "feature_area": "steps"
     }
   },
+  "Custom field mapping": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Custom interval (months)": {
     "context": {
       "feature_area": "rounds"
@@ -15285,7 +15296,7 @@
   },
   "Disabled": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "providers"
     }
   },
@@ -15422,7 +15433,7 @@
   "Discovery": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "service-desk"
+      "feature_area": "reviewer-pool"
     }
   },
   "Discovery (recommended)": {
@@ -16791,6 +16802,7 @@
       "feature_area": "reviewer-discovery"
     }
   },
+  "Email address and API token of an Atlassian account.": {},
   "Email address for CrossRef API polite pool. Provides higher rate limits.": {},
   "Email address of the user": {
     "context": {
@@ -20502,6 +20514,7 @@
       "feature_area": "footer"
     }
   },
+  "For Jira Server and Data Center.": {},
   "For Jira Server/Data Center, create a PAT in your profile settings.": {
     "context": {
       "feature_area": "steps"
@@ -22968,6 +22981,11 @@
     }
   },
   "Importing resources": {},
+  "In Atlassian Administration, open Directory, then Service accounts, and create an OAuth 2.0 credential for the service account with the scopes read:servicedesk-request, write:servicedesk-request, manage:servicedesk-customer, read:jira-work, write:jira-work and read:jira-user. The service account needs a Jira Service Management agent licence and the Service Desk Team role on the project.": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
   "In Billing": {
     "context": {
       "feature_area": "mappings"
@@ -25275,6 +25293,7 @@
       "feature_area": "site-agents"
     }
   },
+  "Legacy. Not accepted by Atlassian Cloud.": {},
   "Legal & Privacy": {
     "context": {
       "feature_area": "footer"
@@ -31684,7 +31703,7 @@
   "Not carried over": {},
   "Not configured": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "providers"
     }
   },
@@ -32182,7 +32201,9 @@
   },
   "OAuth 2.0 Access Token": {},
   "OAuth 2.0 Client ID": {},
+  "OAuth 2.0 Client Secret. With the client ID set, Waldur obtains and renews access tokens itself (client credentials grant).": {},
   "OAuth 2.0 Token Type": {},
+  "OAuth 2.0 access token": {},
   "OAuth/OIDC token claim name containing user roles for automatic staff/support assignment. If the claim contains 'staff', user gets is_staff=True. If it contains 'support', user gets is_support=True. Leave empty to disable role synchronization from identity provider.": {},
   "OECD Category": {
     "context": {
@@ -33134,6 +33155,11 @@
     }
   },
   "Only staff users are allowed to perform this action.": {},
+  "Only the credentials of the selected method are kept; the others are cleared on update.": {
+    "context": {
+      "feature_area": "service-desk"
+    }
+  },
   "Only users matching the following criteria can accept this invitation. Users must satisfy at least one criterion from each configured restriction type.": {
     "context": {
       "feature_area": "actions"
@@ -34413,7 +34439,7 @@
   "Other": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "actions"
+      "feature_area": "service-desk"
     }
   },
   "Other (manual input)": {
@@ -35729,11 +35755,6 @@
       "feature_area": "steps"
     }
   },
-  "Personal Access Token (Server/Data Center)": {
-    "context": {
-      "primary_ui_type": "label"
-    }
-  },
   "Personal Access Token Authentication": {
     "context": {
       "feature_area": "steps"
@@ -35743,6 +35764,11 @@
   "Personal Access Tokens": {
     "context": {
       "feature_area": "personal-access-tokens"
+    }
+  },
+  "Personal access token (Data Center)": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Personal access token created": {
@@ -40370,6 +40396,7 @@
       "feature_area": "setup"
     }
   },
+  "Recommended for Atlassian Cloud. Uses the client ID and secret of a service account OAuth 2.0 credential; Waldur renews the access tokens itself.": {},
   "Reconcile": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -47037,6 +47064,16 @@
       "feature_area": "service-accounts"
     }
   },
+  "Service account (OAuth 2.0)": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Service account credential": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
   "Service account has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -47065,6 +47102,11 @@
   "Service catalog UUID": {},
   "Service catalog offering": {},
   "Service catalog offerings": {},
+  "Service desk": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Service desk ID or key": {},
   "Service desk configuration incomplete": {
     "context": {
@@ -47602,6 +47644,11 @@
   "Set to true if this category is for OpenStack Volume. Only one category can have \"true\" value.": {
     "context": {
       "feature_area": "admin"
+    }
+  },
+  "Set up Atlassian service desk": {
+    "context": {
+      "feature_area": "atlassian-discovery"
     }
   },
   "Set up helpdesk": {
@@ -48214,6 +48261,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Sign-in method": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
   "Signed in as {username}": {
     "context": {
       "variables": {
@@ -48288,6 +48340,11 @@
     }
   },
   "Site Agent Logs": {},
+  "Site URL": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
   "Site agent": {
     "context": {
       "feature_area": "policies"
@@ -61059,6 +61116,11 @@
       "feature_area": "layouts"
     }
   },
+  "Username and password": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Username anonymized prefix": {
     "context": {
       "feature_area": "integration"
@@ -62442,7 +62504,7 @@
   },
   "Webhook": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "hooks"
     }
   },
@@ -63880,6 +63942,11 @@
   "Your Arrow API key": {
     "context": {
       "feature_area": "setup"
+    }
+  },
+  "Your Atlassian Cloud site, e.g. https://your-domain.atlassian.net. Waldur looks up its cloud ID and connects through the Atlassian API gateway.": {
+    "context": {
+      "feature_area": "steps"
     }
   },
   "Your Atlassian account email": {
@@ -69059,6 +69126,19 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "{site}, service desk {project}": {
+    "context": {
+      "variables": {
+        "site": {
+          "type": "unknown"
+        },
+        "project": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "service-desk"
     }
   },
   "{start} → {end} ({zone})": {

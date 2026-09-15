@@ -1,4 +1,5 @@
-import { capitalize } from 'lodash-es';
+import { capitalize, pick } from 'lodash-es';
+import { useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
@@ -9,7 +10,15 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { SupportSettingsForm } from './SupportSettingsForm';
+import {
+  AUTH_METHOD_FIELD,
+  prepareAtlassianSettings,
+  prepareAtlassianSubmission,
+} from './atlassianAuth';
+import {
+  getProviderSettings,
+  SupportSettingsForm,
+} from './SupportSettingsForm';
 
 interface AdministrationServiceDeskUpdateDialogProps {
   resolve: {
@@ -21,15 +30,31 @@ interface AdministrationServiceDeskUpdateDialogProps {
 export const AdministrationServiceDeskUpdateDialog = ({
   resolve,
 }: AdministrationServiceDeskUpdateDialogProps) => {
+  const isAtlassian = resolve.name === 'atlassian';
+
+  const initialValues = useMemo(
+    () =>
+      isAtlassian
+        ? prepareAtlassianSettings(resolve.initialValues)
+        : resolve.initialValues,
+    [isAtlassian, resolve.initialValues],
+  );
+
   const updateServiceDeskMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
-      const relevantFormData = {};
-      Object.keys(formData).forEach((fieldName) => {
-        if (fieldName.startsWith(resolve.name.toUpperCase())) {
-          relevantFormData[fieldName] = formData[fieldName];
-        }
-      });
-      return overrideSettings({ body: relevantFormData, ...formDataOptions });
+      // The provider's own settings only; not every one carries its prefix.
+      const settingKeys = getProviderSettings(resolve.name).map(
+        (field) => field.key,
+      );
+      let body: Record<string, unknown> = pick(formData, settingKeys);
+      if (isAtlassian) {
+        body = prepareAtlassianSubmission(
+          body,
+          formData[AUTH_METHOD_FIELD],
+          resolve.initialValues,
+        );
+      }
+      return overrideSettings({ body, ...formDataOptions });
     },
 
     successMessage: translate('Configurations have been updated'),
@@ -45,7 +70,7 @@ export const AdministrationServiceDeskUpdateDialog = ({
   return (
     <Form
       onSubmit={(values) => updateServiceDeskMutation.mutateAsync(values)}
-      initialValues={resolve.initialValues}
+      initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit} autoComplete="off">
           <ModalDialog
