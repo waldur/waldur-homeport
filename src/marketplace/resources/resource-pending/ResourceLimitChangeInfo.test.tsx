@@ -16,9 +16,6 @@ vi.mock('@/marketplace/service-providers/dashboard/ChangesAmountBadge', () => ({
     <span data-testid="badge">{changes}</span>
   ),
 }));
-vi.mock('@/core/Tooltip', () => ({
-  Tip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
 vi.mock('./CostEstimatedChangeView', () => ({
   CostEstimatedChangeView: () => null,
 }));

@@ -5,9 +5,10 @@ import {
   marketplaceCustomerEstimatedCostPoliciesList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { Tip } from '@/core/Tooltip';
 import { CostPolicyActions } from '@/customer/cost-policies/CostPolicyActions';
 import { CostPolicyCreateButton } from '@/customer/cost-policies/CostPolicyCreateButton';
 import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
@@ -73,14 +74,13 @@ export const OrganizationCostPoliciesList: FC = () => {
           title: (
             <>
               {translate('Action triggered')}{' '}
-              <Tip
-                id="action-triggered-tooltip"
+              <Tooltip
                 label={translate(
                   "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
                 )}
               >
                 <QuestionIcon size={18} weight="bold" />
-              </Tip>
+              </Tooltip>
             </>
           ),
           render: ({ row }) => <BooleanBadge value={row.has_fired} />,

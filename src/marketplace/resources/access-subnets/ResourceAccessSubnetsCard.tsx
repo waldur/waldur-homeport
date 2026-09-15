@@ -8,7 +8,8 @@ import {
   accessSubnetsList,
 } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -86,15 +87,17 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
         title={
           <>
             {translate('Access subnets')}
-            <Tip
-              id="resource-access-subnets-help"
+            <Tooltip
               label={translate(
                 'Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.',
               )}
-              className="ms-2"
             >
-              <QuestionIcon size={16} weight="bold" className="text-muted" />
-            </Tip>
+              <QuestionIcon
+                size={16}
+                weight="bold"
+                className="ms-2 text-muted"
+              />
+            </Tooltip>
           </>
         }
         columns={[

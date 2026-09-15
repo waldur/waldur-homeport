@@ -1,6 +1,7 @@
 import { GearIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+
+import { Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -110,12 +111,10 @@ export const RabbitMQQueueConfigPopover: FC<
     });
   }
 
-  const popover = (
-    <Popover id={`queue-config-${queue.name}`}>
-      <Popover.Header as="h3">
-        {translate('Queue configuration')}
-      </Popover.Header>
-      <Popover.Body>
+  const popoverContent = (
+    <>
+      <div className="mb-2 fw-bold">{translate('Queue configuration')}</div>
+      <div>
         <table className="table table-sm table-borderless mb-0">
           <tbody>
             {configItems.map((item, index) => (
@@ -128,19 +127,13 @@ export const RabbitMQQueueConfigPopover: FC<
             ))}
           </tbody>
         </table>
-      </Popover.Body>
-    </Popover>
+      </div>
+    </>
   );
 
   return (
-    <OverlayTrigger
-      trigger={['hover', 'focus']}
-      placement="left"
-      overlay={popover}
-    >
-      <span className="cursor-pointer text-info">
-        <GearIcon size={18} weight="bold" />
-      </span>
-    </OverlayTrigger>
+    <Tooltip side="left" autoWidth={true} label={popoverContent}>
+      <GearIcon size={18} weight="bold" className="cursor-pointer text-info" />
+    </Tooltip>
   );
 };

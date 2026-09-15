@@ -1,12 +1,12 @@
 import { FileCsvIcon, FileXlsIcon, PrinterIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import exportAs from '@/table/exporters';
 import { ExportData } from '@/table/exporters/types';
-
-import { Tip } from './Tooltip';
 
 interface EChartActionsProps {
   chartInstance: any;
@@ -102,7 +102,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
     (props.exportPdf || props.exportCsv || props.exportExcel) && (
       <div className="d-flex justify-content-end gap-2 px-1 pt-2">
         {props.exportPdf && (
-          <Tip id="tip-echarts-pdf" label="PDF">
+          <Tooltip label="PDF">
             <button
               type="button"
               className="text-btn text-hover-primary"
@@ -110,10 +110,10 @@ export const EChartActions: FC<EChartActionsProps> = ({
             >
               <PrinterIcon size={20} weight="bold" />
             </button>
-          </Tip>
+          </Tooltip>
         )}
         {props.exportCsv && (
-          <Tip id="tip-echarts-csv" label="CSV">
+          <Tooltip label="CSV">
             <button
               type="button"
               className="text-btn text-hover-primary"
@@ -121,10 +121,10 @@ export const EChartActions: FC<EChartActionsProps> = ({
             >
               <FileCsvIcon size={20} weight="bold" />
             </button>
-          </Tip>
+          </Tooltip>
         )}
         {props.exportExcel && (
-          <Tip id="tip-echarts-excel" label="Excel">
+          <Tooltip label="Excel">
             <button
               type="button"
               className="text-btn text-hover-primary"
@@ -132,7 +132,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
             >
               <FileXlsIcon size={20} weight="bold" />
             </button>
-          </Tip>
+          </Tooltip>
         )}
       </div>
     )

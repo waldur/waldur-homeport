@@ -39,12 +39,13 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { getNextPageUrl } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
-import { Tip } from '@/core/Tooltip';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -1275,10 +1276,9 @@ export const OrganisationAllocationTab: FC = () => {
               </>
             )}
 
-            <Tip id="tip-alloc-excel" label={translate('Download Excel')}>
+            <Tooltip label={translate('Download Excel')}>
               <button
                 type="button"
-                className="text-btn text-hover-primary"
                 onClick={async () => {
                   setExcelProgress({ current: 0, total: 1 });
                   await downloadAllocationExcel(
@@ -1289,10 +1289,11 @@ export const OrganisationAllocationTab: FC = () => {
                   );
                   setExcelProgress(null);
                 }}
+                className="text-btn text-hover-primary"
               >
                 <FileXlsIcon size={20} weight="bold" />
               </button>
-            </Tip>
+            </Tooltip>
             {excelProgress && (
               <span className="text-muted small ms-2">
                 {translate('Preparing Excel — sheet {current} of {total}…', {
@@ -1364,10 +1365,9 @@ export const OrganisationAllocationTab: FC = () => {
               </>
             )}
 
-            <Tip id="tip-consumption-excel" label={translate('Download Excel')}>
+            <Tooltip label={translate('Download Excel')}>
               <button
                 type="button"
-                className="text-btn text-hover-primary"
                 onClick={async () => {
                   setExcelProgress({ current: 0, total: 1 });
                   await downloadAllocationExcel(
@@ -1378,10 +1378,11 @@ export const OrganisationAllocationTab: FC = () => {
                   );
                   setExcelProgress(null);
                 }}
+                className="text-btn text-hover-primary"
               >
                 <FileXlsIcon size={20} weight="bold" />
               </button>
-            </Tip>
+            </Tooltip>
             {excelProgress && (
               <span className="text-muted small ms-2">
                 {translate('Preparing Excel — sheet {current} of {total}…', {

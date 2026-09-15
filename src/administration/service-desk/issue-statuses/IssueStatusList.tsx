@@ -2,8 +2,9 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { supportIssueStatusesList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -57,18 +58,17 @@ export const IssueStatusList: FC = () => {
       title={
         <span className="d-flex align-items-center gap-2">
           {translate('Issue status mapping')}
-          <Tip
-            id="issue-status-mapping-info"
+          <Tooltip
             label={translate(
               'Map your service desk status names to Waldur outcome types. "Resolved" statuses complete orders successfully. "Canceled" statuses terminate resources.',
             )}
           >
             <InfoIcon
               size={18}
-              className="text-muted cursor-pointer"
               weight="bold"
+              className="text-muted cursor-pointer"
             />
-          </Tip>
+          </Tooltip>
         </span>
       }
       tableActions={<IssueStatusCreateButton refetch={tableProps.fetch} />}

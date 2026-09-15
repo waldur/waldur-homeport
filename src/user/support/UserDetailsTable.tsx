@@ -2,10 +2,11 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { User } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
-import { Tip } from '@/core/Tooltip';
 import { formatPhoneNumber } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
@@ -81,8 +82,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
           <div className="d-inline-flex align-items-center gap-2">
             <FieldWithCopy value={props.user.identity_provider_label} />
             {props.user.should_protect_user_details && (
-              <Tip
-                id="user-details-protected"
+              <Tooltip
                 label={translate(
                   'Profile fields (organization, name, email) are managed by the identity provider and cannot be edited in Waldur.',
                 )}
@@ -90,7 +90,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
                 <Badge variant="purple" outline>
                   {translate('Details protected')}
                 </Badge>
-              </Tip>
+              </Tooltip>
             )}
           </div>
         }
@@ -162,15 +162,14 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         label={
           <span className="d-inline-flex align-items-center gap-1">
             {translate('Organization')}
-            <Tip
-              id="user-organization-tooltip"
-              placement="top"
+            <Tooltip
+              side="top"
               label={translate(
                 'Supplied by the identity provider. Auto-provisioning rules that match by organization name compare this value against Waldur customer names.',
               )}
             >
               <QuestionIcon size={16} weight="bold" className="text-muted" />
-            </Tip>
+            </Tooltip>
           </span>
         }
         value={<FieldWithCopy value={props.user.organization} />}
@@ -234,14 +233,13 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
               <Badge variant="danger" outline>
                 {translate('Administratively disabled')}
               </Badge>
-              <Tip
-                id="user-admin-deactivated-tooltip"
+              <Tooltip
                 label={translate(
                   'This account was disabled by an administrator. When automatic role-based deactivation is enabled, the system will not re-enable it automatically, even if the user regains roles. A staff member must reactivate it manually.',
                 )}
               >
                 <QuestionIcon size={16} weight="bold" className="text-muted" />
-              </Tip>
+              </Tooltip>
             </div>
           }
         />

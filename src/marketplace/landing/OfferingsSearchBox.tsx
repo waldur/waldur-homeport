@@ -5,11 +5,12 @@ import {
   MarketplacePublicOfferingsListData,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AsyncSearchBox } from '@/core/async/AsyncSearchBox';
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
-import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -50,20 +51,19 @@ const OfferingListItem: FC<{ row: any }> = ({ row }) => {
         </div>
         {!isFeatureVisible(MarketplaceFeatures.catalogue_only) && (
           <div className="flex-shrink-0">
-            <Tip
-              id={`search-offering-${row.uuid}`}
-              label={translate('Add resource')}
-            >
-              <OfferingLink
-                offering_uuid={row.uuid}
-                buttonVariant="text-primary"
-                className="btn-icon btn-sm"
-              >
-                <span className="svg-icon svg-icon-2">
-                  <PlusCircleIcon weight="bold" />
-                </span>
-              </OfferingLink>
-            </Tip>
+            <Tooltip label={translate('Add resource')}>
+              <span>
+                <OfferingLink
+                  offering_uuid={row.uuid}
+                  buttonVariant="text-primary"
+                  className="btn-icon btn-sm"
+                >
+                  <span className="svg-icon svg-icon-2">
+                    <PlusCircleIcon weight="bold" />
+                  </span>
+                </OfferingLink>
+              </span>
+            </Tooltip>
           </div>
         )}
       </div>

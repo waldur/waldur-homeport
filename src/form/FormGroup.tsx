@@ -5,7 +5,8 @@ import { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 
-import { Tip, TipProps } from '@/core/Tooltip';
+import { TooltipProps } from 'waldur-ui';
+import { Tooltip } from 'waldur-ui';
 
 import { FieldError } from './FieldError';
 
@@ -19,7 +20,7 @@ export interface FormGroupProps {
   help?: ReactNode;
   tooltipEnd?: boolean;
   helpEnd?: boolean;
-  tooltipProps?: Partial<TipProps>;
+  tooltipProps?: Partial<TooltipProps>;
 
   hideLabel?: boolean;
   hideError?: boolean;
@@ -78,13 +79,11 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const labelNode = !hideLabel && (label || tooltip) && (
     <Form.Label className={classNames({ required, 'me-auto': true })}>
       {tooltip && !tooltipEnd && (
-        <Tip
-          id={'form-field-tooltip-' + controlId}
-          label={tooltip}
-          {...tooltipProps}
-        >
-          <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}
-        </Tip>
+        <>
+          <Tooltip label={tooltip} {...tooltipProps}>
+            <QuestionIcon weight="bold" size={20} className="text-muted" />
+          </Tooltip>{' '}
+        </>
       )}
       {label}
     </Form.Label>
@@ -106,14 +105,13 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           {labelNode && <span className="me-auto">{labelNode}</span>}
           {quickAction}
           {tooltip && tooltipEnd && (
-            <Tip
-              id={'form-field-tooltip-' + controlId}
-              className="align-self-center ms-2 mb-2"
-              label={tooltip}
-              {...tooltipProps}
-            >
-              <QuestionIcon weight="bold" size={16} className="text-muted" />
-            </Tip>
+            <Tooltip label={tooltip} {...tooltipProps}>
+              <QuestionIcon
+                weight="bold"
+                size={16}
+                className="align-self-center ms-2 mb-2 text-muted"
+              />
+            </Tooltip>
           )}
         </div>
       ) : (

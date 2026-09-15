@@ -7,8 +7,9 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDate, formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -136,19 +137,18 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
             <>
               {renderFieldOrDash(
                 row.comment ? (
-                  <Tip
+                  <Tooltip
                     label={row.comment}
-                    id={`comment-tip-${row.uuid}`}
-                    delay={{ show: 0, hide: 0 }}
-                    tipClassName="text-start"
+                    delayDuration={0}
+                    contentClassName="text-start"
                   >
                     <span
-                      className="ellipsis d-inline-block"
                       style={{ width: 150 }}
+                      className="ellipsis d-inline-block"
                     >
                       {row.comment}
                     </span>
-                  </Tip>
+                  </Tooltip>
                 ) : null,
               )}
             </>

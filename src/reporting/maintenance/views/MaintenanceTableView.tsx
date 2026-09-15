@@ -1,9 +1,10 @@
 import { FC, useEffect, useMemo } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { getMaintenanceState } from '@/maintenance/utils';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -93,12 +94,11 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
       },
       {
         title: (
-          <Tip
+          <Tooltip
             label={translate('Difference between actual end and scheduled end')}
-            id="overrun-header-tooltip"
           >
             <span>{translate('Overrun')}</span>
-          </Tip>
+          </Tooltip>
         ),
         orderField: 'overrun_minutes',
         render: ({ row }) => {

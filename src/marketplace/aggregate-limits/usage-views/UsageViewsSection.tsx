@@ -8,10 +8,11 @@ import {
   marketplaceProjectUsageComponentsUsageRetrieve,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
-import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { DashboardFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -129,9 +130,9 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
           title={
             <>
               {translate('Per-offering usage views')}{' '}
-              <Tip id="usage-views-hint" label={activeVariant.hint}>
+              <Tooltip label={activeVariant.hint}>
                 <QuestionIcon weight="bold" />
-              </Tip>
+              </Tooltip>
             </>
           }
           actions={

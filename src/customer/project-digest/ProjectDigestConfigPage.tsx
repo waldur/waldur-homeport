@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
@@ -91,11 +92,10 @@ export const ProjectDigestConfigPage: FC = () => {
                 label={translate('Send test email')}
               />
             )}
-            <Tip
+            <Tooltip
               label={
                 formState.pristine ? translate('No changes to save') : undefined
               }
-              id="save-digest-config"
             >
               <SubmitButton
                 submitting={formState.submitting}
@@ -103,7 +103,7 @@ export const ProjectDigestConfigPage: FC = () => {
                 form={DIGEST_FORM_ID}
                 label={translate('Save')}
               />
-            </Tip>
+            </Tooltip>
             <ProjectDigestPreviewButton />
             <ProjectDigestSummaryButton />
           </>

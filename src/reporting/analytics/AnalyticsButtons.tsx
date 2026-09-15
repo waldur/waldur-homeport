@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 
@@ -24,14 +25,11 @@ interface AnalyticsButtonProps {
 const WhatIfButton: FC<AnalyticsButtonProps> = ({
   state,
   isDisabled,
-  tipId,
+
   size = 'sm',
 }) =>
   isDisabled ? (
-    <Tip
-      id={tipId || 'what-if-tip'}
-      label={translate('No data available for analysis')}
-    >
+    <Tooltip label={translate('No data available for analysis')}>
       <CompactSubmitButton
         submitting={false}
         type="button"
@@ -39,7 +37,7 @@ const WhatIfButton: FC<AnalyticsButtonProps> = ({
         disabled
         label={translate('What if')}
       />
-    </Tip>
+    </Tooltip>
   ) : (
     <Link
       state={state}
@@ -56,14 +54,11 @@ const WhatIfButton: FC<AnalyticsButtonProps> = ({
 const WhySoButton: FC<AnalyticsButtonProps> = ({
   state,
   isDisabled,
-  tipId,
+
   size = 'sm',
 }) =>
   isDisabled ? (
-    <Tip
-      id={tipId || 'why-so-tip'}
-      label={translate('No data available for analysis')}
-    >
+    <Tooltip label={translate('No data available for analysis')}>
       <CompactSubmitButton
         submitting={false}
         type="button"
@@ -71,7 +66,7 @@ const WhySoButton: FC<AnalyticsButtonProps> = ({
         disabled
         label={translate('Why so')}
       />
-    </Tip>
+    </Tooltip>
   ) : (
     <Link
       state={state}

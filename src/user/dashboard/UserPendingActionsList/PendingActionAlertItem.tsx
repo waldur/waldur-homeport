@@ -2,9 +2,10 @@ import { BellSlashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { UserAction } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
@@ -67,18 +68,17 @@ export const PendingActionAlertItem: FC<{
         <div className="d-flex align-items-center gap-2">
           {displayTitle}
           {row.is_effectively_silenced && (
-            <Tip
+            <Tooltip
               label={
                 row.is_silenced
                   ? translate('This action has been permanently silenced')
                   : translate('This action has been temporarily silenced')
               }
-              id="silenced-action-tooltip"
             >
               <Badge variant="secondary" size="sm" pill onlyIcon>
                 <BellSlashIcon size={12} weight="bold" />
               </Badge>
-            </Tip>
+            </Tooltip>
           )}
         </div>
       }

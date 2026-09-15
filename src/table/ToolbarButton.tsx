@@ -3,9 +3,10 @@ import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 
 interface ToolbarButtonProps {
   /** Button text label (optional for icon-only buttons) */
@@ -87,12 +88,9 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
 
   if (effectiveTooltip) {
     return (
-      <Tip
-        id={`toolbar-btn-${effectiveTooltip.replace(/\s+/g, '-')}`}
-        label={effectiveTooltip}
-      >
-        {button}
-      </Tip>
+      <Tooltip label={effectiveTooltip}>
+        <span>{button}</span>
+      </Tooltip>
     );
   }
 

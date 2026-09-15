@@ -17,12 +17,13 @@ import {
 import Markdown from 'markdown-to-jsx';
 import { FC } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AssistantComposer } from '@/ai-assistant/components/shared/AssistantComposer';
 import { LoadingDots } from '@/ai-assistant/components/shared/LoadingDots';
 import { UserMessageShell } from '@/ai-assistant/components/shared/UserMessageShell';
 import { AlertItem } from '@/core/AlertItem';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 import { splitReasoning } from './streamChat';
@@ -73,7 +74,6 @@ const MessageError: FC = () => (
 );
 
 const AssistantActionBar: FC = () => {
-  const messageId = useAuiState(({ message }) => message.id);
   const text = useAuiState(({ message }) => textOf(message.content));
   return (
     <ActionBarPrimitive.Root
@@ -87,16 +87,18 @@ const AssistantActionBar: FC = () => {
         size={16}
       />
       <AuiIf condition={(s) => s.message.isLast}>
-        <Tip label={translate('Regenerate')} id={`pg-regenerate-${messageId}`}>
-          <ActionBarPrimitive.Reload asChild>
-            <button
-              className="aui-message-action-btn"
-              aria-label={translate('Regenerate')}
-            >
-              <ArrowClockwiseIcon weight="bold" size={16} />
-            </button>
-          </ActionBarPrimitive.Reload>
-        </Tip>
+        <Tooltip label={translate('Regenerate')}>
+          <span>
+            <ActionBarPrimitive.Reload asChild>
+              <button
+                className="aui-message-action-btn"
+                aria-label={translate('Regenerate')}
+              >
+                <ArrowClockwiseIcon weight="bold" size={16} />
+              </button>
+            </ActionBarPrimitive.Reload>
+          </span>
+        </Tooltip>
       </AuiIf>
     </ActionBarPrimitive.Root>
   );
@@ -141,16 +143,18 @@ const UserActionBar: FC = () => {
       hideWhenRunning
       className="aui-message-action-panel"
     >
-      <Tip label={translate('Edit')} id={`pg-edit-${messageId}`}>
-        <ActionBarPrimitive.Edit asChild>
-          <button
-            className="aui-message-action-btn"
-            aria-label={translate('Edit')}
-          >
-            <PencilSimpleIcon weight="bold" size={16} />
-          </button>
-        </ActionBarPrimitive.Edit>
-      </Tip>
+      <Tooltip label={translate('Edit')}>
+        <span>
+          <ActionBarPrimitive.Edit asChild>
+            <button
+              className="aui-message-action-btn"
+              aria-label={translate('Edit')}
+            >
+              <PencilSimpleIcon weight="bold" size={16} />
+            </button>
+          </ActionBarPrimitive.Edit>
+        </span>
+      </Tooltip>
     </ActionBarPrimitive.Root>
   );
 };

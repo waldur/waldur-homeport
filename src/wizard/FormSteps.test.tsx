@@ -20,11 +20,6 @@ vi.mock('@/marketplace/common/PageBarTabs', () => ({
   ),
 }));
 
-// Mock Tooltip to render children directly
-vi.mock('@/core/Tooltip', () => ({
-  Tip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
 describe('FormSteps', () => {
   const baseSteps = [
     {

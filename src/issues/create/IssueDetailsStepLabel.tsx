@@ -1,8 +1,9 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { useFormState } from 'react-final-form';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 import { IssueFormData } from './types';
@@ -23,7 +24,7 @@ export const IssueDetailsStepLabel = () => {
       {translate('Issue details')}
       {hasDetails && (
         <span className="mx-2">
-          <Tip
+          <Tooltip
             label={
               <>
                 {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE &&
@@ -55,10 +56,9 @@ export const IssueDetailsStepLabel = () => {
                 )}
               </>
             }
-            id="tooltip"
           >
             <InfoIcon weight="bold" />
-          </Tip>
+          </Tooltip>
         </span>
       )}
     </>

@@ -1,10 +1,10 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { uniqueId } from 'lodash-es';
 import { FC, ReactNode, useContext } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { ResourceActionMenuContext } from '@/marketplace/resources/actions/ResourceActionMenuContext';
@@ -121,17 +121,16 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         </div>
       </Component>
       {props.tooltip && (
-        <Tip
-          label={props.tooltip}
-          id={`action-reason-${uniqueId()}`}
-          className="ms-1 me-3"
-        >
+        <Tooltip label={props.tooltip}>
           <QuestionIcon
             size={20}
             weight="bold"
-            className={classNames('text-muted', props.disabled && 'opacity-50')}
+            className={classNames(
+              'ms-1 me-3 text-muted',
+              props.disabled && 'opacity-50',
+            )}
           />
-        </Tip>
+        </Tooltip>
       )}
       {props.staff && <StaffOnlyIndicator className="text-dark ms-1 me-3" />}
     </div>

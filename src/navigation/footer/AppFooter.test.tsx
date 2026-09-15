@@ -9,9 +9,13 @@ import { AppFooter } from './AppFooter';
 
 ENV.buildId = '1.2.3';
 
-vi.mock('@/core/Tooltip', () => ({
-  Tip: ({ children, label }: any) => <div title={label}>{children}</div>,
-}));
+vi.mock('waldur-ui', async () => {
+  const actual = await vi.importActual<any>('waldur-ui');
+  return {
+    ...actual,
+    Tooltip: ({ children, label }: any) => <div title={label}>{children}</div>,
+  };
+});
 vi.mock('./DisclaimerArea', () => ({
   DisclaimerArea: () => <div data-testid="disclaimer">Disclaimer</div>,
 }));

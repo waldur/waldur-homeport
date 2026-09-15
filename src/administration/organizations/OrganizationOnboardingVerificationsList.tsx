@@ -6,9 +6,10 @@ import {
   OnboardingVerificationStatusEnum,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
@@ -84,12 +85,9 @@ export const getOnboardingVerificationColumns = (options?: {
         <>
           <BooleanField value={row.can_customer_be_created} />
           {row.customer_creation_error_message && (
-            <Tip
-              id={`tip-customer-creation-${row.uuid}`}
-              label={row.customer_creation_error_message}
-            >
+            <Tooltip label={row.customer_creation_error_message}>
               <QuestionIcon weight="bold" />
-            </Tip>
+            </Tooltip>
           )}
         </>
       ),

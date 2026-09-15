@@ -1,7 +1,8 @@
 import { RobotIcon, UserIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 /**
@@ -23,34 +24,30 @@ export const formatGrantSource = (source?: string | null): string | null => {
 
 export const GrantSourceIndicator: FunctionComponent<{
   source?: string | null;
-  uuid: string;
-}> = ({ source, uuid }) => {
+  uuid?: string;
+}> = ({ source }) => {
   const label = formatGrantSource(source);
   if (!label) {
     return (
-      <Tip
-        label={translate('Granted by a person.')}
-        id={`grant-source-${uuid}`}
-      >
+      <Tooltip label={translate('Granted by a person.')}>
         <span className="text-muted d-inline-flex align-items-center gap-1">
           <UserIcon size={16} weight="bold" />
           {translate('Manual')}
         </span>
-      </Tip>
+      </Tooltip>
     );
   }
   return (
-    <Tip
+    <Tooltip
       label={translate(
         'Granted automatically from identity provider data ({source}). It may be revoked automatically if the user stops matching.',
         { source },
       )}
-      id={`grant-source-${uuid}`}
     >
       <span className="text-primary d-inline-flex align-items-center gap-1">
         <RobotIcon size={16} weight="bold" />
         {label}
       </span>
-    </Tip>
+    </Tooltip>
   );
 };

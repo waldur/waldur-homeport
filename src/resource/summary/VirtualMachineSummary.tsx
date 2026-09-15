@@ -1,7 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatRelative } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { formatSummary } from '@/resource/utils';
@@ -18,15 +19,13 @@ export const ResourceSummaryField = ({ resource }) => (
   <>
     {formatSummary(resource)}
     {resource.flavor_name && (
-      <Tip
-        id="resourceSummary"
+      <Tooltip
         label={translate('Flavor name: {flavor_name}', {
           flavor_name: resource.flavor_name,
         })}
       >
-        {' '}
-        <QuestionIcon size={17} weight="bold" />
-      </Tip>
+        <QuestionIcon size={17} weight="bold" className="ms-1" />
+      </Tooltip>
     )}
   </>
 );

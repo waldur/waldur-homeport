@@ -3,11 +3,12 @@ import { useCallback } from 'react';
 import { ComponentsUsageStats } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { EChart } from '@/core/EChart';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -118,12 +119,11 @@ export const AggregateLimitWidget = ({
   const TitleWithTip = () => (
     <>
       {title}{' '}
-      <Tip
-        id="aggregate-limit-tooltip"
+      <Tooltip
         label={translate('You are viewing the chart in log scale mode.')}
       >
         <QuestionIcon weight="bold" />
-      </Tip>
+      </Tooltip>
     </>
   );
 

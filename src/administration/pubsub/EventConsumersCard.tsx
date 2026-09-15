@@ -2,12 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
 import { EventConsumer, eventConsumersList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
 import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
@@ -69,16 +70,15 @@ const ObjectTypesCell: FC<{ row: EventConsumer }> = ({ row }) => {
 const ScopesCell: FC<{ row: EventConsumer }> = ({ row }) => {
   if (row.is_global) {
     return (
-      <Tip
+      <Tooltip
         label={translate(
           'Bound to no scope: receives every event in the system, including events about all users.',
         )}
-        id={`consumer-global-${row.uuid}`}
       >
         <Badge variant="danger" pill outline>
           {translate('Global')}
         </Badge>
-      </Tip>
+      </Tooltip>
     );
   }
   return (

@@ -26,11 +26,12 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { UI_STALE_TIME } from '@/core/constants';
 import { parseDate } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
-import { Tip } from '@/core/Tooltip';
 import { required } from '@/core/validators';
 import {
   FieldError,
@@ -318,8 +319,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                   <Nav.Item key={component.uuid} className={isHidden && 'h-0'}>
                     <Nav.Link eventKey={component.uuid}>
                       {Boolean(errors.components?.[component.type]) && (
-                        <Tip
-                          id={`tip-${component.uuid}-error`}
+                        <Tooltip
                           label={
                             isHidden ? null : (
                               <FieldError
@@ -334,11 +334,10 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                             weight="bold"
                             className="text-danger me-1"
                           />
-                        </Tip>
+                        </Tooltip>
                       )}
                       {component.name}
-                      <Tip
-                        id={`tip-${component.uuid}-type`}
+                      <Tooltip
                         label={
                           isHidden
                             ? null
@@ -350,7 +349,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                           weight="bold"
                           className="ms-1"
                         />
-                      </Tip>
+                      </Tooltip>
                     </Nav.Link>
                   </Nav.Item>
                 );
@@ -393,8 +392,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                               }
                             >
                               {Boolean(errors.components?.[component.type]) && (
-                                <Tip
-                                  id={`tip-${component.uuid}-error`}
+                                <Tooltip
                                   label={
                                     <FieldError
                                       error={errors.components[component.type]}
@@ -407,21 +405,20 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                                     weight="bold"
                                     className="text-danger me-1"
                                   />
-                                </Tip>
+                                </Tooltip>
                               )}
                               {component.name}
-                              <Tip
-                                id={`tip-${component.uuid}-type`}
+                              <Tooltip
                                 label={getBillingTypeLabelOrDash(
                                   component.billing_type,
                                 )}
                               >
                                 <QuestionIcon
                                   size={18}
-                                  className="ms-1"
                                   weight="bold"
+                                  className="ms-1"
                                 />
-                              </Tip>
+                              </Tooltip>
                             </ActionsDropdownItem>
                           ))}
                         </div>

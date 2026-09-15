@@ -8,7 +8,8 @@ import {
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { flattenObject } from '@/core/utils';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
@@ -116,29 +117,25 @@ export const FormSteps: FC<{
           {hideStatusIcons ? null : isDisabled ? (
             <LockIcon weight="bold" className="text-muted" size={20} />
           ) : step.fields && hasCriticalErrors ? (
-            <Tip
+            <Tooltip
               label={<FieldErrorMessage error={criticalErrors} />}
-              className="stepper-icon critical-error"
-              id={`stepperErrorTip-${i}`}
-              placement="left"
+              side="left"
               autoWidth
             >
-              <XCircleIcon weight="bold" className="text-danger" size={20} />
-            </Tip>
+              <XCircleIcon weight="bold" size={20} className="text-danger" />
+            </Tooltip>
           ) : step.fields && hasNormalErrors ? (
-            <Tip
+            <Tooltip
               label={<FieldErrorMessage error={normalErrors} />}
-              className="stepper-icon error"
-              id={`stepperErrorTip-${i}`}
-              placement="left"
+              side="left"
               autoWidth
             >
               <WarningCircleIcon
                 weight="bold"
-                className="text-warning"
                 size={20}
+                className="text-warning"
               />
-            </Tip>
+            </Tooltip>
           ) : completedSteps[i] ? (
             <CheckCircleIcon weight="bold" className="text-success" size={20} />
           ) : step.required ? (

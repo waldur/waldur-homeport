@@ -11,9 +11,10 @@ import React, { FC, useCallback, useContext, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PopoverMenuContent } from '@/navigation/NavMenu';
@@ -434,20 +435,22 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
                 straight to its inner <button> regardless of the Tip/span
                 wrapping in between, so Slot always has a proper ref
                 target no matter where Tip sits.) */}
-            <Tip id="table-add-filter-tip" label={translate('Add filter')}>
-              <RadixPopover.Trigger asChild>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  aria-label={translate('Add filter')}
-                  className="btn-icon btn-add-filter"
-                >
-                  <span className="svg-icon svg-icon-4">
-                    <PlusIcon weight="bold" />
-                  </span>
-                </Button>
-              </RadixPopover.Trigger>
-            </Tip>
+            <Tooltip label={translate('Add filter')}>
+              <span>
+                <RadixPopover.Trigger asChild>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    aria-label={translate('Add filter')}
+                    className="btn-icon btn-add-filter"
+                  >
+                    <span className="svg-icon svg-icon-4">
+                      <PlusIcon weight="bold" />
+                    </span>
+                  </Button>
+                </RadixPopover.Trigger>
+              </span>
+            </Tooltip>
             {/* forceMount + conditional `show` — same reasoning as the
                 column-filter toggle's Content above. */}
             <RadixPopover.Portal

@@ -2,8 +2,9 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { User } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
-import { Tip } from '@/core/Tooltip';
 
 interface SymbolsGroupProps {
   items: object[];
@@ -38,22 +39,24 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
     tabIndex={0}
   >
     {items.slice(0, max).map((item: User, index: number) => (
-      <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
-        {item[imageKey] || item[nameKey] ? (
-          <Avatar
-            size={size}
-            src={item[imageKey]}
-            name={item[nameKey]}
-            circle
-          />
-        ) : (
-          <div className={`symbol symbol-circle symbol-${size}px`}>
-            <div className="symbol-label fs-4 fw-bold bg-tertiary text-quaternary">
-              {item[emailKey] ? item[emailKey][0].toUpperCase() : '?'}
+      <Tooltip key={index} label={item[nameKey]}>
+        <span>
+          {item[imageKey] || item[nameKey] ? (
+            <Avatar
+              size={size}
+              src={item[imageKey]}
+              name={item[nameKey]}
+              circle
+            />
+          ) : (
+            <div className={`symbol symbol-circle symbol-${size}px`}>
+              <div className="symbol-label fs-4 fw-bold bg-tertiary text-quaternary">
+                {item[emailKey] ? item[emailKey][0].toUpperCase() : '?'}
+              </div>
             </div>
-          </div>
-        )}
-      </Tip>
+          )}
+        </span>
+      </Tooltip>
     ))}
     {(length ?? items.length) > max && (
       <div className={`symbol symbol-circle symbol-${size}px`}>

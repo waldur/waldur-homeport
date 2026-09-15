@@ -1,7 +1,8 @@
 import { PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { Offering } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { useOfferingAccess } from './useOfferingAccess';
@@ -25,22 +26,18 @@ export const RequestAccessButton = ({
   }
 
   return (
-    <Tip
-      id="tip-request-access"
-      label={disabledReason}
-      className="order-2 order-sm-1 flex-sm-column-auto flex-root"
-    >
+    <Tooltip label={disabledReason}>
       <button
         type="button"
-        className="btn btn-lg btn-primary w-100"
         disabled={disabled || loading}
         onClick={handleRequestAccess}
+        className="order-2 order-sm-1 flex-sm-column-auto flex-root btn btn-lg btn-primary w-100"
       >
         <span className="svg-icon svg-icon-2">
           <PaperPlaneTiltIcon weight="bold" />
         </span>
         {translate('Request')}
       </button>
-    </Tip>
+    </Tooltip>
   );
 };

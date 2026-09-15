@@ -1,7 +1,8 @@
 import { FC, useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { composeValidators, email, required, url } from '@/core/validators';
 import {
   BooleanGroup,
@@ -114,8 +115,7 @@ export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
               footer={
                 <>
                   <CloseDialogButton />
-                  <Tip
-                    id="ldap-generate-btn"
+                  <Tooltip
                     label={
                       invalid
                         ? translate(
@@ -130,7 +130,7 @@ export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
                       type="submit"
                       disabled={invalid}
                     />
-                  </Tip>
+                  </Tooltip>
                 </>
               }
             >

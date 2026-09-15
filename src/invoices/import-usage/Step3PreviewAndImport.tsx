@@ -3,9 +3,10 @@ import { FormCheck } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -39,18 +40,18 @@ const statusVariants = {
 };
 
 const StatusField = ({ row }: { row: UsageImportRow }) => (
-  <Tip id={`tip-${row.uuid}`} label={row.error}>
+  <Tooltip label={row.error}>
     <Badge variant={statusVariants[row.status]} pill outline>
       {statusMessages[row.status]}
     </Badge>
-  </Tip>
+  </Tooltip>
 );
 
 const WithTooltip = ({ label = '', len = 24 }) =>
   label?.length > len ? (
-    <Tip label={label} id="tip-truncated">
-      {truncate(label, len)}
-    </Tip>
+    <Tooltip label={label}>
+      <span>{truncate(label, len)}</span>
+    </Tooltip>
   ) : (
     label || DASH_ESCAPE_CODE
   );

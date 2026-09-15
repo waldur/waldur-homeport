@@ -5,9 +5,10 @@ import { FC, useCallback, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import { proposalProtectedCallsMatchingConfigurationRetrieve } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
@@ -207,16 +208,15 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
         <Card.Title>
           <h3>
             {translate('Matching settings')}{' '}
-            <Tip
-              id="matching-tooltip"
+            <Tooltip
               label={translate('Reviewer-Proposal Matching')}
               body={translate(
                 'Configure how reviewers are matched to proposals based on expertise. Includes affinity calculation weights and assignment constraints.',
               )}
               autoWidth
             >
-              <InfoIcon className="text-muted" weight="bold" />
-            </Tip>
+              <InfoIcon weight="bold" className="text-muted" />
+            </Tooltip>
           </h3>
         </Card.Title>
         <div className="card-toolbar">

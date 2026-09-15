@@ -2,7 +2,8 @@ import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { useEffect } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { SearchInput } from './SearchInput';
@@ -58,22 +59,18 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
       <RadixPopover.Anchor asChild>
         <div className="d-flex align-items-center" id="searchContainer">
           {compact ? (
-            <Tip
-              label={translate('Search')}
-              id="search-toggle-tip"
-              placement="bottom"
-            >
+            <Tooltip label={translate('Search')} side="bottom">
               <button
-                className="btn-nav-item"
                 type="button"
                 onClick={() => setShow(true)}
                 aria-label={translate('Search')}
+                className="btn-nav-item"
               >
                 <span className="svg-icon svg-icon-2">
                   <MagnifyingGlassIcon weight="bold" />
                 </span>
               </button>
-            </Tip>
+            </Tooltip>
           ) : (
             <>
               <SearchInput
@@ -85,22 +82,18 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
                 showShortcut={!show}
                 onFocus={() => setShow(true)}
               />
-              <Tip
-                label={translate('Search')}
-                id="search-toggle-mobile-tip"
-                placement="bottom"
-              >
+              <Tooltip label={translate('Search')} side="bottom">
                 <button
-                  className="btn-nav-item d-lg-none"
                   type="button"
                   onClick={() => setShow(true)}
                   aria-label={translate('Search')}
+                  className="btn-nav-item d-lg-none"
                 >
                   <span className="svg-icon svg-icon-2">
                     <MagnifyingGlassIcon weight="bold" />
                   </span>
                 </button>
-              </Tip>
+              </Tooltip>
             </>
           )}
         </div>

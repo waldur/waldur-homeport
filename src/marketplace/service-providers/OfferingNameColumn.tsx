@@ -1,5 +1,5 @@
+import { BackendIdTip } from '@/core/BackendIdTip';
 import { Link } from '@/core/Link';
-import { BackendIdTip } from '@/core/Tooltip';
 import { useCustomer } from '@/workspace/hooks';
 
 export const OfferingNameColumn = ({ row }) => {

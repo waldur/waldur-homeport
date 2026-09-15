@@ -1,10 +1,12 @@
 import React, { FC, ReactNode } from 'react';
-import { OverlayTrigger, Tooltip, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field, Form, useFormState } from 'react-final-form';
 import {
   openstackTenantsSetQuotas,
   OpenstackTenantsSetQuotasData,
 } from 'waldur-js-client';
+
+import { Tooltip } from 'waldur-ui';
 
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
 import { WarnTip } from '@/core/WarnTip';
@@ -293,11 +295,11 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
 
   // Derived-size tooltip: dotted underline on the label itself
   const labelContent = row.tooltip ? (
-    <OverlayTrigger overlay={<Tooltip>{row.tooltip}</Tooltip>} placement="top">
+    <Tooltip label={row.tooltip}>
       <span className="text-nowrap text-decoration-underline-dotted cursor-help">
         {row.label}
       </span>
-    </OverlayTrigger>
+    </Tooltip>
   ) : (
     <span className="text-nowrap">{row.label}</span>
   );

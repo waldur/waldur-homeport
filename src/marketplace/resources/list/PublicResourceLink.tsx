@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Resource } from 'waldur-js-client';
 
+import { BackendIdTip } from '@/core/BackendIdTip';
 import { Link } from '@/core/Link';
-import { BackendIdTip } from '@/core/Tooltip';
 
 import { EndDateTooltip } from './EndDateTooltip';
 

@@ -4,8 +4,9 @@ import {
   WarningIcon,
 } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
+
+import { Tooltip } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { useDrawer } from '@/drawer/actions';
@@ -70,16 +71,9 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
       )}
       {showIssues &&
         (isCourseProject ? (
-          <OverlayTrigger
-            placement="top"
-            overlay={
-              <Tooltip id="project-support-tooltip">
-                {translate('Support')}
-              </Tooltip>
-            }
-          >
+          <Tooltip label={translate('Support')}>
             <span>{supportButton}</span>
-          </OverlayTrigger>
+          </Tooltip>
         ) : (
           supportButton
         ))}

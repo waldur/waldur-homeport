@@ -1,7 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import { marketplaceOfferingReferralsList } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { REFERRALS_TABLE } from '@/marketplace/referral/constants';
 import { ReferralTypeIcon } from '@/marketplace/referral/ReferralTypeIcon';
@@ -44,9 +45,9 @@ export const ReferralsList: FunctionComponent<{ offering }> = ({
     {
       title: translate('PID'),
       render: ({ row }) => (
-        <Tip label={row.relation_type} id="relation-type-label">
-          {row.pid}
-        </Tip>
+        <Tooltip label={row.relation_type}>
+          <span>{row.pid}</span>
+        </Tooltip>
       ),
     },
   ];

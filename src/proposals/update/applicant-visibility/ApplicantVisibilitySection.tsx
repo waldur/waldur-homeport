@@ -6,7 +6,8 @@ import {
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { UserAttributeVisibilityTable } from '@/marketplace/user-attributes/UserAttributeVisibilityTable';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -21,15 +22,13 @@ interface ApplicantVisibilitySectionProps {
 const TITLE = (
   <>
     {translate('Applicant data visibility')}{' '}
-    <Tip
-      id="applicant-visibility-tip"
+    <Tooltip
       label={translate(
         'Control which applicant fields are visible to reviewers during evaluation. When no custom configuration exists, the global default is applied.',
       )}
-      className="mx-2 text-muted"
     >
-      <QuestionIcon size={20} weight="fill" />
-    </Tip>
+      <QuestionIcon size={20} weight="fill" className="mx-2 text-muted" />
+    </Tooltip>
   </>
 );
 

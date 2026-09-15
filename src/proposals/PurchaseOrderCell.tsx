@@ -1,7 +1,8 @@
 import { CheckCircleIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -27,8 +28,7 @@ export const PurchaseOrderCell: FC<PurchaseOrderCellProps> = ({ row }) => {
   }
   if (!row.has_purchase_order) {
     return (
-      <Tip
-        id="purchase-order-missing"
+      <Tooltip
         label={
           usesCallVocabulary()
             ? translate(
@@ -43,7 +43,7 @@ export const PurchaseOrderCell: FC<PurchaseOrderCellProps> = ({ row }) => {
           <WarningCircleIcon weight="bold" />
           {translate('Required')}
         </span>
-      </Tip>
+      </Tooltip>
     );
   }
   return (

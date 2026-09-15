@@ -2,7 +2,8 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { Quota } from '@/openstack/types';
 import { formatQuotaName, formatQuotaValue } from '@/quotas/utils';
@@ -59,13 +60,9 @@ export const QuotaUsageBarChartDescription = ({ quota, hideLabel = false }) => (
     <p className="mb-0">
       {!hideLabel && formatQuotaName(quota.name)}
       {exceeds(quota) && (
-        <Tip
-          id={quota.name}
-          label={translate('Quota usage exceeds available limit.')}
-        >
-          {' '}
-          <WarningIcon className="text-warning" size={16} weight="bold" />
-        </Tip>
+        <Tooltip label={translate('Quota usage exceeds available limit.')}>
+          <WarningIcon className="text-warning ms-1" size={16} weight="bold" />
+        </Tooltip>
       )}
     </p>
     <span>{getSummary(quota)}</span>
@@ -85,25 +82,23 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
               hideLabel={props.hideLabel}
             />
 
-            <Tip
-              id="quota-usage"
-              label={<ProgressTooltipMessage quota={quota} />}
-              className="quota-progress"
-            >
-              <ProgressBar>
-                <ProgressBar
-                  variant="primary"
-                  now={(quota.usage * 100) / quota.limit}
-                  key={1}
-                />
+            <Tooltip label={<ProgressTooltipMessage quota={quota} />}>
+              <span className="quota-progress">
+                <ProgressBar>
+                  <ProgressBar
+                    variant="primary"
+                    now={(quota.usage * 100) / quota.limit}
+                    key={1}
+                  />
 
-                <ProgressBar
-                  variant="warning"
-                  now={(quota.required * 100) / quota.limit}
-                  key={2}
-                />
-              </ProgressBar>
-            </Tip>
+                  <ProgressBar
+                    variant="warning"
+                    now={(quota.required * 100) / quota.limit}
+                    key={2}
+                  />
+                </ProgressBar>
+              </span>
+            </Tooltip>
           </div>
         );
       }

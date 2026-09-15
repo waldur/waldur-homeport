@@ -1,12 +1,12 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { useSref } from '@uirouter/react';
 import classNames from 'classnames';
-import { uniqueId } from 'lodash-es';
 import { PropsWithChildren, forwardRef } from 'react';
 import { Breadcrumb, BreadcrumbItemProps } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { MiddleTruncate } from '@/core/MiddleTruncate';
-import { Tip } from '@/core/Tooltip';
 import { truncate as truncateText } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -88,13 +88,9 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
           ) : maxLength ? (
             <span>
               {children.length > maxLength + 5 ? (
-                <Tip
-                  label={children}
-                  id={'tip-breadcrumb-' + uniqueId()}
-                  placement="bottom"
-                >
-                  {truncateText(children, maxLength)}
-                </Tip>
+                <Tooltip label={children} side="bottom">
+                  <span>{truncateText(children, maxLength)}</span>
+                </Tooltip>
               ) : (
                 children
               )}

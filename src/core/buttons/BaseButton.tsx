@@ -3,8 +3,9 @@ import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 
 interface BaseButtonProps {
   /** Button text label */
@@ -63,9 +64,9 @@ const wrapTooltip = (
     children
   );
   return (
-    <Tip label={tooltip} id="button-tooltip">
-      {trigger}
-    </Tip>
+    <Tooltip label={tooltip}>
+      <span>{trigger}</span>
+    </Tooltip>
   );
 };
 

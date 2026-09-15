@@ -1,10 +1,10 @@
 import { PencilSimpleIcon, QuestionIcon } from '@phosphor-icons/react';
-import { uniqueId } from 'lodash-es';
 import { useMemo } from 'react';
 import { Notification, notificationMessagesList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
@@ -48,22 +48,17 @@ export const NotificationList = () => {
             <>
               {row.key}
               {hasOverriddenTemplate(row) && (
-                <Tip
-                  id={'tip-notif-overridden-' + row.uuid}
-                  label={translate('Content is overridden')}
-                  className="svg-icon svg-icon-5 ms-3"
-                >
-                  <PencilSimpleIcon weight="bold" />
-                </Tip>
+                <Tooltip label={translate('Content is overridden')}>
+                  <PencilSimpleIcon
+                    weight="bold"
+                    className="svg-icon svg-icon-5 ms-3"
+                  />
+                </Tooltip>
               )}
               {row.description && (
-                <Tip
-                  label={row.description}
-                  className="ms-2"
-                  id={uniqueId('descriptionTip')}
-                >
-                  <QuestionIcon weight="bold" />
-                </Tip>
+                <Tooltip label={row.description}>
+                  <QuestionIcon weight="bold" className="ms-2" />
+                </Tooltip>
               )}
             </>
           ),

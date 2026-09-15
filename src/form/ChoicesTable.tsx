@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import { FC, useMemo, useState } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import {
   CustomComponentInputProps,
   FilterOptions,
@@ -60,9 +61,9 @@ const PureChoicesTable: FC<ChoicesTableProps> = ({
             {enableSelect && (
               <td>
                 {choice.disabled ? (
-                  <Tip id={choice.uuid} label={choice.disabledReason}>
+                  <Tooltip label={choice.disabledReason}>
                     <ProhibitIcon weight="bold" />
-                  </Tip>
+                  </Tooltip>
                 ) : (
                   <input
                     type="radio"

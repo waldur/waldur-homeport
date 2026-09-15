@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
 
 export const TitleColumn: FunctionComponent<{ row }> = ({ row }) => (
-  <Tip id="title-tooltip" label={row.summary}>
-    <span className="ellipsis" style={{ width: 150 }}>
+  <Tooltip label={row.summary}>
+    <span style={{ width: 150 }} className="ellipsis">
       {row.summary}
     </span>
-  </Tip>
+  </Tooltip>
 );

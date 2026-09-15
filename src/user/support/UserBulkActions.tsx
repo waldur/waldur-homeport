@@ -6,7 +6,8 @@ import {
 } from '@phosphor-icons/react';
 import { User, usersPartialUpdate } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
 import {
@@ -91,13 +92,15 @@ export const UserBulkActions = ({
             tooltip has to sit on a separate, non-disabled sibling rather
             than wrap the item itself -- same trick ActionItem.tsx uses. */}
         {inactiveUsers.length === 0 && (
-          <Tip
+          <Tooltip
             label={translate('None of the selected users are inactive.')}
-            id="user-bulk-activate-reason"
-            className="ms-1 me-3"
           >
-            <QuestionIcon size={16} weight="bold" className="text-muted" />
-          </Tip>
+            <QuestionIcon
+              size={16}
+              weight="bold"
+              className="ms-1 me-3 text-muted"
+            />
+          </Tooltip>
         )}
       </div>
       <div className="d-flex align-items-center">
@@ -118,13 +121,13 @@ export const UserBulkActions = ({
           {translate('Deactivate')}
         </ActionsDropdownItem>
         {activeUsers.length === 0 && (
-          <Tip
-            label={translate('None of the selected users are active.')}
-            id="user-bulk-deactivate-reason"
-            className="ms-1 me-3"
-          >
-            <QuestionIcon size={16} weight="bold" className="text-muted" />
-          </Tip>
+          <Tooltip label={translate('None of the selected users are active.')}>
+            <QuestionIcon
+              size={16}
+              weight="bold"
+              className="ms-1 me-3 text-muted"
+            />
+          </Tooltip>
         )}
       </div>
     </ActionsDropdownComponent>

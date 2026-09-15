@@ -7,9 +7,10 @@ import {
   proposalProtectedCallsCoiConfigurationRetrieve,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import {
   BooleanEditField,
   EditFieldProvider,
@@ -161,16 +162,15 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
       title={
         <span className="d-flex align-items-center gap-2">
           {translate('COI configuration')}
-          <Tip
-            id="coi-tooltip"
+          <Tooltip
             label={translate('Conflict of Interest')}
             body={translate(
               'COI settings control how conflicts of interest between reviewers and proposals are detected and handled. This includes co-authorship, institutional affiliations, and other relationships that may affect impartial review.',
             )}
             autoWidth
           >
-            <InfoIcon className="text-muted" weight="bold" />
-          </Tip>
+            <InfoIcon weight="bold" className="text-muted" />
+          </Tooltip>
         </span>
       }
       actions={<COISummaryButton config={config} />}

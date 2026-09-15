@@ -6,9 +6,10 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { getPlanUnitAbbr } from '@/marketplace/orders/utils';
 
 interface ResourceRateFieldProps {
@@ -54,10 +55,10 @@ export const ResourceRateField: FC<ResourceRateFieldProps> = ({
   const tooltipBody = `${limit} ${unit} × ${defaultCurrency(price)}/${unit}`;
 
   return (
-    <Tip id={`rate-${row.uuid}`} label={rateLabel} body={tooltipBody}>
+    <Tooltip label={rateLabel} body={tooltipBody}>
       <span className="cursor-help text-decoration-underline-dotted">
         {rateLabel}
       </span>
-    </Tip>
+    </Tooltip>
   );
 };

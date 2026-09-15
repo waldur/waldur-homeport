@@ -10,8 +10,9 @@ import { Button } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
-import { Tip } from '@/core/Tooltip';
 import { formatFilesize } from '@/core/utils';
 import { required } from '@/core/validators';
 import { FilterBox } from '@/form/FilterBox';
@@ -240,8 +241,7 @@ export const K8sFlavorSelectionTable: React.FC<
           {selectedFlavor ? selectedFlavor.name : translate('Select...')}
         </span>
         {selectedFlavor ? (
-          <Tip
-            id={'tip-flavor-' + selectedFlavor.uuid}
+          <Tooltip
             label={
               <div className="text-start">
                 <span className="d-block">vCPUs: {selectedFlavor.vcpus}</span>
@@ -250,7 +250,7 @@ export const K8sFlavorSelectionTable: React.FC<
             }
           >
             <QuestionIcon weight="bold" size={16} className="text-gray-400" />
-          </Tip>
+          </Tooltip>
         ) : null}
         {selectedFlavor ? (
           <XIcon

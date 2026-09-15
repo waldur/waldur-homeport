@@ -1,11 +1,12 @@
 import { FunctionComponent, useMemo } from 'react';
 import { marketplaceOfferingUsersList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -197,14 +198,13 @@ export const ProviderOfferingUsersList: FunctionComponent<
               </Badge>
             );
             return missingLabels ? (
-              <Tip
+              <Tooltip
                 label={translate('Missing: {attributes}', {
                   attributes: missingLabels,
                 })}
-                id={`profile-incomplete-${row.uuid}`}
               >
-                {badge}
-              </Tip>
+                <span>{badge}</span>
+              </Tooltip>
             ) : (
               badge
             );

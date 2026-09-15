@@ -2,7 +2,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
 
 import { AnalyticsCapability, AnalyticsMode, DrillDownDataItem } from './types';
 import { WhatIfSimulator } from './WhatIfSimulator';
@@ -50,9 +50,9 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
                     className="d-flex align-items-center gap-2"
                   >
                     {config.label}
-                    <Tip label={config.description} id={`help-${mode}`}>
+                    <Tooltip label={config.description}>
                       <QuestionIcon size={16} weight="bold" />
-                    </Tip>
+                    </Tooltip>
                   </Nav.Link>
                 </Nav.Item>
               );

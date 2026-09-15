@@ -10,9 +10,10 @@ import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { Tooltip } from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
 import { useModal } from '@/modal/actions';
@@ -156,12 +157,11 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
       {(rtcAvailable || roomAlias) && <ActionsDropdownSeparator />}
       {rtcAvailable &&
         (blockedByOtherCall ? (
-          <Tip
-            id="tc-start-call-blocked"
+          <Tooltip
             label={translate(
               'Disconnect from the current call before starting a new one.',
             )}
-            placement="left"
+            side="left"
           >
             <span>
               <ActionsDropdownItem disabled>
@@ -169,7 +169,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
                 {translate('Start call')}
               </ActionsDropdownItem>
             </span>
-          </Tip>
+          </Tooltip>
         ) : (
           <ActionsDropdownItem
             onSelect={handleCall}

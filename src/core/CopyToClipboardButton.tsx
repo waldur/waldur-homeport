@@ -2,7 +2,8 @@ import { CopyIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useCallback, FunctionComponent } from 'react';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
@@ -42,12 +43,9 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
       type="button"
       onClick={(e) => onClick(e)}
     >
-      <Tip
-        label={translate('Copy to clipboard')}
-        id={'copyToClipboard-' + value}
-      >
+      <Tooltip label={translate('Copy to clipboard')}>
         <CopyIcon weight="bold" size={size} />
-      </Tip>
+      </Tooltip>
     </button>
   );
 

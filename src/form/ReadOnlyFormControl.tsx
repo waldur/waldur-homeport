@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FunctionComponent, ReactNode } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
 
 export interface ReadOnlyChildProps {
   input: {
@@ -67,13 +67,9 @@ export const ReadOnlyFormControl: FunctionComponent<
   const labelNode = tooltip ? (
     <div className="d-flex justify-content-between flex-grow-1">
       <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>
-      <Tip
-        id={'tip' + (label || tooltip).substring(0, 20).replaceAll(' ', '-')}
-        label={tooltip}
-        placement="left"
-      >
+      <Tooltip label={tooltip} side="left">
         <QuestionIcon size={20} weight="bold" className="text-gray-500" />
-      </Tip>
+      </Tooltip>
     </div>
   ) : (
     <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>

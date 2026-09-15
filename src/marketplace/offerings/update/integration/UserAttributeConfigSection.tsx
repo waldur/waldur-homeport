@@ -7,8 +7,9 @@ import {
   OfferingUserAttributeConfig,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { UserAttributeVisibilityTable } from '@/marketplace/user-attributes/UserAttributeVisibilityTable';
 
@@ -17,15 +18,13 @@ import { OfferingEditPanelProps } from './types';
 const TITLE = (
   <>
     {translate('User attribute exposure')}{' '}
-    <Tip
-      id="user-attribute-exposure-tip"
+    <Tooltip
       label={translate(
         'Configure which user profile attributes are exposed to this service provider when users are provisioned. Exposed attributes become visible in the OfferingUser API responses.',
       )}
-      className="mx-2 text-muted"
     >
-      <QuestionIcon size={24} weight="fill" />
-    </Tip>
+      <QuestionIcon size={24} weight="fill" className="mx-2 text-muted" />
+    </Tooltip>
   </>
 );
 

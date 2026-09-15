@@ -4,10 +4,11 @@ import {
   WarningCircleIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
-import { FunctionComponent, useId } from 'react';
+import { FunctionComponent } from 'react';
+
+import { Tooltip } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 /**
@@ -58,7 +59,7 @@ export const MemberSyncStateIndicator: FunctionComponent<{
   // role_uuid identifies the role, not the grant — several users in one
   // table can hold the same role, so a role-based tooltip id would
   // produce duplicate DOM ids.
-  const tooltipId = useId();
+
   if (!grant.sync_state) {
     return null;
   }
@@ -77,8 +78,8 @@ export const MemberSyncStateIndicator: FunctionComponent<{
     .filter(Boolean)
     .join(' — ');
   return (
-    <Tip label={details} id={`member-sync-${tooltipId}`}>
+    <Tooltip label={details}>
       <spec.Icon size={16} weight="fill" className={spec.className} />
-    </Tip>
+    </Tooltip>
   );
 };

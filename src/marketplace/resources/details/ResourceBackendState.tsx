@@ -1,8 +1,9 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { Resource } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 export const ResourceBackendState = ({ resource }: { resource: Resource }) => {
@@ -10,13 +11,10 @@ export const ResourceBackendState = ({ resource }: { resource: Resource }) => {
     return null;
   }
   return (
-    <Tip
-      id="tip-resource-backend-state"
-      label={translate('Backend state: Erred')}
-    >
+    <Tooltip label={translate('Backend state: Erred')}>
       <Badge variant="danger" size="sm" pill outline onlyIcon>
         <XCircleIcon weight="bold" size={12} />
       </Badge>
-    </Tip>
+    </Tooltip>
   );
 };

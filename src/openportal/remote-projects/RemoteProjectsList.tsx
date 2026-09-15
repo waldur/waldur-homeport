@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { openportalRemoteProjectsList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { createFetcher } from '@/table/api';
@@ -81,12 +82,9 @@ export const RemoteProjectsList = () => {
       orderField: 'state',
       render: ({ row }) =>
         row.error_message ? (
-          <Tip
-            id={`remote-project-state-${row.uuid}`}
-            label={row.error_message}
-          >
+          <Tooltip label={row.error_message}>
             <RemoteProjectStateField project={row} />
-          </Tip>
+          </Tooltip>
         ) : (
           <RemoteProjectStateField project={row} />
         ),

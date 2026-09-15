@@ -16,7 +16,8 @@ import {
 } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { DropdownActionItemType } from './types';
@@ -185,9 +186,9 @@ export const TableDropdownToggle = forwardRef<
       // fires from a live wrapper element — same reason the Bootstrap
       // version wrapped it.
       return (
-        <Tip label={tooltipMessage} id="actions-dropdown-tip">
+        <Tooltip label={tooltipMessage}>
           <span className="d-inline-block">{toggle}</span>
-        </Tip>
+        </Tooltip>
       );
     }
 

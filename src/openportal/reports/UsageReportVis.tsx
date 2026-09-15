@@ -19,8 +19,9 @@
 import { FileArrowDownIcon, FileXlsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
+import { Tooltip } from 'waldur-ui';
+
 import { EChart } from '@/core/EChart';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 import { ProjectUsageReport } from './ProjectUsageReport';
@@ -239,10 +240,9 @@ export const UsageReportVis: FC<Props> = ({
         </span>
 
         <div className="d-flex gap-2 ms-auto">
-          <Tip id="tip-usage-excel" label={translate('Download Excel')}>
+          <Tooltip label={translate('Download Excel')}>
             <button
               type="button"
-              className="text-btn text-hover-primary"
               onClick={async () => {
                 setExcelProgress({ current: 0, total: 1 });
                 await downloadUsageExcel(
@@ -253,24 +253,25 @@ export const UsageReportVis: FC<Props> = ({
                 );
                 setExcelProgress(null);
               }}
+              className="text-btn text-hover-primary"
             >
               <FileXlsIcon size={20} weight="bold" />
             </button>
-          </Tip>
-          <Tip id="tip-usage-json" label={translate('Download JSON')}>
+          </Tooltip>
+          <Tooltip label={translate('Download JSON')}>
             <button
               type="button"
-              className="text-btn text-hover-primary"
               onClick={() =>
                 downloadJson(
                   reports.map((r) => r.apiItem),
                   'usage_report.json',
                 )
               }
+              className="text-btn text-hover-primary"
             >
               <FileArrowDownIcon size={20} weight="bold" />
             </button>
-          </Tip>
+          </Tooltip>
         </div>
         {excelProgress && (
           <span className="text-muted small ms-2">

@@ -6,11 +6,12 @@ import {
   NestedAgentService,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -42,9 +43,9 @@ const TableComponent = ({
         {
           title: translate('Backend'),
           render: ({ row }) => (
-            <Tip id={'tip-' + row.uuid} label={row.backend_type}>
-              {row.backend_type}
-            </Tip>
+            <Tooltip label={row.backend_type}>
+              <span>{row.backend_type}</span>
+            </Tooltip>
           ),
         },
         {

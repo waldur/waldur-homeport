@@ -2,7 +2,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { FormCheck, ListGroup, ListGroupItem } from 'react-bootstrap';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
 
 export const MultiSelectField: FunctionComponent<{ input; options }> = ({
   input,
@@ -29,13 +29,9 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
             {option.title}
             {option.help_text && (
               <div>
-                <Tip
-                  id={`checkbox-${index}`}
-                  label={option.help_text}
-                  autoWidth={true}
-                >
+                <Tooltip label={option.help_text} autoWidth={true}>
                   <QuestionIcon weight="bold" />
-                </Tip>
+                </Tooltip>
               </div>
             )}
           </FormCheck.Label>

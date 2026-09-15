@@ -3,8 +3,9 @@ import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
@@ -208,12 +209,11 @@ const TableTh = ({
           }
           onClick={() => onTogglePin(pinKey)}
         >
-          <Tip
-            id={`tip-pin-${pinKey}`}
+          <Tooltip
             label={pinned ? translate('Unpin column') : translate('Pin column')}
           >
             <PushPinIcon size={16} weight={pinned ? 'fill' : 'bold'} />
-          </Tip>
+          </Tooltip>
         </button>
       )}
     </div>

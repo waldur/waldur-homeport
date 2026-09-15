@@ -2,7 +2,8 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef } from 'react';
 import { OfferingComponent, ProviderPlanDetails } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import {
   BillingTypeBadge,
@@ -43,13 +44,9 @@ const getColumns = (
     render: ({ row }) => (
       <>
         {row.name}{' '}
-        <Tip
-          id={`tip-component-${plan.name}-${row.name}`}
-          label={row.type}
-          placement="right"
-        >
+        <Tooltip label={row.type} side="right">
           <InfoIcon weight="bold" />
-        </Tip>
+        </Tooltip>
       </>
     ),
   },

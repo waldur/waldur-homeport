@@ -11,9 +11,10 @@ import {
 import { useFormState } from 'react-final-form';
 import { Project, Resource } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDate, parseDate } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
@@ -140,13 +141,12 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
             {row.name}
             {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
               row.is_industry && (
-                <Tip
-                  id={'tip-industry-' + row.uuid}
-                  label={translate('Industry project')}
-                  className="svg-icon svg-icon-4 ms-3"
-                >
-                  <FactoryIcon weight="bold" />
-                </Tip>
+                <Tooltip label={translate('Industry project')}>
+                  <FactoryIcon
+                    weight="bold"
+                    className="svg-icon svg-icon-4 ms-3"
+                  />
+                </Tooltip>
               )}
           </>
         ),

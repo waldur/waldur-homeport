@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { uniqueId } from 'lodash-es';
 import { FC, useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { components } from 'react-select';
@@ -55,7 +54,6 @@ const FirstChipValueContainer = (props: any) => {
       {visibleValues}
       {hiddenValues.length > 0 && (
         <Tooltip
-          id={uniqueId('tip-proposals')}
           label={hiddenValues.map((child) => child.props?.children).join(', ')}
         >
           <div className="inline-block">

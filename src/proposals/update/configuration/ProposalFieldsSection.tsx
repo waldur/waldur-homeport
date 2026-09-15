@@ -2,10 +2,9 @@ import { QuestionIcon, WarningIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { Select } from 'waldur-ui';
+import { Select, Tooltip } from 'waldur-ui';
 
 import { Badge } from '@/core/Badge';
-import { Tip } from '@/core/Tooltip';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -34,15 +33,13 @@ interface ProposalFieldsSectionProps {
 const TITLE = (
   <>
     {translate('Project details fields')}{' '}
-    <Tip
-      id="proposal-fields-tip"
+    <Tooltip
       label={translate(
         'Choose what this call asks applicants for. Name and project duration are always required. A field cannot be made required once the call has proposals.',
       )}
-      className="mx-2 text-muted"
     >
-      <QuestionIcon size={20} weight="fill" />
-    </Tip>
+      <QuestionIcon size={20} weight="fill" className="mx-2 text-muted" />
+    </Tooltip>
   </>
 );
 
@@ -65,9 +62,9 @@ const UsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => (
         </Badge>
       );
       return tooltip ? (
-        <Tip key={item} id={`usage-${item}`} label={tooltip}>
-          {badge}
-        </Tip>
+        <Tooltip key={item} label={tooltip}>
+          <span>{badge}</span>
+        </Tooltip>
       ) : (
         badge
       );

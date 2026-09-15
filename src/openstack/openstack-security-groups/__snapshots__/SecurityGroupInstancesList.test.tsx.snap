@@ -70,13 +70,13 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       data-testid="pin-toggle-column-0"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -99,13 +99,13 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       data-testid="pin-toggle-column-1"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -128,13 +128,13 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       data-testid="pin-toggle-column-2"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -157,13 +157,13 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       data-testid="pin-toggle-column-3"
                       type="button"
                     >
-                      <span>
-                        <span
-                          data-testid="PushPinIcon"
-                          size="16"
-                          weight="bold"
-                        />
-                      </span>
+                      <span
+                        class=""
+                        data-state="closed"
+                        data-testid="PushPinIcon"
+                        size="16"
+                        weight="bold"
+                      />
                     </button>
                   </div>
                 </th>
@@ -199,12 +199,12 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                         class="text-btn"
                         type="button"
                       >
-                        <span>
-                          <span
-                            data-testid="CopyIcon"
-                            weight="bold"
-                          />
-                        </span>
+                        <span
+                          class=""
+                          data-state="closed"
+                          data-testid="CopyIcon"
+                          weight="bold"
+                        />
                       </button>
                     </div>
                   </div>
@@ -224,13 +224,13 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                           class="text-btn"
                           type="button"
                         >
-                          <span>
-                            <span
-                              data-testid="CopyIcon"
-                              size="17"
-                              weight="bold"
-                            />
-                          </span>
+                          <span
+                            class=""
+                            data-state="closed"
+                            data-testid="CopyIcon"
+                            size="17"
+                            weight="bold"
+                          />
                         </button>
                       </div>
                     </span>
@@ -255,13 +255,13 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                         class="text-btn"
                         type="button"
                       >
-                        <span>
-                          <span
-                            data-testid="CopyIcon"
-                            size="17"
-                            weight="bold"
-                          />
-                        </span>
+                        <span
+                          class=""
+                          data-state="closed"
+                          data-testid="CopyIcon"
+                          size="17"
+                          weight="bold"
+                        />
                       </button>
                     </div>
                   </span>
@@ -269,7 +269,10 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                 <td
                   class="ellipsis"
                 >
-                  <span>
+                  <span
+                    class=""
+                    data-state="closed"
+                  >
                     <span
                       class="badge-outline-primary badge-pill badge"
                       data-testid="default-state-indicator"
@@ -290,7 +293,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       aria-haspopup="menu"
                       class="btn dropdown-toggle btn-text-secondary btn-icon no-arrow btn-lg"
                       data-state="closed"
-                      id="radix-:r0:"
+                      id="radix-:r8:"
                       type="button"
                     >
                       <span

@@ -3,9 +3,10 @@ import { FC, useMemo } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { isDescendantOf } from '@/navigation/useTabs';
 
@@ -74,11 +75,13 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
                 // disabled nav link stops receiving hover, so a tooltip
                 // nested inside it would never open. Same arrangement as the
                 // draft-offering tab in OfferingViewHero.
-                <Tip id="tip-profile-view-disabled" label={disabledReason}>
-                  <Nav.Link disabled className="text-center min-w-60px">
-                    {translate('View')}
-                  </Nav.Link>
-                </Tip>
+                <Tooltip label={disabledReason}>
+                  <span>
+                    <Nav.Link disabled className="text-center min-w-60px">
+                      {translate('View')}
+                    </Nav.Link>
+                  </span>
+                </Tooltip>
               )}
             </Nav.Item>
           )}

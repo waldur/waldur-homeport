@@ -5,7 +5,8 @@ import { FC, ReactNode } from 'react';
 import { FieldRenderProps } from 'react-final-form';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { useFlatpickrTheme } from './useFlatpickrTheme';
@@ -86,15 +87,9 @@ const BaseFlatpickrField: FC<BaseFlatpickrFieldProps> = ({
           onClick={() => onChange?.(null)}
           style={{ position: 'absolute', right: 10, top: 10 }}
         >
-          <Tip
-            id="date-input-remove"
-            label={translate('Remove')}
-            className="w-100"
-          >
-            <span className="svg-icon svg-icon-2">
-              <XIcon weight="bold" />
-            </span>
-          </Tip>
+          <Tooltip label={translate('Remove')}>
+            <XIcon weight="bold" className="w-100 svg-icon svg-icon-2" />
+          </Tooltip>
         </button>
       ) : (
         <span

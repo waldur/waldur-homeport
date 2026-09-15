@@ -232,7 +232,7 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                       'Editable, together with its translations, from the "Edit name translations" action.',
                     )}
                     tooltipEnd
-                    tooltipProps={{ placement: 'bottom' }}
+                    tooltipProps={{ side: 'bottom' }}
                   />
                 ) : (
                   <StringGroup
@@ -244,7 +244,7 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                       'Human-readable name shown to users throughout the portal.',
                     )}
                     tooltipEnd
-                    tooltipProps={{ placement: 'bottom' }}
+                    tooltipProps={{ side: 'bottom' }}
                     required
                   />
                 )}
@@ -260,7 +260,7 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
                     'Permanent technical identifier used by the API and by permission checks. It cannot be changed once the role has been created.',
                   )}
                   tooltipEnd
-                  tooltipProps={{ placement: 'bottom' }}
+                  tooltipProps={{ side: 'bottom' }}
                   validate={
                     isEdit ? required : composeValidators(required, isRoleCode)
                   }

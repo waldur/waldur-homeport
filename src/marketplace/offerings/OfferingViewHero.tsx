@@ -4,12 +4,13 @@ import { FC, useMemo } from 'react';
 import { Nav, Tab, Table } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
 import { translate } from '@/i18n';
 import { ParentLink } from '@/marketplace/resources/details/ParentResourceLink';
@@ -118,21 +119,22 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
           <Nav variant="tabs" className="nav-line-tabs mb-4">
             {offering.state === 'Draft' ? (
               <Nav.Item>
-                <Tip
-                  id="tip-public-offering-disabled"
+                <Tooltip
                   label={translate(
                     'The public view is currently inactive as this offering is in draft status.',
                   )}
                 >
-                  <Nav.Link
-                    disabled
-                    className="d-flex align-items-center text-center min-w-60px"
-                    data-testid="offering-tab-public"
-                  >
-                    {translate('Public')}
-                    <QuestionIcon size={18} className="ms-1" weight="bold" />
-                  </Nav.Link>
-                </Tip>
+                  <span>
+                    <Nav.Link
+                      disabled
+                      className="d-flex align-items-center text-center min-w-60px"
+                      data-testid="offering-tab-public"
+                    >
+                      {translate('Public')}
+                      <QuestionIcon size={18} className="ms-1" weight="bold" />
+                    </Nav.Link>
+                  </span>
+                </Tooltip>
               </Nav.Item>
             ) : (
               <Nav.Item>

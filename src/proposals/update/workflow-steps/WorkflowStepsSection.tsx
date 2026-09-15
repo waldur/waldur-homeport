@@ -6,7 +6,8 @@ import {
   ResponsibleRoleEnum,
 } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
@@ -71,12 +72,9 @@ const StepNameCell = ({ row }: { row: CallWorkflowStep }) => {
   return (
     <div className="d-flex align-items-center gap-2">
       {def?.mandatory && (
-        <Tip
-          id={`workflow-step-${row.uuid}-mandatory`}
-          label={translate('Mandatory step. Cannot be removed.')}
-        >
-          <LockSimpleIcon className="text-muted" size={14} weight="bold" />
-        </Tip>
+        <Tooltip label={translate('Mandatory step. Cannot be removed.')}>
+          <LockSimpleIcon size={14} weight="bold" className="text-muted" />
+        </Tooltip>
       )}
       <span className="fw-semibold">{name}</span>
     </div>

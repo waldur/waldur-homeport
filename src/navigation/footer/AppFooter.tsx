@@ -2,10 +2,11 @@ import { ArrowCircleUpIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useState } from 'react';
 import { versionRetrieve } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { format } from '@/core/ErrorMessageFormatter';
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { BackendHealthStatusIndicator } from '@/navigation/footer/BackendHealthStatusIndicator';
@@ -91,21 +92,15 @@ export const AppFooter: FunctionComponent = () => {
             )}
             <BackendHealthStatusIndicator />
             {showUpgradeAvailable && (
-              <Tip
-                id="upgrade-tooltip"
-                label={translate('Update available')}
-                className="ms-8px"
-              >
-                <span className="d-inline-block">
-                  <ArrowCircleUpIcon
-                    size={20}
-                    color="#6B8E23"
-                    weight="bold"
-                    className="cursor-pointer"
-                    onClick={openUpgradeDialog}
-                  />
-                </span>
-              </Tip>
+              <Tooltip label={translate('Update available')}>
+                <ArrowCircleUpIcon
+                  size={20}
+                  color="#6B8E23"
+                  weight="bold"
+                  onClick={openUpgradeDialog}
+                  className="ms-8px d-inline-block cursor-pointer"
+                />
+              </Tooltip>
             )}
           </div>
           <FooterLinks />

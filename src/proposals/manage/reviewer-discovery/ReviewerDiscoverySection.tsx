@@ -9,10 +9,11 @@ import {
   reviewerSuggestionsDestroy,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -97,17 +98,12 @@ const AffinityScoreWithTooltip: FC<{ row: ReviewerSuggestion }> = ({ row }) => {
   );
 
   return (
-    <Tip
-      id={`affinity-${row.uuid}`}
-      label={tooltipContent}
-      placement="top"
-      autoWidth
-    >
+    <Tooltip label={tooltipContent} side="top" autoWidth>
       <div className="fw-bold text-success cursor-pointer">
         {formatScore(row.affinity_score)}
         <InfoIcon className="ms-1" size={14} weight="bold" />
       </div>
-    </Tip>
+    </Tooltip>
   );
 };
 

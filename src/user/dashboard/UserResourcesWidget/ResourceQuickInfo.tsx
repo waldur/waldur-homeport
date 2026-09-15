@@ -12,10 +12,11 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LONG_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import {
   findResourcePlan,
@@ -170,8 +171,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                     />
                     <span className="fs-7">{endpoint.name}</span>
                   </a>
-                  <Tip
-                    id={`endpoint-${index}`}
+                  <Tooltip
                     label={
                       isSshFormat(endpoint.url) && resource.username
                         ? formatSshCommand(endpoint.url, resource.username)
@@ -180,12 +180,12 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                   >
                     <button
                       type="button"
-                      className="btn btn-link p-0 text-muted"
                       onClick={() => copyText(endpoint.url)}
+                      className="btn btn-link p-0 text-muted"
                     >
                       <CopyIcon size={14} weight="bold" />
                     </button>
-                  </Tip>
+                  </Tooltip>
                 </div>
               ))}
             </div>

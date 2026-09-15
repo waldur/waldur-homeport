@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 import { Field, FieldRenderProps } from 'react-final-form';
+
+import { Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { FieldError } from '@/form';
@@ -54,18 +56,11 @@ const UsernameField: FC<UsernameFieldProps> = ({
   <>
     <InputGroup className="mb-2">
       {ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX && (
-        <OverlayTrigger
-          placement="top"
-          overlay={
-            <Tooltip id="freeipa-username-prefix">
-              {translate('Username prefix')}
-            </Tooltip>
-          }
-        >
+        <Tooltip label={translate('Username prefix')}>
           <InputGroup.Text>
             {ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX}
           </InputGroup.Text>
-        </OverlayTrigger>
+        </Tooltip>
       )}
       <Form.Control
         type="text"

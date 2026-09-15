@@ -2,11 +2,12 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { User, usersList, UsersListData } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AITokenExpandableRow } from '@/administration/ai-assistant/AITokenExpandableRow';
 import { ENV } from '@/core/config';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { Tip } from '@/core/Tooltip';
 import { formatPhoneNumber } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
 import { SupportFeatures, UserFeatures } from '@/FeaturesEnums';
@@ -52,9 +53,9 @@ const EmailField = ({ row }: { row: User }) => {
     return <>{row.email}</>;
   }
   return (
-    <Tip label={row.email} id={`user-email-${row.uuid}`} placement="top">
+    <Tooltip label={row.email} side="top">
       <span>{row.email.slice(0, EMAIL_MAX_LENGTH)}…</span>
-    </Tip>
+    </Tooltip>
   );
 };
 
@@ -85,13 +86,12 @@ const OrganizationRolesField = ({ row }: { row: User }) => {
   if (permissions.length > 0) {
     return permissions.map((permission, index) => (
       <span key={index}>
-        <Tip
-          key={index}
-          label={formatRole(permission.role_name)}
-          id="customer-role"
-        >
-          {permission.scope_name} <QuestionIcon weight="bold" />
-        </Tip>
+        <Tooltip key={index} label={formatRole(permission.role_name)}>
+          <span>
+            {permission.scope_name}
+            <QuestionIcon weight="bold" />
+          </span>
+        </Tooltip>
         <br />
       </span>
     ));
@@ -107,16 +107,18 @@ const ProjectRolesField = ({ row }: { row: User }) => {
   if (permissions.length > 0) {
     return permissions.map((permission, index) => (
       <span key={index}>
-        <Tip
+        <Tooltip
           key={index}
           label={translate('{role} ({name})', {
             role: formatRole(permission.role_name),
             name: permission.customer_name,
           })}
-          id="project-role"
         >
-          {permission.scope_name} <QuestionIcon weight="bold" />
-        </Tip>
+          <span>
+            {permission.scope_name}
+            <QuestionIcon weight="bold" />
+          </span>
+        </Tooltip>
         <br />
       </span>
     ));

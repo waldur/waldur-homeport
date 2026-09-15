@@ -3,7 +3,8 @@ import { useMutation } from '@tanstack/react-query';
 import { Field } from 'react-final-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { getNameFieldValidators, composeValidators } from '@/core/validators';
 import { FormGroup, StringField } from '@/form';
 import { translate } from '@/i18n';
@@ -49,8 +50,7 @@ const ResourceNameField = (props) => {
           title={translate('Suggest name')}
         />
       ) : (
-        <Tip
-          id="ResourceNameField"
+        <Tooltip
           label={translate('Organization and project need to be selected.')}
         >
           <ActionButton
@@ -63,7 +63,7 @@ const ResourceNameField = (props) => {
             iconNode={<LightbulbFilamentIcon weight="bold" />}
             title={translate('Suggest name')}
           />
-        </Tip>
+        </Tooltip>
       )}
     </div>
   );

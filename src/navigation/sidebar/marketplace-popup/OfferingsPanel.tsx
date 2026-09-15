@@ -15,9 +15,10 @@ import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
-import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
@@ -60,46 +61,47 @@ const OfferingListItem: FunctionComponent<{
   const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
 
   return (
-    <Tip
+    <Tooltip
       label={
         item.state === 'Paused' ? item.paused_reason || item.state : undefined
       }
-      id={`tip-${item.uuid}`}
     >
-      <ListGroupItem
-        data-uuid={item.uuid}
-        className={classNames({
-          active: selectedItem && item.uuid === selectedItem.uuid,
-        })}
-        style={style}
-        onClick={() => onClick(item)}
-        disabled={item.state === 'Paused'}
-      >
-        <Stack direction="horizontal" gap={3}>
-          {item.image ? (
-            <div className="symbol symbol-40px">
-              <img src={item.image} alt="offering" />
+      <span>
+        <ListGroupItem
+          data-uuid={item.uuid}
+          className={classNames({
+            active: selectedItem && item.uuid === selectedItem.uuid,
+          })}
+          style={style}
+          onClick={() => onClick(item)}
+          disabled={item.state === 'Paused'}
+        >
+          <Stack direction="horizontal" gap={3}>
+            {item.image ? (
+              <div className="symbol symbol-40px">
+                <img src={item.image} alt="offering" />
+              </div>
+            ) : (
+              <div className="symbol">
+                <ImagePlaceholder width="40px" height="40px">
+                  {abbreviation && (
+                    <div className="symbol-label fs-6 fw-bold">
+                      {abbreviation}
+                    </div>
+                  )}
+                </ImagePlaceholder>
+              </div>
+            )}
+            <div>
+              <h5 className="title ellipsis mb-1">{truncate(item.name, 40)}</h5>
+              <p className="description ellipsis fs-7 mb-0">
+                <TextWithoutFormatting html={truncate(item.description, 120)} />
+              </p>
             </div>
-          ) : (
-            <div className="symbol">
-              <ImagePlaceholder width="40px" height="40px">
-                {abbreviation && (
-                  <div className="symbol-label fs-6 fw-bold">
-                    {abbreviation}
-                  </div>
-                )}
-              </ImagePlaceholder>
-            </div>
-          )}
-          <div>
-            <h5 className="title ellipsis mb-1">{truncate(item.name, 40)}</h5>
-            <p className="description ellipsis fs-7 mb-0">
-              <TextWithoutFormatting html={truncate(item.description, 120)} />
-            </p>
-          </div>
-        </Stack>
-      </ListGroupItem>
-    </Tip>
+          </Stack>
+        </ListGroupItem>
+      </span>
+    </Tooltip>
   );
 };
 

@@ -6,7 +6,8 @@ import { Field } from 'react-final-form';
 import { FieldRenderProps } from 'react-final-form';
 import { Project } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { PopoverMenuContent } from '@/navigation/NavMenu';
@@ -133,13 +134,11 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                   )}
                 </span>
               ) : (
-                <Tip
-                  id={'tip-project-role-' + role.name}
-                  label={role.tooltip}
-                  className="menu-link disabled px-3"
-                >
-                  <RoleTitle role={role} ambiguous={ambiguous} />
-                </Tip>
+                <Tooltip label={role.tooltip}>
+                  <span className="menu-link disabled px-3">
+                    <RoleTitle role={role} ambiguous={ambiguous} />
+                  </span>
+                </Tooltip>
               )}
             </div>
           ) : (

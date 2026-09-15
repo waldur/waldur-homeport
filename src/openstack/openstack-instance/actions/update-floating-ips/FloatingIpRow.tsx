@@ -2,7 +2,8 @@ import { CopyIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useField } from 'react-final-form';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
@@ -38,9 +39,9 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
               type="button"
               className="text-btn pe-3"
             >
-              <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
+              <Tooltip label={translate('Copy to clipboard')}>
                 <CopyIcon size={20} weight="bold" />
-              </Tip>
+              </Tooltip>
             </button>
             {pair.address}
           </div>

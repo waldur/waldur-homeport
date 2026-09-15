@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { renderFieldOrDash } from '@/table/utils';
@@ -60,9 +61,9 @@ export const ImportReviewTab = () => {
               <tr key={data.uuid}>
                 <td className="text-dark">{data.remote_category}</td>
                 <td className="text-dark">
-                  <Tip id={`tip-offering-${data.uuid}`} label={data.offering}>
-                    {data.offering}
-                  </Tip>
+                  <Tooltip label={data.offering}>
+                    <span>{data.offering}</span>
+                  </Tooltip>
                 </td>
                 <td>{data.local_category}</td>
               </tr>

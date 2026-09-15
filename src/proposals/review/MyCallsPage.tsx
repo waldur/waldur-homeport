@@ -1,9 +1,10 @@
 import { FC, useMemo } from 'react';
 import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDate } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -99,24 +100,18 @@ export const MyCallsPage: FC = () => {
           return (
             <div className="d-flex gap-1">
               {inProgress > 0 && (
-                <Tip
-                  id={`in-progress-${row.uuid}`}
-                  label={translate('In progress')}
-                >
+                <Tooltip label={translate('In progress')}>
                   <Badge variant="warning" pill outline>
                     {inProgress}
                   </Badge>
-                </Tip>
+                </Tooltip>
               )}
               {completed > 0 && (
-                <Tip
-                  id={`completed-${row.uuid}`}
-                  label={translate('Completed')}
-                >
+                <Tooltip label={translate('Completed')}>
                   <Badge variant="success" pill outline>
                     {completed}
                   </Badge>
-                </Tip>
+                </Tooltip>
               )}
             </div>
           );
@@ -146,31 +141,25 @@ export const MyCallsPage: FC = () => {
           return (
             <div className="d-flex gap-1">
               {bySeverity.real > 0 && (
-                <Tip id={`coi-real-${row.uuid}`} label={translate('Real')}>
+                <Tooltip label={translate('Real')}>
                   <Badge variant="danger" pill outline>
                     {bySeverity.real}
                   </Badge>
-                </Tip>
+                </Tooltip>
               )}
               {bySeverity.apparent > 0 && (
-                <Tip
-                  id={`coi-apparent-${row.uuid}`}
-                  label={translate('Apparent')}
-                >
+                <Tooltip label={translate('Apparent')}>
                   <Badge variant="warning" pill outline>
                     {bySeverity.apparent}
                   </Badge>
-                </Tip>
+                </Tooltip>
               )}
               {bySeverity.potential > 0 && (
-                <Tip
-                  id={`coi-potential-${row.uuid}`}
-                  label={translate('Potential')}
-                >
+                <Tooltip label={translate('Potential')}>
                   <Badge variant="info" pill outline>
                     {bySeverity.potential}
                   </Badge>
-                </Tip>
+                </Tooltip>
               )}
             </div>
           );

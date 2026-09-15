@@ -2,10 +2,11 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { StatsCard } from '@/core/StatsCard';
-import { Tip } from '@/core/Tooltip';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { isFeatureVisible } from '@/features/connect';
 import { DashboardFeatures } from '@/FeaturesEnums';
@@ -34,10 +35,10 @@ const Metric: FC<{ value: ReactNode; caption: ReactNode; tone?: string }> = ({
 
 /** An info tip in the tile's corner, for a figure whose derivation is not
  *  obvious from its label. */
-const MetricTip: FC<{ id: string; label: string }> = ({ id, label }) => (
-  <Tip id={id} label={label}>
+const MetricTip: FC<{ id?: string; label: string }> = ({ label }) => (
+  <Tooltip label={label}>
     <InfoIcon weight="bold" className="text-muted" />
-  </Tip>
+  </Tooltip>
 );
 
 /**

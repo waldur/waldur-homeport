@@ -8,11 +8,12 @@ import { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { ActionTakenEnum, InjectionSeverityEnum } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { formatDateTime, formatShortDateTime } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 
 // Vocabulary shared by the two assistant channels. It lived in the
@@ -103,17 +104,17 @@ export const TokenUsageBadge: FunctionComponent<{
   inputTokens?: number | null;
   outputTokens?: number | null;
   prefix?: string;
-}> = ({ id, label, inputTokens, outputTokens, prefix }) => {
+}> = ({ label, inputTokens, outputTokens, prefix }) => {
   if (inputTokens == null && outputTokens == null) return null;
   return (
-    <Tip id={id} label={label}>
+    <Tooltip label={label}>
       <span className="text-muted text-nowrap">
         {prefix}
         {inputTokens != null && <>↓ {formatUsageValue(inputTokens)}</>}
         {inputTokens != null && outputTokens != null && ' / '}
         {outputTokens != null && <>↑ {formatUsageValue(outputTokens)}</>}
       </span>
-    </Tip>
+    </Tooltip>
   );
 };
 
@@ -182,19 +183,16 @@ export const asPercent = (value?: number | null) =>
 // The hint matters because the denominator is rated replies only — three
 // thumbs-up and one thumbs-down reads as 75% (positive ÷ rated), not
 // "something broke".
-export const SatisfactionLabel: FunctionComponent<{ id: string }> = ({
-  id,
-}) => (
+export const SatisfactionLabel: FunctionComponent<{ id?: string }> = () => (
   <>
     {translate('Satisfaction')}{' '}
-    <Tip
-      id={id}
+    <Tooltip
       label={translate(
         'Share of rated replies marked helpful: positive ÷ (positive + negative). Counts every rating ever submitted, not a recent window, and ignores replies nobody rated.',
       )}
     >
       <QuestionIcon weight="bold" />
-    </Tip>
+    </Tooltip>
   </>
 );
 

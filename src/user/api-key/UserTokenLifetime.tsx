@@ -4,7 +4,8 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
@@ -74,14 +75,16 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
         </FormGroup>
         <FormGroup
           label={
-            <Tip
-              id="token"
+            <Tooltip
               label={translate(
                 'Lifetime will be updated and reset upon saving the form. Token lifetime is prolonged each time a successful API call with the token is done.',
               )}
             >
-              {translate('Token lifetime')} <QuestionIcon weight="bold" />
-            </Tip>
+              <span>
+                {translate('Token lifetime')}
+                <QuestionIcon weight="bold" />
+              </span>
+            </Tooltip>
           }
         >
           <Select

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { FormCheck, FormText } from 'react-bootstrap';
 
-import { Tip } from './Tooltip';
+import { Tooltip } from 'waldur-ui';
 
 interface AwesomeCheckboxProps {
   label?: React.ReactNode;
@@ -52,9 +52,9 @@ export const AwesomeCheckbox: FC<AwesomeCheckboxProps> = ({
         <FormCheck.Label htmlFor={props.id}>
           {props.tooltip && (
             <>
-              <Tip label={props.tooltip} id="tooltip">
+              <Tooltip label={props.tooltip}>
                 <QuestionIcon weight="bold" />
-              </Tip>{' '}
+              </Tooltip>{' '}
             </>
           )}
           {props.label}

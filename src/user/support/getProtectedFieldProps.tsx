@@ -1,9 +1,10 @@
 import { LockSimpleIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { User } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
-import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -52,19 +53,18 @@ export const getProtectedFieldProps = (
     ? (val: any) => (
         <span className="d-inline-flex align-items-center gap-2">
           <span>{renderFieldOrDash(val)}</span>
-          <Tip
+          <Tooltip
             label={translate('Required field not provided by {idp}', {
               idp:
                 user.identity_provider_label || translate('identity provider'),
             })}
-            id={`${field}-warning`}
           >
             <WarningCircleIcon
               size={16}
               weight="bold"
               className="text-warning"
             />
-          </Tip>
+          </Tooltip>
         </span>
       )
     : undefined;

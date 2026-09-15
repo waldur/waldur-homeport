@@ -5,10 +5,11 @@ import {
   ArrowConsumptionRecord,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
-import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -101,14 +102,13 @@ export const ConsumptionRecordsList: FunctionComponent<
           title: (
             <>
               {translate('Final')}{' '}
-              <Tip
-                id="final-sell-tooltip"
+              <Tooltip
                 label={translate(
                   'Confirmed amount from Arrow billing export. Empty until reconciliation is run.',
                 )}
               >
                 <QuestionIcon size={18} weight="bold" />
-              </Tip>
+              </Tooltip>
             </>
           ),
           render: ({ row }) =>
@@ -122,14 +122,13 @@ export const ConsumptionRecordsList: FunctionComponent<
           title: (
             <>
               {translate('Status')}{' '}
-              <Tip
-                id="status-tooltip"
+              <Tooltip
                 label={translate(
                   'Pending: provisional amount from Arrow API. Finalized: confirmed by billing export. Reconciled: adjustment applied if final differs from consumed.',
                 )}
               >
                 <QuestionIcon size={18} weight="bold" />
-              </Tip>
+              </Tooltip>
             </>
           ),
           render: ({ row }) => (

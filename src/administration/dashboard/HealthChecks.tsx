@@ -3,7 +3,9 @@ import {
   XCircleIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
-import { Card, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card, Col } from 'react-bootstrap';
+
+import { Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -63,18 +65,17 @@ const HealthInfoItem = ({
   if (hasError) {
     return (
       <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
-        <OverlayTrigger
-          placement="top"
-          overlay={
-            <Tooltip id={`tooltip-${title}`}>
+        <Tooltip
+          label={
+            <>
               <strong>Error:</strong> {error}
-            </Tooltip>
+            </>
           }
         >
           <div className="p-3 border rounded bg-light-danger cursor-pointer h-100">
             {statusContent}
           </div>
-        </OverlayTrigger>
+        </Tooltip>
       </Col>
     );
   }

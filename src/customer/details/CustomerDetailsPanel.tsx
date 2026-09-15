@@ -6,12 +6,13 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
 import { CompactEditButton } from '@/form/CompactEditButton';
@@ -38,15 +39,12 @@ import { CustomerOrganizationGroupsRow } from './CustomerOrganizationGroupsRow';
 import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
-const TabBadge = ({ count, tabKey }: { count: number; tabKey: string }) => (
-  <Tip
-    label={translate('{count} fields', { count })}
-    id={`org-tab-badge-${tabKey}`}
-  >
+const TabBadge = ({ count }: { count: number; tabKey?: string }) => (
+  <Tooltip label={translate('{count} fields', { count })}>
     <span className="badge badge-sm badge-circle badge-light ms-2">
       {count}
     </span>
-  </Tip>
+  </Tooltip>
 );
 
 const useTabStats = (isStaff: boolean) => {

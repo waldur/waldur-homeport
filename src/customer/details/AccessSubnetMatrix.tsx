@@ -9,8 +9,9 @@ import {
   marketplacePublicOfferingsList,
 } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { Tip } from '@/core/Tooltip';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -222,21 +223,18 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
           <span className="text-nowrap">
             {row.inet}
             {isLocked(row) && (
-              <Tip
-                id={`staff-managed-${row.uuid}`}
+              <Tooltip
                 label={translate('Added by staff. It cannot be changed here.')}
-                className="ms-2"
               >
-                <LockIcon size={14} weight="bold" className="text-muted" />
-              </Tip>
+                <LockIcon size={14} weight="bold" className="ms-2 text-muted" />
+              </Tooltip>
             )}
           </span>
         ),
       },
       ...targets.map((target) => ({
         title: target.dormant ? (
-          <Tip
-            id={`dormant-${target.key}`}
+          <Tooltip
             label={translate(
               'This organization no longer has resources of {offering}. Existing entries still apply if it is used again, and can be removed here.',
               { offering: target.label },
@@ -245,7 +243,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
             <span className="text-muted text-decoration-underline-dotted">
               {target.label}
             </span>
-          </Tip>
+          </Tooltip>
         ) : (
           target.label
         ),
