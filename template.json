@@ -33495,7 +33495,7 @@
       "feature_area": "proposal"
     }
   },
-  "Opens in your default Matrix client if configured.": {
+  "Opens matrix.to, which hands the room over to your Matrix client.": {
     "context": {
       "feature_area": "matrix"
     }

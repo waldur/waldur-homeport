@@ -8,6 +8,8 @@ import {
 } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
+import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
 import { MatrixChatHeader } from './MatrixChatHeader';
@@ -59,6 +61,7 @@ const renderHeader = (props: Record<string, unknown> = {}) =>
 beforeEach(() => {
   vi.mocked(useNotify().showSuccess).mockClear();
   vi.mocked(useNotify().showError).mockClear();
+  vi.mocked(useModal().openDialog).mockClear();
   h.members = MEMBERS;
   h.call = {
     callState: 'idle',
@@ -112,6 +115,20 @@ describe('MatrixChatHeader', () => {
     await user.click(container.querySelector('.dropdown-toggle')!);
     expect(await screen.findByText('Start call')).toBeTruthy();
     expect(screen.getByText(/external Matrix client/i)).toBeTruthy();
+  });
+
+  it('shows the Matrix login before handing the room to an external client', async () => {
+    const user = userEvent.setup();
+    const { container } = renderHeader({ roomAlias: '#llm:server' });
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(await screen.findByText(/external Matrix client/i));
+    expect(useModal().openDialog).toHaveBeenCalledWith(
+      MatrixCredentialsDialog,
+      {
+        resolve: { roomAlias: '#llm:server', roomUuid: 'room-1' },
+      },
+    );
   });
 
   it('shows "End call" in the kebab when the active call is in this room', async () => {
