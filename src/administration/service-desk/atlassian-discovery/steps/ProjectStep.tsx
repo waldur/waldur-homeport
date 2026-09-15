@@ -9,7 +9,7 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
-import type { AtlassianFormValues } from '../types';
+import { AtlassianFormValues, extractCredentials } from '../types';
 
 /**
  * Step 2: Project Selection
@@ -23,17 +23,7 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Extract credentials from form values
-  const credentials = {
-    api_url: values.api_url,
-    auth_method: values.auth_method,
-    email: values.email,
-    token: values.token,
-    personal_access_token: values.personal_access_token,
-    username: values.username,
-    password: values.password,
-    verify_ssl: values.verify_ssl,
-  };
+  const credentials = extractCredentials(values);
 
   // Load projects when step mounts
   useEffect(() => {

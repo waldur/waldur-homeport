@@ -701,6 +701,12 @@ export const SettingsDescription = [
         type: 'secret_field',
       },
       {
+        key: 'ATLASSIAN_OAUTH2_CLIENT_SECRET',
+        description: translate('OAuth 2.0 Client Secret. With the client ID set, Waldur obtains and renews access tokens itself (client credentials grant).'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
         key: 'ATLASSIAN_OAUTH2_ACCESS_TOKEN',
         description: translate('OAuth 2.0 Access Token'),
         default: '',
@@ -726,7 +732,7 @@ export const SettingsDescription = [
       },
       {
         key: 'ATLASSIAN_EXCLUDED_ATTACHMENT_TYPES',
-        description: translate('Comma-separated list of file extenstions not allowed for attachment.'),
+        description: translate('Comma-separated list of file extensions not allowed for attachment.'),
         default: '',
         type: 'string',
       },

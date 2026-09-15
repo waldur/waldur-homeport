@@ -1,4 +1,5 @@
 import type {
+  AtlassianCredentialsRequest,
   AtlassianProjectResponse,
   AtlassianRequestTypeResponse,
   AtlassianCustomFieldResponse,
@@ -32,8 +33,13 @@ export interface AtlassianFormValues {
   personal_access_token: string;
   username: string;
   password: string;
+  client_id: string;
+  client_secret: string;
   verify_ssl: boolean;
   credentialsValid: boolean;
+  // URL the backend connects to: for OAuth 2.0 a Cloud site URL becomes the
+  // API gateway URL.
+  resolvedApiUrl?: string;
 
   // Step 2: Projects (populated by ProjectStep)
   projects: AtlassianProjectResponse[];
@@ -48,3 +54,21 @@ export interface AtlassianFormValues {
   priorities: AtlassianPriorityResponse[];
   fieldMappings: FieldMappings;
 }
+
+/**
+ * Extract credentials from form values for API calls.
+ */
+export const extractCredentials = (
+  values: AtlassianFormValues,
+): AtlassianCredentialsRequest => ({
+  api_url: values.api_url,
+  auth_method: values.auth_method,
+  email: values.email,
+  token: values.token,
+  personal_access_token: values.personal_access_token,
+  username: values.username,
+  password: values.password,
+  client_id: values.client_id,
+  client_secret: values.client_secret,
+  verify_ssl: values.verify_ssl,
+});

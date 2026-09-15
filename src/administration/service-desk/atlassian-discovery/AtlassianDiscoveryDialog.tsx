@@ -5,6 +5,8 @@ import { supportSettingsAtlassianCurrentSettingsRetrieve } from 'waldur-js-clien
 import { translate } from '@/i18n';
 import { ProgressStep, Wizard } from '@/wizard';
 
+import { getConfiguredValue } from '../atlassianAuth';
+
 import { CredentialsStep } from './steps/CredentialsStep';
 import { FieldMappingStep } from './steps/FieldMappingStep';
 import { PreviewStep } from './steps/PreviewStep';
@@ -37,7 +39,16 @@ const wizardForms = [
  * - Custom renderFooter for step-specific navigation buttons
  * - Async operations (credential validation, API discovery) update form values
  */
-export const AtlassianDiscoveryDialog: FC = () => {
+interface AtlassianDiscoveryDialogProps {
+  resolve?: {
+    // Settings as loaded on the service desk page, stored secrets included
+    settings?: Record<string, unknown>;
+  };
+}
+
+export const AtlassianDiscoveryDialog: FC<AtlassianDiscoveryDialogProps> = ({
+  resolve,
+}) => {
   // Load current settings to pre-fill the form
   const { data: currentSettings } = useQuery({
     queryKey: ['AtlassianCurrentSettings'],
@@ -49,20 +60,24 @@ export const AtlassianDiscoveryDialog: FC = () => {
   const initialValues = useMemo((): Partial<AtlassianFormValues> => {
     const settings = currentSettings?.data as
       Record<string, unknown> | undefined;
+    const storedSecret = (key: string) =>
+      (getConfiguredValue(resolve?.settings || {}, key) as string) || '';
 
     return {
       // Credentials - pre-fill from existing settings
       api_url: (settings?.ATLASSIAN_API_URL as string) || '',
       auth_method:
         (settings?.auth_method as AtlassianFormValues['auth_method']) ||
-        'api_token',
+        'oauth2_client_credentials',
       email: (settings?.ATLASSIAN_EMAIL as string) || '',
       username: (settings?.ATLASSIAN_USERNAME as string) || '',
+      client_id: (settings?.ATLASSIAN_OAUTH2_CLIENT_ID as string) || '',
       verify_ssl: (settings?.ATLASSIAN_VERIFY_SSL as boolean) ?? true,
-      // Secrets are not pre-filled for security
-      token: '',
-      personal_access_token: '',
-      password: '',
+      // Stored secrets are shown masked, as in the other settings forms
+      token: storedSecret('ATLASSIAN_TOKEN'),
+      personal_access_token: storedSecret('ATLASSIAN_PERSONAL_ACCESS_TOKEN'),
+      password: storedSecret('ATLASSIAN_PASSWORD'),
+      client_secret: storedSecret('ATLASSIAN_OAUTH2_CLIENT_SECRET'),
       credentialsValid: false,
 
       // Discovery results - initially empty
@@ -74,7 +89,7 @@ export const AtlassianDiscoveryDialog: FC = () => {
       priorities: [],
       fieldMappings: {},
     };
-  }, [currentSettings]);
+  }, [currentSettings, resolve?.settings]);
 
   // The actual save happens in PreviewStep, so onSubmit is a no-op
   const handleSubmit = useCallback(() => {
@@ -89,8 +104,10 @@ export const AtlassianDiscoveryDialog: FC = () => {
 
   return (
     <Wizard<AtlassianFormValues>
-      title={translate('Atlassian Settings Discovery')}
-      subtitle={translate('Configure Atlassian Jira Service Desk integration')}
+      title={translate('Set up Atlassian service desk')}
+      subtitle={translate(
+        'Connect Jira Service Management, then pick the project, request types and fields',
+      )}
       steps={steps}
       wizardForms={wizardForms}
       onSubmit={handleSubmit}
