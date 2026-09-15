@@ -21503,6 +21503,11 @@
       "feature_area": "integration"
     }
   },
+  "HEAppE instance identifier": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "HEAppE local base path": {
     "context": {
       "feature_area": "integration"
@@ -25901,7 +25906,7 @@
       "feature_area": "steps"
     }
   },
-  "LiveKit API key for the Element Call SFU (Calls observability tab).": {},
+  "LiveKit API key for the call SFU (Calls observability tab).": {},
   "LiveKit API secret used to mint the admin token.": {},
   "LiveKit is not configured.": {
     "context": {
@@ -62796,6 +62801,11 @@
     }
   },
   "Whether this mapping is enabled for sync": {},
+  "Which HEAppE deployment this offering targets. Not the same as the cluster ID.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Which price to use for invoice items: sell or buy": {
     "context": {
       "feature_area": "settings"
