@@ -92,8 +92,18 @@ const preview: Preview = {
       },
     },
 
+    // Storybook 10's core viewport feature reads `options` (a Record<string,
+    // Viewport>) — not `viewports`, the old addon-viewport (Storybook 6/7)
+    // key. With `viewports`, this whole block was silently ignored and the
+    // toolbar fell back to its own built-in `MINIMAL_VIEWPORTS` list
+    // (Small mobile/Large mobile/Tablet/Desktop) instead, with no error —
+    // confirmed by inspecting node_modules/storybook/dist/chunk-*.d.ts's
+    // `ViewportParameters` type. Selecting one of these presets is a
+    // `globals.viewport` value (e.g. `{ globals: { viewport: 'mobile' } }`
+    // on a story/meta), not a `parameters.viewport.defaultViewport` —  that
+    // parameter doesn't exist in this version either.
     viewport: {
-      viewports: {
+      options: {
         mobile: {
           name: 'Mobile (xs)',
           styles: { width: '375px', height: '667px' },
