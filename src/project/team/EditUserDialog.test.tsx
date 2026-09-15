@@ -194,4 +194,35 @@ describe('EditUserDialog (Project)', () => {
     ).toBeInTheDocument(); // DASH_ESCAPE_CODE
     expect(screen.getByText('Username')).toBeInTheDocument();
   });
+
+  // A role missing from the cache gets a fresh fallback object each render, and
+  // final-form reinitializes when initialValues stop being shallow-equal.
+  it('keeps a typed expiration when the dialog re-renders', async () => {
+    const user = userEvent.setup();
+    const resolve = {
+      ...mockResolve,
+      permission: { ...mockPermission, role_name: 'retired' } as any,
+    };
+
+    const { rerender } = renderDialog(resolve);
+    const dateInput = screen.getByDisplayValue('2024-12-31');
+    await user.clear(dateInput);
+    await user.type(dateInput, '2025-12-31');
+    rerender(<EditUserDialog resolve={resolve} />);
+
+    expect(screen.getByDisplayValue('2025-12-31')).toBeInTheDocument();
+  });
+
+  it('labels a held role missing from the cache with its description', () => {
+    renderDialog({
+      ...mockResolve,
+      permission: {
+        ...mockPermission,
+        role_name: 'PROJECT.acme.ADMIN',
+        role_description: 'Acme administrator',
+      } as any,
+    });
+
+    expect(screen.getByText('Acme administrator')).toBeInTheDocument();
+  });
 });

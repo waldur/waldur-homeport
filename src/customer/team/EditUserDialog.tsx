@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
   customersAddUser,
@@ -14,7 +14,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Role } from '@/permissions/types';
-import { getCustomerRoles } from '@/permissions/utils';
+import { getHeldRole } from '@/permissions/utils';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@/project/team/RoleGroup';
 import { useCustomer } from '@/workspace/hooks';
@@ -77,12 +77,13 @@ const savePermissions = async (
 export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
   const currentCustomer = useCustomer();
 
-  const initialValues = {
-    role: getCustomerRoles().find(
-      ({ name }) => name === resolve.customer.role_name,
-    ),
-    expiration_time: resolve.customer.expiration_time,
-  };
+  const initialValues = useMemo(
+    () => ({
+      role: getHeldRole(resolve.customer.role_name, 'customer'),
+      expiration_time: resolve.customer.expiration_time,
+    }),
+    [resolve.customer],
+  );
 
   const updateMutation = useManagedMutation<any, any, EditUserDialogFormData>({
     mutationFn: (formData) =>

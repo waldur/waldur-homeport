@@ -30848,6 +30848,11 @@
       "feature_area": "steps"
     }
   },
+  "No other roles are available in this organization. Ask staff to reveal a concealed role or reactivate one.": {
+    "context": {
+      "feature_area": "team"
+    }
+  },
   "No outputs found for this order": {
     "context": {
       "feature_area": "details"
@@ -31200,6 +31205,11 @@
     }
   },
   "No roles are available for this offering in your organization.": {
+    "context": {
+      "feature_area": "team"
+    }
+  },
+  "No roles are available in this organization. Ask staff to reveal a concealed role or reactivate one.": {
     "context": {
       "feature_area": "team"
     }
@@ -56618,6 +56628,11 @@
   "Unable to load role.": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "Unable to load roles.": {
+    "context": {
+      "feature_area": "team"
     }
   },
   "Unable to load science domain preset.": {

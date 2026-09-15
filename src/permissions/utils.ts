@@ -73,6 +73,30 @@ export const getCustomerRoles = () => getRoles(['customer']);
 
 export const getProposalRoles = () => getRoles(['proposal']);
 
+/**
+ * The role a member currently holds, for pre-filling an edit form. Searches the
+ * whole cache rather than getRoles, and falls back to a role built from the
+ * name: a deactivated role, or an organization clone created after page load,
+ * is still the member's role, and the backend accepts updating its expiration.
+ * Pass the description when the permission carries one, so an uncached role
+ * reads as a label rather than a machine name.
+ */
+export const getHeldRole = (
+  roleName: string | null | undefined,
+  contentType: RoleType,
+  description?: string,
+): Role | undefined =>
+  roleName
+    ? (ENV.roles.find(
+        (role) => role.name === roleName && role.content_type === contentType,
+      ) ??
+      ({
+        name: roleName,
+        description: description || roleName,
+        content_type: contentType,
+      } as Role))
+    : undefined;
+
 const ROLE_MAP = {
   owner: RoleEnum.CUSTOMER_OWNER,
   service_manager: RoleEnum.CUSTOMER_MANAGER,
