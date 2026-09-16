@@ -1943,6 +1943,11 @@
       "feature_area": "create"
     }
   },
+  "Add dedicated load balancer nodes for ingress and service exposure.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Add default access subnet": {
     "context": {
       "feature_area": "access-subnets"
@@ -3686,6 +3691,12 @@
     }
   },
   "Alumni": {},
+  "Always included": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "options"
+    }
+  },
   "Always keep at least this many most recent revisions per user, however old they are. Must be above 0, otherwise pruning can erase a user's history entirely.": {},
   "Ambiguous — {count} organizations share this name.": {
     "context": {
@@ -13352,6 +13363,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "organizations"
+    }
+  },
+  "Customer chooses": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Customer data": {
@@ -23327,6 +23343,11 @@
       "feature_area": "list"
     }
   },
+  "Include load balancer nodes": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Include media files when exporting Matrix room history.": {},
   "Include offering access endpoints in export": {
     "context": {
@@ -26236,6 +26257,11 @@
   "Load balancer name": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Load balancer nodes": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Load balancer nodes (Mandatory)": {
@@ -29640,7 +29666,7 @@
       "feature_area": "common"
     }
   },
-  "Network rules for public-facing load balancers and ingress controllers": {
+  "Network rules for public-facing ingress and exposed services": {
     "context": {
       "feature_area": "common"
     }
@@ -32030,6 +32056,11 @@
   "Not mapped": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Not offered": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Not overridden": {
@@ -63434,6 +63465,11 @@
     }
   },
   "Whether automatic periodic sync is enabled for this integration": {},
+  "Whether clusters get dedicated load balancer nodes. Defaults to always included.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Whether the role is granted on the whole resource or on individual resource sub-projects.": {
     "context": {
       "feature_area": "roles"

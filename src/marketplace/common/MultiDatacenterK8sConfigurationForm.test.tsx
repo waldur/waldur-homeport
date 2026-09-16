@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
+import { K8sDefaultConfiguration } from './multi-datacenter-k8s-types';
 import { MultiDatacenterK8sConfigurationForm } from './MultiDatacenterK8sConfigurationForm';
 
 vi.mock('./K8sSecurityConfigSection', () => ({
@@ -18,10 +19,16 @@ describe('MultiDatacenterK8sConfigurationForm', () => {
     vi.clearAllMocks();
   });
 
-  const renderComponent = () => {
+  const renderComponent = (defaultConfigs?: K8sDefaultConfiguration) => {
     return render(
       <MultiDatacenterK8sConfigurationForm
-        field={{ type: 'multi_datacenter_k8s_config', label: 'Multi K8s' }}
+        field={
+          {
+            type: 'multi_datacenter_k8s_config',
+            label: 'Multi K8s',
+            default_configs: defaultConfigs,
+          } as any
+        }
         input={
           {
             name: 'k8s_multi',
@@ -74,5 +81,49 @@ describe('MultiDatacenterK8sConfigurationForm', () => {
         ]),
       }),
     );
+  });
+
+  describe('load balancer', () => {
+    beforeEach(() => {
+      vi.mocked(marketplacePublicOfferingsList).mockResolvedValue({
+        data: [],
+      } as any);
+    });
+
+    it('shows one mandatory load balancer per datacenter by default', () => {
+      renderComponent();
+
+      expect(
+        screen.getAllByText(/Load balancer nodes \(Mandatory\)/),
+      ).toHaveLength(3);
+    });
+
+    it('drops the load balancer from every datacenter at once', async () => {
+      renderComponent({ load_balancer_mode: 'optional' });
+
+      expect(screen.getAllByText(/^Load balancer nodes:$/)).toHaveLength(3);
+      // 3 workers + 1 controller + 1 load balancer per datacenter
+      expect(screen.getAllByText(/^5 nodes,/)).toHaveLength(3);
+
+      await userEvent.click(
+        screen.getByRole('checkbox', { name: /Include load balancer/ }),
+      );
+
+      expect(screen.queryByText(/Load balancer nodes/)).not.toBeInTheDocument();
+      expect(screen.getAllByText(/^4 nodes,/)).toHaveLength(3);
+      expect(mockOnChange).toHaveBeenLastCalledWith(
+        expect.objectContaining({ load_balancer: false }),
+      );
+    });
+
+    it('is not offered when disabled', () => {
+      renderComponent({ load_balancer_mode: 'disabled' });
+
+      expect(screen.queryByText(/Load balancer nodes/)).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('checkbox', { name: /Include load balancer/ }),
+      ).not.toBeInTheDocument();
+      expect(screen.getAllByText(/^4 nodes,/)).toHaveLength(3);
+    });
   });
 });

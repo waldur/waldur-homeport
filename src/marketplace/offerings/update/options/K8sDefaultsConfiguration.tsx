@@ -1,11 +1,27 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
+import { useField } from 'react-final-form';
+import { LoadBalancerModeEnum } from 'waldur-js-client';
 
-import { StringGroup, NumberGroup } from '@/form';
+import { StringGroup, NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+
+const getLoadBalancerModeOptions = (): Array<{
+  value: LoadBalancerModeEnum;
+  label: string;
+}> => [
+  { value: 'required', label: translate('Always included') },
+  { value: 'optional', label: translate('Customer chooses') },
+  { value: 'disabled', label: translate('Not offered') },
+];
 
 export const K8sDefaultsConfiguration: React.FC<{}> = () => {
   const name = 'default_configs';
+  const {
+    input: { value: loadBalancerMode },
+  } = useField<LoadBalancerModeEnum>(`${name}.load_balancer_mode`, {
+    subscription: { value: true },
+  });
   return (
     <Card>
       <Card.Header>
@@ -115,63 +131,78 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           {translate('Load Balancer Defaults')}
           <small className="text-muted ms-2">({translate('Optional')})</small>
         </h6>
-        <Row>
-          <Col md={6}>
-            <NumberGroup
-              label={translate('vCPUs per Load Balancer')}
-              help={translate(
-                'Number of vCPUs allocated to each load balancer node',
-              )}
-              name={`${name}.default_lb_vcpus`}
-              type="number"
-              min="1"
-              max="16"
-              parse={(value) => (value ? parseInt(value, 10) : undefined)}
-            />
-          </Col>
-          <Col md={6}>
-            <NumberGroup
-              label={translate('RAM per Load Balancer (GB)')}
-              help={translate(
-                'Amount of RAM in GB allocated to each load balancer node',
-              )}
-              name={`${name}.default_lb_ram_gb`}
-              type="number"
-              min="1"
-              max="64"
-              parse={(value) => (value ? parseInt(value, 10) : undefined)}
-            />
-          </Col>
-        </Row>
+        <SelectGroup
+          name={`${name}.load_balancer_mode`}
+          label={translate('Load balancer nodes')}
+          description={translate(
+            'Whether clusters get dedicated load balancer nodes. Defaults to always included.',
+          )}
+          options={getLoadBalancerModeOptions()}
+          placeholder={translate('Always included')}
+          isClearable={false}
+          simpleValue
+        />
+        {loadBalancerMode !== 'disabled' && (
+          <>
+            <Row>
+              <Col md={6}>
+                <NumberGroup
+                  label={translate('vCPUs per Load Balancer')}
+                  help={translate(
+                    'Number of vCPUs allocated to each load balancer node',
+                  )}
+                  name={`${name}.default_lb_vcpus`}
+                  type="number"
+                  min="1"
+                  max="16"
+                  parse={(value) => (value ? parseInt(value, 10) : undefined)}
+                />
+              </Col>
+              <Col md={6}>
+                <NumberGroup
+                  label={translate('RAM per Load Balancer (GB)')}
+                  help={translate(
+                    'Amount of RAM in GB allocated to each load balancer node',
+                  )}
+                  name={`${name}.default_lb_ram_gb`}
+                  type="number"
+                  min="1"
+                  max="64"
+                  parse={(value) => (value ? parseInt(value, 10) : undefined)}
+                />
+              </Col>
+            </Row>
 
-        <Row>
-          <Col md={6}>
-            <NumberGroup
-              label={translate('System Disk per Load Balancer (GB)')}
-              help={translate(
-                'Size of system disk in GB for each load balancer node',
-              )}
-              name={`${name}.default_lb_system_disk_gb`}
-              type="number"
-              min="1"
-              max="500"
-              parse={(value) => (value ? parseInt(value, 10) : undefined)}
-            />
-          </Col>
-          <Col md={6}>
-            <NumberGroup
-              label={translate('Data Disk per Load Balancer (GB)')}
-              help={translate(
-                'Size of data disk in GB for each load balancer node',
-              )}
-              name={`${name}.default_lb_logs_disk_gb`}
-              type="number"
-              min="1"
-              max="1000"
-              parse={(value) => (value ? parseInt(value, 10) : undefined)}
-            />
-          </Col>
-        </Row>
+            <Row>
+              <Col md={6}>
+                <NumberGroup
+                  label={translate('System Disk per Load Balancer (GB)')}
+                  help={translate(
+                    'Size of system disk in GB for each load balancer node',
+                  )}
+                  name={`${name}.default_lb_system_disk_gb`}
+                  type="number"
+                  min="1"
+                  max="500"
+                  parse={(value) => (value ? parseInt(value, 10) : undefined)}
+                />
+              </Col>
+              <Col md={6}>
+                <NumberGroup
+                  label={translate('Data Disk per Load Balancer (GB)')}
+                  help={translate(
+                    'Size of data disk in GB for each load balancer node',
+                  )}
+                  name={`${name}.default_lb_logs_disk_gb`}
+                  type="number"
+                  min="1"
+                  max="1000"
+                  parse={(value) => (value ? parseInt(value, 10) : undefined)}
+                />
+              </Col>
+            </Row>
+          </>
+        )}
 
         {/* Worker Node Defaults */}
         <h6 className="border-bottom pb-2 mb-3 mt-4">
