@@ -5,6 +5,8 @@ import { Field, ResourceSummaryProps } from '@/resource/summary';
 import { formatDefault } from '@/resource/utils';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { formatIpv6Mode } from './ipv6Modes';
+
 export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
   const Component = props.formTableItem ? FormTable.Item : Field;
@@ -47,6 +49,19 @@ export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
         label={translate('IP version')}
         value={formatDefault(resource.ip_version)}
       />
+
+      {resource.ip_version === 6 && (
+        <>
+          <Component
+            label={translate('IPv6 router advertisement mode')}
+            value={formatIpv6Mode(resource.ipv6_ra_mode)}
+          />
+          <Component
+            label={translate('IPv6 address mode')}
+            value={formatIpv6Mode(resource.ipv6_address_mode)}
+          />
+        </>
+      )}
 
       <Component
         label={translate('Enable DHCP')}

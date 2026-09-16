@@ -103,16 +103,30 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
     [resource.floating_ips],
   );
 
+  // A floating IP maps to a fixed IPv4 address on the port, so an IPv6 subnet
+  // can never take one -- the API refuses it, and offering it here would only
+  // produce a submit that cannot succeed. Only a colon tells the families
+  // apart without parsing the prefix.
+  const ipv4Ports = useMemo(
+    () => resource.ports.filter((port) => !port.subnet_cidr?.includes(':')),
+    [resource.ports],
+  );
+
   const subnets = useMemo(
     () => [
       { value: '', label: translate('Select connected subnet') },
-      ...resource.ports.map((port) => ({
+      ...ipv4Ports.map((port) => ({
         value: port.subnet,
         label: `${port.subnet_name} (${port.subnet_cidr})`,
       })),
     ],
-    [resource.ports],
+    [ipv4Ports],
   );
+
+  // Told apart so the dialog can say which of the two it is: an instance with
+  // no subnets at all, or one connected only to IPv6.
+  const hasOnlyIpv6Subnets =
+    resource.ports.length > 0 && ipv4Ports.length === 0;
 
   return (
     <Form<FloatingIPsFormData>
@@ -135,6 +149,7 @@ export const UpdateFloatingIpsDialog: FC<UpdateFloatingIpsDialogProps> = ({
                     fields={fields}
                     floatingIps={floatingIps}
                     subnets={subnets}
+                    hasOnlyIpv6Subnets={hasOnlyIpv6Subnets}
                   />
                 )}
               </FieldArray>

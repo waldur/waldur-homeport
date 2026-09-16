@@ -39,6 +39,18 @@ const SUBNET_B = {
   cidr: '10.0.1.0/24',
 };
 
+const SUBNET_V6 = {
+  url: 'https://example.com/api/openstack-subnets/v6/',
+  uuid: 'v6',
+  name: 'subnet-v6',
+  cidr: 'fd00:a:1::/64',
+};
+
+// What getDefaultFloatingIps() returns for the "no floating IP" choice; the
+// select labels options by `address`, so seeding a row without one renders an
+// empty control.
+const SKIP_FIP = { url: 'false', address: 'Skip floating IP assignment' };
+
 const offering = { scope_uuid: 'tenant-1', quotas: [] } as any;
 
 const renderStep = (initialValues: any = {}) => {
@@ -126,6 +138,60 @@ describe('FormNetworkSecurityStep — auto-seed first network row', () => {
     const networks = getValues()?.attributes?.networks;
     expect(networks).toHaveLength(1);
     expect(networks[0].subnet.uuid).toBe(SUBNET_B.uuid);
+  });
+
+  // A floating IP is mapped onto a fixed IPv4 address of the port, so an IPv6
+  // subnet has nothing to map it to and the API refuses the order. The form
+  // has to say so rather than let the order be placed and fail.
+  it('disables auto-assign on a row whose subnet is IPv6', async () => {
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET_V6]),
+    );
+    const user = userEvent.setup();
+    renderStep({
+      attributes: {
+        networks: [{ subnet: SUBNET_V6, floatingIp: SKIP_FIP }],
+      },
+    });
+
+    // The step renders a spinner until the subnet query resolves, so wait for
+    // the row itself rather than for the request to have been made.
+    await screen.findByText(SUBNET_V6.name);
+
+    await user.click(screen.getByLabelText(/Floating IP/));
+
+    await waitFor(() => {
+      const autoAssign = screen
+        .getAllByRole('option')
+        .find((o) => /Auto-assign floating IP/.test(o.textContent || ''));
+      expect(autoAssign).toHaveAttribute('aria-disabled', 'true');
+    });
+  });
+
+  // The families are decided per row: a tenant holding both must keep
+  // auto-assign usable on its IPv4 subnets.
+  it('leaves auto-assign available on a row whose subnet is IPv4', async () => {
+    vi.mocked(openstackSubnetsList).mockResolvedValue(
+      mockListResponse([SUBNET]),
+    );
+    const user = userEvent.setup();
+    renderStep({
+      attributes: {
+        networks: [{ subnet: SUBNET, floatingIp: SKIP_FIP }],
+      },
+    });
+
+    // Same as above: wait for the row, not for the request.
+    await screen.findByText(SUBNET.name);
+
+    await user.click(screen.getByLabelText(/Floating IP/));
+
+    await waitFor(() => {
+      const autoAssign = screen
+        .getAllByRole('option')
+        .find((o) => /Auto-assign floating IP/.test(o.textContent || ''));
+      expect(autoAssign).toHaveAttribute('aria-disabled', 'false');
+    });
   });
 
   it('does not add a duplicate row when "Add subnet" is clicked while every subnet is in use', async () => {

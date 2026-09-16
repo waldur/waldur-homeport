@@ -70,10 +70,14 @@ const StaticRouteAddButton = ({ onClick }) => (
 export const StaticRoutesTable: FC<{
   fields;
   fixedIps?: OpenStackFixedIp[];
-}> = ({ fields, fixedIps = [] }) => {
+  // A subnet's next hops must be in the subnet's own family, which may be
+  // IPv6; routers and everything else keep the IPv4 check.
+  validateNexthop?: (value, allValues?) => string | undefined;
+}> = ({ fields, fixedIps = [], validateNexthop = validateIPv4 }) => {
   const nexthopValidator = useMemo(
-    () => composeValidators(required, validateIPv4, validateFixedIPs(fixedIps)),
-    [fixedIps],
+    () =>
+      composeValidators(required, validateNexthop, validateFixedIPs(fixedIps)),
+    [fixedIps, validateNexthop],
   );
 
   return (

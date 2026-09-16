@@ -10,10 +10,10 @@ import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 
-const IPAddressRow = ({ address, onRemove }) => (
+const IPAddressRow = ({ address, validateAddress, onRemove }) => (
   <tr>
     <td>
-      <Field name={address} validate={validateIPv4}>
+      <Field name={address} validate={validateAddress}>
         {({ input, meta }) => (
           <>
             <BaseInputField {...input} aria-label={translate('IP address')} />
@@ -42,7 +42,12 @@ const IPAddressAddButton = ({ onClick }) => (
   />
 );
 
-export const IpAddressList: React.FC<any> = ({ fields }) => (
+// A subnet's nameservers must be in the subnet's own family, which may be
+// IPv6; every other list keeps the IPv4 check.
+export const IpAddressList: React.FC<any> = ({
+  fields,
+  validateAddress = validateIPv4,
+}) => (
   <>
     {fields.length > 0 ? (
       <>
@@ -64,6 +69,7 @@ export const IpAddressList: React.FC<any> = ({ fields }) => (
               <IPAddressRow
                 key={address}
                 address={address}
+                validateAddress={validateAddress}
                 onRemove={() => fields.remove(index)}
               />
             ))}
