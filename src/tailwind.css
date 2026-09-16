@@ -187,14 +187,6 @@
   }
 }
 
-/* Same clash: src/ uses `bg-gray-50` as Metronic's theme-aware panel
-   background; Tailwind's version stays light in dark mode. */
-@layer bootstrap {
-  .bg-gray-50 {
-    background-color: var(--bs-gray-50) !important;
-  }
-}
-
 /* No `.dark` class in this app — dark mode swaps compiled stylesheets
    (src/theme/utils.ts). data-theme on <html> gives Tailwind's dark:
    variant a real signal to key off instead of introducing a second toggle. */
