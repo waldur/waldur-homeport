@@ -406,7 +406,8 @@ $progress-bg: if(
 );
 $progress-box-shadow: unset;
 $progress-bar-color: $white;
-$progress-bar-bg: $primary;
+// The live brand colour, not the build-time $primary: tenants re-brand at runtime.
+$progress-bar-bg: var(--bs-primary);
 
 // Pagination
 $pagination-item-height: 2.154rem !default; // Custom variable
