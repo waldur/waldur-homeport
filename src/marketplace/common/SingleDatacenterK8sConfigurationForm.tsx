@@ -24,9 +24,12 @@ import {
   MultiDatacenterK8sClusterConfig,
   DatacenterNodeGroup,
   K8sDefaultConfiguration,
-  createDefaultClusterConfig,
   getDefaultDatacenterDiskConfig,
   calculateTotalClusterResources,
+  getInitialClusterConfig,
+  getLoadBalancerMode,
+  getLoadBalancerNodesCount,
+  hasLoadBalancer,
 } from './multi-datacenter-k8s-types';
 
 interface SingleDatacenterK8sConfigurationFormProps extends FormField {
@@ -52,14 +55,10 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
 
   // Simple cluster configuration for single datacenter
   const fieldValue = input?.value as MultiDatacenterK8sClusterConfig;
-  const defaultClusterConfig = createDefaultClusterConfig(
-    topology,
-    defaultConfigs,
-  );
 
   const [clusterConfig, setClusterConfig] =
-    useState<MultiDatacenterK8sClusterConfig>(
-      fieldValue || defaultClusterConfig,
+    useState<MultiDatacenterK8sClusterConfig>(() =>
+      getInitialClusterConfig(topology, fieldValue, defaultConfigs),
     );
 
   const [availableInfrastructures, setAvailableInfrastructures] = useState<
@@ -136,6 +135,13 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
     });
   };
 
+  const handleLoadBalancerChange = (value: boolean) => {
+    setClusterConfig({
+      ...clusterConfig,
+      load_balancer: value,
+    });
+  };
+
   // Node group management functions
   const addNodeGroup = () => {
     const datacenter = clusterConfig.datacenters[0];
@@ -202,7 +208,13 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
 
   // Controller and load balancer configurations
   const controllerNodes: number = 3;
-  const loadBalancerNodes = 1;
+  const loadBalancerNodes = getLoadBalancerNodesCount(
+    topology,
+    0,
+    hasLoadBalancer(clusterConfig, defaultConfigs),
+  );
+  const loadBalancerRequired =
+    getLoadBalancerMode(defaultConfigs) === 'required';
   const controllerVcpus = defaultConfigs?.default_controller_vcpus || 2;
   const controllerRam = defaultConfigs?.default_controller_ram_gb || 4;
   const controllerSystemDisk =
@@ -227,6 +239,8 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
         onKubernetesVersionChange={handleKubernetesVersionChange}
         installLonghorn={clusterConfig.install_longhorn || false}
         onLonghornChange={handleLonghornChange}
+        loadBalancer={clusterConfig.load_balancer}
+        onLoadBalancerChange={handleLoadBalancerChange}
       />
 
       {/* Datacenter configuration */}
@@ -308,38 +322,43 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
             space={5}
           />
           {/* Load Balancer Nodes Information */}
-          <Field
-            label={
-              <>
-                {translate('Load balancer nodes (Mandatory)')}:
-                <span className="text-quaternary fw-normal d-block">
-                  {translate(
-                    'External load balancers for ingress and service exposure',
-                  )}
-                </span>
-              </>
-            }
-            value={
-              <>
-                <span className="d-block">
-                  {loadBalancerNodes} load{' '}
-                  {loadBalancerNodes === 1 ? 'balancer' : 'balancers'}
-                </span>
-                <span className="d-block">
-                  {loadBalancerNodes * lbVcpus} vCPU,{' '}
-                  {loadBalancerNodes * lbRam}GB RAM
-                </span>
-                <span className="d-block">
-                  {loadBalancerNodes * lbSystemDisk}GB system +{' '}
-                  {loadBalancerNodes * lbLogsDisk}GB logs
-                </span>
-              </>
-            }
-            labelCol={4}
-            valueCol={7}
-            valueClass="offset-sm-1"
-            space={datacenter?.openstack_infrastructure ? 5 : 0}
-          />
+          {loadBalancerNodes > 0 && (
+            <Field
+              label={
+                <>
+                  {loadBalancerRequired
+                    ? translate('Load balancer nodes (Mandatory)')
+                    : translate('Load balancer nodes')}
+                  :
+                  <span className="text-quaternary fw-normal d-block">
+                    {translate(
+                      'External load balancers for ingress and service exposure',
+                    )}
+                  </span>
+                </>
+              }
+              value={
+                <>
+                  <span className="d-block">
+                    {loadBalancerNodes} load{' '}
+                    {loadBalancerNodes === 1 ? 'balancer' : 'balancers'}
+                  </span>
+                  <span className="d-block">
+                    {loadBalancerNodes * lbVcpus} vCPU,{' '}
+                    {loadBalancerNodes * lbRam}GB RAM
+                  </span>
+                  <span className="d-block">
+                    {loadBalancerNodes * lbSystemDisk}GB system +{' '}
+                    {loadBalancerNodes * lbLogsDisk}GB logs
+                  </span>
+                </>
+              }
+              labelCol={4}
+              valueCol={7}
+              valueClass="offset-sm-1"
+              space={datacenter?.openstack_infrastructure ? 5 : 0}
+            />
+          )}
 
           {/* Node Groups Configuration */}
           {datacenter?.openstack_infrastructure && (

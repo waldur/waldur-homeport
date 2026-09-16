@@ -11,6 +11,7 @@ import { K8sFormSection } from './K8sFormSection';
 import {
   K8sDefaultConfiguration,
   getAvailableKubernetesVersions,
+  getLoadBalancerMode,
   validateK8sConfiguration,
   isK8sConfigurationComplete,
 } from './multi-datacenter-k8s-types';
@@ -22,6 +23,8 @@ interface K8sKubernetesConfigSectionProps {
   installLonghorn: boolean;
   onLonghornChange: (value: boolean) => void;
   longhornDescription?: string;
+  loadBalancer?: boolean;
+  onLoadBalancerChange?: (value: boolean) => void;
 }
 
 export const K8sKubernetesConfigSection: React.FC<
@@ -33,6 +36,8 @@ export const K8sKubernetesConfigSection: React.FC<
   installLonghorn,
   onLonghornChange,
   longhornDescription,
+  loadBalancer,
+  onLoadBalancerChange,
 }) => {
   const configurationWarnings = validateK8sConfiguration(defaultConfigs);
   const isConfigComplete = isK8sConfigurationComplete(defaultConfigs);
@@ -89,6 +94,22 @@ export const K8sKubernetesConfigSection: React.FC<
             onChange={onLonghornChange}
           />
         </FormGroup>
+
+        {getLoadBalancerMode(defaultConfigs) === 'optional' &&
+          onLoadBalancerChange && (
+            <FormGroup space={5}>
+              <AwesomeCheckbox
+                type="checkbox"
+                label={translate('Include load balancer nodes')}
+                description={translate(
+                  'Add dedicated load balancer nodes for ingress and service exposure.',
+                )}
+                id="include-load-balancer"
+                value={loadBalancer}
+                onChange={onLoadBalancerChange}
+              />
+            </FormGroup>
+          )}
       </K8sFormSection>
     </>
   );

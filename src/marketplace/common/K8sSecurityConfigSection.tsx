@@ -50,7 +50,7 @@ export const K8sSecurityConfigSection: React.FC<
         field={{
           label: translate('Public access rules'),
           help_text: translate(
-            'Network rules for public-facing load balancers and ingress controllers',
+            'Network rules for public-facing ingress and exposed services',
           ),
           required: false,
           rule_type: 'public_access',

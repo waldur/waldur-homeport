@@ -23,12 +23,14 @@ import {
   MultiDatacenterK8sClusterConfig,
   DatacenterConfiguration,
   DatacenterNodeGroup,
-  createDefaultClusterConfig,
   calculateDatacenterResources,
   calculateTotalClusterResources,
   getControllerNodesCount,
+  getInitialClusterConfig,
+  getLoadBalancerMode,
   getLoadBalancerNodesCount,
   getDefaultDatacenterDiskConfig,
+  hasLoadBalancer,
   K8sDefaultConfiguration,
 } from './multi-datacenter-k8s-types';
 
@@ -49,6 +51,7 @@ interface DatacenterCardProps {
   availableInfrastructures: any[];
   loadingInfrastructures: boolean;
   defaultConfigs?: K8sDefaultConfiguration;
+  loadBalancer: boolean;
 }
 
 const DatacenterCard: React.FC<DatacenterCardProps> = ({
@@ -59,6 +62,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
   availableInfrastructures,
   loadingInfrastructures,
   defaultConfigs,
+  loadBalancer,
 }) => {
   const handleInfrastructureChange = (infraUuid: string) => {
     const selectedInfra = availableInfrastructures.find(
@@ -124,9 +128,16 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
     topology,
     index,
     defaultConfigs,
+    loadBalancer,
   );
   const controllerNodes = getControllerNodesCount(topology, index);
-  const loadBalancerNodes = getLoadBalancerNodesCount(topology, index);
+  const loadBalancerNodes = getLoadBalancerNodesCount(
+    topology,
+    index,
+    loadBalancer,
+  );
+  const loadBalancerRequired =
+    getLoadBalancerMode(defaultConfigs) === 'required';
 
   return (
     <AccordionCard
@@ -218,7 +229,10 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
         <Field
           label={
             <>
-              {translate('Load balancer nodes (Mandatory)')}:
+              {loadBalancerRequired
+                ? translate('Load balancer nodes (Mandatory)')
+                : translate('Load balancer nodes')}
+              :
               <span className="text-quaternary fw-normal d-block">
                 {translate(
                   'External load balancers for ingress and service exposure',
@@ -322,14 +336,10 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
 
   // The value is stored directly as the cluster config, not wrapped in a MultiDatacenterK8sConfigField
   const fieldValue = input?.value as MultiDatacenterK8sClusterConfig;
-  const defaultClusterConfig = createDefaultClusterConfig(
-    topology,
-    defaultConfigs,
-  );
 
   const [clusterConfig, setClusterConfig] =
-    useState<MultiDatacenterK8sClusterConfig>(
-      fieldValue || defaultClusterConfig,
+    useState<MultiDatacenterK8sClusterConfig>(() =>
+      getInitialClusterConfig(topology, fieldValue, defaultConfigs),
     );
 
   const [availableInfrastructures, setAvailableInfrastructures] = useState<
@@ -384,6 +394,13 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
     });
   };
 
+  const handleLoadBalancerChange = (value: boolean) => {
+    setClusterConfig({
+      ...clusterConfig,
+      load_balancer: value,
+    });
+  };
+
   const updateDatacenter = (
     index: number,
     updatedDatacenter: DatacenterConfiguration,
@@ -402,6 +419,7 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
     clusterConfig,
     defaultConfigs,
   );
+  const loadBalancer = hasLoadBalancer(clusterConfig, defaultConfigs);
 
   return (
     <K8sOptionCard
@@ -419,6 +437,8 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
         longhornDescription={translate(
           'Automatically install Longhorn for cloud-native distributed block storage. Requires at least 3 storage nodes across all datacenters.',
         )}
+        loadBalancer={clusterConfig.load_balancer}
+        onLoadBalancerChange={handleLoadBalancerChange}
       />
 
       {/* Datacenter configuration */}
@@ -438,6 +458,7 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
             availableInfrastructures={availableInfrastructures}
             loadingInfrastructures={loadingInfrastructures}
             defaultConfigs={defaultConfigs}
+            loadBalancer={loadBalancer}
           />
         ))}
 
@@ -450,9 +471,11 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
               : translate('{n} per DC', { n: 1 })
           }
           loadBalancerTooltip={
-            topology === '1-datacenter'
-              ? translate('{n} in DC1', { n: 1 })
-              : translate('{n} per DC', { n: 1 })
+            !loadBalancer
+              ? undefined
+              : topology === '1-datacenter'
+                ? translate('{n} in DC1', { n: 1 })
+                : translate('{n} per DC', { n: 1 })
           }
         />
       </K8sFormSection>

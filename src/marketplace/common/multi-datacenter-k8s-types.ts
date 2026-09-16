@@ -8,6 +8,8 @@
  * 4. Per-Datacenter Worker/Storage Groups with flavor selection
  */
 
+import { LoadBalancerModeEnum } from 'waldur-js-client';
+
 import { translate } from '@/i18n';
 
 export interface LocalOpenStackFlavor {
@@ -50,6 +52,10 @@ export interface MultiDatacenterK8sClusterConfig {
   public_access_rules?: any[]; // Security rules for public access
   administrative_access_rules?: any[]; // Security rules for admin access
   install_longhorn?: boolean; // Optional Longhorn distributed storage installation
+  // Whether the cluster gets load balancer nodes. Absent in orders placed
+  // before the provider could make the load balancer optional, which always
+  // had one.
+  load_balancer?: boolean;
 }
 
 export interface K8sDefaultConfiguration {
@@ -61,6 +67,7 @@ export interface K8sDefaultConfiguration {
   default_lb_ram_gb?: number;
   default_lb_system_disk_gb?: number;
   default_lb_logs_disk_gb?: number;
+  load_balancer_mode?: LoadBalancerModeEnum;
   minimal_worker_vcpus?: number;
   minimal_worker_ram_gb?: number;
   default_worker_data_disk_gb?: number;
@@ -169,6 +176,28 @@ export const isK8sConfigurationComplete = (
 
 // Utility functions
 
+export const getLoadBalancerMode = (
+  defaultConfigs?: K8sDefaultConfiguration,
+): LoadBalancerModeEnum => defaultConfigs?.load_balancer_mode || 'required';
+
+/**
+ * The offering's mode wins over the stored flag, so a flag left over from a
+ * different mode cannot add or drop the load balancer.
+ */
+export const hasLoadBalancer = (
+  config: Pick<MultiDatacenterK8sClusterConfig, 'load_balancer'>,
+  defaultConfigs?: K8sDefaultConfiguration,
+): boolean => {
+  switch (getLoadBalancerMode(defaultConfigs)) {
+    case 'disabled':
+      return false;
+    case 'optional':
+      return config.load_balancer !== false;
+    default:
+      return true;
+  }
+};
+
 export const getDefaultDatacenterDiskConfig = (
   defaultConfigs?: K8sDefaultConfiguration,
 ): DatacenterDiskConfiguration => ({
@@ -213,6 +242,24 @@ export const createDefaultClusterConfig = (
     kubernetes_version: defaultVersion?.value ?? '',
     topology,
     datacenters,
+    load_balancer: getLoadBalancerMode(defaultConfigs) !== 'disabled',
+  };
+};
+
+/**
+ * Initial form value: the stored config (or a fresh one) with the load
+ * balancer flag settled against the offering's mode, so the submitted order
+ * always states whether a load balancer is wanted.
+ */
+export const getInitialClusterConfig = (
+  topology: '1-datacenter' | '3-datacenter',
+  value: MultiDatacenterK8sClusterConfig | undefined,
+  defaultConfigs?: K8sDefaultConfiguration,
+): MultiDatacenterK8sClusterConfig => {
+  const config = value || createDefaultClusterConfig(topology, defaultConfigs);
+  return {
+    ...config,
+    load_balancer: hasLoadBalancer(config, defaultConfigs),
   };
 };
 
@@ -232,7 +279,11 @@ export const getControllerNodesCount = (
 export const getLoadBalancerNodesCount = (
   topology: '1-datacenter' | '3-datacenter',
   datacenterIndex: number,
+  loadBalancer = true,
 ): number => {
+  if (!loadBalancer) {
+    return 0;
+  }
   if (topology === '1-datacenter') {
     // For single datacenter: 1 load balancer in the single datacenter
     return datacenterIndex === 0 ? 1 : 0;
@@ -247,6 +298,7 @@ export const calculateDatacenterResources = (
   topology: '1-datacenter' | '3-datacenter',
   datacenterIndex: number,
   defaultConfigs: K8sDefaultConfiguration = DEFAULT_K8S_CONFIGURATION,
+  loadBalancer = true,
 ) => {
   let workerNodes = 0;
   let storageNodes = 0;
@@ -286,6 +338,7 @@ export const calculateDatacenterResources = (
   const loadBalancerNodes = getLoadBalancerNodesCount(
     topology,
     datacenterIndex,
+    loadBalancer,
   );
   const totalNodes =
     workerNodes + storageNodes + controllerNodes + loadBalancerNodes;
@@ -327,6 +380,7 @@ export const calculateTotalClusterResources = (
   config: MultiDatacenterK8sClusterConfig,
   defaultConfigs?: K8sDefaultConfiguration,
 ) => {
+  const loadBalancer = hasLoadBalancer(config, defaultConfigs);
   return config.datacenters.reduce(
     (totals, datacenter, index) => {
       const dcResources = calculateDatacenterResources(
@@ -334,6 +388,7 @@ export const calculateTotalClusterResources = (
         config.topology,
         index,
         defaultConfigs,
+        loadBalancer,
       );
       return {
         totalNodes: totals.totalNodes + dcResources.totalNodes,
