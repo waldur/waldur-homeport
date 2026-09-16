@@ -962,6 +962,7 @@
       "action_type": "create"
     }
   },
+  "Accept SCIM provisioning from SURF Research Access Management (SRAM) at /scim/v2/sram/. Also requires SCIM_INBOUND_ENABLED and a staff service-account token registered as the service's SCIM bearer token in SRAM.": {},
   "Accept all": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -1762,6 +1763,11 @@
     "context": {
       "primary_ui_type": "action_button",
       "feature_area": "qos"
+    }
+  },
+  "Add SRAM project rule": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "Add Storage Data Type": {
@@ -3789,6 +3795,11 @@
     }
   },
   "An error occurred.": {},
+  "An inactive rule grants nothing and revokes the roles it granted.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "An operation is already in progress.": {
     "context": {
       "feature_area": "api-keys"
@@ -3949,7 +3960,7 @@
   },
   "Any": {
     "context": {
-      "feature_area": "rule-editor"
+      "feature_area": "sram"
     }
   },
   "Any (fallback to HOMEPORT_URL)": {
@@ -4116,6 +4127,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "users"
+    }
+  },
+  "Applies only when the source is \"Group\" or \"Collaboration or group\".": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "Applies to": {
@@ -4869,6 +4885,16 @@
         }
       },
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Are you sure you want to delete the rule {name}? The project roles it granted are revoked.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "sram"
     }
   },
   "Are you sure you want to delete the shortcut?": {
@@ -6951,6 +6977,7 @@
       "feature_area": "join-organization"
     }
   },
+  "Available placeholders:": {},
   "Available quota": {},
   "Available quota usage: {usage}": {
     "context": {
@@ -9910,6 +9937,26 @@
   },
   "Code is too short.": {},
   "Code should consist of latin symbols, numbers, dashes and underscores.": {},
+  "Collaboration": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Collaboration or group": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Collaborations and groups provisioned by SURF Research Access Management, and the rules that grant their members project roles.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
+  "Collaborations, groups within them, or both.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Collaborative (Active)": {
     "context": {
       "primary_ui_type": "label"
@@ -14368,6 +14415,12 @@
     }
   },
   "Delete (nothing attached)": {},
+  "Delete SRAM project rule": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "sram"
+    }
+  },
   "Delete ToS": {
     "context": {
       "primary_ui_type": "title",
@@ -15700,7 +15753,8 @@
   },
   "Display name": {
     "context": {
-      "feature_area": "offerings"
+      "primary_ui_type": "title",
+      "feature_area": "sram"
     }
   },
   "Display name for the AI Assistant persona (e.g. 'Mari', 'Waldur Assistant').": {},
@@ -16141,6 +16195,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Duplicate SRAM project rule": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Duplicate auto-provisioning rule": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -16335,6 +16394,11 @@
       "feature_area": "qos"
     }
   },
+  "Edit SRAM project rule": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Edit ToS {version}": {
     "context": {
       "variables": {
@@ -16517,6 +16581,11 @@
   "Edit helpdesk": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "Edit in SCIM settings": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "Edit issue status": {
@@ -18547,6 +18616,11 @@
   "Evidence description": {
     "context": {
       "feature_area": "coi-review"
+    }
+  },
+  "Exact": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Exact match": {
@@ -21541,9 +21615,15 @@
       "feature_area": "affiliations"
     }
   },
+  "Granted by an SRAM project rule. It is revoked automatically when the membership in SRAM ends.": {},
   "Granted on the organization itself. Leave empty to grant no organization-level role.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Grants a project role to the members of matching SRAM collaborations and groups, on the projects of their organization that the selector picks.": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "Grants nothing yet — choose a role on the previous step.": {
@@ -21643,6 +21723,14 @@
       "feature_area": "customer"
     }
   },
+  "Group placeholders are empty for collaborations. The match never leaves the organization of the SRAM group.": {},
+  "Group short names": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "sram"
+    }
+  },
+  "Group short names apply only to groups. Set the source to \"Group\" or \"Collaboration or group\", or clear the patterns.": {},
   "Grouped by": {
     "context": {
       "feature_area": "usage-views"
@@ -23291,6 +23379,11 @@
       "feature_area": "announcements"
     }
   },
+  "Inbound SCIM is disabled": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Incident": {
     "context": {
       "primary_ui_type": "label"
@@ -24093,9 +24186,34 @@
     }
   },
   "Invalid offering": {},
+  "Invalid placeholder: {detail}. Use {placeholders}, and write a literal brace as {open} or {close}.": {
+    "context": {
+      "variables": {
+        "detail": {
+          "type": "unknown"
+        },
+        "placeholders": {
+          "type": "unknown"
+        },
+        "open": {
+          "type": "unknown"
+        },
+        "close": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "sram",
+      "action_type": "cancel"
+    }
+  },
   "Invalid range. Ensure the end number is greater than or equal to the start number.": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Invalid regular expression.": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "Invalid tax percent": {},
@@ -24686,6 +24804,11 @@
       "feature_area": "pubsub"
     }
   },
+  "It grants nothing until it is activated.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "It is used as default page title if it's not specified explicitly.": {},
   "It is used as prefix for page title.": {},
   "It is used for rendering callback URL in HomePort": {},
@@ -25143,7 +25266,8 @@
   "Label that is visible to users in service catalog.": {},
   "Labels": {
     "context": {
-      "feature_area": "node"
+      "primary_ui_type": "title",
+      "feature_area": "sram"
     }
   },
   "Language": {
@@ -27507,6 +27631,11 @@
     }
   },
   "Master toggle for the nightly LLM-as-judge review of completed anonymous sessions. On by default — cost is bounded by ANONYMOUS_CHAT_REVIEW_DAILY_TOKEN_BUDGET.": {},
+  "Match": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Match against call description": {
     "context": {
       "feature_area": "reviewer-pool"
@@ -28225,7 +28354,7 @@
   "Members": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "sram"
     }
   },
   "Members by organization": {
@@ -28729,6 +28858,7 @@
     }
   },
   "Minutes the announcement banner stays visible after maintenance completes": {},
+  "Mirrors a membership in SURF Research Access Management (SRAM). Changes made here are overwritten by the next SRAM push.": {},
   "Miss": {
     "context": {
       "primary_ui_type": "label"
@@ -29485,6 +29615,7 @@
       "feature_area": "openportal-remote"
     }
   },
+  "Name of the organization role whose permissions SRAM placeholder roles copy. Empty gives placeholders no permissions. Placeholders are refreshed on the next push or by 'waldur sram_resync'.": {},
   "Name of the remote offering, e.g. \"isambard-ai\"": {
     "context": {
       "feature_area": "project-templates"
@@ -30159,6 +30290,11 @@
   "No SLURM offerings found for this service provider. Create a SLURM offering first.": {
     "context": {
       "feature_area": "site-agent"
+    }
+  },
+  "No SRAM collaborations have been provisioned yet. They appear here after SRAM pushes them over SCIM.": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "No Service Desk projects found. Please ensure you have access to at least one Service Desk project.": {
@@ -31286,6 +31422,11 @@
       "feature_area": "service-providers"
     }
   },
+  "No project rules yet. Add one to grant project roles to the members of SRAM collaborations and groups.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "No project template assigned": {},
   "No projects": {
     "context": {
@@ -31836,6 +31977,11 @@
       "action_type": "read"
     }
   },
+  "Nobody holds the placeholder role of this group yet.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Nobody holds this role yet.": {
     "context": {
       "feature_area": "workflow-steps"
@@ -32126,6 +32272,11 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "Not set: placeholder roles carry no permissions.": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "Not shared: this offering holds its own accounts": {
@@ -33415,6 +33566,11 @@
   "Only draft offerings can be deleted": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Only groups whose short name matches one of these are selected. A trailing * matches by prefix. Leave empty to match any group.": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "Only lengths that fit inside the fixed project duration are offered ({cap}).": {
@@ -36456,6 +36612,17 @@
       "primary_ui_type": "label"
     }
   },
+  "Placeholder role": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "sram"
+    }
+  },
+  "Placeholder role for an SRAM collaboration or group. Its description is the SRAM display name.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Placeholders: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Leave empty for default name-based slug.": {
     "context": {
       "variables": {
@@ -37540,6 +37707,11 @@
       "feature_area": "celery"
     }
   },
+  "Prefix": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Prefix for invoice item names (e.g., \"Arrow consumption\"). Used in both provisional and compensation items.": {},
   "Prefix of ticket keys created by the built-in service desk, e.g. WLD in WLD-A1B2C3D4. Three to five capital latin letters. Keys of existing tickets are not rewritten.": {},
   "Prefix to be appended to all group names created in FreeIPA by Waldur. It marks which groups are managed by Waldur, so it may not be empty.": {},
@@ -37743,6 +37915,16 @@
         }
       },
       "feature_area": "consumption"
+    }
+  },
+  "Preview of {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "sram"
     }
   },
   "Preview offering": {
@@ -38626,6 +38808,11 @@
       "feature_area": "details"
     }
   },
+  "Project field": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Project field name": {},
   "Project field name.": {},
   "Project grants": {
@@ -38884,6 +39071,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "users"
+    }
+  },
+  "Project rules": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "sram"
     }
   },
   "Project search": {
@@ -41122,6 +41315,11 @@
       "feature_area": "project"
     }
   },
+  "Regular expression": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Regular expression that a project name must fully match when creating or renaming a project. The whole name has to match the pattern. Leave empty to disable the check. Examples: '^.{1,32}$' limits the name to at most 32 characters; '^[A-Za-z0-9 _-]{1,32}$' also restricts it to letters, digits, spaces, underscores and hyphens; '^[A-Za-z].{0,31}$' additionally requires it to start with a letter.": {
     "context": {
       "variables": {
@@ -41882,6 +42080,11 @@
     }
   },
   "Render service provider account management UI: provider accounts, username conflicts, the shared GLAuth directory and provider account settings.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
+  "Render the SRAM integration administration page and SRAM markers in team lists. Backend access is gated separately on the SRAM_INTEGRATION_ENABLED Constance setting.": {
     "context": {
       "feature_area": "features"
     }
@@ -45196,6 +45399,12 @@
       "feature_area": "providers"
     }
   },
+  "SCIM and SRAM settings": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
+  "SCIM attribute holding the value matched against SCIM_USER_MATCH_WALDUR_ATTRIBUTE, e.g. userName, emails, or an extension path such as urn:mace:surf.nl:sram:scim:extension:User.eduPersonUniqueId.": {},
   "SCIM user synchronization has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -45309,6 +45518,52 @@
   "SNAT enabled": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "SRAM": {},
+  "SRAM cannot push collaborations or members until SCIM_INBOUND_ENABLED is on.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
+  "SRAM group": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "sram"
+    }
+  },
+  "SRAM groups": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "sram"
+    }
+  },
+  "SRAM integration": {
+    "context": {
+      "feature_area": "administration"
+    }
+  },
+  "SRAM project rule has been created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "sram"
+    }
+  },
+  "SRAM project rule has been deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "sram"
+    }
+  },
+  "SRAM project rule has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "sram"
+    }
+  },
+  "SRAM project rules": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "SSH Key": {
@@ -48934,7 +49189,7 @@
   "Slug": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "sram"
     }
   },
   "Slug has been successfully set.": {
@@ -51540,6 +51795,16 @@
       "feature_area": "settings"
     }
   },
+  "The SRAM groups this rule matches now, the projects it selects in each organization, and the members who get the {role} role there. Expand a group for details.": {
+    "context": {
+      "variables": {
+        "role": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "sram"
+    }
+  },
   "The URL may be incorrect, or the feature may be disabled.": {
     "context": {
       "feature_area": "error"
@@ -51698,6 +51963,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "compliance"
+    }
+  },
+  "The collaboration must carry one of these labels; a group is judged by the labels of its collaboration. Leave empty to match any.": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "The compliance checklist cannot be changed once proposals exist for this call.": {
@@ -52251,6 +52521,12 @@
       "feature_area": "passkeys"
     }
   },
+  "The pattern must not be empty.": {},
+  "The pattern selects no project in this organization.": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "The plan has been created, but its prices could not be saved. Set them with the Edit prices action.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -52384,6 +52660,11 @@
   "The room is still being processed. Retry becomes available once the operation appears stalled.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "The rule matches no SRAM group. Check the source, labels and group short names.": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "The science domain has been created.": {
@@ -53524,6 +53805,11 @@
   "This role has no permissions.": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "This rule is inactive": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.": {
@@ -54962,6 +55248,11 @@
       "feature_area": "quick-shortcuts"
     }
   },
+  "Type a value and press Enter": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Type handling": {
     "context": {
       "feature_area": "coi-settings"
@@ -55150,6 +55441,12 @@
         }
       },
       "feature_area": "core"
+    }
+  },
+  "URN": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "sram"
     }
   },
   "URN namespace for SCIM entitlements.": {},
@@ -55693,6 +55990,12 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "Unable to create SRAM project rule.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "sram"
+    }
+  },
   "Unable to create VM snapshot.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -56194,6 +56497,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "qos"
+    }
+  },
+  "Unable to delete SRAM project rule.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "sram"
     }
   },
   "Unable to delete Terms of Service.": {
@@ -58209,6 +58518,11 @@
       "feature_area": "roles"
     }
   },
+  "Unable to save the rule": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Unable to schedule SCIM user synchronization.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -58709,6 +59023,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "qos"
+    }
+  },
+  "Unable to update SRAM project rule.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "sram"
     }
   },
   "Unable to update Terms of Service.": {
@@ -61831,6 +62151,11 @@
       "feature_area": "roles"
     }
   },
+  "Users who get the role": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Users whose email matches any of these regex patterns will be allowed.": {
     "context": {
       "feature_area": "restrictions"
@@ -62597,7 +62922,8 @@
   "View summary": {},
   "View team": {
     "context": {
-      "feature_area": "UserResourcesWidget"
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "Viewing image": {
@@ -62981,6 +63307,7 @@
     }
   },
   "Waldur site agent": {},
+  "Waldur user attribute that links an inbound SCIM user to an existing account. Must be username or an enabled identifying attribute. With username, new accounts are named after the matched value.": {},
   "Waldur username": {
     "context": {
       "primary_ui_type": "title",
@@ -63226,7 +63553,8 @@
   },
   "What it grants": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "sram"
     }
   },
   "What this proposal produced once it was accepted.": {
@@ -63481,12 +63809,22 @@
       "feature_area": "integration"
     }
   },
+  "Which SRAM groups": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Which price to use for invoice items: sell or buy": {
     "context": {
       "feature_area": "settings"
     }
   },
   "Which price to use for invoicing: sell (default) or buy": {},
+  "Which projects": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "Which services are you interested in using? (Please select from the available service types.)": {},
   "Who can access": {
     "context": {
@@ -65283,6 +65621,11 @@
       "feature_area": "profiles"
     }
   },
+  "e.g. Research workspaces": {
+    "context": {
+      "feature_area": "sram"
+    }
+  },
   "e.g. SECRET_TOKEN": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -65296,6 +65639,11 @@
   "e.g. backup": {
     "context": {
       "feature_area": "service-accounts"
+    }
+  },
+  "e.g. compute-*": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "e.g. https://": {
@@ -65346,6 +65694,11 @@
   "e.g. someone@example.com": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "e.g. tag_ufra": {
+    "context": {
+      "feature_area": "sram"
     }
   },
   "e.g. urn:schac:homeOrganizationType:int:university": {
@@ -66101,7 +66454,7 @@
   },
   "projects": {
     "context": {
-      "feature_area": "views"
+      "feature_area": "sram"
     }
   },
   "provider accounts": {
@@ -66342,6 +66695,16 @@
       "feature_area": "dashboard"
     }
   },
+  "single {brace}": {
+    "context": {
+      "variables": {
+        "brace": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "sram"
+    }
+  },
   "snapshots": {
     "context": {
       "feature_area": "openstack-snapshot"
@@ -66536,6 +66899,16 @@
   "triggered on": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "unclosed {brace}": {
+    "context": {
+      "variables": {
+        "brace": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "sram"
     }
   },
   "under 2 MB.": {
@@ -68162,6 +68535,19 @@
       "feature_area": "email"
     }
   },
+  "{field}, {match}": {
+    "context": {
+      "variables": {
+        "field": {
+          "type": "unknown"
+        },
+        "match": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "sram"
+    }
+  },
   "{filled}/{total} fields filled": {
     "context": {
       "variables": {
@@ -68496,6 +68882,16 @@
         }
       },
       "feature_area": "affiliates"
+    }
+  },
+  "{name} (copy)": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "sram"
     }
   },
   "{name} (the referred organization)": {

@@ -14,6 +14,7 @@ import { translate } from '@/i18n';
 import { getActivePaymentProfile } from '@/invoices/details/utils';
 import { hasSupport } from '@/issues/hooks';
 import { PermissionEnum } from '@/permissions/enums';
+import { canViewCustomerTeam } from '@/permissions/teamVisibility';
 import {
   getCustomer,
   isOwnerOrStaff,
@@ -110,7 +111,12 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Team'),
       priority: 130,
-      permissions: [userHasCustomerPermission(PermissionEnum.LIST_INVITATIONS)],
+      // Children inherit these; a child declaring its own permissions has to
+      // repeat canViewCustomerTeam.
+      permissions: [
+        userHasCustomerPermission(PermissionEnum.LIST_INVITATIONS),
+        canViewCustomerTeam,
+      ],
     },
   },
 
@@ -220,7 +226,10 @@ export const states: StateDeclaration[] = [
     data: {
       skipBreadcrumb: true,
       breadcrumb: () => translate('Group invitations'),
-      permissions: [() => !ENV.plugins.WALDUR_CORE.INVITATION_USE_WEBHOOKS],
+      permissions: [
+        canViewCustomerTeam,
+        () => !ENV.plugins.WALDUR_CORE.INVITATION_USE_WEBHOOKS,
+      ],
     },
   },
 

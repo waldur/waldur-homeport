@@ -16,6 +16,7 @@ import {
   formatRoleLabel,
   getAmbiguousRoleDescriptions,
 } from '@/permissions/utils';
+import { SramRoleBadge } from '@/sram/SramBadge';
 
 const renderRoleType = (roleType: RoleType) =>
   ({
@@ -46,6 +47,7 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => {
           {showName && (
             <span className="text-muted ms-2 small">{props.data.name}</span>
           )}
+          <SramRoleBadge roleName={props.data.name} className="ms-2" />
         </span>
         <span
           style={{

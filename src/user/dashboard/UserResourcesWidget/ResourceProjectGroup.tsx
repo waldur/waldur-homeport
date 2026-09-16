@@ -10,6 +10,8 @@ import { Link } from '@/core/Link';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
 import { translate } from '@/i18n';
+import { canViewTeam } from '@/permissions/teamVisibility';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceQuickInfo } from './ResourceQuickInfo';
 import { ProjectInfo } from './utils';
@@ -26,6 +28,11 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
   defaultOpen = false,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
+  const user = useUser();
+  const showTeam = canViewTeam(user, {
+    customerId: project.customerUuid,
+    projectId: project.uuid,
+  });
 
   // Lazy load project details when accordion is opened
   const { data: projectDetails, isLoading: isLoadingDetails } = useQuery({
@@ -67,7 +74,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
         totalCount,
       };
     },
-    enabled: isOpen,
+    enabled: isOpen && showTeam,
     staleTime: STALE_TIME,
   });
 

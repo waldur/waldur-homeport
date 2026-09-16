@@ -19678,7 +19678,7 @@ __metadata:
     waldur-auth-core: "workspace:*"
     waldur-design-tokens: "workspace:*"
     waldur-i18n-runtime: "workspace:*"
-    waldur-js-client: "npm:8.1.3-rc.14.dev.20260916181037.345"
+    waldur-js-client: "npm:8.1.3-rc.14.dev.20260916203656.347"
     waldur-runtime-config: "workspace:*"
     waldur-telemetry: "workspace:*"
     waldur-ui: "workspace:*"
@@ -19696,10 +19696,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"waldur-js-client@npm:8.1.3-rc.14.dev.20260916181037.345":
-  version: 8.1.3-rc.14.dev.20260916181037.345
-  resolution: "waldur-js-client@npm:8.1.3-rc.14.dev.20260916181037.345"
-  checksum: 10c0/de7b8465826813663e647a3e85c25a4ecd41d1845d6f83640ee855fb521ff2ef5645a2e8c5dd650cc51160632b1f7d8f6ae49fec42b86ce163eb729e0af29492
+"waldur-js-client@npm:8.1.3-rc.14.dev.20260916203656.347":
+  version: 8.1.3-rc.14.dev.20260916203656.347
+  resolution: "waldur-js-client@npm:8.1.3-rc.14.dev.20260916203656.347"
+  checksum: 10c0/0f26b5610809efc4071edfacd2b69f7b89e8d633b8fc9d3335ed4ba69a940e6bedec75d2f827400c1c0989182e7937671fe902df72e9fd9f0ad85069376bd16f
   languageName: node
   linkType: hard
 

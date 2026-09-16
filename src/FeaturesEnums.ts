@@ -89,6 +89,10 @@ export enum ResellerFeatures {
   arrow = 'reseller.arrow',
 }
 
+export enum SramFeatures {
+  integration = 'sram.integration',
+}
+
 export enum SupportFeatures {
   conceal_change_request = 'support.conceal_change_request',
   enable_llm_assistant = 'support.enable_llm_assistant',
@@ -121,6 +125,7 @@ export type FeaturesEnum =
   | ProjectFeatures
   | RancherFeatures
   | ResellerFeatures
+  | SramFeatures
   | SupportFeatures
   | UserFeatures
 ;

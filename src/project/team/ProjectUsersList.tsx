@@ -28,6 +28,8 @@ const mandatoryFields = [
   'user_full_name',
   'role_name',
   'user_username',
+  // Marks grants made by the SRAM integration
+  'source',
 ];
 
 const TeamSecondaryDropdownActions = ({ project, refetch }) => {

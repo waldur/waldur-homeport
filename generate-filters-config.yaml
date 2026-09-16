@@ -104,6 +104,19 @@ overrides:
         true: Finalized
         false: Pending
 
+  sram_groups:
+    filters:
+      - customer_uuid
+      - kind
+    customer_uuid:
+      label: Organization
+      name: customer_uuid
+    kind:
+      label: Kind
+      enumOverrides:
+        co: Collaboration
+        group: Group
+
   openstack_images:
     filters:
       - show_duplicate_names

@@ -7,6 +7,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { GenericPermission } from '@/permissions/types';
+import { SramTeamMarker } from '@/sram/SramBadge';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table, { TableColumns } from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
@@ -142,7 +143,13 @@ export const TeamTableComponent = <
                   </span>
                 ))
               ) : (
-                <RoleField row={row} />
+                <>
+                  <RoleField row={row} />
+                  <SramTeamMarker
+                    source={(row as any).source}
+                    roleName={(row as any).role_name}
+                  />
+                </>
               )}
               {suffix && <span className="text-muted small">{suffix}</span>}
             </span>
