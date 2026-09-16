@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import { SramGroup, sramGroupsList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -26,7 +27,7 @@ const LabelsCell: FC<{ labels: unknown }> = ({ labels }) => {
   return (
     <span className="d-inline-flex flex-wrap gap-1">
       {items.map((label) => (
-        <Badge key={label} variant="default" size="sm" outline>
+        <Badge key={label} variant="neutral" size="sm" tone="outline">
           {label}
         </Badge>
       ))}

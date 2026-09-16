@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import {
@@ -17,8 +18,8 @@ const SramBadgeView: FC<{ tooltip: string; className?: string }> = ({
   <Badge
     variant="teal"
     size="sm"
-    pill
-    outline
+    shape="pill"
+    tone="outline"
     tooltip={tooltip}
     className={className}
     data-testid="sram-badge"
