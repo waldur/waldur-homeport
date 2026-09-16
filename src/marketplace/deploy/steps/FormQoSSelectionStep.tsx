@@ -3,12 +3,11 @@ import { useEffect, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Offering } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
-
 import { AccordionCard } from '@/core/AccordionCard';
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+import { StepContent } from '@/wizard/VStepperFormStep';
 
 import { FormStepProps } from '../types';
 
@@ -94,37 +93,37 @@ export const FormQoSSelectionStep = (props: FormStepProps) => {
   }
 
   return (
-    <Tooltip label={props.disabledTooltip}>
-      <span>
-        <AccordionCard
-          title={props.title}
-          id={props.id}
-          className={classNames('step-card', props.disabled && 'step-disabled')}
-          defaultOpen
-        >
-          {props.disabled && <div className="step-blocker" />}
-          {partitions.length > 0 && (
-            <SelectGroup
-              name="attributes.partition"
-              label={translate('Partition')}
-              placeholder={translate('Select partition...')}
-              options={partitionOptions}
-              isClearable
-              simpleValue
-            />
-          )}
+    <AccordionCard
+      title={props.title}
+      id={props.id}
+      className={classNames('step-card', props.disabled && 'step-disabled')}
+      defaultOpen
+    >
+      <StepContent
+        disabled={props.disabled}
+        disabledReason={props.disabledTooltip}
+      >
+        {partitions.length > 0 && (
           <SelectGroup
-            name="attributes.qos"
-            label={translate('Quality of service (QoS)')}
-            placeholder={translate('Select QoS...')}
-            options={qosOptions}
+            name="attributes.partition"
+            label={translate('Partition')}
+            placeholder={translate('Select partition...')}
+            options={partitionOptions}
             isClearable
             simpleValue
-            required={qosRequired}
-            validate={qosRequired ? required : undefined}
           />
-        </AccordionCard>
-      </span>
-    </Tooltip>
+        )}
+        <SelectGroup
+          name="attributes.qos"
+          label={translate('Quality of service (QoS)')}
+          placeholder={translate('Select QoS...')}
+          options={qosOptions}
+          isClearable
+          simpleValue
+          required={qosRequired}
+          validate={qosRequired ? required : undefined}
+        />
+      </StepContent>
+    </AccordionCard>
   );
 };

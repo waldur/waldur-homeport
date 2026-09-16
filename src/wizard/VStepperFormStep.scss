@@ -11,13 +11,14 @@
     z-index: 1;
   }
 
+  .step-fieldset {
+    display: contents;
+  }
+
   &.step-disabled {
-    .form-control,
+    /* react-select isn't a native control, so the fieldset can't disable
+       it; native inputs and buttons use their own :disabled styles. */
     .metronic-select__control {
-      background-color: var(--bs-gray-50);
-      cursor: not-allowed;
-    }
-    .btn {
       background-color: var(--bs-gray-50);
       cursor: not-allowed;
     }
