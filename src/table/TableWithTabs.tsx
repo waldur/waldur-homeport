@@ -116,7 +116,7 @@ export const TableWithTabs: FC<
           </Col>
           <Col
             sm="auto"
-            className="ms-auto d-flex gap-4 flex-wrap flex-sm-nowrap text-nowrap"
+            className="ms-auto mw-100 d-flex gap-4 flex-wrap flex-sm-nowrap text-nowrap"
           >
             {headerActions}
             <div

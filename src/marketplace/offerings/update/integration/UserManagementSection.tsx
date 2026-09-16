@@ -229,28 +229,29 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
               ACCOUNT_SCOPE_OPTIONS,
             )}
           />
-          {context.sharingOfferings !== undefined && (
-            <FormTable.Item
-              label={translate('Shared with')}
-              description={translate(
-                'Other offerings of this service provider where a person has the same account: username, POSIX UID and home directory.',
-              )}
-              value={
-                <SharedAccountsValue
-                  offeringUuid={props.offering.uuid}
-                  shared={sharedAccounts}
-                  sharingOfferings={context.sharingOfferings}
-                />
-              }
-              actions={
-                <Link
-                  state="marketplace-provider-account-settings"
-                  params={{ uuid: props.offering.customer_uuid }}
-                  label={translate('Provider account settings')}
-                />
-              }
-            />
-          )}
+          {isFeatureVisible(MarketplaceFeatures.show_provider_accounts) &&
+            context.sharingOfferings !== undefined && (
+              <FormTable.Item
+                label={translate('Shared with')}
+                description={translate(
+                  'Other offerings of this service provider where a person has the same account: username, POSIX UID and home directory.',
+                )}
+                value={
+                  <SharedAccountsValue
+                    offeringUuid={props.offering.uuid}
+                    shared={sharedAccounts}
+                    sharingOfferings={context.sharingOfferings}
+                  />
+                }
+                actions={
+                  <Link
+                    state="marketplace-provider-account-settings"
+                    params={{ uuid: props.offering.customer_uuid }}
+                    label={translate('Provider account settings')}
+                  />
+                }
+              />
+            )}
           <SelectEditField
             name="plugin_options.username_generation_policy"
             label={translate('Username generation policy')}

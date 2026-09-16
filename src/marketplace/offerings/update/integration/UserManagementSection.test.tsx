@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProviderOfferingsUpdateIntegration } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { renderWithProviders } from '@/test/harness';
 
 import { useOfferingAccountContext } from './useOfferingAccountContext';
@@ -100,9 +101,19 @@ const withSetting = (key: string, value: string, source: string) => ({
   },
 });
 
+const showProviderAccounts = () =>
+  vi
+    .mocked(isFeatureVisible)
+    .mockImplementation(
+      (feature) => feature === MarketplaceFeatures.show_provider_accounts,
+    );
+
 describe('DefaultUserManagementSection account settings', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // Every feature is off unless a test turns it on; clearing keeps the
+    // implementation a previous test set.
+    vi.mocked(isFeatureVisible).mockImplementation(() => false);
     vi.mocked(useRouter).mockReturnValue({
       stateService: { go: vi.fn() },
     } as any);
@@ -145,6 +156,7 @@ describe('DefaultUserManagementSection account settings', () => {
   });
 
   it('names the other offerings that share accounts', () => {
+    showProviderAccounts();
     renderSection('accounts');
 
     expect(screen.getByText('Shared with')).toBeInTheDocument();
@@ -152,7 +164,17 @@ describe('DefaultUserManagementSection account settings', () => {
     expect(screen.getByText('Provider account settings')).toBeInTheDocument();
   });
 
+  it('hides the sharing overview without the provider accounts feature', () => {
+    renderSection('accounts');
+
+    expect(screen.queryByText('Shared with')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Provider account settings'),
+    ).not.toBeInTheDocument();
+  });
+
   it('says per-offering accounts are not shared', () => {
+    showProviderAccounts();
     renderSection(
       'accounts',
       withSetting('account_scope', 'offering', 'offering'),

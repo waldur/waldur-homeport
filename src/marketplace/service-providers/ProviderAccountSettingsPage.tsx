@@ -12,6 +12,7 @@ export const ProviderAccountSettingsPage: FC<
 > = ({ provider }) => {
   // The route resolves the provider once; keep saved edits on screen.
   const [serviceProvider, setServiceProvider] = useState(provider);
+
   return (
     <ProviderAccountSettings
       serviceProvider={serviceProvider}

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import {
   EditFieldProvider,
   SelectEditField,
@@ -8,6 +9,8 @@ import {
 } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
@@ -22,6 +25,12 @@ import {
   USERNAME_GENERATION_POLICY_OPTIONS,
 } from './accountSettings';
 import { useServiceProviderUpdate } from './useServiceProviderUpdate';
+
+const AccountOptionsPreviewDialog = lazyComponent(() =>
+  import('./accounts/AccountOptionsPreviewDialog').then((module) => ({
+    default: module.AccountOptionsPreviewDialog,
+  })),
+);
 
 interface ProviderAccountSettingsProps {
   serviceProvider: ServiceProvider;
@@ -50,6 +59,31 @@ const renderOptionOrFallback =
 // A cleared select yields null; the backend removes a setting sent blank.
 const parseCleared = (value) => value ?? '';
 
+// The full explanation opens in a dialog, as TruncatedMarkdown shows long
+// text: one line on the card and a Show more link to the rest.
+const AccountSettingsIntroDialog: FC = () => (
+  <div className="modal-header-less">
+    <div className="modal-body">
+      <h5 className="modal-title mb-3">{translate('Account settings')}</h5>
+      <p>
+        {translate(
+          'These settings decide how the accounts people get on your offerings are named and set up: the username, home directory and login shell that your systems, such as an LDAP directory, receive for each person.',
+        )}
+      </p>
+      <p>
+        {translate(
+          'Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.',
+        )}
+      </p>
+      <p className="mb-0">
+        {translate(
+          'Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.',
+        )}
+      </p>
+    </div>
+  </div>
+);
+
 export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
   serviceProvider,
   setServiceProvider,
@@ -59,27 +93,39 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
   const update = useServiceProviderUpdate(serviceProvider, setServiceProvider);
   // The backend lets organization owners and staff update the provider.
   const canUpdate = checkIsOwnerOrStaff(customer, user);
+  const { openDialog } = useModal();
   const options = serviceProvider.account_options ?? {};
 
   return (
-    <FormTable.Card title={translate('Accounts')} className="card-bordered">
-      <div className="text-muted mb-6">
-        <p>
-          {translate(
-            'These settings decide how the accounts people get on your offerings are named and set up: the username, home directory and login shell that your systems, such as an LDAP directory, receive for each person.',
-          )}
-        </p>
-        <p>
-          {translate(
-            'Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.',
-          )}
-        </p>
-        <p className="mb-0">
-          {translate(
-            'Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.',
-          )}
-        </p>
-      </div>
+    <FormTable.Card
+      title={translate('Account settings')}
+      className="card-bordered"
+      actions={
+        canUpdate && (
+          <ActionButton
+            title={translate('Preview changes')}
+            action={() =>
+              openDialog(AccountOptionsPreviewDialog, {
+                resolve: { serviceProvider, setServiceProvider },
+                size: 'xl',
+              })
+            }
+          />
+        )
+      }
+    >
+      <p className="text-muted mb-6">
+        {translate(
+          'How the accounts people get on your offerings are named and set up.',
+        )}{' '}
+        <button
+          type="button"
+          className="text-anchor"
+          onClick={() => openDialog(AccountSettingsIntroDialog, { size: 'lg' })}
+        >
+          {translate('Show more')}
+        </button>
+      </p>
       <EditFieldProvider scope={serviceProvider} callback={update}>
         <FormTable hideActions={!canUpdate}>
           <SelectEditField

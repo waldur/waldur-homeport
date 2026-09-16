@@ -122,7 +122,7 @@ export const FIELD_MAPPING: Record<
   },
 };
 
-const formatValue = (value: unknown): string => {
+export const formatValue = (value: unknown): string => {
   if (value === null || value === undefined || value === '') {
     return DASH_ESCAPE_CODE;
   }
@@ -130,6 +130,21 @@ const formatValue = (value: unknown): string => {
     return value.length > 0 ? value.join(', ') : DASH_ESCAPE_CODE;
   }
   return String(value);
+};
+
+/** The user attributes an offering's config exposes, labelled and formatted. */
+export const getExposedUserAttributes = (
+  config: { exposed_fields?: string[] } | null | undefined,
+  offeringUser: OfferingUser | null | undefined,
+) => {
+  if (!config?.exposed_fields || !offeringUser) return [];
+  return config.exposed_fields
+    .filter((field) => FIELD_MAPPING[field])
+    .map((field) => ({
+      key: field,
+      label: FIELD_MAPPING[field].label(),
+      value: formatValue(FIELD_MAPPING[field].getValue(offeringUser)),
+    }));
 };
 
 export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
@@ -170,16 +185,10 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
     refetchOfferingUser();
   };
 
-  const exposedUserAttributes = useMemo(() => {
-    if (!config?.exposed_fields || !offeringUser) return [];
-    return config.exposed_fields
-      .filter((field) => FIELD_MAPPING[field])
-      .map((field) => ({
-        key: field,
-        label: FIELD_MAPPING[field].label(),
-        value: formatValue(FIELD_MAPPING[field].getValue(offeringUser)),
-      }));
-  }, [config, offeringUser]);
+  const exposedUserAttributes = useMemo(
+    () => getExposedUserAttributes(config, offeringUser),
+    [config, offeringUser],
+  );
 
   return (
     <ModalDialog

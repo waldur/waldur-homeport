@@ -653,6 +653,11 @@
     }
   },
   "A configuration file that must be added to the Matrix homeserver to register Waldur as an appservice. Contains tokens, bot user ID, webhook URL, and namespace declarations.": {},
+  "A conflict is a person who has different usernames on different offerings of this service provider, for example because the offerings generate usernames differently.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "A cost policy": {
     "context": {
       "feature_area": "details"
@@ -683,9 +688,30 @@
   "A name of the shared volume to store scripts": {},
   "A network port — either an interface on a router or a NIC attached to an instance.": {},
   "A network shared into this tenant from another tenant via a Neutron RBAC policy.": {},
+  "A new person would get {username}, home directory {home} and login shell {shell}.": {
+    "context": {
+      "variables": {
+        "username": {
+          "type": "string"
+        },
+        "home": {
+          "type": "unknown"
+        },
+        "shell": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "accounts"
+    }
+  },
   "A one-time fee applied on activation.": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "A person’s account on one offering: one row for each offering the person uses.": {
+    "context": {
+      "feature_area": "offering-users"
     }
   },
   "A potential conflict of interest was detected for this proposal. It may be blocked from assignment.": {
@@ -1254,7 +1280,7 @@
   "Account": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "posix-id-pools"
+      "feature_area": "accounts"
     }
   },
   "Account deletion": {
@@ -1280,6 +1306,12 @@
   "Account settings": {
     "context": {
       "feature_area": "marketplace"
+    }
+  },
+  "Account settings have been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "accounts"
     }
   },
   "Account state": {
@@ -3278,6 +3310,11 @@
       "feature_area": "details"
     }
   },
+  "Allocated with a new UID": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Allocated {amount}": {
     "context": {
       "variables": {
@@ -3554,6 +3591,19 @@
       "feature_area": "invitations"
     }
   },
+  "Allowed values: {min} to {max}": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Allows service providers to send messages with attachments to customers on pending orders, and customers to respond": {
     "context": {
       "feature_area": "integration"
@@ -3597,6 +3647,16 @@
   "Already mapped": {
     "context": {
       "feature_area": "setup"
+    }
+  },
+  "Already used by other pools: {ranges}.": {
+    "context": {
+      "variables": {
+        "ranges": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
     }
   },
   "Also allowed by the service provider": {
@@ -8979,6 +9039,11 @@
       "feature_area": "update"
     }
   },
+  "Change the settings and preview what they do before applying them. Nothing is saved until you apply.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Changed options": {
     "context": {
       "primary_ui_type": "title",
@@ -9377,6 +9442,11 @@
   "Choose the service provider this maintenance announcement applies to": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Choose the username to keep for each person. Their accounts on the other offerings are renamed to it and take over its POSIX UID and home directory.": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Choose what should be restored along with the project:": {
@@ -18387,6 +18457,11 @@
       "action_type": "read"
     }
   },
+  "Every person has the same username on all offerings of this service provider.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Every remaining resource is terminated. A project left with no active resources is deleted.": {
     "context": {
       "feature_area": "policy-watch"
@@ -20959,6 +21034,11 @@
       "feature_area": "integration"
     }
   },
+  "GLAuth directory": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
   "GPU Hour": {
     "context": {
       "primary_ui_type": "label"
@@ -22051,7 +22131,7 @@
   },
   "Home directory": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "service-providers"
     }
   },
@@ -22223,6 +22303,11 @@
   "How the Reviewer Pool Works": {
     "context": {
       "feature_area": "reviewer-pool"
+    }
+  },
+  "How the accounts people get on your offerings are named and set up.": {
+    "context": {
+      "feature_area": "service-providers"
     }
   },
   "How the user registered (e.g. eduTEAMS, local)": {},
@@ -22490,6 +22575,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "providers"
+    }
+  },
+  "Identity attributes": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Identity claim": {
@@ -24515,6 +24605,11 @@
       "feature_area": "openstack"
     }
   },
+  "It matters once offerings share accounts. With accounts per service provider, a person has one account, with one username, POSIX UID and home directory, on all of them, so one of the usernames has to be kept. Until then, switching the account scope to per service provider is refused.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "It was accepted for {email}. If it does not arrive, the problem is past the relay — check its own logs and the recipient spam folder.": {
     "context": {
       "variables": {
@@ -26447,7 +26542,7 @@
   "Login page layout style.": {},
   "Login shell": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "integration"
     }
   },
@@ -29666,6 +29761,12 @@
       "feature_area": "resource-pending"
     }
   },
+  "New home directory": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "accounts"
+    }
+  },
   "New hourly plan fee": {
     "context": {
       "feature_area": "resource-pending"
@@ -29796,6 +29897,12 @@
   "New usage policy": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "New username": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "accounts"
     }
   },
   "New value": {
@@ -30856,6 +30963,11 @@
       "feature_area": "create"
     }
   },
+  "No offering of this service provider shares accounts yet. Set the account scope to per service provider, and enable automatic creation of offering users on the offerings.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "No offerings": {
     "context": {
       "feature_area": "credits"
@@ -31705,6 +31817,11 @@
       "feature_area": "steps"
     }
   },
+  "None exposed to this provider": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "None of the selected users are active.": {
     "context": {
       "feature_area": "support"
@@ -31979,6 +32096,11 @@
   "Notes from manager": {
     "context": {
       "feature_area": "review"
+    }
+  },
+  "Nothing changes: the offering sets these values itself or they stay the same.": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Nothing is left running, so the credit stops being drawn. Any balance left at that point is still subject to the minimum monthly draw.": {
@@ -32455,6 +32577,11 @@
   "Offering UUID": {
     "context": {
       "feature_area": "event-subscriptions"
+    }
+  },
+  "Offering accounts": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Offering and plan": {
@@ -33095,6 +33222,16 @@
   "Once start date is reached, invitations and orders are processed.": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "One directory for the offerings that share accounts: {offerings}. Each person appears once, with the groups of all those offerings.": {
+    "context": {
+      "variables": {
+        "offerings": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "accounts"
     }
   },
   "One project": {
@@ -34715,6 +34852,22 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Overlaps {min}–{max} of another {scope}.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        },
+        "scope": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Overridden": {
     "context": {
       "primary_ui_type": "label",
@@ -34789,6 +34942,11 @@
   "Overwrite existing offering if one with the same name exists": {
     "context": {
       "feature_area": "single-import"
+    }
+  },
+  "Own account": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Owner": {
@@ -35553,6 +35711,11 @@
       "feature_area": "assignments"
     }
   },
+  "People with different usernames on different offerings. They must be resolved before offerings can share accounts.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Per day": {
     "context": {
       "primary_ui_type": "label"
@@ -35862,6 +36025,12 @@
   "Permissions that never apply": {
     "context": {
       "feature_area": "hygiene"
+    }
+  },
+  "Person": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "accounts"
     }
   },
   "Person identifier fields are not configured for this validation method. Please contact administrators.": {
@@ -37438,6 +37607,11 @@
       "action_type": "create"
     }
   },
+  "Preview changes to account settings": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Preview commands": {
     "context": {
       "feature_area": "policies"
@@ -37714,7 +37888,7 @@
   },
   "Primary GID": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "service-providers"
     }
   },
@@ -39264,9 +39438,19 @@
       "feature_area": "details"
     }
   },
+  "Provider account details": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Provider account settings": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Provider accounts": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Provider actions": {
@@ -39388,6 +39572,11 @@
   "Provider ticket": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "Provider username": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Provider-side synchronization failed.": {
@@ -41559,6 +41748,11 @@
       "feature_area": "passkeys"
     }
   },
+  "Renaming a live account changes who owns its files on your systems. Move or re-own the files of the renamed accounts afterwards.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Render POSIX ID pool management UI for service providers.": {
     "context": {
       "feature_area": "features"
@@ -42503,6 +42697,17 @@
       "action_type": "create"
     }
   },
+  "Resolve conflicts": {
+    "context": {
+      "primary_ui_type": "action_button",
+      "feature_area": "accounts"
+    }
+  },
+  "Resolve conflicts lets you choose that username for each person. Their accounts on the other offerings are renamed to it and take over its POSIX UID and home directory. People whose usernames already agree need no choice.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Resolve duplicate offerings": {
     "context": {
       "feature_area": "admin"
@@ -42518,6 +42723,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "admin",
       "action_type": "create"
+    }
+  },
+  "Resolve username conflicts": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Resolved": {
@@ -47563,7 +47773,11 @@
       "feature_area": "roles"
     }
   },
-  "Set both the minimum and maximum, or neither.": {},
+  "Set both the minimum and maximum, or neither.": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Set by the longest subscription requested.": {},
   "Set columns in {name} category": {
     "context": {
@@ -51734,6 +51948,11 @@
       "feature_area": "actions"
     }
   },
+  "The maximum must not be below the minimum.": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
   "The maximum number of attempts to pull user from backend.": {},
   "The maximum number of proposals that can be assigned to this reviewer.": {
     "context": {
@@ -51856,6 +52075,11 @@
       "feature_area": "organization-create"
     }
   },
+  "The one account a person has on all offerings that share accounts, with the same username, POSIX UID and home directory.": {
+    "context": {
+      "feature_area": "offering-users"
+    }
+  },
   "The organization UUID is not specified in one or more records.": {
     "context": {
       "feature_area": "import"
@@ -51927,6 +52151,11 @@
   "The plan name is not specified in one or more resource records.": {
     "context": {
       "feature_area": "import"
+    }
+  },
+  "The pools of one service provider must not overlap: UIDs against UIDs, GIDs against GIDs. A UID and a GID may share a number, so the same range can serve both.": {
+    "context": {
+      "feature_area": "posix-id-pools"
     }
   },
   "The project has been created.": {
@@ -52102,6 +52331,11 @@
   },
   "The service was active for the last 10 minutes": {},
   "The service wasn't active for the last 10 minutes": {},
+  "The settings changed since the preview. Preview again to apply them.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "The setup process generates authentication tokens and a registration YAML that must be added to your Matrix homeserver configuration.": {
     "context": {
       "feature_area": "matrix"
@@ -57113,6 +57347,12 @@
       "feature_area": "call-management"
     }
   },
+  "Unable to preview the change.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "accounts"
+    }
+  },
   "Unable to preview the changes.": {
     "context": {
       "feature_area": "admin"
@@ -57636,6 +57876,11 @@
   "Unable to resolve ticket.": {
     "context": {
       "primary_ui_type": "error_message"
+    }
+  },
+  "Unable to resolve username conflicts.": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Unable to restore VM snapshot.": {
@@ -58392,6 +58637,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "details"
+    }
+  },
+  "Unable to update account settings.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "accounts"
     }
   },
   "Unable to update affiliation.": {
@@ -60478,6 +60729,19 @@
       "feature_area": "auth"
     }
   },
+  "Use a value from {min} to {max}.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Use an existing namespace": {
     "context": {
       "feature_area": "template"
@@ -61309,6 +61573,17 @@
       "feature_area": "integration"
     }
   },
+  "Username conflicts": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
+  "Username conflicts have been resolved.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "accounts"
+    }
+  },
   "Username for Estonian Äriregister API authentication.": {},
   "Username for access user": {},
   "Username generation policy": {
@@ -61346,6 +61621,12 @@
   "Username prefix": {
     "context": {
       "feature_area": "freeipa"
+    }
+  },
+  "Usernames": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "accounts"
     }
   },
   "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).": {},
@@ -61767,6 +62048,16 @@
   "Values are in 8KB pages": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "Values below {min} are reserved for system accounts on the hosts.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
     }
   },
   "Values that trigger this question": {
@@ -65176,6 +65467,11 @@
   "h": {},
   "half month": {},
   "half-month": {},
+  "has active resources": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "health monitors": {
     "context": {
       "feature_area": "openstack-lbaas"
@@ -65467,6 +65763,11 @@
       "feature_area": "views"
     }
   },
+  "offering accounts": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "offering component usages": {
     "context": {
       "feature_area": "provider"
@@ -65487,6 +65788,7 @@
       "feature_area": "service-providers"
     }
   },
+  "offering pool": {},
   "offering resources": {
     "context": {
       "feature_area": "details"
@@ -65683,6 +65985,11 @@
       "feature_area": "views"
     }
   },
+  "provider accounts": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "publications": {
     "context": {
       "feature_area": "team"
@@ -65752,6 +66059,11 @@
   "remove": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "renames": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "replications": {
@@ -65900,6 +66212,7 @@
       "feature_area": "profiles"
     }
   },
+  "service provider pool": {},
   "services": {
     "context": {
       "feature_area": "cluster"
@@ -66168,6 +66481,16 @@
       "action_type": "read"
     }
   },
+  "used on {count} offering(s)": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "accounts"
+    }
+  },
   "user": {
     "context": {
       "feature_area": "reports"
@@ -66191,6 +66514,11 @@
   "user role queues": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "username conflicts": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "users": {
@@ -66684,6 +67012,16 @@
       "action_type": "read"
     }
   },
+  "{count} existing account(s) keep their home directory and login shell; the change applies to accounts created later.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "accounts"
+    }
+  },
   "{count} fields": {
     "context": {
       "variables": {
@@ -67006,6 +67344,16 @@
       "feature_area": "roles"
     }
   },
+  "{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is refused until they are adopted under Accounts > Username conflicts.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "accounts"
+    }
+  },
   "{count} problems detected": {
     "context": {
       "variables": {
@@ -67161,6 +67509,16 @@
         }
       },
       "feature_area": "reviewer-discovery"
+    }
+  },
+  "{count} provider account(s) keep their username, home directory and login shell.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "accounts"
     }
   },
   "{count} queries running": {
@@ -67466,6 +67824,22 @@
         }
       },
       "feature_area": "chat"
+    }
+  },
+  "{count} {namespace} are allocated from this pool; the next new one is {next}. The range may shrink, but every allocated value must stay inside it.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "next": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
     }
   },
   "{count}d": {
@@ -67948,6 +68322,25 @@
         }
       },
       "feature_area": "usage"
+    }
+  },
+  "{namespace} {min}–{max} ({scope})": {
+    "context": {
+      "variables": {
+        "namespace": {
+          "type": "string"
+        },
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        },
+        "scope": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
     }
   },
   "{names} are not common to all selected VPCs, so they are left unchanged in this order.": {
@@ -68934,6 +69327,21 @@
         }
       },
       "feature_area": "projects"
+    }
+  },
+  "{renamed} offering account(s) renamed, {kept} provider account(s) unchanged, {homes} account(s) keeping their home directory and login shell.": {
+    "context": {
+      "variables": {
+        "renamed": {
+          "type": "string"
+        },
+        "kept": {
+          "type": "unknown"
+        },
+        "homes": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{resourceName} resource has been moved to {projectName} project.": {
