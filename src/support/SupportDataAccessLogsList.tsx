@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { dataAccessLogsList, GlobalUserDataAccessLog } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -83,8 +84,8 @@ export const SupportDataAccessLogsList = () => {
         render: ({ row }: { row: GlobalUserDataAccessLog }) => (
           <Badge
             variant={getAccessorTypeBadgeVariant(row.accessor_type)}
-            pill
-            outline
+            shape="pill"
+            tone="outline"
           >
             {getAccessorCategory(row.accessor_type)}
           </Badge>

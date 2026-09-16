@@ -16,10 +16,11 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { RoleCompareButton } from '@/administration/roles/RoleCompareButton';
 import { RolePermissionDelta } from '@/administration/roles/RolePermissionDelta';
 import { getAllPages } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { lazyComponent } from '@/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -296,21 +297,31 @@ export const OrganizationRolesList: FC = () => {
           render: ({ row }) => (
             <>
               {row.is_system_role ? (
-                <Badge variant="secondary" pill outline>
+                <Badge variant="secondary" shape="pill" tone="outline">
                   {translate('System role')}
                 </Badge>
               ) : (
-                <Badge variant="success" pill outline>
+                <Badge variant="success" shape="pill" tone="outline">
                   {translate('Organization role')}
                 </Badge>
               )}
               {concealedMap.has(row.uuid) && (
-                <Badge variant="warning" pill outline className="ms-1">
+                <Badge
+                  variant="warning"
+                  shape="pill"
+                  tone="outline"
+                  className="ms-1"
+                >
                   {translate('Concealed')}
                 </Badge>
               )}
               {!row.is_active && (
-                <Badge variant="danger" pill outline className="ms-1">
+                <Badge
+                  variant="danger"
+                  shape="pill"
+                  tone="outline"
+                  className="ms-1"
+                >
                   {translate('Inactive')}
                 </Badge>
               )}

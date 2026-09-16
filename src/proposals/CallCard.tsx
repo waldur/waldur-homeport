@@ -2,7 +2,8 @@ import { LockIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Stack } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate, formatRelativeWithHour } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { ModelCard1 } from '@/core/ModelCard1';
@@ -39,7 +40,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
               {!nextRound ? (
                 <div className="text-muted">{translate('No rounds')}</div>
               ) : nextRound.status.label === 'Open' ? (
-                <Badge variant="warning" pill outline>
+                <Badge variant="warning" shape="pill" tone="outline">
                   {translate('Cutoff')}
                   {': '}
                   {formatRelativeWithHour(nextRound.cutoff_time)}
@@ -53,15 +54,15 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
               ) : null}
               {Boolean(call.fixed_duration_in_days) && (
                 <Badge
-                  variant="default"
-                  pill
-                  outline
+                  variant="neutral"
+                  shape="pill"
+                  tone="outline"
                   tooltip={
                     <Badge
                       variant="blue"
                       leftIcon={<LockIcon weight="bold" />}
-                      pill
-                      outline
+                      shape="pill"
+                      tone="outline"
                     >
                       {translate('Fixed duration: {n} days', {
                         n: call.fixed_duration_in_days,

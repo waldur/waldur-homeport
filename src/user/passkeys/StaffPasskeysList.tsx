@@ -1,8 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { staffPasskeysList } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -40,11 +41,11 @@ export const StaffPasskeysList: FunctionComponent<{ user? }> = ({ user }) => {
       title: translate('Status'),
       render: ({ row }) =>
         row.is_active ? (
-          <Badge variant="success" light>
+          <Badge variant="success" tone="light">
             {translate('Active')}
           </Badge>
         ) : (
-          <Badge variant="danger" light>
+          <Badge variant="danger" tone="light">
             {translate('Revoked')}
           </Badge>
         ),

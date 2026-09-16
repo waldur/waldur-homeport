@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { useTeamWorkload } from '../api';
@@ -23,7 +24,7 @@ export const TeamWorkload: FC<{ helpdeskUuid: string }> = ({
                   {member.user_full_name}
                 </strong>
                 {!member.has_capacity && (
-                  <Badge variant="danger" pill outline>
+                  <Badge variant="danger" shape="pill" tone="outline">
                     {translate('At capacity')}
                   </Badge>
                 )}

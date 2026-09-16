@@ -1,7 +1,8 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Table as BootstrapTable } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { titleCase } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -22,7 +23,7 @@ const ApprovalRateColumn: FC<{ row: ResourceDemandStat }> = ({ row }) => {
   const variant = rate >= 70 ? 'success' : rate >= 40 ? 'warning' : 'danger';
 
   return (
-    <Badge variant={variant} outline>
+    <Badge variant={variant} tone="outline">
       {rate.toFixed(0)}%
     </Badge>
   );

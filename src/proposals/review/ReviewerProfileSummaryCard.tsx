@@ -4,8 +4,9 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
-import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OrcidLogo } from '@/core/OrcidLogo';
@@ -108,11 +109,11 @@ export const ReviewerProfileSummaryCard: FC<
             <div className="d-flex align-items-center gap-2 mb-1">
               <h4 className="mb-0">{currentUser?.full_name}</h4>
               {profile.is_published ? (
-                <Badge variant="success" outline>
+                <Badge variant="success" tone="outline">
                   {translate('Published')}
                 </Badge>
               ) : (
-                <Badge variant="warning" outline>
+                <Badge variant="warning" tone="outline">
                   {translate('Not published')}
                 </Badge>
               )}

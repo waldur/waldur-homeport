@@ -51,7 +51,7 @@ export const StatusPill = ({
   className,
 }: StatusPillProps) => (
   <Badge
-    pill
+    shape="pill"
     className={cn('w-fit gap-1.5 font-medium', TONE_CLASSES[tone], className)}
   >
     <span className={cn('size-1.5 rounded-full', DOT_CLASSES[tone])} />

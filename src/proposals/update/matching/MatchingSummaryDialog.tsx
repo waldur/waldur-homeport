@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -247,7 +248,11 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
                     <td className="fw-bold text-gray-800">
                       {method.label}
                       {method.method === currentMethod && (
-                        <Badge variant="success" outline className="ms-2">
+                        <Badge
+                          variant="success"
+                          tone="outline"
+                          className="ms-2"
+                        >
                           {translate('Active')}
                         </Badge>
                       )}
@@ -306,31 +311,31 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-4">{translate('Score interpretation')}</h4>
           <div className="d-flex flex-wrap gap-3">
             <div className="d-flex align-items-center gap-2">
-              <Badge variant="success" outline>
+              <Badge variant="success" tone="outline">
                 80-100%
               </Badge>
               <span>{translate('Excellent match')}</span>
             </div>
             <div className="d-flex align-items-center gap-2">
-              <Badge variant="primary" outline>
+              <Badge variant="primary" tone="outline">
                 60-79%
               </Badge>
               <span>{translate('Good match')}</span>
             </div>
             <div className="d-flex align-items-center gap-2">
-              <Badge variant="warning" outline>
+              <Badge variant="warning" tone="outline">
                 40-59%
               </Badge>
               <span>{translate('Moderate match')}</span>
             </div>
             <div className="d-flex align-items-center gap-2">
-              <Badge variant="danger" outline>
+              <Badge variant="danger" tone="outline">
                 20-39%
               </Badge>
               <span>{translate('Weak match')}</span>
             </div>
             <div className="d-flex align-items-center gap-2">
-              <Badge variant="secondary" outline>
+              <Badge variant="secondary" tone="outline">
                 0-19%
               </Badge>
               <span>{translate('Poor match')}</span>

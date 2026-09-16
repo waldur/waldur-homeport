@@ -5,7 +5,8 @@ import {
   openportalManagedProjectsList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -193,7 +194,12 @@ export const ManagedProjectsList = () => {
         <>
           {row.state}
           {isEmbargoed(row) && (
-            <Badge variant="warning" pill outline className="ms-1">
+            <Badge
+              variant="warning"
+              shape="pill"
+              tone="outline"
+              className="ms-1"
+            >
               {translate('Embargoed')}
             </Badge>
           )}

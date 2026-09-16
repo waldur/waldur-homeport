@@ -1,7 +1,9 @@
 import { CalendarIcon, InfinityIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface Props {
@@ -16,14 +18,11 @@ interface Props {
 
 // Colour encodes the period family. The variants come from the theme's badge
 // palette rather than fixed pastels, so the chip follows light and dark mode.
-// `secondary` is a pale brand tint in this theme, and badge-light-secondary
-// paints text and background the same colour — gray-600 keeps the neutral chip
-// readable in both themes.
-const PERIOD_VARIANT: Record<string, string> = {
+const PERIOD_VARIANT: Record<string, BadgeVariant> = {
   month: 'indigo',
   quarterly: 'success',
   annual: 'warning',
-  total: 'gray-600',
+  total: 'neutral',
 };
 
 function familyLabelFor(limitPeriod: string | null | undefined): string {
@@ -56,11 +55,11 @@ export const LimitPeriodChip: FC<Props> = ({
   if (billingType === 'usage' && !limitPeriod) {
     return (
       <Badge
-        variant="gray-600"
+        variant="neutral"
         size={size === 'sm' ? 'sm' : undefined}
         leftIcon={<InfinityIcon weight="bold" size={iconSize} />}
-        pill
-        light
+        shape="pill"
+        tone="light"
         tooltip={translate(
           'Usage-based component — no limit period defined; values are raw measurements.',
         )}
@@ -87,8 +86,8 @@ export const LimitPeriodChip: FC<Props> = ({
           <CalendarIcon weight="bold" size={iconSize} />
         )
       }
-      pill
-      light
+      shape="pill"
+      tone="light"
       tooltip={window ? `${familyLabel} · ${window}` : familyLabel}
     >
       {familyLabel}

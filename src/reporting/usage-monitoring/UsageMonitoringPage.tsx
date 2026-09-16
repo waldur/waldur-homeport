@@ -4,7 +4,8 @@ import {
   ResourceMissingUsage,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -72,7 +73,7 @@ const StateColumn = ({ row }: { row: ResourceMissingUsage }) => {
   const stateVariant = STATE_VARIANTS[row.state] || 'secondary';
 
   return (
-    <Badge variant={stateVariant} outline>
+    <Badge variant={stateVariant} tone="outline">
       {row.state}
     </Badge>
   );

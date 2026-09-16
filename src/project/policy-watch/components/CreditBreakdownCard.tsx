@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { Variant } from 'react-bootstrap/types';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 
@@ -17,7 +18,7 @@ interface Segment {
   label: string;
   value: number;
   color: string;
-  variant: Variant;
+  variant: BadgeVariant;
   hint: string;
 }
 
@@ -99,8 +100,8 @@ export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
             key={s.key}
             variant={s.variant}
             size="sm"
-            pill
-            outline
+            shape="pill"
+            tone="outline"
             hasBullet
             tooltip={s.hint}
           >

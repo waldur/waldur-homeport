@@ -1,7 +1,8 @@
 import { forwardRef, FunctionComponent } from 'react';
 
+import { Badge } from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
-import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { Link } from '@/core/Link';
@@ -54,8 +55,8 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
           <Badge
             variant="purple"
             size="sm"
-            pill
-            outline
+            shape="pill"
+            tone="outline"
             className="align-items-end mt-1"
           >
             {translate('Staff')}

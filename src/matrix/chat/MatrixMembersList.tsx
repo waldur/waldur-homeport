@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
+import { Badge } from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 
 import { getChatAvatarColor } from './chatColors';
@@ -47,12 +48,17 @@ export const MatrixMembersList: FC = () => {
               />
               <span className="text-truncate flex-grow-1">{m.name}</span>
               {roleBadge && (
-                <Badge variant={roleBadge.variant} size="sm" pill outline>
+                <Badge
+                  variant={roleBadge.variant}
+                  size="sm"
+                  shape="pill"
+                  tone="outline"
+                >
                   {roleBadge.label}
                 </Badge>
               )}
               {invited && (
-                <Badge variant="warning" size="sm" pill outline>
+                <Badge variant="warning" size="sm" shape="pill" tone="outline">
                   {translate('Invited')}
                 </Badge>
               )}

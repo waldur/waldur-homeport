@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { affiliationAutocomplete } from '@/marketplace/common/autocompletes';
@@ -43,7 +44,7 @@ export const AffiliationGroup = ({
         <span className="text-muted ms-2">({option.abbreviation})</span>
       )}
       {isStaff && customerDefaultUuids.has(option.uuid) && (
-        <Badge variant="info" pill outline className="ms-2">
+        <Badge variant="info" shape="pill" tone="outline" className="ms-2">
           {translate('Default')}
         </Badge>
       )}

@@ -17,7 +17,7 @@
 import { FileArrowDownIcon, FileXlsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Badge, Tooltip } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { translate } from '@/i18n';
@@ -189,9 +189,9 @@ export const StorageReportVis: FC<Props> = ({
             },
           )}
           {report.isEmpty && (
-            <span className="badge bg-secondary ms-2">
+            <Badge variant="secondary" tone="solid" className="ms-2">
               {translate('Empty')}
-            </span>
+            </Badge>
           )}
         </span>
 

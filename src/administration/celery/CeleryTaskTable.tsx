@@ -3,8 +3,8 @@ import { useCallback, useMemo } from 'react';
 import { CeleryTask } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -126,21 +126,21 @@ export const CeleryTaskTable = ({
             showDuration ? (
               row.time_start ? (
                 <Tooltip label={formatDateTime(row.time_start * 1000)}>
-                  <Badge variant="primary" light>
+                  <Badge variant="primary" tone="light">
                     {formatDuration(row.time_start)}
                   </Badge>
                 </Tooltip>
               ) : (
-                <Badge variant="secondary" light>
+                <Badge variant="secondary" tone="light">
                   {translate('Pending')}
                 </Badge>
               )
             ) : row.acknowledged ? (
-              <Badge variant="success" light>
+              <Badge variant="success" tone="light">
                 {translate('Acknowledged')}
               </Badge>
             ) : (
-              <Badge variant="warning" light>
+              <Badge variant="warning" tone="light">
                 {translate('Pending')}
               </Badge>
             ),
@@ -154,7 +154,7 @@ export const CeleryTaskTable = ({
                   ? 'info'
                   : 'secondary'
               }
-              light
+              tone="light"
             >
               {(row.delivery_info?.priority as number) ?? 0}
             </Badge>

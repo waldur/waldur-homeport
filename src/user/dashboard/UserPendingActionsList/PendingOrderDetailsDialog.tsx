@@ -11,7 +11,8 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -91,7 +92,12 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
         <Field
           label={translate('Type')}
           value={
-            <Badge variant={typeBadge.variant} size="sm" pill outline>
+            <Badge
+              variant={typeBadge.variant}
+              size="sm"
+              shape="pill"
+              tone="outline"
+            >
               {typeBadge.label}
             </Badge>
           }

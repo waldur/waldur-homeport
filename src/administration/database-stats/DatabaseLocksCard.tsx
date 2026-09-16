@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 
 import type { LockStats } from './api';
@@ -46,8 +47,8 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
               {data.waiting_locks > 0 ? (
                 <Badge
                   variant={health === 'danger' ? 'danger' : 'warning'}
-                  pill
-                  outline
+                  shape="pill"
+                  tone="outline"
                 >
                   {data.waiting_locks}
                 </Badge>
@@ -62,7 +63,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
             </td>
             <td className="text-end">
               {data.access_exclusive_locks > 0 ? (
-                <Badge variant="warning" pill outline>
+                <Badge variant="warning" shape="pill" tone="outline">
                   {data.access_exclusive_locks}
                 </Badge>
               ) : (

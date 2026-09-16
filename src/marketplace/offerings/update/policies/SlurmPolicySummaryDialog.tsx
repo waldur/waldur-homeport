@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { marketplaceSlurmPeriodicUsagePoliciesPreviewImpact } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { MermaidChart } from '@/core/MermaidChart';
@@ -174,7 +175,12 @@ const PreviewCommands: FC<{ config: SlurmPolicyConfig }> = ({ config }) => {
           {data.preview_commands.map((cmd, idx) => (
             <tr key={idx}>
               <td>
-                <Badge variant="secondary" size="sm" pill outline>
+                <Badge
+                  variant="secondary"
+                  size="sm"
+                  shape="pill"
+                  tone="outline"
+                >
                   {cmd.type}
                 </Badge>
               </td>
@@ -461,19 +467,19 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                   <td>
                     {exUsagePercent < 80 ? (
-                      <Badge variant="success" pill outline>
+                      <Badge variant="success" shape="pill" tone="outline">
                         {translate('No action')}
                       </Badge>
                     ) : exUsagePercent < 100 ? (
-                      <Badge variant="warning" pill outline>
+                      <Badge variant="warning" shape="pill" tone="outline">
                         {translate('Notification threshold')}
                       </Badge>
                     ) : exUsagePercent < gracePercent ? (
-                      <Badge variant="danger" pill outline>
+                      <Badge variant="danger" shape="pill" tone="outline">
                         {translate('Downscale threshold')}
                       </Badge>
                     ) : (
-                      <Badge variant="danger" pill outline>
+                      <Badge variant="danger" shape="pill" tone="outline">
                         {translate('Pause threshold')}
                       </Badge>
                     )}
@@ -536,8 +542,8 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                       <td>
                         <Badge
                           variant={isEnabled ? 'success' : 'secondary'}
-                          pill
-                          outline
+                          shape="pill"
+                          tone="outline"
                         >
                           {isEnabled
                             ? translate('Enabled')
@@ -657,8 +663,8 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                       {'enabled' in row ? (
                         <Badge
                           variant={row.enabled ? 'success' : 'secondary'}
-                          pill
-                          outline
+                          shape="pill"
+                          tone="outline"
                         >
                           {row.value}
                         </Badge>

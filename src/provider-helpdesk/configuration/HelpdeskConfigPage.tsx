@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import { ProviderHelpdesk, providerHelpdesksList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -50,7 +51,7 @@ export const HelpdeskConfigPage: FC = () => {
         render: ({ row }) => {
           const meta = getHealthMeta(row.health_status);
           return (
-            <Badge variant={meta.variant} pill outline>
+            <Badge variant={meta.variant} shape="pill" tone="outline">
               {meta.label}
             </Badge>
           );

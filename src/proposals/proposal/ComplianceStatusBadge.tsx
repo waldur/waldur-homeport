@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface ComplianceStatus {
@@ -19,7 +20,7 @@ export const ComplianceStatusBadge: FC<ComplianceStatusBadgeProps> = ({
 }) => {
   if (!status?.has_checklist) {
     return (
-      <Badge variant="default" pill outline>
+      <Badge variant="neutral" shape="pill" tone="outline">
         {translate('N/A')}
       </Badge>
     );
@@ -27,7 +28,7 @@ export const ComplianceStatusBadge: FC<ComplianceStatusBadgeProps> = ({
 
   if (status.requires_review) {
     return (
-      <Badge variant="warning" pill outline>
+      <Badge variant="warning" shape="pill" tone="outline">
         {translate('Needs review')}
       </Badge>
     );
@@ -35,7 +36,7 @@ export const ComplianceStatusBadge: FC<ComplianceStatusBadgeProps> = ({
 
   if (status.is_completed) {
     return (
-      <Badge variant="success" pill outline>
+      <Badge variant="success" shape="pill" tone="outline">
         {translate('OK')}
       </Badge>
     );
@@ -44,7 +45,7 @@ export const ComplianceStatusBadge: FC<ComplianceStatusBadgeProps> = ({
   // Incomplete but doesn't require review
   const percentage = status.completion_percentage || 0;
   return (
-    <Badge variant="purple" pill outline>
+    <Badge variant="purple" shape="pill" tone="outline">
       {translate('{percentage}% complete', { percentage })}
     </Badge>
   );

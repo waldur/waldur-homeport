@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
-import { Badge, Card, Nav, Tab } from 'react-bootstrap';
+import { Card, Nav, Tab } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
+
+import { Badge } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -132,8 +134,9 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
                     {tab.title}
                     {query && (
                       <Badge
-                        bg={hasMatches ? 'light' : 'secondary'}
-                        text={hasMatches ? 'dark' : 'white'}
+                        variant={hasMatches ? 'primary' : 'neutral'}
+                        shape="pill"
+                        tone="light"
                         className="ms-2"
                       >
                         {filteredCount}

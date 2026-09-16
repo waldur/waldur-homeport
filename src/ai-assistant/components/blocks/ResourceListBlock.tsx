@@ -5,7 +5,8 @@ import {
   marketplaceResourcesList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
@@ -100,7 +101,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
           <TableIcon weight="bold" />
           <strong>{translate('Resource table')}</strong>
         </div>
-        <Badge variant="default" size="sm" outline hasBullet>
+        <Badge variant="neutral" size="sm" tone="outline" hasBullet>
           {translate('Not rendered')}
         </Badge>
       </div>

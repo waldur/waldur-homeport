@@ -1,7 +1,8 @@
 import { CheckIcon, ClockCountdownIcon, XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 const requestStatus = {
@@ -22,8 +23,8 @@ export const PermissionRequestStateField: FC<{ row }> = ({ row }) => {
     <Badge
       variant={status?.color || 'default'}
       leftIcon={status ? <status.icon weight="bold" /> : null}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
     >
       {status?.label || row.state}
     </Badge>

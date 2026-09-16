@@ -1,6 +1,8 @@
 import { FC, ReactNode } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { MixSummary } from './mixDetection';
@@ -15,7 +17,7 @@ interface MixBannerProps {
 
 // Theme badge variants rather than raw bg-* classes, so the strip follows
 // light and dark mode like every other badge in the portal.
-const codeVariant: Record<MixSummary['code'], string> = {
+const codeVariant: Record<MixSummary['code'], BadgeVariant> = {
   A: 'info',
   B: 'success',
   C: 'warning',
@@ -35,7 +37,7 @@ export const MixBanner: FC<MixBannerProps> = ({
 }) => {
   return (
     <div className="d-flex flex-wrap align-items-center gap-2 small mb-2 px-2 py-2 rounded bg-body-secondary">
-      <Badge variant={codeVariant[mix.code]} light>
+      <Badge variant={codeVariant[mix.code]} tone="light">
         {mix.label}
       </Badge>
       <span>

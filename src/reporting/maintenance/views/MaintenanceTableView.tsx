@@ -2,8 +2,8 @@ import { FC, useEffect, useMemo } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { getMaintenanceState } from '@/maintenance/utils';
@@ -115,7 +115,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
         render: ({ row }) => {
           const state = getMaintenanceState(row.state);
           return (
-            <Badge variant={state.color} size="sm" pill outline>
+            <Badge variant={state.color} size="sm" shape="pill" tone="outline">
               {state.label}
             </Badge>
           );

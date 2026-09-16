@@ -4,8 +4,8 @@ import { FC, useState, useEffect } from 'react';
 import { Form, InputGroup, Table } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -167,7 +167,11 @@ const AllocationInputCell: FC<{
           change === 0 ? (
             <span className="text-muted">{change}</span>
           ) : (
-            <Badge variant={change > 0 ? 'success' : 'danger'} pill outline>
+            <Badge
+              variant={change > 0 ? 'success' : 'danger'}
+              shape="pill"
+              tone="outline"
+            >
               {change > 0 ? `+${change}` : String(change)}
             </Badge>
           )

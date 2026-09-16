@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
@@ -16,19 +17,19 @@ export const ExpiryBadge: FC<ExpiryBadgeProps> = ({ expires }) => {
 
   if (diffDays < 0) {
     return (
-      <Badge variant="danger" size="sm" pill outline>
+      <Badge variant="danger" size="sm" shape="pill" tone="outline">
         {translate('Expired')}
       </Badge>
     );
   } else if (diffDays === 0) {
     return (
-      <Badge variant="danger" size="sm" pill outline>
+      <Badge variant="danger" size="sm" shape="pill" tone="outline">
         {translate('Expires today')}
       </Badge>
     );
   } else if (diffDays <= 3) {
     return (
-      <Badge variant="warning" size="sm" pill outline>
+      <Badge variant="warning" size="sm" shape="pill" tone="outline">
         {diffDays === 1
           ? translate('Expires tomorrow')
           : translate('Expires in {count} days', { count: diffDays })}
@@ -36,7 +37,7 @@ export const ExpiryBadge: FC<ExpiryBadgeProps> = ({ expires }) => {
     );
   } else {
     return (
-      <Badge variant="secondary" size="sm" pill outline>
+      <Badge variant="secondary" size="sm" shape="pill" tone="outline">
         {translate('Expires {date}', { date: formatDate(expires) })}
       </Badge>
     );

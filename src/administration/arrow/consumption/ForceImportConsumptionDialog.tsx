@@ -6,7 +6,8 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { SubmitButton } from '@/form';
 import { AsyncSelect } from '@/form/select';
@@ -223,22 +224,22 @@ export const ForceImportConsumptionDialog = ({
                     {item.has_existing ? (
                       <div className="d-flex flex-column gap-1">
                         {item.is_finalized ? (
-                          <Badge variant="danger" pill outline>
+                          <Badge variant="danger" shape="pill" tone="outline">
                             {translate('Finalized — will overwrite')}
                           </Badge>
                         ) : (
-                          <Badge variant="warning" pill outline>
+                          <Badge variant="warning" shape="pill" tone="outline">
                             {translate('Pending — will update')}
                           </Badge>
                         )}
                         {item.is_reconciled && (
-                          <Badge variant="primary" pill outline>
+                          <Badge variant="primary" shape="pill" tone="outline">
                             {translate('Reconciled')}
                           </Badge>
                         )}
                       </div>
                     ) : (
-                      <Badge variant="success" pill outline>
+                      <Badge variant="success" shape="pill" tone="outline">
                         {translate('New')}
                       </Badge>
                     )}

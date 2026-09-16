@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -61,7 +62,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                 <tr>
                   <td className="text-muted">{translate('State')}</td>
                   <td className="text-end">
-                    <Badge variant={getBadgeVariant(health)} outline>
+                    <Badge variant={getBadgeVariant(health)} tone="outline">
                       {formatCircuitBreakerState(data.state)}
                     </Badge>
                   </td>
@@ -140,7 +141,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                             getCircuitBreakerLevel(transition.to_state),
                           )}
                           size="sm"
-                          outline
+                          tone="outline"
                         >
                           {formatCircuitBreakerState(transition.to_state)}
                         </Badge>

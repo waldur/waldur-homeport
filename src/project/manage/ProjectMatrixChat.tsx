@@ -154,10 +154,10 @@ const RoomDetails: FC<{
           value={
             <StateIndicator
               label={room.state}
-              variant={ROOM_STATE_VARIANT[room.state] || 'default'}
+              variant={ROOM_STATE_VARIANT[room.state] || 'neutral'}
               active={room.state === 'creating' || room.state === 'disabling'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             />
           }
         />

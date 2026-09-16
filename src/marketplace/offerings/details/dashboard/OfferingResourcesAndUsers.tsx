@@ -15,7 +15,9 @@ import {
   Offering,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -26,7 +28,11 @@ interface OwnProps {
   offering: Offering;
 }
 
-const infoState = [
+const infoState: Array<{
+  variant: BadgeVariant;
+  states: string[];
+  icon: any;
+}> = [
   { variant: 'success', states: ['OK'], icon: CheckIcon },
   {
     variant: 'warning',
@@ -97,13 +103,13 @@ const InfoRow = ({
               return (
                 <Badge
                   key={stat.state}
-                  variant={state?.variant || 'default'}
+                  variant={state?.variant || 'neutral'}
                   leftIcon={
                     // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
                     <Icon weight="bold" />
                   }
-                  pill
-                  outline
+                  shape="pill"
+                  tone="outline"
                 >
                   {stat.state}
                   {': '}

@@ -1,7 +1,8 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { Col, Form, Row, Stack } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { BaseNumberField } from '@/form/NumberField';
@@ -92,10 +93,10 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
           {translate('Node group #{n}', { n: index + 1 })}
         </h6>
         <Badge
-          variant={isStorageGroup ? 'warning' : 'default'}
+          variant={isStorageGroup ? 'warning' : 'neutral'}
           size="sm"
-          pill
-          outline
+          shape="pill"
+          tone="outline"
         >
           {nodeGroup.type.toUpperCase()}
         </Badge>

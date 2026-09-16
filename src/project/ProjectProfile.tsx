@@ -8,7 +8,8 @@ import { useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
@@ -40,11 +41,21 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
           )}
         <span>{project.name}</span>
         {project.kind === 'course' ? (
-          <Badge variant="pink" pill outline className="ms-2 text-nowrap">
+          <Badge
+            variant="pink"
+            shape="pill"
+            tone="outline"
+            className="ms-2 text-nowrap"
+          >
             {translate('Course')}
           </Badge>
         ) : project.kind === 'public' ? (
-          <Badge variant="blue" pill outline className="ms-2 text-nowrap">
+          <Badge
+            variant="blue"
+            shape="pill"
+            tone="outline"
+            className="ms-2 text-nowrap"
+          >
             {translate('Public')}
           </Badge>
         ) : null}

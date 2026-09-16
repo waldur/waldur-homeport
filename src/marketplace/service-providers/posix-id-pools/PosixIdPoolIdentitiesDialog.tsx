@@ -1,10 +1,11 @@
 import { FC, useMemo } from 'react';
-import { Badge } from 'react-bootstrap';
 import {
   marketplacePosixIdentitiesList,
   PosixIdentity,
   PosixIdPool,
 } from 'waldur-js-client';
+
+import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -108,17 +109,17 @@ export const PosixIdPoolIdentitiesDialog: FC<
         title: translate('Status'),
         render: ({ row }: { row: PosixIdentity }) =>
           !row.released_at ? (
-            <Badge bg="light-success" text="success">
+            <Badge variant="success" tone="outline">
               {translate('Active')}
             </Badge>
           ) : row.recyclable === false ? (
             // Released, but withheld from the pool: the number is still stamped
             // on files in the provider's filesystem until an operator returns it.
-            <Badge bg="light-danger" text="danger">
+            <Badge variant="danger" tone="outline">
               {translate('Withheld')}
             </Badge>
           ) : (
-            <Badge bg="light-warning" text="warning">
+            <Badge variant="warning" tone="outline">
               {translate('Released')}
             </Badge>
           ),

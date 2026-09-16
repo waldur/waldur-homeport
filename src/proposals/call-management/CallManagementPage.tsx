@@ -6,7 +6,8 @@ import {
   ProposalProtectedCallsListData,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -156,8 +157,8 @@ export const CallManagementPage: FunctionComponent<CallManagementPageProps> = ({
           render: ({ row }) => (
             <Badge
               variant={CALL_STATE_VARIANT[row.state] || 'secondary'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {formatCallState(row.state)}
             </Badge>

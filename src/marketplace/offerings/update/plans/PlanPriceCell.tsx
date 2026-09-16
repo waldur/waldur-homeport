@@ -4,7 +4,8 @@ import {
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { getEffectiveComponents } from '@/marketplace/details/plan/effectiveComponents';
@@ -59,7 +60,13 @@ export const PlanPriceCell: FC<PlanPriceCellProps> = ({ plan, offering }) => {
         {defaultCurrency(0)}
         {/* `default`, the gray BillingTypeBadge uses: this theme tints
             `secondary` green, which would read as a status. */}
-        <Badge variant="default" size="sm" pill outline className="ms-2">
+        <Badge
+          variant="neutral"
+          size="sm"
+          shape="pill"
+          tone="outline"
+          className="ms-2"
+        >
           {translate('Free')}
         </Badge>
       </span>

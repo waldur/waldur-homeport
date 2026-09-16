@@ -3,8 +3,8 @@ import { FC, useMemo } from 'react';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -73,7 +73,7 @@ const ArrayBadges: FC<{ values: unknown }> = ({ values }) => {
   return (
     <div className="d-flex flex-wrap gap-1">
       {values.map((item, index) => (
-        <Badge key={index} variant="primary" size="sm" outline>
+        <Badge key={index} variant="primary" size="sm" tone="outline">
           {String(item)}
         </Badge>
       ))}
@@ -277,7 +277,9 @@ export const OrganizationResourcesTable: FC<
     const metadataColumns: Column<Resource>[] = [
       {
         title: translate('State'),
-        render: ({ row }) => <ResourceStateField resource={row} pill outline />,
+        render: ({ row }) => (
+          <ResourceStateField resource={row} shape="pill" tone="outline" />
+        ),
         orderField: 'state',
       },
       {

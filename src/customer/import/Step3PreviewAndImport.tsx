@@ -3,7 +3,8 @@ import { useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 import { Customer } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
@@ -29,7 +30,11 @@ const statusMessages = {
 const StatusField = ({ row }) => {
   const validate = validateOrganizationCreation(row);
   return (
-    <Badge variant={validate.valid ? 'success' : 'danger'} pill outline>
+    <Badge
+      variant={validate.valid ? 'success' : 'danger'}
+      shape="pill"
+      tone="outline"
+    >
       {validate.valid ? translate('OK') : statusMessages[validate.errors[0]]}
     </Badge>
   );

@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react';
 import { User } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { formatPhoneNumber } from '@/core/utils';
@@ -87,7 +87,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
                   'Profile fields (organization, name, email) are managed by the identity provider and cannot be edited in Waldur.',
                 )}
               >
-                <Badge variant="purple" outline>
+                <Badge variant="purple" tone="outline">
                   {translate('Details protected')}
                 </Badge>
               </Tooltip>
@@ -230,7 +230,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
           label={translate('Administrative status')}
           value={
             <div className="d-inline-flex align-items-center gap-2">
-              <Badge variant="danger" outline>
+              <Badge variant="danger" tone="outline">
                 {translate('Administratively disabled')}
               </Badge>
               <Tooltip

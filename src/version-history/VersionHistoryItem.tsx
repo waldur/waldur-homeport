@@ -2,7 +2,8 @@ import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { getAbbreviation } from '@/core/utils';
@@ -113,8 +114,8 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
                   variant="warning"
                   size="sm"
                   leftIcon={<ShieldWarningIcon weight="bold" />}
-                  pill
-                  outline
+                  shape="pill"
+                  tone="outline"
                   className="me-2"
                 >
                   {translate('Policy')}
@@ -135,8 +136,8 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
           <StateIndicator
             label={versionLabel}
             variant={versionIndex === 0 ? 'success' : 'secondary'}
-            outline
-            pill
+            tone="outline"
+            shape="pill"
           />
         </div>
       </div>

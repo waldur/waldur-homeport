@@ -1,30 +1,30 @@
 import { FC } from 'react';
 import type { QueueKindEnum } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { BadgeTone, BadgeVariant, Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 
 const KIND_BADGES: Record<
   QueueKindEnum,
-  { variant: string; outline: boolean; label: string; tip: string }
+  { variant: BadgeVariant; tone: BadgeTone; label: string; tip: string }
 > = {
   consumer: {
     variant: 'primary',
-    outline: false,
+    tone: 'solid',
     label: translate('Consumer'),
     tip: translate('Unified pub/sub queue: receives every enabled event type'),
   },
   legacy: {
     variant: 'secondary',
-    outline: true,
+    tone: 'outline',
     label: translate('Legacy'),
     tip: translate('Per-object-type event subscription queue'),
   },
   unknown: {
-    variant: 'light',
-    outline: true,
+    variant: 'neutral',
+    tone: 'outline',
     label: translate('Unknown'),
     tip: translate('Not a Waldur event queue'),
   },
@@ -36,7 +36,7 @@ export const QueueKindBadge: FC<{ kind: QueueKindEnum; id: string }> = ({
   const config = KIND_BADGES[kind];
   return (
     <Tooltip label={config.tip}>
-      <Badge variant={config.variant} pill outline={config.outline}>
+      <Badge variant={config.variant} shape="pill" tone={config.tone}>
         {config.label}
       </Badge>
     </Tooltip>

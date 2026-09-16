@@ -3,8 +3,8 @@ import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { translate } from '@/i18n';
@@ -37,9 +37,9 @@ const AnalyticsColumn = ({ report }: { report: ReportDefinition }) => {
         <Tooltip label={translate('What-If analysis')}>
           <Link state={report.analyticsState} params={{ mode: 'what-if' }}>
             <Badge
-              variant="gray"
+              variant="neutral"
               leftIcon={<QuestionIcon weight="bold" />}
-              outline
+              tone="outline"
               className="cursor-pointer"
             >
               {translate('What if')}
@@ -51,9 +51,9 @@ const AnalyticsColumn = ({ report }: { report: ReportDefinition }) => {
         <Tooltip label={translate('Why-So analysis')}>
           <Link state={report.analyticsState} params={{ mode: 'why-so' }}>
             <Badge
-              variant="gray"
+              variant="neutral"
               leftIcon={<QuestionIcon weight="bold" />}
-              outline
+              tone="outline"
               className="cursor-pointer"
             >
               {translate('Why so')}

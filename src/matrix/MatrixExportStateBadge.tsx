@@ -1,9 +1,11 @@
 import { FC } from 'react';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 
-const EXPORT_STATE_VARIANT: Record<string, string> = {
+const EXPORT_STATE_VARIANT: Record<string, BadgeVariant> = {
   pending: 'warning',
   exporting: 'primary',
   completed: 'success',
@@ -36,10 +38,10 @@ export const MatrixExportStateBadge: FC<MatrixExportStateBadgeProps> = ({
 }) => (
   <StateIndicator
     label={stateLabel(state)}
-    variant={EXPORT_STATE_VARIANT[state] || 'default'}
+    variant={EXPORT_STATE_VARIANT[state] || 'neutral'}
     tooltip={state === 'failed' ? errorMessage : undefined}
     active={state === 'exporting'}
-    pill
-    outline
+    shape="pill"
+    tone="outline"
   />
 );

@@ -8,7 +8,8 @@ import {
   SlurmPolicyEvaluateResponse,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -157,17 +158,27 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
               </td>
               <td>
                 {r.paused && (
-                  <Badge variant="danger" size="sm" outline className="me-1">
+                  <Badge
+                    variant="danger"
+                    size="sm"
+                    tone="outline"
+                    className="me-1"
+                  >
                     {translate('Paused')}
                   </Badge>
                 )}
                 {r.downscaled && (
-                  <Badge variant="warning" size="sm" outline className="me-1">
+                  <Badge
+                    variant="warning"
+                    size="sm"
+                    tone="outline"
+                    className="me-1"
+                  >
                     {translate('Downscaled')}
                   </Badge>
                 )}
                 {!r.paused && !r.downscaled && (
-                  <Badge variant="success" size="sm" outline>
+                  <Badge variant="success" size="sm" tone="outline">
                     {translate('Normal')}
                   </Badge>
                 )}

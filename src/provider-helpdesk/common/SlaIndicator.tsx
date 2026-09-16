@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -23,7 +24,7 @@ export const SlaIndicator: FC<SlaIndicatorProps> = ({
 }) => {
   if (slaBreached) {
     return (
-      <Badge variant="danger" pill outline>
+      <Badge variant="danger" shape="pill" tone="outline">
         {translate('SLA breached')}
       </Badge>
     );
@@ -38,7 +39,7 @@ export const SlaIndicator: FC<SlaIndicatorProps> = ({
 
   if (now > deadline) {
     return (
-      <Badge variant="danger" pill outline>
+      <Badge variant="danger" shape="pill" tone="outline">
         {translate('Overdue')}
       </Badge>
     );
@@ -50,8 +51,8 @@ export const SlaIndicator: FC<SlaIndicatorProps> = ({
   return (
     <Badge
       variant={atRisk ? 'warning' : 'success'}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
       tooltip={translate('Due {time}', {
         time: formatRelative(resolutionDeadline),
       })}

@@ -13,8 +13,9 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getAllPages } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { formatDate, formatISODate, parseDate } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -41,15 +42,15 @@ const RESOURCES_QUERY_ID = 'project-endible-resources';
 const StateField = ({ row, projectDate }: { row; projectDate: DateTime }) => {
   const date = parseDate(row.end_date);
   return date.hasSame(projectDate, 'day') ? (
-    <Badge variant="success" size="sm" pill outline>
+    <Badge variant="success" size="sm" shape="pill" tone="outline">
       {translate('Aligned')}
     </Badge>
   ) : date > projectDate ? (
-    <Badge variant="danger" size="sm" pill outline>
+    <Badge variant="danger" size="sm" shape="pill" tone="outline">
       {translate('After project')}
     </Badge>
   ) : (
-    <Badge variant="warning" size="sm" pill outline>
+    <Badge variant="warning" size="sm" shape="pill" tone="outline">
       {translate('Before project')}
     </Badge>
   );

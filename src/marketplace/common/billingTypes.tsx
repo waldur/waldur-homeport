@@ -5,7 +5,8 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -106,10 +107,10 @@ export const BillingTypeBadge: FC<BillingTypeBadgeProps> = ({
   // neutral by name but derives from the runtime brand ramp.
   return (
     <Badge
-      variant="default"
+      variant="neutral"
       size="sm"
-      pill
-      outline
+      shape="pill"
+      tone="outline"
       tooltip={tooltip}
       tooltipProps={{ autoWidth: true }}
       className={className}

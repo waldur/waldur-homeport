@@ -18,8 +18,9 @@ import {
 } from 'react-bootstrap';
 import { projectsList } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getNextPageUrl } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
 import { useCustomer } from '@/workspace/hooks';
@@ -228,7 +229,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                     {p.is_in_grace_period && (
                       <Badge
                         variant="warning"
-                        outline
+                        tone="outline"
                         className="ms-2"
                         style={{ fontSize: '0.7em' }}
                       >
@@ -237,8 +238,8 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                     )}
                     {p.is_expired && !p.is_in_grace_period && (
                       <Badge
-                        variant="default"
-                        outline
+                        variant="neutral"
+                        tone="outline"
                         className="ms-2"
                         style={{ fontSize: '0.7em' }}
                       >

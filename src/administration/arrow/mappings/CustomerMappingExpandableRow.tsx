@@ -2,7 +2,8 @@ import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -126,11 +127,11 @@ export const CustomerMappingExpandableRow: FC<
                       </td>
                       <td>
                         {inBilling ? (
-                          <Badge variant="success" outline>
+                          <Badge variant="success" tone="outline">
                             {translate('Yes')}
                           </Badge>
                         ) : (
-                          <Badge variant="default" outline>
+                          <Badge variant="neutral" tone="outline">
                             {translate('No')}
                           </Badge>
                         )}

@@ -2,7 +2,8 @@ import { FC, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import { OrderDetails } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
@@ -77,7 +78,7 @@ const NestedKeyValueTable: FC<{
 
 /** Tab counter, same treatment the global search popover gives its tabs. */
 const TabCount: FC<{ count: number }> = ({ count }) => (
-  <Badge variant="default" pill outline className="ms-2">
+  <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
     {count}
   </Badge>
 );

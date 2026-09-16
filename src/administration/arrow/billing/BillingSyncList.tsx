@@ -1,7 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import { adminArrowBillingSyncsList, ArrowBillingSync } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -98,8 +99,8 @@ export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
             render: ({ row }) => (
               <Badge
                 variant={getBillingSyncStateVariant(row.state)}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {getBillingSyncStateLabel(row.state)}
               </Badge>

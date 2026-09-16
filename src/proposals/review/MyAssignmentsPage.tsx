@@ -9,8 +9,8 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -46,7 +46,7 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} size="sm" pill outline>
+    <Badge variant={variant} size="sm" shape="pill" tone="outline">
       {statusDisplay}
     </Badge>
   );
@@ -149,7 +149,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
                 <td>
                   {item.has_coi ? (
                     <span className="d-inline-flex align-items-center gap-1">
-                      <Badge variant="danger" size="sm" outline>
+                      <Badge variant="danger" size="sm" tone="outline">
                         {translate('COI detected')}
                       </Badge>
                       <Tooltip
@@ -202,7 +202,7 @@ const BatchStatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} size="sm" pill outline>
+    <Badge variant={variant} size="sm" shape="pill" tone="outline">
       {statusDisplay}
     </Badge>
   );
@@ -284,7 +284,7 @@ export const MyAssignmentsPage: FC = () => {
                 {row.expires_at ? formatDateTime(row.expires_at) : '-'}
                 {row.is_expired && (
                   <span className="d-inline-flex align-items-center gap-1 ms-1">
-                    <Badge variant="danger" size="sm" outline>
+                    <Badge variant="danger" size="sm" tone="outline">
                       {translate('Expired')}
                     </Badge>
                     <Tooltip

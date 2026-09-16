@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
@@ -32,7 +33,7 @@ const StructuredEntry = ({ entry }: { entry: ParsedInternalNote }) => (
       </div>
     )}
     {entry.action && (
-      <Badge variant="default" outline className="flex-shrink-0">
+      <Badge variant="neutral" tone="outline" className="flex-shrink-0">
         {entry.action}
       </Badge>
     )}

@@ -51,8 +51,8 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
                 ? 'warning'
                 : 'primary'
           }
-          outline
-          pill
+          tone="outline"
+          shape="pill"
         />
       ),
     },

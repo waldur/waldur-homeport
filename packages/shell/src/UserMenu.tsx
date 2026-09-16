@@ -112,8 +112,8 @@ export function UserMenu() {
                 // Badge grew a real variant/tone system.
                 <Badge
                   variant="purple"
+                  shape="pill"
                   tone="outline"
-                  pill
                   className="mt-0.5 px-1.5 py-0"
                 >
                   {translate('Staff')}

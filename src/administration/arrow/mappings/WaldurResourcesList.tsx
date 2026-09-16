@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { WaldurResourceForLinking } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -17,7 +18,7 @@ export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
     <Card.Header>
       <h5 className="mb-0">
         {translate('Waldur Resources')}
-        <Badge variant="default" outline className="ms-2">
+        <Badge variant="neutral" tone="outline" className="ms-2">
           {resources?.length || 0}
         </Badge>
       </h5>
@@ -58,7 +59,7 @@ export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
                   </td>
                   <td>
                     <Badge
-                      bg={
+                      variant={
                         resource.state === 'OK'
                           ? 'success'
                           : resource.state === 'Erred'

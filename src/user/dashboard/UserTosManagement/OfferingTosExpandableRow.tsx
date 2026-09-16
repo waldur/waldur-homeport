@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -46,7 +47,12 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
         title: (
           <>
             {translate('Resources')}
-            <Badge variant="default" pill outline className="ms-2">
+            <Badge
+              variant="neutral"
+              shape="pill"
+              tone="outline"
+              className="ms-2"
+            >
               {resourcesCountQuery.isLoading ? (
                 <LoadingSpinnerSimple />
               ) : (

@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import { usersDataAccessHistoryList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -86,8 +87,8 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
         render: ({ row }: { row: DataAccessHistoryEntry }) => (
           <Badge
             variant={getAccessorTypeBadgeVariant(row.accessor_type)}
-            pill
-            outline
+            shape="pill"
+            tone="outline"
           >
             {getAccessorCategory(row.accessor_type)}
           </Badge>
@@ -98,7 +99,12 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
         render: ({ row }: { row: DataAccessHistoryEntry }) => (
           <div className="d-flex flex-wrap gap-1">
             {row.accessed_fields.map((field) => (
-              <Badge key={field} variant="secondary" pill outline>
+              <Badge
+                key={field}
+                variant="secondary"
+                shape="pill"
+                tone="outline"
+              >
                 {formatFieldName(field)}
               </Badge>
             ))}

@@ -10,7 +10,8 @@ import {
   openstackPortsRetrieve,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
 import { ResourceSummary } from '@/resource/summary/ResourceSummary';
@@ -143,8 +144,8 @@ export const TenantPortsList: FunctionComponent<{
             return (
               <Badge
                 variant={category.variant}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
                 tooltip={row.device_owner}
               >
                 {category.label}
@@ -158,8 +159,8 @@ export const TenantPortsList: FunctionComponent<{
           render: ({ row }) => (
             <Badge
               variant={row.status === 'ACTIVE' ? 'success' : 'warning'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {row.status}
             </Badge>
@@ -170,8 +171,8 @@ export const TenantPortsList: FunctionComponent<{
           render: ({ row }) => (
             <Badge
               variant={row.admin_state_up ? 'success' : 'warning'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {row.admin_state_up ? translate('Active') : translate('Inactive')}
             </Badge>
@@ -182,8 +183,8 @@ export const TenantPortsList: FunctionComponent<{
           render: ({ row }) => (
             <Badge
               variant={row.port_security_enabled ? 'success' : 'danger'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {row.port_security_enabled ? translate('Yes') : translate('No')}
             </Badge>

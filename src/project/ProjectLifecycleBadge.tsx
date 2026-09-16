@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 const APPROACHING_DAYS = 30;
@@ -43,7 +44,13 @@ export const ProjectLifecycleBadge: FC<ProjectLifecycleBadgeProps> = ({
       Math.ceil((effectiveEndDateObj.getTime() - today.getTime()) / 86400000),
     );
     return (
-      <Badge variant="warning" size="sm" pill outline className={className}>
+      <Badge
+        variant="warning"
+        size="sm"
+        shape="pill"
+        tone="outline"
+        className={className}
+      >
         {translate('In grace, {n}d left', { n: String(daysLeft) })}
       </Badge>
     );
@@ -51,7 +58,13 @@ export const ProjectLifecycleBadge: FC<ProjectLifecycleBadgeProps> = ({
 
   if (effectiveEndDateObj < today) {
     return (
-      <Badge variant="danger" size="sm" pill outline className={className}>
+      <Badge
+        variant="danger"
+        size="sm"
+        shape="pill"
+        tone="outline"
+        className={className}
+      >
         {translate('Expired')}
       </Badge>
     );
@@ -62,7 +75,13 @@ export const ProjectLifecycleBadge: FC<ProjectLifecycleBadgeProps> = ({
   );
   if (daysToEnd >= 0 && daysToEnd <= APPROACHING_DAYS) {
     return (
-      <Badge variant="warning" size="sm" pill outline className={className}>
+      <Badge
+        variant="warning"
+        size="sm"
+        shape="pill"
+        tone="outline"
+        className={className}
+      >
         {daysToEnd === 0
           ? translate('Ends today')
           : translate('Ends in {n}d', { n: String(daysToEnd) })}

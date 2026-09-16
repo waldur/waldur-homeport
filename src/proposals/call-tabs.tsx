@@ -1,17 +1,19 @@
 import { FC } from 'react';
 import { CallStates } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { TableTab } from '@/table/types';
 
 import { CallState } from './types';
 
-export const CALL_STATE_VARIANT: Record<CallState, string> = {
+export const CALL_STATE_VARIANT: Record<CallState, BadgeVariant> = {
   active: 'success',
   draft: 'warning',
-  archived: 'gray',
+  archived: 'neutral',
 };
 
 interface CallCounts {
@@ -64,7 +66,7 @@ const TabTitle: FC<{ label: string; count?: number }> = ({ label, count }) => (
   <span className="d-flex align-items-center gap-2">
     {label}
     {typeof count === 'number' && (
-      <Badge variant="secondary" size="sm" pill outline>
+      <Badge variant="secondary" size="sm" shape="pill" tone="outline">
         {count}
       </Badge>
     )}

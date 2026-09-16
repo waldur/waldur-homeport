@@ -2,8 +2,8 @@ import { FunctionComponent, useMemo } from 'react';
 import { marketplaceOfferingUsersList } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -151,13 +151,13 @@ export const ProviderOfferingUsersList: FunctionComponent<
           render: ({ row }) => {
             if (row.has_consent) {
               return (
-                <Badge variant="success" pill outline>
+                <Badge variant="success" shape="pill" tone="outline">
                   {translate('Accepted')}
                 </Badge>
               );
             }
             return (
-              <Badge variant="warning" pill outline>
+              <Badge variant="warning" shape="pill" tone="outline">
                 {translate('Not accepted')}
               </Badge>
             );
@@ -177,7 +177,7 @@ export const ProviderOfferingUsersList: FunctionComponent<
           render: ({ row }) => {
             if (row.is_profile_complete) {
               return (
-                <Badge variant="success" pill outline>
+                <Badge variant="success" shape="pill" tone="outline">
                   {translate('Complete')}
                 </Badge>
               );
@@ -193,7 +193,7 @@ export const ProviderOfferingUsersList: FunctionComponent<
               })
               .join(', ');
             const badge = (
-              <Badge variant="warning" pill outline>
+              <Badge variant="warning" shape="pill" tone="outline">
                 {translate('Incomplete')}
               </Badge>
             );

@@ -1,4 +1,4 @@
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 import { formatProposalState } from '../utils';
 
@@ -14,7 +14,7 @@ const stateColorMapping = {
 export const ProposalBadge = ({ state }) => {
   const variant = stateColorMapping[state] || 'default';
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {formatProposalState(state)}
     </Badge>
   );

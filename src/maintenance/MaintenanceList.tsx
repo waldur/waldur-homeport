@@ -5,7 +5,8 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -70,7 +71,7 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
         render: ({ row }) => {
           const state = getMaintenanceState(row.state);
           return (
-            <Badge variant={state.color} size="sm" pill outline>
+            <Badge variant={state.color} size="sm" shape="pill" tone="outline">
               {state.label}
             </Badge>
           );

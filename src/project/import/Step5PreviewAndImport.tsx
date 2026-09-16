@@ -12,8 +12,8 @@ import { useFormState } from 'react-final-form';
 import { Project, Resource } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDate, parseDate } from '@/core/dateUtils';
 import { truncate } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
@@ -200,8 +200,8 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
           return (
             <Badge
               variant={isOk && row.name ? 'success' : 'danger'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {!row.name
                 ? translate('Missing name')

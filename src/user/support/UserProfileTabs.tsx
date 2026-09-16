@@ -1,7 +1,7 @@
 import { Fragment, ReactNode, useCallback, useMemo } from 'react';
 import { User } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Badge, Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -109,22 +109,30 @@ const TabBadge = ({ stats }: { stats: TabStats; tabKey?: string }) => {
           fields: stats.missingMandatoryFields.join(', '),
         })}
       >
-        <span
+        <Badge
           data-testid="tab-badge-danger"
-          className="badge badge-sm badge-circle badge-danger ms-2"
+          variant="danger"
+          size="sm"
+          shape="circle"
+          tone="solid"
+          className="ms-2"
         >
           {stats.missingMandatory}
-        </span>
+        </Badge>
       </Tooltip>
     );
   }
   return (
-    <span
-      className="badge badge-sm badge-circle badge-light ms-2"
+    <Badge
+      variant="neutral"
+      size="sm"
+      shape="circle"
+      tone="light"
+      className="ms-2"
       data-testid="tab-badge-total"
     >
       {stats.total}
-    </span>
+    </Badge>
   );
 };
 
@@ -531,9 +539,9 @@ const buildGeographicFields = ({
               Array.isArray(value) && value.length > 0 ? (
                 <span className="d-flex flex-wrap gap-2">
                   {(value as string[]).map((code) => (
-                    <span key={code} className="badge badge-light">
+                    <Badge key={code} variant="neutral" tone="light">
                       <CountryFlag countryCode={code} fontSize={14} /> {code}
-                    </span>
+                    </Badge>
                   ))}
                 </span>
               ) : null)
@@ -811,9 +819,9 @@ const buildSystemFields = ({
                 ? user.eduperson_assurance
                 : []
               ).map((uri) => (
-                <span key={uri} className="badge badge-light-info">
+                <Badge key={uri} variant="info" tone="light">
                   {formatAssuranceUri(uri)}
-                </span>
+                </Badge>
               ))}
             </span>
           }

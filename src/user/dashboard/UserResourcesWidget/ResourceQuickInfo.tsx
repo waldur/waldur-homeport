@@ -98,7 +98,12 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
               {resource.offering_name} ({resource.category_title})
             </small>
           </div>
-          <ResourceStateField resource={resource} pill outline size="sm" />
+          <ResourceStateField
+            resource={resource}
+            shape="pill"
+            tone="outline"
+            size="sm"
+          />
         </div>
 
         {/* Offering description */}

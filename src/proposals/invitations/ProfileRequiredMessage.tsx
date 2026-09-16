@@ -2,6 +2,8 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -37,21 +39,27 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
         </p>
         <div className="d-flex flex-column align-items-center gap-4">
           <div className="d-flex align-items-center gap-3">
-            <div
-              className={`badge ${hasProfile ? 'bg-success' : 'bg-secondary'} rounded-circle p-2`}
+            <Badge
+              variant={hasProfile ? 'success' : 'secondary'}
+              shape="circle"
+              tone="solid"
+              className="p-2"
             >
               {hasProfile ? '✓' : '1'}
-            </div>
+            </Badge>
             <span className={hasProfile ? 'text-success' : ''}>
               {translate('Create your reviewer profile')}
             </span>
           </div>
           <div className="d-flex align-items-center gap-3">
-            <div
-              className={`badge ${isPublished ? 'bg-success' : 'bg-secondary'} rounded-circle p-2`}
+            <Badge
+              variant={isPublished ? 'success' : 'secondary'}
+              shape="circle"
+              tone="solid"
+              className="p-2"
             >
               {isPublished ? '✓' : '2'}
-            </div>
+            </Badge>
             <span className={isPublished ? 'text-success' : ''}>
               {translate('Publish your profile')}
             </span>

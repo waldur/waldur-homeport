@@ -13,7 +13,8 @@ import {
   type RuleTestMatchResponse,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { SubmitButton, AsyncSelectGroup } from '@/form';
@@ -243,11 +244,11 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
         <dt className="col-sm-4">{translate('Details protected')}</dt>
         <dd className="col-sm-8">
           {result.user_is_protected ? (
-            <Badge variant="purple" outline>
+            <Badge variant="purple" tone="outline">
               {translate('Yes')}
             </Badge>
           ) : (
-            <Badge variant="default" outline>
+            <Badge variant="neutral" tone="outline">
               {translate('No')}
             </Badge>
           )}

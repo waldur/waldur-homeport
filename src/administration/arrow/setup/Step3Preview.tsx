@@ -4,7 +4,8 @@ import { Alert, Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { adminArrowSettingsSaveSettings } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { ExternalLink } from '@/core/ExternalLink';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
@@ -194,15 +195,15 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
                     </td>
                     <td>
                       {et.recommended ? (
-                        <Badge variant="success" pill outline>
+                        <Badge variant="success" shape="pill" tone="outline">
                           {translate('Recommended')}
                         </Badge>
                       ) : et.compatible ? (
-                        <Badge variant="primary" pill outline>
+                        <Badge variant="primary" shape="pill" tone="outline">
                           {translate('Compatible')}
                         </Badge>
                       ) : (
-                        <Badge variant="danger" pill outline>
+                        <Badge variant="danger" shape="pill" tone="outline">
                           {translate('Missing fields')}
                         </Badge>
                       )}

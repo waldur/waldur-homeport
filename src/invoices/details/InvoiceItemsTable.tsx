@@ -1,7 +1,8 @@
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { invoicesItemsRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -170,10 +171,10 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
           {translate('Invoice no.')} {invoice.number}
           {!invoiceView && customer.agreement_number && (
             <Badge
-              variant="default"
+              variant="neutral"
               size="sm"
-              pill
-              outline
+              shape="pill"
+              tone="outline"
               className="fw-bold ms-2"
             >
               {translate('Agreement no:')} {customer.agreement_number}

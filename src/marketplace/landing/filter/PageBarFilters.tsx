@@ -2,7 +2,8 @@ import { XIcon } from '@phosphor-icons/react';
 import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { CompactActionButton } from '@/table/CompactActionButton';
@@ -32,14 +33,14 @@ export const PageBarFilters = () => {
             >
               {item.label}
               <Badge
-                variant="default"
+                variant="neutral"
                 rightIcon={
                   <RemoveFilterBadgeButton
                     onClick={() => removeFilter(item.name)}
                   />
                 }
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {item.getValueLabel
                   ? item.getValueLabel(item.value)

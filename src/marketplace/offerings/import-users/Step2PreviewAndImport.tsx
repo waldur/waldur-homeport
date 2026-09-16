@@ -8,9 +8,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { BadgeVariant, Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { truncate } from '@/core/utils';
 import { deleteDuplicateRecords } from '@/customer/import/utils';
 import { FieldErrorMessage } from '@/form/FieldError';
@@ -35,8 +35,8 @@ const getStatusMessages = () => ({
   created: translate('Created'),
   erred: translate('Erred'),
 });
-const statusColors = {
-  ready: 'default',
+const statusColors: Record<RecordStatus['status'], BadgeVariant> = {
+  ready: 'neutral',
   created: 'success',
   erred: 'danger',
 };
@@ -56,13 +56,17 @@ const StatusField = ({
         status.status === 'erred' && <FieldErrorMessage error={status.error} />
       }
     >
-      <Badge variant={statusColors[status.status]} pill outline>
+      <Badge variant={statusColors[status.status]} shape="pill" tone="outline">
         {statusMessages[status.status]}
       </Badge>
     </Tooltip>
   ) : (
     <Tooltip label={validate.reason[0]}>
-      <Badge variant={validate.valid ? 'default' : 'danger'} pill outline>
+      <Badge
+        variant={validate.valid ? 'neutral' : 'danger'}
+        shape="pill"
+        tone="outline"
+      >
         {validate.valid
           ? translate('Ready')
           : statusMessages[validate.errors[0]]}

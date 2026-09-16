@@ -6,9 +6,9 @@ import {
   OnboardingVerificationStatusEnum,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { BadgeVariant, Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -24,7 +24,7 @@ import { OnboardingVerificationExpandableRow } from './OnboardingVerificationExp
 const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
   status,
 }) => {
-  const statusColors = {
+  const statusColors: Record<OnboardingVerificationStatusEnum, BadgeVariant> = {
     pending: 'warning',
     verified: 'success',
     failed: 'danger',
@@ -33,7 +33,7 @@ const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
   };
   const color = statusColors[status] || 'secondary';
   return (
-    <Badge variant={color} pill outline>
+    <Badge variant={color} shape="pill" tone="outline">
       {status}
     </Badge>
   );

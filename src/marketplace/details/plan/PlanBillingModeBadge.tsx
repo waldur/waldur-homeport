@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 import { getPlanBillingModeLabel, PlanBilling } from './billingMode';
 
@@ -24,8 +24,8 @@ export const PlanBillingModeBadge: FC<{
     <Badge
       variant={VARIANTS[mode]}
       size={size}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
       className={className}
     >
       {getPlanBillingModeLabel(mode)}

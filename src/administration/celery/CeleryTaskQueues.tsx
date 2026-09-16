@@ -6,8 +6,9 @@ import {
   CeleryTask,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 
 import { CeleryTaskTable } from './CeleryTaskTable';
@@ -78,7 +79,12 @@ export const CeleryTaskQueues = ({
             <Nav.Item key={tab.key} className="text-nowrap">
               <Nav.Link as="button" eventKey={tab.key} className="py-4">
                 {tab.title}
-                <Badge variant={tab.variant} size="sm" light className="ms-2">
+                <Badge
+                  variant={tab.variant}
+                  size="sm"
+                  tone="light"
+                  className="ms-2"
+                >
                   {tab.count}
                 </Badge>
               </Nav.Link>

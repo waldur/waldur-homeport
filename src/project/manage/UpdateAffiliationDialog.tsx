@@ -11,7 +11,8 @@ import {
   projectsUpdateAffiliation,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -124,7 +125,12 @@ export const UpdateAffiliationDialog: FunctionComponent<
           <span>
             {row.name}
             {isStaff && customerDefaultUuids.has(row.uuid) && (
-              <Badge variant="info" pill outline className="ms-2">
+              <Badge
+                variant="info"
+                shape="pill"
+                tone="outline"
+                className="ms-2"
+              >
                 {translate('Default')}
               </Badge>
             )}

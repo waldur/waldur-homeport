@@ -10,7 +10,7 @@ export const OwnReviewStateRenderer = (props) => (
   <StateIndicator
     variant={getReviewStateBadgeVariant(props.row.state)}
     label={formatOwnReviewState(props.row.state)}
-    outline
-    pill
+    tone="outline"
+    shape="pill"
   />
 );

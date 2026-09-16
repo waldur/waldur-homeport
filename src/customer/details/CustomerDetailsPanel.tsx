@@ -6,7 +6,7 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Badge, Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -41,9 +41,15 @@ import { CustomerEditPanelProps } from './types';
 
 const TabBadge = ({ count }: { count: number; tabKey?: string }) => (
   <Tooltip label={translate('{count} fields', { count })}>
-    <span className="badge badge-sm badge-circle badge-light ms-2">
+    <Badge
+      variant="neutral"
+      size="sm"
+      shape="circle"
+      tone="light"
+      className="ms-2"
+    >
       {count}
-    </span>
+    </Badge>
   </Tooltip>
 );
 

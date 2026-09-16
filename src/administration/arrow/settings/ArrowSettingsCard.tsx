@@ -2,7 +2,8 @@ import { useCallback } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import type { ArrowSettings } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDateTime } from '@/core/dateUtils';
 import { ExternalLink } from '@/core/ExternalLink';
@@ -184,10 +185,10 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 <td>
                   <Badge
                     variant={
-                      currentSettings.sync_enabled ? 'success' : 'default'
+                      currentSettings.sync_enabled ? 'success' : 'neutral'
                     }
-                    pill
-                    outline
+                    shape="pill"
+                    tone="outline"
                   >
                     {currentSettings.sync_enabled
                       ? translate('Yes')

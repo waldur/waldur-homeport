@@ -4,7 +4,8 @@ import {
   marketplaceOfferingTermsOfServiceList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
@@ -27,7 +28,12 @@ export const OrderDetailsQuickBody = ({
       <Field
         label={translate('Type')}
         value={
-          <Badge variant={typeBadge.variant} size="sm" pill outline>
+          <Badge
+            variant={typeBadge.variant}
+            size="sm"
+            shape="pill"
+            tone="outline"
+          >
             {typeBadge.label}
           </Badge>
         }

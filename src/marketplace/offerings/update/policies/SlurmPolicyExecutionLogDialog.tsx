@@ -7,7 +7,9 @@ import {
   SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -24,7 +26,7 @@ const UsagePercentageBadge: FC<{ value: number; graceLimit: number }> = ({
   value,
   graceLimit,
 }) => {
-  let variant = 'success';
+  let variant: BadgeVariant = 'success';
   if (value >= graceLimit) {
     variant = 'danger';
   } else if (value >= 100) {
@@ -33,14 +35,14 @@ const UsagePercentageBadge: FC<{ value: number; graceLimit: number }> = ({
     variant = 'info';
   }
   return (
-    <Badge variant={variant} size="sm" pill outline>
+    <Badge variant={variant} size="sm" shape="pill" tone="outline">
       {value.toFixed(1)}%
     </Badge>
   );
 };
 
 const ActionBadge: FC<{ action: string }> = ({ action }) => {
-  const variantMap: Record<string, string> = {
+  const variantMap: Record<string, BadgeVariant> = {
     pause: 'danger',
     downscale: 'warning',
     notify: 'info',
@@ -49,8 +51,8 @@ const ActionBadge: FC<{ action: string }> = ({ action }) => {
     <Badge
       variant={variantMap[action] || 'secondary'}
       size="sm"
-      pill
-      outline
+      shape="pill"
+      tone="outline"
       className="me-1"
     >
       {action}
@@ -64,27 +66,27 @@ const SiteAgentStatusBadge: FC<{
 }> = ({ sent, confirmed }) => {
   if (!sent) {
     return (
-      <Badge variant="secondary" size="sm" pill outline>
+      <Badge variant="secondary" size="sm" shape="pill" tone="outline">
         {translate('N/A')}
       </Badge>
     );
   }
   if (confirmed === null) {
     return (
-      <Badge variant="warning" size="sm" pill outline>
+      <Badge variant="warning" size="sm" shape="pill" tone="outline">
         {translate('Pending')}
       </Badge>
     );
   }
   if (confirmed) {
     return (
-      <Badge variant="success" size="sm" pill outline>
+      <Badge variant="success" size="sm" shape="pill" tone="outline">
         {translate('OK')}
       </Badge>
     );
   }
   return (
-    <Badge variant="danger" size="sm" pill outline>
+    <Badge variant="danger" size="sm" shape="pill" tone="outline">
       {translate('Failed')}
     </Badge>
   );
@@ -223,7 +225,12 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
             <tr key={cmd.uuid}>
               <td className="text-nowrap">{formatDateTime(cmd.executed_at)}</td>
               <td>
-                <Badge variant="secondary" size="sm" pill outline>
+                <Badge
+                  variant="secondary"
+                  size="sm"
+                  shape="pill"
+                  tone="outline"
+                >
                   {cmd.command_type}
                 </Badge>
               </td>
@@ -236,19 +243,24 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
                     cmd.execution_mode === 'production' ? 'primary' : 'info'
                   }
                   size="sm"
-                  pill
-                  outline
+                  shape="pill"
+                  tone="outline"
                 >
                   {cmd.execution_mode}
                 </Badge>
               </td>
               <td>
                 {cmd.success ? (
-                  <Badge variant="success" size="sm" pill outline>
+                  <Badge
+                    variant="success"
+                    size="sm"
+                    shape="pill"
+                    tone="outline"
+                  >
                     {translate('OK')}
                   </Badge>
                 ) : (
-                  <Badge variant="danger" size="sm" pill outline>
+                  <Badge variant="danger" size="sm" shape="pill" tone="outline">
                     {translate('Failed')}
                   </Badge>
                 )}

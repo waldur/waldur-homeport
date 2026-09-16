@@ -1,5 +1,4 @@
 import enforceActionsDropdownInTables from './rules/enforce-actions-dropdown-in-tables.js';
-import enforceBadgeDesignTokens from './rules/enforce-badge-design-tokens.js';
 import enforceBadgeIconPatterns from './rules/enforce-badge-icon-patterns.js';
 import enforceBadgePropsConsistency from './rules/enforce-badge-props-consistency.js';
 import enforceBadgeRightIconPattern from './rules/enforce-badge-right-icon-pattern.js';
@@ -34,7 +33,6 @@ export default {
     'enforce-actions-dropdown-in-tables': enforceActionsDropdownInTables,
     'enforce-badge-icon-patterns': enforceBadgeIconPatterns,
     'enforce-badge-props-consistency': enforceBadgePropsConsistency,
-    'enforce-badge-design-tokens': enforceBadgeDesignTokens,
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
     'enforce-button-variants': enforceButtonVariants,

@@ -5,7 +5,8 @@ import {
   ResourceProject,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -30,7 +31,7 @@ const NameCell: FC<{ row: ResourceProject }> = ({ row }) =>
   row.is_removed ? (
     <span className="text-muted">
       <s>{row.name}</s>{' '}
-      <Badge variant="danger" pill outline className="fs-8 ms-1">
+      <Badge variant="danger" shape="pill" tone="outline" className="fs-8 ms-1">
         {translate('Removed')}
       </Badge>
     </span>

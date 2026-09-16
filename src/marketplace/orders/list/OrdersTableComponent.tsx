@@ -5,7 +5,8 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -130,7 +131,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
     {
       title: translate('State'),
       render: ({ row }) => (
-        <OrderStateField order={row} pill outline hasBullet />
+        <OrderStateField order={row} shape="pill" tone="outline" hasBullet />
       ),
       orderField: 'state',
       keys: ['state'],
@@ -205,7 +206,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
           <span className="d-inline-flex align-items-center gap-2">
             {name}
             {row.auto_approved ? (
-              <Badge variant="purple" pill outline>
+              <Badge variant="purple" shape="pill" tone="outline">
                 {translate('Auto-approved')}
               </Badge>
             ) : null}

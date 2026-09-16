@@ -1,6 +1,7 @@
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
@@ -36,8 +37,8 @@ export const BillingSyncStatusCard = () => {
             </div>
             <Badge
               variant={settings.sync_enabled ? 'success' : 'warning'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {settings.sync_enabled
                 ? translate('Enabled')

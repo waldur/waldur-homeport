@@ -2,8 +2,8 @@ import { FC, useMemo } from 'react';
 import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -42,7 +42,7 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} size="sm" pill outline>
+    <Badge variant={variant} size="sm" shape="pill" tone="outline">
       {statusDisplay}
     </Badge>
   );
@@ -101,14 +101,14 @@ export const MyCallsPage: FC = () => {
             <div className="d-flex gap-1">
               {inProgress > 0 && (
                 <Tooltip label={translate('In progress')}>
-                  <Badge variant="warning" pill outline>
+                  <Badge variant="warning" shape="pill" tone="outline">
                     {inProgress}
                   </Badge>
                 </Tooltip>
               )}
               {completed > 0 && (
                 <Tooltip label={translate('Completed')}>
-                  <Badge variant="success" pill outline>
+                  <Badge variant="success" shape="pill" tone="outline">
                     {completed}
                   </Badge>
                 </Tooltip>
@@ -142,21 +142,21 @@ export const MyCallsPage: FC = () => {
             <div className="d-flex gap-1">
               {bySeverity.real > 0 && (
                 <Tooltip label={translate('Real')}>
-                  <Badge variant="danger" pill outline>
+                  <Badge variant="danger" shape="pill" tone="outline">
                     {bySeverity.real}
                   </Badge>
                 </Tooltip>
               )}
               {bySeverity.apparent > 0 && (
                 <Tooltip label={translate('Apparent')}>
-                  <Badge variant="warning" pill outline>
+                  <Badge variant="warning" shape="pill" tone="outline">
                     {bySeverity.apparent}
                   </Badge>
                 </Tooltip>
               )}
               {bySeverity.potential > 0 && (
                 <Tooltip label={translate('Potential')}>
-                  <Badge variant="info" pill outline>
+                  <Badge variant="info" shape="pill" tone="outline">
                     {bySeverity.potential}
                   </Badge>
                 </Tooltip>

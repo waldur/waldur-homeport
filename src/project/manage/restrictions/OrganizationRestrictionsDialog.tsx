@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { Customer } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getRestrictionsArray } from '@/core/restrictions';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -31,9 +33,9 @@ const RestrictionsDisplay: FC<{
       <strong>{title}:</strong>
       <div className="d-flex flex-wrap gap-2 mt-2">
         {values.map((value) => (
-          <span key={value} className="badge badge-light">
+          <Badge key={value} variant="neutral" tone="light">
             {value}
-          </span>
+          </Badge>
         ))}
       </div>
     </div>

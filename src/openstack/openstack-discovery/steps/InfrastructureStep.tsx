@@ -10,7 +10,8 @@ import {
   openstackDiscoveryDiscoverVolumeTypes,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatFilesize } from '@/core/utils';
 import { SelectField } from '@/form';
@@ -198,7 +199,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                         <h5 className="mb-1">
                           {network.name}{' '}
                           {network.is_shared && (
-                            <Badge variant="purple" outline>
+                            <Badge variant="purple" tone="outline">
                               {translate('Shared')}
                             </Badge>
                           )}

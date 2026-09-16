@@ -3,7 +3,8 @@ import { DateTime } from 'luxon';
 import { FC, useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SummaryWidget } from '@/core/SummaryWidget';
@@ -68,12 +69,11 @@ export const GrowthPage: FC = () => {
             badgeColors.css reproduces Metronic's bug where its text and
             background are the same colour, so "+0" renders as an empty pill. */}
         <Badge
-          variant={grew ? 'success' : 'default'}
+          variant={grew ? 'success' : 'neutral'}
           size="sm"
           leftIcon={grew ? <TrendUpIcon weight="bold" /> : undefined}
-          pill
-          outline={!grew}
-          light={grew}
+          shape="pill"
+          tone={grew ? 'light' : 'outline'}
         >
           {`+${count}`}
         </Badge>

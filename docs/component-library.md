@@ -788,7 +788,7 @@ import { BaseButton } from '@/core/buttons/BaseButton';
 #### Badge
 
 ```ts
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 ```
 
 | Prop           | Type                                                                                            | Required | Default | Description                  |

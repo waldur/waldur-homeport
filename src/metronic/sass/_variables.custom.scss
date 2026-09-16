@@ -374,22 +374,6 @@ $tooltip-color: $text-primary_on-brand !default;
 $tooltip-padding-y: 0.154rem * 4 !default;
 $tooltip-padding-x: 0.154rem * 6 !default;
 
-// Badges
-$badge-font-size: 1.075rem !default;
-$badge-font-size-sm: 0.925rem !default;
-$badge-font-size-lg: 1.075rem !default;
-$badge-font-weight: 500 !default;
-$badge-icon-size: 12px !default;
-$badge-icon-space: 4px !default;
-$badge-bullet-size: 6px !default;
-$badge-bullet-space: 6px !default;
-$badge-padding-y: 1px !default;
-$badge-padding-y-sm: 1px !default; // Custom variable
-$badge-padding-y-lg: 3px !default; // Custom variable
-$badge-padding-x: 9px !default;
-$badge-padding-x-sm: 7px !default; // Custom variable
-$badge-padding-x-lg: 11px !default; // Custom variable
-
 // Breadcrumbs
 $breadcrumb-divider: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="6.26358" y1="18.4759" x2="14.0116" y2="1.86025" stroke="#{$fg-quinary}" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/></svg>') !default;
 $breadcrumb-divider-color: $fg-quinary !default;

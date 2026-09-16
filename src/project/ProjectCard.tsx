@@ -2,7 +2,8 @@ import { useRouter } from '@uirouter/react';
 import { FunctionComponent, MouseEvent, useCallback } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { Link } from '@/core/Link';
@@ -116,8 +117,8 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
                     <Badge
                       variant="secondary"
                       size="sm"
-                      pill
-                      outline
+                      shape="pill"
+                      tone="outline"
                       className="ms-1"
                     >
                       {translate('+{count}d grace', {

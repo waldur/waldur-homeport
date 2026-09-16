@@ -4,7 +4,9 @@ import {
   RemoteProjectAuditEntry,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { DetailsDiff } from '@/openportal/DetailsDiff';
@@ -35,7 +37,7 @@ const eventTypeLabels: Record<RemoteProjectAuditEntry['event_type'], string> = {
 
 const eventTypeVariants: Record<
   RemoteProjectAuditEntry['event_type'],
-  'success' | 'danger' | 'warning' | 'info' | 'default'
+  BadgeVariant
 > = {
   award_attempted: 'info',
   award_rejected: 'danger',
@@ -43,7 +45,7 @@ const eventTypeVariants: Record<
   award_updated: 'info',
   award_update_confirmed: 'success',
   award_update_rejected: 'danger',
-  state_changed: 'default',
+  state_changed: 'neutral',
   resource_deleted: 'danger',
 };
 
@@ -114,7 +116,10 @@ export const RemoteProjectAuditLog = ({
       title: translate('Event'),
       orderField: 'event_type',
       render: ({ row }) => (
-        <Badge variant={eventTypeVariants[row.event_type] || 'default'} pill>
+        <Badge
+          variant={eventTypeVariants[row.event_type] || 'neutral'}
+          shape="pill"
+        >
           {eventTypeLabels[row.event_type] || row.event_type}
         </Badge>
       ),

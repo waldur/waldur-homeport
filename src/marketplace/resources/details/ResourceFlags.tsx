@@ -9,8 +9,8 @@ import {
 import { Resource } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDate, formatMediumDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
@@ -76,7 +76,13 @@ const FlagBadge = ({
   const attribution = getAttribution(resource, field);
 
   const badge = (
-    <Badge variant={variant} size="sm" leftIcon={icon} pill outline>
+    <Badge
+      variant={variant}
+      size="sm"
+      leftIcon={icon}
+      shape="pill"
+      tone="outline"
+    >
       {label}
     </Badge>
   );
@@ -107,7 +113,13 @@ const LifecycleBadge = ({
   tipId?: string;
 }) => (
   <Tooltip label={tooltip}>
-    <Badge variant={variant} size="sm" leftIcon={icon} pill outline>
+    <Badge
+      variant={variant}
+      size="sm"
+      leftIcon={icon}
+      shape="pill"
+      tone="outline"
+    >
       {label}
     </Badge>
   </Tooltip>

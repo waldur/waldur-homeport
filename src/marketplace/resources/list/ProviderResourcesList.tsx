@@ -241,7 +241,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('State'),
-      render: ({ row }) => <ResourceStateField resource={row} pill outline />,
+      render: ({ row }) => (
+        <ResourceStateField resource={row} shape="pill" tone="outline" />
+      ),
       filter: 'state',
       orderField: 'state',
       inlineFilter: (row) => getStates().filter((op) => op.value === row.state),

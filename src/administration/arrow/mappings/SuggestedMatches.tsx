@@ -5,7 +5,8 @@ import {
   LicenseSuggestion,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
@@ -67,7 +68,7 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
       <Card.Header>
         <h5 className="mb-0">
           {translate('Suggested Matches')}
-          <Badge bg="primary" className="ms-2">
+          <Badge variant="primary" className="ms-2">
             {suggestions.length}
           </Badge>
         </h5>
@@ -98,7 +99,7 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
                 </td>
                 <td>
                   <Badge
-                    bg={
+                    variant={
                       suggestion.confidence >= 0.8
                         ? 'success'
                         : suggestion.confidence >= 0.5

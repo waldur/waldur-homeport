@@ -7,7 +7,8 @@ import {
 import { FunctionComponent, useMemo } from 'react';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { CustomerPermissionsLogButton } from '@/customer/team/CustomerPermissionsLogButton';
 import { TeamDropdownActions } from '@/customer/team/TeamDropdownActions';
@@ -82,17 +83,17 @@ export const GroupInvitationsList: FunctionComponent = () => {
               <Badge
                 variant="blue"
                 leftIcon={<GlobeSimpleIcon weight="bold" />}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {translate('Public')}
               </Badge>
             ) : (
               <Badge
-                variant="default"
+                variant="neutral"
                 leftIcon={<LockIcon weight="bold" />}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {translate('Private')}
               </Badge>
@@ -107,17 +108,17 @@ export const GroupInvitationsList: FunctionComponent = () => {
               <Badge
                 variant="success"
                 leftIcon={<CheckIcon weight="bold" />}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {translate('Active')}
               </Badge>
             ) : (
               <Badge
-                variant="default"
+                variant="neutral"
                 leftIcon={<XIcon weight="bold" />}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {translate('Inactive')}
               </Badge>

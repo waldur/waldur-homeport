@@ -13,8 +13,9 @@ import { Card, Nav, Tab } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
-import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { SaveButton } from '@/core/SaveButton';
 import { FeaturesDescription } from '@/features/FeaturesDescription';
@@ -291,7 +292,7 @@ export const FeaturesList = () => {
                                 <Badge
                                   variant="secondary"
                                   size="sm"
-                                  light
+                                  tone="light"
                                   className="ms-2"
                                 >
                                   {filteredCount}
@@ -342,9 +343,9 @@ export const FeaturesList = () => {
                                   {tab.title}
                                   {query && (
                                     <Badge
-                                      variant="default"
+                                      variant="neutral"
                                       size="sm"
-                                      outline
+                                      tone="outline"
                                       className="ms-2"
                                     >
                                       {filteredCount}
@@ -373,7 +374,7 @@ export const FeaturesList = () => {
                         className="btn btn-flush p-0"
                         onClick={() => handleSelect(tab.key)}
                       >
-                        <Badge variant="default" size="sm" outline>
+                        <Badge variant="neutral" size="sm" tone="outline">
                           {tab.title} ({getFilteredCount(tab.key)})
                         </Badge>
                       </button>

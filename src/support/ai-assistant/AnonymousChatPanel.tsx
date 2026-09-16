@@ -8,8 +8,8 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatUsageValue } from '@/core/formatNumber';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
@@ -346,7 +346,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
           <div className="d-flex align-items-center gap-2">
             <span>{row.offerings_shown ?? 0}</span>
             {Boolean(row.offerings_clicked) && (
-              <Badge variant="success" size="sm" outline>
+              <Badge variant="success" size="sm" tone="outline">
                 {translate('{count} clicks', {
                   count: row.offerings_clicked,
                 })}

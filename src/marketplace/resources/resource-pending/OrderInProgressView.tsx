@@ -3,7 +3,8 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
@@ -108,7 +109,7 @@ export const getSteps = (
           variant="warning"
           size="sm"
           leftIcon={<WarningIcon weight="bold" />}
-          outline
+          tone="outline"
         >
           {translate('Purchase order required')}
         </Badge>,

@@ -1,4 +1,5 @@
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import {
@@ -36,7 +37,7 @@ export const ReviewHeader = ({
       slug={proposal.slug}
       badge={
         <div className="d-flex align-items-center gap-2 flex-wrap">
-          <Badge variant={variant} pill outline>
+          <Badge variant={variant} shape="pill" tone="outline">
             {formatReviewState(review.state)}
           </Badge>
           <WorkflowStepBadge proposalUuid={proposal.uuid} />

@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { Badge, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { supportRequestTypesAdminList } from 'waldur-js-client';
+
+import { Badge } from 'waldur-ui';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -17,7 +19,7 @@ import { RequestTypeRowActions } from './RequestTypeRowActions';
 const requestTypesAdminFetcher = createFetcher(supportRequestTypesAdminList);
 
 const renderSyncStatus = ({ row }: { row: RequestTypeAdmin }) => (
-  <Badge bg={row.is_synced ? 'info' : 'secondary'}>
+  <Badge variant={row.is_synced ? 'info' : 'secondary'}>
     {row.is_synced ? translate('Synced') : translate('Manual')}
   </Badge>
 );
@@ -26,8 +28,8 @@ const renderActiveStatus = ({ row }: { row: RequestTypeAdmin }) => (
   <StateIndicator
     variant={row.is_active ? 'success' : 'warning'}
     label={row.is_active ? translate('Active') : translate('Inactive')}
-    outline
-    pill
+    tone="outline"
+    shape="pill"
   />
 );
 

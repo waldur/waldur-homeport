@@ -5,7 +5,8 @@ import {
   AssignmentBatchList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { SubmitButton, DateTimeGroup } from '@/form';
 import { FormGroup } from '@/form';
@@ -86,7 +87,7 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
                   <div className="form-control-plaintext">
                     {formatDateTime(batch.expires_at)}
                     {batch.is_expired && (
-                      <Badge variant="danger" outline className="ms-2">
+                      <Badge variant="danger" tone="outline" className="ms-2">
                         {translate('Expired')}
                       </Badge>
                     )}

@@ -1,7 +1,8 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import { Resource } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { toPlanBilling } from '@/marketplace/details/plan/billingMode';
@@ -36,14 +37,14 @@ export const ResourcePlanChangeInfo = ({
         valueClass="d-flex align-items-center gap-2"
         value={
           <>
-            <Badge variant="blue" pill outline>
+            <Badge variant="blue" shape="pill" tone="outline">
               {order.old_plan_name}
             </Badge>
             <PlanBillingModeBadge
               mode={toPlanBilling(order.old_plan_billing_mode)}
             />
             <ArrowRightIcon weight="bold" />
-            <Badge variant="warning" pill outline>
+            <Badge variant="warning" shape="pill" tone="outline">
               {order.new_plan_name}
             </Badge>
             <PlanBillingModeBadge

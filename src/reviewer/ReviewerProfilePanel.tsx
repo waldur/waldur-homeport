@@ -8,7 +8,8 @@ import {
   reviewerProfilesUnpublish,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -131,11 +132,11 @@ export const ReviewerProfilePanel = ({
             <div className="d-flex align-items-center gap-2 mb-2">
               <h3 className="mb-0">{translate('Reviewer profile')}</h3>
               {profile.is_published ? (
-                <Badge variant="success" outline>
+                <Badge variant="success" tone="outline">
                   {translate('Published')}
                 </Badge>
               ) : (
-                <Badge variant="default" outline>
+                <Badge variant="neutral" tone="outline">
                   {translate('Not published')}
                 </Badge>
               )}

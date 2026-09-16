@@ -85,7 +85,7 @@ export const VersionHistoryDialog: FunctionComponent<
             <StateIndicator
               label={`${versions.length} ${translate('versions')}`}
               variant="info"
-              outline
+              tone="outline"
             />
           </div>
           <VersionStateAtTimestamp

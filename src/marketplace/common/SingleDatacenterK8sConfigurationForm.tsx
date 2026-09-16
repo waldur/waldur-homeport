@@ -3,9 +3,10 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Alert } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
 import { MAX_PAGE_SIZE } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { FormField } from '@/form/types';
@@ -252,7 +253,13 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
           title={
             <>
               {translate('Datacenter 1')}
-              <Badge variant="default" size="sm" pill outline className="ms-4">
+              <Badge
+                variant="neutral"
+                size="sm"
+                shape="pill"
+                tone="outline"
+                className="ms-4"
+              >
                 {totalResources.totalNodes} nodes, {totalResources.totalVCpus}{' '}
                 vCPUs, {totalResources.totalRam}GB RAM
               </Badge>

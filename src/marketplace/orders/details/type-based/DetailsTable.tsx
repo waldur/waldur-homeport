@@ -2,7 +2,8 @@ import { ArrowUpIcon, ArrowDownIcon } from '@phosphor-icons/react';
 import { createElement, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { Column } from '@/table/types';
 
@@ -29,7 +30,13 @@ export const ValueIndicator = ({
   );
 
   return (
-    <Badge variant={variant} size="sm" leftIcon={icon} pill outline>
+    <Badge
+      variant={variant}
+      size="sm"
+      leftIcon={icon}
+      shape="pill"
+      tone="outline"
+    >
       {value}
     </Badge>
   );

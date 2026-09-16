@@ -91,8 +91,8 @@ export const RabbitMQVhostExpandableRow: FC<
               <StateIndicator
                 label={queueType}
                 variant={variant}
-                pill
-                outline={queueType === 'classic'}
+                shape="pill"
+                tone={queueType === 'classic' ? 'outline' : 'solid'}
               />
             );
           },

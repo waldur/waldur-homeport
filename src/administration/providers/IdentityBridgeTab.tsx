@@ -2,7 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { identityBridgeStatsRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatRelativeWithHour } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -16,7 +18,7 @@ const HealthIndicator: FC<{
   staleCount: number;
   totalCount: number;
 }> = ({ staleCount, totalCount }) => {
-  let variant: string;
+  let variant: BadgeVariant;
   let label: string;
   if (staleCount === 0) {
     variant = 'success';
@@ -29,7 +31,7 @@ const HealthIndicator: FC<{
     label = translate('Unhealthy');
   }
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {label}
     </Badge>
   );

@@ -6,7 +6,8 @@ import {
   ProposalPublicCallsListData,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -100,8 +101,8 @@ const CallColumns = [
     render: ({ row }) => (
       <Badge
         variant={CALL_STATE_VARIANT[row.state] || 'secondary'}
-        pill
-        outline
+        shape="pill"
+        tone="outline"
       >
         {formatCallState(row.state)}
       </Badge>
@@ -136,7 +137,7 @@ const CallColumns = [
     title: translate('Duration'),
     render: ({ row }) =>
       row.fixed_duration_in_days ? (
-        <Badge variant="blue" pill outline>
+        <Badge variant="blue" shape="pill" tone="outline">
           {translate('Fixed - {n} days', {
             n: row.fixed_duration_in_days,
           })}

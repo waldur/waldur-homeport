@@ -6,7 +6,8 @@ import {
 } from 'waldur-js-client';
 import type { NameEnum, SoftwareCatalogDiscover } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -99,11 +100,11 @@ export const SoftwareCatalogDiscoverDialog = () => {
             title: translate('Update available'),
             render: ({ row }) =>
               row.update_available ? (
-                <Badge variant="success" pill outline>
+                <Badge variant="success" shape="pill" tone="outline">
                   {translate('Yes')}
                 </Badge>
               ) : (
-                <Badge variant="default" pill outline>
+                <Badge variant="neutral" shape="pill" tone="outline">
                   {translate('No')}
                 </Badge>
               ),

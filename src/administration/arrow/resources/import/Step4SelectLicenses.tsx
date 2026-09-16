@@ -3,7 +3,8 @@ import { Alert } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { ArrowLicense } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
@@ -116,7 +117,7 @@ const LinkedLicensesTable = ({
           {
             title: '',
             render: () => (
-              <Badge variant="success" outline>
+              <Badge variant="success" tone="outline">
                 {translate('Imported')}
               </Badge>
             ),

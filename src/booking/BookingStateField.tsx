@@ -33,8 +33,8 @@ export const BookingStateField: FunctionComponent<{ row }> = ({ row }) => {
             : 'primary'
       }
       active={state === 'Unconfirmed'}
-      outline
-      pill
+      tone="outline"
+      shape="pill"
     />
   );
 };

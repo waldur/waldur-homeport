@@ -3,8 +3,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Alert } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { FormField } from '@/form/types';
@@ -144,7 +145,13 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
       title={
         <>
           {datacenter.name}
-          <Badge variant="default" size="sm" pill outline className="ms-4">
+          <Badge
+            variant="neutral"
+            size="sm"
+            shape="pill"
+            tone="outline"
+            className="ms-4"
+          >
             {dcResources.totalNodes} nodes, {dcResources.totalVCpus} vCPUs,{' '}
             {dcResources.totalRam}GB RAM
           </Badge>

@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Col, Nav, Row } from 'react-bootstrap';
 
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
-import { Badge } from '@/core/Badge';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -19,15 +21,23 @@ interface PermissionOption {
   value: string;
 }
 
+interface PermissionFieldProps {
+  input: {
+    value: string[];
+    onChange: (value: string[]) => void;
+  };
+}
+
 /**
  * How much of a group is granted, as the light badge tones the design uses:
- * grey when empty, amber when partial, green when complete. `light` rather
- * than `secondary` for the empty case — Waldur's `secondary` is a brand-tinted
- * neutral (--bs-secondary is #f1f7ef), so it reads green, not grey.
+ * grey when empty, amber when partial, green when complete.
  */
-const getCoverage = (selectedCount: number, total: number) =>
+const getCoverage = (
+  selectedCount: number,
+  total: number,
+): { label: string; variant: BadgeVariant } =>
   selectedCount === 0
-    ? { label: translate('None'), variant: 'light' }
+    ? { label: translate('None'), variant: 'neutral' }
     : selectedCount === total
       ? { label: translate('Full'), variant: 'success' }
       : { label: translate('Partial'), variant: 'warning' };
@@ -37,7 +47,7 @@ const getCoverage = (selectedCount: number, total: number) =>
  * 13 groups. Groups run down the left with a None/Partial/Full read-out; the
  * open group's permissions are ticked on the right.
  */
-export const PermissionField = (props) => {
+export const PermissionField = (props: PermissionFieldProps) => {
   // react-final-form hands an empty array field over as '' until it is touched.
   const selected: string[] = useMemo(
     () => (Array.isArray(props.input.value) ? props.input.value : []),
@@ -161,7 +171,12 @@ export const PermissionField = (props) => {
                       className="flex-grow-1 d-flex justify-content-between align-items-center"
                     >
                       {entity.label}
-                      <Badge variant={coverage.variant} size="sm" pill outline>
+                      <Badge
+                        variant={coverage.variant}
+                        size="sm"
+                        shape="pill"
+                        tone="outline"
+                      >
                         {coverage.label}
                       </Badge>
                     </Nav.Link>

@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 export const AssignmentStatusBadge: FC<{
   status: string;
@@ -26,7 +26,7 @@ export const AssignmentStatusBadge: FC<{
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {statusDisplay}
     </Badge>
   );

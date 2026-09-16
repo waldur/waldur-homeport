@@ -6,7 +6,8 @@ import {
   matrixRoomsMembersList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
 import { translate } from '@/i18n';
@@ -24,7 +25,7 @@ const NavItem = ({ title, eventKey, count }) => (
     <Nav.Link eventKey={eventKey}>
       {title}
       {count !== undefined && (
-        <Badge variant="default" pill outline className="ms-2">
+        <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
           {count}
         </Badge>
       )}

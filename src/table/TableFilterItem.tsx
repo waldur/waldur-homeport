@@ -15,8 +15,8 @@ import { useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 
 import { RemoveFilterBadgeButton } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { PopoverMenuContent } from '@/navigation/NavMenu';
@@ -57,14 +57,14 @@ export const TableSidebarFilterValues = ({
           style={!ellipsis ? { maxWidth: 'unset' } : undefined}
         >
           <Badge
-            variant="default"
+            variant="neutral"
             size="lg"
             rightIcon={
               !hideRemoveButton && (
                 <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
               )
             }
-            outline
+            tone="outline"
             className="fs-7"
           >
             {badgeValue(value)}
@@ -76,14 +76,14 @@ export const TableSidebarFilterValues = ({
         {value.map((v, i) => (
           <Badge
             key={i}
-            variant="default"
+            variant="neutral"
             size="lg"
             rightIcon={
               !hideRemoveButton && (
                 <RemoveFilterBadgeButton onClick={() => remove(value, v)} />
               )
             }
-            outline
+            tone="outline"
             className="filter-value fs-7"
             style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
@@ -93,14 +93,14 @@ export const TableSidebarFilterValues = ({
       </>
     ) : (
       <Badge
-        variant="default"
+        variant="neutral"
         size="lg"
         rightIcon={
           !hideRemoveButton && (
             <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
           )
         }
-        outline
+        tone="outline"
         className="filter-value fs-7"
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >

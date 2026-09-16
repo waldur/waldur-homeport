@@ -2,7 +2,8 @@ import Papa from 'papaparse';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useField, useForm } from 'react-final-form';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
@@ -26,7 +27,11 @@ const statusMessages = {
 const StatusField = ({ row }) => {
   const validate = validateCourseAccountCreation(row);
   return (
-    <Badge variant={validate.valid ? 'success' : 'danger'} pill outline>
+    <Badge
+      variant={validate.valid ? 'success' : 'danger'}
+      shape="pill"
+      tone="outline"
+    >
       {validate.valid ? translate('OK') : statusMessages[validate.errors[0]]}
     </Badge>
   );

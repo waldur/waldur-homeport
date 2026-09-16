@@ -1,3 +1,5 @@
+import { Badge } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import FormTable from '@/form/FormTable';
@@ -39,9 +41,9 @@ const MultilingualImageField = ({
   <div className="d-flex flex-wrap gap-2">
     {value && typeof value === 'object' && Object.keys(value).length > 0 ? (
       Object.entries(value).map(([lang]) => (
-        <span key={lang} className="badge badge-light-primary">
+        <Badge key={lang} variant="primary" tone="light">
           {lang.toUpperCase()}
-        </span>
+        </Badge>
       ))
     ) : (
       <span className="text-muted">
@@ -70,9 +72,9 @@ const LoginPageListField = ({
     return (
       <div className="d-flex flex-wrap gap-2">
         {value.map((stat, i) => (
-          <span key={i} className="badge badge-light-primary">
+          <Badge key={i} variant="primary" tone="light">
             {stat.value} {stat.label}
-          </span>
+          </Badge>
         ))}
       </div>
     );
@@ -153,9 +155,9 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
               const label =
                 item.options.find((option) => option.value === v)?.label || v;
               return (
-                <span key={v} className="badge badge-light-primary">
+                <Badge key={v} variant="primary" tone="light">
                   {label}
-                </span>
+                </Badge>
               );
             })}
           </div>

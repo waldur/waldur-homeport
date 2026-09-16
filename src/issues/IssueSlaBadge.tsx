@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Issue } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 /** Resolve the effective SLA state, treating sla_breached as authoritative. */
@@ -34,19 +35,19 @@ export const IssueSlaBadge: FunctionComponent<{
   switch (getSlaState(issue)) {
     case 'breached':
       return (
-        <Badge variant="danger" pill outline>
+        <Badge variant="danger" shape="pill" tone="outline">
           {translate('SLA breached')}
         </Badge>
       );
     case 'on_track':
       return (
-        <Badge variant="success" pill outline>
+        <Badge variant="success" shape="pill" tone="outline">
           {translate('On track')}
         </Badge>
       );
     case 'met':
       return (
-        <Badge variant="secondary" pill outline>
+        <Badge variant="secondary" shape="pill" tone="outline">
           {translate('SLA met')}
         </Badge>
       );

@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { CallCoiConfiguration, CoiTypeEnum } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -286,14 +287,18 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
                       <td>
                         <Badge
                           variant={getSeverityVariant(info.severity)}
-                          pill
-                          outline
+                          shape="pill"
+                          tone="outline"
                         >
                           {info.severity}
                         </Badge>
                       </td>
                       <td>
-                        <Badge variant={handling.variant} pill outline>
+                        <Badge
+                          variant={handling.variant}
+                          shape="pill"
+                          tone="outline"
+                        >
                           {handling.label}
                         </Badge>
                       </td>

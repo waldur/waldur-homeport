@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
@@ -18,7 +19,7 @@ export const DueDateBadge: FC<DueDateBadgeProps> = ({ dueDate }) => {
     // Overdue
     const overdueDays = Math.abs(diffDays);
     return (
-      <Badge variant="danger" size="sm" pill outline>
+      <Badge variant="danger" size="sm" shape="pill" tone="outline">
         {overdueDays === 1
           ? translate('1 day overdue')
           : translate('{count} days overdue', { count: overdueDays })}
@@ -26,13 +27,13 @@ export const DueDateBadge: FC<DueDateBadgeProps> = ({ dueDate }) => {
     );
   } else if (diffDays === 0) {
     return (
-      <Badge variant="warning" size="sm" pill outline>
+      <Badge variant="warning" size="sm" shape="pill" tone="outline">
         {translate('Due today')}
       </Badge>
     );
   } else if (diffDays <= 7) {
     return (
-      <Badge variant="warning" size="sm" pill outline>
+      <Badge variant="warning" size="sm" shape="pill" tone="outline">
         {diffDays === 1
           ? translate('Due tomorrow')
           : translate('Due in {count} days', { count: diffDays })}
@@ -40,7 +41,7 @@ export const DueDateBadge: FC<DueDateBadgeProps> = ({ dueDate }) => {
     );
   } else {
     return (
-      <Badge variant="secondary" size="sm" pill outline>
+      <Badge variant="secondary" size="sm" shape="pill" tone="outline">
         {formatDate(dueDate)}
       </Badge>
     );

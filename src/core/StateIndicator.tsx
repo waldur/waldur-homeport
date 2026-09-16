@@ -1,19 +1,17 @@
 import { capitalize, lowerCase } from 'lodash-es';
 import { FunctionComponent } from 'react';
-import { Variant } from 'react-bootstrap/types';
 
-import { Badge } from './Badge';
+import { Badge, BadgeShape, BadgeTone, BadgeVariant } from 'waldur-ui';
+
 import { LoadingSpinnerSimple } from './LoadingSpinner';
 
 export interface StateIndicatorProps {
   label: string;
   tooltip?: string;
-  variant: Variant;
+  variant: BadgeVariant;
   active?: boolean;
-  roundless?: boolean;
-  light?: boolean;
-  outline?: boolean;
-  pill?: boolean;
+  shape?: BadgeShape;
+  tone?: BadgeTone;
   hasBullet?: boolean;
   size?: 'sm' | 'lg';
   'data-testid'?: string;
@@ -38,7 +36,7 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
       active ? (
         <LoadingSpinnerSimple
           className={
-            props.light || props.outline
+            props.tone === 'light' || props.tone === 'outline'
               ? `text-${props.variant}`
               : `badge-${props.variant}`
           }

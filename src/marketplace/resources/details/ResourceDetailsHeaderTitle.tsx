@@ -28,8 +28,8 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
 
         <ResourceStateField
           resource={resource}
-          pill
-          outline
+          shape="pill"
+          tone="outline"
           hasBullet
           size="sm"
         />

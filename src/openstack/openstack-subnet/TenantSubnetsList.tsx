@@ -5,7 +5,8 @@ import {
   OpenstackSubnetsListData,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
 import { ResourceState } from '@/resource/state/ResourceState';
@@ -95,8 +96,8 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
                 <Badge
                   variant="secondary"
                   size="sm"
-                  pill
-                  light
+                  shape="pill"
+                  tone="light"
                   tooltip={translate(
                     'How instances on this subnet get their IPv6 address.',
                   )}

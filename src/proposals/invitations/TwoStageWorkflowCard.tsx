@@ -7,6 +7,8 @@ import {
 import { FC, useState } from 'react';
 import { Card, Collapse } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 export const TwoStageWorkflowCard: FC = () => {
@@ -56,9 +58,9 @@ export const TwoStageWorkflowCard: FC = () => {
                         />
                       </div>
                       <div>
-                        <span className="badge badge-primary mb-1">
+                        <Badge variant="primary" tone="solid" className="mb-1">
                           {translate('Stage 1')}
-                        </span>
+                        </Badge>
                         <h5 className="mb-0">{translate('Join the Pool')}</h5>
                       </div>
                     </div>
@@ -139,9 +141,9 @@ export const TwoStageWorkflowCard: FC = () => {
                         />
                       </div>
                       <div>
-                        <span className="badge badge-success mb-1">
+                        <Badge variant="success" tone="solid" className="mb-1">
                           {translate('Stage 2')}
-                        </span>
+                        </Badge>
                         <h5 className="mb-0">
                           {translate('Receive Assignments')}
                         </h5>

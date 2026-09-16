@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { NestedOfferingAccessSubnet } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 /**
@@ -57,7 +58,7 @@ export const ProviderDefaultSubnets: FC<ProviderDefaultSubnetsProps> = ({
             <Badge
               key={subnet.uuid}
               variant="secondary"
-              outline
+              tone="outline"
               tooltip={subnet.description || undefined}
             >
               {subnet.inet}

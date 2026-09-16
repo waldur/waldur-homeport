@@ -2,8 +2,8 @@ import { ShieldWarningIcon, WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
@@ -50,7 +50,7 @@ export const ReviewerInvitationStatus: FC<ReviewerInvitationStatusProps> = ({
         )}
       {isExpired(row.invitation_expires_at) &&
         row.invitation_status === 'pending' && (
-          <Badge variant="danger" outline>
+          <Badge variant="danger" tone="outline">
             {translate('Expired')}
           </Badge>
         )}
@@ -70,7 +70,7 @@ export const ReviewerInvitationStatus: FC<ReviewerInvitationStatusProps> = ({
           <Badge
             variant="warning"
             leftIcon={<ShieldWarningIcon size={14} weight="bold" />}
-            outline
+            tone="outline"
           >
             {translate('Overridden')}
           </Badge>

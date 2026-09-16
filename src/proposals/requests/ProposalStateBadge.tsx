@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { ProposalState } from '@/proposals/types';
 import { formatProposalState } from '@/proposals/utils';
 
@@ -26,7 +27,7 @@ export const ProposalStateBadge: FC<{ state: ProposalState }> = ({ state }) => {
     return null;
   }
   return (
-    <Badge variant={getProposalStateVariant(state)} outline>
+    <Badge variant={getProposalStateVariant(state)} tone="outline">
       {formatProposalState(state)}
     </Badge>
   );

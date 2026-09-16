@@ -3,9 +3,9 @@ import { FC, useMemo, useState } from 'react';
 import { EventConsumer, eventConsumersList } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -58,7 +58,7 @@ const ObjectTypesCell: FC<{ row: EventConsumer }> = ({ row }) => {
   const types = row.object_types;
   if (types.length === 0) {
     return (
-      <Badge variant="secondary" pill outline>
+      <Badge variant="secondary" shape="pill" tone="outline">
         {translate('All types')}
       </Badge>
     );
@@ -75,7 +75,7 @@ const ScopesCell: FC<{ row: EventConsumer }> = ({ row }) => {
           'Bound to no scope: receives every event in the system, including events about all users.',
         )}
       >
-        <Badge variant="danger" pill outline>
+        <Badge variant="danger" shape="pill" tone="outline">
           {translate('Global')}
         </Badge>
       </Tooltip>
@@ -135,11 +135,11 @@ const EventConsumersTable: FC = () => {
         title: translate('Queue'),
         render: ({ row }: { row: EventConsumer }) =>
           row.queue_created ? (
-            <Badge variant="success" pill outline>
+            <Badge variant="success" shape="pill" tone="outline">
               {translate('Queue created')}
             </Badge>
           ) : (
-            <Badge variant="warning" pill outline>
+            <Badge variant="warning" shape="pill" tone="outline">
               {translate('Queue pending')}
             </Badge>
           ),

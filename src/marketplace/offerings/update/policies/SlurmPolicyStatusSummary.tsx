@@ -6,7 +6,8 @@ import {
   SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -60,26 +61,26 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
     if (lastEvaluation.site_agent_confirmed === null) {
       if (!lastEvaluation.stomp_message_sent) {
         return (
-          <Badge variant="secondary" size="sm" pill outline>
+          <Badge variant="secondary" size="sm" shape="pill" tone="outline">
             {translate('No command sent')}
           </Badge>
         );
       }
       return (
-        <Badge variant="warning" size="sm" pill outline>
+        <Badge variant="warning" size="sm" shape="pill" tone="outline">
           {translate('Awaiting confirmation')}
         </Badge>
       );
     }
     if (lastEvaluation.site_agent_confirmed) {
       return (
-        <Badge variant="success" size="sm" pill outline>
+        <Badge variant="success" size="sm" shape="pill" tone="outline">
           {translate('Confirmed')}
         </Badge>
       );
     }
     return (
-      <Badge variant="danger" size="sm" pill outline>
+      <Badge variant="danger" size="sm" shape="pill" tone="outline">
         {translate('Failed')}
       </Badge>
     );

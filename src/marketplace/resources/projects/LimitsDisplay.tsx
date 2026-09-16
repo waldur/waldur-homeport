@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 type ComponentLike = {
   type: string;
@@ -24,9 +24,9 @@ export const LimitsDisplay: FC<{
         return (
           <Badge
             key={key}
-            variant="default"
-            pill
-            outline
+            variant="neutral"
+            shape="pill"
+            tone="outline"
             tooltip={c?.name ? `${c.name} (${key})` : key}
           >
             {label}: {value}

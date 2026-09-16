@@ -1,7 +1,9 @@
 import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { ModelCard1 } from '@/core/ModelCard1';
 import { Field } from '@/resource/summary';
@@ -83,7 +85,7 @@ export const tableStoryRows: TableStoryRow[] = [
   },
 ];
 
-const STATUS_VARIANT: Record<TableStoryRow['status'], string> = {
+const STATUS_VARIANT: Record<TableStoryRow['status'], BadgeVariant> = {
   OK: 'success',
   Erred: 'danger',
   Creating: 'warning',
@@ -105,7 +107,7 @@ export const TableStoryGridItem = ({ row }: { row: TableStoryRow }) => (
         <Field
           label="Status"
           value={
-            <Badge variant={STATUS_VARIANT[row.status]} light>
+            <Badge variant={STATUS_VARIANT[row.status]} tone="light">
               {row.status}
             </Badge>
           }
@@ -315,7 +317,7 @@ export const tableStoryColumns: Column<TableStoryRow>[] = [
     id: 'status',
     title: 'Status',
     render: ({ row }) => (
-      <Badge variant={STATUS_VARIANT[row.status]} light>
+      <Badge variant={STATUS_VARIANT[row.status]} tone="light">
         {row.status}
       </Badge>
     ),

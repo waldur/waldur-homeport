@@ -4,7 +4,8 @@ import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
 import { Col, Nav, Row, Tab } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatPhoneNumber } from '@/core/utils';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -483,7 +484,12 @@ export const SearchPopover = ({
               <Nav.Link eventKey="all">
                 {translate('All results')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" pill outline className="ms-2">
+                  <Badge
+                    variant="neutral"
+                    shape="pill"
+                    tone="outline"
+                    className="ms-2"
+                  >
                     {result.data.resultsCount}
                   </Badge>
                 )}
@@ -493,7 +499,12 @@ export const SearchPopover = ({
               <Nav.Link eventKey="organizations">
                 {translate('Organizations')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" pill outline className="ms-2">
+                  <Badge
+                    variant="neutral"
+                    shape="pill"
+                    tone="outline"
+                    className="ms-2"
+                  >
                     {result.data.customersCount}
                   </Badge>
                 )}
@@ -503,7 +514,12 @@ export const SearchPopover = ({
               <Nav.Link eventKey="projects">
                 {translate('Projects')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" pill outline className="ms-2">
+                  <Badge
+                    variant="neutral"
+                    shape="pill"
+                    tone="outline"
+                    className="ms-2"
+                  >
                     {result.data.projectsCount}
                   </Badge>
                 )}
@@ -517,7 +533,12 @@ export const SearchPopover = ({
               <Nav.Link eventKey="resources">
                 {translate('Resources')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" pill outline className="ms-2">
+                  <Badge
+                    variant="neutral"
+                    shape="pill"
+                    tone="outline"
+                    className="ms-2"
+                  >
                     {result.data.resourcesCount}
                   </Badge>
                 )}
@@ -529,7 +550,12 @@ export const SearchPopover = ({
                   <LockIcon size={14} className="me-1" weight="bold" />
                   {translate('Users')}
                   {Boolean(usersResult?.data) && (
-                    <Badge variant="default" pill outline className="ms-2">
+                    <Badge
+                      variant="neutral"
+                      shape="pill"
+                      tone="outline"
+                      className="ms-2"
+                    >
                       {usersResult.data.usersCount}
                     </Badge>
                   )}

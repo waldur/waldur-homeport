@@ -235,7 +235,14 @@ export const OrderMetadataTab = ({
 
         <FormTable.Item
           label={translate('Status')}
-          value={<OrderStateField order={order} pill outline hasBullet />}
+          value={
+            <OrderStateField
+              order={order}
+              shape="pill"
+              tone="outline"
+              hasBullet
+            />
+          }
         />
 
         {DetailsComponent && (

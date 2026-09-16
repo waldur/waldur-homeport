@@ -3,6 +3,8 @@ import { FC } from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 import { CategoryGroup } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -72,7 +74,9 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
           {item.title}
         </span>
         {'offering_count' in item && item.offering_count !== undefined && (
-          <span className="badge bg-secondary">{item.offering_count}</span>
+          <Badge variant="secondary" shape="pill" tone="solid">
+            {item.offering_count}
+          </Badge>
         )}
       </ListGroup.Item>
     );
@@ -126,9 +130,9 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
                     </div>
                     <span className="flex-grow-1">{cat.title}</span>
                     {cat.offering_count !== undefined && (
-                      <span className="badge bg-secondary">
+                      <Badge variant="secondary" shape="pill" tone="solid">
                         {cat.offering_count}
-                      </span>
+                      </Badge>
                     )}
                   </ListGroup.Item>
                 ))}

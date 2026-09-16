@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 interface AssignmentBatchStatusBadgeProps {
   status: string;
@@ -28,7 +28,7 @@ export const AssignmentBatchStatusBadge: FC<
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {statusDisplay}
     </Badge>
   );
