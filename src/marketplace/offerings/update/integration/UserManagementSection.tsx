@@ -1,8 +1,11 @@
 import { FC } from 'react';
-import { UsernameGenerationPolicyEnum } from 'waldur-js-client';
+import { AccountSetting, OfferingAccountSettings } from 'waldur-js-client';
 
 import { CheckOrX } from '@/core/CheckOrX';
+import { Link } from '@/core/Link';
 import { required } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 import {
   BooleanEditField,
   EditFieldProvider,
@@ -10,48 +13,28 @@ import {
   StringEditField,
 } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
+import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
+import {
+  ACCOUNT_SCOPE_OPTIONS,
+  getOptionLabel,
+  USERNAME_GENERATION_POLICY_OPTIONS,
+} from '@/marketplace/service-providers/accountSettings';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 
+import { AccountSettingValue } from './AccountSettingValue';
 import { GLAuthConfigButton } from './GLAuthConfigButton';
+import {
+  PosixIdPoolSummary,
+  SharedAccountsValue,
+} from './OfferingAccountsOverview';
 import { OfferingEditPanelProps } from './types';
+import { useOfferingAccountContext } from './useOfferingAccountContext';
 import {
   canSeeOfferingSecretOptions,
   SECRET_OPTIONS_HIDDEN_REASON,
   useUpdateOfferingIntegration,
 } from './utils';
-
-type UsernameGenerationPolicyOption = {
-  label: string;
-  value: UsernameGenerationPolicyEnum;
-};
-
-const USERNAME_GENERATION_POLICY_OPTIONS: UsernameGenerationPolicyOption[] = [
-  {
-    label: translate('Service provider'),
-    value: 'service_provider',
-  },
-  {
-    label: translate('Anonymized'),
-    value: 'anonymized',
-  },
-  {
-    label: translate('Full name'),
-    value: 'full_name',
-  },
-  {
-    label: translate('Waldur username'),
-    value: 'waldur_username',
-  },
-  {
-    label: translate('FreeIPA'),
-    value: 'freeipa',
-  },
-  {
-    label: translate('Identity claim'),
-    value: 'identity_claim',
-  },
-];
 
 const ACCOUNT_NAME_GENERATION_POLICY_OPTIONS = [
   {
@@ -75,12 +58,34 @@ const POSIX_ID_SOURCE_OPTIONS = [
   },
 ];
 
-const getTooltip = (currentValue, defaultValue) =>
-  !currentValue
-    ? translate('Could be "{value}"', {
-        value: defaultValue,
-      })
-    : null;
+// An unset source allocates from the pool; say so rather than show a dash.
+const renderIdSource = (value: string) =>
+  value ? (
+    getOptionLabel(POSIX_ID_SOURCE_OPTIONS, value)
+  ) : (
+    <div className="d-flex flex-column align-items-start">
+      <span>{translate('POSIX ID pool')}</span>
+      <small className="text-muted">{translate('Default')}</small>
+    </div>
+  );
+
+type AccountSettingKey = keyof OfferingAccountSettings;
+
+type Options = { label: string; value: string }[];
+
+// Names the value that removing the offering's own setting leads to, which
+// the backend reports as the setting's inherited value.
+const getResetLabel = (setting: AccountSetting, options?: Options) => {
+  const inherited = setting.inherited;
+  if (!inherited) {
+    return undefined;
+  }
+  const value =
+    (options && getOptionLabel(options, inherited.value)) || inherited.value;
+  return inherited.source === 'provider'
+    ? translate('Use provider setting ({value})', { value })
+    : translate('Use default ({value})', { value });
+};
 
 export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
   props,
@@ -89,6 +94,7 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
     props.offering,
     props.refetch,
   );
+  const context = useOfferingAccountContext(props.offering);
 
   const pluginOptions = props.offering.plugin_options;
   const canCreateUser =
@@ -104,18 +110,53 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
   // settings. Editing it from an empty render would clear the password in place.
   const secretOptionsHidden = !canSeeOfferingSecretOptions(props.offering);
 
-  return (
-    <FormTable.Card
-      title={translate('User management')}
-      className="card-bordered mb-7"
-      actions={
-        posixEnabled ? (
-          <GLAuthConfigButton offering={props.offering} />
-        ) : undefined
+  // Account settings an offering does not set itself are inherited from its
+  // service provider, then from a built-in default. The backend resolves them.
+  const getAccountSetting = (
+    key: AccountSettingKey,
+  ): AccountSetting | undefined => props.offering.account_settings?.[key];
+
+  const renderAccountSetting =
+    (key: AccountSettingKey, canEdit: boolean, options?: Options) => () => {
+      const setting = getAccountSetting(key);
+      if (!setting) {
+        return null;
       }
-    >
-      <FormTable>
-        <EditFieldProvider scope={props.offering} callback={update}>
+      return (
+        <AccountSettingValue
+          setting={setting}
+          label={options ? getOptionLabel(options, setting.value) : undefined}
+          // A blank value removes the offering's own setting, so it inherits
+          // again; omitting the key would keep it, as plugin options merge.
+          onReset={
+            canEdit
+              ? () => update({ plugin_options: { [key]: '' } })
+              : undefined
+          }
+          resetLabel={getResetLabel(setting, options)}
+        />
+      );
+    };
+
+  const usernamePolicy = getAccountSetting('username_generation_policy')?.value;
+  const sharedAccounts =
+    getAccountSetting('account_scope')?.value === 'provider';
+
+  return (
+    <EditFieldProvider scope={props.offering} callback={update}>
+      <TabbedSection
+        title={translate('User management')}
+        actions={
+          posixEnabled ? (
+            <GLAuthConfigButton offering={props.offering} />
+          ) : undefined
+        }
+        enableSearch
+      >
+        <TabbedSection.Tab
+          id="offering-users"
+          title={translate('Offering users')}
+        >
           <StringEditField
             name="secret_options.shared_user_password"
             label={translate('Shared user password')}
@@ -169,6 +210,47 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
               }
             />
           )}
+        </TabbedSection.Tab>
+
+        <TabbedSection.Tab id="accounts" title={translate('Accounts')}>
+          <SelectEditField
+            name="plugin_options.account_scope"
+            label={translate('Account scope')}
+            description={translate(
+              'Per offering: this offering holds its own account for a person. Per service provider: the account is shared with the other offerings of this service provider. A value set on this offering overrides the service provider setting.',
+            )}
+            options={ACCOUNT_SCOPE_OPTIONS}
+            simpleValue
+            validate={required}
+            isClearable={false}
+            renderValue={renderAccountSetting(
+              'account_scope',
+              true,
+              ACCOUNT_SCOPE_OPTIONS,
+            )}
+          />
+          {context.sharingOfferings !== undefined && (
+            <FormTable.Item
+              label={translate('Shared with')}
+              description={translate(
+                'Other offerings of this service provider where a person has the same account: username, POSIX UID and home directory.',
+              )}
+              value={
+                <SharedAccountsValue
+                  offeringUuid={props.offering.uuid}
+                  shared={sharedAccounts}
+                  sharingOfferings={context.sharingOfferings}
+                />
+              }
+              actions={
+                <Link
+                  state="marketplace-provider-account-settings"
+                  params={{ uuid: props.offering.customer_uuid }}
+                  label={translate('Provider account settings')}
+                />
+              }
+            />
+          )}
           <SelectEditField
             name="plugin_options.username_generation_policy"
             label={translate('Username generation policy')}
@@ -177,34 +259,36 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
             validate={required}
             isClearable={false}
             warnTooltip={
-              getTooltip(
-                pluginOptions?.username_generation_policy,
-                translate('Service provider'),
-              ) ||
-              (pluginOptions?.username_generation_policy ===
-                'service_provider' &&
-                translate(
-                  'Warning: Service provider option will clear all usernames of the existing offering users',
-                ))
+              usernamePolicy === 'service_provider'
+                ? translate(
+                    'Warning: Service provider option will clear all usernames of the existing offering users',
+                  )
+                : null
             }
             disabled={!canCreateUser}
-            renderValue={(value) =>
-              USERNAME_GENERATION_POLICY_OPTIONS.find(
-                (op) => op.value === value,
-              )?.label
-            }
+            renderValue={renderAccountSetting(
+              'username_generation_policy',
+              canCreateUser,
+              USERNAME_GENERATION_POLICY_OPTIONS,
+            )}
           />
-          {pluginOptions?.username_generation_policy === 'anonymized' && (
+          {usernamePolicy === 'anonymized' && (
             <StringEditField
               name="plugin_options.username_anonymized_prefix"
               label={translate('Username anonymized prefix')}
-              warnTooltip={getTooltip(
-                pluginOptions?.username_anonymized_prefix,
-                'walduruser_',
-              )}
+              placeholder={
+                getAccountSetting('username_anonymized_prefix')?.value
+              }
               disabled={!canCreateUser}
+              renderValue={renderAccountSetting(
+                'username_anonymized_prefix',
+                canCreateUser,
+              )}
             />
           )}
+        </TabbedSection.Tab>
+
+        <TabbedSection.Tab id="posix" title={translate('POSIX')}>
           <BooleanEditField
             name="plugin_options.enable_posix_account"
             label={translate('Manage POSIX/LDAP account')}
@@ -216,90 +300,118 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
             // default), so the read-only display must not render null as "off".
             renderValue={(value) => <CheckOrX value={value !== false} />}
           />
-          {posixEnabled && (
-            <>
-              <SelectEditField
-                name="plugin_options.uid_source"
-                label={translate('UID source')}
-                description={translate(
-                  'Where each offering user’s UID comes from: allocated from the offering’s POSIX ID pool (default), or taken from the user’s uid_number identity attribute (e.g. an OIDC claim). Pair "User attribute" with a GID-only pool to avoid UID collisions.',
-                )}
-                options={POSIX_ID_SOURCE_OPTIONS}
-                simpleValue
-                isClearable={false}
-                disabled={!canCreateUser}
-                warnTooltip={
-                  uidSource === 'user_attribute'
-                    ? translate(
-                        'UIDs are read from each user’s uid_number attribute; users without it are left without a UID. The pool’s UID range is not used for this offering.',
-                      )
-                    : getTooltip(uidSource, translate('POSIX ID pool'))
-                }
-                renderValue={(value) =>
-                  POSIX_ID_SOURCE_OPTIONS.find((op) => op.value === value)
-                    ?.label
-                }
-              />
-              <SelectEditField
-                name="plugin_options.gid_source"
-                label={translate('Primary GID source')}
-                description={translate(
-                  'Where each offering user’s primary GID comes from: allocated from the offering’s POSIX ID pool (default), or taken from the user’s primary_gid identity attribute.',
-                )}
-                options={POSIX_ID_SOURCE_OPTIONS}
-                simpleValue
-                isClearable={false}
-                disabled={!canCreateUser}
-                warnTooltip={
-                  gidSource === 'user_attribute'
-                    ? translate(
-                        'Primary GIDs are read from each user’s primary_gid attribute; users without it are left without a primary GID. The pool’s GID range is not used for this offering.',
-                      )
-                    : getTooltip(gidSource, translate('POSIX ID pool'))
-                }
-                renderValue={(value) =>
-                  POSIX_ID_SOURCE_OPTIONS.find((op) => op.value === value)
-                    ?.label
-                }
-              />
-              <StringEditField
-                name="plugin_options.homedir_prefix"
-                label={translate('Home directory prefix')}
-                warnTooltip={getTooltip(
-                  pluginOptions?.homedir_prefix,
-                  '/home/',
-                )}
-                disabled={!canCreateUser}
-              />
-              <StringEditField
-                name="plugin_options.login_shell"
-                label={translate('Login shell')}
-                warnTooltip={getTooltip(
-                  pluginOptions?.login_shell,
-                  '/bin/bash',
-                )}
-                disabled={!canCreateUser}
-              />
-              <BooleanEditField
-                name="plugin_options.emit_display_name"
-                label={translate('Expose display name in GLAuth')}
-                description={translate(
-                  "If enabled, the user's full name is emitted as a displayName attribute (LDAP displayName) in the GLAuth configuration.",
-                )}
-                disabled={!canCreateUser}
-              />
-              <BooleanEditField
-                name="plugin_options.emit_waldur_username"
-                label={translate('Expose Waldur username in GLAuth')}
-                description={translate(
-                  'If enabled, the Waldur username is emitted as a waldurUsername attribute in the GLAuth configuration, alongside the generated POSIX login name.',
-                )}
-                disabled={!canCreateUser}
-              />
-            </>
+          {posixEnabled && context.pool !== undefined && (
+            <FormTable.Item
+              label={translate('POSIX ID pool')}
+              description={translate(
+                'Where UIDs and GIDs are allocated from when their source is the POSIX ID pool.',
+              )}
+              value={
+                <PosixIdPoolSummary
+                  pool={context.pool}
+                  offeringUuid={props.offering.uuid}
+                />
+              }
+              actions={
+                // The pools page is gated by the same flag. Its route checks it
+                // as a permission, which Link does not see, so it would
+                // otherwise lead to a not-found page.
+                isFeatureVisible(MarketplaceFeatures.show_posix_id_pools) && (
+                  <Link
+                    state="marketplace-provider-posix-id-pools"
+                    params={{ uuid: props.offering.customer_uuid }}
+                    label={translate('Manage pools')}
+                  />
+                )
+              }
+            />
           )}
-        </EditFieldProvider>
-      </FormTable>
-    </FormTable.Card>
+          {posixEnabled && (
+            <SelectEditField
+              name="plugin_options.uid_source"
+              label={translate('UID source')}
+              description={translate(
+                'Where each offering user’s UID comes from: allocated from the offering’s POSIX ID pool (default), or taken from the user’s uid_number identity attribute (e.g. an OIDC claim). Pair "User attribute" with a GID-only pool to avoid UID collisions.',
+              )}
+              options={POSIX_ID_SOURCE_OPTIONS}
+              simpleValue
+              isClearable={false}
+              disabled={!canCreateUser}
+              warnTooltip={
+                uidSource === 'user_attribute'
+                  ? translate(
+                      'UIDs are read from each user’s uid_number attribute; users without it are left without a UID. The pool’s UID range is not used for this offering.',
+                    )
+                  : null
+              }
+              renderValue={renderIdSource}
+            />
+          )}
+          {posixEnabled && (
+            <SelectEditField
+              name="plugin_options.gid_source"
+              label={translate('Primary GID source')}
+              description={translate(
+                'Where each offering user’s primary GID comes from: allocated from the offering’s POSIX ID pool (default), or taken from the user’s primary_gid identity attribute.',
+              )}
+              options={POSIX_ID_SOURCE_OPTIONS}
+              simpleValue
+              isClearable={false}
+              disabled={!canCreateUser}
+              warnTooltip={
+                gidSource === 'user_attribute'
+                  ? translate(
+                      'Primary GIDs are read from each user’s primary_gid attribute; users without it are left without a primary GID. The pool’s GID range is not used for this offering.',
+                    )
+                  : null
+              }
+              renderValue={renderIdSource}
+            />
+          )}
+          {posixEnabled && (
+            <StringEditField
+              name="plugin_options.homedir_prefix"
+              label={translate('Home directory prefix')}
+              placeholder={getAccountSetting('homedir_prefix')?.value}
+              disabled={!canCreateUser}
+              renderValue={renderAccountSetting(
+                'homedir_prefix',
+                canCreateUser,
+              )}
+            />
+          )}
+          {posixEnabled && (
+            <StringEditField
+              name="plugin_options.login_shell"
+              label={translate('Login shell')}
+              placeholder={getAccountSetting('login_shell')?.value}
+              disabled={!canCreateUser}
+              renderValue={renderAccountSetting('login_shell', canCreateUser)}
+            />
+          )}
+        </TabbedSection.Tab>
+
+        {posixEnabled && (
+          <TabbedSection.Tab id="glauth" title={translate('GLAuth')}>
+            <BooleanEditField
+              name="plugin_options.emit_display_name"
+              label={translate('Expose display name in GLAuth')}
+              description={translate(
+                "If enabled, the user's full name is emitted as a displayName attribute (LDAP displayName) in the GLAuth configuration.",
+              )}
+              disabled={!canCreateUser}
+            />
+            <BooleanEditField
+              name="plugin_options.emit_waldur_username"
+              label={translate('Expose Waldur username in GLAuth')}
+              description={translate(
+                'If enabled, the Waldur username is emitted as a waldurUsername attribute in the GLAuth configuration, alongside the generated POSIX login name.',
+              )}
+              disabled={!canCreateUser}
+            />
+          </TabbedSection.Tab>
+        )}
+      </TabbedSection>
+    </EditFieldProvider>
   );
 };

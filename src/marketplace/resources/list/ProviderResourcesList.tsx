@@ -296,6 +296,7 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'offering_uuid', // ShowUsageAction, ReportUsageAction
     'provider_uuid', // CreateRobotAccountAction
     'offering_plugin_options', // CreateRobotAccountAction
+    'offering_account_settings', // CreateRobotAccountAction
     'backend_id', // ShowUsageAction, ReportUsageAction, SetBackendIdAction
     'is_usage_based', // Expandable view, ShowUsageAction, ReportUsageAction
     'is_limit_based', // Expandable view, ShowUsageAction, ReportUsageAction
