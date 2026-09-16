@@ -187,6 +187,18 @@
   }
 }
 
+/* Same name clash, same fix: `bg-gray-50` is used across src/ as Metronic's
+   theme-aware panel background (--bs-gray-50: #f9fafb light, #161b26 dark).
+   Tailwind's own `bg-gray-50` reads colors.css's gray ramp, which stays
+   light in dark mode on purpose, so its winning utility painted those
+   panels (K8s datacenter cards, invoice tables, ...) light grey under
+   light text. */
+@layer bootstrap {
+  .bg-gray-50 {
+    background-color: var(--bs-gray-50) !important;
+  }
+}
+
 /* No `.dark` class in this app — dark mode swaps compiled stylesheets
    (src/theme/utils.ts). data-theme on <html> gives Tailwind's dark:
    variant a real signal to key off instead of introducing a second toggle. */
