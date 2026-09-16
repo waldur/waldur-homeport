@@ -450,6 +450,23 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-provider-account-settings',
+    url: 'account-settings/',
+    component: lazyComponent(() =>
+      import('./service-providers/ProviderAccountSettingsPage').then(
+        (module) => ({
+          default: module.ProviderAccountSettingsPage,
+        }),
+      ),
+    ),
+    parent: 'provider-marketplace',
+    data: {
+      breadcrumb: () => translate('Account settings'),
+      priority: 31,
+    },
+  },
+
+  {
     name: 'marketplace-provider-organizations',
     parent: 'marketplace-provider-customers',
     url: 'organizations/',

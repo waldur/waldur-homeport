@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect } from 'react';
 import {
-  marketplaceServiceProvidersPartialUpdate,
   serviceProviderApiSecretCodeRetrieve,
   ServiceProvider,
 } from 'waldur-js-client';
@@ -20,6 +19,7 @@ import { useCustomer } from '@/workspace/hooks';
 import { SecretValueField } from '../SecretValueField';
 
 import { RegenerateSecretCodeButton } from './RegenerateSecretCodeButton';
+import { useServiceProviderUpdate } from './useServiceProviderUpdate';
 
 interface OwnProps {
   serviceProvider: ServiceProvider;
@@ -56,19 +56,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
     }
   }, [error]);
 
-  const update = async (formData) => {
-    try {
-      const res = await marketplaceServiceProvidersPartialUpdate({
-        path: { uuid: serviceProvider.uuid },
-        body: formData,
-      });
-      setServiceProvider(res.data);
-      return res;
-    } catch (error) {
-      showErrorResponse(error);
-      throw error;
-    }
-  };
+  const update = useServiceProviderUpdate(serviceProvider, setServiceProvider);
 
   if (customer && serviceProvider) {
     return (

@@ -1272,6 +1272,16 @@
       "feature_area": "integration"
     }
   },
+  "Account scope": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Account settings": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
   "Account state": {
     "context": {
       "primary_ui_type": "title",
@@ -1341,6 +1351,11 @@
   "Accounting type settings": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "Accounts": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Accrued on": {
@@ -3774,6 +3789,16 @@
   "Anonymized": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Anonymized username prefix": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
+  "Anonymized usernames are this prefix followed by the POSIX UID of the account. Leave empty to let each offering decide.": {
+    "context": {
+      "feature_area": "service-providers"
     }
   },
   "Anonymous chat": {
@@ -9333,6 +9358,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Choose per service provider when your offerings share one user directory: a person then has a single account, with the same username and POSIX UID, on all of them.": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
   "Choose specific proposals to find matching reviewers.": {},
   "Choose the OpenStack tenant that will provide infrastructure for this datacenter": {
     "context": {
@@ -11568,15 +11598,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offerings"
-    }
-  },
-  "Could be \"{value}\"": {
-    "context": {
-      "variables": {
-        "value": {
-          "type": "unknown"
-        }
-      }
     }
   },
   "Could not access the clipboard.": {
@@ -14024,6 +14045,21 @@
       "feature_area": "vmware"
     }
   },
+  "Default for offerings that do not set their own login shell. Leave empty to let each offering decide.": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
+  "Default for offerings that do not set their own policy. Leave empty to let each offering decide.": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
+  "Default for offerings that do not set their own prefix. Leave empty to let each offering decide.": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
   "Default grace period (days)": {
     "context": {
       "feature_area": "details"
@@ -16072,6 +16108,11 @@
   "Each offering sets fairshare independently per account. SLURM calculates level_fs = shares_norm / usage_efctv within sibling accounts under the same parent.": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Each offering uses its own value where it sets one, then the value here, then the built-in default. The User management settings of an offering show which of the three applies.": {
+    "context": {
+      "feature_area": "service-providers"
     }
   },
   "Each project can have one chat room. Rooms are created by project owners and automatically populated with project members. Owners can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.": {
@@ -20898,6 +20939,16 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "GIDs": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "GLAuth": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "GLAuth configuration for {offering}": {
     "context": {
       "variables": {
@@ -23439,6 +23490,11 @@
   "Inherit from components": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Inherited from service provider": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Initial": {
@@ -26827,6 +26883,11 @@
       "feature_area": "project"
     }
   },
+  "Manage pools": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Manage posix id pool": {
     "context": {
       "primary_ui_type": "label",
@@ -29875,6 +29936,11 @@
       "feature_area": "reports"
     }
   },
+  "No POSIX ID pool: accounts get no UID or GID from a pool until one is created.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "No POSIX group IDs are assigned to this project.": {
     "context": {
       "feature_area": "manage"
@@ -30882,6 +30948,11 @@
       "feature_area": "steps"
     }
   },
+  "No other offering of this service provider yet": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "No other roles are available in this organization. Ask staff to reveal a concealed role or reactivate one.": {
     "context": {
       "feature_area": "team"
@@ -31826,6 +31897,20 @@
   "Not set": {
     "context": {
       "feature_area": "mappings"
+    }
+  },
+  "Not set, offerings default to {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Not shared: this offering holds its own accounts": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Not signed in": {
@@ -34498,6 +34583,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Other offerings of this service provider where a person has the same account: username, POSIX UID and home directory.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Other social sciences": {
     "context": {
       "primary_ui_type": "label"
@@ -34761,6 +34851,11 @@
   "PO reference": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "POSIX": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "POSIX ID pool": {
@@ -35478,12 +35573,32 @@
       "primary_ui_type": "label"
     }
   },
+  "Per offering": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Per offering: each offering holds its own account for a person. Per service provider: one account per person, shared across all offerings of this service provider. Switching to per service provider links existing offering accounts and is refused while a person has different usernames on different offerings. Offerings can override this setting.": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
+  "Per offering: this offering holds its own account for a person. Per service provider: the account is shared with the other offerings of this service provider. A value set on this offering overrides the service provider setting.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Per project — each RP limit ≤ parent resource limit": {
     "context": {
       "primary_ui_type": "label"
     }
   },
   "Per resource": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Per service provider": {
     "context": {
       "primary_ui_type": "label"
     }
@@ -36884,6 +36999,11 @@
   "Pool name": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Pool of this offering": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Pool scope": {
@@ -39142,6 +39262,11 @@
   "Provider UUID": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Provider account settings": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Provider actions": {
@@ -47245,6 +47370,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Service provider pool": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Service provider profile has been disabled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -47799,7 +47929,7 @@
   "Shared with": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "offering-users"
+      "feature_area": "integration"
     }
   },
   "Shared/Billing enabled": {
@@ -48654,6 +48784,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "reviewer"
+    }
+  },
+  "Some required information is missing or invalid.": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Some selected projects cannot be deleted due to insufficient permissions.": {
@@ -52441,6 +52576,11 @@
       "feature_area": "email"
     }
   },
+  "These settings decide how the accounts people get on your offerings are named and set up: the username, home directory and login shell that your systems, such as an LDAP directory, receive for each person.": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
   "These values are required to generate a working appservice registration. They will be saved to Matrix settings.": {
     "context": {
       "feature_area": "matrix"
@@ -54625,6 +54765,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "posix-id-pools"
+    }
+  },
+  "UIDs": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "UIDs are read from each user’s uid_number attribute; users without it are left without a UID. The pool’s UID range is not used for this offering.": {
@@ -60338,6 +60483,15 @@
       "feature_area": "template"
     }
   },
+  "Use default ({value})": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Use example values (no resource selected)": {
     "context": {
       "feature_area": "policies"
@@ -60351,6 +60505,20 @@
   "Use project date": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Use provider setting": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
+  "Use provider setting ({value})": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Use the \"Preview\" section below the form to see the rendered digest for a specific project.": {
@@ -62869,6 +63037,11 @@
   "When you receive specific proposal assignments (Stage 2), you can declare any conflicts of interest. The system may also automatically detect some conflicts based on institutional affiliations or co-authorship.": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Where UIDs and GIDs are allocated from when their source is the POSIX ID pool.": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Where a linear ramp says consumption should stand on this day of the month.": {
@@ -67637,6 +67810,24 @@
         }
       },
       "feature_area": "policy-watch"
+    }
+  },
+  "{label} {min}–{max} ({used} used)": {
+    "context": {
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        },
+        "used": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{label} · pre-paid": {

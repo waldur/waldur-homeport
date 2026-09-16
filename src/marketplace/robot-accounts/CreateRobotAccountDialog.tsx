@@ -41,10 +41,13 @@ export const useRobotAccountFields = (resource) => {
       maxlength: 32,
       type: 'string',
       pattern: LATIN_NAME_PATTERN,
+      // The effective policy may be inherited from the service provider, so
+      // the offering's own plugin option is only a fallback for an older API.
       disabled:
-        resource.offering_plugin_options &&
-        resource.offering_plugin_options['username_generation_policy'] ===
-          'service_provider',
+        (resource.offering_account_settings?.username_generation_policy
+          ?.value ??
+          resource.offering_plugin_options?.username_generation_policy) ===
+        'service_provider',
       disabled_tooltip: translate('Username is managed by service provider.'),
     },
     {
