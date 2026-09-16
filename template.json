@@ -41459,6 +41459,11 @@
       "feature_area": "features"
     }
   },
+  "Render service provider account management UI: provider accounts, username conflicts, the shared GLAuth directory and provider account settings.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Render the project Matrix chat UI. Backend access is gated separately on the MATRIX_ENABLED Constance setting.": {
     "context": {
       "feature_area": "features"
