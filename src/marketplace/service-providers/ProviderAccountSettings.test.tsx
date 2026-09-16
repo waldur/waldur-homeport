@@ -52,7 +52,8 @@ describe('ProviderAccountSettings', () => {
   it('renders the provider-level account fields', () => {
     renderSection({ account_scope: 'provider' });
 
-    expect(screen.getByText('Accounts')).toBeInTheDocument();
+    expect(screen.getByText('Account settings')).toBeInTheDocument();
+    expect(screen.getByText('Preview changes')).toBeInTheDocument();
     expect(screen.getByText('Account scope')).toBeInTheDocument();
     expect(screen.getByText('Per service provider')).toBeInTheDocument();
     expect(screen.getByText('Username generation policy')).toBeInTheDocument();
@@ -60,12 +61,23 @@ describe('ProviderAccountSettings', () => {
     expect(screen.getByText('Login shell')).toBeInTheDocument();
   });
 
-  it('explains how offerings resolve account settings', () => {
+  it('explains the settings in one line, with the rest a click away', async () => {
+    const user = userEvent.setup();
     renderSection();
 
     expect(
-      screen.getByText(/then the value here, then the built-in default/),
+      screen.getByText(
+        /How the accounts people get on your offerings are named and set up/,
+      ),
     ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/then the value here, then the built-in default/),
+    ).not.toBeInTheDocument();
+
+    const { openDialog } = useModal();
+    vi.mocked(openDialog).mockClear();
+    await user.click(screen.getByRole('button', { name: 'Show more' }));
+    expect(openDialog).toHaveBeenCalledTimes(1);
   });
 
   it('shows what unset provider options fall back to', () => {

@@ -6,6 +6,9 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+
 export interface SharingOffering {
   uuid: string;
   name: string;
@@ -50,7 +53,9 @@ export const useOfferingAccountContext = (
         )
         .map(({ uuid, name }) => ({ uuid, name }));
     },
-    enabled,
+    // Nothing shows the sharing offerings without the provider accounts UI.
+    enabled:
+      enabled && isFeatureVisible(MarketplaceFeatures.show_provider_accounts),
     refetchOnWindowFocus: false,
   });
 

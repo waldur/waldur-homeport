@@ -380,6 +380,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    // The accounts people get on the provider's offerings: who has one, how
+    // they are named, and where their POSIX IDs come from.
+    name: 'provider-accounts',
+    abstract: true,
+    parent: 'marketplace-provider',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Accounts'),
+      priority: 125,
+    },
+  },
+
+  {
     name: 'provider-resources',
     abstract: true,
     parent: 'marketplace-provider',
@@ -434,7 +448,12 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-vendor-offering-users',
-    url: 'offering-users/',
+    // Offering users and provider accounts are tabs of one page; the tab is
+    // kept in `tab`, dynamic so switching does not reload the page.
+    url: 'offering-users/?tab',
+    params: {
+      tab: { dynamic: true },
+    },
     component: lazyComponent(() =>
       import('./service-providers/offering-users/ProviderOfferingUsersWithTabs').then(
         (module) => ({
@@ -442,10 +461,54 @@ export const states: StateDeclaration[] = [
         }),
       ),
     ),
-    parent: 'provider-marketplace',
+    parent: 'provider-accounts',
     data: {
-      breadcrumb: () => translate('Offering users'),
+      // Without provider accounts the page lists offering users only.
+      breadcrumb: () =>
+        isFeatureVisible(MarketplaceFeatures.show_provider_accounts)
+          ? translate('Users')
+          : translate('Offering users'),
+      priority: 10,
+    },
+  },
+
+  {
+    name: 'marketplace-provider-username-conflicts',
+    url: 'username-conflicts/',
+    component: lazyComponent(() =>
+      import('./service-providers/accounts/ProviderUsernameConflicts').then(
+        (module) => ({
+          default: module.ProviderUsernameConflicts,
+        }),
+      ),
+    ),
+    parent: 'provider-accounts',
+    data: {
+      breadcrumb: () => translate('Username conflicts'),
       priority: 30,
+      permissions: [
+        () => isFeatureVisible(MarketplaceFeatures.show_provider_accounts),
+      ],
+    },
+  },
+
+  {
+    name: 'marketplace-provider-account-directory',
+    url: 'account-directory/',
+    component: lazyComponent(() =>
+      import('./service-providers/accounts/ProviderDirectory').then(
+        (module) => ({
+          default: module.ProviderDirectory,
+        }),
+      ),
+    ),
+    parent: 'provider-accounts',
+    data: {
+      breadcrumb: () => translate('GLAuth directory'),
+      priority: 40,
+      permissions: [
+        () => isFeatureVisible(MarketplaceFeatures.show_provider_accounts),
+      ],
     },
   },
 
@@ -459,10 +522,13 @@ export const states: StateDeclaration[] = [
         }),
       ),
     ),
-    parent: 'provider-marketplace',
+    parent: 'provider-accounts',
     data: {
       breadcrumb: () => translate('Account settings'),
-      priority: 31,
+      priority: 50,
+      permissions: [
+        () => isFeatureVisible(MarketplaceFeatures.show_provider_accounts),
+      ],
     },
   },
 
@@ -661,9 +727,12 @@ export const states: StateDeclaration[] = [
         (module) => ({ default: module.ProviderRobotAccountList }),
       ),
     ),
-    parent: 'provider-resources',
+    // Robot accounts get POSIX IDs from the pools and appear in the directory
+    // like people's accounts, so they are listed with them.
+    parent: 'provider-accounts',
     data: {
       breadcrumb: () => translate('Robot accounts'),
+      priority: 25,
     },
   },
 
@@ -917,7 +986,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'marketplace-provider-posix-id-pools',
-    parent: 'provider-marketplace',
+    parent: 'provider-accounts',
     url: 'posix-id-pools/',
     component: lazyComponent(() =>
       import('./service-providers/posix-id-pools/ProviderPosixIdPoolsList').then(
@@ -928,7 +997,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('POSIX ID pools'),
-      priority: 21,
+      priority: 60,
       permissions: [
         () => isFeatureVisible(MarketplaceFeatures.show_posix_id_pools),
       ],

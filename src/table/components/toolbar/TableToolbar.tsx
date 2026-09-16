@@ -125,7 +125,12 @@ export function TableToolbarActions() {
         <Col
           xs
           className={classNames(
-            'order-2 order-sm-2 d-flex align-items-center flex-wrap flex-sm-nowrap text-nowrap gap-4',
+            'order-2 order-sm-2 d-flex align-items-center flex-wrap',
+            // In a tabbed card's header the toolbar shares the width with the
+            // card title; let search and buttons wrap instead of overflowing.
+            // Kept in place so a standalone table's classes are unchanged.
+            !portal?.toolbar && 'flex-sm-nowrap',
+            'text-nowrap gap-4',
             showTitle
               ? 'ms-auto justify-content-end'
               : 'justify-content-between',

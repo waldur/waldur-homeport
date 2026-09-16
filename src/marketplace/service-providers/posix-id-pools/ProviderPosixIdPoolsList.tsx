@@ -46,11 +46,16 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
     filter,
   });
 
+  // The dialogs show which ranges the other pools already use.
   const RowActions = useCallback(
     ({ row }: { row: PosixIdPool }) => (
-      <PosixIdPoolRowActions row={row} refetch={tableProps.fetch} />
+      <PosixIdPoolRowActions
+        row={row}
+        pools={tableProps.rows}
+        refetch={tableProps.fetch}
+      />
     ),
-    [tableProps.fetch],
+    [tableProps.rows, tableProps.fetch],
   );
 
   const ExpandableRow = useCallback(
@@ -155,6 +160,7 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
           <PosixIdPoolCreateButton
             providerUuid={provider.uuid as string}
             customerUuid={provider.customer_uuid as string}
+            pools={tableProps.rows}
             refetch={tableProps.fetch}
           />
         ) : undefined

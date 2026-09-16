@@ -7,6 +7,7 @@ import {
   PosixIdPool,
 } from 'waldur-js-client';
 
+import { AlertItem } from '@/core/AlertItem';
 import { required } from '@/core/validators';
 import {
   AsyncSelectGroup,
@@ -20,46 +21,112 @@ import { providerOfferingsAutocomplete } from '@/marketplace/common/autocomplete
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import {
+  buildPoolValidator,
+  NAMESPACES,
+  NamespaceKey,
+  POSIX_ID_MAX,
+  POSIX_ID_MIN,
+  PoolFormValues,
+  poolValue,
+  scopeLabel,
+} from './poolRanges';
+
 const POSIX_ID_POOL_SCOPE_OPTIONS = [
   { label: translate('Service provider (default)'), value: 'service_provider' },
   { label: translate('Offering (override)'), value: 'offering' },
 ];
+
+const NAMESPACE_LABELS: Record<NamespaceKey, () => string> = {
+  uid: () => translate('UIDs'),
+  gid: () => translate('GIDs'),
+};
 
 interface PosixIdPoolFormDialogProps {
   resolve: {
     pool?: PosixIdPool;
     providerUuid?: string;
     customerUuid?: string;
+    /** The pools listed alongside; the provider's others must not overlap. */
+    pools?: PosixIdPool[];
     refetch: () => void;
   };
 }
 
-interface FormValues {
+type FormValues = PoolFormValues & {
   scope: string;
   offering?: { uuid: string; name: string } | null;
-  // Each range is optional but all-or-nothing; at least one must be defined.
-  min_uid?: number | null;
-  max_uid?: number | null;
-  min_gid?: number | null;
-  max_gid?: number | null;
   description?: string;
-}
+};
 
-const validatePool = (values: FormValues) => {
-  const errors: Record<string, string> = {};
-  const missing = translate('Set both the minimum and maximum, or neither.');
-  const uidTouched = values.min_uid != null || values.max_uid != null;
-  const gidTouched = values.min_gid != null || values.max_gid != null;
-  if (uidTouched && values.min_uid == null) errors.min_uid = missing;
-  if (uidTouched && values.max_uid == null) errors.max_uid = missing;
-  if (gidTouched && values.min_gid == null) errors.min_gid = missing;
-  if (gidTouched && values.max_gid == null) errors.max_gid = missing;
-  const uidComplete = values.min_uid != null && values.max_uid != null;
-  const gidComplete = values.min_gid != null && values.max_gid != null;
-  if (!uidComplete && !gidComplete) {
-    errors.min_uid = translate('Define at least one of the UID or GID ranges.');
-  }
-  return errors;
+/** What a range may hold: the global bounds, the other pools, the allocations. */
+const RangeGuidance: FC<{ pool?: PosixIdPool; siblings: PosixIdPool[] }> = ({
+  pool,
+  siblings,
+}) => {
+  const taken = NAMESPACES.flatMap((ns) =>
+    siblings
+      .filter((other) => poolValue(other, `min_${ns}`) != null)
+      .map((other) =>
+        translate('{namespace} {min}–{max} ({scope})', {
+          namespace: NAMESPACE_LABELS[ns](),
+          min: poolValue(other, `min_${ns}`),
+          max: poolValue(other, `max_${ns}`),
+          scope: scopeLabel(other),
+        }),
+      ),
+  );
+  const allocated = pool
+    ? NAMESPACES.filter(
+        (ns) =>
+          poolValue(pool, `min_${ns}`) != null &&
+          (poolValue(pool, `${ns}_used`) ?? 0) > 0,
+      ).map((ns) =>
+        translate(
+          '{count} {namespace} are allocated from this pool; the next new one is {next}. The range may shrink, but every allocated value must stay inside it.',
+          {
+            count: poolValue(pool, `${ns}_used`),
+            namespace: NAMESPACE_LABELS[ns](),
+            next: poolValue(pool, `next_${ns}`),
+          },
+        ),
+      )
+    : [];
+  return (
+    <AlertItem
+      variant="info"
+      className="mb-5"
+      title={translate('Allowed values: {min} to {max}', {
+        min: POSIX_ID_MIN,
+        max: POSIX_ID_MAX,
+      })}
+      body={
+        <ul className="mb-0 ps-4">
+          <li>
+            {translate(
+              'Values below {min} are reserved for system accounts on the hosts.',
+              { min: POSIX_ID_MIN },
+            )}
+          </li>
+          <li>
+            {translate(
+              'The pools of one service provider must not overlap: UIDs against UIDs, GIDs against GIDs. A UID and a GID may share a number, so the same range can serve both.',
+            )}
+          </li>
+          {taken.length > 0 && (
+            <li>
+              {translate('Already used by other pools: {ranges}.', {
+                ranges: taken.join(', '),
+              })}
+            </li>
+          )}
+          {allocated.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      }
+    />
+  );
 };
 
 const ScopeFields: FC<{ customerUuid?: string; submitting: boolean }> = ({
@@ -109,6 +176,19 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
 ) => {
   const pool = props.resolve.pool;
   const isEdit = Boolean(pool?.uuid);
+  const customerUuid = pool?.customer_uuid ?? props.resolve.customerUuid;
+
+  // Only the same provider's pools constrain this one; an admin list mixes
+  // organizations.
+  const siblings = useMemo(
+    () =>
+      (props.resolve.pools ?? []).filter(
+        (other) =>
+          other.customer_uuid === customerUuid && other.uuid !== pool?.uuid,
+      ),
+    [props.resolve.pools, customerUuid, pool?.uuid],
+  );
+  const validate = useMemo(() => buildPoolValidator(siblings), [siblings]);
 
   const initialValues = useMemo<FormValues>(
     () =>
@@ -183,7 +263,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
   return (
     <Form<FormValues>
       onSubmit={onSubmit}
-      validate={validatePool}
+      validate={validate}
       initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid, submitError }) => (
         <form onSubmit={handleSubmit}>
@@ -203,9 +283,11 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
           >
             <div className="size-sm">
               {submitError && (
-                <div className="alert alert-danger" role="alert">
-                  {submitError}
-                </div>
+                <AlertItem
+                  variant="error"
+                  title={submitError}
+                  className="mb-4"
+                />
               )}
               {!isEdit && (
                 <ScopeFields
@@ -213,6 +295,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                   submitting={submitting}
                 />
               )}
+              <RangeGuidance pool={pool} siblings={siblings} />
               <p className="text-muted fs-7 mb-3">
                 {translate(
                   'Define at least one range. Leave a range empty to source it externally — for example UIDs from an OIDC claim while GIDs are allocated by Waldur.',

@@ -8,16 +8,18 @@ import { PosixIdPoolIdentitiesButton } from './PosixIdPoolIdentitiesButton';
 
 interface PosixIdPoolRowActionsProps {
   row: PosixIdPool;
+  pools?: PosixIdPool[];
   refetch: () => void;
 }
 
 export const PosixIdPoolRowActions = ({
   row,
+  pools,
   refetch,
 }: PosixIdPoolRowActionsProps) => (
   <ActionsDropdown row={row} refetch={refetch}>
     <PosixIdPoolIdentitiesButton row={row} />
-    <PosixIdPoolEditButton row={row} refetch={refetch} />
+    <PosixIdPoolEditButton row={row} pools={pools} refetch={refetch} />
     <PosixIdPoolDeleteButton row={row} refetch={refetch} />
   </ActionsDropdown>
 );

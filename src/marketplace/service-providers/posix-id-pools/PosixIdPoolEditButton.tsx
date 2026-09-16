@@ -14,11 +14,14 @@ const PosixIdPoolFormDialog = lazyComponent(() =>
 
 interface PosixIdPoolEditButtonProps {
   row: PosixIdPool;
+  /** The pools listed alongside, so the dialog can keep ranges apart. */
+  pools?: PosixIdPool[];
   refetch: () => void;
 }
 
 export const PosixIdPoolEditButton = ({
   row,
+  pools,
   refetch,
 }: PosixIdPoolEditButtonProps) => {
   const user = useUser();
@@ -34,7 +37,7 @@ export const PosixIdPoolEditButton = ({
     <EditModalButton
       dialog={PosixIdPoolFormDialog}
       row={row}
-      buildResolve={(r) => ({ pool: r, refetch })}
+      buildResolve={(r) => ({ pool: r, pools, refetch })}
       size="lg"
     />
   );
