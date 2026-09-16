@@ -24,6 +24,7 @@ import {
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { parseDate } from '@/core/dateUtils';
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getCustomer } from '@/customer/utils';
@@ -489,7 +490,11 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
         const errorMessage = translate('Unable to submit order.');
         showErrorResponse(error, errorMessage);
         const errorData = {};
-        const _errorData = error?.response?.data;
+        // The SDK throws the response body itself, with the envelope spread on
+        // top -- there is no `data`. Reading `response.data` therefore always
+        // came up empty, so no field error ever reached the form and the
+        // sidebar and submit button had nothing to show.
+        const _errorData = getErrorBody(error);
         if (_errorData && typeof _errorData === 'object') {
           for (const key of Object.keys(_errorData)) {
             if (key === 'non_field_errors') {
