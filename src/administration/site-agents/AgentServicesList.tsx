@@ -4,7 +4,9 @@ import {
   marketplaceSiteAgentServicesList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -29,7 +31,7 @@ const mandatoryFields: Array<keyof AgentService> = [
   'processors',
 ];
 
-const getStateBadgeVariant = (state: string) => {
+const getStateBadgeVariant = (state: string): BadgeVariant => {
   switch (state) {
     case 'Active':
       return 'success';
@@ -38,7 +40,7 @@ const getStateBadgeVariant = (state: string) => {
     case 'Error':
       return 'danger';
     default:
-      return 'default';
+      return 'neutral';
   }
 };
 
@@ -74,7 +76,11 @@ export const AgentServicesList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('State'),
       render: ({ row }) => (
-        <Badge variant={getStateBadgeVariant(row.state)} pill outline>
+        <Badge
+          variant={getStateBadgeVariant(row.state)}
+          shape="pill"
+          tone="outline"
+        >
           {row.state}
         </Badge>
       ),

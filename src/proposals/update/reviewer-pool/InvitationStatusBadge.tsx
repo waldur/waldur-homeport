@@ -2,8 +2,8 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 
 interface InvitationStatusBadgeProps {
@@ -44,8 +44,8 @@ export const InvitationStatusBadge: FC<InvitationStatusBadgeProps> = ({
           </Tooltip>
         ) : undefined
       }
-      pill
-      outline
+      shape="pill"
+      tone="outline"
     >
       {statusDisplay}
     </Badge>

@@ -6,7 +6,8 @@ import {
   marketplaceSiteAgentLogsList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -76,7 +77,11 @@ export const OfferingAlerts: FC<OwnProps> = ({ offering }) => {
         {
           title: translate('Level'),
           render: ({ row }) => (
-            <Badge variant={levelVariant[row.level]} pill outline>
+            <Badge
+              variant={levelVariant[row.level]}
+              shape="pill"
+              tone="outline"
+            >
               {row.level}
             </Badge>
           ),

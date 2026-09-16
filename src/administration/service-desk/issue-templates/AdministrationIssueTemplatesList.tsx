@@ -25,8 +25,8 @@ const renderType = ({ row }) => (
       IssueTemplateTypeOptions.find((opt) => opt.value === row.issue_type)
         ?.label || row.issue_type
     }
-    outline
-    pill
+    tone="outline"
+    shape="pill"
   />
 );
 

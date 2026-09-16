@@ -2,8 +2,9 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { rolesCloneToCustomer } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getRoles as fetchRoles } from '@/administration/roles/utils';
-import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { BooleanGroup, FormGroup, SelectGroup, SubmitButton } from '@/form';
@@ -90,7 +91,11 @@ export const CloneRoleDialog: FC<{ resolve: CloneRoleDialogResolve }> = ({
                 {values.template.permissions?.length ? (
                   <div className="d-flex flex-wrap gap-1">
                     {values.template.permissions.map((permission) => (
-                      <Badge key={permission} variant="secondary" outline>
+                      <Badge
+                        key={permission}
+                        variant="secondary"
+                        tone="outline"
+                      >
                         {permission}
                       </Badge>
                     ))}

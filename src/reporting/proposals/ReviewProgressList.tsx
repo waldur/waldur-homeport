@@ -1,6 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -23,7 +24,7 @@ const CompletionRateColumn: FC<{ row: ReviewProgressStat }> = ({ row }) => {
   const rate = row.completion_rate;
   const variant = rate >= 75 ? 'success' : rate >= 50 ? 'warning' : 'danger';
   return (
-    <Badge variant={variant} outline>
+    <Badge variant={variant} tone="outline">
       {rate.toFixed(1)}%
     </Badge>
   );
@@ -37,27 +38,30 @@ const ReviewProgressExpandableRow: FC<{ row: ReviewProgressStat }> = ({
       key: 'done',
       label: translate('Done'),
       value: row.completed,
-      variant: 'outline-moss',
+      variant: 'moss' as const,
     },
     {
       key: 'active',
       label: translate('Active'),
       value: row.in_progress,
-      variant: 'outline-success',
+      variant: 'success' as const,
     },
     {
       key: 'pending',
       label: translate('Pending'),
       value: row.pending,
-      variant: 'outline-warning',
+      variant: 'warning' as const,
     },
-    {
-      key: 'declined',
-      label: translate('Declined'),
-      value: row.declined,
-      variant: 'outline-error',
-      hidden: row.declined === 0,
-    },
+    ...(row.declined > 0
+      ? [
+          {
+            key: 'declined',
+            label: translate('Declined'),
+            value: row.declined,
+            variant: 'danger' as const,
+          },
+        ]
+      : []),
   ];
 
   return (

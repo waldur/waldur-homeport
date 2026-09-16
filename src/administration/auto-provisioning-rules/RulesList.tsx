@@ -1,7 +1,8 @@
 import { CheckIcon, MinusIcon } from '@phosphor-icons/react';
 import { autoprovisioningRulesList, Rule } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -14,7 +15,12 @@ import { RuleCreateButton } from './RuleCreateButton';
 import { RuleExpandableRow } from './RuleExpandableRow';
 
 const BooleanIconBadge = ({ value }) => (
-  <Badge variant={value ? 'success' : 'default'} pill outline onlyIcon>
+  <Badge
+    variant={value ? 'success' : 'neutral'}
+    shape="pill"
+    tone="outline"
+    onlyIcon
+  >
     {value ? (
       <CheckIcon weight="bold" size={12} />
     ) : (

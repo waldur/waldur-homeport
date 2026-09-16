@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { getAbbreviation } from '@/core/utils';
@@ -105,7 +105,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           {/* Badges */}
           <div className="d-flex flex-wrap gap-2 mb-4">
             {offering.category_title && (
-              <Badge variant="default" outline className="fw-normal">
+              <Badge variant="neutral" tone="outline" className="fw-normal">
                 {offering.category_title}
               </Badge>
             )}
@@ -128,7 +128,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
                 <Badge
                   variant="purple"
                   leftIcon={<QuestionIcon size={12} weight="bold" />}
-                  outline
+                  tone="outline"
                   className="fw-normal"
                 >
                   {translate('Restricted')}
@@ -142,9 +142,9 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
                 )}
               >
                 <Badge
-                  variant="default"
+                  variant="neutral"
                   leftIcon={<LockSimpleIcon size={12} weight="bold" />}
-                  outline
+                  tone="outline"
                   className="fw-normal"
                 >
                   {translate('Inaccessible')}

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 /** Strip `isd:` prefix and capitalize first letter */
@@ -21,7 +22,13 @@ export const IsdBadges: FC<IsdBadgesProps> = ({ isds, size }) => {
   return (
     <span className="d-inline-flex flex-wrap gap-1">
       {isds.map((isd) => (
-        <Badge key={isd} variant="primary" size={size} pill outline>
+        <Badge
+          key={isd}
+          variant="primary"
+          size={size}
+          shape="pill"
+          tone="outline"
+        >
           {formatIsdName(isd)}
         </Badge>
       ))}

@@ -1,7 +1,8 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
@@ -27,8 +28,8 @@ const PurchaseOrderBadge = ({ order, offering }) => {
           variant="success"
           size="sm"
           leftIcon={<DownloadSimpleIcon weight="bold" size={12} />}
-          pill
-          outline
+          shape="pill"
+          tone="outline"
         >
           {translate('Download')}
         </Badge>
@@ -38,14 +39,14 @@ const PurchaseOrderBadge = ({ order, offering }) => {
 
   if (requireUpload) {
     return (
-      <Badge variant="warning" size="sm" pill outline>
+      <Badge variant="warning" size="sm" shape="pill" tone="outline">
         {translate('Required')}
       </Badge>
     );
   }
 
   return (
-    <Badge variant="default" size="sm" pill outline>
+    <Badge variant="neutral" size="sm" shape="pill" tone="outline">
       {translate('Optional')}
     </Badge>
   );

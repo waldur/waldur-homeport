@@ -2,8 +2,8 @@ import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 
 export const AssignmentOverrideIndicator: FC<{
@@ -26,7 +26,7 @@ export const AssignmentOverrideIndicator: FC<{
     <Badge
       variant="warning"
       leftIcon={<ShieldWarningIcon size={14} weight="bold" />}
-      outline
+      tone="outline"
     >
       {translate('Overridden')}
     </Badge>

@@ -15,6 +15,7 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
 import { OfflineBlockContext } from '@/ai-assistant/components/blocks/offlineBlockContext';
 import { MessageDataInspector } from '@/ai-assistant/components/shared/MessageDataInspector';
@@ -29,7 +30,6 @@ import {
   messageBlocks,
 } from '@/ai-assistant/lib/messages/messageUtils';
 import { uiRegistry } from '@/ai-assistant/lib/registry/uiRegistry';
-import { Badge } from '@/core/Badge';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDateTime, formatShortDateTime } from '@/core/dateUtils';
@@ -126,7 +126,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                   variant={getSeverityBadgeVariant(selectedMessage.severity)}
                   size="sm"
                   leftIcon={<ShieldWarningIcon weight="bold" />}
-                  outline
+                  tone="outline"
                 >
                   {severityLabels[selectedMessage.severity]}
                 </Badge>
@@ -138,7 +138,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                 <Badge
                   variant={getActionBadgeVariant(selectedMessage.action_taken)}
                   size="sm"
-                  outline
+                  tone="outline"
                 >
                   {actionLabels[selectedMessage.action_taken]}
                 </Badge>
@@ -153,14 +153,14 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                   variant="secondary"
                   size="sm"
                   leftIcon={<ShieldWarningIcon weight="bold" />}
-                  outline
+                  tone="outline"
                 >
                   {translate('Flagged in history')}
                 </Badge>
               </Tooltip>
             )}
             {isViewingHistory && (
-              <Badge variant="default" size="sm" outline>
+              <Badge variant="neutral" size="sm" tone="outline">
                 {translate('Past version')}
               </Badge>
             )}

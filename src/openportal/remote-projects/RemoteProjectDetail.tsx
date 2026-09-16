@@ -3,7 +3,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { Card } from 'react-bootstrap';
 import { openportalRemoteProjectsRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { ExternalLink } from '@/core/ExternalLink';
@@ -190,7 +191,12 @@ export const RemoteProjectDetail = () => {
               <summary className="fw-semibold cursor-pointer">
                 {translate('Sync details')}
                 {!row.last_confirmed_details && (
-                  <Badge variant="secondary" pill outline className="ms-2">
+                  <Badge
+                    variant="secondary"
+                    shape="pill"
+                    tone="outline"
+                    className="ms-2"
+                  >
                     {translate('Not yet confirmed')}
                   </Badge>
                 )}

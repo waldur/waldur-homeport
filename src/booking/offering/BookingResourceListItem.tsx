@@ -3,9 +3,10 @@ import { cloneDeep } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
 
+import { Badge } from 'waldur-ui';
+
 import { bookingStateAliases } from '@/booking/BookingStateField';
 import { BookingResource, EventInput } from '@/booking/types';
-import { Badge } from '@/core/Badge';
 import { parseDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -166,7 +167,7 @@ export const BookingResourceListItem = ({
                     {parseDate(layout.schedule.end).toFormat("LLL dd',' HH:mm")}
                   </span>
                   {item.attributes.schedules.length > 1 && (
-                    <Badge pill outline className="my-1">
+                    <Badge shape="pill" tone="outline" className="my-1">
                       {translate('+{count} more schedules', {
                         count: item.attributes.schedules.length - 1,
                       })}

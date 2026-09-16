@@ -112,8 +112,8 @@ export const RevokeTosDialog = ({
                         <td>
                           <ResourceStateField
                             resource={resource}
-                            outline
-                            pill
+                            tone="outline"
+                            shape="pill"
                           />
                         </td>
                       </tr>

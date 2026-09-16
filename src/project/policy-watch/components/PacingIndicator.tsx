@@ -5,10 +5,11 @@ import {
 } from '@phosphor-icons/react';
 import { CSSProperties, FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Variant } from 'react-bootstrap/types';
+
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { StatsCard } from '@/core/StatsCard';
 import { translate } from '@/i18n';
@@ -101,7 +102,7 @@ export const PacingIndicator: FC<Props> = ({
   const willMissMinimal =
     minimalFraction !== null && projectedFraction < minimalFraction;
   const willMissExpected = projectedFraction < 0.999;
-  const tone: Variant = isCreditExpired
+  const tone: BadgeVariant = isCreditExpired
     ? // Neutral rather than alarming: an expired credit is settled, not going
       // wrong. There is nothing here for the team to act on.
       'secondary'
@@ -157,8 +158,8 @@ export const PacingIndicator: FC<Props> = ({
             <TrendDownIcon weight="bold" />
           )
         }
-        pill
-        light
+        shape="pill"
+        tone="light"
       >
         {pct0(fraction)}
       </Badge>
@@ -201,7 +202,13 @@ export const PacingIndicator: FC<Props> = ({
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
         <div className="d-flex align-items-center gap-2">
           <span className="fw-bold">{translate('Pacing')}</span>
-          <Badge variant={tone} pill outline hasBullet tooltip={statusHint}>
+          <Badge
+            variant={tone}
+            shape="pill"
+            tone="outline"
+            hasBullet
+            tooltip={statusHint}
+          >
             {statusLabel}
           </Badge>
         </div>
@@ -277,7 +284,13 @@ export const PacingIndicator: FC<Props> = ({
 
       <div className="d-flex flex-wrap gap-2 mt-4">
         {isOver && (
-          <Badge variant="danger" size="sm" pill outline hasBullet>
+          <Badge
+            variant="danger"
+            size="sm"
+            shape="pill"
+            tone="outline"
+            hasBullet
+          >
             {translate('Over expected +{pct}', { pct: pct0(overFraction) })}
           </Badge>
         )}
@@ -285,8 +298,8 @@ export const PacingIndicator: FC<Props> = ({
           <Badge
             variant="warning"
             size="sm"
-            pill
-            outline
+            shape="pill"
+            tone="outline"
             hasBullet
             tooltip={translate(
               'Minimum monthly draw: {pct} of expected, grace {grace}%. Usage covered by credit shows as "Credit compensation" invoice items; when usage stays below the minimum, the top-up to reach it is drawn straight from the balance with no invoice item — that shortfall becomes "Lost" credit.',
@@ -302,8 +315,8 @@ export const PacingIndicator: FC<Props> = ({
         <Badge
           variant="secondary"
           size="sm"
-          pill
-          outline
+          shape="pill"
+          tone="outline"
           hasBullet
           tooltip={translate(
             'Where a linear ramp says consumption should stand on this day of the month.',

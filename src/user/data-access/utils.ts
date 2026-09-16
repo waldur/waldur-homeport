@@ -1,3 +1,5 @@
+import { BadgeVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { AccessorType, AccessType } from './types';
@@ -22,13 +24,13 @@ export const formatAccessType = (accessType: AccessType): string => {
 // Get badge variant based on access type
 export const getAccessTypeBadgeVariant = (
   accessType: AccessType,
-): 'danger' | 'warning' | 'default' => {
-  const variants: Record<AccessType, 'danger' | 'warning' | 'default'> = {
+): BadgeVariant => {
+  const variants: Record<AccessType, BadgeVariant> = {
     staff: 'danger',
     support: 'warning',
     staff_and_support: 'danger',
   };
-  return variants[accessType] || 'default';
+  return variants[accessType] || 'neutral';
 };
 
 // Map accessor type to anonymized category label

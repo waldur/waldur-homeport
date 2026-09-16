@@ -1,9 +1,10 @@
 import { FC, useRef, useState, useEffect } from 'react';
 
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
-import { Badge } from './Badge';
 import { SafeMarkdown } from './SafeMarkdown';
 
 interface TruncatedMarkdownProps {
@@ -32,7 +33,7 @@ const FullMarkdownModal: FC<FullMarkdownModalProps> = ({ resolve }) => {
           {resolve.showInternalBadge && (
             <>
               {' '}
-              <Badge variant="warning" pill outline>
+              <Badge variant="warning" shape="pill" tone="outline">
                 {translate('Internal')}
               </Badge>
             </>

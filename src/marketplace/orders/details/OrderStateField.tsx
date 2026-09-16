@@ -1,3 +1,5 @@
+import { BadgeShape, BadgeTone } from 'waldur-ui';
+
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 
@@ -5,10 +7,16 @@ import { ORDER_STATE_LABELS } from '../OrderStates';
 
 export const OrderStateField = ({
   order,
-  pill,
-  outline,
+  shape,
+  tone,
   hasBullet = false,
   size = undefined,
+}: {
+  order: { state: string };
+  shape?: BadgeShape;
+  tone?: BadgeTone;
+  hasBullet?: boolean;
+  size?: 'sm' | 'lg';
 }) => {
   return (
     <StateIndicator
@@ -23,8 +31,8 @@ export const OrderStateField = ({
               : 'warning'
       }
       active={false}
-      pill={pill}
-      outline={outline}
+      shape={shape}
+      tone={tone}
       hasBullet={hasBullet}
       size={size}
     />

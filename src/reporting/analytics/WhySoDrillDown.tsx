@@ -7,7 +7,8 @@ import classNames from 'classnames';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -56,8 +57,8 @@ const DrillDownChange: FC<{ change?: DrillDownDataItem['change'] }> = ({
           {changeDirection === 'down' && <TrendDownIcon weight="bold" />}
         </>
       }
-      pill
-      outline
+      shape="pill"
+      tone="outline"
       className={classNames(
         'd-inline-flex align-items-center gap-1',
         changeDirection === 'stable' && 'text-muted',

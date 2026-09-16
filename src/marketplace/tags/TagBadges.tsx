@@ -2,8 +2,7 @@ import { FC, MouseEvent } from 'react';
 import { NestedTag } from 'waldur-js-client';
 
 import { Tag, Tooltip } from 'waldur-ui';
-
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 interface TagBadgesProps {
   tags?: NestedTag[];
@@ -48,7 +47,7 @@ export const TagBadges: FC<TagBadgesProps> = ({
       ))}
       {hiddenTags.length > 0 && (
         <Tooltip label={hiddenTags.map((t) => t.name).join(', ')}>
-          <Badge variant="default" size="sm" outline>
+          <Badge variant="neutral" size="sm" tone="outline">
             +{hiddenTags.length}
           </Badge>
         </Tooltip>

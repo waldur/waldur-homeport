@@ -30,8 +30,8 @@ export const ActionDialogHeader = ({
             <ResourceStateField
               resource={marketplaceResource}
               size="sm"
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             />
           </div>
         </div>

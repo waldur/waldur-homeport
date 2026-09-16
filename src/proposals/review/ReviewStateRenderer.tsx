@@ -8,8 +8,8 @@ export const ReviewStateRenderer = (props) => {
     <StateIndicator
       variant={variant}
       label={formatReviewState(props.row.state)}
-      outline
-      pill
+      tone="outline"
+      shape="pill"
     />
   );
 };

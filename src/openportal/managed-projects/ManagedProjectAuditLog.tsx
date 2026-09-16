@@ -4,7 +4,9 @@ import {
   openportalManagedProjectAuditList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { DetailsDiff } from '@/openportal/DetailsDiff';
@@ -36,13 +38,13 @@ const eventTypeLabels: Record<ManagedProjectAuditEntry['event_type'], string> =
 
 const eventTypeVariants: Record<
   ManagedProjectAuditEntry['event_type'],
-  'success' | 'danger' | 'warning' | 'info' | 'default'
+  BadgeVariant
 > = {
   created: 'info',
   approved: 'success',
   rejected: 'danger',
   deleted: 'danger',
-  note_added: 'default',
+  note_added: 'neutral',
   details_updated: 'info',
   project_attached: 'success',
   project_detached: 'warning',
@@ -120,7 +122,10 @@ export const ManagedProjectAuditLog = ({
       title: translate('Event'),
       orderField: 'event_type',
       render: ({ row }) => (
-        <Badge variant={eventTypeVariants[row.event_type] || 'default'} pill>
+        <Badge
+          variant={eventTypeVariants[row.event_type] || 'neutral'}
+          shape="pill"
+        >
           {eventTypeLabels[row.event_type] || row.event_type}
         </Badge>
       ),

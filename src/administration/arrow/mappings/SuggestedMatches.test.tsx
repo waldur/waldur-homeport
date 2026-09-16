@@ -54,9 +54,12 @@ describe('SuggestedMatches', () => {
     expect(screen.getByText('Resource Low')).toBeInTheDocument();
 
     // Check confidence badges
-    expect(screen.getByText('90%')).toHaveClass('bg-success');
-    expect(screen.getByText('60%')).toHaveClass('bg-warning');
-    expect(screen.getByText('30%')).toHaveClass('bg-secondary');
+    expect(screen.getByText('90%')).toHaveAttribute('data-variant', 'success');
+    expect(screen.getByText('60%')).toHaveAttribute('data-variant', 'warning');
+    expect(screen.getByText('30%')).toHaveAttribute(
+      'data-variant',
+      'secondary',
+    );
   });
 
   it('calls adminArrowCustomerMappingsLinkResource when Link button is clicked', async () => {

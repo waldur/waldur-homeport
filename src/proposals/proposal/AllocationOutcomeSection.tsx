@@ -267,8 +267,8 @@ const AllocationOutcome: FC<{ proposal: Proposal; projectUuid: string }> = ({
                     row.allocated ? (
                       <ResourceStateField
                         resource={row.allocated}
-                        pill
-                        outline
+                        shape="pill"
+                        tone="outline"
                       />
                     ) : (
                       translate('Open')

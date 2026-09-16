@@ -1,6 +1,8 @@
 import { CheckIcon, XIcon, ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Alert, Card, Badge, Row, Col } from 'react-bootstrap';
+import { Alert, Card, Row, Col } from 'react-bootstrap';
+
+import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -70,15 +72,16 @@ export const OfferingMetadataDisplay: FunctionComponent<
             {offeringInfo.type && (
               <p>
                 <strong>{translate('Type:')}</strong>{' '}
-                <Badge bg="primary">{offeringInfo.type}</Badge>
+                <Badge variant="primary">{offeringInfo.type}</Badge>
               </p>
             )}
             {offeringInfo.state && (
               <p>
                 <strong>{translate('State:')}</strong>{' '}
                 <Badge
-                  bg={offeringInfo.state === 'Active' ? 'success' : 'secondary'}
-                  text={offeringInfo.state === 'Active' ? 'white' : 'dark'}
+                  variant={
+                    offeringInfo.state === 'Active' ? 'success' : 'secondary'
+                  }
                 >
                   {offeringInfo.state}
                 </Badge>
@@ -107,7 +110,7 @@ export const OfferingMetadataDisplay: FunctionComponent<
           <h6>{translate('Included Components')}</h6>
           <div className="d-flex flex-wrap gap-2">
             {metadata.exported_components.map((component) => (
-              <Badge key={component} bg="primary" pill>
+              <Badge key={component} variant="primary" shape="pill">
                 {componentLabels[component] || component}
               </Badge>
             ))}

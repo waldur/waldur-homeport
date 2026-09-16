@@ -1,4 +1,5 @@
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { renderFieldOrDash } from '@/table/utils';
 
 const STATUS_COLORS = {
@@ -20,8 +21,8 @@ export const IssueStatus = ({ status }) => {
     <Badge
       variant={STATUS_COLORS[status] || 'default'}
       size="sm"
-      pill
-      outline
+      shape="pill"
+      tone="outline"
       className="flex-shrink-0"
     >
       {status}

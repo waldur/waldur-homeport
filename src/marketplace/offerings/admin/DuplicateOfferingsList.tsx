@@ -6,7 +6,8 @@ import {
   marketplaceOpenstackDuplicateOfferingsList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
@@ -100,7 +101,7 @@ const DuplicateOfferingsExpandableRow: FC<{ row: DuplicateOfferingGroup }> = ({
             title: translate('Recommended'),
             render: ({ row }) =>
               row.is_recommended_keeper ? (
-                <Badge variant="primary" pill outline>
+                <Badge variant="primary" shape="pill" tone="outline">
                   {translate('Keeper')}
                 </Badge>
               ) : (

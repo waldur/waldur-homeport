@@ -1,5 +1,7 @@
 import { Offering } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { StateIndicator } from '@/core/StateIndicator';
 
 import {
@@ -15,6 +17,14 @@ interface OfferingStateFieldProps {
   hasBullet?: boolean;
 }
 
+const OFFERING_STATE_VARIANTS: Record<string, BadgeVariant> = {
+  [DRAFT]: 'neutral',
+  [ACTIVE]: 'success',
+  [PAUSED]: 'warning',
+  [ARCHIVED]: 'neutral',
+  [UNAVAILABLE]: 'danger',
+};
+
 export const OfferingStateField = ({
   offering,
   hasBullet,
@@ -22,18 +32,10 @@ export const OfferingStateField = ({
   return (
     <StateIndicator
       label={offering.state}
-      variant={
-        {
-          [DRAFT]: 'default',
-          [ACTIVE]: 'success',
-          [PAUSED]: 'warning',
-          [ARCHIVED]: 'default',
-          [UNAVAILABLE]: 'danger',
-        }[offering.state]
-      }
+      variant={OFFERING_STATE_VARIANTS[offering.state] || 'neutral'}
       hasBullet={hasBullet}
-      outline
-      pill
+      tone="outline"
+      shape="pill"
       data-testid="offering-state-field"
     />
   );

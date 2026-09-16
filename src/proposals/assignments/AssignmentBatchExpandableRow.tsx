@@ -2,7 +2,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { assignmentBatchesRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -118,7 +119,7 @@ export const AssignmentBatchExpandableRow: FC<
             title: translate('COI'),
             render: ({ row: item }) =>
               item.has_coi ? (
-                <Badge variant="danger" outline>
+                <Badge variant="danger" tone="outline">
                   {translate('COI detected')} ({item.coi_count})
                 </Badge>
               ) : (

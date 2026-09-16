@@ -5,7 +5,8 @@ import {
 import { FC, useCallback } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
 import { StringGroup, BooleanGroup, TextGroup } from '@/form';
@@ -126,12 +127,12 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
                 variant="success"
                 size="sm"
                 leftIcon={<ShieldCheckIcon weight="bold" />}
-                light
+                tone="light"
               >
                 {translate('Set')}
               </Badge>
             ) : (
-              <Badge variant="warning" size="sm" light>
+              <Badge variant="warning" size="sm" tone="light">
                 {translate('Not set')}
               </Badge>
             )}

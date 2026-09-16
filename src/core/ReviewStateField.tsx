@@ -6,7 +6,8 @@ import {
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -41,8 +42,8 @@ export const ReviewStateField: FC<{ state?: string }> = ({ state }) => {
     <Badge
       variant={status.color}
       leftIcon={<status.icon weight="bold" />}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
     >
       {status.label}
     </Badge>

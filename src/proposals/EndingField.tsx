@@ -1,7 +1,8 @@
 import { LockIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { parseDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -50,8 +51,8 @@ export const EndingField = ({
           <Badge
             variant="blue"
             size="sm"
-            pill
-            outline
+            shape="pill"
+            tone="outline"
             onlyIcon
             tooltip={translate('Fixed duration')}
           >

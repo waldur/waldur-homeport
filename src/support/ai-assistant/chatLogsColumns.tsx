@@ -1,7 +1,8 @@
 import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { InjectionSeverityEnum } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { BooleanField } from '@/table/BooleanField';
@@ -29,12 +30,12 @@ export const flaggedColumn = <T extends FlaggableRow>(
         variant="danger"
         size="sm"
         leftIcon={<ShieldWarningIcon weight="bold" />}
-        outline
+        tone="outline"
       >
         {translate('Yes')}
       </Badge>
     ) : (
-      <Badge variant="success" size="sm" outline>
+      <Badge variant="success" size="sm" tone="outline">
         {translate('Clean')}
       </Badge>
     ),
@@ -74,7 +75,7 @@ export const maxSeverityColumn = <T extends SeverityRow>(
           row.max_severity as InjectionSeverityEnum,
         )}
         size="sm"
-        outline
+        tone="outline"
       >
         {severityLabels[row.max_severity as InjectionSeverityEnum]}
       </Badge>

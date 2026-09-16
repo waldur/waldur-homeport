@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface RestrictionsValueProps {
@@ -17,9 +19,9 @@ export const RestrictionsValue: FC<RestrictionsValueProps> = ({
   return (
     <div className="d-flex flex-wrap gap-2">
       {values.map((value) => (
-        <span key={value} className="badge badge-light">
+        <Badge key={value} variant="neutral" tone="light">
           {value}
-        </span>
+        </Badge>
       ))}
     </div>
   );

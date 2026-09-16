@@ -1,8 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { passkeysList } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -18,7 +19,7 @@ import { PasskeyRegisterButton } from './PasskeyRegisterButton';
 const PasskeyStatus: FunctionComponent<{ row }> = ({ row }) => {
   if (!row.is_active) {
     return (
-      <Badge variant="danger" light>
+      <Badge variant="danger" tone="light">
         {translate('Revoked')}
       </Badge>
     );
@@ -29,13 +30,13 @@ const PasskeyStatus: FunctionComponent<{ row }> = ({ row }) => {
   // "stopped working".
   if (row.is_orphaned) {
     return (
-      <Badge variant="warning" light>
+      <Badge variant="warning" tone="light">
         {translate('Unusable')}
       </Badge>
     );
   }
   return (
-    <Badge variant="success" light>
+    <Badge variant="success" tone="light">
       {translate('Active')}
     </Badge>
   );

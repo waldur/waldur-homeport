@@ -1,9 +1,9 @@
 import { FC, useEffect, useMemo } from 'react';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -49,7 +49,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
                 ? 'warning'
                 : 'primary';
           return (
-            <Badge variant={variant} pill outline>
+            <Badge variant={variant} shape="pill" tone="outline">
               {formatDuration(row.duration_seconds)}
             </Badge>
           );
@@ -67,8 +67,8 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
           row.wait_event_type ? (
             <Badge
               variant={row.wait_event_type === 'Lock' ? 'warning' : 'secondary'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {row.wait_event_type}
             </Badge>

@@ -10,9 +10,10 @@ import {
   proposalMyRequestedResourcesCount,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { isAuthenticated } from '@/auth/AuthService';
 import { fetchResultCount } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isEmpty } from '@/core/utils';
@@ -235,7 +236,7 @@ export const getTabs = (
           title: (
             <>
               {translate('My requests')}{' '}
-              <Badge variant="secondary" pill>
+              <Badge variant="secondary" shape="pill">
                 {resourceRequestCount}
               </Badge>
             </>

@@ -1,9 +1,11 @@
 import { OfferingUserState, RuntimeStateEnum } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
-const getStateBadgeVariant = (state: OfferingUserState) => {
+const getStateBadgeVariant = (state: OfferingUserState): BadgeVariant => {
   switch (state) {
     case 'Creating':
       return 'blue';
@@ -19,17 +21,17 @@ const getStateBadgeVariant = (state: OfferingUserState) => {
     case 'Deleted':
       return 'danger';
     default:
-      return 'default';
+      return 'neutral';
   }
 };
 
 export const OfferingUserStateField = ({ row }) => (
-  <Badge variant={getStateBadgeVariant(row.state)} pill outline>
+  <Badge variant={getStateBadgeVariant(row.state)} shape="pill" tone="outline">
     {row.state}
   </Badge>
 );
 
-const getRuntimeStateBadgeVariant = (state: RuntimeStateEnum) => {
+const getRuntimeStateBadgeVariant = (state: RuntimeStateEnum): BadgeVariant => {
   switch (state) {
     case 'Active':
       return 'success';
@@ -37,7 +39,7 @@ const getRuntimeStateBadgeVariant = (state: RuntimeStateEnum) => {
     case 'Pending additional validation':
       return 'warning';
     default:
-      return 'default';
+      return 'neutral';
   }
 };
 
@@ -49,8 +51,8 @@ export const OfferingUserRuntimeStateField = ({ row }) => {
   return (
     <Badge
       variant={getRuntimeStateBadgeVariant(row.runtime_state)}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
     >
       {row.runtime_state}
     </Badge>

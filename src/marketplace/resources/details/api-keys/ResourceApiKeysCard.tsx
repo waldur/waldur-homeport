@@ -7,6 +7,8 @@ import {
   ResourceApiKeyStatus,
 } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -23,7 +25,9 @@ import { useUser } from '@/workspace/hooks';
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
 import { TRANSITIONAL, useInvalidateRevealedKey } from './useResourceApiKeys';
 
-const getStateVariant = (state: ResourceApiKeyState) => {
+const getStateVariant = (
+  state: ResourceApiKeyState,
+): { variant: BadgeVariant; active: boolean } => {
   if (state === 'Erred') return { variant: 'danger', active: false };
   if (state === 'OK') return { variant: 'success', active: false };
   // Creating / Updating — in progress, show the spinner.
@@ -121,8 +125,8 @@ const getColumns = (): Column<ResourceApiKeyStatus>[] => [
           variant={variant}
           active={active}
           tooltip={row.state === 'Erred' ? row.error_message : ''}
-          pill
-          outline
+          shape="pill"
+          tone="outline"
         />
       );
     },

@@ -4,7 +4,8 @@ import { useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
 import { overrideSettingsRetrieve, statsTableGrowth } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -59,7 +60,11 @@ export const TableGrowthPage = () => {
         state="admin-table-growth-settings"
         className="text-decoration-none"
       >
-        <Badge variant={isEnabled ? 'success' : 'warning'} pill outline>
+        <Badge
+          variant={isEnabled ? 'success' : 'warning'}
+          shape="pill"
+          tone="outline"
+        >
           {isEnabled
             ? translate('Monitoring enabled')
             : translate('Monitoring disabled')}

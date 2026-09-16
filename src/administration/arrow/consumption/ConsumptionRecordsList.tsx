@@ -6,8 +6,8 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -135,15 +135,15 @@ export const ConsumptionRecordsList: FunctionComponent<
             <div className="d-flex flex-column gap-1">
               <Badge
                 variant={row.is_finalized ? 'success' : 'warning'}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {row.is_finalized
                   ? translate('Finalized')
                   : translate('Pending')}
               </Badge>
               {row.is_reconciled && (
-                <Badge variant="primary" pill outline>
+                <Badge variant="primary" shape="pill" tone="outline">
                   {translate('Reconciled')}
                 </Badge>
               )}

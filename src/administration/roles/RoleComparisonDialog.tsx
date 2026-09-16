@@ -42,8 +42,8 @@ const columns: Column<ComparisonRow>[] = [
       <StateIndicator
         label={row.added ? translate('Added') : translate('Removed')}
         variant={row.added ? 'success' : 'danger'}
-        outline
-        pill
+        tone="outline"
+        shape="pill"
       />
     ),
     id: 'change',

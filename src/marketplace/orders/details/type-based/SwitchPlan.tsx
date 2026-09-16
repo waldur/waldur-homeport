@@ -2,8 +2,8 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
@@ -42,7 +42,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
         labelWidth={200}
         value={
           <span className="d-inline-flex align-items-center gap-2">
-            <Badge variant="default" pill outline>
+            <Badge variant="neutral" shape="pill" tone="outline">
               {order.old_plan_name}
             </Badge>
             <PlanBillingModeBadge
@@ -56,7 +56,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
         labelWidth={200}
         value={
           <span className="d-inline-flex align-items-center gap-2">
-            <Badge variant="moss" pill outline>
+            <Badge variant="moss" shape="pill" tone="outline">
               {order.new_plan_name}
             </Badge>
             <PlanBillingModeBadge

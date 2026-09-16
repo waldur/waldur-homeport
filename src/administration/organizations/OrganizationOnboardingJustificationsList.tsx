@@ -6,7 +6,9 @@ import {
   ValidationDecisionEnum,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -20,14 +22,14 @@ import { OnboardingJustificationExpandableRow } from './OnboardingJustificationE
 const DecisionBadge: FC<{ decision: ValidationDecisionEnum }> = ({
   decision,
 }) => {
-  const decisionColors = {
+  const decisionColors: Record<ValidationDecisionEnum, BadgeVariant> = {
     pending: 'warning',
     approved: 'success',
     rejected: 'danger',
   };
   const color = decisionColors[decision] || 'secondary';
   return (
-    <Badge variant={color} pill outline>
+    <Badge variant={color} shape="pill" tone="outline">
       {decision}
     </Badge>
   );

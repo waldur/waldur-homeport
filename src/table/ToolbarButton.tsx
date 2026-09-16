@@ -4,8 +4,8 @@ import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 
 interface ToolbarButtonProps {
@@ -76,8 +76,8 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
         <Badge
           variant="primary"
           size="sm"
-          pill
-          outline
+          shape="pill"
+          tone="outline"
           className="position-absolute top-0 start-100 translate-middle fs-7"
         >
           {typeof badge === 'number' && badge > 9 ? '9+' : badge}

@@ -4,8 +4,9 @@ import {
   accessSubnetsResourceImpactRetrieve,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import Table from '@/table/Table';
@@ -43,9 +44,9 @@ const AddressList = ({ row }: { row: AccessSubnetImpactResource }) => {
           <Badge
             key={`${address.source}-${address.inet}`}
             variant={
-              address.source === 'provider_default' ? 'secondary' : 'default'
+              address.source === 'provider_default' ? 'secondary' : 'neutral'
             }
-            outline
+            tone="outline"
             tooltip={
               address.source === 'provider_default'
                 ? translate('Published by the service provider.')
@@ -164,11 +165,11 @@ export const AccessSubnetImpactDialog: FC<AccessSubnetImpactDialogProps> = ({
             title: translate('Enforcement'),
             render: ({ row }) =>
               row.concealment_enabled ? (
-                <Badge variant="success" outline>
+                <Badge variant="success" tone="outline">
                   {translate('Enforced')}
                 </Badge>
               ) : (
-                <Badge variant="default" outline>
+                <Badge variant="neutral" tone="outline">
                   {translate('Advisory')}
                 </Badge>
               ),

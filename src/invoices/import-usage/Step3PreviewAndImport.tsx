@@ -3,9 +3,9 @@ import { FormCheck } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 
-import { Tooltip } from 'waldur-ui';
+import { BadgeVariant, Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -32,8 +32,8 @@ const statusMessages = {
   created: translate('Created'),
 };
 
-const statusVariants = {
-  ready: 'default',
+const statusVariants: Record<string, BadgeVariant> = {
+  ready: 'neutral',
   skipped: 'warning',
   error: 'danger',
   created: 'success',
@@ -41,7 +41,7 @@ const statusVariants = {
 
 const StatusField = ({ row }: { row: UsageImportRow }) => (
   <Tooltip label={row.error}>
-    <Badge variant={statusVariants[row.status]} pill outline>
+    <Badge variant={statusVariants[row.status]} shape="pill" tone="outline">
       {statusMessages[row.status]}
     </Badge>
   </Tooltip>
@@ -108,7 +108,7 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
           <div>
             <WithTooltip label={row.customerName} />
             {row.customerMatched && (
-              <Badge variant="success" light className="ms-2">
+              <Badge variant="success" tone="light" className="ms-2">
                 {translate('Matched')}
               </Badge>
             )}

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -171,7 +172,7 @@ export const PoolSummaryDialog: FC = () => {
                 {INVITATION_STATUSES.map((item) => (
                   <tr key={item.status}>
                     <td>
-                      <Badge variant={item.variant} pill outline>
+                      <Badge variant={item.variant} shape="pill" tone="outline">
                         {item.label}
                       </Badge>
                     </td>

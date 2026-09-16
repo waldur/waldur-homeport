@@ -7,17 +7,19 @@ import {
   marketplaceCourseAccountsList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
-const stateConfig: Record<string, { label: string; color: string }> = {
+const stateConfig: Record<string, { label: string; color: BadgeVariant }> = {
   Pending: { label: translate('Pending'), color: 'warning' },
   OK: { label: translate('OK'), color: 'success' },
   Erred: { label: translate('Erred'), color: 'danger' },
-  Closed: { label: translate('Closed'), color: 'default' },
+  Closed: { label: translate('Closed'), color: 'neutral' },
 };
 
 interface Step3CreationProgressProps {
@@ -102,17 +104,17 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
     <div>
       <div className="d-flex gap-3 mb-4 align-items-center">
         {counts.Pending > 0 && (
-          <Badge variant="warning" pill outline>
+          <Badge variant="warning" shape="pill" tone="outline">
             {translate('{n} Pending', { n: counts.Pending })}
           </Badge>
         )}
         {counts.OK > 0 && (
-          <Badge variant="success" pill outline>
+          <Badge variant="success" shape="pill" tone="outline">
             {translate('{n} Created', { n: counts.OK })}
           </Badge>
         )}
         {counts.Erred > 0 && (
-          <Badge variant="danger" pill outline>
+          <Badge variant="danger" shape="pill" tone="outline">
             {translate('{n} Failed', { n: counts.Erred })}
           </Badge>
         )}
@@ -142,7 +144,7 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
                 <tr key={account.uuid}>
                   <td>{renderFieldOrDash(account.email)}</td>
                   <td>
-                    <Badge variant={config.color} pill outline>
+                    <Badge variant={config.color} shape="pill" tone="outline">
                       {config.label}
                     </Badge>
                   </td>

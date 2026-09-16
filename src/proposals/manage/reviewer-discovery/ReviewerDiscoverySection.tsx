@@ -10,8 +10,8 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -65,7 +65,7 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {statusDisplay}
     </Badge>
   );

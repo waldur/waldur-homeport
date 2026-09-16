@@ -1,5 +1,7 @@
 import { BackendTypeEnum, ProviderHelpdesk } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 // Single source of truth for helpdesk backend types: the human labels shown in
@@ -28,16 +30,20 @@ const URL_SETTING_KEY: Partial<Record<BackendTypeEnum, string>> = {
   smax: 'SMAX_API_URL',
 };
 
-const HELPDESK_HEALTH_META: Record<string, { variant: string; label: string }> =
-  {
-    healthy: { variant: 'success', label: translate('Healthy') },
-    degraded: { variant: 'warning', label: translate('Degraded') },
-    unhealthy: { variant: 'danger', label: translate('Unhealthy') },
-    unreachable: { variant: 'danger', label: translate('Unreachable') },
-    inactive: { variant: 'secondary', label: translate('Inactive') },
-  };
+const HELPDESK_HEALTH_META: Record<
+  string,
+  { variant: BadgeVariant; label: string }
+> = {
+  healthy: { variant: 'success', label: translate('Healthy') },
+  degraded: { variant: 'warning', label: translate('Degraded') },
+  unhealthy: { variant: 'danger', label: translate('Unhealthy') },
+  unreachable: { variant: 'danger', label: translate('Unreachable') },
+  inactive: { variant: 'secondary', label: translate('Inactive') },
+};
 
-export const getHealthMeta = (status?: string) =>
+export const getHealthMeta = (
+  status?: string,
+): { variant: BadgeVariant; label: string } =>
   (status && HELPDESK_HEALTH_META[status]) || {
     variant: 'secondary',
     label: translate('Unknown'),

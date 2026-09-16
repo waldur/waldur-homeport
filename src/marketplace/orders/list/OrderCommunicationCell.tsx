@@ -6,7 +6,9 @@ import {
 import { FC, ReactNode } from 'react';
 import { OrderDetails } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { stripHtml } from '@/core/sanitize';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -23,7 +25,7 @@ const getOrderCommunication = (
   order: OrderDetails,
 ): {
   label: string;
-  variant: string;
+  variant: BadgeVariant;
   icon: ReactNode;
   message: string;
 } | null => {
@@ -59,8 +61,8 @@ export const OrderCommunicationCell: FC<{ row: OrderDetails }> = ({ row }) => {
     <Badge
       variant={info.variant}
       leftIcon={info.icon}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
       tooltip={info.message || undefined}
     >
       {info.label}

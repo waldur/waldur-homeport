@@ -2,8 +2,8 @@ import { FC, useMemo } from 'react';
 import { assignmentBatchesList, AssignmentBatchList } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
@@ -80,7 +80,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
                 count: row.items_pending_count,
               })}
             >
-              <Badge variant="warning" pill outline>
+              <Badge variant="warning" shape="pill" tone="outline">
                 {row.items_pending_count}
               </Badge>
             </Tooltip>
@@ -89,7 +89,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
                 count: row.items_accepted_count,
               })}
             >
-              <Badge variant="success" pill outline>
+              <Badge variant="success" shape="pill" tone="outline">
                 {row.items_accepted_count}
               </Badge>
             </Tooltip>
@@ -98,7 +98,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
                 count: row.items_declined_count,
               })}
             >
-              <Badge variant="danger" pill outline>
+              <Badge variant="danger" shape="pill" tone="outline">
                 {row.items_declined_count}
               </Badge>
             </Tooltip>
@@ -134,7 +134,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
           <span>
             {row.expires_at ? formatDateTime(row.expires_at) : '-'}
             {row.is_expired && (
-              <Badge variant="danger" outline className="ms-1">
+              <Badge variant="danger" tone="outline" className="ms-1">
                 {translate('Expired')}
               </Badge>
             )}

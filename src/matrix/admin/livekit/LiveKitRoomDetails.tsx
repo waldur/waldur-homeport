@@ -13,6 +13,8 @@ import {
   LiveKitTrack,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { formatRelative } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -58,15 +60,12 @@ const ParticipantRow: FC<{ participant: LiveKitParticipant }> = ({
   <div className="border-bottom py-3">
     <div className="d-flex align-items-center justify-content-between">
       <span className="fw-bold">{participant.identity}</span>
-      <span
-        className={
-          participant.state === 'ACTIVE'
-            ? 'badge badge-light-success'
-            : 'badge badge-light'
-        }
+      <Badge
+        variant={participant.state === 'ACTIVE' ? 'success' : 'neutral'}
+        tone="light"
       >
         {participant.state}
-      </span>
+      </Badge>
     </div>
     <div className="text-muted fs-7 mb-2 d-flex align-items-center gap-2">
       {participant.is_publisher && (

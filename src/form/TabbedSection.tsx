@@ -1,8 +1,9 @@
 import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { useSettingsUrlSync } from '@/administration/settings/useSettingsUrlSync';
-import { Badge } from '@/core/Badge';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -137,7 +138,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
                       <Badge
                         variant="secondary"
                         size="sm"
-                        light
+                        tone="light"
                         className="ms-2"
                       >
                         {tab.count}

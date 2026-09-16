@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { ArrowLicense } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -15,7 +16,7 @@ export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
     <Card.Header>
       <h5 className="mb-0">
         {translate('Arrow Licenses')}
-        <Badge variant="default" outline className="ms-2">
+        <Badge variant="neutral" tone="outline" className="ms-2">
           {licenses?.length || 0}
         </Badge>
       </h5>

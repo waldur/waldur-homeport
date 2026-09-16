@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
@@ -15,7 +16,7 @@ export const ChangedLimitField: FunctionComponent<ChangedLimitFieldProps> = ({
 }) => {
   if (changedLimit === 0) {
     return (
-      <Badge variant="default" size="sm" pill outline>
+      <Badge variant="neutral" size="sm" shape="pill" tone="outline">
         {translate('No change')}
       </Badge>
     );

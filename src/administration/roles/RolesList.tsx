@@ -4,7 +4,8 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { RoleDetails, rolesList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { RoleUsersExpandableRow } from '@/customer/roles/RoleUsersExpandableRow';
 import { translate } from '@/i18n';
@@ -95,11 +96,11 @@ export const RolesList = () => {
           render: ({ row }) => (
             <>
               {row.is_system_role ? (
-                <Badge variant="secondary" pill outline>
+                <Badge variant="secondary" shape="pill" tone="outline">
                   {translate('System')}
                 </Badge>
               ) : (
-                <Badge variant="primary" pill outline>
+                <Badge variant="primary" shape="pill" tone="outline">
                   {translate('Custom')}
                 </Badge>
               )}
@@ -119,12 +120,12 @@ export const RolesList = () => {
                 state="organization-manage"
                 params={{ uuid: row.customer_uuid, tab: 'roles' }}
               >
-                <Badge variant="success" pill outline>
+                <Badge variant="success" shape="pill" tone="outline">
                   {row.customer_name}
                 </Badge>
               </Link>
             ) : (
-              <Badge variant="secondary" pill outline>
+              <Badge variant="secondary" shape="pill" tone="outline">
                 {translate('Deployment-wide')}
               </Badge>
             ),

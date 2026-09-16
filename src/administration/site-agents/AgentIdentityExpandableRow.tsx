@@ -1,7 +1,9 @@
 import { FC } from 'react';
 import { AgentIdentity } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -15,7 +17,7 @@ interface AgentIdentityExpandableRowProps {
   row: AgentIdentity;
 }
 
-const getStateBadgeVariant = (state: string) => {
+const getStateBadgeVariant = (state: string): BadgeVariant => {
   switch (state) {
     case 'Active':
       return 'success';
@@ -24,7 +26,7 @@ const getStateBadgeVariant = (state: string) => {
     case 'Error':
       return 'danger';
     default:
-      return 'default';
+      return 'neutral';
   }
 };
 
@@ -47,8 +49,8 @@ const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
                   ? 'secondary'
                   : 'warning'
             }
-            pill
-            outline={!hasConsumerQueue}
+            shape="pill"
+            tone={hasConsumerQueue ? 'solid' : 'outline'}
           >
             {hasConsumerQueue
               ? translate('Unified consumer')
@@ -153,8 +155,8 @@ export const AgentIdentityExpandableRow: FC<
                       <td>
                         <Badge
                           variant={getStateBadgeVariant(service.state)}
-                          pill
-                          outline
+                          shape="pill"
+                          tone="outline"
                         >
                           {service.state}
                         </Badge>

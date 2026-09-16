@@ -12,7 +12,8 @@ import {
   openportalAccessForEmailList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { useDebouncedValue } from '@/core/useDebouncedValue';
 import { FilterBox } from '@/form/FilterBox';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -142,7 +143,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
               <div className="mb-3">
                 <h5 className="mb-1 fw-bold">{project.name}</h5>
                 <div>
-                  <Badge variant="primary" light>
+                  <Badge variant="primary" tone="light">
                     {projectId}
                   </Badge>
                 </div>

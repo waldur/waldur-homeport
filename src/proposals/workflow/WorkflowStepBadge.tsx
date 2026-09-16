@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import {
@@ -25,7 +26,7 @@ export const WorkflowStepBadge: FC<WorkflowStepBadgeProps> = ({
   // reflow once the badge resolves.
   if (isLoading) {
     return (
-      <Badge variant="outline-secondary" pill>
+      <Badge variant="secondary" shape="pill" tone="outline">
         {translate('Loading step…')}
       </Badge>
     );
@@ -41,7 +42,7 @@ export const WorkflowStepBadge: FC<WorkflowStepBadgeProps> = ({
 
   if (active && activeIndex >= 0) {
     return (
-      <Badge variant="outline-primary" pill>
+      <Badge variant="primary" shape="pill" tone="outline">
         {translate('Step {current} of {total}: {name}', {
           current: activeIndex + 1,
           total: visible.length,
@@ -53,7 +54,7 @@ export const WorkflowStepBadge: FC<WorkflowStepBadgeProps> = ({
 
   const completedCount = visible.filter((s) => s.status === 'completed').length;
   return (
-    <Badge variant="outline-secondary" pill>
+    <Badge variant="secondary" shape="pill" tone="outline">
       {translate('{completed} of {total} steps complete', {
         completed: completedCount,
         total: visible.length,

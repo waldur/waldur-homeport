@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { UserAction } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
@@ -75,7 +75,7 @@ export const PendingActionAlertItem: FC<{
                   : translate('This action has been temporarily silenced')
               }
             >
-              <Badge variant="secondary" size="sm" pill onlyIcon>
+              <Badge variant="secondary" size="sm" shape="pill" onlyIcon>
                 <BellSlashIcon size={12} weight="bold" />
               </Badge>
             </Tooltip>

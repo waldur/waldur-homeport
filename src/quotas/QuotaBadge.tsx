@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 import { Quota } from './types';
 import { formatQuota } from './utils';
@@ -19,8 +19,8 @@ export const QuotaBadge = ({
 
   return (
     <Badge
-      variant="default"
-      outline
+      variant="neutral"
+      tone="outline"
       className={classNames('fw-normal', className)}
     >
       {Boolean(image) && (

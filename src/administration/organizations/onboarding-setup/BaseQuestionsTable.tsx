@@ -14,9 +14,10 @@ import {
   ChecklistTypeEnum,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AddButton } from '@/core/AddButton';
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -372,7 +373,12 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
     {
       title: translate('Type'),
       render: ({ row }) => (
-        <Badge variant="purple" pill outline className="px-3 py-2">
+        <Badge
+          variant="purple"
+          shape="pill"
+          tone="outline"
+          className="px-3 py-2"
+        >
           {getQuestionTypeLabel(row.question_type)}
         </Badge>
       ),
@@ -387,11 +393,21 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
       title: translate('Required'),
       render: ({ row }) =>
         row.required ? (
-          <Badge variant="danger" pill outline className="px-3 py-2">
+          <Badge
+            variant="danger"
+            shape="pill"
+            tone="outline"
+            className="px-3 py-2"
+          >
             {translate('Required')}
           </Badge>
         ) : (
-          <Badge variant="default" pill outline className="px-3 py-2">
+          <Badge
+            variant="neutral"
+            shape="pill"
+            tone="outline"
+            className="px-3 py-2"
+          >
             {translate('Optional')}
           </Badge>
         ),

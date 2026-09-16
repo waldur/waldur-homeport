@@ -1,8 +1,8 @@
 /**
  * ESLint rule to enforce consistent Badge props pattern
- * - Enforce prop ordering: variant, size, pill, outline, onlyIcon
- * - Remove explicit boolean values (light={true} → light)
- * - Enforce pill before outline
+ * - Enforce prop ordering: variant, size, shape, tone, onlyIcon
+ * - Remove explicit boolean values (hasBullet={true} → hasBullet)
+ * - Enforce shape before tone
  */
 
 const PREFERRED_PROP_ORDER = [
@@ -10,12 +10,10 @@ const PREFERRED_PROP_ORDER = [
   'size',
   'leftIcon',
   'rightIcon',
-  'pill',
-  'outline',
-  'light',
+  'shape',
+  'tone',
   'onlyIcon',
   'alignIcon',
-  'roundless',
   'hasBullet',
   'tooltip',
   'tooltipProps',

@@ -270,16 +270,14 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   class="ellipsis"
                 >
                   <span
-                    class=""
+                    class="badge inline-flex items-center justify-center border-[1px] text-[1.075rem] leading-[20px] font-medium transition-colors rounded-full py-[1px] px-[9px]"
                     data-state="closed"
+                    data-testid="default-state-indicator"
+                    data-tone="outline"
+                    data-variant="primary"
+                    label="ACTIVE"
                   >
-                    <span
-                      class="badge-outline-primary badge-pill badge"
-                      data-testid="default-state-indicator"
-                      label="ACTIVE"
-                    >
-                      Active
-                    </span>
+                    Active
                   </span>
                 </td>
                 <td

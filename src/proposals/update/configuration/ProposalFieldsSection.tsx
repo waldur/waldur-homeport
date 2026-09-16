@@ -3,8 +3,8 @@ import { FC, useMemo } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
 import { Select, Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -52,8 +52,8 @@ const UsageList: FC<{ usage: ProposalFieldUsage[] }> = ({ usage }) => (
       const badge = (
         <Badge
           key={item}
-          variant={isConsequential(item) ? 'warning' : 'gray'}
-          outline
+          variant={isConsequential(item) ? 'warning' : 'neutral'}
+          tone="outline"
         >
           {isConsequential(item) && (
             <WarningIcon size={12} weight="bold" className="me-1" />
@@ -108,14 +108,22 @@ export const ProposalFieldsSection: FC<ProposalFieldsSectionProps> = ({
           description={translate(
             'Names the proposal. The awarded project is named after the call and the round start date, followed by this name.',
           )}
-          value={<Badge variant="gray">{getStateLabel('required')}</Badge>}
+          value={
+            <Badge variant="neutral" tone="outline">
+              {getStateLabel('required')}
+            </Badge>
+          }
         />
         <FormTable.Item
           label={translate('Project duration in days')}
           description={translate(
             'States the length of the award, so it cannot be switched off.',
           )}
-          value={<Badge variant="gray">{getStateLabel('required')}</Badge>}
+          value={
+            <Badge variant="neutral" tone="outline">
+              {getStateLabel('required')}
+            </Badge>
+          }
         />
         {metadata.map((row) => {
           const options = row.allowed_states.map((state) => ({

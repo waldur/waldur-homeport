@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { CourseAccount, marketplaceCourseAccountsList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -18,9 +20,12 @@ import { useTeamTableTabs } from '../team/tabs';
 import { CourseAccountActions } from './CourseAccountActions';
 import { CourseAccountExpandableRow } from './CourseAccountExpandableRow';
 
-const courseAccountState = {
+const courseAccountState: Record<
+  string,
+  { label: string; color: BadgeVariant }
+> = {
   Pending: { label: translate('Pending'), color: 'warning' },
-  Closed: { label: translate('Closed'), color: 'default' },
+  Closed: { label: translate('Closed'), color: 'neutral' },
   Erred: { label: translate('Erred'), color: 'danger' },
   OK: { label: translate('OK'), color: 'success' },
 };
@@ -74,7 +79,11 @@ export const ProjectCourseAccountsList = ({ admin = false }) => {
       {
         title: translate('State'),
         render: ({ row }) => (
-          <Badge variant={courseAccountState[row.state].color} pill outline>
+          <Badge
+            variant={courseAccountState[row.state].color}
+            shape="pill"
+            tone="outline"
+          >
             {courseAccountState[row.state].label}
           </Badge>
         ),

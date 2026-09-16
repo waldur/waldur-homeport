@@ -2,6 +2,8 @@ import { ArrowDownIcon, ArrowUpIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
+import { Badge, type BadgeVariant } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 
 interface ChangesAmountBadgeProps {
@@ -20,6 +22,7 @@ interface ChangesAmountBadgeProps {
   reverseColor?: boolean;
   unit?: string;
 }
+
 export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   changes,
   showOnInfinity,
@@ -35,63 +38,103 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   reverseColor,
   unit = '%',
 }) => {
-  let className = asBadge
-    ? `badge${badgePill ? ' badge-pill' : ''}${badgeSm ? ' badge-sm' : ''} badge-${badgeOutline ? 'outline' : 'light'}-`
-    : 'text-';
-  const arrowClassName = asBadge ? '' : 'fs-4';
+  const num = typeof changes === 'string' ? parseFloat(changes) : changes;
 
-  if (typeof changes === 'string') {
-    changes = parseFloat(changes);
-  }
+  const isNonZero = num !== 0 && !Number.isNaN(num);
+  const isNegative = num < 0;
+  const isInfinity = Math.abs(num) === Infinity;
 
-  if (changes !== 0 && !Number.isNaN(changes)) {
-    if (changes < 0) {
-      className += reverseColor ? 'success' : 'danger';
+  let colorVariant: BadgeVariant = 'neutral';
+  let textColorClass = 'text-default';
+  if (isNonZero) {
+    if (isNegative) {
+      colorVariant = reverseColor ? 'success' : 'danger';
+      textColorClass = reverseColor ? 'text-success' : 'text-danger';
     } else {
-      className += reverseColor ? 'danger' : 'success';
+      colorVariant = reverseColor ? 'danger' : 'success';
+      textColorClass = reverseColor ? 'text-danger' : 'text-success';
     }
-  } else {
-    className += 'default';
   }
 
-  const renderNumber = (num) =>
+  const renderNumber = (val: number) =>
     asPrice
-      ? defaultCurrency(num)
+      ? defaultCurrency(val)
       : keepDecimals
-        ? num
-        : num.toFixed?.(fractionDigits);
+        ? val
+        : val.toFixed?.(fractionDigits);
 
-  return changes === undefined || (changes !== 0 && !Number.isNaN(changes)) ? (
-    changes < 0 ? (
-      changes !== -Infinity ? (
-        <span className={classNames(className, 'has-left-icon')}>
-          <span className={classNames(arrowClassName, 'left-icon')}>
-            <ArrowDownIcon weight="bold" />
-          </span>{' '}
-          {showSign && '-'}
-          {renderNumber(Math.abs(changes))}
-          {unit}
-        </span>
-      ) : showOnInfinity ? (
-        <span className={classNames(className, arrowClassName, 'badge-icon')}>
-          <ArrowDownIcon weight="bold" />
-        </span>
-      ) : null
-    ) : changes !== Infinity ? (
-      <span className={classNames(className, 'has-left-icon')}>
-        <span className={classNames(arrowClassName, 'left-icon')}>
-          <ArrowUpIcon weight="bold" />
-        </span>{' '}
-        {showSign && '+'}
-        {renderNumber(changes)}
+  const arrowIcon = isNegative ? (
+    <ArrowDownIcon weight="bold" />
+  ) : (
+    <ArrowUpIcon weight="bold" />
+  );
+
+  if (isNonZero || num === undefined) {
+    if (isInfinity) {
+      if (!showOnInfinity) return null;
+      if (asBadge) {
+        return (
+          <Badge
+            variant={colorVariant}
+            size={badgeSm ? 'sm' : undefined}
+            shape={badgePill ? 'pill' : undefined}
+            tone={badgeOutline ? 'outline' : 'light'}
+            onlyIcon
+          >
+            {arrowIcon}
+          </Badge>
+        );
+      }
+      return (
+        <span className={classNames(textColorClass, 'fs-4')}>{arrowIcon}</span>
+      );
+    }
+
+    const content = (
+      <>
+        {showSign && (isNegative ? '-' : '+')}
+        {renderNumber(isNegative ? Math.abs(num) : num)}
         {unit}
+      </>
+    );
+
+    if (asBadge) {
+      return (
+        <Badge
+          variant={colorVariant}
+          size={badgeSm ? 'sm' : undefined}
+          leftIcon={arrowIcon}
+          shape={badgePill ? 'pill' : undefined}
+          tone={badgeOutline ? 'outline' : 'light'}
+        >
+          {content}
+        </Badge>
+      );
+    }
+
+    return (
+      <span className={textColorClass}>
+        <span className="fs-4 me-1">{arrowIcon}</span>
+        {content}
       </span>
-    ) : showOnInfinity ? (
-      <span className={classNames(className, arrowClassName, 'badge-icon')}>
-        <ArrowUpIcon weight="bold" />
-      </span>
-    ) : null
-  ) : showOnZero ? (
-    <span className={className}>0{unit}</span>
-  ) : null;
+    );
+  }
+
+  if (showOnZero) {
+    if (asBadge) {
+      return (
+        <Badge
+          variant="neutral"
+          size={badgeSm ? 'sm' : undefined}
+          shape={badgePill ? 'pill' : undefined}
+          tone={badgeOutline ? 'outline' : 'light'}
+        >
+          0{unit}
+        </Badge>
+      );
+    }
+    return <span className="text-default">0{unit}</span>;
+  }
+
+  return null;
 };

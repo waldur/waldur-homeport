@@ -5,6 +5,8 @@ import {
   BroadcastMessagesListData,
 } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -33,8 +35,8 @@ const mandatoryFields: BroadcastMessagesListData['query']['field'] = [
   'send_at',
 ];
 
-const broadcastState = {
-  DRAFT: { label: translate('Draft'), color: 'default' },
+const broadcastState: Record<string, { label: string; color: BadgeVariant }> = {
+  DRAFT: { label: translate('Draft'), color: 'neutral' },
   SENT: { label: translate('Sent'), color: 'success' },
 };
 
@@ -77,8 +79,8 @@ export const BroadcastList: FunctionComponent<BroadcastListProps> = ({
             <StateIndicator
               label={broadcastState[row.state]?.label || row.state}
               variant={broadcastState[row.state]?.color || 'info'}
-              outline
-              pill
+              tone="outline"
+              shape="pill"
             />
           ),
           filter: 'state',

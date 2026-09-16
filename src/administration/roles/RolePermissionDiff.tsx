@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { PermissionDiff, isEmptyDiff } from './permissionDiff';
@@ -13,7 +14,7 @@ export const PermissionDeltaCounters: FC<{ diff: PermissionDiff }> = ({
   diff,
 }) =>
   isEmptyDiff(diff) ? (
-    <Badge variant="secondary" pill outline>
+    <Badge variant="secondary" shape="pill" tone="outline">
       {translate('Identical')}
     </Badge>
   ) : (
@@ -21,8 +22,8 @@ export const PermissionDeltaCounters: FC<{ diff: PermissionDiff }> = ({
       {diff.added.length > 0 && (
         <Badge
           variant="success"
-          pill
-          outline
+          shape="pill"
+          tone="outline"
           tooltip={translate('{count} permissions this role adds', {
             count: diff.added.length,
           })}
@@ -34,8 +35,8 @@ export const PermissionDeltaCounters: FC<{ diff: PermissionDiff }> = ({
       {diff.removed.length > 0 && (
         <Badge
           variant="danger"
-          pill
-          outline
+          shape="pill"
+          tone="outline"
           tooltip={translate('{count} permissions this role drops', {
             count: diff.removed.length,
           })}

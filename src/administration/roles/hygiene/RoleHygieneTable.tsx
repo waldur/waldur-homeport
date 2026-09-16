@@ -4,7 +4,9 @@ import {
   RoleHygieneFindingSeverityEnum,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
@@ -14,11 +16,12 @@ import { useTable } from '@/table/useTable';
 import { RoleHygieneFindingDetails } from './RoleHygieneFindingDetails';
 import { filterFindings, getCheckLabel } from './utils';
 
-const SEVERITY_VARIANTS: Record<RoleHygieneFindingSeverityEnum, string> = {
-  error: 'danger',
-  warning: 'warning',
-  info: 'default',
-};
+const SEVERITY_VARIANTS: Record<RoleHygieneFindingSeverityEnum, BadgeVariant> =
+  {
+    error: 'danger',
+    warning: 'warning',
+    info: 'neutral',
+  };
 
 const getSeverityLabel = (severity: RoleHygieneFindingSeverityEnum) =>
   ({
@@ -78,7 +81,13 @@ export const RoleHygieneTable = ({
       title: (
         <>
           {tab.label}
-          <Badge variant="default" size="sm" pill outline className="ms-2">
+          <Badge
+            variant="neutral"
+            size="sm"
+            shape="pill"
+            tone="outline"
+            className="ms-2"
+          >
             {count(tab.value)}
           </Badge>
         </>
@@ -104,8 +113,8 @@ export const RoleHygieneTable = ({
             <Badge
               variant={SEVERITY_VARIANTS[row.severity]}
               size="sm"
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {getSeverityLabel(row.severity)}
             </Badge>
@@ -152,7 +161,7 @@ export const RoleHygieneTable = ({
             <>
               {row.scope_type ? formatRoleType(row.scope_type) : '—'}{' '}
               {row.is_system_role && (
-                <Badge variant="default" size="sm" pill outline>
+                <Badge variant="neutral" size="sm" shape="pill" tone="outline">
                   {translate('System')}
                 </Badge>
               )}

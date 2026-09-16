@@ -94,8 +94,8 @@ export const UserTosManagementSection: FC = () => {
                 variant="success"
                 label={translate('Accepted')}
                 hasBullet
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               />
             );
           } else if (row.user_has_consent === false) {
@@ -104,8 +104,8 @@ export const UserTosManagementSection: FC = () => {
                 variant="danger"
                 label={translate('Not Accepted')}
                 hasBullet
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               />
             );
           }

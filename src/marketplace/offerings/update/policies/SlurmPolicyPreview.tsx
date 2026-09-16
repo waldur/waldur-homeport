@@ -6,7 +6,9 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesPreviewImpact,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { SECOND } from '@/core/constants';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -294,8 +296,10 @@ const DateProjections: FC<DateProjectionsProps> = ({
     );
   };
 
-  const getQosStatusBadge = (status: string) => {
-    const badges: Record<string, { label: string; variant: string }> = {
+  const getQosStatusBadge = (
+    status: string,
+  ): { label: string; variant: BadgeVariant } => {
+    const badges: Record<string, { label: string; variant: BadgeVariant }> = {
       normal: { label: translate('Normal'), variant: 'success' },
       notification: {
         label: translate('Notification Sent'),
@@ -505,7 +509,12 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
                 {preview.preview_commands.map((cmd, idx) => (
                   <tr key={idx}>
                     <td>
-                      <Badge variant="secondary" size="sm" pill outline>
+                      <Badge
+                        variant="secondary"
+                        size="sm"
+                        shape="pill"
+                        tone="outline"
+                      >
                         {cmd.type}
                       </Badge>
                     </td>
@@ -542,7 +551,12 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
                       {formatDateTime(cmd.executed_at)}
                     </td>
                     <td>
-                      <Badge variant="secondary" size="sm" pill outline>
+                      <Badge
+                        variant="secondary"
+                        size="sm"
+                        shape="pill"
+                        tone="outline"
+                      >
                         {cmd.command_type}
                       </Badge>
                     </td>
@@ -557,19 +571,29 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
                             : 'info'
                         }
                         size="sm"
-                        pill
-                        outline
+                        shape="pill"
+                        tone="outline"
                       >
                         {cmd.execution_mode}
                       </Badge>
                     </td>
                     <td>
                       {cmd.success ? (
-                        <Badge variant="success" size="sm" pill outline>
+                        <Badge
+                          variant="success"
+                          size="sm"
+                          shape="pill"
+                          tone="outline"
+                        >
                           {translate('OK')}
                         </Badge>
                       ) : (
-                        <Badge variant="danger" size="sm" pill outline>
+                        <Badge
+                          variant="danger"
+                          size="sm"
+                          shape="pill"
+                          tone="outline"
+                        >
                           {translate('Failed')}
                         </Badge>
                       )}

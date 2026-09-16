@@ -1,7 +1,8 @@
 import { CeleryWorkerStats } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
@@ -35,7 +36,7 @@ export const CeleryWorkerInfo = ({
     <AccordionCard
       title={workerName}
       actions={
-        <Badge variant="success" light>
+        <Badge variant="success" tone="light">
           {translate('Running')}
         </Badge>
       }

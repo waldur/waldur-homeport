@@ -6,7 +6,8 @@ import {
   ConflictOfInterestStatusEnum,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -47,12 +48,12 @@ const SeverityBadge: FC<{ severity: CoiSeverityLevel; display: string }> = ({
       case 'potential':
         return 'info';
       default:
-        return 'default';
+        return 'neutral';
     }
   }, [severity]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {display}
     </Badge>
   );
@@ -71,12 +72,12 @@ const StatusBadge: FC<{
       case 'dismissed':
       case 'pending':
       default:
-        return 'default';
+        return 'neutral';
     }
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {display}
     </Badge>
   );

@@ -8,8 +8,9 @@ import {
   usersPartialUpdate,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
-import { Badge } from '@/core/Badge';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -240,11 +241,11 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
           label={translate('Federation status')}
           value={
             status.is_federated ? (
-              <Badge variant="success" pill outline>
+              <Badge variant="success" shape="pill" tone="outline">
                 {translate('Federated')}
               </Badge>
             ) : (
-              <Badge variant="secondary" pill outline>
+              <Badge variant="secondary" shape="pill" tone="outline">
                 {translate('Local')}
               </Badge>
             )
@@ -287,7 +288,12 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
                     >
                       <td>{attr}</td>
                       <td>
-                        <Badge variant="primary" size="sm" pill outline>
+                        <Badge
+                          variant="primary"
+                          size="sm"
+                          shape="pill"
+                          tone="outline"
+                        >
                           {formatIsdName(info.source)}
                         </Badge>
                       </td>
@@ -317,7 +323,12 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
           </p>
           <div className="d-flex flex-wrap gap-2">
             {status.effective_bridge_fields.map((field) => (
-              <Badge key={field} variant="secondary" pill outline>
+              <Badge
+                key={field}
+                variant="secondary"
+                shape="pill"
+                tone="outline"
+              >
                 {field}
               </Badge>
             ))}

@@ -11,13 +11,13 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
 import { OfflineBlockContext } from '@/ai-assistant/components/blocks/offlineBlockContext';
 import { MessageDataInspector } from '@/ai-assistant/components/shared/MessageDataInspector';
 import { flattenToolBlocks } from '@/ai-assistant/lib/messages/messageUtils';
 import { uiRegistry } from '@/ai-assistant/lib/registry/uiRegistry';
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -78,13 +78,13 @@ const ReviewVerdict: FunctionComponent<{
               <Badge
                 variant={getResolutionBadgeVariant(score)}
                 size="sm"
-                outline
+                tone="outline"
               >
                 {translate('Resolution {score}/5', { score })}
               </Badge>
             )}
             {Boolean(feedback.llm_intent_category) && (
-              <Badge variant="default" size="sm" outline>
+              <Badge variant="neutral" size="sm" tone="outline">
                 {feedback.llm_intent_category}
               </Badge>
             )}
@@ -93,7 +93,7 @@ const ReviewVerdict: FunctionComponent<{
                 variant="danger"
                 size="sm"
                 leftIcon={<ShieldWarningIcon weight="bold" />}
-                outline
+                tone="outline"
               >
                 {translate('Hallucination')}
               </Badge>
@@ -167,7 +167,7 @@ const InteractionTurns: FunctionComponent<{
                   variant={getSeverityBadgeVariant(severity)}
                   size="sm"
                   leftIcon={<ShieldWarningIcon weight="bold" />}
-                  outline
+                  tone="outline"
                 >
                   {severityLabels[severity]}
                 </Badge>
@@ -176,7 +176,7 @@ const InteractionTurns: FunctionComponent<{
                 <Badge
                   variant={getActionBadgeVariant(action)}
                   size="sm"
-                  outline
+                  tone="outline"
                 >
                   {actionLabels[action]}
                 </Badge>

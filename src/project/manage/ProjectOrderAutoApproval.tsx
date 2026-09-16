@@ -7,7 +7,8 @@ import {
   marketplaceProjectOrderAutoApprovalsList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
@@ -83,15 +84,15 @@ export const ProjectOrderAutoApproval: FC<ProjectOrderAutoApprovalProps> = ({
       key: 'status',
       label: translate('Status'),
       value: !rule ? (
-        <Badge variant="default" outline>
+        <Badge variant="neutral" tone="outline">
           {translate('Not configured')}
         </Badge>
       ) : enabled ? (
-        <Badge variant="success" outline>
+        <Badge variant="success" tone="outline">
           {translate('Enabled')}
         </Badge>
       ) : (
-        <Badge variant="default" outline>
+        <Badge variant="neutral" tone="outline">
           {translate('Disabled')}
         </Badge>
       ),

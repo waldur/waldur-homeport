@@ -6,8 +6,9 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { TableTab } from '@/table/types';
 import { useUser } from '@/workspace/hooks';
@@ -26,7 +27,7 @@ const TabLabelWithCount = ({
   <span className="d-flex align-items-center gap-2">
     {label}
     {count !== undefined && count > 0 && (
-      <Badge variant={variant} size="sm" pill light>
+      <Badge variant={variant} size="sm" shape="pill" tone="light">
         {count}
       </Badge>
     )}

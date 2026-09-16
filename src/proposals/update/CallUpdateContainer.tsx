@@ -4,7 +4,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
@@ -168,7 +169,12 @@ const Body = ({ call, refetch, loading }) => {
               roleSuffix={(row) =>
                 call.panel_chair_uuid &&
                 row.user_uuid === call.panel_chair_uuid ? (
-                  <Badge variant="primary" size="sm" pill outline>
+                  <Badge
+                    variant="primary"
+                    size="sm"
+                    shape="pill"
+                    tone="outline"
+                  >
                     {translate('Chair')}
                   </Badge>
                 ) : null

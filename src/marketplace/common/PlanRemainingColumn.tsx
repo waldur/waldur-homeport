@@ -1,10 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-const getColor = (value) =>
+const getColor = (value): BadgeVariant =>
   value === null
-    ? 'gray'
+    ? 'neutral'
     : value < 0.6
       ? 'warning'
       : value < 0.8
@@ -12,7 +13,7 @@ const getColor = (value) =>
         : 'success';
 
 export const PlanRemainingColumn: FunctionComponent<{ row }> = ({ row }) => (
-  <Badge variant={getColor(row.remaining)} pill outline>
+  <Badge variant={getColor(row.remaining)} shape="pill" tone="outline">
     {row.remaining === null ? 'N/A' : row.remaining}
   </Badge>
 );

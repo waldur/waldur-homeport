@@ -98,7 +98,7 @@ export const ResourceLimitChangeInfo = ({
       {userIsRequestor && (
         <Field
           label={translate('Status')}
-          value={<OrderStateField order={order} pill outline />}
+          value={<OrderStateField order={order} shape="pill" tone="outline" />}
           space={2}
         />
       )}

@@ -2,7 +2,8 @@ import { FC, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 import { Issue } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { translate } from '@/i18n';
@@ -64,11 +65,11 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
       </Card.Header>
       <Card.Body>
         <div className="d-flex flex-wrap gap-2 mb-3">
-          <Badge variant="info" pill outline>
+          <Badge variant="info" shape="pill" tone="outline">
             {translate('Routed')}
           </Badge>
           {issue.is_escalated && (
-            <Badge variant="danger" pill outline>
+            <Badge variant="danger" shape="pill" tone="outline">
               {translate('Escalated')}
             </Badge>
           )}

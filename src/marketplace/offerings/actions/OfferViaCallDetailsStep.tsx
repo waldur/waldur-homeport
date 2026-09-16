@@ -2,8 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { callManagingOrganisationsList } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { AsyncSelectGroup, DateGroup, SelectGroup, StringGroup } from '@/form';
@@ -47,7 +48,7 @@ export const OfferViaCallDetailsStep: FC<WizardStepProps> = (props) => {
           <span className="text-muted ms-2">({option.abbreviation})</span>
         )}
         {callManagerUuids?.has(option.uuid) && (
-          <Badge variant="info" pill outline className="ms-2">
+          <Badge variant="info" shape="pill" tone="outline" className="ms-2">
             {translate('Call manager')}
           </Badge>
         )}

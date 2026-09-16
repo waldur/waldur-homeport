@@ -11,7 +11,8 @@ import {
   ReviewerPublication,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { ExternalLink } from '@/core/ExternalLink';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -174,7 +175,7 @@ const SeverityBadge: FC<{ severity: string; display: string }> = ({
   }, [severity]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {display}
     </Badge>
   );
@@ -201,7 +202,7 @@ const StatusBadge: FC<{ status: string; display: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {display}
     </Badge>
   );

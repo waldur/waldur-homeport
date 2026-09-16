@@ -1,5 +1,7 @@
 import { BillingUnit, OrderDetails } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface OrderType {
@@ -12,7 +14,7 @@ interface OrderType {
     | 'switch_plan'
     | 'terminate'
     | 'restore';
-  variant: string;
+  variant: BadgeVariant;
 }
 
 export const getOrderType = (order: OrderDetails): OrderType => {
@@ -30,7 +32,7 @@ export const getOrderType = (order: OrderDetails): OrderType => {
         return {
           label: translate('Renew prepaid resource'),
           type: 'renew',
-          variant: 'default',
+          variant: 'neutral',
         };
       } else if (attributes.old_limits) {
         return {
@@ -64,7 +66,7 @@ export const getOrderType = (order: OrderDetails): OrderType => {
         variant: 'success',
       };
     default:
-      return { label: 'N/A', type: null, variant: 'default' };
+      return { label: 'N/A', type: null, variant: 'neutral' };
   }
 };
 

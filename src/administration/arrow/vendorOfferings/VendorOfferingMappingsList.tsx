@@ -4,7 +4,8 @@ import {
   ArrowVendorOfferingMapping,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -82,7 +83,11 @@ export const VendorOfferingMappingsList: FunctionComponent<
         {
           title: translate('Status'),
           render: ({ row }) => (
-            <Badge variant={row.is_active ? 'success' : 'default'} pill outline>
+            <Badge
+              variant={row.is_active ? 'success' : 'neutral'}
+              shape="pill"
+              tone="outline"
+            >
               {row.is_active ? translate('Active') : translate('Inactive')}
             </Badge>
           ),

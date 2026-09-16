@@ -44,17 +44,11 @@
   --pill-neutral-text: var(--color-gray-600);
   --pill-neutral-dot: var(--color-gray-500);
 
-  /* Real source: src/metronic/sass/core/components/_badge.scss's
-     .badge-outline-#{$name} recipe (bg = theme-50-color, border =
-     theme-200-color, text = theme-700-color), 'purple' key — the exact
-     variant UserDropdownMenu.tsx's real Staff badge uses
+  /* Purple pill tokens — recipe for UserDropdownMenu's Staff badge
      (`<Badge variant="purple" outline pill>`). Not part of the generated
      brand/gray/success/warning/error ramps (there's no other consumer of
-     a purple scale), so these are the literal $purple-50/200/700 hex
-     values from src/metronic/sass/_colors.scss, not colors.css-generated.
-     Unlike the other pill-* variants, this one has a visible border —
-     Metronic's outline style is genuinely bordered, not a transparent-
-     border solid fill. */
+     a purple scale), so these are the literal purple-50/200/700 values.
+     Unlike the other pill-* variants, this one has a visible border. */
   --pill-purple-bg: #f4f3ff;
   --pill-purple-border: #d9d6fe;
   --pill-purple-text: #5925dc;

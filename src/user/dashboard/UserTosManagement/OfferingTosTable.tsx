@@ -79,8 +79,8 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
                   : translate('Not Accepted')
               }
               size="sm"
-              pill
-              outline
+              shape="pill"
+              tone="outline"
               hasBullet
             />
           ),

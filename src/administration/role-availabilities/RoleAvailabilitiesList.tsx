@@ -4,7 +4,8 @@ import {
   roleAvailabilitiesList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -71,7 +72,12 @@ export const RoleAvailabilitiesList = () => {
           render: ({ row }) => (
             <>
               <span>{row.scope_name || row.scope_uuid}</span>
-              <Badge variant="default" pill outline className="ms-2">
+              <Badge
+                variant="neutral"
+                shape="pill"
+                tone="outline"
+                className="ms-2"
+              >
                 {row.scope_type}
               </Badge>
             </>
@@ -81,11 +87,11 @@ export const RoleAvailabilitiesList = () => {
           title: translate('Source'),
           render: ({ row }) =>
             row.is_profile_managed ? (
-              <Badge variant="info" pill outline>
+              <Badge variant="info" shape="pill" tone="outline">
                 {translate('Profile: {name}', { name: row.profile_name })}
               </Badge>
             ) : (
-              <Badge variant="default" pill outline>
+              <Badge variant="neutral" shape="pill" tone="outline">
                 {translate('Direct')}
               </Badge>
             ),

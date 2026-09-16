@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import type { RmqQueueStats } from './api';
@@ -18,7 +20,7 @@ export const getQueueHealth = (
 
 const healthConfig: Record<
   QueueHealthStatus,
-  { variant: string; label: string }
+  { variant: BadgeVariant; label: string }
 > = {
   healthy: { variant: 'success', label: translate('Healthy') },
   warning: { variant: 'warning', label: translate('Warning') },
@@ -37,7 +39,7 @@ export const RabbitMQQueueHealthBadge: FC<RabbitMQQueueHealthBadgeProps> = ({
   const config = healthConfig[status];
 
   return (
-    <Badge variant={config.variant} pill outline>
+    <Badge variant={config.variant} shape="pill" tone="outline">
       {config.label}
     </Badge>
   );
@@ -65,7 +67,7 @@ export const RabbitMQVhostHealthBadge: FC<RabbitMQVhostHealthBadgeProps> = ({
   const config = healthConfig[worstStatus];
 
   return (
-    <Badge variant={config.variant} pill outline>
+    <Badge variant={config.variant} shape="pill" tone="outline">
       {config.label}
     </Badge>
   );

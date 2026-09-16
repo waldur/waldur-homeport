@@ -2,7 +2,8 @@ import { FC, useEffect } from 'react';
 import { ProgressBar, Stack } from 'react-bootstrap';
 import { ServiceProviderComplianceOverview } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -56,7 +57,7 @@ export const ComplianceExpandableRow: FC<{
           {
             title: translate('Status'),
             render: ({ row }) => (
-              <Badge variant="default" pill outline>
+              <Badge variant="neutral" shape="pill" tone="outline">
                 {row.status}
               </Badge>
             ),

@@ -2,8 +2,8 @@ import { FC, useMemo, useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { generateBrandColors } from 'waldur-design-tokens';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { EChart } from '@/core/EChart';
 import { getBrandColor } from '@/core/utils';
 import { useChartThemeColors } from '@/dashboard/chartColors';
@@ -234,8 +234,8 @@ export const TreemapView: FC<Props> = ({ components }) => {
           </span>
           <Badge
             variant="indigo"
-            light
-            roundless
+            shape="roundless"
+            tone="light"
             tooltip={translate('Top-level rectangles — one per offering')}
           >
             {translate('Offering')}
@@ -243,8 +243,8 @@ export const TreemapView: FC<Props> = ({ components }) => {
           <span className="text-secondary">›</span>
           <Badge
             variant="warning"
-            light
-            roundless
+            shape="roundless"
+            tone="light"
             tooltip={translate(
               'Inside each offering — usage-based vs limit-based components',
             )}
@@ -254,8 +254,8 @@ export const TreemapView: FC<Props> = ({ components }) => {
           <span className="text-secondary">›</span>
           <Badge
             variant="success"
-            light
-            roundless
+            shape="roundless"
+            tone="light"
             tooltip={translate('Leaf rectangles — one per OfferingComponent')}
           >
             {translate('Component')}

@@ -2,7 +2,8 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -44,7 +45,7 @@ export const HelpdeskOverviewPage: FC = () => {
   const rows: Array<[string, ReactNode]> = [
     [
       translate('Technology'),
-      <Badge variant="secondary" pill outline>
+      <Badge variant="secondary" shape="pill" tone="outline">
         {getBackendLabel(helpdesk.backend_type)}
       </Badge>,
     ],
@@ -58,7 +59,7 @@ export const HelpdeskOverviewPage: FC = () => {
     ],
     [
       translate('Health'),
-      <Badge variant={health.variant} pill outline>
+      <Badge variant={health.variant} shape="pill" tone="outline">
         {health.label}
       </Badge>,
     ],

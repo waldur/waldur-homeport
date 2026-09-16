@@ -3,7 +3,8 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert, Table as BTable } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
 import { SubmitButton } from '@/form/SubmitButton';

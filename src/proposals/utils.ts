@@ -8,6 +8,8 @@ import {
 } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@/navigation/types';
@@ -128,7 +130,9 @@ export const formatOwnReviewState = (value: ProposalReviewStateEnum) =>
   getOwnReviewStateOptions().find((option) => option.value === value)?.label ||
   value;
 
-export const getReviewStateBadgeVariant = (value: ProposalReviewStateEnum) =>
+export const getReviewStateBadgeVariant = (
+  value: ProposalReviewStateEnum,
+): BadgeVariant =>
   value === 'in_review' || value === 'submitted'
     ? 'warning'
     : value === 'rejected'
@@ -138,7 +142,9 @@ export const getReviewStateBadgeVariant = (value: ProposalReviewStateEnum) =>
 export const isReviewInFinalState = (state: ProposalReviewStateEnum) =>
   !['in_review'].includes(state);
 
-export const getRoundStatus = (round: NestedRound) => {
+export const getRoundStatus = (
+  round: NestedRound,
+): { label: string; value: string; color: BadgeVariant } | null | undefined => {
   if (!round) {
     return null;
   } else if (round.status === 'scheduled') {
@@ -160,13 +166,15 @@ export const getRoundsWithStatus = (rounds: NestedRound[]) =>
     status: getRoundStatus(round),
   }));
 
-export const getCallStatus = (call: Call) => {
+export const getCallStatus = (
+  call: Call,
+): { label: string; color: BadgeVariant } => {
   if (call.state == 'active')
     return { label: translate('Active'), color: 'success' };
   else if (call.state == 'draft')
     return { label: translate('Draft'), color: 'danger' };
   else if (call.state == 'archived')
-    return { label: translate('Archived'), color: 'gray' };
+    return { label: translate('Archived'), color: 'neutral' };
   else {
     return { label: call.state, color: 'secondary' };
   }

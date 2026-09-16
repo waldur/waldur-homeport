@@ -1,7 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import { broadcastMessagesRecipientsRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -10,7 +11,7 @@ import { useTable } from '@/table/useTable';
 const BadgesList = ({ items }) => (
   <>
     {items.map((c, index) => (
-      <Badge key={index} pill outline className="me-3">
+      <Badge key={index} shape="pill" tone="outline" className="me-3">
         {c.name}
       </Badge>
     ))}

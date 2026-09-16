@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 
@@ -62,8 +63,8 @@ export const AdministrativeAccessSection: FC<
                     variant={getAccessTypeBadgeVariant(
                       user.access_type as AccessType,
                     )}
-                    pill
-                    outline
+                    shape="pill"
+                    tone="outline"
                   >
                     {formatAccessType(user.access_type as AccessType)}
                   </Badge>

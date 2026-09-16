@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Alert, Table } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -70,7 +71,12 @@ export const ServiceProviderAccessSection: FC<
             </div>
             <div className="d-flex flex-wrap gap-1">
               {provider.exposed_fields.map((field) => (
-                <Badge key={field} variant="secondary" pill outline>
+                <Badge
+                  key={field}
+                  variant="secondary"
+                  shape="pill"
+                  tone="outline"
+                >
                   {formatFieldName(field)}
                 </Badge>
               ))}
@@ -120,7 +126,7 @@ export const ServiceProviderAccessSection: FC<
                         </td>
                         <td>
                           {user.role ? (
-                            <Badge variant="info" pill outline>
+                            <Badge variant="info" shape="pill" tone="outline">
                               {user.role}
                             </Badge>
                           ) : (

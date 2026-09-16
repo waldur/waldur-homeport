@@ -9,7 +9,8 @@ import {
   supportUsersConnectionsRetrieve,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
@@ -26,7 +27,7 @@ const NavItem = ({ title, eventKey, count }) => (
   <Nav.Item className="text-nowrap">
     <Nav.Link eventKey={eventKey}>
       {title}
-      <Badge variant="default" pill outline className="ms-2">
+      <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
         {count || 0}
       </Badge>
     </Nav.Link>

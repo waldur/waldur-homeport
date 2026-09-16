@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import { Issue, supportIssuesList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { hasProviderRouting } from '@/issues/hooks';
@@ -152,7 +153,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
           render: ({ row }) =>
             row.is_routed ? (
               <div className="d-flex align-items-center gap-2">
-                <Badge variant="info" pill outline>
+                <Badge variant="info" shape="pill" tone="outline">
                   {translate('Routed')}
                 </Badge>
                 {providerName(row) && <span>{providerName(row)}</span>}

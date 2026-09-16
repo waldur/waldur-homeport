@@ -24,7 +24,13 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
         size={20}
       />
 
-      <OrderStateField order={order} pill outline hasBullet size="sm" />
+      <OrderStateField
+        order={order}
+        shape="pill"
+        tone="outline"
+        hasBullet
+        size="sm"
+      />
     </div>
   );
 };

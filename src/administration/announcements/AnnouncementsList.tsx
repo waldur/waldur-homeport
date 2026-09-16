@@ -33,8 +33,8 @@ const renderType = ({ row }) => (
       AnnouncementTypeOptions.find((opt) => opt.value === row.type)?.label ||
       row.type
     }
-    outline
-    pill
+    tone="outline"
+    shape="pill"
   />
 );
 
@@ -42,8 +42,8 @@ const renderStatus = ({ row }) => (
   <StateIndicator
     variant={row.is_active ? 'success' : 'danger'}
     label={row.is_active ? translate('Active') : translate('Inactive')}
-    outline
-    pill
+    tone="outline"
+    shape="pill"
   />
 );
 

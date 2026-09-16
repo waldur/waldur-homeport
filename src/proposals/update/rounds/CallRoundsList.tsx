@@ -50,8 +50,8 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
       <StateIndicator
         label={roundState.label}
         variant={roundState.color}
-        outline
-        pill
+        tone="outline"
+        shape="pill"
       />
     );
   };

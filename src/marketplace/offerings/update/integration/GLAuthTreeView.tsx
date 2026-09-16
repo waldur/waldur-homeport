@@ -23,6 +23,8 @@ import type {
   GlauthTreeUser,
 } from 'waldur-js-client';
 
+import { Badge, type BadgeTone, type BadgeVariant } from 'waldur-ui';
+
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 
@@ -41,20 +43,22 @@ interface TreeNodeData {
   id: string;
   name: string;
   type: NodeType;
-  badge?: { text: string; cls: string };
+  badge?: { text: string; variant: BadgeVariant; tone?: BadgeTone };
   children?: TreeNodeData[];
 }
 
-const kindBadge = (kind: GlauthGroupKind): { text: string; cls: string } => {
+const kindBadge = (
+  kind: GlauthGroupKind,
+): { text: string; variant: BadgeVariant; tone: BadgeTone } => {
   switch (kind) {
     case 'project':
-      return { text: 'project', cls: 'badge-secondary' };
+      return { text: 'project', variant: 'secondary', tone: 'solid' };
     case 'resource_role':
-      return { text: 'resource role', cls: 'badge-light-primary' };
+      return { text: 'resource role', variant: 'primary', tone: 'light' };
     case 'resource_project_role':
-      return { text: 'rp role', cls: 'badge-light-success' };
+      return { text: 'rp role', variant: 'success', tone: 'light' };
     case 'personal':
-      return { text: 'personal', cls: 'badge-light' };
+      return { text: 'personal', variant: 'neutral', tone: 'light' };
   }
 };
 
@@ -173,8 +177,8 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
     name: `cn=${u.username},ou=users,${BASE_DN}`,
     type: 'user',
     badge: u.disabled
-      ? { text: translate('disabled'), cls: 'badge-light-danger' }
-      : { text: translate('active'), cls: 'badge-light-success' },
+      ? { text: translate('disabled'), variant: 'danger', tone: 'light' }
+      : { text: translate('active'), variant: 'success', tone: 'light' },
     children: userAttributes(u),
   }));
 
@@ -184,7 +188,11 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
     id: `svcacct:${r.username}`,
     name: `cn=${r.username},ou=svcaccts,${BASE_DN}`,
     type: 'svcacct',
-    badge: { text: translate('service account'), cls: 'badge-light-info' },
+    badge: {
+      text: translate('service account'),
+      variant: 'info',
+      tone: 'light',
+    },
     children: svcAcctAttributes(r),
   }));
 
@@ -195,7 +203,8 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'ou',
       badge: {
         text: translate('{n} entries', { n: tree.groups.length }),
-        cls: 'badge-secondary',
+        variant: 'secondary',
+        tone: 'solid',
       },
       children: groupChildren,
     },
@@ -205,7 +214,8 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'ou',
       badge: {
         text: translate('{n} entries', { n: tree.users.length }),
-        cls: 'badge-secondary',
+        variant: 'secondary',
+        tone: 'solid',
       },
       children: userChildren,
     },
@@ -217,7 +227,8 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'ou',
       badge: {
         text: translate('{n} entries', { n: tree.robot_accounts.length }),
-        cls: 'badge-secondary',
+        variant: 'secondary',
+        tone: 'solid',
       },
       children: svcacctChildren,
     });
@@ -230,7 +241,8 @@ const buildTree = (tree: GlauthTree): TreeNodeData[] => {
       type: 'root',
       badge: {
         text: translate('offering: {name}', { name: tree.offering.name }),
-        cls: 'badge-secondary',
+        variant: 'secondary',
+        tone: 'solid',
       },
       children: ous,
     },
@@ -339,9 +351,13 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
             : data.name}
         </span>
         {data.badge && (
-          <span className={`badge ${data.badge.cls} ms-2 flex-shrink-0`}>
+          <Badge
+            variant={data.badge.variant}
+            tone={data.badge.tone}
+            className="ms-2 flex-shrink-0"
+          >
             {data.badge.text}
-          </span>
+          </Badge>
         )}
       </div>
     </div>

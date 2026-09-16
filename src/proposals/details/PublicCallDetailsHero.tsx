@@ -32,8 +32,8 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
             <StateIndicator
               variant={status.color}
               label={status.label}
-              outline
-              pill
+              tone="outline"
+              shape="pill"
             />
           </div>
           <p className="text-muted fs-7 mb-0">{call.customer_name}</p>

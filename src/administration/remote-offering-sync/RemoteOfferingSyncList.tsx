@@ -4,7 +4,8 @@ import {
   RemoteSynchronisation,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
@@ -68,10 +69,10 @@ export const RemoteOfferingSyncList: FunctionComponent = () => {
               variant={
                 ['OK', 'Active'].includes(row.get_state_display)
                   ? 'primary'
-                  : 'default'
+                  : 'neutral'
               }
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {row.get_state_display}
             </Badge>
@@ -80,7 +81,11 @@ export const RemoteOfferingSyncList: FunctionComponent = () => {
         {
           title: translate('Enabled'),
           render: ({ row }) => (
-            <Badge variant={row.is_active ? 'primary' : 'default'} pill outline>
+            <Badge
+              variant={row.is_active ? 'primary' : 'neutral'}
+              shape="pill"
+              tone="outline"
+            >
               {row.is_active ? translate('Yes') : translate('No')}
             </Badge>
           ),

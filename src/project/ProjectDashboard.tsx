@@ -5,9 +5,10 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getResourcesCount } from '@/administration/api';
 import { parseSelectData } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { SHORT_STALE_TIME, STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Panel } from '@/core/Panel';
@@ -206,7 +207,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                 title={
                   <>
                     {translate('Staff Notes')}{' '}
-                    <Badge variant="warning" pill outline>
+                    <Badge variant="warning" shape="pill" tone="outline">
                       {translate('Internal')}
                     </Badge>
                   </>

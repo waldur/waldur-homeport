@@ -2,8 +2,8 @@ import { FC, useCallback } from 'react';
 import { AgentIdentity, AgentServiceState } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
@@ -35,8 +35,8 @@ const StateField = ({ row }: { row: AgentIdentity['services'][1] }) => (
             ? 'danger'
             : 'warning'
       }
-      pill
-      outline
+      shape="pill"
+      tone="outline"
     >
       {row.state}
     </Badge>

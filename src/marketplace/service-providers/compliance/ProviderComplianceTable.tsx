@@ -5,7 +5,8 @@ import {
   ServiceProviderComplianceOverview,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { createFetcher } from '@/table/api';
@@ -52,9 +53,9 @@ export const ProviderComplianceTable: FC<ProviderComplianceTableProps> = (
         title: translate('State'),
         render: () => {
           // FIX: use real data - not available on backend atm
-          const state = { color: 'success', label: 'Active' };
+          const state = { color: 'success' as const, label: 'Active' };
           return (
-            <Badge variant={state.color} size="sm" pill outline>
+            <Badge variant={state.color} size="sm" shape="pill" tone="outline">
               {state.label}
             </Badge>
           );

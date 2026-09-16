@@ -18,6 +18,11 @@ export const OperatingStatusBadge = ({
   if (!status) return renderFieldOrDash(status);
   const variant = VARIANTS[status] || 'secondary';
   return (
-    <StateIndicator label={status} variant={variant as any} outline pill />
+    <StateIndicator
+      label={status}
+      variant={variant as any}
+      tone="outline"
+      shape="pill"
+    />
   );
 };

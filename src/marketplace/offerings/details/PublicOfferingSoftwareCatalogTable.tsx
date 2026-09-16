@@ -2,8 +2,8 @@ import { FunctionComponent, useMemo } from 'react';
 import { marketplaceSoftwarePackagesList, Offering } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
@@ -110,7 +110,7 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
           title: translate('Extension'),
           render: ({ row }) =>
             row.is_extension ? (
-              <Badge variant="primary" pill outline>
+              <Badge variant="primary" shape="pill" tone="outline">
                 {translate('Extension')}
               </Badge>
             ) : (
@@ -142,9 +142,9 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
             <>
               {row.catalog_name}
               {row.catalog_type_display && (
-                <span className="ms-2 badge badge-light-info">
+                <Badge variant="info" tone="light" className="ms-2">
                   {row.catalog_type_display}
-                </span>
+                </Badge>
               )}
             </>
           ),

@@ -30,6 +30,8 @@ import React, {
 } from 'react';
 import { chatQuotaUsageRetrieve } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { calculateQuotaPercentage } from '@/administration/ai-assistant/AITokenExpandableRow';
 import {
   VMOrderActions,
@@ -48,7 +50,6 @@ import {
   BlockHistoryEntry,
 } from '@/ai-assistant/lib/types';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
-import { Badge } from '@/core/Badge';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -383,7 +384,7 @@ const BlockBasedContent: FC<BlockBasedContentProps> = ({ selector }) => {
             onNext={goToNextVersion}
           />
           {isViewingHistory && (
-            <Badge variant="warning" size="sm" outline>
+            <Badge variant="warning" size="sm" tone="outline">
               {translate('Past version')}
             </Badge>
           )}

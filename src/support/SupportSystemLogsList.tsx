@@ -7,7 +7,8 @@ import {
   SystemLog,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -93,7 +94,7 @@ export const SupportSystemLogsList = () => {
       {
         title: translate('Source'),
         render: ({ row }: { row: SystemLog }) => (
-          <Badge variant="secondary" pill outline>
+          <Badge variant="secondary" shape="pill" tone="outline">
             {row.source}
           </Badge>
         ),
@@ -109,7 +110,11 @@ export const SupportSystemLogsList = () => {
         title: translate('Level'),
         orderField: 'level_number',
         render: ({ row }: { row: SystemLog }) => (
-          <Badge variant={getLevelBadgeVariant(row.level)} pill outline>
+          <Badge
+            variant={getLevelBadgeVariant(row.level)}
+            shape="pill"
+            tone="outline"
+          >
             {row.level}
           </Badge>
         ),
@@ -144,7 +149,11 @@ export const SupportSystemLogsList = () => {
             state="admin-system-logging-settings"
             className="text-decoration-none"
           >
-            <Badge variant={isEnabled ? 'success' : 'warning'} pill outline>
+            <Badge
+              variant={isEnabled ? 'success' : 'warning'}
+              shape="pill"
+              tone="outline"
+            >
               {isEnabled
                 ? translate('Collection enabled')
                 : translate('Collection disabled')}

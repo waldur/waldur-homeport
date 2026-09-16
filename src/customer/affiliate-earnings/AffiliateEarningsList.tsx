@@ -96,9 +96,9 @@ export const AffiliateEarningsList: FC<{ customerUuid: string }> = ({
         render: ({ row }) => (
           <StateIndicator
             label={row.is_active ? translate('Active') : translate('Inactive')}
-            variant={row.is_active ? 'success' : 'default'}
-            outline
-            pill
+            variant={row.is_active ? 'success' : 'neutral'}
+            tone="outline"
+            shape="pill"
           />
         ),
       },

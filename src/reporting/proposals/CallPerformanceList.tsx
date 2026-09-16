@@ -1,6 +1,8 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
@@ -17,21 +19,28 @@ import { StatusBreakdown } from './StatusBreakdown';
 import { CallPerformanceStat, CallStates } from './types';
 
 const CallStateColumn: FC<{ row: CallPerformanceStat }> = ({ row }) => {
-  const stateConfig: Record<CallStates, { variant: string; label: string }> = {
-    active: { variant: 'outline-secondary', label: translate('Active') },
-    draft: { variant: 'gray', label: translate('Draft') },
-    archived: { variant: 'outline-default', label: translate('Archived') },
+  const stateConfig: Record<
+    CallStates,
+    { variant: BadgeVariant; label: string }
+  > = {
+    active: { variant: 'secondary', label: translate('Active') },
+    draft: { variant: 'neutral', label: translate('Draft') },
+    archived: { variant: 'neutral', label: translate('Archived') },
   };
 
   const config = stateConfig[row.state as CallStates];
-  return <Badge variant={config.variant}>{config.label}</Badge>;
+  return (
+    <Badge variant={config.variant} tone="outline">
+      {config.label}
+    </Badge>
+  );
 };
 
 const AcceptanceRateColumn: FC<{ row: CallPerformanceStat }> = ({ row }) => {
   const rate = row.acceptance_rate;
   const variant = rate >= 80 ? 'success' : rate >= 60 ? 'warning' : 'danger';
   return (
-    <Badge variant={variant} outline>
+    <Badge variant={variant} tone="outline">
       {rate.toFixed(1)}%
     </Badge>
   );
@@ -109,19 +118,19 @@ const CallPerformanceExpandableRow: FC<{ row: CallPerformanceStat }> = ({
             key: 'accepted',
             label: translate('Accepted'),
             value: row.proposals_accepted,
-            variant: 'outline-secondary',
+            variant: 'secondary',
           },
           {
             key: 'in_review',
             label: translate('In review'),
             value: row.proposals_in_review,
-            variant: 'outline-warning',
+            variant: 'warning',
           },
           {
             key: 'rejected',
             label: translate('Rejected'),
             value: row.proposals_rejected,
-            variant: 'outline-danger',
+            variant: 'danger',
           },
         ]}
       />

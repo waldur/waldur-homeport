@@ -95,6 +95,7 @@
   --color-purple-50: #f4f3ff;
   --color-purple-200: #d9d6fe;
   --color-purple-300: #bdb4fe;
+  --color-purple-400: #9b8afb;
   --color-purple-500: #7a5af8;
   --color-purple-600: #6938ef;
   --color-purple-700: #5925dc;
@@ -124,6 +125,7 @@
   --color-moss-50: #f5fbee;
   --color-moss-200: #ceeab0;
   --color-moss-300: #acdc79;
+  --color-moss-400: #86cb3c;
   --color-moss-500: #669f2a;
   --color-moss-600: #4f7a21;
   --color-moss-700: #3f621a;
@@ -133,11 +135,42 @@
   --color-pink-50: #fdf2fa;
   --color-pink-200: #fcceee;
   --color-pink-300: #faa7e0;
+  --color-pink-400: #f670c7;
   --color-pink-500: #ee46bc;
   --color-pink-600: #dd2590;
   --color-pink-700: #c11574;
   --color-pink-900: #851651;
   --color-pink-950: #4e0d30;
+
+  --color-teal-50: #f0fdf9;
+  --color-teal-200: #99f6e0;
+  --color-teal-300: #5fe9d0;
+  --color-teal-400: #2ed3b7;
+  --color-teal-500: #15b79e;
+  --color-teal-600: #0e9384;
+  --color-teal-700: #107569;
+  --color-teal-900: #134e48;
+  --color-teal-950: #0a2926;
+
+  --color-orange-50: #fff6ed;
+  --color-orange-200: #fddcab;
+  --color-orange-300: #feb273;
+  --color-orange-400: #fd853a;
+  --color-orange-500: #fb6514;
+  --color-orange-600: #ec4a0a;
+  --color-orange-700: #c4320a;
+  --color-orange-900: #7e2410;
+  --color-orange-950: #57130a;
+
+  --color-rose-50: #fff1f3;
+  --color-rose-200: #fecdd6;
+  --color-rose-300: #fea3b4;
+  --color-rose-400: #fd6f8e;
+  --color-rose-500: #f63d68;
+  --color-rose-600: #e31b54;
+  --color-rose-700: #c01048;
+  --color-rose-900: #89123e;
+  --color-rose-950: #510b24;
 }
 
 :root[data-theme='dark'] {

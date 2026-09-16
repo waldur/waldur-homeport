@@ -6,7 +6,8 @@ import {
   SoftwarePackage,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
@@ -74,7 +75,7 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
         <Field label={translate('Categories')} labelWidth={140}>
           <div className="d-flex flex-wrap gap-1">
             {categories.map((cat) => (
-              <Badge key={cat} variant="info" light>
+              <Badge key={cat} variant="info" tone="light">
                 {cat}
               </Badge>
             ))}

@@ -1,5 +1,7 @@
 import type { ArrowBillingSyncStateEnum } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 const BILLING_SYNC_STATE_LABELS: Record<ArrowBillingSyncStateEnum, string> = {
@@ -12,7 +14,7 @@ const BILLING_SYNC_STATE_LABELS: Record<ArrowBillingSyncStateEnum, string> = {
 /** Get badge variant for billing sync state */
 export const getBillingSyncStateVariant = (
   state: ArrowBillingSyncStateEnum,
-): 'success' | 'primary' | 'warning' | 'danger' | 'default' => {
+): BadgeVariant => {
   switch (state) {
     case 3: // synced
       return 'success';
@@ -23,7 +25,7 @@ export const getBillingSyncStateVariant = (
     case 4: // failed
       return 'danger';
     default:
-      return 'default';
+      return 'neutral';
   }
 };
 

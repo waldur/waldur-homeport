@@ -1,3 +1,5 @@
+import { BadgeVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 // Single source for provider support-user roles: drives both the role select
@@ -5,7 +7,7 @@ import { translate } from '@/i18n';
 const PROVIDER_ROLES: Array<{
   value: string;
   label: string;
-  variant: string;
+  variant: BadgeVariant;
 }> = [
   { value: 'agent', label: translate('Agent'), variant: 'secondary' },
   { value: 'manager', label: translate('Manager'), variant: 'info' },
@@ -18,7 +20,7 @@ export const PROVIDER_ROLE_OPTIONS = PROVIDER_ROLES.map(({ value, label }) => ({
 
 export const PROVIDER_ROLE_META: Record<
   string,
-  { variant: string; label: string }
+  { variant: BadgeVariant; label: string }
 > = Object.fromEntries(
   PROVIDER_ROLES.map(({ value, label, variant }) => [
     value,

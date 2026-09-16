@@ -5,6 +5,8 @@ import {
   marketplaceResourcesList,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { useDebouncedValue } from '@/core/useDebouncedValue';
@@ -188,13 +190,14 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
       {impactBreakdown.length > 0 && (
         <div className="d-flex flex-wrap gap-2 mb-3">
           {impactBreakdown.map((item) => (
-            <span
+            <Badge
               key={item.level}
-              className="badge badge-light-info"
+              variant="info"
+              tone="light"
               title={item.label}
             >
               {item.label}: {item.count}
-            </span>
+            </Badge>
           ))}
         </div>
       )}

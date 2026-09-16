@@ -49,8 +49,8 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
             <StateIndicator
               variant={status.color}
               label={status.label}
-              outline
-              pill
+              tone="outline"
+              shape="pill"
             />
           </div>
           <div className="d-flex align-items-center gap-2">

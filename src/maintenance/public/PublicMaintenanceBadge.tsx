@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { PublicMaintenanceAnnouncement } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 
@@ -62,7 +62,13 @@ const MaintenanceBadge: FC<{ maintenance: PublicMaintenanceAnnouncement }> = ({
 
   return (
     <Tooltip label={buildTooltip(maintenance)}>
-      <Badge variant={variant} size="sm" leftIcon={icon} pill outline>
+      <Badge
+        variant={variant}
+        size="sm"
+        leftIcon={icon}
+        shape="pill"
+        tone="outline"
+      >
         {label}
       </Badge>
     </Tooltip>

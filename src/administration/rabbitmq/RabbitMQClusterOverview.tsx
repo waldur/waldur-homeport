@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -134,9 +136,9 @@ const RabbitMQClusterOverviewContent: FC<
             </h6>
             <div className="d-flex flex-wrap gap-2">
               {data.listeners.map((listener, index) => (
-                <span key={index} className="badge bg-light text-dark">
+                <Badge key={index} variant="neutral" tone="light">
                   {listener.protocol}:{listener.port}
-                </span>
+                </Badge>
               ))}
             </div>
           </>

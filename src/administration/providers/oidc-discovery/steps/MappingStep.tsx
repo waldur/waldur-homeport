@@ -2,7 +2,8 @@ import { FC, useEffect, useMemo } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import {
   isProfileAttributeEnabled,
@@ -129,8 +130,8 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
               {field.suggested_claims.map((claim) => (
                 <Badge
                   key={claim}
-                  variant={availableSet.has(claim) ? 'success' : 'default'}
-                  outline
+                  variant={availableSet.has(claim) ? 'success' : 'neutral'}
+                  tone="outline"
                   className="ms-1"
                   style={{ cursor: 'pointer' }}
                   onClick={() =>
@@ -250,7 +251,7 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
       </p>
 
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <Badge variant="primary" outline>
+        <Badge variant="primary" tone="outline">
           {translate('{count} of {total} fields mapped', {
             count: mappedCount,
             total: enabledFields.length,

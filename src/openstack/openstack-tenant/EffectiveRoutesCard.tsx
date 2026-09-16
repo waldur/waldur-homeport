@@ -7,7 +7,9 @@ import {
   openstackRoutersEffectiveRoutesRetrieve,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -18,8 +20,6 @@ interface Props {
   routerUuid: string;
 }
 
-type BadgeVariant = 'success' | 'info' | 'warning' | 'default' | 'danger';
-
 const sourceVariant = (source: EffectiveRoute['source']): BadgeVariant => {
   switch (source) {
     case 'default':
@@ -29,7 +29,7 @@ const sourceVariant = (source: EffectiveRoute['source']): BadgeVariant => {
     case 'static':
       return 'warning';
     default:
-      return 'default';
+      return 'neutral';
   }
 };
 
@@ -96,7 +96,7 @@ const DestinationCell: FC<{ row: EffectiveRoute }> = ({ row }) => (
 );
 
 const SourceCell: FC<{ row: EffectiveRoute }> = ({ row }) => (
-  <Badge variant={sourceVariant(row.source)} outline>
+  <Badge variant={sourceVariant(row.source)} tone="outline">
     {sourceLabel(row.source)}
   </Badge>
 );
@@ -107,27 +107,27 @@ const SnatBadge: FC<{ snat: boolean | null; hasGateway: boolean }> = ({
 }) => {
   if (!hasGateway) {
     return (
-      <Badge variant="default" outline>
+      <Badge variant="neutral" tone="outline">
         {translate('No external gateway')}
       </Badge>
     );
   }
   if (snat === false) {
     return (
-      <Badge variant="warning" outline>
+      <Badge variant="warning" tone="outline">
         {translate('SNAT disabled')}
       </Badge>
     );
   }
   if (snat === true) {
     return (
-      <Badge variant="success" outline>
+      <Badge variant="success" tone="outline">
         {translate('SNAT enabled')}
       </Badge>
     );
   }
   return (
-    <Badge variant="default" outline>
+    <Badge variant="neutral" tone="outline">
       {translate('SNAT default')}
     </Badge>
   );

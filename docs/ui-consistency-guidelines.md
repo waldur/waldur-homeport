@@ -29,13 +29,13 @@ Empty states are critical touchpoints that can either frustrate users or guide t
 
 ### 1.1 Empty State Types
 
-| Type | Purpose | Example |
-|------|---------|---------|
-| **First-use** | Onboarding opportunity | "No projects yet. Create your first project to get started." |
-| **No search results** | Help refine search | "Your search 'xyz' did not match any resources." |
-| **Filtered empty** | Suggest filter modification | "No resources matching current filters" |
-| **User-cleared** | Task completion | "All tasks completed!" |
-| **Error state** | Recovery with retry | "Unable to load data." + Reload button |
+| Type                  | Purpose                     | Example                                                      |
+| --------------------- | --------------------------- | ------------------------------------------------------------ |
+| **First-use**         | Onboarding opportunity      | "No projects yet. Create your first project to get started." |
+| **No search results** | Help refine search          | "Your search 'xyz' did not match any resources."             |
+| **Filtered empty**    | Suggest filter modification | "No resources matching current filters"                      |
+| **User-cleared**      | Task completion             | "All tasks completed!"                                       |
+| **Error state**       | Recovery with retry         | "Unable to load data." + Reload button                       |
 
 ### 1.2 Table Empty States
 
@@ -90,7 +90,10 @@ getNoResultMessage({ query: 'john', verboseName: 'users' });
 // → "Your search "john" did not match any users."
 
 // For empty tables without filters
-getNoResultMessage({ verboseName: 'projects', customEmpty: translate('Start by creating a project.') });
+getNoResultMessage({
+  verboseName: 'projects',
+  customEmpty: translate('Start by creating a project.'),
+});
 ```
 
 ### 1.3 Inline Empty Values
@@ -118,10 +121,14 @@ import { renderFieldOrDash } from '@/table/utils';
 
 ```tsx
 // Empty array - use descriptive message
-{items.length > 0 ? items.map(renderItem) : translate('None')}
+{
+  items.length > 0 ? items.map(renderItem) : translate('None');
+}
 
 // Or use dash for consistency
-{items.length > 0 ? items.join(', ') : DASH_ESCAPE_CODE}
+{
+  items.length > 0 ? items.join(', ') : DASH_ESCAPE_CODE;
+}
 ```
 
 **What the column holds decides it, not how empty the cell looks.**
@@ -130,12 +137,12 @@ An empty cell is rarely a null: a count is 0, a price is 0.0000000, a relation
 is []. Deciding per cell is how one table ends up saying nothing three
 different ways, so decide by type:
 
-| The column holds | Empty renders as | Example |
-|---|---|---|
-| money — a price, a cost, a total | the figure, always: `defaultCurrency(...)` | `€0.00` for a plan whose components are all priced at 0 |
-| a count | the number, or the column's own word for zero | `Not used` for the resources on a plan |
-| an optional list or relation, where empty is the ordinary state | `—` | a plan's organization groups: none assigned means no restriction |
-| a genuinely absent field (`null`/`undefined`) | `—` via `renderFieldOrDash` | a description nobody wrote |
+| The column holds                                                | Empty renders as                              | Example                                                          |
+| --------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------- |
+| money — a price, a cost, a total                                | the figure, always: `defaultCurrency(...)`    | `€0.00` for a plan whose components are all priced at 0          |
+| a count                                                         | the number, or the column's own word for zero | `Not used` for the resources on a plan                           |
+| an optional list or relation, where empty is the ordinary state | `—`                                           | a plan's organization groups: none assigned means no restriction |
+| a genuinely absent field (`null`/`undefined`)                   | `—` via `renderFieldOrDash`                   | a description nobody wrote                                       |
 
 A price, a count or a total is never dashed: `0` is a fact somebody's
 configuration produced and usually one they must act on, while `—` reads as
@@ -152,19 +159,25 @@ Cells read against the ones beside them before they read against the app.
 
 ```tsx
 // Default (no context)
-translate('No {verboseName} found', { verboseName })
+translate('No {verboseName} found', { verboseName });
 
 // With search query
-translate('Your search "{query}" did not match any {verboseName}.', { query, verboseName })
+translate('Your search "{query}" did not match any {verboseName}.', {
+  query,
+  verboseName,
+});
 
 // With active filters
-translate('No {verboseName} found matching current filters', { verboseName })
+translate('No {verboseName} found matching current filters', { verboseName });
 
 // First use (encouraging)
-translate('No {verboseName} yet. Create your first {singular} to get started.', { verboseName, singular })
+translate(
+  'No {verboseName} yet. Create your first {singular} to get started.',
+  { verboseName, singular },
+);
 
 // After action completion
-translate('All {verboseName} have been processed.')
+translate('All {verboseName} have been processed.');
 ```
 
 ---
@@ -175,14 +188,14 @@ The decision to hide vs disable a button significantly impacts user experience. 
 
 ### 2.1 Decision Matrix
 
-| Scenario | Action | Rationale |
-|----------|--------|-----------|
-| User lacks permission (role-based) | **HIDE** | User will never be authorized in current context |
-| Resource in wrong state | **DISABLE** + tooltip | Temporary; user can fix by changing state |
-| Action in progress | **DISABLE** + spinner | Will become available when complete |
-| Feature not applicable | **HIDE** | Doesn't apply to this resource type |
-| Validation incomplete | **DISABLE** + tooltip | User can complete requirements |
-| Quota exceeded | **DISABLE** + tooltip | User can request more quota |
+| Scenario                           | Action                | Rationale                                        |
+| ---------------------------------- | --------------------- | ------------------------------------------------ |
+| User lacks permission (role-based) | **HIDE**              | User will never be authorized in current context |
+| Resource in wrong state            | **DISABLE** + tooltip | Temporary; user can fix by changing state        |
+| Action in progress                 | **DISABLE** + spinner | Will become available when complete              |
+| Feature not applicable             | **HIDE**              | Doesn't apply to this resource type              |
+| Validation incomplete              | **DISABLE** + tooltip | User can complete requirements                   |
+| Quota exceeded                     | **DISABLE** + tooltip | User can request more quota                      |
 
 ### 2.2 Disabled Button Requirements
 
@@ -214,7 +227,7 @@ const MyAction = ({ resource }) => {
       title={translate('Restart')}
       action={handleRestart}
       disabled={disabled}
-      tooltip={tooltip}  // Always provide tooltip when disabled
+      tooltip={tooltip} // Always provide tooltip when disabled
       iconNode={<ArrowClockwiseIcon weight="bold" />}
     />
   );
@@ -240,11 +253,13 @@ const MyComponent = ({ project }) => {
   const user = useUser();
 
   // HIDE if user lacks permission (they can never do this)
-  if (!hasPermission(user, {
-    permission: 'resource.create',
-    projectId: project.uuid
-  })) {
-    return null;  // Early return - hide entire component
+  if (
+    !hasPermission(user, {
+      permission: 'resource.create',
+      projectId: project.uuid,
+    })
+  ) {
+    return null; // Early return - hide entire component
   }
 
   return <CreateResourceButton />;
@@ -260,13 +275,13 @@ import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 <ActionItem
   title={translate('Admin action')}
   action={handleAction}
-  staff  // Shows StaffOnlyIndicator badge
-/>
+  staff // Shows StaffOnlyIndicator badge
+/>;
 
 // Check staff status
 const user = useUser();
 if (!user?.is_staff) {
-  return null;  // Hide from non-staff
+  return null; // Hide from non-staff
 }
 ```
 
@@ -285,18 +300,18 @@ Consistent loading feedback prevents user confusion and maintains perceived perf
 // For manual control in custom components:
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 
-{loading && !data.length ? (
-  <LoadingSpinner />
-) : (
-  <DataContent data={data} />
-)}
+{
+  loading && !data.length ? <LoadingSpinner /> : <DataContent data={data} />;
+}
 
 // With existing data - show subtle indicator, don't replace content
-{loading && data.length > 0 && (
-  <div className="text-center py-2">
-    <LoadingSpinnerIcon className="text-muted" />
-  </div>
-)}
+{
+  loading && data.length > 0 && (
+    <div className="text-center py-2">
+      <LoadingSpinnerIcon className="text-muted" />
+    </div>
+  );
+}
 ```
 
 ### 3.2 Button Loading
@@ -349,7 +364,7 @@ if (error) {
 <LoadingErred
   loadData={retry}
   message={translate('Connection failed. Please check your network.')}
-/>
+/>;
 ```
 
 **Always provide a retry action** - never leave users stuck.
@@ -360,11 +375,11 @@ if (error) {
 
 ### 4.1 Filter Visibility Rules
 
-| Filter Position | When Visible | On Empty Table |
-|-----------------|--------------|----------------|
-| `header` | Always | Always visible |
-| `menu` | Toggle button click | Show toggle button |
-| `sidebar` | When filters active OR toggled | **Show toggle button** (allow discovery) |
+| Filter Position | When Visible                   | On Empty Table                           |
+| --------------- | ------------------------------ | ---------------------------------------- |
+| `header`        | Always                         | Always visible                           |
+| `menu`          | Toggle button click            | Show toggle button                       |
+| `sidebar`       | When filters active OR toggled | **Show toggle button** (allow discovery) |
 
 **Important**: Never completely hide filters on empty tables. Users need to discover that filters exist and may be causing the empty state.
 
@@ -376,7 +391,9 @@ if (error) {
 ```tsx
 <NoResult
   title={translate('No results match your filters')}
-  message={translate('Try adjusting your filters or clear them to see all items.')}
+  message={translate(
+    'Try adjusting your filters or clear them to see all items.',
+  )}
   actions={
     <>
       <Button variant="tertiary" onClick={clearFilters}>
@@ -394,7 +411,7 @@ if (error) {
 // Table configuration
 <Table
   filters={<MyFilters />}
-  filterPosition="menu"  // 'header' | 'menu' | 'sidebar'
+  filterPosition="menu" // 'header' | 'menu' | 'sidebar'
   // ...
 />
 ```
@@ -416,9 +433,11 @@ import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@/table/constants';
 // PAGE_SIZE_FULL = 10 (for primary tables)
 
 // Hide pagination when items ≤ PAGE_SIZE_COMPACT
-{pagination.resultCount > PAGE_SIZE_COMPACT && (
-  <TablePagination {...pagination} />
-)}
+{
+  pagination.resultCount > PAGE_SIZE_COMPACT && (
+    <TablePagination {...pagination} />
+  );
+}
 
 // Show item count
 // Format: "Showing 1-10 of 100"
@@ -453,11 +472,7 @@ export const DeleteProjectButton = ({ project, refetch }) => {
   });
 
   return (
-    <Button
-      variant="danger"
-      onClick={() => mutate()}
-      disabled={isPending}
-    >
+    <Button variant="danger" onClick={() => mutate()} disabled={isPending}>
       {translate('Delete')}
     </Button>
   );
@@ -498,11 +513,7 @@ export const BulkDeleteProjectsButton = ({ projects, refetch }) => {
   });
 
   return (
-    <Button
-      variant="danger"
-      onClick={() => mutate()}
-      disabled={isPending}
-    >
+    <Button variant="danger" onClick={() => mutate()} disabled={isPending}>
       {translate('Delete selected')}
     </Button>
   );
@@ -617,7 +628,7 @@ import { StateIndicator } from '@/core/StateIndicator';
 <StateIndicator label="Active" variant="success" />
 <StateIndicator label="Pending" variant="warning" />
 <StateIndicator label="Error" variant="danger" />
-<StateIndicator label="Inactive" variant="default" />
+<StateIndicator label="Inactive" variant="neutral" />
 
 // Styling options
 <StateIndicator
@@ -632,13 +643,13 @@ import { StateIndicator } from '@/core/StateIndicator';
 
 ### 7.2 Variant Mapping Guidelines
 
-| State Category | Variant | Examples |
-|---------------|---------|----------|
-| Success/Active | `success` | Active, Running, Completed, Approved |
-| Warning/Pending | `warning` | Pending, Processing, Updating |
-| Error/Failed | `danger` | Error, Failed, Rejected, Unavailable |
-| Neutral/Default | `default` | Draft, Archived, Paused, Unknown |
-| Info | `info` | New, In Review |
+| State Category  | Variant   | Examples                             |
+| --------------- | --------- | ------------------------------------ |
+| Success/Active  | `success` | Active, Running, Completed, Approved |
+| Warning/Pending | `warning` | Pending, Processing, Updating        |
+| Error/Failed    | `danger`  | Error, Failed, Rejected, Unavailable |
+| Neutral/Default | `default` | Draft, Archived, Paused, Unknown     |
+| Info            | `info`    | New, In Review                       |
 
 **Custom variants** (for differentiation within same category):
 `pink`, `blue`, `teal`, `indigo`, `purple`, `rose`, `orange`, `moss`
@@ -688,15 +699,13 @@ From `ActionItem` - use question icon for disabled action explanation:
 import { QuestionIcon } from '@phosphor-icons/react';
 
 // When action is disabled, show question icon with tooltip
-{props.disabled && props.tooltip && (
-  <Tip label={props.tooltip} id={`disabled-reason-${id}`}>
-    <QuestionIcon
-      size={20}
-      weight="bold"
-      className="text-muted ms-1"
-    />
-  </Tip>
-)}
+{
+  props.disabled && props.tooltip && (
+    <Tip label={props.tooltip} id={`disabled-reason-${id}`}>
+      <QuestionIcon size={20} weight="bold" className="text-muted ms-1" />
+    </Tip>
+  );
+}
 ```
 
 ---
@@ -728,13 +737,13 @@ All user-facing text must use `translate()`:
 import { translate } from '@/i18n';
 
 // Simple string
-translate('Save changes')
+translate('Save changes');
 
 // With placeholders
-translate('Hello, {name}!', { name: user.name })
+translate('Hello, {name}!', { name: user.name });
 
 // Plural forms
-translate('{count} item', '{count} items', { count })
+translate('{count} item', '{count} items', { count });
 
 // Never hard-code strings
 // ❌ <Button>Submit</Button>
@@ -803,9 +812,8 @@ const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
 
 ```tsx
 // Automatically converts 'menu' to 'sidebar' on small screens
-const filterPosition = isSm && originalPosition === 'menu'
-  ? 'sidebar'
-  : originalPosition;
+const filterPosition =
+  isSm && originalPosition === 'menu' ? 'sidebar' : originalPosition;
 ```
 
 ### 11.3 Interactive Element Sizing
@@ -911,31 +919,43 @@ When cards are displayed in a row (carousel, grid), ensure they all have equal h
 
 ### What NOT to Do
 
-| Anti-Pattern | Problem | Correct Approach |
-|--------------|---------|------------------|
-| Redundant `length === 0` checks | Table already handles empty | Trust the Table component |
-| Mixed null display (`—`, "N/A", "", "None") | Inconsistent | Always use `DASH_ESCAPE_CODE` or `renderFieldOrDash` |
-| Hide + Disable for same scenario | Confusing | Follow decision matrix consistently |
-| Disabled button without tooltip | User doesn't know why | Always provide tooltip |
-| Hard-coded strings | Not translatable | Always use `translate()` |
-| Hidden filters on empty tables | Can't discover filters | Show filter toggle |
-| Empty state without CTA | Dead end | Always provide next action |
-| `user.is_staff` checks everywhere | Inconsistent | Use `hasPermission()` utility |
-| Silent redirect for anonymous users | Confusing, "magical" | Show confirmation dialog before redirect |
-| Cards without `h-100` in flex rows | Uneven card heights | Use `display: flex` on wrapper + `h-100` on card |
+| Anti-Pattern                                | Problem                     | Correct Approach                                     |
+| ------------------------------------------- | --------------------------- | ---------------------------------------------------- |
+| Redundant `length === 0` checks             | Table already handles empty | Trust the Table component                            |
+| Mixed null display (`—`, "N/A", "", "None") | Inconsistent                | Always use `DASH_ESCAPE_CODE` or `renderFieldOrDash` |
+| Hide + Disable for same scenario            | Confusing                   | Follow decision matrix consistently                  |
+| Disabled button without tooltip             | User doesn't know why       | Always provide tooltip                               |
+| Hard-coded strings                          | Not translatable            | Always use `translate()`                             |
+| Hidden filters on empty tables              | Can't discover filters      | Show filter toggle                                   |
+| Empty state without CTA                     | Dead end                    | Always provide next action                           |
+| `user.is_staff` checks everywhere           | Inconsistent                | Use `hasPermission()` utility                        |
+| Silent redirect for anonymous users         | Confusing, "magical"        | Show confirmation dialog before redirect             |
+| Cards without `h-100` in flex rows          | Uneven card heights         | Use `display: flex` on wrapper + `h-100` on card     |
 
 ### Code Examples - Bad vs Good
 
 ```tsx
 // ❌ BAD: Inconsistent empty display
-{user.email || 'N/A'}
-{user.phone || ''}
-{user.name || '—'}
+{
+  user.email || 'N/A';
+}
+{
+  user.phone || '';
+}
+{
+  user.name || '—';
+}
 
 // ✅ GOOD: Consistent
-{renderFieldOrDash(user.email)}
-{renderFieldOrDash(user.phone)}
-{renderFieldOrDash(user.name)}
+{
+  renderFieldOrDash(user.email);
+}
+{
+  renderFieldOrDash(user.phone);
+}
+{
+  renderFieldOrDash(user.name);
+}
 ```
 
 ```tsx
@@ -960,16 +980,20 @@ if (hasPermission(user, { permission: 'resource.admin', projectId })) { ... }
 
 ```tsx
 // ❌ BAD: Empty state dead end
-{items.length === 0 && <p>No items</p>}
+{
+  items.length === 0 && <p>No items</p>;
+}
 
 // ✅ GOOD: Actionable empty state
-{items.length === 0 && (
-  <NoResult
-    title={translate('No items yet')}
-    message={translate('Create your first item to get started.')}
-    actions={<CreateButton />}
-  />
-)}
+{
+  items.length === 0 && (
+    <NoResult
+      title={translate('No items yet')}
+      message={translate('Create your first item to get started.')}
+      actions={<CreateButton />}
+    />
+  );
+}
 ```
 
 ---
@@ -982,7 +1006,11 @@ if (hasPermission(user, { permission: 'resource.admin', projectId })) { ... }
 // Empty states
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
-import { renderFieldOrDash, getNoResultTitle, getNoResultMessage } from '@/table/utils';
+import {
+  renderFieldOrDash,
+  getNoResultTitle,
+  getNoResultMessage,
+} from '@/table/utils';
 
 // Buttons & Actions
 import { BaseButton } from '@/core/buttons/BaseButton';
@@ -995,7 +1023,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 
 // Indicators
 import { StateIndicator } from '@/core/StateIndicator';
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
 
 // Tooltips
 import { Tip } from '@/core/Tooltip';
@@ -1057,13 +1085,13 @@ Based on a codebase analysis, these are prioritized inconsistencies that should 
 
 ```tsx
 // Current (inconsistent)
-row.network_name || 'N/A'
-project.name || 'N/A'
-row.destination_url || row.email || 'N/A'
+row.network_name || 'N/A';
+project.name || 'N/A';
+row.destination_url || row.email || 'N/A';
 
 // Should be
-renderFieldOrDash(row.network_name)
-renderFieldOrDash(project.name)
+renderFieldOrDash(row.network_name);
+renderFieldOrDash(project.name);
 ```
 
 ### 2. Scattered Staff Permission Checks
@@ -1107,10 +1135,10 @@ Various components have disabled buttons that don't explain why they're disabled
 
 ```tsx
 // Current
-copyField: (row) => row.mac_address || ''
+copyField: (row) => row.mac_address || '';
 
 // Should provide fallback or hide copy when empty
-copyField: (row) => row.mac_address || undefined
+copyField: (row) => row.mac_address || undefined;
 ```
 
 ### 6. Inconsistent Empty State Messages
@@ -1142,7 +1170,7 @@ return false;
 
 ```tsx
 // Current
-organization: groupInvitation.scope_name || 'N/A'
+organization: groupInvitation.scope_name || 'N/A';
 
 // Should handle missing data more gracefully
 ```
@@ -1165,11 +1193,11 @@ Various data-fetching components don't show `LoadingErred` on fetch failure.
 
 ### When to use which filter pattern
 
-| Pattern | Use |
-|---|---|
-| Page-level filters (top of page) | Used on report pages |
-| Header global filters | Used as system-wide filters affecting multiple pages |
-| Table dropdown filters | Used for table column filtering |
+| Pattern                          | Use                                                  |
+| -------------------------------- | ---------------------------------------------------- |
+| Page-level filters (top of page) | Used on report pages                                 |
+| Header global filters            | Used as system-wide filters affecting multiple pages |
+| Table dropdown filters           | Used for table column filtering                      |
 
 ### Standard filter component composition
 
@@ -1213,10 +1241,15 @@ module.exports = {
         const expr = node.expression;
         if (expr.type === 'LogicalExpression' && expr.operator === '&&') {
           const left = context.getSourceCode().getText(expr.left);
-          if (left.includes('.length') || left.includes('loading') || left.includes('isEmpty')) {
+          if (
+            left.includes('.length') ||
+            left.includes('loading') ||
+            left.includes('isEmpty')
+          ) {
             context.report({
               node,
-              message: 'Filters must not be conditionally hidden based on data or loading state. Always render filters.',
+              message:
+                'Filters must not be conditionally hidden based on data or loading state. Always render filters.',
             });
           }
         }
@@ -1232,10 +1265,10 @@ Report filters remain at the top of the page. On smaller screens filters may wra
 
 ### Default filter states per report type
 
-| Default state | Meaning |
-|---|---|
-| No filters applied | Report loads full dataset |
-| Pre-filled date range | Report loads recent data (e.g. last 30 days) |
+| Default state          | Meaning                                        |
+| ---------------------- | ---------------------------------------------- |
+| No filters applied     | Report loads full dataset                      |
+| Pre-filled date range  | Report loads recent data (e.g. last 30 days)   |
 | Required filters empty | User must select filters before results appear |
 
 ---
@@ -1244,12 +1277,12 @@ Report filters remain at the top of the page. On smaller screens filters may wra
 
 ### When to use each chart type
 
-| Chart | Use |
-|---|---|
+| Chart       | Use                                                       |
+| ----------- | --------------------------------------------------------- |
 | Donut / Pie | Showing how something breaks down as a share of the whole |
-| Bar | Comparing values across categories |
-| Line | Showing how something changes over time |
-| Stacked bar | Comparing totals AND showing what's inside each total |
+| Bar         | Comparing values across categories                        |
+| Line        | Showing how something changes over time                   |
+| Stacked bar | Comparing totals AND showing what's inside each total     |
 
 - Use **line** when continuity matters — when the shape of the trend is the point.
 - Use **stacked bar** only when both the total and the breakdown are meaningful. Keep it to 4–5 segments max, otherwise it gets hard to read.
@@ -1266,12 +1299,12 @@ Charts must reflect the same filtered dataset as the report. Filters affect char
 const MyChart = () => {
   const [filters, setFilters] = useState({});
   const [dateRange, setDateRange] = useState(null);
-}
+};
 
 // ✅ GOOD
 const MyChart = ({ data }) => {
   // receives already-filtered data from parent report
-}
+};
 ```
 
 ```js
@@ -1285,7 +1318,14 @@ module.exports = {
         if (!isUseState) return;
 
         const varName = node.parent?.id?.elements?.[0]?.name || '';
-        const filterKeywords = ['filter', 'Filter', 'dateRange', 'DateRange', 'period', 'Period'];
+        const filterKeywords = [
+          'filter',
+          'Filter',
+          'dateRange',
+          'DateRange',
+          'period',
+          'Period',
+        ];
         const componentName = context.getScope().block?.id?.name || '';
 
         if (
@@ -1294,7 +1334,8 @@ module.exports = {
         ) {
           context.report({
             node,
-            message: 'Chart components must not manage their own filter state. Receive filtered data from the parent report instead.',
+            message:
+              'Chart components must not manage their own filter state. Receive filtered data from the parent report instead.',
           });
         }
       },
@@ -1311,15 +1352,15 @@ Charts should include:
 - Totals or summary values
 - Legend
 
-Tooltips show the specific value and aggregation context (e.g. *Sum of invoices in March — $12,400*).
+Tooltips show the specific value and aggregation context (e.g. _Sum of invoices in March — $12,400_).
 
 ### Chart empty and loading states
 
-| State | UI |
-|---|---|
-| Loading | Chart skeleton |
-| Empty | "No data for selected filters. Try adjusting your filters." |
-| Error | Inline message or alert |
+| State   | UI                                                          |
+| ------- | ----------------------------------------------------------- |
+| Loading | Chart skeleton                                              |
+| Empty   | "No data for selected filters. Try adjusting your filters." |
+| Error   | Inline message or alert                                     |
 
 Keep the chart container at its normal height even when empty. Never return `null` from a chart component.
 
@@ -1330,9 +1371,16 @@ Keep the chart container at its normal height even when empty. Never return `nul
 if (!data.length) return null;
 
 // ✅ GOOD
-{data.length === 0
-  ? <NoResult title={translate('No data for selected filters. Try adjusting your filters.')} />
-  : <Chart data={data} />
+{
+  data.length === 0 ? (
+    <NoResult
+      title={translate(
+        'No data for selected filters. Try adjusting your filters.',
+      )}
+    />
+  ) : (
+    <Chart data={data} />
+  );
 }
 ```
 
@@ -1343,10 +1391,14 @@ module.exports = {
       ReturnStatement(node) {
         const src = context.getSourceCode().getText(node);
         const componentName = context.getScope().block?.id?.name || '';
-        if (componentName.toLowerCase().includes('chart') && src.includes('return null')) {
+        if (
+          componentName.toLowerCase().includes('chart') &&
+          src.includes('return null')
+        ) {
           context.report({
             node,
-            message: 'Chart components must not return null on empty data. Keep the container and show an empty state instead.',
+            message:
+              'Chart components must not return null on empty data. Keep the container and show an empty state instead.',
           });
         }
       },
@@ -1398,19 +1450,23 @@ module.exports = {
         const names = children.map((c) => c.openingElement?.name?.name || '');
 
         const filterIdx = names.findIndex((n) => n.includes('Filter'));
-        const tableIdx = names.findIndex((n) => n.includes('Table') || n.includes('DataTable'));
+        const tableIdx = names.findIndex(
+          (n) => n.includes('Table') || n.includes('DataTable'),
+        );
         const chartIdx = names.findIndex((n) => n.includes('Chart'));
 
         if (filterIdx !== -1 && tableIdx !== -1 && tableIdx < filterIdx) {
           context.report({
             node,
-            message: 'DataTable must come after ReportFilters in report page layout.',
+            message:
+              'DataTable must come after ReportFilters in report page layout.',
           });
         }
         if (filterIdx !== -1 && chartIdx !== -1 && chartIdx < filterIdx) {
           context.report({
             node,
-            message: 'Chart must come after ReportFilters in report page layout.',
+            message:
+              'Chart must come after ReportFilters in report page layout.',
           });
         }
       },

@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { GlobalUserDataAccessLog } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { formatFieldName } from '@/user/data-access/utils';
@@ -23,7 +24,12 @@ export const SupportDataAccessLogsExpandableRow: FC<
           <strong>{translate('Accessed fields')}:</strong>
           <div className="d-flex flex-wrap gap-1 mt-1">
             {row.accessed_fields.map((field) => (
-              <Badge key={field} variant="secondary" pill outline>
+              <Badge
+                key={field}
+                variant="secondary"
+                shape="pill"
+                tone="outline"
+              >
                 {formatFieldName(field)}
               </Badge>
             ))}

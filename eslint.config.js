@@ -69,7 +69,6 @@ export default tseslint
         'waldur-custom/enforce-actions-dropdown-in-tables': 'warn',
         'waldur-custom/enforce-badge-icon-patterns': 'error',
         'waldur-custom/enforce-badge-props-consistency': 'error',
-        'waldur-custom/enforce-badge-design-tokens': 'error',
         'waldur-custom/no-manual-icon-colors-in-badges': 'error',
         'waldur-custom/enforce-badge-right-icon-pattern': 'error',
         'waldur-custom/enforce-button-variants': 'error',

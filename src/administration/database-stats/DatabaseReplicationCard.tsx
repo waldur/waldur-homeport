@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
+import { Badge } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { Badge } from '@/core/Badge';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -44,8 +45,8 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
             <td className="text-end">
               <Badge
                 variant={data.is_replica ? 'info' : 'primary'}
-                pill
-                outline
+                shape="pill"
+                tone="outline"
               >
                 {data.is_replica ? translate('Replica') : translate('Primary')}
               </Badge>

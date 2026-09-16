@@ -4,7 +4,8 @@ import {
   providerSupportUsersList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -59,7 +60,7 @@ const TeamTable: FC<{ helpdeskUuid?: string }> = ({ helpdeskUuid }) => {
             label: row.role ?? '',
           };
           return (
-            <Badge variant={meta.variant} pill outline>
+            <Badge variant={meta.variant} shape="pill" tone="outline">
               {meta.label}
             </Badge>
           );

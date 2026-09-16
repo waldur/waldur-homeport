@@ -41,8 +41,8 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
         <StateIndicator
           label={row.archived ? translate('Archived') : translate('Active')}
           variant={row.archived ? 'warning' : 'success'}
-          outline
-          pill
+          tone="outline"
+          shape="pill"
           // The other two badges on this row are sm; a status badge that towers
           // over them reads as a different kind of thing.
           size="sm"

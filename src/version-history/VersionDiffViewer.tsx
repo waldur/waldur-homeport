@@ -62,7 +62,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
           <StateIndicator
             label={`${changedCount} ${translate('field(s) changed')}`}
             variant={changedCount > 0 ? 'warning' : 'secondary'}
-            outline
+            tone="outline"
           />
         </div>
         <Nav variant="pills" className="nav-pills-sm">

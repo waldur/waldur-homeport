@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react';
 import { ReviewerSuggestion } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
@@ -29,7 +30,7 @@ const formatScore = (score: number | undefined | null) => {
 const COIBadge: FC<{ proposal: TopMatchingProposal }> = ({ proposal }) => {
   if (!proposal.has_coi) {
     return (
-      <Badge variant="success" pill outline>
+      <Badge variant="success" shape="pill" tone="outline">
         {translate('No conflict')}
       </Badge>
     );
@@ -37,7 +38,7 @@ const COIBadge: FC<{ proposal: TopMatchingProposal }> = ({ proposal }) => {
 
   const variant = proposal.coi_severity === 'real' ? 'danger' : 'warning';
   return (
-    <Badge variant={variant} pill outline>
+    <Badge variant={variant} shape="pill" tone="outline">
       {proposal.coi_type || translate('Conflict')}
     </Badge>
   );
@@ -76,7 +77,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
           </h6>
           <div className="d-flex flex-wrap gap-2">
             {matchedKeywords.map((keyword, index) => (
-              <Badge key={index} variant="primary" pill outline>
+              <Badge key={index} variant="primary" shape="pill" tone="outline">
                 {keyword}
               </Badge>
             ))}

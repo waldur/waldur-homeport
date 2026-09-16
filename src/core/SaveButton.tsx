@@ -2,7 +2,7 @@ import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button, ButtonProps } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { Badge, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -33,9 +33,14 @@ export const SaveButton: FC<SaveButtonProps> = ({
         {submitting ? translate('Saving...') : translate('Save')}
       </Button>
       {dirty && (
-        <span className="position-absolute top-0 start-100 translate-middle badge badge-circle badge-warning">
+        <Badge
+          variant="warning"
+          shape="circle"
+          tone="solid"
+          className="position-absolute top-0 start-100 translate-middle"
+        >
           !
-        </span>
+        </Badge>
       )}
     </div>
   );

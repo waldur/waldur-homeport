@@ -3,6 +3,8 @@ import {
   MaintenanceAnnouncementStateEnum,
 } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -47,10 +49,10 @@ export const validateWindow = (
 
 export const getMaintenanceState = (
   state: MaintenanceAnnouncementStateEnum,
-) => {
+): { label: string; color: BadgeVariant } => {
   switch (state) {
     case 'Draft':
-      return { label: translate('Draft'), color: 'default' };
+      return { label: translate('Draft'), color: 'neutral' };
     case 'Scheduled':
       return { label: translate('Scheduled'), color: 'warning' };
     case 'In progress':
@@ -61,7 +63,7 @@ export const getMaintenanceState = (
       return { label: translate('Cancelled'), color: 'danger' };
 
     default:
-      return { label: state, color: 'default' };
+      return { label: state, color: 'neutral' };
   }
 };
 

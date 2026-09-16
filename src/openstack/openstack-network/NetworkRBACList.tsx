@@ -5,7 +5,8 @@ import {
   openstackNetworkRbacPoliciesList,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { ResourceDeleteButton } from '@/resource/actions/ResourceDeleteButton';
@@ -57,8 +58,8 @@ export const NetworkRBACList: FC<{ network: OpenStackNetwork }> = ({
           render: ({ row }) => (
             <Badge
               variant={POLICY_TYPE[row.policy_type]?.color || 'default'}
-              pill
-              outline
+              shape="pill"
+              tone="outline"
             >
               {POLICY_TYPE[row.policy_type]?.label || row.policy_type}
             </Badge>

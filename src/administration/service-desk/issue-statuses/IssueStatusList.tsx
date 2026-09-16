@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { supportIssueStatusesList } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -21,8 +21,8 @@ const renderType = ({ row }: { row: IssueStatusAdmin }) => (
   <Badge
     variant={row.type === IssueStatusTypes.RESOLVED ? 'success' : 'danger'}
     size="sm"
-    pill
-    outline
+    shape="pill"
+    tone="outline"
   >
     {row.type_display}
   </Badge>

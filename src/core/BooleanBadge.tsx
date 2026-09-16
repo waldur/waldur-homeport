@@ -1,6 +1,7 @@
 import { CheckIcon, XIcon } from '@phosphor-icons/react';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 export const BooleanBadge = ({ value }) =>
@@ -9,8 +10,8 @@ export const BooleanBadge = ({ value }) =>
       variant="success"
       size="sm"
       leftIcon={<CheckIcon weight="bold" />}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
     >
       {translate('Yes')}
     </Badge>
@@ -19,8 +20,8 @@ export const BooleanBadge = ({ value }) =>
       variant="danger"
       size="sm"
       leftIcon={<XIcon weight="bold" />}
-      pill
-      outline
+      shape="pill"
+      tone="outline"
     >
       {translate('No')}
     </Badge>

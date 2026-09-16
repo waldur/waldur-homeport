@@ -40,9 +40,9 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -529,7 +529,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                   {p.is_in_grace_period && (
                     <Badge
                       variant="warning"
-                      outline
+                      tone="outline"
                       className="ms-2"
                       style={{ fontSize: '0.7em' }}
                     >
@@ -538,8 +538,8 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                   )}
                   {p.is_expired && !p.is_in_grace_period && (
                     <Badge
-                      variant="default"
-                      outline
+                      variant="neutral"
+                      tone="outline"
                       className="ms-2"
                       style={{ fontSize: '0.7em' }}
                     >
@@ -1477,7 +1477,7 @@ export const OrganisationAllocationTab: FC = () => {
               depleted.length +
               offTrack.length >
               0 && (
-              <Badge variant="warning" outline>
+              <Badge variant="warning" tone="outline">
                 {
                   new Set<string>([
                     ...slowStart.map(
@@ -1707,7 +1707,11 @@ export const OrganisationAllocationTab: FC = () => {
                     <>
                       {translate('Slow start')}
                       {slowStart.length > 0 && (
-                        <Badge variant="warning" outline className="ms-2">
+                        <Badge
+                          variant="warning"
+                          tone="outline"
+                          className="ms-2"
+                        >
                           {slowStart.length}
                         </Badge>
                       )}
@@ -1774,7 +1778,11 @@ export const OrganisationAllocationTab: FC = () => {
                     <>
                       {translate('Inactive')}
                       {inactive.length > 0 && (
-                        <Badge variant="warning" outline className="ms-2">
+                        <Badge
+                          variant="warning"
+                          tone="outline"
+                          className="ms-2"
+                        >
                           {inactive.length}
                         </Badge>
                       )}
@@ -1843,7 +1851,7 @@ export const OrganisationAllocationTab: FC = () => {
                     <>
                       {translate('Nearly depleted')}
                       {depleted.length > 0 && (
-                        <Badge variant="danger" outline className="ms-2">
+                        <Badge variant="danger" tone="outline" className="ms-2">
                           {depleted.length}
                         </Badge>
                       )}
@@ -1912,7 +1920,11 @@ export const OrganisationAllocationTab: FC = () => {
                     <>
                       {translate('Off track')}
                       {offTrack.length > 0 && (
-                        <Badge variant="warning" outline className="ms-2">
+                        <Badge
+                          variant="warning"
+                          tone="outline"
+                          className="ms-2"
+                        >
                           {offTrack.length}
                         </Badge>
                       )}

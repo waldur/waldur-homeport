@@ -4,7 +4,8 @@ import { Alert, Card, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { identityProvidersDiscoverMetadata } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { WarnCard } from '@/core/WarnCard';
@@ -187,9 +188,9 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                 <Badge
                   key={claim}
                   variant={
-                    values.manualClaims?.includes(claim) ? 'warning' : 'default'
+                    values.manualClaims?.includes(claim) ? 'warning' : 'neutral'
                   }
-                  outline
+                  tone="outline"
                 >
                   {claim}
                   {values.manualClaims?.includes(claim) && (
@@ -248,7 +249,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               </p>
               <div className="d-flex flex-wrap gap-2">
                 {discoveryResult.suggested_scopes.map((scope) => (
-                  <Badge key={scope} variant="primary" outline>
+                  <Badge key={scope} variant="primary" tone="outline">
                     {scope}
                   </Badge>
                 ))}

@@ -120,7 +120,7 @@ describe('getCallStatus', () => {
     });
     expect(getCallStatus({ state: 'archived' } as Call)).toEqual({
       label: 'Archived',
-      color: 'gray',
+      color: 'neutral',
     });
   });
 

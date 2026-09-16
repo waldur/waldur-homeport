@@ -10,6 +10,8 @@ import {
   projectCreditsList,
 } from 'waldur-js-client';
 
+import { BadgeVariant } from 'waldur-ui';
+
 import { SHORT_STALE_TIME, STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
@@ -197,19 +199,22 @@ export const useHasProjectPermission = (permission) => {
 };
 
 export const projectKindOptions = (): Partial<
-  Record<ProjectKindEnum, { value: ProjectKindEnum; label; color; icon }>
+  Record<
+    ProjectKindEnum,
+    { value: ProjectKindEnum; label: string; color: BadgeVariant; icon: any }
+  >
 > => {
   const baseOptions = {
     default: {
       value: 'default' as ProjectKindEnum,
       label: translate('Regular'),
-      color: 'default',
+      color: 'neutral' as BadgeVariant,
       icon: null,
     },
     course: {
       value: 'course' as ProjectKindEnum,
       label: translate('Course'),
-      color: 'pink',
+      color: 'pink' as BadgeVariant,
       icon: GraduationCapIcon,
     },
   };

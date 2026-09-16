@@ -27,7 +27,7 @@ export function getResourceState(resource: Resource): StateIndicatorProps {
   }
   if (state === 'ok') {
     if (runtimeShutdownStates.indexOf(runtimeState) !== -1) {
-      context.variant = 'default';
+      context.variant = 'neutral';
     } else if (runtimeWarningStates.indexOf(runtimeState) !== -1) {
       context.variant = 'warning';
     }

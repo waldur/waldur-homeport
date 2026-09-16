@@ -1,4 +1,5 @@
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
@@ -16,8 +17,8 @@ export const OfferingScopeState = ({ state }) => (
     value={
       <Badge
         variant={variant[state] || 'secondary'}
-        pill
-        outline
+        shape="pill"
+        tone="outline"
         data-testid="offering-scope-state"
       >
         {state.toLocaleUpperCase()}

@@ -19,7 +19,7 @@
 import { FileArrowDownIcon, FileXlsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Badge, Tooltip } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { translate } from '@/i18n';
@@ -233,9 +233,9 @@ export const UsageReportVis: FC<Props> = ({
             },
           )}
           {!report.isComplete && (
-            <span className="badge bg-warning ms-2">
+            <Badge variant="warning" tone="solid" className="ms-2">
               {translate('In progress')}
-            </span>
+            </Badge>
           )}
         </span>
 

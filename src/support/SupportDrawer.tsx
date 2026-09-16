@@ -2,7 +2,8 @@ import { ChatsCircleIcon, LifebuoyIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useRef } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
 import { useDrawerShellClass } from '@/drawer/useDrawerShellClass';
@@ -83,7 +84,7 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
                     <ChatsCircleIcon size={16} weight="bold" />
                     {translate('Team chat')}
                     {matrixUnread > 0 && (
-                      <Badge variant="primary" pill light>
+                      <Badge variant="primary" shape="pill" tone="light">
                         {matrixUnread > 99 ? '99+' : matrixUnread}
                       </Badge>
                     )}

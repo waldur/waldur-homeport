@@ -1,10 +1,11 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { Badge } from 'react-bootstrap';
 import {
   marketplacePosixIdPoolsList,
   PosixIdPool,
   ServiceProvider,
 } from 'waldur-js-client';
+
+import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { ProgressBar } from '@/core/ProgressBar';
@@ -68,7 +69,7 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
       {
         title: translate('Scope'),
         render: ({ row }: { row: PosixIdPool }) => (
-          <Badge bg="light-primary" text="primary">
+          <Badge variant="primary" tone="light">
             {getScopeLabel(row.scope)}
           </Badge>
         ),

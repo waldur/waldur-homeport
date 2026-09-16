@@ -2,7 +2,8 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { CallWorkflowStep, ResponsibleRoleEnum } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { AllocationTime } from '@/proposals/types';
@@ -75,7 +76,7 @@ const renderEvaluators = (row: CallWorkflowStep) => {
             {user.username} · {user.email}
           </span>
           {user.is_panel_chair && (
-            <Badge variant="primary" size="sm" pill outline>
+            <Badge variant="primary" size="sm" shape="pill" tone="outline">
               {translate('Chair')}
             </Badge>
           )}

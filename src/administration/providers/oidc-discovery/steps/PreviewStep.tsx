@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { Alert, Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -51,7 +52,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                   {translate('Provider Type')}
                 </td>
                 <td>
-                  <Badge variant="primary" outline>
+                  <Badge variant="primary" tone="outline">
                     {providerType}
                   </Badge>
                 </td>
@@ -196,11 +197,11 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 <td className="text-muted">{translate('PKCE')}</td>
                 <td>
                   {values.enable_pkce ? (
-                    <Badge variant="success" outline>
+                    <Badge variant="success" tone="outline">
                       {translate('Enabled')}
                     </Badge>
                   ) : (
-                    <Badge variant="default" outline>
+                    <Badge variant="neutral" tone="outline">
                       {translate('Disabled')}
                     </Badge>
                   )}
@@ -212,11 +213,11 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
                 <td>
                   {values.enable_post_logout_redirect ? (
-                    <Badge variant="success" outline>
+                    <Badge variant="success" tone="outline">
                       {translate('Enabled')}
                     </Badge>
                   ) : (
-                    <Badge variant="default" outline>
+                    <Badge variant="neutral" tone="outline">
                       {translate('Disabled')}
                     </Badge>
                   )}
@@ -226,11 +227,11 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 <td className="text-muted">{translate('Provider Status')}</td>
                 <td>
                   {values.is_active ? (
-                    <Badge variant="success" outline>
+                    <Badge variant="success" tone="outline">
                       {translate('Enabled')}
                     </Badge>
                   ) : (
-                    <Badge variant="warning" outline>
+                    <Badge variant="warning" tone="outline">
                       {translate('Disabled')}
                     </Badge>
                   )}

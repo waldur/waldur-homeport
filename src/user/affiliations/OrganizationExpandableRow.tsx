@@ -6,9 +6,10 @@ import {
   projectsCount as fetchProjectsCount,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getResourcesCount } from '@/administration/api';
 import { fetchResultCount } from '@/core/api';
-import { Badge } from '@/core/Badge';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
@@ -50,7 +51,7 @@ export const NavItem = ({ title, eventKey, count, countLoading }) => (
   <Nav.Item className="text-nowrap">
     <Nav.Link eventKey={eventKey}>
       {title}
-      <Badge variant="default" pill outline className="ms-2">
+      <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
         {countLoading ? <LoadingSpinnerSimple /> : count || 0}
       </Badge>
     </Nav.Link>

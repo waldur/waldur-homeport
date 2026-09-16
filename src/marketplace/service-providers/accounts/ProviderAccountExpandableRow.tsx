@@ -5,7 +5,8 @@ import {
   ServiceProviderAccount,
 } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { TruncatedDescription } from '@/core/TruncatedDescription';
 import { translate } from '@/i18n';
@@ -97,7 +98,7 @@ export const ProviderAccountExpandableRow = ({
               ) : (
                 <>
                   {renderFieldOrDash(row.username)}{' '}
-                  <Badge variant="warning" pill outline>
+                  <Badge variant="warning" shape="pill" tone="outline">
                     {translate('Own account')}
                   </Badge>
                 </>

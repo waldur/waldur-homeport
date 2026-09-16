@@ -8,9 +8,9 @@ import { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { ActionTakenEnum, InjectionSeverityEnum } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { BadgeVariant, Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { formatDateTime, formatShortDateTime } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
@@ -31,7 +31,7 @@ export const severityLabels: Record<InjectionSeverityEnum, string> = {
 
 export const getSeverityBadgeVariant = (
   severity: InjectionSeverityEnum,
-): 'danger' | 'orange' | 'warning' | 'secondary' | 'success' => {
+): BadgeVariant => {
   switch (severity) {
     case 'critical':
       return 'danger';
@@ -48,7 +48,7 @@ export const getSeverityBadgeVariant = (
 
 export const getActionBadgeVariant = (
   action: ActionTakenEnum,
-): 'danger' | 'orange' | 'warning' | 'secondary' => {
+): BadgeVariant => {
   switch (action) {
     case 'block':
       return 'danger';
@@ -122,11 +122,11 @@ export const TokenUsageBadge: FunctionComponent<{
 // conversation, it graded it afterwards.
 const SENDER_BADGES: Record<
   'user' | 'assistant' | 'reviewer',
-  { variant: string; label: string }
+  { variant: BadgeVariant; label: string }
 > = {
   user: { variant: 'info', label: translate('User') },
   assistant: { variant: 'primary', label: translate('Assistant') },
-  reviewer: { variant: 'default', label: translate('Reviewer') },
+  reviewer: { variant: 'neutral', label: translate('Reviewer') },
 };
 
 /**
@@ -161,7 +161,7 @@ export const MessageGutter: FunctionComponent<
   return (
     <div className="message-gutter d-flex flex-column gap-2 text-muted">
       <div>
-        <Badge variant={SENDER_BADGES[sender].variant} size="sm" outline>
+        <Badge variant={SENDER_BADGES[sender].variant} size="sm" tone="outline">
           {SENDER_BADGES[sender].label}
         </Badge>
       </div>
@@ -242,7 +242,7 @@ export const FeedbackStrip: FunctionComponent<
             <ThumbsDownIcon weight="fill" />
           )
         }
-        outline
+        tone="outline"
         className="message-feedback-label"
       >
         {positive
@@ -253,7 +253,7 @@ export const FeedbackStrip: FunctionComponent<
         <Badge
           variant={variant}
           size="sm"
-          outline
+          tone="outline"
           className="message-feedback-category"
         >
           {category}

@@ -1,11 +1,12 @@
 import { FC } from 'react';
-import { Variant } from 'react-bootstrap/types';
+
+import { BadgeVariant } from 'waldur-ui';
 
 import { StateIndicator } from '@/core/StateIndicator';
 
 const PROGRESSING_STATES = new Set(['Creating', 'Updating', 'Terminating']);
 
-const STATE_VARIANTS: Record<string, Variant> = {
+const STATE_VARIANTS: Record<string, BadgeVariant> = {
   Creating: 'success',
   OK: 'success',
   Updating: 'success',
@@ -24,8 +25,8 @@ export const StateLabel: FC<{ state: string }> = ({ state }) => {
       label={state}
       variant={variant}
       active={PROGRESSING_STATES.has(state)}
-      outline
-      pill
+      tone="outline"
+      shape="pill"
     />
   );
 };

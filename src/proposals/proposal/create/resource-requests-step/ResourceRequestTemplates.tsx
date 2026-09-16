@@ -13,8 +13,8 @@ import {
 } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
-import { Badge } from '@/core/Badge';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { FieldReviewComments } from '@/proposals/proposal/create-review/FieldReviewComments';
@@ -114,8 +114,8 @@ const TableTitle = () => (
         <QuestionIcon weight="bold" size={16} className="w-100" />
       </Tooltip>
     }
-    pill
-    outline
+    shape="pill"
+    tone="outline"
   >
     {translate('Template based')}
   </Badge>

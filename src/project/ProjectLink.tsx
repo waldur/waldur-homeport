@@ -4,7 +4,8 @@ import { FC, PropsWithChildren } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { AtLeast } from '@/core/types';
 import { isFeatureVisible } from '@/features/connect';
@@ -67,11 +68,10 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
         // eslint-disable-next-line waldur-custom/enforce-badge-icon-patterns
         <Badge
           variant={kind.color}
-          pill
-          outline
+          shape="pill"
+          tone="outline"
           onlyIcon
           tooltip={translate('{name} project', { name: kind.label })}
-          tooltipProps={{ id: 'tip-kind-' + row.uuid }}
         >
           {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
           <Icon weight="bold" size={12} />
@@ -85,7 +85,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
           </span>
         )}
       {row.is_removed && (
-        <Badge variant="danger" pill outline className="fs-8">
+        <Badge variant="danger" shape="pill" tone="outline" className="fs-8">
           {translate('Removed')}
         </Badge>
       )}

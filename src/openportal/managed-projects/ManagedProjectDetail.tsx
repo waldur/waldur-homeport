@@ -3,7 +3,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { Card } from 'react-bootstrap';
 import { openportalManagedProjectsRetrieveGet } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { ExternalLink } from '@/core/ExternalLink';
@@ -106,7 +107,12 @@ export const ManagedProjectDetail = () => {
               <>
                 {row.state}
                 {isEmbargoed(row) && (
-                  <Badge variant="warning" pill outline className="ms-1">
+                  <Badge
+                    variant="warning"
+                    shape="pill"
+                    tone="outline"
+                    className="ms-1"
+                  >
                     {translate('Embargoed')}
                   </Badge>
                 )}
