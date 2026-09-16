@@ -1,18 +1,19 @@
 import { FC } from 'react';
 import { SramGroupKindEnum } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 export const SramGroupKindBadge: FC<{ kind: SramGroupKindEnum }> = ({
   kind,
 }) =>
   kind === 'co' ? (
-    <Badge variant="blue" size="sm" pill outline>
+    <Badge variant="blue" size="sm" shape="pill" tone="outline">
       {translate('Collaboration')}
     </Badge>
   ) : (
-    <Badge variant="default" size="sm" pill outline>
+    <Badge variant="neutral" size="sm" shape="pill" tone="outline">
       {translate('Group')}
     </Badge>
   );

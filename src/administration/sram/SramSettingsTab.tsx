@@ -3,9 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, ReactNode } from 'react';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { getKeyTitle } from '@/administration/settings/utils';
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { ENV } from '@/core/config';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -36,11 +37,11 @@ const renderValue = (key: string, value: unknown): ReactNode => {
   const item = findSetting(key);
   if (item?.type === 'boolean') {
     return value ? (
-      <Badge variant="success" pill outline>
+      <Badge variant="success" shape="pill" tone="outline">
         {translate('Enabled')}
       </Badge>
     ) : (
-      <Badge variant="default" pill outline>
+      <Badge variant="neutral" shape="pill" tone="outline">
         {translate('Disabled')}
       </Badge>
     );

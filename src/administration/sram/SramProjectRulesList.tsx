@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { SramProjectRule, sramProjectRulesList } from 'waldur-js-client';
 
-import { Badge } from '@/core/Badge';
+import { Badge } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -30,7 +31,7 @@ const ListCell: FC<{ value: unknown; emptyLabel: string }> = ({
   return (
     <span className="d-inline-flex flex-wrap gap-1">
       {items.map((item) => (
-        <Badge key={item} variant="default" size="sm" outline>
+        <Badge key={item} variant="neutral" size="sm" tone="outline">
           {item}
         </Badge>
       ))}
@@ -55,11 +56,11 @@ export const SramProjectRulesList: FC = () => {
       title: translate('State'),
       render: ({ row }) =>
         row.is_active === false ? (
-          <Badge variant="default" pill outline>
+          <Badge variant="neutral" shape="pill" tone="outline">
             {translate('Inactive')}
           </Badge>
         ) : (
-          <Badge variant="success" pill outline>
+          <Badge variant="success" shape="pill" tone="outline">
             {translate('Active')}
           </Badge>
         ),

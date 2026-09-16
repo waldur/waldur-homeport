@@ -7,8 +7,9 @@ import {
   SramRulePreviewUser,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { AlertItem } from '@/core/AlertItem';
-import { Badge } from '@/core/Badge';
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -180,7 +181,10 @@ export const SramRulePreviewDialog: FC<SramRulePreviewDialogProps> = ({
     {
       title: translate('Projects'),
       render: ({ row }) => (
-        <Badge variant={row.projects.length ? 'primary' : 'default'} outline>
+        <Badge
+          variant={row.projects.length ? 'primary' : 'neutral'}
+          tone="outline"
+        >
           {row.projects.length}
         </Badge>
       ),
@@ -189,7 +193,10 @@ export const SramRulePreviewDialog: FC<SramRulePreviewDialogProps> = ({
     {
       title: translate('Users'),
       render: ({ row }) => (
-        <Badge variant={row.users.length ? 'primary' : 'default'} outline>
+        <Badge
+          variant={row.users.length ? 'primary' : 'neutral'}
+          tone="outline"
+        >
           {row.users.length}
         </Badge>
       ),
