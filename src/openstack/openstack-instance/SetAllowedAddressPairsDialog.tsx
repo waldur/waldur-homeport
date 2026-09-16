@@ -21,7 +21,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
-import { validatePrivateCIDR } from '../utils';
+import { validateAllowedAddressPair } from '../utils';
 
 import { formatAddressList } from './utils';
 
@@ -57,7 +57,7 @@ const PairRow = ({
 }) => (
   <tr>
     <td>
-      <Field name={`${pair}.ip_address`} validate={validatePrivateCIDR}>
+      <Field name={`${pair}.ip_address`} validate={validateAllowedAddressPair}>
         {({ input, meta }) => (
           <>
             <StringField input={input} meta={meta} />

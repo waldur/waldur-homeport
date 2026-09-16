@@ -55,4 +55,46 @@ describe('TenantSubnetsList', () => {
 
     expect(screen.getAllByText(DASH_ESCAPE_CODE).length).toBeGreaterThan(0);
   });
+
+  // How instances get an address is the one thing the row would otherwise
+  // hide, and it cannot be changed after creation -- so it belongs next to
+  // the prefix rather than only inside the expanded summary.
+  it('names the address mode of an IPv6 subnet beside its prefix', () => {
+    renderList(
+      subnet({
+        name: 'v6-subnet',
+        cidr: 'fd00:a:1::/64',
+        ip_version: 6,
+        ipv6_address_mode: 'slaac',
+      } as any),
+    );
+
+    expect(screen.getByText('fd00:a:1::/64')).toBeInTheDocument();
+    expect(screen.getByText('SLAAC')).toBeInTheDocument();
+  });
+
+  // An unset mode on an IPv6 subnet is a choice -- no automatic addressing --
+  // not missing data, so it is named rather than left blank.
+  it('names an unset IPv6 address mode as None', () => {
+    renderList(
+      subnet({
+        name: 'manual-subnet',
+        cidr: 'fd00:a:9::/64',
+        ip_version: 6,
+        ipv6_address_mode: null,
+      } as any),
+    );
+
+    expect(screen.getByText('None')).toBeInTheDocument();
+  });
+
+  it('leaves an IPv4 subnet without a mode badge', () => {
+    renderList(
+      subnet({ name: 'v4-subnet', cidr: '10.20.0.0/24', ip_version: 4 } as any),
+    );
+
+    expect(screen.getByText('10.20.0.0/24')).toBeInTheDocument();
+    expect(screen.queryByText('None')).not.toBeInTheDocument();
+    expect(screen.queryByText('SLAAC')).not.toBeInTheDocument();
+  });
 });

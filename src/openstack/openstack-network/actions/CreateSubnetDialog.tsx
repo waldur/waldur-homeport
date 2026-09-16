@@ -7,11 +7,12 @@ import { openstackNetworksCreateSubnet } from 'waldur-js-client';
 
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
 import { getErrorBody } from '@/core/ErrorMessageFormatter';
-import { required } from '@/core/validators';
+import { composeValidators, required } from '@/core/validators';
 import {
   AsyncSelectGroup,
   BooleanGroup,
   FormFooter,
+  SelectGroup,
   StringGroup,
   TextGroup,
 } from '@/form';
@@ -22,10 +23,21 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { InternalNetworkAllocationPool } from '@/openstack/openstack-subnet/AllocationPoolsField';
+import {
+  getIpv6ModeOptions,
+  Ipv6ModeChoice,
+  PREFIX_BUILT_IPV6_MODES,
+} from '@/openstack/openstack-subnet/ipv6Modes';
 import { networkAutocomplete } from '@/openstack/openstack-subnet/networkAutocomplete';
 import { routerAutocomplete } from '@/openstack/openstack-subnet/routerAutocomplete';
 import { IpAddressList } from '@/openstack/openstack-tenant/IpAddressList';
 import { StaticRoutesTable } from '@/openstack/openstack-tenant/StaticRoutesTable';
+import {
+  getCidrIpVersion,
+  parseSubnetCidr,
+  validateIpInSubnetFamily,
+  validateSubnetCidr,
+} from '@/openstack/utils';
 import { ActionDialogProps } from '@/resource/actions/types';
 
 type CreateSubnetDialogResolve = {
@@ -46,7 +58,42 @@ type CreateSubnetFormData = {
   dns_nameservers?: any[];
   router?: { url: string };
   skip_router_connection?: boolean;
+  ipv6_mode?: Ipv6ModeChoice;
 };
+
+// Module scope, deliberately: react-final-form re-initialises the form whenever
+// the `initialValues` identity changes, so an object literal here wipes whatever
+// the user has typed on any parent re-render -- and the dialog now has one, since
+// reporting dirtiness sets state in ModalRoot.
+const INITIAL_VALUES = {
+  cidr: '192.168.42.0/24',
+  allocation_pools: [{ start: '192.168.42.10', end: '192.168.42.200' }],
+  // Only read once the CIDR is IPv6. SLAAC is the usual choice there, and it
+  // is what lets instances configure themselves without a DHCPv6 server.
+  ipv6_mode: 'slaac' as Ipv6ModeChoice,
+};
+
+/** The API rejects the pair too, but only after a round trip, and it can be
+ * seen from the form: in these modes instances build their address from the
+ * prefix, so the prefix has to be a /64. */
+const validatePrefixForIpv6Mode = (value, allValues?) => {
+  const cidr = parseSubnetCidr(value);
+  if (
+    cidr?.version === 6 &&
+    cidr.prefix !== 64 &&
+    PREFIX_BUILT_IPV6_MODES.includes(allValues?.ipv6_mode)
+  ) {
+    return translate(
+      'SLAAC and DHCPv6 stateless need a /64 prefix, because instances build their address from it.',
+    );
+  }
+};
+
+const validateCidr = composeValidators(
+  required,
+  validateSubnetCidr,
+  validatePrefixForIpv6Mode,
+);
 
 /** Turn a DRF validation body into react-final-form submit errors.
  *
@@ -55,15 +102,6 @@ type CreateSubnetFormData = {
  * can go under its own control instead of only into a toast. FormGroup already
  * renders `meta.submitError`; nothing but the mapping was missing.
  */
-// Module scope, deliberately: react-final-form re-initialises the form whenever
-// the `initialValues` identity changes, so an object literal here wipes whatever
-// the user has typed on any parent re-render -- and the dialog now has one, since
-// reporting dirtiness sets state in ModalRoot.
-const INITIAL_VALUES = {
-  cidr: '192.168.42.0/24',
-  allocation_pools: [{ start: '192.168.42.10', end: '192.168.42.200' }],
-};
-
 const toSubmitErrors = (error: unknown) => {
   const body = getErrorBody(error);
   if (!body) return undefined;
@@ -72,12 +110,47 @@ const toSubmitErrors = (error: unknown) => {
     const message = Array.isArray(value) ? value.join(' ') : value;
     if (field === 'non_field_errors' || field === 'detail') {
       errors[FORM_ERROR] = message;
+    } else if (field === 'ipv6_ra_mode' || field === 'ipv6_address_mode') {
+      // Both come from the one selector, so that is where the message goes.
+      errors.ipv6_mode = message;
     } else {
       errors[field] = message;
     }
   });
   return Object.keys(errors).length ? errors : undefined;
 };
+
+const useCidrIpVersion = () => {
+  const { values } = useFormState<CreateSubnetFormData>({
+    subscription: { values: true },
+  });
+  return getCidrIpVersion(values.cidr);
+};
+
+/** Neutron accepts the two IPv6 modes only as an equal pair or with one of
+ * them unset, so a single choice sets both. An IPv4 subnet has neither. */
+const Ipv6ModeField: FC = () => {
+  if (useCidrIpVersion() !== 6) {
+    return null;
+  }
+  return (
+    <SelectGroup
+      name="ipv6_mode"
+      label={translate('IPv6 address mode')}
+      description={translate(
+        'How instances get their IPv6 address. SLAAC and DHCPv6 stateless need a /64 prefix.',
+      )}
+      options={getIpv6ModeOptions()}
+      simpleValue
+      isClearable={false}
+    />
+  );
+};
+
+/** Hidden for IPv6: the pool editor works out and checks IPv4 ranges only, and
+ * with no pool given Neutron hands out the whole prefix. */
+const AllocationPoolField: FC = () =>
+  useCidrIpVersion() === 6 ? null : <InternalNetworkAllocationPool />;
 
 /** The routers on offer are those of the tenant that owns the *network*, which
  * is what the API validates the choice against -- and with the network field
@@ -148,8 +221,11 @@ export const CreateSubnetDialog: FC<
         network: _network,
         router,
         skip_router_connection,
+        ipv6_mode,
+        allocation_pools,
         ...submitData
       } = formData;
+      const isIPv6 = getCidrIpVersion(formData.cidr) === 6;
 
       return openstackNetworksCreateSubnet({
         path: { uuid: networkUuid },
@@ -158,6 +234,12 @@ export const CreateSubnetDialog: FC<
         // server-side, so it too is only worth sending when set.
         body: {
           ...submitData,
+          // The pool editor is hidden for IPv6, and what it last held is an
+          // IPv4 range; without a pool Neutron uses the whole prefix.
+          ...(isIPv6 ? {} : { allocation_pools }),
+          ...(isIPv6 && ipv6_mode && ipv6_mode !== 'none'
+            ? { ipv6_ra_mode: ipv6_mode, ipv6_address_mode: ipv6_mode }
+            : {}),
           ...(router ? { router: router.url } : {}),
           ...(skip_router_connection ? { skip_router_connection: true } : {}),
         },
@@ -221,21 +303,36 @@ export const CreateSubnetDialog: FC<
             <StringGroup
               name="gateway_ip"
               label={translate('Gateway IP of this subnet')}
+              validate={validateIpInSubnetFamily}
             />
             <BooleanGroup
               name="disable_gateway"
               label={translate('Disable gateway IP advertising via DHCP')}
             />
             <FormGroup label={translate('Host routes')}>
-              <FieldArray name="host_routes" component={StaticRoutesTable} />
+              <FieldArray
+                name="host_routes"
+                component={StaticRoutesTable}
+                validateNexthop={validateIpInSubnetFamily}
+              />
             </FormGroup>
             <FormGroup label={translate('DNS name servers')}>
-              <FieldArray name="dns_nameservers" component={IpAddressList} />
+              <FieldArray
+                name="dns_nameservers"
+                component={IpAddressList}
+                validateAddress={validateIpInSubnetFamily}
+              />
             </FormGroup>
             <StringGroup
               name="cidr"
               label={translate('Internal network mask (CIDR)')}
+              description={translate(
+                'An IPv4 or IPv6 network with its prefix length, for example 192.168.42.0/24 or 2001:db8::/64.',
+              )}
+              required={true}
+              validate={validateCidr}
             />
+            <Ipv6ModeField />
             <BooleanGroup
               name="skip_router_connection"
               label={translate('Do not attach to a router')}
@@ -247,7 +344,7 @@ export const CreateSubnetDialog: FC<
               showNetworkField={showNetworkField}
               networkTenantUuid={resource.tenant_uuid}
             />
-            <InternalNetworkAllocationPool />
+            <AllocationPoolField />
           </ModalDialog>
         </form>
       )}

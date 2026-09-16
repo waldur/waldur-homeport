@@ -264,79 +264,107 @@ const renderNetworkRows = ({
   return (
     <div className="mb-5">
       <div className="border-rows mb-4">
-        {fields.map((network, index) => (
-          <Fragment key={index}>
-            <Row className="g-4">
-              <Col sm={6}>
-                <SelectGroup
-                  name={`${network}.subnet`}
-                  label={translate('Subnet')}
-                  options={freeSubnets}
-                  validate={required}
-                  required={true}
-                  placeholder={translate('Select subnet')}
-                  getOptionValue={(option) => option.url}
-                  getOptionLabel={(option) => option.name}
-                  noUpdateOnBlur
-                  spaceless
-                  components={{ ValueContainer: SubnetValueContainer }}
-                />
-              </Col>
-              <Col sm>
-                <SelectGroup
-                  name={`${network}.floatingIp`}
-                  label={
-                    fipQuotaExhausted ? (
-                      <>
-                        {translate('Floating IP')}{' '}
-                        <Tooltip
-                          label={translate(
-                            'Floating IP quota is exhausted; auto-assign is unavailable. Ask the administrator to raise the limit.',
-                          )}
-                        >
-                          <WarningCircleIcon
-                            weight="bold"
-                            size={14}
-                            className="text-warning align-text-bottom ms-1"
-                          />
-                        </Tooltip>
-                      </>
-                    ) : (
-                      translate('Floating IP')
-                    )
-                  }
-                  options={freeFloatingIps}
-                  validate={required}
-                  required={true}
-                  isDisabled={!fields.value[index]?.subnet?.uuid}
-                  isOptionDisabled={(option) => Boolean(option.isDisabled)}
-                  getOptionValue={(option) => option.url}
-                  getOptionLabel={(option) => option.address}
-                  noUpdateOnBlur
-                  spaceless
-                />
-              </Col>
-              <Col xs="auto" className="align-self-end">
-                <ActionButton
-                  action={() => fields.remove(index)}
-                  iconNode={<TrashIcon weight="bold" />}
-                  variant="text-danger"
-                />
-              </Col>
-              {hasCustomIp && (
-                <Col xs={12}>
-                  <Col sm={6}>
-                    <CustomIpField
-                      parentName={network}
-                      data={fields.value[index]}
-                      hasAutoOption
-                    />
-                  </Col>
+        {fields.map((network, index) => {
+          // A floating IP is mapped onto a fixed IPv4 address of the port, so
+          // an IPv6 subnet has nothing to map it to and the API refuses the
+          // order. Decided per row: a tenant can hold subnets of both
+          // families, and an IPv4 row must keep auto-assign.
+          const rowSubnetIsIpv6 = Boolean(
+            fields.value?.[index]?.subnet?.cidr?.includes(':'),
+          );
+          const rowFloatingIps = rowSubnetIsIpv6
+            ? freeFloatingIps.map((option) =>
+                option.url === 'true'
+                  ? {
+                      ...option,
+                      isDisabled: true,
+                      disabledReason: translate(
+                        'Floating IPs are IPv4 only; this subnet is IPv6.',
+                      ),
+                    }
+                  : option,
+              )
+            : freeFloatingIps;
+          return (
+            <Fragment key={index}>
+              <Row className="g-4">
+                <Col sm={6}>
+                  <SelectGroup
+                    name={`${network}.subnet`}
+                    label={translate('Subnet')}
+                    options={freeSubnets}
+                    validate={required}
+                    required={true}
+                    placeholder={translate('Select subnet')}
+                    getOptionValue={(option) => option.url}
+                    getOptionLabel={(option) => option.name}
+                    noUpdateOnBlur
+                    spaceless
+                    components={{ ValueContainer: SubnetValueContainer }}
+                  />
                 </Col>
-              )}
-            </Row>
-          </Fragment>
-        ))}
+                <Col sm>
+                  <SelectGroup
+                    name={`${network}.floatingIp`}
+                    label={
+                      fipQuotaExhausted || rowSubnetIsIpv6 ? (
+                        <>
+                          {translate('Floating IP')}{' '}
+                          <Tooltip
+                            label={
+                              rowSubnetIsIpv6
+                                ? translate(
+                                    'Floating IPs are IPv4 only, so none can be attached to an IPv6 subnet. The instance is reachable on its own IPv6 address instead.',
+                                  )
+                                : translate(
+                                    'Floating IP quota is exhausted; auto-assign is unavailable. Ask the administrator to raise the limit.',
+                                  )
+                            }
+                          >
+                            <WarningCircleIcon
+                              weight="bold"
+                              size={14}
+                              className="text-warning align-text-bottom ms-1"
+                            />
+                          </Tooltip>
+                        </>
+                      ) : (
+                        translate('Floating IP')
+                      )
+                    }
+                    options={rowFloatingIps}
+                    validate={required}
+                    required={true}
+                    isDisabled={!fields.value[index]?.subnet?.uuid}
+                    isOptionDisabled={(option) => Boolean(option.isDisabled)}
+                    getOptionValue={(option) => option.url}
+                    getOptionLabel={(option) => option.address}
+                    noUpdateOnBlur
+                    spaceless
+                  />
+                </Col>
+                <Col xs="auto" className="align-self-end">
+                  <ActionButton
+                    action={() => fields.remove(index)}
+                    iconNode={<TrashIcon weight="bold" />}
+                    variant="text-danger"
+                  />
+                </Col>
+                {hasCustomIp && (
+                  <Col xs={12}>
+                    <Col sm={6}>
+                      <CustomIpField
+                        parentName={network}
+                        data={fields.value[index]}
+                        hasAutoOption
+                      />
+                    </Col>
+                  </Col>
+                )}
+              </Row>
+            </Fragment>
+          );
+        })}
       </div>
       <ActionButton
         action={addRow}

@@ -605,6 +605,11 @@
       "feature_area": "views"
     }
   },
+  "::/0 covers every address, which would let this port answer for all of them.": {
+    "context": {
+      "feature_area": "openstack"
+    }
+  },
   "< {value} min (others)": {
     "context": {
       "variables": {
@@ -3713,7 +3718,22 @@
       "feature_area": "options"
     }
   },
+  "An IPv4 or IPv6 network with its prefix length, for example 192.168.42.0/24 or 2001:db8::/64.": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "An IPv4/IPv6 subnet with its own CIDR, gateway, and DHCP range.": {},
+  "An IPv6 default subnet uses SLAAC, which needs a /64 prefix, because instances build their address from it.": {},
+  "An address pair cannot cover {description}.": {
+    "context": {
+      "variables": {
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "An error has occurred.": {},
   "An error occurred during script execution.": {
     "context": {
@@ -13480,6 +13500,16 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "DHCPv6 stateful": {
+    "context": {
+      "feature_area": "openstack-subnet"
+    }
+  },
+  "DHCPv6 stateless": {
+    "context": {
+      "feature_area": "openstack-subnet"
+    }
+  },
   "DLQ count": {
     "context": {
       "feature_area": "pubsub"
@@ -17690,6 +17720,7 @@
   },
   "Ensure this field has no more than 30 characters.": {},
   "Enter IPv4 address.": {},
+  "Enter IPv6 address.": {},
   "Enter a CIDR address.": {},
   "Enter a claim name.": {
     "context": {
@@ -17759,6 +17790,11 @@
   "Enter a name...": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Enter a network address in CIDR format.": {
+    "context": {
+      "feature_area": "openstack"
     }
   },
   "Enter a reason for declining": {
@@ -20607,6 +20643,16 @@
       "feature_area": "openstack-instance"
     }
   },
+  "Floating IPs are IPv4 only, so none can be attached to an IPv6 subnet. The instance is reachable on its own IPv6 address instead.": {
+    "context": {
+      "feature_area": "deploy"
+    }
+  },
+  "Floating IPs are IPv4 only; this subnet is IPv6.": {
+    "context": {
+      "feature_area": "deploy"
+    }
+  },
   "Floating IPs removal has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -22262,6 +22308,16 @@
       "feature_area": "invitations"
     }
   },
+  "How instances get their IPv6 address. SLAAC and DHCPv6 stateless need a /64 prefix.": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
+  "How instances on this subnet get their IPv6 address.": {
+    "context": {
+      "feature_area": "openstack-subnet"
+    }
+  },
   "How it works": {
     "context": {
       "primary_ui_type": "action_button",
@@ -22495,6 +22551,16 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "cluster"
+    }
+  },
+  "IPv6 address mode": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
+  "IPv6 router advertisement mode": {
+    "context": {
+      "feature_area": "openstack-subnet"
     }
   },
   "ISD": {
@@ -23402,6 +23468,7 @@
       "feature_area": "list"
     }
   },
+  "Include the prefix length, for example 192.168.42.0/24 or 2001:db8::/64.": {},
   "Include weekends": {
     "context": {
       "feature_area": "booking"
@@ -45139,6 +45206,12 @@
       "feature_area": "issues"
     }
   },
+  "SLAAC": {
+    "context": {
+      "feature_area": "openstack-subnet"
+    }
+  },
+  "SLAAC and DHCPv6 stateless need a /64 prefix, because instances build their address from it.": {},
   "SLURM": {
     "context": {
       "feature_area": "policy-watch"
@@ -53041,6 +53114,11 @@
   "This identity provider does not expose its supported claims in the discovery document. You can manually add claim names below based on your IdP documentation.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "This instance is connected only to IPv6 subnets. Floating IPs are IPv4 only, so there is nothing to attach — an IPv6 instance is reachable on its own address instead.": {
+    "context": {
+      "feature_area": "update-floating-ips"
     }
   },
   "This invitation has already been canceled.": {

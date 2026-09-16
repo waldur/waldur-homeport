@@ -106,6 +106,35 @@ describe('UpdateFloatingIpsDialog', () => {
     ).toBeInTheDocument();
   });
 
+  // A floating IP maps to a fixed IPv4 address, so an IPv6 subnet can never
+  // take one. The API refuses it; offering the form anyway would only produce
+  // a submit that cannot succeed.
+  it('explains itself when the instance is connected only to IPv6 subnets', async () => {
+    const ipv6Resource = {
+      ...fakeInstance,
+      floating_ips: [],
+      ports: [
+        {
+          subnet: '/api/openstack-subnets/4103fc543c1d4f5997208539d8c1a19c/',
+          subnet_uuid: '4103fc543c1d4f5997208539d8c1a19c',
+          subnet_name: 'v6-subnet',
+          subnet_cidr: 'fd00:a:1::/64',
+        },
+      ],
+    } as unknown as OpenStackInstance;
+    renderDialog(ipv6Resource);
+
+    expect(
+      await screen.findByText(/connected only to IPv6 subnets/),
+    ).toBeInTheDocument();
+    // It *is* connected, so the not-connected wording would be wrong here.
+    expect(
+      screen.queryByText(
+        'Instance is not connected to any internal subnets yet. Please connect it to internal subnet first.',
+      ),
+    ).not.toBeInTheDocument();
+  });
+
   it('renders floating IPs table when remote data is fetched', async () => {
     renderDialog();
     await waitFor(() => {

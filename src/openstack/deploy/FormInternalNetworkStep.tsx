@@ -8,7 +8,7 @@ import { FormStepProps } from '@/marketplace/deploy/types';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { OpenStackAllocationPool } from '../OpenStackAllocationPool';
-import { validatePrivateCIDR } from '../utils';
+import { validateTenantSubnetCidr } from '../utils';
 
 export const FormInternalNetworkStep = (props: FormStepProps) => {
   const [advancedEnabled, setAdvancedEnabled] = useToggle(false);
@@ -34,7 +34,7 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
       <StringGroup
         name="attributes.subnet_cidr"
         label={translate('Internal network mask (CIDR)')}
-        validate={validatePrivateCIDR}
+        validate={validateTenantSubnetCidr}
       />
       <FormGroup
         id="attributes.subnet_allocation_pool"

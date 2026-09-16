@@ -322,6 +322,144 @@ describe('CreateSubnetDialog', () => {
     expect('router' in (body as object)).toBe(false);
   });
 
+  it('sends the CIDR and both modes for an IPv6 SLAAC subnet', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Name/), 'v6-subnet');
+    const cidrInput = screen.getByLabelText(/Internal network mask \(CIDR\)/);
+    await user.clear(cidrInput);
+    await user.type(cidrInput, '2001:db8:42::/64');
+    await openAndSelectOption(user, 'IPv6 address mode', 'SLAAC');
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    await waitFor(() => {
+      expect(openstackNetworksCreateSubnet).toHaveBeenCalledWith({
+        path: { uuid: 'network-uuid' },
+        body: expect.objectContaining({
+          name: 'v6-subnet',
+          cidr: '2001:db8:42::/64',
+          ipv6_ra_mode: 'slaac',
+          ipv6_address_mode: 'slaac',
+        }),
+      });
+    });
+    const body = vi.mocked(openstackNetworksCreateSubnet).mock.calls[0][0]
+      .body as object;
+    // The pool editor only knows IPv4; Neutron uses the whole prefix instead.
+    expect('allocation_pools' in body).toBe(false);
+    expect('ipv6_mode' in body).toBe(false);
+  });
+
+  it('sends no modes when an IPv6 subnet has none', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Name/), 'v6-no-modes');
+    const cidrInput = screen.getByLabelText(/Internal network mask \(CIDR\)/);
+    await user.clear(cidrInput);
+    await user.type(cidrInput, '2001:db8:42::/56');
+    await openAndSelectOption(user, 'IPv6 address mode', 'None');
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    await waitFor(() => {
+      expect(openstackNetworksCreateSubnet).toHaveBeenCalled();
+    });
+    const body = vi.mocked(openstackNetworksCreateSubnet).mock.calls[0][0]
+      .body as object;
+    expect('ipv6_ra_mode' in body).toBe(false);
+    expect('ipv6_address_mode' in body).toBe(false);
+  });
+
+  it('flags a non-/64 prefix with SLAAC or stateless before submitting', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+
+    await user.type(screen.getByLabelText(/Name/), 'v6-wide');
+    const cidrInput = screen.getByLabelText(/Internal network mask \(CIDR\)/);
+    await user.clear(cidrInput);
+    await user.type(cidrInput, '2001:db8:42::/56');
+    await openAndSelectOption(user, 'IPv6 address mode', 'DHCPv6 stateless');
+
+    expect(
+      await screen.findByText(/instances build their address from it/),
+    ).toBeInTheDocument();
+    const submit = screen.getByRole('button', { name: /Submit/i });
+    expect(submit).toBeDisabled();
+    await user.click(submit);
+    expect(openstackNetworksCreateSubnet).not.toHaveBeenCalled();
+
+    // Stateful DHCPv6 hands out addresses itself, so any prefix will do.
+    await openAndSelectOption(user, 'IPv6 address mode', 'DHCPv6 stateful');
+    await waitFor(() => {
+      expect(
+        screen.queryByText(/instances build their address from it/),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it('keeps IPv4 subnets as before: no mode selector and no mode fields', async () => {
+    const user = userEvent.setup();
+    vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
+    renderDialog();
+
+    expect(screen.queryByText('IPv6 address mode')).not.toBeInTheDocument();
+    expect(
+      screen.getByText('Internal network allocation pool'),
+    ).toBeInTheDocument();
+
+    await user.type(screen.getByLabelText(/Name/), 'v4-subnet');
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    await waitFor(() => {
+      expect(openstackNetworksCreateSubnet).toHaveBeenCalledWith({
+        path: { uuid: 'network-uuid' },
+        body: expect.objectContaining({
+          name: 'v4-subnet',
+          cidr: '192.168.42.0/24',
+          allocation_pools: [{ start: '192.168.42.10', end: '192.168.42.200' }],
+        }),
+      });
+    });
+    const body = vi.mocked(openstackNetworksCreateSubnet).mock.calls[0][0]
+      .body as object;
+    expect('ipv6_ra_mode' in body).toBe(false);
+    expect('ipv6_address_mode' in body).toBe(false);
+    expect('ipv6_mode' in body).toBe(false);
+  });
+
+  it('asks for the prefix length of a CIDR', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+
+    const cidrInput = screen.getByLabelText(/Internal network mask \(CIDR\)/);
+    await user.clear(cidrInput);
+    await user.type(cidrInput, '2001:db8:42::');
+    await user.tab();
+
+    expect(
+      await screen.findByText(/Include the prefix length/),
+    ).toBeInTheDocument();
+  });
+
+  it('checks the gateway against the family of the CIDR', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+
+    const cidrInput = screen.getByLabelText(/Internal network mask \(CIDR\)/);
+    await user.clear(cidrInput);
+    await user.type(cidrInput, '2001:db8:42::/64');
+    await user.type(
+      screen.getByLabelText('Gateway IP of this subnet'),
+      '192.168.42.1',
+    );
+    await user.tab();
+
+    expect(await screen.findByText('Enter IPv6 address.')).toBeInTheDocument();
+  });
+
   it('submits complex array fields (host_routes, dns_nameservers, allocation_pools)', async () => {
     const user = userEvent.setup();
     vi.mocked(openstackNetworksCreateSubnet).mockResolvedValue({} as any);
