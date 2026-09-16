@@ -5,7 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { Form, Alert } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { required } from '@/core/validators';
@@ -14,6 +14,7 @@ import { BaseTextField } from '@/form/TextField';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { NoResult } from '@/navigation/header/search/NoResult';
 import { validateIPv4CIDR } from '@/openstack/openstack-security-groups/rule-editor/CIDRField';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
@@ -293,11 +294,11 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
       }
     >
       {rules.length === 0 ? (
-        <Alert variant="info">
-          {translate(
-            'No security rules configured. Add default rules or create custom ones.',
-          )}
-        </Alert>
+        <NoResult
+          title={translate('No security rules configured')}
+          message={translate('Add default rules or create custom ones.')}
+          noAction
+        />
       ) : (
         <div>
           <Table<K8sSecurityRule>

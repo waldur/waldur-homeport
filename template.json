@@ -1943,6 +1943,11 @@
       "feature_area": "access-subnets"
     }
   },
+  "Add default rules or create custom ones.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Add default subnet": {
     "context": {
       "feature_area": "access-subnets"
@@ -31497,7 +31502,7 @@
       "feature_area": "deploy"
     }
   },
-  "No security rules configured. Add default rules or create custom ones.": {
+  "No security rules configured": {
     "context": {
       "feature_area": "common"
     }
