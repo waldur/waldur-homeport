@@ -303,6 +303,16 @@ export const FeaturesDescription: FeatureSection[] = [
     ],
   },
   {
+    key: 'sram',
+    description: translate('SRAM integration'),
+    items: [
+      {
+        key: 'integration',
+        description: translate('Render the SRAM integration administration page and SRAM markers in team lists. Backend access is gated separately on the SRAM_INTEGRATION_ENABLED Constance setting.'),
+      },
+    ],
+  },
+  {
     key: 'support',
     description: translate('Support workspace'),
     items: [

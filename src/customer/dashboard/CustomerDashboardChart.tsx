@@ -12,6 +12,7 @@ import { TeamWidget } from '@/dashboard/TeamWidget';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
+import { canViewTeam } from '@/permissions/teamVisibility';
 import { Customer, User } from '@/workspace/types';
 
 import { useCustomerCostChart, useCustomerTeamChart } from './utils';
@@ -23,13 +24,15 @@ interface CustomerDashboardProps {
 
 export const CustomerDashboardChart: FunctionComponent<
   CustomerDashboardProps
-> = ({ customer }) => {
+> = ({ customer, user }) => {
   const costChart = useCustomerCostChart(customer);
 
   const teamChart = useCustomerTeamChart(customer);
 
   const router = useRouter();
   const goToUsers = () => router.stateService.go('organization-users');
+  // The member list behind the badge needs the view-team permission.
+  const canOpenTeam = canViewTeam(user, { customerId: customer.uuid });
 
   const { callback, canInvite, loadingProjects } = useCreateInvitation({
     roleTypes: ['customer', 'project'],
@@ -84,7 +87,7 @@ export const CustomerDashboardChart: FunctionComponent<
               chartData={{ chart: teamChart.chart, options: teamChart.options }}
               showChart
               scope={customer}
-              onBadgeClick={goToUsers}
+              onBadgeClick={canOpenTeam ? goToUsers : undefined}
               onAddClick={callback}
               showAdd={canInvite}
               loadingAdd={loadingProjects}

@@ -79,6 +79,10 @@ export const PermissionOptions = [
         label: translate('Update customer'),
         value: 'CUSTOMER.UPDATE',
       },
+      {
+        label: translate('View team'),
+        value: 'CUSTOMER.VIEW_TEAM',
+      },
     ],
   },
   {
@@ -405,6 +409,10 @@ export const PermissionOptions = [
       {
         label: translate('Update project'),
         value: 'PROJECT.UPDATE',
+      },
+      {
+        label: translate('View team'),
+        value: 'PROJECT.VIEW_TEAM',
       },
     ],
   },

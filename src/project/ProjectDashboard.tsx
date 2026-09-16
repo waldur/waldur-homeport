@@ -27,6 +27,7 @@ import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { canViewTeam } from '@/permissions/teamVisibility';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser, useProject } from '@/workspace/hooks';
 
@@ -54,6 +55,10 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
 
   const router = useRouter();
   const goToUsers = () => router.stateService.go('project-users');
+  const showTeam = canViewTeam(user, {
+    customerId: project?.customer_uuid,
+    projectId: project?.uuid,
+  });
 
   const canEditProject =
     userFromSelector &&
@@ -245,37 +250,39 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
             <ProjectDashboardCostLimits project={project} />
           </Col>
         )}
-        <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
-          <TeamWidget
-            api={() =>
-              projectsListUsersList({
-                path: { uuid: project.uuid },
-                query: {
-                  field: [
-                    'user_uuid',
-                    'user_full_name',
-                    'user_email',
-                    'user_image',
-                    'role_name',
-                  ],
+        {showTeam && (
+          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+            <TeamWidget
+              api={() =>
+                projectsListUsersList({
+                  path: { uuid: project.uuid },
+                  query: {
+                    field: [
+                      'user_uuid',
+                      'user_full_name',
+                      'user_email',
+                      'user_image',
+                      'role_name',
+                    ],
 
-                  page_size: 5,
-                },
-              }).then(parseSelectData)
-            }
-            scope={project}
-            chartData={teamData}
-            showChart
-            onBadgeClick={isProjectRemoved ? undefined : goToUsers}
-            onAddClick={isProjectRemoved ? undefined : callback}
-            showAdd={canInvite && !isProjectRemoved}
-            loadingAdd={loadingProjects}
-            className="h-100"
-            nameKey="user_full_name"
-            emailKey="user_email"
-            imageKey="user_image"
-          />
-        </Col>
+                    page_size: 5,
+                  },
+                }).then(parseSelectData)
+              }
+              scope={project}
+              chartData={teamData}
+              showChart
+              onBadgeClick={isProjectRemoved ? undefined : goToUsers}
+              onAddClick={isProjectRemoved ? undefined : callback}
+              showAdd={canInvite && !isProjectRemoved}
+              loadingAdd={loadingProjects}
+              className="h-100"
+              nameKey="user_full_name"
+              emailKey="user_email"
+              imageKey="user_image"
+            />
+          </Col>
+        )}
         {shouldShowCurrentMonthWidget && (
           <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
             <AggregateLimitWidget

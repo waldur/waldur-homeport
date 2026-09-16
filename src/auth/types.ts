@@ -141,6 +141,7 @@ interface CoreConfiguration {
   AI_ASSISTANT_ENABLED_ROLES:
     'disabled' | 'staff' | 'staff_and_support' | 'all' | 'anonymous';
   MATRIX_ENABLED: boolean;
+  SRAM_INTEGRATION_ENABLED?: boolean;
 }
 
 interface OpenStackConfiguration {

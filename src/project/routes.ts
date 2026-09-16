@@ -12,6 +12,7 @@ import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { hasActiveProjectMatrixRoomInCache } from '@/matrix/chat/useProjectMatrixRooms';
 import { isMatrixChatEnabled } from '@/matrix/utils';
+import { canViewProjectTeam } from '@/permissions/teamVisibility';
 import { getProject, isStaffOrSupport } from '@/workspace/selectors';
 
 import { loadProject } from './resolve';
@@ -50,6 +51,9 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Team'),
       priority: 120,
+      // Children inherit these; a child declaring its own permissions has to
+      // repeat canViewProjectTeam.
+      permissions: [canViewProjectTeam],
     },
   },
 
@@ -222,6 +226,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Course accounts'),
       feature: InvitationsFeatures.show_course_accounts,
       permissions: [
+        canViewProjectTeam,
         (state) => {
           const project = getProject(state);
           if (isFeatureVisible(InvitationsFeatures.show_course_accounts)) {

@@ -1429,6 +1429,31 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'SCIM_USER_MATCH_WALDUR_ATTRIBUTE',
+        description: translate('Waldur user attribute that links an inbound SCIM user to an existing account. Must be username or an enabled identifying attribute. With username, new accounts are named after the matched value.'),
+        default: 'username',
+        type: 'choice_field',
+        options: [{ value: 'username', label: 'Username' }, { value: 'email', label: 'Email' }, { value: 'civil_number', label: 'Civil number' }],
+      },
+      {
+        key: 'SCIM_USER_MATCH_SCIM_ATTRIBUTE',
+        description: translate('SCIM attribute holding the value matched against SCIM_USER_MATCH_WALDUR_ATTRIBUTE, e.g. userName, emails, or an extension path such as urn:mace:surf.nl:sram:scim:extension:User.eduPersonUniqueId.'),
+        default: 'userName',
+        type: 'string',
+      },
+      {
+        key: 'SRAM_INTEGRATION_ENABLED',
+        description: translate('Accept SCIM provisioning from SURF Research Access Management (SRAM) at /scim/v2/sram/. Also requires SCIM_INBOUND_ENABLED and a staff service-account token registered as the service\'s SCIM bearer token in SRAM.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'SRAM_PLACEHOLDER_ROLE_TEMPLATE',
+        description: translate('Name of the organization role whose permissions SRAM placeholder roles copy. Empty gives placeholders no permissions. Placeholders are refreshed on the next push or by \'waldur sram_resync\'.'),
+        default: '',
+        type: 'string',
+      },
+      {
         key: 'SCIM_PULL_API_URL',
         description: translate('Base URL for outbound SCIM pull (fetching user attributes from an external IdP).'),
         default: '',

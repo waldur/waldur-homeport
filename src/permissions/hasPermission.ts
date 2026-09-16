@@ -22,13 +22,16 @@ export function checkScope(
   if (user?.is_staff) {
     return true;
   }
-  const userRole = user.permissions?.find(
-    ({ scope_uuid, scope_type }) =>
-      scope_uuid === targetScopeId && scope_type === targetScopeType,
+  // A user can hold several roles on one scope (an owner who is also in an
+  // SRAM collaboration, say): any of them may grant the permission.
+  return (
+    user.permissions?.some(
+      ({ scope_uuid, scope_type, role_name }) =>
+        scope_uuid === targetScopeId &&
+        scope_type === targetScopeType &&
+        roleGrants(role_name, targetPerm),
+    ) ?? false
   );
-  if (userRole && roleGrants(userRole.role_name, targetPerm)) {
-    return true;
-  }
 }
 
 /**
