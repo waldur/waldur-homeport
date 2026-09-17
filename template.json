@@ -9883,6 +9883,11 @@
       "feature_area": "create"
     }
   },
+  "Cluster Topology": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Cluster info": {
     "context": {
       "feature_area": "rabbitmq"
@@ -9902,6 +9907,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "users"
+    }
+  },
+  "Cluster topology": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Co-authorship (Old)": {
@@ -13774,17 +13784,17 @@
       "feature_area": "database-stats"
     }
   },
-  "Datacenter 1": {
-    "context": {
-      "feature_area": "common"
-    }
-  },
   "Datacenter configuration": {
     "context": {
       "feature_area": "common"
     }
   },
   "Datacenters": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Datacenters were reset for the new topology. Select the infrastructure and node groups again.": {
     "context": {
       "feature_area": "common"
     }
@@ -49034,6 +49044,12 @@
       "feature_area": "providers"
     }
   },
+  "Single site, 3 controllers": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "options"
+    }
+  },
   "Single-Datacenter Kubernetes Configuration": {
     "context": {
       "primary_ui_type": "label"
@@ -53354,6 +53370,11 @@
       "feature_area": "organization-create"
     }
   },
+  "This cluster was configured with a different topology than the offering now allows.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "This configuration contains placeholder values (e.g., <YOUR_API_TOKEN_HERE>) that need to be replaced with actual values before use.": {
     "context": {
       "feature_area": "site-agent"
@@ -54042,6 +54063,12 @@
         }
       },
       "feature_area": "ai-assistant"
+    }
+  },
+  "Three sites, 1 controller each": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "options"
     }
   },
   "Threshold": {
@@ -63798,6 +63825,16 @@
   "Where each offering user’s primary GID comes from: allocated from the offering’s POSIX ID pool (default), or taken from the user’s primary_gid identity attribute.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Where the controller nodes run: three in one site, or one in each of three sites.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Where the controller nodes run: three in one site, or one in each of three sites. When not set, the option type decides.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Whether automatic periodic sync is enabled for this integration": {},

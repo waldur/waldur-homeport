@@ -1,4 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
+import { isEqual } from 'lodash-es';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Alert } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
@@ -6,6 +7,7 @@ import { marketplacePublicOfferingsList } from 'waldur-js-client';
 import { Badge } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
+import { MAX_PAGE_SIZE } from '@/core/api';
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { FormField } from '@/form/types';
@@ -24,10 +26,15 @@ import {
   MultiDatacenterK8sClusterConfig,
   DatacenterConfiguration,
   DatacenterNodeGroup,
+  K8sClusterTopology,
   calculateDatacenterResources,
   calculateTotalClusterResources,
   getControllerNodesCount,
   getInitialClusterConfig,
+  changeClusterTopology,
+  getInitialTopology,
+  getTopologyMode,
+  isTopologyAllowed,
   getLoadBalancerMode,
   getLoadBalancerNodesCount,
   getDefaultDatacenterDiskConfig,
@@ -35,7 +42,7 @@ import {
   K8sDefaultConfiguration,
 } from './multi-datacenter-k8s-types';
 
-interface MultiDatacenterK8sConfigurationFormProps extends FormField {
+interface K8sClusterConfigurationFormProps extends FormField {
   field: {
     type?: string;
     label?: string;
@@ -47,7 +54,7 @@ interface MultiDatacenterK8sConfigurationFormProps extends FormField {
 interface DatacenterCardProps {
   datacenter: DatacenterConfiguration;
   index: number;
-  topology: '1-datacenter' | '3-datacenter';
+  topology: K8sClusterTopology;
   onUpdate: (updatedDatacenter: DatacenterConfiguration) => void;
   availableInfrastructures: any[];
   loadingInfrastructures: boolean;
@@ -325,29 +332,39 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
   );
 };
 
-export const MultiDatacenterK8sConfigurationForm: React.FC<
-  MultiDatacenterK8sConfigurationFormProps
+/**
+ * Order form for both Kubernetes option types. The topology comes from the
+ * offering's topology_mode, or from the option type when it is not set; with
+ * customer_choice the customer picks it here.
+ */
+export const K8sClusterConfigurationForm: React.FC<
+  K8sClusterConfigurationFormProps
 > = ({ field, input, meta }) => {
   const customer = useCustomer();
 
   // Extract default configurations from the field (set via EditOptionDialog)
   const defaultConfigs: K8sDefaultConfiguration | undefined = (field as any)
     ?.default_configs;
+  const topologyMode = getTopologyMode(field.type, defaultConfigs);
 
-  // Determine topology based on field type
-  const fieldType = field.type;
-  const topology: '1-datacenter' | '3-datacenter' =
-    fieldType === 'multi_datacenter_k8s_config'
-      ? '3-datacenter'
-      : '1-datacenter';
-
-  // The value is stored directly as the cluster config, not wrapped in a MultiDatacenterK8sConfigField
+  // The value is stored directly as the cluster config
   const fieldValue = input?.value as MultiDatacenterK8sClusterConfig;
 
   const [clusterConfig, setClusterConfig] =
     useState<MultiDatacenterK8sClusterConfig>(() =>
-      getInitialClusterConfig(topology, fieldValue, defaultConfigs),
+      getInitialClusterConfig(
+        getInitialTopology(field.type, fieldValue, defaultConfigs),
+        fieldValue || undefined,
+        defaultConfigs,
+      ),
     );
+  const [topologyChanged, setTopologyChanged] = useState(false);
+  const topology = clusterConfig.topology;
+  const topologyAllowed = isTopologyAllowed(
+    clusterConfig,
+    field.type,
+    defaultConfigs,
+  );
 
   const [availableInfrastructures, setAvailableInfrastructures] = useState<
     any[]
@@ -359,7 +376,7 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
     try {
       const result = await marketplacePublicOfferingsList({
         query: {
-          page_size: 100,
+          page_size: MAX_PAGE_SIZE,
           type: ['OpenStack.Tenant'],
           state: ['Active'],
         },
@@ -382,7 +399,12 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
   inputRef.current = input;
 
   useEffect(() => {
-    if (inputRef.current?.onChange) {
+    // Leave an unchanged stored value alone, so opening a resource option
+    // dialog does not rewrite the resource's cluster.
+    if (
+      inputRef.current?.onChange &&
+      !isEqual(inputRef.current.value, clusterConfig)
+    ) {
       inputRef.current.onChange(clusterConfig);
     }
   }, [clusterConfig]);
@@ -406,6 +428,16 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
       ...clusterConfig,
       load_balancer: value,
     });
+  };
+
+  const handleTopologyChange = (value: K8sClusterTopology) => {
+    if (!value || value === topology) {
+      return;
+    }
+    setClusterConfig(
+      changeClusterTopology(clusterConfig, value, defaultConfigs),
+    );
+    setTopologyChanged(true);
   };
 
   const updateDatacenter = (
@@ -435,17 +467,39 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
       required={field?.required}
       error={meta?.error}
     >
+      {!topologyAllowed && (
+        <Alert variant="warning" className="mb-4">
+          {translate(
+            'This cluster was configured with a different topology than the offering now allows.',
+          )}
+        </Alert>
+      )}
       <K8sKubernetesConfigSection
         defaultConfigs={defaultConfigs}
         kubernetesVersion={clusterConfig.kubernetes_version}
         onKubernetesVersionChange={handleKubernetesVersionChange}
         installLonghorn={clusterConfig.install_longhorn || false}
         onLonghornChange={handleLonghornChange}
-        longhornDescription={translate(
-          'Automatically install Longhorn for cloud-native distributed block storage. Requires at least 3 storage nodes across all datacenters.',
-        )}
+        longhornDescription={
+          topology === '3-datacenter'
+            ? translate(
+                'Automatically install Longhorn for cloud-native distributed block storage. Requires at least 3 storage nodes across all datacenters.',
+              )
+            : undefined
+        }
         loadBalancer={clusterConfig.load_balancer}
         onLoadBalancerChange={handleLoadBalancerChange}
+        topology={topology}
+        onTopologyChange={
+          topologyMode === 'customer_choice' ? handleTopologyChange : undefined
+        }
+        topologyNotice={
+          topologyChanged
+            ? translate(
+                'Datacenters were reset for the new topology. Select the infrastructure and node groups again.',
+              )
+            : undefined
+        }
       />
 
       {/* Datacenter configuration */}

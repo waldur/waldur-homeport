@@ -1,3 +1,4 @@
+import { isNil, omitBy } from 'lodash-es';
 import {
   BillingUnit,
   PlanBillingMode,
@@ -61,7 +62,9 @@ export const formatOption = (option: OptionFormData) => {
     (item.type === 'single_datacenter_k8s_config' ||
       item.type === 'multi_datacenter_k8s_config')
   ) {
-    item.default_configs = default_configs;
+    // A cleared setting (for example topology_mode set back to "the type
+    // decides") must disappear rather than reach the backend as null.
+    item.default_configs = omitBy(default_configs, isNil);
   }
 
   // Handle validators for cross-field validation

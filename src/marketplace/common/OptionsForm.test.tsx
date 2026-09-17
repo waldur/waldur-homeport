@@ -21,15 +21,9 @@ vi.mock('./ComponentMultiplierField', () => ({
   ),
 }));
 
-vi.mock('./SingleDatacenterK8sConfigurationForm', () => ({
-  SingleDatacenterK8sConfigurationForm: () => (
-    <div data-testid="mock-k8s-single" />
-  ),
-}));
-
-vi.mock('./MultiDatacenterK8sConfigurationForm', () => ({
-  MultiDatacenterK8sConfigurationForm: () => (
-    <div data-testid="mock-k8s-multi" />
+vi.mock('./K8sClusterConfigurationForm', () => ({
+  K8sClusterConfigurationForm: ({ field }) => (
+    <div data-testid={`mock-k8s-${field.type}`} />
   ),
 }));
 
@@ -273,8 +267,13 @@ describe('OptionsForm Integration', () => {
       expect(
         screen.getByTestId('mock-component-multiplier'),
       ).toBeInTheDocument();
-      expect(screen.getByTestId('mock-k8s-single')).toBeInTheDocument();
-      expect(screen.getByTestId('mock-k8s-multi')).toBeInTheDocument();
+      // Both Kubernetes types render the one cluster form.
+      expect(
+        screen.getByTestId('mock-k8s-single_datacenter_k8s_config'),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByTestId('mock-k8s-multi_datacenter_k8s_config'),
+      ).toBeInTheDocument();
       // Storage folder manager isn't explicitly mocked above, but it renders a FormGroup/Select natively.
       expect(screen.getByText('Folder Mgr')).toBeInTheDocument();
     });
@@ -349,7 +348,9 @@ describe('OptionsForm Integration', () => {
         },
       });
 
-      expect(screen.getByTestId('mock-k8s-single')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('mock-k8s-single_datacenter_k8s_config'),
+      ).toBeInTheDocument();
       // No label row at all: no help tooltip and no label to hang the
       // required marker on. K8sOptionCard names the block instead.
       expect(screen.queryByTestId('QuestionIcon')).not.toBeInTheDocument();
