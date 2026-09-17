@@ -88,7 +88,7 @@ export const SecurityGroupInstancesList: FC<{
           copyField: (row) => row.name,
         },
         {
-          title: translate('Internal IPs'),
+          title: translate('Fixed IPs'),
           render: ({ row }) => <InternalIps ports={row.ports} />,
         },
         {

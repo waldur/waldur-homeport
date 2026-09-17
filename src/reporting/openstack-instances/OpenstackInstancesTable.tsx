@@ -196,7 +196,7 @@ export const OpenstackInstancesTable: FC = () => {
     },
     {
       id: 'internal_ips',
-      title: translate('Internal IPs'),
+      title: translate('Fixed IPs'),
       render: ({ row }) => (
         <>{renderFieldOrDash(row.internal_ips?.join(', '))}</>
       ),

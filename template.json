@@ -20559,7 +20559,7 @@
   "Fixed IPs": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "openstack-tenant"
+      "feature_area": "openstack-instance"
     }
   },
   "Fixed and limit-based charges are billed for this period. The plan can be created, but the other plans of this offering use a different period, and customers can only move between plans that share one.": {
@@ -24020,17 +24020,6 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "core"
-    }
-  },
-  "Internal IP": {
-    "context": {
-      "feature_area": "summary"
-    }
-  },
-  "Internal IPs": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "openstack-instance"
     }
   },
   "Internal LiveKit base URL. Falls back to http://livekit:7880 when blank.": {},

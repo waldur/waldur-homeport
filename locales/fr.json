@@ -2386,8 +2386,6 @@
   "Integration type ({count})": "Type d'intégration ({count})",
   "Intent": "Intention",
   "Internal": "Interne",
-  "Internal IP": "IP interne",
-  "Internal IPs": "IP internes",
   "Internal address": "Adresse interne",
   "Internal field name (e.g., country)": "Nom interne du champ (par ex. country)",
   "Internal identifier (lowercase, no spaces)": "Identifiant interne (minuscules, sans espaces)",

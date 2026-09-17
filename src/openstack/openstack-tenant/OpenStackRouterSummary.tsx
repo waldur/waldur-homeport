@@ -17,7 +17,11 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
     .map((ip: { ip_address?: string }) => ip?.ip_address)
     .filter(Boolean);
   const externalIpSet = new Set(externalFixedIps);
-  const internalIps = fixedIps.filter((ip) => !externalIpSet.has(ip));
+  // These are all fixed IPs; what sets the gateway's apart is that they are
+  // external, not that the rest are "internal". OpenStack has no label of that
+  // name for an address -- it says fixed IPs here and external fixed IPs for the
+  // gateway, and keeps "internal" for the interface itself.
+  const interfaceFixedIps = fixedIps.filter((ip) => !externalIpSet.has(ip));
   const mappedExternalIps: string[] = (
     props.resource.offering_external_ips ?? []
   ).filter((ip: string) => !externalIpSet.has(ip));
@@ -25,8 +29,14 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
   return (
     <>
       <Component
-        label={translate('Internal IPs')}
-        value={internalIps.length ? <IPList value={internalIps} /> : 'N/A'}
+        label={translate('Fixed IPs')}
+        value={
+          interfaceFixedIps.length ? (
+            <IPList value={interfaceFixedIps} />
+          ) : (
+            'N/A'
+          )
+        }
       />
 
       {props.resource.has_external_gateway ? (

@@ -409,8 +409,6 @@
   "Instance should be shutoff and OK or erred. Please contact support.": "Instantie moet worden afgesloten en OK of foutief zijn. Neem dan contact op met ondersteuning.",
   "Instances count": "Aantal instanties",
   "Internal": "Intern",
-  "Internal IP": "Intern IP",
-  "Internal IPs": "Interne IPs",
   "Internal name": "Interne naam",
   "Internal network ID": "Interne netwerk-ID",
   "Internal network allocation pool": "Interne netwerktoewijzingspool",

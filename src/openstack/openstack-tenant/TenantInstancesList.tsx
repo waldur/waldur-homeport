@@ -76,7 +76,7 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
           render: ({ row }) => <ResourceSummaryField resource={row} />,
         },
         {
-          title: translate('Internal IPs'),
+          title: translate('Fixed IPs'),
           render: ({ row }) => <IPList value={row.internal_ips} />,
         },
         {

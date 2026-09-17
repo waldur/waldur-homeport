@@ -36,7 +36,7 @@ export const InstanceMainComponent = ({ resourceScope }) => {
         )}
 
         <Field
-          label={translate('Internal IPs')}
+          label={translate('Fixed IPs')}
           value={resourceScope.internal_ips.join(', ')}
           hasCopy
         />

@@ -39,18 +39,26 @@ export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
         value={<ResourceSummaryField {...props} />}
       />
 
+      {/*
+        Three different things, so three different names. `internal_ips` are the
+        addresses the instance holds on the tenant's own networks -- fixed IPs,
+        in Nova's own term, which says where an address comes from rather than
+        who can reach it. `external_ips` are the floating IPs plus any directly
+        connected ones, so "Floating IPs" would not cover them. `external_address`
+        is narrower still: the address a floating IP is itself mapped to.
+      */}
       <Component
-        label={translate('Internal IP')}
+        label={translate('Fixed IPs')}
         value={<IPList value={props.resource.internal_ips} />}
       />
 
       <Component
-        label={translate('Floating IP')}
+        label={translate('External IPs')}
         value={<IPList value={props.resource.external_ips} />}
       />
 
       <Component
-        label={translate('External IPs')}
+        label={translate('Mapped public IPs')}
         value={<IPList value={props.resource.external_address} />}
       />
 
