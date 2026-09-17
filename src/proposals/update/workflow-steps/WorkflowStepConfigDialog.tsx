@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import arrayMutators from 'final-form-arrays';
 import { FC, useCallback, useMemo } from 'react';
@@ -21,12 +21,15 @@ import {
   SubmitButton,
 } from '@/form';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { AllocationTime, Call } from '@/proposals/types';
 import { getAllocationTimeOptions } from '@/proposals/utils';
 import {
+  getEnabledStepIds,
+  getMissingDependencies,
   RESPONSIBLE_ROLE_OPTIONS,
   ResponsibleRoleEnum,
   responsibleRoleLabel,
@@ -40,10 +43,18 @@ import {
 import { callWorkflowStepsKey } from '@/proposals/workflow/queries';
 
 import { CriteriaListField } from './CriteriaListField';
+import {
+  disableCascadeConfirmation,
+  disableDependents,
+  getEnabledDependents,
+} from './setStepEnabled';
 
 interface WorkflowStepConfigProps {
   call: Call;
   step: CallWorkflowStep;
+  // Every configured step of the call — the enable switch resolves its
+  // dependencies and dependents against the current enabled state.
+  steps: CallWorkflowStep[];
   refetch?(): void;
 }
 
@@ -57,6 +68,7 @@ interface CriterionInput {
 }
 
 interface FormValues {
+  is_enabled: boolean;
   duration_in_days: number | null;
   min_reviewers: number | null;
   min_score_threshold: string | null;
@@ -73,10 +85,53 @@ interface FormValues {
 }
 
 export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
-  const { call, step, refetch } = resolve;
+  const { call, step, steps, refetch } = resolve;
   const definition = stepDefinition(step.step);
   const showReviewExtras = step.step === 'expert_review';
   const showAllocationExtras = step.step === 'allocation_decision';
+  // A mandatory step always runs and the backend rejects disabling it, so it
+  // gets no switch at all — the padlock on the table row carries that story.
+  // A toggle-managed step (award_response) is switched through Allocation
+  // decision's "Include award response" instead; a switch here would leave
+  // that flag on while the step is off, until the next save re-enables it.
+  const showEnableSwitch =
+    !definition?.mandatory && !definition?.managedByToggle;
+
+  const enabledStepIds = useMemo(() => getEnabledStepIds(steps), [steps]);
+
+  // Enabling is rejected by the backend until every dependency is enabled, so
+  // gate the switch on the same rule the row action uses.
+  const missingDependencies = useMemo(
+    () =>
+      step.is_enabled ? [] : getMissingDependencies(step.step, enabledStepIds),
+    [step, enabledStepIds],
+  );
+
+  // Turning this step off takes its dependents with it. The switch allows
+  // that; the submit asks the same question the row action asks.
+  const enabledDependents = useMemo(
+    () => (step.is_enabled ? getEnabledDependents(step, steps) : []),
+    [step, steps],
+  );
+
+  const enableBlocked = missingDependencies.length > 0;
+
+  const enableHelpText = enableBlocked
+    ? translate('Enable {steps} first.', {
+        steps: missingDependencies.map(stepLabel).join(', '),
+      })
+    : enabledDependents.length > 0
+      ? translate(
+          'Turning this off also disables {dependents}, which depends on it.',
+          {
+            dependents: enabledDependents
+              .map((s) => stepLabel(s.step))
+              .join(', '),
+          },
+        )
+      : translate(
+          'When off, the step is skipped: it stays out of the workflow preview and no proposal ever enters it.',
+        );
 
   const responsibleRoleOptions = useMemo(
     () =>
@@ -119,6 +174,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
 
   const initialValues = useMemo<FormValues>(
     () => ({
+      is_enabled: step.is_enabled ?? true,
       duration_in_days: step.duration_in_days ?? null,
       min_reviewers: step.min_reviewers ?? null,
       min_score_threshold: step.min_score_threshold ?? null,
@@ -145,20 +201,47 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
     [step],
   );
 
+  const { confirm } = useModal();
+  const queryClient = useQueryClient();
+
+  // Pull the table back in line with the backend after a failed save. Past
+  // its first request a cascading save may already have changed something (a
+  // dependent disabled, the step itself still on) -- useManagedMutation only
+  // refetches on success, so the failure path has to ask for it.
+  const reconcile = useCallback(() => {
+    queryClient.invalidateQueries({
+      queryKey: callWorkflowStepsKey(call.uuid),
+    });
+    refetch?.();
+  }, [queryClient, call.uuid, refetch]);
+
   const submitMutation = useManagedMutation<
     unknown,
     unknown,
-    PatchedCallWorkflowStepRequest
+    { body: PatchedCallWorkflowStepRequest; cascade: boolean }
   >({
-    mutationFn: (body) =>
-      proposalProtectedCallsWorkflowStepsPartialUpdate({
-        path: { uuid: call.uuid, obj_uuid: step.uuid },
-        body,
-      }),
+    mutationFn: async ({ body, cascade }) => {
+      const patch = (patchBody: PatchedCallWorkflowStepRequest) =>
+        proposalProtectedCallsWorkflowStepsPartialUpdate({
+          path: { uuid: call.uuid, obj_uuid: step.uuid },
+          body: patchBody,
+        });
+      if (!cascade) {
+        return patch(body);
+      }
+      // Switching the step off with dependents: the form fields go first, so
+      // a rejected form changes nothing; then the dependents, so none ever
+      // outlives its dependency; then the step itself.
+      const { is_enabled, ...fields } = body;
+      await patch(fields);
+      await disableDependents(call.uuid, step, steps);
+      return patch({ is_enabled });
+    },
     successMessage: translate('Workflow step configuration updated.'),
     errorMessage: translate('Unable to update workflow step configuration.'),
     refetch,
     invalidateQueries: [{ queryKey: callWorkflowStepsKey(call.uuid) }],
+    onError: reconcile,
   });
 
   const onSubmit = useCallback(
@@ -172,6 +255,11 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
             .filter((c) => c.name.length > 0)
         : undefined;
       const body: PatchedCallWorkflowStepRequest = {
+        // Only when the user actually moved the switch, so saving an unrelated
+        // field never re-enables a step somebody else has since turned off.
+        ...(values.is_enabled !== step.is_enabled
+          ? { is_enabled: values.is_enabled }
+          : {}),
         duration_in_days: values.duration_in_days || null,
         min_reviewers: values.min_reviewers || null,
         min_score_threshold: values.min_score_threshold || null,
@@ -190,13 +278,38 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
           : {}),
         transition_mode: values.transition_mode || 'automatic_on_completion',
       };
+      // Switching the step off strands anything that depends on it, so ask
+      // first -- the same warning the row action shows.
+      const cascade =
+        !values.is_enabled && step.is_enabled && enabledDependents.length > 0;
+      if (cascade) {
+        const {
+          title,
+          body: message,
+          options,
+        } = disableCascadeConfirmation(step, enabledDependents);
+        try {
+          await confirm(title, message, options);
+        } catch {
+          // Cancelled: leave the form exactly as the user left it.
+          return;
+        }
+      }
+
       try {
-        await submitMutation.mutateAsync(body);
+        await submitMutation.mutateAsync({ body, cascade });
       } catch {
         return { [FORM_ERROR]: translate('Unable to save changes.') };
       }
     },
-    [showReviewExtras, showAllocationExtras, submitMutation],
+    [
+      showReviewExtras,
+      showAllocationExtras,
+      submitMutation,
+      step,
+      enabledDependents,
+      confirm,
+    ],
   );
 
   return (
@@ -235,6 +348,15 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
           >
             {definition && (
               <p className="text-muted mb-4">{definition.description}</p>
+            )}
+
+            {showEnableSwitch && (
+              <BooleanGroup
+                name="is_enabled"
+                label={translate('Step enabled')}
+                disabled={enableBlocked}
+                help_text={enableHelpText}
+              />
             )}
 
             <NumberGroup

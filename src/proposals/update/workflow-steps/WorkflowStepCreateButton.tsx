@@ -5,7 +5,10 @@ import { CallWorkflowStep } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
-import { getStepDefinitions } from '@/proposals/workflow/constants';
+import {
+  getStepDefinitions,
+  stepDefinition,
+} from '@/proposals/workflow/constants';
 import { ActionButton } from '@/table/ActionButton';
 
 import { AddWorkflowStepDialog } from './AddWorkflowStepDialog';
@@ -26,10 +29,19 @@ export const WorkflowStepCreateButton = ({
   tooltip: externalTooltip,
 }: OwnProps) => {
   const { openDialog: openModal } = useModal();
-  const allAdded = useMemo(
-    () => configuredSteps.length >= getStepDefinitions().length,
-    [configuredSteps.length],
-  );
+  // Toggle-managed steps (award_response) are provisioned by another step's
+  // flag and never offered in the dialog, so they must not count on either
+  // side of this comparison: counting them in the catalogue alone leaves the
+  // button enabled on a fully configured call, and the dialog then opens with
+  // an empty step picker.
+  const allAdded = useMemo(() => {
+    const addable = (step: { step: CallWorkflowStep['step'] }) =>
+      !stepDefinition(step.step)?.managedByToggle;
+    return (
+      configuredSteps.filter(addable).length >=
+      getStepDefinitions().filter((d) => !d.managedByToggle).length
+    );
+  }, [configuredSteps]);
 
   const openDialog = useCallback(() => {
     openModal(AddWorkflowStepDialog, {

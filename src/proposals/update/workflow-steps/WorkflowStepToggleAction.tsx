@@ -1,15 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
-import {
-  CallWorkflowStep,
-  proposalProtectedCallsWorkflowStepsPartialUpdate,
-} from 'waldur-js-client';
+import { CallWorkflowStep } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@/i18n';
+import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import {
-  getDependentSteps,
   getEnabledStepIds,
   getMissingDependencies,
   stepDefinition,
@@ -17,6 +13,12 @@ import {
 } from '@/proposals/workflow/constants';
 import { callWorkflowStepsKey } from '@/proposals/workflow/queries';
 import { ActionItem } from '@/resource/actions/ActionItem';
+
+import {
+  disableCascadeConfirmation,
+  getEnabledDependents,
+  setStepEnabled,
+} from './setStepEnabled';
 
 interface OwnProps {
   row: CallWorkflowStep;
@@ -42,11 +44,10 @@ export const WorkflowStepToggleAction = ({
   // them (their dependency disappears), so we cascade the disable to them —
   // matching the backend rule that a dependent can't be enabled without its
   // dependency. Only relevant when this step is currently enabled.
-  const enabledDependents = useMemo(() => {
-    if (!row.is_enabled) return [];
-    const dependentIds = new Set(getDependentSteps(row.step));
-    return steps.filter((s) => s.is_enabled && dependentIds.has(s.step));
-  }, [steps, row.step, row.is_enabled]);
+  const enabledDependents = useMemo(
+    () => (row.is_enabled ? getEnabledDependents(row, steps) : []),
+    [steps, row],
+  );
 
   // When enabling, every dependency must already be enabled or the backend
   // rejects with a 400. Surface that as a disabled action with a hint instead.
@@ -75,43 +76,19 @@ export const WorkflowStepToggleAction = ({
   const confirmation = useMemo(
     () =>
       enabledDependents.length > 0
-        ? {
-            title: translate('Disable {step}?', { step: stepLabel(row.step) }),
-            body: translate(
-              '{dependents} depends on {step}, so it will be disabled too.',
-              {
-                dependents: (
-                  <strong>
-                    {enabledDependents.map((s) => stepLabel(s.step)).join(', ')}
-                  </strong>
-                ),
-                step: stepLabel(row.step),
-              },
-              formatJsxTemplate,
-            ),
-            options: { positiveButton: translate('Disable') },
-          }
+        ? disableCascadeConfirmation(row, enabledDependents)
         : undefined,
-    [enabledDependents, row.step],
+    [enabledDependents, row],
   );
 
   const toggleMutation = useManagedMutation<unknown, unknown, void>({
-    mutationFn: async () => {
-      // Disabling cascades to the dependents first, then this step (their
-      // dependency); enabling touches only this step. Run the PATCHes
-      // sequentially, NOT with Promise.all: concurrent requests race, and if
-      // the backend evaluates the dependency's disable before the dependents'
-      // it rejects with a 400 (a dependent can't stay enabled without its
-      // dependency). Tearing the dependents down first keeps every
-      // intermediate state valid.
-      const targets = [...enabledDependents, row];
-      for (const target of targets) {
-        await proposalProtectedCallsWorkflowStepsPartialUpdate({
-          path: { uuid: call.uuid, obj_uuid: target.uuid },
-          body: { is_enabled: !row.is_enabled },
-        });
-      }
-    },
+    mutationFn: () =>
+      setStepEnabled({
+        callUuid: call.uuid,
+        row,
+        steps,
+        enabled: !row.is_enabled,
+      }),
     errorMessage: translate('Unable to update workflow step.'),
     // Row action, not a modal submission — nothing to close.
     closeModal: false,
