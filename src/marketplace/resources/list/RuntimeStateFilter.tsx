@@ -10,32 +10,47 @@ import { useProject } from '@/workspace/hooks';
 interface RuntimeStateFilterProps {
   /** Limits the offered states to the resources of a single offering. */
   offeringUuid?: string;
+  /** Limits the offered states to the resources of a single organization. */
+  customerUuid?: string;
   [key: string]: any;
 }
 
 export const RuntimeStateFilter: React.FC<RuntimeStateFilterProps> = ({
   offeringUuid,
+  customerUuid,
   ...props
 }) => {
   const { params } = useCurrentStateAndParams();
   const project = useProject();
+  const categoryUuid = params.category_uuid;
+  const projectUuid = project?.uuid;
+  const hasScope = Boolean(
+    offeringUuid || categoryUuid || projectUuid || customerUuid,
+  );
 
   const { data, isLoading } = useQuery({
     queryKey: [
       'runtime-states',
-      project?.uuid,
-      params.category_uuid,
+      projectUuid,
+      categoryUuid,
       offeringUuid,
+      customerUuid,
     ],
     queryFn: () =>
       marketplaceRuntimeStatesList({
         query: {
-          project_uuid: project?.uuid,
-          category_uuid: params.category_uuid,
+          project_uuid: projectUuid,
+          category_uuid: categoryUuid,
           offering_uuid: offeringUuid,
+          customer_uuid: customerUuid,
         },
       }).then((r) => r.data),
+    enabled: hasScope,
   });
+
+  if (!hasScope) {
+    return null;
+  }
 
   return (
     <SelectFilter
