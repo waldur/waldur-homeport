@@ -48,3 +48,34 @@ describe('formatOrderForCreate attributes normalization', () => {
     expect((body.attributes as any).vms).toEqual(['i-1', 'i-2']);
   });
 });
+
+describe('formatOrderForCreate hidden options', () => {
+  it('omits values of options hidden by a visible_if rule', () => {
+    const offering = makeOffering({
+      order: ['backups', 'account'],
+      options: {
+        backups: { type: 'boolean', label: 'Backups' },
+        account: {
+          type: 'select_string',
+          label: 'Account',
+          choices: ['own', 'new'],
+          visible_if: { field: 'backups', values: [true] },
+        },
+      },
+    });
+
+    const hidden = formatOrderForCreate(offering, {
+      attributes: { name: 'x', backups: false, account: 'own' },
+    } as any);
+    expect(hidden.attributes).toEqual({ name: 'x', backups: false });
+
+    const shown = formatOrderForCreate(offering, {
+      attributes: { name: 'x', backups: true, account: 'own' },
+    } as any);
+    expect(shown.attributes).toEqual({
+      name: 'x',
+      backups: true,
+      account: 'own',
+    });
+  });
+});

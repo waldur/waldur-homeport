@@ -1,5 +1,5 @@
-import { FC, useMemo } from 'react';
-import { Field, useFormState } from 'react-final-form';
+import { FC, useEffect, useMemo } from 'react';
+import { Field, useForm, useFormState } from 'react-final-form';
 import { OfferingOptions } from 'waldur-js-client';
 
 import {
@@ -35,6 +35,7 @@ import { ConditionalCascadeField } from './ConditionalCascadeField';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
+import { getHiddenOptionKeys } from './optionVisibility';
 import { StorageFolderManagerField } from './StorageFolderManagerField';
 import { DeployFormData } from './types';
 
@@ -80,13 +81,22 @@ const VALIDATOR_MAPPING = {
  * @param options - All options (to get labels for target fields)
  * @param allValues - All form values for cross-field validation
  * @param customValidator - Optional custom validator from params
+ * @param hiddenKeys - Options hidden by their `visible_if` rules
+ * @param key - Key of `option`, needed to tell whether it is hidden
  */
 export const buildOptionValidator = (
   option: any,
   options: any,
   allValues: Record<string, any>,
   customValidator?: (value: any) => any,
+  hiddenKeys?: ReadonlySet<string>,
+  key?: string,
 ) => {
+  // A hidden option has no value and is never required.
+  if (key !== undefined && hiddenKeys?.has(key)) {
+    return undefined;
+  }
+
   const validators: Array<(value: any) => any> = [];
 
   // Add custom validator if provided (e.g., K8s config validator)
@@ -103,6 +113,9 @@ export const buildOptionValidator = (
   // Add cross-field validators
   if (option.validators && Array.isArray(option.validators)) {
     option.validators.forEach((validator: AttributeValidator) => {
+      if (hiddenKeys?.has(validator.target_field)) {
+        return;
+      }
       const targetOption = options.options?.[validator.target_field];
       const targetLabel = targetOption?.label;
 
@@ -261,6 +274,7 @@ export const OptionsForm = ({
   customer?: DeployFormData['customer'];
 }) => {
   const { values } = useFormState({ subscription: { values: true } });
+  const form = useForm();
   const selectedCustomer = useCustomer();
   const customer = preferedCustomer || selectedCustomer;
 
@@ -274,12 +288,35 @@ export const OptionsForm = ({
     [customer?.uuid],
   );
 
+  const hiddenKeys = useMemo(
+    () => getHiddenOptionKeys(options.options, values?.attributes),
+    [options.options, values?.attributes],
+  );
+
+  // Hidden options must not keep a value: clear it as soon as the option is
+  // hidden, so that ticking a box back on starts from an empty follow-up.
+  // The key is a string so that the effect only re-runs when the set changes.
+  const hiddenWithValues = [...hiddenKeys]
+    .filter((key) => values?.attributes?.[key] !== undefined)
+    .sort()
+    .join('\n');
+  useEffect(() => {
+    if (!hiddenWithValues) {
+      return;
+    }
+    form.batch(() => {
+      hiddenWithValues.split('\n').forEach((key) => {
+        form.change(`attributes.${key}`, undefined);
+      });
+    });
+  }, [form, hiddenWithValues]);
+
   return (
     <>
       {options.order &&
         options.order.map((key) => {
           const option = options.options[key];
-          if (!option) {
+          if (!option || hiddenKeys.has(key)) {
             return null;
           }
           const { OptionField, params } = getComponentAndParams(
@@ -295,6 +332,8 @@ export const OptionsForm = ({
             options,
             values,
             params.validate,
+            hiddenKeys,
+            key,
           );
 
           // Fields that render their own heading opt out of the whole

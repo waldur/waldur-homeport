@@ -1,5 +1,6 @@
 import { Offering, OrderCreateRequest } from 'waldur-js-client';
 
+import { getHiddenOptionKeys } from '@/marketplace/common/optionVisibility';
 import {
   getFormLimitSerializer,
   getFormSerializer,
@@ -52,8 +53,17 @@ const formatAttributes = (
   const serializer = getFormSerializer(offering.type);
   const attributes = serializer(formData.attributes, offering);
   const newAttributes = {} as OrderCreateRequest['attributes'];
+  // Options hidden by a visible_if rule are not submitted; the backend would
+  // drop them anyway.
+  const hiddenKeys = getHiddenOptionKeys(
+    offering.options?.options,
+    formData.attributes,
+  );
 
   for (const [key, value] of Object.entries(attributes)) {
+    if (hiddenKeys.has(key)) {
+      continue;
+    }
     const optionConfig = offering.options?.options?.[key];
 
     if (optionConfig?.type === 'conditional_cascade') {

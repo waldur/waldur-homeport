@@ -27,7 +27,12 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
   const { name, ...option } = props.resolve.option;
   const options = useMemo(() => {
     return {
-      options: { [name]: { ...option, required: false } },
+      // The card only offers options that are visible for the resource's
+      // current values, and this dialog edits that one option alone, so its
+      // visibility rule (which refers to another option) does not apply here.
+      options: {
+        [name]: { ...option, required: false, visible_if: undefined },
+      },
       order: [name],
     };
   }, [name, option]);

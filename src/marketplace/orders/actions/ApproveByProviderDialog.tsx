@@ -1,6 +1,6 @@
 import { CheckIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form, useFormState } from 'react-final-form';
 import {
   marketplaceOrdersApproveByProvider,
@@ -19,6 +19,10 @@ import {
   getComponentAndParams,
   OptionsForm,
 } from '@/marketplace/common/OptionsForm';
+import {
+  getHiddenOptionKeys,
+  omitHiddenOptionValues,
+} from '@/marketplace/common/optionVisibility';
 import { OptionValue } from '@/marketplace/resources/options/OptionValue';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -46,7 +50,8 @@ const OptionRow: FC<{
   option: any;
   submittedValue: any;
   resourceOptions: any;
-}> = ({ optionKey, option, submittedValue, resourceOptions }) => {
+  hiddenKeys: ReadonlySet<string>;
+}> = ({ optionKey, option, submittedValue, resourceOptions, hiddenKeys }) => {
   const { values } = useFormState({ subscription: { values: true } });
   const { OptionField, params } = getComponentAndParams(
     option,
@@ -58,6 +63,8 @@ const OptionRow: FC<{
     resourceOptions,
     values,
     params.validate,
+    hiddenKeys,
+    optionKey,
   );
 
   return (
@@ -81,6 +88,58 @@ const OptionRow: FC<{
   );
 };
 
+/**
+ * Options hidden by a visible_if rule for the values the resource would have
+ * once the order is approved. The order carries no live copy of the resource
+ * options, but `old_options` is the snapshot taken when the order was created,
+ * and no other option change can happen while it is pending.
+ */
+const getApprovalHiddenKeys = (
+  resourceOptions: any,
+  currentOptions: Record<string, any>,
+  newValues: Record<string, any> | undefined,
+) =>
+  getHiddenOptionKeys(resourceOptions?.options, {
+    ...currentOptions,
+    ...newValues,
+  });
+
+const SubmittedOptionRows: FC<{
+  resourceOptions: any;
+  currentOptions: Record<string, any>;
+  userSubmittedOptions: Record<string, any>;
+}> = ({ resourceOptions, currentOptions, userSubmittedOptions }) => {
+  const { values } = useFormState({ subscription: { values: true } });
+  const hiddenKeys = useMemo(
+    () =>
+      getApprovalHiddenKeys(
+        resourceOptions,
+        currentOptions,
+        values?.attributes,
+      ),
+    [resourceOptions, currentOptions, values?.attributes],
+  );
+  return (
+    <>
+      {resourceOptions.order.map((key) => {
+        const option = resourceOptions.options[key];
+        const submittedValue = userSubmittedOptions[key];
+        if (submittedValue === undefined || hiddenKeys.has(key)) return null;
+        return (
+          <OptionRow
+            key={key}
+            optionKey={key}
+            option={option}
+            submittedValue={submittedValue}
+            resourceOptions={resourceOptions}
+            hiddenKeys={hiddenKeys}
+          />
+        );
+      })}
+    </>
+  );
+};
+
 export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
   resolve,
 }) => {
@@ -94,6 +153,10 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
   // User-submitted options (from Update orders)
   const userSubmittedOptions =
     orderAttributes?.new_options || orderAttributes.options || {};
+  const currentOptions = useMemo(
+    () => orderAttributes?.old_options || {},
+    [orderAttributes],
+  );
 
   // Fetch offering to get resource_options (only if order supports options)
   const offeringQuery = useQuery({
@@ -117,8 +180,19 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
   >({
     mutationFn: async (formData) => {
       const body: { attributes?: { new_options?: Record<string, any> } } = {};
-      if (formData?.attributes && Object.keys(formData.attributes).length > 0) {
-        body.attributes = { new_options: formData.attributes };
+      const newOptions = formData?.attributes
+        ? omitHiddenOptionValues(
+            resourceOptions?.options,
+            formData.attributes,
+            getApprovalHiddenKeys(
+              resourceOptions,
+              currentOptions,
+              formData.attributes,
+            ),
+          )
+        : undefined;
+      if (newOptions && Object.keys(newOptions).length > 0) {
+        body.attributes = { new_options: newOptions };
       }
 
       await marketplaceOrdersApproveByProvider({
@@ -193,20 +267,11 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                           </tr>
                         </thead>
                         <tbody>
-                          {resourceOptions.order.map((key) => {
-                            const option = resourceOptions.options[key];
-                            const submittedValue = userSubmittedOptions[key];
-                            if (submittedValue === undefined) return null;
-                            return (
-                              <OptionRow
-                                key={key}
-                                optionKey={key}
-                                option={option}
-                                submittedValue={submittedValue}
-                                resourceOptions={resourceOptions}
-                              />
-                            );
-                          })}
+                          <SubmittedOptionRows
+                            resourceOptions={resourceOptions}
+                            currentOptions={currentOptions}
+                            userSubmittedOptions={userSubmittedOptions}
+                          />
                         </tbody>
                       </table>
                     </div>

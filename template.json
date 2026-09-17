@@ -9253,6 +9253,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Checked": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Checked {checked} reviewers, generated {created} suggestions.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -41882,7 +41887,7 @@
   "Remove rule": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "manage",
+      "feature_area": "options",
       "action_type": "create"
     }
   },
@@ -41947,6 +41952,15 @@
   "Remove template": {
     "context": {
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Remove the \"Show only when\" rule from: {options} first.": {
+    "context": {
+      "variables": {
+        "options": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Remove the end date so projects are not scheduled for expiration.": {
@@ -46680,6 +46694,11 @@
       "feature_area": "roles"
     }
   },
+  "Select at least one value.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Select available weekdays": {
     "context": {
       "feature_area": "booking"
@@ -46892,6 +46911,11 @@
   "Select one or more draft batches.": {
     "context": {
       "feature_area": "assignments"
+    }
+  },
+  "Select option...": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Select or leave it empty": {
@@ -47253,6 +47277,11 @@
       "feature_area": "options"
     }
   },
+  "Select the option this one depends on.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Select the permissions this token should have. The token can only use permissions you currently hold.": {
     "context": {
       "feature_area": "personal-access-tokens"
@@ -47291,6 +47320,16 @@
   "Select user...": {
     "context": {
       "feature_area": "support-users"
+    }
+  },
+  "Select value...": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Select values...": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Select vendor offering...": {
@@ -48715,6 +48754,11 @@
     }
   },
   "Show offering cover image as a banner above the name on the offering page.": {},
+  "Show only when": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Show password": {
     "context": {
       "feature_area": "resource"
@@ -48795,6 +48839,11 @@
   "Show the staff diagnostics page listing tenants with duplicate per-tenant OpenStack offerings.": {
     "context": {
       "feature_area": "features"
+    }
+  },
+  "Show this option only when an earlier option has one of the selected values. A hidden option is never required and its value is not stored.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Show type field in project create dialog.": {
@@ -52466,6 +52515,11 @@
   "The one account a person has on all offerings that share accounts, with the same username, POSIX UID and home directory.": {
     "context": {
       "feature_area": "offering-users"
+    }
+  },
+  "The option must be an earlier boolean or select option.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "The organization UUID is not specified in one or more records.": {
@@ -59904,6 +59958,11 @@
       "feature_area": "list"
     }
   },
+  "Unchecked": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Unconfirmed": {
     "context": {
       "primary_ui_type": "label",
@@ -62527,6 +62586,11 @@
         }
       },
       "feature_area": "posix-id-pools"
+    }
+  },
+  "Values must be valid for the selected option.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Values that trigger this question": {

@@ -28,6 +28,10 @@ export interface OptionFormData {
     type: Option | string;
     target_field: Option | string;
   }>;
+  visible_if?: {
+    field?: string;
+    values?: Array<boolean | string>;
+  };
 }
 
 export type OfferingLimits = Record<string, { min: number; max: number }>;

@@ -10,6 +10,8 @@ import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { OfferingSectionProps } from '../types';
 
+import { formatDependentOptionsError, getDependentOptions } from './validation';
+
 export const DeleteOptionButton: FC<
   OfferingSectionProps & {
     optionKey: string;
@@ -17,6 +19,7 @@ export const DeleteOptionButton: FC<
     type: string;
   }
 > = ({ optionKey, optionLabel, offering, type, refetch }) => {
+  const dependents = getDependentOptions(offering[type], optionKey);
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: async () => {
       const oldOptions = offering[type];
@@ -60,9 +63,15 @@ export const DeleteOptionButton: FC<
     <CompactActionButton
       variant="danger"
       action={mutate}
-      disabled={isPending}
+      disabled={isPending || dependents.length > 0}
       title={translate('Delete')}
-      tooltip={isPending ? translate('Processing') : undefined}
+      tooltip={
+        isPending
+          ? translate('Processing')
+          : dependents.length > 0
+            ? formatDependentOptionsError(dependents)
+            : undefined
+      }
     />
   );
 };
