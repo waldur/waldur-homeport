@@ -51,6 +51,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           hasCustomerFilter={props.hasCustomerColumn}
           customer={customer}
           project={project}
+          context={props.context}
         />
       }
       columns={getResourceAllListColumns(

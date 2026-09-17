@@ -20,6 +20,7 @@ interface ProjectResourcesAllFilterProps {
   hasCustomerFilter?: boolean;
   customer?: Customer;
   project?: Project;
+  context?: 'organization' | 'project';
 }
 
 export const ProjectResourcesAllFilter: FunctionComponent<
@@ -56,7 +57,13 @@ export const ProjectResourcesAllFilter: FunctionComponent<
       />
       {props.hasCustomerFilter ? <OrganizationFilter /> : null}
       {props.hasProjectFilter ? <ProjectFilter /> : null}
-      <RuntimeStateFilter />
+      {props.context ? (
+        <RuntimeStateFilter
+          customerUuid={
+            props.context === 'organization' ? props.customer?.uuid : undefined
+          }
+        />
+      ) : null}
       <ResourceStateFilter instantApply={false} />
       <BooleanFilter
         title={translate('Include terminated')}
