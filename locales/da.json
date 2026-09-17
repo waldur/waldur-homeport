@@ -415,8 +415,6 @@
   "Instance should be shutoff and OK or erred. Please contact support.": "Instansen skal lukkes og OK eller fejle. Kontakt venligst support.",
   "Instances count": "Antal instanser",
   "Internal": "Intern",
-  "Internal IP": "Intern IP",
-  "Internal IPs": "Interne IP'er",
   "Internal name": "Internt navn",
   "Internal network ID": "Internt netværks-ID",
   "Internal network allocation pool": "Intern netværkstildelingspulje",

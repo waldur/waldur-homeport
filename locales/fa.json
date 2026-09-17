@@ -289,8 +289,6 @@
   "Instance should be shutoff and OK or erred. Please contact support.": "Instance باید غیر فعال و درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید.",
   "Instances count": "شمردن Instance",
   "Internal": "داخلی",
-  "Internal IP": "IP داخلی",
-  "Internal IPs": "IPs داخلی",
   "Internal name": "نام داخلی",
   "Internal network ID": "network ID داخلی",
   "Internal network allocation pool": "اختصاص شبکه داخلی",

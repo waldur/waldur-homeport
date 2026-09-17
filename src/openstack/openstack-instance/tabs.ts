@@ -13,7 +13,7 @@ export const OpenStackInstanceTabConfiguration: ResourceTabsConfiguration = {
       children: [
         {
           key: 'ports',
-          title: translate('Internal IPs'),
+          title: translate('Fixed IPs'),
           component: lazyComponent(() =>
             import('./InternalIpsList').then((module) => ({
               default: module.InternalIpsList,
