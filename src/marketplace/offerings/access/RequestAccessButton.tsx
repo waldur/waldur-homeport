@@ -31,7 +31,7 @@ export const RequestAccessButton = ({
         type="button"
         disabled={disabled || loading}
         onClick={handleRequestAccess}
-        className="order-2 order-sm-1 flex-sm-column-auto flex-root btn btn-lg btn-primary w-100"
+        className="order-2 order-sm-1 flex-sm-column-auto flex-root btn btn-lg btn-primary"
       >
         <span className="svg-icon svg-icon-2">
           <PaperPlaneTiltIcon weight="bold" />
