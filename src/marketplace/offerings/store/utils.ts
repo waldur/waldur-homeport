@@ -30,6 +30,7 @@ export const formatOption = (option: OptionFormData) => {
     cascade_config,
     component_multiplier_config,
     default_configs,
+    visible_if,
     ...rest
   } = option;
   const item: any = {
@@ -81,6 +82,11 @@ export const formatOption = (option: OptionFormData) => {
             : v.target_field,
       }));
     }
+  }
+
+  // A rule without a referenced option is an unfinished one; drop it.
+  if (visible_if?.field && visible_if.values?.length) {
+    item.visible_if = { field: visible_if.field, values: visible_if.values };
   }
 
   return item;

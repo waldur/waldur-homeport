@@ -1,6 +1,7 @@
 import { useFormState } from 'react-final-form';
 
 import { BooleanGroup, StringGroup } from '@/form';
+import { FieldError } from '@/form/FieldError';
 import { translate } from '@/i18n';
 
 import { InternalNamePrefill } from '../../InternalNamePrefill';
@@ -15,6 +16,7 @@ import { NumericOptionConfig } from './NumericOptionConfig';
 import { OptionTypeGroup } from './OptionTypeGroup';
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 import { StringOptionConfig } from './StringOptionConfig';
+import { VisibleIfConfiguration } from './VisibleIfConfiguration';
 
 const OPTION_COMPONENTS = {
   integer: NumericOptionConfig,
@@ -29,9 +31,17 @@ const OPTION_COMPONENTS = {
   multi_datacenter_k8s_config: K8sDefaultsConfiguration,
 };
 
-export const OptionForm = ({ resourceType, offering }) => {
-  const { values } = useFormState({
-    subscription: { values: true },
+export const OptionForm = ({
+  resourceType,
+  offering,
+  optionKey,
+}: {
+  resourceType: 'options' | 'resource_options';
+  offering;
+  optionKey?: string;
+}) => {
+  const { values, errors } = useFormState({
+    subscription: { values: true, errors: true },
   });
   const type = values.type?.value;
   const OptionComponent = OPTION_COMPONENTS[type];
@@ -44,9 +54,14 @@ export const OptionForm = ({ resourceType, offering }) => {
       <StringGroup label={translate('Description')} name="help_text" />
       <OptionTypeGroup />
       {OptionComponent && <OptionComponent offering={offering} />}
+      <VisibleIfConfiguration
+        options={offering?.[resourceType]}
+        optionKey={optionKey}
+      />
       {resourceType === 'options' ? (
         <BooleanGroup name="required" label={translate('Required')} />
       ) : null}
+      {errors?.dependents ? <FieldError error={errors.dependents} /> : null}
     </>
   );
 };

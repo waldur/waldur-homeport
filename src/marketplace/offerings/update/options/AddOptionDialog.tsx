@@ -54,7 +54,9 @@ export const AddOptionDialog = ({ resolve }) => {
   return (
     <Form
       onSubmit={(values) => addMutation.mutateAsync(values)}
-      validate={validateOptionForm}
+      validate={(values) =>
+        validateOptionForm(values, { options: resolve.offering[resolve.type] })
+      }
       initialValues={{
         type: FIELD_TYPES[0],
       }}

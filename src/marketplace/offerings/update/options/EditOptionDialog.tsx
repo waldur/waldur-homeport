@@ -92,7 +92,12 @@ export const EditOptionDialog = ({ resolve }) => {
     <Form
       onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={initialValues}
-      validate={validateOptionForm}
+      validate={(values) =>
+        validateOptionForm(values, {
+          options: resolve.offering[resolve.type],
+          optionKey: resolve.option.name,
+        })
+      }
       mutators={{ ...arrayMutators }}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
@@ -109,6 +114,7 @@ export const EditOptionDialog = ({ resolve }) => {
             <OptionForm
               resourceType={resolve.type}
               offering={resolve.offering}
+              optionKey={resolve.option.name}
             />
           </ModalDialog>
         </form>
