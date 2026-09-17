@@ -9,8 +9,10 @@ import { translate } from '@/i18n';
 
 import { K8sFormSection } from './K8sFormSection';
 import {
+  K8sClusterTopology,
   K8sDefaultConfiguration,
   getAvailableKubernetesVersions,
+  getTopologyOptions,
   getLoadBalancerMode,
   validateK8sConfiguration,
   isK8sConfigurationComplete,
@@ -25,6 +27,10 @@ interface K8sKubernetesConfigSectionProps {
   longhornDescription?: string;
   loadBalancer?: boolean;
   onLoadBalancerChange?: (value: boolean) => void;
+  topology?: K8sClusterTopology;
+  // Given only when the offering lets the customer pick the topology.
+  onTopologyChange?: (value: K8sClusterTopology) => void;
+  topologyNotice?: string;
 }
 
 export const K8sKubernetesConfigSection: React.FC<
@@ -38,6 +44,9 @@ export const K8sKubernetesConfigSection: React.FC<
   longhornDescription,
   loadBalancer,
   onLoadBalancerChange,
+  topology,
+  onTopologyChange,
+  topologyNotice,
 }) => {
   const configurationWarnings = validateK8sConfiguration(defaultConfigs);
   const isConfigComplete = isK8sConfigurationComplete(defaultConfigs);
@@ -78,6 +87,33 @@ export const K8sKubernetesConfigSection: React.FC<
             options={getAvailableKubernetesVersions(defaultConfigs)}
           />
         </FormGroup>
+
+        {onTopologyChange && (
+          <FormGroup
+            label={translate('Cluster topology')}
+            description={translate(
+              'Where the controller nodes run: three in one site, or one in each of three sites.',
+            )}
+            required
+            space={5}
+          >
+            <SelectField
+              input={{
+                value: topology,
+                onChange: onTopologyChange,
+                onBlur: () => {},
+              }}
+              simpleValue
+              isClearable={false}
+              options={getTopologyOptions()}
+            />
+            {topologyNotice && (
+              <Alert variant="info" className="mt-3 mb-0">
+                {topologyNotice}
+              </Alert>
+            )}
+          </FormGroup>
+        )}
 
         <FormGroup space={5}>
           <AwesomeCheckbox

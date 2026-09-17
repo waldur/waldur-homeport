@@ -33,9 +33,8 @@ import { useCustomer } from '@/workspace/hooks';
 import { ComponentMultiplierField } from './ComponentMultiplierField';
 import { ConditionalCascadeField } from './ConditionalCascadeField';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
+import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
-import { MultiDatacenterK8sConfigurationForm } from './MultiDatacenterK8sConfigurationForm';
-import { SingleDatacenterK8sConfigurationForm } from './SingleDatacenterK8sConfigurationForm';
 import { StorageFolderManagerField } from './StorageFolderManagerField';
 import { DeployFormData } from './types';
 
@@ -238,13 +237,11 @@ export const getComponentAndParams = (option, key, customer, loaders?: any) => {
       };
       break;
 
+    // Both types render one form; the topology comes from
+    // default_configs.topology_mode, falling back to the type.
     case 'single_datacenter_k8s_config':
-      OptionField = SingleDatacenterK8sConfigurationForm;
-      params = getK8sParams(option);
-      break;
-
     case 'multi_datacenter_k8s_config':
-      OptionField = MultiDatacenterK8sConfigurationForm;
+      OptionField = K8sClusterConfigurationForm;
       params = getK8sParams(option);
       break;
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import { useField } from 'react-final-form';
-import { LoadBalancerModeEnum } from 'waldur-js-client';
+import { LoadBalancerModeEnum, TopologyModeEnum } from 'waldur-js-client';
 
 import { StringGroup, NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -15,8 +15,25 @@ const getLoadBalancerModeOptions = (): Array<{
   { value: 'disabled', label: translate('Not offered') },
 ];
 
+const getTopologyModeOptions = (): Array<{
+  value: TopologyModeEnum;
+  label: string;
+}> => [
+  { value: '1-datacenter', label: translate('Single site, 3 controllers') },
+  {
+    value: '3-datacenter',
+    label: translate('Three sites, 1 controller each'),
+  },
+  { value: 'customer_choice', label: translate('Customer chooses') },
+];
+
 export const K8sDefaultsConfiguration: React.FC<{}> = () => {
   const name = 'default_configs';
+  const {
+    input: { value: optionType },
+  } = useField<{ value?: string }>('type', {
+    subscription: { value: true },
+  });
   const {
     input: { value: loadBalancerMode },
   } = useField<LoadBalancerModeEnum>(`${name}.load_balancer_mode`, {
@@ -63,8 +80,31 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           )}
         </p>
 
-        {/* Controller Node Defaults */}
+        {/* Cluster Topology */}
         <h6 className="border-bottom pb-2 mb-3">
+          {translate('Cluster Topology')}
+          <small className="text-muted ms-2">({translate('Optional')})</small>
+        </h6>
+        <SelectGroup
+          name={`${name}.topology_mode`}
+          label={translate('Cluster topology')}
+          description={translate(
+            'Where the controller nodes run: three in one site, or one in each of three sites. When not set, the option type decides.',
+          )}
+          options={getTopologyModeOptions()}
+          placeholder={
+            optionType?.value === 'multi_datacenter_k8s_config'
+              ? translate('Three sites, 1 controller each')
+              : translate('Single site, 3 controllers')
+          }
+          // Clearing hands the choice back to the option type.
+          isClearable
+          parse={(value) => value || undefined}
+          simpleValue
+        />
+
+        {/* Controller Node Defaults */}
+        <h6 className="border-bottom pb-2 mb-3 mt-4">
           {translate('Controller Node Defaults')}
           <small className="text-muted ms-2">({translate('Optional')})</small>
         </h6>
