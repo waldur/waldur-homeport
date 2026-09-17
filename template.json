@@ -15505,8 +15505,7 @@
         "step": {
           "type": "unknown"
         }
-      },
-      "feature_area": "workflow-steps"
+      }
     }
   },
   "Disabled": {
@@ -49844,6 +49843,11 @@
       "feature_area": "manage"
     }
   },
+  "Step enabled": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "Step {current} of {total}: {name}": {
     "context": {
       "variables": {
@@ -55193,6 +55197,16 @@
   "Tuple statistics": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "Turning this off also disables {dependents}, which depends on it.": {
+    "context": {
+      "variables": {
+        "dependents": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "workflow-steps"
     }
   },
   "Two independent things must both be right before anything is sent: a relay that accepts mail from this installation, and at least one enabled notification type.": {
@@ -63728,6 +63742,11 @@
       "feature_area": "usage"
     }
   },
+  "When off, the step is skipped: it stays out of the workflow preview and no proposal ever enters it.": {
+    "context": {
+      "feature_area": "workflow-steps"
+    }
+  },
   "When official billing export arrives, amounts are compared": {
     "context": {
       "feature_area": "settings"
@@ -68434,8 +68453,7 @@
         "step": {
           "type": "unknown"
         }
-      },
-      "feature_area": "workflow-steps"
+      }
     }
   },
   "{description} for {name}": {

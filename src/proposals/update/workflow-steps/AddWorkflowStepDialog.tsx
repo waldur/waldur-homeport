@@ -142,7 +142,8 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
         // Award response is provisioned via the "Include award response"
         // toggle on Allocation decision, not by adding it directly — hide it
         // from the Add menu so the catalog has a single source of truth.
-        .filter((d) => d.id !== 'award_response')
+        // Same rule as the Add button's "everything is configured" check.
+        .filter((d) => !d.managedByToggle)
         .filter((d) => !configuredStepIds.has(d.id))
         .map((d) => {
           const missingDeps = getMissingDependencies(d.id, enabledStepIds);
