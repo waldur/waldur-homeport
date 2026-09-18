@@ -337,6 +337,18 @@ const DROP_TO_SIDE = {
 // which makes this specific class redundant but harmless).
 const ACTIONS_SHELL_CONTENT_CLASSNAME = 'dropdown-menu show position-static';
 
+// Radix flips and shifts a tall panel but never shortens it, so a long actions
+// menu runs off-screen. The height variable is per-primitive, hence two.
+const ACTIONS_SHELL_DROPDOWN_STYLE: React.CSSProperties = {
+  maxHeight: 'var(--radix-dropdown-menu-content-available-height)',
+  overflowY: 'auto',
+};
+
+const ACTIONS_SHELL_POPOVER_STYLE: React.CSSProperties = {
+  maxHeight: 'var(--radix-popover-content-available-height)',
+  overflowY: 'auto',
+};
+
 export const ActionsDropdownComponent: FunctionComponent<
   PropsWithChildren<
     ActionsDropdownShellProps & {
@@ -379,7 +391,7 @@ export const ActionsDropdownComponent: FunctionComponent<
         align={align}
         sideOffset={2}
         className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
-        style={menuStyle}
+        style={{ ...ACTIONS_SHELL_DROPDOWN_STYLE, ...menuStyle }}
         {...rest}
       >
         {children}
@@ -449,7 +461,7 @@ export const ActionsPopoverComponent: FunctionComponent<
         align={align}
         sideOffset={2}
         className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
-        style={menuStyle}
+        style={{ ...ACTIONS_SHELL_POPOVER_STYLE, ...menuStyle }}
         {...rest}
       >
         {children}
