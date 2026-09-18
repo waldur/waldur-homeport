@@ -26,6 +26,7 @@ export const MatrixDiagnosticsDialog: FC = () => {
       title={translate('Connectivity diagnostics')}
       footer={
         <div className="d-flex justify-content-between w-100">
+          <CloseDialogButton />
           <SubmitButton
             submitting={isFetching}
             onClick={() => refetch()}
@@ -38,7 +39,6 @@ export const MatrixDiagnosticsDialog: FC = () => {
             }
             className="btn btn-light btn-sm"
           />
-          <CloseDialogButton />
         </div>
       }
     >

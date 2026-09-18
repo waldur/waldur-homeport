@@ -161,12 +161,12 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
             title={resolve.title}
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid || isLoading}
                   submitting={submitting}
                   label={translate('Save')}
                 />
-                <CloseDialogButton />
               </>
             }
           >

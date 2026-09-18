@@ -74,6 +74,7 @@ export const EditRolePermissionsDialog: FC<{
             }
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   submitting={submitting}
                   disabled={invalid}
@@ -81,7 +82,6 @@ export const EditRolePermissionsDialog: FC<{
                 >
                   {translate('Save')}
                 </SubmitButton>
-                <CloseDialogButton />
               </>
             }
           >

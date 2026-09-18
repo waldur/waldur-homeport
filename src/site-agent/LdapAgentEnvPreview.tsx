@@ -76,6 +76,7 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
               }
               size="lg"
             />
+            <CloseDialogButton label={translate('Close')} />
             <BaseButton
               variant="primary"
               onClick={handleDownload}
@@ -83,7 +84,6 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
               label={translate('Download .env')}
               size="lg"
             />
-            <CloseDialogButton label={translate('Close')} />
           </div>
         </div>
       }

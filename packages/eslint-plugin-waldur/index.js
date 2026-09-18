@@ -5,6 +5,7 @@ import enforceBadgeRightIconPattern from './rules/enforce-badge-right-icon-patte
 import enforceBorderRadiusTokens from './rules/enforce-border-radius-tokens.js';
 import enforceBreadcrumbColors from './rules/enforce-breadcrumb-colors.js';
 import enforceButtonVariants from './rules/enforce-button-variants.js';
+import enforceDialogButtonOrder from './rules/enforce-dialog-button-order.js';
 import enforceDisabledButtonTooltip from './rules/enforce-disabled-button-tooltip.js';
 import enforceFeaturedIcon from './rules/enforce-featured-icon.js';
 import enforceFormcheckComponents from './rules/enforce-formcheck-components.js';
@@ -36,6 +37,7 @@ export default {
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
     'enforce-button-variants': enforceButtonVariants,
+    'enforce-dialog-button-order': enforceDialogButtonOrder,
     'no-direct-bootstrap-button': noDirectBootstrapButton,
     'no-bootstrap-button-markup': noBootstrapButtonMarkup,
     'no-hand-rolled-table': noHandRolledTable,

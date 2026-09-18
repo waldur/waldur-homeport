@@ -68,10 +68,10 @@ export const CloneRoleDialog: FC<{ resolve: CloneRoleDialogResolve }> = ({
             title={translate('Clone role into organization')}
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton disabled={invalid} submitting={submitting}>
                   {translate('Clone')}
                 </SubmitButton>
-                <CloseDialogButton />
               </>
             }
           >

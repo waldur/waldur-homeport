@@ -208,12 +208,12 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
             }
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Generate matches')}
                 />
-                <CloseDialogButton />
               </>
             }
           >

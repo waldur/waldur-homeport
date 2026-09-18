@@ -241,12 +241,12 @@ export const CreateManualAssignmentDialog: FC<
             )}
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Create assignment')}
                 />
-                <CloseDialogButton />
               </>
             }
           >

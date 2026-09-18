@@ -72,12 +72,12 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
             )}
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Save')}
                 />
-                <CloseDialogButton />
               </>
             }
           >

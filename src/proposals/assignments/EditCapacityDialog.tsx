@@ -49,11 +49,11 @@ export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
             title={translate('Edit reviewer capacity')}
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Save')}
                 />
-                <CloseDialogButton />
               </>
             }
           >
