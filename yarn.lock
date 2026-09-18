@@ -16781,7 +16781,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-transition-group@npm:4.4.5, react-transition-group@npm:^4.3.0, react-transition-group@npm:^4.4.5":
+"react-transition-group@npm:^4.3.0, react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
   dependencies:
@@ -16930,17 +16930,6 @@ __metadata:
   version: 5.0.0
   resolution: "readdirp@npm:5.0.0"
   checksum: 10c0/faf1ec57cff2020f473128da3f8d2a57813cc3a08a36c38cae1c9af32c1579906cc50ba75578043b35bade77e945c098233665797cf9730ba3613a62d6e79219
-  languageName: node
-  linkType: hard
-
-"reapop@npm:^4.2.2":
-  version: 4.3.0
-  resolution: "reapop@npm:4.3.0"
-  dependencies:
-    react-transition-group: "npm:4.4.5"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/57fdc8d4f1865f816552338cc158c953e7efdd101bd4723553a0483d299d12be1bb0f1228362b61d25b616dcbb65f5c0195b82010f1ad6818764603662a0be26
   languageName: node
   linkType: hard
 
@@ -17771,6 +17760,20 @@ __metadata:
     dot-case: "npm:^3.0.4"
     tslib: "npm:^2.0.3"
   checksum: 10c0/ab19a913969f58f4474fe9f6e8a026c8a2142a01f40b52b79368068343177f818cdfef0b0c6b9558f298782441d5ca8ed5932eb57822439fad791d866e62cecd
+  languageName: node
+  linkType: hard
+
+"sonner@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "sonner@npm:2.0.8"
+  peerDependencies:
+    "@types/react": ^18.0.0 || ^19.0.0
+    react: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+    react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/cc271f78dca7e7d7ce34a724883f3292ba671b5ed3d41732430df28c38a8f6a47e8e59da5fdd0b258ac07136db0cdaf02f8cda9afb9cc9f12d81b6c319b427f7
   languageName: node
   linkType: hard
 
@@ -19650,13 +19653,13 @@ __metadata:
     react-window: "npm:^1.8.11"
     react-window-infinite-loader: "npm:^1.0.10"
     read-excel-file: "npm:^7.0.1"
-    reapop: "npm:^4.2.2"
     redux: "npm:^4.2.1"
     redux-logger: "npm:^3.0.6"
     redux-mock-store: "npm:^1.2.3"
     reselect: "npm:^3.0.1"
     sass: "npm:^1.85.0"
     serve: "npm:^14.2.4"
+    sonner: "npm:^2.0.8"
     source-map: "npm:^0.7.6"
     storybook: "npm:^10.5.8"
     storybook-addon-pseudo-states: "npm:^10.5.8"

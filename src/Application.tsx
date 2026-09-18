@@ -3,7 +3,6 @@ import { QueryClientProvider, useSuspenseQuery } from '@tanstack/react-query';
 import { UIRouter, UIView } from '@uirouter/react';
 import { FunctionComponent, Suspense } from 'react';
 import { Provider } from 'react-redux';
-import { NotificationsProvider, setUpNotifications } from 'reapop';
 
 import { AnonymousThreadProvider } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
@@ -29,15 +28,6 @@ import { ThemeProvider } from './theme/ThemeProvider';
 
 states.forEach((state) => router.stateRegistry.register(state));
 
-setUpNotifications({
-  defaultProps: {
-    position: 'top-right',
-    dismissible: true,
-    dismissAfter: 7000,
-    showDismissButton: true,
-  },
-});
-
 const ApplicationInner: FunctionComponent = () => {
   useSuspenseQuery({
     queryKey: BOOTSTRAP_QUERY_KEY,
@@ -46,38 +36,36 @@ const ApplicationInner: FunctionComponent = () => {
 
   return (
     <ErrorBoundary fallback={ErrorMessage}>
-      <NotificationsProvider>
-        <UIRouter router={router}>
-          <Provider store={store}>
-            <LayoutProvider>
-              <ThemeProvider>
-                {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
+      <UIRouter router={router}>
+        <Provider store={store}>
+          <LayoutProvider>
+            <ThemeProvider>
+              {/* Drawer/Modal providers must wrap MatrixRoot: MatrixCallHost
                     (rendered inside MatrixRoot) opens the chat drawer from the
                     call widget via useDrawer, so it needs the same shared
                     DrawerProvider instance as the rest of the app. */}
-                <ModalProvider>
-                  <DrawerProvider>
-                    <MatrixRoot>
-                      <ThreadProvider>
-                        <ThreadRuntimeProvider>
-                          <AnonymousThreadProvider>
-                            <RealtimeRoot />
-                            <NotificationContainer />
-                            <ModalRoot />
-                            <ConfirmModalRoot />
-                            <DrawerRoot />
-                            <UIView />
-                          </AnonymousThreadProvider>
-                        </ThreadRuntimeProvider>
-                      </ThreadProvider>
-                    </MatrixRoot>
-                  </DrawerProvider>
-                </ModalProvider>
-              </ThemeProvider>
-            </LayoutProvider>
-          </Provider>
-        </UIRouter>
-      </NotificationsProvider>
+              <ModalProvider>
+                <DrawerProvider>
+                  <MatrixRoot>
+                    <ThreadProvider>
+                      <ThreadRuntimeProvider>
+                        <AnonymousThreadProvider>
+                          <RealtimeRoot />
+                          <NotificationContainer />
+                          <ModalRoot />
+                          <ConfirmModalRoot />
+                          <DrawerRoot />
+                          <UIView />
+                        </AnonymousThreadProvider>
+                      </ThreadRuntimeProvider>
+                    </ThreadProvider>
+                  </MatrixRoot>
+                </DrawerProvider>
+              </ModalProvider>
+            </ThemeProvider>
+          </LayoutProvider>
+        </Provider>
+      </UIRouter>
     </ErrorBoundary>
   );
 };

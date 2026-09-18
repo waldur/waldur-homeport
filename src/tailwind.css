@@ -151,6 +151,18 @@
   --z-index-tooltip: 1180;
 }
 
+/* `static` because nothing uses this as a `z-toast` class — Tailwind only
+   emits theme variables it finds used, and a `var(...)` inside a TSX string
+   doesn't count, so without it the variable is missing from the build and
+   the inline z-index resolves to `auto`. */
+@theme static {
+  /* NotificationContainer.tsx's Toaster. Above Bootstrap's modal (1055) and
+     popover (1070) and the app's own .dropdown-menu (1100), below
+     --z-index-tooltip so a toast's own Dismiss tooltip isn't painted under
+     the toast. Sonner's default is 999999999, which buries every tooltip. */
+  --z-index-toast: 1150;
+}
+
 /* Tailwind's `visibility` utility set includes a class literally named
    `.collapse` (`{ visibility: collapse }` — the third state alongside
    `visible`/`invisible`, meant for hiding table rows/columns without
