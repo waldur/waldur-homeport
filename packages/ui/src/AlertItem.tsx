@@ -1,4 +1,5 @@
 import {
+  CheckCircleIcon,
   InfoIcon,
   WarningCircleIcon,
   WarningOctagonIcon,
@@ -6,9 +7,13 @@ import {
 import { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
 import { cn } from './cn';
-import { FeaturedIcon, FeaturedIconVariant } from './FeaturedIcon';
+import {
+  FeaturedIcon,
+  FeaturedIconSize,
+  FeaturedIconVariant,
+} from './FeaturedIcon';
 
-export type AlertItemVariant = 'info' | 'warning' | 'error';
+export type AlertItemVariant = 'info' | 'success' | 'warning' | 'error';
 export type AlertItemType = 'full-width' | 'floating';
 
 export interface AlertItemProps extends Omit<
@@ -22,6 +27,10 @@ export interface AlertItemProps extends Omit<
   variant?: AlertItemVariant;
   type?: AlertItemType;
   className?: string;
+  /** FeaturedIcon size. Defaults to 'lg' (42px), the full-row look. */
+  iconSize?: FeaturedIconSize;
+  /** Extra classes for the icon, e.g. to override its default vertical offset. */
+  iconClassName?: string;
 }
 
 const ALERT_ICON: Record<
@@ -29,6 +38,7 @@ const ALERT_ICON: Record<
   { icon: ReactNode; variant: FeaturedIconVariant }
 > = {
   info: { icon: <InfoIcon weight="bold" />, variant: 'neutral' },
+  success: { icon: <CheckCircleIcon weight="bold" />, variant: 'success' },
   warning: { icon: <WarningCircleIcon weight="bold" />, variant: 'warning' },
   error: { icon: <WarningOctagonIcon weight="bold" />, variant: 'danger' },
 };
@@ -43,7 +53,9 @@ const ALERT_ICON: Record<
  * - `floating`: p-[1.23rem] (15.99px padding all around), rounded-[0.475rem] (6.175px radius), full border
  * - Border color: var(--surface-card-border) (#E4E7EC light / #1F242F dark)
  * - Row gap: gap-[0.846rem] (10.998px)
- * - Icon: FeaturedIcon size="lg" (42px outer ring, 32px inner, 24px icon) with -mt-[0.77rem] (-10.01px)
+ * - Icon: FeaturedIcon size="lg" by default (42px outer ring, 32px inner, 24px icon)
+ *   with -mt-[0.77rem] (-10.01px); `iconSize`/`iconClassName` let a caller
+ *   (e.g. Toast, which uses the smaller 'md' default) override either.
  * - Title: text-sm (14px) font-medium (500) leading-[20px] text-[var(--surface-text-primary)]
  * - Body: text-sm (14px) font-normal (400) leading-[20px] text-[var(--surface-text-secondary)]
  * - Actions: flex items-start pr-[2px] gap-[12px]
@@ -58,6 +70,8 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
       variant = 'info',
       type = 'full-width',
       className,
+      iconSize = 'lg',
+      iconClassName,
       ...props
     },
     ref,
@@ -78,10 +92,10 @@ export const AlertItem = forwardRef<HTMLDivElement, AlertItemProps>(
       >
         <FeaturedIcon
           icon={ALERT_ICON[variant].icon}
-          size="lg"
+          size={iconSize}
           variant={ALERT_ICON[variant].variant}
           data-testid="alert-featured-icon"
-          className="-mt-[0.77rem]"
+          className={cn('-mt-[0.77rem]', iconClassName)}
         />
         <div className="grow">
           <div className="flex items-center flex-wrap gap-[0.616rem] mb-[0.308rem]">

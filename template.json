@@ -15716,7 +15716,7 @@
   },
   "Dismiss": {
     "context": {
-      "feature_area": "coi-review"
+      "feature_area": "notification"
     }
   },
   "Dismiss conflict": {
