@@ -10,6 +10,10 @@ import { Badge } from 'waldur-ui';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import {
+  limitEntries,
+  PublicResourcesLimits,
+} from '@/marketplace/resources/list/PublicResourcesLimits';
 import { TableDropdownToggle } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -180,6 +184,17 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       }),
       id: 'client_organization',
       optional: true,
+    },
+    {
+      // Requested component limits: what a reviewer needs in order to approve,
+      // and otherwise one page load per order. Exported as a flat "key: value"
+      // list rather than the raw dict so a review spreadsheet stays readable.
+      title: translate('Limits'),
+      render: PublicResourcesLimits,
+      export: (row) => limitEntries(row.limits).join(', ') || 'N/A',
+      keys: ['limits'],
+      exportKeys: ['limits'],
+      id: 'limits',
     },
     {
       title: translate('Approved at'),
