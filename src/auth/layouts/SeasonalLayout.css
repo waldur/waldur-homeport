@@ -125,11 +125,13 @@
   flex-wrap: wrap;
 }
 
-.layout-seasonal-footer .menu-link {
+.layout-seasonal-footer .menu-link,
+.layout-seasonal-footer .menu-link .menu-title {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-.layout-seasonal-footer .menu-link:hover {
+.layout-seasonal-footer .menu-link:hover,
+.layout-seasonal-footer .menu-link:hover .menu-title {
   color: #fff !important;
 }
 

@@ -110,7 +110,8 @@
   color: white;
 }
 
-.layout-diagonal-footer .menu-link {
+.layout-diagonal-footer .menu-link,
+.layout-diagonal-footer .menu-link .menu-title {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 

@@ -80,7 +80,8 @@
   color: white;
 }
 
-.layout-animated-gradient-footer .menu-link {
+.layout-animated-gradient-footer .menu-link,
+.layout-animated-gradient-footer .menu-link .menu-title {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
