@@ -1,8 +1,10 @@
 import { ReactNode, useMemo } from 'react';
 import { toast } from 'sonner';
 
+import { AlertItemVariant } from 'waldur-ui';
+
 import { format } from '@/core/ErrorMessageFormatter';
-import { Toast, ToastAction, ToastVariant } from '@/notification/Toast';
+import { Toast, ToastAction } from '@/notification/Toast';
 
 const DEFAULT_DURATION = 7000;
 
@@ -15,7 +17,7 @@ interface ToastOptions {
 }
 
 const show = (
-  variant: ToastVariant,
+  variant: AlertItemVariant,
   title: ReactNode,
   message?: ReactNode,
   options: ToastOptions = {},

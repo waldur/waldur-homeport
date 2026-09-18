@@ -3,15 +3,13 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { toast } from 'sonner';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, AlertItemVariant } from 'waldur-ui';
 
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { IconButton } from '@/core/buttons/IconButton';
 import { translate } from '@/i18n';
 
 import './Toast.scss';
-
-export type ToastVariant = 'info' | 'success' | 'warning' | 'error';
 
 export interface ToastAction {
   label: string;
@@ -24,7 +22,7 @@ interface ToastProps {
   id: string | number;
   title: ReactNode;
   message?: ReactNode;
-  variant: ToastVariant;
+  variant: AlertItemVariant;
   actions?: ToastAction[];
 }
 

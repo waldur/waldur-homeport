@@ -2,9 +2,8 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 
-import { AlertItem } from '@/core/AlertItem';
 import { EligibilityRestrictionFormItems } from '@/core/restrictions';
 import { EditFieldProvider } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
