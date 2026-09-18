@@ -45,10 +45,12 @@
   color: white;
 }
 
-.layout-centered-card-footer .menu-link {
+.layout-centered-card-footer .menu-link,
+.layout-centered-card-footer .menu-link .menu-title {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.layout-centered-card-footer .menu-link:hover {
+.layout-centered-card-footer .menu-link:hover,
+.layout-centered-card-footer .menu-link:hover .menu-title {
   color: white !important;
 }

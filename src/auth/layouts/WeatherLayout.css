@@ -98,11 +98,13 @@
   flex-wrap: wrap;
 }
 
-.layout-weather-footer .menu-link {
+.layout-weather-footer .menu-link,
+.layout-weather-footer .menu-link .menu-title {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-.layout-weather-footer .menu-link:hover {
+.layout-weather-footer .menu-link:hover,
+.layout-weather-footer .menu-link:hover .menu-title {
   color: #fff !important;
 }
 
