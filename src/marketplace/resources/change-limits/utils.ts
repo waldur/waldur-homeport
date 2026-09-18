@@ -27,6 +27,7 @@ import {
 } from '@/marketplace/details/plan/effectiveComponents';
 import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@/marketplace/offerings/store/types';
+import { TENANT_TYPE } from '@/openstack/constants';
 
 type PlanWithComponents = Pick<BasePublicPlan, 'components'>;
 
@@ -117,7 +118,8 @@ export const getRemainingMonths = (endDate: string): number => {
 };
 
 export const getLimitChangeRequirements = (
-  resource: Pick<Resource, 'limits' | 'current_usages'>,
+  resource: Pick<Resource, 'limits' | 'current_usages'> &
+    Partial<Pick<Resource, 'limit_usage'>>,
   offering: PublicOfferingDetails | Offering,
   plan?: PlanWithComponents | null,
 ) => {
@@ -127,7 +129,17 @@ export const getLimitChangeRequirements = (
   const components = getEffectiveComponents(offering, plan).filter(
     (component) => component.billing_type === 'limit' || component.is_prepaid,
   );
-  const usages = limitParser(resource.current_usages || {});
+  const rawUsages = { ...(resource.current_usages || {}) };
+  // Match the overview: period usage for limits, except live OpenStack quotas.
+  if (offering.type !== TENANT_TYPE) {
+    for (const component of components) {
+      const limitUsage = resource.limit_usage?.[component.type];
+      if (component.billing_type === 'limit' && limitUsage != null) {
+        rawUsages[component.type] = limitUsage;
+      }
+    }
+  }
+  const usages = limitParser(rawUsages);
   const resourceLimits = limitParser(resource.limits);
   const limits: Record<string, number> = Object.fromEntries(
     components.map((component) => [
