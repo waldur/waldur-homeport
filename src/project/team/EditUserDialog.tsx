@@ -116,6 +116,7 @@ const EditUserDialogFormBody: FC<{
         }
         footer={
           <>
+            <CloseDialogButton />
             <SubmitButton
               disabled={invalid || isProjectManagerBlocked}
               disabledReason={
@@ -127,7 +128,6 @@ const EditUserDialogFormBody: FC<{
             >
               {translate('Save')}
             </SubmitButton>
-            <CloseDialogButton />
           </>
         }
       >

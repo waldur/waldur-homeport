@@ -72,12 +72,12 @@ export const DirectEmailInviteDialog = ({
             }
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Send invitation')}
                 />
-                <CloseDialogButton />
               </>
             }
           >

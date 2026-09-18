@@ -82,6 +82,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
               }
               size="lg"
             />
+            <CloseDialogButton label={translate('Close')} onClick={onClose} />
             <BaseButton
               variant="primary"
               onClick={handleDownload}
@@ -89,7 +90,6 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
               label={translate('Download YAML')}
               size="lg"
             />
-            <CloseDialogButton label={translate('Close')} onClick={onClose} />
           </div>
         </div>
       }

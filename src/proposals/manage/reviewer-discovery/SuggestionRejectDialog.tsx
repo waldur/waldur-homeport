@@ -67,12 +67,12 @@ export const SuggestionRejectDialog = ({
             title={translate('Reject suggestion')}
             footer={
               <>
+                <CloseDialogButton />
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Reject')}
                   className="btn-danger"
                 />
-                <CloseDialogButton />
               </>
             }
           >
