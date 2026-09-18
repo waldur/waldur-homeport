@@ -1,14 +1,13 @@
 import {
-  Icon,
   InfoIcon,
   WarningCircleIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
-import { FC } from 'react';
-import { Variant } from 'react-bootstrap/types';
+import { FC, ReactNode } from 'react';
+
+import { FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
 
 import { formatDate, formatISODate, formatRelative } from '@/core/dateUtils';
-import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 
@@ -18,16 +17,16 @@ import { CreditEvent } from '../types';
 // Success, Gray — with the matching semantic glyph, rather than by subject
 // matter. What each event is stays in its title. `secondary` has no featured
 // icon style, so it falls through to the success green; `dark` is the grey one.
-const TONE_ICON: Record<CreditEvent['tone'], Icon> = {
-  danger: XCircleIcon,
-  warning: WarningCircleIcon,
-  muted: InfoIcon,
+const TONE_ICON: Record<CreditEvent['tone'], ReactNode> = {
+  danger: <XCircleIcon weight="bold" />,
+  warning: <WarningCircleIcon weight="bold" />,
+  muted: <InfoIcon weight="bold" />,
 };
 
-const TONE_VARIANT: Record<CreditEvent['tone'], Variant> = {
+const TONE_VARIANT: Record<CreditEvent['tone'], FeaturedIconVariant> = {
   danger: 'danger',
   warning: 'warning',
-  muted: 'dark',
+  muted: 'neutral',
 };
 
 // An event dated today is in effect now. Relative formatting would render it
@@ -80,9 +79,8 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
             key={`${event.kind}-${event.date}-${index}`}
           >
             <div className="d-flex flex-column align-items-center">
-              {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
               <FeaturedIcon
-                IconComponent={TONE_ICON[event.tone]}
+                icon={TONE_ICON[event.tone]}
                 variant={TONE_VARIANT[event.tone]}
                 size="sm"
               />

@@ -4,7 +4,7 @@ import { BaseButton } from './BaseButton';
 import { LoadingSpinner } from './LoadingSpinner';
 
 const meta: Meta<typeof LoadingSpinner> = {
-  title: 'Primitives/LoadingSpinner',
+  title: 'Feedback/LoadingSpinner',
   component: LoadingSpinner,
   parameters: {
     docs: {

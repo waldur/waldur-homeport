@@ -5,7 +5,7 @@ import {
   openstackNetworkRbacPoliciesList,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BadgeVariant } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -15,7 +15,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
-const POLICY_TYPE = {
+const POLICY_TYPE: Record<string, { color: BadgeVariant; label: string }> = {
   access_as_shared: { color: 'blue', label: translate('Shared') },
   access_as_external: { color: 'warning', label: translate('External') },
 };
@@ -57,7 +57,7 @@ export const NetworkRBACList: FC<{ network: OpenStackNetwork }> = ({
           title: translate('Policy type'),
           render: ({ row }) => (
             <Badge
-              variant={POLICY_TYPE[row.policy_type]?.color || 'default'}
+              variant={POLICY_TYPE[row.policy_type]?.color || 'neutral'}
               shape="pill"
               tone="outline"
             >

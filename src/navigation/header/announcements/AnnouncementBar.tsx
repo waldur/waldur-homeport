@@ -1,9 +1,9 @@
 import { Icon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
-import { Variant } from 'react-bootstrap/types';
 
-import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
+
 import { parseMarkdownLinksOnly } from '@/core/sanitize';
 import { translate } from '@/i18n';
 
@@ -11,7 +11,11 @@ import { useTextTruncation } from './useTextTruncation';
 
 interface AnnouncementBarProps {
   icon: Icon;
-  variant: Variant;
+  /** Also drives the `bar-{variant}` background class — only success/
+   * warning/danger have a real `.bar-{variant}` rule (_alerts.scss); `info`/
+   * `neutral`/`primary` still color the icon correctly via FeaturedIcon but
+   * render on the plain `bg-body` background, same as `colored: false`. */
+  variant: FeaturedIconVariant;
   /** Inline label used by non-announcement bars (offering/order/resource). */
   label?: ReactNode;
   /** Announcement title (e.g. the maintenance name), shown in title styling. */
@@ -41,6 +45,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   colored,
   hasColon,
 }) => {
+  const IconComponent = icon;
   const { textRef, isTruncated } = useTextTruncation();
   const safeDescription = useMemo(
     () => parseMarkdownLinksOnly(description),
@@ -63,8 +68,10 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
           ellipsis && 'ellipsis',
         )}
       >
-        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-        <FeaturedIcon IconComponent={icon} variant={variant} />
+        <FeaturedIcon
+          icon={<IconComponent weight="bold" />}
+          variant={variant}
+        />
 
         <div
           ref={textRef}

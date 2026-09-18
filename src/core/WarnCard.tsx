@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { FeaturedIcon } from './FeaturedIcon';
+import { FeaturedIcon } from 'waldur-ui';
 
 interface WarnCardProps {
   title?: ReactNode;
@@ -27,8 +27,10 @@ export const WarnCard: FC<WarnCardProps> = ({
     )}
   >
     <Card.Body className="d-flex align-items-start gap-3 p-4">
-      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      <FeaturedIcon IconComponent={WarningCircleIcon} variant="warning" />
+      <FeaturedIcon
+        icon={<WarningCircleIcon weight="bold" />}
+        variant="warning"
+      />
 
       <div className={prominent ? 'text-dark' : undefined}>
         <div className="mb-1 fw-bold">{title}</div>

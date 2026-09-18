@@ -7,7 +7,8 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';

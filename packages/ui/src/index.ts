@@ -6,7 +6,7 @@ export { LoadingSpinner } from './LoadingSpinner';
 export { Tooltip } from './Tooltip';
 export type { TooltipProps } from './Tooltip';
 
-export { Badge } from './Badge';
+export { Badge, BADGE_STYLES } from './Badge';
 export type { BadgeProps, BadgeShape, BadgeTone, BadgeVariant } from './Badge';
 
 export {
@@ -17,6 +17,21 @@ export {
   CardHeader,
   CardTitle,
 } from './Card';
+
+export { FeaturedIcon } from './FeaturedIcon';
+export type {
+  FeaturedIconProps,
+  FeaturedIconSize,
+  FeaturedIconTone,
+  FeaturedIconVariant,
+} from './FeaturedIcon';
+
+export { AlertItem } from './AlertItem';
+export type {
+  AlertItemProps,
+  AlertItemType,
+  AlertItemVariant,
+} from './AlertItem';
 
 export {
   Table,

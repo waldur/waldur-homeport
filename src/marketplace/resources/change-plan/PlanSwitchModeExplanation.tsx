@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import {

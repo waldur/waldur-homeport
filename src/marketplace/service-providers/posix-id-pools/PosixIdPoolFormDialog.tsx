@@ -7,7 +7,8 @@ import {
   PosixIdPool,
 } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import {
   AsyncSelectGroup,

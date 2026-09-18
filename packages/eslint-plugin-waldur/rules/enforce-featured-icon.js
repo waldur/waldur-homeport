@@ -7,7 +7,7 @@ export default {
     type: 'problem',
     docs: {
       description:
-        'Enforce FeaturedIcon component with solid/size props instead of custom icon styling',
+        'Enforce FeaturedIcon component with tone/size props instead of custom icon styling',
       category: 'Best Practices',
     },
     fixable: null,
@@ -16,14 +16,17 @@ export default {
       useFeaturedIconComponent:
         'Use FeaturedIcon component instead of custom icon implementation',
       useFeaturedIconProps:
-        'FeaturedIcon should use "solid" and "size" props for consistent styling',
+        'FeaturedIcon should use "tone" and "size" props for consistent styling',
       deprecatedFeaturedIconSize:
-        'FeaturedIcon size "{{size}}" should use standard sizes: sm, lg, xl',
+        'FeaturedIcon size "{{size}}" should use standard sizes: sm, md, default, lg, xl',
     },
   },
 
   create(context) {
-    const standardSizes = ['sm', 'lg', 'xl'];
+    // 'default' and 'md' are real, selectable FeaturedIconSize values (not just the
+    // implicit fallback for an omitted `size`) — see
+    // packages/ui/src/FeaturedIcon.tsx's own comment.
+    const standardSizes = ['sm', 'md', 'default', 'lg', 'xl'];
 
     return {
       JSXElement(node) {

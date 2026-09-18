@@ -5,7 +5,8 @@ import {
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { FeaturedIcon } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';
@@ -36,9 +37,8 @@ export const RemovedProjectWarningBar: FC = () => {
   return (
     <div className="layout-warning-bar bar-warning">
       <div className="container-fluid w-100 d-flex align-items-center gap-2">
-        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
         <FeaturedIcon
-          IconComponent={WarningCircleIcon}
+          icon={<WarningCircleIcon weight="bold" />}
           variant="warning"
           size="sm"
         />

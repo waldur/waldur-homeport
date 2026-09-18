@@ -187,3 +187,167 @@
   --color-gray-900: #161b26;
   --color-gray-950: #0c111d;
 }
+
+/* ==========================================================================
+   Tailwind CSS v4 @theme token registration.
+   Exposes both the runtime brand tokens (--waldur-brand-*) and all base/extended
+   color ramps as first-class Tailwind utilities (bg-*, text-*, border-*, etc.)
+   to any consuming app importing this file.
+   ========================================================================== */
+
+@theme {
+  --color-brand-25: var(--waldur-brand-25);
+  --color-brand-50: var(--waldur-brand-50);
+  --color-brand-100: var(--waldur-brand-100);
+  --color-brand-200: var(--waldur-brand-200);
+  --color-brand-300: var(--waldur-brand-300);
+  --color-brand-400: var(--waldur-brand-400);
+  --color-brand-500: var(--waldur-brand-500);
+  --color-brand-600: var(--waldur-brand-600);
+  --color-brand-700: var(--waldur-brand-700);
+  --color-brand-800: var(--waldur-brand-800);
+  --color-brand-900: var(--waldur-brand-900);
+  --color-brand-950: var(--waldur-brand-950);
+  --color-brand: var(--waldur-brand-color);
+
+  --color-gray-25: var(--color-gray-25);
+  --color-gray-50: var(--color-gray-50);
+  --color-gray-100: var(--color-gray-100);
+  --color-gray-200: var(--color-gray-200);
+  --color-gray-300: var(--color-gray-300);
+  --color-gray-400: var(--color-gray-400);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-600: var(--color-gray-600);
+  --color-gray-700: var(--color-gray-700);
+  --color-gray-800: var(--color-gray-800);
+  --color-gray-900: var(--color-gray-900);
+  --color-gray-950: var(--color-gray-950);
+
+  --color-error-25: var(--color-error-25);
+  --color-error-50: var(--color-error-50);
+  --color-error-100: var(--color-error-100);
+  --color-error-200: var(--color-error-200);
+  --color-error-300: var(--color-error-300);
+  --color-error-400: var(--color-error-400);
+  --color-error-500: var(--color-error-500);
+  --color-error-600: var(--color-error-600);
+  --color-error-700: var(--color-error-700);
+  --color-error-800: var(--color-error-800);
+  --color-error-900: var(--color-error-900);
+  --color-error-950: var(--color-error-950);
+
+  --color-warning-25: var(--color-warning-25);
+  --color-warning-50: var(--color-warning-50);
+  --color-warning-100: var(--color-warning-100);
+  --color-warning-200: var(--color-warning-200);
+  --color-warning-300: var(--color-warning-300);
+  --color-warning-400: var(--color-warning-400);
+  --color-warning-500: var(--color-warning-500);
+  --color-warning-600: var(--color-warning-600);
+  --color-warning-700: var(--color-warning-700);
+  --color-warning-800: var(--color-warning-800);
+  --color-warning-900: var(--color-warning-900);
+  --color-warning-950: var(--color-warning-950);
+
+  --color-success-25: var(--color-success-25);
+  --color-success-50: var(--color-success-50);
+  --color-success-100: var(--color-success-100);
+  --color-success-200: var(--color-success-200);
+  --color-success-300: var(--color-success-300);
+  --color-success-400: var(--color-success-400);
+  --color-success-500: var(--color-success-500);
+  --color-success-600: var(--color-success-600);
+  --color-success-700: var(--color-success-700);
+  --color-success-800: var(--color-success-800);
+  --color-success-900: var(--color-success-900);
+  --color-success-950: var(--color-success-950);
+
+  --color-info-50: var(--color-info-50);
+  --color-info-200: var(--color-info-200);
+  --color-info-300: var(--color-info-300);
+  --color-info-400: var(--color-info-400);
+  --color-info-500: var(--color-info-500);
+  --color-info-600: var(--color-info-600);
+  --color-info-700: var(--color-info-700);
+  --color-info-900: var(--color-info-900);
+
+  --color-purple-50: var(--color-purple-50);
+  --color-purple-200: var(--color-purple-200);
+  --color-purple-300: var(--color-purple-300);
+  --color-purple-400: var(--color-purple-400);
+  --color-purple-500: var(--color-purple-500);
+  --color-purple-600: var(--color-purple-600);
+  --color-purple-700: var(--color-purple-700);
+  --color-purple-900: var(--color-purple-900);
+  --color-purple-950: var(--color-purple-950);
+
+  --color-blue-50: var(--color-blue-50);
+  --color-blue-200: var(--color-blue-200);
+  --color-blue-300: var(--color-blue-300);
+  --color-blue-400: var(--color-blue-400);
+  --color-blue-500: var(--color-blue-500);
+  --color-blue-600: var(--color-blue-600);
+  --color-blue-700: var(--color-blue-700);
+  --color-blue-900: var(--color-blue-900);
+  --color-blue-950: var(--color-blue-950);
+
+  --color-indigo-50: var(--color-indigo-50);
+  --color-indigo-200: var(--color-indigo-200);
+  --color-indigo-300: var(--color-indigo-300);
+  --color-indigo-400: var(--color-indigo-400);
+  --color-indigo-500: var(--color-indigo-500);
+  --color-indigo-600: var(--color-indigo-600);
+  --color-indigo-700: var(--color-indigo-700);
+  --color-indigo-900: var(--color-indigo-900);
+  --color-indigo-950: var(--color-indigo-950);
+
+  --color-moss-50: var(--color-moss-50);
+  --color-moss-200: var(--color-moss-200);
+  --color-moss-300: var(--color-moss-300);
+  --color-moss-400: var(--color-moss-400);
+  --color-moss-500: var(--color-moss-500);
+  --color-moss-600: var(--color-moss-600);
+  --color-moss-700: var(--color-moss-700);
+  --color-moss-900: var(--color-moss-900);
+  --color-moss-950: var(--color-moss-950);
+
+  --color-pink-50: var(--color-pink-50);
+  --color-pink-200: var(--color-pink-200);
+  --color-pink-300: var(--color-pink-300);
+  --color-pink-400: var(--color-pink-400);
+  --color-pink-500: var(--color-pink-500);
+  --color-pink-600: var(--color-pink-600);
+  --color-pink-700: var(--color-pink-700);
+  --color-pink-900: var(--color-pink-900);
+  --color-pink-950: var(--color-pink-950);
+
+  --color-teal-50: var(--color-teal-50);
+  --color-teal-200: var(--color-teal-200);
+  --color-teal-300: var(--color-teal-300);
+  --color-teal-400: var(--color-teal-400);
+  --color-teal-500: var(--color-teal-500);
+  --color-teal-600: var(--color-teal-600);
+  --color-teal-700: var(--color-teal-700);
+  --color-teal-900: var(--color-teal-900);
+  --color-teal-950: var(--color-teal-950);
+
+  --color-orange-50: var(--color-orange-50);
+  --color-orange-200: var(--color-orange-200);
+  --color-orange-300: var(--color-orange-300);
+  --color-orange-400: var(--color-orange-400);
+  --color-orange-500: var(--color-orange-500);
+  --color-orange-600: var(--color-orange-600);
+  --color-orange-700: var(--color-orange-700);
+  --color-orange-900: var(--color-orange-900);
+  --color-orange-950: var(--color-orange-950);
+
+  --color-rose-50: var(--color-rose-50);
+  --color-rose-200: var(--color-rose-200);
+  --color-rose-300: var(--color-rose-300);
+  --color-rose-400: var(--color-rose-400);
+  --color-rose-500: var(--color-rose-500);
+  --color-rose-600: var(--color-rose-600);
+  --color-rose-700: var(--color-rose-700);
+  --color-rose-900: var(--color-rose-900);
+  --color-rose-950: var(--color-rose-950);
+}

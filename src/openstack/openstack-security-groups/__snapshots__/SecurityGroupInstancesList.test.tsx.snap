@@ -270,7 +270,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   class="ellipsis"
                 >
                   <span
-                    class="badge inline-flex items-center justify-center border-[1px] text-[1.075rem] leading-[20px] font-medium transition-colors rounded-full py-[1px] px-[9px]"
+                    class="badge inline-flex items-center justify-center border-[1px] text-[1.075rem] leading-[20px] font-medium transition-colors rounded-full py-[1px] px-[9px] bg-brand-50 border-brand-200 text-brand-700 dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
                     data-state="closed"
                     data-testid="default-state-indicator"
                     data-tone="outline"

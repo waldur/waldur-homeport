@@ -2,10 +2,8 @@ import { BellSlashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { UserAction } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge, Tooltip } from 'waldur-ui';
 
-import { AlertItem } from '@/core/AlertItem';
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 

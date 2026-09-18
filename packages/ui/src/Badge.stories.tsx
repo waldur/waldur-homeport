@@ -37,7 +37,7 @@ const TONES: BadgeTone[] = ['outline', 'light', 'solid'];
 const SHAPES: BadgeShape[] = ['rounded', 'pill', 'circle', 'roundless'];
 
 const meta: Meta<typeof Badge> = {
-  title: 'Primitives/Badge',
+  title: 'Data Display/Badge',
   component: Badge,
   argTypes: {
     variant: { control: 'select', options: VARIANTS },

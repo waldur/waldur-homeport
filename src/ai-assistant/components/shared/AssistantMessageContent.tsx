@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
+import { AlertItem } from 'waldur-ui';
+
 import { BlockRenderer } from '@/ai-assistant/components/BlockRenderer';
 import { LoadingDots } from '@/ai-assistant/components/shared/LoadingDots';
 import { UIBlock } from '@/ai-assistant/lib/types';
-import { AlertItem } from '@/core/AlertItem';
 import { translate } from '@/i18n';
 
 interface AssistantMessageContentProps {

@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { proposalPublicCallsList } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 

@@ -2,7 +2,7 @@ import { Icon, WarningCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { FeaturedIcon } from 'waldur-ui';
 
 import '@/user/OfferingUsersWarningBar.scss';
 
@@ -26,9 +26,8 @@ export const ResourceWarningBar: React.FC<ResourceWarningBarProps> = ({
         <div className="d-flex justify-content-between align-items-center py-3">
           <div className="d-flex align-items-center">
             {IconComponent && (
-              // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
               <FeaturedIcon
-                IconComponent={IconComponent}
+                icon={<IconComponent weight="bold" />}
                 variant="warning"
                 size="sm"
               />

@@ -4,9 +4,8 @@ import {
   accessSubnetsResourceImpactRetrieve,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
-import { AlertItem } from '@/core/AlertItem';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import Table from '@/table/Table';

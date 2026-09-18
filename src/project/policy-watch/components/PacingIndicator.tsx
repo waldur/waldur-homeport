@@ -6,10 +6,8 @@ import {
 import { CSSProperties, FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { BadgeVariant } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge, BadgeVariant } from 'waldur-ui';
 
-import { AlertItem } from '@/core/AlertItem';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { StatsCard } from '@/core/StatsCard';
 import { translate } from '@/i18n';

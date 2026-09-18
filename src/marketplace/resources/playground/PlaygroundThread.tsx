@@ -17,12 +17,11 @@ import {
 import Markdown from 'markdown-to-jsx';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 
 import { AssistantComposer } from '@/ai-assistant/components/shared/AssistantComposer';
 import { LoadingDots } from '@/ai-assistant/components/shared/LoadingDots';
 import { UserMessageShell } from '@/ai-assistant/components/shared/UserMessageShell';
-import { AlertItem } from '@/core/AlertItem';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 

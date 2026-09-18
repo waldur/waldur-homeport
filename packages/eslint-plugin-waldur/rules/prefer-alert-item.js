@@ -27,7 +27,7 @@ const RATIONALE =
   "  AlertItem takes title, body and variant ('info' | 'warning' | 'error').";
 
 // AlertItem itself, and places where a bare Bootstrap alert is deliberate.
-const ALLOWED_FILES = ['src/core/AlertItem.tsx'];
+const ALLOWED_FILES = ['packages/ui/src/AlertItem.tsx'];
 
 export default {
   meta: {
@@ -42,10 +42,10 @@ export default {
     schema: [],
     messages: {
       preferAlertItem:
-        "Prefer AlertItem from '@/core/AlertItem' over react-bootstrap's Alert.\n" +
+        "Prefer AlertItem from 'waldur-ui' over react-bootstrap's Alert.\n" +
         RATIONALE,
       preferAlertItemOverMarkup:
-        'Prefer AlertItem from \'@/core/AlertItem\' over a hand-rolled <{{ element }} className="alert">.\n' +
+        'Prefer AlertItem from \'waldur-ui\' over a hand-rolled <{{ element }} className="alert">.\n' +
         RATIONALE,
     },
   },

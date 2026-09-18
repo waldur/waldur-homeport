@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Switch } from './Switch';
 
 const meta: Meta<typeof Switch> = {
-  title: 'Primitives/Switch',
+  title: 'Forms/Switch',
   component: Switch,
   argTypes: {
     checked: { control: 'boolean' },

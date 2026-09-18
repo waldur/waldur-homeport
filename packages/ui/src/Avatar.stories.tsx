@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AvatarFallback, AvatarImage, AvatarRoot } from './Avatar';
 
 const meta: Meta<typeof AvatarRoot> = {
-  title: 'Primitives/Avatar',
+  title: 'Data Display/Avatar',
   component: AvatarRoot,
   parameters: {
     docs: {

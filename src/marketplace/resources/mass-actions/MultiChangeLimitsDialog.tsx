@@ -7,7 +7,8 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { composeValidators, required } from '@/core/validators';

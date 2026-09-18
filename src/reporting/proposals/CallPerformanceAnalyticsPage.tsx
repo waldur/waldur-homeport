@@ -1,5 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
+import { ProposalStates } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -189,7 +190,7 @@ function getProposalStateBreakdown(
   const call = calls.find((c) => c.call_uuid === callId);
   if (!call) return [];
 
-  const states = [
+  const states: Array<{ id: ProposalStates; label: string; value: number }> = [
     {
       id: 'accepted',
       label: translate('Accepted'),

@@ -8,7 +8,8 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { SelectGroup, StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';

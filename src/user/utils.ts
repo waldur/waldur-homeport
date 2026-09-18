@@ -1,4 +1,6 @@
-const ROLE_COLORS = {
+import { BadgeVariant } from 'waldur-ui';
+
+const ROLE_COLORS: Record<string, BadgeVariant> = {
   'CALL.MANAGER': 'orange',
   'CALL.REVIEWER': 'blue',
   'CUSTOMER.CALL_ORGANIZER': 'purple',
@@ -15,5 +17,5 @@ const ROLE_COLORS = {
   Reviewer: 'blue',
 };
 
-export const getRoleColor = (roleName: string) =>
-  ROLE_COLORS[roleName] || 'default';
+export const getRoleColor = (roleName: string): BadgeVariant =>
+  ROLE_COLORS[roleName] || 'neutral';

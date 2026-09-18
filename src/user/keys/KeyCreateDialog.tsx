@@ -4,8 +4,9 @@ import { Card } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { keysCreate, SshKeyRequest } from 'waldur-js-client';
 
+import { FeaturedIcon } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { required } from '@/core/validators';
 import { StringGroup, TextGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
@@ -47,8 +48,7 @@ const SshKeyRestrictionsBanner = () => {
   return (
     <Card className="card-bordered bg-light-info mb-4">
       <Card.Body className="d-flex align-items-center gap-3 p-4">
-        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-        <FeaturedIcon IconComponent={InfoIcon} variant="info" />
+        <FeaturedIcon icon={<InfoIcon weight="bold" />} variant="info" />
         <div>
           {allowedTypes.length > 0 && (
             <div>

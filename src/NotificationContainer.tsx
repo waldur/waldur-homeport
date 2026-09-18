@@ -8,10 +8,11 @@ import {
 import { FunctionComponent, useEffect } from 'react';
 import NotificationsSystem, { useNotifications } from 'reapop';
 
+import { FeaturedIcon } from 'waldur-ui';
+
 import { setGlobalNotify } from '@/store/notify';
 import { useTheme } from '@/theme/useTheme';
 
-import { FeaturedIcon } from './core/FeaturedIcon';
 import { darkTheme, lightTheme } from './notification/theme';
 
 export const NotificationContainer: FunctionComponent = () => {
@@ -31,25 +32,32 @@ export const NotificationContainer: FunctionComponent = () => {
       components={{
         NotificationIcon: (props) => (
           <div style={props.theme.notificationIcon(props.notification)}>
-            {/* eslint-disable waldur-custom/enforce-phosphor-icon-weight */}
             {props.notification.status === 'success' ? (
-              <FeaturedIcon IconComponent={CheckCircleIcon} variant="success" />
+              <FeaturedIcon
+                icon={<CheckCircleIcon weight="bold" />}
+                variant="success"
+              />
             ) : props.notification.status === 'warning' ? (
               <FeaturedIcon
-                IconComponent={WarningCircleIcon}
+                icon={<WarningCircleIcon weight="bold" />}
                 variant="warning"
               />
             ) : props.notification.status === 'error' ? (
               <FeaturedIcon
-                IconComponent={WarningOctagonIcon}
+                icon={<WarningOctagonIcon weight="bold" />}
                 variant="danger"
               />
             ) : props.notification.status === 'info' ? (
-              <FeaturedIcon IconComponent={InfoIcon} variant="dark" />
+              <FeaturedIcon
+                icon={<InfoIcon weight="bold" />}
+                variant="neutral"
+              />
             ) : props.notification.status === 'loading' ? (
-              <FeaturedIcon IconComponent={ClockCountdownIcon} variant="dark" />
+              <FeaturedIcon
+                icon={<ClockCountdownIcon weight="bold" />}
+                variant="neutral"
+              />
             ) : null}
-            {/* eslint-enable waldur-custom/enforce-phosphor-icon-weight */}
           </div>
         ),
       }}

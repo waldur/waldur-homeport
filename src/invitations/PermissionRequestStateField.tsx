@@ -1,11 +1,20 @@
-import { CheckIcon, ClockCountdownIcon, XIcon } from '@phosphor-icons/react';
+import {
+  CheckIcon,
+  ClockCountdownIcon,
+  Icon,
+  XIcon,
+} from '@phosphor-icons/react';
 import { FC } from 'react';
+import { PermissionRequest } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BadgeVariant } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
-const requestStatus = {
+const requestStatus: Record<
+  string,
+  { label: string; color: BadgeVariant; icon: Icon }
+> = {
   pending: {
     label: translate('Pending'),
     color: 'warning',
@@ -16,12 +25,14 @@ const requestStatus = {
   canceled: { label: translate('Canceled'), color: 'danger', icon: XIcon },
 };
 
-export const PermissionRequestStateField: FC<{ row }> = ({ row }) => {
+export const PermissionRequestStateField: FC<{
+  row: Pick<PermissionRequest, 'state'>;
+}> = ({ row }) => {
   const status = requestStatus[row.state];
 
   return (
     <Badge
-      variant={status?.color || 'default'}
+      variant={status?.color || 'neutral'}
       leftIcon={status ? <status.icon weight="bold" /> : null}
       shape="pill"
       tone="outline"

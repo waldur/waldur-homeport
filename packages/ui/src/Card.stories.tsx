@@ -11,7 +11,7 @@ import {
 } from './Card';
 
 const meta: Meta<typeof Card> = {
-  title: 'Primitives/Card',
+  title: 'Data Display/Card',
   component: Card,
   parameters: {
     docs: {

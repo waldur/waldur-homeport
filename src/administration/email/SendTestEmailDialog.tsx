@@ -4,7 +4,8 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { EmailGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';

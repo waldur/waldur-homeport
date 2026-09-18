@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { EventSubscription, eventSubscriptionsList } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
