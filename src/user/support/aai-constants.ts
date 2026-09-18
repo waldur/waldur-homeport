@@ -113,3 +113,23 @@ export const formatAssuranceUri = (uri: string): string => {
     return uri;
   }
 };
+
+/** The eight standard eduPerson affiliation values. Offered as suggestions
+ * only: identity providers commonly send *scoped* values
+ * (`faculty@university.example`) via voPersonExternalAffiliation, so anything
+ * outside this list has to stay typeable. */
+export const getAffiliationOptions = () => [
+  { value: 'faculty', label: translate('Faculty') },
+  { value: 'staff', label: translate('Staff') },
+  { value: 'student', label: translate('Student') },
+  { value: 'employee', label: translate('Employee') },
+  { value: 'alum', label: translate('Alumni') },
+  { value: 'member', label: translate('Member') },
+  { value: 'affiliate', label: translate('Affiliate') },
+  { value: 'library-walk-in', label: translate('Library walk-in') },
+];
+
+/** Known REFEDS assurance URIs, labelled. A deployment may require a URI no
+ * profile lists, so these are suggestions rather than a closed set. */
+export const getAssuranceLevelOptions = () =>
+  Object.entries(ASSURANCE_LABELS).map(([value, label]) => ({ value, label }));
