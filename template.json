@@ -2354,6 +2354,16 @@
       }
     }
   },
+  "Add {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "restrictions"
+    }
+  },
   "Added": {
     "context": {
       "primary_ui_type": "title",
@@ -2631,7 +2641,11 @@
     }
   },
   "Affected resource field name": {},
-  "Affiliate": {},
+  "Affiliate": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Affiliate earnings": {
     "context": {
       "feature_area": "affiliate-earnings"
@@ -3696,7 +3710,11 @@
       "feature_area": "reviewer"
     }
   },
-  "Alumni": {},
+  "Alumni": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Always included": {
     "context": {
       "primary_ui_type": "label",
@@ -3795,6 +3813,11 @@
     }
   },
   "An error occurred.": {},
+  "An extra requirement on top of the email, affiliation and identity group.": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
   "An inactive rule grants nothing and revokes the roles it granted.": {
     "context": {
       "feature_area": "sram"
@@ -4020,6 +4043,18 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "update"
+    }
+  },
+  "Applicant eligibility": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "update"
+    }
+  },
+  "Applicant eligibility has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "eligibility"
     }
   },
   "Applicant explicitly accepts or declines the award before provisioning.": {},
@@ -9256,6 +9291,11 @@
   "Checked": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Checked when a proposal is created": {
+    "context": {
+      "feature_area": "eligibility"
     }
   },
   "Checked {checked} reviewers, generated {created} suggestions.": {
@@ -16078,6 +16118,11 @@
       "action_type": "read"
     }
   },
+  "Drafts started before a restriction was added are not re-checked, and eligibility does not limit who may join the project once the proposal is granted. Values are matched exactly against what the identity provider sends: a scoped affiliation arrives looking like faculty@university.example.": {
+    "context": {
+      "feature_area": "eligibility"
+    }
+  },
   "Drawable today": {
     "context": {
       "primary_ui_type": "label",
@@ -17166,7 +17211,11 @@
     }
   },
   "Emit one log line per OpenStack HTTP call on logger `waldur_openstack.calls` (method, host+path, status, elapsed ms, originating backend action). Useful for diagnosing slow tenant operations; off by default because chatty under steady-state load.": {},
-  "Employee": {},
+  "Employee": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Employment": {
     "context": {
       "primary_ui_type": "label"
@@ -19261,7 +19310,11 @@
     }
   },
   "FK to Waldur Customer (organization)": {},
-  "Faculty": {},
+  "Faculty": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Failed": {
     "context": {
       "primary_ui_type": "label",
@@ -25722,7 +25775,11 @@
       "feature_area": "views"
     }
   },
-  "Library walk-in": {},
+  "Library walk-in": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "License": {
     "context": {
       "primary_ui_type": "title",
@@ -41345,6 +41402,11 @@
       "feature_area": "create"
     }
   },
+  "Regular expressions matched against the applicant’s email, such as @university\\.example$": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
   "Regular user": {
     "context": {
       "feature_area": "support"
@@ -44093,6 +44155,7 @@
       "feature_area": "service-providers"
     }
   },
+  "Restricts who may submit a proposal. Email patterns, user affiliations and identity sources form a single group: an applicant matching any one value in it passes. Nationalities and organization types are each checked on top of that, and every assurance level listed is required. A field left empty is not checked, and only attributes this deployment collects are listed.": {},
   "Result": {
     "context": {
       "primary_ui_type": "label",
@@ -46928,6 +46991,11 @@
       "feature_area": "support-users"
     }
   },
+  "Select or type a value": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
   "Select or type to add tags...": {
     "context": {
       "feature_area": "overview"
@@ -49659,6 +49727,11 @@
       "feature_area": "proposals"
     }
   },
+  "Standard eduPerson values are suggested; scoped values can be typed in.": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
   "Standard — adds headings, links, quote": {
     "context": {
       "primary_ui_type": "label"
@@ -50067,7 +50140,11 @@
     }
   },
   "Structural attachment (interface, port, instance NIC).": {},
-  "Student": {},
+  "Student": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Style of sidebar.": {},
   "Sub-domains": {
     "context": {
@@ -51916,6 +51993,11 @@
       "feature_area": "announcements"
     }
   },
+  "The applicant must hold every level listed, not just one of them.": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
   "The applicant of each proposal": {},
   "The assistant is at capacity today. Please try again tomorrow.": {
     "context": {
@@ -52290,6 +52372,11 @@
     }
   },
   "The instance will be stopped if it is running. Existing backups and volume snapshots will be deleted.": {},
+  "The institution that authenticated the applicant, exactly as reported at login.": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
   "The invoice has been marked as paid.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -53447,6 +53534,11 @@
   "This deletes the RabbitMQ queue and broker user of this consumer. The client will stop receiving events until it registers again. Continue?": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "This deployment does not collect this attribute, so no applicant can match these values. Clear them to stop turning every applicant away.": {
+    "context": {
+      "feature_area": "restrictions"
     }
   },
   "This deployment requires a passkey for administrator accounts. Add one now to carry on — it takes a moment, and you can use your device screen lock or a security key.": {
@@ -55332,9 +55424,24 @@
       "feature_area": "quick-shortcuts"
     }
   },
+  "Type a pattern and press Enter": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
   "Type a value and press Enter": {
     "context": {
       "feature_area": "sram"
+    }
+  },
+  "Type a value to add it": {
+    "context": {
+      "feature_area": "restrictions"
+    }
+  },
+  "Type an identity source and press Enter": {
+    "context": {
+      "feature_area": "restrictions"
     }
   },
   "Type handling": {
@@ -59191,6 +59298,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "announcements"
+    }
+  },
+  "Unable to update applicant eligibility.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "eligibility"
     }
   },
   "Unable to update attribute": {

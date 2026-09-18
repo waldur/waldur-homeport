@@ -30,6 +30,7 @@ import { CallResourceTemplates } from './configuration/CallResourceTemplates';
 import { GeneralConfigurationSection } from './configuration/GeneralConfigurationSection';
 import { ProposalFieldsSection } from './configuration/ProposalFieldsSection';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
+import { CallEligibilitySection } from './eligibility/CallEligibilitySection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { MatchingSection } from './matching/MatchingSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
@@ -101,6 +102,11 @@ const Body = ({ call, refetch, loading }) => {
               key: 'applicant-visibility',
               title: translate('Applicant data visibility'),
               component: ApplicantVisibilitySection,
+            },
+            {
+              key: 'applicant-eligibility',
+              title: translate('Applicant eligibility'),
+              component: CallEligibilitySection,
             },
             {
               key: 'resource-templates',
