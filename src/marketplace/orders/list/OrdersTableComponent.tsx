@@ -10,12 +10,17 @@ import { Badge } from 'waldur-ui';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import {
+  limitEntries,
+  PublicResourcesLimits,
+} from '@/marketplace/resources/list/PublicResourcesLimits';
 import { TableDropdownToggle } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table, { TableColumns } from '@/table/Table';
 import { TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { OrderProviderActions } from '../actions/OrderProviderActions';
 import { shouldHideProviderActions } from '../actions/selectors';
@@ -179,6 +184,18 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
         uuid: row.customer_uuid,
       }),
       id: 'client_organization',
+      optional: true,
+    },
+    {
+      // Requested component limits: what a reviewer needs in order to approve,
+      // and otherwise one page load per order. Exported as a flat "key: value"
+      // list rather than the raw dict so a review spreadsheet stays readable.
+      title: translate('Limits'),
+      render: PublicResourcesLimits,
+      export: (row) => renderFieldOrDash(limitEntries(row.limits).join(', ')),
+      keys: ['limits'],
+      exportKeys: ['limits'],
+      id: 'limits',
       optional: true,
     },
     {
