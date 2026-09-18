@@ -1,6 +1,7 @@
 import { BellIcon, QuestionIcon, SquaresFourIcon } from '@phosphor-icons/react';
 import { ReactNode } from 'react';
 import { translate } from 'waldur-i18n-runtime';
+import { NotificationProvider } from 'waldur-notifications';
 import {
   IconButton,
   SearchField,
@@ -120,69 +121,77 @@ function AppShellContent({
   children,
 }: AppShellProps) {
   return (
-    <SidebarProvider
-      className="h-svh w-full text-[var(--surface-text-primary)]"
-      style={{ backgroundColor: 'var(--surface-page-bg)' }}
-    >
-      <Sidebar>
-        <SidebarHeader className="gap-4">
-          <SidebarBrand
-            logo={logo}
-            onShortcutsClick={onShortcutsClick}
-            shortcutsLabel={translate('Quick shortcuts')}
+    <>
+      {/* Standalone, not a wrapper — NotifyService/useNotify write to
+          toastStore directly rather than through this subtree, the same
+          way waldur-homeport's own NotificationContainer is a sibling of
+          UIView rather than its ancestor. Every micro-app gets a working
+          toast stack for free, matching ShellErrorBoundary below. */}
+      <NotificationProvider />
+      <SidebarProvider
+        className="h-svh w-full text-[var(--surface-text-primary)]"
+        style={{ backgroundColor: 'var(--surface-page-bg)' }}
+      >
+        <Sidebar>
+          <SidebarHeader className="gap-4">
+            <SidebarBrand
+              logo={logo}
+              onShortcutsClick={onShortcutsClick}
+              shortcutsLabel={translate('Quick shortcuts')}
+            />
+            {sidebarHeader}
+          </SidebarHeader>
+          <SidebarContent>{sidebarContent}</SidebarContent>
+        </Sidebar>
+
+        <SidebarInset className="min-h-0">
+          <TopBar
+            left={orgSwitcher}
+            center={
+              topBarCenter === null
+                ? undefined
+                : (topBarCenter ?? (
+                    <SearchField
+                      placeholder={translate('Search')}
+                      // '⌘K' isn't translatable content, just the universal
+                      // shortcut-key convention — not worth a prop until an
+                      // app actually needs a different one.
+                      shortcutHint="⌘K"
+                      className="hidden md:flex"
+                    />
+                  ))
+            }
+            right={
+              <>
+                <IconButton
+                  icon={<SquaresFourIcon size={18} weight="bold" />}
+                  label={translate('Apps')}
+                  className="hidden sm:flex"
+                  onClick={onAppsClick}
+                />
+                <IconButton
+                  icon={<QuestionIcon size={18} weight="bold" />}
+                  label={translate('Help')}
+                  className="hidden sm:flex"
+                  onClick={onHelpClick}
+                />
+                <IconButton
+                  icon={<BellIcon size={18} weight="bold" />}
+                  label={translate('Notifications')}
+                  hasIndicator={hasNotifications}
+                  onClick={onNotificationsClick}
+                />
+                <UserMenu />
+              </>
+            }
           />
-          {sidebarHeader}
-        </SidebarHeader>
-        <SidebarContent>{sidebarContent}</SidebarContent>
-      </Sidebar>
 
-      <SidebarInset className="min-h-0">
-        <TopBar
-          left={orgSwitcher}
-          center={
-            topBarCenter === null
-              ? undefined
-              : (topBarCenter ?? (
-                  <SearchField
-                    placeholder={translate('Search')}
-                    // '⌘K' isn't translatable content, just the universal
-                    // shortcut-key convention — not worth a prop until an
-                    // app actually needs a different one.
-                    shortcutHint="⌘K"
-                    className="hidden md:flex"
-                  />
-                ))
-          }
-          right={
-            <>
-              <IconButton
-                icon={<SquaresFourIcon size={18} weight="bold" />}
-                label={translate('Apps')}
-                className="hidden sm:flex"
-                onClick={onAppsClick}
-              />
-              <IconButton
-                icon={<QuestionIcon size={18} weight="bold" />}
-                label={translate('Help')}
-                className="hidden sm:flex"
-                onClick={onHelpClick}
-              />
-              <IconButton
-                icon={<BellIcon size={18} weight="bold" />}
-                label={translate('Notifications')}
-                hasIndicator={hasNotifications}
-                onClick={onNotificationsClick}
-              />
-              <UserMenu />
-            </>
-          }
-        />
-
-        <div className="flex flex-1 flex-col overflow-y-auto">
-          <ShellErrorBoundary>{children}</ShellErrorBoundary>
-        </div>
-        {footer}
-      </SidebarInset>
-    </SidebarProvider>
+          <div className="flex flex-1 flex-col overflow-y-auto">
+            <ShellErrorBoundary>{children}</ShellErrorBoundary>
+          </div>
+          {footer}
+        </SidebarInset>
+      </SidebarProvider>
+    </>
   );
 }

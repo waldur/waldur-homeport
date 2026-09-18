@@ -33,6 +33,9 @@ export type {
   AlertItemVariant,
 } from './AlertItem';
 
+export { Toast, ToastProvider, ToastViewport } from './Toast';
+export type { ToastAction, ToastProps } from './Toast';
+
 export {
   Table,
   TableBody,

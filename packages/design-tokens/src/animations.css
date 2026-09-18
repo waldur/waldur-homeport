@@ -77,6 +77,38 @@
   }
 }
 
+/**
+ * Toast enter/exit — a plain slide-in-from-the-right + fade, and its
+ * reverse. There's no legacy Bootstrap toast to match parity against here
+ * (unlike the modal keyframes above), so these are a from-scratch pick
+ * rather than a measured value: right, since that's also the Toast
+ * Provider's swipeDirection, so an entering and a dismissed-by-swipe toast
+ * travel the same axis. Also plays for a completed swipe dismissal, not
+ * just the timer/close-button case — see Toast.tsx's own comment on why a
+ * swipe-specific exit isn't worth the extra keyframe.
+ */
+@keyframes waldur-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes waldur-toast-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-waldur-animated] {
     animation-duration: 0.01ms !important;
