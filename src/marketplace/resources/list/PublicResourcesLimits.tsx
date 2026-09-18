@@ -1,8 +1,18 @@
-import { Resource } from 'waldur-js-client';
+import { Limits } from '@/marketplace/common/types';
 
-export const PublicResourcesLimits = ({ row }: { row: Resource }) => {
-  if (!row.limits || !Object.keys(row.limits).length) return 'N/A';
-  const keyValues = Object.entries(row.limits).map((entry) => entry.join(': '));
+// Exported so a table's `export` can emit the same text the cell renders.
+export const limitEntries = (limits?: Limits | null) =>
+  limits ? Object.entries(limits).map((entry) => entry.join(': ')) : [];
+
+// Takes any row carrying `limits` — a marketplace Resource or an
+// OrderDetails — because the cell reads nothing else off the row.
+export const PublicResourcesLimits = ({
+  row,
+}: {
+  row: { limits?: Limits | null };
+}) => {
+  const keyValues = limitEntries(row.limits);
+  if (!keyValues.length) return 'N/A';
   return (
     <div className="text-nowrap">
       {keyValues.map((keyValue, index) => (
