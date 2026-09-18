@@ -2,14 +2,15 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
+
 import { RadialBg } from '@/navigation/header/search/RadialBg';
 
 interface ModalDialogProps {
   title?: ReactNode;
   subtitle?: ReactNode;
   iconNode?: ReactNode;
-  iconColor?: string;
+  iconColor?: FeaturedIconVariant;
   footer?: ReactNode;
   closeButton?: boolean;
   className?: string;
@@ -60,9 +61,9 @@ export const ModalDialog: FC<ModalDialogProps> = ({
             <>
               <RadialBg className="icon-background" />
               <FeaturedIcon
-                IconComponent={iconNode}
+                icon={iconNode}
                 variant={iconColor}
-                solid
+                tone="solid"
                 size="lg"
                 className="modal-icon mb-6"
               />

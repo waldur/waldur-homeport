@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { ENV } from '@/core/config';
 import { format } from '@/core/ErrorMessageFormatter';

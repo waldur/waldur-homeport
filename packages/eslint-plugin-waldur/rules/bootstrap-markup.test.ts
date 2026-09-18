@@ -96,7 +96,7 @@ describe('prefer-alert-item', () => {
       { code: 'const A = () => <div role="alert" />;' },
       {
         code: 'const A = () => <div className="alert alert-danger" />;',
-        filename: 'src/core/AlertItem.tsx',
+        filename: 'packages/ui/src/AlertItem.tsx',
       },
     ],
     invalid: [

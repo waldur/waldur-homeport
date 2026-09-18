@@ -21,6 +21,9 @@ export const AnnouncementTypeOptions = [
   },
 ];
 
+// `as const` keeps `.variant` a literal type (FeaturedIconVariant, not the
+// widened `string` an object literal defaults to) — it flows into
+// ModalDialog's `iconColor` prop via AnnouncementDetailsDialog.tsx.
 export const ANNOUNCEMENT_ICON = {
   warning: {
     icon: WarningCircleIcon,
@@ -32,9 +35,9 @@ export const ANNOUNCEMENT_ICON = {
   },
   information: {
     icon: InfoIcon,
-    variant: 'dark',
+    variant: 'neutral',
   },
-};
+} as const;
 
 export const getAnnouncementTypeLabel = (type) =>
   AnnouncementTypeOptions.find((op) => op.value === type)?.label || type;

@@ -7,8 +7,9 @@ import {
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
+import { AlertItem } from 'waldur-ui';
+
 import { useComposerSeed } from '@/ai-assistant/hooks/useComposerSeed';
-import { AlertItem } from '@/core/AlertItem';
 import { translate } from '@/i18n';
 
 interface Props {

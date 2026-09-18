@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import React, { FC, PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 

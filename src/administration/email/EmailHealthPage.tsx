@@ -2,7 +2,8 @@ import { PaperPlaneTiltIcon, PlugsConnectedIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';

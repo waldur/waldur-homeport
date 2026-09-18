@@ -1,6 +1,6 @@
-import { CSSProperties, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import type { BadgeVariant } from './Badge';
+import { BADGE_STYLES, type BadgeVariant } from './Badge';
 import { cn } from './cn';
 import {
   Dialog,
@@ -101,18 +101,10 @@ const ModePickerOption = ({
   >
     {mode.icon && (
       <span
-        // Same indirection Badge.tsx uses: the variant's own token pair is
-        // assigned to two scoped custom properties, so one static pair of
-        // Tailwind classes can read whichever variant is in play — a class
-        // name built from a template literal would be invisible to
-        // Tailwind's static analysis.
-        style={
-          {
-            '--mode-icon-bg': `var(--badge-${mode.variant ?? 'primary'}-light-bg)`,
-            '--mode-icon-text': `var(--badge-${mode.variant ?? 'primary'}-light-text)`,
-          } as CSSProperties
-        }
-        className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[var(--mode-icon-bg)] text-[var(--mode-icon-text)]"
+        className={cn(
+          'flex size-10 shrink-0 items-center justify-center rounded-lg',
+          BADGE_STYLES[mode.variant ?? 'primary'].light,
+        )}
       >
         {mode.icon}
       </span>

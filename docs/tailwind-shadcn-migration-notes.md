@@ -227,6 +227,29 @@ Tailwind's `dark:` variant is `@custom-variant dark
 remains the source of truth for Bootstrap/Metronic styling; `data-theme` is
 additive.
 
+## AlertItem (Tailwind rebuild & Legacy retired)
+
+`packages/ui/src/AlertItem.tsx` (exported from `waldur-ui`). Replaces the legacy
+Bootstrap/Metronic component from `src/core/AlertItem.tsx` with pure Tailwind
+utilities and surface design tokens. The legacy component (`AlertItem.tsx` and
+`AlertItem.scss`) has been retired, and all ~35 production call sites across `src/`
+now import directly from `waldur-ui`.
+
+- **Pure Tailwind utilities**: No `.alert-item` or Bootstrap classes.
+  All styling is done via explicit Tailwind utilities (`flex`, `gap-[0.846rem]`,
+  `p-[1.23rem]`, `py-[1.23rem] px-0`, `rounded-[0.475rem]`, etc.).
+- **Typography**: Uses `text-[1.077rem]` and `font-medium` (500) with
+  `leading-[1.43]` on the title (`<h6>`) and `text-[1.077rem] font-normal text-[var(--surface-text-secondary)]`
+  on the body. This matches Metronic's `$font-weight-bold: 500`, `$font-size-6: 1.077rem`,
+  and `--bs-body-line-height: 1.43` dynamically across all viewports (including below `lg`
+  where root font-size scales to 12px, as well as desktop 13px).
+- **Actions slot spacing**: Metronic's `$spacers: (4: $spacer * 0.154 * 6)`
+  computed to 0.924rem (12.012px @ 13px root), mapped here as `gap-[0.924rem] pr-[2px] items-start`.
+- **Border colors**: Uses `--surface-card-border` (`#E4E7EC` light, `#1F242F` dark),
+  matching Metronic's `--bs-border-color` in both themes.
+- **Lint rule**: `packages/eslint-plugin-waldur/rules/prefer-alert-item.js`
+  steers call sites toward `import { AlertItem } from 'waldur-ui'`.
+
 ## BaseButton (Tailwind rebuild)
 
 `packages/ui/src/BaseButton.tsx`. Colors come from

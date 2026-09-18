@@ -23,7 +23,7 @@
    motion — this is for packages/ui's Radix Dialog/Sheet primitives.
    Keyframe names are namespaced, so nothing else picks them up. */
 @import 'waldur-design-tokens/animations.css';
-@import 'waldur-design-tokens/badgeColors.css';
+@import 'waldur-design-tokens/colors.css';
 
 /* Preflight's one rule that Bootstrap has no counterpart for, and so the
    only part of it that actually reaches the app:
@@ -202,24 +202,6 @@
 
 @theme {
   --font-sans: var(--waldur-font-family), Helvetica, sans-serif;
-
-  /* Token bridge, not new colors — points at CSS custom properties the app
-     already sets at runtime (afterBootstrap.tsx's initCssVariables) or
-     compiles per-theme (_root.scss), so BRAND_COLOR/theme changes re-theme
-     these with zero code here changing. */
-  --color-brand-25: var(--waldur-brand-25);
-  --color-brand-50: var(--waldur-brand-50);
-  --color-brand-100: var(--waldur-brand-100);
-  --color-brand-200: var(--waldur-brand-200);
-  --color-brand-300: var(--waldur-brand-300);
-  --color-brand-400: var(--waldur-brand-400);
-  --color-brand-500: var(--waldur-brand-500);
-  --color-brand-600: var(--waldur-brand-600);
-  --color-brand-700: var(--waldur-brand-700);
-  --color-brand-800: var(--waldur-brand-800);
-  --color-brand-900: var(--waldur-brand-900);
-  --color-brand-950: var(--waldur-brand-950);
-  --color-brand: var(--waldur-brand-color);
 
   --color-bg-primary: var(--waldur-bg-primary);
   --color-border-secondary: var(--waldur-border-secondary);

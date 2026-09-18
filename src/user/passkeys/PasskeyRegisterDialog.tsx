@@ -1,7 +1,8 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Form } from 'react-final-form';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { StringGroup } from '@/form';

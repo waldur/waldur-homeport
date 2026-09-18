@@ -266,7 +266,8 @@
     "overrides": [
       {
         "files": [
-          "src/tailwind.css"
+          "src/tailwind.css",
+          "packages/design-tokens/src/colors.css"
         ],
         "rules": {
           "scss/at-rule-no-unknown": [

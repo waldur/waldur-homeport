@@ -2,6 +2,8 @@ import { FormApi } from 'final-form';
 import { FC, ReactNode } from 'react';
 import { FormRenderProps } from 'react-final-form';
 
+import { FeaturedIconVariant } from 'waldur-ui';
+
 import { ProgressStep } from '@/wizard';
 
 /**
@@ -44,7 +46,7 @@ export interface WizardStepProps extends FormRenderProps<any, any> {
   /** Optional props to pass to the modal */
   modalProps?: {
     iconNode?: ReactNode;
-    iconColor?: string;
+    iconColor?: FeaturedIconVariant;
     headerClassName?: string;
     bodyClassName?: string;
   };

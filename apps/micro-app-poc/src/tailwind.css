@@ -16,7 +16,7 @@
    than transitions. Values are waldur-homeport's real Bootstrap modal
    motion. */
 @import 'waldur-design-tokens/animations.css';
-@import 'waldur-design-tokens/badgeColors.css';
+@import 'waldur-design-tokens/colors.css';
 
 /* Same override as the main app's own src/tailwind.css: OrgDashboardMock.tsx
    sets data-theme via the shared waldur/theme/name localStorage key, not an

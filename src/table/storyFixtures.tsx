@@ -1,9 +1,7 @@
 import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 
-import { BadgeVariant } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge, BadgeVariant } from 'waldur-ui';
 
-import { AlertItem } from '@/core/AlertItem';
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { ModelCard1 } from '@/core/ModelCard1';
 import { Field } from '@/resource/summary';

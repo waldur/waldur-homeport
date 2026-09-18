@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { Invitation, RoleType } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
 

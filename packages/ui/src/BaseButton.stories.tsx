@@ -72,7 +72,7 @@ const meta: Meta<typeof BaseButton> = {
   // (the Bootstrap original) in the Storybook sidebar for side-by-side
   // browsing, even though this component now lives in a different
   // package — pure UI-organization choice, unrelated to file location.
-  title: 'Primitives/BaseButton',
+  title: 'Actions/BaseButton',
   component: BaseButton,
   parameters: {
     // Every per-state color choice was verified empirically against the

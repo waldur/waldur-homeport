@@ -11,8 +11,9 @@ import {
   UserRoleDetails,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
-import { AlertItem } from '@/core/AlertItem';
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { formatDate, formatISODate } from '@/core/dateUtils';

@@ -2,9 +2,8 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 
-import { AlertItem } from '@/core/AlertItem';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { StatsCard } from '@/core/StatsCard';
 import { WidgetCard } from '@/dashboard/WidgetCard';

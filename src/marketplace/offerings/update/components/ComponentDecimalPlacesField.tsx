@@ -2,7 +2,8 @@ import React from 'react';
 import { useFormState } from 'react-final-form';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 

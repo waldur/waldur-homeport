@@ -4,9 +4,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, FeaturedIcon } from 'waldur-ui';
 
-import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { translate } from '@/i18n';
@@ -39,13 +38,11 @@ import { WorkflowStepsSection } from './workflow-steps/WorkflowStepsSection';
 
 const PageHero = ({ call, refetch }) => (
   <>
-    {/* FeaturedIcon is used inline in the warning banner, not as an icon component.
-       The WarningCircleIcon weight is set on the component import, not the JSX prop. */}
-    {/* eslint-disable waldur-custom/enforce-featured-icon, waldur-custom/enforce-phosphor-icon-weight */}
+    {/* eslint-disable waldur-custom/enforce-featured-icon */}
     {call.state === 'archived' && (
       <div className="d-flex align-items-center gap-3 bg-light-warning text-warning border-bottom py-3 px-8">
         <FeaturedIcon
-          IconComponent={WarningCircleIcon}
+          icon={<WarningCircleIcon weight="bold" />}
           size="sm"
           variant="warning"
         />
@@ -63,7 +60,7 @@ const PageHero = ({ call, refetch }) => (
       </div>
     )}
     {/* Re-enable lint rules after the archived banner section */}
-    {/* eslint-enable waldur-custom/enforce-featured-icon, waldur-custom/enforce-phosphor-icon-weight */}
+    {/* eslint-enable waldur-custom/enforce-featured-icon */}
     <div className="container-fluid my-5">
       <CallTabs call={call} />
       <CallUpdateHero call={call} refetch={refetch} />
@@ -118,7 +115,6 @@ const Body = ({ call, refetch, loading }) => {
           key: 'rounds',
           title: (
             <>
-              {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
               {!call.rounds.length && <ValidationIcon value={false} />}
               {translate('Rounds')}
             </>

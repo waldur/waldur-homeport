@@ -1,9 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import { staffPasskeysList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
-import { AlertItem } from '@/core/AlertItem';
 import { formatDate, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';

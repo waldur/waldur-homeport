@@ -6,9 +6,10 @@ import {
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { Card, Form } from 'react-bootstrap';
 
+import { FeaturedIcon } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -50,8 +51,10 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
     >
       <Card className="card-bordered bg-light-warning mb-4">
         <Card.Body className="d-flex align-items-center gap-3 p-4">
-          {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-          <FeaturedIcon IconComponent={WarningCircleIcon} variant="warning" />
+          <FeaturedIcon
+            icon={<WarningCircleIcon weight="bold" />}
+            variant="warning"
+          />
           <div>
             <div className="fw-bold">
               {translate(

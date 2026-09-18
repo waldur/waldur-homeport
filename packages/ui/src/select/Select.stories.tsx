@@ -21,7 +21,7 @@ const ORG_OPTIONS = [
 ];
 
 const meta: Meta<typeof Select> = {
-  title: 'Primitives/Select',
+  title: 'Forms/Select',
   component: Select,
   argTypes: {
     size: { control: 'select', options: [undefined, 'sm'] },

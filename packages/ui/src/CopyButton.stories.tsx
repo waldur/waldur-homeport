@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CopyButton } from './CopyButton';
 
 const meta: Meta<typeof CopyButton> = {
-  title: 'Primitives/CopyButton',
+  title: 'Actions/CopyButton',
   component: CopyButton,
   argTypes: {
     value: { control: 'text' },

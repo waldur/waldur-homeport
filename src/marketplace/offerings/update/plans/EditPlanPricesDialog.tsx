@@ -7,7 +7,8 @@ import {
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { resolvePlanComponents } from '@/marketplace/details/plan/effectiveComponents';

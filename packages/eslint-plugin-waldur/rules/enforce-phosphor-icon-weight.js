@@ -59,6 +59,28 @@ function isInPhosphorImport(context, iconName) {
   return importRegex.test(text);
 }
 
+// Real, unrelated components legitimately named "*Icon" (FeaturedIcon,
+// CountryFlagIcon, ValidationIcon, ...) false-positive `notPhosphorIcon`
+// below in any file that also imports a real Phosphor icon — the
+// `endsWith('Icon')` heuristic can't tell "wrong import" from "correctly
+// imported, just also ends in Icon". If the element name is imported (named
+// or default) from anywhere other than @phosphor-icons/react, it's
+// evidently an intentional, correctly-sourced component, not a mis-imported
+// icon — skip the warning rather than require a disable comment at every
+// call site.
+function isImportedFromElsewhere(context, elementName) {
+  const sourceCode = context.getSourceCode();
+  const text = sourceCode.getText();
+
+  const namedImport = new RegExp(
+    `import\\s*{[^}]*\\b${elementName}\\b[^}]*}\\s*from\\s*['"](?!@phosphor-icons/react)[^'"]+['"]`,
+  );
+  const defaultImport = new RegExp(
+    `import\\s+${elementName}\\s+from\\s*['"](?!@phosphor-icons/react)[^'"]+['"]`,
+  );
+  return namedImport.test(text) || defaultImport.test(text);
+}
+
 const RECOMMENDED_WEIGHTS = [
   'thin',
   'light',
@@ -122,7 +144,10 @@ export default {
         // Check if this icon is actually imported from Phosphor
         if (!isInPhosphorImport(context, elementName)) {
           // It's an icon-like element but not from Phosphor - warn if appropriate
-          if (hasPhosphorImport(context)) {
+          if (
+            hasPhosphorImport(context) &&
+            !isImportedFromElsewhere(context, elementName)
+          ) {
             context.report({
               node: node.openingElement.name,
               messageId: 'notPhosphorIcon',

@@ -2,7 +2,8 @@ import { FunctionComponent } from 'react';
 import { Form } from 'react-final-form';
 import { staffPasskeysRevoke } from 'waldur-js-client';
 
-import { AlertItem } from '@/core/AlertItem';
+import { AlertItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { TextGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
