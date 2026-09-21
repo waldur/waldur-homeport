@@ -46,3 +46,25 @@ export function applyTheme(
 ) {
   target.setAttribute('data-theme', theme);
 }
+
+/**
+ * The theme currently applied to `target`'s data-theme attribute, the
+ * counterpart of applyTheme(). Anything other than "dark", including a missing
+ * attribute (before the first applyTheme()) or no DOM, is "light".
+ *
+ * A snapshot read straight from the DOM, for code that cannot use a theme
+ * context: a canvas chart, a third-party widget. Re-read it when the theme
+ * changes.
+ */
+export function getAppliedTheme(
+  target: HTMLElement | undefined = typeof document === 'undefined'
+    ? undefined
+    : document.documentElement,
+): ThemeName {
+  return target?.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+}
+
+/** Whether the applied theme is "dark". See getAppliedTheme(). */
+export function isDarkTheme(target?: HTMLElement): boolean {
+  return getAppliedTheme(target) === 'dark';
+}

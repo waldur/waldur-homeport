@@ -65,6 +65,23 @@ things in dark mode (see `src/tailwind.css` for the re-point). Retiring the SCSS
 separate, larger step: it depends on every `$gray-N` reader in theme-sensitive SCSS first
 moving to semantic tokens.
 
+## Reading a token in code
+
+For code that cannot take `var(--x)` directly (a canvas chart, a third-party widget), read the
+resolved value instead of hard-coding a hex or repeating `getComputedStyle(...)`:
+
+```ts
+import { getCssVar, isDarkTheme } from 'waldur-design-tokens';
+import { useResolvedVar } from 'waldur-design-tokens/react';
+
+getCssVar('--waldur-brand-600', '#307300'); // trimmed; the fallback covers unset or no DOM
+const value = useResolvedVar('--color-gray-500'); // React state, re-read when <html>'s style or data-theme changes
+isDarkTheme(); // the theme applied to <html>, for code that has no theme context
+```
+
+`getCssVar` and `isDarkTheme` are snapshots, so re-read them when the theme or brand colour changes. `useResolvedVar` is
+its own entry point so the main one stays free of React.
+
 ## Seeing the tokens
 
 Storybook, group **Foundations**, stories in `packages/design-tokens/src/*.stories.tsx`:
