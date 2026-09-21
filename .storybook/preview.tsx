@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 import { useEffect } from 'react';
+import { sb } from 'storybook/test';
 
 import { generateBrandColors, hexToRgb } from 'waldur-design-tokens';
 
@@ -7,6 +8,9 @@ import { getBrandColor } from '@/core/utils';
 import { loadTheme } from '@/theme/utils';
 
 import '../src/tailwind.css';
+
+// Redirects @/core/api to src/core/__mocks__/api.ts: same API, fixture icons.
+sb.mock(import('../src/core/api.ts'));
 
 /**
  * Seeds --waldur-brand-* the same way afterBootstrap.tsx's
