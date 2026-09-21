@@ -7,6 +7,8 @@ import {
   OpenstackHypervisorsListData,
 } from 'waldur-js-client';
 
+import { getCssVar } from 'waldur-design-tokens';
+
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -16,14 +18,12 @@ import { computeUsage, formatMemory } from './utils';
 
 const useChartPalette = () =>
   useMemo(() => {
-    const get = (name: string) =>
-      getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     return {
-      used: get('--waldur-utility-indigo-400'),
-      available: get('--waldur-utility-blue-400'),
-      total: get('--waldur-utility-teal-400'),
-      warning: get('--waldur-utility-warning-400'),
-      empty: get('--waldur-utility-gray-300'),
+      used: getCssVar('--waldur-utility-indigo-400'),
+      available: getCssVar('--waldur-utility-blue-400'),
+      total: getCssVar('--waldur-utility-teal-400'),
+      warning: getCssVar('--waldur-utility-warning-400'),
+      empty: getCssVar('--waldur-utility-gray-300'),
     };
   }, []);
 

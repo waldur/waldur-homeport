@@ -1,19 +1,14 @@
 import mermaid from 'mermaid';
 import { FC, useEffect, useId, useState } from 'react';
 
+import { getCssVar, isDarkTheme } from 'waldur-design-tokens';
+
 import { translate } from '@/i18n';
 
 interface MermaidChartProps {
   code: string;
   className?: string;
 }
-
-// Helper to get CSS variable value
-const getCssVar = (name: string): string => {
-  return getComputedStyle(document.documentElement)
-    .getPropertyValue(name)
-    .trim();
-};
 
 // Dark mode fallback colors (from _colors.scss)
 const DARK_GRAYS = {
@@ -58,32 +53,31 @@ const initMermaid = () => {
     },
   ]);
 
-  const isDarkMode =
-    document.documentElement.getAttribute('data-theme') === 'dark';
+  const isDarkMode = isDarkTheme();
 
   const grays = isDarkMode ? DARK_GRAYS : LIGHT_GRAYS;
 
   // In dark mode, brand colors are inverted:
   // light 100 -> dark 800, light 200 -> dark 700, etc.
   const primaryColor = isDarkMode
-    ? getCssVar('--waldur-brand-800') || '#1f5000'
-    : getCssVar('--waldur-brand-100') || '#e6f0e3';
+    ? getCssVar('--waldur-brand-800', '#1f5000')
+    : getCssVar('--waldur-brand-100', '#e6f0e3');
 
   const primaryBorderColor = isDarkMode
-    ? getCssVar('--waldur-brand-500') || '#398500'
-    : getCssVar('--waldur-brand-400') || '#6ca359';
+    ? getCssVar('--waldur-brand-500', '#398500')
+    : getCssVar('--waldur-brand-400', '#6ca359');
 
   const secondaryColor = isDarkMode
-    ? getCssVar('--waldur-brand-900') || '#174000'
-    : getCssVar('--waldur-brand-50') || '#f1f7ef';
+    ? getCssVar('--waldur-brand-900', '#174000')
+    : getCssVar('--waldur-brand-50', '#f1f7ef');
 
   const secondaryBorderColor = isDarkMode
-    ? getCssVar('--waldur-brand-700') || '#286100'
-    : getCssVar('--waldur-brand-200') || '#c3dabb';
+    ? getCssVar('--waldur-brand-700', '#286100')
+    : getCssVar('--waldur-brand-200', '#c3dabb');
 
   const clusterBorderColor = isDarkMode
-    ? getCssVar('--waldur-brand-600') || '#307300'
-    : getCssVar('--waldur-brand-300') || '#97bf89';
+    ? getCssVar('--waldur-brand-600', '#307300')
+    : getCssVar('--waldur-brand-300', '#97bf89');
 
   // Text colors - in dark mode use light grays
   const primaryTextColor = grays[isDarkMode ? 100 : 800];

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { generateBrandColors } from 'waldur-design-tokens';
+import { generateBrandColors, getCssVar } from 'waldur-design-tokens';
 
 import { getBrandColor } from '@/core/utils';
 import { useTheme } from '@/theme/useTheme';
@@ -17,20 +17,12 @@ import { useTheme } from '@/theme/useTheme';
  * color and never drift back to off-theme palettes.
  */
 /**
- * Reads a CSS custom property off the document root. The light and dark themes
- * ship as separate stylesheets that define the same variable names, so anything
+ * Colours below are read with getCssVar(). The light and dark themes ship as
+ * separate stylesheets that define the same variable names, so anything
  * resolved this way follows the active theme — charts draw onto a canvas and
  * cannot use the variables directly. Callers must recompute when the theme
  * changes; `useChartThemeColors` does that for them.
  */
-const cssVar = (name: string, fallback: string): string => {
-  if (typeof document === 'undefined') return fallback;
-  const value = getComputedStyle(document.documentElement)
-    .getPropertyValue(name)
-    .trim();
-  return value || fallback;
-};
-
 export const getChartThemeColors = () => {
   const brand = generateBrandColors(getBrandColor());
   return {
@@ -39,17 +31,17 @@ export const getChartThemeColors = () => {
     brand500: brand[500],
     brand600: brand[600],
     /** Secondary / remaining / inactive series (gray-300). */
-    neutral: cssVar('--waldur-utility-gray-300', '#d0d5dd'),
+    neutral: getCssVar('--waldur-utility-gray-300', '#d0d5dd'),
     /** Track / background fill (gray-200). */
-    track: cssVar('--bs-secondary-bg', '#e4e7ec'),
+    track: getCssVar('--bs-secondary-bg', '#e4e7ec'),
     /** Axis / muted label text (gray-500). */
-    muted: cssVar('--bs-secondary-color', '#667085'),
+    muted: getCssVar('--bs-secondary-color', '#667085'),
     /** Strong body text (gray-700). */
-    text: cssVar('--bs-body-color', '#344054'),
+    text: getCssVar('--bs-body-color', '#344054'),
     /** Card / canvas background, for gaps and borders drawn inside a chart. */
-    surface: cssVar('--bs-card-bg', '#ffffff'),
+    surface: getCssVar('--bs-card-bg', '#ffffff'),
     /** Divider between chart elements. */
-    border: cssVar('--bs-border-color', '#e4e7ec'),
+    border: getCssVar('--bs-border-color', '#e4e7ec'),
     /** $success-600 */
     success: '#039855',
     /** $warning-600 */

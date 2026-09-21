@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useLayoutEffect, useState } from 'react';
 
 import tokens from '../tokens/colors.json';
 
 import { DEFAULT_PRIMARY_COLORS } from './brandColors';
+import { useResolvedVar } from './react';
 
 const meta: Meta = {
   title: 'Foundations/Colors',
@@ -78,31 +78,6 @@ const tokenRamp = (name: string): RampSpec => ({
   steps: Object.keys(RAMPS[name].steps),
   description: RAMPS[name].description,
 });
-
-/**
- * Resolved value of a custom property on <html>. Re-read when <html>'s style or
- * data-theme changes, because the brand ramp is written there at runtime
- * (initBrandTokens), after the first render.
- */
-function useResolvedVar(cssVar: string) {
-  const [value, setValue] = useState('');
-  useLayoutEffect(() => {
-    const read = () =>
-      setValue(
-        getComputedStyle(document.documentElement)
-          .getPropertyValue(cssVar)
-          .trim(),
-      );
-    read();
-    const observer = new MutationObserver(read);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['style', 'data-theme'],
-    });
-    return () => observer.disconnect();
-  }, [cssVar]);
-  return value;
-}
 
 /** Renders `backticked` spans as inline code. */
 function Prose({ text }: { text: string }) {
