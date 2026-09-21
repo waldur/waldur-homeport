@@ -5,13 +5,13 @@
  * Declared once, in `@theme static`, under the names Tailwind itself uses
  * (--color-<ramp>-<step>): that registers the bg-, text- and border-
  * utilities and provides the `var(--color-gray-50)` the sibling token files
- * read. See colors.css for why this is not a `:root` block plus a
- * self-referencing `@theme` alias.
+ * read. Every ramp is physical (step 900 is dark in both themes); the dark
+ * theme is chosen by the semantic tokens, which read `gray-dark` there.
  */
 
 @theme static {
-  /* Neutral. The only ramp with a dark palette of its own in CSS; the others
-     are reused at a mirrored step. */
+  /* Neutral, blue-tinted. Physical lightness (900 is dark) and identical in
+     both themes; dark UI reads `gray-dark` instead. */
   --color-gray-25: #fcfcfd;
   --color-gray-50: #f9fafb;
   --color-gray-100: #f2f4f7;
@@ -24,6 +24,25 @@
   --color-gray-800: #182230;
   --color-gray-900: #101828;
   --color-gray-950: #0c111d;
+
+  /* The gray ramp for dark UI: neutral where `gray` is blue-tinted. Physical
+     lightness like every other CSS ramp (gray-dark-900 is dark). Dark
+     surfaces read it (the dark-theme token blocks and the `dark` sidebar
+     style); `gray` itself is the same in both themes. Step N is the SCSS dark
+     value of the mirrored `$gray-N` (SCSS inverts gray in dark mode), which
+     colorParity.test.ts keeps in sync. */
+  --color-gray-dark-25: #fafafa;
+  --color-gray-dark-50: #f5f5f6;
+  --color-gray-dark-100: #f0f1f1;
+  --color-gray-dark-200: #ececed;
+  --color-gray-dark-300: #cecfd2;
+  --color-gray-dark-400: #94969c;
+  --color-gray-dark-500: #85888e;
+  --color-gray-dark-600: #61646c;
+  --color-gray-dark-700: #333741;
+  --color-gray-dark-800: #1f242f;
+  --color-gray-dark-900: #161b26;
+  --color-gray-dark-950: #0c111d;
 
   /* Destructive / validation. Called `danger` in the SCSS variables and
      Bootstrap. */
@@ -163,22 +182,4 @@
   --color-rose-700: #c01048;
   --color-rose-900: #89123e;
   --color-rose-950: #510b24;
-}
-
-/* Physical lightness, not theme-inverted like the SCSS $gray-N (which is why the
-   same class name means opposite things in Tailwind and Metronic in dark mode):
-   step N here is the SCSS dark value of the mirrored step. */
-:root[data-theme='dark'] {
-  --color-gray-25: #fafafa;
-  --color-gray-50: #f5f5f6;
-  --color-gray-100: #f0f1f1;
-  --color-gray-200: #ececed;
-  --color-gray-300: #cecfd2;
-  --color-gray-400: #94969c;
-  --color-gray-500: #85888e;
-  --color-gray-600: #61646c;
-  --color-gray-700: #333741;
-  --color-gray-800: #1f242f;
-  --color-gray-900: #161b26;
-  --color-gray-950: #0c111d;
 }

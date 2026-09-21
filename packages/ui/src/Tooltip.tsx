@@ -68,15 +68,15 @@ const contentClassName = ({
     autoWidth ? 'max-w-none' : 'max-w-[200px]',
     hasBody ? 'p-[12px] text-left' : 'px-[12px] py-[8px] text-center',
     theme === 'dark'
-      ? 'bg-[var(--color-gray-900)] text-[#fff] dark:bg-[var(--color-gray-50)] dark:text-[var(--color-gray-900)]'
-      : 'bg-[var(--color-gray-900)] text-[#fff]',
+      ? 'bg-[var(--color-gray-900)] text-[#fff] dark:bg-[var(--color-gray-dark-50)] dark:text-[var(--color-gray-dark-900)]'
+      : 'bg-[var(--color-gray-900)] text-[#fff] dark:bg-[var(--color-gray-dark-900)]',
     className,
   );
 
 const arrowClassName = (theme: 'light' | 'dark') =>
   theme === 'dark'
-    ? 'fill-[var(--color-gray-900)] dark:fill-[var(--color-gray-50)]'
-    : 'fill-[var(--color-gray-900)]';
+    ? 'fill-[var(--color-gray-900)] dark:fill-[var(--color-gray-dark-50)]'
+    : 'fill-[var(--color-gray-900)] dark:fill-[var(--color-gray-dark-900)]';
 
 /**
  * Custom tooltip arrow.
@@ -100,7 +100,7 @@ const bubbleChildren = (label: ReactNode, body: ReactNode) => (
   <>
     <div className="font-medium">{label}</div>
     {body && (
-      <div className="mt-[4px] font-normal text-[var(--color-gray-300)]">
+      <div className="mt-[4px] font-normal text-[var(--color-gray-300)] dark:text-[var(--color-gray-dark-300)]">
         {body}
       </div>
     )}

@@ -44,8 +44,8 @@ const VARIANT_STYLES: Record<FeaturedIconVariant, { fg: string; bg: string }> =
       bg: 'bg-info-50 dark:bg-info-900',
     },
     neutral: {
-      fg: 'text-gray-500 dark:text-gray-400',
-      bg: 'bg-gray-100 dark:bg-gray-800',
+      fg: 'text-gray-500 dark:text-gray-dark-400',
+      bg: 'bg-gray-100 dark:bg-gray-dark-800',
     },
     primary: {
       fg: 'text-brand-600 dark:text-brand-400',

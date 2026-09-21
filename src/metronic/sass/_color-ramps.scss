@@ -6,8 +6,8 @@
 // Derived variables ($success, $success-active, ...) stay in _colors.scss.
 
 // gray
-// Neutral. The only ramp with a dark palette of its own in CSS; the others
-// are reused at a mirrored step.
+// Neutral, blue-tinted. Physical lightness (900 is dark) and identical in
+// both themes; dark UI reads `gray-dark` instead.
 $gray-25: if(isDarkMode(), #0c111d, #fcfcfd) !default;
 $gray-50: if(isDarkMode(), #161b26, #f9fafb) !default;
 $gray-100: if(isDarkMode(), #1f242f, #f2f4f7) !default;

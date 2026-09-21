@@ -439,7 +439,7 @@ export const Interactive: Story = {
           <button
             type="button"
             aria-label="Remove filter"
-            className="rounded-full p-0.5 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="rounded-full p-0.5 hover:bg-gray-200 dark:hover:bg-gray-dark-700 transition-colors"
             onClick={() => alert('Filter removed')}
           >
             <XIcon size={12} weight="bold" />

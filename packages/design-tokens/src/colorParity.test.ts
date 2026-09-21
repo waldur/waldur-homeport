@@ -9,8 +9,9 @@ import { describe, expect, it } from 'vitest';
  * render, with `isDarkMode()` resolved at compile time) and as CSS custom
  * properties in colorRamps.css (what Tailwind components read). Both are
  * generated from tokens/colors.json, and generateTokens.test.ts fails when
- * either is stale — so this test now checks the generator itself: that its
- * two outputs really agree, including the mirrored-step rule for dark gray.
+ * either is stale — so this test checks the data and the generator: that the
+ * two outputs really agree, including the dark gray ramp (`gray-dark`), which
+ * exists only in CSS and has to keep matching the SCSS dark grays.
  * (It read hand-written files before, and caught success-25/100/200 drifting.)
  *
  * It parses the files as text on purpose — there is no build step to import
@@ -68,9 +69,13 @@ const parseCssBlock = (block: string) => {
   return out;
 };
 
-const darkStart = css.indexOf(":root[data-theme='dark']");
-const lightCss = parseCssBlock(css.slice(0, darkStart));
-const darkCss = parseCssBlock(css.slice(darkStart));
+const lightCss = parseCssBlock(css);
+const grayDark = new Map(
+  [...css.matchAll(/--color-gray-dark-(\d+):\s*(#[0-9a-f]+);/gi)].map((m) => [
+    m[1],
+    m[2].toLowerCase(),
+  ]),
+);
 const scssRamps = parseScss();
 const toScssKey = (cssKey: string) => {
   const [name, step] = cssKey.split('-');
@@ -117,23 +122,29 @@ describe('colorRamps.css ↔ _color-ramps.scss parity', () => {
     }
   });
 
-  // Only gray has a distinct dark ramp in colorRamps.css. It is stored with
-  // physical lightness (gray-900 is dark in both themes), while the SCSS
+  // `gray` is the same in both themes in CSS; dark UI reads `gray-dark`. It is
+  // stored with physical lightness (gray-dark-900 is dark), while the SCSS
   // `$gray-N` is theme-inverted (`$gray-900` is light in dark mode) — so the
-  // same step name means opposite things, and the two ramps line up only
-  // through the mirrored step. That is also why Tailwind's `bg-gray-50` and
-  // Metronic's `.bg-gray-50` disagree in dark mode.
-  it('keeps the dark gray ramp equal to the mirrored SCSS dark gray', () => {
+  // same step name means opposite things, and the two line up only through the
+  // mirrored step. That is also why Tailwind's `bg-gray-50` and Metronic's
+  // `.bg-gray-50` disagree in dark mode.
+  it('keeps gray-dark equal to the mirrored SCSS dark gray', () => {
+    expect(grayDark.size).toBe(STEPS.length);
     const drift: string[] = [];
     for (const step of STEPS) {
-      const cssValue = darkCss.get(`gray-${step}`);
+      const cssValue = grayDark.get(step);
       const scssValue = scssRamps.get(`gray-${mirror(step)}`)?.dark;
       if (cssValue !== scssValue) {
         drift.push(
-          `--color-gray-${step}: css ${cssValue} != scss $gray-${mirror(step)} ${scssValue}`,
+          `--color-gray-dark-${step}: css ${cssValue} != scss $gray-${mirror(step)} ${scssValue}`,
         );
       }
     }
     expect(drift).toEqual([]);
+  });
+
+  it('does not override any ramp per theme', () => {
+    // A per-theme override of --color-gray-N is what gray-dark replaced.
+    expect(css).not.toMatch(/data-theme/);
   });
 });

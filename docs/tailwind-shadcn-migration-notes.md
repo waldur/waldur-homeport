@@ -250,11 +250,13 @@ The SCSS and CSS copies used to be maintained by hand and had drifted
 (`success-25/100/200`). Now `generateTokens.test.ts` fails when either output
 is stale, and `colorParity.test.ts` checks that the generator's two outputs
 agree. Note the two sides use opposite conventions for gray in dark mode:
-`--color-gray-N` keeps physical lightness (gray-900 is dark in both themes),
-SCSS `$gray-N` is theme-inverted (`$gray-900` is light in dark mode). The
-generator encodes that as "CSS step N = SCSS dark value of the mirrored step".
-The same class name therefore means opposite things — which is why
-`.bg-gray-50` needs the `!important` re-point in `src/tailwind.css`.
+CSS `--color-gray-N` keeps physical lightness (gray-900 is dark in both themes)
+and is the same in both themes, while SCSS `$gray-N` is theme-inverted
+(`$gray-900` is light in dark mode). Dark UI in CSS reads a second ramp,
+`--color-gray-dark-N`, whose values are the SCSS dark grays at the mirrored
+step. The same class name `gray-50` therefore still means opposite things in
+Tailwind and Metronic in dark mode — which is why `.bg-gray-50` needs the
+`!important` re-point in `src/tailwind.css`.
 
 ### Brand color token bridge
 

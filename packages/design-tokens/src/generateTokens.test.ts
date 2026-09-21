@@ -36,26 +36,6 @@ describe('generator', () => {
       gray: { steps, ...extra },
     },
   });
-  const fullGray = Object.fromEntries(
-    [
-      '25',
-      '50',
-      '100',
-      '200',
-      '300',
-      '400',
-      '500',
-      '600',
-      '700',
-      '800',
-      '900',
-      '950',
-    ].map((step, i) => [
-      step,
-      { light: `#00000${i.toString(16)}`, dark: `#11111${i.toString(16)}` },
-    ]),
-  );
-
   it('emits a plain value when a step is the same in both themes', () => {
     const scss = generateScss({
       ramps: { pink: { steps: { '950': { light: '#4e0d30' } } } },
@@ -84,7 +64,6 @@ describe('generator', () => {
           scssDefault: false,
           steps: { '50': { light: '#f1f7ef', dark: '#174000' } },
         },
-        gray: { steps: fullGray },
       },
     };
     expect(generateScss(t)).toContain(
@@ -101,19 +80,27 @@ describe('generator', () => {
     const t = {
       ramps: {
         pink: { steps: { '400': { light: '#f670c7', scss: false } } },
-        gray: { steps: fullGray },
       },
     };
     expect(generateScss(t)).not.toContain('$pink-400');
     expect(generateCss(t)).toContain('--color-pink-400: #f670c7;');
   });
 
-  it('mirrors the SCSS dark gray into the CSS dark block', () => {
-    const css = generateCss(tokens(fullGray));
-    // fullGray's dark values are #111110 (step 25) .. #11111b (step 950), so
-    // CSS step 25 takes the dark value of SCSS step 950, and vice versa.
-    expect(css).toContain('--color-gray-25: #11111b;');
-    expect(css).toContain('--color-gray-950: #111110;');
+  it('keeps a CSS-only ramp out of the SCSS and emits it as a plain ramp', () => {
+    const t = {
+      ramps: {
+        'gray-dark': {
+          scss: false,
+          steps: { '900': { light: '#161b26' } },
+        },
+      },
+    };
+    expect(generateScss(t)).not.toContain('gray-dark');
+    expect(generateCss(t)).toContain('--color-gray-dark-900: #161b26;');
+  });
+
+  it('never emits a per-theme override block', () => {
+    expect(generateCss(readTokens())).not.toMatch(/data-theme/);
   });
 
   it('rejects a redundant dark value and non-canonical colours', () => {
