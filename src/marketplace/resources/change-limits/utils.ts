@@ -110,10 +110,13 @@ export const hasEditableLimitComponents = (
     ).some((c) => c.billing_type === 'limit' || c.is_prepaid),
   );
 
-export const getRemainingMonths = (endDate: string): number => {
-  const now = DateTime.now();
+export const getRemainingMonths = (
+  endDate: string,
+  fromDate?: string,
+): number => {
+  const from = fromDate ? DateTime.fromISO(fromDate) : DateTime.now();
   const end = DateTime.fromISO(endDate);
-  return Math.max(0, Math.ceil(end.diff(now, 'months').months));
+  return Math.max(0, Math.ceil(end.diff(from, 'months').months));
 };
 
 export const getLimitChangeRequirements = (
@@ -296,6 +299,11 @@ export const getLimitChangeData = (
   orderCanBeApproved,
   concealBillingInfo = false,
   resourceEndDate?: string,
+  // Anchor for "remaining months", instead of the moment this happens to
+  // render. Viewing an already-created order must show the same figure it
+  // showed on day one -- omit this only for a live preview of a request that
+  // doesn't exist yet, where "today" genuinely is the right anchor.
+  remainingMonthsFrom?: string,
 ): StateProps => {
   const { multipliers, periodKeys } = getBillingPeriods(plan.unit);
   const offeringComponents = getEffectiveComponents(offering, plan).filter(
@@ -303,7 +311,7 @@ export const getLimitChangeData = (
   );
 
   const remainingMonths = resourceEndDate
-    ? getRemainingMonths(resourceEndDate)
+    ? getRemainingMonths(resourceEndDate, remainingMonthsFrom)
     : undefined;
 
   const components: ComponentRowType[] = offeringComponents.map((component) => {
