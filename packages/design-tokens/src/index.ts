@@ -1,6 +1,7 @@
 export { hexToRgb } from './colorMath';
 export { DEFAULT_PRIMARY_COLORS, generateBrandColors } from './brandColors';
-export { getCssVar } from './cssVar';
+export { getBrandVar, getCssVar } from './cssVar';
+export type { BrandStep } from './cssVar';
 export { generateColors } from './generateColors';
 export { initBrandTokens } from './initBrandTokens';
 export { initFontFamily } from './initFontFamily';

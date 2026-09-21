@@ -77,6 +77,7 @@ const preview: Preview = {
             'StatCard',
             'Table',
             'DataTable',
+            'MermaidChart',
           ],
           'Overlays',
           ['Tooltip', 'Popover', 'DropdownMenu', 'Dialog', 'Sheet'],
