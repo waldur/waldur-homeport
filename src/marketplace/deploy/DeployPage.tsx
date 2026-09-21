@@ -44,7 +44,7 @@ import { DeployFormData, Limits } from '../common/types';
 import { PageBarProvider } from '../context';
 import { formatOrderForCreate } from '../details/utils';
 import { getMarketplaceFilters } from '../landing/filter/store/selectors';
-import { getDefaultLimits, scrollToSectionById } from '../offerings/utils';
+import { scrollToSectionById } from '../offerings/utils';
 import { isExperimentalUiComponentsVisible } from '../utils';
 
 import { DeployPageActions } from './DeployPageActions';
@@ -54,6 +54,7 @@ import { NavigationBlocker } from './NavigationBlocker';
 import { useOrderFormData } from './selectors';
 import { isPartitionQosRequired } from './steps/FormQoSSelectionStep';
 import { OfferingConfigurationFormStep } from './types';
+import { useDefaultLimits } from './useDefaultLimits';
 import { hasStepWithField } from './utils';
 
 import './DeployPage.scss';
@@ -150,18 +151,7 @@ export const BaseDeployPage = ({
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  // Seed the offering's defaults, without overwriting what is already there.
-  //
-  // This effect is not the only writer of `values.limits`: a step can fill them
-  // in too -- the vSphere template step sets cpu, ram and disk from the chosen
-  // template -- and the two race. Which one wins used to depend on whether the
-  // template query was served from cache: a plain reassignment blanked the
-  // fields when this effect ran second, and a one-shot guard blanked them when
-  // it ran first, since React flushes a child's effects before its parent's.
-  // Merging the current values on top is invariant to that ordering. Nothing
-  // stale survives an offering switch either: a route-level change remounts the
-  // form (see the `key` on <Form> below), and an in-form change goes through
-  // FormCloudStep, which clears `limits` as it switches.
+  // Seed the offering's attribute defaults.
   useEffect(() => {
     if (isEdit) return;
     if (selectedOffering) {
@@ -180,16 +170,17 @@ export const BaseDeployPage = ({
           ),
         );
       }
-      form.change('limits', {
-        ...getDefaultLimits(selectedOffering),
-        ...props.limits,
-        ...form.getState().values.limits,
-      });
     }
   }, [selectedOffering]);
 
+  useDefaultLimits({
+    offering: selectedOffering,
+    fallbackLimits: props.limits,
+    skip: isEdit,
+  });
+
   // The plan has its own trigger: it is assigned once the offering's plans are
-  // known, which is unrelated to seeding the defaults above.
+  // known, which is unrelated to seeding the defaults.
   useEffect(() => {
     if (isEdit) return;
     if (hasStepWithField(formSteps, 'plan') && plans) {
@@ -525,6 +516,11 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
       mutators={{ ...arrayMutators }}
       onSubmit={handleMutate}
       initialValues={initialValues}
+      // Choosing the project re-runs initializeFormValues (it depends on
+      // currentProject) and hands the form new initial values. Without this,
+      // the reinitialisation drops everything written since -- the plan, the
+      // limits, whatever the user typed.
+      keepDirtyOnReinitialize
       subscription={{ values: true }}
       render={({ values, handleSubmit }) => {
         const selectedOffering = values.offering || props.offering;
