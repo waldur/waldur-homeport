@@ -1,5 +1,12 @@
 export { hexToRgb } from './colorMath';
 export { DEFAULT_PRIMARY_COLORS, generateBrandColors } from './brandColors';
+export {
+  contrastRatio,
+  parseColor,
+  readableOn,
+  relativeLuminance,
+} from './contrast';
+export type { Rgb } from './contrast';
 export { getBrandVar, getCssVar } from './cssVar';
 export type { BrandStep } from './cssVar';
 export { generateColors } from './generateColors';

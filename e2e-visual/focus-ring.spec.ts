@@ -1,5 +1,7 @@
 import { test, expect, Page } from '@playwright/test';
 
+import { contrastRatio, parseColor } from 'waldur-design-tokens/contrast';
+
 /**
  * Asserts that keyboard focus produces a *visible* indicator, with enough
  * contrast to satisfy WCAG 1.4.11.
@@ -65,26 +67,6 @@ const KNOWN_CONTRAST_GAPS = new Set<string>(['primary']);
 
 /** WCAG 1.4.11 Non-text Contrast: an indicator needs 3:1 against what it sits against. */
 const MIN_CONTRAST = 3;
-
-function relativeLuminance([r, g, b]: number[]) {
-  const channel = (v: number) => {
-    const c = v / 255;
-    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  };
-  return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
-}
-
-function contrastRatio(a: number[], b: number[]) {
-  const [lighter, darker] = [relativeLuminance(a), relativeLuminance(b)].sort(
-    (x, y) => y - x,
-  );
-  return (lighter + 0.05) / (darker + 0.05);
-}
-
-function parseRgb(value: string): number[] | null {
-  const parts = value.match(/[\d.]+/g);
-  return parts && parts.length >= 3 ? parts.slice(0, 3).map(Number) : null;
-}
 
 async function setUpFixtures(page: Page, theme: 'light' | 'dark') {
   await page.goto(`${STORYBOOK_URL}${STORY}${theme}`, {
@@ -178,20 +160,20 @@ for (const theme of ['light', 'dark'] as const) {
         // Contrast of a multi-layer box-shadow ring isn't meaningfully one value.
         if (!hasOutline) return;
 
-        const ringColor = parseRgb(measured!.outlineColor);
+        const ringColor = parseColor(measured!.outlineColor);
         expect(ringColor, `${ring}: unreadable outline color`).not.toBeNull();
 
         // With a positive offset the ring is separated from the control by a
         // gap showing whatever is behind it, so the page background — not the
         // control's own fill — is what it must contrast against. Drawn flush,
         // it sits directly on the control.
-        const ownBackground = parseRgb(measured!.background);
+        const ownBackground = parseColor(measured!.background);
         const isTransparent = /rgba\(\s*0,\s*0,\s*0,\s*0\s*\)/.test(
           measured!.background,
         );
         const behind =
           measured!.outlineOffset > 0 || isTransparent || !ownBackground
-            ? parseRgb(measured!.pageBackground)
+            ? parseColor(measured!.pageBackground)
             : ownBackground;
 
         if (!behind) return;
