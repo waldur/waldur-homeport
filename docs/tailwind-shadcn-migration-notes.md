@@ -228,26 +228,32 @@ they replaced):
 class, an SCSS media query or a `useMediaQuery()` call. The micro-app keeps
 Tailwind's defaults (no Bootstrap there to agree with).
 
-### Color ramps: one declaration, one parity test
+### Color ramps: generated from one file
 
-`packages/design-tokens/src/colors.css` declares each ramp step once, in
-`@theme static`, under Tailwind's own name (`--color-gray-50`); that both
-registers the `bg-gray-50`-style utilities and provides the `var(--color-gray-50)`
-the other token files read. It used to be a `:root` block plus a `@theme`
-block aliasing each variable to itself, which shipped 128 self-referencing
-declarations (`--color-gray-50: var(--color-gray-50)`) that only worked
-because the unlayered `:root` value outranked Tailwind's layered `@theme`
-output. (`@theme inline` doesn't fix it: Tailwind re-emits a variable whenever
+The colour ramps are generated, not hand-written: `tokens/colors.json` in
+`packages/design-tokens` is the only place a ramp value is edited, and
+`yarn tokens:generate` writes both `src/metronic/sass/_color-ramps.scss`
+(what Bootstrap/Metronic render) and `packages/design-tokens/src/colorRamps.css`
+(what Tailwind reads). See [design-tokens.md](design-tokens.md).
+
+Each CSS ramp step is declared once, in `@theme static`, under Tailwind's own
+name (`--color-gray-50`); that both registers the `bg-gray-50`-style utilities
+and provides the `var(--color-gray-50)` the other token files read. It used to
+be a `:root` block plus a `@theme` block aliasing each variable to itself,
+which shipped 128 self-referencing declarations
+(`--color-gray-50: var(--color-gray-50)`) that only worked because the
+unlayered `:root` value outranked Tailwind's layered `@theme` output.
+(`@theme inline` doesn't fix it: Tailwind re-emits a variable whenever
 `var(--its-name)` appears in the generated CSS.)
 
-The same ramps also exist as SCSS in `src/metronic/sass/_colors.scss`, which
-is what Bootstrap/Metronic actually render, and the two had drifted
-(`success-25/100/200`). `colorParity.test.ts` now fails when a light value
-differs between them, and when the dark gray ramp stops equalling the
-mirrored SCSS one. Note the two sides use opposite conventions for gray in
-dark mode: `--color-gray-N` keeps physical lightness (gray-900 is dark in
-both themes), SCSS `$gray-N` is theme-inverted (`$gray-900` is light in dark
-mode). The same class name therefore means opposite things — which is why
+The SCSS and CSS copies used to be maintained by hand and had drifted
+(`success-25/100/200`). Now `generateTokens.test.ts` fails when either output
+is stale, and `colorParity.test.ts` checks that the generator's two outputs
+agree. Note the two sides use opposite conventions for gray in dark mode:
+`--color-gray-N` keeps physical lightness (gray-900 is dark in both themes),
+SCSS `$gray-N` is theme-inverted (`$gray-900` is light in dark mode). The
+generator encodes that as "CSS step N = SCSS dark value of the mirrored step".
+The same class name therefore means opposite things — which is why
 `.bg-gray-50` needs the `!important` re-point in `src/tailwind.css`.
 
 ### Brand color token bridge

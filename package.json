@@ -18,6 +18,8 @@
     "preview": "vite preview",
     "format:check": "prettier --check \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
     "format:fix": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
+    "tokens:generate": "node packages/design-tokens/scripts/generate-tokens.mjs",
+    "tokens:check": "node packages/design-tokens/scripts/generate-tokens.mjs --check",
     "style:check": "stylelint \"src/**/*.css\" \"src/**/*.scss\" \"packages/**/*.css\"",
     "lint:check": "eslint src locales/tools",
     "lint:fix": "eslint --fix src locales/tools",
@@ -269,6 +271,7 @@
         "files": [
           "src/tailwind.css",
           "packages/design-tokens/src/colors.css",
+          "packages/design-tokens/src/colorRamps.css",
           "packages/design-tokens/src/zIndex.css"
         ],
         "rules": {

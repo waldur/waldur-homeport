@@ -23,6 +23,7 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | [filter-migration-guide.md](table/filter-migration-guide.md)       | Generated table filters from the OpenAPI schema                                 |
 | [button-variant-linting.md](button-variant-linting.md)       | Design-token button variants and the ESLint rule enforcing them                 |
 | [theme.md](theme.md)                                         | Dark mode and theming, including third-party components                         |
+| [design-tokens.md](design-tokens.md)                         | Colour ramps as data: `tokens/colors.json`, the generator, what is and isn't generated |
 | [menu-navigation.md](menu-navigation.md)                     | Sidebar menu structure and state-based routing                                  |
 | [sidebar.md](sidebar.md)                                     | Sidebar navigation architecture, design tokens, components, and recipes        |
 | [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Bootstrap → Tailwind/shadcn migration: cascade layers, token extraction, visual-parity test methodology |

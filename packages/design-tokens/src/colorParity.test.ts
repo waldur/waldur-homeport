@@ -5,11 +5,13 @@ import { describe, expect, it } from 'vitest';
 
 /**
  * The colour ramps exist twice: as SCSS variables in
- * src/metronic/sass/_colors.scss (what Bootstrap/Metronic actually render,
- * with `isDarkMode()` resolved at compile time) and as CSS custom properties
- * in colors.css (what Tailwind components read). Nothing links them, so they
- * drifted once already (success-25/100/200). This test is the link: it fails
- * when a value is edited on one side only.
+ * src/metronic/sass/_color-ramps.scss (what Bootstrap/Metronic actually
+ * render, with `isDarkMode()` resolved at compile time) and as CSS custom
+ * properties in colorRamps.css (what Tailwind components read). Both are
+ * generated from tokens/colors.json, and generateTokens.test.ts fails when
+ * either is stale — so this test now checks the generator itself: that its
+ * two outputs really agree, including the mirrored-step rule for dark gray.
+ * (It read hand-written files before, and caught success-25/100/200 drifting.)
  *
  * It parses the files as text on purpose — there is no build step to import
  * from, and a regex over `$name-N: if(isDarkMode(), dark, light)` is enough.
@@ -18,8 +20,8 @@ import { describe, expect, it } from 'vitest';
 const read = (relative: string) =>
   readFileSync(fileURLToPath(new URL(relative, import.meta.url)), 'utf8');
 
-const scss = read('../../../src/metronic/sass/_colors.scss');
-const css = read('./colors.css');
+const scss = read('../../../src/metronic/sass/_color-ramps.scss');
+const css = read('./colorRamps.css');
 
 // The two spellings differ for exactly one ramp.
 const SCSS_NAME: Record<string, string> = { error: 'danger' };
@@ -68,16 +70,14 @@ const parseCssBlock = (block: string) => {
 
 const darkStart = css.indexOf(":root[data-theme='dark']");
 const lightCss = parseCssBlock(css.slice(0, darkStart));
-const darkCss = parseCssBlock(
-  css.slice(darkStart, css.indexOf('@theme', darkStart)),
-);
+const darkCss = parseCssBlock(css.slice(darkStart));
 const scssRamps = parseScss();
 const toScssKey = (cssKey: string) => {
   const [name, step] = cssKey.split('-');
   return `${SCSS_NAME[name] ?? name}-${step}`;
 };
 
-// Steps colors.css carries that Metronic never defines (the SCSS ramps for
+// Steps colorRamps.css carries that Metronic never defines (the SCSS ramps for
 // these hues are sparser). Listed explicitly so the list can't quietly rot:
 // the test below asserts each one really is absent from the SCSS.
 const CSS_ONLY_STEPS = [
@@ -88,7 +88,7 @@ const CSS_ONLY_STEPS = [
   'rose-400',
 ];
 
-describe('colors.css ↔ _colors.scss parity', () => {
+describe('colorRamps.css ↔ _color-ramps.scss parity', () => {
   it('finds the ramps it is supposed to compare', () => {
     expect(lightCss.size).toBeGreaterThan(100);
     expect(scssRamps.size).toBeGreaterThan(100);
@@ -102,7 +102,7 @@ describe('colors.css ↔ _colors.scss parity', () => {
       }
       const scssValue = scssRamps.get(toScssKey(key))?.light;
       if (scssValue === undefined) {
-        drift.push(`--color-${key}: missing in _colors.scss`);
+        drift.push(`--color-${key}: missing in _color-ramps.scss`);
       } else if (scssValue !== value) {
         drift.push(`--color-${key}: css ${value} != scss ${scssValue}`);
       }
@@ -117,7 +117,7 @@ describe('colors.css ↔ _colors.scss parity', () => {
     }
   });
 
-  // Only gray has a distinct dark ramp in colors.css. It is stored with
+  // Only gray has a distinct dark ramp in colorRamps.css. It is stored with
   // physical lightness (gray-900 is dark in both themes), while the SCSS
   // `$gray-N` is theme-inverted (`$gray-900` is light in dark mode) — so the
   // same step name means opposite things, and the two ramps line up only
