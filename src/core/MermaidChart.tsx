@@ -59,7 +59,7 @@ const initMermaid = () => {
   ]);
 
   const isDarkMode =
-    document.documentElement.getAttribute('data-bs-theme') === 'dark';
+    document.documentElement.getAttribute('data-theme') === 'dark';
 
   const grays = isDarkMode ? DARK_GRAYS : LIGHT_GRAYS;
 

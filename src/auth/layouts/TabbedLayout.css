@@ -35,7 +35,7 @@
   margin-bottom: 1.5rem;
 }
 
-[data-bs-theme='dark'] .layout-tabbed-tabs {
+[data-theme='dark'] .layout-tabbed-tabs {
   background: var(--bs-gray-800);
 }
 
@@ -55,7 +55,7 @@
   color: var(--bs-gray-800);
 }
 
-[data-bs-theme='dark'] .layout-tabbed-tab:hover {
+[data-theme='dark'] .layout-tabbed-tab:hover {
   color: var(--bs-gray-300);
 }
 

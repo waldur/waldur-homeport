@@ -34,7 +34,7 @@
   overflow: hidden;
 }
 
-[data-bs-theme='dark'] .layout-wizard-progress {
+[data-theme='dark'] .layout-wizard-progress {
   background: var(--bs-gray-700);
 }
 
