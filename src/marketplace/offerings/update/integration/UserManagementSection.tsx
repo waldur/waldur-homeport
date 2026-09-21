@@ -184,6 +184,13 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
               )}
             />
           )}
+          <BooleanEditField
+            name="plugin_options.enable_scim_entitlements"
+            label={translate('Enable SCIM entitlements')}
+            description={translate(
+              'Include this offering in outbound SCIM entitlement sync for SSH login-node access. An SSH access endpoint alone is not enough; this option must be enabled. Also requires SCIM_MEMBERSHIP_SYNC_ENABLED on the deployment.',
+            )}
+          />
           {props.offering.type === SITE_AGENT_PLUGIN && (
             <SelectEditField
               name="plugin_options.account_name_generation_policy"
