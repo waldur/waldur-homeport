@@ -127,6 +127,11 @@ export const Offering_accountingEnum = {
   marketplace_offering_component_created: 'marketplace_offering_component_created',
   marketplace_offering_component_deleted: 'marketplace_offering_component_deleted',
   marketplace_offering_component_updated: 'marketplace_offering_component_updated',
+  marketplace_offering_merge_created: 'marketplace_offering_merge_created',
+  marketplace_offering_merge_executed: 'marketplace_offering_merge_executed',
+  marketplace_offering_merge_failed: 'marketplace_offering_merge_failed',
+  marketplace_offering_merge_undone: 'marketplace_offering_merge_undone',
+  marketplace_offering_merge_verification_failed: 'marketplace_offering_merge_verification_failed',
   marketplace_offering_options_updated: 'marketplace_offering_options_updated',
   marketplace_offering_resource_options_updated: 'marketplace_offering_resource_options_updated',
   marketplace_plan_archived: 'marketplace_plan_archived',
@@ -276,7 +281,15 @@ export const Openstack_subnetEnum = {
 };
 
 export const PermissionsEnum = {
+  role_cloned: 'role_cloned',
+  role_concealed: 'role_concealed',
+  role_definition_created: 'role_definition_created',
+  role_definition_deleted: 'role_definition_deleted',
+  role_definition_updated: 'role_definition_updated',
+  role_disabled: 'role_disabled',
+  role_enabled: 'role_enabled',
   role_granted: 'role_granted',
+  role_revealed: 'role_revealed',
   role_revoked: 'role_revoked',
   role_updated: 'role_updated',
 };
