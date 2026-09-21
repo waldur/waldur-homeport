@@ -53,6 +53,15 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
         currentLimits,
         usages,
         true,
+        false,
+        order.resource_end_date ?? undefined,
+        // Matches the backend's own snapshot window (Order._get_cost_dates:
+        // self.start_date or the creation moment) -- this order already
+        // exists, so "remaining months" must anchor to when it was created,
+        // not to whenever this page happens to be viewed. Otherwise this
+        // breakdown drifts away from the (now-frozen) Cost change figure
+        // above it the longer the order sits unread.
+        order.start_date ?? order.created,
       );
     }
     return {
