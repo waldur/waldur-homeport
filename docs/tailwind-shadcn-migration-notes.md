@@ -147,52 +147,63 @@ if the CSS chunking or theme-loading strategy ever changes.
 ### Root font-size override
 
 Metronic forces `html, body { font-size: 13px !important }` (12px below
-`lg`). Tailwind's scale is rem-based against a 16px assumption, so
+`md`, i.e. `max-width: 767.98px` — checked in the compiled stylesheet; the
+992px `lg` query sets the same 13px again). Tailwind's scale is rem-based against a 16px assumption, so
 `src/tailwind.css`'s `@theme` overrides `--spacing`/`--text-sm`/`--text-base`/
 `--radius-md`/`--radius-lg` with explicit px values.
 
-**The override works for `--radius-*` but not for `--spacing`, and the
-spacing failure isn't a clean, predictable ratio.** Verified live via
-`getComputedStyle` (inject a bare `<div class="p-N">`, no other styles):
-`rounded-md`/`rounded-lg` correctly compute 6px/8px, matching the override
-exactly. But the numbered spacing/gap utilities (`p-1`…`gap-96`) don't
-uniformly fall back to Tailwind's un-overridden default either — some steps
-do (`p-1`/`p-2`/`p-3`/`p-5` measured exactly `0.25rem × N` at the current
-root, i.e. the override never reached them), while others land on a value
-that matches _neither_ `4px × N` nor `0.25rem × N` (`p-4` measured
-11.088px; `4 × 4px` = 16, `4 × 0.25rem` at that root = 12). Whatever
-Tailwind v4 is doing internally for those specific steps, it isn't
-reliably steerable via `--spacing`. **Practical rule: never use a numbered
-spacing/gap utility for a value that needs to render at a specific px size
-— use a px arbitrary value (`p-[12px]`) instead**, as `BaseButton.tsx`,
-`Badge.tsx`, and `Tooltip.tsx` all do throughout. `--radius-*` doesn't have
-this problem (`rounded-md`/`rounded-lg`/`rounded-modal` — a custom-named
-addition to the same theme block, see below — are all safe to use
-normally), and neither does Tailwind's own reserved `z-*`/`--z-index-*`
-namespace (see the z-index scale below) — this is specifically a
-`--spacing` quirk, not a general "theme overrides don't work" issue.
+**The override works for `--radius-*` and `--z-index-*`, but numbered
+spacing utilities still don't render at `4px × N` — because Bootstrap's own
+utility of the same name wins, not because Tailwind ignores `--spacing`.**
+Bootstrap's utility API emits `.p-N`/`.m-N`/`.gap-N`/… from `$spacers`, all
+with `!important` (compiled `style-*.css`: `.p-1{padding:.25rem!important}`,
+`.p-4{padding:.924rem!important}`, `.gap-4{gap:.924rem!important}`), and
+Tailwind emits the same class names (`.p-4{padding:calc(var(--spacing) * 4)}`,
+`--spacing:4px` does reach the built CSS). `!important` beats any
+un-`!important` rule regardless of layer order, so on a real app page
+Bootstrap's value is the one that renders. That accounts exactly for the
+measurements that used to look inexplicable: `p-1`/`p-2`/`p-3`/`p-5` measured
+`0.25rem × N` because those are Bootstrap's `$spacers` 1/2/3/5
+(0.25/0.5/0.75/1.25rem), and `p-4` measured 11.088px because Bootstrap's
+`$spacers[4]` is `0.154 × 6 = 0.924rem`, which at the 12px mobile root is
+11.088px (Tailwind's own `p-4` would be 16px). Steps past the
+end of Bootstrap's `$spacers` (its keys stop at 20) fall through to
+Tailwind and render at `4px × N`, which is why the failure looked partial.
+
+Consequence: in `packages/ui`, `p-4` means 16px in Storybook (no Bootstrap
+loaded) and ~12px in the app. **Practical rule, unchanged: never use a
+numbered spacing/gap utility for a value that needs to render at a specific
+px size — use a px arbitrary value (`p-[12px]`)**, as `BaseButton.tsx`,
+`Badge.tsx`, and `Tooltip.tsx` all do throughout. It is a workaround for the
+class-name collision described above, not for a Tailwind limitation; the
+structural fixes are a Tailwind class prefix or dropping Bootstrap's
+overlapping utilities as consumers migrate. `--radius-*`
+(`rounded-md`/`rounded-lg`/`rounded-modal`) is safe to use normally: Bootstrap
+only defines numeric `.rounded-N` and `-circle`/`-pill`/`-top`-style names,
+none of which Tailwind's named steps share. The one collision there is the
+bare `.rounded` (Bootstrap: `8px !important`).
 
 **Named scale tokens beyond the font-size/radius ones above, added as this
 migration needed them** (all in `src/tailwind.css`'s `@theme` block, all
 verified live to resolve to the stated value with zero drift from what
 they replaced):
 
-- **z-index** — `--z-index-sidebar-panel: 105` and
-  `--z-index-mobile-drawer: 110`, generating real `z-sidebar-panel`/
-  `z-mobile-drawer` utilities (Tailwind's `--z-index-*` namespace does
-  auto-generate a matching `z-<name>` class — confirmed empirically, not
-  assumed, before relying on it). Named only where a value was chosen to
-  match a still-present Metronic layer's own z-index (`Sidebar.tsx`'s
-  desktop panel, `Sheet.tsx`'s mobile drawer, matching
-  `$aside-config`/the real mobile drawer's measured 110 respectively) —
-  components with no such parity requirement (`Dialog`, `Popover`,
-  `DropdownMenu`) keep Tailwind's own built-in `z-50`/`z-10`, since that's
-  already a shared, named value with nothing Metronic-specific to anchor
-  to. `Tooltip.tsx`'s `zIndex` prop default (1180, matching `Tip`'s own
-  default) stays a plain JS number rather than a class — its _override_
-  case needs a value only known at runtime, which no static class can
-  express — but is commented to point at `--z-index-tooltip`, the same
-  canonical value, so the two don't drift independently.
+- **z-index** — `--z-index-sidebar-panel: 105`,
+  `--z-index-mobile-drawer: 110`, `--z-index-toast: 1150` and
+  `--z-index-tooltip: 1180`, now in
+  `packages/design-tokens/src/zIndex.css` (not `src/tailwind.css`) so the
+  micro-apps get the same `z-sidebar-panel`/`z-mobile-drawer` utilities that
+  `waldur-ui`'s Sidebar and Sheet use — before, they were simply never
+  generated there. The file opens with the whole stacking order, Bootstrap
+  and Metronic layers included, and `zIndex.test.ts` asserts the ordering
+  (drawer below modals, toast above every Bootstrap overlay, tooltip above
+  toast) plus that `Tooltip.tsx`'s literal `1180` default equals the token.
+  Tailwind's `--z-index-*` namespace auto-generates a matching `z-<name>`
+  class. Named only where a value was chosen to match a still-present
+  Metronic layer — components with no such parity requirement (`Dialog`,
+  `Popover`, `DropdownMenu`) keep Tailwind's built-in `z-50`/`z-10`.
+  `--z-index-toast` is `@theme static` because its only consumer is an inline
+  `var(...)` in a TSX string, which Tailwind's usage scan doesn't see.
 - **radius** — `--radius-modal: 20px`, covering `Dialog.tsx`'s modal
   content and `Sidebar.tsx`'s mode-switcher card (both visibly rounder than
   `rounded-lg`, both pair with `bg-[var(--surface-card-bg)]`). Deliberately
@@ -207,6 +218,37 @@ they replaced):
   regex incidentally also matches Tailwind's digit-leading `rounded-2xl`/
   `rounded-3xl`, so those two names can't be used as literal classes
   anywhere in lint-covered code regardless of this migration.
+
+### Breakpoints
+
+`src/tailwind.css` pins `--breakpoint-sm/md/lg/xl/2xl` to 576/768/992/1200/1400px
+— the same values as Bootstrap's `$grid-breakpoints` and `GRID_BREAKPOINTS` in
+`src/core/constants.ts` — instead of Tailwind's 640/768/1024/1280/1536, so
+`lg` is 992px whether it appears as a Tailwind variant, a Bootstrap `.d-lg-*`
+class, an SCSS media query or a `useMediaQuery()` call. The micro-app keeps
+Tailwind's defaults (no Bootstrap there to agree with).
+
+### Color ramps: one declaration, one parity test
+
+`packages/design-tokens/src/colors.css` declares each ramp step once, in
+`@theme static`, under Tailwind's own name (`--color-gray-50`); that both
+registers the `bg-gray-50`-style utilities and provides the `var(--color-gray-50)`
+the other token files read. It used to be a `:root` block plus a `@theme`
+block aliasing each variable to itself, which shipped 128 self-referencing
+declarations (`--color-gray-50: var(--color-gray-50)`) that only worked
+because the unlayered `:root` value outranked Tailwind's layered `@theme`
+output. (`@theme inline` doesn't fix it: Tailwind re-emits a variable whenever
+`var(--its-name)` appears in the generated CSS.)
+
+The same ramps also exist as SCSS in `src/metronic/sass/_colors.scss`, which
+is what Bootstrap/Metronic actually render, and the two had drifted
+(`success-25/100/200`). `colorParity.test.ts` now fails when a light value
+differs between them, and when the dark gray ramp stops equalling the
+mirrored SCSS one. Note the two sides use opposite conventions for gray in
+dark mode: `--color-gray-N` keeps physical lightness (gray-900 is dark in
+both themes), SCSS `$gray-N` is theme-inverted (`$gray-900` is light in dark
+mode). The same class name therefore means opposite things — which is why
+`.bg-gray-50` needs the `!important` re-point in `src/tailwind.css`.
 
 ### Brand color token bridge
 
@@ -241,7 +283,7 @@ now import directly from `waldur-ui`.
 - **Typography**: Uses `text-[1.077rem]` and `font-medium` (500) with
   `leading-[1.43]` on the title (`<h6>`) and `text-[1.077rem] font-normal text-[var(--surface-text-secondary)]`
   on the body. This matches Metronic's `$font-weight-bold: 500`, `$font-size-6: 1.077rem`,
-  and `--bs-body-line-height: 1.43` dynamically across all viewports (including below `lg`
+  and `--bs-body-line-height: 1.43` dynamically across all viewports (including below `md`
   where root font-size scales to 12px, as well as desktop 13px).
 - **Actions slot spacing**: Metronic's `$spacers: (4: $spacer * 0.154 * 6)`
   computed to 0.924rem (12.012px @ 13px root), mapped here as `gap-[0.924rem] pr-[2px] items-start`.

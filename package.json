@@ -268,7 +268,8 @@
       {
         "files": [
           "src/tailwind.css",
-          "packages/design-tokens/src/colors.css"
+          "packages/design-tokens/src/colors.css",
+          "packages/design-tokens/src/zIndex.css"
         ],
         "rules": {
           "scss/at-rule-no-unknown": [

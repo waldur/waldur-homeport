@@ -17,6 +17,9 @@
    motion. */
 @import 'waldur-design-tokens/animations.css';
 @import 'waldur-design-tokens/colors.css';
+/* z-sidebar-panel / z-mobile-drawer, which waldur-ui's Sidebar and Sheet use:
+   without this those utilities are never generated here. */
+@import 'waldur-design-tokens/zIndex.css';
 
 /* Same override as the main app's own src/tailwind.css: OrgDashboardMock.tsx
    sets data-theme via the shared waldur/theme/name localStorage key, not an

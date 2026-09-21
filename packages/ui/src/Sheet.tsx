@@ -62,7 +62,7 @@ export const SheetOverlay = forwardRef<
       // focus"). Letting Radix mount/unmount this normally (present only
       // while genuinely open or mid-exit-animation) keeps those
       // side-effects scoped to real open state instead.
-      // z-mobile-drawer (110, src/tailwind.css), not z-50 — Metronic's
+      // z-mobile-drawer (110, packages/design-tokens/src/zIndex.css), not z-50 — Metronic's
       // mobile drawer (.aside.drawer-mobile-on) sits at z-index: 110,
       // above its own header's z-index: 100 — measured live, and distinct
       // from the desktop panel's z-sidebar-panel (105, Sidebar.tsx's matching
