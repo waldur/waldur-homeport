@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
+import { contrastRatio } from 'waldur-design-tokens';
+
 import tokens from '../../packages/design-tokens/tokens/colors.json';
 
 const state = vi.hoisted(() => ({ dark: false }));
@@ -34,21 +36,6 @@ vi.mock('waldur-design-tokens', async () => {
 
 import { getMermaidThemeVariables } from './mermaidTheme';
 
-const channel = (v: number) => {
-  const c = v / 255;
-  return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-};
-const luminance = (hex: string) => {
-  const [r, g, b] = [1, 3, 5].map((i) =>
-    channel(parseInt(hex.slice(i, i + 2), 16)),
-  );
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-};
-const contrast = (a: string, b: string) => {
-  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
-  return (hi + 0.05) / (lo + 0.05);
-};
-
 // Text on the fill it is drawn on. Dark mode once had near-black labels on dark
 // green nodes (1.4:1); this is the check that would have caught it.
 const PAIRS: [text: string, fill: string][] = [
@@ -67,7 +54,7 @@ describe('mermaid theme contrast', () => {
         string,
         string
       >;
-      const ratio = contrast(vars[textKey], vars[fillKey]);
+      const ratio = contrastRatio(vars[textKey], vars[fillKey]);
       expect(
         ratio,
         `${textKey} ${vars[textKey]} on ${fillKey} ${vars[fillKey]}`,

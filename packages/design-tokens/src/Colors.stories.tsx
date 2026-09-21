@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import tokens from '../tokens/colors.json';
 
 import { DEFAULT_PRIMARY_COLORS } from './brandColors';
+import { readableOn } from './contrast';
 import { useResolvedVar } from './react';
 
 const meta: Meta = {
@@ -99,25 +100,6 @@ function Prose({ text }: { text: string }) {
   );
 }
 
-const channel = (v: number) => {
-  const c = v / 255;
-  return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-};
-
-/** Black or white, whichever has the higher WCAG contrast on `hex`. */
-function readableOn(hex: string) {
-  const m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex);
-  if (!m) {
-    return 'inherit';
-  }
-  const [r, g, b] = m.slice(1).map((h) => channel(parseInt(h, 16)));
-  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  // contrast vs white = 1.05 / (L + 0.05), vs black = (L + 0.05) / 0.05
-  return 1.05 / (luminance + 0.05) > (luminance + 0.05) / 0.05
-    ? '#fff'
-    : '#000';
-}
-
 function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
   const value = useResolvedVar(cssVar);
   return (
@@ -129,7 +111,7 @@ function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
         className="flex h-14 items-end px-2 pb-1.5 font-mono text-xs font-semibold"
         style={{
           backgroundColor: `var(${cssVar})`,
-          color: readableOn(value),
+          color: readableOn(value) ?? 'inherit',
         }}
       >
         {step}
@@ -203,7 +185,10 @@ function ComparisonBar({ cssVar }: { cssVar: string }) {
     <div
       title={cssVar}
       className="flex h-9 items-center justify-end rounded-md border border-[var(--surface-card-border)] px-2 font-mono text-[10px] uppercase"
-      style={{ backgroundColor: `var(${cssVar})`, color: readableOn(value) }}
+      style={{
+        backgroundColor: `var(${cssVar})`,
+        color: readableOn(value) ?? 'inherit',
+      }}
     >
       {value}
     </div>
