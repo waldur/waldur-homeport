@@ -1,0 +1,210 @@
+{
+  "$comment": "Colour primitives. `light` is the value in the light theme, `dark` the value in the dark theme; a step with no `dark` is the same in both. Edit here, then run `yarn tokens:generate` — the SCSS and CSS ramps are generated from this file and must not be edited by hand.",
+  "ramps": {
+    "gray": {
+      "description": "Neutral. The only ramp with a dark palette of its own in CSS; the others are reused at a mirrored step.",
+      "steps": {
+        "25": { "light": "#fcfcfd", "dark": "#0c111d" },
+        "50": { "light": "#f9fafb", "dark": "#161b26" },
+        "100": { "light": "#f2f4f7", "dark": "#1f242f" },
+        "200": { "light": "#e4e7ec", "dark": "#333741" },
+        "300": { "light": "#d0d5dd", "dark": "#61646c" },
+        "400": { "light": "#98a2b3", "dark": "#85888e" },
+        "500": { "light": "#667085", "dark": "#94969c" },
+        "600": { "light": "#475467", "dark": "#cecfd2" },
+        "700": { "light": "#344054", "dark": "#ececed" },
+        "800": { "light": "#182230", "dark": "#f0f1f1" },
+        "900": { "light": "#101828", "dark": "#f5f5f6" },
+        "950": { "light": "#0c111d", "dark": "#fafafa" }
+      }
+    },
+    "error": {
+      "description": "Destructive / validation. Called `danger` in the SCSS variables and Bootstrap.",
+      "scssName": "danger",
+      "steps": {
+        "25": { "light": "#fffbfa", "dark": "#55160c" },
+        "50": { "light": "#fef3f2", "dark": "#7a271a" },
+        "100": { "light": "#fee4e2", "dark": "#912018" },
+        "200": { "light": "#fecdca", "dark": "#b42318" },
+        "300": { "light": "#fda29b", "dark": "#d92d20" },
+        "400": { "light": "#f97066", "dark": "#f04438" },
+        "500": { "light": "#f04438", "dark": "#f97066" },
+        "600": { "light": "#d92d20", "dark": "#fda29b" },
+        "700": { "light": "#b42318", "dark": "#fecdca" },
+        "800": { "light": "#912018", "dark": "#fee4e2" },
+        "900": { "light": "#7a271a", "dark": "#fef3f2" },
+        "950": { "light": "#55160c", "dark": "#fffbfa" }
+      }
+    },
+    "warning": {
+      "description": "Caution.",
+      "steps": {
+        "25": { "light": "#fffcf5", "dark": "#4e1d09" },
+        "50": { "light": "#fffaeb", "dark": "#7a2e0e" },
+        "100": { "light": "#fef0c7", "dark": "#93370d" },
+        "200": { "light": "#fedf89", "dark": "#b54708" },
+        "300": { "light": "#fec84b", "dark": "#dc6803" },
+        "400": { "light": "#fdb022", "dark": "#f79009" },
+        "500": { "light": "#f79009", "dark": "#fdb022" },
+        "600": { "light": "#dc6803", "dark": "#fec84b" },
+        "700": { "light": "#b54708", "dark": "#fedf89" },
+        "800": { "light": "#93370d", "dark": "#fef0c7" },
+        "900": { "light": "#7a2e0e", "dark": "#fffaeb" },
+        "950": { "light": "#4e1d09", "dark": "#fffcf5" }
+      }
+    },
+    "success": {
+      "description": "Waldur-specific green, not the reference design system's stock success scale.",
+      "steps": {
+        "25": { "light": "#f6fef9", "dark": "#053321" },
+        "50": { "light": "#ecfdf3", "dark": "#054f31" },
+        "100": { "light": "#dcfae6", "dark": "#05603a" },
+        "200": { "light": "#a6f4c5", "dark": "#027a48" },
+        "300": { "light": "#6ce9a6", "dark": "#039855" },
+        "400": { "light": "#32d583", "dark": "#12b76a" },
+        "500": { "light": "#12b76a", "dark": "#32d583" },
+        "600": { "light": "#039855", "dark": "#6ce9a6" },
+        "700": { "light": "#027a48", "dark": "#a6f4c5" },
+        "800": { "light": "#05603a", "dark": "#dcfae6" },
+        "900": { "light": "#054f31", "dark": "#ecfdf3" },
+        "950": { "light": "#053321", "dark": "#f6fef9" }
+      }
+    },
+    "info": {
+      "note": "Sparser than gray/error/warning/success: steps Metronic never defined (25/100/800, and 400 for most hues) are left out rather than invented. `info` and `purple` are byte-identical at every step \u2014 this app's \"info\" hue is the same violet as \"purple\", not blue. Like error/warning/success, these are theme-invariant single ramps: dark mode reuses the same ramp at a mirrored step, so no separate dark block exists for them in CSS.",
+      "steps": {
+        "50": { "light": "#f4f3ff", "dark": "#3e1c96" },
+        "200": { "light": "#d9d6fe", "dark": "#5925dc" },
+        "300": { "light": "#bdb4fe", "dark": "#6938ef" },
+        "400": { "light": "#9b8afb", "dark": "#7a5af8" },
+        "500": { "light": "#7a5af8", "dark": "#9b8afb" },
+        "600": { "light": "#6938ef", "dark": "#bdb4fe" },
+        "700": { "light": "#5925dc", "dark": "#d9d6fe" },
+        "900": { "light": "#3e1c96", "dark": "#f4f3ff" }
+      }
+    },
+    "purple": {
+      "steps": {
+        "50": { "light": "#f4f3ff", "dark": "#3e1c96" },
+        "200": { "light": "#d9d6fe", "dark": "#5925dc" },
+        "300": { "light": "#bdb4fe", "dark": "#6938ef" },
+        "400": { "light": "#9b8afb", "scss": false },
+        "500": { "light": "#7a5af8", "dark": "#9b8afb" },
+        "600": { "light": "#6938ef", "dark": "#bdb4fe" },
+        "700": { "light": "#5925dc", "dark": "#d9d6fe" },
+        "900": { "light": "#3e1c96", "dark": "#f4f3ff" },
+        "950": { "light": "#27115f" }
+      }
+    },
+    "blue": {
+      "steps": {
+        "50": { "light": "#eff8ff", "dark": "#194185" },
+        "200": { "light": "#b2ddff", "dark": "#175cd3" },
+        "300": { "light": "#84caff", "dark": "#1570ef" },
+        "400": { "light": "#53b1fd", "dark": "#84caff" },
+        "500": { "light": "#2e90fa", "dark": "#53b1fd" },
+        "600": { "light": "#1570ef", "dark": "#84caff" },
+        "700": { "light": "#175cd3", "dark": "#b2ddff" },
+        "900": { "light": "#194185", "dark": "#eff8ff" },
+        "950": { "light": "#102a56" }
+      }
+    },
+    "indigo": {
+      "steps": {
+        "50": { "light": "#eef4ff", "dark": "#2d3282" },
+        "200": { "light": "#c7d7fe", "dark": "#3538cd" },
+        "300": { "light": "#a4bcfd", "dark": "#444ce7" },
+        "400": { "light": "#8098f9", "dark": "#a4bcfd" },
+        "500": { "light": "#6172f3", "dark": "#8098f9" },
+        "600": { "light": "#444ce7", "dark": "#a4bcfd" },
+        "700": { "light": "#3538cd", "dark": "#c7d7fe" },
+        "900": { "light": "#2d3282", "dark": "#eef4ff" },
+        "950": { "light": "#1f235b" }
+      }
+    },
+    "moss": {
+      "steps": {
+        "50": { "light": "#f5fbee", "dark": "#2b4212" },
+        "200": { "light": "#ceeab0", "dark": "#3f621a" },
+        "300": { "light": "#acdc79", "dark": "#4f7a21" },
+        "400": { "light": "#86cb3c", "scss": false },
+        "500": { "light": "#669f2a", "dark": "#86cb3c" },
+        "600": { "light": "#4f7a21", "dark": "#acdc79" },
+        "700": { "light": "#3f621a", "dark": "#ceeab0" },
+        "900": { "light": "#2b4212", "dark": "#f5fbee" },
+        "950": { "light": "#1a280b" }
+      }
+    },
+    "pink": {
+      "steps": {
+        "50": { "light": "#fdf2fa", "dark": "#851651" },
+        "200": { "light": "#fcceee", "dark": "#c11574" },
+        "300": { "light": "#faa7e0", "dark": "#dd2590" },
+        "400": { "light": "#f670c7", "scss": false },
+        "500": { "light": "#ee46bc", "dark": "#f670c7" },
+        "600": { "light": "#dd2590", "dark": "#faa7e0" },
+        "700": { "light": "#c11574", "dark": "#fcceee" },
+        "900": { "light": "#851651", "dark": "#fdf2fa" },
+        "950": { "light": "#4e0d30" }
+      }
+    },
+    "teal": {
+      "steps": {
+        "50": { "light": "#f0fdf9", "dark": "#134e48" },
+        "200": { "light": "#99f6e0", "dark": "#107569" },
+        "300": { "light": "#5fe9d0", "dark": "#0e9384" },
+        "400": { "light": "#2ed3b7", "dark": "#5fe9d0" },
+        "500": { "light": "#15b79e", "dark": "#2ed3b7" },
+        "600": { "light": "#0e9384", "dark": "#5fe9d0" },
+        "700": { "light": "#107569", "dark": "#99f6e0" },
+        "900": { "light": "#134e48", "dark": "#f0fdf9" },
+        "950": { "light": "#0a2926" }
+      }
+    },
+    "orange": {
+      "steps": {
+        "50": { "light": "#fff6ed", "dark": "#7e2410" },
+        "200": { "light": "#fddcab", "dark": "#c4320a" },
+        "300": { "light": "#feb273", "dark": "#ec4a0a" },
+        "400": { "light": "#fd853a", "scss": false },
+        "500": { "light": "#fb6514", "dark": "#fd853a" },
+        "600": { "light": "#ec4a0a", "dark": "#feb273" },
+        "700": { "light": "#c4320a", "dark": "#fddcab" },
+        "900": { "light": "#7e2410", "dark": "#fff6ed" },
+        "950": { "light": "#57130a" }
+      }
+    },
+    "rose": {
+      "steps": {
+        "50": { "light": "#fff1f3", "dark": "#89123e" },
+        "200": { "light": "#fecdd6", "dark": "#c01048" },
+        "300": { "light": "#fea3b4", "dark": "#e31b54" },
+        "400": { "light": "#fd6f8e", "scss": false },
+        "500": { "light": "#f63d68", "dark": "#fd6f8e" },
+        "600": { "light": "#e31b54", "dark": "#fea3b4" },
+        "700": { "light": "#c01048", "dark": "#fecdd6" },
+        "900": { "light": "#89123e", "dark": "#fff1f3" },
+        "950": { "light": "#510b24" }
+      }
+    },
+    "primary": {
+      "description": "Waldur's static default green. Not exposed to Tailwind: the tenant-configurable brand colour is the runtime --waldur-brand-* ramp, not this.",
+      "scssDefault": false,
+      "css": false,
+      "steps": {
+        "25": { "light": "#fafcf9", "dark": "#103000" },
+        "50": { "light": "#f1f7ef", "dark": "#174000" },
+        "100": { "light": "#e6f0e3", "dark": "#1f5000" },
+        "200": { "light": "#c3dabb", "dark": "#286100" },
+        "300": { "light": "#97bf89", "dark": "#307300" },
+        "400": { "light": "#6ca359", "dark": "#398500" },
+        "500": { "light": "#398500", "dark": "#6ca359" },
+        "600": { "light": "#307300", "dark": "#97bf89" },
+        "700": { "light": "#286100", "dark": "#c3dabb" },
+        "800": { "light": "#1f5000", "dark": "#e6f0e3" },
+        "900": { "light": "#174000", "dark": "#f1f7ef" },
+        "950": { "light": "#103000", "dark": "#fafcf9" }
+      }
+    }
+  }
+}

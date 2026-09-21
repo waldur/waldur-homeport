@@ -38,6 +38,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `tables.md` - Modular index for useTable, columns, filters, row actions, export, and visual customizations
 - `table/filter-migration-guide.md` - Generated table filters from OpenAPI schema
 - `development-setup.md` - Build, environment, tooling
+- `design-tokens.md` - Colour ramps generated from `tokens/colors.json` (never edit `_color-ramps.scss` / `colorRamps.css`)
 - `ui-consistency-guidelines.md` - Empty states, buttons, loading, tooltips
 
 Subagents in `.claude/agents/` provide deep expertise for each area.

@@ -12,7 +12,7 @@ The app uses **two separate compiled stylesheets** that are dynamically loaded b
 SCSS variables use the `isDarkMode()` function to return different values at compile time:
 
 ```scss
-// In _colors.scss
+// Generated into _color-ramps.scss from packages/design-tokens/tokens/colors.json
 $gray-50: if(isDarkMode(), #161b26, #f9fafb);
 $gray-100: if(isDarkMode(), #1f242f, #f2f4f7);
 $gray-900: if(isDarkMode(), #f5f5f6, #101828);
@@ -28,7 +28,8 @@ $gray-900: if(isDarkMode(), #f5f5f6, #101828);
 | `src/theme/utils.ts` | Dynamic CSS loading, initial theme detection |
 | `src/theme/ThemeSwitcher.tsx` | UI toggle component |
 | `src/metronic/sass/_tokens.scss` | Semantic design tokens |
-| `src/metronic/sass/_colors.scss` | Theme-aware color definitions |
+| `src/metronic/sass/_colors.scss` | Derived color variables (`$success`, `$text-muted`, brand ramp, …) |
+| `src/metronic/sass/_color-ramps.scss` | Theme-aware color ramps — **generated**, edit `packages/design-tokens/tokens/colors.json` (see [design-tokens.md](design-tokens.md)) |
 | `src/metronic/sass/core/base/functions/_mode.scss` | `isDarkMode()` SCSS function |
 
 ## Theme Initialization Flow
