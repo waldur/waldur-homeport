@@ -12,6 +12,7 @@
     "./surfaceColors.css": "./src/surfaceColors.css",
     "./sidebarColors.css": "./src/sidebarColors.css",
     "./animations.css": "./src/animations.css",
+    "./zIndex.css": "./src/zIndex.css",
     "./fonts.css": "./src/fonts.css"
   },
   "dependencies": {

@@ -1,0 +1,48 @@
+/**
+ * Named z-index layers for the Tailwind/shadcn side of the app, in one place.
+ *
+ * The full stacking order the app lives with, lowest first. Only the rows
+ * marked "token" are defined here; the rest come from Bootstrap/Metronic and
+ * are listed so an ordering constraint can be read off one list instead of
+ * being re-derived from comments scattered across files:
+ *
+ *      100  Metronic header/toolbar (layout/_variables.scss)
+ *      105  --z-index-sidebar-panel   token  (= Metronic $aside-config z-index)
+ *      110  --z-index-mobile-drawer   token  (= Metronic $drawer z-index)
+ *     1000  Bootstrap $zindex-dropdown
+ *     1050  Bootstrap $zindex-modal-backdrop
+ *     1055  Bootstrap $zindex-modal
+ *     1070  Bootstrap $zindex-popover (also .role-project-select-popup)
+ *     1080  Bootstrap $zindex-tooltip
+ *     1100  the app's own .dropdown-menu (custom/_button-group.scss)
+ *     1150  --z-index-toast          token  (above modal/popover/dropdown)
+ *     1180  --z-index-tooltip        token  (above toast, so a toast's own
+ *                                            Dismiss tooltip stays visible)
+ *
+ * Only values chosen to match a still-present Metronic layer belong here —
+ * components with no such parity requirement (Dialog, Popover, DropdownMenu)
+ * keep Tailwind's built-in z-50/z-10. `--z-index-*` is one of Tailwind's own
+ * theme namespaces, so each token also becomes a real `z-<name>` utility.
+ *
+ * zIndex.test.ts asserts the ordering above, so re-numbering a token can't
+ * silently invert it.
+ */
+
+@theme {
+  --z-index-sidebar-panel: 105;
+  --z-index-mobile-drawer: 110;
+  /* Not consumed as a `z-tooltip` class: packages/ui/src/Tooltip.tsx types
+     its zIndex prop as a plain number (an override needs a runtime value no
+     static class can express), so its default is the literal 1180 there.
+     zIndex.test.ts pins that literal to this token so they can't drift. */
+  --z-index-tooltip: 1180;
+}
+
+/* `static` because nothing uses this as a `z-toast` class — Tailwind only
+   emits theme variables it finds used, and a `var(...)` inside a TSX string
+   (NotificationContainer.tsx's inline style) doesn't count, so without it
+   the variable is missing from the build and the inline z-index resolves to
+   `auto`. */
+@theme static {
+  --z-index-toast: 1150;
+}
