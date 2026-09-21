@@ -5,7 +5,7 @@
   flex-direction: column;
 }
 
-[data-bs-theme='dark'] .layout-neumorphism {
+[data-theme='dark'] .layout-neumorphism {
   background: #2d3436;
 }
 
@@ -36,7 +36,7 @@
     -20px -20px 60px #ffffff;
 }
 
-[data-bs-theme='dark'] .layout-neumorphism-card {
+[data-theme='dark'] .layout-neumorphism-card {
   background: #2d3436;
   box-shadow:
     20px 20px 60px #262b2d,
@@ -52,7 +52,7 @@
     inset -5px -5px 10px #ffffff;
 }
 
-[data-bs-theme='dark'] .layout-neumorphism-card .form-control {
+[data-theme='dark'] .layout-neumorphism-card .form-control {
   background: #2d3436;
   box-shadow:
     inset 5px 5px 10px #262b2d,
@@ -67,7 +67,7 @@
     -5px -5px 10px #ffffff;
 }
 
-[data-bs-theme='dark'] .layout-neumorphism-card .btn {
+[data-theme='dark'] .layout-neumorphism-card .btn {
   box-shadow:
     5px 5px 10px #262b2d,
     -5px -5px 10px #343d3f;
@@ -81,6 +81,6 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-[data-bs-theme='dark'] .layout-neumorphism-footer {
+[data-theme='dark'] .layout-neumorphism-footer {
   border-top-color: rgba(255, 255, 255, 0.1);
 }

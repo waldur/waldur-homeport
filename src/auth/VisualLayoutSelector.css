@@ -84,6 +84,6 @@
   color: var(--bs-primary);
 }
 
-[data-bs-theme='dark'] .layout-canvas {
+[data-theme='dark'] .layout-canvas {
   background: var(--bs-gray-900);
 }

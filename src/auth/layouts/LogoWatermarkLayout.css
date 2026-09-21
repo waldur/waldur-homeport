@@ -21,7 +21,7 @@
   pointer-events: none;
 }
 
-[data-bs-theme='dark'] .layout-logo-watermark-bg {
+[data-theme='dark'] .layout-logo-watermark-bg {
   opacity: 0.05;
   filter: invert(1);
 }
