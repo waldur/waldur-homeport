@@ -17307,6 +17307,11 @@
     }
   },
   "Enable SCIM entitlement synchronization to external identity provider.": {},
+  "Enable SCIM entitlements": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Enable SLA deadline tracking for the basic support backend.": {},
   "Enable SLURM Periodic Usage Policy": {
     "context": {
@@ -23650,6 +23655,11 @@
     }
   },
   "Include the prefix length, for example 192.168.42.0/24 or 2001:db8::/64.": {},
+  "Include this offering in outbound SCIM entitlement sync for SSH login-node access. An SSH access endpoint alone is not enough; this option must be enabled. Also requires SCIM_MEMBERSHIP_SYNC_ENABLED on the deployment.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Include weekends": {
     "context": {
       "feature_area": "booking"

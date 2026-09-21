@@ -2,6 +2,7 @@ import { EChartsOption } from 'echarts';
 import React, { useMemo } from 'react';
 
 import { EChart } from '@/core/EChart';
+import { getCategoricalColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
 interface DonutChartItem {
@@ -71,19 +72,7 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
 
     const chartData = useMemo(() => prepareChartData(data), [data]);
 
-    const palette = useMemo(
-      () => [
-        '#97bf89', // primary-300
-        '#84caff', // blue-300
-        '#5fe9d0', // teal-300
-        '#bdb4fe', // info-300
-        '#faa7e0', // pink-300
-        '#a4bcfd', // indigo-300
-        '#acdc79', // moss-300
-        '#fea3b4', // rose-300
-      ],
-      [],
-    );
+    const palette = useMemo(() => getCategoricalColors(), []);
 
     const options = useMemo<EChartsOption>(
       () => ({

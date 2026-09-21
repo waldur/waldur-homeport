@@ -1,3 +1,4 @@
+import { buildClassDefs } from './nodePalette';
 import type {
   TopologyEdge,
   TopologyEdgeKind,
@@ -223,17 +224,7 @@ const edgeStyle = (kind: TopologyEdgeKind): string => {
 const classFor = (type: TopologyNodeType | 'aggregate_instances'): string =>
   type === 'aggregate_instances' ? 'node_instance' : `node_${type}`;
 
-const CLASS_DEFS = `
-classDef node_tenant fill:#0a3500,stroke:#3a8c00,color:#f5f5f6,stroke-width:2px
-classDef node_router fill:#1f5000,stroke:#3a8c00,color:#f5f5f6
-classDef node_network fill:#26384d,stroke:#5078a8,color:#f5f5f6
-classDef node_subnet fill:#1f3a4a,stroke:#5078a8,color:#f5f5f6
-classDef node_port fill:#2e2f33,stroke:#85888e,color:#f5f5f6
-classDef node_instance fill:#1f3a26,stroke:#3a8c00,color:#f5f5f6
-classDef node_floating_ip fill:#3a2f1f,stroke:#a87a3a,color:#f5f5f6
-classDef node_external_network fill:#3a1f1f,stroke:#a83a3a,color:#f5f5f6
-classDef node_rbac_share fill:#3a1f3a,stroke:#a83aa8,color:#f5f5f6
-`.trim();
+const CLASS_DEFS = buildClassDefs();
 
 const aggregateLargeSubnets = (
   graph: TopologyGraph,

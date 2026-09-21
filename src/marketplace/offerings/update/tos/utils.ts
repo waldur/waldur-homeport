@@ -1,12 +1,15 @@
 import { EChartsOption } from 'echarts';
 import type { VersionAdoption, TimeSeriesToSData } from 'waldur-js-client';
 
+import { getChartThemeColors } from '@/dashboard/chartColors';
+
 /**
  * Format version adoption data for ECharts bar chart
  */
 export const formatVersionAdoptionChart = (
   data: VersionAdoption[],
 ): EChartsOption => {
+  const colors = getChartThemeColors();
   return {
     tooltip: {
       trigger: 'axis',
@@ -38,7 +41,7 @@ export const formatVersionAdoptionChart = (
         type: 'bar',
         data: data.map((d) => d.users_count),
         itemStyle: {
-          color: '#97bf89',
+          color: colors.brand300,
           borderRadius: [5, 5, 0, 0],
         },
       },
@@ -56,6 +59,7 @@ export const formatConsentStatusChart = (stats: {
   total_consents_count: number;
   active_users_count: number;
 }): EChartsOption => {
+  const colors = getChartThemeColors();
   const accepted = stats.accepted_consents_count;
   const revoked = stats.revoked_consents_count;
   const notAccepted = Math.max(0, stats.total_users_count - accepted - revoked);
@@ -104,7 +108,7 @@ export const formatConsentStatusChart = (stats: {
           show: false,
         },
         data: pieData,
-        color: ['#307300', '#97bf89', '#e4e7ec'],
+        color: [colors.brand600, colors.brand300, colors.track],
       },
     ],
   };
@@ -116,6 +120,7 @@ export const formatConsentStatusChart = (stats: {
 export const formatAcceptedTrendChart = (
   data: TimeSeriesToSData[],
 ): EChartsOption => {
+  const colors = getChartThemeColors();
   return {
     tooltip: {
       trigger: 'axis',
@@ -146,13 +151,13 @@ export const formatAcceptedTrendChart = (
         smooth: true,
         data: data.map((d) => d.count),
         itemStyle: {
-          color: '#307300',
+          color: colors.brand600,
         },
         lineStyle: {
-          color: '#307300',
+          color: colors.brand600,
         },
         areaStyle: {
-          color: '#307300',
+          color: colors.brand600,
           opacity: 0.3,
         },
       },
