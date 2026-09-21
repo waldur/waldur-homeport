@@ -580,3 +580,68 @@ describe('Service provider manager-only redirect', () => {
     expect(mockGetCurrentUser).not.toHaveBeenCalled();
   });
 });
+
+describe('Permission guard redirect', () => {
+  const denied = () => false;
+  const allowed = () => true;
+
+  let guardHook: any;
+
+  const findGuardHook = () =>
+    onStartHandlers.find(
+      (h) =>
+        typeof h.criteria?.to === 'function' &&
+        h.criteria.to({
+          name: 'probe',
+          data: { permissions: [denied] },
+        }) === true,
+    );
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+
+    attachTransitions();
+    guardHook = findGuardHook();
+    expect(guardHook).toBeTruthy();
+  });
+
+  it('does not match a state whose permissions are satisfied', () => {
+    expect(
+      guardHook.criteria.to({
+        name: 'support',
+        data: { permissions: [allowed] },
+      }),
+    ).toBeFalsy();
+  });
+
+  it('keeps the denied address instead of rewriting it', () => {
+    /**
+     * The error states have no url of their own. Without `location: false` the
+     * address bar is rewritten to '/', the url router re-matches that against
+     * the `*path` catch-all, and the access-denied page this guard just chose
+     * is replaced by the generic 404 — so a refusal read as a broken link.
+     */
+    guardHook.callback(createMockTransition('support-list'));
+
+    expect(mockTarget).toHaveBeenCalledWith(
+      'errorPage.noPermission',
+      undefined,
+      { location: false },
+    );
+  });
+
+  it('honours an explicit fallback state', () => {
+    guardHook.callback({
+      ...createMockTransition('support-list'),
+      options: () => ({ custom: { fallbackState: 'profile-manage' } }),
+    });
+
+    expect(mockTarget).toHaveBeenCalledWith('profile-manage', undefined, {
+      location: false,
+    });
+  });
+});

@@ -295,6 +295,13 @@ export function attachTransitions() {
     (transition) =>
       transition.router.stateService.target(
         transition.options().custom?.fallbackState || 'errorPage.noPermission',
+        undefined,
+        // `location: false` keeps the address that was denied. The error states
+        // have no url of their own, so without it the address bar is rewritten
+        // to '/', the url router re-matches that against the `*path` catch-all,
+        // and the access-denied page the guard just chose is replaced by the
+        // generic 404 — which reads as a broken link rather than a refusal.
+        { location: false },
       ),
   );
 
