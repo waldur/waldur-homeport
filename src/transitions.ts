@@ -243,31 +243,21 @@ export function attachTransitions() {
 
   // Check resolvers before entering to a state
   router.transitionService.onBefore({}, async (transition) => {
-    const toState = transition.to();
-
-    const getAllStates = (state) => {
-      const states = [];
-      while (state) {
-        states.push(state);
-        state = state.parent
-          ? transition.router.stateRegistry.get(state.parent)
-          : null;
-      }
-      return states;
-    };
-
-    // Get all parent states
-    const states = getAllStates(toState);
+    // The whole destination path, ancestors included. This used to climb
+    // `parent` from the state *declaration*, which stops at any state named
+    // with UI-Router's dot notation: UI-Router records the parent on its
+    // internal state object and never on the declaration. So a deep link into
+    // `organization-billing.billing` found no resolver to await and evaluated
+    // permissions against an empty store, denying the page to its owner (#301).
+    const nodes = transition.treeChanges().to;
 
     // Permission predicates run synchronously in the onStart hook below but
     // may depend on data produced by async resolvers. Awaiting those tokens
     // here ensures a fresh deep-link doesn't evaluate permissions against
     // undefined state.
     const awaitedTokens = ['fetchCustomer', 'project'].filter((token) =>
-      states.some((state) =>
-        Array.isArray(state.resolve)
-          ? state.resolve?.some((resolver) => resolver.token === token)
-          : false,
+      nodes.some((node) =>
+        node.resolvables?.some((resolvable) => resolvable.token === token),
       ),
     );
 
