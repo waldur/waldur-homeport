@@ -5,6 +5,7 @@ import {
 } from 'waldur-auth-core';
 import {
   applySidebarStyle,
+  DEFAULT_PRIMARY_COLORS,
   getInitialTheme,
   initBrandTokens,
   initFontFamily,
@@ -29,11 +30,11 @@ import {
   setConfiguredSidebarStyle,
 } from './sidebarStyleConfig';
 
-// The backend's own real default (src/SettingsDescription.ts's BRAND_COLOR
-// setting) — not an arbitrary placeholder. A micro-app that never
-// overrides defaultBrandColor renders with the same default a fresh,
-// unconfigured Waldur deployment would.
-const DEFAULT_BRAND_COLOR = '#307300';
+// The default green ramp's brand step, which is the backend's own real default
+// (src/SettingsDescription.ts's BRAND_COLOR setting) — not an arbitrary
+// placeholder. A micro-app that never overrides defaultBrandColor renders with
+// the same default a fresh, unconfigured Waldur deployment would.
+const DEFAULT_BRAND_COLOR = DEFAULT_PRIMARY_COLORS[600];
 
 export interface MicroAppBootstrapConfig {
   /** Defaults to getApiUrlFromMeta() (the page's own `<meta name="api-url">`)

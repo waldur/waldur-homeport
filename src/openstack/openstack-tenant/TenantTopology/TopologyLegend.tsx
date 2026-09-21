@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { translate } from '@/i18n';
 
 import type { LegendEdgeStyle } from './buildMermaidCode';
+import { LEGEND_EDGE_STROKE, NODE_PALETTE } from './nodePalette';
 import type { TopologyNodeType } from './types';
 
 interface Props {
@@ -36,8 +37,8 @@ const useItems = (): LegendItem[] => [
   {
     type: 'tenant',
     shape: 'circle',
-    fill: '#0a3500',
-    stroke: '#3a8c00',
+    fill: NODE_PALETTE.tenant.fill,
+    stroke: NODE_PALETTE.tenant.stroke,
     label: translate('Tenant'),
     description: translate(
       'Your OpenStack project — the scope that owns all the networks, routers, and instances below.',
@@ -46,8 +47,8 @@ const useItems = (): LegendItem[] => [
   {
     type: 'router',
     shape: 'rhombus',
-    fill: '#1f5000',
-    stroke: '#3a8c00',
+    fill: NODE_PALETTE.router.fill,
+    stroke: NODE_PALETTE.router.stroke,
     label: translate('Router'),
     description: translate(
       'A virtual L3 router that connects internal subnets to each other and to the external network.',
@@ -56,8 +57,8 @@ const useItems = (): LegendItem[] => [
   {
     type: 'network',
     shape: 'rectangle',
-    fill: '#26384d',
-    stroke: '#5078a8',
+    fill: NODE_PALETTE.network.fill,
+    stroke: NODE_PALETTE.network.stroke,
     label: translate('Network'),
     description: translate(
       'A private network owned by the tenant; carries one or more subnets.',
@@ -66,8 +67,8 @@ const useItems = (): LegendItem[] => [
   {
     type: 'subnet',
     shape: 'parallelogram',
-    fill: '#1f3a4a',
-    stroke: '#5078a8',
+    fill: NODE_PALETTE.subnet.fill,
+    stroke: NODE_PALETTE.subnet.stroke,
     label: translate('Subnet'),
     description: translate(
       'An IPv4/IPv6 subnet with its own CIDR, gateway, and DHCP range.',
@@ -76,8 +77,8 @@ const useItems = (): LegendItem[] => [
   {
     type: 'port',
     shape: 'rounded',
-    fill: '#2e2f33',
-    stroke: '#85888e',
+    fill: NODE_PALETTE.port.fill,
+    stroke: NODE_PALETTE.port.stroke,
     label: translate('Port'),
     description: translate(
       'A network port — either an interface on a router or a NIC attached to an instance.',
@@ -86,16 +87,16 @@ const useItems = (): LegendItem[] => [
   {
     type: 'instance',
     shape: 'subroutine',
-    fill: '#1f3a26',
-    stroke: '#3a8c00',
+    fill: NODE_PALETTE.instance.fill,
+    stroke: NODE_PALETTE.instance.stroke,
     label: translate('Instance'),
     description: translate('A virtual machine running in this tenant.'),
   },
   {
     type: 'floating_ip',
     shape: 'asymmetric',
-    fill: '#3a2f1f',
-    stroke: '#a87a3a',
+    fill: NODE_PALETTE.floating_ip.fill,
+    stroke: NODE_PALETTE.floating_ip.stroke,
     label: translate('Floating IP'),
     description: translate(
       'A reserved external IP allocated to the tenant; can be attached to a port to expose an instance.',
@@ -104,8 +105,8 @@ const useItems = (): LegendItem[] => [
   {
     type: 'external_network',
     shape: 'hexagon',
-    fill: '#3a1f1f',
-    stroke: '#a83a3a',
+    fill: NODE_PALETTE.external_network.fill,
+    stroke: NODE_PALETTE.external_network.stroke,
     label: translate('External network'),
     description: translate(
       'A provider-level network used as the tenant’s upstream gateway; supplies floating IPs.',
@@ -114,8 +115,8 @@ const useItems = (): LegendItem[] => [
   {
     type: 'rbac_share',
     shape: 'back-parallelogram',
-    fill: '#3a1f3a',
-    stroke: '#a83aa8',
+    fill: NODE_PALETTE.rbac_share.fill,
+    stroke: NODE_PALETTE.rbac_share.stroke,
     label: translate('RBAC share'),
     description: translate(
       'A network shared into this tenant from another tenant via a Neutron RBAC policy.',
@@ -225,7 +226,7 @@ const ShapeSwatch: FC<{ kind: ShapeKind; fill: string; stroke: string }> = ({
 };
 
 const EdgeSwatch: FC<{ kind: string }> = ({ kind }) => {
-  const stroke = '#85888e';
+  const stroke = LEGEND_EDGE_STROKE;
   if (kind === 'dotted') {
     return (
       <svg width={36} height={12} viewBox="0 0 36 12" aria-hidden>

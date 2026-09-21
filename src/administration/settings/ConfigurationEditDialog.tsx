@@ -3,6 +3,8 @@ import { FormControl } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
+import { DEFAULT_PRIMARY_COLORS } from 'waldur-design-tokens';
+
 import { VisualLayoutSelector } from '@/auth/VisualLayoutSelector';
 import { formDataOptions } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -27,7 +29,7 @@ import {
 } from './utils';
 
 const colorPalette = [
-  '#307300',
+  DEFAULT_PRIMARY_COLORS[600],
   '#4E5BA6',
   '#444CE7',
   '#6938EF',

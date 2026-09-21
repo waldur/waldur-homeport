@@ -1,7 +1,7 @@
 import { CheckIcon } from '@phosphor-icons/react';
 import React, { useMemo } from 'react';
 
-import { ENV } from '@/core/config';
+import { getBrandColor } from '@/core/utils';
 
 import { LayoutPreview } from './LayoutPreview';
 import { LAYOUT_OPTIONS, LandingPageLayout } from './layouts';
@@ -17,7 +17,7 @@ export const VisualLayoutSelector: React.FC<VisualLayoutSelectorProps> = ({
   value,
   onChange,
 }) => {
-  const brandColor = ENV.plugins.WALDUR_CORE.BRAND_COLOR || '#307300';
+  const brandColor = getBrandColor();
 
   const groupedOptions = useMemo(() => {
     return LAYOUT_OPTIONS.reduce(
