@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { getCssVar } from './cssVar';
+import { DEFAULT_PRIMARY_COLORS } from './brandColors';
+import { getBrandVar, getCssVar } from './cssVar';
 
 const root = document.documentElement;
 
@@ -27,5 +28,23 @@ describe('getCssVar', () => {
   it('treats an empty value as unset', () => {
     root.style.setProperty('--test-empty', ' ');
     expect(getCssVar('--test-empty', '#fff')).toBe('#fff');
+  });
+});
+
+describe('getBrandVar', () => {
+  it('reads --waldur-brand-<step> from <html>', () => {
+    root.style.setProperty('--waldur-brand-600', '#1570ef');
+    expect(getBrandVar(600)).toBe('#1570ef');
+  });
+
+  it('falls back to the same step of the default ramp', () => {
+    expect(getBrandVar(600)).toBe(DEFAULT_PRIMARY_COLORS[600]);
+    expect(getBrandVar(50)).toBe(DEFAULT_PRIMARY_COLORS[50]);
+  });
+
+  it('falls back per step, not for the whole ramp', () => {
+    root.style.setProperty('--waldur-brand-600', '#1570ef');
+    expect(getBrandVar(600)).toBe('#1570ef');
+    expect(getBrandVar(700)).toBe(DEFAULT_PRIMARY_COLORS[700]);
   });
 });

@@ -1,49 +1,23 @@
 import mermaid from 'mermaid';
 import { FC, useEffect, useId, useState } from 'react';
 
-import { getCssVar, isDarkTheme } from 'waldur-design-tokens';
+import { isDarkTheme } from 'waldur-design-tokens';
 
 import { translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
+
+import { getMermaidThemeVariables } from './mermaidTheme';
 
 interface MermaidChartProps {
   code: string;
   className?: string;
 }
 
-// Dark mode fallback colors (from _colors.scss)
-const DARK_GRAYS = {
-  25: '#0c111d',
-  50: '#161b26',
-  100: '#1f242f',
-  200: '#333741',
-  300: '#61646c',
-  400: '#85888e',
-  500: '#94969c',
-  600: '#cecfd2',
-  700: '#ececed',
-  800: '#f0f1f1',
-  900: '#f5f5f6',
-};
+let iconsRegistered = false;
 
-const LIGHT_GRAYS = {
-  25: '#fcfcfd',
-  50: '#f9fafb',
-  100: '#f2f4f7',
-  200: '#e4e7ec',
-  300: '#d0d5dd',
-  400: '#98a2b3',
-  500: '#667085',
-  600: '#475467',
-  700: '#344054',
-  800: '#182230',
-  900: '#101828',
-};
-
-let initialized = false;
-
-const initMermaid = () => {
-  if (initialized) return;
-  initialized = true;
+const registerIcons = () => {
+  if (iconsRegistered) return;
+  iconsRegistered = true;
 
   // Register Phosphor icons pack (lazy loaded)
   mermaid.registerIconPacks([
@@ -52,92 +26,18 @@ const initMermaid = () => {
       loader: () => import('@iconify-json/ph').then((module) => module.icons),
     },
   ]);
+};
 
-  const isDarkMode = isDarkTheme();
-
-  const grays = isDarkMode ? DARK_GRAYS : LIGHT_GRAYS;
-
-  // In dark mode, brand colors are inverted:
-  // light 100 -> dark 800, light 200 -> dark 700, etc.
-  const primaryColor = isDarkMode
-    ? getCssVar('--waldur-brand-800', '#1f5000')
-    : getCssVar('--waldur-brand-100', '#e6f0e3');
-
-  const primaryBorderColor = isDarkMode
-    ? getCssVar('--waldur-brand-500', '#398500')
-    : getCssVar('--waldur-brand-400', '#6ca359');
-
-  const secondaryColor = isDarkMode
-    ? getCssVar('--waldur-brand-900', '#174000')
-    : getCssVar('--waldur-brand-50', '#f1f7ef');
-
-  const secondaryBorderColor = isDarkMode
-    ? getCssVar('--waldur-brand-700', '#286100')
-    : getCssVar('--waldur-brand-200', '#c3dabb');
-
-  const clusterBorderColor = isDarkMode
-    ? getCssVar('--waldur-brand-600', '#307300')
-    : getCssVar('--waldur-brand-300', '#97bf89');
-
-  // Text colors - in dark mode use light grays
-  const primaryTextColor = grays[isDarkMode ? 100 : 800];
-  const textColor = grays[isDarkMode ? 700 : 700];
-  const lineColor = grays[400];
-
-  // Background colors
-  const tertiaryColor = grays[isDarkMode ? 200 : 100];
-  const backgroundColor = isDarkMode ? grays[50] : '#ffffff';
-  const noteBkgColor = grays[isDarkMode ? 100 : 50];
-  const noteBorderColor = grays[300];
-
+// Mermaid draws SVG from resolved colours, so it has to be configured again
+// whenever the theme changes.
+const configureMermaid = () => {
   mermaid.initialize({
     startOnLoad: false,
     theme: 'base',
     securityLevel: 'strict',
     maxTextSize: 250000,
     maxEdges: 2000,
-    themeVariables: {
-      // Dark mode flag
-      darkMode: isDarkMode,
-
-      // Core colors matching Waldur brand
-      primaryColor,
-      primaryBorderColor,
-      primaryTextColor,
-      secondaryColor,
-      secondaryBorderColor,
-      secondaryTextColor: primaryTextColor,
-      tertiaryColor,
-      tertiaryBorderColor: grays[300],
-      tertiaryTextColor: textColor,
-
-      // Text and lines
-      lineColor,
-      textColor,
-
-      // Background
-      background: backgroundColor,
-      mainBkg: primaryColor,
-
-      // Flowchart specific
-      nodeBorder: primaryBorderColor,
-      clusterBkg: secondaryColor,
-      clusterBorder: clusterBorderColor,
-      defaultLinkColor: lineColor,
-
-      // State diagram specific
-      labelColor: textColor,
-      altBackground: tertiaryColor,
-
-      // Notes
-      noteBkgColor,
-      noteTextColor: textColor,
-      noteBorderColor,
-
-      // Font
-      fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    },
+    themeVariables: getMermaidThemeVariables(isDarkTheme()),
     flowchart: {
       curve: 'basis',
       padding: 20,
@@ -154,8 +54,15 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Not read here: it is the dependency that re-renders the diagram when the
+  // theme changes, since the colours are resolved when Mermaid is configured.
+  const { theme } = useTheme();
+
   useEffect(() => {
-    initMermaid();
+    registerIcons();
+    configureMermaid();
+
+    let cancelled = false;
 
     const render = async () => {
       setLoading(true);
@@ -180,16 +87,27 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
           throw new Error('Diagram rendering failed');
         }
 
-        setSvgContent(svg);
+        if (!cancelled) {
+          setSvgContent(svg);
+        }
       } catch {
-        setError(translate('Failed to render diagram'));
+        if (!cancelled) {
+          setError(translate('Failed to render diagram'));
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     };
 
     render();
-  }, [code, id]);
+
+    // A newer run (another theme or code) owns the state from here on.
+    return () => {
+      cancelled = true;
+    };
+  }, [code, id, theme]);
 
   if (error) {
     return <div className="alert alert-danger">{error}</div>;
