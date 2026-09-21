@@ -1,56 +1,49 @@
 /**
- * Base color ramps (25-950) that semantic tokens (buttonColors.css, and
- * future Badge/Alert/ProgressBar tokens) compose from. Cross-checked
- * against Waldur's reference design system and the live app — see
- * waldur-homeport/docs/tailwind-shadcn-migration-notes.md for the
- * methodology.
+ * Colour entry point: the base ramps plus the brand bridge. The semantic
+ * token files (buttonColors.css, surfaceColors.css, sidebarColors.css)
+ * import this and compose from it.
  *
- * Only gray has genuinely distinct light/dark palettes. Error/warning/
- * success are theme-invariant single ramps — dark-mode UI reuses the SAME
- * ramp at different steps (e.g. error-50 for light becomes error-900 for
- * the equivalent dark background) rather than a parallel dark scale.
+ * Ramps (gray, error, warning, success, info and the accent hues, steps
+ * 25-950) come from colorRamps.css, which is GENERATED. Edit
+ * tokens/colors.json and run `yarn tokens:generate`; never edit the output.
+ * The same JSON also generates the SCSS ramps Bootstrap/Metronic render
+ * (src/metronic/sass/_color-ramps.scss), so the two cannot drift.
+ * See docs/design-tokens.md.
  *
- * Brand is deliberately NOT here — it stays runtime-injected via
- * --waldur-brand-* (this package's initBrandTokens(), called once at
- * bootstrap by each consuming app), since it's tenant-configurable.
+ * Every ramp is physical: step 900 is dark in both themes. The dark theme is
+ * chosen by the semantic tokens, whose dark-theme blocks pick different steps
+ * of the same ramp (error-50 on a light surface becomes error-900 on the
+ * equivalent dark one). Gray is the one difference in palette: dark UI wants
+ * neutral grays where `gray` is blue-tinted, so it has a second ramp,
+ * `gray-dark`, that dark surfaces read instead: the dark-theme blocks and the
+ * `dark` sidebar style. Nothing overrides
+ * `--color-gray-N` per theme, so a bare `text-gray-500` is the same colour in
+ * both. (The SCSS `$gray-N` is different again: it is inverted per theme.)
  *
- * The ramps themselves live in colorRamps.css, GENERATED from
- * tokens/colors.json (`yarn tokens:generate`) together with the SCSS ramps in
- * src/metronic/sass/_color-ramps.scss, so the two can no longer drift. Edit the
- * JSON, not either output.
+ * Brand is deliberately not a ramp here. It is tenant-configurable, so it is
+ * injected at runtime as --waldur-brand-* (initBrandTokens(), called once at
+ * bootstrap by each consuming app) and only bridged to Tailwind below.
  *
- * They are declared once, in `@theme static`, under the exact names Tailwind
- * uses (--color-<ramp>-<step>) — that one declaration both registers the bg-,
- * text- and border- utilities and provides the `var(--color-gray-50)` the other
- * token files read. The dark gray ramp is a plain unlayered override of the
- * same variables.
- *
- * Why not a `:root` block plus a `@theme { --color-gray-50:
- * var(--color-gray-50) }` alias block, as this file used to be: that emitted
- * a self-referencing declaration (a cycle, invalid at computed-value time)
- * for every step. It only ever worked because the unlayered :root value
- * outranked Tailwind's layered @theme output, and `@theme inline` does not
- * help — Tailwind still emits a variable whenever `var(--its-name)` appears
- * in the generated CSS.
- *
- * `static`: Tailwind otherwise emits only the theme variables it sees used
- * as utilities, and most of these are consumed as plain `var()` from the
- * sibling token files instead.
- *
- * colorParity.test.ts still compares the SCSS and CSS outputs, as a check on
- * the generator itself.
+ * Why the ramps are `@theme static` and not a `:root` block aliased by a
+ * `@theme` block: an alias of the form `--color-gray-50: var(--color-gray-50)`
+ * is a self-referencing declaration, invalid at computed-value time. It only
+ * appeared to work because unlayered `:root` outranks Tailwind's layered
+ * theme output. `@theme inline` does not avoid it either, since Tailwind
+ * still emits a variable whenever `var(--its-name)` appears in the generated
+ * CSS. Declaring each step once, under Tailwind's own name, registers the
+ * bg-/text-/border- utilities and provides the `var(--color-*)` the sibling
+ * files read, with nothing to alias. `static` because most steps are only
+ * consumed as plain `var()` from those files, and Tailwind otherwise emits
+ * just the theme variables it sees used as utilities.
  */
 
 @import './colorRamps.css';
 
-/* ==========================================================================
-   Brand ramp -> Tailwind utilities (bg-brand-600, text-brand-700, ...).
-   A naming bridge onto the runtime-injected --waldur-brand-* properties, not
-   a color definition — the value is set per tenant at bootstrap. These point
-   at a differently named variable, so they are not self-references. The
-   base/extended ramps above register their own utilities via @theme static.
-   ========================================================================== */
-
+/* Brand ramp -> Tailwind utilities (bg-brand-600, text-brand-700, ...).
+   A naming bridge onto the runtime --waldur-brand-* properties, not a colour
+   definition: the values are set per tenant at bootstrap. They point at a
+   differently named variable, so unlike the ramps in colorRamps.css they are
+   not self-references and can live in a regular `@theme`. */
 @theme {
   --color-brand-25: var(--waldur-brand-25);
   --color-brand-50: var(--waldur-brand-50);

@@ -6,6 +6,11 @@
   border-radius: 8px;
   overflow: hidden;
 
+  // --color-gray-N is the same in both themes; dark reads the dark gray ramp.
+  [data-theme='dark'] & {
+    border-color: var(--color-gray-dark-300);
+  }
+
   .mdxeditor-source-editor .cm-scroller,
   .mdxeditor-diff-editor,
   .editable-area {
@@ -28,6 +33,10 @@
     padding: 16px;
     min-height: 200px;
     background-color: #f8f9fa;
+
+    [data-theme='dark'] & {
+      border-color: var(--color-gray-dark-300);
+    }
   }
 }
 

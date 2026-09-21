@@ -98,7 +98,7 @@ export const getSelectTailwindClassNames = <
       cn('flex flex-1 items-center flex-wrap gap-[6px]', isMulti && 'py-[2px]'),
 
     multiValue: () =>
-      'bg-[var(--color-gray-200)] dark:bg-[var(--color-gray-700)] rounded-md px-[4px] py-[2px] flex items-center gap-[4px] m-[2px]',
+      'bg-[var(--color-gray-200)] dark:bg-[var(--color-gray-dark-700)] rounded-md px-[4px] py-[2px] flex items-center gap-[4px] m-[2px]',
 
     multiValueLabel: () => 'text-[11px] text-[var(--surface-text-primary)]',
 

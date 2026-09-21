@@ -37,24 +37,6 @@ export const CSS_OUT = path.join(
 const SOURCE = 'packages/design-tokens/tokens/colors.json';
 const GENERATOR = 'packages/design-tokens/scripts/generate-tokens.mjs';
 
-/** Step names in lightness order, lightest first (light theme). */
-export const STEP_ORDER = [
-  '25',
-  '50',
-  '100',
-  '200',
-  '300',
-  '400',
-  '500',
-  '600',
-  '700',
-  '800',
-  '900',
-  '950',
-];
-const mirror = (step) =>
-  STEP_ORDER[STEP_ORDER.length - 1 - STEP_ORDER.indexOf(step)];
-
 const numeric = (a, b) => Number(a) - Number(b);
 
 /** Steps of a ramp in numeric order, with defaults applied. */
@@ -103,6 +85,7 @@ export function generateScss(tokens) {
     '// Derived variables ($success, $success-active, ...) stay in _colors.scss.',
   ];
   for (const [key, ramp] of Object.entries(tokens.ramps)) {
+    if (ramp.scss === false) continue;
     const name = ramp.scssName ?? key;
     const flag = ramp.scssDefault === false ? '' : ' !default';
     const lines = stepsOf(key, ramp)
@@ -128,8 +111,8 @@ export function generateCss(tokens) {
     ' * Declared once, in `@theme static`, under the names Tailwind itself uses',
     ' * (--color-<ramp>-<step>): that registers the bg-, text- and border-',
     ' * utilities and provides the `var(--color-gray-50)` the sibling token files',
-    ' * read. See colors.css for why this is not a `:root` block plus a',
-    ' * self-referencing `@theme` alias.',
+    ' * read. Every ramp is physical (step 900 is dark in both themes); the dark',
+    ' * theme is chosen by the semantic tokens, which read `gray-dark` there.',
     ' */',
     '',
     '@theme static {',
@@ -152,28 +135,6 @@ export function generateCss(tokens) {
   }
   out.push(blocks.join('\n\n'), '}', '');
 
-  // gray is stored with physical lightness in dark mode: --color-gray-900 is
-  // the dark one in both themes. The SCSS $gray-N is theme-inverted, so the
-  // dark value of CSS step N is the SCSS dark value of the mirrored step.
-  const gray = tokens.ramps.gray;
-  const byStep = Object.fromEntries(
-    stepsOf('gray', gray).map((s) => [s.step, s]),
-  );
-  out.push(
-    '/* Physical lightness, not theme-inverted like the SCSS $gray-N (which is why the',
-    '   same class name means opposite things in Tailwind and Metronic in dark mode):',
-    '   step N here is the SCSS dark value of the mirrored step. */',
-    ":root[data-theme='dark'] {",
-  );
-  for (const { step } of stepsOf('gray', gray)) {
-    const source = byStep[mirror(step)];
-    if (!source?.dark)
-      throw new Error(
-        `gray-${mirror(step)} has no dark value to mirror into gray-${step}`,
-      );
-    out.push(`  --color-gray-${step}: ${source.dark};`);
-  }
-  out.push('}', '');
   return out.join('\n');
 }
 

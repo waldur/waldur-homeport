@@ -108,17 +108,17 @@
   --btn-secondary-bg-hover: var(--waldur-brand-700);
   --btn-secondary-bg-pressed: var(--waldur-brand-600);
   --btn-secondary-border: var(--waldur-brand-400);
-  --btn-secondary-text: var(--color-gray-50);
+  --btn-secondary-text: var(--color-gray-dark-50);
   --btn-secondary-focus-ring: var(--waldur-brand-500);
 
-  --btn-tertiary-bg: var(--color-gray-950);
-  --btn-tertiary-bg-hover: var(--color-gray-900);
-  --btn-tertiary-bg-pressed: var(--color-gray-700);
-  --btn-tertiary-border: var(--color-gray-700);
-  --btn-tertiary-text: var(--color-gray-300);
+  --btn-tertiary-bg: var(--color-gray-dark-950);
+  --btn-tertiary-bg-hover: var(--color-gray-dark-900);
+  --btn-tertiary-bg-pressed: var(--color-gray-dark-700);
+  --btn-tertiary-border: var(--color-gray-dark-700);
+  --btn-tertiary-text: var(--color-gray-dark-300);
   --btn-tertiary-focus-ring: var(--waldur-brand-500);
 
-  --btn-text-secondary-hover-bg: var(--color-gray-800);
+  --btn-text-secondary-hover-bg: var(--color-gray-dark-800);
   --btn-text-secondary-focus-ring: var(--waldur-brand-500);
 
   --btn-danger-bg: var(--color-error-900);
@@ -142,14 +142,14 @@
   --btn-success-text: var(--color-success-400);
   --btn-success-focus-ring: var(--color-success-500);
 
-  --btn-disabled-bg: var(--color-gray-800);
-  --btn-disabled-text: var(--color-gray-500);
+  --btn-disabled-bg: var(--color-gray-dark-800);
+  --btn-disabled-text: var(--color-gray-dark-500);
 
-  --btn-pressed-text-on-vivid: var(--color-gray-50);
+  --btn-pressed-text-on-vivid: var(--color-gray-dark-50);
 
-  --btn-text-primary-color: var(--color-gray-300);
-  --btn-text-primary-pressed: var(--color-gray-50);
-  --btn-text-secondary-color: var(--color-gray-300);
+  --btn-text-primary-color: var(--color-gray-dark-300);
+  --btn-text-primary-pressed: var(--color-gray-dark-50);
+  --btn-text-secondary-color: var(--color-gray-dark-300);
   --btn-text-danger-color: var(--color-error-200);
   --btn-text-warning-color: var(--color-warning-300);
   --btn-text-success-color: var(--color-success-200);

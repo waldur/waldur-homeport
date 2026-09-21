@@ -78,11 +78,11 @@ export const BADGE_STYLES: Record<BadgeVariant, Record<BadgeTone, string>> = {
       'bg-info-50 border-info-200 text-info-700 dark:bg-info-900 dark:border-info-700 dark:text-info-200',
   },
   neutral: {
-    solid: 'border-transparent bg-gray-600 text-white dark:bg-gray-400',
+    solid: 'border-transparent bg-gray-600 text-white dark:bg-gray-dark-400',
     light:
-      'border-transparent bg-gray-50 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
+      'border-transparent bg-gray-50 text-gray-600 dark:bg-gray-dark-800 dark:text-gray-dark-400',
     outline:
-      'bg-gray-100 border-gray-300 text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300',
+      'bg-gray-100 border-gray-300 text-gray-700 dark:bg-gray-dark-800 dark:border-gray-dark-600 dark:text-gray-dark-300',
   },
   purple: {
     solid: 'border-transparent bg-purple-500 text-white dark:bg-purple-400',

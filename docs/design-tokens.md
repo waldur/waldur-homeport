@@ -36,20 +36,47 @@ JSON or the output was edited. The fix is always `yarn tokens:generate`.
 
 Optional ramp-level keys: `scssName` (the SCSS variable prefix when it differs from the CSS
 name — `error` is `$danger-*`), `scssDefault: false` (omit `!default`), `css: false` (SCSS
-only — the static default green `primary`, which Tailwind never sees).
+only — the static default green `primary`, which Tailwind never sees), `scss: false` (CSS
+only — `gray-dark`).
 
 Colours are lower-case `#rrggbb`; the generator rejects anything else, and a `dark` equal to
 `light`.
 
-## Gray is stored two ways on purpose
+## Gray in dark mode: `gray` and `gray-dark`
 
-`dark` in the JSON is the SCSS value: `$gray-N` is **theme-inverted** (`$gray-900` is light in
-dark mode). The CSS `--color-gray-N` keeps **physical lightness** (`--color-gray-900` is dark in
-both themes), so its dark block is derived: CSS step _N_ = the SCSS dark value of the mirrored
-step (25 ↔ 950, 50 ↔ 900, …). You don't write it; the generator does.
+Dark UI wants neutral grays where the light `gray` is blue-tinted (500 is `#667085` vs
+`#85888e`), so there are two CSS ramps, both physical (step 900 is dark in both):
 
-This is also why Tailwind's `bg-gray-50` and Metronic's `.bg-gray-50` mean opposite things in
-dark mode (see `src/tailwind.css` for the re-point).
+- `--color-gray-N` (`gray`) is the same in both themes. Nothing overrides it per theme, so a bare
+  `text-gray-500` is one colour everywhere.
+- `--color-gray-dark-N` (`gray-dark`) is the palette for dark surfaces. It is read by the
+  dark-theme blocks of `surfaceColors.css` and `buttonColors.css`, and by the `dark` sidebar style
+  in `sidebarColors.css` (a fixed look that is dark in either theme, so it reads `gray-dark`
+  unconditionally, while the `light` style reads `gray`). A component that needs a dark-specific
+  gray writes `dark:bg-[var(--color-gray-dark-800)]` or `dark:bg-gray-dark-800`.
+
+`gray-dark` is CSS-only (`"scss": false`) and its values are the SCSS dark grays re-indexed:
+SCSS `$gray-N` is **theme-inverted** (`$gray-900` is light in dark mode), so
+`gray-dark-N` = the SCSS dark value of the mirrored step (25 ↔ 950, 50 ↔ 900, …).
+`colorParity.test.ts` keeps them in sync, so change the SCSS dark gray and `gray-dark` together.
+
+The SCSS/CSS mismatch is why Tailwind's `bg-gray-50` and Metronic's `.bg-gray-50` mean opposite
+things in dark mode (see `src/tailwind.css` for the re-point). Retiring the SCSS inversion is a
+separate, larger step: it depends on every `$gray-N` reader in theme-sensitive SCSS first
+moving to semantic tokens.
+
+## Seeing the tokens
+
+Storybook, group **Foundations**, stories in `packages/design-tokens/src/*.stories.tsx`:
+
+- **Colors** — one page per ramp family, all in the same swatch style (step, resolved hex, variable
+  name on hover): `Neutral` (`gray`, `gray-dark` and a side-by-side comparison), `Status`
+  (`success`, `warning`, `error`, `info`), `Accent` (the decorative hues) and `Brand` (the runtime
+  `--waldur-brand-*` ramp). The first three are driven by `tokens/colors.json`, so a new ramp or
+  step appears with no story edit; `SurfaceTokens` shows the semantic layer.
+- **Typography** and **Elevation** — the type scale, shadows and radii.
+
+They live with the tokens they document, so a token change and its story change land in one package.
 
 ## What is not generated (yet)
 
