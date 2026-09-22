@@ -14,30 +14,6 @@
   }
 }
 
-// Set menu link padding x
-@mixin menu-link-padding-x($value) {
-  // Menu item
-  .menu-item {
-    .menu-link,
-    .menu-content {
-      padding-left: $value;
-      padding-right: $value;
-    }
-  }
-}
-
-// Set menu link padding y
-@mixin menu-link-padding-y($value) {
-  // Menu item
-  .menu-item {
-    .menu-link,
-    .menu-content {
-      padding-top: $value;
-      padding-bottom: $value;
-    }
-  }
-}
-
 // Set menu indention
 @mixin menu-link-indention($value, $offset) {
   // Accordion mode
