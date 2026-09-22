@@ -9,7 +9,7 @@ export const MermaidBlock: FC<UIBlockProps> = ({ block }) => {
   const code = block.content;
 
   return (
-    <div className="aui-code-block-root">
+    <div className="aui-code-block-root aui-code-block-root--mermaid">
       <CodeHeader language="mermaid" code={code} showCopyButton={isComplete} />
       <MermaidDiagram code={code} />
     </div>
