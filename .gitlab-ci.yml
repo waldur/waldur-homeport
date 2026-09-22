@@ -18,8 +18,6 @@ include:
   - project: "waldur/waldur-pipelines"
     file: "/templates/test/vulnerability-scan.yml"
   - project: "waldur/waldur-pipelines"
-    file: "/templates/sbom/upload-sboms-to-docs.yml"
-  - project: "waldur/waldur-pipelines"
     file: "/templates/sbom/generate-image-sbom.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/test/license-scan.yml"
@@ -553,28 +551,34 @@ Lint dockerfile:
         - DL3018 # "versions for `apk add`" warning
   before_script: []
 
-Generate Image SBOM:
-  extends: .Generate Image SBOM template
+# SBOMs are release evidence, so they are produced for every tag that ships an
+# image: stable releases and release candidates alike. The `web` rule lets a
+# maintainer rehearse the whole chain from the pipeline UI (set SBOM_DRY_RUN=1)
+# without cutting a release: the publish job then creates and deletes a GitHub
+# draft release instead of a real one. It is limited to protected refs because
+# the publish job carries a GitHub write token that must not be exposed to a
+# script anyone can edit on a feature branch.
+.sbom-rules:
   rules:
-    - when: never
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+(-rc\.\d+)?$/'
+    - if: '$CI_PIPELINE_SOURCE == "web" && $SBOM_DRY_RUN && $CI_COMMIT_REF_PROTECTED == "true"'
+      when: manual
+
+Generate Image SBOM:
+  extends:
+    - .Generate Image SBOM template
+    - .sbom-rules
   variables:
     PROJECT_NAME: "waldur-homeport"
 
 Generate Codebase SBOM:
+  extends: .sbom-rules
   stage: build
-  image: registry.hpc.ut.ee/mirror/library/node:lts-alpine
   interruptible: true
   allow_failure: true
-  rules:
-    - when: never
-    # - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
-  cache: []
-  before_script: []
   script:
-    - apk add git || echo "Non-Alpine image, skipping"
-    - yarn set version berry
-    - yarn install --no-immutable
-    - yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx --spec-version 1.6 --output-file waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.json -v
+    # Pinned: the tool that produces supply-chain evidence should not float.
+    - yarn dlx -q @cyclonedx/yarn-plugin-cyclonedx@3.4.0 --spec-version 1.6 --output-file waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.json -v
     - echo "SBOM generated. Size:"
     - du -h waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.json
     - tar -czf waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.tar.gz waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.json
@@ -731,27 +735,58 @@ Test k8s deployment:
     - kubectl get pods -l app=waldur-homeport-test-${CI_MERGE_REQUEST_ID}
   allow_failure: true
 
-Upload Image SBOM:
-  extends: .Upload SBOM template
-  rules:
-    - when: never
+# Publishes the SBOMs as assets of a GitHub release on the public mirror, the
+# same way waldur-keycloak-mapper ships its JAR. The mirror carries every tag
+# but has never had a release. target_commitish only matters if the mirror
+# has not synced this tag yet when the job runs: GitHub then creates it at the
+# released commit instead of at the mirror's default branch.
+Publish SBOMs to GitHub release:
+  extends: .sbom-rules
+  stage: deploy
+  image:
+    name: registry.hpc.ut.ee/mirror/alpine/git:latest
+    entrypoint: [""]
+  interruptible: false
+  # A GitHub outage must not fail the release pipeline; the image publish and
+  # the docs release chain do not depend on this job.
+  allow_failure: true
   needs:
-    - Generate Image SBOM
+    - job: Generate Image SBOM
+      optional: true
+    - job: Generate Codebase SBOM
+      optional: true
+  cache: []
+  before_script: []
   variables:
-    PROJECT_NAME: "waldur-homeport"
-    SBOM_TYPE: "image"
-    SBOM_DIR: "images"
-
-Upload Source SBOM:
-  extends: .Upload SBOM template
-  rules:
-    - when: never
-  needs:
-    - Generate Codebase SBOM
-  variables:
-    PROJECT_NAME: "waldur-homeport"
-    SBOM_TYPE: "source"
-    SBOM_DIR: "source"
+    GH_TOKEN: $GITHUB_JENKINS_TOKEN
+    GH_REPO: waldur/waldur-homeport
+  script:
+    - '[ -n "$GITHUB_JENKINS_TOKEN" ] || { echo "GITHUB_JENKINS_TOKEN is not available to this job; a maintainer must add it (contents: write on $GH_REPO)"; exit 1; }'
+    # Both generators are allow_failure, so a missing archive means one of them
+    # failed or has not been played yet. Publishing a release with one SBOM would
+    # look like success, so refuse instead.
+    - |
+      for archive in waldur-homeport-${CI_COMMIT_TAG}-image.cyclonedx.tar.gz waldur-homeport-${CI_COMMIT_TAG}-source.cyclonedx.tar.gz; do
+        [ -f "$archive" ] || { echo "$archive is missing: check the generator jobs of this pipeline"; exit 1; }
+        tar -xzf "$archive"
+      done
+    - apk add --no-cache github-cli
+    - |
+      if [ -n "$CI_COMMIT_TAG" ]; then
+        # Release candidates are prereleases so GitHub never badges one as "Latest".
+        case "$CI_COMMIT_TAG" in *-rc.*) prerelease=--prerelease ;; *) prerelease= ;; esac
+        # A retried job finds the release already there; --clobber replaces its assets.
+        gh release view "$CI_COMMIT_TAG" >/dev/null 2>&1 || gh release create "$CI_COMMIT_TAG" $prerelease --target "$CI_COMMIT_SHA" --title "$CI_COMMIT_TAG" --notes ""
+        gh release upload "$CI_COMMIT_TAG" waldur-homeport-*.cyclonedx.json --clobber
+      else
+        # Drafts create no tag and are invisible to the public, so a dry run leaves
+        # no trace. gh only removes a draft it created on its own behalf, so a
+        # failed upload here must be cleaned up by hand.
+        dry_run="sbom-dry-run-$CI_PIPELINE_ID"
+        gh release create "$dry_run" --draft --title "SBOM dry run $CI_PIPELINE_ID" --notes "" waldur-homeport-*.cyclonedx.json \
+          || { gh release delete "$dry_run" --yes 2>/dev/null; exit 1; }
+        gh release delete "$dry_run" --yes
+      fi
 
 Cleanup test k8s deployment:
   stage: deploy
