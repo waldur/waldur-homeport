@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { generateSystemImageChoices } from './utils';
+import { generateSystemImageChoices, isMissingRequiredPlan } from './utils';
 
 const img = (name: string) => ({ name, uuid: name });
 
@@ -241,5 +241,29 @@ describe('generateSystemImageChoices', () => {
       const vyos = choices.find((c) => c.label === 'VyOS');
       expect(vyos.options).toHaveLength(2);
     });
+  });
+});
+
+describe('isMissingRequiredPlan', () => {
+  const plan = (archived = false) => ({ uuid: 'p', archived }) as any;
+  const offering = (shared: boolean, plans) => ({ shared, plans }) as any;
+
+  it('blocks a shared offering with no plan', () => {
+    expect(isMissingRequiredPlan(offering(true, []))).toBe(true);
+  });
+
+  it('blocks a shared offering whose only plan is archived', () => {
+    expect(isMissingRequiredPlan(offering(true, [plan(true)]))).toBe(true);
+  });
+
+  it('allows a shared offering with a live plan', () => {
+    expect(isMissingRequiredPlan(offering(true, [plan()]))).toBe(false);
+  });
+
+  // The API refuses a planless create order only on a shared offering; the
+  // per-tenant OpenStack instance and volume offerings are private, carry no
+  // plan of their own, and are ordered planless every day.
+  it('allows a private offering with no plan', () => {
+    expect(isMissingRequiredPlan(offering(false, []))).toBe(false);
   });
 });

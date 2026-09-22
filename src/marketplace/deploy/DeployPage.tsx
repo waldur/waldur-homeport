@@ -56,7 +56,7 @@ import { isPartitionQosRequired } from './steps/FormQoSSelectionStep';
 import { OfferingConfigurationFormStep } from './types';
 import { useDefaultLimits } from './useDefaultLimits';
 import { useDefaultPlan } from './useDefaultPlan';
-import { hasStepWithField } from './utils';
+import { hasStepWithField, isMissingRequiredPlan } from './utils';
 
 import './DeployPage.scss';
 
@@ -105,6 +105,41 @@ export const BaseDeployPage = ({
     user,
     PermissionEnum.CREATE_ORDER,
   );
+  // New orders only: an edit carries the plan the order was placed with, and an
+  // offering that has since lost its last orderable plan must not lock the form.
+  const hasNoOrderablePlan = useMemo(
+    () => !isEdit && isMissingRequiredPlan(selectedOffering),
+    [isEdit, selectedOffering],
+  );
+
+  // Why every step but the first is closed, in reporting order. One answer for
+  // the three places that render a closed step: they were spelled out at each
+  // of them and had drifted -- the preview site had no tooltip at all.
+  const blockedReason = useMemo(() => {
+    if (noOrganizationOrProject) {
+      return translate('Select an organization and project to proceed.');
+    }
+    if (isProjectInactive) {
+      return translate('Project has reached its end date.');
+    }
+    if (!canCreateOrder) {
+      return translate('You are not allowed to create orders in this project.');
+    }
+    if (hasNoOrderablePlan) {
+      // Without it the form is a dead end: FormPlanStep renders nothing when
+      // there is no plan to show, nothing stops the submit, and the order comes
+      // back refused for a plan the user was never offered.
+      return translate(
+        'No plan of this offering is available to you, so it cannot be ordered.',
+      );
+    }
+    return null;
+  }, [
+    noOrganizationOrProject,
+    isProjectInactive,
+    canCreateOrder,
+    hasNoOrderablePlan,
+  ]);
 
   const formSteps = useMemo(
     () =>
@@ -191,11 +226,9 @@ export const BaseDeployPage = ({
   const disabledSteps = useMemo(
     () =>
       formSteps.map(
-        (step) =>
-          step.id !== 'step-general' &&
-          (isProjectInactive || noOrganizationOrProject || !canCreateOrder),
+        (step) => step.id !== 'step-general' && Boolean(blockedReason),
       ),
-    [formSteps, isProjectInactive, noOrganizationOrProject, canCreateOrder],
+    [formSteps, blockedReason],
   );
 
   const setScroll = useCallback(() => {
@@ -305,12 +338,8 @@ export const BaseDeployPage = ({
                 title={step.label}
                 offering={selectedOffering}
                 params={step.params}
-                disabled={
-                  step.id !== 'step-general' &&
-                  (isProjectInactive ||
-                    noOrganizationOrProject ||
-                    !canCreateOrder)
-                }
+                disabled={step.id !== 'step-general' && Boolean(blockedReason)}
+                disabledTooltip={blockedReason}
                 previewMode
               />
             </div>
@@ -340,25 +369,8 @@ export const BaseDeployPage = ({
                 title={step.label}
                 offering={selectedOffering}
                 params={step.params}
-                disabled={
-                  step.id !== 'step-general' &&
-                  (isProjectInactive ||
-                    noOrganizationOrProject ||
-                    !canCreateOrder)
-                }
-                disabledTooltip={
-                  noOrganizationOrProject
-                    ? translate(
-                        'Select an organization and project to proceed.',
-                      )
-                    : isProjectInactive
-                      ? translate('Project has reached its end date.')
-                      : !canCreateOrder
-                        ? translate(
-                            'You are not allowed to create orders in this project.',
-                          )
-                        : null
-                }
+                disabled={step.id !== 'step-general' && Boolean(blockedReason)}
+                disabledTooltip={blockedReason}
               />
             </div>
           ))}

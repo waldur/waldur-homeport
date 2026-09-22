@@ -31704,6 +31704,11 @@
       "feature_area": "details"
     }
   },
+  "No plan of this offering is available to you, so it cannot be ordered.": {
+    "context": {
+      "feature_area": "deploy"
+    }
+  },
   "No plans available": {
     "context": {
       "feature_area": "vendorOfferings"
