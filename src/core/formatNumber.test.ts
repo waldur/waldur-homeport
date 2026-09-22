@@ -25,6 +25,20 @@ describe('formatUsageValue', () => {
       expect(formatUsageValue(-1000)).toBe('-1,000');
       expect(formatUsageValue(-1234567)).toBe('-1,234,567');
     });
+
+    // Intl's own default, which the plain notation inherits.
+    it('rounds at three decimal places unless told otherwise', () => {
+      expect(formatUsageValue(1.23456)).toBe('1.235');
+    });
+
+    it('keeps the precision a caller asks for', () => {
+      expect(formatUsageValue(1.23456, false, 5)).toBe('1.23456');
+      expect(formatUsageValue(1.23456, undefined, 4)).toBe('1.2346');
+    });
+
+    it('honours a precision narrower than the default', () => {
+      expect(formatUsageValue(1234.56, false, 0)).toBe('1,235');
+    });
   });
 
   describe('compact formatting', () => {
@@ -53,6 +67,10 @@ describe('formatUsageValue', () => {
     it('limits to 1 decimal place', () => {
       expect(formatUsageValue(1250, true)).toBe('1.3K');
       expect(formatUsageValue(1550000, true)).toBe('1.6M');
+    });
+
+    it('takes a wider precision when asked', () => {
+      expect(formatUsageValue(1250, true, 2)).toBe('1.25K');
     });
   });
 

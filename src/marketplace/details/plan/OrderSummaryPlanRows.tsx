@@ -6,6 +6,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { formatComponentQuantity } from '@/marketplace/common/componentQuantity';
 import { CheckoutPricingRow } from '@/marketplace/deploy/CheckoutPricingRow';
 import { Customer } from '@/workspace/types';
 
@@ -19,9 +20,20 @@ interface OrderSummaryPlanRowsProps {
   concealPrices?: boolean;
 }
 
-const getRowLabel = (component: Component) => {
-  const qty = component.displayAmount ?? component.amount;
-  const base = `${component.name} ${qty} ${component.measured_unit}`;
+/**
+ * A row as "<name> <amount> <unit>", or just the name when there is no amount
+ * to state — a component with no measured unit used to leave the name
+ * trailing a space, and a boolean one printed a bare 1.
+ *
+ * Exported for its own tests: the component around it needs redux, a customer
+ * and the feature flags, and none of that says anything about the label.
+ */
+export const getRowLabel = (component: Component) => {
+  const qty = formatComponentQuantity(
+    component.displayAmount ?? component.amount,
+    component,
+  );
+  const base = qty ? `${component.name} ${qty}` : component.name;
   if (component.displayAmount != null && component.durationInMonths) {
     return `${base} × ${translate('{count} months', { count: component.durationInMonths })}`;
   }
@@ -91,7 +103,10 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                 <CheckoutPricingRow
                   key={i}
                   label={row.name}
-                  value={`${row.displayAmount ?? row.amount} ${row.measured_unit}`}
+                  value={formatComponentQuantity(
+                    row.displayAmount ?? row.amount,
+                    row,
+                  )}
                 />
               ))}
         </div>
@@ -113,7 +128,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                 <CheckoutPricingRow
                   key={i}
                   label={row.name}
-                  value={`${row.amount} ${row.measured_unit}`}
+                  value={formatComponentQuantity(row.amount, row)}
                 />
               ))}
           {!shouldConcealPrices
@@ -134,7 +149,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                 <CheckoutPricingRow
                   key={i}
                   label={row.name}
-                  value={`${row.amount} ${row.measured_unit}`}
+                  value={formatComponentQuantity(row.amount, row)}
                 />
               ))}
         </div>
