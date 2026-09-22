@@ -53,6 +53,15 @@ const RESTRICTED_IMPORTS = [
     message:
       'Use Tooltip or Popover from "waldur-ui" instead of react-bootstrap/OverlayTrigger.',
   },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Popover'],
+    message: 'Use Popover from "waldur-ui" instead of react-bootstrap.',
+  },
+  {
+    name: 'react-bootstrap/Popover',
+    message: 'Use Popover from "waldur-ui" instead of react-bootstrap/Popover.',
+  },
 ];
 
 export default tseslint

@@ -957,31 +957,6 @@ $pagination-transition:
   border-color 0.15s ease-in-out,
   box-shadow 0.15s ease-in-out !default;
 
-// Popovers
-$popover-bg: if(isDarkMode(), $gray-200, $body-bg) !default;
-$popover-font-size: $font-size-base !default;
-$popover-border-color: $popover-bg !default;
-$popover-border-radius: $border-radius !default;
-$popover-box-shadow: $dropdown-box-shadow !default;
-$popover-header-bg: $popover-bg !default;
-$popover-header-color: $gray-800 !default;
-$popover-header-font-weight: 500 !default; // Custom variable
-$popover-header-font-size: 1rem !default; // Custom variable
-$popover-header-padding-y: 1rem !default;
-$popover-header-padding-x: 1.25rem !default;
-$popover-header-border-color: if(
-  isDarkMode(),
-  $gray-300,
-  $gray-100
-) !default; // Custom variable
-$popover-body-color: $gray-800 !default;
-$popover-body-padding-y: 1.25rem !default;
-$popover-body-padding-x: 1.25rem !default;
-
-$popover-dissmis-btn-height: 1.5rem !default; // Custom variable
-$popover-dissmis-btn-top: 0.85rem !default; // Custom variable
-$popover-dissmis-btn-end: 0.85rem !default; // Custom variable
-
 // Code
 $code-bg: if(isDarkMode(), $gray-200, #f1f3f8) !default; // Custom variable
 $code-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.08) !default; // Custom variable
