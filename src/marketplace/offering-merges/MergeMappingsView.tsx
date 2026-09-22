@@ -8,6 +8,12 @@ import { renderFieldOrDash } from '@/table/utils';
 import { InvoicePolicyLabel } from './InvoicePolicy';
 import { StaticTable } from './StaticTable';
 
+/** What the mapping section is for, shown on every heading that names it. */
+export const getMappingsHelp = () =>
+  translate(
+    'Which source plan and component each target plan and component takes over. The merge is refused while anything a moved row uses is left unmapped.',
+  );
+
 type Offerings = Record<string, ProviderOfferingDetails>;
 
 export const getPlanNames = (offerings: Offerings = {}) =>
@@ -99,6 +105,9 @@ export const MergeMappingsView: FC<{
       <StaticTable<MappingRow>
         table={`OfferingMergePlans-${merge.uuid}`}
         title={translate('Plan mapping')}
+        help={translate(
+          'Which target plan each source plan becomes. A plan a moved resource or order uses must be mapped.',
+        )}
         verboseName={translate('Plan mappings')}
         rows={planRows}
         columns={columns(translate('Source plan'), translate('Target plan'))}
@@ -106,6 +115,9 @@ export const MergeMappingsView: FC<{
       <StaticTable<MappingRow>
         table={`OfferingMergeComponents-${merge.uuid}`}
         title={translate('Component mapping')}
+        help={translate(
+          'Which target component each source component becomes. A component used by usage, quotas or invoice lines must be mapped.',
+        )}
         verboseName={translate('Component mappings')}
         rows={componentRows}
         columns={columns(
@@ -116,6 +128,9 @@ export const MergeMappingsView: FC<{
       <StaticTable<MappingRow>
         table={`OfferingMergeAnswers-${merge.uuid}`}
         title={translate('Order answer keys')}
+        help={translate(
+          'Which key of the target order form each source key is renamed to, so past answers keep their meaning.',
+        )}
         verboseName={translate('Answer key renames')}
         rows={answerRows}
         columns={columns(translate('Old key'), translate('New key'), false)}

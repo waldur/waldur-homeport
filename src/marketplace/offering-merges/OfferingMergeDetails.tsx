@@ -6,6 +6,7 @@ import { OfferingMergeRefusal } from 'waldur-js-client';
 
 import { BaseButton } from '@/core/buttons/BaseButton';
 import { formatDateTime } from '@/core/dateUtils';
+import { HelpTip } from '@/core/HelpTip';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -21,7 +22,12 @@ import {
   useMergeOfferings,
   useOfferingMerge,
 } from './hooks';
-import { getPlanNames, MergeMappingsView } from './MergeMappingsView';
+import { getChangesHelp } from './MergeEntriesView';
+import {
+  getMappingsHelp,
+  getPlanNames,
+  MergeMappingsView,
+} from './MergeMappingsView';
 import { MergePreviewView } from './MergePreviewView';
 import { MergeRefusalAlert } from './MergeRefusal';
 import { MergeProgress, MergeVerification } from './MergeRunStatus';
@@ -142,7 +148,10 @@ export const OfferingMergeDetails: FC = () => {
 
       <Card>
         <Card.Header>
-          <Card.Title>{translate('Mappings')}</Card.Title>
+          <Card.Title className="d-flex align-items-center gap-2">
+            {translate('Mappings')}
+            <HelpTip label={getMappingsHelp()} />
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           <MergeMappingsView merge={merge} offerings={offerings} />
@@ -151,12 +160,17 @@ export const OfferingMergeDetails: FC = () => {
 
       <Card>
         <Card.Header>
-          <Card.Title>{translate('Preview')}</Card.Title>
+          <Card.Title className="d-flex align-items-center gap-2">
+            {translate('Preview')}
+            <HelpTip label={getChangesHelp()} />
+          </Card.Title>
         </Card.Header>
         <Card.Body>
           {merge.preview ? (
             <MergePreviewView
               preview={merge.preview}
+              mergeUuid={merge.uuid}
+              mergeState={merge.state}
               planNames={getPlanNames(offerings)}
               tableId={`OfferingMergeDetails-${merge.uuid}`}
             />

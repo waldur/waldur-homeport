@@ -50,6 +50,8 @@ export const PreviewStep: FC<PreviewStepProps> = ({
       {current ? (
         <MergePreviewView
           preview={merge.preview}
+          mergeUuid={merge.uuid}
+          mergeState={merge.state}
           planNames={planNames}
           acknowledged={acknowledged}
           onAcknowledge={onAcknowledge}

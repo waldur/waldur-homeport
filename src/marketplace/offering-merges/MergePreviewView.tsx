@@ -1,6 +1,10 @@
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
-import { OfferingMergeIssue, OfferingMergePreview } from 'waldur-js-client';
+import {
+  OfferingMergeIssue,
+  OfferingMergePreview,
+  OfferingMergeStateEnum,
+} from 'waldur-js-client';
 
 import { AlertItem } from 'waldur-ui';
 
@@ -8,8 +12,9 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { MergeEntriesView } from './MergeEntriesView';
+import { SectionHeading } from './SectionHeading';
 import { StaticTable } from './StaticTable';
-import { formatCoverageLabel } from './utils';
 
 interface PriceDifference {
   source_plan: string;
@@ -34,6 +39,10 @@ const IssueCode: FC<{ code: string }> = ({ code }) => (
 
 interface MergePreviewViewProps {
   preview: OfferingMergePreview;
+  /** The saved record the drill-down lists its rows from. */
+  mergeUuid: string;
+  /** Its state, which decides what that drill-down can still list. */
+  mergeState?: OfferingMergeStateEnum;
   /** Plan names by uuid, to label price differences. */
   planNames?: Record<string, string>;
   /** Given, each warning gets a checkbox; omitted, the view is read-only. */
@@ -44,6 +53,8 @@ interface MergePreviewViewProps {
 
 export const MergePreviewView: FC<MergePreviewViewProps> = ({
   preview,
+  mergeUuid,
+  mergeState,
   planNames = {},
   acknowledged,
   onAcknowledge,
@@ -52,17 +63,17 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
   const blockers = preview.blockers ?? [];
   const warnings = preview.warnings ?? [];
   const prices = getPriceDifferences(warnings);
-  const counts = Object.entries(preview.counts ?? {}).filter(
-    ([, count]) => count > 0,
-  );
-  const leftOnSource = Object.entries(preview.left_on_source ?? {}).filter(
-    ([, count]) => count > 0,
-  );
 
   return (
     <div className="d-flex flex-column gap-5">
       <section>
-        <h4 className="mb-3">{translate('Blockers')}</h4>
+        <SectionHeading
+          title={translate('Blockers')}
+          help={translate(
+            'What prevents the merge from running. Each one has to be resolved in the mappings or on the offerings themselves.',
+          )}
+          className="mb-3"
+        />
         {blockers.length === 0 ? (
           <AlertItem
             variant="success"
@@ -87,7 +98,13 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
       </section>
 
       <section>
-        <h4 className="mb-3">{translate('Warnings')}</h4>
+        <SectionHeading
+          title={translate('Warnings')}
+          help={translate(
+            'Consequences the merge does not prevent. Each one has to be acknowledged before the merge may be run.',
+          )}
+          className="mb-3"
+        />
         {warnings.length === 0 ? (
           <p className="text-muted mb-0">{translate('No warnings.')}</p>
         ) : (
@@ -125,6 +142,9 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
         <StaticTable<PriceDifference>
           table={`${tableId}-prices`}
           title={translate('Price differences')}
+          help={translate(
+            'Mapped plan components that cost a different amount on the target, so the merge changes what customers pay.',
+          )}
           verboseName={translate('Price differences')}
           rows={prices}
           columns={[
@@ -150,47 +170,21 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
         />
       )}
 
-      <section>
-        <h4 className="mb-3">{translate('What moves to the target')}</h4>
-        <FormTable.Card>
-          <FormTable>
-            {counts.length === 0 ? (
-              <FormTable.Item
-                label={translate('Rows')}
-                value={translate('Nothing to move.')}
-              />
-            ) : (
-              counts.map(([label, count]) => (
-                <FormTable.Item
-                  key={label}
-                  label={formatCoverageLabel(label)}
-                  value={count}
-                />
-              ))
-            )}
-          </FormTable>
-        </FormTable.Card>
-      </section>
-
-      {leftOnSource.length > 0 && (
-        <section>
-          <h4 className="mb-3">{translate('What stays on the sources')}</h4>
-          <FormTable.Card>
-            <FormTable>
-              {leftOnSource.map(([label, count]) => (
-                <FormTable.Item
-                  key={label}
-                  label={formatCoverageLabel(label)}
-                  value={count}
-                />
-              ))}
-            </FormTable>
-          </FormTable.Card>
-        </section>
-      )}
+      <MergeEntriesView
+        preview={preview}
+        mergeUuid={mergeUuid}
+        mergeState={mergeState}
+        tableId={tableId}
+      />
 
       <section>
-        <h4 className="mb-3">{translate('Invoices and usage summaries')}</h4>
+        <SectionHeading
+          title={translate('Invoices and usage summaries')}
+          help={translate(
+            'How many invoice lines the merge rewrites under the chosen policy, and which usage summaries it recomputes afterwards.',
+          )}
+          className="mb-3"
+        />
         <FormTable.Card>
           <FormTable>
             <FormTable.Item

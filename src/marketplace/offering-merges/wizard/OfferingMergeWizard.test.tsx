@@ -15,6 +15,13 @@ import * as workspaceHooks from '@/workspace/hooks';
 
 import { OfferingMergeWizard } from './OfferingMergeWizard';
 
+// The preview's grouped tables read their state from the Redux store, which
+// this suite has none of: it is about the wizard's flow, not its tables.
+vi.mock('@/table/useTable', () => ({
+  useTable: () => ({ rows: [], fetch: vi.fn() }),
+}));
+vi.mock('@/table/Table', () => ({ default: () => null }));
+
 const merge = {
   uuid: 'merge',
   modified: '2026-09-19T10:00:00Z',
