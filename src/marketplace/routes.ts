@@ -874,18 +874,55 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'admin-marketplace-duplicate-offerings',
+    name: 'admin-marketplace-offering-merges',
     parent: 'admin-marketplace',
-    url: 'openstack-duplicate-offerings/',
+    url: 'offering-merges/',
     component: lazyComponent(() =>
-      import('@/marketplace/offerings/admin/DuplicateOfferingsList').then(
-        (module) => ({ default: module.DuplicateOfferingsList }),
+      import('@/marketplace/offering-merges/OfferingMergesPage').then(
+        (module) => ({ default: module.OfferingMergesPage }),
       ),
     ),
     data: {
-      breadcrumb: () => translate('OpenStack duplicate offerings'),
-      feature: MarketplaceFeatures.show_openstack_duplicate_offerings,
+      breadcrumb: () => translate('Offering merges'),
       priority: 15,
+    },
+  },
+  {
+    name: 'admin-marketplace-offering-merge-wizard',
+    parent: 'admin-marketplace',
+    url: 'offering-merges/new/?merge&step&sources&target',
+    params: {
+      merge: { dynamic: true, value: null, squash: true },
+      step: { dynamic: true, value: null, squash: true },
+      sources: { dynamic: true, value: null, squash: true },
+      target: { dynamic: true, value: null, squash: true },
+      // A duplicate group's suggested mapping; not in the URL, so a reload
+      // falls back to asking the backend for a suggestion.
+      mapping: { dynamic: true, value: null },
+    },
+    component: lazyComponent(() =>
+      import('@/marketplace/offering-merges/wizard/OfferingMergeWizard').then(
+        (module) => ({ default: module.OfferingMergeWizard }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('New offering merge'),
+      skipBreadcrumb: true,
+      permissions: [isStaff],
+    },
+  },
+  {
+    name: 'admin-marketplace-offering-merge-details',
+    parent: 'admin-marketplace',
+    url: 'offering-merges/:merge_uuid/',
+    component: lazyComponent(() =>
+      import('@/marketplace/offering-merges/OfferingMergeDetails').then(
+        (module) => ({ default: module.OfferingMergeDetails }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Offering merge'),
+      skipBreadcrumb: true,
     },
   },
 

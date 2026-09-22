@@ -1402,6 +1402,16 @@
       "feature_area": "affiliate-earnings"
     }
   },
+  "Acknowledge the warnings: {codes}.": {
+    "context": {
+      "variables": {
+        "codes": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "offering-merges"
+    }
+  },
   "Acknowledged": {
     "context": {
       "feature_area": "celery"
@@ -1655,7 +1665,7 @@
   "Active resources": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "Active reviewers": {
@@ -3129,6 +3139,7 @@
   },
   "All months": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -3957,6 +3968,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "marketplace-checklist"
+    }
+  },
+  "Answer key renames": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Answer submitted.": {
@@ -7248,6 +7264,11 @@
       "feature_area": "callbacks"
     }
   },
+  "Back to offering merges": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Back to profile": {
     "context": {
       "feature_area": "invitations",
@@ -7533,6 +7554,20 @@
       "primary_ui_type": "label"
     }
   },
+  "Billed as {source} on the source but as {target} on the target.": {
+    "context": {
+      "variables": {
+        "source": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard",
+      "action_type": "read"
+    }
+  },
   "Billed by usage": {
     "context": {
       "feature_area": "details"
@@ -7554,6 +7589,20 @@
   "Billed by usage; rates change on the day of the switch": {
     "context": {
       "feature_area": "type-based"
+    }
+  },
+  "Billed per {source} on the source but per {target} on the target.": {
+    "context": {
+      "variables": {
+        "source": {
+          "type": "unknown"
+        },
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard",
+      "action_type": "read"
     }
   },
   "Billing": {
@@ -7659,11 +7708,7 @@
       "feature_area": "change-plan"
     }
   },
-  "Billing periods": {
-    "context": {
-      "primary_ui_type": "title"
-    }
-  },
+  "Billing periods": {},
   "Billing plan to use for resources created from this vendor offering": {
     "context": {
       "feature_area": "vendorOfferings"
@@ -7813,6 +7858,13 @@
       "feature_area": "support"
     }
   },
+  "Blockers": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
+  "Blockers and warnings": {},
   "Body": {
     "context": {
       "feature_area": "broadcasts"
@@ -8764,11 +8816,6 @@
       "feature_area": "course-accounts"
     }
   },
-  "Cannot resolve automatically": {
-    "context": {
-      "feature_area": "admin"
-    }
-  },
   "Cannot rotate a revoked token.": {
     "context": {
       "feature_area": "personal-access-tokens"
@@ -9254,6 +9301,12 @@
         }
       },
       "feature_area": "anonymous"
+    }
+  },
+  "Check": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
     }
   },
   "Check COI detection results before generating assignments.": {
@@ -9859,6 +9912,11 @@
   "Closed issues (this month)": {
     "context": {
       "feature_area": "dashboard"
+    }
+  },
+  "Closed-invoice items kept as they are": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Closing dialog": {
@@ -10490,6 +10548,16 @@
       "feature_area": "component-policies"
     }
   },
+  "Component mapping": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Component mappings": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Component name": {
     "context": {
       "primary_ui_type": "title",
@@ -10924,6 +10992,11 @@
   "Confirm all": {
     "context": {
       "feature_area": "reviewer-discovery"
+    }
+  },
+  "Confirm and run": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Confirm deletion": {
@@ -11485,6 +11558,11 @@
   "Continue conversation": {
     "context": {
       "feature_area": "header"
+    }
+  },
+  "Continue in wizard": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Continue review": {
@@ -12196,6 +12274,11 @@
   "Create disk": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Create draft": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Create event subscription": {
@@ -13182,6 +13265,11 @@
       "feature_area": "details"
     }
   },
+  "Current open month": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Current period overlaid against previous, per (offering, component).": {},
   "Current plan": {
     "context": {
@@ -13201,7 +13289,7 @@
   "Current price": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "plans"
+      "feature_area": "offering-merges"
     }
   },
   "Current registry code: {value}.": {
@@ -14469,7 +14557,6 @@
       "action_type": "create"
     }
   },
-  "Delete (nothing attached)": {},
   "Delete SRAM project rule": {
     "context": {
       "primary_ui_type": "title",
@@ -14649,6 +14736,12 @@
   "Delete matching queues": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "Delete merge": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
     }
   },
   "Delete offering": {
@@ -16271,7 +16364,7 @@
   },
   "Duplicate offerings": {
     "context": {
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "Duplicate policy": {
@@ -16282,7 +16375,7 @@
   "Duplicates": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "Duration": {
@@ -16719,7 +16812,7 @@
   },
   "Edit offering": {
     "context": {
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "Edit offering partition": {
@@ -18666,16 +18759,6 @@
       "action_type": "read"
     }
   },
-  "Everything below will be moved onto {keeper}, and the duplicate offerings deleted.": {
-    "context": {
-      "variables": {
-        "keeper": {
-          "type": "unknown"
-        }
-      },
-      "feature_area": "admin"
-    }
-  },
   "Evidence data": {
     "context": {
       "feature_area": "coi-review"
@@ -19323,7 +19406,7 @@
   "Failed": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "policies"
+      "feature_area": "offering-merges"
     }
   },
   "Failed Records": {
@@ -20348,6 +20431,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "plans",
       "action_type": "create"
+    }
+  },
+  "Fill in suggestions": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Fill in the details to create a new user account.": {
@@ -22636,6 +22724,11 @@
       "feature_area": "issues"
     }
   },
+  "I understand the consequences.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "I want to create a VM": {
     "context": {
       "feature_area": "ai-assistant"
@@ -24671,6 +24764,21 @@
       "feature_area": "details"
     }
   },
+  "Invoice items rewritten": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Invoice items rewritten: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-merges"
+    }
+  },
   "Invoice no.": {
     "context": {
       "feature_area": "details"
@@ -24680,6 +24788,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "list"
+    }
+  },
+  "Invoice policy": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "offering-merges"
     }
   },
   "Invoice price from billing export. Sell price tries \"Sell Total Price\" then \"Customer Total Price\". Buy price tries \"Buy Total Price\" then \"Total Wholesale Price\".": {},
@@ -24701,6 +24815,11 @@
   "Invoices": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Invoices and usage summaries": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Involuntary context switches": {
@@ -24934,6 +25053,12 @@
       "action_type": "read"
     }
   },
+  "Items on closed invoices": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Items on every invoice, closed ones included, are rewritten to name the target offering, plan and component. Use it when past invoices should read as if the target had always been used. Amounts never change.": {},
   "JPG, PNG, PDF or .asice (max {size})": {
     "context": {
       "variables": {
@@ -25061,6 +25186,11 @@
       "feature_area": "reporting"
     }
   },
+  "Keep as is": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Keep existing offering permissions when moving to a new organization": {
     "context": {
       "feature_area": "list"
@@ -25094,7 +25224,7 @@
   },
   "Keeper": {
     "context": {
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "Keeps roles in step with the identity provider, the way SCIM group membership does.": {
@@ -27539,6 +27669,21 @@
       "feature_area": "import-usage"
     }
   },
+  "Map every source plan and component that resources, orders or usage refer to. Unused ones may stay unmapped: they remain on the archived source.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Map order answers": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Map plans and components": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Map remote portal roles to local roles": {
     "context": {
       "feature_area": "project-templates"
@@ -27589,7 +27734,7 @@
   },
   "Mappings": {
     "context": {
-      "feature_area": "reports"
+      "feature_area": "offering-merges"
     }
   },
   "Maps Arrow customer references (XSP...) to Waldur organizations.": {
@@ -28535,9 +28680,39 @@
       "feature_area": "support-users"
     }
   },
-  "Merge into keeper": {
+  "Merge into {target}": {
     "context": {
-      "feature_area": "admin"
+      "variables": {
+        "target": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "offering-merges",
+      "action_type": "read"
+    }
+  },
+  "Merge into {target} ({state})": {
+    "context": {
+      "variables": {
+        "target": {
+          "type": "unknown"
+        },
+        "state": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard",
+      "action_type": "read"
+    }
+  },
+  "Merge not found": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Merging…": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Mermaid source copied to clipboard.": {
@@ -30082,6 +30257,11 @@
       "feature_area": "issue-templates"
     }
   },
+  "New key": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "New limit": {
     "context": {
       "primary_ui_type": "title",
@@ -30091,6 +30271,12 @@
   "New limits": {
     "context": {
       "feature_area": "UserPendingActionsList"
+    }
+  },
+  "New merge": {
+    "context": {
+      "primary_ui_type": "action_button",
+      "feature_area": "offering-merges"
     }
   },
   "New monthly plan fee": {
@@ -30111,6 +30297,11 @@
   "New offering": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "New offering merge": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "New plan": {
@@ -30242,7 +30433,7 @@
   "Next": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "actions",
+      "feature_area": "wizard",
       "action_type": "create"
     }
   },
@@ -30775,6 +30966,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "No current preview": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "No custom fields found. You can skip this step and configure field mappings later.": {
     "context": {
       "feature_area": "steps"
@@ -31290,6 +31486,11 @@
   "No offerings match your search. To find organisations, projects or resources, use the search in the top bar.": {
     "context": {
       "feature_area": "landing"
+    }
+  },
+  "No offerings of an allowed type": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "No open round available.": {
@@ -31866,6 +32067,11 @@
       "feature_area": "reports"
     }
   },
+  "No stored preview. It is computed in the wizard and discarded when a mapping changes.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "No stream data received from the assistant.": {},
   "No stream data received from the inference API": {},
   "No subnets": {
@@ -32025,6 +32231,11 @@
   "No volume availability zones found.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "No warnings.": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "No {verboseName} found": {
@@ -32422,6 +32633,11 @@
       "feature_area": "review"
     }
   },
+  "Nothing blocks this merge.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Nothing changes: the offering sets these values itself or they stay the same.": {
     "context": {
       "feature_area": "accounts"
@@ -32457,6 +32673,11 @@
       "feature_area": "details"
     }
   },
+  "Nothing to move.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Nothing to plot": {
     "context": {
       "feature_area": "views"
@@ -32465,6 +32686,11 @@
   "Nothing to plot — no limit-based components with caps and explicit period bounds.": {
     "context": {
       "feature_area": "views"
+    }
+  },
+  "Nothing to rename": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Nothing to show": {
@@ -33117,6 +33343,16 @@
       "feature_area": "dashboard"
     }
   },
+  "Offering merge": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
+  "Offering merges": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Offering must have at least one plan.": {
     "context": {
       "feature_area": "actions"
@@ -33229,7 +33465,7 @@
   "Offering type": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "admin",
+      "feature_area": "offering-merges",
       "action_type": "read"
     }
   },
@@ -33372,6 +33608,11 @@
   "Old end date": {
     "context": {
       "feature_area": "type-based"
+    }
+  },
+  "Old key": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Old limit": {
@@ -33604,6 +33845,16 @@
       "feature_area": "list"
     }
   },
+  "Only a done merge can be undone. This one is {state}.": {
+    "context": {
+      "variables": {
+        "state": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "Only a draft or previewed merge can be deleted.": {},
   "Only a single IP address (/{prefix}) is allowed.": {
     "context": {
       "variables": {
@@ -33643,6 +33894,7 @@
       "feature_area": "sram"
     }
   },
+  "Only items on invoices that can still change are rewritten to name the target offering, plan and component. Closed invoices keep naming the sources.": {},
   "Only lengths that fit inside the fixed project duration are offered ({cap}).": {
     "context": {
       "variables": {
@@ -33817,6 +34069,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Open merge record": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Open or closed": {
     "context": {
       "feature_area": "generated"
@@ -33902,7 +34159,7 @@
   },
   "OpenStack duplicate offerings": {
     "context": {
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "OpenStack flavor": {
@@ -34364,6 +34621,11 @@
   "Order UUID": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Order answer keys": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Order approval": {
@@ -34994,7 +35256,7 @@
   "Orphaned resources": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "Other": {
@@ -35578,6 +35840,11 @@
   "Partner Reference": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Passed": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Passkey": {},
@@ -36817,6 +37084,16 @@
       "feature_area": "plans"
     }
   },
+  "Plan mapping": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Plan mappings": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Plan name": {
     "context": {
       "primary_ui_type": "title",
@@ -36855,7 +37132,7 @@
   "Plans": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "offerings"
+      "feature_area": "wizard"
     }
   },
   "Plans below safety margin": {},
@@ -38017,6 +38294,12 @@
       "feature_area": "plans"
     }
   },
+  "Previewed": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "offering-merges"
+    }
+  },
   "Previous": {
     "context": {
       "primary_ui_type": "title",
@@ -38115,11 +38398,22 @@
       "feature_area": "details"
     }
   },
+  "Price after merge": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
   "Price at least one component, or mark the plan as free.": {
     "context": {
       "primary_ui_type": "submit_button",
       "feature_area": "plans",
       "action_type": "create"
+    }
+  },
+  "Price differences": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Price for consumption": {
@@ -38550,6 +38844,7 @@
       "feature_area": "deploy"
     }
   },
+  "Progress and verification": {},
   "Project": {
     "context": {
       "primary_ui_type": "title",
@@ -40621,6 +40916,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "rabbitmq"
+    }
+  },
+  "Queued": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "offering-merges"
     }
   },
   "Queues": {
@@ -43083,7 +43384,7 @@
   "Resolve": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "admin",
+      "feature_area": "accounts",
       "action_type": "create"
     }
   },
@@ -43098,26 +43399,24 @@
       "feature_area": "accounts"
     }
   },
-  "Resolve duplicate offerings": {
+  "Resolve in merge wizard": {
     "context": {
-      "feature_area": "admin"
-    }
-  },
-  "Resolve duplicates": {
-    "context": {
-      "feature_area": "admin"
-    }
-  },
-  "Resolve the blockers listed above first.": {
-    "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "admin",
-      "action_type": "create"
+      "feature_area": "offering-merges"
     }
   },
   "Resolve username conflicts": {
     "context": {
       "feature_area": "accounts"
+    }
+  },
+  "Resolve {count} blocker(s) first.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-merges"
     }
   },
   "Resolved": {
@@ -43915,6 +44214,11 @@
       "feature_area": "UserTosManagement"
     }
   },
+  "Resources to move": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Resources will need to be manually recreated": {
     "context": {
       "feature_area": "project"
@@ -43943,6 +44247,11 @@
   "Resources, limits, and usage by organization": {
     "context": {
       "feature_area": "reporting"
+    }
+  },
+  "Resources, orders, usage and history of the sources move to the target; the sources are archived. Basic, Support and site agent offerings merge between themselves; any other type only into an offering of the same type.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Resources:": {
@@ -44168,8 +44477,8 @@
   "Restricts who may submit a proposal. Email patterns, user affiliations and identity sources form a single group: an applicant matching any one value in it passes. Nationalities and organization types are each checked on top of that, and every assurance level listed is required. A field left empty is not checked, and only attributes this deployment collects are listed.": {},
   "Result": {
     "context": {
-      "primary_ui_type": "label",
-      "feature_area": "policies"
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
     }
   },
   "Result of last run": {
@@ -45419,6 +45728,21 @@
       "feature_area": "cluster"
     }
   },
+  "Run again": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Run merge": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Run preview": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Run test": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -45426,8 +45750,24 @@
       "action_type": "create"
     }
   },
+  "Run the preview first.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Run the preview first. Changing a mapping discards the previous one.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Run the preview to see what the merge moves. It is required before the merge can run.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Running": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "celery"
     }
   },
@@ -45847,6 +46187,11 @@
   "Save script": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Save the changed mappings and run the preview again.": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Save this file as .env in your refresh-glauth-config service installation directory.": {
@@ -46767,6 +47112,11 @@
       "feature_area": "roles"
     }
   },
+  "Select at least one source offering.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Select at least one value.": {
     "context": {
       "feature_area": "options"
@@ -47235,6 +47585,11 @@
       "feature_area": "import"
     }
   },
+  "Select source offerings...": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Select specific offerings to target": {
     "context": {
       "feature_area": "steps"
@@ -47278,6 +47633,11 @@
   "Select tag...": {
     "context": {
       "feature_area": "tags"
+    }
+  },
+  "Select target offering...": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Select target organization and project": {
@@ -47373,6 +47733,11 @@
         }
       },
       "feature_area": "import"
+    }
+  },
+  "Select the target offering.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "Select the vendor offering to determine which Arrow licenses to show and which Waldur offering to import into.": {
@@ -49258,11 +49623,6 @@
     }
   },
   "Size of the thumbnail to generate when screenshot is uploaded for an offering.": {},
-  "Skip": {
-    "context": {
-      "feature_area": "admin"
-    }
-  },
   "Skip connection to external network": {
     "context": {
       "feature_area": "openstack"
@@ -49538,6 +49898,11 @@
       "feature_area": "event-subscriptions"
     }
   },
+  "Source component": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Source for OpenStack instance compute usage (cores and RAM). \"Quota\" (default) derives usage from instance flavors; \"Placement\" reads Placement allocations and can additionally bill specialty resource classes (VGPU, PCI, custom). Storage is always billed from Cinder volumes regardless of this setting.": {
     "context": {
       "feature_area": "openstack"
@@ -49545,11 +49910,35 @@
   },
   "Source label written to User.attribute_sources for attributes pulled from a remote SCIM directory.": {},
   "Source label written to User.attribute_sources for inbound SCIM writes. Used by the multi-source attribute merge to track ownership.": {},
+  "Source offering": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
+  "Source offerings": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "Source package": {
     "context": {
       "primary_ui_type": "label"
     }
   },
+  "Source plan": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
+  "Sources": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
+  "Sources and target": {},
   "South Africa": {},
   "South Korea": {},
   "Space Quotas": {
@@ -50010,6 +50399,28 @@
         }
       },
       "feature_area": "workflow"
+    }
+  },
+  "Step {done} of {total}: {step}. Rows {rowsDone} of {rowsTotal}.": {
+    "context": {
+      "variables": {
+        "done": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        },
+        "step": {
+          "type": "unknown"
+        },
+        "rowsDone": {
+          "type": "unknown"
+        },
+        "rowsTotal": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-merges"
     }
   },
   "Step {index}": {
@@ -51265,7 +51676,7 @@
   "Target": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "cluster"
+      "feature_area": "offering-merges"
     }
   },
   "Target approval rate": {
@@ -51283,6 +51694,11 @@
       "feature_area": "single-import"
     }
   },
+  "Target component": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Target field": {
     "context": {
       "feature_area": "options"
@@ -51291,6 +51707,16 @@
   "Target invoice": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Target offering": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Target plan": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Target type": {
@@ -51572,7 +51998,7 @@
   "Tenant": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "admin"
+      "feature_area": "offering-merges"
     }
   },
   "Tenant name": {
@@ -51588,6 +52014,11 @@
   "Tenant user username": {
     "context": {
       "feature_area": "openstack"
+    }
+  },
+  "Tenants with more than one offering of a type. Resolve a group to merge its duplicates into the recommended keeper; blockers and warnings are those of that merge with the suggested mapping.": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Terminate": {
@@ -52195,12 +52626,6 @@
       "feature_area": "project-digest"
     }
   },
-  "The duplicate offerings have been resolved.": {
-    "context": {
-      "primary_ui_type": "success_message",
-      "feature_area": "admin"
-    }
-  },
   "The earliest time this award may be approved on the receiving portal. Leave empty to allow approval at any time.": {
     "context": {
       "feature_area": "actions"
@@ -52354,6 +52779,16 @@
       "feature_area": "manage"
     }
   },
+  "The group has no duplicates left to merge.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "The group has no recommended keeper.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "The homeserver pushes room events to Waldur via the appservice webhook. Waldur processes bot commands and ignores other events.": {
     "context": {
       "feature_area": "matrix"
@@ -52405,11 +52840,6 @@
       "feature_area": "ai-assistant"
     }
   },
-  "The keeper is missing a counterpart for the records below, so merging would discard billing or usage history.": {
-    "context": {
-      "feature_area": "admin"
-    }
-  },
   "The key can be revealed once it is active.": {
     "context": {
       "feature_area": "api-keys"
@@ -52419,6 +52849,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "keys"
+    }
+  },
+  "The last task reported an error": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "The list is published for an external firewall to enforce. This portal does not block traffic on it.": {
@@ -52501,6 +52936,79 @@
   "The maximum port number is not specified.": {
     "context": {
       "feature_area": "rule-editor"
+    }
+  },
+  "The merge draft has been created.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "wizard"
+    }
+  },
+  "The merge has been deleted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-merges"
+    }
+  },
+  "The merge has been queued.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-merges"
+    }
+  },
+  "The merge is done and verified.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The merge is done but its verification failed.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The merge is not saved yet.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "The merge is {state}.": {
+    "context": {
+      "variables": {
+        "state": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "offering-merges"
+    }
+  },
+  "The merge is {state}; its mappings can no longer change.": {
+    "context": {
+      "variables": {
+        "state": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "wizard"
+    }
+  },
+  "The merge may have been deleted.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "The merge record and its mappings are deleted. Nothing was merged yet, so no offering changes.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "The merge runs in the background. This page follows its progress and can be reloaded or left at any time.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The merge was refused": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "The message could not be sent": {
@@ -52599,9 +53107,24 @@
       "feature_area": "import"
     }
   },
+  "The offering that remains. Prepare its plans and components before merging.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The offerings are fixed once the draft exists. Delete the draft and start a new merge to pick others.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "The offerings here are not priced yet, so none can be requested. Please contact support.": {
     "context": {
       "feature_area": "resource-requests-step"
+    }
+  },
+  "The offerings to merge away.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "The official registration number of your company": {
@@ -52701,6 +53224,11 @@
   "The pools of one service provider must not overlap: UIDs against UIDs, GIDs against GIDs. A UID and a GID may share a number, so the same range can serve both.": {
     "context": {
       "feature_area": "posix-id-pools"
+    }
+  },
+  "The preview counts what moves, lists what blocks the merge and what needs your acknowledgement. Changing a mapping discards it.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "The project has been created.": {
@@ -52912,6 +53440,16 @@
     }
   },
   "The slug template cannot be changed once proposals exist for this call.": {},
+  "The source has no components.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "The source has no plans.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "The starting price covers what the plan fixes. Components you size yourself and metered usage are charged on top, at the rates above.": {
     "context": {
       "feature_area": "details"
@@ -52962,6 +53500,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "admin"
+    }
+  },
+  "The target's order form knows every answer key of the sources.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "The threshold is reached and this action has been applied.": {
@@ -53325,6 +53868,11 @@
       "feature_area": "debug"
     }
   },
+  "These answer keys are on the sources' order forms but not on the target's. Rename each to a target key, or leave it as is: the answers are kept, but the target's form does not show them.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "These are the license references from Arrow billing export. Resources with matching backend_id will show consumption data.": {
     "context": {
       "feature_area": "mappings"
@@ -53343,6 +53891,16 @@
   "These fields can be synced via the Identity Bridge.": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "These offering types cannot be merged.": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "These offerings cannot be merged: their types differ and are not Basic, Support or site agent.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "These restrictions are configured at the organization level and apply to all projects within this organization.": {
@@ -53663,6 +54221,11 @@
   "This is the distributed virtual router port serving the OpenStack metadata service (169.254.169.254). If you delete it, cloud-init will stop working for instances in this network: new instances will not receive SSH keys or initial configuration. This port can only be restored via the OpenStack CLI.": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "This is the first step.": {
+    "context": {
+      "feature_area": "wizard"
     }
   },
   "This is the primary database": {
@@ -56600,6 +57163,12 @@
       "feature_area": "affiliates"
     }
   },
+  "Unable to create the merge.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "wizard"
+    }
+  },
   "Unable to create the project template.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -57049,6 +57618,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "affiliates"
+    }
+  },
+  "Unable to delete the merge.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-merges"
     }
   },
   "Unable to delete the user agreement.": {
@@ -57977,9 +58552,10 @@
       "feature_area": "accounts"
     }
   },
-  "Unable to preview the changes.": {
+  "Unable to preview the merge.": {
     "context": {
-      "feature_area": "admin"
+      "primary_ui_type": "error_message",
+      "feature_area": "wizard"
     }
   },
   "Unable to publish Google Calendar.": {
@@ -58491,12 +59067,6 @@
       "feature_area": "pubsub"
     }
   },
-  "Unable to resolve the duplicate offerings.": {
-    "context": {
-      "primary_ui_type": "error_message",
-      "feature_area": "admin"
-    }
-  },
   "Unable to resolve ticket.": {
     "context": {
       "primary_ui_type": "error_message"
@@ -58648,6 +59218,12 @@
       "feature_area": "matrix"
     }
   },
+  "Unable to run the merge.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-merges"
+    }
+  },
   "Unable to save a broadcast as a template.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -58717,6 +59293,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "roles"
+    }
+  },
+  "Unable to save the mappings.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "wizard"
     }
   },
   "Unable to save the rule": {
@@ -59010,6 +59592,12 @@
       "feature_area": "usage"
     }
   },
+  "Unable to suggest mappings.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "wizard"
+    }
+  },
   "Unable to sync FreeIPA profile.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -59134,6 +59722,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "support"
+    }
+  },
+  "Unable to undo the merge.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-merges"
     }
   },
   "Unable to unlink OpenStack instance.": {
@@ -60090,6 +60684,46 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "booking"
+    }
+  },
+  "Undo": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Undo has been queued.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-merges"
+    }
+  },
+  "Undo merge": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
+  "Undo moves the resources, orders, usage and other rows back to the source offerings, restores their plans and components, unarchives the sources and puts the invoice items back as they were before the merge. Items on invoices closed since the merge stay as they are. Undo is refused if anything changed on the moved rows since the merge.": {},
+  "Undo was refused": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Undoing": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "offering-merges"
+    }
+  },
+  "Undoing the merge…": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Undone": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "offering-merges"
     }
   },
   "Unexpected exception happened during login process.": {
@@ -61245,11 +61879,6 @@
       "feature_area": "offerings"
     }
   },
-  "Usage records": {
-    "context": {
-      "primary_ui_type": "title"
-    }
-  },
   "Usage report": {
     "context": {
       "feature_area": "openportal"
@@ -61274,6 +61903,11 @@
         }
       },
       "feature_area": "project-detail"
+    }
+  },
+  "Usage summaries recomputed": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Usage tracking": {
@@ -62786,6 +63420,16 @@
       "feature_area": "team"
     }
   },
+  "Verification after the merge": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Verification after the undo": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Verification details": {
     "context": {
       "feature_area": "organizations"
@@ -62795,6 +63439,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "organizations"
+    }
+  },
+  "Verification failed": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Verification method": {
@@ -62815,6 +63464,11 @@
   "Verifications": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "Verified": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Verify Danish companies via Dun & Bradstreet's Nordic Right to Sign service by checking your name against the company's listed signatories. Matches that can't be confirmed automatically are reviewed by our team.": {},
@@ -63382,6 +64036,11 @@
       "feature_area": "database-stats"
     }
   },
+  "Waiting for a worker…": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Waiting for support": {
     "context": {
       "primary_ui_type": "label"
@@ -63594,8 +64253,18 @@
   },
   "Warnings": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "hygiene"
+    }
+  },
+  "Warnings acknowledged": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
+  "Warnings not acknowledged": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "We apologize for the inconvenience. Try reloading the page.": {},
@@ -63772,6 +64441,16 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "sram"
+    }
+  },
+  "What moves to the target": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "What stays on the sources": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "What this proposal produced once it was accepted.": {
@@ -64024,6 +64703,7 @@
       "feature_area": "options"
     }
   },
+  "Where usage and resources land": {},
   "Whether automatic periodic sync is enabled for this integration": {},
   "Whether clusters get dedicated load balancer nodes. Defaults to always included.": {
     "context": {
@@ -64046,6 +64726,7 @@
       "feature_area": "sram"
     }
   },
+  "Which invoices are rewritten": {},
   "Which price to use for invoice items: sell or buy": {
     "context": {
       "feature_area": "settings"
@@ -65505,6 +66186,11 @@
       "feature_area": "proposals"
     }
   },
+  "archived": {
+    "context": {
+      "feature_area": "wizard"
+    }
+  },
   "article code changes": {
     "context": {
       "feature_area": "article-codes"
@@ -65731,11 +66417,6 @@
   "disks": {
     "context": {
       "feature_area": "vmware"
-    }
-  },
-  "duplicates": {
-    "context": {
-      "feature_area": "admin"
     }
   },
   "e.g.": {
@@ -66485,6 +67166,11 @@
   "offering invitations": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "offering merges": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "offering permissions": {
@@ -67535,6 +68221,19 @@
       "feature_area": "workflow"
     }
   },
+  "{components} component(s) over {months}": {
+    "context": {
+      "variables": {
+        "components": {
+          "type": "unknown"
+        },
+        "months": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "offering-merges"
+    }
+  },
   "{component} (hours)": {
     "context": {
       "variables": {
@@ -68318,6 +69017,16 @@
       "feature_area": "resource-requests-step"
     }
   },
+  "{count} resource(s)": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-merges"
+    }
+  },
   "{count} resource(s) are advisory only": {
     "context": {
       "variables": {
@@ -68751,6 +69460,19 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "{done} of {total}": {
+    "context": {
+      "variables": {
+        "done": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "wizard"
     }
   },
   "{enabled} of {total}": {
