@@ -4,7 +4,6 @@ import {
   LightningIcon,
   PlayIcon,
   QuestionIcon,
-  WarningIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
@@ -21,6 +20,8 @@ import {
   PolicyPeriodEnum,
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -682,18 +683,15 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
         >
           {enableToggle}
           {existingPolicy?.warnings?.length > 0 && (
-            <div className="alert alert-warning d-flex align-items-start mb-4">
-              <WarningIcon
-                weight="bold"
-                className="me-2 mt-1 flex-shrink-0"
-                size={20}
-              />
-              <div>
-                {existingPolicy.warnings.map((warning, index) => (
-                  <div key={index}>{warning}</div>
-                ))}
-              </div>
-            </div>
+            <AlertItem
+              variant="warning"
+              type="floating"
+              className="mb-4"
+              title={translate('Warning')}
+              body={existingPolicy.warnings.map((warning, index) => (
+                <div key={index}>{warning}</div>
+              ))}
+            />
           )}
           {existingPolicy && (
             <SlurmPolicyStatusSummary policyUuid={existingPolicy.uuid} />

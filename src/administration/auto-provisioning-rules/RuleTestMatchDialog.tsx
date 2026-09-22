@@ -13,7 +13,7 @@ import {
   type RuleTestMatchResponse,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
@@ -125,9 +125,12 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
         )}
       </div>
       {result.block_reason && (
-        <div className="alert alert-warning py-2 px-3 mb-3">
-          {result.block_reason}
-        </div>
+        <AlertItem
+          variant="warning"
+          type="floating"
+          title={result.block_reason}
+          className="mb-3"
+        />
       )}
 
       <h6 className="mt-4 mb-2">{translate('Filter outcomes')}</h6>
@@ -154,48 +157,57 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
         <>
           <h6 className="mt-4 mb-2">{translate('Organization lookup')}</h6>
           {result.customer_candidates.length === 0 ? (
-            <div className="alert alert-danger py-2 px-3 mb-0">
-              {translate(
+            <AlertItem
+              variant="error"
+              type="floating"
+              title={translate(
                 'No Waldur organization matches the user\'s IdP organization ("{name}").',
                 { name: result.user_organization || '—' },
               )}
-            </div>
+            />
           ) : result.customer_lookup_ambiguous ? (
-            <div className="alert alert-danger py-2 px-3 mb-0">
-              <div className="fw-semibold mb-1">
-                {translate(
-                  'Ambiguous — {count} organizations share this name.',
-                  { count: result.customer_candidates.length },
-                )}
-              </div>
-              <ul className="mb-0">
-                {result.customer_candidates.map((c) => (
-                  <li key={c.uuid}>
-                    {c.url ? (
-                      <a href={c.url} target="_blank" rel="noreferrer">
-                        {c.name}
-                      </a>
-                    ) : (
-                      c.name
-                    )}
-                    {c.abbreviation ? ` (${c.abbreviation})` : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <AlertItem
+              variant="error"
+              type="floating"
+              title={translate(
+                'Ambiguous — {count} organizations share this name.',
+                { count: result.customer_candidates.length },
+              )}
+              body={
+                <ul className="mb-0">
+                  {result.customer_candidates.map((c) => (
+                    <li key={c.uuid}>
+                      {c.url ? (
+                        <a href={c.url} target="_blank" rel="noreferrer">
+                          {c.name}
+                        </a>
+                      ) : (
+                        c.name
+                      )}
+                      {c.abbreviation ? ` (${c.abbreviation})` : null}
+                    </li>
+                  ))}
+                </ul>
+              }
+            />
           ) : (
-            <div className="alert alert-success py-2 px-3 mb-0">
-              {translate('Matched organization: {name}', {
+            <AlertItem
+              variant="success"
+              type="floating"
+              title={translate('Matched organization: {name}', {
                 name: result.customer_candidates[0].name,
               })}
-            </div>
+            />
           )}
         </>
       )}
 
       {result.unconfigured_claims?.length > 0 && (
-        <div className="alert alert-warning py-2 px-3 mt-3 mb-0">
-          {translate(
+        <AlertItem
+          variant="warning"
+          type="floating"
+          title={translate('Warning')}
+          body={translate(
             "Not received from any identity provider: {claims}. Waldur only stores a claim that is listed in the provider's extra fields, so this rule cannot match anyone until it is added there.",
             {
               claims: result.unconfigured_claims
@@ -203,7 +215,8 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
                 .join(', '),
             },
           )}
-        </div>
+          className="mt-3"
+        />
       )}
 
       <h6 className="mt-4 mb-2">{translate('User attributes')}</h6>
@@ -324,21 +337,28 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
 
               {resolve.rule.use_user_organization_as_customer_name &&
                 protectedMethods.length === 0 && (
-                  <div className="alert alert-warning py-2 px-3 mt-3 mb-0">
-                    {translate(
+                  <AlertItem
+                    variant="warning"
+                    type="floating"
+                    title={translate('Warning')}
+                    body={translate(
                       'This rule resolves the organization from the user IdP claim, but no protected registration methods are configured. No user will currently pass the protection check.',
                     )}
-                  </div>
+                    className="mt-3"
+                  />
                 )}
 
               {mutation.error && (
-                <div className="alert alert-danger py-2 px-3 mt-3 mb-0">
-                  {translate('Test failed: {error}', {
+                <AlertItem
+                  variant="error"
+                  type="floating"
+                  title={translate('Test failed: {error}', {
                     error:
                       (mutation.error as Error).message ||
                       translate('Unknown error'),
                   })}
-                </div>
+                  className="mt-3"
+                />
               )}
 
               {mutation.data && <ResultPanel result={mutation.data} />}

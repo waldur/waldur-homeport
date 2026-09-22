@@ -1,4 +1,6 @@
-import { Alert, Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -23,9 +25,11 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
 
   if (!activeSettings) {
     return (
-      <Alert variant="info">
-        {translate('Arrow integration not configured')}
-      </Alert>
+      <AlertItem
+        type="floating"
+        variant="info"
+        title={translate('Arrow integration not configured')}
+      />
     );
   }
 
@@ -38,11 +42,14 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          <Alert variant="warning" className="mb-4">
-            {translate(
+          <AlertItem
+            type="floating"
+            variant="warning"
+            className="mb-4"
+            title={translate(
               'These actions are for debugging purposes only. Use with caution.',
             )}
-          </Alert>
+          />
 
           <Row className="g-4">
             <Col md={6}>

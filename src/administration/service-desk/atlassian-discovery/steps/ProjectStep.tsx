@@ -1,8 +1,10 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Alert, Card, FormCheck, Spinner } from 'react-bootstrap';
+import { Card, FormCheck, Spinner } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverProjects } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
@@ -104,7 +106,7 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
   if (error) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <Alert variant="danger">{error}</Alert>
+        <AlertItem type="floating" variant="error" title={error} />
       </WizardModal>
     );
   }
@@ -112,11 +114,13 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
   if (values.projects.length === 0) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <Alert variant="warning">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="warning"
+          title={translate(
             'No Service Desk projects found. Please ensure you have access to at least one Service Desk project.',
           )}
-        </Alert>
+        />
       </WizardModal>
     );
   }

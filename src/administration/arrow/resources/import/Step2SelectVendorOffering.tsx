@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Alert, Form as BsForm } from 'react-bootstrap';
+import { Form as BsForm } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 import { adminArrowVendorOfferingMappingsList } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
@@ -29,16 +31,22 @@ const VendorOfferingSelect = ({ input }: { input: any }) => {
   if (isLoading) return <LoadingSpinner />;
   if (error)
     return (
-      <Alert variant="danger">{translate('Failed to load offerings')}</Alert>
+      <AlertItem
+        type="floating"
+        variant="error"
+        title={translate('Failed to load offerings')}
+      />
     );
 
   if (!data?.length) {
     return (
-      <Alert variant="warning">
-        {translate(
+      <AlertItem
+        type="floating"
+        variant="warning"
+        title={translate(
           'No vendor offerings are configured. Please configure vendor offering mappings first.',
         )}
-      </Alert>
+      />
     );
   }
 

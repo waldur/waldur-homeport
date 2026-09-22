@@ -1,10 +1,12 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Alert, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import {
   EligibleProject,
   matrixRoomsCreate,
   matrixRoomsEligibleProjectsList,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { AsyncSelect } from '@/form/select';
@@ -123,7 +125,7 @@ export const AdminCreateMatrixRoomDialog: FC<
           'Select a project to create a Matrix chat room for. All project members will be invited automatically.',
         )}
       </p>
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <AlertItem type="floating" variant="error" title={error} />}
       <Form.Group className="mb-4">
         <Form.Label>{translate('Organization')}</Form.Label>
         <AsyncSelect

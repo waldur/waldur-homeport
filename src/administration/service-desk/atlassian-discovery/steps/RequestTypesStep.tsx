@@ -1,8 +1,10 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Alert, FormCheck, Spinner, Table } from 'react-bootstrap';
+import { FormCheck, Spinner, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
@@ -124,7 +126,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
   if (error) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <Alert variant="danger">{error}</Alert>
+        <AlertItem type="floating" variant="error" title={error} />
       </WizardModal>
     );
   }
@@ -132,11 +134,13 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
   if (values.requestTypes.length === 0) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <Alert variant="warning">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="warning"
+          title={translate(
             'No request types found for this project. Please configure request types in Jira Service Desk.',
           )}
-        </Alert>
+        />
       </WizardModal>
     );
   }

@@ -3,6 +3,8 @@ import { Form, Nav, Tab } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
@@ -147,11 +149,13 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
 
   if (components.length === 0) {
     return (
-      <div className="alert alert-info">
-        {translate(
+      <AlertItem
+        type="floating"
+        variant="info"
+        title={translate(
           'No capacity will be freed with the current limit changes. Please adjust limits in the previous step.',
         )}
-      </div>
+      />
     );
   }
 

@@ -1,8 +1,10 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Alert, Card, Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
@@ -329,11 +331,13 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         </Card.Body>
       </Card>
 
-      <Alert variant="info">
-        {translate(
+      <AlertItem
+        type="floating"
+        variant="info"
+        title={translate(
           'Note: Credentials (API token, password, etc.) will be securely stored and are not shown in this preview.',
         )}
-      </Alert>
+      />
     </WizardModal>
   );
 };

@@ -1,8 +1,10 @@
-import { Alert } from 'react-bootstrap';
+import { AlertItem } from 'waldur-ui';
 
 export const ErredRemoteConnection = ({ error, message }) => (
-  <Alert variant="danger">
-    <h4>{message}</h4>
-    {error?.message && <p>{error.message}</p>}
-  </Alert>
+  <AlertItem
+    variant="error"
+    type="floating"
+    title={message}
+    body={error?.message}
+  />
 );

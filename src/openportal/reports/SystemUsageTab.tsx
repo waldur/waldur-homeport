@@ -6,7 +6,9 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Alert, Button, Card, Container, Form } from 'react-bootstrap';
+import { Button, Card, Container, Form } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
@@ -462,27 +464,24 @@ export const SystemUsageTab: FC = () => {
 
       {/* ── Slow-load warning ───────────────────────────────────────────── */}
       {showSlowWarning && (
-        <Alert
+        <AlertItem
+          type="floating"
           variant="warning"
-          className="d-flex align-items-start gap-3 mb-3"
-        >
-          <div className="flex-grow-1">
-            <strong>{translate('This is taking a while.')}</strong>
-            <div className="small mt-1">
-              {translate(
-                'To speed things up: select a specific year and month filter before loading. System-wide data across all projects and users can be very large.',
-              )}
-            </div>
-          </div>
-          <Button
-            variant="warning"
-            size="sm"
-            className="flex-shrink-0"
-            onClick={() => window.location.reload()}
-          >
-            {translate('Cancel & reload')}
-          </Button>
-        </Alert>
+          className="mb-3"
+          title={translate('This is taking a while.')}
+          body={translate(
+            'To speed things up: select a specific year and month filter before loading. System-wide data across all projects and users can be very large.',
+          )}
+          actions={
+            <Button
+              variant="warning"
+              size="sm"
+              onClick={() => window.location.reload()}
+            >
+              {translate('Cancel & reload')}
+            </Button>
+          }
+        />
       )}
 
       {/* ── Errors ─────────────────────────────────────────────────────── */}
@@ -505,32 +504,31 @@ export const SystemUsageTab: FC = () => {
 
       {/* ── User mapping truncation notice ──────────────────────────────── */}
       {usersTruncatedCount > 0 && nameMaps !== undefined && (
-        <Alert
+        <AlertItem
+          type="floating"
           variant="info"
-          className="d-flex align-items-center gap-2 mb-3 py-2"
-        >
-          <small>
-            {translate(
-              'User names shown for top {max} users by usage only. {count} more {user} not mapped.',
-              {
-                max: MAX_USER_MAPPINGS,
-                count: usersTruncatedCount,
-                user:
-                  usersTruncatedCount !== 1
-                    ? translate('users')
-                    : translate('user'),
-              },
-            )}
-          </small>
-          <Button
-            variant="tertiary"
-            size="sm"
-            className="ms-auto"
-            onClick={() => setLoadAllUserMappings(true)}
-          >
-            {translate('Load all user names')}
-          </Button>
-        </Alert>
+          className="mb-3"
+          title={translate(
+            'User names shown for top {max} users by usage only. {count} more {user} not mapped.',
+            {
+              max: MAX_USER_MAPPINGS,
+              count: usersTruncatedCount,
+              user:
+                usersTruncatedCount !== 1
+                  ? translate('users')
+                  : translate('user'),
+            },
+          )}
+          actions={
+            <Button
+              variant="tertiary"
+              size="sm"
+              onClick={() => setLoadAllUserMappings(true)}
+            >
+              {translate('Load all user names')}
+            </Button>
+          }
+        />
       )}
 
       {/* ── Charts ────────────────────────────────────────────────────── */}

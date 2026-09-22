@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { AlertItem } from 'waldur-ui';
+
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -184,14 +186,14 @@ export const MatrixHowItWorksDialog: FC = () => {
       <div className="d-flex flex-column gap-8">
         {/* Overview */}
         <section>
-          <div className="alert alert-info">
-            <strong>{translate('What is Matrix chat integration?')}</strong>
-            <p className="mb-0 mt-2">
-              {translate(
-                'Matrix is an open protocol for decentralized communication. This integration registers Waldur as a Matrix appservice, enabling automatic creation of project chat rooms, member synchronization based on project roles, bot commands for operational queries, and chat history exports for compliance.',
-              )}
-            </p>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            title={translate('What is Matrix chat integration?')}
+            body={translate(
+              'Matrix is an open protocol for decentralized communication. This integration registers Waldur as a Matrix appservice, enabling automatic creation of project chat rooms, member synchronization based on project roles, bot commands for operational queries, and chat history exports for compliance.',
+            )}
+          />
         </section>
 
         {/* Setup Flow */}
@@ -205,31 +207,36 @@ export const MatrixHowItWorksDialog: FC = () => {
           <div className="border rounded p-4">
             <MermaidChart code={SETUP_FLOW_DIAGRAM} className="text-center" />
           </div>
-          <div className="alert alert-secondary mt-4">
-            <strong>{translate('Setup steps:')}</strong>
-            <ol className="mb-0 mt-2">
-              <li>
-                {translate(
-                  'Click "Setup appservice" and optionally provide the Waldur URL reachable by the homeserver',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Copy the generated registration YAML to your homeserver configuration directory',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Register the YAML file in your homeserver settings (e.g., app_service_config_files in Synapse, or the equivalent for your homeserver)',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Restart the homeserver — it will begin sending events to the Waldur webhook',
-                )}
-              </li>
-            </ol>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            className="mt-4"
+            title={translate('Setup steps:')}
+            body={
+              <ol className="mb-0">
+                <li>
+                  {translate(
+                    'Click "Setup appservice" and optionally provide the Waldur URL reachable by the homeserver',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Copy the generated registration YAML to your homeserver configuration directory',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Register the YAML file in your homeserver settings (e.g., app_service_config_files in Synapse, or the equivalent for your homeserver)',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Restart the homeserver — it will begin sending events to the Waldur webhook',
+                  )}
+                </li>
+              </ol>
+            }
+          />
         </section>
 
         {/* Room Lifecycle */}

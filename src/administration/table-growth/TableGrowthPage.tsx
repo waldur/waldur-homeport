@@ -1,10 +1,9 @@
-import { LightningIcon, WarningCircleIcon } from '@phosphor-icons/react';
+import { LightningIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { Alert } from 'react-bootstrap';
 import { overrideSettingsRetrieve, statsTableGrowth } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
@@ -91,15 +90,11 @@ export const TableGrowthPage = () => {
 
     return (
       <Panel title={panelTitle} cardBordered>
-        <Alert variant="danger" className="d-flex align-items-center mb-0">
-          <WarningCircleIcon size={24} weight="bold" className="me-3" />
-          <div>
-            <strong>
-              {translate('Failed to load table growth statistics')}
-            </strong>
-            <p className="mb-0 mt-1">{errorMessage}</p>
-          </div>
-        </Alert>
+        <AlertItem
+          variant="error"
+          title={translate('Failed to load table growth statistics')}
+          body={errorMessage}
+        />
       </Panel>
     );
   }

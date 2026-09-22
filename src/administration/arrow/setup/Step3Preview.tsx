@@ -1,10 +1,10 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Alert, Card, Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { adminArrowSettingsSaveSettings } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { ExternalLink } from '@/core/ExternalLink';
 import { SubmitButton } from '@/form/SubmitButton';
@@ -238,11 +238,13 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
         </Card>
       )}
 
-      <Alert variant="info">
-        {translate(
+      <AlertItem
+        type="floating"
+        variant="info"
+        title={translate(
           'Note: API credentials will be securely stored. You can add more customer mappings after setup.',
         )}
-      </Alert>
+      />
     </WizardModal>
   );
 };

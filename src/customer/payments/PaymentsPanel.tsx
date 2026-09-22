@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect, useState } from 'react';
-import { Alert } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { PaymentsList } from '@/customer/payments/PaymentsList';
@@ -29,8 +30,10 @@ export const PaymentsPanel: FunctionComponent = () => {
     return isStaff || isSupport ? <PaymentsList /> : null;
   } else if (!activePaymentProfile) {
     return (
-      <Alert variant="light">
-        {translate(
+      <AlertItem
+        type="floating"
+        variant="info"
+        title={translate(
           'You do not have an active payment profile, visit {link} to create a payment profile.',
           {
             link: (
@@ -42,7 +45,7 @@ export const PaymentsPanel: FunctionComponent = () => {
           },
           formatJsxTemplate,
         )}
-      </Alert>
+      />
     );
   } else {
     return null;

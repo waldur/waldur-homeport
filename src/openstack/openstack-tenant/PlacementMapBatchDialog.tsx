@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { openstackInstancesRetrieve, Resource } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -75,9 +77,11 @@ export const PlacementMapBatchDialog: FC<Props> = ({ resolve }) => {
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
-        <div className="alert alert-danger">
-          {translate('Failed to load instances.')}
-        </div>
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate('Failed to load instances.')}
+        />
       ) : !enriched?.length ? (
         <NoResult
           title={translate('No instances found')}

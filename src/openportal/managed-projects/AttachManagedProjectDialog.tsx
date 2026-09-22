@@ -7,6 +7,8 @@ import {
   OpenportalUnmanagedProjectsListData,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { AsyncSelectGroup, SubmitButton } from '@/form';
 import { createLoadOptions } from '@/form/select';
@@ -40,9 +42,11 @@ export const AttachManagedProjectDialog: React.FC<
   if (!project) {
     return (
       <ModalDialog title={translate('Attach Project')}>
-        <div className="alert alert-danger" role="alert">
-          {translate('Managed Project is not available.')}
-        </div>
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate('Managed Project is not available.')}
+        />
       </ModalDialog>
     );
   }
@@ -57,9 +61,11 @@ export const AttachManagedProjectDialog: React.FC<
   if (!projectTemplate) {
     return (
       <ModalDialog title={translate('Attach Project')}>
-        <div className="alert alert-danger" role="alert">
-          {translate('Project template data is not available.')}
-        </div>
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate('Project template data is not available.')}
+        />
       </ModalDialog>
     );
   }
@@ -71,11 +77,13 @@ export const AttachManagedProjectDialog: React.FC<
   if (!targetCustomer) {
     return (
       <ModalDialog title={translate('Attach Project')}>
-        <div className="alert alert-danger" role="alert">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate(
             'Customer Organization into which to create the project is not available.',
           )}
-        </div>
+        />
       </ModalDialog>
     );
   }
@@ -116,12 +124,14 @@ export const AttachManagedProjectDialog: React.FC<
   if (!canEditCustomer) {
     return (
       <ModalDialog title={translate('Attach Project')}>
-        <div className="alert alert-danger" role="alert">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate(
             'You do not have permission to edit ManagedProjects in {customer}.',
             { customer: currentCustomer?.name },
           )}
-        </div>
+        />
       </ModalDialog>
     );
   }
@@ -129,12 +139,14 @@ export const AttachManagedProjectDialog: React.FC<
   if (!canEditTargetCustomer) {
     return (
       <ModalDialog title={translate('Attach Project')}>
-        <div className="alert alert-danger" role="alert">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate(
             'You do not have permission to attach projects from {customer}.',
             { customer: targetCustomer?.name },
           )}
-        </div>
+        />
       </ModalDialog>
     );
   }

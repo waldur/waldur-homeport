@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -92,12 +92,15 @@ export const CustomerMappingExpandableRow: FC<
         </div>
 
         {/* Explanation */}
-        <div className="alert alert-light mb-4">
-          <strong>{translate('How linking works:')}</strong>{' '}
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="info"
+          className="mb-4"
+          title={translate('How linking works:')}
+          body={translate(
             'Resource backend_id should contain the Arrow License Reference (e.g., XSP12345). This is used to fetch consumption data from Arrow API.',
           )}
-        </div>
+        />
 
         {/* Consumption lines (resources with consumption data) */}
         {data.consumption_lines && data.consumption_lines.length > 0 && (

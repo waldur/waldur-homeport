@@ -2,6 +2,7 @@ import mermaid from 'mermaid';
 import { FC, useEffect, useId, useState } from 'react';
 
 import { isDarkTheme } from 'waldur-design-tokens';
+import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useTheme } from '@/theme/useTheme';
@@ -110,7 +111,7 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
   }, [code, id, theme]);
 
   if (error) {
-    return <div className="alert alert-danger">{error}</div>;
+    return <AlertItem type="floating" variant="error" title={error} />;
   }
 
   if (loading) {

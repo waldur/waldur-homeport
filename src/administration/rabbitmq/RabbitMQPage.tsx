@@ -1,6 +1,6 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { Alert } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
@@ -43,23 +43,22 @@ export const RabbitMQPage = () => {
 
     return (
       <Panel title={translate('RabbitMQ subscription queues')} cardBordered>
-        <Alert variant="danger" className="d-flex align-items-center mb-0">
-          <WarningCircleIcon size={24} weight="bold" className="me-3" />
-          <div>
-            <strong>
-              {is503
-                ? translate('RabbitMQ service unavailable')
-                : translate('Failed to load RabbitMQ statistics')}
-            </strong>
-            <p className="mb-0 mt-1">
-              {is503
-                ? translate(
-                    'The RabbitMQ management API is not responding. Please check that RabbitMQ is running.',
-                  )
-                : errorMessage}
-            </p>
-          </div>
-        </Alert>
+        <AlertItem
+          variant="error"
+          type="floating"
+          title={
+            is503
+              ? translate('RabbitMQ service unavailable')
+              : translate('Failed to load RabbitMQ statistics')
+          }
+          body={
+            is503
+              ? translate(
+                  'The RabbitMQ management API is not responding. Please check that RabbitMQ is running.',
+                )
+              : errorMessage
+          }
+        />
       </Panel>
     );
   }

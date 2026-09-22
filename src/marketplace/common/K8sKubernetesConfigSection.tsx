@@ -1,6 +1,6 @@
-import { InfoIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { Alert } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SelectField } from '@/form';
@@ -55,15 +55,19 @@ export const K8sKubernetesConfigSection: React.FC<
     <>
       {/* Configuration Warnings */}
       {configurationWarnings.length > 0 && (
-        <Alert variant="warning" className="mb-4">
-          <InfoIcon className="me-2" size={16} weight="bold" />
-          <strong>{translate('Configuration incomplete')}</strong>
-          <ul className="mb-0 mt-2">
-            {configurationWarnings.map((warning, index) => (
-              <li key={index}>{warning}</li>
-            ))}
-          </ul>
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mb-4"
+          title={translate('Configuration incomplete')}
+          body={
+            <ul className="mb-0 mt-2">
+              {configurationWarnings.map((warning, index) => (
+                <li key={index}>{warning}</li>
+              ))}
+            </ul>
+          }
+        />
       )}
 
       {/* Kubernetes Version Selection */}
@@ -108,9 +112,12 @@ export const K8sKubernetesConfigSection: React.FC<
               options={getTopologyOptions()}
             />
             {topologyNotice && (
-              <Alert variant="info" className="mt-3 mb-0">
-                {topologyNotice}
-              </Alert>
+              <AlertItem
+                type="floating"
+                variant="info"
+                className="mt-3 mb-0"
+                title={topologyNotice}
+              />
             )}
           </FormGroup>
         )}

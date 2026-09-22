@@ -62,6 +62,15 @@ const RESTRICTED_IMPORTS = [
     name: 'react-bootstrap/Popover',
     message: 'Use Popover from "waldur-ui" instead of react-bootstrap/Popover.',
   },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Alert'],
+    message: 'Use AlertItem from "waldur-ui" instead of react-bootstrap.',
+  },
+  {
+    name: 'react-bootstrap/Alert',
+    message: 'Use AlertItem from "waldur-ui" instead of react-bootstrap/Alert.',
+  },
 ];
 
 export default tseslint
@@ -123,7 +132,6 @@ export default tseslint
         'waldur-custom/no-hand-rolled-table': 'warn',
         'waldur-custom/no-hand-rolled-modal-footer': 'error',
         'waldur-custom/enforce-dialog-button-order': 'error',
-        'waldur-custom/prefer-alert-item': 'warn',
         'waldur-custom/no-direct-bootstrap-dropdown-button': 'error',
         'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',

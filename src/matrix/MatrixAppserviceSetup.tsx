@@ -7,7 +7,7 @@ import {
   overrideSettingsRetrieve,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -197,11 +197,13 @@ export const MatrixAppserviceSetupDialog: FC = () => {
             {step === 'loading' && <LoadingSpinner />}
 
             {step === 'error' && (
-              <div className="alert alert-danger mb-0">
-                {translate(
+              <AlertItem
+                type="floating"
+                variant="error"
+                title={translate(
                   'Failed to load Matrix appservice configuration. Check your connection and try again.',
                 )}
-              </div>
+              />
             )}
 
             {step === 'prereqs' && (
@@ -268,11 +270,14 @@ export const MatrixAppserviceSetupDialog: FC = () => {
             {step === 'main' && (
               <>
                 {tokensConfigured && (
-                  <div className="alert alert-warning mb-4">
-                    {translate(
+                  <AlertItem
+                    type="floating"
+                    variant="warning"
+                    className="mb-4"
+                    title={translate(
                       'AS and HS tokens are already configured. Running setup again will generate new tokens and overwrite the existing ones. You will need to update your homeserver configuration with the new registration YAML.',
                     )}
-                  </div>
+                  />
                 )}
                 <StringGroup
                   name="url"

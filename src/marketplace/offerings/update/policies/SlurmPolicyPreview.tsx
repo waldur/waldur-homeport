@@ -6,8 +6,7 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesPreviewImpact,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge, BadgeVariant } from 'waldur-ui';
 
 import { SECOND } from '@/core/constants';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
@@ -427,24 +426,32 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
   return (
     <div>
       {resource && (
-        <div className="alert alert-info mb-4">
-          <strong>{translate('Resource')}: </strong>
-          {resource.name || resource.uuid}
-          {preview.current_usage !== undefined && (
-            <span className="ms-3">
-              <strong>{translate('Current Usage')}: </strong>
-              {preview.current_usage.toLocaleString()}
-              {preview.daily_usage_rate !== undefined &&
-                preview.daily_usage_rate > 0 && (
-                  <span className="text-muted">
-                    {' '}
-                    ({preview.daily_usage_rate.toFixed(2)}{' '}
-                    {translate('per day avg')})
-                  </span>
-                )}
-            </span>
-          )}
-        </div>
+        <AlertItem
+          variant="info"
+          type="floating"
+          className="mb-4"
+          title={
+            <>
+              {translate('Resource')}: {resource.name || resource.uuid}
+            </>
+          }
+          body={
+            preview.current_usage !== undefined && (
+              <>
+                <strong>{translate('Current Usage')}: </strong>
+                {preview.current_usage.toLocaleString()}
+                {preview.daily_usage_rate !== undefined &&
+                  preview.daily_usage_rate > 0 && (
+                    <span className="text-muted">
+                      {' '}
+                      ({preview.daily_usage_rate.toFixed(2)}{' '}
+                      {translate('per day avg')})
+                    </span>
+                  )}
+              </>
+            )
+          }
+        />
       )}
 
       <ThresholdVisualization

@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { Alert } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   type ArrowCustomerMapping,
   adminArrowCustomerMappingsPartialUpdate,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { AsyncSelectGroup, BooleanGroup, StringGroup } from '@/form';
@@ -144,9 +145,12 @@ export const CustomerMappingEditDialog = ({
             <BooleanGroup name="is_active" label={translate('Active')} />
 
             {mutationError && (
-              <Alert variant="danger" className="mb-4">
-                {mutationError}
-              </Alert>
+              <AlertItem
+                type="floating"
+                variant="error"
+                className="mb-4"
+                title={mutationError}
+              />
             )}
           </ModalDialog>
         </form>

@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Alert, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
+
+import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -60,21 +62,26 @@ export const ReviewImportTab: FunctionComponent = () => {
           )}
 
           {formData?.import_secret_options && (
-            <Alert variant="warning">
-              <strong>{translate('Warning:')}</strong>{' '}
-              {translate(
+            <AlertItem
+              variant="warning"
+              type="floating"
+              className="mb-3"
+              title={translate('Warning:')}
+              body={translate(
                 'Secret options will be imported and may overwrite existing secrets.',
               )}
-            </Alert>
+            />
           )}
 
           {formData?.overwrite_existing && (
-            <Alert variant="warning">
-              <strong>{translate('Warning:')}</strong>{' '}
-              {translate(
+            <AlertItem
+              variant="warning"
+              type="floating"
+              title={translate('Warning:')}
+              body={translate(
                 'Existing offering with the same name will be overwritten.',
               )}
-            </Alert>
+            />
           )}
         </Col>
       </Row>

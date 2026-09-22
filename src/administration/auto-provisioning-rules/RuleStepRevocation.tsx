@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { AlertItem } from 'waldur-ui';
+
 import { BooleanGroup } from '@/form';
 import { translate } from '@/i18n';
 import { getCustomerRoles, getProjectRoles } from '@/permissions/utils';
@@ -91,11 +93,13 @@ export const RuleStepRevocation: FC<WizardFormStepProps> = (props) => {
         className="w-100"
       />
       {values.revoke_when_unmatched && (
-        <div className="alert alert-warning py-2 px-3 mb-0">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="warning"
+          title={translate(
             'Roles this rule granted will be revoked the next time a user who no longer matches signs in. Roles granted by a person, and roles granted by other rules, are never touched.',
           )}
-        </div>
+        />
       )}
     </WizardForm>
   );

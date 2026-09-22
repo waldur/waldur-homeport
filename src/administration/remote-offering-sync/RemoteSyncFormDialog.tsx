@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
-import { Alert, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Form, FormRenderProps } from 'react-final-form';
 import {
   marketplaceRemoteSynchronisationsCreate,
@@ -12,6 +12,8 @@ import {
   remoteWaldurApiRemoteCustomers,
   ServiceProvider,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
@@ -235,13 +237,20 @@ const RemoteSyncRenderer = ({
           required
         />
         {connecting ? (
-          <Alert variant="warning" className="overflow-auto mh-200px">
-            {translate('Connecting')}...
-          </Alert>
+          <AlertItem
+            type="floating"
+            variant="warning"
+            title={<>{translate('Connecting')}...</>}
+            className="overflow-auto mh-200px"
+          />
         ) : error ? (
-          <Alert variant="danger" className="overflow-auto mh-200px">
-            <FieldError error={error} />
-          </Alert>
+          <AlertItem
+            type="floating"
+            variant="error"
+            title={translate('Error')}
+            body={<FieldError error={error} />}
+            className="overflow-auto mh-200px"
+          />
         ) : null}
         <Row>
           <Col xs={6}>

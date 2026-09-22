@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Alert, Card, Nav, Tab } from 'react-bootstrap';
+import { Card, Nav, Tab } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -48,11 +50,13 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
     const errorResponse = (error as any)?.response;
     if (errorResponse?.status === 403) {
       return (
-        <Alert variant="warning">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="warning"
+          title={translate(
             "You do not have permission to view this user's data access information.",
           )}
-        </Alert>
+        />
       );
     }
     return <LoadingErred loadData={refetch} />;

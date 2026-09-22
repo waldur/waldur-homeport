@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Alert, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import {
   marketplaceServiceProvidersGenerateSiteAgentConfig,
   marketplaceServiceProvidersOfferingsList,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
@@ -164,11 +166,13 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       ) : offeringsLoading ? (
         <LoadingSpinner />
       ) : !offerings || offerings.length === 0 ? (
-        <Alert variant="info">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="info"
+          title={translate(
             'No SLURM offerings found for this service provider. Create a SLURM offering first.',
           )}
-        </Alert>
+        />
       ) : (
         <Form.Group className="mb-4">
           <Form.Label className="fw-bold">

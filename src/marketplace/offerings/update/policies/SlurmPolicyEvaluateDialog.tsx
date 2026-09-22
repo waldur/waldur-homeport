@@ -8,7 +8,7 @@ import {
   SlurmPolicyEvaluateResponse,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
@@ -104,17 +104,23 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
       {isLoading && <LoadingSpinner />}
 
       {dryRunMutation.isError && (
-        <div className="alert alert-danger">
-          {translate('Dry run failed.')}{' '}
-          {String((dryRunMutation.error as Error)?.message || '')}
-        </div>
+        <AlertItem
+          variant="error"
+          type="floating"
+          className="mb-4"
+          title={translate('Dry run failed.')}
+          body={String((dryRunMutation.error as Error)?.message || '')}
+        />
       )}
 
       {evaluateMutation.isError && (
-        <div className="alert alert-danger">
-          {translate('Evaluation failed.')}{' '}
-          {String((evaluateMutation.error as Error)?.message || '')}
-        </div>
+        <AlertItem
+          variant="error"
+          type="floating"
+          className="mb-4"
+          title={translate('Evaluation failed.')}
+          body={String((evaluateMutation.error as Error)?.message || '')}
+        />
       )}
 
       {dryRunResult && <DryRunResults data={dryRunResult} />}

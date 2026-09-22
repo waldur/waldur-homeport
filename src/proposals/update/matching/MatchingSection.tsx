@@ -5,7 +5,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import { proposalProtectedCallsMatchingConfigurationRetrieve } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -258,20 +258,20 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                   />
                 ))}
               </FormTable>
-              <div className="alert alert-info mt-4 d-flex align-items-center gap-2">
-                <InfoIcon size={20} weight="bold" />
-                <span>
-                  {translate(
-                    'Weights should sum to 1.0 for optimal results. Current sum: {sum}',
-                    {
-                      sum: (
-                        (config?.keyword_weight ?? 0.4) +
-                        (config?.text_weight ?? 0.6)
-                      ).toFixed(2),
-                    },
-                  )}
-                </span>
-              </div>
+              <AlertItem
+                type="floating"
+                variant="info"
+                className="mt-4"
+                title={translate(
+                  'Weights should sum to 1.0 for optimal results. Current sum: {sum}',
+                  {
+                    sum: (
+                      (config?.keyword_weight ?? 0.4) +
+                      (config?.text_weight ?? 0.6)
+                    ).toFixed(2),
+                  },
+                )}
+              />
             </Tab.Pane>
 
             {/* Constraints tab */}

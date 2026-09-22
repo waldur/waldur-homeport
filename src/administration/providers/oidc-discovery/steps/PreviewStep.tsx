@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Alert, Card, Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -242,15 +242,19 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
         </Card.Body>
       </Card>
 
-      <Alert variant="info">
-        {existingProvider
-          ? translate(
-              'Click "Update Provider" to apply these changes. Client secret will be securely stored.',
-            )
-          : translate(
-              'Click "Create Provider" to save this configuration. Client secret will be securely stored.',
-            )}
-      </Alert>
+      <AlertItem
+        variant="info"
+        type="floating"
+        title={
+          existingProvider
+            ? translate(
+                'Click "Update Provider" to apply these changes. Client secret will be securely stored.',
+              )
+            : translate(
+                'Click "Create Provider" to save this configuration. Client secret will be securely stored.',
+              )
+        }
+      />
     </WizardModal>
   );
 };

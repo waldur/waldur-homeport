@@ -1,6 +1,6 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Alert } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { translate } from '@/i18n';
@@ -27,18 +27,12 @@ export const PubSubIssuesCard: FC<PubSubIssuesCardProps> = ({ issues }) => {
       {hasIssues ? (
         <div className="d-flex flex-column gap-2">
           {issues.map((issue, index) => (
-            <Alert
+            <AlertItem
               key={index}
               variant="warning"
-              className="d-flex align-items-center mb-0"
-            >
-              <WarningCircleIcon
-                size={20}
-                weight="bold"
-                className="text-warning me-2 flex-shrink-0"
-              />
-              {issue}
-            </Alert>
+              type="floating"
+              title={issue}
+            />
           ))}
         </div>
       ) : (

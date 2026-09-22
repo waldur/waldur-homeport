@@ -6,6 +6,8 @@ import {
   openportalProjectTemplateRetrieve,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -145,9 +147,13 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
   if (!canEditCustomer) {
     return (
       <ModalDialog title={dialogTitle}>
-        <div className="alert alert-danger" role="alert">
-          {translate('You do not have permission to perform this action.')}
-        </div>
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate(
+            'You do not have permission to perform this action.',
+          )}
+        />
       </ModalDialog>
     );
   }
@@ -163,9 +169,11 @@ export const ProjectTemplateDialog: React.FC<ProjectTemplateDialogProps> = ({
   if (error) {
     return (
       <ModalDialog title={dialogTitle}>
-        <div className="alert alert-danger" role="alert">
-          {translate('Error loading project template details.')}
-        </div>
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={translate('Error loading project template details.')}
+        />
       </ModalDialog>
     );
   }

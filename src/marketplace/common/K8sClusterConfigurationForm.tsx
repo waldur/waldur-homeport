@@ -1,10 +1,9 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { isEqual } from 'lodash-es';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Alert } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { MAX_PAGE_SIZE } from '@/core/api';
@@ -306,11 +305,13 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           />
 
           {datacenter.node_groups.length === 0 && (
-            <Alert variant="warning">
-              {translate(
+            <AlertItem
+              type="floating"
+              variant="warning"
+              title={translate(
                 'Add at least one worker group to configure this datacenter',
               )}
-            </Alert>
+            />
           )}
 
           {datacenter.node_groups.map((group, groupIndex) => (
@@ -468,11 +469,14 @@ export const K8sClusterConfigurationForm: React.FC<
       error={meta?.error}
     >
       {!topologyAllowed && (
-        <Alert variant="warning" className="mb-4">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mb-4"
+          title={translate(
             'This cluster was configured with a different topology than the offering now allows.',
           )}
-        </Alert>
+        />
       )}
       <K8sKubernetesConfigSection
         defaultConfigs={defaultConfigs}

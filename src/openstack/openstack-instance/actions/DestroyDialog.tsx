@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Alert } from 'react-bootstrap';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
@@ -12,11 +13,15 @@ import { ActionDialogProps } from '@/resource/actions/types';
 import { getDeleteField } from './utils';
 
 const TerminationWarning = () => (
-  <Alert variant="warning" className="mb-4">
-    {translate(
+  <AlertItem
+    type="floating"
+    variant="warning"
+    title={translate('Warning')}
+    body={translate(
       'The instance will be stopped if it is running. Existing backups and volume snapshots will be deleted.',
     )}
-  </Alert>
+    className="mb-4"
+  />
 );
 
 export const DestroyDialog: FC<ActionDialogProps> = ({

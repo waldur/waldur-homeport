@@ -1,5 +1,7 @@
 import { FC, useMemo } from 'react';
 
+import { AlertItem } from 'waldur-ui';
+
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -597,23 +599,30 @@ export const ArrowHowItWorksDialog: FC = () => {
       <div className="d-flex flex-column gap-8">
         {/* Overview */}
         <section>
-          <div className="alert alert-info">
-            <strong>{translate('What is Arrow Integration?')}</strong>
-            <p className="mb-0 mt-2">
-              {translate(
-                'Arrow Integration connects Waldur to ArrowSphere, a cloud distribution platform. This integration enables automatic synchronization of billing data, consumption records, and customer information between the two systems.',
-              )}
-            </p>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            title={translate('What is Arrow Integration?')}
+            body={translate(
+              'Arrow Integration connects Waldur to ArrowSphere, a cloud distribution platform. This integration enables automatic synchronization of billing data, consumption records, and customer information between the two systems.',
+            )}
+          />
           {settings && (
-            <div className="alert alert-warning mt-4 mb-0">
-              <strong>{translate('Invoice price source')}:</strong>{' '}
-              <strong>{priceLabel}</strong>.{' '}
-              {translate(
-                'All invoice items, provisional amounts, and reconciliation adjustments use {price} prices.',
-                { price: priceLabel.toLowerCase() },
-              )}
-            </div>
+            <AlertItem
+              type="floating"
+              variant="warning"
+              className="mt-4"
+              title={translate('Invoice price source')}
+              body={
+                <>
+                  <strong>{priceLabel}</strong>.{' '}
+                  {translate(
+                    'All invoice items, provisional amounts, and reconciliation adjustments use {price} prices.',
+                    { price: priceLabel.toLowerCase() },
+                  )}
+                </>
+              }
+            />
           )}
         </section>
 
@@ -755,31 +764,36 @@ export const ArrowHowItWorksDialog: FC = () => {
               className="text-center"
             />
           </div>
-          <div className="alert alert-secondary mt-4">
-            <strong>{translate('Two-stage billing model:')}</strong>
-            <ol className="mb-0 mt-2">
-              <li>
-                {translate(
-                  'Real-time consumption tracking via consumption API creates provisional invoice items',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'When official billing export arrives, amounts are compared',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Compensation items are created for any discrepancies',
-                )}{' '}
-                (
-                <span className="fw-semibold">
-                  adjustment = final_{priceSource} - consumed_{priceSource}
-                </span>
-                )
-              </li>
-            </ol>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            className="mt-4"
+            title={translate('Two-stage billing model:')}
+            body={
+              <ol className="mb-0 mt-2">
+                <li>
+                  {translate(
+                    'Real-time consumption tracking via consumption API creates provisional invoice items',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'When official billing export arrives, amounts are compared',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Compensation items are created for any discrepancies',
+                  )}{' '}
+                  (
+                  <span className="fw-semibold">
+                    adjustment = final_{priceSource} - consumed_{priceSource}
+                  </span>
+                  )
+                </li>
+              </ol>
+            }
+          />
         </section>
 
         {/* Invoice Item Creation */}
@@ -832,12 +846,15 @@ export const ArrowHowItWorksDialog: FC = () => {
               </tbody>
             </table>
           </div>
-          <div className="alert alert-info mt-4">
-            <strong>{translate('Flow:')}</strong>{' '}
-            {translate(
+          <AlertItem
+            type="floating"
+            variant="info"
+            className="mt-4"
+            title={translate('Flow:')}
+            body={translate(
               'Provisional items are created during consumption sync and used for end-of-month invoicing. When the final billing export arrives (typically next month), if amounts differ, a compensation item is added to the current month invoice to adjust the difference.',
             )}
-          </div>
+          />
         </section>
 
         {/* Consumption Records Flow */}
@@ -870,12 +887,15 @@ export const ArrowHowItWorksDialog: FC = () => {
               className="text-center"
             />
           </div>
-          <div className="alert alert-info mt-4">
-            <strong>{translate('Resources tab:')}</strong>{' '}
-            {translate(
+          <AlertItem
+            type="floating"
+            variant="info"
+            className="mt-4"
+            title={translate('Resources tab:')}
+            body={translate(
               'The Resources tab shows all Waldur resources that can be linked to Arrow. Use "Set backend ID" to manually link a resource to an Arrow license, or use the Import button to create new resources from Arrow licenses.',
             )}
-          </div>
+          />
         </section>
 
         {/* Consumption History Sync */}
@@ -894,31 +914,36 @@ export const ArrowHowItWorksDialog: FC = () => {
               className="text-center"
             />
           </div>
-          <div className="alert alert-secondary mt-4">
-            <strong>{translate('How to sync historical consumption:')}</strong>
-            <ol className="mb-0 mt-2">
-              <li>
-                {translate(
-                  'Go to the Resources tab and find the resource with an Arrow backend ID',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Click the actions menu and select "Sync consumption history"',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Choose the date range (defaults to last 12 months)',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Click Sync to fetch consumption data and create usage records',
-                )}
-              </li>
-            </ol>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            className="mt-4"
+            title={translate('How to sync historical consumption:')}
+            body={
+              <ol className="mb-0 mt-2">
+                <li>
+                  {translate(
+                    'Go to the Resources tab and find the resource with an Arrow backend ID',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Click the actions menu and select "Sync consumption history"',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Choose the date range (defaults to last 12 months)',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Click Sync to fetch consumption data and create usage records',
+                  )}
+                </li>
+              </ol>
+            }
+          />
         </section>
 
         {/* Sync States */}

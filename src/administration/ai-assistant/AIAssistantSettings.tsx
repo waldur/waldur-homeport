@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isFeatureVisible } from '@/features/connect';
@@ -42,14 +44,13 @@ export const AIAssistantSettings = () => {
   // Only show if AI assistant feature is enabled
   if (!isFeatureVisible(SupportFeatures.enable_llm_assistant)) {
     return (
-      <div className="alert alert-info">
-        <h4>{translate('AI Assistant Not Enabled')}</h4>
-        <p>
-          {translate(
-            'The AI Assistant feature is currently disabled. Enable it in the configuration to access these settings.',
-          )}
-        </p>
-      </div>
+      <AlertItem
+        type="floating"
+        title={translate('AI Assistant Not Enabled')}
+        body={translate(
+          'The AI Assistant feature is currently disabled. Enable it in the configuration to access these settings.',
+        )}
+      />
     );
   }
 

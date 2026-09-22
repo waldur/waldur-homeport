@@ -1,6 +1,7 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
+
+import { AlertItem } from 'waldur-ui';
 
 import { TextGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -11,19 +12,14 @@ export const Step3FinalConfig: FC<WizardFormStepProps> = (props) => {
   return (
     <WizardForm {...props}>
       <div className="size-lg">
-        <div
-          className="alert alert-warning d-flex align-items-center"
+        <AlertItem
+          variant="warning"
+          type="floating"
+          title={translate(
+            'Resource name will be auto-generated on resource creation.',
+          )}
           role="alert"
-        >
-          <span className="svg-icon svg-icon-2 me-2">
-            <WarningCircleIcon weight="bold" />
-          </span>
-          <span className="fw-bold">
-            {translate(
-              'Resource name will be auto-generated on resource creation.',
-            )}
-          </span>
-        </div>
+        />
 
         <TextGroup
           name="attributes.description"
