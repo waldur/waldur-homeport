@@ -1,5 +1,6 @@
-import { FC, useState } from 'react';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import * as Tabs from '@radix-ui/react-tabs';
+import classNames from 'classnames';
+import { FC, useRef, useState } from 'react';
 
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
@@ -29,37 +30,59 @@ type View = 'requests' | 'resources';
  */
 export const ProfileRequests: FC = () => {
   const [view, setView] = useState<View>('requests');
+  // The switcher is `tableActions` on whichever list is mounted. Changing the
+  // lens unmounts that table, so the focused button is destroyed. This ref
+  // puts focus back on the selected tab after the new list commits.
+  const restoreFocusRef = useRef(false);
   useTitle(requestListTitle());
+
+  const handleValueChange = (next: string) => {
+    if (next && next !== view) {
+      restoreFocusRef.current = true;
+      setView(next as View);
+    }
+  };
+
+  const switcher = (
+    <Tabs.Root value={view} onValueChange={handleValueChange}>
+      <Tabs.List className="btn-group" aria-label={translate('Group by')}>
+        <Tabs.Trigger
+          value="requests"
+          ref={(node) => {
+            if (node && view === 'requests' && restoreFocusRef.current) {
+              node.focus();
+              restoreFocusRef.current = false;
+            }
+          }}
+          className={classNames(
+            'btn btn-tertiary px-6',
+            view === 'requests' && 'btn-active',
+          )}
+        >
+          {requestViewLabel()}
+        </Tabs.Trigger>
+        <Tabs.Trigger
+          value="resources"
+          ref={(node) => {
+            if (node && view === 'resources' && restoreFocusRef.current) {
+              node.focus();
+              restoreFocusRef.current = false;
+            }
+          }}
+          className={classNames(
+            'btn btn-tertiary px-6',
+            view === 'resources' && 'btn-active',
+          )}
+        >
+          {translate('By resource')}
+        </Tabs.Trigger>
+      </Tabs.List>
+    </Tabs.Root>
+  );
 
   // In the card toolbar beside search, not above the panel: this is a tab
   // inside the profile, and the standalone heading treatment is for a table
   // that owns its page (compare UserOfferingList on Remote accounts).
-  const switcher = (
-    <ToggleButtonGroup
-      type="radio"
-      name="requestsView"
-      value={view}
-      onChange={(value: View) => setView(value)}
-    >
-      <ToggleButton
-        id="requests-view-requests"
-        value="requests"
-        variant="tertiary"
-        className="px-6"
-      >
-        {requestViewLabel()}
-      </ToggleButton>
-      <ToggleButton
-        id="requests-view-resources"
-        value="resources"
-        variant="tertiary"
-        className="px-6"
-      >
-        {translate('By resource')}
-      </ToggleButton>
-    </ToggleButtonGroup>
-  );
-
   return view === 'requests' ? (
     <UserProposalsList actions={switcher} standalone={false} />
   ) : (

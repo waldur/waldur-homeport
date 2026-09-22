@@ -5112,7 +5112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-tabs@npm:1.1.21":
+"@radix-ui/react-tabs@npm:1.1.21, @radix-ui/react-tabs@npm:^1.1.3":
   version: 1.1.21
   resolution: "@radix-ui/react-tabs@npm:1.1.21"
   dependencies:
@@ -19530,6 +19530,7 @@ __metadata:
     "@radix-ui/react-popover": "npm:^1.1.19"
     "@radix-ui/react-scroll-area": "npm:^1.2.14"
     "@radix-ui/react-slot": "npm:^1.3.3"
+    "@radix-ui/react-tabs": "npm:^1.1.3"
     "@radix-ui/react-toast": "npm:^1.2.23"
     "@radix-ui/react-toggle": "npm:^1.1.14"
     "@sentry/react": "npm:^8.55.0"
