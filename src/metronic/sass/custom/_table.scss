@@ -389,77 +389,11 @@
     }
   }
 
-  .table-filter {
-    width: 100%;
-    display: flex;
-    align-items: stretch;
-
-    .scroll-x {
-      margin-bottom: -0.5rem;
-    }
-
-    .filter-toggle {
-      display: flex;
-      align-items: center;
-      border-radius: 0;
-      position: relative;
-
-      .filter-field {
-        max-height: 50px;
-        width: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: all 0.3s;
-      }
-
-      .filter-value {
-        max-width: 100px;
-        margin-left: 0.5rem;
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        > * {
-          display: block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-
-      &.active {
-        .filter-field {
-          opacity: 1;
-          width: 300px;
-          margin-left: 0.5rem;
-        }
-        .filter-value {
-          display: none;
-        }
-      }
-
-      &:not(:last-child)::after {
-        content: '';
-        width: 2px;
-        height: 40px;
-        position: absolute;
-        top: 15px;
-        right: 0;
-        background-color: $border-secondary;
-      }
-    }
-  }
-
   // Full width for nested tables
   .table.table-expandable tr.expanded + tr,
   /* TABLE FULL IN CARD */
   &.full-width {
     overflow: hidden;
-
-    .table-filter {
-      padding-left: 0;
-      padding-right: 0;
-    }
 
     &:not(.grid-table) .card-header {
       margin: 0;

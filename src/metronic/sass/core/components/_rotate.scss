@@ -25,21 +25,6 @@ $rotate-transition: transform 0.3s ease;
     }
   }
 
-  .rotate-n#{$value} {
-    transition: $rotate-transition;
-    backface-visibility: hidden;
-
-    .collapsible:not(.collapsed) > &,
-    .active > & {
-      transform: rotateZ(-#{$value}deg);
-      transition: $rotate-transition;
-
-      [direction='rtl'] & {
-        transform: rotateZ(#{$value}deg);
-      }
-    }
-  }
-
   .rotate-active-#{$value} {
     transition: $rotate-transition;
     backface-visibility: hidden;

@@ -89,18 +89,6 @@
     display: inline-flex;
     align-items: center;
   }
-
-  // Align start
-  &.btn-trim-start {
-    justify-content: flex-start !important;
-    padding-left: 0 !important;
-  }
-
-  // Align start
-  &.btn-trim-end {
-    justify-content: flex-end !important;
-    padding-right: 0 !important;
-  }
 }
 
 // Icons
@@ -163,42 +151,5 @@
       margin: 0;
       line-height: 1;
     }
-  }
-}
-
-// Hover effects
-.btn.btn-hover-rise {
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-10%);
-    transition: transform 0.3s ease;
-  }
-}
-
-.btn.btn-hover-scale {
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-  }
-}
-
-.btn.btn-hover-rotate-end {
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: rotate(4deg);
-    transition: transform 0.3s ease;
-  }
-}
-
-.btn.btn-hover-rotate-start {
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: rotate(-4deg);
-    transition: transform 0.3s ease;
   }
 }

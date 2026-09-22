@@ -74,31 +74,6 @@
     }
   }
 
-  // Circle style
-  &.image-input-circle {
-    border-radius: 50%;
-
-    // Wrapper
-    .image-input-wrapper {
-      border-radius: 50%;
-    }
-
-    // Change Control
-    [data-kt-image-input-action='change'] {
-      left: 100%;
-      top: 0;
-      transform: translate(-100%, 0%);
-    }
-
-    // Cancel & Remove Buttons
-    [data-kt-image-input-action='cancel'],
-    [data-kt-image-input-action='remove'] {
-      left: 100%;
-      top: 100%;
-      transform: translate(-100%, -100%);
-    }
-  }
-
   // Bordered style
   &.image-input-outline {
     .image-input-wrapper {

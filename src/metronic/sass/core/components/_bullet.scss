@@ -18,16 +18,3 @@
   height: get($bullet, dot-size);
   border-radius: 100% !important;
 }
-
-// Vertical bullet
-.bullet-vertical {
-  width: get($bullet, bar-height);
-  height: get($bullet, bar-width);
-}
-
-// Vertical line
-.bullet-line {
-  width: get($bullet, line-width);
-  height: get($bullet, line-height);
-  border-radius: 0;
-}
