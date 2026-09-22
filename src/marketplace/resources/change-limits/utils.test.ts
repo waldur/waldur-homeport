@@ -11,6 +11,7 @@ import {
   getLimitChangeData,
   loadData,
 } from '@/marketplace/resources/change-limits/utils';
+import { TENANT_TYPE } from '@/openstack/constants';
 
 import * as fixtures from './fixtures';
 
@@ -108,10 +109,11 @@ describe('Change resource limits', () => {
     expect(getRemainingMonths(pastDate.toISO())).toBe(0);
   });
 
-  it('getLimitChangeRequirements extracts correct data', async () => {
+  it('getLimitChangeRequirements uses period usage for limit components', async () => {
     const { getLimitChangeRequirements } = await import('./utils');
     const resource = {
       current_usages: { cores: 5 },
+      limit_usage: { cores: 8 },
       limits: { cores: 10, ram: 20 },
     } as any;
     const offering = {
@@ -123,9 +125,67 @@ describe('Change resource limits', () => {
     } as any;
 
     const requirements = getLimitChangeRequirements(resource, offering);
-    expect(requirements.usages).toEqual({ cores: 5 });
+    expect(requirements.usages).toEqual({ cores: 8 });
     expect(requirements.limits).toEqual({ cores: 10, ram: 20 });
     expect(requirements.offeringLimits).toBeDefined();
+  });
+
+  it('getLimitChangeRequirements preserves zero and falls back to current usage', async () => {
+    const { getLimitChangeRequirements } = await import('./utils');
+    const resource = {
+      current_usages: { cores: 5, ram: 7 },
+      limit_usage: { cores: 0 },
+      limits: { cores: 10, ram: 20 },
+    } as any;
+    const offering = {
+      type: 'test-type',
+      components: [
+        { type: 'cores', billing_type: 'limit', name: 'Cores' },
+        { type: 'ram', billing_type: 'limit', name: 'RAM' },
+      ],
+    } as any;
+
+    const requirements = getLimitChangeRequirements(resource, offering);
+    expect(requirements.usages).toEqual({ cores: 0, ram: 7 });
+  });
+
+  it('getLimitChangeRequirements keeps live usage for OpenStack tenants', async () => {
+    const { getLimitChangeRequirements } = await import('./utils');
+    const resource = {
+      current_usages: { cores: 5 },
+      limit_usage: { cores: 8 },
+      limits: { cores: 10 },
+    } as any;
+    const offering = {
+      type: TENANT_TYPE,
+      components: [{ type: 'cores', billing_type: 'limit', name: 'Cores' }],
+    } as any;
+
+    const requirements = getLimitChangeRequirements(resource, offering);
+    expect(requirements.usages).toEqual({ cores: 5 });
+  });
+
+  it('getLimitChangeRequirements keeps live usage for prepaid components', async () => {
+    const { getLimitChangeRequirements } = await import('./utils');
+    const resource = {
+      current_usages: { credits: 5 },
+      limit_usage: { credits: 8 },
+      limits: { credits: 10 },
+    } as any;
+    const offering = {
+      type: 'test-type',
+      components: [
+        {
+          type: 'credits',
+          billing_type: 'one',
+          is_prepaid: true,
+          name: 'Credits',
+        },
+      ],
+    } as any;
+
+    const requirements = getLimitChangeRequirements(resource, offering);
+    expect(requirements.usages).toEqual({ credits: 5 });
   });
 
   it('loadData falls back to offering plans if plan retrieval fails', async () => {
