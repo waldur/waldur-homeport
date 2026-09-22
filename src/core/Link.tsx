@@ -53,6 +53,9 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     }
 
     return (
+      // href arrives via the sref spread, which the rule cannot see. A real
+      // anchor already activates on Enter, so no key handler is needed.
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
       <a
         ref={ref}
         {...(state ? sref : {})}
@@ -69,7 +72,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             !(className || '').includes('btn') &&
             'text-anchor',
         )}
-        onKeyDown={(e) => e.key === 'Enter' && onClick(e)}
         role={onClick ? 'button' : undefined}
         {...rest}
       >
