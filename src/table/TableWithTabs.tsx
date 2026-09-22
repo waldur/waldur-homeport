@@ -133,6 +133,7 @@ export const TableWithTabs: FC<
           defaultActiveKey={defaultActiveKey}
           activeKey={activeKey ?? defaultActiveKey}
           onSelect={handleSelect}
+          unmountOnExit
           className="min-h-175px"
         >
           <div className="d-flex justify-content-between">
@@ -164,7 +165,7 @@ export const TableWithTabs: FC<
           {isRefsReady && (
             <Tab.Content className="overflow-auto">
               {tabs.map((tab) => (
-                <Tab.Pane key={tab.key} eventKey={tab.key} unmountOnExit={true}>
+                <Tab.Pane key={tab.key} eventKey={tab.key}>
                   <tab.component
                     {...data}
                     activeTab={activeKey}

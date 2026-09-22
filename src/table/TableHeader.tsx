@@ -79,6 +79,8 @@ function renderSortingIcon(
         }
         upTestId="sort-asc"
         downTestId="sort-desc"
+        upLabel={translate('Sort ascending')}
+        downLabel={translate('Sort descending')}
       />
     </span>
   );
@@ -345,6 +347,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
               <FormCheck
                 ref={refCheck}
                 data-testid="select-all"
+                aria-label={translate('Select all rows')}
                 className="form-check form-check-custom form-check-md"
                 checked={isAllSelected}
                 onChange={() => onSelectAllRows(rows)}

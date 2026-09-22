@@ -55,6 +55,7 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
           defaultActiveKey={defaultActiveKey}
           activeKey={activeKey}
           onSelect={handleSelect}
+          unmountOnExit
         >
           <Nav variant="tabs" className="nav-line-tabs mb-5">
             {tabs.map((tab) => (
@@ -65,12 +66,12 @@ export const AdvancedIntegrationSection: FC<OfferingEditPanelProps> = (
           </Nav>
           <Tab.Content>
             {showUserAttribute && (
-              <Tab.Pane eventKey="user-attribute" unmountOnExit>
+              <Tab.Pane eventKey="user-attribute">
                 <UserAttributeConfigSection {...props} />
               </Tab.Pane>
             )}
             {showLexis && (
-              <Tab.Pane eventKey="lexis" unmountOnExit>
+              <Tab.Pane eventKey="lexis">
                 <LexisLinkIntegrationSection {...props} />
               </Tab.Pane>
             )}

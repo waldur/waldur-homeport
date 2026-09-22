@@ -67,7 +67,7 @@ export const ProviderProjectExpandableRow: FC<OwnProps> = ({
           </Nav>
         </div>
         <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="team" unmountOnExit={true}>
+          <Tab.Pane eventKey="team">
             <SummaryTeamTable
               scope={row}
               context="project"
@@ -76,7 +76,7 @@ export const ProviderProjectExpandableRow: FC<OwnProps> = ({
               hideActions
             />
           </Tab.Pane>
-          <Tab.Pane eventKey="metadata" unmountOnExit={true}>
+          <Tab.Pane eventKey="metadata">
             <ProviderProjectMetadataPanel answers={row.project_metadata} />
           </Tab.Pane>
         </Tab.Content>

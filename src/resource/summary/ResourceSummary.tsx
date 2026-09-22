@@ -56,7 +56,7 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
                 ))}
             </Nav>
             <Tab.Content className="overflow-auto">
-              <Tab.Pane eventKey="details" unmountOnExit={true}>
+              <Tab.Pane eventKey="details">
                 <ResourceSummaryBase resource={props.resource} />
                 {SummaryComponent && (
                   <SummaryComponent resource={props.resource} />
@@ -64,11 +64,7 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
               </Tab.Pane>
               {props.extraTabs &&
                 props.extraTabs.map((tab) => (
-                  <Tab.Pane
-                    key={tab.eventKey}
-                    eventKey={tab.eventKey}
-                    unmountOnExit={true}
-                  >
+                  <Tab.Pane key={tab.eventKey} eventKey={tab.eventKey}>
                     <tab.component />
                   </Tab.Pane>
                 ))}

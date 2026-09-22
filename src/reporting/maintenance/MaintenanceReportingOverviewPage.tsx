@@ -67,6 +67,7 @@ export const MaintenanceReportingOverviewPage: FC = () => {
           <Tab.Container
             activeKey={activeTab}
             onSelect={(k) => setActiveTab(k as MaintenanceViewTab)}
+            unmountOnExit
           >
             <Nav
               variant="tabs"
@@ -85,10 +86,10 @@ export const MaintenanceReportingOverviewPage: FC = () => {
             </Nav>
 
             <Tab.Content>
-              <Tab.Pane eventKey="table" mountOnEnter unmountOnExit>
+              <Tab.Pane eventKey="table" mountOnEnter>
                 <MaintenanceTableView announcements={announcements} />
               </Tab.Pane>
-              <Tab.Pane eventKey="timeline" mountOnEnter unmountOnExit>
+              <Tab.Pane eventKey="timeline" mountOnEnter>
                 <MaintenanceTimelineView announcements={announcements} />
               </Tab.Pane>
             </Tab.Content>

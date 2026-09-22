@@ -109,6 +109,8 @@ const CellWrapper: FC<any> = (props) => {
             <CaretUpDownButtons
               onClickUp={() => adjustValue(step)}
               onClickDown={() => adjustValue(-step)}
+              upLabel={translate('Increase value')}
+              downLabel={translate('Decrease value')}
             />
           </div>
         </InputGroup>

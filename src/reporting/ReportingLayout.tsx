@@ -33,6 +33,7 @@ export const ReportingLayout: FC = () => {
             name="period"
             value={months}
             onChange={setMonths}
+            aria-label={translate('Time period')}
           >
             <ToggleButton id="period-0" value={0} variant="tertiary">
               {translate('All time')}

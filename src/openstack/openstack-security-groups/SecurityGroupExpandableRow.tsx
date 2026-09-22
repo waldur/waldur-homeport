@@ -29,10 +29,10 @@ export const SecurityGroupExpandableRow: FC<{
           </Nav.Item>
         </Nav>
         <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="rules" unmountOnExit>
+          <Tab.Pane eventKey="rules">
             <SecurityGroupRulesTable row={row} />
           </Tab.Pane>
-          <Tab.Pane eventKey="instances" unmountOnExit>
+          <Tab.Pane eventKey="instances">
             <SecurityGroupInstancesList row={row} refetchGroups={fetch} />
           </Tab.Pane>
         </Tab.Content>

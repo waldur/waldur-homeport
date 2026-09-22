@@ -224,7 +224,11 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
         </div>
       </Card.Header>
       <Card.Body>
-        <Tab.Container activeKey={activeTab} onSelect={handleTabSelect}>
+        <Tab.Container
+          activeKey={activeTab}
+          onSelect={handleTabSelect}
+          unmountOnExit
+        >
           <Nav variant="tabs" className="nav-line-tabs mb-5">
             {tabs.map((tab) => (
               <Nav.Item key={tab.key}>
@@ -234,7 +238,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
           </Nav>
           <Tab.Content>
             {/* Affinity calculation tab */}
-            <Tab.Pane eventKey="affinity" unmountOnExit>
+            <Tab.Pane eventKey="affinity">
               <FormTable>
                 {affinityRows.map((row) => (
                   <FormTable.Item
@@ -271,7 +275,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
             </Tab.Pane>
 
             {/* Constraints tab */}
-            <Tab.Pane eventKey="constraints" unmountOnExit>
+            <Tab.Pane eventKey="constraints">
               <FormTable>
                 {constraintRows.map((row) => (
                   <FormTable.Item

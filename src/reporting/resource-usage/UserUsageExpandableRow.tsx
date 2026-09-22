@@ -177,6 +177,7 @@ export const UsageExpandableRow = ({
                       value={period}
                       defaultValue={period}
                       onChange={setPeriod}
+                      aria-label={translate('Time period')}
                     >
                       {periodOptions.map((option) => (
                         <ToggleButton

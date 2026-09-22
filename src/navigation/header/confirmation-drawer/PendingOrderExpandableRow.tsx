@@ -189,7 +189,11 @@ export const PendingOrderExpandableRow: FC<{ row: OrderDetails }> = ({
     // past its edge. `fluid` makes it take the width it is actually given, and
     // the tables shrink with the panel instead.
     <ExpandableContainer className="fluid">
-      <Tab.Container activeKey={activeTab} onSelect={setActiveTab}>
+      <Tab.Container
+        activeKey={activeTab}
+        onSelect={setActiveTab}
+        unmountOnExit
+      >
         <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
           {/* d-flex on the item + align-items-center on the link: a tab
               carrying a count badge is taller than a bare label, so without
@@ -216,10 +220,10 @@ export const PendingOrderExpandableRow: FC<{ row: OrderDetails }> = ({
           </Nav.Item>
         </Nav>
         <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="metadata" unmountOnExit>
+          <Tab.Pane eventKey="metadata">
             <MetadataTab order={order} />
           </Tab.Pane>
-          <Tab.Pane eventKey="limits" unmountOnExit>
+          <Tab.Pane eventKey="limits">
             <NestedKeyValueTable
               table={`pending-order-limits-${order.uuid}`}
               rows={limitRows}
@@ -229,7 +233,7 @@ export const PendingOrderExpandableRow: FC<{ row: OrderDetails }> = ({
               verboseName={translate('limits')}
             />
           </Tab.Pane>
-          <Tab.Pane eventKey="attributes" unmountOnExit>
+          <Tab.Pane eventKey="attributes">
             <NestedKeyValueTable
               table={`pending-order-attributes-${order.uuid}`}
               rows={attributeRows}

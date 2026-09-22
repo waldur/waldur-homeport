@@ -147,6 +147,8 @@ const AllocationInputCell: FC<{
                 <CaretUpDownButtons
                   onClickUp={() => adjustValue(1)}
                   onClickDown={() => adjustValue(-1)}
+                  upLabel={translate('Increase value')}
+                  downLabel={translate('Decrease value')}
                 />
               </div>
             </InputGroup>

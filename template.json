@@ -9729,6 +9729,11 @@
       "feature_area": "settings"
     }
   },
+  "Classification view": {
+    "context": {
+      "feature_area": "project-classification"
+    }
+  },
   "Clean": {
     "context": {
       "feature_area": "ai-assistant"
@@ -14275,7 +14280,7 @@
   },
   "Decrease value": {
     "context": {
-      "feature_area": "analytics"
+      "feature_area": "form"
     }
   },
   "Default": {
@@ -21885,7 +21890,7 @@
   },
   "Group by": {
     "context": {
-      "feature_area": "requests"
+      "feature_area": "metadata"
     }
   },
   "Group by:": {
@@ -22544,6 +22549,11 @@
   "Hook removal": {
     "context": {
       "primary_ui_type": "title",
+      "feature_area": "hooks"
+    }
+  },
+  "Hook type": {
+    "context": {
       "feature_area": "hooks"
     }
   },
@@ -23843,7 +23853,7 @@
   "Increase or decrease available reviewers": {},
   "Increase value": {
     "context": {
-      "feature_area": "analytics"
+      "feature_area": "form"
     }
   },
   "Increases the total allocation at the start of a period by adding unused capacity from the previous period (capped at {pct}% of the base). This gives users a larger budget to work with.": {
@@ -32388,6 +32398,11 @@
     }
   },
   "Node name": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
+  "Node role": {
     "context": {
       "feature_area": "create"
     }
@@ -47263,6 +47278,11 @@
       "feature_area": "roles"
     }
   },
+  "Select all rows": {
+    "context": {
+      "feature_area": "table"
+    }
+  },
   "Select all visible": {
     "context": {
       "feature_area": "reports"
@@ -47779,6 +47799,11 @@
   "Select router...": {
     "context": {
       "feature_area": "modal"
+    }
+  },
+  "Select row": {
+    "context": {
+      "feature_area": "table"
     }
   },
   "Select saved filter": {
@@ -50131,6 +50156,18 @@
   "Somewhat disagree": {
     "context": {
       "feature_area": "marketplace-checklist"
+    }
+  },
+  "Sort ascending": {
+    "context": {
+      "feature_area": "analytics",
+      "action_type": "sort"
+    }
+  },
+  "Sort descending": {
+    "context": {
+      "feature_area": "analytics",
+      "action_type": "sort"
     }
   },
   "Source": {
@@ -55179,7 +55216,7 @@
   },
   "Time period": {
     "context": {
-      "feature_area": "orders"
+      "feature_area": "details"
     }
   },
   "Time slot": {

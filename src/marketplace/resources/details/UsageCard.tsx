@@ -127,6 +127,7 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
               value={period}
               defaultValue={period}
               onChange={setPeriod}
+              aria-label={translate('Time period')}
             >
               {periodOptions.map((option) => (
                 <ToggleButton

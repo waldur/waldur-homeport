@@ -194,7 +194,7 @@ export const SupportUserConnectionsRow: FC<{ row: SupportUser }> = ({
         </Nav>
       </div>
       <Tab.Content className="overflow-auto">
-        <Tab.Pane eventKey="reported" unmountOnExit={true}>
+        <Tab.Pane eventKey="reported">
           <ConnectionsTable<SupportUserIssueBrief>
             supportUserUuid={row.uuid}
             slice="reported_issues"
@@ -203,7 +203,7 @@ export const SupportUserConnectionsRow: FC<{ row: SupportUser }> = ({
           />
         </Tab.Pane>
 
-        <Tab.Pane eventKey="assigned" unmountOnExit={true}>
+        <Tab.Pane eventKey="assigned">
           <ConnectionsTable<SupportUserIssueBrief>
             supportUserUuid={row.uuid}
             slice="assigned_issues"
@@ -212,7 +212,7 @@ export const SupportUserConnectionsRow: FC<{ row: SupportUser }> = ({
           />
         </Tab.Pane>
 
-        <Tab.Pane eventKey="comments" unmountOnExit={true}>
+        <Tab.Pane eventKey="comments">
           <ConnectionsTable<SupportUserCommentBrief>
             supportUserUuid={row.uuid}
             slice="comments"
@@ -221,7 +221,7 @@ export const SupportUserConnectionsRow: FC<{ row: SupportUser }> = ({
           />
         </Tab.Pane>
 
-        <Tab.Pane eventKey="attachments" unmountOnExit={true}>
+        <Tab.Pane eventKey="attachments">
           <ConnectionsTable<SupportUserAttachmentBrief>
             supportUserUuid={row.uuid}
             slice="attachments"

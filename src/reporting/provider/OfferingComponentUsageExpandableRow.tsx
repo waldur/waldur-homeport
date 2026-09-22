@@ -137,6 +137,7 @@ export const OfferingComponentUsageExpandableRow: FC<
                   name={'period-' + uniqueId()}
                   value={period}
                   onChange={setPeriod}
+                  aria-label={translate('Time period')}
                 >
                   {[6, 12].map((m) => (
                     <ToggleButton

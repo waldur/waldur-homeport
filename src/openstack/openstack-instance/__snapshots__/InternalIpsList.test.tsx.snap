@@ -268,9 +268,7 @@ exports[`InternalIpsList > renders list 1`] = `
                 <td
                   class="row-actions pinned pinned-end"
                 >
-                  <div
-                    aria-hidden="true"
-                  >
+                  <div>
                     <button
                       aria-expanded="false"
                       aria-haspopup="menu"

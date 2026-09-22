@@ -12,6 +12,7 @@ export const NodeRoleField: FunctionComponent<FieldRenderProps<string>> = ({
     onChange={input.onChange}
     name="role"
     type="radio"
+    aria-label={translate('Node role')}
   >
     <ToggleButton value="agent" id="agent">
       {translate('Agent')}

@@ -141,10 +141,10 @@ export const PoolExpandableRow: FC<PoolExpandableRowProps> = ({ row }) => {
           </Nav.Item>
         </Nav>
         <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="members" unmountOnExit>
+          <Tab.Pane eventKey="members">
             <MembersTable poolUuid={row.uuid} />
           </Tab.Pane>
-          <Tab.Pane eventKey="health-monitor" unmountOnExit>
+          <Tab.Pane eventKey="health-monitor">
             <HealthMonitorTable poolUuid={row.uuid} />
           </Tab.Pane>
         </Tab.Content>

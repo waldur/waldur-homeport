@@ -23,7 +23,12 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
   }, [value]);
   return (
     <div className="copyToClipboard">
-      <button className="text-btn" type="button" onClick={onClick}>
+      <button
+        className="text-btn"
+        type="button"
+        aria-label={translate('Copy to clipboard')}
+        onClick={onClick}
+      >
         <Tooltip label={translate('Copy to clipboard')}>
           <CopyIcon weight="bold" />
         </Tooltip>

@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { Select } from '@/form/select';
 
+import { translate } from './translate';
 import { useLanguageSelector } from './useLanguageSelector';
 
 export const LanguageSelectorBox: FunctionComponent = () => {
@@ -22,6 +23,7 @@ export const LanguageSelectorBox: FunctionComponent = () => {
       onChange={handleChange}
       size="sm"
       className="login-lang-select"
+      aria-label={translate('Language')}
     />
   );
 };

@@ -5,6 +5,7 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
 
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import { translate } from '@/i18n';
 
 // ── Base (Pure UI) ──────────────────────────────────────
 
@@ -105,6 +106,8 @@ export const BaseNumberField: FC<BaseNumberFieldProps> = ({
           <CaretUpDownButtons
             onClickUp={() => changeBy(stepNum)}
             onClickDown={() => changeBy(-stepNum)}
+            upLabel={translate('Increase value')}
+            downLabel={translate('Decrease value')}
           />
         )}
         {unit && (
