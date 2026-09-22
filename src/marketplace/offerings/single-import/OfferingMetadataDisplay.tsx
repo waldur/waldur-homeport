@@ -1,8 +1,8 @@
-import { CheckIcon, XIcon, ClockIcon } from '@phosphor-icons/react';
+import { CheckIcon, ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Alert, Card, Row, Col } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -27,10 +27,13 @@ export const OfferingMetadataDisplay: FunctionComponent<
 > = ({ metadata, isValid, error }) => {
   if (error) {
     return (
-      <Alert variant="danger" className="mt-3">
-        <XIcon size={16} className="me-2" weight="bold" />
-        <strong>{translate('Invalid file format:')}</strong> {error}
-      </Alert>
+      <AlertItem
+        variant="error"
+        type="floating"
+        className="mt-3"
+        title={translate('Invalid file format:')}
+        body={error}
+      />
     );
   }
 

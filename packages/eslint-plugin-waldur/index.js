@@ -25,7 +25,6 @@ import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
-import preferAlertItem from './rules/prefer-alert-item.js';
 import preferClassnamesUtility from './rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.js';
 
@@ -42,7 +41,6 @@ export default {
     'no-bootstrap-button-markup': noBootstrapButtonMarkup,
     'no-hand-rolled-table': noHandRolledTable,
     'no-hand-rolled-modal-footer': noHandRolledModalFooter,
-    'prefer-alert-item': preferAlertItem,
     'no-direct-bootstrap-dropdown-button': noDirectBootstrapDropdownButton,
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,

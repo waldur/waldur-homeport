@@ -5,6 +5,8 @@ import {
   marketplaceArticleCodeUpdatePreview,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import {
   SubmitButton,
@@ -139,7 +141,14 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
           />
         </div>
       </div>
-      {error && <div className="alert alert-warning mb-0 mt-4">{error}</div>}
+      {error && (
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mb-0 mt-4"
+          title={error}
+        />
+      )}
     </WizardModal>
   );
 };

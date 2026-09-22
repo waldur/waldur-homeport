@@ -1,6 +1,6 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useState } from 'react';
-import { Alert, Card, FormCheck, Spinner, Table } from 'react-bootstrap';
+import { Card, FormCheck, Spinner, Table } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import {
   openstackDiscoveryDiscoverExternalNetworks,
@@ -10,7 +10,7 @@ import {
   openstackDiscoveryDiscoverVolumeTypes,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatFilesize } from '@/core/utils';
@@ -158,13 +158,19 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
       {/* External Networks */}
       <h4 className="mb-4">{translate('External Networks')}</h4>
       {errors.networks ? (
-        <Alert variant="danger" className="mb-4">
-          {errors.networks}
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="error"
+          title={errors.networks}
+          className="mb-4"
+        />
       ) : values.externalNetworks.length === 0 ? (
-        <Alert variant="warning" className="mb-4">
-          {translate('No external networks found.')}
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="warning"
+          title={translate('No external networks found.')}
+          className="mb-4"
+        />
       ) : (
         <>
           <p className="text-muted mb-4">
@@ -235,9 +241,12 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
         <div className="col-sm-6">
           <FormGroup label={translate('Instance availability zone')}>
             {errors.instanceAZs ? (
-              <Alert variant="danger" className="mb-0">
-                {errors.instanceAZs}
-              </Alert>
+              <AlertItem
+                type="floating"
+                variant="error"
+                title={errors.instanceAZs}
+                className="mb-0"
+              />
             ) : instanceAZOptions.length > 0 ? (
               <Field name="selectedInstanceAZ">
                 {({ input, meta }) => (
@@ -260,9 +269,12 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
         <div className="col-sm-6">
           <FormGroup label={translate('Volume availability zone')}>
             {errors.volumeAZs ? (
-              <Alert variant="danger" className="mb-0">
-                {errors.volumeAZs}
-              </Alert>
+              <AlertItem
+                type="floating"
+                variant="error"
+                title={errors.volumeAZs}
+                className="mb-0"
+              />
             ) : volumeAZOptions.length > 0 ? (
               <Field name="selectedVolumeAZ">
                 {({ input, meta }) => (

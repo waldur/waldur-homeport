@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { Alert, Card, Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -44,9 +46,12 @@ export const CustomerBillingSummaryDialog: FC<
         <div className="d-flex flex-column gap-6">
           {/* Error message if any (only show for unexpected errors) */}
           {data.error && !data.error.includes('billing') && (
-            <Alert variant="warning">
-              <strong>{translate('Warning:')}</strong> {data.error}
-            </Alert>
+            <AlertItem
+              type="floating"
+              variant="warning"
+              title={translate('Warning:')}
+              body={data.error}
+            />
           )}
 
           {/* Header info */}
@@ -124,20 +129,27 @@ export const CustomerBillingSummaryDialog: FC<
           {/* How it works explanation */}
           {data.resources_with_backend_id === 0 &&
             data.total_customer_resources > 0 && (
-              <Alert variant="info" className="mb-0">
-                <strong>{translate('How resource linking works:')}</strong>
-                <p className="mb-2 mt-2">
-                  {translate(
-                    'Resources are linked to Arrow via their backend_id field, which should contain the Arrow License Reference (e.g., XSP12345).',
-                  )}
-                </p>
-                <p className="mb-0">
-                  {translate(
-                    'None of your {count} resources have a backend_id set. Set the backend_id to the Arrow license reference to enable consumption tracking.',
-                    { count: data.total_customer_resources },
-                  )}
-                </p>
-              </Alert>
+              <AlertItem
+                type="floating"
+                variant="info"
+                className="mb-0"
+                title={translate('How resource linking works:')}
+                body={
+                  <>
+                    <p className="mb-2 mt-2">
+                      {translate(
+                        'Resources are linked to Arrow via their backend_id field, which should contain the Arrow License Reference (e.g., XSP12345).',
+                      )}
+                    </p>
+                    <p className="mb-0">
+                      {translate(
+                        'None of your {count} resources have a backend_id set. Set the backend_id to the Arrow license reference to enable consumption tracking.',
+                        { count: data.total_customer_resources },
+                      )}
+                    </p>
+                  </>
+                }
+              />
             )}
 
           {/* Billing Data from Arrow */}

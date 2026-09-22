@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Alert, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { formatDate } from '@/core/dateUtils';
@@ -42,15 +42,20 @@ export const ServiceProviderAccessSection: FC<
   return (
     <div className="mb-4">
       <h5 className="mb-3">{translate('Service provider access')}</h5>
-      <Alert variant="info" className="mb-4">
-        {isViewerStaffOrSupport
-          ? translate(
-              'Service providers can only access the specific fields the user consented to when using their offerings.',
-            )
-          : translate(
-              'Service providers can only access the specific fields you consented to when using their offerings.',
-            )}
-      </Alert>
+      <AlertItem
+        type="floating"
+        variant="info"
+        className="mb-4"
+        title={
+          isViewerStaffOrSupport
+            ? translate(
+                'Service providers can only access the specific fields the user consented to when using their offerings.',
+              )
+            : translate(
+                'Service providers can only access the specific fields you consented to when using their offerings.',
+              )
+        }
+      />
 
       {providers.map((provider) => (
         <AccordionCard

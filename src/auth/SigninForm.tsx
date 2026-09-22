@@ -277,13 +277,14 @@ export const SigninForm = () => {
             />
 
             {formError && (
-              <div
-                className="alert alert-danger mt-3 ellipsis-lines-1"
+              <AlertItem
+                type="floating"
+                variant="error"
+                title={formError}
                 role="alert"
+                className="mt-3 ellipsis-lines-1"
                 style={{ maxWidth: '100vh' }}
-              >
-                {formError}
-              </div>
+              />
             )}
           </form>
         );

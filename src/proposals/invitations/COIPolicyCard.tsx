@@ -3,6 +3,8 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { InvitationCoiConfiguration } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface COIPolicyCardProps {
@@ -62,13 +64,15 @@ export const COIPolicyCard: FC<COIPolicyCardProps> = ({ config }) => {
             </div>
           )}
 
-          <div className="alert alert-info mb-0">
-            <p className="mb-0">
-              {translate(
-                'This call requires you to declare any potential conflicts of interest before you can accept the invitation. Please review the proposals below and indicate any conflicts.',
-              )}
-            </p>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            title={translate('Declaration required')}
+            body={translate(
+              'This call requires you to declare any potential conflicts of interest before you can accept the invitation. Please review the proposals below and indicate any conflicts.',
+            )}
+            className="mb-0"
+          />
         </div>
       </Card.Body>
     </Card>

@@ -1,12 +1,14 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useState } from 'react';
-import { Alert, Card, Spinner, Table } from 'react-bootstrap';
+import { Card, Spinner, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
   openstackDiscoveryPreviewServiceAttributes,
   ProviderOfferingDetails,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { SubmitButton } from '@/form/SubmitButton';
@@ -176,7 +178,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
   if (previewError) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <Alert variant="danger">{previewError}</Alert>
+        <AlertItem type="floating" variant="error" title={previewError} />
       </WizardModal>
     );
   }

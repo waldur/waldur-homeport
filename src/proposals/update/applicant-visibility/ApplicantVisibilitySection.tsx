@@ -1,12 +1,11 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Alert } from 'react-bootstrap';
 import {
   CallApplicantVisibilityConfigRequest,
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { UserAttributeVisibilityTable } from '@/marketplace/user-attributes/UserAttributeVisibilityTable';
@@ -63,11 +62,14 @@ export const ApplicantVisibilitySection: FC<
       className="card-bordered mb-5"
       emptyHint={
         isDefault ? (
-          <Alert variant="info" className="mb-3">
-            {translate(
+          <AlertItem
+            type="floating"
+            variant="info"
+            className="mb-3"
+            title={translate(
               'Using global defaults. Saving any field will create a custom configuration for this call.',
             )}
-          </Alert>
+          />
         ) : null
       }
     />

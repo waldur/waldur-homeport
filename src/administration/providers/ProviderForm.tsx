@@ -1,5 +1,7 @@
 import { Field, useFormState } from 'react-final-form';
 
+import { AlertItem } from 'waldur-ui';
+
 import { required, redirectURI, validateRedirectURLs } from '@/core/validators';
 import { WarnCard } from '@/core/WarnCard';
 import {
@@ -128,9 +130,13 @@ const AllowedRedirectsField = () => {
             )}
 
             {meta.error && meta.touched && (
-              <div className="alert alert-danger mt-2 mb-0" role="alert">
-                {meta.error}
-              </div>
+              <AlertItem
+                variant="error"
+                type="floating"
+                title={meta.error}
+                className="mt-2"
+                role="alert"
+              />
             )}
           </FormGroup>
         );

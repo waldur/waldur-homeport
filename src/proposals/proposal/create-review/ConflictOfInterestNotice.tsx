@@ -1,5 +1,6 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
+
+import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ProposalReview } from '@/proposals/types';
@@ -31,22 +32,14 @@ export const ConflictOfInterestNotice: FC<ConflictOfInterestNoticeProps> = ({
   }
 
   return (
-    <div className="alert alert-warning d-flex align-items-start gap-3 mb-5">
-      <WarningCircleIcon
-        weight="bold"
-        size={20}
-        className="mt-1 flex-shrink-0"
-      />
-      <div>
-        <div className="fw-bold">
-          {translate('This call requires a conflict of interest declaration')}
-        </div>
-        <div className="fs-7">
-          {translate(
-            'You will be asked to confirm you have no conflict of interest with this proposal before your review can be submitted. If you do have one, decline the review now rather than reading further.',
-          )}
-        </div>
-      </div>
-    </div>
+    <AlertItem
+      variant="warning"
+      type="floating"
+      className="mb-5"
+      title={translate('This call requires a conflict of interest declaration')}
+      body={translate(
+        'You will be asked to confirm you have no conflict of interest with this proposal before your review can be submitted. If you do have one, decline the review now rather than reading further.',
+      )}
+    />
   );
 };

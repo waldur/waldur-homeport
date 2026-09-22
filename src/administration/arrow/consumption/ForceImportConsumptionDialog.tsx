@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { Alert, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
   Resource,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { SubmitButton } from '@/form';
@@ -194,11 +194,13 @@ export const ForceImportConsumptionDialog = ({
       </p>
 
       {previewData.length === 0 ? (
-        <Alert variant="info">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="info"
+          title={translate(
             'No consumption data found for the selected period range.',
           )}
-        </Alert>
+        />
       ) : (
         <div className="table-responsive">
           <table className="table table-striped table-hover">
@@ -252,16 +254,21 @@ export const ForceImportConsumptionDialog = ({
       )}
 
       {previewMutation.data?.errors?.length > 0 && (
-        <Alert variant="warning" className="mt-3">
-          <strong>{translate('Some periods had errors:')}</strong>
-          <ul className="mb-0 mt-2">
-            {previewMutation.data.errors.map((err: any, idx: number) => (
-              <li key={idx}>
-                {err.period}: {err.error}
-              </li>
-            ))}
-          </ul>
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mt-3"
+          title={translate('Some periods had errors:')}
+          body={
+            <ul className="mb-0 mt-2">
+              {previewMutation.data.errors.map((err: any, idx: number) => (
+                <li key={idx}>
+                  {err.period}: {err.error}
+                </li>
+              ))}
+            </ul>
+          }
+        />
       )}
     </>
   );
@@ -269,47 +276,54 @@ export const ForceImportConsumptionDialog = ({
   const renderResultPhase = () => (
     <>
       {importMutation.isSuccess && importMutation.data && (
-        <Alert
+        <AlertItem
+          type="floating"
           variant={
             importMutation.data.periods_synced > 0 ? 'success' : 'warning'
           }
-        >
-          <strong>{translate('Force import completed')}</strong>
-          <ul className="mb-0 mt-2">
-            <li>
-              {translate('Periods synced')}:{' '}
-              {importMutation.data.periods_synced}
-            </li>
-            <li>
-              {translate('Periods skipped')}:{' '}
-              {importMutation.data.periods_skipped}
-            </li>
-            {importMutation.data.periods_no_data > 0 && (
-              <li className="text-muted">
-                {translate('Periods with no data')}:{' '}
-                {importMutation.data.periods_no_data}
+          title={translate('Force import completed')}
+          body={
+            <ul className="mb-0 mt-2">
+              <li>
+                {translate('Periods synced')}:{' '}
+                {importMutation.data.periods_synced}
               </li>
-            )}
-            {importMutation.data.errors?.length > 0 && (
-              <li className="text-danger">
-                {translate('Errors')}: {importMutation.data.errors.length}
+              <li>
+                {translate('Periods skipped')}:{' '}
+                {importMutation.data.periods_skipped}
               </li>
-            )}
-          </ul>
-        </Alert>
+              {importMutation.data.periods_no_data > 0 && (
+                <li className="text-muted">
+                  {translate('Periods with no data')}:{' '}
+                  {importMutation.data.periods_no_data}
+                </li>
+              )}
+              {importMutation.data.errors?.length > 0 && (
+                <li className="text-danger">
+                  {translate('Errors')}: {importMutation.data.errors.length}
+                </li>
+              )}
+            </ul>
+          }
+        />
       )}
 
       {importMutation.data?.errors?.length > 0 && (
-        <Alert variant="warning" className="mt-3">
-          <strong>{translate('Some periods had errors:')}</strong>
-          <ul className="mb-0 mt-2">
-            {importMutation.data.errors.map((err: any, idx: number) => (
-              <li key={idx}>
-                {err.period}: {err.error}
-              </li>
-            ))}
-          </ul>
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mt-3"
+          title={translate('Some periods had errors:')}
+          body={
+            <ul className="mb-0 mt-2">
+              {importMutation.data.errors.map((err: any, idx: number) => (
+                <li key={idx}>
+                  {err.period}: {err.error}
+                </li>
+              ))}
+            </ul>
+          }
+        />
       )}
     </>
   );

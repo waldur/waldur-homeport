@@ -7,6 +7,8 @@ import {
   marketplaceProviderOfferingsTosStatsRetrieve,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
@@ -97,9 +99,11 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
             {isLoadingOfferings ? (
               <LoadingSpinner />
             ) : offeringsError ? (
-              <div className="alert alert-danger" role="alert">
-                {translate('Unable to load offerings.')}
-              </div>
+              <AlertItem
+                type="floating"
+                variant="error"
+                title={translate('Unable to load offerings.')}
+              />
             ) : (
               <Select
                 value={offeringOptions.find(
@@ -115,9 +119,11 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
         )}
 
         {!selectedOffering && (
-          <div className="alert alert-info" role="alert">
-            {translate('Please select an offering to view statistics.')}
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            title={translate('Please select an offering to view statistics.')}
+          />
         )}
 
         {selectedOffering && isLoading && (
@@ -126,9 +132,11 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
           </div>
         )}
         {selectedOffering && error && (
-          <div className="alert alert-danger" role="alert">
-            {translate('Unable to load ToS statistics.')}
-          </div>
+          <AlertItem
+            type="floating"
+            variant="error"
+            title={translate('Unable to load ToS statistics.')}
+          />
         )}
         {selectedOffering && !isLoading && !error && data && (
           <>

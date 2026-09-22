@@ -1,6 +1,6 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { Alert } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
@@ -44,13 +44,13 @@ export const DatabaseStatsPage = () => {
 
     return (
       <Panel title={translate('Database statistics')} cardBordered>
-        <Alert variant="danger" className="d-flex align-items-center mb-0">
-          <WarningCircleIcon size={24} weight="bold" className="me-3" />
-          <div>
-            <strong>{translate('Failed to load database statistics')}</strong>
-            <p className="mb-0 mt-1">{errorMessage}</p>
-          </div>
-        </Alert>
+        <AlertItem
+          variant="error"
+          type="floating"
+          title={translate('Failed to load database statistics')}
+          body={errorMessage}
+          className="mb-0"
+        />
       </Panel>
     );
   }

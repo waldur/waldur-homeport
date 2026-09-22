@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { Alert } from 'react-bootstrap';
 import {
   Issue,
   ProviderHelpdesk,
@@ -7,6 +6,8 @@ import {
   supportIssuesReroute,
   supportIssuesRetrieve,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -19,26 +20,31 @@ import { ActionButton } from '@/table/ActionButton';
 import { providerTicketInfo } from './providerTicketInfo';
 
 const RerouteImpactWarning: FC = () => (
-  <Alert variant="warning" className="mb-4">
-    <p className="mb-2 fw-bold">{translate('Rerouting this ticket will:')}</p>
-    <ul className="mb-0 ps-4">
-      <li>
-        {translate(
-          'Withdraw the ticket from the current provider (and remove it from their system where supported).',
-        )}
-      </li>
-      <li>
-        {translate(
-          'Notify the current provider that the ticket has been withdrawn.',
-        )}
-      </li>
-      <li>
-        {translate(
-          'Create a new ticket for the selected provider and notify them.',
-        )}
-      </li>
-    </ul>
-  </Alert>
+  <AlertItem
+    type="floating"
+    variant="warning"
+    className="mb-4"
+    title={translate('Rerouting this ticket will:')}
+    body={
+      <ul className="mb-0 ps-4">
+        <li>
+          {translate(
+            'Withdraw the ticket from the current provider (and remove it from their system where supported).',
+          )}
+        </li>
+        <li>
+          {translate(
+            'Notify the current provider that the ticket has been withdrawn.',
+          )}
+        </li>
+        <li>
+          {translate(
+            'Create a new ticket for the selected provider and notify them.',
+          )}
+        </li>
+      </ul>
+    }
+  />
 );
 
 const RerouteDialog: FC<{

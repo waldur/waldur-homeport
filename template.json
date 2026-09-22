@@ -7499,6 +7499,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Batch expired": {
+    "context": {
+      "feature_area": "assignments"
+    }
+  },
   "Batch import": {
     "context": {
       "feature_area": "course-accounts"
@@ -14192,6 +14197,11 @@
         }
       },
       "feature_area": "proposal"
+    }
+  },
+  "Declaration required": {
+    "context": {
+      "feature_area": "invitations"
     }
   },
   "Decline": {
@@ -32670,7 +32680,7 @@
   "Note": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "policies"
+      "feature_area": "event-subscriptions"
     }
   },
   "Note added": {
@@ -35128,6 +35138,11 @@
     }
   },
   "Organization lookup": {
+    "context": {
+      "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Organization matching": {
     "context": {
       "feature_area": "auto-provisioning-rules"
     }
@@ -39806,6 +39821,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Projects without an end date": {
+    "context": {
+      "feature_area": "reports"
+    }
+  },
   "Projects, resources and cost per affiliated organization, with an explicit unaffiliated bucket": {
     "context": {
       "feature_area": "reporting"
@@ -43394,7 +43414,11 @@
       "feature_area": "issues"
     }
   },
-  "Rerouting this ticket will:": {},
+  "Rerouting this ticket will:": {
+    "context": {
+      "feature_area": "issues"
+    }
+  },
   "Rescue": {
     "context": {
       "feature_area": "actions"
@@ -46987,6 +47011,11 @@
   "Security rules": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Security warning": {
+    "context": {
+      "feature_area": "deploy"
     }
   },
   "See less": {
@@ -53115,7 +53144,11 @@
       "feature_area": "import"
     }
   },
-  "The instance will be stopped if it is running. Existing backups and volume snapshots will be deleted.": {},
+  "The instance will be stopped if it is running. Existing backups and volume snapshots will be deleted.": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "The institution that authenticated the applicant, exactly as reported at login.": {
     "context": {
       "feature_area": "restrictions"
@@ -64728,7 +64761,7 @@
   "Warning": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "providers"
+      "feature_area": "auto-provisioning-rules"
     }
   },
   "Warning threshold": {

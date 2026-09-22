@@ -1,7 +1,9 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Alert, Form, Stack } from 'react-bootstrap';
+import { Form, Stack } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
+
+import { AlertItem } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SelectGroup, TextGroup } from '@/form';
@@ -32,11 +34,13 @@ const FieldsListGroup = ({
 
   if (!['multi_select', 'single_select'].includes(values.question_type)) {
     return (
-      <Alert variant="warning">
-        {translate(
+      <AlertItem
+        type="floating"
+        variant="warning"
+        title={translate(
           'This section is only for single select and multi select questions.',
         )}
-      </Alert>
+      />
     );
   }
 

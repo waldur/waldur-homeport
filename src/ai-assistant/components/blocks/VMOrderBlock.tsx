@@ -14,6 +14,8 @@ import {
   useState,
 } from 'react';
 
+import { AlertItem } from 'waldur-ui';
+
 import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
 import { UIBlockProps } from '@/ai-assistant/lib/types';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -349,14 +351,16 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
 
         {/* No options available message */}
         {(!hasFlavors || !hasImages) && (
-          <div className="alert alert-warning">
-            {(() => {
+          <AlertItem
+            type="floating"
+            variant="warning"
+            title={(() => {
               if (!hasFlavors && !hasImages)
                 return translate('No flavors or images available.');
               if (!hasFlavors) return translate('No flavors available.');
               return translate('No images available.');
             })()}
-          </div>
+          />
         )}
 
         {/* Form fields */}

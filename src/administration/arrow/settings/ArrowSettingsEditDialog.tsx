@@ -1,10 +1,11 @@
-import { Alert } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   type ArrowSettings,
   type InvoicePriceSourceEnum,
   adminArrowSettingsPartialUpdate,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { StringGroup, SecretGroup, SelectGroup, BooleanGroup } from '@/form';
@@ -152,9 +153,12 @@ export const ArrowSettingsEditDialog = ({
             />
 
             {mutationError && (
-              <Alert variant="danger" className="mb-4">
-                {mutationError}
-              </Alert>
+              <AlertItem
+                type="floating"
+                variant="error"
+                className="mb-4"
+                title={mutationError}
+              />
             )}
           </ModalDialog>
         </form>

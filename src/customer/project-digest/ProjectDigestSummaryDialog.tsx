@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { AlertItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -147,26 +149,30 @@ export const ProjectDigestSummaryDialog: FC = () => {
         </section>
 
         <section>
-          <div className="alert alert-info mb-0">
-            <strong>{translate('Good to know:')}</strong>
-            <ul className="mb-0 mt-2">
-              <li>
-                {translate(
-                  'Use the "Send test email" button to send a digest to yourself for review.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Use the "Preview" section below the form to see the rendered digest for a specific project.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Projects with no reportable data are skipped — members will not receive empty emails.',
-                )}
-              </li>
-            </ul>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            title={translate('Good to know:')}
+            body={
+              <ul className="mb-0 mt-2">
+                <li>
+                  {translate(
+                    'Use the "Send test email" button to send a digest to yourself for review.',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Use the "Preview" section below the form to see the rendered digest for a specific project.',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Projects with no reportable data are skipped — members will not receive empty emails.',
+                  )}
+                </li>
+              </ul>
+            }
+          />
         </section>
       </div>
     </ModalDialog>

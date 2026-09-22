@@ -297,8 +297,10 @@ now import directly from `waldur-ui`.
   computed to 0.924rem (12.012px @ 13px root), mapped here as `gap-[0.924rem] pr-[2px] items-start`.
 - **Border colors**: Uses `--surface-card-border` (`#E4E7EC` light, `#1F242F` dark),
   matching Metronic's `--bs-border-color` in both themes.
-- **Lint rule**: `packages/eslint-plugin-waldur/rules/prefer-alert-item.js`
-  steers call sites toward `import { AlertItem } from 'waldur-ui'`.
+- **Lint rule**: `no-restricted-imports` (`RESTRICTED_IMPORTS` in `eslint.config.js`)
+  blocks `import { Alert } from 'react-bootstrap'`, steering call sites toward
+  `import { AlertItem } from 'waldur-ui'` — the same mechanism used for Badge,
+  Tooltip, and Popover.
 
 ## BaseButton (Tailwind rebuild)
 

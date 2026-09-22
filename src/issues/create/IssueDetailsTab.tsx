@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import { Alert, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
+
+import { AlertItem } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -112,23 +114,27 @@ export const IssueDetailsTab = ({
   // Show error if no request types available
   if (error || issueTypes.length === 0) {
     return (
-      <Alert variant="warning">
-        <Alert.Heading>
-          {translate('Service desk configuration incomplete')}
-        </Alert.Heading>
-        <p>
-          {translate(
-            'Unable to create support request. No request types are available.',
-          )}
-        </p>
-        {isStaffOrSupport && (
-          <p className="mb-0 text-muted">
-            <small>
-              {translate('Staff info: No active RequestTypes found.')}
-            </small>
-          </p>
-        )}
-      </Alert>
+      <AlertItem
+        type="floating"
+        variant="warning"
+        title={translate('Service desk configuration incomplete')}
+        body={
+          <>
+            <p>
+              {translate(
+                'Unable to create support request. No request types are available.',
+              )}
+            </p>
+            {isStaffOrSupport && (
+              <p className="mb-0 text-muted">
+                <small>
+                  {translate('Staff info: No active RequestTypes found.')}
+                </small>
+              </p>
+            )}
+          </>
+        }
+      />
     );
   }
 

@@ -5,7 +5,7 @@ import {
   AssignmentBatchList,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { SubmitButton, DateTimeGroup } from '@/form';
@@ -105,11 +105,14 @@ export const ExtendDeadlineDialog: FC<ExtendDeadlineDialogProps> = ({
               />
 
               {batch.is_expired && (
-                <div className="alert alert-info">
-                  {translate(
+                <AlertItem
+                  type="floating"
+                  variant="info"
+                  title={translate('Batch expired')}
+                  body={translate(
                     'This batch has expired. Setting a new deadline will reactivate it and allow the reviewer to respond.',
                   )}
-                </div>
+                />
               )}
             </div>
           </ModalDialog>

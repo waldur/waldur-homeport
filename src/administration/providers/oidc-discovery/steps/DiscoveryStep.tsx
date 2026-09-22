@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
-import { Alert, Card, Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { identityProvidersDiscoverMetadata } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -117,10 +117,15 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
           message={translate('Failed to discover OIDC metadata')}
           loadData={refetch}
         />
-        <Alert variant="danger" className="mt-4">
-          {(error as Error).message ||
-            translate('Unable to connect to the discovery endpoint.')}
-        </Alert>
+        <AlertItem
+          variant="error"
+          type="floating"
+          title={
+            (error as Error).message ||
+            translate('Unable to connect to the discovery endpoint.')
+          }
+          className="mt-4"
+        />
       </WizardModal>
     );
   }

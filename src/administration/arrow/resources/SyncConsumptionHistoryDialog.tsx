@@ -1,10 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Alert, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
   Resource,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -135,36 +137,45 @@ export const SyncConsumptionHistoryDialog = ({
       </Form.Group>
 
       {mutation.isSuccess && mutation.data && (
-        <Alert variant="success">
-          <strong>{translate('Sync completed')}</strong>
-          <ul className="mb-0 mt-2">
-            <li>
-              {translate('Periods synced')}: {mutation.data.periods_synced}
-            </li>
-            <li>
-              {translate('Periods skipped (finalized)')}:{' '}
-              {mutation.data.periods_skipped}
-            </li>
-            {mutation.data.errors?.length > 0 && (
-              <li className="text-danger">
-                {translate('Errors')}: {mutation.data.errors.length}
+        <AlertItem
+          type="floating"
+          variant="success"
+          title={translate('Sync completed')}
+          body={
+            <ul className="mb-0 mt-2">
+              <li>
+                {translate('Periods synced')}: {mutation.data.periods_synced}
               </li>
-            )}
-          </ul>
-        </Alert>
+              <li>
+                {translate('Periods skipped (finalized)')}:{' '}
+                {mutation.data.periods_skipped}
+              </li>
+              {mutation.data.errors?.length > 0 && (
+                <li className="text-danger">
+                  {translate('Errors')}: {mutation.data.errors.length}
+                </li>
+              )}
+            </ul>
+          }
+        />
       )}
 
       {mutation.data?.errors?.length > 0 && (
-        <Alert variant="warning" className="mt-3">
-          <strong>{translate('Some periods had errors:')}</strong>
-          <ul className="mb-0 mt-2">
-            {mutation.data.errors.map((err: any, idx: number) => (
-              <li key={idx}>
-                {err.period}: {err.error}
-              </li>
-            ))}
-          </ul>
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="warning"
+          className="mt-3"
+          title={translate('Some periods had errors:')}
+          body={
+            <ul className="mb-0 mt-2">
+              {mutation.data.errors.map((err: any, idx: number) => (
+                <li key={idx}>
+                  {err.period}: {err.error}
+                </li>
+              ))}
+            </ul>
+          }
+        />
       )}
     </ModalDialog>
   );

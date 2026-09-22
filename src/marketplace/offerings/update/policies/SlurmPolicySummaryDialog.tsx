@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { marketplaceSlurmPeriodicUsagePoliciesPreviewImpact } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -499,27 +499,33 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
             )}
           </p>
 
-          <div className="alert alert-light border mb-4">
-            <h6 className="fw-bold mb-2">
-              {translate('Carryover vs Grace ratio')}
-            </h6>
-            <p className="mb-2">
-              <strong>{translate('Carryover factor')}</strong> ({carryoverPct}
-              %):{' '}
-              {translate(
-                'Increases the total allocation at the start of a period by adding unused capacity from the previous period (capped at {pct}% of the base). This gives users a larger budget to work with.',
-                { pct: carryoverPct },
-              )}
-            </p>
-            <p className="mb-0">
-              <strong>{translate('Grace ratio')}</strong> (
-              {config.grace_ratio ?? 0.2}):{' '}
-              {translate(
-                'Allows temporary overconsumption beyond the total allocation before the resource is fully blocked. At 100% usage the resource is downscaled (slowed down), but it is not paused until {percent}%. This is an overdraft buffer, not extra allocation.',
-                { percent: gracePercent + '%' },
-              )}
-            </p>
-          </div>
+          <AlertItem
+            variant="info"
+            type="floating"
+            className="mb-4"
+            title={translate('Carryover vs Grace ratio')}
+            body={
+              <>
+                <p className="mb-2">
+                  <strong>{translate('Carryover factor')}</strong> (
+                  {carryoverPct}
+                  %):{' '}
+                  {translate(
+                    'Increases the total allocation at the start of a period by adding unused capacity from the previous period (capped at {pct}% of the base). This gives users a larger budget to work with.',
+                    { pct: carryoverPct },
+                  )}
+                </p>
+                <p className="mb-0">
+                  <strong>{translate('Grace ratio')}</strong> (
+                  {config.grace_ratio ?? 0.2}):{' '}
+                  {translate(
+                    'Allows temporary overconsumption beyond the total allocation before the resource is fully blocked. At 100% usage the resource is downscaled (slowed down), but it is not paused until {percent}%. This is an overdraft buffer, not extra allocation.',
+                    { percent: gracePercent + '%' },
+                  )}
+                </p>
+              </>
+            }
+          />
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>

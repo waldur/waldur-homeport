@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { Alert } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { required, url as urlValidator } from '@/core/validators';
 import { StringGroup, SecretGroup, BooleanGroup } from '@/form';
@@ -12,11 +13,14 @@ export const ConnectionStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       {existingProvider && (
-        <Alert variant="info" className="mb-4">
-          {translate('Re-discovering settings for: {label}', {
+        <AlertItem
+          variant="info"
+          type="floating"
+          title={translate('Re-discovering settings for: {label}', {
             label: existingProvider.label || existingProvider.provider,
           })}
-        </Alert>
+          className="mb-4"
+        />
       )}
       <div className="mb-6">
         <h4 className="mb-4">{translate('OIDC Connection Settings')}</h4>

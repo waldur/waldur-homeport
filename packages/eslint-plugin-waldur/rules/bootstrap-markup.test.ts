@@ -3,7 +3,6 @@ import { RuleTester } from 'eslint';
 import { describe } from 'vitest';
 
 import noBootstrapButtonMarkup from './no-bootstrap-button-markup.js';
-import preferAlertItem from './prefer-alert-item.js';
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -77,40 +76,6 @@ describe('no-bootstrap-button-markup', () => {
       {
         code: "const A = ({ v }) => <a className={classNames(v && 'btn btn-' + v)} />;",
         errors: [{ messageId: 'noBootstrapButtonMarkup' }],
-      },
-    ],
-  });
-});
-
-describe('prefer-alert-item', () => {
-  ruleTester.run('prefer-alert-item', preferAlertItem as any, {
-    valid: [
-      // AlertItem's own inner parts, and Bootstrap's alert-heading.
-      { code: 'const A = () => <div className="alert-icon" />;' },
-      { code: 'const A = () => <div className="alert-actions" />;' },
-      { code: 'const A = () => <h6 className="alert-heading" />;' },
-      { code: 'const A = () => <div className="alert-item" />;' },
-      // The component, which is the recommended path.
-      { code: 'const A = () => <AlertItem title="x" />;' },
-      // role="alert" is an ARIA attribute, not a class.
-      { code: 'const A = () => <div role="alert" />;' },
-      {
-        code: 'const A = () => <div className="alert alert-danger" />;',
-        filename: 'packages/ui/src/AlertItem.tsx',
-      },
-    ],
-    invalid: [
-      {
-        code: 'const A = () => <div className="alert alert-warning" />;',
-        errors: [{ messageId: 'preferAlertItemOverMarkup' }],
-      },
-      {
-        code: 'const A = () => <span className="alert alert-info mb-0" />;',
-        errors: [{ messageId: 'preferAlertItemOverMarkup' }],
-      },
-      {
-        code: 'import { Alert } from "react-bootstrap";',
-        errors: [{ messageId: 'preferAlertItem' }],
       },
     ],
   });

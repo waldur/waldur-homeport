@@ -1,9 +1,8 @@
 import { FC, useMemo } from 'react';
-import { Alert } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { ArrowLicense } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -186,11 +185,13 @@ export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
           </p>
 
           {availableLicenses.length === 0 && linkedLicenses.length === 0 && (
-            <Alert variant="info">
-              {translate('No licenses found for vendor "{vendor}".', {
+            <AlertItem
+              type="floating"
+              variant="info"
+              title={translate('No licenses found for vendor "{vendor}".', {
                 vendor: vendorName,
               })}
-            </Alert>
+            />
           )}
 
           {availableLicenses.length > 0 && (

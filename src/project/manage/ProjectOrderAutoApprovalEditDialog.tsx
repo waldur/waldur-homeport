@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Alert } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   Project,
@@ -9,6 +8,8 @@ import {
   marketplaceProjectOrderAutoApprovalsDestroy,
   marketplaceProjectOrderAutoApprovalsPartialUpdate,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { SubmitButton, BooleanGroup, NumberGroup } from '@/form';
@@ -133,11 +134,14 @@ export const ProjectOrderAutoApprovalEditDialog: FC<EditDialogProps> = ({
             }
           >
             {showStaffWarning && (
-              <Alert variant="warning">
-                {translate(
+              <AlertItem
+                type="floating"
+                variant="warning"
+                title={translate('Warning')}
+                body={translate(
                   "You don't hold order-approval permission on this scope. Saving this rule will let orders be auto-approved without further review.",
                 )}
-              </Alert>
+              />
             )}
 
             <BooleanGroup

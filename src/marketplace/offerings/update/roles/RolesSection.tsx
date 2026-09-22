@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
-import { Alert } from 'react-bootstrap';
 import { marketplaceOfferingRolesList, OfferingRole } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -44,12 +45,15 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
   return (
     <>
       {lockedByProfile && (
-        <Alert variant="info" className="mb-3">
-          {translate(
+        <AlertItem
+          variant="info"
+          type="floating"
+          className="mb-3"
+          title={translate(
             'Roles for this offering are managed centrally by the service profile "{profile}". To edit, manage the profile from the administration panel.',
             { profile: profileName },
           )}
-        </Alert>
+        />
       )}
       <Table<OfferingRole>
         {...tableProps}

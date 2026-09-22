@@ -1,11 +1,13 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import {
   supportSettingsAtlassianDiscoverCustomFields,
   supportSettingsAtlassianDiscoverPriorities,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { SelectGroup } from '@/form';
 import { SubmitButton } from '@/form/SubmitButton';
@@ -144,7 +146,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
   if (error) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <Alert variant="danger">{error}</Alert>
+        <AlertItem type="floating" variant="error" title={error} />
       </WizardModal>
     );
   }
@@ -273,11 +275,14 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
         </div>
       </div>
       {(values.customFields || []).length === 0 && (
-        <Alert variant="info" className="mt-4">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="info"
+          title={translate(
             'No custom fields found. You can skip this step and configure field mappings later.',
           )}
-        </Alert>
+          className="mt-4"
+        />
       )}
     </WizardModal>
   );

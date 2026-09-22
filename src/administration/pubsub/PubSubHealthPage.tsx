@@ -1,6 +1,6 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { Alert } from 'react-bootstrap';
+
+import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
@@ -45,23 +45,22 @@ export const PubSubHealthPage = () => {
 
     return (
       <Panel title={translate('PubSub publishing health')} cardBordered>
-        <Alert variant="danger" className="d-flex align-items-center mb-0">
-          <WarningCircleIcon size={24} weight="bold" className="me-3" />
-          <div>
-            <strong>
-              {is503
-                ? translate('PubSub service unavailable')
-                : translate('Failed to load PubSub health status')}
-            </strong>
-            <p className="mb-0 mt-1">
-              {is503
-                ? translate(
-                    'The PubSub debug API is not responding. Please check that the backend service is running.',
-                  )
-                : errorMessage}
-            </p>
-          </div>
-        </Alert>
+        <AlertItem
+          variant="error"
+          type="floating"
+          title={
+            is503
+              ? translate('PubSub service unavailable')
+              : translate('Failed to load PubSub health status')
+          }
+          body={
+            is503
+              ? translate(
+                  'The PubSub debug API is not responding. Please check that the backend service is running.',
+                )
+              : errorMessage
+          }
+        />
       </Panel>
     );
   }

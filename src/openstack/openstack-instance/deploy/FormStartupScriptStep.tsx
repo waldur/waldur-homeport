@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { Alert } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
@@ -34,11 +33,15 @@ export const FormStartupScriptStep = (props: FormStepProps) => {
           id={props.id}
           className={classNames('step-card', props.disabled && 'step-disabled')}
         >
-          <Alert variant="warning" className="mb-4">
-            {translate(
+          <AlertItem
+            type="floating"
+            variant="warning"
+            title={translate('Security warning')}
+            body={translate(
               'Cloud-init user data is stored and transmitted in plain text — it is kept unencrypted in the database, forwarded to OpenStack where any process on the instance can read it via the metadata service, and it may appear in logs. Do not put unencrypted secrets (passwords, private keys, API tokens) here; reference a secrets manager or inject them through an encrypted channel instead.',
             )}
-          </Alert>
+            className="mb-4"
+          />
           {scriptEnabled ? (
             <MonacoGroup
               name="attributes.user_data"

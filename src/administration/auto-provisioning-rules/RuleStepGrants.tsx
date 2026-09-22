@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 
+import { AlertItem } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import {
   AsyncSelectGroup,
@@ -63,26 +65,34 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
         onChange={() => change('customer', null)}
       />
       {values.use_user_organization_as_customer_name && (
-        <div className="alert alert-info py-2 px-3 mb-5">
-          <div>
-            {translate(
-              'The organization is matched by exact name against the user.organization claim from the identity provider. The user must also be registered through a method listed in PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS.',
-            )}
-          </div>
-          {protectedMethods.length === 0 ? (
-            <div className="fw-semibold mt-2">
-              {translate(
-                'Warning: PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS is empty — no user will currently match.',
+        <AlertItem
+          type="floating"
+          variant="info"
+          className="mb-5"
+          title={translate('Organization matching')}
+          body={
+            <>
+              <div>
+                {translate(
+                  'The organization is matched by exact name against the user.organization claim from the identity provider. The user must also be registered through a method listed in PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS.',
+                )}
+              </div>
+              {protectedMethods.length === 0 ? (
+                <div className="fw-semibold mt-2">
+                  {translate(
+                    'Warning: PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS is empty — no user will currently match.',
+                  )}
+                </div>
+              ) : (
+                <div className="text-muted small mt-1">
+                  {translate('Protected registration methods: {methods}', {
+                    methods: protectedMethods.join(', '),
+                  })}
+                </div>
               )}
-            </div>
-          ) : (
-            <div className="text-muted small mt-1">
-              {translate('Protected registration methods: {methods}', {
-                methods: protectedMethods.join(', '),
-              })}
-            </div>
-          )}
-        </div>
+            </>
+          }
+        />
       )}
       <AsyncSelectGroup
         name="customer"

@@ -21,7 +21,6 @@ import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import {
-  Alert,
   Button,
   ButtonGroup,
   Card,
@@ -39,7 +38,7 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
@@ -1157,27 +1156,24 @@ export const OrganisationAllocationTab: FC = () => {
       )}
 
       {showSlowWarning && (
-        <Alert
+        <AlertItem
+          type="floating"
           variant="warning"
-          className="d-flex align-items-start gap-3 mb-3"
-        >
-          <div className="flex-grow-1">
-            <strong>{translate('This is taking a while.')}</strong>
-            <div className="small mt-1">
-              {translate(
-                'To speed things up: use the project search or date filters to load fewer projects.',
-              )}
-            </div>
-          </div>
-          <Button
-            variant="warning"
-            size="sm"
-            className="flex-shrink-0"
-            onClick={() => window.location.reload()}
-          >
-            {translate('Cancel & reload')}
-          </Button>
-        </Alert>
+          className="mb-3"
+          title={translate('This is taking a while.')}
+          body={translate(
+            'To speed things up: use the project search or date filters to load fewer projects.',
+          )}
+          actions={
+            <Button
+              variant="warning"
+              size="sm"
+              onClick={() => window.location.reload()}
+            >
+              {translate('Cancel & reload')}
+            </Button>
+          }
+        />
       )}
 
       {loadTriggered &&
@@ -1408,63 +1404,63 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Warning: projects without end dates ─────────────────────────── */}
       {noEndDateSummaries.length > 0 && (
-        <Alert variant="warning">
-          <div className="d-flex align-items-start gap-2 mb-2">
-            <WarningCircleIcon
-              size={20}
-              className="text-warning"
-              weight="bold"
-            />
-            <span>
-              {noEndDateSummaries.length === 1
-                ? translate(
-                    '{count} project has no end date and is not shown in the burn-down chart. Together it represents <strong>{amount} {currencyName}</strong> of unspent allocation.',
-                    {
-                      count: noEndDateSummaries.length,
-                      amount: fmtCredits(noEndDateUnspent),
-                      currencyName,
-                      strong: (text) => <strong>{text}</strong>,
-                    },
-                    formatJsxTemplate,
-                  )
-                : translate(
-                    '{count} projects have no end date and are not shown in the burn-down chart. Together they represent <strong>{amount} {currencyName}</strong> of unspent allocation.',
-                    {
-                      count: noEndDateSummaries.length,
-                      amount: fmtCredits(noEndDateUnspent),
-                      currencyName,
-                      strong: (text) => <strong>{text}</strong>,
-                    },
-                    formatJsxTemplate,
-                  )}
-            </span>
-          </div>
-          <ul className="mb-0 ps-4">
-            {noEndDateSummaries.map((s) => {
-              const unspent = Math.max(
-                0,
-                parseCredits(s.total_credits) -
-                  parseCredits(s.total_spend) -
-                  parseCredits(s.current_month_spend),
-              );
-              return (
-                <li key={s.project_uuid}>
-                  <a
-                    href={`/projects/${s.project_uuid}/`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {s.project_name}
-                  </a>
-                  {translate(' — {unspent} {currency} unspent', {
-                    unspent: fmtCredits(unspent),
-                    currency: currencyName,
-                  })}
-                </li>
-              );
-            })}
-          </ul>
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="warning"
+          title={translate('Projects without an end date')}
+          body={
+            <>
+              <span>
+                {noEndDateSummaries.length === 1
+                  ? translate(
+                      '{count} project has no end date and is not shown in the burn-down chart. Together it represents <strong>{amount} {currencyName}</strong> of unspent allocation.',
+                      {
+                        count: noEndDateSummaries.length,
+                        amount: fmtCredits(noEndDateUnspent),
+                        currencyName,
+                        strong: (text) => <strong>{text}</strong>,
+                      },
+                      formatJsxTemplate,
+                    )
+                  : translate(
+                      '{count} projects have no end date and are not shown in the burn-down chart. Together they represent <strong>{amount} {currencyName}</strong> of unspent allocation.',
+                      {
+                        count: noEndDateSummaries.length,
+                        amount: fmtCredits(noEndDateUnspent),
+                        currencyName,
+                        strong: (text) => <strong>{text}</strong>,
+                      },
+                      formatJsxTemplate,
+                    )}
+              </span>
+              <ul className="mb-0 ps-4 mt-2">
+                {noEndDateSummaries.map((s) => {
+                  const unspent = Math.max(
+                    0,
+                    parseCredits(s.total_credits) -
+                      parseCredits(s.total_spend) -
+                      parseCredits(s.current_month_spend),
+                  );
+                  return (
+                    <li key={s.project_uuid}>
+                      <a
+                        href={`/projects/${s.project_uuid}/`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {s.project_name}
+                      </a>
+                      {translate(' — {unspent} {currency} unspent', {
+                        unspent: fmtCredits(unspent),
+                        currency: currencyName,
+                      })}
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          }
+        />
       )}
 
       {/* ── Concerning projects ─────────────────────────────────────────── */}

@@ -1,6 +1,8 @@
 import { FC, useEffect } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
+import { AlertItem } from 'waldur-ui';
+
 import { required, validateRedirectURLs, redirectURI } from '@/core/validators';
 import { BooleanGroup, FormGroup, StringGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -106,9 +108,13 @@ const AllowedRedirectsField: FC = () => {
             )}
 
             {meta.error && meta.touched && (
-              <div className="alert alert-danger mt-2 mb-0" role="alert">
-                {meta.error}
-              </div>
+              <AlertItem
+                variant="error"
+                type="floating"
+                title={meta.error}
+                className="mt-2"
+                role="alert"
+              />
             )}
           </FormGroup>
         );

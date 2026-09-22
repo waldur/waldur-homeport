@@ -893,12 +893,6 @@ $modal-lg: 800px !default;
 $modal-md: 500px !default;
 $modal-sm: 300px !default;
 
-// Alerts
-// Define alert colors, border radius, and padding.
-$alert-color-scale: if(isDarkMode(), 60%, 40%) !default;
-$alert-border-scale: if(isDarkMode(), -60%, -70%) !default;
-$alert-bg-scale: if(isDarkMode(), -60%, -80%) !default;
-
 // Dropdowns
 // Dropdown menu container and contents.
 $dropdown-box-shadow: if(

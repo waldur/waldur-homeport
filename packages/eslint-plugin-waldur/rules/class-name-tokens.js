@@ -1,9 +1,9 @@
 /**
  * Shared helper for rules that inspect Bootstrap classes on native elements.
  *
- * The rules named after markup (`no-direct-bootstrap-button`, `prefer-alert-item`)
- * originally only saw `import { Button } from 'react-bootstrap'`. The thing they
- * are actually about — `<button className="btn btn-danger">` — carries no import
+ * The rules named after markup (e.g. `no-direct-bootstrap-button`) originally
+ * only saw `import { Button } from 'react-bootstrap'`. The thing they are
+ * actually about — `<button className="btn btn-danger">` — carries no import
  * at all, so it slipped through. These helpers pull the statically knowable class
  * tokens out of a `className` attribute so a `JSXOpeningElement` visitor can match
  * on them.
@@ -132,7 +132,7 @@ export const getClassNameAttribute = (node) =>
   );
 
 /** True when the element is a native DOM element (lowercase name), not a component. */
-export const isNativeElement = (node) =>
+const isNativeElement = (node) =>
   node.name &&
   node.name.type === 'JSXIdentifier' &&
   /^[a-z]/.test(node.name.name);

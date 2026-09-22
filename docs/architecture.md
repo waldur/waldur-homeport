@@ -253,7 +253,6 @@ form — `<button className="btn btn-danger">` — which carries no import and s
 invisible to the rule above. It is a warning rather than an error because the tree
 still holds well over a hundred of these and converting one is a per-screen
 judgement, not a mechanical swap; promote it to `error` once the count reaches zero.
-`waldur-custom/prefer-alert-item` works the same way for `<div className="alert">`.
 
 Each rule keeps its own `ALLOWED_FILES` list at the top of
 `packages/eslint-plugin-waldur/rules/`, and the two lists differ on purpose — the

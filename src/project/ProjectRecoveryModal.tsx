@@ -4,13 +4,14 @@ import {
   WarningIcon,
 } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Alert } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   Project,
   ProjectRecoveryRequest,
   projectsRecover,
 } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { RadioGroup, DateGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -242,16 +243,14 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
             </div>
 
             {!hasTerminationMetadata && (
-              <Alert variant="info">
-                <h6 className="alert-heading">
-                  {translate('Basic Recovery Available')}
-                </h6>
-                <p className="mb-0">
-                  {translate(
-                    'This project was deleted before team member metadata was captured. Only basic project recovery is available. Team members will need to be manually added after recovery.',
-                  )}
-                </p>
-              </Alert>
+              <AlertItem
+                type="floating"
+                variant="info"
+                title={translate('Basic Recovery Available')}
+                body={translate(
+                  'This project was deleted before team member metadata was captured. Only basic project recovery is available. Team members will need to be manually added after recovery.',
+                )}
+              />
             )}
           </ModalDialog>
         </form>

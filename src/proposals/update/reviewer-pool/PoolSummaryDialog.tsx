@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
@@ -122,14 +122,14 @@ export const PoolSummaryDialog: FC = () => {
       <div className="d-flex flex-column gap-8">
         {/* Overview */}
         <section>
-          <div className="alert alert-info">
-            <strong>{translate('Two-Stage Reviewer Workflow:')}</strong>
-            <p className="mb-0 mt-2">
-              {translate(
-                'The review process has two stages. Stage 1 (this section) builds the reviewer pool - inviting experts to participate in the call. Stage 2 assigns specific proposals to accepted pool members for review.',
-              )}
-            </p>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            title={translate('Two-Stage Reviewer Workflow:')}
+            body={translate(
+              'The review process has two stages. Stage 1 (this section) builds the reviewer pool - inviting experts to participate in the call. Stage 2 assigns specific proposals to accepted pool members for review.',
+            )}
+          />
         </section>
 
         {/* Main Flow Diagram */}

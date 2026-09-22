@@ -1,9 +1,9 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { Alert, Table as BTable } from 'react-bootstrap';
+import { Table as BTable } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
@@ -133,9 +133,12 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
   if (error) {
     return (
       <WizardModal {...props} renderFooter={renderFooter}>
-        <Alert variant="danger" className="mb-4">
-          {error}
-        </Alert>
+        <AlertItem
+          type="floating"
+          variant="error"
+          className="mb-4"
+          title={error}
+        />
       </WizardModal>
     );
   }
@@ -150,11 +153,13 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
       </p>
 
       {values.customers.length === 0 ? (
-        <Alert variant="info">
-          {translate(
+        <AlertItem
+          type="floating"
+          variant="info"
+          title={translate(
             'No Arrow customers found. You can continue without mappings.',
           )}
-        </Alert>
+        />
       ) : (
         <div className="table-responsive mb-4" style={{ maxHeight: '400px' }}>
           <BTable striped bordered hover size="sm">

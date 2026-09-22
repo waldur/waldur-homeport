@@ -1,5 +1,7 @@
-import { Alert, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { adminArrowBillingSyncsCleanupConsumption } from 'waldur-js-client';
+
+import { AlertItem } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -39,11 +41,17 @@ export const CleanupConsumptionAction = () => {
           pending={isCleaning}
         />
         {cleanupData && (
-          <Alert variant="info" className="mt-3 mb-0">
-            <small>
-              {translate('Cleanup result:')} {JSON.stringify(cleanupData.data)}
-            </small>
-          </Alert>
+          <AlertItem
+            type="floating"
+            variant="info"
+            className="mt-3 mb-0"
+            title={
+              <small>
+                {translate('Cleanup result:')}{' '}
+                {JSON.stringify(cleanupData.data)}
+              </small>
+            }
+          />
         )}
       </Card.Body>
     </Card>

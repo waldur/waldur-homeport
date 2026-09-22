@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { MermaidChart } from '@/core/MermaidChart';
 import { translate } from '@/i18n';
@@ -192,26 +192,30 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
       <div className="d-flex flex-column gap-8">
         {/* Important Note */}
         <section>
-          <div className="alert alert-info">
-            <strong>{translate('Who is included in matching:')}</strong>
-            <ul className="mb-0 mt-2">
-              <li>
-                {translate(
-                  'Only reviewers who have ACCEPTED the pool invitation are included.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'All proposals from all rounds in this call are matched.',
-                )}
-              </li>
-              <li>
-                {translate(
-                  'Affinity scores are computed and cached for all reviewer-proposal pairs.',
-                )}
-              </li>
-            </ul>
-          </div>
+          <AlertItem
+            type="floating"
+            variant="info"
+            title={translate('Who is included in matching:')}
+            body={
+              <ul className="mb-0 mt-2">
+                <li>
+                  {translate(
+                    'Only reviewers who have ACCEPTED the pool invitation are included.',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'All proposals from all rounds in this call are matched.',
+                  )}
+                </li>
+                <li>
+                  {translate(
+                    'Affinity scores are computed and cached for all reviewer-proposal pairs.',
+                  )}
+                </li>
+              </ul>
+            }
+          />
         </section>
 
         {/* Affinity Computation Flow */}

@@ -5,7 +5,7 @@ import {
 import { FC, useCallback } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { Badge } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
@@ -140,16 +140,20 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
         )}
       </h6>
       {values.remove_password ? (
-        <div className="alert alert-warning d-flex align-items-center justify-content-between py-3">
-          <span>{translate('Password will be removed when you save.')}</span>
-          <button
-            type="button"
-            className="btn btn-sm btn-light-warning"
-            onClick={handleCancelRemove}
-          >
-            {translate('Cancel')}
-          </button>
-        </div>
+        <AlertItem
+          type="floating"
+          variant="warning"
+          title={translate('Password will be removed when you save.')}
+          actions={
+            <button
+              type="button"
+              className="btn btn-sm btn-light-warning"
+              onClick={handleCancelRemove}
+            >
+              {translate('Cancel')}
+            </button>
+          }
+        />
       ) : (
         <>
           <FormGroup
