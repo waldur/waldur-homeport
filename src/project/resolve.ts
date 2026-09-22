@@ -20,6 +20,10 @@ async function primeProjectMatrixRooms(projectUuid: string) {
     await queryClient.fetchQuery({
       queryKey: projectMatrixRoomsKey(projectUuid),
       queryFn: () => fetchProjectMatrixRooms(projectUuid),
+      // The Communication route predicate reads this entry synchronously, and
+      // most project pages render nothing that observes it, so the default
+      // 5-minute idle GC would silently hide the tab.
+      gcTime: Infinity,
     });
   } catch (error) {
     // Graceful degradation: surface the failure but leave the cache UNSET.

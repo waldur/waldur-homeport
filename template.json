@@ -11181,6 +11181,11 @@
       "feature_area": "matrix"
     }
   },
+  "Connect to Matrix…": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Connect to remote waldur": {
     "context": {
       "primary_ui_type": "label"
@@ -25169,7 +25174,7 @@
       "feature_area": "invitations"
     }
   },
-  "Join the room first to open it in Matrix.": {
+  "Join the room first to get its credentials.": {
     "context": {
       "feature_area": "matrix"
     }
@@ -34053,11 +34058,6 @@
       "feature_area": "details"
     }
   },
-  "Open in Matrix": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
   "Open in Matrix client": {
     "context": {
       "feature_area": "matrix"
@@ -34350,6 +34350,11 @@
   "Opening a submission window": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Opening this provisions your Matrix account the first time and issues a new access token each time. Treat the details below as a password.": {
+    "context": {
+      "feature_area": "matrix"
     }
   },
   "Opening your review of this proposal.": {
@@ -45615,12 +45620,12 @@
       "feature_area": "matrix"
     }
   },
-  "Room must be active to join or leave.": {
+  "Room must be active to issue credentials.": {
     "context": {
       "feature_area": "matrix"
     }
   },
-  "Room must be active to join.": {
+  "Room must be active to join or leave.": {
     "context": {
       "feature_area": "matrix"
     }
@@ -51939,7 +51944,7 @@
   },
   "Team chat": {
     "context": {
-      "feature_area": "dashboard"
+      "feature_area": "support"
     }
   },
   "Team chat rooms are created automatically for your projects.": {

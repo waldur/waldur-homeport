@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FC } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
@@ -10,11 +11,10 @@ import { renderWithProviders } from '@/test/harness';
 
 import { ProjectMatrixChat } from './ProjectMatrixChat';
 
-// The card toolbars are plain flex containers, not Radix menus. Every
-// MatrixRoomActions button is an ActionItem, which defaults to a
-// RadixDropdownMenu.Item and throws "`MenuItem` must be used within `Menu`"
-// outside one — so these assertions only pass while each button is handed an
-// `as` that switches it to a real button.
+// "Export history" belongs to the History exports card and is handed an `as`
+// that turns it into a real button. Every Chat room card action is a plain
+// ActionItem inside the "All actions" dropdown, so it only exists in the DOM
+// once that menu is open — hence the click in openRoomMenu.
 const h = vi.hoisted(() => ({ rooms: [] as MatrixRoom[] }));
 
 vi.mock('@/matrix/chat/useProjectMatrixRooms', () => ({
@@ -59,34 +59,71 @@ const renderTab = (state: string) => {
   );
 };
 
+const openRoomMenu = async () => {
+  const user = userEvent.setup();
+  await user.click(screen.getByRole('button', { name: /All actions/ }));
+};
+
 describe('ProjectMatrixChat', () => {
-  it('renders the actions of an active room as buttons', () => {
+  it('promotes the conversation out of the menu while the room is healthy', async () => {
     renderTab('active');
 
-    for (const name of [
-      'Open in team chat',
-      'Open in Matrix',
-      'Sync members',
-      'Disable chat',
-      'Export history',
-    ]) {
-      expect(screen.getByRole('button', { name })).toBeInTheDocument();
-    }
+    expect(
+      screen.getByRole('button', { name: 'Open in team chat' }),
+    ).toBeInTheDocument();
+
+    await openRoomMenu();
+    expect(
+      screen.queryByRole('menuitem', { name: 'Open in team chat' }),
+    ).toBeNull();
   });
 
-  it('renders the recovery actions of a non-active room as buttons', () => {
+  it('orders the active-room menu from cheapest to most destructive', async () => {
+    renderTab('active');
+    await openRoomMenu();
+
+    for (const name of ['Sync members', 'Connect to Matrix…', 'Disable chat']) {
+      expect(screen.getByRole('menuitem', { name })).toBeInTheDocument();
+    }
+    expect(
+      screen.getAllByRole('menuitem').map((item) => item.textContent),
+    ).toEqual(['Sync members', 'Connect to Matrix…', 'Disable chat']);
+    // Owned by the neighbouring History exports card, not the menu.
+    expect(
+      screen.getByRole('button', { name: 'Export history' }),
+    ).toBeInTheDocument();
+  });
+
+  it('promotes Retry out of the menu while the room is errored', async () => {
     renderTab('error');
 
-    for (const name of ['Retry', 'Disable chat', 'Delete']) {
-      expect(screen.getByRole('button', { name })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument();
+
+    await openRoomMenu();
+    for (const name of ['Disable chat', 'Delete']) {
+      expect(screen.getByRole('menuitem', { name })).toBeInTheDocument();
     }
+    expect(screen.queryByRole('menuitem', { name: 'Retry' })).toBeNull();
   });
 
-  it('renders the re-enable action of an archived room as a button', () => {
+  // A disable task that died leaves the room in `disabling`, and the backend
+  // retry re-dispatches it; without this the tab offers no way out.
+  it('offers Retry for a room stuck disabling', () => {
+    renderTab('disabling');
+
+    expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument();
+  });
+
+  it('promotes Re-enable out of the menu while the room is archived', async () => {
     renderTab('archived');
 
-    for (const name of ['Re-enable chat', 'Delete']) {
-      expect(screen.getByRole('button', { name })).toBeInTheDocument();
-    }
+    expect(
+      screen.getByRole('button', { name: 'Re-enable chat' }),
+    ).toBeInTheDocument();
+
+    await openRoomMenu();
+    expect(
+      screen.getByRole('menuitem', { name: 'Delete' }),
+    ).toBeInTheDocument();
   });
 });

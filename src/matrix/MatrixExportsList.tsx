@@ -125,6 +125,8 @@ export const MatrixExportsList: FC<MatrixExportsListProps> = ({
       columns={columns}
       verboseName={translate('history exports')}
       hideTitle
+      // Always embedded; the host block is the frame.
+      cardBordered={false}
       hasActionBar={hasActionBar}
       portal={portal}
     />

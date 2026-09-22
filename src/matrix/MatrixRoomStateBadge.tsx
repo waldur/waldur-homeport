@@ -13,7 +13,9 @@ export const ROOM_STATE_VARIANT: Record<string, BadgeVariant> = {
   error: 'danger',
 };
 
-const stateLabel = (state: string) => {
+/** Backend enum → translated label. Also used by the Chat tab, which renders
+ *  these states through StateIndicator for its in-progress pulse. */
+export const stateLabel = (state: string) => {
   switch (state) {
     case 'creating':
       return translate('Creating');

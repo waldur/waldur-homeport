@@ -336,6 +336,11 @@ $dropdown-box-shadow: if(
 ) !default;
 $dropdown-item-padding-x: 16px;
 $dropdown-item-padding-y: 10px;
+// Bootstrap defaults these to `$spacer * .5` margins and a raw
+// rgba($black, .15): the rows already carry their own padding, and every
+// other rule in the product resolves through $border-*.
+$dropdown-divider-margin-y: 0;
+$dropdown-divider-bg: $border-secondary;
 $dropdown-link-hover-color: $gray-700;
 $dropdown-link-hover-bg: $gray-50;
 $dropdown-link-active-color: $gray-700;

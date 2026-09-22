@@ -1,45 +1,23 @@
-import {
-  ChatsCircleIcon,
-  HeadsetIcon,
-  WarningIcon,
-} from '@phosphor-icons/react';
-import { useCallback } from 'react';
+import { HeadsetIcon, WarningIcon } from '@phosphor-icons/react';
 import { Project } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
-import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
-import { useProjectMatrixRooms } from '@/matrix/chat/useProjectMatrixRooms';
-import { isMatrixChatEnabled } from '@/matrix/utils';
-import { openSupportDrawer } from '@/support/openSupportDrawer';
 
 interface ProjectActionsProps {
   project: Project;
 }
 
 export const ProjectActions = ({ project }: ProjectActionsProps) => {
-  const { openDrawer } = useDrawer();
   const showIssues = hasSupport();
-  const showMatrixChat = isMatrixChatEnabled();
   const isCourseProject = project.kind === 'course';
 
-  const { data: rooms } = useProjectMatrixRooms(project.uuid);
-  const activeRoom = rooms?.find((r) => r.state === 'active');
-
-  const openChat = useCallback(() => {
-    if (!activeRoom) return;
-    openSupportDrawer(openDrawer, {
-      defaultRoomUuid: activeRoom.uuid,
-      matrixRoomAlias: activeRoom.room_alias,
-    });
-  }, [openDrawer, activeRoom]);
-
   const supportButtonClass = isCourseProject
-    ? 'btn btn-secondary btn-icon btn-sm'
-    : 'btn btn-secondary btn-lg';
+    ? 'btn btn-tertiary btn-icon btn-sm'
+    : 'btn btn-tertiary btn-lg';
 
   const supportButton = (
     <Link
@@ -61,14 +39,6 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
 
   return (
     <div className="d-flex gap-2">
-      {showMatrixChat && activeRoom && (
-        <button type="button" className="btn btn-secondary" onClick={openChat}>
-          <span className="svg-icon svg-icon-2">
-            <ChatsCircleIcon weight="bold" />
-          </span>
-          {translate('Team chat')}
-        </button>
-      )}
       {showIssues &&
         (isCourseProject ? (
           <Tooltip label={translate('Support')}>

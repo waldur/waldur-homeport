@@ -3,6 +3,7 @@ import {
   ArrowCounterClockwiseIcon,
   ChatsCircleIcon,
   ExportIcon,
+  PlugsConnectedIcon,
   PowerIcon,
   SignInIcon,
   SignOutIcon,
@@ -38,6 +39,8 @@ interface MatrixRoomActionsProps {
    * item, which throws without a Menu ancestor.
    */
   as?: ComponentType;
+  /** Button variant, honoured only alongside `as` (menu rows are unstyled). */
+  variant?: string;
 }
 
 // You can only open a room's conversation if you actually belong to it — the
@@ -61,15 +64,15 @@ export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row, as }) => {
   return (
     <ActionItem
       as={as}
-      title={translate('Open in Matrix')}
+      title={translate('Connect to Matrix…')}
       action={handleJoin}
-      iconNode={<ChatsCircleIcon weight="bold" />}
+      iconNode={<PlugsConnectedIcon weight="bold" />}
       disabled={row.state !== 'active' || !member}
       tooltip={
         row.state !== 'active'
-          ? translate('Room must be active to join.')
+          ? translate('Room must be active to issue credentials.')
           : !member
-            ? translate('Join the room first to open it in Matrix.')
+            ? translate('Join the room first to get its credentials.')
             : undefined
       }
     />
@@ -124,6 +127,7 @@ export const JoinLeaveRoomButton: FC<MatrixRoomActionsProps> = ({
 export const OpenInTeamChatButton: FC<MatrixRoomActionsProps> = ({
   row,
   as,
+  variant,
 }) => {
   const { openDrawer } = useDrawer();
 
@@ -139,6 +143,7 @@ export const OpenInTeamChatButton: FC<MatrixRoomActionsProps> = ({
   return (
     <ActionItem
       as={as}
+      variant={variant}
       title={translate('Open in team chat')}
       action={handleOpen}
       iconNode={<ChatsCircleIcon weight="bold" />}
@@ -223,6 +228,7 @@ export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
   as,
+  variant,
 }) => {
   const { mutate: retry } = useManagedMutation<unknown, unknown, void>({
     mutationFn: () => matrixRoomsRetry({ path: { uuid: row.uuid } }),
@@ -261,6 +267,7 @@ export const RetryRoomButton: FC<MatrixRoomActionsProps> = ({
   return (
     <ActionItem
       as={as}
+      variant={variant}
       title={translate('Retry')}
       action={() => retry()}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
@@ -292,6 +299,7 @@ export const DisableChatButton: FC<MatrixRoomActionsProps> = ({
       title={translate('Disable chat')}
       action={handleDisable}
       iconNode={<PowerIcon weight="bold" />}
+      iconColor="danger"
       className="text-danger"
       disabled={!canDisable}
       tooltip={
@@ -307,6 +315,7 @@ export const ReactivateChatButton: FC<MatrixRoomActionsProps> = ({
   row,
   refetch,
   as,
+  variant,
 }) => {
   const reactivateConfirmation = useMemo(
     () => ({
@@ -330,6 +339,7 @@ export const ReactivateChatButton: FC<MatrixRoomActionsProps> = ({
   return (
     <ActionItem
       as={as}
+      variant={variant}
       title={translate('Re-enable chat')}
       action={() => reactivate()}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
@@ -373,6 +383,7 @@ export const DeleteRoomButton: FC<MatrixRoomActionsProps> = ({
       title={translate('Delete')}
       action={() => deleteRoom()}
       iconNode={<TrashIcon weight="bold" />}
+      iconColor="danger"
       className="text-danger"
     />
   );
