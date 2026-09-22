@@ -2395,6 +2395,16 @@
       "feature_area": "openstack"
     }
   },
+  "Added permissions ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "permissions"
+    }
+  },
   "Added rules ({count})": {
     "context": {
       "variables": {
@@ -15203,6 +15213,15 @@
       "primary_ui_type": "title",
       "feature_area": "access-subnets",
       "action_type": "create"
+    }
+  },
+  "Description ({language})": {
+    "context": {
+      "variables": {
+        "language": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Description for security rule {name}": {
@@ -36613,6 +36632,16 @@
       "feature_area": "roles"
     }
   },
+  "Permissions ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "permissions"
+    }
+  },
   "Permissions reviews": {
     "context": {
       "feature_area": "project"
@@ -42377,6 +42406,16 @@
       "feature_area": "openstack"
     }
   },
+  "Removed permissions ({count})": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "permissions"
+    }
+  },
   "Removed projects cannot be restored.": {
     "context": {
       "feature_area": "manage"
@@ -42432,6 +42471,19 @@
   "Rename passkey": {
     "context": {
       "feature_area": "passkeys"
+    }
+  },
+  "Renamed from {old_name} to {role_name}.": {
+    "context": {
+      "variables": {
+        "old_name": {
+          "type": "string"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "permissions"
     }
   },
   "Renaming a live account changes who owns its files on your systems. Move or re-own the files of the renamed accounts afterwards.": {
@@ -45215,6 +45267,11 @@
       "feature_area": "hygiene"
     }
   },
+  "Role definition": {
+    "context": {
+      "feature_area": "events"
+    }
+  },
   "Role description": {
     "context": {
       "feature_area": "roles"
@@ -45390,6 +45447,81 @@
   "Role status": {
     "context": {
       "feature_area": "affiliations"
+    }
+  },
+  "Role {role_name} has been concealed for {customer_link}.": {
+    "context": {
+      "variables": {
+        "role_name": {
+          "type": "string"
+        },
+        "customer_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "Role {role_name} has been created.": {
+    "context": {
+      "variables": {
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "Role {role_name} has been deleted.": {
+    "context": {
+      "variables": {
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "Role {role_name} has been disabled.": {
+    "context": {
+      "variables": {
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "Role {role_name} has been enabled.": {
+    "context": {
+      "variables": {
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "Role {role_name} has been revealed for {customer_link}.": {
+    "context": {
+      "variables": {
+        "role_name": {
+          "type": "string"
+        },
+        "customer_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "Role {template_name} has been cloned into {customer_link} as {role_name}.": {
+    "context": {
+      "variables": {
+        "template_name": {
+          "type": "string"
+        },
+        "customer_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
     }
   },
   "Roles": {
@@ -46394,6 +46526,20 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "administration"
+    }
+  },
+  "Scope changed from {old_scope} to {new_scope}.": {
+    "context": {
+      "variables": {
+        "old_scope": {
+          "type": "unknown"
+        },
+        "new_scope": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "permissions",
+      "action_type": "create"
     }
   },
   "Scope name": {
@@ -52619,6 +52765,15 @@
   "The default security group cannot be deleted.": {
     "context": {
       "feature_area": "openstack-security-groups"
+    }
+  },
+  "The definition of role {role_name} has been changed.": {
+    "context": {
+      "variables": {
+        "role_name": {
+          "type": "string"
+        }
+      }
     }
   },
   "The digest can include the following sections, depending on which plugins are installed:": {
@@ -62729,6 +62884,169 @@
       }
     }
   },
+  "User {user_link} has changed a role definition.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has changed the definition of role {role_name}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "User {user_link} has cloned a role into an organization.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has cloned role {template_name} into {customer_link} as {role_name}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "template_name": {
+          "type": "string"
+        },
+        "customer_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "User {user_link} has concealed a role for an organization.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has concealed role {role_name} for {customer_link}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        },
+        "customer_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has created a role.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has created role {role_name}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "User {user_link} has deleted a role.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has deleted role {role_name}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "User {user_link} has disabled a role.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has disabled role {role_name}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "User {user_link} has enabled a role.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has enabled role {role_name}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "User {user_link} has granted role to {affected_user_link}.": {
     "context": {
       "primary_ui_type": "title",
@@ -62755,6 +63073,31 @@
           "type": "url"
         },
         "affected_user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has revealed a role for an organization.": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "user_link": {
+          "type": "url"
+        }
+      }
+    }
+  },
+  "User {user_link} has revealed role {role_name} for {customer_link}.": {
+    "context": {
+      "variables": {
+        "user_link": {
+          "type": "url"
+        },
+        "role_name": {
+          "type": "string"
+        },
+        "customer_link": {
           "type": "url"
         }
       }
@@ -69628,6 +69971,32 @@
       "feature_area": "type-based"
     }
   },
+  "{label} cleared (was \"{from}\").": {
+    "context": {
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "from": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "permissions"
+    }
+  },
+  "{label} set to \"{to}\".": {
+    "context": {
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "to": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "permissions"
+    }
+  },
   "{label} {amount} · {pct}%": {
     "context": {
       "variables": {
@@ -69670,6 +70039,21 @@
         }
       },
       "feature_area": "common"
+    }
+  },
+  "{label}: \"{from}\" to \"{to}\".": {
+    "context": {
+      "variables": {
+        "label": {
+          "type": "string"
+        },
+        "from": {
+          "type": "unknown"
+        },
+        "to": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{limitType} is enforced per account at job submission time. Each offering controls its own account limits independently.": {
