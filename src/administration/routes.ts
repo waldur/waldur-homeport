@@ -53,6 +53,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
+    redirectTo: 'admin-celery-info',
     data: {
       breadcrumb: () => translate('System management'),
     },
@@ -64,6 +65,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
+    redirectTo: 'admin-branding',
     data: {
       breadcrumb: () => translate('User interface'),
     },
@@ -75,6 +77,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
+    redirectTo: 'admin-ai-assistant-settings',
     data: {
       breadcrumb: () => translate('Configuration'),
     },
@@ -86,6 +89,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
+    redirectTo: 'admin-organization-checklist-management',
     data: {
       breadcrumb: () => translate('Organizations & compliance'),
     },
@@ -97,6 +101,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
+    redirectTo: 'admin-marketplace-offerings',
     data: {
       breadcrumb: () => getMarketplaceTitle(),
     },

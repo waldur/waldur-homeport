@@ -21890,7 +21890,7 @@
   },
   "Group by": {
     "context": {
-      "feature_area": "views"
+      "feature_area": "requests"
     }
   },
   "Group by:": {
@@ -49698,6 +49698,11 @@
   "Sign in": {
     "context": {
       "feature_area": "valimo"
+    }
+  },
+  "Sign in method": {
+    "context": {
+      "feature_area": "auth"
     }
   },
   "Sign in with local account": {},

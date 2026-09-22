@@ -373,6 +373,7 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-provider',
     component: UIView,
     url: '',
+    redirectTo: 'marketplace-vendor-offerings',
     data: {
       breadcrumb: () => getMarketplaceTitle(),
       priority: 120,
@@ -387,6 +388,7 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-provider',
     component: UIView,
     url: '',
+    redirectTo: 'marketplace-vendor-offering-users',
     data: {
       breadcrumb: () => translate('Accounts'),
       priority: 125,
@@ -399,6 +401,7 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-provider',
     component: UIView,
     url: '',
+    redirectTo: 'marketplace-provider-orders',
     data: {
       breadcrumb: () => translate('Resources'),
       priority: 130,
@@ -411,6 +414,7 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-provider',
     component: UIView,
     url: '',
+    redirectTo: 'marketplace-provider-offering-requests',
     data: {
       feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Calls for proposals'),
@@ -424,6 +428,7 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-provider',
     component: UIView,
     url: '',
+    redirectTo: 'marketplace-provider-project-templates',
     data: {
       permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
       breadcrumb: () => translate('Managed projects'),
