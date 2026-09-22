@@ -58,6 +58,7 @@ export const states: StateDeclaration[] = [
     parent: 'reporting',
     component: UIView,
     abstract: true,
+    redirectTo: 'reporting-resources-geography',
     data: {
       breadcrumb: () => translate('Resources'),
       priority: 100,
@@ -300,6 +301,7 @@ export const states: StateDeclaration[] = [
     parent: 'reporting',
     component: UIView,
     abstract: true,
+    redirectTo: 'reporting-call-performance-analytics',
     data: {
       breadcrumb: () => translate('Proposals'),
       priority: 200,
@@ -419,6 +421,7 @@ export const states: StateDeclaration[] = [
     parent: 'reporting',
     component: UIView,
     abstract: true,
+    redirectTo: 'reporting-capacity-analytics',
     data: {
       breadcrumb: () => translate('Provider'),
       priority: 300,
@@ -575,6 +578,7 @@ export const states: StateDeclaration[] = [
     parent: 'reporting',
     component: UIView,
     abstract: true,
+    redirectTo: 'reporting-user-affiliations',
     data: {
       breadcrumb: () => translate('Users'),
       priority: 350,
@@ -675,6 +679,7 @@ export const states: StateDeclaration[] = [
     parent: 'reporting',
     component: UIView,
     abstract: true,
+    redirectTo: 'reporting-growth',
     data: {
       breadcrumb: () => translate('Financial'),
       priority: 400,
@@ -807,6 +812,7 @@ export const states: StateDeclaration[] = [
     parent: 'reporting',
     component: UIView,
     abstract: true,
+    redirectTo: 'reporting-maintenance-overview',
     data: {
       breadcrumb: () => translate('Operations'),
       priority: 475,

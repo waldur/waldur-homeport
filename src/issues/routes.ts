@@ -29,6 +29,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     abstract: true,
     url: '',
+    redirectTo: 'support-active-sessions',
     data: {
       breadcrumb: () => translate('User management'),
     },
@@ -40,6 +41,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     abstract: true,
     url: '',
+    redirectTo: 'support-announcements',
     data: {
       breadcrumb: () => translate('Communication'),
     },
@@ -51,6 +53,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     abstract: true,
     url: '',
+    redirectTo: 'support-affiliates',
     data: {
       breadcrumb: () => translate('Customer support'),
     },
@@ -62,6 +65,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     abstract: true,
     url: '',
+    redirectTo: 'support-ai-assistant-logs',
     data: {
       breadcrumb: () => translate('Logs'),
     },

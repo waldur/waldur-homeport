@@ -70,6 +70,7 @@ export const states: StateDeclaration[] = [
     parent: 'profile',
     component: UIView,
     url: '',
+    redirectTo: 'profile-api-key',
     data: {
       breadcrumb: () => translate('Credentials'),
       priority: 110,

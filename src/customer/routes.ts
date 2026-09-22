@@ -64,6 +64,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     component: UIView,
     url: '',
+    redirectTo: 'organization-orders',
     data: {
       breadcrumb: () => translate('Resources'),
       priority: 110,
@@ -301,6 +302,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     component: UIView,
     url: '',
+    redirectTo: 'organization-billing.billing',
     data: {
       breadcrumb: () => translate('Accounting'),
       priority: 140,
@@ -407,6 +409,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     component: UIView,
     url: '',
+    redirectTo: 'organization-component-policies',
     data: {
       breadcrumb: () => translate('Policy'),
       priority: 150,
