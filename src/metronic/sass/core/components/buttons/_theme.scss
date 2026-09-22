@@ -26,41 +26,6 @@
   } @else if ($name == secondary) {
     $value: $brand-50;
   }
-  //   // Base
-  //   .btn.btn-#{$name} {
-  //     $color: theme-inverse-color($name);
-  //     $icon-color: theme-inverse-color($name);
-  //     $border-color: $value;
-  //     $bg-color: $value;
-
-  //     $color-active: theme-inverse-color($name);
-  //     $icon-color-active: theme-inverse-color($name);
-  //     $border-color-active: theme-active-color($name);
-  //     $bg-color-active: theme-active-color($name);
-
-  //     $color-dark: theme-dark-inverse-color($name);
-  //     $icon-color-dark: theme-dark-inverse-color($name);
-  //     $border-color-dark: theme-dark-color($name);
-  //     $bg-color-dark: theme-dark-color($name);
-
-  //     $bg-color-disabled: $gray-100;
-
-  //     @include button-custom-variant(
-  //       $color,
-  //       $icon-color,
-  //       $border-color,
-  //       $bg-color,
-  //       $color-active,
-  //       $icon-color-active,
-  //       $border-color-active,
-  //       $bg-color-active,
-  //       $color-dark,
-  //       $icon-color-dark,
-  //       $border-color-dark,
-  //       $bg-color-dark,
-  //       $bg-color-disabled
-  //     );
-  //   }
 
   // Light
   @if (theme-light-color($name)) {
@@ -275,30 +240,6 @@
         $bg-color-active
       );
     }
-
-    //     // Text colors
-    //     .btn.btn-text-#{$name} {
-    //       $color: $value;
-    //       $icon-color: null;
-    //       $bg-color: null;
-    //       $border-color: null;
-
-    //       $color-active: null;
-    //       $icon-color-active: null;
-    //       $border-color-active: null;
-    //       $bg-color-active: null;
-
-    //       @include button-custom-variant(
-    //         $color,
-    //         $icon-color,
-    //         $border-color,
-    //         $bg-color,
-    //         $color-active,
-    //         $icon-color-active,
-    //         $border-color-active,
-    //         $bg-color-active
-    //       );
-    //     }
 
     // Text colors active state
     .btn.btn-active-text-#{$name} {

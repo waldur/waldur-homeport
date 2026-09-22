@@ -26,25 +26,6 @@
     box-shadow: none !important;
   }
 
-  // Remove border
-  // &:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(
-  //     .border-active
-  //   ):not(.btn-flush):not(.btn-icon) {
-  //   border: 0;
-  //   padding: calc(#{$btn-padding-y} + #{$btn-border-width})
-  //     calc(#{$btn-padding-x} + #{$btn-border-width});
-
-  //   &.btn-lg {
-  //     padding: calc(#{$btn-padding-y-lg} + #{$btn-border-width})
-  //       calc(#{$btn-padding-x-lg} + #{$btn-border-width});
-  //   }
-
-  //   &.btn-sm {
-  //     padding: calc(#{$btn-padding-y-sm} + #{$btn-border-width})
-  //       calc(#{$btn-padding-x-sm} + #{$btn-border-width});
-  //   }
-  // }
-
   // Link
   &.btn-link {
     border: 0;
@@ -160,13 +141,6 @@
     padding: 0;
     height: $input-height;
     width: $input-height;
-
-    // Remove border
-    // &:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(
-    //     .border-active
-    //   ):not(.btn-flush) {
-    //   border: 0;
-    // }
 
     // Sizes
     &.btn-sm {

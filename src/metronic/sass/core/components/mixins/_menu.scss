@@ -263,7 +263,6 @@
   $bg-color: null,
   $all-links: true
 ) {
-  //&.here > .menu-link,
   &.show > .menu-link {
     transition: $transition-link;
 
