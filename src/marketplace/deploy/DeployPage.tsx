@@ -55,6 +55,7 @@ import { useOrderFormData } from './selectors';
 import { isPartitionQosRequired } from './steps/FormQoSSelectionStep';
 import { OfferingConfigurationFormStep } from './types';
 import { useDefaultLimits } from './useDefaultLimits';
+import { useDefaultPlan } from './useDefaultPlan';
 import { hasStepWithField } from './utils';
 
 import './DeployPage.scss';
@@ -103,11 +104,6 @@ export const BaseDeployPage = ({
   const canCreateOrder = hasPermissionOnAnyScope(
     user,
     PermissionEnum.CREATE_ORDER,
-  );
-
-  const plans = useMemo(
-    () => selectedOffering.plans.filter((plan) => plan.archived === false),
-    [selectedOffering],
   );
 
   const formSteps = useMemo(
@@ -179,18 +175,13 @@ export const BaseDeployPage = ({
     skip: isEdit,
   });
 
-  // The plan has its own trigger: it is assigned once the offering's plans are
-  // known, which is unrelated to seeding the defaults.
-  useEffect(() => {
-    if (isEdit) return;
-    if (hasStepWithField(formSteps, 'plan') && plans) {
-      if (props.plan) {
-        form.change('plan', props.plan);
-      } else if (plans.length === 1) {
-        form.change('plan', plans[0]);
-      }
-    }
-  }, [plans, props.plan]);
+  // Follows the offering: FormCloudStep can switch it without remounting the
+  // form, leaving behind a plan that belongs to the offering switched away from.
+  useDefaultPlan({
+    offering: selectedOffering,
+    plan: props.plan,
+    skip: isEdit || !hasStepWithField(formSteps, 'plan'),
+  });
 
   const [lastY, setLastY] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>(

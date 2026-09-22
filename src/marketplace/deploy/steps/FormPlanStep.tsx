@@ -5,6 +5,7 @@ import { OrderSummaryButton } from '@/marketplace/details/OrderSummaryButton';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
 import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { getOrderablePlans } from '@/marketplace/offerings/details/planPricing';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { useOrderFormData } from '../selectors';
@@ -12,7 +13,7 @@ import { FormStepProps } from '../types';
 
 export const FormPlanStep = (props: FormStepProps) => {
   const plans = useMemo(
-    () => props.offering.plans.filter((plan) => plan.archived === false),
+    () => getOrderablePlans(props.offering),
     [props.offering],
   );
 
