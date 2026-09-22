@@ -1,4 +1,5 @@
 import { createElement } from 'react';
+import { Offering } from 'waldur-js-client';
 
 import CentOS from '@/images/appstore/centos.svg';
 import Debian from '@/images/appstore/debian.svg';
@@ -7,6 +8,8 @@ import Oracle from '@/images/appstore/oracle.svg';
 import Rocky from '@/images/appstore/rocky.svg';
 import Ubuntu from '@/images/appstore/ubuntu.svg';
 import Windows from '@/images/appstore/windows.svg';
+
+import { getOrderablePlans } from '../offerings/details/planPricing';
 
 import { BoxRadioChoice } from './steps/BoxRadioField';
 import { OfferingConfigurationFormStep } from './types';
@@ -118,3 +121,14 @@ export const hasStepWithField = (
 ) =>
   steps &&
   steps.some((step) => step.fields && step.fields.some((key) => key === field));
+
+/**
+ * A shared offering has to carry a plan: `_validate_plan_for_create` refuses a
+ * create order on one without it, while a private offering may be ordered
+ * planless. The plans the API returns are filtered by what the user may order,
+ * so an empty list means none is available to *them*, not that the provider
+ * published none.
+ */
+export const isMissingRequiredPlan = (
+  offering: Pick<Offering, 'plans' | 'shared'>,
+) => Boolean(offering?.shared) && getOrderablePlans(offering).length === 0;
