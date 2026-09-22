@@ -40,9 +40,16 @@ const RoleDetailsDialog = ({ role }) => (
 export const RolePopover = ({ roleName }) => {
   const role = ENV.roles.find((role) => role.name === roleName);
   const { openDialog } = useModal();
+  if (!role) {
+    // A role the cache does not know: deleted, or private to an organization
+    // the viewer cannot see. There are no details to open, and the dialog would
+    // render an empty body titled "Role details: undefined" - formatTemplate
+    // interpolates a missing value as the literal string.
+    return <>{roleName}</>;
+  }
   return (
     <>
-      {role?.description || role?.name || roleName}{' '}
+      {role.description || role.name}{' '}
       <QuestionIcon
         size={12}
         weight="bold"

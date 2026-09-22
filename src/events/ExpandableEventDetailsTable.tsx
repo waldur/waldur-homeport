@@ -8,6 +8,11 @@ import {
   RulesChangedContext,
   SecurityGroupRulesDiff,
 } from '@/openstack/events';
+import {
+  getRoleDefinitionDetails,
+  RoleDefinitionChangeContext,
+  RoleDefinitionChanges,
+} from '@/permissions/events';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { ExpandableEventField } from './ExpandableEventField';
@@ -174,6 +179,25 @@ export const ExpandableEventDetailsTable: FunctionComponent<
         value={
           <AllowedAddressPairsDiff
             context={event.context as AllowedAddressPairsChangedContext}
+          />
+        }
+      />
+    )}
+
+    {/* Gated on the same call that renders the row. ExpandableEventField drops
+        a falsy value, but a JSX element is truthy even when the component
+        renders nothing, so gating on the event type alone left the label
+        standing above an empty column. */}
+    {getRoleDefinitionDetails(
+      event.event_type,
+      event.context as RoleDefinitionChangeContext,
+    ) && (
+      <ExpandableEventField
+        label={translate('Role definition')}
+        value={
+          <RoleDefinitionChanges
+            eventType={event.event_type}
+            context={event.context as RoleDefinitionChangeContext}
           />
         }
       />
