@@ -45,4 +45,16 @@
   .btn-check + .btn:not(.btn-sm):not(.btn-lg) {
     padding: 9px 15px;
   }
+
+  // Selected segment when the option is a Radix tab trigger (data-state="active").
+  > .btn[data-state='active'] {
+    background-color: $bg-tertiary;
+    box-shadow: unset;
+  }
+
+  // Ensure an inactive focused tab keeps resting background rather than
+  // being painted with the active fill.
+  > .btn[role='tab']:focus:not([data-state='active']):not(.btn-active) {
+    background-color: $btn-tertiary-bg;
+  }
 }
