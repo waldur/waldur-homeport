@@ -106,6 +106,16 @@ body:has(#kt_drawer.confirmation-drawer-active) .header {
   z-index: get($drawer, z-index) + 1;
 }
 
+// Radix's modal Dialog sets `pointer-events: none` on <body>, so the header's
+// drawer toggles would show no hover or pointer cursor and a click on one would
+// only land on the page behind. Keep them live: each toggle closes its own
+// drawer or switches to another (DrawerRoot leaves that click to the toggle).
+body:has(#kt_drawer.ai-chat-drawer-active) [data-drawer-toggle],
+body:has(#kt_drawer.support-drawer-active) [data-drawer-toggle],
+body:has(#kt_drawer.confirmation-drawer-active) [data-drawer-toggle] {
+  pointer-events: auto;
+}
+
 // The confirmation drawer keeps the default card-body scroll (unlike the chat
 // drawers, which manage their own internal scroll), so the body must fill the
 // fixed-height card and shrink below its content to scroll. Override .scroll-y's

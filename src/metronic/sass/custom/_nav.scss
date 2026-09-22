@@ -61,9 +61,13 @@
     @include svg-icon-color($gray-400);
   }
 
+  // `aria-expanded`: the drawer this button opens is showing. The drawer takes
+  // focus (and, being modal, hover), so without it the button looks idle and
+  // nothing says a second click closes the drawer.
   &:focus,
   &:active,
-  &:hover {
+  &:hover,
+  &[aria-expanded='true'] {
     background-color: $btn-secondary-bg;
 
     i {

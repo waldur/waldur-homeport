@@ -7,7 +7,7 @@ import { Tooltip } from 'waldur-ui';
 
 import { fetchResultCount } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
-import { useDrawer } from '@/drawer/actions';
+import { useDrawer, useIsDrawerOpenWith } from '@/drawer/actions';
 import { DrawerExpandToolbar } from '@/drawer/DrawerExpandToolbar';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { isDrawerOpenWithClass } from '@/drawer/utils';
@@ -30,6 +30,7 @@ const PendingConfirmationContainer = lazyComponent(() =>
 
 export const ConfirmationDrawerToggle: React.FC = () => {
   const { openDrawer, closeDrawer } = useDrawer();
+  const isOpen = useIsDrawerOpenWith(DRAWER_SHELL_CLASS.confirmation);
 
   const showConsumerOrders = !isFeatureVisible(
     MarketplaceFeatures.conceal_pending_consumer_orders,
@@ -77,12 +78,10 @@ export const ConfirmationDrawerToggle: React.FC = () => {
       closeDrawer();
       return;
     }
-    document
-      .getElementById('kt_drawer')
-      ?.classList.add(DRAWER_SHELL_CLASS.confirmation);
     openDrawer(PendingConfirmationContainer, {
       title: translate('Pending confirmations'),
       toolbar: DrawerExpandToolbar,
+      shellClass: DRAWER_SHELL_CLASS.confirmation,
       ...counters,
     });
   };
@@ -95,6 +94,8 @@ export const ConfirmationDrawerToggle: React.FC = () => {
           type="button"
           onClick={handleOpenDrawer}
           aria-label={translate('Pending tasks')}
+          aria-expanded={isOpen}
+          data-drawer-toggle
           className="position-relative btn-nav-item"
         >
           <span className="svg-icon svg-icon-2">

@@ -19,6 +19,7 @@ vi.mock('@/navigation/useTabs', () => ({
 }));
 vi.mock('@/drawer/actions', () => ({
   useDrawer: () => ({ openDrawer: vi.fn(), closeDrawer: vi.fn() }),
+  useIsDrawerOpenWith: () => aiDrawerOpen,
 }));
 vi.mock('@/ai-assistant/anonymous/AnonymousThreadProvider', () => ({
   useAnonymousThreadContext: () => ({
@@ -38,6 +39,7 @@ vi.mock('@/ai-assistant/logic/ThreadProvider', () => ({
 }));
 
 let hasNewMessages = false;
+let aiDrawerOpen = false;
 let anonymousMessages: unknown[] = [];
 let anonymousHasUnreadReply = false;
 let authenticatedThreads = new Map<string, unknown[]>();
@@ -56,6 +58,7 @@ describe('LLMChatDrawerToggle', () => {
   beforeEach(() => {
     setState('public.offerings');
     hasNewMessages = false;
+    aiDrawerOpen = false;
     anonymousMessages = [];
     anonymousHasUnreadReply = false;
     authenticatedThreads = new Map([['t1', []]]);
@@ -98,6 +101,24 @@ describe('LLMChatDrawerToggle', () => {
     expect(toggle.dataset.state).toBe('closed');
     expect(toggle.textContent).toBe('');
     expect(toggle.getAttribute('aria-label')).toBe('Ask the AI assistant');
+  });
+
+  // The drawer takes focus and, being modal, hover too — without this the
+  // toggle looks idle and nothing says a second click closes the drawer.
+  it('shows as pressed while its drawer is open', () => {
+    const { rerender } = render(<LLMChatDrawerToggle />);
+    expect(screen.getByTestId('llm-chat-drawer-toggle')).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
+
+    aiDrawerOpen = true;
+    rerender(<LLMChatDrawerToggle />);
+
+    expect(screen.getByTestId('llm-chat-drawer-toggle')).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
   });
 
   it("blinks for a visitor's unread reply, held in shared state so any entry point can clear it", () => {

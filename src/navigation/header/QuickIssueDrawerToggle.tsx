@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Tooltip } from 'waldur-ui';
 
-import { useDrawer } from '@/drawer/actions';
+import { useDrawer, useIsDrawerOpenWith } from '@/drawer/actions';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { isDrawerOpenWithClass } from '@/drawer/utils';
 import { translate } from '@/i18n';
@@ -14,6 +14,7 @@ import { openSupportDrawer } from '@/support/openSupportDrawer';
 
 export const QuickIssueDrawerToggle: React.FC = () => {
   const { openDrawer, closeDrawer } = useDrawer();
+  const isOpen = useIsDrawerOpenWith(DRAWER_SHELL_CLASS.support);
   const matrixUnread = useMatrixTotalUnread();
   const showChatBullet = isMatrixChatEnabled() && matrixUnread > 0;
 
@@ -33,6 +34,8 @@ export const QuickIssueDrawerToggle: React.FC = () => {
           type="button"
           onClick={toggleSupportDrawer}
           aria-label={translate('Support')}
+          aria-expanded={isOpen}
+          data-drawer-toggle
           className="position-relative btn-nav-item"
         >
           <span className="svg-icon svg-icon-2">
