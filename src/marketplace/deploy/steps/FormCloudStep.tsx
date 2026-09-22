@@ -129,6 +129,12 @@ export const FormCloudStep = (props: FormStepProps) => {
         // run -- lets BaseDeployPage seed the new defaults into an empty object
         // while a step that owns limits still writes after it.
         form.change('limits', undefined);
+        // The plan belongs to it too, and for the same reason it goes here
+        // rather than in an effect: useOrderPrices reads the held plan's own
+        // prices and components, so a plan left in place for one commit prices
+        // the offering switched away from against the one switched to.
+        // useDefaultPlan refills the default, or leaves the choice to the user.
+        form.change('plan', undefined);
       }
     },
     [form.change],
