@@ -1226,3 +1226,30 @@ overrides:
         'false': Scoped
     user_uuid:
       label: Owner
+
+  marketplace_offering_merges:
+    filters:
+      - state
+      - offering_uuid
+      - created_by_uuid
+    state:
+      isMulti: true
+      enumOverrides:
+        draft: Draft
+        previewed: Previewed
+        queued: Queued
+        running: Running
+        done: Done
+        failed: Failed
+        undoing: Undoing
+        undone: Undone
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_provider_offerings_list
+      searchParam: name
+    created_by_uuid:
+      label: Created by
+      name: created_by
+      operationId: users_list
+      searchParam: full_name
