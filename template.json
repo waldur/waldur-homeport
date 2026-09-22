@@ -47283,11 +47283,6 @@
       "feature_area": "single-import"
     }
   },
-  "Select chat room": {
-    "context": {
-      "feature_area": "chat"
-    }
-  },
   "Select checklist": {
     "context": {
       "primary_ui_type": "label"

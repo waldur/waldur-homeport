@@ -27,14 +27,12 @@ import { useMatrixCall } from './call/useMatrixCall';
 import { MatrixChatHeader } from './MatrixChatHeader';
 import { MatrixMessageInput } from './MatrixMessageInput';
 import { MatrixMessageList } from './MatrixMessageList';
-import { MatrixRoomSelector } from './MatrixRoomSelector';
 import { MatrixSyncStatus } from './MatrixSyncStatus';
 import { MatrixTypingIndicator } from './MatrixTypingIndicator';
 import { useAllMatrixRooms } from './useAllMatrixRooms';
 import { useMatrixClient } from './useMatrixClient';
 import { useMatrixFileUpload } from './useMatrixFileUpload';
 import { useMatrixRoom } from './useMatrixRoom';
-import { useMatrixRooms } from './useMatrixRooms';
 import { useRoomMemberImages, useRoomMemberNames } from './useRoomMemberNames';
 import { buildVoiceContent } from './voice/buildVoiceContent';
 import { generateWaveform } from './voice/generateWaveform';
@@ -60,11 +58,9 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     useMatrixClient();
   const { callState, callRoomId, callRoomUuid } = useMatrixCall();
   const { requestReturnToCall } = useContext(MatrixCallPortalContext);
-  const [activeRoomUuid, setActiveRoomUuid] = useState(roomUuid);
-  const { data: rooms } = useMatrixRooms(projectUuid);
   const { rooms: allRooms } = useAllMatrixRooms();
-  const memberNames = useRoomMemberNames(activeRoomUuid);
-  const memberImages = useRoomMemberImages(activeRoomUuid);
+  const memberNames = useRoomMemberNames(roomUuid);
+  const memberImages = useRoomMemberImages(roomUuid);
   const currentUser = useUser();
   const {
     uploadFile,
@@ -129,24 +125,8 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
 
   // Connect on mount
   useEffect(() => {
-    connect(activeRoomUuid);
-  }, [activeRoomUuid]);
-
-  const handleRoomSelect = useCallback(
-    (uuid: string) => {
-      // Discard any in-progress recording before switching — the clip belongs to
-      // the room being left, not the one being opened (otherwise Send would post
-      // it to the newly-selected room).
-      recorder.cancel();
-      setSendingVoice(false);
-      setActiveRoomUuid(uuid);
-      connect(uuid);
-    },
-    [connect, recorder],
-  );
-
-  const activeRooms =
-    rooms?.filter((r) => r.state === 'active' && r.room_alias) || [];
+    connect(roomUuid);
+  }, [roomUuid]);
 
   // 'discovering' is included so the drawer reserves the call pane the moment
   // a room is claimed — otherwise MatrixCallHost falls back to the floating
@@ -202,10 +182,10 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
             </div>
           )}
           <MatrixChatHeader
-            roomUuid={activeRoomUuid}
+            roomUuid={roomUuid}
             roomName={
               roomName ||
-              activeRooms.find((r) => r.uuid === activeRoomUuid)?.room_name ||
+              allRooms.find((r) => r.uuid === roomUuid)?.room_name ||
               translate('Chat')
             }
             roomAlias={roomAlias}
@@ -238,19 +218,11 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
             </div>
           )}
 
-          {activeRooms.length > 1 && !onBack && (
-            <MatrixRoomSelector
-              rooms={activeRooms}
-              activeRoomUuid={activeRoomUuid}
-              onSelect={handleRoomSelect}
-            />
-          )}
-
           <div className="flex-grow-1 overflow-hidden d-flex flex-column">
             {showConnectionError && (
               <div className="flex-grow-1 d-flex align-items-center justify-content-center p-4">
                 <LoadingErred
-                  loadData={() => connect(activeRoomUuid)}
+                  loadData={() => connect(roomUuid)}
                   message={
                     error || translate('Could not connect to the chat server.')
                   }
