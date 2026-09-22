@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { ProgressBar } from '@/core/ProgressBar';
 import { translate } from '@/i18n';
 
 interface CapacityIndicatorProps {
@@ -16,16 +17,16 @@ export const CapacityIndicator: FC<CapacityIndicatorProps> = ({
     return <span className="text-muted">{translate('Unlimited')}</span>;
   }
   const ratio = open / max;
-  const variant =
-    ratio >= 1 ? 'bg-danger' : ratio >= 0.75 ? 'bg-warning' : 'bg-success';
+  const variant = ratio >= 1 ? 'danger' : ratio >= 0.75 ? 'warning' : 'success';
   return (
     <div className="d-flex align-items-center gap-2" style={{ minWidth: 90 }}>
-      <div className="progress flex-grow-1" style={{ height: 6 }}>
-        <div
-          className={`progress-bar ${variant}`}
-          style={{ width: `${Math.min(ratio * 100, 100)}%` }}
-        />
-      </div>
+      <ProgressBar
+        now={Math.min(open, max)}
+        max={max}
+        variant={variant}
+        neutralTrack
+        className="h-6px shadow-none"
+      />
       <small className="text-nowrap">
         {open}/{max}
       </small>
