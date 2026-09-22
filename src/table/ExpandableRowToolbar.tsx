@@ -168,11 +168,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
               <RadixPopover.Content
                 align="end"
                 sideOffset={2}
-                // position-static: Bootstrap's own .popover class hardcodes
-                // `position: absolute; left: 0`, fighting the Radix popper
-                // wrapper for control of this box's placement — see
-                // TableColumnsButton.tsx's own comment on this exact fix.
-                className="popover bs-popover-bottom position-static"
+                className="z-50 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
               >
                 <ColumnsPopover
                   columns={optionalColumns}

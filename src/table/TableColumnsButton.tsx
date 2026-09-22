@@ -112,7 +112,7 @@ const ColumnsPopover = ({
   );
 
   return (
-    <div className="border mw-400px">
+    <div className="mw-400px">
       <div className="p-5">
         <FilterBox
           type="search"
@@ -224,17 +224,7 @@ export const TableColumnButton: FC<TableProps> = ({
           side="bottom"
           align="end"
           sideOffset={2}
-          // position-static: Bootstrap's own .popover class hardcodes
-          // `position: absolute; left: 0`, which fights the Radix popper
-          // wrapper — the actual positioned element here — for control of
-          // this box's placement. Left in place, that `position: absolute`
-          // takes the panel out of the wrapper's normal flow, so instead of
-          // Radix's own align="end" transform positioning it, the panel
-          // just pins to the wrapper's local (0,0) and grows rightward,
-          // overflowing the viewport for a trigger anywhere near the right
-          // edge. Same fix, same reasoning, as ActionsDropdownComponent's
-          // own `position-static` on `.dropdown-menu` in ActionsDropdown.tsx.
-          className="popover bs-popover-bottom position-static"
+          className="z-50 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
         >
           <ColumnsPopover
             columns={columns}

@@ -1106,11 +1106,8 @@
   // Bootstrap popovers default to a smaller font; pin the members list to the
   // chat's body size so names are readable.
   font-size: $font-size-lg;
-
-  .popover-body {
-    max-height: 320px;
-    overflow-y: auto;
-  }
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 // Faint full-panel tint keeps the messages readable underneath; the hint
