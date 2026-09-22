@@ -1,8 +1,9 @@
-import { ChatsCircleIcon } from '@phosphor-icons/react';
+import { ChatsCircleIcon, EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { MatrixCredentials, matrixCredentialsRetrieve } from 'waldur-js-client';
 
+import { IconButton } from '@/core/buttons/IconButton';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -19,19 +20,39 @@ interface MatrixCredentialsDialogProps {
   };
 }
 
+// Copy never requires revealing first; Reveal is for retyping by hand.
 const CredentialRow: FC<{ label: string; value: string; masked?: boolean }> = ({
   label,
   value,
   masked,
-}) => (
-  <div className="d-flex align-items-center justify-content-between mb-3 p-3 border rounded">
-    <div>
-      <small className="text-muted d-block">{label}</small>
-      <code>{masked ? '\u2022'.repeat(12) : value}</code>
+}) => {
+  const [revealed, setRevealed] = useState(false);
+  return (
+    <div className="d-flex align-items-center justify-content-between mb-3 p-3 border rounded">
+      <div className="text-break me-3">
+        <small className="text-muted d-block">{label}</small>
+        <code>{masked && !revealed ? '\u2022'.repeat(12) : value}</code>
+      </div>
+      <div className="d-flex align-items-center flex-shrink-0">
+        {masked && (
+          <IconButton
+            iconNode={
+              revealed ? (
+                <EyeSlashIcon weight="bold" />
+              ) : (
+                <EyeIcon weight="bold" />
+              )
+            }
+            tooltip={revealed ? translate('Hide') : translate('Reveal')}
+            onClick={() => setRevealed(!revealed)}
+            variant="text-secondary"
+          />
+        )}
+        <CopyToClipboardButton value={value} />
+      </div>
     </div>
-    <CopyToClipboardButton value={value} />
-  </div>
-);
+  );
+};
 
 const CredentialsContent: FC<{
   credentials: MatrixCredentials;
@@ -41,6 +62,11 @@ const CredentialsContent: FC<{
 
   return (
     <div>
+      <p className="text-muted">
+        {translate(
+          'Opening this provisions your Matrix account the first time and issues a new access token each time. Treat the details below as a password.',
+        )}
+      </p>
       {roomAlias && (
         <CredentialRow label={translate('Room alias')} value={roomAlias} />
       )}
