@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, renderHook, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 
-import { Select, AsyncSelect } from '.';
+import { Select, AsyncSelect, useSelect } from '.';
 
 const options = [
   { value: 'a', label: 'A' },
@@ -118,5 +118,49 @@ describe('AsyncSelect component', () => {
       expect(renderedOptions[2]).toHaveTextContent('A');
       expect(renderedOptions[3]).toHaveTextContent('B');
     });
+  });
+});
+
+describe('useSelect — portaling defaults', () => {
+  // The portal styles carry the z-index and the `pointer-events: auto` that
+  // keeps a menu clickable inside the modal drawer (src/drawer). A caller's
+  // own `styles` is merged with them, because replacing them would break that
+  // far from the call site — so assert composition, not just presence.
+  const menuList = (base: object) => ({ ...base, height: '99px' });
+
+  it('keeps the portal styles when a caller passes its own', () => {
+    const { result } = renderHook(() =>
+      useSelect({ options, styles: { menuList } }),
+    );
+    expect(result.current.styles.menuList).toBe(menuList);
+    expect(result.current.styles.menuPortal({})).toEqual({
+      zIndex: 9999,
+      pointerEvents: 'auto',
+    });
+  });
+
+  it('lets a caller override one style key without dropping the others', () => {
+    const menuPortal = (base: object) => ({ ...base, zIndex: 1 });
+    const { result } = renderHook(() =>
+      useSelect({ options, styles: { menuPortal } }),
+    );
+    expect(result.current.styles.menuPortal).toBe(menuPortal);
+    expect(result.current.maxMenuHeight).toBe(260);
+    expect(result.current.menuPortalTarget).toBe(document.body);
+  });
+
+  it('keeps the table filter height alongside the portal styles', () => {
+    const { result } = renderHook(() =>
+      // `value: null` skips the selected-first reordering, which a table
+      // filter's always-open menu would otherwise run on mount.
+      useSelect({ options, variant: 'tableFilter', value: null }),
+    );
+    expect(result.current.styles.menuList({})).toEqual({ height: '175px' });
+    expect(result.current.styles.menuPortal({})).toEqual({
+      zIndex: 9999,
+      pointerEvents: 'auto',
+    });
+    // ...but it renders inline, so nothing portals and those styles never apply.
+    expect(result.current.menuPortalTarget).toBeUndefined();
   });
 });

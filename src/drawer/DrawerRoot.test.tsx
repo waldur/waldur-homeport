@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
+import { Select } from '@/form/select';
 import {
   ActionsDropdownComponent,
   ActionsDropdownItem,
@@ -54,6 +55,16 @@ const OverlayDrawerContent = () => (
   </div>
 );
 
+const pickOption = vi.fn();
+
+const SelectDrawerContent = () => (
+  <Select
+    aria-label="Flavor"
+    options={[{ value: 'm1.small', label: 'm1.small' }]}
+    onChange={pickOption}
+  />
+);
+
 const OpenButton = ({
   onOpen,
 }: {
@@ -81,6 +92,7 @@ const renderDrawer = () => {
         title: 'Panel',
         shellClass: 'ai-chat-drawer-active',
       }),
+    openSelect: () => openDrawer(SelectDrawerContent, { title: 'Panel' }),
   };
 };
 
@@ -322,6 +334,28 @@ describe('DrawerRoot', () => {
     await user.click(await screen.findByRole('button', { name: '3 members' }));
 
     expect(await screen.findByText('Mart Tamm')).toBeInTheDocument();
+  });
+
+  // react-select is not a Radix layer, so the nesting above doesn't cover it:
+  // its menu portals to <body>, which the modal dialog has set to
+  // `pointer-events: none`. The menu inherits that, every click on an option
+  // falls through to the drawer beneath, and react-select closes the menu as
+  // if the user had clicked away.
+  it('picks an option from a select inside the drawer', async () => {
+    const user = userEvent.setup();
+    pickOption.mockClear();
+    const { openSelect } = renderDrawer();
+    openSelect();
+
+    await user.click(await screen.findByRole('combobox', { name: 'Flavor' }));
+    await user.click(await screen.findByRole('option', { name: 'm1.small' }));
+
+    expect(pickOption).toHaveBeenCalledWith(
+      { value: 'm1.small', label: 'm1.small' },
+      expect.anything(),
+    );
+    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
   });
 
   // Radix decides a pointerdown is "inside" via an onPointerDownCapture on the

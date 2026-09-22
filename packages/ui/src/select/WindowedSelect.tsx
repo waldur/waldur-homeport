@@ -4,6 +4,7 @@ import BaseSelect from 'react-select';
 import { composeComponents } from './SelectHelper';
 import { getSelectTailwindClassNames } from './tailwindStyles';
 import { CustomSelectProps } from './types';
+import { defaultPortalingProps } from './useSelect';
 import { VirtualMenuList } from './VirtualMenuList';
 
 const DEFAULT_WINDOW_THRESHOLD = 100;
@@ -59,14 +60,18 @@ export const WindowedSelect: FC<WindowedSelectProps> = ({
 
   return (
     <BaseSelect
-      menuPortalTarget={document.body}
-      styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-      menuPosition="fixed"
-      menuPlacement="bottom"
-      // Matches tailwindStyles.ts's `menuList` cap (`max-h-[260px]`) — see
-      // the same override/comment in useSelect.ts's `defaultPortalingProps`.
-      maxMenuHeight={260}
+      // This component renders react-select directly rather than through
+      // useSelect, so it takes the shared portal target, z-index,
+      // `pointer-events: auto` and menu-height cap from the one definition —
+      // see `defaultPortalingProps` for what each is for.
+      {...defaultPortalingProps}
       {...(props as any)}
+      // Merged, not replaced: a caller's own `styles` must not drop the
+      // portal defaults above. Per-key overrides still win.
+      styles={{
+        ...defaultPortalingProps.styles,
+        ...(props as any).styles,
+      }}
       components={finalComponents}
       unstyled={true}
       classNames={classNamesConfig}
