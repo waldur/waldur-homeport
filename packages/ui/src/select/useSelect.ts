@@ -14,9 +14,21 @@ import {
   CustomSelectProps,
 } from './types';
 
-const defaultPortalingProps = {
+/**
+ * The portaling props every select in this package shares. Exported so
+ * WindowedSelect — which renders react-select directly instead of going
+ * through these hooks — spreads the same values rather than repeating them;
+ * deliberately not re-exported from the package root, it is internal.
+ */
+export const defaultPortalingProps = {
   menuPortalTarget: document.body,
-  styles: { menuPortal: (base) => ({ ...base, zIndex: 9999 }) },
+  styles: {
+    // A modal Radix Dialog (the app drawer) sets `pointer-events: none` on
+    // <body> and re-enables only its own content. The portalled menu is
+    // outside that content and would inherit `none`, leaving every option
+    // unclickable.
+    menuPortal: (base) => ({ ...base, zIndex: 9999, pointerEvents: 'auto' }),
+  },
   menuPosition: 'fixed' as const,
   menuPlacement: 'bottom' as const,
   // Matches tailwindStyles.ts's `menuList` cap (`max-h-[260px]`). react-select's
@@ -25,6 +37,16 @@ const defaultPortalingProps = {
   // this override a virtualized menu (VirtualMenuList reads this same prop)
   // renders visibly taller than a non-virtualized one.
   maxMenuHeight: 260,
+};
+
+// A table filter renders its menu inline — the hooks below clear
+// `menuPortalTarget` — so it needs no portal styles. They are merged with it
+// rather than replaced, like any other caller's `styles`.
+const tableFilterStyles = {
+  menuList: (baseStyles) => ({
+    ...baseStyles,
+    height: '175px',
+  }),
 };
 
 export const useSelect = <
@@ -86,12 +108,7 @@ export const useSelect = <
         menuPortalTarget: undefined,
         menuPosition: undefined,
         menuPlacement: undefined,
-        styles: {
-          menuList: (baseStyles) => ({
-            ...baseStyles,
-            height: '175px',
-          }),
-        },
+        styles: tableFilterStyles,
       }
     : {};
 
@@ -120,6 +137,15 @@ export const useSelect = <
     ...tableFilterProps,
     components: composedComponents,
     ...props,
+    // Merged, not replaced: a caller passing its own `styles` would otherwise
+    // drop the portal z-index and the `pointer-events: auto` above, and the
+    // symptom — an unclickable menu inside the modal drawer — surfaces far
+    // from the call that caused it. Per-key overrides still win.
+    styles: {
+      ...defaultPortalingProps.styles,
+      ...(isTableFilter ? tableFilterStyles : {}),
+      ...props.styles,
+    },
     unstyled: true,
     classNames: classNamesConfig,
     isDisabled,
@@ -201,12 +227,7 @@ export const useAsyncSelect = <
         menuPortalTarget: undefined,
         menuPosition: undefined,
         menuPlacement: undefined,
-        styles: {
-          menuList: (baseStyles) => ({
-            ...baseStyles,
-            height: '175px',
-          }),
-        },
+        styles: tableFilterStyles,
       }
     : {};
 
@@ -236,6 +257,12 @@ export const useAsyncSelect = <
     ...tableFilterProps,
     components: composedComponents,
     ...props,
+    // Merged, not replaced — see the same block in `useSelect` above.
+    styles: {
+      ...defaultPortalingProps.styles,
+      ...(isTableFilter ? tableFilterStyles : {}),
+      ...props.styles,
+    },
     unstyled: true,
     classNames: classNamesConfig,
     isDisabled,
