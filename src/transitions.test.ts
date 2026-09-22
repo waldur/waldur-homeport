@@ -11,6 +11,7 @@ const mockTarget = vi.fn();
 const mockGo = vi.fn();
 const mockGetState = vi.fn();
 const mockGetCustomer = vi.fn();
+const mockGetAsync = vi.fn();
 
 const onBeforeHandlers: Array<{ criteria: any; callback: any }> = [];
 const onStartHandlers: Array<{ criteria: any; callback: any }> = [];
@@ -97,11 +98,18 @@ vi.mock('./user/passkeys/enforcement', () => ({
 
 import { attachTransitions } from './transitions';
 
-function createMockTransition(toStateName: string, params: any = {}) {
+function createMockTransition(
+  toStateName: string,
+  params: any = {},
+  // The destination path UI-Router builds for the transition, ancestors
+  // included. Nodes carry the resolvables the deep-link hook looks for.
+  treeChangesTo: any[] = [],
+) {
   return {
     to: () => ({ name: toStateName, data: {}, params: () => params }),
     from: () => ({ name: '' }),
     params: (type?: string) => (type === 'from' ? {} : params),
+    treeChanges: () => ({ to: treeChangesTo }),
     router: {
       stateService: {
         target: (...args) => mockTarget(...args),
@@ -113,7 +121,7 @@ function createMockTransition(toStateName: string, params: any = {}) {
       },
       stateRegistry: { get: vi.fn() },
     },
-    injector: () => ({ getAsync: vi.fn() }),
+    injector: () => ({ getAsync: (...args) => mockGetAsync(...args) }),
     options: () => ({}),
   };
 }
@@ -643,5 +651,74 @@ describe('Permission guard redirect', () => {
     expect(mockTarget).toHaveBeenCalledWith('profile-manage', undefined, {
       location: false,
     });
+  });
+});
+
+describe('Deep-link resolve await', () => {
+  let resolveHook: any;
+
+  // The path UI-Router builds for /organizations/<uuid>/billing/. The resolve
+  // that loads the organization sits on the `organization` ancestor, and the
+  // leaf is named with dot notation, so its declaration carries no `parent`
+  // to climb — the shape that used to slip through (#301).
+  const organizationBillingPath = [
+    { state: { name: 'layout' }, resolvables: [] },
+    {
+      state: { name: 'organization' },
+      resolvables: [{ token: 'fetchCustomer' }],
+    },
+    { state: { name: 'organization-billing' }, resolvables: [] },
+    { state: { name: 'organization-billing.billing' }, resolvables: [] },
+  ];
+
+  const projectIssuesPath = [
+    { state: { name: 'layout' }, resolvables: [] },
+    { state: { name: 'project' }, resolvables: [{ token: 'project' }] },
+    { state: { name: 'project.issues' }, resolvables: [] },
+  ];
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    onBeforeHandlers.length = 0;
+    onStartHandlers.length = 0;
+    onSuccessHandlers.length = 0;
+    onErrorHandlers.length = 0;
+
+    attachTransitions();
+
+    // The only onBefore registered without a `to` criteria.
+    resolveHook = onBeforeHandlers.find((h) => !h.criteria.to);
+    expect(resolveHook).toBeTruthy();
+  });
+
+  it('waits for an ancestor resolve when the state is named with dot notation', async () => {
+    await resolveHook.callback(
+      createMockTransition(
+        'organization-billing.billing',
+        { uuid: 'org' },
+        organizationBillingPath,
+      ),
+    );
+
+    expect(mockGetAsync).toHaveBeenCalledWith('fetchCustomer');
+  });
+
+  it('waits for the project resolve the same way', async () => {
+    await resolveHook.callback(
+      createMockTransition('project.issues', { uuid: 'p' }, projectIssuesPath),
+    );
+
+    expect(mockGetAsync).toHaveBeenCalledWith('project');
+  });
+
+  it('awaits nothing when the path carries no workspace resolve', async () => {
+    await resolveHook.callback(
+      createMockTransition('profile.details', {}, [
+        { state: { name: 'layout' }, resolvables: [] },
+        { state: { name: 'profile' }, resolvables: [{ token: 'something' }] },
+      ]),
+    );
+
+    expect(mockGetAsync).not.toHaveBeenCalled();
   });
 });
