@@ -29,19 +29,6 @@
   }
 }
 
-@mixin svg-icon-transition() {
-  svg {
-    [fill]:not(g) {
-      transition: fill 0.3s ease;
-    }
-  }
-  svg[fill] {
-    :not(g) {
-      transition: fill 0.3s ease;
-    }
-  }
-}
-
 @mixin svg-icon-size($size, $important: false) {
   svg {
     height: $size valueif($important, !important, null);
