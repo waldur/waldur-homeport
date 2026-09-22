@@ -1396,6 +1396,7 @@
       "feature_area": "integration"
     }
   },
+  "Accounts, user groups and access records tied to the offering. An account the target already has stays on the source.": {},
   "Accrued on": {
     "context": {
       "primary_ui_type": "title",
@@ -3992,6 +3993,7 @@
       "feature_area": "offering-users"
     }
   },
+  "Answers of the orders": {},
   "Anti-affinity": {
     "context": {
       "primary_ui_type": "label"
@@ -5943,6 +5945,12 @@
       "feature_area": "terminate"
     }
   },
+  "Area": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
   "Argentina": {},
   "ArgoCD Configuration": {
     "context": {
@@ -6939,6 +6947,7 @@
       "feature_area": "deploy"
     }
   },
+  "Autoprovisioning rules": {},
   "Availability": {
     "context": {
       "primary_ui_type": "title",
@@ -9461,6 +9470,11 @@
       "feature_area": "email"
     }
   },
+  "Checks run automatically right after the operation, in the same transaction. A failed check rolls nothing back: it tells you to undo.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Chemical engineering": {
     "context": {
       "primary_ui_type": "label"
@@ -10574,6 +10588,7 @@
       "feature_area": "plans"
     }
   },
+  "Component quotas": {},
   "Component type": {
     "context": {
       "feature_area": "usage-views"
@@ -11303,6 +11318,11 @@
   "Consent status breakdown": {
     "context": {
       "feature_area": "tos"
+    }
+  },
+  "Consequences the merge does not prevent. Each one has to be acknowledged before the merge may be run.": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Conservative (5%)": {
@@ -13560,6 +13580,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Customer credits": {},
   "Customer data": {
     "context": {
       "primary_ui_type": "title"
@@ -17322,6 +17343,11 @@
   "Empty = system default, -1 = unlimited": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Empty list": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Enable": {
@@ -22599,6 +22625,11 @@
       "feature_area": "update"
     }
   },
+  "How many invoice lines the merge rewrites under the chosen policy, and which usage summaries it recomputes afterwards.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "How many minutes before scheduled maintenance users should be notified.": {},
   "How many proposals will I need to review?": {
     "context": {
@@ -24779,6 +24810,8 @@
       "feature_area": "offering-merges"
     }
   },
+  "Invoice lines and their details": {},
+  "Invoice lines and their plan component": {},
   "Invoice no.": {
     "context": {
       "feature_area": "details"
@@ -26187,6 +26220,9 @@
       "feature_area": "project-detail"
     }
   },
+  "Limits of the autoprovisioning rules": {},
+  "Limits of the orders": {},
+  "Limits of the resources": {},
   "Limits the maximum number of resources from this offering allowed per project": {
     "context": {
       "feature_area": "integration"
@@ -26212,6 +26248,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Lines already written on invoices. They are not moved: they are rewritten in place, as far as the invoice policy allows.": {},
   "Link": {
     "context": {
       "primary_ui_type": "action_button",
@@ -27702,6 +27739,11 @@
   "Mappable User Fields": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Mapped plan components that cost a different amount on the target, so the merge changes what customers pay.": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Mapped public IPs": {
@@ -29385,6 +29427,7 @@
       "feature_area": "project-detail"
     }
   },
+  "Monthly usage summaries": {},
   "Monthly usage trend ({year})": {
     "context": {
       "variables": {
@@ -32643,6 +32686,11 @@
       "feature_area": "accounts"
     }
   },
+  "Nothing here": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Nothing is left running, so the credit stops being drawn. Any balance left at that point is still subject to the minimum monthly draw.": {
     "context": {
       "feature_area": "policy-watch"
@@ -33059,6 +33107,12 @@
       "feature_area": "blocks"
     }
   },
+  "Object": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
   "Object totals": {
     "context": {
       "feature_area": "rabbitmq"
@@ -33165,6 +33219,7 @@
       "feature_area": "reporting"
     }
   },
+  "Offering components": {},
   "Offering cost chart": {
     "context": {
       "feature_area": "expandable"
@@ -33230,6 +33285,7 @@
       "feature_area": "list"
     }
   },
+  "Offering files": {},
   "Offering group": {
     "context": {
       "primary_ui_type": "title",
@@ -33446,6 +33502,7 @@
       "feature_area": "integration"
     }
   },
+  "Offering role groups": {},
   "Offering shared?": {
     "context": {
       "feature_area": "details"
@@ -33497,6 +33554,7 @@
       "feature_area": "details"
     }
   },
+  "Offering user groups": {},
   "Offering user has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -33583,6 +33641,7 @@
       "feature_area": "proposals"
     }
   },
+  "Offerings requested in proposals": {},
   "Offerings shown": {
     "context": {
       "primary_ui_type": "title",
@@ -34628,6 +34687,7 @@
       "feature_area": "offering-merges"
     }
   },
+  "Order answers of the resources": {},
   "Order approval": {
     "context": {
       "primary_ui_type": "title",
@@ -35648,6 +35708,7 @@
       "feature_area": "service-providers"
     }
   },
+  "POSIX id pools": {},
   "POSIX identifiers": {
     "context": {
       "feature_area": "offering-users"
@@ -36386,6 +36447,7 @@
       "feature_area": "views"
     }
   },
+  "Per-user usage limits": {},
   "Percentage": {
     "context": {
       "primary_ui_type": "title",
@@ -37045,6 +37107,7 @@
       "feature_area": "resource-usage"
     }
   },
+  "Plan components": {},
   "Plan description": {
     "context": {
       "feature_area": "plan"
@@ -37136,6 +37199,9 @@
     }
   },
   "Plans below safety margin": {},
+  "Plans of the orders": {},
+  "Plans of the resources": {},
+  "Plans requested in proposals": {},
   "Plans with their own billing mode are not affected: {plans}.": {
     "context": {
       "variables": {
@@ -38368,6 +38434,7 @@
       "feature_area": "UserPendingActionsList"
     }
   },
+  "Previous plans of the orders": {},
   "Previous team members:": {
     "context": {
       "feature_area": "project"
@@ -39421,6 +39488,8 @@
       "feature_area": "project"
     }
   },
+  "Project resource limits": {},
+  "Project resource usages": {},
   "Project restrictions": {
     "context": {
       "feature_area": "actions"
@@ -41136,6 +41205,11 @@
   "Raw Usage Reset": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Raw payload": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Re-check": {
@@ -45194,6 +45268,7 @@
       "feature_area": "profiles"
     }
   },
+  "Role assignments": {},
   "Role availabilities": {
     "context": {
       "feature_area": "role-availabilities"
@@ -45681,6 +45756,16 @@
   "Rows per page": {
     "context": {
       "feature_area": "table"
+    }
+  },
+  "Rows that deliberately stay with the archived source offerings: their own plans and components, consents, offering-level policies and roles. They are not moved, and the sources are archived rather than deleted.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Rows the target already has": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Rule changes": {
@@ -48898,6 +48983,7 @@
       "feature_area": "vendorOfferings"
     }
   },
+  "Settings that describe an offering itself, such as its plans and components.": {},
   "Setup": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -49276,6 +49362,16 @@
   "Show start date field in project create dialog.": {
     "context": {
       "feature_area": "features"
+    }
+  },
+  "Show the affected rows": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Show the check details": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "Show the last 5 orders for the project": {},
@@ -50372,6 +50468,12 @@
   "Stay on current": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Stays on the source": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
     }
   },
   "Step": {
@@ -52991,7 +53093,13 @@
       "feature_area": "wizard"
     }
   },
+  "The merge leaves these rows on the archived source offering, either because nothing on the target matches them or because the target has an equivalent row already. A dash means the merge changes the row, in the way the subtitle names.": {},
   "The merge may have been deleted.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "The merge never wrote them, so there is nothing to list once it has run.": {
     "context": {
       "feature_area": "offering-merges"
     }
@@ -53308,6 +53416,7 @@
   },
   "The resource will be restored automatically when costs drop below the threshold.": {},
   "The resource will be unpaused automatically when costs drop below the threshold.": {},
+  "The resources the merge moves to the target, with the orders, limits and order answers that follow them.": {},
   "The response window for this assignment batch has passed.": {
     "context": {
       "feature_area": "review"
@@ -53348,6 +53457,11 @@
   "The room is still being processed. Retry becomes available once the operation appears stalled.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "The rows this count covers, with the value each one carries now and the value it carries after the merge.": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "The rule matches no SRAM group. Check the source, labels and group short names.": {
@@ -53906,6 +54020,16 @@
   "These restrictions are configured at the organization level and apply to all projects within this organization.": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "These rows describe the source offerings themselves. They are not moved and stay with the archived sources.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "These rows would have moved, but the target has an equivalent already, so they stay where they are.": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "These scopes are recommended based on the discovered claim mappings.": {
@@ -60675,6 +60799,11 @@
       "feature_area": "list"
     }
   },
+  "Unchanged: it stays on the archived source.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Unchecked": {
     "context": {
       "primary_ui_type": "label"
@@ -61879,6 +62008,10 @@
       "feature_area": "offerings"
     }
   },
+  "Usage policy components": {},
+  "Usage polling state": {},
+  "Usage records": {},
+  "Usage records, billing periods and quotas of past months. They follow the resources so history stays with them.": {},
   "Usage report": {
     "context": {
       "feature_area": "openportal"
@@ -61988,6 +62121,7 @@
       "feature_area": "resource-usage"
     }
   },
+  "Usages of the resources": {},
   "Use ORCID sandbox environment for testing. When enabled, uses sandbox URLs automatically.": {},
   "Use TRES billing units instead of raw TRES values": {
     "context": {
@@ -62310,6 +62444,7 @@
       "feature_area": "providers"
     }
   },
+  "User consents": {},
   "User could not be updated": {
     "context": {
       "primary_ui_type": "error_message",
@@ -63430,6 +63565,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "Verification check": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Verification details": {
     "context": {
       "feature_area": "organizations"
@@ -64405,7 +64545,19 @@
       "feature_area": "options"
     }
   },
+  "What changes": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
   "What do you want to achieve by using Waldur? Please describe your main objectives or expected outcomes.": {},
+  "What happens": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
   "What happens next": {
     "context": {
       "feature_area": "policy-watch"
@@ -64443,7 +64595,13 @@
       "feature_area": "sram"
     }
   },
-  "What moves to the target": {
+  "What it is": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
+  "What prevents the merge from running. Each one has to be resolved in the mappings or on the offerings themselves.": {
     "context": {
       "feature_area": "offering-merges"
     }
@@ -64453,6 +64611,13 @@
       "feature_area": "offering-merges"
     }
   },
+  "What the merge changes": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offering-merges"
+    }
+  },
+  "What the merge would do if it ran now. It is computed again when the merge runs, and the run is refused if anything changed since.": {},
   "What this proposal produced once it was accepted.": {
     "context": {
       "feature_area": "proposal"
@@ -64727,6 +64892,11 @@
     }
   },
   "Which invoices are rewritten": {},
+  "Which key of the target order form each source key is renamed to, so past answers keep their meaning.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Which price to use for invoice items: sell or buy": {
     "context": {
       "feature_area": "settings"
@@ -64739,6 +64909,17 @@
     }
   },
   "Which services are you interested in using? (Please select from the available service types.)": {},
+  "Which source plan and component each target plan and component takes over. The merge is refused while anything a moved row uses is left unmapped.": {},
+  "Which target component each source component becomes. A component used by usage, quotas or invoice lines must be mapped.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
+  "Which target plan each source plan becomes. A plan a moved resource or order uses must be mapped.": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "Who can access": {
     "context": {
       "feature_area": "data-access"
@@ -66123,6 +66304,11 @@
       "feature_area": "chat"
     }
   },
+  "affected rows": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "affiliated organizations": {
     "context": {
       "feature_area": "affiliated-organizations"
@@ -66235,6 +66421,11 @@
         }
       },
       "feature_area": "pubsub"
+    }
+  },
+  "becomes": {
+    "context": {
+      "feature_area": "offering-merges"
     }
   },
   "beyond connected and default routes": {
@@ -67113,6 +67304,11 @@
       "feature_area": "openstack-network"
     }
   },
+  "no": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "no credit drawn last month": {
     "context": {
       "feature_area": "views"
@@ -67123,6 +67319,7 @@
       "feature_area": "reports"
     }
   },
+  "none": {},
   "notifications": {
     "context": {
       "feature_area": "notifications"
@@ -67566,6 +67763,11 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "rows": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "rules": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -68001,6 +68203,11 @@
       "feature_area": "cluster"
     }
   },
+  "yes": {
+    "context": {
+      "feature_area": "offering-merges"
+    }
+  },
   "yr": {
     "context": {
       "feature_area": "renew-allocation"
@@ -68292,6 +68499,19 @@
       "feature_area": "steps"
     }
   },
+  "{count} affected rows of {title}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "offering-merges"
+    }
+  },
   "{count} affiliations enabled": {
     "context": {
       "variables": {
@@ -68445,6 +68665,15 @@
       "feature_area": "accounts"
     }
   },
+  "{count} field(s)": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
+    }
+  },
   "{count} fields": {
     "context": {
       "variables": {
@@ -68483,6 +68712,15 @@
         }
       },
       "feature_area": "pubsub"
+    }
+  },
+  "{count} item(s)": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{count} items were processed successfully.": {
@@ -68596,6 +68834,26 @@
         }
       },
       "feature_area": "settings"
+    }
+  },
+  "{count} of them stay on the source.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-merges"
+    }
+  },
+  "{count} of them stayed on the source; they are not in the list.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "offering-merges"
     }
   },
   "{count} of {reviewed} judged threads. Categories are derived from the marketplace catalog, so the set differs between deployments.": {

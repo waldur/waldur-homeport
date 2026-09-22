@@ -1,7 +1,9 @@
 import {
   InvoicePolicyEnum,
   OfferingMerge,
+  OfferingMergeEntry,
   OfferingMergeIssue,
+  OfferingMergePreview,
   OfferingMergeStateEnum,
   OfferingMergeSuggestedMapping,
   PatchedOfferingMergeRequest,
@@ -13,6 +15,8 @@ import {
   ACTIVE_STATES,
   CROSS_TYPE_MERGEABLE_TYPES,
   EDITABLE_STATES,
+  JOURNALLED_STATES,
+  KEPT_ON_SOURCE_EFFECT,
   POLL_INTERVAL,
   PREVIEWABLE_STATES,
 } from './constants';
@@ -179,6 +183,14 @@ export const isPreviewable = (state?: OfferingMergeStateEnum) =>
 export const isActive = (state?: OfferingMergeStateEnum) =>
   ACTIVE_STATES.includes(state);
 
+/**
+ * Whether the drill-down describes what was written rather than what is
+ * planned. Once a merge has run, the endpoint reads its journal, and a row the
+ * merge deliberately did not write is absent from it.
+ */
+export const listsFromJournal = (state?: OfferingMergeStateEnum) =>
+  JOURNALLED_STATES.includes(state);
+
 /** Poll while a task works on the record; stop on every settled state. */
 export const getRefetchInterval = (merge?: OfferingMerge): number | false =>
   merge && isActive(merge.state) ? POLL_INTERVAL : false;
@@ -280,7 +292,7 @@ export const getMergeStateLabel = (state: OfferingMergeStateEnum): string =>
  * Coverage entries are labelled "app.Model.field". Show the model and the
  * field so the reader can tell moved rows from rewritten references.
  */
-export const formatCoverageLabel = (label: string): string => {
+const formatCoverageLabel = (label: string): string => {
   const parts = label.split('.');
   if (parts.length < 3) {
     return label;
@@ -293,3 +305,264 @@ export const formatCoverageLabel = (label: string): string => {
 };
 
 export const RESOURCE_COUNT_KEY = 'marketplace.Resource.offering';
+
+/**
+ * Readable names for the coverage entries, built on call so the translation
+ * catalogue is loaded by the time they are read. An entry the map does not
+ * name falls back to its label, humanised.
+ */
+const getCoverageTitles = (): Record<string, string> => ({
+  'marketplace.Resource.offering': translate('Resources'),
+  'marketplace.Resource.plan': translate('Plans of the resources'),
+  'marketplace.Resource.limits': translate('Limits of the resources'),
+  'marketplace.Resource.current_usages': translate('Usages of the resources'),
+  'marketplace.Resource.attributes': translate(
+    'Order answers of the resources',
+  ),
+  'marketplace.Order.offering': translate('Orders'),
+  'marketplace.Order.plan': translate('Plans of the orders'),
+  'marketplace.Order.old_plan': translate('Previous plans of the orders'),
+  'marketplace.Order.limits': translate('Limits of the orders'),
+  'marketplace.Order.attributes': translate('Answers of the orders'),
+  'marketplace.ResourceProject.limits': translate('Project resource limits'),
+  'marketplace.ResourceProject.current_usages': translate(
+    'Project resource usages',
+  ),
+  'marketplace.ResourceLimitChangeRequest.requested_limits': translate(
+    'Limit change requests',
+  ),
+  'marketplace.ResourcePlanPeriod.plan': translate('Billing periods'),
+  'marketplace.ComponentUsage.component': translate('Usage records'),
+  'marketplace.ComponentUsageMonthly.component': translate(
+    'Monthly usage summaries',
+  ),
+  'marketplace.ComponentQuota.component': translate('Component quotas'),
+  'marketplace.ComponentUsagePollRecord.component': translate(
+    'Usage polling state',
+  ),
+  'marketplace.ComponentUserUsageLimit.component': translate(
+    'Per-user usage limits',
+  ),
+  'invoices.InvoiceItem.plan_component': translate(
+    'Invoice lines and their plan component',
+  ),
+  'invoices.InvoiceItem.details': translate('Invoice lines and their details'),
+  'marketplace.OfferingUser.offering': translate('Offering users'),
+  'marketplace.OfferingUserGroup.offering': translate('Offering user groups'),
+  'marketplace.OfferingRoleGroup.offering': translate('Offering role groups'),
+  'marketplace.PosixIdPool.offering': translate('POSIX id pools'),
+  'support.Issue.offering': translate('Support requests'),
+  'invoices.CustomerCredit.offerings': translate('Customer credits'),
+  'policy.CustomerUsagePolicyComponent.component': translate(
+    'Usage policy components',
+  ),
+  'proposal.RequestedOffering.offering': translate(
+    'Offerings requested in proposals',
+  ),
+  'proposal.RequestedOffering.plan': translate('Plans requested in proposals'),
+  'waldur_autoprovisioning.Rule.plan': translate('Autoprovisioning rules'),
+  'waldur_autoprovisioning.Rule.plan_limits': translate(
+    'Limits of the autoprovisioning rules',
+  ),
+  'waldur_openportal.ProjectTemplate.offerings': translate('Project templates'),
+  'marketplace.Plan.offering': translate('Plans'),
+  'marketplace.OfferingComponent.offering': translate('Offering components'),
+  'marketplace.PlanComponent.plan': translate('Plan components'),
+  'marketplace.UserOfferingConsent.offering': translate('User consents'),
+  'marketplace.OfferingTermsOfService.offering': translate('Terms of service'),
+  'marketplace.Screenshot.offering': translate('Screenshots'),
+  'marketplace.OfferingFile.offering': translate('Offering files'),
+  'permissions.UserRole.scope': translate('Role assignments'),
+});
+
+const getCoverageTitle = (label: string): string =>
+  getCoverageTitles()[label] ?? formatCoverageLabel(label);
+
+/** One coverage entry as the preview tables render it. */
+export interface MergeEntryRow {
+  label: string;
+  title: string;
+  areaTitle: string;
+  effectTitle: string;
+  count: number;
+  leftOnSource: number;
+  canListRows: boolean;
+}
+
+/** The entries of one area, in the order the API reported them. */
+interface MergeEntryArea {
+  key: string;
+  title: string;
+  rows: MergeEntryRow[];
+}
+
+export interface GroupedMergeEntries {
+  areas: MergeEntryArea[];
+  /**
+   * Entries whose rows stay behind. With the grouped payload these are the
+   * ``kept_on_source`` entries — configuration that describes the source
+   * offering. With the legacy payload they are something else entirely (see
+   * ``legacy``), so the two must not be described in the same words.
+   */
+  keptOnSource: MergeEntryRow[];
+  /**
+   * The preview predates the grouped payload, so area, effect and the meaning
+   * of ``keptOnSource`` are all unknown.
+   */
+  legacy: boolean;
+}
+
+const toEntryRow = (entry: OfferingMergeEntry): MergeEntryRow => ({
+  label: entry.label,
+  title: getCoverageTitle(entry.label),
+  areaTitle: entry.area_title,
+  effectTitle: entry.effect_title,
+  count: entry.count,
+  leftOnSource: entry.left_on_source,
+  canListRows: entry.can_list_rows,
+});
+
+const toLegacyRow = (label: string, count: number): MergeEntryRow => ({
+  label,
+  title: getCoverageTitle(label),
+  areaTitle: '',
+  effectTitle: '',
+  count,
+  leftOnSource: 0,
+  canListRows: false,
+});
+
+const positiveEntries = (counts: Record<string, number> | undefined) =>
+  Object.entries(counts ?? {}).filter(([, count]) => count > 0);
+
+/**
+ * A preview stored before the API grouped its counts carries only the two flat
+ * maps. Show them as one unclassified group rather than an empty panel.
+ */
+const groupLegacyCounts = (
+  preview: OfferingMergePreview,
+): GroupedMergeEntries => {
+  const counts = positiveEntries(preview?.counts);
+  return {
+    areas: counts.length
+      ? [
+          {
+            key: 'counts',
+            title: translate('What the merge changes'),
+            rows: counts.map(([label, count]) => toLegacyRow(label, count)),
+          },
+        ]
+      : [],
+    // In the legacy payload left_on_source counts collisions: rows that would
+    // have moved, but the target has an equivalent already. That is not the
+    // offering configuration the grouped payload keeps on the source, so the
+    // view titles this section differently when the flag is set.
+    keptOnSource: positiveEntries(preview?.left_on_source).map(
+      ([label, count]) => toLegacyRow(label, count),
+    ),
+    legacy: true,
+  };
+};
+
+/**
+ * The preview's entries by area, in the order the API lists them, with the
+ * entries that stay on the source kept apart from the ones that move.
+ */
+export const groupMergeEntries = (
+  preview: OfferingMergePreview,
+): GroupedMergeEntries => {
+  const entries = (preview?.entries ?? []).filter((entry) => entry.count > 0);
+  if (entries.length === 0) {
+    return groupLegacyCounts(preview);
+  }
+  const areas: MergeEntryArea[] = [];
+  const keptOnSource: MergeEntryRow[] = [];
+  entries.forEach((entry) => {
+    const row = toEntryRow(entry);
+    if (entry.effect === KEPT_ON_SOURCE_EFFECT) {
+      keptOnSource.push(row);
+      return;
+    }
+    const area = areas.find((item) => item.key === entry.area);
+    if (area) {
+      area.rows.push(row);
+    } else {
+      areas.push({ key: entry.area, title: entry.area_title, rows: [row] });
+    }
+  });
+  return { areas, keptOnSource, legacy: false };
+};
+
+/** A details key as a label: "invoice_items" becomes "Invoice items". */
+export const humanizeDetailsKey = (key: string): string => {
+  const words = key.replace(/_/g, ' ').trim();
+  return words ? `${words.charAt(0).toUpperCase()}${words.slice(1)}` : key;
+};
+
+const summarizeDetailsValue = (value: unknown): string => {
+  if (value === null || value === undefined) {
+    return translate('none');
+  }
+  if (Array.isArray(value)) {
+    return translate('{count} item(s)', { count: value.length });
+  }
+  if (typeof value === 'object') {
+    return translate('{count} field(s)', {
+      count: Object.keys(value).length,
+    });
+  }
+  if (typeof value === 'number') {
+    return value.toLocaleString();
+  }
+  if (typeof value === 'boolean') {
+    return value ? translate('yes') : translate('no');
+  }
+  return String(value);
+};
+
+/** The number of top-level details keys a row summary names before eliding. */
+const SUMMARY_KEYS = 3;
+
+/**
+ * One line describing a check's details, so the common case is readable in the
+ * table and only an interesting check needs the dialog.
+ */
+export const summarizeCheckDetails = (
+  details: Record<string, unknown> | undefined,
+): string => {
+  const entries = Object.entries(details ?? {});
+  if (entries.length === 0) {
+    return '';
+  }
+  const summary = entries
+    .slice(0, SUMMARY_KEYS)
+    .map(
+      ([key, value]) =>
+        `${humanizeDetailsKey(key)}: ${summarizeDetailsValue(value)}`,
+    )
+    .join(', ');
+  return entries.length > SUMMARY_KEYS ? `${summary}…` : summary;
+};
+
+/**
+ * One line per area saying what its rows are about, for the help bubble on
+ * the section heading. An area the map does not know shows no bubble.
+ */
+export const getAreaHelp = (area: string): string | undefined =>
+  ({
+    resources_and_orders: translate(
+      'The resources the merge moves to the target, with the orders, limits and order answers that follow them.',
+    ),
+    billing_history: translate(
+      'Usage records, billing periods and quotas of past months. They follow the resources so history stays with them.',
+    ),
+    invoices: translate(
+      'Lines already written on invoices. They are not moved: they are rewritten in place, as far as the invoice policy allows.',
+    ),
+    accounts_and_access: translate(
+      'Accounts, user groups and access records tied to the offering. An account the target already has stays on the source.',
+    ),
+    offering_configuration: translate(
+      'Settings that describe an offering itself, such as its plans and components.',
+    ),
+  })[area];

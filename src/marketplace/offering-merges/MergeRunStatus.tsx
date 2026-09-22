@@ -8,13 +8,17 @@ import {
 
 import { AlertItem } from 'waldur-ui';
 
+import { BaseButton } from '@/core/buttons/BaseButton';
 import { formatDateTime } from '@/core/dateUtils';
 import { ProgressBar } from '@/core/ProgressBar';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
+import { renderFieldOrDash } from '@/table/utils';
 
+import { MergeCheckDetailsDialog } from './MergeCheckDetailsDialog';
 import { StaticTable } from './StaticTable';
-import { isActive } from './utils';
+import { isActive, summarizeCheckDetails } from './utils';
 
 const PassedBadge: FC<{ passed: boolean }> = ({ passed }) => (
   <StateIndicator
@@ -25,9 +29,32 @@ const PassedBadge: FC<{ passed: boolean }> = ({ passed }) => (
   />
 );
 
-const formatDetails = (details: Record<string, unknown>) => {
-  const entries = Object.entries(details ?? {});
-  return entries.length ? JSON.stringify(details) : '';
+/**
+ * The details as one line, opening the dialog that renders them in full. The
+ * payloads are nested objects; a row of raw JSON truncated mid-value is what
+ * this replaces.
+ */
+const CheckDetails: FC<{ check: OfferingMergeCheck }> = ({ check }) => {
+  const { openDialog } = useModal();
+  const summary = summarizeCheckDetails(check.details);
+  if (!summary) {
+    return <>{renderFieldOrDash(null)}</>;
+  }
+  return (
+    <BaseButton
+      variant="text-primary"
+      size="sm"
+      className="p-0 text-start text-truncate mw-100"
+      label={summary}
+      tooltip={translate('Show the check details')}
+      onClick={() =>
+        openDialog(MergeCheckDetailsDialog, {
+          resolve: { check },
+          size: 'lg',
+        })
+      }
+    />
+  );
 };
 
 export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
@@ -78,6 +105,9 @@ const VerificationReport: FC<{
 }> = ({ title, report, tableId }) => (
   <StaticTable<OfferingMergeCheck>
     table={tableId}
+    help={translate(
+      'Checks run automatically right after the operation, in the same transaction. A failed check rolls nothing back: it tells you to undo.',
+    )}
     title={
       <span className="d-flex align-items-center gap-3">
         {title}
@@ -100,9 +130,7 @@ const VerificationReport: FC<{
       },
       {
         title: translate('Details'),
-        render: ({ row }) => (
-          <span className="fs-8 text-muted">{formatDetails(row.details)}</span>
-        ),
+        render: ({ row }) => <CheckDetails check={row} />,
         ellipsis: true,
       },
     ]}

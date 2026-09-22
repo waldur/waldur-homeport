@@ -1,0 +1,28 @@
+/* The affected rows hold snapshot values: component types, plan names and
+   whole rendered documents. Two things have to be true for them to be
+   readable.
+
+   The column widths must hold. With the default `table-layout: auto` a single
+   long identifier decides the column's width, which is how "Object" ended up
+   taking half the dialog. Fixing the layout makes the colgroup percentages
+   the whole story.
+
+   And a value must wrap at its spaces. Bootstrap's `.text-break` sets
+   `word-break: break-word` as well as `overflow-wrap`, which splits inside an
+   identifier even when there is a space to wrap at
+   ("hours_during_working_hour / s (Premium)"). `overflow-wrap` on its own
+   keeps the token whole and only splits one that cannot fit a line by
+   itself — which, with a fixed layout, is the rare case rather than the
+   normal one. */
+.merge-affected-table {
+  table {
+    table-layout: fixed;
+  }
+
+  th,
+  td {
+    overflow-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+  }
+}

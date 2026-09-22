@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { OfferingMerge } from 'waldur-js-client';
+import {
+  OfferingMerge,
+  OfferingMergeEntry,
+  OfferingMergePreview,
+} from 'waldur-js-client';
 
 import { POLL_INTERVAL } from './constants';
 import {
@@ -10,7 +14,9 @@ import {
   getPresetSuggestion,
   getRefetchInterval,
   getUnknownAnswerKeys,
+  groupMergeEntries,
   prefillMappings,
+  summarizeCheckDetails,
 } from './utils';
 
 const PREVIEW = {
@@ -250,5 +256,146 @@ describe('getPresetSuggestion', () => {
     expect(
       getPresetSuggestion(null, presetSelection, presetSelection),
     ).toBeUndefined();
+  });
+});
+
+const entry = (overrides: Partial<OfferingMergeEntry>): OfferingMergeEntry =>
+  ({
+    label: 'marketplace.Resource.offering',
+    area: 'resources_and_orders',
+    area_title: 'Resources and orders',
+    effect: 'moved',
+    effect_title: 'Moved to the target',
+    count: 3,
+    left_on_source: 0,
+    can_list_rows: true,
+    ...overrides,
+  }) as OfferingMergeEntry;
+
+const previewOf = (
+  overrides: Partial<OfferingMergePreview>,
+): OfferingMergePreview =>
+  ({ ...PREVIEW, ...overrides }) as OfferingMergePreview;
+
+describe('groupMergeEntries', () => {
+  it('groups by area in the order the API lists the entries', () => {
+    const { areas } = groupMergeEntries(
+      previewOf({
+        entries: [
+          entry({
+            label: 'marketplace.ComponentUsage.component',
+            area: 'billing_history',
+            area_title: 'Billing history',
+          }),
+          entry({}),
+          entry({ label: 'marketplace.Order.offering' }),
+        ],
+      }),
+    );
+    expect(areas.map((area) => area.key)).toEqual([
+      'billing_history',
+      'resources_and_orders',
+    ]);
+    expect(areas[1].rows.map((row) => row.label)).toEqual([
+      'marketplace.Resource.offering',
+      'marketplace.Order.offering',
+    ]);
+    expect(areas[1].rows[0].title).toBe('Resources');
+  });
+
+  it('keeps the entries that stay on the source out of the areas', () => {
+    const { areas, keptOnSource, legacy } = groupMergeEntries(
+      previewOf({
+        entries: [
+          entry({}),
+          entry({
+            label: 'marketplace.Plan.offering',
+            area: 'offering_configuration',
+            area_title: 'Offering configuration',
+            effect: 'kept_on_source',
+            effect_title: 'Kept on the archived source',
+          }),
+        ],
+      }),
+    );
+    expect(areas).toHaveLength(1);
+    expect(areas[0].rows.map((row) => row.label)).toEqual([
+      'marketplace.Resource.offering',
+    ]);
+    expect(keptOnSource.map((row) => row.label)).toEqual([
+      'marketplace.Plan.offering',
+    ]);
+    expect(keptOnSource[0].areaTitle).toBe('Offering configuration');
+    expect(legacy).toBe(false);
+  });
+
+  it('drops the entries a merge does not touch', () => {
+    const { areas } = groupMergeEntries(
+      previewOf({
+        entries: [
+          entry({}),
+          entry({
+            label: 'marketplace.Order.offering',
+            count: 0,
+          }),
+        ],
+      }),
+    );
+    expect(areas[0].rows).toHaveLength(1);
+  });
+
+  it('falls back to the flat counts of a preview stored before the grouping', () => {
+    const { areas, keptOnSource, legacy } = groupMergeEntries(
+      previewOf({
+        entries: [],
+        counts: { 'marketplace.Resource.offering': 3 },
+        left_on_source: { 'marketplace.OfferingUser.offering': 1 },
+      }),
+    );
+    expect(areas).toHaveLength(1);
+    expect(areas[0].rows[0]).toMatchObject({
+      label: 'marketplace.Resource.offering',
+      count: 3,
+      // Nothing is known about the effect, so nothing may be drilled into.
+      canListRows: false,
+    });
+    // The old payload counts collisions in left_on_source - rows the target
+    // has an equivalent of - not the configuration a merge keeps on the
+    // source, so the view must not describe them in those words.
+    expect(legacy).toBe(true);
+    expect(keptOnSource[0]).toMatchObject({
+      label: 'marketplace.OfferingUser.offering',
+      count: 1,
+    });
+  });
+});
+
+describe('summarizeCheckDetails', () => {
+  it('names the first keys and says how much each holds', () => {
+    expect(
+      summarizeCheckDetails({
+        moved_resources: 12000,
+        offerings: { a: 1, b: 2 },
+        missing: ['x'],
+      }),
+    ).toBe(
+      `Moved resources: ${(12000).toLocaleString()}, Offerings: 2 field(s), Missing: 1 item(s)`,
+    );
+  });
+
+  it('elides the rest of a wide payload', () => {
+    const summary = summarizeCheckDetails({
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4,
+    });
+    expect(summary.endsWith('…')).toBe(true);
+    expect(summary).not.toContain('D:');
+  });
+
+  it('has nothing to say about an empty payload', () => {
+    expect(summarizeCheckDetails({})).toBe('');
+    expect(summarizeCheckDetails(undefined)).toBe('');
   });
 });
