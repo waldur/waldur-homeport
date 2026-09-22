@@ -16,46 +16,60 @@ import { AddProjectUserButton } from './AddProjectUserButton';
 import { DeleteProjectUserButton } from './DeleteProjectUserButton';
 import { EditProjectUserButton } from './EditProjectUserButton';
 
-const RowActions = ({ row, refetch, project }) => {
+type CustomerProjectGrant = CustomerUser['projects'][number];
+
+export type ProjectGrantRow = CustomerProjectGrant & {
+  uuid: string;
+  project_uuid: string;
+};
+
+// Composite uuid (project uuid + role name) survives the table's entity-dict
+// de-dup in `transformRows` (src/table/utils.tsx); without it, two grants on
+// the same project with different roles collapse to one row. role_name is the
+// discriminator because NestedProjectPermission has no role_uuid.
+export const toProjectGrantRow = (
+  grant: CustomerProjectGrant,
+): ProjectGrantRow => ({
+  ...grant,
+  project_uuid: grant.uuid ?? '',
+  uuid: `${grant.uuid ?? ''}-${grant.role_name ?? ''}`,
+});
+
+export const RowActions = ({
+  row,
+  refetch,
+  project,
+}: {
+  row: CustomerUser;
+  refetch;
+  project: ProjectGrantRow;
+}) => {
+  // The row's uuid is the composite key, so an action building an API path
+  // from it would hit /api/projects/<uuid>-PROJECT.ADMIN/ and 404.
+  const grant = { ...project, uuid: project.project_uuid };
+
   return (
     <ActionsDropdownComponent>
-      <EditProjectUserButton
-        customer={row}
-        project={project}
-        refetch={refetch}
-      />
+      <EditProjectUserButton customer={row} project={grant} refetch={refetch} />
 
       <DeleteProjectUserButton
         customer={row}
-        project={project}
+        project={grant}
         refetch={refetch}
       />
     </ActionsDropdownComponent>
   );
 };
 
-type CustomerProjectGrant = CustomerUser['projects'][number];
-
 export const CustomerUsersListExpandableRow: FunctionComponent<{
   row: CustomerUser;
   refetch;
 }> = ({ row, refetch }) => {
-  // Composite uuid (project_uuid + role_name) survives the table's
-  // entity-dict de-dup in `transformRows` (src/table/utils.tsx);
-  // without it, two grants on the same project with different roles
-  // collapse to one row. Original project uuid preserved as
-  // `project_uuid` for the dashboard link. role_name is the
-  // discriminator because NestedProjectPermission has no role_uuid.
-  const tableProps = useTable<
-    CustomerProjectGrant & { uuid: string; project_uuid: string }
-  >({
+  // `project_uuid` is what the dashboard link below needs.
+  const tableProps = useTable<ProjectGrantRow>({
     table: 'CustomerUsersListExpandableRow-' + row.uuid,
     fetchData: createClientPaginatedFetcher(
-      (row.projects ?? []).map((p) => ({
-        ...p,
-        project_uuid: p.uuid ?? '',
-        uuid: `${p.uuid ?? ''}-${p.role_name ?? ''}`,
-      })),
+      (row.projects ?? []).map(toProjectGrantRow),
     ),
   });
 
@@ -70,7 +84,7 @@ export const CustomerUsersListExpandableRow: FunctionComponent<{
     </div>
   ) : (
     <ExpandableContainer hasMultiSelect>
-      <Table<CustomerProjectGrant & { uuid: string; project_uuid: string }>
+      <Table<ProjectGrantRow>
         {...tableProps}
         rowKey="uuid"
         columns={[
