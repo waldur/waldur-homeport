@@ -803,6 +803,15 @@ React state backing it at all).
   `aria-describedby={undefined}` opts out of the paired description warning,
   since drawer content is arbitrary and has no natural description. Both are
   strict a11y additions — the old drawer had no ARIA role at all.
+- **Moving `.drawer-on` into React's `className` silently broke the shell
+  classes.** They were added with `classList.add` (by the `open*` helpers and a
+  `useDrawerShellClass` hook), which only survives while React leaves the
+  attribute alone. Closing changes the `className` string, React rewrites the
+  whole attribute, and the floating card lost its class for the entire
+  slide-out — dropping to the default full-height panel over the page header.
+  The hook's delayed removal never had anything left to remove. Shell classes
+  are now a `shellClass` drawer prop that `DrawerRoot` renders and
+  `closeDrawer` keeps; nothing may add a class to `#kt_drawer` by hand.
 
 ### Testing gotcha: `ResizeObserver` and animation timing
 

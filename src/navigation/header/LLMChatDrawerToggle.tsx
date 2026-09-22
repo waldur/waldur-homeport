@@ -10,7 +10,7 @@ import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isAnonymousVisitor, isAssistantEnabled } from '@/ai-assistant/utils';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
 import { BaseButton } from '@/core/buttons/BaseButton';
-import { useDrawer } from '@/drawer/actions';
+import { useDrawer, useIsDrawerOpenWith } from '@/drawer/actions';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { isDrawerOpen, isDrawerOpenWithClass } from '@/drawer/utils';
 import { translate } from '@/i18n';
@@ -27,6 +27,7 @@ import { HeaderButtonBullet } from './HeaderButtonBullet';
  */
 export const LLMChatDrawerToggle: React.FC = () => {
   const { openDrawer, closeDrawer } = useDrawer();
+  const isOpen = useIsDrawerOpenWith(DRAWER_SHELL_CLASS.ai);
   const user = useUser();
   const prevUserUuid = useRef(user?.uuid);
   const { state } = useCurrentStateAndParams();
@@ -121,6 +122,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
       label={label}
       iconNode={<SparkleIcon weight="bold" />}
       onClick={toggleChatDrawer}
+      data-drawer-toggle=""
       data-state={dataState}
       data-testid="llm-chat-drawer-toggle"
     />
@@ -131,6 +133,8 @@ export const LLMChatDrawerToggle: React.FC = () => {
         type="button"
         onClick={toggleChatDrawer}
         aria-label={label}
+        aria-expanded={isOpen}
+        data-drawer-toggle
         data-state={dataState}
         data-testid="llm-chat-drawer-toggle"
         className="position-relative btn-nav-item"

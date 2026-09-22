@@ -85,13 +85,25 @@ export const DrawerRoot: FunctionComponent = () => {
       <Dialog.Content
         ref={contentRef}
         id="kt_drawer"
-        className={classNames('bg-body drawer drawer-end', {
-          'drawer-on': isOpen,
-        })}
+        className={classNames(
+          'bg-body drawer drawer-end',
+          drawerProps.shellClass,
+          { 'drawer-on': isOpen },
+        )}
         style={{ '--drawer-width': drawerProps.width } as React.CSSProperties}
         aria-describedby={undefined}
         onPointerDownOutside={(event) => {
           if (event.detail.originalEvent === insidePointerDownRef.current) {
+            event.preventDefault();
+          }
+          // A floating drawer leaves the header's drawer toggles live (see
+          // _shell.scss). Their click closes or switches the drawer; dismissing
+          // it here first would have that same click open it again.
+          const target = event.detail.originalEvent.target as Element | null;
+          if (
+            drawerProps.shellClass &&
+            target?.closest('[data-drawer-toggle]')
+          ) {
             event.preventDefault();
           }
         }}

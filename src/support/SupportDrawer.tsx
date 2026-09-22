@@ -4,9 +4,7 @@ import { Nav, Tab } from 'react-bootstrap';
 
 import { Badge } from 'waldur-ui';
 
-import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
-import { useDrawerShellClass } from '@/drawer/useDrawerShellClass';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { MatrixChatPanel } from '@/matrix/chat/MatrixChatPanel';
@@ -60,11 +58,6 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
     if (isFreshDeepLink) consumedDeepLinkRef.current = deepLinkKey;
     if (activeTab !== storedTab) setSupportTab(activeTab);
   }, [isFreshDeepLink, deepLinkKey, activeTab, storedTab]);
-
-  // openSupportDrawer adds this before the slide-in; the hook re-asserts it on
-  // mount and removes it on close. Width and data-expanded are owned by the
-  // toolbar's useDrawerExpand cleanup.
-  useDrawerShellClass(DRAWER_SHELL_CLASS.support);
 
   return (
     <Tab.Container

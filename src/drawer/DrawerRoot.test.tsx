@@ -76,7 +76,36 @@ const renderDrawer = () => {
     open: () => openDrawer(DrawerContent, { title: 'Panel' }),
     openDirty: () => openDrawer(DirtyDrawerContent, { title: 'Panel' }),
     openOverlays: () => openDrawer(OverlayDrawerContent, { title: 'Panel' }),
+    openShelled: () =>
+      openDrawer(DrawerContent, {
+        title: 'Panel',
+        shellClass: 'ai-chat-drawer-active',
+      }),
   };
+};
+
+/**
+ * jsdom applies no stylesheets, so Presence sees no exit animation and drops
+ * #kt_drawer the instant it closes. Report the slide-in/slide-out keyframes
+ * _shell.scss gives it, read live off the class list the way a browser's
+ * computed style is, so the drawer stays mounted through the slide-out.
+ */
+const simulateSlideAnimations = () => {
+  const getComputedStyle = window.getComputedStyle;
+  return vi
+    .spyOn(window, 'getComputedStyle')
+    .mockImplementation((element, pseudo) => {
+      const styles = getComputedStyle(element, pseudo);
+      if (element.id !== 'kt_drawer') return styles;
+      return new Proxy(styles, {
+        get: (target, key) =>
+          key === 'animationName'
+            ? element.classList.contains('drawer-on')
+              ? 'kt-drawer-slide-in'
+              : 'kt-drawer-slide-out'
+            : Reflect.get(target, key),
+      });
+    });
 };
 
 /**
@@ -153,6 +182,64 @@ describe('DrawerRoot', () => {
     });
     // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
     expect(document.querySelector('.drawer-overlay')).not.toBeInTheDocument();
+  });
+
+  // The floating-card class is what keeps the drawer below the page header.
+  // Losing it mid slide-out snaps the card to full viewport height for the
+  // length of the animation, covering the header it had been sitting under.
+  it('keeps the shell class through the slide-out', async () => {
+    const user = userEvent.setup();
+    const computedStyle = simulateSlideAnimations();
+    const { openShelled } = renderDrawer();
+    openShelled();
+    await screen.findByTestId('drawer-content');
+    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+    expect(document.getElementById('kt_drawer')).toHaveClass(
+      'ai-chat-drawer-active',
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Close' }));
+
+    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+    const drawer = document.getElementById('kt_drawer');
+    expect(drawer).not.toHaveClass('drawer-on');
+    expect(drawer).toHaveClass('ai-chat-drawer-active');
+    computedStyle.mockRestore();
+  });
+
+  // A floating drawer leaves the header's drawer toggles clickable. Their own
+  // click has to decide: dismissing the drawer on the pointerdown would let
+  // that same click reopen it, or skip switching to another drawer.
+  it('leaves a floating drawer to its header toggle', async () => {
+    const user = userEvent.setup();
+    const onToggle = vi.fn();
+    let openDrawer!: ReturnType<typeof useDrawer>['openDrawer'];
+    render(
+      <DrawerProvider>
+        <OpenButton onOpen={(fn) => (openDrawer = fn)} />
+        {/* Inline stand-in for the _shell.scss rule jsdom doesn't load. */}
+        <button
+          type="button"
+          data-drawer-toggle
+          onClick={onToggle}
+          style={{ pointerEvents: 'auto' }}
+        >
+          Support
+        </button>
+        <DrawerRoot />
+      </DrawerProvider>,
+    );
+    openDrawer(DrawerContent, {
+      title: 'Panel',
+      shellClass: 'ai-chat-drawer-active',
+    });
+    await screen.findByTestId('drawer-content');
+
+    await user.click(screen.getByText('Support'));
+
+    expect(onToggle).toHaveBeenCalled();
+    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+    expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
   });
 
   it('closes when the content calls the injected close prop', async () => {

@@ -20,10 +20,9 @@ interface OpenUnifiedChatDrawerOptions {
 type OpenDrawer = ReturnType<typeof useDrawer>['openDrawer'];
 
 /**
- * Single entry point for opening the AI assistant drawer. The class on
- * #kt_drawer and the toolbar must be applied here in the toggle handler,
- * not in component lifecycle — otherwise the slide-in animation runs
- * before the styles are in place.
+ * Single entry point for opening the AI assistant drawer. The shell class and
+ * toolbar go in with the open, not from the panel's lifecycle — the panel is
+ * lazy, and the slide-in would otherwise start before its styles are in place.
  */
 export const openUnifiedChatDrawer = (
   openDrawer: OpenDrawer,
@@ -32,10 +31,10 @@ export const openUnifiedChatDrawer = (
   if (options.seedPrompt) {
     setPendingAssistantSeed(options.seedPrompt);
   }
-  document.getElementById('kt_drawer')?.classList.add(DRAWER_SHELL_CLASS.ai);
   openDrawer(UnifiedChatDrawer, {
     title: options.title ?? translate('AI assistant'),
     toolbar: LLMChatDrawerToolbar,
     width: '800px',
+    shellClass: DRAWER_SHELL_CLASS.ai,
   });
 };
