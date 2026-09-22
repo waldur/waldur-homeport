@@ -196,6 +196,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       class="my-1"
                     >
                       <button
+                        aria-label="Copy to clipboard"
                         class="text-btn"
                         type="button"
                       >
@@ -221,6 +222,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                         class="my-1 mx-2 text-hover-primary cursor-pointer d-inline z-index-1 position-relative"
                       >
                         <button
+                          aria-label="Copy to clipboard"
                           class="text-btn"
                           type="button"
                         >
@@ -252,6 +254,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       class="my-1 mx-2 text-hover-primary cursor-pointer d-inline z-index-1 position-relative"
                     >
                       <button
+                        aria-label="Copy to clipboard"
                         class="text-btn"
                         type="button"
                       >
@@ -283,9 +286,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                 <td
                   class="row-actions pinned pinned-end"
                 >
-                  <div
-                    aria-hidden="true"
-                  >
+                  <div>
                     <button
                       aria-expanded="false"
                       aria-haspopup="menu"

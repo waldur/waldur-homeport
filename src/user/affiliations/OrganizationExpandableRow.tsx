@@ -192,13 +192,13 @@ export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
             </Nav>
           </div>
           <Tab.Content className="overflow-auto">
-            <Tab.Pane eventKey="projects" unmountOnExit={true}>
+            <Tab.Pane eventKey="projects">
               <SummaryOrganizationProjects customer={props.row} />
             </Tab.Pane>
-            <Tab.Pane eventKey="resources" unmountOnExit={true}>
+            <Tab.Pane eventKey="resources">
               <SummaryResourcesTable scope={props.row} context="organization" />
             </Tab.Pane>
-            <Tab.Pane eventKey="team" unmountOnExit={true}>
+            <Tab.Pane eventKey="team">
               <SummaryTeamTable scope={props.row} context="organization" />
             </Tab.Pane>
           </Tab.Content>

@@ -293,6 +293,7 @@ const TokenSummary = ({ quota }) => {
               percent={percent ?? 0}
               height={4}
               className="flex-grow-1"
+              label={typeof p.label === 'string' ? p.label : undefined}
             />
             <span className="token-value">
               {percent !== null ? `${percent}%` : '∞'}

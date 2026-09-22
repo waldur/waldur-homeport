@@ -38,7 +38,11 @@ const OpenstackInstancesPageTable: FC = () => {
         summary && <OpenstackInstancesSummaryCards summary={summary} />
       )}
 
-      <Tab.Container activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
+      <Tab.Container
+        activeKey={activeTab}
+        onSelect={(k) => setActiveTab(k)}
+        unmountOnExit
+      >
         <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-6 border-0">
           <Nav.Item>
             <Nav.Link as="button" eventKey="instances">
@@ -53,10 +57,10 @@ const OpenstackInstancesPageTable: FC = () => {
         </Nav>
 
         <Tab.Content>
-          <Tab.Pane eventKey="instances" mountOnEnter unmountOnExit>
+          <Tab.Pane eventKey="instances" mountOnEnter>
             <OpenstackInstancesTable />
           </Tab.Pane>
-          <Tab.Pane eventKey="aggregated" mountOnEnter unmountOnExit>
+          <Tab.Pane eventKey="aggregated" mountOnEnter>
             <OpenstackInstancesAggregateView />
           </Tab.Pane>
         </Tab.Content>

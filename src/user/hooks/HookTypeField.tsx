@@ -31,6 +31,7 @@ export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
       defaultValue={defaultValue}
       value={input.value}
       onChange={input.onChange}
+      aria-label={translate('Hook type')}
     >
       {options.map((option) => (
         <ToggleButton

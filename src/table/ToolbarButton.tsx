@@ -65,6 +65,7 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
       size={size}
       onClick={onClick}
       disabled={isDisabled}
+      aria-label={isIconOnly ? effectiveTooltip : undefined}
     >
       {pending ? (
         <LoadingSpinnerSimple />

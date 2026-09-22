@@ -31,10 +31,10 @@ export const PlanExpandableRow: FC<OwnProps> = (props) => (
       </Nav>
 
       <Tab.Content className="overflow-auto">
-        <Tab.Pane eventKey="resources" unmountOnExit={true}>
+        <Tab.Pane eventKey="resources">
           <PlanResourcesTable {...props} />
         </Tab.Pane>
-        <Tab.Pane eventKey="components" unmountOnExit={true}>
+        <Tab.Pane eventKey="components">
           <PlanComponentsTable {...props} />
         </Tab.Pane>
       </Tab.Content>

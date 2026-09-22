@@ -26,6 +26,7 @@ export const MetadataGroupBy = ({
         name="groupBy"
         value={value}
         onChange={onChange}
+        aria-label={translate('Group by')}
       >
         {buttons.map((button) => (
           <ToggleButton

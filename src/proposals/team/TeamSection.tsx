@@ -146,7 +146,11 @@ export const TeamSection: FC<
           </Card.Header>
         )}
       <Card.Body className="pt-0">
-        <TableTabsContainer defaultActiveKey="users" className="min-h-175px">
+        <TableTabsContainer
+          defaultActiveKey="users"
+          unmountOnExit
+          className="min-h-175px"
+        >
           <div className="overflow-auto">
             <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
               <Nav.Item className="text-nowrap">
@@ -172,7 +176,7 @@ export const TeamSection: FC<
             </Nav>
           </div>
           <Tab.Content className="overflow-auto">
-            <Tab.Pane eventKey="users" unmountOnExit={true}>
+            <Tab.Pane eventKey="users">
               <UsersList
                 table={usersTable}
                 scope={props.scope}
@@ -189,7 +193,7 @@ export const TeamSection: FC<
                 roleSuffix={props.roleSuffix}
               />
             </Tab.Pane>
-            <Tab.Pane eventKey="invitations" unmountOnExit={true}>
+            <Tab.Pane eventKey="invitations">
               <InvitationsList
                 table={invitationsTable}
                 hideRole={hideRole}
@@ -198,7 +202,7 @@ export const TeamSection: FC<
                 fullWidth
               />
             </Tab.Pane>
-            <Tab.Pane eventKey="permissions" unmountOnExit={true}>
+            <Tab.Pane eventKey="permissions">
               <BaseEventsList
                 table={`permissions-log${props.scope.url}`}
                 filter={eventsFilter}

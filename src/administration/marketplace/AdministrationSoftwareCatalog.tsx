@@ -174,6 +174,7 @@ export const AdministrationSoftwareCatalog = () => {
           defaultActiveKey={defaultActiveKey}
           activeKey={activeKey}
           onSelect={handleSelect}
+          unmountOnExit
         >
           <Nav variant="tabs" className="nav-line-tabs mb-5">
             {TABS.map((tab) => (
@@ -183,16 +184,16 @@ export const AdministrationSoftwareCatalog = () => {
             ))}
           </Nav>
           <Tab.Content>
-            <Tab.Pane eventKey="catalogs" unmountOnExit>
+            <Tab.Pane eventKey="catalogs">
               <CatalogsTab />
             </Tab.Pane>
-            <Tab.Pane eventKey="general" unmountOnExit>
+            <Tab.Pane eventKey="general">
               <SettingsTab groupName={SETTINGS_GROUP_NAMES.general} />
             </Tab.Pane>
-            <Tab.Pane eventKey="eessi" unmountOnExit>
+            <Tab.Pane eventKey="eessi">
               <SettingsTab groupName={SETTINGS_GROUP_NAMES.eessi} />
             </Tab.Pane>
-            <Tab.Pane eventKey="spack" unmountOnExit>
+            <Tab.Pane eventKey="spack">
               <SettingsTab groupName={SETTINGS_GROUP_NAMES.spack} />
             </Tab.Pane>
           </Tab.Content>

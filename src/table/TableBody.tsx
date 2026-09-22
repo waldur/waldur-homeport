@@ -99,6 +99,7 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
         <button
           type="button"
           className="inline-filter btn btn-icon btn-sm btn-tertiary icon-align"
+          aria-label={translate('Add filter')}
         >
           <Tooltip label={translate('Add filter')} delayDuration={1000}>
             <FunnelSimpleIcon weight="bold" size={20} />
@@ -110,16 +111,16 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
         className="menu menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
       >
         <div className="menu-item">
-          <span
+          <button
+            type="button"
             className="menu-link px-5 py-3"
-            aria-hidden="true"
             onClick={callback}
           >
             <span className="menu-icon w-auto me-4">
               <SquareLogoIcon weight="bold" size={20} />
             </span>
             <span className="menu-title">{translate('Filter by')}</span>
-          </span>
+          </button>
         </div>
       </PopoverMenuContent>
     </RadixPopover.Root>
@@ -499,6 +500,7 @@ const TableRow = memo<TableRowProps>(
                   <FormCheck
                     name={fieldProps.input.name}
                     type={fieldType}
+                    aria-label={translate('Select row')}
                     className="form-check form-check-custom"
                     checked={isChecked}
                     onChange={handleFieldChange}
@@ -507,6 +509,7 @@ const TableRow = memo<TableRowProps>(
                 </>
               ) : (
                 <FormCheck
+                  aria-label={translate('Select row')}
                   className="form-check form-check-custom form-check-md"
                   checked={isChecked}
                   onChange={handleSelectRow}
@@ -543,9 +546,7 @@ const TableRow = memo<TableRowProps>(
             )}
             onClick={(e) => e.stopPropagation()}
           >
-            <div aria-hidden="true">
-              {React.createElement(rowActions, { row, fetch })}
-            </div>
+            <div>{React.createElement(rowActions, { row, fetch })}</div>
           </td>
         )}
       </tr>

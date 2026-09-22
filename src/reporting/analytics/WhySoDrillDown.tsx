@@ -263,6 +263,8 @@ const WhySoDrillDownTable: FC<{
         downClassName={classNames(
           sortColumn === column && sortOrder === 'desc' && 'text-primary',
         )}
+        upLabel={translate('Sort ascending')}
+        downLabel={translate('Sort descending')}
         className="ms-1"
       />
     );

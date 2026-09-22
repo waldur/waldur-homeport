@@ -280,6 +280,7 @@ export function SidebarMenuAccordion({
         )}
       >
         <Collapsible.Trigger
+          aria-label={typeof title === 'string' ? title : undefined}
           className={cn(
             sidebarMenuButtonVariants({ active: false }),
             'group',

@@ -8,6 +8,8 @@ interface CaretUpDownButtonsProps {
   downClassName?: string;
   upTestId?: string;
   downTestId?: string;
+  upLabel: string;
+  downLabel: string;
 }
 
 export const CaretUpDownButtons = (props: CaretUpDownButtonsProps) => {
@@ -17,6 +19,7 @@ export const CaretUpDownButtons = (props: CaretUpDownButtonsProps) => {
         type="button"
         data-testid={props.upTestId}
         onClick={props.onClickUp}
+        aria-label={props.upLabel}
         className={classNames('text-btn', props.upClassName)}
       >
         <svg width="16" height="8" fill="currentColor" viewBox="0 0 256 128">
@@ -27,6 +30,7 @@ export const CaretUpDownButtons = (props: CaretUpDownButtonsProps) => {
         type="button"
         data-testid={props.downTestId}
         onClick={props.onClickDown}
+        aria-label={props.downLabel}
         className={classNames('text-btn', props.downClassName)}
       >
         <svg width="16" height="8" fill="currentColor" viewBox="0 0 256 128">

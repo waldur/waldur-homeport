@@ -406,7 +406,7 @@ export const LoadBalancerExpandableRow: FC<LoadBalancerExpandableRowProps> = ({
           </Nav.Item>
         </Nav>
         <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="details" unmountOnExit>
+          <Tab.Pane eventKey="details">
             <ResourceSummaryBase resource={row} />
             <VipPortDetails
               vipPortUrl={row.vip_port}
@@ -414,16 +414,16 @@ export const LoadBalancerExpandableRow: FC<LoadBalancerExpandableRowProps> = ({
             />
             <FloatingIpDetails floatingIpUrl={row.attached_floating_ip} />
           </Tab.Pane>
-          <Tab.Pane eventKey="security-groups" unmountOnExit>
+          <Tab.Pane eventKey="security-groups">
             <SecurityGroupsTab
               loadBalancerUuid={row.uuid}
               vipPort={row.vip_port}
             />
           </Tab.Pane>
-          <Tab.Pane eventKey="listeners" unmountOnExit>
+          <Tab.Pane eventKey="listeners">
             <ListenersTable loadBalancerUuid={row.uuid} />
           </Tab.Pane>
-          <Tab.Pane eventKey="pools" unmountOnExit>
+          <Tab.Pane eventKey="pools">
             <PoolsTable loadBalancerUuid={row.uuid} />
           </Tab.Pane>
         </Tab.Content>

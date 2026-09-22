@@ -71,6 +71,7 @@ export function SidebarMenuButton({
     <Comp
       data-active={active}
       disabled={disabled}
+      aria-label={tooltip}
       className={cn(
         sidebarMenuButtonVariants({ active }),
         isSub && 'rounded-none',

@@ -41,6 +41,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
     <button
       className={classNames('text-btn', buttonClassName)}
       type="button"
+      aria-label={translate('Copy to clipboard')}
       onClick={(e) => onClick(e)}
     >
       <Tooltip label={translate('Copy to clipboard')}>

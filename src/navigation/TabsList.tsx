@@ -94,6 +94,8 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
     <NavMenu open={open} onOpenChange={setOpen} modal={false}>
       <RadixDropdownMenu.Trigger asChild>
         <span
+          role="button"
+          tabIndex={0}
           className={classNames('menu-item me-0 me-lg-2', { here: active })}
           {...hoverHandlers}
         >

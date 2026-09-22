@@ -158,6 +158,7 @@ const ExtendForm: FC<ExtendFormProps> = ({
                 const offset = QUICK_OFFSETS.find((o) => o.key === value);
                 if (offset) applyQuickOffset(offset.key, offset.minutes);
               }}
+              aria-label={translate('Quick extend')}
             >
               {QUICK_OFFSETS.map((offset) => (
                 <ToggleButton

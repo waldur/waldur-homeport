@@ -117,6 +117,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
           defaultActiveKey={defaultActiveKey}
           activeKey={activeKey}
           onSelect={(key) => key && handleSelect(key)}
+          unmountOnExit
         >
           {enableSearch && (
             <div className="d-flex justify-content-end mb-3">
@@ -151,7 +152,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
           </Nav>
           <Tab.Content>
             {processedTabs.map((tab) => (
-              <Tab.Pane key={tab.id} eventKey={tab.id} unmountOnExit>
+              <Tab.Pane key={tab.id} eventKey={tab.id}>
                 {tab.fields.length > 0 ? (
                   <FormTable hideActions={hideActions}>{tab.fields}</FormTable>
                 ) : (

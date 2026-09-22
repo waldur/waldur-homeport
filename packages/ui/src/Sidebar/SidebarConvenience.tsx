@@ -296,6 +296,7 @@ export const SidebarCallToAction = ({
       disabledTooltip={disabledTooltip}
       onClick={disabled ? undefined : onClick}
       data-testid={dataTestId}
+      aria-label={typeof label === 'string' ? label : undefined}
       className="justify-center gap-2 rounded-md border-2 border-[var(--nav-item-icon)] text-[var(--nav-item-icon)] hover:text-[var(--nav-item-text)]"
     >
       {icon}
@@ -355,6 +356,7 @@ export const SidebarModeCard = ({
   <button
     type="button"
     onClick={onClick}
+    aria-label={subtitle ? `${title}: ${subtitle}` : title}
     className="flex w-full items-center gap-3 rounded-modal bg-[var(--surface-card-bg)] p-3 text-left group-data-[collapsible=icon]/panel:size-9 group-data-[collapsible=icon]/panel:justify-center group-data-[collapsible=icon]/panel:rounded-lg group-data-[collapsible=icon]/panel:p-0"
   >
     {icon && (

@@ -58,7 +58,9 @@ const HealthInfoItem = ({
           {message}
         </span>
       </div>
-      <div className="health-title fw-semibold text-muted small">{title}</div>
+      <div className="health-title fw-semibold text-gray-700 small">
+        {title}
+      </div>
     </div>
   );
 

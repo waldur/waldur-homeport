@@ -59,6 +59,7 @@ export const ProjectClassificationPage: FC = () => {
           name="activeTab"
           value={activeTab}
           onChange={(v) => setActiveTab(v)}
+          aria-label={translate('Classification view')}
         >
           <ToggleButton
             id="tbg-oecd"

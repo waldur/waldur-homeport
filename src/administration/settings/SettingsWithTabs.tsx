@@ -120,6 +120,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
           defaultActiveKey={defaultActiveKey}
           activeKey={activeKey}
           onSelect={handleSelect}
+          unmountOnExit
         >
           <Nav variant="tabs" className="nav-line-tabs mb-5">
             {tabs.map((tab) => {
@@ -149,7 +150,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
           </Nav>
           <Tab.Content>
             {filteredGroups.map(({ tab, items }) => (
-              <Tab.Pane key={tab.key} eventKey={tab.key} unmountOnExit>
+              <Tab.Pane key={tab.key} eventKey={tab.key}>
                 {items.length > 0 ? (
                   <FormTable>
                     {items.map((item) => (

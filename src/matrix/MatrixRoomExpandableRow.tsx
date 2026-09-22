@@ -122,10 +122,10 @@ export const MatrixRoomExpandableRow: FC<{ row: MatrixRoom }> = ({ row }) => (
         </Nav>
       </div>
       <Tab.Content className="overflow-auto">
-        <Tab.Pane eventKey="history" unmountOnExit>
+        <Tab.Pane eventKey="history">
           <MatrixExportsList room_uuid={row.uuid} hasActionBar={false} />
         </Tab.Pane>
-        <Tab.Pane eventKey="members" unmountOnExit>
+        <Tab.Pane eventKey="members">
           <MembersTable roomUuid={row.uuid} />
         </Tab.Pane>
       </Tab.Content>

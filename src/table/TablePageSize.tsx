@@ -21,6 +21,7 @@ export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
       </label>
       <select
         className="form-select form-select-sm form-select-transparent ps-2 pe-5"
+        aria-label={translate('Rows per page')}
         onChange={(event) => {
           props.updatePageSize(parseInt(event.target.value, 10));
         }}

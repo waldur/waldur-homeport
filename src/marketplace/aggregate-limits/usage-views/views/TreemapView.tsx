@@ -268,6 +268,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           value={mode}
           onChange={(v) => setMode(v as SizeMode)}
           size="sm"
+          aria-label={translate('Size by')}
         >
           <ToggleButton id="tm-usage" value="usage" variant="tertiary">
             {translate('Usage')}

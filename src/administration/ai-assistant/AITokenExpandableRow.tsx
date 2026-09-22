@@ -73,6 +73,7 @@ const renderUsageCell = (percentage: number | null) => {
         percent={percentage}
         height={6}
         className="flex-grow-1"
+        label={translate('Usage')}
       />
       <span className="text-nowrap" style={{ minWidth: '40px' }}>
         {percentage}%

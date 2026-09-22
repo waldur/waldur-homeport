@@ -133,7 +133,7 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
           </Nav>
         </div>
         <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="active" unmountOnExit={true}>
+          <Tab.Pane eventKey="active">
             <Table
               {...tableProps}
               columns={[
@@ -207,7 +207,7 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
               }}
             />
           </Tab.Pane>
-          <Tab.Pane eventKey="invitations" unmountOnExit={true}>
+          <Tab.Pane eventKey="invitations">
             <ResourceUserInvitationsList
               resource={resource}
               offering={offering}
