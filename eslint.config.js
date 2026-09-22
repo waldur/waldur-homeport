@@ -23,6 +23,18 @@ const browserGlobals = {
 
 delete browserGlobals['AudioWorkletGlobalScope '];
 
+const RESTRICTED_IMPORTS = [
+  {
+    name: 'react-bootstrap',
+    importNames: ['Badge'],
+    message: 'Use Badge from "waldur-ui" instead of react-bootstrap.',
+  },
+  {
+    name: 'react-bootstrap/Badge',
+    message: 'Use Badge from "waldur-ui" instead of react-bootstrap/Badge.',
+  },
+];
+
 export default tseslint
   .config(
     eslint.configs.recommended,
@@ -165,6 +177,12 @@ export default tseslint
             name: 'close',
           },
         ],
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: RESTRICTED_IMPORTS,
+          },
+        ],
       },
     },
     {
@@ -229,6 +247,7 @@ export default tseslint
           'error',
           {
             paths: [
+              ...RESTRICTED_IMPORTS,
               {
                 name: '@/i18n',
                 importNames: ['translate'],
