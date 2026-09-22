@@ -170,6 +170,12 @@
   max-width: 100%;
   min-width: 300px;
   overflow-x: auto;
+
+  // Mermaid gives its SVG width="100%", which can't resolve while the message
+  // bubble shrink-wraps its children, so the diagram falls back to 300px.
+  &--mermaid {
+    align-self: stretch;
+  }
 }
 
 .aui-code-header {
