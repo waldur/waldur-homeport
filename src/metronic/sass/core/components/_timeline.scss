@@ -48,23 +48,4 @@
     overflow: auto;
     margin-bottom: 1.5rem;
   }
-
-  // Vertical center
-  &.timeline-center {
-    .timeline-item {
-      align-items: center;
-
-      &:first-child {
-        .timeline-line {
-          top: 50%;
-        }
-      }
-
-      &:last-child {
-        .timeline-line {
-          bottom: 50%;
-        }
-      }
-    }
-  }
 }

@@ -240,30 +240,6 @@
         $bg-color-active
       );
     }
-
-    // Text colors active state
-    .btn.btn-active-text-#{$name} {
-      $color: null;
-      $icon-color: null;
-      $bg-color: null;
-      $border-color: null;
-
-      $color-active: $value;
-      $icon-color-active: null;
-      $border-color-active: null;
-      $bg-color-active: null;
-
-      @include button-custom-variant(
-        $color,
-        $icon-color,
-        $border-color,
-        $bg-color,
-        $color-active,
-        $icon-color-active,
-        $border-color-active,
-        $bg-color-active
-      );
-    }
   }
 }
 
@@ -370,37 +346,5 @@
     .btn-check:active + & {
       background-color: $border-color-active !important;
     }
-  }
-
-  &.btn-active-outline-default {
-    $color: null;
-    $icon-color: null;
-    $border-color: null;
-    $bg-color: null;
-
-    $color-active: $gray-700;
-    $icon-color-active: $gray-700;
-    $border-color-active: $gray-300;
-    $bg-color-active: $gray-50;
-
-    $color-dark: $gray-700;
-    $icon-color-dark: $gray-700;
-    $border-color-dark: $gray-500;
-    $bg-color-dark: $gray-100;
-
-    @include button-custom-variant(
-      $color,
-      $icon-color,
-      $border-color,
-      $bg-color,
-      $color-active,
-      $icon-color-active,
-      $border-color-active,
-      $bg-color-active,
-      $color-dark,
-      $icon-color-dark,
-      $border-color-dark,
-      $bg-color-dark
-    );
   }
 }
