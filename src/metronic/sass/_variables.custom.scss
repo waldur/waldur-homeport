@@ -266,12 +266,6 @@ $modal-sm: 400px !default;
 // Popovers
 $popover-bg: $body-bg !default;
 
-// Tooltips
-$tooltip-bg: $bg-primary-solid !default;
-$tooltip-color: $text-primary_on-brand !default;
-$tooltip-padding-y: 0.154rem * 4 !default;
-$tooltip-padding-x: 0.154rem * 6 !default;
-
 // Breadcrumbs
 $breadcrumb-divider: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="6.26358" y1="18.4759" x2="14.0116" y2="1.86025" stroke="#{$fg-quinary}" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/></svg>') !default;
 $breadcrumb-divider-color: $fg-quinary !default;

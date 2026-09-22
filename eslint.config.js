@@ -33,6 +33,26 @@ const RESTRICTED_IMPORTS = [
     name: 'react-bootstrap/Badge',
     message: 'Use Badge from "waldur-ui" instead of react-bootstrap/Badge.',
   },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Tooltip'],
+    message: 'Use Tooltip from "waldur-ui" instead of react-bootstrap.',
+  },
+  {
+    name: 'react-bootstrap/Tooltip',
+    message: 'Use Tooltip from "waldur-ui" instead of react-bootstrap/Tooltip.',
+  },
+  {
+    name: 'react-bootstrap',
+    importNames: ['OverlayTrigger'],
+    message:
+      'Use Tooltip or Popover from "waldur-ui" instead of react-bootstrap/OverlayTrigger.',
+  },
+  {
+    name: 'react-bootstrap/OverlayTrigger',
+    message:
+      'Use Tooltip or Popover from "waldur-ui" instead of react-bootstrap/OverlayTrigger.',
+  },
 ];
 
 export default tseslint
