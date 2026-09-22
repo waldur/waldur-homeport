@@ -86,7 +86,6 @@ const RowWrapper2 = (
     hidePrices={props.hidePrices}
     period={props.period}
     activePriceIndex={props.activePriceIndex}
-    hasX={!props.offeringComponent.is_boolean}
     className="control"
   >
     {props.offeringComponent.is_boolean ? (

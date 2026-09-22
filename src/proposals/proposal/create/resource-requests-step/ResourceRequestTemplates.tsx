@@ -1,6 +1,5 @@
 import { CheckCircleIcon, CubeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { startCase } from 'lodash-es';
 import { FC, useEffect, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +16,11 @@ import { Badge } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
+import {
+  findQuantityComponent,
+  formatComponentQuantity,
+  getComponentLabel,
+} from '@/marketplace/common/componentQuantity';
 import { FieldReviewComments } from '@/proposals/proposal/create-review/FieldReviewComments';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { PurchaseOrderCell } from '@/proposals/PurchaseOrderCell';
@@ -70,17 +74,32 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
             <table className="table align-middle">
               <thead>
                 <tr className="align-middle">
+                  <th style={{ width: '50%' }}>{translate('Component')}</th>
                   <th style={{ width: '50%' }}>
-                    {translate('Attribute name')}
+                    {translate('Requested amount')}
                   </th>
-                  <th style={{ width: '50%' }}>{translate('Value')}</th>
                 </tr>
               </thead>
               <tbody>
                 {keyValues.map(([key, value], index) => (
+                  // Limits are keyed by component type: name each one as the
+                  // offering does, and state the unit its amount is counted in.
                   <tr key={index}>
-                    <td>{startCase(key)}</td>
-                    <td>{value}</td>
+                    <td>
+                      {getComponentLabel(
+                        key,
+                        row.requested_offering_components,
+                      )}
+                    </td>
+                    <td>
+                      {formatComponentQuantity(
+                        value,
+                        findQuantityComponent(
+                          row.requested_offering_components,
+                          key,
+                        ),
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -6620,11 +6620,6 @@
       "feature_area": "attributes"
     }
   },
-  "Attribute name": {
-    "context": {
-      "feature_area": "resource-requests-step"
-    }
-  },
   "Attribute provenance": {
     "context": {
       "feature_area": "support"
@@ -43079,7 +43074,7 @@
   "Requested amount": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "requests"
+      "feature_area": "resource-requests-step"
     }
   },
   "Requested at": {

@@ -5,6 +5,7 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { composeValidators } from '@/core/validators';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { formatQuantityLabel } from '@/marketplace/common/componentQuantity';
 import { formatIntField, getLimitParser } from '@/marketplace/common/utils';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
@@ -48,9 +49,10 @@ const PrepaidRow = ({
           // multiplier, which is what the total beside it already accounts for.
           viewMode ? (
             <span>
-              {translate('Quantity')}:{' '}
-              {component.displayAmount ?? component.amount}
-              {component.measured_unit ? ` ${component.measured_unit}` : 'x'}
+              {formatQuantityLabel(
+                component.displayAmount ?? component.amount,
+                component,
+              )}
             </span>
           ) : (
             <Field

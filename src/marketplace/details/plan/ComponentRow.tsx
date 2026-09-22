@@ -21,7 +21,6 @@ interface ComponentRowProps {
   period?: PlanPeriod;
   activePriceIndex?: number;
   hidePrices?: boolean;
-  hasX?: boolean;
   className?: string;
   /** Set when the quantity is unknown, so no total can be stated yet. */
   hideTotal?: boolean;
