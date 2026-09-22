@@ -20,10 +20,6 @@ vi.mock('./useMatrixClient', () => ({
   useMatrixClient: () => h.matrixClient,
 }));
 
-vi.mock('./useMatrixRooms', () => ({
-  useMatrixRooms: () => ({ data: h.rooms }),
-}));
-
 vi.mock('./useAllMatrixRooms', () => ({
   useAllMatrixRooms: () => ({ rooms: h.rooms }),
 }));
@@ -68,12 +64,6 @@ vi.mock('./MatrixSyncStatus', () => ({
 
 vi.mock('./MatrixChatHeader', () => ({
   MatrixChatHeader: () => null,
-}));
-
-vi.mock('./MatrixRoomSelector', () => ({
-  MatrixRoomSelector: ({ onSelect }: { onSelect: (uuid: string) => void }) => (
-    <button onClick={() => onSelect('room-2')}>switch-room</button>
-  ),
 }));
 
 vi.mock('./voice/useVoiceRecorder', () => ({
@@ -198,17 +188,18 @@ describe('MatrixChatDrawer — dock slot + chat layout', () => {
     expect(screen.getByTestId('message-input')).toBeInTheDocument();
   });
 
-  it('cancels an in-progress recording when switching rooms', async () => {
+  // A project has exactly one room; switching conversations belongs to the
+  // room list, which remounts the drawer.
+  it('offers no room switcher even when several rooms are active', () => {
     h.rooms = [
       { uuid: 'room-1', state: 'active', room_alias: '#a:s', room_name: 'A' },
       { uuid: 'room-2', state: 'active', room_alias: '#b:s', room_name: 'B' },
     ];
-    const user = userEvent.setup();
     render(<MatrixChatDrawer roomUuid="room-1" />);
 
-    await user.click(screen.getByRole('button', { name: 'switch-room' }));
-
-    expect(h.cancelRecording).toHaveBeenCalled();
+    expect(
+      screen.queryByRole('combobox', { name: 'Select chat room' }),
+    ).toBeNull();
   });
 });
 
