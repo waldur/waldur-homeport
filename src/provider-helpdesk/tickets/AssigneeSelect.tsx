@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
-import Select from 'react-select';
 
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
 import { useAssignTicket, useProviderTeam } from '../api';
@@ -56,17 +56,13 @@ export const AssigneeSelect: FC<AssigneeSelectProps> = ({
 
   return (
     <div style={{ minWidth: 180 }}>
-      <Select<AssigneeOption>
+      <Select
         value={current}
         options={options}
         isDisabled={assign.isPending}
         isLoading={assign.isPending}
         placeholder={translate('Unassigned')}
-        menuPortalTarget={
-          typeof document !== 'undefined' ? document.body : undefined
-        }
-        styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-        onChange={(option) =>
+        onChange={(option: AssigneeOption | null) =>
           option &&
           option.value !== assignee &&
           assign.mutate({

@@ -1,13 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { FC, useMemo, useState } from 'react';
 import {
   providerCannedResponsesList,
   providerCannedResponsesRender,
 } from 'waldur-js-client';
 
+import { FormGroup } from '@/form';
+import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
+
+interface CannedResponseOption {
+  value: string;
+  label: string;
+}
 
 interface CannedResponseSelectorProps {
   helpdeskUuid: string;
@@ -40,6 +46,15 @@ export const CannedResponseSelector: FC<CannedResponseSelectorProps> = ({
     enabled: Boolean(helpdeskUuid),
   });
 
+  const options = useMemo<CannedResponseOption[]>(
+    () =>
+      responses.map((response) => ({
+        value: response.uuid,
+        label: response.name,
+      })),
+    [responses],
+  );
+
   if (!responses.length) {
     return null;
   }
@@ -66,24 +81,20 @@ export const CannedResponseSelector: FC<CannedResponseSelectorProps> = ({
   };
 
   return (
-    <Form.Group className="mb-3">
-      <Form.Label className="text-muted fs-7">
-        {translate('Canned response')}
-      </Form.Label>
-      <Form.Select
-        // Reset to the placeholder after each pick so the same response can be
+    <FormGroup label={translate('Canned response')}>
+      <Select
+        // Held at null rather than at the picked option so the control falls
+        // back to the placeholder after each pick, letting the same response be
         // inserted again.
-        value=""
-        disabled={rendering}
-        onChange={(event) => handlePick(event.target.value)}
-      >
-        <option value="">{translate('Insert a canned response…')}</option>
-        {responses.map((response) => (
-          <option key={response.uuid} value={response.uuid}>
-            {response.name}
-          </option>
-        ))}
-      </Form.Select>
-    </Form.Group>
+        value={null}
+        options={options}
+        isDisabled={rendering}
+        isLoading={rendering}
+        placeholder={translate('Insert a canned response…')}
+        onChange={(option: CannedResponseOption | null) =>
+          option && handlePick(option.value)
+        }
+      />
+    </FormGroup>
   );
 };
