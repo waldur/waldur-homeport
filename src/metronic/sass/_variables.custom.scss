@@ -20,116 +20,12 @@ $brands: (
 ) !default;
 
 $brands-rgb: (
-  '25': $brand-25-rgb,
   '50': $brand-50-rgb,
-  '100': $brand-100-rgb,
   '200': $brand-200-rgb,
-  '300': $brand-300-rgb,
   '400': $brand-400-rgb,
-  '500': $brand-500-rgb,
   '600': $brand-600-rgb,
-  '700': $brand-700-rgb,
-  '800': $brand-800-rgb,
   '900': $brand-900-rgb,
 ) !default;
-
-// Dark colors
-$theme-dark-colors: (
-  'secondary': $secondary-dark,
-) !default; // Custom variable
-
-// Dark inverse colors
-$theme-dark-inverse-colors: (
-  'secondary': $secondary-dark-inverse,
-) !default; // Custom variable
-
-// 50 colors
-$theme-50-colors: (
-  'brand': $brand-50,
-  'gray': $gray-50,
-  'primary': $primary-50,
-  'secondary': $secondary-light,
-  'light': $gray-50,
-  'success': $success-50,
-  'info': $info-50,
-  'warning': $warning-50,
-  'danger': $danger-50,
-  // custom colors
-  'pink': $pink-50,
-  'blue': $blue-50,
-  'teal': $teal-50,
-  'indigo': $indigo-50,
-  'purple': $purple-50,
-  'rose': $rose-50,
-  'moss': $moss-50,
-  'orange': $orange-50,
-) !default; // Custom variable
-
-// 200 colors
-$theme-200-colors: (
-  'brand': $brand-200,
-  'gray': $gray-200,
-  'primary': $primary-200,
-  'secondary': $secondary-active,
-  'light': $gray-200,
-  'success': $success-200,
-  'info': $info-200,
-  'warning': $warning-200,
-  'danger': $danger-200,
-  // custom colors
-  'pink': $pink-200,
-  'blue': $blue-200,
-  'teal': $teal-200,
-  'indigo': $indigo-200,
-  'purple': $purple-200,
-  'rose': $rose-200,
-  'moss': $moss-200,
-  'orange': $orange-200,
-) !default; // Custom variable
-
-// 500 colors
-$theme-500-colors: (
-  'brand': $brand-500,
-  'gray': $gray-500,
-  'primary': $primary-500,
-  'secondary': $secondary-dark,
-  'light': $gray-500,
-  'success': $success-500,
-  'info': $info-500,
-  'warning': $warning-500,
-  'danger': $danger-500,
-  // custom colors
-  'pink': $pink-500,
-  'blue': $blue-500,
-  'teal': $teal-500,
-  'indigo': $indigo-500,
-  'purple': $purple-500,
-  'rose': $rose-500,
-  'moss': $moss-500,
-  'orange': $orange-500,
-) !default; // Custom variable
-
-// 700 colors
-$theme-700-colors: (
-  'brand': $brand-700,
-  'gray': $gray-700,
-  'primary': $primary-700,
-  'secondary': $secondary-dark,
-  'light': $gray-700,
-  'success': $success-700,
-  'info': $info-700,
-  'warning': $warning-700,
-  'danger': $danger-700,
-  // custom colors
-  'pink': $pink-700,
-  'blue': $blue-700,
-  'teal': $teal-700,
-  'indigo': $indigo-700,
-  'purple': $purple-700,
-  'rose': $rose-700,
-  'moss': $moss-700,
-  'orange': $orange-700,
-) !default; // Custom variable
 
 // Button variants
 /* prettier-ignore */
@@ -356,9 +252,6 @@ $modal-footer-margin-between: 0.923rem !default;
 
 $modal-content-border-radius: $border-radius-xl !default;
 
-$modal-content-box-shadow:
-  0 12px 14px -4px rgba(#101828, 0.05),
-  0 6px 6px -4px rgba(#101828, 0.03) !default;
 $modal-content-box-shadow-xs:
   0 12px 14px -4px rgba(#101828, 0.1),
   0 6px 6px -4px rgba(#101828, 0.04) !default;

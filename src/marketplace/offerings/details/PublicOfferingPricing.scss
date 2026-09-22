@@ -1,11 +1,9 @@
-@import '@/sass/variables';
-
 .publicOfferingPricing {
   display: flex;
   column-gap: 40px;
-  border: 1px solid $border-color;
+  border: 1px solid var(--color-gray-200);
   border-radius: 4px;
-  background-color: $white;
+  background-color: var(--waldur-bg-primary, #fff);
   padding: 24px;
   color: #000;
 

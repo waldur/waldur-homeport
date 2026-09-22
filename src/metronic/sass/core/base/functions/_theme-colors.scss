@@ -29,56 +29,6 @@
   @return get($theme-light-colors, $key);
 }
 
-@function theme-dark-color($key: 'primary') {
-  @if ($key == 'secondary') {
-    @return $brand-300;
-  }
-  @return get($theme-dark-colors, $key);
-}
-
-@function theme-dark-inverse-color($key: 'primary') {
-  @if ($key == 'secondary') {
-    @return $brand-800;
-  }
-  @return get($theme-dark-inverse-colors, $key);
-}
-
-@function theme-50-color($key: 'primary') {
-  @if ($key == 'primary') {
-    @return $brand-50;
-  } @else if ($key == 'secondary') {
-    @return $brand-50;
-  }
-  @return get($theme-50-colors, $key);
-}
-
-@function theme-200-color($key: 'primary') {
-  @if ($key == 'primary') {
-    @return $brand-200;
-  } @else if ($key == 'secondary') {
-    @return $brand-200;
-  }
-  @return get($theme-200-colors, $key);
-}
-
-@function theme-500-color($key: 'primary') {
-  @if ($key == 'primary') {
-    @return $brand-500;
-  } @else if ($key == 'secondary') {
-    @return $brand-500;
-  }
-  @return get($theme-500-colors, $key);
-}
-
-@function theme-700-color($key: 'primary') {
-  @if ($key == 'primary') {
-    @return $brand-700;
-  } @else if ($key == 'secondary') {
-    @return $brand-700;
-  }
-  @return get($theme-700-colors, $key);
-}
-
 @function get-brand-color($name, $rgb: false) {
   @if ($name == primary) {
     @if ($rgb) {
@@ -93,8 +43,6 @@
       @return map-get($brands-rgb, $suffix);
     } @else if not $rgb and map-has-key($brands, $suffix) {
       @return map-get($brands, $suffix);
-    } @else {
-      @error "Brand color with suffix #{$suffix} not found in \$brands map.";
     }
   }
 

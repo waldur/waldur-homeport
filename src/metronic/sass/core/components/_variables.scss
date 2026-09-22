@@ -328,8 +328,6 @@ $link-color: if(isDarkMode(), $brand-400, $brand) !default;
 $link-decoration: none !default;
 $link-hover-color: if(isDarkMode(), $brand-500, $brand-700) !default;
 $link-hover-decoration: underline !default;
-// Darken percentage for links with `.text-*` class (e.g. `.text-success`)
-$emphasized-link-hover-darken-percentage: 15% !default;
 
 // Paragraphs
 //
@@ -381,8 +379,6 @@ $border-widths: (
   4: 4px,
   5: 5px,
 ) !default;
-
-$rounded-pill: 50rem !default;
 
 $component-active-color: $primary-inverse !default;
 $component-active-bg: $primary !default;
@@ -747,7 +743,6 @@ $form-check-input-width-lg: 2.25rem !default;
 $form-check-input-bg-size: 60% 60% !default; // Custom variable
 $form-check-min-height: $font-size-base * $line-height-base !default;
 $form-check-padding-start: $form-check-input-width + 0.5rem !default;
-$form-check-padding-left: $form-check-input-width + 0.5rem !default;
 $form-check-margin-bottom: 0.125rem !default;
 $form-check-label-color: null !default;
 $form-check-label-cursor: null !default;
@@ -795,7 +790,6 @@ $form-switch-width-lg: 3.75rem !default; // Custom variable
 $form-switch-height-lg: 2.75rem !default; // Custom variable
 
 $form-switch-padding-start: $form-switch-width + 0.5rem !default;
-$form-switch-padding-left: $form-switch-width + 0.5rem !default;
 $form-switch-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color}'/></svg>") !default;
 $form-switch-bg-image-solid: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$form-switch-color-solid}" stroke="#{$border-primary}" stroke-width="0.3"/></g></svg>') !default;
 $form-switch-bg-image-solid-disabled: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$fg-disabled_subtle}" stroke="#{$border-secondary}" stroke-width="0.3"/></g></svg>') !default; // Custom
@@ -810,8 +804,6 @@ $form-switch-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3
 $form-switch-checked-bg-image-solid: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="2.9" fill="#{$form-switch-color-solid}" stroke="#fff8" stroke-width="0.6"/></g></svg>') !default; // Custom
 $form-switch-checked-bg-image-solid-disabled: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$bg-primary}"/></g></svg>') !default; // Custom
 $form-switch-checked-bg-position: right center !default;
-
-$form-check-inline-margin-right: 1rem !default;
 
 $input-group-addon-bg: $gray-100 !default;
 $input-group-addon-color: $gray-800 !default;
@@ -890,7 +882,6 @@ $modal-content-border-width: 0 !default;
 $modal-content-border-radius: $border-radius !default;
 $modal-content-inner-border-radius: $border-radius !default;
 
-$modal-content-box-shadow: 0 0.25rem 0.5rem rgba($black, 0.05) !default;
 $modal-content-box-shadow-xs: 0 0.25rem 0.5rem rgba($black, 0.1) !default;
 $modal-content-box-shadow-sm-up: 0 0.5rem 1rem rgba($black, 0.1) !default;
 
@@ -941,7 +932,6 @@ $pagination-color: $gray-700 !default;
 $pagination-bg: transparent !default;
 $pagination-border-width: 0 !default;
 $pagination-border-radius: $btn-border-radius !default;
-$pagination-margin-left: 0 !default;
 $pagination-border-color: transparent !default;
 
 $pagination-focus-color: $component-hover-color !default;
@@ -1006,16 +996,11 @@ $tooltip-margin: 0 !default;
 
 // Badges
 $badge-font-size: 0.85rem !default;
-$badge-font-size-sm: 0.85rem !default;
-$badge-font-size-lg: 1rem !default;
 $badge-font-weight: $font-weight-bolder !default;
 $badge-color: $body-bg !default;
 $badge-padding-y: 0.5em !default;
 $badge-padding-x: 0.85em !default;
 $badge-border-radius: $border-radius !default;
-$badge-size: 1.75rem !default; // Custom variable
-$badge-size-sm: 1.5rem !default; // Custom variable
-$badge-size-lg: 2rem !default; // Custom variable
 
 // Code
 $code-bg: if(isDarkMode(), $gray-200, #f1f3f8) !default; // Custom variable
@@ -1025,7 +1010,6 @@ $code-margin: 0 0.5rem !default; // Custom variable
 $code-font-weight: 400 !default; // Custom variable
 $code-border-radius: 0.3rem !default; // Custom variable
 $code-color: if(isDarkMode(), #e493c6, #b93993) !default; // Custom variable
-$code-space: 0.25rem !default; // Custom variable
 
 // Spinners
 
@@ -1207,40 +1191,6 @@ $bullet: (
   line-width: 5px,
 ) !default;
 
-// Scrolltop
-$scrolltop: (
-  opacity: (
-    default: 0,
-    on: 0.3,
-    hover: 1,
-  ),
-  bottom: (
-    desktop: 40px,
-    tablet-and-mobile: 30px,
-  ),
-  right: (
-    desktop: 20px,
-    tablet-and-mobile: 15px,
-  ),
-  size: (
-    desktop: 36px,
-    tablet-and-mobile: 30px,
-  ),
-  bg-color: (
-    default: $primary,
-    hover: $primary,
-  ),
-  icon-color: (
-    default: $white,
-    hover: $white,
-  ),
-) !default;
-
-// Sticky Toolbar
-$sticky-toolbar: (
-  z-index: 95,
-) !default;
-
 // Drawer
 $drawer: (
   z-index: 110,
@@ -1310,18 +1260,6 @@ $menu: (
   ),
 ) !default;
 
-// Feedback
-$feedback: (
-  popup: (
-    z-index: 1000,
-    box-shadow: $dropdown-box-shadow,
-    background-color: $body-bg,
-    border-radius: $border-radius,
-    transition-speed: 0.6s,
-    padding: 1rem 1.25rem,
-  ),
-) !default;
-
 // Custom scrollbar
 $scrollbar: (
   space: 0.5rem,
@@ -1329,35 +1267,4 @@ $scrollbar: (
   height: 0.4rem,
   color: $gray-200,
   hover-color: darken($gray-200, 2%),
-) !default;
-
-// Overlay
-$overlay: (
-  bg: rgba($black, 0.05),
-) !default;
-
-// BlockUI
-$blockui: (
-  overlay-bg: rgba($black, 0.05),
-) !default;
-
-// Rating
-$rating: (
-  color: (
-    default: $gray-400,
-    active: #ffad0f,
-  ),
-) !default;
-
-// Sticky
-$fixed: (
-  z-index: 1005,
-) !default;
-
-// Container
-$container: (
-  padding: (
-    default: 1.5rem,
-    lg: 2rem,
-  ),
 ) !default;
