@@ -982,18 +982,6 @@ $popover-dissmis-btn-height: 1.5rem !default; // Custom variable
 $popover-dissmis-btn-top: 0.85rem !default; // Custom variable
 $popover-dissmis-btn-end: 0.85rem !default; // Custom variable
 
-// Tooltips
-$tooltip-font-size: $font-size-sm !default;
-$tooltip-max-width: 200px !default;
-$tooltip-color: $gray-800 !default;
-$tooltip-bg: $popover-bg !default;
-$tooltip-border-radius: $btn-border-radius !default;
-$tooltip-opacity: 1 !default;
-$tooltip-box-shadow: $popover-box-shadow !default; // Custom variable
-$tooltip-padding-y: 0.75rem !default;
-$tooltip-padding-x: 1rem !default;
-$tooltip-margin: 0 !default;
-
 // Code
 $code-bg: if(isDarkMode(), $gray-200, #f1f3f8) !default; // Custom variable
 $code-box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.08) !default; // Custom variable

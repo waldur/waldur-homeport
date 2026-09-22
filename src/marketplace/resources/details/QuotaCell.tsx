@@ -38,7 +38,7 @@ const CellDescription = ({
         <>
           {' '}
           <Tooltip label={description}>
-            <QuestionIcon weight="bold" className="aligned-tip" />
+            <QuestionIcon weight="bold" className="inline-flex items-center" />
           </Tooltip>
         </>
       )}
