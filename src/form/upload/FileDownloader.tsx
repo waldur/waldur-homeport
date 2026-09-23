@@ -50,6 +50,7 @@ export const FileDownloader = ({
 
   return (
     <button
+      type="button"
       className={
         className ??
         `text-btn text-hover-primary${children ? '' : ` w-${size}px`}`
