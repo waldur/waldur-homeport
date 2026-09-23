@@ -105,7 +105,7 @@ export const ScienceDomainLoadPresetButton = ({ refetch }) => {
           resolve: { refetch },
         });
       }}
-      variant="outline btn-outline-default"
+      variant="tertiary"
     />
   );
 };
