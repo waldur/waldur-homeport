@@ -10,10 +10,12 @@ import {
   BooleanEditField,
   EditFieldProvider,
   NumberEditField,
+  SelectEditField,
 } from '@/form/editFields';
 import FormTable from '@/form/FormTable';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
+import { userAutocomplete } from '@/marketplace/common/autocompletes';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { CallDurationPolicy } from '@/proposals/CallDurationPolicy';
 import { Call } from '@/proposals/types';
@@ -34,6 +36,41 @@ export const validateFixedDuration = (value: any) => {
     ? undefined
     : translate('Enter a whole number of days, 1 or more.');
 };
+
+/**
+ * A call places one marketplace order per resource it grants. This decides
+ * who those orders are created by — the person named on them, who receives
+ * the order notifications. It grants nothing: the call review authorised the
+ * spend, and the orders are carried out with system authority.
+ */
+const getOrderAuthorOptions = () => [
+  { value: 'applicant', label: translate('Proposal applicant') },
+  { value: 'project_manager', label: translate('Project manager') },
+  { value: 'call_manager', label: translate('Call manager') },
+  { value: 'specific_user', label: translate('Named contact') },
+];
+
+/**
+ * The call stores its named contact as a bare UUID, but the async user picker
+ * can only display an option object — react-select drops any other value, so
+ * the box would read as empty. Seed an option from the call's own name for it.
+ */
+export const formatOrderAuthorUser = (
+  value: any,
+  call: Pick<Call, 'order_author_user_name'>,
+) => {
+  if (!value) {
+    return null;
+  }
+  if (typeof value === 'string') {
+    return { uuid: value, full_name: call.order_author_user_name };
+  }
+  return value;
+};
+
+/** The API takes the contact as a bare UUID, or `null` to clear it. */
+export const normalizeOrderAuthorUser = (value: any) =>
+  value?.uuid ?? value ?? null;
 
 interface GeneralConfigurationSectionProps {
   call: Call;
@@ -71,12 +108,17 @@ export const GeneralConfigurationSection: FC<
         body.compliance_checklist ||
         null;
     }
+    if ('order_author_user' in body) {
+      body.order_author_user = normalizeOrderAuthorUser(body.order_author_user);
+    }
 
     // No confirmation for a changed fixed duration: allocation reads it from
     // the call when the project is created, so unallocated proposals follow
     // it without any of their rows being rewritten.
     return updateCall(body);
   };
+
+  const orderAuthorOptions = useMemo(getOrderAuthorOptions, []);
 
   const loadComplianceChecklists = useMemo(
     () =>
@@ -144,6 +186,46 @@ export const GeneralConfigurationSection: FC<
               translate('Not configured')
             }
           />
+          <SelectEditField
+            name="order_author"
+            label={translate('Resource orders created by')}
+            description={translate(
+              'Who the orders for resources granted by this call are created by. That person is named on each order and receives the order notifications.',
+            )}
+            options={orderAuthorOptions}
+            simpleValue
+            isClearable={false}
+            disabled={props.isReadOnly}
+            renderValue={(value) =>
+              orderAuthorOptions.find((o) => o.value === value)?.label ||
+              translate('Proposal applicant')
+            }
+          />
+          {props.call.order_author === 'specific_user' && (
+            <AsyncSelectEditField
+              name="order_author_user"
+              label={translate('Named contact')}
+              description={translate(
+                'Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organisation managing it.',
+              )}
+              loadOptions={userAutocomplete}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) =>
+                option.email
+                  ? `${option.full_name || option.username} (${option.email})`
+                  : option.full_name || option.username
+              }
+              format={(value) => formatOrderAuthorUser(value, props.call)}
+              emptyValue={null}
+              isClearable={true}
+              placeholder={translate('Select a user')}
+              disabled={props.isReadOnly}
+              renderValue={() =>
+                props.call.order_author_user_name ||
+                translate('Not set — falls back to the proposal applicant')
+              }
+            />
+          )}
           <BooleanEditField
             name="reviewer_identity_visible_to_submitters"
             label={translate('Reviewer identity visible to applicants')}
