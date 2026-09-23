@@ -5,6 +5,7 @@ import { userActionsUpdateActions } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 export const RecalculateUserActionsButton: FC<{ refetch?: () => void }> = ({
@@ -31,6 +32,7 @@ export const RecalculateUserActionsButton: FC<{ refetch?: () => void }> = ({
       action={() => recalculateMutation.mutate()}
       disabled={recalculateMutation.isPending}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
+      as={ActionButton}
     />
   );
 };
