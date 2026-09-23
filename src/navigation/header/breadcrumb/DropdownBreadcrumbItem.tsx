@@ -45,7 +45,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
           side="bottom"
           align="start"
           sideOffset={2}
-          className="z-50 mw-400px min-w-200px pb-2 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
+          className="z-header-popover mw-400px min-w-200px pb-2 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
         >
           {typeof item.dropdown === 'function'
             ? item.dropdown(() => setShow(false))
