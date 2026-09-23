@@ -32,12 +32,21 @@ const BOOTSTRAP = {
   appDropdownMenu: 1100,
 };
 const METRONIC_HEADER = 100;
+const METRONIC_TOOLBAR = 99;
 
 describe('z-index tokens', () => {
   it('puts the sidebar panel and mobile drawer above the header, below overlays', () => {
     expect(token('sidebar-panel')).toBeGreaterThan(METRONIC_HEADER);
     expect(token('mobile-drawer')).toBeGreaterThan(METRONIC_HEADER);
     expect(token('mobile-drawer')).toBeLessThan(BOOTSTRAP.modal);
+  });
+
+  it('puts header popovers above the header, toolbar and sidebar, below modals', () => {
+    expect(token('header-popover')).toBeGreaterThan(METRONIC_HEADER);
+    expect(token('header-popover')).toBeGreaterThan(METRONIC_TOOLBAR);
+    expect(token('header-popover')).toBeGreaterThan(token('sidebar-panel'));
+    expect(token('header-popover')).toBeGreaterThan(token('mobile-drawer'));
+    expect(token('header-popover')).toBeLessThan(BOOTSTRAP.modal);
   });
 
   it('keeps the drawer and the desktop panel distinct', () => {

@@ -104,7 +104,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
           side="bottom"
           align="start"
           sideOffset={2}
-          className="z-50 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
+          className="z-header-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
         >
           <SearchPopover
             result={result}

@@ -6,10 +6,11 @@
  * are listed so an ordering constraint can be read off one list instead of
  * being re-derived from comments scattered across files:
  *
- *      100  Metronic header/toolbar (layout/_variables.scss)
+ *       99  Metronic fixed toolbar (page tabs, layout/_variables.scss)
+ *      100  Metronic header (layout/_variables.scss)
  *      105  --z-index-sidebar-panel   token  (= Metronic $aside-config z-index)
  *      110  --z-index-mobile-drawer   token  (= Metronic $drawer z-index)
- *     1000  Bootstrap $zindex-dropdown
+ *     1000  --z-index-header-popover  token  (= Bootstrap $zindex-dropdown)
  *     1050  Bootstrap $zindex-modal-backdrop
  *     1055  Bootstrap $zindex-modal
  *     1070  Bootstrap $zindex-popover (also .role-project-select-popup)
@@ -31,6 +32,10 @@
 @theme {
   --z-index-sidebar-panel: 105;
   --z-index-mobile-drawer: 110;
+  /* Popovers opened from the header (global search, breadcrumb dropdowns)
+     drop down over the fixed toolbar and page tabs, so Tailwind's z-50
+     leaves them painted underneath. */
+  --z-index-header-popover: 1000;
   /* Not consumed as a `z-tooltip` class: packages/ui/src/Tooltip.tsx types
      its zIndex prop as a plain number (an override needs a runtime value no
      static class can express), so its default is the literal 1180 there.
