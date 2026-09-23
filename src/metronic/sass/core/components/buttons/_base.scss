@@ -60,16 +60,6 @@
     }
   }
 
-  // Outline dashed
-  &.btn-outline-dashed {
-    border: 1px dashed $border-dashed-color;
-  }
-
-  // Outline default
-  &.btn-outline-default {
-    border: 1px solid $input-border-color;
-  }
-
   // No focus
   &.btn-no-focus {
     box-shadow: none !important;
