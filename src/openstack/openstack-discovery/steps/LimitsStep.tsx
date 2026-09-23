@@ -35,6 +35,7 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
         onClick={() => props.handleSubmit()}
         type="button"
         iconNode={<CaretRightIcon weight="bold" />}
+        data-testid="wizard-next-btn"
       />
     </>
   );

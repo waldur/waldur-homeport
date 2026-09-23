@@ -131,12 +131,10 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
         label={translate('Continue')}
         onClick={() => props.handleSubmit()}
         type="button"
-        className="btn-icon-right min-w-125px"
-      >
-        <span className="svg-icon svg-icon-2">
-          <CaretRightIcon weight="bold" />
-        </span>
-      </SubmitButton>
+        className="min-w-125px"
+        iconNode={<CaretRightIcon weight="bold" />}
+        data-testid="wizard-next-btn"
+      />
     </>
   );
 
