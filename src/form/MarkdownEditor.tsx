@@ -52,6 +52,8 @@ interface MarkdownEditorProps extends FormField {
   className?: string;
   /** Offering UUID for markdown image uploads via the provider offerings API. */
   offeringUuid?: string;
+  /** Show image insertion regardless of the markdown image display feature. */
+  showImages?: boolean;
 }
 
 const Toolbar = ({ showImages }: { showImages: boolean }) => {
@@ -110,7 +112,7 @@ const MarkdownEditor: FC<MarkdownEditorProps> = (props) => {
   const initialValue = useRef(props.input?.value);
   const { showErrorResponse } = useNotify();
   const { theme } = useTheme();
-  const showImages = isMarkdownImageDisplayEnabled();
+  const showImages = props.showImages || isMarkdownImageDisplayEnabled();
 
   const imageUploadHandler = useMemo(() => {
     if (!props.offeringUuid || !isMarkdownImageUploadEnabled()) {

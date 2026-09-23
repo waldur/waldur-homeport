@@ -1,6 +1,7 @@
 import { Badge } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { TruncatedMarkdown } from '@/core/TruncatedMarkdown';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
@@ -138,6 +139,12 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
               ? JSON.stringify(value, null, 2)
               : value || ''}
           </pre>
+        ) : item.type === 'markdown_field' ? (
+          value?.trim() ? (
+            <TruncatedMarkdown text={value} title={getKeyTitle(item.key)} />
+          ) : (
+            <span className="text-muted">{translate('Not configured')}</span>
+          )
         ) : item.type === 'multilingual_image_field' ? (
           <MultilingualImageField value={value} />
         ) : item.type === 'json_list_field' ? (

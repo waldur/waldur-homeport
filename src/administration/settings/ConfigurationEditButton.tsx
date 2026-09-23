@@ -16,7 +16,10 @@ export const ConfigurationEditButton = ({ item, value }) => {
     () =>
       openDialog(ConfigurationEditDialog, {
         resolve: { item, initialValues: { value } },
-        size: item.key === 'LOGIN_PAGE_LAYOUT' ? 'lg' : 'md',
+        size:
+          item.key === 'LOGIN_PAGE_LAYOUT' || item.type === 'markdown_field'
+            ? 'lg'
+            : 'md',
       }),
     [],
   );

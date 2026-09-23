@@ -471,6 +471,23 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('About us page'),
+    items: [
+      {
+        key: 'ABOUT_US_PAGE_ENABLED',
+        description: translate('Show the About us page and its link in the footer.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ABOUT_US_PAGE_CONTENT',
+        description: translate('Markdown content of the About us page.'),
+        default: '',
+        type: 'markdown_field',
+      },
+    ],
+  },
+  {
     description: translate('Login page'),
     items: [
       {

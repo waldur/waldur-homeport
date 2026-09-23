@@ -1,3 +1,6 @@
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+
 import { LegalPrivacyMenu } from './LegalPrivacyMenu';
 import { MenuItem } from './MenuItem';
 import { MobileMenu } from './MobileMenu';
@@ -19,6 +22,10 @@ export const FooterLinks = () => {
       ) : (
         /* Desktop Layout */
         config.dynamic.map((item) => <MenuItem key={item.id} {...item} />)
+      )}
+      {/* Kept out of dynamic items so mobile never groups it under "More" */}
+      {ENV.plugins.WALDUR_CORE.ABOUT_US_PAGE_ENABLED && (
+        <MenuItem label={translate('About us')} state="about.about-us" />
       )}
       <LegalPrivacyMenu />
       {/* Support is always at the end in both layouts */}

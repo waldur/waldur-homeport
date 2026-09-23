@@ -46,6 +46,11 @@ const BRANDING_TABS: SettingsTab[] = [
     groupName: translate('Theme'),
   },
   {
+    key: 'about-us',
+    title: translate('About us page'),
+    groupName: translate('About us page'),
+  },
+  {
     key: 'login-page',
     title: translate('Login page'),
     groupName: translate('Login page'),
