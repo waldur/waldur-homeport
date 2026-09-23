@@ -7,6 +7,9 @@ const { mockRouter, mockUIRouterReact } = vi.hoisted(() => {
       target: vi.fn(),
       params: vi.fn().mockReturnValue({}),
       href: vi.fn(),
+      is: vi.fn().mockReturnValue(false),
+      includes: vi.fn().mockReturnValue(false),
+      get: vi.fn(),
     },
     urlService: {
       path: vi.fn(),
@@ -46,6 +49,7 @@ const { mockRouter, mockUIRouterReact } = vi.hoisted(() => {
         params: router.globals.params,
       })),
       useTransition: vi.fn(),
+      useOnStateChanged: vi.fn(),
       UISref: ({ children }) => children,
       UISrefActive: ({ children }) => children,
       UIRouter: ({ children }) => children,
