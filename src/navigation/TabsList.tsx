@@ -99,18 +99,15 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
           className={classNames('menu-item me-0 me-lg-2', { here: active })}
           {...hoverHandlers}
         >
-          <MenuLink
-            to={
-              (typeof parentTab.redirectTo === 'string'
-                ? parentTab.redirectTo
-                : parentTab.redirectTo?.state) || parentTab.to
-            }
-            params={
-              typeof parentTab.redirectTo === 'object'
-                ? parentTab.redirectTo.params
-                : undefined
-            }
-          >
+          {/* The first entry of this tab's own submenu — `children` already
+              holds it filtered by feature flags and permissions and sorted the
+              way the menu renders, so the tab and the top of its menu cannot
+              disagree. The route table's `redirectTo` cannot stand in for it:
+              `transitionTo` rejects a transition to an abstract state before
+              any hook runs, so that redirect never fires, and a fixed state
+              name is the first entry only on the deployment it was written
+              against. This branch renders only when children exist. */}
+          <MenuLink to={parentTab.children[0].to}>
             <span className="menu-title">{parentTab.title}</span>
             <span className="menu-arrow" />
           </MenuLink>
