@@ -18804,6 +18804,11 @@
       "action_type": "read"
     }
   },
+  "Every order this call places is attributed to this person — a shared mailbox, for example. They must hold a role on this call or on the organisation managing it.": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
   "Every person has the same username on all offerings of this service provider.": {
     "context": {
       "feature_area": "accounts"
@@ -29966,6 +29971,12 @@
       "feature_area": "single-import"
     }
   },
+  "Named contact": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "configuration"
+    }
+  },
   "Named on proposal": {
     "context": {
       "primary_ui_type": "label"
@@ -32636,6 +32647,11 @@
   "Not set": {
     "context": {
       "feature_area": "mappings"
+    }
+  },
+  "Not set — falls back to the proposal applicant": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Not set, offerings default to {value}": {
@@ -39422,6 +39438,11 @@
       "feature_area": "create"
     }
   },
+  "Project manager": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Project members": {},
   "Project members have been synchronised successfully.": {
     "context": {
@@ -39847,6 +39868,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "assignments"
+    }
+  },
+  "Proposal applicant": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "configuration"
     }
   },
   "Proposal compliance": {
@@ -43940,6 +43967,11 @@
       "feature_area": "list"
     }
   },
+  "Resource orders created by": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
   "Resource paused by policy": {
     "context": {
       "primary_ui_type": "label"
@@ -47265,6 +47297,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "workflow-steps",
       "action_type": "create"
+    }
+  },
+  "Select a user": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Select a user and assign a role.": {
@@ -65351,6 +65388,11 @@
   "Who it matches": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Who the orders for resources granted by this call are created by. That person is named on each order and receives the order notifications.": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Why": {
