@@ -7,7 +7,15 @@ import {
 } from '@phosphor-icons/react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
-import React, { FC, useCallback, useContext, useMemo, useState } from 'react';
+import React, {
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,6 +30,7 @@ import { PopoverMenuContent } from '@/navigation/NavMenu';
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
+import { closeFlyoutOnTabOut, focusFirstIn } from './filterMenuFocus';
 import { SavedFilterSelect } from './SavedFilterSelect';
 import {
   selectFilterValues,
@@ -76,29 +85,35 @@ const FlyoutRow: FC<
     open?: boolean;
     onOpenChange?(open: boolean): void;
   }>
-> = ({ label, icon, content, onOpenChange, open }) => (
-  <RadixPopover.Root open={open} modal={false} onOpenChange={onOpenChange}>
-    <RadixPopover.Trigger asChild>
-      <span className="menu-link" role="button">
-        <span className="menu-title">{label}</span>
-        {icon}
-      </span>
-    </RadixPopover.Trigger>
-    <PopoverMenuContent
-      placement="right-start"
-      className="w-250px py-3 shadow-sm"
-      // See TableFilterItem.tsx's own onOpenAutoFocus/onCloseAutoFocus
-      // comment: Radix's default auto-focus behaviors, un-suppressed,
-      // cause a sibling row that just opened to misread this row's
-      // *delayed* close-focus-return as an outside interaction and
-      // dismiss itself.
-      onOpenAutoFocus={(e) => e.preventDefault()}
-      onCloseAutoFocus={(e) => e.preventDefault()}
-    >
-      {content}
-    </PopoverMenuContent>
-  </RadixPopover.Root>
-);
+> = ({ label, icon, content, onOpenChange, open }) => {
+  const { activeItemName, menuIsOpen, closeMenu } =
+    useContext(TableFilterContext);
+  return (
+    <RadixPopover.Root open={open} modal={false} onOpenChange={onOpenChange}>
+      <RadixPopover.Trigger asChild>
+        {/* A real <button> so Tab reaches the row and Enter/Space open
+            it; `button.menu-link` in the menu base keeps the row look. */}
+        <button type="button" className="menu-link">
+          <span className="menu-title">{label}</span>
+          {icon}
+        </button>
+      </RadixPopover.Trigger>
+      <PopoverMenuContent
+        placement="right-start"
+        className="w-250px py-3 shadow-sm"
+        // Same close-focus rule as the filter rows — see
+        // TableMenuFilterItem's onCloseAutoFocus in TableFilterItem.tsx.
+        onCloseAutoFocus={(e) =>
+          (activeItemName || !menuIsOpen) && e.preventDefault()
+        }
+        onEscapeKeyDown={() => closeMenu?.()}
+        onKeyDown={(e) => closeFlyoutOnTabOut(e, () => onOpenChange?.(false))}
+      >
+        {content}
+      </PopoverMenuContent>
+    </RadixPopover.Root>
+  );
+};
 
 // Synthetic `activeItemName` values for SaveFilterItems' two rows, which
 // aren't real filters (no `name` of their own) but are still siblings in
@@ -200,30 +215,32 @@ const SaveFilterItems = ({ table, formId, apply }) => {
             }
             content={
               <>
+                {/* Real buttons, so they are reachable by Tab and
+                    announced by screen readers. */}
                 <div className="menu-item">
-                  <span
+                  <button
+                    type="button"
                     className="menu-link"
-                    aria-hidden="true"
                     onClick={onSaveFilter}
                   >
                     <span className="menu-title">{translate('Save as')}</span>
                     <StarIcon size={20} className="ms-auto" weight="bold" />
-                  </span>
+                  </button>
                 </div>
                 {selectedSavedFilter ? (
                   <div className="menu-item">
-                    <span
+                    <button
+                      type="button"
                       className="menu-link"
-                      aria-hidden="true"
                       onClick={(e) => onSaveFilter(e, true)}
                     >
-                      {translate('Update')}
+                      <span className="menu-title">{translate('Update')}</span>
                       <ArrowsClockwiseIcon
                         size={20}
                         className="ms-auto"
                         weight="bold"
                       />
-                    </span>
+                    </button>
                   </div>
                 ) : null}
               </>
@@ -247,10 +264,12 @@ const SaveFilterItems = ({ table, formId, apply }) => {
           icon={<CaretRightIcon size={20} className="ms-auto" weight="bold" />}
           content={
             <div className="menu-item">
+              {/* `role="presentation"`, not `aria-hidden`: aria-hidden
+                  would hide the select inside from screen readers too. */}
               <div
                 className="menu-content filter-field"
                 onClick={(e) => e.stopPropagation()}
-                aria-hidden="true"
+                role="presentation"
               >
                 <SavedFilterSelect
                   table={table}
@@ -296,11 +315,9 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
     undefined,
   );
   // Plain passthrough, not staged through an intermediate `undefined`
-  // frame on a setTimeout (an earlier version did that): once each row's
-  // own onOpenAutoFocus/onCloseAutoFocus are suppressed (TableFilterItem.tsx,
-  // FlyoutRow below — see the comment above on why), switching directly
-  // between two rows can just flip this value with nothing further to
-  // stage.
+  // frame: each row skips Radix's close-focus return while a sibling has
+  // taken over (TableFilterItem.tsx, FlyoutRow above), so switching
+  // directly between two rows can just flip this value.
   const setActiveItemName = setActiveItemNameRaw;
 
   const apply = useCallback(
@@ -338,8 +355,11 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
   // The callback ref instead runs exactly when the node itself attaches,
   // whenever that ends up being.
   const [existed, setExisted] = useState(true);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const checkExisted = useCallback(
     (node: HTMLDivElement | null) => {
+      contentRef.current = node;
       if (node && props.openName) {
         const item = node.querySelector('#filter-item-' + props.openName);
         setExisted(Boolean(item));
@@ -347,6 +367,48 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
     },
     [props.openName],
   );
+
+  // Radix moves focus into a Popover's content on mount and back to the
+  // trigger on unmount, but `forceMount` below keeps this content mounted
+  // for good, so neither fires — and the list is portaled away from its
+  // trigger, so Tab has no way in either. Both moves happen here instead,
+  // in an effect rather than on a later frame: by then a row may have
+  // opened its own flyout, and pulling focus back into the list would
+  // dismiss it as an outside interaction.
+  const wasOpen = useRef(false);
+  // Set by closeMenu() below: focus is then in a portaled flyout, outside
+  // `contentRef`, so the effect can't tell on its own that it belongs to
+  // this menu.
+  const reclaimFocus = useRef(false);
+  useEffect(() => {
+    const content = contentRef.current;
+    if (open) {
+      focusFirstIn(content);
+    } else if (wasOpen.current) {
+      // Only reclaim focus the closing menu would otherwise strand; a
+      // close because the user moved onto something else leaves it be.
+      const active = document.activeElement;
+      if (
+        reclaimFocus.current ||
+        !active ||
+        active === document.body ||
+        content?.contains(active)
+      ) {
+        triggerRef.current?.focus();
+      }
+      reclaimFocus.current = false;
+    }
+    wasOpen.current = open;
+  }, [open]);
+
+  // Escape closes the whole filter window in one press from anywhere
+  // inside it — a row, a flyout, a field. Radix alone dismisses only the
+  // innermost layer.
+  const closeMenu = useCallback(() => {
+    reclaimFocus.current = true;
+    setOpen(false);
+    setActiveItemName(undefined);
+  }, [setActiveItemName]);
 
   if (props.openName && !existed) return null;
 
@@ -357,7 +419,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         apply,
         openMenuName: props.openName,
         menuIsOpen: open,
-        closeMenu: () => setOpen(false),
+        closeMenu,
         activeItemName,
         setActiveItemName,
       }}
@@ -380,6 +442,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
           <>
             <RadixPopover.Trigger asChild>
               <button
+                ref={triggerRef}
                 type="button"
                 aria-label={translate('Filter by column')}
                 className={classNames(COLUMN_FILTER_TOGGLE_CLASS, 'text-btn')}
@@ -403,6 +466,10 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               <RadixPopover.Content
                 ref={checkExisted}
                 forceMount
+                aria-label={translate('Filter by column')}
+                // Portaled like a row's flyout, so Tab off either edge
+                // closes it and focus returns to the funnel icon.
+                onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
                 side="bottom"
                 align="start"
                 sideOffset={2}
@@ -443,6 +510,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               <span>
                 <RadixPopover.Trigger asChild>
                   <Button
+                    ref={triggerRef}
                     variant="secondary"
                     size="sm"
                     aria-label={translate('Add filter')}
@@ -462,7 +530,12 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               container={getFilterMenuPortalContainer()}
             >
               <RadixPopover.Content
+                ref={contentRef}
                 forceMount
+                aria-label={translate('Add filter')}
+                // Tab off either edge closes the list; the close effect
+                // above then returns focus to the "+" trigger.
+                onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
                 side="bottom"
                 align="start"
                 sideOffset={2}

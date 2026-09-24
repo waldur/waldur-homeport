@@ -42345,6 +42345,7 @@
       "feature_area": "resources-filter"
     }
   },
+  "Remove filter value": {},
   "Remove from favourites": {
     "context": {
       "feature_area": "search"
@@ -42544,6 +42545,15 @@
   "Remove validator": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Remove {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Removed": {

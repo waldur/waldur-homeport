@@ -89,7 +89,7 @@ export const Open: Story = {
     await userEvent.click(canvas.getByRole('button', { name: 'Add filter' }));
     // screen, not canvas: this content is portaled — see file comment.
     // Not getByText either: "Saved filters (0)" is nested (an outer
-    // role="button" span wrapping an inner .menu-title span), and both
+    // button wrapping an inner .menu-title span), and both
     // count as separate text matches under RTL's default text-content
     // matching. getByRole's accessible-name computation collapses that
     // nesting into one name.
@@ -143,13 +143,11 @@ export const WithCurrentFiltersApplied: Story = {
       name: 'Current filters',
     });
     await userEvent.click(currentFiltersRow);
-    // Not a bare getByText: "Save as" is `aria-hidden` (so getByRole can't
-    // find it) and, like "Saved filters (0)" above, nested — an outer
-    // .menu-link span wraps an inner .menu-title span with identical text
-    // content, so an unscoped match is ambiguous between the two.
-    await waitFor(() =>
-      screen.getByText('Save as', { selector: '.menu-title' }),
-    );
+    // getByRole, not getByText: "Save as" is a real, focusable button
+    // now — the point of the row being reachable at all — so the role
+    // query both finds it and asserts that it is exposed to a screen
+    // reader, which the previous `aria-hidden` span was not.
+    await waitFor(() => screen.getByRole('button', { name: 'Save as' }));
   },
 };
 

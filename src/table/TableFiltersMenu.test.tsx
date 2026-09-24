@@ -4,10 +4,12 @@ import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
 import { describe, expect, it, vi } from 'vitest';
 
+import { setFilter } from './actions';
 import { TableFilterContext } from './FilterContextProvider';
 import { StringFilter } from './filters';
 import { tableInitialReducer } from './store';
 import { TableFiltersMenu } from './TableFiltersMenu';
+import { FilterItem } from './types';
 
 /**
  * Regression coverage for the Radix conversion: TableFiltersMenu used to
@@ -18,9 +20,17 @@ import { TableFiltersMenu } from './TableFiltersMenu';
  * TableFilterContext's `openMenuName` instead.
  */
 describe('TableFiltersMenu', () => {
-  const renderMenu = (props: Record<string, any> = {}) => {
+  const renderMenu = (
+    props: Record<string, any> = {},
+    appliedFilters: FilterItem[] = [],
+  ) => {
     const table = 'TableFiltersMenuRegressionTable';
     const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    // Through the real reducer rather than a preloaded state tree: this
+    // slice's own reducer owns every other per-table default
+    // (`savedFilters` among them, which SaveFilterItems reads eagerly),
+    // and a hand-written seed silently drops them.
+    appliedFilters.forEach((item) => store.dispatch(setFilter(table, item)));
     const applyFiltersFn = vi.fn();
     render(
       <Provider store={store}>
@@ -275,5 +285,216 @@ describe('TableFiltersMenu', () => {
       </Provider>,
     );
     await waitFor(() => expect(container).toBeEmptyDOMElement());
+  });
+  /**
+   * Keyboard access to the "Add filter" list (WCAG 2.1.1). Reported as
+   * "I go to the Set filters button and activate it, a dropdown menu
+   * shows up. But I have no way of navigating the dropdown menu via
+   * keyboard. This is completely inaccessible."
+   *
+   * Two separate causes, one per test below: every row was a
+   * `<span role="button">` — the role without any of the behaviour, so
+   * unreachable by Tab and inert to Enter/Space — and the list itself is
+   * Radix-portaled away from its trigger, so even focusable rows have no
+   * Tab route in from the button that opens them. Both are asserted here
+   * rather than in Storybook because jsdom tracks `document.activeElement`
+   * faithfully; it is only real *layout* it doesn't do.
+   */
+  describe('keyboard access', () => {
+    // "Current filters" only renders once at least one filter holds a
+    // real value.
+    const applied: FilterItem[] = [
+      {
+        name: 'catalog_name',
+        label: 'Catalog',
+        value: 'production',
+        component: null,
+      },
+    ];
+
+    it('moves focus into the list when the menu opens, so Tab can reach every row', async () => {
+      const user = userEvent.setup();
+      renderMenu();
+
+      await user.click(screen.getByRole('button', { name: 'Add filter' }));
+
+      const rows = await screen.findAllByRole('button', {
+        name: /Saved filters|Catalog/,
+      });
+      await waitFor(() => expect(rows[0]).toHaveFocus());
+
+      // And the rest of the list is a plain Tab away — no row is skipped.
+      for (const row of rows.slice(1)) {
+        await user.tab();
+        expect(row).toHaveFocus();
+      }
+    });
+
+    it('names the filter list after its trigger', async () => {
+      const user = userEvent.setup();
+      renderMenu();
+
+      await user.click(screen.getByRole('button', { name: 'Add filter' }));
+      expect(
+        await screen.findByRole('dialog', { name: 'Add filter' }),
+      ).toBeInTheDocument();
+    });
+
+    it('opens a filter row with Enter and puts focus in its flyout', async () => {
+      const user = userEvent.setup();
+      renderMenu();
+
+      await user.click(screen.getByRole('button', { name: 'Add filter' }));
+      const row = await screen.findByRole('button', { name: 'Catalog' });
+      row.focus();
+      await user.keyboard('{Enter}');
+
+      const field = await screen.findByPlaceholderText('Catalog');
+      await waitFor(() => expect(field).toHaveFocus());
+    });
+
+    it('opens a filter row with Space too', async () => {
+      const user = userEvent.setup();
+      renderMenu();
+
+      await user.click(screen.getByRole('button', { name: 'Add filter' }));
+      const row = await screen.findByRole('button', { name: 'Catalog' });
+      row.focus();
+      await user.keyboard('{ }');
+
+      expect(await screen.findByPlaceholderText('Catalog')).toBeInTheDocument();
+    });
+
+    it('exposes "Save as" as a real button the keyboard can reach', async () => {
+      // "Save as" (and "Update", once a saved filter is selected) used to
+      // be `aria-hidden` spans with an onClick: no Tab stop, no
+      // Enter/Space, and absent from the accessibility tree entirely, so
+      // a screen reader never announced them at all.
+      const user = userEvent.setup();
+      renderMenu({}, applied);
+
+      await user.click(screen.getByRole('button', { name: 'Add filter' }));
+      const currentFilters = await screen.findByRole('button', {
+        name: 'Current filters',
+      });
+      currentFilters.focus();
+      await user.keyboard('{Enter}');
+
+      const saveAs = await screen.findByRole('button', { name: 'Save as' });
+      await waitFor(() => expect(saveAs).toHaveFocus());
+    });
+
+    it('closes the whole menu on one Escape from inside a filter', async () => {
+      // Radix on its own dismisses only the innermost layer, so it took
+      // two presses to get out of the filter window and the first read as
+      // "Escape doesn't work". The flyout is portaled to document.body,
+      // so the close also has to hand focus back itself or the keyboard
+      // is stranded on <body>.
+      const user = userEvent.setup();
+      renderMenu();
+
+      const trigger = screen.getByRole('button', { name: 'Add filter' });
+      await user.click(trigger);
+      const row = await screen.findByRole('button', { name: 'Catalog' });
+      row.focus();
+      await user.keyboard('{Enter}');
+      await screen.findByPlaceholderText('Catalog');
+
+      await user.keyboard('{Escape}');
+      await waitFor(() => expect(trigger).toHaveFocus());
+      expect(screen.queryByPlaceholderText('Catalog')).not.toBeInTheDocument();
+    });
+
+    it('returns focus to the row when Tab leaves its flyout', async () => {
+      // Tab out of a portaled flyout otherwise lands past the end of the
+      // page: "second level filters do not work on tab, and I can't go
+      // back to the first level filter".
+      const user = userEvent.setup();
+      renderMenu();
+
+      await user.click(screen.getByRole('button', { name: 'Add filter' }));
+      const row = await screen.findByRole('button', { name: 'Catalog' });
+      row.focus();
+      await user.keyboard('{Enter}');
+      await screen.findByPlaceholderText('Catalog');
+
+      // This filter is `instantApply={false}`, so the flyout holds the
+      // field plus Cancel/Apply: Tab walks those first, and only the Tab
+      // that would leave the flyout comes back to the row.
+      await user.tab();
+      expect(
+        await screen.findByRole('button', { name: 'Cancel' }),
+      ).toHaveFocus();
+      await user.tab();
+      expect(screen.getByRole('button', { name: 'Apply' })).toHaveFocus();
+
+      await user.tab();
+      await waitFor(() => expect(row).toHaveFocus());
+    });
+
+    it('returns focus to the row when Shift+Tab leaves its flyout', async () => {
+      const user = userEvent.setup();
+      renderMenu();
+
+      await user.click(screen.getByRole('button', { name: 'Add filter' }));
+      const row = await screen.findByRole('button', { name: 'Catalog' });
+      row.focus();
+      await user.keyboard('{Enter}');
+      await screen.findByPlaceholderText('Catalog');
+
+      await user.tab({ shift: true });
+      await waitFor(() => expect(row).toHaveFocus());
+    });
+
+    it("returns focus to a column's funnel icon when Tab leaves its popup", async () => {
+      // The column popup has no flyout of its own — the field sits
+      // directly in it — so it needs the same way back, or Tab walks out
+      // of the page from the table header.
+      const user = userEvent.setup();
+      renderMenu({ openName: 'catalog_name' });
+
+      const funnel = screen.getByRole('button', { name: 'Filter by column' });
+      funnel.focus();
+      await user.keyboard('{Enter}');
+      const field = await screen.findByPlaceholderText('Catalog');
+      field.focus();
+
+      await user.tab({ shift: true });
+      await waitFor(() => expect(funnel).toHaveFocus());
+    });
+
+    it('lets Shift+Tab off the first row go back out to the trigger', async () => {
+      // Radix loops focus inside its own content, which made the list a
+      // cul-de-sac: Shift+Tab wrapped round to the last row instead of
+      // going back to the "+" button — "it just moves me inside the same
+      // filter window and not back to the + icon button".
+      const user = userEvent.setup();
+      renderMenu();
+
+      const trigger = screen.getByRole('button', { name: 'Add filter' });
+      await user.click(trigger);
+      const first = await screen.findByRole('button', {
+        name: /Saved filters/,
+      });
+      first.focus();
+
+      await user.tab({ shift: true });
+      await waitFor(() => expect(trigger).toHaveFocus());
+    });
+
+    it('returns focus to the trigger when the menu closes', async () => {
+      // `forceMount` (see TableFiltersMenu.tsx) means Radix's own
+      // focus-restore-on-unmount never runs for this menu, so closing it
+      // would otherwise strand the keyboard on a hidden element.
+      const user = userEvent.setup();
+      renderMenu();
+
+      const trigger = screen.getByRole('button', { name: 'Add filter' });
+      await user.click(trigger);
+      await screen.findByRole('button', { name: 'Catalog' });
+
+      await user.keyboard('{Escape}');
+      await waitFor(() => expect(trigger).toHaveFocus());
+    });
   });
 });
