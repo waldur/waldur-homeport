@@ -907,7 +907,16 @@
       "primary_ui_type": "title"
     }
   },
-  "About us page": {},
+  "About us": {
+    "context": {
+      "feature_area": "footer"
+    }
+  },
+  "About us page": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "About {count} days after the deadline": {
     "context": {
       "variables": {
@@ -41476,7 +41485,6 @@
   },
   "Reason for modifying": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "project"
     }
   },

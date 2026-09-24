@@ -37,7 +37,7 @@ export const CommentDeleteButton: FC<CommentDeleteButtonProps> = ({
       submitting={deleteComment.isPending}
       type="button"
       variant="tertiary"
-      disabled={!comment.destroy_is_available || deleteComment.isPending}
+      disabled={deleteComment.isPending}
       onClick={() => deleteComment.mutate()}
       label={translate('Remove')}
       iconNode={<TrashIcon weight="bold" />}
