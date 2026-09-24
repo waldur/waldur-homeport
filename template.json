@@ -12090,15 +12090,20 @@
       "feature_area": "course-accounts"
     }
   },
+  "Course account closure has been requested.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "course-accounts"
+    }
+  },
   "Course account has been created.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "course-accounts"
     }
   },
-  "Course account has been deleted.": {
+  "Course account is already being processed.": {
     "context": {
-      "primary_ui_type": "success_message",
       "feature_area": "course-accounts"
     }
   },

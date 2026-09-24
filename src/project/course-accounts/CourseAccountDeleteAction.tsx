@@ -16,7 +16,10 @@ export const CourseAccountDeleteAction = ({ row, refetch }: OwnProps) => {
   const deleteMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceCourseAccountsDestroy({ path: { uuid: row.uuid } }),
-    successMessage: translate('Course account has been deleted.'),
+    // Closing now happens asynchronously on the backend: the request only
+    // queues it, the row moves to Pending, and it settles into Closed (or
+    // Erred) once the task runs.
+    successMessage: translate('Course account closure has been requested.'),
     errorMessage: translate('Unable to delete course account.'),
     refetch,
     confirmation: {
@@ -34,16 +37,19 @@ export const CourseAccountDeleteAction = ({ row, refetch }: OwnProps) => {
     },
   });
 
+  const disabledReason =
+    row.state === 'Closed'
+      ? translate('Cannot delete closed course account.')
+      : row.state === 'Pending'
+        ? translate('Course account is already being processed.')
+        : undefined;
+
   return (
     <RemovalActionItem
       action={() => deleteMutation.mutate()}
       title={translate('Delete')}
-      disabled={deleteMutation.isPending || row.state === 'Closed'}
-      tooltip={
-        row.state === 'Closed'
-          ? translate('Cannot delete closed course account.')
-          : undefined
-      }
+      disabled={deleteMutation.isPending || Boolean(disabledReason)}
+      tooltip={disabledReason}
     />
   );
 };
