@@ -196,7 +196,10 @@
       vertical-align: middle;
     }
 
-    &:hover > td.has-filter {
+    // Keyboard focus reveals a cell's filter shortcut just as hovering the row
+    // does, making room for it so it doesn't cover the text.
+    &:hover > td.has-filter,
+    > td.has-filter:has(button.inline-filter:focus-visible) {
       div.td-data:not(.with-copy div.td-data) {
         width: calc(100% - 40px); /* 32px of filter button + 8px of gap */
         overflow-x: hidden;

@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import {
   marketplaceCategoriesList,
   marketplaceProviderOfferingsList,
@@ -126,3 +127,25 @@ export const fetchLastNOfferings = async (
   ).data;
   return offerings;
 };
+
+/** A react-bootstrap ListGroupItem with only an onClick renders a plain <li>:
+ * clickable, but the keyboard can neither reach nor activate it. These props
+ * make the row a control without changing a class, so the list looks the same.
+ * `disabled` rows stay out of the tab order -- there is nothing to activate. */
+export const getSelectableRowProps = (
+  onSelect: () => void,
+  disabled?: boolean,
+) =>
+  disabled
+    ? { onClick: undefined }
+    : {
+        role: 'button',
+        tabIndex: 0,
+        onClick: onSelect,
+        onKeyDown: (event: KeyboardEvent<HTMLElement>) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onSelect();
+          }
+        },
+      };

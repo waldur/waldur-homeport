@@ -2321,6 +2321,11 @@
       "feature_area": "template"
     }
   },
+  "Add to favourites": {
+    "context": {
+      "feature_area": "search"
+    }
+  },
   "Add user": {
     "context": {
       "primary_ui_type": "action_button",
@@ -42330,6 +42335,11 @@
   "Remove filter": {
     "context": {
       "feature_area": "resources-filter"
+    }
+  },
+  "Remove from favourites": {
+    "context": {
+      "feature_area": "search"
     }
   },
   "Remove health monitor": {

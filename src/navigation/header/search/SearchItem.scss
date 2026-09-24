@@ -12,7 +12,10 @@
     overflow: hidden;
   }
 
+  // Zero width still leaves the button in the tab order, so focus on the row
+  // or on the star itself reveals it the way hovering the row does.
   &:hover .btn-fav,
+  &:focus-within .btn-fav,
   .btn-fav.show {
     width: auto;
     opacity: 1;

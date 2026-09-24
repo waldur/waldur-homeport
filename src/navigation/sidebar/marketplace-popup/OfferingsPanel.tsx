@@ -24,7 +24,7 @@ import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';
-import { fetchOfferingsByPage } from './utils';
+import { fetchOfferingsByPage, getSelectableRowProps } from './utils';
 
 const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 // Fallback height (px) used until the viewport is measured. Matches the
@@ -73,8 +73,11 @@ const OfferingListItem: FunctionComponent<{
             active: selectedItem && item.uuid === selectedItem.uuid,
           })}
           style={style}
-          onClick={() => onClick(item)}
           disabled={item.state === 'Paused'}
+          {...getSelectableRowProps(
+            () => onClick(item),
+            item.state === 'Paused',
+          )}
         >
           <Stack direction="horizontal" gap={3}>
             {item.image ? (
