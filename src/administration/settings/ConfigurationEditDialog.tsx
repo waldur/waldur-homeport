@@ -13,6 +13,7 @@ import { SelectField, SubmitButton, TextField } from '@/form';
 import { FormGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import MarkdownEditor from '@/form/MarkdownEditor';
 import { MonacoField } from '@/form/MonacoField';
 import { StringField } from '@/form/StringField';
 import { WideImageField } from '@/form/WideImageField';
@@ -172,6 +173,10 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                   {({ input }) => (
                     <MonacoField input={input} language="json" height={100} />
                   )}
+                </Field>
+              ) : item.type === 'markdown_field' ? (
+                <Field name="value">
+                  {({ input }) => <MarkdownEditor input={input} showImages />}
                 </Field>
               ) : item.type === 'text_field' ? (
                 <Field name="value">

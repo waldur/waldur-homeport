@@ -1,3 +1,4 @@
+import { ENV } from '@/core/config';
 import { StateDeclaration } from '@/core/types';
 import { translate } from '@/i18n';
 
@@ -40,6 +41,28 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Privacy policy'),
+    },
+  },
+
+  {
+    name: 'about.about-us',
+    url: '/about-us/',
+    component: lazyComponent(() =>
+      import('./about/AboutUsPage').then((module) => ({
+        default: module.AboutUsPage,
+      })),
+    ),
+    onEnter: (transition) => {
+      if (!ENV.plugins.WALDUR_CORE.ABOUT_US_PAGE_ENABLED) {
+        return transition.router.stateService.target(
+          'errorPage.notFound',
+          undefined,
+          { location: false },
+        );
+      }
+    },
+    data: {
+      breadcrumb: () => translate('About us'),
     },
   },
 ];
