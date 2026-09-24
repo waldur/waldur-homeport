@@ -23,6 +23,7 @@ const renderMirror = (
   activeChannel: ChatChannel,
   filters: Record<string, any[]> = {},
   queries: Record<string, string> = {},
+  hasOtherTab = true,
 ) => {
   dispatched.length = 0;
   const tableNames = new Set([
@@ -44,7 +45,9 @@ const renderMirror = (
   const wrapper = ({ children }: PropsWithChildren) => (
     <Provider store={store}>{children}</Provider>
   );
-  return renderHook(() => useSharedChatFilters(activeChannel), { wrapper });
+  return renderHook(() => useSharedChatFilters(activeChannel, hasOtherTab), {
+    wrapper,
+  });
 };
 
 const stored = (name: string, value: any) => [
@@ -211,5 +214,35 @@ describe('useSharedChatFilters', () => {
     );
 
     expect(queryWrites()).toEqual([]);
+  });
+
+  it('carries no filter and leaves the URL alone without the other tab', () => {
+    // A translated name would otherwise put severity= in the URL for a table
+    // that cannot be shown.
+    renderMirror(
+      'authenticated',
+      {
+        [AUTHENTICATED_TABLE]: stored('max_severity', {
+          label: 'High',
+          value: 'high',
+        }),
+      },
+      {},
+      false,
+    );
+
+    expect(mirrored()).toEqual([]);
+    expect(syncFiltersToURL).not.toHaveBeenCalled();
+  });
+
+  it('still persists the search term without the other tab', () => {
+    renderMirror(
+      'authenticated',
+      {},
+      { [AUTHENTICATED_TABLE]: 'openstack' },
+      false,
+    );
+
+    expect(syncFiltersToURL).toHaveBeenCalledWith({ query: 'openstack' });
   });
 });

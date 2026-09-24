@@ -4,8 +4,9 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { DateTime, Settings } from 'luxon';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { isAnonymousAssistantEnabled } from '@/ai-assistant/utils';
 import { TABLE_KEY as AUTHENTICATED_TABLE } from '@/support/SupportAIAssistantLogsList';
 import * as tableActions from '@/table/actions';
 
@@ -25,6 +26,10 @@ vi.mock('@/table/TableWithTabs', () => ({
       ))}
     </div>
   ),
+}));
+
+vi.mock('@/ai-assistant/utils', () => ({
+  isAnonymousAssistantEnabled: vi.fn(),
 }));
 
 // Resolved eagerly: a Settings.now that parses a date on each call recurses,
@@ -67,6 +72,10 @@ const renderDashboard = ({
 const setFilterActions = () =>
   dispatched.filter((action) => action.type === tableActions.SET_FILTER);
 
+beforeEach(() => {
+  vi.mocked(isAnonymousAssistantEnabled).mockReturnValue(true);
+});
+
 afterEach(() => {
   Settings.now = () => Date.now();
 });
@@ -77,6 +86,15 @@ describe('SupportAIAssistantDashboard', () => {
 
     expect(screen.getByText('Authenticated chat')).toBeInTheDocument();
     expect(screen.getByText('Anonymous chat')).toBeInTheDocument();
+  });
+
+  it('hides the anonymous tab while anonymous chat is disabled', () => {
+    vi.mocked(isAnonymousAssistantEnabled).mockReturnValue(false);
+
+    renderDashboard();
+
+    expect(screen.getByText('Authenticated chat')).toBeInTheDocument();
+    expect(screen.queryByText('Anonymous chat')).not.toBeInTheDocument();
   });
 
   it('offers the period control in the page header', () => {
@@ -133,6 +151,23 @@ describe('SupportAIAssistantDashboard', () => {
       filters: {
         [AUTHENTICATED_TABLE]: storedRange('2026-01-01', '2026-03-01'),
         [ANONYMOUS_TABLE]: storedRange('2026-08-04', '2026-08-10'),
+      },
+    });
+
+    expect(screen.getByText('Last 7 days')).toBeInTheDocument();
+  });
+
+  it('reads the authenticated period when a stale link names the hidden anonymous tab', () => {
+    // TableWithTabs falls back to the first tab for an unknown key, so the
+    // header has to follow it rather than the URL.
+    Settings.now = () => FIXED_NOW;
+    vi.mocked(isAnonymousAssistantEnabled).mockReturnValue(false);
+
+    renderDashboard({
+      tab: 'anonymous',
+      filters: {
+        [AUTHENTICATED_TABLE]: storedRange('2026-08-04', '2026-08-10'),
+        [ANONYMOUS_TABLE]: storedRange('2026-01-01', '2026-03-01'),
       },
     });
 
