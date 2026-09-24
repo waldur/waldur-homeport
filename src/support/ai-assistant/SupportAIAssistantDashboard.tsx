@@ -1,7 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { isAnonymousAssistantEnabled } from '@/ai-assistant/utils';
 import { translate } from '@/i18n';
 import {
   DateRangeValue,
@@ -28,18 +29,17 @@ import { useSharedChatFilters } from './useSharedChatFilters';
 // Admin dashboard for the AI assistant. Reuses the shared TableWithTabs (the
 // same component the Matrix admin dashboard uses) so each assistant channel is
 // a tab: authenticated chat threads and anonymous marketplace interactions.
-const TABS: TableTab[] = [
-  {
-    key: 'authenticated',
-    title: translate('Authenticated chat'),
-    component: SupportAIAssistantLogsList,
-  },
-  {
-    key: 'anonymous',
-    title: translate('Anonymous chat'),
-    component: AnonymousChatPanel,
-  },
-];
+const AUTHENTICATED_TAB: TableTab = {
+  key: 'authenticated',
+  title: translate('Authenticated chat'),
+  component: SupportAIAssistantLogsList,
+};
+
+const ANONYMOUS_TAB: TableTab = {
+  key: 'anonymous',
+  title: translate('Anonymous chat'),
+  component: AnonymousChatPanel,
+};
 
 // The preset writes into the very field the drawer's range picker owns rather
 // than a parallel query param, so there is one source of truth: the picker's
@@ -50,16 +50,30 @@ const RANGE_FILTER = 'created_range';
 export const SupportAIAssistantDashboard: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { params } = useCurrentStateAndParams();
+  // Otherwise the tab reads "no anonymous threads yet" on a deployment that
+  // can never have any.
+  const anonymousEnabled = isAnonymousAssistantEnabled();
+  // Memoised because TableWithTabs re-runs its URL sync whenever tabs changes.
+  const tabs = useMemo(
+    () =>
+      anonymousEnabled
+        ? [AUTHENTICATED_TAB, ANONYMOUS_TAB]
+        : [AUTHENTICATED_TAB],
+    [anonymousEnabled],
+  );
 
   // Read from the tab on screen: each table owns its filter storage, so a
-  // header that averaged the two would describe neither.
+  // header that averaged the two would describe neither. A stale
+  // ?tab=anonymous link lands on the authenticated tab once that tab is hidden.
   const activeChannel: ChatChannel =
-    params?.tab === 'anonymous' ? 'anonymous' : 'authenticated';
+    anonymousEnabled && params?.tab === 'anonymous'
+      ? 'anonymous'
+      : 'authenticated';
   const activeTable =
     activeChannel === 'anonymous' ? ANONYMOUS_TABLE : AUTHENTICATED_TABLE;
 
   // Carries every shared filter — not just the period — to the other tab.
-  useSharedChatFilters(activeChannel);
+  useSharedChatFilters(activeChannel, anonymousEnabled);
 
   const range: DateRangeValue | undefined =
     useFilterValues(activeTable)[RANGE_FILTER];
@@ -98,7 +112,7 @@ export const SupportAIAssistantDashboard: FunctionComponent = () => {
   return (
     <TableWithTabs
       title={translate('AI assistant logs')}
-      tabs={TABS}
+      tabs={tabs}
       syncWithUrlKey="tab"
       // headerActions, not actions: the latter renders beside the tab strip
       // (TableWithTabs.tsx:147), which put the control a row below the title.

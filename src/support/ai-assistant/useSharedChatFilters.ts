@@ -27,8 +27,15 @@ const TABLE_BY_CHANNEL: Record<ChatChannel, string> = {
  * Only the tab on screen is mounted, so only it writes to the URL and only it
  * can be edited — mirroring one way, active to inactive, is enough and cannot
  * ping-pong.
+ *
+ * Without the other tab (anonymous chat disabled) there is nobody to carry the
+ * filters to, and the translated names would only leave params in the URL for
+ * a table that cannot be shown.
  */
-export const useSharedChatFilters = (activeChannel: ChatChannel) => {
+export const useSharedChatFilters = (
+  activeChannel: ChatChannel,
+  hasOtherTab = true,
+) => {
   const dispatch = useDispatch();
   const inactiveChannel = otherChannel(activeChannel);
   const inactiveTable = TABLE_BY_CHANNEL[inactiveChannel];
@@ -60,6 +67,9 @@ export const useSharedChatFilters = (activeChannel: ChatChannel) => {
     );
   }, [dispatch]);
 
+  // The search term is still mirrored without the other tab: it has one name on
+  // both, so nothing stray reaches the URL, and this effect is also what
+  // persists it there for the tab on screen.
   useEffect(() => {
     if (inactiveQuery === activeQuery) {
       return;
@@ -70,6 +80,9 @@ export const useSharedChatFilters = (activeChannel: ChatChannel) => {
   }, [activeQuery, inactiveQuery, inactiveTable, dispatch]);
 
   useEffect(() => {
+    if (!hasOtherTab) {
+      return;
+    }
     SHARED_CHAT_FILTERS.forEach((shared) => {
       const from = shared[activeChannel];
       const to = shared[inactiveChannel];
@@ -99,6 +112,7 @@ export const useSharedChatFilters = (activeChannel: ChatChannel) => {
       }
     });
   }, [
+    hasOtherTab,
     activeChannel,
     inactiveChannel,
     inactiveTable,
