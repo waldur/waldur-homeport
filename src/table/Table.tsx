@@ -489,8 +489,6 @@ function Table<RowType = any>(props: TableProps<RowType>) {
     setFilterPosition,
     applyFilters,
     applyFiltersFn,
-    filters,
-    renderFiltersDrawer,
     hasOptionalColumns,
     columns,
     toggleColumn,
@@ -513,12 +511,10 @@ function Table<RowType = any>(props: TableProps<RowType>) {
 
   // Initialize filters
   useEffect(() => {
-    if (filterPosition === 'sidebar') {
-      renderFiltersDrawer(filters, props.formId);
-    } else if (filterPosition === 'menu') {
+    if (applyFiltersFn) {
       applyFiltersFn(true);
     }
-  }, []);
+  }, [applyFiltersFn]);
 
   // Fetch when filters are applied
   useEffect(() => {

@@ -65,7 +65,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     };
   }, [table, dispatch]);
 
-  const { openDrawer, renderDrawer } = useDrawer();
+  const { openDrawer } = useDrawer();
 
   // Get Redux state for request building
   const tableState = useSelector(getTableState(table));
@@ -270,20 +270,10 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     },
     [openDrawer, applyFiltersFn, table, dispatch],
   );
-  const renderFiltersDrawer = useCallback(
-    (filters: JSX.Element, formId?: string) => {
-      renderDrawer(TableFilterContainer, {
-        table,
-        filters,
-        formId,
-        setFilter: (item: FilterItem) =>
-          dispatch(actions.setFilter(table, item)),
-      });
-      applyFiltersFn(true);
-      dispatch(actions.selectSavedFilter(table, null));
-    },
-    [renderDrawer, applyFiltersFn, table, dispatch],
-  );
+  const renderFiltersDrawer = useCallback(() => {
+    applyFiltersFn(true);
+    dispatch(actions.selectSavedFilter(table, null));
+  }, [applyFiltersFn, table, dispatch]);
 
   const setDisplayMode = useCallback(
     (mode: DisplayMode) => dispatch(actions.setMode(table, mode)),

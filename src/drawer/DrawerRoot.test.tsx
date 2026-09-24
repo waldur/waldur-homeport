@@ -1,5 +1,5 @@
 import * as RadixPopover from '@radix-ui/react-popover';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
@@ -373,5 +373,38 @@ describe('DrawerRoot', () => {
 
     // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
     expect(document.getElementById('kt_drawer')).toHaveClass('drawer-on');
+  });
+
+  it('does not overwrite an active open drawer when renderDrawer is called with another component', async () => {
+    let drawerMethods!: ReturnType<typeof useDrawer>;
+    const CompA = () => <div data-testid="comp-a">Component A</div>;
+    const CompB = () => <div data-testid="comp-b">Component B</div>;
+
+    const TestButton = () => {
+      drawerMethods = useDrawer();
+      return null;
+    };
+
+    render(
+      <DrawerProvider>
+        <TestButton />
+        <DrawerRoot />
+      </DrawerProvider>,
+    );
+
+    act(() => {
+      drawerMethods.openDrawer(CompA, { title: 'Drawer A' });
+    });
+
+    expect(await screen.findByTestId('comp-a')).toBeInTheDocument();
+    expect(screen.getByText('Drawer A')).toBeInTheDocument();
+
+    act(() => {
+      drawerMethods.renderDrawer(CompB, { title: 'Drawer B' });
+    });
+
+    expect(screen.getByTestId('comp-a')).toBeInTheDocument();
+    expect(screen.getByText('Drawer A')).toBeInTheDocument();
+    expect(screen.queryByTestId('comp-b')).not.toBeInTheDocument();
   });
 });
