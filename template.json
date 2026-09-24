@@ -907,6 +907,7 @@
       "primary_ui_type": "title"
     }
   },
+  "About us page": {},
   "About {count} days after the deadline": {
     "context": {
       "variables": {
@@ -27877,6 +27878,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Markdown content of the About us page.": {},
   "Marker for comment. Used for separating comments made via Waldur from natively added comments.": {},
   "Marketing cookies": {
     "context": {
@@ -49601,6 +49603,7 @@
       "feature_area": "features"
     }
   },
+  "Show the About us page and its link in the footer.": {},
   "Show the affected rows": {
     "context": {
       "feature_area": "offering-merges"

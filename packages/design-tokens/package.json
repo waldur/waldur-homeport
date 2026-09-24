@@ -13,6 +13,7 @@
     "./buttonColors.css": "./src/buttonColors.css",
     "./surfaceColors.css": "./src/surfaceColors.css",
     "./sidebarColors.css": "./src/sidebarColors.css",
+    "./focusRing.css": "./src/focusRing.css",
     "./animations.css": "./src/animations.css",
     "./zIndex.css": "./src/zIndex.css",
     "./fonts.css": "./src/fonts.css"

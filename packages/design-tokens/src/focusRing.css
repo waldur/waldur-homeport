@@ -1,0 +1,25 @@
+/**
+ * One focus ring for everything that doesn't bring its own.
+ *
+ * Buttons already draw a brand ring (buttonColors.css's --btn-*-focus-ring,
+ * and Metronic's .btn:focus-visible), but links, breadcrumbs, sidebar rows and
+ * anything else with no focus styling of its own fell through to the browser
+ * default — blue on Chrome/Safari, so keyboard users saw two different rings
+ * depending on what they landed on. Same brand steps as the button rings:
+ * 600 on light, 500 on dark, where the ramp is lighter against dark surfaces.
+ */
+:root {
+  --focus-ring-color: var(--waldur-brand-600);
+  --focus-ring-width: 2px;
+  /* 0, like every button in the app -- a ring that hugs one control and floats
+     off the next is the inconsistency this file exists to remove. */
+  --focus-ring-offset: 0;
+  /* Corner for controls that have none of their own -- links, icon-only text
+     buttons, anything with a tabindex -- so their ring is not the one square
+     box in a row of rounded ones. A control with its own radius keeps it. */
+  --focus-ring-radius: 6px;
+}
+
+:root[data-theme='dark'] {
+  --focus-ring-color: var(--waldur-brand-500);
+}
