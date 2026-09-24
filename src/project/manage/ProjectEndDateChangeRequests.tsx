@@ -3,18 +3,19 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import {
   Project,
+  ProjectEndDateChangeRequest,
   projectEndDateChangeRequestsList,
   projectsRetrieve,
 } from 'waldur-js-client';
-
-import { Tooltip } from 'waldur-ui';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { Field } from '@/resource/summary';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -29,6 +30,15 @@ interface ProjectEndDateChangeRequestsProps {
 
 const isPending = (row: { state: string }) =>
   row.state?.toLowerCase() === 'pending';
+
+const ExpandableRow = ({ row }: { row: ProjectEndDateChangeRequest }) => (
+  <ExpandableContainer>
+    <Field
+      label={translate('Reason for modifying')}
+      value={renderFieldOrDash(row.comment)}
+    />
+  </ExpandableContainer>
+);
 
 const TABLE_TABS = [
   {
@@ -132,30 +142,6 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
           export: (row) => renderFieldOrDash(row.created_by_full_name),
         },
         {
-          title: translate('Reason for modifying'),
-          render: ({ row }) => (
-            <>
-              {renderFieldOrDash(
-                row.comment ? (
-                  <Tooltip
-                    label={row.comment}
-                    delayDuration={0}
-                    contentClassName="text-start"
-                  >
-                    <span
-                      style={{ width: 150 }}
-                      className="ellipsis d-inline-block"
-                    >
-                      {row.comment}
-                    </span>
-                  </Tooltip>
-                ) : null,
-              )}
-            </>
-          ),
-          export: (row) => renderFieldOrDash(row.comment),
-        },
-        {
           title: translate('State'),
           render: ({ row }) => <>{renderFieldOrDash(row.state)}</>,
           export: (row) => renderFieldOrDash(row.state),
@@ -184,6 +170,8 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
       ]}
       verboseName={translate('end date change requests')}
       enableExport={false}
+      expandableRow={ExpandableRow}
+      isRowExpandable={(row) => !!row.comment}
       rowActions={({ row }) =>
         isPending(row) && canReview && row.created_by_uuid !== user?.uuid ? (
           <ActionsDropdown row={row}>
