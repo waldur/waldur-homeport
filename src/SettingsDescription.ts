@@ -1034,6 +1034,12 @@ export const SettingsDescription = [
         type: 'integer',
       },
       {
+        key: 'PROPOSAL_DASHBOARD_REVIEWS_DUE_WITHIN_DAYS',
+        description: translate('How many days ahead the call manager dashboard looks for review deadlines. Past-due reviews are always included.'),
+        default: 7,
+        type: 'integer',
+      },
+      {
         key: 'DEFAULT_PROPOSAL_REQUIRED_FIELDS',
         description: translate('Project details fields a new call requires by default. Applied when the call is created; changing this never alters an existing call.'),
         default: ['project_summary'],
