@@ -471,14 +471,21 @@ export const SearchPopover = ({
         show={show}
         setQuery={setQuery}
         className="px-5 mb-6"
-        autoFocus
       />
 
       <Tab.Container
         activeKey={activeTab}
         onSelect={(key) => setActiveTab(key)}
       >
-        <div className="overflow-auto">
+        {/*
+          Firefox makes any scrollable box a Tab stop (Chrome only when it holds
+          nothing focusable), so without this the first Tab landed on the row
+          itself and the two browsers differed. Tab lands on the selected tab
+          and the arrows switch tabs; a tab scrolls into view as it takes focus.
+          py-1 leaves room for the line-tab focus ring, which is drawn outside
+          the tab and would otherwise be clipped by this scroll box.
+        */}
+        <div className="overflow-auto py-1" tabIndex={-1}>
           <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
             <Nav.Item className="text-nowrap ms-5">
               <Nav.Link eventKey="all">
