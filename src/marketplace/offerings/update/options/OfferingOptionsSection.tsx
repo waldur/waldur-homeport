@@ -21,13 +21,13 @@ export const OfferingOptionsSection: FC<OfferingSectionProps> = (props) => {
               'If you want user to provide additional details when ordering, please configure input form for the user below',
             )}
           >
-            <QuestionIcon size={24} weight="fill" className="mx-2 text-muted" />
+            <QuestionIcon size={20} weight="bold" className="text-muted" />
           </Tooltip>
         </>
       }
+      verboseName={translate('input variables')}
       offering={props.offering}
       refetch={props.refetch}
-      loading={props.loading}
     />
   );
 };

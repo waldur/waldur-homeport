@@ -18,6 +18,9 @@ import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 import { StringOptionConfig } from './StringOptionConfig';
 import { VisibleIfConfiguration } from './VisibleIfConfiguration';
 
+export const hasOptionSettings = (type?: string) =>
+  Boolean(type && type in OPTION_COMPONENTS);
+
 const OPTION_COMPONENTS = {
   integer: NumericOptionConfig,
   money: NumericOptionConfig,
@@ -31,7 +34,19 @@ const OPTION_COMPONENTS = {
   multi_datacenter_k8s_config: K8sDefaultsConfiguration,
 };
 
-export const OptionForm = ({
+// Not a registered field, and it is raised by the type on the first step while
+// the choices that can break it live on the second, so both steps show it.
+const DependentsError = () => {
+  const { errors } = useFormState({ subscription: { errors: true } });
+  return errors?.dependents ? <FieldError error={errors.dependents} /> : null;
+};
+
+/**
+ * First step: the option itself. Everything the dialog used to show up front
+ * stays here — including the visibility rule and the Required switch, which
+ * apply to every type and must not be a step away.
+ */
+export const OptionBasicsForm = ({
   resourceType,
   offering,
   optionKey,
@@ -39,29 +54,40 @@ export const OptionForm = ({
   resourceType: 'options' | 'resource_options';
   offering;
   optionKey?: string;
-}) => {
-  const { values, errors } = useFormState({
-    subscription: { values: true, errors: true },
-  });
-  const type = values.type?.value;
-  const OptionComponent = OPTION_COMPONENTS[type];
+}) => (
+  <>
+    <DisplayNameField />
+    <InternalNameField />
+    <InternalNamePrefill source="label" target="name" />
+    <StringGroup label={translate('Description')} name="help_text" />
+    <OptionTypeGroup />
+    <VisibleIfConfiguration
+      options={offering?.[resourceType]}
+      optionKey={optionKey}
+    />
+    {resourceType === 'options' ? (
+      <BooleanGroup name="required" label={translate('Required')} />
+    ) : null}
+    <DependentsError />
+  </>
+);
+
+/**
+ * Second step: the settings of the chosen type. The wizard only adds this step
+ * for types that have settings (see `hasOptionSettings`).
+ */
+export const OptionSettingsForm = ({ offering }: { offering }) => {
+  const { values } = useFormState({ subscription: { values: true } });
+  const OptionComponent = OPTION_COMPONENTS[values.type?.value];
+
+  if (!OptionComponent) {
+    return null;
+  }
 
   return (
     <>
-      <DisplayNameField />
-      <InternalNameField />
-      <InternalNamePrefill source="label" target="name" />
-      <StringGroup label={translate('Description')} name="help_text" />
-      <OptionTypeGroup />
-      {OptionComponent && <OptionComponent offering={offering} />}
-      <VisibleIfConfiguration
-        options={offering?.[resourceType]}
-        optionKey={optionKey}
-      />
-      {resourceType === 'options' ? (
-        <BooleanGroup name="required" label={translate('Required')} />
-      ) : null}
-      {errors?.dependents ? <FieldError error={errors.dependents} /> : null}
+      <OptionComponent offering={offering} />
+      <DependentsError />
     </>
   );
 };

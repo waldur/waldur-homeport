@@ -81,10 +81,11 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
                   }
                   className="btn-icon-right min-w-125px"
                   data-testid="wizard-submit-btn"
-                  children={
+                  // As iconNode, not children: children replace the label in
+                  // SubmitButton, which left the Next button wordless.
+                  iconNode={
                     props.loading ? (
                       <span className="svg-icon svg-icon-2">
-                        {}
                         <LoadingSpinnerSimple />
                       </span>
                     ) : !isLastStep ? (

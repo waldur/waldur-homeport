@@ -11,6 +11,7 @@ import { Tooltip } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
 import {
   BooleanEditField,
   EditFieldProvider,
@@ -191,6 +192,8 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             )}
             min={1}
             max={10}
+            required
+            validate={required}
             disabled={isReadOnly}
             renderValue={(value) => translate('{n} years', { n: value ?? 3 })}
           />
@@ -202,6 +205,8 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             )}
             min={1}
             max={10}
+            required
+            validate={required}
             disabled={isReadOnly}
             renderValue={(value) =>
               translate('{n} shared papers', { n: value ?? 1 })
@@ -215,6 +220,8 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             )}
             min={1}
             max={10}
+            required
+            validate={required}
             disabled={isReadOnly}
             renderValue={(value) => translate('{n} years', { n: value ?? 2 })}
           />

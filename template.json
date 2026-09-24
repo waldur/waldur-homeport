@@ -2155,7 +2155,6 @@
   },
   "Add option": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "options"
     }
   },
@@ -2283,7 +2282,6 @@
   },
   "Add step": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "options"
     }
   },
@@ -10028,11 +10026,6 @@
   "Cluster Tenants": {
     "context": {
       "feature_area": "create"
-    }
-  },
-  "Cluster Topology": {
-    "context": {
-      "feature_area": "options"
     }
   },
   "Cluster info": {
@@ -22344,6 +22337,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Hidden answers aren't saved.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Hide": {
     "context": {
       "feature_area": "auth"
@@ -25541,6 +25539,7 @@
   },
   "Label": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "providers"
     }
   },
@@ -31349,11 +31348,6 @@
       "feature_area": "inference"
     }
   },
-  "No input variables found": {
-    "context": {
-      "feature_area": "options"
-    }
-  },
   "No instance availability zones found.": {
     "context": {
       "feature_area": "steps"
@@ -33355,11 +33349,6 @@
       "feature_area": "endpoints"
     }
   },
-  "Offering doesn't have input variables.": {
-    "context": {
-      "feature_area": "options"
-    }
-  },
   "Offering doesn't have roles.": {
     "context": {
       "feature_area": "roles"
@@ -34560,6 +34549,7 @@
   },
   "Option": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "actions"
     }
   },
@@ -43435,6 +43425,11 @@
       "feature_area": "create"
     }
   },
+  "Required only while visible.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Required organization types": {
     "context": {
       "feature_area": "actions"
@@ -43448,11 +43443,6 @@
   "Required. This is an administrative override: the account will not be reactivated automatically by the system, even if the user regains roles.": {
     "context": {
       "feature_area": "create-user-steps"
-    }
-  },
-  "Required: Users cannot create clusters until Kubernetes versions are configured.": {
-    "context": {
-      "feature_area": "options"
     }
   },
   "Required: every component must have a value greater than zero.": {
@@ -49653,7 +49643,7 @@
       "feature_area": "features"
     }
   },
-  "Show this option only when an earlier option has one of the selected values. A hidden option is never required and its value is not stored.": {
+  "Show this option only for certain answers to an earlier option.": {
     "context": {
       "feature_area": "options"
     }
@@ -50893,6 +50883,16 @@
   "Storage Data Type": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Storage Data Type {index}": {
+    "context": {
+      "variables": {
+        "index": {
+          "type": "number"
+        }
+      },
+      "feature_area": "options"
     }
   },
   "Storage Data Types": {
@@ -61261,11 +61261,7 @@
       "action_type": "read"
     }
   },
-  "Unknown Type": {
-    "context": {
-      "feature_area": "options"
-    }
-  },
+  "Unknown Type": {},
   "Unknown device": {
     "context": {
       "primary_ui_type": "label",
@@ -63580,6 +63576,11 @@
   "Users by organization type": {
     "context": {
       "feature_area": "users"
+    }
+  },
+  "Users cannot create clusters until Kubernetes versions are configured.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Users from organizations of these types will be allowed.": {
@@ -67615,6 +67616,11 @@
       "feature_area": "views"
     }
   },
+  "input variables": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "instances": {
     "context": {
       "feature_area": "openstack-security-groups"
@@ -68187,6 +68193,11 @@
   "resource invitations": {
     "context": {
       "feature_area": "projects"
+    }
+  },
+  "resource options": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "resource queues": {

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { openstackNetworksSetMtu } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -35,6 +36,8 @@ export const SetMtuDialog: FC<ActionDialogProps> = ({
           label: translate('MTU'),
           minValue: 68,
           maxValue: 65536,
+          required: true,
+          validate: required,
         },
       ]}
       initialValues={{

@@ -107,6 +107,36 @@ describe('VisibleIfConfiguration', () => {
     });
   });
 
+  it('explains the button before a rule exists', () => {
+    renderComponent('velero_account');
+    expect(
+      screen.getByText(
+        'Show this option only for certain answers to an earlier option.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Hidden answers aren't saved/),
+    ).not.toBeInTheDocument();
+  });
+
+  it('warns about the consequences only once a rule exists', () => {
+    renderComponent('velero_account', {
+      visible_if: { field: 'velero_backups', values: [true] },
+    });
+    expect(screen.getByText(/Hidden answers aren't saved/)).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Required only while visible/),
+    ).not.toBeInTheDocument();
+  });
+
+  it('adds the required line when the option is required', () => {
+    renderComponent('velero_account', {
+      required: true,
+      visible_if: { field: 'velero_backups', values: [true] },
+    });
+    expect(screen.getByText(/Required only while visible/)).toBeInTheDocument();
+  });
+
   it('removes the rule', async () => {
     const onSubmit = renderComponent('velero_account', {
       visible_if: { field: 'velero_backups', values: [true] },

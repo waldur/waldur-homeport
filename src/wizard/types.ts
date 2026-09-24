@@ -112,8 +112,12 @@ export interface WizardProps<FormValues = any> {
   submitLabel?: string;
   /** Label for the next button on intermediate steps */
   nextLabel?: string;
-  /** Array of step definitions */
-  steps: WizardStep[];
+  /**
+   * Step definitions, or a function of the current values when a step only
+   * applies to some of them -- the last step decides whether the footer
+   * offers "Next" or the submit label.
+   */
+  steps: WizardStep[] | ((values: any) => WizardStep[]);
   /** Whether to hide the step indicator */
   hideStepper?: boolean;
   /** Array of step components, one for each step */

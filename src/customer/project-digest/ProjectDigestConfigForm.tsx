@@ -6,6 +6,7 @@ import {
   ProjectDigestConfigRequest,
 } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
 import { BooleanGroup, SelectGroup, NumberGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -160,6 +161,7 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
                     'Day of the month to send the digest (1-28).',
                   )}
                   required
+                  validate={required}
                 />
               )}
 

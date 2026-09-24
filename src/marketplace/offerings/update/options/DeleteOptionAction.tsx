@@ -6,19 +6,17 @@ import {
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { CompactActionButton } from '@/table/CompactActionButton';
-
-import { OfferingSectionProps } from '../types';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 import { formatDependentOptionsError, getDependentOptions } from './validation';
 
-export const DeleteOptionButton: FC<
-  OfferingSectionProps & {
-    optionKey: string;
-    optionLabel: string;
-    type: string;
-  }
-> = ({ optionKey, optionLabel, offering, type, refetch }) => {
+export const DeleteOptionAction: FC<{
+  offering;
+  optionKey: string;
+  optionLabel: string;
+  type: string;
+  refetch;
+}> = ({ optionKey, optionLabel, offering, type, refetch }) => {
   const dependents = getDependentOptions(offering[type], optionKey);
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: async () => {
@@ -60,11 +58,10 @@ export const DeleteOptionButton: FC<
     refetch,
   });
   return (
-    <CompactActionButton
-      variant="danger"
+    <RemovalActionItem
+      title={translate('Delete')}
       action={mutate}
       disabled={isPending || dependents.length > 0}
-      title={translate('Delete')}
       tooltip={
         isPending
           ? translate('Processing')

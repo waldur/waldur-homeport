@@ -111,6 +111,22 @@ describe('EditCapacityDialog', () => {
     });
   });
 
+  it('does not save a cleared capacity', async () => {
+    const user = userEvent.setup();
+    renderDialog();
+
+    await user.clear(screen.getByLabelText('Maximum assignments'));
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+
+    // Without the validator the empty value was dropped from the PATCH body:
+    // nothing changed, yet the success toast still showed.
+    expect(
+      await screen.findByText('This field is required.'),
+    ).toBeInTheDocument();
+    expect(callReviewerPoolsPartialUpdate).not.toHaveBeenCalled();
+    expect(showSuccess).not.toHaveBeenCalled();
+  });
+
   it('shows an error notification and keeps the dialog open on a 400 response', async () => {
     const user = userEvent.setup();
     const error = {

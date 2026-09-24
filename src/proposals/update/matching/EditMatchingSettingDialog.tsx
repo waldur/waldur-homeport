@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
 import { NumberGroup, SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -185,6 +186,8 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
                 <NumberGroup
                   label={FIELD_LABELS[resolve.name]}
                   name={resolve.name}
+                  required
+                  validate={required}
                   min={1}
                   max={20}
                   description={FIELD_DESCRIPTIONS[resolve.name]}

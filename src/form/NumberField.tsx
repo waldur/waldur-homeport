@@ -67,6 +67,12 @@ export const BaseNumberField: FC<BaseNumberFieldProps> = ({
     );
 
   const isOutOfRange = (v) => {
+    // Number('') is 0, so an empty field used to clamp to `min` -- it rendered
+    // invalid before anything was typed, and blurring it silently filled in
+    // the minimum.
+    if (v === null || v === undefined || String(v).trim() === '') {
+      return false;
+    }
     const num = Number(v);
     if (!isNaN(num)) {
       const clamped = clamp(num, minNum, maxNum);

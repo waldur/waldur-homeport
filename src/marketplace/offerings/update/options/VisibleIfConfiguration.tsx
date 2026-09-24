@@ -1,14 +1,14 @@
-import { EyeIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { OfferingOptions } from 'waldur-js-client';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
-import { CompactIconButton } from '@/core/buttons/IconButton';
 import { FormGroup } from '@/form';
 import { FieldError } from '@/form/FieldError';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { getVisibleIfCandidates } from './validation';
 
@@ -115,13 +115,27 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
   return (
     <FormGroup
       label={translate('Show only when')}
-      description={translate(
-        'Show this option only when an earlier option has one of the selected values. A hidden option is never required and its value is not stored.',
-      )}
+      description={
+        rule ? (
+          <>
+            {translate("Hidden answers aren't saved.")}
+            {values.required ? (
+              <> {translate('Required only while visible.')}</>
+            ) : null}
+          </>
+        ) : (
+          translate(
+            'Show this option only for certain answers to an earlier option.',
+          )
+        )
+      }
     >
       {rule ? (
-        <div className="d-flex gap-2 align-items-start">
-          <div className="flex-grow-1">
+        // Grid, not flex-grow: the value picker only renders once an option is
+        // chosen, and free-space distribution made the first select resize
+        // when it appeared.
+        <div className="row g-2 align-items-start">
+          <div className="col">
             <Field
               name="visible_if.field"
               render={({ input }) => (
@@ -145,26 +159,29 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
             />
             <RuleError name="visible_if.field" />
           </div>
-          <div className="flex-grow-1">
+          <div className="col">
             {parent ? <ValuesField parent={parent} /> : null}
             {parent ? <RuleError name="visible_if.values" /> : null}
           </div>
-          <CompactIconButton
-            variant="outline-danger"
-            onClick={() => form.change('visible_if', undefined)}
-            iconNode={<TrashIcon weight="bold" />}
-            tooltip={translate('Remove rule')}
-          />
+          <div className="col-auto">
+            <RemovalActionButton
+              action={() => form.change('visible_if', undefined)}
+              tooltip={translate('Remove rule')}
+              // Square at the selects' own height, so the rule stays one row.
+              className="h-40px w-40px"
+            />
+          </div>
         </div>
       ) : (
-        <BaseButton
-          variant="outline-primary"
-          size="sm"
-          onClick={() =>
+        // Same control the other in-dialog row adders use (checklist answer
+        // options, cascade steps): compact, text-primary, plus icon.
+        <CompactActionButton
+          action={() =>
             form.change('visible_if', { field: undefined, values: [] })
           }
-          iconNode={<EyeIcon className="me-1" weight="bold" />}
-          label={translate('Add rule')}
+          title={translate('Add rule')}
+          iconNode={<PlusIcon weight="bold" />}
+          variant="text-primary"
         />
       )}
     </FormGroup>

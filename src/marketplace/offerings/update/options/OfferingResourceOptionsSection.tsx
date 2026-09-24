@@ -23,13 +23,13 @@ export const OfferingResourceOptionsSection: FC<OfferingSectionProps> = (
               'If you want user to be able to modify resource options after creation, please configure options for user below',
             )}
           >
-            <QuestionIcon size={24} weight="fill" className="mx-2 text-muted" />
+            <QuestionIcon size={20} weight="bold" className="text-muted" />
           </Tooltip>
         </>
       }
+      verboseName={translate('resource options')}
       offering={props.offering}
       refetch={props.refetch}
-      loading={props.loading}
     />
   );
 };

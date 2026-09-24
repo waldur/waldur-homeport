@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { required } from '@/core/validators';
 import { StringGroup, TextGroup, SelectGroup, NumberGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
@@ -148,6 +149,7 @@ export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
               name="min_replicas"
               label={translate('Min replicas')}
               required={true}
+              validate={required}
               min={1}
               max={10}
             />
@@ -155,6 +157,7 @@ export const HPACreateDialog: FC<HPACreateDialogProps> = (props) => {
               name="max_replicas"
               label={translate('Max replicas')}
               required={true}
+              validate={required}
               min={1}
               max={10}
             />
