@@ -1,20 +1,16 @@
-import arrayMutators from 'final-form-arrays';
 import { useMemo } from 'react';
-import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateOptions,
   marketplaceProviderOfferingsUpdateResourceOptions,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatOption } from '../../store/utils';
 
 import { FIELD_TYPES } from './constants';
-import { OptionForm } from './OptionForm';
+import { OptionWizard } from './OptionWizard';
 import { validateOptionForm } from './validation';
 
 const serializeCascadeConfig = (cascadeConfig) => {
@@ -89,8 +85,9 @@ export const EditOptionDialog = ({ resolve }) => {
   });
 
   return (
-    <Form
-      onSubmit={(values) => updateMutation.mutateAsync(values)}
+    <OptionWizard
+      title={translate('Edit option')}
+      submitLabel={translate('Save')}
       initialValues={initialValues}
       validate={(values) =>
         validateOptionForm(values, {
@@ -98,27 +95,10 @@ export const EditOptionDialog = ({ resolve }) => {
           optionKey: resolve.option.name,
         })
       }
-      mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={translate('Edit option')}
-            footer={
-              <SubmitButton
-                disabled={invalid}
-                submitting={submitting}
-                label={translate('Save')}
-              />
-            }
-          >
-            <OptionForm
-              resourceType={resolve.type}
-              offering={resolve.offering}
-              optionKey={resolve.option.name}
-            />
-          </ModalDialog>
-        </form>
-      )}
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
+      resourceType={resolve.type}
+      offering={resolve.offering}
+      optionKey={resolve.option.name}
     />
   );
 };

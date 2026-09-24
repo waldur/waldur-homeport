@@ -76,12 +76,42 @@ describe('K8sDefaultsConfiguration topology mode', () => {
     expect(screen.getByText(label)).toBeInTheDocument();
   });
 
+  it('blocks submission until the Kubernetes versions are given', async () => {
+    const onSubmit = vi.fn();
+    render(
+      <Form
+        onSubmit={onSubmit}
+        initialValues={{ type: { value: 'single_datacenter_k8s_config' } }}
+        render={({ handleSubmit, invalid }) => (
+          <form onSubmit={handleSubmit}>
+            <K8sDefaultsConfiguration />
+            <button type="submit" disabled={invalid}>
+              Save
+            </button>
+          </form>
+        )}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+
+    await userEvent.type(
+      screen.getByRole('textbox', { name: /Available Kubernetes Versions/ }),
+      '1.34.0',
+    );
+    expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
+  });
+
   it('submits the selected mode', async () => {
     const onSubmit = vi.fn();
     render(
       <Form
         onSubmit={onSubmit}
-        initialValues={{ type: { value: 'multi_datacenter_k8s_config' } }}
+        initialValues={{
+          type: { value: 'multi_datacenter_k8s_config' },
+          // Versions are mandatory now, so the form cannot submit without them.
+          default_configs: { available_kubernetes_versions: '1.34.0' },
+        }}
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <K8sDefaultsConfiguration />
@@ -97,7 +127,10 @@ describe('K8sDefaultsConfiguration topology mode', () => {
 
     expect(onSubmit).toHaveBeenCalledWith(
       expect.objectContaining({
-        default_configs: { topology_mode: 'customer_choice' },
+        default_configs: {
+          topology_mode: 'customer_choice',
+          available_kubernetes_versions: '1.34.0',
+        },
       }),
       expect.anything(),
       expect.anything(),

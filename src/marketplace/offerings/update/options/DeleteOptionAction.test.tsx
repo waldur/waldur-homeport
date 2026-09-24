@@ -3,11 +3,11 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { renderWithProviders } from '@/test/harness';
 
-import { DeleteOptionButton } from './DeleteOptionButton';
+import { DeleteOptionAction } from './DeleteOptionAction';
 
 // Expose the tooltip as an attribute; the real one only renders on hover.
-vi.mock('@/table/CompactActionButton', () => ({
-  CompactActionButton: ({ title, disabled, tooltip }) => (
+vi.mock('@/resource/actions/RemovalActionItem', () => ({
+  RemovalActionItem: ({ title, disabled, tooltip }) => (
     <button disabled={disabled} data-tooltip={tooltip}>
       {title}
     </button>
@@ -37,17 +37,16 @@ const offering: any = {
 
 const renderButton = (optionKey: string) =>
   renderWithProviders(
-    <DeleteOptionButton
+    <DeleteOptionAction
       offering={offering}
       type="options"
       optionKey={optionKey}
       optionLabel={offering.options.options[optionKey].label}
       refetch={vi.fn()}
-      loading={false}
     />,
   );
 
-describe('DeleteOptionButton', () => {
+describe('DeleteOptionAction', () => {
   it('blocks deleting an option that other rules refer to', () => {
     renderButton('backups');
     const button = screen.getByRole('button', { name: 'Delete' });

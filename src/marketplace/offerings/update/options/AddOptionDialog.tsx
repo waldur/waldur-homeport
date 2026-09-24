@@ -1,19 +1,15 @@
-import arrayMutators from 'final-form-arrays';
-import { Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateOptions,
   marketplaceProviderOfferingsUpdateResourceOptions,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatOption } from '../../store/utils';
 
 import { FIELD_TYPES } from './constants';
-import { OptionForm } from './OptionForm';
+import { OptionWizard } from './OptionWizard';
 import { validateOptionForm } from './validation';
 
 export const AddOptionDialog = ({ resolve }) => {
@@ -52,34 +48,16 @@ export const AddOptionDialog = ({ resolve }) => {
   });
 
   return (
-    <Form
-      onSubmit={(values) => addMutation.mutateAsync(values)}
+    <OptionWizard
+      title={translate('Add option')}
+      submitLabel={translate('Create')}
+      initialValues={{ type: FIELD_TYPES[0] }}
       validate={(values) =>
         validateOptionForm(values, { options: resolve.offering[resolve.type] })
       }
-      initialValues={{
-        type: FIELD_TYPES[0],
-      }}
-      mutators={{ ...arrayMutators }}
-      render={({ handleSubmit, submitting, invalid }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={translate('Add option')}
-            footer={
-              <SubmitButton
-                disabled={invalid}
-                submitting={submitting}
-                label={translate('Create')}
-              />
-            }
-          >
-            <OptionForm
-              resourceType={resolve.type}
-              offering={resolve.offering}
-            />
-          </ModalDialog>
-        </form>
-      )}
+      onSubmit={(values) => addMutation.mutateAsync(values)}
+      resourceType={resolve.type}
+      offering={resolve.offering}
     />
   );
 };

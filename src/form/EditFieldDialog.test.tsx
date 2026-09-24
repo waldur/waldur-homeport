@@ -2,6 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
+import { required } from '@/core/validators';
 import { renderWithProviders } from '@/test/harness';
 
 import { EditFieldDialog } from './EditFieldDialog';
@@ -81,6 +82,25 @@ describe('EditFieldDialog', () => {
     await submit();
 
     await waitFor(() => expect(callback).toHaveBeenCalledWith({ limit: null }));
+  });
+
+  it('blocks clearing a numeric field that has a required validator', async () => {
+    // A non-null numeric column: clearing must be stopped in the dialog, not
+    // sent as null for the server to reject.
+    const callback = vi.fn().mockResolvedValue({});
+    renderDialog({
+      scope: { lookback_years: 3 },
+      name: 'lookback_years',
+      callback,
+      fieldComponent: NumberField as any,
+      fieldProps: { min: 1, validate: required },
+      emptyValue: null,
+    });
+
+    await userEvent.clear(screen.getByRole('spinbutton'));
+
+    expect(screen.getByRole('button', { name: /confirm/i })).toBeDisabled();
+    expect(callback).not.toHaveBeenCalled();
   });
 
   it('still submits the typed value for a non-empty edit', async () => {

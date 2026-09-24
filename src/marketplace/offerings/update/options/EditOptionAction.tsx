@@ -1,10 +1,10 @@
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-
-import { OfferingSectionProps } from '../types';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { OPTION_FORM_ID } from './constants';
 
@@ -14,12 +14,12 @@ const EditOptionDialog = lazyComponent(() =>
   })),
 );
 
-export const EditOptionButton: FunctionComponent<
-  OfferingSectionProps & {
-    option;
-    type;
-  }
-> = ({ offering, option, refetch, type }) => {
+export const EditOptionAction: FunctionComponent<{
+  offering;
+  option;
+  type;
+  refetch;
+}> = ({ offering, option, refetch, type }) => {
   const { openDialog } = useModal();
   const callback = () => {
     openDialog(EditOptionDialog, {
@@ -28,5 +28,11 @@ export const EditOptionButton: FunctionComponent<
       size: 'lg',
     });
   };
-  return <CompactEditButton onClick={callback} />;
+  return (
+    <ActionItem
+      title={translate('Edit')}
+      iconNode={<PencilSimpleIcon weight="bold" />}
+      action={callback}
+    />
+  );
 };

@@ -155,6 +155,29 @@ describe('EditMatchingSettingDialog', () => {
     expect(vi.mocked(useModal().closeDialog)).toHaveBeenCalled();
   });
 
+  it('does not save a cleared integer setting', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <EditMatchingSettingDialog
+        {...makeProps('max_proposals_per_reviewer', 'Edit max proposals')}
+      />,
+    );
+
+    const input = await screen.findByRole('spinbutton');
+    await user.clear(input);
+    await user.click(screen.getByRole('button', { name: /Save/i }));
+
+    // Without the validator the empty value was dropped from the PATCH body:
+    // nothing changed, yet the success toast still showed.
+    expect(
+      await screen.findByText('This field is required.'),
+    ).toBeInTheDocument();
+    expect(
+      proposalProtectedCallsMatchingConfigurationPartialUpdate,
+    ).not.toHaveBeenCalled();
+    expect(vi.mocked(useNotify().showSuccess)).not.toHaveBeenCalled();
+  });
+
   it('surfaces an API 400 error and calls showErrorResponse', async () => {
     const user = userEvent.setup();
     const error = {

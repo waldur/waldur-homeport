@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { openstackListenersCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -74,6 +75,7 @@ export const CreateListenerDialog: FC<ActionDialogProps> = ({
           minValue: 1,
           maxValue: 65535,
           required: true,
+          validate: required,
         },
         {
           name: 'default_pool',

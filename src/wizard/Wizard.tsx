@@ -43,10 +43,16 @@ export function Wizard<FormValues = any>({
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
   const [loading, setLoading] = useToggle(false);
 
-  const isLast = step === props.steps.length - 1;
+  const resolveSteps = (values) =>
+    typeof props.steps === 'function' ? props.steps(values) : props.steps;
 
-  const nextStep = () => {
-    const newStep = step + 1;
+  // Steps that depend on the values can shrink below the current step (a
+  // later answer drops a step), so the step shown is the current one clamped
+  // to the steps that exist now.
+  const clampStep = (values) => Math.min(step, resolveSteps(values).length - 1);
+
+  const nextStep = (from = step) => {
+    const newStep = from + 1;
     setStep(newStep);
     if (newStep > lastVisitedStep) {
       setLastVisitedStep(newStep);
@@ -54,19 +60,19 @@ export function Wizard<FormValues = any>({
     return newStep;
   };
 
-  const prevStep = () => setStep((s) => Math.max(0, s - 1));
+  const prevStep = (values) =>
+    setStep((s) => Math.max(0, Math.min(s, clampStep(values)) - 1));
 
   const selectStep = (num: number) => {
     if (num <= lastVisitedStep) setStep(num);
   };
 
-  const _submitLabel = isLast ? submitLabel : nextLabel;
-
   const _submit = (values, form, callback) => {
-    if (isLast) {
+    const current = clampStep(values);
+    if (current === resolveSteps(values).length - 1) {
       return props.onSubmit(values, form, callback);
     } else {
-      return Promise.resolve(nextStep());
+      return Promise.resolve(nextStep(current));
     }
   };
 
@@ -77,31 +83,38 @@ export function Wizard<FormValues = any>({
       validate={props.validate}
       mutators={props.mutators}
       render={(formProps) => {
+        const steps = resolveSteps(formProps.values);
+        const current = Math.min(step, steps.length - 1);
+        const isLast = current === steps.length - 1;
+        // Bound to the form's own values: callers pass anything from the
+        // values to a click event.
+        const onPrev = () => prevStep(formProps.values);
+
         // Build renderFooter wrapper that provides navigation functions
         const renderFooterWithNav = props.renderFooter
           ? () =>
               props.renderFooter!({
-                step,
-                totalSteps: props.steps.length,
+                step: current,
+                totalSteps: steps.length,
                 submitting: formProps.submitting,
                 invalid: formProps.invalid,
                 values: formProps.values,
                 form: formProps.form,
-                onPrev: prevStep,
+                onPrev,
                 onStep: selectStep,
                 handleSubmit: formProps.handleSubmit,
               } as WizardFooterRenderProps)
           : undefined;
 
-        return createElement(props.wizardForms[step], {
+        return createElement(props.wizardForms[current], {
           ...formProps,
           title: props.title,
           subtitle: props.subtitle,
-          onPrev: prevStep,
+          onPrev,
           onStep: selectStep,
-          submitLabel: _submitLabel,
-          step,
-          steps: props.steps,
+          submitLabel: isLast ? submitLabel : nextLabel,
+          step: current,
+          steps,
           hideStepper: props.hideStepper,
           initialValues: props.initialValues,
           actions: props.actions,

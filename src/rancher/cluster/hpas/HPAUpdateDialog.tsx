@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { RancherHpa, rancherHpasUpdate } from 'waldur-js-client';
 
+import { required } from '@/core/validators';
 import { StringGroup, TextGroup, NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
@@ -102,6 +103,7 @@ export const HPAUpdateDialog: FC<HPAUpdateDialogProps> = (props) => {
               name="min_replicas"
               label={translate('Min replicas')}
               required={true}
+              validate={required}
               min={1}
               max={10}
             />
@@ -109,6 +111,7 @@ export const HPAUpdateDialog: FC<HPAUpdateDialogProps> = (props) => {
               name="max_replicas"
               label={translate('Max replicas')}
               required={true}
+              validate={required}
               min={1}
               max={10}
             />

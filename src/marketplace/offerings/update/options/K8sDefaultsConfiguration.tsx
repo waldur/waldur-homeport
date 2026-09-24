@@ -1,10 +1,14 @@
 import React from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { useField } from 'react-final-form';
 import { LoadBalancerModeEnum, TopologyModeEnum } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
+import { required } from '@/core/validators';
 import { StringGroup, NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
+import { K8sFormSection } from '@/marketplace/common/K8sFormSection';
 
 const getLoadBalancerModeOptions = (): Array<{
   value: LoadBalancerModeEnum;
@@ -40,52 +44,46 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
     subscription: { value: true },
   });
   return (
-    <Card>
-      <Card.Header>
-        <h6 className="mb-0">
-          {translate('Default Kubernetes Infrastructure Sizing')}
-        </h6>
-      </Card.Header>
-      <Card.Body>
-        {/* Configuration Guide */}
-        <div className="rounded border border-primary bg-secondary p-4 mb-4">
-          <h6 className="mb-2 text-primary">
-            {translate('Configuration Guide')}
-          </h6>
-          <p className="mb-2">
-            {translate(
-              'To make this Kubernetes option fully functional, you need to configure:',
-            )}
-          </p>
-          <ul className="mb-2">
-            <li>
-              <strong>{translate('Kubernetes Versions')}</strong>{' '}
-              {translate('(Required - see section below)')}
-            </li>
-            <li>
-              <strong>{translate('Default Resource Sizing')}</strong>{' '}
-              {translate('(Optional - improves user experience)')}
-            </li>
-          </ul>
-          <p className="mb-0 text-muted">
-            {translate(
-              'Without Kubernetes versions configured, users will see a warning and cannot create clusters.',
-            )}
-          </p>
-        </div>
-
-        <p className="text-muted mb-4">
-          {translate(
-            'Configure default resource allocations for controller nodes, load balancers, and storage volumes. These values will be used as defaults when users create new clusters.',
-          )}
-        </p>
-
-        {/* Cluster Topology */}
-        <h6 className="border-bottom pb-2 mb-3">
-          {translate('Cluster Topology')}
-          <small className="text-muted ms-2">({translate('Optional')})</small>
-        </h6>
+    <>
+      <K8sFormSection
+        title={translate('Default Kubernetes Infrastructure Sizing')}
+        subtitle={translate(
+          'Configure default resource allocations for controller nodes, load balancers, and storage volumes. These values will be used as defaults when users create new clusters.',
+        )}
+      >
+        <AlertItem
+          variant="info"
+          type="floating"
+          // Same 17.5px step the fields below use.
+          className="mb-5"
+          title={translate('Configuration Guide')}
+          body={
+            <>
+              <p className="mb-2">
+                {translate(
+                  'To make this Kubernetes option fully functional, you need to configure:',
+                )}
+              </p>
+              <ul className="mb-2">
+                <li>
+                  <strong>{translate('Kubernetes Versions')}</strong>{' '}
+                  {translate('(Required - see section below)')}
+                </li>
+                <li>
+                  <strong>{translate('Default Resource Sizing')}</strong>{' '}
+                  {translate('(Optional - improves user experience)')}
+                </li>
+              </ul>
+              <p className="mb-0">
+                {translate(
+                  'Without Kubernetes versions configured, users will see a warning and cannot create clusters.',
+                )}
+              </p>
+            </>
+          }
+        />
         <SelectGroup
+          space={5}
           name={`${name}.topology_mode`}
           label={translate('Cluster topology')}
           description={translate(
@@ -102,16 +100,18 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           parse={(value) => value || undefined}
           simpleValue
         />
+      </K8sFormSection>
 
-        {/* Controller Node Defaults */}
-        <h6 className="border-bottom pb-2 mb-3 mt-4">
-          {translate('Controller Node Defaults')}
-          <small className="text-muted ms-2">({translate('Optional')})</small>
-        </h6>
+      <K8sFormSection
+        title={translate('Controller Node Defaults')}
+        topSeparator
+      >
         <Row>
           <Col md={6}>
             <NumberGroup
+              space={5}
               label={translate('vCPUs per Controller')}
+              tooltipEnd
               help={translate(
                 'Number of vCPUs allocated to each controller node',
               )}
@@ -124,7 +124,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={6}>
             <NumberGroup
+              space={5}
               label={translate('RAM per Controller (GB)')}
+              tooltipEnd
               help={translate(
                 'Amount of RAM in GB allocated to each controller node',
               )}
@@ -140,7 +142,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
         <Row>
           <Col md={6}>
             <NumberGroup
+              space={5}
               label={translate('System Disk per Controller (GB)')}
+              tooltipEnd
               help={translate(
                 'Size of system disk in GB for each controller node',
               )}
@@ -153,7 +157,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={6}>
             <NumberGroup
+              space={5}
               label={translate('Data Disk per Controller (GB)')}
+              tooltipEnd
               help={translate(
                 'Size of data disk in GB for each controller node',
               )}
@@ -165,13 +171,11 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             />
           </Col>
         </Row>
+      </K8sFormSection>
 
-        {/* Load Balancer Defaults */}
-        <h6 className="border-bottom pb-2 mb-3 mt-4">
-          {translate('Load Balancer Defaults')}
-          <small className="text-muted ms-2">({translate('Optional')})</small>
-        </h6>
+      <K8sFormSection title={translate('Load Balancer Defaults')} topSeparator>
         <SelectGroup
+          space={5}
           name={`${name}.load_balancer_mode`}
           label={translate('Load balancer nodes')}
           description={translate(
@@ -187,7 +191,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             <Row>
               <Col md={6}>
                 <NumberGroup
+                  space={5}
                   label={translate('vCPUs per Load Balancer')}
+                  tooltipEnd
                   help={translate(
                     'Number of vCPUs allocated to each load balancer node',
                   )}
@@ -200,7 +206,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               </Col>
               <Col md={6}>
                 <NumberGroup
+                  space={5}
                   label={translate('RAM per Load Balancer (GB)')}
+                  tooltipEnd
                   help={translate(
                     'Amount of RAM in GB allocated to each load balancer node',
                   )}
@@ -216,7 +224,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             <Row>
               <Col md={6}>
                 <NumberGroup
+                  space={5}
                   label={translate('System Disk per Load Balancer (GB)')}
+                  tooltipEnd
                   help={translate(
                     'Size of system disk in GB for each load balancer node',
                   )}
@@ -229,7 +239,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
               </Col>
               <Col md={6}>
                 <NumberGroup
+                  space={5}
                   label={translate('Data Disk per Load Balancer (GB)')}
+                  tooltipEnd
                   help={translate(
                     'Size of data disk in GB for each load balancer node',
                   )}
@@ -243,16 +255,18 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             </Row>
           </>
         )}
+      </K8sFormSection>
 
-        {/* Worker Node Defaults */}
-        <h6 className="border-bottom pb-2 mb-3 mt-4">
-          {translate('Worker Node Requirements')}
-          <small className="text-muted ms-2">({translate('Optional')})</small>
-        </h6>
+      <K8sFormSection
+        title={translate('Worker Node Requirements')}
+        topSeparator
+      >
         <Row>
           <Col md={6}>
             <NumberGroup
+              space={5}
               label={translate('Minimal vCPUs per Worker')}
+              tooltipEnd
               help={translate(
                 'Minimum number of vCPUs required for worker nodes when selecting flavors',
               )}
@@ -265,7 +279,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={6}>
             <NumberGroup
+              space={5}
               label={translate('Minimal RAM per Worker (GB)')}
+              tooltipEnd
               help={translate(
                 'Minimum amount of RAM in GB required for worker nodes when selecting flavors',
               )}
@@ -277,16 +293,15 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             />
           </Col>
         </Row>
+      </K8sFormSection>
 
-        {/* Volume Defaults */}
-        <h6 className="border-bottom pb-2 mb-3 mt-4">
-          {translate('Default Volume Sizes')}
-          <small className="text-muted ms-2">({translate('Optional')})</small>
-        </h6>
+      <K8sFormSection title={translate('Default Volume Sizes')} topSeparator>
         <Row>
           <Col md={4}>
             <NumberGroup
+              space={5}
               label={translate('Worker Data Disk (GB)')}
+              tooltipEnd
               help={translate('Default size of data disk for worker nodes')}
               name={`${name}.default_worker_data_disk_gb`}
               type="number"
@@ -297,7 +312,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={4}>
             <NumberGroup
+              space={5}
               label={translate('Storage Data Disk (GB)')}
+              tooltipEnd
               help={translate('Default size of data disk for storage nodes')}
               name={`${name}.default_storage_data_disk_gb`}
               type="number"
@@ -308,7 +325,9 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
           </Col>
           <Col md={4}>
             <NumberGroup
+              space={5}
               label={translate('Storage SAN Disk (GB)')}
+              tooltipEnd
               help={translate(
                 'Default size of virtual SAN disk for storage nodes',
               )}
@@ -320,30 +339,34 @@ export const K8sDefaultsConfiguration: React.FC<{}> = () => {
             />
           </Col>
         </Row>
+      </K8sFormSection>
 
-        {/* Kubernetes Version Configuration */}
-        <h6 className="border-bottom pb-2 mb-3 mt-4">
-          {translate('Kubernetes Version Configuration')}
-          <span className="text-danger ms-1">*</span>
-        </h6>
-        <p className="text-muted small mb-3">
-          {translate(
-            'Required: Users cannot create clusters until Kubernetes versions are configured.',
-          )}
-        </p>
+      <K8sFormSection
+        title={translate('Kubernetes Version Configuration')}
+        topSeparator
+      >
         <Row>
           <Col md={12}>
             <StringGroup
+              space={5}
+              required
               label={translate('Available Kubernetes Versions')}
+              tooltipEnd
               help={translate(
                 'Enter comma-separated list of Kubernetes versions (e.g., 1.32.0,1.33.0,1.34.0). This controls which versions users can select when creating clusters.',
               )}
+              validate={(value) =>
+                required(value) &&
+                translate(
+                  'Users cannot create clusters until Kubernetes versions are configured.',
+                )
+              }
               name={`${name}.available_kubernetes_versions`}
               placeholder="1.32.0,1.33.0,1.34.0"
             />
           </Col>
         </Row>
-      </Card.Body>
-    </Card>
+      </K8sFormSection>
+    </>
   );
 };

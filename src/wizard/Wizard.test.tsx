@@ -31,6 +31,16 @@ const Step3: FC<WizardStepProps> = (props) => (
   </WizardModal>
 );
 
+// A last step whose answer drops it from the steps.
+const ShrinkingStep3: FC<WizardStepProps> = (props) => (
+  <WizardModal {...props}>
+    <div data-testid="step3-content">Step 3 Content</div>
+    <button type="button" onClick={() => props.form.change('short', true)}>
+      Drop step 3
+    </button>
+  </WizardModal>
+);
+
 const steps = [
   { key: 'step1', label: 'Step 1', completed: false },
   { key: 'step2', label: 'Step 2', completed: false },
@@ -270,5 +280,80 @@ describe('WizardStepIndicator', () => {
     expect(
       screen.getByRole('group', { name: /form progress/i }),
     ).toBeInTheDocument();
+  });
+
+  describe('steps as a function of the values', () => {
+    it('submits from the first step when the values need no second one', async () => {
+      const onSubmit = vi.fn();
+      renderWizard({
+        steps: (values) =>
+          values.name ? steps.slice(0, 2) : steps.slice(0, 1),
+        onSubmit,
+      });
+
+      // No second step for these values: the footer offers the submit label.
+      expect(
+        screen.getByRole('button', { name: /Submit/ }),
+      ).toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: /Next/ })).toBeNull();
+
+      await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+      await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+      expect(screen.getByTestId('step1-content')).toBeInTheDocument();
+    });
+
+    it('offers Next once the values bring a second step', async () => {
+      const onSubmit = vi.fn();
+      renderWizard({
+        steps: (values) =>
+          values.name ? steps.slice(0, 2) : steps.slice(0, 1),
+        onSubmit,
+      });
+
+      await userEvent.type(screen.getByTestId('step1-input'), 'x');
+      expect(screen.getByRole('button', { name: /Next/ })).toBeInTheDocument();
+
+      await userEvent.click(screen.getByRole('button', { name: /Next/ }));
+      await waitFor(() =>
+        expect(screen.getByTestId('step2-content')).toBeInTheDocument(),
+      );
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it('stays on a step that exists when the values drop the current one', async () => {
+      const onSubmit = vi.fn();
+      renderWizard({
+        steps: (values) => (values.short ? steps.slice(0, 2) : steps),
+        wizardForms: [Step1, Step2, ShrinkingStep3],
+        onSubmit,
+      });
+
+      await userEvent.click(screen.getByRole('button', { name: /Next/ }));
+      await userEvent.click(screen.getByRole('button', { name: /Next/ }));
+      await userEvent.click(
+        await screen.findByRole('button', { name: 'Drop step 3' }),
+      );
+
+      // Step 2 is the last one now, so it is shown and offers the submit label.
+      expect(screen.getByTestId('step2-content')).toBeInTheDocument();
+      await userEvent.click(screen.getByRole('button', { name: /Submit/ }));
+      await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+    });
+
+    it('goes back from the clamped step, not from the dropped one', async () => {
+      renderWizard({
+        steps: (values) => (values.short ? steps.slice(0, 2) : steps),
+        wizardForms: [Step1, Step2, ShrinkingStep3],
+      });
+
+      await userEvent.click(screen.getByRole('button', { name: /Next/ }));
+      await userEvent.click(screen.getByRole('button', { name: /Next/ }));
+      await userEvent.click(
+        await screen.findByRole('button', { name: 'Drop step 3' }),
+      );
+      await userEvent.click(screen.getByTestId('wizard-back-btn'));
+
+      expect(screen.getByTestId('step1-content')).toBeInTheDocument();
+    });
   });
 });
