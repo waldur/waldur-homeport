@@ -47,6 +47,11 @@ const FIXTURES = `
   <ul class="menu"><li class="menu-item">
     <a href="#" class="menu-link" data-ring="menu-link">Menu link</a>
   </li></ul>
+  <ul class="nav nav-tabs nav-line-tabs">
+    <li class="nav-item">
+      <a href="#" class="nav-link" data-ring="nav-line-tab">View</a>
+    </li>
+  </ul>
 </div>`;
 
 const CASES = [
@@ -58,6 +63,7 @@ const CASES = [
   'btn-group-label',
   'unlayered-override',
   'menu-link',
+  'nav-line-tab',
 ] as const;
 
 /** Controls whose ring is drawn straight onto a solid brand fill, where the
@@ -108,14 +114,19 @@ async function focusByKeyboardAndMeasure(page: Page, ring: string) {
         ? (active.nextElementSibling as HTMLElement | null)
         : active;
       if (!styled || styled.dataset?.ring !== target) return null;
-      const styles = getComputedStyle(styled);
+      const ringHost =
+        target === 'nav-line-tab' ? styled.closest('.nav-item') : styled;
+      const ringSource =
+        target === 'nav-line-tab' && ringHost
+          ? getComputedStyle(ringHost, '::before')
+          : getComputedStyle(styled);
       return {
-        outlineWidth: parseFloat(styles.outlineWidth),
-        outlineStyle: styles.outlineStyle,
-        outlineColor: styles.outlineColor,
-        outlineOffset: parseFloat(styles.outlineOffset),
-        boxShadow: styles.boxShadow,
-        background: styles.backgroundColor,
+        outlineWidth: parseFloat(ringSource.outlineWidth),
+        outlineStyle: ringSource.outlineStyle,
+        outlineColor: ringSource.outlineColor,
+        outlineOffset: parseFloat(ringSource.outlineOffset),
+        boxShadow: ringSource.boxShadow,
+        background: ringSource.backgroundColor,
         pageBackground: getComputedStyle(document.body).backgroundColor,
       };
     }, ring);
