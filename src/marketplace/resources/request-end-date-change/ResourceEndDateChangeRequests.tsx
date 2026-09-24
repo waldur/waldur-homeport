@@ -15,8 +15,10 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
+import { Field } from '@/resource/summary';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -28,6 +30,15 @@ interface Props {
 
 const isPending = (row: { state: string }) =>
   row.state?.toLowerCase() === 'pending';
+
+const ExpandableRow = ({ row }: { row: ResourceEndDateChangeRequest }) => (
+  <ExpandableContainer>
+    <Field
+      label={translate('Comment')}
+      value={renderFieldOrDash(row.comment)}
+    />
+  </ExpandableContainer>
+);
 
 const ApproveAction: FC<{
   row: ResourceEndDateChangeRequest;
@@ -185,10 +196,6 @@ export const ResourceEndDateChangeRequests: FunctionComponent<Props> = ({
           render: ({ row }) => <ReviewStateField state={row.state} />,
         },
         {
-          title: translate('Comment'),
-          render: ({ row }) => <>{renderFieldOrDash(row.comment)}</>,
-        },
-        {
           title: translate('Reviewed by'),
           render: ({ row }) => (
             <>{renderFieldOrDash(row.reviewed_by_full_name)}</>
@@ -207,6 +214,8 @@ export const ResourceEndDateChangeRequests: FunctionComponent<Props> = ({
       ]}
       verboseName={translate('end date change requests')}
       enableExport={false}
+      expandableRow={ExpandableRow}
+      isRowExpandable={(row) => !!row.comment}
       rowActions={({ row }) =>
         canDecide && isPending(row) ? (
           <ActionsDropdown row={row}>
