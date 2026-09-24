@@ -64,9 +64,10 @@ interface ITableFilterContext {
    * to its own trigger, the new row (already open elsewhere in the DOM)
    * reads that stray focus event as an outside interaction and
    * dismisses itself — a screenshot mid-transition catches both looking
-   * open at once. Fixed by suppressing onOpenAutoFocus/onCloseAutoFocus
-   * on every row's own Popover.Content, not by anything in this field —
-   * this coordination alone was never the missing piece. Undefined
+   * open at once. Fixed in each row's own Popover.Content, which skips
+   * that close-focus return while this field names a sibling (see
+   * TableMenuFilterItem's onCloseAutoFocus), not by anything in this
+   * field alone. Undefined
    * outside TableFiltersMenu's own context override, in which case
    * TableMenuFilterItem falls back to fully independent local state —
    * correct for a filter rendered standalone, with no siblings to

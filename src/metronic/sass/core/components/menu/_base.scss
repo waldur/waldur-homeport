@@ -39,6 +39,12 @@
     font: inherit;
     color: inherit;
     text-align: inherit;
+    // A button shrink-wraps its text even at `display: flex`, so without
+    // this a row stops filling its item: `.menu-arrow`/`ms-auto` lose the
+    // right edge to push against, and the focus ring wraps the label
+    // rather than the row. (Harmless where `.menu-item` itself
+    // shrink-wraps, as in the footer bar.)
+    width: 100%;
   }
 
   // Menu Link

@@ -22,6 +22,7 @@ import { translate } from '@/i18n';
 import { PopoverMenuContent } from '@/navigation/NavMenu';
 
 import { TableFilterContext } from './FilterContextProvider';
+import { closeFlyoutOnTabOut } from './filterMenuFocus';
 import { selectFilterValues } from './selectors';
 
 const DELAY_WAITING_FOR_FILTER = 50; // ms
@@ -40,6 +41,13 @@ export interface TableFilterItemProps {
 }
 
 export { RemoveFilterBadgeButton };
+
+// Value labels can be elements (badgeValue/getValueLabel may render
+// markup), which can't go into aria-label — fall back to a generic name.
+const removeValueLabel = (label) =>
+  typeof label === 'string' || typeof label === 'number'
+    ? translate('Remove {value}', { value: label })
+    : translate('Remove filter value');
 
 export const TableSidebarFilterValues = ({
   value,
@@ -61,7 +69,10 @@ export const TableSidebarFilterValues = ({
             size="lg"
             rightIcon={
               !hideRemoveButton && (
-                <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+                <RemoveFilterBadgeButton
+                  onClick={() => remove(value, value)}
+                  label={removeValueLabel(badgeValue(value))}
+                />
               )
             }
             tone="outline"
@@ -80,7 +91,10 @@ export const TableSidebarFilterValues = ({
             size="lg"
             rightIcon={
               !hideRemoveButton && (
-                <RemoveFilterBadgeButton onClick={() => remove(value, v)} />
+                <RemoveFilterBadgeButton
+                  onClick={() => remove(value, v)}
+                  label={removeValueLabel(getValueLabel(v))}
+                />
               )
             }
             tone="outline"
@@ -97,7 +111,10 @@ export const TableSidebarFilterValues = ({
         size="lg"
         rightIcon={
           !hideRemoveButton && (
-            <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+            <RemoveFilterBadgeButton
+              onClick={() => remove(value, value)}
+              label={removeValueLabel(getValueLabel(value))}
+            />
           )
         }
         tone="outline"
@@ -436,10 +453,12 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   if (isColumnTarget) {
     return (
       <div id={`filter-item-${props.name}`} className="menu-item">
+        {/* `role="presentation"`, not `aria-hidden`: aria-hidden would
+            hide the filter field inside from screen readers too. */}
         <div
           className="menu-content filter-field"
           onClick={(e) => e.stopPropagation()}
-          aria-hidden="true"
+          role="presentation"
         >
           {/* Deferred until the popup itself is open, not mounted the
               moment this force-mounted row exists — see menuIsOpen's own
@@ -486,31 +505,36 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
     <div id={`filter-item-${props.name}`} className="menu-item">
       <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
         <RadixPopover.Trigger asChild>
-          <span className="menu-link" role="button">
+          {/* A real <button> so Tab reaches the row and Enter/Space open
+              it; `button.menu-link` in the menu base keeps the row look. */}
+          <button type="button" className="menu-link">
             <span className="menu-title">{props.title}</span>
             <CaretRightIcon size={20} className="ms-auto" weight="bold" />
-          </span>
+          </button>
         </RadixPopover.Trigger>
         <PopoverMenuContent
           placement="right-start"
           className="w-375px py-3 shadow-sm"
-          // Both suppressed for the activeItemName race documented on
-          // that context field's own comment (FilterContextProvider.tsx).
-          // Traced here via a temporary debug event log: the
-          // newly-opened row's onFocusOutside/onInteractOutside fired
-          // with the *other* row's own trigger element as `e.target`,
-          // arriving right after that other row's onCloseAutoFocus —
-          // i.e. the delayed close returning focus to its trigger is
-          // exactly what the new row misread as "something outside me
-          // was interacted with."
-          onOpenAutoFocus={(e) => e.preventDefault()}
-          onCloseAutoFocus={(e) => e.preventDefault()}
+          // Radix returns focus to this row on close, so the keyboard
+          // stays in the list. Two exceptions skip that:
+          // - a sibling row has taken over (`activeItemName` is set): the
+          //   sibling would read the delayed focus return as an outside
+          //   interaction and dismiss itself (see `activeItemName` in
+          //   FilterContextProvider.tsx);
+          // - the whole menu has closed: this row is hidden with it, and
+          //   TableFiltersMenu moves focus to its trigger instead.
+          onCloseAutoFocus={(e) =>
+            (activeItemName || !menuIsOpen) && e.preventDefault()
+          }
+          onEscapeKeyDown={() => closeMenu?.()}
+          onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
         >
           <div className="menu-item">
+            {/* `role="presentation"` — see the column branch above. */}
             <div
               className="menu-content filter-field"
               onClick={(e) => e.stopPropagation()}
-              aria-hidden="true"
+              role="presentation"
             >
               {open && props.children}
             </div>

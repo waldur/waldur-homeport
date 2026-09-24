@@ -128,6 +128,36 @@ describe('TableSidebarFilterValues', () => {
     );
     expect(screen.getByText('Custom Badge')).toBeInTheDocument();
   });
+
+  it('names each remove button after the value it removes', () => {
+    render(
+      <TableSidebarFilterValues
+        value={[{ label: 'Alpha' }, { label: 'Beta' }]}
+        getValueLabel={(v) => v.label}
+        remove={mockRemove}
+      />,
+    );
+    expect(
+      screen.getByRole('button', { name: 'Remove Alpha' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Remove Beta' }),
+    ).toBeInTheDocument();
+  });
+
+  it('falls back to a generic remove label when the value renders markup', () => {
+    render(
+      <TableSidebarFilterValues
+        value="any value"
+        getValueLabel={(v) => v}
+        badgeValue={() => <strong>Custom</strong>}
+        remove={mockRemove}
+      />,
+    );
+    expect(
+      screen.getByRole('button', { name: 'Remove filter value' }),
+    ).toBeInTheDocument();
+  });
 });
 
 /**
