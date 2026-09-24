@@ -36,7 +36,6 @@ export const CommentEditButton: FC<CommentEditButtonProps> = ({ comment }) => {
       type="button"
       variant="tertiary"
       className="me-3"
-      disabled={!comment.update_is_available}
       onClick={openEditCommentDialog}
       label={translate('Change')}
       iconNode={<PencilSimpleIcon weight="bold" />}

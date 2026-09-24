@@ -1,7 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { supportCommentsUpdate, supportIssuesComment } from 'waldur-js-client';
+import {
+  supportCommentsPartialUpdate,
+  supportIssuesComment,
+} from 'waldur-js-client';
 
 import { renderWithProviders } from '@/test/harness';
 
@@ -72,8 +75,10 @@ describe('CommentFormDialog', () => {
     });
   });
 
-  it('calls supportCommentsUpdate on edit', async () => {
-    vi.mocked(supportCommentsUpdate).mockResolvedValue({ data: {} } as any);
+  it('sends only the new text on edit, leaving visibility alone', async () => {
+    vi.mocked(supportCommentsPartialUpdate).mockResolvedValue({
+      data: {},
+    } as any);
     renderComponent({ resolve: { comment: mockComment, issue: mockIssue } });
 
     const input = screen.getByDisplayValue('Existing comment');
@@ -84,9 +89,9 @@ describe('CommentFormDialog', () => {
     await user.click(submitBtn);
 
     await waitFor(() => {
-      expect(supportCommentsUpdate).toHaveBeenCalledWith({
+      expect(supportCommentsPartialUpdate).toHaveBeenCalledWith({
         path: { uuid: mockComment.uuid },
-        body: { is_public: true, description: 'Updated comment' },
+        body: { description: 'Updated comment' },
       });
     });
   });
