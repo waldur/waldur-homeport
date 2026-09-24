@@ -2,6 +2,9 @@
 // Nav
 //
 
+// Shared with custom/_nav.scss so the focus ring tracks this margin.
+$nav-line-tabs-link-margin: 0.615rem !default;
+
 // Line tabs
 .nav-line-tabs {
   border-bottom-width: 1px;
@@ -21,7 +24,7 @@
       border-bottom: 2px solid transparent;
       transition: $transition-link;
       padding: 4px 4px 10px;
-      margin: 0 0.615rem;
+      margin: 0 $nav-line-tabs-link-margin;
     }
 
     // First Item

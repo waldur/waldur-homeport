@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
@@ -29,7 +29,7 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
 }) => {
   const { state } = useCurrentStateAndParams();
   const router = useRouter();
-  const goTo = (stateName) => router.stateService.go(stateName);
+  const goTo = (stateName: string) => router.stateService.go(stateName);
 
   const isValidUser = useMemo(
     () =>
@@ -41,6 +41,7 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
   );
 
   const showViewTab = isDescendantOf('profile', state);
+  const editActive = state.name === 'profile-manage' || !showViewTab;
 
   const disabledReason = !user?.agreement_date
     ? translate('Terms of service not accepted')
@@ -52,49 +53,46 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
     <LoadingErred loadData={refetch} />
   ) : (
     <div className="container-fluid my-5">
-      <Tab.Container
-        defaultActiveKey={
-          state.name === 'profile-manage' || !showViewTab
-            ? 'profile-manage'
-            : 'profile.details'
-        }
-        onSelect={showViewTab ? goTo : null}
-      >
-        <Nav variant="tabs" className="nav-line-tabs mb-4">
-          {showViewTab && (
-            <Nav.Item>
-              {isValidUser ? (
-                <Nav.Link
-                  eventKey="profile.details"
-                  className="text-center min-w-60px"
-                >
-                  {translate('View')}
-                </Nav.Link>
-              ) : (
-                // The tooltip has to wrap the link from the outside: a
-                // disabled nav link stops receiving hover, so a tooltip
-                // nested inside it would never open. Same arrangement as the
-                // draft-offering tab in OfferingViewHero.
-                <Tooltip label={disabledReason}>
-                  <span>
-                    <Nav.Link disabled className="text-center min-w-60px">
-                      {translate('View')}
-                    </Nav.Link>
-                  </span>
-                </Tooltip>
-              )}
-            </Nav.Item>
-          )}
+      <Nav variant="tabs" className="nav-line-tabs mb-4">
+        {showViewTab && (
           <Nav.Item>
-            <Nav.Link
-              eventKey="profile-manage"
-              className="text-center min-w-60px"
-            >
-              {translate('Edit')}
-            </Nav.Link>
+            {isValidUser ? (
+              <Nav.Link
+                as="button"
+                type="button"
+                className="text-center min-w-60px"
+                active={!editActive}
+                onClick={() => goTo('profile.details')}
+              >
+                {translate('View')}
+              </Nav.Link>
+            ) : (
+              // The tooltip has to wrap the link from the outside: a
+              // disabled nav link stops receiving hover, so a tooltip
+              // nested inside it would never open. Same arrangement as the
+              // draft-offering tab in OfferingViewHero.
+              <Tooltip label={disabledReason}>
+                <span>
+                  <Nav.Link disabled className="text-center min-w-60px">
+                    {translate('View')}
+                  </Nav.Link>
+                </span>
+              </Tooltip>
+            )}
           </Nav.Item>
-        </Nav>
-      </Tab.Container>
+        )}
+        <Nav.Item>
+          <Nav.Link
+            as="button"
+            type="button"
+            className="text-center min-w-60px"
+            active={editActive}
+            onClick={() => goTo('profile-manage')}
+          >
+            {translate('Edit')}
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
       <UserProfile user={user} />
     </div>
   );

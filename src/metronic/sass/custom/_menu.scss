@@ -95,6 +95,20 @@
   outline: none;
 }
 
+// Dashboard tab row (TabsList). The row scrolls in overflow-auto, which clips
+// an outline drawn outside the link, so the ring is inset. The hover rule
+// must win: Radix focuses the row on pointer hover and some browsers treat
+// that as :focus-visible. Keyboard focus (no hover) still shows the ring.
+.toolbar .header-menu .menu-link:focus-visible {
+  outline: $focus-ring-width solid $focus-ring-primary;
+  outline-offset: -$focus-ring-width;
+  border-radius: $border-radius;
+}
+
+.toolbar .header-menu .menu-link:hover:focus-visible {
+  outline: none;
+}
+
 // Keyboard highlight. `.menu-link:hover` (menu/_theme.scss's
 // menu-link-hover-state mixin) is a plain CSS pseudo-class, so mouse hover
 // needs no bridge at all. Radix's keyboard navigation instead marks the
