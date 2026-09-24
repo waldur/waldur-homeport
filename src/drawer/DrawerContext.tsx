@@ -77,10 +77,15 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
 
   const renderDrawer = useCallback(
     <T,>(component: ComponentType<T>, props?: T & DrawerProps) => {
+      // Never overwrite an active open drawer with a background render call
+      // unless that drawer is already displaying this component.
+      if (isOpen && drawerComponent !== component) {
+        return;
+      }
       setDrawerComponent(() => component);
       setDrawerProps({ ...DEFAULT_DRAWER_PROPS, ...props });
     },
-    [],
+    [isOpen, drawerComponent],
   );
 
   // Update the global ref

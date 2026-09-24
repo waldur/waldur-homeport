@@ -49,31 +49,65 @@
   }
 }
 
-// When the AI chat or support drawer is open, make the card and body fill the
+// When the AI chat, support, or confirmation drawer is open, make the card and body fill the
 // drawer height so the content can use flex layout internally.
 #kt_drawer.ai-chat-drawer-active,
 #kt_drawer.support-drawer-active,
 #kt_drawer.confirmation-drawer-active {
-  top: calc(65px + 4px);
-  right: 4px;
-  max-width: calc(100% - 8px);
-  height: calc(100vh - 65px - 8px);
-
-  .outstanding-bar-enabled & {
-    top: calc(65px + 4px + var(--kt-pagebar-height));
-    height: calc(100vh - 65px - 8px - var(--kt-pagebar-height));
-  }
-  transition: width 0.3s ease;
-  box-shadow: $box-shadow-xl;
-  border-radius: 20px;
   overflow: hidden;
+  transition: width 0.3s ease;
 
-  // Read by the @keyframes below instead of a plain `&:not(.drawer-on)`
-  // transform override — an animation's fill-forwards end value beats a
-  // same-origin declarative rule regardless of specificity, so a plain
-  // override here would only apply mid-transition and get clobbered the
-  // moment the slide-out animation finishes.
-  --drawer-closed-x: calc(100% + 4px);
+  @include media-breakpoint-down(lg) {
+    top: get($header-config, default, outer-height, tablet-and-mobile);
+    right: 0;
+    max-width: 100%;
+    width: 100%;
+    height: calc(
+      100vh - #{get($header-config, default, outer-height, tablet-and-mobile)}
+    );
+    border-radius: 0;
+    box-shadow: none;
+    --drawer-closed-x: 100%;
+
+    .outstanding-bar-enabled & {
+      top: calc(
+        #{get($header-config, default, outer-height, tablet-and-mobile)} +
+          var(--kt-pagebar-height)
+      );
+      height: calc(
+        100vh -
+          #{get(
+            $header-config,
+            default,
+            outer-height,
+            tablet-and-mobile
+          )} - var(--kt-pagebar-height)
+      );
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    top: calc(#{get($header-config, default, outer-height, desktop)} + 4px);
+    right: 4px;
+    max-width: calc(100% - 8px);
+    height: calc(
+      100vh - #{get($header-config, default, outer-height, desktop)} - 8px
+    );
+    border-radius: 20px;
+    box-shadow: $box-shadow-xl;
+    --drawer-closed-x: calc(100% + 4px);
+
+    .outstanding-bar-enabled & {
+      top: calc(
+        #{get($header-config, default, outer-height, desktop)} + 4px +
+          var(--kt-pagebar-height)
+      );
+      height: calc(
+        100vh - #{get($header-config, default, outer-height, desktop)} -
+          8px - var(--kt-pagebar-height)
+      );
+    }
+  }
 }
 
 // DrawerRoot.tsx doesn't portal to <body> (see its own comment on why), so

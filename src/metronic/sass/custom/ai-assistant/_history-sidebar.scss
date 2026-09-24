@@ -19,24 +19,8 @@
   display: flex;
 }
 
-// Shared full-width drawer styles for tablet and mobile
-@mixin full-width-drawer {
-  #kt_drawer.ai-chat-drawer-active {
-    width: 100% !important;
-    max-width: 100% !important;
-    right: 0 !important;
-    border-radius: 0 !important;
-    position: fixed !important;
-    top: get($header-config, fixed, outer-height, tablet-and-mobile) !important;
-    bottom: 0 !important;
-    height: auto !important;
-  }
-}
-
 // Tablet: full-width drawer, sidebar side-by-side when toggled open
 @media (min-width: 768px) and (max-width: 991px) {
-  @include full-width-drawer;
-
   // Side-by-side layout when history is open
   #kt_drawer[data-history-open='true'] .aui-chat-drawer {
     flex-direction: row;
@@ -49,8 +33,6 @@
 
 // Mobile: full-screen drawer with sidebar as slide-in overlay
 @media (max-width: 767px) {
-  @include full-width-drawer;
-
   #kt_drawer[data-history-open='true'] .aui-chat-drawer {
     flex-direction: column;
   }
