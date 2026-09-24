@@ -123,6 +123,7 @@ describe('InvitationConfirmDialog', () => {
 
     await userEvent.click(screen.getByText('Close'));
     expect(useModal().closeDialog).toHaveBeenCalled();
+    expect(InvitationTokenStorage.remove).toHaveBeenCalled();
     expect(router.stateService.go).toHaveBeenCalledWith('profile.details');
   });
 
