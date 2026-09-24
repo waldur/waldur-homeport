@@ -24,7 +24,20 @@
    Keyframe names are namespaced, so nothing else picks them up. */
 @import 'waldur-design-tokens/animations.css';
 @import 'waldur-design-tokens/colors.css';
+@import 'waldur-design-tokens/focusRing.css';
 @import 'waldur-design-tokens/zIndex.css';
+
+/* The app's one focus ring, for everything that doesn't style its own —
+   links, breadcrumbs, sidebar rows, anything with tabindex. In `base`, so
+   Metronic's .btn ring (bootstrap layer) and the BaseButton variants
+   (utilities) still win where they apply, and an element that deliberately
+   suppresses its outline keeps doing so. */
+@layer base {
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
 
 /* Preflight's one rule that Bootstrap has no counterpart for, and so the
    only part of it that actually reaches the app:
@@ -58,6 +71,18 @@
    ICON_BUTTON_BASE_CLASSNAME respectively — so it is blockified by its
    parent and never depended on preflight's rule to begin with. Verify that
    still holds before moving one of them into an inline-flow context. */
+/* The ring's corner for controls that bring no radius of their own. It sits in
+   `bootstrap`, not `base`, only because Bootstrap's reboot forces
+   `button { border-radius: 0 }` there -- from `base` every plain <button> (the
+   column pin, the favourite star) would keep square corners while the padded
+   buttons beside them are rounded. A component that sets its own radius still
+   wins: same specificity, and its stylesheet loads after this one. */
+@layer bootstrap {
+  :focus-visible {
+    border-radius: var(--focus-ring-radius);
+  }
+}
+
 @layer bootstrap {
   img,
   svg,
