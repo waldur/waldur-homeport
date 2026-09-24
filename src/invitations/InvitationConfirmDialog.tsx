@@ -51,6 +51,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
   }, [closeDialog, onConfirm, invitation]);
 
   const closeButton = useCallback(() => {
+    InvitationTokenStorage.remove();
     closeDialog();
     router.stateService.go('profile.details');
   }, [closeDialog]);
