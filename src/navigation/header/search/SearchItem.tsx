@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { ReactNode } from 'react';
 
 import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { ItemImage } from '@/navigation/workspace/context-selector/ItemImage';
 
@@ -63,6 +64,12 @@ export const SearchItem = (props: SearchItemProps) => {
         {props.actions}
         {props.addFavoritePage && (
           <button
+            type="button"
+            aria-label={
+              isFav
+                ? translate('Remove from favourites')
+                : translate('Add to favourites')
+            }
             className={classNames('btn-fav', isFav && 'show')}
             onClick={(e) =>
               isFav

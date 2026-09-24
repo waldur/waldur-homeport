@@ -15,6 +15,7 @@ import { translate } from '@/i18n';
 import { Category, CategoryGroup } from '@/marketplace/types';
 
 import { BaseList } from './BaseList';
+import { getSelectableRowProps } from './utils';
 
 const EmptyCategoryListPlaceholder: FunctionComponent = () => (
   <div className="message-wrapper ellipsis">
@@ -39,7 +40,7 @@ const CategoryListItem: FunctionComponent<
       className={classNames(className, {
         active: (selectedItem && item.uuid === selectedItem.uuid) || active,
       })}
-      onClick={() => onClick(item)}
+      {...getSelectableRowProps(() => onClick(item))}
     >
       <Stack
         direction="horizontal"

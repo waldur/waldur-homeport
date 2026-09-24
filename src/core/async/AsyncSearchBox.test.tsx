@@ -64,6 +64,15 @@ describe('AsyncSearchBox', () => {
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
   });
 
+  // Used to sit in an aria-hidden wrapper: typable, but never announced.
+  it('exposes the search input to assistive technology', () => {
+    renderSearchBox();
+
+    expect(
+      screen.getByRole('searchbox', { name: 'Search...' }),
+    ).toBeInTheDocument();
+  });
+
   it('the search input accepts a full word', async () => {
     const user = userEvent.setup();
     renderSearchBox();

@@ -88,10 +88,12 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
     <div id="search-box-wrapper" className={wrapperClassName}>
       <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
         <RadixPopover.Anchor asChild>
-          <div aria-hidden="true">
+          {/* Positions the popover only; aria-hidden here hid the input. */}
+          <div>
             <FilterBox
               type="search"
               placeholder={placeholder}
+              aria-label={placeholder}
               onFocus={() => setOpen(true)}
               onChange={(e) => {
                 applyQuery(e.target.value);
