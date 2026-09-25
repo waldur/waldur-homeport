@@ -18,6 +18,10 @@ import { Variant } from 'react-bootstrap/esm/types';
 
 import { Tooltip } from 'waldur-ui';
 
+import {
+  radixDropdownMenuScrollContentStyle,
+  radixPopoverScrollContentStyle,
+} from '@/core/radixScrollContentStyles';
 import { translate } from '@/i18n';
 
 import { DropdownActionItemType } from './types';
@@ -337,18 +341,6 @@ const DROP_TO_SIDE = {
 // which makes this specific class redundant but harmless).
 const ACTIONS_SHELL_CONTENT_CLASSNAME = 'dropdown-menu show position-static';
 
-// Radix flips and shifts a tall panel but never shortens it, so a long actions
-// menu runs off-screen. The height variable is per-primitive, hence two.
-const ACTIONS_SHELL_DROPDOWN_STYLE: React.CSSProperties = {
-  maxHeight: 'var(--radix-dropdown-menu-content-available-height)',
-  overflowY: 'auto',
-};
-
-const ACTIONS_SHELL_POPOVER_STYLE: React.CSSProperties = {
-  maxHeight: 'var(--radix-popover-content-available-height)',
-  overflowY: 'auto',
-};
-
 export const ActionsDropdownComponent: FunctionComponent<
   PropsWithChildren<
     ActionsDropdownShellProps & {
@@ -391,7 +383,7 @@ export const ActionsDropdownComponent: FunctionComponent<
         align={align}
         sideOffset={2}
         className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
-        style={{ ...ACTIONS_SHELL_DROPDOWN_STYLE, ...menuStyle }}
+        style={{ ...radixDropdownMenuScrollContentStyle, ...menuStyle }}
         {...rest}
       >
         {children}
@@ -461,7 +453,7 @@ export const ActionsPopoverComponent: FunctionComponent<
         align={align}
         sideOffset={2}
         className={classNames(ACTIONS_SHELL_CONTENT_CLASSNAME, menuClassName)}
-        style={{ ...ACTIONS_SHELL_POPOVER_STYLE, ...menuStyle }}
+        style={{ ...radixPopoverScrollContentStyle, ...menuStyle }}
         {...rest}
       >
         {children}

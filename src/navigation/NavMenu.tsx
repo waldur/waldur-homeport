@@ -5,6 +5,10 @@ import { ComponentPropsWithoutRef, forwardRef, useRef, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
+import {
+  radixDropdownMenuScrollContentStyle,
+  radixPopoverScrollContentStyle,
+} from '@/core/radixScrollContentStyles';
 
 /**
  * Radix-driven replacement for the header/footer/sidebar-popup menus built
@@ -165,6 +169,7 @@ export function NavMenuContent({
   className,
   placement = 'bottom-start',
   sideOffset = 2,
+  style,
   ...props
 }: ComponentPropsWithoutRef<typeof RadixDropdownMenu.Content> & {
   /** Same placement strings Metronic's own placement config used, e.g.
@@ -180,6 +185,7 @@ export function NavMenuContent({
         sideOffset={sideOffset}
         data-popper-placement={placement}
         className={classNames(NAV_MENU_CONTENT_CLASSNAME, className)}
+        style={{ ...radixDropdownMenuScrollContentStyle, ...style }}
         {...props}
       />
     </RadixDropdownMenu.Portal>
@@ -206,6 +212,7 @@ export function PopoverMenuContent({
   className,
   placement = 'bottom-start',
   sideOffset = 2,
+  style,
   ...props
 }: ComponentPropsWithoutRef<typeof RadixPopover.Content> & {
   /** Same placement strings NavMenuContent's own `placement` takes, e.g.
@@ -221,6 +228,7 @@ export function PopoverMenuContent({
         sideOffset={sideOffset}
         data-popper-placement={placement}
         className={classNames(NAV_MENU_CONTENT_CLASSNAME, className)}
+        style={{ ...radixPopoverScrollContentStyle, ...style }}
         {...props}
       />
     </RadixPopover.Portal>
@@ -281,6 +289,7 @@ const NAV_MENU_SUB_CONTENT_CLASSNAME = classNames(
 export function NavMenuSubContent({
   className,
   placement = 'right-start',
+  style,
   ...props
 }: ComponentPropsWithoutRef<typeof RadixDropdownMenu.SubContent> & {
   placement?: string;
@@ -296,6 +305,7 @@ export function NavMenuSubContent({
         align={align}
         data-popper-placement={placement}
         className={classNames(NAV_MENU_SUB_CONTENT_CLASSNAME, className)}
+        style={{ ...radixDropdownMenuScrollContentStyle, ...style }}
         {...props}
       />
     </RadixDropdownMenu.Portal>
