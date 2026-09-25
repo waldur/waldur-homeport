@@ -5,12 +5,14 @@ import {
   customersAddUser,
   customersUsersList,
   projectsAddUser,
+  projectsListUsersList,
   projectsOtherUsersList,
   rolesList,
   usersList,
   usersMeRetrieve,
 } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { renderWithProviders } from '@/test/harness';
 import { openAndSelectOption, typeAndSelectOption } from '@/test/select';
 import { mockListResponse } from '@/test/utils';
@@ -210,5 +212,82 @@ describe('AddUserDialog', () => {
     renderComponent({ ...mockProps, title: undefined });
 
     expect(screen.getByText('Add user')).toBeInTheDocument();
+  });
+
+  describe('existing role feedback', () => {
+    const mockExistingRole = (roleUuid: string, roleName: string) =>
+      vi.mocked(projectsListUsersList).mockResolvedValue(
+        mockListResponse([
+          {
+            role_uuid: roleUuid,
+            role_name: roleName,
+            user_uuid: 'user1-uuid',
+            user_email: 'john@example.com',
+          },
+        ]) as any,
+      );
+
+    const fillForm = async (user: ReturnType<typeof userEvent.setup>) => {
+      await typeAndSelectOption(user, 'User', 'John', /John Doe/);
+      await openAndSelectOption(user, 'Role', 'project role');
+    };
+
+    beforeEach(() => {
+      ENV.plugins.WALDUR_CORE.INVITATION_DISABLE_MULTIPLE_ROLES = false;
+    });
+
+    it('blocks submission when the user already has the requested role', async () => {
+      const user = userEvent.setup();
+      mockExistingRole('project-role-uuid', 'project role');
+      renderComponent();
+
+      await fillForm(user);
+
+      expect(
+        await screen.findByText(
+          'User already has this role in this scope. Update their existing role instead.',
+        ),
+      ).toBeInTheDocument();
+      await waitFor(() =>
+        expect(screen.getByRole('button', { name: 'Add role' })).toBeDisabled(),
+      );
+    });
+
+    it('warns without blocking when the user has a different role', async () => {
+      const user = userEvent.setup();
+      mockExistingRole('other-role-uuid', 'Project administrator');
+      renderComponent();
+
+      await fillForm(user);
+
+      expect(
+        await screen.findByText(
+          'User already has the "Project administrator" role in this scope.',
+        ),
+      ).toBeInTheDocument();
+      await waitFor(() =>
+        expect(
+          screen.getByRole('button', { name: 'Add role' }),
+        ).not.toBeDisabled(),
+      );
+    });
+
+    it('blocks a different role when multiple roles per scope are disabled', async () => {
+      ENV.plugins.WALDUR_CORE.INVITATION_DISABLE_MULTIPLE_ROLES = true;
+      const user = userEvent.setup();
+      mockExistingRole('other-role-uuid', 'Project administrator');
+      renderComponent();
+
+      await fillForm(user);
+
+      expect(
+        await screen.findByText(
+          'User already has the "Project administrator" role in this scope. Only one role per scope is allowed.',
+        ),
+      ).toBeInTheDocument();
+      await waitFor(() =>
+        expect(screen.getByRole('button', { name: 'Add role' })).toBeDisabled(),
+      );
+    });
   });
 });

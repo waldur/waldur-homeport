@@ -31,6 +31,9 @@ const BACKEND_ERROR_TRANSLATIONS: Record<string, string> = {
   'User already has this role in the scope.': translate(
     'User already has this role in the scope.',
   ),
+  'User has already the same role in this scope.': translate(
+    'User has already the same role in this scope.',
+  ),
   'User already has role within this scope.': translate(
     'User already has role within this scope.',
   ),

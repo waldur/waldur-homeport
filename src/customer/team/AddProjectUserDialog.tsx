@@ -3,12 +3,16 @@ import { Form } from 'react-final-form';
 import { CustomerUser, Project, User, projectsAddUser } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
+import { FieldError } from '@/form/FieldError';
+import { FieldWarning } from '@/form/FieldWarning';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { getExistingRoleFeedback } from '@/permissions/existingRoles';
 import { Role } from '@/permissions/types';
+import { useExistingRoles } from '@/permissions/useExistingRoles';
 import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import {
   getOnlyOneProjectManagerTooltip,
@@ -77,6 +81,18 @@ const AddProjectUserDialogFormBody: FC<{
     values.role,
   );
 
+  const { hits: existingRoles, isChecking: isCheckingExistingRoles } =
+    useExistingRoles({
+      role: values.role,
+      userUuid: resolve.customer.uuid,
+      scopeUuid: values.project?.uuid,
+    });
+  const existingRoleFeedback = getExistingRoleFeedback(existingRoles);
+  // Hold the button while the lookup is in flight, otherwise a quick submit
+  // slips through before the verdict arrives.
+  const isExistingRoleBlocked =
+    Boolean(existingRoleFeedback?.blocking) || isCheckingExistingRoles;
+
   return (
     <form onSubmit={handleSubmit}>
       <ModalDialog
@@ -92,11 +108,16 @@ const AddProjectUserDialogFormBody: FC<{
             <CloseDialogButton />
             <SubmitButton
               submitting={updateMutation.isPending}
-              disabled={invalid || isProjectManagerBlocked}
+              disabled={
+                invalid || isProjectManagerBlocked || isExistingRoleBlocked
+              }
               disabledReason={
                 isProjectManagerBlocked
                   ? getOnlyOneProjectManagerTooltip()
-                  : undefined
+                  : isExistingRoleBlocked
+                    ? (existingRoleFeedback?.message ??
+                      translate('Checking the existing roles of this user...'))
+                    : undefined
               }
               data-testid="submit-button"
             >
@@ -116,6 +137,12 @@ const AddProjectUserDialogFormBody: FC<{
               projectId: values.project?.uuid,
             }}
           />
+          {existingRoleFeedback &&
+            (existingRoleFeedback.blocking ? (
+              <FieldError error={existingRoleFeedback.message} />
+            ) : (
+              <FieldWarning error={existingRoleFeedback.message} />
+            ))}
           <ExpirationTimeGroup disabled={updateMutation.isPending} />
         </div>
       </ModalDialog>

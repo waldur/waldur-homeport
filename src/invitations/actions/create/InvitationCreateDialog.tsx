@@ -4,6 +4,11 @@ import { Form, FormSpy } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
+import {
+  getWarningSignature,
+  isExistingRoleBlocking,
+  shouldHoldForWarnings,
+} from '@/permissions/existingRoles';
 import { useNotify } from '@/store/notify';
 
 import { RestrictionsInfoCard } from '../RestrictionsInfoCard';
@@ -37,6 +42,7 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
   const [_duplicateEmails, setDuplicateEmails] = useState<string[]>([]);
   const [isCheckingDuplicates, setIsCheckingDuplicates] = useState(false);
   const rowsSnapshotRef = useRef<string>('');
+  const acknowledgedWarningsRef = useRef<string>('');
 
   const handleContinueClick = useCallback(
     async (formApi: {
@@ -77,20 +83,51 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
 
       setIsCheckingDuplicates(true);
       try {
-        const duplicatePairs = await checkDuplicates(
+        const { duplicatePairs, existingRoleHits } = await checkDuplicates(
           formValues as Parameters<typeof checkDuplicates>[0],
         );
-        if (duplicatePairs.length > 0) {
+
+        // The same role is rejected by the backend unconditionally, and a
+        // different one whenever multiple roles per scope are disabled. Anything
+        // else is legitimate, so it only warns and never gates Continue.
+        const blockingRoleHits = existingRoleHits.filter(
+          isExistingRoleBlocking,
+        );
+        const warningRoleHits = existingRoleHits.filter(
+          (hit) => !isExistingRoleBlocking(hit),
+        );
+        // Warnings live on the row list, which only exists on step 1, so they
+        // are always written before deciding whether to advance.
+        formApi.change(
+          '_existingRoleWarnings',
+          warningRoleHits.length > 0 ? warningRoleHits : undefined,
+        );
+        const warningSignature = getWarningSignature(warningRoleHits);
+
+        if (duplicatePairs.length > 0 || blockingRoleHits.length > 0) {
           setDuplicateEmails(duplicatePairs.map((p) => p.email));
-          formApi.change('_duplicateEmails', duplicatePairs);
+          formApi.change(
+            '_duplicateEmails',
+            duplicatePairs.length > 0 ? duplicatePairs : undefined,
+          );
+          formApi.change(
+            '_existingRoleBlocks',
+            blockingRoleHits.length > 0 ? blockingRoleHits : undefined,
+          );
+          // The warnings for the remaining rows sit on screen next to the
+          // errors, so they count as seen.
+          acknowledgedWarningsRef.current = warningSignature;
           rows.forEach((row: GroupInviteRow, i: number) => {
             if (row?.email && row?.role_project?.role?.uuid) {
-              const isDuplicate = duplicatePairs.some(
-                (p) =>
-                  p.email === row.email &&
-                  p.roleUuid === row.role_project.role.uuid,
-              );
-              if (isDuplicate) {
+              const roleUuid = row.role_project.role.uuid;
+              const isFlagged =
+                duplicatePairs.some(
+                  (p) => p.email === row.email && p.roleUuid === roleUuid,
+                ) ||
+                blockingRoleHits.some(
+                  (hit) => hit.email === row.email && hit.roleUuid === roleUuid,
+                );
+              if (isFlagged) {
                 formApi.change(`rows.${i}.email`, row.email);
               }
             }
@@ -99,6 +136,21 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
         }
         setDuplicateEmails([]);
         formApi.change('_duplicateEmails', undefined);
+        formApi.change('_existingRoleBlocks', undefined);
+
+        // Advancing unmounts the row list, so hold on step 1 the first time a
+        // warning shows up. A second Continue goes through: these invitations
+        // are legitimate, the inviter just gets told before sending them.
+        if (
+          shouldHoldForWarnings(
+            warningRoleHits,
+            acknowledgedWarningsRef.current,
+          )
+        ) {
+          acknowledgedWarningsRef.current = warningSignature;
+          return false;
+        }
+        acknowledgedWarningsRef.current = warningSignature;
         return true;
       } catch (e) {
         showErrorResponse(

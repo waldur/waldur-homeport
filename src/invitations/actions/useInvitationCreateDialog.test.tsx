@@ -1,6 +1,9 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { projectsListUsersList } from 'waldur-js-client';
+import {
+  projectsListUsersList,
+  userInvitationsCheckDuplicates,
+} from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { RoleEnum } from '@/permissions/enums';
@@ -110,5 +113,80 @@ describe('useInvitationCreateDialog roles', () => {
     expect(result.current.find((r) => r.uuid === 'pm-uuid')).toMatchObject({
       is_active: true,
     });
+  });
+});
+
+describe('useInvitationCreateDialog checkDuplicates', () => {
+  const context = {
+    roleTypes: ['project'],
+    project,
+    customer: { uuid: 'customer-uuid', url: '/customers/customer-uuid/' },
+  } as any;
+
+  const formData = {
+    rows: [
+      {
+        email: 'member@example.com',
+        role_project: { role: memberRole, project },
+      },
+    ],
+  } as any;
+
+  const renderCheck = () => {
+    const { wrapper } = createTestWrapper();
+    return renderHook(
+      () => useInvitationCreateDialog(context).checkDuplicates,
+      {
+        wrapper,
+      },
+    );
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    ENV.plugins.WALDUR_CORE.ONLY_ONE_PROJECT_MANAGER = false;
+    ENV.plugins.WALDUR_CORE.INVITATION_DISABLE_MULTIPLE_ROLES = false;
+  });
+
+  it('returns pending duplicates and existing roles side by side', async () => {
+    vi.mocked(userInvitationsCheckDuplicates).mockResolvedValue({
+      data: {
+        duplicates: [{ email: 'member@example.com', role: 'member-uuid' }],
+        existing_roles: [
+          {
+            email: 'member@example.com',
+            role: 'member-uuid',
+            existing_role: 'admin-uuid',
+            existing_role_name: 'PROJECT.ADMIN',
+            existing_role_description: 'Project administrator',
+            is_same_role: false,
+          },
+        ],
+      },
+    } as any);
+
+    const { result } = renderCheck();
+    const outcome = await result.current(formData);
+
+    expect(outcome.duplicatePairs).toEqual([
+      { email: 'member@example.com', roleUuid: 'member-uuid' },
+    ]);
+    expect(outcome.existingRoleHits).toEqual([
+      {
+        email: 'member@example.com',
+        roleUuid: 'member-uuid',
+        existingRoleUuid: 'admin-uuid',
+        existingRoleName: 'Project administrator',
+        isSameRole: false,
+      },
+    ]);
+  });
+
+  it('returns both lists empty when no row is complete', async () => {
+    const { result } = renderCheck();
+    const outcome = await result.current({ rows: [{ email: '' }] } as any);
+
+    expect(outcome).toEqual({ duplicatePairs: [], existingRoleHits: [] });
+    expect(userInvitationsCheckDuplicates).not.toHaveBeenCalled();
   });
 });
