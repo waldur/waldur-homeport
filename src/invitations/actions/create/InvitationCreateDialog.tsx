@@ -12,6 +12,7 @@ import {
 import { useNotify } from '@/store/notify';
 
 import { RestrictionsInfoCard } from '../RestrictionsInfoCard';
+import { isVerdictForRow } from '../rowVerdicts';
 import { GroupInviteRow, InvitationContext } from '../types';
 import { useInvitationCreateDialog } from '../useInvitationCreateDialog';
 
@@ -114,22 +115,16 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
             '_existingRoleBlocks',
             blockingRoleHits.length > 0 ? blockingRoleHits : undefined,
           );
-          // The warnings for the remaining rows sit on screen next to the
-          // errors, so they count as seen.
-          acknowledgedWarningsRef.current = warningSignature;
+          // Warnings are not counted as seen here: the list only moves to
+          // another page when the current one has nothing flagged, so a
+          // warning elsewhere may never have been on screen. The Continue
+          // after the errors are fixed holds for them once.
           rows.forEach((row: GroupInviteRow, i: number) => {
-            if (row?.email && row?.role_project?.role?.uuid) {
-              const roleUuid = row.role_project.role.uuid;
-              const isFlagged =
-                duplicatePairs.some(
-                  (p) => p.email === row.email && p.roleUuid === roleUuid,
-                ) ||
-                blockingRoleHits.some(
-                  (hit) => hit.email === row.email && hit.roleUuid === roleUuid,
-                );
-              if (isFlagged) {
-                formApi.change(`rows.${i}.email`, row.email);
-              }
+            const isFlagged = [...duplicatePairs, ...blockingRoleHits].some(
+              (verdict) => isVerdictForRow(verdict, row),
+            );
+            if (isFlagged) {
+              formApi.change(`rows.${i}.email`, row.email);
             }
           });
           return false;

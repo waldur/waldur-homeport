@@ -22,6 +22,8 @@ import {
 import { ActionButton } from '@/table/ActionButton';
 import { TablePagination } from '@/table/TablePagination';
 
+import { findVerdictForRow, isVerdictForRow, RowVerdict } from '../rowVerdicts';
+
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
 
 const getRowIndexFromFieldName = (fieldName: string): number | null => {
@@ -73,16 +75,13 @@ const duplicateInvitationValidator = (
   fieldName: string,
 ) => {
   if (!value) return undefined;
-  const list = allValues?._duplicateEmails as
-    Array<{ email: string; roleUuid: string }> | undefined;
-  if (!Array.isArray(list)) return undefined;
   const rowIndex = getRowIndexFromFieldName(fieldName);
   if (rowIndex == null) return undefined;
-  const roleUuid = getRoleUuidForRow(allValues, rowIndex);
-  const isDuplicate = list.some(
-    (p) => p.email === value && p.roleUuid === roleUuid,
+  const pending = findVerdictForRow(
+    allValues?._duplicateEmails as RowVerdict[] | undefined,
+    allValues?.rows?.[rowIndex],
   );
-  if (isDuplicate) {
+  if (pending) {
     return {
       __pendingInvitation: true,
       message: translate('This email already has a pending invitation.'),
@@ -98,12 +97,12 @@ const existingRoleBlockValidator = (
   fieldName: string,
 ) => {
   if (!value) return undefined;
-  const list = allValues?._existingRoleBlocks as ExistingRoleHit[] | undefined;
-  if (!Array.isArray(list)) return undefined;
   const rowIndex = getRowIndexFromFieldName(fieldName);
   if (rowIndex == null) return undefined;
-  const roleUuid = getRoleUuidForRow(allValues, rowIndex);
-  const hit = list.find((h) => h.email === value && h.roleUuid === roleUuid);
+  const hit = findVerdictForRow(
+    allValues?._existingRoleBlocks as ExistingRoleHit[] | undefined,
+    allValues?.rows?.[rowIndex],
+  );
   if (!hit) return undefined;
   return {
     __existingRoleBlock: true,
@@ -111,19 +110,8 @@ const existingRoleBlockValidator = (
   };
 };
 
-type FlaggedPair = { email?: string; roleUuid?: string };
-
 const getFeedbackColSpan = () =>
   isFeatureVisible(InvitationsFeatures.conceal_civil_number) ? 3 : 4;
-
-const findRowHit = <T extends FlaggedPair>(
-  list: T[] | '' | undefined,
-  email: string,
-  roleUuid: string,
-): T | undefined =>
-  Array.isArray(list)
-    ? list.find((item) => item.email === email && item.roleUuid === roleUuid)
-    : undefined;
 
 /**
  * The server verdicts for one row, rendered as a full-width row under it.
@@ -138,7 +126,7 @@ const findRowHit = <T extends FlaggedPair>(
  */
 const RowFeedback = ({ name }: { name: string }) => {
   const useList = (listName: string) =>
-    useField<FlaggedPair[]>(listName, { subscription: { value: true } }).input
+    useField<RowVerdict[]>(listName, { subscription: { value: true } }).input
       .value;
   const pending = useList('_duplicateEmails');
   const blocks = useList('_existingRoleBlocks') as ExistingRoleHit[] | '';
@@ -149,19 +137,18 @@ const RowFeedback = ({ name }: { name: string }) => {
   const {
     input: { value: roleProject },
   } = useField(`${name}.role_project`, { subscription: { value: true } });
-  const roleUuid = roleProject?.role?.uuid;
-  if (!email || !roleUuid) return null;
+  const row = { email, role_project: roleProject };
 
   let message: ReactNode = null;
-  if (findRowHit(pending, email, roleUuid)) {
+  if (findVerdictForRow(pending, row)) {
     message = (
       <FieldError
         error={translate('This email already has a pending invitation.')}
       />
     );
   } else {
-    const block = findRowHit(blocks, email, roleUuid);
-    const warning = findRowHit(warnings, email, roleUuid);
+    const block = findVerdictForRow(blocks, row);
+    const warning = findVerdictForRow(warnings, row);
     if (block) {
       message = <FieldError error={getExistingRoleMessage(block)} />;
     } else if (warning) {
@@ -191,8 +178,7 @@ const useShowFirstFlaggedRow = (
   setPage: (page: number) => void,
 ) => {
   const useList = (name: string) =>
-    useField<FlaggedPair[]>(name, { subscription: { value: true } }).input
-      .value;
+    useField<RowVerdict[]>(name, { subscription: { value: true } }).input.value;
   const inForm = useList('_duplicateInFormEmails');
   const pending = useList('_duplicateEmails');
   const blocks = useList('_existingRoleBlocks');
@@ -204,13 +190,7 @@ const useShowFirstFlaggedRow = (
     if (!pairs.length || !rows?.length) return;
     const flagged = rows
       .map((row, index) =>
-        pairs.some(
-          (pair) =>
-            pair.email === row?.email &&
-            pair.roleUuid === row?.role_project?.role?.uuid,
-        )
-          ? index
-          : -1,
+        pairs.some((pair) => isVerdictForRow(pair, row)) ? index : -1,
       )
       .filter((index) => index >= 0);
     if (!flagged.length) return;

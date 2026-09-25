@@ -178,6 +178,20 @@ describe('existingRoles', () => {
       expect(shouldHoldForWarnings(hits, signature)).toBe(false);
     });
 
+    it('treats the same warnings in another order as already shown', () => {
+      // Scopes are checked in parallel, so answers arrive in any order.
+      const shown = getWarningSignature([
+        hit('a@example.com'),
+        hit('b@example.com'),
+      ]);
+      expect(
+        shouldHoldForWarnings(
+          [hit('b@example.com'), hit('a@example.com')],
+          shown,
+        ),
+      ).toBe(false);
+    });
+
     it('holds again when a different set of warnings turns up', () => {
       const shown = getWarningSignature([hit('a@example.com')]);
       expect(shouldHoldForWarnings([hit('b@example.com')], shown)).toBe(true);
