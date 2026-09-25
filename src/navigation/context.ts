@@ -23,7 +23,26 @@ export interface LayoutContextInterface {
   setBreadcrumbs(items: IBreadcrumbItem[]);
 }
 
-export const LayoutContext = createContext<Partial<LayoutContextInterface>>({});
+const noop = () => {};
+
+// Every use* hook below calls its setter unconditionally (no optional
+// chaining), so a consumer rendered without a real LayoutContext.Provider -
+// most commonly a unit test - crashed on a bare `{}` default. No-op stubs
+// mean that case degrades silently instead, matching how these hooks behave
+// once a real provider mounts and simply does nothing with the update.
+export const LayoutContext = createContext<Partial<LayoutContextInterface>>({
+  setActions: noop,
+  extraTabs: [],
+  setExtraTabs: noop,
+  fullPage: false,
+  setFullPage: noop,
+  setExtraToolbar: noop,
+  setPageHero: noop,
+  setPageBar: noop,
+  setExtraAnnouncementBar: noop,
+  breadcrumbs: [],
+  setBreadcrumbs: noop,
+});
 
 export const useExtraTabs = (tabs: Tab[]) => {
   const layoutContext = useContext(LayoutContext);
