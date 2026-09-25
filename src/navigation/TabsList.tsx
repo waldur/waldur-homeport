@@ -39,6 +39,11 @@ const MenuLink: FC<
     </a>
   );
 
+const tabTestId = (tab) => {
+  const id = tab.params?.tab ?? tab.to;
+  return id ? `tab-${id}` : undefined;
+};
+
 const findActiveTab = (tabs, router) => {
   const exactMatch = tabs.find(
     (parent) =>
@@ -49,6 +54,21 @@ const findActiveTab = (tabs, router) => {
   );
   if (exactMatch) {
     return exactMatch;
+  }
+  // No page tab matches ?tab= — it is absent (routes declare `tab` with no
+  // default) or names no tab — so the page renders its first shown tab
+  // (usePageTabsTransmitter). Highlight that same tab rather than none, by the
+  // same rule: skip hidden tabs and hidden children. Route tabs always match
+  // exactly above, and tabs on other states are left to the descendant match.
+  const onThisState = (to) => to && router.stateService.is(to);
+  const fallbackTab = tabs.find(
+    (tab) =>
+      tab.visible !== false &&
+      (onThisState(tab.to) ||
+        tab.children?.some((c) => c.visible !== false && onThisState(c.to))),
+  );
+  if (fallbackTab) {
+    return fallbackTab;
   }
   return tabs.find((parent) => {
     if (!isDescendantOf(parent.to, router.globals.current)) {
@@ -96,6 +116,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
         <span
           role="button"
           tabIndex={0}
+          data-testid={tabTestId(parentTab)}
           className={classNames('menu-item me-0 me-lg-2', { here: active })}
           {...hoverHandlers}
         >
@@ -167,6 +188,7 @@ export const TabsList: FC = () => {
         ) : parentTab.to || parentTab.redirectTo ? (
           <span
             key={parentIndex}
+            data-testid={tabTestId(parentTab)}
             className={classNames('menu-item text-nowrap', {
               here: isMatch(activeTab, parentTab),
             })}
