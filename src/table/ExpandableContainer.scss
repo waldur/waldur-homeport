@@ -43,7 +43,9 @@ table .expandable-container {
     // tr
     div.field-row {
       display: table-row;
-      vertical-align: middle;
+      // Top, not middle: a one-line label centred against a wrapped value
+      // reads as misaligned. Identical for single-line rows.
+      vertical-align: top;
       unicode-bidi: isolate;
       border-color: inherit;
 
@@ -136,6 +138,23 @@ table .expandable-container {
       display: flex;
       justify-content: center;
     }
+  }
+}
+
+// A `full-width` table moves its card padding onto the first cell, and the
+// expanded row's cell is that first cell — so it carries 24px of padding-left
+// that a normal expandable table does not (`_table.scss` sets `padding-left: 0`
+// there). Without this the nested content sits 24px right of the first column's
+// text. Measured: full-width 24px / normal 0px.
+$fullWidthCellPadding: 24px;
+
+.card-table.full-width table .expandable-container {
+  margin-left: calc($expandArrowWidth - $fullWidthCellPadding);
+
+  &.has-multiselect {
+    margin-left: calc(
+      $expandArrowWidth - $fullWidthCellPadding + $checkboxWidth
+    );
   }
 }
 

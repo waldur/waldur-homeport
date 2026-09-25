@@ -152,18 +152,17 @@ export const states: StateDeclaration[] = [
       priority: 30,
     },
   },
+  // Folded into the roles page as a tab; kept as a redirect so bookmarks, the
+  // chaos route sweep and external links keep resolving. No `data.breadcrumb`,
+  // so `filterState` in src/navigation/useTabs.tsx drops it from the header menu.
   {
     name: 'admin-role-availabilities',
     url: 'role-availabilities/',
     parent: 'admin-configuration',
-    component: lazyComponent(() =>
-      import('./role-availabilities/RoleAvailabilitiesList').then((module) => ({
-        default: module.RoleAvailabilitiesList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Role availabilities'),
-    },
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: { state: 'admin-roles', params: { tab: 'availability' } },
   },
   {
     name: 'admin-marketplace-offering-profile-detail',
@@ -724,31 +723,28 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-roles',
-    url: 'roles/',
+    url: 'roles/?tab',
     parent: 'admin-configuration',
     component: lazyComponent(() =>
-      import('./roles/RolesList').then((module) => ({
-        default: module.RolesList,
+      import('./roles/RolesPage').then((module) => ({
+        default: module.RolesPage,
       })),
     ),
     data: {
-      breadcrumb: () => translate('User roles'),
+      breadcrumb: () => translate('Roles'),
     },
   },
 
+  // See admin-role-availabilities above: a tab of the roles page now, kept as a
+  // redirect only. The staff gate moved onto the tab itself.
   {
     name: 'admin-role-hygiene',
     url: 'role-hygiene/',
     parent: 'admin-configuration',
-    component: lazyComponent(() =>
-      import('./roles/hygiene/RoleHygienePage').then((module) => ({
-        default: module.RoleHygienePage,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Role hygiene'),
-      permissions: [isStaff],
-    },
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: { state: 'admin-roles', params: { tab: 'hygiene' } },
   },
 
   {

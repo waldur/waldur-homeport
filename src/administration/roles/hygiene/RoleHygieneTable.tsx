@@ -7,14 +7,17 @@ import {
 import { BadgeVariant } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
-import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { RoleHygieneFindingDetails } from './RoleHygieneFindingDetails';
 import { filterFindings, getCheckLabel } from './utils';
+
+import './RoleHygienePage.scss';
 
 const SEVERITY_VARIANTS: Record<RoleHygieneFindingSeverityEnum, BadgeVariant> =
   {
@@ -36,6 +39,8 @@ interface RoleHygieneTableProps {
   onSelectSeverity(severity?: RoleHygieneFindingSeverityEnum): void;
   /** Changes whenever a fresh report arrives, so the rows are re-read. */
   version?: number;
+  /** Set when the table sits in the roles page's tabs. */
+  portal?: TableWithPortal['portal'];
 }
 
 export const RoleHygieneTable = ({
@@ -43,6 +48,7 @@ export const RoleHygieneTable = ({
   severity,
   onSelectSeverity,
   version,
+  portal,
 }: RoleHygieneTableProps) => {
   const filter = useMemo(() => ({ severity, version }), [severity, version]);
 
@@ -122,57 +128,47 @@ export const RoleHygieneTable = ({
         },
         {
           title: translate('Problem'),
+          render: ({ row }) => getCheckLabel(row.check),
+        },
+        {
+          // The check's machine-readable id, split out of the Problem cell so
+          // each column holds one value — the Name/Code pairing the catalogue
+          // table already uses.
+          title: translate('Check'),
           render: ({ row }) => (
-            <>
-              <span className="d-block text-dark fw-semibold">
-                {getCheckLabel(row.check)}
-              </span>
-              <span className="d-block text-muted font-monospace fs-8">
-                {row.check}
-              </span>
-            </>
+            <span className="font-monospace">{row.check}</span>
           ),
+          copyField: (row) => row.check,
         },
         {
           title: translate('Role'),
-          // Not `copyField`: it floats the button beside the whole two-line
-          // cell instead of next to the code it copies.
+          render: ({ row }) => renderFieldOrDash(row.role_description),
+        },
+        {
+          title: translate('Code'),
           render: ({ row }) => (
-            <>
-              <span className="d-block text-dark">
-                {row.role_description || translate('(no description)')}
-              </span>
-              <span className="d-flex align-items-center gap-1">
-                <span className="text-muted font-monospace fs-8">
-                  {row.role_name}
-                </span>
-                <CopyToClipboardButton
-                  value={row.role_name}
-                  size={14}
-                  verbose={translate('Role code')}
-                />
-              </span>
-            </>
+            <span className="font-monospace">{row.role_name}</span>
           ),
+          copyField: (row) => row.role_name,
         },
         {
           title: translate('Scope'),
-          render: ({ row }) => (
-            <>
-              {row.scope_type ? formatRoleType(row.scope_type) : '—'}{' '}
-              {row.is_system_role && (
-                <Badge variant="neutral" size="sm" shape="pill" tone="outline">
-                  {translate('System')}
-                </Badge>
-              )}
-            </>
-          ),
+          render: ({ row }) =>
+            renderFieldOrDash(
+              row.scope_type ? formatRoleType(row.scope_type) : null,
+            ),
         },
       ]}
       tabs={tabs}
       expandableRow={RoleHygieneFindingDetails}
       title={translate('Findings')}
       verboseName={translate('findings')}
+      className={portal ? 'role-hygiene-findings' : undefined}
+      // Inside the roles page's tabs the card and the toolbar are the page's.
+      portal={portal}
+      hasActionBar={!portal}
+      cardBordered={!portal}
+      fullWidth={!!portal}
       hasQuery={true}
       showPageSizeSelector={true}
       placeholderHasRetry={false}

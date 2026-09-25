@@ -1,36 +1,28 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
-import { useRouter } from '@uirouter/react';
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { FC, useMemo } from 'react';
 import { RoleDetails, rolesList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
-
 import { Link } from '@/core/Link';
+import { StateIndicator } from '@/core/StateIndicator';
 import { RoleUsersExpandableRow } from '@/customer/roles/RoleUsersExpandableRow';
 import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
-import { BooleanField } from '@/table/BooleanField';
 import {
   AdminRolesFilter,
   AdminRolesFilterFormId,
   selectAdminRolesFilter,
 } from '@/table/generated/AdminRolesFilter';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { RoleActions } from './RoleActions';
 import { RoleCreateButton } from './RoleCreateButton';
 import { RolePermissionDelta } from './RolePermissionDelta';
 
-export const RolesList = () => {
-  const isStaff = useSelector(isStaffSelector);
-  const router = useRouter();
+export const RolesList: FC<TableWithPortal> = ({ portal }) => {
   const filterValues = useFilterValues('RolesList');
   const filter = useMemo(
     () => selectAdminRolesFilter(filterValues),
@@ -90,20 +82,15 @@ export const RolesList = () => {
         },
         {
           // Whether the role is a built-in system role (fixed, deployment-wide)
-          // or a staff-created custom one.
+          // or a staff-created custom one. Plain text like Scope: both this and
+          // Availability hold a closed pair of values, so badging them only
+          // produced two same-coloured pills per row. Status keeps the one
+          // badge in this table.
           title: translate('Type'),
           orderField: 'is_system_role',
           render: ({ row }) => (
             <>
-              {row.is_system_role ? (
-                <Badge variant="secondary" shape="pill" tone="outline">
-                  {translate('System')}
-                </Badge>
-              ) : (
-                <Badge variant="primary" shape="pill" tone="outline">
-                  {translate('Custom')}
-                </Badge>
-              )}
+              {row.is_system_role ? translate('System') : translate('Custom')}
               {/* What a clone changed relative to its template; the full
                   comparison is a row action. */}{' '}
               <RolePermissionDelta row={row} />
@@ -113,21 +100,18 @@ export const RolesList = () => {
         {
           // Where the role can be used: everywhere, or only within one
           // organization (an org-scoped clone), independent of system/custom.
+          // The organization is a link, which already sets it apart from the
+          // deployment-wide default without a badge around it.
           title: translate('Availability'),
           render: ({ row }) =>
             row.customer_name && row.customer_uuid ? (
               <Link
                 state="organization-manage"
                 params={{ uuid: row.customer_uuid, tab: 'roles' }}
-              >
-                <Badge variant="success" shape="pill" tone="outline">
-                  {row.customer_name}
-                </Badge>
-              </Link>
+                label={row.customer_name}
+              />
             ) : (
-              <Badge variant="secondary" shape="pill" tone="outline">
-                {translate('Deployment-wide')}
-              </Badge>
+              translate('Deployment-wide')
             ),
         },
         {
@@ -136,12 +120,31 @@ export const RolesList = () => {
           render: ({ row }) => row.users_count,
         },
         {
-          title: translate('Active'),
+          // Active/Inactive pill, as every other administration table renders a
+          // status (AnnouncementsList, RequestTypesList); the bare check/cross
+          // icon `BooleanField` draws reads as a different kind of value.
+          title: translate('Status'),
           orderField: 'is_active',
-          render: ({ row }) => <BooleanField value={row.is_active} />,
+          render: ({ row }) => (
+            <StateIndicator
+              variant={row.is_active ? 'success' : 'danger'}
+              label={
+                row.is_active ? translate('Active') : translate('Inactive')
+              }
+              tone="outline"
+              shape="pill"
+            />
+          ),
         },
       ]}
+      title={translate('Roles')}
       verboseName={translate('roles')}
+      // Rendered only as a tab of the roles page, whose card and toolbar these
+      // controls belong to.
+      portal={portal}
+      hasActionBar={false}
+      cardBordered={false}
+      fullWidth
       expandableRow={RoleUsersExpandableRow}
       filters={<AdminRolesFilter />}
       formId={AdminRolesFilterFormId}
@@ -150,18 +153,7 @@ export const RolesList = () => {
         <RoleActions row={row} refetch={tableProps.fetch} />
       )}
       showPageSizeSelector={true}
-      tableActions={
-        <>
-          {isStaff && (
-            <ActionButton
-              title={translate('Role hygiene')}
-              iconNode={<WarningCircleIcon weight="bold" />}
-              action={() => router.stateService.go('admin-role-hygiene')}
-            />
-          )}
-          <RoleCreateButton refetch={tableProps.fetch} />
-        </>
-      }
+      tableActions={<RoleCreateButton refetch={tableProps.fetch} />}
     />
   );
 };

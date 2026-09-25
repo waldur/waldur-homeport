@@ -87,6 +87,18 @@ const splitUrl = (url: string) => {
   return { path: normalizedPath, pathParams, queryParams };
 };
 
+/**
+ * `redirectTo` is either a state name or a `{state, params}` target (used by
+ * the states kept only so an old URL still resolves). A function form cannot
+ * be evaluated here, so it is reported as no redirect.
+ */
+const redirectTargetOf = (state): string | null => {
+  if (typeof state.redirectTo === 'string') return state.redirectTo;
+  if (typeof state.redirectTo?.state === 'string')
+    return state.redirectTo.state;
+  return null;
+};
+
 const buildEntry = (name: string): ManifestEntry => {
   const state = byName.get(name);
   const chain = chainOf(name);
@@ -112,7 +124,7 @@ const buildEntry = (name: string): ManifestEntry => {
     name,
     abstract: Boolean(state.abstract),
     parent: parentOf(name),
-    redirectTo: typeof state.redirectTo === 'string' ? state.redirectTo : null,
+    redirectTo: redirectTargetOf(state),
     path: path || '/',
     pathParams,
     queryParams,

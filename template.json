@@ -262,11 +262,6 @@
       "feature_area": "project"
     }
   },
-  "(no description)": {
-    "context": {
-      "feature_area": "hygiene"
-    }
-  },
   "(no input)": {
     "context": {
       "feature_area": "ai-assistant"
@@ -9053,6 +9048,11 @@
       "feature_area": "marketplace"
     }
   },
+  "Catalogue": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Catalogues": {
     "context": {
       "primary_ui_type": "title",
@@ -9409,7 +9409,7 @@
   "Check": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "offering-merges"
+      "feature_area": "hygiene"
     }
   },
   "Check COI detection results before generating assignments.": {
@@ -22899,6 +22899,11 @@
   },
   "Hungarian algorithm": {},
   "Hungary": {},
+  "Hygiene": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Hypervisor": {
     "context": {
       "primary_ui_type": "title",
@@ -45680,11 +45685,6 @@
       "feature_area": "profiles"
     }
   },
-  "Role code": {
-    "context": {
-      "feature_area": "hygiene"
-    }
-  },
   "Role definition": {
     "context": {
       "feature_area": "events"
@@ -45790,12 +45790,6 @@
   "Role has been updated.": {
     "context": {
       "primary_ui_type": "success_message",
-      "feature_area": "roles"
-    }
-  },
-  "Role hygiene": {
-    "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "roles"
     }
   },
@@ -45945,7 +45939,7 @@
   "Roles": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "roles"
     }
   },
   "Roles & Status": {
@@ -47574,6 +47568,11 @@
   "Select a resource to use its actual limits and usage for the preview.": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Select a role above to compare this one with.": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "Select a role to compare this one with.": {
@@ -54030,6 +54029,11 @@
   "The reviewer will be permanently removed from this proposal.": {
     "context": {
       "feature_area": "coi-review"
+    }
+  },
+  "The role catalogue, where each role may be used, and what is malformed in the catalogue.": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "The role has been disabled": {
@@ -63349,11 +63353,6 @@
     }
   },
   "User profile settings": {},
-  "User roles": {
-    "context": {
-      "feature_area": "administration"
-    }
-  },
   "User roles will need to be manually reassigned": {
     "context": {
       "feature_area": "project"

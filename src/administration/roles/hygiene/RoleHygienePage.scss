@@ -1,0 +1,23 @@
+// The tab pane already supplies the block's horizontal padding, so everything
+// inside it — the summary cards, the severity strip and the findings table —
+// should start on the same line as the page's own tab strip. Two things push
+// past it by default:
+
+// 1. The summary row cancels its negative gutter margins (`mx-0`, so it cannot
+//    bleed past the pane and get clipped), which leaves each column's own
+//    gutter padding indenting the outer cards. Drop it on the outer edges only,
+//    keeping the gutters between cards.
+.role-hygiene-summary > :first-child {
+  padding-left: 0;
+}
+.role-hygiene-summary > :last-child {
+  padding-right: 0;
+}
+
+// 2. `fullWidth` pulls the findings table's rows out to the pane edge, but its
+//    card header keeps the card padding, so the severity strip sat 24px right
+//    of the table's first column.
+.role-hygiene-findings > .card-header.table-tabs {
+  padding-left: 0;
+  padding-right: 0;
+}
