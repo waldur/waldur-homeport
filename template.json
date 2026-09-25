@@ -476,6 +476,30 @@
       "feature_area": "roles"
     }
   },
+  "1 release with breaking changes": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
+  "1 security fix pending, {urgency} urgency.": {
+    "context": {
+      "variables": {
+        "urgency": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "1 security fix, {urgency} urgency": {
+    "context": {
+      "variables": {
+        "urgency": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "changelog"
+    }
+  },
   "1 star": {
     "context": {
       "feature_area": "create-review"
@@ -486,6 +510,7 @@
       "feature_area": "roles"
     }
   },
+  "1 version behind": {},
   "10 (light load)": {
     "context": {
       "primary_ui_type": "label",
@@ -1519,7 +1544,7 @@
   "Actions": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "remote-offering-sync"
+      "feature_area": "changelog"
     }
   },
   "Actions are triggered when usage crosses these thresholds. Each action can be independently enabled or disabled.": {
@@ -2675,6 +2700,16 @@
     }
   },
   "Affected resource field name": {},
+  "Affected resources": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
+  "Affected users": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Affiliate": {
     "context": {
       "primary_ui_type": "label"
@@ -3131,6 +3166,11 @@
   "All domains allowed": {
     "context": {
       "feature_area": "managed-projects"
+    }
+  },
+  "All entries": {
+    "context": {
+      "feature_area": "generated"
     }
   },
   "All file types accepted": {},
@@ -3933,6 +3973,11 @@
       "feature_area": "announcements"
     }
   },
+  "Announcement text": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Announcements": {
     "context": {
       "feature_area": "issues"
@@ -4205,6 +4250,12 @@
       "feature_area": "users"
     }
   },
+  "Applies here": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "changelog"
+    }
+  },
   "Applies only when the source is \"Group\" or \"Collaboration or group\".": {
     "context": {
       "feature_area": "sram"
@@ -4216,6 +4267,11 @@
       "feature_area": "details"
     }
   },
+  "Applies to all deployments.": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Applies to offering": {
     "context": {
       "feature_area": "generated"
@@ -4224,6 +4280,11 @@
   "Applies to sign-in": {
     "context": {
       "feature_area": "generated"
+    }
+  },
+  "Applies to this deployment": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Apply": {
@@ -8034,6 +8095,11 @@
     }
   },
   "Brazil": {},
+  "Breaking": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Brief description of the news item...": {
     "context": {
       "feature_area": "settings"
@@ -9225,6 +9291,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "type-based"
+    }
+  },
+  "Changelog": {
+    "context": {
+      "feature_area": "administration"
     }
   },
   "Changes": {
@@ -11686,6 +11757,11 @@
       "feature_area": "map"
     }
   },
+  "Copied": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Copied from the template role.": {
     "context": {
       "feature_area": "roles"
@@ -11704,7 +11780,7 @@
   },
   "Copy": {
     "context": {
-      "feature_area": "notifications"
+      "feature_area": "changelog"
     }
   },
   "Copy applicant-data visibility settings.": {
@@ -12256,6 +12332,13 @@
   "Create and send broadcast messages to users": {
     "context": {
       "feature_area": "broadcasts"
+    }
+  },
+  "Create announcement": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "changelog",
+      "action_type": "create"
     }
   },
   "Create another": {
@@ -13048,7 +13131,7 @@
   "Current": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "usage-views"
+      "feature_area": "changelog"
     }
   },
   "Current API (Your IP: {ip})": {
@@ -13726,6 +13809,11 @@
     }
   },
   "Customers pay upfront for the full subscription period. Requires end date.": {},
+  "Customized": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Custom…": {
     "context": {
       "feature_area": "create"
@@ -15210,6 +15298,11 @@
       "feature_area": "roles"
     }
   },
+  "Deprecation": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Deregister": {
     "context": {
       "feature_area": "pubsub"
@@ -15917,7 +16010,7 @@
   },
   "Dismiss": {
     "context": {
-      "feature_area": "coi-review"
+      "feature_area": "changelog"
     }
   },
   "Dismiss conflict": {
@@ -16066,6 +16159,11 @@
       "feature_area": "call"
     }
   },
+  "Docker Compose": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Docker version": {
     "context": {
       "feature_area": "node"
@@ -16128,6 +16226,7 @@
       "feature_area": "documents"
     }
   },
+  "Does not apply to this deployment.": {},
   "Domain": {
     "context": {
       "primary_ui_type": "title",
@@ -16195,6 +16294,11 @@
   "Download YAML": {
     "context": {
       "feature_area": "site-agent"
+    }
+  },
+  "Download report": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "Download template": {
@@ -19181,6 +19285,11 @@
       "feature_area": "create"
     }
   },
+  "Exploitability": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Explore marketplace": {
     "context": {
       "primary_ui_type": "label",
@@ -20203,6 +20312,11 @@
       "feature_area": "workflow"
     }
   },
+  "Feature": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Feature is disabled.": {},
   "Features": {
     "context": {
@@ -20779,6 +20893,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Fix": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Fixed": {
     "context": {
       "primary_ui_type": "label"
@@ -20833,6 +20952,16 @@
         }
       },
       "feature_area": "proposals"
+    }
+  },
+  "Fixed in {versions}.": {
+    "context": {
+      "variables": {
+        "versions": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "changelog"
     }
   },
   "Fixed price": {
@@ -22251,6 +22380,11 @@
       "feature_area": "header"
     }
   },
+  "Helm": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Help me manage my accounts": {
     "context": {
       "feature_area": "ai-assistant"
@@ -22682,6 +22816,7 @@
     }
   },
   "How maintenance notifications are delivered.": {},
+  "How many days ahead the call manager dashboard looks for review deadlines. Past-due reviews are always included.": {},
   "How many decimal places a customer may use for this limit. 0 keeps it a whole number.": {
     "context": {
       "feature_area": "update"
@@ -22993,6 +23128,11 @@
   },
   "Identify root causes by drilling down into specific calls and states": {},
   "Identify root causes by drilling down into specific offering types and providers": {},
+  "Identity": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Identity & Authentication": {
     "context": {
       "feature_area": "providers"
@@ -23313,6 +23453,11 @@
       "feature_area": "announcements"
     }
   },
+  "Impact analysis": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Impact field name": {},
   "Impact level": {
     "context": {
@@ -23565,6 +23710,11 @@
     }
   },
   "Importing resources": {},
+  "Improvement": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "In Atlassian Administration, open Directory, then Service accounts, and create an OAuth 2.0 credential for the service account with the scopes read:servicedesk-request, write:servicedesk-request, manage:servicedesk-customer, read:jira-work, write:jira-work and read:jira-user. The service account needs a Jira Service Management agent licence and the Service Desk Team role on the project.": {
     "context": {
       "feature_area": "steps"
@@ -24909,6 +25059,7 @@
   },
   "Invoices": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "list"
     }
   },
@@ -25336,7 +25487,7 @@
   "Key": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "list"
+      "feature_area": "changelog"
     }
   },
   "Key ID": {
@@ -27306,6 +27457,16 @@
       "feature_area": "create"
     }
   },
+  "Maintenance window end": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
+  "Maintenance window start": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Maintenance {when}": {
     "context": {
       "variables": {
@@ -27905,6 +28066,7 @@
   },
   "Marketplace": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "i18n"
     }
   },
@@ -29285,6 +29447,11 @@
       "feature_area": "setup"
     }
   },
+  "Mitigation": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Mix-agnostic: each (offering, component) compares against its own previous period — periods are aligned per row, not across rows.": {
     "context": {
       "feature_area": "views"
@@ -29315,6 +29482,11 @@
   "Models unavailable": {
     "context": {
       "feature_area": "playground"
+    }
+  },
+  "Moderate": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Moderate (+20%)": {
@@ -32588,6 +32760,11 @@
       "feature_area": "shared"
     }
   },
+  "Not installed": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Not limited": {
     "context": {
       "feature_area": "type-based"
@@ -34008,6 +34185,7 @@
       "feature_area": "actions"
     }
   },
+  "Only affects development and testing.": {},
   "Only canceled invitations can be deleted.": {
     "context": {
       "feature_area": "invitations"
@@ -34021,6 +34199,15 @@
   "Only draft offerings can be deleted": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Only for deployments using: {conditions}.": {
+    "context": {
+      "variables": {
+        "conditions": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Only groups whose short name matches one of these are selected. A trailing * matches by prefix. Leave empty to match any group.": {
@@ -34245,6 +34432,11 @@
     }
   },
   "OpenPortal remote allocation": {},
+  "OpenStack": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "OpenStack Configuration": {
     "context": {
       "feature_area": "create"
@@ -36418,6 +36610,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Pending upgrade": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Pending upload": {
     "context": {
       "feature_area": "marketplace-checklist"
@@ -37760,6 +37957,11 @@
       "feature_area": "single-import"
     }
   },
+  "Plugin status": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "Plugins": {
     "context": {
       "primary_ui_type": "title"
@@ -38123,6 +38325,11 @@
   "Post-Logout Redirect": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Post-upgrade actions": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "Postal": {
@@ -42049,10 +42256,33 @@
       "feature_area": "actions"
     }
   },
+  "Release {label}": {
+    "context": {
+      "variables": {
+        "label": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "Release {version}": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Released": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "posix-id-pools"
+    }
+  },
+  "Relevance": {
+    "context": {
+      "feature_area": "generated"
     }
   },
   "Reload": {
@@ -45010,6 +45240,7 @@
       "feature_area": "create-user-steps"
     }
   },
+  "Review the command for your deployment method and run it where Waldur is deployed. Back up the database first.": {},
   "Review the configuration below before applying it to the offering.": {
     "context": {
       "feature_area": "steps"
@@ -45352,6 +45583,12 @@
   "Right Split": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Risk": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "changelog"
     }
   },
   "Robot SSH keys": {
@@ -46197,6 +46434,7 @@
   "SLAAC and DHCPv6 stateless need a /64 prefix, because instances build their address from it.": {},
   "SLURM": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policy-watch"
     }
   },
@@ -46599,6 +46837,22 @@
       "feature_area": "steps"
     }
   },
+  "Schedule upgrade": {
+    "context": {
+      "primary_ui_type": "action_button",
+      "feature_area": "changelog"
+    }
+  },
+  "Schedule upgrade to {version}": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "changelog"
+    }
+  },
   "Schedule your first maintenance announcement to notify affected customers.": {
     "context": {
       "feature_area": "maintenance"
@@ -46983,7 +47237,13 @@
   "Secure authentication through supported Austrian eID methods.": {},
   "Security": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "changelog"
+    }
+  },
+  "Security alert": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "Security configuration": {
@@ -47068,6 +47328,11 @@
   "Security rules": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Security update available": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "Security warning": {
@@ -48854,6 +49119,13 @@
       "feature_area": "actions"
     }
   },
+  "Set a maintenance window that ends after it starts.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "changelog",
+      "action_type": "create"
+    }
+  },
   "Set a new expiration date for this assignment batch.": {
     "context": {
       "feature_area": "assignments"
@@ -49243,6 +49515,11 @@
     "context": {
       "primary_ui_type": "action_button",
       "feature_area": "vendorOfferings"
+    }
+  },
+  "Settings impact": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "Settings that describe an offering itself, such as its plans and components.": {},
@@ -53037,6 +53314,11 @@
       "feature_area": "course-accounts"
     }
   },
+  "The end must be after the start.": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "The endpoint does not expose any model.": {
     "context": {
       "feature_area": "playground",
@@ -54521,6 +54803,11 @@
       "feature_area": "project"
     }
   },
+  "This creates a maintenance announcement visible to all users, informing them about the scheduled upgrade window.": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "This decision will be logged for audit purposes.": {
     "context": {
       "feature_area": "coi-review"
@@ -55388,7 +55675,7 @@
   "Title": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "settings"
+      "feature_area": "changelog"
     }
   },
   "Title input / output tokens": {
@@ -56557,6 +56844,11 @@
   "Types requiring recusal": {
     "context": {
       "feature_area": "coi-settings"
+    }
+  },
+  "UI": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "UI component data": {
@@ -58808,6 +59100,12 @@
   "Unable to load the role hygiene report.": {
     "context": {
       "feature_area": "hygiene"
+    }
+  },
+  "Unable to load the upgrade report.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "changelog"
     }
   },
   "Unable to load this offering.": {
@@ -61969,9 +62267,30 @@
       "feature_area": "reports"
     }
   },
+  "Upgrade announcement has been scheduled.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "changelog"
+    }
+  },
   "Upgrade available": {
     "context": {
-      "feature_area": "footer"
+      "feature_area": "changelog"
+    }
+  },
+  "Upgrade commands": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
+  "Upgrade to {version}": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "changelog"
     }
   },
   "Upload": {
@@ -64283,6 +64602,11 @@
       "feature_area": "user"
     }
   },
+  "View advisory": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "View all": {
     "context": {
       "feature_area": "core"
@@ -64340,6 +64664,11 @@
   "View event consumers": {
     "context": {
       "feature_area": "event-subscriptions"
+    }
+  },
+  "View full changelog": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "View identities": {
@@ -65450,6 +65779,11 @@
   "Why is this user being deactivated?": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Why relevant": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "Why so": {
@@ -66738,6 +67072,16 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "Your version ({version}) is affected.": {
+    "context": {
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "changelog"
+    }
+  },
   "Zammad": {
     "context": {
       "primary_ui_type": "label"
@@ -66910,6 +67254,11 @@
       "feature_area": "support-users"
     }
   },
+  "automatic": {
+    "context": {
+      "feature_area": "changelog"
+    }
+  },
   "avg {ms}ms": {
     "context": {
       "variables": {
@@ -66978,6 +67327,11 @@
   "catalogues": {
     "context": {
       "feature_area": "catalog"
+    }
+  },
+  "changelog entries": {
+    "context": {
+      "feature_area": "changelog"
     }
   },
   "claims ({claims})": {
@@ -67904,6 +68258,7 @@
       "feature_area": "category"
     }
   },
+  "older": {},
   "on": {
     "context": {
       "feature_area": "details"
@@ -68280,6 +68635,7 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "running": {},
   "security group": {
     "context": {
       "feature_area": "openstack-security-groups"
@@ -69762,6 +70118,16 @@
       "feature_area": "pubsub"
     }
   },
+  "{count} releases with breaking changes": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "changelog"
+    }
+  },
   "{count} request type(s) selected": {
     "context": {
       "variables": {
@@ -69892,6 +70258,31 @@
       "feature_area": "email"
     }
   },
+  "{count} security fixes pending, {urgency} urgency.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "urgency": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "{count} security fixes, {urgency} urgency": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        },
+        "urgency": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "changelog"
+    }
+  },
   "{count} selected": {
     "context": {
       "variables": {
@@ -69986,6 +70377,15 @@
         }
       },
       "feature_area": "roles"
+    }
+  },
+  "{count} versions behind": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      }
     }
   },
   "{count} with findings": {

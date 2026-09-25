@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { versionRetrieve } from 'waldur-js-client';
 
@@ -72,5 +72,45 @@ describe('AppFooter', () => {
     // After re-render with versionInfo, it should show upgrade available
     const tip = await screen.findByTitle('Update available');
     expect(tip).toBeInTheDocument();
+  });
+
+  it('compares against the backend version, not the frontend build', async () => {
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(versionRetrieve).mockResolvedValue({
+      data: {
+        version: '8.1.3',
+        latest_version: '8.1.3',
+        changelog_summary: {
+          versions_behind: 0,
+          breaking_release_count: 0,
+          has_breaking_changes: false,
+        },
+      },
+    } as any);
+
+    render(<AppFooter />);
+
+    await waitFor(() => expect(versionRetrieve).toHaveBeenCalled());
+    // ENV.buildId is 1.2.3, but the backend already runs the latest release.
+    expect(screen.queryByTitle(/behind|Update available/)).toBeNull();
+  });
+
+  it('labels the badge with the number of releases behind', async () => {
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
+    vi.mocked(versionRetrieve).mockResolvedValue({
+      data: {
+        version: '8.1.3-rc.15',
+        latest_version: '8.1.3-rc.17',
+        changelog_summary: {
+          versions_behind: 2,
+          breaking_release_count: 0,
+          has_breaking_changes: false,
+        },
+      },
+    } as any);
+
+    render(<AppFooter />);
+
+    expect(await screen.findByTitle('2 versions behind')).toBeInTheDocument();
   });
 });

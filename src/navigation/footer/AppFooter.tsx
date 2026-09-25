@@ -1,14 +1,18 @@
 import { ArrowCircleUpIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useState } from 'react';
-import { versionRetrieve } from 'waldur-js-client';
+import { Version, versionRetrieve } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
 
+import { getVersionsBehindLabel } from '@/changelog/labels';
+import { SecurityAlertBanner } from '@/changelog/SecurityAlertBanner';
+import { ChangelogSummary } from '@/changelog/types';
 import { ENV } from '@/core/config';
 import { format } from '@/core/ErrorMessageFormatter';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { useExtraAnnouncementBar } from '@/navigation/context';
 import { BackendHealthStatusIndicator } from '@/navigation/footer/BackendHealthStatusIndicator';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
@@ -16,17 +20,32 @@ import { useUser } from '@/workspace/hooks';
 import { DisclaimerArea } from './DisclaimerArea';
 import { FooterLinks } from './FooterLinks';
 
+const ChangelogSummaryDialog = lazyComponent(() =>
+  import('@/changelog/ChangelogSummaryDialog').then((module) => ({
+    default: module.ChangelogSummaryDialog,
+  })),
+);
+
 const UpgradeNotificationDialog = lazyComponent(() =>
   import('./UpgradeNotificationDialog').then((module) => ({
     default: module.UpgradeNotificationDialog,
   })),
 );
 
-const compareVersions = (current: string, latest: string) => {
-  // Skip comparison for non-semver versions
-  if (current === 'develop' || current === 'latest') return false;
+const isNonReleaseBuild = (buildId: string) =>
+  buildId === 'develop' || buildId === 'latest';
 
-  return current !== latest;
+// Colour tokens (packages/design-tokens) as text colours; the icon inherits
+// them through currentColor.
+const getBadgeColorClass = (summary?: ChangelogSummary) => {
+  if (
+    summary?.security_alert?.max_urgency === 'critical' ||
+    summary?.has_breaking_changes
+  )
+    return 'text-[var(--color-error-600)]';
+  if (summary?.security_alert?.max_urgency === 'high')
+    return 'text-[var(--color-warning-600)]';
+  return 'text-[var(--color-success-600)]';
 };
 
 export const AppFooter: FunctionComponent = () => {
@@ -37,18 +56,11 @@ export const AppFooter: FunctionComponent = () => {
   const user = useUser();
 
   const isUserStaffOrSupport = user?.is_staff || user?.is_support;
-  const [versionInfo, setVersionInfo] = useState<{
-    version?: string;
-    latest_version?: string;
-  }>(null);
+  const [versionInfo, setVersionInfo] = useState<Version>(null);
 
   useEffect(() => {
     const checkVersion = async () => {
-      if (
-        isUserStaffOrSupport &&
-        ENV.buildId !== 'develop' &&
-        ENV.buildId !== 'latest'
-      ) {
+      if (isUserStaffOrSupport && !isNonReleaseBuild(ENV.buildId)) {
         try {
           const response = await versionRetrieve();
           setVersionInfo(response.data);
@@ -70,15 +82,51 @@ export const AppFooter: FunctionComponent = () => {
     checkVersion();
   }, [isUserStaffOrSupport]);
 
+  // The backend serializes changelog_summary as a plain DictField, so the
+  // schema (and the SDK) only know it as a free-form object.
+  const summary = versionInfo?.changelog_summary as unknown as
+    ChangelogSummary | undefined;
+  const securityAlert = summary?.security_alert;
+  // The changelog summary is computed for the backend's version, which is the
+  // one to show and compare against - not the frontend build.
+  const backendVersion = versionInfo?.version;
+
+  // Show security banner at top of page via layout context
+  useExtraAnnouncementBar(
+    securityAlert ? (
+      <SecurityAlertBanner
+        alert={securityAlert}
+        currentVersion={backendVersion}
+      />
+    ) : null,
+    [securityAlert, backendVersion],
+  );
+
   const showUpgradeAvailable =
     versionInfo?.latest_version &&
-    compareVersions(ENV.buildId, versionInfo.latest_version);
+    backendVersion !== versionInfo.latest_version &&
+    !isNonReleaseBuild(ENV.buildId);
+  const badgeColorClass = getBadgeColorClass(summary);
 
   const openUpgradeDialog = () => {
-    openDialog(UpgradeNotificationDialog, {
-      resolve: { version: versionInfo.latest_version },
-    });
+    if (summary) {
+      openDialog(ChangelogSummaryDialog, {
+        resolve: {
+          summary,
+          currentVersion: backendVersion,
+          latestVersion: versionInfo.latest_version,
+        },
+      });
+    } else {
+      openDialog(UpgradeNotificationDialog, {
+        resolve: { version: versionInfo.latest_version },
+      });
+    }
   };
+
+  const badgeLabel = summary
+    ? getVersionsBehindLabel(summary.versions_behind)
+    : translate('Update available');
 
   return (
     <div className="footer d-flex flex-column">
@@ -92,13 +140,12 @@ export const AppFooter: FunctionComponent = () => {
             )}
             <BackendHealthStatusIndicator />
             {showUpgradeAvailable && (
-              <Tooltip label={translate('Update available')}>
+              <Tooltip label={badgeLabel}>
                 <ArrowCircleUpIcon
                   size={20}
-                  color="#6B8E23"
                   weight="bold"
                   onClick={openUpgradeDialog}
-                  className="ms-8px d-inline-block cursor-pointer"
+                  className={`ms-8px d-inline-block cursor-pointer ${badgeColorClass}`}
                 />
               </Tooltip>
             )}

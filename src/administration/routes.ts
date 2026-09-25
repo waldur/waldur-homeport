@@ -108,6 +108,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-changelog',
+    url: 'changelog/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./changelog/ChangelogPage').then((module) => ({
+        default: module.ChangelogPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Changelog'),
+      permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
     name: 'admin-table-growth',
     url: 'table-growth/',
     parent: 'admin-system-management',
