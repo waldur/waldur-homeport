@@ -127,6 +127,33 @@ describe('DefaultUserManagementSection account settings', () => {
       expect(screen.getByRole('tab', { name })).toBeInTheDocument();
     }
     expect(screen.getByText('Shared user password')).toBeInTheDocument();
+    expect(
+      screen.getByText('Use per-resource robot accounts as identity model'),
+    ).toBeInTheDocument();
+  });
+
+  it('blocks combining robot-account mode with automatic offering users', () => {
+    const { unmount } = renderSection('offering-users', {
+      ...inheritedOffering,
+      plugin_options: {
+        ...inheritedOffering.plugin_options,
+        uses_robot_accounts: true,
+        service_provider_can_create_offering_user: false,
+      },
+    });
+
+    expect(
+      screen.getByTestId(
+        'edit-plugin_options.service_provider_can_create_offering_user',
+      ),
+    ).toBeDisabled();
+
+    unmount();
+    renderSection('offering-users');
+
+    expect(
+      screen.getByTestId('edit-plugin_options.uses_robot_accounts'),
+    ).toBeDisabled();
   });
 
   it('hides the GLAuth tab when POSIX accounts are not managed', () => {
