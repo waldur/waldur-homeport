@@ -8893,6 +8893,8 @@
       "feature_area": "plans"
     }
   },
+  "Cannot be combined with automatic creation of offering users. Disable that option first.": {},
+  "Cannot be combined with per-resource robot accounts as the identity model. Disable that option first.": {},
   "Cannot change the network ACL of a revoked token.": {
     "context": {
       "feature_area": "personal-access-tokens"
@@ -50124,6 +50126,11 @@
       "feature_area": "steps"
     }
   },
+  "Signals that integrators should provision per-resource robot accounts instead of offering users. Does not block creating robot accounts on offerings that use offering users (for example LEXIS links). Unset means off.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Signed in as {username}": {
     "context": {
       "variables": {
@@ -62805,6 +62812,11 @@
   "Use local credentials": {
     "context": {
       "feature_area": "layouts"
+    }
+  },
+  "Use per-resource robot accounts as identity model": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Use project date": {
