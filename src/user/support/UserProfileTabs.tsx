@@ -1005,6 +1005,8 @@ interface UserProfileTabsProps {
   user: User;
   disabled?: boolean;
   disabledReason?: string;
+  /** Rendered in the panel header's toolbar, beside the title. */
+  actions?: ReactNode;
 }
 
 const useProfileTabFields = (
@@ -1029,6 +1031,7 @@ export const UserProfileTabs = ({
   user,
   disabled = false,
   disabledReason,
+  actions,
 }: UserProfileTabsProps) => {
   const currentUser = useUser();
   const { confirm } = useModal();
@@ -1098,7 +1101,15 @@ export const UserProfileTabs = ({
 
   return (
     <EditFieldProvider scope={user} callback={handleUpdate}>
-      <TabbedSection title={translate('Details')} hideActions={disabled}>
+      <TabbedSection
+        title={
+          isSelf
+            ? translate('Personal information')
+            : translate('Profile settings')
+        }
+        actions={actions}
+        hideActions={disabled}
+      >
         <TabbedSection.Tab
           id="basic"
           title={
