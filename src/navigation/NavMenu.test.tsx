@@ -1,6 +1,7 @@
 import * as RadixPopover from '@radix-ui/react-popover';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { CSSProperties } from 'react';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -57,24 +58,35 @@ describe('NavMenuContent', () => {
 });
 
 describe('PopoverMenuContent', () => {
-  it('uses the popover available-height variable for scroll', () => {
+  const renderPanel = (style?: CSSProperties) => {
     render(
       <RadixPopover.Root open>
         <RadixPopover.Anchor asChild>
           <span>Anchor</span>
         </RadixPopover.Anchor>
-        <PopoverMenuContent>
+        <PopoverMenuContent style={style}>
           <div>Panel body</div>
         </PopoverMenuContent>
       </RadixPopover.Root>,
     );
-
     const body = screen.getByText('Panel body');
     // eslint-disable-next-line testing-library/no-node-access
-    const panel = body.closest('.menu-sub-dropdown');
-    expect(panel).toHaveStyle({
+    return body.closest('.menu-sub-dropdown');
+  };
+
+  it('does not height-cap editor panels (table filter selects live here)', () => {
+    const panel = renderPanel();
+    expect(panel).not.toHaveStyle({
       maxHeight: 'var(--radix-popover-content-available-height)',
       overflowY: 'auto',
+    });
+  });
+
+  it('still merges a caller-supplied style', () => {
+    const panel = renderPanel({ width: 320 });
+    expect(panel).toHaveStyle({ width: '320px' });
+    expect(panel).not.toHaveStyle({
+      maxHeight: 'var(--radix-popover-content-available-height)',
     });
   });
 });
