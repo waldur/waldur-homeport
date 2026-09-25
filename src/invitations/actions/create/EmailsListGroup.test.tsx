@@ -95,6 +95,32 @@ describe('EmailsListGroup row feedback', () => {
     expect(getForm().getState().valid).toBe(false);
   });
 
+  it('clears a blocking verdict once the row moves to another project', async () => {
+    const getForm = renderList();
+
+    act(() => {
+      getForm().change('_existingRoleBlocks', [
+        { ...verdict(true)[0], projectUuid: project.uuid },
+      ]);
+    });
+    await screen.findByDisplayValue(lastEmail);
+    expect(getForm().getState().valid).toBe(false);
+
+    act(() => {
+      getForm().change('rows[5].role_project', {
+        role: memberRole,
+        project: { uuid: 'other-project-uuid', name: 'Other project' },
+      });
+    });
+
+    expect(
+      screen.queryByText(
+        'User already has this role in this scope. Update their existing role instead.',
+      ),
+    ).not.toBeInTheDocument();
+    expect(getForm().getState().valid).toBe(true);
+  });
+
   it('does not pull the page back once the user pages away', async () => {
     const user = userEvent.setup();
     const getForm = renderList();

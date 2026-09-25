@@ -168,13 +168,20 @@ describe('useInvitationCreateDialog checkDuplicates', () => {
     const { result } = renderCheck();
     const outcome = await result.current(formData);
 
+    // Both carry the project they were checked in, so a verdict can be
+    // dropped from a row that moves to another project.
     expect(outcome.duplicatePairs).toEqual([
-      { email: 'member@example.com', roleUuid: 'member-uuid' },
+      {
+        email: 'member@example.com',
+        roleUuid: 'member-uuid',
+        projectUuid: 'project-uuid',
+      },
     ]);
     expect(outcome.existingRoleHits).toEqual([
       {
         email: 'member@example.com',
         roleUuid: 'member-uuid',
+        projectUuid: 'project-uuid',
         existingRoleUuid: 'admin-uuid',
         existingRoleName: 'Project administrator',
         isSameRole: false,

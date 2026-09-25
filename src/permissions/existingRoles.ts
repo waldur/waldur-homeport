@@ -10,6 +10,8 @@ import { translate } from '@/i18n';
 export interface ExistingRoleHit {
   email?: string;
   roleUuid: string;
+  /** The project the role was checked in, when the requested role is project-scoped. */
+  projectUuid?: string;
   existingRoleUuid: string;
   existingRoleName: string;
   isSameRole: boolean;
@@ -90,11 +92,16 @@ export const isExistingRoleBlocking = (hit: ExistingRoleHit): boolean =>
 
 /**
  * Identifies a set of warnings so the caller can tell a set it has already put
- * on screen from a new one.
+ * on screen from a new one. Sorted, because the duplicate check queries each
+ * scope in parallel and collects the answers in whatever order they arrive.
  */
 export const getWarningSignature = (hits: ExistingRoleHit[]): string =>
   hits
-    .map((hit) => `${hit.email}\0${hit.roleUuid}\0${hit.existingRoleUuid}`)
+    .map(
+      (hit) =>
+        `${hit.email}\0${hit.roleUuid}\0${hit.projectUuid ?? ''}\0${hit.existingRoleUuid}`,
+    )
+    .sort()
     .join('|');
 
 /**
