@@ -5,10 +5,7 @@ import { ComponentPropsWithoutRef, forwardRef, useRef, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
-import {
-  radixDropdownMenuScrollContentStyle,
-  radixPopoverScrollContentStyle,
-} from '@/core/radixScrollContentStyles';
+import { radixDropdownMenuScrollContentStyle } from '@/core/radixScrollContentStyles';
 
 /**
  * Radix-driven replacement for the header/footer/sidebar-popup menus built
@@ -228,7 +225,7 @@ export function PopoverMenuContent({
         sideOffset={sideOffset}
         data-popper-placement={placement}
         className={classNames(NAV_MENU_CONTENT_CLASSNAME, className)}
-        style={{ ...radixPopoverScrollContentStyle, ...style }}
+        style={style}
         {...props}
       />
     </RadixPopover.Portal>
