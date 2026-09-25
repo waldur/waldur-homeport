@@ -25,6 +25,11 @@ interface RoleComparisonDialogResolve {
   role: RoleDetails;
 }
 
+// Floor for the results area, so picking a baseline or swapping between short
+// diffs no longer resizes the dialog. A diff long enough to fill the page still
+// grows past it.
+const COMPARISON_TABLE_HEIGHT = 420;
+
 interface ComparisonRow {
   uuid: string;
   code: string;
@@ -159,22 +164,24 @@ export const RoleComparisonDialog: FC<{
           </FormGroup>
         </div>
       </div>
-      {diff && (
-        <Table<ComparisonRow>
-          {...tableProps}
-          columns={columns}
-          verboseName={translate('differences')}
-          emptyMessage={translate(
-            'Both roles carry exactly the same permissions.',
-          )}
-          hideTitle
-          hasActionBar={false}
-          fullWidth
-          cardBordered
-          minHeight="auto"
-          placeholderHasRetry={false}
-        />
-      )}
+      {/* Always mounted: rendering it only once a baseline was picked made the
+          dialog jump on the first selection. */}
+      <Table<ComparisonRow>
+        {...tableProps}
+        columns={columns}
+        verboseName={translate('differences')}
+        emptyMessage={
+          baseline
+            ? translate('Both roles carry exactly the same permissions.')
+            : translate('Select a role above to compare this one with.')
+        }
+        hideTitle
+        hasActionBar={false}
+        fullWidth
+        cardBordered
+        minHeight={COMPARISON_TABLE_HEIGHT}
+        placeholderHasRetry={false}
+      />
     </ModalDialog>
   );
 };

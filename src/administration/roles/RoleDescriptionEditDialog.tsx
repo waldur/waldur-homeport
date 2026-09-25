@@ -1,12 +1,12 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import { rolesRetrieve, rolesUpdateDescriptionsUpdate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { StringField, SubmitButton } from '@/form';
+import { StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -105,28 +105,17 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
                 'The name shown to users for this role, in each language. The role code is edited separately.',
               )}
             </p>
-            <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-              <table className="table">
-                <tbody>
-                  {ENV.languageChoices.map(({ code, label }) => (
-                    <tr key={code}>
-                      <td className="align-middle fw-bold">{label}</td>
-                      <td>
-                        <Field name={`description_${code}`}>
-                          {({ input, meta }) => (
-                            <StringField
-                              input={input}
-                              meta={meta}
-                              disabled={submitting}
-                            />
-                          )}
-                        </Field>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            {/* One labelled field per language, like every other form in the
+                app. The modal body scrolls on its own (ModalRoot renders every
+                dialog `scrollable`), so the list needs no height of its own. */}
+            {ENV.languageChoices.map(({ code, label }) => (
+              <StringGroup
+                key={code}
+                name={`description_${code}`}
+                label={label}
+                disabled={submitting}
+              />
+            ))}
           </ModalDialog>
         </form>
       )}

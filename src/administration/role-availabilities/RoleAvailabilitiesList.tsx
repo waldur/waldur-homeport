@@ -1,4 +1,5 @@
 import { TrashIcon } from '@phosphor-icons/react';
+import { FC } from 'react';
 import {
   roleAvailabilitiesDestroy,
   roleAvailabilitiesList,
@@ -12,6 +13,7 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -46,7 +48,7 @@ const DeleteAvailabilityAction = ({ row, refetch }) => {
   );
 };
 
-export const RoleAvailabilitiesList = () => {
+export const RoleAvailabilitiesList: FC<TableWithPortal> = ({ portal }) => {
   const tableProps = useTable({
     table: 'RoleAvailabilitiesList',
     fetchData: createFetcher(roleAvailabilitiesList),
@@ -57,6 +59,12 @@ export const RoleAvailabilitiesList = () => {
       {...tableProps}
       title={translate('Role availabilities')}
       verboseName={translate('role availabilities')}
+      // Rendered only as a tab of the roles page, whose card and toolbar these
+      // controls belong to.
+      portal={portal}
+      hasActionBar={false}
+      cardBordered={false}
+      fullWidth
       columns={[
         {
           title: translate('Role'),

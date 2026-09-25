@@ -130,6 +130,9 @@ const RoleUsersTable: FC<{ roleUuid: string; customerUuid?: string }> = ({
       verboseName={translate('users')}
       emptyMessage={translate('No users are assigned this role.')}
       placeholderHasRetry={false}
+      // Every other expandable-row table does this: the default 300px floor
+      // leaves the empty state stranded at the top of a half-empty box.
+      minHeight="auto"
       hideTitle
       hasActionBar={false}
     />

@@ -1,18 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { RoleHygieneFindingSeverityEnum } from 'waldur-js-client';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { TableWithPortal } from '@/table/types';
 
 import { getRoleHygieneReport } from '../../api';
 
 import { RoleHygieneSummary } from './RoleHygieneSummary';
 import { RoleHygieneTable } from './RoleHygieneTable';
 
-export const RoleHygienePage = () => {
+import './RoleHygienePage.scss';
+
+export const RoleHygienePage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   const [severity, setSeverity] = useState<
     RoleHygieneFindingSeverityEnum | undefined
   >();
@@ -36,7 +39,10 @@ export const RoleHygienePage = () => {
   }
 
   return (
-    <>
+    // `pt-5` + the summary's `mx-0`: the spacing contract for a TableWithTabs
+    // pane, as in SupportAIAssistantLogsList. Without it the cards butt up
+    // against the tab strip.
+    <div className="pt-5">
       <RoleHygieneSummary report={data} />
       {data.findings.length === 0 ? (
         <NoResult
@@ -53,8 +59,9 @@ export const RoleHygienePage = () => {
           severity={severity}
           onSelectSeverity={setSeverity}
           version={dataUpdatedAt}
+          portal={portal}
         />
       )}
-    </>
+    </div>
   );
 };

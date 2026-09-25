@@ -1,4 +1,4 @@
-import { PencilSimpleIcon } from '@phosphor-icons/react';
+import { TranslateIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -28,7 +28,7 @@ export const RoleDescriptionEditButton = ({ row, refetch }) => {
   return (
     <ActionItem
       title={translate('Edit name translations')}
-      iconNode={<PencilSimpleIcon weight="bold" />}
+      iconNode={<TranslateIcon weight="bold" />}
       action={openRoleEditDialog}
     />
   );
