@@ -70,10 +70,12 @@ export const PublicDashboardHero: FC<
                   </span>
                 </Tooltip>
               ) : null}
-              <div className="d-flex flex-column flex-grow-1 gap-2">
+              {/* min-w-0: a flex item won't shrink below its longest word, so an
+                  unbroken name would push the details out of the card */}
+              <div className="d-flex flex-column flex-grow-1 gap-2 min-w-0">
                 <div className="d-flex flex-sm-row flex-column-reverse align-items-sm-center gap-3">
                   {/* Title */}
-                  <div className="flex-grow-1">{props.title}</div>
+                  <div className="flex-grow-1 min-w-0">{props.title}</div>
                   {/* Actions */}
                   {props.actions && (
                     <div
@@ -81,7 +83,7 @@ export const PublicDashboardHero: FC<
                         props.mobileBottomActions
                           ? 'd-none d-sm-flex'
                           : 'd-flex',
-                        'flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3',
+                        'flex-shrink-0 flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3',
                       )}
                     >
                       {props.actions}
