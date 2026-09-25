@@ -73,7 +73,10 @@ export const BulkUpload: FC<OwnProps> = (props) => {
         },
       });
     },
-    [setFile, setImportedUsersCount],
+    // onImport resolves the CSV roles against the roles the dialog holds now.
+    // Those load asynchronously, so a callback kept from the first render
+    // would match every row against an empty list.
+    [props.onImport, showError],
   );
 
   const onDownloadClick = useCallback(() => {
