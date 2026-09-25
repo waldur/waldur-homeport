@@ -758,10 +758,10 @@ Publish SBOMs to GitHub release:
   cache: []
   before_script: []
   variables:
-    GH_TOKEN: $GITHUB_JENKINS_TOKEN
+    GH_TOKEN: $OPENNODE_JENKINS_GITHUB_TOKEN
     GH_REPO: waldur/waldur-homeport
   script:
-    - '[ -n "$GITHUB_JENKINS_TOKEN" ] || { echo "GITHUB_JENKINS_TOKEN is not available to this job; a maintainer must add it (contents: write on $GH_REPO)"; exit 1; }'
+    - '[ -n "$OPENNODE_JENKINS_GITHUB_TOKEN" ] || { echo "OPENNODE_JENKINS_GITHUB_TOKEN (a waldur group variable) is not available to this job; it needs contents: write on $GH_REPO"; exit 1; }'
     # Both generators are allow_failure, so a missing archive means one of them
     # failed or has not been played yet. Publishing a release with one SBOM would
     # look like success, so refuse instead.
