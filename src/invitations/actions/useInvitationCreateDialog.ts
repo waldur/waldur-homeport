@@ -7,6 +7,10 @@ import { getAllPages } from '@/core/api';
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import {
+  ExistingRoleHit,
+  mapExistingRoleResponse,
+} from '@/permissions/existingRoles';
 import { Role } from '@/permissions/types';
 import {
   getOnlyOneProjectManagerTooltip,
@@ -16,6 +20,13 @@ import { useProjectHasActiveManager } from '@/project/team/useProjectHasActiveMa
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 import { GroupInvitationFormData, InvitationContext } from './types';
+
+export interface DuplicateCheckResult {
+  /** (email, role) pairs that already have a pending invitation in the scope. */
+  duplicatePairs: Array<{ email: string; roleUuid: string }>;
+  /** Roles the invitees already hold in the scope. */
+  existingRoleHits: ExistingRoleHit[];
+}
 
 export const useInvitationCreateDialog = (context: InvitationContext) => {
   const defaultProject = useMemo(
@@ -110,11 +121,12 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
   const checkDuplicates = useCallback(
     async (
       formData: GroupInvitationFormData,
-    ): Promise<Array<{ email: string; roleUuid: string }>> => {
+    ): Promise<DuplicateCheckResult> => {
       const validRows = (formData.rows ?? []).filter(
         (row) => row?.email && row?.role_project?.role,
       );
-      if (validRows.length === 0) return [];
+      if (validRows.length === 0)
+        return { duplicatePairs: [], existingRoleHits: [] };
 
       const byScope = new Map<string, { email: string; role: string }[]>();
       for (const row of validRows) {
@@ -129,6 +141,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       }
 
       const duplicatePairs: Array<{ email: string; roleUuid: string }> = [];
+      const existingRoleHits: ExistingRoleHit[] = [];
       await Promise.all(
         Array.from(byScope.entries()).map(async ([scope, invitations]) => {
           const response = await userInvitationsCheckDuplicates({
@@ -143,9 +156,12 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
               })),
             );
           }
+          existingRoleHits.push(
+            ...mapExistingRoleResponse(data?.existing_roles),
+          );
         }),
       );
-      return duplicatePairs;
+      return { duplicatePairs, existingRoleHits };
     },
     [getScopeForRow],
   );

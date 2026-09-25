@@ -9474,6 +9474,11 @@
       "feature_area": "dashboard"
     }
   },
+  "Checking the existing roles of this user...": {
+    "context": {
+      "feature_area": "team"
+    }
+  },
   "Checking the outgoing mail configuration...": {
     "context": {
       "feature_area": "email"
@@ -63032,7 +63037,26 @@
     }
   },
   "User already has role within this scope.": {},
+  "User already has the \"{role}\" role in this scope.": {
+    "context": {
+      "variables": {
+        "role": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "User already has the \"{role}\" role in this scope. Only one role per scope is allowed.": {
+    "context": {
+      "variables": {
+        "role": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "User already has this role in the scope.": {},
+  "User already has this role in this scope. Update their existing role instead.": {},
   "User answers": {
     "context": {
       "feature_area": "organizations"
@@ -63134,6 +63158,7 @@
       "feature_area": "questions"
     }
   },
+  "User has already the same role in this scope.": {},
   "User has been activated.": {
     "context": {
       "primary_ui_type": "success_message",
