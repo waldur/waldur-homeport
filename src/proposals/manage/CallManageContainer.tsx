@@ -4,6 +4,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { AccessDeniedPage } from '@/error/AccessDeniedPage';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -12,11 +13,12 @@ import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { useUser } from '@/workspace/hooks';
 
 import { CallTabs } from '../details/CallTabs';
 import { CallUpdateHero } from '../update/CallUpdateHero';
 import { ReviewerPoolContainer } from '../update/reviewer-pool/ReviewerPoolContainer';
-import { useCallBreadcrumbItems } from '../utils';
+import { canAccessCallManagement, useCallBreadcrumbItems } from '../utils';
 
 import { CallDashboard } from './CallDashboard';
 import { CallEventsList } from './CallEventsList';
@@ -79,6 +81,7 @@ export const CallManageContainer: FunctionComponent = () => {
   const {
     params: { call_uuid },
   } = useCurrentStateAndParams();
+  const user = useUser();
 
   const {
     data: call,
@@ -102,7 +105,13 @@ export const CallManageContainer: FunctionComponent = () => {
   ) : error ? (
     <h3>{translate('Unable to load call details.')}</h3>
   ) : call ? (
-    <Body refetch={refetch} loading={isRefetching} call={call} />
+    // Same gate as the Edit page: this URL is reachable by anyone who can read
+    // the call, and reviewers and panel members can.
+    canAccessCallManagement(user, call) ? (
+      <Body refetch={refetch} loading={isRefetching} call={call} />
+    ) : (
+      <AccessDeniedPage />
+    )
   ) : (
     <InvalidRoutePage />
   );

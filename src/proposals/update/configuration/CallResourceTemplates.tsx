@@ -6,7 +6,7 @@ import {
 
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
-import { callLockedTooltip } from '@/proposals/workflow/constants';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -70,12 +70,17 @@ export const CallResourceTemplates: FC<CallResourceTemplatesProps> = (
           call={props.call}
           refetch={tableProps.fetch}
           disabled={props.isReadOnly}
-          tooltip={props.isReadOnly ? callLockedTooltip() : undefined}
+          tooltip={
+            props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
+          }
         />
       }
       rowActions={({ row, fetch }) =>
         props.isReadOnly ? (
-          <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+          <ActionsDropdown
+            disabled
+            tooltip={getCallReadOnlyReason(props.call)}
+          />
         ) : (
           <RowActions row={row} fetch={fetch} call={props.call} />
         )

@@ -14,6 +14,7 @@ import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
+import { canManageCallReviews } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import {
   ConflictsOfInterestFilter,
@@ -26,6 +27,7 @@ import {
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { useUser } from '@/workspace/hooks';
 
 import { COIExpandableRow } from './COIExpandableRow';
 import { COIRowActions } from './COIRowActions';
@@ -84,6 +86,8 @@ const StatusBadge: FC<{
 };
 
 export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
+  // Dismiss, waive and recuse need MANAGE_PROPOSAL_REVIEW.
+  const canManage = canManageCallReviews(useUser(), call);
   const values = useFilterValues('COIReviewTable');
 
   const formFilters = useMemo(
@@ -213,7 +217,7 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
       showPageSizeSelector
       hasQuery
       filters={<ConflictsOfInterestFilter call={call} />}
-      rowActions={COIRowActions}
+      rowActions={canManage ? COIRowActions : undefined}
       hasOptionalColumns
       expandableRow={COIExpandableRow}
       tableActions={<PoolSummaryButton />}

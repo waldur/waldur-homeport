@@ -3,10 +3,12 @@ import { callReviewerPoolsList, CallReviewerPool } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
+import { canManageCallReviews } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
 
@@ -21,6 +23,7 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
   call,
 }) => {
   const tabs = useReviewerPoolTabs();
+  const canManage = canManageCallReviews(useUser(), call);
   const filter = useMemo(
     () => ({
       call_uuid: call.uuid,
@@ -112,9 +115,16 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
       verboseName={translate('reviewers')}
       showPageSizeSelector
       hasQuery
-      rowActions={({ row }) => (
-        <ReviewerCapacityRowActions row={row} refetch={tableProps.fetch} />
-      )}
+      rowActions={
+        canManage
+          ? ({ row }) => (
+              <ReviewerCapacityRowActions
+                row={row}
+                refetch={tableProps.fetch}
+              />
+            )
+          : undefined
+      }
     />
   );
 };

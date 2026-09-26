@@ -87,6 +87,13 @@ describe('getCallManagerCustomerUuids', () => {
   });
 });
 
+const organizerOf = (customerUuid: string, managingOrgUuid: string) => ({
+  scope_type: 'call_organizer',
+  scope_uuid: managingOrgUuid,
+  role_name: 'CUSTOMER.CALL_ORGANIZER',
+  customer_uuid: customerUuid,
+});
+
 describe('canManageCalls', () => {
   // Staff and support carry no call-scoped roles at all — verified against
   // /api/users/me/, where a staff account reports zero call permissions — so
@@ -125,5 +132,29 @@ describe('canManageCalls', () => {
   it('is false for a user with nothing at all', () => {
     expect(canManageCalls(undefined)).toBe(false);
     expect(canManageCalls({ permissions: [] })).toBe(false);
+  });
+});
+
+describe('canManageCalls for a call organizer', () => {
+  // The organizer's role is bound to the CallManagingOrganisation, so it never
+  // appears as a call-scoped CALL.MANAGER row. Without an explicit check the
+  // role that ships with CALL.UPDATE gets no entry point to its own calls.
+  it('is true for a user holding only a call_organizer role', () => {
+    const user = { permissions: [organizerOf('customer-1', 'managing-org-1')] };
+    expect(getCallManagerCustomerUuids(user)).toEqual([]);
+    expect(canManageCalls(user)).toBe(true);
+  });
+
+  it('stays false for reviewers and panel members', () => {
+    const user = {
+      permissions: [
+        { ...managerOf('customer-1', 'call-1'), role_name: 'CALL.REVIEWER' },
+        {
+          ...managerOf('customer-1', 'call-2'),
+          role_name: 'CALL.PANEL_MEMBER',
+        },
+      ],
+    };
+    expect(canManageCalls(user)).toBe(false);
   });
 });

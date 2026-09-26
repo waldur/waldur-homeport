@@ -13,7 +13,8 @@ import { BadgeVariant } from 'waldur-ui';
 import { translate } from '@/i18n';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@/navigation/types';
-import { RoleEnum } from '@/permissions/enums';
+import { PermissionEnum, RoleEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import {
   AllocationTime,
   Call,
@@ -21,6 +22,10 @@ import {
   CallState,
   ProposalState,
 } from '@/proposals/types';
+import {
+  checkIsOwnerOrStaff,
+  checkIsStaffOrSupport,
+} from '@/workspace/selectors';
 
 // Allocation timing is a call-level policy on the allocation_decision workflow
 // step (not per-round): 'on_decision' provisions immediately, 'fixed_date' uses
@@ -189,6 +194,66 @@ export const getRoundInitialValues = (
   timezone: DateTime.local().zoneName,
 });
 
+/**
+ * Whether the user may write to this call.
+ *
+ * The single frontend statement of the backend's gate on ProtectedCallViewSet:
+ * `permission_factory(UPDATE_CALL, CALL_PERMISSION_SOURCES)` with sources
+ * `["*", "manager"]` — the permission held either on the call itself, where a
+ * CALL.MANAGER role sits, or on its managing organisation, where a
+ * CUSTOMER.CALL_ORGANIZER role is bound. Both roles ship carrying CALL.UPDATE.
+ *
+ * Every surface that asks "may this user edit the call?" goes through here, so
+ * the answer cannot drift between the page body, the action menu and the
+ * navigation that leads to them.
+ */
+export const canUpdateCall = (user: User, call: Call): boolean =>
+  Boolean(
+    hasPermission(user, {
+      permission: PermissionEnum.UPDATE_CALL,
+      scopeId: call?.uuid,
+      callOrganizerId: call?.manager_uuid,
+    }),
+  );
+
+/**
+ * Whether the user may open the call's management surfaces at all — the Edit
+ * and Manage pages and the tab strip that leads to them.
+ *
+ * Broader than `canUpdateCall` on purpose, and the distinction matters: an
+ * organization owner holds no CALL.UPDATE (so every field stays read-only) but
+ * does hold the call team-management permissions, exercised from the Team tab
+ * inside the Edit page. Gating page access on `canUpdateCall` alone would
+ * strand them.
+ *
+ * Support users are admitted too, read-only: the backend lets them read every
+ * call and its management data but grants them no write, so every control on
+ * these pages stays disabled or hidden for them.
+ *
+ * Reviewers and panel members satisfy none of these, which is the point: they
+ * can read a call through the API to do their reviewing, but these pages are
+ * not theirs, whether they arrive by link or by typed URL.
+ */
+export const canAccessCallManagement = (user: User, call: Call): boolean =>
+  canUpdateCall(user, call) ||
+  checkIsOwnerOrStaff({ uuid: call?.customer_uuid } as any, user) ||
+  Boolean(checkIsStaffOrSupport(user));
+
+/**
+ * Whether the user may manage the call's reviewers — invite to the pool,
+ * generate and confirm matches, create and send assignment batches, resolve
+ * conflicts of interest. Mirrors the backend's MANAGE_PROPOSAL_REVIEW gate,
+ * held on the call or on its managing organisation.
+ */
+export const canManageCallReviews = (user: User, call: Call): boolean =>
+  Boolean(
+    hasPermission(user, {
+      permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
+      scopeId: call?.uuid,
+      callOrganizerId: call?.manager_uuid,
+    }),
+  );
+
 export const checkIsCallManager = (call: Call, user: User): boolean =>
   !!user?.permissions?.find(
     (permission) =>
@@ -259,8 +324,10 @@ export const usePublicCallBreadcrumbItems = (
 };
 
 // Tooltip explaining why a call's fields are read-only, for the disabled edit
-// controls on the call-edit tabs (a call can only be edited while draft).
+// controls on the call-edit tabs. Only ever called when the call is read-only,
+// and state is the archived case, so anything else is a permission block:
+// draft and active calls are editable by whoever holds UPDATE_CALL.
 export const getCallReadOnlyReason = (call?: { state?: string }): string =>
   call?.state === 'archived'
     ? translate('This call is archived and cannot be edited.')
-    : translate('This call is active and cannot be edited.');
+    : translate('You do not have permission to edit this call.');

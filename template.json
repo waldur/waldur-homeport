@@ -8580,7 +8580,6 @@
       "feature_area": "reporting"
     }
   },
-  "Call configuration cannot be changed once the call is archived.": {},
   "Call description": {
     "context": {
       "primary_ui_type": "label"
@@ -54741,7 +54740,6 @@
       "feature_area": "rounds"
     }
   },
-  "This call is active and cannot be edited.": {},
   "This call is archived and cannot be edited.": {},
   "This call is archived and read-only.": {
     "context": {
@@ -66557,6 +66555,7 @@
       "feature_area": "managed-projects"
     }
   },
+  "You do not have permission to edit this call.": {},
   "You do not have permission to manage power operations for this instance.": {},
   "You do not have permission to manage this instance.": {},
   "You do not have permission to move projects from this organization.": {

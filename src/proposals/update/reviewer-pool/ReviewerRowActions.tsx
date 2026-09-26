@@ -14,16 +14,21 @@ const FORCE_ACCEPT_STATUSES = ['pending', 'declined', 'expired'];
 interface ReviewerRowActionsProps {
   row: CallReviewerPoolExtended;
   refetch: () => void;
+  /** Force-accept writes to the pool; viewers without MANAGE_PROPOSAL_REVIEW
+   * keep only the read-side copy action. */
+  canManage: boolean;
 }
 
 export const ReviewerRowActions: FC<ReviewerRowActionsProps> = ({
   row,
   refetch,
+  canManage,
 }) => {
   const { showSuccess } = useNotify();
 
   const showCopyLink = !!row.invitation_link;
   const showForceAccept =
+    canManage &&
     FORCE_ACCEPT_STATUSES.includes(row.invitation_status) &&
     !!row.reviewer_uuid;
 

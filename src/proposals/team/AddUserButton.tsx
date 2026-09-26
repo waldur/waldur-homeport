@@ -18,24 +18,30 @@ const AddUserDialog = lazyComponent(() =>
   })),
 );
 
+const ADD_USER_PERMISSIONS = [
+  PermissionEnum.CREATE_CALL_PERMISSION,
+  PermissionEnum.MANAGE_PROPOSAL,
+];
+
 export const AddUserButton: React.FC<AddUserDialogProps> = (props) => {
   const { openDialog } = useModal();
   const user = useUser();
 
-  // The team panel renders for both proposal and call scopes. scope.uuid is
-  // either a proposal or a call uuid — checkScope inside hasPermission
-  // disambiguates by scope_type. Permission-granting on either side counts.
+  // Mirrors UserRoleCreateSerializer: the scope type's create permission --
+  // CALL.CREATE_PERMISSION for a call, PROPOSAL.MANAGE for a proposal -- held
+  // on the scope's organization or on the scope itself. The team panel renders
+  // for both, and checkScope inside hasPermission tells them apart by
+  // scope_type. Organization owners hold the call one on the organization.
   const scopeUuid = props.scope?.uuid;
   const canAddUser =
     !!scopeUuid &&
-    (hasPermission(user, {
-      permission: PermissionEnum.UPDATE_PROPOSAL_PERMISSION,
-      scopeId: scopeUuid,
-    }) ||
+    ADD_USER_PERMISSIONS.some((permission) =>
       hasPermission(user, {
-        permission: PermissionEnum.UPDATE_CALL_PERMISSION,
+        permission,
         scopeId: scopeUuid,
-      }));
+        customerId: props.scope?.customer_uuid,
+      }),
+    );
 
   return (
     <ActionItem
@@ -45,9 +51,11 @@ export const AddUserButton: React.FC<AddUserDialogProps> = (props) => {
       disabled={!canAddUser}
       tooltip={
         !canAddUser
-          ? getPermissionDisabledTooltip(
-              PermissionEnum.UPDATE_PROPOSAL_PERMISSION,
-            )
+          ? getPermissionDisabledTooltip(ADD_USER_PERMISSIONS, [
+              'customer',
+              'call',
+              'proposal',
+            ])
           : null
       }
     />

@@ -46,6 +46,19 @@ export const getCallManagerCustomerUuids = (user): string[] => [
 ];
 
 /**
+ * A call organizer's CUSTOMER.CALL_ORGANIZER role is bound to the
+ * CallManagingOrganisation, so it never appears as a call-scoped CALL.MANAGER
+ * row and a manager-only scan misses it entirely — leaving a role that ships
+ * with CALL.UPDATE and CALL.LIST no entry point to the calls it runs.
+ */
+const isCallOrganizer = (user): boolean =>
+  Boolean(
+    user?.permissions?.some(
+      (permission) => permission.scope_type === 'call_organizer',
+    ),
+  );
+
+/**
  * Whether this user has any calls to manage.
  *
  * Staff and support hold no call-scoped roles — their reach comes from the
@@ -62,6 +75,7 @@ export const getCallManagerCustomerUuids = (user): string[] => [
 export const canManageCalls = (user): boolean =>
   Boolean(user?.is_staff) ||
   Boolean(user?.is_support) ||
+  isCallOrganizer(user) ||
   getCallManagerCustomerUuids(user).length > 0;
 
 /**

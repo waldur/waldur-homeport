@@ -9,6 +9,7 @@ import {
 import { Badge, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -18,7 +19,6 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { Call } from '../../types';
 import {
-  callLockedTooltip,
   getStepDefinitions,
   responsibleRoleLabel,
   stepDefinition,
@@ -237,7 +237,7 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
               configuredSteps={sortedRows}
               refetch={tableProps.fetch}
               disabled={isReadOnly}
-              tooltip={isReadOnly ? callLockedTooltip() : undefined}
+              tooltip={isReadOnly ? getCallReadOnlyReason(call) : undefined}
             />
           )
         }
@@ -246,7 +246,10 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
             ? undefined
             : ({ row, fetch }) =>
                 isReadOnly ? (
-                  <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+                  <ActionsDropdown
+                    disabled
+                    tooltip={getCallReadOnlyReason(call)}
+                  />
                 ) : isSyntheticStep(row) ? (
                   <ActionsDropdown
                     disabled

@@ -1,7 +1,7 @@
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useModal } from '@/modal/actions';
-import { callLockedTooltip } from '@/proposals/workflow/constants';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 
 import type { EditMatchingSettingProps } from './types';
 
@@ -31,7 +31,7 @@ export const EditMatchingSettingButton = ({
       onClick={callback}
       variant="secondary"
       disabled={disabled}
-      tooltip={disabled ? callLockedTooltip() : undefined}
+      tooltip={disabled ? getCallReadOnlyReason(props.call) : undefined}
     />
   );
 };

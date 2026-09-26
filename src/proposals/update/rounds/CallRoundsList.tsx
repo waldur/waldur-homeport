@@ -10,7 +10,7 @@ import { translate } from '@/i18n';
 import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
 import { Call } from '@/proposals/types';
 import { getRoundStatus } from '@/proposals/utils';
-import { callLockedTooltip } from '@/proposals/workflow/constants';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -59,7 +59,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
   const RowActions = useCallback(
     (props: { row: ProtectedRound }) =>
       isReadOnly ? (
-        <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+        <ActionsDropdown disabled tooltip={getCallReadOnlyReason(call)} />
       ) : (
         <RoundRowActions row={props.row} refetch={refetch} call={call} />
       ),
@@ -120,7 +120,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
           call={call}
           refetch={refetch}
           disabled={isReadOnly}
-          tooltip={isReadOnly ? callLockedTooltip() : undefined}
+          tooltip={isReadOnly ? getCallReadOnlyReason(call) : undefined}
         />
       }
       expandableRow={ExpandableRow}

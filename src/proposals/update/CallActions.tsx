@@ -9,14 +9,20 @@ import {
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { RoleType } from '@/permissions/types';
+import { getPermissionDisabledTooltip } from '@/permissions/utils';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
 import {
   ActionsDropdownComponent,
   ActionsDropdownSeparator,
 } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
+import { canUpdateCall } from '../utils';
 import {
   callWorkflowStepsKey,
   fetchCallWorkflowSteps,
@@ -42,6 +48,29 @@ export const CallActions: FC<CallActionsProps> = ({
   const { confirm, openDialog } = useModal();
 
   const { showErrorResponse, showSuccess } = useNotify();
+
+  const user = useUser();
+
+  // Activate and archive are call writes, so they follow the shared rule.
+  const canUpdate = canUpdateCall(user, call);
+  // Duplicating writes a *new* call, so the backend gates it on CREATE_CALL
+  // held on the managing organisation, not on UPDATE_CALL of the original.
+  const canDuplicateCall = Boolean(
+    hasPermission(user, {
+      permission: PermissionEnum.CREATE_CALL,
+      callOrganizerId: call.manager_uuid,
+    }),
+  );
+  // Scope types matter: the helper defaults to project/customer roles, but the
+  // roles carrying these permissions live on the call (CALL.MANAGER) and on the
+  // managing organisation (CUSTOMER.CALL_ORGANIZER, content type call_organizer).
+  const CALL_SCOPES: RoleType[] = ['call', 'call_organizer'];
+  const noUpdateTooltip = canUpdate
+    ? null
+    : getPermissionDisabledTooltip(PermissionEnum.UPDATE_CALL, CALL_SCOPES);
+  const noDuplicateTooltip = canDuplicateCall
+    ? null
+    : getPermissionDisabledTooltip(PermissionEnum.CREATE_CALL, CALL_SCOPES);
 
   const hasRounds = call.rounds.length > 0;
 
@@ -111,21 +140,23 @@ export const CallActions: FC<CallActionsProps> = ({
     });
   }, [openDialog, call, refetch]);
 
-  const tooltipMessage = !hasRounds
-    ? translate('Call must have a round to be activated')
-    : !hasEnabledStep
-      ? translate(
-          'Call must have at least one enabled workflow step to be activated',
-        )
-      : !mandatoryStepsEnabled
+  const tooltipMessage = !canUpdate
+    ? noUpdateTooltip
+    : !hasRounds
+      ? translate('Call must have a round to be activated')
+      : !hasEnabledStep
         ? translate(
-            'All mandatory workflow steps must be enabled to activate the call',
+            'Call must have at least one enabled workflow step to be activated',
           )
-        : !hasOffering
+        : !mandatoryStepsEnabled
           ? translate(
-              'Call must have at least one accepted offering to be activated',
+              'All mandatory workflow steps must be enabled to activate the call',
             )
-          : null;
+          : !hasOffering
+            ? translate(
+                'Call must have at least one accepted offering to be activated',
+              )
+            : null;
 
   if (call.state === 'draft') {
     return (
@@ -147,11 +178,15 @@ export const CallActions: FC<CallActionsProps> = ({
           iconNode={<ArchiveIcon weight="bold" />}
           iconColor="danger"
           className="text-danger"
+          disabled={!canUpdate}
+          tooltip={noUpdateTooltip}
         />
         <ActionItem
           title={translate('Duplicate call')}
           action={handleDuplicate}
           iconNode={<CopyIcon weight="bold" />}
+          disabled={!canDuplicateCall}
+          tooltip={noDuplicateTooltip}
         />
       </ActionsDropdownComponent>
     );
@@ -175,6 +210,8 @@ export const CallActions: FC<CallActionsProps> = ({
           title={translate('Duplicate call')}
           action={handleDuplicate}
           iconNode={<CopyIcon weight="bold" />}
+          disabled={!canDuplicateCall}
+          tooltip={noDuplicateTooltip}
         />
       </ActionsDropdownComponent>
     );
@@ -192,6 +229,8 @@ export const CallActions: FC<CallActionsProps> = ({
         title={translate('Duplicate call')}
         action={handleDuplicate}
         iconNode={<CopyIcon weight="bold" />}
+        disabled={!canDuplicateCall}
+        tooltip={noDuplicateTooltip}
       />
       <ActionsDropdownSeparator className="border-secondary" />
       <ActionItem
@@ -200,6 +239,8 @@ export const CallActions: FC<CallActionsProps> = ({
         iconNode={<ArchiveIcon weight="bold" />}
         iconColor="danger"
         className="text-danger"
+        disabled={!canUpdate}
+        tooltip={noUpdateTooltip}
       />
     </ActionsDropdownComponent>
   );
