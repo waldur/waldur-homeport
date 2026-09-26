@@ -153,8 +153,10 @@ export const states: StateDeclaration[] = [
     },
   },
   // Folded into the roles page as a tab; kept as a redirect so bookmarks, the
-  // chaos route sweep and external links keep resolving. No `data.breadcrumb`,
-  // so `filterState` in src/navigation/useTabs.tsx drops it from the header menu.
+  // chaos route sweep and external links keep resolving. ui-router inherits
+  // `data` from the parent, so without `skipBreadcrumb` this state picks up
+  // admin-configuration's "Configuration" breadcrumb and `filterState` in
+  // src/navigation/useTabs.tsx lists it in the header menu under that name.
   {
     name: 'admin-role-availabilities',
     url: 'role-availabilities/',
@@ -163,6 +165,9 @@ export const states: StateDeclaration[] = [
     // local StateDeclaration type.
     component: UIView,
     redirectTo: { state: 'admin-roles', params: { tab: 'availability' } },
+    data: {
+      skipBreadcrumb: true,
+    },
   },
   {
     name: 'admin-marketplace-offering-profile-detail',
@@ -745,6 +750,9 @@ export const states: StateDeclaration[] = [
     // local StateDeclaration type.
     component: UIView,
     redirectTo: { state: 'admin-roles', params: { tab: 'hygiene' } },
+    data: {
+      skipBreadcrumb: true,
+    },
   },
 
   {
