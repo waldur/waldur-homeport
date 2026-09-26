@@ -82,10 +82,12 @@ export const ProfileRequests: FC = () => {
 
   // In the card toolbar beside search, not above the panel: this is a tab
   // inside the profile, and the standalone heading treatment is for a table
-  // that owns its page (compare UserOfferingList on Remote accounts).
+  // that owns its page (compare UserOfferingList on Remote accounts). Both
+  // lenses, or the switcher resizes as you toggle: that header sizes up every
+  // button in it.
   return view === 'requests' ? (
     <UserProposalsList actions={switcher} standalone={false} />
   ) : (
-    <ResourceRequestsList actions={switcher} />
+    <ResourceRequestsList actions={switcher} standalone={false} />
   );
 };

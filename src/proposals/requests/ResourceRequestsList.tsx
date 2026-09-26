@@ -28,12 +28,15 @@ interface ResourceRequestsListProps {
   title?: string;
   /** Rendered in the card toolbar beside search. */
   actions?: ReactNode;
+  /** Standalone puts the title above the panel; false for a tab inside one. */
+  standalone?: boolean;
 }
 
 export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
   offeringUuid,
   title,
   actions,
+  standalone = true,
 }) => {
   const tableId = offeringUuid
     ? `ResourceRequests-${offeringUuid}`
@@ -148,6 +151,7 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
       {...tableProps}
       title={title}
       columns={columns}
+      standalone={standalone}
       tableActions={actions}
       verboseName={translate('resource requests')}
       hasQuery
