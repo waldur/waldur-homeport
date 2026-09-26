@@ -5,14 +5,27 @@ import { describe, expect, it, vi } from 'vitest';
 import { ProfileRequests } from './ProfileRequests';
 
 vi.mock('@/proposals/proposal/UserProposalsList', () => ({
-  UserProposalsList: (props: { actions?: React.ReactNode }) => (
-    <div data-testid="requests-list">{props.actions}</div>
+  UserProposalsList: (props: {
+    actions?: React.ReactNode;
+    standalone?: boolean;
+  }) => (
+    <div data-testid="requests-list" data-standalone={String(props.standalone)}>
+      {props.actions}
+    </div>
   ),
 }));
 
 vi.mock('./ResourceRequestsList', () => ({
-  ResourceRequestsList: (props: { actions?: React.ReactNode }) => (
-    <div data-testid="resources-list">{props.actions}</div>
+  ResourceRequestsList: (props: {
+    actions?: React.ReactNode;
+    standalone?: boolean;
+  }) => (
+    <div
+      data-testid="resources-list"
+      data-standalone={String(props.standalone)}
+    >
+      {props.actions}
+    </div>
   ),
 }));
 
@@ -29,6 +42,25 @@ describe('ProfileRequests', () => {
     );
     expect(screen.getByRole('tab', { name: 'By resource' })).toHaveAttribute(
       'aria-selected',
+      'false',
+    );
+  });
+
+  it('keeps both lenses out of the standalone header', async () => {
+    // The standalone header sizes up every button in it, so a lens left
+    // standalone resizes the switcher as you toggle.
+    const user = userEvent.setup();
+    render(<ProfileRequests />);
+
+    expect(screen.getByTestId('requests-list')).toHaveAttribute(
+      'data-standalone',
+      'false',
+    );
+
+    await user.click(screen.getByRole('tab', { name: 'By resource' }));
+
+    expect(screen.getByTestId('resources-list')).toHaveAttribute(
+      'data-standalone',
       'false',
     );
   });
