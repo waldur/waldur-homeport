@@ -8,7 +8,7 @@ import { translate } from '@/i18n';
 import { CallOfferingStateField } from '@/proposals/details/CallOfferingStateField';
 import { Call } from '@/proposals/types';
 import { UnpreviewableDiscountWarning } from '@/proposals/UnpreviewableDiscountWarning';
-import { callLockedTooltip } from '@/proposals/workflow/constants';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -78,13 +78,18 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
           call={props.call}
           refetch={tableProps.fetch}
           disabled={props.isReadOnly}
-          tooltip={props.isReadOnly ? callLockedTooltip() : undefined}
+          tooltip={
+            props.isReadOnly ? getCallReadOnlyReason(props.call) : undefined
+          }
         />
       }
       expandableRow={CallOfferingExpandableRow}
       rowActions={({ row }) =>
         props.isReadOnly ? (
-          <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+          <ActionsDropdown
+            disabled
+            tooltip={getCallReadOnlyReason(props.call)}
+          />
         ) : (
           <CallOfferingRowActions row={row} refetch={tableProps.fetch} />
         )

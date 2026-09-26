@@ -1,6 +1,6 @@
 import { CallDocumentsCard } from '@/proposals/details/CallDocumentsCard';
 import { RemoveDocumentAction } from '@/proposals/update/documents/RemoveDocumentButton';
-import { callLockedTooltip } from '@/proposals/workflow/constants';
+import { getCallReadOnlyReason } from '@/proposals/utils';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { AttachDocumentsButton } from './AttachDocumentsButton';
@@ -11,12 +11,12 @@ export const CallDocumentsSection = ({ call, refetch, isReadOnly }) => {
       call={call}
       refetch={refetch}
       disabled={isReadOnly}
-      tooltip={isReadOnly ? callLockedTooltip() : undefined}
+      tooltip={isReadOnly ? getCallReadOnlyReason(call) : undefined}
     />
   );
   const rowActions = ({ row }) =>
     isReadOnly ? (
-      <ActionsDropdown disabled tooltip={callLockedTooltip()} />
+      <ActionsDropdown disabled tooltip={getCallReadOnlyReason(call)} />
     ) : (
       <ActionsDropdown row={row} refetch={refetch} data={{ call }}>
         <RemoveDocumentAction row={row} call={call} refetch={refetch} />

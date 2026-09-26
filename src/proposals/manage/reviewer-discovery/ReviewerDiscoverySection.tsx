@@ -20,6 +20,7 @@ import { useBatchMutation } from '@/modal/useBatchMutation';
 import { Call } from '@/proposals/types';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
+import { canManageCallReviews } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import {
   ReviewerSuggestionsFilter,
@@ -29,6 +30,7 @@ import {
 } from '@/table/generated/ReviewerSuggestionsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { useUser } from '@/workspace/hooks';
 
 import { ReviewerDiscoveryActions } from './ReviewerDiscoveryActions';
 import { SuggestionExpandableRow } from './SuggestionExpandableRow';
@@ -218,6 +220,9 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
 }) => {
   const { openDialog } = useModal();
   const { values } = useFormState();
+  // Generating, confirming, rejecting and inviting all need
+  // MANAGE_PROPOSAL_REVIEW; everyone else gets the suggestions read-only.
+  const canManage = canManageCallReviews(useUser(), call);
 
   const formFilters = useMemo(
     () => selectReviewerSuggestionsFilter(values),
@@ -397,7 +402,7 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
   const toolbarActions = (
     <>
       <PoolSummaryButton />
-      {call && (
+      {call && canManage && (
         <ReviewerDiscoveryActions call={call} refetch={tableProps.fetch} />
       )}
     </>
@@ -414,12 +419,12 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
       showPageSizeSelector
       hasQuery
       filters={<ReviewerSuggestionsFilter />}
-      rowActions={SuggestionRowActions}
+      rowActions={canManage ? SuggestionRowActions : undefined}
       rowClass={({ row }) =>
         row.status === 'rejected' ? 'bg-light-danger' : ''
       }
-      enableMultiSelect
-      multiSelectActions={BulkActions}
+      enableMultiSelect={canManage}
+      multiSelectActions={canManage ? BulkActions : undefined}
       hasOptionalColumns
       expandableRow={SuggestionExpandableRow}
       formId={ReviewerSuggestionsFilterFormId}

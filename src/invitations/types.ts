@@ -4,6 +4,7 @@ export { Invitation } from 'waldur-js-client';
 export interface GenericInvitationContext {
   scope?: {
     manager_uuid?: string;
+    customer_uuid?: string;
     url: string;
     uuid: string;
   };

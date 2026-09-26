@@ -39,6 +39,7 @@ export const TeamSection: FC<
     id?: string;
     hasTeamTabs?: boolean;
     extraRowActions?: FC<{ row: GenericPermission }>;
+    hasExtraRowActions?: (row: GenericPermission) => boolean;
     roleSuffix?: (row: GenericPermission) => ReactNode;
   }
 > = (props) => {
@@ -190,6 +191,7 @@ export const TeamSection: FC<
                     : undefined
                 }
                 extraRowActions={props.extraRowActions}
+                hasExtraRowActions={props.hasExtraRowActions}
                 roleSuffix={props.roleSuffix}
               />
             </Tab.Pane>

@@ -4,6 +4,7 @@ import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { Call } from '@/proposals/types';
+import { canManageCallReviews } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import {
   CallReviewerPoolsFilter,
@@ -13,6 +14,7 @@ import {
 } from '@/table/generated/CallReviewerPoolsFilter';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { useUser } from '@/workspace/hooks';
 
 import { InviteReviewerButton } from './InviteReviewerButton';
 import { PoolSummaryButton } from './PoolSummaryButton';
@@ -33,6 +35,7 @@ interface ReviewerPoolSectionProps {
 
 const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
   const { values } = useFormState();
+  const canManage = canManageCallReviews(useUser(), call);
 
   const formFilters = useMemo(
     () => selectCallReviewerPoolsFilter(values),
@@ -144,12 +147,18 @@ const ReviewerPoolSectionTable: FC<ReviewerPoolSectionProps> = ({ call }) => {
       hasOptionalColumns
       expandableRow={ReviewerPoolExpandableRow}
       rowActions={({ row }: { row: CallReviewerPoolExtended }) => (
-        <ReviewerRowActions row={row} refetch={tableProps.fetch} />
+        <ReviewerRowActions
+          row={row}
+          refetch={tableProps.fetch}
+          canManage={canManage}
+        />
       )}
       tableActions={
         <>
           <PoolSummaryButton />
-          <InviteReviewerButton call={call} refetch={tableProps.fetch} />
+          {canManage && (
+            <InviteReviewerButton call={call} refetch={tableProps.fetch} />
+          )}
         </>
       }
       formId={CallReviewerPoolsFilterFormId}

@@ -7,10 +7,9 @@ import { Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
-import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { Call } from '../types';
-import { checkIsCallManager } from '../utils';
+import { canAccessCallManagement } from '../utils';
 
 export const CallTabs = ({ call }: { call: Call }) => {
   const router = useRouter();
@@ -19,14 +18,15 @@ export const CallTabs = ({ call }: { call: Call }) => {
     router.stateService.go(state, { call_uuid: call.uuid });
 
   const user = useUser();
-  const canEdit = useMemo(() => {
-    if (checkIsOwnerOrStaff({ uuid: call.customer_uuid } as any, user))
-      return true;
-    if (checkIsCallManager(call, user)) return true;
-    return false;
-  }, [user]);
+  // Who gets the call's management tab strip -- the same rule that guards the
+  // pages themselves, see `canAccessCallManagement`: editors, organization
+  // owners (team management only) and support (read-only).
+  const canManage = useMemo(
+    () => canAccessCallManagement(user, call),
+    [user, call],
+  );
 
-  if (!canEdit) return null;
+  if (!canManage) return null;
 
   return (
     <Tab.Container defaultActiveKey={state.name} onSelect={goTo}>

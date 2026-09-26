@@ -7,6 +7,7 @@ import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 import { Badge, FeaturedIcon } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { AccessDeniedPage } from '@/error/AccessDeniedPage';
 import { InvalidRoutePage } from '@/error/InvalidRoutePage';
 import { translate } from '@/i18n';
 import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
@@ -15,11 +16,16 @@ import { useTitle } from '@/navigation/title';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { RoleEnum } from '@/permissions/enums';
+import { useUser } from '@/workspace/hooks';
 
 import { CallTabs } from '../details/CallTabs';
 import { SetPanelChairButton } from '../team/SetPanelChairButton';
 import { TeamSection } from '../team/TeamSection';
-import { useCallBreadcrumbItems } from '../utils';
+import {
+  canAccessCallManagement,
+  canUpdateCall,
+  useCallBreadcrumbItems,
+} from '../utils';
 
 import { ApplicantVisibilitySection } from './applicant-visibility/ApplicantVisibilitySection';
 import { CallActions } from './CallActions';
@@ -70,6 +76,8 @@ const PageHero = ({ call, refetch }) => (
 );
 
 const Body = ({ call, refetch, loading }) => {
+  const user = useUser();
+
   const tabs = useMemo<PageBarTab[]>(
     () =>
       [
@@ -155,19 +163,35 @@ const Body = ({ call, refetch, loading }) => {
         {
           key: 'team',
           title: translate('Team'),
-          component: ({ call, refetch }) => (
+          // Deliberately NOT gated on isReadOnly as a whole: managing the call
+          // team runs on CALL.CREATE_PERMISSION / UPDATE_PERMISSION /
+          // DELETE_PERMISSION, which the backend keeps separate from UPDATE_CALL
+          // (ProtectedCallViewSet exempts add_user/update_user/delete_user from
+          // its blanket gate so organization owners keep team management), and
+          // AddUserButton already checks that set itself. Only the panel-chair
+          // action PATCHes the call, so only it follows the call's edit lock --
+          // hidden, like Remove for users who may not remove, rather than shown
+          // disabled.
+          component: ({ call, refetch, isReadOnly }) => (
             <TeamSection
               scope={call}
               roles={[RoleEnum.CALL_MANAGER, RoleEnum.CALL_PANEL_MEMBER]}
               roleTypes={['call', 'call_organizer']}
               title={translate('Call team')}
-              extraRowActions={({ row }) => (
-                <SetPanelChairButton
-                  permission={row}
-                  call={call}
-                  refetch={refetch}
-                />
-              )}
+              extraRowActions={
+                isReadOnly
+                  ? undefined
+                  : ({ row }) => (
+                      <SetPanelChairButton
+                        permission={row}
+                        call={call}
+                        refetch={refetch}
+                      />
+                    )
+              }
+              hasExtraRowActions={(row) =>
+                row.role_name === RoleEnum.CALL_PANEL_MEMBER
+              }
               roleSuffix={(row) =>
                 call.panel_chair_uuid &&
                 row.user_uuid === call.panel_chair_uuid ? (
@@ -197,14 +221,16 @@ const Body = ({ call, refetch, loading }) => {
     tabSpec: { component: Component },
   } = usePageTabsTransmitter(tabs);
 
-  // Read-only mirrors what the backend actually enforces: only an archived
-  // call is frozen server-side (StateValidator(draft, active) on the call
-  // update + per-nested-surface archived guards). Draft and active calls are
-  // fully editable. The one field-level exception the backend still enforces
-  // is applied inside the General/Configuration sections: the slug-template
-  // and compliance-checklist fields are locked once proposals exist
-  // (call.has_proposals).
-  const isReadOnly = call.state === 'archived';
+  const canUpdate = canUpdateCall(user, call);
+
+  // Read-only mirrors what the backend actually enforces: an archived call is
+  // frozen server-side (StateValidator(draft, active) on the call update +
+  // per-nested-surface archived guards), and every write needs UPDATE_CALL.
+  // Draft and active calls are fully editable by a permitted user. The one
+  // field-level exception the backend still enforces is applied inside the
+  // General/Configuration sections: the slug-template and compliance-checklist
+  // fields are locked once proposals exist (call.has_proposals).
+  const isReadOnly = call.state === 'archived' || !canUpdate;
 
   return (
     <Component
@@ -220,6 +246,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
   const {
     params: { call_uuid },
   } = useCurrentStateAndParams();
+  const user = useUser();
 
   const {
     data: call,
@@ -245,7 +272,14 @@ export const CallUpdateContainer: FunctionComponent = () => {
   ) : error ? (
     <h3>{translate('Unable to load call details.')}</h3>
   ) : call ? (
-    <Body refetch={refetch} loading={isRefetching} call={call} />
+    // The route carries no permission guard -- `data.permissions` hooks run
+    // against Redux state only, so they cannot answer "may this user edit
+    // *this* call". Checked here instead, where the call is in hand.
+    canAccessCallManagement(user, call) ? (
+      <Body refetch={refetch} loading={isRefetching} call={call} />
+    ) : (
+      <AccessDeniedPage />
+    )
   ) : (
     <InvalidRoutePage />
   );

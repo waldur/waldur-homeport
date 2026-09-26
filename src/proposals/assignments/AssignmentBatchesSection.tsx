@@ -8,10 +8,12 @@ import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
+import { canManageCallReviews } from '@/proposals/utils';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
 
@@ -30,6 +32,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   call,
 }) => {
   const tabs = useReviewerPoolTabs();
+  const canManage = canManageCallReviews(useUser(), call);
 
   const filter = useMemo(
     () => ({
@@ -149,7 +152,9 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   const batchesTableActions = (
     <>
       <PoolSummaryButton />
-      <CreateAssignmentDropdown call={call} refetch={tableProps.fetch} />
+      {canManage && (
+        <CreateAssignmentDropdown call={call} refetch={tableProps.fetch} />
+      )}
     </>
   );
 
@@ -163,12 +168,16 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
       showPageSizeSelector
       hasQuery
       expandableRow={AssignmentBatchExpandableRow}
-      rowActions={({ row }) => (
-        <AssignmentBatchRowActions row={row} refetch={tableProps.fetch} />
-      )}
+      rowActions={
+        canManage
+          ? ({ row }) => (
+              <AssignmentBatchRowActions row={row} refetch={tableProps.fetch} />
+            )
+          : undefined
+      }
       tableActions={batchesTableActions}
-      enableMultiSelect
-      multiSelectActions={SendDraftsBulkAction}
+      enableMultiSelect={canManage}
+      multiSelectActions={canManage ? SendDraftsBulkAction : undefined}
     />
   );
 };
