@@ -40,7 +40,7 @@ export const ResourceComponentUsageTable: FC<
   const columns = [
     {
       title: translate('Billing period'),
-      render: ({ row }) => <>{formatMonth(row.date)}</>,
+      render: ({ row }) => <>{formatMonth(row.billing_period)}</>,
       orderField: 'billing_period',
     },
     {

@@ -65,7 +65,7 @@ export const ResourceComponentUserUsageTable: FC<
     },
     {
       title: translate('Date'),
-      render: ({ row }) => <>{formatMonth(row.date)}</>,
+      render: ({ row }) => <>{formatMonth(row.billing_period)}</>,
       filter: 'billing_period',
       orderField: 'component_usage__billing_period',
     },
