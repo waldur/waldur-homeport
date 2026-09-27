@@ -7,6 +7,8 @@ import { translate } from '@/i18n';
 
 import { SettingsCard } from '../settings/SettingsCard';
 
+import { TelemetrySendingCard } from './TelemetrySendingCard';
+
 export const AdministrationTelemetry = () => {
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['AdministrationTelemetry'],
@@ -22,7 +24,15 @@ export const AdministrationTelemetry = () => {
       />
     );
 
-  return data ? (
-    <SettingsCard groupNames={[translate('Telemetry')]} settingsSource={data} />
-  ) : null;
+  return (
+    <>
+      <TelemetrySendingCard />
+      {data ? (
+        <SettingsCard
+          groupNames={[translate('Telemetry')]}
+          settingsSource={data}
+        />
+      ) : null}
+    </>
+  );
 };
