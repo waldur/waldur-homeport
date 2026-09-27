@@ -1,4 +1,5 @@
 import {
+  CustomerOecdCodeStats,
   ProjectsLimitsGroupedByIndustryFlag,
   ProjectsLimitsGroupedByOecd,
   ProjectsUsagesGroupedByIndustryFlag,
@@ -10,7 +11,7 @@ export interface ProjectClassificationStats {
   oecdLimits: ProjectsLimitsGroupedByOecd | null;
   industryUsages: ProjectsUsagesGroupedByIndustryFlag | null;
   industryLimits: ProjectsLimitsGroupedByIndustryFlag | null;
-  oecdProjectCounts: Array<{ oecd_code: string; count: number }>;
+  oecdProjectCounts: CustomerOecdCodeStats[];
   industryProjectCounts: Array<{ industry_flag: boolean; count: number }>;
 }
 

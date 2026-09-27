@@ -1,19 +1,20 @@
 import { FC, useCallback, useMemo } from 'react';
+import { CustomerOecdCodeStats } from 'waldur-js-client';
 
 import { ChartCard } from '@/core/ChartCard';
 import { translate } from '@/i18n';
 import { BarChart } from '@/reporting/users/charts/BarChart';
 
 interface OecdUsageChartProps {
-  projectCounts: Array<{ oecd_code: string; count: number }>;
+  projectCounts: CustomerOecdCodeStats[];
 }
 
 export const OecdUsageChart: FC<OecdUsageChartProps> = ({ projectCounts }) => {
   const aggregatedCounts = useMemo(() => {
     const countMap = new Map<string, number>();
     projectCounts.forEach((item) => {
-      const current = countMap.get(item.oecd_code) || 0;
-      countMap.set(item.oecd_code, current + item.count);
+      const current = countMap.get(item.oecd) || 0;
+      countMap.set(item.oecd, current + item.count);
     });
     return Array.from(countMap.entries())
       .map(([name, value]) => ({ name, value }))
