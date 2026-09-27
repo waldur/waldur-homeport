@@ -301,6 +301,12 @@ export const SettingsDescription = [
         type: 'integer',
       },
       {
+        key: 'TELEMETRY_DEPLOYMENT_ID',
+        description: translate('Random identifier sent with telemetry so reports from one deployment can be grouped. Generated on the first report; clear it to rotate.'),
+        default: '',
+        type: 'string',
+      },
+      {
         key: 'CHECK_FOR_UPDATES',
         description: translate('If true, the version endpoint queries GitHub for the latest released Waldur version. Disable in deployments without outbound internet access to avoid failed requests to api.github.com.'),
         default: true,
@@ -1563,7 +1569,7 @@ export const SettingsDescription = [
         description: translate('List of automatic validation methods available for this portal.'),
         default: [],
         type: 'multiple_choice_field',
-        options: [{ value: 'ariregister', label: 'ariregister' }, { value: 'wirtschaftscompass', label: 'wirtschaftscompass' }, { value: 'bolagsverket', label: 'bolagsverket' }, { value: 'dnb_se', label: 'dnb_se' }, { value: 'dnb_no', label: 'dnb_no' }, { value: 'dnb_dk', label: 'dnb_dk' }, { value: 'dnb_fi', label: 'dnb_fi' }],
+        options: [{ value: 'ariregister', label: 'ariregister' }, { value: 'wirtschaftscompass', label: 'wirtschaftscompass' }, { value: 'bolagsverket', label: 'bolagsverket' }, { value: 'breg', label: 'breg' }, { value: 'dnb_se', label: 'dnb_se' }, { value: 'dnb_no', label: 'dnb_no' }, { value: 'dnb_dk', label: 'dnb_dk' }, { value: 'dnb_fi', label: 'dnb_fi' }],
       },
       {
         key: 'ONBOARDING_VERIFICATION_EXPIRY_HOURS',
