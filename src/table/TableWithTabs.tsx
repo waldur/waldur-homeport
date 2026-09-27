@@ -72,6 +72,11 @@ export const TableWithTabs: FC<
   }, [params, syncWithUrlKey, tabs, defaultActiveKey]);
 
   const handleSelect = (key: string | null) => {
+    // Re-selecting the open tab mounts nothing new, so the portalled controls
+    // hidden below would never be restored.
+    if (key === (activeKey ?? defaultActiveKey)) {
+      return;
+    }
     // Remove all children that came through the portal from the toolbar and title,
     // to prevent previous children to be visible when the new tab is rendered
     const childrenToBeRemoved = [];
