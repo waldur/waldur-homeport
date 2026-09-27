@@ -34750,6 +34750,11 @@
       "feature_area": "offerings"
     }
   },
+  "Operators can force this off at deploy time with WALDUR_TELEMETRY_ENABLED=false, which overrides this setting.": {
+    "context": {
+      "feature_area": "telemetry"
+    }
+  },
   "Option": {
     "context": {
       "primary_ui_type": "label",
@@ -48591,6 +48596,11 @@
       "feature_area": "playground"
     }
   },
+  "Send an anonymous daily usage report to the Waldur team.": {
+    "context": {
+      "feature_area": "telemetry"
+    }
+  },
   "Send answers": {
     "context": {
       "feature_area": "blocks"
@@ -48687,6 +48697,11 @@
       "action_type": "create"
     }
   },
+  "Send telemetry metrics": {
+    "context": {
+      "feature_area": "telemetry"
+    }
+  },
   "Send telemetry metrics.": {
     "context": {
       "feature_area": "features"
@@ -48707,6 +48722,11 @@
   "Sender address": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "Sending": {
+    "context": {
+      "feature_area": "telemetry"
     }
   },
   "Sending is disabled in logs.": {
@@ -52562,6 +52582,18 @@
   "Telemetry": {
     "context": {
       "feature_area": "administration"
+    }
+  },
+  "Telemetry sending has been disabled.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "telemetry"
+    }
+  },
+  "Telemetry sending has been enabled.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "telemetry"
     }
   },
   "Telemetry service version.": {},
@@ -61248,6 +61280,12 @@
   "Unable to update team member.": {
     "context": {
       "primary_ui_type": "error_message"
+    }
+  },
+  "Unable to update telemetry sending.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "telemetry"
     }
   },
   "Unable to update the affiliate link.": {
