@@ -14,8 +14,15 @@ vi.mock('@/table/useTable', () => ({
   },
 }));
 
-// The heavy Table is irrelevant here; the columns render usage rows we don't have.
-vi.mock('@/table/Table', () => ({ default: () => null }));
+const tableSpy = vi.fn();
+
+// The heavy Table is irrelevant here; capture the columns it would render.
+vi.mock('@/table/Table', () => ({
+  default: (props: any) => {
+    tableSpy(props);
+    return null;
+  },
+}));
 
 // No active filter form values in these tests.
 vi.mock('@/table/useFilterValues', () => ({ useFilterValues: () => ({}) }));
@@ -51,5 +58,26 @@ describe('ResourceComponentUserUsageTable', () => {
     // resource's per-user usage to staff.
     expect(filter.resource_uuid).toBe('marketplace-uuid');
     expect(filter.type).toBe('cpu');
+  });
+  it('labels a row with its billing period, not the time it was reported', () => {
+    tableSpy.mockClear();
+
+    render(
+      <ResourceComponentUserUsageTable
+        resource={resource as any}
+        offeringComponent={offeringComponent as any}
+        portal={{}}
+      />,
+    );
+
+    const { columns } = tableSpy.mock.calls[0][0];
+    const column = columns.find((c) => c.title === 'Date');
+    // August usage reported on 2 September must still read as August.
+    const { container } = render(
+      column.render({
+        row: { date: '2026-09-02T10:00:00Z', billing_period: '2026-08-01' },
+      }),
+    );
+    expect(container.textContent).toBe('August 2026');
   });
 });
