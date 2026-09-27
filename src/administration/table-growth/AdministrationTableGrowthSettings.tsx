@@ -25,9 +25,11 @@ export const AdministrationTableGrowthSettings = () => {
     );
 
   return data ? (
-    <SettingsCard
-      groupNames={[translate('Table Growth Monitoring')]}
-      settingsSource={data}
-    />
+    <div className="pt-5">
+      <SettingsCard
+        groupNames={[translate('Table Growth Monitoring')]}
+        settingsSource={data}
+      />
+    </div>
   ) : null;
 };

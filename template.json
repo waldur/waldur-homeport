@@ -7442,6 +7442,11 @@
       "feature_area": "site-agents"
     }
   },
+  "Background task workers, the message broker and event publishing.": {
+    "context": {
+      "feature_area": "system-management"
+    }
+  },
   "Backing up": {},
   "Backlog": {
     "context": {
@@ -9148,9 +9153,9 @@
       "feature_area": "views"
     }
   },
-  "Celery info": {
+  "Celery": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title"
     }
   },
   "Celery may be down or not responding. Task queues and statistics are unavailable.": {
@@ -14055,12 +14060,17 @@
       "feature_area": "openstack-instance"
     }
   },
-  "Database size": {
+  "Database": {
     "context": {
-      "feature_area": "database-stats"
+      "feature_area": "administration"
     }
   },
-  "Database statistics": {
+  "Database health, table growth monitoring and its settings.": {
+    "context": {
+      "feature_area": "system-management"
+    }
+  },
+  "Database size": {
     "context": {
       "feature_area": "database-stats"
     }
@@ -18893,6 +18903,7 @@
   },
   "Event subscriptions (legacy)": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "event-subscriptions"
     }
   },
@@ -22133,6 +22144,11 @@
   "Growth scenario": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Growth settings": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "Growth source": {
@@ -27198,6 +27214,11 @@
   "Logger name": {
     "context": {
       "feature_area": "generated"
+    }
+  },
+  "Logging & telemetry": {
+    "context": {
+      "feature_area": "administration"
     }
   },
   "Logging user in": {
@@ -40717,12 +40738,7 @@
   },
   "PubSub health": {
     "context": {
-      "feature_area": "administration"
-    }
-  },
-  "PubSub publishing health": {
-    "context": {
-      "feature_area": "pubsub"
+      "primary_ui_type": "title"
     }
   },
   "PubSub service unavailable": {
@@ -41442,7 +41458,7 @@
   },
   "RabbitMQ": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title"
     }
   },
   "RabbitMQ cluster health and configuration details": {
@@ -41458,11 +41474,6 @@
   "RabbitMQ statistics are unavailable; message and consumer counts are not shown.": {
     "context": {
       "feature_area": "pubsub"
-    }
-  },
-  "RabbitMQ subscription queues": {
-    "context": {
-      "feature_area": "rabbitmq"
     }
   },
   "RabbitMQ version": {
@@ -51008,6 +51019,11 @@
       "feature_area": "reporting"
     }
   },
+  "Statistics": {
+    "context": {
+      "primary_ui_type": "title"
+    }
+  },
   "Stats": {
     "context": {
       "primary_ui_type": "label"
@@ -52154,9 +52170,14 @@
       "feature_area": "offerings"
     }
   },
+  "System log collection and telemetry reporting.": {
+    "context": {
+      "feature_area": "system-management"
+    }
+  },
   "System logging": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title"
     }
   },
   "System logs": {
@@ -52285,17 +52306,7 @@
   },
   "Table growth": {
     "context": {
-      "feature_area": "administration"
-    }
-  },
-  "Table growth monitoring": {
-    "context": {
-      "feature_area": "table-growth"
-    }
-  },
-  "Table growth settings": {
-    "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title"
     }
   },
   "Table has been exported to {format}.": {
@@ -52581,7 +52592,8 @@
   },
   "Telemetry": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title",
+      "feature_area": "telemetry"
     }
   },
   "Telemetry sending has been disabled.": {
@@ -66036,6 +66048,11 @@
   "Workers": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Workers & messaging": {
+    "context": {
+      "feature_area": "administration"
     }
   },
   "Workflow": {

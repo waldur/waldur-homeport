@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
+import { FC } from 'react';
 
 import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { TableWithPortal } from '@/table/types';
+
+import { TabToolbar } from '../TabToolbar';
 
 import { getDatabaseStats } from './api';
 import { DatabaseActiveQueries } from './DatabaseActiveQueries';
@@ -19,7 +22,7 @@ import { DatabaseReplicationCard } from './DatabaseReplicationCard';
 import { DatabaseTableStats } from './DatabaseTableStats';
 import { DatabaseTransactionsCard } from './DatabaseTransactionsCard';
 
-export const DatabaseStatsPage = () => {
+export const DatabaseStatsPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['DatabaseStats'],
     queryFn: getDatabaseStats,
@@ -28,14 +31,14 @@ export const DatabaseStatsPage = () => {
 
   if (isLoading || !data) {
     return (
-      <Panel title={translate('Database statistics')} cardBordered>
+      <div className="pt-5">
         <div className="text-center py-10">
           <LoadingSpinner />
           <p className="text-muted mt-4">
             {translate('Fetching database statistics, please standby...')}
           </p>
         </div>
-      </Panel>
+      </div>
     );
   }
 
@@ -43,7 +46,7 @@ export const DatabaseStatsPage = () => {
     const errorMessage = error instanceof Error ? error.message : String(error);
 
     return (
-      <Panel title={translate('Database statistics')} cardBordered>
+      <div className="pt-5">
         <AlertItem
           variant="error"
           type="floating"
@@ -51,7 +54,7 @@ export const DatabaseStatsPage = () => {
           body={errorMessage}
           className="mb-0"
         />
-      </Panel>
+      </div>
     );
   }
 
@@ -60,11 +63,8 @@ export const DatabaseStatsPage = () => {
   );
 
   return (
-    <Panel
-      title={translate('Database statistics')}
-      actions={panelActions}
-      cardBordered
-    >
+    <div className="pt-5">
+      <TabToolbar portal={portal}>{panelActions}</TabToolbar>
       <DatabaseOverviewCards data={data} />
       <DatabaseConnectionsCard data={data.connections} />
       <DatabaseCacheCard data={data.cache_performance} />
@@ -75,6 +75,6 @@ export const DatabaseStatsPage = () => {
       <DatabaseQueryPerformanceCard data={data.query_performance} />
       <DatabaseReplicationCard data={data.replication} />
       <DatabaseTableStats data={data.table_stats} />
-    </Panel>
+    </div>
   );
 };
