@@ -5,10 +5,10 @@ import { KeyboardEvent as ReactKeyboardEvent, useEffect, useRef } from 'react';
 import { Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { getTabbableAfter, getTabbables } from '@/navigation/tabbables';
 
 import { SearchInput } from './SearchInput';
 import { SearchPopover } from './SearchPopover';
-import { getTabbableAfter, getTabbables } from './tabbables';
 import { useSearch } from './useSearch';
 
 import './SearchToggle.scss';
