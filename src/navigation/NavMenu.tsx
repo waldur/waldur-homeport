@@ -1,7 +1,13 @@
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef, forwardRef, useRef, useState } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  forwardRef,
+  PointerEvent,
+  useRef,
+  useState,
+} from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
@@ -87,7 +93,8 @@ const PLACEMENT_TO_SIDE_ALIGN = (
  * Root/Trigger, and Radix's DropdownMenuTrigger only ever opens on
  * click/keyboard, with no built-in hover mode. Reproduced by hand
  * instead: `open` is lifted and controlled, and the returned
- * `hoverHandlers` need spreading onto *both* the trigger and the content
+ * handlers need spreading onto *both* the trigger (`triggerHandlers`)
+ * and the content (`hoverHandlers`)
  * (leaving off either one closes the menu the instant the pointer
  * crosses the small visual gap between the button and its panel while
  * moving toward it), gated to `lg`+ only. The 200ms close-on-leave delay
@@ -115,7 +122,7 @@ export function useHoverMenu(requireDesktop = true) {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
   };
 
-  const hoverHandlers = {
+  const mouseHandlers = {
     onMouseEnter: () => {
       if (!isDesktop) return;
       cancelClose();
@@ -128,7 +135,34 @@ export function useHoverMenu(requireDesktop = true) {
     },
   };
 
-  return { isDesktop, open, setOpen, hoverHandlers };
+  // Hover has already opened the menu by the time a mouse clicks the
+  // trigger, and Radix closes it on that pointer-down twice over: the
+  // trigger toggles it, and the content dismisses it because the trigger
+  // lies outside the content. The trigger cancels its own toggle and
+  // leaves this flag for the content to cancel the dismissal.
+  const keepOpenOnPointerDown = useRef(false);
+
+  const triggerHandlers = {
+    ...mouseHandlers,
+    onPointerDown: (event: PointerEvent<HTMLElement>) => {
+      if (isDesktop && open && event.pointerType === 'mouse') {
+        event.preventDefault();
+        keepOpenOnPointerDown.current = true;
+      }
+    },
+  };
+
+  const hoverHandlers = {
+    ...mouseHandlers,
+    onPointerDownOutside: (event: Event) => {
+      if (keepOpenOnPointerDown.current) {
+        keepOpenOnPointerDown.current = false;
+        event.preventDefault();
+      }
+    },
+  };
+
+  return { isDesktop, open, setOpen, hoverHandlers, triggerHandlers };
 }
 
 export const NavMenu = RadixDropdownMenu.Root;

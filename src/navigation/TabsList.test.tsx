@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
-import { describe, expect, it, vi } from 'vitest';
+import { forwardRef } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { TabsList } from './TabsList';
 
@@ -12,8 +14,17 @@ vi.mock('./useTabs', () => ({
 }));
 
 vi.mock('@/core/Link', () => ({
-  Link: ({ state, children }) => (
-    <span data-testid={`link-${state}`}>{children}</span>
+  Link: forwardRef<HTMLAnchorElement, any>(
+    ({ state, params, children, ...rest }, ref) => (
+      <a
+        ref={ref}
+        href={`/${state}`}
+        data-params={JSON.stringify(params)}
+        {...rest}
+      >
+        {children}
+      </a>
+    ),
   ),
 }));
 
@@ -30,35 +41,93 @@ const mockRouterOn = (state: string, params: Record<string, any> = {}) =>
   } as any);
 
 describe('TabsList', () => {
-  it('links a parent tab to the first entry of its own submenu', () => {
+  beforeEach(() => {
     tabs.current = [
+      { title: 'Dashboard', to: 'public.marketplace-landing' },
       {
-        title: 'Managed projects',
-        to: 'managed-projects',
-        // What the route table declares — the router never reaches it, since
-        // transitionTo rejects an abstract target before hooks run.
-        redirectTo: 'marketplace-provider-project-templates',
+        title: 'Offerings',
         children: [
+          { title: 'All offerings', to: 'public.offerings' },
           {
-            title: 'Externally managed projects',
-            to: 'marketplace-provider-managed-projects',
-          },
-          {
-            title: 'Managed Projects Audit Log',
-            to: 'marketplace-provider-managed-projects-audit',
+            title: 'HPC',
+            to: 'public.marketplace-category',
+            params: { category_uuid: 'hpc' },
           },
         ],
       },
+      { title: 'Orders', to: 'auth-marketplace-orders' },
     ];
+  });
 
+  it('renders a parent tab as a button with no link inside it', () => {
     render(<TabsList />);
 
+    const trigger = screen.getByRole('button', { name: 'Offerings' });
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
     expect(
-      screen.getByTestId('link-marketplace-provider-managed-projects'),
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByTestId('link-marketplace-provider-project-templates'),
+      screen.queryByRole('link', { name: 'Offerings' }),
     ).not.toBeInTheDocument();
+  });
+
+  it('opens the submenu from the keyboard and lists every child', async () => {
+    const user = userEvent.setup();
+    render(<TabsList />);
+
+    await user.tab();
+    expect(screen.getByRole('link', { name: 'Dashboard' })).toHaveFocus();
+    await user.tab();
+    const trigger = screen.getByRole('button', { name: 'Offerings' });
+    expect(trigger).toHaveFocus();
+
+    await user.keyboard('{Enter}');
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    expect(
+      screen.getAllByRole('menuitem').map((item) => item.textContent),
+    ).toEqual(['All offerings', 'HPC']);
+    expect(
+      screen.getByRole('menuitem', { name: 'All offerings' }),
+    ).toHaveFocus();
+
+    await user.keyboard('{ArrowDown}');
+    expect(screen.getByRole('menuitem', { name: 'HPC' })).toHaveFocus();
+
+    await user.keyboard('{Escape}');
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
+  it('opens the submenu with Space', async () => {
+    const user = userEvent.setup();
+    render(<TabsList />);
+
+    screen.getByRole('button', { name: 'Offerings' }).focus();
+    await user.keyboard(' ');
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+  });
+
+  it('moves on to the next tab when Tab leaves the open submenu', async () => {
+    const user = userEvent.setup();
+    render(<TabsList />);
+
+    screen.getByRole('button', { name: 'Offerings' }).focus();
+    await user.keyboard('{Enter}');
+    await user.tab();
+
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Orders' })).toHaveFocus();
+  });
+
+  it('returns to the trigger when Shift+Tab leaves the open submenu', async () => {
+    const user = userEvent.setup();
+    render(<TabsList />);
+
+    const trigger = screen.getByRole('button', { name: 'Offerings' });
+    trigger.focus();
+    await user.keyboard('{Enter}');
+    await user.tab({ shift: true });
+
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
   });
 
   const pageTabs = [

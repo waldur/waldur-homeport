@@ -35,7 +35,7 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
   title,
   children,
 }) => {
-  const { open, setOpen, hoverHandlers } = useHoverMenu();
+  const { open, setOpen, hoverHandlers, triggerHandlers } = useHoverMenu();
 
   return (
     <li className="menu-item" data-testid="footer-dropdown">
@@ -43,7 +43,7 @@ export const FooterDropdown: React.FC<FooterDropdownProps> = ({
         <NavMenuTrigger asChild>
           {/* A <button>, not a <span>: the trigger has to be reachable by
               keyboard (WCAG 2.1.1). */}
-          <button type="button" className="menu-link px-3" {...hoverHandlers}>
+          <button type="button" className="menu-link px-3" {...triggerHandlers}>
             <span className="menu-title">{title}</span>
             <span className="menu-arrow rotate-active-90" />
           </button>

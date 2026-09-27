@@ -8,7 +8,15 @@ import {
 } from '@uirouter/react';
 import classNames from 'classnames';
 import { isMatch } from 'lodash-es';
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  FC,
+  KeyboardEvent as ReactKeyboardEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -19,6 +27,7 @@ import {
   NavMenuItem,
   useHoverMenu,
 } from '@/navigation/NavMenu';
+import { getTabbableAfter } from '@/navigation/tabbables';
 
 import { isDescendantOf, useTabs } from './useTabs';
 
@@ -89,54 +98,65 @@ const findActiveTab = (tabs, router) => {
  * responsive CSS (`.menu-lg-down-accordion`,
  * `.menu-sub-down-accordion.menu-sub-dropdown`).
  *
- * Both modes collapse to the same Radix dropdown here — a deliberate
- * simplification, not an overlooked one. Metronic's own imperative menu
- * JS never called `preventDefault()` on this trigger (confirmed in its
- * `_click` handler before that file was deleted — the line was
- * commented out, not missing), and Link's own onClick always fires its
- * state transition regardless, so clicking this row today already
- * navigates away immediately in the common case (parentTab always
- * carries its own `to`/`redirectTo`) — remounting the whole tree and
- * making whatever the accordion was doing under it invisible in
- * practice. Reproducing a true
- * inline-accordion mode here would faithfully replicate a mode nothing
- * can actually observe; a single hover-capable Radix dropdown (matching
- * FooterDropdown.tsx's own identical original attribute value) is both
- * simpler and already what `lg`+ users see today.
+ * Both modes collapse to the same Radix dropdown here. The trigger is a
+ * plain button that only opens the menu (click, Enter, Space, ArrowDown,
+ * or hover at `lg`+); it does not navigate, so every destination,
+ * including the first, is a menu item (WCAG 2.1.1, no link nested in a
+ * button).
  */
 const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
   parentTab,
   active,
 }) => {
-  const { open, setOpen, hoverHandlers } = useHoverMenu();
+  const { open, setOpen, hoverHandlers, triggerHandlers } = useHoverMenu();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const tabTargetRef = useRef<HTMLElement | null>(null);
+
+  // Radix menus swallow Tab. Treat the portaled menu as if it sat right
+  // after its trigger: Tab closes it and moves on to the next header item,
+  // Shift+Tab closes it and returns to the trigger.
+  const handleContentKeyDown = (event: ReactKeyboardEvent) => {
+    if (event.key !== 'Tab') return;
+    event.preventDefault();
+    tabTargetRef.current =
+      !event.shiftKey && triggerRef.current
+        ? getTabbableAfter(triggerRef.current, event.currentTarget)
+        : null;
+    setOpen(false);
+  };
+
+  const handleCloseAutoFocus = (event: Event) => {
+    const target = tabTargetRef.current;
+    tabTargetRef.current = null;
+    if (target) {
+      event.preventDefault();
+      target.focus();
+    }
+  };
 
   return (
     <NavMenu open={open} onOpenChange={setOpen} modal={false}>
-      <RadixDropdownMenu.Trigger asChild>
-        <span
-          role="button"
-          tabIndex={0}
-          data-testid={tabTestId(parentTab)}
-          className={classNames('menu-item me-0 me-lg-2', { here: active })}
-          {...hoverHandlers}
-        >
-          {/* The first entry of this tab's own submenu — `children` already
-              holds it filtered by feature flags and permissions and sorted the
-              way the menu renders, so the tab and the top of its menu cannot
-              disagree. The route table's `redirectTo` cannot stand in for it:
-              `transitionTo` rejects a transition to an abstract state before
-              any hook runs, so that redirect never fires, and a fixed state
-              name is the first entry only on the deployment it was written
-              against. This branch renders only when children exist. */}
-          <MenuLink to={parentTab.children[0].to}>
+      <span
+        data-testid={tabTestId(parentTab)}
+        className={classNames('menu-item me-0 me-lg-2', { here: active })}
+      >
+        <RadixDropdownMenu.Trigger asChild>
+          <button
+            ref={triggerRef}
+            type="button"
+            className="menu-link"
+            {...triggerHandlers}
+          >
             <span className="menu-title">{parentTab.title}</span>
             <span className="menu-arrow" />
-          </MenuLink>
-        </span>
-      </RadixDropdownMenu.Trigger>
+          </button>
+        </RadixDropdownMenu.Trigger>
+      </span>
       <NavMenuContent
         placement="bottom-start"
         className="menu-gray-600 menu-state-bg-gray menu-rounded-0 menu-dropdown-default fw-bolder fs-6 py-2 w-200px"
+        onKeyDown={handleContentKeyDown}
+        onCloseAutoFocus={handleCloseAutoFocus}
         {...hoverHandlers}
       >
         {parentTab.children.map((childTab, childIndex) => (

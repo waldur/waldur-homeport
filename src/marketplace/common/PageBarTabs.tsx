@@ -47,7 +47,7 @@ interface PageBarTabProps {
  * is independent of dropdown state and unaffected either way.
  */
 const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
-  const { open, setOpen, hoverHandlers } = useHoverMenu(false);
+  const { open, setOpen, hoverHandlers, triggerHandlers } = useHoverMenu(false);
   return (
     <NavMenu open={open} onOpenChange={setOpen} modal={false}>
       <NavMenuTrigger asChild>
@@ -63,7 +63,7 @@ const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
           }
           onClick={() => scrollToSectionById(props.name)}
           data-testid={`page-bar-tab-${props.name}`}
-          {...hoverHandlers}
+          {...triggerHandlers}
         >
           {props.title}
         </Button>
