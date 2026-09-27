@@ -25,7 +25,7 @@ export const AdministrationTelemetry = () => {
     );
 
   return (
-    <>
+    <div className="pt-5">
       <TelemetrySendingCard />
       {data ? (
         <SettingsCard
@@ -33,6 +33,6 @@ export const AdministrationTelemetry = () => {
           settingsSource={data}
         />
       ) : null}
-    </>
+    </div>
   );
 };

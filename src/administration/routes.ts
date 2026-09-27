@@ -53,7 +53,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
-    redirectTo: 'admin-celery-info',
+    redirectTo: 'admin-workers',
     data: {
       breadcrumb: () => translate('System management'),
     },
@@ -123,20 +123,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-table-growth',
-    url: 'table-growth/',
-    parent: 'admin-system-management',
-    component: lazyComponent(() =>
-      import('./table-growth/TableGrowthPage').then((module) => ({
-        default: module.TableGrowthPage,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Table growth'),
-    },
-  },
-
-  {
     name: 'admin-marketplace-offering-profiles',
     url: 'offering-profiles/',
     parent: 'admin-marketplace',
@@ -187,46 +173,58 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-table-growth-settings',
-    url: 'table-growth-settings/',
+    name: 'admin-workers',
+    url: 'workers/?tab',
     parent: 'admin-system-management',
     component: lazyComponent(() =>
-      import('./table-growth/AdministrationTableGrowthSettings').then(
-        (module) => ({
-          default: module.AdministrationTableGrowthSettings,
-        }),
-      ),
+      import('./system-management/WorkersPage').then((module) => ({
+        default: module.WorkersPage,
+      })),
     ),
     data: {
-      breadcrumb: () => translate('Table growth settings'),
+      breadcrumb: () => translate('Workers & messaging'),
     },
   },
 
   {
-    name: 'admin-system-info',
-    url: 'system-info/',
+    name: 'admin-database',
+    url: 'database/?tab',
     parent: 'admin-system-management',
     component: lazyComponent(() =>
-      import('./database-stats/DatabaseStatsPage').then((module) => ({
-        default: module.DatabaseStatsPage,
+      import('./system-management/DatabasePage').then((module) => ({
+        default: module.DatabasePage,
       })),
     ),
     data: {
-      breadcrumb: () => translate('Database statistics'),
+      breadcrumb: () => translate('Database'),
     },
   },
 
+  {
+    name: 'admin-logging-telemetry',
+    url: 'logging-telemetry/?tab',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./system-management/LoggingTelemetryPage').then((module) => ({
+        default: module.LoggingTelemetryPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Logging & telemetry'),
+    },
+  },
+
+  // Folded into a tabbed System management page; kept as a redirect so
+  // bookmarks, the chaos route sweep and external links keep resolving. See
+  // admin-role-availabilities for why `skipBreadcrumb` is needed.
   {
     name: 'admin-celery-info',
     url: 'celery-info/',
     parent: 'admin-system-management',
-    component: lazyComponent(() =>
-      import('./CeleryInfoPage').then((module) => ({
-        default: module.CeleryInfoPage,
-      })),
-    ),
+    component: UIView,
+    redirectTo: { state: 'admin-workers', params: { tab: 'celery' } },
     data: {
-      breadcrumb: () => translate('Celery info'),
+      skipBreadcrumb: true,
     },
   },
 
@@ -234,14 +232,96 @@ export const states: StateDeclaration[] = [
     name: 'admin-rabbitmq',
     url: 'rabbitmq/',
     parent: 'admin-system-management',
-    component: lazyComponent(() =>
-      import('./rabbitmq/RabbitMQPage').then((module) => ({
-        default: module.RabbitMQPage,
-      })),
-    ),
+    component: UIView,
+    redirectTo: { state: 'admin-workers', params: { tab: 'rabbitmq' } },
     data: {
-      breadcrumb: () => translate('RabbitMQ'),
-      permissions: [isStaffOrSupport],
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-pubsub-health',
+    url: 'pubsub-health/',
+    parent: 'admin-system-management',
+    component: UIView,
+    redirectTo: { state: 'admin-workers', params: { tab: 'pubsub' } },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-event-subscriptions',
+    url: 'event-subscriptions/',
+    parent: 'admin-system-management',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-workers',
+      params: { tab: 'event-subscriptions' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-system-info',
+    url: 'system-info/',
+    parent: 'admin-system-management',
+    component: UIView,
+    redirectTo: { state: 'admin-database', params: { tab: 'statistics' } },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-table-growth',
+    url: 'table-growth/',
+    parent: 'admin-system-management',
+    component: UIView,
+    redirectTo: { state: 'admin-database', params: { tab: 'table-growth' } },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-table-growth-settings',
+    url: 'table-growth-settings/',
+    parent: 'admin-system-management',
+    component: UIView,
+    redirectTo: { state: 'admin-database', params: { tab: 'settings' } },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-system-logging-settings',
+    url: 'system-logging/',
+    parent: 'admin-system-management',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-logging-telemetry',
+      params: { tab: 'system-logging' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-telemetry-settings',
+    url: 'telemetry/',
+    parent: 'admin-system-management',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-logging-telemetry',
+      params: { tab: 'telemetry' },
+    },
+    data: {
+      skipBreadcrumb: true,
     },
   },
 
@@ -261,21 +341,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-pubsub-health',
-    url: 'pubsub-health/',
-    parent: 'admin-system-management',
-    component: lazyComponent(() =>
-      import('./pubsub/PubSubHealthPage').then((module) => ({
-        default: module.PubSubHealthPage,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('PubSub health'),
-      permissions: [isStaff],
-    },
-  },
-
-  {
     name: 'admin-site-agents',
     url: 'site-agents/?tab',
     parent: 'admin-system-management',
@@ -286,21 +351,6 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Site agents'),
-      permissions: [isStaffOrSupport],
-    },
-  },
-
-  {
-    name: 'admin-event-subscriptions',
-    url: 'event-subscriptions/',
-    parent: 'admin-system-management',
-    component: lazyComponent(() =>
-      import('./event-subscriptions/EventSubscriptionsList').then((module) => ({
-        default: module.EventSubscriptionsList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Event subscriptions (legacy)'),
       permissions: [isStaffOrSupport],
     },
   },
@@ -410,33 +460,6 @@ export const states: StateDeclaration[] = [
     },
   },
 
-  {
-    name: 'admin-system-logging-settings',
-    url: 'system-logging/',
-    parent: 'admin-system-management',
-    component: lazyComponent(() =>
-      import('./system-logging/AdministrationSystemLogging').then((module) => ({
-        default: module.AdministrationSystemLogging,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('System logging'),
-    },
-  },
-
-  {
-    name: 'admin-telemetry-settings',
-    url: 'telemetry/',
-    parent: 'admin-system-management',
-    component: lazyComponent(() =>
-      import('./telemetry/AdministrationTelemetry').then((module) => ({
-        default: module.AdministrationTelemetry,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Telemetry'),
-    },
-  },
   {
     name: 'admin-custom-scripts-settings',
     url: 'custom-scripts/',

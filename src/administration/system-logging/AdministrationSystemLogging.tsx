@@ -23,9 +23,11 @@ export const AdministrationSystemLogging = () => {
     );
 
   return data ? (
-    <SettingsCard
-      groupNames={[translate('System Logging')]}
-      settingsSource={data}
-    />
+    <div className="pt-5">
+      <SettingsCard
+        groupNames={[translate('System Logging')]}
+        settingsSource={data}
+      />
+    </div>
   ) : null;
 };

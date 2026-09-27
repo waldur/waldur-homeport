@@ -9,7 +9,7 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import { Column, TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
 import { EventSubscriptionCreateButton } from './EventSubscriptionCreateButton';
@@ -30,7 +30,9 @@ const mandatoryFields: Array<keyof EventSubscription> = [
   'source_ip',
 ];
 
-export const EventSubscriptionsList: FC = () => {
+export const EventSubscriptionsList: FC<Partial<TableWithPortal>> = ({
+  portal,
+}) => {
   const tableProps = useTable({
     table: 'EventSubscriptionsList',
     fetchData: createFetcher(eventSubscriptionsList),
@@ -87,7 +89,9 @@ export const EventSubscriptionsList: FC = () => {
   ];
 
   return (
-    <>
+    // `pt-5`: the spacing contract for a TableWithTabs pane, as in
+    // RoleHygienePage; without it the notice butts up against the tab strip.
+    <div className="pt-5">
       <AlertItem
         variant="warning"
         title={translate('Legacy event subscriptions are deprecated')}
@@ -96,7 +100,7 @@ export const EventSubscriptionsList: FC = () => {
             {translate(
               'Per-object-type event subscriptions are superseded by unified event consumers, which receive every enabled event type on a single queue. New integrations should register through /api/event-consumers/ instead.',
             )}{' '}
-            <Link state="admin-pubsub-health">
+            <Link state="admin-workers" params={{ tab: 'pubsub' }}>
               {translate('View event consumers')}
             </Link>
             {' · '}
@@ -111,6 +115,12 @@ export const EventSubscriptionsList: FC = () => {
         columns={columns}
         title={translate('Event subscriptions (legacy)')}
         verboseName={translate('Event subscription')}
+        // Rendered only as a tab of the workers & messaging page, whose card
+        // and toolbar these controls belong to.
+        portal={portal}
+        hasActionBar={false}
+        cardBordered={false}
+        fullWidth
         hasQuery
         enableExport
         expandableRow={EventSubscriptionExpandableRow}
@@ -121,6 +131,6 @@ export const EventSubscriptionsList: FC = () => {
           <EventSubscriptionCreateButton refetch={tableProps.fetch} />
         }
       />
-    </>
+    </div>
   );
 };

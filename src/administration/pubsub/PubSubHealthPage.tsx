@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
+import { FC } from 'react';
 
 import { AlertItem } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { TableWithPortal } from '@/table/types';
+
+import { TabToolbar } from '../TabToolbar';
 
 import { getPubSubOverview } from './api';
 import { EventConsumersCard } from './EventConsumersCard';
@@ -19,7 +22,7 @@ import { PubSubMetricsResetButton } from './PubSubMetricsResetButton';
 import { PubSubOverviewCards } from './PubSubOverviewCards';
 import { PubSubTopQueuesCard } from './PubSubTopQueuesCard';
 
-export const PubSubHealthPage = () => {
+export const PubSubHealthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['PubSubOverview'],
     queryFn: getPubSubOverview,
@@ -28,14 +31,14 @@ export const PubSubHealthPage = () => {
 
   if (isLoading || !data) {
     return (
-      <Panel title={translate('PubSub publishing health')} cardBordered>
+      <div className="pt-5">
         <div className="text-center py-10">
           <LoadingSpinner />
           <p className="text-muted mt-4">
             {translate('Fetching PubSub health status, please standby...')}
           </p>
         </div>
-      </Panel>
+      </div>
     );
   }
 
@@ -44,7 +47,7 @@ export const PubSubHealthPage = () => {
     const is503 = errorMessage.includes('503');
 
     return (
-      <Panel title={translate('PubSub publishing health')} cardBordered>
+      <div className="pt-5">
         <AlertItem
           variant="error"
           type="floating"
@@ -61,7 +64,7 @@ export const PubSubHealthPage = () => {
               : errorMessage
           }
         />
-      </Panel>
+      </div>
     );
   }
 
@@ -76,11 +79,8 @@ export const PubSubHealthPage = () => {
   );
 
   return (
-    <Panel
-      title={translate('PubSub publishing health')}
-      actions={panelActions}
-      cardBordered
-    >
+    <div className="pt-5">
+      <TabToolbar portal={portal}>{panelActions}</TabToolbar>
       <PubSubOverviewCards data={data} />
       <PubSubIssuesCard issues={data.issues} />
       <PubSubCircuitBreakerCard currentState={data.circuit_breaker.state} />
@@ -89,6 +89,6 @@ export const PubSubHealthPage = () => {
       <PubSubTopQueuesCard />
       <EventConsumersCard />
       <EventSubscriptionQueuesCard />
-    </Panel>
+    </div>
   );
 };

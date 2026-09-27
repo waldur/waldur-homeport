@@ -146,7 +146,8 @@ export const SupportSystemLogsList = () => {
         <>
           {translate('System logs')}{' '}
           <Link
-            state="admin-system-logging-settings"
+            state="admin-logging-telemetry"
+            params={{ tab: 'system-logging' }}
             className="text-decoration-none"
           >
             <Badge
