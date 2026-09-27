@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
+  CustomerOecdCodeStats,
   ProjectsLimitsGroupedByOecd,
   ProjectsUsagesGroupedByOecd,
 } from 'waldur-js-client';
@@ -11,7 +12,7 @@ import { OecdUsageTable } from './OecdUsageTable';
 interface OecdUsageTabProps {
   usages: ProjectsUsagesGroupedByOecd | null;
   limits: ProjectsLimitsGroupedByOecd | null;
-  projectCounts: Array<{ oecd_code: string; count: number }>;
+  projectCounts: CustomerOecdCodeStats[];
 }
 
 export const OecdUsageTab: FC<OecdUsageTabProps> = ({
