@@ -4,7 +4,7 @@ import { MaintenanceAnnouncement } from 'waldur-js-client';
 import { Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { formatMediumDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { getMaintenanceState } from '@/maintenance/utils';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -62,10 +62,10 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
         render: ({ row }) => (
           <>
             <span className="d-block text-nowrap">
-              {formatDateTime(row.scheduled_start)}
+              {formatMediumDateTime(row.scheduled_start)}
             </span>
             <span className="d-block text-nowrap text-muted">
-              {formatDateTime(row.scheduled_end)}
+              {formatMediumDateTime(row.scheduled_end)}
             </span>
           </>
         ),
@@ -80,12 +80,12 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
             <>
               <span className="d-block text-nowrap">
                 {row.actual_start
-                  ? formatDateTime(row.actual_start)
+                  ? formatMediumDateTime(row.actual_start)
                   : DASH_ESCAPE_CODE}
               </span>
               <span className="d-block text-nowrap text-muted">
                 {row.actual_end
-                  ? formatDateTime(row.actual_end)
+                  ? formatMediumDateTime(row.actual_end)
                   : DASH_ESCAPE_CODE}
               </span>
             </>

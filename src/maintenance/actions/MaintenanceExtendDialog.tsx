@@ -10,7 +10,7 @@ import {
 
 import { SegmentedControl } from 'waldur-ui';
 
-import { formatDateTime, parseDate } from '@/core/dateUtils';
+import { formatMediumDateTime, parseDate } from '@/core/dateUtils';
 import { DateTimeField } from '@/form/DateTimeField';
 import { FormFooter } from '@/form/FormFooter';
 import { translate } from '@/i18n';
@@ -128,7 +128,7 @@ const ExtendForm: FC<ExtendFormProps> = ({
   );
 
   const newEndPreview = values.scheduled_end
-    ? formatDateTime(values.scheduled_end)
+    ? formatMediumDateTime(values.scheduled_end)
     : null;
 
   return (
@@ -141,7 +141,7 @@ const ExtendForm: FC<ExtendFormProps> = ({
         <BSForm.Group className="mb-4">
           <BSForm.Label>{translate('Current end')}</BSForm.Label>
           <div className="form-control-plaintext">
-            {formatDateTime(currentEnd)}
+            {formatMediumDateTime(currentEnd)}
           </div>
         </BSForm.Group>
 
