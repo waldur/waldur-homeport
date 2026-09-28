@@ -7,7 +7,7 @@ import {
 
 import { Badge } from 'waldur-ui';
 
-import { formatDateTime } from '@/core/dateUtils';
+import { formatMediumDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table, { TableColumns } from '@/table/Table';
@@ -58,10 +58,10 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
         render: ({ row }) => (
           <>
             <span className="d-block text-nowrap">
-              {formatDateTime(row.scheduled_start)}
+              {formatMediumDateTime(row.scheduled_start)}
             </span>
             <span className="d-block text-nowrap">
-              {formatDateTime(row.scheduled_end)}
+              {formatMediumDateTime(row.scheduled_end)}
             </span>
           </>
         ),

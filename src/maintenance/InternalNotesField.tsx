@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { Badge } from 'waldur-ui';
 
-import { formatDateTime, formatRelative } from '@/core/dateUtils';
+import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { useCustomer, useUser } from '@/workspace/hooks';
@@ -18,7 +18,7 @@ const formatEntryTimestamp = (date: Date): string => {
   if (relative) return relative;
   // Very-recent entries (~now) can yield a null relative formatting; fall
   // back to a compact wall-clock time.
-  return formatDateTime(date);
+  return formatMediumDateTime(date);
 };
 
 const StructuredEntry = ({ entry }: { entry: ParsedInternalNote }) => (
