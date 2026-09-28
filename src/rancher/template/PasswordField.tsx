@@ -2,9 +2,10 @@ import React from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { range } from '@/core/utils';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 import { FieldProps } from '../types';
 
@@ -29,9 +30,11 @@ export const PasswordField: React.FC<FieldProps> = (props) => {
     (fieldProps) => (
       <InputGroup>
         <FormControl {...fieldProps.input} />
-        <ActionButton
-          action={setGeneratedPassword}
-          title={translate('Generate password')}
+        <BaseButton
+          onClick={setGeneratedPassword}
+          label={translate('Generate password')}
+          variant="tertiary"
+          size="lg"
         />
       </InputGroup>
     ),

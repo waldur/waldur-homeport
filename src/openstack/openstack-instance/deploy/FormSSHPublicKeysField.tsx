@@ -3,10 +3,11 @@ import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-final-form';
 import { keysList, KeysListData } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
@@ -68,11 +69,13 @@ export const FormSSHPublicKeysField = (props: Partial<TableProps>) => {
       title={translate('SSH public keys')}
       verboseName={translate('SSH keys')}
       tableActions={
-        <ActionButton
-          action={openFormDialog}
-          title={translate('Create new')}
+        <BaseButton
+          onClick={openFormDialog}
+          label={translate('Create new')}
           iconNode={<PlusCircleIcon weight="bold" />}
           className="text-nowrap"
+          variant="tertiary"
+          size="lg"
         />
       }
       hoverable

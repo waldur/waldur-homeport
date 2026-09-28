@@ -1,5 +1,7 @@
 import { Project } from 'waldur-js-client';
 
+import { ButtonSize } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import { ActionsDropdownSeparator } from '@/table/ActionsDropdown';
@@ -11,16 +13,16 @@ import { BatchSetEndDateAction } from './BatchSetEndDateAction';
 export const BatchProjectActions = ({
   rows,
   refetch,
-  className,
+  size,
 }: {
   rows: Project[];
   refetch;
-  className?: string;
+  size?: ButtonSize;
 }) => (
   <ActionDropdownButton
     variant="primary"
     title={translate('All actions')}
-    className={className}
+    size={size}
   >
     <BatchMoveProjectAction rows={rows} refetch={refetch} />
     <BatchSetEndDateAction rows={rows} refetch={refetch} />

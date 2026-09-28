@@ -83,7 +83,8 @@ export const OfferingComponentDialog: FC<{
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Save') : translate('Confirm')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

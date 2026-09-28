@@ -62,7 +62,7 @@ Set `disabledClick: true` to prevent click actions (such as row selection or row
 ```ts
 {
   title: translate('Actions'),
-  render: ({ row }) => <Button onClick={() => triggerAction(row)} />,
+  render: ({ row }) => <BaseButton onClick={() => triggerAction(row)} label={translate('Action')} />,
   disabledClick: true, // Click event does not bubble up to the row <tr>
 }
 ```

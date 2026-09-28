@@ -8,6 +8,8 @@ import {
   useState,
 } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { openSupportDrawer } from '@/support/openSupportDrawer';
@@ -136,15 +138,13 @@ export const MatrixCallFloatingWidget = forwardRef<
         <span className="fw-semibold flex-grow-1 text-truncate">
           {roomName}
         </span>
-        <button
-          type="button"
-          className="btn btn-sm btn-light"
+        <BaseButton
+          variant="tertiary"
+          size="sm"
           onClick={handleReturnToCall}
-          aria-label={translate('Return to call')}
-          title={translate('Return to call in chat')}
-        >
-          <ArrowSquareInIcon size={14} weight="bold" />
-        </button>
+          tooltip={translate('Return to call in chat')}
+          iconNode={<ArrowSquareInIcon size={14} weight="bold" />}
+        />
       </div>
       <div
         ref={portalTargetRef}

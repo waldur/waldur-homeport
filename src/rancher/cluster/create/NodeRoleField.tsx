@@ -1,24 +1,20 @@
 import { FunctionComponent } from 'react';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
+
+import { SegmentedControl } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
 export const NodeRoleField: FunctionComponent<FieldRenderProps<string>> = ({
   input,
 }) => (
-  <ToggleButtonGroup
-    value={input.value}
-    onChange={input.onChange}
-    name="role"
-    type="radio"
+  <SegmentedControl
     aria-label={translate('Node role')}
-  >
-    <ToggleButton value="agent" id="agent">
-      {translate('Agent')}
-    </ToggleButton>
-    <ToggleButton value="server" id="server">
-      {translate('Server')}
-    </ToggleButton>
-  </ToggleButtonGroup>
+    options={[
+      { value: 'agent', label: translate('Agent') },
+      { value: 'server', label: translate('Server') },
+    ]}
+    value={input.value}
+    onValueChange={input.onChange}
+  />
 );

@@ -2,9 +2,11 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 import { Form, Stack } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
-import { BaseSecretField, SubmitButton } from '@/form';
+import { BaseSecretField } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -50,13 +52,16 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
       title={translate('API key')}
       footer={
         resolve.canManage ? (
-          <SubmitButton
-            submitting={false}
+          <BaseButton
+            size="lg"
+            variant="primary"
             onClick={rotate}
             disabled={!ready}
+            disabledReason={
+              !ready ? translate('API key is not ready to rotate') : undefined
+            }
             label={translate('Rotate')}
             iconNode={<ArrowsClockwiseIcon weight="bold" />}
-            iconOnLeft
           />
         ) : undefined
       }
@@ -72,7 +77,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
             <CopyToClipboardButton
               value={value}
               size={20}
-              buttonClassName="btn btn-text-secondary btn-icon"
+              buttonVariant="text-secondary"
               onlyButton
             />
           </Stack>

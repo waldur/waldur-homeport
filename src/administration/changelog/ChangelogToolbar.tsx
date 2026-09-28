@@ -9,11 +9,12 @@ import {
   changelogUpgradeReportRetrieve,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 import { ScheduleUpgradeDialog } from './ScheduleUpgradeDialog';
@@ -113,12 +114,13 @@ export const ChangelogToolbar: FC = () => {
           iconNode={<DownloadIcon weight="bold" />}
         />
       </ActionDropdownButton>
-      <ActionButton
-        title={translate('Schedule upgrade')}
+      <BaseButton
+        label={translate('Schedule upgrade')}
         iconNode={<CalendarPlusIcon weight="bold" />}
-        action={openScheduleDialog}
+        onClick={openScheduleDialog}
         pending={loading}
         variant="primary"
+        size="lg"
       />
     </>
   );

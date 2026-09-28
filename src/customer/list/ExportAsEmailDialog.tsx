@@ -11,6 +11,8 @@ import {
   invoicesList,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { composeValidators, email, required } from '@/core/validators';
 import { AccountingPeriodFieldComponent } from '@/customer/list/AccountingPeriodField';
@@ -21,7 +23,6 @@ import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 async function oldestInvoice() {
   const response = (
@@ -150,25 +151,22 @@ const renderEmails = ({ fields }: any) => (
           </Field>
         </Col>
         <Col sm={2}>
-          <button
-            type="button"
-            className="btn btn-danger"
+          <BaseButton
+            variant="danger"
             onClick={() => fields.remove(index)}
-          >
-            <span className="svg-icon svg-icon-2">
-              <TrashIcon weight="bold" />
-            </span>
-          </button>
+            iconNode={<TrashIcon weight="bold" />}
+          />
         </Col>
       </Row>
     ))}
     <Row>
       <Col>
-        <ActionButton
-          title={translate('Add email')}
-          action={() => fields.push(undefined)}
+        <BaseButton
+          label={translate('Add email')}
+          onClick={() => fields.push(undefined)}
           iconNode={<PlusCircleIcon weight="bold" />}
           variant="primary"
+          size="lg"
         />
       </Col>
     </Row>

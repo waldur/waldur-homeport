@@ -40,7 +40,8 @@ export const AcceptBookingButton: FC<AcceptBookingButtonProps> = ({
       }
       submitting={acceptMutation.isPending}
       label={translate('Accept')}
-      className="btn btn-success me-2"
+      variant="success"
+      className="me-2"
       onClick={() => acceptMutation.mutate()}
     />
   );

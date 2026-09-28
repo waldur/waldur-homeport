@@ -11,8 +11,9 @@ import {
   reviewerProfilesPublish,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 import { router } from '@/router';
@@ -265,25 +266,35 @@ export const ReviewerInvitationAccept: FC = () => {
 
       {/* Actions */}
       <div className="d-flex gap-4 justify-content-center">
-        <SubmitButton
-          type="button"
+        <BaseButton
           variant="success"
           onClick={() => acceptMutation.mutate()}
           disabled={!canAccept || declineMutation.isPending}
-          submitting={acceptMutation.isPending}
+          disabledReason={
+            !canAccept
+              ? translate('Please complete your profile first')
+              : declineMutation.isPending
+                ? translate('Decline in progress')
+                : undefined
+          }
+          pending={acceptMutation.isPending}
           label={translate('Accept invitation')}
           iconNode={<CheckIcon weight="bold" />}
-          iconOnLeft
+          size="lg"
         />
-        <SubmitButton
-          type="button"
+        <BaseButton
           variant="danger"
           onClick={() => declineMutation.mutate()}
           disabled={acceptMutation.isPending}
-          submitting={declineMutation.isPending}
+          disabledReason={
+            acceptMutation.isPending
+              ? translate('Accept in progress')
+              : undefined
+          }
+          pending={declineMutation.isPending}
           label={translate('Decline invitation')}
           iconNode={<XIcon weight="bold" />}
-          iconOnLeft
+          size="lg"
         />
       </div>
       {!canAccept && (

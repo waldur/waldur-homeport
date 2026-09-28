@@ -3,12 +3,7 @@
  * Ensuring users always understand why an action is unavailable.
  */
 
-const TARGET_COMPONENTS = new Set([
-  'ActionButton',
-  'CompactActionButton',
-  'ToolbarButton',
-  'BaseButton',
-]);
+const TARGET_COMPONENTS = new Set(['BaseButton']);
 
 export default {
   meta: {

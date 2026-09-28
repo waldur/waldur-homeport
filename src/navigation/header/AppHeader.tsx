@@ -3,7 +3,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { useSidebar, Tooltip } from 'waldur-ui';
+import { useSidebar, BaseButton, Tooltip } from 'waldur-ui';
 
 import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { getIconUrl } from '@/core/api';
@@ -105,16 +105,15 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             style={{ minWidth: 0, flexBasis: 0, overflow: 'hidden' }}
           >
             {Boolean(user) && isResourceCreationView && (
-              <button
-                className="btn me-3 py-0 d-inline-flex align-items-center justify-content-center align-self-center gap-1 text-primary fw-semibold fs-5 border-0 bg-transparent"
-                type="button"
+              <BaseButton
+                variant="text-primary"
+                className="me-3 py-0 align-self-center fw-semibold fs-5"
                 onClick={onGoBack}
-                title={translate('Go back')}
+                tooltip={translate('Go back')}
                 style={{ width: '108px', height: '36px' }}
-              >
-                <CaretLeftIcon size={18} weight="bold" />
-                <span>{translate('Go back')}</span>
-              </button>
+                iconNode={<CaretLeftIcon size={18} weight="bold" />}
+                label={translate('Go back')}
+              />
             )}
             {hasBreadcrumbs && <BreadcrumbMain />}
           </div>

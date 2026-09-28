@@ -1,10 +1,11 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { Offering, Resource } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ToolbarButton } from '@/table/ToolbarButton';
 
 interface ResourceViewChangeButtonProps {
   resource: Resource;
@@ -31,8 +32,8 @@ export const ResourceViewChangeButton = ({
     });
 
   return (
-    <ToolbarButton
-      title={translate('View change')}
+    <BaseButton
+      label={translate('View change')}
       iconNode={<InfoIcon weight="bold" />}
       onClick={callback}
       variant="tertiary"

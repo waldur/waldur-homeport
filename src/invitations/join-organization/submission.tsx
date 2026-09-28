@@ -60,7 +60,7 @@ export const useRequestToAccessOrganization = () => {
               size: 'sm',
               positiveButton: translate('OK'),
               onlyPositiveButton: true,
-              positiveButtonVariant: 'primary w-95px',
+              positiveButtonVariant: 'primary',
               iconNode: <CheckCircleIcon weight="bold" />,
             },
           );
@@ -83,7 +83,7 @@ export const useRequestToAccessOrganization = () => {
               size: 'sm',
               positiveButton: translate('OK'),
               onlyPositiveButton: true,
-              positiveButtonVariant: 'primary w-95px',
+              positiveButtonVariant: 'primary',
               iconNode: <CheckCircleIcon weight="bold" />,
             },
           );

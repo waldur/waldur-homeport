@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { goBack } from './utils';
@@ -53,9 +54,12 @@ export const ErrorPageView: FC<PropsWithChildren<ErrorPageViewProps>> = (
       {title ? <h2>{title}</h2> : null}
       <p>{description}</p>
       {!props.hideActions && (
-        <SubmitButton submitting={false} onClick={goBack} type="button">
-          {translate('Home')}
-        </SubmitButton>
+        <BaseButton
+          onClick={goBack}
+          label={translate('Home')}
+          variant="primary"
+          size="lg"
+        />
       )}
       {props.children}
     </div>

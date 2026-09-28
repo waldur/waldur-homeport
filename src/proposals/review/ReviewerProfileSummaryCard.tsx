@@ -4,13 +4,12 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { reviewerProfilesMeRetrieve } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import Avatar from '@/core/Avatar';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OrcidLogo } from '@/core/OrcidLogo';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { router } from '@/router';
 import { useUser } from '@/workspace/hooks';
@@ -78,13 +77,13 @@ export const ReviewerProfileSummaryCard: FC<
                 )}
               </p>
             </div>
-            <SubmitButton
-              type="button"
+            <BaseButton
               variant="warning"
               onClick={handleManageProfile}
-              submitting={false}
               label={translate('Create profile')}
               iconNode={<ArrowRightIcon weight="bold" />}
+              iconRight
+              size="lg"
             />
           </div>
         </Card.Body>
@@ -157,13 +156,13 @@ export const ReviewerProfileSummaryCard: FC<
           </div>
 
           {/* Action */}
-          <SubmitButton
-            type="button"
-            variant="light-primary"
+          <BaseButton
+            variant="secondary"
             onClick={handleManageProfile}
-            submitting={false}
             label={translate('Manage profile')}
             iconNode={<ArrowRightIcon weight="bold" />}
+            iconRight
+            size="lg"
           />
         </div>
       </Card.Body>

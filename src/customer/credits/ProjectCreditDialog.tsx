@@ -115,7 +115,8 @@ export const ProjectCreditDialog: FC<ProjectCreditDialogProps> = ({
                   disabled={invalid || !dirty || !organizationCredit}
                   submitting={submitting}
                   label={isEdit ? translate('Edit') : translate('Confirm')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                   data-testid="submit-button"
                 />
               </>

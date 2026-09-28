@@ -6,7 +6,7 @@ import {
   openstackSecurityGroupsList,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -15,7 +15,6 @@ import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -63,13 +62,15 @@ const ShowPreviewButton = () => {
   }, [securityGroups]);
 
   return (
-    <ActionButton
-      action={callback}
+    <BaseButton
+      onClick={callback}
       disabled={!securityGroups?.length}
       disabledReason={translate('No security groups selected')}
-      title={translate('Preview')}
+      label={translate('Preview')}
       iconNode={<EyeIcon weight="bold" />}
       className="text-nowrap"
+      variant="tertiary"
+      size="lg"
     />
   );
 };

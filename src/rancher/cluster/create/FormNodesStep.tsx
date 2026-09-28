@@ -6,6 +6,8 @@ import { Field, useForm } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
@@ -16,13 +18,11 @@ import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { NODES_FIELD_ARRAY } from './constants';
 import { RANCHER_NODE_ROLES } from './RANCHER_NODE_ROLES';
 import { filterFlavors, useFormTenant, useVolumeDataLoader } from './utils';
-
 import './FormNodesStep.scss';
 
 const filterFlavor = (node, flavor) => {
@@ -154,10 +154,11 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                           </Field>
                         </td>
                         <td>
-                          <ActionButton
+                          <BaseButton
                             variant="text-danger"
-                            action={() => fields.remove(index)}
+                            onClick={() => fields.remove(index)}
                             iconNode={<XIcon weight="bold" />}
+                            size="lg"
                           />
                         </td>
                       </tr>
@@ -169,12 +170,13 @@ const renderNodeRows = ({ fields, flavors }: any) => {
           </div>
         </Form.Group>
       )}
-      <ActionButton
+      <BaseButton
         variant="tertiary"
         className="text-nowrap"
-        action={addRow}
+        onClick={addRow}
         iconNode={<PlusIcon weight="bold" />}
-        title={translate('Add')}
+        label={translate('Add')}
+        size="lg"
       />
     </>
   );

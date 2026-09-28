@@ -101,8 +101,8 @@ describe('enforce-dialog-button-order', () => {
               footer={
                 <>
                   <CloseDialogButton />
-                  <CompactSubmitButton variant="danger" label="Reject" />
-                  <CompactSubmitButton variant="success" label="Approve" />
+                  <BaseButton variant="danger" label="Reject" />
+                  <BaseButton variant="success" label="Approve" />
                 </>
               }
             />

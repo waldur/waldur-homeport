@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { Issue, supportIssuesEscalate } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { ActionButton } from '@/table/ActionButton';
 
 const EscalateDialog: FC<{
   resolve: { issue: Issue; refetch: () => void };
@@ -55,10 +56,13 @@ export const EscalateButton: FC<{ issue: Issue; refetch: () => void }> = ({
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Escalate')}
+    <BaseButton
+      label={translate('Escalate')}
       variant="tertiary"
-      action={() => openDialog(EscalateDialog, { resolve: { issue, refetch } })}
+      onClick={() =>
+        openDialog(EscalateDialog, { resolve: { issue, refetch } })
+      }
+      size="lg"
     />
   );
 };

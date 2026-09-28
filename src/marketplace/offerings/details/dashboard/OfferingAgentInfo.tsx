@@ -1,13 +1,14 @@
 import { FC, useCallback } from 'react';
 import { AgentIdentity } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime, formatUptime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
 const AgentPackagesDialog = lazyComponent(() =>
@@ -89,11 +90,12 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
               colon
               value={
                 (agentIdentity.dependencies as any[])?.length ? (
-                  <CompactActionButton
+                  <BaseButton
                     variant="text-primary"
                     className="ms-n2"
-                    action={openPackagesDialog}
-                    title={translate('Details')}
+                    onClick={openPackagesDialog}
+                    label={translate('Details')}
+                    size="sm"
                   />
                 ) : (
                   'N/A'

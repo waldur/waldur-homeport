@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { downloadFile } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
@@ -33,14 +35,13 @@ export const FileAttachmentsDialog: FC<FileAttachmentsDialogProps> = ({
   >
     <div className="d-flex flex-column gap-3">
       {resolve.files.map((file) => (
-        <button
+        <BaseButton
           key={file.stored_file_id}
-          type="button"
-          className="btn btn-link p-0 text-primary text-start align-self-start"
+          variant="text-primary"
+          className="text-start align-self-start"
           onClick={() => downloadMediaFile(file.stored_file_id, file.name)}
-        >
-          {file.name}
-        </button>
+          label={file.name}
+        />
       ))}
     </div>
   </ModalDialog>

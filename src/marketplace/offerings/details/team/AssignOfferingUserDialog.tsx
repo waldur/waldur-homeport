@@ -89,7 +89,8 @@ export const AssignOfferingUserDialog: FC<{
                   label={translate('Add role')}
                   submitting={submitting}
                   disabled={invalid || rolesLoading || roles.length === 0}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

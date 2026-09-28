@@ -5,10 +5,11 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useCustomer, useUser } from '@/workspace/hooks';
@@ -121,9 +122,9 @@ export const ProviderUsernameConflicts: FC<ProviderUsernameConflictsProps> = ({
       tableActions={
         canResolve &&
         tableProps.rows.length > 0 && (
-          <ActionButton
-            title={translate('Resolve conflicts')}
-            action={() =>
+          <BaseButton
+            label={translate('Resolve conflicts')}
+            onClick={() =>
               openDialog(AdoptProviderAccountsDialog, {
                 resolve: {
                   provider,
@@ -132,6 +133,8 @@ export const ProviderUsernameConflicts: FC<ProviderUsernameConflictsProps> = ({
                 },
               })
             }
+            variant="tertiary"
+            size="lg"
           />
         )
       }

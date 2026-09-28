@@ -2,7 +2,7 @@ import { BellSlashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { UserAction } from 'waldur-js-client';
 
-import { AlertItem, Badge, Tooltip } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
@@ -17,14 +17,13 @@ import { PENDING_ACTION_COMPONENTS, getActionTypeLabel } from './utils';
 const PrimaryActionButton: FC<{ action: PrimaryActionInfo }> = ({ action }) => {
   const IconComponent = action.icon;
   return (
-    <button
-      type="button"
-      className="btn btn-sm btn-light-primary"
+    <BaseButton
+      variant="secondary"
+      size="sm"
       onClick={action.handler}
-    >
-      <IconComponent weight="bold" size={14} />
-      <span className="ms-1">{action.label}</span>
-    </button>
+      iconNode={<IconComponent weight="bold" size={14} />}
+      label={action.label}
+    />
   );
 };
 

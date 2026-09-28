@@ -7,10 +7,11 @@ import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { marketplaceBookingsList } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { ActionButton } from '@/table/ActionButton';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { BookingProps } from '../types';
@@ -73,10 +74,11 @@ const renderScheduleRows = ({
                 </span>
               )}
             </label>
-            <ActionButton
+            <BaseButton
               variant="text-danger"
-              action={() => fields.remove(index)}
+              onClick={() => fields.remove(index)}
               iconNode={<XIcon weight="bold" />}
+              size="lg"
             />
           </div>
           <Field
@@ -112,12 +114,13 @@ const renderScheduleRows = ({
           </Field>
         </div>
       ))}
-      <ActionButton
+      <BaseButton
         variant="text-primary"
         className="text-nowrap"
-        action={addRow}
+        onClick={addRow}
         iconNode={<PlusIcon weight="bold" />}
-        title={translate('Add time period')}
+        label={translate('Add time period')}
+        size="lg"
       />
     </>
   );

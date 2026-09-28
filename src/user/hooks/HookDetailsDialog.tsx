@@ -148,12 +148,7 @@ export const HookDetailsDialog: FunctionComponent<{
                   <Field
                     name="hook_type"
                     validate={required}
-                    render={({ input }) => (
-                      <HookTypeField
-                        input={input}
-                        defaultValue={initialValues.hook_type}
-                      />
-                    )}
+                    render={({ input }) => <HookTypeField input={input} />}
                   />
                 ) : (
                   <>

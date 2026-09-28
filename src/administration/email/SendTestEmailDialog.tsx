@@ -47,7 +47,7 @@ export const SendTestEmailDialog: FC = () => {
                   disabled={invalid || mutation.isPending}
                   submitting={mutation.isPending}
                   label={translate('Send')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

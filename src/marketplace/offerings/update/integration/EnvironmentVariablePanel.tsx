@@ -2,9 +2,10 @@ import { XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface EnvironmentVariablePanelProps {
   index: number;
@@ -42,10 +43,11 @@ export const EnvironmentVariablePanel: FC<EnvironmentVariablePanelProps> = ({
         </Field>
       </td>
       <td>
-        <CompactActionButton
+        <BaseButton
           variant="text-danger"
-          action={() => onRemove(index)}
+          onClick={() => onRemove(index)}
           iconNode={<XIcon weight="bold" />}
+          size="sm"
         />
       </td>
     </tr>

@@ -1,10 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { CreateModalButtonProps } from './types';
 
@@ -64,17 +64,15 @@ export function CreateModalButton<TResolve extends Record<string, unknown>>({
     openDialog,
   ]);
 
-  const ButtonComponent =
-    buttonSize === 'sm' ? CompactActionButton : ActionButton;
-
   return (
-    <ButtonComponent
-      action={handleClick}
-      title={title}
+    <BaseButton
+      onClick={handleClick}
+      label={title}
       iconNode={iconNode}
       variant={variant}
       disabled={disabled}
       tooltip={tooltip}
+      size={buttonSize ?? 'lg'}
     />
   );
 }

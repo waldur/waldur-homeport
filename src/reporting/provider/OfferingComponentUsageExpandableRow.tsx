@@ -1,15 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { uniqueId } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { FC, useMemo, useState } from 'react';
-import {
-  Card,
-  Col,
-  Row,
-  ToggleButton,
-  ToggleButtonGroup,
-} from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
+
+import { SegmentedControl } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
@@ -132,26 +127,17 @@ export const OfferingComponentUsageExpandableRow: FC<
           <Card className="card-bordered">
             <Card.Body className="p-4">
               <div className="d-flex align-items-center justify-content-between gap-2 text-nowrap flex-wrap mb-4">
-                <ToggleButtonGroup
-                  type="radio"
-                  name={'period-' + uniqueId()}
-                  value={period}
-                  onChange={setPeriod}
+                <SegmentedControl<number>
                   aria-label={translate('Time period')}
-                >
-                  {[6, 12].map((m) => (
-                    <ToggleButton
-                      key={m}
-                      id={'tbg-' + m + uniqueId()}
-                      value={m}
-                      variant="outline-secondary"
-                      size="sm"
-                      className="px-4"
-                    >
-                      {translate('{month} months', { month: m })}
-                    </ToggleButton>
-                  ))}
-                </ToggleButtonGroup>
+                  size="sm"
+                  itemClassName="px-4"
+                  options={[6, 12].map((m) => ({
+                    value: m,
+                    label: translate('{month} months', { month: m }),
+                  }))}
+                  value={period}
+                  onValueChange={setPeriod}
+                />
                 {row.measured_unit && (
                   <span className="fs-7 text-muted">
                     {translate('Metric')}: {row.measured_unit}

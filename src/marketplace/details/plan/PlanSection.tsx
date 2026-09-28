@@ -73,12 +73,7 @@ const PlanCard = ({
         <Field
           label={translate('Description')}
           labelWidth={200}
-          value={
-            <PlanDescriptionButton
-              className="btn btn-sm btn-secondary"
-              planDescription={planDescription}
-            />
-          }
+          value={<PlanDescriptionButton planDescription={planDescription} />}
         />
       )}
 

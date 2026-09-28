@@ -1,10 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Offering } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const AddDocumentDialog = lazyComponent(() =>
   import('./AddDocumentDialog').then((module) => ({
@@ -31,12 +32,14 @@ export const AddDocumentButton = ({
     });
   };
   return (
-    <ActionButton
-      action={callback}
-      title={translate('Add document')}
+    <BaseButton
+      onClick={callback}
+      label={translate('Add document')}
       iconNode={<PlusCircleIcon weight="bold" />}
       disabled={disabled}
       tooltip={tooltip}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

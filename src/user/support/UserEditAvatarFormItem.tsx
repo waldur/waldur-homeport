@@ -2,11 +2,12 @@ import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { User } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import FormTable from '@/form/FormTable';
 import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { useUser } from '@/workspace/hooks';
 
 import { useUpdateUser } from './useUpdateUser';
@@ -49,7 +50,7 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
           input={{ value: image, onChange: (value) => setImage(value) } as any}
           extraActions={({ isChanged, isTooLarge }) =>
             isChanged || isLoading ? (
-              <CompactActionButton
+              <BaseButton
                 variant="primary"
                 iconRight
                 disabled={isTooLarge || disabled}
@@ -59,9 +60,10 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
                     : disabledReason
                 }
                 pending={isLoading}
-                action={() => callback({ image })}
-                title={translate('Save')}
+                onClick={() => callback({ image })}
+                label={translate('Save')}
                 iconNode={<UploadSimpleIcon weight="bold" />}
+                size="sm"
               />
             ) : null
           }

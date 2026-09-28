@@ -1,6 +1,7 @@
 import { Offering } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { useOfferingAccess } from './useOfferingAccess';
@@ -24,9 +25,9 @@ export const CardRequestAccessButton = ({
   }
 
   return (
-    <CompactSubmitButton
-      submitting={loading}
-      type="button"
+    <BaseButton
+      size="sm"
+      pending={loading}
       variant="text-secondary"
       disabled={disabled}
       onClick={handleRequestAccess}

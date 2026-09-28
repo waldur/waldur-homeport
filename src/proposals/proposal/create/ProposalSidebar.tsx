@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { Panel } from '@/core/Panel';
 import { FloatingSubmitButton } from '@/form/FloatingSubmitButton';
 import { SidebarProps } from '@/form/SidebarProps';
 import { TosNotification } from '@/form/TosNotification';
 import { translate } from '@/i18n';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
-import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
 
 interface CompletionPageSidebarProps extends SidebarProps {
@@ -88,14 +89,15 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             errors={submitErrors}
           />
 
-          <ActionButton
-            action={props.saveAsDraft}
-            title={translate('Save as draft')}
+          <BaseButton
+            onClick={props.saveAsDraft}
+            label={translate('Save as draft')}
             variant="secondary"
             className="w-100 mt-2"
             disabled={props.submitting}
             disabledReason={translate('Saving draft...')}
             pending={props.isSaving}
+            size="lg"
           />
           <TosNotification />
         </>

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { SubmitButton } from '@/form';
 import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
@@ -36,7 +36,8 @@ export const CustomerMediaPanel = (props: CustomerMediaPanelOwnProps) => {
                 size={64}
                 extraActions={({ isChanged, isTooLarge }) =>
                   isChanged || submitting ? (
-                    <CompactSubmitButton
+                    <SubmitButton
+                      size="sm"
                       submitting={submitting}
                       label={translate('Save')}
                       disabled={isTooLarge}

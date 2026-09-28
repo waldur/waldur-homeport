@@ -10,7 +10,7 @@ import {
   openstackPortsRetrieve,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
@@ -18,7 +18,6 @@ import { ResourceSummary } from '@/resource/summary/ResourceSummary';
 import { setToggled } from '@/table/actions';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
-import { ToolbarButton } from '@/table/ToolbarButton';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -194,9 +193,11 @@ export const TenantPortsList: FunctionComponent<{
       tableActions={
         <>
           {targetPortUuid && (
-            <ToolbarButton
+            <BaseButton
+              variant="tertiary"
+              size="lg"
               iconNode={<XCircleIcon weight="bold" />}
-              title={translate('Show all ports')}
+              label={translate('Show all ports')}
               onClick={clearPortFilter}
               className="me-2"
             />

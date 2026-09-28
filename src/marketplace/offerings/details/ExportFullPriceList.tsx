@@ -7,10 +7,11 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 import exportExcel from '@/table/exporters/excel';
 
 interface ExportFullPriceListProps {
@@ -82,11 +83,12 @@ export const ExportFullPriceList: FunctionComponent<
       {loading ? (
         <LoadingSpinnerSimple />
       ) : error ? null : components ? (
-        <ActionButton
+        <BaseButton
           variant="tertiary"
-          action={() => onExport(offering.name, components)}
+          onClick={() => onExport(offering.name, components)}
           iconNode={<DownloadSimpleIcon weight="bold" />}
-          title={translate('Export price list')}
+          label={translate('Export price list')}
+          size="lg"
         />
       ) : null}
     </div>

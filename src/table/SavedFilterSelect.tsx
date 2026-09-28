@@ -4,7 +4,8 @@ import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { WindowedSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -38,12 +39,13 @@ const Control = (props) => (
       {props.children}
     </components.Control>
     {Boolean(props.getValue()[0]) && (
-      <CompactIconButton
+      <BaseButton
         iconNode={<TrashIcon weight="bold" />}
         tooltip={translate('Delete filter')}
         onClick={(e) => props.remove(e, props.getValue()[0])}
         variant="text-danger"
         className="me-3"
+        size="sm"
       />
     )}
   </div>
@@ -53,12 +55,13 @@ const ListOption: FC<OptionProps & { remove }> = (props) => (
   <components.Option {...props}>
     <div className="d-flex justify-content-between align-items-center">
       {props.children}
-      <CompactIconButton
+      <BaseButton
         iconNode={<TrashIcon weight="bold" />}
         tooltip={translate('Delete filter')}
         onClick={(e) => props.remove(e, props.getValue()[0])}
         variant="text-danger"
         className="btn-remove"
+        size="sm"
       />
     </div>
   </components.Option>

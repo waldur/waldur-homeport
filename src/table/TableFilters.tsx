@@ -4,9 +4,10 @@ import { Col, Row, Stack } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
+import { BaseButton } from 'waldur-ui';
+
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { clearAllFilters } from './actions';
 import { TableFiltersMenu } from './TableFiltersMenu';
@@ -78,12 +79,13 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
       </Col>
       {!props.hideClearFilters && props.filtersStorage.length > 0 && (
         <Col xs="auto" className="align-self-start text-end">
-          <CompactActionButton
+          <BaseButton
             variant="text-secondary"
             className="btn-no-focus"
-            action={clearFilters}
+            onClick={clearFilters}
             iconNode={<XIcon weight="bold" />}
-            title={clearLabel}
+            label={clearLabel}
+            size="sm"
           />
         </Col>
       )}

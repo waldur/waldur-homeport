@@ -351,7 +351,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
                 submitting={submitting}
                 disabled={pristine || submitting}
                 label={translate('Save')}
-                className="btn btn-primary"
+                variant="primary"
               />
             </div>
           </form>

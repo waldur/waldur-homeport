@@ -7,6 +7,8 @@ import {
   scienceDomainsPresetsList,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -14,7 +16,6 @@ import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 
 const LoadPresetDialog = ({ resolve }) => {
   const { showSuccess } = useNotify();
@@ -97,10 +98,10 @@ export const ScienceDomainLoadPresetButton = ({ refetch }) => {
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      title={translate('Load preset')}
+    <BaseButton
+      label={translate('Load preset')}
       iconNode={<DownloadSimpleIcon weight="bold" />}
-      action={() => {
+      onClick={() => {
         openDialog(LoadPresetDialog, {
           resolve: { refetch },
         });

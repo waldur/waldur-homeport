@@ -89,7 +89,12 @@
     color: inherit;
   }
 
-  .list-card-actions .btn {
+  // Plain `button` tag, not `.btn`: both actions here (ViewOfferingButton,
+  // CardRequestAccessButton) render BaseButton, which doesn't carry the
+  // legacy Bootstrap `.btn` class — and may wrap its own <button> in an
+  // extra Tooltip span when `disabledReason` is set, so this can't assume
+  // the button is a direct child either.
+  .list-card-actions button {
     width: 100%;
     text-align: center;
   }

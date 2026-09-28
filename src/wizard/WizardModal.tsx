@@ -1,12 +1,13 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
+import { Tooltip, BaseButton } from 'waldur-ui';
+
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { wrapTooltip } from '@/table/ActionButton';
 
 import type { WizardStepProps } from './types';
 import { WizardStepIndicator } from './WizardStepIndicator';
@@ -40,6 +41,25 @@ interface WizardModalProps extends WizardStepProps {
 export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
   const isLastStep = props.step === props.steps.length - 1;
 
+  const submitButton = (
+    <SubmitButton
+      submitting={props.submitting}
+      label={props.submitLabel}
+      invalid={props.submitDisabled || props.loading || props.invalid}
+      className="min-w-125px"
+      data-testid="wizard-submit-btn"
+      // As iconNode, not children: children replace the label in
+      // SubmitButton, which left the Next button wordless.
+      iconNode={
+        props.loading ? (
+          <LoadingSpinnerSimple />
+        ) : !isLastStep ? (
+          <CaretRightIcon weight="bold" />
+        ) : null
+      }
+    />
+  );
+
   return (
     <form
       className="wizard"
@@ -55,46 +75,26 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
           ) : (
             <>
               {props.step > 0 && (
-                <SubmitButton
-                  submitting={false}
+                <BaseButton
                   variant="tertiary"
                   className="min-w-125px me-auto"
                   onClick={() => props.onPrev(props.values)}
-                  type="button"
                   label={translate('Back')}
                   iconNode={<CaretLeftIcon weight="bold" />}
-                  iconOnLeft
                   data-testid="wizard-back-btn"
+                  size="lg"
                 />
               )}
               <CloseDialogButton className="min-w-125px" />
               {typeof props.actions === 'function'
                 ? props.actions({ values: props.values })
                 : props.actions}
-              {wrapTooltip(
-                props.submitTooltip,
-                <SubmitButton
-                  submitting={props.submitting}
-                  label={props.submitLabel}
-                  invalid={
-                    props.submitDisabled || props.loading || props.invalid
-                  }
-                  className="btn-icon-right min-w-125px"
-                  data-testid="wizard-submit-btn"
-                  // As iconNode, not children: children replace the label in
-                  // SubmitButton, which left the Next button wordless.
-                  iconNode={
-                    props.loading ? (
-                      <span className="svg-icon svg-icon-2">
-                        <LoadingSpinnerSimple />
-                      </span>
-                    ) : !isLastStep ? (
-                      <span className="svg-icon svg-icon-2">
-                        <CaretRightIcon weight="bold" />
-                      </span>
-                    ) : null
-                  }
-                />,
+              {props.submitTooltip ? (
+                <Tooltip label={props.submitTooltip}>
+                  <span>{submitButton}</span>
+                </Tooltip>
+              ) : (
+                submitButton
               )}
             </>
           )

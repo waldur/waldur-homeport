@@ -11,16 +11,7 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdown } from './ActionsDropdown';
 
 /**
- * The row-actions menu — the single highest-leverage component in the
- * Metronic/react-bootstrap -> Radix dropdown migration: `ActionsDropdown`
- * is reachable from ~184 files and `ActionItem` from ~520, so rewriting
- * these two internally converts the bulk of the app's dropdowns without
- * touching a call site.
- *
- * These stories exist to make that rewrite verifiable: they render the
- * menu open so its computed styles (item padding, font, hover fill, icon
- * sizing, panel radius/shadow) can be measured and compared against the
- * Bootstrap values recorded in docs/tailwind-shadcn-migration-notes.md.
+ * ActionsDropdown renders row-actions or toolbar dropdown menus.
  */
 const meta: Meta<typeof ActionsDropdown> = {
   title: 'Navigation/ActionsDropdown',
@@ -81,6 +72,23 @@ export const Labeled: Story = {
   ),
 };
 
+/**
+ * The labelled variant on a filled variant (`primary`), not just the
+ * default `tertiary` — the caret's own color used to come from `.svg-icon`'s
+ * fixed muted-gray fill, invisible against `tertiary`'s already-dark text
+ * but a real mismatch against `primary`'s white text once the toggle
+ * stopped emitting `.btn` (confirmed live on ProviderCard's "Enabled"
+ * toggle). Exists to keep that regression visible here instead of only on
+ * a real admin page behind auth.
+ */
+export const LabeledPrimary: Story = {
+  render: () => (
+    <ActionsDropdown labeled label="Enabled" variant="primary">
+      {items}
+    </ActionsDropdown>
+  ),
+};
+
 /** A disabled action carrying its explanatory tooltip, plus a staff-only row. */
 export const DisabledAndStaffItems: Story = {
   render: () => (
@@ -132,4 +140,23 @@ export const LoadingState: Story = {
 
 export const EmptyState: Story = {
   render: () => <ActionsDropdown labeled label="Actions" />,
+};
+
+/** Toggle sizes for labeled dropdowns. */
+export const LabeledSizes: Story = {
+  render: () => (
+    <div className="d-flex align-items-center gap-4">
+      {(['sm', 'md', 'lg'] as const).map((size) => (
+        <ActionsDropdown
+          key={size}
+          labeled
+          label={size}
+          size={size}
+          className="w-auto"
+        >
+          {items}
+        </ActionsDropdown>
+      ))}
+    </div>
+  ),
 };

@@ -14,10 +14,8 @@ import { Accordion, AccordionContext } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 
-import { RemoveFilterBadgeButton } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton, RemoveFilterBadgeButton } from 'waldur-ui';
 
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { PopoverMenuContent } from '@/navigation/NavMenu';
 
@@ -474,20 +472,19 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
             <div className="menu-item">
               <div className="menu-content filter-footer pb-0">
                 <div className="d-flex gap-4">
-                  <SubmitButton
-                    submitting={false}
+                  <BaseButton
                     variant="tertiary"
                     className="flex-grow-1 w-50"
                     onClick={closeMenu}
-                    type="button"
                     label={translate('Cancel')}
+                    size="lg"
                   />
-                  <SubmitButton
-                    submitting={false}
+                  <BaseButton
                     className="flex-grow-1 w-50"
                     onClick={() => onApply()}
-                    type="button"
                     label={translate('Apply')}
+                    variant="primary"
+                    size="lg"
                   />
                 </div>
               </div>
@@ -546,20 +543,19 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
                 {open && (
                   <div className="menu-content filter-footer pb-0">
                     <div className="d-flex gap-4">
-                      <SubmitButton
-                        submitting={false}
+                      <BaseButton
                         variant="tertiary"
                         className="flex-grow-1 w-50"
                         onClick={() => setOpen(false)}
-                        type="button"
                         label={translate('Cancel')}
+                        size="lg"
                       />
-                      <SubmitButton
-                        submitting={false}
+                      <BaseButton
                         className="flex-grow-1 w-50"
                         onClick={() => onApply()}
-                        type="button"
                         label={translate('Apply')}
+                        variant="primary"
+                        size="lg"
                       />
                     </div>
                   </div>

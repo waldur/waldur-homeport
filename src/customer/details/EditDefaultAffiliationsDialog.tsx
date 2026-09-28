@@ -8,8 +8,9 @@ import {
   customersUpdateDefaultAffiliations,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getAllPages } from '@/core/api';
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -167,7 +168,7 @@ export const EditDefaultAffiliationsDialog: FunctionComponent<
         <div className="d-flex gap-2">
           <BaseButton
             size="sm"
-            variant="outline-primary"
+            variant="secondary"
             disabled={bulkLoading}
             disabledReason={
               bulkLoading ? translate('Loading affiliations...') : undefined
@@ -178,7 +179,14 @@ export const EditDefaultAffiliationsDialog: FunctionComponent<
           />
           <BaseButton
             size="sm"
-            variant="outline-secondary"
+            // Was "outline-secondary" — measured via getComputedStyle
+            // against the real compiled CSS: border/text color
+            // rgb(241,247,239), a near-white pale mint with no visible
+            // contrast against this dialog's white background. A
+            // pre-existing rendering bug, not a variant this migration
+            // should faithfully reproduce; "tertiary" (neutral, readable
+            // border+text) is the closest reasonable design-token stand-in.
+            variant="tertiary"
             disabled={bulkLoading || selectedUuids.size === 0}
             disabledReason={
               selectedUuids.size === 0

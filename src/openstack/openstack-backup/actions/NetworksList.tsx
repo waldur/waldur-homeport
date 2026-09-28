@@ -2,8 +2,9 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Field } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 import {
   BackupFormChoices,
@@ -16,22 +17,24 @@ import {
 type NetworkChoices = Pick<BackupFormChoices, 'subnets' | 'floatingIps'>;
 
 const AddButton = ({ onClick, disabled }) => (
-  <ActionButton
-    action={onClick}
+  <BaseButton
+    onClick={onClick}
     disabled={disabled}
     disabledReason={translate('No available subnets')}
-    title={translate('Add')}
+    label={translate('Add')}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"
+    size="lg"
   />
 );
 
 const DeleteButton = ({ onClick }) => (
-  <ActionButton
-    action={onClick}
+  <BaseButton
+    onClick={onClick}
     tooltip={translate('Delete')}
     iconNode={<TrashIcon weight="bold" />}
     variant="text-secondary"
+    size="lg"
   />
 );
 

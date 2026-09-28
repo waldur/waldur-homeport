@@ -217,7 +217,8 @@ const RemoteSyncRenderer = ({
               disabled={Boolean(invalid || pristine || connecting || error)}
               submitting={submitting}
               label={isEdit ? translate('Save') : translate('Create')}
-              className="btn btn-primary w-175px"
+              variant="primary"
+              className="w-175px"
             />
           </>
         }

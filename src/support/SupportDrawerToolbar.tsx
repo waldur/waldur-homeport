@@ -1,7 +1,8 @@
 import { ArrowsInSimpleIcon, ArrowsOutSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { MediumIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { DrawerCloseButton } from '@/drawer/DrawerCloseButton';
 import { useDrawerExpand } from '@/drawer/useDrawerExpand';
 import { translate } from '@/i18n';
@@ -13,7 +14,7 @@ export const SupportDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
     <>
       {/* Desktop: expand/collapse */}
       <span className="d-none d-lg-inline-flex">
-        <MediumIconButton
+        <BaseButton
           iconNode={
             expanded ? (
               <ArrowsInSimpleIcon weight="bold" />
@@ -28,7 +29,8 @@ export const SupportDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
           }
           onClick={toggleExpand}
           variant="tertiary-ghost"
-          tooltipPlacement="bottom"
+          tooltipSide="bottom"
+          size="md"
         />
       </span>
       <DrawerCloseButton close={close} />

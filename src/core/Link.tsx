@@ -1,7 +1,7 @@
 import { useSref } from '@uirouter/react';
-import classNames from 'classnames';
 import React, { forwardRef } from 'react';
-import { Variant } from 'react-bootstrap/esm/types';
+
+import { ButtonVariant, buttonVariants, cn, ButtonSize } from 'waldur-ui';
 
 import { isStateVisible } from './stateVisibility';
 
@@ -10,7 +10,11 @@ interface LinkProps {
   children?: React.ReactNode;
   state: string;
   params?: object;
-  buttonVariant?: Variant;
+  buttonVariant?: ButtonVariant;
+  /** Only meaningful alongside `buttonVariant`. Defaults to 'md', matching BaseButton. */
+  buttonSize?: ButtonSize;
+  /** Only meaningful alongside `buttonVariant`. Square, icon-sized hit target instead of content-driven width. */
+  buttonIconOnly?: boolean;
   className?: string;
   target?: string;
   onClick?: (e?) => void;
@@ -33,6 +37,8 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       onClick,
       target,
       buttonVariant,
+      buttonSize,
+      buttonIconOnly,
       className,
       ...rest
     },
@@ -65,11 +71,16 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
           onClick?.(e);
           e.preventDefault();
         }}
-        className={classNames(
-          buttonVariant && 'btn btn-' + buttonVariant,
+        className={cn(
+          buttonVariant &&
+            buttonVariants({
+              variant: buttonVariant,
+              size: buttonSize,
+              iconOnly: buttonIconOnly,
+            }),
           className,
           typeof (label || children) === 'string' &&
-            !(className || '').includes('btn') &&
+            !buttonVariant &&
             'text-anchor',
         )}
         role={onClick ? 'button' : undefined}

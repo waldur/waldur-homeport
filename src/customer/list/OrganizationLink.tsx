@@ -1,7 +1,8 @@
 import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
-import { Variant } from 'react-bootstrap/esm/types';
+
+import { ButtonVariant, buttonVariants, ButtonSize } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { useUser } from '@/workspace/hooks';
@@ -11,7 +12,10 @@ interface OwnProps {
   className?: string;
   onClick?(): void;
   asButton?: boolean;
-  buttonVariant?: Variant;
+  buttonVariant?: ButtonVariant;
+  /** Size and shape of the link when it renders as a button (`buttonVariant`). */
+  buttonSize?: ButtonSize;
+  buttonIconOnly?: boolean;
 }
 
 const PERMISSION_MAP = {
@@ -77,6 +81,8 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
   className,
   asButton,
   buttonVariant,
+  buttonSize,
+  buttonIconOnly,
   children,
 }) => {
   const linkState = useOrganizationLinkState(uuid);
@@ -89,6 +95,8 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
         onClick={onClick}
         className={className}
         buttonVariant={buttonVariant}
+        buttonSize={buttonSize}
+        buttonIconOnly={buttonIconOnly}
       >
         {children}
       </Link>
@@ -102,7 +110,12 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
         type="button"
         className={classNames(
           className,
-          buttonVariant && `btn btn-${buttonVariant}`,
+          buttonVariant &&
+            buttonVariants({
+              variant: buttonVariant,
+              size: buttonSize,
+              iconOnly: buttonIconOnly,
+            }),
         )}
         disabled
       >

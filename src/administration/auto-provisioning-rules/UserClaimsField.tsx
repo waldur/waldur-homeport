@@ -4,7 +4,8 @@ import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { StringField } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import { translate } from '@/i18n';
@@ -61,11 +62,12 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
                   </Field>
                 </td>
                 <td>
-                  <IconButton
+                  <BaseButton
                     iconNode={<TrashIcon weight="bold" />}
                     tooltip={translate('Remove')}
                     onClick={() => fields.remove(index)}
                     variant="danger"
+                    size="lg"
                   />
                 </td>
               </tr>
@@ -75,11 +77,12 @@ const ClaimRows: FC<FieldArrayRenderProps<ClaimRow, HTMLElement>> = ({
       </table>
     )}
     <div>
-      <IconButton
+      <BaseButton
         iconNode={<PlusCircleIcon weight="bold" />}
         tooltip={translate('Add claim')}
         onClick={() => fields.push({ claim: '', values: [] })}
         variant="tertiary"
+        size="lg"
       />
     </div>
     {typeof meta.error === 'string' && (

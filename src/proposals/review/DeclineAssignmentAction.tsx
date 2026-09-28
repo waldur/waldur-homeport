@@ -2,9 +2,10 @@ import { XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { assignmentItemsDecline, MyAssignmentItem } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface DeclineAssignmentActionProps {
   item: MyAssignmentItem;
@@ -41,12 +42,13 @@ export const DeclineAssignmentAction: FC<DeclineAssignmentActionProps> = ({
   });
 
   return (
-    <CompactActionButton
-      action={mutate}
-      title={translate('Decline')}
+    <BaseButton
+      onClick={mutate}
+      label={translate('Decline')}
       iconNode={<XIcon weight="bold" />}
-      variant="outline-danger"
+      variant="danger"
       pending={isPending}
+      size="sm"
     />
   );
 };

@@ -9,11 +9,10 @@ import {
   useRef,
 } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { formatFilesize } from '@/core/utils';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 
 import { FormField } from './types';
@@ -112,55 +111,45 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             : translate('Upload an image JPG or PNG')}
         </p>
         <div className="d-flex gap-2 mb-4">
-          {/* `.btn.disabled` drops pointer events, so the tooltip trigger has
-              to wrap the label rather than sit inside it. */}
-          <Tooltip label={props.disabled ? props.disabledReason : null}>
-            <span className="d-inline-block">
-              <label
-                className={classNames(
-                  'btn btn-tertiary btn-sm btn-icon-right',
-                  props.disabled && 'disabled',
-                )}
-                data-image-input-action="change"
-              >
-                {translate('Change')}
-                <span className="svg-icon svg-icon-5">
-                  <PencilSimpleIcon weight="bold" />
-                </span>
-                <input
-                  ref={inputRef}
-                  type="file"
-                  name={input.name}
-                  accept=".png, .jpg, .jpeg"
-                  onChange={(event) => changeImage(event.target.files[0])}
-                  className="d-none"
-                  disabled={props.disabled}
-                />
-              </label>
-            </span>
-          </Tooltip>
-          <CompactSubmitButton
-            submitting={false}
+          <BaseButton
             variant="tertiary"
-            className="btn-icon-right"
+            size="sm"
+            data-image-input-action="change"
+            onClick={() => inputRef.current?.click()}
+            disabled={props.disabled}
+            disabledReason={props.disabledReason}
+            iconNode={<PencilSimpleIcon weight="bold" />}
+            label={translate('Change')}
+          />
+          <input
+            ref={inputRef}
+            type="file"
+            name={input.name}
+            accept=".png, .jpg, .jpeg"
+            onChange={(event) => changeImage(event.target.files[0])}
+            className="d-none"
+            disabled={props.disabled}
+          />
+          <BaseButton
+            size="sm"
+            variant="tertiary"
             onClick={() => changeImage(initialValue)}
             disabled={props.disabled}
             disabledReason={props.disabledReason}
-            type="button"
             label={translate('Cancel')}
             iconNode={<XIcon weight="bold" />}
+            iconRight
             data-image-input-action="cancel"
           />
-          <CompactSubmitButton
-            submitting={false}
+          <BaseButton
+            size="sm"
             variant="tertiary"
-            className="btn-icon-right"
             onClick={() => changeImage(null)}
             disabled={props.disabled}
             disabledReason={props.disabledReason}
-            type="button"
             label={translate('Remove')}
             iconNode={<TrashIcon weight="bold" />}
+            iconRight
             data-image-input-action="remove"
           />
           {props.extraActions

@@ -114,7 +114,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
                     ? 'primary'
                     : provider?.is_active === false
                       ? 'warning'
-                      : 'dark'
+                      : 'tertiary'
                 }
                 title={
                   provider?.is_active === true

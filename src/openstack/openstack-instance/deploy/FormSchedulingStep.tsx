@@ -7,14 +7,13 @@ import {
   openstackServerGroupsList,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
@@ -101,11 +100,12 @@ export const FormSchedulingStep = (props: FormStepProps) => {
             verboseName={translate('server groups')}
             tableActions={
               serverGroup ? (
-                <ActionButton
-                  action={clearSelection}
-                  title={translate('Clear')}
+                <BaseButton
+                  onClick={clearSelection}
+                  label={translate('Clear')}
                   iconNode={<XIcon weight="bold" />}
                   variant="text-primary"
+                  size="lg"
                 />
               ) : null
             }

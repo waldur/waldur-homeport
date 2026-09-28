@@ -1,8 +1,8 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
-import { SubmitButton } from '@/form/SubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface RefreshButtonProps {
@@ -17,19 +17,14 @@ export const RefreshButton = ({
   refetch,
   isLoading,
   className,
-}: RefreshButtonProps) => {
-  const ButtonComponent = size === 'sm' ? CompactSubmitButton : SubmitButton;
-
-  return (
-    <ButtonComponent
-      submitting={isLoading}
-      type="button"
-      variant="tertiary"
-      className={classNames('min-w-100px', className)}
-      onClick={!isLoading ? refetch : undefined}
-      label={translate('Refresh')}
-      iconNode={<ArrowClockwiseIcon weight="bold" />}
-      iconOnLeft
-    />
-  );
-};
+}: RefreshButtonProps) => (
+  <BaseButton
+    pending={isLoading}
+    size={size}
+    variant="tertiary"
+    className={classNames('min-w-100px', className)}
+    onClick={!isLoading ? refetch : undefined}
+    label={translate('Refresh')}
+    iconNode={<ArrowClockwiseIcon weight="bold" />}
+  />
+);

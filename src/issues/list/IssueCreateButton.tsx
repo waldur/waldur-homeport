@@ -1,11 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { ISSUE_CREATION_FORM_ID } from '@/issues/create/constants';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const IssueCreateDialog = lazyComponent(() =>
   import('@/issues/create/IssueCreateDialog').then((module) => ({
@@ -28,9 +29,9 @@ export const IssueCreateButton: FunctionComponent<IssueCreateButtonProps> = (
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      title={translate('Create')}
-      action={() => {
+    <BaseButton
+      label={translate('Create')}
+      onClick={() => {
         openDialog(IssueCreateDialog, {
           resolve,
           dialogClassName: 'modal-dialog-centered mw-650px',
@@ -39,6 +40,7 @@ export const IssueCreateButton: FunctionComponent<IssueCreateButtonProps> = (
       }}
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
+      size="lg"
     />
   );
 };

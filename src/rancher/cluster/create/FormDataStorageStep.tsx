@@ -2,12 +2,13 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback } from 'react';
 import { FieldArray } from 'react-final-form-arrays';
 
+import { BaseButton } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { RancherFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { ActionButton } from '@/table/ActionButton';
 import { VStepperFormStepCard } from '@/wizard';
 
 import {
@@ -16,7 +17,6 @@ import {
 } from './FormNodeStorageTable';
 import { useFormNodes, useFormTenant, useVolumeDataLoader } from './utils';
 import { VolumeMountPointGroup } from './VolumeMountPointGroup';
-
 import './FormDataStorageStep.scss';
 
 const renderDataVolumeRows = ({
@@ -55,14 +55,15 @@ const renderDataVolumeRows = ({
         ))}
       <tr>
         <td colSpan={4}>
-          <ActionButton
+          <BaseButton
             variant="tertiary"
             className="text-nowrap"
-            action={() =>
+            onClick={() =>
               fields.push({ size: 1, volume_type: defaultVolumeType })
             }
             iconNode={<PlusIcon weight="bold" />}
-            title={translate('Add data volume')}
+            label={translate('Add data volume')}
+            size="lg"
           />
         </td>
       </tr>

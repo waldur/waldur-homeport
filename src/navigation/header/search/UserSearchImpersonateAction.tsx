@@ -2,9 +2,10 @@ import { EyeIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, MouseEvent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { useImpersonate } from '@/user/support/useImpersonate';
 import { useUser } from '@/workspace/hooks';
 
@@ -58,12 +59,13 @@ export const UserSearchImpersonateAction: FunctionComponent<
   };
 
   return (
-    <CompactActionButton
-      title={translate('Impersonate')}
-      action={handleClick}
+    <BaseButton
+      label={translate('Impersonate')}
+      onClick={handleClick}
       iconNode={<EyeIcon weight="bold" />}
       pending={isPending}
       variant="text-primary"
+      size="sm"
     />
   );
 };

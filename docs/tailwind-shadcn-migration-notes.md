@@ -1,6 +1,9 @@
 # Tailwind & shadcn UI Architecture
 
-Architectural reference and design system manual for Tailwind CSS v4, shadcn UI, and Radix UI in Waldur Homeport. Documents runtime framework coexistence, design tokens, component architecture, styling conventions, and linting guardrails.
+Architectural reference and design system manual for Tailwind CSS v4, shadcn UI, and Radix UI in Waldur Homeport. Documents runtime framework coexistence, design tokens, component architecture, styling conventions, the button migration and its aftermath, and linting guardrails.
+
+> [!NOTE]
+> **Status**: every button in the app is rendered by `BaseButton` (or by `buttonVariants()` on an element that cannot be a `BaseButton`), and the legacy Bootstrap/Metronic `.btn` CSS has been deleted. The remaining Bootstrap-backed UI is layout, forms, tables, modals and the dropdown/menu shells listed under [Component Systems Overview](#component-systems-overview). New UI is built on `waldur-ui`.
 
 ---
 
@@ -22,18 +25,20 @@ Architectural reference and design system manual for Tailwind CSS v4, shadcn UI,
    - [Badge](#badge)
    - [Tooltip](#tooltip)
    - [Popover](#popover)
-   - [BaseButton](#basebutton)
+   - [Buttons](#buttons)
    - [Sidebar & Mobile Sheet](#sidebar-mobile-sheet)
    - [Content Drawer (`#kt_drawer`)](#content-drawer-kt-drawer)
    - [Dropdown & Menu System Map](#dropdown-menu-system-map)
    - [ActionsDropdown & ActionItem](#actionsdropdown-actionitem)
    - [NavMenu](#navmenu)
-3. [Linting & Guardrails](#linting-guardrails)
+3. [Legacy Button CSS Retirement](#legacy-button-css-retirement)
+4. [Linting & Guardrails](#linting-guardrails)
    - [Restricted Imports](#restricted-imports)
    - [Custom ESLint Rules Matrix](#custom-eslint-rules-matrix)
-4. [Storybook & Testing Toolchain](#storybook-testing-toolchain)
+5. [Storybook & Testing Toolchain](#storybook-testing-toolchain)
    - [Storybook Environment & Vitest](#storybook-environment-vitest)
-   - [Visual Parity Test Suite](#visual-parity-test-suite)
+   - [Visual E2E Specs](#visual-e2e-specs)
+   - [Retired Visual Parity Suite](#retired-visual-parity-suite)
    - [Testing Gotchas & Pitfalls](#testing-gotchas-pitfalls)
 
 ---
@@ -47,29 +52,35 @@ Waldur Homeport operates on two active UI component patterns:
 1. **Modern Tailwind / Radix Primitives (`packages/ui`, exported as `waldur-ui`)**
    - Built with pure Tailwind v4 utilities and CSS design tokens from `packages/design-tokens`.
    - Free of all Bootstrap and Metronic classes, SCSS variables, and runtime mixins.
-   - Includes `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `FeaturedIcon`, `StatusPill`, `CopyButton`, `Card`, and `LoadingSpinner`.
+   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `DropdownMenu`, `Switch`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, and `LoadingSpinner`.
+   - Exports `buttonVariants()`, `ButtonVariant` and `ButtonSize` so elements that cannot be a `BaseButton` (links, Radix triggers that need a specific child shape) still get the exact same classes.
 
 2. **Transitional Shells (Radix Engine with Themed Skins)**
    - Used where extensive surface area requires maintaining existing container styling while leveraging accessible Radix primitives:
      - `ActionsDropdown.tsx` / `ActionItem.tsx`: Radix `DropdownMenu` and `Popover` driving standard action menus.
      - `NavMenu.tsx`: Radix `DropdownMenu` driving application chrome (header dropdowns, language picker).
      - `#kt_drawer` (`DrawerRoot.tsx`): Radix `Dialog` driving slide-over content panels.
+   - These still wear Bootstrap/Metronic panel classes (`.dropdown-menu`, `.menu-sub-dropdown`); only their _buttons_ have moved to `waldur-ui`.
 
 ---
 
 ### Component Standards & Usage Guide
 
-| UI Element             | Standard Component          | Package          | Usage & Styling Notes                                  | Prohibited Imports                            |
-| :--------------------- | :-------------------------- | :--------------- | :----------------------------------------------------- | :-------------------------------------------- |
-| **Alert / Banner**     | `AlertItem`                 | `waldur-ui`      | Pure Tailwind, `--surface-card-border`, 5 variants     | `react-bootstrap` `Alert`                     |
-| **Badge / Pill**       | `Badge`                     | `waldur-ui`      | 15 variants × 3 tones, structural `border-[1px]`       | `react-bootstrap` `Badge`                     |
-| **Tooltip**            | `Tooltip`                   | `waldur-ui`      | Radix Tooltip (hover/focus) + Popover (click fallback) | `react-bootstrap` `Tooltip`, `OverlayTrigger` |
-| **Popover**            | `Popover`, `PopoverContent` | `waldur-ui`      | Radix Popover with `--surface-card-*` tokens           | `react-bootstrap` `Popover`                   |
-| **Sidebar Navigation** | `Sidebar`, `Sheet`          | `waldur-ui`      | Collapsible desktop rail + mobile Radix Sheet          | Metronic sidebar JS                           |
-| **Button**             | `BaseButton` / wrappers     | `@/core/buttons` | Inset `box-shadow` border, semantic button tokens      | Direct `react-bootstrap` `Button`             |
-| **Table Actions**      | `ActionsDropdown`           | `@/table`        | Radix DropdownMenu with keyboard navigation            | `react-bootstrap` `DropdownButton`            |
-| **Header Chrome Menu** | `NavMenu`                   | `@/navigation`   | Radix DropdownMenu with responsive hover triggers      | N/A                                           |
-| **Slide-Over Drawer**  | `DrawerRoot`                | `@/drawer`       | Radix Dialog with CSS keyframe transitions             | N/A                                           |
+| UI Element                    | Standard Component          | Package        | Usage & Styling Notes                                                                        | Prohibited                                                  |
+| :---------------------------- | :-------------------------- | :------------- | :------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
+| **Alert / Banner**            | `AlertItem`                 | `waldur-ui`    | Pure Tailwind, `--surface-card-border`, 5 variants                                           | `react-bootstrap` `Alert`                                   |
+| **Badge / Pill**              | `Badge`                     | `waldur-ui`    | 15 variants × 3 tones, structural `border-[1px]`                                             | `react-bootstrap` `Badge`                                   |
+| **Tooltip**                   | `Tooltip`                   | `waldur-ui`    | Radix Tooltip (hover/focus) + Popover (click fallback)                                       | `react-bootstrap` `Tooltip`, `OverlayTrigger`               |
+| **Popover**                   | `Popover`, `PopoverContent` | `waldur-ui`    | Radix Popover with `--surface-card-*` tokens                                                 | `react-bootstrap` `Popover`                                 |
+| **Button**                    | `BaseButton`                | `waldur-ui`    | 12 variants × 3 sizes, inset `box-shadow` border, outline focus ring, semantic button tokens | `react-bootstrap` `Button`, hand-written `btn` class markup |
+| **Link styled as button**     | `Link` with `buttonVariant` | `@/core/Link`  | Same classes as `BaseButton` via `buttonVariants()`; keeps anchor semantics and routing      | `<a className="btn …">`                                     |
+| **Mutually exclusive choice** | `SegmentedControl`          | `waldur-ui`    | Radix RadioGroup, `neutral` / `brand` variants, button sizes                                 | `react-bootstrap` `ToggleButtonGroup`, `btn-group` markup   |
+| **Sidebar Navigation**        | `Sidebar`, `Sheet`          | `waldur-ui`    | Collapsible desktop rail + mobile Radix Sheet                                                | Metronic sidebar JS                                         |
+| **Table Actions**             | `ActionsDropdown`           | `@/table`      | Radix DropdownMenu with keyboard navigation                                                  | `react-bootstrap` `DropdownButton`                          |
+| **Header Chrome Menu**        | `NavMenu`                   | `@/navigation` | Radix DropdownMenu with responsive hover triggers                                            | N/A                                                         |
+| **Slide-Over Drawer**         | `DrawerRoot`                | `@/drawer`     | Radix Dialog with CSS keyframe transitions                                                   | N/A                                                         |
+
+The _Prohibited_ column is convention; the subset that lint enforces is listed under [Linting & Guardrails](#linting-guardrails) (`ToggleButtonGroup` and `btn-group` markup are not).
 
 ---
 
@@ -311,13 +322,29 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ---
 
-### BaseButton
+### Buttons
 
-`packages/ui/src/BaseButton.tsx`.
+Three primitives in `waldur-ui` (`packages/ui/src`) and `Link` in `@/core/Link` make up the application's unified button architecture:
 
-- **Inset Box-Shadow Border**: A physical CSS `border` participates in `border-box` layout sizing. At a 13px root font size, fractional padding chains cause subpixel anti-aliasing variations. `BaseButton` uses an inset `box-shadow` for borders (`box-shadow: inset 0 0 0 1px ...`) to preserve pixel-perfect dimensions without shifting layout.
-- **`:focus` vs. `:focus-visible`**: Uses `:focus` to match standard ring behavior (visible on click and keyboard navigation). `active:shadow-none` suppresses the ring while actively pressed.
-- **State Token Matrix**: Focus rings, hover states, and active pressed colors resolve to dedicated tokens in `buttonColors.css`.
+| Primitive                     | Role & Use Case                                                                    | Package / Location |
+| :---------------------------- | :--------------------------------------------------------------------------------- | :----------------- |
+| `BaseButton`                  | Standard action buttons across dialogs, tables, and page headers                   | `waldur-ui`        |
+| `buttonVariants()`            | Shared CVA styling applied to non-button elements (router links, dropdown toggles) | `waldur-ui`        |
+| `SegmentedControl`            | Mutually exclusive view switchers (Radix RadioGroup)                               | `waldur-ui`        |
+| `Link` (with `buttonVariant`) | State-based router navigation styled with button aesthetics                        | `@/core/Link`      |
+
+`ButtonVariant` and `ButtonSize` are derived directly from the `cva` definition (`VariantProps<typeof buttonVariants>`), guaranteeing types stay synchronized with rendered classes.
+
+#### Architectural Highlights
+
+- **Integer Heights & Inset Borders**: Decoupled from physical CSS `border-box` calculations via `shadow-[inset_0_0_0_1px_var(...)]`, guaranteeing exact heights: 28px (`sm`), 36px (`md`, default), and 44px (`lg`).
+- **Direct Tooltip Integration**: `buttonVariants` does not declare `disabled:pointer-events-none`; instead, it pairs `disabled:cursor-not-allowed` with matching `data-disabled:*` styles. `<BaseButton>` passes `data-disabled` and wraps `<button>` inside `<Tooltip>` with **zero wrapper `<span>` elements**, eliminating flexbox alignment bugs (`self-center`, `w-100`).
+- **Outline Focus Rings**: Focus indicators use native CSS `outline` (`focus-visible:[outline:2px_solid_var(...)]`) for forced-colors compatibility and resistance to container resets.
+- **Toggles in `ActionsDropdown`**: Dropdown toggles render a direct `<button>` with `buttonVariants()` (rather than `BaseButton`) so the rotating caret (`rotate-toggle-180`) remains an immediate child for CSS animation.
+- **SegmentedControl**: Built on Radix RadioGroup (<kbd>←</kbd>/<kbd>→</kbd> select, single <kbd>Tab</kbd> stop) with `inline-flex self-center` preventing layout stretching.
+
+> [!TIP]
+> **Authoritative Guide**: For complete variant tokens, full prop specifications, icon sizing rules, dropdown toggle architecture, and the call-site conversion guide, see the dedicated [Button UI Guide](button-ui-guide.md).
 
 ---
 
@@ -367,6 +394,9 @@ Radix's `Slot` clones trigger elements and attaches positioning refs and event h
 
 - **Keyboard Highlight Bridge**: Bootstrap targets `.dropdown-item:hover, .dropdown-item:focus`. Radix manages focus and sets `[data-highlighted]`. `_dropdown.scss` maps `[data-highlighted]` onto Bootstrap's hover treatment so arrow-key navigation displays the active highlight.
 - **Isolated Row Testing**: Exported helper `inActionsMenu(children)` wraps action rows in a headless Radix Menu for Vitest unit tests without needing an entire table harness.
+- **Toggle buttons use `buttonVariants()`, not `BaseButton`**: `TableDropdownToggle` / `AddDropdownToggle` in this file and `Toggle` in `ActionDropdownButton.tsx` render a raw `<button>` carrying `buttonVariants()` classes. The caret span (`rotate-toggle-180`) must be a _direct_ child of the button for `_dropdown.scss`'s `.dropdown-toggle[data-state='open'] > .rotate-toggle-180` selector, and `BaseButton` wraps `iconNode` in an extra span. Their icons are sized with the Phosphor `size` prop (16.25px `sm`, 19.5px otherwise) rather than a `.svg-icon` wrapper.
+- **Classes the toggles keep**: `dropdown-toggle` and `no-arrow`, because `.disabled-view` and `custom/_table.scss` still key off the literal `dropdown-toggle` class, and — on the icon-only toggle — a bare `btn-icon` marker, which is inert for styling but is the other half of `.disabled-view`'s `.dropdown-toggle.btn-icon { display: none }` rule.
+- **Panel still on Bootstrap**: the menu panel (`.dropdown-menu` / `.dropdown-item`) is unchanged; only the trigger moved to `waldur-ui` tokens.
 
 ---
 
@@ -380,90 +410,105 @@ Radix's `Slot` clones trigger elements and attaches positioning refs and event h
 
 ---
 
+## Legacy Button CSS Retirement
+
+Once no element rendered a literal `.btn` class, the Bootstrap/Metronic button CSS was deleted.
+
+### Removed
+
+- `@import 'bootstrap/scss/buttons'` and Metronic's `core/components/buttons/_theme.scss`.
+- The `.btn` portion of `core/components/buttons/_base.scss`, the button-variant mixins (`mixins/_buttons.scss`), the `$button-variants` map and `$btn-extended-variants`.
+- The `.btn` block of `custom/_buttons.scss`, plus every compound `.btn …` rule in `custom/_base`, `_content`, `_modal`, `_table`, core `_nav` and `_print-mode`, `PageBarTabs.scss`, `PublicOfferingPricing.scss` and the glass/neumorphism layout sheets.
+- Earlier: `.btn-group` (with `@import 'bootstrap/scss/button-group'`), replaced by `SegmentedControl`, and `ToolbarButton`.
+
+**How it was verified**: the compiled stylesheet (light and dark) was diffed before and after. About 9,000 rules disappeared, every one with `.btn` in its selector; nothing else changed, and nothing new appeared. Deleting CSS this way is safe only because the rules were _compound_ with `.btn` — a selector such as `.btn.btn-icon.btn-sm` cannot match an element without the literal class. Repeat the diff (fetch the compiled sheet from the dev server with `?direct`, then compare rules with `postcss`) before deleting more.
+
+### Kept
+
+These do not depend on `.btn`:
+
+| Class                                             | Why it stays                                                                                                                                                                                                                      |
+| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.btn-no-focus`                                   | Standalone helper in `core/components/buttons/_base.scss` that callers pass as a plain `className` to a `BaseButton`. Removes the box-shadow glow only; `BaseButton`'s focus ring is an outline, so it survives. |
+| `.btn-nav-item`                                   | Header icon buttons (`custom/_nav.scss`)                                                                                                                                                                                          |
+| `.btn-close`                                      | Bootstrap's modal close control (`bootstrap/scss/close`)                                                                                                                                                                          |
+| `.btn-text-align`                                 | Text alignment helper used on a `div`                                                                                                                                                                                             |
+| `.dropdown-toggle.btn-icon`                       | `.disabled-view` rule that hides row-action toggles (see [`ActionsDropdown`](#actionsdropdown-actionitem))                                                                                                                        |
+| `$btn-*` SCSS variables and `_tokens.scss` values | Still read by AI-assistant and other component styles                                                                                                                                                                             |
+
+**Guardrail**: `no-bootstrap-button-markup` is an error with no allowlist, so hand-written `btn` markup cannot come back unnoticed (see [Custom ESLint Rules Matrix](#custom-eslint-rules-matrix)).
+
+**Known consequence**: the deleted rules also carried some sizes that had already stopped applying to `BaseButton`s (44px modal-footer and toolbar buttons, a 150px footer minimum width). Deleting them changed nothing on screen, but it means a button that should be large must say so with `size="lg"`.
+
+---
+
 ## Linting & Guardrails
 
 ### Restricted Imports
 
-Configured in `eslint.config.js` via `no-restricted-imports`:
+Configured in `eslint.config.js` via `no-restricted-imports` (`RESTRICTED_IMPORTS`). Each entry has a `message` that names the replacement:
 
-```javascript
-const RESTRICTED_IMPORTS = [
-  {
-    name: 'react-bootstrap',
-    importNames: ['Badge'],
-    message: 'Use Badge from "waldur-ui" instead of react-bootstrap.',
-  },
-  {
-    name: 'react-bootstrap/Badge',
-    message: 'Use Badge from "waldur-ui" instead of react-bootstrap/Badge.',
-  },
-  {
-    name: 'react-bootstrap',
-    importNames: ['Tooltip'],
-    message: 'Use Tooltip from "waldur-ui" instead of react-bootstrap.',
-  },
-  {
-    name: 'react-bootstrap/Tooltip',
-    message: 'Use Tooltip from "waldur-ui" instead of react-bootstrap/Tooltip.',
-  },
-  {
-    name: 'react-bootstrap',
-    importNames: ['OverlayTrigger'],
-    message:
-      'Use Tooltip or Popover from "waldur-ui" instead of react-bootstrap/OverlayTrigger.',
-  },
-  {
-    name: 'react-bootstrap/OverlayTrigger',
-    message:
-      'Use Tooltip or Popover from "waldur-ui" instead of react-bootstrap/OverlayTrigger.',
-  },
-  {
-    name: 'react-bootstrap',
-    importNames: ['Popover'],
-    message: 'Use Popover from "waldur-ui" instead of react-bootstrap.',
-  },
-  {
-    name: 'react-bootstrap/Popover',
-    message: 'Use Popover from "waldur-ui" instead of react-bootstrap/Popover.',
-  },
-  {
-    name: 'react-bootstrap',
-    importNames: ['Alert'],
-    message: 'Use AlertItem from "waldur-ui" instead of react-bootstrap.',
-  },
-  {
-    name: 'react-bootstrap/Alert',
-    message: 'Use AlertItem from "waldur-ui" instead of react-bootstrap/Alert.',
-  },
-];
-```
+| `react-bootstrap` import    | Use instead                                                                            |
+| :-------------------------- | :------------------------------------------------------------------------------------- |
+| `Badge`                     | `Badge` from `waldur-ui`                                                               |
+| `Tooltip`, `OverlayTrigger` | `Tooltip` (or `Popover`) from `waldur-ui`                                              |
+| `Popover`                   | `Popover` from `waldur-ui`                                                             |
+| `Alert`                     | `AlertItem` from `waldur-ui`                                                           |
+| `Button`                    | `BaseButton` from `waldur-ui` (or `SubmitButton` / `CloseDialogButton` where they fit) |
+| `DropdownButton`            | `ActionsDropdown`                                                                      |
+
+Each is blocked both as a named import from `react-bootstrap` and as a deep import (`react-bootstrap/Badge`, …). A genuinely new exception belongs on the offending line as `// eslint-disable-next-line no-restricted-imports -- <reason>`.
+
+Import restrictions only see imports. A button hand-written as `<button className="btn btn-danger">` imports nothing, so it is caught by the custom rule `no-bootstrap-button-markup` below.
 
 ---
 
 ### Custom ESLint Rules Matrix
 
-Implemented in `packages/eslint-plugin-waldur`:
+Implemented in `packages/eslint-plugin-waldur` and enabled as `waldur-custom/*` in `eslint.config.js`. Rules marked `warn` steer new code while existing violations (over a hundred hand-rolled tables, for example) are converted one screen at a time; promote them to `error` when the count reaches zero.
 
-| Rule Name                             | Severity | Enforced Pattern                                                                                        |
-| :------------------------------------ | :------- | :------------------------------------------------------------------------------------------------------ |
-| `enforce-badge-icon-patterns`         | `error`  | Enforces 12px icon sizing inside `Badge` components.                                                    |
-| `enforce-badge-props-consistency`     | `error`  | Validates valid combinations of `variant`, `tone`, and `shape` props on `Badge`.                        |
-| `no-manual-icon-colors-in-badges`     | `error`  | Prevents manual color classes on icons rendered inside `Badge`.                                         |
-| `enforce-badge-right-icon-pattern`    | `error`  | Standardizes right-side action icon styling in badges.                                                  |
-| `no-direct-bootstrap-button`          | `error`  | Prohibits importing `Button` directly from `react-bootstrap`.                                           |
-| `enforce-button-variants`             | `error`  | Enforces valid semantic button variants on Waldur button wrappers.                                      |
-| `no-bootstrap-button-markup`          | `warn`   | Flags native `<button className="btn ...">` markup; guides conversion to `BaseButton` wrappers.         |
-| `no-direct-bootstrap-dropdown-button` | `error`  | Prohibits `react-bootstrap/DropdownButton`.                                                             |
-| `enforce-actions-dropdown-in-tables`  | `warn`   | Steers table action buttons toward `ActionsDropdown`.                                                   |
-| `no-hand-rolled-table`                | `warn`   | Flags bare `<table>` elements that should use Waldur Table components.                                  |
-| `no-hand-rolled-modal-footer`         | `error`  | Enforces standard modal footer wrappers instead of custom flex rows.                                    |
-| `enforce-dialog-button-order`         | `error`  | Enforces primary/cancel button order in dialog footers.                                                 |
-| `enforce-featured-icon`               | `error`  | Requires `FeaturedIcon` for highlighted icon emblems.                                                   |
-| `enforce-border-radius-tokens`        | `error`  | Prohibits arbitrary radius classes in favor of design tokens.                                           |
-| `enforce-nav-tabs-pattern`            | `error`  | Standardizes navigation tab markup and active states.                                                   |
-| `enforce-breadcrumb-colors`           | `error`  | Enforces semantic token colors on breadcrumbs.                                                          |
-| `enforce-formcheck-components`        | `error`  | Enforces standard form check wrappers.                                                                  |
-| `enforce-phosphor-icon-weight`        | `error`  | Enforces consistent icon weight across Phosphor icons.                                                  |
+#### Buttons, dialogs and tables
+
+| Rule Name                            | Severity | Enforced Pattern                                                                                                                                    |
+| :----------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `no-bootstrap-button-markup`         | `error`  | Flags `btn` as a class token on a native `<button>`, `<a>`, `<input>` or `<label>`. No allowlist: use `BaseButton`, or `Link` with `buttonVariant`. |
+| `enforce-disabled-button-tooltip`    | `error`  | A disabled `BaseButton` needs a `tooltip` or `disabledReason` explaining why.                                                                       |
+| `no-edit-button-size-override`       | `error`  | Prevents `size="sm"` on `EditButton`; use `CompactEditButton`.                                                                                      |
+| `enforce-dialog-button-order`        | `error`  | Dismissive actions first, primary submission/approval last (rightmost) in dialog footers.                                                           |
+| `no-hand-rolled-modal-footer`        | `error`  | Prefer `ModalDialog`'s `footer` prop over hand-rolling action buttons inside its children.                                                          |
+| `enforce-actions-dropdown-in-tables` | `warn`   | Steers table row actions toward `ActionsDropdown`.                                                                                                  |
+| `no-hand-rolled-table`               | `warn`   | Prefer `@/table/Table` over `react-bootstrap` `Table` or raw `<table>` markup.                                                                      |
+| `enforce-noresult-with-cta`          | `error`  | `NoResult` empty states need an actionable call-to-action button.                                                                                   |
+| `enforce-render-field-or-dash`       | `error`  | Table cells use `renderFieldOrDash()` for empty values.                                                                                             |
+
+#### Visual patterns
+
+| Rule Name                          | Severity | Enforced Pattern                                                           |
+| :--------------------------------- | :------- | :------------------------------------------------------------------------- |
+| `enforce-badge-icon-patterns`      | `error`  | Enforces 12px icon sizing inside `Badge` components.                       |
+| `enforce-badge-props-consistency`  | `error`  | Validates `variant`, `tone` and `shape` prop combinations on `Badge`.      |
+| `no-manual-icon-colors-in-badges`  | `error`  | Prevents manual colour classes on icons rendered inside `Badge`.           |
+| `enforce-badge-right-icon-pattern` | `error`  | Standardizes right-side action icon styling in badges.                     |
+| `enforce-featured-icon`            | `error`  | Requires `FeaturedIcon` (with `tone`/`size`) for highlighted icon emblems. |
+| `enforce-phosphor-icon-weight`     | `error`  | Consistent `weight` prop on Phosphor icons.                                |
+| `enforce-border-radius-tokens`     | `error`  | Design-token radius classes instead of hard-coded values.                  |
+| `enforce-nav-tabs-pattern`         | `error`  | Navigation tabs use the `nav-line-tabs` class.                             |
+| `enforce-breadcrumb-colors`        | `error`  | Breadcrumb links use the `$text-brand-secondary` token.                    |
+| `enforce-formcheck-components`     | `error`  | React Bootstrap `FormCheck` instead of custom form-control markup.         |
+
+#### Code hygiene
+
+| Rule Name                        | Severity | Enforced Pattern                                                                                                                  |
+| :------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `no-direct-client-usage`         | `error`  | No direct use of low-level API client methods.                                                                                    |
+| `no-direct-field-adapter`        | `error`  | Adapter components are not passed straight to `Field`'s `component` prop.                                                         |
+| `no-template-in-translate`       | `error`  | No template literals or concatenation inside `translate()` calls.                                                                 |
+| `prefer-classnames-utility`      | `error`  | Use `classNames()` instead of manual `className` string concatenation.                                                            |
+| `no-redundant-vi-mock`           | `error`  | No `vi.mock` for modules that are already mocked globally.                                                                        |
+| `no-undefined-in-mutation-body`  | `warn`   | Do not collapse a request-body field to `undefined`: the key is dropped and clearing the field becomes a silent no-op.            |
+| `prefer-mutate-over-mutateAsync` | `warn`   | Buttons and action items (`BaseButton`, `ActionItem`, …) call `.mutate()`; keep `.mutateAsync()` for forms that need the promise. |
+
+The former `enforce-button-variants` rule was deleted: the variant list lives in the `ButtonVariant` type, so the compiler enforces it.
 
 ---
 
@@ -480,25 +525,27 @@ Implemented in `packages/eslint-plugin-waldur`:
   CHOKIDAR_USEPOLLING=1 yarn vitest run --project=storybook
   ```
 
+- **Stories to look at**: `Actions/BaseButton` (`packages/ui/src/BaseButton.stories.tsx`: playground, every state, sizes, icon-only, realistic usage), `Actions/SegmentedControl` (variants, sizes, `BesideTallerSibling`, `AsTabsWithPanels`), and `src/table/ActionsDropdown.stories.tsx`.
+- **Storybook is not the app**: it applies the theme through `storybook-addon-pseudo-states`, which rewrites `:focus-visible` / `:hover` selectors. See the pitfall below before trusting a `:not(:focus-visible)` result there.
+
 ---
 
-### Visual Parity Test Suite
+### Visual E2E Specs
 
-Directly compares legacy and new component implementations side-by-side using Playwright screenshots (`e2e-visual/base-button-parity.spec.ts`):
+`yarn test:e2e:visual` runs `e2e-visual/*.spec.ts` through Playwright (project `visual`, against the app on :8001 and Storybook on :6006).
 
-```bash
-yarn playwright test base-button-parity --project visual --workers=1
-```
+- **`focus-ring.spec.ts`**: asserts that keyboard focus produces a _visible_ indicator with at least 3:1 contrast (WCAG 2.4.7 and 1.4.11), in light and dark. Its fixtures are built from `buttonVariants()` on the `actions-basebutton--playground` story's stylesheet and cover the places a ring was once suppressed: elevation utilities (`shadow-sm`), an unlayered page stylesheet setting a `box-shadow`, `.menu-link` and `nav-line-tabs`. The `primary` case is a recorded contrast gap (`test.fail()`): a brand ring on a brand-filled button is about 1.6:1. `.btn-no-focus` is deliberately not a fixture — see the pseudo-states pitfall.
+- **`stat-card-parity.spec.ts`**, **`charts.spec.ts`**, **`wizards.spec.ts`**: parity and screenshot checks for other components; `visualParityHarness.ts` holds the shared pixel-diff and chromaticity helpers.
 
-Note: `--workers=1` is required to avoid memory exhaustion during parallel canvas rasterization.
+Run one spec with `yarn playwright test focus-ring --project=visual --workers=1` (a filter, not a path; passing a path is read as a project name). Playwright executes specs in Node, so a spec may import `packages/ui/src/BaseButton` directly but not the `waldur-ui` barrel, whose modules touch `document` at import time.
 
-**Coverage**: 12 variants × 2 sizes × 2 themes × 6 interaction states (`enabled`, `disabled`, `hover`, `active`, `.focus()`, `.click()`) = 288 test cases.
+---
 
-**Verification Steps**:
+### Retired Visual Parity Suite
 
-1. **Dimension Parity**: Compares `locator.boundingBox()` with `MAX_DIMENSION_SLACK_PX = 0.5px` (avoids PNG rounding noise).
-2. **Pixelmatch Ratio**: Checks diff pixel ratio with `DIFF_RATIO_THRESHOLD = 0.16` and per-pixel threshold `0.25`.
-3. **Dominant-Color Chromaticity**: Evaluates color hue balance across RGB channels (`CHROMATICITY_TOLERANCE = 10`) to catch tint errors on small text-only buttons where pixel ratios are low.
+`e2e-visual/base-button-parity.spec.ts` compared the legacy Bootstrap `BaseButton` against the new Tailwind/shadcn one side-by-side via Playwright screenshots, pixel-diffing 288 variant/size/theme/state combinations, so the new component could be proven a drop-in replacement before any call site used it. Every call site has migrated and the legacy component is deleted, so the spec, its dedicated CI job and its Storybook story (`BaseButtonParity.stories.tsx`) were removed together.
+
+The techniques it validated remain a useful reference for the next component swap: dimension parity via `boundingBox()`, a pixelmatch ratio, and dominant-colour chromaticity for low-pixel-ratio text-only buttons (implemented in `visualParityHarness.ts`, still used by `stat-card-parity.spec.ts`).
 
 ---
 
@@ -526,3 +573,11 @@ Note: `--workers=1` is required to avoid memory exhaustion during parallel canva
      ```
 
 3. **Headless Browser Animation Polling**: CDP/Playwright tabs in automated modes skip compositing animation frames if backgrounded. `setTimeout` polling of `getAnimations()` may read `currentTime: 0`. Trigger a screenshot capture or force a reflow to guarantee paint completion.
+4. **Tailwind only generates classes it can read literally**: Tailwind v4 scans source files for complete class strings. A class assembled at runtime (`` `[&>svg]:h-[${px}]` ``) is never generated, so it silently does nothing. `BaseButton`'s icons rendered at 16px instead of 20px for exactly this reason. Write the class as a literal and pass the varying part through a CSS custom property (`style={{ '--icon-size': px }}` with `[&>svg]:h-[var(--icon-size)]`), or choose between whole literal classes. Classes inside HTML strings (chart tooltips) are scanned too, provided they are literals — `buttonVariants()` returns literals.
+5. **Compound Bootstrap selectors are dead without the parent class**: most Metronic rules are written `.btn.btn-sm { … }` or `.btn { &.btn-icon { … } }`. Adding `btn-sm` to an element that lacks `.btn` does nothing, and a hand-rolled `Link`/`div` that dropped `.btn` loses the rule with no error. Grep the SCSS for the class before relying on it; prefer `variant`/`size` props.
+6. **A different tree shape at the same position remounts**: a component that returns `<Wrapper>{child}</Wrapper>` on one render and bare `child` on the next makes React discard and recreate `child`, losing focus and any ref held on it. The filter button's count badge did this until it got a wrapper that is always mounted; `BaseButton`'s tooltip uses `alwaysMount` for the same reason. If a control's focus is lost when a badge or tooltip appears, look for this.
+7. **A flex row stretches its children**: `align-items: stretch` is the default, so a control with no explicit height grows to the tallest sibling. A `SegmentedControl` measured 36px in isolation and 44px in a toolbar. Give shared controls `self-center` (or an explicit size) instead of relying on the host row.
+8. **Cascade layers invert for `!important`**: in `@layer bootstrap`, an `!important` declaration beats Tailwind utilities (a later layer) because important declarations reverse layer order. That is why `.btn-no-focus { box-shadow: none !important }` removes a `BaseButton`'s inset border, and why an override meant to win over a Tailwind utility from the `bootstrap` layer must itself be `!important`.
+9. **Storybook rewrites pseudo-classes**: `storybook-addon-pseudo-states` turns `:not(:focus-visible)` into `:not(.pseudo-focus-visible)`, which matches every element, so a rule such as `.btn-no-focus:not(:focus-visible) { outline: none !important }` suppresses the outline permanently _in Storybook_ while behaving correctly in the app. Measure focus and hover behaviour against the running app (the dev server on :8001) before changing CSS on the strength of a Storybook or `e2e-visual` result.
+10. **Radix RadioGroup in jsdom**: arrow keys move _and_ select only while the key is held. With `userEvent`, use `keyboard('{ArrowRight>}')` (press without release) followed by `waitFor`, not `keyboard('{ArrowRight}')`. Radix `Tabs` reports `data-state="active"`, a `RadioGroup` item `data-state="checked"`.
+11. **Test conventions**: mock the current user with `vi.mocked(useUser).mockReturnValue(…)` — `@/workspace/hooks` is mocked globally, and a local `vi.mock` of it trips `no-redundant-vi-mock`. Testing Library's `no-node-access` rule forbids `.querySelector`/`.closest` in tests; reach elements by role, label or text. Prove a new regression test by reverting the fix and watching it fail.

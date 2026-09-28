@@ -3,12 +3,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { overrideSettingsRetrieve, statsTableGrowth } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
 import { useNotify } from '@/store/notify';
@@ -104,15 +103,14 @@ export const TableGrowthPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
     <>
       {monitoringBadge}
       {userIsStaff && (
-        <SubmitButton
-          submitting={isSampling}
-          type="button"
+        <BaseButton
+          pending={isSampling}
           variant="tertiary"
           className="min-w-100px"
           onClick={() => triggerSampling()}
           label={translate('Sample now')}
           iconNode={<LightningIcon weight="bold" />}
-          iconOnLeft
+          size="lg"
         />
       )}
       <RefreshButton refetch={refetch} isLoading={isRefetching} />

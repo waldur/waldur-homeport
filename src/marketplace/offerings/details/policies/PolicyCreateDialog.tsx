@@ -109,7 +109,8 @@ export const PolicyCreateDialog: FC<PolicyCreateDialogProps> = ({
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={translate('Create')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

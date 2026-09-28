@@ -3,7 +3,8 @@ import { FC, Fragment, useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MatrixRoom } from 'waldur-js-client';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StateIndicator } from '@/core/StateIndicator';
@@ -25,7 +26,6 @@ import {
 import { ROOM_STATE_VARIANT, stateLabel } from '@/matrix/MatrixRoomStateBadge';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import { ActionsDropdownSeparator } from '@/table/ActionsDropdown';
 import { renderFieldOrDash } from '@/table/utils';
@@ -85,7 +85,7 @@ const RoomActions: FC<{
         <PromotedAction
           row={room}
           refetch={refetch}
-          as={ActionButton}
+          as={BaseButton}
           variant="secondary"
         />
       )}
@@ -129,7 +129,7 @@ const HistoryExportsCard: FC<{
           {isActive ? (
             <div ref={setRefreshSlot} className="d-flex align-items-center" />
           ) : (
-            <IconButton
+            <BaseButton
               iconNode={<ArrowsClockwiseIcon weight="bold" />}
               tooltip={translate(
                 'Refresh is available when the room is active — no history exports can be produced in the current state.',
@@ -137,14 +137,11 @@ const HistoryExportsCard: FC<{
               onClick={() => undefined}
               variant="text-secondary"
               disabled
+              size="lg"
             />
           )}
           {isOwnerOrStaff && isActive && (
-            <ExportHistoryButton
-              row={room}
-              refetch={refetch}
-              as={ActionButton}
-            />
+            <ExportHistoryButton row={room} refetch={refetch} as={BaseButton} />
           )}
         </div>
       }

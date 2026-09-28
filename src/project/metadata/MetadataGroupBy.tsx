@@ -1,4 +1,6 @@
-import { FormLabel, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { FormLabel } from 'react-bootstrap';
+
+import { SegmentedControl } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -21,25 +23,13 @@ export const MetadataGroupBy = ({
   return (
     <>
       <FormLabel className="mb-0">{translate('Group by:')}</FormLabel>
-      <ToggleButtonGroup
-        type="radio"
-        name="groupBy"
-        value={value}
-        onChange={onChange}
+      <SegmentedControl
         aria-label={translate('Group by')}
-      >
-        {buttons.map((button) => (
-          <ToggleButton
-            key={button.value}
-            id={'tbg-' + button.value}
-            value={button.value}
-            variant="tertiary"
-            size="sm"
-          >
-            {button.label}
-          </ToggleButton>
-        ))}
-      </ToggleButtonGroup>
+        size="sm"
+        options={buttons}
+        value={value}
+        onValueChange={onChange}
+      />
     </>
   );
 };

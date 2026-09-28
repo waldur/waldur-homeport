@@ -91,7 +91,7 @@ describe('CreateModalButton', () => {
     );
 
     const button = screen.getByRole('button');
-    expect(button).toHaveClass('btn-secondary');
+    expect(button).toHaveClass('bg-[var(--btn-secondary-bg)]');
   });
 
   it('uses default size lg when not specified', async () => {

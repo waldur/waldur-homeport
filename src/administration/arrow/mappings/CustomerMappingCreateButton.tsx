@@ -1,9 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const CustomerMappingCreateDialog = lazyComponent(() =>
   import('./CustomerMappingCreateDialog').then((module) => ({
@@ -21,16 +22,17 @@ export const CustomerMappingCreateButton = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      action={() => {
+    <BaseButton
+      onClick={() => {
         openDialog(CustomerMappingCreateDialog, {
           resolve: { refetch },
           size: 'lg',
         });
       }}
-      title={translate('Add mapping')}
+      label={translate('Add mapping')}
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
+      size="lg"
     />
   );
 };

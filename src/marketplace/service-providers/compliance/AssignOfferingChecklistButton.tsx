@@ -1,9 +1,10 @@
 import { ArrowSquareInIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import { ASSIGN_CHECKLIST_TO_OFFERINGS_FORM_ID } from '../constants';
 
@@ -23,11 +24,12 @@ export const AssignOfferingChecklistButton = ({ provider, refetch }) => {
     });
 
   return (
-    <ActionButton
-      action={callback}
-      title={translate('Assign checklist')}
+    <BaseButton
+      onClick={callback}
+      label={translate('Assign checklist')}
       iconNode={<ArrowSquareInIcon weight="bold" />}
       variant="primary"
+      size="lg"
     />
   );
 };

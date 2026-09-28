@@ -130,7 +130,7 @@ describe('StorageFolderConfiguration', () => {
         name: 'Add Storage Data Type',
       });
       expect(addButton).toBeInTheDocument();
-      expect(addButton).toHaveClass('btn-text-primary');
+      expect(addButton).toHaveClass('text-[var(--btn-text-primary-color)]');
     });
 
     it('renders FieldArray for storage data types', () => {

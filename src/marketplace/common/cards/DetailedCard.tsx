@@ -14,7 +14,6 @@ import Placeholder from '@/images/logo_w.svg';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { CardRequestAccessButton } from '@/marketplace/offerings/access/CardRequestAccessButton';
 import { TagBadges } from '@/marketplace/tags/TagBadges';
-import { wrapTooltip } from '@/table/ActionButton';
 
 import { getOfferingImage } from '../getOfferingImage';
 import { ViewOfferingButton } from '../ViewOfferingButton';
@@ -40,8 +39,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
 
   const image = getOfferingImage(offering);
 
-  return wrapTooltip(
-    tooltipMessage,
+  const card = (
     <OfferingDetailsLink
       offering_uuid={offering.uuid}
       className={classNames(className, 'offering-card-detailed', {
@@ -172,6 +170,14 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           />
         </Card.Footer>
       </Card>
-    </OfferingDetailsLink>,
+    </OfferingDetailsLink>
+  );
+
+  return tooltipMessage ? (
+    <Tooltip label={tooltipMessage}>
+      <span>{card}</span>
+    </Tooltip>
+  ) : (
+    card
   );
 };

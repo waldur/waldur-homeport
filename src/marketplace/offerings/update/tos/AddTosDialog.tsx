@@ -82,7 +82,8 @@ export const AddTosDialog: FC<AddTosDialogProps> = ({ resolve }) => {
               <div className="d-flex gap-3 justify-content-end mt-4">
                 <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Confirm')}

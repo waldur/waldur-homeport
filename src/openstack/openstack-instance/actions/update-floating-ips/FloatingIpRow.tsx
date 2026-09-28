@@ -2,11 +2,10 @@ import { CopyIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useField } from 'react-final-form';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 
 import { SelectField } from './SelectField';
 
@@ -54,11 +53,12 @@ export const FloatingIpRow = ({ name, subnets, floatingIps, onRemove }) => {
         )}
       </td>
       <td>
-        <ActionButton
-          action={onRemove}
-          title={translate('Remove')}
+        <BaseButton
+          onClick={onRemove}
+          label={translate('Remove')}
           iconNode={<TrashIcon weight="bold" />}
           variant="text-secondary"
+          size="lg"
         />
       </td>
     </tr>

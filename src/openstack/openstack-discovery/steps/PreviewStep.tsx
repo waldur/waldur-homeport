@@ -8,10 +8,10 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
-import { SubmitButton } from '@/form/SubmitButton';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -140,15 +140,13 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
 
   const renderFooter = () => (
     <>
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         variant="tertiary"
         className="min-w-125px me-auto"
         onClick={() => props.onPrev(values)}
-        type="button"
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
-        iconOnLeft
+        size="lg"
       />
       <CloseDialogButton className="min-w-125px" />
       <SubmitButton
@@ -156,7 +154,6 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         disabled={loading || !!previewError || !values.previewResult}
         label={translate('Apply Configuration')}
         onClick={() => applyMutation.mutate()}
-        type="button"
         data-testid="discovery-apply-btn"
       />
     </>

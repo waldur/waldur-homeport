@@ -4801,7 +4801,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-radio-group@npm:1.4.7":
+"@radix-ui/react-radio-group@npm:1.4.7, @radix-ui/react-radio-group@npm:^1.4.7":
   version: 1.4.7
   resolution: "@radix-ui/react-radio-group@npm:1.4.7"
   dependencies:
@@ -19774,6 +19774,7 @@ __metadata:
     "@radix-ui/react-dialog": "npm:^1.1.23"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.24"
     "@radix-ui/react-popover": "npm:^1.1.19"
+    "@radix-ui/react-radio-group": "npm:^1.4.7"
     "@radix-ui/react-scroll-area": "npm:^1.2.14"
     "@radix-ui/react-slot": "npm:^1.3.3"
     "@radix-ui/react-toast": "npm:^1.2.23"

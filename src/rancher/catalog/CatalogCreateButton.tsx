@@ -1,11 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const CatalogCreateDialog = lazyComponent(() =>
   import('./CatalogCreateDialog').then((module) => ({
@@ -19,10 +20,12 @@ export const CatalogCreateButton: FC<{ cluster }> = ({ cluster }) => {
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Create')}
-      action={() => openDialog(CatalogCreateDialog, { resolve: { cluster } })}
+    <BaseButton
+      label={translate('Create')}
+      onClick={() => openDialog(CatalogCreateDialog, { resolve: { cluster } })}
       iconNode={<PlusCircleIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

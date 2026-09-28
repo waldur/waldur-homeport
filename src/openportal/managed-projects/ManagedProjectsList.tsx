@@ -5,7 +5,7 @@ import {
   openportalManagedProjectsList,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -13,7 +13,6 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
 import { BooleanFilter } from '@/table';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
@@ -43,17 +42,18 @@ const NotesButton = ({
   const count = row.details?.notes?.length ?? 0;
 
   return (
-    <ActionButton
-      title={String(count)}
+    <BaseButton
+      label={String(count)}
       iconNode={<ChatTeardropTextIcon weight="bold" />}
       variant="tertiary"
-      action={() =>
+      onClick={() =>
         openDialog(ManagedProjectNotesDialog, {
           row,
           resolve: { refetch },
           size: 'md',
         })
       }
+      size="lg"
     />
   );
 };
@@ -224,7 +224,7 @@ export const ManagedProjectsList = () => {
       tableActions={
         <Link
           state="marketplace-provider-managed-projects-audit"
-          buttonVariant="outline-primary"
+          buttonVariant="tertiary"
         >
           {translate('Audit Log')}
         </Link>

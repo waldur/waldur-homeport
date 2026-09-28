@@ -6,12 +6,13 @@ import {
   marketplaceProviderOfferingsGlauthUsersConfigRetrieve,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const GLAuthConfigDialog = lazyComponent(() =>
   import('./GLAuthConfigDialog').then((module) => ({
@@ -72,9 +73,9 @@ export const GLAuthConfigButton: FC<{
   return error ? (
     <LoadingErred loadData={refetch} />
   ) : (
-    <ActionButton
-      action={callback}
-      title={translate('View GLAuth configuration')}
+    <BaseButton
+      onClick={callback}
+      label={translate('View GLAuth configuration')}
       iconNode={enabled && ready && <EyeIcon weight="bold" />}
       pending={isLoading}
       disabled={!enabled}
@@ -84,6 +85,8 @@ export const GLAuthConfigButton: FC<{
           '"Enable automatic creation of offering users" must be enabled for GLAuth generation',
         )
       }
+      variant="tertiary"
+      size="lg"
     />
   );
 };

@@ -1,9 +1,10 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { usersScimSyncAll } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 export const ScimSyncButton = () => {
   const { mutate, isPending } = useManagedMutation<any, any, void>({
@@ -13,12 +14,13 @@ export const ScimSyncButton = () => {
   });
 
   return (
-    <ActionButton
-      action={mutate}
+    <BaseButton
+      onClick={mutate}
       variant="primary"
       pending={isPending}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
-      title={translate('Sync all users')}
+      label={translate('Sync all users')}
+      size="lg"
     />
   );
 };

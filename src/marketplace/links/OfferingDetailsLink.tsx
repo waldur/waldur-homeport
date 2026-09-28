@@ -1,12 +1,16 @@
 import React, { PropsWithChildren } from 'react';
-import { Variant } from 'react-bootstrap/esm/types';
+
+import { ButtonVariant, ButtonSize } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 
 interface OwnProps {
   offering_uuid: string;
   className?: string;
-  buttonVariant?: Variant;
+  buttonVariant?: ButtonVariant;
+  /** Size and shape of the link when it renders as a button (`buttonVariant`). */
+  buttonSize?: ButtonSize;
+  buttonIconOnly?: boolean;
   disabled?: boolean;
 }
 
@@ -18,6 +22,8 @@ export const OfferingDetailsLink: React.FC<PropsWithChildren<OwnProps>> = (
       state="public-offering.marketplace-public-offering"
       params={{ uuid: props.offering_uuid }}
       buttonVariant={props.buttonVariant}
+      buttonSize={props.buttonSize}
+      buttonIconOnly={props.buttonIconOnly}
       className={props.className}
     >
       {props.children}

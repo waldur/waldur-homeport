@@ -59,7 +59,7 @@ export const AddRoleDialog: FC<{ resolve: AddRoleResolve }> = ({ resolve }) => {
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Create')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

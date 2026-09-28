@@ -1,4 +1,12 @@
-export { BaseButton } from './BaseButton';
+export { BaseButton, buttonVariants } from './BaseButton';
+export type { BaseButtonProps, ButtonSize, ButtonVariant } from './BaseButton';
+export {
+  BUTTON_ICON_SIZES,
+  getButtonIconSize,
+  getButtonIconPx,
+} from './buttonIconSizes';
+export { ButtonCaret } from './ButtonCaret';
+export type { ButtonCaretProps } from './ButtonCaret';
 export { cn } from './cn';
 export { CopyButton } from './CopyButton';
 export type { CopyButtonProps } from './CopyButton';
@@ -172,6 +180,19 @@ export {
 export type { SheetContentProps } from './Sheet';
 
 export { useIsMobile } from './useIsMobile';
+
+export { SegmentedControl } from './SegmentedControl';
+export type {
+  SegmentedControlOption,
+  SegmentedControlProps,
+  SegmentedValue,
+} from './SegmentedControl';
+
+export {
+  segmentedItemClassName,
+  segmentedListClassName,
+} from './segmentedStyles';
+export type { SegmentedVariant } from './segmentedStyles';
 
 export { Switch } from './Switch';
 export type { SwitchProps } from './Switch';

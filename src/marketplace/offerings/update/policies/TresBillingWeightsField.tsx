@@ -4,7 +4,8 @@ import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { NumberField, StringField } from '@/form';
 import { translate } from '@/i18n';
@@ -78,12 +79,13 @@ const FieldsListGroup = ({
                         </Field>
                       </td>
                       <td>
-                        <IconButton
+                        <BaseButton
                           iconNode={<TrashIcon weight="bold" />}
                           tooltip={translate('Remove')}
                           onClick={() => removeRow(index)}
                           variant="danger"
                           disabled={fields.length === 1}
+                          size="lg"
                         />
                       </td>
                     </tr>
@@ -95,11 +97,12 @@ const FieldsListGroup = ({
         </Form.Group>
       )}
       <div>
-        <IconButton
+        <BaseButton
           iconNode={<PlusCircleIcon weight="bold" />}
           tooltip={translate('Add')}
           onClick={addRow}
           variant="tertiary"
+          size="lg"
         />
       </div>
     </>

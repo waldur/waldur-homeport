@@ -2,10 +2,11 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import type { ArrowSettings } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const ArrowSettingsEditDialog = lazyComponent(() =>
   import('./ArrowSettingsEditDialog').then((module) => ({
@@ -32,11 +33,12 @@ export const ArrowSettingsEditAction = ({
   }, [settings, refetch, openDialog]);
 
   return (
-    <ActionButton
-      action={handleEdit}
-      title={translate('Edit')}
+    <BaseButton
+      onClick={handleEdit}
+      label={translate('Edit')}
       iconNode={<PencilSimpleIcon weight="bold" />}
       variant="secondary"
+      size="lg"
     />
   );
 };

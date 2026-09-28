@@ -15,6 +15,8 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -26,7 +28,6 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
 import {
@@ -265,12 +266,13 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
             }
             footer={
               <>
-                <ActionButton
-                  action={backToMainForm}
-                  title={translate('Back')}
+                <BaseButton
+                  onClick={backToMainForm}
+                  label={translate('Back')}
                   iconNode={<ArrowLeftIcon weight="bold" />}
                   variant="tertiary"
                   className="min-w-125px"
+                  size="lg"
                 />
                 <SubmitButton
                   submitting={submitting}
@@ -278,7 +280,8 @@ export const MaintenanceSaveAsTemplateDialog: FC<OwnProps> = (props) => {
                     invalid || isLoadingOfferings || Boolean(errorOfferings)
                   }
                   label={translate('Save')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                   children={
                     isLoadingOfferings ? (
                       <span className="svg-icon svg-icon-2">

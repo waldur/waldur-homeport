@@ -1,6 +1,8 @@
 import { FC, useState } from 'react';
 import type { ToSConsentDashboard } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 type TableType =
@@ -129,15 +131,16 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
           </div>
           {(data.accepted_consents_over_time || []).length > 4 && (
             <div className="text-center mt-2">
-              <button
-                type="button"
-                className="btn btn-link btn-sm"
+              <BaseButton
+                variant="text-primary"
+                size="sm"
                 onClick={() => setShowAllAcceptedMonths(!showAllAcceptedMonths)}
-              >
-                {showAllAcceptedMonths
-                  ? translate('Show recent months')
-                  : translate('Show all months')}
-              </button>
+                label={
+                  showAllAcceptedMonths
+                    ? translate('Show recent months')
+                    : translate('Show all months')
+                }
+              />
             </div>
           )}
         </div>
@@ -180,15 +183,16 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
           </div>
           {data.revoked_consents_over_time.length > 4 && (
             <div className="text-center mt-2">
-              <button
-                type="button"
-                className="btn btn-link btn-sm"
+              <BaseButton
+                variant="text-primary"
+                size="sm"
                 onClick={() => setShowAllRevokedMonths(!showAllRevokedMonths)}
-              >
-                {showAllRevokedMonths
-                  ? translate('Show recent months')
-                  : translate('Show all months')}
-              </button>
+                label={
+                  showAllRevokedMonths
+                    ? translate('Show recent months')
+                    : translate('Show all months')
+                }
+              />
             </div>
           )}
         </div>

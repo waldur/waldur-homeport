@@ -2,9 +2,10 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { marketplaceProviderOfferingsSync } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 import { VALID_OFFERING_TYPES } from './VALID_OFFERING_TYPES';
 
@@ -39,14 +40,15 @@ export const SyncButton = ({ offering, refetch }) => {
   const enabled = ['OK', 'ERRED'].includes(offering.scope_state);
 
   return (
-    <ActionButton
-      action={mutate}
+    <BaseButton
+      onClick={mutate}
       variant="tertiary"
       disabled={!enabled || isPending}
       disabledReason={translate('Synchronization is in progress')}
       pending={!enabled}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
-      title={translate('Synchronize')}
+      label={translate('Synchronize')}
+      size="lg"
     />
   );
 };

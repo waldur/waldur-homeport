@@ -4,12 +4,13 @@ import {
   projectEndDateChangeRequestsCancel,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 interface PendingRequestDialogProps {
   request: ProjectEndDateChangeRequest;
@@ -47,17 +48,18 @@ export const PendingRequestDialog: FC<PendingRequestDialogProps> = ({
       footer={
         <>
           <CloseDialogButton />
-          <ActionButton
-            title={
+          <BaseButton
+            label={
               cancelMutation.isPending
                 ? translate('Canceling...')
                 : translate('Cancel request')
             }
-            action={() => cancelMutation.mutate()}
+            onClick={() => cancelMutation.mutate()}
             variant="danger"
             disabled={cancelMutation.isPending}
             disabledReason={translate('The request is being processed')}
             pending={cancelMutation.isPending}
+            size="lg"
           />
         </>
       }

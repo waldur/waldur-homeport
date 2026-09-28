@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
-import { ButtonVariant, Variant } from 'react-bootstrap/esm/types';
+import { Variant } from 'react-bootstrap/esm/types';
+
+import { ButtonVariant } from 'waldur-ui';
 
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { DialogSizeType } from '@/modal/types';
@@ -18,6 +20,7 @@ interface DialogLaunchProps<T> {
 
 interface ActionButtonProps {
   title: string;
+  label?: string;
   icon?: string;
   className?: string;
   staff?: boolean;

@@ -3,13 +3,14 @@ import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Offering } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { ISSUE_CREATION_FORM_ID } from '@/issues/create/constants';
 import { hasSupport } from '@/issues/hooks';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 const IssueCreateDialog = lazyComponent(() =>
@@ -78,11 +79,12 @@ export const OfferingSupportButton: FC<{ offering: Offering }> = ({
   };
 
   return (
-    <ActionButton
-      title={translate('Support')}
+    <BaseButton
+      label={translate('Support')}
       iconNode={<HeadsetIcon weight="bold" />}
       variant="secondary"
-      action={handleClick}
+      onClick={handleClick}
+      size="lg"
     />
   );
 };

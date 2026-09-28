@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import {
@@ -135,10 +134,9 @@ export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
                       ? translate('Confirm & restore')
                       : translate('Confirm')
                   }
-                  className={classNames(
-                    'btn btn-primary',
-                    offering.state === 'Unavailable' ? 'mw-200px' : 'w-175px',
-                  )}
+                  className={
+                    offering.state === 'Unavailable' ? 'mw-200px' : 'w-175px'
+                  }
                 />
               </>
             }

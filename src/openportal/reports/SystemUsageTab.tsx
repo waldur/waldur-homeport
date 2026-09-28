@@ -2,13 +2,12 @@
  * System-wide OpenPortal usage and storage tab for staff / support users.
  */
 /* eslint-disable no-console */
-/* eslint-disable waldur-custom/no-direct-bootstrap-button */
 
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Button, Card, Container, Form } from 'react-bootstrap';
+import { Card, Container, Form } from 'react-bootstrap';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
@@ -353,26 +352,24 @@ export const SystemUsageTab: FC = () => {
         )}
 
         <div className="ms-auto d-flex align-items-center gap-2">
-          <Button
+          <BaseButton
             variant="secondary"
             size="sm"
             onClick={() => {
               clearMappingCache();
               refetchReports();
             }}
-          >
-            {translate('Refresh')}
-          </Button>
-          <Button
+            label={translate('Refresh')}
+          />
+          <BaseButton
             variant="secondary"
             size="sm"
             onClick={() => {
               setShowLoadPrompt(true);
               setLoadTriggered(false);
             }}
-          >
-            {translate('Load new data…')}
-          </Button>
+            label={translate('Load new data…')}
+          />
         </div>
       </div>
 
@@ -398,16 +395,15 @@ export const SystemUsageTab: FC = () => {
               )}
             </p>
 
-            <Button
+            <BaseButton
               variant="primary"
               size="sm"
               onClick={() => {
                 setLoadTriggered(true);
                 setShowLoadPrompt(false);
               }}
-            >
-              {translate('Load reports')}
-            </Button>
+              label={translate('Load reports')}
+            />
           </Card.Body>
         </Card>
       )}
@@ -473,13 +469,12 @@ export const SystemUsageTab: FC = () => {
             'To speed things up: select a specific year and month filter before loading. System-wide data across all projects and users can be very large.',
           )}
           actions={
-            <Button
+            <BaseButton
               variant="warning"
               size="sm"
               onClick={() => window.location.reload()}
-            >
-              {translate('Cancel & reload')}
-            </Button>
+              label={translate('Cancel & reload')}
+            />
           }
         />
       )}
@@ -520,13 +515,12 @@ export const SystemUsageTab: FC = () => {
             },
           )}
           actions={
-            <Button
+            <BaseButton
               variant="tertiary"
               size="sm"
               onClick={() => setLoadAllUserMappings(true)}
-            >
-              {translate('Load all user names')}
-            </Button>
+              label={translate('Load all user names')}
+            />
           }
         />
       )}

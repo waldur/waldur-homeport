@@ -5,8 +5,13 @@ import { supportSettingsAtlassianValidateCredentials } from 'waldur-js-client';
 import { AlertItem } from 'waldur-ui';
 
 import { url } from '@/core/validators';
-import { StringGroup, RadioGroup, BooleanGroup, SecretGroup } from '@/form';
-import { SubmitButton } from '@/form/SubmitButton';
+import {
+  SubmitButton,
+  StringGroup,
+  RadioGroup,
+  BooleanGroup,
+  SecretGroup,
+} from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -88,7 +93,6 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         disabled={!isFormValid()}
         label={translate('Validate & Continue')}
         onClick={validateAndContinue}
-        type="button"
       />
     </>
   );

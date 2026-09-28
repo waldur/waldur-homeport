@@ -84,7 +84,8 @@ export const ProjectField: FC<ProjectFieldProps> = ({
           <ProjectCreateButton
             customer={customer as any}
             title={translate('Add project')}
-            variant="link"
+            variant="text-primary"
+            size="sm"
             className="mb-1"
           />
         )

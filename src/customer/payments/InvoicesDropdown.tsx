@@ -2,6 +2,8 @@ import { FileTextIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Invoice } from 'waldur-js-client';
 
+import { ButtonVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import { ActionsDropdownItem } from '@/table/ActionsDropdown';
@@ -13,7 +15,7 @@ interface ResourceActionComponentProps {
   open?: boolean;
   loading?: boolean;
   error?: object;
-  variant?: string;
+  variant?: ButtonVariant;
   invoices: Invoice[];
 }
 

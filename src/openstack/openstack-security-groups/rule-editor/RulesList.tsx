@@ -4,9 +4,10 @@ import { Table } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { EthernetType } from '@/openstack/types';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { HeaderWithTooltip } from './HeaderWithTooltip';
 import { RuleRow } from './RuleRow';
@@ -87,11 +88,12 @@ export const RulesList: FC<{
             )}
           </tbody>
         </Table>
-        <CompactActionButton
-          action={() => fields.push(DEFAULT_RULE)}
-          title={translate('Add rule')}
+        <BaseButton
+          onClick={() => fields.push(DEFAULT_RULE)}
+          label={translate('Add rule')}
           iconNode={<PlusIcon weight="bold" />}
           variant="primary"
+          size="sm"
         />
       </>
     )}

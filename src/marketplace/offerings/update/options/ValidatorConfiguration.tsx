@@ -4,8 +4,8 @@ import { Field, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
@@ -96,16 +96,21 @@ export const ValidatorConfiguration = ({
                     )}
                   />
                 </div>
-                <CompactIconButton
-                  variant="outline-danger"
+                <BaseButton
+                  variant="danger"
                   onClick={() => fields.remove(index)}
                   iconNode={<TrashIcon weight="bold" />}
                   tooltip={translate('Remove validator')}
+                  size="sm"
                 />
               </div>
             ))}
             <BaseButton
-              variant="outline-primary"
+              // Was "outline-primary" — see EditDefaultAffiliationsDialog.tsx
+              // for why this maps to "secondary", the closest design-token
+              // equivalent (no transparent/bordered brand-color variant
+              // exists in the new system).
+              variant="secondary"
               size="sm"
               className="align-self-start"
               onClick={() =>

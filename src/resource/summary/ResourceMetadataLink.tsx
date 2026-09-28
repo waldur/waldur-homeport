@@ -1,7 +1,8 @@
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import { Resource } from '../types';
 
@@ -18,16 +19,16 @@ export const ResourceMetadataLink = <T extends Resource = any>(
 ) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      variant="link"
-      className="btn-flush"
-      action={() =>
+    <BaseButton
+      variant="tertiary"
+      onClick={() =>
         openDialog(ResourceMetadataDialog, {
           resolve: props,
           size: 'lg',
         })
       }
-      title={translate('Show')}
+      label={translate('Show')}
+      size="sm"
     />
   );
 };

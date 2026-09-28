@@ -4,9 +4,8 @@ import { Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -67,22 +66,21 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
   // Custom footer for this step
   const renderFooter = () => (
     <>
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         variant="tertiary"
         className="min-w-125px me-auto"
         onClick={() => props.onPrev(values)}
-        type="button"
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
-        iconOnLeft
+        size="lg"
       />
       <CloseDialogButton className="min-w-125px" />
-      <SubmitButton
-        submitting={saveSettingsMutation.isPending}
+      <BaseButton
+        pending={saveSettingsMutation.isPending}
         label={translate('Save Settings')}
         onClick={() => saveSettingsMutation.mutate()}
-        type="button"
+        variant="primary"
+        size="lg"
       />
     </>
   );

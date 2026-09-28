@@ -4,12 +4,10 @@ import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
 import { Col, Nav, Row, Tab } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { formatPhoneNumber } from '@/core/utils';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
@@ -75,12 +73,13 @@ const AllResultsTabContent = ({
               <h6 className="text-gray-700 fw-bold mb-0">
                 {translate('Recent')}
               </h6>
-              <CompactActionButton
+              <BaseButton
                 variant="text-secondary"
                 className="btn-no-focus"
-                action={clearRecentSearches}
+                onClick={clearRecentSearches}
                 iconNode={<XIcon weight="bold" />}
-                title={translate('Clear')}
+                label={translate('Clear')}
+                size="sm"
               />
             </div>
             {recentSearchItems.map((item) => (
@@ -108,15 +107,13 @@ const AllResultsTabContent = ({
             <SectionNoResult />
           )}
           {!isCurrentPageFavorite && (
-            <SubmitButton
-              submitting={false}
-              type="button"
+            <BaseButton
               variant="text-primary"
-              className="btn-sm ms-5"
+              className="ms-5"
               onClick={addCurrentPageFavorite}
               label={translate('Add current page')}
               iconNode={<PlusIcon weight="bold" />}
-              iconOnLeft
+              size="lg"
             />
           )}
         </div>

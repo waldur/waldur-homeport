@@ -3,13 +3,14 @@ import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionButton } from '@/table/ActionButton';
 import { AddDropdownToggle } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
@@ -58,15 +59,16 @@ export const OrganizationCreateButton: FunctionComponent = () => {
   }
 
   return (
-    <ActionButton
-      title={translate('Add')}
-      action={() =>
+    <BaseButton
+      label={translate('Add')}
+      onClick={() =>
         user.is_staff
           ? openDialog(CustomerCreateDialog, { resolve: { role: 'CUSTOMER' } })
           : router.stateService.go('organizations-create')
       }
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
+      size="lg"
     />
   );
 };

@@ -12,7 +12,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { LONG_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
@@ -176,21 +176,16 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                     />
                     <span className="fs-7">{endpoint.name}</span>
                   </a>
-                  <Tooltip
-                    label={
+                  <BaseButton
+                    variant="text-secondary"
+                    onClick={() => copyText(endpoint.url)}
+                    tooltip={
                       isSshFormat(endpoint.url) && resource.username
                         ? formatSshCommand(endpoint.url, resource.username)
                         : endpoint.url
                     }
-                  >
-                    <button
-                      type="button"
-                      onClick={() => copyText(endpoint.url)}
-                      className="btn btn-link p-0 text-muted"
-                    >
-                      <CopyIcon size={14} weight="bold" />
-                    </button>
-                  </Tooltip>
+                    iconNode={<CopyIcon size={14} weight="bold" />}
+                  />
                 </div>
               ))}
             </div>
@@ -207,7 +202,9 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                   resource_uuid: resource.uuid,
                   tab: 'getting-started',
                 }}
-                className="btn btn-sm btn-link text-info p-0 me-3"
+                buttonVariant="text-primary"
+                buttonSize="sm"
+                className="p-0 me-3"
               >
                 <BookOpenIcon size={16} weight="bold" className="me-1" />
                 {translate('Getting started')}
@@ -217,7 +214,9 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
           <Link
             state="marketplace-resource-details"
             params={{ resource_uuid: resource.uuid }}
-            className="btn btn-sm btn-link text-primary p-0"
+            buttonVariant="text-primary"
+            buttonSize="sm"
+            className="p-0"
           >
             {translate('View details')}
             <ArrowRightIcon size={16} weight="bold" className="ms-1" />

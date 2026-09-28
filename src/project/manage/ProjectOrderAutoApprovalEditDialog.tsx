@@ -9,7 +9,7 @@ import {
   marketplaceProjectOrderAutoApprovalsPartialUpdate,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { SubmitButton, BooleanGroup, NumberGroup } from '@/form';
@@ -116,19 +116,20 @@ export const ProjectOrderAutoApprovalEditDialog: FC<EditDialogProps> = ({
             footer={
               <>
                 {rule ? (
-                  <SubmitButton
-                    submitting={destroyMutation.isPending}
-                    type="button"
+                  <BaseButton
+                    pending={destroyMutation.isPending}
                     onClick={() => destroyMutation.mutate()}
                     label={translate('Remove rule')}
-                    className="btn btn-danger me-auto"
+                    variant="danger"
+                    className="me-auto"
+                    size="lg"
                   />
                 ) : null}
                 <CloseDialogButton />
                 <SubmitButton
                   submitting={submitting || upsertMutation.isPending}
                   label={translate('Save')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

@@ -2,7 +2,8 @@ import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { FormField } from './types';
@@ -36,15 +37,16 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
   return (
     <div className="box-number-input">
       <div className="box-number-input-control">
-        <CompactIconButton
+        <BaseButton
           iconNode={<MinusIcon weight="bold" />}
           tooltip={translate('Decrease')}
           onClick={() =>
             change(Number(input.value) - 1 * Number(props.step || 1))
           }
           disabled={props.disabled}
-          variant="active-icon-primary"
+          variant="tertiary-ghost"
           className="minus-btn btn-no-focus"
+          size="sm"
         />
         <Form.Control
           {...props.input}
@@ -55,15 +57,16 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           onBlur={() => change(input.value)}
         />
 
-        <CompactIconButton
+        <BaseButton
           iconNode={<PlusIcon weight="bold" />}
           tooltip={translate('Increase')}
           onClick={() =>
             change(Number(input.value) + 1 * Number(props.step || 1))
           }
           disabled={props.disabled}
-          variant="active-icon-primary"
+          variant="tertiary-ghost"
           className="plus-btn btn-no-focus"
+          size="sm"
         />
       </div>
     </div>

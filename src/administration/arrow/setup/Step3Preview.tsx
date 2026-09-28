@@ -4,10 +4,9 @@ import { Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { adminArrowSettingsSaveSettings } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { ExternalLink } from '@/core/ExternalLink';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -46,22 +45,21 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
 
   const renderFooter = () => (
     <>
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         variant="tertiary"
         className="min-w-125px me-auto"
         onClick={() => props.onPrev(values)}
-        type="button"
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
-        iconOnLeft
+        size="lg"
       />
       <CloseDialogButton className="min-w-125px" />
-      <SubmitButton
-        submitting={handleSaveMutation.isPending}
+      <BaseButton
+        pending={handleSaveMutation.isPending}
         label={translate('Save & Complete')}
         onClick={() => handleSaveMutation.mutate()}
-        type="button"
+        variant="primary"
+        size="lg"
       />
     </>
   );

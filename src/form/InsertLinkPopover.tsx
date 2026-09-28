@@ -19,7 +19,8 @@ import { useState, FC, useEffect, forwardRef } from 'react';
 import { Modal, FormLabel } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { StringField } from './StringField';
@@ -64,18 +65,19 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
           </Field>
 
           <div>
-            <CompactSubmitButton
-              submitting={false}
+            <BaseButton
+              size="sm"
               variant="tertiary"
-              type="button"
               onClick={(e) => {
                 e.preventDefault();
                 onCancel();
               }}
               label={translate('Cancel')}
             />
-            <CompactSubmitButton
-              submitting={false}
+            <BaseButton
+              size="sm"
+              variant="primary"
+              type="submit"
               className="ms-2"
               label={translate('Save')}
             />

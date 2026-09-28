@@ -73,7 +73,8 @@ export const OfferingQoSFormDialog: FC<OfferingQoSFormDialogProps> = ({
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Edit') : translate('Add')}
-                  className="btn btn-primary w-125px"
+                  variant="primary"
+                  className="w-125px"
                 />
               </>
             }

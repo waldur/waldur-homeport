@@ -5,9 +5,10 @@ import {
   marketplaceUserOfferingConsentsRevoke,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
@@ -54,13 +55,13 @@ export const RevokeTosDialog = ({
       footer={
         <>
           <CloseDialogButton className="flex-equal" />
-          <SubmitButton
-            submitting={revokeMutation.isPending}
+          <BaseButton
+            pending={revokeMutation.isPending}
             variant="danger"
             className="flex-equal"
             onClick={() => revokeMutation.mutate()}
-            type="button"
             label={translate('Revoke')}
+            size="lg"
           />
         </>
       }

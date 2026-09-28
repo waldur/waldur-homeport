@@ -5,10 +5,11 @@ import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { NumberField, SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 interface ComponentLimitsFieldProps extends FieldArrayRenderProps<
@@ -130,11 +131,12 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
       )}
       {fields.length < components.length && (
         <div>
-          <ActionButton
-            title={translate('Add')}
+          <BaseButton
+            label={translate('Add')}
             variant="tertiary"
-            action={addRow}
+            onClick={addRow}
             iconNode={<PlusCircleIcon weight="bold" />}
+            size="lg"
           />
         </div>
       )}

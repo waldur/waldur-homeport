@@ -2,11 +2,12 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { CustomerUser } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionButton } from '@/table/ActionButton';
 
 const AddProjectUserDialog = lazyComponent(() =>
   import('./AddProjectUserDialog').then((module) => ({
@@ -40,10 +41,12 @@ export const AddProjectUserButton: React.FC<AddProjectUserButtonProps> = ({
       iconNode={<PlusCircleIcon weight="bold" />}
     />
   ) : (
-    <ActionButton
-      action={callback}
-      title={translate('Add')}
+    <BaseButton
+      onClick={callback}
+      label={translate('Add')}
       iconNode={<PlusCircleIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

@@ -10,9 +10,8 @@ import classNames from 'classnames';
 import { FC, useCallback } from 'react';
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
@@ -103,23 +102,18 @@ const ParamInput: FC<{
 
   return (
     <InputGroup size="sm">
-      <Tooltip
-        label={
+      <BaseButton
+        size="sm"
+        variant="tertiary"
+        onClick={() => handleChange(numValue - step)}
+        disabled={isAtMin}
+        tooltip={
           isAtMin
             ? translate('Minimum value reached')
             : translate('Decrease value')
         }
-      >
-        <CompactSubmitButton
-          submitting={false}
-          type="button"
-          variant="outline-secondary"
-          onClick={() => handleChange(numValue - step)}
-          disabled={isAtMin}
-          iconNode={<CaretDownIcon weight="bold" />}
-          label=""
-        />
-      </Tooltip>
+        iconNode={<CaretDownIcon weight="bold" />}
+      />
       <Form.Control
         type="number"
         value={numValue}
@@ -130,23 +124,18 @@ const ParamInput: FC<{
         className="text-center"
         style={{ maxWidth: '100px' }}
       />
-      <Tooltip
-        label={
+      <BaseButton
+        size="sm"
+        variant="tertiary"
+        onClick={() => handleChange(numValue + step)}
+        disabled={isAtMax}
+        tooltip={
           isAtMax
             ? translate('Maximum value reached')
             : translate('Increase value')
         }
-      >
-        <CompactSubmitButton
-          submitting={false}
-          type="button"
-          variant="outline-secondary"
-          onClick={() => handleChange(numValue + step)}
-          disabled={isAtMax}
-          iconNode={<CaretUpIcon weight="bold" />}
-          label=""
-        />
-      </Tooltip>
+        iconNode={<CaretUpIcon weight="bold" />}
+      />
       {param.unit && <InputGroup.Text>{param.unit}</InputGroup.Text>}
     </InputGroup>
   );

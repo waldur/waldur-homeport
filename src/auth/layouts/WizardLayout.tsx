@@ -2,6 +2,8 @@ import { ShieldIcon, KeyIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getIdentityProviders } from '@/administration/api';
 import { getIconUrl } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -46,13 +48,13 @@ export const WizardLayout = () => {
             <p className="text-muted">
               {ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}
             </p>
-            <button
-              type="button"
-              className="btn btn-primary btn-lg w-100 mt-4"
+            <BaseButton
+              variant="primary"
+              size="lg"
+              className="w-100 mt-4"
               onClick={() => setStep(hasSso && hasLocal ? 'method' : 'login')}
-            >
-              {translate('Get Started')}
-            </button>
+              label={translate('Get Started')}
+            />
           </div>
         );
 
@@ -89,13 +91,12 @@ export const WizardLayout = () => {
                 <small>{translate('Use local credentials')}</small>
               </button>
             </div>
-            <button
-              type="button"
-              className="btn btn-link mt-3"
+            <BaseButton
+              variant="text-primary"
+              className="mt-3"
               onClick={() => setStep('welcome')}
-            >
-              {translate('Back')}
-            </button>
+              label={translate('Back')}
+            />
           </div>
         );
 
@@ -123,13 +124,12 @@ export const WizardLayout = () => {
               <SigninForm />
             ) : null}
             <UserAuthWarning />
-            <button
-              type="button"
-              className="btn btn-link mt-3"
+            <BaseButton
+              variant="text-primary"
+              className="mt-3"
               onClick={() => setStep(hasSso && hasLocal ? 'method' : 'welcome')}
-            >
-              {translate('Back')}
-            </button>
+              label={translate('Back')}
+            />
           </div>
         );
     }

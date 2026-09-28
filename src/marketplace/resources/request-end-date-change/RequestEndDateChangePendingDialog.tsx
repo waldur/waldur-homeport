@@ -4,12 +4,13 @@ import {
   ResourceEndDateChangeRequest,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 interface Props {
   request: ResourceEndDateChangeRequest;
@@ -37,15 +38,16 @@ export const RequestEndDateChangePendingDialog: FC<Props> = ({
       footer={
         <>
           <CloseDialogButton />
-          <ActionButton
-            title={
+          <BaseButton
+            label={
               cancelMutation.isPending
                 ? translate('Canceling...')
                 : translate('Cancel request')
             }
-            action={() => cancelMutation.mutate()}
+            onClick={() => cancelMutation.mutate()}
             variant="danger"
             pending={cancelMutation.isPending}
+            size="lg"
           />
         </>
       }

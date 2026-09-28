@@ -1,11 +1,12 @@
 import { EnvelopeSimpleIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
-import { ActionButton } from '@/table/ActionButton';
 
 const DirectEmailInviteDialog = lazyComponent(() =>
   import('@/proposals/manage/reviewer-discovery/DirectEmailInviteDialog').then(
@@ -34,11 +35,12 @@ export const InviteReviewerButton: FC<InviteReviewerButtonProps> = ({
   }, [call, refetch, openDialog]);
 
   return (
-    <ActionButton
-      action={handleInviteByEmail}
-      title={translate('Invite by email')}
+    <BaseButton
+      onClick={handleInviteByEmail}
+      label={translate('Invite by email')}
       iconNode={<EnvelopeSimpleIcon weight="bold" />}
       variant="primary"
+      size="lg"
     />
   );
 };

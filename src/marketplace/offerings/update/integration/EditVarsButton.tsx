@@ -1,10 +1,11 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import { ENVIRON_FORM_ID } from './constants';
 import { EditVarsDialogProps } from './EditVarsDialog';
@@ -27,11 +28,13 @@ export const EditVarsButton: FunctionComponent<
     });
   };
   return (
-    <ActionButton
-      action={callback}
+    <BaseButton
+      onClick={callback}
       iconNode={<PencilSimpleIcon weight="bold" />}
-      title={translate('Edit environment variables')}
+      label={translate('Edit environment variables')}
       className="me-3"
+      variant="tertiary"
+      size="lg"
     />
   );
 };

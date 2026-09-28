@@ -3,10 +3,11 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { FieldError } from '@/form/FieldError';
 import { BaseInputField } from '@/form/InputField';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 
@@ -23,22 +24,24 @@ const IPAddressRow = ({ address, validateAddress, onRemove }) => (
       </Field>
     </td>
     <td>
-      <CompactActionButton
-        title={translate('Remove')}
-        action={onRemove}
+      <BaseButton
+        label={translate('Remove')}
+        onClick={onRemove}
         iconNode={<TrashIcon weight="bold" />}
         variant="text-secondary"
+        size="sm"
       />
     </td>
   </tr>
 );
 
 const IPAddressAddButton = ({ onClick }) => (
-  <CompactActionButton
-    title={translate('Add address')}
-    action={onClick}
+  <BaseButton
+    label={translate('Add address')}
+    onClick={onClick}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"
+    size="sm"
   />
 );
 

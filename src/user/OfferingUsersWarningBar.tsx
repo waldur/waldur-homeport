@@ -2,11 +2,10 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { FeaturedIcon } from 'waldur-ui';
+import { FeaturedIcon, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { router } from '@/router';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { usePendingOfferingUsers } from './hooks/usePendingOfferingUsers';
 
@@ -50,11 +49,12 @@ export const OfferingUsersWarningBar: FC = () => {
             { count },
           )}
         </p>
-        <CompactActionButton
+        <BaseButton
           variant="tertiary"
-          action={handleViewAccounts}
+          onClick={handleViewAccounts}
           className="ms-auto"
-          title={translate('View accounts')}
+          label={translate('View accounts')}
+          size="sm"
         />
       </div>
     </div>

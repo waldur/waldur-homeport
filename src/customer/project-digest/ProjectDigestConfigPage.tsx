@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -84,12 +84,11 @@ export const ProjectDigestConfigPage: FC = () => {
         actions={
           <>
             {formState.isEnabled && (
-              <SubmitButton
-                submitting={false}
-                type="button"
+              <BaseButton
                 variant="secondary"
                 onClick={handleSendTest}
                 label={translate('Send test email')}
+                size="lg"
               />
             )}
             <Tooltip

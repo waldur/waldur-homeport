@@ -155,7 +155,8 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                   submitting={false}
                   disabled={invalid}
                   label={translate('Continue')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                   onClick={handleSubmit}
                 />
               </>

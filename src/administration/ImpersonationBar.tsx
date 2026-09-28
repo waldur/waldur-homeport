@@ -3,6 +3,8 @@ import { useMutation } from '@tanstack/react-query';
 import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getHeaders } from '@/core/api';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
@@ -47,15 +49,14 @@ export const ImpersonationBar = () => {
           },
         )}
       </Stack>
-      <button
-        type="button"
-        className="btn btn-active-white"
+      <BaseButton
+        variant="secondary"
         onClick={() => stop()}
         disabled={isLoading}
-      >
-        <EyeSlashIcon size={20} weight="bold" className="me-3" />
-        {translate('Stop impersonating')}
-      </button>
+        disabledReason={translate('Stopping...')}
+        iconNode={<EyeSlashIcon size={20} weight="bold" />}
+        label={translate('Stop impersonating')}
+      />
     </div>
   );
 };

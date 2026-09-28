@@ -3,12 +3,12 @@ import { FC, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { getKeyTitle } from './utils';
@@ -76,10 +76,12 @@ const StatsEditor: FC<{
           </InputGroup>
         </div>
       ))}
-      <CompactActionButton
-        action={addItem}
+      <BaseButton
+        onClick={addItem}
         iconNode={<PlusCircleIcon weight="bold" />}
-        title={translate('Add stat')}
+        label={translate('Add stat')}
+        variant="tertiary"
+        size="sm"
       />
     </div>
   );
@@ -138,10 +140,12 @@ const CarouselSlidesEditor: FC<{
           {index < items.length - 1 && <hr className="my-4" />}
         </div>
       ))}
-      <CompactActionButton
-        action={addItem}
+      <BaseButton
+        onClick={addItem}
         iconNode={<PlusCircleIcon weight="bold" />}
-        title={translate('Add slide')}
+        label={translate('Add slide')}
+        variant="tertiary"
+        size="sm"
       />
     </div>
   );
@@ -231,10 +235,12 @@ const NewsItemsEditor: FC<{
           {index < items.length - 1 && <hr className="my-4" />}
         </div>
       ))}
-      <CompactActionButton
-        action={addItem}
+      <BaseButton
+        onClick={addItem}
         iconNode={<PlusCircleIcon weight="bold" />}
-        title={translate('Add news item')}
+        label={translate('Add news item')}
+        variant="tertiary"
+        size="sm"
       />
     </div>
   );
@@ -283,12 +289,13 @@ export const LoginPageListEditDialog: FC<LoginPageListEditDialogProps> = ({
       footer={
         <>
           <CloseDialogButton className="flex-equal" />
-          <SubmitButton
-            submitting={submitMutation.isPending}
+          <BaseButton
+            pending={submitMutation.isPending}
             className="flex-equal"
             onClick={() => submitMutation.mutate()}
-            type="button"
             label={translate('Confirm')}
+            variant="primary"
+            size="lg"
           />
         </>
       }

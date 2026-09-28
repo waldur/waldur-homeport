@@ -61,7 +61,8 @@ export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
                   label={translate('Submit')}
                   submitting={submitting}
                   disabled={invalid}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

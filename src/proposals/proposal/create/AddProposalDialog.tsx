@@ -180,7 +180,8 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                     // is; the button just needs the verb every other create
                     // dialog in the app uses.
                     label={translate('Create')}
-                    className="btn btn-primary min-w-125px"
+                    variant="primary"
+                    className="min-w-125px"
                   />
                 </>
               }

@@ -5,9 +5,10 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 interface RegenerateSecretCodeButtonProps {
   serviceProvider: ServiceProvider;
@@ -50,11 +51,11 @@ export const RegenerateSecretCodeButton: FC<
   });
 
   return (
-    <ActionButton
-      title={translate('Regenerate')}
-      action={() => mutate()}
+    <BaseButton
+      label={translate('Regenerate')}
+      onClick={() => mutate()}
       pending={isPending}
-      className="btn btn-primary"
+      variant="primary"
     />
   );
 };

@@ -2,6 +2,8 @@ import { CopyIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useCallback, FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
@@ -43,16 +45,13 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
       {!rightIcon && label}
     </button>
   ) : (
-    <button
-      className={classNames('btn', className, rightIcon && 'btn-icon-right')}
-      type="button"
+    <BaseButton
+      variant="tertiary"
+      className={className}
       onClick={onClick}
-    >
-      {rightIcon && label}
-      <span className="svg-icon svg-icon-2">
-        <CopyIcon weight="bold" />
-      </span>
-      {!rightIcon && label}
-    </button>
+      iconNode={<CopyIcon weight="bold" />}
+      iconRight={rightIcon}
+      label={label}
+    />
   );
 };

@@ -1,4 +1,5 @@
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 export const AnnouncementError = ({ refetch }) => (
@@ -6,12 +7,11 @@ export const AnnouncementError = ({ refetch }) => (
     <div>
       <p>
         {translate('Unable to load announcements')}
-        <SubmitButton
-          submitting={false}
-          type="button"
-          variant="text"
+        <BaseButton
+          variant="text-primary"
           onClick={() => refetch()}
           label={translate('Retry')}
+          size="lg"
         />
       </p>
     </div>

@@ -32,66 +32,77 @@ The application features a comprehensive set of reusable UI components organized
 
 ### Button Components
 
-The application uses a unified button system. **Never import Bootstrap Button directly** - use the appropriate Waldur wrapper component.
+The application uses a unified button system built on Tailwind v4 and Radix UI. **Never import Bootstrap Button directly** - use the appropriate Waldur wrapper component.
+
+> [!TIP]
+> See the authoritative [Button UI Guide](button-ui-guide.md) for full architectural documentation, design token tables, direct tooltip integration, dropdown toggles, and accessibility specifications.
 
 #### Core Button Components
 
-| Component               | Location                            | Description                    | Key Features                                                                   |
-| ----------------------- | ----------------------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
-| **ActionButton**        | `src/table/ActionButton.tsx`        | General purpose action button  | Tooltip, loading state, icon support, multiple variants                        |
-| **RowActionButton**     | `src/table/ActionButton.tsx`        | Optimized for table rows       | Smaller touch target, row context                                              |
-| **CompactActionButton** | `src/table/CompactActionButton.tsx` | Small inline actions           | Compact size for tight spaces                                                  |
-| **SubmitButton**        | `src/form/SubmitButton.tsx`         | Form submission                | Loading spinner, disabled states, large size                                   |
-| **CompactSubmitButton** | `src/form/CompactSubmitButton.tsx`  | Compact form submission        | Small size for popovers/inline forms                                           |
-| **EditButton**          | `src/form/EditButton.tsx`           | Edit navigation/dialogs        | Large size, edit icon                                                          |
-| **CompactEditButton**   | `src/form/CompactEditButton.tsx`    | Edit button for key-value rows | Used in key-value component where label and edit button appear in the same row |
-| **CloseDialogButton**   | `src/modal/CloseDialogButton.tsx`   | Modal cancel/close             | Auto-closes dialog, customizable label                                         |
-| **IconButton**          | `src/core/buttons/IconButton.tsx`   | Icon-only with tooltip         | Required tooltip for accessibility                                             |
-| **ToolbarButton**       | `src/table/ToolbarButton.tsx`       | Table/panel toolbars           | Badge support, consistent toolbar styling                                      |
-| **SaveButton**          | `src/core/SaveButton.tsx`           | Form save with dirty state     | Tracks form changes, conditional visibility                                    |
+| Component             | Location                          | Description                    | Key Features                                                                                   |
+| --------------------- | --------------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |
+| **BaseButton**        | `waldur-ui`                       | General purpose action button  | Direct Tooltip, loading spinner, icon support, 12 variants, sizes (`sm`, `md` [default], `lg`) |
+| **SubmitButton**      | `src/form/SubmitButton.tsx`       | Form submission                | Loading spinner, disabled states, large size (`lg` default, `sm` for compact)                  |
+| **CompactEditButton** | `src/form/CompactEditButton.tsx`  | Edit button for key-value rows | Used in key-value component where label and edit button appear in the same row                 |
+| **CloseDialogButton** | `src/modal/CloseDialogButton.tsx` | Modal cancel/close             | Auto-closes dialog, customizable label, large size (`lg` default)                              |
+| **SaveButton**        | `src/core/SaveButton.tsx`         | Form save with dirty state     | Tracks form changes, dirty badge indicator, conditional visibility                             |
+| **SegmentedControl**  | `waldur-ui`                       | View switcher (a lens)         | Radix RadioGroup: arrows select, one tab stop; `segmentedItemClassName` styles `Tabs.Trigger`  |
 
 #### Button Selection Guide
 
-| Use Case                               | Component                           | Size |
-| -------------------------------------- | ----------------------------------- | ---- |
-| Form submit                            | `SubmitButton`                      | `lg` |
-| Form submit in popover/inline form     | `CompactSubmitButton`               | `sm` |
-| Table row action                       | `ActionButton` or `RowActionButton` | `lg` |
-| Inline action in tight spaces          | `CompactActionButton`               | `sm` |
-| Modal cancel/close                     | `CloseDialogButton`                 | `lg` |
-| Icon-only button                       | `IconButton`                        | —    |
-| Table toolbar buttons                  | `ToolbarButton` or `IconButton`     | —    |
-| Edit button in key-value component row | `CompactEditButton`                 | `sm` |
-| Edit in card/panel header              | `EditButton`                        | `lg` |
-| Create with dialog                     | `CreateModalButton`                 | `lg` |
+| Use Case                               | Component                            | Size                 |
+| -------------------------------------- | ------------------------------------ | -------------------- |
+| Form submit                            | `SubmitButton`                       | `lg`                 |
+| Form submit in popover/inline form     | `SubmitButton`                       | `sm`                 |
+| Table row action                       | `BaseButton`                         | `sm`                 |
+| Inline action in tight spaces          | `BaseButton`                         | `sm`                 |
+| Modal cancel/close                     | `CloseDialogButton`                  | `lg`                 |
+| Icon-only button with tooltip          | `BaseButton` (`iconNode`, `tooltip`) | `sm` \| `md` \| `lg` |
+| Table toolbar buttons                  | `BaseButton` (`tertiary`)            | `lg`                 |
+| Edit button in key-value component row | `CompactEditButton`                  | `sm`                 |
+| Edit in card/panel header              | `BaseButton` (`iconNode`, `label`)   | `sm` \| `md`         |
+| Create with dialog                     | `CreateModalButton`                  | `lg`                 |
 
-#### ActionButton Usage
+#### BaseButton Usage
 
 ```tsx
-import { ActionButton } from '@/table/ActionButton';
+import { BaseButton } from 'waldur-ui';
 
 // Basic usage
-<ActionButton
-  title={translate('Edit')}
-  action={() => handleEdit()}
+<BaseButton
+  label={translate('Edit')}
+  onClick={() => handleEdit()}
   iconNode={<PencilIcon weight="bold" />}
+  variant="tertiary"
+  size="lg"
 />
 
 // With loading state
-<ActionButton
-  title={translate('Save')}
-  action={handleSave}
+<BaseButton
+  label={translate('Save')}
+  onClick={handleSave}
   pending={isSaving}
   variant="primary"
+  size="lg"
 />
 
 // Disabled with tooltip
-<ActionButton
-  title={translate('Delete')}
-  action={handleDelete}
+<BaseButton
+  label={translate('Delete')}
+  onClick={handleDelete}
   disabled={!canDelete}
   tooltip={!canDelete ? translate('Cannot delete active item') : undefined}
   variant="danger"
+  size="lg"
+/>
+
+// Icon-only button with tooltip (sm, md, or lg)
+<BaseButton
+  iconNode={<TrashIcon weight="bold" />}
+  tooltip={translate('Delete')}
+  onClick={handleDelete}
+  variant="danger"
+  size="sm"
 />
 ```
 
@@ -135,27 +146,6 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 // With custom handler
 <CloseDialogButton onClick={handleCancel} disabled={submitting} />
-```
-
-#### IconButton Usage
-
-```tsx
-import { IconButton } from '@/core/buttons/IconButton';
-
-// Toolbar refresh button
-<IconButton
-  iconNode={<ArrowsClockwiseIcon weight="bold" />}
-  tooltip={translate('Refresh')}
-  onClick={handleRefresh}
-/>
-
-// With pending state
-<IconButton
-  iconNode={<DownloadIcon weight="bold" />}
-  tooltip={translate('Export')}
-  onClick={handleExport}
-  pending={isExporting}
-/>
 ```
 
 ### Modal and Dialog Components
@@ -256,7 +246,7 @@ export const MyEditButton = ({ row, refetch }) => (
 | ------------------------- | ------------------------------------ | ------------------ | ------------------------------- |
 | **CopyToClipboard**       | `src/core/CopyToClipboard.tsx`       | Copy functionality | Click to copy, success feedback |
 | **CopyToClipboardButton** | `src/core/CopyToClipboardButton.tsx` | Copy button        | Icon button, tooltip            |
-| **Tooltip**               | `src/core/Tooltip.tsx`               | Tooltip wrapper    | Help text, positioning          |
+| **Tooltip**               | `packages/ui/src/Tooltip.tsx`        | Tooltip wrapper    | Help text, positioning          |
 | **ProgressSteps**         | `src/wizard/ProgressSteps.tsx`       | Step indicator     | Multi-step processes, progress  |
 
 ## Component Design Principles
@@ -612,47 +602,28 @@ Prop tables extracted from TypeScript interfaces. Use these to generate correct 
 
 ### Buttons
 
-#### ActionButton
+#### BaseButton
 
 ```ts
-import { ActionButton } from '@/table/ActionButton';
+import { BaseButton } from 'waldur-ui';
 ```
 
-| Prop          | Type                                       | Required | Default      | Description                                        |
-| ------------- | ------------------------------------------ | -------- | ------------ | -------------------------------------------------- |
-| `action`      | `(event?: any) => void`                    | yes      | —            | Click handler                                      |
-| `title`       | `string`                                   | no       | —            | Button label text                                  |
-| `iconNode`    | `ReactNode`                                | no       | —            | Icon to display                                    |
-| `iconRight`   | `boolean`                                  | no       | `false`      | Place icon on the right instead of left            |
-| `variant`     | `string`                                   | no       | `'tertiary'` | Design token button variant                        |
-| `disabled`    | `boolean`                                  | no       | `false`      | Disabled state                                     |
-| `tooltip`     | `string`                                   | no       | —            | Tooltip text. **REQUIRED when `disabled` is true** |
-| `pending`     | `boolean`                                  | no       | `false`      | Shows spinner and disables button                  |
-| `className`   | `string`                                   | no       | —            | Additional CSS classes                             |
-| `visibility`  | `{ minWidth?: number; maxWidth?: number }` | no       | —            | Responsive visibility constraints                  |
-| `data-testid` | `string`                                   | no       | —            | Test ID attribute                                  |
+General purpose action button supporting direct Tooltip integration, loading state, icons, 12 variants, and integer sizing (`sm`, `md`, or `lg`). See the comprehensive [Button UI Guide](button-ui-guide.md).
 
----
-
-#### CompactActionButton
-
-```ts
-import { CompactActionButton } from '@/table/CompactActionButton';
-```
-
-Same props as `ActionButton` (without `visibility`). Use for tight spaces — renders at `sm` size.
-
-| Prop        | Type                    | Required | Default      | Description                                        |
-| ----------- | ----------------------- | -------- | ------------ | -------------------------------------------------- |
-| `action`    | `(event?: any) => void` | yes      | —            | Click handler                                      |
-| `title`     | `string`                | no       | —            | Button label text                                  |
-| `iconNode`  | `ReactNode`             | no       | —            | Icon to display                                    |
-| `iconRight` | `boolean`               | no       | `false`      | Place icon on the right instead of left            |
-| `variant`   | `string`                | no       | `'tertiary'` | Design token button variant                        |
-| `disabled`  | `boolean`               | no       | `false`      | Disabled state                                     |
-| `tooltip`   | `string`                | no       | —            | Tooltip text. **REQUIRED when `disabled` is true** |
-| `pending`   | `boolean`               | no       | `false`      | Shows spinner and disables button                  |
-| `className` | `string`                | no       | —            | Additional CSS classes                             |
+| Prop             | Type                    | Required | Default | Description                                                                  |
+| ---------------- | ----------------------- | -------- | ------- | ---------------------------------------------------------------------------- |
+| `label`          | `ReactNode`             | no       | —       | Button label text                                                            |
+| `onClick`        | `(event?: any) => void` | no       | —       | Click handler                                                                |
+| `iconNode`       | `ReactNode`             | no       | —       | Icon to display                                                              |
+| `iconRight`      | `boolean`               | no       | `false` | Place icon on the right instead of left                                      |
+| `variant`        | `ButtonVariant`         | no       | —       | Design token button variant (`tertiary`, `primary`, …)                       |
+| `size`           | `'sm' \| 'md' \| 'lg'`  | no       | `'md'`  | Button size: `sm` (28px), `md` (36px, default), or `lg` (44px)               |
+| `disabled`       | `boolean`               | no       | `false` | Disabled state                                                               |
+| `tooltip`        | `ReactNode`             | no       | —       | Tooltip text. **REQUIRED when `disabled` is true** (or use `disabledReason`) |
+| `disabledReason` | `ReactNode`             | no       | —       | Tooltip shown only when button is disabled                                   |
+| `pending`        | `boolean`               | no       | `false` | Shows spinner and disables button                                            |
+| `className`      | `string`                | no       | —       | Additional CSS classes                                                       |
+| `data-testid`    | `string`                | no       | —       | Test ID attribute                                                            |
 
 ---
 
@@ -662,124 +633,23 @@ Same props as `ActionButton` (without `visibility`). Use for tight spaces — re
 import { SubmitButton } from '@/form';
 ```
 
-| Prop         | Type                                                   | Required | Default     | Description                                   |
-| ------------ | ------------------------------------------------------ | -------- | ----------- | --------------------------------------------- |
-| `submitting` | `boolean`                                              | yes      | —           | Shows spinner and disables button while true  |
-| `label`      | `ReactNode`                                            | no       | —           | Button label text                             |
-| `children`   | `ReactNode`                                            | no       | —           | Alternative to `label`                        |
-| `variant`    | `string`                                               | no       | `'primary'` | Design token button variant                   |
-| `disabled`   | `boolean`                                              | no       | `false`     | Disabled state independent of `submitting`    |
-| `invalid`    | `boolean`                                              | no       | `false`     | Disables button when form is invalid          |
-| `type`       | `'submit' \| 'button'`                                 | no       | `'submit'`  | Button type                                   |
-| `onClick`    | `(event: React.MouseEvent<HTMLButtonElement>) => void` | no       | —           | Click handler                                 |
-| `iconNode`   | `ReactNode`                                            | no       | —           | Icon to display                               |
-| `iconOnLeft` | `boolean`                                              | no       | `false`     | Place icon on the left (default is right)     |
-| `id`         | `string`                                               | no       | —           | HTML id attribute                             |
-| `form`       | `string`                                               | no       | —           | Associates button with a form by id           |
-| `className`  | `string`                                               | no       | —           | Additional CSS classes                        |
-| `data-*`     | `string`                                               | no       | —           | Any `data-` attribute for testing/integration |
-
----
-
-#### CompactSubmitButton
-
-```ts
-import { CompactSubmitButton } from '@/form';
-```
-
-Same props as `SubmitButton` (without `form`). Renders at `sm` size — use inside popovers and inline forms.
-
-| Prop         | Type                                                   | Required | Default     | Description                                  |
-| ------------ | ------------------------------------------------------ | -------- | ----------- | -------------------------------------------- |
-| `submitting` | `boolean`                                              | yes      | —           | Shows spinner and disables button while true |
-| `label`      | `ReactNode`                                            | no       | —           | Button label text                            |
-| `children`   | `ReactNode`                                            | no       | —           | Alternative to `label`                       |
-| `variant`    | `string`                                               | no       | `'primary'` | Design token button variant                  |
-| `disabled`   | `boolean`                                              | no       | `false`     | Disabled state independent of `submitting`   |
-| `invalid`    | `boolean`                                              | no       | `false`     | Disables button when form is invalid         |
-| `type`       | `'submit' \| 'button'`                                 | no       | `'submit'`  | Button type                                  |
-| `onClick`    | `(event: React.MouseEvent<HTMLButtonElement>) => void` | no       | —           | Click handler                                |
-| `iconNode`   | `ReactNode`                                            | no       | —           | Icon to display                              |
-| `iconOnLeft` | `boolean`                                              | no       | `false`     | Place icon on the left (default is right)    |
-| `id`         | `string`                                               | no       | —           | HTML id attribute                            |
-| `className`  | `string`                                               | no       | —           | Additional CSS classes                       |
-
----
-
-#### IconButton
-
-```ts
-import { IconButton } from '@/core/buttons/IconButton';
-```
-
-| Prop          | Type                                | Required | Default    | Description                                  |
-| ------------- | ----------------------------------- | -------- | ---------- | -------------------------------------------- |
-| `iconNode`    | `ReactNode`                         | yes      | —          | Icon to display                              |
-| `tooltip`     | `string`                            | yes      | —          | Tooltip text. **Required for accessibility** |
-| `onClick`     | `(event: React.MouseEvent) => void` | yes      | —          | Click handler                                |
-| `variant`     | `ButtonVariant`                     | no       | —          | Design token button variant                  |
-| `disabled`    | `boolean`                           | no       | `false`    | Disabled state                               |
-| `pending`     | `boolean`                           | no       | `false`    | Shows spinner while true                     |
-| `type`        | `'button' \| 'submit'`              | no       | `'button'` | Button type                                  |
-| `className`   | `string`                            | no       | —          | Additional CSS classes                       |
-| `data-testid` | `string`                            | no       | —          | Test ID attribute                            |
-
----
-
-#### CompactIconButton
-
-```ts
-import { CompactIconButton } from '@/core/buttons/IconButton';
-```
-
-Identical props to `IconButton`. Renders at `sm` size.
-
----
-
-#### ToolbarButton
-
-```ts
-import { ToolbarButton } from '@/table/ToolbarButton';
-```
-
-| Prop        | Type                                | Required | Default | Description                                       |
-| ----------- | ----------------------------------- | -------- | ------- | ------------------------------------------------- |
-| `iconNode`  | `ReactNode`                         | yes      | —       | Icon to display                                   |
-| `onClick`   | `(event: React.MouseEvent) => void` | yes      | —       | Click handler                                     |
-| `title`     | `string`                            | no       | —       | Button label text (omit for icon-only)            |
-| `tooltip`   | `string`                            | no       | —       | Tooltip text shown on hover                       |
-| `variant`   | `ButtonVariant`                     | no       | —       | Design token button variant                       |
-| `disabled`  | `boolean`                           | no       | `false` | Disabled state                                    |
-| `pending`   | `boolean`                           | no       | `false` | Shows spinner while true                          |
-| `badge`     | `number \| string`                  | no       | —       | Badge count to display (e.g. active filter count) |
-| `className` | `string`                            | no       | —       | Additional CSS classes                            |
-
----
-
-#### BaseButton
-
-```ts
-import { BaseButton } from '@/core/buttons/BaseButton';
-```
-
-**Do not use in feature code.** This is an internal primitive used by the higher-level button components. Feature code must use the specific button components (`ActionButton`, `SubmitButton`, `ToolbarButton`, etc.) which already cover all use cases.
-
-| Prop        | Type                    | Required | Default    | Description                                        |
-| ----------- | ----------------------- | -------- | ---------- | -------------------------------------------------- |
-| `size`      | `'sm' \| 'lg'`          | yes      | —          | Button size                                        |
-| `label`     | `ReactNode`             | no       | —          | Button label text                                  |
-| `onClick`   | `(event?: any) => void` | no       | —          | Click handler                                      |
-| `iconNode`  | `ReactNode`             | no       | —          | Icon to display                                    |
-| `iconRight` | `boolean`               | no       | `false`    | Place icon on the right instead of left            |
-| `variant`   | `ButtonVariant`         | no       | —          | Design token button variant                        |
-| `disabled`  | `boolean`               | no       | `false`    | Disabled state                                     |
-| `tooltip`   | `string`                | no       | —          | Tooltip text. **REQUIRED when `disabled` is true** |
-| `pending`   | `boolean`               | no       | `false`    | Shows spinner and disables button                  |
-| `type`      | `'button' \| 'submit'`  | no       | `'button'` | Button type                                        |
-| `id`        | `string`                | no       | —          | HTML id attribute                                  |
-| `form`      | `string`                | no       | —          | Associates button with a form by id                |
-| `className` | `string`                | no       | —          | Additional CSS classes                             |
-| `data-*`    | `string`                | no       | —          | Any `data-` attribute for testing/integration      |
+| Prop         | Type                                                   | Required | Default     | Description                                    |
+| ------------ | ------------------------------------------------------ | -------- | ----------- | ---------------------------------------------- |
+| `submitting` | `boolean`                                              | yes      | —           | Shows spinner and disables button while true   |
+| `label`      | `ReactNode`                                            | no       | —           | Button label text                              |
+| `children`   | `ReactNode`                                            | no       | —           | Alternative to `label`                         |
+| `variant`    | `string`                                               | no       | `'primary'` | Design token button variant                    |
+| `size`       | `'sm' \| 'lg'`                                         | no       | `'lg'`      | Button size (`'sm'` for compact/popover forms) |
+| `disabled`   | `boolean`                                              | no       | `false`     | Disabled state independent of `submitting`     |
+| `invalid`    | `boolean`                                              | no       | `false`     | Disables button when form is invalid           |
+| `type`       | `'submit' \| 'button'`                                 | no       | `'submit'`  | Button type                                    |
+| `onClick`    | `(event: React.MouseEvent<HTMLButtonElement>) => void` | no       | —           | Click handler                                  |
+| `iconNode`   | `ReactNode`                                            | no       | —           | Icon to display                                |
+| `iconOnLeft` | `boolean`                                              | no       | `false`     | Place icon on the left (default is right)      |
+| `id`         | `string`                                               | no       | —           | HTML id attribute                              |
+| `form`       | `string`                                               | no       | —           | Associates button with a form by id            |
+| `className`  | `string`                                               | no       | —           | Additional CSS classes                         |
+| `data-*`     | `string`                                               | no       | —           | Any `data-` attribute for testing/integration  |
 
 ---
 
@@ -914,15 +784,15 @@ import { SelectFilter } from '@/table';
 
 Combines `TableFilterItem` and `Select`.
 
-| Prop             | Type                                   | Required | Default | Description                                            |
-| ---------------- | -------------------------------------- | -------- | ------- | ------------------------------------------------------ |
-| `title`          | `string`                               | yes      | —       | Filter label/title                                     |
-| `name`           | `string`                               | yes      | —       | Field name in form state                               |
-| `options`        | `Array<{ value: any; label: string }>` | yes      | —       | Selectable options                                     |
-| `badgeValue`     | `(value) => string \| number`          | no       | —       | Custom badge value renderer                            |
-| `getValueLabel`  | `(value) => string \| number`          | no       | —       | Custom label for selected value                        |
-| `isMulti`        | `boolean`                              | no       | `false` | Enable multi-value selection                           |
-| `isClearable`    | `boolean`                              | no       | `true`  | Show clear button                                      |
+| Prop            | Type                                   | Required | Default | Description                     |
+| --------------- | -------------------------------------- | -------- | ------- | ------------------------------- |
+| `title`         | `string`                               | yes      | —       | Filter label/title              |
+| `name`          | `string`                               | yes      | —       | Field name in form state        |
+| `options`       | `Array<{ value: any; label: string }>` | yes      | —       | Selectable options              |
+| `badgeValue`    | `(value) => string \| number`          | no       | —       | Custom badge value renderer     |
+| `getValueLabel` | `(value) => string \| number`          | no       | —       | Custom label for selected value |
+| `isMulti`       | `boolean`                              | no       | `false` | Enable multi-value selection    |
+| `isClearable`   | `boolean`                              | no       | `true`  | Show clear button               |
 
 ---
 
@@ -950,15 +820,15 @@ Combines `TableFilterItem` and `AsyncSelect`.
 
 Both `SelectFilter` and `AsyncSelectFilter` normalize their form value on mount and on every value change so callers (custom `badgeValue` resolvers, downstream filter→query mappers) can rely on a single shape:
 
-| Filter mode  | Incoming value                                | Becomes                                                  |
-| ------------ | --------------------------------------------- | -------------------------------------------------------- |
-| `isMulti`    | a single option object                        | `[option]`                                               |
-| `isMulti`    | a raw scalar matching one of `options`        | `[matchedOption]`                                        |
-| `isMulti`    | a raw scalar with no match (or no `options`)  | `null`                                                   |
-| not `isMulti`| an array                                      | first element (or `null` if empty)                       |
-| not `isMulti`| a raw scalar matching one of `options`        | `matchedOption`                                          |
-| not `isMulti`| a raw scalar with no match (or no `options`)  | `null`                                                   |
-| any          | shape already matches                         | unchanged                                                |
+| Filter mode   | Incoming value                               | Becomes                            |
+| ------------- | -------------------------------------------- | ---------------------------------- |
+| `isMulti`     | a single option object                       | `[option]`                         |
+| `isMulti`     | a raw scalar matching one of `options`       | `[matchedOption]`                  |
+| `isMulti`     | a raw scalar with no match (or no `options`) | `null`                             |
+| not `isMulti` | an array                                     | first element (or `null` if empty) |
+| not `isMulti` | a raw scalar matching one of `options`       | `matchedOption`                    |
+| not `isMulti` | a raw scalar with no match (or no `options`) | `null`                             |
+| any           | shape already matches                        | unchanged                          |
 
 This guards against three real failure modes that otherwise produce a "ghost" active filter — an incrementing active-filter counter with an empty chip and no API parameter:
 
@@ -998,9 +868,9 @@ import { OfferingFilter } from '@/marketplace/offerings/details/OfferingFilter';
 
 A specialized autonomous filter for Marketplace Offerings.
 
-| Prop                | Type      | Required | Default | Description                             |
-| ------------------- | --------- | -------- | ------- | --------------------------------------- |
-| `offeringFilter`    | `object`  | no       | —       | Static filter for the autocomplete API  |
+| Prop                | Type      | Required | Default | Description                                |
+| ------------------- | --------- | -------- | ------- | ------------------------------------------ |
+| `offeringFilter`    | `object`  | no       | —       | Static filter for the autocomplete API     |
 | `providerOfferings` | `boolean` | no       | `true`  | Fetch from provider or public API endpoint |
 
 ---
@@ -1154,15 +1024,15 @@ import { Select } from '@/form/select';
 
 Standard select component based on `react-select`.
 
-| Prop             | Type                                   | Required | Default | Description                                            |
-| ---------------- | -------------------------------------- | -------- | ------- | ------------------------------------------------------ |
-| `options`        | `Array<{ value: any; label: string }>` | yes      | —       | Selectable options                                     |
-| `isMulti`        | `boolean`                              | no       | `false` | Enable multi-value selection                           |
-| `placeholder`    | `string`                               | no       | —       | Placeholder text                                       |
-| `isDisabled`     | `boolean`                              | no       | `false` | Disable the select                                     |
-| `isClearable`    | `boolean`                              | no       | `false` | Show clear button                                      |
-| `size`           | `'sm'`                                 | no       | —       | Small sizing                                           |
-| `variant`        | `'tableFilter'`                        | no       | —       | Style variant for table filters                        |
+| Prop          | Type                                   | Required | Default | Description                     |
+| ------------- | -------------------------------------- | -------- | ------- | ------------------------------- |
+| `options`     | `Array<{ value: any; label: string }>` | yes      | —       | Selectable options              |
+| `isMulti`     | `boolean`                              | no       | `false` | Enable multi-value selection    |
+| `placeholder` | `string`                               | no       | —       | Placeholder text                |
+| `isDisabled`  | `boolean`                              | no       | `false` | Disable the select              |
+| `isClearable` | `boolean`                              | no       | `false` | Show clear button               |
+| `size`        | `'sm'`                                 | no       | —       | Small sizing                    |
+| `variant`     | `'tableFilter'`                        | no       | —       | Style variant for table filters |
 
 ---
 
@@ -1174,12 +1044,12 @@ import { AsyncSelect } from '@/form/select';
 
 Async select component based on `react-select-async-paginate`.
 
-| Prop             | Type                     | Required | Default | Description                                            |
-| ---------------- | ------------------------ | -------- | ------- | ------------------------------------------------------ |
-| `loadOptions`    | `AsyncSelectLoader`      | yes      | —       | Function to load options                               |
-| `isMulti`        | `boolean`                | no       | `false` | Enable multi-value selection                           |
-| `placeholder`    | `string`                 | no       | —       | Placeholder text                                       |
-| `isDisabled`     | `boolean`                | no       | `false` | Disable the select                                     |
+| Prop          | Type                | Required | Default | Description                  |
+| ------------- | ------------------- | -------- | ------- | ---------------------------- |
+| `loadOptions` | `AsyncSelectLoader` | yes      | —       | Function to load options     |
+| `isMulti`     | `boolean`           | no       | `false` | Enable multi-value selection |
+| `placeholder` | `string`            | no       | —       | Placeholder text             |
+| `isDisabled`  | `boolean`           | no       | `false` | Disable the select           |
 
 ---
 
@@ -1213,12 +1083,12 @@ import { AsyncSelectField } from '@/form';
 
 React Final Form async select component.
 
-| Prop             | Type                     | Required | Default | Description                                            |
-| ---------------- | ------------------------ | -------- | ------- | ------------------------------------------------------ |
-| `loadOptions`    | `AsyncSelectLoader`      | yes      | —       | Function to load options                               |
-| `isMulti`        | `boolean`                | no       | `false` | Enable multi-value selection                           |
-| `placeholder`    | `string`                 | no       | —       | Placeholder text                                       |
-| `isDisabled`     | `boolean`                | no       | `false` | Disable the select                                     |
+| Prop          | Type                | Required | Default | Description                  |
+| ------------- | ------------------- | -------- | ------- | ---------------------------- |
+| `loadOptions` | `AsyncSelectLoader` | yes      | —       | Function to load options     |
+| `isMulti`     | `boolean`           | no       | `false` | Enable multi-value selection |
+| `placeholder` | `string`            | no       | —       | Placeholder text             |
+| `isDisabled`  | `boolean`           | no       | `false` | Disable the select           |
 
 ---
 

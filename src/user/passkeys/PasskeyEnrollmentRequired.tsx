@@ -2,8 +2,9 @@ import { FingerprintIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { router } from '@/router';
@@ -123,13 +124,14 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
                   'This deployment requires a passkey for administrator accounts. Add one now to carry on — it takes a moment, and you can use your device screen lock or a security key.',
                 )}
               </p>
-              <SubmitButton
-                submitting={resuming}
+              <BaseButton
+                pending={resuming}
                 onClick={enrol}
-                type="button"
                 label={translate('Add passkey')}
                 className="w-100"
                 data-testid="passkey-enrollment-required-add"
+                variant="primary"
+                size="lg"
               />
               {user?.username && (
                 <p className="text-muted mt-6 mb-0">

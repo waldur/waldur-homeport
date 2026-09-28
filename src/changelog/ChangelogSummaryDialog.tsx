@@ -1,9 +1,8 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, BaseButton, Badge } from 'waldur-ui';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';

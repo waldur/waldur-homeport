@@ -2,10 +2,11 @@ import { ArrowClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import Illustration from '@/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 
 import { lazyComponent } from './core/lazyComponent';
-import { SubmitButton } from './form/SubmitButton';
 import { translate } from './i18n';
 import './LoadingScreen.css';
 import { ThemeProvider } from './theme/ThemeProvider';
@@ -48,23 +49,19 @@ export const LoadingScreen: FunctionComponent<{
                       stack of its own. Gating on it hid the trace in exactly
                       the cases where the message alone was not enough to act
                       on. */}
-                  <SubmitButton
-                    submitting={false}
-                    type="button"
+                  <BaseButton
+                    size="lg"
                     variant="tertiary"
                     onClick={() => setShow(true)}
                     label={translate('Show error trace')}
                     iconNode={<EyeIcon weight="bold" />}
-                    iconOnLeft
                   />
-                  <SubmitButton
-                    submitting={false}
-                    type="button"
+                  <BaseButton
+                    size="lg"
                     variant="success"
                     onClick={() => location.reload()}
                     label={translate('Reload')}
                     iconNode={<ArrowClockwiseIcon weight="bold" />}
-                    iconOnLeft
                   />
                 </div>
               </div>

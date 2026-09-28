@@ -2,12 +2,13 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { getAbbreviation } from '@/core/utils';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { CardRequestAccessButton } from '@/marketplace/offerings/access/CardRequestAccessButton';
-import { wrapTooltip } from '@/table/ActionButton';
 
 import { ViewOfferingButton } from '../ViewOfferingButton';
 
@@ -23,8 +24,7 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
   const { isAllowed, isDisabled, tooltipMessage, disabledButtonTooltip } =
     useOfferingAccessibility(offering);
 
-  return wrapTooltip(
-    tooltipMessage,
+  const card = (
     <OfferingDetailsLink
       offering_uuid={offering.uuid}
       className={classNames(className, 'offering-card-list', {
@@ -93,6 +93,14 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
           </div>
         </Card.Body>
       </Card>
-    </OfferingDetailsLink>,
+    </OfferingDetailsLink>
+  );
+
+  return tooltipMessage ? (
+    <Tooltip label={tooltipMessage}>
+      <span>{card}</span>
+    </Tooltip>
+  ) : (
+    card
   );
 };

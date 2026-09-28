@@ -59,7 +59,7 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
               <ExternalLink
                 label={translate('Manage profile')}
                 url={user.identity_provider_management_url}
-                className="btn btn-light-primary"
+                buttonVariant="secondary"
               />
             )}
           </>

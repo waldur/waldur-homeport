@@ -4,16 +4,16 @@ import { Col, Row } from 'react-bootstrap';
 import { Form, useForm, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { FilterBox } from '@/form/FilterBox';
-import { SubmitButton } from '@/form/SubmitButton';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { DataLoader } from '@/navigation/sidebar/marketplace-popup/DataLoader';
 import { sidebarResourcesFilterSelector } from '@/navigation/sidebar/resources-filter/utils';
-import { ActionButton } from '@/table/ActionButton';
 
 import { ProjectAutocomplete } from '../list/ProjectAutocomplete';
 
@@ -101,21 +101,27 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
             {step === 1 ? (
               <CloseDialogButton className="flex-equal" />
             ) : (
-              <ActionButton
+              <BaseButton
                 variant="tertiary"
                 className="flex-equal"
-                action={() => setStep((current) => current - 1)}
-                title={translate('Back')}
+                onClick={() => setStep((current) => current - 1)}
+                label={translate('Back')}
+                size="lg"
               />
             )}
             {step === 1 || step === 2 ? (
-              <SubmitButton
+              <BaseButton
                 className="flex-equal"
                 disabled={!nextEnabled}
-                submitting={false}
-                type="button"
+                disabledReason={
+                  !nextEnabled
+                    ? translate('Please select a resource to continue')
+                    : undefined
+                }
                 onClick={() => setStep((current) => current + 1)}
                 label={translate('Next')}
+                variant="primary"
+                size="lg"
               />
             ) : (
               <ImportButton disabled={!submitEnabled} submitting={submitting} />

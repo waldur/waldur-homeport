@@ -8,7 +8,6 @@
 const BUTTON_TAGS = new Set([
   'SubmitButton',
   'CloseDialogButton',
-  'CompactSubmitButton',
   'Button',
   'BaseButton',
   'ActionButton',
@@ -126,11 +125,11 @@ function classifyButton(node) {
     return { type: 'PRIMARY', node, tagName, label: label || 'Submit' };
   }
 
-  if (tagName === 'CompactSubmitButton') {
-    if (variant === 'danger') {
-      return { type: 'REJECT', node, tagName, label: label || 'Reject' };
-    }
-    return { type: 'PRIMARY', node, tagName, label: label || 'Submit' };
+  if (
+    variant === 'danger' &&
+    (labelLower === 'reject' || labelLower === 'decline')
+  ) {
+    return { type: 'REJECT', node, tagName, label: label || 'Reject' };
   }
 
   if (variant === 'primary' || variant === 'success' || btnType === 'submit') {

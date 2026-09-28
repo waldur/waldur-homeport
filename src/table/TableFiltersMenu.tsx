@@ -16,10 +16,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -492,37 +491,28 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
           </>
         ) : (
           <>
-            {/* Tip wraps the Trigger, not the other way around: Tip
-                (src/core/Tooltip.tsx) is a plain function component, not
-                forwardRef, so nesting it *inside* `Trigger asChild` broke
-                the trigger outright — Radix's Slot had nothing but Tip
-                itself to attach its ref/merged props to, and Tip doesn't
-                forward either to the real <Button> further in. Reported
-                live: the button rendered but didn't open anything.
-                (ActionsDropdown.tsx's TableDropdownToggle also nests Tip
-                around a disabled trigger, but doesn't need this same
-                fix — there Trigger's asChild child is TableDropdownToggle
-                itself, a real forwardRef component that threads the ref
-                straight to its inner <button> regardless of the Tip/span
-                wrapping in between, so Slot always has a proper ref
-                target no matter where Tip sits.) */}
-            <Tooltip label={translate('Add filter')}>
-              <span>
-                <RadixPopover.Trigger asChild>
-                  <Button
-                    ref={triggerRef}
-                    variant="secondary"
-                    size="sm"
-                    aria-label={translate('Add filter')}
-                    className="btn-icon btn-add-filter"
-                  >
-                    <span className="svg-icon svg-icon-4">
-                      <PlusIcon weight="bold" />
-                    </span>
-                  </Button>
-                </RadixPopover.Trigger>
-              </span>
-            </Tooltip>
+            {/* BaseButton is forwardRef, so — unlike the old raw <Button>
+                wrapped in a plain, non-forwardRef tooltip component (which
+                broke when nested *inside* `Trigger asChild`: Slot had
+                nothing but the wrapper to attach its ref/merged props to,
+                and the wrapper didn't forward either) — it can sit directly
+                inside `Trigger asChild` with its own `tooltip` prop. The ref Slot
+                clones onto BaseButton threads straight to its inner
+                <button> via BaseButton's own forwardRef, regardless of
+                the Tooltip/span wrapping BaseButton renders internally.
+                `data-add-filter` must stay: TableButtons.tsx/TableToolbar.tsx
+                locate and .click() this exact button via
+                querySelector('[data-add-filter]'). */}
+            <RadixPopover.Trigger asChild>
+              <BaseButton
+                ref={triggerRef}
+                variant="secondary"
+                size="sm"
+                data-add-filter
+                tooltip={translate('Add filter')}
+                iconNode={<PlusIcon weight="bold" />}
+              />
+            </RadixPopover.Trigger>
             {/* forceMount + conditional `show` — same reasoning as the
                 column-filter toggle's Content above. */}
             <RadixPopover.Portal

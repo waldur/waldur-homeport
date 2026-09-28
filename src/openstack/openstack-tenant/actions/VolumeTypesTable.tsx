@@ -3,9 +3,10 @@ import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
   <tr>
@@ -36,22 +37,24 @@ const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
       </Field>
     </td>
     <td>
-      <CompactActionButton
-        title={translate('Remove')}
-        action={onRemove}
+      <BaseButton
+        label={translate('Remove')}
+        onClick={onRemove}
         iconNode={<TrashIcon weight="bold" />}
         variant="text-secondary"
+        size="sm"
       />
     </td>
   </tr>
 );
 
 const VolumeTypeAddButton = ({ onClick }) => (
-  <CompactActionButton
-    title={translate('Add')}
-    action={onClick}
+  <BaseButton
+    label={translate('Add')}
+    onClick={onClick}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"
+    size="sm"
   />
 );
 

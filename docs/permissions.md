@@ -35,7 +35,7 @@ export const AcceptAction = (props) => {
   if (!isOwnerOrStaff && !isServiceManager) {
     return null;
   } else {
-    return <Button/>;
+    return <BaseButton label={translate('Accept')} />;
   }
 }
 ```
@@ -50,7 +50,7 @@ export const AcceptAction = (props) => {
   })) {
     return null;
   } else {
-    return <Button/>;
+    return <BaseButton label={translate('Accept')} />;
   }
 }
 

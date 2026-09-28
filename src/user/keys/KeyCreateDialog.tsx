@@ -101,7 +101,7 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
                 disabled={invalid}
                 submitting={submitting}
                 label={translate('Import key')}
-                className="btn btn-primary"
+                variant="primary"
               />
             }
           >

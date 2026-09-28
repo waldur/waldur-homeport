@@ -103,7 +103,8 @@ export const ComponentPolicyFormDialog: FC<ComponentPolicyFormDialogProps> = ({
                   disabled={invalid || !dirty}
                   submitting={submitMutation.isPending}
                   label={isEdit ? translate('Edit') : translate('Create')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

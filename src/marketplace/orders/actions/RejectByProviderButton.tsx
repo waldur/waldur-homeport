@@ -5,6 +5,8 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import {
   TABLE_MARKETPLACE_ORDERS,
@@ -15,7 +17,6 @@ import {
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
-import { ActionButton } from '@/table/ActionButton';
 
 import { OrderSummaryRows } from './OrderSummaryRows';
 
@@ -71,7 +72,7 @@ export const RejectByProviderButton: FunctionComponent<
   return (
     <ActionItem
       as={props.as}
-      className={props.as === ActionButton ? 'w-100' : 'text-danger'}
+      className={props.as === BaseButton ? 'w-100' : 'text-danger'}
       title={translate('Decline')}
       action={mutate}
       disabled={isLoading}

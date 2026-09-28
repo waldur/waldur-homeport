@@ -1,13 +1,14 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { ISSUE_CREATION_FORM_ID } from '@/issues/create/constants';
 import { hasSupport } from '@/issues/hooks';
 import { IssuesList } from '@/issues/list/IssuesList';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { PAGE_SIZE_COMPACT } from '@/table/constants';
 
 const IssueCreateDialog = lazyComponent(() =>
@@ -28,11 +29,12 @@ const CreateIssueButton = ({ resource }) => {
       formId: ISSUE_CREATION_FORM_ID,
     });
   return (
-    <ActionButton
+    <BaseButton
       iconNode={<PlusCircleIcon weight="bold" />}
-      title={translate('Create')}
-      action={callback}
+      label={translate('Create')}
+      onClick={callback}
       variant="primary"
+      size="lg"
     />
   );
 };

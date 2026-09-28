@@ -2,7 +2,8 @@ import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { OfferingMergePreview, OfferingMergeStateEnum } from 'waldur-js-client';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Column } from '@/table/types';

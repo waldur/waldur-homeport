@@ -119,10 +119,6 @@
         align-items: center;
         justify-content: center;
         gap: 0.75rem;
-
-        .btn {
-          white-space: nowrap;
-        }
       }
 
       .dropdown-toggle:before {
@@ -156,7 +152,19 @@
     > td.has-filter {
       position: relative;
 
-      button.inline-filter {
+      // The absolute hover-reveal positioning lives on `.inline-filter-anchor`,
+      // a plain wrapper span around the trigger — not on the trigger's own
+      // `.inline-filter` <button>. BaseButton wraps any button with a
+      // `tooltip` prop in its own in-flow span for Radix Tooltip; if the
+      // *button itself* were `position: absolute`, that wrapper span would
+      // have no in-flow content left to size itself by and would collapse
+      // to zero size — which is also what the Tooltip anchors its floating
+      // position to, so the "Add filter" tooltip would show up wherever
+      // that collapsed span happens to sit, not next to the visible icon.
+      // Positioning this stable outer anchor instead, and leaving the
+      // button itself in normal flow inside it, keeps the icon and its
+      // tooltip anchored to the same real, correctly-sized box.
+      .inline-filter-anchor {
         position: absolute;
         right: 0.75rem;
         transition: $transition-fade;
@@ -167,14 +175,16 @@
         background: $gray-50;
         width: 32px;
         height: 32px;
-        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        svg {
-          color: $gray-600;
-        }
-        &:hover svg {
-          color: $gray-700;
-        }
+      .inline-filter svg {
+        color: $gray-600;
+      }
+      .inline-filter:hover svg {
+        color: $gray-700;
       }
     }
 
@@ -211,7 +221,7 @@
         width: calc(100% - 40px);
       }
 
-      button.inline-filter {
+      .inline-filter-anchor {
         opacity: 1;
       }
     }
@@ -335,18 +345,6 @@
   }
 
   .card-header .card-toolbar {
-    .btn.btn-lg {
-      height: 44px;
-      font-size: $input-btn-font-size-lg;
-
-      &.btn-icon {
-        width: 44px;
-      }
-      &:not(.btn-icon) {
-        padding: 0.692rem 1.153rem;
-      }
-    }
-
     .table-toolbar-search {
       flex: 0 0 320px;
       max-width: 320px;
@@ -356,19 +354,6 @@
         flex: 1 1 auto;
         max-width: 100%;
         width: 100%;
-      }
-    }
-  }
-
-  .card-toolbar {
-    .btn {
-      &.btn-icon {
-        width: 44px;
-        height: 44px;
-      }
-      &.btn-icon.btn-sm {
-        width: 28px;
-        height: 28px;
       }
     }
   }
@@ -746,16 +731,4 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 // Standalone table header
 .table-standalone-header {
   margin-bottom: 24px;
-
-  .btn {
-    height: 44px;
-    font-size: $input-btn-font-size-lg;
-
-    &.btn-icon {
-      width: 44px;
-    }
-    &:not(.btn-icon) {
-      padding: 0.692rem 1.153rem;
-    }
-  }
 }

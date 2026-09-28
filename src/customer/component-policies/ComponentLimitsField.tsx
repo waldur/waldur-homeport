@@ -4,12 +4,13 @@ import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { composeValidators, required } from '@/core/validators';
 import { NumberField, SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { validateNonNegative } from '@/marketplace/common/utils';
 import { useComponentLimitsArrayFieldFunctions } from '@/marketplace/offerings/details/policies/ComponentLimitsField';
-import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { policyPeriodOptions } from '../cost-policies/utils';
@@ -120,9 +121,11 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
         </Form.Group>
       )}
       <div>
-        <ActionButton
-          action={addRow}
+        <BaseButton
+          onClick={addRow}
           iconNode={<PlusCircleIcon weight="bold" />}
+          variant="tertiary"
+          size="lg"
         />
       </div>
     </>

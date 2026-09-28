@@ -147,9 +147,12 @@ export const ReviewerPoolSection = ({ call }) => {
       filters={<ReviewerPoolFilter />}
       expandableRow={ExpandableRow}
       tableActions={
-        <button className="btn btn-primary btn-sm" onClick={handleInvite}>
-          {translate('Invite reviewer')}
-        </button>
+        <BaseButton
+          variant="primary"
+          size="sm"
+          onClick={handleInvite}
+          label={translate('Invite reviewer')}
+        />
       }
     />
   );

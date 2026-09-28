@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { StringField } from '@/form';
 import { translate } from '@/i18n';
 
@@ -35,11 +35,12 @@ export const CriteriaListField: FC<OwnProps> = ({ name }) => (
                 )}
               />
             </div>
-            <CompactIconButton
+            <BaseButton
               tooltip={translate('Remove')}
               iconNode={<TrashIcon weight="bold" />}
               onClick={() => fields.remove(index)}
               variant="text-danger"
+              size="sm"
             />
           </div>
         ))}

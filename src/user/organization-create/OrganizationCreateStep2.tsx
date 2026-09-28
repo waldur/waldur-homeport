@@ -4,6 +4,8 @@ import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Form as BootstrapForm, Card, Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import {
@@ -264,15 +266,14 @@ export const OrganizationCreateStep2: FunctionComponent<
                                   'This check uses your identity from your account. Complete your profile to continue.',
                                 )}
                           </div>
-                          <button
-                            type="button"
-                            className="btn btn-primary btn-sm"
+                          <BaseButton
+                            variant="primary"
+                            size="sm"
                             onClick={() =>
                               router.stateService.go('profile-manage')
                             }
-                          >
-                            {translate('Complete profile')}
-                          </button>
+                            label={translate('Complete profile')}
+                          />
                         </div>
                       </Card.Body>
                     </Card>

@@ -7,7 +7,7 @@ import {
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { useComposerSeed } from '@/ai-assistant/hooks/useComposerSeed';
 import { translate } from '@/i18n';
@@ -71,18 +71,16 @@ export const AssistantComposer: FC<Props> = ({
             {leadingActions}
             <AuiIf condition={(s) => !s.thread.isRunning}>
               <ComposerPrimitive.Send asChild>
-                {/* asChild requires a raw <button> here, not the design-token Button */}
-                <button
-                  className={classNames(
-                    'btn btn-text-primary btn-sm d-flex align-items-center gap-2',
-                    alignEnd && 'ms-auto',
-                  )}
+                {/* BaseButton is forwardRef and spreads its rest props, so asChild can merge Send's handlers/disabled onto it */}
+                <BaseButton
+                  variant="text-primary"
+                  size="sm"
+                  className={classNames(alignEnd && 'ms-auto')}
                   {...(disabled ? { disabled: true } : {})}
                   aria-label={translate('Send message')}
-                >
-                  <PaperPlaneTiltIcon weight="bold" />
-                  <span>{translate('Send')}</span>
-                </button>
+                  iconNode={<PaperPlaneTiltIcon weight="bold" />}
+                  label={translate('Send')}
+                />
               </ComposerPrimitive.Send>
             </AuiIf>
             <AuiIf condition={(s) => s.thread.isRunning}>

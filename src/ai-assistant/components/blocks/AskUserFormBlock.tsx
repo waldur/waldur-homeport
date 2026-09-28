@@ -8,7 +8,8 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 
@@ -480,14 +481,15 @@ export const AskUserFormBody: FC<
               clearComposer={false}
               asChild
             >
-              <button
-                type="button"
-                className="btn btn-primary btn-sm aui-ask-user-submit"
+              <BaseButton
+                variant="primary"
+                size="sm"
+                className="aui-ask-user-submit"
                 onClick={() => setSubmitted(true)}
-              >
-                <span>{translate('Send answers')}</span>
-                <ArrowRightIcon size={13} weight="bold" />
-              </button>
+                label={translate('Send answers')}
+                iconNode={<ArrowRightIcon size={13} weight="bold" />}
+                iconRight
+              />
             </ThreadPrimitive.Suggestion>
           )}
         </div>

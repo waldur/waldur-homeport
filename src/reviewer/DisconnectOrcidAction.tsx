@@ -4,7 +4,8 @@ import {
   reviewerProfilesDisconnectOrcid,
 } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -32,11 +33,11 @@ export const DisconnectOrcidAction: FC<DisconnectOrcidActionProps> = ({
   });
 
   return (
-    <CompactSubmitButton
-      type="button"
+    <BaseButton
+      size="sm"
       variant="danger"
       onClick={() => mutate()}
-      submitting={isPending}
+      pending={isPending}
       label={translate('Disconnect ORCID')}
     />
   );

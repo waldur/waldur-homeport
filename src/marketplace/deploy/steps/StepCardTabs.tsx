@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { CompactActionButton } from '@/table/CompactActionButton';
+import { BaseButton } from 'waldur-ui';
 
 export interface TabSpec<T = any> {
   title: string;
@@ -23,15 +23,16 @@ export const StepCardTabs: React.FC<StepCardTabsProps<TabSpec<any>>> = ({
   return (
     <>
       {tabs.map((tabItem) => (
-        <CompactActionButton
+        <BaseButton
           key={tabItem.key}
-          variant="link"
+          variant={tab.key === tabItem.key ? 'text-primary' : 'text-secondary'}
           className={classNames(
-            'btn-color-dark btn-active-color-primary mx-3',
-            tab.key === tabItem.key && 'active text-decoration-underline',
+            'mx-3',
+            tab.key === tabItem.key && 'text-decoration-underline',
           )}
-          action={() => setTab(tabItem)}
-          title={tabItem.title}
+          onClick={() => setTab(tabItem)}
+          label={tabItem.title}
+          size="sm"
         />
       ))}
     </>

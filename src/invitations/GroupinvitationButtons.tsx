@@ -1,21 +1,20 @@
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 export const GroupInvitationButtons = ({ dismiss, submitRequest }) => (
   <>
-    <SubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
       onClick={dismiss}
       variant="secondary"
       label={translate('Cancel')}
+      size="lg"
     />
-    <SubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
       variant="primary"
       onClick={submitRequest}
       label={translate('Submit')}
+      size="lg"
     />
   </>
 );

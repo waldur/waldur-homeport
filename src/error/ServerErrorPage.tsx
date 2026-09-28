@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { goBack } from '@/error/utils';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
 
@@ -15,17 +16,18 @@ export const ServerErrorPage: FunctionComponent = () => {
   return (
     <ErrorPageView code="500" hideActions>
       <div className="d-flex gap-3 justify-content-center">
-        <SubmitButton
-          submitting={false}
+        <BaseButton
           onClick={goBack}
           variant="secondary"
-          type="button"
-        >
-          {translate('Go back')}
-        </SubmitButton>
-        <SubmitButton submitting={false} onClick={reload} type="button">
-          {translate('Reload page')}
-        </SubmitButton>
+          label={translate('Go back')}
+          size="lg"
+        />
+        <BaseButton
+          onClick={reload}
+          label={translate('Reload page')}
+          variant="primary"
+          size="lg"
+        />
       </div>
     </ErrorPageView>
   );

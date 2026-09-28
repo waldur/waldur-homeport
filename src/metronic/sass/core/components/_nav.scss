@@ -120,8 +120,7 @@ $nav-line-tabs-link-margin: 0.615rem !default;
   &.nav-group-fluid {
     display: flex;
 
-    > label,
-    > .btn {
+    > label {
       position: relative;
       flex-shrink: 0;
       flex-grow: 1;
@@ -130,10 +129,6 @@ $nav-line-tabs-link-margin: 0.615rem !default;
 
     > label {
       margin-right: 0.1rem;
-
-      > .btn {
-        width: 100%;
-      }
 
       &:last-child {
         margin-right: 0;

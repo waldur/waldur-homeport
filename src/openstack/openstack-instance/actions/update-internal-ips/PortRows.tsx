@@ -2,12 +2,13 @@ import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { SubnetValueContainer } from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import { formatSubnet } from '@/openstack/openstack-instance/utils';
-import { ActionButton } from '@/table/ActionButton';
 
 import { CustomIpFieldFinal } from './CustomIpFieldFinal';
 
@@ -61,11 +62,12 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
                 />
               </Col>
               <Col xs="auto" className="align-self-end">
-                <ActionButton
-                  action={() => fields.remove(index)}
+                <BaseButton
+                  onClick={() => fields.remove(index)}
                   iconNode={<TrashIcon weight="bold" />}
                   variant="text-danger"
                   tooltip={translate('Remove')}
+                  size="lg"
                 />
               </Col>
               {hasCustomIp && (
@@ -83,17 +85,18 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
           </Fragment>
         ))}
       </div>
-      <ActionButton
-        action={addRow}
+      <BaseButton
+        onClick={addRow}
         disabled={freeSubnets.length === 0}
         tooltip={
           freeSubnets.length === 0
             ? translate('No more subnets available')
             : undefined
         }
-        title={translate('Add subnet')}
+        label={translate('Add subnet')}
         iconNode={<PlusCircleIcon weight="bold" />}
         variant="text-primary"
+        size="lg"
       />
     </div>
   );

@@ -1,7 +1,8 @@
 import { ArrowCounterClockwiseIcon, WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { SubmitButton } from '@/form/SubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -61,14 +62,13 @@ export const PubSubCircuitBreakerResetButton: FC<
   }
 
   return (
-    <SubmitButton
-      submitting={isPending}
-      type="button"
+    <BaseButton
+      pending={isPending}
       variant="warning"
       onClick={() => mutate()}
       label={translate('Reset circuit breaker')}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
-      iconOnLeft
+      size="lg"
     />
   );
 };

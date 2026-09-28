@@ -7,7 +7,7 @@ import {
   supportIssuesRetrieve,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
@@ -15,7 +15,6 @@ import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { ActionButton } from '@/table/ActionButton';
 
 import { providerTicketInfo } from './providerTicketInfo';
 
@@ -147,10 +146,11 @@ export const RerouteButton: FC<{
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Reroute')}
+    <BaseButton
+      label={translate('Reroute')}
       variant="tertiary"
-      action={() => openDialog(RerouteDialog, { resolve: { issue, refetch } })}
+      onClick={() => openDialog(RerouteDialog, { resolve: { issue, refetch } })}
+      size="lg"
     />
   );
 };

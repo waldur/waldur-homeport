@@ -30,13 +30,14 @@ exports[`InternalIpsList > renders list 1`] = `
             </div>
             <button
               aria-label="Loading"
-              class="btn-icon disabled btn btn-flush btn-lg"
+              class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-[transparent] text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[transparent] active:shadow-none disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)] rounded-lg text-base leading-6 p-0 h-[44px] w-[44px]"
+              data-disabled=""
               data-state="closed"
               disabled=""
               type="button"
             >
               <span
-                class="svg-icon svg-icon-2"
+                class="inline-flex shrink-0 items-center justify-center text-[var(--btn-icon-color,currentColor)] size-5 [&>svg]:size-5"
               >
                 <span
                   class="animation-spin"
@@ -57,11 +58,11 @@ exports[`InternalIpsList > renders list 1`] = `
             class="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4"
           >
             <button
-              class="btn btn-tertiary btn-lg"
+              class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] bg-[var(--btn-tertiary-bg)] text-[var(--btn-tertiary-text)] hover:bg-[var(--btn-tertiary-bg-hover)] focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-tertiary-border)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6"
               type="button"
             >
               <span
-                class="svg-icon svg-icon-2"
+                class="inline-flex shrink-0 items-center justify-center text-[var(--btn-icon-color,currentColor)] size-5 [&>svg]:size-5"
               >
                 <span
                   data-testid="WrenchIcon"
@@ -272,7 +273,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     <button
                       aria-expanded="false"
                       aria-haspopup="menu"
-                      class="btn dropdown-toggle btn-text-secondary btn-icon no-arrow btn-lg"
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-[transparent] text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[transparent] active:shadow-none disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6 p-0 h-[44px] w-[44px] dropdown-toggle btn-icon no-arrow"
                       data-state="closed"
                       id="radix-:r5:"
                       type="button"

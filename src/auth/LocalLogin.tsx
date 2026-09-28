@@ -1,6 +1,8 @@
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import './LocalLogin.css';
@@ -16,27 +18,25 @@ interface LocalLoginFormProps {
 }
 
 export const LocalLoginButton: FC<LocalLoginButtonProps> = ({ onClick }) => (
-  <button
-    type="button"
-    className="btn btn-link login-with-local-account-button"
+  <BaseButton
+    variant="text-primary"
+    className="login-with-local-account-button"
     onClick={onClick}
-  >
-    {translate('Sign in with local account')}
-  </button>
+    label={translate('Sign in with local account')}
+  />
 );
 
 export const LocalLoginForm: FC<LocalLoginFormProps> = ({ onBack }) => (
   <div className="local-login-form">
     <SigninForm />
     {onBack && (
-      <button
-        type="button"
-        className="btn btn-link text-muted mt-2"
+      <BaseButton
+        variant="text-secondary"
+        className="mt-2"
         onClick={onBack}
-      >
-        <ArrowLeftIcon className="me-2" weight="bold" />
-        {translate('Back to all sign-in options')}
-      </button>
+        iconNode={<ArrowLeftIcon weight="bold" />}
+        label={translate('Back to all sign-in options')}
+      />
     )}
   </div>
 );

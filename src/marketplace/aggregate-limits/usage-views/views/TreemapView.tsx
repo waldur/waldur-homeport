@@ -1,8 +1,7 @@
 import { FC, useMemo, useState } from 'react';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { generateBrandColors } from 'waldur-design-tokens';
-import { Badge } from 'waldur-ui';
+import { Badge, SegmentedControl } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { getBrandColor } from '@/core/utils';
@@ -262,34 +261,25 @@ export const TreemapView: FC<Props> = ({ components }) => {
           </Badge>
         </div>
         <small className="text-secondary">{translate('Size by')}:</small>
-        <ToggleButtonGroup
-          type="radio"
-          name="treemap-mode"
-          value={mode}
-          onChange={(v) => setMode(v as SizeMode)}
-          size="sm"
+        <SegmentedControl<SizeMode>
           aria-label={translate('Size by')}
-        >
-          <ToggleButton id="tm-usage" value="usage" variant="tertiary">
-            {translate('Usage')}
-          </ToggleButton>
-          <ToggleButton
-            id="tm-limit"
-            value="limit"
-            variant="tertiary"
-            disabled={!mix.hasLimit}
-          >
-            {translate('Limit')}
-          </ToggleButton>
-          <ToggleButton
-            id="tm-pct"
-            value="pct"
-            variant="tertiary"
-            disabled={disablePct}
-          >
-            {translate('% of limit')}
-          </ToggleButton>
-        </ToggleButtonGroup>
+          size="sm"
+          options={[
+            { value: 'usage', label: translate('Usage') },
+            {
+              value: 'limit',
+              label: translate('Limit'),
+              disabled: !mix.hasLimit,
+            },
+            {
+              value: 'pct',
+              label: translate('% of limit'),
+              disabled: disablePct,
+            },
+          ]}
+          value={mode}
+          onValueChange={setMode}
+        />
         {disablePct && (
           <small className="text-muted">
             {translate(

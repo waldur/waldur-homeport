@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import { Issue, supportIssuesSetStatus } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { ActionButton } from '@/table/ActionButton';
 
 const ChangeStatusDialog: FC<{
   resolve: { issue: Issue; refetch: () => void };
@@ -66,16 +67,17 @@ export const ChangeStatusButton: FC<{ issue: Issue; refetch: () => void }> = ({
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Change status')}
+    <BaseButton
+      label={translate('Change status')}
       variant="tertiary"
       disabled={!issue.update_is_available}
       disabledReason={translate(
         'This request cannot be updated in its current state.',
       )}
-      action={() =>
+      onClick={() =>
         openDialog(ChangeStatusDialog, { resolve: { issue, refetch } })
       }
+      size="lg"
     />
   );
 };

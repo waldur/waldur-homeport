@@ -4,7 +4,8 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { OfferingMergeRefusal } from 'waldur-js-client';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { HelpTip } from '@/core/HelpTip';
 import { Link } from '@/core/Link';

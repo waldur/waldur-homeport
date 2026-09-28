@@ -74,7 +74,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
             <CopyToClipboard
               value={config}
               label={translate('Copy')}
-              className="btn-tertiary w-150px"
+              className="w-150px"
             />
           </div>
         )}

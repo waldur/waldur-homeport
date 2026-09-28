@@ -14,7 +14,7 @@ import {
   ChecklistTypeEnum,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { AddButton } from '@/core/AddButton';
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
@@ -24,7 +24,6 @@ import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -434,13 +433,14 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
 
   const tableActions = (
     <>
-      <ActionButton
-        title={translate('Import preset')}
-        action={handleImportPreset}
+      <BaseButton
+        label={translate('Import preset')}
+        onClick={handleImportPreset}
         disabled={isImporting}
         disabledReason={translate('Import in progress')}
         iconNode={<DownloadSimpleIcon weight="bold" />}
-        variant="light"
+        variant="tertiary"
+        size="lg"
       />
       <AddButton action={handleAddQuestion} />
     </>

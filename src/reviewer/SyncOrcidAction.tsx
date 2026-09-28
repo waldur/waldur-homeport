@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { ReviewerProfile, reviewerProfilesSyncOrcid } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -33,11 +34,11 @@ export const SyncOrcidAction: FC<SyncOrcidActionProps> = ({
   });
 
   return (
-    <CompactSubmitButton
-      type="button"
-      variant="outline-primary"
+    <BaseButton
+      size="sm"
+      variant="secondary"
       onClick={() => mutate()}
-      submitting={isPending}
+      pending={isPending}
       label={translate('Sync ORCID')}
     />
   );

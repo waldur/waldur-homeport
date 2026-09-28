@@ -56,11 +56,10 @@ const OfferingListItem: FC<{ row: any }> = ({ row }) => {
                 <OfferingLink
                   offering_uuid={row.uuid}
                   buttonVariant="text-primary"
-                  className="btn-icon btn-sm"
+                  buttonSize="sm"
+                  buttonIconOnly
                 >
-                  <span className="svg-icon svg-icon-2">
-                    <PlusCircleIcon weight="bold" />
-                  </span>
+                  <PlusCircleIcon weight="bold" size={19.5} />
                 </OfferingLink>
               </span>
             </Tooltip>

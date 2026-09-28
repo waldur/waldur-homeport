@@ -9,8 +9,7 @@ import {
   reviewerSuggestionsDestroy,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton, Tooltip } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -188,29 +187,32 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
       </span>
       {pendingRows.length > 0 && (
         <>
-          <button
-            className="btn btn-sm btn-success"
+          <BaseButton
+            variant="success"
+            size="sm"
             onClick={() => handleBulkConfirm()}
             disabled={isLoading}
-          >
-            {translate('Confirm all')} ({pendingRows.length})
-          </button>
-          <button
-            className="btn btn-sm btn-danger"
+            disabledReason={translate('Action in progress')}
+            label={`${translate('Confirm all')} (${pendingRows.length})`}
+          />
+          <BaseButton
+            variant="danger"
+            size="sm"
             onClick={() => handleBulkReject()}
             disabled={isLoading}
-          >
-            {translate('Reject all')} ({pendingRows.length})
-          </button>
+            disabledReason={translate('Action in progress')}
+            label={`${translate('Reject all')} (${pendingRows.length})`}
+          />
         </>
       )}
-      <button
-        className="btn btn-sm btn-danger"
+      <BaseButton
+        variant="danger"
+        size="sm"
         onClick={() => handleBulkDelete()}
         disabled={isLoading}
-      >
-        {translate('Delete all')} ({rows.length})
-      </button>
+        disabledReason={translate('Action in progress')}
+        label={`${translate('Delete all')} (${rows.length})`}
+      />
     </div>
   );
 };
@@ -264,16 +266,16 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
           <div>
             <div className="d-flex align-items-center gap-2">
               <span className="fw-bold">{row.reviewer_name}</span>
-              <button
-                className="btn btn-sm btn-icon btn-light-primary"
+              <BaseButton
+                variant="secondary"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleViewProfile(row);
                 }}
-                title={translate('View profile')}
-              >
-                <UserIcon size={14} weight="bold" />
-              </button>
+                tooltip={translate('View profile')}
+                iconNode={<UserIcon size={14} weight="bold" />}
+              />
             </div>
             {row.reviewer_biography && (
               <div

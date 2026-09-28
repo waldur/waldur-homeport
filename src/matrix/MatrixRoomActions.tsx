@@ -21,6 +21,8 @@ import {
   matrixRoomsSyncMembers,
 } from 'waldur-js-client';
 
+import { ButtonVariant } from 'waldur-ui';
+
 import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { DisableChatRoomDialog } from '@/matrix/DisableChatRoomDialog';
@@ -40,7 +42,7 @@ interface MatrixRoomActionsProps {
    */
   as?: ComponentType;
   /** Button variant, honoured only alongside `as` (menu rows are unstyled). */
-  variant?: string;
+  variant?: ButtonVariant;
 }
 
 // You can only open a room's conversation if you actually belong to it — the

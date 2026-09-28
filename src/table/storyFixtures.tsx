@@ -1,12 +1,10 @@
 import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 
-import { AlertItem, Badge, BadgeVariant } from 'waldur-ui';
+import { AlertItem, Badge, BadgeVariant, BaseButton } from 'waldur-ui';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { ModelCard1 } from '@/core/ModelCard1';
 import { Field } from '@/resource/summary';
 
-import { CompactActionButton } from './CompactActionButton';
 import { ExpandableContainer } from './ExpandableContainer';
 import { BooleanFilter, SelectFilter, StringFilter } from './filters';
 import { RemovalActionButton } from './RemovalActionButton';
@@ -246,15 +244,19 @@ export const TableStoryBulkDeleteButton = ({
  */
 export const TableStoryInlineRowActions = () => (
   <div className="d-flex gap-2">
-    <CompactActionButton
-      action={() => undefined}
-      title="Edit"
+    <BaseButton
+      onClick={() => undefined}
+      label="Edit"
       iconNode={<PencilSimpleIcon weight="bold" />}
+      variant="tertiary"
+      size="sm"
     />
-    <CompactActionButton
-      action={() => undefined}
-      title="Delete"
+    <BaseButton
+      onClick={() => undefined}
+      label="Delete"
       iconNode={<TrashIcon weight="bold" />}
+      variant="tertiary"
+      size="sm"
     />
   </div>
 );

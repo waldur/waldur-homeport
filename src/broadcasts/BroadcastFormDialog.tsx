@@ -6,12 +6,13 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { ActionButton } from '@/table/ActionButton';
 import { ProgressStep, Wizard, WizardFooterRenderProps } from '@/wizard';
 
 import { MessageStep, RecipientsStep } from './steps';
@@ -79,8 +80,8 @@ export const BroadcastFormDialog: FC<BroadcastFormDialogProps> = ({
               iconOnLeft
               label={translate('Save as draft')}
             />
-            <ActionButton
-              action={() => saveAsTemplate(props.values)}
+            <BaseButton
+              onClick={() => saveAsTemplate(props.values)}
               variant="secondary"
               disabled={disabled}
               disabledReason={
@@ -89,10 +90,11 @@ export const BroadcastFormDialog: FC<BroadcastFormDialogProps> = ({
                   : translate('Please fill in all required fields')
               }
               iconNode={<FloppyDiskIcon weight="bold" />}
-              title={translate('Save as a template')}
+              label={translate('Save as a template')}
+              size="lg"
             />
-            <ActionButton
-              action={props.handleSubmit}
+            <BaseButton
+              onClick={props.handleSubmit}
               disabled={disabled}
               disabledReason={
                 props.submitting
@@ -100,7 +102,9 @@ export const BroadcastFormDialog: FC<BroadcastFormDialogProps> = ({
                   : translate('Please fill in all required fields')
               }
               iconNode={<ArrowRightIcon weight="bold" />}
-              title={translate('Select recipients')}
+              label={translate('Select recipients')}
+              variant="tertiary"
+              size="lg"
             />
           </>
         );
@@ -108,11 +112,12 @@ export const BroadcastFormDialog: FC<BroadcastFormDialogProps> = ({
 
       return (
         <>
-          <ActionButton
-            action={props.onPrev}
+          <BaseButton
+            onClick={props.onPrev}
             variant="secondary"
             iconNode={<ArrowLeftIcon weight="bold" />}
-            title={translate('Back')}
+            label={translate('Back')}
+            size="lg"
           />
           <SubmitButton
             submitting={false}

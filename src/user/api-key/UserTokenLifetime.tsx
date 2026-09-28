@@ -58,7 +58,8 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
           <Col sm="auto" className="order-1 order-sm-2 min-w-25 ms-auto">
             <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3">
               <SubmitButton
-                className="btn btn-primary btn-metro me-2"
+                variant="primary"
+                className="me-2"
                 submitting={submitting}
                 onClick={() => {
                   handleSubmit();

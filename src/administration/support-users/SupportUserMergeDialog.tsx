@@ -6,8 +6,9 @@ import {
   supportUsersMerge,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -63,12 +64,20 @@ export const SupportUserMergeDialog = ({ resolve }) => {
       footer={
         <>
           <CloseDialogButton />
-          <SubmitButton
-            type="button"
+          <BaseButton
             disabled={selected.length === 0 || mergeMutation.isPending}
-            submitting={mergeMutation.isPending}
+            disabledReason={
+              selected.length === 0
+                ? translate(
+                    'Please select at least one duplicate user to merge',
+                  )
+                : undefined
+            }
+            pending={mergeMutation.isPending}
             onClick={() => mergeMutation.mutate()}
             label={translate('Merge')}
+            variant="primary"
+            size="lg"
           />
         </>
       }

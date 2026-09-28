@@ -6,9 +6,8 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { Select } from 'waldur-ui';
+import { BaseButton, Select } from 'waldur-ui';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 

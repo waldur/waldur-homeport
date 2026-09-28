@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { marketplaceOrdersList, OrderDetails } from 'waldur-js-client';
+
+import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
@@ -62,7 +63,7 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
         <OrderConsumerActions
           order={row}
           refetch={tableProps.fetch}
-          as={Button}
+          as={BaseButton}
           size="sm"
         />
       )}

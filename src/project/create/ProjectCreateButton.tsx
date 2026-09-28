@@ -1,13 +1,13 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-import { ButtonVariant } from 'react-bootstrap/esm/types';
+
+import { ButtonVariant, BaseButton, ButtonSize } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
@@ -20,6 +20,7 @@ const ProjectCreateDialog = lazyComponent(() =>
 interface ProjectCreateButtonProps {
   customer: Customer;
   variant?: ButtonVariant;
+  size?: ButtonSize;
   title?: string;
   iconNode?: ReactNode;
   refetch?: () => void;
@@ -30,6 +31,7 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
   customer: _customer,
   title = translate('Add'),
   variant = 'primary',
+  size = 'lg',
   iconNode,
   refetch,
   className,
@@ -46,11 +48,11 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      title={title}
+    <BaseButton
+      label={title}
       variant={variant}
       className={className}
-      action={() =>
+      onClick={() =>
         openDialog(ProjectCreateDialog, {
           size: 'lg',
           formId: 'projectCreate',
@@ -69,6 +71,7 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
       }
       iconNode={iconNode || <PlusCircleIcon weight="bold" />}
       disabled={disabled}
+      size={size}
     />
   );
 };

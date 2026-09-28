@@ -7,7 +7,7 @@ import {
   openportalAccessForEmailList,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { useDebouncedValue } from '@/core/useDebouncedValue';
 import { FilterBox } from '@/form/FilterBox';
@@ -242,13 +242,11 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
               style={{ flex: 1 }}
             />
             {searchValue && (
-              <button
-                type="button"
-                className="btn btn-secondary"
+              <BaseButton
+                variant="secondary"
                 onClick={handleClear}
-              >
-                {translate('Clear')}
-              </button>
+                label={translate('Clear')}
+              />
             )}
           </div>
         </div>

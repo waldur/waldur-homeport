@@ -2,6 +2,8 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { marketplaceOfferingProfilesRemoveRole } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -37,13 +39,14 @@ export const OfferingProfileRoleRemoveButton: FC<
   });
 
   return (
-    <button
-      type="button"
-      className="btn btn-sm btn-light text-danger"
+    <BaseButton
+      variant="text-danger"
+      size="sm"
       onClick={() => removeMutation.mutate()}
       disabled={removeMutation.isPending}
-    >
-      <TrashIcon weight="bold" /> {translate('Remove')}
-    </button>
+      disabledReason={translate('Removing...')}
+      iconNode={<TrashIcon weight="bold" />}
+      label={translate('Remove')}
+    />
   );
 };

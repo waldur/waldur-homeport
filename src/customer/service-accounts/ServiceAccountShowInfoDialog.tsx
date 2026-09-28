@@ -33,7 +33,7 @@ export const ServiceAccountShowInfoDialog = ({ resolve }: OwnProps) => {
           <CopyToClipboardButton
             value={resolve.token}
             size={20}
-            buttonClassName="btn btn-text-secondary btn-icon"
+            buttonVariant="text-secondary"
             onlyButton
           />
         </Stack>

@@ -5,8 +5,9 @@ import {
 import { Table } from 'react-bootstrap';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -82,14 +83,12 @@ export const IssueLogButton = ({ issue }) => {
     });
 
   return (
-    <SubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
       variant="secondary"
       onClick={callback}
       label={translate('Show log')}
       iconNode={<ClockCounterClockwiseIcon weight="bold" />}
-      iconOnLeft
+      size="lg"
     />
   );
 };
@@ -116,15 +115,13 @@ export const IssueSyncButton = ({
   }
 
   return (
-    <SubmitButton
-      submitting={isPending}
-      type="button"
+    <BaseButton
+      pending={isPending}
       variant="secondary"
       onClick={() => mutate()}
-      disabled={isPending}
       label={translate('Sync')}
       iconNode={<CloudArrowDownIcon weight="bold" />}
-      iconOnLeft
+      size="lg"
     />
   );
 };

@@ -1,10 +1,12 @@
 /**
  * Shared helper for rules that inspect Bootstrap classes on native elements.
  *
- * The rules named after markup (e.g. `no-direct-bootstrap-button`) originally
- * only saw `import { Button } from 'react-bootstrap'`. The thing they are
- * actually about — `<button className="btn btn-danger">` — carries no import
- * at all, so it slipped through. These helpers pull the statically knowable class
+ * Import-based checks (the `no-restricted-imports` entries for
+ * `Button`/`DropdownButton` in eslint.config.js) only ever saw
+ * `import { Button } from 'react-bootstrap'`. The thing rules using these
+ * helpers are actually about — `<button className="btn btn-danger">` —
+ * carries no import at all, so it slipped through. These helpers pull the
+ * statically knowable class
  * tokens out of a `className` attribute so a `JSXOpeningElement` visitor can match
  * on them.
  *

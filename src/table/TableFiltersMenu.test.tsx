@@ -71,9 +71,9 @@ describe('TableFiltersMenu', () => {
     expect(await screen.findByText('Catalog')).toBeInTheDocument();
   });
 
-  it('the "Add filter" button itself carries Radix\'s trigger state, not just Tip\'s wrapper', async () => {
-    // Regression test for the Tip-inside-Trigger-asChild bug documented
-    // on TableFiltersMenu.tsx's own "Tip wraps the Trigger" comment: the
+  it('the "Add filter" button itself carries Radix\'s trigger state, not just its tooltip wrapper', async () => {
+    // Regression test for the tooltip-wrapper-inside-Trigger-asChild bug
+    // (see the comment above the trigger in TableFiltersMenu.tsx): the
     // button rendered but never actually carried aria-expanded/data-state.
     // jsdom doesn't fail on bad positioning (no real layout), so this
     // asserts the attributes directly instead — the one part of the bug

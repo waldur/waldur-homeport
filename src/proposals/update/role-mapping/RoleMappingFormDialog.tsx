@@ -95,7 +95,8 @@ export const RoleMappingFormDialog = ({ resolve }) => {
                   submitting={submitting}
                   disabled={invalid}
                   label={isEdit ? translate('Update') : translate('Create')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

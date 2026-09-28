@@ -13,14 +13,14 @@ import { FC, useMemo, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Link } from '@/core/Link';
 import { FilterBox } from '@/form/FilterBox';
 import { Select } from '@/form/select';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 import {
   ActionsPopoverComponent,
   ActionsPopoverItem,
@@ -134,18 +134,20 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           className={isSmallScr ? 'w-250px' : 'w-300px'}
         />
 
-        <SubmitButton
-          submitting={submitting || executing}
+        <BaseButton
+          pending={submitting || executing}
           disabled={!dirty}
+          disabledReason={
+            !dirty ? translate('There are no changes to save') : undefined
+          }
           onClick={onSave}
-          type="button"
           iconNode={<CheckIcon weight="bold" />}
-          iconOnLeft
-        >
-          {isSmallScr ? translate('Save') : translate('Save script')}
-        </SubmitButton>
-        <ActionButton
-          action={onReset}
+          label={isSmallScr ? translate('Save') : translate('Save script')}
+          variant="primary"
+          size="lg"
+        />
+        <BaseButton
+          onClick={onReset}
           variant="secondary"
           disabled={submitting || !dirty}
           disabledReason={
@@ -154,19 +156,21 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
               : translate('No changes to reset')
           }
           iconNode={<ArrowClockwiseIcon weight="bold" />}
-          title={isSmallScr ? translate('Reset') : translate('Reset to saved')}
+          label={isSmallScr ? translate('Reset') : translate('Reset to saved')}
+          size="lg"
         />
-        <ActionButton
+        <BaseButton
           variant="secondary"
-          action={onDryRun}
+          onClick={onDryRun}
           disabled={submitting}
           disabledReason={translate('Saving in progress')}
           pending={executing}
           className="text-nowrap"
           iconNode={<PlayIcon weight="bold" />}
-          title={
+          label={
             isSmallScr ? translate('Dry run') : translate('Dry run script')
           }
+          size="lg"
         />
       </div>
       {/* ActionsPopoverComponent, not ActionsDropdownComponent: the search

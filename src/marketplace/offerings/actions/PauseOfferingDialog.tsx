@@ -42,7 +42,7 @@ export const PauseOfferingDialog: FunctionComponent<{
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Pause')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

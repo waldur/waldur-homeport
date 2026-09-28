@@ -2,14 +2,13 @@ import { SparkleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import React, { useEffect, useRef } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { useAnonymousThreadContext } from '@/ai-assistant/anonymous/AnonymousThreadProvider';
 import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { isAnonymousVisitor, isAssistantEnabled } from '@/ai-assistant/utils';
 import { openUnifiedChatDrawer } from '@/chat/openUnifiedChatDrawer';
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { useDrawer, useIsDrawerOpenWith } from '@/drawer/actions';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
 import { isDrawerOpen, isDrawerOpenWithClass } from '@/drawer/utils';

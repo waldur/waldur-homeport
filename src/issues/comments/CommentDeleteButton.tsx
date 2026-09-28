@@ -2,7 +2,8 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { FC, useContext } from 'react';
 import { supportCommentsDestroy } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -33,11 +34,10 @@ export const CommentDeleteButton: FC<CommentDeleteButtonProps> = ({
   });
 
   return (
-    <CompactSubmitButton
-      submitting={deleteComment.isPending}
-      type="button"
+    <BaseButton
+      size="sm"
+      pending={deleteComment.isPending}
       variant="tertiary"
-      disabled={deleteComment.isPending}
       onClick={() => deleteComment.mutate()}
       label={translate('Remove')}
       iconNode={<TrashIcon weight="bold" />}

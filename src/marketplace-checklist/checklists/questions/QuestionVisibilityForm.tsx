@@ -11,6 +11,8 @@ import {
   QuestionTypeEnum,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -31,8 +33,6 @@ import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
 import { questionConditionOperatorOptions } from '@/marketplace-checklist/utils';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { ActionButton } from '@/table/ActionButton';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface FieldValue {
   depends_on_question?;
@@ -153,10 +153,11 @@ export const FieldsListGroup = ({
                 {translate('Condition {index}', { index: i + 1 })}
               </h6>
               <div className="card-toolbar m-0">
-                <ActionButton
-                  action={() => removeRow(i)}
+                <BaseButton
+                  onClick={() => removeRow(i)}
                   iconNode={<TrashIcon weight="bold" />}
                   variant="text-danger"
+                  size="lg"
                 />
               </div>
             </Card.Header>
@@ -264,15 +265,16 @@ export const FieldsListGroup = ({
         );
       })}
       <div>
-        <CompactActionButton
-          action={addRow}
-          title={translate('Add condition')}
+        <BaseButton
+          onClick={addRow}
+          label={translate('Add condition')}
           iconNode={<PlusIcon weight="bold" />}
           variant="text-primary"
           disabled={addDisabled}
           disabledReason={translate(
             'Complete all condition fields before adding another',
           )}
+          size="sm"
         />
       </div>
     </>

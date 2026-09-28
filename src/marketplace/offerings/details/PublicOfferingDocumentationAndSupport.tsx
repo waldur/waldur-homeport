@@ -3,6 +3,8 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
+import { buttonVariants } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
@@ -27,7 +29,7 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
               href={offering.documentation_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-light"
+              className={buttonVariants({ variant: 'tertiary' })}
             >
               <span className="svg-icon svg-icon-2">
                 <ArrowSquareOutIcon weight="bold" />
@@ -43,7 +45,7 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
               href={offering.helpdesk_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-light"
+              className={buttonVariants({ variant: 'tertiary' })}
             >
               <span className="svg-icon svg-icon-2">
                 <ArrowSquareOutIcon weight="bold" />

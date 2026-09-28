@@ -1,10 +1,11 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import { ImportDialogProps } from './types';
 
@@ -20,15 +21,17 @@ export const ResourceImportButton: FC<ImportDialogProps['resolve']> = (
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      title={translate('Import')}
-      action={() => {
+    <BaseButton
+      label={translate('Import')}
+      onClick={() => {
         openDialog(ResourceImportDialog, {
           resolve: props,
           size: 'lg',
         });
       }}
       iconNode={<DownloadSimpleIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

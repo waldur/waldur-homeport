@@ -102,7 +102,7 @@ export const UpdateOfferingMediaDialog: FunctionComponent<
                 validate={required}
                 accept="image/*"
                 buttonLabel={translate('Browse')}
-                className="btn btn-secondary"
+                variant="secondary"
               />
             </div>
           </ModalDialog>

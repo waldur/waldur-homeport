@@ -2,11 +2,10 @@ import { XIcon } from '@phosphor-icons/react';
 import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { RemoveFilterBadgeButton } from '@/table/TableFilterItem';
 
 import { getMarketplaceFilters } from './store/selectors';
@@ -50,12 +49,13 @@ export const PageBarFilters = () => {
               </Badge>
             </Stack>
           ))}
-          <CompactActionButton
+          <BaseButton
             variant="text-secondary"
             className="btn-no-focus"
-            action={clearAllFilters}
+            onClick={clearAllFilters}
             iconNode={<XIcon weight="bold" />}
-            title={translate('Clear filters')}
+            label={translate('Clear filters')}
+            size="sm"
           />
         </div>
       </div>

@@ -1,10 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 const ImportYAMLDialog = lazyComponent(() =>
@@ -22,15 +23,17 @@ export const ImportYAMLButton: FunctionComponent<{ cluster_id: string }> = ({
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Import YAML')}
-      action={() =>
+    <BaseButton
+      label={translate('Import YAML')}
+      onClick={() =>
         openDialog(ImportYAMLDialog, {
           resolve: { cluster_id },
           size: 'lg',
         })
       }
       iconNode={<PlusCircleIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

@@ -6,6 +6,8 @@ import {
 import classNames from 'classnames';
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { FormField } from './types';
@@ -93,31 +95,29 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
             {translate('Upload an image')} JPG {translate('or')} PNG,{' '}
             {translate('under 2 MB.')} {props.description}
           </div>
-          <label
-            className="btn btn-tertiary d-inline-flex align-items-center gap-2"
+          <BaseButton
+            variant="tertiary"
+            className="imagefield-upload-button"
             data-kt-image-input-action="change"
-          >
-            {input.value ? (
-              <>
-                <span>{translate('Replace')}</span>
+            onClick={() => inputRef.current?.click()}
+            iconNode={
+              input.value ? (
                 <ArrowsClockwiseIcon size={20} weight="bold" />
-              </>
-            ) : (
-              <>
+              ) : (
                 <UploadSimpleIcon size={20} weight="bold" />
-                <span>{translate('Upload')}</span>
-              </>
-            )}
-            <input
-              ref={inputRef}
-              type="file"
-              name={input.name}
-              accept=".png, .jpg, .jpeg"
-              onChange={(event) => changeImage(event.target.files[0])}
-              style={{ display: 'none' }}
-              data-testid="image-input"
-            />
-          </label>
+              )
+            }
+            label={input.value ? translate('Replace') : translate('Upload')}
+          />
+          <input
+            ref={inputRef}
+            type="file"
+            name={input.name}
+            accept=".png, .jpg, .jpeg"
+            onChange={(event) => changeImage(event.target.files[0])}
+            style={{ display: 'none' }}
+            data-testid="image-input"
+          />
         </div>
       </div>
     </div>

@@ -3,10 +3,12 @@ import { FC, useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useToggle } from 'react-use';
 
+import { BaseButton } from 'waldur-ui';
+
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { FormFooter, SubmitButton } from '@/form';
+import { FormFooter } from '@/form';
 import { MonacoField } from '@/form/MonacoField';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -87,13 +89,13 @@ export const ViewYAMLDialog: FC<ViewYAMLDialogProps> = ({ resolve }) => {
             {value && !loading && (
               <div className="d-flex align-items-center gap-2 mt-4">
                 <CopyToClipboard value={value as string} textButton />
-                <SubmitButton
-                  submitting={false}
+                <BaseButton
                   onClick={toggleShowDiff}
-                  type="button"
                   label={
                     showDiff ? translate('Hide diff') : translate('Show diff')
                   }
+                  variant="primary"
+                  size="lg"
                 />
               </div>
             )}

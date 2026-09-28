@@ -82,7 +82,8 @@ export const EventSubscriptionForm = ({
                   submitting={submitting}
                   invalid={invalid}
                   label={isEdit ? translate('Update') : translate('Create')}
-                  className="btn btn-primary flex-equal"
+                  variant="primary"
+                  className="flex-equal"
                 />
               </>
             }

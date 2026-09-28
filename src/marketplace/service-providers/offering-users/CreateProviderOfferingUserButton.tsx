@@ -1,9 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const CreateProviderOfferingUserDialog = lazyComponent(() =>
   import('./CreateProviderOfferingUserDialog').then((module) => ({
@@ -14,15 +15,16 @@ const CreateProviderOfferingUserDialog = lazyComponent(() =>
 export const CreateProviderOfferingUserButton = ({ refetch, provider }) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      title={translate('Create')}
+    <BaseButton
+      label={translate('Create')}
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
-      action={() =>
+      onClick={() =>
         openDialog(CreateProviderOfferingUserDialog, {
           resolve: { refetch, provider },
         })
       }
+      size="lg"
     />
   );
 };

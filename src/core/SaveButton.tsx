@@ -1,37 +1,38 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button, ButtonProps } from 'react-bootstrap';
 
-import { Badge, Tooltip } from 'waldur-ui';
+import { BaseButton, Badge, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
-interface SaveButtonProps extends Omit<ButtonProps, 'variant' | 'children'> {
+interface SaveButtonProps {
   submitting?: boolean;
   dirty?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit';
+  onClick?: (event?: any) => void;
+  className?: string;
 }
 
 export const SaveButton: FC<SaveButtonProps> = ({
   submitting,
   dirty,
-  className = '',
-  ...rest
+  className,
+  type,
+  onClick,
 }) => {
   const button = (
     <div className="position-relative">
-      <Button
-        className={`min-w-80px ${className}`.trim()}
+      <BaseButton
+        className={`min-w-80px ${className || ''}`.trim()}
         variant={dirty ? 'warning' : 'primary'}
         disabled={submitting}
+        disabledReason={translate('Saving...')}
         size="lg"
-        {...rest}
-      >
-        <span className="svg-icon svg-icon-2">
-          <CheckCircleIcon weight="bold" />
-        </span>
-        {submitting ? translate('Saving...') : translate('Save')}
-      </Button>
+        type={type}
+        onClick={onClick}
+        iconNode={<CheckCircleIcon weight="bold" />}
+        label={submitting ? translate('Saving...') : translate('Save')}
+      />
       {dirty && (
         <Badge
           variant="warning"

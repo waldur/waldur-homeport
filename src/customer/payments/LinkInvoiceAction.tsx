@@ -62,7 +62,7 @@ export const LinkInvoiceAction: FunctionComponent<{ row }> = ({
       invoices={value}
       onToggle={onToggle}
       onSelect={mutate}
-      variant="outline"
+      variant="tertiary"
     />
   );
 };

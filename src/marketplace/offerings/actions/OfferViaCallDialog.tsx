@@ -8,6 +8,8 @@ import { useRouter } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 import { marketplacePlansList, ProviderOffering } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -58,15 +60,13 @@ const renderFooter = ({
   return (
     <>
       {step > 0 && (
-        <SubmitButton
-          type="button"
+        <BaseButton
           variant="tertiary"
           className="min-w-125px me-auto"
-          submitting={false}
           onClick={() => onPrev()}
           label={translate('Back')}
           iconNode={<CaretLeftIcon weight="bold" />}
-          iconOnLeft
+          size="lg"
         />
       )}
       <CloseDialogButton variant="tertiary" className="min-w-125px" />

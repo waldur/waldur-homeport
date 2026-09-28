@@ -3,11 +3,11 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import { FileRejection } from 'react-dropzone';
 import { FieldInputProps } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
-
 import '@/form/upload/AttachmentsList.scss';
 
 // Format for new file uploads (before backend processing)
@@ -333,11 +333,12 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
                   </p>
                 </div>
                 <div>
-                  <CompactActionButton
-                    action={() => handleRemove(file.name)}
+                  <BaseButton
+                    onClick={() => handleRemove(file.name)}
                     iconNode={<TrashIcon weight="bold" />}
-                    variant="flush"
-                    className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete"
+                    variant="tertiary-ghost"
+                    className="attachment-item__delete"
+                    size="sm"
                   />
                 </div>
               </div>

@@ -71,6 +71,34 @@ const RESTRICTED_IMPORTS = [
     name: 'react-bootstrap/Alert',
     message: 'Use AlertItem from "waldur-ui" instead of react-bootstrap/Alert.',
   },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Button'],
+    message:
+      'Avoid importing Button directly from react-bootstrap. Use Waldur wrapper components instead:\n' +
+      '  - BaseButton: the general-purpose wrapper from waldur-ui (page actions, dialogs, icon buttons)\n' +
+      '  - SubmitButton: for form submit and action buttons\n' +
+      '  - CloseDialogButton: for modal cancel/close buttons',
+  },
+  {
+    name: 'react-bootstrap/Button',
+    message:
+      'Use BaseButton (or another Waldur wrapper) from "waldur-ui" instead of react-bootstrap/Button.',
+  },
+  {
+    name: 'react-bootstrap',
+    importNames: ['DropdownButton'],
+    message:
+      'Avoid importing DropdownButton directly from react-bootstrap. Use Waldur wrapper components instead:\n' +
+      '  - ActionDropdownButton: for panel/card header dropdown menus (large size)\n' +
+      '  - CompactActionDropdownButton: for inline contexts like table cells (small size)\n' +
+      'Import from @/table/ActionDropdownButton.',
+  },
+  {
+    name: 'react-bootstrap/DropdownButton',
+    message:
+      'Use ActionDropdownButton from "@/table/ActionDropdownButton" instead of react-bootstrap/DropdownButton.',
+  },
 ];
 
 export default tseslint
@@ -121,18 +149,14 @@ export default tseslint
         'waldur-custom/enforce-badge-props-consistency': 'error',
         'waldur-custom/no-manual-icon-colors-in-badges': 'error',
         'waldur-custom/enforce-badge-right-icon-pattern': 'error',
-        'waldur-custom/enforce-button-variants': 'error',
-        'waldur-custom/no-direct-bootstrap-button': 'error',
-        // Warning while the existing hand-rolled buttons are converted; see the
-        // rule's docblock. Promote to 'error' once the count reaches zero.
-        'waldur-custom/no-bootstrap-button-markup': 'warn',
+        // Zero instances remain; see the rule's docblock.
+        'waldur-custom/no-bootstrap-button-markup': 'error',
         // Warnings rather than errors: the tree still carries dozens of each,
         // and converting one is a per-screen judgement rather than a mechanical
         // swap. They steer new code; promote to 'error' once the count is down.
         'waldur-custom/no-hand-rolled-table': 'warn',
         'waldur-custom/no-hand-rolled-modal-footer': 'error',
         'waldur-custom/enforce-dialog-button-order': 'error',
-        'waldur-custom/no-direct-bootstrap-dropdown-button': 'error',
         'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',
         'waldur-custom/enforce-formcheck-components': 'error',

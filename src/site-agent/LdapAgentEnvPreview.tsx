@@ -7,8 +7,8 @@ import {
 import { FC, useCallback, useState } from 'react';
 
 import { AlertItem } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { MonacoEditor } from '@/form/MonacoEditor';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';

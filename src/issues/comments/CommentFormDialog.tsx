@@ -98,7 +98,8 @@ export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
                   submitting={submitting}
                   disabled={invalid || submitting || pristine}
                   label={translate('Confirm')}
-                  className="btn btn-primary flex-equal"
+                  variant="primary"
+                  className="flex-equal"
                 />
               </>
             }

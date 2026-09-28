@@ -29,4 +29,32 @@ describe('ActionDropdownButton', () => {
 
     expect(await screen.findByText('Disable')).toBeInTheDocument();
   });
+
+  it.each([
+    ['sm', 'py-[4px]'],
+    ['md', 'py-[8px]'],
+    ['lg', 'py-[10px]'],
+  ] as const)('renders the %s size', (size, paddingClass) => {
+    render(
+      <ActionDropdownButton title="Actions" size={size}>
+        <div>Item</div>
+      </ActionDropdownButton>,
+    );
+
+    expect(screen.getByRole('button', { name: /Actions/ })).toHaveClass(
+      paddingClass,
+    );
+  });
+
+  it('defaults to the lg size', () => {
+    render(
+      <ActionDropdownButton title="Actions">
+        <div>Item</div>
+      </ActionDropdownButton>,
+    );
+
+    expect(screen.getByRole('button', { name: /Actions/ })).toHaveClass(
+      'py-[10px]',
+    );
+  });
 });

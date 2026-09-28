@@ -7,7 +7,7 @@ import {
   overrideSettingsRetrieve,
 } from 'waldur-js-client';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import { AlertItem, BaseButton, Tooltip } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -161,13 +161,11 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                 )}
                 <CloseDialogButton />
                 {step === 'error' && (
-                  <button
-                    type="button"
-                    className="btn btn-primary"
+                  <BaseButton
+                    variant="primary"
                     onClick={handleRetry}
-                  >
-                    {translate('Retry')}
-                  </button>
+                    label={translate('Retry')}
+                  />
                 )}
                 {step === 'prereqs' && (
                   <SubmitButton

@@ -7,6 +7,8 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
+import { buttonVariants } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { parseDate } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
@@ -101,8 +103,8 @@ const formatChart = (
 
             if (hasMoreBtn) {
               tooltip += `<div class="text-center mt-3">`;
-              tooltip += `<button id="see-more-btn" class="btn btn-link btn-icon-right py-0">${translate('See more')}`;
-              tooltip += `<span class="svg-icon svg-icon-2 svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm48.49-108.49a12,12,0,0,1,0,17l-40,40a12,12,0,0,1-17,0l-40-40a12,12,0,0,1,17-17L128,135l31.51-31.52A12,12,0,0,1,176.49,103.51Z"></path></svg></span>`;
+              tooltip += `<button id="see-more-btn" class="${buttonVariants({ variant: 'text-primary', size: 'sm' })}">${translate('See more')}`;
+              tooltip += `<svg class="shrink-0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm48.49-108.49a12,12,0,0,1,0,17l-40,40a12,12,0,0,1-17,0l-40-40a12,12,0,0,1,17-17L128,135l31.51-31.52A12,12,0,0,1,176.49,103.51Z"></path></svg>`;
               tooltip += `</button></div>`;
 
               setTimeout(() => {

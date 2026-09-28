@@ -1,13 +1,13 @@
 import { XIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Spinner } from 'react-bootstrap';
 import { customersPartialUpdate } from 'waldur-js-client';
+
+import { BaseButton } from 'waldur-ui';
 
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { formatCoordinates } from '@/map/coordinates';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
@@ -54,17 +54,14 @@ export const CustomerLocationRow: FC<{
       actions={
         canUpdate ? (
           <>
-            <ActionButton
-              iconNode={
-                !isPending ? (
-                  <TrashIcon weight="bold" className="text-danger" />
-                ) : (
-                  <Spinner className="animation-spin" />
-                )
-              }
-              action={mutate}
+            <BaseButton
+              iconNode={<TrashIcon weight="bold" className="text-danger" />}
+              onClick={mutate}
               variant="secondary"
-              className="btn-sm btn-icon me-3"
+              className="me-3"
+              size="sm"
+              pending={isPending}
+              tooltip={translate('Remove')}
             />
 
             <SetLocationButton customer={customer} />

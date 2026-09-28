@@ -2,7 +2,8 @@ import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
@@ -38,15 +39,13 @@ export const UserToken = ({ token }) => {
             }}
           />
 
-          <CompactSubmitButton
-            submitting={false}
-            type="button"
+          <BaseButton
+            size="sm"
             variant="primary"
             className="px-3 h-30px"
             onClick={onClick}
             label={translate('Copy')}
             iconNode={<CopyIcon weight="bold" />}
-            iconOnLeft
           />
         </InputGroup>
       </div>

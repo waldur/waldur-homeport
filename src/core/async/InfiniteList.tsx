@@ -1,6 +1,8 @@
 import { InfiniteData, UseInfiniteQueryResult } from '@tanstack/react-query';
 import { ComponentType, Fragment, ReactNode } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { DataPage } from '@/table/api';
 
@@ -37,15 +39,21 @@ export const InfiniteList = <RowType,>({
       <div className="text-center">
         {context.hasNextPage && (
           <div>
-            <button
+            <BaseButton
               onClick={() => context.fetchNextPage()}
               disabled={context.isFetchingNextPage}
-              className="btn btn-link"
-            >
-              {context.isFetchingNextPage
-                ? translate('Loading more...')
-                : translate('Load more')}
-            </button>
+              disabledReason={
+                context.isFetchingNextPage
+                  ? translate('Loading more...')
+                  : undefined
+              }
+              variant="text-primary"
+              label={
+                context.isFetchingNextPage
+                  ? translate('Loading more...')
+                  : translate('Load more')
+              }
+            />
           </div>
         )}
         <div>

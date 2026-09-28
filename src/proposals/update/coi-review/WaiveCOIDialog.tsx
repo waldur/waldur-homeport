@@ -56,7 +56,10 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
             bodyClassName="pt-0"
             footer={
               <>
-                <CloseDialogButton disabled={waivedMutation.isPending} />
+                <CloseDialogButton
+                  disabled={waivedMutation.isPending}
+                  disabledReason={translate('Submission in progress')}
+                />
                 <SubmitButton
                   submitting={waivedMutation.isPending}
                   disabled={invalid}

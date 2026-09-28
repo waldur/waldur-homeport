@@ -1,10 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const OfferingProfileForm = lazyComponent(() =>
   import('./OfferingProfileForm').then((module) => ({
@@ -22,14 +23,16 @@ export const CreateProfileAction: FC<CreateProfileActionProps> = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      title={translate('Create profile')}
+    <BaseButton
+      label={translate('Create profile')}
       iconNode={<PlusCircleIcon weight="bold" />}
-      action={() =>
+      onClick={() =>
         openDialog(OfferingProfileForm, {
           resolve: { refetch },
         })
       }
+      variant="tertiary"
+      size="lg"
     />
   );
 };

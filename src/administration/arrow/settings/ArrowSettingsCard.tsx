@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import type { ArrowSettings } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDateTime } from '@/core/dateUtils';
@@ -12,7 +12,6 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { useArrowSettings } from '../api';
@@ -35,10 +34,11 @@ const ArrowSetupButton = () => {
   }, []);
 
   return (
-    <ActionButton
-      action={openSetupDialog}
-      title={translate('Setup Arrow Integration')}
+    <BaseButton
+      onClick={openSetupDialog}
+      label={translate('Setup Arrow Integration')}
       variant="primary"
+      size="lg"
     />
   );
 };

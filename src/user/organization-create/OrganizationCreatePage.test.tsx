@@ -54,12 +54,7 @@ const user = userEvent.setup();
 const getSubmitButton = () =>
   screen
     .getAllByRole('button')
-    .find(
-      (btn) =>
-        btn.getAttribute('type') === 'submit' &&
-        !btn.classList.contains('btn-secondary') &&
-        !btn.classList.contains('btn-tertiary'),
-    );
+    .find((btn) => btn.getAttribute('type') === 'submit');
 
 /** Selects a verification method from the dropdown */
 const selectMethod = async (methodLabel: string) => {

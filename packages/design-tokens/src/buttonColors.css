@@ -33,6 +33,7 @@
   --btn-secondary-bg-pressed: var(--waldur-brand-300);
   --btn-secondary-border: var(--waldur-brand-300);
   --btn-secondary-text: var(--waldur-brand-900);
+  --btn-secondary-icon: var(--waldur-brand-500);
   --btn-secondary-focus-ring: var(--waldur-brand-600);
 
   --btn-tertiary-bg: #ffffff;
@@ -109,6 +110,7 @@
   --btn-secondary-bg-pressed: var(--waldur-brand-600);
   --btn-secondary-border: var(--waldur-brand-400);
   --btn-secondary-text: var(--color-gray-dark-50);
+  --btn-secondary-icon: var(--waldur-brand-400);
   --btn-secondary-focus-ring: var(--waldur-brand-500);
 
   --btn-tertiary-bg: var(--color-gray-dark-950);

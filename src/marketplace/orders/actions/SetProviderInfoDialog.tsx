@@ -85,7 +85,8 @@ export const SetProviderInfoDialog: FC<SetProviderInfoDialogProps> = ({
                 <SubmitButton
                   submitting={providerMutation.isPending}
                   label={translate('Send')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

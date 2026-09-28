@@ -2,22 +2,13 @@
  * Organisation-level OpenPortal reports tab.
  */
 
-/* eslint-disable waldur-custom/no-direct-bootstrap-button */
 /* eslint-disable no-console */
 import { useQuery } from '@tanstack/react-query';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  Modal,
-  Row,
-} from 'react-bootstrap';
+import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { projectsList } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -253,16 +244,22 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" size="sm" onClick={onClose}>
-          {translate('Cancel')}
-        </Button>
-        <Button variant="primary" size="sm" onClick={() => onConfirm(draft)}>
-          {translate('Apply ({count} {project})', {
+        <BaseButton
+          variant="secondary"
+          size="sm"
+          onClick={onClose}
+          label={translate('Cancel')}
+        />
+        <BaseButton
+          variant="primary"
+          size="sm"
+          onClick={() => onConfirm(draft)}
+          label={translate('Apply ({count} {project})', {
             count: draft.size,
             project:
               draft.size !== 1 ? translate('projects') : translate('project'),
           })}
-        </Button>
+        />
       </Modal.Footer>
     </Modal>
   );
@@ -773,13 +770,12 @@ export const OrganisationReportsTab: FC = () => {
                     : translate('project'),
               })}
             </span>
-            <Button
+            <BaseButton
               variant="primary"
               size="sm"
               onClick={() => setDialogOpen(true)}
-            >
-              {translate('Filter selected projects')}
-            </Button>
+              label={translate('Filter selected projects')}
+            />
           </div>
         )}
 
@@ -829,7 +825,7 @@ export const OrganisationReportsTab: FC = () => {
                 })}
               </span>
             )}
-            <Button
+            <BaseButton
               variant="secondary"
               size="sm"
               onClick={() => {
@@ -840,16 +836,14 @@ export const OrganisationReportsTab: FC = () => {
                 refetchProjects();
                 if (loadTriggered) refetchReports();
               }}
-            >
-              {translate('Refresh')}
-            </Button>
-            <Button
+              label={translate('Refresh')}
+            />
+            <BaseButton
               variant="secondary"
               size="sm"
               onClick={() => setShowLoadPrompt(true)}
-            >
-              {translate('Load new data…')}
-            </Button>
+              label={translate('Load new data…')}
+            />
           </div>
         )}
       </div>
@@ -939,16 +933,15 @@ export const OrganisationReportsTab: FC = () => {
               )}
             </p>
 
-            <Button
+            <BaseButton
               variant="primary"
               size="sm"
               onClick={() => {
                 setLoadTriggered(true);
                 setShowLoadPrompt(false);
               }}
-            >
-              {translate('Load reports')}
-            </Button>
+              label={translate('Load reports')}
+            />
           </Card.Body>
         </Card>
       )}
@@ -995,13 +988,12 @@ export const OrganisationReportsTab: FC = () => {
             'To speed things up: use a specific year/month filter, or search for fewer projects when loading. Large datasets with many users and projects take longer to process.',
           )}
           actions={
-            <Button
+            <BaseButton
               variant="warning"
               size="sm"
               onClick={() => window.location.reload()}
-            >
-              {translate('Cancel & reload')}
-            </Button>
+              label={translate('Cancel & reload')}
+            />
           }
         />
       )}
@@ -1053,15 +1045,14 @@ export const OrganisationReportsTab: FC = () => {
             },
           )}
           actions={
-            <Button
+            <BaseButton
               variant="tertiary"
               size="sm"
               onClick={() => {
                 setLoadAllUserMappings(true);
               }}
-            >
-              {translate('Load all user names')}
-            </Button>
+              label={translate('Load all user names')}
+            />
           }
         />
       )}

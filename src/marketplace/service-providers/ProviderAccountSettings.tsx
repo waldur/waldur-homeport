@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import {
   EditFieldProvider,
@@ -10,7 +12,6 @@ import {
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
@@ -102,14 +103,16 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
       className="card-bordered"
       actions={
         canUpdate && (
-          <ActionButton
-            title={translate('Preview changes')}
-            action={() =>
+          <BaseButton
+            label={translate('Preview changes')}
+            onClick={() =>
               openDialog(AccountOptionsPreviewDialog, {
                 resolve: { serviceProvider, setServiceProvider },
                 size: 'xl',
               })
             }
+            variant="tertiary"
+            size="lg"
           />
         )
       }

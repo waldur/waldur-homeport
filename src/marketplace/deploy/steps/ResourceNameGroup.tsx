@@ -3,14 +3,13 @@ import { useMutation } from '@tanstack/react-query';
 import { Field } from 'react-final-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { getNameFieldValidators, composeValidators } from '@/core/validators';
 import { FormGroup, StringField } from '@/form';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 
 const ResourceNameField = (props) => {
   const { showErrorResponse } = useNotify();
@@ -41,27 +40,29 @@ const ResourceNameField = (props) => {
         <StringField input={props.input} meta={props.meta} id={props.id} />
       </div>
       {project ? (
-        <ActionButton
+        <BaseButton
           variant="tertiary"
-          action={() => suggestName()}
+          onClick={() => suggestName()}
           disabled={isLoading}
           disabledReason={translate('Loading suggestion')}
           iconNode={<LightbulbFilamentIcon weight="bold" />}
-          title={translate('Suggest name')}
+          label={translate('Suggest name')}
+          size="lg"
         />
       ) : (
         <Tooltip
           label={translate('Organization and project need to be selected.')}
         >
-          <ActionButton
+          <BaseButton
             variant="tertiary"
             disabled
             disabledReason={translate(
               'Organization and project selection required',
             )}
-            action={() => {}}
+            onClick={() => {}}
             iconNode={<LightbulbFilamentIcon weight="bold" />}
-            title={translate('Suggest name')}
+            label={translate('Suggest name')}
+            size="lg"
           />
         </Tooltip>
       )}

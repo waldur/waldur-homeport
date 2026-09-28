@@ -1,7 +1,7 @@
 import { PhonePlusIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { FeaturedIcon } from 'waldur-ui';
+import { BaseButton, FeaturedIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -36,14 +36,13 @@ export const CallInProgressBanner: FC = () => {
       <span className="call-in-progress-banner__label flex-grow-1 text-truncate">
         {translate('Call in progress')}
       </span>
-      <button
-        type="button"
-        className="btn btn-sm btn-tertiary d-inline-flex align-items-center gap-2"
+      <BaseButton
+        variant="tertiary"
+        size="sm"
         onClick={startCall}
-      >
-        <PhonePlusIcon size={16} weight="bold" />
-        {translate('Join call')}
-      </button>
+        iconNode={<PhonePlusIcon size={16} weight="bold" />}
+        label={translate('Join call')}
+      />
     </div>
   );
 };

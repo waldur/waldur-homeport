@@ -1,10 +1,11 @@
 import { PaperclipIcon, XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatFilesize } from '@/core/utils';
 import { FileUploadField } from '@/form';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 interface AttachmentRowProps {
   value: File | null | undefined;
@@ -27,7 +28,8 @@ export const AttachmentRow: FC<AttachmentRowProps> = ({
       input={{ value, onChange } as any}
       accept={accept}
       buttonLabel={buttonLabel ?? translate('Attach file')}
-      className="btn btn-tertiary"
+      variant="tertiary"
+      size="md"
     />
     <div className="flex-grow-1 ms-3 align-items-center d-flex">
       <span className="text-muted fs-5">
@@ -41,10 +43,12 @@ export const AttachmentRow: FC<AttachmentRowProps> = ({
       </span>
     </div>
     {value && (
-      <ActionButton
-        title={translate('Remove')}
-        action={() => onChange(null)}
+      <BaseButton
+        label={translate('Remove')}
+        onClick={() => onChange(null)}
         iconNode={<XIcon weight="bold" />}
+        variant="tertiary"
+        size="lg"
       />
     )}
   </div>

@@ -4,9 +4,10 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 interface RegisterServiceProviderButtonProps {
@@ -39,11 +40,12 @@ export const RegisterServiceProviderButton: FC<
   });
 
   return (
-    <ActionButton
-      title={translate('Register as service provider')}
-      action={() => mutate()}
+    <BaseButton
+      label={translate('Register as service provider')}
+      onClick={() => mutate()}
       variant="secondary"
       pending={isPending}
+      size="lg"
     />
   );
 };

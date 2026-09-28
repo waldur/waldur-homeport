@@ -75,7 +75,8 @@ export const ChartCard: React.FC<ChartCardProps> = ({
             disabled={isEmpty}
             align="end"
             drop="down"
-            className="btn-md"
+            size="md"
+            className="w-auto"
             label={
               <>
                 <span className="svg-icon svg-icon-2 me-1">

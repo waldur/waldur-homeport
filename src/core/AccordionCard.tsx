@@ -1,4 +1,3 @@
-import { CaretDownIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import {
   FC,
@@ -13,6 +12,8 @@ import {
   Card,
   useAccordionButton,
 } from 'react-bootstrap';
+
+import { ButtonCaret } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -89,11 +90,7 @@ const CustomToggle = ({
           aria-expanded={isOpen}
           onClick={decoratedOnClick}
         >
-          <CaretDownIcon
-            weight="bold"
-            size={20}
-            className="rotate-toggle-180"
-          />
+          <ButtonCaret />
         </button>
       </div>
     </Card.Header>

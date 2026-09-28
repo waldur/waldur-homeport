@@ -2,9 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Issue, providerTicketsRetrieve } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { IssueDetails } from '@/issues/IssueDetails';
-import { ActionButton } from '@/table/ActionButton';
 
 import { useClaimTicket, useResolveTicket } from '../api';
 
@@ -42,15 +43,17 @@ const ProviderDetailActions: FC<{ issue: Issue; refetch: () => void }> = ({
           refetch={refetchAll}
         />
       </div>
-      <ActionButton
-        title={translate('Claim')}
+      <BaseButton
+        label={translate('Claim')}
         variant="tertiary"
-        action={() => claim.mutate({ uuid: issue.uuid })}
+        onClick={() => claim.mutate({ uuid: issue.uuid })}
+        size="lg"
       />
-      <ActionButton
-        title={translate('Resolve')}
+      <BaseButton
+        label={translate('Resolve')}
         variant="primary"
-        action={() => resolve.mutate({ uuid: issue.uuid })}
+        onClick={() => resolve.mutate({ uuid: issue.uuid })}
+        size="lg"
       />
     </>
   );

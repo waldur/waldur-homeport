@@ -2,9 +2,10 @@ import { CaretCircleDownIcon, CaretCircleUpIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 import { useCategories } from '../category/useCategories';
 import { CategoryGroupLink } from '../links/CategoryGroupLink';
@@ -56,9 +57,9 @@ export const CategoriesList: FC = () => {
       </Row>
       {showMoreButton ? (
         <div className="text-center my-3">
-          <ActionButton
+          <BaseButton
             variant="text-primary"
-            action={() => setShowAll((value) => !value)}
+            onClick={() => setShowAll((value) => !value)}
             iconRight
             iconNode={
               showAll ? (
@@ -67,7 +68,8 @@ export const CategoriesList: FC = () => {
                 <CaretCircleDownIcon weight="bold" />
               )
             }
-            title={showAll ? translate('See less') : translate('See more')}
+            label={showAll ? translate('See less') : translate('See more')}
+            size="lg"
           />
         </div>
       ) : null}

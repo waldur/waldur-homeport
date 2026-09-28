@@ -1,8 +1,9 @@
 import { ChatDotsIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { isReviewInFinalState } from '@/proposals/utils';
-import { ActionButton } from '@/table/ActionButton';
 
 export const AddCommentButton = ({
   review,
@@ -12,13 +13,14 @@ export const AddCommentButton = ({
   const disabled = isReviewInFinalState(review?.state);
 
   return (
-    <ActionButton
-      action={onClick}
+    <BaseButton
+      onClick={onClick}
       iconNode={<ChatDotsIcon weight="bold" />}
       variant="text-primary"
       disabled={disabled}
       tooltip={translate('Add comment')}
       className={className}
+      size="lg"
     />
   );
 };

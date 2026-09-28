@@ -1,7 +1,9 @@
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { EditButton } from '@/form/EditButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
@@ -58,6 +60,15 @@ export const UpdateResourceOptionButton: FunctionComponent<
   }
 
   return (
-    <EditButton onClick={callback} disabled={disabled} tooltip={tooltip} />
+    <BaseButton
+      onClick={callback}
+      disabled={disabled}
+      tooltip={tooltip}
+      iconNode={<PencilSimpleIcon weight="bold" />}
+      label={translate('Edit')}
+      iconRight
+      variant="tertiary"
+      size="sm"
+    />
   );
 };

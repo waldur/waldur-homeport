@@ -4,7 +4,8 @@ import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { onboardingVerificationsDestroy } from 'waldur-js-client';
 
-import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { BaseButton } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
@@ -374,25 +375,27 @@ export const OrganizationCreatePage: FC = () => {
 
                     {/* Footer buttons */}
                     <div className="d-flex justify-content-between mt-5 pt-5 border-top">
-                      <SubmitButton
-                        submitting={false}
+                      <BaseButton
                         variant="secondary"
                         onClick={prevStep}
                         disabled={step === 0}
+                        disabledReason={
+                          step === 0
+                            ? translate('You are on the first step')
+                            : undefined
+                        }
                         className="min-w-125px"
-                        type="button"
                         label={translate('Back')}
                         iconNode={<CaretLeftIcon weight="bold" />}
-                        iconOnLeft
+                        size="lg"
                       />
                       <div className="d-flex gap-3">
-                        <SubmitButton
-                          submitting={false}
+                        <BaseButton
                           variant="tertiary"
                           className="min-w-125px"
                           onClick={handleCancel}
-                          type="button"
                           label={translate('Cancel')}
+                          size="lg"
                         />
                         <SubmitButton
                           submitting={submitting}
@@ -401,18 +404,11 @@ export const OrganizationCreatePage: FC = () => {
                           }
                           invalid={submitDisabled}
                           disabledReason={submitDisabledReason || undefined}
-                          className="btn-icon-right min-w-125px"
-                          children={
-                            submitting ? (
-                              <span className="svg-icon svg-icon-2">
-                                {}
-                                <LoadingSpinnerSimple />
-                              </span>
-                            ) : !isLast ? (
-                              <span className="svg-icon svg-icon-2">
-                                <CaretRightIcon weight="bold" />
-                              </span>
-                            ) : null
+                          className="min-w-125px"
+                          iconNode={
+                            !isLast ? (
+                              <CaretRightIcon weight="bold" />
+                            ) : undefined
                           }
                         />
                       </div>

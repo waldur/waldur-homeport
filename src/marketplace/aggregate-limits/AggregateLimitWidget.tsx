@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { ComponentsUsageStats } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -12,7 +12,6 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { Customer } from '@/workspace/types';
 
 import { useAggregateLimitChart } from './utils';
@@ -143,11 +142,12 @@ export const AggregateLimitWidget = ({
   const cardAction = () => {
     if (showViewAllButton) {
       return (
-        <CompactActionButton
-          action={viewAllComponents}
-          title={translate('View all')}
-          variant="link"
+        <BaseButton
+          onClick={viewAllComponents}
+          label={translate('View all')}
+          variant="text-primary"
           className="py-0"
+          size="sm"
         />
       );
     }

@@ -1,15 +1,15 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { useFormState } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { DeployFormData } from '@/marketplace/common/types';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 interface PlanDescriptionButtonProps {
   planDescription?: string;
-  className?: string;
 }
 
 const PlanDescription = lazyComponent(() =>
@@ -42,11 +42,12 @@ export const PlanDescriptionButton = (props: PlanDescriptionButtonProps) => {
     });
 
   return (
-    <ActionButton
-      title={translate('View details')}
-      action={handleClick}
+    <BaseButton
+      label={translate('View details')}
+      onClick={handleClick}
       iconNode={<EyeIcon weight="bold" />}
-      className={props.className}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

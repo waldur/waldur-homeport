@@ -1,9 +1,10 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import type { MatchingConfig } from './types';
 
@@ -22,15 +23,17 @@ export const MatchingSummaryButton = ({
 }: MatchingSummaryButtonProps) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      action={() =>
+    <BaseButton
+      onClick={() =>
         openDialog(MatchingSummaryDialog, {
           resolve: { config },
           size: 'xl',
         })
       }
-      title={translate('How it works')}
+      label={translate('How it works')}
       iconNode={<QuestionIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

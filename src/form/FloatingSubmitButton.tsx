@@ -1,7 +1,6 @@
 import { FC } from 'react';
-import { Variant } from 'react-bootstrap/types';
 
-import { Tooltip } from 'waldur-ui';
+import { ButtonVariant, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -14,7 +13,7 @@ interface OwnProps {
   disabled?: boolean;
   submitting: boolean;
   errors?: Record<string, any>;
-  variant?: Variant;
+  variant?: ButtonVariant;
 }
 
 export const FloatingSubmitButton: FC<OwnProps> = ({

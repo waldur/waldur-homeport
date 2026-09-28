@@ -320,7 +320,7 @@ Use the `pending` prop on buttons:
 
 ```tsx
 import { SubmitButton } from '@/form';
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
 
 // Form submit button
 <SubmitButton
@@ -396,12 +396,16 @@ if (error) {
   )}
   actions={
     <>
-      <Button variant="tertiary" onClick={clearFilters}>
-        {translate('Clear filters')}
-      </Button>
-      <Button variant="outline" onClick={openFilters}>
-        {translate('View filters')}
-      </Button>
+      <BaseButton
+        variant="tertiary"
+        onClick={clearFilters}
+        label={translate('Clear filters')}
+      />
+      <BaseButton
+        variant="secondary"
+        onClick={openFilters}
+        label={translate('View filters')}
+      />
     </>
   }
 />
@@ -472,9 +476,13 @@ export const DeleteProjectButton = ({ project, refetch }) => {
   });
 
   return (
-    <Button variant="danger" onClick={() => mutate()} disabled={isPending}>
-      {translate('Delete')}
-    </Button>
+    <SubmitButton
+      type="button"
+      variant="danger"
+      onClick={() => mutate()}
+      submitting={isPending}
+      label={translate('Delete')}
+    />
   );
 };
 ```
@@ -513,31 +521,32 @@ export const BulkDeleteProjectsButton = ({ projects, refetch }) => {
   });
 
   return (
-    <Button variant="danger" onClick={() => mutate()} disabled={isPending}>
-      {translate('Delete selected')}
-    </Button>
+    <SubmitButton
+      type="button"
+      variant="danger"
+      onClick={() => mutate()}
+      submitting={isPending}
+      label={translate('Delete selected')}
+    />
   );
 };
 ```
 
 ### 5.2 Form Dialog Pattern
 
-Use the `useModal` hook to manage dialog state:
+`CloseDialogButton` already closes the dialog via its own internal
+`useModal()` call, so a form dialog's footer rarely needs the hook directly —
+reach for `useModal()` yourself only when you need something beyond closing,
+like a custom `onClick` before closing:
 
 ```tsx
-import { useModal } from '@/modal/actions';
-
 export const MyDialog: FC = () => {
-  const { closeDialog } = useModal();
-
   return (
     <ModalDialog
       title={translate('Title')}
       footer={
         <div className="d-flex gap-2 justify-content-end">
-          <Button variant="tertiary" onClick={closeDialog}>
-            {translate('Cancel')}
-          </Button>
+          <CloseDialogButton />
           <SubmitButton
             label={translate('Save changes')}
             submitting={isSubmitting}
@@ -571,9 +580,12 @@ export const ApproveButton = ({ resource }) => {
   });
 
   return (
-    <Button onClick={() => mutate()} disabled={isPending}>
-      {translate('Approve')}
-    </Button>
+    <SubmitButton
+      type="button"
+      onClick={() => mutate()}
+      submitting={isPending}
+      label={translate('Approve')}
+    />
   );
 };
 ```
@@ -657,6 +669,15 @@ import { StateIndicator } from '@/core/StateIndicator';
 ---
 
 ## 8. Tooltips
+
+> **Stale examples below**: `@/core/Tooltip` and its `Tip` export no longer
+> exist — the current component is `Tooltip` from `waldur-ui`, and its
+> actual prop API (`label`, `side`, `alwaysMount`, `trigger`, wrapping the
+> triggering element as `children`) differs from the `id`/`body`/`theme`
+> props shown in 8.1 and 8.2 below. For a disabled button specifically,
+> prefer `BaseButton`'s own `disabledReason` prop (see 2.2) over wrapping it
+> in a separate `Tooltip` — it already handles the disabled-only visibility
+> and keeps the DOM structure stable across enabled/disabled toggles.
 
 ### 8.1 Usage Guidelines
 
@@ -746,8 +767,8 @@ translate('Hello, {name}!', { name: user.name });
 translate('{count} item', '{count} items', { count });
 
 // Never hard-code strings
-// ❌ <Button>Submit</Button>
-// ✅ <Button>{translate('Submit')}</Button>
+// ❌ <BaseButton label="Submit" />
+// ✅ <BaseButton label={translate('Submit')} />
 ```
 
 ---
@@ -835,12 +856,14 @@ const filterPosition =
 
 ```tsx
 // Button sizes
-<Button size="lg">Large (44px)</Button>
-<Button>Default (36px)</Button>
-<Button size="sm">Small (28px)</Button>
+<BaseButton size="lg" label="Large (44px)" />
+<BaseButton label="Default (36px)" />
+<BaseButton size="sm" label="Small (28px)" />
 ```
 
 > **Note:** The 44px minimum touch target (WCAG) is primarily for mobile/touch interfaces. Desktop applications can use smaller interactive elements.
+>
+> For complete component specifications, variant tokens, and the decision matrix, see the [Button UI Guide](button-ui-guide.md).
 
 ---
 
@@ -960,12 +983,15 @@ When cards are displayed in a row (carousel, grid), ensure they all have equal h
 
 ```tsx
 // ❌ BAD: Disabled without explanation
-<Button disabled={!canEdit}>Edit</Button>
+<BaseButton disabled={!canEdit} label="Edit" />
 
-// ✅ GOOD: Disabled with tooltip
-<Tip label={canEdit ? null : translate('You need edit permission')}>
-  <Button disabled={!canEdit}>Edit</Button>
-</Tip>
+// ✅ GOOD: Disabled with reason -- BaseButton's own disabledReason prop
+// shows the tooltip only while the button is actually disabled
+<BaseButton
+  disabled={!canEdit}
+  disabledReason={translate('You need edit permission')}
+  label="Edit"
+/>
 ```
 
 ```tsx
@@ -1013,7 +1039,9 @@ import {
 } from '@/table/utils';
 
 // Buttons & Actions
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+import { SubmitButton } from '@/form';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useValidators } from '@/resource/actions/useValidators';
 
@@ -1026,7 +1054,7 @@ import { StateIndicator } from '@/core/StateIndicator';
 import { Badge } from 'waldur-ui';
 
 // Tooltips
-import { Tip } from '@/core/Tooltip';
+import { Tooltip } from 'waldur-ui';
 
 // Permissions
 import { hasPermission } from '@/permissions/hasPermission';

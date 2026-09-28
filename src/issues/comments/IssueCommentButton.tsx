@@ -1,8 +1,9 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { FC, useContext } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
@@ -24,15 +25,16 @@ export const IssueCommentButton: FC = () => {
   };
 
   return (
-    <SubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
       variant="secondary"
       disabled={uiDisabled}
+      disabledReason={
+        uiDisabled ? translate('Adding comments is not available') : undefined
+      }
       onClick={openCommentDialog}
       label={translate('Add comment')}
       iconNode={<PlusIcon weight="bold" />}
-      iconOnLeft
+      size="lg"
     />
   );
 };

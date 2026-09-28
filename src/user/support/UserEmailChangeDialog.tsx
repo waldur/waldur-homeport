@@ -28,7 +28,8 @@ export const UserEmailChangeDialog: FunctionComponent<{
               disabled={email === user.email || !email || isProtected}
               submitting={submitting}
               label={translate('Request change')}
-              className="btn btn-primary flex-equal"
+              variant="primary"
+              className="flex-equal"
               onClick={() => handleSubmit()}
             />
           ) : (
@@ -36,7 +37,8 @@ export const UserEmailChangeDialog: FunctionComponent<{
               disabled={isProtected}
               submitting={submitting}
               label={translate('Cancel request')}
-              className="btn btn-danger flex-equal"
+              variant="danger"
+              className="flex-equal"
               onClick={() => cancelRequest()}
             />
           )}

@@ -1,13 +1,14 @@
 import { PlusMinusIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { defaultCurrency, formatCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import { Component, PlanPeriod } from './types';
 
@@ -104,12 +105,13 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
               })}
             </div>
             <div className="estimate">
-              <ActionButton
-                variant="link"
-                action={onClick}
+              <BaseButton
+                variant="text-primary"
+                onClick={onClick}
                 className="p-0"
                 iconNode={<PlusMinusIcon size={16} weight="bold" />}
-                title={translate('Calculate price')}
+                label={translate('Calculate price')}
+                size="lg"
               />
             </div>
           </>

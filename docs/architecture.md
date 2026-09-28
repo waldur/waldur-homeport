@@ -192,30 +192,22 @@ return <Component {...props} />;
 - **Presentation Components**: Pure UI components with props
 - **Form Components**: Specialized forms using React Final Form
 - **Table Components**: Reusable table infrastructure with filtering, sorting, pagination
-- **Button Components**: Unified button system wrapping Bootstrap for consistent UX
+- **Button Components**: Unified button system built on Tailwind/shadcn for consistent UX
 
 ### Button Component Architecture
 
-The application uses a unified button system that wraps Bootstrap Button to ensure consistent styling, behavior, and accessibility. **Direct Bootstrap Button imports are forbidden** - use the appropriate Waldur wrapper component instead.
+The application uses a unified button system to ensure consistent styling, behavior, and accessibility. **Direct Bootstrap Button imports and raw Bootstrap button markup are forbidden or deprecated** — use `BaseButton` (`waldur-ui`) or the appropriate specialized wrapper component instead.
+
+`BaseButton` (`waldur-ui`) is a from-scratch Tailwind/shadcn component, not a Bootstrap wrapper. It natively provides tooltips (with `tooltipSide`), loading states (`pending`), icon-only layout/padding resets, responsive sizing (`sm`, `md`, `lg`), and design token variants. The specialized wrappers in `src/` (`SubmitButton`, `CloseDialogButton`, `SaveButton`, etc.) compose `BaseButton` directly.
 
 ```text
-Bootstrap Button (internal only, wrapped by BaseButton)
+BaseButton (from 'waldur-ui' — Tailwind/shadcn, general purpose actions, size="sm" | "md" | "lg")
 │
-├── ActionButton (general purpose table/card actions)
-│   ├── RowActionButton (optimized for table rows)
-│   └── CompactActionButton (small variant for inline actions)
+├── SubmitButton (form submission, default size="lg", supports size="sm")
 │
-├── SubmitButton (form submission, large size)
-│   └── CompactSubmitButton (small forms, popovers)
-│
-├── EditButton (edit navigation/dialogs, large size)
-│   └── CompactEditButton (inline field editing)
+├── CompactEditButton (inline field editing)
 │
 ├── CloseDialogButton (modal cancel/close)
-│
-├── IconButton (icon-only with tooltip)
-│
-├── ToolbarButton (table/panel toolbars)
 │
 ├── SaveButton (form save with dirty state tracking)
 │
@@ -227,48 +219,49 @@ Bootstrap Button (internal only, wrapped by BaseButton)
 
 #### Button Selection Guide
 
-| Use Case | Component |
-|----------|-----------|
-| Form submit | `SubmitButton` |
-| Form submit in popover/compact form | `CompactSubmitButton` |
-| Table row action | `ActionButton` or `RowActionButton` |
-| Inline action (small) | `CompactActionButton` |
-| Modal cancel/close | `CloseDialogButton` |
-| Icon-only button with tooltip | `IconButton` |
-| Table toolbar (refresh, export, filter) | `ToolbarButton` or `IconButton` |
-| Edit field in settings row | `CompactEditButton` |
-| Edit in card header | `EditButton` |
-| Create with dialog | `CreateModalButton` |
-| Delete with confirmation | `DeleteButton` |
+| Use Case                                | Component                                                     |
+| --------------------------------------- | ------------------------------------------------------------- |
+| Form submit                             | `SubmitButton` (`size="lg"` default, `size="sm"` for compact) |
+| Table row action                        | `BaseButton` (size="lg")                                      |
+| Inline action (small)                   | `BaseButton` (size="sm")                                      |
+| Modal cancel/close                      | `CloseDialogButton`                                           |
+| Icon-only button with tooltip           | `BaseButton` (`iconNode`, `tooltip`)                          |
+| Table toolbar (refresh, export, filter) | `BaseButton` (`variant="tertiary"`, `size="lg"`)             |
+| Edit field in settings row              | `CompactEditButton`                                           |
+| Edit in card header                     | `BaseButton` (`iconNode`, `label`)                            |
+| Create with dialog                      | `CreateModalButton`                                           |
+| Delete with confirmation                | `DeleteButton`                                                |
 
 #### ESLint Enforcement
 
-Two rules cover the two ways a Bootstrap button reaches the tree.
+Two mechanisms cover the two ways Bootstrap button styling reaches the tree.
 
-`waldur-custom/no-direct-bootstrap-button` (**error**) catches the import —
-`import { Button } from 'react-bootstrap'`.
+A plain `no-restricted-imports` entry (**error**, `eslint.config.js`'s
+`RESTRICTED_IMPORTS` array — the same mechanism already used to ban
+`Badge`/`Tooltip`/`OverlayTrigger`/`Popover`/`Alert` from `react-bootstrap`)
+catches direct imports — `import { Button } from 'react-bootstrap'` — for
+both `Button` and `DropdownButton`. It replaced two near-identical custom
+rules (`no-direct-bootstrap-button`, `no-direct-bootstrap-dropdown-button`)
+once their `ALLOWED_FILES` lists had shrunk to nothing: the migration's
+closing pass converted every remaining real `<Button>`/`<DropdownButton>`
+usage in the app, leaving zero call sites for either. A genuinely new
+exception belongs on the offending line as a standard
+`// eslint-disable-next-line no-restricted-imports -- <reason>`.
 
-`waldur-custom/no-bootstrap-button-markup` (**warning**) catches the hand-rolled
+`waldur-custom/no-bootstrap-button-markup` (**error**) catches the hand-rolled
 form — `<button className="btn btn-danger">` — which carries no import and so was
-invisible to the rule above. It is a warning rather than an error because the tree
-still holds well over a hundred of these and converting one is a per-screen
-judgement, not a mechanical swap; promote it to `error` once the count reaches zero.
-
-Each rule keeps its own `ALLOWED_FILES` list at the top of
-`packages/eslint-plugin-waldur/rules/`, and the two lists differ on purpose — the
-import rule additionally exempts files that reference `Button` only as a type or
-compose it with `ButtonGroup`/`Dropdown`, which says nothing about markup. The
-wrappers exempted from both are:
-
-- `src/core/buttons/BaseButton.tsx`
-- `src/core/buttons/IconButton.tsx`
-- `src/core/SaveButton.tsx`
-- `src/modal/CloseDialogButton.tsx`
-- `src/table/ToolbarButton.tsx`
-
-`src/core/Link.tsx` is exempt from the markup rule only: its `buttonVariant` prop is
-the sanctioned link-as-button, so the `btn` class it composes is the abstraction
-rather than an instance of the problem.
+invisible to the import rule. The tree has no remaining instances and the rule
+has no allowlist: `Link` builds its button classes from `buttonVariants()` via
+its `buttonVariant` prop, and `LoginButton` and `AssistantComposer`'s Send button
+are plain `BaseButton`s (`BaseButton` is forwardRef, so it works under
+`assistant-ui`'s `asChild`).
+`src/table/ActionsDropdown.tsx`/`ActionDropdownButton.tsx`'s row-action dropdown
+toggles were the last remaining hand-rolled usage in the shared component
+layer (as opposed to the scattered app-level instances above) — Phase F3
+converted their toggle buttons onto `buttonVariants()` from waldur-ui, so
+they no longer trigger this rule at all. See that file's top-of-file comment
+for why the *menu panel* (`.dropdown-menu`/`.dropdown-item`) stayed on
+Bootstrap classes regardless — a separate axis from the toggle button.
 
 ## Key Directories
 
@@ -346,8 +339,9 @@ first paint, so the entry graph is kept deliberately small:
   visitor on the application's own login page. Whether a session exists is
   decided from web storage in the script, since only the browser can see it.
 - `yarn build:check` (`scripts/bundle-budget.mjs`, run by the `Check cold-path
-  budget` CI job on every MR) fails when the entry script plus its `modulepreload`s exceed the
-  gzip budget, or when echarts, matrix-js-sdk, livekit-client, monaco-editor,
+  budget` CI job on every MR) fails when the entry script plus its
+  `modulepreload`s exceed the gzip budget, or when echarts, matrix-js-sdk,
+  livekit-client, monaco-editor,
   @mdxeditor/editor or mermaid appear in that set. Each of those is loaded
   lazily on purpose: `reporting/screens.ts` keeps the route flags chart-free,
   `MatrixRoot` lazy-loads `MatrixProviders`, `MatrixCallHost` lazy-loads the

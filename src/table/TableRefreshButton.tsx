@@ -1,12 +1,13 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { Sorting } from '@/table/types';
 
 export const LoadingSpinner: FunctionComponent = () => (
-  <IconButton
+  <BaseButton
     iconNode={
       <span className="animation-spin">
         <ArrowsClockwiseIcon weight="bold" />
@@ -14,8 +15,9 @@ export const LoadingSpinner: FunctionComponent = () => (
     }
     tooltip={translate('Loading')}
     onClick={() => {}}
-    variant="flush"
+    variant="text-secondary"
     disabled
+    size="lg"
   />
 );
 
@@ -38,11 +40,12 @@ export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = (
   }
 
   return (
-    <IconButton
+    <BaseButton
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
       tooltip={translate('Refresh')}
       onClick={() => props.fetch(true)}
       variant="text-secondary"
+      size="lg"
     />
   );
 };

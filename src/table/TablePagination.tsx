@@ -2,7 +2,8 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import Pagination from '@/table/Pagination';
 
@@ -102,11 +103,13 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
       {/* Mobile view */}
       <div className="table-pagination d-flex d-md-none align-items-center justify-content-between">
         <div className={'page-item me-1' + (prevDisabled ? ' disabled' : '')}>
-          <IconButton
+          <BaseButton
             iconNode={<CaretLeftIcon weight="bold" />}
             tooltip={translate('Previous page')}
             onClick={() => props.gotoPage(props.currentPage - 1)}
             disabled={prevDisabled}
+            size="lg"
+            variant="tertiary"
           />
         </div>
         {props.hasRows && (
@@ -118,11 +121,13 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
           </div>
         )}
         <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>
-          <IconButton
+          <BaseButton
             iconNode={<CaretRightIcon weight="bold" />}
             tooltip={translate('Next page')}
             onClick={() => props.gotoPage(props.currentPage + 1)}
             disabled={nextDisabled}
+            size="lg"
+            variant="tertiary"
           />
         </div>
       </div>

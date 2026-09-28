@@ -5,6 +5,8 @@ import {
   proposalReviewsSubmit,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SubmitButton, TextGroup } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
@@ -12,7 +14,6 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ProposalReview } from '@/proposals/types';
-import { ActionButton } from '@/table/ActionButton';
 
 import { RateStars } from './RateStars';
 
@@ -101,13 +102,14 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
             footer={
               <>
                 <CloseDialogButton variant="tertiary" />
-                <ActionButton
+                <BaseButton
                   variant="secondary"
-                  title={translate('Save as draft')}
-                  action={() => saveDraft.mutate(values)}
+                  label={translate('Save as draft')}
+                  onClick={() => saveDraft.mutate(values)}
                   pending={saveDraft.isPending}
                   disabled={pending}
                   disabledReason={translate('Please wait...')}
+                  size="lg"
                 />
                 <SubmitButton
                   submitting={submitReview.isPending}

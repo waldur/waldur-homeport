@@ -2,6 +2,8 @@ import { FC, useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -53,20 +55,18 @@ export const ProjectDetailsDialog: FC<ProjectDetailsDialogProps> = ({
             )}
             footer={
               <>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
+                <BaseButton
+                  variant="secondary"
                   onClick={onCancel}
-                >
-                  {translate('Cancel')}
-                </button>
-                <button
+                  label={translate('Cancel')}
+                />
+                <BaseButton
                   type="submit"
-                  className="btn btn-primary"
+                  variant="primary"
                   disabled={submitting}
-                >
-                  {translate('Submit request')}
-                </button>
+                  disabledReason={translate('Submitting...')}
+                  label={translate('Submit request')}
+                />
               </>
             }
           >

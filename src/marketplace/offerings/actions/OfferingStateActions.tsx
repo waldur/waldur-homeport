@@ -12,6 +12,8 @@ import {
   marketplaceProviderOfferingsUnpause,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -19,7 +21,6 @@ import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 import {
@@ -206,11 +207,12 @@ export const OfferingStateActions = ({
   }
   if (offering.state == ARCHIVED) {
     return (
-      <ActionButton
+      <BaseButton
         variant="tertiary"
-        action={(event) => runActionAndBlurOnPointerClick(event, setDraft)}
+        onClick={(event) => runActionAndBlurOnPointerClick(event, setDraft)}
         className={className}
-        title={draftTitle}
+        label={draftTitle}
+        size="lg"
       />
     );
   }
@@ -221,13 +223,14 @@ export const OfferingStateActions = ({
   }[offering.state];
 
   return (
-    <ActionButton
+    <BaseButton
       variant={offering.state === DRAFT ? 'primary' : 'secondary'}
-      action={(event) => runActionAndBlurOnPointerClick(event, callback)}
+      onClick={(event) => runActionAndBlurOnPointerClick(event, callback)}
       className={classNames('min-w-26', className)}
-      title={title}
+      label={title}
       iconNode={icon}
       data-testid="offering-primary-state-action"
+      size="lg"
     />
   );
 };

@@ -2,10 +2,11 @@ import { EyeIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import type { ArrowBillingSync } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 const BillingSyncItemsDialog = lazyComponent(() =>
@@ -30,11 +31,12 @@ export const BillingSyncActions = ({ row }: BillingSyncActionsProps) => {
 
   return (
     <ActionsDropdown>
-      <ActionButton
-        action={handleViewItems}
-        title={translate('View items')}
+      <BaseButton
+        onClick={handleViewItems}
+        label={translate('View items')}
         iconNode={<EyeIcon weight="bold" />}
         variant="secondary"
+        size="lg"
       />
     </ActionsDropdown>
   );

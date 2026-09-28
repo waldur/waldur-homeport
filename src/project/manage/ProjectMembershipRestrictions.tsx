@@ -7,7 +7,7 @@ import {
   projectsPartialUpdate,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -22,7 +22,6 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { useSetProject, useUser } from '@/workspace/hooks';
 
 interface ProjectMembershipRestrictionsProps {
@@ -120,11 +119,12 @@ export const ProjectMembershipRestrictions: FC<
       }
       cardBordered
       actions={
-        <ActionButton
-          action={openOrganizationRestrictionsDialog}
-          title={translate('Organization restrictions')}
+        <BaseButton
+          onClick={openOrganizationRestrictionsDialog}
+          label={translate('Organization restrictions')}
           iconNode={<BuildingsIcon weight="bold" />}
           variant="secondary"
+          size="lg"
         />
       }
     >

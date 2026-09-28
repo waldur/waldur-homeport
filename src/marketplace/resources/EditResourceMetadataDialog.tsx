@@ -10,6 +10,8 @@ import {
   marketplaceProviderResourcesSetEndpoints,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { FieldError, StringField } from '@/form';
@@ -19,7 +21,6 @@ import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface Column {
   field: string;
@@ -69,11 +70,12 @@ const FieldRows: FC<{
       <div className="mb-6">
         <div className="d-flex justify-content-between align-items-center mb-2">
           <span className="fw-bold">{title}</span>
-          <CompactActionButton
-            title={addTitle}
-            action={() => fields.push({})}
+          <BaseButton
+            label={addTitle}
+            onClick={() => fields.push({})}
             iconNode={<PlusIcon weight="bold" />}
             variant="text-secondary"
+            size="sm"
           />
         </div>
         {fields.length ? (
@@ -109,11 +111,12 @@ const FieldRows: FC<{
                     </td>
                   ))}
                   <td className="row-actions">
-                    <CompactActionButton
-                      title={translate('Remove')}
-                      action={() => fields.remove(index)}
+                    <BaseButton
+                      label={translate('Remove')}
+                      onClick={() => fields.remove(index)}
                       iconNode={<TrashIcon weight="bold" />}
                       variant="text-secondary"
+                      size="sm"
                     />
                   </td>
                 </tr>

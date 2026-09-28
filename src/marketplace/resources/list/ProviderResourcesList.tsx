@@ -7,6 +7,8 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { BackendIdTip } from '@/core/BackendIdTip';
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { formatDateTime } from '@/core/dateUtils';
@@ -21,7 +23,6 @@ import { ResourceTerminationDateField } from '@/marketplace/resources/list/Resou
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category } from '@/marketplace/types';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -71,11 +72,12 @@ const ResourceField = ({ row }) => {
   };
   return (
     <div className="d-flex align-items-center gap-1">
-      <ActionButton
-        variant="flush"
+      <BaseButton
+        variant="tertiary-ghost"
         className="text-anchor fw-normal"
-        action={callback}
-        title={row.name || row.offering_name}
+        onClick={callback}
+        label={row.name || row.offering_name}
+        size="lg"
       />
       <BackendIdTip backendId={row.backend_id} />
       <EndDateTooltip end_date={row.resource_effective_end_date} />

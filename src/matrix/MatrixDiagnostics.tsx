@@ -37,7 +37,8 @@ export const MatrixDiagnosticsDialog: FC = () => {
                 {isFetching ? translate('Checking...') : translate('Re-check')}
               </>
             }
-            className="btn btn-light btn-sm"
+            variant="tertiary"
+            size="sm"
           />
         </div>
       }

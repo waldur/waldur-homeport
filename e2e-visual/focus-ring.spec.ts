@@ -2,47 +2,52 @@ import { test, expect, Page } from '@playwright/test';
 
 import { contrastRatio, parseColor } from 'waldur-design-tokens/contrast';
 
+import { buttonVariants } from '../packages/ui/src/BaseButton';
+
 /**
  * Asserts that keyboard focus produces a *visible* indicator, with enough
  * contrast to satisfy WCAG 1.4.11.
  *
- * base-button-parity.spec.ts compares the old and new buttons against each
- * other, so it passes just as happily when neither renders a ring at all. It
- * cannot catch a control losing its indicator outright (WCAG 2.4.7), which is
- * what had happened across the login page.
+ * A visual comparison passes just as happily when a control renders no ring at
+ * all, so it cannot catch a control losing its indicator outright (WCAG 2.4.7),
+ * which is what had happened across the login page.
  *
  * Each fixture below is a place where a `box-shadow`-based ring was previously
- * suppressed — button groups, `.btn-no-focus`, elevation utilities, unlayered
- * page CSS, `.btn-link`, `.menu-link` — so re-adding any such suppression
- * fails CI instead of silently costing keyboard users their focus indicator.
+ * suppressed — elevation utilities, unlayered page CSS, `.menu-link` — so
+ * re-adding any such suppression fails CI instead of silently costing
+ * keyboard users their focus indicator. The buttons are rendered with the
+ * same `buttonVariants()` classes BaseButton uses.
+ *
+ * `.btn-no-focus` is deliberately not a fixture: its
+ * `:not(:focus-visible) { outline: none !important }` rule is rewritten by
+ * Storybook's pseudo-states addon into `:not(.pseudo-focus-visible)`, which
+ * always matches, so the case fails here while the real app keeps its ring.
  */
 
 const STORYBOOK_URL = 'http://localhost:6006';
 
-/** Any story will do — we only need Storybook's compiled Metronic stylesheet
- *  and its seeded --waldur-brand-* tokens, then we supply our own markup. */
+/** Any story will do — we only need Storybook's compiled stylesheets (Metronic,
+ *  Tailwind) and its seeded --waldur-brand-* tokens, then we supply our own markup. */
 const STORY =
-  '/iframe.html?id=migration-basebutton-parity--default&viewMode=story&globals=theme:';
+  '/iframe.html?id=actions-basebutton--playground&viewMode=story&globals=theme:';
 
-/** Mimics the unlayered `.btn` box-shadow that src/auth/layouts/NeumorphismLayout.css
- *  applies via a plain (non-`@layer`) import. */
-const UNLAYERED_OVERRIDE = `.layout-neumorphism-card .btn {
+/** Mimics an unlayered page stylesheet putting a `box-shadow` on every button
+ *  inside a container — a plain (non-`@layer`) rule beats every layered ring. */
+const UNLAYERED_OVERRIDE = `.layout-neumorphism-card button {
   box-shadow: 5px 5px 10px #bec3c9, -5px -5px 10px #ffffff;
 }`;
 
+const button = (variant: Parameters<typeof buttonVariants>[0]['variant']) =>
+  buttonVariants({ variant, size: 'md' });
+
 const FIXTURES = `
 <div id="focus-fixtures" style="padding:40px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
-  <button class="btn btn-tertiary" data-ring="tertiary">Tertiary</button>
-  <button class="btn btn-primary" data-ring="primary">Primary</button>
-  <button class="btn btn-link" data-ring="btn-link">Link button</button>
-  <button class="btn btn-tertiary btn-no-focus" data-ring="btn-no-focus">No-focus</button>
-  <button class="btn btn-tertiary shadow-sm" data-ring="shadow-sm">Elevated</button>
-  <div class="btn-group">
-    <input class="btn-check" type="radio" id="ring-toggle" name="ring-group">
-    <label class="btn btn-tertiary" for="ring-toggle" data-ring="btn-group-label">Toggle</label>
-  </div>
+  <button class="${button('tertiary')}" data-ring="tertiary">Tertiary</button>
+  <button class="${button('primary')}" data-ring="primary">Primary</button>
+  <button class="${button('text-primary')}" data-ring="text-primary">Text button</button>
+  <button class="${button('tertiary')} shadow-sm" data-ring="shadow-sm">Elevated</button>
   <div class="layout-neumorphism-card">
-    <button class="btn btn-tertiary" data-ring="unlayered-override">Neumorphic</button>
+    <button class="${button('tertiary')}" data-ring="unlayered-override">Neumorphic</button>
   </div>
   <ul class="menu"><li class="menu-item">
     <a href="#" class="menu-link" data-ring="menu-link">Menu link</a>
@@ -57,10 +62,8 @@ const FIXTURES = `
 const CASES = [
   'tertiary',
   'primary',
-  'btn-link',
-  'btn-no-focus',
+  'text-primary',
   'shadow-sm',
-  'btn-group-label',
   'unlayered-override',
   'menu-link',
   'nav-line-tab',
@@ -93,8 +96,8 @@ async function setUpFixtures(page: Page, theme: 'light' | 'dark') {
 
 /** Tabs until the wanted element has focus and measures in the same step, so
  *  `:focus-visible` matches the way it does for a real keyboard user. A bare
- *  .focus() call would not exercise the `.btn-check:focus + .btn` sibling path
- *  at all, and measuring in a later round-trip let focus drift. */
+ *  .focus() call would not exercise `:focus-visible` the way a keyboard user
+ *  does, and measuring in a later round-trip let focus drift. */
 async function focusByKeyboardAndMeasure(page: Page, ring: string) {
   await page.evaluate(() => {
     if (document.activeElement instanceof HTMLElement) {
@@ -108,12 +111,8 @@ async function focusByKeyboardAndMeasure(page: Page, ring: string) {
     const measured = await page.evaluate((target) => {
       const active = document.activeElement as HTMLElement | null;
       if (!active) return null;
-      // For `.btn-check` toggles the focus sits on the visually hidden input
-      // while the ring is drawn on its label.
-      const styled = active.classList.contains('btn-check')
-        ? (active.nextElementSibling as HTMLElement | null)
-        : active;
-      if (!styled || styled.dataset?.ring !== target) return null;
+      const styled = active;
+      if (styled.dataset?.ring !== target) return null;
       const ringHost =
         target === 'nav-line-tab' ? styled.closest('.nav-item') : styled;
       const ringSource =

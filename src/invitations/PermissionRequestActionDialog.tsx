@@ -59,32 +59,24 @@ export const PermissionRequestActionDialog: FunctionComponent<OwnProps> = (
                     disabled={invalid || isPending}
                     variant="danger"
                     className="w-150px"
-                    type="button"
                     onClick={() => {
                       actionRef.current = 'reject';
                       handleSubmit();
                     }}
-                  >
-                    <span className="svg-icon svg-icon-2">
-                      <XCircleIcon weight="bold" />
-                    </span>
-                    {translate('Decline')}
-                  </SubmitButton>
+                    label={translate('Decline')}
+                    iconNode={<XCircleIcon weight="bold" />}
+                  />
                   <SubmitButton
                     submitting={isApproving}
                     disabled={invalid || isPending}
                     className="w-150px"
-                    type="button"
                     onClick={() => {
                       actionRef.current = 'approve';
                       handleSubmit();
                     }}
-                  >
-                    <span className="svg-icon svg-icon-2">
-                      <CheckCircleIcon weight="bold" />
-                    </span>
-                    {translate('Approve')}
-                  </SubmitButton>
+                    label={translate('Approve')}
+                    iconNode={<CheckCircleIcon weight="bold" />}
+                  />
                 </>
               )
             }

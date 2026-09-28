@@ -3,8 +3,9 @@ import { FC } from 'react';
 import { useField } from 'react-final-form';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 import { CIDRField } from './CIDRField';
 import { DescriptionField } from './DescriptionField';
@@ -45,11 +46,12 @@ export const RuleRow: FC<RuleRowProps> = ({
       />
       <DescriptionField name={`${name}.description`} />
       <td>
-        <ActionButton
-          action={onRemove}
+        <BaseButton
+          onClick={onRemove}
           iconNode={<TrashIcon weight="bold" />}
           variant="text-secondary"
-          title={translate('Remove')}
+          label={translate('Remove')}
+          size="lg"
         />
       </td>
     </tr>

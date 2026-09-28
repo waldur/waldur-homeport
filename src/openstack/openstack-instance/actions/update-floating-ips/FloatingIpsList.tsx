@@ -1,8 +1,9 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 import { FloatingIpRow } from './FloatingIpRow';
 
@@ -52,15 +53,16 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
           </table>
         )}
 
-        <ActionButton
-          action={() => {
+        <BaseButton
+          onClick={() => {
             fields.push({
               floating_ip: true,
             });
           }}
-          title={translate('Add')}
+          label={translate('Add')}
           iconNode={<PlusCircleIcon weight="bold" />}
           variant="text-secondary"
+          size="lg"
         />
       </>
     )}

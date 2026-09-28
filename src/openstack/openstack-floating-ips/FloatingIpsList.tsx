@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import {
   OpenStackFloatingIp,
   openstackFloatingIpsList,
@@ -105,13 +104,13 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
       title={translate('Floating IPs')}
       showPageSizeSelector
       tableActions={
-        <ButtonGroup>
+        <div className="d-flex gap-2">
           <PullFloatingIpsAction resource={resourceScope} />
           <CreateFloatingIpAction
             resource={resourceScope}
             refetch={tableProps.fetch}
           />
-        </ButtonGroup>
+        </div>
       }
       rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={tableProps.fetch} />

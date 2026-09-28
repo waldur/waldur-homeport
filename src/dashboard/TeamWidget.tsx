@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Col } from 'react-bootstrap';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -109,12 +110,13 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
             (loadingAdd ? (
               <LoadingSpinner />
             ) : (
-              <IconButton
+              <BaseButton
                 iconNode={<PlusIcon size={16} weight="bold" />}
                 tooltip={translate('Add user')}
                 variant="tertiary"
-                className="border-dashed btn-avatar btn-circle"
+                className="border-dashed size-10 rounded-full"
                 onClick={onAddClick}
+                size="lg"
               />
             ))}
         </Col>

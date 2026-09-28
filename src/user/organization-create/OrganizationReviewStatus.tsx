@@ -2,11 +2,11 @@ import { ClockCountdownIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { RadialBg } from '@/navigation/header/search/RadialBg';
-import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
-
 import './OrganizationReviewStatus.scss';
 
 interface OrganizationReviewStatusProps {
@@ -85,11 +85,12 @@ export const OrganizationReviewStatus: FunctionComponent<
           )}
         </p>
 
-        <ActionButton
+        <BaseButton
           variant="tertiary"
-          action={onGoToDashboard}
+          onClick={onGoToDashboard}
           className="px-8 mt-5"
-          title={translate('Go to dashboard')}
+          label={translate('Go to dashboard')}
+          size="lg"
         />
       </Card.Body>
     </Card>

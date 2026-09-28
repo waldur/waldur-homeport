@@ -7,6 +7,8 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
 import { DateField } from '@/form/DateField';
@@ -18,7 +20,6 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 interface EditOrderFieldDialogProps {
   resolve: {
@@ -162,10 +163,11 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
             footer={
               <>
                 <CloseDialogButton className="flex-equal" />
-                <ActionButton
-                  className="btn btn-primary flex-equal"
-                  title={translate('Save')}
-                  action={handleSubmit}
+                <BaseButton
+                  variant="primary"
+                  className="flex-equal"
+                  label={translate('Save')}
+                  onClick={handleSubmit}
                   disabled={invalid || submitting}
                   disabledReason={
                     submitting

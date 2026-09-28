@@ -6,11 +6,10 @@ import {
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC, useCallback, useMemo } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { getResourceAccessEndpoints, isSshFormat } from './utils';
 
@@ -70,15 +69,12 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
   return (
     <RadixDropdownMenu.Root>
       <RadixDropdownMenu.Trigger asChild>
-        <button
-          type="button"
-          className="btn dropdown-toggle btn-tertiary no-arrow btn-icon-right"
-        >
-          {translate('Access resource')}
-          <span className="svg-icon svg-icon-2 rotate-toggle-180">
-            <CaretDownIcon weight="bold" />
-          </span>
-        </button>
+        <BaseButton
+          variant="tertiary"
+          label={translate('Access resource')}
+          iconNode={<CaretDownIcon weight="bold" />}
+          iconRight
+        />
       </RadixDropdownMenu.Trigger>
       <RadixDropdownMenu.Portal>
         <RadixDropdownMenu.Content
@@ -107,14 +103,15 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                       : endpoint.url
                   }
                 >
-                  <CompactActionButton
-                    variant="link"
-                    action={(e) => {
+                  <BaseButton
+                    variant="text-primary"
+                    onClick={(e) => {
                       copyText(endpoint.url);
                       e.preventDefault();
                     }}
                     iconNode={<CopyIcon weight="bold" />}
                     className="h-20px"
+                    size="sm"
                   />
                 </Tooltip>
               </a>

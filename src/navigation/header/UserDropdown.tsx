@@ -28,10 +28,15 @@ import { WebShellMenuItem } from './WebShellMenuItem';
 const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
   const user = useUser();
   return (
+    // Not a BaseButton: the trigger's content is an avatar image plus a
+    // two-line name/role block (and a conditional Staff badge), none of
+    // which fits BaseButton's single iconNode + label slots. The original
+    // className carried bare `btn` purely for Bootstrap's button reset
+    // (no variant class), so that reset is reproduced directly here instead.
     <button
       ref={ref}
       type="button"
-      className="btn d-flex align-items-center gap-4 py-2 px-2"
+      className="cursor-pointer border-0 bg-transparent d-flex align-items-center gap-4 py-2 px-2"
       aria-label={translate('User menu')}
       {...props}
     >
@@ -118,10 +123,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
           <UserDropdownMenuItems />
         ) : (
           <div className="d-grid gap-2 px-5">
-            <Link
-              state="login"
-              className="btn btn-light btn-color-dark btn-active-color-dark"
-            >
+            <Link state="login" buttonVariant="tertiary">
               {translate('Sign in')}
             </Link>
           </div>

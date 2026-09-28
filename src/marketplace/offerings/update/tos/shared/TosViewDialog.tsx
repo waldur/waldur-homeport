@@ -2,8 +2,9 @@ import { CheckIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { marketplaceUserOfferingConsentsCreate } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SafeMarkdown } from '@/core/SafeMarkdown';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -53,8 +54,8 @@ export const TosViewDialog = ({
         <>
           <CloseDialogButton label={translate('Close')} />
           {offering && refetch && !tos.has_user_consent && (
-            <SubmitButton
-              submitting={acceptTosMutation.isPending}
+            <BaseButton
+              pending={acceptTosMutation.isPending}
               disabled={!scrolledToBottom}
               disabledReason={
                 !scrolledToBottom
@@ -65,9 +66,9 @@ export const TosViewDialog = ({
               }
               label={translate('Accept')}
               iconNode={<CheckIcon weight="bold" />}
-              iconOnLeft
-              type="button"
               onClick={() => acceptTosMutation.mutate()}
+              variant="primary"
+              size="lg"
             />
           )}
         </>

@@ -1,8 +1,9 @@
 import { ChartBarIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 import { TosReportingModal } from './TosReportingModal';
 
@@ -19,10 +20,12 @@ export const TosReportingButton: FC<TosReportingButtonProps> = ({
 
   return (
     <>
-      <ActionButton
-        title={translate('ToS reporting')}
+      <BaseButton
+        label={translate('ToS reporting')}
         iconNode={<ChartBarIcon weight="bold" />}
-        action={() => setIsOpen(true)}
+        onClick={() => setIsOpen(true)}
+        variant="tertiary"
+        size="lg"
       />
       {isOpen && (
         <TosReportingModal

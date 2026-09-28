@@ -8,6 +8,8 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { getBookingFilterOptionStates } from '@/booking/utils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -76,12 +78,11 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
           {isRefetching ? (
             <LoadingSpinner />
           ) : (
-            <button
-              className="btn btn-icon btn-text-secondary"
+            <BaseButton
+              variant="text-secondary"
               onClick={() => refetch()}
-            >
-              <ArrowsClockwiseIcon weight="bold" />
-            </button>
+              iconNode={<ArrowsClockwiseIcon weight="bold" />}
+            />
           )}
         </Card.Title>
       </Card.Header>

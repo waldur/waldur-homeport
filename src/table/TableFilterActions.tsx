@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
@@ -69,29 +70,27 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
 
   return (
     <Stack direction="horizontal" gap={2}>
-      <CompactSubmitButton
-        submitting={false}
+      <BaseButton
+        size="sm"
         variant="text-primary"
         className="me-auto"
         onClick={saveFilter}
-        type="button"
         label={
           selectedSavedFilter
             ? translate('Update filter')
             : translate('Save filter')
         }
       />
-      <CompactSubmitButton
-        submitting={false}
+      <BaseButton
+        size="sm"
         variant="secondary"
         onClick={props.close}
-        type="button"
         label={translate('Cancel')}
       />
-      <CompactSubmitButton
-        submitting={false}
+      <BaseButton
+        size="sm"
+        variant="primary"
         onClick={applyCallback}
-        type="button"
         label={translate('Apply')}
       />
     </Stack>

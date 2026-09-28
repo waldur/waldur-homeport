@@ -47,7 +47,8 @@ export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Save')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

@@ -1,10 +1,11 @@
 import { PlusIcon, UserPlusIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 const AddRemoteUserDialog = lazyComponent(() =>
@@ -44,19 +45,23 @@ export const UserTableActions = ({ refetch }) => {
   return (
     <>
       {isStaffUser && (
-        <ActionButton
-          action={openCreateDialog}
+        <BaseButton
+          onClick={openCreateDialog}
           className="me-3"
           iconNode={<UserPlusIcon weight="bold" />}
-          title={translate('Create user')}
+          label={translate('Create user')}
+          variant="tertiary"
+          size="lg"
         />
       )}
       {showEduTeams && (
-        <ActionButton
-          action={openAddRemoteDialog}
+        <BaseButton
+          onClick={openAddRemoteDialog}
           className="me-3"
           iconNode={<PlusIcon weight="bold" />}
-          title={translate('Add user')}
+          label={translate('Add user')}
+          variant="tertiary"
+          size="lg"
         />
       )}
     </>
