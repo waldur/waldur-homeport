@@ -40,8 +40,10 @@ export const Sidebar: React.FC<PropsWithChildren> = ({ children }) => {
   // see its own doc comment for why that's still needed.
   const { markUserToggled } = useSidebarLayoutShim();
 
+  // Start below the impersonation bar (or any other outstanding bar), like
+  // the header and toolbar do.
   return (
-    <SidebarRoot>
+    <SidebarRoot className="in-[.outstanding-bar-enabled]:top-(--kt-pagebar-height) in-[.outstanding-bar-enabled]:h-[calc(100svh-var(--kt-pagebar-height))]">
       <SidebarBrandHeader onToggle={markUserToggled} />
       <SidebarContent>
         <SidebarMenu>{children}</SidebarMenu>
