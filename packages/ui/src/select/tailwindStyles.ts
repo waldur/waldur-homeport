@@ -217,11 +217,15 @@ export const getSelectTailwindClassNames = <
       // between` would shove apart instead of keeping together — the
       // old SCSS scoped this the same way, to
       // `:not(.metronic-select__menu-list--is-multi)` only.
+      // `[&>*]:grow` (also single-select only, as in the old SCSS) lets a
+      // custom Option's content fill the row, so anything it right-aligns
+      // (RoleOption's type badge, UserListOptionInline's icons) stays at the
+      // far edge instead of collapsing onto the label.
       if (isTableFilter) {
         return cn(
           stateClasses,
           'flex! items-center gap-[8px] h-[40px] px-[12px] py-[2px]',
-          !isMulti && 'justify-between',
+          !isMulti && 'justify-between [&>*]:grow',
           'cursor-pointer select-none transition-colors text-[14px]!',
           '[&>*]:line-clamp-2',
           checkmarkClasses,
@@ -232,7 +236,8 @@ export const getSelectTailwindClassNames = <
       return cn(
         stateClasses,
         'flex! items-center px-[16px] py-[10px] cursor-pointer select-none transition-colors text-[14.3px]!',
-        !isMulti && 'justify-between',
+        // `gap-[8px]` keeps the content clear of the selected row's checkmark.
+        !isMulti && 'justify-between gap-[8px] [&>*]:grow',
         checkmarkClasses,
         colorClasses,
       );
