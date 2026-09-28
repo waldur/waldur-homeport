@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { BroadcastMessage } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Field } from '@/resource/summary';
@@ -19,13 +21,11 @@ export const RecipientsField: FunctionComponent<{
   return (
     <Field label={translate('Recipients')} labelCol={5} valueCol={7}>
       <p>
-        <button
-          className="btn btn-link btn-flush"
-          type="button"
+        <BaseButton
+          variant="text-primary"
           onClick={openRecipientsList}
-        >
-          {translate('Show recipients')}
-        </button>
+          label={translate('Show recipients')}
+        />
       </p>
     </Field>
   );

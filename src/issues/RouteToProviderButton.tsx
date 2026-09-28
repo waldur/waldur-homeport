@@ -6,6 +6,8 @@ import {
   supportIssuesRouteToProvider,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
@@ -13,7 +15,6 @@ import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { ActionButton } from '@/table/ActionButton';
 
 const RouteToProviderDialog: FC<{
   resolve: { issue: Issue; refetch: () => void };
@@ -89,12 +90,13 @@ export const RouteToProviderButton: FC<{
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Route to provider')}
+    <BaseButton
+      label={translate('Route to provider')}
       variant="tertiary"
-      action={() =>
+      onClick={() =>
         openDialog(RouteToProviderDialog, { resolve: { issue, refetch } })
       }
+      size="lg"
     />
   );
 };

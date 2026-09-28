@@ -1,12 +1,13 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
@@ -52,9 +53,9 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
   }
 
   return (
-    <ActionButton
-      title={translate('Bulk import')}
-      action={() =>
+    <BaseButton
+      label={translate('Bulk import')}
+      onClick={() =>
         openDialog(ProjectImportDialog, {
           size: 'lg',
           formId: 'BulkImportProjects',
@@ -65,6 +66,8 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
         })
       }
       iconNode={<UploadSimpleIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

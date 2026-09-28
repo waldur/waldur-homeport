@@ -2,11 +2,12 @@ import { LifebuoyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { hasProviderRouting } from '@/issues/hooks';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useUser } from '@/workspace/hooks';
 
 const HelpdeskSettingsForm = lazyComponent(() =>
@@ -52,10 +53,10 @@ export const HelpdeskSetupCard: FC = () => {
             )}
           </p>
         </div>
-        <ActionButton
-          title={translate('Set up helpdesk')}
+        <BaseButton
+          label={translate('Set up helpdesk')}
           variant="primary"
-          action={() =>
+          onClick={() =>
             openDialog(HelpdeskSettingsForm, {
               resolve: {
                 serviceProviderUuid: customer.service_provider_uuid,
@@ -63,6 +64,7 @@ export const HelpdeskSetupCard: FC = () => {
               },
             })
           }
+          size="lg"
         />
       </Card.Body>
     </Card>

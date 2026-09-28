@@ -7,10 +7,9 @@ import {
   supportSettingsAtlassianDiscoverPriorities,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
-import { SelectGroup } from '@/form';
-import { SubmitButton } from '@/form/SubmitButton';
+import { SelectGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -104,29 +103,23 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
   // Custom footer for this step
   const renderFooter = () => (
     <>
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         variant="tertiary"
         className="min-w-125px me-auto"
         onClick={() => props.onPrev(values)}
-        type="button"
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
-        iconOnLeft
+        size="lg"
       />
       <CloseDialogButton className="min-w-125px" />
       <SubmitButton
-        submitting={false}
+        submitting={loading}
         disabled={loading}
         label={translate('Continue')}
         onClick={handleContinue}
-        type="button"
-        className="btn-icon-right min-w-125px"
-      >
-        <span className="svg-icon svg-icon-2">
-          <CaretRightIcon weight="bold" />
-        </span>
-      </SubmitButton>
+        className="min-w-125px"
+        iconNode={<CaretRightIcon weight="bold" />}
+      />
     </>
   );
 

@@ -37,7 +37,9 @@ const VolumeBadgeTipView = ({ volume, resourceName }: VolumeBadgeProps) => {
           params={{
             resource_uuid: volume.marketplace_resource_uuid,
           }}
-          className="btn btn-sm btn-dark mt-2"
+          buttonVariant="secondary"
+          buttonSize="sm"
+          className="mt-2"
         >
           {translate('Go to detail view')}
         </Link>

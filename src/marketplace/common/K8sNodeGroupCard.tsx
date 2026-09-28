@@ -1,13 +1,12 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { Col, Form, Row, Stack } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { BaseNumberField } from '@/form/NumberField';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { K8sFlavorSelectionTable } from './K8sFlavorSelectionTable';
 import {
@@ -101,10 +100,11 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
           {nodeGroup.type.toUpperCase()}
         </Badge>
         {canRemove && (
-          <CompactActionButton
+          <BaseButton
             variant="danger"
-            action={onRemove}
+            onClick={onRemove}
             iconNode={<TrashIcon weight="bold" />}
+            size="sm"
           />
         )}
       </Stack>

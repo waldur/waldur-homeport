@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import React, { ReactNode, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { SubmitButton } from '@/form';
+import { ButtonVariant, BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -24,7 +25,7 @@ interface ConfirmationDialogProps {
     type?: ConfirmationDialogType;
     positiveButton?: string;
     negativeButton?: string;
-    positiveButtonVariant?: string;
+    positiveButtonVariant?: ButtonVariant;
     onlyPositiveButton?: boolean;
     iconNode?: ReactNode;
     hideIcon?: boolean;
@@ -105,14 +106,18 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
               onClick={handleCancel}
             />
           )}
-          <SubmitButton
+          <BaseButton
             variant={positiveButtonVariant}
             className={onlyPositiveButton ? undefined : 'flex-equal px-3'}
             onClick={handleSubmit}
             disabled={showInput && inputRequired && !inputValue.trim()}
-            type="button"
-            submitting={false}
+            disabledReason={
+              showInput && inputRequired && !inputValue.trim()
+                ? translate('Please enter the required text to confirm')
+                : undefined
+            }
             label={positiveButton}
+            size="lg"
           />
         </>
       }

@@ -5,12 +5,10 @@ import {
   MagnifyingGlassIcon,
 } from '@phosphor-icons/react';
 import React, { useMemo, useState } from 'react';
-// eslint-disable-next-line waldur-custom/no-direct-bootstrap-button -- Complex selector button with custom children, tooltip, and nested click handler
-import { Button } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { buttonVariants, cn, Tooltip } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatFilesize } from '@/core/utils';
@@ -230,10 +228,12 @@ export const K8sFlavorSelectionTable: React.FC<
 
   return (
     <div className="d-grid">
-      <Button
-        variant="text-primary"
-        size="lg"
-        className="ellipsis justify-content-start gap-2"
+      <button
+        type="button"
+        className={cn(
+          buttonVariants({ variant: 'text-primary', size: 'lg' }),
+          'ellipsis justify-content-start gap-2',
+        )}
         onClick={openModal}
         disabled={!offeringUuid}
       >
@@ -269,7 +269,7 @@ export const K8sFlavorSelectionTable: React.FC<
             className="text-gray-400 ms-auto"
           />
         )}
-      </Button>
+      </button>
     </div>
   );
 };

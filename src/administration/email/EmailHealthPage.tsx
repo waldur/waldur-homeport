@@ -2,14 +2,13 @@ import { PaperPlaneTiltIcon, PlugsConnectedIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
 import { useModal } from '@/modal/actions';
@@ -90,23 +89,20 @@ export const EmailHealthPage: FC = () => {
       actions={
         <div className="d-flex align-items-center gap-4">
           <RefreshButton refetch={reload} isLoading={isRefetching} />
-          <SubmitButton
-            submitting={probe.isPending}
-            type="button"
+          <BaseButton
+            pending={probe.isPending}
             variant="tertiary"
             onClick={() => probe.mutate()}
             label={translate('Test connection')}
             iconNode={<PlugsConnectedIcon weight="bold" />}
-            iconOnLeft
+            size="lg"
           />
-          <SubmitButton
-            submitting={false}
-            type="button"
+          <BaseButton
             variant="primary"
             onClick={() => openDialog(SendTestEmailDialog)}
             label={translate('Send test email')}
             iconNode={<PaperPlaneTiltIcon weight="bold" />}
-            iconOnLeft
+            size="lg"
           />
         </div>
       }

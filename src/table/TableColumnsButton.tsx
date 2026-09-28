@@ -20,11 +20,10 @@ import {
 } from '@phosphor-icons/react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useMemo, useState } from 'react';
-import { Button, FormCheck } from 'react-bootstrap';
+import { FormCheck } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 
@@ -119,11 +118,12 @@ const ColumnsPopover = ({
           placeholder={translate('Search...')}
           onChange={(e) => setQuery(e.target.value)}
           rightAction={
-            <CompactIconButton
+            <BaseButton
               iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
               tooltip={translate('Reset settings to default')}
               onClick={resetColumns}
               variant="text-secondary"
+              size="sm"
             />
           }
         />
@@ -197,28 +197,18 @@ export const TableColumnButton: FC<TableProps> = ({
   };
   return (
     <RadixPopover.Root modal={false}>
-      <Tooltip label={translate('Toggle visible columns')}>
-        <span className="d-inline-flex">
-          {/* Trigger wraps the real <Button> (not an ancestor <span>): a
-                                      disabled HTML button never dispatches click events at all, so
-                                      unlike the old OverlayTrigger setup this needs no separate
-                                      trigger-suppression workaround for the grid-mode disabled
-                                      state. */}
-          <RadixPopover.Trigger asChild disabled={mode !== 'table'}>
-            <Button
-              disabled={mode !== 'table'}
-              variant="tertiary"
-              size="lg"
-              className="btn-icon"
-              aria-label={translate('Toggle visible columns')}
-            >
-              <span className="svg-icon svg-icon-2">
-                <GearIcon weight="bold" />
-              </span>
-            </Button>
-          </RadixPopover.Trigger>
-        </span>
-      </Tooltip>
+      {/* BaseButton's own `tooltip` prop wraps the button in its own
+          Tooltip internally — Radix's nested asChild composition delivers
+          Popover's props down to the underlying <button>. */}
+      <RadixPopover.Trigger asChild disabled={mode !== 'table'}>
+        <BaseButton
+          disabled={mode !== 'table'}
+          variant="tertiary"
+          size="lg"
+          tooltip={translate('Toggle visible columns')}
+          iconNode={<GearIcon weight="bold" />}
+        />
+      </RadixPopover.Trigger>
       <RadixPopover.Portal>
         <RadixPopover.Content
           side="bottom"

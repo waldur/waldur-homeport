@@ -2,11 +2,12 @@ import { XCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { openportalManagedProjectsReject } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { wrapTooltip } from '@/table/ActionButton';
 
 export const RejectManagedProjectButton = ({ row, as, className, refetch }) => {
   const project = row; // Assuming row is the project object
@@ -33,8 +34,8 @@ export const RejectManagedProjectButton = ({ row, as, className, refetch }) => {
       ),
     },
   });
-  return wrapTooltip(
-    translate('Click to reject this project.'),
+
+  const content = (
     <>
       {rejectMutation.isPending ? (
         <LoadingSpinnerSimple className="me-1" />
@@ -49,6 +50,12 @@ export const RejectManagedProjectButton = ({ row, as, className, refetch }) => {
           size="sm"
         />
       )}
-    </>,
+    </>
+  );
+
+  return (
+    <Tooltip label={translate('Click to reject this project.')}>
+      <span>{content}</span>
+    </Tooltip>
   );
 };

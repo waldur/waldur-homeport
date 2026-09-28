@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useForm } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
@@ -10,7 +12,6 @@ import { translate } from '@/i18n';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { VStepperFormStepCard } from '@/wizard';
 
 import { formatSubnets, useFormTenant } from './utils';
@@ -42,12 +43,13 @@ export const FormNetworkStep = (props: FormStepProps) => {
       actions={
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">
-            <CompactActionButton
+            <BaseButton
               variant="tertiary"
               className="text-nowrap"
-              action={() => {}}
+              onClick={() => {}}
               iconNode={<PlusIcon weight="bold" />}
-              title={translate('New network')}
+              label={translate('New network')}
+              size="sm"
             />
           </div>
         ) : null

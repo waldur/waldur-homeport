@@ -13,6 +13,7 @@ import {
   onboardingQuestionMetadataUpdate,
 } from 'waldur-js-client';
 
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { QuestionGeneralForm } from '@/marketplace-checklist/checklists/questions/QuestionGeneralForm';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -208,19 +209,11 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
             footer={
               <>
                 <CloseDialogButton />
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={
-                    !values.description ||
-                    !values.question_type ||
-                    questionMutation.isPending
-                  }
-                >
-                  {questionMutation.isPending
-                    ? translate('Saving...')
-                    : translate('Save')}
-                </button>
+                <SubmitButton
+                  submitting={questionMutation.isPending}
+                  disabled={!values.description || !values.question_type}
+                  label={translate('Save')}
+                />
               </>
             }
           >

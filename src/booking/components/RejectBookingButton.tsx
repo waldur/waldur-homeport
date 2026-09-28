@@ -32,7 +32,7 @@ export const RejectBookingButton: FC<RejectBookingButtonProps> = ({
       label={
         isServiceProviderContext ? translate('Deny') : translate('Cancel order')
       }
-      className="btn btn-danger"
+      variant="danger"
       onClick={() => rejectMutation.mutate()}
     />
   );

@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
@@ -58,28 +59,20 @@ export const OrderProviderActions = ({
     return null;
   }
 
-  return as === ActionButton ? (
+  return as === BaseButton ? (
     <>
       {showApproveByProviderButton && (
         <ApproveByProviderButton
           row={order}
           refetch={refetch}
-          as={ActionButton}
+          as={BaseButton}
         />
       )}
       {showRejectByProviderButton && (
-        <RejectByProviderButton
-          row={order}
-          refetch={refetch}
-          as={ActionButton}
-        />
+        <RejectByProviderButton row={order} refetch={refetch} as={BaseButton} />
       )}
       {showRequestInfoButton && (
-        <SetProviderInfoButton
-          row={order}
-          refetch={refetch}
-          as={ActionButton}
-        />
+        <SetProviderInfoButton row={order} refetch={refetch} as={BaseButton} />
       )}
     </>
   ) : (

@@ -80,9 +80,10 @@ function CustomToggle({ item, eventKey }) {
       onClick={decoratedOnClick}
       active={activeEventKey === eventKey}
     >
-      <span className="svg-icon svg-icon-3 text-gray-700 rotate-90">
-        <CaretRightIcon weight="bold" />
-      </span>
+      <CaretRightIcon
+        weight="bold"
+        className="size-4 text-gray-700 rotate-90"
+      />
     </CategoryListItem>
   );
 }

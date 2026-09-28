@@ -68,4 +68,30 @@ describe('Link', () => {
 
     expect(onClick).not.toHaveBeenCalled();
   });
+
+  it('styles a plain text link as an anchor', () => {
+    render(<Link state="profile.details">Profile</Link>);
+
+    expect(screen.getByText('Profile')).toHaveClass('text-anchor');
+  });
+
+  it('does not add anchor styling to a link rendered as a button', () => {
+    render(
+      <Link state="profile.details" buttonVariant="secondary">
+        Profile
+      </Link>,
+    );
+
+    expect(screen.getByText('Profile')).not.toHaveClass('text-anchor');
+  });
+
+  it('keeps anchor styling when the caller only passes an unrelated btn-* class', () => {
+    render(
+      <Link state="profile.details" className="btn-no-focus">
+        Profile
+      </Link>,
+    );
+
+    expect(screen.getByText('Profile')).toHaveClass('text-anchor');
+  });
 });

@@ -51,10 +51,9 @@ describe('ExecuteMergeButton', () => {
     );
     const button = screen.getByRole('button', { name: /run merge/i });
     expect(button).toBeDisabled();
-    // A disabled button gets no pointer events; the tooltip listens on the
-    // wrapper BaseButton puts around it.
-    // eslint-disable-next-line testing-library/no-node-access
-    await userEvent.hover(button.parentElement);
+    // BaseButton puts Tooltip directly on the button without wrapper spans;
+    // pointer-events are preserved so hover fires directly on the button.
+    await userEvent.hover(button);
     expect(
       (await screen.findAllByText(/offering_user_on_both/)).length,
     ).toBeGreaterThan(0);

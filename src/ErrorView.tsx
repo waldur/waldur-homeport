@@ -5,7 +5,8 @@ import {
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import '@/navigation/header/search/NoResult.scss';
 import { useModal } from '@/modal/actions';
@@ -47,23 +48,19 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
           </div>
         </div>
         <div className="actions d-flex gap-4 mt-2">
-          <SubmitButton
-            submitting={false}
-            type="button"
+          <BaseButton
             variant="tertiary"
             onClick={openErrorTraceDialog}
             label={translate('Show error trace')}
             iconNode={<EyeIcon weight="bold" />}
-            iconOnLeft
+            size="lg"
           />
-          <SubmitButton
-            submitting={false}
-            type="button"
+          <BaseButton
             variant="tertiary"
             onClick={() => location.reload()}
             label={translate('Reload')}
             iconNode={<ArrowClockwiseIcon weight="bold" />}
-            iconOnLeft
+            size="lg"
           />
         </div>
       </div>

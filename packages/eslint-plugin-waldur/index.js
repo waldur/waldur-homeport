@@ -4,7 +4,6 @@ import enforceBadgePropsConsistency from './rules/enforce-badge-props-consistenc
 import enforceBadgeRightIconPattern from './rules/enforce-badge-right-icon-pattern.js';
 import enforceBorderRadiusTokens from './rules/enforce-border-radius-tokens.js';
 import enforceBreadcrumbColors from './rules/enforce-breadcrumb-colors.js';
-import enforceButtonVariants from './rules/enforce-button-variants.js';
 import enforceDialogButtonOrder from './rules/enforce-dialog-button-order.js';
 import enforceDisabledButtonTooltip from './rules/enforce-disabled-button-tooltip.js';
 import enforceFeaturedIcon from './rules/enforce-featured-icon.js';
@@ -14,8 +13,6 @@ import enforceNoResultWithCta from './rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
-import noDirectBootstrapButton from './rules/no-direct-bootstrap-button.js';
-import noDirectBootstrapDropdownButton from './rules/no-direct-bootstrap-dropdown-button.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
@@ -35,13 +32,10 @@ export default {
     'enforce-badge-props-consistency': enforceBadgePropsConsistency,
     'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
     'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
-    'enforce-button-variants': enforceButtonVariants,
     'enforce-dialog-button-order': enforceDialogButtonOrder,
-    'no-direct-bootstrap-button': noDirectBootstrapButton,
     'no-bootstrap-button-markup': noBootstrapButtonMarkup,
     'no-hand-rolled-table': noHandRolledTable,
     'no-hand-rolled-modal-footer': noHandRolledModalFooter,
-    'no-direct-bootstrap-dropdown-button': noDirectBootstrapDropdownButton,
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,
     'enforce-formcheck-components': enforceFormcheckComponents,

@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Variant } from 'react-bootstrap/types';
 import { ProtectedRound } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
+import { ButtonVariant, BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { Call } from '../types';
@@ -13,7 +13,7 @@ interface PublicCallApplyButtonProps {
   call: Call;
   round?: ProtectedRound;
   title?: string;
-  variant?: Variant;
+  variant?: ButtonVariant;
   className?: string;
   size?: 'sm' | 'lg';
 }
@@ -31,9 +31,7 @@ export const PublicCallApplyButton: FC<PublicCallApplyButtonProps> = ({
   if (hidden) return null;
 
   return (
-    <SubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
       variant={variant}
       size={size}
       className={className}

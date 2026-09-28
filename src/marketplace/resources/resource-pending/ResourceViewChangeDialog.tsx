@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
 import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
@@ -8,7 +10,6 @@ import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink'
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { Field } from '@/resource/summary';
-import { ActionButton } from '@/table/ActionButton';
 
 import { ResourceLimitChangeInfo } from './ResourceLimitChangeInfo';
 import { ResourcePlanChangeInfo } from './ResourcePlanChangeInfo';
@@ -48,7 +49,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
           <OrderDetailsLink
             order_uuid={order.uuid}
             project_uuid={order.project_uuid}
-            className="btn btn-tertiary"
+            buttonVariant="tertiary"
           >
             {translate('Go to order')}
           </OrderDetailsLink>
@@ -58,7 +59,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
                 order={order}
                 offering={offering}
                 refetch={refetch}
-                as={ActionButton}
+                as={BaseButton}
               />
             </div>
           ) : order.state === 'pending-provider' ? (
@@ -66,7 +67,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
               <OrderProviderActions
                 order={order}
                 refetch={refetch}
-                as={ActionButton}
+                as={BaseButton}
               />
             </div>
           ) : null}

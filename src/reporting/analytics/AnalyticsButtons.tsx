@@ -1,9 +1,8 @@
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 
 import { AnalyticsMode } from './types';
@@ -29,20 +28,19 @@ const WhatIfButton: FC<AnalyticsButtonProps> = ({
   size = 'sm',
 }) =>
   isDisabled ? (
-    <Tooltip label={translate('No data available for analysis')}>
-      <CompactSubmitButton
-        submitting={false}
-        type="button"
-        variant="secondary"
-        disabled
-        label={translate('What if')}
-      />
-    </Tooltip>
+    <BaseButton
+      size={size}
+      variant="secondary"
+      disabled
+      tooltip={translate('No data available for analysis')}
+      label={translate('What if')}
+    />
   ) : (
     <Link
       state={state}
       params={{ mode: 'what-if' }}
-      className={`btn btn-secondary ${size === 'sm' ? 'btn-sm' : ''}`}
+      buttonVariant="secondary"
+      buttonSize={size}
     >
       {translate('What if')}
     </Link>
@@ -58,20 +56,19 @@ const WhySoButton: FC<AnalyticsButtonProps> = ({
   size = 'sm',
 }) =>
   isDisabled ? (
-    <Tooltip label={translate('No data available for analysis')}>
-      <CompactSubmitButton
-        submitting={false}
-        type="button"
-        variant="secondary"
-        disabled
-        label={translate('Why so')}
-      />
-    </Tooltip>
+    <BaseButton
+      size={size}
+      variant="secondary"
+      disabled
+      tooltip={translate('No data available for analysis')}
+      label={translate('Why so')}
+    />
   ) : (
     <Link
       state={state}
       params={{ mode: 'why-so' }}
-      className={`btn btn-secondary ${size === 'sm' ? 'btn-sm' : ''}`}
+      buttonVariant="secondary"
+      buttonSize={size}
     >
       {translate('Why so')}
     </Link>

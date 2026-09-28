@@ -17,7 +17,7 @@ import {
   useState,
 } from 'react';
 
-import { Tag } from 'waldur-ui';
+import { BaseButton, Tag } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { translate } from '@/i18n';
@@ -549,21 +549,20 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
                 }
                 disabled={disabled || uploading}
               />
-              <button
-                type="button"
-                className="tc-composer-mic btn btn-icon"
+              <BaseButton
+                variant="text-secondary"
+                className="tc-composer-mic"
                 disabled={disabled || !recordingSupported}
                 onClick={onStartRecording}
-                title={
+                tooltip={
                   !recordingSupported
                     ? translate(
                         'Voice messages are not supported in this browser.',
                       )
                     : translate('Record voice message')
                 }
-              >
-                <MicrophoneIcon weight="bold" />
-              </button>
+                iconNode={<MicrophoneIcon weight="bold" />}
+              />
             </>
           )}
         </div>

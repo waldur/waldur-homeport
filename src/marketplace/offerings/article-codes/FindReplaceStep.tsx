@@ -78,7 +78,6 @@ export const FindReplaceStep: FC<WizardStepProps> = (props) => {
         disabled={!values.search?.trim()}
         label={translate('Preview changes')}
         onClick={previewAndContinue}
-        type="button"
       />
     </>
   );

@@ -2,7 +2,7 @@ import { Icon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
 
-import { FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
+import { BaseButton, FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
 
 import { parseMarkdownLinksOnly } from '@/core/sanitize';
 import { translate } from '@/i18n';
@@ -103,13 +103,13 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
           />
         </div>
         {onAction && actionLabel ? (
-          <button
-            type="button"
-            className="btn btn-sm btn-tertiary flex-shrink-0 ms-auto"
+          <BaseButton
+            variant="tertiary"
+            size="sm"
+            className="flex-shrink-0 ms-auto"
             onClick={onAction}
-          >
-            {actionLabel}
-          </button>
+            label={actionLabel}
+          />
         ) : null}
         {showMoreButton && (
           <button

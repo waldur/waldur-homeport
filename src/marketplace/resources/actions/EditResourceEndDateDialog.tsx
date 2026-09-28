@@ -74,7 +74,8 @@ export const EditResourceEndDateDialog: FunctionComponent<
                     submitting={submitting}
                     label={translate('Save')}
                     disabled={invalid || exceedsProjectEndDate}
-                    className="btn btn-primary min-w-125px"
+                    variant="primary"
+                    className="min-w-125px"
                   />
                 </>
               }

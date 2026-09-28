@@ -1,8 +1,9 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC, useContext } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
@@ -31,9 +32,8 @@ export const CommentEditButton: FC<CommentEditButtonProps> = ({ comment }) => {
   };
 
   return (
-    <CompactSubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
+      size="sm"
       variant="tertiary"
       className="me-3"
       onClick={openEditCommentDialog}

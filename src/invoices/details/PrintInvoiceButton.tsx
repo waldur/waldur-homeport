@@ -1,14 +1,13 @@
 import { PrinterIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 
 export const PrintInvoiceButton: FunctionComponent = () => (
-  <SubmitButton
-    submitting={false}
-    type="button"
+  <BaseButton
     variant="secondary"
     onClick={() => window.print()}
     label={
@@ -17,6 +16,6 @@ export const PrintInvoiceButton: FunctionComponent = () => (
         : translate('Print invoice')
     }
     iconNode={<PrinterIcon weight="bold" />}
-    iconOnLeft
+    size="lg"
   />
 );

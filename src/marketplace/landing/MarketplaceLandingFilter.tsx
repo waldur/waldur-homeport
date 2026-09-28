@@ -7,11 +7,12 @@ import { Form, useForm } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
@@ -97,22 +98,23 @@ export const MarketplaceLandingFilter = () => {
       render={({ handleSubmit, values }) => (
         <RadixPopover.Root open={show} onOpenChange={setShow} modal={false}>
           <RadixPopover.Trigger asChild>
-            <button
+            <BaseButton
               type="button"
               id="marketplace-landing-filter-toggle"
-              className={classNames(
-                'btn dropdown-toggle btn-tertiary d-flex text-nowrap btn-icon-right no-arrow',
-                show && 'active',
-              )}
-            >
-              <FunnelSimpleIcon size={20} className="svg-icon" weight="bold" />
-              {translate('Organization')} & {translate('Project')}
-              <CaretDownIcon
-                size={18}
-                className="svg-icon rotate-toggle-180 ms-2 me-0"
-                weight="bold"
-              />
-            </button>
+              variant="tertiary"
+              className={classNames('text-nowrap', show && 'active')}
+              iconNode={<FunnelSimpleIcon size={20} weight="bold" />}
+              label={
+                <>
+                  {translate('Organization')} & {translate('Project')}
+                  <CaretDownIcon
+                    size={18}
+                    className="rotate-toggle-180"
+                    weight="bold"
+                  />
+                </>
+              }
+            />
           </RadixPopover.Trigger>
           <RadixPopover.Portal>
             <RadixPopover.Content
@@ -160,11 +162,12 @@ export const MarketplaceLandingFilter = () => {
                   <LandingFilterFields values={values} />
 
                   <Stack direction="horizontal" gap={4}>
-                    <ActionButton
+                    <BaseButton
                       variant="tertiary"
                       className="flex-equal"
-                      action={() => setShow(false)}
-                      title={translate('Cancel')}
+                      onClick={() => setShow(false)}
+                      label={translate('Cancel')}
+                      size="lg"
                     />
                     <SubmitButton
                       submitting={false}

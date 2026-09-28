@@ -7,8 +7,9 @@ import {
   OnboardingVerification,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form/SubmitButton';
 import { AttachmentItem } from '@/form/upload/AttachmentItem';
 import { AttachmentsList } from '@/form/upload/AttachmentsList';
 import { translate } from '@/i18n';
@@ -66,25 +67,33 @@ export const OnboardingJustificationDetails: FC<
             </div>
             {showActions && (
               <div className="d-flex gap-2">
-                <SubmitButton
-                  submitting={actionLoading}
+                <BaseButton
+                  pending={actionLoading}
                   variant="danger"
                   onClick={() => onReject?.(values)}
                   disabled={!isPending}
+                  disabledReason={
+                    !isPending
+                      ? translate('Request has already been processed')
+                      : undefined
+                  }
                   label={translate('Reject')}
                   iconNode={<XCircleIcon weight="bold" />}
-                  iconOnLeft
-                  type="button"
+                  size="lg"
                 />
-                <SubmitButton
-                  submitting={actionLoading}
+                <BaseButton
+                  pending={actionLoading}
                   variant="primary"
                   onClick={() => onApprove?.(values)}
                   disabled={!isPending}
+                  disabledReason={
+                    !isPending
+                      ? translate('Request has already been processed')
+                      : undefined
+                  }
                   label={translate('Approve')}
                   iconNode={<CheckCircleIcon weight="bold" />}
-                  iconOnLeft
-                  type="button"
+                  size="lg"
                 />
               </div>
             )}

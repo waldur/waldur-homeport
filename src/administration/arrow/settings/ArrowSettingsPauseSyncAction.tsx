@@ -1,9 +1,10 @@
 import { PauseIcon } from '@phosphor-icons/react';
 import { adminArrowBillingSyncsPauseSync } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 import { arrowQueryKeys } from '../api';
 
@@ -27,12 +28,13 @@ export const ArrowSettingsPauseSyncAction = ({
   });
 
   return (
-    <ActionButton
-      action={handlePauseSync}
-      title={translate('Pause sync')}
+    <BaseButton
+      onClick={handlePauseSync}
+      label={translate('Pause sync')}
       iconNode={<PauseIcon weight="bold" />}
       variant="secondary"
       pending={isPending}
+      size="lg"
     />
   );
 };

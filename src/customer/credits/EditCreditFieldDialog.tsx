@@ -58,7 +58,8 @@ export const EditCreditFieldDialog: FC<{
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Confirm')}
-                  className="btn btn-primary flex-equal"
+                  variant="primary"
+                  className="flex-equal"
                 />
               </>
             }

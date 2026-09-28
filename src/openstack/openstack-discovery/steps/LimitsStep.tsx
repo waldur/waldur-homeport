@@ -2,8 +2,9 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { NumberGroup } from '@/form';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -18,24 +19,23 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
 
   const renderFooter = () => (
     <>
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         variant="tertiary"
         className="min-w-125px me-auto"
         onClick={() => props.onPrev(values)}
-        type="button"
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
-        iconOnLeft
+        size="lg"
       />
       <CloseDialogButton className="min-w-125px" />
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         label={translate('Continue')}
         onClick={() => props.handleSubmit()}
-        type="button"
         iconNode={<CaretRightIcon weight="bold" />}
         data-testid="wizard-next-btn"
+        iconRight
+        variant="primary"
+        size="lg"
       />
     </>
   );

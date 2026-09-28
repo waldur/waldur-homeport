@@ -99,7 +99,8 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
                   disabled={
                     invalid || rolesLoading || filteredRoles.length === 0
                   }
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

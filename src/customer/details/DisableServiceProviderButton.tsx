@@ -4,9 +4,10 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 import { useCustomer, useSetCustomer } from '@/workspace/hooks';
 
 interface DisableServiceProviderButtonProps {
@@ -45,11 +46,12 @@ export const DisableServiceProviderButton: FC<
   });
 
   return (
-    <ActionButton
-      title={translate('Disable service provider profile')}
-      action={() => mutate()}
+    <BaseButton
+      label={translate('Disable service provider profile')}
+      onClick={() => mutate()}
       variant="danger"
       pending={isPending}
+      size="lg"
     />
   );
 };

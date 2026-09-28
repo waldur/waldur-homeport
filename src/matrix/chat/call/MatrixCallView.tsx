@@ -34,7 +34,7 @@ import {
   useState,
 } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
@@ -428,9 +428,12 @@ const CallErrorPanel: FC<{
       loadData={onRetry}
       message={message || translate('Could not connect to the call.')}
     />
-    <button type="button" className="btn btn-sm btn-light" onClick={onClose}>
-      {translate('Close')}
-    </button>
+    <BaseButton
+      variant="tertiary"
+      size="sm"
+      onClick={onClose}
+      label={translate('Close')}
+    />
   </div>
 );
 

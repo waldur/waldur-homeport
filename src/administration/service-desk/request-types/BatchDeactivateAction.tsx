@@ -5,9 +5,10 @@ import {
   supportRequestTypesAdminDeactivate,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 interface BatchDeactivateActionProps {
   rows: RequestTypeAdmin[];
@@ -48,9 +49,9 @@ export const BatchDeactivateAction: FC<BatchDeactivateActionProps> = ({
   });
 
   return (
-    <ActionButton
-      title={translate('Deactivate')}
-      action={mutate}
+    <BaseButton
+      label={translate('Deactivate')}
+      onClick={mutate}
       iconNode={<XCircleIcon weight="bold" />}
       variant="warning"
       disabled={isPending || !activeRows.length}
@@ -59,6 +60,7 @@ export const BatchDeactivateAction: FC<BatchDeactivateActionProps> = ({
           ? translate('No active request types selected')
           : translate('Operation in progress')
       }
+      size="lg"
     />
   );
 };

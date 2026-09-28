@@ -1,10 +1,11 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const EditCategoryDialog = lazyComponent(() =>
   import('./EditCategoryDialog').then((module) => ({
@@ -24,10 +25,12 @@ export const EditCategoryButton: FunctionComponent<{
     });
   };
   return (
-    <ActionButton
-      action={callback}
-      title={translate('Edit category')}
+    <BaseButton
+      onClick={callback}
+      label={translate('Edit category')}
       iconNode={<PencilSimpleIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

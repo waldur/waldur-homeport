@@ -9,9 +9,10 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { Field, Form, useFormState } from 'react-final-form';
 import { useBoolean } from 'react-use';
 
+import { BaseButton } from 'waldur-ui';
+
 import { InfiniteList } from '@/core/async/InfiniteList';
 import { BaseAsyncListProps, RowData } from '@/core/async/types';
-import { IconButton } from '@/core/buttons/IconButton';
 import { isEmpty } from '@/core/utils';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
@@ -134,12 +135,13 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
 
         {Boolean(filters) && (
           <div className="position-relative">
-            <IconButton
+            <BaseButton
               iconNode={<FunnelSimpleIcon weight="bold" />}
               tooltip={translate('Toggle filters')}
               variant="tertiary"
               className="btn-toggle-filters"
               onClick={setFilterOpen}
+              size="lg"
             />
             {!isEmpty(formValues) && (
               <HeaderButtonBullet size={8} blink={false} className="me-n2" />

@@ -1,5 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { useModal } from '@/modal/actions';
 
@@ -24,9 +26,12 @@ export const OpenStackSecurityGroupsLink = ({ items }) => {
   }
 
   return (
-    <button className="btn btn-link btn-flush" onClick={handleOpenDialog}>
-      {items.map((item) => item.name).join(', ')}
-      <QuestionIcon size={17} className="ms-1" weight="bold" />
-    </button>
+    <BaseButton
+      variant="text-primary"
+      onClick={handleOpenDialog}
+      label={items.map((item) => item.name).join(', ')}
+      iconNode={<QuestionIcon size={17} weight="bold" />}
+      iconRight
+    />
   );
 };

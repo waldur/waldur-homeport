@@ -6,6 +6,8 @@ import {
   OfferingState,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -85,13 +87,13 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
     <ResourceWarningBar
       className={offering.state === 'Unavailable' ? 'disabled-view' : undefined}
       actions={
-        <button
-          type="button"
-          className="btn btn-warning text-orange fw-semibold px-4 py-2 ms-3 btn-sm"
+        <BaseButton
+          variant="warning"
+          size="sm"
+          className="text-orange fw-semibold px-4 py-2 ms-3"
           onClick={handleViewTos}
-        >
-          {translate('Review in profile')}
-        </button>
+          label={translate('Review in profile')}
+        />
       }
     >
       <p className="mb-0">

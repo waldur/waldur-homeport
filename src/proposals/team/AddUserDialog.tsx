@@ -71,7 +71,8 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                   label={translate('Add role')}
                   submitting={submitting}
                   disabled={invalid}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

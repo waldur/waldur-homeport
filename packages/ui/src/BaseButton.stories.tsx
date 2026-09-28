@@ -1,14 +1,21 @@
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
+  ArrowsClockwiseIcon,
   CaretLeftIcon,
   CaretRightIcon,
+  FileTextIcon,
+  FunnelIcon,
+  MagnifyingGlassIcon,
+  PencilIcon,
   PlusCircleIcon,
+  PlusIcon,
+  TrashIcon,
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ComponentProps, ReactNode } from 'react';
 
-import { BaseButton } from './BaseButton';
+import { BaseButton, type ButtonSize } from './BaseButton';
 
 const CONTAINED_VARIANTS = [
   'primary',
@@ -44,7 +51,6 @@ const VARIANT_LABELS: Record<string, string> = {
   'text-success': 'Success',
 };
 
-type Size = 'sm' | 'lg';
 type IconSide = 'left' | 'right';
 
 const STATES = [
@@ -68,19 +74,13 @@ const stateId = (state: State, variant: string) =>
   `state-btn-${state}-${variant}`;
 
 const meta: Meta<typeof BaseButton> = {
-  // Kept alongside waldur-homeport's own Core/Buttons/BaseButton story
-  // (the Bootstrap original) in the Storybook sidebar for side-by-side
-  // browsing, even though this component now lives in a different
-  // package — pure UI-organization choice, unrelated to file location.
   title: 'Actions/BaseButton',
   component: BaseButton,
   parameters: {
-    // Every per-state color choice was verified empirically against the
-    // real BaseButton — see docs/tailwind-shadcn-migration-notes.md.
     docs: {
       description: {
         component:
-          'Tailwind/shadcn rebuild of BaseButton (see waldur-homeport/src/core/buttons/BaseButton.stories.tsx for the original). Not yet wired into production — see BaseButton.tsx.',
+          'BaseButton component with full variant, size, and interaction state matrix.',
       },
     },
   },
@@ -89,7 +89,7 @@ const meta: Meta<typeof BaseButton> = {
       control: 'select',
       options: [...CONTAINED_VARIANTS, ...TEXT_VARIANTS],
     },
-    size: { control: 'radio', options: ['sm', 'lg'] },
+    size: { control: 'radio', options: ['sm', 'md', 'lg'] },
   },
   args: {
     label: 'Label',
@@ -102,7 +102,16 @@ export default meta;
 type Story = StoryObj<typeof BaseButton>;
 
 /** Single button, full controls — for exploring one variant/state combo. */
-export const Playground: Story = {};
+export const Playground: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'One button, every prop exposed as a Control — reach for this when checking a single variant/size/state combination rather than scanning a full matrix.',
+      },
+    },
+  },
+};
 
 const ICONS: Record<IconSide, { arrow: ReactNode; caret: ReactNode }> = {
   left: {
@@ -143,7 +152,7 @@ const StateGrid = ({
   iconShape,
 }: {
   variants: readonly string[];
-  size: Size;
+  size: ButtonSize;
   iconSide: IconSide;
   iconShape: 'arrow' | 'caret';
 }) => (
@@ -216,13 +225,13 @@ const pseudoForRows = (variants: readonly string[]) => ({
 // friendlier stand-in for `iconRight`), so they get their own StoryObj
 // shape rather than reusing `Story` (= StoryObj<typeof BaseButton>) above.
 interface GridArgs {
-  size: Size;
+  size: ButtonSize;
   iconSide: IconSide;
 }
 type GridStory = StoryObj<GridArgs>;
 
 const gridArgTypes: Meta<GridArgs>['argTypes'] = {
-  size: { control: 'radio', options: ['sm', 'lg'] },
+  size: { control: 'radio', options: ['sm', 'md', 'lg'] },
   iconSide: { control: 'radio', options: ['left', 'right'] },
 };
 const gridArgs: GridArgs = { size: 'lg', iconSide: 'right' };
@@ -238,7 +247,15 @@ export const ContainedStates: GridStory = {
       iconShape="arrow"
     />
   ),
-  parameters: { pseudo: pseudoForRows(CONTAINED_VARIANTS) },
+  parameters: {
+    pseudo: pseudoForRows(CONTAINED_VARIANTS),
+    docs: {
+      description: {
+        story:
+          'Every solid-background variant (Primary through Success) across every interaction state — hover/focus/press are forced via storybook-addon-pseudo-states, not screenshots, so they reflect this build’s actual CSS. Secondary buttons feature signature two-tone styling: dark plum text paired with a vibrant magenta icon in light mode.',
+      },
+    },
+  },
 };
 
 export const TextStates: GridStory = {
@@ -252,7 +269,15 @@ export const TextStates: GridStory = {
       iconShape="caret"
     />
   ),
-  parameters: { pseudo: pseudoForRows(TEXT_VARIANTS) },
+  parameters: {
+    pseudo: pseudoForRows(TEXT_VARIANTS),
+    docs: {
+      description: {
+        story:
+          'The five transparent-background "text-*" variants (link-style buttons with no border) across every interaction state — used for lower-emphasis actions like inline row actions or a dialog’s secondary link.',
+      },
+    },
+  },
 };
 
 // Icon-only matrix — a separate spec page (Shared components → Buttons,
@@ -284,7 +309,7 @@ const ICON_ONLY_STATE_LABELS: Record<IconOnlyState, string> = {
 const iconOnlyId = (state: IconOnlyState, variant: string) =>
   `icon-only-btn-${state}-${variant}`;
 
-const IconOnlyGrid = ({ size }: { size: Size }) => (
+const IconOnlyGrid = ({ size }: { size: ButtonSize }) => (
   // p-12 matches this package's other stories (DropdownMenu.stories.tsx,
   // Popover.stories.tsx) — see StateGrid's own comment above.
   <div className="inline-block p-12">
@@ -350,13 +375,268 @@ const pseudoForIconOnlyColumns = () => ({
   ),
 });
 
-export const IconOnlyStates: StoryObj<{ size: Size }> = {
-  argTypes: { size: { control: 'radio', options: ['sm', 'lg'] } },
+export const IconOnlyStates: StoryObj<{ size: ButtonSize }> = {
+  argTypes: { size: { control: 'radio', options: ['sm', 'md', 'lg'] } },
   // lg, not sm: real icon-only usage (TableColumnsButton's gear,
   // TableFilterButton's funnel — see the app's own toolbar) renders at
   // this size. sm's tighter padding reads as a small circle rather than
   // the bordered square those buttons actually are.
   args: { size: 'lg' },
   render: ({ size }) => <IconOnlyGrid size={size} />,
-  parameters: { pseudo: pseudoForIconOnlyColumns() },
+  parameters: {
+    pseudo: pseudoForIconOnlyColumns(),
+    docs: {
+      description: {
+        story:
+          'Icon-only buttons (no label) across the five Contained colors and four states — note the square, fixed-size hit target (28/36/44px per size) instead of the label buttons’ content-driven width, and the disabledReason-driven tooltip explaining why a disabled one is unavailable.',
+      },
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Sizes — the grids above expose `size` as a Controls radio (defaulting to
+// lg), so comparing sm/md/lg means re-rendering the same grid three times
+// and holding the differences in your head. This story instead puts all
+// three side by side as their own axis, across the three shapes size
+// actually changes: a plain label, a label+icon, and icon-only (whose
+// square hit target — 28/36/44px, from the cva `size` variant's own
+// comment — is the one case size changes something other than padding).
+// Kept to a single representative variant (primary) since size's visual
+// effect (padding/leading/icon scale) doesn't vary by color — that's
+// already covered by ContainedStates/TextStates above.
+const SIZES = ['sm', 'md', 'lg'] as const;
+const SIZE_HEIGHTS: Record<ButtonSize, string> = {
+  sm: '28px',
+  md: '36px',
+  lg: '44px',
+};
+
+const SizeGrid = () => (
+  <div className="inline-block p-12">
+    {/* eslint-disable-next-line waldur-custom/no-hand-rolled-table */}
+    <table className="border-collapse">
+      <thead>
+        <tr>
+          <th className="w-32" />
+          {SIZES.map((size) => (
+            <th
+              key={size}
+              className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
+            >
+              {size} ({SIZE_HEIGHTS[size]})
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+            Label
+          </th>
+          {SIZES.map((size) => (
+            <td key={size} className="p-3 align-middle">
+              <BaseButton variant="primary" size={size} label="Label" />
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+            Label + icon
+          </th>
+          {SIZES.map((size) => (
+            <td key={size} className="p-3 align-middle">
+              <BaseButton
+                variant="primary"
+                size={size}
+                label="Label"
+                iconNode={<PlusCircleIcon weight="bold" />}
+              />
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+            Icon only
+          </th>
+          {SIZES.map((size) => (
+            <td key={size} className="p-3 align-middle">
+              <BaseButton
+                variant="primary"
+                size={size}
+                iconNode={<PlusCircleIcon weight="bold" />}
+                tooltip="Add"
+              />
+            </td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+);
+
+export const Sizes: Story = {
+  render: () => <SizeGrid />,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'sm/md/lg side by side across the three shapes size affects — a plain label, a label with an icon, and icon-only (whose hit target goes square and fixed-width instead of content-driven) — one variant (primary) since color doesn’t interact with size.',
+      },
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Realistic usage — the matrices above isolate one axis (variant × state) at
+// a time; this story instead shows the handful of button *groups* that
+// recur throughout the app, each rendered as it actually gets composed, so a
+// reader can sanity-check spacing/alignment/emphasis choices in context
+// rather than mentally assembling swatches. One story, not four, so the
+// sidebar doesn't grow a story per layout — the <SectionHeader>s below do
+// that job inside the canvas instead.
+const SectionHeader = ({ title, hint }: { title: string; hint: string }) => (
+  <div className="mb-3">
+    <h3 className="text-sm font-semibold text-[var(--surface-text-primary,#111827)]">
+      {title}
+    </h3>
+    <p className="text-sm text-[var(--surface-text-secondary,#6b7280)]">
+      {hint}
+    </p>
+  </div>
+);
+
+const UsageSection = ({ children }: { children: ReactNode }) => (
+  <div className="mb-10">{children}</div>
+);
+
+export const RealisticUsage: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The recurring button groupings from the app itself (dialog footer, wizard footer, table toolbar, inline row actions) rendered together, instead of one variant at a time — for eyeballing real composition, not just individual buttons.',
+      },
+    },
+  },
+  render: () => (
+    <div className="p-12" style={{ maxWidth: 640 }}>
+      <UsageSection>
+        <SectionHeader
+          title="Dialog footer"
+          hint="CloseDialogButton (tertiary) + a primary submit — the standard modal footer pairing."
+        />
+        <div className="flex justify-end gap-3 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+          <BaseButton variant="tertiary" size="lg" label="Cancel" />
+          <BaseButton variant="primary" size="lg" label="Save" />
+        </div>
+      </UsageSection>
+
+      <UsageSection>
+        <SectionHeader
+          title="Destructive confirmation footer"
+          hint="Same layout, danger replacing primary — the delete-confirmation shape."
+        />
+        <div className="flex justify-end gap-3 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+          <BaseButton variant="tertiary" size="lg" label="Cancel" />
+          <BaseButton variant="danger" size="lg" label="Delete" />
+        </div>
+      </UsageSection>
+
+      <UsageSection>
+        <SectionHeader
+          title="Wizard footer"
+          hint="Back (icon-left, tertiary) on the far side, Continue (icon-right, primary) advancing — matches WizardModal's default footer."
+        />
+        <div className="flex items-center justify-between border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+          <BaseButton
+            variant="tertiary"
+            size="lg"
+            label="Back"
+            iconNode={<CaretLeftIcon weight="bold" />}
+          />
+          <BaseButton
+            variant="primary"
+            size="lg"
+            label="Continue"
+            iconNode={<CaretRightIcon weight="bold" />}
+            iconRight
+          />
+        </div>
+      </UsageSection>
+
+      <UsageSection>
+        <SectionHeader
+          title="Table toolbar"
+          hint="Icon-only utility buttons (search, filter) beside a labeled primary action — a table's action bar."
+        />
+        <div className="flex items-center gap-2 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+          <BaseButton
+            variant="tertiary"
+            size="lg"
+            iconNode={<MagnifyingGlassIcon weight="bold" />}
+            tooltip="Search"
+          />
+          <BaseButton
+            variant="tertiary"
+            size="lg"
+            iconNode={<FunnelIcon weight="bold" />}
+            tooltip="Filter"
+          />
+          <div className="flex-1" />
+          <BaseButton
+            variant="primary"
+            size="lg"
+            label="New"
+            iconNode={<PlusIcon weight="bold" />}
+          />
+        </div>
+      </UsageSection>
+
+      <UsageSection>
+        <SectionHeader
+          title="Inline row actions"
+          hint="Low-emphasis text-* variants for actions attached to a single list row — never the full-weight Contained colors here."
+        />
+        <div className="flex items-center justify-between rounded-md border border-[var(--surface-border,#e5e7eb)] px-4 py-3">
+          <span className="text-sm">acc-prod-eu-west-1</span>
+          <div className="flex gap-1">
+            <BaseButton
+              variant="text-secondary"
+              size="sm"
+              label="Edit"
+              iconNode={<PencilIcon weight="bold" />}
+            />
+            <BaseButton
+              variant="text-danger"
+              size="sm"
+              label="Delete"
+              iconNode={<TrashIcon weight="bold" />}
+            />
+          </div>
+        </div>
+      </UsageSection>
+
+      <UsageSection>
+        <SectionHeader
+          title="Page header actions (Two-tone secondary)"
+          hint="Secondary buttons feature two-tone brand styling: dark plum text paired with a vibrant magenta icon for signature brand actions."
+        />
+        <div className="flex items-center gap-3 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+          <BaseButton
+            variant="secondary"
+            size="md"
+            label="Sync"
+            iconNode={<ArrowsClockwiseIcon weight="bold" />}
+          />
+          <BaseButton
+            variant="secondary"
+            size="md"
+            label="Show log"
+            iconNode={<FileTextIcon weight="bold" />}
+          />
+        </div>
+      </UsageSection>
+    </div>
+  ),
 };

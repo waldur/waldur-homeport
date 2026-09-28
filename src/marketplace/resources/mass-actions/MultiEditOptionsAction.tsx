@@ -2,13 +2,14 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Resource } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasAllPermissions } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 const MultiEditOptionsDialog = lazyComponent(() =>
@@ -68,11 +69,12 @@ export const MultiEditOptionsAction = ({
 
   return canShow ? (
     asButton ? (
-      <ActionButton
+      <BaseButton
         variant="tertiary"
-        action={callback}
+        onClick={callback}
         iconNode={<PencilSimpleIcon weight="bold" />}
-        title={translate('Edit all')}
+        label={translate('Edit all')}
+        size="lg"
       />
     ) : (
       <EditAction

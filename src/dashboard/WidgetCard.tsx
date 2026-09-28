@@ -4,6 +4,9 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
+import { translate } from '@/i18n';
 import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 interface WidgetCardAction {
@@ -62,16 +65,18 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
             {actions?.length && (
               <RadixDropdownMenu.Root>
                 <RadixDropdownMenu.Trigger asChild>
-                  <button
-                    type="button"
-                    className="btn btn-text-secondary btn-sm btn-icon h-25px w-25px"
-                  >
-                    <DotsThreeVerticalIcon
-                      size={20}
-                      weight="bold"
-                      className="text-gray-400"
-                    />
-                  </button>
+                  <BaseButton
+                    variant="text-secondary"
+                    size="sm"
+                    tooltip={translate('More actions')}
+                    iconNode={
+                      <DotsThreeVerticalIcon
+                        size={20}
+                        weight="bold"
+                        className="text-gray-400"
+                      />
+                    }
+                  />
                 </RadixDropdownMenu.Trigger>
                 <RadixDropdownMenu.Portal>
                   <RadixDropdownMenu.Content

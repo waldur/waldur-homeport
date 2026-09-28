@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton, ButtonVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface SubmitButtonProps {
@@ -16,9 +17,9 @@ interface SubmitButtonProps {
   disabled?: boolean;
   /** Form validation state - disables button when true */
   invalid?: boolean;
-  /** Bootstrap button variant - defaults to 'primary' */
-  variant?: string;
-  /** Bootstrap button size - defaults to 'lg' */
+  /** Button variant - defaults to 'primary' */
+  variant?: ButtonVariant;
+  /** Button size - defaults to 'lg' */
   size?: 'sm' | 'lg';
   /** Additional CSS classes */
   className?: string;
@@ -40,8 +41,8 @@ interface SubmitButtonProps {
 
 /**
  * SubmitButton - for form submission.
- * Always renders at large size for visual consistency.
- * Use CompactSubmitButton for compact form contexts (popovers, inline forms).
+ * Defaults to large size (`size="lg"`).
+ * Pass `size="sm"` for compact form contexts (popovers, inline forms).
  */
 export const SubmitButton: FC<SubmitButtonProps> = ({
   submitting,

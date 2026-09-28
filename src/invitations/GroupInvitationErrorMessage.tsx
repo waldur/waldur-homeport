@@ -1,4 +1,5 @@
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import Illustration from '@/images/table-placeholders/undraw_empty_xct9.svg';
 import { ImageTablePlaceholder } from '@/table/ImageTablePlaceholder';
@@ -11,11 +12,11 @@ export const GroupInvitationErrorMessage = ({ dismiss }) => (
       "You've either entered invalid URL or don't have enough permissions to view this page.",
     )}
     action={
-      <SubmitButton
-        submitting={false}
-        type="button"
+      <BaseButton
         onClick={dismiss}
         label={translate('Go to profile')}
+        variant="primary"
+        size="lg"
       />
     }
   />

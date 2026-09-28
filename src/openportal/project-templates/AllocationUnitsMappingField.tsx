@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React, { useState, FunctionComponent, useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
@@ -112,17 +114,15 @@ export const AllocationUnitsMappingField: FunctionComponent<
                   <span>
                     {translate('1 credit equals')} {value} {unit}
                   </span>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-danger"
+                  <BaseButton
+                    variant="danger"
+                    size="sm"
                     onClick={() => removeMapping(unit)}
-                    title={translate('Remove mapping')}
-                    aria-label={translate('Remove mapping for {{unit}}', {
+                    tooltip={translate('Remove mapping for {{unit}}', {
                       unit,
                     })}
-                  >
-                    {translate('Remove')}
-                  </button>
+                    label={translate('Remove')}
+                  />
                 </li>
               ))}
             </ul>
@@ -174,18 +174,18 @@ export const AllocationUnitsMappingField: FunctionComponent<
             />
           </div>
           <div className="col-md-2">
-            <button
+            <BaseButton
               type="button"
-              className={`btn btn-sm ${
-                isAddButtonEnabled ? 'btn-primary' : 'btn-outline-secondary'
-              }`}
+              size="sm"
+              variant={isAddButtonEnabled ? 'primary' : 'tertiary'}
               onClick={addMapping}
               disabled={!isAddButtonEnabled}
-              title={translate('Add mapping')}
+              disabledReason={translate(
+                'Select a unit and enter a value first',
+              )}
               aria-label={translate('Add allocation mapping')}
-            >
-              {translate('Add')}
-            </button>
+              label={translate('Add')}
+            />
           </div>
         </div>
 

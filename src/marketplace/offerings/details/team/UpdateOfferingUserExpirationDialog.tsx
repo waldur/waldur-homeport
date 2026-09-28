@@ -52,7 +52,7 @@ export const UpdateOfferingUserExpirationDialog: FC<{
                 <SubmitButton
                   label={translate('Save')}
                   submitting={submitting}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

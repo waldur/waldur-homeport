@@ -2,6 +2,10 @@ import { UploadSimpleIcon } from '@phosphor-icons/react';
 import accepts from 'attr-accept';
 import { ReactNode, useRef, useState } from 'react';
 
+import { BaseButton, ButtonVariant, ButtonSize } from 'waldur-ui';
+
+import { translate } from '@/i18n';
+
 import { FormField } from './types';
 
 export interface FileUploadFieldProps extends FormField {
@@ -9,6 +13,8 @@ export interface FileUploadFieldProps extends FormField {
   showFileName?: boolean;
   buttonLabel: string;
   iconNode?: ReactNode;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   className?: string;
 }
 
@@ -16,7 +22,9 @@ export const FileUploadField = ({
   accept,
   showFileName,
   buttonLabel,
-  className = 'btn btn-sm btn-primary',
+  variant = 'primary',
+  size = 'sm',
+  className,
   disabled,
   input,
   iconNode = <UploadSimpleIcon weight="bold" />,
@@ -54,14 +62,17 @@ export const FileUploadField = ({
   return (
     <>
       {showFileName ? fileName || 'None' : null}{' '}
-      <button
+      <BaseButton
         type="button"
+        variant={variant}
+        size={size}
         className={className}
         onClick={openFileDialog}
         disabled={disabled}
-      >
-        <span className="svg-icon svg-icon-2">{iconNode}</span> {buttonLabel}
-      </button>
+        disabledReason={translate('This field is disabled')}
+        iconNode={iconNode}
+        label={buttonLabel}
+      />
       <input
         type="file"
         style={{ display: 'none' }}

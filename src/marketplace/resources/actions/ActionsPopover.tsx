@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { loadData } from './loadData';
 import { ModalActionsDialog } from './ModalActionsDialog';
@@ -73,11 +74,12 @@ export const ActionsPopover = ({
         <ActionsList {...value} refetch={refetch} />
       </ResourceActionMenuContext.Provider>
       <div className="d-flex flex-column justify-content-center flex-grow-1">
-        <CompactActionButton
-          variant="link"
+        <BaseButton
+          variant="text-primary"
           className="text-decoration-underline my-1"
-          action={callback}
-          title={translate('Show all')}
+          onClick={callback}
+          label={translate('Show all')}
+          size="sm"
         />
       </div>
     </>

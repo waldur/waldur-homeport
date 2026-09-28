@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -153,7 +153,8 @@ export const AccessSubnetFormDialog = ({
       <ModalDialog
         title={isEditMode ? config.titleEdit : config.titleCreate}
         footer={
-          <CompactSubmitButton
+          <SubmitButton
+            size="sm"
             submitting={isPending}
             label={isEditMode ? translate('Update') : translate('Create')}
           />

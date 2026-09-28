@@ -229,9 +229,12 @@ export const EventConsumersCard: FC = () => {
         'Unified pub/sub consumers registered through /api/event-consumers/. Site-agent consumers are managed on the Site agents page.',
       )}
       actions={
-        <Link state="admin-site-agents" className="btn btn-sm btn-light">
-          {translate('Site agents')}
-        </Link>
+        <Link
+          state="admin-site-agents"
+          buttonVariant="tertiary"
+          buttonSize="sm"
+          label={translate('Site agents')}
+        />
       }
       isOpen={open}
       onToggle={setOpen}

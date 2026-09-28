@@ -2,6 +2,8 @@ import { TrashIcon, WarningIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
@@ -99,14 +101,17 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
   }, [data, mutation]);
 
   return (
-    <button
-      type="button"
-      className="btn btn-danger d-flex align-items-center gap-2"
+    <BaseButton
+      variant="danger"
       onClick={handlePurgeAll}
       disabled={mutation.isPending || data.total_queues === 0}
-    >
-      <TrashIcon size={16} weight="bold" />
-      {translate('Purge all queues')}
-    </button>
+      disabledReason={
+        data.total_queues === 0
+          ? translate('No queues to purge')
+          : translate('Purge is already in progress')
+      }
+      iconNode={<TrashIcon size={16} weight="bold" />}
+      label={translate('Purge all queues')}
+    />
   );
 };

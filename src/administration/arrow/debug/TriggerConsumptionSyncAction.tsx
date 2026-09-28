@@ -2,9 +2,10 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { Card } from 'react-bootstrap';
 import { adminArrowBillingSyncsTriggerConsumptionSync } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 import { arrowQueryKeys } from '../api';
 
@@ -38,12 +39,13 @@ export const TriggerConsumptionSyncAction = () => {
             'Manually trigger consumption data synchronization from Arrow.',
           )}
         </p>
-        <ActionButton
-          action={handleTriggerConsumptionSync}
-          title={translate('Sync consumption')}
+        <BaseButton
+          onClick={handleTriggerConsumptionSync}
+          label={translate('Sync consumption')}
           iconNode={<ArrowsClockwiseIcon weight="bold" />}
           variant="primary"
           pending={isTriggering}
+          size="lg"
         />
       </Card.Body>
     </Card>

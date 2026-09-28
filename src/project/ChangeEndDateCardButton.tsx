@@ -2,8 +2,9 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { useChangeEndDateRequest } from './useChangeEndDateRequest';
 
@@ -29,15 +30,17 @@ export const ChangeEndDateCardButton: FC<ChangeEndDateCardButtonProps> = ({
   const label = translate('Request end date change.');
 
   return (
-    <CompactActionButton
+    <BaseButton
       className="ms-1"
-      action={(e) => {
+      onClick={(e) => {
         e?.stopPropagation?.();
         e?.preventDefault?.();
         open();
       }}
       iconNode={<PencilSimpleIcon weight="bold" />}
       tooltip={label}
+      variant="tertiary"
+      size="sm"
     />
   );
 };

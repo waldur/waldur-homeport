@@ -3,6 +3,8 @@ import { FC, ReactNode, useState } from 'react';
 import { Card, Collapse } from 'react-bootstrap';
 import { Offering, Resource, ResourceApiKeyStatus } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -83,22 +85,23 @@ const PlaygroundCard: FC<{
               onChange={modelState.setModel}
             />
           )}
-          <button
-            type="button"
-            className="btn btn-tertiary btn-sm"
-            aria-label={
+          <BaseButton
+            variant="tertiary"
+            size="sm"
+            tooltip={
               open
                 ? translate('Collapse playground')
                 : translate('Open playground')
             }
             onClick={toggle}
-          >
-            {open ? (
-              <CaretUpIcon weight="bold" size={16} />
-            ) : (
-              <CaretDownIcon weight="bold" size={16} />
-            )}
-          </button>
+            iconNode={
+              open ? (
+                <CaretUpIcon weight="bold" size={16} />
+              ) : (
+                <CaretDownIcon weight="bold" size={16} />
+              )
+            }
+          />
         </div>
       </Card.Header>
       <Collapse in={open} mountOnEnter unmountOnExit>

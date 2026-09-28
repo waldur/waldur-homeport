@@ -5,6 +5,8 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { chatThreadsArchive, chatThreadsUnarchive } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import {
   groupThreadsByDate,
   THREAD_LIST_QUERY_KEY,
@@ -12,7 +14,6 @@ import {
 } from '@/ai-assistant/lib/thread/useThreadList';
 import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
 import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
-import { MediumIconButton } from '@/core/buttons/IconButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
 import { FilterBox } from '@/form/FilterBox';
@@ -79,7 +80,7 @@ export const ChatHistorySidebar: FC = () => {
         <div className="aui-history-header">
           {/* Desktop only: collapse toggle (mobile never minimizes) */}
           <span className="d-none d-md-inline-flex">
-            <MediumIconButton
+            <BaseButton
               iconNode={
                 <span className={collapsed ? 'aui-icon-rotate-180' : ''}>
                   <SidebarToggleGraphic />
@@ -92,6 +93,7 @@ export const ChatHistorySidebar: FC = () => {
               }
               onClick={() => setCollapsed(!collapsed)}
               variant="tertiary-ghost"
+              size="md"
             />
           </span>
           {!collapsed && (
@@ -102,11 +104,12 @@ export const ChatHistorySidebar: FC = () => {
         </div>
         {collapsed ? (
           <span className="d-none d-md-inline-flex">
-            <MediumIconButton
+            <BaseButton
               iconNode={<PlusIcon weight="bold" />}
               tooltip={translate('New chat')}
               onClick={handleNewChat}
               variant="tertiary"
+              size="md"
             />
           </span>
         ) : null}
@@ -119,13 +122,13 @@ export const ChatHistorySidebar: FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button
-            className="btn btn-tertiary aui-history-new-chat"
+          <BaseButton
+            variant="tertiary"
+            className="aui-history-new-chat"
             onClick={handleNewChat}
-          >
-            <PlusIcon weight="bold" size={20} />
-            {translate('New chat')}
-          </button>
+            iconNode={<PlusIcon weight="bold" size={20} />}
+            label={translate('New chat')}
+          />
         </div>
       )}
       {!collapsed && (

@@ -1,0 +1,26 @@
+.dropdown-menu {
+  z-index: 1100;
+}
+
+.dropdown-item {
+  color: $gray-700;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+
+  .svg-icon {
+    margin-right: 0.923rem;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+
+.dropdown-toggle.no-arrow {
+  &::before,
+  &::after {
+    content: none;
+  }
+}

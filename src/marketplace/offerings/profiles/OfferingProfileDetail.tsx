@@ -10,10 +10,11 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { OfferingProfileRoleRemoveButton } from './OfferingProfileRoleRemoveButton';
@@ -56,10 +57,12 @@ export const OfferingProfileDetail: FC = () => {
       <Card>
         <Card.Header className="d-flex align-items-center justify-content-between">
           <h5 className="mb-0">{translate('Role catalog')}</h5>
-          <ActionButton
-            title={translate('Add role')}
+          <BaseButton
+            label={translate('Add role')}
             iconNode={<PlusCircleIcon weight="bold" />}
-            action={() => setShowAdd(true)}
+            onClick={() => setShowAdd(true)}
+            variant="tertiary"
+            size="lg"
           />
         </Card.Header>
         <Card.Body>
@@ -196,23 +199,25 @@ const AddRoleToProfileDialog: FC<{
                         ({r.content_type})
                       </span>
                     </span>
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-primary"
+                    <BaseButton
+                      variant="primary"
+                      size="sm"
                       onClick={() => submit(r.uuid)}
                       disabled={submitting}
-                    >
-                      {translate('Add')}
-                    </button>
+                      disabledReason={translate('Adding role...')}
+                      label={translate('Add')}
+                    />
                   </li>
                 ))}
               </ul>
             )}
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-light" onClick={onClose}>
-              {translate('Close')}
-            </button>
+            <BaseButton
+              variant="tertiary"
+              onClick={onClose}
+              label={translate('Close')}
+            />
           </div>
         </div>
       </div>

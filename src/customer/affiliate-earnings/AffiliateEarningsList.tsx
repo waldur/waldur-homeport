@@ -7,6 +7,8 @@ import {
   CustomerAffiliate,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -14,7 +16,6 @@ import { StateIndicator } from '@/core/StateIndicator';
 import { SummaryWidget } from '@/core/SummaryWidget';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -124,27 +125,29 @@ export const AffiliateEarningsList: FC<{ customerUuid: string }> = ({
         tableActions={
           <>
             {user?.is_staff && credit && (
-              <ActionButton
-                action={() =>
+              <BaseButton
+                onClick={() =>
                   openDialog(AdjustWithdrawableDialog, {
                     resolve: { credit, refetch: refetchCredit },
                   })
                 }
-                title={translate('Adjust withdrawable balance')}
+                label={translate('Adjust withdrawable balance')}
                 variant="tertiary"
                 iconNode={<CoinsIcon weight="bold" />}
+                size="lg"
               />
             )}
-            <ActionButton
-              action={() =>
+            <BaseButton
+              onClick={() =>
                 openDialog(CreditTransactionsDialog, {
                   resolve: { customerUuid },
                   size: 'lg',
                 })
               }
-              title={translate('Credit transactions')}
+              label={translate('Credit transactions')}
               variant="tertiary"
               iconNode={<ReceiptIcon weight="bold" />}
+              size="lg"
             />
           </>
         }

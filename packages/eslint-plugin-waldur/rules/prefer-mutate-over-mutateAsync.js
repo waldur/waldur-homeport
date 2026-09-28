@@ -4,9 +4,6 @@
  */
 
 const TARGET_COMPONENTS = new Set([
-  'ActionButton',
-  'CompactActionButton',
-  'ToolbarButton',
   'BaseButton',
   'ActionItem',
   'Button',

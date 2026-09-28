@@ -1,9 +1,10 @@
 import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import { KeyboardEvent, useMemo } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { BaseStringField } from '@/form';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { SearchResult } from './useSearch';
 
@@ -84,10 +85,11 @@ export const SearchInput = ({
         ) : null}
         {/* Clear button */}
         {!isLoading && query ? (
-          <CompactActionButton
+          <BaseButton
+            size="sm"
             variant="text-secondary"
             className="position-absolute top-50 end-0 translate-middle-y me-4 z-index-5"
-            action={() => setQuery('')}
+            onClick={() => setQuery('')}
             iconNode={<XIcon weight="bold" />}
             tooltip={translate('Clear')}
           />

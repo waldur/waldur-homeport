@@ -3,17 +3,16 @@ import classNames from 'classnames';
 import { FC, ReactNode, useContext } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 
-import { Tooltip } from 'waldur-ui';
+import { ButtonVariant, Tooltip, BaseButton } from 'waldur-ui';
 
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { ResourceActionMenuContext } from '@/marketplace/resources/actions/ResourceActionMenuContext';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownItem, PlainActionItem } from '@/table/ActionsDropdown';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 export interface ActionItemProps {
   title: string;
+  label?: string;
   action: () => void;
   iconNode?: ReactNode;
   iconColor?: Variant;
@@ -26,11 +25,12 @@ export interface ActionItemProps {
   size?: 'sm' | 'lg';
   actionId?: ResourceAction;
   resource?: any;
-  variant?: string;
+  variant?: ButtonVariant;
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
   const actionMenuContext = useContext(ResourceActionMenuContext);
+  const label = props.label ?? props.title ?? '';
   // Default to ActionsDropdownItem (a real RadixDropdownMenu.Item, needing
   // a Menu Root/Content ancestor); ModalActionsDialog's "show all actions"
   // search results render outside one entirely (a plain react-bootstrap
@@ -51,7 +51,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
   }
   if (
     actionMenuContext?.query &&
-    !props.title
+    !label
       .toLocaleLowerCase()
       .includes(actionMenuContext.query.toLocaleLowerCase())
   ) {
@@ -64,20 +64,19 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     return null;
   }
 
-  // When rendering as a Button (or any non-menu-item), use ActionButton or CompactActionButton
+  // When rendering as a Button (or any non-menu-item), use BaseButton
   if (props.as && !isMenuRow) {
-    const ButtonComponent =
-      props.size === 'sm' ? CompactActionButton : ActionButton;
     return (
       <div className="d-flex align-items-center">
-        <ButtonComponent
+        <BaseButton
           className={props.className}
-          action={props.action}
+          onClick={props.action}
           disabled={props.disabled}
           iconNode={props.iconNode}
-          title={props.title}
+          label={label}
           tooltip={props.tooltip}
-          variant={props.variant}
+          variant={props.variant ?? 'tertiary'}
+          size={props.size ?? 'lg'}
         />
         {props.staff && <StaffOnlyIndicator className="text-dark ms-1 me-3" />}
       </div>
@@ -117,7 +116,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
               {props.iconNode}
             </span>
           )}
-          {props.title}
+          {label}
         </div>
       </Component>
       {props.tooltip && (

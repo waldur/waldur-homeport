@@ -1,10 +1,9 @@
 import { FactoryIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
-import { Variant } from 'react-bootstrap/esm/types';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, ButtonVariant, ButtonSize } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { AtLeast } from '@/core/types';
@@ -18,7 +17,10 @@ import { projectKindOptions } from './utils';
 
 interface OwnProps {
   row: AtLeast<Project, 'uuid' | 'name'> & { customer_uuid?: string };
-  buttonVariant?: Variant;
+  buttonVariant?: ButtonVariant;
+  /** Size and shape of the link when it renders as a button (`buttonVariant`). */
+  buttonSize?: ButtonSize;
+  buttonIconOnly?: boolean;
   className?: string;
   showIndustry?: boolean;
   showKind?: boolean;
@@ -28,6 +30,8 @@ interface OwnProps {
 export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
   row,
   buttonVariant,
+  buttonSize,
+  buttonIconOnly,
   className,
   children,
   showIndustry = true,
@@ -57,6 +61,8 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
           label={children ? undefined : row.name}
           onClick={onClick}
           buttonVariant={buttonVariant}
+          buttonSize={buttonSize}
+          buttonIconOnly={buttonIconOnly}
           className={labelClassName}
         >
           {children}

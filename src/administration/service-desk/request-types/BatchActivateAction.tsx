@@ -5,9 +5,10 @@ import {
   supportRequestTypesAdminActivate,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 interface BatchActivateActionProps {
   rows: RequestTypeAdmin[];
@@ -51,9 +52,9 @@ export const BatchActivateAction: FC<BatchActivateActionProps> = ({
   });
 
   return (
-    <ActionButton
-      title={translate('Activate')}
-      action={mutate}
+    <BaseButton
+      label={translate('Activate')}
+      onClick={mutate}
       iconNode={<CheckCircleIcon weight="bold" />}
       variant="primary"
       disabled={isPending || !inactiveRows.length}
@@ -62,6 +63,7 @@ export const BatchActivateAction: FC<BatchActivateActionProps> = ({
           ? translate('No inactive request types selected')
           : translate('Operation in progress')
       }
+      size="lg"
     />
   );
 };

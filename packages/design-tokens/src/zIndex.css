@@ -15,7 +15,7 @@
  *     1055  Bootstrap $zindex-modal
  *     1070  Bootstrap $zindex-popover (also .role-project-select-popup)
  *     1080  Bootstrap $zindex-tooltip
- *     1100  the app's own .dropdown-menu (custom/_button-group.scss)
+ *     1100  the app's own .dropdown-menu (custom/_dropdown-base.scss)
  *     1150  --z-index-toast          token  (above modal/popover/dropdown)
  *     1180  --z-index-tooltip        token  (above toast, so a toast's own
  *                                            Dismiss tooltip stays visible)

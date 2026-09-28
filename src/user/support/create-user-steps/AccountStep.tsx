@@ -5,7 +5,7 @@ import {
 import { FC, useCallback } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { generatePassword } from '@/core/generatePassword';
 import { composeValidators, email, required } from '@/core/validators';
@@ -145,13 +145,12 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           variant="warning"
           title={translate('Password will be removed when you save.')}
           actions={
-            <button
-              type="button"
-              className="btn btn-sm btn-light-warning"
+            <BaseButton
+              variant="warning"
+              size="sm"
               onClick={handleCancelRemove}
-            >
-              {translate('Cancel')}
-            </button>
+              label={translate('Cancel')}
+            />
           }
         />
       ) : (
@@ -174,26 +173,24 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
                   )}
                 </Field>
               </div>
-              <button
-                type="button"
-                className="btn btn-light-success btn-sm"
+              <BaseButton
+                variant="success"
+                size="sm"
                 onClick={handleGeneratePassword}
-                title={translate('Generate password')}
-              >
-                <ArrowCounterClockwiseIcon weight="bold" className="me-1" />
-                {translate('Generate')}
-              </button>
+                tooltip={translate('Generate password')}
+                iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+                label={translate('Generate')}
+              />
             </div>
           </FormGroup>
           {editMode && user?.has_usable_password && !values.password && (
             <FormGroup label="" spaceless>
-              <button
-                type="button"
-                className="btn btn-sm btn-danger"
+              <BaseButton
+                variant="danger"
+                size="sm"
                 onClick={handleRemovePassword}
-              >
-                {translate('Remove password')}
-              </button>
+                label={translate('Remove password')}
+              />
             </FormGroup>
           )}
         </>

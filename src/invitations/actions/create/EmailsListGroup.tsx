@@ -3,7 +3,7 @@ import { Fragment, ReactNode, useCallback, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, useField } from 'react-final-form';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { usePagination } from '@/core/usePagination';
@@ -19,7 +19,6 @@ import {
   ExistingRoleHit,
   getExistingRoleMessage,
 } from '@/permissions/existingRoles';
-import { ActionButton } from '@/table/ActionButton';
 import { TablePagination } from '@/table/TablePagination';
 
 import { findVerdictForRow, isVerdictForRow, RowVerdict } from '../rowVerdicts';
@@ -357,14 +356,15 @@ export const EmailsListGroup = ({
                           />
                         </td>
                         <td>
-                          <ActionButton
+                          <BaseButton
                             variant="text-danger"
-                            action={() => removeRow(i)}
+                            onClick={() => removeRow(i)}
                             disabled={fields.length === 1}
                             disabledReason={translate(
                               'At least one email is required',
                             )}
                             iconNode={<TrashIcon weight="bold" />}
+                            size="lg"
                           />
                         </td>
                       </tr>
@@ -377,19 +377,20 @@ export const EmailsListGroup = ({
           </Form.Group>
         )}
         <div>
-          <ActionButton
+          <BaseButton
             variant="text-primary"
             disabled={warn}
             disabledReason={translate(
               'Fill in empty email fields before adding more',
             )}
-            action={addRow}
-            title={
+            onClick={addRow}
+            label={
               fields.length > 0
                 ? translate('Add another user')
                 : translate('Add user')
             }
             iconNode={<PlusIcon weight="bold" />}
+            size="lg"
           />
           {warn && (
             <span className="text-danger ms-2">

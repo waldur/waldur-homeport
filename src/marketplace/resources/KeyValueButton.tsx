@@ -1,8 +1,9 @@
 import { useCallback, FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import { MarketplaceKeyValueDialog } from './MarketplaceKeyValueDialog';
 
@@ -15,11 +16,11 @@ export const KeyValueButton: FunctionComponent<{ items; title }> = (props) => {
   }, [props.items, props.title]);
 
   return (
-    <ActionButton
-      variant="link"
-      className="btn-flush"
-      action={showDetails}
-      title={translate('Show details')}
+    <BaseButton
+      variant="tertiary"
+      onClick={showDetails}
+      label={translate('Show details')}
+      size="sm"
     />
   );
 };

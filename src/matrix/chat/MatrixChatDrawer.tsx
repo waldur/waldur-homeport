@@ -14,7 +14,7 @@ import {
 } from 'react';
 import Dropzone from 'react-dropzone';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
@@ -208,13 +208,12 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                     (callRoom as any)?.room_name ?? translate('another room'),
                 })}
               </span>
-              <button
-                type="button"
-                className="btn btn-sm btn-success"
+              <BaseButton
+                variant="success"
+                size="sm"
                 onClick={requestReturnToCall}
-              >
-                {translate('Return to call')}
-              </button>
+                label={translate('Return to call')}
+              />
             </div>
           )}
 
@@ -251,22 +250,23 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                       }
                       side="left"
                     >
-                      <button
-                        type="button"
+                      <BaseButton
                         onClick={() => setChatVisible((v) => !v)}
                         aria-label={
                           chatVisible
                             ? translate('Hide chat')
                             : translate('Show chat')
                         }
-                        className="btn btn-icon btn-sm btn-light"
-                      >
-                        {chatVisible ? (
-                          <ArrowsOutSimpleIcon weight="bold" />
-                        ) : (
-                          <ArrowsInSimpleIcon weight="bold" />
-                        )}
-                      </button>
+                        variant="tertiary"
+                        size="sm"
+                        iconNode={
+                          chatVisible ? (
+                            <ArrowsOutSimpleIcon weight="bold" />
+                          ) : (
+                            <ArrowsInSimpleIcon weight="bold" />
+                          )
+                        }
+                      />
                     </Tooltip>
                   </div>
                 )}

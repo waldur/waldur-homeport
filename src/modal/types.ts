@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { ModalProps } from 'react-bootstrap';
 
+import { ButtonVariant } from 'waldur-ui';
+
 export type DialogSizeType = 'sm' | 'md' | 'lg' | 'xl';
 export type ConfirmationDialogType =
   'primary' | 'success' | 'warning' | 'danger';
@@ -18,7 +20,7 @@ export interface ConfirmationOptions {
   positiveButton?: string;
   negativeButton?: string;
   size?: DialogSizeType;
-  positiveButtonVariant?: string;
+  positiveButtonVariant?: ButtonVariant;
   onlyPositiveButton?: boolean;
   iconNode?: ReactNode;
   hideIcon?: boolean;

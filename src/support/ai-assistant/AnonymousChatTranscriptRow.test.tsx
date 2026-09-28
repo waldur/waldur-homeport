@@ -271,7 +271,7 @@ describe('AnonymousChatTranscriptRow', () => {
 
     // The severity badge now carries what tripped the guard, as it does on the
     // authenticated side — previously the anonymous badge said only "High".
-    // Tip only mounts its overlay on hover, so reach the trigger through the
+    // Tooltip only mounts its overlay on hover, so reach the trigger through the
     // badge text, the way the KPI tooltip test does.
     await userEvent.hover(screen.getByText('High'));
     await screen.findByText('PII: pii_estonian_id');

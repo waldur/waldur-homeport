@@ -1,49 +1,34 @@
 import { EnvelopeSimpleIcon, LinkSimpleIcon } from '@phosphor-icons/react';
-import { useMemo, FunctionComponent } from 'react';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { FunctionComponent } from 'react';
+
+import { SegmentedControl } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
-export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
-  input,
-  defaultValue,
-}) => {
-  const options = useMemo(
-    () => [
+export const HookTypeField: FunctionComponent<{ input }> = ({ input }) => (
+  <SegmentedControl
+    aria-label={translate('Hook type')}
+    options={[
       {
-        key: 'email',
-        label: translate('Email'),
-        iconClass: <EnvelopeSimpleIcon weight="bold" />,
+        value: 'email',
+        label: (
+          <>
+            <EnvelopeSimpleIcon weight="bold" size={20} />
+            {translate('Email')}
+          </>
+        ),
       },
       {
-        key: 'webhook',
-        label: translate('Webhook'),
-        iconClass: <LinkSimpleIcon weight="bold" />,
+        value: 'webhook',
+        label: (
+          <>
+            <LinkSimpleIcon weight="bold" size={20} />
+            {translate('Webhook')}
+          </>
+        ),
       },
-    ],
-
-    [],
-  );
-  return (
-    <ToggleButtonGroup
-      name="hook_type"
-      type="radio"
-      defaultValue={defaultValue}
-      value={input.value}
-      onChange={input.onChange}
-      aria-label={translate('Hook type')}
-    >
-      {options.map((option) => (
-        <ToggleButton
-          key={option.key}
-          id={option.key}
-          value={option.key}
-          variant="tertiary"
-        >
-          <span className="svg-icon svg-icon-2 me-3">{option.iconClass}</span>
-          {option.label}
-        </ToggleButton>
-      ))}
-    </ToggleButtonGroup>
-  );
-};
+    ]}
+    value={input.value}
+    onValueChange={input.onChange}
+  />
+);

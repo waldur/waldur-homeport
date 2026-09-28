@@ -1,15 +1,18 @@
 import { ListIcon, GridFourIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
-import { ToolbarButton } from './ToolbarButton';
 import { TableProps } from './types';
 
 export const TableDisplayModeButton = (
   props: Pick<TableProps, 'mode' | 'setDisplayMode'>,
 ) => {
   return (
-    <ToolbarButton
+    <BaseButton
+      variant="tertiary"
+      size="lg"
       tooltip={
         props.mode === 'grid' ? translate('Table mode') : translate('Grid mode')
       }

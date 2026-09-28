@@ -2,9 +2,10 @@ import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { marketplaceProviderOfferingsAccessSubnetsRetrieve } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { saveFile } from '@/table/exporters/saveFile';
@@ -49,14 +50,12 @@ export const OfferingAccessSubnetsAllowListDialog = ({
               value={packedText}
               verbose={translate('Allow-list')}
             />
-            <SubmitButton
-              submitting={false}
-              type="button"
+            <BaseButton
               variant="tertiary"
               onClick={download}
               label={translate('Download')}
               iconNode={<DownloadSimpleIcon weight="bold" />}
-              iconOnLeft
+              size="lg"
             />
           </>
         )

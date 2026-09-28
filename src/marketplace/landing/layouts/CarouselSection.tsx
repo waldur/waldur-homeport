@@ -2,7 +2,8 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useRef } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 
@@ -34,20 +35,26 @@ export const CarouselSection: FC<CarouselSectionProps> = ({
       <Card.Header className="gap-2">
         <h4 className="mb-0">{title}</h4>
         <div className="d-flex align-items-stretch gap-2">
-          <CompactIconButton
+          <BaseButton
             iconNode={<CaretLeftIcon weight="bold" />}
             tooltip={translate('Scroll left')}
             onClick={() => scroll('left')}
+            size="sm"
+            variant="tertiary"
           />
-          <CompactIconButton
+          <BaseButton
             iconNode={<CaretRightIcon weight="bold" />}
             tooltip={translate('Scroll right')}
             onClick={() => scroll('right')}
+            size="sm"
+            variant="tertiary"
           />
           {linkProps && (
             <Link
               {...linkProps}
-              className="btn btn-sm btn-tertiary d-inline-flex align-items-center"
+              buttonVariant="tertiary"
+              buttonSize="sm"
+              className="d-inline-flex align-items-center"
             >
               {translate('View all')}
               <CaretRightIcon size={16} className="ms-1" weight="bold" />

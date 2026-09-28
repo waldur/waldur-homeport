@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { proposalProposalsCompleteWorkflowStep } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { usesCallVocabulary } from '@/proposals/presentation';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 import { Proposal } from '../types';
@@ -119,27 +120,29 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
 
   return (
     <>
-      <ActionButton
+      <BaseButton
         variant="primary"
-        action={() => acceptAward.mutate()}
+        onClick={() => acceptAward.mutate()}
         pending={acceptAward.isPending}
         className="w-100 mt-2"
         iconNode={<CheckCircleIcon weight="bold" />}
-        title={
+        label={
           usesCallVocabulary() ? translate('Accept award') : translate('Accept')
         }
+        size="lg"
       />
-      <ActionButton
+      <BaseButton
         variant="danger"
-        action={() => declineAward.mutate()}
+        onClick={() => declineAward.mutate()}
         pending={declineAward.isPending}
         className="w-100 mt-2"
         iconNode={<XCircleIcon weight="bold" />}
-        title={
+        label={
           usesCallVocabulary()
             ? translate('Decline award')
             : translate('Decline')
         }
+        size="lg"
       />
     </>
   );

@@ -1,5 +1,6 @@
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
@@ -13,9 +14,7 @@ export const OrderReviewButton = ({ order, loadData }) => {
   const { openDialog } = useModal();
 
   return (
-    <SubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
       variant="tertiary"
       onClick={() =>
         openDialog(OrderReviewDialog, {
@@ -25,6 +24,7 @@ export const OrderReviewButton = ({ order, loadData }) => {
         })
       }
       label={translate('Review PDF')}
+      size="lg"
     />
   );
 };

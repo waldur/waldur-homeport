@@ -256,11 +256,10 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
                 <OrderDetailsLink
                   order_uuid={resource.order_in_progress.uuid}
                   project_uuid={resource.order_in_progress.project_uuid}
-                  className="btn btn-sm btn-tertiary"
+                  buttonVariant="tertiary"
+                  buttonSize="sm"
                 >
-                  <span className="svg-icon svg-icon-2">
-                    <InfoIcon weight="bold" />
-                  </span>
+                  <InfoIcon size={20} weight="bold" />
                   {translate('View order')}
                 </OrderDetailsLink>
               ))}

@@ -3,8 +3,9 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
+import { Tooltip } from 'waldur-ui';
+
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
-import { wrapTooltip } from '@/table/ActionButton';
 
 import './FormTable.scss';
 
@@ -27,6 +28,19 @@ export interface FormTableItemProps {
   htmlFor?: string;
 }
 
+const IconTooltip = ({
+  tooltip,
+  icon,
+}: {
+  tooltip: ReactNode;
+  icon: ReactNode;
+}) =>
+  tooltip ? (
+    <Tooltip label={tooltip}>
+      <span>{icon}</span>
+    </Tooltip>
+  ) : null;
+
 const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
   actions,
   ...props
@@ -44,28 +58,40 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
           >
             {props.label}
             {props.required && <span className="text-danger ms-1">*</span>}
-            {Boolean(props.tooltip) &&
-              wrapTooltip(
-                props.tooltip,
+            <IconTooltip
+              tooltip={props.tooltip}
+              icon={
                 <QuestionIcon
                   size={20}
                   weight="bold"
                   className="ms-2 text-muted mb-1"
-                />,
-              )}
-            {Boolean(props.warnTooltip) &&
-              wrapTooltip(
-                props.warnTooltip,
+                />
+              }
+            />
+            <IconTooltip
+              tooltip={props.warnTooltip}
+              icon={
                 <WarningCircleIcon
                   size={20}
                   weight="bold"
                   className="ms-2 text-warning mb-1"
-                />,
-              )}
+                />
+              }
+            />
             {props.colon && ':'}
           </label>
-          {wrapTooltip(
-            props.description,
+          {props.description ? (
+            <Tooltip label={props.description}>
+              <div
+                className={classNames(
+                  'description fw-normal',
+                  props.descriptionClassName,
+                )}
+              >
+                {props.description}
+              </div>
+            </Tooltip>
+          ) : (
             <div
               className={classNames(
                 'description fw-normal',
@@ -73,7 +99,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
               )}
             >
               {props.description}
-            </div>,
+            </div>
           )}
         </th>
       ) : i === 0 && props.label ? (
@@ -81,24 +107,26 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
           <label htmlFor={props.htmlFor} className="mb-0 d-block">
             {props.label}
             {props.required && <span className="text-danger ms-1">*</span>}
-            {Boolean(props.tooltip) &&
-              wrapTooltip(
-                props.tooltip,
+            <IconTooltip
+              tooltip={props.tooltip}
+              icon={
                 <QuestionIcon
                   size={20}
                   weight="bold"
                   className="ms-2 text-muted mb-1"
-                />,
-              )}
-            {Boolean(props.warnTooltip) &&
-              wrapTooltip(
-                props.warnTooltip,
+                />
+              }
+            />
+            <IconTooltip
+              tooltip={props.warnTooltip}
+              icon={
                 <WarningCircleIcon
                   size={20}
                   weight="bold"
                   className="ms-2 text-warning mb-1"
-                />,
-              )}
+                />
+              }
+            />
             {props.colon && ':'}
           </label>
         </th>

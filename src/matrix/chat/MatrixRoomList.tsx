@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { FC, useMemo, useState } from 'react';
 
-import { MediumIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
 import { FilterBox } from '@/form/FilterBox';
@@ -98,7 +99,7 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
             collapsed state still needs an escape back to the full list. */}
         {onToggleCollapse && (
           <div className="tc-sidebar-top">
-            <MediumIconButton
+            <BaseButton
               iconNode={
                 <span className="aui-icon-rotate-180">
                   <SidebarToggleGraphic />
@@ -107,6 +108,7 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
               tooltip={translate('Expand sidebar')}
               onClick={onToggleCollapse}
               variant="tertiary-ghost"
+              size="md"
             />
           </div>
         )}

@@ -1,9 +1,10 @@
 import { ShieldCheckIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const OfferingAccessSubnetsAllowListDialog = lazyComponent(() =>
   import('../details/OfferingAccessSubnetsAllowListDialog').then((module) => ({
@@ -18,15 +19,17 @@ export const OfferingAccessSubnetsAllowListButton = ({
 }) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      title={translate('Firewall allow-list')}
-      action={() =>
+    <BaseButton
+      label={translate('Firewall allow-list')}
+      onClick={() =>
         openDialog(OfferingAccessSubnetsAllowListDialog, {
           resolve: { offeringUuid },
           size: 'lg',
         })
       }
       iconNode={<ShieldCheckIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

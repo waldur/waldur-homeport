@@ -116,7 +116,7 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
             disabled={isPending}
             label={translate('Reconcile')}
             onClick={() => reconcileMutation.mutate()}
-            className="btn btn-secondary"
+            variant="secondary"
           />
           <SubmitButton
             submitting={syncMutation.isPending}

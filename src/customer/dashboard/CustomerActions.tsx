@@ -17,7 +17,7 @@ export const CustomerActions = ({ customer }: CustomerActionsProps) => {
         <Link
           state="organization.issues"
           params={{ uuid: customer.uuid }}
-          className="btn btn-secondary"
+          buttonVariant="secondary"
         >
           <span className="svg-icon svg-icon-2">
             <WarningIcon weight="bold" />

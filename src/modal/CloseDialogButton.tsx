@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import { ButtonVariant } from 'react-bootstrap/esm/types';
+
+import { BaseButton, ButtonVariant } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -8,12 +8,14 @@ import { useModal } from '@/modal/actions';
 interface CloseDialogButtonProps {
   /** Button label - defaults to 'Cancel' */
   label?: string;
-  /** Bootstrap button variant - defaults to 'tertiary' */
+  /** Button variant - defaults to 'tertiary' */
   variant?: ButtonVariant;
   /** Additional CSS classes */
   className?: string;
   /** Disabled state */
   disabled?: boolean;
+  /** Tooltip shown only when the button is disabled, explaining why */
+  disabledReason?: string;
   /** Custom click handler - if provided, called instead of closeDialog() */
   onClick?: () => void;
 }
@@ -39,6 +41,7 @@ export const CloseDialogButton: React.FC<CloseDialogButtonProps> = ({
   variant = 'tertiary',
   className,
   disabled,
+  disabledReason,
   onClick,
 }) => {
   const { closeDialog } = useModal();
@@ -52,14 +55,14 @@ export const CloseDialogButton: React.FC<CloseDialogButtonProps> = ({
   };
 
   return (
-    <Button
+    <BaseButton
       className={className}
       onClick={handleClick}
       variant={variant}
       size="lg"
       disabled={disabled}
-    >
-      {label || translate('Cancel')}
-    </Button>
+      disabledReason={disabledReason}
+      label={label || translate('Cancel')}
+    />
   );
 };

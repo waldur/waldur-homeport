@@ -2,6 +2,8 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { reviewerProfilesMe } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -24,16 +26,17 @@ export const CreateProfilePrompt: FC = () => {
             'Create a reviewer profile to manage your affiliations, expertise, and publications for proposal reviews.',
           )}
         </p>
-        <button
-          type="button"
-          className="btn btn-primary"
+        <BaseButton
+          variant="primary"
           onClick={() => mutate()}
           disabled={isCreating}
-        >
-          {isCreating
-            ? translate('Creating...')
-            : translate('Create reviewer profile')}
-        </button>
+          disabledReason={translate('Creating...')}
+          label={
+            isCreating
+              ? translate('Creating...')
+              : translate('Create reviewer profile')
+          }
+        />
       </Card.Body>
     </Card>
   );

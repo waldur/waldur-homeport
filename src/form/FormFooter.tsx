@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
-import { ButtonVariant } from 'react-bootstrap/esm/types';
 import { useFormState } from 'react-final-form';
+
+import { ButtonVariant } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';

@@ -3,12 +3,13 @@ import { FC, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { MatrixRoom, matrixRoomsList } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ProjectLink } from '@/project/ProjectLink';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -84,15 +85,16 @@ const CreateRoomAction: FC<{ refetch(): void }> = ({ refetch }) => {
     [openDialog, refetch],
   );
   return (
-    <ActionButton
-      title={translate('Create')}
+    <BaseButton
+      label={translate('Create')}
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
-      action={handleClick}
+      onClick={handleClick}
       disabled={!isMatrixEnabled()}
       disabledReason={translate(
         'Enable Matrix chat in the Settings tab before creating rooms.',
       )}
+      size="lg"
     />
   );
 };

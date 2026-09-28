@@ -1,6 +1,8 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { required } from '@/core/validators';
 import {
@@ -15,7 +17,6 @@ import { BaseCredentialsSection } from '@/marketplace/offerings/update/integrati
 import { OfferingEditPanelProps } from '@/marketplace/offerings/update/integration/types';
 import { useModal } from '@/modal/actions';
 import { TENANT_TYPE } from '@/openstack/constants';
-import { ActionButton } from '@/table/ActionButton';
 
 const OpenStackDiscoveryDialog = lazyComponent(() =>
   import('@/openstack/openstack-discovery/OpenStackDiscoveryDialog').then(
@@ -43,8 +44,8 @@ export const OpenStackCredentialsSection: FC<OfferingEditPanelProps> = (
       {...props}
       actions={
         props.offering.type === TENANT_TYPE && (
-          <ActionButton
-            action={() =>
+          <BaseButton
+            onClick={() =>
               openDialog(OpenStackDiscoveryDialog, {
                 size: 'xl',
                 resolve: {
@@ -55,8 +56,9 @@ export const OpenStackCredentialsSection: FC<OfferingEditPanelProps> = (
             }
             variant="tertiary"
             iconNode={<MagnifyingGlassIcon weight="bold" />}
-            title={translate('Discover')}
+            label={translate('Discover')}
             data-testid="credentials-discover-btn"
+            size="lg"
           />
         )
       }

@@ -7,6 +7,8 @@ import {
 } from '@phosphor-icons/react';
 import { FC, ReactNode, useState } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface AIDisclosureBannerProps {
@@ -146,12 +148,12 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
       </div>
 
       <div className="w-100" style={{ maxWidth: 520 }}>
-        <button
-          className="btn btn-primary w-100 py-3 fw-bold fs-6"
+        <BaseButton
+          variant="primary"
+          className="w-100 py-3 fw-bold fs-6"
           onClick={onAcknowledge}
-        >
-          {translate('I understand')}
-        </button>
+          label={translate('I understand')}
+        />
       </div>
     </div>
   );

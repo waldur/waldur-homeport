@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { MatrixCredentials, matrixCredentialsRetrieve } from 'waldur-js-client';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton, buttonVariants } from 'waldur-ui';
+
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -35,7 +36,7 @@ const CredentialRow: FC<{ label: string; value: string; masked?: boolean }> = ({
       </div>
       <div className="d-flex align-items-center flex-shrink-0">
         {masked && (
-          <IconButton
+          <BaseButton
             iconNode={
               revealed ? (
                 <EyeSlashIcon weight="bold" />
@@ -46,6 +47,7 @@ const CredentialRow: FC<{ label: string; value: string; masked?: boolean }> = ({
             tooltip={revealed ? translate('Hide') : translate('Reveal')}
             onClick={() => setRevealed(!revealed)}
             variant="text-secondary"
+            size="lg"
           />
         )}
         <CopyToClipboardButton value={value} />
@@ -109,7 +111,7 @@ const CredentialsContent: FC<{
         <div className="mt-4">
           <a
             href={matrixRoomUrl}
-            className="btn btn-primary w-100"
+            className={`${buttonVariants({ variant: 'primary' })} w-100`}
             target="_blank"
             rel="noreferrer"
           >

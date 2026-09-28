@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+
+import { SegmentedControl } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -54,30 +55,16 @@ export const ProjectClassificationPage: FC = () => {
       <ClassificationSummaryCards summary={summary} />
 
       <div className="my-6">
-        <ToggleButtonGroup
-          type="radio"
-          name="activeTab"
-          value={activeTab}
-          onChange={(v) => setActiveTab(v)}
+        <SegmentedControl<TabKey>
           aria-label={translate('Classification view')}
-        >
-          <ToggleButton
-            id="tbg-oecd"
-            value="oecd"
-            variant="tertiary"
-            className="px-6"
-          >
-            {translate('By OECD code')}
-          </ToggleButton>
-          <ToggleButton
-            id="tbg-industry"
-            value="industry"
-            variant="tertiary"
-            className="px-6"
-          >
-            {translate('By industry')}
-          </ToggleButton>
-        </ToggleButtonGroup>
+          itemClassName="px-6"
+          options={[
+            { value: 'oecd', label: translate('By OECD code') },
+            { value: 'industry', label: translate('By industry') },
+          ]}
+          value={activeTab}
+          onValueChange={setActiveTab}
+        />
       </div>
       {activeTab === 'oecd' ? (
         <OecdUsageTab

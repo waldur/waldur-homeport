@@ -6,7 +6,7 @@ import { projectsPartialUpdate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { SubmitButton } from '@/form';
 import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -57,7 +57,8 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
                   disabled={project.is_removed}
                   extraActions={({ isChanged, isTooLarge }) =>
                     (isChanged || submitting) && !project.is_removed ? (
-                      <CompactSubmitButton
+                      <SubmitButton
+                        size="sm"
                         submitting={submitting}
                         disabled={isTooLarge}
                         label={translate('Save')}

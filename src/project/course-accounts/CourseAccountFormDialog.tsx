@@ -15,6 +15,8 @@ import {
   marketplaceCourseAccountsCreateBulk,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { EmailGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -22,7 +24,6 @@ import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { ProgressStep, WizardStepIndicator } from '@/wizard';
 import { useProject } from '@/workspace/hooks';
 
@@ -226,31 +227,33 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
               footer={
                 <>
                   {activeTab === 'batch' && step === 1 && (
-                    <ActionButton
-                      title={translate('Back')}
-                      action={prevStep}
+                    <BaseButton
+                      label={translate('Back')}
+                      onClick={prevStep}
                       iconNode={<CaretLeftIcon weight="bold" />}
                       variant="tertiary"
                       className="w-125px me-auto"
+                      size="lg"
                     />
                   )}
                   {activeTab === 'batch' && step === 2 ? (
-                    <ActionButton
-                      title={translate('Close')}
-                      action={() => {
+                    <BaseButton
+                      label={translate('Close')}
+                      onClick={() => {
                         if (refetch) refetch();
                         closeDialog();
                       }}
                       variant="primary"
                       className="w-125px"
+                      size="lg"
                     />
                   ) : (
                     <>
                       <CloseDialogButton className="w-125px" />
                       {activeTab === 'batch' && step === 0 ? (
-                        <ActionButton
-                          title={translate('Next')}
-                          action={nextStep}
+                        <BaseButton
+                          label={translate('Next')}
+                          onClick={nextStep}
                           iconNode={<CaretRightIcon weight="bold" />}
                           iconRight
                           disabled={invalid}
@@ -259,6 +262,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                           )}
                           variant="primary"
                           className="w-125px"
+                          size="lg"
                         />
                       ) : (
                         <SubmitButton
@@ -268,7 +272,8 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                             (activeTab === 'batch' && hasErrors && !skipErrors)
                           }
                           label={translate('Create')}
-                          className="btn btn-primary w-125px"
+                          variant="primary"
+                          className="w-125px"
                         />
                       )}
                     </>

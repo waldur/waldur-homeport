@@ -1,7 +1,8 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import React, { ReactNode } from 'react';
 
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -60,13 +61,12 @@ export const DeleteConfirmationDialog: React.FC<
             className="min-w-150px"
             onClick={handleCancel}
           />
-          <SubmitButton
-            submitting={false}
+          <BaseButton
             variant="danger"
             className="min-w-150px"
             onClick={handleSubmit}
-            type="button"
             label={positiveButton || translate('Delete')}
+            size="lg"
           />
         </>
       }

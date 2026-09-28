@@ -1,3 +1,5 @@
+import { ButtonVariant, ButtonSize } from 'waldur-ui';
+
 export type HistoryEntityType =
   'resource' | 'customer' | 'user' | 'ssh_key' | 'offering' | 'plan';
 
@@ -6,6 +8,9 @@ export interface VersionHistoryButtonProps {
   entityUuid: string;
   entityName: string;
   asDropdownItem?: boolean;
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  className?: string;
 }
 
 export interface VersionHistoryDialogProps {

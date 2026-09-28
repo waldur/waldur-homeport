@@ -2,6 +2,8 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { CallWorkflowStep } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
@@ -9,7 +11,6 @@ import {
   getStepDefinitions,
   stepDefinition,
 } from '@/proposals/workflow/constants';
-import { ActionButton } from '@/table/ActionButton';
 
 import { AddWorkflowStepDialog } from './AddWorkflowStepDialog';
 
@@ -58,13 +59,14 @@ export const WorkflowStepCreateButton = ({
       : undefined;
 
   return (
-    <ActionButton
-      action={openDialog}
-      title={translate('Add')}
+    <BaseButton
+      onClick={openDialog}
+      label={translate('Add')}
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
       disabled={isDisabled}
       tooltip={reason}
+      size="lg"
     />
   );
 };

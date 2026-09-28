@@ -66,7 +66,8 @@ export const EditOfferingChecklistDialog: FC<{
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={translate('Save')}
-                  className="btn btn-primary w-125px"
+                  variant="primary"
+                  className="w-125px"
                 />
               </>
             }

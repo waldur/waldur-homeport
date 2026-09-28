@@ -45,7 +45,10 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
           <Link
             state={backState}
             params={backParams}
-            className="btn btn-icon btn-white btn-color-gray-600 btn-active-primary shadow-sm h-40px w-40px"
+            buttonVariant="secondary"
+            buttonSize="lg"
+            buttonIconOnly
+            className="shadow-sm"
           >
             <ArrowLeftIcon size={20} weight="bold" />
           </Link>

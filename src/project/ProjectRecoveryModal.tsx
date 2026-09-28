@@ -142,7 +142,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Recover Project')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

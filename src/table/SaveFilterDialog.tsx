@@ -53,7 +53,8 @@ export const SaveFilterDialog = (props: SaveFilterDialogProps) => {
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Update') : translate('Save')}
-                  className="btn btn-primary flex-equal"
+                  variant="primary"
+                  className="flex-equal"
                 />
               </>
             }

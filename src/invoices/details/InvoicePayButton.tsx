@@ -1,6 +1,8 @@
 import { MoneyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { buttonVariants } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useCustomer } from '@/workspace/hooks';
@@ -26,7 +28,7 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
 
   return asButton ? (
     <a
-      className="btn btn-warning px-2"
+      className={`${buttonVariants({ variant: 'warning' })} px-2`}
       href={row.payment_url}
       target="_self"
       rel="noopener noreferrer"

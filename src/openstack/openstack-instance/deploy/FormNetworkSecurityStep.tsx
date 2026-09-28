@@ -24,7 +24,7 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import { AlertItem, Tooltip, BaseButton } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
@@ -38,7 +38,6 @@ import {
   getIPsInRange,
   isIPInRange,
 } from '@/openstack/openstack-network/utils';
-import { ActionButton } from '@/table/ActionButton';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard } from '@/wizard';
@@ -343,10 +342,11 @@ const renderNetworkRows = ({
                   />
                 </Col>
                 <Col xs="auto" className="align-self-end">
-                  <ActionButton
-                    action={() => fields.remove(index)}
+                  <BaseButton
+                    onClick={() => fields.remove(index)}
                     iconNode={<TrashIcon weight="bold" />}
                     variant="text-danger"
+                    size="lg"
                   />
                 </Col>
                 {hasCustomIp && (
@@ -365,13 +365,14 @@ const renderNetworkRows = ({
           );
         })}
       </div>
-      <ActionButton
-        action={addRow}
+      <BaseButton
+        onClick={addRow}
         disabled={freeSubnets.length === 0}
         disabledReason={translate('No available subnets')}
-        title={translate('Add subnet')}
+        label={translate('Add subnet')}
         iconNode={<PlusCircleIcon weight="bold" />}
         variant="text-primary"
+        size="lg"
       />
     </div>
   );

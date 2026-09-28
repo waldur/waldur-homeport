@@ -108,7 +108,8 @@ const EditManagedIsdsDialog: FC<EditManagedIsdsDialogProps> = ({ resolve }) => {
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Save')}
-                  className="btn btn-primary flex-equal"
+                  variant="primary"
+                  className="flex-equal"
                 />
               </>
             }

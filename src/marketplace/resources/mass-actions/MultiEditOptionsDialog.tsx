@@ -100,7 +100,8 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
                   }
                   submitting={submitting}
                   label={translate('Confirm')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

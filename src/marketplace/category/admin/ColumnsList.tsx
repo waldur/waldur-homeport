@@ -3,9 +3,10 @@ import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { ColumnRow } from './ColumnRow';
 
@@ -37,11 +38,12 @@ const ColumnsHeader: FC = () => (
 );
 
 const ColumnAddButton = ({ fields }) => (
-  <CompactActionButton
+  <BaseButton
     variant="primary"
-    action={() => fields.push({})}
+    onClick={() => fields.push({})}
     iconNode={<PlusIcon weight="bold" />}
-    title={translate('Add column')}
+    label={translate('Add column')}
+    size="sm"
   />
 );
 

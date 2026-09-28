@@ -5,11 +5,10 @@ import {
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { FeaturedIcon } from 'waldur-ui';
+import { FeaturedIcon, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { useProject } from '@/workspace/hooks';
 
 import { ProjectRecoveryModal } from './ProjectRecoveryModal';
@@ -48,12 +47,13 @@ export const RemovedProjectWarningBar: FC = () => {
             'This project has been removed. All resources have been terminated and user roles have been revoked.',
           )}
         </p>
-        <CompactActionButton
-          action={openRecoveryModal}
-          title={translate('Recover Project')}
+        <BaseButton
+          onClick={openRecoveryModal}
+          label={translate('Recover Project')}
           iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
           variant="warning"
           className="ms-auto"
+          size="sm"
         />
       </div>
     </div>

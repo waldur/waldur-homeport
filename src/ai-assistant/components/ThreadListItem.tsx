@@ -4,9 +4,10 @@ import {
   TrashIcon,
 } from '@phosphor-icons/react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
-import classNames from 'classnames';
 import { FC, forwardRef } from 'react';
 import { ThreadSession } from 'waldur-js-client';
+
+import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -26,17 +27,15 @@ interface ThreadItemMenuProps {
  * _history-sidebar.scss — shows the trigger on row hover).
  */
 const ThreadItemMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => (
-  <button
+  <BaseButton
     ref={ref}
     type="button"
-    className={classNames(
-      'btn dropdown-toggle btn-text-secondary btn-icon no-arrow btn-sm',
-      'aui-history-item-menu-trigger',
-    )}
+    variant="text-secondary"
+    size="sm"
+    className="aui-history-item-menu-trigger"
+    iconNode={<DotsThreeVerticalIcon weight="bold" size={22} />}
     {...props}
-  >
-    <DotsThreeVerticalIcon weight="bold" size={22} />
-  </button>
+  />
 ));
 ThreadItemMenuToggle.displayName = 'ThreadItemMenuToggle';
 

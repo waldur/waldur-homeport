@@ -4,7 +4,8 @@ import { createElement, useCallback } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { titleCase } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -66,12 +67,11 @@ export function TableToolbarActions() {
         actions.toggleFilterMenu(true);
         const parent: HTMLElement = event.currentTarget.closest('.card-table');
         if (!parent) return;
-        const btns = parent.getElementsByClassName(
-          'btn-add-filter',
-        ) as HTMLCollectionOf<HTMLButtonElement>;
-        if (btns?.length) {
+        const addFilterButton =
+          parent.querySelector<HTMLButtonElement>('[data-add-filter]');
+        if (addFilterButton) {
           if (!showFilterMenuToggle || filtersStorage?.length) {
-            btns.item(0).click();
+            addFilterButton.click();
             event.stopPropagation();
           }
         }
@@ -99,12 +99,13 @@ export function TableToolbarActions() {
           className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-4"
         >
           <Stack direction="horizontal" className="fw-normal text-dark me-2">
-            <CompactIconButton
+            <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
               onClick={actions.resetSelection}
               variant="text-secondary"
               className="me-1"
+              size="sm"
             />
             <span>
               ({selectedRows?.length}) {translate('Selected')}

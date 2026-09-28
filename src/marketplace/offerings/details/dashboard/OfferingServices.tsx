@@ -1,14 +1,13 @@
 import { FC, useCallback } from 'react';
 import { AgentIdentity, AgentServiceState } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 const ServiceProcessesDetailsDialog = lazyComponent(() =>
   import('./ServiceProcessesDetailsDialog').then((module) => ({
@@ -77,11 +76,12 @@ export const OfferingServices: FC<OwnProps> = ({ agentIdentity }) => {
               colon
               value={<StateField row={service} />}
               actions={
-                <CompactActionButton
+                <BaseButton
                   variant="text-primary"
                   className="text-nowrap"
-                  action={() => openProcessesDialog(service)}
-                  title={translate('Show processes')}
+                  onClick={() => openProcessesDialog(service)}
+                  label={translate('Show processes')}
+                  size="sm"
                 />
               }
             />

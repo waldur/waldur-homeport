@@ -5,6 +5,8 @@ import { Form } from 'react-final-form';
 import { useMediaQuery } from 'react-responsive';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { GroupInvitationTokenStorage } from '@/core/StorageManager';
 import { SubmitButton } from '@/form';
@@ -12,9 +14,7 @@ import { translate } from '@/i18n';
 import { useBreadcrumbs } from '@/navigation/context';
 import { IBreadcrumbItem } from '@/navigation/types';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { useUser } from '@/workspace/hooks';
@@ -108,11 +108,12 @@ export const AvailableOrganizationsToJoin: FC = () => {
               <div className="anonymous-join-organization-action d-flex align-items-center w-100">
                 {values?.invitation?.uuid ? (
                   <>
-                    <CompactActionButton
-                      action={() => form.change('invitation', null)}
+                    <BaseButton
+                      onClick={() => form.change('invitation', null)}
                       iconNode={<XIcon weight="bold" />}
                       variant="secondary"
-                      className="btn-no-focus btn-icon-gray-700 btn-active-icon-danger me-2"
+                      className="btn-no-focus me-2"
+                      size="sm"
                     />
                     <div className="d-flex flex-wrap fs-6 ellipsis">
                       <span className="fw-normal me-1">
@@ -128,7 +129,8 @@ export const AvailableOrganizationsToJoin: FC = () => {
                   <SubmitButton
                     submitting={submitting}
                     disabled={invalid || !values?.invitation?.uuid}
-                    className="btn btn-primary ms-6"
+                    variant="primary"
+                    className="ms-6"
                   >
                     <span className="svg-icon svg-icon-2">
                       <LockOpenIcon weight="bold" />
@@ -137,22 +139,24 @@ export const AvailableOrganizationsToJoin: FC = () => {
                   </SubmitButton>
                 ) : values?.invitation?.uuid ? (
                   isSmallScr ? (
-                    <CompactActionButton
-                      action={() =>
+                    <BaseButton
+                      onClick={() =>
                         continueToAutentification(values.invitation)
                       }
-                      title={translate('Continue to autentification')}
+                      label={translate('Continue to autentification')}
                       variant="primary"
                       className="ms-6"
+                      size="sm"
                     />
                   ) : (
-                    <ActionButton
-                      action={() =>
+                    <BaseButton
+                      onClick={() =>
                         continueToAutentification(values.invitation)
                       }
-                      title={translate('Continue to autentification')}
+                      label={translate('Continue to autentification')}
                       variant="primary"
                       className="ms-6"
+                      size="lg"
                     />
                   )
                 ) : null}

@@ -1,6 +1,6 @@
-import * as Tabs from '@radix-ui/react-tabs';
-import classNames from 'classnames';
-import { FC, useRef, useState } from 'react';
+import { FC, useCallback, useRef, useState } from 'react';
+
+import { SegmentedControl, SegmentedControlOption } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useTitle } from '@/navigation/title';
@@ -30,54 +30,46 @@ type View = 'requests' | 'resources';
  */
 export const ProfileRequests: FC = () => {
   const [view, setView] = useState<View>('requests');
-  // The switcher is `tableActions` on whichever list is mounted. Changing the
-  // lens unmounts that table, so the focused button is destroyed. This ref
-  // puts focus back on the selected tab after the new list commits.
+  // The switcher is `actions` on whichever list is mounted. Changing the lens
+  // unmounts that table, so the focused segment is destroyed. This flag is
+  // consumed once by the new switcher's ref, which puts focus back on the
+  // selected segment as it mounts.
   const restoreFocusRef = useRef(false);
   useTitle(requestListTitle());
 
-  const handleValueChange = (next: string) => {
-    if (next && next !== view) {
-      restoreFocusRef.current = true;
-      setView(next as View);
+  const options: SegmentedControlOption<View>[] = [
+    { value: 'requests', label: requestViewLabel() },
+    { value: 'resources', label: translate('By resource') },
+  ];
+
+  const restoreFocus = useCallback((node: HTMLDivElement | null) => {
+    if (node && restoreFocusRef.current) {
+      restoreFocusRef.current = false;
+      node
+        .querySelector<HTMLElement>('[role="radio"][aria-checked="true"]')
+        ?.focus();
     }
+  }, []);
+
+  const handleValueChange = (next: View) => {
+    restoreFocusRef.current = true;
+    setView(next);
   };
 
   const switcher = (
-    <Tabs.Root value={view} onValueChange={handleValueChange}>
-      <Tabs.List className="btn-group" aria-label={translate('Group by')}>
-        <Tabs.Trigger
-          value="requests"
-          ref={(node) => {
-            if (node && view === 'requests' && restoreFocusRef.current) {
-              node.focus();
-              restoreFocusRef.current = false;
-            }
-          }}
-          className={classNames(
-            'btn btn-tertiary px-6',
-            view === 'requests' && 'btn-active',
-          )}
-        >
-          {requestViewLabel()}
-        </Tabs.Trigger>
-        <Tabs.Trigger
-          value="resources"
-          ref={(node) => {
-            if (node && view === 'resources' && restoreFocusRef.current) {
-              node.focus();
-              restoreFocusRef.current = false;
-            }
-          }}
-          className={classNames(
-            'btn btn-tertiary px-6',
-            view === 'resources' && 'btn-active',
-          )}
-        >
-          {translate('By resource')}
-        </Tabs.Trigger>
-      </Tabs.List>
-    </Tabs.Root>
+    <SegmentedControl
+      ref={restoreFocus}
+      aria-label={translate('Group by')}
+      options={options}
+      value={view}
+      onValueChange={handleValueChange}
+      // lg to match the search box and toolbar buttons it sits beside. Both
+      // hosts must agree: the requests view mounts it in the card toolbar, the
+      // resources view in the page header, and an unset size would render 36px
+      // in one and (before the control stopped stretching) 44px in the other.
+      size="lg"
+      itemClassName="px-6"
+    />
   );
 
   // In the card toolbar beside search, not above the panel: this is a tab

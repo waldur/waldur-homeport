@@ -17,7 +17,7 @@ import {
 import Markdown from 'markdown-to-jsx';
 import { FC } from 'react';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import { AlertItem, BaseButton, Tooltip } from 'waldur-ui';
 
 import { AssistantComposer } from '@/ai-assistant/components/shared/AssistantComposer';
 import { LoadingDots } from '@/ai-assistant/components/shared/LoadingDots';
@@ -173,14 +173,14 @@ const EditComposer: FC = () => (
       <ComposerPrimitive.Input className="aui-edit-composer-input" autoFocus />
       <div className="aui-edit-composer-footer">
         <ComposerPrimitive.Cancel asChild>
-          <button className="btn btn-tertiary btn-sm">
-            {translate('Cancel')}
-          </button>
+          <BaseButton
+            variant="tertiary"
+            size="sm"
+            label={translate('Cancel')}
+          />
         </ComposerPrimitive.Cancel>
         <ComposerPrimitive.Send asChild>
-          <button className="btn btn-primary btn-sm">
-            {translate('Update')}
-          </button>
+          <BaseButton variant="primary" size="sm" label={translate('Update')} />
         </ComposerPrimitive.Send>
       </div>
     </ComposerPrimitive.Root>

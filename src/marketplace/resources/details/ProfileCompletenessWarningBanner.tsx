@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { OfferingState, marketplaceOfferingUsersList } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -82,13 +84,13 @@ export const ProfileCompletenessWarningBanner: FC<
     <ResourceWarningBar
       className={offering.state === 'Unavailable' ? 'disabled-view' : undefined}
       actions={
-        <button
-          type="button"
-          className="btn btn-warning text-orange fw-semibold px-4 py-2 ms-3 btn-sm"
+        <BaseButton
+          variant="warning"
+          size="sm"
+          className="text-orange fw-semibold px-4 py-2 ms-3"
           onClick={handleCompleteProfile}
-        >
-          {translate('Complete profile')}
-        </button>
+          label={translate('Complete profile')}
+        />
       }
     >
       <p className="mb-0">

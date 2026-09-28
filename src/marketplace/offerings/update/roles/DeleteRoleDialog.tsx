@@ -1,7 +1,8 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { marketplaceOfferingRolesDestroy } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -28,13 +29,13 @@ export const DeleteRoleDialog = ({
       footer={
         <>
           <CloseDialogButton className="flex-equal" />
-          <SubmitButton
-            submitting={deleteMutation.isPending}
+          <BaseButton
+            pending={deleteMutation.isPending}
             variant="danger"
             className="flex-equal"
             onClick={() => deleteMutation.mutate()}
-            type="button"
             label={translate('Delete')}
+            size="lg"
           />
         </>
       }

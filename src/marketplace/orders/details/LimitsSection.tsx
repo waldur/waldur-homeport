@@ -8,7 +8,8 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
@@ -117,12 +118,13 @@ export const LimitsSection = ({
         {editable && hasSelection && (
           <div className="card-toolbar d-flex align-items-center gap-3">
             <Stack direction="horizontal" className="fw-normal text-dark">
-              <CompactIconButton
+              <BaseButton
                 iconNode={<XIcon weight="bold" />}
                 tooltip={translate('Clear selection')}
                 onClick={clearSelection}
                 variant="text-secondary"
                 className="me-1"
+                size="sm"
               />
               <span>
                 ({selectedRows.length}) {translate('Selected')}

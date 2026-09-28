@@ -1,7 +1,8 @@
 import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { SubmitButton } from '@/form/SubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -41,14 +42,13 @@ export const PubSubMetricsResetButton: FC = () => {
   });
 
   return (
-    <SubmitButton
-      submitting={isPending}
-      type="button"
+    <BaseButton
+      pending={isPending}
       variant="secondary"
       onClick={() => mutate()}
       label={translate('Reset metrics')}
       iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
-      iconOnLeft
+      size="lg"
     />
   );
 };

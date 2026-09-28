@@ -57,7 +57,7 @@ export const PersonalAccessTokenNetworkAclDialog = ({ resolve }) => {
               <SubmitButton
                 submitting={submitting}
                 label={translate('Save')}
-                className="btn btn-primary"
+                variant="primary"
               />
             }
           >

@@ -261,7 +261,7 @@ describe('AnonymousChatPanel', () => {
       'Interactions where the assistant asked a clarifying question instead of recommending — 13 of 111.',
     );
 
-    // The split still has to be reachable, and in the right order. Tip renders
+    // The split still has to be reachable, and in the right order. Tooltip renders
     // its trigger as a bare span with no role or name, so there is nothing to
     // query it by — reach it through the label that does have text.
     // eslint-disable-next-line testing-library/no-node-access

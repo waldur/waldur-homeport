@@ -1,7 +1,9 @@
 import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, createContext, useMemo, useState } from 'react';
-import { Nav, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+
+import { SegmentedControl } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -28,23 +30,16 @@ export const ReportingLayout: FC = () => {
       <div className="d-flex justify-content-between align-items-center gap-4 mb-5">
         <h1>{translate('Reporting')}</h1>
         {isDashboard && (
-          <ToggleButtonGroup
-            type="radio"
-            name="period"
-            value={months}
-            onChange={setMonths}
+          <SegmentedControl<number>
             aria-label={translate('Time period')}
-          >
-            <ToggleButton id="period-0" value={0} variant="tertiary">
-              {translate('All time')}
-            </ToggleButton>
-            <ToggleButton id="period-6" value={6} variant="tertiary">
-              {translate('6 months')}
-            </ToggleButton>
-            <ToggleButton id="period-12" value={12} variant="tertiary">
-              {translate('12 months')}
-            </ToggleButton>
-          </ToggleButtonGroup>
+            options={[
+              { value: 0, label: translate('All time') },
+              { value: 6, label: translate('6 months') },
+              { value: 12, label: translate('12 months') },
+            ]}
+            value={months}
+            onValueChange={setMonths}
+          />
         )}
       </div>
 

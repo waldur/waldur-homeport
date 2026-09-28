@@ -70,7 +70,8 @@ export const AdjustWithdrawableDialog: FC<OwnProps> = ({
                     submitting={submitting}
                     disabled={invalid}
                     label={translate('Save')}
-                    className="btn btn-primary min-w-125px"
+                    variant="primary"
+                    className="min-w-125px"
                   />
                 </>
               }

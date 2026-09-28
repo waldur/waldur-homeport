@@ -1,18 +1,23 @@
 import { FC } from 'react';
 
+import { buttonVariants, ButtonVariant } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { UIBlockProps } from '../../lib/types';
 
+// The block's own 'primary' | 'secondary' | 'info' vocabulary (set by the
+// assistant backend, see UIBlock['links'] in lib/types.ts) predates the
+// design-token variant names and doesn't line up with them 1:1.
+const VARIANT_MAP: Record<'primary' | 'secondary' | 'info', ButtonVariant> = {
+  primary: 'secondary',
+  secondary: 'tertiary',
+  info: 'tertiary-ghost',
+};
+
 export const HomePortNavBlock: FC<UIBlockProps> = ({ block }) => {
   const links = block.links;
   if (!links || links.length === 0) return null;
-
-  const variantClasses: Record<string, string> = {
-    primary: 'btn btn-sm btn-secondary',
-    secondary: 'btn btn-sm btn-tertiary',
-    info: 'btn btn-sm btn-tertiary-ghost',
-  };
 
   return (
     <div className="d-flex flex-column gap-2 my-2">
@@ -22,7 +27,10 @@ export const HomePortNavBlock: FC<UIBlockProps> = ({ block }) => {
           <a
             key={i}
             href={link.url}
-            className={variantClasses[link.variant || 'primary']}
+            className={buttonVariants({
+              variant: VARIANT_MAP[link.variant || 'primary'],
+              size: 'sm',
+            })}
             target="_blank"
             rel="noopener noreferrer"
           >

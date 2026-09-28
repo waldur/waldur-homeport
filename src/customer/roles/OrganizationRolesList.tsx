@@ -16,7 +16,7 @@ import {
   rolesList,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { RoleCompareButton } from '@/administration/roles/RoleCompareButton';
 import { RolePermissionDelta } from '@/administration/roles/RolePermissionDelta';
@@ -28,7 +28,6 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ROLE_TYPES } from '@/permissions/constants';
 import { formatRoleType } from '@/permissions/utils';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import {
@@ -89,11 +88,12 @@ const CloneRoleButton: FC<{ customerUuid: string; refetch: () => void }> = ({
     [openDialog, customerUuid, refetch],
   );
   return (
-    <ActionButton
-      action={open}
-      title={translate('Clone role')}
+    <BaseButton
+      onClick={open}
+      label={translate('Clone role')}
       variant="primary"
       iconNode={<CopyIcon weight="bold" />}
+      size="lg"
     />
   );
 };

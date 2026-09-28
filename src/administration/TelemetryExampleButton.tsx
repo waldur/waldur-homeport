@@ -1,9 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 const TelemetryExampleDialog = lazyComponent(() =>
   import('./TelemetryExampleDialog').then((module) => ({
@@ -14,11 +15,12 @@ const TelemetryExampleDialog = lazyComponent(() =>
 export const TelemetryExampleButton = () => {
   const { openDialog } = useModal();
   return (
-    <CompactActionButton
-      action={() => openDialog(TelemetryExampleDialog)}
-      variant="link"
+    <BaseButton
+      onClick={() => openDialog(TelemetryExampleDialog)}
+      variant="text-primary"
       iconNode={<EyeIcon weight="bold" />}
-      title={translate('Show example')}
+      label={translate('Show example')}
+      size="sm"
     />
   );
 };

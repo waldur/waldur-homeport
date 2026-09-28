@@ -30,7 +30,7 @@ import React, {
 } from 'react';
 import { chatQuotaUsageRetrieve } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { BaseButton, Badge } from 'waldur-ui';
 
 import { calculateQuotaPercentage } from '@/administration/ai-assistant/AITokenExpandableRow';
 import {
@@ -187,10 +187,12 @@ const ThreadSuggestions: FC = () => {
           send
           asChild
         >
-          <button className="btn btn-tertiary aui-thread-welcome-suggestion-btn">
-            {suggestedAction.icon}
-            <span>{suggestedAction.label}</span>
-          </button>
+          <BaseButton
+            variant="tertiary"
+            className="aui-thread-welcome-suggestion-btn"
+            iconNode={suggestedAction.icon}
+            label={suggestedAction.label}
+          />
         </ThreadPrimitive.Suggestion>
       ))}
     </div>

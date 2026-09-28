@@ -1,10 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const AffiliateLinkFormDialog = lazyComponent(() =>
   import('./AffiliateLinkFormDialog').then((module) => ({
@@ -22,15 +23,16 @@ export const AffiliateLinkCreateAction: FC<AffiliateLinkCreateActionProps> = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      title={translate('Add affiliate link')}
+    <BaseButton
+      label={translate('Add affiliate link')}
       variant="primary"
       iconNode={<PlusCircleIcon weight="bold" />}
-      action={() =>
+      onClick={() =>
         openDialog(AffiliateLinkFormDialog, {
           resolve: { refetch },
         })
       }
+      size="lg"
     />
   );
 };

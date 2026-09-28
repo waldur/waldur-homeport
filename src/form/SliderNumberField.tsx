@@ -3,7 +3,8 @@ import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldRenderProps } from 'react-final-form';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import './SliderNumberField.scss';
@@ -96,21 +97,23 @@ const BaseSliderNumberField: FC<BaseSliderNumberFieldProps> = ({
         />
 
         <div>
-          <CompactIconButton
+          <BaseButton
             iconNode={<PlusIcon weight="bold" />}
             tooltip={translate('Increase')}
             onClick={() => change(Number(value) + 1 * Number(step || 1))}
             disabled={disabled}
-            variant="active-icon-primary"
+            variant="tertiary-ghost"
             className="plus-btn btn-no-focus"
+            size="sm"
           />
-          <CompactIconButton
+          <BaseButton
             iconNode={<MinusIcon weight="bold" />}
             tooltip={translate('Decrease')}
             onClick={() => change(Number(value) - 1 * Number(step || 1))}
             disabled={disabled}
-            variant="active-icon-primary"
+            variant="tertiary-ghost"
             className="minus-btn btn-no-focus icon-align"
+            size="sm"
           />
         </div>
       </div>

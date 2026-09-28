@@ -2,13 +2,12 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
-import { ActionButton } from '@/table/ActionButton';
 import { BooleanField } from '@/table/BooleanField';
 import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
@@ -85,11 +84,12 @@ export const HelpdeskOverviewPage: FC = () => {
     <Card className="card-bordered">
       <Card.Header className="d-flex justify-content-between align-items-center">
         <Card.Title>{translate('Helpdesk overview')}</Card.Title>
-        <ActionButton
-          title={translate('Validate')}
+        <BaseButton
+          label={translate('Validate')}
           iconNode={<ArrowsClockwiseIcon weight="bold" />}
           variant="tertiary"
-          action={() => validateMutation.mutate({ uuid: helpdesk.uuid })}
+          onClick={() => validateMutation.mutate({ uuid: helpdesk.uuid })}
+          size="lg"
         />
       </Card.Header>
       <Card.Body>

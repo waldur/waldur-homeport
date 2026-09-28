@@ -57,7 +57,11 @@ export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
         {/* Page title */}
         <div className="d-flex justify-content-between align-items-center mb-6">
           <h1 className="mb-0 fs-1x">{title}</h1>
-          <Link state="public.offerings" className="btn btn-sm btn-tertiary">
+          <Link
+            state="public.offerings"
+            buttonVariant="tertiary"
+            buttonSize="sm"
+          >
             {translate('View all')}
             <CaretRightIcon size={16} className="ms-1" weight="bold" />
           </Link>

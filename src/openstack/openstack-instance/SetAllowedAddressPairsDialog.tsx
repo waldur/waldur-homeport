@@ -12,14 +12,14 @@ import {
   openstackPortsSetAllowedAddressPairs,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { getUUID } from '@/core/utils';
 import { StringField, FieldError, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateAllowedAddressPair } from '../utils';
 
@@ -77,22 +77,24 @@ const PairRow = ({
       </Field>
     </td>
     <td>
-      <CompactActionButton
-        action={onRemove}
-        title={translate('Remove')}
+      <BaseButton
+        onClick={onRemove}
+        label={translate('Remove')}
         iconNode={<TrashIcon weight="bold" />}
         variant="text-secondary"
+        size="sm"
       />
     </td>
   </tr>
 );
 
 const PairAddButton = ({ onClick }: { onClick: () => void }) => (
-  <ActionButton
-    action={onClick}
-    title={translate('Add pair')}
+  <BaseButton
+    onClick={onClick}
+    label={translate('Add pair')}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"
+    size="lg"
   />
 );
 

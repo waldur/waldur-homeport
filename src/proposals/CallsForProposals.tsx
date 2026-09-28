@@ -31,13 +31,15 @@ export const CallsForProposals: FunctionComponent = () => {
         <div className="d-flex justify-content-center gap-5">
           <Link
             state="calls-for-proposals-all-available-offerings"
-            className="btn btn-tertiary w-200px"
+            buttonVariant="tertiary"
+            className="w-200px"
           >
             {translate('Available offerings')}
           </Link>
           <Link
             state="calls-for-proposals-all-calls"
-            className="btn w-200px btn-primary"
+            buttonVariant="primary"
+            className="w-200px"
           >
             {translate('All calls')}
           </Link>

@@ -75,14 +75,16 @@ export const RowActions: FC<RowActionsProps> = ({ row, refetch }) => {
 For simple tables with very few actions, you can render buttons directly in the row cells:
 
 ```tsx
-import { CompactActionButton } from '@/table/CompactActionButton';
+import { BaseButton } from 'waldur-ui';
 
 const RowActions = ({ row }) => (
   <div className="d-flex gap-2">
-    <CompactActionButton
-      action={() => handleEdit(row)}
-      title={translate('Edit')}
+    <BaseButton
+      onClick={() => handleEdit(row)}
+      label={translate('Edit')}
       iconNode={<PencilSimple />}
+      variant="tertiary"
+      size="sm"
     />
   </div>
 );

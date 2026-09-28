@@ -59,12 +59,10 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
       footer={
         <OfferingDetailsLink
           offering_uuid={props.resolve.offering.uuid}
-          className="btn btn-secondary btn-icon-right"
+          buttonVariant="secondary"
         >
           {translate('More details')}
-          <span className="svg-icon svg-icon-4">
-            <CaretRightIcon weight="bold" />
-          </span>
+          <CaretRightIcon size={16} weight="bold" />
         </OfferingDetailsLink>
       }
     >

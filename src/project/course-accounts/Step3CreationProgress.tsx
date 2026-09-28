@@ -7,12 +7,11 @@ import {
   marketplaceCourseAccountsList,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { BadgeVariant, BaseButton } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 
 const stateConfig: Record<string, { label: string; color: BadgeVariant }> = {
@@ -118,14 +117,15 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
             {translate('{n} Failed', { n: counts.Erred })}
           </Badge>
         )}
-        <ActionButton
-          title={translate('Refresh')}
-          action={() => refetch()}
+        <BaseButton
+          label={translate('Refresh')}
+          onClick={() => refetch()}
           iconNode={<ArrowsClockwiseIcon weight="bold" />}
           variant="tertiary"
           disabled={isFetching}
           disabledReason={translate('Refreshing...')}
           className="ms-auto"
+          size="lg"
         />
       </div>
       <div className="table-responsive">

@@ -1,6 +1,8 @@
 import { MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { translate } from '@/i18n';
 import { useTheme } from '@/theme/useTheme';
@@ -33,21 +35,21 @@ export const ThemeSwitcherButton: FunctionComponent = () => {
   const isDark = theme === 'dark';
 
   return (
-    <button
-      type="button"
-      className="btn btn-tertiary btn-icon"
+    <BaseButton
+      variant="tertiary"
       onClick={toggleTheme}
-      title={
+      tooltip={
         isDark
           ? translate('Switch to light mode')
           : translate('Switch to dark mode')
       }
-    >
-      {isDark ? (
-        <SunIcon size={20} weight="bold" />
-      ) : (
-        <MoonIcon size={20} weight="bold" />
-      )}
-    </button>
+      iconNode={
+        isDark ? (
+          <SunIcon size={20} weight="bold" />
+        ) : (
+          <MoonIcon size={20} weight="bold" />
+        )
+      }
+    />
   );
 };

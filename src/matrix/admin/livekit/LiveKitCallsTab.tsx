@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { adminMatrixLivekitOverviewRetrieve } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { ActionButton } from '@/table/ActionButton';
 
 import { getErrorDetail, isNotConfiguredError } from './liveKitFormatters';
 import { LiveKitRoomsTable } from './LiveKitRoomsTable';
@@ -46,13 +46,13 @@ const LiveKitCallsTab: FC = () => {
           title={getErrorDetail(error) || translate('LiveKit is unreachable.')}
           message={null}
           actions={
-            <SubmitButton
-              submitting={isFetching}
-              type="button"
+            <BaseButton
+              pending={isFetching}
               variant="tertiary"
               className="mw-175px min-w-120px w-50"
               onClick={() => refetch()}
               label={translate('Retry')}
+              size="lg"
             />
           }
         />
@@ -65,13 +65,13 @@ const LiveKitCallsTab: FC = () => {
             title={translate('No active calls right now')}
             message={translate('Rooms will appear here when a call starts.')}
             actions={
-              <SubmitButton
-                submitting={isFetching}
-                type="button"
+              <BaseButton
+                pending={isFetching}
                 variant="tertiary"
                 className="mw-175px min-w-120px w-50"
                 onClick={() => refetch()}
                 label={translate('Refresh')}
+                size="lg"
               />
             }
           />
@@ -89,13 +89,14 @@ const LiveKitCallsTab: FC = () => {
           rooms table itself is on screen. */}
       {data && !error && data.rooms.length > 0 && (
         <div className="d-flex justify-content-end mb-3">
-          <ActionButton
-            title={translate('Refresh')}
-            action={() => refetch()}
+          <BaseButton
+            label={translate('Refresh')}
+            onClick={() => refetch()}
             iconNode={<ArrowClockwiseIcon weight="bold" />}
             variant="tertiary"
             disabled={isFetching}
             disabledReason={translate('Refreshing…')}
+            size="lg"
           />
         </div>
       )}

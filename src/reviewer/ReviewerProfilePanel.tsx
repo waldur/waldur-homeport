@@ -8,10 +8,9 @@ import {
   reviewerProfilesUnpublish,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
@@ -140,18 +139,20 @@ export const ReviewerProfilePanel = ({
                   {translate('Not published')}
                 </Badge>
               )}
-              <button
-                type="button"
-                className="btn btn-icon btn-sm btn-text-secondary"
+              <BaseButton
+                variant="text-secondary"
+                size="sm"
                 onClick={handleRefresh}
                 disabled={isRefreshing}
-              >
-                <ArrowsClockwiseIcon
-                  size={16}
-                  weight="bold"
-                  className={isRefreshing ? 'animation-spin' : ''}
-                />
-              </button>
+                disabledReason={translate('Refreshing...')}
+                iconNode={
+                  <ArrowsClockwiseIcon
+                    size={16}
+                    weight="bold"
+                    className={isRefreshing ? 'animation-spin' : ''}
+                  />
+                }
+              />
             </div>
             {profile.is_published && profile.published_at && (
               <span className="text-muted fw-normal fs-7">
@@ -166,20 +167,20 @@ export const ReviewerProfilePanel = ({
           <div className="d-flex flex-wrap align-items-center gap-3 ms-lg-auto">
             <ReviewerProfileAddDropdown profile={profile} />
             {profile.is_published ? (
-              <SubmitButton
-                type="button"
+              <BaseButton
                 variant="danger"
                 onClick={handleUnpublish}
-                submitting={isPublishing}
+                pending={isPublishing}
                 label={translate('Unpublish profile')}
+                size="lg"
               />
             ) : (
-              <SubmitButton
-                type="button"
+              <BaseButton
                 variant="primary"
                 onClick={handlePublish}
-                submitting={isPublishing}
+                pending={isPublishing}
                 label={translate('Publish profile')}
+                size="lg"
               />
             )}
           </div>

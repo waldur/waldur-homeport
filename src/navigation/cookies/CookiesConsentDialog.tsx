@@ -1,9 +1,10 @@
 import { CookieIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { Link } from '@/core/Link';
-import { SubmitButton } from '@/form';
 import { formatJsx, translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -58,29 +59,28 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
       footer={
         hasAnalyticalSoftware ? (
           <>
-            <SubmitButton
-              submitting={false}
+            <BaseButton
               onClick={resolve.acceptEssential}
               variant="tertiary"
               className="flex-equal"
-              type="button"
               label={translate('Deny analytical cookies')}
+              size="lg"
             />
-            <SubmitButton
-              submitting={false}
+            <BaseButton
               onClick={resolve.acceptAll}
               className="flex-equal"
-              type="button"
               label={translate('Accept all')}
+              variant="primary"
+              size="lg"
             />
           </>
         ) : (
-          <SubmitButton
-            submitting={false}
+          <BaseButton
             onClick={resolve.acceptAll}
             className="w-100"
-            type="button"
             label={translate('Accept & continue')}
+            variant="primary"
+            size="lg"
           />
         )
       }

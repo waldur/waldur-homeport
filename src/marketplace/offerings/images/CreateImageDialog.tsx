@@ -50,7 +50,8 @@ export const CreateImageDialog = (props: {
               <>
                 <CloseDialogButton className="flex-equal" />
                 <SubmitButton
-                  className="flex-equal btn btn-primary"
+                  variant="primary"
+                  className="flex-equal"
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Confirm')}

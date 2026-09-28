@@ -1,8 +1,9 @@
 import { ReactElement, ReactNode } from 'react';
 
+import { ButtonVariant, BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 import { ActionValidator } from './types';
 import { useValidators } from './useValidators';
@@ -12,10 +13,12 @@ interface AsyncActionButtonProps<T> {
   resource: T;
   validators?: ActionValidator<T>[];
   title: string;
+  label?: string;
   actionTitle?: string;
   icon?: string;
   iconNode?: ReactNode;
   className?: string;
+  variant?: ButtonVariant;
   hasConfirmation?: boolean;
   confirmationOptions?: {
     showRouterSelect?: boolean;
@@ -37,6 +40,7 @@ export const AsyncActionButton: <T extends { uuid?: string }>(
   ...rest
 }) => {
   const validationState = useValidators(validators, resource);
+  const label = rest.label ?? rest.title;
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: (variables) => apiMethod(resource.uuid, variables),
@@ -47,7 +51,7 @@ export const AsyncActionButton: <T extends { uuid?: string }>(
       ? {
           title: translate('Confirmation'),
           body: translate('Are you sure you want to {action}?', {
-            action: (actionTitle || rest.title).toLowerCase(),
+            action: (actionTitle || label || '').toLowerCase(),
           }),
           options: {
             iconNode: rest.iconNode,
@@ -57,15 +61,27 @@ export const AsyncActionButton: <T extends { uuid?: string }>(
         }
       : undefined,
   });
+
+  const {
+    title: _title,
+    label: _label,
+    icon: _icon,
+    variant,
+    ...cleanRest
+  } = rest;
+
   return (
-    <ActionButton
-      {...rest}
+    <BaseButton
+      {...cleanRest}
       {...validationState}
+      label={label}
       disabled={isPending || validationState.disabled}
       tooltip={
         isPending ? translate('Action is in progress') : validationState.tooltip
       }
-      action={(variables) => mutate(variables)}
+      onClick={(variables) => mutate(variables)}
+      variant={variant ?? 'tertiary'}
+      size="lg"
     />
   );
 };

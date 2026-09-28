@@ -4,10 +4,11 @@ import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { OpenStackFixedIp } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required, composeValidators } from '@/core/validators';
 import { StringField, FieldError } from '@/form';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 
@@ -48,22 +49,24 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
       </Field>
     </td>
     <td>
-      <CompactActionButton
-        title={translate('Remove')}
-        action={onRemove}
+      <BaseButton
+        label={translate('Remove')}
+        onClick={onRemove}
         iconNode={<TrashIcon weight="bold" />}
         variant="text-secondary"
+        size="sm"
       />
     </td>
   </tr>
 );
 
 const StaticRouteAddButton = ({ onClick }) => (
-  <CompactActionButton
-    title={translate('Add route')}
-    action={onClick}
+  <BaseButton
+    label={translate('Add route')}
+    onClick={onClick}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"
+    size="sm"
   />
 );
 

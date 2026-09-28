@@ -1,11 +1,11 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionButton } from '@/table/ActionButton';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { EditModalButtonProps } from './types';
 
@@ -15,7 +15,7 @@ import { EditModalButtonProps } from './types';
  * Reduces boilerplate by encapsulating the common pattern of:
  * - Creating a callback that opens a modal dialog with row data
  * - Passing resolve props and initialValues to the dialog
- * - Rendering an EditAction or ActionButton with the callback
+ * - Rendering an EditAction or BaseButton with the callback
  *
  * @example
  * ```tsx
@@ -77,16 +77,15 @@ export function EditModalButton<
   ]);
 
   if (renderAs === 'button') {
-    const ButtonComponent =
-      buttonSize === 'sm' ? CompactActionButton : ActionButton;
     return (
-      <ButtonComponent
-        action={handleClick}
-        title={title}
+      <BaseButton
+        onClick={handleClick}
+        label={title}
         iconNode={iconNode}
         variant="tertiary"
         disabled={disabled}
         tooltip={tooltip}
+        size={buttonSize}
       />
     );
   }

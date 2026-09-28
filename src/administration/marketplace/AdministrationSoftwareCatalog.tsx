@@ -9,6 +9,8 @@ import {
   overrideSettingsRetrieve,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -16,7 +18,6 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -62,11 +63,13 @@ const UpdateCatalogButton = ({
   });
 
   return (
-    <ActionButton
-      action={mutate}
-      title={translate('Update')}
+    <BaseButton
+      onClick={mutate}
+      label={translate('Update')}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
       pending={isPending}
+      variant="tertiary"
+      size="lg"
     />
   );
 };
@@ -131,10 +134,12 @@ const CatalogsTab = () => {
         <UpdateCatalogButton row={row} refetch={tableProps.fetch} />
       )}
       tableActions={
-        <ActionButton
-          action={openDiscover}
-          title={translate('Check for updates')}
+        <BaseButton
+          onClick={openDiscover}
+          label={translate('Check for updates')}
           iconNode={<ArrowsClockwiseIcon weight="bold" />}
+          variant="tertiary"
+          size="lg"
         />
       }
     />

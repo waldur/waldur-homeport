@@ -13,7 +13,7 @@ import { Card, Nav, Tab } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { BaseButton, Badge } from 'waldur-ui';
 
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
 import { ENV } from '@/core/config';
@@ -307,13 +307,16 @@ export const FeaturesList = () => {
                   {hiddenTabKeys.size > 0 && (
                     <RadixDropdownMenu.Root onOpenChange={updateOverflow}>
                       <RadixDropdownMenu.Trigger asChild>
-                        <button
-                          type="button"
-                          className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px flex-shrink-0"
+                        <BaseButton
+                          variant="text-secondary"
+                          size="md"
+                          className="flex-shrink-0"
                           style={{ marginBottom: 2 }}
-                        >
-                          <DotsThreeVerticalIcon size={22} weight="bold" />
-                        </button>
+                          tooltip={translate('More tabs')}
+                          iconNode={
+                            <DotsThreeVerticalIcon size={22} weight="bold" />
+                          }
+                        />
                       </RadixDropdownMenu.Trigger>
                       <RadixDropdownMenu.Portal>
                         <RadixDropdownMenu.Content
@@ -368,16 +371,17 @@ export const FeaturesList = () => {
                       })}
                     </span>
                     {tabsWithMatches.map((tab) => (
-                      <button
+                      <BaseButton
                         key={tab.key}
-                        type="button"
-                        className="btn btn-flush p-0"
+                        variant="tertiary-ghost"
+                        className="p-0"
                         onClick={() => handleSelect(tab.key)}
-                      >
-                        <Badge variant="neutral" size="sm" tone="outline">
-                          {tab.title} ({getFilteredCount(tab.key)})
-                        </Badge>
-                      </button>
+                        label={
+                          <Badge variant="neutral" size="sm" tone="outline">
+                            {tab.title} ({getFilteredCount(tab.key)})
+                          </Badge>
+                        }
+                      />
                     ))}
                   </div>
                 )}

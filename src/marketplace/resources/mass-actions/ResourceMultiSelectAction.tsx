@@ -1,5 +1,7 @@
 import { Resource } from 'waldur-js-client';
 
+import { ButtonSize } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import { ActionsDropdownSeparator } from '@/table/ActionsDropdown';
@@ -24,18 +26,18 @@ import { MultiUnlinkAction } from './MultiUnlinkAction';
 export const ResourceMultiSelectAction = ({
   rows,
   refetch,
-  className,
+  size,
 }: {
   rows: Resource[];
   refetch(): void;
-  className?: string;
+  size?: ButtonSize;
 }) => {
   const user = useUser();
   return (
     <ActionDropdownButton
       variant="primary"
       title={translate('All actions')}
-      className={className}
+      size={size}
     >
       <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
       <MultiChangeLimitsAction rows={rows} refetch={refetch} />

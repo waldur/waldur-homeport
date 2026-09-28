@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { AccordionCard } from '@/core/AccordionCard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -16,7 +18,6 @@ import { useCallFixedDuration } from '@/proposals/callQueries';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { isReviewInFinalState } from '@/proposals/utils';
-import { ActionButton } from '@/table/ActionButton';
 import { FormSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
@@ -189,20 +190,21 @@ export const ProposalDetails = ({
           panel
         />
         {isCallManagerView && review && !isReviewInFinalState(review.state) && (
-          <ActionButton
+          <BaseButton
             variant="primary"
-            action={() =>
+            onClick={() =>
               openDialog(SubmitReviewDialog, { resolve: { review, refetch } })
             }
             className="w-100 mt-2"
             iconNode={<PaperPlaneTiltIcon weight="bold" />}
-            title={translate('Submit review')}
+            label={translate('Submit review')}
+            size="lg"
           />
         )}
         {isCallManagerView && canCreateReview && (
-          <ActionButton
+          <BaseButton
             variant="secondary"
-            action={() =>
+            onClick={() =>
               openDialog(CreateManualAssignmentDialog, {
                 resolve: {
                   call: { uuid: proposal.call_uuid } as Call,
@@ -214,7 +216,8 @@ export const ProposalDetails = ({
             }
             className="w-100 mt-2"
             iconNode={<ChatTextIcon weight="bold" />}
-            title={translate('Create review')}
+            label={translate('Create review')}
+            size="lg"
           />
         )}
         {isCallManagerView && hasWorkflow && (

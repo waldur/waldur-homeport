@@ -82,7 +82,8 @@ export const CustomerCreateDialog: FC<OwnProps> = ({ resolve }) => {
                   submitting={submitting}
                   disabled={invalid}
                   label={translate('Create')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

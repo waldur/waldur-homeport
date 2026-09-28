@@ -1,7 +1,8 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { IconButton, MediumIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 /**
@@ -14,21 +15,23 @@ import { translate } from '@/i18n';
 export const DrawerCloseButton: FC<{ close: () => void }> = ({ close }) => (
   <>
     <span className="d-none d-md-inline-flex">
-      <MediumIconButton
+      <BaseButton
         iconNode={<XIcon weight="bold" />}
         tooltip={translate('Close')}
         onClick={close}
         variant="tertiary-ghost"
-        tooltipPlacement="bottom"
+        tooltipSide="bottom"
+        size="md"
       />
     </span>
     <span className="d-inline-flex d-md-none">
-      <IconButton
+      <BaseButton
         iconNode={<XIcon weight="bold" />}
         tooltip={translate('Close')}
         onClick={close}
         variant="tertiary-ghost"
-        tooltipPlacement="bottom"
+        tooltipSide="bottom"
+        size="lg"
       />
     </span>
   </>

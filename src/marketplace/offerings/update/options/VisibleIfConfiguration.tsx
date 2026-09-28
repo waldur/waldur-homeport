@@ -3,11 +3,12 @@ import { FC, useMemo } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { OfferingOptions } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { FormGroup } from '@/form';
 import { FieldError } from '@/form/FieldError';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { getVisibleIfCandidates } from './validation';
@@ -175,11 +176,12 @@ export const VisibleIfConfiguration: FC<VisibleIfConfigurationProps> = ({
       ) : (
         // Same control the other in-dialog row adders use (checklist answer
         // options, cascade steps): compact, text-primary, plus icon.
-        <CompactActionButton
-          action={() =>
+        <BaseButton
+          size="sm"
+          onClick={() =>
             form.change('visible_if', { field: undefined, values: [] })
           }
-          title={translate('Add rule')}
+          label={translate('Add rule')}
           iconNode={<PlusIcon weight="bold" />}
           variant="text-primary"
         />

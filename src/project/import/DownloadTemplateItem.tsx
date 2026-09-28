@@ -1,7 +1,7 @@
 import { DownloadSimpleIcon, FileCsvIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { CompactActionButton } from '@/table/CompactActionButton';
+import { BaseButton } from 'waldur-ui';
 
 interface DownloadTemplateItemProps {
   name: string;
@@ -26,11 +26,12 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
         <p className="fs-6 text-muted mb-0">{props.size}</p>
       </div>
       <div>
-        <CompactActionButton
-          action={props.onClick}
+        <BaseButton
+          onClick={props.onClick}
           iconNode={<DownloadSimpleIcon weight="bold" />}
           iconRight
-          variant="link"
+          variant="text-primary"
+          size="sm"
         />
       </div>
     </div>

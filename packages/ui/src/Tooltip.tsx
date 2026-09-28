@@ -44,6 +44,26 @@ export interface TooltipProps extends Omit<
    * - `'click'`: Opens on click and dismisses on outside click or Escape using Radix Popover.
    */
   trigger?: 'hover' | 'click';
+  /**
+   * Keeps the full Radix `Provider`/`Root`/`Trigger` structure mounted even
+   * on a render where `label` is currently falsy, instead of falling back
+   * to the bare `Slot` passthrough below. Only `hover` mode honors this
+   * (`click` always needs `label` to have anything to open).
+   *
+   * Use this when the SAME logical element's `label` toggles between empty
+   * and a real value across renders — e.g. a tooltip that only applies
+   * while its trigger is disabled. Without it, the element this wraps
+   * unmounts and remounts every time `label` flips from falsy to truthy
+   * (or back): `Slot` and the full Radix structure are different component
+   * trees at the same position, so React discards and recreates whatever
+   * `children` resolves to rather than reconciling it — losing focus and
+   * invalidating any ref/DOM-node identity held on it. Confirmed via an
+   * isolated RTL repro: capture the child via `getByRole`, toggle `label`
+   * from empty to set, and the captured node's `isConnected` goes false.
+   * Not needed when `label` is either always present or always absent for
+   * a given call site — only when it toggles.
+   */
+  alwaysMount?: boolean;
 }
 
 /**
@@ -131,11 +151,12 @@ export const Tooltip = forwardRef<HTMLButtonElement, TooltipProps>(
       zIndex = 1180,
       delayDuration = 200,
       trigger = 'hover',
+      alwaysMount,
       ...rest
     },
     ref,
   ) => {
-    if (!label)
+    if (!label && !(alwaysMount && trigger === 'hover'))
       return (
         <Slot ref={ref} className={className} {...rest}>
           {children}
@@ -189,20 +210,22 @@ export const Tooltip = forwardRef<HTMLButtonElement, TooltipProps>(
           >
             {children}
           </TooltipPrimitive.Trigger>
-          <TooltipPrimitive.Portal>
-            <TooltipPrimitive.Content
-              id={id}
-              side={side}
-              sideOffset={8}
-              style={{ zIndex }}
-              className={bubbleClassName}
-            >
-              {bubbleChildren(label, body)}
-              <TooltipPrimitive.Arrow asChild>
-                {bubbleArrow(theme)}
-              </TooltipPrimitive.Arrow>
-            </TooltipPrimitive.Content>
-          </TooltipPrimitive.Portal>
+          {label && (
+            <TooltipPrimitive.Portal>
+              <TooltipPrimitive.Content
+                id={id}
+                side={side}
+                sideOffset={8}
+                style={{ zIndex }}
+                className={bubbleClassName}
+              >
+                {bubbleChildren(label, body)}
+                <TooltipPrimitive.Arrow asChild>
+                  {bubbleArrow(theme)}
+                </TooltipPrimitive.Arrow>
+              </TooltipPrimitive.Content>
+            </TooltipPrimitive.Portal>
+          )}
         </TooltipPrimitive.Root>
       </TooltipPrimitive.Provider>
     );

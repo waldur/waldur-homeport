@@ -1,14 +1,16 @@
 import { PrinterIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 
 export const ExportOrderComponentsButton: FunctionComponent = () => (
-  <ActionButton
+  <BaseButton
     variant="tertiary"
-    action={() => window.print()}
+    onClick={() => window.print()}
     iconNode={<PrinterIcon weight="bold" />}
-    title={translate('Print PDF')}
+    label={translate('Print PDF')}
+    size="lg"
   />
 );

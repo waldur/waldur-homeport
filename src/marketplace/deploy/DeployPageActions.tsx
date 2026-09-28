@@ -2,29 +2,20 @@ import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { forwardRef } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
-/**
- * forwardRef for the asChild Trigger below — see ActionsDropdown.tsx's
- * TableDropdownToggle for the general requirement. Reproduces the exact
- * classes react-bootstrap's `Dropdown.Toggle variant="light"
- * bsPrefix="btn-icon bg-body"` rendered — empirically confirmed via RTL
- * (`btn-icon bg-body btn btn-light`, with no `dropdown-toggle` class:
- * overriding `bsPrefix` replaces DropdownToggle's own base class entirely,
- * and Button never receives that bsPrefix so it applies its own default
- * "btn" prefix independently), not reconstructed from reading the
- * component source alone.
- */
+/** forwardRef for the asChild Trigger below — see ActionsDropdown.tsx's TableDropdownToggle for the general requirement. */
 const DeployPageActionsToggle = forwardRef<HTMLButtonElement>((props, ref) => (
-  <button
+  <BaseButton
     ref={ref}
-    type="button"
-    className="btn-icon bg-body btn btn-light"
+    variant="tertiary"
+    tooltip={translate('Actions')}
+    iconNode={<DotsThreeVerticalIcon weight="bold" />}
     {...props}
-  >
-    <DotsThreeVerticalIcon weight="bold" />
-  </button>
+  />
 ));
 DeployPageActionsToggle.displayName = 'DeployPageActionsToggle';
 

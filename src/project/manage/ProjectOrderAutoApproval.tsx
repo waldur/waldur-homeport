@@ -7,7 +7,7 @@ import {
   marketplaceProjectOrderAutoApprovalsList,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -21,7 +21,6 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -131,10 +130,12 @@ export const ProjectOrderAutoApproval: FC<ProjectOrderAutoApprovalProps> = ({
       className="card-bordered"
       actions={
         canManage ? (
-          <ActionButton
-            title={rule ? translate('Edit') : translate('Configure')}
+          <BaseButton
+            label={rule ? translate('Edit') : translate('Configure')}
             iconNode={<PencilSimpleIcon weight="bold" />}
-            action={openEditor}
+            onClick={openEditor}
+            variant="tertiary"
+            size="lg"
           />
         ) : undefined
       }

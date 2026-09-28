@@ -6,6 +6,8 @@ export const OrderDetailsLink: FunctionComponent<any> = (props) => (
   <Link
     state="marketplace-orders.details"
     params={{ order_uuid: props.order_uuid }}
+    buttonVariant={props.buttonVariant}
+    buttonSize={props.buttonSize}
     className={props.className}
     onClick={props.onClick}
   >

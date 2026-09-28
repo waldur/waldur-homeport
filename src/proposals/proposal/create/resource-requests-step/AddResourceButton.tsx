@@ -1,7 +1,8 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';

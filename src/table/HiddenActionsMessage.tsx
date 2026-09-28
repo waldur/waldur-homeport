@@ -1,7 +1,7 @@
 import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { FeaturedIcon } from 'waldur-ui';
+import { BaseButton, FeaturedIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -38,13 +38,12 @@ export const HiddenActionsMessage: FunctionComponent<
         </button>
       </div>
       <div className="ms-auto">
-        <button
-          type="button"
-          className="btn btn-sm btn-icon btn-text-secondary"
+        <BaseButton
+          variant="text-secondary"
+          size="sm"
           onClick={close}
-        >
-          <XIcon size={18} weight="bold" />
-        </button>
+          iconNode={<XIcon size={18} weight="bold" />}
+        />
       </div>
     </div>
   );

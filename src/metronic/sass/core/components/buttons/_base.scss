@@ -1,140 +1,18 @@
 //
 // Buttons Base
 //
+// The Bootstrap/Metronic `.btn` component is gone: every button is rendered by
+// BaseButton (or `buttonVariants()`) from waldur-ui, which style themselves
+// with Tailwind and the design tokens. Only this standalone helper remains,
+// because callers still pass it as a plain `className`.
 
-// Button
-.btn {
-  // Not `!important`: in `.btn-check + .btn` toggle groups the focus sits on the
-  // sibling input, so the label matches this and would lose its ring.
+// No-focus is a standalone selector, not nested under `.btn` —
+// BaseButton-based buttons pass this as a plain `className` override and
+// don't carry the literal `.btn` class.
+.btn-no-focus {
+  box-shadow: none !important;
+
   &:not(:focus-visible) {
-    outline: none;
-  }
-
-  // Baseline ring for variants that declare none of their own (e.g. .btn-link).
-  // An `outline`, so no `box-shadow` reset can suppress it (WCAG 2.4.7).
-  &:focus-visible {
-    outline: $focus-ring-width solid $focus-ring-primary;
-    outline-offset: $focus-ring-offset;
-  }
-
-  // Reset focus shadow. The `:not(:focus)` exemption that used to be here
-  // existed for the ring; now the ring is an outline, it only let Bootstrap's
-  // own `.btn:focus` glow paint underneath.
-  &:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(
-      .btn-outline.show
-    ) {
-    box-shadow: none !important;
-  }
-
-  // Link
-  &.btn-link {
-    border: 0;
-    border-radius: 0;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    color: $brand;
-    font-weight: $btn-font-weight;
-    text-align: left;
-
-    box-shadow: none !important;
-
-    &:focus,
-    &:hover {
-      text-decoration: underline !important;
-    }
-
-    // Link icon
-    i {
-      color: $brand;
-    }
-    .svg-icon {
-      @include svg-icon-color($brand);
-    }
-    &.dropdown-toggle:after {
-      color: $brand;
-    }
-  }
-
-  // No focus
-  &.btn-no-focus {
-    box-shadow: none !important;
-
-    &:not(:focus-visible) {
-      outline: none !important;
-    }
-  }
-
-  // Flush
-  &.btn-flush {
-    @include button-reset();
-  }
-
-  // Flex
-  &.btn-flex {
-    display: inline-flex;
-    align-items: center;
-  }
-}
-
-// Icons
-.btn {
-  // Default font-size for all buttons
-  &:not(.btn-lg) {
-    font-size: 14px;
-  }
-
-  // Font icon
-  i {
-    display: inline-flex;
-    font-size: $font-size-base;
-    margin: 0.35rem;
-    vertical-align: middle;
-    line-height: 0;
-  }
-  &:not(.btn-icon).btn-icon-right {
-    .svg-icon:last-child,
-    i:last-child {
-      margin: 0;
-      margin-left: 0.35rem;
-    }
-  }
-
-  // Svg icon
-  .svg-icon {
-    flex-shrink: 0;
-    line-height: 0;
-    margin-right: 0.5rem;
-  }
-
-  // Icon only button
-  &.btn-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    height: $input-height;
-    width: $input-height;
-
-    // Sizes
-    &.btn-sm {
-      height: $input-height-sm;
-      width: $input-height-sm;
-    }
-
-    &.btn-lg {
-      height: $input-height-lg;
-      width: $input-height-lg;
-    }
-
-    &.btn-circle {
-      border-radius: 50%;
-    }
-
-    i,
-    .svg-icon {
-      padding: 0;
-      margin: 0;
-      line-height: 1;
-    }
+    outline: none !important;
   }
 }

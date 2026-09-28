@@ -146,7 +146,8 @@ export const CostPolicyFormDialog: FC<CostPolicyFormDialogProps> = (props) => {
                   disabled={invalid || !dirty}
                   submitting={submitting}
                   label={isEdit ? translate('Edit') : translate('Create')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

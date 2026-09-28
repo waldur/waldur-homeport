@@ -15,14 +15,11 @@
  * Visible to staff and support users only (via route permissions).
  */
 
-/* eslint-disable waldur-custom/no-direct-bootstrap-button */
 import { FileXlsIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import {
-  Button,
-  ButtonGroup,
   Card,
   Col,
   Container,
@@ -38,8 +35,13 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  SegmentedControl,
+  Tooltip,
+} from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -80,6 +82,51 @@ const daysBetween = (a: DateTime, b: DateTime): number =>
 
 type ChartType = 'bar' | 'line';
 type GroupBy = 'day' | 'month';
+
+interface ToggleProps<T extends string> {
+  value: T;
+  onChange: (value: T) => void;
+  className?: string;
+}
+
+// Both cards (burn-down and consumption) offer the same two switchers.
+const GroupByToggle: FC<ToggleProps<GroupBy>> = ({
+  value,
+  onChange,
+  className,
+}) => (
+  <SegmentedControl<GroupBy>
+    aria-label={translate('Interval')}
+    size="sm"
+    variant="brand"
+    className={className}
+    options={[
+      { value: 'day', label: translate('Day') },
+      { value: 'month', label: translate('Month') },
+    ]}
+    value={value}
+    onValueChange={onChange}
+  />
+);
+
+const ChartTypeToggle: FC<ToggleProps<ChartType>> = ({
+  value,
+  onChange,
+  className,
+}) => (
+  <SegmentedControl<ChartType>
+    aria-label={translate('Chart type')}
+    size="sm"
+    variant="brand"
+    className={className}
+    options={[
+      { value: 'bar', label: translate('Bar') },
+      { value: 'line', label: translate('Line') },
+    ]}
+    value={value}
+    onValueChange={onChange}
+  />
+);
 
 /**
  * Compute remaining credits for a project at a given reference date.
@@ -552,16 +599,24 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" size="sm" onClick={onClose}>
-          {translate('Cancel')}
-        </Button>
-        <Button variant="primary" size="sm" onClick={() => onConfirm(draft)}>
-          {draft.size === 1
-            ? translate('Apply')
-            : translate('Apply ({count} projects)', {
-                count: draft.size,
-              })}
-        </Button>
+        <BaseButton
+          variant="secondary"
+          size="sm"
+          onClick={onClose}
+          label={translate('Cancel')}
+        />
+        <BaseButton
+          variant="primary"
+          size="sm"
+          onClick={() => onConfirm(draft)}
+          label={
+            draft.size === 1
+              ? translate('Apply')
+              : translate('Apply ({count} projects)', {
+                  count: draft.size,
+                })
+          }
+        />
       </Modal.Footer>
     </Modal>
   );
@@ -994,13 +1049,12 @@ export const OrganisationAllocationTab: FC = () => {
                     : translate('project'),
               })}
             </span>
-            <Button
+            <BaseButton
               variant="primary"
               size="sm"
               onClick={() => setDialogOpen(true)}
-            >
-              {translate('Filter selected projects')}
-            </Button>
+              label={translate('Filter selected projects')}
+            />
           </div>
         )}
 
@@ -1016,7 +1070,7 @@ export const OrganisationAllocationTab: FC = () => {
                 </span>
               ) : null;
             })()}
-            <Button
+            <BaseButton
               variant="secondary"
               size="sm"
               onClick={() => {
@@ -1029,19 +1083,17 @@ export const OrganisationAllocationTab: FC = () => {
                 refetchProjects();
                 if (loadTriggered) refetchSummaries();
               }}
-            >
-              {translate('Refresh')}
-            </Button>
-            <Button
+              label={translate('Refresh')}
+            />
+            <BaseButton
               variant="secondary"
               size="sm"
               onClick={() => {
                 setShowLoadPrompt(true);
                 setLoadTriggered(false);
               }}
-            >
-              {translate('Load new data…')}
-            </Button>
+              label={translate('Load new data…')}
+            />
           </div>
         )}
       </div>
@@ -1129,16 +1181,15 @@ export const OrganisationAllocationTab: FC = () => {
               </Col>
             </Row>
 
-            <Button
+            <BaseButton
               variant="primary"
               size="sm"
               onClick={() => {
                 setLoadTriggered(true);
                 setShowLoadPrompt(false);
               }}
-            >
-              {translate('Load data')}
-            </Button>
+              label={translate('Load data')}
+            />
           </Card.Body>
         </Card>
       )}
@@ -1165,13 +1216,12 @@ export const OrganisationAllocationTab: FC = () => {
             'To speed things up: use the project search or date filters to load fewer projects.',
           )}
           actions={
-            <Button
+            <BaseButton
               variant="warning"
               size="sm"
               onClick={() => window.location.reload()}
-            >
-              {translate('Cancel & reload')}
-            </Button>
+              label={translate('Cancel & reload')}
+            />
           }
         />
       )}
@@ -1240,35 +1290,12 @@ export const OrganisationAllocationTab: FC = () => {
 
             {chartOptions && (
               <>
-                <ButtonGroup size="sm" className="ms-auto">
-                  <Button
-                    variant={groupBy === 'day' ? 'primary' : 'secondary'}
-                    onClick={() => setGroupBy('day')}
-                  >
-                    {translate('Day')}
-                  </Button>
-                  <Button
-                    variant={groupBy === 'month' ? 'primary' : 'secondary'}
-                    onClick={() => setGroupBy('month')}
-                  >
-                    {translate('Month')}
-                  </Button>
-                </ButtonGroup>
-
-                <ButtonGroup size="sm">
-                  <Button
-                    variant={chartType === 'bar' ? 'primary' : 'secondary'}
-                    onClick={() => setChartType('bar')}
-                  >
-                    {translate('Bar')}
-                  </Button>
-                  <Button
-                    variant={chartType === 'line' ? 'primary' : 'secondary'}
-                    onClick={() => setChartType('line')}
-                  >
-                    {translate('Line')}
-                  </Button>
-                </ButtonGroup>
+                <GroupByToggle
+                  className="ms-auto"
+                  value={groupBy}
+                  onChange={setGroupBy}
+                />
+                <ChartTypeToggle value={chartType} onChange={setChartType} />
               </>
             )}
 
@@ -1321,43 +1348,15 @@ export const OrganisationAllocationTab: FC = () => {
 
             {consumptionOptions && (
               <>
-                <ButtonGroup size="sm" className="ms-auto">
-                  <Button
-                    variant={
-                      consumptionGroupBy === 'day' ? 'primary' : 'secondary'
-                    }
-                    onClick={() => setConsumptionGroupBy('day')}
-                  >
-                    {translate('Day')}
-                  </Button>
-                  <Button
-                    variant={
-                      consumptionGroupBy === 'month' ? 'primary' : 'secondary'
-                    }
-                    onClick={() => setConsumptionGroupBy('month')}
-                  >
-                    {translate('Month')}
-                  </Button>
-                </ButtonGroup>
-
-                <ButtonGroup size="sm">
-                  <Button
-                    variant={
-                      consumptionChartType === 'bar' ? 'primary' : 'secondary'
-                    }
-                    onClick={() => setConsumptionChartType('bar')}
-                  >
-                    {translate('Bar')}
-                  </Button>
-                  <Button
-                    variant={
-                      consumptionChartType === 'line' ? 'primary' : 'secondary'
-                    }
-                    onClick={() => setConsumptionChartType('line')}
-                  >
-                    {translate('Line')}
-                  </Button>
-                </ButtonGroup>
+                <GroupByToggle
+                  className="ms-auto"
+                  value={consumptionGroupBy}
+                  onChange={setConsumptionGroupBy}
+                />
+                <ChartTypeToggle
+                  value={consumptionChartType}
+                  onChange={setConsumptionChartType}
+                />
               </>
             )}
 
@@ -1492,14 +1491,13 @@ export const OrganisationAllocationTab: FC = () => {
                 }
               </Badge>
             )}
-            <Button
+            <BaseButton
               variant={showThresholds ? 'primary' : 'secondary'}
               size="sm"
               className="ms-auto"
               onClick={() => setShowThresholds((v: boolean) => !v)}
-            >
-              {translate('Thresholds')}
-            </Button>
+              label={translate('Thresholds')}
+            />
           </Card.Header>
 
           <Card.Body>

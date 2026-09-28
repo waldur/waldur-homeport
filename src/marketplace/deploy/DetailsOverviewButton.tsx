@@ -1,9 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const DetailsOverviewDialog = lazyComponent(() =>
   import('./DetailsOverviewDialog').then((module) => ({
@@ -26,12 +27,12 @@ export const DetailsOverviewButton = ({
 }: OwnProps) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
+    <BaseButton
       variant="tertiary"
       className={className}
       disabled={!offering}
       disabledReason={translate('Offering information is not available')}
-      action={() =>
+      onClick={() =>
         openDialog(DetailsOverviewDialog, {
           offering,
           customer,
@@ -40,7 +41,8 @@ export const DetailsOverviewButton = ({
         })
       }
       iconNode={<EyeIcon weight="bold" />}
-      title={translate('More details')}
+      label={translate('More details')}
+      size="lg"
     />
   );
 };

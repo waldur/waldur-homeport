@@ -4,7 +4,7 @@ import { Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@/core/api';
-import { SubmitButton, BooleanGroup } from '@/form';
+import { BooleanGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 import { useModal } from '@/modal/actions';
@@ -138,7 +138,6 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                 className="flex-equal"
                 onClick={handleSubmit}
                 disabled={pristine}
-                type="button"
                 label={translate('Save')}
               />
             </>

@@ -1,10 +1,11 @@
 import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useForm } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 import { FormStepProps } from '../deploy/types';
 
@@ -30,10 +31,10 @@ export const OrderSummaryButton = ({
   const { openDialog } = useModal();
   const form = useForm();
   return (
-    <ActionButton
+    <BaseButton
       variant="tertiary"
       className={className}
-      action={() =>
+      onClick={() =>
         openDialog(OrderSummaryDialog, {
           offering,
           formValues: form.getState().values,
@@ -42,8 +43,9 @@ export const OrderSummaryButton = ({
       }
       disabled={disabled}
       disabledReason={disabledReason}
-      title={label}
+      label={label}
       iconNode={<ClipboardTextIcon weight="bold" />}
+      size="lg"
     />
   );
 };

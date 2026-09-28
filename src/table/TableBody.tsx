@@ -17,7 +17,7 @@ import React, {
 import { FormCheck } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { FieldErrorMessage } from '@/form/FieldError';
@@ -85,45 +85,45 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
     filterConfig.setFilter(value);
     changeFilterValue(column.filter, value);
     apply();
-    // Metronic's own dropdown closed on any non-trigger row click by
-    // default; the context `apply` this calls (FilterContextProvider's
-    // base one, not TableFiltersMenu's override — this button isn't
-    // nested inside that menu) does no closing of its own, so it's done
-    // explicitly here instead.
+    // Close the popover explicitly on selection, as context apply does
+    // not handle popover state.
     setOpen(false);
   }, [filterComponents, column, row, changeFilterValue, apply]);
 
   return (
-    <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
-      <RadixPopover.Trigger asChild>
-        <button
-          type="button"
-          className="inline-filter btn btn-icon btn-sm btn-tertiary icon-align"
-          aria-label={translate('Add filter')}
+    // `.inline-filter-anchor` carries the absolute hover-reveal positioning;
+    // the actual `.inline-filter` trigger button stays a normal in-flow element
+    // inside it so BaseButton's tooltip wrapper span sizes correctly around it.
+    <span className="inline-filter-anchor">
+      <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
+        <RadixPopover.Trigger asChild>
+          <BaseButton
+            variant="text-secondary"
+            size="sm"
+            className="inline-filter icon-align"
+            tooltip={translate('Add filter')}
+            iconNode={<FunnelSimpleIcon weight="bold" size={20} />}
+          />
+        </RadixPopover.Trigger>
+        <PopoverMenuContent
+          placement="bottom-start"
+          className="menu menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
         >
-          <Tooltip label={translate('Add filter')} delayDuration={1000}>
-            <FunnelSimpleIcon weight="bold" size={20} />
-          </Tooltip>
-        </button>
-      </RadixPopover.Trigger>
-      <PopoverMenuContent
-        placement="bottom-start"
-        className="menu menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
-      >
-        <div className="menu-item">
-          <button
-            type="button"
-            className="menu-link px-5 py-3"
-            onClick={callback}
-          >
-            <span className="menu-icon w-auto me-4">
-              <SquareLogoIcon weight="bold" size={20} />
-            </span>
-            <span className="menu-title">{translate('Filter by')}</span>
-          </button>
-        </div>
-      </PopoverMenuContent>
-    </RadixPopover.Root>
+          <div className="menu-item">
+            <button
+              type="button"
+              className="menu-link px-5 py-3"
+              onClick={callback}
+            >
+              <span className="menu-icon w-auto me-4">
+                <SquareLogoIcon weight="bold" size={20} />
+              </span>
+              <span className="menu-title">{translate('Filter by')}</span>
+            </button>
+          </div>
+        </PopoverMenuContent>
+      </RadixPopover.Root>
+    </span>
   );
 });
 

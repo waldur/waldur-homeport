@@ -21,7 +21,7 @@ import {
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -29,13 +29,7 @@ import { Panel } from '@/core/Panel';
 import { SaveButton } from '@/core/SaveButton';
 import { composeValidators, required, validateEmails } from '@/core/validators';
 import { policyPeriodOptions } from '@/customer/cost-policies/utils';
-import {
-  SubmitButton,
-  SelectGroup,
-  StringGroup,
-  BooleanGroup,
-  NumberGroup,
-} from '@/form';
+import { SelectGroup, StringGroup, BooleanGroup, NumberGroup } from '@/form';
 import { MultiSelectValue } from '@/form/select';
 import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
@@ -99,16 +93,13 @@ const EvaluateButton: FC<{ policyUuid: string }> = ({ policyUuid }) => {
   }
 
   return (
-    <SubmitButton
-      variant="outline-warning"
+    <BaseButton
+      variant="warning"
       onClick={openEvaluate}
-      submitting={false}
-      type="button"
       iconNode={<PlayIcon weight="bold" />}
-      iconOnLeft
-    >
-      {translate('Evaluate')}
-    </SubmitButton>
+      label={translate('Evaluate')}
+      size="lg"
+    />
   );
 };
 
@@ -664,15 +655,19 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               {existingPolicy && (
                 <EvaluateButton policyUuid={existingPolicy.uuid} />
               )}
-              <SubmitButton
+              <BaseButton
                 variant="secondary"
                 onClick={() => form.reset()}
                 disabled={pristine}
-                submitting={isSubmitting}
-                type="button"
-              >
-                {translate('Reset')}
-              </SubmitButton>
+                disabledReason={
+                  pristine
+                    ? translate('There are no changes to reset')
+                    : undefined
+                }
+                pending={isSubmitting}
+                label={translate('Reset')}
+                size="lg"
+              />
               <SaveButton
                 onClick={handleSubmit}
                 submitting={isSubmitting}

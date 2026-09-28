@@ -11,7 +11,8 @@ import {
   PatchedOfferingMergeRequest,
 } from 'waldur-js-client';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';

@@ -2,11 +2,12 @@ import { CheckCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { openportalManagedProjectsApprove } from 'waldur-js-client';
 
+import { Tooltip } from 'waldur-ui';
+
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { wrapTooltip } from '@/table/ActionButton';
 
 export const ApproveManagedProjectButton = ({
   row,
@@ -33,8 +34,7 @@ export const ApproveManagedProjectButton = ({
     return null;
   }
 
-  return wrapTooltip(
-    translate('Click to approve this project.'),
+  const content = (
     <>
       {isLoading ? (
         <LoadingSpinnerSimple className="me-1" />
@@ -49,6 +49,12 @@ export const ApproveManagedProjectButton = ({
           size="sm"
         />
       )}
-    </>,
+    </>
+  );
+
+  return (
+    <Tooltip label={translate('Click to approve this project.')}>
+      <span>{content}</span>
+    </Tooltip>
   );
 };

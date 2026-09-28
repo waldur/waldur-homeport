@@ -26,7 +26,7 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -359,24 +359,25 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
               <Nav variant="tabs" className="nav-line-tabs mb-4">
                 <Nav.Item>
                   <RadixDropdownMenu.Root>
-                    <RadixDropdownMenu.Trigger asChild>
-                      <button
-                        type="button"
-                        className="btn dropdown-toggle btn-text-secondary btn-icon no-arrow w-35px h-35px position-relative"
-                      >
-                        <DotsThreeIcon size={22} weight="bold" />
-                        {wrappedComponents.some((comp) =>
-                          Boolean(errors.components?.[comp.type]),
-                        ) && (
-                          <HeaderButtonBullet
-                            size={10}
-                            blink={false}
-                            variant="danger"
-                            className="me-n2"
-                          />
-                        )}
-                      </button>
-                    </RadixDropdownMenu.Trigger>
+                    <div className="position-relative d-inline-flex">
+                      <RadixDropdownMenu.Trigger asChild>
+                        <BaseButton
+                          variant="text-secondary"
+                          size="md"
+                          iconNode={<DotsThreeIcon size={22} weight="bold" />}
+                        />
+                      </RadixDropdownMenu.Trigger>
+                      {wrappedComponents.some((comp) =>
+                        Boolean(errors.components?.[comp.type]),
+                      ) && (
+                        <HeaderButtonBullet
+                          size={10}
+                          blink={false}
+                          variant="danger"
+                          className="me-n2"
+                        />
+                      )}
+                    </div>
                     <RadixDropdownMenu.Portal>
                       <RadixDropdownMenu.Content
                         sideOffset={2}

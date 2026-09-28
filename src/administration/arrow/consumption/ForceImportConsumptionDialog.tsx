@@ -6,7 +6,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { BaseButton, AlertItem, Badge } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { SubmitButton } from '@/form';
@@ -345,14 +345,13 @@ export const ForceImportConsumptionDialog = ({
     if (phase === 'preview') {
       return (
         <>
-          <button
-            type="button"
-            className="btn btn-secondary"
+          <BaseButton
+            variant="secondary"
             onClick={() => setPhase('form')}
             disabled={importMutation.isPending}
-          >
-            {translate('Back')}
-          </button>
+            disabledReason={translate('Import is already in progress')}
+            label={translate('Back')}
+          />
           <CloseDialogButton label={translate('Cancel')} />
           <SubmitButton
             submitting={importMutation.isPending}

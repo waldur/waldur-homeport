@@ -5,7 +5,7 @@ import { FC, ReactNode } from 'react';
 import { FieldRenderProps } from 'react-final-form';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -81,16 +81,15 @@ const BaseFlatpickrField: FC<BaseFlatpickrFieldProps> = ({
       />
 
       {value && typeof value === 'string' && !disabled ? (
-        <button
-          type="button"
-          className="btn btn-icon btn-circle btn-color-muted w-25px h-25px bg-body shadow end-button"
+        <BaseButton
+          variant="tertiary"
+          size="sm"
+          className="rounded-full bg-body shadow end-button"
           onClick={() => onChange?.(null)}
           style={{ position: 'absolute', right: 10, top: 10 }}
-        >
-          <Tooltip label={translate('Remove')}>
-            <XIcon weight="bold" className="w-100 svg-icon svg-icon-2" />
-          </Tooltip>
-        </button>
+          tooltip={translate('Remove')}
+          iconNode={<XIcon weight="bold" />}
+        />
       ) : (
         <span
           className="svg-icon svg-icon-2 svg-icon-gray-500"

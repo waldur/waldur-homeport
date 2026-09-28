@@ -1,10 +1,11 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 const ComponentUsageImportDialog = lazyComponent(() =>
@@ -29,15 +30,17 @@ export const ComponentUsageImportButton: FC<
   }
 
   return (
-    <ActionButton
-      title={translate('Import usage')}
-      action={() =>
+    <BaseButton
+      label={translate('Import usage')}
+      onClick={() =>
         openDialog(ComponentUsageImportDialog, {
           size: 'lg',
           resolve: { refetch },
         })
       }
       iconNode={<UploadSimpleIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

@@ -31,17 +31,6 @@ describe('no-bootstrap-button-markup', () => {
       // Nothing static to read.
       { code: 'const A = ({ c }) => <button className={c} />;' },
       { code: 'const A = ({ v }) => <button className={`btn-${v}`} />;' },
-      // The wrappers themselves.
-      {
-        code: 'const A = () => <button className="btn" />;',
-        filename: 'src/core/buttons/BaseButton.tsx',
-      },
-      // Link composes `btn` behind its buttonVariant prop, so it is allowlisted
-      // even though the shape below is otherwise a violation.
-      {
-        code: "const A = ({ v }) => <a className={classNames(v && 'btn btn-' + v)} />;",
-        filename: 'src/core/Link.tsx',
-      },
     ],
     invalid: [
       {
@@ -71,8 +60,7 @@ describe('no-bootstrap-button-markup', () => {
         code: 'const A = ({ on }) => <button className={on ? "btn" : "link"} />;',
         errors: [{ messageId: 'noBootstrapButtonMarkup' }],
       },
-      // String concatenation contributes its literal halves — this is the
-      // shape Link.tsx uses, so the allowlist above has to be doing the work.
+      // String concatenation contributes its literal halves.
       {
         code: "const A = ({ v }) => <a className={classNames(v && 'btn btn-' + v)} />;",
         errors: [{ messageId: 'noBootstrapButtonMarkup' }],

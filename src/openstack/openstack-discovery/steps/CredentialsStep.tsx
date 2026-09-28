@@ -5,13 +5,13 @@ import { openstackDiscoveryValidateCredentials } from 'waldur-js-client';
 import { AlertItem } from 'waldur-ui';
 
 import {
+  SubmitButton,
   StringGroup,
   SelectGroup,
   SecretGroup,
   BooleanGroup,
   TextGroup,
 } from '@/form';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -72,7 +72,6 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         disabled={!isFormValid()}
         label={translate('Validate & Continue')}
         onClick={validateAndContinue}
-        type="button"
         data-testid="discovery-validate-btn"
       />
     </>

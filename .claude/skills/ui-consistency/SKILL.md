@@ -20,10 +20,13 @@ import { renderFieldOrDash } from '@/table/utils';
 ### Disabled Buttons
 
 ```tsx
-// ALWAYS provide tooltip explaining WHY disabled
-<Tip label={disabled ? translate('Resource must be in OK state') : null}>
-  <Button disabled={disabled}>Action</Button>
-</Tip>
+// ALWAYS provide a reason explaining WHY disabled — prefer BaseButton's own
+// disabledReason prop over wrapping it in a separate Tooltip
+<BaseButton
+  disabled={disabled}
+  disabledReason={disabled ? translate('Resource must be in OK state') : undefined}
+  label={translate('Action')}
+/>
 ```
 
 ### Empty States
@@ -94,7 +97,7 @@ Before completing UI work, verify:
 ```tsx
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { renderFieldOrDash } from '@/table/utils';
-import { Tip } from '@/core/Tooltip';
+import { BaseButton, Tooltip } from 'waldur-ui';
 import { hasPermission } from '@/permissions/hasPermission';
 import { StateIndicator } from '@/core/StateIndicator';
 import { LoadingErred } from '@/core/LoadingErred';

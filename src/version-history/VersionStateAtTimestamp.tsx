@@ -5,6 +5,8 @@ import { Form } from 'react-bootstrap';
 import Flatpickr from 'react-flatpickr';
 import { VersionHistory } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
 import { translate } from '@/i18n';
 
@@ -75,18 +77,15 @@ export const VersionStateAtTimestamp: FunctionComponent<
           <CalendarBlankIcon weight="bold" />
         </span>
       </div>
-      <button
-        type="button"
-        className="btn btn-sm btn-light-primary"
+      <BaseButton
+        variant="secondary"
+        size="sm"
         onClick={handleQuery}
         disabled={!timestamp || isLoading}
-      >
-        {isLoading ? (
-          <span className="spinner-border spinner-border-sm" />
-        ) : (
-          translate('Load')
-        )}
-      </button>
+        disabledReason={translate('Select a date and time first')}
+        pending={isLoading}
+        label={translate('Load')}
+      />
       {error && (
         <span className="text-danger fs-7">
           {translate('No version found at this time')}

@@ -1,6 +1,8 @@
 import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useId, useState } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { UIBlock } from '@/ai-assistant/lib/types';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
@@ -55,24 +57,28 @@ const InspectorSection: FC<InspectorSectionProps> = ({
   return (
     <div>
       <div className="d-flex align-items-center gap-2">
-        <button
-          type="button"
+        <BaseButton
+          variant="tertiary-ghost"
+          size="sm"
+          className="p-0"
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
           aria-controls={panelId}
-          className="btn btn-sm d-inline-flex align-items-center gap-1 p-0"
-        >
-          {expanded ? (
-            <CaretDownIcon weight="bold" size={12} />
-          ) : (
-            <CaretRightIcon weight="bold" size={12} />
-          )}
-          <span className="small">
-            {expanded
-              ? translate('Hide {label} ({count})', { label, count })
-              : translate('Show {label} ({count})', { label, count })}
-          </span>
-        </button>
+          iconNode={
+            expanded ? (
+              <CaretDownIcon weight="bold" size={12} />
+            ) : (
+              <CaretRightIcon weight="bold" size={12} />
+            )
+          }
+          label={
+            <span className="small">
+              {expanded
+                ? translate('Hide {label} ({count})', { label, count })
+                : translate('Show {label} ({count})', { label, count })}
+            </span>
+          }
+        />
         {expanded && (
           <CopyToClipboardButton
             value={text}

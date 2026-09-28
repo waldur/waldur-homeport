@@ -1,6 +1,5 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { marketplaceOrdersSetStateDone, OrderDetails } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -10,7 +9,6 @@ import { ActionItem } from '@/resource/actions/ActionItem';
 interface MarkAsDoneButtonProps {
   row: OrderDetails;
   refetch?: () => void;
-  as?: React.ComponentType;
 }
 
 export const MarkAsDoneButton: FunctionComponent<MarkAsDoneButtonProps> = (
@@ -28,10 +26,6 @@ export const MarkAsDoneButton: FunctionComponent<MarkAsDoneButtonProps> = (
   });
   return (
     <ActionItem
-      as={props.as}
-      className={
-        props.as === Button ? 'btn-light-success btn-sm w-100' : undefined
-      }
       title={translate('Mark as done')}
       action={mutate}
       disabled={isLoading}

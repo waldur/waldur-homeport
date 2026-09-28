@@ -5,6 +5,8 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { AIDisclosureBanner } from '@/ai-assistant/components/AIDisclosureDialog';
 import { ChatHistorySidebar } from '@/ai-assistant/components/ChatHistorySidebar';
 import { LLMErrorBoundary } from '@/ai-assistant/components/LLMErrorBoundary';
@@ -17,7 +19,6 @@ import {
   isDisclosureAcknowledged,
 } from '@/ai-assistant/utils';
 import { useChatDrawerPreference } from '@/chat/chatDrawerPreferences';
-import { IconButton, MediumIconButton } from '@/core/buttons/IconButton';
 import { useDrawer } from '@/drawer/actions';
 import { DrawerCloseButton } from '@/drawer/DrawerCloseButton';
 import { useDrawerExpand } from '@/drawer/useDrawerExpand';
@@ -127,7 +128,7 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
           full-screen layout) */}
       {!isAnonymous && (
         <span className="d-none d-lg-inline-flex position-relative">
-          <MediumIconButton
+          <BaseButton
             iconNode={
               expanded ? (
                 <ArrowsInSimpleIcon weight="bold" />
@@ -142,7 +143,8 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
             }
             onClick={toggleExpand}
             variant="tertiary-ghost"
-            tooltipPlacement="bottom"
+            tooltipSide="bottom"
+            size="md"
           />
           {hasNewMessages && !expanded && (
             <HeaderButtonBullet className="pe-none" />
@@ -153,22 +155,24 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
         <>
           {/* Tablet: compact history toggle */}
           <span className="d-none d-md-inline-flex d-lg-none">
-            <MediumIconButton
+            <BaseButton
               iconNode={<ListIcon weight="bold" />}
               tooltip={translate('History')}
               onClick={toggleHistory}
               variant="tertiary-ghost"
-              tooltipPlacement="bottom"
+              tooltipSide="bottom"
+              size="md"
             />
           </span>
           {/* Mobile: large history toggle */}
           <span className="d-inline-flex d-md-none">
-            <IconButton
+            <BaseButton
               iconNode={<ListIcon weight="bold" />}
               tooltip={translate('History')}
               onClick={toggleHistory}
               variant="tertiary-ghost"
-              tooltipPlacement="bottom"
+              tooltipSide="bottom"
+              size="lg"
             />
           </span>
         </>

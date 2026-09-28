@@ -3,11 +3,10 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Table as BTable } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Select } from '@/form/select';
-import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -97,22 +96,20 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
 
   const renderFooter = () => (
     <>
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         variant="tertiary"
         className="min-w-125px me-auto"
         onClick={() => props.onPrev(values)}
-        type="button"
         label={translate('Back')}
         iconNode={<CaretLeftIcon weight="bold" />}
-        iconOnLeft
+        size="lg"
       />
       <CloseDialogButton className="min-w-125px" />
-      <SubmitButton
-        submitting={false}
+      <BaseButton
         label={translate('Continue')}
         onClick={() => props.handleSubmit()}
-        type="button"
+        variant="primary"
+        size="lg"
       />
     </>
   );

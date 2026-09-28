@@ -35,12 +35,11 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
         props.toggleFilterMenu(true);
         const parent: HTMLElement = event.target.closest('.card-table');
         if (!parent) return;
-        const btns = parent.getElementsByClassName(
-          'btn-add-filter',
-        ) as HTMLCollectionOf<HTMLButtonElement>;
-        if (btns?.length) {
+        const addFilterButton =
+          parent.querySelector<HTMLButtonElement>('[data-add-filter]');
+        if (addFilterButton) {
           if (!props.showFilterMenuToggle || props.filtersStorage?.length) {
-            btns.item(0).click();
+            addFilterButton.click();
             event.stopPropagation();
           }
         }

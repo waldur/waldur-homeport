@@ -2,6 +2,8 @@ import { DownloadSimpleIcon, EnvelopeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Offering, OrderDetails } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { FormattedHtml } from '@/core/FormattedHtml';
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
@@ -10,7 +12,6 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 const SetConsumerInfoDialog = lazyComponent(() =>
@@ -63,11 +64,12 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
         title={translate('Provider message')}
         actions={
           canRespond ? (
-            <ActionButton
-              title={translate('Respond')}
-              action={openRespondDialog}
+            <BaseButton
+              label={translate('Respond')}
+              onClick={openRespondDialog}
               iconNode={<EnvelopeIcon weight="bold" />}
               variant="primary"
+              size="lg"
             />
           ) : undefined
         }

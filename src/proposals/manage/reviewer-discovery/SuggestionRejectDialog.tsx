@@ -71,7 +71,7 @@ export const SuggestionRejectDialog = ({
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Reject')}
-                  className="btn-danger"
+                  variant="danger"
                 />
               </>
             }

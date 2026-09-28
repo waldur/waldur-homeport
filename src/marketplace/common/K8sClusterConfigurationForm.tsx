@@ -3,7 +3,7 @@ import { isEqual } from 'lodash-es';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { MAX_PAGE_SIZE } from '@/core/api';
@@ -12,7 +12,6 @@ import { FormGroup } from '@/form';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { useCustomer } from '@/workspace/hooks';
 
 import { K8sFormSection } from './K8sFormSection';
@@ -289,11 +288,12 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           <Field
             label={translate('Node groups')}
             value={
-              <CompactActionButton
+              <BaseButton
                 variant="secondary"
-                action={addNodeGroup}
+                onClick={addNodeGroup}
                 iconNode={<PlusCircleIcon weight="bold" />}
-                title={translate('Add node group')}
+                label={translate('Add node group')}
+                size="sm"
               />
             }
             labelCol={4}

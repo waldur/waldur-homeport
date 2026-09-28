@@ -90,7 +90,8 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
                   }
                   submitting={submitting}
                   label={translate('Save')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

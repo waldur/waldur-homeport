@@ -1,7 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { AccountSetting } from 'waldur-js-client';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface AccountSettingValueProps {

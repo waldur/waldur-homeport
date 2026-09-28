@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import {
   rancherServicesDestroy,
   rancherServicesYamlRetrieve,
@@ -13,7 +12,7 @@ import { ViewYAMLButton } from './ViewYAMLButton';
 
 export const ServiceActions: FC<{ row; fetch }> = ({ row, fetch }) => {
   return (
-    <ButtonGroup>
+    <div className="d-flex gap-2">
       <ViewYAMLButton
         yamlRetrieve={rancherServicesYamlRetrieve}
         yamlUpdate={rancherServicesYamlUpdate}
@@ -25,6 +24,6 @@ export const ServiceActions: FC<{ row; fetch }> = ({ row, fetch }) => {
         resourceType={translate('Service')}
         refetch={fetch}
       />
-    </ButtonGroup>
+    </div>
   );
 };

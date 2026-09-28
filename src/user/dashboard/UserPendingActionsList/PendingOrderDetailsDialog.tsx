@@ -11,7 +11,7 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
@@ -19,7 +19,6 @@ import { defaultCurrency } from '@/core/formatCurrency';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getOrderType } from '@/marketplace/orders/utils';
@@ -366,23 +365,43 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
       bodyClassName="min-h-300px"
       footer={
         <>
-          <CloseDialogButton className="min-w-100px" disabled={isSubmitting} />
-          <CompactSubmitButton
-            submitting={rejectOrderMutation.isPending}
+          <CloseDialogButton
+            className="min-w-100px"
+            disabled={isSubmitting}
+            disabledReason={translate(
+              'Please wait for the current action to complete',
+            )}
+          />
+          <BaseButton
+            size="sm"
+            pending={rejectOrderMutation.isPending}
             disabled={isSubmitting || !order}
+            disabledReason={
+              isSubmitting
+                ? translate('Please wait for the current action to complete')
+                : !order
+                  ? translate('Order details unavailable')
+                  : undefined
+            }
             variant="danger"
             className="min-w-100px"
             onClick={() => rejectOrderMutation.mutate()}
-            type="button"
             label={translate('Reject')}
           />
-          <CompactSubmitButton
-            submitting={approveOrderMutation.isPending}
+          <BaseButton
+            size="sm"
+            pending={approveOrderMutation.isPending}
             disabled={isSubmitting || !order}
+            disabledReason={
+              isSubmitting
+                ? translate('Please wait for the current action to complete')
+                : !order
+                  ? translate('Order details unavailable')
+                  : undefined
+            }
             variant="success"
             className="min-w-100px"
             onClick={handleApprove}
-            type="button"
             label={translate('Approve')}
           />
         </>

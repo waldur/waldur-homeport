@@ -13,6 +13,8 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { omit } from '@/core/utils';
@@ -22,7 +24,6 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { ProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
@@ -45,11 +46,12 @@ const ShowErrorButton = ({ resource }) => {
     });
   };
   return (
-    <CompactActionButton
+    <BaseButton
       variant="danger"
-      action={showErrorDialog}
+      onClick={showErrorDialog}
       iconNode={<XCircleIcon weight="bold" />}
-      title={translate('Show error')}
+      label={translate('Show error')}
+      size="sm"
     />
   );
 };
@@ -169,22 +171,22 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
 
           <div className="d-flex flex-sm-column gap-3 text-nowrap">
             {canCreateOrder && (
-              <CompactActionButton
+              <BaseButton
                 variant="tertiary"
-                action={mutate}
+                onClick={mutate}
                 pending={isLoading}
                 iconNode={<ArrowsClockwiseIcon weight="bold" />}
-                title={translate('Retry')}
+                label={translate('Retry')}
+                size="sm"
               />
             )}
             <OrderDetailsLink
               order_uuid={resource.creation_order.uuid}
               project_uuid={resource.creation_order.project_uuid}
-              className="btn btn-sm btn-tertiary"
+              buttonVariant="tertiary"
+              buttonSize="sm"
             >
-              <span className="svg-icon svg-icon-4">
-                <InfoIcon weight="bold" />
-              </span>
+              <InfoIcon size={16} weight="bold" />
               {translate('View order')}
             </OrderDetailsLink>
             <ShowErrorButton resource={resource} />

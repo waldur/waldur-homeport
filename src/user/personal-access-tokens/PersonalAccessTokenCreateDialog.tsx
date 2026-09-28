@@ -10,6 +10,8 @@ import {
   PersonalAccessTokenCreateRequest,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { PermissionOptions } from '@/administration/roles/PermissionOptions';
 import { lazyComponent } from '@/core/lazyComponent';
 import { required } from '@/core/validators';
@@ -189,7 +191,7 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                   disabled={invalid}
                   submitting={submitting}
                   label={translate('Create token')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               }
             >
@@ -267,36 +269,40 @@ export const PersonalAccessTokenCreateDialog: React.FC<
                                   )}
                                 </Field>
                               </div>
-                              <button
-                                type="button"
-                                className="btn btn-icon btn-text-danger"
+                              <BaseButton
+                                variant="text-danger"
                                 onClick={() => fields.remove(index)}
                                 disabled={hasGlobalScope}
-                                title={translate('Remove')}
-                              >
-                                <Trash />
-                              </button>
+                                disabledReason={translate(
+                                  'Not available when a global scope is selected.',
+                                )}
+                                tooltip={translate('Remove')}
+                                iconNode={<Trash />}
+                              />
                             </div>
                           );
                         })}
-                        <button
-                          type="button"
-                          className="btn btn-light btn-sm"
+                        <BaseButton
+                          variant="tertiary"
+                          size="sm"
                           onClick={() =>
                             fields.push({ type: null, entity: null })
                           }
                           disabled={hasGlobalScope || typeOptions.length === 0}
-                          title={
-                            typeOptions.length === 0
+                          disabledReason={
+                            hasGlobalScope
                               ? translate(
-                                  'Select at least one permission above to enable bindings.',
+                                  'Not available when a global scope is selected.',
                                 )
-                              : undefined
+                              : typeOptions.length === 0
+                                ? translate(
+                                    'Select at least one permission above to enable bindings.',
+                                  )
+                                : undefined
                           }
-                        >
-                          <Plus className="me-1" />
-                          {translate('Add binding')}
-                        </button>
+                          iconNode={<Plus />}
+                          label={translate('Add binding')}
+                        />
                       </>
                     )}
                   </FieldArray>

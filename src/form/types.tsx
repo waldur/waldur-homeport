@@ -36,12 +36,6 @@ export interface CustomComponentInputProps<T> {
   onChange(value?: T): void;
 }
 
-export interface FilterOptions {
-  name: string;
-  choices: Array<{ value: string; label: string }>;
-  defaultValue: string;
-}
-
 export type PeriodOption = {
   year: number;
   month: number;

@@ -2,10 +2,9 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 
 interface ProfileRequiredMessageProps {
@@ -70,17 +69,17 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
             <Link
               state="profile-manage"
               params={{ tab: 'reviewer-profile' }}
-              className="btn btn-primary"
+              buttonVariant="primary"
             >
               {translate('Create reviewer profile')}
             </Link>
           ) : !isPublished ? (
-            <SubmitButton
-              type="button"
+            <BaseButton
               variant="primary"
               onClick={onPublish}
-              submitting={isPublishing}
+              pending={isPublishing}
               label={translate('Publish profile')}
+              size="lg"
             />
           ) : null}
         </div>

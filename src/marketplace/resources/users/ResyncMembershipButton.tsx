@@ -2,11 +2,12 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
 import { marketplaceProviderResourcesSyncUserRoles } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { checkScope, hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
-import { ToolbarButton } from '@/table/ToolbarButton';
 import { useUser } from '@/workspace/hooks';
 
 /**
@@ -69,8 +70,10 @@ export const ResyncMembershipButton: FunctionComponent<{
     return null;
   }
   return (
-    <ToolbarButton
-      title={translate('Re-sync memberships')}
+    <BaseButton
+      variant="tertiary"
+      size="lg"
+      label={translate('Re-sync memberships')}
       tooltip={translate(
         'Ask the offering agent to re-apply role grants on the provider side.',
       )}

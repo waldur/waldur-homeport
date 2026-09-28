@@ -2,10 +2,11 @@ import { EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Offering } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const OfferingReferralsDialog = lazyComponent(() =>
   import('./OfferingReferralsDialog').then((module) => ({
@@ -22,15 +23,17 @@ export const ReferralDetailsButton: FunctionComponent<
 > = (props) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      title={translate('Details')}
+    <BaseButton
+      label={translate('Details')}
       iconNode={<EyeIcon weight="bold" />}
-      action={() =>
+      onClick={() =>
         openDialog(OfferingReferralsDialog, {
           resolve: props.offering,
           size: 'lg',
         })
       }
+      variant="tertiary"
+      size="lg"
     />
   );
 };

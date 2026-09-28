@@ -1,9 +1,8 @@
 import { XIcon } from '@phosphor-icons/react';
 import { useCallback, useState } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
-import { IconButton } from '@/core/buttons/IconButton';
 import { translate } from '@/i18n';
 
 import { URGENCY_CONFIG } from './constants';
@@ -76,7 +75,8 @@ export const SecurityAlertBanner = ({
       }
       actions={
         !isCritical && (
-          <IconButton
+          <BaseButton
+            size="lg"
             iconNode={<XIcon weight="bold" />}
             tooltip={translate('Dismiss')}
             onClick={handleDismiss}

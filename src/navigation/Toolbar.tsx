@@ -7,7 +7,8 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Button } from 'react-bootstrap';
+
+import { BaseButton } from 'waldur-ui';
 
 import { TabsList } from './TabsList';
 
@@ -17,24 +18,18 @@ interface OwnProps {
 
 const TabsScrollArrows: FunctionComponent = () => (
   <>
-    <Button
-      variant="flush"
+    <BaseButton
+      variant="tertiary-ghost"
       size="sm"
       className="px-2 top-0 start-0 position-absolute h-100"
-    >
-      <span className="svg-icon svg-icon-3">
-        <CaretLeftIcon weight="bold" />
-      </span>
-    </Button>
-    <Button
-      variant="flush"
+      iconNode={<CaretLeftIcon weight="bold" />}
+    />
+    <BaseButton
+      variant="tertiary-ghost"
       size="sm"
       className="px-2 top-0 end-0 position-absolute h-100"
-    >
-      <span className="svg-icon svg-icon-3">
-        <CaretRightIcon weight="bold" />
-      </span>
-    </Button>
+      iconNode={<CaretRightIcon weight="bold" />}
+    />
   </>
 );
 

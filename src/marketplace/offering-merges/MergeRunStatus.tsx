@@ -6,9 +6,8 @@ import {
   OfferingMergeUndoReport,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { formatDateTime } from '@/core/dateUtils';
 import { ProgressBar } from '@/core/ProgressBar';
 import { StateIndicator } from '@/core/StateIndicator';

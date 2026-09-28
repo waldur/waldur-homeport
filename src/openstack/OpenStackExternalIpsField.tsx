@@ -3,9 +3,10 @@ import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
+import { BaseButton } from 'waldur-ui';
+
 import { StringGroup } from '@/form';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
@@ -48,11 +49,12 @@ const FieldsListGroup: FC<FieldArrayRenderProps<any, any>> = ({ fields }) => {
         </Form.Group>
       )}
       <div>
-        <ActionButton
-          title={translate('Add')}
-          action={addRow}
+        <BaseButton
+          label={translate('Add')}
+          onClick={addRow}
           iconNode={<PlusIcon weight="bold" />}
           variant="tertiary"
+          size="lg"
         />
       </div>
     </>

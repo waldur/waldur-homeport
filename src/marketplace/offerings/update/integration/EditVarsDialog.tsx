@@ -9,7 +9,8 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { IconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -55,10 +56,12 @@ export const EditVarsDialog: FC<EditVarsDialogProps> = ({ resolve }) => {
               <ModalDialog
                 title={translate('Edit environment variables')}
                 actions={
-                  <IconButton
+                  <BaseButton
                     iconNode={<PlusCircleIcon weight="bold" />}
                     tooltip={translate('Add variable')}
                     onClick={() => nestedProps.fields.push({})}
+                    size="lg"
+                    variant="tertiary"
                   />
                 }
                 footer={

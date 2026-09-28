@@ -24,7 +24,7 @@ const token = (name: string): number => {
 };
 
 // Bootstrap's own stack (node_modules/bootstrap/scss/_variables.scss) and the
-// app's `.dropdown-menu` override (metronic/sass/custom/_button-group.scss).
+// app's `.dropdown-menu` override (metronic/sass/custom/_dropdown-base.scss).
 const BOOTSTRAP = {
   modal: 1055,
   popover: 1070,

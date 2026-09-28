@@ -60,19 +60,6 @@
   color: white;
 }
 
-.layout-neumorphism-card .btn {
-  border-radius: 12px;
-  box-shadow:
-    5px 5px 10px #bec3c9,
-    -5px -5px 10px #ffffff;
-}
-
-[data-theme='dark'] .layout-neumorphism-card .btn {
-  box-shadow:
-    5px 5px 10px #262b2d,
-    -5px -5px 10px #343d3f;
-}
-
 .layout-neumorphism-footer {
   display: flex;
   justify-content: space-between;

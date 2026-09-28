@@ -8,6 +8,8 @@ import {
   promotionsCampaignsUpdate,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required, requiredArray } from '@/core/validators';
 import {
   StringGroup,
@@ -23,7 +25,6 @@ import { providerOfferingsAutocomplete } from '@/marketplace/common/autocomplete
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { ProgressStep, WizardStepIndicator } from '@/wizard';
 import { useCustomer } from '@/workspace/hooks';
 
@@ -109,31 +110,33 @@ export const CampaignDialog = ({
             }
             footer={
               step === 0 ? (
-                <ActionButton
-                  action={() => setStep(1)}
+                <BaseButton
+                  onClick={() => setStep(1)}
                   disabled={invalid || submitting}
                   disabledReason={translate(
                     'Please fill in the required fields',
                   )}
-                  title={translate('Continue')}
+                  label={translate('Continue')}
                   iconNode={<CaretRightIcon weight="bold" />}
                   iconRight
                   variant="primary"
+                  size="lg"
                 />
               ) : (
-                <ActionButton
+                <BaseButton
                   disabled={invalid || submitting}
                   disabledReason={translate(
                     'Please fill in the required fields',
                   )}
-                  action={handleSubmit}
+                  onClick={handleSubmit}
                   iconNode={<PaperPlaneTiltIcon weight="bold" />}
-                  title={
+                  label={
                     isUpdate
                       ? translate('Update a campaign')
                       : translate('Create a campaign')
                   }
                   variant="primary"
+                  size="lg"
                 />
               )
             }

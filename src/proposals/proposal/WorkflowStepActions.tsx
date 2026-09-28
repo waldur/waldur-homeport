@@ -10,12 +10,13 @@ import {
   proposalProposalsRejectWorkflowStep,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 import { Proposal } from '../types';
@@ -120,18 +121,19 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
   return (
     <>
       {awaitingManualAdvance && (
-        <ActionButton
+        <BaseButton
           variant="primary"
-          action={() => advanceStep.mutate()}
+          onClick={() => advanceStep.mutate()}
           pending={advanceStep.isPending}
           className="w-100 mt-2"
           iconNode={<ArrowRightIcon weight="bold" />}
-          title={translate('Advance workflow')}
+          label={translate('Advance workflow')}
+          size="lg"
         />
       )}
       {canActOnActiveStep && (
         <>
-          <ActionButton
+          <BaseButton
             variant="primary"
             disabled={completeBlockedByChecklist}
             disabledReason={
@@ -141,21 +143,23 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
                   )
                 : undefined
             }
-            action={() =>
+            onClick={() =>
               openDialog(CompleteWorkflowStepDialog, {
                 resolve: { proposal, step: activeStep, refetch },
               })
             }
             className="w-100 mt-2"
             iconNode={<CheckCircleIcon weight="bold" />}
-            title={translate('Complete step')}
+            label={translate('Complete step')}
+            size="lg"
           />
-          <ActionButton
+          <BaseButton
             variant="danger"
-            action={() => rejectStep.mutate()}
+            onClick={() => rejectStep.mutate()}
             className="w-100 mt-2"
             iconNode={<XCircleIcon weight="bold" />}
-            title={translate('Reject at step')}
+            label={translate('Reject at step')}
+            size="lg"
           />
         </>
       )}

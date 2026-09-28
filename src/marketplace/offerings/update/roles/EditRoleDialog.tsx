@@ -58,7 +58,7 @@ export const EditRoleDialog: FC<{ resolve: EditRoleResolve }> = ({
                   label={translate('Save')}
                   submitting={submitting}
                   disabled={invalid}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

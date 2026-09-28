@@ -2,10 +2,11 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { marketplaceResourcesOfferingForSubresourcesList } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n/translate';
 import { OfferingLink } from '@/marketplace/links/OfferingLink';
 import { Resource } from '@/resource/types';
-import { ActionButton } from '@/table/ActionButton';
 
 interface AddResourceButtonProps {
   resource: Resource;
@@ -27,16 +28,11 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
     null;
 
   return loading ? (
-    <ActionButton variant="primary" pending action={() => {}} />
+    <BaseButton variant="primary" pending onClick={() => {}} size="lg" />
   ) : (
     relatedOfferingUuid && (
-      <OfferingLink
-        offering_uuid={relatedOfferingUuid}
-        className="btn btn-primary"
-      >
-        <span className="svg-icon svg-icon-2">
-          <PlusCircleIcon weight="bold" />
-        </span>
+      <OfferingLink offering_uuid={relatedOfferingUuid} buttonVariant="primary">
+        <PlusCircleIcon size={20} weight="bold" />
         {translate('Add resource')}
       </OfferingLink>
     )

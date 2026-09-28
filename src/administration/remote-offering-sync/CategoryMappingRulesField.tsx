@@ -4,13 +4,14 @@ import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
+import { BaseButton } from 'waldur-ui';
+
 import { usePagination } from '@/core/usePagination';
 import { required, requiredArray } from '@/core/validators';
 import { SelectField } from '@/form';
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { categoryAutocomplete } from '@/marketplace/common/autocompletes';
-import { ActionButton } from '@/table/ActionButton';
 import { TablePagination } from '@/table/TablePagination';
 
 interface FieldValue {
@@ -125,14 +126,15 @@ const FieldsListGroup = ({
                       </Field>
                     </td>
                     <td>
-                      <ActionButton
+                      <BaseButton
                         variant="text-danger"
-                        action={() => removeRow(actualIndex)}
+                        onClick={() => removeRow(actualIndex)}
                         disabled={fields.length < 2}
                         disabledReason={translate(
                           'At least one mapping is required',
                         )}
                         iconNode={<TrashIcon weight="bold" />}
+                        size="lg"
                       />
                     </td>
                   </tr>
@@ -143,13 +145,14 @@ const FieldsListGroup = ({
         </table>
       </Form.Group>
       <div>
-        <ActionButton
+        <BaseButton
           variant="text-primary"
-          action={addRow}
+          onClick={addRow}
           disabled={addDisabled}
           disabledReason={translate('Complete existing mappings first')}
           iconNode={<PlusCircleIcon weight="bold" />}
-          title={translate('Add new')}
+          label={translate('Add new')}
+          size="lg"
         />
       </div>
 

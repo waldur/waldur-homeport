@@ -13,10 +13,6 @@
   padding: 1rem;
 }
 
-.layout-glassmorphism-header .btn {
-  background: rgba(255, 255, 255, 0.5);
-}
-
 .layout-glassmorphism-content {
   flex: 1;
   display: flex;

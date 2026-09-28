@@ -1,14 +1,13 @@
 import { FC } from 'react';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { ActionButton } from '@/table/ActionButton';
 
 import { useDiscoverLicenses } from '../api';
 
@@ -81,10 +80,11 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
 
           {/* Close button */}
           <div className="d-flex justify-content-end">
-            <ActionButton
-              action={closeDialog}
+            <BaseButton
+              onClick={closeDialog}
               variant="secondary"
-              title={translate('Close')}
+              label={translate('Close')}
+              size="lg"
             />
           </div>
         </div>

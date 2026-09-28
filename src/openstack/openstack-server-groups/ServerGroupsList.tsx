@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import {
   OpenStackServerGroup,
   openstackServerGroupsList,
@@ -61,7 +60,7 @@ export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
       tableActions={
-        <ButtonGroup>
+        <div className="d-flex gap-2">
           <PullServerGroupsAction
             resource={resourceScope}
             refetch={props.fetch}
@@ -71,7 +70,7 @@ export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
             resource={resourceScope}
             refetch={props.fetch}
           />
-        </ButtonGroup>
+        </div>
       }
     />
   );

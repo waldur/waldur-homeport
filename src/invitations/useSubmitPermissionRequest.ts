@@ -142,7 +142,7 @@ export function useSubmitPermissionRequest(token: string) {
               type: 'danger',
               size: 'sm',
               positiveButton: translate('Back to profile'),
-              positiveButtonVariant: 'primary w-175px',
+              positiveButtonVariant: 'primary',
               onlyPositiveButton: true,
             },
           );

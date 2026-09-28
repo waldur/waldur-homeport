@@ -149,7 +149,7 @@ export const RemoteProjectsList = () => {
       tableActions={
         <Link
           state="organization-remote-projects-audit"
-          buttonVariant="outline-primary"
+          buttonVariant="tertiary"
         >
           {translate('Audit Log')}
         </Link>

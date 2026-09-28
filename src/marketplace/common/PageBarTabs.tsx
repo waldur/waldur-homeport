@@ -11,8 +11,9 @@ import {
   useRef,
   useState,
 } from 'react';
-// eslint-disable-next-line waldur-custom/no-direct-bootstrap-button -- Navigation button with Metronic menu data attributes
-import { Button, Nav, TabContainer } from 'react-bootstrap';
+import { Nav, TabContainer } from 'react-bootstrap';
+
+import { BaseButton } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { useDOMChangeObserver } from '@/core/useDomChangeObserver';
@@ -51,7 +52,7 @@ const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
   return (
     <NavMenu open={open} onOpenChange={setOpen} modal={false}>
       <NavMenuTrigger asChild>
-        <Button
+        <BaseButton
           variant="text-primary"
           size="sm"
           className={
@@ -64,9 +65,8 @@ const PageBarTabItemWithSubTabs = (props: PageBarTabProps) => {
           onClick={() => scrollToSectionById(props.name)}
           data-testid={`page-bar-tab-${props.name}`}
           {...triggerHandlers}
-        >
-          {props.title}
-        </Button>
+          label={props.title}
+        />
       </NavMenuTrigger>
       <NavMenuContent
         placement="bottom-start"
@@ -99,9 +99,11 @@ const PageBarTabItem = (props: PageBarTabProps) =>
     <Link
       state={props.state}
       params={props.params}
+      buttonVariant="text-primary"
+      buttonSize="sm"
       className={
         props.className ||
-        'btn btn-sm bg-active-secondary bg-hover-secondary text-active-inverse-secondary btn-no-focus' +
+        'bg-active-secondary bg-hover-secondary text-active-inverse-secondary btn-no-focus' +
           (props.active ? ' active' : '')
       }
       onClick={() => scrollToSectionById(props.name)}

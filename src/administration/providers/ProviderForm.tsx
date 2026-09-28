@@ -1,6 +1,6 @@
 import { Field, useFormState } from 'react-final-form';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { required, redirectURI, validateRedirectURLs } from '@/core/validators';
 import { WarnCard } from '@/core/WarnCard';
@@ -83,15 +83,12 @@ const AllowedRedirectsField = () => {
                       value={url}
                       onChange={(e) => updateUrl(index, e.target.value)}
                     />
-                    <button
-                      type="button"
-                      className="btn btn-danger"
+                    <BaseButton
+                      variant="danger"
                       onClick={() => removeUrl(index)}
-                      title={translate('Remove URL')}
-                      aria-label={translate('Remove URL')}
-                    >
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                      tooltip={translate('Remove URL')}
+                      iconNode={<span aria-hidden="true">&times;</span>}
+                    />
                   </div>
                   {hasError && (
                     <small className="d-block text-danger mb-3">
@@ -102,13 +99,13 @@ const AllowedRedirectsField = () => {
               );
             })}
 
-            <button
-              type="button"
-              className="btn btn-sm btn-secondary mb-3"
+            <BaseButton
+              variant="secondary"
+              size="sm"
+              className="mb-3"
               onClick={addUrl}
-            >
-              + {translate('Add URL')}
-            </button>
+              label={`+ ${translate('Add URL')}`}
+            />
 
             {currentHomeportUrl && (
               <small className="d-block mt-2 text-muted">

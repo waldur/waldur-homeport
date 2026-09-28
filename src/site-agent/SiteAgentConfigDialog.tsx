@@ -6,10 +6,9 @@ import {
   marketplaceServiceProvidersOfferingsList,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -143,12 +142,18 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       footer={
         <>
           <CloseDialogButton />
-          <SubmitButton
-            submitting={isGenerating}
+          <BaseButton
+            pending={isGenerating}
             label={translate('Generate Configuration')}
             disabled={selectedOfferings.length === 0}
-            type="button"
+            disabledReason={
+              selectedOfferings.length === 0
+                ? translate('Please select at least one offering')
+                : undefined
+            }
             onClick={() => generateConfig()}
+            variant="primary"
+            size="lg"
           />
         </>
       }

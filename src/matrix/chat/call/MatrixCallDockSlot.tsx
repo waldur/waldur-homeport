@@ -8,6 +8,8 @@ import {
   useState,
 } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
@@ -92,13 +94,12 @@ export const MatrixCallDockSlot: FC<MatrixCallDockSlotProps> = ({ roomId }) => {
         <div className="text-muted text-center px-3">
           {translate('Call is playing in Picture-in-Picture')}
         </div>
-        <button
-          type="button"
-          className="btn btn-sm btn-primary"
+        <BaseButton
+          variant="primary"
+          size="sm"
           onClick={requestTogglePopOut}
-        >
-          {translate('Dock back to chat')}
-        </button>
+          label={translate('Dock back to chat')}
+        />
       </div>
     );
   }

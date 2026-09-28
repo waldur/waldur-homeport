@@ -3,9 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -52,13 +53,12 @@ export const UserResourcesDialog: FC = () => {
       iconColor="info"
       footer={
         <div className="d-flex justify-content-end w-100">
-          <SubmitButton
-            submitting={false}
-            type="button"
+          <BaseButton
             onClick={handleViewAllResources}
-          >
-            {translate('View all resources')}
-          </SubmitButton>
+            label={translate('View all resources')}
+            variant="primary"
+            size="lg"
+          />
         </div>
       }
     >

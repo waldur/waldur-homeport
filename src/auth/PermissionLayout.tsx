@@ -95,7 +95,7 @@ const RestrictedView = () => {
           <p className="mb-10 text-dark mw-400px text-center">
             {pageMessage.message}
           </p>
-          <Link state="profile.details" className="btn btn-primary">
+          <Link state="profile.details" buttonVariant="primary">
             {translate('Go to profile')}
           </Link>
         </div>

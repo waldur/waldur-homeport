@@ -18,6 +18,12 @@ const OUTER_SIZE = { sm: 34, md: 38, lg: 42, xl: 46 };
 const SOLID_SIZE = { sm: 32, md: 40, lg: 48, xl: 56 };
 const INNER_SIZE = { sm: 24, md: 28, lg: 32, xl: 36 };
 const ICON_SIZE = { sm: 16, md: 20, lg: 24, xl: 28 };
+const ICON_SVG_SIZES: Record<FeaturedIconSize, string> = {
+  sm: '[&>svg]:size-4',
+  md: '[&>svg]:size-5',
+  lg: '[&>svg]:size-6',
+  xl: '[&>svg]:size-7',
+};
 
 /**
  * Maps the variant to Tailwind utilities.
@@ -111,14 +117,13 @@ export const FeaturedIcon = forwardRef<HTMLDivElement, FeaturedIconProps>(
             'featured-icon-inner inline-flex items-center justify-center rounded-full border-2',
             // Tone-based inner styling
             isSolid ? 'border-transparent' : 'border-current/30',
-            // Sizes the SVG node provided by the caller unconditionally via CSS
-            '[&>svg]:w-[var(--icon-size)] [&>svg]:h-[var(--icon-size)]',
+            // Sizes the SVG node provided by the caller unconditionally via static Tailwind classes
+            ICON_SVG_SIZES[size],
           )}
           style={
             {
               width: innerSize,
               height: innerSize,
-              '--icon-size': `${iconSize}px`,
               '--featured-icon-svg-size': `${iconSize}px`,
             } as CSSProperties
           }

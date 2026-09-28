@@ -10,7 +10,7 @@ import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
 import Avatar from '@/core/Avatar';
 import { Link } from '@/core/Link';
@@ -196,15 +196,16 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   return (
     <div className="tc-header">
       {onBack && (
-        <button
-          type="button"
-          className="position-relative btn btn-sm btn-icon btn-text-secondary"
-          onClick={onBack}
-          title={translate('Back to room list')}
-        >
-          <ArrowLeftIcon size={18} weight="bold" />
+        <div className="position-relative d-inline-flex">
+          <BaseButton
+            variant="text-secondary"
+            size="sm"
+            onClick={onBack}
+            tooltip={translate('Back to room list')}
+            iconNode={<ArrowLeftIcon size={18} weight="bold" />}
+          />
           {otherRoomsUnread > 0 && <HeaderButtonBullet />}
-        </button>
+        </div>
       )}
 
       <Avatar

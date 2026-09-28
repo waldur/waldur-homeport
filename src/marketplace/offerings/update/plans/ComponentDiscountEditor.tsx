@@ -3,7 +3,8 @@ import { FunctionComponent, useState } from 'react';
 import { Field, useField, useForm } from 'react-final-form';
 import { OfferingComponent } from 'waldur-js-client';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { BillingTypeBadge } from '@/marketplace/common/billingTypes';

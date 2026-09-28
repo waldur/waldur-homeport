@@ -1,9 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const ProjectDigestPreviewDialog = lazyComponent(() =>
   import('./ProjectDigestPreviewDialog').then((m) => ({
@@ -14,14 +15,16 @@ const ProjectDigestPreviewDialog = lazyComponent(() =>
 export const ProjectDigestPreviewButton = () => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      action={() =>
+    <BaseButton
+      onClick={() =>
         openDialog(ProjectDigestPreviewDialog, {
           size: 'xl',
         })
       }
-      title={translate('Preview')}
+      label={translate('Preview')}
       iconNode={<EyeIcon weight="bold" />}
+      variant="tertiary"
+      size="lg"
     />
   );
 };

@@ -1,6 +1,8 @@
 import { ClipboardTextIcon, EyeIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -15,7 +17,6 @@ import {
 } from '@/proposals/ProjectDurationNote';
 import { Proposal } from '@/proposals/types';
 import { Field } from '@/resource/summary';
-import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 import { VStepperFormStepCard, VStepperFormStepProps } from '@/wizard';
 
@@ -34,16 +35,17 @@ const ProposalReviewsDialog = lazyComponent(() =>
 const DetailsOverviewButton = ({ proposal, reviews }) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      action={() =>
+    <BaseButton
+      onClick={() =>
         openDialog(ProposalDetailsDialog, {
           proposal,
           reviews,
         })
       }
-      title={translate('More details')}
+      label={translate('More details')}
       iconNode={<EyeIcon weight="bold" />}
       variant="tertiary"
+      size="lg"
     />
   );
 };
@@ -51,11 +53,12 @@ const DetailsOverviewButton = ({ proposal, reviews }) => {
 const ReviewsButton = ({ proposal }) => {
   const { openDialog } = useModal();
   return (
-    <ActionButton
-      action={() => openDialog(ProposalReviewsDialog, { proposal })}
-      title={translate('Reviews')}
+    <BaseButton
+      onClick={() => openDialog(ProposalReviewsDialog, { proposal })}
+      label={translate('Reviews')}
       iconNode={<ClipboardTextIcon weight="bold" />}
       variant="tertiary"
+      size="lg"
     />
   );
 };

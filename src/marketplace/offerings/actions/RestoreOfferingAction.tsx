@@ -1,10 +1,11 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const ChangeOfferingAvailabilityDialog = lazyComponent(() =>
   import('./ChangeOfferingAvailabilityDialog').then((module) => ({
@@ -33,12 +34,13 @@ export const RestoreOfferingAction: FC<RestoreOfferingActionProps> = ({
   };
 
   return (
-    <ActionButton
+    <BaseButton
       variant="tertiary"
-      action={openChangeAvailabilityDialog}
+      onClick={openChangeAvailabilityDialog}
       className={className}
-      title={translate('Restore')}
+      label={translate('Restore')}
       iconNode={<ArrowClockwiseIcon weight="bold" />}
+      size="lg"
     />
   );
 };

@@ -4,8 +4,9 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import {
@@ -171,10 +172,12 @@ const AllocationPoolsList: FunctionComponent<
         </div>
       ))}
       <div className="mb-3">
-        <CompactActionButton
-          action={addPool}
-          title={translate('Add allocation pool')}
+        <BaseButton
+          onClick={addPool}
+          label={translate('Add allocation pool')}
           iconNode={<PlusCircleIcon weight="bold" />}
+          variant="tertiary"
+          size="sm"
         />
       </div>
       {meta.error && meta.submitFailed && (

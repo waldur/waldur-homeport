@@ -2,11 +2,12 @@ import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { OrderDetails } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionButton } from '@/table/ActionButton';
 
 const ApproveByProviderDialog = lazyComponent(() =>
   import('./ApproveByProviderDialog').then((module) => ({
@@ -39,7 +40,7 @@ export const ApproveByProviderButton: FunctionComponent<
   return (
     <ActionItem
       as={props.as}
-      className={props.as === ActionButton ? 'w-100' : undefined}
+      className={props.as === BaseButton ? 'w-100' : undefined}
       title={translate('Approve')}
       action={openApprovalDialog}
       variant="primary"

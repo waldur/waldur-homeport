@@ -54,7 +54,7 @@ export const getDuplicateErrorDialogOptions = () => ({
     size: 'sm' as const,
     positiveButton: translate('OK'),
     onlyPositiveButton: true,
-    positiveButtonVariant: 'primary w-95px',
+    positiveButtonVariant: 'primary' as const,
     iconNode: <InfoIcon weight="bold" />,
   },
 });

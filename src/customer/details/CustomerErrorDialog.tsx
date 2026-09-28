@@ -1,8 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Issue, IssueTypeEnum, supportIssuesCreate } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
-import { SubmitButton } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { ISSUE_IDS } from '@/issues/types/constants';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -259,11 +260,12 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
         <>
           <CloseDialogButton />
           {ENV.plugins.WALDUR_SUPPORT.ENABLED && (
-            <SubmitButton
-              submitting={submitting}
+            <BaseButton
+              pending={submitting}
               onClick={() => onCreateIssue()}
-              type="button"
               label={translate('Propose changes')}
+              variant="primary"
+              size="lg"
             />
           )}
         </>

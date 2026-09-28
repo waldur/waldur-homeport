@@ -20,11 +20,11 @@ import { Card, Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required, requiredArray } from '@/core/validators';
 import { StringField } from '@/form';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 const SortableField = ({ name, index, onRemove, disabled }) => {
   const {
@@ -60,12 +60,13 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
         </Field>
       </td>
       <td width={60}>
-        <ActionButton
-          action={onRemove}
+        <BaseButton
+          onClick={onRemove}
           iconNode={<TrashIcon weight="bold" />}
           variant="text-danger"
           disabled={disabled}
           disabledReason={translate('At least two options are required')}
+          size="lg"
         />
       </td>
     </tr>
@@ -129,15 +130,16 @@ const DraggableFieldsListGroup = ({
               <tr>
                 <td />
                 <td colSpan={2}>
-                  <CompactActionButton
-                    action={addRow}
-                    title={translate('Add answer')}
+                  <BaseButton
+                    onClick={addRow}
+                    label={translate('Add answer')}
                     iconNode={<PlusIcon weight="bold" />}
                     variant="text-primary"
                     disabled={addDisabled}
                     disabledReason={translate(
                       'Fill in all options before adding more',
                     )}
+                    size="sm"
                   />
                 </td>
               </tr>

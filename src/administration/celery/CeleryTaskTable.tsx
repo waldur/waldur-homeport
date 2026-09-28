@@ -2,8 +2,7 @@ import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { CeleryTask } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton, Tooltip } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -51,14 +50,14 @@ const CopyButton = ({ value }: { value: string }) => {
   }, [value]);
 
   return (
-    <button
-      type="button"
-      className="btn btn-icon btn-sm btn-light-primary ms-2"
+    <BaseButton
+      variant="secondary"
+      size="sm"
+      className="ms-2"
       onClick={handleCopy}
-      title={translate('Copy to clipboard')}
-    >
-      <CopyIcon size={14} weight="bold" />
-    </button>
+      tooltip={translate('Copy to clipboard')}
+      iconNode={<CopyIcon size={14} weight="bold" />}
+    />
   );
 };
 

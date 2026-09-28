@@ -5,11 +5,10 @@ import {
   LicenseSuggestion,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 import { arrowQueryKeys } from '../api';
 
@@ -111,16 +110,17 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
                   </Badge>
                 </td>
                 <td className="text-end">
-                  <ActionButton
-                    action={() =>
+                  <BaseButton
+                    onClick={() =>
                       linkResourceMutation.mutate({
                         resourceUuid: suggestion.resource_uuid,
                         licenseReference: suggestion.license_reference,
                       })
                     }
-                    title={translate('Link')}
+                    label={translate('Link')}
                     variant="success"
                     pending={linkResourceMutation.isPending}
+                    size="lg"
                   />
                 </td>
               </tr>

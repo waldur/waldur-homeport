@@ -15,24 +15,26 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
   const showIssues = hasSupport();
   const isCourseProject = project.kind === 'course';
 
-  const supportButtonClass = isCourseProject
-    ? 'btn btn-tertiary btn-icon btn-sm'
-    : 'btn btn-tertiary btn-lg';
-
   const supportButton = (
     <Link
       state="project.issues"
       params={{ uuid: project.uuid }}
-      className={supportButtonClass}
+      buttonVariant="tertiary"
+      buttonSize={isCourseProject ? 'sm' : 'lg'}
+      buttonIconOnly={isCourseProject}
       aria-label={translate('Support')}
     >
-      <span className="svg-icon svg-icon-2">
-        {isCourseProject ? (
-          <HeadsetIcon weight="bold" />
-        ) : (
-          <WarningIcon weight="bold" />
-        )}
-      </span>
+      {/* size (not a `.svg-icon` wrapper) for the exact px dimensions --
+          `.svg-icon`'s color mixin sets a fixed muted-gray fill with
+          nothing to override it now this Link carries no `.btn` (see
+          ActionsDropdown.tsx's TableDropdownToggle for the full
+          explanation) -- letting the icon's own fill="currentColor"
+          inherit the button's actual text color instead. */}
+      {isCourseProject ? (
+        <HeadsetIcon weight="bold" size={20} />
+      ) : (
+        <WarningIcon weight="bold" size={20} />
+      )}
       {!isCourseProject && translate('Support')}
     </Link>
   );

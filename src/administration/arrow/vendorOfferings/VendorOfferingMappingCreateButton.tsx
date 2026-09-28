@@ -1,9 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 
 const VendorOfferingMappingDialog = lazyComponent(() =>
   import('./VendorOfferingMappingDialog').then((module) => ({
@@ -23,9 +24,9 @@ export const VendorOfferingMappingCreateButton = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionButton
-      title={translate('Add mapping')}
-      action={() =>
+    <BaseButton
+      label={translate('Add mapping')}
+      onClick={() =>
         openDialog(VendorOfferingMappingDialog, {
           resolve: { settings, refetch },
         })
@@ -34,6 +35,7 @@ export const VendorOfferingMappingCreateButton = ({
       variant="primary"
       disabled={!settings?.uuid}
       disabledReason={translate('Settings UUID is required')}
+      size="lg"
     />
   );
 };

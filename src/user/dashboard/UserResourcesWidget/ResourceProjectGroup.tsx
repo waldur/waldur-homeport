@@ -137,7 +137,9 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
                   <Link
                     state="project-team"
                     params={{ uuid: project.uuid }}
-                    className="btn btn-sm btn-link text-primary p-0"
+                    buttonVariant="text-primary"
+                    buttonSize="sm"
+                    className="p-0"
                   >
                     {translate('View team')}
                     <ArrowRightIcon size={14} weight="bold" className="ms-1" />

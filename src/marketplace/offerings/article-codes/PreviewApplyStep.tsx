@@ -3,7 +3,8 @@ import { useFormState } from 'react-final-form';
 import type { ArticleCodeUpdatePreviewItem } from 'waldur-js-client';
 import { marketplaceArticleCodeUpdateApply } from 'waldur-js-client';
 
-import { SubmitButton } from '@/form';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@/marketplace/offerings/constants';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -58,13 +59,16 @@ const ApplyAction = ({
   }, [rows, applyMutation]);
 
   return (
-    <SubmitButton
-      submitting={applyMutation.isPending}
-      type="button"
+    <BaseButton
+      pending={applyMutation.isPending}
       variant="success"
       onClick={handleApply}
       disabled={rows.length === 0}
+      disabledReason={
+        rows.length === 0 ? translate('No changes to apply') : undefined
+      }
       label={translate('Apply changes ({count})', { count: rows.length })}
+      size="lg"
     />
   );
 };

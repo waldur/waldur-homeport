@@ -47,7 +47,8 @@ export const ChecklistStatusDialog: FC<ChecklistStatusDialogProps> = ({
                   disabled={invalid || pristine}
                   submitting={submitting}
                   label={translate('Save')}
-                  className="btn btn-primary flex-equal"
+                  variant="primary"
+                  className="flex-equal"
                 />
               </>
             }

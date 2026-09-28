@@ -2,6 +2,8 @@ import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useRef, useState } from 'react';
 import { FieldRenderProps } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import {
   DateTimeRangeField,
   DateTimeRangeHandle,
@@ -140,24 +142,25 @@ export const MaintenanceWindowPicker: FC<FieldRenderProps<WindowValue>> = (
         {chips.map((chip) => {
           const disabled = chip.requiresStart && !start;
           return (
-            <button
+            <BaseButton
               key={chip.label}
-              type="button"
-              className="btn btn-sm btn-light"
+              variant="tertiary"
+              size="sm"
               disabled={disabled}
+              disabledReason={
+                disabled ? translate('Set a start date first') : undefined
+              }
               onClick={() => applyChip(chip)}
-            >
-              {chip.label}
-            </button>
+              label={chip.label}
+            />
           );
         })}
-        <button
-          type="button"
-          className="btn btn-sm btn-light"
+        <BaseButton
+          variant="tertiary"
+          size="sm"
           onClick={focusPicker}
-        >
-          {translate('Custom…')}
-        </button>
+          label={translate('Custom…')}
+        />
       </div>
       {hasFullRange ? (
         <div className="text-muted mt-2">

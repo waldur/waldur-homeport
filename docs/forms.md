@@ -324,9 +324,9 @@ Avoid creating manual tooltips or extra label wrappers. Use the built-in `help` 
 // ❌ Manual tooltip implementation
 <label>
   {translate('Plan')}
-  <Tip label={translate('Help text')}>
+  <Tooltip label={translate('Help text')}>
     <QuestionIcon />
-  </Tip>
+  </Tooltip>
 </label>
 <Field component={SelectField} name="period" />
 

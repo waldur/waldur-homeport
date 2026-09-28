@@ -1,5 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { LoadingSpinner } from '@/table/TableRefreshButton';
 
@@ -15,14 +17,11 @@ export const RefreshButton = (props: RefreshButtonProps) => {
   return props.loading ? (
     <LoadingSpinner />
   ) : (
-    <button
-      type="button"
-      className="btn btn-icon btn-text-secondary"
+    <BaseButton
+      variant="text-secondary"
       onClick={props.refetch}
-      title={label}
-      aria-label={label}
-    >
-      <ArrowsClockwiseIcon size={20} weight="bold" />
-    </button>
+      tooltip={label}
+      iconNode={<ArrowsClockwiseIcon size={20} weight="bold" />}
+    />
   );
 };

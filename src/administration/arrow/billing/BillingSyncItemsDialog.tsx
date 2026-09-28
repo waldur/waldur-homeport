@@ -1,12 +1,13 @@
 import { Table } from 'react-bootstrap';
 import type { ArrowBillingSync, ArrowBillingSyncItem } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { ActionButton } from '@/table/ActionButton';
 
 import { useArrowBillingSyncItems } from '../api';
 
@@ -32,10 +33,11 @@ export const BillingSyncItemsDialog = ({
         reference: billingSync.arrow_reference,
       })}
       footer={
-        <ActionButton
-          action={closeDialog}
+        <BaseButton
+          onClick={closeDialog}
           variant="secondary"
-          title={translate('Close')}
+          label={translate('Close')}
+          size="lg"
         />
       }
     >

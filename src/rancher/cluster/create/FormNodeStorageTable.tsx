@@ -3,13 +3,14 @@ import { FC, PropsWithChildren, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, useForm } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
 import { SelectField, StringField } from '@/form';
 import { BoxNumberField } from '@/form/BoxNumberField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
-import { ActionButton } from '@/table/ActionButton';
 
 interface FormNodeStorageTableProps {
   title?: string;
@@ -139,10 +140,11 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
       )}
       {props.onDeleteRow && (
         <td className="w-60px">
-          <ActionButton
+          <BaseButton
             variant="text-danger"
-            action={props.onDeleteRow}
+            onClick={props.onDeleteRow}
             iconNode={<XIcon weight="bold" />}
+            size="lg"
           />
         </td>
       )}

@@ -1,7 +1,8 @@
 import { useRouter } from '@uirouter/react';
 import { Offering } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 export const ViewOfferingButton = ({
@@ -24,9 +25,8 @@ export const ViewOfferingButton = ({
   };
 
   return (
-    <CompactSubmitButton
-      submitting={false}
-      type="button"
+    <BaseButton
+      size="sm"
       variant="text-primary"
       disabled={disabled}
       onClick={handleClick}

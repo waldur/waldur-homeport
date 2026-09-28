@@ -7,13 +7,14 @@ import {
   marketplaceProviderOfferingsSetProfile,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SubmitButton, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
 interface DialogResolve {
@@ -67,7 +68,7 @@ const Dialog: FC<{ resolve: DialogResolve }> = ({ resolve }) => {
                 <SubmitButton
                   submitting={submitting}
                   label={translate('Save')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }
@@ -99,14 +100,16 @@ export const EditOfferingProfileButton: FC<{
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Edit')}
+    <BaseButton
+      label={translate('Edit')}
       iconNode={<PencilSimpleIcon weight="bold" />}
-      action={() =>
+      onClick={() =>
         openDialog(Dialog, {
           resolve: { offering, refetch },
         })
       }
+      variant="tertiary"
+      size="lg"
     />
   );
 };

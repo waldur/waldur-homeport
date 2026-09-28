@@ -2,6 +2,8 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { useForm } from 'react-final-form';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -69,15 +71,13 @@ export const WizardForm: FC<WizardFormProps> = ({
       footer={
         <>
           {props.step > 0 && (
-            <SubmitButton
-              submitting={false}
+            <BaseButton
               variant="tertiary"
               className="min-w-125px me-auto"
               onClick={props.onPrev}
-              type="button"
               label={translate('Back')}
               iconNode={<CaretLeftIcon weight="bold" />}
-              iconOnLeft
+              size="lg"
             />
           )}
           <CloseDialogButton className="min-w-125px" />

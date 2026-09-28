@@ -1,5 +1,6 @@
 import { ComponentType, ReactNode } from 'react';
-import { ButtonVariant } from 'react-bootstrap/esm/types';
+
+import { ButtonVariant } from 'waldur-ui';
 
 import { AppModalProps } from '@/modal/actions';
 import { DialogSizeType } from '@/modal/types';

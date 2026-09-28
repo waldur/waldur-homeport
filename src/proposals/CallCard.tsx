@@ -18,7 +18,7 @@ const CallLink = ({ call, asButton = false, children }) => (
     state="public-call.details"
     params={{ call_uuid: call.uuid }}
     buttonVariant={asButton ? 'text-primary' : undefined}
-    className={asButton ? 'btn-sm' : undefined}
+    buttonSize={asButton ? 'sm' : undefined}
   >
     {children}
   </Link>

@@ -1,8 +1,9 @@
 import { marketplaceProviderOfferingsDeleteEndpoint } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 export const DeleteEndpointButton = ({ endpoint, offering, refetch }) => {
   const deleteMutation = useManagedMutation<any, any, void>({
@@ -27,11 +28,12 @@ export const DeleteEndpointButton = ({ endpoint, offering, refetch }) => {
     },
   });
   return (
-    <CompactActionButton
+    <BaseButton
       variant="danger"
-      action={() => deleteMutation.mutate()}
+      onClick={() => deleteMutation.mutate()}
       pending={deleteMutation.isPending}
-      title={translate('Delete')}
+      label={translate('Delete')}
+      size="sm"
     />
   );
 };

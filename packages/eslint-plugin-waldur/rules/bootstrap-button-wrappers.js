@@ -1,12 +1,10 @@
 /**
  * The Waldur button wrappers, listed in the messages of both
- * `no-direct-bootstrap-button` (the import) and `no-bootstrap-button-markup`
- * (the hand-rolled `btn` classes) so the two stay in step.
+ * `no-bootstrap-button-markup` (the hand-rolled `btn` classes) and the
+ * `no-restricted-imports` entry for `Button` (eslint.config.js) so the two
+ * stay in step.
  */
 export const WRAPPERS =
-  '  - BaseButton: the general-purpose wrapper (dialog footers, page actions)\n' +
+  '  - BaseButton: the general-purpose wrapper from waldur-ui (page actions, dialogs, icon buttons)\n' +
   '  - SubmitButton: for form submit and action buttons\n' +
-  '  - IconButton: for icon-only buttons with tooltips\n' +
-  '  - ToolbarButton: for table/panel toolbar buttons\n' +
-  '  - ActionButton: for table row actions\n' +
   '  - CloseDialogButton: for modal cancel/close buttons';

@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { AsyncSelect } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
@@ -94,17 +96,15 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
                     <strong>{key}</strong> →{' '}
                     {value?.description || value?.name || 'Selected Role'}
                   </span>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-danger"
+                  <BaseButton
+                    variant="danger"
+                    size="sm"
                     onClick={() => removeMapping(key)}
-                    title={translate('Remove mapping')}
-                    aria-label={translate('Remove mapping for {{key}}', {
+                    tooltip={translate('Remove mapping for {{key}}', {
                       key,
                     })}
-                  >
-                    {translate('Remove')}
-                  </button>
+                    label={translate('Remove')}
+                  />
                 </li>
               ))}
             </ul>
@@ -158,18 +158,18 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
             />
           </div>
           <div className="col-md-2">
-            <button
+            <BaseButton
               type="button"
-              className={`btn btn-sm ${
-                isAddButtonEnabled ? 'btn-primary' : 'btn-outline-secondary'
-              }`}
+              size="sm"
+              variant={isAddButtonEnabled ? 'primary' : 'tertiary'}
               onClick={addMapping}
               disabled={!isAddButtonEnabled}
-              title={translate('Add mapping')}
+              disabledReason={translate(
+                'Enter a remote role name and select a local role first',
+              )}
               aria-label={translate('Add role mapping')}
-            >
-              {translate('Add')}
-            </button>
+              label={translate('Add')}
+            />
           </div>
         </div>
 

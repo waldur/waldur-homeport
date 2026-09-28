@@ -13,7 +13,7 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
 > = ({ order }) => {
   return (
     <div className="d-flex flex-wrap gap-2 mb-2 align-items-center">
-      <div className="btn btn-flush d-flex align-items-center">
+      <div className="d-flex align-items-center">
         <h3 className="text-start mb-0 me-2">
           {order.attributes.name || order.resource_name || DASH_ESCAPE_CODE}
         </h3>

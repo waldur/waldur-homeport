@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
+import { BaseButton } from 'waldur-ui';
+
 import { NotificationContainer } from '@/NotificationContainer';
 import { NotifyService } from '@/store/notify';
 

@@ -5,7 +5,8 @@ import {
   marketplaceOrdersRejectByProvider,
 } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { BaseButton } from 'waldur-ui';
+
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -67,20 +68,18 @@ export const OrderReviewDialog = ({ order, loadData }) => {
       footer={
         <>
           <CloseDialogButton className="min-w-125px" />
-          <CompactSubmitButton
-            submitting={false}
+          <BaseButton
+            size="sm"
             variant="danger"
             className="w-100"
             onClick={() => rejectOrder()}
-            type="button"
             label={translate('Reject')}
           />
-          <CompactSubmitButton
-            submitting={false}
+          <BaseButton
+            size="sm"
             variant="success"
             className="w-100"
             onClick={() => approveOrder()}
-            type="button"
             label={translate('Approve')}
           />
         </>

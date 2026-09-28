@@ -307,7 +307,7 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
                   disabled={invalid || mutation.isPending}
                   submitting={mutation.isPending}
                   label={translate('Run test')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

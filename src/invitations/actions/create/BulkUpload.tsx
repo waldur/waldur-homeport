@@ -8,10 +8,11 @@ import Papa from 'papaparse';
 import { FC, useCallback, useState } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
 
+import { BaseButton } from 'waldur-ui';
+
 import { FileUploadField } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import saveAsCsv from '@/table/exporters/csv';
 
 import example_file from './example_file.json';
@@ -111,10 +112,11 @@ export const BulkUpload: FC<OwnProps> = (props) => {
           </p>
         </Col>
         <Col xs="auto">
-          <ActionButton
+          <BaseButton
             variant="text-danger"
-            action={removeFile}
+            onClick={removeFile}
             iconNode={<TrashIcon weight="bold" />}
+            size="lg"
           />
         </Col>
       </Row>
@@ -149,7 +151,8 @@ export const BulkUpload: FC<OwnProps> = (props) => {
           accept=".csv"
           buttonLabel={translate('Import')}
           iconNode={<DownloadSimpleIcon weight="bold" />}
-          className="btn btn-secondary"
+          variant="secondary"
+          size="md"
         />
       </Col>
     </Row>

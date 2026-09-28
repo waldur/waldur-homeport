@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { getResourcesCount } from '@/administration/api';
 import { parseSelectData } from '@/core/api';
@@ -18,7 +18,6 @@ import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { TeamWidget } from '@/dashboard/TeamWidget';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import { EditButton } from '@/form/EditButton';
 import { translate } from '@/i18n';
 import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
 import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
@@ -28,7 +27,6 @@ import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { canViewTeam } from '@/permissions/teamVisibility';
-import { ActionButton } from '@/table/ActionButton';
 import { useUser, useProject } from '@/workspace/hooks';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
@@ -182,12 +180,14 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                 title={translate('Description')}
                 actions={
                   canEditProject && (
-                    <ActionButton
-                      title={translate('Edit')}
+                    <BaseButton
+                      label={translate('Edit')}
                       iconNode={<PencilSimpleIcon weight="bold" />}
                       iconRight
-                      action={handleEditDescription}
+                      onClick={handleEditDescription}
                       tooltip={translate('Edit description')}
+                      variant="tertiary"
+                      size="lg"
                     />
                   )
                 }
@@ -219,9 +219,14 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                 }
                 actions={
                   user.is_staff && (
-                    <EditButton
+                    <BaseButton
                       onClick={handleEditStaffNotes}
                       tooltip={translate('Edit staff notes')}
+                      iconNode={<PencilSimpleIcon weight="bold" />}
+                      label={translate('Edit')}
+                      iconRight
+                      variant="tertiary"
+                      size="sm"
                     />
                   )
                 }

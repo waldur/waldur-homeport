@@ -70,7 +70,8 @@ export const SetConsumerInfoDialog: FC<SetConsumerInfoDialogProps> = ({
                 <SubmitButton
                   submitting={setConsumerMutation.isPending}
                   label={translate('Send')}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

@@ -2,10 +2,11 @@ import { GearSixIcon, PlugsIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
+import { BaseButton } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
 import { TableWithTabs } from '@/table/TableWithTabs';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
@@ -74,21 +75,23 @@ export const MatrixAdminDashboard = () => {
           <MatrixHowItWorksButton />
           {staff && (
             <>
-              <ActionButton
-                title={translate('Check connectivity')}
-                action={openDiagnostics}
+              <BaseButton
+                label={translate('Check connectivity')}
+                onClick={openDiagnostics}
                 iconNode={<PlugsIcon weight="bold" />}
                 variant="tertiary"
+                size="lg"
               />
-              <ActionButton
-                title={translate('Setup appservice')}
-                action={openSetupDialog}
+              <BaseButton
+                label={translate('Setup appservice')}
+                onClick={openSetupDialog}
                 iconNode={<GearSixIcon weight="bold" />}
                 variant="tertiary"
                 disabled={!matrixEnabled}
                 disabledReason={translate(
                   'Enable Matrix chat in the Settings tab before configuring the appservice.',
                 )}
+                size="lg"
               />
             </>
           )}

@@ -1,10 +1,11 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { ActionButton } from '@/table/ActionButton';
 
 interface FormButtonsProps {
   step: 1 | 2;
@@ -41,30 +42,33 @@ export const FormButtons: FC<FormButtonsProps> = ({
   return step === 1 ? (
     <>
       <CloseDialogButton className="w-150px" />
-      <SubmitButton
-        type="button"
-        submitting={isCheckingDuplicates}
+      <BaseButton
+        pending={isCheckingDuplicates}
         className="w-150px"
         onClick={handleContinue}
         disabled={!valid || isCheckingDuplicates || actionDisabled}
         disabledReason={actionDisabled ? actionDisabledReason : undefined}
         label={translate('Continue')}
+        variant="primary"
+        size="lg"
       />
     </>
   ) : step === 2 ? (
     <>
-      <ActionButton
+      <BaseButton
         variant="tertiary"
         className="w-150px"
-        action={() => setStep(1)}
-        title={translate('Go back')}
+        onClick={() => setStep(1)}
+        label={translate('Go back')}
         iconNode={<CaretLeftIcon weight="bold" />}
+        size="lg"
       />
       <CloseDialogButton className="ms-auto w-150px" />
       <SubmitButton
         label={translate('Send invitation')}
         submitting={submitting}
-        className="btn btn-primary min-w-150px"
+        variant="primary"
+        className="min-w-150px"
         disabled={!valid || actionDisabled}
         disabledReason={actionDisabled ? actionDisabledReason : undefined}
       />

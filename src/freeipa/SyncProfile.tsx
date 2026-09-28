@@ -2,9 +2,8 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { freeipaProfilesUpdateSshKeys } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
@@ -39,15 +38,14 @@ export const SyncProfile: FunctionComponent<{
     <Tooltip
       label={translate('Add Waldur user SSH keys to the FreeIPA profile')}
     >
-      <SubmitButton
-        submitting={isPending}
-        type="button"
+      <BaseButton
+        pending={isPending}
         variant="primary"
         onClick={() => syncProfile()}
         label={translate('Sync profile')}
         iconNode={<ArrowsClockwiseIcon weight="bold" />}
-        iconOnLeft
         className="ms-2"
+        size="lg"
       />
     </Tooltip>
   );

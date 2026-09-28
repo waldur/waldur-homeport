@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import { Issue, supportIssuesAttachResource } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
@@ -8,7 +10,6 @@ import { useModal } from '@/modal/actions';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { ActionButton } from '@/table/ActionButton';
 
 const AttachResourceDialog: FC<{
   resolve: { issue: Issue; refetch: () => void };
@@ -78,12 +79,13 @@ export const AttachResourceButton: FC<{
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Attach resource')}
+    <BaseButton
+      label={translate('Attach resource')}
       variant="tertiary"
-      action={() =>
+      onClick={() =>
         openDialog(AttachResourceDialog, { resolve: { issue, refetch } })
       }
+      size="lg"
     />
   );
 };

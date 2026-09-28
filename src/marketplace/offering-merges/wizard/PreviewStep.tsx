@@ -2,9 +2,8 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OfferingMerge } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { translate } from '@/i18n';
 
 import { MergePreviewView } from '../MergePreviewView';

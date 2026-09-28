@@ -7,7 +7,7 @@ import {
   marketplaceProviderOfferingsTosStatsRetrieve,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -156,20 +156,20 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
                   </li>
                 ))}
               </ul>
-              <button
-                className="btn btn-icon btn-sm btn-light"
+              <BaseButton
+                variant="tertiary"
+                size="sm"
                 onClick={() =>
                   setMode((prev) => (prev === 'chart' ? 'table' : 'chart'))
                 }
-              >
-                <span className="svg-icon svg-icon-2">
-                  {mode === 'chart' ? (
+                iconNode={
+                  mode === 'chart' ? (
                     <TableIcon weight="bold" />
                   ) : (
                     <ChartBarIcon weight="bold" />
-                  )}
-                </span>
-              </button>
+                  )
+                }
+              />
             </div>
 
             {mode === 'chart' ? (

@@ -7,9 +7,10 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
-import { ActionButton } from '@/table/ActionButton';
 
 export const OrdersBulkActions = ({
   rows,
@@ -89,9 +90,9 @@ export const OrdersBulkActions = ({
 
   return (
     <>
-      <ActionButton
-        title={translate('Approve')}
-        action={() => approveMutation.mutate()}
+      <BaseButton
+        label={translate('Approve')}
+        onClick={() => approveMutation.mutate()}
         iconNode={<CheckIcon weight="bold" />}
         variant="primary"
         disabled={
@@ -117,10 +118,11 @@ export const OrdersBulkActions = ({
             : undefined
         }
         pending={approveMutation.isPending}
+        size="lg"
       />
-      <ActionButton
-        title={translate('Reject')}
-        action={() => rejectMutation.mutate()}
+      <BaseButton
+        label={translate('Reject')}
+        onClick={() => rejectMutation.mutate()}
         iconNode={<ProhibitIcon weight="bold" />}
         variant="danger"
         disabled={
@@ -134,6 +136,7 @@ export const OrdersBulkActions = ({
             : translate('Operation in progress')
         }
         pending={rejectMutation.isPending}
+        size="lg"
       />
     </>
   );

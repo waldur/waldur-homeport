@@ -6,6 +6,8 @@ import {
   MarketplaceCategoriesListData,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import Avatar from '@/core/Avatar';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';
@@ -16,7 +18,6 @@ import { CategoryLink } from '@/marketplace/links/CategoryLink';
 import { Category } from '@/marketplace/types';
 import { SelectFilter } from '@/table';
 import { createFetcher } from '@/table/api';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
@@ -125,11 +126,12 @@ export const AdminCategoriesPage: FunctionComponent = () => {
                     <span className="text-danger">
                       {translate('Error in fetching groups')}
                     </span>
-                    <CompactActionButton
-                      action={() => refetch()}
+                    <BaseButton
+                      onClick={() => refetch()}
                       iconNode={<ArrowsClockwiseIcon weight="bold" />}
                       variant="secondary"
                       className="ms-1"
+                      size="sm"
                     />
                   </>
                 );

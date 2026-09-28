@@ -120,7 +120,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
               state="organization-manage"
               params={{ uuid: organization.uuid }}
               buttonVariant="text-primary"
-              className="btn-sm"
+              buttonSize="sm"
             >
               {translate('Edit')}
             </Link>
@@ -129,7 +129,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
             uuid={organization.uuid}
             onClick={() => onClickDetails?.(organization)}
             buttonVariant="text-primary"
-            className="btn-sm"
+            buttonSize="sm"
             asButton
           >
             {translate('Details')}

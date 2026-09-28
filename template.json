@@ -163,7 +163,6 @@
   },
   "\"Enable automatic creation of offering users\" must be enabled for GLAuth generation": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
@@ -182,6 +181,7 @@
   "% Used": {},
   "% of limit": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "views"
     }
   },
@@ -519,6 +519,7 @@
   },
   "12 months": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reporting"
     }
   },
@@ -871,6 +872,11 @@
       "feature_area": "api-keys"
     }
   },
+  "API key is not ready to rotate": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "API key rotated successfully": {
     "context": {
       "primary_ui_type": "success_message",
@@ -987,22 +993,18 @@
   },
   "Accept & continue": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "cookies",
-      "action_type": "create"
+      "feature_area": "cookies"
     }
   },
   "Accept SCIM provisioning from SURF Research Access Management (SRAM) at /scim/v2/sram/. Also requires SCIM_INBOUND_ENABLED and a staff service-account token registered as the service's SCIM bearer token in SRAM.": {},
   "Accept all": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "cookies",
-      "action_type": "create"
+      "feature_area": "cookies"
     }
   },
   "Accept award": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "proposal"
     }
   },
@@ -1018,11 +1020,15 @@
       "feature_area": "roles"
     }
   },
+  "Accept in progress": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "Accept invitation": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "invitations",
-      "action_type": "create"
+      "primary_ui_type": "title",
+      "feature_area": "invitations"
     }
   },
   "Accept the Terms of Service for this resource's offering before using it.": {
@@ -1488,6 +1494,11 @@
       "feature_area": "UserPendingActionsList"
     }
   },
+  "Action in progress": {
+    "context": {
+      "feature_area": "reviewer-discovery"
+    }
+  },
   "Action is disabled for removed project": {
     "context": {
       "feature_area": "manage"
@@ -1495,7 +1506,6 @@
   },
   "Action is in progress": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "actions"
     }
   },
@@ -1554,7 +1564,6 @@
   },
   "Activate": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "vendorOfferings"
     }
   },
@@ -1802,7 +1811,6 @@
   },
   "Add QoS profile": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "qos"
     }
   },
@@ -1818,7 +1826,6 @@
   },
   "Add Terms of Service": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "tos"
     }
   },
@@ -1879,7 +1886,6 @@
   },
   "Add affiliate link": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "affiliates"
     }
   },
@@ -1905,7 +1911,6 @@
   },
   "Add another user": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create"
     }
   },
@@ -1956,14 +1961,11 @@
   },
   "Add comment": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "comments",
-      "action_type": "create"
+      "feature_area": "comments"
     }
   },
   "Add component": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "update"
     }
   },
@@ -1979,14 +1981,11 @@
   },
   "Add current page": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "search",
-      "action_type": "create"
+      "feature_area": "search"
     }
   },
   "Add data volume": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create"
     }
   },
@@ -2017,7 +2016,6 @@
   },
   "Add document": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "documents"
     }
   },
@@ -2028,13 +2026,12 @@
   },
   "Add email": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "list"
     }
   },
   "Add endpoint": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "label",
       "feature_area": "roles"
     }
   },
@@ -2060,7 +2057,6 @@
   },
   "Add guidance": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "questions"
     }
   },
@@ -2081,7 +2077,6 @@
   },
   "Add image": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "images"
     }
   },
@@ -2097,7 +2092,6 @@
   },
   "Add key": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "keys"
     }
   },
@@ -2113,7 +2107,6 @@
   },
   "Add mapping": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "mappings"
     }
   },
@@ -2135,7 +2128,6 @@
   },
   "Add new": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "remote-offering-sync"
     }
   },
@@ -2158,7 +2150,6 @@
   },
   "Add notification": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "hooks"
     }
   },
@@ -2169,7 +2160,6 @@
   },
   "Add offering partition": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "partitions"
     }
   },
@@ -2180,15 +2170,12 @@
   },
   "Add pair": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "openstack-instance"
     }
   },
   "Add passkey": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "passkeys",
-      "action_type": "create"
+      "feature_area": "passkeys"
     }
   },
   "Add payment": {
@@ -2203,7 +2190,6 @@
   },
   "Add plan": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "plans"
     }
   },
@@ -2286,7 +2272,7 @@
   },
   "Add software catalog": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "software-catalogs"
     }
   },
@@ -2307,7 +2293,6 @@
   },
   "Add subnet": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "update-internal-ips"
     }
   },
@@ -2338,7 +2323,6 @@
   },
   "Add time period": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "booking"
     }
   },
@@ -2355,7 +2339,6 @@
   },
   "Add user": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "dashboard"
     }
   },
@@ -2452,6 +2435,16 @@
   "Added to a project you already belong to. Provisioning starts as soon as the order is approved.": {
     "context": {
       "feature_area": "access"
+    }
+  },
+  "Adding comments is not available": {
+    "context": {
+      "feature_area": "comments"
+    }
+  },
+  "Adding role...": {
+    "context": {
+      "feature_area": "profiles"
     }
   },
   "Adding the offering": {
@@ -2560,7 +2553,6 @@
   },
   "Adjust withdrawable balance": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "affiliate-earnings"
     }
   },
@@ -2627,7 +2619,6 @@
   },
   "Advance workflow": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "proposal"
     }
   },
@@ -2926,7 +2917,8 @@
   },
   "Agent": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "create"
     }
   },
   "Agent identities": {
@@ -3303,7 +3295,6 @@
   },
   "All selected orders require a purchase order upload and must be approved individually.": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "actions"
     }
   },
@@ -4047,7 +4038,6 @@
   },
   "Answer the required checklist questions before completing this step.": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "proposal"
     }
   },
@@ -4327,14 +4317,12 @@
   },
   "Apply changes ({count})": {
     "context": {
-      "primary_ui_type": "submit_button",
       "variables": {
         "count": {
           "type": "number"
         }
       },
-      "feature_area": "article-codes",
-      "action_type": "create"
+      "feature_area": "article-codes"
     }
   },
   "Apply filters to table data": {
@@ -6301,7 +6289,6 @@
   },
   "Assign checklist": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "compliance"
     }
   },
@@ -6442,13 +6429,11 @@
   },
   "At least one email is required": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create"
     }
   },
   "At least one mapping is required": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "remote-offering-sync"
     }
   },
@@ -6475,7 +6460,6 @@
   },
   "At least two options are required": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "questions"
     }
   },
@@ -6601,7 +6585,6 @@
   },
   "Attach resource": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "issues"
     }
   },
@@ -7332,9 +7315,7 @@
   },
   "Back": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "consumption",
-      "action_type": "create"
+      "feature_area": "consumption"
     }
   },
   "Back to all sign-in options": {
@@ -7498,6 +7479,7 @@
   },
   "Bar": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -8216,7 +8198,7 @@
   "Bulgaria": {},
   "Bulk import": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "label",
       "feature_area": "import"
     }
   },
@@ -8267,6 +8249,7 @@
   "Buy price aggregated to parent sync record": {},
   "By OECD code": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "project-classification"
     }
   },
@@ -8311,6 +8294,7 @@
   },
   "By industry": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "project-classification"
     }
   },
@@ -8333,6 +8317,7 @@
   },
   "By project": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -8345,6 +8330,7 @@
   },
   "By resource": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "requests"
     }
   },
@@ -8366,6 +8352,7 @@
   },
   "By user": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -8540,7 +8527,6 @@
   },
   "Calculate price": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "plan"
     }
   },
@@ -8768,9 +8754,7 @@
   "Canada": {},
   "Cancel": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "billing",
-      "action_type": "create"
+      "feature_area": "billing"
     }
   },
   "Cancel & reload": {
@@ -8787,9 +8771,8 @@
   },
   "Cancel invitation": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "invitations",
-      "action_type": "create"
+      "primary_ui_type": "title",
+      "feature_area": "invitations"
     }
   },
   "Cancel invitation for {email}?": {
@@ -8852,7 +8835,6 @@
   },
   "Canceling...": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "request-end-date-change"
     }
   },
@@ -9279,7 +9261,6 @@
   },
   "Change status": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "issues"
     }
   },
@@ -9350,6 +9331,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "core"
+    }
+  },
+  "Chart type": {
+    "context": {
+      "feature_area": "reports"
     }
   },
   "Chat": {
@@ -9425,13 +9411,11 @@
   },
   "Check connectivity": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "matrix"
     }
   },
   "Check for updates": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "marketplace"
     }
   },
@@ -9789,7 +9773,6 @@
   "Civil/national ID number": {},
   "Claim": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "auto-provisioning-rules"
     }
   },
@@ -9862,7 +9845,6 @@
   },
   "Clear": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "search"
     }
   },
@@ -9926,8 +9908,16 @@
       "feature_area": "settings"
     }
   },
-  "Click to approve this project.": {},
-  "Click to reject this project.": {},
+  "Click to approve this project.": {
+    "context": {
+      "feature_area": "managed-projects"
+    }
+  },
+  "Click to reject this project.": {
+    "context": {
+      "feature_area": "managed-projects"
+    }
+  },
   "Click to see Google Calendar": {
     "context": {
       "feature_area": "details"
@@ -9992,7 +9982,6 @@
   },
   "Clone role": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "roles"
     }
   },
@@ -10013,7 +10002,6 @@
   },
   "Close": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "administration"
     }
   },
@@ -10532,7 +10520,6 @@
   },
   "Complete all fields before adding more": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "questions"
     }
   },
@@ -10548,7 +10535,6 @@
   },
   "Complete existing mappings first": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "remote-offering-sync"
     }
   },
@@ -10559,9 +10545,7 @@
   },
   "Complete review": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "core",
-      "action_type": "create"
+      "feature_area": "core"
     }
   },
   "Complete step": {
@@ -10944,7 +10928,6 @@
   },
   "Configure": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "update-internal-ips"
     }
   },
@@ -11127,9 +11110,7 @@
   },
   "Confirm with passkey": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "auth",
-      "action_type": "create"
+      "feature_area": "auth"
     }
   },
   "Confirmation": {
@@ -11702,7 +11683,6 @@
   },
   "Continue to autentification": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "join-organization"
     }
   },
@@ -12275,7 +12255,6 @@
   },
   "Create a campaign": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "service-providers"
     }
   },
@@ -12501,7 +12480,6 @@
   },
   "Create new": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "deploy"
     }
   },
@@ -12648,9 +12626,7 @@
   },
   "Create profile": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "profiles",
-      "action_type": "create"
+      "feature_area": "profiles"
     }
   },
   "Create project": {
@@ -12681,7 +12657,6 @@
   },
   "Create review": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "proposal"
     }
   },
@@ -12786,7 +12761,7 @@
   },
   "Create user": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "label",
       "feature_area": "roles"
     }
   },
@@ -13058,7 +13033,6 @@
   },
   "Credit transactions": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "affiliate-earnings"
     }
   },
@@ -14183,6 +14157,7 @@
   },
   "Day": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -14323,8 +14298,9 @@
   },
   "Decline": {
     "context": {
-      "primary_ui_type": "action_button",
-      "feature_area": "invitations"
+      "primary_ui_type": "submit_button",
+      "feature_area": "invitations",
+      "action_type": "create"
     }
   },
   "Decline \"{name}\"? The request will be withdrawn.": {
@@ -14345,15 +14321,19 @@
   },
   "Decline award": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "proposal"
+    }
+  },
+  "Decline in progress": {
+    "context": {
+      "feature_area": "invitations"
     }
   },
   "Decline invitation": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "invitations",
-      "action_type": "create"
+      "primary_ui_type": "title",
+      "feature_area": "invitations"
     }
   },
   "Decline permission request by {name}": {
@@ -15231,6 +15211,11 @@
       "feature_area": "request-types"
     }
   },
+  "Deletion is already in progress": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
   "Demand growth": {
     "context": {
       "primary_ui_type": "label"
@@ -15258,9 +15243,7 @@
   },
   "Deny analytical cookies": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "cookies",
-      "action_type": "create"
+      "feature_area": "cookies"
     }
   },
   "Department": {
@@ -15552,7 +15535,7 @@
   },
   "Details": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "organizations"
     }
   },
@@ -15781,7 +15764,7 @@
   },
   "Disable service provider profile": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "details"
     }
   },
@@ -15935,7 +15918,6 @@
   },
   "Discover": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "openstack"
     }
   },
@@ -16267,9 +16249,7 @@
   },
   "Download": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "upload",
-      "action_type": "create"
+      "feature_area": "upload"
     }
   },
   "Download .env": {
@@ -16433,7 +16413,6 @@
   },
   "Dry run": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
@@ -16445,7 +16424,7 @@
   "Dry run results": {},
   "Dry run script": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "label",
       "feature_area": "roles"
     }
   },
@@ -16786,7 +16765,6 @@
   },
   "Edit all": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "mass-actions"
     }
   },
@@ -16832,7 +16810,6 @@
   },
   "Edit category": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "attributes"
     }
   },
@@ -16868,7 +16845,6 @@
   },
   "Edit description": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "common"
     }
   },
@@ -16889,7 +16865,6 @@
   },
   "Edit environment variables": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
@@ -17184,7 +17159,6 @@
   },
   "Edit schedules": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "booking"
     }
   },
@@ -17555,13 +17529,11 @@
   },
   "Enable Matrix chat in the Settings tab before configuring the appservice.": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "matrix"
     }
   },
   "Enable Matrix chat in the Settings tab before creating rooms.": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "matrix"
     }
   },
@@ -18161,6 +18133,11 @@
   "Enter IPv4 address.": {},
   "Enter IPv6 address.": {},
   "Enter a CIDR address.": {},
+  "Enter a claim name first": {
+    "context": {
+      "feature_area": "steps"
+    }
+  },
   "Enter a claim name.": {
     "context": {
       "feature_area": "auto-provisioning-rules"
@@ -18244,6 +18221,11 @@
   "Enter a reason for declining the award": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Enter a remote role name and select a local role first": {
+    "context": {
+      "feature_area": "project-templates"
     }
   },
   "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.": {
@@ -18660,7 +18642,6 @@
   },
   "Escalate": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "issues"
     }
   },
@@ -18837,6 +18818,11 @@
     }
   },
   "Evaluation history": {
+    "context": {
+      "feature_area": "policies"
+    }
+  },
+  "Evaluation is in progress": {
     "context": {
       "feature_area": "policies"
     }
@@ -19378,13 +19364,11 @@
   },
   "Export price list": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "details"
     }
   },
   "Export report": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "analytics"
     }
   },
@@ -20631,7 +20615,6 @@
   },
   "Fill in empty email fields before adding more": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create"
     }
   },
@@ -20884,7 +20867,6 @@
   },
   "Firewall allow-list": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "access-subnets"
     }
   },
@@ -21631,9 +21613,7 @@
   },
   "Generate Configuration": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "site-agent",
-      "action_type": "create"
+      "feature_area": "site-agent"
     }
   },
   "Generate LDAP Agent Env": {
@@ -21691,7 +21671,6 @@
   },
   "Generate password": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "template"
     }
   },
@@ -21808,7 +21787,6 @@
   },
   "Go back": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "error"
     }
   },
@@ -21829,7 +21807,6 @@
   },
   "Go to dashboard": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "organization-create"
     }
   },
@@ -21846,9 +21823,7 @@
   },
   "Go to profile": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "auth",
-      "action_type": "create"
+      "feature_area": "auth"
     }
   },
   "Go to service catalog": {},
@@ -22064,7 +22039,7 @@
   },
   "Group by": {
     "context": {
-      "feature_area": "metadata"
+      "feature_area": "reports"
     }
   },
   "Group by:": {
@@ -22530,9 +22505,7 @@
   },
   "Hide diff": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "cluster",
-      "action_type": "create"
+      "feature_area": "cluster"
     }
   },
   "Hide embargoed": {
@@ -22828,7 +22801,6 @@
   },
   "How it works": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "settings"
     }
   },
@@ -23014,6 +22986,7 @@
   },
   "IDs": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -23561,7 +23534,6 @@
   },
   "Import YAML": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "cluster"
     }
   },
@@ -23611,8 +23583,12 @@
   },
   "Import in progress": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "onboarding-setup"
+    }
+  },
+  "Import is already in progress": {
+    "context": {
+      "feature_area": "consumption"
     }
   },
   "Import just project details without associated resources. Includes basic project metadata.": {},
@@ -23660,7 +23636,6 @@
   },
   "Import preset": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "onboarding-setup"
     }
   },
@@ -23707,7 +23682,6 @@
   },
   "Import usage": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "import-usage"
     }
   },
@@ -24534,6 +24508,11 @@
       "feature_area": "support"
     }
   },
+  "Interval": {
+    "context": {
+      "feature_area": "reports"
+    }
+  },
   "Invalid JSON format": {
     "context": {
       "feature_area": "single-import"
@@ -24851,7 +24830,6 @@
   },
   "Invite by email": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create"
     }
   },
@@ -26471,6 +26449,7 @@
   },
   "Line": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -26492,7 +26471,7 @@
   "Lines already written on invoices. They are not moved: they are rewritten in place, as far as the invoice policy allows.": {},
   "Link": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "mappings"
     }
   },
@@ -26905,7 +26884,6 @@
   },
   "Load preset": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "science-domains"
     }
   },
@@ -27047,7 +27025,6 @@
   },
   "Loading suggestion": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "steps"
     }
   },
@@ -27712,9 +27689,7 @@
   },
   "Manage profile": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "review",
-      "action_type": "create"
+      "feature_area": "review"
     }
   },
   "Manage proposal": {
@@ -28960,9 +28935,7 @@
   },
   "Merge": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "support-users",
-      "action_type": "create"
+      "feature_area": "support-users"
     }
   },
   "Merge duplicates": {
@@ -29123,7 +29096,7 @@
   },
   "Metric": {
     "context": {
-      "feature_area": "proposals"
+      "feature_area": "reports"
     }
   },
   "Metric name": {
@@ -29731,9 +29704,13 @@
       "feature_area": "ai-assistant"
     }
   },
+  "More actions": {
+    "context": {
+      "feature_area": "dashboard"
+    }
+  },
   "More details": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "deploy"
     }
   },
@@ -29745,6 +29722,11 @@
   "More information": {
     "context": {
       "feature_area": "access"
+    }
+  },
+  "More tabs": {
+    "context": {
+      "feature_area": "administration"
     }
   },
   "Most used checklists": {
@@ -30031,9 +30013,7 @@
   },
   "My Proposals": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "proposals",
-      "action_type": "create"
+      "feature_area": "proposals"
     }
   },
   "My access requests": {},
@@ -30208,6 +30188,7 @@
   },
   "Names": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -30592,7 +30573,6 @@
   },
   "New merge": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "offering-merges"
     }
   },
@@ -30959,7 +30939,6 @@
   },
   "No active request types selected": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "request-types"
     }
   },
@@ -31072,7 +31051,6 @@
   },
   "No available subnets": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "actions"
     }
   },
@@ -31116,16 +31094,19 @@
       "feature_area": "create-user-steps"
     }
   },
+  "No changes to apply": {
+    "context": {
+      "feature_area": "article-codes"
+    }
+  },
   "No changes to reset": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
   "No changes to save": {
     "context": {
-      "primary_ui_type": "action_button",
-      "feature_area": "project-digest"
+      "feature_area": "settings"
     }
   },
   "No charge": {
@@ -31543,7 +31524,6 @@
   "No impact": {},
   "No inactive request types selected": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "request-types"
     }
   },
@@ -31746,7 +31726,6 @@
   },
   "No more subnets available": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "update-internal-ips"
     }
   },
@@ -31807,9 +31786,7 @@
   },
   "No open round available.": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "details",
-      "action_type": "create"
+      "feature_area": "details"
     }
   },
   "No order information available.": {
@@ -31915,7 +31892,6 @@
   },
   "No pending orders selected": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "actions"
     }
   },
@@ -32099,6 +32075,16 @@
   "No queues match this pattern": {
     "context": {
       "primary_ui_type": "error_message",
+      "feature_area": "rabbitmq"
+    }
+  },
+  "No queues to delete": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
+  "No queues to purge": {
+    "context": {
       "feature_area": "rabbitmq"
     }
   },
@@ -32320,7 +32306,6 @@
   },
   "No security groups selected": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "deploy"
     }
   },
@@ -32743,6 +32728,11 @@
   "Not attached to a local project": {
     "context": {
       "feature_area": "managed-projects"
+    }
+  },
+  "Not available when a global scope is selected.": {
+    "context": {
+      "feature_area": "personal-access-tokens"
     }
   },
   "Not carried over": {},
@@ -33624,7 +33614,6 @@
   },
   "Offering information is not available": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "deploy"
     }
   },
@@ -34741,7 +34730,6 @@
   },
   "Operation in progress": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "request-types"
     }
   },
@@ -35023,6 +35011,11 @@
     }
   },
   "Order details": {},
+  "Order details unavailable": {
+    "context": {
+      "feature_area": "UserPendingActionsList"
+    }
+  },
   "Order errors": {
     "context": {
       "feature_area": "resource-pending"
@@ -35265,7 +35258,6 @@
   },
   "Organization and project selection required": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "steps"
     }
   },
@@ -35473,7 +35465,6 @@
   },
   "Organization restrictions": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "actions"
     }
   },
@@ -36026,7 +36017,7 @@
   },
   "POSIX identities": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "posix-id-pools"
     }
   },
@@ -36377,7 +36368,6 @@
   },
   "Pause sync": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "settings"
     }
   },
@@ -37317,6 +37307,7 @@
   },
   "Pie": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -37380,7 +37371,6 @@
   },
   "Placement map": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "mass-actions"
     }
   },
@@ -37600,6 +37590,11 @@
       "action_type": "confirm"
     }
   },
+  "Please complete your profile first": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "Please complete your profile to access this section": {
     "context": {
       "feature_area": "sidebar"
@@ -37646,6 +37641,11 @@
       "feature_area": "actions"
     }
   },
+  "Please enter the required text to confirm": {
+    "context": {
+      "feature_area": "modal"
+    }
+  },
   "Please enter username and password.": {
     "context": {
       "feature_area": "auth"
@@ -37653,7 +37653,6 @@
   },
   "Please fill in all required fields": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "broadcasts"
     }
   },
@@ -37773,9 +37772,7 @@
   },
   "Please read the Terms of Service before accepting.": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "shared",
-      "action_type": "create"
+      "feature_area": "shared"
     }
   },
   "Please review and activate offering {offeringName} ({offeringUuid}). \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}": {
@@ -37864,6 +37861,11 @@
       "feature_area": "blocks"
     }
   },
+  "Please select a resource to continue": {
+    "context": {
+      "feature_area": "import"
+    }
+  },
   "Please select a script language to use dry-run": {
     "context": {
       "feature_area": "integration"
@@ -37886,6 +37888,11 @@
       "feature_area": "settings"
     }
   },
+  "Please select at least one duplicate user to merge": {
+    "context": {
+      "feature_area": "support-users"
+    }
+  },
   "Please select at least one language to save changes": {
     "context": {
       "primary_ui_type": "error_message",
@@ -37896,6 +37903,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "import"
+    }
+  },
+  "Please select at least one offering": {
+    "context": {
+      "feature_area": "site-agent"
     }
   },
   "Please select at least one proposal.": {
@@ -37956,6 +37968,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Please wait for the current action to complete": {
+    "context": {
+      "feature_area": "UserPendingActionsList"
+    }
+  },
   "Please wait while we check your company information in the business registry.": {
     "context": {
       "feature_area": "organization-create"
@@ -37963,7 +37980,6 @@
   },
   "Please wait...": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "details"
     }
   },
@@ -38974,22 +38990,17 @@
   "Principal name": {},
   "Print PDF": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "details"
     }
   },
   "Print invoice": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "details",
-      "action_type": "create"
+      "feature_area": "details"
     }
   },
   "Print record": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "details",
-      "action_type": "create"
+      "feature_area": "details"
     }
   },
   "Priority": {
@@ -40251,9 +40262,7 @@
   },
   "Propose changes": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "details",
-      "action_type": "create"
+      "feature_area": "details"
     }
   },
   "Proposed VAT code: {value}.": {
@@ -40856,9 +40865,7 @@
   },
   "Publish profile": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "invitations",
-      "action_type": "create"
+      "feature_area": "invitations"
     }
   },
   "Publish reviewer profile": {
@@ -41031,6 +41038,11 @@
     }
   },
   "Purge all queues": {
+    "context": {
+      "feature_area": "rabbitmq"
+    }
+  },
+  "Purge is already in progress": {
     "context": {
       "feature_area": "rabbitmq"
     }
@@ -41522,6 +41534,7 @@
       "feature_area": "create"
     }
   },
+  "Random identifier sent with telemetry so reports from one deployment can be grouped. Generated on the first report; clear it to rotate.": {},
   "Rate": {
     "context": {
       "primary_ui_type": "title",
@@ -41655,7 +41668,6 @@
   },
   "Read-only mode": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
@@ -41995,9 +42007,7 @@
   },
   "Refresh": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "common",
-      "action_type": "create"
+      "feature_area": "common"
     }
   },
   "Refresh is available when the room is active — no history exports can be produced in the current state.": {
@@ -42007,13 +42017,11 @@
   },
   "Refreshing...": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "course-accounts"
     }
   },
   "Refreshing…": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "livekit"
     }
   },
@@ -42029,7 +42037,6 @@
   },
   "Regenerate": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "playground"
     }
   },
@@ -42042,7 +42049,6 @@
   "Register as a customer of our portal and provide your cloud services through the service catalog.": {},
   "Register as service provider": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "details"
     }
   },
@@ -42151,7 +42157,6 @@
   },
   "Reject at step": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "proposal"
     }
   },
@@ -42314,9 +42319,7 @@
   },
   "Reload": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "core",
-      "action_type": "create"
+      "feature_area": "core"
     }
   },
   "Reload page": {
@@ -42557,7 +42560,7 @@
   },
   "Remove": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "administration"
     }
   },
@@ -42629,11 +42632,6 @@
       "feature_area": "openstack-lbaas"
     }
   },
-  "Remove mapping": {
-    "context": {
-      "feature_area": "project-templates"
-    }
-  },
   "Remove mapping for {{key}}": {
     "context": {
       "variables": {
@@ -42674,6 +42672,11 @@
       "feature_area": "create-user-steps"
     }
   },
+  "Remove period": {
+    "context": {
+      "feature_area": "booking"
+    }
+  },
   "Remove pool": {
     "context": {
       "primary_ui_type": "title",
@@ -42702,9 +42705,7 @@
   },
   "Remove rule": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "options",
-      "action_type": "create"
+      "feature_area": "options"
     }
   },
   "Remove selected affiliations": {
@@ -42884,6 +42885,11 @@
   "Removing the organization will delete all related resources.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Removing...": {
+    "context": {
+      "feature_area": "profiles"
     }
   },
   "Rename": {
@@ -43315,6 +43321,11 @@
       "feature_area": "support"
     }
   },
+  "Request has already been processed": {
+    "context": {
+      "feature_area": "organizations"
+    }
+  },
   "Request has been approved.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -43714,7 +43725,6 @@
   },
   "Reroute": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "issues"
     }
   },
@@ -43793,22 +43803,19 @@
   },
   "Reset": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
   "Reset circuit breaker": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "pubsub",
-      "action_type": "create"
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
     }
   },
   "Reset metrics": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "pubsub",
-      "action_type": "create"
+      "primary_ui_type": "title",
+      "feature_area": "pubsub"
     }
   },
   "Reset raw usage at period transitions (PriorityUsageResetPeriod=None)": {
@@ -43828,7 +43835,6 @@
   },
   "Reset to saved": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
@@ -43869,7 +43875,6 @@
   },
   "Resolve conflicts": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "accounts"
     }
   },
@@ -44745,7 +44750,6 @@
   },
   "Respond": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "details"
     }
   },
@@ -44805,7 +44809,6 @@
   "Restarting": {},
   "Restore": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "actions"
     }
   },
@@ -44977,15 +44980,12 @@
   },
   "Resume sync": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "settings"
     }
   },
   "Retry": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "ai-assistant",
-      "action_type": "create"
+      "feature_area": "ai-assistant"
     }
   },
   "Retry has been triggered.": {
@@ -45090,9 +45090,7 @@
   },
   "Review PDF": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "details",
-      "action_type": "create"
+      "feature_area": "details"
     }
   },
   "Review Progress Analysis": {
@@ -45468,7 +45466,7 @@
   },
   "Reviews": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "customer"
     }
   },
@@ -46087,9 +46085,7 @@
   },
   "Rotate": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "api-keys",
-      "action_type": "create"
+      "feature_area": "api-keys"
     }
   },
   "Rotate API key": {
@@ -46169,7 +46165,6 @@
   },
   "Route to provider": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "issues"
     }
   },
@@ -46669,9 +46664,7 @@
   },
   "Sample now": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "table-growth",
-      "action_type": "create"
+      "feature_area": "table-growth"
     }
   },
   "Satisfaction": {},
@@ -46694,22 +46687,17 @@
   },
   "Save & Complete": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "setup",
-      "action_type": "create"
+      "feature_area": "setup"
     }
   },
   "Save & dry run script": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
   "Save Settings": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "steps",
-      "action_type": "create"
+      "feature_area": "steps"
     }
   },
   "Save and exit": {
@@ -46726,7 +46714,6 @@
   },
   "Save as a template": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "broadcasts"
     }
   },
@@ -46788,19 +46775,17 @@
   },
   "Saving draft...": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create"
     }
   },
   "Saving in progress": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
   "Saving...": {
     "context": {
-      "feature_area": "onboarding-setup"
+      "feature_area": "core"
     }
   },
   "Scale": {
@@ -46855,7 +46840,6 @@
   },
   "Schedule upgrade": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "changelog"
     }
   },
@@ -47358,13 +47342,11 @@
   },
   "See less": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "landing"
     }
   },
   "See more": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "offering"
     }
   },
@@ -47505,6 +47487,11 @@
       "feature_area": "offering"
     }
   },
+  "Select a date and time first": {
+    "context": {
+      "feature_area": "version-history"
+    }
+  },
   "Select a domain first": {
     "context": {
       "feature_area": "create"
@@ -47608,6 +47595,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "workflow-steps",
       "action_type": "create"
+    }
+  },
+  "Select a unit and enter a value first": {
+    "context": {
+      "feature_area": "project-templates"
     }
   },
   "Select a user": {
@@ -48121,7 +48113,7 @@
   },
   "Select recipients": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "label",
       "feature_area": "broadcasts"
     }
   },
@@ -48624,7 +48616,6 @@
   },
   "Send back": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create-review"
     }
   },
@@ -48720,9 +48711,7 @@
   },
   "Send test email": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "email",
-      "action_type": "create"
+      "feature_area": "email"
     }
   },
   "Send voice message": {
@@ -48852,7 +48841,8 @@
   },
   "Server": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "create"
     }
   },
   "Server error": {
@@ -49167,6 +49157,11 @@
       "feature_area": "assignments"
     }
   },
+  "Set a start date first": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Set access policy for {offeringName}": {
     "context": {
       "variables": {
@@ -49375,7 +49370,6 @@
   },
   "Set management security group": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "cluster"
     }
   },
@@ -49511,7 +49505,6 @@
   },
   "Set up helpdesk": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "common"
     }
   },
@@ -49549,7 +49542,6 @@
   },
   "Settings UUID is required": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "vendorOfferings"
     }
   },
@@ -49568,13 +49560,11 @@
   },
   "Setup Arrow Integration": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "settings"
     }
   },
   "Setup appservice": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "matrix"
     }
   },
@@ -49681,7 +49671,6 @@
   "Should extra issue field mappings be applied": {},
   "Show": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "auth"
     }
   },
@@ -49730,6 +49719,11 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Show as": {
+    "context": {
+      "feature_area": "reports"
+    }
+  },
   "Show available bot commands": {},
   "Show chart": {
     "context": {
@@ -49773,15 +49767,12 @@
   },
   "Show details": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "resources"
     }
   },
   "Show diff": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "cluster",
-      "action_type": "create"
+      "feature_area": "cluster"
     }
   },
   "Show duplicate names": {
@@ -49799,12 +49790,7 @@
       "feature_area": "resource-pending"
     }
   },
-  "Show error trace": {
-    "context": {
-      "primary_ui_type": "submit_button",
-      "action_type": "create"
-    }
-  },
+  "Show error trace": {},
   "Show example": {
     "context": {
       "feature_area": "administration"
@@ -49837,9 +49823,7 @@
   },
   "Show log": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "issues",
-      "action_type": "create"
+      "feature_area": "issues"
     }
   },
   "Show me more options": {
@@ -50135,14 +50119,19 @@
       "feature_area": "auth"
     }
   },
-  "Sign in with local account": {},
+  "Sign in with local account": {
+    "context": {
+      "feature_area": "auth"
+    }
+  },
   "Sign in with {label}": {
     "context": {
       "variables": {
         "label": {
           "type": "string"
         }
-      }
+      },
+      "feature_area": "auth"
     }
   },
   "Sign-in": {
@@ -50522,7 +50511,6 @@
   },
   "Some orders require a purchase order upload and will be skipped. Approve them individually.": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "actions"
     }
   },
@@ -51187,6 +51175,11 @@
     }
   },
   "Stopping": {},
+  "Stopping...": {
+    "context": {
+      "feature_area": "administration"
+    }
+  },
   "Storage": {
     "context": {
       "primary_ui_type": "title",
@@ -51328,7 +51321,6 @@
   },
   "Submission in progress": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "details"
     }
   },
@@ -51425,7 +51417,6 @@
   },
   "Submitting...": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "broadcasts"
     }
   },
@@ -51688,7 +51679,6 @@
   },
   "Suggest name": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "steps"
     }
   },
@@ -51756,7 +51746,7 @@
   },
   "Support": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "title",
       "feature_area": "dashboard"
     }
   },
@@ -51923,7 +51913,6 @@
   },
   "Sync all users": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "providers"
     }
   },
@@ -51941,7 +51930,6 @@
   },
   "Sync consumption": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "debug"
     }
   },
@@ -51984,9 +51972,7 @@
   },
   "Sync profile": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "freeipa",
-      "action_type": "create"
+      "feature_area": "freeipa"
     }
   },
   "Sync remote offerings with your local provider efficiently": {
@@ -52082,13 +52068,11 @@
   },
   "Synchronization is in progress": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
   "Synchronize": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "integration"
     }
   },
@@ -52942,9 +52926,7 @@
   },
   "Test connection": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "email",
-      "action_type": "create"
+      "feature_area": "email"
     }
   },
   "Test digest email has been sent to your email address.": {
@@ -54034,7 +54016,6 @@
   "The request failed. Please try again.": {},
   "The request is being processed": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "project"
     }
   },
@@ -54417,6 +54398,16 @@
     }
   },
   "There are no categories.": {},
+  "There are no changes to reset": {
+    "context": {
+      "feature_area": "policies"
+    }
+  },
+  "There are no changes to save": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "There are no comments yet.": {
     "context": {
       "feature_area": "comments"
@@ -54566,7 +54557,6 @@
   },
   "There is no active organization": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "create"
     }
   },
@@ -54896,6 +54886,11 @@
   "This feature is disabled": {
     "context": {
       "feature_area": "error"
+    }
+  },
+  "This field is disabled": {
+    "context": {
+      "feature_area": "form"
     }
   },
   "This field is only editable when startup script is enabled.": {
@@ -55288,7 +55283,6 @@
   },
   "This request cannot be updated in its current state.": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "issues"
     }
   },
@@ -55682,6 +55676,7 @@
   },
   "Timeline": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "reports"
     }
   },
@@ -55897,7 +55892,6 @@
   },
   "ToS reporting": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "tos"
     }
   },
@@ -61767,9 +61761,7 @@
   },
   "Unpublish profile": {
     "context": {
-      "primary_ui_type": "submit_button",
-      "feature_area": "reviewer",
-      "action_type": "create"
+      "feature_area": "reviewer"
     }
   },
   "Unpublish reviewer profile": {
@@ -61888,7 +61880,6 @@
   },
   "Update a campaign": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "service-providers"
     }
   },
@@ -64261,7 +64252,6 @@
   },
   "Validate": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "configuration"
     }
   },
@@ -64647,7 +64637,6 @@
   },
   "View GLAuth configuration": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "list"
     }
   },
@@ -64741,7 +64730,7 @@
   },
   "View details": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "label",
       "feature_area": "plan"
     }
   },
@@ -64762,7 +64751,6 @@
   },
   "View items": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "billing"
     }
   },
@@ -66481,6 +66469,11 @@
       "feature_area": "users"
     }
   },
+  "You are on the first step": {
+    "context": {
+      "feature_area": "organization-create"
+    }
+  },
   "You are requesting to join {name}": {
     "context": {
       "variables": {
@@ -66631,7 +66624,7 @@
   },
   "You do not have permission to perform this action.": {
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "error_message",
       "feature_area": "import-users"
     }
   },
@@ -66672,7 +66665,6 @@
   },
   "You don't have enough privileges to perform this operation.": {
     "context": {
-      "primary_ui_type": "action_button",
       "feature_area": "team"
     }
   },

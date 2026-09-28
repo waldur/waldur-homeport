@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -57,13 +58,14 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
         ) : null}
       </div>
       <div>
-        <CompactIconButton
+        <BaseButton
           iconNode={<TrashIcon weight="bold" />}
           tooltip={translate('Cancel upload')}
           onClick={() => onCancel(file)}
-          variant="flush"
-          className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete btn-icon-right"
+          variant="text-danger"
+          className="attachment-item__delete"
           disabled={!error && progress && progress !== 0}
+          size="sm"
         />
       </div>
     </div>

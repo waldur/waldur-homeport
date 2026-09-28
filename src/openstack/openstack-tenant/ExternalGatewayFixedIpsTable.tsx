@@ -4,10 +4,11 @@ import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { AvailableExternalNetworkSubnet } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { composeValidators, required } from '@/core/validators';
 import { FieldError, SelectField, StringField } from '@/form';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 
@@ -41,22 +42,24 @@ const FixedIpRow = ({ prefix, subnetOptions, onRemove }) => (
       </Field>
     </td>
     <td>
-      <CompactActionButton
-        title={translate('Remove')}
-        action={onRemove}
+      <BaseButton
+        label={translate('Remove')}
+        onClick={onRemove}
         iconNode={<TrashIcon weight="bold" />}
         variant="text-secondary"
+        size="sm"
       />
     </td>
   </tr>
 );
 
 const AddButton = ({ onClick }) => (
-  <CompactActionButton
-    title={translate('Add fixed IP')}
-    action={onClick}
+  <BaseButton
+    label={translate('Add fixed IP')}
+    onClick={onClick}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"
+    size="sm"
   />
 );
 

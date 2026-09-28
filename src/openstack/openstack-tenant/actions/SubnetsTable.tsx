@@ -4,10 +4,11 @@ import { Table } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { OpenStackSubNet } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { SelectField } from '@/form';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 const getSubnetLabel = (subnet: OpenStackSubNet) =>
   subnet.name ? `${subnet.name} (${subnet.cidr})` : subnet.cidr;
@@ -34,22 +35,24 @@ const SubNetRow = ({ SubNet: subnet, onRemove, sourceSubnets }) => (
       </Field>
     </td>
     <td>
-      <CompactActionButton
-        title={translate('Remove')}
-        action={onRemove}
+      <BaseButton
+        label={translate('Remove')}
+        onClick={onRemove}
         iconNode={<TrashIcon weight="bold" />}
         variant="text-secondary"
+        size="sm"
       />
     </td>
   </tr>
 );
 
 const SubNetAddButton = ({ onClick }) => (
-  <CompactActionButton
-    title={translate('Add')}
-    action={onClick}
+  <BaseButton
+    label={translate('Add')}
+    onClick={onClick}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"
+    size="sm"
   />
 );
 

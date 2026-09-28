@@ -13,7 +13,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { formatDate, formatISODate, parseDate } from '@/core/dateUtils';
@@ -26,7 +26,6 @@ import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useNotify } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { selectSelectedRows } from '@/table/selectors';
 import Table from '@/table/Table';
@@ -190,11 +189,12 @@ const FormModalComponent: FC<
             {step === 1 ? (
               <CloseDialogButton className="min-w-125px" />
             ) : (
-              <ActionButton
-                title={translate('Go back')}
-                action={() => setStep(1)}
+              <BaseButton
+                label={translate('Go back')}
+                onClick={() => setStep(1)}
                 variant="tertiary"
                 className="min-w-125px"
+                size="lg"
               />
             )}
             <SubmitButton
@@ -203,7 +203,8 @@ const FormModalComponent: FC<
               label={
                 step === 1 ? translate('Save') : translate('Confirm & save')
               }
-              className="btn btn-primary min-w-125px"
+              variant="primary"
+              className="min-w-125px"
               onClick={(event) => {
                 if (step === 1 && ignoredResources.length > 0) {
                   event.preventDefault();

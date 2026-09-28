@@ -1,5 +1,6 @@
 import { Form } from 'react-final-form';
 
+import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -22,13 +23,12 @@ export const AuthSaml2Dialog = () => {
             footer={
               <>
                 <CloseDialogButton />
-                <button
-                  disabled={invalid || submitting || pristine}
-                  type="submit"
-                  className="btn btn-success"
-                >
-                  {translate('Login')}
-                </button>
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={invalid || pristine}
+                  variant="success"
+                  label={translate('Login')}
+                />
               </>
             }
           >

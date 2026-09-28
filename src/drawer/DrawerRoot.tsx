@@ -4,7 +4,8 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React, { FunctionComponent, useContext } from 'react';
 
-import { CompactIconButton } from '@/core/buttons/IconButton';
+import { BaseButton } from 'waldur-ui';
+
 import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
@@ -127,11 +128,13 @@ export const DrawerRoot: FunctionComponent = () => {
               {drawerProps.toolbar ? (
                 React.createElement(drawerProps.toolbar, { close: onHide })
               ) : (
-                <CompactIconButton
+                <BaseButton
                   iconNode={<XIcon weight="bold" />}
                   tooltip={translate('Close')}
                   onClick={onHide}
-                  tooltipPlacement="bottom"
+                  tooltipSide="bottom"
+                  size="sm"
+                  variant="tertiary"
                 />
               )}
             </div>

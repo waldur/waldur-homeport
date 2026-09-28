@@ -4,8 +4,7 @@ import { useForm, useFormState } from 'react-final-form';
 import { AlertItem } from 'waldur-ui';
 
 import { url, required } from '@/core/validators';
-import { StringGroup, SecretGroup } from '@/form';
-import { SubmitButton } from '@/form/SubmitButton';
+import { SubmitButton, StringGroup, SecretGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@/wizard';
@@ -61,7 +60,6 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
         disabled={!isFormValid}
         label={translate('Validate & Continue')}
         onClick={validateAndContinue}
-        type="button"
       />
     </>
   );

@@ -1,12 +1,15 @@
 import { FingerprintIcon } from '@phosphor-icons/react';
 import * as Tabs from '@radix-ui/react-tabs';
-import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 
-import { AlertItem } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  segmentedItemClassName,
+  segmentedListClassName,
+} from 'waldur-ui';
 
-import { BaseButton } from '@/core/buttons/BaseButton';
 import { ENV } from '@/core/config';
 import { format } from '@/core/ErrorMessageFormatter';
 import { SubmitButton, StringGroup } from '@/form';
@@ -122,17 +125,18 @@ const PasskeyStep = ({ ceremony, onCancel }) => {
           'Your password was accepted. Confirm with your passkey to finish signing in.',
         )}
       </p>
-      <SubmitButton
-        submitting={busy}
+      <BaseButton
+        pending={busy}
         onClick={verify}
-        invalid={!prepared}
+        disabled={!prepared}
         disabledReason={
           !prepared ? translate('Preparing the passkey challenge.') : undefined
         }
-        type="button"
         label={translate('Confirm with passkey')}
         className="w-100 mb-3"
         data-testid="passkey-mfa-confirm"
+        variant="primary"
+        size="lg"
       />
       <BaseButton
         label={translate('Cancel')}
@@ -214,24 +218,18 @@ export const SigninForm = () => {
                   className="w-100 mb-5"
                 >
                   <Tabs.List
-                    className="btn-group w-100"
+                    className={segmentedListClassName({ fullWidth: true })}
                     aria-label={translate('Sign in method')}
                   >
                     <Tabs.Trigger
                       value="username"
-                      className={classNames(
-                        'btn btn-tertiary w-50',
-                        input.value === 'username' && 'btn-active',
-                      )}
+                      className={segmentedItemClassName({ fullWidth: true })}
                     >
                       {translate('Username')}
                     </Tabs.Trigger>
                     <Tabs.Trigger
                       value="token"
-                      className={classNames(
-                        'btn btn-tertiary w-50',
-                        input.value === 'token' && 'btn-active',
-                      )}
+                      className={segmentedItemClassName({ fullWidth: true })}
                     >
                       {translate('Access token')}
                     </Tabs.Trigger>

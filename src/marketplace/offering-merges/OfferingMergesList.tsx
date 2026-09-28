@@ -3,11 +3,12 @@ import { useRouter } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { marketplaceOfferingMergesList, OfferingMerge } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import {
@@ -68,11 +69,12 @@ const NewMergeButton: FC = () => {
     return null;
   }
   return (
-    <ActionButton
-      title={translate('New merge')}
+    <BaseButton
+      label={translate('New merge')}
       iconNode={<GitMergeIcon weight="bold" />}
       variant="primary"
-      action={() => router.stateService.go(WIZARD_STATE)}
+      onClick={() => router.stateService.go(WIZARD_STATE)}
+      size="lg"
     />
   );
 };

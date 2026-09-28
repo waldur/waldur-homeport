@@ -106,7 +106,8 @@ export const SramSettingsTab: FC = () => {
           <Link
             state="admin-identity"
             params={{ tab: 'scim' }}
-            className="btn btn-tertiary btn-sm"
+            buttonVariant="tertiary"
+            buttonSize="sm"
           >
             <GearSixIcon weight="bold" className="me-2" />
             {translate('Edit in SCIM settings')}

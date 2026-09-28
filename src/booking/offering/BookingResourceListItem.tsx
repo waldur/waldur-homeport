@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { bookingStateAliases } from '@/booking/BookingStateField';
 import { BookingResource, EventInput } from '@/booking/types';
@@ -11,7 +11,6 @@ import { parseDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 const ONE_HOUR_HEIGHT = 40; // 40px
 const ONE_MINUTE_HEIGHT = ONE_HOUR_HEIGHT / 60;
@@ -184,11 +183,12 @@ export const BookingResourceListItem = ({
               <div>{item.project_name}</div>
             )}
             <div className="position-absolute bottom-0 end-0 mb-2">
-              <CompactActionButton
+              <BaseButton
                 variant="tertiary"
                 className={classNames(layout.diffHours < 1.1 && 'py-1')}
-                action={onClickSeeMore}
-                title={translate('See more')}
+                onClick={onClickSeeMore}
+                label={translate('See more')}
+                size="sm"
               />
             </div>
           </div>

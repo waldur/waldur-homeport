@@ -44,7 +44,7 @@ export const DisableChatRoomDialog: FC<DisableChatRoomDialogProps> = ({
           <SubmitButton
             submitting={isPending}
             label={translate('Disable')}
-            className="btn btn-danger"
+            variant="danger"
             onClick={() => disableRoom(deleteHistory)}
           />
         </>

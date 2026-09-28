@@ -11,7 +11,7 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, BaseButton } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
@@ -28,7 +28,6 @@ import { getRequestedResourceCost } from '@/proposals/requestedResourceCost';
 import { RequestedResourceCostLabel } from '@/proposals/RequestedResourceCostLabel';
 import { ProposalReview } from '@/proposals/types';
 import { Field } from '@/resource/summary';
-import { ActionButton } from '@/table/ActionButton';
 import { selectAllRows } from '@/table/actions';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -342,14 +341,16 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
       minHeight="auto"
       hideRefresh
       tableActions={
-        <ActionButton
-          action={saveSelections as any}
-          title={translate('Save')}
+        <BaseButton
+          onClick={saveSelections as any}
+          label={translate('Save')}
           iconNode={<CheckCircleIcon weight="bold" />}
           disabled={!newCount && !removedCount}
           disabledReason={translate('No changes to save')}
           pending={isPending}
           className="min-w-125px"
+          variant="tertiary"
+          size="lg"
         />
       }
       expandableRow={ExpandableRow}

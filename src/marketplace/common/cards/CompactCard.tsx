@@ -2,16 +2,14 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, Tooltip } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { getAbbreviation } from '@/core/utils';
-import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
 import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 import { TagBadges } from '@/marketplace/tags/TagBadges';
-import { wrapTooltip } from '@/table/ActionButton';
 
 import { OfferingCardVariantProps } from './types';
 import { useOfferingAccessibility } from './useOfferingAccessibility';
@@ -40,8 +38,7 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
     </div>
   );
 
-  return wrapTooltip(
-    tooltipMessage,
+  const card = (
     <Tooltip label={tooltipContent}>
       <span>
         <OfferingDetailsLink
@@ -69,9 +66,8 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
                 </div>
               </div>
               <div className="compact-card-hover-action">
-                <CompactSubmitButton
-                  submitting={false}
-                  type="button"
+                <BaseButton
+                  size="sm"
                   variant="text-primary"
                   label={translate('View')}
                 />
@@ -80,6 +76,14 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
           </Card>
         </OfferingDetailsLink>
       </span>
-    </Tooltip>,
+    </Tooltip>
+  );
+
+  return tooltipMessage ? (
+    <Tooltip label={tooltipMessage}>
+      <span>{card}</span>
+    </Tooltip>
+  ) : (
+    card
   );
 };

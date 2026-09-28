@@ -2,9 +2,10 @@ import { CheckIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { assignmentItemsAccept, MyAssignmentItem } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface AcceptAssignmentActionProps {
   item: MyAssignmentItem;
@@ -29,12 +30,13 @@ export const AcceptAssignmentAction: FC<AcceptAssignmentActionProps> = ({
   });
 
   return (
-    <CompactActionButton
-      action={mutate}
-      title={translate('Accept')}
+    <BaseButton
+      onClick={mutate}
+      label={translate('Accept')}
       iconNode={<CheckIcon weight="bold" />}
       variant="success"
       pending={isPending}
+      size="sm"
     />
   );
 };

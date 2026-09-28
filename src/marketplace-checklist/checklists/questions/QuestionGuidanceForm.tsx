@@ -3,13 +3,12 @@ import { useCallback } from 'react';
 import { Form, Stack } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SelectGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
-import { ActionButton } from '@/table/ActionButton';
 
 interface FieldValue {
   answer?;
@@ -78,11 +77,12 @@ const FieldsListGroup = ({
                 className="flex-grow-1"
               />
 
-              <ActionButton
-                action={() => removeRow(i)}
+              <BaseButton
+                onClick={() => removeRow(i)}
                 iconNode={<TrashIcon weight="bold" />}
                 variant="text-danger"
                 className="mt-1"
+                size="lg"
               />
             </Stack>
             <TextGroup
@@ -98,13 +98,14 @@ const FieldsListGroup = ({
         ))}
       </Form.Group>
       <div className="mt-3">
-        <ActionButton
-          action={addRow}
-          title={translate('Add guidance')}
+        <BaseButton
+          onClick={addRow}
+          label={translate('Add guidance')}
           iconNode={<PlusIcon weight="bold" />}
           variant="text-primary"
           disabled={addDisabled}
           disabledReason={translate('Complete all fields before adding more')}
+          size="lg"
         />
       </div>
     </>

@@ -4,8 +4,9 @@ import {
   projectPermissionsReviewsClose,
 } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { CustomerUsersList } from '@/customer/team/CustomerUsersList';
-import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -49,11 +50,12 @@ export const PendingMembershipReviewDialog: FunctionComponent<
             className="min-w-125px"
             label={translate('Remind me later')}
           />
-          <SubmitButton
-            submitting={closeReviewMutation.isPending}
+          <BaseButton
+            pending={closeReviewMutation.isPending}
             onClick={() => closeReviewMutation.mutate()}
-            type="button"
             label={translate('Complete review')}
+            variant="primary"
+            size="lg"
           />
         </>
       }

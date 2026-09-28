@@ -2,12 +2,11 @@ import { FunnelSimpleIcon, GearSixIcon, XIcon } from '@phosphor-icons/react';
 import * as RadixPopover from '@radix-ui/react-popover';
 import { useQueryClient } from '@tanstack/react-query';
 import { ComponentType, FC, createElement, useCallback } from 'react';
-import { Button, FormCheck, Stack } from 'react-bootstrap';
+import { FormCheck, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Tooltip } from 'waldur-ui';
+import { BaseButton, ButtonSize } from 'waldur-ui';
 
-import { CompactIconButton, MediumIconButton } from '@/core/buttons/IconButton';
 import { translate } from '@/i18n';
 import { resetSelection, setFilterQuery, toggleColumn } from '@/table/actions';
 import { getTableState, selectSelectedRows } from '@/table/selectors';
@@ -26,7 +25,7 @@ interface ExpandableRowToolbarProps {
   multiSelectActions: ComponentType<{
     rows: any[];
     refetch(): void;
-    className?: string;
+    size?: ButtonSize;
   }> | null;
   /**
    * Optional columns the user can toggle for the active tab. When omitted or
@@ -122,11 +121,12 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
             direction="horizontal"
             className="fw-normal text-dark gap-2 align-items-center"
           >
-            <CompactIconButton
+            <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
               onClick={clearSelection}
               variant="text-secondary"
+              size="sm"
             />
             <span className="fs-7">
               ({selectedRows.length}) {translate('Selected')}
@@ -138,32 +138,27 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
           createElement(multiSelectActions, {
             rows: selectedRows,
             refetch,
-            className: 'btn-md',
+            size: 'md',
           })}
-        <MediumIconButton
+        <BaseButton
           iconNode={<FunnelSimpleIcon weight="bold" />}
           tooltip={translate('Filter')}
           onClick={() => {}}
+          size="md"
+          variant="tertiary"
         />
         {hasSettings ? (
           <RadixPopover.Root modal={false}>
-            <Tooltip label={translate('Toggle visible columns')}>
-              <span className="d-inline-flex">
-                <RadixPopover.Trigger asChild>
-                  <Button
-                    variant="tertiary"
-                    size="sm"
-                    type="button"
-                    aria-label={translate('Toggle visible columns')}
-                    className="btn-icon btn-icon-md"
-                  >
-                    <span className="svg-icon svg-icon-2">
-                      <GearSixIcon weight="bold" />
-                    </span>
-                  </Button>
-                </RadixPopover.Trigger>
-              </span>
-            </Tooltip>
+            {/* size="md" matches the disabled fallback branch below so the two
+                stay visually consistent. */}
+            <RadixPopover.Trigger asChild>
+              <BaseButton
+                variant="tertiary"
+                size="md"
+                tooltip={translate('Toggle visible columns')}
+                iconNode={<GearSixIcon weight="bold" />}
+              />
+            </RadixPopover.Trigger>
             <RadixPopover.Portal>
               <RadixPopover.Content
                 align="end"
@@ -179,11 +174,13 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
             </RadixPopover.Portal>
           </RadixPopover.Root>
         ) : (
-          <MediumIconButton
+          <BaseButton
             iconNode={<GearSixIcon weight="bold" />}
             tooltip={translate('No columns to configure')}
             onClick={() => {}}
             disabled
+            size="md"
+            variant="tertiary"
           />
         )}
       </div>

@@ -2,6 +2,8 @@ import { PaperclipIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { Answer, QuestionAdmin } from 'waldur-js-client';
 
+import { BaseButton } from 'waldur-ui';
+
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -54,14 +56,11 @@ const downloadMediaFile = (storedFileId: string, fileName: string) => {
 const FileLink: FC<{ file: FileAttachment }> = ({ file }) => {
   const sizeText = file.size ? ` (${formatFilesize(file.size, 'B')})` : '';
   return (
-    <button
-      type="button"
-      className="btn btn-link p-0 text-primary"
+    <BaseButton
+      variant="text-primary"
       onClick={() => downloadMediaFile(file.stored_file_id, file.name)}
-    >
-      {file.name}
-      {sizeText}
-    </button>
+      label={`${file.name}${sizeText}`}
+    />
   );
 };
 
@@ -82,14 +81,12 @@ const MultipleFilesAnswer: FC<{
   }, [files, openDialog]);
 
   return (
-    <button
-      type="button"
-      className="btn btn-link p-0 text-primary d-inline-flex align-items-center gap-1"
+    <BaseButton
+      variant="text-primary"
       onClick={open}
-    >
-      <PaperclipIcon weight="bold" />
-      {translate('{count} attachments', { count: files.length })}
-    </button>
+      iconNode={<PaperclipIcon weight="bold" />}
+      label={translate('{count} attachments', { count: files.length })}
+    />
   );
 };
 

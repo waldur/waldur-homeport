@@ -44,7 +44,8 @@ export const UpdateOfferingPermissionExpirationTimeDialog: FC<{
                   label={translate('Update')}
                   submitting={submitting}
                   disabled={invalid}
-                  className="btn btn-primary min-w-125px"
+                  variant="primary"
+                  className="min-w-125px"
                 />
               </>
             }

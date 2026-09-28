@@ -49,7 +49,7 @@ export const OfferingsGroup: FC<OfferingsGroupProps> = ({ onTagClick }) => {
       verboseName={translate('Offerings')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       tableActions={
-        <Link state="public.offerings" className="btn btn-tertiary">
+        <Link state="public.offerings" buttonVariant="tertiary">
           {translate('All offerings')}
         </Link>
       }

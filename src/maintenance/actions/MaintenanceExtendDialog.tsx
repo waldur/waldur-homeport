@@ -1,16 +1,14 @@
 import { ClockClockwiseIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
-import {
-  Form as BSForm,
-  ToggleButton,
-  ToggleButtonGroup,
-} from 'react-bootstrap';
+import { Form as BSForm } from 'react-bootstrap';
 import { Form as FinalForm, Field, useFormState } from 'react-final-form';
 import {
   MaintenanceAnnouncement,
   maintenanceAnnouncementsPartialUpdate,
 } from 'waldur-js-client';
+
+import { SegmentedControl } from 'waldur-ui';
 
 import { formatDateTime, parseDate } from '@/core/dateUtils';
 import { DateTimeField } from '@/form/DateTimeField';
@@ -150,29 +148,20 @@ const ExtendForm: FC<ExtendFormProps> = ({
         <BSForm.Group className="mb-4">
           <BSForm.Label>{translate('Quick extend')}</BSForm.Label>
           <div>
-            <ToggleButtonGroup
-              type="radio"
-              name="quick-extend"
+            <SegmentedControl
+              aria-label={translate('Quick extend')}
+              size="sm"
+              options={QUICK_OFFSETS.map((offset) => ({
+                value: offset.key,
+                label: offset.label,
+                disabled: submitting,
+              }))}
               value={activeQuickKey || ''}
-              onChange={(value: string) => {
+              onValueChange={(value) => {
                 const offset = QUICK_OFFSETS.find((o) => o.key === value);
                 if (offset) applyQuickOffset(offset.key, offset.minutes);
               }}
-              aria-label={translate('Quick extend')}
-            >
-              {QUICK_OFFSETS.map((offset) => (
-                <ToggleButton
-                  key={offset.key}
-                  id={`quick-extend-${offset.key}`}
-                  value={offset.key}
-                  variant="tertiary"
-                  size="sm"
-                  disabled={submitting}
-                >
-                  {offset.label}
-                </ToggleButton>
-              ))}
-            </ToggleButtonGroup>
+            />
           </div>
         </BSForm.Group>
 

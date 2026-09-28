@@ -78,7 +78,7 @@ export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
                   disabled={invalid}
                   submitting={submitting}
                   label={isEdit ? translate('Save') : translate('Create')}
-                  className="btn btn-primary"
+                  variant="primary"
                 />
               </>
             }

@@ -21,7 +21,8 @@ export const UpgradeNotificationDialog: FunctionComponent<
     footer={
       <CloseDialogButton
         label={translate('Close')}
-        className="btn-success w-100 text-center"
+        variant="success"
+        className="w-100 text-center"
       />
     }
   >
