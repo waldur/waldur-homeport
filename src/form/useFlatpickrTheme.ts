@@ -10,18 +10,20 @@ const hrefs = {
   light: () => import('flatpickr/dist/themes/light.css?url'),
 };
 
-let styleTag: HTMLLinkElement;
+let styleTag: HTMLStyleElement;
 
+// Imported into the `base` layer so the Metronic overrides in
+// _flatpickr.scss (`@layer bootstrap`) win. Loaded unlayered, the theme beats
+// every layered rule and leaves the calendar with a transparent background.
+// `base` rather than a new layer: a layer first seen at runtime would rank
+// above `bootstrap`. See src/tailwind.css.
 function loadTheme(theme: ThemeName) {
   if (!styleTag) {
-    styleTag = document.createElement('link');
-    styleTag.rel = 'stylesheet';
-    styleTag.type = 'text/css';
-    styleTag.crossOrigin = '';
+    styleTag = document.createElement('style');
     document.head.appendChild(styleTag);
   }
   hrefs[theme]().then((url) => {
-    styleTag.href = url.default as string;
+    styleTag.textContent = `@import url("${url.default}") layer(base);`;
   });
 }
 
