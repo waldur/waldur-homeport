@@ -1,18 +1,22 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import {
   marketplaceOfferingGroupsList,
   OfferingGroup,
   ServiceProvider,
 } from 'waldur-js-client';
 
+import { tabTableProps } from '@/administration/tabTableProps';
 import { formatDateTime } from '@/core/dateUtils';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { CustomerResourcesListPlaceholder } from '@/marketplace/resources/list/CustomerResourcesListPlaceholder';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { OfferingGroupCreateButton } from './OfferingGroupCreateButton';
 import { OfferingGroupRowActions } from './OfferingGroupRowActions';
@@ -23,6 +27,7 @@ interface OfferingGroupsListViewProps {
   filter?: Record<string, unknown>;
   customerUrl?: string;
   showCustomerColumn?: boolean;
+  portal?: TableWithPortal['portal'];
   showCreateButton?: boolean;
 }
 
@@ -34,6 +39,7 @@ const OfferingGroupsListView: FunctionComponent<
   customerUrl,
   showCustomerColumn,
   showCreateButton,
+  portal,
 }) => {
   const tableProps = useTable({
     table: tableKey,
@@ -98,12 +104,13 @@ const OfferingGroupsListView: FunctionComponent<
   return (
     <Table<OfferingGroup>
       {...tableProps}
+      {...tabTableProps(portal)}
       columns={columns}
       verboseName={translate('offering groups')}
       initialSorting={{ field: 'title', mode: 'asc' }}
       hasQuery={true}
       tableActions={
-        showCreateButton && customerUrl ? (
+        showCreateButton ? (
           <OfferingGroupCreateButton
             customerUrl={customerUrl}
             refetch={tableProps.fetch}
@@ -140,9 +147,18 @@ export const ProviderOfferingGroupsList = ({
   );
 };
 
-export const AdminOfferingGroupsList: FunctionComponent = () => (
-  <OfferingGroupsListView
-    tableKey="admin-marketplace-offering-groups"
-    showCustomerColumn
-  />
-);
+// Support can read the admin list, but creating a group for another
+// organization's provider is staff-only on the backend.
+export const AdminOfferingGroupsList: FunctionComponent<
+  Partial<TableWithPortal>
+> = ({ portal }) => {
+  const isStaff = useSelector(isStaffSelector);
+  return (
+    <OfferingGroupsListView
+      tableKey="admin-marketplace-offering-groups"
+      showCustomerColumn
+      showCreateButton={isStaff}
+      portal={portal}
+    />
+  );
+};

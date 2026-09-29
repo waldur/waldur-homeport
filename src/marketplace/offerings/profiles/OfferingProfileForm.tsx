@@ -83,6 +83,11 @@ export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
               </>
             }
           >
+            <p className="text-muted mb-5">
+              {translate(
+                'Name the set of roles this profile provides. After saving, add roles to it on the profile page; they become assignable on every offering bound to the profile.',
+              )}
+            </p>
             <StringGroup
               name="name"
               validate={required}

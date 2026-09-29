@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { TableWithPortal } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 
 import { OFFERINGS_FILTER_FORM_ID } from '../constants';
@@ -39,7 +40,9 @@ export const buildOfferingsFilter = (filterValues: any) => {
   return filter;
 };
 
-export const AdminOfferingsList = () => {
+export const AdminOfferingsList: FC<Partial<TableWithPortal>> = ({
+  portal,
+}) => {
   const filterValues = useFilterValues(ADMIN_OFFERING_TABLE_NAME);
 
   const filter = useMemo(
@@ -54,8 +57,10 @@ export const AdminOfferingsList = () => {
       formId={OFFERINGS_FILTER_FORM_ID}
       hasOrganizationColumn
       showActions
+      createInActionsMenu
       showProvider
       filters={<OfferingsListFilter />}
+      portal={portal}
       initialFilters={{
         state: [getStates()[1], getStates()[2]],
         shared: { label: translate('Yes'), value: true },

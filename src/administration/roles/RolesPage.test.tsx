@@ -35,15 +35,18 @@ describe('RolesPage', () => {
     expect(screen.getByText('Catalogue')).toBeInTheDocument();
     expect(screen.getByText('Availability')).toBeInTheDocument();
     expect(screen.getByText('Hygiene')).toBeInTheDocument();
+    expect(screen.getByText('Service profiles')).toBeInTheDocument();
   });
 
   // Both endpoints are staff-only on the backend: role-availabilities returns an
   // empty queryset and the hygiene report is IsStaff, so a support user would
   // otherwise get an unexplained empty table and a 403.
-  it('shows a support user the catalogue only', () => {
+  it('shows a support user the catalogue and service profiles only', () => {
     renderPage({ is_staff: false, is_support: true });
 
     expect(screen.getByText('Catalogue')).toBeInTheDocument();
+    // The profile API is read-open; only its mutations are staff-only.
+    expect(screen.getByText('Service profiles')).toBeInTheDocument();
     expect(screen.queryByText('Availability')).not.toBeInTheDocument();
     expect(screen.queryByText('Hygiene')).not.toBeInTheDocument();
   });

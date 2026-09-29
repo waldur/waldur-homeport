@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
@@ -40,18 +41,35 @@ const HYGIENE_TAB = {
   ),
 };
 
+// Service profiles are read-open to support; only their create, edit and
+// delete actions are staff-only, and those hide themselves.
+const PROFILES_TAB = {
+  key: 'profiles',
+  title: translate('Service profiles'),
+  component: lazyComponent(() =>
+    import('@/marketplace/offerings/profiles/OfferingProfilesList').then(
+      (module) => ({
+        default: module.OfferingProfilesList,
+      }),
+    ),
+  ),
+};
+
 export const RolesPage = () => {
   const isStaff = useSelector(isStaffSelector);
-  const tabs = isStaff
-    ? [CATALOGUE_TAB, AVAILABILITY_TAB, HYGIENE_TAB]
-    : [CATALOGUE_TAB];
+  // Stable identity: TableWithTabs re-syncs the active tab whenever `tabs` changes.
+  const tabs = useMemo(
+    () =>
+      isStaff
+        ? [CATALOGUE_TAB, AVAILABILITY_TAB, PROFILES_TAB, HYGIENE_TAB]
+        : [CATALOGUE_TAB, PROFILES_TAB],
+    [isStaff],
+  );
 
   return (
     <TableWithTabs
       title={translate('Roles')}
-      subtitle={translate(
-        'The role catalogue, where each role may be used, and what is malformed in the catalogue.',
-      )}
+      subtitle={translate('Roles, where they apply, and service profiles.')}
       tabs={tabs}
       syncWithUrlKey="tab"
     />

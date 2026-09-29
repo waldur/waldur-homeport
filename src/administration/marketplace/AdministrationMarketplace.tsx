@@ -28,6 +28,11 @@ const MARKETPLACE_TABS: SettingsTab[] = [
     title: translate('Affiliates'),
     groupName: translate('Affiliates'),
   },
+  {
+    key: 'slurm-policy',
+    title: translate('SLURM policy'),
+    groupName: translate('SLURM Policy'),
+  },
 ];
 
 export const AdministrationMarketplace = () => (
