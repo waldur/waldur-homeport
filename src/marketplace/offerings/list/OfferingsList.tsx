@@ -5,6 +5,7 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
+import { tabTableProps } from '@/administration/tabTableProps';
 import { formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { isFeatureVisible } from '@/features/connect';
@@ -16,11 +17,14 @@ import { BooleanField } from '@/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { SLUG_COLUMN } from '@/table/slug';
 import Table from '@/table/Table';
-import { Column } from '@/table/types';
+import { Column, TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { CreateOfferingButton } from './CreateOfferingButton';
+import {
+  CreateOfferingAction,
+  CreateOfferingButton,
+} from './CreateOfferingButton';
 import { OfferingActions } from './OfferingActions';
 import { OfferingDropdownActions } from './OfferingDropdownActions';
 import { OfferingNameColumn } from './OfferingNameColumn';
@@ -35,19 +39,24 @@ export const BaseOfferingsList: FunctionComponent<{
   filter: MarketplaceProviderOfferingsListData['query'];
   hasOrganizationColumn?: boolean;
   showActions?: boolean;
+  /** Put Add in the Actions menu instead of beside it. */
+  createInActionsMenu?: boolean;
   showProvider?: boolean;
   filters?;
   formId?: string;
   initialFilters?;
+  portal?: TableWithPortal['portal'];
 }> = ({
   table,
   filter,
   hasOrganizationColumn,
   showActions,
+  createInActionsMenu,
   showProvider,
   filters,
   formId,
   initialFilters,
+  portal,
 }) => {
   const props = useTable({
     table,
@@ -176,11 +185,13 @@ export const BaseOfferingsList: FunctionComponent<{
   return (
     <Table
       {...props}
+      {...tabTableProps(portal)}
       placeholderActions={
         showActions && <CreateOfferingButton className="w-175px mw-350px" />
       }
       tableActions={
-        showActions && (
+        showActions &&
+        !createInActionsMenu && (
           <CreateOfferingButton
             showProvider={showProvider}
             fetch={props.fetch}
@@ -189,7 +200,17 @@ export const BaseOfferingsList: FunctionComponent<{
       }
       columns={columns}
       verboseName={translate('Offerings')}
-      dropdownActions={<OfferingDropdownActions refetch={props.fetch} />}
+      dropdownActions={
+        <>
+          {showActions && createInActionsMenu && (
+            <CreateOfferingAction
+              showProvider={showProvider}
+              fetch={props.fetch}
+            />
+          )}
+          <OfferingDropdownActions refetch={props.fetch} />
+        </>
+      }
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       rowActions={

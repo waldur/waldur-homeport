@@ -17,7 +17,7 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { UndoMergeButton } from './actions';
-import { LIST_STATE, WIZARD_STATE } from './constants';
+import { LIST_PARAMS, LIST_STATE, WIZARD_STATE } from './constants';
 import {
   useCanManageMerges,
   useMergeOfferings,
@@ -66,7 +66,7 @@ export const OfferingMergeDetails: FC = () => {
         title={translate('Merge not found')}
         message={translate('The merge may have been deleted.')}
         buttonTitle={translate('Back to offering merges')}
-        callback={() => router.stateService.go(LIST_STATE)}
+        callback={() => router.stateService.go(LIST_STATE, LIST_PARAMS)}
       />
     );
   }

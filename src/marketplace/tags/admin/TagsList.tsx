@@ -1,11 +1,13 @@
 import { FunctionComponent } from 'react';
 import { marketplaceTagsList, Tag } from 'waldur-js-client';
 
+import { tabTableProps } from '@/administration/tabTableProps';
 import { formatDateTime } from '@/core/dateUtils';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 
 import { TagCreateButton } from './TagCreateButton';
@@ -13,7 +15,9 @@ import { TagExpandableRow } from './TagExpandableRow';
 import { TagsBulkDeleteAction } from './TagsBulkDeleteAction';
 import { TagsRowActions } from './TagsRowActions';
 
-export const TagsList: FunctionComponent = () => {
+export const TagsList: FunctionComponent<Partial<TableWithPortal>> = ({
+  portal,
+}) => {
   const tableProps = useTable({
     table: 'TagsList',
     fetchData: createFetcher(marketplaceTagsList),
@@ -23,6 +27,7 @@ export const TagsList: FunctionComponent = () => {
   return (
     <Table<Tag>
       {...tableProps}
+      {...tabTableProps(portal)}
       columns={[
         {
           title: translate('Name'),

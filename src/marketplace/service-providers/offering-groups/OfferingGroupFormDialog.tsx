@@ -7,8 +7,9 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { SubmitButton, StringGroup, TextGroup } from '@/form';
+import { AsyncSelectGroup, SubmitButton, StringGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
@@ -23,12 +24,26 @@ interface OfferingGroupFormDialogProps {
 interface FormValues {
   title: string;
   description?: string;
+  organization?: { url: string; name: string };
 }
 
 export const OfferingGroupFormDialog: FC<OfferingGroupFormDialogProps> = (
   props,
 ) => {
   const isEdit = Boolean(props.resolve.group?.uuid);
+  // Without a customer, as on the admin list, the group's service provider
+  // is picked in the form.
+  const pickOrganization = !isEdit && !props.resolve.customerUrl;
+
+  const loadOrganizations = useMemo(
+    () =>
+      organizationAutocomplete({
+        field: ['name', 'url', 'uuid'],
+        o: 'name',
+        is_service_provider: true,
+      }),
+    [],
+  );
 
   const initialValues = useMemo<FormValues | undefined>(
     () =>
@@ -55,7 +70,7 @@ export const OfferingGroupFormDialog: FC<OfferingGroupFormDialogProps> = (
             body: {
               title: values.title,
               description: values.description,
-              customer: props.resolve.customerUrl,
+              customer: props.resolve.customerUrl ?? values.organization?.url,
             },
           }),
     successMessage: isEdit
@@ -100,6 +115,21 @@ export const OfferingGroupFormDialog: FC<OfferingGroupFormDialogProps> = (
             }
           >
             <div className="size-sm">
+              {pickOrganization && (
+                <AsyncSelectGroup
+                  name="organization"
+                  label={translate('Service provider')}
+                  validate={required}
+                  required
+                  placeholder={translate('Select service provider...')}
+                  loadOptions={loadOrganizations}
+                  getOptionLabel={(option) => option.name}
+                  getOptionValue={(option) => option.url}
+                  noOptionsMessage={() => translate('No service providers')}
+                  isClearable={true}
+                  disabled={submitting}
+                />
+              )}
               <StringGroup
                 label={translate('Title')}
                 name="title"

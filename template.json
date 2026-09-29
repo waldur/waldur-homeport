@@ -774,6 +774,11 @@
   },
   "A reserved external IP allocated to the tenant; can be attached to a port to expose an instance.": {},
   "A rule that does not create a project must grant an organization role.": {},
+  "A service profile is a named set of roles shared by several offerings. Binding an offering to a profile makes the profile's roles assignable on that offering, which shows up on the Availability tab. Adding or removing a role here updates every bound offering in the background. Offerings are bound to a profile from their own settings, and offerings of different types can share one profile.": {
+    "context": {
+      "feature_area": "profiles"
+    }
+  },
   "A service-provider pool applies to all offerings by default. An offering pool overrides it for a single offering.": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -2151,6 +2156,11 @@
   "Add notification": {
     "context": {
       "feature_area": "hooks"
+    }
+  },
+  "Add offering": {
+    "context": {
+      "feature_area": "list"
     }
   },
   "Add offering image": {
@@ -7082,7 +7092,8 @@
   },
   "Available offerings": {
     "context": {
-      "feature_area": "marketplace"
+      "primary_ui_type": "title",
+      "feature_area": "proposals"
     }
   },
   "Available only when every selected resource is an OpenStack tenant.": {
@@ -9065,6 +9076,11 @@
       "primary_ui_type": "title"
     }
   },
+  "Catalogue structure": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
   "Catalogues": {
     "context": {
       "primary_ui_type": "title",
@@ -9073,6 +9089,7 @@
   },
   "Categories": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "dashboard"
     }
   },
@@ -9096,7 +9113,8 @@
   },
   "Category groups": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title",
+      "feature_area": "admin"
     }
   },
   "Category has been deleted.": {
@@ -22898,6 +22916,11 @@
       "feature_area": "service-providers"
     }
   },
+  "How the marketplace catalogue is organised.": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
   "How the user registered (e.g. eduTEAMS, local)": {},
   "How to add a user to a project when an OpenPortal award lists them as a member. 'invitation': create a pending invitation, so the user accepts, agrees to the terms and is provisioned locally before gaining access. 'direct': create the account if it does not exist and grant the role immediately. A pending invitation is reported back to the allocating portal as a member either way, so the award reaches a consistent state without waiting for the user to act.": {},
   "How to sync historical consumption:": {
@@ -30212,6 +30235,11 @@
   "Name should consist of latin symbols and numbers.": {},
   "Name should consist of latin symbols, numbers and dashes.": {},
   "Name should contain at least 3 symbols.": {},
+  "Name the set of roles this profile provides. After saving, add roles to it on the profile page; they become assignable on every offering bound to the profile.": {
+    "context": {
+      "feature_area": "profiles"
+    }
+  },
   "Name your project": {
     "context": {
       "feature_area": "create"
@@ -32321,7 +32349,7 @@
       "feature_area": "roles"
     }
   },
-  "No roles in this catalog yet. Add roles below — they become assignable on every offering bound to this profile.": {
+  "No roles in this catalog yet.": {
     "context": {
       "feature_area": "profiles"
     }
@@ -33632,7 +33660,14 @@
   },
   "Offering groups": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title",
+      "feature_area": "marketplace"
+    }
+  },
+  "Offering has been added to the group.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-groups"
     }
   },
   "Offering has been created.": {
@@ -33645,6 +33680,12 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "actions"
+    }
+  },
+  "Offering has been removed from the group.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "offering-groups"
     }
   },
   "Offering has been updated successfully.": {
@@ -33726,6 +33767,7 @@
   },
   "Offering merges": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "offering-merges"
     }
   },
@@ -33956,6 +33998,16 @@
       "feature_area": "images"
     }
   },
+  "Offerings of {organization}. An offering already in another group moves to this one.": {
+    "context": {
+      "variables": {
+        "organization": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "offering-groups"
+    }
+  },
   "Offerings requested": {
     "context": {
       "primary_ui_type": "label",
@@ -33972,6 +34024,11 @@
   "Offerings shown / clicks": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Offerings, offering groups and merges.": {
+    "context": {
+      "feature_area": "marketplace"
     }
   },
   "Ok": {
@@ -42665,6 +42722,11 @@
       "feature_area": "search"
     }
   },
+  "Remove from group": {
+    "context": {
+      "feature_area": "offering-groups"
+    }
+  },
   "Remove health monitor": {
     "context": {
       "feature_area": "openstack-lbaas"
@@ -42857,6 +42919,16 @@
   "Remove validator": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Remove {name} from this offering group? The offering itself is not changed.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "offering-groups"
     }
   },
   "Remove {value}": {
@@ -46064,6 +46136,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Roles, where they apply, and service profiles.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "Rollback ratio": {
     "context": {
       "feature_area": "database-stats"
@@ -46511,11 +46588,7 @@
     }
   },
   "SLURM Periodic Usage Policy": {},
-  "SLURM Policy": {
-    "context": {
-      "feature_area": "marketplace"
-    }
-  },
+  "SLURM Policy": {},
   "SLURM commands generated": {
     "context": {
       "feature_area": "policies"
@@ -46524,7 +46597,7 @@
   "SLURM policy": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "administration"
+      "feature_area": "offerings"
     }
   },
   "SLURM policy has been created successfully.": {
@@ -49045,7 +49118,8 @@
   },
   "Service profiles": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title",
+      "feature_area": "profiles"
     }
   },
   "Service provider": {
@@ -50488,7 +50562,7 @@
   },
   "Software catalog": {
     "context": {
-      "feature_area": "administration"
+      "feature_area": "marketplace"
     }
   },
   "Software catalog EESSI": {},
@@ -50516,6 +50590,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offerings"
+    }
+  },
+  "Software catalogues and their EESSI and Spack sources.": {
+    "context": {
+      "feature_area": "marketplace"
     }
   },
   "Software packages": {
@@ -52422,7 +52501,8 @@
   },
   "Tags": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title",
+      "feature_area": "overview"
     }
   },
   "Tags have been updated.": {
@@ -54149,11 +54229,6 @@
       "feature_area": "coi-review"
     }
   },
-  "The role catalogue, where each role may be used, and what is malformed in the catalogue.": {
-    "context": {
-      "feature_area": "roles"
-    }
-  },
   "The role has been disabled": {
     "context": {
       "primary_ui_type": "success_message",
@@ -54741,6 +54816,11 @@
   "These restrictions are configured at the organization level and apply to all projects within this organization.": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "These roles can be assigned on every offering bound to this profile, at the scope shown. Adding or removing a role updates the bound offerings in the background.": {
+    "context": {
+      "feature_area": "profiles"
     }
   },
   "These rows describe the source offerings themselves. They are not moved and stay with the archived sources.": {
@@ -57263,6 +57343,12 @@
       "primary_ui_type": "error_message"
     }
   },
+  "Unable to add the offering to the group.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-groups"
+    }
+  },
   "Unable to add user.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -58811,11 +58897,6 @@
       "feature_area": "matrix"
     }
   },
-  "Unable to load SLURM policy configuration.": {
-    "context": {
-      "feature_area": "marketplace"
-    }
-  },
   "Unable to load SSH key settings.": {
     "context": {
       "feature_area": "ssh-keys"
@@ -59813,6 +59894,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "details"
+    }
+  },
+  "Unable to remove the offering from the group.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "offering-groups"
     }
   },
   "Unable to remove the selected attachments.": {
@@ -65578,6 +65665,11 @@
   "What is Matrix chat integration?": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "What is a service profile?": {
+    "context": {
+      "feature_area": "profiles"
     }
   },
   "What it grants": {

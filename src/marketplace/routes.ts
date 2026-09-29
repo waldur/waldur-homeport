@@ -867,29 +867,33 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-marketplace-offerings',
     parent: 'admin-marketplace',
-    url: 'offerings/',
+    url: 'offerings/?tab',
     component: lazyComponent(() =>
-      import('@/marketplace/offerings/admin/AdminOfferingsList').then(
-        (module) => ({ default: module.AdminOfferingsList }),
-      ),
+      import('@/administration/marketplace/OfferingsPage').then((module) => ({
+        default: module.OfferingsPage,
+      })),
     ),
     data: {
-      breadcrumb: () => translate('Available offerings'),
+      breadcrumb: () => translate('Offerings'),
       priority: 10,
     },
   },
+  // Folded into a tabbed Marketplace page; kept as a redirect so bookmarks,
+  // the chaos route sweep and external links keep resolving. See
+  // admin-role-availabilities for why `skipBreadcrumb` is needed.
   {
     name: 'admin-marketplace-offering-merges',
-    parent: 'admin-marketplace',
     url: 'offering-merges/',
-    component: lazyComponent(() =>
-      import('@/marketplace/offering-merges/OfferingMergesPage').then(
-        (module) => ({ default: module.OfferingMergesPage }),
-      ),
-    ),
+    parent: 'admin-marketplace',
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: {
+      state: 'admin-marketplace-offerings',
+      params: { tab: 'merges' },
+    },
     data: {
-      breadcrumb: () => translate('Offering merges'),
-      priority: 15,
+      skipBreadcrumb: true,
     },
   },
   {

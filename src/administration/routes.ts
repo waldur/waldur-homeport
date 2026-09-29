@@ -122,20 +122,22 @@ export const states: StateDeclaration[] = [
     },
   },
 
+  // Now the Service profiles tab of the roles page; kept as a redirect so
+  // bookmarks, the chaos route sweep and external links keep resolving. See
+  // admin-role-availabilities for why `skipBreadcrumb` is needed.
   {
     name: 'admin-marketplace-offering-profiles',
     url: 'offering-profiles/',
-    parent: 'admin-marketplace',
-    component: lazyComponent(() =>
-      import('@/marketplace/offerings/profiles/OfferingProfilesList').then(
-        (module) => ({
-          default: module.OfferingProfilesList,
-        }),
-      ),
-    ),
+    parent: 'admin-configuration',
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: {
+      state: 'admin-roles',
+      params: { tab: 'profiles' },
+    },
     data: {
-      breadcrumb: () => translate('Service profiles'),
-      priority: 30,
+      skipBreadcrumb: true,
     },
   },
   // Folded into the roles page as a tab; kept as a redirect so bookmarks, the
@@ -158,7 +160,9 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-marketplace-offering-profile-detail',
     url: 'offering-profiles/:uuid/',
-    parent: 'admin-marketplace',
+    // Service profiles are a tab of the roles page, so their detail page sits in
+    // the same menu; the URL is unchanged because both parents are url-less.
+    parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('@/marketplace/offerings/profiles/OfferingProfileDetail').then(
         (module) => ({
@@ -553,32 +557,36 @@ export const states: StateDeclaration[] = [
     },
   },
 
+  // Folded into a tabbed Marketplace page; kept as a redirect so bookmarks,
+  // the chaos route sweep and external links keep resolving. See
+  // admin-role-availabilities for why `skipBreadcrumb` is needed.
   {
     name: 'admin-marketplace-category-groups',
     url: 'category-groups',
     parent: 'admin-marketplace',
-    component: lazyComponent(() =>
-      import('@/marketplace/category/admin/CategoryGroupsList').then(
-        (module) => ({ default: module.CategoryGroupsList }),
-      ),
-    ),
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: {
+      state: 'admin-marketplace-categories',
+      params: { tab: 'category-groups' },
+    },
     data: {
-      breadcrumb: () => translate('Category groups'),
-      priority: 50,
+      skipBreadcrumb: true,
     },
   },
 
   {
     name: 'admin-marketplace-categories',
-    url: 'categories/',
+    url: 'categories/?tab',
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
-      import('@/marketplace/category/admin/AdminCategoriesPage').then(
-        (module) => ({ default: module.AdminCategoriesPage }),
-      ),
+      import('./marketplace/CatalogueStructurePage').then((module) => ({
+        default: module.CatalogueStructurePage,
+      })),
     ),
     data: {
-      breadcrumb: () => translate('Categories'),
+      breadcrumb: () => translate('Catalogue structure'),
       priority: 40,
     },
   },
@@ -587,14 +595,15 @@ export const states: StateDeclaration[] = [
     name: 'admin-marketplace-tags',
     url: 'tags/',
     parent: 'admin-marketplace',
-    component: lazyComponent(() =>
-      import('@/marketplace/tags/admin/TagsList').then((module) => ({
-        default: module.TagsList,
-      })),
-    ),
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: {
+      state: 'admin-marketplace-categories',
+      params: { tab: 'tags' },
+    },
     data: {
-      breadcrumb: () => translate('Tags'),
-      priority: 60,
+      skipBreadcrumb: true,
     },
   },
 
@@ -602,16 +611,15 @@ export const states: StateDeclaration[] = [
     name: 'admin-marketplace-offering-groups',
     url: 'offering-groups/',
     parent: 'admin-marketplace',
-    component: lazyComponent(() =>
-      import('@/marketplace/service-providers/offering-groups/ProviderOfferingGroupsList').then(
-        (module) => ({
-          default: module.AdminOfferingGroupsList,
-        }),
-      ),
-    ),
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: {
+      state: 'admin-marketplace-offerings',
+      params: { tab: 'groups' },
+    },
     data: {
-      breadcrumb: () => translate('Offering groups'),
-      priority: 20,
+      skipBreadcrumb: true,
     },
   },
 
@@ -668,14 +676,15 @@ export const states: StateDeclaration[] = [
     name: 'admin-slurm-policy-settings',
     url: 'slurm-policy/',
     parent: 'admin-marketplace',
-    component: lazyComponent(() =>
-      import('./marketplace/AdministrationSlurmPolicy').then((module) => ({
-        default: module.AdministrationSlurmPolicy,
-      })),
-    ),
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: {
+      state: 'admin-marketplace-settings',
+      params: { tab: 'slurm-policy' },
+    },
     data: {
-      breadcrumb: () => translate('SLURM policy'),
-      priority: 100,
+      skipBreadcrumb: true,
     },
   },
 

@@ -8,7 +8,7 @@ const OfferingGroupFormDialog = lazyComponent(() =>
 );
 
 interface OfferingGroupCreateButtonProps {
-  customerUrl: string;
+  customerUrl?: string;
   refetch: () => void;
 }
 

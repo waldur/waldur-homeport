@@ -13,6 +13,9 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { offeringGroupOfferingsTableKey } from './constants';
+import { OfferingGroupRemoveOfferingAction } from './OfferingGroupRemoveOfferingAction';
+
 export const ProviderOfferingGroupOfferingsExpandable = ({
   group,
 }: {
@@ -23,7 +26,7 @@ export const ProviderOfferingGroupOfferingsExpandable = ({
     [group.uuid],
   );
   const tableProps = useTable({
-    table: `marketplace-offering-group-${group.uuid}-offerings`,
+    table: offeringGroupOfferingsTableKey(group.uuid),
     fetchData: createFetcher(marketplaceProviderOfferingsList),
     filter,
     mandatoryFields: [
@@ -34,6 +37,7 @@ export const ProviderOfferingGroupOfferingsExpandable = ({
       'state',
       'resources_count',
       'service_provider_can_create_offering_user', // OfferingGLAuthConfigActionItem
+      'customer_uuid', // OfferingGroupRemoveOfferingAction
     ],
   });
   return (
@@ -68,6 +72,10 @@ export const ProviderOfferingGroupOfferingsExpandable = ({
       rowActions={({ row }) => (
         <ActionsDropdown row={row} refetch={tableProps.fetch}>
           <OfferingGLAuthConfigActionItem row={row} />
+          <OfferingGroupRemoveOfferingAction
+            row={row}
+            refetch={tableProps.fetch}
+          />
         </ActionsDropdown>
       )}
     />

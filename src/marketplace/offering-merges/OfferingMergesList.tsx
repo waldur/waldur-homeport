@@ -5,6 +5,7 @@ import { marketplaceOfferingMergesList, OfferingMerge } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
 
+import { tabTableProps } from '@/administration/tabTableProps';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { StateIndicator } from '@/core/StateIndicator';
@@ -16,6 +17,7 @@ import {
   selectMarketplaceOfferingMergesFilter,
 } from '@/table/generated/MarketplaceOfferingMergesFilter';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
@@ -79,7 +81,9 @@ const NewMergeButton: FC = () => {
   );
 };
 
-export const OfferingMergesList: FC = () => {
+export const OfferingMergesList: FC<Partial<TableWithPortal>> = ({
+  portal,
+}) => {
   const filterValues = useFilterValues(MERGES_TABLE_ID);
   const filter = useMemo(
     () => selectMarketplaceOfferingMergesFilter(filterValues),
@@ -95,6 +99,7 @@ export const OfferingMergesList: FC = () => {
   return (
     <Table<OfferingMerge>
       {...tableProps}
+      {...tabTableProps(portal)}
       title={translate('Offering merges')}
       verboseName={translate('offering merges')}
       filters={<MarketplaceOfferingMergesFilter />}

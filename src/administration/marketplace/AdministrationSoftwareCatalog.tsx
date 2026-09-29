@@ -1,7 +1,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useMemo } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 import type { SoftwareCatalog } from 'waldur-js-client';
 import {
   marketplaceSoftwareCatalogsList,
@@ -11,20 +10,26 @@ import {
 
 import { BaseButton } from 'waldur-ui';
 
+import { tabTableProps } from '@/administration/tabTableProps';
 import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { SettingsDescription } from '@/SettingsDescription';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { TableWithTabs } from '@/table/TableWithTabs';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
-import { SettingsCard } from '../settings/SettingsCard';
-import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
+import { FieldRow } from '../settings/FieldRow';
 
 const SoftwareCatalogDiscoverDialog = lazyComponent(() =>
   import('./SoftwareCatalogDiscoverDialog').then((m) => ({
@@ -32,20 +37,7 @@ const SoftwareCatalogDiscoverDialog = lazyComponent(() =>
   })),
 );
 
-const TABS = [
-  { key: 'catalogs', title: translate('Enabled catalogues') },
-  { key: 'general', title: translate('General') },
-  { key: 'eessi', title: 'EESSI' },
-  { key: 'spack', title: 'Spack' },
-];
-
-const SETTINGS_GROUP_NAMES = {
-  general: translate('Software catalog general'),
-  eessi: translate('Software catalog EESSI'),
-  spack: translate('Software catalog Spack'),
-};
-
-const UpdateCatalogButton = ({
+const UpdateCatalogAction = ({
   row,
   refetch,
 }: {
@@ -63,18 +55,16 @@ const UpdateCatalogButton = ({
   });
 
   return (
-    <BaseButton
-      onClick={mutate}
-      label={translate('Update')}
+    <ActionItem
+      title={translate('Update')}
+      action={() => mutate()}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
-      pending={isPending}
-      variant="tertiary"
-      size="lg"
+      disabled={isPending}
     />
   );
 };
 
-const CatalogsTab = () => {
+const CatalogsTab: FC<Partial<TableWithPortal>> = ({ portal }) => {
   const { openDialog } = useModal();
   const filter = useMemo(() => ({}), []);
   const tableProps = useTable({
@@ -91,6 +81,7 @@ const CatalogsTab = () => {
   return (
     <Table<SoftwareCatalog>
       {...tableProps}
+      {...tabTableProps(portal)}
       columns={[
         {
           title: translate('Name'),
@@ -131,7 +122,9 @@ const CatalogsTab = () => {
       ]}
       verboseName={translate('software catalogs')}
       rowActions={({ row }) => (
-        <UpdateCatalogButton row={row} refetch={tableProps.fetch} />
+        <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <UpdateCatalogAction row={row} refetch={tableProps.fetch} />
+        </ActionsDropdown>
       )}
       tableActions={
         <BaseButton
@@ -146,7 +139,10 @@ const CatalogsTab = () => {
   );
 };
 
-const SettingsTab = ({ groupName }: { groupName: string }) => {
+// A settings group rendered straight into the tab pane, as SettingsWithTabs
+// does: the page header already names the page, so a card per group would
+// only add a second border and repeat the tab title.
+const SettingsTab: FC<{ groupName: string }> = ({ groupName }) => {
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['SoftwareCatalogSettings'],
     queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
@@ -161,49 +157,53 @@ const SettingsTab = ({ groupName }: { groupName: string }) => {
       />
     );
 
-  return data ? (
-    <SettingsCard groupNames={[groupName]} settingsSource={data} />
-  ) : null;
-};
-
-export const AdministrationSoftwareCatalog = () => {
-  const { activeKey, handleSelect, defaultActiveKey } = useSettingsUrlSync(
-    TABS,
-    'tab',
-  );
+  const group = SettingsDescription.find((g) => g.description === groupName);
+  if (!group) return null;
 
   return (
-    <Card className="card-bordered">
-      <Card.Body>
-        <Tab.Container
-          defaultActiveKey={defaultActiveKey}
-          activeKey={activeKey}
-          onSelect={handleSelect}
-          unmountOnExit
-        >
-          <Nav variant="tabs" className="nav-line-tabs mb-5">
-            {TABS.map((tab) => (
-              <Nav.Item key={tab.key}>
-                <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-          <Tab.Content>
-            <Tab.Pane eventKey="catalogs">
-              <CatalogsTab />
-            </Tab.Pane>
-            <Tab.Pane eventKey="general">
-              <SettingsTab groupName={SETTINGS_GROUP_NAMES.general} />
-            </Tab.Pane>
-            <Tab.Pane eventKey="eessi">
-              <SettingsTab groupName={SETTINGS_GROUP_NAMES.eessi} />
-            </Tab.Pane>
-            <Tab.Pane eventKey="spack">
-              <SettingsTab groupName={SETTINGS_GROUP_NAMES.spack} />
-            </Tab.Pane>
-          </Tab.Content>
-        </Tab.Container>
-      </Card.Body>
-    </Card>
+    <FormTable>
+      {group.items.map((item) => (
+        <FieldRow item={item} key={item.key} value={data?.[item.key]} />
+      ))}
+    </FormTable>
   );
 };
+
+const settingsTab = (groupName: string) => {
+  const Component = () => <SettingsTab groupName={groupName} />;
+  return Component;
+};
+
+const TABS = [
+  {
+    key: 'catalogs',
+    title: translate('Enabled catalogues'),
+    component: CatalogsTab,
+  },
+  {
+    key: 'general',
+    title: translate('General'),
+    component: settingsTab(translate('Software catalog general')),
+  },
+  {
+    key: 'eessi',
+    title: 'EESSI',
+    component: settingsTab(translate('Software catalog EESSI')),
+  },
+  {
+    key: 'spack',
+    title: 'Spack',
+    component: settingsTab(translate('Software catalog Spack')),
+  },
+];
+
+export const AdministrationSoftwareCatalog = () => (
+  <TableWithTabs
+    title={translate('Software catalog')}
+    subtitle={translate(
+      'Software catalogues and their EESSI and Spack sources.',
+    )}
+    tabs={TABS}
+    syncWithUrlKey="tab"
+  />
+);

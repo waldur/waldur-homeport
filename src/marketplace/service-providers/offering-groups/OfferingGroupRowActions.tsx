@@ -2,6 +2,7 @@ import { OfferingGroup } from 'waldur-js-client';
 
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
+import { OfferingGroupAddOfferingAction } from './OfferingGroupAddOfferingAction';
 import { OfferingGroupDeleteButton } from './OfferingGroupDeleteButton';
 import { OfferingGroupEditButton } from './OfferingGroupEditButton';
 
@@ -17,6 +18,7 @@ export const OfferingGroupRowActions = ({
   customerUrl,
 }: OfferingGroupRowActionsProps) => (
   <ActionsDropdown row={row} refetch={refetch}>
+    <OfferingGroupAddOfferingAction row={row} refetch={refetch} />
     <OfferingGroupEditButton
       row={row}
       refetch={refetch}

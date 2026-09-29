@@ -40,7 +40,9 @@ export const MERGE_QUERY_KEY = (uuid: string) => ['OfferingMerge', uuid];
 
 export const WIZARD_STATE = 'admin-marketplace-offering-merge-wizard';
 export const DETAILS_STATE = 'admin-marketplace-offering-merge-details';
-export const LIST_STATE = 'admin-marketplace-offering-merges';
+// The merges list is the `merges` tab of the admin Offerings page.
+export const LIST_STATE = 'admin-marketplace-offerings';
+export const LIST_PARAMS = { tab: 'merges' };
 
 /** The effect of an entry whose rows deliberately stay with the source. */
 export const KEPT_ON_SOURCE_EFFECT: OfferingMergeEffectEnum = 'kept_on_source';

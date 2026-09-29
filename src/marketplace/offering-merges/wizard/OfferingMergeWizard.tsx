@@ -20,6 +20,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ProgressStep, VerticalProgressSteps } from '@/wizard';
 
 import {
+  LIST_PARAMS,
   LIST_STATE,
   MERGE_QUERY_KEY,
   MERGES_TABLE_ID,
@@ -494,7 +495,9 @@ export const OfferingMergeWizard: FC = () => {
                 <BaseButton
                   label={translate('Close')}
                   variant="tertiary"
-                  onClick={() => router.stateService.go(LIST_STATE)}
+                  onClick={() =>
+                    router.stateService.go(LIST_STATE, LIST_PARAMS)
+                  }
                 />
                 {step < STEP_RUN && (
                   <BaseButton
