@@ -68,15 +68,7 @@ export const getDefaultLimits = (
   return limitParser(limits);
 };
 
-export const scrollToSectionById = (section: string, extraOffset = 180) => {
-  const el = document.getElementById(section);
-  if (!el) return;
-  window.scroll({
-    behavior: 'smooth',
-    left: 0,
-    top: el.offsetTop - extraOffset,
-  });
-};
+export { scrollToSectionById } from 'waldur-ui';
 
 export const getPublicOfferingBreadcrumbItems = (
   offering,

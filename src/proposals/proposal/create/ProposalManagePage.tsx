@@ -13,7 +13,6 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
-import { PageBarProvider } from '@/marketplace/context';
 import { useBreadcrumbs } from '@/navigation/context';
 import { useTitle } from '@/navigation/title';
 import {
@@ -184,7 +183,7 @@ export const ProposalManagePage = () => {
   }
 
   return (
-    <PageBarProvider scrollOffset={100}>
+    <>
       <SidebarLayout.Header className="pb-5">
         <div className="w-100">
           {isCallManagerView ? (
@@ -225,6 +224,6 @@ export const ProposalManagePage = () => {
           refetch={refetch}
         />
       )}
-    </PageBarProvider>
+    </>
   );
 };

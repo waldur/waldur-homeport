@@ -5,9 +5,9 @@ import { BaseButton } from 'waldur-ui';
 
 import { Panel } from '@/core/Panel';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ScrollSpyNav } from '@/navigation/ScrollSpyNav';
 import { useCallFixedDuration } from '@/proposals/callQueries';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { Proposal, ProposalReview } from '@/proposals/types';
@@ -62,7 +62,7 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
   return (
     <>
       <Panel title={translate('Progress')} cardBordered className="mb-5">
-        <PageBarTabs tabs={tabs} mode="tabs-left" />
+        <ScrollSpyNav items={tabs} />
       </Panel>
       <ProposalCostTotal
         rows={resourceRows || []}

@@ -4,6 +4,7 @@ import { sb } from 'storybook/test';
 
 import { generateBrandColors, hexToRgb } from 'waldur-design-tokens';
 
+import { ENV } from '@/core/config';
 import { getBrandColor } from '@/core/utils';
 import { loadTheme } from '@/theme/utils';
 
@@ -19,6 +20,16 @@ sb.mock(import('../src/core/api.ts'));
  * docs/tailwind-shadcn-migration-notes.md.
  */
 function seedBrandVars() {
+  if (!ENV.plugins?.WALDUR_CORE) {
+    ENV.plugins = {
+      ...ENV.plugins,
+      WALDUR_CORE: {
+        SHORT_PAGE_TITLE: 'Waldur',
+        FULL_PAGE_TITLE: 'Waldur | Cloud Management Platform',
+        ...(ENV.plugins?.WALDUR_CORE || {}),
+      },
+    } as any;
+  }
   const hex = getBrandColor();
   document.documentElement.style.setProperty('--waldur-brand-color', hex);
   document.documentElement.style.setProperty(

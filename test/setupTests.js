@@ -13,6 +13,37 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
   };
 }
 
+// jsdom does not implement IntersectionObserver. This mock stores the latest
+// observer instance and its callback so tests can simulate intersections via
+// globalThis.__triggerIntersection(entries).
+if (typeof globalThis.IntersectionObserver === 'undefined') {
+  globalThis.__ioInstances = [];
+  globalThis.IntersectionObserver = class IntersectionObserver {
+    constructor(callback, options) {
+      this.callback = callback;
+      this.options = options;
+      this.targets = [];
+      globalThis.__ioInstances.push(this);
+    }
+    observe(el) {
+      this.targets.push(el);
+    }
+    unobserve(el) {
+      this.targets = this.targets.filter((t) => t !== el);
+    }
+    disconnect() {
+      this.targets = [];
+      globalThis.__ioInstances = globalThis.__ioInstances.filter(
+        (i) => i !== this,
+      );
+    }
+    // Helper: simulate an intersection event for a specific element
+    trigger(entries) {
+      this.callback(entries, this);
+    }
+  };
+}
+
 // react-bootstrap transitions (Collapse, Fade, Modal) end on a fallback timer
 // from dom-helpers that fires ~5 ms after they start. When a file's last test
 // ends mid-transition, that timer can fire after jsdom is torn down and fail

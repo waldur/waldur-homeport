@@ -41,7 +41,6 @@ import { useCustomer, useProject, useUser } from '@/workspace/hooks';
 
 import { getOrderFormComponent } from '../common/registry';
 import { DeployFormData, Limits } from '../common/types';
-import { PageBarProvider } from '../context';
 import { formatOrderForCreate } from '../details/utils';
 import { getMarketplaceFilters } from '../landing/filter/store/selectors';
 import { scrollToSectionById } from '../offerings/utils';
@@ -350,7 +349,7 @@ export const BaseDeployPage = ({
   }
 
   return (
-    <PageBarProvider scrollOffset={100}>
+    <>
       <SidebarLayout.Header>
         <div className="d-flex justify-content-between align-items-center w-100">
           <h1 className="mb-0 flex-grow-1">
@@ -387,7 +386,7 @@ export const BaseDeployPage = ({
           />
         </SidebarLayout.Sidebar>
       </SidebarLayout.Container>
-    </PageBarProvider>
+    </>
   );
 };
 

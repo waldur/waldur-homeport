@@ -14,7 +14,6 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
-import { PageBarProvider } from '@/marketplace/context';
 import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
 import { ProposalReview } from '@/proposals/types';
@@ -111,7 +110,7 @@ export const ProposalReviewCreatePage = () => {
   }
 
   return (
-    <PageBarProvider scrollOffset={100}>
+    <>
       {/* The review's score/comments are written in the SubmitReviewDialog
           (opened from the sidebar), not inline. This Form only provides
           react-final-form context to the read-only step components below. */}
@@ -158,6 +157,6 @@ export const ProposalReviewCreatePage = () => {
           </form>
         )}
       </Form>
-    </PageBarProvider>
+    </>
   );
 };
