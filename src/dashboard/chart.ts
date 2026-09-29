@@ -5,6 +5,15 @@ import { translate } from '@/i18n';
 import { CHART_BAR_ROUNDING, getChartBrandColor } from './constants';
 import { Chart, ChartData } from './types';
 
+// Mid grey in both themes (the ramp mirrors), so reference lines and crosshairs
+// stay readable on either background instead of a fixed hex.
+const getNeutralLineColor = () =>
+  typeof document === 'undefined'
+    ? undefined
+    : getComputedStyle(document.documentElement)
+        .getPropertyValue('--color-gray-500')
+        .trim() || undefined;
+
 type Value = string | number;
 interface HLine {
   label: string;
@@ -29,7 +38,7 @@ const generateMarkLines = (
               formatter: line.label,
             },
             emphasis: { label: { show: true } },
-            lineStyle: { type: 'solid', color: '#0072ff' },
+            lineStyle: { type: 'solid', color: getNeutralLineColor() },
             yAxis: line.value,
             x: '0%',
             symbol: 'none',
@@ -102,7 +111,7 @@ export const getCostWidgetChartOptions = (
       axisPointer: {
         type: 'cross',
         crossStyle: {
-          color: '#999',
+          color: getNeutralLineColor(),
         },
       },
       formatter: function (params) {
@@ -149,7 +158,6 @@ export const getCostWidgetChartOptions = (
       itemHeight: 8,
       textStyle: {
         fontSize: 12,
-        color: '#555',
       },
       itemGap: 8,
       top: 0,
@@ -248,7 +256,7 @@ export const getCreditWidgetChartOptions = (
       axisPointer: {
         type: 'cross',
         crossStyle: {
-          color: '#999',
+          color: getNeutralLineColor(),
         },
       },
     },
@@ -295,7 +303,6 @@ export const getCreditWidgetChartOptions = (
       itemHeight: 8,
       textStyle: {
         fontSize: 12,
-        color: '#555',
       },
       itemGap: 8,
       top: 0,
