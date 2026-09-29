@@ -121,12 +121,6 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           }
         />
       )}
-      {/* The project duration is stated on the overview card, not asked here;
-          comments left on the old duration field must survive that. */}
-      <FieldReviewComments
-        reviews={reviews}
-        fieldName="comment_project_duration"
-      />
       {isFieldVisible(fieldStates, 'supporting_documentation') && (
         <>
           <FormGroup
