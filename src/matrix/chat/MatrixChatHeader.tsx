@@ -242,7 +242,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
                 side="bottom"
                 align="start"
                 sideOffset={2}
-                className="z-50 tc-members-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
+                className="tc-members-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
               >
                 <MatrixMembersList />
               </RadixPopover.Content>
