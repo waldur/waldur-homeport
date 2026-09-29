@@ -10,7 +10,10 @@ import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
+
+import { tabTableProps } from '../tabTableProps';
 
 const OrganizationField = ({ row }) => (
   <Link
@@ -20,7 +23,9 @@ const OrganizationField = ({ row }) => (
   />
 );
 
-export const OrganizationCreditsList: FC<{}> = () => {
+export const OrganizationCreditsList: FC<Partial<TableWithPortal>> = ({
+  portal,
+}) => {
   const tableProps = useTable({
     table: 'OrganizationCreditsList',
     fetchData: createFetcher(customerCreditsList),
@@ -30,6 +35,7 @@ export const OrganizationCreditsList: FC<{}> = () => {
   return (
     <Table<CustomerCredit>
       {...tableProps}
+      {...tabTableProps(portal)}
       columns={[
         {
           title: translate('Organization name'),

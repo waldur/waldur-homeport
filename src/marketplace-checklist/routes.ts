@@ -1,24 +1,21 @@
-import { lazyComponent } from '@/core/lazyComponent';
+import { UIView } from '@uirouter/react';
+
 import { StateDeclaration } from '@/core/types';
-import { translate } from '@/i18n';
-import { isStaff } from '@/workspace/selectors';
 
 export const states: StateDeclaration[] = [
+  // Now the Checklists tab of the Compliance page; kept as a redirect so
+  // bookmarks and the chaos route sweep keep resolving. The staff gate moved
+  // onto the tab.
   {
     name: 'admin-organization-checklist-management',
     url: 'organization-checklist-management/',
     parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('@/marketplace-checklist/ChecklistManagementTable').then(
-        (module) => ({
-          default: module.ChecklistManagementTable,
-        }),
-      ),
-    ),
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: { state: 'admin-compliance', params: { tab: 'checklists' } },
     data: {
-      breadcrumb: () => translate('Checklist management'),
-      permissions: [isStaff],
-      priority: 504,
+      skipBreadcrumb: true,
     },
   },
 ];

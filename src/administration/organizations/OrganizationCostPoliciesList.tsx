@@ -21,10 +21,15 @@ import {
   MarketplaceCustomerEstimatedCostPoliciesFilterFormId,
 } from '@/table/generated/MarketplaceCustomerEstimatedCostPoliciesFilter';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
-export const OrganizationCostPoliciesList: FC = () => {
+import { tabTableProps } from '../tabTableProps';
+
+export const OrganizationCostPoliciesList: FC<Partial<TableWithPortal>> = ({
+  portal,
+}) => {
   const values = useFilterValues('OrgCostPoliciesList');
 
   const filter = useMemo(
@@ -43,6 +48,7 @@ export const OrganizationCostPoliciesList: FC = () => {
   return (
     <Table<CustomerEstimatedCostPolicy>
       {...tableProps}
+      {...tabTableProps(portal)}
       columns={[
         {
           title: translate('Organization'),

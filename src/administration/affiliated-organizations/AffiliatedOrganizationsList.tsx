@@ -9,14 +9,19 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+
+import { tabTableProps } from '../tabTableProps';
 
 import { AffiliatedOrganizationCreateButton } from './AffiliatedOrganizationCreateButton';
 import { AffiliatedOrganizationProjects } from './AffiliatedOrganizationProjects';
 import { AffiliatedOrganizationRowActions } from './AffiliatedOrganizationRowActions';
 
-export const AffiliatedOrganizationsList: FunctionComponent = () => {
+export const AffiliatedOrganizationsList: FunctionComponent<
+  Partial<TableWithPortal>
+> = ({ portal }) => {
   const tableProps = useTable({
     table: 'AffiliatedOrganizationsList',
     fetchData: createFetcher(affiliatedOrganizationsList),
@@ -26,6 +31,7 @@ export const AffiliatedOrganizationsList: FunctionComponent = () => {
   return (
     <Table<AffiliatedOrganization>
       {...tableProps}
+      {...tabTableProps(portal)}
       columns={[
         {
           title: translate('Name'),

@@ -7,7 +7,10 @@ import { translate } from '@/i18n';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
+
+import { tabTableProps } from '../tabTableProps';
 
 import { UserAgreementCreateButton } from './UserAgreementCreateButton';
 import { UserAgreementDeleteButton } from './UserAgreementDeleteButton';
@@ -35,7 +38,9 @@ const UserAggrementsRowActions = ({ row, fetch }) => (
   />
 );
 
-export const UserAgreementsList: FunctionComponent<{}> = () => {
+export const UserAgreementsList: FunctionComponent<
+  Partial<TableWithPortal>
+> = ({ portal }) => {
   const props = useTable({
     table: 'user-agreements',
     fetchData: createFetcher(userAgreementsList),
@@ -43,6 +48,7 @@ export const UserAgreementsList: FunctionComponent<{}> = () => {
   return (
     <Table<UserAgreement>
       {...props}
+      {...tabTableProps(portal)}
       columns={[
         {
           title: translate('Type'),

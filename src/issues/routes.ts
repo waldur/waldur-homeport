@@ -3,7 +3,11 @@ import { UIView } from '@uirouter/react';
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
-import { ResellerFeatures, SupportFeatures } from '@/FeaturesEnums';
+import {
+  InvitationsFeatures,
+  ResellerFeatures,
+  SupportFeatures,
+} from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
@@ -329,6 +333,21 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Offering users'),
+    },
+  },
+
+  {
+    name: 'support-course-accounts',
+    url: 'course-accounts/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@/administration/CourseAccountsTable').then((module) => ({
+        default: module.CourseAccountsTable,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Course accounts'),
+      feature: InvitationsFeatures.show_course_accounts,
     },
   },
 

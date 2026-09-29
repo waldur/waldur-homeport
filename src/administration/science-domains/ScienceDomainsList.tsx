@@ -6,15 +6,20 @@ import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+
+import { tabTableProps } from '../tabTableProps';
 
 import { ScienceDomainCreateButton } from './ScienceDomainCreateButton';
 import { ScienceDomainLoadPresetButton } from './ScienceDomainLoadPresetButton';
 import { ScienceDomainRowActions } from './ScienceDomainRowActions';
 import { ScienceSubDomainsExpandableRow } from './ScienceSubDomainsExpandableRow';
 
-export const ScienceDomainsList: FunctionComponent = () => {
+export const ScienceDomainsList: FunctionComponent<
+  Partial<TableWithPortal>
+> = ({ portal }) => {
   const tableProps = useTable({
     table: 'ScienceDomainsList',
     fetchData: createFetcher(scienceDomainsList),
@@ -24,6 +29,7 @@ export const ScienceDomainsList: FunctionComponent = () => {
   return (
     <Table<ScienceDomain>
       {...tableProps}
+      {...tabTableProps(portal)}
       columns={[
         {
           title: translate('Code'),

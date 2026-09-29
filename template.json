@@ -3925,12 +3925,6 @@
       "feature_area": "reporting"
     }
   },
-  "Analytics & reports": {
-    "context": {
-      "primary_ui_type": "title",
-      "feature_area": "marketplace-checklist"
-    }
-  },
   "Analytics cookies": {
     "context": {
       "feature_area": "cookies"
@@ -9529,6 +9523,12 @@
       "feature_area": "compliance"
     }
   },
+  "Checklist analytics": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "organizations-compliance"
+    }
+  },
   "Checklist answers saved.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -9551,11 +9551,6 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "checklists"
-    }
-  },
-  "Checklist management": {
-    "context": {
-      "feature_area": "marketplace-checklist"
     }
   },
   "Checklist name": {
@@ -9857,6 +9852,11 @@
   "Classification view": {
     "context": {
       "feature_area": "project-classification"
+    }
+  },
+  "Classifiers": {
+    "context": {
+      "feature_area": "organizations-compliance"
     }
   },
   "Clean": {
@@ -10643,13 +10643,18 @@
   "Compliance": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "overview"
+      "feature_area": "organizations-compliance"
     }
   },
   "Compliance checklist": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "overview"
+    }
+  },
+  "Compliance checklists and the agreements users accept.": {
+    "context": {
+      "feature_area": "organizations-compliance"
     }
   },
   "Compliance metadata": {
@@ -11985,6 +11990,7 @@
   },
   "Cost policies": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "organizations"
     }
   },
@@ -12219,7 +12225,7 @@
   "Course accounts": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "administration"
+      "feature_area": "issues"
     }
   },
   "Create": {
@@ -12971,6 +12977,11 @@
       "feature_area": "organizations"
     }
   },
+  "Credit allocated to organizations and the policies applied when their estimated cost reaches a limit.": {
+    "context": {
+      "feature_area": "organizations-compliance"
+    }
+  },
   "Credit allocated to projects ({currency})": {
     "context": {
       "primary_ui_type": "label",
@@ -13096,7 +13107,13 @@
   },
   "Credits": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "organizations"
+    }
+  },
+  "Credits & cost policies": {
+    "context": {
+      "feature_area": "organizations-compliance"
     }
   },
   "Credits available for this organization: {currency} {credits}": {
@@ -22154,6 +22171,11 @@
       "feature_area": "usage-views"
     }
   },
+  "Groups, affiliations and science domains used to classify organizations and projects.": {
+    "context": {
+      "feature_area": "organizations-compliance"
+    }
+  },
   "Growth": {
     "context": {
       "primary_ui_type": "title",
@@ -22884,6 +22906,11 @@
   "How many proposals will I need to review?": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "How new organizations are onboarded and how projects behave.": {
+    "context": {
+      "feature_area": "organizations-compliance"
     }
   },
   "How often a new round starts after the previous one.": {
@@ -34155,6 +34182,7 @@
   },
   "Onboarding": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "organizations"
     }
   },
@@ -35311,6 +35339,11 @@
   "Organization & Contact": {
     "context": {
       "feature_area": "create-user-steps"
+    }
+  },
+  "Organization & project settings": {
+    "context": {
+      "feature_area": "organizations-compliance"
     }
   },
   "Organization (from IdP)": {
@@ -39406,7 +39439,7 @@
   },
   "Project Digest": {
     "context": {
-      "feature_area": "organizations"
+      "feature_area": "organizations-compliance"
     }
   },
   "Project End Date": {
@@ -39981,11 +40014,6 @@
   "Project search": {
     "context": {
       "feature_area": "reports"
-    }
-  },
-  "Project settings": {
-    "context": {
-      "feature_area": "administration"
     }
   },
   "Project slug": {
@@ -47083,7 +47111,8 @@
   },
   "Science domains": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title",
+      "feature_area": "science-domains"
     }
   },
   "Science sub-domain": {
@@ -59168,11 +59197,6 @@
       "primary_ui_type": "error_message"
     }
   },
-  "Unable to load project settings.": {
-    "context": {
-      "feature_area": "organizations"
-    }
-  },
   "Unable to load project types.": {
     "context": {
       "feature_area": "create"
@@ -63273,7 +63297,7 @@
   },
   "User agreements": {
     "context": {
-      "feature_area": "administration"
+      "primary_ui_type": "title"
     }
   },
   "User already has role within this scope.": {},
