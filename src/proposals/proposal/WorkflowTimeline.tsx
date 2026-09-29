@@ -14,6 +14,7 @@ import {
   showsWorkflowSteps,
 } from '@/proposals/presentation';
 import { ProgressStep, ProgressSteps } from '@/wizard';
+import { useUser } from '@/workspace/hooks';
 
 import { Proposal } from '../types';
 import {
@@ -26,7 +27,7 @@ import {
   proposalWorkflowStatesKey,
 } from '../workflow/queries';
 
-import { getApplicantTimeline } from './applicantTimeline';
+import { getApplicantTimeline, isProposalApplicant } from './applicantTimeline';
 import {
   CurrentStepNote,
   ProgressSteps as ProposalStateSteps,
@@ -93,9 +94,14 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
   // person, and the call team has the full per-step detail under every
   // checkpoint. Handing it to them too would address them as the applicant
   // and paint their tracker amber for a step that is not waiting on them.
+  // A reviewer reads this same view without `showDetails`, so being off the
+  // call team is not enough: only the applicant themself gets the line, and
+  // everyone else sees the plain step labels.
+  const user = useUser();
+  const isApplicant = isProposalApplicant(user, proposal);
   const active = (data ?? []).find((s) => s.status === 'active');
   const statusLine = useMemo<CurrentStepNote | undefined>(() => {
-    if (showDetails || !active) return undefined;
+    if (showDetails || !isApplicant || !active) return undefined;
     if (active.step === 'award_response') {
       // Not a status report: the step is stalled on the applicant, which is
       // what the design system's Status=Warning step is for — the same flag
@@ -125,7 +131,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
         ? translate('Your proposal is being reviewed.')
         : translate('Your request is being reviewed.'),
     };
-  }, [active, showDetails]);
+  }, [active, showDetails, isApplicant]);
 
   const steps = useMemo<ProgressStep[]>(() => {
     // Compact per-step detail: "<status> · <owner> · <date>" on one line, with
