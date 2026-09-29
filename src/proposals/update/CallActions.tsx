@@ -1,4 +1,8 @@
-import { ArchiveIcon, CopyIcon } from '@phosphor-icons/react';
+import {
+  ArchiveIcon,
+  CopyIcon,
+  DownloadSimpleIcon,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import {
@@ -31,6 +35,12 @@ import {
 const DuplicateCallDialog = lazyComponent(() =>
   import('@/proposals/details/DuplicateCallDialog').then((m) => ({
     default: m.DuplicateCallDialog,
+  })),
+);
+
+const ExportCallDialog = lazyComponent(() =>
+  import('@/proposals/transfer/ExportCallDialog').then((m) => ({
+    default: m.ExportCallDialog,
   })),
 );
 
@@ -140,6 +150,22 @@ export const CallActions: FC<CallActionsProps> = ({
     });
   }, [openDialog, call, refetch]);
 
+  const handleExport = useCallback(() => {
+    openDialog(ExportCallDialog, { resolve: { call } });
+  }, [openDialog, call]);
+
+  // Exporting reads the whole configuration, so it takes the same right as
+  // editing it.
+  const exportItem = (
+    <ActionItem
+      title={translate('Export')}
+      action={handleExport}
+      iconNode={<DownloadSimpleIcon weight="bold" />}
+      disabled={!canUpdate}
+      tooltip={noUpdateTooltip}
+    />
+  );
+
   const tooltipMessage = !canUpdate
     ? noUpdateTooltip
     : !hasRounds
@@ -188,6 +214,7 @@ export const CallActions: FC<CallActionsProps> = ({
           disabled={!canDuplicateCall}
           tooltip={noDuplicateTooltip}
         />
+        {exportItem}
       </ActionsDropdownComponent>
     );
   }
@@ -213,6 +240,7 @@ export const CallActions: FC<CallActionsProps> = ({
           disabled={!canDuplicateCall}
           tooltip={noDuplicateTooltip}
         />
+        {exportItem}
       </ActionsDropdownComponent>
     );
   }
@@ -232,6 +260,7 @@ export const CallActions: FC<CallActionsProps> = ({
         disabled={!canDuplicateCall}
         tooltip={noDuplicateTooltip}
       />
+      {exportItem}
       <ActionsDropdownSeparator className="border-secondary" />
       <ActionItem
         title={translate('Archive')}

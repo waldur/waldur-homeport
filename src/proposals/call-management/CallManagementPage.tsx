@@ -30,6 +30,8 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useCustomer } from '@/workspace/hooks';
 
+import { CallRowActions } from '../transfer/CallRowActions';
+import { ImportCallButton } from '../transfer/ImportCallButton';
 import { formatCallState, getCallStateOptions } from '../utils';
 
 import { CallCreateButton } from './CallCreateButton';
@@ -171,7 +173,15 @@ export const CallManagementPage: FunctionComponent<CallManagementPageProps> = ({
       verboseName={translate('Calls')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
-      tableActions={<CallCreateButton refetch={tableProps.fetch} />}
+      tableActions={
+        <>
+          <ImportCallButton refetch={tableProps.fetch} />
+          <CallCreateButton refetch={tableProps.fetch} />
+        </>
+      }
+      rowActions={({ row }) => (
+        <CallRowActions row={row} refetch={tableProps.fetch} />
+      )}
       expandableRow={CallExpandableRow}
       filters={<ProposalPublicCallsFilter />}
     />
