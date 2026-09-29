@@ -55,9 +55,7 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
     [data],
   );
 
-  // TODO: Remove cast once the regenerated SDK ships `awaiting_manual_advance`.
-  const awaitingManualAdvance =
-    (proposal as any).awaiting_manual_advance ?? false;
+  const awaitingManualAdvance = proposal.awaiting_manual_advance ?? false;
 
   const canManage =
     user?.is_staff ||

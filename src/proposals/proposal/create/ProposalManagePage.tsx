@@ -117,6 +117,8 @@ export const ProposalManagePage = () => {
             'compliance_checklist_name',
             // Drives which Project details fields the form asks for.
             'proposal_field_config',
+            // Tells the applicant when review of a submitted proposal starts.
+            'evaluation_start',
             // Cast: compliance_checklist* are protected-call fields, so the
             // list is not assignable to keyof PublicCall.
           ] as any,
@@ -216,6 +218,7 @@ export const ProposalManagePage = () => {
             <WorkflowTimeline
               proposal={proposal}
               showDetails={isCallManagerView}
+              evaluationStart={call?.evaluation_start}
             />
           )}
         </div>

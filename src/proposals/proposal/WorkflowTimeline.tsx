@@ -1,7 +1,10 @@
 import { InfoIcon, XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { ProposalWorkflowStepInstance } from 'waldur-js-client';
+import {
+  EvaluationStartEnum,
+  ProposalWorkflowStepInstance,
+} from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
 
@@ -39,16 +42,17 @@ interface WorkflowTimelineProps {
    *  checkpoint. Call-manager view turns this on; the applicant view keeps
    *  the tracker clean with step labels only. */
   showDetails?: boolean;
+  /** The call's `evaluation_start`. On an `at_cutoff` call a submitted
+   *  proposal waits for its round to close before any step starts. */
+  evaluationStart?: EvaluationStartEnum;
 }
 
 export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
   proposal,
   showDetails = false,
+  evaluationStart,
 }) => {
-  // TODO: Remove cast once the regenerated SDK ships
-  // `awaiting_manual_advance` on Proposal.
-  const awaitingManualAdvance =
-    (proposal as any).awaiting_manual_advance ?? false;
+  const awaitingManualAdvance = proposal.awaiting_manual_advance ?? false;
 
   const { data, isLoading, isError } = useQuery({
     queryKey: proposalWorkflowStatesKey(proposal.uuid),
@@ -100,8 +104,23 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
   const user = useUser();
   const isApplicant = isProposalApplicant(user, proposal);
   const active = (data ?? []).find((s) => s.status === 'active');
+  // A call that evaluates at the round cut-off holds every submitted proposal,
+  // with no step started, until the round closes. Without saying so the
+  // tracker would mark its first step as current and read as review under way.
+  const awaitingCutoff =
+    evaluationStart === 'at_cutoff' &&
+    proposal.state === 'submitted' &&
+    !active;
   const statusLine = useMemo<CurrentStepNote | undefined>(() => {
-    if (showDetails || !isApplicant || !active) return undefined;
+    if (showDetails || !isApplicant) return undefined;
+    if (awaitingCutoff) {
+      return {
+        text: translate(
+          'Submitted — evaluation starts after the round cut-off.',
+        ),
+      };
+    }
+    if (!active) return undefined;
     if (active.step === 'award_response') {
       // Not a status report: the step is stalled on the applicant, which is
       // what the design system's Status=Warning step is for — the same flag
@@ -131,7 +150,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
         ? translate('Your proposal is being reviewed.')
         : translate('Your request is being reviewed.'),
     };
-  }, [active, showDetails, isApplicant]);
+  }, [active, showDetails, isApplicant, awaitingCutoff]);
 
   const steps = useMemo<ProgressStep[]>(() => {
     // Compact per-step detail: "<status> · <owner> · <date>" on one line, with
@@ -159,10 +178,14 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
     // form), so submission is always behind us — leaving the variant at the
     // default paints it with the brand colour, matching the other completed
     // checkpoints.
+    // While the proposal waits for the round cut-off, the note hangs under
+    // Submission: that is where the proposal stands, and no later step is
+    // under way yet.
     const submission: ProgressStep = {
       key: 'submission',
       label: translate('Submission'),
       completed: true,
+      description: awaitingCutoff && statusLine ? [statusLine.text] : undefined,
     };
     const rest = visibleStates.map<ProgressStep>((s, index) => {
       const isFailure = failureIndex !== -1 && index === failureIndex;
@@ -207,7 +230,9 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
         // current one. Steps past the failure are also struck through below.
         disabled:
           isAfterFailure ||
-          (failureIndex !== -1 && !isFailure && s.status !== 'completed'),
+          (failureIndex !== -1 && !isFailure && s.status !== 'completed') ||
+          // Nothing has started before the cut-off: no step is current.
+          (awaitingCutoff && s.status !== 'completed'),
         icon: isFailure ? <XIcon size={16} weight="bold" /> : undefined,
         // Brand colour for done/in-progress (default variant); red for the
         // failure point; amber where the active step is waiting on the
@@ -231,7 +256,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
       };
     });
     return [submission, ...rest];
-  }, [visibleStates, showDetails, failureIndex, statusLine]);
+  }, [visibleStates, showDetails, failureIndex, statusLine, awaitingCutoff]);
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) {
