@@ -19,7 +19,6 @@ const COMMENT_FIELDS: { key: keyof ProposalReview; label: string }[] = [
     key: 'comment_project_description',
     label: translate('Project description'),
   },
-  { key: 'comment_project_duration', label: translate('Project duration') },
   {
     key: 'comment_project_supporting_documentation',
     label: translate('Supporting documentation'),

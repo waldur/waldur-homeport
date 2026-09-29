@@ -52,12 +52,6 @@ const ShowReviewCommentsDialog = ({
             value={review.comment_project_description}
           />
         )}
-        {review.comment_project_duration && (
-          <FormTable.Item
-            label={translate('Project duration')}
-            value={review.comment_project_duration}
-          />
-        )}
         {review.comment_project_supporting_documentation && (
           <FormTable.Item
             label={translate('Project supporting documentation')}
@@ -88,7 +82,6 @@ export const ShowReviewCommentsAction = (props) => {
     props.row.comment_project_title ||
     props.row.comment_project_summary ||
     props.row.comment_project_description ||
-    props.row.comment_project_duration ||
     props.row.comment_project_supporting_documentation ||
     props.row.comment_resource_requests ||
     props.row.comment_team;
