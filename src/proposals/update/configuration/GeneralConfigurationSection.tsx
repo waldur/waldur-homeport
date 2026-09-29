@@ -68,6 +68,16 @@ export const formatOrderAuthorUser = (
   return value;
 };
 
+/**
+ * When a submitted proposal's review workflow starts. `at_cutoff` holds every
+ * proposal in `submitted` until its round closes, so a panel evaluates the
+ * whole batch of a cut-off together.
+ */
+const getEvaluationStartOptions = () => [
+  { value: 'on_submission', label: translate('On submission') },
+  { value: 'at_cutoff', label: translate('At the round cut-off') },
+];
+
 /** The API takes the contact as a bare UUID, or `null` to clear it. */
 export const normalizeOrderAuthorUser = (value: any) =>
   value?.uuid ?? value ?? null;
@@ -119,6 +129,7 @@ export const GeneralConfigurationSection: FC<
   };
 
   const orderAuthorOptions = useMemo(getOrderAuthorOptions, []);
+  const evaluationStartOptions = useMemo(getEvaluationStartOptions, []);
 
   const loadComplianceChecklists = useMemo(
     () =>
@@ -160,6 +171,25 @@ export const GeneralConfigurationSection: FC<
               ) : (
                 translate('Not fixed')
               )
+            }
+          />
+          {/* The backend refuses a change while the call has submitted or
+              in-review proposals. The call does not say whether it has any
+              (has_proposals counts drafts too), so the rule is stated here and
+              a refused save reports the backend's reason. */}
+          <SelectEditField
+            name="evaluation_start"
+            label={translate('Evaluation starts')}
+            description={translate(
+              'On submission starts the review of each proposal as soon as it is submitted. At the round cut-off holds submitted proposals until the round closes, then starts them together. Cannot be changed while the call has submitted or in-review proposals.',
+            )}
+            options={evaluationStartOptions}
+            simpleValue
+            isClearable={false}
+            disabled={props.isReadOnly}
+            renderValue={(value) =>
+              evaluationStartOptions.find((o) => o.value === value)?.label ||
+              translate('On submission')
             }
           />
           <AsyncSelectEditField

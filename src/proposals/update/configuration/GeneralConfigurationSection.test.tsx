@@ -1,6 +1,15 @@
-import { describe, expect, it } from 'vitest';
+import { screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
+import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
+
+import { EditFieldDialog } from '@/form/EditFieldDialog';
+import { useModal } from '@/modal/actions';
+import { renderWithProviders } from '@/test/harness';
+import { openAndSelectOption } from '@/test/select';
 
 import {
+  GeneralConfigurationSection,
   formatOrderAuthorUser,
   normalizeOrderAuthorUser,
   validateFixedDuration,
@@ -60,5 +69,57 @@ describe('normalizeOrderAuthorUser', () => {
   it('submits null for a cleared contact', () => {
     expect(normalizeOrderAuthorUser(null)).toBeNull();
     expect(normalizeOrderAuthorUser(undefined)).toBeNull();
+  });
+});
+
+describe('GeneralConfigurationSection evaluation start', () => {
+  const call = {
+    uuid: 'call-uuid',
+    customer_uuid: 'customer-uuid',
+    evaluation_start: 'on_submission',
+    order_author: 'applicant',
+    has_proposals: true,
+  } as any;
+
+  it('shows when evaluation starts', () => {
+    renderWithProviders(
+      <GeneralConfigurationSection
+        call={{ ...call, evaluation_start: 'at_cutoff' }}
+        refetch={vi.fn()}
+      />,
+    );
+    expect(screen.getByText('Evaluation starts')).toBeInTheDocument();
+    expect(screen.getByText('At the round cut-off')).toBeInTheDocument();
+  });
+
+  it('saves the chosen evaluation start on the call', async () => {
+    const user = userEvent.setup();
+    const refetch = vi.fn();
+    vi.mocked(proposalProtectedCallsPartialUpdate).mockResolvedValue({
+      data: {},
+    } as any);
+    renderWithProviders(
+      <GeneralConfigurationSection call={call} refetch={refetch} />,
+    );
+
+    await user.click(screen.getByTestId('edit-evaluation_start'));
+    const { openDialog } = useModal();
+    const [, dialogProps] = vi.mocked(openDialog).mock.lastCall as any;
+    renderWithProviders(<EditFieldDialog {...dialogProps} />);
+
+    await openAndSelectOption(
+      user,
+      /^Evaluation starts/,
+      'At the round cut-off',
+    );
+    await user.click(screen.getByRole('button', { name: 'Confirm' }));
+
+    await waitFor(() => {
+      expect(proposalProtectedCallsPartialUpdate).toHaveBeenCalledWith({
+        path: { uuid: 'call-uuid' },
+        body: { evaluation_start: 'at_cutoff' },
+      });
+      expect(refetch).toHaveBeenCalled();
+    });
   });
 });

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
-import { Form } from 'react-final-form';
+import { FC, useCallback, useMemo, useState } from 'react';
+import { Form, FormSpy } from 'react-final-form';
 import { components } from 'react-select';
 import {
   CallReviewerPool,
@@ -10,7 +10,7 @@ import {
   proposalProtectedCallsCreateManualAssignment,
 } from 'waldur-js-client';
 
-import { Tag, Tooltip } from 'waldur-ui';
+import { AlertItem, Tag, Tooltip } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SubmitButton, StringGroup, SelectGroup } from '@/form';
@@ -21,6 +21,8 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
 
 import { Call } from '../types';
+
+import { getWorkloadLimitMessage } from './workloadLimit';
 
 const TruncatedMultiValue = (props: any) => (
   <Tag onClear={props.removeProps.onClick}>
@@ -103,10 +105,21 @@ interface FormValues {
   manager_notes?: string;
 }
 
+interface AssignmentRequest extends FormValues {
+  /** Assign even though it takes the reviewer above their workload limit. */
+  overrideWorkloadLimit?: boolean;
+}
+
 export const CreateManualAssignmentDialog: FC<
   CreateManualAssignmentDialogProps
 > = ({ resolve }) => {
-  const { showSuccess } = useNotify();
+  const { showSuccess, showErrorResponse } = useNotify();
+
+  // The backend's reason for refusing the last attempt because of the
+  // reviewer's workload limit. While it is set, submitting assigns anyway.
+  const [workloadLimitMessage, setWorkloadLimitMessage] = useState<
+    string | null
+  >(null);
 
   const { call, refetch, initialProposal } = resolve;
 
@@ -176,7 +189,11 @@ export const CreateManualAssignmentDialog: FC<
     [initialProposal],
   );
 
-  const createAssignmentMutation = useManagedMutation<any, any, FormValues>({
+  const createAssignmentMutation = useManagedMutation<
+    any,
+    any,
+    AssignmentRequest
+  >({
     mutationFn: (values) =>
       proposalProtectedCallsCreateManualAssignment({
         path: { uuid: call.uuid },
@@ -184,9 +201,24 @@ export const CreateManualAssignmentDialog: FC<
           reviewer_pool_entry_uuid: values.reviewer.value,
           proposal_uuids: values.proposals.map((p) => p.value),
           manager_notes: values.manager_notes || '',
+          ...(values.overrideWorkloadLimit
+            ? { override_workload_limit: true }
+            : {}),
         },
       }),
-    errorMessage: translate('Failed to create manual assignment.'),
+    // A refusal for the workload limit is not a dead end: the dialog shows the
+    // reason and offers to assign anyway. Everything else is reported as usual.
+    onError: (error) => {
+      const message = getWorkloadLimitMessage(error);
+      if (message) {
+        setWorkloadLimitMessage(message);
+      } else {
+        showErrorResponse(
+          error,
+          translate('Failed to create manual assignment.'),
+        );
+      }
+    },
     refetch,
     onSuccess: (response) => {
       const data = response.data;
@@ -230,10 +262,24 @@ export const CreateManualAssignmentDialog: FC<
 
   return (
     <Form<FormValues>
-      onSubmit={(values) => createAssignmentMutation.mutateAsync(values)}
+      onSubmit={(values) =>
+        createAssignmentMutation
+          .mutateAsync({
+            ...values,
+            overrideWorkloadLimit: Boolean(workloadLimitMessage),
+          })
+          // Failures are reported in onError; keep the dialog open.
+          .catch(() => undefined)
+      }
       initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
+          {/* The override answers the refusal of one reviewer and set of
+              proposals; a different choice has to be checked again. */}
+          <FormSpy
+            subscription={{ values: true }}
+            onChange={() => setWorkloadLimitMessage(null)}
+          />
           <ModalDialog
             title={translate('Manual assignment')}
             subtitle={translate(
@@ -245,7 +291,12 @@ export const CreateManualAssignmentDialog: FC<
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}
-                  label={translate('Create assignment')}
+                  label={
+                    workloadLimitMessage
+                      ? translate('Assign anyway')
+                      : translate('Create assignment')
+                  }
+                  variant={workloadLimitMessage ? 'warning' : 'primary'}
                 />
               </>
             }
@@ -301,6 +352,22 @@ export const CreateManualAssignmentDialog: FC<
                   'Optional notes about this assignment (visible to managers only).',
                 )}
               />
+
+              {workloadLimitMessage && (
+                <AlertItem
+                  type="floating"
+                  variant="warning"
+                  title={translate('Reviewer workload limit exceeded')}
+                  body={
+                    <>
+                      {workloadLimitMessage}{' '}
+                      {translate(
+                        'You can assign anyway; the override is recorded as an event.',
+                      )}
+                    </>
+                  }
+                />
+              )}
             </div>
           </ModalDialog>
         </form>

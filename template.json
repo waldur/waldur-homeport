@@ -714,6 +714,17 @@
   "A name of the shared volume to store scripts": {},
   "A network port — either an interface on a router or a NIC attached to an instance.": {},
   "A network shared into this tenant from another tenant via a Neutron RBAC policy.": {},
+  "A new invitation will be emailed to \"{reviewer}\" with a new link and expiry date. Links from earlier invitation emails will stop working.": {
+    "context": {
+      "variables": {
+        "reviewer": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "reviewer-pool",
+      "action_type": "read"
+    }
+  },
   "A new person would get {username}, home directory {home} and login shell {shell}.": {
     "context": {
       "variables": {
@@ -6301,6 +6312,13 @@
       "feature_area": "credits"
     }
   },
+  "Assign anyway": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "assignments",
+      "action_type": "create"
+    }
+  },
   "Assign checklist": {
     "context": {
       "feature_area": "compliance"
@@ -6502,6 +6520,11 @@
   "At risk": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "At the round cut-off": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "At this rate the month ends below the minimum draw, and the shortfall is taken from the credit as lost.": {
@@ -19033,6 +19056,11 @@
     }
   },
   "Evaluation results": {},
+  "Evaluation starts": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
   "Evaluation steps with their notification rules and criteria.": {},
   "Evaluator must confirm absence of conflict of interest.": {
     "context": {
@@ -34357,6 +34385,17 @@
       "feature_area": "details"
     }
   },
+  "On submission": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "configuration"
+    }
+  },
+  "On submission starts the review of each proposal as soon as it is submitted. At the round cut-off holds submitted proposals until the round closes, then starts them together. Cannot be changed while the call has submitted or in-review proposals.": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
   "On subnet / network": {
     "context": {
       "primary_ui_type": "title"
@@ -44174,6 +44213,12 @@
     }
   },
   "Resend all selected invitations.": {},
+  "Resend invitation": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "reviewer-pool"
+    }
+  },
   "Reserved": {
     "context": {
       "primary_ui_type": "title",
@@ -45852,6 +45897,11 @@
   "Reviewer workload and completion metrics": {
     "context": {
       "feature_area": "reporting"
+    }
+  },
+  "Reviewer workload limit exceeded": {
+    "context": {
+      "feature_area": "assignments"
     }
   },
   "Reviewer-Proposal Matching": {
@@ -51845,6 +51895,12 @@
   "Submitted value": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Submitted — evaluation starts after the round cut-off.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "proposal"
     }
   },
   "Submitting...": {
@@ -67043,6 +67099,11 @@
   "You can add a message to be attached to the invitation email the users receive.": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "You can assign anyway; the override is recorded as an event.": {
+    "context": {
+      "feature_area": "assignments"
     }
   },
   "You can declare conflicts of interest at that time": {

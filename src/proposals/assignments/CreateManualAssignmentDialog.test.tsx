@@ -228,14 +228,6 @@ describe('CreateManualAssignmentDialog', () => {
 
   it('surfaces backend errors via the error notification', async () => {
     const user = userEvent.setup();
-    // NOTE: the component's onSubmit returns `mutateAsync(values)` without a
-    // `.catch`, so a failed mutation rejects the react-final-form submit
-    // promise. `useManagedMutation` already reports the error via
-    // `showErrorResponse`, but the rejection still escapes as "unhandled".
-    // We swallow it here so this expected-error path doesn't fail the run.
-    const onUnhandled = () => {};
-    process.on('unhandledRejection', onUnhandled);
-
     vi.mocked(proposalProtectedCallsCreateManualAssignment).mockRejectedValue({
       response: { status: 400, data: { detail: 'Bad request' } },
     } as any);
@@ -265,7 +257,93 @@ describe('CreateManualAssignmentDialog', () => {
     });
     // Dialog must stay open on error
     expect(closeDialog).not.toHaveBeenCalled();
+  });
 
-    process.off('unhandledRejection', onUnhandled);
+  it('offers to assign anyway when the workload limit refuses, and retries with the override', async () => {
+    const user = userEvent.setup();
+    const refetch = vi.fn();
+    // DRF's non-field error list, spread onto the error by the auth-core
+    // interceptor.
+    const refusal = {
+      status: 400,
+      0: 'Reviewer Alice Reviewer has 5 open assignments and a limit of 5, so 1 more would exceed it. Set override_workload_limit to assign anyway.',
+    };
+    vi.mocked(proposalProtectedCallsCreateManualAssignment)
+      .mockRejectedValueOnce(refusal)
+      .mockResolvedValueOnce({
+        data: { items_created: 1, skipped_proposals: [] },
+      } as any);
+
+    renderDialog({ refetch, initialProposal: fakeProposal });
+    await screen.findByText('Manual assignment');
+    await user.click(getReviewerCombobox());
+    await user.click(await screen.findByText('Alice Reviewer'));
+
+    const submitBtn = await screen.findByRole('button', {
+      name: 'Create assignment',
+    });
+    await waitFor(() => expect(submitBtn).toBeEnabled());
+    await user.click(submitBtn);
+
+    // The backend's reason is shown, without the API flag it names.
+    expect(
+      await screen.findByText(
+        /Reviewer Alice Reviewer has 5 open assignments and a limit of 5, so 1 more would exceed it\./,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/override_workload_limit/),
+    ).not.toBeInTheDocument();
+    const { showErrorResponse } = useNotify();
+    expect(showErrorResponse).not.toHaveBeenCalled();
+    const { closeDialog } = useModal();
+    expect(closeDialog).not.toHaveBeenCalled();
+
+    await user.click(screen.getByRole('button', { name: 'Assign anyway' }));
+
+    await waitFor(() => {
+      expect(
+        proposalProtectedCallsCreateManualAssignment,
+      ).toHaveBeenLastCalledWith({
+        path: { uuid: 'call-uuid-1' },
+        body: {
+          reviewer_pool_entry_uuid: 'reviewer-pool-uuid-1',
+          proposal_uuids: ['proposal-uuid-1234abcd'],
+          manager_notes: '',
+          override_workload_limit: true,
+        },
+      });
+      expect(refetch).toHaveBeenCalled();
+      expect(closeDialog).toHaveBeenCalled();
+    });
+  });
+
+  it('does not offer the override for other refusals', async () => {
+    const user = userEvent.setup();
+    const refusal = { status: 400, 0: 'Proposal is not assignable.' };
+    vi.mocked(proposalProtectedCallsCreateManualAssignment).mockRejectedValue(
+      refusal,
+    );
+
+    renderDialog({ initialProposal: fakeProposal });
+    await screen.findByText('Manual assignment');
+    await user.click(getReviewerCombobox());
+    await user.click(await screen.findByText('Alice Reviewer'));
+    const submitBtn = await screen.findByRole('button', {
+      name: 'Create assignment',
+    });
+    await waitFor(() => expect(submitBtn).toBeEnabled());
+    await user.click(submitBtn);
+
+    const { showErrorResponse } = useNotify();
+    await waitFor(() =>
+      expect(showErrorResponse).toHaveBeenCalledWith(
+        refusal,
+        'Failed to create manual assignment.',
+      ),
+    );
+    expect(
+      screen.queryByRole('button', { name: 'Assign anyway' }),
+    ).not.toBeInTheDocument();
   });
 });
