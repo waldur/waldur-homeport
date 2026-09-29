@@ -29,6 +29,8 @@ export const STORAGE_FOLDER_PERMISSIONS: Array<{
 export const FIELD_TYPES: Array<{
   value: OptionFieldTypeEnum;
   label: string;
+  /** What the type does, for types whose name does not say it. */
+  description?: string;
 }> = [
   {
     value: 'boolean',
@@ -89,6 +91,23 @@ export const FIELD_TYPES: Array<{
   {
     value: 'component_multiplier',
     label: translate('Component Multiplier'),
+    description: translate(
+      'Shows a number calculated from a limit the customer sets (limit × factor), which the customer may override within a range. It is stored as an order attribute and changes no limit or price.',
+    ),
+  },
+  {
+    value: 'component_formula',
+    label: translate('Component Formula'),
+    description: translate(
+      'The customer enters one number, and each chosen limit component is set to a formula of it, such as input * 2. The calculated limits are priced like any other and cannot be edited by the customer.',
+    ),
+  },
+  {
+    value: 'component_sum',
+    label: translate('Component Sum'),
+    description: translate(
+      'Sets a limit component to the sum of other limit components, whether entered by the customer or calculated by a formula. The customer does not fill it in; the total is shown and priced.',
+    ),
   },
   {
     value: 'single_datacenter_k8s_config',
@@ -103,5 +122,23 @@ export const FIELD_TYPES: Array<{
     label: translate('Storage Folder Manager'),
   },
 ];
+
+// A sum has no value of its own to change after ordering.
+export const ORDER_ONLY_FIELD_TYPES: OptionFieldTypeEnum[] = ['component_sum'];
+
+/** Description of Component Formula on the resource options tab. */
+export const getPairedFormulaDescription = () =>
+  translate(
+    'Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.',
+  );
+
+/** The offering's Component Formula order options, which a resource option can pair with. */
+export const getFormulaOrderOptions = (offering) =>
+  Object.entries(offering?.options?.options || {})
+    .filter(([, option]: [string, any]) => option?.type === 'component_formula')
+    .map(([key, option]: [string, any]) => ({
+      value: key,
+      label: `${option.label || key} (${key})`,
+    }));
 
 export const OPTION_FORM_ID = 'OptionDialog';

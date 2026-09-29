@@ -1,4 +1,7 @@
+import { useMemo } from 'react';
 import { PublicOfferingDetails, Offering } from 'waldur-js-client';
+
+import { getDerivedComponents } from '@/marketplace/common/derivedLimits';
 
 import { ComponentEditRow2 } from './ComponentEditRow';
 import { FixedRows } from './FixedRows';
@@ -17,8 +20,14 @@ export const ControlRows = (props: {
   period?: PlanPeriod;
   activePriceIndex?: number;
   offering: PublicOfferingDetails | Offering;
-}) =>
-  props.viewMode || props.readOnlyLimits ? (
+}) => {
+  // Quantities an order-form option calculates are shown, not typed: the
+  // server would replace a typed value anyway.
+  const derived = useMemo(
+    () => getDerivedComponents(props.offering?.options?.options),
+    [props.offering],
+  );
+  return props.viewMode || props.readOnlyLimits ? (
     <FixedRows
       components={props.components}
       hidePrices={props.hidePrices}
@@ -27,15 +36,26 @@ export const ControlRows = (props: {
     />
   ) : (
     <>
-      {props.components.map((component, index) => (
-        <ComponentEditRow2
-          key={index}
-          component={component}
-          hidePrices={props.hidePrices}
-          period={props.period}
-          activePriceIndex={props.activePriceIndex}
-          offering={props.offering}
-        />
-      ))}
+      {props.components.map((component, index) =>
+        derived.has(component.type) ? (
+          <FixedRows
+            key={index}
+            components={[component]}
+            hidePrices={props.hidePrices}
+            period={props.period}
+            activePriceIndex={props.activePriceIndex}
+          />
+        ) : (
+          <ComponentEditRow2
+            key={index}
+            component={component}
+            hidePrices={props.hidePrices}
+            period={props.period}
+            activePriceIndex={props.activePriceIndex}
+            offering={props.offering}
+          />
+        ),
+      )}
     </>
   );
+};

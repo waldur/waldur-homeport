@@ -7,6 +7,33 @@ import {
 } from './validation';
 
 describe('Option form validation', () => {
+  describe('internal name', () => {
+    const context = {
+      options: {
+        order: ['storage'],
+        options: { storage: { type: 'integer', label: 'Storage' } },
+      } as any,
+    };
+
+    it('refuses a name another option already has', () => {
+      expect(
+        validateOptionForm(
+          { name: 'storage', type: { value: 'integer' } },
+          context,
+        ).name,
+      ).toBeTruthy();
+    });
+
+    it('lets an option keep its own name', () => {
+      expect(
+        validateOptionForm(
+          { name: 'storage', type: { value: 'integer' } },
+          { ...context, optionKey: 'storage' },
+        ).name,
+      ).toBeUndefined();
+    });
+  });
+
   describe('inode multiplier validation', () => {
     const allValuesOK = {
       type: { value: 'storage_folder_manager' },

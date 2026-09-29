@@ -424,6 +424,60 @@ describe('OptionsForm Integration', () => {
   });
 
   describe('Validation integration', () => {
+    describe('component formula', () => {
+      const formulaOptions = (required = false) => ({
+        order: ['storage'],
+        options: {
+          storage: {
+            type: 'component_formula',
+            label: 'Storage',
+            required,
+            component_formula_config: {
+              targets: [{ component_type: 'data', formula: 'input * 2' }],
+            },
+          },
+        },
+      });
+
+      const typeAndLeave = async (value?: string) => {
+        const input = screen.getByRole('spinbutton');
+        await userEvent.click(input);
+        if (value) await userEvent.type(input, value);
+        await userEvent.tab();
+      };
+
+      it('keeps Required with its own checks', async () => {
+        renderForm(formulaOptions(true));
+        await typeAndLeave();
+        expect(
+          await screen.findByText(/This field is required/i),
+        ).toBeInTheDocument();
+      });
+
+      it('refuses a decimal instead of truncating it', async () => {
+        renderForm(formulaOptions());
+        await typeAndLeave('2.5');
+        expect(
+          await screen.findByText('Enter a whole number.'),
+        ).toBeInTheDocument();
+      });
+
+      it('refuses a value whose calculated limit exceeds the component', async () => {
+        renderForm(formulaOptions(), {
+          offering: {
+            options: formulaOptions(),
+            components: [{ type: 'data', name: 'Data', max_value: 100 }],
+          },
+        });
+        await typeAndLeave('60');
+        expect(
+          await screen.findByText(
+            'Calculated Data (120) is above its maximum of 100.',
+          ),
+        ).toBeInTheDocument();
+      });
+    });
+
     it('applies required validation and shows error message on blur', async () => {
       renderForm({
         order: ['mandatory'],

@@ -4,6 +4,7 @@ import { required } from '@/core/validators';
 import { NumberGroup, SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 
+import { getLimitComponentOptions } from './limitComponentOptions';
 import { ValidatorConfiguration } from './ValidatorConfiguration';
 
 interface ComponentMultiplierConfigurationProps {
@@ -14,16 +15,7 @@ export const ComponentMultiplierConfiguration = ({
   offering,
 }: ComponentMultiplierConfigurationProps) => {
   const name = 'component_multiplier_config';
-  // Filter only limit-based components
-  const limitComponents =
-    offering?.components?.filter(
-      (component) => component.billing_type === 'limit',
-    ) || [];
-
-  const componentOptions = limitComponents.map((component) => ({
-    value: component.type,
-    label: `${component.name} (${component.type})`,
-  }));
+  const componentOptions = getLimitComponentOptions(offering);
 
   return (
     <>
@@ -47,7 +39,7 @@ export const ComponentMultiplierConfiguration = ({
         validate={required}
         label={translate('Multiplication Factor')}
         description={translate(
-          'User input will be multiplied by this factor to calculate the component limit',
+          'The value shown to the customer is the component limit multiplied by this factor',
         )}
         required
         type="number"

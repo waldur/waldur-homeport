@@ -25,8 +25,8 @@ const settingsStep: ProgressStep = {
 // so the dialog submits straight from the first one. When there is a second
 // step the wizard shows its step indicator: without it the first step looks
 // like the whole form, and the type's settings behind "Next" go unnoticed.
-const getSteps = (values) =>
-  hasOptionSettings(values?.type?.value)
+const getSteps = (resourceType) => (values) =>
+  hasOptionSettings(values?.type?.value, resourceType)
     ? [optionStep, settingsStep]
     : [optionStep];
 
@@ -82,12 +82,16 @@ export const OptionWizard: FC<OptionWizardProps> = (props) => {
     }),
     [props.resourceType, props.offering, props.optionKey],
   );
+  const steps = useMemo(
+    () => getSteps(props.resourceType),
+    [props.resourceType],
+  );
 
   return (
     <Wizard
       title={props.title}
       submitLabel={props.submitLabel}
-      steps={getSteps}
+      steps={steps}
       wizardForms={wizardForms}
       onSubmit={props.onSubmit}
       initialValues={props.initialValues}

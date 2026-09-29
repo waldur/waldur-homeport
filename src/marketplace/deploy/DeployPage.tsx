@@ -56,6 +56,7 @@ import { isPartitionQosRequired } from './steps/FormQoSSelectionStep';
 import { OfferingConfigurationFormStep } from './types';
 import { useDefaultLimits } from './useDefaultLimits';
 import { useDefaultPlan } from './useDefaultPlan';
+import { useDerivedLimits } from './useDerivedLimits';
 import { hasStepWithField, isMissingRequiredPlan } from './utils';
 
 import './DeployPage.scss';
@@ -209,6 +210,8 @@ export const BaseDeployPage = ({
     fallbackLimits: props.limits,
     skip: isEdit,
   });
+
+  useDerivedLimits(selectedOffering);
 
   // Follows the offering: FormCloudStep can switch it without remounting the
   // form, leaving behind a plan that belongs to the offering switched away from.

@@ -203,6 +203,71 @@ describe('ChangeLimitsDialog', () => {
     });
   });
 
+  it('shows a derived limit without an input and recalculates it', async () => {
+    const user = userEvent.setup();
+    // Storage is the sum of cores and RAM, calculated by an order option.
+    const derivedData = {
+      ...mockFetchedData,
+      resource: { ...mockFetchedData.resource, attributes: {} },
+      offering: {
+        ...fixtures.offering,
+        type: 'Marketplace.Basic',
+        options: {
+          order: ['total'],
+          options: {
+            total: {
+              type: 'component_sum',
+              label: 'Total',
+              component_sum_config: {
+                target_component: 'storage',
+                components: ['cores', 'ram'],
+              },
+            },
+          },
+        },
+      },
+      limits: { cores: 2, ram: 3, storage: 5 },
+      initialValues: { limits: { cores: 2, ram: 3, storage: 5 } },
+    };
+    vi.mocked(loadData).mockResolvedValue(derivedData as any);
+    const updateLimitsMock = vi
+      .mocked(marketplaceResourcesUpdateLimits)
+      .mockResolvedValue({} as any);
+
+    renderDialog();
+    // "Submit" or "Request for a change", depending on approval rights.
+    const submit = () =>
+      screen.getByRole('button', { name: /Submit|Request for a change/ });
+    await waitFor(() => {
+      expect(submit()).toBeInTheDocument();
+    });
+
+    // Cores and RAM take input; storage does not.
+    expect(screen.getAllByRole('spinbutton')).toHaveLength(2);
+    // A sum has no resource option to change it, so no pointer to one.
+    expect(screen.queryByText(/Options tab/)).not.toBeInTheDocument();
+    expect(
+      screen.getByText('Calculated from the order options'),
+    ).toBeInTheDocument();
+
+    const coresInput = screen.getAllByRole('spinbutton')[0];
+    await user.clear(coresInput);
+    await user.type(coresInput, '10');
+
+    await act(async () => {
+      await user.click(submit());
+    });
+    await waitFor(() => {
+      expect(updateLimitsMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.objectContaining({
+            limits: { cores: 10, ram: 3, storage: 13 },
+          }),
+        }),
+      );
+    });
+  });
+
   it('renders boolean component as a checkbox', async () => {
     const dataWithBoolean = {
       ...mockFetchedData,

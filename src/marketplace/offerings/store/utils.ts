@@ -29,6 +29,8 @@ export const formatOption = (option: OptionFormData) => {
     choices,
     cascade_config,
     component_multiplier_config,
+    component_formula_config,
+    component_sum_config,
     default_configs,
     visible_if,
     ...rest
@@ -55,6 +57,20 @@ export const formatOption = (option: OptionFormData) => {
   // Handle component_multiplier_config for component_multiplier type
   if (component_multiplier_config && item.type === 'component_multiplier') {
     item.component_multiplier_config = component_multiplier_config;
+  }
+
+  if (component_formula_config && item.type === 'component_formula') {
+    item.component_formula_config = component_formula_config;
+  }
+
+  if (component_sum_config && item.type === 'component_sum') {
+    item.component_sum_config = component_sum_config;
+  }
+
+  // A sum has nothing to fill in; a Required ticked under another type would
+  // make the order form impossible to submit.
+  if (item.type === 'component_sum') {
+    item.required = false;
   }
 
   // Handle default_configs for K8s config types
