@@ -18,7 +18,10 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
-import { ComplianceStatusBadge } from '../proposal/ComplianceStatusBadge';
+import {
+  ComplianceStatusBadge,
+  formatComplianceStatus,
+} from '../proposal/ComplianceStatusBadge';
 import { ProposalBadge } from '../proposal/ProposalBadge';
 import { ProposalRowActions } from '../proposal/ProposalRowActions';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
@@ -153,6 +156,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
                 ),
                 keys: ['compliance_status'],
                 id: 'compliance',
+                export: (row) => formatComplianceStatus(row.compliance_status),
               },
             ]
           : []),

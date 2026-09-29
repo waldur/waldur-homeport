@@ -15,38 +15,42 @@ interface ComplianceStatusBadgeProps {
   status: ComplianceStatus | null;
 }
 
+const getVariant = (status: ComplianceStatus | null) => {
+  if (!status?.has_checklist) {
+    return 'neutral';
+  }
+  if (status.requires_review) {
+    return 'warning';
+  }
+  if (status.is_completed) {
+    return 'success';
+  }
+  return 'purple';
+};
+
+// Shared with the table export, so the file reads like the badge.
+export const formatComplianceStatus = (
+  status: ComplianceStatus | null,
+): string => {
+  if (!status?.has_checklist) {
+    return translate('N/A');
+  }
+  if (status.requires_review) {
+    return translate('Needs review');
+  }
+  if (status.is_completed) {
+    return translate('OK');
+  }
+  // Incomplete but doesn't require review
+  return translate('{percentage}% complete', {
+    percentage: status.completion_percentage || 0,
+  });
+};
+
 export const ComplianceStatusBadge: FC<ComplianceStatusBadgeProps> = ({
   status,
-}) => {
-  if (!status?.has_checklist) {
-    return (
-      <Badge variant="neutral" shape="pill" tone="outline">
-        {translate('N/A')}
-      </Badge>
-    );
-  }
-
-  if (status.requires_review) {
-    return (
-      <Badge variant="warning" shape="pill" tone="outline">
-        {translate('Needs review')}
-      </Badge>
-    );
-  }
-
-  if (status.is_completed) {
-    return (
-      <Badge variant="success" shape="pill" tone="outline">
-        {translate('OK')}
-      </Badge>
-    );
-  }
-
-  // Incomplete but doesn't require review
-  const percentage = status.completion_percentage || 0;
-  return (
-    <Badge variant="purple" shape="pill" tone="outline">
-      {translate('{percentage}% complete', { percentage })}
-    </Badge>
-  );
-};
+}) => (
+  <Badge variant={getVariant(status)} shape="pill" tone="outline">
+    {formatComplianceStatus(status)}
+  </Badge>
+);
