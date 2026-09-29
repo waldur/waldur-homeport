@@ -38,6 +38,7 @@ export const AuthEnum = {
 export const CallEnum = {
   call_document_added: 'call_document_added',
   call_document_removed: 'call_document_removed',
+  reviewer_workload_limit_overridden: 'reviewer_workload_limit_overridden',
 };
 
 export const ChatEnum = {
