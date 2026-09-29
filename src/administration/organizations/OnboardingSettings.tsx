@@ -23,13 +23,13 @@ export const OnboardingSettings = () => {
       loadData={refetch}
     />
   ) : data ? (
-    <>
+    <div className="pt-5">
       <OnboardingSetup />
       <hr />
       <SettingsCard
         groupNames={[translate('Onboarding settings')]}
         settingsSource={data}
       />
-    </>
+    </div>
   ) : null;
 };

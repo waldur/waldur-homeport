@@ -4,7 +4,6 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
 import { isFeatureVisible } from '@/features/connect';
 import {
-  CustomerFeatures,
   InvitationsFeatures,
   MarketplaceFeatures,
   ProjectFeatures,
@@ -89,7 +88,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
-    redirectTo: 'admin-organization-checklist-management',
+    redirectTo: 'admin-classifiers',
     data: {
       breadcrumb: () => translate('Organizations & compliance'),
     },
@@ -493,19 +492,180 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-user-agreements',
-    url: 'user-agreements/',
+    name: 'admin-organization-credits-cost-policies',
+    url: 'credits-cost-policies/?tab',
     parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
-      import('./agreements/UserAgreementsList').then((module) => ({
-        default: module.UserAgreementsList,
-      })),
+      import('./organizations-compliance/CreditsCostPoliciesPage').then(
+        (module) => ({
+          default: module.CreditsCostPoliciesPage,
+        }),
+      ),
     ),
     data: {
-      breadcrumb: () => translate('User agreements'),
+      breadcrumb: () => translate('Credits & cost policies'),
+      permissions: [isStaff],
     },
   },
 
+  {
+    name: 'admin-organization-project-settings',
+    url: 'organization-project-settings/?tab',
+    parent: 'admin-organizations-compliance',
+    component: lazyComponent(() =>
+      import('./organizations-compliance/OrganizationProjectSettingsPage').then(
+        (module) => ({
+          default: module.OrganizationProjectSettingsPage,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Organization & project settings'),
+    },
+  },
+
+  {
+    name: 'admin-classifiers',
+    url: 'classifiers/?tab',
+    parent: 'admin-organizations-compliance',
+    component: lazyComponent(() =>
+      import('./organizations-compliance/ClassifiersPage').then((module) => ({
+        default: module.ClassifiersPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Classifiers'),
+    },
+  },
+
+  {
+    name: 'admin-compliance',
+    url: 'compliance/?tab',
+    parent: 'admin-organizations-compliance',
+    component: lazyComponent(() =>
+      import('./organizations-compliance/CompliancePage').then((module) => ({
+        default: module.CompliancePage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Compliance'),
+    },
+  },
+
+  // Folded into a tabbed Organizations & compliance page; kept as a redirect
+  // so bookmarks, the chaos route sweep and external links keep resolving. See
+  // admin-role-availabilities for why `skipBreadcrumb` is needed.
+  {
+    name: 'admin-organization-credit-management',
+    url: 'organization-credits/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-organization-credits-cost-policies',
+      params: { tab: 'credits' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-organization-cost-policies',
+    url: 'organization-cost-policies/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-organization-credits-cost-policies',
+      params: { tab: 'cost-policies' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-onboarding-settings',
+    url: 'onboarding-settings/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-organization-project-settings',
+      params: { tab: 'onboarding' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-project-settings',
+    url: 'project-settings/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-organization-project-settings',
+      params: { tab: 'project' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-organizations-group-list',
+    url: 'organization-groups/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-classifiers',
+      params: { tab: 'organization-groups' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-affiliated-organizations',
+    url: 'affiliated-organizations/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: { state: 'admin-classifiers', params: { tab: 'affiliations' } },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-science-domains',
+    url: 'science-domains/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-classifiers',
+      params: { tab: 'science-domains' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'admin-user-agreements',
+    url: 'user-agreements/',
+    parent: 'admin-organizations-compliance',
+    component: UIView,
+    redirectTo: {
+      state: 'admin-compliance',
+      params: { tab: 'user-agreements' },
+    },
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  // A marketplace-resource feature, so it sits in the Marketplace menu; the
+  // URL is unchanged because both menu parents are url-less.
   {
     name: 'admin-user-lexis-links-list',
     url: 'lexis-links/',
@@ -514,9 +674,10 @@ export const states: StateDeclaration[] = [
         (module) => ({ default: module.BasicLexisLinkList }),
       ),
     ),
-    parent: 'admin-organizations-compliance',
+    parent: 'admin-marketplace',
     data: {
       breadcrumb: () => translate('LEXIS links'),
+      priority: 95,
       permissions: [
         () => {
           if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {
@@ -542,18 +703,18 @@ export const states: StateDeclaration[] = [
     },
   },
 
+  // Moved to Support › User management, next to robot accounts and offering
+  // users; kept as a redirect so bookmarks and external links keep resolving.
   {
     name: 'admin-course-accounts',
     url: 'course-accounts/?tab',
     parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./CourseAccountsTable').then((module) => ({
-        default: module.CourseAccountsTable,
-      })),
-    ),
+    // Never rendered: the redirect fires first. `component` is required by the
+    // local StateDeclaration type.
+    component: UIView,
+    redirectTo: 'support-course-accounts',
     data: {
-      breadcrumb: () => translate('Course accounts'),
-      feature: InvitationsFeatures.show_course_accounts,
+      skipBreadcrumb: true,
     },
   },
 
@@ -685,62 +846,6 @@ export const states: StateDeclaration[] = [
     },
     data: {
       skipBreadcrumb: true,
-    },
-  },
-
-  {
-    name: 'admin-organizations-group-list',
-    url: 'organization-groups/',
-    parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./organizations/OrganizationGroupsList').then((module) => ({
-        default: module.OrganizationGroupsList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Organization groups'),
-    },
-  },
-  {
-    name: 'admin-affiliated-organizations',
-    url: 'affiliated-organizations/',
-    parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./affiliated-organizations/AffiliatedOrganizationsList').then(
-        (module) => ({
-          default: module.AffiliatedOrganizationsList,
-        }),
-      ),
-    ),
-    data: {
-      breadcrumb: () => translate('Affiliations'),
-    },
-  },
-  {
-    name: 'admin-science-domains',
-    url: 'science-domains/',
-    parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./science-domains/ScienceDomainsList').then((module) => ({
-        default: module.ScienceDomainsList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Science domains'),
-    },
-  },
-  {
-    name: 'admin-organization-cost-policies',
-    url: 'organization-cost-policies/',
-    parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./organizations/OrganizationCostPoliciesList').then((module) => ({
-        default: module.OrganizationCostPoliciesList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Cost policies'),
-      permissions: [isStaff],
     },
   },
 
@@ -940,50 +1045,6 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Arrow Integration'),
       permissions: [isStaff],
       feature: ResellerFeatures.arrow,
-    },
-  },
-
-  {
-    name: 'admin-onboarding-settings',
-    url: 'onboarding-settings/',
-    parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./organizations/OnboardingSettings').then((module) => ({
-        default: module.OnboardingSettings,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Onboarding settings'),
-      feature: CustomerFeatures.show_onboarding,
-    },
-  },
-
-  {
-    name: 'admin-project-settings',
-    url: 'project-settings/',
-    parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./organizations/AdministrationProject').then((module) => ({
-        default: module.AdministrationProject,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Project settings'),
-    },
-  },
-
-  {
-    name: 'admin-organization-credit-management',
-    url: 'organization-credits/',
-    parent: 'admin-organizations-compliance',
-    component: lazyComponent(() =>
-      import('./organizations/OrganizationCreditsList').then((module) => ({
-        default: module.OrganizationCreditsList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Credit management'),
-      permissions: [isStaff],
     },
   },
 
