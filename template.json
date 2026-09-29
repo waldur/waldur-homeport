@@ -6603,6 +6603,7 @@
       "feature_area": "organizations"
     }
   },
+  "Attached files, included in the export.": {},
   "Attached instance": {
     "context": {
       "primary_ui_type": "label",
@@ -8431,6 +8432,7 @@
       "feature_area": "coi-review"
     }
   },
+  "COI, matching and assignment settings": {},
   "CPU": {
     "context": {
       "primary_ui_type": "label",
@@ -8581,6 +8583,28 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "details"
+    }
+  },
+  "Call export file (.yaml, .yml or .json, max. 10 MB)": {
+    "context": {
+      "feature_area": "transfer"
+    }
+  },
+  "Call exported as YAML.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "transfer"
+    }
+  },
+  "Call imported": {
+    "context": {
+      "feature_area": "transfer"
+    }
+  },
+  "Call imported as a draft.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "transfer"
     }
   },
   "Call in progress": {
@@ -11232,6 +11256,7 @@
     }
   },
   "Conflict-of-interest confirmation": {},
+  "Conflict-of-interest, reviewer matching and assignment settings.": {},
   "Conflicting organization": {
     "context": {
       "feature_area": "coi-review"
@@ -12261,6 +12286,11 @@
   "Create a copy of this call. Team, proposals and reviews are never copied.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Create a draft call from a file exported on this or another portal.": {
+    "context": {
+      "feature_area": "transfer"
     }
   },
   "Create a maintenance template": {
@@ -16303,6 +16333,11 @@
       "feature_area": "import-users"
     }
   },
+  "Download the call configuration to import it on another portal. Call settings are always included; proposals, reviews and people never are.": {
+    "context": {
+      "feature_area": "transfer"
+    }
+  },
   "Downloading page {page} of {totalPages}": {
     "context": {
       "variables": {
@@ -18828,6 +18863,7 @@
     }
   },
   "Evaluation results": {},
+  "Evaluation steps with their notification rules and criteria.": {},
   "Evaluator must confirm absence of conflict of interest.": {
     "context": {
       "feature_area": "workflow-steps"
@@ -19350,6 +19386,11 @@
   "Export as XLSX": {
     "context": {
       "feature_area": "core"
+    }
+  },
+  "Export call": {
+    "context": {
+      "feature_area": "transfer"
     }
   },
   "Export history": {
@@ -23545,6 +23586,11 @@
   "Import access endpoints": {
     "context": {
       "feature_area": "single-import"
+    }
+  },
+  "Import call": {
+    "context": {
+      "feature_area": "transfer"
     }
   },
   "Import completed with {errorCount} errors. {count} questions created.": {
@@ -28168,6 +28214,7 @@
       "feature_area": "import-usage"
     }
   },
+  "Matched by checklist name on import.": {},
   "Matched expertise keywords": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -33891,6 +33938,7 @@
     }
   },
   "Offerings & orders": {},
+  "Offerings and resource templates": {},
   "Offerings count": {
     "context": {
       "primary_ui_type": "title",
@@ -34354,6 +34402,11 @@
   "Open (default)": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Open call": {
+    "context": {
+      "feature_area": "transfer"
     }
   },
   "Open calls": {
@@ -38342,6 +38395,11 @@
       "feature_area": "project-templates"
     }
   },
+  "Portals accept call files up to 10 MB. Export again without documents and attach them to the imported call.": {
+    "context": {
+      "feature_area": "transfer"
+    }
+  },
   "Ports": {
     "context": {
       "primary_ui_type": "title",
@@ -40163,6 +40221,7 @@
       "feature_area": "invitations"
     }
   },
+  "Proposal fields and applicant visibility": {},
   "Proposal lists": {
     "context": {
       "feature_area": "configuration"
@@ -40238,6 +40297,7 @@
       "feature_area": "proposal"
     }
   },
+  "Proposal-to-project role mappings, matched by role name.": {},
   "Proposals": {
     "context": {
       "primary_ui_type": "title",
@@ -43578,6 +43638,7 @@
       "feature_area": "details"
     }
   },
+  "Requested offerings, matched by offering and provider name on import.": {},
   "Requested pausing": {
     "context": {
       "primary_ui_type": "title",
@@ -46146,6 +46207,7 @@
       "feature_area": "create"
     }
   },
+  "Round schedule and settings; no proposals.": {},
   "Rounds": {
     "context": {
       "primary_ui_type": "title",
@@ -50514,6 +50576,11 @@
       "feature_area": "actions"
     }
   },
+  "Some parts were left out of the export": {
+    "context": {
+      "feature_area": "transfer"
+    }
+  },
   "Some periods had errors:": {
     "context": {
       "feature_area": "consumption"
@@ -53395,6 +53462,11 @@
       "feature_area": "issue-statuses"
     }
   },
+  "The export is too large to import": {
+    "context": {
+      "feature_area": "transfer"
+    }
+  },
   "The external network to use as the gateway for this router.": {
     "context": {
       "feature_area": "openstack-tenant"
@@ -53403,6 +53475,22 @@
   "The field to be used for looking up the user.": {
     "context": {
       "feature_area": "providers"
+    }
+  },
+  "The file is larger than 10 MB, the most a portal accepts. Export the call again without documents and attach them after the import.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "transfer"
+    }
+  },
+  "The file is not a call export.": {
+    "context": {
+      "feature_area": "transfer"
+    }
+  },
+  "The file is not valid YAML or JSON.": {
+    "context": {
+      "feature_area": "transfer"
     }
   },
   "The following VM snapshots will also be deleted: {backups}.": {
@@ -58566,6 +58654,12 @@
       "feature_area": "UserPendingActionsList"
     }
   },
+  "Unable to export call.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "transfer"
+    }
+  },
   "Unable to export history.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -58648,6 +58742,11 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "cluster"
+    }
+  },
+  "Unable to import call.": {
+    "context": {
+      "feature_area": "transfer"
     }
   },
   "Unable to import catalog.": {
@@ -65801,6 +65900,7 @@
       "feature_area": "sram"
     }
   },
+  "Which proposal fields are collected and which applicant details are shown.": {},
   "Which services are you interested in using? (Please select from the available service types.)": {},
   "Which source plan and component each target plan and component takes over. The merge is refused while anything a moved row uses is left unmapped.": {},
   "Which target component each source component becomes. A component used by usage, quotas or invoice lines must be mapped.": {
@@ -71197,6 +71297,16 @@
         }
       },
       "feature_area": "project"
+    }
+  },
+  "{name} was created as a draft. Some parts could not be matched on this portal and were skipped:": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "transfer"
     }
   },
   "{name} {price}": {
