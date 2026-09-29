@@ -66,3 +66,14 @@ export const getApplicantTimeline = (
     }
     return acc;
   }, []);
+
+/**
+ * Whether the viewer is the proposal's applicant — its creator, the one user
+ * the backend lets complete an applicant-owned step such as the award
+ * response. Reviewers, call managers and staff reach the same page without
+ * being the applicant, and nothing addressed to the applicant is theirs.
+ */
+export const isProposalApplicant = (
+  user: { uuid?: string } | null | undefined,
+  proposal: { created_by_uuid?: string },
+): boolean => !!user?.uuid && user.uuid === proposal.created_by_uuid;

@@ -16,6 +16,8 @@ import {
   proposalWorkflowStatesKey,
 } from '../workflow/queries';
 
+import { isProposalApplicant } from './applicantTimeline';
+
 interface AwardResponseActionsProps {
   proposal: Proposal;
   refetch: () => void;
@@ -42,7 +44,7 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
     [data],
   );
 
-  const isApplicant = !!user?.uuid && user.uuid === proposal.created_by_uuid;
+  const isApplicant = isProposalApplicant(user, proposal);
   const isAwardStep = activeStep?.step === 'award_response';
 
   const acceptAward = useManagedMutation<any, any, void>({
