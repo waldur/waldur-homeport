@@ -72145,8 +72145,7 @@
         "percentage": {
           "type": "unknown"
         }
-      },
-      "feature_area": "proposal"
+      }
     }
   },
   "{percentage}% uploaded": {
