@@ -5,6 +5,7 @@ import { Field as FinalFormField } from 'react-final-form';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
 import { NumberField } from '@/form';
+import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
 import {
   formatIntField,
@@ -24,6 +25,10 @@ interface ComponentRowProps {
   limits: Limits;
   /** For nested fields */
   parentName?: string;
+  /** Calculated from order options: shown, not edited. */
+  derived?: boolean;
+  /** Shown without an input, as part of a preview. */
+  readOnly?: boolean;
 }
 
 const CellWrapper: FC<any> = (props) => (
@@ -52,22 +57,35 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   limits,
   shouldConcealPrices,
   parentName,
+  derived,
+  readOnly,
 }) => {
   return (
     <tr data-testid={`row-${component.type}`}>
       <td className="text-nowrap">{component.name}</td>
       <td>{renderFieldOrDash(component.usage)}</td>
       <td>{renderFieldOrDash(component.limit)}</td>
-      <FinalFormField
-        name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
-        parse={getLimitParser(component)}
-        format={formatIntField}
-        validate={composeValidators(...getResourceComponentValidator(limits))}
-        min={0}
-        component={CellWrapper}
-        offeringComponent={component}
-        limits={limits}
-      />
+      {derived || readOnly ? (
+        <td>
+          {renderFieldOrDash(component.newLimit)} {component.measured_unit}
+          {derived ? (
+            <div className="form-text text-muted">
+              {translate('Calculated from the order options')}
+            </div>
+          ) : null}
+        </td>
+      ) : (
+        <FinalFormField
+          name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
+          parse={getLimitParser(component)}
+          format={formatIntField}
+          validate={composeValidators(...getResourceComponentValidator(limits))}
+          min={0}
+          component={CellWrapper}
+          offeringComponent={component}
+          limits={limits}
+        />
+      )}
 
       <td>
         <ChangedLimitField

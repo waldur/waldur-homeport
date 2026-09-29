@@ -25,10 +25,15 @@ export const UpdateResourceOptionButton: FunctionComponent<
   // Some offerings apply option changes through a marketplace order rather
   // than writing them straight to the resource. Those need order creation
   // rights on top of the options permission.
-  const createsOrder = Boolean(
-    (props.resource.offering_plugin_options as any)
-      ?.create_orders_on_resource_option_change,
-  );
+  // A formula input changes limits, so it is always ordered, and its dialog
+  // needs the width of the limits table it previews.
+  const isFormula = props.option.type === 'component_formula';
+  const createsOrder =
+    isFormula ||
+    Boolean(
+      (props.resource.offering_plugin_options as any)
+        ?.create_orders_on_resource_option_change,
+    );
   const requiredPermissions = createsOrder
     ? [PermissionEnum.UPDATE_RESOURCE_OPTIONS, PermissionEnum.CREATE_ORDER]
     : [PermissionEnum.UPDATE_RESOURCE_OPTIONS];
@@ -43,6 +48,7 @@ export const UpdateResourceOptionButton: FunctionComponent<
   const callback = () => {
     openDialog(UpdateResourceOptionDialog, {
       resolve: props,
+      size: isFormula ? 'xl' : undefined,
     });
   };
 

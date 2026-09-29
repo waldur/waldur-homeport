@@ -3899,6 +3899,11 @@
       "feature_area": "api-keys"
     }
   },
+  "An option with this internal name already exists.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "An organization cannot be its own affiliate.": {
     "context": {
       "feature_area": "affiliates"
@@ -8565,6 +8570,58 @@
       "feature_area": "common"
     }
   },
+  "Calculated components": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Calculated from the order options": {
+    "context": {
+      "feature_area": "change-limits"
+    }
+  },
+  "Calculated {component} ({value}) is above its maximum of {max}.": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        },
+        "value": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Calculated {component} ({value}) is below its minimum of {min}.": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        },
+        "value": {
+          "type": "unknown"
+        },
+        "min": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Calculated {component} is negative.": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Calendar": {
     "context": {
       "feature_area": "details"
@@ -8920,6 +8977,19 @@
   },
   "Cannot be combined with automatic creation of offering users. Disable that option first.": {},
   "Cannot be combined with per-resource robot accounts as the identity model. Disable that option first.": {},
+  "Cannot calculate {component}: {error}": {
+    "context": {
+      "variables": {
+        "component": {
+          "type": "unknown"
+        },
+        "error": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Cannot change the network ACL of a revoked token.": {
     "context": {
       "feature_area": "personal-access-tokens"
@@ -10686,7 +10756,17 @@
       "feature_area": "component-policies"
     }
   },
+  "Component Formula": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Component Multiplier": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Component Sum": {
     "context": {
       "primary_ui_type": "label"
     }
@@ -10761,6 +10841,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "details"
+    }
+  },
+  "Components entered by the customer or calculated by other options.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Components to add up": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Compute": {
@@ -16185,6 +16275,11 @@
       "feature_area": "common"
     }
   },
+  "Division by zero.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Do not allow a user to hold multiple roles within the same scope (project or organization). Applies to invitations, permission requests and direct role assignment. When enabled, users can still get roles in different scopes but cannot have multiple roles in the same scope.": {},
   "Do not attach to a router": {
     "context": {
@@ -16669,6 +16764,11 @@
     }
   },
   "EESSI catalog version to load (auto-detect if empty)": {},
+  "Each component is set to its formula. A formula may use input (the value entered), numbers, + - * / and parentheses, for example input * 2 * 0.25. Results are rounded up to the precision of the component.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Each conflict type has a severity level and a handling action based on your configuration.": {
     "context": {
       "feature_area": "coi-settings"
@@ -18210,6 +18310,26 @@
     }
   },
   "Ensure this field has no more than 30 characters.": {},
+  "Ensure this value is greater than or equal to {min}.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Ensure this value is less than or equal to {max}.": {
+    "context": {
+      "variables": {
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Enter IPv4 address.": {},
   "Enter IPv6 address.": {},
   "Enter a CIDR address.": {},
@@ -18320,6 +18440,11 @@
   },
   "Enter a valid CIDR address.": {},
   "Enter a whole number of days, 1 or more.": {},
+  "Enter a whole number.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Enter address...": {
     "context": {
       "feature_area": "map"
@@ -21371,6 +21496,36 @@
   "Formula": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Formula ends unexpectedly.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Formula is empty.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Formula is longer than {max} characters.": {
+    "context": {
+      "variables": {
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
+  "Formula is nested too deeply.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
+  "Formula must be a string.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Formula: carryover = min(unused, {pct}% × base)": {
@@ -24715,6 +24870,11 @@
       "feature_area": "invitations"
     }
   },
+  "Invalid number.": {
+    "context": {
+      "feature_area": "common"
+    }
+  },
   "Invalid offering": {},
   "Invalid placeholder: {detail}. Use {placeholders}, and write a literal brace as {open} or {close}.": {
     "context": {
@@ -25880,6 +26040,11 @@
       "feature_area": "database-stats"
     }
   },
+  "Largest value the customer may enter.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Last": {
     "context": {
       "feature_area": "resource-usage"
@@ -26268,6 +26433,7 @@
       "primary_ui_type": "label"
     }
   },
+  "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
   "Lets users who may not change a resource end date themselves ask for it. Holders of the end date permission approve or reject on the resource, and approval applies the date immediately. Requests are also published as events, so an external approval system can decide instead. Does not apply to prepaid offerings, which extend through renewal instead.": {
     "context": {
       "feature_area": "integration"
@@ -26525,6 +26691,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "qos"
+    }
+  },
+  "Limits calculated from the options follow them: change an option on the Options tab to change them.": {
+    "context": {
+      "feature_area": "change-limits"
     }
   },
   "Limits change has been requested for {count} VPCs.": {
@@ -29518,6 +29689,11 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "Missing closing parenthesis.": {
+    "context": {
+      "feature_area": "common"
     }
   },
   "Missing date": {
@@ -35267,6 +35443,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "access"
+    }
+  },
+  "Order option": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Order slug": {
@@ -42788,6 +42969,11 @@
       "feature_area": "team"
     }
   },
+  "Remove component": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Remove external gateway": {
     "context": {
       "feature_area": "openstack-tenant"
@@ -44870,6 +45056,11 @@
   "Resources in project and provider": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "Resources keep their values under this name, so it cannot be changed. To pair with another order option, delete this option and add a new one.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Resources paused status updated.": {
@@ -48005,6 +48196,11 @@
       "feature_area": "component-policies"
     }
   },
+  "Select components": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Select connected subnet": {
     "context": {
       "primary_ui_type": "label",
@@ -49753,6 +49949,7 @@
       "feature_area": "actions"
     }
   },
+  "Sets a limit component to the sum of other limit components, whether entered by the customer or calculated by a formula. The customer does not fill it in; the total is shown and priced.": {},
   "Settings": {
     "context": {
       "primary_ui_type": "title",
@@ -50282,6 +50479,7 @@
       "feature_area": "create"
     }
   },
+  "Shows a number calculated from a limit the customer sets (limit × factor), which the customer may override within a range. It is stored as an order attribute and changes no limit or price.": {},
   "Shows purchase order upload dialog during order approval process": {
     "context": {
       "feature_area": "integration"
@@ -50583,6 +50781,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offerings"
+    }
+  },
+  "Smallest value the customer may enter.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Smax": {
@@ -53261,6 +53464,11 @@
       "feature_area": "deploy"
     }
   },
+  "The Component Formula order option whose value customers can change after ordering.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "The OAuth2/OIDC client ID registered with your identity provider.": {
     "context": {
       "feature_area": "steps"
@@ -53470,6 +53678,17 @@
       "feature_area": "actions"
     }
   },
+  "The change has been submitted as an order.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "options"
+    }
+  },
+  "The change is ordered with the limits calculated from the new value:": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "The chat room for this project is currently unavailable.": {
     "context": {
       "feature_area": "matrix"
@@ -53494,6 +53713,11 @@
   "The compliance checklist cannot be changed once proposals exist for this call.": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "The component whose quantity is set to the sum.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "The conflict will be marked as a false positive and removed from active review.": {
@@ -53526,6 +53750,7 @@
       "feature_area": "views"
     }
   },
+  "The customer enters one number, and each chosen limit component is set to a formula of it, such as input * 2. The calculated limits are priced like any other and cannot be edited by the customer.": {},
   "The customer has submitted this signed Purchase Order for your review.": {
     "context": {
       "feature_area": "details"
@@ -54594,6 +54819,11 @@
   },
   "The value is not valid IP v4 CIDR": {},
   "The value is not valid IP v6 CIDR": {},
+  "The value shown to the customer is the component limit multiplied by this factor": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn.": {
     "context": {
       "feature_area": "create"
@@ -56493,6 +56723,11 @@
   "Total cluster resources": {
     "context": {
       "feature_area": "common"
+    }
+  },
+  "Total component": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Total cores": {
@@ -61794,10 +62029,34 @@
       "feature_area": "offering-merges"
     }
   },
+  "Unexpected character {char} at position {position}.": {
+    "context": {
+      "variables": {
+        "char": {
+          "type": "unknown"
+        },
+        "position": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Unexpected exception happened during login process.": {
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "valimo"
+    }
+  },
+  "Unexpected {token}.": {
+    "context": {
+      "variables": {
+        "token": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common",
+      "action_type": "confirm"
     }
   },
   "Unfortunately, connection to server has failed. Please check if you can connect to {apiEndpoint} from your browser and contact support if the error continues.": {
@@ -63581,11 +63840,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "offerings"
-    }
-  },
-  "User input will be multiplied by this factor to calculate the component limit": {
-    "context": {
-      "feature_area": "options"
     }
   },
   "User inputs": {

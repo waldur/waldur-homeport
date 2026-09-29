@@ -33,6 +33,9 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   time: (value) => formatTime(value),
   conditional_cascade: (value) => value,
   component_multiplier: (value) => value,
+  component_formula: (value) => value,
+  // Never stored: the server drops any value sent for it.
+  component_sum: () => null,
   storage_folder_manager: (value) => {
     if (typeof value === 'object' && value !== null) {
       return `${value.storage_data_type || ''} - ${value.permissions || ''}`;

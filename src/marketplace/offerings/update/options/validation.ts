@@ -136,6 +136,16 @@ export const validateOptionForm = (values, context: OptionFormContext = {}) => {
       );
     }
   }
+  // Options are keyed by internal name: a second one would replace the first.
+  if (
+    values.name &&
+    values.name !== context.optionKey &&
+    context.options?.options?.[values.name]
+  ) {
+    errors.name = translate(
+      'An option with this internal name already exists.',
+    );
+  }
   const brokenDependents = getBrokenDependents(values, context);
   if (brokenDependents.length > 0) {
     // Not a registered field: OptionForm shows it above the submit button.

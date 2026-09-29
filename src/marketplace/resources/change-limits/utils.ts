@@ -55,6 +55,8 @@ export interface ComponentRowType {
   subTotal: number;
   changedSubTotal: number;
   changedLimit: number;
+  /** The new limit itself, for display without recomputing it. */
+  newLimit: number;
   /** How the component is billed; drives the column suffix and the totals grouping. */
   chargeMode: ChargeMode;
   /** Localized suffix appended to the formatted price, e.g. "/mo", " /year", " one-time". */
@@ -351,6 +353,7 @@ export const getLimitChangeData = (
       limit_decimal_places: component.limit_decimal_places,
       usage: usages[component.type] || 0,
       limit: currentLimits[component.type],
+      newLimit,
       subTotal,
       changedSubTotal,
       changedLimit,

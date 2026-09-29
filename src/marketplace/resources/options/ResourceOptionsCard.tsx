@@ -7,6 +7,7 @@ import { Tooltip } from 'waldur-ui';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 
+import { getDerivedLimitInputs } from '../../common/derivedLimits';
 import { getHiddenOptionKeys } from '../../common/optionVisibility';
 import { MultiEditOptionsAction } from '../mass-actions/MultiEditOptionsAction';
 
@@ -118,7 +119,11 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
       loading={props.isLoading}
       className="card-bordered"
       actions={
-        props.resource.state === 'OK' && (
+        props.resource.state === 'OK' &&
+        // Formula inputs are left out of editing several options at once.
+        resourceOptions.order.some(
+          (key) => resourceOptions.options[key]?.type !== 'component_formula',
+        ) && (
           <MultiEditOptionsAction
             rows={[props.resource]}
             refetch={props.refetch}
@@ -140,8 +145,12 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
             name: key,
           };
           const isPendingChange = pendingChange?.changedKeys.includes(key);
+          // A formula input ordered before its resource option existed is
+          // only in the resource's order attributes.
           const currentValue =
-            props.resource.options && props.resource.options[key];
+            option.type === 'component_formula'
+              ? getDerivedLimitInputs(props.resource, props.offering)[key]
+              : props.resource.options && props.resource.options[key];
 
           return (
             <FormTable.Item

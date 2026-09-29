@@ -35,7 +35,13 @@ export const OrderTypeBasedDetails = ({
       />
 
       {orderType.type === 'limits_update' ? (
-        <LimitsUpdate order={order} offering={offering} />
+        <>
+          <LimitsUpdate order={order} offering={offering} />
+          {/* A changed formula input is ordered with the limits it derives. */}
+          {order.attributes?.new_options ? (
+            <OptionsUpdate order={order} offering={offering} tableOnly />
+          ) : null}
+        </>
       ) : orderType.type === 'options_update' ? (
         <OptionsUpdate order={order} offering={offering} />
       ) : orderType.type === 'switch_plan' ? (

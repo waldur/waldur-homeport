@@ -70,8 +70,8 @@ const formatAttributes = (
       // For conditional cascade fields, keep the whole object
       newAttributes[key] = value;
     } else if (optionConfig?.type === 'component_multiplier') {
-      // For component multiplier fields, store the original user input
-      // The multiplication will be handled by backend during order processing
+      // Submitted as entered; the server stores it as an attribute and does
+      // not derive a limit from it (component_formula options do that).
       newAttributes[key] = value;
     } else if (optionConfig?.type === 'storage_folder_manager') {
       // For storage folder manager, keep the whole object structure

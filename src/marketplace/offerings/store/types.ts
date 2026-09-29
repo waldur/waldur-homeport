@@ -1,4 +1,9 @@
-import { CascadeConfig, ComponentMultiplierConfig } from 'waldur-js-client';
+import {
+  CascadeConfig,
+  ComponentFormulaConfig,
+  ComponentMultiplierConfig,
+  ComponentSumConfig,
+} from 'waldur-js-client';
 
 import { K8sDefaultConfiguration } from '@/marketplace/common/multi-datacenter-k8s-types';
 import { Option } from '@/marketplace/common/registry';
@@ -23,6 +28,8 @@ export interface OptionFormData {
   choices: string;
   cascade_config?: CascadeConfig;
   component_multiplier_config?: ComponentMultiplierConfig;
+  component_formula_config?: ComponentFormulaConfig;
+  component_sum_config?: ComponentSumConfig;
   default_configs?: K8sDefaultConfiguration;
   validators?: Array<{
     type: Option | string;

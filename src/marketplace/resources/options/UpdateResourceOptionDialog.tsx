@@ -8,9 +8,12 @@ import {
 import { Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { getDerivedLimitInputs } from '@/marketplace/common/derivedLimits';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+
+import { FormulaChangePreview } from './FormulaChangePreview';
 
 export interface UpdateResourceOptionDialogProps {
   resolve: {
@@ -25,28 +28,59 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
   props,
 ) => {
   const { name, ...option } = props.resolve.option;
+  const isFormula = option.type === 'component_formula';
+  const offering = props.resolve.offering;
   const options = useMemo(() => {
     return {
       // The card only offers options that are visible for the resource's
       // current values, and this dialog edits that one option alone, so its
       // visibility rule (which refers to another option) does not apply here.
       options: {
-        [name]: { ...option, required: false, visible_if: undefined },
+        [name]: {
+          ...option,
+          required: false,
+          visible_if: undefined,
+          // A paired formula option has no formulas of its own: the order
+          // option's are what the value is checked against.
+          ...(isFormula
+            ? {
+                component_formula_config:
+                  offering?.options?.options?.[name]?.component_formula_config,
+              }
+            : {}),
+        },
       },
       order: [name],
     };
-  }, [name, option]);
+  }, [name, option, isFormula, offering]);
 
   const initialValues = useMemo(
     () => ({
       attributes: {
-        [name]:
-          props.resolve.resource && props.resolve.resource.options
+        [name]: isFormula
+          ? // Ordered before the option existed: the ordered value.
+            (getDerivedLimitInputs(props.resolve.resource, offering)[name] ??
+            null)
+          : props.resolve.resource && props.resolve.resource.options
             ? props.resolve.resource.options[name]
             : null,
       },
+      // What the formula validator checks derived limits against; only the
+      // attributes are submitted.
+      ...(isFormula
+        ? {
+            offering,
+            limits: props.resolve.resource?.limits,
+            derivedInputs: getDerivedLimitInputs(
+              props.resolve.resource,
+              offering,
+            ),
+            derivedFallback: props.resolve.resource?.limits,
+            derivedPreview: true,
+          }
+        : {}),
     }),
-    [name, props.resolve.resource],
+    [name, isFormula, offering, props.resolve.resource],
   );
 
   const updateMutation = useManagedMutation<any, any, any>({
@@ -57,7 +91,9 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
           options: formData.attributes,
         },
       }),
-    successMessage: translate('Options have been updated'),
+    successMessage: isFormula
+      ? translate('The change has been submitted as an order.')
+      : translate('Options have been updated'),
     errorMessage: translate('Unable to update options.'),
     refetch: props.resolve.refetch,
   });
@@ -81,7 +117,15 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
           invalid={invalid}
         >
           {name ? (
-            <OptionsForm options={options} />
+            <>
+              <OptionsForm options={options} />
+              {isFormula ? (
+                <FormulaChangePreview
+                  resource={props.resolve.resource}
+                  name={name}
+                />
+              ) : null}
+            </>
           ) : (
             translate('There are no resource options defined in the offering.')
           )}

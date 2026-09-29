@@ -40,6 +40,34 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
     [resolve.rows],
   );
 
+  // Fetch related offering
+  const offeringQuery = useQuery({
+    queryKey: ['resource-offering-options', resolve.rows[0].uuid],
+    queryFn: () =>
+      marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resolve.rows[0].uuid },
+      }).then((response) => response.data),
+    staleTime: UI_STALE_TIME,
+  });
+
+  // A formula input changes billed limits, so each change is ordered and
+  // priced on its own resource; it is left out of editing several at once,
+  // which would copy one resource's value onto the others.
+  const editableOptions = useMemo(() => {
+    const resourceOptions = offeringQuery.data?.resource_options;
+    if (!resourceOptions) return resourceOptions;
+    const keys = (resourceOptions.order || []).filter(
+      (key) => resourceOptions.options?.[key]?.type !== 'component_formula',
+    );
+    return {
+      ...resourceOptions,
+      order: keys,
+      options: Object.fromEntries(
+        keys.map((key) => [key, resourceOptions.options[key]]),
+      ),
+    };
+  }, [offeringQuery.data]);
+
   const updateOptionsMutation = useManagedMutation<
     any,
     any,
@@ -50,23 +78,19 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
         resolve.rows.map((row) =>
           marketplaceResourcesUpdateOptions({
             path: { uuid: row.uuid },
-            body: { options: formData.attributes },
+            body: {
+              options: Object.fromEntries(
+                Object.entries(formData.attributes || {}).filter(
+                  ([key]) => key in (editableOptions?.options || {}),
+                ),
+              ),
+            },
           }),
         ),
       ),
     successMessage: translate('Options have been updated'),
     errorMessage: translate('Unable to update options.'),
     refetch: resolve.refetch,
-  });
-
-  // Fetch related offering
-  const offeringQuery = useQuery({
-    queryKey: ['resource-offering-options', resolve.rows[0].uuid],
-    queryFn: () =>
-      marketplaceResourcesOfferingRetrieve({
-        path: { uuid: resolve.rows[0].uuid },
-      }).then((response) => response.data),
-    staleTime: UI_STALE_TIME,
   });
 
   return (
@@ -110,8 +134,8 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
               <LoadingSpinner />
             ) : offeringQuery.error ? (
               <LoadingErred loadData={offeringQuery.refetch} className="mb-4" />
-            ) : offeringQuery.data.resource_options.order.length ? (
-              <OptionsForm options={offeringQuery.data.resource_options} />
+            ) : editableOptions?.order.length ? (
+              <OptionsForm options={editableOptions} />
             ) : (
               translate(
                 'There are no resource options defined in the offering.',
