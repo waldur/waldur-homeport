@@ -12,6 +12,8 @@ interface EntityHeaderProps {
   badge: ReactNode;
   helpText?: string;
   className?: string;
+  /** Utilities that do not change the entity. Decisions go in the sidebar. */
+  actions?: ReactNode;
 }
 
 export const EntityHeader = ({
@@ -21,11 +23,13 @@ export const EntityHeader = ({
   helpText,
   className,
   idLabel,
+  actions,
 }: EntityHeaderProps) => (
   <div className={className}>
     <div className="d-flex align-items-center mb-1">
       <h1 className="mb-0 fs-1x">{title}</h1>
       <div className="ms-4">{badge}</div>
+      {actions && <div className="ms-auto">{actions}</div>}
     </div>
     <p className="fs-6 text-muted mb-1">
       {idLabel ?? translate('ID')}: {slug}{' '}

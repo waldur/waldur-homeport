@@ -156,6 +156,18 @@ export function useTableExport(table, props?) {
 
   return async (config: ExportConfig) => {
     try {
+      // The server writes this one; nothing to assemble from the rows.
+      if (config.content === 'full' && props?.fullExport) {
+        await props.fullExport.download({
+          withFilters: Boolean(config.withFilters),
+          query: config.withFilters ? tableState.query : undefined,
+        });
+        showSuccess(
+          translate('Table has been exported to {format}.', { format: 'CSV' }),
+        );
+        closeDialog();
+        return;
+      }
       const data = await fetchRows(config);
       await exportAs(config.format, table, data);
       showSuccess(

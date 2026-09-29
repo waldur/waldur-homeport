@@ -3,6 +3,7 @@ import { proposalProposalsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
+import { downloadFile } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import {
@@ -15,13 +16,19 @@ import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
-import { ComplianceStatusBadge } from '../proposal/ComplianceStatusBadge';
+import {
+  ComplianceStatusBadge,
+  formatComplianceStatus,
+} from '../proposal/ComplianceStatusBadge';
 import { ProposalBadge } from '../proposal/ProposalBadge';
 import { ProposalRowActions } from '../proposal/ProposalRowActions';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 import { Call } from '../types';
+import { canExportCall } from '../utils';
 
+import { buildCallExportUrl } from './callExportUrl';
 import { ProposalStepCell } from './ProposalStepCell';
 
 interface CallProposalsListProps {
@@ -54,6 +61,31 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
   });
 
   const hasComplianceChecklist = Boolean(call.compliance_checklist);
+  const user = useUser();
+  const canExport = canExportCall(user, call);
+
+  // Written by the server: it holds a column per requested offering component
+  // and the review scores, none of which are columns in this table.
+  const fullExport = useMemo(
+    () => ({
+      label: translate('Full report'),
+      description: translate(
+        'Every field, including the amount requested per offering component and the review scores.',
+      ),
+      download: ({ withFilters, query }) =>
+        downloadFile(
+          buildCallExportUrl(
+            call,
+            'export-proposals',
+            'proposal_state',
+            withFilters ? formFilters : undefined,
+            query,
+          ),
+          `${call.slug || call.uuid}-proposals.csv`,
+        ),
+    }),
+    [call, formFilters],
+  );
 
   return (
     <Table
@@ -124,6 +156,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
                 ),
                 keys: ['compliance_status'],
                 id: 'compliance',
+                export: (row) => formatComplianceStatus(row.compliance_status),
               },
             ]
           : []),
@@ -143,6 +176,8 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
       )}
       filters={<ProposalProposalsFilter callUuid={call.uuid} />}
       formId={ProposalProposalsFilterFormId}
+      enableExport
+      fullExport={canExport ? fullExport : undefined}
     />
   );
 };

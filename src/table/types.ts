@@ -166,6 +166,13 @@ interface TablePortal {
   additionalActions?: any;
 }
 
+export interface TableFullExport {
+  label: string;
+  description?: string;
+  /** `query` is the table's search term, passed only when filters apply. */
+  download(options: { withFilters: boolean; query?: string }): Promise<void>;
+}
+
 export interface TableProps<RowType = any> extends TableState {
   table?: string;
   rows: any[];
@@ -216,6 +223,9 @@ export interface TableProps<RowType = any> extends TableState {
   toggleRow?(row: any): void;
   toggled?: Record<string, boolean>;
   enableExport?: boolean;
+  /** A server-written export, offered in the dialog as a second choice of
+   * content. For tables whose rows hold more than their columns show. */
+  fullExport?: TableFullExport;
   showExportInDropdown?: boolean;
   placeholderComponent?: React.ReactNode;
   placeholderActions?: React.ReactNode;

@@ -216,6 +216,11 @@ export const canUpdateCall = (user: User, call: Call): boolean =>
     }),
   );
 
+/** Mirrors the backend gate on the export endpoints. Narrower than
+ * `canAccessCallManagement`, which also admits organization owners. */
+export const canExportCall = (user: User, call: Call): boolean =>
+  canUpdateCall(user, call) || Boolean(checkIsStaffOrSupport(user));
+
 /**
  * Whether the user may open the call's management surfaces at all — the Edit
  * and Manage pages and the tab strip that leads to them.

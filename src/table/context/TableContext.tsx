@@ -9,6 +9,7 @@ import {
   PinnedColumns,
   PinnedOffsets,
   Sorting,
+  TableFullExport,
   TableProps,
 } from '../types';
 
@@ -56,6 +57,7 @@ interface TableConfig {
   isRowExpandable?: (row: any) => boolean;
   enableMultiSelect: boolean;
   enableExport: boolean;
+  fullExport?: TableFullExport;
   showExportInDropdown: boolean;
   showPageSizeSelector: boolean;
   hoverable: boolean;

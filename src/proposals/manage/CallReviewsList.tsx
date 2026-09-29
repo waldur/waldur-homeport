@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { proposalReviewsList } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
+import { downloadFile } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { EndingField } from '@/proposals/EndingField';
 import { ReviewExpandableRow } from '@/proposals/review/ReviewExpandableRow';
@@ -17,10 +18,14 @@ import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 import { ReviewsRowActions } from '../review/ReviewsRowActons';
 import { ReviewStateRenderer } from '../review/ReviewStateRenderer';
 import { Call } from '../types';
+import { canExportCall } from '../utils';
+
+import { buildCallExportUrl } from './callExportUrl';
 
 interface CallReviewsListProps {
   call: Call;
@@ -39,6 +44,32 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
   const filter = useMemo(
     () => ({ call_uuid: call.uuid, ...formFilters }),
     [call.uuid, formFilters],
+  );
+
+  const user = useUser();
+  const canExport = canExportCall(user, call);
+
+  // Written by the server: reviewer, score and comment for every review of the
+  // call, not just the page on screen.
+  const fullExport = useMemo(
+    () => ({
+      label: translate('Full report'),
+      description: translate(
+        'Every review of the call, with reviewer, score and public comment.',
+      ),
+      download: ({ withFilters, query }) =>
+        downloadFile(
+          buildCallExportUrl(
+            call,
+            'export-reviews',
+            'review_state',
+            withFilters ? formFilters : undefined,
+            query,
+          ),
+          `${call.slug || call.uuid}-reviews.csv`,
+        ),
+    }),
+    [call, formFilters],
   );
 
   const tableProps = useTable({
@@ -122,6 +153,8 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
       filters={<ProposalReviewsFilter callUuid={call.uuid} />}
       expandableRow={ReviewExpandableRow}
       formId={ProposalReviewsFilterFormId}
+      enableExport
+      fullExport={canExport ? fullExport : undefined}
     />
   );
 };

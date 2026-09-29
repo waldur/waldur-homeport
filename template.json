@@ -4174,6 +4174,11 @@
       "feature_area": "plans"
     }
   },
+  "Application": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Application Credential": {
     "context": {
       "primary_ui_type": "label"
@@ -8505,6 +8510,11 @@
         }
       },
       "feature_area": "course-accounts"
+    }
+  },
+  "CSV, every page.": {
+    "context": {
+      "feature_area": "table"
     }
   },
   "Cache hit ratio": {
@@ -18985,6 +18995,11 @@
       "feature_area": "actions"
     }
   },
+  "Every field, including the amount requested per offering component and the review scores.": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "Every granted project lasts exactly this long, and no prepaid subscription requested under the call may run past it. Leave empty to let the longest subscription requested decide.": {
     "context": {
       "feature_area": "configuration"
@@ -19008,6 +19023,11 @@
   "Every remaining resource is terminated. A project left with no active resources is deleted.": {
     "context": {
       "feature_area": "policy-watch"
+    }
+  },
+  "Every review of the call, with reviewer, score and public comment.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Every year service provider can report up to the amount requested by user.": {
@@ -21547,6 +21567,12 @@
   "Full proposal details": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Full report": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "manage"
     }
   },
   "Full resource breakdown per customer with usages, limits, and costs": {
@@ -31136,6 +31162,12 @@
       "feature_area": "auth"
     }
   },
+  "No attachments.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "proposal"
+    }
+  },
   "No attribute mappings configured": {
     "context": {
       "feature_area": "steps"
@@ -32285,6 +32317,12 @@
       "feature_area": "openportal"
     }
   },
+  "No resources requested.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "proposal"
+    }
+  },
   "No resources with backend ID": {
     "context": {
       "feature_area": "consumption"
@@ -32506,6 +32544,12 @@
   "No targer resources selected.": {
     "context": {
       "feature_area": "reallocate-limits"
+    }
+  },
+  "No team members.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "proposal"
     }
   },
   "No templates found": {
@@ -38701,6 +38745,11 @@
       "feature_area": "reports"
     }
   },
+  "Preparing the document...": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Preparing the passkey challenge.": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -40276,6 +40325,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "assignments"
+    }
+  },
+  "Proposal ID": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Proposal applicant": {
@@ -43760,6 +43814,7 @@
       "feature_area": "invitations"
     }
   },
+  "Requested resources": {},
   "Requesting of new resources has been temporarily paused": {
     "context": {
       "feature_area": "access"
@@ -53431,6 +53486,11 @@
       "feature_area": "sram"
     }
   },
+  "The columns shown in the table, in any format.": {
+    "context": {
+      "feature_area": "table"
+    }
+  },
   "The compliance checklist cannot be changed once proposals exist for this call.": {
     "context": {
       "feature_area": "configuration"
@@ -53692,6 +53752,11 @@
         }
       },
       "feature_area": "manage"
+    }
+  },
+  "The full report always covers every page": {
+    "context": {
+      "feature_area": "table"
     }
   },
   "The group has no duplicates left to merge.": {
@@ -58785,6 +58850,12 @@
       "primary_ui_type": "error_message",
       "feature_area": "table",
       "action_type": "export"
+    }
+  },
+  "Unable to export the proposal.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "proposal"
     }
   },
   "Unable to extend disk.": {
@@ -65069,6 +65140,12 @@
   "Visibility & Access": {
     "context": {
       "primary_ui_type": "title"
+    }
+  },
+  "Visible columns": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "table"
     }
   },
   "Visible to applicant": {},
@@ -71438,6 +71515,26 @@
       "feature_area": "plans"
     }
   },
+  "{name} — page {current} of {total}, exported {date}": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "current": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "feature_area": "proposal"
+    }
+  },
   "{name}: {value} h ({percent}%)": {
     "context": {
       "variables": {
@@ -72072,8 +72169,7 @@
         "percentage": {
           "type": "unknown"
         }
-      },
-      "feature_area": "proposal"
+      }
     }
   },
   "{percentage}% uploaded": {

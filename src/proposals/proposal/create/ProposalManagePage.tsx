@@ -24,6 +24,7 @@ import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { useUser } from '@/workspace/hooks';
 
+import { DownloadProposalPdfAction } from '../DownloadProposalPdfAction';
 import { ProposalDetails } from '../ProposalDetails';
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
 import { WorkflowTimeline } from '../WorkflowTimeline';
@@ -197,7 +198,16 @@ export const ProposalManagePage = () => {
             proposal={proposal}
             call={call}
           />
-          <ProposalHeader proposal={proposal} className="mb-7" />
+          <ProposalHeader
+            proposal={proposal}
+            className="mb-7"
+            // A utility, not a decision: beside the title, not in the sidebar.
+            actions={
+              isCallManagerView ? (
+                <DownloadProposalPdfAction proposal={proposal} />
+              ) : undefined
+            }
+          />
           {/* No stepper while the proposal is a draft: the applicant hasn't
               submitted yet, so no workflow has started — the page shows the
               editable submission form instead. The stepper only appears from

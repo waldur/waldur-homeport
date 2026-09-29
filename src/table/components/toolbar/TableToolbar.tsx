@@ -170,6 +170,7 @@ export function TableToolbarActions() {
                 resetColumns={actions.resetColumns}
                 hasOptionalColumns={config.hasOptionalColumns}
                 enableExport={config.enableExport}
+                fullExport={config.fullExport}
                 showExportInDropdown={config.showExportInDropdown}
                 gridItem={slots.gridItem}
                 mode={mode}
