@@ -12,7 +12,7 @@ import { Tooltip } from 'waldur-ui';
 
 import { flattenObject } from '@/core/utils';
 import { FieldErrorMessage } from '@/form/FieldError';
-import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
+import { ScrollSpyNav } from '@/navigation/ScrollSpyNav';
 
 import { VStepperFormStep } from './VStepperFormStep';
 
@@ -108,7 +108,7 @@ export const FormSteps: FC<{
       title: (
         <div
           className={classNames(
-            'd-flex justify-content-between',
+            'd-flex justify-content-between align-items-center w-100',
             (hasCriticalErrors || hasNormalErrors) && 'has-error',
             isDisabled && 'text-muted',
           )}
@@ -146,5 +146,5 @@ export const FormSteps: FC<{
     };
   });
 
-  return <PageBarTabs tabs={tabs} mode="tabs-left" />;
+  return <ScrollSpyNav items={tabs} />;
 };

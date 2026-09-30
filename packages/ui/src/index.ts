@@ -243,3 +243,23 @@ export type {
   CustomCreatableSelectProps,
   CustomSelectProps,
 } from './select';
+
+export {
+  resolveContainer,
+  ScrollSpyNav,
+  SCROLLSPY_NAV_LINK_ACTIVE,
+  SCROLLSPY_NAV_LINK_BASE,
+  SCROLLSPY_NAV_LINK_INACTIVE,
+  scrollToSection,
+  scrollToSectionById,
+  useScrollTracker,
+} from './ScrollSpy';
+export type {
+  ScrollContainer,
+  ScrollSpyItem,
+  ScrollSpyItemRenderProps,
+  ScrollSpyNavProps,
+  ScrollToSectionOptions,
+  ScrollTrackSide,
+  UseScrollTrackerOptions,
+} from './ScrollSpy';

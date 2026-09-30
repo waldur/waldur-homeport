@@ -110,7 +110,7 @@ const PLACEMENT_TO_SIDE_ALIGN = (
  * matching that click-below/hover-at-`lg`+ config. Pass `false` for a
  * trigger whose original config was unconditionally hover, no
  * responsive variant at all — hover is then unconditional, at every
- * viewport width (PageBarTabs.tsx's in-page section tabs).
+ * viewport width (ScrollSpyNav.tsx's in-page section tabs).
  */
 export function useHoverMenu(requireDesktop = true) {
   const isDesktopQuery = useMediaQuery({ minWidth: GRID_BREAKPOINTS.lg });

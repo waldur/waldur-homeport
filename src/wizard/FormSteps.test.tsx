@@ -3,21 +3,26 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { FormSteps } from './FormSteps';
 
-// Mock PageBarTabs to render tabs content directly
-vi.mock('@/marketplace/common/PageBarTabs', () => ({
-  PageBarTabs: ({
+// Mock ScrollSpyNav to render items content directly
+vi.mock('@/navigation/ScrollSpyNav', () => ({
+  ScrollSpyNav: ({
+    items,
     tabs,
   }: {
-    tabs: { key: string; title: React.ReactNode }[];
-  }) => (
-    <div data-testid="page-bar-tabs">
-      {tabs.map((tab) => (
-        <div key={tab.key} data-testid={`tab-${tab.key}`}>
-          {tab.title}
-        </div>
-      ))}
-    </div>
-  ),
+    items?: { key: string; title: React.ReactNode }[];
+    tabs?: { key: string; title: React.ReactNode }[];
+  }) => {
+    const list = items || tabs || [];
+    return (
+      <div data-testid="page-bar-tabs">
+        {list.map((tab) => (
+          <div key={tab.key} data-testid={`tab-${tab.key}`}>
+            {tab.title}
+          </div>
+        ))}
+      </div>
+    );
+  },
 }));
 
 describe('FormSteps', () => {
