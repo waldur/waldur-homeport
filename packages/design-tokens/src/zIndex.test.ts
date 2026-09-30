@@ -53,6 +53,13 @@ describe('z-index tokens', () => {
     expect(token('mobile-drawer')).not.toBe(token('sidebar-panel'));
   });
 
+  it('puts date-picker popups above modals and dropdowns, below toasts', () => {
+    expect(token('picker-popover')).toBeGreaterThan(BOOTSTRAP.modal);
+    expect(token('picker-popover')).toBeGreaterThan(BOOTSTRAP.popover);
+    expect(token('picker-popover')).toBeGreaterThan(BOOTSTRAP.appDropdownMenu);
+    expect(token('picker-popover')).toBeLessThan(token('toast'));
+  });
+
   it('puts toasts above every Bootstrap overlay', () => {
     expect(token('toast')).toBeGreaterThan(BOOTSTRAP.modal);
     expect(token('toast')).toBeGreaterThan(BOOTSTRAP.popover);

@@ -8,11 +8,10 @@ import { DateTimeRangeField } from './DateTimeRangeField';
 interface RangeDateFieldProps {
   input: any;
   placeholder?: string;
+  /** Open the calendar on mount — set by DateRangeFilter. */
+  autoOpen?: boolean;
 }
 
-// Stable empty-value reference. Flatpickr re-applies its `value` prop (calling
-// setDate, which clears an in-progress selection) whenever the reference
-// changes, so the empty state must always be the same array instance.
 const EMPTY_VALUE: Date[] = [];
 
 const noop = () => undefined;
@@ -25,11 +24,12 @@ const noop = () => undefined;
  * `.min`/`.max` onto a pair of query params, and the backend parses bare
  * dates (`DateFilter` with `date__gte`/`date__lte`), so time would be
  * discarded anyway. That mapping is the whole reason this component exists —
- * everything about driving Flatpickr lives in DateTimeRangeField.
+ * everything about the calendar lives in DateTimeRangeField.
  */
 export const RangeDateField: FunctionComponent<RangeDateFieldProps> = ({
   input,
   placeholder,
+  autoOpen,
 }) => {
   const { onChange, value: inputValue } = input;
 
@@ -42,9 +42,6 @@ export const RangeDateField: FunctionComponent<RangeDateFieldProps> = ({
       .map((iso: string) => DateTime.fromISO(iso).toJSDate());
   }, [inputValue?.min, inputValue?.max]);
 
-  // Stable across renders: DateTimeRangeField keys its Flatpickr options memo
-  // on this identity, and a fresh function each render would tear down and
-  // rebuild the calendar mid-selection.
   const handleChange = useCallback(
     (dates?: Date[]) => {
       onChange(
@@ -59,8 +56,7 @@ export const RangeDateField: FunctionComponent<RangeDateFieldProps> = ({
     [onChange],
   );
 
-  // Focus/blur are unused here: the filter drawer commits on change, and
-  // Flatpickr's own input is read-only.
+  // Focus/blur are unused here: the filter drawer commits on change.
   const adaptedInput = useMemo(
     () => ({
       name: input.name,
@@ -83,6 +79,7 @@ export const RangeDateField: FunctionComponent<RangeDateFieldProps> = ({
       // looks back.
       minDate={null}
       placeholder={placeholder || translate('Select date range')}
+      autoOpen={autoOpen}
     />
   );
 };

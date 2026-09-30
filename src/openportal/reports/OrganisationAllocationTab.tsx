@@ -39,8 +39,12 @@ import {
   AlertItem,
   Badge,
   BaseButton,
+  DatePicker,
+  DateRangePicker,
   SegmentedControl,
   Tooltip,
+  parseDateValue,
+  toIsoDate,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
@@ -495,26 +499,20 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
             <Form.Label className="small mb-1">
               {translate('Start date — after')}
             </Form.Label>
-            <Form.Control
+            <DatePicker
               size="sm"
-              type="date"
-              value={startAfter}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setStartAfter(e.target.value)
-              }
+              value={parseDateValue(startAfter)}
+              onChange={(date) => setStartAfter(toIsoDate(date))}
             />
           </Col>
           <Col xs={6} md={4}>
             <Form.Label className="small mb-1">
               {translate('End date — before')}
             </Form.Label>
-            <Form.Control
+            <DatePicker
               size="sm"
-              type="date"
-              value={endBefore}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setEndBefore(e.target.value)
-              }
+              value={parseDateValue(endBefore)}
+              onChange={(date) => setEndBefore(toIsoDate(date))}
             />
           </Col>
         </Row>
@@ -1144,7 +1142,6 @@ export const OrganisationAllocationTab: FC = () => {
                   {translate('Project search')}
                 </Form.Label>
                 <Form.Control
-                  size="sm"
                   type="text"
                   placeholder={translate('Name search (applied at load time)…')}
                   value={projectSearch}
@@ -1153,30 +1150,24 @@ export const OrganisationAllocationTab: FC = () => {
                   }
                 />
               </Col>
-              <Col xs={6} md={4}>
+              <Col xs={12} md={4}>
                 <Form.Label className="small mb-1">
-                  {translate('Started after')}
+                  {translate('Project period')}
                 </Form.Label>
-                <Form.Control
-                  size="sm"
-                  type="date"
-                  value={projectStartAfter}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setProjectStartAfter(e.target.value)
+                <DateRangePicker
+                  value={
+                    projectStartAfter && projectEndBefore
+                      ? [
+                          parseDateValue(projectStartAfter)!,
+                          parseDateValue(projectEndBefore)!,
+                        ]
+                      : undefined
                   }
-                />
-              </Col>
-              <Col xs={6} md={4}>
-                <Form.Label className="small mb-1">
-                  {translate('Ended before')}
-                </Form.Label>
-                <Form.Control
-                  size="sm"
-                  type="date"
-                  value={projectEndBefore}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setProjectEndBefore(e.target.value)
-                  }
+                  onChange={(range) => {
+                    setProjectStartAfter(range ? toIsoDate(range[0]) : '');
+                    setProjectEndBefore(range ? toIsoDate(range[1]) : '');
+                  }}
+                  clearable
                 />
               </Col>
             </Row>

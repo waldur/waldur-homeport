@@ -19,6 +19,7 @@ import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
 import noHandRolledModalFooter from './rules/no-hand-rolled-modal-footer.js';
 import noHandRolledTable from './rules/no-hand-rolled-table.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
+import noNativeDateInput from './rules/no-native-date-input.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
@@ -35,6 +36,7 @@ export default {
     'enforce-dialog-button-order': enforceDialogButtonOrder,
     'no-bootstrap-button-markup': noBootstrapButtonMarkup,
     'no-hand-rolled-table': noHandRolledTable,
+    'no-native-date-input': noNativeDateInput,
     'no-hand-rolled-modal-footer': noHandRolledModalFooter,
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,

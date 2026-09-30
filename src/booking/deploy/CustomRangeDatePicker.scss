@@ -1,72 +1,53 @@
-.flatpickr-range-custom {
+.booking-range-picker {
   display: flex;
   justify-content: center;
   border-top: 1px solid var(--bs-border-color);
   border-bottom: 1px solid var(--bs-border-color);
 
-  .flatpickr-calendar {
-    box-shadow: unset;
-    border-radius: 0;
-    padding-top: 0;
+  .booking-range-picker-titles {
+    display: flex;
+  }
 
-    .flatpickr-month {
-      border-radius: 0;
-    }
+  // One title per visible month, each spanning half of the calendar.
+  .booking-range-picker-title {
+    display: flex;
+    flex: 1 1 50%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem 0;
 
-    .flatpickr-innerContainer {
-      border: none;
+    label {
+      font-weight: 500;
+      white-space: nowrap;
     }
   }
 
-  .flatpickr-range-date-2 {
-    border-left: 1px solid var(--bs-border-color);
-  }
-  .flatpickr-range-date-1,
-  .flatpickr-range-date-2 {
-    position: relative;
-
-    // Hide the default input
-    .flatpickr-input {
-      display: none;
-    }
-
-    .flatpickr-range-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-
-      label {
-        font-weight: 500;
-      }
-    }
-  }
-
-  .flatpickr-range-time {
+  .booking-range-picker-time {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     height: 400px;
     overflow: hidden;
     padding-left: 0.75rem;
+    border-left: 1px solid var(--bs-border-color);
+  }
 
-    &-1,
-    &-2 {
-      flex-basis: 50%;
-      flex-grow: 1;
-      overflow: hidden;
+  .booking-range-picker-time-list {
+    flex-basis: 50%;
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .title {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
 
-      .title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        h6 {
-          line-height: 3;
-          margin: 0;
-        }
+      h6 {
+        line-height: 3;
+        margin: 0;
       }
     }
 

@@ -56,7 +56,6 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
           name="start_time"
           required
           validate={required}
-          dateFormat="Y-m-d H:i"
           parse={(value) => (value ? formatISOWithoutZone(value) : value)}
           format={(value) => (value ? new Date(value) : value)}
         />
@@ -71,7 +70,6 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
             name="cutoff_time"
             required
             validate={required}
-            dateFormat="Y-m-d H:i"
             parse={(value) => (value ? formatISOWithoutZone(value) : value)}
             format={(value) => (value ? new Date(value) : value)}
             description={

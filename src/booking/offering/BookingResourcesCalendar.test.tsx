@@ -1,25 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { BookingResource } from '../types';
 
 import { BookingResourcesCalendar } from './BookingResourcesCalendar';
-
-// Flatpickr does not render reliably under jsdom; stub it and capture the
-// props it receives so we can assert the computed `enable` ranges without a
-// real date picker.
-const { flatpickrSpy } = vi.hoisted(() => ({ flatpickrSpy: vi.fn() }));
-vi.mock('react-flatpickr', () => ({
-  default: (props: any) => {
-    flatpickrSpy(props);
-    return <div data-testid="flatpickr" />;
-  },
-}));
-
-// Avoids pulling in the theme/Redux machinery and dynamic CSS imports.
-vi.mock('@/form/useFlatpickrTheme', () => ({
-  useFlatpickrTheme: vi.fn(),
-}));
 
 const makeResource = (overrides: Partial<BookingResource>): BookingResource =>
   ({
@@ -29,10 +13,19 @@ const makeResource = (overrides: Partial<BookingResource>): BookingResource =>
     ...overrides,
   }) as BookingResource;
 
+// Day buttons are labelled like "Friday, January 10th, 2025".
+const day = (label: string) =>
+  screen.getByRole('button', { name: new RegExp(label) });
+
+// Crash safety for malformed resources; which days are enabled and what a
+// pick lists are covered by the component's stories.
 describe('BookingResourcesCalendar', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    // Shows January and February 2025, where the fixtures' schedules are.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date(2025, 0, 5, 12, 0));
   });
+  afterEach(() => vi.useRealTimers());
 
   // Regression: the resource-details "Booking" tab passes a raw marketplace
   // resource whose attributes may have no `schedules` key. This used to throw
@@ -45,11 +38,7 @@ describe('BookingResourcesCalendar', () => {
     ).not.toThrow();
 
     expect(screen.getByText('Select a date')).toBeInTheDocument();
-    expect(flatpickrSpy).toHaveBeenCalledWith(
-      expect.objectContaining({
-        options: expect.objectContaining({ enable: [] }),
-      }),
-    );
+    expect(day('January 10th, 2025')).toBeDisabled();
   });
 
   it('does not crash when attributes itself is undefined', () => {
@@ -70,31 +59,12 @@ describe('BookingResourcesCalendar', () => {
     expect(screen.getByText('Select a date')).toBeInTheDocument();
   });
 
-  it('computes enabled ranges from resources that have schedules', () => {
-    const resource = makeResource({
-      attributes: {
-        schedules: [
-          { start: '2025-01-10T09:00:00Z', end: '2025-01-10T11:00:00Z' },
-          { start: '2025-02-03T08:00:00Z', end: '2025-02-04T18:00:00Z' },
-        ],
-      },
-    });
-
-    render(<BookingResourcesCalendar bookingResources={[resource]} />);
-
-    const props = flatpickrSpy.mock.calls.at(-1)![0];
-    expect(props.options.enable).toEqual([
-      { from: '2025-01-10', to: '2025-01-10' },
-      { from: '2025-02-03', to: '2025-02-04' },
-    ]);
-  });
-
   it('ignores resources without schedules while keeping those that have them', () => {
     const withSchedules = makeResource({
       uuid: 'with',
       attributes: {
         schedules: [
-          { start: '2025-03-01T09:00:00Z', end: '2025-03-01T10:00:00Z' },
+          { start: '2025-01-20T09:00:00Z', end: '2025-01-20T10:00:00Z' },
         ],
       },
     });
@@ -111,9 +81,7 @@ describe('BookingResourcesCalendar', () => {
       ),
     ).not.toThrow();
 
-    const props = flatpickrSpy.mock.calls.at(-1)![0];
-    expect(props.options.enable).toEqual([
-      { from: '2025-03-01', to: '2025-03-01' },
-    ]);
+    expect(day('January 20th, 2025')).toBeEnabled();
+    expect(day('January 21st, 2025')).toBeDisabled();
   });
 });

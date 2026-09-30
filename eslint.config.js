@@ -156,6 +156,9 @@ export default tseslint
         // swap. They steer new code; promote to 'error' once the count is down.
         'waldur-custom/no-hand-rolled-table': 'warn',
         'waldur-custom/no-hand-rolled-modal-footer': 'error',
+        // Zero instances remain: every native date/time input was replaced by
+        // the waldur-ui pickers. See the rule's docblock.
+        'waldur-custom/no-native-date-input': 'error',
         'waldur-custom/enforce-dialog-button-order': 'error',
         'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',

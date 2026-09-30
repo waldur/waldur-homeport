@@ -31,14 +31,29 @@ export const BooleanFilter = withTableFilter(AwesomeCheckboxField, {
 
 export const StringFilter = withTableFilter(StringField);
 
-export const DateFilter = withTableFilter(DateField);
+// The date filters open their calendar as soon as the filter is picked,
+// the way SelectFilter/AsyncSelectFilter show their menu (`variant=
+// "tableFilter"`): choosing the filter already says "I want to pick a
+// date". Every entry point mounts the field only then — the "Add filter"
+// row once opened, the column flyout once shown, the mobile accordion row
+// once expanded — so this never fires for filters nobody opened.
+const AutonomousDateFilter = withTableFilter(DateField);
+export const DateFilter: typeof AutonomousDateFilter = (props) => (
+  <AutonomousDateFilter autoOpen {...props} />
+);
 
+const AutonomousDateTimeFilter = withTableFilter(DateTimeField);
 /** @public */
-export const DateTimeFilter = withTableFilter(DateTimeField);
+export const DateTimeFilter: typeof AutonomousDateTimeFilter = (props) => (
+  <AutonomousDateTimeFilter autoOpen {...props} />
+);
 
 /** @public */
 export const NumberFilter = withTableFilter(NumberField);
 
 export const NumberRangeFilter = withTableFilter(RangeNumberField);
 
-export const DateRangeFilter = withTableFilter(RangeDateField);
+const AutonomousDateRangeFilter = withTableFilter(RangeDateField);
+export const DateRangeFilter: typeof AutonomousDateRangeFilter = (props) => (
+  <AutonomousDateRangeFilter autoOpen {...props} />
+);

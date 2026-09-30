@@ -1,45 +1,50 @@
-import { CalendarBlankIcon } from '@phosphor-icons/react';
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { DateTimePickerProps } from 'react-flatpickr';
 
-import { FlatpickrField } from './FlatpickrField';
-import { useFlatpickrTheme } from './useFlatpickrTheme';
+import { DateBound, DatePicker, parseDateValue } from 'waldur-ui';
 
-export const DateField: FunctionComponent<any> = ({
+import { FormField } from './types';
+
+interface DateFieldProps extends FormField {
+  minDate?: DateBound;
+  maxDate?: DateBound;
+  /** Only days matching one of these are selectable. */
+  enable?: Array<(date: Date) => boolean>;
+  /** Always-visible calendar instead of a popup. */
+  inline?: boolean;
+  placeholder?: string;
+  solid?: boolean;
+  /** Open the calendar on mount — set by the table's date filters. */
+  autoOpen?: boolean;
+}
+
+/** A calendar date, stored in form state as an ISO date (`yyyy-MM-dd`). */
+export const DateField: FunctionComponent<DateFieldProps> = ({
+  input,
   minDate,
   maxDate,
-  defaultDate,
-  inline,
-  disabled,
   enable,
-  solid,
+  inline,
   placeholder,
-  input,
-  ...rest
-}) => {
-  useFlatpickrTheme();
-  const options: DateTimePickerProps['options'] = {
-    dateFormat: 'Y-m-d',
-    minDate: minDate,
-    maxDate: maxDate,
-    defaultDate: defaultDate,
-    monthSelectorType: 'static',
-    inline: inline,
-    allowInvalidPreload: true,
-    clickOpens: !disabled,
-  };
-  if (enable) {
-    options.enable = enable;
-  }
-  return (
-    <FlatpickrField
-      options={options}
-      solid={solid}
-      placeholder={placeholder}
-      iconNode={<CalendarBlankIcon weight="bold" />}
-      input={input}
-      disabled={disabled}
-      {...rest}
-    />
-  );
-};
+  solid,
+  disabled,
+  autoOpen,
+  id,
+}) => (
+  <DatePicker
+    value={parseDateValue(input.value)}
+    onChange={(date) =>
+      input.onChange(date ? DateTime.fromJSDate(date).toISODate() : null)
+    }
+    onClose={() => input.onBlur?.()}
+    minDate={minDate}
+    maxDate={maxDate}
+    enable={enable}
+    inline={inline}
+    placeholder={placeholder}
+    solid={solid}
+    disabled={disabled}
+    autoOpen={autoOpen}
+    id={id}
+  />
+);

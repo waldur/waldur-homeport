@@ -16,6 +16,8 @@
  *     1070  Bootstrap $zindex-popover (also .role-project-select-popup)
  *     1080  Bootstrap $zindex-tooltip
  *     1100  the app's own .dropdown-menu (custom/_dropdown-base.scss)
+ *     1110  --z-index-picker-popover token  (date pickers opened inside a
+ *                                            modal or a filter dropdown)
  *     1150  --z-index-toast          token  (above modal/popover/dropdown)
  *     1180  --z-index-tooltip        token  (above toast, so a toast's own
  *                                            Dismiss tooltip stays visible)
@@ -36,6 +38,10 @@
      drop down over the fixed toolbar and page tabs, so Tailwind's z-50
      leaves them painted underneath. */
   --z-index-header-popover: 1000;
+  /* Date-picker popups (packages/ui Calendar in a Popover). They open from
+     fields inside modals and inside table-filter dropdowns, so they must
+     clear both. */
+  --z-index-picker-popover: 1110;
   /* Not consumed as a `z-tooltip` class: packages/ui/src/Tooltip.tsx types
      its zIndex prop as a plain number (an override needs a runtime value no
      static class can express), so its default is the literal 1180 there.

@@ -1,18 +1,4 @@
 .booking-resource-items-calendar {
-  .flatpickr-calendar {
-    box-shadow: unset;
-    border-radius: 0;
-
-    .flatpickr-month {
-      border-radius: 0;
-    }
-  }
-
-  // Hide the default input
-  .flatpickr-input {
-    display: none;
-  }
-
   .timeline-list {
     ul {
       list-style: none;

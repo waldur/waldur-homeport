@@ -1,11 +1,10 @@
-import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
-import Flatpickr from 'react-flatpickr';
+
+import { DatePicker } from 'waldur-ui';
 
 import { FormGroup } from '@/form';
 import { Select } from '@/form/select';
-import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
 import { translate } from '@/i18n';
 
 import { MaintenanceFilterState } from './types';
@@ -91,11 +90,12 @@ interface MaintenanceReportingFilterProps {
   onFilterChange: (filter: Partial<MaintenanceFilterState>) => void;
 }
 
+const isoDateToDate = (value?: string) =>
+  value ? DateTime.fromISO(value).toJSDate() : null;
+
 export const MaintenanceReportingFilter: FC<
   MaintenanceReportingFilterProps
 > = ({ filter, onFilterChange }) => {
-  useFlatpickrTheme();
-
   // Find matching preset based on current dates
   const selectedPreset = useMemo(() => {
     return presetOptions.find((p) => {
@@ -133,67 +133,33 @@ export const MaintenanceReportingFilter: FC<
         label={translate('Start date')}
         className="flex-grow-1 mw-150px"
       >
-        <div style={{ position: 'relative' }}>
-          <Flatpickr
-            value={filter.startDate}
-            onChange={(dates) => {
-              if (dates[0]) {
-                onFilterChange({
-                  startDate: DateTime.fromJSDate(dates[0]).toISODate()!,
-                });
-              }
-            }}
-            options={{
-              dateFormat: 'Y-m-d',
-              maxDate: filter.endDate,
-            }}
-            className="form-control"
-            placeholder={translate('Start date')}
-          />
-          <span
-            className="svg-icon svg-icon-2 svg-icon-gray-500"
-            style={{
-              position: 'absolute',
-              right: 12,
-              top: 13,
-              pointerEvents: 'none',
-            }}
-          >
-            <CalendarBlankIcon weight="bold" />
-          </span>
-        </div>
+        <DatePicker
+          value={isoDateToDate(filter.startDate)}
+          onChange={(date) =>
+            date &&
+            onFilterChange({
+              startDate: DateTime.fromJSDate(date).toISODate()!,
+            })
+          }
+          maxDate={filter.endDate}
+          clearable={false}
+          placeholder={translate('Start date')}
+        />
       </FormGroup>
 
       <FormGroup label={translate('End date')} className="flex-grow-1 mw-150px">
-        <div style={{ position: 'relative' }}>
-          <Flatpickr
-            value={filter.endDate}
-            onChange={(dates) => {
-              if (dates[0]) {
-                onFilterChange({
-                  endDate: DateTime.fromJSDate(dates[0]).toISODate()!,
-                });
-              }
-            }}
-            options={{
-              dateFormat: 'Y-m-d',
-              minDate: filter.startDate,
-            }}
-            className="form-control"
-            placeholder={translate('End date')}
-          />
-          <span
-            className="svg-icon svg-icon-2 svg-icon-gray-500"
-            style={{
-              position: 'absolute',
-              right: 12,
-              top: 13,
-              pointerEvents: 'none',
-            }}
-          >
-            <CalendarBlankIcon weight="bold" />
-          </span>
-        </div>
+        <DatePicker
+          value={isoDateToDate(filter.endDate)}
+          onChange={(date) =>
+            date &&
+            onFilterChange({
+              endDate: DateTime.fromJSDate(date).toISODate()!,
+            })
+          }
+          minDate={filter.startDate}
+          clearable={false}
+          placeholder={translate('End date')}
+        />
       </FormGroup>
 
       <FormGroup label={translate('State')} className="flex-grow-1 mw-250px">

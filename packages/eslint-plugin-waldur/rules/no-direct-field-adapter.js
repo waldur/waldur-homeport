@@ -1,8 +1,7 @@
 // Maps a field adapter to the autonomous `*Group` it should be replaced with.
 // Only adapters that have a corresponding Group exported from `@/form` belong
-// here — InputField, PhoneNumberField and FlatpickrField are intentionally
-// omitted because they have no Group (they are used via the render-prop pattern
-// or only as internal building blocks for Date/Time/DateTime groups).
+// here — InputField and PhoneNumberField are intentionally omitted because
+// they have no Group (they are used via the render-prop pattern).
 const ADAPTER_TO_GROUP = {
   TextField: 'TextGroup',
   StringField: 'StringGroup',

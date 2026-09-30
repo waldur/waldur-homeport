@@ -1,7 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { screen, userEvent, waitFor, within } from 'storybook/test';
+import { ReactElement } from 'react';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
+
+import {
+  getTrigger,
+  isCalendarOpen,
+  pickDay,
+} from '@/form/datePickerStoryHarness';
 
 import { FilterContextProvider } from './FilterContextProvider';
+import { DateRangeFilter } from './filters';
 import { tableStoryFilters, tableStorySavedFilters } from './storyFixtures';
 import { withSeededTableStore } from './storyProviders';
 import { TableFiltersMenu } from './TableFiltersMenu';
@@ -45,10 +53,16 @@ const appliedFilterFixtures: FilterItem[] = [
   { name: 'name', label: 'Name', value: 'production', component: null },
 ];
 
-const FiltersMenuHarness = ({ openName }: { openName?: string }) => (
+const FiltersMenuHarness = ({
+  openName,
+  filters = tableStoryFilters,
+}: {
+  openName?: string;
+  filters?: ReactElement;
+}) => (
   <FilterContextProvider
     table={TABLE_ID}
-    filters={tableStoryFilters}
+    filters={filters}
     formId={FORM_ID}
     filterPosition="menu"
     setFilter={noop}
@@ -58,7 +72,7 @@ const FiltersMenuHarness = ({ openName }: { openName?: string }) => (
     <div style={{ minHeight: 360 }}>
       <TableFiltersMenu
         table={TABLE_ID}
-        filters={tableStoryFilters}
+        filters={filters}
         formId={FORM_ID}
         filterPosition="menu"
         filtersStorage={[]}
@@ -165,5 +179,48 @@ export const ColumnFilterToggle: Story = {
       canvas.getByRole('button', { name: 'Filter by column' }),
     );
     await waitFor(() => screen.getByPlaceholderText('Search by name'));
+  },
+};
+
+const dateFilters = <DateRangeFilter title="Created" name="created" />;
+
+/**
+ * Picking a date filter from "Add filter" opens its calendar straight away,
+ * as a select filter shows its menu. Picking a range closes the calendar
+ * but not the filter's own flyout, whose trigger reopens it. (The picked
+ * range itself isn't shown back: `redux-mock-store` never runs reducers —
+ * see the file comment — and RangeDateField's own stories cover display.)
+ */
+export const DateRangeFilterOpensCalendar: Story = {
+  decorators: [withSeededTableStore(TABLE_ID)],
+  render: () => <FiltersMenuHarness filters={dateFilters} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button', { name: 'Add filter' }));
+    await userEvent.click(
+      await screen.findByRole('button', { name: 'Created' }),
+    );
+    await waitFor(() => expect(isCalendarOpen()).toBe(true));
+
+    await pickDay('2026-06-10');
+    await pickDay('2026-06-12');
+    await waitFor(() => expect(isCalendarOpen()).toBe(false));
+    // The flyout (portalled to <body>) survived the nested calendar
+    // closing — its field is still mounted and reopens the calendar.
+    await userEvent.click(getTrigger(document.body));
+    await waitFor(() => expect(isCalendarOpen()).toBe(true));
+  },
+};
+
+/** The column funnel flyout does the same for a date column. */
+export const ColumnDateFilterOpensCalendar: Story = {
+  decorators: [withSeededTableStore(TABLE_ID)],
+  render: () => <FiltersMenuHarness filters={dateFilters} openName="created" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(
+      canvas.getByRole('button', { name: 'Filter by column' }),
+    );
+    await waitFor(() => expect(isCalendarOpen()).toBe(true));
   },
 };

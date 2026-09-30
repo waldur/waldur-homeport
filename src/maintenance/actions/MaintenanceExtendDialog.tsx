@@ -178,7 +178,6 @@ const ExtendForm: FC<ExtendFormProps> = ({
                     setActiveQuickKey(null);
                   },
                 }}
-                dateFormat="Y-m-d H:i"
                 minDate={currentEnd.toJSDate()}
                 placeholder={translate('Pick a new end date and time')}
               />

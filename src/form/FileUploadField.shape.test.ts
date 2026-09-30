@@ -11,7 +11,7 @@ import { describe, expect, test } from 'vitest';
 // dropzone's transitive copy to the same version. This test guards the
 // import shape so a future regression of the unwrap (or a downgrade to
 // v2) breaks loudly at unit-test time instead of as a runtime error on
-// every upload form. Mirrors react-flatpickr-shape.test.ts.
+// every upload form. Mirrors OfferingsPanel.shape.test.ts.
 describe('attr-accept module shape', () => {
   test('default import is the callable function', () => {
     expect(typeof accepts).toBe('function');

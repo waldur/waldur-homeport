@@ -8,7 +8,7 @@ import { openAndSelectOption } from '@/test/select';
 
 import { EditSchedulesDialog } from './EditSchedulesDialog';
 
-// Mock CustomRangeDatePicker to avoid Flatpickr issues in tests
+// Replace CustomRangeDatePicker with an input so tests set the range directly
 vi.mock('@/booking/deploy/CustomRangeDatePicker', () => ({
   CustomRangeDatePicker: ({ input }) => (
     <input

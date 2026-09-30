@@ -8,7 +8,7 @@ import { describe, expect, test } from 'vitest';
 // toolchain change regresses the default-import unwrap or the named
 // export, this test fails at unit-test time instead of letting the
 // regression surface as a runtime `paginate is not a function` (or similar)
-// on the live "Add Resource" popup. Same pattern as react-flatpickr-shape.test.ts.
+// on the live "Add Resource" popup. Same pattern as FileUploadField.shape.test.ts.
 describe('marketplace-popup pagination libraries — module shape', () => {
   test('react-window-infinite-loader default export is a class component', () => {
     expect(typeof InfiniteLoader).toBe('function');
