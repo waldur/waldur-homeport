@@ -142,12 +142,6 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
-        key: 'ENABLE_MARKDOWN_IMAGE_UPLOAD',
-        description: translate('Allow uploading images for embedding in offering markdown descriptions.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
         key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
         description: translate('If True, users must have active consent to access offerings that have active Terms of Service.'),
         default: false,
