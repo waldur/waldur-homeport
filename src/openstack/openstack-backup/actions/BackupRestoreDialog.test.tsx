@@ -175,7 +175,10 @@ describe('BackupRestoreDialog', () => {
     // Check that all security groups are present in the dropdown
     fakeBackup.instance_security_groups.forEach((group) => {
       expect(
-        screen.getByText(group.name, { selector: 'span.tag' }),
+        // `span.tag > span`: the chip's label sits in a truncating span, and
+        // the selector still has to tell a selected chip apart from the same
+        // name in the dropdown that was just opened.
+        screen.getByText(group.name, { selector: 'span.tag > span' }),
       ).toBeInTheDocument();
     });
   });

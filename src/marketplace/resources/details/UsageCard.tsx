@@ -118,7 +118,10 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
               onChange={(value) => setUsers(value)}
               options={usersFilterOptions}
               isLoading={teamIsLoading}
-              className="min-w-150px min-w-lg-200px"
+              // Fixed, not content-sized: the `w-full` container would other-
+              // wise claim the whole toolbar row when empty and grow with each
+              // chip, shifting every control beside it on every selection.
+              className="w-250px"
             />
           ) : null}
           {periodOptions.length > 1 && (
@@ -127,6 +130,9 @@ export const UsageCard = ({ resource }: { resource: Resource }) => {
               options={periodOptions}
               value={period}
               onValueChange={setPeriod}
+              // Matches the export dropdown and the chart/table toggle, which
+              // are both `lg`, so the toolbar row reads as one height.
+              size="lg"
             />
           )}
           <UsageExportDropdown

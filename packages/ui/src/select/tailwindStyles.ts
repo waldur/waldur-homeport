@@ -61,7 +61,10 @@ export const getSelectTailwindClassNames = <
       );
       return cn(
         stateClasses,
-        'flex items-center justify-between w-full transition-colors',
+        // `font-normal`: a control must not inherit an ambient weight from its
+        // host — `.card-header` sets `font-weight: 700`, which rendered the
+        // value and placeholder bold in every card-toolbar select.
+        'flex items-center justify-between w-full transition-colors font-normal',
         // Gotcha #2: bare `border`/`rounded-md` would collide with
         // Bootstrap. 8px radius matches the old control's $border-radius
         // (Tailwind's `rounded-md` step is 6px).
@@ -95,7 +98,16 @@ export const getSelectTailwindClassNames = <
     },
 
     valueContainer: ({ isMulti }) =>
-      cn('flex flex-1 items-center flex-wrap gap-[6px]', isMulti && 'py-[2px]'),
+      cn(
+        'flex flex-1 items-center gap-[6px]',
+        // A multi-select collapses everything past the second value into a
+        // `+N` tag, so wrapping only ever bought a second line that made the
+        // control change height as values came and went. Without wrapping the
+        // 2px band that separated those lines has nothing to space, and it
+        // pushed a 24px tag past the 26px the control holds inside its own
+        // padding — growing the control by 2px the moment a value was picked.
+        isMulti ? 'flex-nowrap' : 'flex-wrap',
+      ),
 
     multiValue: () =>
       'bg-[var(--color-gray-200)] dark:bg-[var(--color-gray-dark-700)] rounded-md px-[4px] py-[2px] flex items-center gap-[4px] m-[2px]',
@@ -200,7 +212,7 @@ export const getSelectTailwindClassNames = <
 
       const colorClasses = cn(
         isSelected
-          ? 'bg-[var(--surface-hover-bg)] font-medium text-[var(--surface-text-primary)]'
+          ? 'bg-[var(--surface-hover-bg)] text-[var(--surface-text-primary)]'
           : isFocused
             ? 'bg-[var(--surface-hover-bg)] text-[var(--surface-text-primary)]'
             : 'text-[var(--surface-text-primary)]',
