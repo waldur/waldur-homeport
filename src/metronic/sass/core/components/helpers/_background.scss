@@ -61,12 +61,6 @@
     }
   }
 
-  .bg-active-#{$color} {
-    &.active {
-      @include setBgColor($isNotBrand, $value, $altColorRgb);
-    }
-  }
-
   .bg-state-#{$color} {
     cursor: pointer;
 
@@ -91,10 +85,6 @@
   }
 
   .bg-hover-opacity-#{$name}:hover {
-    background-color: rgba(var(--bg-color), #{$value}) !important;
-  }
-
-  .bg-active-opacity-#{$name}.active {
     background-color: rgba(var(--bg-color), #{$value}) !important;
   }
 
@@ -126,12 +116,6 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $lighten;
-  }
-}
-
-.bg-active-lighten {
-  &.active {
     background-color: $lighten;
   }
 }
