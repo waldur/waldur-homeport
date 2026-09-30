@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Col, Nav, Row } from 'react-bootstrap';
+import * as Tabs from '@radix-ui/react-tabs';
+import classNames from 'classnames';
+import { FC, useEffect, useMemo, useState } from 'react';
 
-import { BadgeVariant } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, BadgeVariant } from 'waldur-ui';
 
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { FilterBox } from '@/form/FilterBox';
@@ -11,14 +11,16 @@ import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { PermissionOptions } from './PermissionOptions';
 
-// `.page-tabs-container` (the app's vertical tab treatment) lives in this
-// stylesheet, which otherwise only loads when PageBarTabs itself renders.
-import '@/marketplace/common/PageBarTabs.scss';
-import './PermissionField.scss';
-
 interface PermissionOption {
   label: string;
   value: string;
+}
+
+interface PermissionEntity {
+  label: string;
+  options: PermissionOption[];
+  selectedCount: number;
+  matches: PermissionOption[];
 }
 
 interface PermissionFieldProps {
@@ -42,25 +44,20 @@ const getCoverage = (
       ? { label: translate('Full'), variant: 'success' }
       : { label: translate('Partial'), variant: 'warning' };
 
-/**
- * Permissions outgrew a flat stack of accordions: there are 130+ of them across
- * 13 groups. Groups run down the left with a None/Partial/Full read-out; the
- * open group's permissions are ticked on the right.
- */
-export const PermissionField = (props: PermissionFieldProps) => {
-  // react-final-form hands an empty array field over as '' until it is touched.
-  const selected: string[] = useMemo(
-    () => (Array.isArray(props.input.value) ? props.input.value : []),
-    [props.input.value],
-  );
-  const selectedSet = useMemo(() => new Set(selected), [selected]);
+const TAB_TRIGGER_BASE =
+  'flex items-center justify-between w-full min-h-[36px] py-[7px] px-3 border-y-0 border-r-0 border-l-2 rounded-none bg-transparent text-sm leading-5 text-left cursor-pointer transition-colors hover:text-brand-600 disabled:opacity-40 disabled:cursor-not-allowed';
 
-  const [query, setQuery] = useState('');
+/**
+ * Custom hook managing search filtering across permission groups,
+ * tracking selected permissions, and ensuring an active group is always selected.
+ */
+const usePermissionGroups = (selected: string[], query: string) => {
+  const selectedSet = useMemo(() => new Set(selected), [selected]);
   const [activeKey, setActiveKey] = useState(PermissionOptions[0].label);
 
   const term = query.trim().toLowerCase();
 
-  const groups = useMemo(
+  const groups: PermissionEntity[] = useMemo(
     () =>
       PermissionOptions.map((entity) => ({
         label: entity.label,
@@ -96,9 +93,128 @@ export const PermissionField = (props: PermissionFieldProps) => {
 
   const activeGroup =
     groups.find((group) => group.label === activeKey) ?? groups[0];
+
+  const hasMatches = groups.some((entity) => entity.matches.length > 0);
+
+  return {
+    groups,
+    activeKey,
+    setActiveKey,
+    activeGroup,
+    selectedSet,
+    hasMatches,
+  };
+};
+
+interface PermissionGroupTabProps {
+  entity: PermissionEntity;
+  isActive: boolean;
+}
+
+const PermissionGroupTab: FC<PermissionGroupTabProps> = ({
+  entity,
+  isActive,
+}) => {
+  const coverage = getCoverage(entity.selectedCount, entity.options.length);
+
+  return (
+    <Tabs.Trigger
+      key={entity.label}
+      value={entity.label}
+      disabled={entity.matches.length === 0}
+      className={classNames(
+        TAB_TRIGGER_BASE,
+        isActive
+          ? 'border-l-brand-600 text-brand-600 font-semibold active'
+          : 'border-l-transparent text-[var(--surface-text-secondary)] font-medium',
+      )}
+    >
+      <span>{entity.label}</span>
+      <Badge
+        variant={coverage.variant}
+        size="sm"
+        shape="pill"
+        tone="outline"
+        className="min-w-[62px] justify-center flex-shrink-0"
+      >
+        {coverage.label}
+      </Badge>
+    </Tabs.Trigger>
+  );
+};
+
+interface PermissionOptionsPanelProps {
+  activeGroup: PermissionEntity;
+  selectedSet: Set<string>;
+  onToggleOption: (value: string, checked: boolean) => void;
+  onToggleShown: (checked: boolean) => void;
+}
+
+const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
+  activeGroup,
+  selectedSet,
+  onToggleOption,
+  onToggleShown,
+}) => {
   const shown = activeGroup.matches;
   const allShownSelected =
     shown.length > 0 && shown.every((option) => selectedSet.has(option.value));
+
+  return (
+    <Tabs.Content
+      value={activeGroup.label}
+      className="border-t md:border-t-0 md:border-l border-[var(--waldur-border-secondary)] pt-4 md:ps-4 outline-none"
+    >
+      <p className="text-muted text-sm font-medium leading-5 mb-4">
+        {activeGroup.label}
+      </p>
+      <AwesomeCheckbox
+        id="permission-select-all"
+        className="min-h-[22px] mb-2"
+        type="checkbox"
+        size="sm"
+        label={translate('Select all')}
+        value={allShownSelected}
+        onChange={onToggleShown}
+      />
+      <hr className="mt-0 mb-2" />
+      {shown.map((option: PermissionOption) => (
+        <AwesomeCheckbox
+          className="min-h-[22px] mb-2"
+          key={option.value}
+          id={`permission-${option.value}`}
+          type="checkbox"
+          size="sm"
+          label={option.label}
+          value={selectedSet.has(option.value)}
+          onChange={(checked: boolean) => onToggleOption(option.value, checked)}
+        />
+      ))}
+    </Tabs.Content>
+  );
+};
+
+/**
+ * Permissions outgrew a flat stack of accordions: there are 130+ of them across
+ * 13 groups. Groups run down the left with a None/Partial/Full read-out; the
+ * open group's permissions are ticked on the right.
+ */
+export const PermissionField = (props: PermissionFieldProps) => {
+  // react-final-form hands an empty array field over as '' until it is touched.
+  const selected: string[] = useMemo(
+    () => (Array.isArray(props.input.value) ? props.input.value : []),
+    [props.input.value],
+  );
+
+  const [query, setQuery] = useState('');
+  const {
+    groups,
+    activeKey,
+    setActiveKey,
+    activeGroup,
+    selectedSet,
+    hasMatches,
+  } = usePermissionGroups(selected, query);
 
   const toggleOption = (value: string, checked: boolean) =>
     props.input.onChange(
@@ -110,7 +226,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
   // Bulk selection acts on what the search actually shows, so narrowing to
   // "delete" and ticking "Select all" cannot silently grant the whole group.
   const toggleShown = (checked: boolean) => {
-    const values = shown.map((option: PermissionOption) => option.value);
+    const values = activeGroup.matches.map((option) => option.value);
     props.input.onChange(
       checked
         ? [...selected, ...values.filter((value) => !selectedSet.has(value))]
@@ -119,7 +235,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
   };
 
   return (
-    <div className="permission-picker">
+    <div className="flex flex-1 flex-col">
       <FilterBox
         // The enclosing FormGroup pushes its `controlId` onto every unlabelled
         // control below it, so the search box and the checkboxes would all
@@ -128,94 +244,47 @@ export const PermissionField = (props: PermissionFieldProps) => {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder={translate('Search...')}
-        className="permission-picker__search"
+        className="mb-4"
       />
-      <hr className="permission-picker__divider" />
-      {groups.every((entity) => entity.matches.length === 0) ? (
+      <hr className="m-0" />
+      {!hasMatches ? (
         <NoResult
           title={translate('No permissions found')}
           message={translate('No permission matches this search.')}
           callback={() => setQuery('')}
         />
       ) : (
-        <Row className="permission-picker__panes">
-          <Col md={6} className="permission-picker__groups">
-            <p className="text-muted permission-picker__heading">
+        <Tabs.Root
+          value={activeKey}
+          onValueChange={setActiveKey}
+          orientation="vertical"
+          className="grid grid-cols-1 md:grid-cols-2 flex-1"
+        >
+          <div className="pt-4 md:pe-4">
+            <p className="text-muted text-sm font-medium leading-5 mb-4">
               {translate('Permissions')}
             </p>
-            {/*
-            The app's vertical tabs: `.page-tabs-container` stacks the nav and
-            marks the active item with a left brand bar (see PageBarTabs.scss),
-            the same treatment the deploy and proposal screens get via
-            @/wizard's FormSteps.
-          */}
-            <Nav
-              // Deliberately no variant="tabs": `.nav.nav-tabs … .badge` repaints
-              // any badge inside the active/hovered tab in brand colours, which
-              // would wipe out the None/Partial/Full colour coding. The vertical
-              // layout comes from `.page-tabs-container`, which needs only `.nav`.
-              className="page-tabs-container nav-line-tabs permission-picker__tabs"
-              activeKey={activeKey}
-              onSelect={setActiveKey}
+            <Tabs.List
+              aria-label={translate('Permissions')}
+              className="flex flex-col m-0 p-0"
             >
-              {groups.map((entity) => {
-                const coverage = getCoverage(
-                  entity.selectedCount,
-                  entity.options.length,
-                );
-                return (
-                  <Nav.Item key={entity.label}>
-                    <Nav.Link
-                      eventKey={entity.label}
-                      disabled={entity.matches.length === 0}
-                      className="flex-grow-1 d-flex justify-content-between align-items-center"
-                    >
-                      {entity.label}
-                      <Badge
-                        variant={coverage.variant}
-                        size="sm"
-                        shape="pill"
-                        tone="outline"
-                      >
-                        {coverage.label}
-                      </Badge>
-                    </Nav.Link>
-                  </Nav.Item>
-                );
-              })}
-            </Nav>
-          </Col>
+              {groups.map((entity) => (
+                <PermissionGroupTab
+                  key={entity.label}
+                  entity={entity}
+                  isActive={activeKey === entity.label}
+                />
+              ))}
+            </Tabs.List>
+          </div>
 
-          <Col md={6} className="border-start permission-picker__options">
-            <p className="text-muted permission-picker__heading">
-              {activeGroup.label}
-            </p>
-            <AwesomeCheckbox
-              id="permission-select-all"
-              className="permission-picker__option"
-              type="checkbox"
-              size="sm"
-              label={translate('Select all')}
-              value={allShownSelected}
-              onChange={toggleShown}
-            />
-            <hr className="permission-picker__list-divider" />
-            {shown.map((option: PermissionOption) => (
-              <AwesomeCheckbox
-                className="permission-picker__option"
-                key={option.value}
-                id={`permission-${option.value}`}
-                type="checkbox"
-                size="sm"
-                label={option.label}
-                value={selectedSet.has(option.value)}
-                onChange={(checked: boolean) =>
-                  toggleOption(option.value, checked)
-                }
-              />
-            ))}
-          </Col>
-        </Row>
+          <PermissionOptionsPanel
+            activeGroup={activeGroup}
+            selectedSet={selectedSet}
+            onToggleOption={toggleOption}
+            onToggleShown={toggleShown}
+          />
+        </Tabs.Root>
       )}
     </div>
   );
