@@ -234,7 +234,7 @@ const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
         </RadixPopover.Trigger>
         <PopoverMenuContent
           placement="bottom-start"
-          className="role-project-select-popup menu-gray-700 menu-state-bg-light menu-state-primary border fw-bold fs-6 py-1"
+          className="role-project-select-popup menu-gray-700 menu-state-bg-light menu-state-title-primary border fw-bold fs-6 py-1"
         >
           <RoleAndProjectSelectPopup
             roles={roles}

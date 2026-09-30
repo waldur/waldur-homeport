@@ -98,40 +98,6 @@
   }
 }
 
-// Primary text states
-.menu-state-primary {
-  .menu-item {
-    @include menu-link-hover-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      null
-    );
-    @include menu-link-show-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      null
-    );
-    @include menu-link-here-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      null
-    );
-    @include menu-link-active-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      null
-    );
-  }
-}
-
 // Light primary background states
 .menu-active-bg-light-primary {
   .menu-item {
