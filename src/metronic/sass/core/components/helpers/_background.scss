@@ -31,12 +31,6 @@
   @if (theme-light-color($color)) {
     .bg-light-#{$color} {
       background-color: theme-light-color($color) !important;
-
-      @if ($isNotBrand) {
-        &.hoverable:hover {
-          background-color: darken(theme-light-color($color), 6%) !important;
-        }
-      }
     }
   }
 
@@ -47,25 +41,12 @@
       background-color: rgb($altColorRgb) !important;
       --bg-color: #{$altColorRgb} !important;
     }
-
-    &.hoverable:hover {
-      background-color: theme-active-color($color) !important;
-    }
   }
 
   @if (theme-light-color($color)) {
     .bg-hover-light-#{$color} {
       cursor: pointer;
 
-      &:hover {
-        background-color: theme-light-color($color) !important;
-      }
-    }
-
-    .bg-state-light-#{$color} {
-      cursor: pointer;
-
-      &.active,
       &:hover {
         background-color: theme-light-color($color) !important;
       }
@@ -152,24 +133,5 @@
 .bg-active-lighten {
   &.active {
     background-color: $lighten;
-  }
-}
-
-.bg-state-lighten {
-  cursor: pointer;
-
-  &.active,
-  &:hover {
-    background-color: $lighten;
-  }
-}
-
-// Hoverable
-.hoverable {
-  cursor: pointer;
-  transition: $transition-base;
-
-  &:hover {
-    transition: $transition-base;
   }
 }
