@@ -1,20 +1,12 @@
 import { Info } from 'luxon';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { range } from '@/core/utils';
+import { MonthPicker } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
-const CURRENT_YEAR = new Date().getFullYear();
-
 export const MAX_USER_MAPPINGS = 100;
-
-const YEAR_OPTIONS = Array.from(
-  { length: CURRENT_YEAR - 2024 + 1 },
-  (_, i) => 2024 + i,
-);
-
-const MONTH_OPTIONS = range(12).map((i) => i + 1);
 
 export const MONTH_NAMES = Info.months('long');
 
@@ -42,49 +34,33 @@ export const ReportPreFilters: FC<ReportPreFiltersProps> = ({
   onYearChange,
   onMonthChange,
 }) => {
+  const value = useMemo(
+    () => (year && month ? new Date(year, month - 1, 1) : null),
+    [year, month],
+  );
+
+  const handleChange = (date: Date | null) => {
+    if (date) {
+      onYearChange(date.getFullYear());
+      onMonthChange(date.getMonth() + 1);
+    } else {
+      onYearChange(undefined);
+      onMonthChange(undefined);
+    }
+  };
+
   return (
     <div className="d-flex align-items-center gap-3 mb-3 flex-wrap">
-      <div>
-        <Form.Label className="small mb-1" htmlFor="filterYear">
-          {translate('Year')}
-        </Form.Label>
-        <Form.Select
-          id="filterYear"
-          size="sm"
-          style={{ width: 'auto' }}
-          value={year ?? ''}
-          onChange={(e) =>
-            onYearChange(e.target.value ? Number(e.target.value) : undefined)
-          }
-        >
-          <option value="">{translate('All years')}</option>
-          {YEAR_OPTIONS.map((y) => (
-            <option key={y} value={y}>
-              {y}
-            </option>
-          ))}
-        </Form.Select>
-      </div>
       <div>
         <Form.Label className="small mb-1" htmlFor="filterMonth">
           {translate('Month')}
         </Form.Label>
-        <Form.Select
+        <MonthPicker
           id="filterMonth"
-          size="sm"
-          style={{ width: 'auto' }}
-          value={month ?? ''}
-          onChange={(e) =>
-            onMonthChange(e.target.value ? Number(e.target.value) : undefined)
-          }
-        >
-          <option value="">{translate('All months')}</option>
-          {MONTH_OPTIONS.map((m) => (
-            <option key={m} value={m}>
-              {MONTH_NAMES[m - 1]}
-            </option>
-          ))}
-        </Form.Select>
+          value={value}
+          onChange={handleChange}
+          placeholder={translate('All months')}
+        />
       </div>
     </div>
   );

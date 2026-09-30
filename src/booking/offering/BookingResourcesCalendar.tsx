@@ -1,11 +1,12 @@
 import { CalendarIcon } from '@phosphor-icons/react';
+import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import Flatpickr from 'react-flatpickr';
+
+import { Calendar, useCalendarLocale } from 'waldur-ui';
 
 import { getTimeOptions } from '@/booking/utils';
 import { parseDate } from '@/core/dateUtils';
-import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
 import { translate } from '@/i18n';
 
 import { BookingResource } from '../types';
@@ -22,18 +23,22 @@ interface BookingResourcesCalendarProps {
 export const BookingResourcesCalendar: FunctionComponent<
   BookingResourcesCalendarProps
 > = ({ bookingResources, refetch }) => {
-  const [dates, setDates] = useState(null);
+  const [dates, setDates] = useState<Date[] | null>(null);
+  const locale = useCalendarLocale();
 
   const enabledRanges = useMemo(() => {
     if (!bookingResources) return [];
-    return bookingResources.reduce<Array<{ from; to }>>((acc, event) => {
-      return acc.concat(
-        (event.attributes?.schedules ?? []).map((sch) => ({
-          from: sch.start.toString().split('T')[0],
-          to: sch.end.toString().split('T')[0],
-        })),
-      );
-    }, []);
+    return bookingResources.reduce<Array<{ from: string; to: string }>>(
+      (acc, event) => {
+        return acc.concat(
+          (event.attributes?.schedules ?? []).map((sch) => ({
+            from: sch.start.toString().split('T')[0],
+            to: sch.end.toString().split('T')[0],
+          })),
+        );
+      },
+      [],
+    );
   }, [bookingResources]);
 
   const itemsOfSelectedDate = useMemo(() => {
@@ -53,22 +58,25 @@ export const BookingResourcesCalendar: FunctionComponent<
     });
   }, [dates, bookingResources]);
 
-  useFlatpickrTheme();
+  // ISO-date ranges compare correctly as strings.
+  const isUnbooked = (day: Date) => {
+    const iso = DateTime.fromJSDate(day).toISODate();
+    return !enabledRanges.some(({ from, to }) => from <= iso && iso <= to);
+  };
 
   return (
     <Row className="booking-resource-items-calendar mb-10">
       <Col md="auto">
-        <Flatpickr
-          options={{
-            dateFormat: 'Y-m-d',
-            inline: true,
-            mode: 'single',
-            enable: enabledRanges,
-            showMonths: 2,
-          }}
-          value={dates}
-          className="form-control"
-          onChange={(_dates) => setDates(_dates)}
+        <Calendar
+          mode="single"
+          required
+          numberOfMonths={2}
+          showOutsideDays={false}
+          selected={dates?.[0]}
+          onSelect={(day) => setDates(day ? [day] : null)}
+          weekStartsOn={1}
+          locale={locale}
+          disabled={isUnbooked}
         />
       </Col>
       {dates && dates[0] ? (

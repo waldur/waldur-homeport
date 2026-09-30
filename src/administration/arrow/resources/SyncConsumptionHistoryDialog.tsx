@@ -6,7 +6,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, MonthPicker, parseDateValue, toIsoMonth } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -98,6 +98,7 @@ export const SyncConsumptionHistoryDialog = ({
           <CloseDialogButton label={translate('Cancel')} />
           <SubmitButton
             submitting={mutation.isPending}
+            disabled={!periodFrom || !periodTo || periodFrom > periodTo}
             label={translate('Sync')}
             onClick={() => mutation.mutate()}
           />
@@ -111,11 +112,16 @@ export const SyncConsumptionHistoryDialog = ({
       </p>
 
       <Form.Group className="mb-3">
-        <Form.Label>{translate('From period')}</Form.Label>
-        <Form.Control
-          type="month"
-          value={periodFrom}
-          onChange={(e) => setPeriodFrom(e.target.value)}
+        <Form.Label htmlFor="sync-history-period-from">
+          {translate('From period')}
+        </Form.Label>
+        <MonthPicker
+          id="sync-history-period-from"
+          value={parseDateValue(periodFrom)}
+          onChange={(month) => setPeriodFrom(toIsoMonth(month))}
+          maxDate={periodTo}
+          // Required: the dialog seeds a range and the API needs both ends.
+          clearable={false}
           disabled={mutation.isPending}
         />
         <Form.Text className="text-muted">
@@ -124,11 +130,16 @@ export const SyncConsumptionHistoryDialog = ({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>{translate('To period')}</Form.Label>
-        <Form.Control
-          type="month"
-          value={periodTo}
-          onChange={(e) => setPeriodTo(e.target.value)}
+        <Form.Label htmlFor="sync-history-period-to">
+          {translate('To period')}
+        </Form.Label>
+        <MonthPicker
+          id="sync-history-period-to"
+          value={parseDateValue(periodTo)}
+          onChange={(month) => setPeriodTo(toIsoMonth(month))}
+          minDate={periodFrom}
+          // Required: the dialog seeds a range and the API needs both ends.
+          clearable={false}
           disabled={mutation.isPending}
         />
         <Form.Text className="text-muted">

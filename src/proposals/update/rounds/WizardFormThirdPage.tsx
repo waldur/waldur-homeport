@@ -30,7 +30,6 @@ export const WizardFormThirdPage: FunctionComponent<
             name="allocation_date"
             required
             validate={required}
-            dateFormat="Y-m-d H:i"
             parse={(value) => (value ? formatISOWithoutZone(value) : value)}
             format={(value) => (value ? new Date(value) : value)}
             disabled={submitting}

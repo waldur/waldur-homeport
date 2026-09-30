@@ -263,3 +263,5 @@ export type {
   ScrollTrackSide,
   UseScrollTrackerOptions,
 } from './ScrollSpy';
+
+export * from './DatePicker';

@@ -8,7 +8,15 @@ import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import { Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { projectsList } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  Badge,
+  BaseButton,
+  DatePicker,
+  DateRangePicker,
+  parseDateValue,
+  toIsoDate,
+} from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -129,24 +137,22 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
             <Form.Label className="small mb-1" htmlFor="dlg-startAfter">
               {translate('Start date — after')}
             </Form.Label>
-            <Form.Control
+            <DatePicker
               id="dlg-startAfter"
-              type="date"
               size="sm"
-              value={startAfter}
-              onChange={(e) => setStartAfter(e.target.value)}
+              value={parseDateValue(startAfter)}
+              onChange={(date) => setStartAfter(toIsoDate(date))}
             />
           </Col>
           <Col xs={6} md={4}>
             <Form.Label className="small mb-1" htmlFor="dlg-endBefore">
               {translate('End date — before')}
             </Form.Label>
-            <Form.Control
+            <DatePicker
               id="dlg-endBefore"
-              type="date"
               size="sm"
-              value={endBefore}
-              onChange={(e) => setEndBefore(e.target.value)}
+              value={parseDateValue(endBefore)}
+              onChange={(date) => setEndBefore(toIsoDate(date))}
             />
           </Col>
         </Row>
@@ -865,34 +871,33 @@ export const OrganisationReportsTab: FC = () => {
                 <Form.Control
                   id="projectSearch"
                   type="text"
-                  size="sm"
                   placeholder={translate('Name search (applied at load time)…')}
                   value={projectSearch}
                   onChange={(e) => setProjectSearch(e.target.value)}
                 />
               </Col>
-              <Col xs={6} md={4}>
-                <Form.Label className="small mb-1" htmlFor="projectStartAfter">
-                  {translate('Started after')}
+              <Col xs={12} md={4}>
+                <Form.Label
+                  className="small mb-1"
+                  htmlFor="reportProjectPeriod"
+                >
+                  {translate('Project period')}
                 </Form.Label>
-                <Form.Control
-                  id="projectStartAfter"
-                  type="date"
-                  size="sm"
-                  value={projectStartAfter}
-                  onChange={(e) => setProjectStartAfter(e.target.value)}
-                />
-              </Col>
-              <Col xs={6} md={4}>
-                <Form.Label className="small mb-1" htmlFor="projectEndBefore">
-                  {translate('Ended before')}
-                </Form.Label>
-                <Form.Control
-                  id="projectEndBefore"
-                  type="date"
-                  size="sm"
-                  value={projectEndBefore}
-                  onChange={(e) => setProjectEndBefore(e.target.value)}
+                <DateRangePicker
+                  id="reportProjectPeriod"
+                  value={
+                    projectStartAfter && projectEndBefore
+                      ? [
+                          parseDateValue(projectStartAfter)!,
+                          parseDateValue(projectEndBefore)!,
+                        ]
+                      : undefined
+                  }
+                  onChange={(range) => {
+                    setProjectStartAfter(range ? toIsoDate(range[0]) : '');
+                    setProjectEndBefore(range ? toIsoDate(range[1]) : '');
+                  }}
+                  clearable
                 />
               </Col>
             </Row>

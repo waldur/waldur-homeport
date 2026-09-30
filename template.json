@@ -3365,11 +3365,6 @@
       "feature_area": "workflow-steps"
     }
   },
-  "All years": {
-    "context": {
-      "feature_area": "reports"
-    }
-  },
   "All your citizenships": {
     "context": {
       "feature_area": "support"
@@ -18262,11 +18257,6 @@
       "feature_area": "proposals"
     }
   },
-  "Ended before": {
-    "context": {
-      "feature_area": "reports"
-    }
-  },
   "Ending": {
     "context": {
       "primary_ui_type": "title",
@@ -19582,6 +19572,11 @@
     }
   },
   "Export as CSV": {
+    "context": {
+      "feature_area": "core"
+    }
+  },
+  "Export as PDF": {
     "context": {
       "feature_area": "core"
     }
@@ -40232,6 +40227,11 @@
       "feature_area": "managed-projects"
     }
   },
+  "Project period": {
+    "context": {
+      "feature_area": "reports"
+    }
+  },
   "Project permanently deleted.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -51385,11 +51385,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "matrix"
-    }
-  },
-  "Started after": {
-    "context": {
-      "feature_area": "reports"
     }
   },
   "Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.": {

@@ -10,7 +10,6 @@ import {
 import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { type FieldArrayRenderProps } from 'react-final-form-arrays';
-import { type DateTimePickerProps } from 'react-flatpickr';
 import { usePrevious } from 'react-use';
 
 import { BaseButton } from 'waldur-ui';
@@ -43,7 +42,7 @@ const INITIAL_CONFIG = {
 type OfferingSchedulerProps = FieldArrayRenderProps<BookingProps, any>;
 
 const getDisabledRangeOfDates = (weekends, daysOfWeek) => {
-  const disabledRanges: DateTimePickerProps['options']['disable'] = [];
+  const disabledRanges: Array<(date: Date) => boolean> = [];
   disabledRanges.push(function (date) {
     if (!weekends) {
       if (date.getDay() === 0 || date.getDay() === 6) {
