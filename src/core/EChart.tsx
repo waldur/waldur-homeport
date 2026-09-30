@@ -14,6 +14,7 @@ interface ChartProps {
   exportPdf?: boolean;
   exportCsv?: boolean;
   exportExcel?: boolean;
+  exportPng?: boolean;
   exportTitle?: string;
 }
 

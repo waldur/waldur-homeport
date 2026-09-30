@@ -1,15 +1,12 @@
-import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import React, { useCallback, useRef } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-} from '@/table/ActionsDropdown';
 import exportAs from '@/table/exporters';
 import { ExportData } from '@/table/exporters/types';
+
+import { ChartExportDropdown } from './ChartExportDropdown';
 
 interface ChartCardProps {
   title: string;
@@ -70,38 +67,17 @@ export const ChartCard: React.FC<ChartCardProps> = ({
         </Card.Title>
         <div className="card-toolbar d-flex gap-4 m-0">
           {actions}
-          <ActionsDropdownComponent
-            labeled
+          <ChartExportDropdown
             disabled={isEmpty}
-            align="end"
-            drop="down"
             size="md"
-            className="w-auto"
-            label={
-              <>
-                <span className="svg-icon svg-icon-2 me-1">
-                  <DownloadSimpleIcon weight="bold" />
-                </span>
-                {translate('Export')}
-              </>
+            onExportPng={showPNG ? handleExportPNG : undefined}
+            onExportCsv={
+              getExportData ? () => handleExportData('csv') : undefined
             }
-          >
-            {showPNG && (
-              <ActionsDropdownItem onSelect={handleExportPNG}>
-                {translate('Export as PNG')}
-              </ActionsDropdownItem>
-            )}
-            {getExportData && (
-              <>
-                <ActionsDropdownItem onSelect={() => handleExportData('csv')}>
-                  {translate('Export as CSV')}
-                </ActionsDropdownItem>
-                <ActionsDropdownItem onSelect={() => handleExportData('excel')}>
-                  {translate('Export as XLSX')}
-                </ActionsDropdownItem>
-              </>
-            )}
-          </ActionsDropdownComponent>
+            onExportExcel={
+              getExportData ? () => handleExportData('excel') : undefined
+            }
+          />
         </div>
       </Card.Header>
       <Card.Body className="pt-2">
