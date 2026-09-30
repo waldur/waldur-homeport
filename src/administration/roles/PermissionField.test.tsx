@@ -31,7 +31,7 @@ const search = () => screen.getByPlaceholderText('Search...');
 // "Customer" from also matching "Customer actions for resources".
 const groupItem = (label: string) => {
   const item = screen
-    .getAllByRole('button')
+    .getAllByRole('tab')
     .find(
       (candidate) =>
         ['None', 'Partial', 'Full'].includes(
