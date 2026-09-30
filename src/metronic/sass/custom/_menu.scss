@@ -149,24 +149,11 @@ $menu-link-highlight-exclude: ':not(.disabled):not(.active):not(.here)';
   );
 }
 
-// RoleAndProjectSelectField.tsx's popup combines this with
-// menu-state-bg-light (source order below wins the title colour on
-// :hover the same way — primary-700 over the bg-light block's own
-// gray-700 — so [data-highlighted] keeps that same layering: no
-// background of its own here, since menu-state-bg-light's rule above
-// already supplies it).
-.menu-state-primary
-  .menu-link[data-highlighted]#{$menu-link-highlight-exclude} {
-  transition: $transition-link;
-  @include menu-link-theme(
-    $primary-700,
-    $primary-700,
-    $primary-700,
-    $primary-700,
-    null
-  );
-}
-
+// RoleAndProjectSelectField.tsx's popup combines menu-state-title-primary
+// with menu-state-bg-light: source order below wins the title colour over
+// the bg-light block's gray-700, while the background comes from
+// menu-state-bg-light's rule above.
+//
 // menu-hover-title-primary (BoxRadioField.tsx's version-options menu) is a
 // different Metronic class family — menu/_theme.scss's own generated
 // .menu-hover-title-#{$name} rather than this file's custom
