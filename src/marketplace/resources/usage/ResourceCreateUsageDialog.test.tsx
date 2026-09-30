@@ -132,6 +132,50 @@ describe('ResourceCreateUsageDialog', () => {
     expect(body.contains(footer)).toBe(false);
   });
 
+  it('switches to a component picked from the overflow menu', async () => {
+    const user = userEvent.setup();
+    vi.mocked(getProviderUsageComponents).mockResolvedValue({
+      ...mockData,
+      components: [
+        mockData.components[0],
+        {
+          ...mockData.components[0],
+          uuid: 'comp-2',
+          name: 'Component 2',
+          type: 'comp2',
+        },
+      ],
+    });
+    // jsdom has no layout, so fake the second tab wrapping onto a new row.
+    const rectSpy = vi
+      .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
+      .mockImplementation(function (this: HTMLElement) {
+        const wrapped =
+          this.classList.contains('nav-item') &&
+          this.textContent.includes('Component 2');
+        return { top: wrapped ? 40 : 0 } as DOMRect;
+      });
+
+    renderDialog(props);
+    const overflowTrigger = await waitFor(() => {
+      const trigger = screen
+        .getAllByRole('button')
+        .find((button) => button.getAttribute('aria-haspopup') === 'menu');
+      expect(trigger).toBeDefined();
+      return trigger;
+    });
+
+    await user.click(overflowTrigger);
+    await user.click(
+      await screen.findByRole('menuitem', { name: /Component 2/ }),
+    );
+
+    expect(
+      screen.getByRole('tab', { name: /Component 2/, selected: true }),
+    ).toBeInTheDocument();
+    rectSpy.mockRestore();
+  });
+
   it('submits form with usage values', async () => {
     const user = userEvent.setup();
     vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);

@@ -4,13 +4,11 @@ import {
   WarningCircleIcon,
 } from '@phosphor-icons/react';
 import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
-import SelectableContext from '@restart/ui/SelectableContext';
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
 import {
   FunctionComponent,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -91,10 +89,9 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
   const form = useForm();
   const formState = form.getState();
   const errors = formState.errors || {};
-  // Tab.Container below is uncontrolled (defaultActiveKey only), so switching
-  // tabs from this overflow dropdown has to go through the same internal
-  // SelectableContext that Nav.Link's own eventKey taps into.
-  const selectTab = useContext(SelectableContext);
+  // Controlled so the overflow menu, which sits outside the tab Nav, can
+  // switch tabs too.
+  const [activeTab, setActiveTab] = useState(props.components[0]?.uuid);
 
   const handleWindowResize = useCallback(
     debounce(() => {
@@ -304,7 +301,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
         )}
       </div>
       {props.components.length > 0 && (
-        <Tab.Container defaultActiveKey={props.components[0].uuid}>
+        <Tab.Container activeKey={activeTab} onSelect={setActiveTab}>
           <div className="d-flex">
             <Nav
               ref={refNav}
@@ -388,9 +385,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                             <ActionsDropdownItem
                               key={component.uuid}
                               className="d-flex justify-content-between"
-                              onClick={(event) =>
-                                selectTab?.(component.uuid, event)
-                              }
+                              onClick={() => setActiveTab(component.uuid)}
                             >
                               {Boolean(errors.components?.[component.type]) && (
                                 <Tooltip
