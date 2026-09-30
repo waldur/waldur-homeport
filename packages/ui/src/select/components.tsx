@@ -109,7 +109,12 @@ export const MultiSelectOption = (props) => {
   );
 };
 export const MultiSelectValue = (props: MultiValueProps) => (
-  <Tag onClear={props.removeProps.onClick}>{props.children}</Tag>
+  // `.tag` is a flex row, so a bare text child wraps onto a second line and
+  // doubles the control's height in a narrow select. Truncate it instead; the
+  // values past the limit already collapse into a `+N` tag with a tooltip.
+  <Tag onClear={props.removeProps.onClick} className="max-w-full">
+    <span className="truncate">{props.children}</span>
+  </Tag>
 );
 
 export const MultiSelectLimitedValueContainer = (props) => {
