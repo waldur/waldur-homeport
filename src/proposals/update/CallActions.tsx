@@ -6,10 +6,12 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import {
+  callProposalProjectRoleMappingsCount,
   proposalProtectedCallsActivate,
   proposalProtectedCallsArchive,
 } from 'waldur-js-client';
 
+import { fetchResultCount } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -31,6 +33,8 @@ import {
   callWorkflowStepsKey,
   fetchCallWorkflowSteps,
 } from '../workflow/queries';
+
+import { NoRoleMappingsWarning } from './role-mapping/NoRoleMappingsWarning';
 
 const DuplicateCallDialog = lazyComponent(() =>
   import('@/proposals/details/DuplicateCallDialog').then((m) => ({
@@ -111,10 +115,27 @@ export const CallActions: FC<CallActionsProps> = ({
     async (state, label: string) => {
       try {
         if (state === 'activate') {
+          // Counted at click time so a mapping added a moment ago on the Role
+          // mapping tab clears the warning. A failed count stays silent: the
+          // warning is advice, not a gate.
+          const hasRoleMappings = await callProposalProjectRoleMappingsCount({
+            query: { call_uuid: call.uuid },
+          }).then(
+            (result) => fetchResultCount(result) > 0,
+            () => true,
+          );
+          const notice = translate(
+            'Please make sure the call configuration is complete before activating the call. Once activated, the configuration can no longer be changed.',
+          );
           await confirm(
             translate('Activate call'),
-            translate(
-              'Please make sure the call configuration is complete before activating the call. Once activated, the configuration can no longer be changed.',
+            hasRoleMappings ? (
+              notice
+            ) : (
+              <>
+                {notice}
+                <NoRoleMappingsWarning className="mt-5" />
+              </>
             ),
             {
               positiveButton: translate('Activate'),

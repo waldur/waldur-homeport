@@ -15,6 +15,7 @@ import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { NoRoleMappingsWarning } from './NoRoleMappingsWarning';
 import { RoleMappingCreateButton } from './RoleMappingCreateButton';
 import { RoleMappingDeleteAction } from './RoleMappingDeleteAction';
 import { RoleMappingEditAction } from './RoleMappingEditAction';
@@ -79,6 +80,7 @@ export const CallRoleMappingsList = (props) => {
           <CallRoleMappingsRowActions row={row} refetch={tableProps.fetch} />
         )
       }
+      placeholderComponent={<NoRoleMappingsWarning className="m-6" />}
       showPageSizeSelector
     />
   );
