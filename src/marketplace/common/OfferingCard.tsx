@@ -6,8 +6,6 @@ import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { CARD_STYLES, DEFAULT_CARD_STYLE } from './cards/index';
 import { CardStyleType } from './cards/types';
 
-import './OfferingCard.scss';
-
 interface OfferingCardProps {
   offering: Offering;
   variant?: CardStyleType;

@@ -6,7 +6,6 @@ import {
   OfferingStateOption,
   OfferingStateOptions,
 } from '@/table/generated/MarketplaceProviderOfferingsFilter';
-import './OfferingsStateFilter.scss';
 
 export const getStates = () => [
   { value: 'Draft', label: translate('Draft') },

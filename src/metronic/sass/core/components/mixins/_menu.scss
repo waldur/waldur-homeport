@@ -51,46 +51,6 @@
         }
       }
     }
-
-    .menu-fit & {
-      > .menu-item {
-        > .menu-content,
-        > .menu-link {
-          padding-left: #{$value};
-          padding-right: 0;
-        }
-
-        > .menu-sub:not([data-popper-placement]) {
-          > .menu-item {
-            > .menu-content,
-            > .menu-link {
-              padding-left: calc(#{2 * $value});
-              padding-right: 0;
-            }
-
-            > .menu-sub:not([data-popper-placement]) {
-              > .menu-item {
-                > .menu-content,
-                > .menu-link {
-                  padding-left: calc(#{3 * $value});
-                  padding-right: 0;
-                }
-
-                > .menu-sub:not([data-popper-placement]) {
-                  > .menu-item {
-                    > .menu-content,
-                    > .menu-link {
-                      padding-left: calc(#{4 * $value});
-                      padding-right: 0;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
   }
 }
 
@@ -124,14 +84,6 @@
       // Svg icon
       .svg-icon {
         @include svg-icon-color($icon-color);
-      }
-    }
-  }
-
-  @if ($bullet-color != null) {
-    .menu-bullet {
-      .bullet {
-        background-color: $bullet-color;
       }
     }
   }

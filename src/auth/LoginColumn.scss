@@ -40,10 +40,6 @@
   gap: 0.5rem;
 }
 
-.login-footer.footer-top {
-  margin-top: 0;
-}
-
 .login-footer .menu {
   flex-grow: 1;
   justify-content: space-between;
@@ -117,10 +113,6 @@
   }
 
   .powered-by {
-    display: none;
-  }
-
-  .login-footer.footer-top {
     display: none;
   }
 }

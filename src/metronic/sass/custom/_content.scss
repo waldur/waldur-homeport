@@ -31,9 +31,9 @@
     &:not(.nav-link) {
       color: $fg-disabled !important;
     }
-    &:not(.btn-icon):not(.btn-link):not(.text-btn):not(.text-link):not(
-        .nav-link
-      ):not(.text-anchor) {
+    &:not(.btn-icon):not(.text-btn):not(.text-link):not(.nav-link):not(
+        .text-anchor
+      ) {
       background-color: $btn-bg-disable !important;
       border-color: $btn-bg-disable !important;
     }

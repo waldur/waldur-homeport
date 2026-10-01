@@ -10,8 +10,6 @@ import { PublicOfferingAttributesSection } from '@/marketplace/offerings/details
 import { isValidAttribute } from '@/marketplace/offerings/details/utils';
 import { Category } from '@/marketplace/types';
 
-import './PublicOfferingAttributes.scss';
-
 import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
 
 interface PublicOfferingAttributesProps {

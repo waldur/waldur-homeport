@@ -2,40 +2,20 @@
 // Menu Theme
 //
 
-// Theme text colors
-@each $name, $color in $theme-text-colors {
+// Theme text colors (only variants used across the application)
+@each $name,
+  $color
+    in (
+      'brand': $brand,
+      'gray-500': $gray-500,
+      'gray-600': $gray-600,
+      'gray-700': $gray-700,
+      'gray-800': $gray-800
+    )
+{
   .menu-#{$name} {
     .menu-item {
-      //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state($color, $color, $color, $color, null);
-    }
-  }
-
-  .menu-title-#{$name} {
-    .menu-item {
-      //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state($color, null, null, null, null);
-    }
-  }
-
-  .menu-icon-#{$name} {
-    .menu-item {
-      //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(null, $color, null, null, null);
-    }
-  }
-
-  .menu-bullet-#{$name} {
-    .menu-item {
-      //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(null, null, $color, null, null);
-    }
-  }
-
-  .menu-arrow-#{$name} {
-    .menu-item {
-      //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(null, null, null, $color, null);
+      @include menu-link-default-state($color, $color, null, $color, null);
     }
   }
 }
@@ -94,52 +74,6 @@
       null,
       null,
       get($menu, link, self, bg-color, active)
-    );
-  }
-}
-
-// Light primary background states
-.menu-active-bg-light-primary {
-  .menu-item {
-    @include menu-link-active-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-50
-    );
-  }
-}
-
-.menu-state-bg-light-primary {
-  .menu-item {
-    @include menu-link-show-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-50
-    );
-    @include menu-link-here-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-50
-    );
-    @include menu-link-hover-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-50
-    );
-    @include menu-link-active-state(
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-700,
-      $primary-50
     );
   }
 }
@@ -234,21 +168,5 @@
       $gray-700,
       $gray-50
     );
-  }
-}
-
-// Primary title states
-.menu-hover-title-primary {
-  .menu-item {
-    @include menu-link-hover-state($primary-700, null, null, null, null);
-  }
-}
-
-.menu-state-title-primary {
-  .menu-item {
-    @include menu-link-hover-state($primary-700, null, null, null, null);
-    @include menu-link-here-state($primary-700, null, null, null, null);
-    @include menu-link-show-state($primary-700, null, null, null, null);
-    @include menu-link-active-state($primary-700, null, null, null, null);
   }
 }
