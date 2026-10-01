@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { AccordionCard, Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { translate } from '@/i18n';
 
 import type { LockStats } from './api';

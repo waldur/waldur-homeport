@@ -90,10 +90,7 @@ export const PickRangeWholeDays: Story = {
 export const MinDateToday: Story = {
   render: render({ minDate: 'today' }),
   play: async () => {
-    // On the 1st, yesterday is in a month the picker doesn't show.
-    if (DateTime.now().day > 1) {
-      await expect(await isDayDisabled(daysFromToday(-1))).toBe(true);
-    }
+    await expect(await isDayDisabled(daysFromToday(-1))).toBe(true);
     await expect(await isDayDisabled(daysFromToday(0))).toBe(false);
   },
 };

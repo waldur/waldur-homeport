@@ -1,5 +1,11 @@
 import { FunctionComponent } from 'react';
-import { Accordion } from 'react-bootstrap';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { Report } from '@/marketplace/resources/types';
@@ -12,14 +18,19 @@ export const ShowReportComponent: FunctionComponent<
   ShowReportComponentProps
 > = (props) =>
   Array.isArray(props.report) ? (
-    <Accordion defaultActiveKey="0">
+    <Accordion
+      type="single"
+      collapsible
+      defaultValue="0"
+      className="rounded-md border-[1px] border-solid border-[var(--surface-card-border)]"
+    >
       {props.report.map((section, index) => (
-        <Accordion.Item eventKey={index.toString()} key={index}>
-          <Accordion.Header>{section.header}</Accordion.Header>
-          <Accordion.Body>
+        <AccordionItem value={index.toString()} key={index}>
+          <AccordionTrigger>{section.header}</AccordionTrigger>
+          <AccordionContent>
             <pre>{section.body}</pre>
-          </Accordion.Body>
-        </Accordion.Item>
+          </AccordionContent>
+        </AccordionItem>
       ))}
     </Accordion>
   ) : (

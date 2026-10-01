@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { Accordion } from 'react-bootstrap';
+
+import { Accordion } from 'waldur-ui';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { SavedFilterSelect } from './SavedFilterSelect';
@@ -38,7 +39,7 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
           formId={filtersFormId}
           filterPosition="sidebar"
         />
-        <Accordion alwaysOpen>{props.filters}</Accordion>
+        <Accordion type="multiple">{props.filters}</Accordion>
       </div>
     </TableFilterContext.Provider>
   );

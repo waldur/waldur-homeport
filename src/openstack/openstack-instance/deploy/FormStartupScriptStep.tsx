@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import { AccordionCard, AlertItem, Tooltip } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { BooleanGroup, MonacoGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';

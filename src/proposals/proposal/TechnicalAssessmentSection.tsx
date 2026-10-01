@@ -2,9 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { proposalProposalsStepChecklistResponsesList } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AccordionCard, Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { formatRelative } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { usesCallVocabulary } from '@/proposals/presentation';

@@ -7,9 +7,8 @@ import {
   openstackServerGroupsList,
 } from 'waldur-js-client';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { AccordionCard, BaseButton, Tooltip } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { useOrderFormData } from '@/marketplace/deploy/selectors';

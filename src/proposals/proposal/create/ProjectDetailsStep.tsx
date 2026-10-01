@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { Field } from 'react-final-form';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { isEmpty } from '@/core/utils';
 import { StringGroup, TextGroup } from '@/form';
 import { FormGroup } from '@/form';

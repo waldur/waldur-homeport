@@ -116,6 +116,9 @@ const goToMonth = async (date: DateLike, calendar = getCalendar()) => {
     const months = visibleMonths(calendar);
     if (months.includes(target)) return true;
     const direction = target < months[0] ? 'prev' : 'next';
+    if (isNavDisabled(direction, calendar)) {
+      return;
+    }
     const button = navButton(calendar, direction);
     if (!button) throw new Error(`No ${direction} month button`);
     if (isNavDisabled(direction, calendar)) return false;

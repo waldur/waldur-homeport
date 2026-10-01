@@ -1,6 +1,12 @@
 import { FC } from 'react';
-import { Accordion } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -26,22 +32,26 @@ export const ProjectCostChart: FC = () => {
   if (!project) return null;
 
   return (
-    <Accordion className="mb-7">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>
+    <Accordion
+      type="single"
+      collapsible
+      className="mb-7 rounded-md border-[1px] border-solid border-[var(--surface-card-border)]"
+    >
+      <AccordionItem value="chart">
+        <AccordionTrigger>
           <div className="fw-bolder">
             {translate('Project cost history')}
             {isLoadingChart && <LoadingSpinnerSimple className="ms-2" />}
           </div>
-        </Accordion.Header>
-        <Accordion.Body>
+        </AccordionTrigger>
+        <AccordionContent>
           {errorChart ? (
             <LoadingErred loadData={refetchChart} />
           ) : chartOptions ? (
             <EChart options={chartOptions} height="150px" />
           ) : null}
-        </Accordion.Body>
-      </Accordion.Item>
+        </AccordionContent>
+      </AccordionItem>
     </Accordion>
   );
 };

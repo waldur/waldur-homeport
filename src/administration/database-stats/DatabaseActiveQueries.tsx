@@ -1,9 +1,8 @@
 import { FC, useEffect, useMemo } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { AccordionCard, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';

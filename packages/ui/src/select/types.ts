@@ -23,6 +23,8 @@ interface SelectFieldMeta {
 export type CustomSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter' | 'tableCell';
+  /** `tableFilter` only: keep the inline menu permanently open (default). */
+  menuAlwaysOpen?: boolean;
   input?: SelectFieldInputProps;
   meta?: SelectFieldMeta;
   disabled?: boolean;
@@ -31,6 +33,8 @@ export type CustomSelectProps = {
 export type CustomCreatableSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter' | 'tableCell';
+  /** `tableFilter` only: keep the inline menu permanently open (default). */
+  menuAlwaysOpen?: boolean;
   input?: SelectFieldInputProps;
   meta?: SelectFieldMeta;
   disabled?: boolean;
@@ -39,6 +43,8 @@ export type CustomCreatableSelectProps = {
 export type CustomAsyncSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter' | 'tableCell';
+  /** `tableFilter` only: keep the inline menu permanently open (default). */
+  menuAlwaysOpen?: boolean;
   input?: SelectFieldInputProps;
   meta?: SelectFieldMeta;
   disabled?: boolean;
@@ -47,6 +53,8 @@ export type CustomAsyncSelectProps = {
 export type CustomAsyncCreatableSelectProps = {
   size?: 'sm';
   variant?: 'tableFilter' | 'tableCell';
+  /** `tableFilter` only: keep the inline menu permanently open (default). */
+  menuAlwaysOpen?: boolean;
   input?: SelectFieldInputProps;
   meta?: SelectFieldMeta;
   disabled?: boolean;

@@ -7,7 +7,8 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';

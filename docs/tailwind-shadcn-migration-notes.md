@@ -52,7 +52,7 @@ Waldur Homeport operates on two active UI component patterns:
 1. **Modern Tailwind / Radix Primitives (`packages/ui`, exported as `waldur-ui`)**
    - Built with pure Tailwind v4 utilities and CSS design tokens from `packages/design-tokens`.
    - Free of all Bootstrap and Metronic classes, SCSS variables, and runtime mixins.
-   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `DropdownMenu`, `Switch`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, and `LoadingSpinner`.
+   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `DropdownMenu`, `Switch`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, `LoadingSpinner`, `Accordion`, `AccordionCard`, and `Collapsible`.
    - Exports `buttonVariants()`, `ButtonVariant` and `ButtonSize` so elements that cannot be a `BaseButton` (links, Radix triggers that need a specific child shape) still get the exact same classes.
 
 2. **Transitional Shells (Radix Engine with Themed Skins)**
@@ -66,19 +66,21 @@ Waldur Homeport operates on two active UI component patterns:
 
 ### Component Standards & Usage Guide
 
-| UI Element                    | Standard Component          | Package        | Usage & Styling Notes                                                                        | Prohibited                                                  |
-| :---------------------------- | :-------------------------- | :------------- | :------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| **Alert / Banner**            | `AlertItem`                 | `waldur-ui`    | Pure Tailwind, `--surface-card-border`, 5 variants                                           | `react-bootstrap` `Alert`                                   |
-| **Badge / Pill**              | `Badge`                     | `waldur-ui`    | 15 variants × 3 tones, structural `border-[1px]`                                             | `react-bootstrap` `Badge`                                   |
-| **Tooltip**                   | `Tooltip`                   | `waldur-ui`    | Radix Tooltip (hover/focus) + Popover (click fallback)                                       | `react-bootstrap` `Tooltip`, `OverlayTrigger`               |
-| **Popover**                   | `Popover`, `PopoverContent` | `waldur-ui`    | Radix Popover with `--surface-card-*` tokens                                                 | `react-bootstrap` `Popover`                                 |
-| **Button**                    | `BaseButton`                | `waldur-ui`    | 12 variants × 3 sizes, inset `box-shadow` border, outline focus ring, semantic button tokens | `react-bootstrap` `Button`, hand-written `btn` class markup |
-| **Link styled as button**     | `Link` with `buttonVariant` | `@/core/Link`  | Same classes as `BaseButton` via `buttonVariants()`; keeps anchor semantics and routing      | `<a className="btn …">`                                     |
-| **Mutually exclusive choice** | `SegmentedControl`          | `waldur-ui`    | Radix RadioGroup, `neutral` / `brand` variants, button sizes                                 | `react-bootstrap` `ToggleButtonGroup`, `btn-group` markup   |
-| **Sidebar Navigation**        | `Sidebar`, `Sheet`          | `waldur-ui`    | Collapsible desktop rail + mobile Radix Sheet                                                | Metronic sidebar JS                                         |
-| **Table Actions**             | `ActionsDropdown`           | `@/table`      | Radix DropdownMenu with keyboard navigation                                                  | `react-bootstrap` `DropdownButton`                          |
-| **Header Chrome Menu**        | `NavMenu`                   | `@/navigation` | Radix DropdownMenu with responsive hover triggers                                            | N/A                                                         |
-| **Slide-Over Drawer**         | `DrawerRoot`                | `@/drawer`     | Radix Dialog with CSS keyframe transitions                                                   | N/A                                                         |
+| UI Element                    | Standard Component          | Package        | Usage & Styling Notes                                                                              | Prohibited                                                  |
+| :---------------------------- | :-------------------------- | :------------- | :------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
+| **Alert / Banner**            | `AlertItem`                 | `waldur-ui`    | Pure Tailwind, `--surface-card-border`, 5 variants                                                 | `react-bootstrap` `Alert`                                   |
+| **Badge / Pill**              | `Badge`                     | `waldur-ui`    | 15 variants × 3 tones, structural `border-[1px]`                                                   | `react-bootstrap` `Badge`                                   |
+| **Tooltip**                   | `Tooltip`                   | `waldur-ui`    | Radix Tooltip (hover/focus) + Popover (click fallback)                                             | `react-bootstrap` `Tooltip`, `OverlayTrigger`               |
+| **Popover**                   | `Popover`, `PopoverContent` | `waldur-ui`    | Radix Popover with `--surface-card-*` tokens                                                       | `react-bootstrap` `Popover`                                 |
+| **Button**                    | `BaseButton`                | `waldur-ui`    | 12 variants × 3 sizes, inset `box-shadow` border, outline focus ring, semantic button tokens       | `react-bootstrap` `Button`, hand-written `btn` class markup |
+| **Link styled as button**     | `Link` with `buttonVariant` | `@/core/Link`  | Same classes as `BaseButton` via `buttonVariants()`; keeps anchor semantics and routing            | `<a className="btn …">`                                     |
+| **Mutually exclusive choice** | `SegmentedControl`          | `waldur-ui`    | Radix RadioGroup, `neutral` / `brand` variants, button sizes                                       | `react-bootstrap` `ToggleButtonGroup`, `btn-group` markup   |
+| **Expandable panel group**    | `Accordion`                 | `waldur-ui`    | Radix Accordion, `single` / `multiple`, open header in runtime brand colour; closed panels unmount | `react-bootstrap` `Accordion`                               |
+| **Single expandable panel**   | `Collapsible`               | `waldur-ui`    | Radix Collapsible, unstyled; `keepMounted` keeps form fields mounted while closed                  | `react-bootstrap` `Collapse`, `useAccordionButton`          |
+| **Sidebar Navigation**        | `Sidebar`, `Sheet`          | `waldur-ui`    | Collapsible desktop rail + mobile Radix Sheet                                                      | Metronic sidebar JS                                         |
+| **Table Actions**             | `ActionsDropdown`           | `@/table`      | Radix DropdownMenu with keyboard navigation                                                        | `react-bootstrap` `DropdownButton`                          |
+| **Header Chrome Menu**        | `NavMenu`                   | `@/navigation` | Radix DropdownMenu with responsive hover triggers                                                  | N/A                                                         |
+| **Slide-Over Drawer**         | `DrawerRoot`                | `@/drawer`     | Radix Dialog with CSS keyframe transitions                                                         | N/A                                                         |
 
 The _Prohibited_ column is convention; the subset that lint enforces is listed under [Linting & Guardrails](#linting-guardrails) (`ToggleButtonGroup` and `btn-group` markup are not).
 
@@ -322,6 +324,21 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ---
 
+### Accordion & Collapsible
+
+`packages/ui/src/Accordion.tsx` and `packages/ui/src/Collapsible.tsx` (exported from `waldur-ui`).
+
+- **Accordion** is the shadcn recipe on Radix Accordion: each trigger is a real `<button>` inside an `<h3>` (Bootstrap/Metronic heading margin and type reset), with `aria-expanded`/`aria-controls` and arrow/Home/End keys between headers. Use `type="multiple"` where several panels stay open (table filters sidebar).
+- **Brand colour**: the open header is `text-brand-700` / `dark:text-brand-200`, the runtime tenant ramp. The chevron is a Phosphor icon in `currentColor`, so it always matches — react-bootstrap's version baked the build-time default green into a data-URI SVG.
+- **Motion**: 250ms ease-out slide. Accordion and plain Collapsible use `waldur-collapsible-down/-up` in `waldur-design-tokens/animations.css`, driven by Radix's `--radix-collapsible-content-height`; `overflow: hidden` lives in the keyframes so an open panel lets inline select menus overflow it. `Collapsible keepMounted` (its children stay mounted, so Radix's Presence can't drive keyframes) transitions grid rows 0fr ↔ 1fr instead, clipping only mid-slide and applying `hidden` once closed. Both respect `prefers-reduced-motion`.
+- **Unmount vs. `keepMounted`**:
+  > [!WARNING]
+  > Radix renders `isOpen && children` inside its Content, so a closed panel's children are **unmounted even with `forceMount`**. react-final-form fields inside it unregister and lose their values and validation. For panels holding form fields, use `<Collapsible keepMounted>`: children stay mounted and are only `hidden` while closed. `Accordion` has no such option — none of its intended users hold form fields.
+- **Call sites**: the table filters sidebar (`Accordion type="multiple"`), `AccordionCard` (now in `waldur-ui`; `Collapsible keepMounted`, same props as before; pure Tailwind with rem spacing ported from Metronic's card, and `--card-header-text` / `--card-title-text` / `--card-title-secondary-text` / `--card-header-solid-bg` tokens in `surfaceColors.css` — measured identical to the Metronic card in light and dark), `CategoriesPanel` (`Collapsible`) and a handful of standalone accordions, which add an outer border via `className` (`rounded-md border-[1px] border-solid border-[var(--surface-card-border)]`) — the component itself draws only separators between items.
+- **Enforcement**: `Accordion`, `AccordionContext` and `useAccordionButton` from `react-bootstrap` (and `react-bootstrap/Accordion`) are prohibited in `RESTRICTED_IMPORTS`.
+
+---
+
 ### Buttons
 
 Three primitives in `waldur-ui` (`packages/ui/src`) and `Link` in `@/core/Link` make up the application's unified button architecture:
@@ -427,14 +444,14 @@ Once no element rendered a literal `.btn` class, the Bootstrap/Metronic button C
 
 These do not depend on `.btn`:
 
-| Class                                             | Why it stays                                                                                                                                                                                                                      |
-| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Class                                             | Why it stays                                                                                                                                                                                                     |
+| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `.btn-no-focus`                                   | Standalone helper in `core/components/buttons/_base.scss` that callers pass as a plain `className` to a `BaseButton`. Removes the box-shadow glow only; `BaseButton`'s focus ring is an outline, so it survives. |
-| `.btn-nav-item`                                   | Header icon buttons (`custom/_nav.scss`)                                                                                                                                                                                          |
-| `.btn-close`                                      | Bootstrap's modal close control (`bootstrap/scss/close`)                                                                                                                                                                          |
-| `.btn-text-align`                                 | Text alignment helper used on a `div`                                                                                                                                                                                             |
-| `.dropdown-toggle.btn-icon`                       | `.disabled-view` rule that hides row-action toggles (see [`ActionsDropdown`](#actionsdropdown-actionitem))                                                                                                                        |
-| `$btn-*` SCSS variables and `_tokens.scss` values | Still read by AI-assistant and other component styles                                                                                                                                                                             |
+| `.btn-nav-item`                                   | Header icon buttons (`custom/_nav.scss`)                                                                                                                                                                         |
+| `.btn-close`                                      | Bootstrap's modal close control (`bootstrap/scss/close`)                                                                                                                                                         |
+| `.btn-text-align`                                 | Text alignment helper used on a `div`                                                                                                                                                                            |
+| `.dropdown-toggle.btn-icon`                       | `.disabled-view` rule that hides row-action toggles (see [`ActionsDropdown`](#actionsdropdown-actionitem))                                                                                                       |
+| `$btn-*` SCSS variables and `_tokens.scss` values | Still read by AI-assistant and other component styles                                                                                                                                                            |
 
 **Guardrail**: `no-bootstrap-button-markup` is an error with no allowlist, so hand-written `btn` markup cannot come back unnoticed (see [Custom ESLint Rules Matrix](#custom-eslint-rules-matrix)).
 
@@ -448,14 +465,15 @@ These do not depend on `.btn`:
 
 Configured in `eslint.config.js` via `no-restricted-imports` (`RESTRICTED_IMPORTS`). Each entry has a `message` that names the replacement:
 
-| `react-bootstrap` import    | Use instead                                                                            |
-| :-------------------------- | :------------------------------------------------------------------------------------- |
-| `Badge`                     | `Badge` from `waldur-ui`                                                               |
-| `Tooltip`, `OverlayTrigger` | `Tooltip` (or `Popover`) from `waldur-ui`                                              |
-| `Popover`                   | `Popover` from `waldur-ui`                                                             |
-| `Alert`                     | `AlertItem` from `waldur-ui`                                                           |
-| `Button`                    | `BaseButton` from `waldur-ui` (or `SubmitButton` / `CloseDialogButton` where they fit) |
-| `DropdownButton`            | `ActionsDropdown`                                                                      |
+| `react-bootstrap` import                              | Use instead                                                                            |
+| :---------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| `Badge`                                               | `Badge` from `waldur-ui`                                                               |
+| `Tooltip`, `OverlayTrigger`                           | `Tooltip` (or `Popover`) from `waldur-ui`                                              |
+| `Popover`                                             | `Popover` from `waldur-ui`                                                             |
+| `Alert`                                               | `AlertItem` from `waldur-ui`                                                           |
+| `Button`                                              | `BaseButton` from `waldur-ui` (or `SubmitButton` / `CloseDialogButton` where they fit) |
+| `DropdownButton`                                      | `ActionsDropdown`                                                                      |
+| `Accordion`, `AccordionContext`, `useAccordionButton` | `Accordion` or `Collapsible` from `waldur-ui`                                          |
 
 Each is blocked both as a named import from `react-bootstrap` and as a deep import (`react-bootstrap/Badge`, …). A genuinely new exception belongs on the offending line as `// eslint-disable-next-line no-restricted-imports -- <reason>`.
 

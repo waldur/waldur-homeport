@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 

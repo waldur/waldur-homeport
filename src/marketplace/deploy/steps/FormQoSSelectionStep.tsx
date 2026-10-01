@@ -3,7 +3,8 @@ import { useEffect, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Offering } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';

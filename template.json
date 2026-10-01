@@ -56494,11 +56494,6 @@
       "feature_area": "thread"
     }
   },
-  "Toggle": {
-    "context": {
-      "feature_area": "core"
-    }
-  },
   "Toggle camera": {
     "context": {
       "feature_area": "call"

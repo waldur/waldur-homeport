@@ -1,8 +1,7 @@
 import { CeleryWorkerStats } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AccordionCard, Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 

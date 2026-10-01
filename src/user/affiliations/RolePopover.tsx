@@ -1,5 +1,11 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { Accordion, Card } from 'react-bootstrap';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'waldur-ui';
 
 import { PermissionOptions } from '@/administration/roles/PermissionOptions';
 import { ENV } from '@/core/config';
@@ -14,15 +20,18 @@ const RoleDetailsDialog = ({ role }) => (
       roleName: role?.description || role?.name,
     })}
   >
-    {PermissionOptions.filter((entity) =>
-      entity.options.find((option) =>
-        (role?.permissions || []).includes(option.value),
-      ),
-    ).map((entity, entityIndex) => (
-      <Accordion key={entityIndex}>
-        <Card>
-          <Accordion.Header>{entity.label}</Accordion.Header>
-          <Accordion.Body>
+    <Accordion
+      type="multiple"
+      className="rounded-md border-[1px] border-solid border-[var(--surface-card-border)]"
+    >
+      {PermissionOptions.filter((entity) =>
+        entity.options.find((option) =>
+          (role?.permissions || []).includes(option.value),
+        ),
+      ).map((entity, entityIndex) => (
+        <AccordionItem key={entityIndex} value={String(entityIndex)}>
+          <AccordionTrigger>{entity.label}</AccordionTrigger>
+          <AccordionContent>
             <ul>
               {entity.options
                 .filter((option) => role.permissions.includes(option.value))
@@ -30,10 +39,10 @@ const RoleDetailsDialog = ({ role }) => (
                   <li key={optionIndex}>{option.label}</li>
                 ))}
             </ul>
-          </Accordion.Body>
-        </Card>
-      </Accordion>
-    ))}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
   </ModalDialog>
 );
 

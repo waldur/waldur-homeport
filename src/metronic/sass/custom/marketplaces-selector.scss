@@ -50,8 +50,9 @@
       }
     }
 
-    // Accordion group headers should not look like a selected category
-    .accordion > .list-group-item.active {
+    // Group header rows (CategoriesPanel) should not look like a selected
+    // category while expanded
+    .category-group > .list-group-item.active {
       @if isDarkMode() {
         background-color: $gray-50 !important;
       } @else {

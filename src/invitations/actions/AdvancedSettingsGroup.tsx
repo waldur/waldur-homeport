@@ -1,7 +1,8 @@
 import { useFormState } from 'react-final-form';
 
+import { AccordionCard } from 'waldur-ui';
+
 import { validateEmailPatterns } from '@/administration/auto-provisioning-rules/utils';
-import { AccordionCard } from '@/core/AccordionCard';
 import { BooleanGroup, CommaSeparatedListGroup } from '@/form';
 import { translate } from '@/i18n';
 

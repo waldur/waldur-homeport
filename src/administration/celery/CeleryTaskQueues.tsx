@@ -6,9 +6,8 @@ import {
   CeleryTask,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AccordionCard, Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { translate } from '@/i18n';
 
 import { CeleryTaskTable } from './CeleryTaskTable';

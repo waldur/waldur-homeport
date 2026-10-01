@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { AlertItem, Badge } from 'waldur-ui';
+import { AccordionCard, AlertItem, Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';

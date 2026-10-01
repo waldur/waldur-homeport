@@ -33,10 +33,9 @@ import { TableFilterContainer } from './TableFilterContainer';
  *
  * Each filter field renders through `TableSidebarFilterItem`
  * (TableFilterItem.tsx), a distinct component from the "menu" popover's
- * `TableMenuFilterItem` — an `Accordion.Item` per filter, collapsed by
- * default, its field deferred-mounted until actually expanded (a real,
- * documented fix in that file: react-bootstrap's `Accordion.Body` mounts
- * on render regardless of collapsed state, and every field mounting a
+ * `TableMenuFilterItem` — a waldur-ui `AccordionItem` per filter, collapsed
+ * by default, its field mounted only once expanded (Radix unmounts closed
+ * panels; see that file for why this matters: every field mounting a
  * react-select at once — each with its own forced `autoFocus` — starved
  * the main thread for over a second).
  *

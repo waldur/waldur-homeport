@@ -150,3 +150,37 @@
     height: 0;
   }
 }
+
+/**
+ * waldur-ui Accordion / Collapsible open-close slide, at the sidebar
+ * accordion's 250ms ease-out. Radix sets --radix-collapsible-content-height
+ * on both (Accordion's Content is a Collapsible Content), measured in a
+ * layout effect before the opening frame is painted.
+ *
+ * `overflow: hidden` lives in the keyframes, not on the element: it must
+ * clip only while the height animates (as Bootstrap's `.collapsing` did).
+ * Left on an open panel it clips anything that pops out of it — a
+ * react-select menu — and react-select's scroll-menu-into-view then scrolls
+ * the clipped panel itself, hiding the top of the field.
+ */
+@keyframes waldur-collapsible-down {
+  from {
+    height: 0;
+    overflow: hidden;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    overflow: hidden;
+  }
+}
+
+@keyframes waldur-collapsible-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+    overflow: hidden;
+  }
+  to {
+    height: 0;
+    overflow: hidden;
+  }
+}

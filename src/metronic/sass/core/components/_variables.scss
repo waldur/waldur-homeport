@@ -833,30 +833,6 @@ $card-header-height: 70px !default; // Custom variable
 
 $card-border-enabled: if(isDarkMode(), true, false) !default; // Custom variable
 
-// Accordion
-$accordion-color: $body-color !default;
-$accordion-padding-y: 1.5rem !default;
-$accordion-padding-x: 1.5rem !default;
-$accordion-border-color: $border-color !default;
-$accordion-border-radius: $border-radius !default;
-
-$accordion-body-padding-y: $accordion-padding-y !default;
-$accordion-body-padding-x: $accordion-padding-x !default;
-
-$accordion-button-padding-y: $accordion-padding-y !default;
-$accordion-button-padding-x: $accordion-padding-x !default;
-$accordion-transition:
-  $btn-transition,
-  border-radius 0.15s ease !default;
-$accordion-button-active-bg: $gray-100 !default;
-$accordion-button-active-color: $primary !default;
-
-$accordion-button-focus-border-color: $border-color !default;
-$accordion-button-focus-box-shadow: none !default;
-
-$accordion-icon-width: 1.15rem !default;
-$accordion-icon-active-color: $accordion-button-active-color !default;
-
 // Modals
 
 // Padding applied to the modal body

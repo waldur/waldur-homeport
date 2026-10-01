@@ -6,7 +6,8 @@ import {
   proposalProposalsSubmitStepChecklistAnswers,
 } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import {
