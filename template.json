@@ -32578,6 +32578,11 @@
       "feature_area": "project-templates"
     }
   },
+  "No role mappings": {
+    "context": {
+      "feature_area": "role-mapping"
+    }
+  },
   "No roles are available for this offering in your organization.": {
     "context": {
       "feature_area": "team"
@@ -40496,6 +40501,11 @@
         }
       },
       "feature_area": "openportal"
+    }
+  },
+  "Projects allocated from approved proposals will have nobody on them: not the applicant, not the proposal team. Mappings can be added at any time, but only apply to proposals approved afterwards.": {
+    "context": {
+      "feature_area": "role-mapping"
     }
   },
   "Projects by OECD classification": {
