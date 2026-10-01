@@ -3,10 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { FC } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MatrixRoom } from 'waldur-js-client';
 
+import { ENV } from '@/core/config';
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { renderWithProviders } from '@/test/harness';
 
 import { ProjectMatrixChat } from './ProjectMatrixChat';
@@ -41,13 +43,64 @@ const room = (state: string): MatrixRoom =>
     modified: new Date().toISOString(),
   }) as MatrixRoom;
 
-const renderTab = (state: string) => {
-  h.rooms = [room(state)];
+const STAFF = { is_staff: true };
+const OWNER = {
+  is_staff: false,
+  permissions: [
+    {
+      scope_type: 'customer',
+      scope_uuid: 'customer-uuid',
+      role_name: RoleEnum.CUSTOMER_OWNER,
+    },
+  ],
+};
+const MANAGER = {
+  is_staff: false,
+  permissions: [
+    {
+      scope_type: 'project',
+      scope_uuid: 'project-uuid',
+      role_name: RoleEnum.PROJECT_MANAGER,
+    },
+  ],
+};
+const OTHER_CUSTOMER_OWNER = {
+  is_staff: false,
+  permissions: [
+    {
+      scope_type: 'customer',
+      scope_uuid: 'other-customer-uuid',
+      role_name: RoleEnum.CUSTOMER_OWNER,
+    },
+  ],
+};
+
+// hasPermission reads each role's permissions from ENV.roles; mirror the
+// backend default, where only owners carry MATRIX_ROOM.CREATE.
+const grantRoomCreation = (roleNames: string[]) =>
+  vi.spyOn(ENV, 'roles', 'get').mockReturnValue(
+    roleNames.map((name) => ({
+      name,
+      permissions: [PermissionEnum.CREATE_MATRIX_ROOM],
+    })) as any,
+  );
+
+const renderTab = (
+  state: string | null,
+  user: object = STAFF,
+  project: object = {},
+) => {
+  h.rooms = state ? [room(state)] : [];
   const store = configureStore([])({
     workspace: {
-      user: { is_staff: true },
-      customer: {},
-      project: { uuid: 'project-uuid', name: 'Project' },
+      user,
+      customer: { uuid: 'customer-uuid' },
+      project: {
+        uuid: 'project-uuid',
+        customer_uuid: 'customer-uuid',
+        name: 'Project',
+        ...project,
+      },
     },
   });
   return renderWithProviders(
@@ -65,6 +118,66 @@ const openRoomMenu = async () => {
 };
 
 describe('ProjectMatrixChat', () => {
+  beforeEach(() => {
+    grantRoomCreation([RoleEnum.CUSTOMER_OWNER]);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  // Mirrors the backend for staff and customer owners; support creates rooms
+  // from the admin rooms list instead.
+  it.each([
+    ['staff', STAFF],
+    ['a customer owner', OWNER],
+  ])('lets %s create the room when there is none', (_, user) => {
+    renderTab(null, user);
+
+    expect(
+      screen.getByRole('button', { name: 'Create chat room' }),
+    ).toBeInTheDocument();
+  });
+
+  it('lets a project manager create the room once their role carries the permission', () => {
+    grantRoomCreation([RoleEnum.CUSTOMER_OWNER, RoleEnum.PROJECT_MANAGER]);
+    renderTab(null, MANAGER);
+
+    expect(
+      screen.getByRole('button', { name: 'Create chat room' }),
+    ).toBeInTheDocument();
+  });
+
+  it('offers no room creation to an owner whose role lacks the permission', () => {
+    grantRoomCreation([]);
+    renderTab(null, OWNER);
+
+    expect(
+      screen.queryByRole('button', { name: 'Create chat room' }),
+    ).toBeNull();
+  });
+
+  it('offers no room creation on a removed project', () => {
+    renderTab(null, OWNER, { is_removed: true });
+
+    expect(screen.getByText('No chat room')).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Create chat room' }),
+    ).toBeNull();
+  });
+
+  it.each([
+    ['a project manager', MANAGER],
+    ['an owner of another customer', OTHER_CUSTOMER_OWNER],
+  ])('offers no room creation to %s', (_, user) => {
+    renderTab(null, user);
+
+    expect(screen.getByText('No chat room')).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Create chat room' }),
+    ).toBeNull();
+  });
+
   it('promotes the conversation out of the menu while the room is healthy', async () => {
     renderTab('active');
 

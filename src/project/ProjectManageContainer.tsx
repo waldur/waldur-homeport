@@ -1,8 +1,10 @@
 import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { canCreateMatrixRoom } from '@/matrix/canCreateMatrixRoom';
 import {
   hasActiveMatrixRoom,
   useProjectMatrixRooms,
@@ -13,6 +15,7 @@ import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser, useProject } from '@/workspace/hooks';
+import { isOwnerOrStaff } from '@/workspace/selectors';
 
 import { useProjectPosixGroups } from './manage/useProjectPosixGroups';
 
@@ -65,8 +68,14 @@ const ProjectPosixGroups = lazyComponent(() =>
 export const ProjectManageContainer = () => {
   const project = useProject();
   const user = useUser();
+  const isOwnerOrStaffUser = useSelector(isOwnerOrStaff);
   const { data: rooms } = useProjectMatrixRooms(project?.uuid);
   const hasActiveRoom = hasActiveMatrixRoom(rooms);
+  // Owners and staff manage whatever room exists, even on a removed project,
+  // where its termination export lives.
+  const canManageRoom =
+    canCreateMatrixRoom(user, project) ||
+    (isOwnerOrStaffUser && Boolean(rooms?.length));
   const { data: posixGroups } = useProjectPosixGroups(project?.uuid);
   const hasPosixGroups = Boolean(posixGroups?.length);
 
@@ -121,8 +130,10 @@ export const ProjectManageContainer = () => {
           component: ProjectPosixGroups,
           title: translate('POSIX identities'),
         },
+        // Owners and staff need the tab before a room exists: its empty state
+        // is where they create one.
         isMatrixChatEnabled() &&
-          (user.is_staff || hasActiveRoom) && {
+          (canManageRoom || hasActiveRoom) && {
             key: 'chat',
             component: ProjectMatrixChat,
             title: translate('Chat'),
@@ -136,7 +147,7 @@ export const ProjectManageContainer = () => {
     [
       project,
       canSeeOrderApproval,
-      user.is_staff,
+      canManageRoom,
       hasActiveRoom,
       hasPosixGroups,
     ],

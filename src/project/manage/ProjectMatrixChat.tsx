@@ -10,6 +10,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StateIndicator } from '@/core/StateIndicator';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { canCreateMatrixRoom } from '@/matrix/canCreateMatrixRoom';
 import { useProjectMatrixRooms } from '@/matrix/chat/useProjectMatrixRooms';
 import { CreateMatrixRoomDialog } from '@/matrix/CreateMatrixRoomDialog';
 import { MatrixExportsList } from '@/matrix/MatrixExportsList';
@@ -31,11 +32,12 @@ import { ActionsDropdownSeparator } from '@/table/ActionsDropdown';
 import { renderFieldOrDash } from '@/table/utils';
 import {
   getProject,
+  getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isStaff as isStaffSelector,
 } from '@/workspace/selectors';
 
-// Lifecycle is staff-only here, deliberately stricter than the API.
+// Lifecycle after creation is staff-only here, deliberately stricter than the API.
 // Menu order is by cost: sync → connect (provisions, mints a token) →
 // disable → delete. One action is promoted beside it: the conversation while
 // healthy, otherwise whatever fixes the current state.
@@ -215,6 +217,7 @@ const RoomDetails: FC<{
 
 export const ProjectMatrixChat: FC = () => {
   const project = useSelector(getProject);
+  const user = useSelector(getUser);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const staff = useSelector(isStaffSelector);
   const { openDialog } = useModal();
@@ -252,18 +255,19 @@ export const ProjectMatrixChat: FC = () => {
     );
 
   if (!room) {
+    const canCreate = canCreateMatrixRoom(user, project);
     return (
       <NoResult
         title={translate('No chat room')}
         message={
-          staff
+          canCreate
             ? translate(
                 'No chat room has been created for this project yet. Create one to enable team communication via Matrix.',
               )
             : translate('No chat room has been created for this project.')
         }
-        callback={staff ? openCreateDialog : undefined}
-        buttonTitle={staff ? translate('Create chat room') : undefined}
+        callback={canCreate ? openCreateDialog : undefined}
+        buttonTitle={canCreate ? translate('Create chat room') : undefined}
       />
     );
   }
