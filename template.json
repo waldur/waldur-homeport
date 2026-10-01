@@ -36693,6 +36693,16 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Pattern must be at most {max} characters long.": {
+    "context": {
+      "variables": {
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "options"
+    }
+  },
   "Pattern used to generate project shortnames": {
     "context": {
       "feature_area": "project-templates"
@@ -42505,6 +42515,11 @@
   "Regular expression that a resource backend ID must fully match. Applied when importing a resource or setting its backend ID. Leave empty to allow any value.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Regular expression the whole value must match, for example [a-z][a-z0-9-]+. Use syntax common to Python and JavaScript.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Regular expression to limit flavors list": {
@@ -49577,6 +49592,11 @@
       "feature_area": "create"
     }
   },
+  "Set a validation pattern first.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Set access policy for {offeringName}": {
     "context": {
       "variables": {
@@ -50477,6 +50497,11 @@
         }
       },
       "feature_area": "create"
+    }
+  },
+  "Shown when the value does not match the pattern. Leave empty to show the pattern itself.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Shows a number calculated from a limit the customer sets (limit × factor), which the customer may override within a range. It is stored as an order attribute and changes no limit or price.": {},
@@ -53784,6 +53809,11 @@
   "The default security group cannot be deleted.": {
     "context": {
       "feature_area": "openstack-security-groups"
+    }
+  },
+  "The default value does not match the pattern.": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "The definition of role {role_name} has been changed.": {
@@ -64814,10 +64844,20 @@
       "feature_area": "single-import"
     }
   },
+  "Validation error message": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Validation method": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "organizations"
+    }
+  },
+  "Validation pattern": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Validator type": {
@@ -64853,6 +64893,16 @@
     }
   },
   "Value must be positive": {},
+  "Value must match the pattern {pattern}.": {
+    "context": {
+      "variables": {
+        "pattern": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
+    }
+  },
   "Value should be positive integer": {},
   "Value should not be greater than current limit ({limit}).": {
     "context": {

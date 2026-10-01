@@ -80,4 +80,28 @@ describe('EditOptionDialog', () => {
     ).toBeInTheDocument();
     expect(save).toBeDisabled();
   });
+
+  it('puts the pattern of a text option on its settings step', async () => {
+    renderWithProviders(
+      <EditOptionDialog
+        resolve={{
+          offering,
+          type: 'options',
+          refetch: vi.fn(),
+          option: {
+            type: 'text',
+            label: 'Notes',
+            name: 'notes',
+            pattern: '[^<>]*',
+          },
+        }}
+      />,
+    );
+    expect(
+      screen.getByRole('group', { name: 'Form progress' }),
+    ).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('wizard-submit-btn'));
+    expect(screen.getByDisplayValue('[^<>]*')).toBeInTheDocument();
+    expect(screen.getByText('Validation error message')).toBeInTheDocument();
+  });
 });

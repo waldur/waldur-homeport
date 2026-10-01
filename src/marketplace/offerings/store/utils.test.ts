@@ -65,3 +65,45 @@ describe('formatOption visible_if', () => {
     ).not.toHaveProperty('visible_if');
   });
 });
+
+describe('formatOption pattern', () => {
+  const base = {
+    name: 'slug',
+    label: 'Slug',
+    type: { value: 'string', label: 'String' },
+  } as any;
+
+  it('keeps the pattern and its message', () => {
+    const item = formatOption({
+      ...base,
+      pattern: '[a-z]+',
+      pattern_error: 'Letters only',
+    });
+    expect(item.pattern).toBe('[a-z]+');
+    expect(item.pattern_error).toBe('Letters only');
+  });
+
+  it('drops an empty pattern and a message without a pattern', () => {
+    const item = formatOption({ ...base, pattern: '', pattern_error: 'x' });
+    expect(item).not.toHaveProperty('pattern');
+    expect(item).not.toHaveProperty('pattern_error');
+  });
+
+  it('drops an empty message', () => {
+    const item = formatOption({
+      ...base,
+      pattern: '[a-z]+',
+      pattern_error: '',
+    });
+    expect(item).not.toHaveProperty('pattern_error');
+  });
+
+  it('drops a pattern left behind by a type change', () => {
+    const item = formatOption({
+      ...base,
+      type: { value: 'integer', label: 'Integer' },
+      pattern: '[a-z]+',
+    });
+    expect(item).not.toHaveProperty('pattern');
+  });
+});

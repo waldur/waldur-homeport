@@ -118,6 +118,64 @@ describe('OptionsForm Integration', () => {
     });
   });
 
+  describe('pattern', () => {
+    const slugOptions = {
+      order: ['slug'],
+      options: {
+        slug: {
+          type: 'string',
+          label: 'Project slug',
+          pattern: '[a-z][a-z0-9-]{2,30}',
+          pattern_error: 'Lowercase letters, digits and dashes.',
+        },
+      },
+    };
+
+    const renderWithSubmit = () => {
+      const onSubmit = vi.fn();
+      render(
+        <QueryClientProvider client={queryClient}>
+          <Form
+            onSubmit={onSubmit}
+            render={({ handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <OptionsForm options={slugOptions as any} />
+                <button type="submit">Submit</button>
+              </form>
+            )}
+          />
+        </QueryClientProvider>,
+      );
+      return onSubmit;
+    };
+
+    it('blocks a value that does not match and shows the provider message', async () => {
+      const onSubmit = renderWithSubmit();
+      await userEvent.type(screen.getByRole('textbox'), 'My Project');
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit).not.toHaveBeenCalled();
+      expect(
+        await screen.findByText('Lowercase letters, digits and dashes.'),
+      ).toBeInTheDocument();
+    });
+
+    it('submits a matching value', async () => {
+      const onSubmit = renderWithSubmit();
+      await userEvent.type(screen.getByRole('textbox'), 'my-project');
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+      expect(onSubmit.mock.calls[0][0].attributes).toEqual({
+        slug: 'my-project',
+      });
+    });
+
+    it('does not require an optional value', async () => {
+      const onSubmit = renderWithSubmit();
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('Core rendering behaviors', () => {
     it('renders nothing if options or order is empty', () => {
       renderForm({ options: {}, order: [] });
