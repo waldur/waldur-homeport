@@ -21,6 +21,7 @@ import { InternalNameField } from './InternalNameField';
 import { K8sDefaultsConfiguration } from './K8sDefaultsConfiguration';
 import { NumericOptionConfig } from './NumericOptionConfig';
 import { OptionTypeGroup } from './OptionTypeGroup';
+import { PatternConfiguration } from './PatternConfiguration';
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 import { StringOptionConfig } from './StringOptionConfig';
 import { VisibleIfConfiguration } from './VisibleIfConfiguration';
@@ -34,12 +35,21 @@ export const hasOptionSettings = (
   Boolean(type && type in OPTION_COMPONENTS) &&
   !(resourceType === 'resource_options' && type === 'component_formula');
 
+// The default value and the pattern it must match belong on the same step.
+const StringSettings = () => (
+  <>
+    <StringOptionConfig />
+    <PatternConfiguration />
+  </>
+);
+
 const OPTION_COMPONENTS = {
   integer: NumericOptionConfig,
   money: NumericOptionConfig,
   select_string: ChoicesOptionConfig,
   select_string_multi: ChoicesOptionConfig,
-  string: StringOptionConfig,
+  string: StringSettings,
+  text: PatternConfiguration,
   conditional_cascade: ConditionalCascadeConfiguration,
   component_multiplier: ComponentMultiplierConfiguration,
   component_formula: ComponentFormulaConfiguration,

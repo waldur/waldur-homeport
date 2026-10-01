@@ -5,6 +5,7 @@ import {
   ProviderPlanDetailsRequest,
 } from 'waldur-js-client';
 
+import { isPatternFieldType } from '@/marketplace/common/optionPattern';
 import { getFormLimitSerializer } from '@/marketplace/common/registry';
 
 import { PlanFormData, OptionFormData } from './types';
@@ -33,6 +34,8 @@ export const formatOption = (option: OptionFormData) => {
     component_sum_config,
     default_configs,
     visible_if,
+    pattern,
+    pattern_error,
     ...rest
   } = option;
   const item: any = {
@@ -103,6 +106,16 @@ export const formatOption = (option: OptionFormData) => {
   // A rule without a referenced option is an unfinished one; drop it.
   if (visible_if?.field && visible_if.values?.length) {
     item.visible_if = { field: visible_if.field, values: visible_if.values };
+  }
+
+  // Mastermind rejects a pattern on other types, and pattern_error without a
+  // pattern, so a pattern left behind by a type change or a cleared field
+  // must not be sent.
+  if (pattern && isPatternFieldType(item.type)) {
+    item.pattern = pattern;
+    if (pattern_error) {
+      item.pattern_error = pattern_error;
+    }
   }
 
   return item;

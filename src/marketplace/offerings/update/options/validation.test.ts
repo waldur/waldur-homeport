@@ -239,4 +239,52 @@ describe('Option form validation', () => {
       ).toEqual({});
     });
   });
+
+  describe('pattern validation', () => {
+    const withPattern = (values) =>
+      validateOptionForm({ type: { value: 'string' }, ...values });
+
+    it('accepts a valid pattern with a message', () => {
+      expect(
+        withPattern({ pattern: '[a-z]+', pattern_error: 'Letters only' }),
+      ).toEqual({});
+    });
+
+    it('rejects a pattern that does not compile', () => {
+      expect(withPattern({ pattern: '[a-z' })).toHaveProperty('pattern');
+    });
+
+    it('rejects a pattern only Python understands', () => {
+      expect(withPattern({ pattern: '(?P<name>x)' })).toHaveProperty('pattern');
+    });
+
+    it('rejects a pattern longer than 500 characters', () => {
+      expect(withPattern({ pattern: 'a'.repeat(501) })).toHaveProperty(
+        'pattern',
+      );
+    });
+
+    it('rejects an error message without a pattern', () => {
+      expect(withPattern({ pattern_error: 'Letters only' })).toHaveProperty(
+        'pattern_error',
+      );
+    });
+
+    it('rejects a default value that does not match', () => {
+      expect(withPattern({ pattern: '[a-z]+', default: 'ABC' })).toHaveProperty(
+        'default',
+      );
+      expect(withPattern({ pattern: '[a-z]+', default: 'abc' })).toEqual({});
+    });
+
+    it('ignores pattern fields left on other types', () => {
+      expect(
+        validateOptionForm({
+          type: { value: 'integer' },
+          pattern: '[a-z',
+          pattern_error: 'x',
+        }),
+      ).toEqual({});
+    });
+  });
 });

@@ -45,6 +45,7 @@ import {
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
+import { getOptionPatternValidator } from './optionPattern';
 import { getHiddenOptionKeys } from './optionVisibility';
 import { StorageFolderManagerField } from './StorageFolderManagerField';
 import { DeployFormData } from './types';
@@ -159,6 +160,11 @@ export const buildOptionValidator = (
   // `required` rejects, silently blocking submission.
   if (option.required && option.type !== 'boolean') {
     validators.push(required);
+  }
+
+  const patternValidator = getOptionPatternValidator(option);
+  if (patternValidator) {
+    validators.push(patternValidator);
   }
 
   // Add cross-field validators

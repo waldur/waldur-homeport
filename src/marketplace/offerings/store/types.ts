@@ -39,6 +39,8 @@ export interface OptionFormData {
     field?: string;
     values?: Array<boolean | string>;
   };
+  pattern?: string;
+  pattern_error?: string;
 }
 
 export type OfferingLimits = Record<string, { min: number; max: number }>;
