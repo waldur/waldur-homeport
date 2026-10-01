@@ -14,7 +14,8 @@ import {
   filterGrantableRoles,
   filterRolesByType,
   formatRoleLabel,
-  getAmbiguousRoleDescriptions,
+  getRoleQualifier,
+  getRoleQualifiers,
 } from '@/permissions/utils';
 import { SramRoleBadge } from '@/sram/SramBadge';
 
@@ -27,25 +28,35 @@ const renderRoleType = (roleType: RoleType) =>
     call_organizer: 'CO',
   })[roleType] || '';
 
+// Every option of one open dropdown shares the same options array, so the
+// qualifiers are worked out once per list rather than once per option.
+const qualifiersByOptions = new WeakMap<
+  readonly unknown[],
+  Map<string, string>
+>();
+
+const getOptionQualifiers = (options: readonly unknown[]) => {
+  let qualifiers = qualifiersByOptions.get(options);
+  if (!qualifiers) {
+    qualifiers = getRoleQualifiers(options as Role[]);
+    qualifiersByOptions.set(options, qualifiers);
+  }
+  return qualifiers;
+};
+
 const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => {
   const label = props.data.description || props.data.name;
-  // Show the machine name only when another offered role shares this
-  // description (a system role and its organization clone both reading
-  // "Organization owner"); otherwise it is just noise.
-  const ambiguous = getAmbiguousRoleDescriptions(
-    (props.options as Role[]) ?? [],
+  const qualifier = getRoleQualifier(
+    props.data,
+    getOptionQualifiers(props.options ?? []),
   );
-  const showName =
-    Boolean(props.data.description) &&
-    props.data.description !== props.data.name &&
-    ambiguous.has(label);
   return (
     <components.Option {...props}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <span>
           {label}
-          {showName && (
-            <span className="text-muted ms-2 small">{props.data.name}</span>
+          {qualifier && (
+            <span className="text-muted ms-2 small">{qualifier}</span>
           )}
           <SramRoleBadge roleName={props.data.name} className="ms-2" />
         </span>
@@ -114,7 +125,7 @@ export const RoleGroup: FunctionComponent<{
     heldRole && !offered.some((role) => role.name === heldRole.name)
       ? [...offered, heldRole]
       : offered;
-  const ambiguousDescriptions = getAmbiguousRoleDescriptions(options);
+  const qualifiers = getRoleQualifiers(options);
   // Counted before the grant and name filters: a user who may not grant the
   // organization's roles would otherwise be told to reveal or reactivate one.
   // Waiting for the fetch keeps the message from flashing while roles load.
@@ -144,12 +155,7 @@ export const RoleGroup: FunctionComponent<{
           emptyMessage
         ) : undefined
       }
-      // Normally just the short description; the machine name is appended only
-      // when another offered role shares that description (RoleOption renders
-      // the same disambiguation inline in the dropdown).
-      getOptionLabel={(role: Role) =>
-        formatRoleLabel(role, ambiguousDescriptions)
-      }
+      getOptionLabel={(role: Role) => formatRoleLabel(role, qualifiers)}
       getOptionValue={({ name }) => name}
       validate={required}
       components={{ Option: RoleOption }}

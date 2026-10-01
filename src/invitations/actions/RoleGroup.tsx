@@ -4,22 +4,19 @@ import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 import { Role } from '@/permissions/types';
-import {
-  formatRoleLabel,
-  getAmbiguousRoleDescriptions,
-} from '@/permissions/utils';
+import { formatRoleLabel, getRoleQualifiers } from '@/permissions/utils';
 
 export const RoleGroup: FunctionComponent<{ roles: Role[]; disabled }> = ({
   roles,
   disabled,
 }) => {
-  const ambiguous = useMemo(() => getAmbiguousRoleDescriptions(roles), [roles]);
+  const qualifiers = useMemo(() => getRoleQualifiers(roles), [roles]);
   return (
     <SelectGroup
       name="role"
       validate={required}
       options={roles}
-      getOptionLabel={(item) => formatRoleLabel(item, ambiguous)}
+      getOptionLabel={(item) => formatRoleLabel(item, qualifiers)}
       getOptionValue={(item) => item.uuid}
       isDisabled={disabled}
       label={translate('Role')}

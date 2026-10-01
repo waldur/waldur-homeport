@@ -119,47 +119,85 @@ export const formatRole = (name: string) => {
 export const formatRoleType = (content_type: RoleType) =>
   ROLE_TYPES.find(({ value }) => value === content_type)?.label || content_type;
 
-/**
- * Descriptions that appear on more than one role within a list. When two roles
- * share a description (a system role and its organization clone both read
- * "Organization owner"), the machine name has to be shown to tell them apart;
- * everywhere else it is noise. Pass the result to formatRoleLabel.
- */
-export const getAmbiguousRoleDescriptions = (
-  roles: Pick<Role, 'name' | 'description'>[],
-): Set<string> => {
-  const seen = new Set<string>();
-  const ambiguous = new Set<string>();
-  for (const role of roles) {
-    const label = role.description || role.name;
-    if (seen.has(label)) {
-      ambiguous.add(label);
-    }
-    seen.add(label);
-  }
-  return ambiguous;
-};
+type LabelledRole = Pick<Role, 'name' | 'description'> &
+  Partial<
+    Pick<Role, 'uuid' | 'content_type' | 'is_system_role' | 'customer_name'>
+  >;
+
+// Names are unique only within a scope type, so key by uuid when there is one;
+// a held role rebuilt from a permission (getHeldRole) has only its name.
+const getRoleKey = (role: Pick<LabelledRole, 'uuid' | 'name'>) =>
+  role.uuid ?? role.name;
 
 /**
- * Dropdown label for a role: normally just the human description. The machine
- * name is appended in parentheses only when `ambiguousDescriptions` (from
- * getAmbiguousRoleDescriptions) says another role in the same list shares that
- * description, so identically-named roles stay distinguishable without adding
- * the machine name to every row. Falls back to the name when there is no
- * description or it already equals the name. Omitting `ambiguousDescriptions`
- * keeps the legacy always-append behaviour.
+ * Short qualifiers telling apart roles that share a display name within one
+ * list, keyed by role uuid (or name, without one). Only colliding roles get one:
+ * the scope type when the collision spans scopes, and the owning organization
+ * (or "Custom role") for a non-system role such as an organization's copy of a
+ * system role. The machine name is the last resort, used only when those still
+ * leave two roles alike.
+ * Pass the result to formatRoleLabel.
+ */
+export const getRoleQualifiers = (
+  roles: LabelledRole[],
+): Map<string, string> => {
+  const groups = new Map<string, LabelledRole[]>();
+  for (const role of roles) {
+    const label = role.description || role.name;
+    groups.set(label, [...(groups.get(label) ?? []), role]);
+  }
+  const qualifiers = new Map<string, string>();
+  for (const [label, group] of groups) {
+    if (group.length < 2) continue;
+    // A role of unknown scope (a held role rebuilt from a rule) tells nothing
+    // apart, so it must not make the collision look like it spans scopes.
+    const spansScopes =
+      new Set(group.map((role) => role.content_type).filter(Boolean)).size > 1;
+    const candidates = group.map((role) =>
+      [
+        spansScopes && role.content_type && formatRoleType(role.content_type),
+        role.is_system_role === false &&
+          (role.customer_name || translate('Custom role')),
+      ]
+        .filter(Boolean)
+        .join(', '),
+    );
+    group.forEach((role, index) => {
+      const clashes = candidates.some(
+        (candidate, other) =>
+          other !== index && candidate === candidates[index],
+      );
+      const qualifier = [
+        candidates[index],
+        clashes && role.name !== label && role.name,
+      ]
+        .filter(Boolean)
+        .join(', ');
+      if (qualifier) {
+        qualifiers.set(getRoleKey(role), qualifier);
+      }
+    });
+  }
+  return qualifiers;
+};
+
+/** The qualifier getRoleQualifiers assigned to this role, if any. */
+export const getRoleQualifier = (
+  role: Pick<LabelledRole, 'uuid' | 'name'>,
+  qualifiers?: Map<string, string>,
+) => qualifiers?.get(getRoleKey(role));
+
+/**
+ * Dropdown label for a role: the human description, followed by its qualifier
+ * from getRoleQualifiers when another role in the same list reads the same.
  */
 export const formatRoleLabel = (
-  role: Pick<Role, 'name' | 'description'>,
-  ambiguousDescriptions?: Set<string>,
+  role: Pick<LabelledRole, 'uuid' | 'name' | 'description'>,
+  qualifiers?: Map<string, string>,
 ) => {
-  if (!role.description || role.description === role.name) {
-    return role.name;
-  }
-  if (ambiguousDescriptions && !ambiguousDescriptions.has(role.description)) {
-    return role.description;
-  }
-  return `${role.description} (${role.name})`;
+  const label = role.description || role.name;
+  const qualifier = getRoleQualifier(role, qualifiers);
+  return qualifier ? `${label} (${qualifier})` : label;
 };
 
 /**

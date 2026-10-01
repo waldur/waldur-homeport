@@ -25,7 +25,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Role } from '@/permissions/types';
 import {
   formatRoleLabel,
-  getAmbiguousRoleDescriptions,
+  getRoleQualifiers,
   getProjectRoles,
 } from '@/permissions/utils';
 
@@ -153,8 +153,8 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
     }
     return roles;
   }, [resolve.rule]);
-  const ambiguousRoles = useMemo(
-    () => getAmbiguousRoleDescriptions(roleOptions),
+  const roleQualifiers = useMemo(
+    () => getRoleQualifiers(roleOptions),
     [roleOptions],
   );
 
@@ -307,7 +307,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
               options={roleOptions}
               getOptionValue={(role: Role) => role.uuid}
               getOptionLabel={(role: Role) =>
-                formatRoleLabel(role, ambiguousRoles)
+                formatRoleLabel(role, roleQualifiers)
               }
               simpleValue
               isClearable={false}
