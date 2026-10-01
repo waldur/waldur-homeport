@@ -2190,6 +2190,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'MATRIX_AUTO_CREATE_PROJECT_ROOMS',
+        description: translate('Automatically create a Matrix room for every newly created project. Off by default; existing projects are backfilled with the provision_matrix_rooms management command.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
         key: 'MATRIX_HOMESERVER_URL',
         description: translate('Matrix homeserver base URL, e.g. https://matrix.example.com'),
         default: '',

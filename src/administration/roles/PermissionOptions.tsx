@@ -135,6 +135,15 @@ export const PermissionOptions = [
     ],
   },
   {
+    label: translate('Matrix_room'),
+    options: [
+      {
+        label: translate('Create matrix room'),
+        value: 'MATRIX_ROOM.CREATE',
+      },
+    ],
+  },
+  {
     label: translate('Offering'),
     options: [
       {
