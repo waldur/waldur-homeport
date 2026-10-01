@@ -27,6 +27,7 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | [menu-navigation.md](menu-navigation.md)                                 | Sidebar menu structure and state-based routing                                                          |
 | [sidebar.md](sidebar.md)                                                 | Sidebar navigation architecture, design tokens, components, and recipes                                 |
 | [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Bootstrap → Tailwind/shadcn migration: cascade layers, token extraction, visual-parity test methodology |
+| [menu-tailwind-migration-plan.md](menu-tailwind-migration-plan.md)       | Plan for replacing Metronic `menu*` classes and SCSS with Tailwind                                      |
 
 ## API and data
 
