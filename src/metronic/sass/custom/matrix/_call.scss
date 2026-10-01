@@ -168,7 +168,10 @@
   }
 }
 
+// Portals to <body> outside fullscreen, beside the chat drawer; like
+// .tc-members-popover, a plain `z-50` opens it hidden behind the drawer.
 .call-device-settings-popover {
+  z-index: $zindex-popover;
   width: 280px;
 }
 
