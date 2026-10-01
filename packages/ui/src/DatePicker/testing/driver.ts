@@ -105,15 +105,20 @@ export const isNavDisabled = (
   );
 };
 
-/** Pages the calendar with its own prev/next buttons until `date` is shown. */
+/**
+ * Pages the calendar with its own prev/next buttons until `date` is shown.
+ * Resolves `false` when the calendar refuses to page that far, as it does
+ * past `minDate`/`maxDate`.
+ */
 const goToMonth = async (date: DateLike, calendar = getCalendar()) => {
   const target = isoMonth(date);
   for (let step = 0; step < 60; step++) {
     const months = visibleMonths(calendar);
-    if (months.includes(target)) return;
+    if (months.includes(target)) return true;
     const direction = target < months[0] ? 'prev' : 'next';
     const button = navButton(calendar, direction);
     if (!button) throw new Error(`No ${direction} month button`);
+    if (isNavDisabled(direction, calendar)) return false;
     await userEvent.click(button);
     await waitFor(() => {
       if (visibleMonths(calendar)[0] === months[0]) {
@@ -128,7 +133,8 @@ export const isDayDisabled = async (
   date: DateLike,
   calendar = getCalendar(),
 ) => {
-  await goToMonth(date, calendar);
+  // A day in a month the calendar will not page to cannot be picked.
+  if (!(await goToMonth(date, calendar))) return true;
   const day = findDay(calendar, date);
   if (!day) throw new Error(`Day ${isoDay(date)} is not rendered`);
   return day.disabled;
@@ -141,7 +147,9 @@ export const selectedDays = (calendar = getCalendar()) =>
     .map((d) => d.iso);
 
 export const pickDay = async (date: DateLike, calendar = getCalendar()) => {
-  await goToMonth(date, calendar);
+  if (!(await goToMonth(date, calendar))) {
+    throw new Error(`Cannot navigate to ${isoMonth(date)}`);
+  }
   const day = findDay(calendar, date);
   if (!day) throw new Error(`Day ${isoDay(date)} is not rendered`);
   // Disabled days are still clickable by a user; they just do nothing.
