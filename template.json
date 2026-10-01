@@ -13790,6 +13790,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Custom role": {
+    "context": {
+      "feature_area": "permissions"
+    }
+  },
   "Custom role offered everywhere": {
     "context": {
       "feature_area": "hygiene"

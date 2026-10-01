@@ -12,25 +12,21 @@ import { required } from '@/core/validators';
 import { translate } from '@/i18n';
 import { PopoverMenuContent } from '@/navigation/NavMenu';
 import { Role } from '@/permissions/types';
-import { getAmbiguousRoleDescriptions } from '@/permissions/utils';
+import { getRoleQualifier, getRoleQualifiers } from '@/permissions/utils';
 import { Customer } from '@/workspace/types';
 
-// Role title with the machine name appended only when another offered role
-// shares this description (a system role and its identically-named
-// organization clone); otherwise the name is just noise.
-const RoleTitle: React.FC<{ role: Role; ambiguous: Set<string> }> = ({
-  role,
-  ambiguous,
-}) => (
-  <span className="menu-title">
-    {role.description || role.name}
-    {role.description &&
-      role.description !== role.name &&
-      ambiguous.has(role.description) && (
-        <span className="text-muted ms-2 small">{role.name}</span>
-      )}
-  </span>
-);
+const RoleTitle: React.FC<{
+  role: Role;
+  qualifiers: Map<string, string>;
+}> = ({ role, qualifiers }) => {
+  const qualifier = getRoleQualifier(role, qualifiers);
+  return (
+    <span className="menu-title">
+      {role.description || role.name}
+      {qualifier && <span className="text-muted ms-2 small">{qualifier}</span>}
+    </span>
+  );
+};
 
 interface RoleAndProjectSelectPopupProps {
   roles: (Role & { tooltip? })[];
@@ -89,7 +85,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
     [select, selectedProject, selectedRole, close],
   );
 
-  const ambiguous = useMemo(() => getAmbiguousRoleDescriptions(roles), [roles]);
+  const qualifiers = useMemo(() => getRoleQualifiers(roles), [roles]);
 
   const [query, setQuery] = useState('');
   const projects = useMemo(() => {
@@ -128,7 +124,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                   onClick={() => onClickRole(role)}
                   aria-hidden="true"
                 >
-                  <RoleTitle role={role} ambiguous={ambiguous} />
+                  <RoleTitle role={role} qualifiers={qualifiers} />
                   {role.content_type === 'project' && !currentProject && (
                     <span className="menu-arrow" />
                   )}
@@ -136,7 +132,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
               ) : (
                 <Tooltip label={role.tooltip}>
                   <span className="menu-link disabled px-3">
-                    <RoleTitle role={role} ambiguous={ambiguous} />
+                    <RoleTitle role={role} qualifiers={qualifiers} />
                   </span>
                 </Tooltip>
               )}
@@ -144,7 +140,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
           ) : (
             <div key={role.uuid} className="menu-item px-3">
               <span className="menu-link disabled px-3">
-                <RoleTitle role={role} ambiguous={ambiguous} />
+                <RoleTitle role={role} qualifiers={qualifiers} />
                 <span className="menu-arrow" />
               </span>
             </div>

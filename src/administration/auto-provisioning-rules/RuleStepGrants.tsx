@@ -16,7 +16,7 @@ import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { Role } from '@/permissions/types';
 import {
   formatRoleLabel,
-  getAmbiguousRoleDescriptions,
+  getRoleQualifiers,
   getCustomerRoles,
   getProjectRoles,
 } from '@/permissions/utils';
@@ -38,16 +38,16 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
     () => getProjectRoles().filter((role) => role.is_system_role),
     [],
   );
-  const ambiguousRoles = useMemo(
-    () => getAmbiguousRoleDescriptions(projectRoles),
+  const projectRoleQualifiers = useMemo(
+    () => getRoleQualifiers(projectRoles),
     [projectRoles],
   );
   const customerRoles = useMemo(
     () => getCustomerRoles().filter((role) => role.is_system_role),
     [],
   );
-  const ambiguousCustomerRoles = useMemo(
-    () => getAmbiguousRoleDescriptions(customerRoles),
+  const customerRoleQualifiers = useMemo(
+    () => getRoleQualifiers(customerRoles),
     [customerRoles],
   );
 
@@ -112,7 +112,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
         name="customer_role"
         options={customerRoles}
         getOptionLabel={(role: Role) =>
-          formatRoleLabel(role, ambiguousCustomerRoles)
+          formatRoleLabel(role, customerRoleQualifiers)
         }
         getOptionValue={({ name }) => name}
         simpleValue
@@ -139,7 +139,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
             name="project_role"
             options={projectRoles}
             getOptionLabel={(role: Role) =>
-              formatRoleLabel(role, ambiguousRoles)
+              formatRoleLabel(role, projectRoleQualifiers)
             }
             getOptionValue={({ name }) => name}
             simpleValue
