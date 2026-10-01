@@ -725,3 +725,10 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 .table-standalone-header {
   margin-bottom: 24px;
 }
+
+// The columns popover portals to <body>, so tables inside a modal or drawer
+// need the popover tier to show it above them; a plain `z-50` opens it hidden
+// behind the modal.
+.table-columns-popover {
+  z-index: $zindex-popover;
+}

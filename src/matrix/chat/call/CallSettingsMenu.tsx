@@ -9,9 +9,11 @@ import { translate } from '@/i18n';
 
 interface CallSettingsMenuProps {
   /**
-   * Render the popover (and the select menus) inside this element. Needed when
-   * the call is fullscreened — the Fullscreen API only paints the fullscreened
-   * subtree, so anything portaled to <body> would be invisible.
+   * Render the popover inside this element. Needed when the call is
+   * fullscreened — the Fullscreen API only paints the fullscreened subtree, so
+   * anything portaled to <body> would be invisible. Everywhere else it stays
+   * in <body>: Safari mis-paints the drawer's content while a fixed layer sits
+   * inside the drawer.
    */
   container?: HTMLElement | null;
 }
@@ -19,10 +21,9 @@ interface CallSettingsMenuProps {
 interface DeviceSelectProps {
   kind: MediaDeviceKind;
   label: string;
-  menuTarget?: HTMLElement | null;
 }
 
-const DeviceSelect: FC<DeviceSelectProps> = ({ kind, label, menuTarget }) => {
+const DeviceSelect: FC<DeviceSelectProps> = ({ kind, label }) => {
   const { devices, activeDeviceId, setActiveMediaDevice } =
     useMediaDeviceSelect({ kind });
   const options = devices.map((d) => ({
@@ -40,11 +41,11 @@ const DeviceSelect: FC<DeviceSelectProps> = ({ kind, label, menuTarget }) => {
         onChange={(option: any) => option && setActiveMediaDevice(option.value)}
         isSearchable={false}
         menuPlacement="auto"
-        // Only override the portal target when fullscreen forces the menu into
-        // the call subtree. Passing `undefined` otherwise would clobber the
-        // hook's `document.body` default and the menu renders clipped inside
-        // the popover instead of floating above it.
-        {...(menuTarget ? { menuPortalTarget: menuTarget } : {})}
+        // Inline in the popover rather than a fixed menu portalled elsewhere,
+        // so it moves with the popover wherever that portals and adds no
+        // second fixed layer for Safari to mis-composite.
+        menuPortalTarget={null}
+        menuPosition="absolute"
       />
     </div>
   );
@@ -77,16 +78,14 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
         <RadixPopover.Content
           side="top"
           sideOffset={2}
-          className="z-50 call-device-settings-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden p-4"
+          // The docked call belongs to MatrixCallHost's React tree, not the
+          // drawer's, so the drawer would read clicks here as a click away.
+          data-drawer-inside=""
+          className="call-device-settings-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden p-4"
         >
           <div className="call-device-settings">
             {kinds.map(({ kind, label }) => (
-              <DeviceSelect
-                key={kind}
-                kind={kind}
-                label={label}
-                menuTarget={container}
-              />
+              <DeviceSelect key={kind} kind={kind} label={label} />
             ))}
           </div>
         </RadixPopover.Content>

@@ -40,7 +40,13 @@ export const DrawerRoot: FunctionComponent = () => {
   React.useEffect(() => {
     const remember = (event: Event) => {
       const target = event.target as Node | null;
-      if (target && contentRef.current?.contains(target)) {
+      // `data-drawer-inside` opts in an overlay that such content portals to
+      // <body>, outside the drawer's DOM as well as its React tree.
+      if (
+        target &&
+        (contentRef.current?.contains(target) ||
+          (target instanceof Element && target.closest('[data-drawer-inside]')))
+      ) {
         insidePointerDownRef.current = event;
       }
     };

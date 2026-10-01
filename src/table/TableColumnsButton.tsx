@@ -214,7 +214,7 @@ export const TableColumnButton: FC<TableProps> = ({
           side="bottom"
           align="end"
           sideOffset={2}
-          className="z-50 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
+          className="table-columns-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
         >
           <ColumnsPopover
             columns={columns}

@@ -20,9 +20,14 @@
 // transform values below match core _drawer.scss's `.drawer-on`/`.drawer-end`
 // so there's nothing to visually reconcile once the animation ends.
 #kt_drawer {
+  // No `forwards` here: a held end frame computes to
+  // `matrix(1, 0, 0, 1, 0, 0)`, not `none`, and any transform makes the
+  // drawer the containing block for `position: fixed` descendants — a
+  // react-select menu portalled into the drawer then lands offset by the
+  // drawer's own position and clipped by its overflow. Once the slide-in ends,
+  // core's `.drawer-on { transform: none }` applies instead.
   &.drawer-on {
-    animation: kt-drawer-slide-in get($drawer, transition-speed) ease-in-out
-      forwards;
+    animation: kt-drawer-slide-in get($drawer, transition-speed) ease-in-out;
   }
 
   &:not(.drawer-on) {

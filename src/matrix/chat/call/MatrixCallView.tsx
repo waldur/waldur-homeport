@@ -348,7 +348,9 @@ const CallStage: FC<{
             primary controls. Hidden in the cramped floating widget. */}
         {!compact && (
           <>
-            <CallSettingsMenu />
+            <CallSettingsMenu
+              container={isFullscreen ? containerRef.current : null}
+            />
             {fullscreenSupported && (
               <Tooltip
                 label={
