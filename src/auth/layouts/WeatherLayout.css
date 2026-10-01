@@ -60,11 +60,6 @@
   padding: 0.5rem;
 }
 
-.layout-weather-header .theme-switcher-btn {
-  color: white;
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
 .layout-weather-content {
   position: relative;
   z-index: 1;

@@ -92,16 +92,6 @@
       }
     }
 
-    // Menu Icon
-    .menu-bullet {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: get($menu, link, bullet, width);
-      margin-right: get($menu, link, bullet, space);
-    }
-
     // Menu Label
     .menu-title {
       display: flex;
@@ -161,140 +151,82 @@
   justify-content: center;
 }
 
-// Responsive
-@each $direction in (up, down) {
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+// Sub dropdown
+.menu-sub-dropdown {
+  display: none;
+  border-radius: get($menu, dropdown, border-radius);
+  background-color: get($menu, dropdown, background-color);
+  box-shadow: get($menu, dropdown, box-shadow);
+  z-index: get($menu, dropdown, z-index);
 
-    @if $infix and $direction == down {
-      $infix: $infix + '-' + $direction;
-    }
+  // Dropdown show
+  .show.menu-dropdown > &,
+  &.menu.show,
+  &.show[data-popper-placement] {
+    display: flex;
 
-    @include media-breakpoint-direction($direction, $breakpoint) {
-      // Accordion arrow
-      .menu-item.menu#{$infix}-accordion {
-        &.showing:not(.menu-dropdown),
-        &.show:not(.hiding):not(.menu-dropdown) {
-          > .menu-link {
-            .menu-arrow:after {
-              @include menu-link-arrow-rotate(90deg, -90deg);
-            }
-          }
-        }
-      }
+    // Animation
+    @if (get($menu, dropdown, animation) == true) {
+      // Move up
+      animation:
+        menu-sub-dropdown-animation-fade-in
+          #{get($menu, dropdown, animation-speed)}
+          ease
+          1,
+        menu-sub-dropdown-animation-move-up
+          #{get($menu, dropdown, animation-speed)}
+          ease
+          1;
 
-      // Sub dropdown
-      .menu-sub#{$infix}-dropdown {
-        display: none;
-        border-radius: get($menu, dropdown, border-radius);
-        background-color: get($menu, dropdown, background-color);
-        box-shadow: get($menu, dropdown, box-shadow);
-        z-index: get($menu, dropdown, z-index);
-
-        // Dropdown show
-        .show.menu-dropdown > &,
-        &.menu.show,
-        &.show[data-popper-placement] {
-          display: flex;
-
-          // Animation
-          @if (get($menu, dropdown, animation) == true) {
-            // Move up
-            animation:
-              menu-sub-dropdown-animation-fade-in
-                #{get($menu, dropdown, animation-speed)}
-                ease
-                1,
-              menu-sub-dropdown-animation-move-up
-                #{get($menu, dropdown, animation-speed)}
-                ease
-                1;
-
-            // Move down
-            &[data-popper-placement='top'],
-            &[data-popper-placement='top-start'],
-            &[data-popper-placement='top-end'] {
-              animation:
-                menu-sub-dropdown-animation-fade-in
-                  #{get($menu, dropdown, animation-speed)}
-                  ease
-                  1,
-                menu-sub-dropdown-animation-move-down
-                  #{get($menu, dropdown, animation-speed)}
-                  ease
-                  1;
-            }
-          }
-        }
-      }
-
-      // Sub accordion
-      .menu-sub#{$infix}-accordion {
-        display: none;
-
-        .show:not(.menu-dropdown) > &,
-        &.show {
-          display: flex;
-        }
-      }
-
-      // Inline
-      .menu#{$infix}-inline {
-        display: flex;
-      }
-
-      // Reset link left & right paddings of level 1 menu links
-      .menu#{$infix}-fit {
-        > .menu-item {
-          > .menu-content,
-          > .menu-link {
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-          }
-        }
-      }
-
-      .menu#{$infix}-column {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .menu#{$infix}-row {
-        flex-direction: row;
-
-        > .menu-item {
-          display: flex;
-          align-items: center;
-
-          > .menu-link {
-            .menu-arrow:after {
-              @include menu-link-arrow-rotate(90deg, -90deg);
-            }
-          }
-        }
-      }
-
-      // Border radiuses
-      .menu#{$infix}-rounded {
-        .menu-link {
-          @include border-radius($border-radius);
-        }
-      }
-
-      // Border radiuses
-      .menu#{$infix}-pill {
-        .menu-link {
-          border-radius: 50px;
-        }
-      }
-
-      // Reset border radiuses
-      .menu#{$infix}-rounded-0 {
-        .menu-link {
-          border-radius: 0 !important;
-        }
+      // Move down
+      &[data-popper-placement='top'],
+      &[data-popper-placement='top-start'],
+      &[data-popper-placement='top-end'] {
+        animation:
+          menu-sub-dropdown-animation-fade-in
+            #{get($menu, dropdown, animation-speed)}
+            ease
+            1,
+          menu-sub-dropdown-animation-move-down
+            #{get($menu, dropdown, animation-speed)}
+            ease
+            1;
       }
     }
+  }
+}
+
+.menu-column {
+  flex-direction: column;
+  width: 100%;
+}
+
+.menu-row {
+  flex-direction: row;
+
+  > .menu-item {
+    display: flex;
+    align-items: center;
+
+    > .menu-link {
+      .menu-arrow:after {
+        @include menu-link-arrow-rotate(90deg, -90deg);
+      }
+    }
+  }
+}
+
+// Border radiuses
+.menu-rounded {
+  .menu-link {
+    @include border-radius($border-radius);
+  }
+}
+
+// Reset border radiuses
+.menu-rounded-0 {
+  .menu-link {
+    border-radius: 0 !important;
   }
 }
 

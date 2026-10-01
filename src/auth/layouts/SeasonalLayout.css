@@ -87,11 +87,6 @@
   padding: 1rem;
 }
 
-.layout-seasonal-header .theme-switcher-btn {
-  color: white;
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
 .layout-seasonal-content {
   position: relative;
   z-index: 1;

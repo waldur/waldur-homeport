@@ -1,9 +1,3 @@
-// Drawer body padding for the Support requests drawer.
-// Top is 0 — drawer header already provides the spacing below it.
-.quick-issue-drawer-body {
-  padding: 0 24px 16px;
-}
-
 // Bare table chrome for the Support requests drawer.
 // Cancels the theme's default card-header margin and card-body padding
 // so the search bar, rows, and footer sit flush with the drawer body
