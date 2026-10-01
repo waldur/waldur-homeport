@@ -1,8 +1,7 @@
 import { FC } from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AccordionCard, AlertItem } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { translate } from '@/i18n';
 
 interface PubSubIssuesCardProps {

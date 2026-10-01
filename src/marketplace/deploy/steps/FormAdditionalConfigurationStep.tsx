@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { StepContent } from '@/wizard/VStepperFormStep';
 

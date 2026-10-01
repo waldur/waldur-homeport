@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Customer, Project } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { getRestrictionsArray, RestrictionsValue } from '@/core/restrictions';
 import { translate } from '@/i18n';
 

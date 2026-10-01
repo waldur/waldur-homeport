@@ -99,6 +99,17 @@ const RESTRICTED_IMPORTS = [
     message:
       'Use ActionDropdownButton from "@/table/ActionDropdownButton" instead of react-bootstrap/DropdownButton.',
   },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Accordion', 'AccordionContext', 'useAccordionButton'],
+    message:
+      'Use Accordion (a group of panels) or Collapsible (one panel; keepMounted for form fields) from "waldur-ui" instead of react-bootstrap.',
+  },
+  {
+    name: 'react-bootstrap/Accordion',
+    message:
+      'Use Accordion or Collapsible from "waldur-ui" instead of react-bootstrap/Accordion.',
+  },
 ];
 
 export default tseslint

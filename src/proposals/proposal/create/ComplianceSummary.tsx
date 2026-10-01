@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import FormTable from '@/form/FormTable';

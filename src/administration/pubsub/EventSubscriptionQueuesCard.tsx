@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';

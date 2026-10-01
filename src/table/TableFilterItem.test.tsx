@@ -7,7 +7,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { ModalProvider } from '@/modal/ModalContext';
 
 import { TableFilterContext } from './FilterContextProvider';
-import { StringFilter } from './filters';
+import { SelectFilter, StringFilter } from './filters';
 import { tableInitialReducer } from './store';
 import { TableFilterContainer } from './TableFilterContainer';
 import { TableSidebarFilterValues } from './TableFilterItem';
@@ -282,5 +282,56 @@ describe('TableSidebarFilterItem (filterPosition="sidebar")', () => {
 
     await user.click(screen.getByRole('button', { name: 'Catalog' }));
     expect(screen.queryByPlaceholderText('Catalog')).not.toBeInTheDocument();
+  });
+
+  // Several sidebar filters can be expanded at once. A table-filter select
+  // whose menu never closes (as in the filter popover) stacked every open
+  // menu over the rows below; in the sidebar only the focused one shows.
+  it('shows only the focused select filter menu when several are expanded', async () => {
+    const user = userEvent.setup();
+    const store = createStore(combineReducers({ tables: tableInitialReducer }));
+    render(
+      <Provider store={store}>
+        <ModalProvider>
+          <TableFilterContainer
+            table="SidebarSelectMenusTable"
+            formId="SidebarSelectMenusForm"
+            setFilter={() => undefined}
+            filters={
+              <>
+                <SelectFilter
+                  title="State"
+                  name="state"
+                  options={[
+                    { value: 'ok', label: 'OK' },
+                    { value: 'erred', label: 'Erred' },
+                  ]}
+                />
+                <SelectFilter
+                  title="Kind"
+                  name="kind"
+                  options={[
+                    { value: 'vm', label: 'VM' },
+                    { value: 'volume', label: 'Volume' },
+                  ]}
+                />
+              </>
+            }
+          />
+        </ModalProvider>
+      </Provider>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'State' }));
+    expect(await screen.findByText('Erred')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Kind' }));
+    expect(await screen.findByText('Volume')).toBeInTheDocument();
+    // State is still expanded, but its menu closed when focus moved on.
+    expect(screen.getByRole('button', { name: 'State' })).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    );
+    expect(screen.queryByText('Erred')).not.toBeInTheDocument();
   });
 });

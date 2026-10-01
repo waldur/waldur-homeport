@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Accordion, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { rancherAppsCreate } from 'waldur-js-client';
 
@@ -72,21 +72,24 @@ export const TemplateDetail: FunctionComponent = () => {
         <form onSubmit={handleSubmit}>
           <TemplateHeader {...state.data!} />
 
-          <Accordion
+          {/* Always-expanded sections in one bordered box, split by a rule. */}
+          <div
             id="application-template-form"
-            defaultActiveKey="configuration"
+            className="border rounded bg-body"
           >
             {state.data!.version.readme && (
-              <Accordion.Item eventKey="readme">
+              <div>
                 <Card.Header>
                   <Card.Title>{translate('Summary')}</Card.Title>
                 </Card.Header>
                 <Card.Body>
                   <SafeMarkdown text={state.data!.version.readme} />
                 </Card.Body>
-              </Accordion.Item>
+              </div>
             )}
-            <Accordion.Item eventKey="configuration">
+            <div
+              className={state.data!.version.readme ? 'border-top' : undefined}
+            >
               <Card.Header>
                 <Card.Title>{translate('Configuration')}</Card.Title>
               </Card.Header>
@@ -112,8 +115,8 @@ export const TemplateDetail: FunctionComponent = () => {
                   );
                 })()}
               </Card.Body>
-            </Accordion.Item>
-          </Accordion>
+            </div>
+          </div>
         </form>
       )}
     />

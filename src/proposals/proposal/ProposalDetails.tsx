@@ -3,9 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { AccordionCard, BaseButton } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Panel } from '@/core/Panel';

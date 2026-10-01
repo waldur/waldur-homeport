@@ -1,5 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Accordion, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'waldur-ui';
 
 import { ExternalLink } from '@/core/ExternalLink';
 import { translate } from '@/i18n';
@@ -69,20 +76,26 @@ export const ApplicationDetailsDialog: FunctionComponent<{
     title={translate('Application details')}
     footer={<CloseDialogButton label={translate('Ok')} />}
   >
-    <Accordion id="application-details" defaultActiveKey="summary">
-      <Accordion.Item eventKey="summary">
-        <Accordion.Header>{translate('Summary')}</Accordion.Header>
-        <Accordion.Body>
+    <Accordion
+      id="application-details"
+      type="single"
+      collapsible
+      defaultValue="summary"
+      className="rounded-md border-[1px] border-solid border-[var(--surface-card-border)]"
+    >
+      <AccordionItem value="summary">
+        <AccordionTrigger>{translate('Summary')}</AccordionTrigger>
+        <AccordionContent>
           <ApplicationDetailsTable application={application} />
-        </Accordion.Body>
-      </Accordion.Item>
+        </AccordionContent>
+      </AccordionItem>
       {application.answers && (
-        <Accordion.Item eventKey="answers">
-          <Accordion.Header>{translate('Answers')}</Accordion.Header>
-          <Accordion.Body>
+        <AccordionItem value="answers">
+          <AccordionTrigger>{translate('Answers')}</AccordionTrigger>
+          <AccordionContent>
             <ApplicationAnswersTable application={application} />
-          </Accordion.Body>
-        </Accordion.Item>
+          </AccordionContent>
+        </AccordionItem>
       )}
     </Accordion>
   </ModalDialog>

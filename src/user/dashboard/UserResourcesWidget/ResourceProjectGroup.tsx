@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { projectsListUsersList, projectsRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
 import { STALE_TIME } from '@/core/constants';
 import { Link } from '@/core/Link';

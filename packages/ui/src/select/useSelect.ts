@@ -104,7 +104,14 @@ export const useSelect = <
   const tableFilterProps = isTableFilter
     ? {
         autoFocus: true,
-        menuIsOpen: true,
+        // The filter popover shows one filter at a time, so its menu stays
+        // open. Where several filters are expanded together (the mobile
+        // sidebar), `menuAlwaysOpen={false}` makes each an ordinary
+        // dropdown instead: opened by the autofocus, closed on blur, so only
+        // one menu shows at a time.
+        ...(props.menuAlwaysOpen === false
+          ? { openMenuOnFocus: true }
+          : { menuIsOpen: true }),
         menuPortalTarget: undefined,
         menuPosition: undefined,
         menuPlacement: undefined,
@@ -223,7 +230,14 @@ export const useAsyncSelect = <
   const tableFilterProps = isTableFilter
     ? {
         autoFocus: true,
-        menuIsOpen: true,
+        // The filter popover shows one filter at a time, so its menu stays
+        // open. Where several filters are expanded together (the mobile
+        // sidebar), `menuAlwaysOpen={false}` makes each an ordinary
+        // dropdown instead: opened by the autofocus, closed on blur, so only
+        // one menu shows at a time.
+        ...(props.menuAlwaysOpen === false
+          ? { openMenuOnFocus: true }
+          : { menuIsOpen: true }),
         menuPortalTarget: undefined,
         menuPosition: undefined,
         menuPlacement: undefined,

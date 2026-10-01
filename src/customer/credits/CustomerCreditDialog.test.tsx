@@ -64,6 +64,7 @@ describe('CustomerCreditDialog', () => {
   });
 
   it('renders edit form correctly', async () => {
+    const user = userEvent.setup();
     const credit = {
       uuid: 'credit-uuid',
       customer_uuid: 'customer-uuid',
@@ -79,6 +80,12 @@ describe('CustomerCreditDialog', () => {
     );
 
     expect(screen.getByText('Edit credit')).toBeInTheDocument();
+    // The invoice history chart mounts once its panel is opened.
+    await user.click(
+      await screen.findByRole('button', {
+        name: 'Organization invoice history',
+      }),
+    );
     expect(await screen.findByTestId('echart')).toBeInTheDocument();
 
     const valueInput = screen.getByTestId('value');

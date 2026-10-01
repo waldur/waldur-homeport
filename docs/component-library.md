@@ -207,12 +207,12 @@ export const MyEditButton = ({ row, refetch }) => (
 
 ### Cards and Layout Components
 
-| Component          | Location                       | Description        | Key Features                         |
-| ------------------ | ------------------------------ | ------------------ | ------------------------------------ |
-| **Panel**          | `src/core/Panel.tsx`           | Basic card panel   | Header, actions, flexible content    |
-| **AccordionCard**  | `src/core/AccordionCard.tsx`   | Collapsible card   | Toggle functionality, custom styling |
-| **WidgetCard**     | `src/dashboard/WidgetCard.tsx` | Dashboard widget   | Flexible layout, action dropdown     |
-| **StatisticsCard** | `src/core/StatisticsCard.tsx`  | Statistics display | Large value display, "View all" link |
+| Component          | Location                                          | Description        | Key Features                         |
+| ------------------ | ------------------------------------------------- | ------------------ | ------------------------------------ |
+| **Panel**          | `src/core/Panel.tsx`                              | Basic card panel   | Header, actions, flexible content    |
+| **AccordionCard**  | `waldur-ui` (`packages/ui/src/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling |
+| **WidgetCard**     | `src/dashboard/WidgetCard.tsx`                    | Dashboard widget   | Flexible layout, action dropdown     |
+| **StatisticsCard** | `src/core/StatisticsCard.tsx`                     | Statistics display | Large value display, "View all" link |
 
 ### Data Display Components
 

@@ -5,7 +5,8 @@ import {
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import type { EmailFinding } from './api';

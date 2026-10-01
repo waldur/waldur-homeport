@@ -2,10 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
 import { EventConsumer, eventConsumersList } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { AccordionCard, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';

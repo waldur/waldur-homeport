@@ -1,4 +1,5 @@
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { formatFilesize } from '@/core/utils';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';

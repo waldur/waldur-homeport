@@ -2,9 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { AccordionCard, Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';

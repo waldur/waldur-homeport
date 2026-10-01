@@ -1,4 +1,5 @@
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { TeamSection } from '@/proposals/team/TeamSection';
 import { Proposal, ProposalReview } from '@/proposals/types';

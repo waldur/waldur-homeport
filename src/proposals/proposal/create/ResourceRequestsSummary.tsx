@@ -1,6 +1,7 @@
 import { proposalProposalsResourcesList } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';

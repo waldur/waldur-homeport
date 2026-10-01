@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
 import { BaseTextField } from '@/form/TextField';
 import { translate } from '@/i18n';

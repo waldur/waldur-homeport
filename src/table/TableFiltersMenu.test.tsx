@@ -23,6 +23,7 @@ describe('TableFiltersMenu', () => {
   const renderMenu = (
     props: Record<string, any> = {},
     appliedFilters: FilterItem[] = [],
+    outerFilterPosition: 'menu' | 'sidebar' = 'menu',
   ) => {
     const table = 'TableFiltersMenuRegressionTable';
     const store = createStore(combineReducers({ tables: tableInitialReducer }));
@@ -37,7 +38,7 @@ describe('TableFiltersMenu', () => {
         <TableFilterContext.Provider
           value={{
             table,
-            filterPosition: 'menu',
+            filterPosition: outerFilterPosition,
             form: 'TableFiltersMenuRegressionForm',
             setFilter: () => undefined,
             registerFilterComponent: () => undefined,
@@ -69,6 +70,28 @@ describe('TableFiltersMenu', () => {
 
     await user.click(screen.getByRole('button', { name: 'Add filter' }));
     expect(await screen.findByText('Catalog')).toBeInTheDocument();
+  });
+
+  it('renders its rows as menu items even when the table is in sidebar mode', async () => {
+    // On a narrow viewport the table's filterPosition is 'sidebar', but
+    // TableHeader still renders a TableFiltersMenu per filtered column.
+    // Its rows must take the menu branch: the sidebar branch renders an
+    // AccordionItem, which throws outside TableFilterContainer's Accordion.
+    const user = userEvent.setup();
+    renderMenu({}, [], 'sidebar');
+
+    await user.click(screen.getByRole('button', { name: 'Add filter' }));
+    expect(
+      await screen.findByRole('button', { name: 'Catalog' }),
+    ).not.toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('opens a column filter directly even when the table is in sidebar mode', async () => {
+    const user = userEvent.setup();
+    renderMenu({ openName: 'catalog_name' }, [], 'sidebar');
+
+    await user.click(screen.getByRole('button', { name: 'Filter by column' }));
+    expect(await screen.findByPlaceholderText('Catalog')).toBeInTheDocument();
   });
 
   it('the "Add filter" button itself carries Radix\'s trigger state, not just its tooltip wrapper', async () => {

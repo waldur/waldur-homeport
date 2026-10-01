@@ -3,9 +3,8 @@ import { isEqual } from 'lodash-es';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import { AccordionCard, AlertItem, Badge, BaseButton } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { MAX_PAGE_SIZE } from '@/core/api';
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';

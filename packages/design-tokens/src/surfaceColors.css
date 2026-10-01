@@ -28,6 +28,15 @@
   --surface-text-secondary: var(--color-gray-500);
   --surface-text-muted: var(--color-gray-400);
 
+  /* Collapsible card header (waldur-ui AccordionCard), matching the
+     Metronic card it replaced: header text/caret ($gray-700), title
+     ($headings-color), the compact variant's title (.text-secondary) and
+     the solid header strip ($gray-50). */
+  --card-header-text: var(--color-gray-700);
+  --card-title-text: var(--color-gray-900);
+  --card-title-secondary-text: var(--color-gray-700);
+  --card-header-solid-bg: var(--color-gray-50);
+
   --pill-success-bg: var(--color-success-50);
   --pill-success-text: var(--color-success-700);
   --pill-success-dot: var(--color-success-600);
@@ -128,6 +137,11 @@
   --surface-text-primary: var(--color-gray-dark-25);
   --surface-text-secondary: var(--color-gray-dark-400);
   --surface-text-muted: var(--color-gray-dark-500);
+
+  --card-header-text: var(--color-gray-dark-200);
+  --card-title-text: var(--color-gray-dark-50);
+  --card-title-secondary-text: var(--color-gray-dark-300);
+  --card-header-solid-bg: var(--color-gray-dark-900);
 
   --pill-success-bg: var(--color-success-900);
   --pill-success-text: var(--color-success-400);

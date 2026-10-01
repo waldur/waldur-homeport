@@ -9,9 +9,8 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { AccordionCard, BaseButton, Tooltip } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { wait } from '@/core/utils';
 import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';

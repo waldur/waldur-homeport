@@ -1,6 +1,12 @@
 import { FC } from 'react';
-import { Accordion } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -24,15 +30,19 @@ export const OrganizationCostChart: FC = () => {
   if (!customer) return null;
 
   return (
-    <Accordion className="mb-7">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>
+    <Accordion
+      type="single"
+      collapsible
+      className="mb-7 rounded-md border-[1px] border-solid border-[var(--surface-card-border)]"
+    >
+      <AccordionItem value="chart">
+        <AccordionTrigger>
           <div className="fw-bolder">
             {translate('Organization invoice history')}
             {isLoading && <LoadingSpinnerSimple className="ms-2" />}
           </div>
-        </Accordion.Header>
-        <Accordion.Body>
+        </AccordionTrigger>
+        <AccordionContent>
           {error ? (
             <LoadingErred loadData={refetch} />
           ) : options ? (
@@ -45,8 +55,8 @@ export const OrganizationCostChart: FC = () => {
               <EChart options={options} height="150px" />
             </>
           ) : null}
-        </Accordion.Body>
-      </Accordion.Item>
+        </AccordionContent>
+      </AccordionItem>
     </Accordion>
   );
 };

@@ -265,3 +265,21 @@ export type {
 } from './ScrollSpy';
 
 export * from './DatePicker';
+
+export {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from './Accordion';
+export type { AccordionTriggerProps } from './Accordion';
+
+export {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from './Collapsible';
+export type { CollapsibleProps } from './Collapsible';
+
+export { AccordionCard } from './AccordionCard';
+export type { AccordionCardProps } from './AccordionCard';

@@ -2,7 +2,8 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 import type { TransactionStats } from './api';

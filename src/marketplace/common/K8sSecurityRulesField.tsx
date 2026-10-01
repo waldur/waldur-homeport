@@ -7,7 +7,8 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SelectField } from '@/form';
 import { BaseTextField } from '@/form/TextField';

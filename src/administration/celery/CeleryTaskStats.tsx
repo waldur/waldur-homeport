@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { AccordionCard, Tooltip } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';

@@ -1,6 +1,7 @@
 import { useFormState } from 'react-final-form';
 
-import { AccordionCard } from '@/core/AccordionCard';
+import { AccordionCard } from 'waldur-ui';
+
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
 

@@ -1,9 +1,8 @@
 import { FC, useMemo } from 'react';
 import { OrganizationalAccess, OrganizationalUser } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { AccordionCard, Badge } from 'waldur-ui';
 
-import { AccordionCard } from '@/core/AccordionCard';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';

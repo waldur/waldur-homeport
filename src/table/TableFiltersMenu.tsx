@@ -415,6 +415,12 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
     <TableFilterContext.Provider
       value={{
         ...context,
+        // Always 'menu', whatever the table's own position: on a narrow
+        // viewport that is 'sidebar', yet TableHeader still renders one of
+        // these per filtered column. Inheriting it sent the rows down
+        // TableFilterItem's sidebar branch — an AccordionItem, which throws
+        // outside TableFilterContainer's Accordion.
+        filterPosition: 'menu',
         apply,
         openMenuName: props.openName,
         menuIsOpen: open,
