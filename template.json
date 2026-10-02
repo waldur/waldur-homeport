@@ -7006,6 +7006,7 @@
       "feature_area": "coi-settings"
     }
   },
+  "Automatically create a Matrix room for every newly created project. Off by default; existing projects are backfilled with the provision_matrix_rooms management command.": {},
   "Automatically creates new orders when configuration options of related resources are modified": {
     "context": {
       "feature_area": "integration"
@@ -12628,6 +12629,12 @@
   "Create load balancer": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Create matrix room": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "Create message": {
@@ -28601,6 +28608,11 @@
   "Matrix user ID": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Matrix_room": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Max": {

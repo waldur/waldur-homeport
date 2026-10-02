@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createPortal } from 'react-dom';
 import { describe, expect, it } from 'vitest';
@@ -43,8 +43,11 @@ describe('TableWithTabs', () => {
     await userEvent.click(screen.getByRole('tab', { name: 'second' }));
 
     expect(screen.getByText('Second action')).toBeVisible();
-    // The old pane can outlive the switch while its fade-out runs; what matters
-    // is that its control no longer shows in the shared toolbar.
-    expect(screen.getByText('First action')).not.toBeVisible();
+    // The old pane fades out and then unmounts (unmountOnExit). How far the
+    // fade has got when this line runs is timing, so wait for the end state:
+    // its control is gone from the shared toolbar.
+    await waitFor(() =>
+      expect(screen.queryByText('First action')).not.toBeInTheDocument(),
+    );
   });
 });
