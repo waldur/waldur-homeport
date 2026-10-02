@@ -19,6 +19,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 import { OrderActionsButton } from '../actions/OrderActionsButton';
+import { shouldLinkProviderResource } from '../utils';
 
 import { ErrorDetailsTab } from './ErrorDetailsTab';
 import { LimitsSection } from './LimitsSection';
@@ -222,6 +223,10 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
       }),
     [user, props.order?.provider_uuid],
   );
+  const linkProviderResource = useMemo(
+    () => shouldLinkProviderResource(user, props.order),
+    [user, props.order],
+  );
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
     const order = props.order;
@@ -253,17 +258,29 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
         params: { uuid: order.project_uuid },
         ellipsis: 'xxl',
       },
-      {
-        key: 'resource',
-        text: order.resource_name,
-        to: 'marketplace-resource-details',
-        params: { resource_uuid: order.marketplace_resource_uuid },
-        dropdown: (close) => (
-          <ResourceBreadcrumbPopover order={order} close={close} />
-        ),
-        truncate: true,
-        tooltipText: `${order.category_title}: ${order.resource_name}`,
-      },
+      linkProviderResource
+        ? {
+            key: 'resource',
+            text: order.resource_name,
+            to: 'marketplace-provider-resource-details',
+            params: {
+              uuid: order.provider_uuid,
+              resource_uuid: order.marketplace_resource_uuid,
+            },
+            truncate: true,
+            tooltipText: `${order.category_title}: ${order.resource_name}`,
+          }
+        : {
+            key: 'resource',
+            text: order.resource_name,
+            to: 'marketplace-resource-details',
+            params: { resource_uuid: order.marketplace_resource_uuid },
+            dropdown: (close) => (
+              <ResourceBreadcrumbPopover order={order} close={close} />
+            ),
+            truncate: true,
+            tooltipText: `${order.category_title}: ${order.resource_name}`,
+          },
       // A provider arriving from their Orders table would otherwise have no way
       // back to it: the rest of this trail is the customer's project hierarchy.
       canActAsProvider && {
@@ -287,7 +304,7 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
         truncate: true,
       },
     ].filter(Boolean) as IBreadcrumbItem[];
-  }, [props.order, canActAsProvider]);
+  }, [props.order, canActAsProvider, linkProviderResource]);
   useBreadcrumbs(breadcrumbItems);
 
   const tabs = useMemo(

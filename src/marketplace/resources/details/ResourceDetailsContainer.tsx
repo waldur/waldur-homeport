@@ -4,7 +4,10 @@ import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { marketplaceResourcesRetrieve } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesRetrieve,
+  marketplaceResourcesRetrieve,
+} from 'waldur-js-client';
 
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { usePermissionView } from '@/auth/PermissionLayout';
@@ -41,9 +44,14 @@ import { canViewTeam } from '@/permissions/teamVisibility';
 import { ProjectUsersBadge } from '@/project/ProjectUsersBadge';
 import { router } from '@/router';
 import { setCurrentResource } from '@/workspace/actions';
-import { useUser } from '@/workspace/hooks';
+import { useCustomer, useUser } from '@/workspace/hooks';
 
-import { fetchData, getResourceTabs } from './fetchData';
+import {
+  fetchData,
+  fetchProviderData,
+  getProviderResourceTabs,
+  getResourceTabs,
+} from './fetchData';
 import { PolicyAttributionBanner } from './PolicyAttributionBanner';
 import { ProfileCompletenessWarningBanner } from './ProfileCompletenessWarningBanner';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
@@ -52,14 +60,33 @@ import { ServiceProviderCommentWarningBar } from './ServiceProviderCommentWarnin
 import { TosConsentWarningBanner } from './TosConsentWarningBanner';
 import { useIsResourceProjectOnlyViewer } from './useIsResourceProjectOnlyViewer';
 
+const normalizeUuid = (uuid?: string) =>
+  (uuid || '').replace(/-/g, '').toLowerCase();
+
 const ResourceTeamDialog = lazyComponent(() =>
   import('./ResourceTeamDialog').then((module) => ({
     default: module.ResourceTeamDialog,
   })),
 );
 
-export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
+interface ResourceDetailsContainerProps {
+  /**
+   * Opened from the provider workspace: the resource and everything the page
+   * loads about it come from the provider endpoints, which serve the provider
+   * organization's roles, while the consumer endpoints answer them with 404.
+   */
+  providerView?: boolean;
+}
+
+export const ResourceDetailsContainer: FunctionComponent<
+  ResourceDetailsContainerProps
+> = ({ providerView = false }) => {
   const { params } = useCurrentStateAndParams();
+  const resourceUuid: string | undefined = params['resource_uuid'];
+  const retrieveResource = providerView
+    ? marketplaceProviderResourcesRetrieve
+    : marketplaceResourcesRetrieve;
+  const view = providerView ? 'provider' : 'consumer';
   const dispatch = useDispatch();
 
   const { openDialog } = useModal();
@@ -84,16 +111,26 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     isRefetching: isRefetchingResource,
     error: errorResource,
   } = useQuery({
-    queryKey: ['resource-details', params['resource_uuid']],
+    queryKey: ['resource-details', resourceUuid, view],
 
     queryFn: () =>
-      marketplaceResourcesRetrieve({
-        path: { uuid: params['resource_uuid'] },
+      retrieveResource({
+        path: { uuid: resourceUuid },
       }).then((r) => r.data),
 
+    // Leaving for the not-found page renders this container once more without
+    // the id; the SDK would then request the unexpanded path template.
+    enabled: !!resourceUuid,
     refetchOnWindowFocus: false,
     staleTime: UI_STALE_TIME,
   });
+  // The provider endpoint also serves resources of other providers the user
+  // holds a role on; under this provider's address they are not found.
+  const belongsToOtherProvider =
+    providerView &&
+    !!resource &&
+    normalizeUuid(resource.provider_uuid) !== normalizeUuid(params['uuid']);
+
   const {
     data,
     refetch: refetchData,
@@ -101,8 +138,14 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     isRefetching: isRefetchingData,
     error: errorData,
   } = useQuery({
-    queryKey: ['resource-details-page', resource?.uuid],
-    queryFn: () => (resource?.uuid ? fetchData(resource) : null),
+    queryKey: ['resource-details-page', resource?.uuid, view],
+    enabled: !belongsToOtherProvider,
+    queryFn: () =>
+      resource?.uuid
+        ? providerView
+          ? fetchProviderData(resource)
+          : fetchData(resource)
+        : null,
     refetchOnWindowFocus: false,
     staleTime: UI_STALE_TIME,
   });
@@ -126,11 +169,11 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   }, [refetchResource, refetchData, resource?.scope, invalidateActionsPopover]);
 
   const { data: resourceState } = useQuery({
-    queryKey: ['ResourceState', resource?.uuid],
+    queryKey: ['ResourceState', resource?.uuid, view],
 
     queryFn: () =>
       resource?.uuid
-        ? marketplaceResourcesRetrieve({
+        ? retrieveResource({
             path: {
               uuid: resource?.uuid,
             },
@@ -151,7 +194,8 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         : null,
 
     refetchInterval: 10 * 1000,
-    enabled: !!resource?.order_in_progress || resource?.state !== 'OK',
+    enabled:
+      !!resource && (!!resource.order_in_progress || resource.state !== 'OK'),
   });
   // Check if resource state or order details changed
   useEffect(() => {
@@ -200,6 +244,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   // they can still be rejected. A failed count only leaves that tab hidden, it
   // never takes the page down.
   const needsPendingLimitCount = Boolean(
+    !providerView &&
     resource &&
     data?.offering &&
     needsPendingLimitChangeRequestsCount({
@@ -222,19 +267,22 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
 
   const tabs = useMemo(
     () =>
-      data
-        ? getResourceTabs({
-            ...data,
-            resource,
-            isStaff: user?.is_staff,
-            isSupport: user?.is_support,
-            isRPOnly,
-            canManageLimitRequests,
-            canManageEndDateRequests,
-            pendingLimitChangeRequestsCount,
-          })
-        : [],
+      !data || !resource
+        ? []
+        : providerView
+          ? getProviderResourceTabs({ resource })
+          : getResourceTabs({
+              ...(data as Awaited<ReturnType<typeof fetchData>>),
+              resource,
+              isStaff: user?.is_staff,
+              isSupport: user?.is_support,
+              isRPOnly,
+              canManageLimitRequests,
+              canManageEndDateRequests,
+              pendingLimitChangeRequestsCount,
+            }),
     [
+      providerView,
       resource,
       data,
       user?.is_staff,
@@ -255,8 +303,52 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     getProjectBreadcrumbItem,
   } = usePresetBreadcrumbItems();
 
+  const providerCustomer = useCustomer();
+  const providerUuid: string | undefined = params['uuid'];
+
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
     if (!resource) return [];
+    if (providerView) {
+      return [
+        getOrganizationsBreadcrumbItem(),
+        getOrganizationBreadcrumbItem(
+          {
+            uuid: providerUuid,
+            name: providerCustomer?.name || resource.provider_name,
+          },
+          {
+            key: 'marketplace-provider-dashboard',
+            to: 'marketplace-provider-dashboard',
+            params: { uuid: providerUuid },
+            onClick: undefined,
+          },
+        ),
+        {
+          key: 'marketplace-vendor-offerings',
+          text: translate('Offerings'),
+          to: 'marketplace-vendor-offerings',
+          params: { uuid: providerUuid },
+          ellipsis: 'md',
+        },
+        {
+          key: 'offering',
+          text: resource.offering_name,
+          to: 'marketplace-offering-details',
+          params: {
+            uuid: providerUuid,
+            offering_uuid: resource.offering_uuid,
+            tab: 'resources-list',
+          },
+          ellipsis: 'xxl',
+        },
+        {
+          key: 'resource',
+          text: resource.name,
+          truncate: true,
+          active: true,
+        },
+      ];
+    }
     return [
       getOrganizationsBreadcrumbItem(),
       getOrganizationBreadcrumbItem({
@@ -291,7 +383,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         active: true,
       },
     ];
-  }, [resource]);
+  }, [resource, providerView, providerUuid, providerCustomer?.name]);
 
   useBreadcrumbs(breadcrumbItems);
 
@@ -312,22 +404,30 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   }, [resource]);
 
   useEffect(() => {
+    // The workspace resource scopes the consumer sidebar to the resource's
+    // project, which is not the workspace a provider is in.
+    if (providerView) return;
     dispatch(setCurrentResource(resource));
     return () => {
       dispatch(setCurrentResource(undefined));
     };
-  }, [resource]);
+  }, [resource, providerView]);
 
   usePageHero(
     !data || isLoading ? null : (
       <>
-        <TosConsentWarningBanner
-          offering={data.offering}
-          userHasConsent={data.offering?.user_has_consent}
-          userHasOfferingUser={data.offering?.user_has_offering_user}
-        />
-        <ProfileCompletenessWarningBanner offering={data.offering} />
+        {!providerView && (
+          <>
+            <TosConsentWarningBanner
+              offering={data.offering}
+              userHasConsent={data.offering?.user_has_consent}
+              userHasOfferingUser={data.offering?.user_has_offering_user}
+            />
+            <ProfileCompletenessWarningBanner offering={data.offering} />
+          </>
+        )}
         <ResourceDetailsHero
+          providerView={providerView}
           resource={resource}
           scope={data.scope}
           offering={data.offering}
@@ -338,10 +438,12 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
       </>
     ),
 
-    [resource, data, refetch, isLoading, isRefetching],
+    [resource, data, refetch, isLoading, isRefetching, providerView],
   );
 
   const messagingBar = useMemo(() => {
+    // Asks the consumer to answer the provider, so a provider has nothing to do.
+    if (providerView) return null;
     const order = resource?.order_in_progress;
     if (order?.state !== 'pending-provider' || !order?.provider_message)
       return null;
@@ -380,7 +482,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         colored
       />
     );
-  }, [resource]);
+  }, [resource, providerView]);
 
   useExtraAnnouncementBar(
     !data || isLoading ? null : (
@@ -403,7 +505,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
             variant={ANNOUNCEMENT_ICON.warning.variant}
             colored
           />
-        ) : (
+        ) : providerView ? null : (
           <ServiceProviderCommentWarningBar offering={data.offering} />
         )}
         {messagingBar}
@@ -413,7 +515,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         )}
       </>
     ),
-    [data, isLoading, messagingBar, resource],
+    [data, isLoading, messagingBar, resource, providerView],
   );
 
   const openTeamModal = useCallback(() => {
@@ -426,10 +528,12 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
 
   // The badge lists the parent project's team, which needs the view-team
   // permission; without it the request is a 403, so it is not made at all.
-  const showProjectTeam = canViewTeam(user, {
-    customerId: resource?.customer_uuid,
-    projectId: resource?.project_uuid,
-  });
+  const showProjectTeam =
+    !providerView &&
+    canViewTeam(user, {
+      customerId: resource?.customer_uuid,
+      projectId: resource?.project_uuid,
+    });
 
   useToolbarActions(
     showProjectTeam ? (
@@ -449,6 +553,11 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   );
 
   const { tabSpec } = usePageTabsTransmitter(tabs);
+
+  if (belongsToOtherProvider) {
+    goToNotFound();
+    return null;
+  }
 
   if (error) {
     if (error['response']?.status === 404) {
@@ -485,3 +594,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     />
   );
 };
+
+export const ProviderResourceDetailsContainer: FunctionComponent = () => (
+  <ResourceDetailsContainer providerView />
+);

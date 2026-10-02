@@ -13,6 +13,7 @@ import { getComponentsAndUsages } from './utils';
 interface ResourceUsageDialogProps {
   resolve: {
     resource: Resource;
+    providerView?: boolean;
   };
 }
 
@@ -25,7 +26,10 @@ export const ResourceShowUsageDialog: FunctionComponent<
     data: value,
   } = useQuery({
     queryKey: ['ResourceShowUsageDialog', resolve],
-    queryFn: () => getComponentsAndUsages(resolve.resource.uuid, null),
+    queryFn: () =>
+      getComponentsAndUsages(resolve.resource.uuid, null, {
+        providerView: resolve.providerView,
+      }),
   });
 
   return (

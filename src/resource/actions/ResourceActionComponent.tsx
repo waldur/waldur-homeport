@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { translate } from '@/i18n';
 import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
+import { ProviderActionContext } from '@/marketplace/resources/actions/ProviderActionContext';
 import {
   ActionsDropdownComponent,
   ActionsDropdownItem,
@@ -98,16 +99,18 @@ export const ResourceActionComponent: FunctionComponent<
               </ActionGroup>
             )}
             {providerActions.length > 0 && (
-              <ActionGroup title={translate('Provider actions')}>
-                {providerActions.map((ActionComponent, index) => (
-                  <ActionComponent
-                    key={`provider-${index}`}
-                    resource={props.resource}
-                    marketplaceResource={props.marketplaceResource}
-                    refetch={props.refetch}
-                  />
-                ))}
-              </ActionGroup>
+              <ProviderActionContext.Provider value={true}>
+                <ActionGroup title={translate('Provider actions')}>
+                  {providerActions.map((ActionComponent, index) => (
+                    <ActionComponent
+                      key={`provider-${index}`}
+                      resource={props.resource}
+                      marketplaceResource={props.marketplaceResource}
+                      refetch={props.refetch}
+                    />
+                  ))}
+                </ActionGroup>
+              </ProviderActionContext.Provider>
             )}
             {props.staffActions?.length > 0 && user.is_staff && (
               <ActionGroup title={translate('Staff actions')}>

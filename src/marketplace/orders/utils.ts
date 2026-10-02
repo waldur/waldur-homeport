@@ -1,8 +1,11 @@
-import { BillingUnit, OrderDetails } from 'waldur-js-client';
+import { BillingUnit, OrderDetails, User } from 'waldur-js-client';
 
 import { BadgeVariant } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { checkScope } from '@/permissions/hasPermission';
+import { checkCanAccessServiceProvider } from '@/workspace/selectors';
 
 interface OrderType {
   label: string;
@@ -103,3 +106,57 @@ export const getPlanUnitAbbr = (planUnit: BillingUnit) =>
           : planUnit === 'quarter'
             ? translate('/quarter')
             : '/' + planUnit;
+
+/**
+ * Can the user read a resource through the consumer endpoints? They serve
+ * staff and support, RESOURCE.LIST on the resource's organization or project,
+ * and a role on the resource itself; a role held only on the provider side
+ * does not count.
+ */
+export const canViewConsumerResource = (
+  user: Pick<User, 'is_staff' | 'is_support' | 'permissions'> | undefined,
+  {
+    customerUuid,
+    projectUuid,
+    resourceUuid,
+  }: { customerUuid?: string; projectUuid?: string; resourceUuid?: string },
+): boolean => {
+  if (!user) return false;
+  if (user.is_staff || user.is_support) return true;
+  if (
+    checkScope(user, 'customer', customerUuid, PermissionEnum.LIST_RESOURCES) ||
+    checkScope(user, 'project', projectUuid, PermissionEnum.LIST_RESOURCES)
+  ) {
+    return true;
+  }
+  return (user.permissions ?? []).some(
+    ({ scope_type, scope_uuid }) =>
+      scope_type === 'resource' &&
+      !!resourceUuid &&
+      scope_uuid === resourceUuid,
+  );
+};
+
+/**
+ * Should links to the order's resource open the provider's view of it? Only
+ * when the user cannot read it through the consumer endpoints, which answer
+ * them with 404, but can open the provider workspace.
+ */
+export const shouldLinkProviderResource = (
+  user: User | undefined,
+  order: Pick<
+    OrderDetails,
+    | 'customer_uuid'
+    | 'project_uuid'
+    | 'marketplace_resource_uuid'
+    | 'provider_uuid'
+  >,
+): boolean =>
+  !!user &&
+  !!order &&
+  !canViewConsumerResource(user, {
+    customerUuid: order.customer_uuid,
+    projectUuid: order.project_uuid,
+    resourceUuid: order.marketplace_resource_uuid,
+  }) &&
+  checkCanAccessServiceProvider({ uuid: order.provider_uuid }, user);

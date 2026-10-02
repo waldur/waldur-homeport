@@ -1,8 +1,10 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { Resource } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
 import { formatJsxTemplate, translate } from '@/i18n';
 import openstackIcon from '@/images/appstore/icon-openstack.png';
+import { isDescendantOf } from '@/navigation/useTabs';
 
 interface ParentLinkProps {
   parent_name: string;
@@ -37,17 +39,32 @@ export const ParentLink = ({
   </>
 );
 
-export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
-  resource.parent_uuid && resource.parent_name ? (
+export const ParentResourceLink = ({ resource }: { resource: Resource }) => {
+  // In the provider workspace the parent is opened in the provider's view too,
+  // as the consumer page is not readable by provider-side roles.
+  const { state, params } = useCurrentStateAndParams();
+  const inProviderWorkspace = isDescendantOf('marketplace-provider', state);
+  return resource.parent_uuid && resource.parent_name ? (
     <p className="text-muted fs-7 mb-0">
-      <ParentLink
-        parent_name={resource.parent_name}
-        state="marketplace-resource-details"
-        params={{ resource_uuid: resource.parent_uuid }}
-        icon={openstackIcon}
-        iconAlt="openstack"
-      />
+      {inProviderWorkspace ? (
+        <ParentLink
+          parent_name={resource.parent_name}
+          state="marketplace-provider-resource-details"
+          params={{ uuid: params.uuid, resource_uuid: resource.parent_uuid }}
+          icon={openstackIcon}
+          iconAlt="openstack"
+        />
+      ) : (
+        <ParentLink
+          parent_name={resource.parent_name}
+          state="marketplace-resource-details"
+          params={{ resource_uuid: resource.parent_uuid }}
+          icon={openstackIcon}
+          iconAlt="openstack"
+        />
+      )}
     </p>
   ) : (
     <p className="me-1"> </p>
   );
+};

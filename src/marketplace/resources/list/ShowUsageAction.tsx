@@ -7,6 +7,7 @@ import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { ResourceAction } from '../actions/constants';
+import { useIsProviderAction } from '../actions/ProviderActionContext';
 
 const ResourceShowUsageDialog = lazyComponent(() =>
   import('@/marketplace/resources/usage/ResourceShowUsageDialog').then(
@@ -16,10 +17,13 @@ const ResourceShowUsageDialog = lazyComponent(() =>
 
 export const ShowUsageAction = ({ resource }: { resource: Resource }) => {
   const { openDialog } = useModal();
+  // The dialog renders outside this tree, so the context is handed over.
+  const providerView = useIsProviderAction();
   const callback = (resource) => {
     openDialog(ResourceShowUsageDialog, {
       resolve: {
         resource,
+        providerView,
       },
       size: 'lg',
     });

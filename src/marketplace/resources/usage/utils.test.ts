@@ -1,7 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  marketplaceProviderResourcesOfferingRetrieve,
   marketplaceResourcesOfferingRetrieve,
   marketplaceComponentUsagesList,
+  marketplaceComponentUserUsagesList,
   OfferingComponent,
 } from 'waldur-js-client';
 
@@ -469,6 +471,30 @@ describe('ResourceUsageChart', () => {
   });
 
   describe('getComponentsAndUsages', () => {
+    it('reads the offering through the provider endpoint in the provider view', async () => {
+      vi.mocked(marketplaceResourcesOfferingRetrieve).mockClear();
+      vi.mocked(marketplaceProviderResourcesOfferingRetrieve).mockResolvedValue(
+        {
+          data: { components: [] },
+        } as any,
+      );
+      vi.mocked(marketplaceComponentUsagesList).mockResolvedValue({
+        data: [],
+        response: { headers: new Headers() },
+      } as any);
+      vi.mocked(marketplaceComponentUserUsagesList).mockResolvedValue({
+        data: [],
+        response: { headers: new Headers() },
+      } as any);
+
+      await getComponentsAndUsages('resource-uuid', 1, { providerView: true });
+
+      expect(marketplaceProviderResourcesOfferingRetrieve).toHaveBeenCalledWith(
+        { path: { uuid: 'resource-uuid' } },
+      );
+      expect(marketplaceResourcesOfferingRetrieve).not.toHaveBeenCalled();
+    });
+
     it('should return empty state when offering retrieval fails with 404', async () => {
       vi.mocked(marketplaceResourcesOfferingRetrieve).mockRejectedValue({
         response: { status: 404 },

@@ -18,11 +18,16 @@ import { OfferingUserDetailsField } from './OfferingUserDetailsField';
 interface ResourceDetailsHeaderBodyProps {
   resource: Resource;
   offering: PublicOfferingDetails;
+  /**
+   * The project and the viewer's own offering user are consumer data a
+   * provider-side user cannot read, so they are not requested.
+   */
+  providerView?: boolean;
 }
 
 export const ResourceDetailsHeaderBody: FunctionComponent<
   ResourceDetailsHeaderBodyProps
-> = ({ resource, offering }) => {
+> = ({ resource, offering, providerView = false }) => {
   const user = useUser();
 
   const { data: project } = useQuery({
@@ -34,6 +39,7 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
             query: { field: ['customer_display_billing_info_in_projects'] },
           }).then((response) => response.data)
         : null,
+    enabled: !providerView,
     refetchOnWindowFocus: false,
     staleTime: STALE_TIME,
   });
@@ -49,7 +55,7 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
             },
           }).then((response) => response.data[0] || null)
         : null,
-    enabled: !!(user?.uuid && offering?.uuid),
+    enabled: !providerView && !!(user?.uuid && offering?.uuid),
     staleTime: STALE_TIME,
   });
 

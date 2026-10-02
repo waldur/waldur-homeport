@@ -1,6 +1,9 @@
 import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { marketplaceResourcesRestore, Resource } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesRestore,
+  Resource,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -21,8 +24,11 @@ export const RestoreResourceAction: FC<RestoreResourceActionProps> = ({
   const user = useUser();
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
+    // Restoring is the provider's decision (it needs SET_RESOURCE_STATE on the
+    // offering's organization), and the provider endpoint serves exactly the
+    // roles that pass that check, where the consumer one may not.
     mutationFn: () =>
-      marketplaceResourcesRestore({
+      marketplaceProviderResourcesRestore({
         path: { uuid: resource.uuid },
         // The restore action re-provisions the existing resource and ignores
         // the request body, but the generated client still requires one.

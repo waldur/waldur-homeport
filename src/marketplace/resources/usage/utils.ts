@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import {
   PublicOfferingDetails,
+  marketplaceProviderResourcesOfferingRetrieve,
   marketplaceResourcesOfferingRetrieve,
   marketplaceComponentUserUsagesList,
   marketplaceComponentUsagesList,
@@ -363,14 +364,20 @@ const getUsageBasedOfferingComponents = (components: OfferingComponent[]) => {
 export const getComponentsAndUsages = async (
   resource_uuid: string,
   months: number,
+  // Provider-side roles read the offering through the provider endpoint; the
+  // consumer one answers them with 404.
+  { providerView = false }: { providerView?: boolean } = {},
 ) => {
+  const retrieveOffering = providerView
+    ? marketplaceProviderResourcesOfferingRetrieve
+    : marketplaceResourcesOfferingRetrieve;
   if (!resource_uuid) {
     return { components: null, usages: null, userUsages: null };
   }
 
   let offering: PublicOfferingDetails;
   try {
-    offering = await marketplaceResourcesOfferingRetrieve({
+    offering = await retrieveOffering({
       path: { uuid: resource_uuid },
     }).then((response) => response.data);
   } catch (error) {
