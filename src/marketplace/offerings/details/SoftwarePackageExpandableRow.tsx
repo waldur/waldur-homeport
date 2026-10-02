@@ -13,6 +13,11 @@ import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
+import {
+  getOfferingEnabledCpuFamilies,
+  getOfferingEnabledCpuMicroarchitectures,
+} from '../softwareCatalogCpu';
+
 const SoftwarePackageList: FC<{ packages: NestedParentSoftware[] }> = ({
   packages,
 }) => (
@@ -38,20 +43,28 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
   row,
   offering,
 }) => {
-  const enabledCpuFamily =
-    offering?.software_catalogs?.flatMap((sc) => sc.enabled_cpu_family || []) ||
-    [];
-  const enabledCpuMicroarchitectures =
-    offering?.software_catalogs?.flatMap(
-      (sc) => sc.enabled_cpu_microarchitectures || [],
-    ) || [];
+  const enabledCpuFamily = getOfferingEnabledCpuFamilies(
+    offering?.software_catalogs,
+  );
+  const enabledCpuMicroarchitectures = getOfferingEnabledCpuMicroarchitectures(
+    offering?.software_catalogs,
+  );
+  const hasCpuRestrictions =
+    enabledCpuFamily.length > 0 || enabledCpuMicroarchitectures.length > 0;
 
   const filteredVersions =
     row.versions
       ?.filter((version) => {
         if (!version.targets || version.targets.length === 0) return false;
+        if (!hasCpuRestrictions) {
+          return true;
+        }
         return version.targets.some((target) => {
-          const [cpuFamily, microArch] = target.target_name?.split('/') || [];
+          const cpuFamily = target.target_name;
+          const microArch = target.target_subtype;
+          if (!cpuFamily || !microArch) {
+            return false;
+          }
           return (
             (enabledCpuFamily.length === 0 ||
               enabledCpuFamily.includes(cpuFamily)) &&

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { Form } from 'react-final-form';
 import {
-  AccountOptions,
+  ProviderAccountOptionsRequest,
   AccountOptionsPreview,
   marketplaceServiceProvidersAccountOptionsPreview,
   marketplaceServiceProvidersPartialUpdate,
@@ -35,10 +35,10 @@ type Values = Partial<Record<(typeof ACCOUNT_OPTION_KEYS)[number], string>>;
 
 // Every key is sent: an unchanged value merges as a no-op, and an emptied one
 // is sent blank, which removes the provider's own setting.
-const toChanges = (values: Values): AccountOptions =>
+const toChanges = (values: Values): ProviderAccountOptionsRequest =>
   Object.fromEntries(
     ACCOUNT_OPTION_KEYS.map((key) => [key, values[key] ?? '']),
-  ) as AccountOptions;
+  ) as ProviderAccountOptionsRequest;
 
 interface AccountOptionsPreviewDialogProps {
   resolve: {

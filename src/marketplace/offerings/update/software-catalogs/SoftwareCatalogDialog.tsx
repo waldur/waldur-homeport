@@ -13,6 +13,8 @@ import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import { catalogSupportsCpuTargetRestrictions } from '../../softwareCatalogCpu';
+
 import { SoftwareCatalogForm } from './SoftwareCatalogForm';
 
 type DialogMode = 'add' | 'edit';
@@ -50,6 +52,21 @@ export const SoftwareCatalogDialog: FC<SoftwareCatalogDialogProps> = ({
 
   const saveCatalogMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
+      const catalogForCpuRestrictions =
+        formData.catalog ??
+        (mode === 'edit' ? softwareCatalog?.catalog : undefined);
+      const supportsCpu = catalogSupportsCpuTargetRestrictions(
+        catalogForCpuRestrictions,
+      );
+      const enabledCpuFamily = supportsCpu
+        ? formData.enabled_cpu_family?.map((arch) => arch.value || arch) || []
+        : [];
+      const enabledCpuMicroarchitectures = supportsCpu
+        ? formData.enabled_cpu_microarchitectures?.map(
+            (microarch) => microarch.value || microarch,
+          ) || []
+        : [];
+
       switch (mode) {
         case 'add':
           return marketplaceProviderOfferingsAddSoftwareCatalog({
@@ -57,14 +74,8 @@ export const SoftwareCatalogDialog: FC<SoftwareCatalogDialogProps> = ({
             body: {
               offering: offering.uuid,
               catalog: formData.catalog?.uuid || formData.catalog,
-              enabled_cpu_family:
-                formData.enabled_cpu_family?.map(
-                  (arch) => arch.value || arch,
-                ) || [],
-              enabled_cpu_microarchitectures:
-                formData.enabled_cpu_microarchitectures?.map(
-                  (microarch) => microarch.value || microarch,
-                ) || [],
+              enabled_cpu_family: enabledCpuFamily,
+              enabled_cpu_microarchitectures: enabledCpuMicroarchitectures,
               partition: formData.partition_uuid,
             },
           });
@@ -74,9 +85,8 @@ export const SoftwareCatalogDialog: FC<SoftwareCatalogDialogProps> = ({
               path: { uuid: offering.uuid },
               body: {
                 offering_catalog_uuid: softwareCatalog.uuid,
-                enabled_cpu_family: formData.enabled_cpu_family || [],
-                enabled_cpu_microarchitectures:
-                  formData.enabled_cpu_microarchitectures || [],
+                enabled_cpu_family: enabledCpuFamily,
+                enabled_cpu_microarchitectures: enabledCpuMicroarchitectures,
                 partition: formData.partition_uuid,
               },
             },
