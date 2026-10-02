@@ -2,13 +2,12 @@ import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
 const UserImportDialog = lazyComponent(() =>
@@ -35,9 +34,9 @@ export const UserImportButton: FC<UserImportButtonProps> = ({
   });
 
   return (
-    <BaseButton
-      label={translate('Bulk import')}
-      onClick={() =>
+    <ActionItem
+      title={translate('Bulk import')}
+      action={() =>
         openDialog(UserImportDialog, {
           size: 'lg',
           formId: 'BulkImportOfferingUsers',
@@ -47,11 +46,10 @@ export const UserImportButton: FC<UserImportButtonProps> = ({
       iconNode={<UploadSimpleIcon weight="bold" />}
       disabled={!canCreateOfferingUser}
       tooltip={
-        !canCreateOfferingUser &&
-        translate('You do not have permission to perform this action.')
+        !canCreateOfferingUser
+          ? translate('You do not have permission to perform this action.')
+          : undefined
       }
-      variant="tertiary"
-      size="lg"
     />
   );
 };
