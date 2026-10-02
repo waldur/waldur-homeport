@@ -21,6 +21,8 @@ interface DataDeclaration {
   /** Page header component is concealed as long as this parameter is set to true. */
   hideHeader: boolean;
   hideHeaderMenu: boolean;
+  /** Header shows a Go back button in place of the breadcrumbs. */
+  showGoBack?: boolean;
   skipAuth: boolean;
   title?(): string;
   breadcrumb?(): string;

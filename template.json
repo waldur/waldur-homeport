@@ -1036,11 +1036,6 @@
       "feature_area": "roles"
     }
   },
-  "Accept in progress": {
-    "context": {
-      "feature_area": "invitations"
-    }
-  },
   "Accept invitation": {
     "context": {
       "primary_ui_type": "title",
@@ -8776,6 +8771,11 @@
       "feature_area": "actions"
     }
   },
+  "Call name:": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "Call performance": {
     "context": {
       "primary_ui_type": "title",
@@ -14486,11 +14486,6 @@
       "feature_area": "proposal"
     }
   },
-  "Declaration required": {
-    "context": {
-      "feature_area": "invitations"
-    }
-  },
   "Decline": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -14518,11 +14513,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "proposal"
-    }
-  },
-  "Decline in progress": {
-    "context": {
-      "feature_area": "invitations"
     }
   },
   "Decline invitation": {
@@ -21647,7 +21637,7 @@
       "feature_area": "project-digest"
     }
   },
-  "Frequently Asked Questions": {
+  "Frequently asked questions": {
     "context": {
       "feature_area": "invitations"
     }
@@ -22793,11 +22783,6 @@
   "Hide custom": {
     "context": {
       "feature_area": "blocks"
-    }
-  },
-  "Hide details": {
-    "context": {
-      "feature_area": "invitations"
     }
   },
   "Hide diff": {
@@ -25203,6 +25188,16 @@
       "feature_area": "dashboard"
     }
   },
+  "Invited by:": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
+  "Invited on:": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "Invited {name} to the team": {
     "context": {
       "primary_ui_type": "text_content",
@@ -25713,7 +25708,7 @@
       "feature_area": "matrix"
     }
   },
-  "Join the Pool": {
+  "Join the pool": {
     "context": {
       "feature_area": "invitations"
     }
@@ -28809,6 +28804,11 @@
   "Max volumes per tenant": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Max. proposals:": {
+    "context": {
+      "feature_area": "invitations"
     }
   },
   "Maximal resource count per project": {
@@ -38024,11 +38024,6 @@
       "action_type": "confirm"
     }
   },
-  "Please complete your profile first": {
-    "context": {
-      "feature_area": "invitations"
-    }
-  },
   "Please complete your profile to access this section": {
     "context": {
       "feature_area": "sidebar"
@@ -40613,7 +40608,7 @@
   },
   "Proposal disclosure level": {
     "context": {
-      "feature_area": "invitations"
+      "feature_area": "coi-settings"
     }
   },
   "Proposal fields and applicant visibility": {},
@@ -42210,7 +42205,7 @@
       "feature_area": "UserPendingActionsList"
     }
   },
-  "Receive Assignments": {
+  "Receive assignments": {
     "context": {
       "feature_area": "invitations"
     }
@@ -45246,6 +45241,11 @@
       "feature_area": "details"
     }
   },
+  "Respond by:": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "Respond to provider": {
     "context": {
       "feature_area": "actions"
@@ -45602,6 +45602,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Review and respond to the invitation below. Your decision helps the call manager build a balanced reviewer pool.": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "Review capacity": {
     "context": {
       "action_type": "read"
@@ -45880,7 +45885,7 @@
   "Reviewer invitation": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "invitations"
+      "feature_area": "proposals"
     }
   },
   "Reviewer is a competitor to the proposal team or organization": {},
@@ -51295,16 +51300,6 @@
       "feature_area": "organizations"
     }
   },
-  "Stage 1": {
-    "context": {
-      "feature_area": "invitations"
-    }
-  },
-  "Stage 2": {
-    "context": {
-      "feature_area": "invitations"
-    }
-  },
   "Stage {stage} of {total} — {label}": {
     "context": {
       "variables": {
@@ -51653,6 +51648,16 @@
         }
       },
       "feature_area": "options"
+    }
+  },
+  "Step {n}": {
+    "context": {
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "invitations"
     }
   },
   "Step {step}: ": {
@@ -54139,6 +54144,16 @@
       "feature_area": "restrictions"
     }
   },
+  "The invitation is being accepted.": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
+  "The invitation is being declined.": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "The invoice has been marked as paid.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -55384,6 +55399,11 @@
       "feature_area": "rounds"
     }
   },
+  "This call has a conflict of interest policy. No proposals are shared with you yet: when specific proposals are assigned to you, you will be asked to declare any conflicts before you review them.": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "This call is archived and cannot be edited.": {},
   "This call is archived and read-only.": {
     "context": {
@@ -55398,11 +55418,6 @@
   "This call requires a conflict of interest declaration": {
     "context": {
       "feature_area": "create-review"
-    }
-  },
-  "This call requires you to declare any potential conflicts of interest before you can accept the invitation. Please review the proposals below and indicate any conflicts.": {
-    "context": {
-      "feature_area": "invitations"
     }
   },
   "This call restricts who may apply. Check the terms before submitting.": {
@@ -55540,6 +55555,11 @@
   "This invitation has expired.": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "This invitation has expired. Please contact the call manager for a new invitation.": {
+    "context": {
+      "feature_area": "invitations"
     }
   },
   "This invitation is no longer available.": {
@@ -66394,7 +66414,7 @@
       "feature_area": "matching"
     }
   },
-  "When you receive specific proposal assignments (Stage 2), you can declare any conflicts of interest. The system may also automatically detect some conflicts based on institutional affiliations or co-authorship.": {
+  "When you receive specific proposal assignments (Step 2), you can declare any conflicts of interest. The system may also automatically detect some conflicts based on institutional affiliations or co-authorship.": {
     "context": {
       "feature_area": "invitations"
     }
@@ -67398,6 +67418,11 @@
       }
     }
   },
+  "You have been invited to review": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "You have entered data in form. When dialog is closed form data would be lost.": {
     "context": {
       "feature_area": "modal"
@@ -67523,14 +67548,16 @@
       "feature_area": "invitations"
     }
   },
-  "You will have access to full proposal details when reviewing for potential conflicts.": {},
+  "You will not join the reviewer pool for this call. This cannot be undone from this page.": {
+    "context": {
+      "feature_area": "invitations"
+    }
+  },
   "You will receive an email with your assigned proposals": {
     "context": {
       "feature_area": "invitations"
     }
   },
-  "You will see proposal titles and summaries when reviewing for potential conflicts.": {},
-  "You will see proposal titles only when reviewing for potential conflicts.": {},
   "You're switching to the {name} organization. This will discard any entered data. Do you want to proceed?": {
     "context": {
       "variables": {
