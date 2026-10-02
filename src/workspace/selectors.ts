@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect';
 
 import { AtLeast } from '@/core/types';
-import { RoleEnum } from '@/permissions/enums';
+import { PermissionEnum, RoleEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { type RootState } from '@/store/reducers';
 
 import { Customer, Project, User } from './types';
@@ -98,6 +99,85 @@ export const checkIsOwnerOrStaff = (
   }
   return customer && checkIsOwner(customer, user);
 };
+
+/**
+ * Permissions that are only exercised on the provider side of an
+ * organization. Holding any of them on the organization is what Mastermind
+ * asks of a provider view, so a custom role carrying them (a least-privilege
+ * provider operator, say) must reach the provider workspace without being made
+ * an owner or a service provider manager. REGISTER is left out: it is used to
+ * become a provider, not to run one. ORDER.* and RESOURCE.* are left out too,
+ * even APPROVE, REJECT and UPDATE_OPTIONS: on an organization they are also
+ * consumer-side rights (approving the organization's own orders, editing
+ * options of resources it consumes), so they would open the workspace to a
+ * role that never acts as the provider.
+ */
+const SERVICE_PROVIDER_ACCESS_PERMISSIONS: string[] = Object.values(
+  PermissionEnum,
+).filter(
+  (permission) =>
+    permission.startsWith('SERVICE_PROVIDER.') &&
+    permission !== PermissionEnum.REGISTER_SERVICE_PROVIDER,
+);
+
+/**
+ * May the user open the service provider workspace of this organization?
+ * Owners and service provider managers always may; anyone else needs a
+ * provider-side permission on the organization. What each page then shows is
+ * still decided by its own permission checks.
+ */
+export const checkCanAccessServiceProvider = (
+  customer: AtLeast<Customer, 'uuid'>,
+  user: User,
+): boolean =>
+  checkIsOwnerOrStaff(customer, user) ||
+  checkIsServiceManager(customer, user) ||
+  (!!customer?.uuid &&
+    SERVICE_PROVIDER_ACCESS_PERMISSIONS.some((permission) =>
+      hasPermission(user, { permission, customerId: customer.uuid }),
+    ));
+
+/**
+ * Route guard for the whole provider workspace (`/providers/:uuid/`). Hiding
+ * the Service provider tab is not enough: a typed address would still open the
+ * workspace and its unguarded pages. Support keeps it, as before any guard.
+ */
+export const canAccessServiceProviderWorkspace = (state: RootState): boolean =>
+  checkIsStaffOrSupport(getUser(state)) ||
+  checkCanAccessServiceProvider(getCustomer(state), getUser(state));
+
+/**
+ * Does the user hold `permission` on the provider organization? Support staff
+ * always do, as they had every provider tab before any tab was guarded.
+ */
+export const checkServiceProviderPermission = (
+  customer: AtLeast<Customer, 'uuid'>,
+  user: User,
+  permission: string,
+): boolean =>
+  checkIsStaffOrSupport(user) ||
+  (!!customer?.uuid &&
+    !!hasPermission(user, { permission, customerId: customer.uuid }));
+
+/** Route guard for a provider workspace tab backed by one permission. */
+export const hasServiceProviderPermission =
+  (permission: string) =>
+  (state: RootState): boolean =>
+    checkServiceProviderPermission(
+      getCustomer(state),
+      getUser(state),
+      permission,
+    );
+
+/**
+ * Route guard for the provider Team tab. Mastermind shows a provider's team to
+ * anyone holding a role on the ServiceProvider itself, or CUSTOMER.VIEW_TEAM on
+ * its organization; a custom provider role without either would open an empty
+ * list.
+ */
+export const canViewServiceProviderTeam = (state: RootState): boolean =>
+  checkHasServiceProviderRole(getCustomer(state), getUser(state)) ||
+  hasServiceProviderPermission(PermissionEnum.VIEW_CUSTOMER_TEAM)(state);
 
 const checkIsReader = (
   customer: AtLeast<Customer, 'uuid'>,

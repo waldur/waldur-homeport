@@ -20,6 +20,7 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
+  checkCanAccessServiceProvider,
   checkIsServiceManager,
   checkIsServiceManagerOnly,
   checkIsOwnerOrStaff,
@@ -54,9 +55,10 @@ const PageHero = ({ customer }) => {
     customer?.call_managing_organization_uuid &&
     isFeatureVisible(MarketplaceFeatures.show_call_management_functionality);
 
+  // Permission based, so a custom provider role reaches the workspace too.
   const showServiceProvider =
     customer?.is_service_provider &&
-    (checkIsServiceManager(customer, user) || isOwnerOrStaff);
+    checkCanAccessServiceProvider(customer, user);
 
   // Helpdesk is a distinct support-agent domain; surface it as its own mode once
   // a helpdesk is configured. Support-agent-only visibility (a support user with

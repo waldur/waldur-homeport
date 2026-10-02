@@ -10,6 +10,9 @@ import { translate } from '@/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
 import { PermissionEnum } from '@/permissions/enums';
 import {
+  canAccessServiceProviderWorkspace,
+  canViewServiceProviderTeam,
+  hasServiceProviderPermission,
   isOwnerOrStaff,
   isServiceManagerOnly,
   isStaff,
@@ -241,6 +244,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       title: () => translate('Service provider'),
+      permissions: [canAccessServiceProviderWorkspace],
     },
     resolve: [
       {
@@ -302,10 +306,13 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Audit logs'),
       priority: 160,
       // These are the organization's events, which Mastermind does not show a
-      // service provider manager (waldur/waldur-mastermind#396). This only hides
-      // the tab: `data.permissions` is read by useTabs, not by the router, so the
-      // URL still opens the page and the backend refuses its request.
-      permissions: [(state) => !isServiceManagerOnly(state)],
+      // service provider manager (waldur/waldur-mastermind#396). The guard hides
+      // the tab, and the router refuses the URL too, as it checks the target
+      // state's own `data.permissions`.
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        (state) => !isServiceManagerOnly(state),
+      ],
     },
   },
 
@@ -319,6 +326,14 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Customers'),
       priority: 110,
+      // The provider workspace is open to custom provider roles, so each tab
+      // asks for the permission its endpoints check rather than for a role.
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        hasServiceProviderPermission(
+          PermissionEnum.LIST_SERVICE_PROVIDER_CUSTOMERS,
+        ),
+      ],
     },
   },
 
@@ -334,6 +349,10 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Team'),
       priority: 155,
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        canViewServiceProviderTeam,
+      ],
     },
   },
 
@@ -348,6 +367,14 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Maintenance announcements'),
+      // Announcements are created and scheduled with this permission; a
+      // provider role without it has nothing to do on the page.
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        hasServiceProviderPermission(
+          PermissionEnum.MANAGE_MAINTENANCE_ANNOUNCEMENT,
+        ),
+      ],
     },
   },
 
@@ -364,6 +391,12 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Compliance'),
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        hasServiceProviderPermission(
+          PermissionEnum.LIST_SERVICE_PROVIDER_CUSTOMERS,
+        ),
+      ],
     },
   },
 
@@ -430,7 +463,10 @@ export const states: StateDeclaration[] = [
     url: '',
     redirectTo: 'marketplace-provider-project-templates',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
       breadcrumb: () => translate('Managed projects'),
       priority: 150,
     },
@@ -492,6 +528,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Username conflicts'),
       priority: 30,
       permissions: [
+        canAccessServiceProviderWorkspace,
         () => isFeatureVisible(MarketplaceFeatures.show_provider_accounts),
       ],
     },
@@ -512,6 +549,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('GLAuth directory'),
       priority: 40,
       permissions: [
+        canAccessServiceProviderWorkspace,
         () => isFeatureVisible(MarketplaceFeatures.show_provider_accounts),
       ],
     },
@@ -532,6 +570,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Account settings'),
       priority: 50,
       permissions: [
+        canAccessServiceProviderWorkspace,
         () => isFeatureVisible(MarketplaceFeatures.show_provider_accounts),
       ],
     },
@@ -550,6 +589,13 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       skipBreadcrumb: true,
+      // The group guard only hides the tab; the router checks this state.
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        hasServiceProviderPermission(
+          PermissionEnum.LIST_SERVICE_PROVIDER_CUSTOMERS,
+        ),
+      ],
     },
   },
 
@@ -564,6 +610,13 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       skipBreadcrumb: true,
+      // The group guard only hides the tab; the router checks this state.
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        hasServiceProviderPermission(
+          PermissionEnum.LIST_SERVICE_PROVIDER_USERS,
+        ),
+      ],
     },
   },
 
@@ -578,6 +631,13 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       skipBreadcrumb: true,
+      // The group guard only hides the tab; the router checks this state.
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        hasServiceProviderPermission(
+          PermissionEnum.LIST_SERVICE_PROVIDER_PROJECTS,
+        ),
+      ],
     },
   },
   {
@@ -753,6 +813,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Orders'),
       permissions: [
+        canAccessServiceProviderWorkspace,
         () => !isFeatureVisible(MarketplaceFeatures.catalogue_only),
       ],
     },
@@ -783,7 +844,10 @@ export const states: StateDeclaration[] = [
     ),
     parent: 'managed-projects',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
       breadcrumb: () => translate('Externally managed projects'),
     },
   },
@@ -798,7 +862,10 @@ export const states: StateDeclaration[] = [
     ),
     parent: 'managed-projects',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
       breadcrumb: () => translate('Managed project'),
     },
   },
@@ -813,7 +880,10 @@ export const states: StateDeclaration[] = [
     ),
     parent: 'managed-projects',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
       breadcrumb: () => translate('Managed Projects Audit Log'),
     },
   },
@@ -828,7 +898,10 @@ export const states: StateDeclaration[] = [
     ),
     parent: 'managed-projects',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        () => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED,
+      ],
       breadcrumb: () => translate('Available managed project templates'),
     },
   },
@@ -1045,6 +1118,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('POSIX ID pools'),
       priority: 60,
       permissions: [
+        canAccessServiceProviderWorkspace,
         () => isFeatureVisible(MarketplaceFeatures.show_posix_id_pools),
       ],
     },

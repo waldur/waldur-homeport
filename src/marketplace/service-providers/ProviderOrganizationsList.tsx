@@ -15,9 +15,10 @@ import { CustomerMembersColumn } from './CustomerMembersColumn';
 import { CustomerNameColumn } from './CustomerNameColumn';
 import { OrganizationProjectsExpandable } from './OrganizationProjectsExpandable';
 import { ProjectsCountColumn } from './ProjectsCountColumn';
-import { PROVIDER_CUSTOMERS_TABLE_TABS } from './utils';
+import { useProviderCustomersTabs } from './useProviderCustomersTabs';
 
 const ProviderOrganizationsListComponent = ({ provider }) => {
+  const tabs = useProviderCustomersTabs();
   const tableProps = useTable({
     table: 'marketplace-provider-organizations',
     fetchData: createFetcher(marketplaceServiceProvidersCustomersList, {
@@ -71,7 +72,7 @@ const ProviderOrganizationsListComponent = ({ provider }) => {
     <Table
       {...tableProps}
       columns={columns}
-      tabs={PROVIDER_CUSTOMERS_TABLE_TABS}
+      tabs={tabs}
       verboseName={translate('Organizations')}
       showPageSizeSelector={true}
       expandableRow={ExpandableRow}

@@ -6,10 +6,9 @@ import { BaseButton } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasAllPermissions } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
+import { canUpdateResourceOptions } from './permissions';
 import { UpdateResourceOptionDialogProps } from './UpdateResourceOptionDialog';
 
 const UpdateResourceOptionDialog = lazyComponent(() =>
@@ -22,24 +21,11 @@ export const UpdateResourceOptionButton: FunctionComponent<
   UpdateResourceOptionDialogProps['resolve']
 > = (props) => {
   const user = useUser();
-  // Some offerings apply option changes through a marketplace order rather
-  // than writing them straight to the resource. Those need order creation
-  // rights on top of the options permission.
   // A formula input changes limits, so it is always ordered, and its dialog
   // needs the width of the limits table it previews.
   const isFormula = props.option.type === 'component_formula';
-  const createsOrder =
-    isFormula ||
-    Boolean(
-      (props.resource.offering_plugin_options as any)
-        ?.create_orders_on_resource_option_change,
-    );
-  const requiredPermissions = createsOrder
-    ? [PermissionEnum.UPDATE_RESOURCE_OPTIONS, PermissionEnum.CREATE_ORDER]
-    : [PermissionEnum.UPDATE_RESOURCE_OPTIONS];
-  const hasPerms = hasAllPermissions(user, requiredPermissions, {
-    projectId: props.resource.project_uuid,
-    customerId: props.resource.customer_uuid,
+  const hasPerms = canUpdateResourceOptions(user, props.resource, {
+    forceOrder: isFormula,
   });
   const isResourceOk = props.resource.state === 'OK';
   const disabled = !hasPerms || !isResourceOk;

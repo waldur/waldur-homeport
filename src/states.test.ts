@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { states } from './states';
+import { canAccessServiceProviderWorkspace } from './workspace/selectors';
 
 /**
  * TabsList renders a parent tab's own trigger as a link to
@@ -38,6 +39,43 @@ describe('abstract states shown as tabs', () => {
       const target = byName.get(redirectTarget(state));
       expect(target).toBeDefined();
       expect(target.abstract).toBeFalsy();
+    },
+  );
+});
+
+/**
+ * A child state that declares its own `data.permissions` replaces the ones it
+ * would inherit, so every guarded page under the provider workspace has to
+ * repeat the workspace guard or a typed address bypasses it.
+ */
+describe('provider workspace states', () => {
+  const parentOf = (state) =>
+    state.parent ??
+    (state.name.includes('.')
+      ? state.name.slice(0, state.name.lastIndexOf('.'))
+      : undefined);
+
+  const ancestry = (state) => {
+    const chain = [];
+    for (let s = state; s; s = byName.get(parentOf(s))) chain.push(s);
+    return chain;
+  };
+
+  const providerStates = states.filter((state) =>
+    ancestry(state).some((s) => s.name === 'marketplace-provider'),
+  );
+
+  it('finds the provider workspace states', () => {
+    expect(providerStates.length).toBeGreaterThan(10);
+  });
+
+  it.each(providerStates.map((state) => [state.name, state]))(
+    '%s is guarded by the workspace access check',
+    (_name, state) => {
+      const guarded = ancestry(state).find((s) => s.data?.permissions);
+      expect(guarded?.data.permissions).toContain(
+        canAccessServiceProviderWorkspace,
+      );
     },
   );
 });
