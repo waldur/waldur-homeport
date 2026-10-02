@@ -12,7 +12,7 @@ import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 import { PlanSwitchModeExplanation } from './PlanSwitchModeExplanation';
@@ -65,7 +65,7 @@ interface ChangePlanDialogProps {
 const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
   const user = useUser();
 
-  const orderCanBeApproved = hasPermission(user, {
+  const orderCanBeApproved = hasConsumerPermission(user, {
     permission: PermissionEnum.APPROVE_ORDER,
     customerId: props.resource.customer_uuid,
     projectId: props.resource.project_uuid,

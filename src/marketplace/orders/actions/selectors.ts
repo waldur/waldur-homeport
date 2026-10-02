@@ -1,11 +1,11 @@
 import { MergedPluginOptions, OrderDetails } from 'waldur-js-client';
 
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 
 export const checkOrderCanBeApproved = (user, customer, project) =>
-  hasPermission(user, {
+  hasConsumerPermission(user, {
     permission: PermissionEnum.APPROVE_ORDER,
     customerId: customer?.uuid,
     projectId: project?.uuid,

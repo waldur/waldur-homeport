@@ -11,7 +11,7 @@ import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 const SetConsumerInfoDialog = lazyComponent(() =>
@@ -43,7 +43,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
       order.state === 'pending-provider' &&
       order.provider_message &&
       offering?.plugin_options?.enable_provider_consumer_messaging &&
-      hasPermission(user, {
+      hasConsumerPermission(user, {
         permission: PermissionEnum.SET_CONSUMER_ORDER_INFO,
         customerId: order.customer_uuid,
         projectId: order.project_uuid,

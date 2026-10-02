@@ -106,6 +106,28 @@ export const hasPermission = (
 };
 
 /**
+ * hasPermission for the consumer side of an order: only a role on the project
+ * or on its organization counts. A role on the organization's ServiceProvider
+ * acts for the provider, so it must not unlock consumer actions on orders the
+ * organization's own projects placed — the backend checks those against
+ * `project` and `project.customer` only and would refuse them.
+ */
+export const hasConsumerPermission = (
+  user: Pick<User, 'is_staff' | 'permissions'>,
+  request: Pick<PermissionRequest, 'permission' | 'projectId' | 'customerId'>,
+): boolean => {
+  if (user?.is_staff) {
+    return true;
+  }
+  return (
+    (!!request.projectId &&
+      checkScope(user, 'project', request.projectId, request.permission)) ||
+    (!!request.customerId &&
+      checkScope(user, 'customer', request.customerId, request.permission))
+  );
+};
+
+/**
  * True only if every listed permission is held in the same scope request.
  * Used by actions that need more than one right at once — for example
  * changing resource limits, which both mutates the resource and submits a

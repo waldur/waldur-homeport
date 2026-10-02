@@ -13,7 +13,7 @@ import { isMatrixChatEnabled } from '@/matrix/utils';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser, useProject } from '@/workspace/hooks';
 import { isOwnerOrStaff } from '@/workspace/selectors';
 
@@ -84,7 +84,7 @@ export const ProjectManageContainer = () => {
     return (
       user.is_staff ||
       user.is_support ||
-      hasPermission(user, {
+      hasConsumerPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         projectId: project.uuid,
         customerId: project.customer_uuid,

@@ -20,7 +20,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -59,7 +59,7 @@ export const ProjectOrderAutoApproval: FC<ProjectOrderAutoApprovalProps> = ({
     if (project?.is_removed) return false;
     return (
       user.is_staff ||
-      hasPermission(user, {
+      hasConsumerPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         projectId: project?.uuid,
         customerId: project?.customer_uuid,
