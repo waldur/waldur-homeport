@@ -30,7 +30,6 @@ const FieldsListGroup = ({
     changePageSize,
     visibleItems,
     refreshPageOnAdd,
-    refreshPageOnRemove,
     hasPages,
   } = usePagination(fields);
 
@@ -47,24 +46,10 @@ const FieldsListGroup = ({
 
   const removeRow = (index: number) => {
     if (fields.length > 1) {
-      const currentPageItems = fields.value.slice(
-        (page - 1) * pageSize,
-        page * pageSize,
-      );
       fields.remove(index);
-
-      const newLength = fields.length - 1;
-
-      const lastPage = Math.ceil(newLength / pageSize);
-      const isLastItemOnPage = currentPageItems.length === 1;
-
-      if (isLastItemOnPage && page > 1 && page === lastPage) {
-        setPage(page - 1);
-      }
-
-      const actualIndex = (page - 1) * pageSize + index;
-      if (actualIndex < fields.value.length) {
-        refreshPageOnRemove();
+      const lastPage = Math.ceil((fields.length - 1) / pageSize);
+      if (page > lastPage) {
+        setPage(lastPage);
       }
     }
   };
@@ -83,14 +68,13 @@ const FieldsListGroup = ({
             </tr>
           </thead>
           <tbody>
-            {visibleItems.map((component, i) => {
-              const actualIndex = (page - 1) * pageSize + i;
-              return component ? (
+            {visibleItems.map((name, i) =>
+              name ? (
                 <Fragment key={`${page}-${i}-${fields.length}`}>
                   <tr>
                     <td data-testid="remote-category-col">
                       <Field
-                        name={`${fields.name}[${actualIndex}].remote_category`}
+                        name={`${name}.remote_category`}
                         validate={required}
                       >
                         {({ input, meta }) => (
@@ -106,7 +90,7 @@ const FieldsListGroup = ({
                     </td>
                     <td data-testid="local-category-col">
                       <Field
-                        name={`${fields.name}[${actualIndex}].local_category`}
+                        name={`${name}.local_category`}
                         validate={required}
                       >
                         {(fieldProps) => (
@@ -128,7 +112,7 @@ const FieldsListGroup = ({
                     <td>
                       <BaseButton
                         variant="text-danger"
-                        onClick={() => removeRow(actualIndex)}
+                        onClick={() => removeRow(i)}
                         disabled={fields.length < 2}
                         disabledReason={translate(
                           'At least one mapping is required',
@@ -139,8 +123,8 @@ const FieldsListGroup = ({
                     </td>
                   </tr>
                 </Fragment>
-              ) : null;
-            })}
+              ) : null,
+            )}
           </tbody>
         </table>
       </Form.Group>
