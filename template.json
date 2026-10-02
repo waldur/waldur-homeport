@@ -31149,6 +31149,11 @@
       "feature_area": "setup"
     }
   },
+  "No CPU targets are available for this catalog version. Sync the catalog or choose another version.": {
+    "context": {
+      "feature_area": "software-catalogs"
+    }
+  },
   "No Celery workers detected": {
     "context": {
       "feature_area": "administration"
@@ -43328,6 +43333,16 @@
         }
       },
       "feature_area": "openstack"
+    }
+  },
+  "Removed saved values that this catalog version does not provide: {values}. Select replacements before saving, or the offering will not be restricted to them.": {
+    "context": {
+      "variables": {
+        "values": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "software-catalogs"
     }
   },
   "Removing Longhorn may result in the loss of attached volumes. Do you want to delete existing backups as well, or keep them for future use?": {
@@ -59343,6 +59358,11 @@
   "Unable to load AI Assistant configuration.": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Unable to load CPU targets.": {
+    "context": {
+      "feature_area": "software-catalogs"
     }
   },
   "Unable to load Matrix credentials.": {

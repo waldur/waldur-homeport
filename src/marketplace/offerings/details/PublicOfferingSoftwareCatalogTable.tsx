@@ -16,6 +16,11 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import {
+  getOfferingEnabledCpuFamilies,
+  getOfferingEnabledCpuMicroarchitectures,
+} from '../softwareCatalogCpu';
+
 import { SoftwarePackageExpandableRow } from './SoftwarePackageExpandableRow';
 
 interface PublicOfferingSoftwareCatalogTableProps {
@@ -30,14 +35,11 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
   );
 
   const getTableSubtitle = () => {
-    const enabledCpuFamily =
-      offering?.software_catalogs?.flatMap(
-        (sc) => sc.enabled_cpu_family || [],
-      ) || [];
+    const enabledCpuFamily = getOfferingEnabledCpuFamilies(
+      offering?.software_catalogs,
+    );
     const enabledCpuMicroarchitectures =
-      offering?.software_catalogs?.flatMap(
-        (sc) => sc.enabled_cpu_microarchitectures || [],
-      ) || [];
+      getOfferingEnabledCpuMicroarchitectures(offering?.software_catalogs);
 
     const uniqueEnabledCpuFamily = [...new Set(enabledCpuFamily)];
     const uniqueCpuMicroarchitectures = [
@@ -70,21 +72,24 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
     [values],
   );
 
-  const filter = useMemo(
-    () => ({
+  const filter = useMemo(() => {
+    const enabledCpuFamily = getOfferingEnabledCpuFamilies(
+      offering.software_catalogs,
+    );
+    const enabledCpuMicroarchitectures =
+      getOfferingEnabledCpuMicroarchitectures(offering.software_catalogs);
+    const hasCpuRestrictionFilters =
+      enabledCpuFamily.length > 0 || enabledCpuMicroarchitectures.length > 0;
+
+    return {
       offering_uuid: offering.uuid,
-      ...(offering.software_catalogs?.length > 0 && {
-        cpu_family: offering.software_catalogs.flatMap(
-          (sc) => sc.enabled_cpu_family || '',
-        )[0],
-        cpu_microarchitecture: offering.software_catalogs.flatMap(
-          (sc) => sc.enabled_cpu_microarchitectures || [],
-        ),
+      ...(hasCpuRestrictionFilters && {
+        cpu_family: [...new Set(enabledCpuFamily)],
+        cpu_microarchitecture: [...new Set(enabledCpuMicroarchitectures)],
       }),
       ...formFilter,
-    }),
-    [offering.uuid, offering.software_catalogs, formFilter],
-  );
+    };
+  }, [offering.uuid, offering.software_catalogs, formFilter]);
 
   const tableProps = useTable({
     table: 'OfferingSoftwarePackages-' + offering.uuid,
