@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { renderWithProviders } from '@/test/harness';
+import { useUser } from '@/workspace/hooks';
 
 import {
   useResourceApiKeysTable,
@@ -101,5 +102,40 @@ describe('InferenceServiceView', () => {
 
     expect(screen.getByTestId('playground')).toBeInTheDocument();
     expect(reveal).toHaveBeenCalledTimes(1);
+  });
+
+  describe('picking the playground key', () => {
+    const OTHERS = { uuid: 'k1', state: 'OK', user_uuid: 'someone-else' };
+    const SHARED = { uuid: 'k2', state: 'OK', user_uuid: null };
+
+    const renderWith = (keys: any[], user: any) => {
+      vi.mocked(useUser).mockReturnValue(user);
+      setup({ keys } as any);
+      renderWithProviders(
+        <InferenceServiceView resource={makeResource()} offering={OFFERING} />,
+      );
+    };
+
+    // Reveal refuses another user's personal key, which would leave the
+    // playground unable to authenticate.
+    it('skips a key assigned to someone else for a shared one', () => {
+      renderWith([OTHERS, SHARED], { uuid: 'me' });
+      expect(useRevealedApiKey).toHaveBeenCalledWith('k2');
+    });
+
+    it("prefers staff's own or a shared key over someone else's", () => {
+      renderWith([OTHERS, SHARED], { uuid: 'me', is_staff: true });
+      expect(useRevealedApiKey).toHaveBeenCalledWith('k2');
+    });
+
+    it("lets staff fall back to someone else's key", () => {
+      renderWith([OTHERS], { uuid: 'me', is_staff: true });
+      expect(useRevealedApiKey).toHaveBeenCalledWith('k1');
+    });
+
+    it("picks no key when every active key is someone else's", () => {
+      renderWith([OTHERS], { uuid: 'me' });
+      expect(useRevealedApiKey).toHaveBeenCalledWith('');
+    });
   });
 });

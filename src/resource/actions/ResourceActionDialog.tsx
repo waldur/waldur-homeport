@@ -28,6 +28,8 @@ interface ResourceActionDialogProps {
   dialogSubtitle?: ReactNode;
   dialogFullButtons?: boolean;
   dialogSubmitLabel?: string;
+  /** Keep Save disabled until the user changes something. */
+  disableSubmitWhenPristine?: boolean;
   formFields?: any[] | ((values: any) => any[]);
   initialValues?: any;
   loading?: boolean;
@@ -49,6 +51,8 @@ const ResourceActionDialogInner: FC<any> = ({
   handleSubmit,
   submitting,
   invalid,
+  pristine,
+  disableSubmitWhenPristine,
   dialogTitle,
   dialogSubtitle,
   dialogFullButtons,
@@ -180,6 +184,8 @@ const ResourceActionDialogInner: FC<any> = ({
       onSubmit={handleSubmit}
       submitting={submitting}
       invalid={invalid}
+      submitDisabled={Boolean(disableSubmitWhenPristine && pristine)}
+      submitDisabledReason={translate('Nothing has changed.')}
       fullButtons={dialogFullButtons}
       loading={loading}
     >
@@ -198,6 +204,7 @@ const ResourceActionDialogInner: FC<any> = ({
             disabled: field.disabled,
             disabled_tooltip: field.disabled_tooltip,
             spaceless: field.spaceless,
+            space: field.space,
             parse: field.parse,
             validate: Array.isArray(field.validate)
               ? composeValidators(...field.validate)

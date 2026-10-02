@@ -17,6 +17,10 @@ interface FormFooterProps {
   onCancel?: () => void;
   /** Disable all buttons */
   disabled?: boolean;
+  /** Disable only the submit button, e.g. while there is nothing to submit */
+  submitDisabled?: boolean;
+  /** Tooltip explaining why the submit button is disabled */
+  submitDisabledReason?: string;
   /** Show cancel button - defaults to true */
   showCancel?: boolean;
   /** Apply flex-equal class for full-width buttons */
@@ -63,6 +67,8 @@ export const FormFooter: FC<FormFooterProps> = ({
   cancelLabel,
   onCancel,
   disabled,
+  submitDisabled,
+  submitDisabledReason,
   showCancel = true,
   fullWidth,
   submitVariant = 'primary',
@@ -89,7 +95,8 @@ export const FormFooter: FC<FormFooterProps> = ({
         label={submitLabel || translate('Submit')}
         variant={submitVariant}
         className={buttonClassName}
-        disabled={disabled}
+        disabled={disabled || submitDisabled}
+        disabledReason={submitDisabled ? submitDisabledReason : undefined}
         invalid={invalid}
       >
         {submitChildren}

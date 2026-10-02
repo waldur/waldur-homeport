@@ -12,6 +12,8 @@ interface ActionDialogProps {
   submitting?: boolean;
   loading?: boolean;
   invalid?: boolean;
+  submitDisabled?: boolean;
+  submitDisabledReason?: string;
   onSubmit: any;
   error?: string;
   fullButtons?: boolean;
@@ -28,6 +30,8 @@ export const ActionDialogFinal: React.FC<
         <FormFooter
           submitLabel={props.submitLabel}
           fullWidth={props.fullButtons}
+          submitDisabled={props.submitDisabled}
+          submitDisabledReason={props.submitDisabledReason}
         />
       }
     >

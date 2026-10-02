@@ -1,130 +1,67 @@
-import { ArrowsClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
-import { FC, useEffect, useRef } from 'react';
-import {
-  marketplaceResourceApiKeysRotate,
-  Resource,
-  ResourceApiKeyState,
-  ResourceApiKeyStatus,
-} from 'waldur-js-client';
+import { useEffect, useMemo, useRef } from 'react';
+import { Offering, Resource } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import { Badge } from 'waldur-ui';
 
+import Avatar from '@/core/Avatar';
+import { CreateModalButton } from '@/core/buttons';
 import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
 import { StateIndicator } from '@/core/StateIndicator';
-import { formatJsxTemplate, translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
-import { useManagedMutation } from '@/modal/useManagedMutation';
+import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
+import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
-import { RevealApiKeyDialog } from './RevealApiKeyDialog';
-import { TRANSITIONAL, useInvalidateRevealedKey } from './useResourceApiKeys';
+import { ApiKeyActionsDropdown } from './ApiKeyActions';
+import { ApiKeyExpandableRow } from './ApiKeyExpandableRow';
+import { ApiKeyUsageSummary } from './ApiKeyUsageMeter';
+import { getHeadlineUsage } from './keyLimits';
+import { getStateLabel, getStateTooltip, getStateVariant } from './state';
+import { ApiKeyRow, KeyComponent } from './types';
+import { TRANSITIONAL } from './useResourceApiKeys';
 
-const getStateVariant = (
-  state: ResourceApiKeyState,
-): { variant: BadgeVariant; active: boolean } => {
-  if (state === 'Erred') return { variant: 'danger', active: false };
-  if (state === 'OK') return { variant: 'success', active: false };
-  // Creating / Updating — in progress, show the spinner.
-  return { variant: 'success', active: true };
-};
+const RequestApiKeyDialog = lazyComponent(() =>
+  import('./RequestApiKeyDialog').then((module) => ({
+    default: module.RequestApiKeyDialog,
+  })),
+);
 
-const ApiKeyActions: FC<{
-  row: ResourceApiKeyStatus;
-  canManage: boolean;
-  refetch: () => void;
-}> = ({ row, canManage, refetch }) => {
-  const { openDialog } = useModal();
-  const invalidateReveal = useInvalidateRevealedKey();
-  const { active: busy } = getStateVariant(row.state);
-  // Only an OK key has a value the backend has actually accepted; the reveal
-  // endpoint rejects anything else, so don't offer reveal until then.
-  const revealable = row.state === 'OK';
-  // Rotating an Erred key re-mints it — surface that as "Retry".
-  const isErred = row.state === 'Erred';
-
-  const { mutate: rotate, isPending: rotating } = useManagedMutation({
-    mutationFn: () =>
-      marketplaceResourceApiKeysRotate({ path: { uuid: row.uuid } }),
-    // Retry re-attempts a failed generation — nothing is lost, so no prompt.
-    // Rotate replaces a live key, so it confirms first.
-    confirmation: isErred
-      ? undefined
-      : {
-          title: translate('Rotate API key'),
-          body: translate(
-            'Replace the credentials for API key {name}? Anything still using them will stop working, and the key ID may change too. Your other keys are unaffected, so rotate one at a time to stay online.',
-            { name: <strong>{row.client_id}</strong> },
-            formatJsxTemplate,
-          ),
-          options: { positiveButton: translate('Yes') },
-        },
-    successMessage: isErred
-      ? translate('API key generation retried')
-      : translate('API key rotation requested'),
-    errorMessage: translate('Unable to rotate the API key.'),
-    onSuccess: () => {
-      invalidateReveal(row.uuid);
-      refetch();
-    },
-  });
-
-  const openReveal = () =>
-    openDialog(RevealApiKeyDialog, {
-      resolve: { uuid: row.uuid, canManage, onRotate: () => rotate() },
-    });
-
-  return (
-    <ActionsDropdown row={row} refetch={refetch} size="sm">
-      <ActionItem
-        title={translate('Reveal')}
-        action={openReveal}
-        iconNode={<EyeIcon weight="bold" />}
-        disabled={!revealable}
-        tooltip={
-          !revealable
-            ? translate('The key can be revealed once it is active.')
-            : undefined
-        }
-      />
-      {canManage && (
-        <ActionItem
-          title={isErred ? translate('Retry') : translate('Rotate')}
-          action={() => rotate()}
-          iconNode={<ArrowsClockwiseIcon weight="bold" />}
-          disabled={busy || rotating}
-          tooltip={
-            busy ? translate('An operation is already in progress.') : undefined
-          }
-        />
-      )}
-    </ActionsDropdown>
-  );
-};
-
-const getColumns = (): Column<ResourceApiKeyStatus>[] => [
+// Limits, usage and models exist only under key management; without it the API
+// returns them as null, so their columns would only ever show dashes. An
+// assignee set while it was on still decides who may reveal the key, so its
+// column stays for as long as any key has one.
+const getColumns = (
+  components: KeyComponent[],
+  models: string[],
+  resourceLimits: Record<string, number>,
+  keyManagement: boolean,
+  anyAssigned: boolean,
+): Column<ApiKeyRow>[] => [
   {
-    // The public half of the credential — an S3 access key id for croit, a slot
-    // name for inference keys. Named for what it is, since neither backend's own
-    // term covers the other. Never blank: client_id is half of unique_together.
     title: translate('Key ID'),
-    render: ({ row }) => <code>{row.client_id}</code>,
+    render: ({ row }) =>
+      row.client_id ? <code>{row.client_id}</code> : DASH_ESCAPE_CODE,
   },
+  ...(keyManagement
+    ? getManagedColumns(components, models, resourceLimits)
+    : anyAssigned
+      ? [getAssigneeColumn()]
+      : []),
   {
     title: translate('State'),
     render: ({ row }) => {
       const { variant, active } = getStateVariant(row.state);
       return (
         <StateIndicator
-          label={row.state}
+          label={getStateLabel(row)}
           variant={variant}
           active={active}
-          tooltip={row.state === 'Erred' ? row.error_message : ''}
+          tooltip={getStateTooltip(row)}
           shape="pill"
           tone="outline"
         />
@@ -132,21 +69,91 @@ const getColumns = (): Column<ResourceApiKeyStatus>[] => [
     },
   },
   {
-    // Rotation rewrites the row in place, so `modified` is the age of the secret
-    // currently in use — the number that matters for a credential — rather than
-    // the age of the slot holding it.
+    // The age of the value in use: set by its creation or latest rotation, not
+    // moved by a pause or an edit.
     title: translate('Issued'),
     render: ({ row }) =>
-      row.modified ? <>{formatDateTime(row.modified)}</> : <>&mdash;</>,
+      renderFieldOrDash(row.issued_at && formatDateTime(row.issued_at)),
   },
 ];
 
-interface ResourceApiKeysCardProps extends TableProps<ResourceApiKeyStatus> {
+const getAssigneeColumn = (): Column<ApiKeyRow> => ({
+  title: translate('Assignee'),
+  render: ({ row }) =>
+    row.user_full_name ? (
+      <span className="flex items-center gap-x-2">
+        <Avatar name={row.user_full_name} size={32} circle />
+        {row.user_full_name}
+      </span>
+    ) : (
+      DASH_ESCAPE_CODE
+    ),
+});
+
+const getManagedColumns = (
+  components: KeyComponent[],
+  models: string[],
+  resourceLimits: Record<string, number>,
+): Column<ApiKeyRow>[] => [
+  getAssigneeColumn(),
+  ...(components.length
+    ? [
+        {
+          title: translate('Limits & usage'),
+          render: ({ row }: { row: ApiKeyRow }) => (
+            <ApiKeyUsageSummary
+              reading={getHeadlineUsage(row, components, resourceLimits)}
+            />
+          ),
+        },
+      ]
+    : []),
+  ...(models.length
+    ? [
+        {
+          title: translate('Models'),
+          render: ({ row }: { row: ApiKeyRow }) => {
+            // A key with no list may call every model.
+            if (!row.allowed_models?.length) return translate('All models');
+            // Models no longer offered are dropped rather than shown stale.
+            const allowed = row.allowed_models.filter((model) =>
+              models.includes(model),
+            );
+            return allowed.length ? (
+              // Table cells have no vertical padding of their own, so wrapped
+              // chips need it to stay clear of the row borders.
+              <span className="flex flex-wrap gap-3 py-3">
+                {allowed.map((model) => (
+                  <Badge
+                    key={model}
+                    variant="neutral"
+                    shape="pill"
+                    tone="outline"
+                  >
+                    {model}
+                  </Badge>
+                ))}
+              </span>
+            ) : (
+              DASH_ESCAPE_CODE
+            );
+          },
+        },
+      ]
+    : []),
+];
+
+interface ResourceApiKeysCardProps extends TableProps<ApiKeyRow> {
   resource: Resource;
+  offering?: Pick<
+    Offering,
+    'components' | 'plugin_options' | 'resource_options'
+  >;
 }
 
 export const ResourceApiKeysCard = ({
   resource,
+  offering,
   ...tableProps
 }: ResourceApiKeysCardProps) => {
   const user = useUser();
@@ -155,29 +162,90 @@ export const ResourceApiKeysCard = ({
     projectId: resource.project_uuid,
     customerId: resource.customer_uuid,
   });
+  const components = useMemo<KeyComponent[]>(
+    () => offering?.components ?? [],
+    [offering],
+  );
+  const resourceLimits = useMemo(
+    () => (resource.limits ?? {}) as Record<string, number>,
+    [resource.limits],
+  );
+  // The offering's choices, narrowed by the resource's own selection.
+  const models = useMemo<string[]>(() => {
+    const choices = offering?.resource_options?.options?.models?.choices ?? [];
+    const option = (resource.options as any)?.models;
+    // A single-choice models option stores one string rather than a list.
+    const selected: string[] = option ? [].concat(option) : [];
+    return selected.length
+      ? choices.filter((model) => selected.includes(model))
+      : choices;
+  }, [offering, resource.options]);
+  const keyManagement = Boolean(
+    offering?.plugin_options?.enable_api_key_provisioning,
+  );
 
-  // useTable has no built-in polling; refresh while any key is mid-operation so
-  // the appearing/disappearing rows and the state indicator stay live.
-  const rows = (tableProps.rows ?? []) as ResourceApiKeyStatus[];
-  const syncing = rows.some((key) => TRANSITIONAL.includes(key.state));
+  // useTable has no built-in polling; refresh while any key is mid-operation.
+  const rows = (tableProps.rows ?? []) as ApiKeyRow[];
+  const syncing = rows.some(
+    (key) => key.state && TRANSITIONAL.includes(key.state),
+  );
   const fetchRef = useRef(tableProps.fetch);
   fetchRef.current = tableProps.fetch;
   useEffect(() => {
     if (!syncing) return;
-    const id = setInterval(() => fetchRef.current(), 5000);
-    return () => clearInterval(id);
+    const timer = setInterval(() => fetchRef.current(), 5000);
+    return () => clearInterval(timer);
   }, [syncing]);
 
   return (
-    <Table<ResourceApiKeyStatus>
+    <Table<ApiKeyRow>
       title={translate('API keys')}
       verboseName={translate('API keys')}
       cardBordered
-      columns={getColumns()}
+      columns={getColumns(
+        components,
+        models,
+        resourceLimits,
+        keyManagement,
+        rows.some((key) => key.user_uuid),
+      )}
+      tableActions={
+        canManage && keyManagement ? (
+          <CreateModalButton
+            title={translate('Request key')}
+            dialog={RequestApiKeyDialog}
+            size="md"
+            resolve={{
+              resource,
+              components,
+              models,
+              refetch: tableProps.fetch,
+            }}
+          />
+        ) : undefined
+      }
+      // The expanded row is the per-component usage, which only key
+      // management reports; without it there is nothing to expand, so the
+      // header's expand-all toggle goes too.
+      expandableRow={
+        keyManagement && components.length
+          ? ({ row }) => (
+              <ApiKeyExpandableRow
+                row={row}
+                components={components}
+                resourceLimits={resourceLimits}
+              />
+            )
+          : undefined
+      }
       rowActions={({ row }) => (
-        <ApiKeyActions
+        <ApiKeyActionsDropdown
           row={row}
+          resource={resource}
+          components={components}
+          models={models}
           canManage={canManage}
+          keyManagement={keyManagement}
           refetch={tableProps.fetch}
         />
       )}

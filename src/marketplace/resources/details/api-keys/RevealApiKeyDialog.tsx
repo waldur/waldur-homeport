@@ -10,11 +10,17 @@ import { BaseSecretField } from '@/form';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 
 import { useRevealedApiKey } from './useResourceApiKeys';
 
 interface OwnProps {
-  resolve: { uuid: string; canManage: boolean; onRotate: () => void };
+  resolve: {
+    uuid: string;
+    clientId?: string | null;
+    canManage: boolean;
+    onRotate: () => void;
+  };
 }
 
 // Reveal follows the service-account model (ServiceAccountShowInfoDialog): the
@@ -50,6 +56,9 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
   return (
     <ModalDialog
       title={translate('API key')}
+      subtitle={
+        <ScopeSubtitle label={translate('Key ID')} name={resolve.clientId} />
+      }
       footer={
         resolve.canManage ? (
           <BaseButton

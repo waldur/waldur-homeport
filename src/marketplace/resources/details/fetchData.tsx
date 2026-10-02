@@ -157,11 +157,8 @@ export const getResourceTabs = ({
     });
   }
 
-  // Any backend that reports API keys gets the tab — the resource says whether it
-  // owns any, so there is no offering type or flag for a provider to get wrong.
-  // The cast goes away once a waldur-js-client carrying has_api_keys is published;
-  // the field ships with the mastermind side of this change.
-  if ((resource as Resource & { has_api_keys?: boolean }).has_api_keys) {
+  // Any backend that reports API keys gets the tab, unless the offering hides it.
+  if (resource.has_api_keys && !offering.plugin_options?.hide_api_keys_tab) {
     tabs.push({
       key: 'api-keys',
       title: translate('API keys'),

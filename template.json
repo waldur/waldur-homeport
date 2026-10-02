@@ -692,6 +692,11 @@
   "A custom .png image file for login page": {},
   "A custom PNG icon for Keycloak login button": {},
   "A custom favicon .png image file": {},
+  "A deleted key cannot be edited.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "A human-readable name for this identity provider.": {
     "context": {
       "feature_area": "steps"
@@ -880,16 +885,46 @@
       "feature_area": "api-keys"
     }
   },
-  "API key for authenticating with the AI Assistant service.": {},
-  "API key for authentication": {},
-  "API key generation retried": {
+  "API key deletion requested": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "api-keys"
     }
   },
+  "API key for authenticating with the AI Assistant service.": {},
+  "API key for authentication": {},
   "API key is not ready to rotate": {
     "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "API key pause requested": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
+  "API key request withdrawn": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
+  "API key requested": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
+  "API key resume requested": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
+  "API key retry requested": {
+    "context": {
+      "primary_ui_type": "success_message",
       "feature_area": "api-keys"
     }
   },
@@ -900,6 +935,18 @@
     }
   },
   "API key rotation requested": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
+  "API key settings saved": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "api-keys"
+    }
+  },
+  "API key unassigned": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "api-keys"
@@ -3202,6 +3249,11 @@
   "All mandatory workflow steps must be enabled to activate the call": {
     "context": {
       "feature_area": "update"
+    }
+  },
+  "All models": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "All months": {
@@ -6366,7 +6418,7 @@
   "Assignee": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "tickets"
+      "feature_area": "api-keys"
     }
   },
   "Assignment accepted.": {
@@ -13048,7 +13100,7 @@
   "Creating": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "service-providers"
+      "feature_area": "api-keys"
     }
   },
   "Creating a backup schedule": {},
@@ -14885,6 +14937,22 @@
       "action_type": "create"
     }
   },
+  "Delete API key": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
+    }
+  },
+  "Delete API key {name}? It stops working once the provider revokes it, and it cannot be restored.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "api-keys"
+    }
+  },
   "Delete SRAM project rule": {
     "context": {
       "primary_ui_type": "title",
@@ -15344,7 +15412,7 @@
   "Deleted": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "service-providers"
+      "feature_area": "api-keys"
     }
   },
   "Deleted suggestion for {name}.": {
@@ -15383,7 +15451,7 @@
   "Deleting": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "service-providers"
+      "feature_area": "api-keys"
     }
   },
   "Deleting...": {
@@ -15391,6 +15459,7 @@
       "feature_area": "reviewer-discovery"
     }
   },
+  "Deletion": {},
   "Deletion in progress": {
     "context": {
       "feature_area": "request-types"
@@ -17113,6 +17182,11 @@
       "feature_area": "details"
     }
   },
+  "Edit key settings": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Edit keyword weight": {
     "context": {
       "primary_ui_type": "title"
@@ -18689,7 +18763,7 @@
   "Erred": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "resource-pending"
+      "feature_area": "api-keys"
     }
   },
   "Erred resources": {
@@ -22765,6 +22839,11 @@
       "feature_area": "auth"
     }
   },
+  "Hide API keys tab": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Hide API token management tab from non-staff and non-support users.": {
     "context": {
       "feature_area": "features"
@@ -25809,7 +25888,8 @@
   },
   "Key ID": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
     }
   },
   "Key concepts": {
@@ -26336,6 +26416,11 @@
       "primary_ui_type": "title"
     }
   },
+  "Leave all unticked to allow every model.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Leave call": {
     "context": {
       "feature_area": "call"
@@ -26464,6 +26549,11 @@
     }
   },
   "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
+  "Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "Lets users who may not change a resource end date themselves ask for it. Holders of the end date permission approve or reject on the resource, and approval applies the date immediately. Requests are also published as events, so an external approval system can decide instead. Does not apply to prepaid offerings, which extend through renewal instead.": {
     "context": {
       "feature_area": "integration"
@@ -26721,6 +26811,17 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "qos"
+    }
+  },
+  "Limits & usage": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
+    }
+  },
+  "Limits and models can be changed once the key is active. The assignee can be changed now.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Limits calculated from the options follow them: change an option on the Options tab to change them.": {
@@ -27870,6 +27971,11 @@
     "context": {
       "primary_ui_type": "text_content",
       "feature_area": "offerings"
+    }
+  },
+  "Manage API keys one by one": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Manage Arrow (ArrowSphere) cloud distribution platform integration for billing synchronization.": {
@@ -29821,6 +29927,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "playground"
+    }
+  },
+  "Models": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
     }
   },
   "Models unavailable": {
@@ -33337,6 +33449,11 @@
       "feature_area": "accounts"
     }
   },
+  "Nothing has changed.": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Nothing here": {
     "context": {
       "feature_area": "offering-merges"
@@ -34724,6 +34841,16 @@
     }
   },
   "Only staff users are allowed to perform this action.": {},
+  "Only the assignee can reveal the key. Leave empty for a key shared by the project.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Only the assignee can reveal this key.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Only the credentials of the selected method are kept; the others are cleared on update.": {
     "context": {
       "feature_area": "service-desk"
@@ -36789,6 +36916,22 @@
       "action_type": "create"
     }
   },
+  "Pause API key": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
+    }
+  },
+  "Pause API key {name}? Anything using it stops working until you resume it. The key keeps its value.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "api-keys"
+    }
+  },
   "Pause offering": {
     "context": {
       "primary_ui_type": "label",
@@ -36826,14 +36969,21 @@
       "feature_area": "billing"
     }
   },
+  "Paused at limit": {},
   "Paused due to project grace period": {
     "context": {
       "feature_area": "details"
     }
   },
+  "Paused on reaching a limit. It resumes on its own once under its limits again: when a new month begins or a limit is raised.": {},
   "Paused resources": {
     "context": {
       "feature_area": "policies"
+    }
+  },
+  "Pausing": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Pay": {
@@ -41948,6 +42098,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Raising the limit resumes the key on its own. Resumed while still over its limit, it is paused again on the next usage report.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Rancher Server": {
     "context": {
       "feature_area": "create"
@@ -43689,6 +43844,11 @@
       "feature_area": "access"
     }
   },
+  "Request API key": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Request ID": {
     "context": {
       "feature_area": "create"
@@ -43846,6 +44006,11 @@
   "Request is not valid.": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Request key": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Request limit change": {
@@ -44684,6 +44849,16 @@
       "feature_area": "resource-pending"
     }
   },
+  "Resource limit: {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-keys"
+    }
+  },
   "Resource limits change request has been submitted.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -45489,6 +45664,16 @@
   "Resume sync": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Resume the key to rotate it.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Resuming": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "Retry": {
@@ -46623,7 +46808,13 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "Rotating": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Rotating OAuth2 refresh token for remote eduTEAMS API access. Automatically updated by the periodic token rotation task. If empty, falls back to REMOTE_EDUTEAMS_REFRESH_TOKEN from Django settings.": {},
+  "Rotation": {},
   "Round": {
     "context": {
       "primary_ui_type": "title",
@@ -50084,6 +50275,7 @@
     }
   },
   "Settings that describe an offering itself, such as its plans and components.": {},
+  "Settings update": {},
   "Setup": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -54187,6 +54379,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "The key can be paused once it is active.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "The key can be revealed once it is active.": {
     "context": {
       "feature_area": "api-keys"
@@ -54196,6 +54393,16 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "keys"
+    }
+  },
+  "The key was never created, so it has nothing to resume.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "The key was never created, so it has nothing to rotate.": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "The last task reported an error": {
@@ -59025,6 +59232,12 @@
       "feature_area": "team"
     }
   },
+  "Unable to delete the API key.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "api-keys"
+    }
+  },
   "Unable to delete the affiliate link.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -60472,6 +60685,12 @@
       "feature_area": "site-agent"
     }
   },
+  "Unable to request the API key.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "api-keys"
+    }
+  },
   "Unable to reroute ticket to the selected provider.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -60552,6 +60771,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "matrix"
+    }
+  },
+  "Unable to retry the API key command.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "api-keys"
     }
   },
   "Unable to retype volume.": {
@@ -61157,6 +61382,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "support"
+    }
+  },
+  "Unable to unassign the API key.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "api-keys"
     }
   },
   "Unable to undo the merge.": {
@@ -61952,6 +62183,18 @@
       "feature_area": "telemetry"
     }
   },
+  "Unable to update the API key settings.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "api-keys"
+    }
+  },
+  "Unable to update the API key state.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "api-keys"
+    }
+  },
   "Unable to update the affiliate link.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -62103,6 +62346,30 @@
   "Unarchive": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Unassign": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
+  "Unassign API key": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "api-keys"
+    }
+  },
+  "Unassign API key {name} from {user}? Anyone with access to the resource can then reveal it.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "user": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-keys"
     }
   },
   "Unassigned": {
@@ -62991,7 +63258,8 @@
   },
   "Updating": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "api-keys"
     }
   },
   "Updating floating IPs": {},
@@ -66673,6 +66941,11 @@
       "feature_area": "issues"
     }
   },
+  "Withdraw this key request? The key was never created, so it is removed at once.": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "Withdrawable balance ({currency})": {
     "context": {
       "primary_ui_type": "label",
@@ -68768,6 +69041,11 @@
       "feature_area": "cluster"
     }
   },
+  "inherited": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "inner-fill width = usage / limit; colour: <70% green, <90% amber, <100% orange, ≥100% red": {
     "context": {
       "feature_area": "views"
@@ -69121,6 +69399,11 @@
   "organizations": {
     "context": {
       "feature_area": "organizations"
+    }
+  },
+  "over limit": {
+    "context": {
+      "feature_area": "api-keys"
     }
   },
   "passkeys": {
@@ -69630,6 +69913,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "this key": {
+    "context": {
+      "feature_area": "api-keys"
+    }
+  },
   "this month": {
     "context": {
       "feature_area": "cost-policies"
@@ -70079,6 +70367,15 @@
       },
       "feature_area": "dashboard",
       "action_type": "update"
+    }
+  },
+  "{command} failed": {
+    "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{completed} of {total} steps complete": {
@@ -73479,6 +73776,19 @@
         }
       },
       "feature_area": "posix-id-pools"
+    }
+  },
+  "{used} of {limit}": {
+    "context": {
+      "variables": {
+        "used": {
+          "type": "unknown"
+        },
+        "limit": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "api-keys"
     }
   },
   "{used} of {max} connections ({percent}%)": {
