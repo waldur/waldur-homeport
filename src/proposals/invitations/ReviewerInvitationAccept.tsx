@@ -1,4 +1,4 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
+import { CheckCircleIcon, InfoIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback } from 'react';
@@ -13,14 +13,18 @@ import {
 
 import { BaseButton } from 'waldur-ui';
 
+import { DEFAULT_REDIRECT_STATE } from '@/auth/authNavigation';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { useModal } from '@/modal/actions';
 import { useTitle } from '@/navigation/title';
 import { router } from '@/router';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
-import { COIPolicyCard } from './COIPolicyCard';
+import { COIPolicyCard, hasCOIPolicy } from './COIPolicyCard';
+import { InvitationDetailsCard } from './InvitationDetailsCard';
+import { InvitationFAQCard } from './InvitationFAQCard';
 import { ProfileRequiredMessage } from './ProfileRequiredMessage';
 import { TwoStageWorkflowCard } from './TwoStageWorkflowCard';
 
@@ -84,6 +88,7 @@ export const ReviewerInvitationAccept: FC = () => {
   } = useCurrentStateAndParams();
   const user = useUser();
   const { showSuccess, showErrorResponse } = useNotify();
+  const { confirm } = useModal();
 
   useTitle(translate('Reviewer invitation'));
 
@@ -123,10 +128,10 @@ export const ReviewerInvitationAccept: FC = () => {
 
   // Decline mutation
   const declineMutation = useMutation({
-    mutationFn: () => declineInvitation(token, translate('User declined')),
+    mutationFn: (reason: string) => declineInvitation(token, reason),
     onSuccess: () => {
       showSuccess(translate('Invitation declined.'));
-      router.stateService.go('profile');
+      router.stateService.go(DEFAULT_REDIRECT_STATE);
     },
     onError: (error) => {
       showErrorResponse(error, translate('Unable to decline invitation.'));
@@ -149,13 +154,38 @@ export const ReviewerInvitationAccept: FC = () => {
     publishMutation.mutate();
   }, [publishMutation]);
 
+  const handleDecline = async () => {
+    let result: { input?: string };
+    try {
+      result = await confirm(
+        translate('Decline invitation'),
+        translate(
+          'You will not join the reviewer pool for this call. This cannot be undone from this page.',
+        ),
+        {
+          type: 'danger',
+          positiveButton: translate('Decline'),
+          negativeButton: translate('Cancel'),
+          positiveButtonVariant: 'danger',
+          showInput: true,
+          inputLabel: translate('Reason'),
+          inputPlaceholder: translate('Optional'),
+          inputRequired: false,
+        },
+      );
+    } catch {
+      return;
+    }
+    declineMutation.mutate(result?.input?.trim() || translate('User declined'));
+  };
+
   if (invitationLoading || profileLoading) {
     return <LoadingSpinner />;
   }
 
   if (invitationError) {
     return (
-      <Container className="py-10">
+      <Container fluid className="py-10">
         <Card className="card-bordered">
           <Card.Body className="text-center py-10">
             <h3 className="text-danger mb-4">
@@ -179,7 +209,7 @@ export const ReviewerInvitationAccept: FC = () => {
   // CheckIcon if invitation is already processed
   if (invitation.invitation_status !== 'pending') {
     return (
-      <Container className="py-10">
+      <Container fluid className="py-10">
         <Card className="card-bordered">
           <Card.Body className="text-center py-10">
             <h3 className="mb-4">
@@ -197,10 +227,28 @@ export const ReviewerInvitationAccept: FC = () => {
   }
 
   const canAccept = profileStatus?.has_profile && profileStatus?.is_published;
+  const acceptBlockedReason = invitation.is_expired
+    ? translate(
+        'This invitation has expired. Please contact the call manager for a new invitation.',
+      )
+    : !canAccept
+      ? translate(
+          'Please create and publish your reviewer profile before accepting the invitation.',
+        )
+      : undefined;
 
   return (
-    <Container className="py-10">
-      <h2 className="mb-6">{translate('Reviewer invitation')}</h2>
+    <Container fluid className="py-10">
+      <div className="mb-6">
+        <h1 className="fs-2 fw-semibold mb-1">
+          {translate('You have been invited to review')}
+        </h1>
+        <p className="text-muted mb-0">
+          {translate(
+            'Review and respond to the invitation below. Your decision helps the call manager build a balanced reviewer pool.',
+          )}
+        </p>
+      </div>
 
       {/* Profile gating message */}
       <ProfileRequiredMessage
@@ -210,100 +258,57 @@ export const ReviewerInvitationAccept: FC = () => {
         isPublishing={publishMutation.isPending}
       />
 
-      {/* Invitation details */}
-      <Card className="card-bordered mb-6">
-        <Card.Header>
-          <Card.Title>
-            <h3>{translate('Invitation details')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <div className="d-flex flex-column gap-4">
-            <div>
-              <div className="fw-bold text-muted mb-1">{translate('Call')}</div>
-              <div className="fs-4">{invitation.call_name}</div>
-            </div>
-            {invitation.invited_by_name && (
-              <div>
-                <div className="fw-bold text-muted mb-1">
-                  {translate('Invited by')}
-                </div>
-                <div>{invitation.invited_by_name}</div>
-              </div>
-            )}
-            {invitation.expires_at && (
-              <div>
-                <div className="fw-bold text-muted mb-1">
-                  {translate('Expires')}
-                </div>
-                <div>
-                  {new Date(invitation.expires_at).toLocaleDateString()}
-                </div>
-              </div>
-            )}
-          </div>
-        </Card.Body>
-      </Card>
+      <InvitationDetailsCard invitation={invitation} />
 
       {/* Two-stage workflow explanation */}
       <TwoStageWorkflowCard />
 
+      <InvitationFAQCard />
+
       {/* COI Policy (informational - disclosure happens at assignment stage) */}
       <COIPolicyCard config={invitation.coi_configuration} />
 
-      {invitation.coi_configuration && (
-        <Card className="card-bordered mb-6 bg-light-info">
-          <Card.Body>
-            <p className="mb-0 text-info">
-              <strong>{translate('Note')}:</strong>{' '}
+      <div className="position-sticky bottom-0 z-index-2 d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between gap-4 border rounded bg-body px-6 py-4">
+        <div className="d-none d-md-flex align-items-center gap-2 flex-fill text-muted">
+          {hasCOIPolicy(invitation.coi_configuration) && (
+            <>
+              <InfoIcon size={18} weight="bold" className="flex-shrink-0" />
               {translate(
                 'When you are assigned specific proposals to review, you will have the opportunity to disclose any conflicts of interest at that time.',
               )}
-            </p>
-          </Card.Body>
-        </Card>
-      )}
-
-      {/* Actions */}
-      <div className="d-flex gap-4 justify-content-center">
-        <BaseButton
-          variant="success"
-          onClick={() => acceptMutation.mutate()}
-          disabled={!canAccept || declineMutation.isPending}
-          disabledReason={
-            !canAccept
-              ? translate('Please complete your profile first')
-              : declineMutation.isPending
-                ? translate('Decline in progress')
-                : undefined
-          }
-          pending={acceptMutation.isPending}
-          label={translate('Accept invitation')}
-          iconNode={<CheckIcon weight="bold" />}
-          size="lg"
-        />
-        <BaseButton
-          variant="danger"
-          onClick={() => declineMutation.mutate()}
-          disabled={acceptMutation.isPending}
-          disabledReason={
-            acceptMutation.isPending
-              ? translate('Accept in progress')
-              : undefined
-          }
-          pending={declineMutation.isPending}
-          label={translate('Decline invitation')}
-          iconNode={<XIcon weight="bold" />}
-          size="lg"
-        />
-      </div>
-      {!canAccept && (
-        <p className="text-center text-muted mt-4">
-          {translate(
-            'Please create and publish your reviewer profile before accepting the invitation.',
+            </>
           )}
-        </p>
-      )}
+        </div>
+        <div className="d-flex gap-3 ms-auto flex-shrink-0">
+          <BaseButton
+            variant="success"
+            onClick={() => acceptMutation.mutate()}
+            disabled={Boolean(acceptBlockedReason) || declineMutation.isPending}
+            disabledReason={
+              acceptBlockedReason ??
+              (declineMutation.isPending
+                ? translate('The invitation is being declined.')
+                : undefined)
+            }
+            pending={acceptMutation.isPending}
+            label={translate('Accept')}
+            iconNode={<CheckCircleIcon weight="bold" />}
+          />
+          <BaseButton
+            variant="danger"
+            onClick={handleDecline}
+            disabled={acceptMutation.isPending}
+            disabledReason={
+              acceptMutation.isPending
+                ? translate('The invitation is being accepted.')
+                : undefined
+            }
+            pending={declineMutation.isPending}
+            label={translate('Decline')}
+            iconNode={<XCircleIcon weight="bold" />}
+          />
+        </div>
+      </div>
     </Container>
   );
 };

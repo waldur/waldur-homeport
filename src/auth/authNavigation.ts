@@ -22,7 +22,22 @@ import { resetSessionState } from './sessionReset';
  * own thin equivalent instead of importing this file.
  */
 
-const DEFAULT_REDIRECT_STATE = 'profile.details';
+export const DEFAULT_REDIRECT_STATE = 'profile.details';
+
+// Pages a fresh login is routed through before it resumes the intended one
+const PASSKEY_GATE_STATE = 'profile-passkeys-required';
+const PROFILE_GATE_STATE = 'profile-manage';
+
+/**
+ * Whether `stateName` is a step of signing in rather than a page the user
+ * chose: the login form, the SSO callbacks under `home.`, and the gates
+ * resolvePostLoginTarget sends a fresh login through.
+ */
+export const isSignInStep = (stateName: string) =>
+  stateName === 'login' ||
+  stateName.startsWith('home.') ||
+  stateName === PASSKEY_GATE_STATE ||
+  stateName === PROFILE_GATE_STATE;
 
 export function storeRedirect() {
   if (
@@ -57,11 +72,11 @@ export function resolvePostLoginTarget(
   }
   if (needsPasskeyEnrollment(user)) {
     rememberBlockedNavigation(intended.toState, intended.toParams);
-    return { toState: 'profile-passkeys-required', toParams: {} };
+    return { toState: PASSKEY_GATE_STATE, toParams: {} };
   }
   if (!isUserValid(user)) {
     rememberBlockedNavigation(intended.toState, intended.toParams);
-    return { toState: 'profile-manage', toParams: {} };
+    return { toState: PROFILE_GATE_STATE, toParams: {} };
   }
   return intended;
 }

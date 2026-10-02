@@ -1,9 +1,9 @@
-import { ShieldCheckIcon } from '@phosphor-icons/react';
+import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { InvitationCoiConfiguration } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { FeaturedIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -11,68 +11,35 @@ interface COIPolicyCardProps {
   config?: InvitationCoiConfiguration | null;
 }
 
-const DISCLOSURE_LEVEL_DESCRIPTIONS: Record<string, string> = {
-  titles_only: translate(
-    'You will see proposal titles only when reviewing for potential conflicts.',
-  ),
-  titles_and_summaries: translate(
-    'You will see proposal titles and summaries when reviewing for potential conflicts.',
-  ),
-  full_details: translate(
-    'You will have access to full proposal details when reviewing for potential conflicts.',
-  ),
-};
+// A call can carry a COI configuration with no conflict types set
+export const hasCOIPolicy = (config?: InvitationCoiConfiguration | null) =>
+  Boolean(
+    config?.recusal_required_types?.length ||
+    config?.management_allowed_types?.length ||
+    config?.disclosure_only_types?.length,
+  );
 
 export const COIPolicyCard: FC<COIPolicyCardProps> = ({ config }) => {
-  if (!config) {
-    return null;
-  }
-
-  // Show the card if there are any configured COI types
-  const hasRecusalTypes = config.recusal_required_types?.length > 0;
-  const hasManagementTypes = config.management_allowed_types?.length > 0;
-  const hasDisclosureTypes = config.disclosure_only_types?.length > 0;
-  const hasCOIPolicy =
-    hasRecusalTypes || hasManagementTypes || hasDisclosureTypes;
-
-  if (!hasCOIPolicy) {
+  if (!hasCOIPolicy(config)) {
     return null;
   }
 
   return (
     <Card className="card-bordered mb-6">
-      <Card.Header className="border-bottom-0 pb-0">
-        <Card.Title>
-          <h3 className="d-flex align-items-center gap-2">
-            <ShieldCheckIcon size={24} weight="bold" className="text-primary" />
-            {translate('Conflict of interest policy')}
-          </h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <div className="d-flex flex-column gap-4">
-          {config.proposal_disclosure_level && (
-            <div>
-              <div className="fw-bold text-muted mb-1">
-                {translate('Proposal disclosure level')}
-              </div>
-              <div>
-                {DISCLOSURE_LEVEL_DESCRIPTIONS[
-                  config.proposal_disclosure_level
-                ] || config.proposal_disclosure_level}
-              </div>
-            </div>
-          )}
-
-          <AlertItem
-            type="floating"
-            variant="info"
-            title={translate('Declaration required')}
-            body={translate(
-              'This call requires you to declare any potential conflicts of interest before you can accept the invitation. Please review the proposals below and indicate any conflicts.',
+      <Card.Body className="d-flex gap-4">
+        <FeaturedIcon
+          icon={<InfoIcon weight="bold" />}
+          variant="neutral"
+          size="sm"
+          className="flex-shrink-0"
+        />
+        <div>
+          <h4 className="mb-1">{translate('Conflict of interest policy')}</h4>
+          <p className="text-muted mb-0">
+            {translate(
+              'This call has a conflict of interest policy. No proposals are shared with you yet: when specific proposals are assigned to you, you will be asked to declare any conflicts before you review them.',
             )}
-            className="mb-0"
-          />
+          </p>
         </div>
       </Card.Body>
     </Card>

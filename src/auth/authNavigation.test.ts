@@ -51,6 +51,7 @@ import {
   storeRedirect,
   redirectOnSuccess,
   resolvePostLoginTarget,
+  isSignInStep,
   clearAuthCache,
   localLogout,
   explicitLogout,
@@ -174,6 +175,31 @@ describe('authNavigation', () => {
         toParams: {},
       });
       expect(isUserValidMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('isSignInStep', () => {
+    it('counts the login form and the SSO callbacks', () => {
+      expect(isSignInStep('login')).toBe(true);
+      expect(isSignInStep('home.oauth_login_completed')).toBe(true);
+    });
+
+    it('counts every gate a fresh login is routed through', () => {
+      const user = { uuid: 'u1' } as any;
+      const intended = { toState: 'project.details', toParams: {} };
+      needsPasskeyEnrollmentMock.mockReturnValueOnce(true);
+      expect(isSignInStep(resolvePostLoginTarget(user, intended).toState)).toBe(
+        true,
+      );
+      isUserValidMock.mockReturnValueOnce(false);
+      expect(isSignInStep(resolvePostLoginTarget(user, intended).toState)).toBe(
+        true,
+      );
+    });
+
+    it('does not count pages the user chose', () => {
+      expect(isSignInStep('project.details')).toBe(false);
+      expect(isSignInStep('profile.details')).toBe(false);
     });
   });
 
