@@ -7,9 +7,8 @@ import { BaseButton } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
+import { canUpdateResourceOptions } from '@/marketplace/resources/options/permissions';
 import { useModal } from '@/modal/actions';
-import { PermissionEnum } from '@/permissions/enums';
-import { hasAllPermissions } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 const MultiEditOptionsDialog = lazyComponent(() =>
@@ -33,30 +32,11 @@ export const MultiEditOptionsAction = ({
   const canShow = useMemo(() => {
     // Check if the offering of all resources is the same & check permission
     const offeringUuid = rows[0].offering_uuid;
-    return rows.every((resource) => {
-      // Offerings that apply option changes through a marketplace order need
-      // order creation rights as well.
-      const createsOrder = Boolean(
-        (resource.offering_plugin_options as any)
-          ?.create_orders_on_resource_option_change,
-      );
-      return (
+    return rows.every(
+      (resource) =>
         resource.offering_uuid === offeringUuid &&
-        hasAllPermissions(
-          user,
-          createsOrder
-            ? [
-                PermissionEnum.UPDATE_RESOURCE_OPTIONS,
-                PermissionEnum.CREATE_ORDER,
-              ]
-            : [PermissionEnum.UPDATE_RESOURCE_OPTIONS],
-          {
-            projectId: resource.project_uuid,
-            customerId: resource.customer_uuid,
-          },
-        )
-      );
-    });
+        canUpdateResourceOptions(user, resource),
+    );
   }, [rows, user]);
 
   const callback = () =>

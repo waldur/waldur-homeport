@@ -14,11 +14,12 @@ import { useTable } from '@/table/useTable';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
 import { ProviderProjectExpandableRow } from './ProviderProjectExpandableRow';
-import { PROVIDER_CUSTOMERS_TABLE_TABS } from './utils';
+import { useProviderCustomersTabs } from './useProviderCustomersTabs';
 
 const TABLE_ID = 'marketplace-provider-projects';
 
 const ProviderProjectsListComponent = ({ provider }) => {
+  const tabs = useProviderCustomersTabs();
   const filterValues = useFilterValues(TABLE_ID);
   const filter = useMemo(
     () => selectMarketplaceServiceProvidersProjectsFilter(filterValues),
@@ -44,7 +45,7 @@ const ProviderProjectsListComponent = ({ provider }) => {
   return (
     <ProjectsListTable
       {...tableProps}
-      tabs={PROVIDER_CUSTOMERS_TABLE_TABS}
+      tabs={tabs}
       tableActions={null}
       rowActions={null}
       expandableRow={ExpandableRow}
