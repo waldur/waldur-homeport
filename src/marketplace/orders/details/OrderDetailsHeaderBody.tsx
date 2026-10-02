@@ -8,6 +8,9 @@ import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { Field } from '@/resource/summary';
+import { useUser } from '@/workspace/hooks';
+
+import { shouldLinkProviderResource } from '../utils';
 
 import { OrderDetailsQuickBody } from './OrderDetailsQuickBody';
 
@@ -53,6 +56,7 @@ const PurchaseOrderBadge = ({ order, offering }) => {
 };
 
 export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
+  const user = useUser();
   const showPurchaseOrder =
     offering?.plugin_options?.enable_purchase_order_upload ||
     offering?.plugin_options?.require_purchase_order_upload;
@@ -79,10 +83,21 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
         <Field
           label={translate('Resource')}
           value={
-            <ResourceLink
-              uuid={order.marketplace_resource_uuid}
-              label={order.resource_name}
-            />
+            shouldLinkProviderResource(user, order) ? (
+              <Link
+                state="marketplace-provider-resource-details"
+                params={{
+                  uuid: order.provider_uuid,
+                  resource_uuid: order.marketplace_resource_uuid,
+                }}
+                label={order.resource_name}
+              />
+            ) : (
+              <ResourceLink
+                uuid={order.marketplace_resource_uuid}
+                label={order.resource_name}
+              />
+            )
           }
           labelClass="w-100px"
           labelCol="auto"

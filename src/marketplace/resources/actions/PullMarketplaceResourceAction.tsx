@@ -1,5 +1,8 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { marketplaceResourcesPull } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesPull,
+  marketplaceResourcesPull,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -8,6 +11,7 @@ import { validateState } from '@/resource/actions/base';
 import { ActionContext } from '@/resource/actions/types';
 import { useValidators } from '@/resource/actions/useValidators';
 
+import { useIsProviderAction } from './ProviderActionContext';
 import { getMarketplaceResourceUuid } from './utils';
 
 const SUPPORTED_OFFERING_TYPES = [
@@ -32,10 +36,13 @@ export const PullMarketplaceResourceAction = ({
   ...rest
 }) => {
   const validationState = useValidators(validators, resource);
+  const pull = useIsProviderAction()
+    ? marketplaceProviderResourcesPull
+    : marketplaceResourcesPull;
 
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
-      marketplaceResourcesPull({
+      pull({
         path: {
           uuid: getMarketplaceResourceUuid(resource),
         },

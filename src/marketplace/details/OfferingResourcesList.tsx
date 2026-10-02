@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import {
   marketplaceProviderResourcesList,
@@ -12,6 +13,7 @@ import {
   FILTER_OFFERING_RESOURCE,
   TABLE_OFFERING_RESOURCE,
 } from '@/marketplace/details/constants';
+import { isDescendantOf } from '@/navigation/useTabs';
 import { createFetcher } from '@/table/api';
 import { selectProviderOfferingResourcesFilter } from '@/table/generated/ProviderOfferingResourcesFilter';
 import Table from '@/table/Table';
@@ -41,6 +43,10 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
   ...props
 }) => {
   const values = useFilterValues(TABLE_OFFERING_RESOURCE);
+  // The list is shown in the provider workspace and in administration; only
+  // the former links to the provider's view of a resource.
+  const { state } = useCurrentStateAndParams();
+  const inProviderWorkspace = isDescendantOf('marketplace-provider', state);
   const filterValues: FilterValues = values;
 
   const filter = useMemo(() => {
@@ -81,6 +87,9 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = ({
       title={translate('Resources')}
       columns={getResourceAllListColumns(true, true, {
         isOfferingScoped: true,
+        providerUuid: inProviderWorkspace
+          ? props.offering.customer_uuid
+          : undefined,
       })}
       hasOptionalColumns
       verboseName={translate('offering resources')}

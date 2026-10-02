@@ -111,13 +111,22 @@ export const getResourceAllListColumns = (
   // On a list already scoped to a single offering, category and offering hold
   // the same value in every row. They stay available in the column picker, but
   // showing them by default only costs horizontal space.
-  { isOfferingScoped = false }: { isOfferingScoped?: boolean } = {},
+  // In the provider workspace, names link to the provider's view of the
+  // resource, as the consumer page is not readable by provider-side roles.
+  {
+    isOfferingScoped = false,
+    providerUuid,
+  }: { isOfferingScoped?: boolean; providerUuid?: string } = {},
 ) =>
   (
     [
       {
         title: translate('Name'),
-        render: ResourceNameField,
+        render: providerUuid
+          ? ({ row }) => (
+              <ResourceNameField row={row} providerUuid={providerUuid} />
+            )
+          : ResourceNameField,
         orderField: 'name',
         id: 'name',
         keys: ['name'],

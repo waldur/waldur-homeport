@@ -938,6 +938,38 @@ export const states: StateDeclaration[] = [
       skipHero: true,
     },
   },
+  // The same page opened from the provider workspace. Provider-side roles
+  // cannot read a consumer's resource through the consumer endpoints, so this
+  // variant loads it through the provider ones and keeps to provider tabs.
+  {
+    name: 'marketplace-provider-resource-container',
+    url: '',
+    abstract: true,
+    parent: 'marketplace-provider',
+    component: lazyComponent(() =>
+      import('./resources/details/ResourceDetailsContainer').then((module) => ({
+        default: module.ProviderResourceDetailsContainer,
+      })),
+    ),
+  },
+  {
+    name: 'marketplace-provider-resource-details',
+    url: 'resource-details/:resource_uuid?tab',
+    parent: 'marketplace-provider-resource-container',
+    params: {
+      tab: { dynamic: true },
+    },
+    component: lazyComponent(() =>
+      import('@/marketplace/resources/details/ResourceDetailsPage').then(
+        (module) => ({ default: module.ResourceDetailsPage }),
+      ),
+    ),
+    data: {
+      useExtraTabs: true,
+      skipBreadcrumb: true,
+      skipHero: true,
+    },
+  },
   {
     name: 'admin-marketplace-offerings',
     parent: 'admin-marketplace',

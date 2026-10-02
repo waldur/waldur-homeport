@@ -10,14 +10,16 @@ import { PublicResourceLink } from './PublicResourceLink';
 
 interface ResourceNameFieldProps {
   row: Resource;
+  providerUuid?: string;
 }
 
 export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   row,
+  providerUuid,
 }) => {
   return (
     <div className="d-flex align-items-center gap-1 flex-wrap">
-      <PublicResourceLink row={row} />
+      <PublicResourceLink row={row} providerUuid={providerUuid} />
       <CopyToClipboardButton
         value={row.name}
         className="text-hover-primary cursor-pointer d-inline-block"

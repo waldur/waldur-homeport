@@ -24,8 +24,11 @@ const OrderInProgressActions: FC<{
   resource: Resource;
   offering: PublicOfferingDetails;
   refetch(): void;
-}> = ({ resource, offering, refetch }) => {
+  providerView?: boolean;
+}> = ({ resource, offering, refetch, providerView }) => {
   if (resource.order_in_progress.state === 'pending-consumer') {
+    // Consumer approval is not the provider's to give; an empty menu helps no one.
+    if (providerView) return null;
     return (
       <ActionsDropdownComponent labeled size="sm" drop="down">
         <OrderConsumerActions
@@ -61,6 +64,8 @@ interface OrderInProgressViewProps {
   resource: Resource;
   offering: PublicOfferingDetails;
   customerView?: boolean;
+  /** Shown to the provider: the consumer's approval actions are left out. */
+  providerView?: boolean;
   refetch(): void;
 }
 
@@ -226,6 +231,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   resource,
   offering,
   customerView,
+  providerView,
   refetch,
 }) => {
   if (!resource.order_in_progress) {
@@ -267,6 +273,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
               resource={resource}
               offering={offering}
               refetch={refetch}
+              providerView={providerView}
             />
           </div>
         </Card.Body>

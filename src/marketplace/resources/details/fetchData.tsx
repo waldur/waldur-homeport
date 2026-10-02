@@ -1,4 +1,6 @@
 import {
+  marketplaceProviderResourcesDetailsRetrieve,
+  marketplaceProviderResourcesOfferingRetrieve,
   marketplaceResourcesDetailsRetrieve,
   marketplaceResourcesOfferingRetrieve,
   Offering,
@@ -518,4 +520,69 @@ export const fetchData = async (resource: Resource) => {
     robotAccountsCount,
     endDateChangeRequestsCount,
   };
+};
+
+/**
+ * Tabs of the resource page opened from the provider workspace. Most consumer
+ * tabs read the resource through the consumer endpoints, which answer a
+ * provider-side user with 404, so only the tabs that need nothing beyond the
+ * provider's own view of the resource are offered.
+ */
+export const getProviderResourceTabs = ({
+  resource,
+}: {
+  resource: Resource;
+}) => {
+  const tabs: PageBarTab[] = [
+    {
+      key: 'resource-details',
+      title: translate('Resource details'),
+      component: lazyComponent(() =>
+        import('./ResourceMetadataCard').then((module) => ({
+          default: module.ResourceMetadataCard,
+        })),
+      ),
+    },
+    {
+      key: 'order-history',
+      title: translate('Order history'),
+      component: lazyComponent(() =>
+        import('@/marketplace/orders/list/ResourceOrders').then((module) => ({
+          default: module.ResourceOrders,
+        })),
+      ),
+    },
+  ];
+  if (resource.report?.length > 0) {
+    tabs.push({
+      key: 'report',
+      title: translate('Report'),
+      component: lazyComponent(() =>
+        import('./ShowReportCard').then((module) => ({
+          default: module.ShowReportCard,
+        })),
+      ),
+    });
+  }
+  return tabs;
+};
+
+/** Loads the page data through the provider endpoints only. */
+export const fetchProviderData = async (resource: Resource) => {
+  let scope;
+  if (resource.scope) {
+    scope = (
+      await marketplaceProviderResourcesDetailsRetrieve({
+        path: { uuid: resource.uuid },
+      })
+    ).data;
+  }
+  const offering = await marketplaceProviderResourcesOfferingRetrieve({
+    path: { uuid: resource.uuid },
+  }).then((response) => response.data);
+  const components = resolvePlanComponents(
+    offering.components,
+    findResourcePlan(offering.plans, resource.plan_uuid),
+  );
+  return { scope, components, offering };
 };
