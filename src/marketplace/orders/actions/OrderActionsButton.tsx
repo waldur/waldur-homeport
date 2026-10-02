@@ -3,7 +3,10 @@ import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import {
+  hasConsumerPermission,
+  hasPermission,
+} from '@/permissions/hasPermission';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 import {
   BASIC_OFFERING_TYPE,
@@ -44,7 +47,7 @@ export const OrderActionsButton = ({
         order.offering_type,
       ) &&
       ['executing', 'pending-consumer'].includes(order.state) &&
-      hasPermission(user, {
+      hasConsumerPermission(user, {
         permission: PermissionEnum.CANCEL_ORDER,
         customerId: order.customer_uuid,
         projectId: order.project_uuid,
@@ -95,12 +98,12 @@ export const OrderActionsButton = ({
 
   const showConsumerActions = useMemo(() => {
     if (order.state !== 'pending-consumer') return false;
-    const canApprove = hasPermission(user, {
+    const canApprove = hasConsumerPermission(user, {
       permission: PermissionEnum.APPROVE_ORDER,
       customerId: order.customer_uuid,
       projectId: order.project_uuid,
     });
-    const canReject = hasPermission(user, {
+    const canReject = hasConsumerPermission(user, {
       permission: PermissionEnum.REJECT_ORDER,
       customerId: order.customer_uuid,
       projectId: order.project_uuid,

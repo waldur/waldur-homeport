@@ -6,7 +6,7 @@ import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
 
@@ -37,7 +37,7 @@ export const RejectByConsumerButton: FC<
     refetch,
   });
   if (
-    !hasPermission(user, {
+    !hasConsumerPermission(user, {
       permission: PermissionEnum.REJECT_ORDER,
       customerId: order.customer_uuid,
       projectId: order.project_uuid,

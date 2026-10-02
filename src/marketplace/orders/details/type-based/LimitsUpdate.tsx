@@ -23,7 +23,10 @@ import {
 } from './OrderCommonFields';
 
 export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
-  const shouldConcealPrices = useShouldConcealPrices(order.project_uuid);
+  const shouldConcealPrices = useShouldConcealPrices(
+    order.project_uuid,
+    order.customer_uuid,
+  );
   const data = useMemo(() => {
     const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
     const requirements = getLimitChangeRequirements(

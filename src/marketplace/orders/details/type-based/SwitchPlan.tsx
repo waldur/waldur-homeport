@@ -25,7 +25,10 @@ import {
 } from './OrderCommonFields';
 
 export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
-  const shouldConcealPrices = useShouldConcealPrices(order.project_uuid);
+  const shouldConcealPrices = useShouldConcealPrices(
+    order.project_uuid,
+    order.customer_uuid,
+  );
   const data = useMemo(
     () => getPlanSwitchData(order, offering),
     [order, offering],

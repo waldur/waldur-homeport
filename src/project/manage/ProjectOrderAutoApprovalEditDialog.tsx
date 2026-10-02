@@ -18,7 +18,7 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
 interface EditDialogProps {
@@ -52,7 +52,7 @@ export const ProjectOrderAutoApprovalEditDialog: FC<EditDialogProps> = ({
   const user = useUser();
   const queryClient = useQueryClient();
 
-  const hasScopedPermission = hasPermission(user, {
+  const hasScopedPermission = hasConsumerPermission(user, {
     permission: PermissionEnum.APPROVE_ORDER,
     projectId: project.uuid,
     customerId: project.customer_uuid,

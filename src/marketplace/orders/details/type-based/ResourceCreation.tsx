@@ -20,7 +20,10 @@ const PureResourceCreation = ({
   editable,
   components,
 }: OrderTypeBasedProps & PricesData) => {
-  const shouldConcealPrices = useShouldConcealPrices(order.project_uuid);
+  const shouldConcealPrices = useShouldConcealPrices(
+    order.project_uuid,
+    order.customer_uuid,
+  );
   const {
     usageRows,
     initialRows,

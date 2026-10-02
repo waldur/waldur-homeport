@@ -16,7 +16,7 @@ import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
@@ -46,7 +46,7 @@ export const ProjectDashboardCostLimits = ({
   const canManageAutoApproval =
     !project.is_removed &&
     (user.is_staff ||
-      hasPermission(user, {
+      hasConsumerPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         projectId: project.uuid,
         customerId: project.customer_uuid,
