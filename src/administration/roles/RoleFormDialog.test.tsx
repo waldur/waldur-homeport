@@ -13,6 +13,7 @@ import {
 import { renderWithProviders } from '@/test/harness';
 import { mockListResponse } from '@/test/utils';
 
+import { PermissionOptions } from './PermissionOptions';
 import { RoleFormDialog } from './RoleFormDialog';
 
 // When editing, the dialog fetches the full role (the list row only carries
@@ -45,14 +46,16 @@ describe('RoleFormDialog', () => {
   it('summarises the whole role in the footer', async () => {
     const user = userEvent.setup();
     renderDialog();
+    // The group list is generated from the backend, so derive its size.
+    const total = PermissionOptions.length;
     expect(
-      screen.getByText(/0\/13 groups · 0 permissions/),
+      screen.getByText(`0/${total} groups · 0 permissions`),
     ).toBeInTheDocument();
 
     await user.click(screen.getByLabelText('Approve and reject proposals'));
 
     expect(
-      screen.getByText(/1\/13 groups · 1 permissions/),
+      screen.getByText(`1/${total} groups · 1 permissions`),
     ).toBeInTheDocument();
   });
 
