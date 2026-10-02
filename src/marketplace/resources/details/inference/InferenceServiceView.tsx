@@ -8,6 +8,7 @@ import { BaseButton } from 'waldur-ui';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { useUser } from '@/workspace/hooks';
 
 import {
   getInferenceEndpoint,
@@ -19,6 +20,7 @@ import {
   InferenceModelState,
   useInferenceModels,
 } from '../../playground/useInferenceModels';
+import { canRevealKey } from '../api-keys/state';
 import {
   useResourceApiKeysTable,
   useRevealedApiKey,
@@ -136,9 +138,15 @@ export const InferenceServiceView = ({
   // The keys themselves are managed in the resource's "API keys" tab; here they
   // are only needed to pick the key the playground authenticates with.
   const { rows } = useResourceApiKeysTable(resource);
-  const activeKey = (rows as ResourceApiKeyStatus[] | undefined)?.find(
-    (key) => key.state === 'OK',
-  );
+  const user = useUser();
+  const keys = (rows as ResourceApiKeyStatus[] | undefined) ?? [];
+  // The viewer's own or a shared key first, so the playground's usage is not
+  // charged to someone else's key; staff and support may fall back to any.
+  const activeKey =
+    keys.find(
+      (key) =>
+        key.state === 'OK' && (!key.user_uuid || key.user_uuid === user?.uuid),
+    ) ?? keys.find((key) => canRevealKey(key, user));
   const playgroundKey = useRevealedApiKey(activeKey?.uuid ?? '');
   const modelState = useInferenceModels(endpoint, playgroundKey.value);
 

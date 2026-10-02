@@ -1,6 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, useId } from 'react';
 import { FormCheck, FormText } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
@@ -22,6 +22,11 @@ export const AwesomeCheckbox: FC<AwesomeCheckboxProps> = ({
   type = 'switch',
   ...props
 }) => {
+  // Without an id of its own the checkbox takes the enclosing FormGroup's
+  // controlId, which every checkbox in the group shares, so each label would
+  // toggle the group's first box.
+  const fallbackId = useId();
+  const id = props.id ?? fallbackId;
   return (
     <label
       className={classNames(
@@ -39,7 +44,7 @@ export const AwesomeCheckbox: FC<AwesomeCheckboxProps> = ({
     >
       <FormCheck
         type="checkbox"
-        id={props.id}
+        id={id}
         checked={props.value}
         disabled={props.disabled}
         onChange={(e: React.ChangeEvent<any>) =>
@@ -49,7 +54,7 @@ export const AwesomeCheckbox: FC<AwesomeCheckboxProps> = ({
       />
 
       {(props.label || props.tooltip) && (
-        <FormCheck.Label htmlFor={props.id}>
+        <FormCheck.Label htmlFor={id}>
           {props.tooltip && (
             <>
               <Tooltip label={props.tooltip}>

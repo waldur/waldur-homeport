@@ -49,6 +49,21 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
             name="plugin_options.expose_inference_playground"
             label={translate('Enable inference service view')}
           />
+          <BooleanEditField
+            name="plugin_options.hide_api_keys_tab"
+            label={translate('Hide API keys tab')}
+          />
+          {props.offering.type === SITE_AGENT_PLUGIN && (
+            // A claim about the agent's backend, not a preference: one that
+            // cannot govern keys fails every such command.
+            <BooleanEditField
+              name="plugin_options.enable_api_key_provisioning"
+              label={translate('Manage API keys one by one')}
+              description={translate(
+                'Lets users request API keys, assign them, limit their usage and their models, and pause or delete them. Turn on only if the backend behind the site agent supports it, such as the Envoy AI Gateway; others, such as Ceph S3, fail those actions. Without it, keys can only be revealed and rotated.',
+              )}
+            />
+          )}
           <SelectEditField
             name="plugin_options.disabled_resource_actions"
             label={translate('Disabled resource actions')}

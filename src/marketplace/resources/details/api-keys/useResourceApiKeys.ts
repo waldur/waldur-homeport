@@ -13,7 +13,11 @@ import { useTable } from '@/table/useTable';
 
 /** States where the agent is mid-operation — the row shows a spinner and the
  * table keeps polling until the key settles. */
-export const TRANSITIONAL: ResourceApiKeyState[] = ['Creating', 'Updating'];
+export const TRANSITIONAL: ResourceApiKeyState[] = [
+  'Creating',
+  'Updating',
+  'Deleting',
+];
 
 const revealKey = (keyUuid: string) => ['resource-api-key-reveal', keyUuid];
 
