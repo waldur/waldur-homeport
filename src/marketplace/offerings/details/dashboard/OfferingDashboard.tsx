@@ -9,6 +9,9 @@ import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { PermissionEnum } from '@/permissions/enums';
+import { useUser } from '@/workspace/hooks';
+import { checkServiceProviderPermission } from '@/workspace/selectors';
 
 import { ComponentsUsage } from './ComponentsUsage';
 import { OfferingAgentInfo } from './OfferingAgentInfo';
@@ -23,6 +26,14 @@ interface OwnProps {
 
 export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.xl });
+  const user = useUser();
+  // Usage and state counters are provider statistics; a role that can open
+  // the offering without that right would only get an error card.
+  const canSeeStatistics = checkServiceProviderPermission(
+    { uuid: offering.customer_uuid },
+    user,
+    PermissionEnum.GET_SERVICE_PROVIDER_STATISTICS,
+  );
   const [agentIdentity, setAgentIdentity] = useState(null);
 
   const {
@@ -57,7 +68,7 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
 
   return (
     <>
-      <ComponentsUsage offering={offering} />
+      {canSeeStatistics && <ComponentsUsage offering={offering} />}
 
       {isLoading ? (
         <LoadingSpinner />
@@ -74,7 +85,9 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
                 agentIdentity={agentIdentity}
                 setAgentIdentity={setAgentIdentity}
               />
-              <OfferingResourcesAndUsers offering={offering} />
+              {canSeeStatistics && (
+                <OfferingResourcesAndUsers offering={offering} />
+              )}
               {showExperimentalUiComponents && (
                 <OfferingComponentUsagePanel offering={offering} />
               )}
@@ -94,7 +107,9 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
                 setAgentIdentity={setAgentIdentity}
               />
             )}
-            <OfferingResourcesAndUsers offering={offering} />
+            {canSeeStatistics && (
+              <OfferingResourcesAndUsers offering={offering} />
+            )}
             {showExperimentalUiComponents && (
               <OfferingComponentUsagePanel offering={offering} />
             )}
