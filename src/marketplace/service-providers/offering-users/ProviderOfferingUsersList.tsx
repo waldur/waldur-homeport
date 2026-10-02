@@ -21,7 +21,6 @@ import {
 } from '@/marketplace/OfferingUserStateField';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
-import { TableExportButton } from '@/table/TableExportButton';
 import { TableWithPortal } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
@@ -305,6 +304,11 @@ export const ProviderOfferingUsersList: FunctionComponent<
     ...profileCompleteColumn,
   ];
 
+  // The provider-wide toolbar shares the card header with the tabs' title, so
+  // only the primary Create button stays a button; the rest fold into Actions.
+  const usesDefaultActions =
+    !tableActions && !portal?.additionalActions && !offering;
+
   const showExpandableRow = offering
     ? offering.has_compliance_requirements || showPosixColumns
     : Boolean(provider) ||
@@ -348,19 +352,27 @@ export const ProviderOfferingUsersList: FunctionComponent<
             onSuccess={tableProps.fetch}
           />
         ) : (
-          <>
-            {provider && (
-              <TosReportingButton providerUuid={provider.customer_uuid} />
-            )}
-            <UserImportButton refetch={tableProps.fetch} provider={provider} />
-            <TableExportButton {...tableProps} columns={columns} />
-            <CreateProviderOfferingUserButton
-              refetch={tableProps.fetch}
-              provider={provider}
-            />
-          </>
+          <CreateProviderOfferingUserButton
+            refetch={tableProps.fetch}
+            provider={provider}
+          />
         )
       }
+      dropdownActions={
+        usesDefaultActions ? (
+          <>
+            {provider && (
+              <TosReportingButton
+                providerUuid={provider.customer_uuid}
+                asDropdownItem
+              />
+            )}
+            <UserImportButton refetch={tableProps.fetch} provider={provider} />
+          </>
+        ) : undefined
+      }
+      enableExport={usesDefaultActions}
+      showExportInDropdown={usesDefaultActions}
       rowActions={({ row }) => (
         <OfferingUserRowActions
           row={row}
