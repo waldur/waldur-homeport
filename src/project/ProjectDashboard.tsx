@@ -30,6 +30,7 @@ import { canViewTeam } from '@/permissions/teamVisibility';
 import { useUser, useProject } from '@/workspace/hooks';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
+import { ProjectPosixGroupsWidget } from './dashboard/ProjectPosixGroupsWidget';
 import { ProjectCreditHealthBlock } from './policy-watch/ProjectCreditHealthBlock';
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
 import { ProjectDashboardCredit } from './ProjectDashboardCredit';
@@ -322,6 +323,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           section renders nothing until an operator enables one. */}
       {showBillingInfo && <ProjectCreditHealthBlock project={project} />}
       <UsageViewsSection project={project} />
+      <ProjectPosixGroupsWidget project={project} />
     </>
   );
 };

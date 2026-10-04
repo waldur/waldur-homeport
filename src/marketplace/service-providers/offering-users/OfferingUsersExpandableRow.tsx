@@ -8,6 +8,8 @@ import {
   QuestionWithAnswer,
 } from 'waldur-js-client';
 
+import { Badge } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
@@ -29,7 +31,11 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { AnswerRowActions } from './AnswerRowActions';
 
-const PosixGroupsTable = ({ offeringUser }: { offeringUser: OfferingUser }) => {
+export const PosixGroupsTable = ({
+  offeringUser,
+}: {
+  offeringUser: OfferingUser;
+}) => {
   const tableProps = useTable({
     table: 'offeringUserPosixGroups-' + offeringUser.uuid,
     fetchData: createFetcher(marketplaceOfferingUsersPosixGroupsList, {
@@ -44,6 +50,24 @@ const PosixGroupsTable = ({ offeringUser }: { offeringUser: OfferingUser }) => {
           title: translate('GID'),
           render: ({ row }) => row.gid,
           copyField: (row) => String(row.gid),
+        },
+        {
+          // A provider project group is shared by all offerings of the
+          // provider; the others belong to this offering.
+          title: translate('Group'),
+          render: ({ row }) =>
+            row.kind === 'provider_project_group' ? (
+              <span className="d-inline-flex align-items-center gap-2">
+                {row.group_name ? <code>{row.group_name}</code> : null}
+                <Badge variant="primary" tone="light">
+                  {translate('Service provider group')}
+                </Badge>
+              </span>
+            ) : (
+              <Badge variant="neutral" tone="light">
+                {translate('Offering group')}
+              </Badge>
+            ),
         },
         {
           title: translate('Organization'),

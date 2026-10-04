@@ -221,24 +221,26 @@ const TableCell = memo(
       ? showTruncationTooltip
       : undefined;
 
-    const content = column.copyField ? (
-      <>
-        <div className="with-copy d-flex align-items-center gap-1">
-          <div className="td-data">{renderedContent}</div>
-          <CopyToClipboardButton value={valueToCopy} />
-        </div>
-        {hasFilter && <InlineFilterButton column={column} row={row} />}
-      </>
-    ) : (
-      <>
-        {hasFilter ? (
-          <div className="td-data">{renderedContent}</div>
-        ) : (
-          renderedContent
-        )}
-        {hasFilter && <InlineFilterButton column={column} row={row} />}
-      </>
-    );
+    // Nothing to copy (a dash, "not assigned"): no copy button either.
+    const content =
+      column.copyField && valueToCopy !== '' && valueToCopy != null ? (
+        <>
+          <div className="with-copy d-flex align-items-center gap-1">
+            <div className="td-data">{renderedContent}</div>
+            <CopyToClipboardButton value={valueToCopy} />
+          </div>
+          {hasFilter && <InlineFilterButton column={column} row={row} />}
+        </>
+      ) : (
+        <>
+          {hasFilter ? (
+            <div className="td-data">{renderedContent}</div>
+          ) : (
+            renderedContent
+          )}
+          {hasFilter && <InlineFilterButton column={column} row={row} />}
+        </>
+      );
 
     const handleClick = column.disabledClick
       ? (e: React.MouseEvent) => e.stopPropagation()

@@ -89,6 +89,21 @@ describe('AccountOptionsPreviewResult', () => {
     ).toBeInTheDocument();
   });
 
+  it('shows the warnings about turning project groups on', () => {
+    renderWithProviders(
+      <AccountOptionsPreviewResult
+        preview={{
+          ...preview,
+          warnings: [
+            "The provider's POSIX ID pool has no group GID range: set it first.",
+          ],
+        }}
+      />,
+    );
+
+    expect(screen.getByText(/has no group GID range/)).toBeInTheDocument();
+  });
+
   it('says when an offering is not affected', () => {
     renderWithProviders(
       <AccountOptionsPreviewResult

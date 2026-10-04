@@ -1158,6 +1158,27 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-provider-project-groups',
+    parent: 'provider-accounts',
+    url: 'project-groups/',
+    component: lazyComponent(() =>
+      import('./service-providers/project-groups/ProviderProjectGroupsList').then(
+        (module) => ({
+          default: module.ProviderProjectGroupsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Project groups'),
+      priority: 65,
+      permissions: [
+        canAccessServiceProviderWorkspace,
+        () => isFeatureVisible(MarketplaceFeatures.show_posix_id_pools),
+      ],
+    },
+  },
+
+  {
     name: 'public.marketplace-providers',
     url: '/marketplace-providers/',
     component: lazyComponent(() =>

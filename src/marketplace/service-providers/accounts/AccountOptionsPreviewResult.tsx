@@ -120,6 +120,14 @@ export const AccountOptionsPreviewResult: FC<{
   preview: AccountOptionsPreview;
 }> = ({ preview }) => (
   <>
+    {(preview.warnings ?? []).map((warning) => (
+      <AlertItem
+        key={warning}
+        variant="warning"
+        className="mb-4"
+        title={warning}
+      />
+    ))}
     {preview.username_conflicts > 0 && (
       <AlertItem
         variant="warning"

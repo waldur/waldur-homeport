@@ -9,6 +9,7 @@ import {
 
 import { AlertItem } from 'waldur-ui';
 
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import {
   AsyncSelectGroup,
@@ -24,13 +25,14 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import {
   buildPoolValidator,
-  NAMESPACES,
-  NamespaceKey,
   POSIX_ID_MAX,
   POSIX_ID_MIN,
   PoolFormValues,
   poolValue,
+  RangeKey,
+  RANGES,
   scopeLabel,
+  toId,
 } from './poolRanges';
 
 const POSIX_ID_POOL_SCOPE_OPTIONS = [
@@ -38,10 +40,21 @@ const POSIX_ID_POOL_SCOPE_OPTIONS = [
   { label: translate('Offering (override)'), value: 'offering' },
 ];
 
-const NAMESPACE_LABELS: Record<NamespaceKey, () => string> = {
+const RANGE_LABELS: Record<RangeKey, () => string> = {
   uid: () => translate('UIDs'),
   gid: () => translate('GIDs'),
+  group_gid: () => translate('Project group GIDs'),
 };
+
+// The same, inside a sentence.
+const RANGE_NOUNS: Record<RangeKey, () => string> = {
+  uid: () => translate('UIDs'),
+  gid: () => translate('GIDs'),
+  group_gid: () => translate('project group GIDs'),
+};
+
+// Project groups draw only on the service provider's own pool.
+const takesGroupRange = (scope?: string) => scope !== 'offering';
 
 interface PosixIdPoolFormDialogProps {
   resolve: {
@@ -65,12 +78,12 @@ const RangeGuidance: FC<{ pool?: PosixIdPool; siblings: PosixIdPool[] }> = ({
   pool,
   siblings,
 }) => {
-  const taken = NAMESPACES.flatMap((ns) =>
+  const taken = RANGES.flatMap((ns) =>
     siblings
       .filter((other) => poolValue(other, `min_${ns}`) != null)
       .map((other) =>
         translate('{namespace} {min}–{max} ({scope})', {
-          namespace: NAMESPACE_LABELS[ns](),
+          namespace: RANGE_LABELS[ns](),
           min: poolValue(other, `min_${ns}`),
           max: poolValue(other, `max_${ns}`),
           scope: scopeLabel(other),
@@ -78,7 +91,7 @@ const RangeGuidance: FC<{ pool?: PosixIdPool; siblings: PosixIdPool[] }> = ({
       ),
   );
   const allocated = pool
-    ? NAMESPACES.filter(
+    ? RANGES.filter(
         (ns) =>
           poolValue(pool, `min_${ns}`) != null &&
           (poolValue(pool, `${ns}_used`) ?? 0) > 0,
@@ -87,7 +100,7 @@ const RangeGuidance: FC<{ pool?: PosixIdPool; siblings: PosixIdPool[] }> = ({
           '{count} {namespace} are allocated from this pool; the next new one is {next}. The range may shrink, but every allocated value must stay inside it.',
           {
             count: poolValue(pool, `${ns}_used`),
-            namespace: NAMESPACE_LABELS[ns](),
+            namespace: RANGE_NOUNS[ns](),
             next: poolValue(pool, `next_${ns}`),
           },
         ),
@@ -112,6 +125,11 @@ const RangeGuidance: FC<{ pool?: PosixIdPool; siblings: PosixIdPool[] }> = ({
           <li>
             {translate(
               'The pools of one service provider must not overlap: UIDs against UIDs, GIDs against GIDs. A UID and a GID may share a number, so the same range can serve both.',
+            )}
+          </li>
+          <li>
+            {translate(
+              'The project group range holds GIDs too, so it must not overlap any GID range, including this pool’s own.',
             )}
           </li>
           {taken.length > 0 && (
@@ -172,6 +190,46 @@ const ScopeFields: FC<{ customerUuid?: string; submitting: boolean }> = ({
   );
 };
 
+/** The range provider project groups take their GIDs from. */
+const GroupRangeFields: FC<{ pool?: PosixIdPool; submitting: boolean }> = ({
+  pool,
+  submitting,
+}) => (
+  <>
+    <h6 className="mt-2 mb-1">{translate('Project group GIDs')}</h6>
+    <p className="text-muted fs-7 mb-3">
+      {translate(
+        'Optional. Reserves GIDs for the one POSIX group each project gets at this service provider. Without it, project groups take GIDs from the GID range shared with users’ primary groups. Set it before enabling project groups in the account settings.',
+      )}
+    </p>
+    <div className="row">
+      <div className="col-sm-6">
+        <NumberGroup
+          name="min_group_gid"
+          label={translate('Minimum project group GID')}
+          description={translate('First GID of the range (inclusive).')}
+          disabled={submitting}
+        />
+      </div>
+      <div className="col-sm-6">
+        <NumberGroup
+          name="max_group_gid"
+          label={translate('Maximum project group GID')}
+          description={translate('Last GID of the range (inclusive).')}
+          disabled={submitting}
+        />
+      </div>
+    </div>
+    {pool?.next_group_gid != null && (
+      <p className="text-muted fs-7 mb-3" data-testid="next-group-gid">
+        {translate('Next project group GID: {next}', {
+          next: pool.next_group_gid,
+        })}
+      </p>
+    )}
+  </>
+);
+
 export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
   props,
 ) => {
@@ -200,6 +258,8 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
             max_uid: pool.max_uid ?? undefined,
             min_gid: pool.min_gid ?? undefined,
             max_gid: pool.max_gid ?? undefined,
+            min_group_gid: pool.min_group_gid ?? undefined,
+            max_group_gid: pool.max_group_gid ?? undefined,
             description: pool.description ?? '',
           }
         : ({ scope: 'service_provider' } as FormValues),
@@ -212,19 +272,27 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
         ? marketplacePosixIdPoolsPartialUpdate({
             path: { uuid: pool!.uuid! },
             body: {
-              min_uid: values.min_uid ?? null,
-              max_uid: values.max_uid ?? null,
-              min_gid: values.min_gid ?? null,
-              max_gid: values.max_gid ?? null,
+              min_uid: toId(values.min_uid),
+              max_uid: toId(values.max_uid),
+              min_gid: toId(values.min_gid),
+              max_gid: toId(values.max_gid),
+              ...(takesGroupRange(pool!.scope) && {
+                min_group_gid: toId(values.min_group_gid),
+                max_group_gid: toId(values.max_group_gid),
+              }),
               description: values.description,
             },
           })
         : marketplacePosixIdPoolsCreate({
             body: {
-              min_uid: values.min_uid ?? null,
-              max_uid: values.max_uid ?? null,
-              min_gid: values.min_gid ?? null,
-              max_gid: values.max_gid ?? null,
+              min_uid: toId(values.min_uid),
+              max_uid: toId(values.max_uid),
+              min_gid: toId(values.min_gid),
+              max_gid: toId(values.max_gid),
+              ...(takesGroupRange(values.scope) && {
+                min_group_gid: toId(values.min_group_gid),
+                max_group_gid: toId(values.max_group_gid),
+              }),
               description: values.description,
               service_provider:
                 values.scope === 'service_provider'
@@ -249,10 +317,11 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
     } catch (e: any) {
       if (e?.response?.status === 400) {
         // The fetch client spreads the parsed error body directly onto `e`
-        // (alongside the raw `response`). Keep per-field errors AND surface
+        // (alongside `response`, `status`, `statusText` and `url`, which
+        // getErrorBody drops). Keep per-field errors AND surface
         // non-field errors (e.g. the provider-wide overlap message) as an
         // inline form-level banner.
-        const { response: _response, ...data } = e;
+        const data = getErrorBody(e) ?? {};
         return {
           ...data,
           [FORM_ERROR]: data.non_field_errors?.[0] || data.detail,
@@ -266,7 +335,14 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
       onSubmit={onSubmit}
       validate={validate}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid, submitError }) => (
+      render={({
+        handleSubmit,
+        submitting,
+        hasValidationErrors,
+        submitError,
+        dirtySinceLastSubmit,
+        values,
+      }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -276,14 +352,14 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
             }
             footer={
               <SubmitButton
-                disabled={invalid}
+                disabled={hasValidationErrors}
                 submitting={submitting}
                 label={isEdit ? translate('Save') : translate('Create')}
               />
             }
           >
             <div className="size-sm">
-              {submitError && (
+              {submitError && !dirtySinceLastSubmit && (
                 <AlertItem
                   variant="error"
                   title={submitError}
@@ -342,6 +418,9 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                   />
                 </div>
               </div>
+              {takesGroupRange(isEdit ? pool!.scope : values.scope) && (
+                <GroupRangeFields pool={pool} submitting={submitting} />
+              )}
               <TextGroup
                 label={translate('Description')}
                 name="description"

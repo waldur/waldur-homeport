@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -13,6 +14,8 @@ import { ProjectManageContainer } from './ProjectManageContainer';
 const h = vi.hoisted(() => ({
   rooms: [] as MatrixRoom[],
   tabKeys: [] as string[],
+  posixGroups: { data: [] } as Record<string, unknown>,
+  posixVisible: true,
 }));
 
 vi.mock('@/navigation/usePageTabsTransmitter', () => ({
@@ -30,7 +33,8 @@ vi.mock('@/matrix/chat/useProjectMatrixRooms', async (importOriginal) => ({
 }));
 
 vi.mock('./manage/useProjectPosixGroups', () => ({
-  useProjectPosixGroups: () => ({ data: [] }),
+  useProjectPosixGroups: () => h.posixGroups,
+  isProjectPosixGroupsVisible: () => h.posixVisible,
 }));
 
 const STAFF = { is_staff: true, permissions: [] };
@@ -132,4 +136,58 @@ describe('ProjectManageContainer chat tab', () => {
       expect(renderTabs(user, { is_removed: true })).toContain('chat');
     },
   );
+});
+
+describe('ProjectManageContainer POSIX identities tab', () => {
+  beforeEach(() => {
+    h.rooms = [];
+  });
+
+  afterEach(() => {
+    h.posixGroups = { data: [] };
+    h.posixVisible = true;
+    vi.restoreAllMocks();
+  });
+
+  it('hides the tab where POSIX pools are off, even with groups', () => {
+    h.posixVisible = false;
+    h.posixGroups = { data: [{ kind: 'provider_project_group', gid: 1 }] };
+    expect(renderTabs(MANAGER)).not.toContain('posix-identities');
+  });
+
+  it('hides the tab when the project has no POSIX groups', () => {
+    h.posixGroups = { data: [] };
+    expect(renderTabs(MANAGER)).not.toContain('posix-identities');
+  });
+
+  it('shows the tab when the project has groups', () => {
+    h.posixGroups = { data: [{ kind: 'provider_project_group', gid: 1 }] };
+    expect(renderTabs(MANAGER)).toContain('posix-identities');
+  });
+
+  // The tab renders the loading and error states, so a failed rollup must not
+  // take it away.
+  it.each([
+    ['loading', { data: undefined, isLoading: true }],
+    ['failed', { data: undefined, isError: true }],
+  ])('keeps the open tab while the groups are %s', (_, state) => {
+    h.posixGroups = state;
+    vi.mocked(useCurrentStateAndParams).mockReturnValue({
+      state: { name: 'project-manage' },
+      params: { tab: 'posix-identities' },
+    } as any);
+    expect(renderTabs(MANAGER)).toContain('posix-identities');
+  });
+
+  it.each([
+    ['loading', { data: undefined, isLoading: true }],
+    ['failed', { data: undefined, isError: true }],
+  ])('does not flash the tab while the groups are %s elsewhere', (_, state) => {
+    h.posixGroups = state;
+    vi.mocked(useCurrentStateAndParams).mockReturnValue({
+      state: { name: 'project-manage' },
+      params: { tab: 'general' },
+    } as any);
+    expect(renderTabs(MANAGER)).not.toContain('posix-identities');
+  });
 });
