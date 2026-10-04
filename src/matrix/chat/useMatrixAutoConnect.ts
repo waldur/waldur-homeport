@@ -1,12 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { matrixRoomsList } from 'waldur-js-client';
 
 import { getChatDrawerPreference } from '@/chat/chatDrawerPreferences';
 import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
 import { useMatrixClient } from './useMatrixClient';
+import { useMemberMatrixRooms } from './useMemberMatrixRooms';
 
 /**
  * Boots the Matrix sync client on app load without opening any chat UI, so the
@@ -23,13 +22,7 @@ export function useMatrixAutoConnect(): void {
   const user = useUser();
   const enabled = isMatrixChatEnabled();
 
-  const { data: rooms } = useQuery({
-    // Same key as useAllMatrixRooms — the fetch is shared, not duplicated.
-    queryKey: ['matrixRoomsAll'],
-    queryFn: () =>
-      matrixRoomsList({ query: { member: true } as any }).then((r) => r.data),
-    enabled: enabled && Boolean(user?.uuid),
-  });
+  const { data: rooms } = useMemberMatrixRooms();
 
   useEffect(() => {
     if (!enabled || !user?.uuid || connectionState !== 'idle') return;

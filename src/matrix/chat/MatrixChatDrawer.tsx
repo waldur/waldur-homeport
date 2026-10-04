@@ -156,8 +156,12 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
 
   const showChat = !showCallView || chatVisible;
 
+  // An ended session has no client left, so its panel replaces the
+  // conversation whatever the drawer showed before.
+  const sessionEnded = connectionState === 'ended';
   const showConnectionError =
-    connectionState === 'error' && messages.length === 0 && !showCallView;
+    sessionEnded ||
+    (connectionState === 'error' && messages.length === 0 && !showCallView);
 
   return (
     <Dropzone
@@ -223,7 +227,10 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                 <LoadingErred
                   loadData={() => connect(roomUuid)}
                   message={
-                    error || translate('Could not connect to the chat server.')
+                    sessionEnded
+                      ? translate('Your chat session has ended.')
+                      : error ||
+                        translate('Could not connect to the chat server.')
                   }
                 />
               </div>

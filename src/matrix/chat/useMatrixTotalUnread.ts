@@ -1,17 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useMatrixClient } from './useMatrixClient';
+import { useMemberMatrixRooms } from './useMemberMatrixRooms';
 
 /**
- * Total unread notifications across all joined rooms, computed straight from
- * the synced client so it stays live app-wide (e.g. the header chat icon)
- * even while the chat drawer is closed. Muted rooms carry a 0 server-side
- * notification count, so they drop out on their own. Pass `excludeRoomId` to
- * omit the open room — used by the back button to flag unread in *other* rooms.
+ * Total unread notifications across the user's Waldur rooms, computed straight
+ * from the synced client so it stays live app-wide (e.g. the header chat icon)
+ * even while the chat drawer is closed. Only rooms in Waldur's room list count:
+ * the Matrix account can also be in DMs or rooms joined from an external
+ * client, whose unread the drawer has nowhere to show. Muted rooms carry a 0
+ * server-side notification count, so they drop out on their own. Pass
+ * `excludeRoomId` to omit the open room — used by the back button to flag
+ * unread in *other* rooms.
  */
 export function useMatrixTotalUnread(excludeRoomId?: string | null): number {
   const { client, connectionState } = useMatrixClient();
+  const { data: rooms } = useMemberMatrixRooms();
   const [total, setTotal] = useState(0);
+
+  const waldurRoomIds = useMemo(
+    () => new Set((rooms ?? []).map((r) => r.room_id).filter(Boolean)),
+    [rooms],
+  );
 
   useEffect(() => {
     if (!client || connectionState !== 'connected') {
@@ -22,6 +32,7 @@ export function useMatrixTotalUnread(excludeRoomId?: string | null): number {
       let sum = 0;
       for (const room of client.getRooms()) {
         if (room.roomId === excludeRoomId) continue;
+        if (!waldurRoomIds.has(room.roomId)) continue;
         if (room.getMyMembership?.() !== 'join') continue;
         sum += room.getUnreadNotificationCount?.('total' as any) ?? 0;
       }
@@ -36,7 +47,7 @@ export function useMatrixTotalUnread(excludeRoomId?: string | null): number {
       client.removeListener('Room.receipt' as any, recompute);
       client.removeListener('accountData' as any, recompute);
     };
-  }, [client, connectionState, excludeRoomId]);
+  }, [client, connectionState, excludeRoomId, waldurRoomIds]);
 
   return total;
 }

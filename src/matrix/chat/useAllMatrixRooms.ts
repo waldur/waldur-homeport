@@ -1,9 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { matrixRoomsList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { isMatrixChatEnabled } from '@/matrix/utils';
 import { useUser } from '@/workspace/hooks';
 
 import {
@@ -13,6 +10,7 @@ import {
 import { isRoomMuted } from './mute';
 import { classifyPreviewEvent, PreviewKind } from './previewClassifier';
 import { useMatrixClient } from './useMatrixClient';
+import { useMemberMatrixRooms } from './useMemberMatrixRooms';
 import { useAllRoomMemberNames } from './useRoomMemberNames';
 import { resolveMemberName } from './utils';
 
@@ -134,21 +132,7 @@ export function useAllMatrixRooms() {
   const currentUser = useUser();
   const [liveMap, setLiveMap] = useState<RoomLiveMap>({});
 
-  const query = useQuery({
-    queryKey: ['matrixRoomsAll'],
-    // Restrict to rooms the current user belongs to. Unlike the admin rooms
-    // view, the chat list is personal — staff/support must not see rooms they
-    // are not a member of.
-    queryFn: () =>
-      matrixRoomsList({ query: { member: true } as any }).then((r) => r.data),
-    // Gate on an authenticated user, mirroring useMatrixAutoConnect's observer
-    // of this same shared query key. Without it this observer keeps the query
-    // enabled during the OIDC login transition, so an anonymous /matrix/rooms/
-    // request fires; its 401 lands after the exchanged token is stored and the
-    // global interceptor mistakes it for an expired session and logs the user
-    // straight back out.
-    enabled: isMatrixChatEnabled() && Boolean(currentUser?.uuid),
-  });
+  const query = useMemberMatrixRooms();
 
   // Preview sender names: small rooms are covered by the members embedded in
   // the room list response (no extra request). Rooms larger than the embedded

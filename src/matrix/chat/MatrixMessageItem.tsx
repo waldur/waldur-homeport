@@ -10,6 +10,7 @@ import { translate } from '@/i18n';
 import { getChatAvatarColor } from './chatColors';
 import { MessageReactionChips } from './MessageReactionChips';
 import { MessageReactionToolbar } from './MessageReactionToolbar';
+import { withFreshAccessToken } from './session';
 import { MatrixChatMessage } from './types';
 import { useMatrixClient } from './useMatrixClient';
 import { formatTime, sanitizeName } from './utils';
@@ -42,11 +43,12 @@ function useAuthenticatedMediaUrl(mxcUrl: string | undefined) {
     if (!baseUrl) return;
 
     const url = `${baseUrl}/_matrix/client/v1/media/download/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}`;
-    const accessToken = (client as any).getAccessToken?.();
 
-    fetch(url, {
-      headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
-    })
+    withFreshAccessToken(client, (accessToken) =>
+      fetch(url, {
+        headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+      }),
+    )
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.blob();

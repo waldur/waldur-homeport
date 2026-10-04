@@ -50793,6 +50793,12 @@
   },
   "Services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.": {},
   "Services you plan to use": {},
+  "Session ended": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "feature_area": "chat"
+    }
+  },
   "Set": {
     "context": {
       "feature_area": "create-user-steps"
@@ -69150,6 +69156,11 @@
   "Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enrol using a phone or a security key from the next prompt.": {
     "context": {
       "feature_area": "passkeys"
+    }
+  },
+  "Your chat session has ended.": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Your comment...": {

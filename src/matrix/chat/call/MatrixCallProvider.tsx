@@ -194,6 +194,13 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
     };
   }, []);
 
+  // An ended chat session takes the client with it, so the call could neither
+  // keep its membership alive nor announce leaving; end it with the session
+  // rather than leave media running in the floating widget.
+  useEffect(() => {
+    if (connectionState === 'ended' && inCallRef.current) endCall();
+  }, [connectionState, endCall]);
+
   // Leave the call on Waldur logout / user switch. MatrixRoot keeps this
   // provider mounted across auth changes (so `children` never remounts), so the
   // unmount cleanup above won't fire on logout — mirror MatrixChatProvider's
