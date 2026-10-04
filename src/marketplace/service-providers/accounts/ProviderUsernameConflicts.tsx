@@ -15,6 +15,8 @@ import { useTable } from '@/table/useTable';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
+import { candidateEvidence } from './candidateEvidence';
+
 const AdoptProviderAccountsDialog = lazyComponent(() =>
   import('./AdoptProviderAccountsDialog').then((module) => ({
     default: module.AdoptProviderAccountsDialog,
@@ -56,15 +58,7 @@ const renderCandidates = (conflict: ProviderUsernameConflict) => (
       <li key={candidate.username}>
         <strong>{candidate.username}</strong>{' '}
         <span className="text-muted">
-          {translate('used on {count} offering(s)', {
-            count: candidate.offering_count,
-          })}
-          {candidate.has_active_resources
-            ? ` · ${translate('has active resources')}`
-            : ''}
-          {candidate.home_directories.length
-            ? ` · ${candidate.home_directories.join(', ')}`
-            : ''}
+          {candidateEvidence(candidate).join(' · ')}
         </span>
       </li>
     ))}

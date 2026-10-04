@@ -133,7 +133,7 @@ export const AccountOptionsPreviewResult: FC<{
         variant="warning"
         className="mb-4"
         title={translate(
-          '{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is refused until they are adopted under Accounts > Username conflicts.',
+          '{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is refused until each keeps one: use Resolve conflicts below, or Accounts > Username conflicts.',
           { count: preview.username_conflicts },
         )}
       />

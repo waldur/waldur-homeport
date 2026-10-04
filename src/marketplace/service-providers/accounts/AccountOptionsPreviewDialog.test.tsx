@@ -125,4 +125,24 @@ describe('AccountOptionsPreviewDialog', () => {
     expect(screen.getByText('Turning project groups off')).toBeInTheDocument();
     expect(screen.getByText(/Existing groups stay/)).toBeInTheDocument();
   });
+
+  it('blocks applying a switch that usernames conflict with, and offers to resolve them', async () => {
+    const user = userEvent.setup();
+    vi.mocked(
+      marketplaceServiceProvidersAccountOptionsPreview,
+    ).mockResolvedValue({
+      data: { warnings: [], username_conflicts: 2 },
+    } as any);
+    renderDialog({
+      uuid: 'provider-uuid',
+      account_options: { account_scope: 'offering' },
+    } as any);
+
+    await user.click(screen.getByLabelText('Account scope'));
+    await user.click(await screen.findByText('Per service provider'));
+    await user.click(screen.getByRole('button', { name: 'Preview' }));
+
+    expect(await screen.findByTestId('resolve-conflicts')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Apply' })).toBeDisabled();
+  });
 });

@@ -19,6 +19,7 @@ import {
   OfferingUserRuntimeStateField,
   OfferingUserStateField,
 } from '@/marketplace/OfferingUserStateField';
+import { ProviderAccountButton } from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
@@ -44,6 +45,10 @@ const mandatoryFields = [
   'service_provider_comment_url',
   'is_profile_complete',
   'missing_profile_attributes',
+  // Row actions and the expanded row tell a backed account by these, whatever
+  // columns are shown.
+  'service_provider_account_uuid',
+  'service_provider_account_username',
 ];
 
 export const ProviderOfferingUsersList: FunctionComponent<
@@ -247,7 +252,11 @@ export const ProviderOfferingUsersList: FunctionComponent<
     },
     {
       title: translate('External username'),
-      render: ({ row }) => renderFieldOrDash(row.username),
+      render: ({ row }) => (
+        <>
+          {renderFieldOrDash(row.username)} <ProviderAccountButton row={row} />
+        </>
+      ),
       export: 'username',
       orderField: 'username',
       id: 'username',

@@ -27,6 +27,7 @@ vi.mock('@/table/useTable', () => ({
         uuid: 'ou-1',
         offering_name: 'Cluster A',
         username: 'jdoe',
+        service_provider_account_uuid: 'account-1',
         state: 'OK',
         created: '2024-01-01T00:00:00Z',
       },
@@ -34,6 +35,16 @@ vi.mock('@/table/useTable', () => ({
         uuid: 'ou-2',
         offering_name: 'Cluster B',
         username: 'j.doe',
+        service_provider_account_uuid: null,
+        state: 'OK',
+        created: '2024-01-01T00:00:00Z',
+      },
+      {
+        // Its own account, though it happens to carry the same name.
+        uuid: 'ou-3',
+        offering_name: 'Cluster C',
+        username: 'jdoe',
+        service_provider_account_uuid: null,
         state: 'OK',
         created: '2024-01-01T00:00:00Z',
       },
@@ -63,6 +74,14 @@ describe('ProviderAccountExpandableRow', () => {
     renderWithProviders(<ProviderAccountExpandableRow row={account} />);
 
     expect(screen.getByText('j.doe')).toBeInTheDocument();
-    expect(screen.getByText('Own account')).toBeInTheDocument();
+    expect(screen.getAllByText('Own account')).toHaveLength(2);
+  });
+
+  it('decides by the link, not by a coinciding username', () => {
+    renderWithProviders(<ProviderAccountExpandableRow row={account} />);
+
+    // Clusters A and C both say "jdoe"; only A reads through the account.
+    expect(screen.getAllByText('Shared')).toHaveLength(1);
+    expect(screen.getAllByText('Own account')).toHaveLength(2);
   });
 });

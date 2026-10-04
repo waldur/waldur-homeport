@@ -23,6 +23,10 @@ import {
 import { ProjectGroupsRolloutOrder } from '../project-groups/ProjectGroupsRolloutOrder';
 
 import { AccountOptionsPreviewResult } from './AccountOptionsPreviewResult';
+import {
+  fetchUsernameConflicts,
+  useOpenConflictResolution,
+} from './useConflictResolution';
 
 const ACCOUNT_OPTION_KEYS = [
   'account_scope',
@@ -61,6 +65,7 @@ export const AccountOptionsPreviewDialog: FC<
   const [preview, setPreview] = useState<AccountOptionsPreview>();
   const [previewed, setPreviewed] = useState<string>();
   const [previewing, setPreviewing] = useState(false);
+  const openConflictResolution = useOpenConflictResolution();
 
   const apply = useManagedMutation<any, any, Values>({
     mutationFn: (values) =>
@@ -101,6 +106,26 @@ export const AccountOptionsPreviewDialog: FC<
       render={({ handleSubmit, submitting, values }) => {
         // Applying is offered only for the values the preview was made for.
         const current = previewed === JSON.stringify(toChanges(values));
+        // The backend refuses the switch while usernames conflict; resolving
+        // them is offered instead, and the switch is applied after.
+        const blockedByConflicts =
+          current &&
+          values.account_scope === 'provider' &&
+          serviceProvider.account_options?.account_scope !== 'provider' &&
+          (preview?.username_conflicts ?? 0) > 0;
+        const resolveConflicts = async () => {
+          try {
+            const conflicts = await fetchUsernameConflicts(serviceProvider);
+            openConflictResolution(serviceProvider, conflicts, () =>
+              apply.mutateAsync(values),
+            );
+          } catch (error) {
+            showErrorResponse(
+              error,
+              translate('Unable to load username conflicts.'),
+            );
+          }
+        };
         return (
           <form onSubmit={handleSubmit}>
             <ModalDialog
@@ -112,8 +137,23 @@ export const AccountOptionsPreviewDialog: FC<
                     variant="tertiary"
                     onClick={() => runPreview(values)}
                   />
+                  {blockedByConflicts && (
+                    <BaseButton
+                      label={translate('Resolve conflicts')}
+                      variant="tertiary"
+                      onClick={resolveConflicts}
+                      data-testid="resolve-conflicts"
+                    />
+                  )}
                   <SubmitButton
-                    disabled={!current || previewing}
+                    disabled={!current || previewing || blockedByConflicts}
+                    disabledReason={
+                      blockedByConflicts
+                        ? translate(
+                            'Resolve the username conflicts first: switching to per service provider accounts is refused until then.',
+                          )
+                        : undefined
+                    }
                     submitting={submitting}
                     label={translate('Apply')}
                   />

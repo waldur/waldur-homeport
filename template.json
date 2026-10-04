@@ -21870,6 +21870,11 @@
       "feature_area": "consumption"
     }
   },
+  "From the provider account": {
+    "context": {
+      "feature_area": "import-users"
+    }
+  },
   "From {amount}": {
     "context": {
       "variables": {
@@ -41470,6 +41475,11 @@
       "feature_area": "details"
     }
   },
+  "Provider account": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Provider account details": {
     "context": {
       "feature_area": "accounts"
@@ -44891,6 +44901,13 @@
   "Resolve in merge wizard": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Resolve the username conflicts first: switching to per service provider accounts is refused until then.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "accounts",
+      "action_type": "create"
     }
   },
   "Resolve username conflicts": {
@@ -50741,6 +50758,16 @@
       "feature_area": "integration"
     }
   },
+  "Shared with the provider’s other offerings. The username and POSIX attributes are managed on the provider account {username}.": {
+    "context": {
+      "variables": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "feature_area": "accounts"
+    }
+  },
   "Shared/Billing enabled": {
     "context": {
       "feature_area": "offerings"
@@ -55583,6 +55610,11 @@
       "feature_area": "support"
     }
   },
+  "The username and POSIX attributes are managed on the provider account and shared with the provider’s other offerings.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "The username cannot be changed after the account is created.": {
     "context": {
       "feature_area": "create-user-steps"
@@ -56413,6 +56445,11 @@
   "This offering requires a purchase order. The request cannot be submitted until one is attached.": {
     "context": {
       "feature_area": "proposals"
+    }
+  },
+  "This offering shares accounts across the provider’s offerings: the username comes from the person’s provider account.": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "This offering — unique within this offering only": {
@@ -60489,6 +60526,11 @@
       "feature_area": "email"
     }
   },
+  "Unable to load the provider account.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Unable to load the review details.": {
     "context": {
       "feature_area": "review"
@@ -60524,6 +60566,12 @@
   "Unable to load user.": {
     "context": {
       "feature_area": "support"
+    }
+  },
+  "Unable to load username conflicts.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "accounts"
     }
   },
   "Unable to load users": {
@@ -69473,11 +69521,7 @@
   "h": {},
   "half month": {},
   "half-month": {},
-  "has active resources": {
-    "context": {
-      "feature_area": "accounts"
-    }
-  },
+  "has active resources": {},
   "health monitors": {
     "context": {
       "feature_area": "openstack-lbaas"
@@ -69486,6 +69530,15 @@
   "history exports": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "home directory {paths}": {
+    "context": {
+      "variables": {
+        "paths": {
+          "type": "url"
+        }
+      }
     }
   },
   "horizontal pod autoscaler": {
@@ -69749,11 +69802,13 @@
       "feature_area": "offering-merges"
     }
   },
+  "no active resources": {},
   "no credit drawn last month": {
     "context": {
       "feature_area": "views"
     }
   },
+  "no home directory": {},
   "no spend this month": {
     "context": {
       "feature_area": "reports"
@@ -70562,8 +70617,7 @@
         "count": {
           "type": "number"
         }
-      },
-      "feature_area": "accounts"
+      }
     }
   },
   "user": {
@@ -71497,7 +71551,17 @@
       "feature_area": "roles"
     }
   },
-  "{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is refused until they are adopted under Accounts > Username conflicts.": {
+  "{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is applied once every conflict is resolved.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "accounts"
+    }
+  },
+  "{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is refused until each keeps one: use Resolve conflicts below, or Accounts > Username conflicts.": {
     "context": {
       "variables": {
         "count": {
@@ -72673,6 +72737,17 @@
         }
       },
       "feature_area": "sram"
+    }
+  },
+  "{name} (quota exhausted)": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "deploy"
     }
   },
   "{name} (the referred organization)": {
