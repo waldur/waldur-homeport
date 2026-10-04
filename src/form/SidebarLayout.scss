@@ -1,21 +1,11 @@
-$headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
-
+/* Sticky position, offsets and height live in SidebarLayout.tsx. */
 .v-stepper-form-sidebar {
   width: 350px; /* for larger screen sizes */
-  top: $headerAndToolbarHeight;
-  z-index: 95 !important;
-  position: sticky !important;
   flex-shrink: 0;
-  height: calc(100vh - $headerAndToolbarHeight);
 
   &.transparent {
     background-color: transparent;
     box-shadow: none;
-
-    .toolbar-fixed & {
-      top: calc($headerAndToolbarHeight + 20px);
-      height: fit-content;
-    }
   }
 
   .stepper {
@@ -67,15 +57,6 @@ $headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
         }
       }
     }
-  }
-}
-
-body:not(.toolbar-fixed) .v-stepper-form-sidebar {
-  top: 65px;
-  height: calc(100vh - 65px - 10px);
-
-  &.transparent {
-    top: 75px;
   }
 }
 

@@ -6,8 +6,10 @@
  * are listed so an ordering constraint can be read off one list instead of
  * being re-derived from comments scattered across files:
  *
+ *       95  Stepper form sidebar (sticky, src/form/SidebarLayout.tsx)
  *       99  Metronic fixed toolbar (page tabs, layout/_variables.scss)
  *      100  Metronic header (layout/_variables.scss)
+ *      101  Outstanding (impersonation) bar (src/navigation/OutstandingBar.tsx)
  *      105  --z-index-sidebar-panel   token  (= Metronic $aside-config z-index)
  *      110  --z-index-mobile-drawer   token  (= Metronic $drawer z-index)
  *     1000  --z-index-header-popover  token  (= Bootstrap $zindex-dropdown)

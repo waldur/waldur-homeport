@@ -1,0 +1,51 @@
+//
+// Sticky top
+//
+
+// Height of the fixed chrome above the page content: header, page tabs,
+// filter bar and impersonation bar, each counted only while it's shown.
+// Sticky page elements sit below it, e.g. `top-(--layout-sticky-top)`.
+body {
+  --layout-chrome-header: #{get($header-config, fixed, outer-height, desktop)};
+  --layout-chrome-tabs: 0px;
+  --layout-chrome-filters: 0px;
+  --layout-chrome-bar: 0px;
+  --layout-sticky-top: calc(
+    var(--layout-chrome-header) + var(--layout-chrome-tabs) +
+      var(--layout-chrome-filters) + var(--layout-chrome-bar)
+  );
+
+  &.extra-toolbar-enabled {
+    --layout-chrome-filters: var(--kt-extra-toolbar-height);
+  }
+
+  // Keyed on the class: --kt-pagebar-height stays on body after the bar goes.
+  &.outstanding-bar-enabled {
+    --layout-chrome-bar: var(--kt-pagebar-height);
+  }
+
+  @include media-breakpoint-up(lg) {
+    &.toolbar-fixed {
+      --layout-chrome-tabs: var(--kt-toolbar-height);
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    --layout-chrome-header: #{get(
+        $header-config,
+        fixed,
+        outer-height,
+        tablet-and-mobile
+      )};
+
+    &.toolbar-tablet-and-mobile-fixed {
+      --layout-chrome-tabs: var(--kt-toolbar-height-tablet-and-mobile);
+    }
+
+    // The breadcrumb strip under the mobile header, on pages that have one.
+    &:has(.breadcrumb-mobile) {
+      --layout-chrome-header: #{2 *
+        get($header-config, fixed, outer-height, tablet-and-mobile)};
+    }
+  }
+}
