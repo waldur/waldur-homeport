@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { ServiceProvider } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { Badge, BaseButton } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
 import {
   EditFieldProvider,
   SelectEditField,
@@ -25,6 +26,7 @@ import {
   getOptionLabel,
   USERNAME_GENERATION_POLICY_OPTIONS,
 } from './accountSettings';
+import { ProjectGroupsRolloutOrder } from './project-groups/ProjectGroupsRolloutOrder';
 import { useServiceProviderUpdate } from './useServiceProviderUpdate';
 
 const AccountOptionsPreviewDialog = lazyComponent(() =>
@@ -96,6 +98,12 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
   const canUpdate = checkIsOwnerOrStaff(customer, user);
   const { openDialog } = useModal();
   const options = serviceProvider.account_options ?? {};
+  // The switch goes through the preview, which warns about a missing range.
+  const openPreview = () =>
+    openDialog(AccountOptionsPreviewDialog, {
+      resolve: { serviceProvider, setServiceProvider },
+      size: 'xl',
+    });
 
   return (
     <FormTable.Card
@@ -105,12 +113,7 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
         canUpdate && (
           <BaseButton
             label={translate('Preview changes')}
-            onClick={() =>
-              openDialog(AccountOptionsPreviewDialog, {
-                resolve: { serviceProvider, setServiceProvider },
-                size: 'xl',
-              })
-            }
+            onClick={openPreview}
             variant="tertiary"
             size="lg"
           />
@@ -189,6 +192,39 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
             )}
             placeholder={DEFAULT_LOGIN_SHELL}
             renderValue={renderOrFallback(DEFAULT_LOGIN_SHELL)}
+          />
+          <FormTable.Item
+            label={translate('Create project groups')}
+            data-testid="project-groups-enabled"
+            description={
+              <>
+                {translate(
+                  'One POSIX group per project that uses your offerings, with a GID from the service provider’s POSIX ID pool. To keep the GIDs of groups your directory already holds:',
+                )}
+                <ProjectGroupsRolloutOrder />
+              </>
+            }
+            value={
+              options.project_groups_enabled ? (
+                <Badge variant="success" tone="light">
+                  {translate('Enabled')}
+                </Badge>
+              ) : (
+                <Badge variant="neutral" tone="light">
+                  {translate('Disabled')}
+                </Badge>
+              )
+            }
+            actions={
+              canUpdate && (
+                <CompactEditButton
+                  onClick={openPreview}
+                  variant="secondary"
+                  tooltip={translate('Change in the preview')}
+                  data-testid="edit-project-groups-enabled"
+                />
+              )
+            }
           />
         </FormTable>
       </EditFieldProvider>

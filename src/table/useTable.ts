@@ -176,6 +176,8 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
       fetchData: options.fetchData,
       filter,
       staleTime: options.staleTime,
+      retry: options.retry,
+      meta: options.meta,
       queryField: options.queryField,
       mandatoryFields: options.mandatoryFields,
       onFetch: options.onFetch,

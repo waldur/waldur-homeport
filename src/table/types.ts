@@ -18,6 +18,17 @@ export interface TableOptionsType<RowType = any> {
   onFetch?: (rows: RowType[], totalCount: number, firstFetch: boolean) => void;
   onApplyFilter?: (filters: FilterItem[], firstFetch: boolean) => void;
   staleTime?: number;
+  /**
+   * How a failed fetch is retried before the error view shows; the app default
+   * retries a server error three times, several seconds of spinner. Pass
+   * `retryServerErrors(n)` to keep the 4xx exclusion with a lower limit.
+   */
+  retry?: boolean | ((failureCount: number, error: any) => boolean);
+  /**
+   * Query meta; `OWN_ERROR_STATE` keeps the global error handler from
+   * redirecting, since the table renders its own error view.
+   */
+  meta?: Record<string, unknown>;
   queryField?: string;
   exportFields?: string[] | ((props: any) => string[]);
   exportKeys?: string[];

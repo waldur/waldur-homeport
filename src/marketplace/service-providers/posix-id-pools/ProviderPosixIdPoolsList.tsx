@@ -16,6 +16,7 @@ import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
+import { roundUtilization } from './poolRanges';
 import { PosixIdPoolCreateButton } from './PosixIdPoolCreateButton';
 import { PosixIdPoolRowActions } from './PosixIdPoolRowActions';
 import { PosixIdPoolStatsExpandable } from './PosixIdPoolStatsExpandable';
@@ -100,6 +101,21 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
         copyField: (row: PosixIdPool) =>
           row.min_gid == null ? '' : `${row.min_gid}-${row.max_gid}`,
       },
+      {
+        title: translate('Project group GID range'),
+        render: ({ row }: { row: PosixIdPool }) =>
+          row.min_group_gid == null ? (
+            <>{renderFieldOrDash(null)}</>
+          ) : (
+            <>
+              {row.min_group_gid} – {row.max_group_gid}
+            </>
+          ),
+        copyField: (row: PosixIdPool) =>
+          row.min_group_gid == null
+            ? ''
+            : `${row.min_group_gid}-${row.max_group_gid}`,
+      },
       ...(showCustomerColumn
         ? [
             {
@@ -114,7 +130,7 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
         render: ({ row }: { row: PosixIdPool }) => (
           <div style={{ minWidth: 90 }}>
             <ProgressBar
-              now={row.uid_utilization ?? 0}
+              now={roundUtilization(row.uid_utilization)}
               showValue
               compact
               variant={utilizationVariant(row.uid_utilization ?? 0)}
@@ -127,13 +143,29 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
         render: ({ row }: { row: PosixIdPool }) => (
           <div style={{ minWidth: 90 }}>
             <ProgressBar
-              now={row.gid_utilization ?? 0}
+              now={roundUtilization(row.gid_utilization)}
               showValue
               compact
               variant={utilizationVariant(row.gid_utilization ?? 0)}
             />
           </div>
         ),
+      },
+      {
+        title: translate('Project group GID utilization'),
+        render: ({ row }: { row: PosixIdPool }) =>
+          row.group_gid_utilization == null ? (
+            <>{renderFieldOrDash(null)}</>
+          ) : (
+            <div style={{ minWidth: 90 }}>
+              <ProgressBar
+                now={roundUtilization(row.group_gid_utilization)}
+                showValue
+                compact
+                variant={utilizationVariant(row.group_gid_utilization)}
+              />
+            </div>
+          ),
       },
       {
         title: translate('Description'),

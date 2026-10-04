@@ -13,6 +13,8 @@ interface UseTableQueryOptions {
   fetchData: Fetcher;
   filter?: Record<string, any>;
   staleTime?: number;
+  retry?: boolean | ((failureCount: number, error: any) => boolean);
+  meta?: Record<string, unknown>;
   queryField?: string;
   mandatoryFields?: string[];
   onFetch?: (rows: any[], totalCount: number, firstFetch: boolean) => void;
@@ -48,6 +50,8 @@ export function useTableQuery<RowType = any>(
     fetchData,
     filter,
     staleTime,
+    retry,
+    meta,
     queryField,
     mandatoryFields,
     onFetch,
@@ -184,6 +188,8 @@ export function useTableQuery<RowType = any>(
       }
     },
     staleTime,
+    ...(retry !== undefined && { retry }),
+    ...(meta && { meta }),
   });
 
   // Call onFetch callback when data changes

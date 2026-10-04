@@ -120,7 +120,11 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
       <div>{children}</div>
       {description && <Form.Text>{description}</Form.Text>}
       {!hideError && meta && meta.touched && (
-        <FieldError error={meta.error || meta.submitError} />
+        // A refusal from the server applies to the value it was given; once
+        // the field is edited it is stale until the next submit.
+        <FieldError
+          error={meta.error || (!meta.dirtySinceLastSubmit && meta.submitError)}
+        />
       )}
     </Form.Group>
   );

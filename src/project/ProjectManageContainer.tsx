@@ -1,4 +1,4 @@
-import { UIView } from '@uirouter/react';
+import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -17,7 +17,10 @@ import { hasConsumerPermission } from '@/permissions/hasPermission';
 import { useUser, useProject } from '@/workspace/hooks';
 import { isOwnerOrStaff } from '@/workspace/selectors';
 
-import { useProjectPosixGroups } from './manage/useProjectPosixGroups';
+import {
+  isProjectPosixGroupsVisible,
+  useProjectPosixGroups,
+} from './manage/useProjectPosixGroups';
 
 const ProjectGeneral = lazyComponent(() =>
   import('./manage/ProjectGeneral').then((module) => ({
@@ -76,8 +79,21 @@ export const ProjectManageContainer = () => {
   const canManageRoom =
     canCreateMatrixRoom(user, project) ||
     (isOwnerOrStaffUser && Boolean(rooms?.length));
-  const { data: posixGroups } = useProjectPosixGroups(project?.uuid);
-  const hasPosixGroups = Boolean(posixGroups?.length);
+  const {
+    data: posixGroups,
+    isLoading: posixGroupsLoading,
+    isError: posixGroupsFailed,
+  } = useProjectPosixGroups(project?.uuid);
+  // Shown when the project has groups. While the rollup loads or after it
+  // failed, it stays only if it is the open tab, so its loading and error
+  // states show there without the tab flashing on every other project page.
+  const { params } = useCurrentStateAndParams();
+  const posixTabOpen = params?.tab === 'posix-identities';
+  // Never where POSIX identities are off, whatever the project holds.
+  const hasPosixGroups =
+    isProjectPosixGroupsVisible() &&
+    (Boolean(posixGroups?.length) ||
+      (posixTabOpen && (posixGroupsLoading || posixGroupsFailed)));
 
   const canSeeOrderApproval = useMemo(() => {
     if (!project) return false;

@@ -10,7 +10,7 @@ import {
 
 import { AlertItem, BaseButton } from 'waldur-ui';
 
-import { SelectGroup, StringGroup, SubmitButton } from '@/form';
+import { BooleanGroup, SelectGroup, StringGroup, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -20,6 +20,7 @@ import {
   ACCOUNT_SCOPE_OPTIONS,
   USERNAME_GENERATION_POLICY_OPTIONS,
 } from '../accountSettings';
+import { ProjectGroupsRolloutOrder } from '../project-groups/ProjectGroupsRolloutOrder';
 
 import { AccountOptionsPreviewResult } from './AccountOptionsPreviewResult';
 
@@ -31,14 +32,19 @@ const ACCOUNT_OPTION_KEYS = [
   'login_shell',
 ] as const;
 
-type Values = Partial<Record<(typeof ACCOUNT_OPTION_KEYS)[number], string>>;
+type Values = Partial<Record<(typeof ACCOUNT_OPTION_KEYS)[number], string>> & {
+  project_groups_enabled?: boolean;
+};
 
 // Every key is sent: an unchanged value merges as a no-op, and an emptied one
 // is sent blank, which removes the provider's own setting.
 const toChanges = (values: Values): ProviderAccountOptionsRequest =>
-  Object.fromEntries(
-    ACCOUNT_OPTION_KEYS.map((key) => [key, values[key] ?? '']),
-  ) as ProviderAccountOptionsRequest;
+  ({
+    ...Object.fromEntries(
+      ACCOUNT_OPTION_KEYS.map((key) => [key, values[key] ?? '']),
+    ),
+    project_groups_enabled: Boolean(values.project_groups_enabled),
+  }) as ProviderAccountOptionsRequest;
 
 interface AccountOptionsPreviewDialogProps {
   resolve: {
@@ -156,6 +162,33 @@ export const AccountOptionsPreviewDialog: FC<
                   />
                 </div>
               </div>
+              <BooleanGroup
+                name="project_groups_enabled"
+                label={translate('Create project groups')}
+                description={translate(
+                  'Give every project with a resource on your offerings one POSIX group, with a GID from the service provider’s POSIX ID pool. Turning it on also creates the groups of projects already using your offerings.',
+                )}
+              />
+              {values.project_groups_enabled &&
+                !serviceProvider.account_options?.project_groups_enabled && (
+                  <AlertItem
+                    variant="info"
+                    className="mb-4"
+                    title={translate('Before enabling project groups')}
+                    body={<ProjectGroupsRolloutOrder />}
+                  />
+                )}
+              {!values.project_groups_enabled &&
+                serviceProvider.account_options?.project_groups_enabled && (
+                  <AlertItem
+                    variant="info"
+                    className="mb-4"
+                    title={translate('Turning project groups off')}
+                    body={translate(
+                      'Existing groups stay, with their GIDs and members, and stay listed for your directory. Projects that start using your offerings get no group until you turn it on again.',
+                    )}
+                  />
+                )}
               {preview && !current && (
                 <AlertItem
                   variant="info"

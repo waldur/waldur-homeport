@@ -12,6 +12,22 @@ overrides:
       label: Applies to offering
       operationId: marketplace_provider_offerings_list
 
+  marketplace_service_provider_project_groups:
+    filters:
+      - in_use
+      - offering_uuid
+    in_use:
+      label: Usage
+      enumOverrides:
+        'true': In use
+        'false': Not in use
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_provider_offerings_list
+      extraQuery:
+        customer_uuid: 'props.customerUuid'
+
   marketplace_posix_identities:
     filters:
       - consumer_type

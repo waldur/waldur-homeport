@@ -774,6 +774,7 @@
       "feature_area": "freeipa"
     }
   },
+  "A project group is the one POSIX group a project gets at this service provider, with a stable GID and the project members’ accounts as its members. Clusters grant access through it, and files on shared storage are owned by it.": {},
   "A provider-level network used as the tenant’s upstream gateway; supplies floating IPs.": {},
   "A re-sync was already requested recently.": {
     "context": {
@@ -1406,6 +1407,11 @@
   "Account settings": {
     "context": {
       "feature_area": "marketplace"
+    }
+  },
+  "Account settings are not enabled on this portal; ask its administrator to turn on provider accounts so project groups can be switched on.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "Account settings have been updated.": {
@@ -2670,6 +2676,24 @@
       "feature_area": "support"
     }
   },
+  "Adopt": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "project-groups",
+      "action_type": "create"
+    }
+  },
+  "Adopt existing group": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
+  "Adopt groups your directory already holds, one per line: the project’s UUID or short name, the GID and, optionally, the group name, separated by commas. Either every line is imported or, if any is refused, none.": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
+  "Adopt the groups your directory already holds, with their GIDs, under Accounts > Project groups.": {},
   "Advance immediately on completion": {
     "context": {
       "feature_area": "workflow"
@@ -3576,6 +3600,11 @@
   "Allow \"N/A\" answer": {
     "context": {
       "feature_area": "questions"
+    }
+  },
+  "Allow a GID outside the project group range": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "Allow anonymous users to see plans": {},
@@ -6594,6 +6623,19 @@
       "feature_area": "policy-watch"
     }
   },
+  "At {provider}, the project has group {name}; it gets a GID once the provider can assign one.": {
+    "context": {
+      "variables": {
+        "provider": {
+          "type": "unknown"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "Atlassian": {
     "context": {
       "primary_ui_type": "label"
@@ -7662,6 +7704,11 @@
   "Before": {
     "context": {
       "feature_area": "openportal"
+    }
+  },
+  "Before enabling project groups": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Before project": {
@@ -9371,6 +9418,23 @@
       "action_type": "read"
     }
   },
+  "Change GID": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "project-groups",
+      "action_type": "create"
+    }
+  },
+  "Change GID of {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
   "Change VPC limits": {
     "context": {
       "feature_area": "mass-actions"
@@ -9398,6 +9462,11 @@
   "Change flavor": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Change in the preview": {
+    "context": {
+      "feature_area": "service-providers"
     }
   },
   "Change limits": {
@@ -12866,6 +12935,11 @@
       "feature_area": "roles"
     }
   },
+  "Create project groups": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
   "Create proposal": {
     "context": {
       "feature_area": "create"
@@ -15413,6 +15487,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "api-keys"
+    }
+  },
+  "Deleted project": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "Deleted suggestion for {name}.": {
@@ -18019,6 +18098,7 @@
     }
   },
   "Enable project digest email notifications for organizations.": {},
+  "Enable project groups: every project with a resource on your offerings then gets a group, with the next free GID from the range.": {},
   "Enable provider-customer messaging": {
     "context": {
       "feature_area": "integration"
@@ -18422,6 +18502,7 @@
   "Enter IPv4 address.": {},
   "Enter IPv6 address.": {},
   "Enter a CIDR address.": {},
+  "Enter a GID.": {},
   "Enter a claim name first": {
     "context": {
       "feature_area": "steps"
@@ -18559,6 +18640,7 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Enter at least one group.": {},
   "Enter claim name (e.g., preferred_username)": {
     "context": {
       "feature_area": "steps"
@@ -19402,6 +19484,11 @@
   "Existing affiliate links could not be loaded, so organizations that already have an active affiliate are not marked. Saving still checks this.": {
     "context": {
       "feature_area": "affiliates"
+    }
+  },
+  "Existing groups stay, with their GIDs and members, and stay listed for your directory. Projects that start using your offerings get no group until you turn it on again.": {
+    "context": {
+      "feature_area": "accounts"
     }
   },
   "Existing offering with the same name will be overwritten.": {
@@ -20912,9 +20999,30 @@
       "feature_area": "single-import"
     }
   },
+  "Files and cluster access at {provider} use group {name}, GID {gid}.": {
+    "context": {
+      "variables": {
+        "provider": {
+          "type": "unknown"
+        },
+        "name": {
+          "type": "string"
+        },
+        "gid": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "manage"
+    }
+  },
   "Files created": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "Files on shared storage keep the old GID until they are changed with chgrp; renumbering them is up to you.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "Filesize": {
@@ -21195,6 +21303,11 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "First GID of the range (inclusive).": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
   "First UID of the pool (inclusive).": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -21471,6 +21584,11 @@
   "For Jira Server/Data Center, create a PAT in your profile settings.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "For a GID your directory assigned before Waldur managed it. A GID held by anything else at this service provider, or lying in another of its pools, is refused either way.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "For complete details, please see our <pp>Privacy policy</pp>.": {
@@ -22100,6 +22218,11 @@
       "feature_area": "overview"
     }
   },
+  "Give every project with a resource on your offerings one POSIX group, with a GID from the service provider’s POSIX ID pool. Turning it on also creates the groups of projects already using your offerings.": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Give this passkey a name you will recognise later, then follow your device prompt. Nothing secret leaves your device.": {
     "context": {
       "feature_area": "passkeys"
@@ -22378,11 +22501,7 @@
       "feature_area": "join-organization"
     }
   },
-  "Group IDs (GIDs) assigned to this project across offerings — both project groups and resource / role groups.": {
-    "context": {
-      "feature_area": "manage"
-    }
-  },
+  "Group IDs (GIDs) assigned to this project: its one group at each service provider, and the groups held per offering.": {},
   "Group TRES (concurrent)": {
     "context": {
       "primary_ui_type": "label"
@@ -22438,6 +22557,12 @@
       "feature_area": "customer"
     }
   },
+  "Group name": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "project-groups"
+    }
+  },
   "Group placeholders are empty for collaborations. The match never leaves the organization of the SRAM group.": {},
   "Group short names": {
     "context": {
@@ -22449,6 +22574,21 @@
   "Grouped by": {
     "context": {
       "feature_area": "usage-views"
+    }
+  },
+  "Groups": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
+  "Groups at service providers": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "Groups per offering": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Groups, affiliations and science domains used to classify organizations and projects.": {
@@ -23957,6 +24097,11 @@
       "feature_area": "single-import"
     }
   },
+  "Import groups": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
   "Import in progress": {
     "context": {
       "feature_area": "onboarding-setup"
@@ -24146,6 +24291,12 @@
       "primary_ui_type": "label",
       "feature_area": "proposals",
       "action_type": "read"
+    }
+  },
+  "In use": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "project-groups"
     }
   },
   "In-depth analysis of organization quota limits and usage projections": {
@@ -26190,6 +26341,11 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "Last GID of the range (inclusive).": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Last UID of the pool (inclusive).": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -26885,6 +27041,71 @@
   "Line chart": {
     "context": {
       "feature_area": "reports"
+    }
+  },
+  "Line {line}, {field}: {message}": {
+    "context": {
+      "variables": {
+        "line": {
+          "type": "unknown"
+        },
+        "field": {
+          "type": "unknown"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
+  "Line {line}: \"{value}\" is neither a project UUID nor a short name.": {
+    "context": {
+      "variables": {
+        "line": {
+          "type": "unknown"
+        },
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
+  "Line {line}: \"{value}\" is not a GID.": {
+    "context": {
+      "variables": {
+        "line": {
+          "type": "unknown"
+        },
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
+  "Line {line}: expected the project’s UUID or short name, the GID and an optional group name.": {
+    "context": {
+      "variables": {
+        "line": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
+  "Line {line}: {message}": {
+    "context": {
+      "variables": {
+        "line": {
+          "type": "unknown"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "feature_area": "project-groups"
     }
   },
   "Linear": {
@@ -29134,6 +29355,11 @@
       "feature_area": "policies"
     }
   },
+  "Maximum project group GID": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Maximum quarterly": {
     "context": {
       "primary_ui_type": "label",
@@ -29789,6 +30015,11 @@
   "Minimum number of vCPUs required for worker nodes when selecting flavors": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Minimum project group GID": {
+    "context": {
+      "feature_area": "posix-id-pools"
     }
   },
   "Minimum remaining capacity to maintain": {},
@@ -30856,6 +31087,11 @@
       "feature_area": "thread"
     }
   },
+  "New GID": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
   "New Zealand": {},
   "New announcement has been created.": {
     "context": {
@@ -31215,6 +31451,16 @@
       "feature_area": "table"
     }
   },
+  "Next project group GID: {next}": {
+    "context": {
+      "variables": {
+        "next": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Next reset": {
     "context": {
       "feature_area": "views"
@@ -31294,11 +31540,6 @@
   "No POSIX ID pool: accounts get no UID or GID from a pool until one is created.": {
     "context": {
       "feature_area": "integration"
-    }
-  },
-  "No POSIX group IDs are assigned to this project.": {
-    "context": {
-      "feature_area": "manage"
     }
   },
   "No POSIX identifiers found.": {
@@ -32171,6 +32412,11 @@
       "feature_area": "managed-projects"
     }
   },
+  "No members: nobody in the project has an active account at this service provider.": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
   "No membership restrictions are configured at the organization level.": {
     "context": {
       "feature_area": "restrictions"
@@ -32422,6 +32668,7 @@
       "feature_area": "steps"
     }
   },
+  "No pool range can supply a GID yet. The group gets one as soon as a range can.": {},
   "No pools": {
     "context": {
       "feature_area": "openstack-lbaas"
@@ -32448,6 +32695,21 @@
     }
   },
   "No project assigned": {},
+  "No project group range: project groups take GIDs from the GID range.": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
+  "No project groups to show": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
+  "No project groups yet": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
   "No project metadata": {
     "context": {
       "feature_area": "service-providers"
@@ -33206,7 +33468,12 @@
   },
   "Not assigned": {
     "context": {
-      "feature_area": "openstack-floating-ips"
+      "feature_area": "project-groups"
+    }
+  },
+  "Not assigned yet": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Not attached to a local project": {
@@ -33264,6 +33531,12 @@
   "Not helpful (selected). Activate to edit your feedback.": {
     "context": {
       "feature_area": "shared"
+    }
+  },
+  "Not in use": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "project-groups"
     }
   },
   "Not installed": {
@@ -33517,6 +33790,11 @@
   "Nothing to show here": {
     "context": {
       "feature_area": "list"
+    }
+  },
+  "Nothing was imported.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "Notification": {
@@ -34652,6 +34930,11 @@
       "feature_area": "create"
     }
   },
+  "One POSIX group per project that uses your offerings, with a GID from the service provider’s POSIX ID pool. To keep the GIDs of groups your directory already holds:": {
+    "context": {
+      "feature_area": "service-providers"
+    }
+  },
   "One directory for the offerings that share accounts: {offerings}. Each person appears once, with the groups of all those offerings.": {
     "context": {
       "variables": {
@@ -35455,6 +35738,7 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "Optional. Reserves GIDs for the one POSIX group each project gets at this service provider. Without it, project groups take GIDs from the GID range shared with users’ primary groups. Set it before enabling project groups in the account settings.": {},
   "Optional. Used by browser clients when the homeserver URL above is Docker-internal or otherwise unreachable from the browser.": {
     "context": {
       "feature_area": "matrix"
@@ -36282,6 +36566,7 @@
       "feature_area": "support"
     }
   },
+  "Outside the range": {},
   "Over cap": {
     "context": {
       "feature_area": "views"
@@ -36358,6 +36643,19 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "rabbitmq"
+    }
+  },
+  "Overlaps this pool’s GID range {min}–{max}.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "posix-id-pools"
     }
   },
   "Overlaps {min}–{max} of another {scope}.": {
@@ -36563,6 +36861,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "service-providers"
+    }
+  },
+  "POSIX groups": {
+    "context": {
+      "feature_area": "dashboard"
     }
   },
   "POSIX id pools": {},
@@ -40197,9 +40500,43 @@
       "feature_area": "manage"
     }
   },
+  "Project group GID": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
+  "Project group GID range": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "posix-id-pools"
+    }
+  },
+  "Project group GID utilization": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "posix-id-pools"
+    }
+  },
   "Project group GIDs": {
     "context": {
       "feature_area": "offering-users"
+    }
+  },
+  "Project group has been adopted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "project-groups"
+    }
+  },
+  "Project groups": {
+    "context": {
+      "feature_area": "marketplace"
+    }
+  },
+  "Project groups have been imported.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "project-groups"
     }
   },
   "Project has already been removed": {
@@ -42446,6 +42783,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "billing"
+    }
+  },
+  "Record a group your directory already holds, so the project keeps its GID and Waldur never hands that GID to anything else. The project needs no resource yet.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "Record notification has been sent to organization owners.": {
@@ -46372,6 +46714,7 @@
   },
   "Role / scope": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "manage"
     }
   },
@@ -49178,6 +49521,15 @@
       "feature_area": "common"
     }
   },
+  "Select “{option}” to use it anyway.": {
+    "context": {
+      "variables": {
+        "option": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "Select...": {
     "context": {
       "feature_area": "select"
@@ -49759,6 +50111,11 @@
     }
   },
   "Service provider details": {},
+  "Service provider group": {
+    "context": {
+      "feature_area": "offering-users"
+    }
+  },
   "Service provider has been registered.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -49858,6 +50215,23 @@
       "feature_area": "create-user-steps"
     }
   },
+  "Set GID": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "project-groups",
+      "action_type": "create"
+    }
+  },
+  "Set GID of {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
   "Set MTU": {
     "context": {
       "feature_area": "actions"
@@ -49875,6 +50249,7 @@
       "feature_area": "assignments"
     }
   },
+  "Set a project group GID range on the service provider’s POSIX ID pool.": {},
   "Set a start date first": {
     "context": {
       "feature_area": "create"
@@ -50442,6 +50817,11 @@
   "Show all ports": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "Show all projects, not only those using this service provider": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "Show as": {
@@ -53784,6 +54164,17 @@
       "feature_area": "options"
     }
   },
+  "The GID of the project group has been changed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "project-groups"
+    }
+  },
+  "The GID the group has in the directory.": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
   "The OAuth2/OIDC client ID registered with your identity provider.": {
     "context": {
       "feature_area": "steps"
@@ -54304,6 +54695,21 @@
       "feature_area": "table"
     }
   },
+  "The group currently has GID {gid}.": {
+    "context": {
+      "variables": {
+        "gid": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
+  "The group has no GID yet. The GID you set is the one it gets.": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
   "The group has no duplicates left to merge.": {
     "context": {
       "feature_area": "offering-merges"
@@ -54599,6 +55005,11 @@
       "feature_area": "roles"
     }
   },
+  "The name the group has in the directory. Leave empty to use the project’s short name.": {
+    "context": {
+      "feature_area": "project-groups"
+    }
+  },
   "The new limits below will be applied to all {count} selected VPCs.": {
     "context": {
       "variables": {
@@ -54690,6 +55101,11 @@
   "The official registration number of your company": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "The old GID stays reserved: Waldur does not hand it to another project.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "The one account a person has on all offerings that share accounts, with the same username, POSIX UID and home directory.": {
@@ -54791,6 +55207,11 @@
       "feature_area": "wizard"
     }
   },
+  "The project group range holds GIDs too, so it must not overlap any GID range, including this pool’s own.": {
+    "context": {
+      "feature_area": "posix-id-pools"
+    }
+  },
   "The project has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -54848,6 +55269,11 @@
   "The request is being processed": {
     "context": {
       "feature_area": "project"
+    }
+  },
+  "The request was refused.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "The resource has not been provisioned on the remote site yet.": {
@@ -56074,6 +56500,27 @@
       }
     }
   },
+  "This project already has group {name} with GID {gid}. Use Change GID on it instead.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        },
+        "gid": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
+  "This project already has group {name}. Use Change GID on it instead.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "This project ended on {endDate}. Resources will remain active until {effectiveEndDate}.": {
     "context": {
       "variables": {
@@ -56703,6 +57150,11 @@
   "To speed up the review process, provide as much data as possible": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "To start: set a project group GID range on the POSIX ID pool, adopt the groups your directory already holds, then enable project groups in the account settings.": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "To verify your right to represent a company in Austria, we need to confirm your identity by matching your personal details with official business registry information. Please provide your first name, last name, and date of birth, which will be used for this verification.": {},
@@ -57552,6 +58004,11 @@
       "feature_area": "database-stats"
     }
   },
+  "Turning project groups off": {
+    "context": {
+      "feature_area": "accounts"
+    }
+  },
   "Turning this off also disables {dependents}, which depends on it.": {
     "context": {
       "variables": {
@@ -58047,6 +58504,12 @@
       "feature_area": "credits"
     }
   },
+  "Unable to adopt the project group.": {
+    "context": {
+      "primary_ui_type": "notification_message",
+      "feature_area": "project-groups"
+    }
+  },
   "Unable to advance the workflow.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -58259,6 +58722,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "actions"
+    }
+  },
+  "Unable to change the GID of the project group.": {
+    "context": {
+      "primary_ui_type": "notification_message",
+      "feature_area": "project-groups"
     }
   },
   "Unable to check for duplicate invitations.": {
@@ -59532,6 +60001,12 @@
       "feature_area": "single-import"
     }
   },
+  "Unable to import project groups.": {
+    "context": {
+      "primary_ui_type": "notification_message",
+      "feature_area": "project-groups"
+    }
+  },
   "Unable to import projects": {
     "context": {
       "primary_ui_type": "error_message",
@@ -59996,6 +60471,11 @@
   "Unable to load templates": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Unable to load the POSIX groups of this project.": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Unable to load the application options for this offering.": {
@@ -63745,6 +64225,7 @@
     }
   },
   "Usages of the resources": {},
+  "Use 1–32 lowercase letters, digits, \"_\" and \"-\", starting with a letter or \"_\".": {},
   "Use ORCID sandbox environment for testing. When enabled, uses sandbox URLs automatically.": {},
   "Use TRES billing units instead of raw TRES values": {
     "context": {
@@ -63777,6 +64258,18 @@
         }
       },
       "feature_area": "posix-id-pools"
+    }
+  },
+  "Use a whole number from {min} to {max}.": {
+    "context": {
+      "variables": {
+        "min": {
+          "type": "unknown"
+        },
+        "max": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "Use an existing namespace": {
@@ -68967,6 +69460,16 @@
       "feature_area": "invitations"
     }
   },
+  "groups at service providers": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
+  "groups per offering": {
+    "context": {
+      "feature_area": "manage"
+    }
+  },
   "h": {},
   "half month": {},
   "half-month": {},
@@ -69508,6 +70011,12 @@
   "project credit": {
     "context": {
       "feature_area": "cost-policies"
+    }
+  },
+  "project group GIDs": {},
+  "project groups": {
+    "context": {
+      "feature_area": "project-groups"
     }
   },
   "projects": {
@@ -71766,6 +72275,19 @@
       "feature_area": "sram"
     }
   },
+  "{field}: {message}": {
+    "context": {
+      "variables": {
+        "field": {
+          "type": "unknown"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "feature_area": "project-groups"
+    }
+  },
   "{filled}/{total} fields filled": {
     "context": {
       "variables": {
@@ -73075,6 +73597,19 @@
         }
       },
       "feature_area": "project"
+    }
+  },
+  "{project} — has group {name}": {
+    "context": {
+      "variables": {
+        "project": {
+          "type": "unknown"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "project-groups"
     }
   },
   "{ready} ready, {skipped} skipped, {errors} errors": {

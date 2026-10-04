@@ -10,6 +10,8 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { ProgressBar } from '@/core/ProgressBar';
 import { translate } from '@/i18n';
 
+import { roundUtilization } from './poolRanges';
+
 const utilizationVariant = (utilization: number, threshold: number) =>
   utilization >= threshold
     ? 'danger'
@@ -21,13 +23,14 @@ const NamespaceStats: FunctionComponent<{
   label: string;
   stats: PosixIdPoolNamespaceStats | null;
   threshold: number;
-}> = ({ label, stats, threshold }) => (
+  emptyText?: string;
+}> = ({ label, stats, threshold, emptyText }) => (
   <div className="mb-3">
     <div className="fw-bold mb-1">{label}</div>
     {stats ? (
       <>
         <ProgressBar
-          now={stats.utilization}
+          now={roundUtilization(stats.utilization)}
           showValue
           compact
           variant={utilizationVariant(stats.utilization, threshold)}
@@ -47,7 +50,8 @@ const NamespaceStats: FunctionComponent<{
       </>
     ) : (
       <div className="text-secondary fs-7">
-        {translate('Not managed by this pool — sourced externally.')}
+        {emptyText ??
+          translate('Not managed by this pool — sourced externally.')}
       </div>
     )}
   </div>
@@ -84,6 +88,16 @@ export const PosixIdPoolStatsExpandable: FunctionComponent<{
         stats={data.gid}
         threshold={data.utilization_threshold}
       />
+      {row.scope !== 'offering' && (
+        <NamespaceStats
+          label={translate('Project group GID')}
+          stats={data.group_gid}
+          threshold={data.utilization_threshold}
+          emptyText={translate(
+            'No project group range: project groups take GIDs from the GID range.',
+          )}
+        />
+      )}
     </div>
   );
 };

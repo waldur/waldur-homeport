@@ -1,5 +1,6 @@
 import { QueryCache, QueryClient } from '@tanstack/react-query';
 
+import { retryServerErrors } from '@/core/queryRetry';
 import { goToNotFound } from '@/error/utils';
 import { router } from '@/router';
 
@@ -9,17 +10,8 @@ export const BOOTSTRAP_QUERY_KEY = ['Application'];
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // A 4xx (403/404/400/...) is deterministic — retrying it just repeats the
-      // failure and any error toast/redirect (React Query defaults to 3
-      // retries, which is what turned a single 403 on a preview query into a
-      // toast storm). Only retry transient/server errors.
-      retry: (failureCount, error: any) => {
-        const status = error?.response?.status ?? error?.status;
-        if (typeof status === 'number' && status >= 400 && status < 500) {
-          return false;
-        }
-        return failureCount < 3;
-      },
+      // A 4xx is deterministic: only transient and server errors are retried.
+      retry: retryServerErrors(),
     },
   },
   queryCache: new QueryCache({
