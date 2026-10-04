@@ -26644,7 +26644,7 @@
   },
   "Leave page": {
     "context": {
-      "feature_area": "deploy"
+      "feature_area": "form"
     }
   },
   "Leave room": {
@@ -33181,6 +33181,11 @@
   "No tree data available.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "No unsaved changes": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "No update": {
@@ -52191,7 +52196,7 @@
   },
   "Stay": {
     "context": {
-      "feature_area": "deploy"
+      "feature_area": "form"
     }
   },
   "Stay on current": {
@@ -63285,7 +63290,7 @@
   },
   "Unsaved changes": {
     "context": {
-      "feature_area": "deploy"
+      "feature_area": "form"
     }
   },
   "Unset panel chair": {
@@ -68309,7 +68314,7 @@
   },
   "You have unsaved changes. If you leave this page, your changes will be lost.": {
     "context": {
-      "feature_area": "deploy"
+      "feature_area": "form"
     }
   },
   "You have {count} accounts that require attention to complete setup.": {

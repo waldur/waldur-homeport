@@ -1,3 +1,4 @@
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { ProposalCanSubmitResponse } from 'waldur-js-client';
 
@@ -14,6 +15,8 @@ import { FormSteps } from '@/wizard';
 interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;
   isSaving?: boolean;
+  /** Whether the form holds edits that Save as draft has not sent yet. */
+  hasUnsavedChanges?: boolean;
   editable?: boolean;
   /** Every requested resource, for the summary. */
   resourceRows?: any[];
@@ -95,11 +98,21 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             label={translate('Save as draft')}
             variant="secondary"
             className="w-100 mt-2"
-            disabled={props.submitting}
-            disabledReason={translate('Saving draft...')}
+            disabled={props.submitting || !props.hasUnsavedChanges}
+            disabledReason={
+              props.submitting
+                ? translate('Saving draft...')
+                : translate('No unsaved changes')
+            }
             pending={props.isSaving}
             size="lg"
           />
+          {props.hasUnsavedChanges && !props.isSaving && (
+            <p className="d-flex align-items-center justify-content-center gap-1 text-warning fs-6 mt-2 mb-0">
+              <WarningCircleIcon size={16} weight="bold" />
+              {translate('You have unsaved changes')}
+            </p>
+          )}
           <TosNotification />
         </>
       )}
