@@ -20,6 +20,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import { RoleActions } from './RoleActions';
 import { RoleCreateButton } from './RoleCreateButton';
+import { RoleNamesAdjustButton } from './RoleNamesAdjustButton';
 import { RolePermissionDelta } from './RolePermissionDelta';
 
 export const RolesList: FC<TableWithPortal> = ({ portal }) => {
@@ -153,7 +154,12 @@ export const RolesList: FC<TableWithPortal> = ({ portal }) => {
         <RoleActions row={row} refetch={tableProps.fetch} />
       )}
       showPageSizeSelector={true}
-      tableActions={<RoleCreateButton refetch={tableProps.fetch} />}
+      tableActions={
+        <>
+          <RoleNamesAdjustButton refetch={tableProps.fetch} />
+          <RoleCreateButton refetch={tableProps.fetch} />
+        </>
+      }
     />
   );
 };
