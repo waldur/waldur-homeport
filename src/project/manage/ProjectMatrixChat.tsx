@@ -25,6 +25,7 @@ import {
   SyncMembersButton,
 } from '@/matrix/MatrixRoomActions';
 import { ROOM_STATE_VARIANT, stateLabel } from '@/matrix/MatrixRoomStateBadge';
+import { canOpenInExternalClient } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
@@ -38,8 +39,8 @@ import {
 } from '@/workspace/selectors';
 
 // Lifecycle after creation is staff-only here, deliberately stricter than the API.
-// Menu order is by cost: sync → connect (provisions, mints a token) →
-// disable → delete. One action is promoted beside it: the conversation while
+// Menu order is by cost: sync → connect (hands the room to an external
+// client) → disable → delete. One action is promoted beside it: the conversation while
 // healthy, otherwise whatever fixes the current state.
 const RoomActions: FC<{
   room: MatrixRoom;
@@ -70,7 +71,9 @@ const RoomActions: FC<{
 
   const groups = [
     canSync && <SyncMembersButton key="sync" row={room} refetch={refetch} />,
-    isActive && (
+    // Gated here as well as in the button: a null item would still count
+    // towards the menu and its separators.
+    isActive && canOpenInExternalClient() && (
       <OpenInMatrixButton key="matrix" row={room} refetch={refetch} />
     ),
     canDisable && (

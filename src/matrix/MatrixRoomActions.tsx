@@ -27,6 +27,7 @@ import { useDrawer } from '@/drawer/actions';
 import { translate } from '@/i18n';
 import { DisableChatRoomDialog } from '@/matrix/DisableChatRoomDialog';
 import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
+import { canOpenInExternalClient } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -46,8 +47,8 @@ interface MatrixRoomActionsProps {
 }
 
 // You can only open a room's conversation if you actually belong to it — the
-// backend withholds the room access token for non-members, so the chat would
-// not load. Staff/support must Join first.
+// backend refuses non-members the room, so the chat would not load.
+// Staff/support must Join first.
 const isRoomMember = (row: MatrixRoom) =>
   row.current_user_membership_state === 'joined' ||
   row.current_user_membership_state === 'invited';
@@ -57,9 +58,11 @@ export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row, as }) => {
 
   const handleJoin = useCallback(() => {
     openDialog(MatrixCredentialsDialog, {
-      resolve: { roomAlias: row.room_alias, roomUuid: row.uuid },
+      resolve: { roomAlias: row.room_alias },
     });
-  }, [openDialog, row.room_alias, row.uuid]);
+  }, [openDialog, row.room_alias]);
+
+  if (!canOpenInExternalClient()) return null;
 
   const member = isRoomMember(row);
 
@@ -72,9 +75,9 @@ export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row, as }) => {
       disabled={row.state !== 'active' || !member}
       tooltip={
         row.state !== 'active'
-          ? translate('Room must be active to issue credentials.')
+          ? translate('The room must be active to open it in a Matrix client.')
           : !member
-            ? translate('Join the room first to get its credentials.')
+            ? translate('Join the room first to open it in a Matrix client.')
             : undefined
       }
     />

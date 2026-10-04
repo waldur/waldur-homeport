@@ -45,6 +45,8 @@ type OfferingVisibilityMode =
 /** How a user reaches services. Navigation only; the API serves the same data. */
 export type ServiceAccessMode = 'calls' | 'marketplace' | 'both';
 
+export type MatrixExternalLoginMethod = 'none' | 'password' | 'oidc';
+
 interface CoreConfiguration {
   INVITATION_USE_WEBHOOKS: boolean;
   /** Staff and support accounts must hold a passkey and have satisfied it. */
@@ -144,6 +146,7 @@ interface CoreConfiguration {
   AI_ASSISTANT_ENABLED_ROLES:
     'disabled' | 'staff' | 'staff_and_support' | 'all' | 'anonymous';
   MATRIX_ENABLED: boolean;
+  MATRIX_EXTERNAL_LOGIN_METHOD?: MatrixExternalLoginMethod;
   SRAM_INTEGRATION_ENABLED?: boolean;
 }
 

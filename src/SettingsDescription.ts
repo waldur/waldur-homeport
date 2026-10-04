@@ -2297,16 +2297,11 @@ export const SettingsDescription = [
         type: 'string',
       },
       {
-        key: 'MATRIX_LOGIN_METHOD',
-        description: translate('Login method for Matrix credentials: password, token, or oidc.'),
-        default: 'token',
-        type: 'string',
-      },
-      {
-        key: 'MATRIX_OIDC_PROVIDER_URL',
-        description: translate('OIDC provider URL for Matrix SSO login.'),
-        default: '',
-        type: 'url_field',
+        key: 'MATRIX_EXTERNAL_LOGIN_METHOD',
+        description: translate('How users sign in to an external Matrix client such as Element: \'none\' (Waldur offers no external sign-in), \'password\' (a password Waldur derives for each user), or \'oidc\' (single sign-on configured on the homeserver). Switching away from \'password\' does not revoke passwords already shown or sign out external clients.'),
+        default: 'none',
+        type: 'choice_field',
+        options: [{ value: 'none', label: 'None: Waldur offers no external sign-in' }, { value: 'password', label: 'Password derived for each user' }, { value: 'oidc', label: 'Single sign-on through the homeserver' }],
       },
       {
         key: 'MATRIX_LIVEKIT_KEY',

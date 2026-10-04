@@ -20117,6 +20117,11 @@
       "feature_area": "openstack-instance"
     }
   },
+  "External Matrix clients are not enabled on this server.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "External Networks": {
     "context": {
       "feature_area": "steps"
@@ -23710,6 +23715,7 @@
     }
   },
   "How users reach services. 'calls': only through calls for proposals, no marketplace navigation. 'marketplace': the marketplace is the single entry point; calls are reached through an offering and proposals are tracked in the user profile. 'both': marketplace and calls are browsable independently. Navigation only — the API serves the same data in every mode.": {},
+  "How users sign in to an external Matrix client such as Element: 'none' (Waldur offers no external sign-in), 'password' (a password Waldur derives for each user), or 'oidc' (single sign-on configured on the homeserver). Switching away from 'password' does not revoke passwords already shown or sign out external clients.": {},
   "How would you like to sign in?": {
     "context": {
       "feature_area": "layouts"
@@ -26277,7 +26283,7 @@
       "feature_area": "invitations"
     }
   },
-  "Join the room first to get its credentials.": {
+  "Join the room first to open it in a Matrix client.": {
     "context": {
       "feature_area": "matrix"
     }
@@ -28201,7 +28207,6 @@
       "feature_area": "callbacks"
     }
   },
-  "Login method for Matrix credentials: password, token, or oidc.": {},
   "Login page": {
     "context": {
       "primary_ui_type": "title"
@@ -34550,7 +34555,6 @@
     }
   },
   "OIDC authorization endpoint URL. Reserved for future OAuth 2.0 authorization code flow integration.": {},
-  "OIDC provider URL for Matrix SSO login.": {},
   "OK": {
     "context": {
       "primary_ui_type": "label",
@@ -35963,11 +35967,6 @@
   "Opening a submission window": {
     "context": {
       "feature_area": "actions"
-    }
-  },
-  "Opening this provisions your Matrix account the first time and issues a new access token each time. Treat the details below as a password.": {
-    "context": {
-      "feature_area": "matrix"
     }
   },
   "Opening your review of this proposal.": {
@@ -47666,11 +47665,6 @@
       "feature_area": "matrix"
     }
   },
-  "Room must be active to issue credentials.": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
   "Room must be active to join or leave.": {
     "context": {
       "feature_area": "matrix"
@@ -51840,6 +51834,11 @@
       "feature_area": "auth"
     }
   },
+  "Sign in to your Matrix client with these details. Treat the password like any other.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Sign in with local account": {
     "context": {
       "feature_area": "auth"
@@ -55976,6 +55975,11 @@
       "feature_area": "matrix"
     }
   },
+  "The room must be active to open it in a Matrix client.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "The rows this count covers, with the value each one carries now and the value it carries after the merge.": {
     "context": {
       "feature_area": "offering-merges"
@@ -57274,7 +57278,7 @@
       "feature_area": "questions"
     }
   },
-  "This server uses single sign-on. Open your Matrix client and sign in via SSO.": {
+  "This server uses single sign-on. In your Matrix client, enter the homeserver below and sign in with single sign-on.": {
     "context": {
       "feature_area": "matrix"
     }
