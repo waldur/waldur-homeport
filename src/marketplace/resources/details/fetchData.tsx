@@ -2,6 +2,7 @@ import {
   marketplaceProviderResourcesDetailsRetrieve,
   marketplaceProviderResourcesOfferingRetrieve,
   marketplaceResourcesDetailsRetrieve,
+  marketplaceResourceMetricsList,
   marketplaceResourcesOfferingRetrieve,
   Offering,
   Resource,
@@ -10,7 +11,11 @@ import {
 import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
-import { MarketplaceFeatures, OpenstackFeatures } from '@/FeaturesEnums';
+import {
+  MarketplaceFeatures,
+  OpenstackFeatures,
+  ProjectFeatures,
+} from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import {
@@ -43,6 +48,7 @@ export const getResourceTabs = ({
   scope,
   lexisLinksCount,
   robotAccountsCount,
+  metricsCount = 0,
   isStaff,
   isSupport,
   isRPOnly = false,
@@ -56,6 +62,7 @@ export const getResourceTabs = ({
   scope;
   lexisLinksCount;
   robotAccountsCount;
+  metricsCount?: number;
   isStaff: boolean;
   isSupport?: boolean;
   isRPOnly?: boolean;
@@ -222,6 +229,19 @@ export const getResourceTabs = ({
       title: translate('Usage'),
       component: lazyComponent(() =>
         import('./UsageCard').then((module) => ({ default: module.UsageCard })),
+      ),
+    });
+  }
+
+  // Only where the resource's offering has adopted custom metrics.
+  if (metricsCount) {
+    tabs.push({
+      key: 'metrics',
+      title: translate('Metrics'),
+      component: lazyComponent(() =>
+        import('@/project/metrics/ResourceMetricsTab').then((module) => ({
+          default: module.ResourceMetricsTab,
+        })),
       ),
     });
   }
@@ -497,6 +517,15 @@ export const fetchData = async (resource: Resource) => {
   const robotAccountsCount = await countRobotAccounts({
     resource: resource.url,
   });
+  let metricsCount = 0;
+  if (isFeatureVisible(ProjectFeatures.show_custom_metrics)) {
+    metricsCount = await marketplaceResourceMetricsList({
+      query: { resource_uuid: resource.uuid },
+    })
+      .then((response) => response.data.length)
+      // A failed probe only hides the tab; it must not break the page.
+      .catch(() => 0);
+  }
 
   // The requester is not an approver, so the tab is otherwise invisible to
   // them and they cannot tell what became of what they asked for. The list
@@ -515,6 +544,7 @@ export const fetchData = async (resource: Resource) => {
     offering,
     lexisLinksCount,
     robotAccountsCount,
+    metricsCount,
     endDateChangeRequestsCount,
   };
 };

@@ -2,8 +2,10 @@ import { FC } from 'react';
 import {
   marketplaceMetricBreakdownList,
   ProjectMetric,
+  ResourceMetric,
 } from 'waldur-js-client';
 
+import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { formatFigure } from '@/marketplace/metrics/options';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -11,33 +13,55 @@ import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
+// The backend's name for breaking a project's figure down by its resources.
+const BY_RESOURCE = 'resource';
+
 interface Row {
   uuid: string;
   label: string;
+  resourceUuid: string | null;
   value: number | null;
 }
 
 export const MetricBreakdownDialog: FC<{
-  resolve: { item: ProjectMetric; projectUuid: string; attribute: string };
-}> = ({ resolve: { item, projectUuid, attribute } }) => {
+  resolve: {
+    item: ProjectMetric | ResourceMetric;
+    projectUuid?: string;
+    resourceUuid?: string;
+    attribute: string;
+  };
+}> = ({ resolve: { item, projectUuid, resourceUuid, attribute } }) => {
   const metric = item.offering_metric;
   const isCounter = metric.kind === 'counter';
+  const byResource = attribute === BY_RESOURCE;
+  const title = byResource
+    ? translate('Breakdown by resource')
+    : translate('Breakdown by {attribute}', { attribute });
   const tableProps = useTable<Row>({
-    table: `metric-breakdown-${metric.uuid}-${attribute}`,
+    table: `metric-breakdown-${metric.uuid}-${resourceUuid ?? projectUuid}-${attribute}`,
     fetchData: async () => {
       // The backend computes each value's figure the way the card does:
       // every series' total or latest level first, then combined.
       const { data } = await marketplaceMetricBreakdownList({
         query: {
           offering_metric_uuid: metric.uuid,
-          project_uuid: projectUuid,
+          ...(resourceUuid
+            ? { resource_uuid: resourceUuid }
+            : { project_uuid: projectUuid }),
           group_by: attribute,
           start: item.period_start,
         },
       });
       const rows = data.map((entry) => {
-        const label = String(entry.value ?? translate('Not set'));
-        return { uuid: label, label, value: entry.figure };
+        const label = byResource
+          ? entry.resource_name
+          : String(entry.value ?? translate('Not set'));
+        return {
+          uuid: entry.resource_uuid ?? label,
+          label,
+          resourceUuid: entry.resource_uuid,
+          value: entry.figure,
+        };
       });
       return { rows, resultCount: rows.length };
     },
@@ -45,7 +69,7 @@ export const MetricBreakdownDialog: FC<{
 
   return (
     <ModalDialog
-      title={translate('Breakdown by {attribute}', { attribute })}
+      title={title}
       subtitle={
         <ScopeSubtitle label={translate('Metric')} name={metric.name} />
       }
@@ -54,10 +78,18 @@ export const MetricBreakdownDialog: FC<{
         {...tableProps}
         columns={[
           {
-            title: attribute,
-            render: ({ row }) => (
-              <span className="text-dark fw-semibold">{row.label}</span>
-            ),
+            title: byResource ? translate('Resource') : attribute,
+            render: ({ row }) =>
+              row.resourceUuid ? (
+                <Link
+                  state="marketplace-resource-details"
+                  params={{ resource_uuid: row.resourceUuid, tab: 'metrics' }}
+                  label={row.label}
+                  className="text-dark fw-semibold"
+                />
+              ) : (
+                <span className="text-dark fw-semibold">{row.label}</span>
+              ),
           },
           {
             title: isCounter ? translate('Total') : translate('Latest value'),
@@ -66,7 +98,7 @@ export const MetricBreakdownDialog: FC<{
         ]}
         fullWidth
         equalColWidth
-        verboseName={attribute}
+        verboseName={byResource ? translate('resources') : attribute}
         hasPagination={false}
         hideTitle
         hasActionBar={false}
