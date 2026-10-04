@@ -90,10 +90,11 @@ export const ProviderAccountExpandableRow = ({
           {
             // An offering account backed by this provider account carries its
             // username, so repeating it says nothing. Only an offering that
-            // keeps its own account (or one not yet adopted) can differ.
+            // keeps its own account (or one not yet adopted) can differ --
+            // and only the link says which, since two names can coincide.
             title: translate('Account'),
             render: ({ row }) =>
-              row.username === account.username ? (
+              row.service_provider_account_uuid === account.uuid ? (
                 <span className="text-muted">{translate('Shared')}</span>
               ) : (
                 <>

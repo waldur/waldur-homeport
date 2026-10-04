@@ -18,6 +18,10 @@ import { UserFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
+import {
+  isProviderBacked,
+  ProviderAccountButton,
+} from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -224,6 +228,21 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
             label={translate('Offering username')}
             value={<FieldWithCopy value={formatValue(offeringUser.username)} />}
           />
+          {isProviderBacked(offeringUser) && (
+            <FormTable.Item
+              label={translate('Provider account')}
+              value={
+                <>
+                  <ProviderAccountButton row={offeringUser} />
+                  <div className="text-muted fs-7 mt-1">
+                    {translate(
+                      'The username and POSIX attributes are managed on the provider account and shared with the provider’s other offerings.',
+                    )}
+                  </div>
+                </>
+              }
+            />
+          )}
           <FormTable.Item
             label={translate('State')}
             value={<OfferingUserStateField row={offeringUser} />}

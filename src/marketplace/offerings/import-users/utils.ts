@@ -57,12 +57,15 @@ export const parseOfferingUsersFile = (file: File) => {
 };
 
 export const validateOfferingUserCreation = (record: OfferingUserRecord) => {
+  // An offering that shares accounts takes the username from the provider
+  // account, so a row for it needs none.
+  const hasUsername = Boolean(record.username) || record.provider_account;
   return {
-    valid: record.user_uuid && record.username && record.offering_uuid,
+    valid: record.user_uuid && hasUsername && record.offering_uuid,
     errors: [
       record.customer_uuid === 'invalid' ? 'provider' : null,
       record.user_uuid ? null : 'invalid',
-      record.username ? null : 'username',
+      hasUsername ? null : 'username',
       record.offering_uuid ? null : 'offering',
     ].filter(Boolean),
     reason: [

@@ -5,6 +5,7 @@ import { required } from '@/core/validators';
 import { AsyncSelectGroup, FormFooter, StringGroup } from '@/form';
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
+import { sharesProviderAccounts } from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -12,6 +13,7 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 export const CreateOfferingUserDialog = ({
   resolve: { offering, onSuccess },
 }) => {
+  const providerAccounts = sharesProviderAccounts(offering);
   const mutation = useManagedMutation<
     any,
     any,
@@ -22,7 +24,7 @@ export const CreateOfferingUserDialog = ({
         body: {
           offering: offering.url,
           user: formData.user.url,
-          username: formData.username,
+          ...(providerAccounts ? {} : { username: formData.username }),
         },
       }),
 
@@ -58,7 +60,18 @@ export const CreateOfferingUserDialog = ({
               }
               validate={required}
             />
-            <StringGroup name="username" label={translate('Username')} />
+            {providerAccounts ? (
+              <p
+                className="text-muted mb-0"
+                data-testid="provider-account-note"
+              >
+                {translate(
+                  'This offering shares accounts across the provider’s offerings: the username comes from the person’s provider account.',
+                )}
+              </p>
+            ) : (
+              <StringGroup name="username" label={translate('Username')} />
+            )}
           </ModalDialog>
         </form>
       )}

@@ -15,11 +15,15 @@ import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import { candidateEvidence } from './candidateEvidence';
+
 interface AdoptProviderAccountsDialogProps {
   resolve: {
     provider: ServiceProvider;
     conflicts: ProviderUsernameConflict[];
     refetch: () => void;
+    /** Opened from a switch to per service provider accounts, applied after. */
+    pendingSwitch?: boolean;
   };
 }
 
@@ -27,19 +31,9 @@ interface FormValues {
   resolutions?: Record<string, string>;
 }
 
-// The evidence for choosing: how widely a name is used and whether it is live.
 const candidateLabel = (
   candidate: ProviderUsernameConflict['candidates'][number],
-) =>
-  [
-    candidate.username,
-    translate('used on {count} offering(s)', {
-      count: candidate.offering_count,
-    }),
-    candidate.has_active_resources ? translate('has active resources') : null,
-  ]
-    .filter(Boolean)
-    .join(' · ');
+) => [candidate.username, ...candidateEvidence(candidate)].join(' · ');
 
 /**
  * Choose the username each conflicted person keeps. The backend then backs
@@ -48,7 +42,7 @@ const candidateLabel = (
  */
 export const AdoptProviderAccountsDialog: FC<
   AdoptProviderAccountsDialogProps
-> = ({ resolve: { provider, conflicts, refetch } }) => {
+> = ({ resolve: { provider, conflicts, refetch, pendingSwitch } }) => {
   const mutation = useManagedMutation<any, any, Record<string, string>>({
     mutationFn: (resolutions) =>
       marketplaceServiceProvidersAdoptProviderAccounts({
@@ -90,6 +84,17 @@ export const AdoptProviderAccountsDialog: FC<
           >
             {submitError && (
               <AlertItem variant="error" title={submitError} className="mb-4" />
+            )}
+            {pendingSwitch && (
+              <AlertItem
+                variant="info"
+                className="mb-4"
+                data-testid="pending-switch"
+                title={translate(
+                  '{count} person(s) have different usernames on different offerings. Switching to per service provider accounts is applied once every conflict is resolved.',
+                  { count: conflicts.length },
+                )}
+              />
             )}
             <p className="text-muted">
               {translate(

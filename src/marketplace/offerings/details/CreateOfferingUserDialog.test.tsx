@@ -70,4 +70,50 @@ describe('CreateOfferingUserDialog', () => {
       expect(onSuccess).toHaveBeenCalled();
     });
   });
+
+  it('asks no username where the offering shares provider accounts', async () => {
+    const user = userEvent.setup();
+    vi.mocked(usersList).mockResolvedValue(
+      mockListResponse([
+        {
+          url: '/api/users/user-1/',
+          full_name: 'Test User',
+          email: 'test@example.com',
+          username: 'test_user',
+          uuid: 'user-1',
+        },
+      ]),
+    );
+    vi.mocked(marketplaceOfferingUsersCreate).mockResolvedValue({} as any);
+
+    renderDialog({
+      resolve: {
+        offering: {
+          ...offering,
+          account_settings: {
+            account_scope: { value: 'provider', source: 'provider' },
+          },
+        },
+        onSuccess: vi.fn(),
+      },
+    });
+
+    expect(
+      await screen.findByTestId('provider-account-note'),
+    ).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Username/i)).toBeNull();
+
+    await user.click(screen.getByLabelText('User'));
+    await user.click(await screen.findByText('Test User'));
+    await user.click(screen.getByRole('button', { name: /Submit/i }));
+
+    await waitFor(() =>
+      expect(marketplaceOfferingUsersCreate).toHaveBeenCalledWith({
+        body: {
+          offering: '/api/marketplace-offerings/offering-1/',
+          user: '/api/users/user-1/',
+        },
+      }),
+    );
+  });
 });

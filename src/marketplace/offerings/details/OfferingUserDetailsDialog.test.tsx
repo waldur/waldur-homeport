@@ -133,4 +133,27 @@ describe('OfferingUserDetailsDialog', () => {
     expect(screen.getByText('Jane Doe')).toBeInTheDocument();
     expect(screen.getByText('jane_external')).toBeInTheDocument();
   });
+
+  it('says a backed account is managed on its provider account', async () => {
+    vi.mocked(marketplaceOfferingUsersRetrieve).mockResolvedValue({
+      data: {
+        ...offeringUser,
+        customer_uuid: 'provider-customer',
+        service_provider_account_uuid: 'account-1',
+        service_provider_account_username: 'jane',
+      },
+    } as any);
+    renderDialog();
+
+    expect(
+      await screen.findByTestId('provider-account-link'),
+    ).toBeInTheDocument();
+  });
+
+  it('shows no provider account for an own account', async () => {
+    renderDialog();
+
+    expect(await screen.findByText('jane_external')).toBeInTheDocument();
+    expect(screen.queryByTestId('provider-account-link')).toBeNull();
+  });
 });

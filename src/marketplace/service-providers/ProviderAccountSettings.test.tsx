@@ -1,7 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { marketplaceServiceProvidersPartialUpdate } from 'waldur-js-client';
+import {
+  marketplaceServiceProvidersPartialUpdate,
+  marketplaceServiceProvidersUsernameConflictsList,
+} from 'waldur-js-client';
 
 import { EditFieldDialog } from '@/form/EditFieldDialog';
 import { useModal } from '@/modal/actions';
@@ -154,6 +157,11 @@ describe('ProviderAccountSettings', () => {
   });
 
   it('surfaces the refusal to enable provider scope', async () => {
+    // No conflicts reported up front, yet the backend refuses (a race, say):
+    // the refusal is shown rather than swallowed.
+    vi.mocked(
+      marketplaceServiceProvidersUsernameConflictsList,
+    ).mockResolvedValue({ data: [] } as any);
     const user = userEvent.setup();
     const error = {
       status: 400,

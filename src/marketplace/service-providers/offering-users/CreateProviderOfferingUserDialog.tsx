@@ -6,9 +6,11 @@ import {
 
 import { translate } from '@/i18n';
 import {
+  OfferingsAutocompleteCommonFields,
   providerOfferingsAutocomplete,
   userAutocomplete,
 } from '@/marketplace/common/autocompletes';
+import { sharesProviderAccounts } from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
@@ -33,7 +35,7 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
     any,
     any,
     {
-      offering: { url: string; customer_uuid: string };
+      offering: { url: string; customer_uuid: string; account_settings?: any };
       user: { url: string };
       username?: string;
     }
@@ -43,7 +45,9 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
         body: {
           offering: formData.offering.url,
           user: formData.user.url,
-          username: formData.username,
+          ...(sharesProviderAccounts(formData.offering)
+            ? {}
+            : { username: formData.username }),
         },
       }),
     successMessage: translate('Offering user has been created.'),
@@ -72,11 +76,13 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
       providerOfferingsAutocomplete({
         customer: provider.customer,
         can_create_offering_user: true,
+        // Read to leave out the username where the offering shares accounts.
+        field: [...OfferingsAutocompleteCommonFields, 'account_settings'],
       }),
     [provider.customer],
   );
 
-  const fields = [
+  const fields = (values) => [
     {
       name: 'user',
       label: translate('User'),
@@ -96,11 +102,17 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
         </>
       ),
     },
-    {
-      name: 'username',
-      label: translate('Username'),
-      type: 'string',
-    },
+    // The username comes from the provider account where the offering
+    // shares accounts; the backend would ignore one entered here.
+    ...(sharesProviderAccounts(values?.offering)
+      ? []
+      : [
+          {
+            name: 'username',
+            label: translate('Username'),
+            type: 'string',
+          },
+        ]),
   ];
 
   return (

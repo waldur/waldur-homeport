@@ -19,6 +19,10 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { FIELD_MAPPING } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
+import {
+  isProviderBacked,
+  ProviderAccountButton,
+} from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { BooleanIconBadge } from '@/project/metadata/BooleanIconBadge';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
@@ -216,6 +220,20 @@ export const OfferingUsersExpandableRow = ({
 
   return (
     <ExpandableContainer>
+      {isProviderBacked(offeringUser) && (
+        <Field
+          label={translate('Provider account')}
+          value={
+            <>
+              {renderFieldOrDash(
+                offeringUser.service_provider_account_username,
+              )}{' '}
+              <ProviderAccountButton row={offeringUser} />
+            </>
+          }
+          labelClass="mw-175px"
+        />
+      )}
       {showPosix && <PosixIdentifiersTable offeringUser={offeringUser} />}
       {showPosix && <PosixGroupsTable offeringUser={offeringUser} />}
       {showTosFields && (

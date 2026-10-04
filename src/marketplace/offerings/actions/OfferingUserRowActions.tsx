@@ -3,6 +3,10 @@ import { OfferingUser, ServiceProvider } from 'waldur-js-client';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { OfferingUserDetailsButton } from '@/marketplace/offerings/details/OfferingUserDetailsButton';
+import {
+  isProviderBacked,
+  ProviderAccountAction,
+} from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { ProviderOfferingUserDeleteButton } from '@/marketplace/service-providers/ProviderOfferingUserDeleteButton';
 import { ProviderOfferingUserUpdateButton } from '@/marketplace/service-providers/ProviderOfferingUserUpdateButton';
 import { RestrictOfferingUserButton } from '@/marketplace/service-providers/RestrictOfferingUser';
@@ -48,6 +52,9 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
   const posixEnabled =
     isFeatureVisible(MarketplaceFeatures.show_posix_id_pools) &&
     offering?.plugin_options?.enable_posix_account !== false;
+  // A backed account's username and POSIX attributes belong to its provider
+  // account: edited there, so the row offers a way to it instead.
+  const backed = isProviderBacked(row);
 
   return (
     <ActionsDropdown
@@ -57,14 +64,17 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
         (props) => (
           <OfferingUserDetailsButton row={props.row} offering={offering} />
         ),
+        backed ? (props) => <ProviderAccountAction row={props.row} /> : null,
         (props) => (
           <>
-            <ProviderOfferingUserUpdateButton
-              {...props}
-              provider={provider}
-              offering={offering}
-              updateScope="username"
-            />
+            {!backed && (
+              <ProviderOfferingUserUpdateButton
+                {...props}
+                provider={provider}
+                offering={offering}
+                updateScope="username"
+              />
+            )}
             {(Boolean(provider) || canUpdateOfferingUser) && (
               <>
                 <ProviderOfferingUserUpdateButton
@@ -85,7 +95,7 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
                   offering={offering}
                   updateScope="runtime_state"
                 />
-                {posixEnabled && (
+                {posixEnabled && !backed && (
                   <ProviderOfferingUserUpdateButton
                     {...props}
                     provider={provider}

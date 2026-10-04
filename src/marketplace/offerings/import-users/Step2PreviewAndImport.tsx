@@ -15,6 +15,7 @@ import { truncate } from '@/core/utils';
 import { deleteDuplicateRecords } from '@/customer/import/utils';
 import { FieldErrorMessage } from '@/form/FieldError';
 import { translate } from '@/i18n';
+import { sharesProviderAccounts } from '@/marketplace/service-providers/accounts/ProviderAccountLink';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -146,7 +147,14 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       },
       {
         title: translate('Offering username'),
-        render: ({ row }) => <WithTooltip label={row.username} />,
+        render: ({ row }) =>
+          row.provider_account ? (
+            <span className="text-muted">
+              {translate('From the provider account')}
+            </span>
+          ) : (
+            <WithTooltip label={row.username} />
+          ),
       },
       {
         title: translate('Status'),
@@ -177,8 +185,8 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           const offerings = await marketplaceProviderOfferingsList({
             query: {
               field: provider
-                ? ['uuid', 'name', 'customer_uuid']
-                : ['uuid', 'name'],
+                ? ['uuid', 'name', 'customer_uuid', 'account_settings']
+                : ['uuid', 'name', 'account_settings'],
               uuid_list: offeringUuids.join(','),
             },
           }).then((res) => res.data);
@@ -209,6 +217,7 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
               user_uuid: user?.uuid, // not exist, means invalid
               user_username: row.username,
               username: row.offering_username,
+              provider_account: sharesProviderAccounts(offering),
               ...(!providerOwned ? { customer_uuid: 'invalid' } : {}), // not belong to the provider
             };
           });

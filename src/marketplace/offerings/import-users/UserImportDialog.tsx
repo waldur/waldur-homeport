@@ -70,10 +70,11 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
               exist.offering_uuid === user.offering_uuid,
           );
 
+          // The backend ignores a username where the offering shares accounts.
           const payload = {
             offering_uuid: user.offering_uuid,
             user_uuid: user.user_uuid,
-            username: user.username,
+            ...(user.provider_account ? {} : { username: user.username }),
           };
 
           if (userAlreadySaved) {

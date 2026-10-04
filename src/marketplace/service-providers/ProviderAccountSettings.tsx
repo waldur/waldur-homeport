@@ -16,6 +16,7 @@ import { useModal } from '@/modal/actions';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
+import { useGuardedProviderUpdate } from './accounts/useConflictResolution';
 import {
   ACCOUNT_SCOPE_OPTIONS,
   DEFAULT_ACCOUNT_SCOPE,
@@ -27,7 +28,6 @@ import {
   USERNAME_GENERATION_POLICY_OPTIONS,
 } from './accountSettings';
 import { ProjectGroupsRolloutOrder } from './project-groups/ProjectGroupsRolloutOrder';
-import { useServiceProviderUpdate } from './useServiceProviderUpdate';
 
 const AccountOptionsPreviewDialog = lazyComponent(() =>
   import('./accounts/AccountOptionsPreviewDialog').then((module) => ({
@@ -93,7 +93,7 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
 }) => {
   const user = useUser();
   const customer = useCustomer();
-  const update = useServiceProviderUpdate(serviceProvider, setServiceProvider);
+  const update = useGuardedProviderUpdate(serviceProvider, setServiceProvider);
   // The backend lets organization owners and staff update the provider.
   const canUpdate = checkIsOwnerOrStaff(customer, user);
   const { openDialog } = useModal();
