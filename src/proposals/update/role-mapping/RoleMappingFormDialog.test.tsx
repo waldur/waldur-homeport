@@ -18,8 +18,8 @@ import { RoleMappingFormDialog } from './RoleMappingFormDialog';
 // add a proposal role here. ENV is a mutable singleton, so we restore it in
 // beforeEach to avoid cross-test leakage.
 const proposalRole = {
-  name: 'pi',
-  description: 'Principal Investigator',
+  name: 'PROPOSAL.MANAGER',
+  description: 'Proposal manager',
   content_type: 'proposal',
   is_active: true,
 };
@@ -52,21 +52,65 @@ describe('RoleMappingFormDialog', () => {
   it('renders edit dialog without the proposal role select and prefills project role', async () => {
     const mapping = {
       uuid: 'mapping-uuid',
-      proposal_role: 'pi',
+      proposal_role: 'PROPOSAL.MANAGER',
       project_role: 'manager',
     };
     renderDialog({ resolve: { mapping, refetch: vi.fn() } });
 
-    // Title prefix is stable; the interpolated role name comes from formatRole.
+    // The title names the proposal role by its description.
     expect(
-      await screen.findByText(/Edit role mapping for/i),
+      await screen.findByText('Edit role mapping for Proposal manager'),
     ).toBeInTheDocument();
     // Edit mode hides the proposal role select.
     expect(screen.queryByLabelText(/Proposal role/i)).not.toBeInTheDocument();
-    // Project role select is prefilled with the existing value. The option
-    // label falls back to `name` (the seeded roles have no `label` field).
-    expect(screen.getByText('manager')).toBeInTheDocument();
+    // Project role select is prefilled and labelled by its description.
+    expect(screen.getByText('Manager')).toBeInTheDocument();
+    expect(screen.queryByText('manager')).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Update/i })).toBeInTheDocument();
+  });
+
+  it('falls back to the role name in the title when the role is not cached', async () => {
+    const mapping = {
+      uuid: 'mapping-uuid',
+      proposal_role: 'PROPOSAL.CUSTOM',
+      project_role: null,
+    };
+    renderDialog({ resolve: { mapping, refetch: vi.fn() } });
+
+    expect(
+      await screen.findByText('Edit role mapping for PROPOSAL.CUSTOM'),
+    ).toBeInTheDocument();
+  });
+
+  it('labels proposal roles by description, qualifying ones that collide', async () => {
+    const user = userEvent.setup();
+    ENV.roles.push(
+      {
+        name: 'PROPOSAL.MEMBER',
+        description: 'Proposal member',
+        content_type: 'proposal',
+        is_active: true,
+      } as any,
+      {
+        name: 'PROPOSAL.MEMBER.ACME',
+        description: 'Proposal member',
+        content_type: 'proposal',
+        is_active: true,
+      } as any,
+    );
+    renderDialog({ resolve: { call: { url: 'call-url' }, refetch: vi.fn() } });
+
+    await screen.findByText('Create role mapping');
+    await user.click(screen.getByLabelText(/Proposal role/i));
+
+    expect(await screen.findByText('Proposal manager')).toBeInTheDocument();
+    expect(
+      screen.getByText('Proposal member (PROPOSAL.MEMBER)'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Proposal member (PROPOSAL.MEMBER.ACME)'),
+    ).toBeInTheDocument();
+    expect(screen.queryByText('PROPOSAL.MANAGER')).not.toBeInTheDocument();
   });
 
   it('keeps the submit button disabled until the required proposal role is chosen', async () => {
@@ -81,7 +125,7 @@ describe('RoleMappingFormDialog', () => {
     // Pick the proposal role via the react-select control.
     const proposalSelect = screen.getByLabelText(/Proposal role/i);
     await user.click(proposalSelect);
-    await user.click(await screen.findByText('pi'));
+    await user.click(await screen.findByText('Proposal manager'));
 
     await waitFor(() => expect(submitBtn).toBeEnabled());
   });
@@ -99,7 +143,7 @@ describe('RoleMappingFormDialog', () => {
 
     const proposalSelect = screen.getByLabelText(/Proposal role/i);
     await user.click(proposalSelect);
-    await user.click(await screen.findByText('pi'));
+    await user.click(await screen.findByText('Proposal manager'));
 
     await user.click(screen.getByRole('button', { name: /Create/i }));
 
@@ -108,7 +152,7 @@ describe('RoleMappingFormDialog', () => {
         body: {
           call: 'call-url',
           project_role: null,
-          proposal_role: 'pi',
+          proposal_role: 'PROPOSAL.MANAGER',
         },
       });
     });
@@ -127,7 +171,7 @@ describe('RoleMappingFormDialog', () => {
     const refetch = vi.fn();
     const mapping = {
       uuid: 'mapping-uuid',
-      proposal_role: 'pi',
+      proposal_role: 'PROPOSAL.MANAGER',
       project_role: 'manager',
     };
     vi.mocked(callProposalProjectRoleMappingsPartialUpdate).mockResolvedValue(
@@ -173,7 +217,7 @@ describe('RoleMappingFormDialog', () => {
 
     const proposalSelect = screen.getByLabelText(/Proposal role/i);
     await user.click(proposalSelect);
-    await user.click(await screen.findByText('pi'));
+    await user.click(await screen.findByText('Proposal manager'));
 
     await user.click(screen.getByRole('button', { name: /Create/i }));
 

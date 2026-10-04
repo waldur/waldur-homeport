@@ -47,11 +47,12 @@ export const CallRoleMappingsList = (props) => {
   const columns: Column<ProposalProjectRoleMapping>[] = [
     {
       title: translate('Proposal role'),
-      render: ({ row }) => formatRole(row.proposal_role),
+      render: ({ row }) => formatRole(row.proposal_role, 'proposal'),
     },
     {
       title: translate('Project role'),
-      render: ({ row }) => renderFieldOrDash(formatRole(row.project_role)),
+      render: ({ row }) =>
+        renderFieldOrDash(formatRole(row.project_role, 'project')),
     },
   ];
 

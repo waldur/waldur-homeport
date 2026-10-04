@@ -11,8 +11,11 @@ import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { Role } from '@/permissions/types';
 import {
   formatRole,
+  formatRoleLabel,
+  getRoleQualifiers,
   getProjectRoles,
   getProposalRoles,
 } from '@/permissions/utils';
@@ -21,6 +24,10 @@ export const RoleMappingFormDialog = ({ resolve }) => {
   const isEdit = Boolean(resolve.mapping);
   const proposalRoleOptions = getProposalRoles();
   const projectRoleOptions = getProjectRoles();
+  // Descriptions shared by two offered roles (a system role and an
+  // organization's clone) get a qualifier to tell them apart.
+  const proposalRoleQualifiers = getRoleQualifiers(proposalRoleOptions);
+  const projectRoleQualifiers = getRoleQualifiers(projectRoleOptions);
 
   // Helper to find option object by name for initial values
   const findOption = (options, value) =>
@@ -79,7 +86,10 @@ export const RoleMappingFormDialog = ({ resolve }) => {
             title={
               isEdit
                 ? translate('Edit role mapping for {proposalRole}', {
-                    proposalRole: formatRole(initialValues.proposal_role),
+                    proposalRole: formatRole(
+                      resolve.mapping.proposal_role,
+                      'proposal',
+                    ),
                   })
                 : translate('Create role mapping')
             }
@@ -106,7 +116,9 @@ export const RoleMappingFormDialog = ({ resolve }) => {
                 name="proposal_role"
                 label={translate('Proposal role')}
                 options={proposalRoleOptions}
-                getOptionLabel={(option) => option.label || option.name}
+                getOptionLabel={(option: Role) =>
+                  formatRoleLabel(option, proposalRoleQualifiers)
+                }
                 getOptionValue={(option) => option.name}
                 validate={required}
                 isClearable={false}
@@ -116,7 +128,9 @@ export const RoleMappingFormDialog = ({ resolve }) => {
               name="project_role"
               label={translate('Project role')}
               options={projectRoleOptions}
-              getOptionLabel={(option) => option.label || option.name}
+              getOptionLabel={(option: Role) =>
+                formatRoleLabel(option, projectRoleQualifiers)
+              }
               getOptionValue={(option) => option.name || null}
               isClearable={true}
             />

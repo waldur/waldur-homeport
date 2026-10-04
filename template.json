@@ -785,6 +785,7 @@
     }
   },
   "A project group is the one POSIX group a project gets at this service provider, with a stable GID and the project members’ accounts as its members. Clusters grant access through it, and files on shared storage are owned by it.": {},
+  "A proposal must keep at least one proposal manager. Grant the role to someone else first.": {},
   "A provider-level network used as the tenant’s upstream gateway; supplies floating IPs.": {},
   "A re-sync was already requested recently.": {
     "context": {
@@ -35461,6 +35462,16 @@
       "feature_area": "metrics"
     }
   },
+  "Only a proposal manager can change the proposal team.": {
+    "context": {
+      "feature_area": "team"
+    }
+  },
+  "Only a proposal manager can submit the proposal.": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "Only a single IP address (/{prefix}) is allowed.": {
     "context": {
       "variables": {
@@ -56147,6 +56158,11 @@
       "feature_area": "wizard"
     }
   },
+  "The team is fixed after submission; the call manager can change it.": {
+    "context": {
+      "feature_area": "team"
+    }
+  },
   "The threshold is reached and this action has been applied.": {
     "context": {
       "feature_area": "policy-watch"
@@ -64359,7 +64375,8 @@
   },
   "Update proposal": {
     "context": {
-      "feature_area": "create"
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "Update resource": {

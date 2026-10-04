@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { FC, ReactNode, useMemo } from 'react';
+import { FC, ReactNode, useCallback, useMemo, useRef } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import {
   proposalProposalsListUsersList,
@@ -22,11 +22,14 @@ import { useTable } from '@/table/useTable';
 import { CALL_REVIEWERS_QUERY_KEY } from '../constants';
 import { AddCommentButton } from '../proposal/create-review/AddCommentButton';
 import { FieldReviewComments } from '../proposal/create-review/FieldReviewComments';
-import { ProposalReview } from '../types';
+import { Proposal, ProposalReview } from '../types';
 
 import { InvitationsList } from './InvitationsList';
 import { ReviewerExpandableRow } from './ReviewerExpandableRow';
+import { getTeamScopeType } from './teamApi';
 import { TeamDropdownActions } from './TeamDropdownActions';
+import { TEAM_EVENT_TYPES } from './teamRules';
+import { useProposalTeamRules } from './useProposalTeamRules';
 import { UsersList } from './UsersList';
 
 export const TeamSection: FC<
@@ -46,6 +49,15 @@ export const TeamSection: FC<
   const queryClient = useQueryClient();
   const hideRole = props.roles && props.roles.length === 1;
 
+  const roleType = props.roleTypes?.[0];
+  // A proposal's team follows rules of its own: who may grant or revoke which
+  // role depends on the proposal's state and the viewer's role on it or on
+  // its call, not only on the scope's team permission.
+  const isProposalTeam = roleType === 'proposal' && !props.roles;
+  const proposal = isProposalTeam ? (props.scope as Proposal) : undefined;
+  const rules = useProposalTeamRules(proposal);
+  const scopeType = getTeamScopeType(props.roleTypes);
+
   const usersFilter = useMemo(
     () => ({
       role: props.roles,
@@ -53,7 +65,30 @@ export const TeamSection: FC<
     [props.roles],
   );
 
-  const roleType = props.roleTypes?.[0];
+  // useTableQuery runs onFetch in an effect keyed on the callback, so an
+  // inline function would run it on every render (every keystroke in the
+  // draft form). The latest handler is kept in a ref behind a stable callback.
+  const onUsersFetchRef = useRef<(rows: any[]) => void>(undefined);
+  onUsersFetchRef.current = (rows) => {
+    if (props.change) {
+      props.change('users', rows);
+    }
+    // Update query data for the call reviewers
+    if (props.roles && props.roles.includes(RoleEnum.CALL_REVIEWER)) {
+      const newReviewers = rows.filter(
+        (row) => row.role_name === RoleEnum.CALL_REVIEWER,
+      );
+      queryClient.setQueryData(
+        [CALL_REVIEWERS_QUERY_KEY, props.scope.uuid],
+        newReviewers,
+      );
+    }
+  };
+  const onUsersFetch = useCallback(
+    (rows: any[]) => onUsersFetchRef.current?.(rows),
+    [],
+  );
+
   const usersTable = useTable({
     table: `UserList${props.title}`,
     fetchData: createFetcher(
@@ -63,21 +98,7 @@ export const TeamSection: FC<
       { path: { uuid: props.scope.uuid } },
     ),
     filter: usersFilter,
-    onFetch(rows) {
-      if (props.change) {
-        props.change('users', rows);
-      }
-      // Update query data for the call reviewers
-      if (props.roles && props.roles.includes(RoleEnum.CALL_REVIEWER)) {
-        const newReviewers = rows.filter(
-          (row) => row.role_name === RoleEnum.CALL_REVIEWER,
-        );
-        queryClient.setQueryData(
-          [CALL_REVIEWERS_QUERY_KEY, props.scope.uuid],
-          newReviewers,
-        );
-      }
-    },
+    onFetch: onUsersFetch,
   });
 
   const invitationsFilter = useMemo(
@@ -94,10 +115,25 @@ export const TeamSection: FC<
   const eventsFilter = useMemo(
     () => ({
       scope: props.scope.url,
-      event_type: ['role_granted', 'role_revoked', 'role_updated'],
+      event_type: TEAM_EVENT_TYPES,
     }),
     [props.scope],
   );
+
+  // After a member was added or removed, not on every reload of the table
+  // (paging, search): the team change may decide whether the proposal can be
+  // submitted.
+  const fetchUsers = usersTable.fetch;
+  const onTeamChange = rules?.onTeamChange;
+  const refetchUsers = useCallback(() => {
+    fetchUsers();
+    onTeamChange?.();
+  }, [fetchUsers, onTeamChange]);
+
+  const showTeamActions = !props.readOnlyMode && (!rules || rules.dropdown);
+  // Invitations and the change log are for those who manage the team.
+  const showManagementTabs =
+    !props.readOnlyMode && (!rules || rules.canManageTeam);
 
   return (
     <Card className="card-bordered" id={props.id}>
@@ -106,11 +142,12 @@ export const TeamSection: FC<
           <h3>{props.title}</h3>
         </Card.Title>
         <div className="card-toolbar gap-4">
-          {!props.readOnlyMode ? (
+          {showTeamActions ? (
             <TeamDropdownActions
-              refetchUsers={usersTable.fetch}
+              refetchUsers={refetchUsers}
               refetchInvitations={invitationsTable.fetch}
               {...props}
+              {...rules?.dropdown}
             />
           ) : props.onAddCommentClick ? (
             <AddCommentButton
@@ -160,7 +197,7 @@ export const TeamSection: FC<
               {/* Invitations and the permissions log are management surfaces the
                   backend denies to reviewers; in read-only (review) mode we show
                   only the team roster so the info matches the viewer's role. */}
-              {!props.readOnlyMode && (
+              {showManagementTabs && (
                 <>
                   <Nav.Item className="text-nowrap">
                     <Nav.Link eventKey="invitations">
@@ -178,6 +215,9 @@ export const TeamSection: FC<
           </div>
           <Tab.Content className="overflow-auto">
             <Tab.Pane eventKey="users">
+              {rules?.teamNote && !props.readOnlyMode ? (
+                <p className="text-muted py-3 mb-0">{rules.teamNote}</p>
+              ) : null}
               <UsersList
                 table={usersTable}
                 scope={props.scope}
@@ -190,9 +230,14 @@ export const TeamSection: FC<
                     ? ReviewerExpandableRow
                     : undefined
                 }
+                readOnly={props.readOnlyMode || rules?.readOnly}
                 extraRowActions={props.extraRowActions}
                 hasExtraRowActions={props.hasExtraRowActions}
                 roleSuffix={props.roleSuffix}
+                canRemoveRow={rules?.canRemoveRow}
+                getRemoveDisabledReason={rules?.getRemoveDisabledReason}
+                scopeType={scopeType}
+                refetch={refetchUsers}
               />
             </Tab.Pane>
             <Tab.Pane eventKey="invitations">

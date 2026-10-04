@@ -30,6 +30,9 @@ interface CompletionPageSidebarProps extends SidebarProps {
    * after the applicant has already pressed the button.
    */
   canSubmit?: ProposalCanSubmitResponse;
+  /** Whether the viewer may submit the proposal. A proposal administrator
+   * edits it but leaves submitting to a proposal manager. */
+  canSubmitProposal?: boolean;
 }
 
 export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
@@ -83,15 +86,21 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
       />
       {props.editable && (
         <>
-          <FloatingSubmitButton
-            submitting={props.submitting}
-            label={translate('Submit')}
-            variant="primary"
-            disabled={
-              props.isSaving || hasIncompleteSteps || Boolean(serverRefusal)
-            }
-            errors={submitErrors}
-          />
+          {props.canSubmitProposal === false ? (
+            <p className="text-muted mb-0" data-testid="submit-by-manager">
+              {translate('Only a proposal manager can submit the proposal.')}
+            </p>
+          ) : (
+            <FloatingSubmitButton
+              submitting={props.submitting}
+              label={translate('Submit')}
+              variant="primary"
+              disabled={
+                props.isSaving || hasIncompleteSteps || Boolean(serverRefusal)
+              }
+              errors={submitErrors}
+            />
+          )}
 
           <BaseButton
             onClick={props.saveAsDraft}

@@ -23,7 +23,13 @@ const ADD_USER_PERMISSIONS = [
   PermissionEnum.MANAGE_PROPOSAL,
 ];
 
-export const AddUserButton: React.FC<AddUserDialogProps> = (props) => {
+export const AddUserButton: React.FC<
+  AddUserDialogProps & {
+    /** Decided by the caller when the scope has rules of its own, e.g. a
+     * proposal whose call managers may add its managers. */
+    canAddUser?: boolean;
+  }
+> = ({ canAddUser: canAddUserOverride, ...props }) => {
   const { openDialog } = useModal();
   const user = useUser();
 
@@ -34,14 +40,15 @@ export const AddUserButton: React.FC<AddUserDialogProps> = (props) => {
   // scope_type. Organization owners hold the call one on the organization.
   const scopeUuid = props.scope?.uuid;
   const canAddUser =
-    !!scopeUuid &&
-    ADD_USER_PERMISSIONS.some((permission) =>
-      hasPermission(user, {
-        permission,
-        scopeId: scopeUuid,
-        customerId: props.scope?.customer_uuid,
-      }),
-    );
+    canAddUserOverride ??
+    (!!scopeUuid &&
+      ADD_USER_PERMISSIONS.some((permission) =>
+        hasPermission(user, {
+          permission,
+          scopeId: scopeUuid,
+          customerId: props.scope?.customer_uuid,
+        }),
+      ));
 
   return (
     <ActionItem

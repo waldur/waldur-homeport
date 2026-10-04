@@ -11,9 +11,18 @@ import { InvitationContext } from '../types';
 import { useCreateInvitation } from '../useCreateInvitation';
 
 export const InvitationCreateButton: FC<
-  Omit<InvitationContext, 'customer' | 'user'>
-> = (context) => {
-  const { callback, canInvite, loadingProjects } = useCreateInvitation(context);
+  Omit<InvitationContext, 'customer' | 'user'> & {
+    /** Decided by the caller when the scope has rules of its own, e.g. the
+     * call managers who may invite to a proposal of their call. */
+    canInvite?: boolean;
+  }
+> = ({ canInvite: canInviteOverride, ...context }) => {
+  const {
+    callback,
+    canInvite: canInviteByPermission,
+    loadingProjects,
+  } = useCreateInvitation(context);
+  const canInvite = canInviteOverride ?? canInviteByPermission;
 
   const permissions = context.roleTypes
     ?.map((rt) => PermissionMap[rt])

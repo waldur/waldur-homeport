@@ -147,7 +147,9 @@ export const ProposalSubmissionStep: FC<{
   call?;
   reviews?: ProposalReview[];
   refetch;
-}> = ({ proposal, call, reviews, refetch }) => {
+  /** Whether the viewer may submit, not only edit, the proposal. */
+  canSubmitProposal?: boolean;
+}> = ({ proposal, call, reviews, refetch, canSubmitProposal = true }) => {
   const { confirm } = useModal();
   const router = useRouter();
 
@@ -487,6 +489,7 @@ export const ProposalSubmissionStep: FC<{
                   submitting={submitting}
                   completedSteps={completedSteps}
                   canSubmit={canSubmit}
+                  canSubmitProposal={canSubmitProposal}
                 />
               </SidebarLayout.Sidebar>
             </SidebarLayout.Container>

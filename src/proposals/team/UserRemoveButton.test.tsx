@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { ENV } from '@/core/config';
 import { PermissionEnum, RoleEnum } from '@/permissions/enums';
+import * as hasPermissionModule from '@/permissions/hasPermission';
 import { inActionsMenu, renderWithProviders } from '@/test/harness';
 import * as workspaceHooks from '@/workspace/hooks';
 
@@ -34,7 +35,12 @@ const renderAs = (user) => {
   vi.mocked(workspaceHooks.useUser).mockReturnValue(user);
   renderWithProviders(
     inActionsMenu(
-      <UserRemoveButton permission={member} scope={call} refetch={vi.fn()} />,
+      <UserRemoveButton
+        permission={member}
+        scope={call}
+        scopeType="call"
+        refetch={vi.fn()}
+      />,
     ),
   );
 };
@@ -77,5 +83,47 @@ describe('UserRemoveButton', () => {
       ],
     });
     expect(screen.queryByText('Remove')).not.toBeInTheDocument();
+  });
+
+  it('leaves the decision to the caller when it passes one', () => {
+    const permissionCheck = vi.spyOn(hasPermissionModule, 'hasPermission');
+    vi.mocked(workspaceHooks.useUser).mockReturnValue({
+      permissions: [],
+    } as any);
+    renderWithProviders(
+      inActionsMenu(
+        <UserRemoveButton
+          permission={member}
+          scope={call}
+          scopeType="call"
+          refetch={vi.fn()}
+          canRemove
+        />,
+      ),
+    );
+    expect(screen.getByText('Remove')).toBeInTheDocument();
+    expect(permissionCheck).not.toHaveBeenCalled();
+  });
+
+  it('is disabled with the reason when the caller gives one', () => {
+    vi.mocked(workspaceHooks.useUser).mockReturnValue({
+      permissions: [],
+    } as any);
+    renderWithProviders(
+      inActionsMenu(
+        <UserRemoveButton
+          permission={member}
+          scope={call}
+          scopeType="call"
+          refetch={vi.fn()}
+          canRemove
+          disabledReason="Keep one manager."
+        />,
+      ),
+    );
+    expect(screen.getByRole('menuitem', { name: /Remove/ })).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
   });
 });

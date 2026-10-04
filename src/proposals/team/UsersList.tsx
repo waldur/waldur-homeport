@@ -5,6 +5,7 @@ import { translate } from '@/i18n';
 import { GenericPermission } from '@/permissions/types';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
+import { TeamScopeType } from './teamApi';
 import { UserRemoveButton, useCanRemoveTeamMember } from './UserRemoveButton';
 
 interface UsersListProps {
@@ -25,6 +26,14 @@ interface UsersListProps {
   hasExtraRowActions?: (row: GenericPermission) => boolean;
   /** Inline hint next to the role badge, e.g. a "Chair" marker. */
   roleSuffix?: (row: GenericPermission) => ReactNode;
+  /** Whether this row may be removed, when the scope has rules of its own
+   * (e.g. a proposal team). Without it the scope's team permission decides. */
+  canRemoveRow?: (row: GenericPermission) => boolean;
+  /** Why Remove is disabled on this row, shown as its tooltip. */
+  getRemoveDisabledReason?: (row: GenericPermission) => string | undefined;
+  scopeType: TeamScopeType;
+  /** Called after a member was removed; defaults to reloading the table. */
+  refetch?(): void;
 }
 
 export const UsersList: FC<UsersListProps> = ({
@@ -41,8 +50,15 @@ export const UsersList: FC<UsersListProps> = ({
   extraRowActions: ExtraRowActions,
   hasExtraRowActions,
   roleSuffix,
+  canRemoveRow,
+  getRemoveDisabledReason,
+  scopeType,
+  refetch,
 }) => {
-  const canRemove = useCanRemoveTeamMember(scope);
+  // One source of truth: the caller's rule when given, else the permission.
+  const canRemoveMember = useCanRemoveTeamMember(scope, Boolean(canRemoveRow));
+  const canRemove = (row: GenericPermission) =>
+    canRemoveRow ? canRemoveRow(row) : canRemoveMember;
   const rowHasExtra = (row: GenericPermission) =>
     Boolean(ExtraRowActions) && (hasExtraRowActions?.(row) ?? true);
   return (
@@ -62,14 +78,19 @@ export const UsersList: FC<UsersListProps> = ({
         readOnly
           ? null
           : ({ row }) =>
-              canRemove || rowHasExtra(row) ? (
+              canRemove(row) || rowHasExtra(row) ? (
                 <ActionsDropdownComponent>
                   {rowHasExtra(row) ? <ExtraRowActions row={row} /> : null}
-                  <UserRemoveButton
-                    permission={row}
-                    refetch={table.fetch}
-                    scope={scope}
-                  />
+                  {canRemove(row) ? (
+                    <UserRemoveButton
+                      permission={row}
+                      refetch={refetch ?? table.fetch}
+                      scope={scope}
+                      scopeType={scopeType}
+                      canRemove
+                      disabledReason={getRemoveDisabledReason?.(row)}
+                    />
+                  ) : null}
                 </ActionsDropdownComponent>
               ) : (
                 <ActionsDropdownComponent disabled tooltip>

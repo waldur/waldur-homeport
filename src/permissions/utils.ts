@@ -110,10 +110,29 @@ const ROLE_MAP = {
   Member: RoleEnum.PROJECT_MEMBER,
 };
 
-export const formatRole = (name: string) => {
-  const roleName = ROLE_MAP[name] || name;
-  const role = ENV.roles.find((role) => role.name === roleName);
-  return role?.description || role?.name;
+/**
+ * Human-readable label for a role name. Pass the content type when the name is
+ * known to belong to one scope, so a same-named role of another scope is not
+ * picked up. A role missing from the cache (deactivated, or private to another
+ * organization) falls back to the supplied description, then the raw name,
+ * rather than rendering as blank.
+ */
+export const formatRole = (
+  name: string | null | undefined,
+  contentType?: RoleType,
+  description?: string,
+): string | undefined => {
+  if (!name) {
+    return undefined;
+  }
+  const matches = (roleName: string) =>
+    ENV.roles.find(
+      (role) =>
+        role.name === roleName &&
+        (!contentType || role.content_type === contentType),
+    );
+  const role = (ROLE_MAP[name] && matches(ROLE_MAP[name])) || matches(name);
+  return role?.description || role?.name || description || name;
 };
 
 export const formatRoleType = (content_type: RoleType) =>

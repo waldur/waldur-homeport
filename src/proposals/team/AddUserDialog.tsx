@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { RoleDetails } from 'waldur-js-client';
 
-import { post } from '@/core/api';
 import { ENV } from '@/core/config';
 import { required } from '@/core/validators';
 import { usersAutocomplete } from '@/customer/team/utils';
@@ -16,6 +15,7 @@ import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@/project/team/RoleGroup';
 import { UserListOptionInline } from '@/project/team/UserListOptionInline';
 
+import { addTeamUser, getTeamScopeType } from './teamApi';
 import { AddUserDialogProps } from './types';
 
 interface AddUserDialogFormData {
@@ -37,7 +37,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
 }) => {
   const saveUserMutation = useManagedMutation<any, any, AddUserDialogFormData>({
     mutationFn: (formData) =>
-      post(`${scope.url}add_user/`, {
+      addTeamUser(getTeamScopeType(roleTypes), scope.uuid, {
         user: formData.user.uuid,
         expiration_time: formData.expiration_time,
         role: roles && roles.length === 1 ? roles[0] : formData.role.name,
