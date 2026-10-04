@@ -19,6 +19,15 @@ export interface CategorySelection {
   isGroup: boolean;
 }
 
+// Sticks 20px below the fixed header, page tabs, filter bar and impersonation
+// bar (--layout-sticky-top), and never grows past the bottom of the screen:
+// a long list scrolls inside the card.
+const cardClassName = classNames(
+  'category-sidebar card-bordered sticky',
+  'top-[calc(var(--layout-sticky-top)+20px)]',
+  'max-h-[calc(100vh-var(--layout-sticky-top)-40px)]',
+);
+
 interface CategorySidebarProps {
   selectedCategory: CategorySelection | null;
   onCategorySelect: (selection: CategorySelection | null) => void;
@@ -32,7 +41,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
 
   if (categories.isLoading) {
     return (
-      <Card className="category-sidebar card-bordered">
+      <Card className={cardClassName}>
         <Card.Body className="d-flex justify-content-center align-items-center py-10">
           <LoadingSpinner />
         </Card.Body>
@@ -42,7 +51,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
 
   if (categories.isError || !categories.data) {
     return (
-      <Card className="category-sidebar card-bordered">
+      <Card className={cardClassName}>
         <Card.Body>
           <LoadingErred loadData={categories.refetch} />
         </Card.Body>
@@ -83,13 +92,13 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
   };
 
   return (
-    <Card className="category-sidebar card-bordered">
+    <Card className={cardClassName}>
       <Card.Header className="border-bottom">
         <Card.Title>
           <span className="h3">{translate('Categories')}</span>
         </Card.Title>
       </Card.Header>
-      <ListGroup variant="flush">
+      <ListGroup variant="flush" className="min-h-0 overflow-y-auto">
         <ListGroup.Item
           action
           active={!selectedCategory}
