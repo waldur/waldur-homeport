@@ -19,13 +19,14 @@ import {
 } from '@/permissions/utils';
 import { SramRoleBadge } from '@/sram/SramBadge';
 
-const renderRoleType = (roleType: RoleType) =>
+export const renderRoleType = (roleType: RoleType) =>
   ({
     customer: 'O',
     project: 'P',
     service_provider: 'SP',
     call: 'C',
     call_organizer: 'CO',
+    proposal: 'PR',
   })[roleType] || '';
 
 // Every option of one open dropdown shares the same options array, so the

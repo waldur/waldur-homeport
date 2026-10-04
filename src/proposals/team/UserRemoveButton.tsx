@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { post } from '@/core/api';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
@@ -9,21 +8,36 @@ import { GenericPermission } from '@/permissions/types';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useUser } from '@/workspace/hooks';
 
+import { deleteTeamUser, TeamScopeType } from './teamApi';
+
 type TeamScope = { url: string; uuid?: string; customer_uuid?: string };
 
 interface UserRemoveButtonProps {
   permission: GenericPermission;
   scope: TeamScope;
+  scopeType: TeamScopeType;
   refetch;
+  /** Decided by the caller when the scope has rules of its own; the team
+   * permission is then not consulted at all. */
+  canRemove?: boolean;
+  /** Shown as the tooltip of a disabled Remove, e.g. the last manager. */
+  disabledReason?: string;
 }
 
 /**
  * Mirrors UserRoleDeleteSerializer: the delete permission of the scope type,
  * held on the scope's organization or on the scope itself. The Team tab is
- * shared by calls and proposals, so either permission counts.
+ * shared by calls and proposals, so either permission counts. With `skip`
+ * the caller decides instead and nothing is checked.
  */
-export const useCanRemoveTeamMember = (scope: TeamScope): boolean => {
+export const useCanRemoveTeamMember = (
+  scope: TeamScope,
+  skip = false,
+): boolean => {
   const user = useUser();
+  if (skip) {
+    return false;
+  }
   return [
     PermissionEnum.DELETE_CALL_PERMISSION,
     PermissionEnum.DELETE_PROPOSAL_PERMISSION,
@@ -39,12 +53,19 @@ export const useCanRemoveTeamMember = (scope: TeamScope): boolean => {
 export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   permission,
   scope,
+  scopeType,
   refetch,
+  canRemove: canRemoveOverride,
+  disabledReason,
 }) => {
-  const canRemove = useCanRemoveTeamMember(scope);
+  const canRemoveByPermission = useCanRemoveTeamMember(
+    scope,
+    canRemoveOverride !== undefined,
+  );
+  const canRemove = canRemoveOverride ?? canRemoveByPermission;
   const deleteMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
-      post(`${scope.url}delete_user/`, {
+      deleteTeamUser(scopeType, scope.uuid, {
         user: permission.user_uuid,
         role: permission.role_name,
       }),
@@ -62,7 +83,8 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   return (
     <RemovalActionItem
       action={() => deleteMutation.mutate()}
-      disabled={deleteMutation.isPending}
+      disabled={deleteMutation.isPending || Boolean(disabledReason)}
+      tooltip={disabledReason}
       title={translate('Remove')}
     />
   );

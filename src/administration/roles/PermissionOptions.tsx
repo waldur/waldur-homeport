@@ -62,6 +62,10 @@ export const PermissionOptions = [
         label: translate('Update permission proposal'),
         value: 'PROPOSAL.UPDATE_PERMISSION',
       },
+      {
+        label: translate('Update proposal'),
+        value: 'PROPOSAL.UPDATE',
+      },
     ],
   },
   {
