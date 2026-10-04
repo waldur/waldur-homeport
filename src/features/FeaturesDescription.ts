@@ -237,6 +237,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Show credit field in project create dialog.'),
       },
       {
+        key: 'show_custom_metrics',
+        description: translate('Show custom metrics: the project Metrics tab and the offering metrics a provider adopts.'),
+      },
+      {
         key: 'show_description_in_create_dialog',
         description: translate('Show description field in project create dialog.'),
       },

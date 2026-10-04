@@ -697,6 +697,16 @@
       "feature_area": "api-keys"
     }
   },
+  "A deprecated definition can no longer be adopted.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "A gauge is a level read at a moment; a counter counts what happened. Fixed once data exists.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "A human-readable name for this identity provider.": {
     "context": {
       "feature_area": "steps"
@@ -791,6 +801,11 @@
   },
   "A reserved external IP allocated to the tenant; can be attached to a port to expose an instance.": {},
   "A rule that does not create a project must grant an organization role.": {},
+  "A service can only report the metrics its offering adopts.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "A service profile is a named set of roles shared by several offerings. Binding an offering to a profile makes the profile's roles assignable on that offering, which shows up on the Availability tab. Adding or removing a role here updates every bound offering in the background. Offerings are bound to a profile from their own settings, and offerings of different types can share one profile.": {
     "context": {
       "feature_area": "profiles"
@@ -1518,6 +1533,12 @@
       "feature_area": "celery"
     }
   },
+  "Across a project": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "metrics"
+    }
+  },
   "Action": {
     "context": {
       "primary_ui_type": "title",
@@ -2180,6 +2201,16 @@
       "feature_area": "team"
     }
   },
+  "Add metric": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Add metric definition": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Add more conditions to configure logic combination": {
     "context": {
       "feature_area": "questions"
@@ -2262,6 +2293,11 @@
       "feature_area": "plans"
     }
   },
+  "Add policy": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Add project": {
     "context": {
       "feature_area": "details"
@@ -2300,6 +2336,11 @@
   "Add resource": {
     "context": {
       "feature_area": "landing"
+    }
+  },
+  "Add retention policy": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Add role": {
@@ -2383,6 +2424,11 @@
   "Add template": {
     "context": {
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Add the resource figures up": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Add tier": {
@@ -2679,7 +2725,7 @@
   "Adopt": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "project-groups",
+      "feature_area": "metrics",
       "action_type": "create"
     }
   },
@@ -2691,6 +2737,16 @@
   "Adopt groups your directory already holds, one per line: the project’s UUID or short name, the GID and, optionally, the group name, separated by commas. Either every line is imported or, if any is refused, none.": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "Adopt metric": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Adopt metrics from the catalogue before a service reports any.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Adopt the groups your directory already holds, with their GIDs, under Accounts > Project groups.": {},
@@ -4353,6 +4409,11 @@
       "feature_area": "changelog"
     }
   },
+  "Applies to every project without its own goal.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Applies to offering": {
     "context": {
       "feature_area": "generated"
@@ -4584,6 +4645,17 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "Archive {name}?": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Archived": {
@@ -6524,6 +6596,11 @@
       "feature_area": "team"
     }
   },
+  "At least": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "At least one complete user invitation is required": {},
   "At least one component limit is required": {
     "context": {
@@ -6577,6 +6654,11 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "At most": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "At most {n} entries are allowed.": {
@@ -6809,7 +6891,7 @@
   },
   "Attributes": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "auto-provisioning-rules"
     }
   },
@@ -7291,6 +7373,11 @@
   "Average review time": {
     "context": {
       "feature_area": "reviewer"
+    }
+  },
+  "Average the resource figures": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Average utilization": {
@@ -8206,6 +8293,17 @@
     }
   },
   "Brazil": {},
+  "Breakdown by {attribute}": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "attribute": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
   "Breaking": {
     "context": {
       "primary_ui_type": "label"
@@ -8738,6 +8836,16 @@
   "Calendar": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Calendar month": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "Calendar quarter": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Call": {
@@ -9528,6 +9636,11 @@
   "Change the settings and preview what they do before applying them. Nothing is saved until you apply.": {
     "context": {
       "feature_area": "accounts"
+    }
+  },
+  "Change vs the previous period": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Changed options": {
@@ -10544,6 +10657,11 @@
   "Comma-separated list of user profile fields that should not be editable in Waldur.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "Comma-separated names a point may carry, for example course, queue.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Command": {
@@ -12393,6 +12511,12 @@
       "feature_area": "plan"
     }
   },
+  "Counter": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
   "Countries": {
     "context": {
       "primary_ui_type": "label",
@@ -13843,6 +13967,7 @@
       "feature_area": "update-internal-ips"
     }
   },
+  "Custom Metrics": {},
   "Custom Scripts": {
     "context": {
       "feature_area": "custom-scripts"
@@ -13911,6 +14036,17 @@
   "Custom message": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Custom metrics": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "marketplace"
+    }
+  },
+  "Custom metrics this offering reports for the projects that use it.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Custom project details": {
@@ -14237,6 +14373,17 @@
       "feature_area": "orders"
     }
   },
+  "Daily roll-ups": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "metrics"
+    }
+  },
+  "Daily roll-ups kept (days)": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Daily totals": {},
   "Daily user totals": {},
   "Dame": {
@@ -14507,6 +14654,7 @@
       "feature_area": "workflow-steps"
     }
   },
+  "Days an archived offering metric keeps its data before it is purged.": {},
   "Days given to reviewers to complete reviews": {},
   "Days of inactivity after which pseudonymous bookkeeping rows (SessionBinding, AnonymousChatBudget) are purged. Active blocks are always retained until they expire. Set to -1 to disable.": {},
   "Deactivate": {
@@ -14823,6 +14971,21 @@
   "Default for offerings that do not set their own prefix. Leave empty to let each offering decide.": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "Default goal": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Default goal for {metric}": {
+    "context": {
+      "variables": {
+        "metric": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Default grace period (days)": {
@@ -15628,6 +15791,12 @@
   "Deployment-wide": {
     "context": {
       "feature_area": "roles"
+    }
+  },
+  "Deprecated": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
     }
   },
   "Deprecation": {
@@ -16436,6 +16605,11 @@
   "Distinct customers": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "Distinct values per attribute": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Distributed storage pool for cluster persistence": {
@@ -17311,6 +17485,16 @@
       "feature_area": "resources"
     }
   },
+  "Edit metric": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Edit metric definition": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Edit minimum reviewers per proposal": {
     "context": {
       "primary_ui_type": "title"
@@ -17404,6 +17588,12 @@
       "feature_area": "credits"
     }
   },
+  "Edit project goal": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
   "Edit project member": {
     "context": {
       "feature_area": "team"
@@ -17463,6 +17653,11 @@
   "Edit resource template": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "Edit retention policy": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Edit review settings": {
@@ -17839,9 +18034,19 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Empty keeps them forever.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Empty list": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Empty shows the catalogue's name.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Enable": {
@@ -18421,7 +18626,7 @@
   },
   "Endpoint": {
     "context": {
-      "feature_area": "inference"
+      "feature_area": "metrics"
     }
   },
   "Endpoint has been added successfully.": {
@@ -19321,6 +19526,11 @@
       "feature_area": "accounts"
     }
   },
+  "Every point and roll-up this metric collected is deleted, then the metric itself. This cannot be undone.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Every remaining resource is terminated. A project left with no active resources is deleted.": {
     "context": {
       "feature_area": "policy-watch"
@@ -19354,6 +19564,11 @@
   "Exact match": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Example request": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Example telemetry metrics": {
@@ -20914,6 +21129,11 @@
     }
   },
   "Fields that can be provided in invitations for email personalization. These are NOT copied to user profile.": {},
+  "Figure across a project": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "File": {
     "context": {
       "primary_ui_type": "title",
@@ -21602,6 +21822,11 @@
       "feature_area": "actions"
     }
   },
+  "For services that already emit OpenTelemetry metrics.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "For your security, never share the following types of information:": {
     "context": {
       "feature_area": "ai-assistant"
@@ -21682,6 +21907,11 @@
   "Forecasting resource demand based on proposal trends": {
     "context": {
       "feature_area": "reporting"
+    }
+  },
+  "Forever": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Form progress": {
@@ -22054,6 +22284,12 @@
       "feature_area": "actions"
     }
   },
+  "Gauge": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
   "Gender": {
     "context": {
       "primary_ui_type": "label",
@@ -22256,12 +22492,17 @@
   },
   "Global": {
     "context": {
-      "feature_area": "pubsub"
+      "feature_area": "metrics"
     }
   },
   "Global (unscoped)": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Global definitions can be adopted by every offering.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Global federation of identity providers for researchers.": {
@@ -22314,6 +22555,60 @@
   "Go to the Resources tab and find the resource with an Arrow backend ID": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Goal for {metric} in {project}": {
+    "context": {
+      "variables": {
+        "metric": {
+          "type": "unknown"
+        },
+        "project": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "Goal has been removed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
+    }
+  },
+  "Goal has been saved.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
+    }
+  },
+  "Goal {comparator} {value}": {
+    "context": {
+      "variables": {
+        "comparator": {
+          "type": "unknown"
+        },
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "Goal: {value}": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "Good direction": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Good match": {
@@ -23094,6 +23389,12 @@
     }
   },
   "Higher Education Institution": {},
+  "Higher is better": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
   "Highlight backend ID display": {
     "context": {
       "feature_area": "integration"
@@ -23249,6 +23550,17 @@
     }
   },
   "Hostname of FreeIPA server.": {},
+  "Hourly roll-ups": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "metrics"
+    }
+  },
+  "Hourly roll-ups kept (days)": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Hours": {
     "context": {
       "feature_area": "details"
@@ -23315,8 +23627,14 @@
       "feature_area": "mappings"
     }
   },
+  "How long raw points and hourly and daily roll-ups are kept.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "How maintenance notifications are delivered.": {},
   "How many days ahead the call manager dashboard looks for review deadlines. Past-due reviews are always included.": {},
+  "How many days back a reported metric point may be timestamped.": {},
   "How many decimal places a customer may use for this limit. 0 keeps it a whole number.": {
     "context": {
       "feature_area": "update"
@@ -23366,6 +23684,11 @@
   "How the accounts people get on your offerings are named and set up.": {
     "context": {
       "feature_area": "service-providers"
+    }
+  },
+  "How the figures of a project’s resources combine. Counted amounts are always added up.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "How the marketplace catalogue is organised.": {
@@ -26168,7 +26491,7 @@
   "Kind": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "rabbitmq"
+      "feature_area": "metrics"
     }
   },
   "Kubernetes & Nodes": {
@@ -26301,6 +26624,7 @@
       "feature_area": "database-stats"
     }
   },
+  "Largest OTLP metrics body accepted, after decompression, in bytes.": {},
   "Largest tables": {
     "context": {
       "feature_area": "database-stats"
@@ -26543,6 +26867,12 @@
   "Latest review completion date": {
     "context": {
       "feature_area": "rounds"
+    }
+  },
+  "Latest value": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "metrics"
     }
   },
   "Latest version": {
@@ -27969,6 +28299,12 @@
   "Low end label": {
     "context": {
       "feature_area": "questions"
+    }
+  },
+  "Lower is better": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
     }
   },
   "Luxembourg": {},
@@ -29767,7 +30103,61 @@
   },
   "Metric": {
     "context": {
-      "feature_area": "reports"
+      "primary_ui_type": "title",
+      "feature_area": "metrics"
+    }
+  },
+  "Metric catalogue": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Metric data is being purged.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Metric definition has been saved.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
+    }
+  },
+  "Metric from the catalogue": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Metric has been adopted.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
+    }
+  },
+  "Metric has been archived.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Metric has been paused.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Metric has been removed.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Metric has been resumed.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Metric has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
     }
   },
   "Metric name": {
@@ -29775,10 +30165,21 @@
       "feature_area": "hpas"
     }
   },
+  "Metrics": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "offerings"
+    }
+  },
   "Metrics have been reset.": {
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "pubsub"
+    }
+  },
+  "Metrics offerings can adopt. Providers may add private ones for their own offerings.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Mexico": {},
@@ -30416,6 +30817,8 @@
       "feature_area": "administration"
     }
   },
+  "Most attribute combinations one resource may report for one metric.": {},
+  "Most metric points accepted in a single report request.": {},
   "Most used checklists": {
     "context": {
       "primary_ui_type": "title"
@@ -30844,6 +31247,7 @@
       "feature_area": "project-templates"
     }
   },
+  "Name of the retention policy used by metric definitions that set none.": {},
   "Name search (applied at load time)…": {
     "context": {
       "feature_area": "reports"
@@ -30952,6 +31356,12 @@
   "Negative feedback": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "Neither": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
     }
   },
   "Neither agree nor disagree": {
@@ -31792,6 +32202,11 @@
       "feature_area": "reallocate-limits"
     }
   },
+  "No catalogue metric left to adopt.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "No categories": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -32015,6 +32430,11 @@
   "No data found": {
     "context": {
       "feature_area": "usage-by-creator"
+    }
+  },
+  "No data reported yet.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "No data to display": {
@@ -32440,6 +32860,16 @@
   "No messages yet. Start the conversation!": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "No metrics adopted": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "No metrics yet": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "No more subnets available": {
@@ -34955,6 +35385,11 @@
       "feature_area": "accounts"
     }
   },
+  "One point or a list per request.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "One project": {
     "context": {
       "feature_area": "service-providers"
@@ -35011,6 +35446,11 @@
     }
   },
   "Only a draft or previewed merge can be deleted.": {},
+  "Only a metric that never received data can be removed; otherwise archive it.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Only a single IP address (/{prefix}) is allowed.": {
     "context": {
       "variables": {
@@ -35507,6 +35947,11 @@
   "OpenStack: Worker Node": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "OpenTelemetry Collector": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Opening a submission window": {
@@ -36577,6 +37022,11 @@
     }
   },
   "Outside the range": {},
+  "Over": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Over cap": {
     "context": {
       "feature_area": "views"
@@ -36737,6 +37187,11 @@
       "feature_area": "site-agent"
     }
   },
+  "Overrides the offering's default goal.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Overrun": {
     "context": {
       "primary_ui_type": "title",
@@ -36768,7 +37223,7 @@
   "Owner": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "pubsub"
+      "feature_area": "metrics"
     }
   },
   "PDF": {
@@ -37623,6 +38078,11 @@
   "Per resource": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Per resource; keeps the number of series bounded.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Per service provider": {
@@ -41058,6 +41518,11 @@
       "feature_area": "reports"
     }
   },
+  "Projects without their own goal will have none.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Projects, resources and cost per affiliated organization, with an explicit unaffiliated bucket": {
     "context": {
       "feature_area": "reporting"
@@ -41994,9 +42459,19 @@
       "feature_area": "deploy"
     }
   },
+  "Purge": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Purge all queues": {
     "context": {
       "feature_area": "rabbitmq"
+    }
+  },
+  "Purge data": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Purge is already in progress": {
@@ -42033,6 +42508,17 @@
         }
       },
       "feature_area": "rabbitmq"
+    }
+  },
+  "Purge {name}?": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Purged {count} messages from queue": {
@@ -42526,6 +43012,17 @@
   "Raw payload": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Raw points": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "metrics"
+    }
+  },
+  "Raw points kept (days)": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "Re-check": {
@@ -43588,6 +44085,11 @@
       "feature_area": "offering-groups"
     }
   },
+  "Remove goal": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Remove health monitor": {
     "context": {
       "feature_area": "openstack-lbaas"
@@ -43772,6 +44274,12 @@
       "feature_area": "mass-actions"
     }
   },
+  "Remove this goal?": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "metrics"
+    }
+  },
   "Remove tier": {
     "context": {
       "feature_area": "plans"
@@ -43790,6 +44298,17 @@
         }
       },
       "feature_area": "offering-groups"
+    }
+  },
+  "Remove {name}?": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Remove {value}": {
@@ -44153,6 +44672,16 @@
   "Reported": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Reported by {offering}": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Reported tickets": {
@@ -46038,6 +46567,22 @@
   "Resuming": {
     "context": {
       "feature_area": "api-keys"
+    }
+  },
+  "Retention policies": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Retention policy": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "Retention policy has been saved.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "metrics"
     }
   },
   "Retry": {
@@ -49825,6 +50370,11 @@
       "feature_area": "blocks"
     }
   },
+  "Sending the same point again replaces its value.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Sending...": {
     "context": {
       "feature_area": "chat"
@@ -50230,6 +50780,11 @@
       "feature_area": "site-agents"
     }
   },
+  "Services can no longer report it and projects no longer see it. Its data is purged automatically after the grace period (30 days by default) unless you resume it.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Services can only be provisioned for a certain affiliation. You currently do not have any organizations or projects connected with your account.": {},
   "Services you plan to use": {},
   "Set": {
@@ -50522,6 +51077,12 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "Set project goal": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
     }
   },
   "Set rules": {
@@ -50893,6 +51454,11 @@
     }
   },
   "Show credit field in project create dialog.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
+  "Show custom metrics: the project Metrics tab and the offering metrics a provider adopts.": {
     "context": {
       "feature_area": "features"
     }
@@ -54613,6 +55179,31 @@
       "feature_area": "providers"
     }
   },
+  "The figure is the latest level in {period}.": {
+    "context": {
+      "variables": {
+        "period": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "The figure is the total for {period}.": {
+    "context": {
+      "variables": {
+        "period": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
+  "The figure should be": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "The file is larger than 10 MB, the most a portal accepts. Export the call again without documents and attach them after the import.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -55239,6 +55830,11 @@
       "feature_area": "wizard"
     }
   },
+  "The project falls back to the offering's default goal.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "The project group range holds GIDs too, so it must not overlap any GID range, including this pool’s own.": {
     "context": {
       "feature_area": "posix-id-pools"
@@ -55432,6 +56028,11 @@
   },
   "The service was active for the last 10 minutes": {},
   "The service wasn't active for the last 10 minutes": {},
+  "The services this project uses haven't adopted any metrics.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "The settings changed since the preview. Preview again to apply them.": {
     "context": {
       "feature_area": "accounts"
@@ -58238,6 +58839,16 @@
       "feature_area": "coi-settings"
     }
   },
+  "UCUM, for example h, % or {learners}. Fixed once data exists.": {
+    "context": {
+      "variables": {
+        "learners": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
+    }
+  },
   "UI": {
     "context": {
       "primary_ui_type": "label"
@@ -58546,6 +59157,12 @@
       "feature_area": "credits"
     }
   },
+  "Unable to adopt metric.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
+    }
+  },
   "Unable to adopt the project group.": {
     "context": {
       "primary_ui_type": "notification_message",
@@ -58770,6 +59387,11 @@
     "context": {
       "primary_ui_type": "notification_message",
       "feature_area": "project-groups"
+    }
+  },
+  "Unable to change the metric.": {
+    "context": {
+      "primary_ui_type": "error_message"
     }
   },
   "Unable to check for duplicate invitations.": {
@@ -60526,6 +61148,12 @@
       "feature_area": "access"
     }
   },
+  "Unable to load the default goal.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
+    }
+  },
   "Unable to load the email configuration": {
     "context": {
       "feature_area": "email"
@@ -60964,6 +61592,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "openstack-floating-ips"
+    }
+  },
+  "Unable to remove goal.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
     }
   },
   "Unable to remove health monitor.": {
@@ -61452,6 +62086,12 @@
       "feature_area": "proposal"
     }
   },
+  "Unable to save goal.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
+    }
+  },
   "Unable to save location.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -61464,6 +62104,12 @@
       "feature_area": "create"
     }
   },
+  "Unable to save metric definition.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
+    }
+  },
   "Unable to save order auto-approval settings.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -61474,6 +62120,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "actions"
+    }
+  },
+  "Unable to save retention policy.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
     }
   },
   "Unable to save review.": {
@@ -62370,6 +63022,12 @@
       "feature_area": "actions"
     }
   },
+  "Unable to update metric.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "metrics"
+    }
+  },
   "Unable to update multilingual logos.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -63069,7 +63727,7 @@
   "Unit": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "details"
+      "feature_area": "metrics"
     }
   },
   "Unit price": {
@@ -64349,6 +65007,7 @@
       "feature_area": "layouts"
     }
   },
+  "Use lowercase dotted names, for example education.course.completions.": {},
   "Use per-resource robot accounts as identity model": {
     "context": {
       "feature_area": "integration"
@@ -65795,7 +66454,7 @@
   "Value": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "integration"
+      "feature_area": "metrics"
     }
   },
   "Value (e.g., 10K+)": {
@@ -67019,6 +67678,11 @@
   "What prevents the merge from running. Each one has to be resolved in the mappings or on the offerings themselves.": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "What services report against. Cannot be changed later.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "What stays on the sources": {
@@ -69744,6 +70408,16 @@
       "feature_area": "details"
     }
   },
+  "metric definitions": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "metrics": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "milli CPUs": {},
   "min": {},
   "minimum draw of {floor} ÷ 30 days": {
@@ -70223,6 +70897,11 @@
   "resources": {
     "context": {
       "feature_area": "resources"
+    }
+  },
+  "retention policies": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "reviewed": {

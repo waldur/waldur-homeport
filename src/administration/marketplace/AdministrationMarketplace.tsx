@@ -33,6 +33,11 @@ const MARKETPLACE_TABS: SettingsTab[] = [
     title: translate('SLURM policy'),
     groupName: translate('SLURM Policy'),
   },
+  {
+    key: 'custom-metrics',
+    title: translate('Custom metrics'),
+    groupName: translate('Custom Metrics'),
+  },
 ];
 
 export const AdministrationMarketplace = () => (
