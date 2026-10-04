@@ -115,6 +115,21 @@
   }
 }
 
+// Sign-in pages render neither the app header nor the page bar, yet the body
+// still carries `outstanding-bar-enabled`, so the offsets above would drop the
+// drawer ~130px down. Tuck it under the sign-in strip instead: its 40px
+// controls plus the layouts' 1rem padding end at 56px.
+body:has(.auth-header-controls) #kt_drawer.ai-chat-drawer-active {
+  $auth-strip-offset: 64px;
+
+  top: $auth-strip-offset;
+  height: calc(100vh - #{$auth-strip-offset});
+
+  @include media-breakpoint-up(lg) {
+    height: calc(100vh - #{$auth-strip-offset} - 4px);
+  }
+}
+
 // DrawerRoot.tsx doesn't portal to <body> (see its own comment on why), so
 // this can't be a direct-child `>` selector the way Metronic's old
 // body.append()'d overlay div allowed — match it as a descendant instead.
