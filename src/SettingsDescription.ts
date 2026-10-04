@@ -2074,6 +2074,47 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('Custom Metrics'),
+    items: [
+      {
+        key: 'METRICS_LATE_DATA_DAYS',
+        description: translate('How many days back a reported metric point may be timestamped.'),
+        default: 7,
+        type: 'integer',
+      },
+      {
+        key: 'METRICS_MAX_SERIES_PER_RESOURCE_METRIC',
+        description: translate('Most attribute combinations one resource may report for one metric.'),
+        default: 500,
+        type: 'integer',
+      },
+      {
+        key: 'METRICS_MAX_POINTS_PER_REQUEST',
+        description: translate('Most metric points accepted in a single report request.'),
+        default: 10000,
+        type: 'integer',
+      },
+      {
+        key: 'METRICS_MAX_OTLP_BODY_BYTES',
+        description: translate('Largest OTLP metrics body accepted, after decompression, in bytes.'),
+        default: 20971520,
+        type: 'integer',
+      },
+      {
+        key: 'METRICS_DEFAULT_RETENTION_POLICY',
+        description: translate('Name of the retention policy used by metric definitions that set none.'),
+        default: 'standard',
+        type: 'string',
+      },
+      {
+        key: 'METRICS_ARCHIVE_GRACE_DAYS',
+        description: translate('Days an archived offering metric keeps its data before it is purged.'),
+        default: 30,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('Identity Bridge'),
     items: [
       {

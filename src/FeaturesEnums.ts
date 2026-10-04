@@ -68,6 +68,7 @@ export enum ProjectFeatures {
   oecd_fos_2007_code = 'project.oecd_fos_2007_code',
   science_domain = 'project.science_domain',
   show_credit_in_create_dialog = 'project.show_credit_in_create_dialog',
+  show_custom_metrics = 'project.show_custom_metrics',
   show_description_in_create_dialog = 'project.show_description_in_create_dialog',
   show_end_date_in_create_dialog = 'project.show_end_date_in_create_dialog',
   show_image_in_create_dialog = 'project.show_image_in_create_dialog',

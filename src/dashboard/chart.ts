@@ -1,5 +1,6 @@
 import { EChartsOption, MarkLineComponentOption, SeriesOption } from 'echarts';
 
+import { escapeHtml } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { CHART_BAR_ROUNDING, getChartBrandColor } from './constants';
@@ -117,14 +118,16 @@ export const getCostWidgetChartOptions = (
       formatter: function (params) {
         if (!params.length) return '';
 
-        const xLabel = params[0].axisValueLabel;
+        // Series and axis names can come from data (a provider's metric name),
+        // and ECharts inserts this string as HTML.
+        const xLabel = escapeHtml(params[0].axisValueLabel);
         params = params.filter((param) => param.value !== undefined);
 
         let tooltipText = `${xLabel}<br/>`;
         params.forEach((param) => {
           tooltipText += `
             <div class="d-flex justify-content-between gap-6">
-              <span>${param.marker} ${param.seriesName}</span>
+              <span>${param.marker} ${escapeHtml(param.seriesName)}</span>
               <strong class="text-end">${param.value}</strong>
             </div>
           `;

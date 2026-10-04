@@ -117,6 +117,23 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'project.metrics',
+    url: 'metrics/',
+    component: lazyComponent(() =>
+      import('./metrics/ProjectMetricsPage').then((module) => ({
+        default: module.ProjectMetricsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Metrics'),
+      priority: 105,
+      feature: ProjectFeatures.show_custom_metrics,
+      // Only where a resource comes from an offering that reports metrics.
+      permissions: [(state) => Boolean(getProject(state)?.has_metrics)],
+    },
+  },
+
+  {
     name: 'project.issues',
     url: 'issues/',
     component: lazyComponent(() =>

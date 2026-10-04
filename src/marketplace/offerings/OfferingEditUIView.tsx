@@ -9,7 +9,7 @@ import {
 import { UI_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
-import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { MarketplaceFeatures, ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
@@ -98,6 +98,12 @@ const AttributesSection = lazyComponent(() =>
     default: module.AttributesSection,
   })),
 );
+const MetricsSection = lazyComponent(() =>
+  import('./update/metrics/MetricsSection').then((module) => ({
+    default: module.MetricsSection,
+  })),
+);
+
 const ComponentsSection = lazyComponent(() =>
   import('./update/components/ComponentsSection').then((module) => ({
     default: module.ComponentsSection,
@@ -147,6 +153,12 @@ const buildIntegrationTab = (offering: Offering): PageBarTab => {
         key: 'backend-id-rules',
         component: BackendIdRulesSection,
         title: translate('Backend ID rules'),
+      },
+      // Services report their custom metrics as part of the integration.
+      isFeatureVisible(ProjectFeatures.show_custom_metrics) && {
+        key: 'metrics',
+        component: MetricsSection,
+        title: translate('Metrics'),
       },
       UserManagementSection && {
         key: 'user-management',

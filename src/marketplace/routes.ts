@@ -5,7 +5,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
 import { userHasCustomerPermission } from '@/customer/utils';
 import { isFeatureVisible } from '@/features/connect';
-import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { MarketplaceFeatures, ProjectFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
 import { PermissionEnum } from '@/permissions/enums';
@@ -982,6 +982,21 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Offerings'),
       priority: 10,
+    },
+  },
+  {
+    name: 'admin-marketplace-metrics',
+    parent: 'admin-marketplace',
+    url: 'metrics/',
+    component: lazyComponent(() =>
+      import('@/administration/metrics/MetricCatalogPage').then((module) => ({
+        default: module.MetricCatalogPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Custom metrics'),
+      priority: 40,
+      feature: ProjectFeatures.show_custom_metrics,
     },
   },
   // Folded into a tabbed Marketplace page; kept as a redirect so bookmarks,
