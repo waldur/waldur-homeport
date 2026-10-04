@@ -44,7 +44,13 @@ export interface MatrixChatMessage {
 }
 
 export type MatrixConnectionState =
-  'idle' | 'connecting' | 'connected' | 'error' | 'disconnected';
+  | 'idle'
+  | 'connecting'
+  | 'connected'
+  | 'error'
+  | 'disconnected'
+  // Waldur refused a new session, or the homeserver kept signing it out.
+  | 'ended';
 
 export interface MatrixChatContextValue {
   client: MatrixClient | null;
@@ -65,11 +71,10 @@ export interface MatrixChatContextValue {
   disconnect: () => void;
   error: string | null;
   /**
-   * True when the most recently requested room was resolved but the backend
-   * withheld conversation access (no room_id/access_token) — i.e. the user can
-   * see/manage the room but is not a member of the conversation (e.g. staff or
-   * a non-member owner). Lets the UI show a clear "not a member" state instead
-   * of an empty placeholder.
+   * True when the open endpoint refused the most recently requested room
+   * (403/404): the user can see or manage the room but is not a member of the
+   * conversation (e.g. staff or a non-member owner). Lets the UI show a clear
+   * "not a member" state instead of an empty placeholder.
    */
   roomAccessDenied: boolean;
 }

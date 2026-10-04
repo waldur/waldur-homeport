@@ -211,3 +211,24 @@ describe('MatrixChatDrawer — does not own the call view', () => {
     expect(source).toMatch(/MatrixCallDockSlot/);
   });
 });
+
+describe('MatrixChatDrawer — ended session', () => {
+  it('says the session has ended and reconnects on reload', async () => {
+    h.matrixClient = {
+      ...h.matrixClient,
+      connectionState: 'ended',
+      activeRoomId: null,
+    };
+
+    render(<MatrixChatDrawer roomUuid="room-1" />);
+
+    expect(
+      screen.getByText('Your chat session has ended.'),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId('message-input')).toBeNull();
+    // Mounting the drawer connects too; only the click should count here.
+    h.matrixClient.connect.mockClear();
+    await userEvent.click(screen.getByRole('button', { name: 'Reload' }));
+    expect(h.matrixClient.connect).toHaveBeenCalledWith('room-1');
+  });
+});

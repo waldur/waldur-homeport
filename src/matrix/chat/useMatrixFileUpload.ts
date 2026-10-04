@@ -4,6 +4,7 @@ import { translate } from '@/i18n';
 import { NotifyService } from '@/store/notify';
 
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
+import { withFreshAccessToken } from './session';
 import { useMatrixClient } from './useMatrixClient';
 
 const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
@@ -79,10 +80,12 @@ export function useMatrixFileUpload() {
 
       setUploading(true);
       try {
-        const uploadResponse = await (client as any).uploadContent(file, {
-          name: file.name,
-          type: file.type,
-        });
+        const uploadResponse: any = await withFreshAccessToken(client, () =>
+          (client as any).uploadContent(file, {
+            name: file.name,
+            type: file.type,
+          }),
+        );
         const mxcUrl =
           typeof uploadResponse === 'string'
             ? uploadResponse

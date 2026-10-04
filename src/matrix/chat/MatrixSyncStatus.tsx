@@ -28,6 +28,10 @@ export const MatrixSyncStatus: FC<MatrixSyncStatusProps> = ({
       bg: 'bg-secondary text-white',
       text: translate('Disconnected'),
     },
+    ended: {
+      bg: 'bg-secondary text-white',
+      text: translate('Session ended'),
+    },
   };
 
   const { bg, text } = config[state] || config.connecting;

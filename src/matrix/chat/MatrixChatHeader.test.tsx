@@ -34,6 +34,10 @@ vi.mock('./useMatrixClient', () => ({
   useMatrixClient: () => h.matrixClient,
 }));
 
+vi.mock('./useMemberMatrixRooms', () => ({
+  useMemberMatrixRooms: () => ({ data: [] }),
+}));
+
 vi.mock('./mute', () => ({
   isRoomMuted: (...a: any[]) => h.isRoomMuted(...a),
   setRoomMuted: (...a: any[]) => h.setRoomMuted(...a),

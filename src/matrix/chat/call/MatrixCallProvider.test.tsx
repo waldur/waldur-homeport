@@ -75,6 +75,24 @@ describe('MatrixCallProvider', () => {
     expect(result.current.callRoomUuid).toBe('uuid-1');
   });
 
+  it('ends the call when the chat session ends', async () => {
+    // An ended session takes the client away: no heartbeat and no way to
+    // announce the leave, so media must not keep flowing on its own.
+    const { result, rerender } = renderHook(useCtx, { wrapper });
+    await act(async () => {
+      await result.current.startCall();
+    });
+    act(() => result.current.markConnected());
+
+    h.client = null;
+    h.activeRoomId = null;
+    h.connectionState = 'ended';
+    rerender();
+
+    expect(result.current.callState).toBe('idle');
+    expect(result.current.credentials).toBeNull();
+  });
+
   it('clears callRoomUuid on endCall', async () => {
     const { result } = renderHook(useCtx, { wrapper });
     await act(async () => {

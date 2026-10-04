@@ -7,13 +7,18 @@ import {
   useRef,
   useState,
 } from 'react';
-import { matrixCredentialsRetrieve } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
 import { MatrixChatContext } from './MatrixChatContext';
 import { getMatrixErrorMessage } from './matrixErrorMessage';
+import {
+  createTokenRefreshFunction,
+  openRoom,
+  sessionTokens,
+  startSession,
+} from './session';
 import { MatrixConnectionState } from './types';
 
 // Logger passed to createClient so the SDK's per-client paths
@@ -29,6 +34,11 @@ const quietMatrixLogger: any = {
     return quietMatrixLogger;
   },
 };
+
+// A session signed out again this soon after an automatic reconnect ends
+// instead: something keeps signing it out, and retrying would only pile up
+// homeserver devices.
+const SIGN_OUT_RECONNECT_WINDOW_MS = 60_000;
 
 // matrix-js-sdk submodules (GroupCallEventHandler, MatrixRTCSession,
 // PushProcessor, ...) import a global `loglevel`-backed logger directly,
@@ -116,6 +126,12 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [connectionState]);
   const [activeRoomId, setActiveRoomId] = useState<string | null>(null);
   const [activeRoomUuid, setActiveRoomUuid] = useState<string | null>(null);
+  // Read by the sign-out handler, which outlives the render that set it up.
+  const activeRoomUuidRef = useRef<string | null>(null);
+  useEffect(() => {
+    activeRoomUuidRef.current = activeRoomUuid;
+  }, [activeRoomUuid]);
+  const lastSignOutReconnectRef = useRef(0);
   const [userId, setUserId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [roomAccessDenied, setRoomAccessDenied] = useState(false);
@@ -123,7 +139,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
   const user = useUser();
   const currentUserUuidRef = useRef<string | null | undefined>(user?.uuid);
 
-  const disconnect = useCallback(() => {
+  const releaseClient = useCallback(() => {
     if (clientRef.current) {
       try {
         if (onSyncRef.current) {
@@ -147,24 +163,47 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       clientRef.current = null;
     }
     connectingRef.current = false;
+  }, []);
+
+  const disconnect = useCallback(() => {
+    releaseClient();
     setConnectionState('disconnected');
     setActiveRoomId(null);
     setActiveRoomUuid(null);
     setUserId(null);
     setError(null);
     setRoomAccessDenied(false);
-  }, []);
+    lastSignOutReconnectRef.current = 0;
+  }, [releaseClient]);
+
+  // Waldur refused a new session, or the homeserver signed one out again right
+  // after a reconnect. The drawer offers to reconnect.
+  const endSession = useCallback(() => {
+    releaseClient();
+    setConnectionState('ended');
+    setActiveRoomId(null);
+    setError(null);
+  }, [releaseClient]);
 
   // Tear down on Waldur logout / user switch. AuthService.clearAuthCache
   // dispatches setCurrentUser(undefined); we listen on the resulting Redux
   // state. If we didn't, the matrix-js-sdk client would keep syncing with
   // the previous user's access token, and a fresh login on the same browser
-  // would mount this provider on top of a live old session.
+  // would mount this provider on top of a live old session. Signing the
+  // session's device out also revokes its tokens; every session has its own
+  // device, so other tabs are unaffected. A provider left without a client
+  // (an ended or failed session) is reset too, so the next user does not
+  // inherit the previous one's state; a cold login from 'idle' is left alone
+  // so the background bootstrap still starts.
   useEffect(() => {
     const newUuid = user?.uuid ?? null;
     if (currentUserUuidRef.current !== newUuid) {
       currentUserUuidRef.current = newUuid;
-      if (clientRef.current) {
+      if (clientRef.current || connectionStateRef.current !== 'idle') {
+        clientRef.current?.logout?.(true).catch(() => {
+          // Best effort: unrevoked, the access token still expires within
+          // minutes and the refresh token once unused for refresh_token_ttl.
+        });
         disconnect();
       }
     }
@@ -190,14 +229,11 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
         if (connectionStateRef.current === 'connected') {
           // Lightweight room switch on the live client.
           try {
-            const res = await matrixCredentialsRetrieve({
-              query: { room_uuid: roomUuid },
-            } as any);
-            const data = res.data as any;
-            if (data.room_id) {
+            const roomId = await openRoom(roomUuid);
+            if (roomId) {
               // Flip both together so consumers never see the id and uuid
               // disagree mid-switch.
-              setActiveRoomId(data.room_id);
+              setActiveRoomId(roomId);
               setActiveRoomUuid(roomUuid);
               setRoomAccessDenied(false);
               setError(null);
@@ -231,27 +267,23 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       setError(null);
 
       try {
-        const res = await matrixCredentialsRetrieve({
-          query: { room_uuid: roomUuid },
-        } as any);
-        const credentials = res.data;
-
-        const creds = credentials as any;
-
-        // The backend always returns an access_token when room_uuid is
-        // provided, regardless of the configured login method.
-        const accessToken: string | undefined =
-          creds.access_token || credentials.login_token;
-
-        if (!accessToken) {
-          throw new Error(
-            'No access token available. Please use an external Matrix client.',
-          );
-        }
-
-        // Dynamic import of matrix-js-sdk — zero main bundle impact
-        const sdk = await import('matrix-js-sdk');
+        // The session comes last: everything that can still fail runs first,
+        // so a failure does not leave a homeserver device behind. A silent
+        // bootstrap does not focus a room, so it has none to open. The
+        // dynamic import keeps matrix-js-sdk out of the main bundle.
+        const [sdk, roomId] = await Promise.all([
+          import('matrix-js-sdk'),
+          activate ? openRoom(roomUuid) : Promise.resolve(null),
+        ]);
         await patchMatrixSdkLoggers();
+        // Tokens live only in this client's memory: nothing is stored in the
+        // browser or on the Waldur side.
+        const session = await startSession();
+        if (!session) {
+          connectingRef.current = false;
+          setConnectionState('ended');
+          return;
+        }
 
         // Explicit MemoryStore: matrix-js-sdk 40.x currently defaults to
         // an in-memory store, but a future bump that flips to IndexedDB
@@ -259,10 +291,17 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
         // logout. Pin the store so the contract is local-and-ephemeral.
 
         const Store = (sdk as any).MemoryStore;
+        const tokens = sessionTokens(session);
         const client = sdk.createClient({
-          baseUrl: credentials.homeserver_url,
-          accessToken,
-          userId: credentials.matrix_user_id,
+          baseUrl: session.homeserver_url,
+          userId: session.matrix_user_id,
+          deviceId: session.device_id,
+          accessToken: tokens.accessToken,
+          refreshToken: tokens.refreshToken,
+          tokenRefreshFunction: createTokenRefreshFunction(
+            session.homeserver_url,
+            sdk.TokenRefreshLogoutError,
+          ),
           // Silence the SDK's verbose FetchHttpApi/sync debug logs.
           // Keep warn/error so real problems still surface.
           logger: quietMatrixLogger,
@@ -291,14 +330,14 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
         // Client assigned — the duplicate-creation window is closed; further
         // connect() calls are now gated by the clientRef.current guard above.
         connectingRef.current = false;
-        setUserId(credentials.matrix_user_id);
+        setUserId(session.matrix_user_id);
 
-        // Set room_id from credentials response — only when activating. A
-        // silent bootstrap leaves the active room null so nothing is focused
-        // (and thus nothing is auto-marked-read) until the user opens a room.
+        // Only when activating: a silent bootstrap leaves the active room null
+        // so nothing is focused (and thus nothing is auto-marked-read) until
+        // the user opens a room.
         if (activate) {
-          if ((credentials as any).room_id) {
-            setActiveRoomId((credentials as any).room_id);
+          if (roomId) {
+            setActiveRoomId(roomId);
             setActiveRoomUuid(roomUuid);
             setRoomAccessDenied(false);
           } else {
@@ -308,10 +347,6 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
             setRoomAccessDenied(true);
           }
         }
-
-        // Auto-join only matters for the room we're focusing; a bootstrap
-        // connects against a room the user is already a member of.
-        const roomId = activate ? (credentials as any).room_id : null;
 
         // Listen for sync state using SDK's own event enum
         const onSync = async (state: string) => {
@@ -327,6 +362,8 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
                   await client.joinRoom(roomId);
                 }
               } catch {
+                // The session may have ended while the join was in flight.
+                if (clientRef.current !== client) return;
                 // If this is the first sync and we failed to join,
                 // we cannot proceed — the user is not in the room.
                 if (state === 'PREPARED') {
@@ -337,6 +374,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
               }
             }
 
+            if (clientRef.current !== client) return;
             setConnectionState('connected');
           } else if (state === 'ERROR') {
             setConnectionState('error');
@@ -346,6 +384,29 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
 
         onSyncRef.current = onSync;
         client.on(sdk.ClientEvent.Sync, onSync);
+        // The homeserver signed the session out: its device was removed (on
+        // deactivation, from Element's session list, by Waldur's device cap) or
+        // it rejected a token not yet due to expire. Whether the user may
+        // still chat is Waldur's call, so ask it for a new session; connect()
+        // ends the session if Waldur refuses.
+        client.on(sdk.HttpApiEvent.SessionLoggedOut, () => {
+          if (clientRef.current !== client) return;
+          const now = Date.now();
+          if (
+            now - lastSignOutReconnectRef.current <
+            SIGN_OUT_RECONNECT_WINDOW_MS
+          ) {
+            endSession();
+            return;
+          }
+          lastSignOutReconnectRef.current = now;
+          const openRoomUuid = activeRoomUuidRef.current;
+          releaseClient();
+          setActiveRoomId(null);
+          void connect(openRoomUuid ?? roomUuid, {
+            activate: Boolean(openRoomUuid),
+          });
+        });
 
         // Detached pending events: reactions/relations local echo calls
         // Room.getPendingEvents(), which throws unless ordering is detached.
@@ -373,10 +434,11 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
         );
       }
     },
-    // Empty deps: connectionState is read via connectionStateRef so this
-    // callback identity is stable across state transitions. Consumers can
-    // safely treat `connect` as referentially stable.
-    [],
+    // connectionState is read via connectionStateRef, and endSession and
+    // releaseClient never change, so this callback identity is stable across
+    // state transitions. Consumers can safely treat `connect` as
+    // referentially stable.
+    [endSession, releaseClient],
   );
 
   // Cleanup on unmount — funnel through disconnect() so the onSync listener
