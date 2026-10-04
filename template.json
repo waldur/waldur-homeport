@@ -8293,6 +8293,12 @@
     }
   },
   "Brazil": {},
+  "Breakdown by resource": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
+    }
+  },
   "Breakdown by {attribute}": {
     "context": {
       "primary_ui_type": "label",
@@ -57225,6 +57231,16 @@
   "This resource will expire soon. Review and renew to prevent downtime.": {
     "context": {
       "feature_area": "UserPendingActionsList"
+    }
+  },
+  "This resource's own figures. Goals apply to the project's combined figure, on the project's Metrics tab.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
+  "This resource's service hasn't adopted any metrics.": {
+    "context": {
+      "feature_area": "metrics"
     }
   },
   "This reviewer has not yet accepted the invitation or created a profile.": {

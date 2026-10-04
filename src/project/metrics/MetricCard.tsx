@@ -1,7 +1,12 @@
-import { FlagIcon, ListBulletsIcon, QuestionIcon } from '@phosphor-icons/react';
+import {
+  CubeIcon,
+  FlagIcon,
+  ListBulletsIcon,
+  QuestionIcon,
+} from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Col } from 'react-bootstrap';
-import { ProjectMetric } from 'waldur-js-client';
+import { ProjectMetric, ResourceMetric } from 'waldur-js-client';
 
 import { Badge, Tooltip } from 'waldur-ui';
 
@@ -60,11 +65,17 @@ const trendDays = () => {
   );
 };
 
+/**
+ * One metric's card: a project's combined figure, with its goal, or, given
+ * resourceUuid, one resource's own figure. Goals apply to the project figure,
+ * so a resource's card has none.
+ */
 export const MetricCard: FC<{
-  item: ProjectMetric;
-  project: { uuid: string; name: string; customer_uuid?: string };
+  item: ProjectMetric | ResourceMetric;
+  project?: { uuid: string; name: string; customer_uuid?: string };
+  resourceUuid?: string;
   refetch(): void;
-}> = ({ item, project, refetch }) => {
+}> = ({ item, project, resourceUuid, refetch }) => {
   const { openDialog } = useModal();
   const user = useUser();
   const metric = item.offering_metric;
@@ -72,19 +83,24 @@ export const MetricCard: FC<{
   const days = useMemo(trendDays, []);
   const { data } = useMetricSeries({
     offering_metric_uuid: metric.uuid,
-    project_uuid: project.uuid,
+    ...(resourceUuid
+      ? { resource_uuid: resourceUuid }
+      : { project_uuid: project.uuid }),
     start: days[0].toISOString(),
     granularity: 'day',
     aggregate: 'last',
   });
   const points = data?.series?.[0]?.points ?? [];
-  const goal = item.goal;
+  const projectItem = 'goal' in item ? item : null;
+  const goal = projectItem?.goal;
   const attributes = metric.attribute_keys ?? [];
   const period = getGoalPeriodOptions().find(
     (o) => o.value === item.period,
   )?.label;
+  const scope = resourceUuid ? { resourceUuid } : { projectUuid: project.uuid };
   // The backend refuses a project goal without PROJECT.UPDATE; don't offer it.
   const canSetGoal =
+    Boolean(projectItem) &&
     Boolean(user) &&
     (hasPermission(user, {
       permission: PermissionEnum.UPDATE_PROJECT,
@@ -183,9 +199,9 @@ export const MetricCard: FC<{
         goal ? (
           <Badge
             variant={
-              item.goal_met === null
+              projectItem.goal_met === null
                 ? 'neutral'
-                : item.goal_met
+                : projectItem.goal_met
                   ? 'success'
                   : 'warning'
             }
@@ -224,13 +240,25 @@ export const MetricCard: FC<{
           icon: <ListBulletsIcon weight="bold" />,
           callback: () =>
             openDialog(MetricBreakdownDialog, {
-              resolve: { item, projectUuid: project.uuid, attribute },
+              resolve: { item, ...scope, attribute },
             }),
         })),
+        ...(projectItem
+          ? [
+              {
+                label: translate('Breakdown by resource'),
+                icon: <CubeIcon weight="bold" />,
+                callback: () =>
+                  openDialog(MetricBreakdownDialog, {
+                    resolve: { item, ...scope, attribute: 'resource' },
+                  }),
+              },
+            ]
+          : []),
         ...(canSetGoal
           ? [
               {
-                label: item.goal_is_project
+                label: projectItem.goal_is_project
                   ? translate('Edit project goal')
                   : translate('Set project goal'),
                 icon: <FlagIcon weight="bold" />,
@@ -239,7 +267,7 @@ export const MetricCard: FC<{
                     resolve: {
                       offeringMetric: metric,
                       project,
-                      goal: item.goal_is_project ? goal : null,
+                      goal: projectItem.goal_is_project ? goal : null,
                       refetch,
                     },
                   }),
