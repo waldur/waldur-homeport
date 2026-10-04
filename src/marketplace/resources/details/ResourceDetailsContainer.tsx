@@ -211,10 +211,20 @@ export const ResourceDetailsContainer: FunctionComponent<
       resourceState.order_in_progress?.consumer_message_updated_at !==
         resource.order_in_progress?.consumer_message_updated_at
     ) {
+      // The page data carries the resource's scope (a VM, an instance), whose
+      // own state gates the scope's actions; it changes with the order, so
+      // it is refetched too, or those actions stay disabled until a reload.
       refetchResource();
+      refetchData();
       invalidateActionsPopover(resource.scope);
     }
-  }, [resource, resourceState, refetchResource, invalidateActionsPopover]);
+  }, [
+    resource,
+    resourceState,
+    refetchResource,
+    refetchData,
+    invalidateActionsPopover,
+  ]);
 
   const isRPOnly = useIsResourceProjectOnlyViewer(resource);
   const canManageLimitRequests =

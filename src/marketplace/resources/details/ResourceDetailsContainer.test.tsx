@@ -145,4 +145,33 @@ describe('ResourceDetailsContainer', () => {
     expect(marketplaceResourcesRetrieve).not.toHaveBeenCalled();
     expect(marketplaceProviderResourcesRetrieve).not.toHaveBeenCalled();
   });
+
+  it('reloads the scope with the resource when the order moves on', async () => {
+    // The scope (a VM, an instance) is part of the page data; its own state
+    // gates its actions, so a resource that leaves UPDATING must take a fresh
+    // scope with it, not just a fresh resource.
+    setParams({ resource_uuid: 'resource-uuid' });
+    const updating = {
+      ...resource,
+      state: 'Updating',
+      order_in_progress: { uuid: 'order-uuid', state: 'executing' },
+    };
+    const done = { ...resource, state: 'OK', order_in_progress: null };
+    let resourceReads = 0;
+    vi.mocked(marketplaceResourcesRetrieve).mockImplementation(((options) => {
+      if (options?.query?.field) {
+        // The state poller.
+        return Promise.resolve({ data: done });
+      }
+      resourceReads += 1;
+      return Promise.resolve({ data: resourceReads === 1 ? updating : done });
+    }) as any);
+
+    renderWithProviders(<ResourceDetailsContainer />);
+
+    await waitFor(() =>
+      expect(marketplaceResourcesOfferingRetrieve).toHaveBeenCalledTimes(2),
+    );
+    expect(resourceReads).toBeGreaterThanOrEqual(2);
+  });
 });
