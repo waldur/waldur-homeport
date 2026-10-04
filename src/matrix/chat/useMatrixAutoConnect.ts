@@ -26,9 +26,8 @@ export function useMatrixAutoConnect(): void {
 
   useEffect(() => {
     if (!enabled || !user?.uuid || connectionState !== 'idle') return;
-    // Only active rooms are connectable — the credentials endpoint issues an
-    // access token only for ACTIVE rooms the user belongs to, so bootstrapping
-    // against any other state silently fails. Mirrors the room list's filter.
+    // Only a member of an active room has a conversation to sync, so the
+    // background session starts only then. Mirrors the room list's filter.
     const activeRooms = (rooms ?? []).filter((r) => r.state === 'active');
     if (activeRooms.length === 0) return;
     const lastRoomUuid = getChatDrawerPreference('lastRoomUuid');

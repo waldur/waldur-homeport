@@ -8,6 +8,7 @@ import {
 } from '@uirouter/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { ENV } from '@/core/config';
 import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
@@ -63,6 +64,7 @@ const renderHeader = (props: Record<string, unknown> = {}) =>
   );
 
 beforeEach(() => {
+  ENV.plugins.WALDUR_CORE.MATRIX_EXTERNAL_LOGIN_METHOD = 'password';
   vi.mocked(useNotify().showSuccess).mockClear();
   vi.mocked(useNotify().showError).mockClear();
   vi.mocked(useModal().openDialog).mockClear();
@@ -130,9 +132,20 @@ describe('MatrixChatHeader', () => {
     expect(useModal().openDialog).toHaveBeenCalledWith(
       MatrixCredentialsDialog,
       {
-        resolve: { roomAlias: '#llm:server', roomUuid: 'room-1' },
+        resolve: { roomAlias: '#llm:server' },
       },
     );
+  });
+
+  it('offers no external client when users cannot sign in to one', async () => {
+    const user = userEvent.setup();
+    h.call.rtcAvailable = true;
+    ENV.plugins.WALDUR_CORE.MATRIX_EXTERNAL_LOGIN_METHOD = 'none';
+    const { container } = renderHeader({ roomAlias: '#llm:server' });
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    await user.click(container.querySelector('.dropdown-toggle')!);
+    expect(await screen.findByText('Start call')).toBeTruthy();
+    expect(screen.queryByText(/external Matrix client/i)).toBeNull();
   });
 
   it('shows "End call" in the kebab when the active call is in this room', async () => {

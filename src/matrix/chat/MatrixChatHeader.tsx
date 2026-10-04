@@ -16,6 +16,7 @@ import Avatar from '@/core/Avatar';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { MatrixCredentialsDialog } from '@/matrix/MatrixJoinButton';
+import { canOpenInExternalClient } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useNotify } from '@/store/notify';
@@ -127,10 +128,11 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
     else startCall();
   };
 
-  // Waldur provisioned the user's Matrix account, so they have no login of
-  // their own for an external client; show it before handing the room over.
+  // Waldur provisioned the user's Matrix account, so show how to sign in to it
+  // before handing the room over.
   const handleOpenExternal = () =>
-    openDialog(MatrixCredentialsDialog, { resolve: { roomAlias, roomUuid } });
+    openDialog(MatrixCredentialsDialog, { resolve: { roomAlias } });
+  const showExternal = Boolean(roomAlias) && canOpenInExternalClient();
 
   const handleMute = async () => {
     if (!muteReady || !client || !activeRoomId) return;
@@ -154,7 +156,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         )}
         {muted ? translate('Unmute') : translate('Mute')}
       </ActionsDropdownItem>
-      {(rtcAvailable || roomAlias) && <ActionsDropdownSeparator />}
+      {(rtcAvailable || showExternal) && <ActionsDropdownSeparator />}
       {rtcAvailable &&
         (blockedByOtherCall ? (
           <Tooltip
@@ -184,7 +186,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
             {isThisRoomsCall ? translate('End call') : translate('Start call')}
           </ActionsDropdownItem>
         ))}
-      {roomAlias && (
+      {showExternal && (
         <ActionsDropdownItem onSelect={handleOpenExternal}>
           <ChatsCircleIcon size={18} className="me-2" weight="bold" />
           {translate('Open in external Matrix client')}

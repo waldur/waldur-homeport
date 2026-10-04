@@ -1,3 +1,4 @@
+import { MatrixExternalLoginMethod } from '@/auth/types';
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
@@ -13,6 +14,17 @@ export const isMatrixEnabled = (): boolean =>
  */
 export const isMatrixChatEnabled = (): boolean =>
   isFeatureVisible(ProjectFeatures.show_matrix_chat) && isMatrixEnabled();
+
+/** How users sign in to a Matrix client outside Waldur; `none` by default. */
+export const getMatrixExternalLoginMethod = (): MatrixExternalLoginMethod =>
+  ENV.plugins?.WALDUR_CORE?.MATRIX_EXTERNAL_LOGIN_METHOD || 'none';
+
+/**
+ * Handing a room to an external client is pointless when the user has no way
+ * to sign in to one: Waldur's own drawer signs in through the appservice.
+ */
+export const canOpenInExternalClient = (): boolean =>
+  getMatrixExternalLoginMethod() !== 'none';
 
 /**
  * Web address of a room, for handing it over to an external Matrix client.

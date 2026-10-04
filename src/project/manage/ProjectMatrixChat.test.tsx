@@ -120,6 +120,7 @@ const openRoomMenu = async () => {
 describe('ProjectMatrixChat', () => {
   beforeEach(() => {
     grantRoomCreation([RoleEnum.CUSTOMER_OWNER]);
+    ENV.plugins.WALDUR_CORE.MATRIX_EXTERNAL_LOGIN_METHOD = 'none';
   });
 
   afterEach(() => {
@@ -192,6 +193,7 @@ describe('ProjectMatrixChat', () => {
   });
 
   it('orders the active-room menu from cheapest to most destructive', async () => {
+    ENV.plugins.WALDUR_CORE.MATRIX_EXTERNAL_LOGIN_METHOD = 'password';
     renderTab('active');
     await openRoomMenu();
 
@@ -205,6 +207,26 @@ describe('ProjectMatrixChat', () => {
     expect(
       screen.getByRole('button', { name: 'Export history' }),
     ).toBeInTheDocument();
+  });
+
+  it('leaves the external client out of the menu when users cannot sign in to one', async () => {
+    renderTab('active');
+    await openRoomMenu();
+
+    expect(
+      screen.getAllByRole('menuitem').map((item) => item.textContent),
+    ).toEqual(['Sync members', 'Disable chat']);
+    expect(screen.getAllByRole('separator')).toHaveLength(1);
+  });
+
+  it('offers a project manager no empty menu when users cannot sign in to an external client', () => {
+    renderTab('active', MANAGER);
+
+    // The card renders, so the missing menu is the gate's doing.
+    expect(
+      screen.getByRole('button', { name: 'Open in team chat' }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /All actions/ })).toBeNull();
   });
 
   it('promotes Retry out of the menu while the room is errored', async () => {

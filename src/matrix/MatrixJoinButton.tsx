@@ -17,7 +17,6 @@ import { getMatrixRoomUrl } from './utils';
 interface MatrixCredentialsDialogProps {
   resolve: {
     roomAlias: string;
-    roomUuid?: string;
   };
 }
 
@@ -61,13 +60,27 @@ const CredentialsContent: FC<{
   roomAlias: string;
 }> = ({ credentials, roomAlias }) => {
   const matrixRoomUrl = getMatrixRoomUrl(roomAlias);
+  const sso = credentials.method === 'oidc';
+
+  // An admin may have switched external clients off since this page loaded.
+  if (credentials.method === 'none') {
+    return (
+      <p className="text-muted">
+        {translate('External Matrix clients are not enabled on this server.')}
+      </p>
+    );
+  }
 
   return (
     <div>
       <p className="text-muted">
-        {translate(
-          'Opening this provisions your Matrix account the first time and issues a new access token each time. Treat the details below as a password.',
-        )}
+        {sso
+          ? translate(
+              'This server uses single sign-on. In your Matrix client, enter the homeserver below and sign in with single sign-on.',
+            )
+          : translate(
+              'Sign in to your Matrix client with these details. Treat the password like any other.',
+            )}
       </p>
       {roomAlias && (
         <CredentialRow label={translate('Room alias')} value={roomAlias} />
@@ -76,35 +89,18 @@ const CredentialsContent: FC<{
         label={translate('Homeserver')}
         value={credentials.homeserver_url}
       />
-      <CredentialRow
-        label={translate('Matrix user ID')}
-        value={credentials.matrix_user_id}
-      />
-
-      {credentials.method === 'password' && credentials.password && (
+      {!sso && (
+        <CredentialRow
+          label={translate('Matrix user ID')}
+          value={credentials.matrix_user_id}
+        />
+      )}
+      {credentials.password && (
         <CredentialRow
           label={translate('Password')}
           value={credentials.password}
           masked
         />
-      )}
-
-      {credentials.method === 'token' && credentials.login_token && (
-        <CredentialRow
-          label={translate('Access token')}
-          value={credentials.login_token}
-          masked
-        />
-      )}
-
-      {credentials.method === 'oidc' && credentials.oidc_provider_url && (
-        <div className="mb-3">
-          <p className="text-muted">
-            {translate(
-              'This server uses single sign-on. Open your Matrix client and sign in via SSO.',
-            )}
-          </p>
-        </div>
       )}
 
       {matrixRoomUrl && (
@@ -133,13 +129,11 @@ export const MatrixCredentialsDialog: FC<MatrixCredentialsDialogProps> = ({
   resolve,
 }) => {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['matrixCredentials', resolve.roomUuid],
-    queryFn: () =>
-      matrixCredentialsRetrieve(
-        resolve.roomUuid
-          ? ({ query: { room_uuid: resolve.roomUuid } } as any)
-          : undefined,
-      ).then((r) => r.data),
+    queryKey: ['matrixCredentials'],
+    queryFn: () => matrixCredentialsRetrieve().then((r) => r.data),
+    // The password does not expire, so keep it only while the dialog shows it.
+    gcTime: 0,
+    refetchOnWindowFocus: false,
   });
 
   return (
