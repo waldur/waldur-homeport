@@ -73,7 +73,9 @@ export const ProposalRoleBasedTabs = ({
 
   return (
     <Tabs
-      defaultActiveKey={router.globals.current.name}
+      // Controlled: a tab click the unsaved-changes prompt cancels must not
+      // leave the clicked tab looking active.
+      activeKey={router.globals.current.name}
       className="nav-line-tabs mb-8"
       onSelect={goTo}
     >

@@ -28,6 +28,7 @@ import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getCustomer } from '@/customer/utils';
+import { NavigationBlocker } from '@/form/NavigationBlocker';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -49,7 +50,6 @@ import { isExperimentalUiComponentsVisible } from '../utils';
 import { DeployPageActions } from './DeployPageActions';
 import { DeployPageSidebar } from './DeployPageSidebar';
 import { resolveCustomer, resolveProject } from './initUtils';
-import { NavigationBlocker } from './NavigationBlocker';
 import { useOrderFormData } from './selectors';
 import { isPartitionQosRequired } from './steps/FormQoSSelectionStep';
 import { OfferingConfigurationFormStep } from './types';
@@ -537,7 +537,7 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
 
         return (
           <>
-            <NavigationBlocker />
+            <NavigationBlocker exiting="marketplace-offering-public" />
             <form onSubmit={handleSubmit}>
               <OrderFormComponent
                 selectedOffering={selectedOffering}
