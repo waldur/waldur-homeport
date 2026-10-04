@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { get } from 'lodash-es';
 import { createRef, FC, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Form } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import {
   proposalProposalsAttachDocument,
   proposalProposalsChecklistRetrieve,
@@ -23,6 +23,7 @@ import { useModal } from '@/modal/actions';
 import { useCallFixedDuration } from '@/proposals/callQueries';
 import { usesCallVocabulary, requestListState } from '@/proposals/presentation';
 import { hasRequestedAmount } from '@/proposals/requestedResourceCost';
+import { useProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { useNotify } from '@/store/notify';
 
@@ -288,6 +289,7 @@ export const ProposalSubmissionStep: FC<{
   // of all of them.
   const { data: resourceRows } = useProposalResourceRows(proposal_uuid);
   const fixedDurationDays = useCallFixedDuration(proposal.call_uuid);
+  const { data: canSubmit } = useProposalCanSubmit(proposal);
 
   const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
     mutationFn: async (formValues: any) => {
@@ -361,6 +363,10 @@ export const ProposalSubmissionStep: FC<{
     <Form
       onSubmit={submitForm}
       initialValues={initialValues}
+      // initialValues is rebuilt whenever the proposal or checklist is refetched
+      // (after Save as draft, or on a revisit). Without this the reset drops
+      // unsaved input and empties the lists the steps tick against.
+      keepDirtyOnReinitialize
       render={({ handleSubmit, submitting, form, values }) => {
         // Store form reference for use in effects
         formRef.current = form;
@@ -391,6 +397,14 @@ export const ProposalSubmissionStep: FC<{
 
         return (
           <form onSubmit={handleSubmit}>
+            {/* Filled through change() rather than an input, so registered
+                here: keepDirtyOnReinitialize only keeps registered fields. */}
+            <Field
+              name="resources_init"
+              subscription={{}}
+              render={() => null}
+            />
+            <Field name="users" subscription={{}} render={() => null} />
             <SidebarLayout.Container>
               <SidebarLayout.Body>
                 {formSteps.map((step, i) => (
@@ -427,7 +441,7 @@ export const ProposalSubmissionStep: FC<{
                   editable={proposal.state === 'draft'}
                   submitting={submitting}
                   completedSteps={completedSteps}
-                  canSubmit={proposal.can_submit}
+                  canSubmit={canSubmit}
                 />
               </SidebarLayout.Sidebar>
             </SidebarLayout.Container>

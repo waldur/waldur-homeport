@@ -13,6 +13,7 @@ import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { Call } from '@/proposals/types';
+import { invalidateProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
 import { isReviewBearingStep } from '@/proposals/workflow/constants';
 import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
@@ -98,6 +99,9 @@ export const useSubmitProposalResourcesFromTemplates = (
         queryClient.invalidateQueries({
           queryKey: ['proposalResources', proposal.uuid],
         });
+        // Here rather than where the list reloads: that also fires on mount,
+        // refetching the whole proposal for a verdict the page already has.
+        invalidateProposalCanSubmit(queryClient, proposal.uuid);
       } catch (error) {
         if (showMessages)
           showErrorResponse(error, translate('Something went wrong'));

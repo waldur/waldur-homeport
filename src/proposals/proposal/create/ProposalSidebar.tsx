@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { ProposalCanSubmitResponse } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
 
@@ -25,7 +26,7 @@ interface CompletionPageSidebarProps extends SidebarProps {
    * a missing purchase order — which otherwise surface as a rejected request
    * after the applicant has already pressed the button.
    */
-  canSubmit?: { can_submit: boolean; error: string | null };
+  canSubmit?: ProposalCanSubmitResponse;
 }
 
 export const ProposalSidebar = (props: CompletionPageSidebarProps) => {

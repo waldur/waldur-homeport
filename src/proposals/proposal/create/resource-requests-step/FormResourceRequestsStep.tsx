@@ -12,6 +12,7 @@ import { AccordionCard } from 'waldur-ui';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
 import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
+import { invalidateProposalCanSubmit } from '@/proposals/useProposalCanSubmit';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -165,14 +166,16 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   }, []);
   const queryClient = useQueryClient();
   // Every add, edit and delete comes through here — the one place that knows
-  // the summary's list has moved on. Invalidating from the table's onFetch
-  // instead fired on the first load and on every page change, so each visit
-  // paged through the whole list twice before showing a total.
+  // the summary's list, and with it the backend's submit verdict, has moved
+  // on. Invalidating from the table's onFetch instead fired on the first load
+  // and on every page change, so each visit paged through the whole list
+  // twice before showing a total.
   const refetchTable = useCallback(() => {
     reloadTableRef.current?.();
     queryClient.invalidateQueries({
       queryKey: ['ProposalResourcesSummary', proposal.uuid],
     });
+    invalidateProposalCanSubmit(queryClient, proposal.uuid);
   }, [queryClient, proposal.uuid]);
 
   // Only the templates branch and the Add button read this; the table below
