@@ -2651,6 +2651,11 @@
     }
   },
   "Adjust limits for a resource and redistribute freed capacity to other resources": {},
+  "Adjust names": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "Adjust parameters to see projected impact.": {
     "context": {
       "feature_area": "analytics"
@@ -4491,6 +4496,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "access"
+    }
+  },
+  "Apply preset": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "Apply table filters": {
@@ -9033,7 +9043,7 @@
   "Calls for proposals": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "marketplace"
+      "feature_area": "roles"
     }
   },
   "Camera": {
@@ -10097,6 +10107,11 @@
   "Choose what this call asks applicants for. Name and project duration are always required. A field cannot be made required once the call has proposals.": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "Choose which roles to rename, then select a preset to fill in their names. You can adjust individual names in the next step.": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "Chosen at order time": {
@@ -13946,6 +13961,21 @@
       "feature_area": "credits"
     }
   },
+  "Current: no name": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
+  "Current: {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "roles"
+    }
+  },
   "Currently attached document": {
     "context": {
       "feature_area": "proposals"
@@ -14053,6 +14083,12 @@
   "Custom metrics this offering reports for the projects that use it.": {
     "context": {
       "feature_area": "metrics"
+    }
+  },
+  "Custom names": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "Custom project details": {
@@ -21828,6 +21864,16 @@
       "feature_area": "cookies"
     }
   },
+  "For deployments that run calls for proposals.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
+  "For marketplace-only mode, where applicants request access to an offering instead of submitting a proposal to a call.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "For public invitations, only project-level roles can be selected.": {
     "context": {
       "feature_area": "actions"
@@ -26339,6 +26385,11 @@
       "feature_area": "openstack-backup"
     }
   },
+  "Keep the current names and edit them yourself.": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "Keep this key secret. You can reveal it again anytime, or rotate it if it is ever exposed.": {
     "context": {
       "feature_area": "api-keys"
@@ -29100,6 +29151,12 @@
     }
   },
   "Marketplace offerings and resources": {},
+  "Marketplace only": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
+    }
+  },
   "Marketplace resource pull has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -31699,6 +31756,11 @@
       "feature_area": "resource-pending"
     }
   },
+  "New name": {
+    "context": {
+      "feature_area": "roles"
+    }
+  },
   "New network": {
     "context": {
       "feature_area": "create"
@@ -33118,6 +33180,11 @@
   "No pools": {
     "context": {
       "feature_area": "openstack-lbaas"
+    }
+  },
+  "No presets are available for this scope. You can edit the names yourself in the next step.": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "No problems detected": {
@@ -35597,6 +35664,11 @@
   "Only the credentials of the selected method are kept; the others are cleared on update.": {
     "context": {
       "feature_area": "service-desk"
+    }
+  },
+  "Only the default-language name is changed; edit other languages with \"Edit name translations\".": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "Only users matching the following criteria can accept this invitation. Users must satisfy at least one criterion from each configured restriction type.": {
@@ -39960,7 +40032,7 @@
   },
   "Preset": {
     "context": {
-      "feature_area": "science-domains"
+      "feature_area": "roles"
     }
   },
   "Preset questions imported successfully. {count} questions created.": {
@@ -39972,6 +40044,16 @@
         }
       },
       "feature_area": "onboarding-setup"
+    }
+  },
+  "Preset: {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "roles"
     }
   },
   "Preview": {
@@ -47477,6 +47559,12 @@
       "feature_area": "roles"
     }
   },
+  "Role names have been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "roles"
+    }
+  },
   "Role removed from profile.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -48588,6 +48676,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "administration"
+    }
+  },
+  "Scope and preset": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Scope changed from {old_scope} to {new_scope}.": {
@@ -52263,6 +52356,12 @@
   "Some required information is missing or invalid.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Some role names were not updated.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "roles"
     }
   },
   "Some selected projects cannot be deleted due to insufficient permissions.": {
@@ -61088,7 +61187,7 @@
   },
   "Unable to load roles.": {
     "context": {
-      "feature_area": "team"
+      "feature_area": "roles"
     }
   },
   "Unable to load science domain preset.": {
@@ -61852,6 +61951,16 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "passkeys"
+    }
+  },
+  "Unable to rename: {roles}.": {
+    "context": {
+      "variables": {
+        "roles": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "roles"
     }
   },
   "Unable to render canned response.": {
@@ -63598,6 +63707,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "list"
+    }
+  },
+  "Unchanged": {
+    "context": {
+      "feature_area": "roles"
     }
   },
   "Unchanged: it stays on the archived source.": {
