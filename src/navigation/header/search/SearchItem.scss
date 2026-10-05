@@ -3,21 +3,25 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin: 0;
     padding: 0;
 
-    width: 0;
+    // The star holds its space at all times and only fades in and out.
+    // Animating its width instead made the row wider while hovered, and a
+    // popover that sizes itself to its contents — the breadcrumb switcher —
+    // grew and snapped back with it. pointer-events keeps the invisible
+    // button from catching clicks without taking it out of the tab order,
+    // which is what reveals it on focus below.
     opacity: 0;
-    transition: all 0.3s;
-    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s;
   }
 
-  // Zero width still leaves the button in the tab order, so focus on the row
+  // Zero opacity still leaves the button in the tab order, so focus on the row
   // or on the star itself reveals it the way hovering the row does.
   &:hover .btn-fav,
   &:focus-within .btn-fav,
   .btn-fav.show {
-    width: auto;
     opacity: 1;
+    pointer-events: auto;
   }
 }

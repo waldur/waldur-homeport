@@ -59,7 +59,14 @@ export const SearchItem = (props: SearchItemProps) => {
           <span className="fs-7 fw-semibold text-muted">{props.subtitle}</span>
         )}
       </div>
-      <div className="ms-auto d-flex">
+      {/*
+        ps-4 keeps the trailing controls the same distance from the title that
+        the avatar keeps on the other side, and gap-2 separates them from each
+        other. It belongs here rather than on the star: the star now always
+        holds its place, but the impersonate action in the users tab sat flush
+        against the name too.
+      */}
+      <div className="ms-auto d-flex gap-2 ps-4">
         {props.badge && <div>{props.badge}</div>}
         {props.actions}
         {props.addFavoritePage && (
