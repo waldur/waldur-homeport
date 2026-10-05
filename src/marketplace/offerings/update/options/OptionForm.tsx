@@ -5,6 +5,7 @@ import { required } from '@/core/validators';
 import { BooleanGroup, SelectGroup, StringGroup } from '@/form';
 import { FieldError } from '@/form/FieldError';
 import { translate } from '@/i18n';
+import { isUniqueOptionFieldType } from '@/marketplace/common/optionErrors';
 
 import { InternalNamePrefill } from '../../InternalNamePrefill';
 
@@ -141,6 +142,21 @@ const DependentsError = () => {
   return errors?.dependents ? <FieldError error={errors.dependents} /> : null;
 };
 
+// Like Required, it applies to several types, so it sits on the first step
+// rather than on each type's settings step.
+const UniqueField = () => {
+  const { values } = useFormState({ subscription: { values: true } });
+  return isUniqueOptionFieldType(values.type?.value) ? (
+    <BooleanGroup
+      name="unique"
+      label={translate('Unique across resources')}
+      description={translate(
+        'Reject a value that another non-terminated resource of this offering already uses.',
+      )}
+    />
+  ) : null;
+};
+
 /**
  * First step: the option itself. Everything the dialog used to show up front
  * stays here — including the visibility rule and the Required switch, which
@@ -169,6 +185,7 @@ export const OptionBasicsForm = ({
       optionKey={optionKey}
     />
     {resourceType === 'options' ? <RequiredGroup /> : null}
+    <UniqueField />
     <DependentsError />
   </>
 );

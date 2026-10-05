@@ -7,8 +7,10 @@ import {
 } from 'waldur-js-client';
 import { Offering } from 'waldur-js-client';
 
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { translate } from '@/i18n';
 import { getDerivedLimitInputs } from '@/marketplace/common/derivedLimits';
+import { splitOptionErrors } from '@/marketplace/common/optionErrors';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { ActionDialogFinal } from '@/modal/ActionDialogFinal';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -103,8 +105,20 @@ export const UpdateResourceOptionDialog: FC<UpdateResourceOptionDialogProps> = (
       onSubmit={async (values) => {
         try {
           await updateMutation.mutateAsync(values);
-        } catch {
-          // Handled by useManagedMutation
+        } catch (error) {
+          // useManagedMutation shows the toast; also put an error about this
+          // option (such as a value already used by another resource) next
+          // to the field. Mastermind nests it under the `options` field.
+          const body = getErrorBody(error);
+          const { attributes } = splitOptionErrors(
+            body?.options && typeof body.options === 'object'
+              ? body.options
+              : body,
+            [name],
+          );
+          if (Object.keys(attributes).length > 0) {
+            return { attributes };
+          }
         }
       }}
       initialValues={initialValues}

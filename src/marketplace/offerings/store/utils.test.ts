@@ -66,6 +66,34 @@ describe('formatOption visible_if', () => {
   });
 });
 
+describe('formatOption unique', () => {
+  const base = {
+    name: 'bucket',
+    label: 'Bucket',
+    type: { value: 'string', label: 'String' },
+  } as any;
+
+  it('keeps the flag on a supported type', () => {
+    expect(formatOption({ ...base, unique: true }).unique).toBe(true);
+  });
+
+  it('leaves out an unticked flag', () => {
+    expect(formatOption({ ...base, unique: false })).not.toHaveProperty(
+      'unique',
+    );
+  });
+
+  it('drops a flag left behind by a type change', () => {
+    expect(
+      formatOption({
+        ...base,
+        type: { value: 'boolean', label: 'Boolean' },
+        unique: true,
+      }),
+    ).not.toHaveProperty('unique');
+  });
+});
+
 describe('formatOption pattern', () => {
   const base = {
     name: 'slug',

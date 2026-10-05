@@ -99,3 +99,31 @@ describe('ApproveByProviderDialog visible_if', () => {
     );
   });
 });
+
+describe('ApproveByProviderDialog option errors', () => {
+  it('shows an error about an option next to its field', async () => {
+    const user = userEvent.setup();
+    renderDialog({
+      old_options: { backups: true, account: 'old' },
+      new_options: { backups: true, account: 'shared' },
+    });
+    // The SDK spreads the DRF body onto the thrown error; mastermind nests
+    // an option error under `attributes`.
+    vi.mocked(marketplaceOrdersApproveByProvider).mockRejectedValue({
+      attributes: {
+        account: [
+          'This value is already used by another resource of this offering.',
+        ],
+      },
+      status: 400,
+    });
+
+    await user.click(await screen.findByRole('button', { name: 'Approve' }));
+
+    expect(
+      await screen.findByText(
+        'This value is already used by another resource of this offering.',
+      ),
+    ).toBeInTheDocument();
+  });
+});

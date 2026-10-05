@@ -112,6 +112,41 @@ describe('UpdateResourceOptionDialog', () => {
     });
   });
 
+  it('shows an error about the option next to its field', async () => {
+    const user = userEvent.setup();
+    const resolve = {
+      resource: { uuid: 'res-1', options: { namespace: 'team-a' } } as any,
+      offering: { uuid: 'off-1' } as any,
+      option: {
+        name: 'namespace',
+        label: 'Namespace',
+        type: 'string',
+        unique: true,
+      } as any,
+      refetch: vi.fn(),
+    };
+
+    // The SDK spreads the DRF body onto the thrown error.
+    vi.mocked(marketplaceResourcesUpdateOptions).mockRejectedValue({
+      options: {
+        namespace: [
+          'This value is already used by another resource of this offering.',
+        ],
+      },
+      status: 400,
+    });
+
+    renderDialog({ resolve });
+
+    await user.click(screen.getByRole('button', { name: 'Update' }));
+
+    expect(
+      await screen.findByText(
+        'This value is already used by another resource of this offering.',
+      ),
+    ).toBeInTheDocument();
+  });
+
   it('renders fallback message when option name is not provided', () => {
     const resolve = {
       resource: { uuid: 'res-1', options: {} } as any,

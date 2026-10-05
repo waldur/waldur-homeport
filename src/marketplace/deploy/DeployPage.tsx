@@ -30,6 +30,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getCustomer } from '@/customer/utils';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { translate } from '@/i18n';
+import { splitOptionErrors } from '@/marketplace/common/optionErrors';
 import { useModal } from '@/modal/actions';
 import { INSTANCE_TYPE } from '@/openstack/constants';
 import { calculateSystemVolumeSize } from '@/openstack/openstack-instance/utils';
@@ -490,16 +491,21 @@ export const DeployPage: FC<DeployPageProps> = (props) => {
         // top -- there is no `data`. Reading `response.data` therefore always
         // came up empty, so no field error ever reached the form and the
         // sidebar and submit button had nothing to show.
-        const _errorData = getErrorBody(error);
-        if (_errorData && typeof _errorData === 'object') {
-          for (const key of Object.keys(_errorData)) {
-            if (key === 'non_field_errors') {
-              Object.assign(errorData, { plan_entries: _errorData[key] });
-              // Scroll to plan step
-              scrollToSectionById('step-plan');
-            } else {
-              Object.assign(errorData, { [key]: _errorData[key] });
-            }
+        const { attributes: optionErrors, rest: _errorData } =
+          splitOptionErrors(getErrorBody(error), [
+            ...Object.keys(props.offering?.options?.options || {}),
+            ...Object.keys(props.offering?.resource_options?.options || {}),
+          ]);
+        if (Object.keys(optionErrors).length > 0) {
+          Object.assign(errorData, { attributes: optionErrors });
+        }
+        for (const key of Object.keys(_errorData)) {
+          if (key === 'non_field_errors') {
+            Object.assign(errorData, { plan_entries: _errorData[key] });
+            // Scroll to plan step
+            scrollToSectionById('step-plan');
+          } else {
+            Object.assign(errorData, { [key]: _errorData[key] });
           }
         }
         return {
