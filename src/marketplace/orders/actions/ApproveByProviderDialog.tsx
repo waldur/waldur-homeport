@@ -9,11 +9,13 @@ import {
 } from 'waldur-js-client';
 
 import { UI_STALE_TIME } from '@/core/constants';
+import { getErrorBody } from '@/core/ErrorMessageFormatter';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { FormFieldError } from '@/form/FormFieldError';
 import { translate } from '@/i18n';
+import { splitOptionErrors } from '@/marketplace/common/optionErrors';
 import {
   buildOptionValidator,
   getComponentAndParams,
@@ -212,8 +214,26 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
     ],
   });
 
-  const handleSubmit = (formData: { attributes?: Record<string, any> }) => {
-    approveOrderMutation.mutate(formData);
+  const handleSubmit = async (formData: {
+    attributes?: Record<string, any>;
+  }) => {
+    try {
+      await approveOrderMutation.mutateAsync(formData);
+    } catch (error) {
+      // useManagedMutation shows the toast; also put an error about an
+      // option (such as a value already used by another resource) next to
+      // its field. Mastermind nests it under the `attributes` field.
+      const body = getErrorBody(error);
+      const { attributes } = splitOptionErrors(
+        body?.attributes && typeof body.attributes === 'object'
+          ? body.attributes
+          : undefined,
+        Object.keys(resourceOptions?.options || {}),
+      );
+      if (Object.keys(attributes).length > 0) {
+        return { attributes };
+      }
+    }
   };
 
   const hasUserSubmittedOptions = Object.keys(userSubmittedOptions).length > 0;

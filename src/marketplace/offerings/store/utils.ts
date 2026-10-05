@@ -5,6 +5,7 @@ import {
   ProviderPlanDetailsRequest,
 } from 'waldur-js-client';
 
+import { isUniqueOptionFieldType } from '@/marketplace/common/optionErrors';
 import { isPatternFieldType } from '@/marketplace/common/optionPattern';
 import { getFormLimitSerializer } from '@/marketplace/common/registry';
 
@@ -34,6 +35,7 @@ export const formatOption = (option: OptionFormData) => {
     component_sum_config,
     default_configs,
     visible_if,
+    unique,
     pattern,
     pattern_error,
     ...rest
@@ -106,6 +108,12 @@ export const formatOption = (option: OptionFormData) => {
   // A rule without a referenced option is an unfinished one; drop it.
   if (visible_if?.field && visible_if.values?.length) {
     item.visible_if = { field: visible_if.field, values: visible_if.values };
+  }
+
+  // Mastermind rejects the flag on other types, so one left behind by a type
+  // change must not be sent.
+  if (unique && isUniqueOptionFieldType(item.type)) {
+    item.unique = true;
   }
 
   // Mastermind rejects a pattern on other types, and pattern_error without a

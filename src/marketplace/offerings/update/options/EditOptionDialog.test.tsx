@@ -81,6 +81,45 @@ describe('EditOptionDialog', () => {
     expect(save).toBeDisabled();
   });
 
+  it('offers the unique flag and loads its saved value', () => {
+    renderWithProviders(
+      <EditOptionDialog
+        resolve={{
+          offering,
+          type: 'options',
+          refetch: vi.fn(),
+          option: {
+            ...offering.options.options.tier,
+            unique: true,
+            name: 'tier',
+          },
+        }}
+      />,
+    );
+    expect(
+      screen.getByRole('checkbox', { name: /Unique across resources/ }),
+    ).toBeChecked();
+  });
+
+  it('offers the unique flag on the first step of a text option', () => {
+    renderWithProviders(
+      <EditOptionDialog
+        resolve={{
+          offering,
+          type: 'options',
+          refetch: vi.fn(),
+          option: { type: 'text', label: 'Notes', name: 'notes' },
+        }}
+      />,
+    );
+    expect(
+      screen.getByRole('group', { name: 'Form progress' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('checkbox', { name: /Unique across resources/ }),
+    ).not.toBeChecked();
+  });
+
   it('puts the pattern of a text option on its settings step', async () => {
     renderWithProviders(
       <EditOptionDialog

@@ -39,6 +39,7 @@ export interface OptionFormData {
     field?: string;
     values?: Array<boolean | string>;
   };
+  unique?: boolean;
   pattern?: string;
   pattern_error?: string;
 }

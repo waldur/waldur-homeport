@@ -43717,6 +43717,11 @@
       "action_type": "create"
     }
   },
+  "Reject a value that another non-terminated resource of this offering already uses.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Reject all": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -63856,6 +63861,11 @@
   "Unique ID of a resource within management plugin": {
     "context": {
       "feature_area": "summary"
+    }
+  },
+  "Unique across resources": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Unique identifier for the backend system associated with this offering.": {
