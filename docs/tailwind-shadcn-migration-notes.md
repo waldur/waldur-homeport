@@ -1,6 +1,6 @@
 # Tailwind & shadcn UI Architecture
 
-Architectural reference and design system manual for Tailwind CSS v4, shadcn UI, and Radix UI in Waldur Homeport. Documents runtime framework coexistence, design tokens, component architecture, styling conventions, the button migration and its aftermath, and linting guardrails.
+Current architecture and implementation guidance for Tailwind CSS v4, shadcn UI, and Radix UI in Waldur Homeport. Covers framework coexistence, design tokens, component standards, styling conventions, linting guardrails, and testing.
 
 > [!NOTE]
 > **Status**: every button in the app is rendered by `BaseButton` (or by `buttonVariants()` on an element that cannot be a `BaseButton`), and the legacy Bootstrap/Metronic `.btn` CSS has been deleted. Every menu and menu-like popover is built from `waldur-ui`'s `Menu` / `MenuPopover`. The remaining Bootstrap-backed UI is layout, forms, tables, modals and the shells listed under [Component Systems Overview](#component-systems-overview). New UI is built on `waldur-ui`.
@@ -31,17 +31,12 @@ Architectural reference and design system manual for Tailwind CSS v4, shadcn UI,
    - [Dropdown & Menu System Map](#dropdown-menu-system-map)
    - [ActionsMenu & ActionItem](#actionsmenu-actionitem)
    - [Nav menus](#nav-menus)
-3. [Legacy Button CSS Retirement](#legacy-button-css-retirement)
-4. [Legacy Menu CSS Retirement](#legacy-menu-css-retirement)
-5. [Legacy Dropdown CSS Retirement](#legacy-dropdown-css-retirement)
-6. [Legacy Pagination CSS Retirement](#legacy-pagination-css-retirement)
-7. [Linting & Guardrails](#linting-guardrails)
+3. [Linting & Guardrails](#linting-guardrails)
    - [Restricted Imports](#restricted-imports)
    - [Custom ESLint Rules Matrix](#custom-eslint-rules-matrix)
-8. [Storybook & Testing Toolchain](#storybook-testing-toolchain)
+4. [Storybook & Testing Toolchain](#storybook-testing-toolchain)
    - [Storybook Environment & Vitest](#storybook-environment-vitest)
    - [Visual E2E Specs](#visual-e2e-specs)
-   - [Retired Visual Parity Suite](#retired-visual-parity-suite)
    - [Testing Gotchas & Pitfalls](#testing-gotchas-pitfalls)
 
 ---
@@ -445,99 +440,6 @@ The header user menu, the language submenu, page-tab submenus, the footer menus 
 
 ---
 
-## Legacy Button CSS Retirement
-
-Once no element rendered a literal `.btn` class, the Bootstrap/Metronic button CSS was deleted.
-
-### Removed
-
-- `@import 'bootstrap/scss/buttons'` and Metronic's `core/components/buttons/_theme.scss`.
-- The `.btn` portion of `core/components/buttons/_base.scss`, the button-variant mixins (`mixins/_buttons.scss`), the `$button-variants` map and `$btn-extended-variants`.
-- The `.btn` block of `custom/_buttons.scss`, plus every compound `.btn …` rule in `custom/_base`, `_content`, `_modal`, `_table`, core `_nav` and `_print-mode`, `PageBarTabs.scss`, `PublicOfferingPricing.scss` and the glass/neumorphism layout sheets.
-- Earlier: `.btn-group` (with `@import 'bootstrap/scss/button-group'`), replaced by `SegmentedControl`, and `ToolbarButton`.
-
-**How it was verified**: the compiled stylesheet (light and dark) was diffed before and after. About 9,000 rules disappeared, every one with `.btn` in its selector; nothing else changed, and nothing new appeared. Deleting CSS this way is safe only because the rules were _compound_ with `.btn` — a selector such as `.btn.btn-icon.btn-sm` cannot match an element without the literal class. Repeat the diff (fetch the compiled sheet from the dev server with `?direct`, then compare rules with `postcss`) before deleting more.
-
-### Kept
-
-These do not depend on `.btn`:
-
-| Class                                             | Why it stays                                                                                                                                                                                                     |
-| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.btn-no-focus`                                   | Standalone helper in `core/components/buttons/_base.scss` that callers pass as a plain `className` to a `BaseButton`. Removes the box-shadow glow only; `BaseButton`'s focus ring is an outline, so it survives. |
-| `.btn-nav-item`                                   | Header icon buttons (`custom/_nav.scss`)                                                                                                                                                                         |
-| `.btn-close`                                      | Bootstrap's modal close control (`bootstrap/scss/close`)                                                                                                                                                         |
-| `.btn-text-align`                                 | Text alignment helper used on a `div`                                                                                                                                                                            |
-| `$btn-*` SCSS variables and `_tokens.scss` values | Still read by AI-assistant and other component styles                                                                                                                                                            |
-
-**Guardrail**: `no-bootstrap-button-markup` is an error with no allowlist, so hand-written `btn` markup cannot come back unnoticed (see [Custom ESLint Rules Matrix](#custom-eslint-rules-matrix)).
-
-**Known consequence**: the deleted rules also carried some sizes that had already stopped applying to `BaseButton`s (44px modal-footer and toolbar buttons, a 150px footer minimum width). Deleting them changed nothing on screen, but it means a button that should be large must say so with `size="lg"`.
-
----
-
-## Legacy Menu CSS Retirement
-
-Once no component relied on a Metronic `.menu`/`.menu-*` class for its styling, the menu CSS was deleted. A few of the class names stayed in the markup, unstyled, until waldur-integration-testing stopped locating elements by them; see [E2E Locators](e2e-locators.md).
-
-### Removed
-
-- `core/components/_menu.scss`, `core/components/menu/_base.scss` and `_theme.scss`, and `core/components/mixins/_menu.scss`.
-- `custom/_menu.scss` and `custom/brand/_menu.scss`.
-- The `$menu` map in `core/components/_variables.scss`.
-- The `.header-menu` rules in `layout/_header.scss` (they only applied inside `.header`; the page tabs render in `.content`).
-- The table filter-menu rules in `custom/_table.scss`. These had already stopped applying: the filter panels are portaled outside `.card-table`.
-
-**How it was verified**: the compiled stylesheet (light and dark) was diffed with `postcss` before and after, as for the buttons. 1,018 rules disappeared from each, every one with `menu` in its selector or a `menu-sub-dropdown` keyframe; nothing else changed and nothing new appeared. Before the components moved off the classes, the originals' computed styles were measured in the running app and the replacements checked against them.
-
-There is no ESLint guardrail for `menu-*` classes yet; now that no component renders them, one could go in without exceptions.
-
----
-
-## Legacy Dropdown CSS Retirement
-
-Once no component relied on a Bootstrap `.dropdown-*` class for its styling, the legacy dropdown CSS was deleted. `.dropdown-menu`, `.dropdown-item` and `.dropdown-toggle` stayed in the markup, unstyled, until waldur-integration-testing stopped locating elements by them; see [E2E Locators](e2e-locators.md).
-
-### Removed
-
-- `@import 'bootstrap/scss/dropdown'`.
-- `custom/_dropdown-base.scss` and `custom/_dropdown.scss` (the Radix bridges). Their one live rule, the toggle caret rotation, moved to `custom/_base.scss` keyed off `[data-actions-toggle]`.
-- The `.dropdown-toggle` rules in `custom/_content.scss` (`.disabled-view`, now on `[data-actions-toggle]`) and `custom/_table.scss`.
-- The `$dropdown-*` variables nothing read any more. `$dropdown-box-shadow` stays: `core/components/_tables.scss` uses it.
-
-**How it was verified**: the compiled light and dark stylesheets were diffed with `postcss` as for the menus. 71 rules disappeared from each, every one with `dropdown` in its selector, and exactly two appeared: the caret rotation and the `.disabled-view` rule on `[data-actions-toggle]`. Removing the unused variables changed nothing. Before the switch, the old and new markup for every row kind were rendered side by side in the running app and their computed styles compared.
-
-**Known consequence**: a page stylesheet that targeted `.dropdown-item` no longer matches anything. `ModalActionsDialog.scss` did; it now targets `[role='menuitem']` and `[data-actions-menu-text]`.
-
----
-
-## Legacy Pagination CSS Retirement
-
-The table pager moved from `src/table/` (react-bootstrap `Pagination` plus hand-written `page-item`/`page-link` markup) to `waldur-ui`'s `TablePagination`, so micro-apps get the same pager. Its colours are the `--pagination-*` tokens in `surfaceColors.css`. Each token maps to the ramp step that the old compiled light and dark stylesheets used.
-
-### Removed
-
-- `@import 'bootstrap/scss/pagination'` and Metronic's `core/components/_pagination.scss` (the `.pagination`/`.page-item`/`.page-link` base, plus `pagination-circle`, `pagination-outline`, `-sm`/`-lg` and icon variants nothing rendered).
-- The `$pagination-*` variables in `core/components/_variables.scss` and `_variables.custom.scss`, and `$table-pagination-padding-y`.
-- The `.card.card-table .table-pagination` block in `custom/_table.scss`: its colours, sizes, border and padding are now the component's own.
-
-### Kept
-
-- The `table-pagination` class on the pager's root, unstyled by the pager itself, so the padding rules for full-width, grid and nested tables in `custom/_table.scss` keep applying. The nested-table `padding-top` is now `!important`, because the component sets its padding with a Tailwind utility, which outranks the bootstrap layer.
-- The helpdesk list's container query, which now switches between `[data-pagination-layout='desktop']` and `[data-pagination-layout='mobile']` instead of the old `.d-md-block`/`.d-md-none` wrappers.
-
-**How it was verified**: the compiled light and dark stylesheets were diffed with `postcss` as for the dropdowns. 89 rules disappeared from each, every one with `pagination`, `page-item` or `page-link` in its selector, and exactly three changed: the `!important` padding and the two helpdesk selectors. Before the switch, the old and new pager were rendered in Storybook in both themes and their computed styles and element positions compared.
-
-**Known consequences**:
-
-- Outside a `.card-table` (the two form-field lists that page their rows), the old pager fell back to Bootstrap's defaults: a brand-coloured hover and a white-on-brand current page, which had poor contrast in dark mode. Those lists now use the same neutral look as every table, without the top border (`bordered={false}`).
-- Page buttons use `min-width: 40px` instead of a fixed 40px width, so 4-digit page numbers no longer overflow the button.
-- Prev/next lose their `$body-bg` background. It was the card colour anyway, so nothing visible changes.
-- Keyboard focus uses the app's shared focus ring (`focusRing.css`) rather than the old brand-200 box-shadow, and only for keyboard focus (`:focus-visible`), not on click.
-- The label and item-count text are 12px instead of 12.35px (`0.95rem`), because the component is sized in pixels so that it looks the same at a micro-app's 16px root.
-
----
-
 ## Linting & Guardrails
 
 ### Restricted Imports
@@ -643,14 +545,6 @@ The former `enforce-button-variants` rule was deleted: the variant list lives in
 - **`stat-card-parity.spec.ts`**, **`charts.spec.ts`**, **`wizards.spec.ts`**: parity and screenshot checks for other components; `visualParityHarness.ts` holds the shared pixel-diff and chromaticity helpers.
 
 Run one spec with `yarn playwright test focus-ring --project=visual --workers=1` (a filter, not a path; passing a path is read as a project name). Playwright executes specs in Node, so a spec may import `packages/ui/src/BaseButton` directly but not the `waldur-ui` barrel, whose modules touch `document` at import time.
-
----
-
-### Retired Visual Parity Suite
-
-`e2e-visual/base-button-parity.spec.ts` compared the legacy Bootstrap `BaseButton` against the new Tailwind/shadcn one side-by-side via Playwright screenshots, pixel-diffing 288 variant/size/theme/state combinations, so the new component could be proven a drop-in replacement before any call site used it. Every call site has migrated and the legacy component is deleted, so the spec, its dedicated CI job and its Storybook story (`BaseButtonParity.stories.tsx`) were removed together.
-
-The techniques it validated remain a useful reference for the next component swap: dimension parity via `boundingBox()`, a pixelmatch ratio, and dominant-colour chromaticity for low-pixel-ratio text-only buttons (implemented in `visualParityHarness.ts`, still used by `stat-card-parity.spec.ts`).
 
 ---
 
