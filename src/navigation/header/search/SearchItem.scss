@@ -1,4 +1,21 @@
 .search-result-item {
+  position: relative;
+
+  // The link and the trailing controls are siblings, so the link has to be
+  // stretched back over the row to keep the whole row clickable. The
+  // controls are lifted above that overlay so they stay clickable in turn.
+  &__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &__controls {
+    position: relative;
+    z-index: 2;
+  }
+
   .btn-fav {
     background-color: transparent;
     border: none;

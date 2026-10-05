@@ -27,6 +27,17 @@ export interface SearchItemProps {
   removeFavorite?: ReturnType<typeof useFavoritePages>['removeFavorite'];
 }
 
+/**
+ * The row is a container with two independent siblings: the link and the
+ * trailing controls (favourite star, per-row actions). The controls used to
+ * sit inside the link, which is invalid HTML — axe reports it as
+ * `nested-interactive`, the row's accessible name swallowed the button's
+ * label, and a click on the star only avoided navigating because every
+ * handler remembered to call `preventDefault`/`stopPropagation`.
+ * The link keeps covering the whole row through the stretching
+ * pseudo-element in SearchItem.scss, so clicking anywhere outside the
+ * controls still follows it.
+ */
 export const SearchItem = (props: SearchItemProps) => {
   const isFav = props.isFavorite
     ? props.isFavorite(props.to, props.params)
@@ -36,30 +47,34 @@ export const SearchItem = (props: SearchItemProps) => {
     useOrganizationAndProjectAutocompletesForResources();
 
   return (
-    <Link
-      state={props.to}
-      params={props.params}
-      className="search-result-item d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
-      onClick={(e) => {
-        if (props.onClick) {
-          props.onClick(props);
-        } else e.stopPropagation();
-        syncResourceFilters(getResourceFilterFromSearchItem(props));
-      }}
-    >
-      <ItemImage
-        item={{ image: props.image, name: props.title }}
-        className="me-4"
-        circle
-      />
+    <div className="search-result-item d-flex align-items-center py-2 px-5 bg-hover-primary-50">
+      <Link
+        state={props.to}
+        params={props.params}
+        className="search-result-item__link d-flex text-dark text-hover-primary align-items-center"
+        onClick={(e) => {
+          if (props.onClick) {
+            props.onClick(props);
+          } else e.stopPropagation();
+          syncResourceFilters(getResourceFilterFromSearchItem(props));
+        }}
+      >
+        <ItemImage
+          item={{ image: props.image, name: props.title }}
+          className="me-4"
+          circle
+        />
 
-      <div className="d-flex flex-column justify-content-start fw-semibold">
-        <span className="fs-6 fw-semibold">{props.title}</span>
-        {Boolean(props.subtitle) && (
-          <span className="fs-7 fw-semibold text-muted">{props.subtitle}</span>
-        )}
-      </div>
-      <div className="ms-auto d-flex">
+        <div className="d-flex flex-column justify-content-start fw-semibold">
+          <span className="fs-6 fw-semibold">{props.title}</span>
+          {Boolean(props.subtitle) && (
+            <span className="fs-7 fw-semibold text-muted">
+              {props.subtitle}
+            </span>
+          )}
+        </div>
+      </Link>
+      <div className="search-result-item__controls ms-auto d-flex">
         {props.badge && <div>{props.badge}</div>}
         {props.actions}
         {props.addFavoritePage && (
@@ -94,6 +109,6 @@ export const SearchItem = (props: SearchItemProps) => {
           </button>
         )}
       </div>
-    </Link>
+    </div>
   );
 };
