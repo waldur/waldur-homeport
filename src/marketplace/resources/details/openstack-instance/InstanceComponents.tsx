@@ -6,6 +6,7 @@ import { OpenStackInstance } from 'waldur-js-client';
 import { translate } from '@/i18n';
 
 import { QuotaCell } from '../QuotaCell';
+import { getStorageTitle } from '../storageTitle';
 
 const ResourceComponentItem = ({ title, usage, units, isSmallScreen }) => {
   return (
@@ -24,7 +25,9 @@ export const InstanceComponents = ({
   const volumeTypes = useMemo<Record<string, number>>(() => {
     const result = {};
     volumes.forEach((volume) => {
-      result[volume.type_name] = (result[volume.type_name] || 0) + volume.size;
+      // Untyped volumes carry no type_name; group them under one key.
+      const type = volume.type_name || '';
+      result[type] = (result[type] || 0) + volume.size;
     });
     return result;
   }, [volumes]);
@@ -51,7 +54,7 @@ export const InstanceComponents = ({
         .map(([volumeType, usage]) => (
           <ResourceComponentItem
             key={volumeType}
-            title={translate('{type} storage', { type: volumeType })}
+            title={getStorageTitle(volumeType)}
             usage={(usage / 1024).toFixed()}
             units="GB"
             isSmallScreen={isSmallScreen}

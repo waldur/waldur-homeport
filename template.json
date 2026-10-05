@@ -75401,8 +75401,7 @@
         "type": {
           "type": "unknown"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "{usage} / {limit} ({percent}%)": {
