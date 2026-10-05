@@ -51149,6 +51149,11 @@
       "feature_area": "openstack-tenant"
     }
   },
+  "Set goal": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "Set limits": {
     "context": {
       "feature_area": "actions"
@@ -51773,6 +51778,12 @@
   "Show this option only for certain answers to an earlier option.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Show total only": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "metrics"
     }
   },
   "Show type field in project create dialog.": {
@@ -52563,6 +52574,17 @@
   "Split Screen": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Split chart by {attribute}": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "attribute": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "metrics"
     }
   },
   "Sponsor number": {
@@ -56171,6 +56193,11 @@
   },
   "The service was active for the last 10 minutes": {},
   "The service wasn't active for the last 10 minutes": {},
+  "The service's default goal. Click to set this project's own.": {
+    "context": {
+      "feature_area": "metrics"
+    }
+  },
   "The services this project uses haven't adopted any metrics.": {
     "context": {
       "feature_area": "metrics"
