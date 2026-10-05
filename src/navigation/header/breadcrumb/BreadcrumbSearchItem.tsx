@@ -52,10 +52,11 @@ export const BreadcrumbSearchItem = ({
         // highlighted row, so the keyboard highlight looks like the
         // pointer's in either theme (Metronic compiles it per theme). The
         // brand bar marks it besides: it is a keyboard user's only focus
-        // indicator, and the current row has a background of its own.
+        // indicator. The current row is not tinted: bg-light-primary
+        // resolves to this same primary-50, so it read as permanently
+        // hovered and gave no hover feedback; aria-current marks it instead.
         'search-result-item d-flex align-items-center pe-5 bg-state-primary-50',
         highlighted && 'active shadow-[inset_3px_0_0_var(--bs-primary)]',
-        item.isCurrent && 'bg-light-primary',
       )}
     >
       <Link
