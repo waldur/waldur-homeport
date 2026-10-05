@@ -7,7 +7,10 @@ import {
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { formatFigure } from '@/marketplace/metrics/options';
+import {
+  formatFigure,
+  formatMetricPeriod,
+} from '@/marketplace/metrics/options';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 import Table from '@/table/Table';
@@ -71,7 +74,15 @@ export const MetricBreakdownDialog: FC<{
     <ModalDialog
       title={title}
       subtitle={
-        <ScopeSubtitle label={translate('Metric')} name={metric.name} />
+        <>
+          <ScopeSubtitle label={translate('Metric')} name={metric.name} />
+          <div>
+            <ScopeSubtitle
+              label={translate('Period')}
+              name={formatMetricPeriod(item.period, item.period_start)}
+            />
+          </div>
+        </>
       }
     >
       <Table<Row>

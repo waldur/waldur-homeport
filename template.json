@@ -42975,6 +42975,18 @@
       "feature_area": "plans"
     }
   },
+  "Q{quarter} {year}, so far": {
+    "context": {
+      "variables": {
+        "quarter": {
+          "type": "unknown"
+        },
+        "year": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "RAM": {
     "context": {
       "primary_ui_type": "title",
@@ -73517,6 +73529,15 @@
         }
       },
       "feature_area": "policy-watch"
+    }
+  },
+  "{month}, so far": {
+    "context": {
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      }
     }
   },
   "{month}M": {
