@@ -12,7 +12,7 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 interface SuggestionRowActionsProps {
   row: ReviewerSuggestion;
@@ -67,7 +67,7 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
   // Show confirm/reject actions for pending suggestions
   if (row.status === 'pending') {
     return (
-      <ActionsDropdownComponent>
+      <ActionsMenu>
         <ActionItem
           title={
             confirmMutation.isPending
@@ -97,13 +97,13 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
           action={() => deleteMutation.mutate()}
           disabled={isLoading}
         />
-      </ActionsDropdownComponent>
+      </ActionsMenu>
     );
   }
 
   // For non-pending statuses, only show delete
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <RemovalActionItem
         title={
           deleteMutation.isPending
@@ -113,6 +113,6 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
         action={() => deleteMutation.mutate()}
         disabled={deleteMutation.isPending}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 
 import { translate } from '@/i18n';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
 
@@ -37,9 +37,9 @@ export const RemoteActions: FC<RemoteActionsProps> = ({ offering }) => {
   }
 
   return (
-    <ActionsDropdownComponent
+    <ActionsMenu
       label={translate('Remote actions')}
-      labeled
+      toggle="labeled"
       variant="tertiary"
     >
       <PullRemoteOfferingDetailsAction offering={offering} />
@@ -50,6 +50,6 @@ export const RemoteActions: FC<RemoteActionsProps> = ({ offering }) => {
       <PullRemoteOfferingInvoicesAction offering={offering} />
       <PushRemoteOfferingProjectDataAction offering={offering} />
       <PullRemoteOfferingRobotAccountsAction offering={offering} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

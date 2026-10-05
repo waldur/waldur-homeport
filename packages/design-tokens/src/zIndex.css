@@ -11,22 +11,28 @@
  *      100  Metronic header (layout/_variables.scss)
  *      101  Outstanding (impersonation) bar (src/navigation/OutstandingBar.tsx)
  *      105  --z-index-sidebar-panel   token  (= Metronic $aside-config z-index)
+ *      105  --z-index-nav-menu        token  (Metronic's old menu dropdown z-index)
  *      110  --z-index-mobile-drawer   token  (= Metronic $drawer z-index)
  *     1000  --z-index-header-popover  token  (= Bootstrap $zindex-dropdown)
  *     1050  Bootstrap $zindex-modal-backdrop
  *     1055  Bootstrap $zindex-modal
- *     1070  Bootstrap $zindex-popover (also .role-project-select-popup)
+ *     1070  --z-index-popover        token  (= Bootstrap $zindex-popover;
+ *                                            waldur-ui's PopoverContent)
  *     1080  Bootstrap $zindex-tooltip
- *     1100  the app's own .dropdown-menu (custom/_dropdown-base.scss)
- *     1110  --z-index-picker-popover token  (date pickers opened inside a
- *                                            modal or a filter dropdown)
+ *     1100  --z-index-dropdown-menu token  (action menus, waldur-ui's
+ *                                            ACTIONS_MENU_PANEL_CLASSNAME)
+ *     1110  --z-index-picker-popover token  (date pickers and the invite
+ *                                            dialog's role picker, opened
+ *                                            inside a modal or a filter
+ *                                            dropdown)
  *     1150  --z-index-toast          token  (above modal/popover/dropdown)
  *     1180  --z-index-tooltip        token  (above toast, so a toast's own
  *                                            Dismiss tooltip stays visible)
  *
  * Only values chosen to match a still-present Metronic layer belong here —
  * components with no such parity requirement (Dialog, Popover, DropdownMenu)
- * keep Tailwind's built-in z-50/z-10. `--z-index-*` is one of Tailwind's own
+ * keep Tailwind's built-in z-50/z-10. (Popover now has a layer of its own:
+ * --z-index-popover.) `--z-index-*` is one of Tailwind's own
  * theme namespaces, so each token also becomes a real `z-<name>` utility.
  *
  * zIndex.test.ts asserts the ordering above, so re-numbering a token can't
@@ -36,10 +42,20 @@
 @theme {
   --z-index-sidebar-panel: 105;
   --z-index-mobile-drawer: 110;
+  /* NavMenu's popup panels (user menu, page-tab submenus, footer menus),
+     which open over the fixed header and toolbar. */
+  --z-index-nav-menu: 105;
   /* Popovers opened from the header (global search, breadcrumb dropdowns)
      drop down over the fixed toolbar and page tabs, so Tailwind's z-50
      leaves them painted underneath. */
   --z-index-header-popover: 1000;
+  /* waldur-ui's PopoverContent (the column picker, call settings, search
+     results). Bootstrap's popover layer, which the react-bootstrap popovers
+     these replace sat on: above modals, so a popover opened in one shows. */
+  --z-index-popover: 1070;
+  /* Action menus (row actions, "Add" menus). They open from tables inside
+     modals, so they sit above the modal and below tooltips. */
+  --z-index-dropdown-menu: 1100;
   /* Date-picker popups (packages/ui Calendar in a Popover). They open from
      fields inside modals and inside table-filter dropdowns, so they must
      clear both. */

@@ -26,7 +26,7 @@ import { cn } from './cn';
  * (see useIsMobile.ts's own comment for why that path mounts more often
  * than its "only below 768px" name suggests) — same class of Radix
  * Slot-composition issue TopBar.tsx's IconButton documents for
- * DropdownMenuTrigger asChild.
+ * Menu.Trigger asChild.
  */
 export const Sheet = SheetPrimitive.Root;
 export const SheetTrigger = SheetPrimitive.Trigger;

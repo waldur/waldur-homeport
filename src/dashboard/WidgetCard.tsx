@@ -1,13 +1,12 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 interface WidgetCardAction {
   label: string;
@@ -63,8 +62,10 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
               <div className="p-0 m-0 flex-shrink-0">{cardAction}</div>
             )}
             {actions?.length && (
-              <RadixDropdownMenu.Root>
-                <RadixDropdownMenu.Trigger asChild>
+              <ActionsMenu
+                side="bottom"
+                align="center"
+                toggle={
                   <BaseButton
                     variant="text-secondary"
                     size="sm"
@@ -77,24 +78,18 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
                       />
                     }
                   />
-                </RadixDropdownMenu.Trigger>
-                <RadixDropdownMenu.Portal>
-                  <RadixDropdownMenu.Content
-                    sideOffset={2}
-                    className="dropdown-menu show position-static"
+                }
+              >
+                {actions.map((action, index) => (
+                  <Menu.Item
+                    key={index}
+                    icon={action.icon}
+                    onSelect={action.callback}
                   >
-                    {actions.map((action, index) => (
-                      <ActionsDropdownItem
-                        key={index}
-                        onClick={action.callback}
-                      >
-                        <span className="svg-icon">{action.icon}</span>
-                        {action.label}
-                      </ActionsDropdownItem>
-                    ))}
-                  </RadixDropdownMenu.Content>
-                </RadixDropdownMenu.Portal>
-              </RadixDropdownMenu.Root>
+                    {action.label}
+                  </Menu.Item>
+                ))}
+              </ActionsMenu>
             )}
           </div>
           {(title || meta || right) && (

@@ -26,6 +26,9 @@
 @import 'waldur-design-tokens/colors.css';
 @import 'waldur-design-tokens/focusRing.css';
 @import 'waldur-design-tokens/zIndex.css';
+/* dark:, menu-row-active:, action-row-active:, action-row-disabled: and
+   tab-active:. See that file for each selector. */
+@import 'waldur-design-tokens/variants.css';
 
 /* The app's one focus ring, for everything that doesn't style its own —
    links, breadcrumbs, sidebar rows, anything with tabindex. In `base`, so
@@ -207,11 +210,6 @@
     background-color: var(--bs-gray-50) !important;
   }
 }
-
-/* No `.dark` class in this app — dark mode swaps compiled stylesheets
-   (src/theme/utils.ts). data-theme on <html> gives Tailwind's dark:
-   variant a real signal to key off instead of introducing a second toggle. */
-@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 @theme {
   --font-sans: var(--waldur-font-family), Helvetica, sans-serif;

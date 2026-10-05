@@ -8,6 +8,7 @@ import {
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
+import { ActionsUnavailable } from '@/table/ActionsDropdown';
 
 interface OwnProps {
   data: {
@@ -42,13 +43,21 @@ export const OfferingUpdateContainer: FC<OwnProps> = (props) => {
         data.offering.state === 'Unavailable' && 'disabled-view',
       )}
     >
-      <props.tabSpec.component
-        offering={data.offering}
-        category={data.category}
-        components={data.components}
-        refetch={props.refetch}
-        loading={props.isRefetching}
-      />
+      <ActionsUnavailable
+        reason={
+          data.offering.state === 'Unavailable'
+            ? translate('This offering is unavailable.')
+            : undefined
+        }
+      >
+        <props.tabSpec.component
+          offering={data.offering}
+          category={data.category}
+          components={data.components}
+          refetch={props.refetch}
+          loading={props.isRefetching}
+        />
+      </ActionsUnavailable>
     </div>
   ) : null;
 };

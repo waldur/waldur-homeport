@@ -49,11 +49,6 @@
       left: var(--sidebar-width-icon, get($aside-config, minimized-width));
       transition: left get($aside-config, transition-speed) ease;
     }
-
-    // Header menu
-    .header-menu {
-      display: flex;
-    }
   }
 }
 
@@ -94,10 +89,9 @@
       top: var(--kt-pagebar-height);
     }
 
-    // Header menu
-    .header-menu {
-      display: none;
-      z-index: get($header-config, fixed, z-index) - 1;
+    .project-selector-toggle {
+      margin: 0 12px;
+      gap: 1rem;
     }
 
     // Page title

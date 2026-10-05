@@ -1,10 +1,11 @@
 import { FunctionComponent, useRef } from 'react';
 import { WebShellTicket, webShellTicket } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { NavMenuItem } from '@/navigation/NavMenu';
 import { useUser } from '@/workspace/hooks';
 
 const createWebShellTicket = () => webShellTicket().then(({ data }) => data);
@@ -43,7 +44,7 @@ export const WebShellMenuItem: FunctionComponent = () => {
   }
 
   return (
-    <NavMenuItem
+    <Menu.Item
       // Keep the menu open until the ticket arrives: closing it would unmount
       // this item while the request is still in flight.
       onSelect={(event) => {
@@ -58,7 +59,7 @@ export const WebShellMenuItem: FunctionComponent = () => {
       }}
       disabled={isPending}
     >
-      <span className="menu-title">{translate('Web shell')}</span>
-    </NavMenuItem>
+      {translate('Web shell')}
+    </Menu.Item>
   );
 };

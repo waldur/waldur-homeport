@@ -1,10 +1,11 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { CustomerCredit } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 const CustomerCreditDialog = lazyComponent(() =>
   import('./CustomerCreditDialog').then((module) => ({
@@ -31,11 +32,11 @@ export const EditCreditButton = ({
     });
 
   return (
-    <ActionsDropdownItem onSelect={openCreditFormDialog}>
-      <span className="svg-icon svg-icon-2">
-        <PencilSimpleIcon weight="bold" />
-      </span>
+    <Menu.Item
+      icon={<PencilSimpleIcon weight="bold" />}
+      onSelect={openCreditFormDialog}
+    >
       {translate('Edit')}
-    </ActionsDropdownItem>
+    </Menu.Item>
   );
 };

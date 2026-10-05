@@ -10,7 +10,7 @@ import { Badge, BadgeVariant } from 'waldur-ui';
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { ResourceDeleteButton } from '@/resource/actions/ResourceDeleteButton';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -22,7 +22,7 @@ const POLICY_TYPE: Record<string, { color: BadgeVariant; label: string }> = {
 
 const RowActions: FC<{ row; fetch }> = ({ row, fetch }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <ResourceDeleteButton
         apiFunction={() =>
           openstackNetworkRbacPoliciesDestroy({
@@ -32,7 +32,7 @@ const RowActions: FC<{ row; fetch }> = ({ row, fetch }) => {
         resourceType={translate('Network sharing')}
         refetch={fetch}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 

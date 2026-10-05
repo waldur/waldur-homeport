@@ -6,6 +6,11 @@ import { MobileMenu } from './MobileMenu';
 vi.mock('./MenuItem', () => ({
   MenuItem: ({ label }: any) => <li data-testid="menu-item">{label}</li>,
 }));
+vi.mock('./FooterDropdownItems', () => ({
+  FooterDropdownLink: ({ label }: any) => (
+    <li data-testid="dropdown-link">{label}</li>
+  ),
+}));
 vi.mock('./FooterDropdown', () => ({
   FooterDropdown: ({ title, children }: any) => (
     <li data-testid="footer-dropdown">
@@ -26,7 +31,8 @@ describe('MobileMenu', () => {
 
     expect(screen.getByTestId('footer-dropdown')).toBeInTheDocument();
     expect(screen.getByText('More')).toBeInTheDocument();
-    expect(screen.getAllByTestId('menu-item')).toHaveLength(2);
+    expect(screen.getAllByTestId('dropdown-link')).toHaveLength(2);
+    expect(screen.queryByTestId('menu-item')).not.toBeInTheDocument();
   });
 
   it('renders standalone items when dynamicItems length < 2', () => {

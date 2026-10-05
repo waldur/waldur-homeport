@@ -1,6 +1,6 @@
 import { forwardRef, FunctionComponent } from 'react';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Menu } from 'waldur-ui';
 
 import Avatar from '@/core/Avatar';
 import { ENV } from '@/core/config';
@@ -9,7 +9,7 @@ import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { NavMenu, NavMenuContent, NavMenuTrigger } from '@/navigation/NavMenu';
+import { NavMenuLink } from '@/navigation/NavMenu';
 import { useUser } from '@/workspace/hooks';
 
 import { ThemeSwitcher } from '../../theme/ThemeSwitcher';
@@ -22,7 +22,7 @@ import { UserToken } from './UserToken';
 import { WebShellMenuItem } from './WebShellMenuItem';
 
 /**
- * forwardRef so this composes under NavMenuTrigger's `asChild` — see
+ * forwardRef so this composes under Menu.Trigger's `asChild` — see
  * ActionsDropdown.tsx's TableDropdownToggle for the general requirement.
  */
 const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
@@ -73,63 +73,64 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
 });
 UserMenuToggle.displayName = 'UserMenuToggle';
 
+/** The user menu's header: the avatar, the name and the email. */
+const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
+  <>
+    <div className="symbol symbol-50px me-5">
+      {!user ? (
+        <ImagePlaceholder width="40px" height="40px" circle />
+      ) : (
+        <Avatar src={user.image} name={user.full_name} size={40} circle />
+      )}
+    </div>
+    <div className="d-flex flex-column">
+      <div className="fw-bolder d-flex align-items-center fs-5">
+        {user ? user.full_name : translate('Guest')}
+      </div>
+      {user ? (
+        // The classes the email had as a Link (Link's text-anchor, which
+        // replaced text-muted): the brand link colour.
+        <span className="fw-bold text-hover-primary fs-7 text-anchor">
+          {user.email}
+        </span>
+      ) : (
+        <span className="fw-bold text-muted fs-7">
+          {translate('Not signed in')}
+        </span>
+      )}
+    </div>
+  </>
+);
+
 export const UserDropdownMenu: FunctionComponent = () => {
   const user = useUser();
   return (
-    <NavMenu modal={false}>
-      <NavMenuTrigger asChild>
+    <Menu modal={false}>
+      <Menu.Trigger asChild>
         <UserMenuToggle />
-      </NavMenuTrigger>
-      <NavMenuContent
-        placement="bottom-end"
-        className="menu-dropdown-default menu-column menu-gray-600 menu-state-bg-gray fw-bold py-4 fs-6 w-275px"
-      >
-        <div className="menu-item px-3">
-          <div className="menu-content d-flex align-items-center px-2">
-            <div className="symbol symbol-50px me-5">
-              {!user ? (
-                <ImagePlaceholder width="40px" height="40px" circle />
-              ) : (
-                <Avatar
-                  src={user.image}
-                  name={user.full_name}
-                  size={40}
-                  circle
-                />
-              )}
-            </div>
-
-            <div className="d-flex flex-column">
-              <div className="fw-bolder d-flex align-items-center fs-5">
-                {user ? user.full_name : translate('Guest')}
-              </div>
-              {user ? (
-                <Link
-                  state="profile.details"
-                  className="fw-bold text-muted text-hover-primary fs-7"
-                >
-                  {user.email}
-                </Link>
-              ) : (
-                <span className="fw-bold text-muted fs-7">
-                  {translate('Not signed in')}
-                </span>
-              )}
-            </div>
+      </Menu.Trigger>
+      <Menu.Content align="end" className="fw-bold py-4 fs-6 w-275px">
+        {/* The header: a row that links to the profile, so the keyboard
+            reaches it like any other row. */}
+        {user ? (
+          <Menu.Item asChild className="px-[16.25px] py-[8px]">
+            <Link state="profile.details">
+              <UserMenuHeader user={user} />
+            </Link>
+          </Menu.Item>
+        ) : (
+          <div className="flex items-center px-[16.25px] py-[8px]">
+            <UserMenuHeader user={user} />
           </div>
-        </div>
+        )}
 
         {user ? (
           <UserDropdownMenuItems />
         ) : (
-          <div className="d-grid gap-2 px-5">
-            <Link state="login" buttonVariant="tertiary">
-              {translate('Sign in')}
-            </Link>
-          </div>
+          <NavMenuLink state="login" label={translate('Sign in')} />
         )}
 
-        <div className="separator my-2" />
+        <Menu.Separator />
 
         <LanguageSelectorDropdown />
 
@@ -139,21 +140,21 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         {!ENV.plugins.WALDUR_CORE.DISABLE_DARK_THEME && (
           <>
-            <div className="separator my-2" />
+            <Menu.Separator />
             <ThemeSwitcher />
           </>
         )}
 
         {user && (
           <>
-            <div className="separator my-2" />
+            <Menu.Separator />
             {(!isFeatureVisible(UserFeatures.conceal_api_token) ||
               user.is_staff ||
               user.is_support) && <UserToken token={user.token} />}
             <UserIpAddress ip={user.ip_address} />
           </>
         )}
-      </NavMenuContent>
-    </NavMenu>
+      </Menu.Content>
+    </Menu>
   );
 };

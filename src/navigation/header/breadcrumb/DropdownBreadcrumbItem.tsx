@@ -1,6 +1,7 @@
 import { CaretDownIcon } from '@phosphor-icons/react';
-import * as RadixPopover from '@radix-ui/react-popover';
 import { KeyboardEvent, useRef, useState } from 'react';
+
+import { Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
 
 import { MiddleTruncate } from '@/core/MiddleTruncate';
 import { IBreadcrumbItem } from '@/navigation/types';
@@ -43,7 +44,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
         // bare), so the label becomes the trigger: the <li> would drag the
         // separator slash into the focus ring, and Radix hands focus back to
         // the trigger on close, which an <li> cannot take.
-        <RadixPopover.Trigger asChild>
+        <PopoverTrigger asChild>
           <span
             role="button"
             tabIndex={0}
@@ -54,7 +55,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
             <MiddleTruncate text={item.text} />
             {arrow}
           </span>
-        </RadixPopover.Trigger>
+        </PopoverTrigger>
       ) : (
         <>
           {item.truncate && item.text.length > 4 ? (
@@ -79,9 +80,13 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
     if (event.key !== 'Tab') return;
     const focusable = Array.from(
       event.currentTarget.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]',
       ),
-    ).filter((node) => node.offsetParent !== null);
+    ).filter(
+      // Not the tabindex=-1 ones: a search dropdown's rows are options of a
+      // listbox, reached by the arrow keys from its search box, not by Tab.
+      (node) => node.offsetParent !== null && node.tabIndex !== -1,
+    );
     const edge = event.shiftKey
       ? focusable[0]
       : focusable[focusable.length - 1];
@@ -111,29 +116,23 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
   return (
     // Non-modal, so the page stays clickable while a switcher is open: a modal
     // one turned the first click on a sidebar link into a mere close.
-    <RadixPopover.Root open={show} onOpenChange={setShow} modal={false}>
-      {item.active ? (
-        crumb
-      ) : (
-        <RadixPopover.Trigger asChild>{crumb}</RadixPopover.Trigger>
-      )}
-      <RadixPopover.Portal>
-        <RadixPopover.Content
-          onKeyDown={leaveOnTab}
-          onInteractOutside={() => {
-            interactedOutside.current = true;
-          }}
-          onCloseAutoFocus={returnFocus}
-          side="bottom"
-          align="start"
-          sideOffset={2}
-          className="z-header-popover mw-400px min-w-200px pb-2 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
-        >
-          {typeof item.dropdown === 'function'
-            ? item.dropdown(() => setShow(false))
-            : item.dropdown}
-        </RadixPopover.Content>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+    <Popover open={show} onOpenChange={setShow} modal={false}>
+      {item.active ? crumb : <PopoverTrigger asChild>{crumb}</PopoverTrigger>}
+      <PopoverContent
+        onKeyDown={leaveOnTab}
+        onInteractOutside={() => {
+          interactedOutside.current = true;
+        }}
+        onCloseAutoFocus={returnFocus}
+        side="bottom"
+        align="start"
+        sideOffset={2}
+        className="z-header-popover mw-400px min-w-200px pb-2"
+      >
+        {typeof item.dropdown === 'function'
+          ? item.dropdown(() => setShow(false))
+          : item.dropdown}
+      </PopoverContent>
+    </Popover>
   );
 };

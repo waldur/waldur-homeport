@@ -18,6 +18,9 @@ interface LinkProps {
   className?: string;
   target?: string;
   onClick?: (e?) => void;
+  tabIndex?: number;
+  id?: string;
+  'aria-current'?: React.AriaAttributes['aria-current'];
 }
 
 /**

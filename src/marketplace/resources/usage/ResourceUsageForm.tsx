@@ -3,7 +3,6 @@ import {
   QuestionIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
 import {
@@ -24,7 +23,7 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { BaseButton, Tooltip } from 'waldur-ui';
+import { BaseButton, Menu, Tooltip } from 'waldur-ui';
 
 import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -40,7 +39,6 @@ import {
 } from '@/form';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { getPeriodRange } from './api';
 import {
@@ -355,15 +353,15 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
             {wrappedComponents.length > 0 ? (
               <Nav variant="tabs" className="nav-line-tabs mb-4">
                 <Nav.Item>
-                  <RadixDropdownMenu.Root>
+                  <Menu>
                     <div className="position-relative d-inline-flex">
-                      <RadixDropdownMenu.Trigger asChild>
+                      <Menu.Trigger asChild>
                         <BaseButton
                           variant="text-secondary"
                           size="md"
                           iconNode={<DotsThreeIcon size={22} weight="bold" />}
                         />
-                      </RadixDropdownMenu.Trigger>
+                      </Menu.Trigger>
                       {wrappedComponents.some((comp) =>
                         Boolean(errors.components?.[comp.type]),
                       ) && (
@@ -375,52 +373,47 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                         />
                       )}
                     </div>
-                    <RadixDropdownMenu.Portal>
-                      <RadixDropdownMenu.Content
-                        sideOffset={2}
-                        className="dropdown-menu show position-static"
-                      >
-                        <div className="mh-200px overflow-auto">
-                          {wrappedComponents.map((component) => (
-                            <ActionsDropdownItem
-                              key={component.uuid}
-                              className="d-flex justify-content-between"
-                              onClick={() => setActiveTab(component.uuid)}
-                            >
-                              {Boolean(errors.components?.[component.type]) && (
-                                <Tooltip
-                                  label={
-                                    <FieldError
-                                      error={errors.components[component.type]}
-                                    />
-                                  }
-                                  autoWidth
-                                >
-                                  <WarningCircleIcon
-                                    size={18}
-                                    weight="bold"
-                                    className="text-danger me-1"
-                                  />
-                                </Tooltip>
-                              )}
-                              {component.name}
+                    <Menu.Content look="actions">
+                      <div className="mh-200px overflow-auto">
+                        {wrappedComponents.map((component) => (
+                          <Menu.Item
+                            key={component.uuid}
+                            className="d-flex justify-content-between"
+                            onClick={() => setActiveTab(component.uuid)}
+                          >
+                            {Boolean(errors.components?.[component.type]) && (
                               <Tooltip
-                                label={getBillingTypeLabelOrDash(
-                                  component.billing_type,
-                                )}
+                                label={
+                                  <FieldError
+                                    error={errors.components[component.type]}
+                                  />
+                                }
+                                autoWidth
                               >
-                                <QuestionIcon
+                                <WarningCircleIcon
                                   size={18}
                                   weight="bold"
-                                  className="ms-1"
+                                  className="text-danger me-1"
                                 />
                               </Tooltip>
-                            </ActionsDropdownItem>
-                          ))}
-                        </div>
-                      </RadixDropdownMenu.Content>
-                    </RadixDropdownMenu.Portal>
-                  </RadixDropdownMenu.Root>
+                            )}
+                            {component.name}
+                            <Tooltip
+                              label={getBillingTypeLabelOrDash(
+                                component.billing_type,
+                              )}
+                            >
+                              <QuestionIcon
+                                size={18}
+                                weight="bold"
+                                className="ms-1"
+                              />
+                            </Tooltip>
+                          </Menu.Item>
+                        ))}
+                      </div>
+                    </Menu.Content>
+                  </Menu>
                 </Nav.Item>
               </Nav>
             ) : (

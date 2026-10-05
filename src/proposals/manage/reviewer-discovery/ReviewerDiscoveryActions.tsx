@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Call } from '@/proposals/types';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { DirectEmailInviteAction } from './DirectEmailInviteAction';
 import { GenerateMatchesAction } from './GenerateMatchesAction';
@@ -17,10 +17,10 @@ export const ReviewerDiscoveryActions: FC<ReviewerDiscoveryActionsProps> = ({
   refetch,
 }) => {
   return (
-    <ActionsDropdownComponent labeled drop="down" variant="secondary">
+    <ActionsMenu toggle="labeled" side="bottom" variant="secondary">
       <GenerateMatchesAction call={call} refetch={refetch} />
       <SendInvitationsAction call={call} refetch={refetch} />
       <DirectEmailInviteAction call={call} refetch={refetch} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

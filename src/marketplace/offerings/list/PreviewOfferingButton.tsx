@@ -1,12 +1,13 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { ACTIVE, PAUSED } from '../store/constants';
 
@@ -29,7 +30,8 @@ export const PreviewOfferingButton = ({
     return null;
   }
   return (
-    <ActionsDropdownItem
+    <Menu.Item
+      icon={<EyeIcon weight="bold" />}
       onSelect={() => {
         openDialog(PreviewOfferingDialog, {
           resolve: { offering: row as any },
@@ -37,10 +39,7 @@ export const PreviewOfferingButton = ({
         });
       }}
     >
-      <span className="svg-icon svg-icon-2">
-        <EyeIcon weight="bold" />
-      </span>
       {translate('Preview order form')}
-    </ActionsDropdownItem>
+    </Menu.Item>
   );
 };

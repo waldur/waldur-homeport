@@ -7,7 +7,7 @@ import {
 
 import { translate } from '@/i18n';
 import { SecurityGroupRulesList } from '@/openstack/openstack-security-groups/SecurityGroupRulesList';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -16,9 +16,9 @@ import { ClusterSecurityGroupSetRulesButton } from './ClusterSecurityGroupSetRul
 import { SetManagementSecurityGroupButton } from './SetManagementSecurityGroupButton';
 
 const RowActions = ({ row, fetch }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <ClusterSecurityGroupSetRulesButton resource={row} refetch={fetch} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );
 
 export const ClusterSecurityGroupsList: FunctionComponent<{

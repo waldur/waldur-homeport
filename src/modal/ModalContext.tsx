@@ -4,6 +4,8 @@ import React, {
   ReactNode,
   ComponentType,
   useCallback,
+  useRef,
+  MutableRefObject,
 } from 'react';
 
 import { createDeferred } from '@/core/utils';
@@ -22,6 +24,8 @@ interface ModalContextValue {
     props?: T & AppModalProps,
   ) => void;
   closeDialog: (type?: ModalAction) => void;
+  /** Where focus goes when the dialog has closed (see ModalRoot). */
+  returnFocusRef: MutableRefObject<HTMLElement | null>;
   confirm: (
     title: ReactNode,
     body: ReactNode,
@@ -37,6 +41,23 @@ export let modalServiceRef: Pick<
   'openDialog' | 'closeDialog' | 'confirm'
 > | null = null;
 
+/**
+ * The element to focus when a dialog closes: the one focused when it opened,
+ * or, for a row of a Radix menu, which unmounts with the menu as the dialog
+ * opens, the menu's trigger.
+ */
+const getReturnFocusTarget = (): HTMLElement | null => {
+  const active = document.activeElement as HTMLElement | null;
+  const menu = active?.closest<HTMLElement>('[role="menu"]');
+  if (menu?.id) {
+    const trigger = document.querySelector<HTMLElement>(
+      `[aria-controls="${CSS.escape(menu.id)}"]`,
+    );
+    if (trigger) return trigger;
+  }
+  return active;
+};
+
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -44,6 +65,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({
     ComponentType<any> | string | null
   >(null);
   const [modalProps, setModalProps] = useState<any>({});
+  const returnFocusRef = useRef<HTMLElement | null>(null);
 
   const [confirmComponent, setConfirmComponent] = useState<
     ComponentType<any> | string | null
@@ -52,10 +74,13 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({
 
   const openDialog = useCallback(
     <T,>(component: ComponentType<T> | string, props?: T & AppModalProps) => {
+      if (!modalComponent) {
+        returnFocusRef.current = getReturnFocusTarget();
+      }
       setModalComponent(() => component);
       setModalProps(props || {});
     },
-    [],
+    [modalComponent],
   );
 
   const closeDialog = useCallback((type: ModalAction = 'HIDE_MODAL') => {
@@ -103,6 +128,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({
         confirmProps,
         openDialog,
         closeDialog,
+        returnFocusRef,
         confirm,
       }}
     >

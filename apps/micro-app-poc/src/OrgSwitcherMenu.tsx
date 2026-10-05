@@ -5,12 +5,7 @@ import { translate } from 'waldur-i18n-runtime';
 // means this always sees root's exact pinned/linked SDK build, not a
 // second, potentially-drifted copy declared here.
 import { Customer } from 'waldur-js-client';
-import {
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-} from 'waldur-ui';
+import { Menu } from 'waldur-ui';
 
 export interface OrgSwitcherMenuProps {
   customers: Customer[];
@@ -32,24 +27,24 @@ export function OrgSwitcherMenu({
 }: OrgSwitcherMenuProps) {
   return (
     <>
-      <DropdownMenuLabel>{translate('Organisations')}</DropdownMenuLabel>
+      <Menu.Label>{translate('Organisations')}</Menu.Label>
       {customers.length > 0 ? (
         // Real role="menuitemradio"/aria-checked selection — see
-        // DropdownMenu.tsx's comment on RadioItem.
-        <DropdownMenuRadioGroup
+        // Menu.tsx's comment on Menu.RadioItem.
+        <Menu.RadioGroup
           value={selectedUuid ?? undefined}
           onValueChange={onSelect}
         >
           {customers.map((customer) => (
-            <DropdownMenuRadioItem key={customer.uuid} value={customer.uuid}>
+            <Menu.RadioItem key={customer.uuid} value={customer.uuid}>
               {customer.name}
-            </DropdownMenuRadioItem>
+            </Menu.RadioItem>
           ))}
-        </DropdownMenuRadioGroup>
+        </Menu.RadioGroup>
       ) : (
         // A lone, non-interactive placeholder — nothing to pick between,
         // so no radio semantics or selection indicator.
-        <DropdownMenuItem>{orgName}</DropdownMenuItem>
+        <Menu.Item>{orgName}</Menu.Item>
       )}
     </>
   );

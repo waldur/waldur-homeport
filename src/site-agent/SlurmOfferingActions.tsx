@@ -5,7 +5,7 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Menu } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -14,8 +14,6 @@ import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { SITE_AGENT_PLUGIN } from './constants';
@@ -115,52 +113,43 @@ export const SlurmOfferingActions: FC<SlurmOfferingActionsProps> = ({
   if (!showSiteAgentConfig && !showLdapAgentEnv) return null;
 
   return (
-    <ActionDropdownButton
-      title={translate('Actions')}
-      disabled={isLoading}
-      align="end"
-    >
-      {showSiteAgentConfig && (
-        <Tooltip
-          label={
-            !serviceProvider
-              ? translate('Service provider not found for this offering.')
-              : null
-          }
-        >
-          <span>
-            <ActionsDropdownItem
-              onSelect={openSiteAgentConfig}
-              disabled={!serviceProvider}
-            >
-              {translate('Generate Site Agent Config')}
-            </ActionsDropdownItem>
-          </span>
-        </Tooltip>
-      )}
-      {showLdapAgentEnv && (
-        <ActionsDropdownItem onSelect={openLdapAgentEnv}>
-          {translate('Generate LDAP Agent Env')}
-        </ActionsDropdownItem>
-      )}
-      {showSiteAgentConfig && canSyncResources && (
-        <Tooltip
-          label={
-            isSyncPending
-              ? translate('Resource synchronization is in progress…')
-              : null
-          }
-        >
-          <span>
-            <ActionsDropdownItem
-              onSelect={() => syncResources()}
-              disabled={isSyncPending}
-            >
-              {translate('Synchronize resources')}
-            </ActionsDropdownItem>
-          </span>
-        </Tooltip>
-      )}
-    </ActionDropdownButton>
+    <Menu>
+      <Menu.TriggerButton disabled={isLoading}>
+        {translate('Actions')}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom" align="end">
+        {showSiteAgentConfig && (
+          <Menu.Item
+            onSelect={openSiteAgentConfig}
+            disabled={!serviceProvider}
+            tooltip={
+              !serviceProvider
+                ? translate('Service provider not found for this offering.')
+                : undefined
+            }
+          >
+            {translate('Generate Site Agent Config')}
+          </Menu.Item>
+        )}
+        {showLdapAgentEnv && (
+          <Menu.Item onSelect={openLdapAgentEnv}>
+            {translate('Generate LDAP Agent Env')}
+          </Menu.Item>
+        )}
+        {showSiteAgentConfig && canSyncResources && (
+          <Menu.Item
+            onSelect={() => syncResources()}
+            disabled={isSyncPending}
+            tooltip={
+              isSyncPending
+                ? translate('Resource synchronization is in progress…')
+                : undefined
+            }
+          >
+            {translate('Synchronize resources')}
+          </Menu.Item>
+        )}
+      </Menu.Content>
+    </Menu>
   );
 };

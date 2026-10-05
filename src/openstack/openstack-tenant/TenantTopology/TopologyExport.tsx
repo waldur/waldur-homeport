@@ -5,10 +5,10 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 interface Props {
   /** Ref to the wrapper div that contains the rendered <svg>. */
@@ -261,26 +261,24 @@ export const TopologyExport: FC<Props> = ({
   }, [mermaidCode, notify]);
 
   return (
-    <ActionDropdownButton
-      variant="tertiary"
-      title={translate('Export')}
-      align="end"
-    >
-      <ActionItem
-        title={translate('Download SVG')}
-        action={exportSvg}
-        iconNode={<FileSvgIcon weight="bold" />}
-      />
-      <ActionItem
-        title={translate('Download PNG')}
-        action={exportPng}
-        iconNode={<FilePngIcon weight="bold" />}
-      />
-      <ActionItem
-        title={translate('Copy mermaid source')}
-        action={copyMermaid}
-        iconNode={<ClipboardTextIcon weight="bold" />}
-      />
-    </ActionDropdownButton>
+    <Menu>
+      <Menu.TriggerButton variant="tertiary" size="lg">
+        {translate('Export')}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom" align="end">
+        <Menu.Item icon={<FileSvgIcon weight="bold" />} onSelect={exportSvg}>
+          {translate('Download SVG')}
+        </Menu.Item>
+        <Menu.Item icon={<FilePngIcon weight="bold" />} onSelect={exportPng}>
+          {translate('Download PNG')}
+        </Menu.Item>
+        <Menu.Item
+          icon={<ClipboardTextIcon weight="bold" />}
+          onSelect={copyMermaid}
+        >
+          {translate('Copy mermaid source')}
+        </Menu.Item>
+      </Menu.Content>
+    </Menu>
   );
 };

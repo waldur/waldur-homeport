@@ -195,8 +195,8 @@ export interface BaseButtonProps extends Omit<
 
 /**
  * forwardRef, and `...rest` reaching the <button>, are both requirements
- * for this to work as a Radix `asChild` trigger (DropdownMenuTrigger,
- * PopoverTrigger) — the composition every migrated dropdown depends on.
+ * for this to work as a Radix `asChild` trigger (Menu.Trigger,
+ * MenuPopover.Trigger) — the composition every migrated dropdown depends on.
  * Radix's Slot clones its child, attaches a ref the popper positions
  * against, and merges in aria-haspopup/aria-expanded/data-state plus its
  * own pointer/keyboard handlers. A plain FC drops the ref (React's

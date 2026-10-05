@@ -11,14 +11,20 @@ ENV.plugins.WALDUR_CORE.DOCS_URL = 'http://docs.example.com';
 ENV.plugins.WALDUR_CORE.SITE_EMAIL = 'support@example.com';
 ENV.plugins.WALDUR_CORE.SITE_PHONE = '+123456789';
 
-vi.mock('./FooterDropdown', () => ({
-  FooterDropdown: ({ title, children }: any) => (
-    <div data-testid="support-dropdown">
-      <span>{title}</span>
-      {children}
-    </div>
-  ),
-}));
+// An open menu, as the real FooterDropdown renders its rows in one.
+vi.mock('./FooterDropdown', async () => {
+  const { Menu } = await import('waldur-ui');
+  return {
+    FooterDropdown: ({ title, children }: any) => (
+      <div data-testid="support-dropdown">
+        <span>{title}</span>
+        <Menu open>
+          <Menu.Content>{children}</Menu.Content>
+        </Menu>
+      </div>
+    ),
+  };
+});
 vi.mock('./IssuesLink', () => ({
   IssuesLink: () => <div data-testid="issues-link">Issues</div>,
 }));
@@ -50,8 +56,11 @@ describe('SupportMenu', () => {
       .mockResolvedValue(undefined);
 
     render(<SupportMenu />);
-    const emailBtn = screen.getByText('support@example.com');
-    await user.click(emailBtn);
+    // A menu item, so arrow keys reach it.
+    const emailRow = screen.getByRole('menuitem', {
+      name: 'support@example.com',
+    });
+    await user.click(emailRow);
     expect(writeTextSpy).toHaveBeenCalledWith('support@example.com');
     await waitFor(() => {
       expect(useNotify().showSuccess).toHaveBeenCalled();

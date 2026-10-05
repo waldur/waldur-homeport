@@ -120,10 +120,6 @@
         justify-content: center;
         gap: 0.75rem;
       }
-
-      .dropdown-toggle:before {
-        display: none;
-      }
     }
 
     > td.row-control > div {
@@ -497,36 +493,12 @@
   }
 }
 
-// Filters menu and its inputs
-.drawer .filter-container,
-.card.card-table .table-filters-menu {
+// Sidebar filters (TableFilterContainer.tsx in the filter drawer)
+.drawer .filter-container {
   white-space: normal;
 
   .filter-field {
     padding-top: 0;
-  }
-
-  .menu-item .menu-link {
-    min-height: 40px;
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  // Column filter
-  &.column-filter {
-    text-transform: none;
-    text-align: start;
-    height: 0;
-    width: 0;
-
-    .menu-link {
-      display: none;
-    }
-  }
-}
-.card.card-table th:not(:first-child) .table-filters-menu.column-filter {
-  .menu-sub-dropdown {
-    margin-left: -125px !important;
   }
 }
 
@@ -724,11 +696,4 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 // Standalone table header
 .table-standalone-header {
   margin-bottom: 24px;
-}
-
-// The columns popover portals to <body>, so tables inside a modal or drawer
-// need the popover tier to show it above them; a plain `z-50` opens it hidden
-// behind the modal.
-.table-columns-popover {
-  z-index: $zindex-popover;
 }

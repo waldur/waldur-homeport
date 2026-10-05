@@ -4,7 +4,7 @@ import {
   rancherWorkloadsYamlUpdate,
 } from 'waldur-js-client';
 
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { DeleteWorkloadAction } from './DeleteWorkloadAction';
 import { RedeployWorkloadAction } from './RedeployWorkloadAction';
@@ -14,7 +14,7 @@ export const WorkloadActions: FunctionComponent<{ workload }> = ({
   workload,
 }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <ViewYAMLButton
         yamlRetrieve={rancherWorkloadsYamlRetrieve}
         yamlUpdate={rancherWorkloadsYamlUpdate}
@@ -22,6 +22,6 @@ export const WorkloadActions: FunctionComponent<{ workload }> = ({
       />
       <RedeployWorkloadAction workload={workload} />
       <DeleteWorkloadAction workload={workload} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

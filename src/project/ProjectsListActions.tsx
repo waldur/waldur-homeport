@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { ChangeEndDateAction } from './ChangeEndDateAction';
 import { DeleteAction } from './DeleteAction';
@@ -25,9 +24,9 @@ export const ProjectsListActions: FC<ProjectsListActionsProps> = ({
   project,
   refetch,
 }) => (
-  <ActionsDropdownComponent title={translate('Actions')}>
+  <ActionsMenu>
     {ActionsList.map((ActionComponent, index) => (
       <ActionComponent key={index} project={project} refetch={refetch} />
     ))}
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );

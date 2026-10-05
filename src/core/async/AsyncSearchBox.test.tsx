@@ -19,7 +19,7 @@ const AnyAsyncSearchBox = AsyncSearchBox as any;
  * down is that a Popover (not a DropdownMenu) is the right choice here:
  * typing a full word into the search input must not lose keystrokes to
  * menu-item typeahead, the same adversarial check
- * ActionsPopoverComponent's own fix used earlier in this migration.
+ * the offering script editor's own fix used earlier in this migration.
  */
 describe('AsyncSearchBox', () => {
   const RowComponent = ({ row }: { row: { uuid: string; name: string } }) => (

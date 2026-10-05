@@ -7,13 +7,13 @@ import {
 
 import { translate } from '@/i18n';
 import { ResourceDeleteButton } from '@/resource/actions/ResourceDeleteButton';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { ViewYAMLButton } from './ViewYAMLButton';
 
 export const IngressActions: FC<{ row; fetch }> = ({ row, fetch }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <ViewYAMLButton
         yamlRetrieve={rancherIngressesYamlRetrieve}
         yamlUpdate={rancherIngressesYamlUpdate}
@@ -27,6 +27,6 @@ export const IngressActions: FC<{ row; fetch }> = ({ row, fetch }) => {
         resourceType={translate('Ingress')}
         refetch={fetch}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

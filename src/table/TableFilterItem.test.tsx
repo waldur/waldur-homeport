@@ -166,7 +166,7 @@ describe('TableSidebarFilterValues', () => {
  * flyout trigger and a MutationObserver watching for its `.show` class.
  * Both are gone now — this exercises the real
  * StringFilter -> withTableFilter -> TableFilterItem chain, unmocked,
- * the same way ActionsPopoverComponent's own typeahead fix was verified
+ * the same way the offering script editor's own typeahead fix was verified
  * earlier in this migration: type a full word into the flyout's input
  * and confirm every keystroke lands, not just enough to prove it opens.
  */

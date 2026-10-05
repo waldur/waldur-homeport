@@ -11,7 +11,7 @@ import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumer
 import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { ProgressSteps } from '@/wizard';
 
 import { ResourceViewChangeButton } from './ResourceViewChangeButton';
@@ -30,13 +30,13 @@ const OrderInProgressActions: FC<{
     // Consumer approval is not the provider's to give; an empty menu helps no one.
     if (providerView) return null;
     return (
-      <ActionsDropdownComponent labeled size="sm" drop="down">
+      <ActionsMenu toggle="labeled" size="sm" side="bottom">
         <OrderConsumerActions
           order={resource.order_in_progress}
           offering={offering}
           refetch={refetch}
         />
-      </ActionsDropdownComponent>
+      </ActionsMenu>
     );
   }
   if (

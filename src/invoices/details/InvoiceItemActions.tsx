@@ -1,4 +1,4 @@
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { InvoiceItemCompensation } from './InvoiceItemCompensation';
@@ -13,7 +13,7 @@ export const InvoiceItemActions = ({ invoice, item, refreshInvoiceItems }) => {
   }
 
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <InvoiceItemUpdate
         item={item}
         refreshInvoiceItems={refreshInvoiceItems}
@@ -34,6 +34,6 @@ export const InvoiceItemActions = ({ invoice, item, refreshInvoiceItems }) => {
         item={item}
         refreshInvoiceItems={refreshInvoiceItems}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

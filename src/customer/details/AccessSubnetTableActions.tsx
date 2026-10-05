@@ -5,7 +5,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 const AccessSubnetForm = lazyComponent(() =>
   import('./AccessSubnetForm').then((module) => ({
@@ -42,7 +42,7 @@ export const AccessSubnetTableActions: FC<AccessSubnetTableActionsProps> = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionsDropdownComponent labeled size="lg" variant="tertiary">
+    <ActionsMenu toggle="labeled" size="lg" variant="tertiary">
       {canManage && (
         <ActionItem
           title={translate('Add access subnet')}
@@ -69,6 +69,6 @@ export const AccessSubnetTableActions: FC<AccessSubnetTableActionsProps> = ({
           })
         }
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

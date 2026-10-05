@@ -226,7 +226,7 @@ BaseButton (from 'waldur-ui' — Tailwind/shadcn, general purpose actions, size=
 | Inline action (small)                   | `BaseButton` (size="sm")                                      |
 | Modal cancel/close                      | `CloseDialogButton`                                           |
 | Icon-only button with tooltip           | `BaseButton` (`iconNode`, `tooltip`)                          |
-| Table toolbar (refresh, export, filter) | `BaseButton` (`variant="tertiary"`, `size="lg"`)             |
+| Table toolbar (refresh, export, filter) | `BaseButton` (`variant="tertiary"`, `size="lg"`)              |
 | Edit field in settings row              | `CompactEditButton`                                           |
 | Edit in card header                     | `BaseButton` (`iconNode`, `label`)                            |
 | Create with dialog                      | `CreateModalButton`                                           |
@@ -255,13 +255,13 @@ has no allowlist: `Link` builds its button classes from `buttonVariants()` via
 its `buttonVariant` prop, and `LoginButton` and `AssistantComposer`'s Send button
 are plain `BaseButton`s (`BaseButton` is forwardRef, so it works under
 `assistant-ui`'s `asChild`).
-`src/table/ActionsDropdown.tsx`/`ActionDropdownButton.tsx`'s row-action dropdown
+`src/table/ActionsDropdown.tsx`'s row-action dropdown
 toggles were the last remaining hand-rolled usage in the shared component
 layer (as opposed to the scattered app-level instances above) — Phase F3
 converted their toggle buttons onto `buttonVariants()` from waldur-ui, so
-they no longer trigger this rule at all. See that file's top-of-file comment
-for why the *menu panel* (`.dropdown-menu`/`.dropdown-item`) stayed on
-Bootstrap classes regardless — a separate axis from the toggle button.
+they no longer trigger this rule at all. The menu panel and rows have since
+moved off Bootstrap's `.dropdown-*` classes too, onto waldur-ui's `Menu` in
+the actions look (`ActionsMenu`).
 
 ## Key Directories
 

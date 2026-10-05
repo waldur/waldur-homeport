@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
+import { CaretDownIcon } from '@phosphor-icons/react';
 import {
   UISrefActive,
   UISrefProps,
   useOnStateChanged,
   useRouter,
 } from '@uirouter/react';
-import classNames from 'classnames';
 import { isMatch } from 'lodash-es';
 import {
   FC,
@@ -18,32 +17,49 @@ import {
   useState,
 } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { cn, Tooltip, Menu } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
-import {
-  NavMenu,
-  NavMenuContent,
-  NavMenuItem,
-  useHoverMenu,
-} from '@/navigation/NavMenu';
+import { NavMenuLink } from '@/navigation/NavMenu';
 import { getTabbableAfter } from '@/navigation/tabbables';
 
 import { isDescendantOf, useTabs } from './useTabs';
 
-const MenuLink: FC<
-  UISrefProps & { className?: string; disabled?: boolean }
-> = ({ to, params, disabled, children, className }) =>
+/**
+ * A page tab, ported from Metronic's `.menu-link` in Toolbar.tsx's old
+ * `menu-rounded menu-gray-500 menu-state-bg-light-primary` row: gray-500,
+ * and brand text on a light brand background when hovered or current. The
+ * current tab is marked with `aria-current`. The tab row scrolls, which
+ * clips an outline drawn outside the tab, so the focus ring is inset; it
+ * is hidden under a pointer because Radix focuses a menu trigger on hover
+ * and some browsers treat that as :focus-visible.
+ */
+const TAB_CLASSNAME = cn(
+  'group flex cursor-pointer items-center rounded-[6px] px-[12px] py-[8px] text-[var(--page-tab-text)] no-underline transition-colors duration-200',
+  // tab-active: is defined in waldur-design-tokens/variants.css.
+  'tab-active:bg-[var(--page-tab-active-bg)] tab-active:text-[var(--page-tab-active-text)]',
+  'data-disabled:cursor-not-allowed data-disabled:text-[var(--menu-item-disabled-text)]',
+  'focus-visible:rounded-lg focus-visible:outline-offset-[calc(var(--focus-ring-width)*-1)] hover:focus-visible:outline-none',
+);
+
+const TabLink: FC<UISrefProps & { current?: boolean; disabled?: boolean }> = ({
+  to,
+  params,
+  current,
+  disabled,
+  children,
+}) =>
   to && !disabled ? (
     <Link
       state={to}
       params={params}
-      className={classNames('menu-link', className)}
+      className={TAB_CLASSNAME}
+      aria-current={current ? 'page' : undefined}
     >
       {children}
     </Link>
   ) : (
-    <a className={classNames('menu-link', disabled && 'disabled', className)}>
+    <a className={TAB_CLASSNAME} data-disabled={disabled ? '' : undefined}>
       {children}
     </a>
   );
@@ -108,7 +124,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
   parentTab,
   active,
 }) => {
-  const { open, setOpen, hoverHandlers, triggerHandlers } = useHoverMenu();
+  const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const tabTargetRef = useRef<HTMLElement | null>(null);
 
@@ -135,41 +151,46 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
   };
 
   return (
-    <NavMenu open={open} onOpenChange={setOpen} modal={false}>
-      <span
+    <Menu open={open} onOpenChange={setOpen} openOnHover="desktop">
+      <li
         data-testid={tabTestId(parentTab)}
-        className={classNames('menu-item me-0 me-lg-2', { here: active })}
+        className="flex items-center me-0 me-lg-2"
       >
-        <RadixDropdownMenu.Trigger asChild>
+        <Menu.Trigger asChild>
           <button
             ref={triggerRef}
             type="button"
-            className="menu-link"
-            {...triggerHandlers}
+            className={TAB_CLASSNAME}
+            aria-current={active ? 'true' : undefined}
           >
-            <span className="menu-title">{parentTab.title}</span>
-            <span className="menu-arrow" />
+            {parentTab.title}
+            {/* gray-500, brand while the tab is hovered, current or open;
+                flips to point up while open. */}
+            <CaretDownIcon
+              size={16.9}
+              weight="bold"
+              className="ms-[8px] shrink-0 text-[var(--page-tab-text)] transition-[rotate] duration-300 group-hover:text-[var(--page-tab-caret-active)] group-aria-[current]:text-[var(--page-tab-caret-active)] group-data-[state=open]:rotate-180 group-data-[state=open]:text-[var(--page-tab-caret-active)]"
+            />
           </button>
-        </RadixDropdownMenu.Trigger>
-      </span>
-      <NavMenuContent
-        placement="bottom-start"
-        className="menu-gray-600 menu-state-bg-gray menu-rounded-0 menu-dropdown-default fw-bolder fs-6 py-2 w-200px"
+        </Menu.Trigger>
+      </li>
+      <Menu.Content
+        align="start"
+        className="fw-bolder fs-6 py-2 w-200px"
         onKeyDown={handleContentKeyDown}
         onCloseAutoFocus={handleCloseAutoFocus}
-        {...hoverHandlers}
       >
         {parentTab.children.map((childTab, childIndex) => (
           <UISrefActive class="active" key={childIndex}>
-            <NavMenuItem asChild>
-              <Link state={childTab.to} params={childTab.params}>
-                <span className="menu-title">{childTab.title}</span>
-              </Link>
-            </NavMenuItem>
+            <NavMenuLink
+              state={childTab.to}
+              params={childTab.params}
+              label={childTab.title}
+            />
           </UISrefActive>
         ))}
-      </NavMenuContent>
-    </NavMenu>
+      </Menu.Content>
+    </Menu>
   );
 };
 
@@ -206,14 +227,12 @@ export const TabsList: FC = () => {
             active={isMatch(activeTab, parentTab)}
           />
         ) : parentTab.to || parentTab.redirectTo ? (
-          <span
+          <li
             key={parentIndex}
             data-testid={tabTestId(parentTab)}
-            className={classNames('menu-item text-nowrap', {
-              here: isMatch(activeTab, parentTab),
-            })}
+            className="flex items-center text-nowrap"
           >
-            <MenuLink
+            <TabLink
               to={
                 (typeof parentTab.redirectTo === 'string'
                   ? parentTab.redirectTo
@@ -224,20 +243,22 @@ export const TabsList: FC = () => {
                   ? parentTab.redirectTo.params
                   : undefined) || parentTab.params
               }
+              current={isMatch(activeTab, parentTab)}
               disabled={parentTab.disabled}
             >
               {/* A disabled tab must say why it is unavailable. The tooltip
-                  sits inside the link because `.menu-link.disabled` keeps
-                  pointer events, so the hover trigger still fires. */}
+                  sits inside the link, which keeps pointer events, so the
+                  hover trigger still fires. The label is a span so Link
+                  doesn't give it its `text-anchor` style. */}
               {parentTab.disabled && parentTab.disabledReason ? (
                 <Tooltip label={parentTab.disabledReason}>
-                  <span className="menu-title">{parentTab.title}</span>
+                  <span>{parentTab.title}</span>
                 </Tooltip>
               ) : (
-                <span className="menu-title">{parentTab.title}</span>
+                <span>{parentTab.title}</span>
               )}
-            </MenuLink>
-          </span>
+            </TabLink>
+          </li>
         ) : null,
       )}
     </>

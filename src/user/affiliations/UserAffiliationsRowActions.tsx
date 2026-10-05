@@ -6,7 +6,7 @@ import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { renderFieldOrDash } from '@/table/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -76,7 +76,7 @@ export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
   });
 
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       {row.is_active ? (
         <RemovalActionItem
           action={revoke}
@@ -107,6 +107,6 @@ export const UserAffiliationsRowActions: FC<UserAffiliationsRowActionsProps> = (
           }
         />
       )}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

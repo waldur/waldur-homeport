@@ -1,10 +1,9 @@
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC } from 'react';
 
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { AddDropdownToggle } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { AddUserButton } from './AddUserButton';
@@ -66,42 +65,31 @@ export const ResourceTeamAddDropdown: FC<ResourceTeamAddDropdownProps> = ({
   if (!canInvite) return null;
 
   return (
-    <RadixDropdownMenu.Root modal={false}>
-      <RadixDropdownMenu.Trigger asChild>
-        <AddDropdownToggle size={size} />
-      </RadixDropdownMenu.Trigger>
-      <RadixDropdownMenu.Portal>
-        <RadixDropdownMenu.Content
-          align="start"
-          sideOffset={2}
-          className="dropdown-menu show position-static"
-        >
-          <InviteUserButton
-            scopeUrl={scopeUrl}
-            scopeUuid={scopeUuid}
-            scopeLabel={scopeLabel}
-            contentType={scope}
-            offeringUuid={offering?.uuid}
-            user={user}
-            refetch={refetch}
-          />
-          {showAssign && (
-            <AddUserButton
-              scope={scope}
-              scopeUuid={scopeUuid}
-              projectUuid={projectUuid}
-              offering={offering}
-              refetch={refetch}
-              disabled={!canInvite}
-              tooltip={
-                !canInvite
-                  ? translate('Available for project managers and above')
-                  : undefined
-              }
-            />
-          )}
-        </RadixDropdownMenu.Content>
-      </RadixDropdownMenu.Portal>
-    </RadixDropdownMenu.Root>
+    <ActionsMenu side="bottom" toggle="add" size={size} align="start">
+      <InviteUserButton
+        scopeUrl={scopeUrl}
+        scopeUuid={scopeUuid}
+        scopeLabel={scopeLabel}
+        contentType={scope}
+        offeringUuid={offering?.uuid}
+        user={user}
+        refetch={refetch}
+      />
+      {showAssign && (
+        <AddUserButton
+          scope={scope}
+          scopeUuid={scopeUuid}
+          projectUuid={projectUuid}
+          offering={offering}
+          refetch={refetch}
+          disabled={!canInvite}
+          tooltip={
+            !canInvite
+              ? translate('Available for project managers and above')
+              : undefined
+          }
+        />
+      )}
+    </ActionsMenu>
   );
 };

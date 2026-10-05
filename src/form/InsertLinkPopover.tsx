@@ -12,6 +12,7 @@ import {
   usePublisher,
   useTranslation,
 } from '@mdxeditor/editor';
+// eslint-disable-next-line no-restricted-imports -- MDXEditor's own link dialog, ported: styled by its CSS (linkDialogPopoverContent, popoverArrow) with Popover.Arrow, not a menu.
 import * as Popover from '@radix-ui/react-popover';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import classNames from 'classnames';

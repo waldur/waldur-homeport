@@ -89,15 +89,12 @@ const RESTRICTED_IMPORTS = [
     name: 'react-bootstrap',
     importNames: ['DropdownButton'],
     message:
-      'Avoid importing DropdownButton directly from react-bootstrap. Use Waldur wrapper components instead:\n' +
-      '  - ActionDropdownButton: for panel/card header dropdown menus (large size)\n' +
-      '  - CompactActionDropdownButton: for inline contexts like table cells (small size)\n' +
-      'Import from @/table/ActionDropdownButton.',
+      'Avoid importing DropdownButton from react-bootstrap. Use Menu with Menu.TriggerButton from "waldur-ui" (or ActionsMenu from "@/table/ActionsDropdown") instead.',
   },
   {
     name: 'react-bootstrap/DropdownButton',
     message:
-      'Use ActionDropdownButton from "@/table/ActionDropdownButton" instead of react-bootstrap/DropdownButton.',
+      'Use Menu with Menu.TriggerButton from "waldur-ui" (or ActionsMenu from "@/table/ActionsDropdown") instead of react-bootstrap/DropdownButton.',
   },
   {
     name: 'react-bootstrap',
@@ -109,6 +106,22 @@ const RESTRICTED_IMPORTS = [
     name: 'react-bootstrap/Accordion',
     message:
       'Use Accordion or Collapsible from "waldur-ui" instead of react-bootstrap/Accordion.',
+  },
+];
+
+// Menus and popovers are built from waldur-ui's Menu / MenuPopover (see
+// docs/menus.md), which wrap these Radix packages with the app's looks and
+// defaults. Only packages/ui may import them directly.
+const RADIX_MENU_IMPORTS = [
+  {
+    name: '@radix-ui/react-dropdown-menu',
+    message:
+      'Use Menu from "waldur-ui" (or ActionsMenu / ActionsDropdown from "@/table/ActionsDropdown" for action menus) instead of @radix-ui/react-dropdown-menu. See docs/menus.md.',
+  },
+  {
+    name: '@radix-ui/react-popover',
+    message:
+      'Use MenuPopover (or Popover) from "waldur-ui" instead of @radix-ui/react-popover. See docs/menus.md.',
   },
 ];
 
@@ -255,6 +268,18 @@ export default tseslint
         'no-restricted-imports': [
           'error',
           {
+            paths: [...RESTRICTED_IMPORTS, ...RADIX_MENU_IMPORTS],
+          },
+        ],
+      },
+    },
+    {
+      // waldur-ui is where Menu and MenuPopover wrap Radix.
+      files: ['packages/ui/**/*.{ts,tsx}'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
             paths: RESTRICTED_IMPORTS,
           },
         ],
@@ -323,6 +348,7 @@ export default tseslint
           {
             paths: [
               ...RESTRICTED_IMPORTS,
+              ...RADIX_MENU_IMPORTS,
               {
                 name: '@/i18n',
                 importNames: ['translate'],

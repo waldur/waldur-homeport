@@ -1,5 +1,4 @@
 import { CaretRightIcon } from '@phosphor-icons/react';
-import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import React, {
@@ -20,10 +19,10 @@ import {
   Badge,
   BaseButton,
   RemoveFilterBadgeButton,
+  MenuPopover,
 } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { PopoverMenuContent } from '@/navigation/NavMenu';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { closeFlyoutOnTabOut } from './filterMenuFocus';
@@ -402,7 +401,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   // The column-header funnel icon (TableFiltersMenu.tsx's `openName`
   // branch) targets exactly one filter — its whole point is "this
   // column's own control," not the full filter list — so that one row
-  // renders its field directly below, with no collapsed menu-link/nested
+  // renders its field directly below, with no collapsed row/nested
   // Popover of its own, and every *other* row renders nothing at all
   // rather than showing a redundant full list alongside it (reported
   // live: the column icon opened the entire "Add filter"-style list,
@@ -440,11 +439,11 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
 
   if (isColumnTarget) {
     return (
-      <div id={`filter-item-${props.name}`} className="menu-item">
+      <div id={`filter-item-${props.name}`}>
         {/* `role="presentation"`, not `aria-hidden`: aria-hidden would
             hide the filter field inside from screen readers too. */}
         <div
-          className="menu-content filter-field"
+          className="filter-field px-[12px] py-[8px]"
           onClick={(e) => e.stopPropagation()}
           role="presentation"
         >
@@ -459,24 +458,22 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
         {!instantApply && menuIsOpen && (
           <>
             <div className="separator" />
-            <div className="menu-item">
-              <div className="menu-content filter-footer pb-0">
-                <div className="d-flex gap-4">
-                  <BaseButton
-                    variant="tertiary"
-                    className="flex-grow-1 w-50"
-                    onClick={closeMenu}
-                    label={translate('Cancel')}
-                    size="lg"
-                  />
-                  <BaseButton
-                    className="flex-grow-1 w-50"
-                    onClick={() => onApply()}
-                    label={translate('Apply')}
-                    variant="primary"
-                    size="lg"
-                  />
-                </div>
+            <div className="filter-footer px-[12px] pt-[8px]">
+              <div className="d-flex gap-4">
+                <BaseButton
+                  variant="tertiary"
+                  className="flex-grow-1 w-50"
+                  onClick={closeMenu}
+                  label={translate('Cancel')}
+                  size="lg"
+                />
+                <BaseButton
+                  className="flex-grow-1 w-50"
+                  onClick={() => onApply()}
+                  label={translate('Apply')}
+                  variant="primary"
+                  size="lg"
+                />
               </div>
             </div>
           </>
@@ -489,18 +486,18 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
   // accordion-row shape — click to expand this one row's own nested
   // Popover, coexisting with every other row in the same list.
   return (
-    <div id={`filter-item-${props.name}`} className="menu-item">
-      <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
-        <RadixPopover.Trigger asChild>
-          {/* A real <button> so Tab reaches the row and Enter/Space open
-              it; `button.menu-link` in the menu base keeps the row look. */}
-          <button type="button" className="menu-link">
-            <span className="menu-title">{props.title}</span>
+    <div id={`filter-item-${props.name}`}>
+      <MenuPopover open={open} onOpenChange={setOpen} modal={false}>
+        <MenuPopover.Trigger asChild>
+          {/* A real <button> so Tab reaches the row and Enter/Space open it. */}
+          <MenuPopover.Item>
+            {props.title}
             <CaretRightIcon size={20} className="ms-auto" weight="bold" />
-          </button>
-        </RadixPopover.Trigger>
-        <PopoverMenuContent
-          placement="right-start"
+          </MenuPopover.Item>
+        </MenuPopover.Trigger>
+        <MenuPopover.Content
+          side="right"
+          align="start"
           className="w-375px py-3 shadow-sm"
           // Radix returns focus to this row on close, so the keyboard
           // stays in the list. Two exceptions skip that:
@@ -516,22 +513,20 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
           onEscapeKeyDown={() => closeMenu?.()}
           onKeyDown={(e) => closeFlyoutOnTabOut(e, () => setOpen(false))}
         >
-          <div className="menu-item">
-            {/* `role="presentation"` — see the column branch above. */}
-            <div
-              className="menu-content filter-field"
-              onClick={(e) => e.stopPropagation()}
-              role="presentation"
-            >
-              {open && props.children}
-            </div>
+          {/* `role="presentation"` — see the column branch above. */}
+          <div
+            className="filter-field px-[12px] py-[8px]"
+            onClick={(e) => e.stopPropagation()}
+            role="presentation"
+          >
+            {open && props.children}
           </div>
           {!instantApply && (
             <>
               <div className="separator" />
-              <div className="menu-item">
+              <div>
                 {open && (
-                  <div className="menu-content filter-footer pb-0">
+                  <div className="filter-footer px-[12px] pt-[8px]">
                     <div className="d-flex gap-4">
                       <BaseButton
                         variant="tertiary"
@@ -553,8 +548,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItemProps>> = ({
               </div>
             </>
           )}
-        </PopoverMenuContent>
-      </RadixPopover.Root>
+        </MenuPopover.Content>
+      </MenuPopover>
     </div>
   );
 };

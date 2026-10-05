@@ -1,13 +1,7 @@
 import { LanguageOption, translate } from 'waldur-i18n-runtime';
 
-import {
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-} from './DropdownMenu';
 import { getLanguageFlag } from './languageFlags';
+import { Menu } from './Menu';
 
 export type { LanguageOption };
 
@@ -18,20 +12,12 @@ export interface LanguageMenuProps {
 }
 
 /**
- * LanguageSelectorDropdown.tsx's real menu-item, as its own reusable
- * piece — a single collapsed row (data-kt-menu-trigger="hover" there)
- * showing the current language, not a flat inline list. The full choice
- * list lives in a
- * nested submenu, revealed on hover there / on click here (Radix has no
- * hover-trigger submenu mode). Selection uses real
- * role="menuitemradio"/aria-checked semantics — see DropdownMenu.tsx's
- * comment on RadioItem.
- *
- * Calls translate() directly (waldur-i18n-runtime is now a real dependency
- * of this package) rather than taking a pre-translated `label` prop — the
- * package's earlier "no i18n dependency" boundary was dropped once every
- * consumer turned out to need translate() anyway, making the labels-prop
- * indirection pure ceremony rather than a real portability guarantee.
+ * The language row of the user menu, as in the main app's
+ * LanguageSelectorDropdown.tsx: a "Language" row showing the current
+ * language in a gray pill, opening a submenu of every language. The
+ * current language is highlighted like the main app's current row, with
+ * no check mark; Radix still gives each row role="menuitemradio" and
+ * aria-checked.
  */
 export function LanguageMenu({
   currentLanguage,
@@ -39,18 +25,19 @@ export function LanguageMenu({
   onLanguageChange,
 }: LanguageMenuProps) {
   return (
-    <DropdownMenuSub>
-      <DropdownMenuSubTrigger>
+    <Menu.Sub>
+      <Menu.SubTrigger>
         {translate('Language')}
-        <span className="ml-auto flex items-center gap-1.5 rounded bg-[var(--surface-hover-bg)] px-2 py-0.5 text-xs">
+        {/* gray-100, 11px, 3px x 10px, gap 6.5px, as the main app's pill. */}
+        <span className="ms-auto flex items-center gap-[6.5px] rounded-lg bg-[var(--menu-item-light-bg)] px-[9.75px] py-[3.25px] text-[11.05px]">
           {currentLanguage.label}
           <span aria-hidden="true">
             {getLanguageFlag(currentLanguage.code)}
           </span>
         </span>
-      </DropdownMenuSubTrigger>
-      <DropdownMenuSubContent>
-        <DropdownMenuRadioGroup
+      </Menu.SubTrigger>
+      <Menu.SubContent className="py-[12px] text-[14px] font-medium w-[175px]">
+        <Menu.RadioGroup
           value={currentLanguage.code}
           onValueChange={(code) => {
             const language = languageChoices.find(
@@ -62,13 +49,16 @@ export function LanguageMenu({
           }}
         >
           {languageChoices.map((language) => (
-            <DropdownMenuRadioItem key={language.code} value={language.code}>
-              <span aria-hidden="true">{getLanguageFlag(language.code)}</span>
+            <Menu.RadioItem key={language.code} value={language.code}>
+              {/* The main app's 20px flag with 13px after it. */}
+              <span aria-hidden="true" className="me-[13px] w-[20px]">
+                {getLanguageFlag(language.code)}
+              </span>
               {language.label}
-            </DropdownMenuRadioItem>
+            </Menu.RadioItem>
           ))}
-        </DropdownMenuRadioGroup>
-      </DropdownMenuSubContent>
-    </DropdownMenuSub>
+        </Menu.RadioGroup>
+      </Menu.SubContent>
+    </Menu.Sub>
   );
 }

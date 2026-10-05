@@ -8,6 +8,7 @@ export {
 export { ButtonCaret } from './ButtonCaret';
 export type { ButtonCaretProps } from './ButtonCaret';
 export { cn } from './cn';
+export * from './Menu';
 export { CopyButton } from './CopyButton';
 export type { CopyButtonProps } from './CopyButton';
 export { LoadingSpinner } from './LoadingSpinner';
@@ -80,23 +81,6 @@ export type { StatusPillProps, StatusTone } from './StatusPill';
 
 export { DataTable } from './DataTable';
 export type { DataTableColumn, DataTableProps } from './DataTable';
-
-export {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from './DropdownMenu';
-export type { DropdownMenuItemProps } from './DropdownMenu';
 
 export {
   SIDEBAR_ICON_BUTTON_CLASSNAME,

@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { ForceAcceptInvitationAction } from './ForceAcceptInvitationAction';
 import {
@@ -40,14 +40,14 @@ export const ReviewerRowActions: FC<ReviewerRowActionsProps> = ({
 
   if (!showCopyLink && !showForceAccept && !showResend) {
     return (
-      <ActionsDropdownComponent size="sm" disabled tooltip>
+      <ActionsMenu size="sm" disabled tooltip>
         {null}
-      </ActionsDropdownComponent>
+      </ActionsMenu>
     );
   }
 
   return (
-    <ActionsDropdownComponent size="sm">
+    <ActionsMenu size="sm">
       {showCopyLink && (
         <ActionItem
           title={translate('Copy invitation link')}
@@ -64,6 +64,6 @@ export const ReviewerRowActions: FC<ReviewerRowActionsProps> = ({
       {showForceAccept && (
         <ForceAcceptInvitationAction row={row} refetch={refetch} />
       )}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

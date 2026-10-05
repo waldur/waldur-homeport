@@ -5,8 +5,10 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
+import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
 import { useToolbarActions } from '@/navigation/context';
+import { ActionsUnavailable } from '@/table/ActionsDropdown';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
 
@@ -44,11 +46,19 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
         props.offering.state === 'Unavailable' && 'disabled-view',
       )}
     >
-      <props.tabSpec.component
-        offering={props.offering}
-        plansUsage={props.plansUsage}
-        uniqueFormId={uniqueFormId}
-      />
+      <ActionsUnavailable
+        reason={
+          props.offering.state === 'Unavailable'
+            ? translate('This offering is unavailable.')
+            : undefined
+        }
+      >
+        <props.tabSpec.component
+          offering={props.offering}
+          plansUsage={props.plansUsage}
+          uniqueFormId={uniqueFormId}
+        />
+      </ActionsUnavailable>
     </div>
   ) : null;
 };

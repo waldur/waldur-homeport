@@ -3,12 +3,8 @@ import { ComponentProps, forwardRef, ReactNode } from 'react';
 
 import { AvatarFallback, AvatarImage, AvatarRoot } from './Avatar';
 import { cn } from './cn';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from './DropdownMenu';
 import { ICON_BUTTON_BASE_CLASSNAME } from './iconButtonStyles';
+import { Menu } from './Menu';
 import { Tooltip } from './Tooltip';
 
 /**
@@ -17,8 +13,8 @@ import { Tooltip } from './Tooltip';
  * control; OrganizationsListMenu.tsx is a sidebar link to a list page, not
  * a switcher). Built directly against a design mockup.
  *
- * OrgSwitcher is a real Radix DropdownMenu (see DropdownMenu.tsx) — the
- * consumer composes the actual menu (DropdownMenuItem/Label/Separator) as
+ * OrgSwitcher is waldur-ui's Menu in the nav look (see Menu.tsx) — the
+ * consumer composes the actual menu (Menu.Item/Label/Separator) as
  * children, the same way Sidebar's nav sections are composed by the
  * consumer rather than hardcoded, since this primitive has no org-list
  * data of its own.
@@ -59,7 +55,7 @@ export const TopBar = ({ left, center, right, className }: TopBarProps) => (
 export interface OrgSwitcherProps {
   badge?: ReactNode;
   name: string;
-  /** Composed as the dropdown's content — DropdownMenuItem/Label/Separator. */
+  /** Composed as the dropdown's content — Menu.Item/Label/Separator. */
   children?: ReactNode;
   className?: string;
 }
@@ -70,8 +66,8 @@ export const OrgSwitcher = ({
   children,
   className,
 }: OrgSwitcherProps) => (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
+  <Menu>
+    <Menu.Trigger asChild>
       <button
         type="button"
         className={cn(
@@ -80,10 +76,9 @@ export const OrgSwitcher = ({
           // flex items default to min-width:auto, which ignores flex-shrink
           // and any child's own truncate class otherwise.
           'flex min-w-0 items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-medium',
-          // --surface-hover-bg, not --nav-item-hover-bg — see DropdownMenu.tsx's
-          // comment on the same substitution. OrgSwitcher sits in the TopBar,
-          // not the sidebar, so it shouldn't inherit the sidebar's own
-          // SIDEBAR_STYLE-driven hover color.
+          // --surface-hover-bg, not --nav-item-hover-bg: OrgSwitcher sits in
+          // the TopBar, not the sidebar, so it shouldn't inherit the
+          // sidebar's own SIDEBAR_STYLE-driven hover color.
           'text-[var(--surface-text-primary)] hover:bg-[var(--surface-hover-bg)]',
           className,
         )}
@@ -100,11 +95,16 @@ export const OrgSwitcher = ({
           weight="bold"
         />
       </button>
-    </DropdownMenuTrigger>
+    </Menu.Trigger>
     {children && (
-      <DropdownMenuContent align="start">{children}</DropdownMenuContent>
+      <Menu.Content
+        align="start"
+        className="py-[12px] text-[14px] font-medium min-w-[200px]"
+      >
+        {children}
+      </Menu.Content>
     )}
-  </DropdownMenu>
+  </Menu>
 );
 
 export interface SearchFieldProps {
@@ -144,7 +144,7 @@ export interface IconButtonProps extends ComponentProps<'button'> {
 
 /**
  * Extends ComponentProps<'button'> (not just onClick/className, the
- * original scope) and forwards its ref, so a DropdownMenuTrigger asChild
+ * original scope) and forwards its ref, so a Menu.Trigger asChild
  * can compose this directly — Radix's Slot clones its child, attaches its
  * own ref (Popper needs it to position the menu against this element),
  * and merges in aria-haspopup/aria-expanded/data-state and its own
@@ -152,7 +152,7 @@ export interface IconButtonProps extends ComponentProps<'button'> {
  * ref ("Function components cannot be given refs"), Popper never gets a
  * real anchor element, and every consumer downstream of that — not just
  * this button — breaks (observed as the whole dashboard crashing the
- * instant a DropdownMenuTrigger wrapped a pre-forwardRef IconButton, not
+ * instant a Menu.Trigger wrapped a pre-forwardRef IconButton, not
  * merely the menu failing to open). The forwarded ref lands on the same
  * <button> Tooltip's own Trigger asChild already puts a ref on; Radix's
  * Slot composes multiple refs on one element rather than clobbering, so

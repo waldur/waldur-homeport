@@ -1,13 +1,15 @@
-import { DownloadSimpleIcon } from '@phosphor-icons/react';
-import React, { FC } from 'react';
+import {
+  DownloadSimpleIcon,
+  FileCsvIcon,
+  FilePdfIcon,
+  FilePngIcon,
+  FileXlsIcon,
+} from '@phosphor-icons/react';
+import { FC, ReactNode } from 'react';
 
-import { ButtonSize } from 'waldur-ui';
+import { ButtonSize, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-} from '@/table/ActionsDropdown';
 
 export interface ChartExportDropdownProps {
   onExportPng?: () => void;
@@ -17,6 +19,9 @@ export interface ChartExportDropdownProps {
   disabled?: boolean;
   size?: ButtonSize;
   className?: string;
+  label?: ReactNode;
+  icon?: ReactNode;
+  align?: 'start' | 'center' | 'end';
 }
 
 export const ChartExportDropdown: FC<ChartExportDropdownProps> = ({
@@ -27,6 +32,9 @@ export const ChartExportDropdown: FC<ChartExportDropdownProps> = ({
   disabled,
   size = 'md',
   className = 'w-auto',
+  label = translate('Export'),
+  icon = <DownloadSimpleIcon weight="bold" />,
+  align = 'end',
 }) => {
   const hasOptions = Boolean(
     onExportPng || onExportPdf || onExportCsv || onExportExcel,
@@ -35,42 +43,49 @@ export const ChartExportDropdown: FC<ChartExportDropdownProps> = ({
   if (!hasOptions) return null;
 
   return (
-    <ActionsDropdownComponent
-      labeled
-      disabled={disabled}
-      align="end"
-      drop="down"
-      size={size}
-      className={className}
-      label={
-        <>
-          <span className="svg-icon svg-icon-2 me-1">
-            <DownloadSimpleIcon weight="bold" />
-          </span>
-          {translate('Export')}
-        </>
-      }
-    >
-      {onExportPng && (
-        <ActionsDropdownItem onSelect={onExportPng}>
-          {translate('Export as PNG')}
-        </ActionsDropdownItem>
-      )}
-      {onExportPdf && (
-        <ActionsDropdownItem onSelect={onExportPdf}>
-          {translate('Export as PDF')}
-        </ActionsDropdownItem>
-      )}
-      {onExportCsv && (
-        <ActionsDropdownItem onSelect={onExportCsv}>
-          {translate('Export as CSV')}
-        </ActionsDropdownItem>
-      )}
-      {onExportExcel && (
-        <ActionsDropdownItem onSelect={onExportExcel}>
-          {translate('Export as XLSX')}
-        </ActionsDropdownItem>
-      )}
-    </ActionsDropdownComponent>
+    <Menu>
+      <Menu.TriggerButton
+        disabled={disabled}
+        size={size}
+        className={className}
+        icon={icon}
+      >
+        {label}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom" align={align}>
+        {onExportPng && (
+          <Menu.Item
+            icon={<FilePngIcon weight="bold" />}
+            onSelect={onExportPng}
+          >
+            {translate('PNG')}
+          </Menu.Item>
+        )}
+        {onExportPdf && (
+          <Menu.Item
+            icon={<FilePdfIcon weight="bold" />}
+            onSelect={onExportPdf}
+          >
+            {translate('PDF')}
+          </Menu.Item>
+        )}
+        {onExportCsv && (
+          <Menu.Item
+            icon={<FileCsvIcon weight="bold" />}
+            onSelect={onExportCsv}
+          >
+            {translate('CSV')}
+          </Menu.Item>
+        )}
+        {onExportExcel && (
+          <Menu.Item
+            icon={<FileXlsIcon weight="bold" />}
+            onSelect={onExportExcel}
+          >
+            {translate('Excel')}
+          </Menu.Item>
+        )}
+      </Menu.Content>
+    </Menu>
   );
 };

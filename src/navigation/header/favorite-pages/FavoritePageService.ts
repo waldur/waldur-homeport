@@ -5,7 +5,7 @@ import {
   useRouter,
 } from '@uirouter/react';
 import { isMatch, pickBy, uniqueId } from 'lodash-es';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { useSelector } from 'react-redux';
 import {
   marketplaceCategoriesRetrieve,
@@ -40,7 +40,33 @@ interface FavoritePageContext {
   resource?: Resource;
 }
 
+/**
+ * The favourite pages, kept in localStorage, and a store over them: every
+ * useFavoritePages() reads the same list and sees each change, wherever it
+ * was made (the header search, a breadcrumb switcher).
+ */
 class FavoritePageServiceClass {
+  private listeners = new Set<() => void>();
+  private snapshot: FavoritePage[] | null = null;
+
+  subscribe = (listener: () => void) => {
+    this.listeners.add(listener);
+    return () => {
+      this.listeners.delete(listener);
+    };
+  };
+
+  /** The list as last read, the same array until it changes. */
+  getSnapshot = (): FavoritePage[] => {
+    this.snapshot ??= this.list();
+    return this.snapshot;
+  };
+
+  private changed = () => {
+    this.snapshot = null;
+    this.listeners.forEach((listener) => listener());
+  };
+
   add = (page: Omit<FavoritePage, 'id'>) => {
     const prevList = this.list();
     let id = uniqueId();
@@ -52,6 +78,7 @@ class FavoritePageServiceClass {
       FAVORITE_PAGES_KEY,
       JSON.stringify(prevList.concat(newPage)),
     );
+    this.changed();
   };
 
   list = (): FavoritePage[] => {
@@ -73,6 +100,7 @@ class FavoritePageServiceClass {
     const prevList = this.list();
     const newList = prevList.filter((p) => p.id !== page.id);
     localStorage.setItem(FAVORITE_PAGES_KEY, JSON.stringify(newList));
+    this.changed();
   };
 }
 
@@ -178,8 +206,12 @@ export const useFavoritePages = () => {
   const project = useProject();
   const resource = useSelector(getResource);
 
-  const getPagesList = () => FavoritePageService.list().reverse();
-  const [favPages, setFavPages] = useState(() => getPagesList());
+  const pages = useSyncExternalStore(
+    FavoritePageService.subscribe,
+    FavoritePageService.getSnapshot,
+  );
+  // Newest first.
+  const favPages = useMemo(() => [...pages].reverse(), [pages]);
 
   const findFavoritePage = useCallback(
     (state, params) =>
@@ -197,10 +229,9 @@ export const useFavoritePages = () => {
       page.params = pickBy(page.params, (value) => value !== null);
       if (findFavoritePage(page.state, page.params)) return;
       FavoritePageService.add(page);
-      setFavPages(getPagesList());
       if (event) event.stopPropagation();
     },
-    [favPages, setFavPages, getPagesList, findFavoritePage],
+    [findFavoritePage],
   );
 
   const currentPageSavedId = useMemo(() => {
@@ -244,10 +275,9 @@ export const useFavoritePages = () => {
       if (event) event.preventDefault();
       const page = findFavoritePage(state, params);
       FavoritePageService.remove(page);
-      setFavPages(getPagesList());
       if (event) event.stopPropagation();
     },
-    [setFavPages, getPagesList, findFavoritePage],
+    [findFavoritePage],
   );
 
   return {

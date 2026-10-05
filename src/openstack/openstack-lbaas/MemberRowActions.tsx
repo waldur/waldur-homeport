@@ -18,7 +18,7 @@ import { PullActionItem } from '@/resource/actions/PullActionItem';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 const EditMemberDialog: FC<ActionDialogProps<OpenStackPoolMember>> = ({
   resolve: { resource, refetch },
@@ -119,7 +119,7 @@ interface MemberRowActionsProps {
 }
 
 export const MemberRowActions: FC<MemberRowActionsProps> = ({ row, fetch }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <DialogActionItem
       title={translate('Edit')}
       modalComponent={EditMemberDialogLazy}
@@ -133,5 +133,5 @@ export const MemberRowActions: FC<MemberRowActionsProps> = ({ row, fetch }) => (
       refetch={fetch}
     />
     <DestroyMemberButton resource={row} refetch={fetch} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );

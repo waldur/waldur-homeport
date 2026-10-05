@@ -18,15 +18,14 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import {
-  ActionsDropdown,
-  ActionsDropdownSeparator,
-} from '@/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { RevealApiKeyDialog } from './RevealApiKeyDialog';
@@ -348,7 +347,7 @@ export const ApiKeyActionsDropdown: FC<{
       )}
       {canManage && keyManagement && (
         // Set apart from the reversible actions above it.
-        <ActionsDropdownSeparator />
+        <Menu.Separator />
       )}
       {canManage && keyManagement && (
         <ActionItem

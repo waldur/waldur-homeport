@@ -9,13 +9,11 @@ import {
   changelogUpgradeReportRetrieve,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 import { ScheduleUpgradeDialog } from './ScheduleUpgradeDialog';
 import { UpgradeCommandsDialog } from './UpgradeCommandsDialog';
@@ -98,22 +96,25 @@ export const ChangelogToolbar: FC = () => {
 
   return (
     <>
-      <ActionDropdownButton
-        variant="tertiary"
-        title={translate('Actions')}
-        disabled={loading}
-      >
-        <ActionItem
-          title={translate('Upgrade commands')}
-          action={openCommandsDialog}
-          iconNode={<TerminalWindowIcon weight="bold" />}
-        />
-        <ActionItem
-          title={translate('Download report')}
-          action={downloadReport}
-          iconNode={<DownloadIcon weight="bold" />}
-        />
-      </ActionDropdownButton>
+      <Menu>
+        <Menu.TriggerButton variant="tertiary" size="lg" disabled={loading}>
+          {translate('Actions')}
+        </Menu.TriggerButton>
+        <Menu.Content look="actions" side="bottom">
+          <Menu.Item
+            icon={<TerminalWindowIcon weight="bold" />}
+            onSelect={openCommandsDialog}
+          >
+            {translate('Upgrade commands')}
+          </Menu.Item>
+          <Menu.Item
+            icon={<DownloadIcon weight="bold" />}
+            onSelect={downloadReport}
+          >
+            {translate('Download report')}
+          </Menu.Item>
+        </Menu.Content>
+      </Menu>
       <BaseButton
         label={translate('Schedule upgrade')}
         iconNode={<CalendarPlusIcon weight="bold" />}

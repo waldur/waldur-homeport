@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   pushStateLocationPlugin,
@@ -53,6 +53,10 @@ const MEMBERS = [
     powerLevel: 0,
   },
 ];
+
+// The icon-only kebab, by its accessible name.
+const actionsToggle = (container: HTMLElement) =>
+  within(container).getByRole('button', { name: 'Actions' });
 
 const renderHeader = (props: Record<string, unknown> = {}) =>
   render(
@@ -117,8 +121,7 @@ describe('MatrixChatHeader', () => {
     const user = userEvent.setup();
     h.call.rtcAvailable = true;
     const { container } = renderHeader({ roomAlias: '#llm:server' });
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     expect(await screen.findByText('Start call')).toBeTruthy();
     expect(screen.getByText(/external Matrix client/i)).toBeTruthy();
   });
@@ -126,8 +129,7 @@ describe('MatrixChatHeader', () => {
   it('shows the Matrix login before handing the room to an external client', async () => {
     const user = userEvent.setup();
     const { container } = renderHeader({ roomAlias: '#llm:server' });
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     await user.click(await screen.findByText(/external Matrix client/i));
     expect(useModal().openDialog).toHaveBeenCalledWith(
       MatrixCredentialsDialog,
@@ -142,8 +144,7 @@ describe('MatrixChatHeader', () => {
     h.call.rtcAvailable = true;
     ENV.plugins.WALDUR_CORE.MATRIX_EXTERNAL_LOGIN_METHOD = 'none';
     const { container } = renderHeader({ roomAlias: '#llm:server' });
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     expect(await screen.findByText('Start call')).toBeTruthy();
     expect(screen.queryByText(/external Matrix client/i)).toBeNull();
   });
@@ -154,8 +155,7 @@ describe('MatrixChatHeader', () => {
     h.call.callState = 'connected';
     h.call.callRoomUuid = 'room-1';
     const { container } = renderHeader({ roomAlias: '#llm:server' });
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     expect(await screen.findByText('End call')).toBeTruthy();
   });
 
@@ -165,15 +165,14 @@ describe('MatrixChatHeader', () => {
     h.call.callState = 'connected';
     h.call.callRoomUuid = 'some-other-room';
     const { container } = renderHeader({ roomAlias: '#llm:server' });
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     const item = await screen.findByText('Start call');
     expect(item).toBeTruthy();
     // Radix marks a disabled row with aria-disabled/data-disabled rather
     // than Bootstrap's `.disabled` class — real semantics assistive tech can
     // read, where the previous markup only looked disabled.
     // eslint-disable-next-line testing-library/no-node-access
-    expect(item.closest('.dropdown-item')).toHaveAttribute(
+    expect(item.closest('[role="menuitem"]')).toHaveAttribute(
       'aria-disabled',
       'true',
     );
@@ -212,8 +211,7 @@ describe('MatrixChatHeader', () => {
   it('renders the mute item in the kebab and not mark-as-read', async () => {
     const user = userEvent.setup();
     const { container } = renderHeader();
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     expect(await screen.findByText('Mute')).toBeTruthy();
     expect(screen.queryByText('Mark as read')).toBeNull();
   });
@@ -239,8 +237,7 @@ describe('MatrixChatHeader', () => {
     const client = mutedClient();
     h.isRoomMuted.mockReturnValue(false);
     const { container } = renderHeader();
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     await user.click(await screen.findByText('Mute'));
     expect(h.setRoomMuted).toHaveBeenCalledWith(client, '!room:server', true);
     await vi.waitFor(() =>
@@ -253,8 +250,7 @@ describe('MatrixChatHeader', () => {
     mutedClient();
     h.isRoomMuted.mockReturnValue(true);
     const { container } = renderHeader();
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     expect(await screen.findByText('Unmute')).toBeTruthy();
     expect(screen.queryByText('Mute')).toBeNull();
   });
@@ -265,8 +261,7 @@ describe('MatrixChatHeader', () => {
     h.isRoomMuted.mockReturnValue(false);
     h.setRoomMuted = vi.fn().mockRejectedValue(new Error('forbidden'));
     const { container } = renderHeader();
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    await user.click(container.querySelector('.dropdown-toggle')!);
+    await user.click(actionsToggle(container));
     await user.click(await screen.findByText('Mute'));
     await vi.waitFor(() =>
       expect(useNotify().showError).toHaveBeenCalledWith(

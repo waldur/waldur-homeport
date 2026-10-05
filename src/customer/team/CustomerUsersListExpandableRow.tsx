@@ -4,7 +4,7 @@ import { CustomerUser } from 'waldur-js-client';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -49,7 +49,7 @@ export const RowActions = ({
   const grant = { ...project, uuid: project.project_uuid };
 
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <EditProjectUserButton customer={row} project={grant} refetch={refetch} />
 
       <DeleteProjectUserButton
@@ -57,7 +57,7 @@ export const RowActions = ({
         project={grant}
         refetch={refetch}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 
