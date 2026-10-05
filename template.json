@@ -38177,6 +38177,21 @@
       "feature_area": "confirmation-drawer"
     }
   },
+  "Pending resource creation": {
+    "context": {
+      "feature_area": "resource-pending"
+    }
+  },
+  "Pending resource termination": {
+    "context": {
+      "feature_area": "resource-pending"
+    }
+  },
+  "Pending resource update": {
+    "context": {
+      "feature_area": "resource-pending"
+    }
+  },
   "Pending review": {
     "context": {
       "feature_area": "call-management"
@@ -46214,21 +46229,6 @@
   "Resource statistics by state and offering": {
     "context": {
       "feature_area": "reporting"
-    }
-  },
-  "Resource successfully created": {
-    "context": {
-      "feature_area": "resource-pending"
-    }
-  },
-  "Resource successfully terminated": {
-    "context": {
-      "feature_area": "resource-pending"
-    }
-  },
-  "Resource successfully updated": {
-    "context": {
-      "feature_area": "resource-pending"
     }
   },
   "Resource sync has been scheduled.": {
