@@ -15,7 +15,6 @@ import {
 
 import { BaseButton } from 'waldur-ui';
 
-import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { omit } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -26,6 +25,8 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
 import { ProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
+
+import { formatTimelineEntry } from './utils';
 
 const ResourceOrderErrorDialog = lazyComponent(() =>
   import('./ResourceOrderErrorDialog').then((module) => ({
@@ -60,34 +61,38 @@ const getSortedSteps = (resource: Resource) => [
   {
     label: translate('Order submitted'),
     description: [
-      [
+      formatTimelineEntry(
         resource.creation_order.created_by_full_name ||
           resource.creation_order.created_by_username,
-        formatDateTime(resource.creation_order.created),
-      ].join(', '),
+        resource.creation_order.created,
+      ),
     ],
 
     state: [],
   },
   {
     label: translate('Approved'),
-    description: [
-      [
-        resource.creation_order.consumer_reviewed_by_full_name ||
-          resource.creation_order.consumer_reviewed_by_username,
-        formatDateTime(resource.creation_order.consumer_reviewed_at),
-      ].join(', '),
-    ],
+    // Orders predating review bookkeeping carry no reviewer and no review
+    // time; leave the line out rather than print a stray comma and the clock.
+    description: resource.creation_order.consumer_reviewed_at
+      ? [
+          formatTimelineEntry(
+            resource.creation_order.consumer_reviewed_by_full_name ||
+              resource.creation_order.consumer_reviewed_by_username,
+            resource.creation_order.consumer_reviewed_at,
+          ),
+        ]
+      : undefined,
 
     state: [],
   },
   {
     label: translate('Creation has failed'),
     description: [
-      [
+      formatTimelineEntry(
         translate('System'),
-        formatDateTime(resource.creation_order.modified),
-      ].join(', '),
+        resource.creation_order.modified,
+      ),
     ],
 
     state: ['erred'],

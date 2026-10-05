@@ -61,6 +61,46 @@ describe('getSteps', () => {
     expect(waiting.description[0]).toBe('Waiting for the project to start');
   });
 
+  it('describes the final step as pending while the order is unfinished', () => {
+    // "Resource successfully created" under a step that has not run told the
+    // viewer of a pending order that their resource already existed.
+    expect(lastStep({ state: 'pending-consumer' }).description[0]).toBe(
+      'Pending resource creation',
+    );
+    expect(
+      lastStep({ state: 'pending-consumer', type: 'Terminate' }).description[0],
+    ).toBe('Pending resource termination');
+    expect(lastStep({ state: 'done' }).description[0]).toBe('Done');
+  });
+
+  it('does not invent a review time when none was recorded', () => {
+    // formatDateTime(null) renders the current time, so the approval entry
+    // used to carry no actor and a timestamp that moved on every reload.
+    const steps = getSteps(
+      buildResource({
+        state: 'executing',
+        consumer_reviewed_by_full_name: null,
+        consumer_reviewed_at: null,
+      }),
+    );
+    const approved = steps[1];
+
+    expect(approved.label).toBe('Approved');
+    expect(approved.description).toBeUndefined();
+  });
+
+  it('falls back to the reviewer username when there is no full name', () => {
+    const steps = getSteps(
+      buildResource({
+        state: 'executing',
+        consumer_reviewed_by_full_name: '',
+        consumer_reviewed_by_username: 'jdoe',
+      }),
+    );
+
+    expect(steps[1].description[0]).toMatch(/^jdoe, /);
+  });
+
   it('does not mark provisioning as done while the project has not started', () => {
     const steps = getSteps(buildResource({ state: 'pending-project' }));
     const creation = steps.find((step) => step.label === 'Creation');

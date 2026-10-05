@@ -28,3 +28,23 @@ export const shouldHideProviderActions = (
   order.offering_type === SITE_AGENT_PLUGIN &&
   !(pluginOptions ?? order.offering_plugin_options)
     ?.enable_display_of_order_actions_for_service_provider;
+
+/**
+ * Approve and decline each render nothing without their own permission, so
+ * any surface that wraps them in a menu must ask this first — otherwise the
+ * trigger is there to open a panel with no rows in it.
+ */
+export const canReviewOrderAsConsumer = (
+  user,
+  order: Pick<OrderDetails, 'customer_uuid' | 'project_uuid'>,
+) =>
+  hasConsumerPermission(user, {
+    permission: PermissionEnum.APPROVE_ORDER,
+    customerId: order.customer_uuid,
+    projectId: order.project_uuid,
+  }) ||
+  hasConsumerPermission(user, {
+    permission: PermissionEnum.REJECT_ORDER,
+    customerId: order.customer_uuid,
+    projectId: order.project_uuid,
+  });

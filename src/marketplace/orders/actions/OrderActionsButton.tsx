@@ -21,7 +21,10 @@ import { MarkAsDoneButton } from './MarkAsDoneButton';
 import { OrderConsumerActions } from './OrderConsumerActions';
 import { OrderProviderActions } from './OrderProviderActions';
 import { RetryOrderButton } from './RetryOrderButton';
-import { shouldHideProviderActions } from './selectors';
+import {
+  canReviewOrderAsConsumer,
+  shouldHideProviderActions,
+} from './selectors';
 import { SetAsErredButton } from './SetAsErredButton';
 
 export const OrderActionsButton = ({
@@ -96,20 +99,12 @@ export const OrderActionsButton = ({
     });
   }, [order, user]);
 
-  const showConsumerActions = useMemo(() => {
-    if (order.state !== 'pending-consumer') return false;
-    const canApprove = hasConsumerPermission(user, {
-      permission: PermissionEnum.APPROVE_ORDER,
-      customerId: order.customer_uuid,
-      projectId: order.project_uuid,
-    });
-    const canReject = hasConsumerPermission(user, {
-      permission: PermissionEnum.REJECT_ORDER,
-      customerId: order.customer_uuid,
-      projectId: order.project_uuid,
-    });
-    return canApprove || canReject;
-  }, [order, user]);
+  const showConsumerActions = useMemo(
+    () =>
+      order.state === 'pending-consumer' &&
+      canReviewOrderAsConsumer(user, order),
+    [order, user],
+  );
 
   if (order.state === 'pending-provider' && !hideProviderActions) {
     return (
