@@ -22,7 +22,9 @@ export function mapEventToMessage(
     content.msgtype === 'm.file';
   // Drop only bodyless *text* events. Media/voice notes carry their payload in
   // url/info/MSC fields and are valid with an empty body (some clients omit it).
-  if (!content.body && !isMediaMsg) return null;
+  // Event content is whatever the sender wrote, not necessarily strings.
+  const body = typeof content.body === 'string' ? content.body : '';
+  if (!body && !isMediaMsg) return null;
 
   const senderId = event.getSender();
   const member = room?.getMember(senderId);
@@ -55,10 +57,10 @@ export function mapEventToMessage(
     txnId: event.getTxnId?.() ?? undefined,
     sender: senderId,
     senderDisplayName: member?.name || formatDisplayName(senderId),
-    body: content.body ?? '',
+    body,
     timestamp: event.getTs(),
     type: content.msgtype || 'm.text',
-    url: content.url,
+    url: typeof content.url === 'string' ? content.url : undefined,
     info: content.info,
     mentionedUserIds,
     isVoice,

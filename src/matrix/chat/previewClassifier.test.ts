@@ -3,6 +3,15 @@ import { describe, expect, it } from 'vitest';
 import { classifyPreviewEvent } from './previewClassifier';
 
 describe('classifyPreviewEvent', () => {
+  it('previews a message whose body is not a string as empty', () => {
+    expect(
+      classifyPreviewEvent('m.room.message', { msgtype: 'm.text', body: 42 }),
+    ).toMatchObject({ kind: 'text', text: '' });
+    expect(
+      classifyPreviewEvent('m.room.message', { msgtype: 'm.file', body: {} }),
+    ).toMatchObject({ kind: 'file', text: '', fileName: '' });
+  });
+
   it('classifies a plain text message', () => {
     const result = classifyPreviewEvent('m.room.message', {
       msgtype: 'm.text',

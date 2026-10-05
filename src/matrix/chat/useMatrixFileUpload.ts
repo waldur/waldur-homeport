@@ -4,12 +4,9 @@ import { translate } from '@/i18n';
 import { NotifyService } from '@/store/notify';
 
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
+import { AUDIO_TYPES, IMAGE_TYPES, VIDEO_TYPES } from './mediaTypes';
 import { withFreshAccessToken } from './session';
 import { useMatrixClient } from './useMatrixClient';
-
-const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-const VIDEO_TYPES = ['video/mp4', 'video/webm', 'video/ogg'];
-const AUDIO_TYPES = ['audio/mpeg', 'audio/ogg', 'audio/wav', 'audio/webm'];
 
 function getMsgType(mimeType: string) {
   if (IMAGE_TYPES.includes(mimeType)) return 'm.image';

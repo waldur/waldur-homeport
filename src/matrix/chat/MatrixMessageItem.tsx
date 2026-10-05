@@ -8,6 +8,7 @@ import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { getChatAvatarColor } from './chatColors';
+import { inlineSafeType } from './mediaTypes';
 import { MessageReactionChips } from './MessageReactionChips';
 import { MessageReactionToolbar } from './MessageReactionToolbar';
 import { withFreshAccessToken } from './session';
@@ -55,7 +56,9 @@ function useAuthenticatedMediaUrl(mxcUrl: string | undefined) {
       })
       .then((blob) => {
         if (revoked) return;
-        const created = URL.createObjectURL(blob);
+        const created = URL.createObjectURL(
+          blob.slice(0, blob.size, inlineSafeType(blob.type)),
+        );
         // A second guard inside the .then is required because the effect can
         // re-run (new mxc/client) between the fetch dispatch and resolve.
         // The cleanup will have set `revoked = true`; revoke the blob we
@@ -310,6 +313,7 @@ const MediaContent: FC<{
       return (
         <a
           href={httpUrl}
+          download={message.body}
           target="_blank"
           rel="noopener noreferrer"
           className="tc-file-card"

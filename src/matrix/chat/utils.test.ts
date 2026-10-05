@@ -53,6 +53,23 @@ describe('mapEventToMessage', () => {
     const msg = mapEventToMessage(makeEvent({ msgtype: 'm.text', body: '' }));
     expect(msg).toBeNull();
   });
+
+  // Any room member can send any JSON; a non-string body or url used to throw
+  // while rendering and broke the room for everyone until it was redacted.
+  it('drops a text message whose body is not a string', () => {
+    const msg = mapEventToMessage(
+      makeEvent({ msgtype: 'm.text', body: { evil: true } }),
+    );
+    expect(msg).toBeNull();
+  });
+
+  it('ignores a media url that is not a string', () => {
+    const msg = mapEventToMessage(
+      makeEvent({ msgtype: 'm.file', body: 'a.txt', url: ['mxc://x/y'] }),
+    );
+    expect(msg?.url).toBeUndefined();
+    expect(msg?.body).toBe('a.txt');
+  });
 });
 
 describe('getSenderName', () => {
