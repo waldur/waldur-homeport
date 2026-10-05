@@ -2,6 +2,17 @@
 # The CI "Scan JS dependencies" job passes --config=.osv-scanner.toml when this
 # file exists (waldur-pipelines /templates/test/vulnerability-scan.yml).
 #
-# No suppressions are active. Add an [[IgnoredVulns]] block only when an
-# advisory has no compatible fixed version, and state the re-evaluation
-# trigger in the reason so the entry does not outlive its premise.
+# Add an [[IgnoredVulns]] block only when an advisory has no compatible fixed
+# version, and state the re-evaluation trigger in the reason so the entry does
+# not outlive its premise.
+
+[[IgnoredVulns]]
+id = "GHSA-vfj7-8cjw-p6xm"
+# braces stack-exhaustion DoS via deeply nested patterns. The advisory affects
+# every version through 3.0.3 (last_affected, no fixed version) and 3.0.3 is the
+# latest published release as of 2026-10. The only occurrence is braces@3.0.3
+# via micromatch@4.0.8, pulled in solely by stylelint (directly and through
+# fast-glob/globby) — dev lint tooling that only expands glob patterns from
+# repo config, never untrusted input, and is not shipped in the bundle.
+# Re-evaluate once braces publishes a patched release.
+reason = "No fixed braces release exists (<=3.0.3 affected). Only via micromatch in stylelint dev tooling; globs come from repo config, never untrusted input. Re-evaluate when braces ships a fix."
