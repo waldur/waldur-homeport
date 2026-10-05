@@ -13,7 +13,7 @@ import { FC, useMemo, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Menu, MenuPopover } from 'waldur-ui';
 
 import { GRID_BREAKPOINTS } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -21,10 +21,7 @@ import { Link } from '@/core/Link';
 import { FilterBox } from '@/form/FilterBox';
 import { Select } from '@/form/select';
 import { translate } from '@/i18n';
-import {
-  ActionsPopoverComponent,
-  ActionsPopoverItem,
-} from '@/table/ActionsDropdown';
+import { TableDropdownToggle } from '@/table/ActionsDropdown';
 
 import { SCRIPT_ROWS } from './utils';
 
@@ -173,87 +170,90 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           size="lg"
         />
       </div>
-      {/* ActionsPopoverComponent, not ActionsDropdownComponent: the search
-          box below needs its keystrokes to reach it reliably, which a
-          Radix DropdownMenu's typeahead-over-its-item-collection cannot
-          guarantee — see ActionsPopoverComponent's own comment. */}
-      <ActionsPopoverComponent
-        label={
-          isSmallScr
-            ? translate('Env variables')
-            : translate('Environment variables')
-        }
-        labeled
-        menuStyle={{ zIndex: 1056 }}
-        drop="down"
-      >
-        <FilterBox
-          type="search"
-          placeholder={translate('Search...')}
-          onChange={(e) => setQuery(e.target.value)}
-          inputClassName="border-0 shadow-none"
-          className="border-bottom"
-          autoFocus
-        />
+      {/* MenuPopover, not Menu: the search box below needs its
+          keystrokes to reach it reliably, which a Radix DropdownMenu's
+          typeahead-over-its-item-collection cannot guarantee. */}
+      <MenuPopover>
+        <MenuPopover.Trigger asChild>
+          <TableDropdownToggle
+            label={
+              isSmallScr
+                ? translate('Env variables')
+                : translate('Environment variables')
+            }
+            labeled
+          />
+        </MenuPopover.Trigger>
+        <MenuPopover.Content
+          look="actions"
+          side="bottom"
+          style={{ zIndex: 1056 }}
+          className="max-h-(--radix-popover-content-available-height) overflow-y-auto"
+        >
+          <FilterBox
+            type="search"
+            placeholder={translate('Search...')}
+            onChange={(e) => setQuery(e.target.value)}
+            inputClassName="border-0 shadow-none"
+            className="border-bottom"
+            autoFocus
+          />
 
-        {filteredEnvItems.map((option) => {
-          return (
-            <ActionsPopoverItem
-              key={option.type + option.value}
-              className="d-flex justify-content-between"
-              as={option.type === 'link' ? Link : undefined}
-              state={option.type === 'link' ? state.name : undefined}
-              params={
-                option.type === 'link' ? { tab: option.value } : undefined
-              }
-            >
-              {option.type === 'link' ? (
-                <>
-                  <span>{option.label}</span>
-                  <ArrowSquareOutIcon
-                    weight="bold"
-                    size={20}
-                    className="text-muted"
-                  />
-                </>
-              ) : (
-                <>
-                  <span>
-                    <span className="svg-icon svg-icon-2">
-                      {option.type === 'environ' ? (
-                        <KeyIcon weight="bold" />
-                      ) : option.type === 'options' ? (
-                        <KeyboardIcon weight="bold" />
-                      ) : option.type === 'roles' ? (
-                        <UserIcon weight="bold" />
-                      ) : (
-                        <SlidersIcon weight="bold" />
-                      )}
-                    </span>
+          {filteredEnvItems.map((option) => {
+            return (
+              <Menu.Item
+                key={option.type + option.value}
+                className="d-flex justify-content-between"
+                asChild={option.type === 'link'}
+              >
+                {option.type === 'link' ? (
+                  <Link state={state.name} params={{ tab: option.value }}>
                     <span>{option.label}</span>
-                    <span className="text-muted ms-3">
-                      {option.type === 'environ'
-                        ? 'ENV'
-                        : option.type === 'options'
-                          ? translate('User input')
-                          : option.type === 'roles'
-                            ? translate('Role')
-                            : option.type === 'resource_options'
-                              ? translate('Resource option')
-                              : null}
+                    <ArrowSquareOutIcon
+                      weight="bold"
+                      size={20}
+                      className="text-muted"
+                    />
+                  </Link>
+                ) : (
+                  <>
+                    <span>
+                      <span className="svg-icon svg-icon-2">
+                        {option.type === 'environ' ? (
+                          <KeyIcon weight="bold" />
+                        ) : option.type === 'options' ? (
+                          <KeyboardIcon weight="bold" />
+                        ) : option.type === 'roles' ? (
+                          <UserIcon weight="bold" />
+                        ) : (
+                          <SlidersIcon weight="bold" />
+                        )}
+                      </span>
+                      <span>{option.label}</span>
+                      <span className="text-muted ms-3">
+                        {option.type === 'environ'
+                          ? 'ENV'
+                          : option.type === 'options'
+                            ? translate('User input')
+                            : option.type === 'roles'
+                              ? translate('Role')
+                              : option.type === 'resource_options'
+                                ? translate('Resource option')
+                                : null}
+                      </span>
                     </span>
-                  </span>
-                  <CopyToClipboardButton
-                    value={option.label}
-                    size={20}
-                    onlyButton
-                  />
-                </>
-              )}
-            </ActionsPopoverItem>
-          );
-        })}
-      </ActionsPopoverComponent>
+                    <CopyToClipboardButton
+                      value={option.label}
+                      size={20}
+                      onlyButton
+                    />
+                  </>
+                )}
+              </Menu.Item>
+            );
+          })}
+        </MenuPopover.Content>
+      </MenuPopover>
     </>
   );
 };

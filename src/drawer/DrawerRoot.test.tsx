@@ -1,16 +1,14 @@
-import * as RadixPopover from '@radix-ui/react-popover';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { describe, expect, it, vi } from 'vitest';
 
+import { Menu, Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
+
 import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { Select } from '@/form/select';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { useDrawer } from './actions';
 import { DrawerProvider } from './DrawerContext';
@@ -39,19 +37,15 @@ const DirtyDrawerContent = () => {
  */
 const OverlayDrawerContent = () => (
   <div>
-    <ActionsDropdownComponent size="sm">
-      <ActionsDropdownItem onSelect={() => undefined}>
-        Start call
-      </ActionsDropdownItem>
-    </ActionsDropdownComponent>
-    <RadixPopover.Root modal={false}>
-      <RadixPopover.Trigger asChild>
+    <ActionsMenu size="sm">
+      <Menu.Item onSelect={() => undefined}>Start call</Menu.Item>
+    </ActionsMenu>
+    <Popover>
+      <PopoverTrigger asChild>
         <button type="button">3 members</button>
-      </RadixPopover.Trigger>
-      <RadixPopover.Portal>
-        <RadixPopover.Content>Mart Tamm</RadixPopover.Content>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+      </PopoverTrigger>
+      <PopoverContent>Mart Tamm</PopoverContent>
+    </Popover>
   </div>
 );
 
@@ -313,13 +307,7 @@ describe('DrawerRoot', () => {
     const user = userEvent.setup();
     const { openOverlays } = renderDrawer();
     openOverlays();
-    const toggle = await waitFor(() => {
-      // The icon-only kebab has no accessible name to query by.
-      // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
-      const el = document.querySelector<HTMLElement>('.dropdown-toggle');
-      expect(el).not.toBeNull();
-      return el!;
-    });
+    const toggle = await screen.findByRole('button', { name: 'Actions' });
 
     await user.click(toggle);
 

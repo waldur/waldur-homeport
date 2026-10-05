@@ -1,6 +1,6 @@
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { offeringOwnsPricing } from '../../utils';
 
@@ -15,7 +15,7 @@ import { UpdateAccessPoliciesAction } from './UpdateAccessPoliciesAction';
 
 export const PlanActions = ({ offering, plan, refetch, user }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       {hasPermission(user, {
         permission: PermissionEnum.UPDATE_OFFERING_PLAN,
         customerId: offering.customer_uuid,
@@ -64,6 +64,6 @@ export const PlanActions = ({ offering, plan, refetch, user }) => {
         customerId: offering.customer_uuid,
       }) && <ArchivePlanButton refetch={refetch} plan={plan} />}
       {user.is_staff && <DeletePlanButton refetch={refetch} plan={plan} />}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

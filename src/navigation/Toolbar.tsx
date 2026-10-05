@@ -10,6 +10,8 @@ import {
 
 import { BaseButton } from 'waldur-ui';
 
+import { translate } from '@/i18n';
+
 import { TabsList } from './TabsList';
 
 interface OwnProps {
@@ -35,7 +37,7 @@ const TabsScrollArrows: FunctionComponent = () => (
 
 export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
   const tabsScrollRef = useRef<HTMLDivElement>();
-  const tabsWrapperRef = useRef<HTMLDivElement>();
+  const tabsWrapperRef = useRef<HTMLElement>();
   const [showScrollArrows, setShowScrollArrows] = useState(false);
 
   const updateSize = useCallback(
@@ -67,11 +69,11 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
           ref={tabsScrollRef}
           className="d-flex align-items-stretch overflow-auto"
         >
-          <div ref={tabsWrapperRef} className="header-menu align-items-stretch">
-            <div className="menu menu-column menu-row menu-rounded menu-gray-500 menu-state-bg-light-primary fs-6 fw-bolder my-5 my-lg-0 align-items-stretch gap-8px">
+          <nav ref={tabsWrapperRef} aria-label={translate('Page tabs')}>
+            <ul className="m-0 flex w-full list-none items-stretch gap-[8px] p-0 fs-6 fw-bolder my-5 my-lg-0">
               <TabsList />
-            </div>
-          </div>
+            </ul>
+          </nav>
         </div>
         <div className="d-flex align-items-center gap-2 gap-lg-3">
           {actions}

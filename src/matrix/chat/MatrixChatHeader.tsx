@@ -6,11 +6,17 @@ import {
   PhoneDisconnectIcon,
   PhoneIcon,
 } from '@phosphor-icons/react';
-import * as RadixPopover from '@radix-ui/react-popover';
 import { FC, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { BaseButton, Tooltip } from 'waldur-ui';
+import {
+  BaseButton,
+  Menu,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Tooltip,
+} from 'waldur-ui';
 
 import Avatar from '@/core/Avatar';
 import { Link } from '@/core/Link';
@@ -20,11 +26,7 @@ import { canOpenInExternalClient } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 import { useNotify } from '@/store/notify';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-  ActionsDropdownSeparator,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { useMatrixCall } from './call/useMatrixCall';
 import { getChatAvatarColor } from './chatColors';
@@ -147,16 +149,16 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   };
 
   const kebab = (
-    <ActionsDropdownComponent size="sm">
-      <ActionsDropdownItem onSelect={handleMute}>
-        {muted ? (
-          <BellIcon size={18} className="me-2" weight="bold" />
-        ) : (
-          <BellSlashIcon size={18} className="me-2" weight="bold" />
-        )}
+    <ActionsMenu size="sm">
+      <Menu.Item
+        icon={
+          muted ? <BellIcon weight="bold" /> : <BellSlashIcon weight="bold" />
+        }
+        onSelect={handleMute}
+      >
         {muted ? translate('Unmute') : translate('Mute')}
-      </ActionsDropdownItem>
-      {(rtcAvailable || showExternal) && <ActionsDropdownSeparator />}
+      </Menu.Item>
+      {(rtcAvailable || showExternal) && <Menu.Separator />}
       {rtcAvailable &&
         (blockedByOtherCall ? (
           <Tooltip
@@ -166,33 +168,36 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
             side="left"
           >
             <span>
-              <ActionsDropdownItem disabled>
-                <PhoneIcon size={18} className="me-2" weight="bold" />
+              <Menu.Item disabled icon={<PhoneIcon weight="bold" />}>
                 {translate('Start call')}
-              </ActionsDropdownItem>
+              </Menu.Item>
             </span>
           </Tooltip>
         ) : (
-          <ActionsDropdownItem
+          <Menu.Item
+            icon={
+              isThisRoomsCall ? (
+                <PhoneDisconnectIcon weight="bold" />
+              ) : (
+                <PhoneIcon weight="bold" />
+              )
+            }
             onSelect={handleCall}
             disabled={busy}
             className={isThisRoomsCall ? 'text-danger' : undefined}
           >
-            {isThisRoomsCall ? (
-              <PhoneDisconnectIcon size={18} className="me-2" weight="bold" />
-            ) : (
-              <PhoneIcon size={18} className="me-2" weight="bold" />
-            )}
             {isThisRoomsCall ? translate('End call') : translate('Start call')}
-          </ActionsDropdownItem>
+          </Menu.Item>
         ))}
       {showExternal && (
-        <ActionsDropdownItem onSelect={handleOpenExternal}>
-          <ChatsCircleIcon size={18} className="me-2" weight="bold" />
+        <Menu.Item
+          icon={<ChatsCircleIcon weight="bold" />}
+          onSelect={handleOpenExternal}
+        >
           {translate('Open in external Matrix client')}
-        </ActionsDropdownItem>
+        </Menu.Item>
       )}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 
   return (
@@ -232,24 +237,22 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
           <span className="fw-semibold text-truncate">{roomName}</span>
         )}
         {members.length > 0 && (
-          <RadixPopover.Root modal={false}>
-            <RadixPopover.Trigger asChild>
+          <Popover>
+            <PopoverTrigger asChild>
               <button type="button" className="tc-header-members">
                 {'· '}
                 {translate('{count} members', { count: members.length })}
               </button>
-            </RadixPopover.Trigger>
-            <RadixPopover.Portal>
-              <RadixPopover.Content
-                side="bottom"
-                align="start"
-                sideOffset={2}
-                className="tc-members-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
-              >
-                <MatrixMembersList />
-              </RadixPopover.Content>
-            </RadixPopover.Portal>
-          </RadixPopover.Root>
+            </PopoverTrigger>
+            <PopoverContent
+              side="bottom"
+              align="start"
+              sideOffset={2}
+              className="tc-members-popover"
+            >
+              <MatrixMembersList />
+            </PopoverContent>
+          </Popover>
         )}
       </div>
 

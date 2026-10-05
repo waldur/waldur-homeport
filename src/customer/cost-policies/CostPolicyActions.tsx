@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { CostPolicyDeleteButton } from './CostPolicyDeleteButton';
 import { CostPolicyDuplicateButton } from './CostPolicyDuplicateButton';
@@ -14,9 +14,9 @@ interface CostPolicyActionsProps {
 }
 
 export const CostPolicyActions: FC<CostPolicyActionsProps> = (props) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <CostPolicyEditButton {...props} />
     <CostPolicyDuplicateButton {...props} />
     <CostPolicyDeleteButton {...props} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );

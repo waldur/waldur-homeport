@@ -273,8 +273,10 @@ exports[`InternalIpsList > renders list 1`] = `
                     <button
                       aria-expanded="false"
                       aria-haspopup="menu"
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-[transparent] text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[transparent] active:shadow-none disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6 p-0 h-[44px] w-[44px] dropdown-toggle btn-icon no-arrow"
+                      aria-label="Actions"
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-[transparent] text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[transparent] active:shadow-none disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6 p-0 h-[44px] w-[44px]"
                       data-state="closed"
+                      data-testid="actions-toggle"
                       id="radix-:r5:"
                       type="button"
                     >

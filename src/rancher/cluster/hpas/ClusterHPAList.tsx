@@ -9,7 +9,7 @@ import {
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import {
   RancherClusterFilter,
@@ -28,7 +28,7 @@ import { HPADeleteButton } from './HPADeleteButton';
 import { HPAUpdateButton } from './HPAUpdateButton';
 
 const RowActions = ({ row, yamlRetrieve, yamlUpdate }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <ViewYAMLButton
       yamlRetrieve={yamlRetrieve}
       yamlUpdate={yamlUpdate}
@@ -37,7 +37,7 @@ const RowActions = ({ row, yamlRetrieve, yamlUpdate }) => (
 
     <HPAUpdateButton hpa={row} />
     <HPADeleteButton hpa={row} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );
 
 export const ClusterHPAList: FunctionComponent<

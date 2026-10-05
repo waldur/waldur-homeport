@@ -1,0 +1,30 @@
+/**
+ * Custom Tailwind variants shared by waldur-homeport (src/tailwind.css),
+ * Storybook and the micro-app (apps/micro-app-poc/src/tailwind.css).
+ * Each one names a selector that would otherwise be repeated as a long
+ * `[&:is(…)]:` arbitrary variant on every class that uses it.
+ */
+
+/* The app has no `.dark` class: data-theme on <html> is the signal (the
+   main app swaps compiled stylesheets alongside it, see src/theme/utils.ts;
+   the micro-app sets it from the shared waldur/theme/name key). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* A highlighted row in a nav menu (waldur-ui's navMenuRowClassName):
+   hovered, Radix's keyboard/pointer highlight, a SubTrigger whose submenu
+   is open, or the current row: the current page's (`.active`, from
+   UISrefActive) or a radio row's checked value (the current language).
+   Disabled rows never highlight. */
+@custom-variant menu-row-active (&:is(:hover, [data-highlighted], [data-state='open'], [data-state='checked'], .active):not([data-disabled]));
+
+/* A highlighted row in an action menu (waldur-ui's ACTIONS_MENU_ROW_CLASSNAME):
+   Bootstrap's `.dropdown-item` also highlighted on :focus and :active. */
+@custom-variant action-row-active (&:is(:hover, :focus, :active, [data-highlighted], .active):not([data-disabled], :disabled, .disabled));
+
+/* A disabled action-menu row, however it is marked: Radix's data-disabled,
+   a native disabled button, or a `.disabled` class. */
+@custom-variant action-row-disabled (&:is([data-disabled], :disabled, .disabled));
+
+/* A hovered or current page tab (src/navigation/TabsList.tsx), unless the
+   tab is disabled. */
+@custom-variant tab-active (&:is(:hover, [aria-current]):not([data-disabled]));

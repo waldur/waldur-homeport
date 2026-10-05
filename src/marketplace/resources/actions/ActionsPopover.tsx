@@ -1,18 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
+import { FC, PropsWithChildren, useCallback } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import { Menu } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
+import { ActionList } from './ActionList';
 import { loadData } from './loadData';
 import { ModalActionsDialog } from './ModalActionsDialog';
-import {
-  ResourceActionMenuContext,
-  ResourceActionMenuContextModel,
-} from './ResourceActionMenuContext';
 
 const ModalMessage: FC<PropsWithChildren> = ({ children }) => (
   <div className="justify-content-center mx-5 my-5">
@@ -35,15 +32,6 @@ export const ActionsPopover = ({
     queryKey: ['ActionsPopover', url],
     queryFn: () => loadData(url),
   });
-  const actionMenuContextValue = useMemo<ResourceActionMenuContextModel>(
-    () => ({
-      hideDisabled: false,
-      query: '',
-      hideGroupName: true,
-      hideNonImportant: true,
-    }),
-    [],
-  );
   const refetch = useCallback(
     () => Promise.all([refetchParent(), refetchChild()]),
     [refetchParent, refetchChild],
@@ -55,6 +43,13 @@ export const ActionsPopover = ({
       refetch,
       ActionsList,
       className: 'resource-actions-modal',
+      // The dialog's accessible name (ModalShell's hidden Dialog.Title):
+      // named for the resource rather than by the visible title, which also
+      // holds the state badge and is only the badge for a resource with no
+      // name.
+      title: name
+        ? translate('Actions for {name}', { name })
+        : translate('Resource actions'),
       ...value,
     });
   };
@@ -70,18 +65,20 @@ export const ActionsPopover = ({
     </ModalMessage>
   ) : value ? (
     <>
-      <ResourceActionMenuContext.Provider value={actionMenuContextValue}>
+      <ActionList hideGroupName hideNonImportant>
         <ActionsList {...value} refetch={refetch} />
-      </ResourceActionMenuContext.Provider>
-      <div className="d-flex flex-column justify-content-center flex-grow-1">
-        <BaseButton
-          variant="text-primary"
-          className="text-decoration-underline my-1"
-          onClick={callback}
-          label={translate('Show all')}
-          size="sm"
-        />
-      </div>
+      </ActionList>
+      {/* A menu item, so that arrow keys reach it and selecting it closes
+          the menu before the dialog opens. It keeps the look of the
+          text-primary BaseButton it replaces: centred, underlined, in the
+          panel's text colour, with the button's light brand background when
+          highlighted. */}
+      <Menu.Item
+        onSelect={callback}
+        className="my-1 justify-center rounded-md px-[8px] py-[4px] text-center text-sm leading-5 font-medium tracking-[0.56px] underline text-inherit action-row-active:bg-[var(--btn-secondary-bg)] action-row-active:text-inherit"
+      >
+        {translate('Show all')}
+      </Menu.Item>
     </>
   ) : null;
 };

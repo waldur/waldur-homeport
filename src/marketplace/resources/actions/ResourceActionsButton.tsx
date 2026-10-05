@@ -14,7 +14,7 @@ interface ResourceActionsButtonProps {
   resource: Resource;
   refetch?(): void;
   labeled?: boolean;
-  drop?: 'up' | 'down' | 'start' | 'end';
+  side?: 'top' | 'right' | 'bottom' | 'left';
   disabled?: boolean;
   size?: 'sm' | 'lg';
 }
@@ -34,7 +34,7 @@ export const ResourceActionsButton: FunctionComponent<
       resource={props.resource}
       refetch={props.refetch}
       labeled={props.labeled}
-      drop={props.drop}
+      side={props.side}
       disabled={props.disabled}
       size={props.size}
     />

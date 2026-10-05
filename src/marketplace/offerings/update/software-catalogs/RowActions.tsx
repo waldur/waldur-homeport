@@ -1,11 +1,11 @@
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { DeleteSoftwareCatalogButton } from './DeleteSoftwareCatalogButton';
 import { EditSoftwareCatalogButton } from './EditSoftwareCatalogButton';
 
 const RowActions = ({ row, refetch, offering }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <EditSoftwareCatalogButton
         offering={offering}
         softwareCatalog={row}
@@ -16,7 +16,7 @@ const RowActions = ({ row, refetch, offering }) => {
         softwareCatalog={row}
         refetch={refetch}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 

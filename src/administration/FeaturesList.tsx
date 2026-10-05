@@ -1,5 +1,4 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
 import {
   useCallback,
@@ -13,7 +12,7 @@ import { Card, Nav, Tab } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
-import { BaseButton, Badge } from 'waldur-ui';
+import { BaseButton, Badge, Menu } from 'waldur-ui';
 
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
 import { ENV } from '@/core/config';
@@ -26,7 +25,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
 
 import { useSettingsUrlSync } from './settings/useSettingsUrlSync';
@@ -305,8 +304,9 @@ export const FeaturesList = () => {
                     </Nav>
                   </div>
                   {hiddenTabKeys.size > 0 && (
-                    <RadixDropdownMenu.Root onOpenChange={updateOverflow}>
-                      <RadixDropdownMenu.Trigger asChild>
+                    <ActionsMenu
+                      side="bottom"
+                      toggle={
                         <BaseButton
                           variant="text-secondary"
                           size="md"
@@ -317,50 +317,45 @@ export const FeaturesList = () => {
                             <DotsThreeVerticalIcon size={22} weight="bold" />
                           }
                         />
-                      </RadixDropdownMenu.Trigger>
-                      <RadixDropdownMenu.Portal>
-                        <RadixDropdownMenu.Content
-                          align="end"
-                          sideOffset={2}
-                          className="dropdown-menu show position-static"
-                        >
-                          <div className="mh-200px overflow-auto">
-                            {FEATURES_TABS.filter((tab) =>
-                              hiddenTabKeys.has(tab.key),
-                            ).map((tab) => {
-                              const filteredCount = getFilteredCount(tab.key);
-                              const hasMatches = filteredCount > 0;
-                              return (
-                                <ActionsDropdownItem
-                                  key={tab.key}
-                                  disabled={!hasMatches && !!query}
-                                  className={classNames(
-                                    'd-flex justify-content-between align-items-center',
-                                    { active: tab.key === activeKey },
-                                  )}
-                                  onClick={() => {
-                                    handleSelect(tab.key);
-                                    scrollToTab(tab.key);
-                                  }}
+                      }
+                      align="end"
+                      onOpenChange={updateOverflow}
+                    >
+                      <div className="mh-200px overflow-auto">
+                        {FEATURES_TABS.filter((tab) =>
+                          hiddenTabKeys.has(tab.key),
+                        ).map((tab) => {
+                          const filteredCount = getFilteredCount(tab.key);
+                          const hasMatches = filteredCount > 0;
+                          return (
+                            <Menu.Item
+                              key={tab.key}
+                              disabled={!hasMatches && !!query}
+                              className={classNames(
+                                'd-flex justify-content-between align-items-center',
+                                { active: tab.key === activeKey },
+                              )}
+                              onClick={() => {
+                                handleSelect(tab.key);
+                                scrollToTab(tab.key);
+                              }}
+                            >
+                              {tab.title}
+                              {query && (
+                                <Badge
+                                  variant="neutral"
+                                  size="sm"
+                                  tone="outline"
+                                  className="ms-2"
                                 >
-                                  {tab.title}
-                                  {query && (
-                                    <Badge
-                                      variant="neutral"
-                                      size="sm"
-                                      tone="outline"
-                                      className="ms-2"
-                                    >
-                                      {filteredCount}
-                                    </Badge>
-                                  )}
-                                </ActionsDropdownItem>
-                              );
-                            })}
-                          </div>
-                        </RadixDropdownMenu.Content>
-                      </RadixDropdownMenu.Portal>
-                    </RadixDropdownMenu.Root>
+                                  {filteredCount}
+                                </Badge>
+                              )}
+                            </Menu.Item>
+                          );
+                        })}
+                      </div>
+                    </ActionsMenu>
                   )}
                 </div>
                 {query && tabsWithMatches.length > 0 && (

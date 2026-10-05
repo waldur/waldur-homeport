@@ -5,16 +5,12 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 
+import { Menu } from 'waldur-ui';
+
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
-import {
-  NavMenu,
-  NavMenuContent,
-  NavMenuItem,
-  NavMenuTrigger,
-} from '@/navigation/NavMenu';
 
 import './BoxRadioField.scss';
 
@@ -241,13 +237,13 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
               onClick={() => onChange(selectedVersions[index].value)}
             >
               {choice.options?.length ? (
-                <NavMenu modal={false}>
+                <Menu modal={false}>
                   {/* Trigger. asChild composes onto the existing <div> —
                       Radix's own default Trigger element is a <button>,
                       which can't nest inside the enclosing
                       "form-check-info" <button> without breaking HTML
                       validity. */}
-                  <NavMenuTrigger asChild>
+                  <Menu.Trigger asChild>
                     <div className="version-selector">
                       <div />
                       <div>
@@ -260,25 +256,39 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                         <CaretDownIcon weight="bold" />
                       </span>
                     </div>
-                  </NavMenuTrigger>
+                  </Menu.Trigger>
 
                   {/* Options menu */}
-                  <NavMenuContent
-                    placement="bottom-start"
-                    className="versions menu menu-rounded menu-gray-600 menu-active-bg-light-primary menu-hover-title-primary border fw-bold rounded-0 mw-250px fs-6 py-3"
+                  <Menu.Content
+                    align="start"
+                    className="border fw-bold rounded-0 mw-250px fs-6 py-3"
+                    // Compact rows, as in the footer menus.
+                    density="compact"
                   >
-                    {choice.options.map((option, i) => (
-                      <NavMenuItem
-                        key={i}
-                        wrapperClassName="px-3"
-                        className="px-3"
-                        onSelect={() => onChangeSelect(option, index)}
-                      >
-                        <span className="menu-title">{option.label}</span>
-                      </NavMenuItem>
-                    ))}
-                  </NavMenuContent>
-                </NavMenu>
+                    {/* Radio items: picking a version is a single choice,
+                        and the current one is announced as checked. */}
+                    <Menu.RadioGroup
+                      value={String(
+                        choice.options.findIndex((option) =>
+                          isEqual(option.value, selectedVersions[index].value),
+                        ),
+                      )}
+                      onValueChange={(value) =>
+                        onChangeSelect(choice.options[Number(value)], index)
+                      }
+                    >
+                      {choice.options.map((option, i) => (
+                        <Menu.RadioItem
+                          key={i}
+                          value={String(i)}
+                          className="mx-[9.75px] rounded-md"
+                        >
+                          {option.label}
+                        </Menu.RadioItem>
+                      ))}
+                    </Menu.RadioGroup>
+                  </Menu.Content>
+                </Menu>
               ) : (
                 <>
                   <div className="form-check-label">{choice.label}</div>

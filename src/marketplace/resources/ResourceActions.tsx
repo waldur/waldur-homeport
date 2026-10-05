@@ -19,7 +19,7 @@ interface ResourceActionsProps {
   scope;
   refetch;
   labeled?: boolean;
-  drop?: 'up' | 'down' | 'start' | 'end';
+  side?: 'top' | 'right' | 'bottom' | 'left';
   disabled?: boolean;
   size?: 'sm' | 'lg';
 }
@@ -28,7 +28,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
   resource,
   scope,
   refetch,
-  drop,
+  side,
   labeled = false,
   disabled,
   size,
@@ -50,7 +50,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
         }
         refetch={refetch}
         labeled
-        drop={drop}
+        side={side}
         disabled={disabled}
         size={size}
       />
@@ -65,7 +65,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
         name={resource.name}
         refetch={refetch}
         labeled={labeled}
-        drop={drop}
+        side={side}
         disabled={disabled}
         size={size}
       />
@@ -83,7 +83,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
       scope={scope}
       refetch={refetch}
       labeled={labeled}
-      drop={drop}
+      side={side}
       disabled={disabled}
       size={size}
     />

@@ -1101,11 +1101,9 @@
   }
 }
 
-// The popover portals to <body>, beside the chat drawer (z-index 100), so it
-// needs the popover tier to show above it; Radix copies this onto its
-// positioned wrapper. A plain `z-50` left it open but hidden behind the drawer.
+// The popover portals to <body>, beside the chat drawer (z-index 100), which
+// PopoverContent's popover layer (z-popover) clears.
 .tc-members-popover {
-  z-index: $zindex-popover;
   width: 260px;
   // Bootstrap popovers default to a smaller font; pin the members list to the
   // chat's body size so names are readable.

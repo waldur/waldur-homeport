@@ -7,6 +7,8 @@ import React, { FunctionComponent, useContext } from 'react';
 import { BaseButton } from 'waldur-ui';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
+import { useFocusThroughRemovals } from '@/core/useFocusThroughRemovals';
+import { useInsidePointerDown } from '@/core/useInsidePointerDown';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 
@@ -22,37 +24,12 @@ export const DrawerRoot: FunctionComponent = () => {
   const { isOpen, drawerComponent, drawerProps, closeDrawer } = context;
   const [isDirtyContext, setIsDirtyContext] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
-  const insidePointerDownRef = React.useRef<Event | null>(null);
-
-  // Radix decides whether a pointerdown belongs to the layer from the React
-  // tree, not the DOM: it flags the pointer as inside from an
-  // onPointerDownCapture on the content. Anything portalled in from a tree
-  // outside the dialog therefore reads as outside however deeply the DOM nests
-  // it — which is how the docked Matrix call, owned by MatrixCallHost so it
-  // survives moving between destinations, dismissed the whole drawer on the
-  // first click on its own mic/camera/screen-share controls.
-  //
-  // So record DOM containment ourselves, from a native capture listener that
-  // runs while the event is still travelling down. Testing the target later,
-  // inside onPointerDownOutside, is too late: React has flushed the re-render
-  // the same pointerdown triggered, and the node the pointer hit — the icon
-  // inside the control — is already detached, so contains() says false.
-  React.useEffect(() => {
-    const remember = (event: Event) => {
-      const target = event.target as Node | null;
-      // `data-drawer-inside` opts in an overlay that such content portals to
-      // <body>, outside the drawer's DOM as well as its React tree.
-      if (
-        target &&
-        (contentRef.current?.contains(target) ||
-          (target instanceof Element && target.closest('[data-drawer-inside]')))
-      ) {
-        insidePointerDownRef.current = event;
-      }
-    };
-    document.addEventListener('pointerdown', remember, true);
-    return () => document.removeEventListener('pointerdown', remember, true);
-  }, []);
+  // Content portaled in from another React tree (the docked Matrix call,
+  // owned by MatrixCallHost so it survives moving between destinations)
+  // would read as outside and dismiss the drawer on its first click.
+  const isInsidePointerDown = useInsidePointerDown(contentRef);
+  // A Tab out of a select would land on the drawer itself (see the hook).
+  useFocusThroughRemovals(contentRef, isOpen);
   const isDirtyForm = isDirtyContext;
   const onHide = () => {
     if (
@@ -100,7 +77,7 @@ export const DrawerRoot: FunctionComponent = () => {
         style={{ '--drawer-width': drawerProps.width } as React.CSSProperties}
         aria-describedby={undefined}
         onPointerDownOutside={(event) => {
-          if (event.detail.originalEvent === insidePointerDownRef.current) {
+          if (isInsidePointerDown(event)) {
             event.preventDefault();
           }
           // A floating drawer leaves the header's drawer toggles live (see

@@ -1,15 +1,12 @@
+import { CopyIcon } from '@phosphor-icons/react';
 import { translate } from 'waldur-i18n-runtime';
 import {
   Avatar,
   Badge,
-  CopyButton,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  buttonVariants,
+  cn,
   LanguageMenu,
-  Switch,
+  Menu,
 } from 'waldur-ui';
 
 import { useCurrentUser } from './useCurrentUser';
@@ -48,7 +45,7 @@ function getInitials(name: string): string {
  * comment) — this component is really shell chrome, not a general-purpose
  * UI primitive, so it belongs next to the providers that feed it rather
  * than in the primitives package. Imports every piece it composes (Badge,
- * CopyButton, the DropdownMenu family, LanguageMenu, Switch, Avatar) from
+ * Menu, LanguageMenu, Avatar) from
  * waldur-ui, a dependency waldur-shell already has.
  *
  * Takes no props — reads useCurrentUser()/useShellTheme()/
@@ -64,6 +61,33 @@ function getInitials(name: string): string {
  * on why that package's earlier "no i18n dependency" boundary was dropped;
  * the same reasoning applies here.
  */
+/**
+ * CopyButton's look (a small tertiary button with a copy icon) without the
+ * button: inside a menu row that does the copying itself.
+ */
+function CopyButtonLook({
+  label,
+  className,
+}: {
+  label: string;
+  className?: string;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        buttonVariants({ variant: 'tertiary', size: 'sm' }),
+        className,
+      )}
+    >
+      <span className="inline-flex size-4 shrink-0 items-center justify-center [&>svg]:size-4">
+        <CopyIcon weight="bold" />
+      </span>
+      {label}
+    </span>
+  );
+}
+
 export function UserMenu() {
   const currentUser = useCurrentUser();
   const { theme, toggleTheme } = useShellTheme();
@@ -71,8 +95,8 @@ export function UserMenu() {
     useShellLanguage();
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+    <Menu>
+      <Menu.Trigger asChild>
         <button type="button" className="flex items-center gap-2">
           <Avatar
             // size-9 (36px), not AvatarRoot's own size-8 default — splits
@@ -122,35 +146,34 @@ export function UserMenu() {
             </div>
           )}
         </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-64">
+      </Menu.Trigger>
+      {/* The main app's user menu (UserDropdown.tsx): 275px wide, a header
+          block, then the language row, the dark-theme toggle and the
+          token/IP rows, split by separators. */}
+      <Menu.Content
+        align="end"
+        className="py-[12px] text-[14px] font-medium w-[275px]"
+      >
         {currentUser && (
           <>
-            {/* Same header block as UserDropdownMenu.tsx's real dropdown
-                content — a bigger avatar (symbol-50px there) plus
-                full_name and email (a profile link there; plain text
-                here, no profile route to link to). */}
-            <div className="flex items-center gap-3 px-2 py-1.5">
+            <div className="flex items-center px-[16.25px] py-[8px]">
               <Avatar
-                className="size-12"
+                className="me-[16.25px] size-[50px]"
                 initials={getInitials(currentUser.fullName)}
                 imageSrc={currentUser.imageSrc}
               />
               <div className="flex min-w-0 flex-col">
-                {/* font-semibold (600), not font-bold (700) — real
-                    UserDropdown.tsx's dropdown-content display name uses
-                    .fw-bolder, not .fw-bold (see the trigger name's own
-                    comment above for the weight-scale source); .fw-bolder
-                    resolves to 600 in this app's Metronic build. */}
-                <span className="truncate text-sm font-semibold text-[var(--surface-text-primary)]">
+                {/* .fw-bolder fs-5 there: 15px, weight 600. */}
+                <span className="truncate text-[14.95px] font-semibold text-[var(--surface-text-primary)]">
                   {currentUser.fullName}
                 </span>
-                <span className="truncate text-xs text-[var(--surface-text-muted)]">
+                {/* .text-muted fs-7 there: 12px, gray-500. */}
+                <span className="truncate text-[12.35px] text-[var(--menu-item-muted-text)]">
                   {currentUser.email}
                 </span>
               </div>
             </div>
-            <DropdownMenuSeparator />
+            <Menu.Separator />
           </>
         )}
         {languageChoices.length > 0 && currentLanguage && (
@@ -160,70 +183,71 @@ export function UserMenu() {
               languageChoices={languageChoices}
               onLanguageChange={onLanguageChange}
             />
-            <DropdownMenuSeparator />
+            <Menu.Separator />
           </>
         )}
-        {/* ThemeSwitcher.tsx's real menu item is an AwesomeCheckbox
-            labeled "Dark theme" — a real toggle switch, not a checkmark
-            (see Switch.tsx). The whole row toggles via DropdownMenuItem's
-            own onClick, same as every other item in this menu, so the
-            Switch here is purely a visual reflection of `theme`
-            (pointer-events-none) — wiring its own onCheckedChange too
-            would double-toggle when a click on it bubbles up to the row
-            anyway. */}
-        <DropdownMenuItem onClick={toggleTheme}>
+        {/* As ThemeSwitcher.tsx's: a menuitemcheckbox showing a switch;
+            choosing it keeps the menu open. */}
+        <Menu.CheckboxItem
+          checked={theme === 'dark'}
+          onCheckedChange={toggleTheme}
+          className="text-[var(--menu-item-strong-text)]"
+        >
           {translate('Dark theme')}
-          <Switch
-            checked={theme === 'dark'}
-            onCheckedChange={() => {}}
-            tabIndex={-1}
-            className="pointer-events-none ml-auto"
-          />
-        </DropdownMenuItem>
+        </Menu.CheckboxItem>
+        {currentUser && <Menu.Separator />}
         {currentUser?.token && (
-          <>
-            <DropdownMenuSeparator />
-            <div className="flex flex-col gap-1.5 px-2 py-1.5">
-              <span className="text-xs font-medium text-[var(--surface-text-muted)]">
-                {translate('API token')}
-              </span>
-              <div className="flex items-center gap-1.5">
-                <input
-                  type="password"
-                  readOnly
-                  value={currentUser.token}
-                  className="min-w-0 flex-1 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-page-bg)] px-2 py-1 text-sm text-[var(--surface-text-primary)]"
+          // As UserToken.tsx: the label, a masked field and a Copy button,
+          // as the look of one row that copies. The field and button are
+          // hidden from screen readers (the token is a secret).
+          <Menu.CopyItem
+            value={currentUser.token}
+            aria-label={translate('Copy API token')}
+            copiedAnnouncement={translate('Copied')}
+          >
+            {(copied) => (
+              <>
+                <span className="me-[6.5px] whitespace-nowrap">
+                  {translate('API token')}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="flex h-[30px] min-w-0 flex-1 items-center overflow-hidden whitespace-nowrap [contain:inline-size] rounded-md bg-[var(--menu-item-light-bg)] px-[9.75px] text-[12.025px] text-[var(--menu-item-strong-text)]"
+                >
+                  {'•'.repeat(currentUser.token.length)}
+                </span>
+                <CopyButtonLook
+                  label={copied ? translate('Copied') : translate('Copy')}
+                  className="ms-[6.5px]"
                 />
-                <CopyButton
-                  value={currentUser.token}
-                  label={translate('Copy')}
-                  copiedLabel={translate('Copied')}
-                />
-              </div>
-            </div>
-          </>
+              </>
+            )}
+          </Menu.CopyItem>
         )}
         {currentUser && (
-          <>
-            <DropdownMenuSeparator />
-            <div className="flex flex-col gap-1.5 px-2 py-1.5">
-              <span className="text-xs font-medium text-[var(--surface-text-muted)]">
-                {translate('IP address')}
-              </span>
-              <div className="flex items-center justify-between gap-1.5">
-                <span className="text-sm text-[var(--surface-text-muted)]">
-                  {currentUser.ipAddress}
+          // As UserIpAddress.tsx: the label above the address and a Copy
+          // button, as the look of one row that copies.
+          <Menu.CopyItem
+            value={currentUser.ipAddress}
+            className="block"
+            copiedAnnouncement={translate('Copied')}
+          >
+            {(copied) => (
+              <>
+                <span className="mb-[6.5px] block">
+                  {translate('IP address')}:
                 </span>
-                <CopyButton
-                  value={currentUser.ipAddress}
-                  label={translate('Copy')}
-                  copiedLabel={translate('Copied')}
-                />
-              </div>
-            </div>
-          </>
+                <div className="flex items-center justify-between text-[var(--menu-item-muted-text)]">
+                  <span>{currentUser.ipAddress}</span>
+                  <CopyButtonLook
+                    label={copied ? translate('Copied') : translate('Copy')}
+                  />
+                </div>
+              </>
+            )}
+          </Menu.CopyItem>
         )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </Menu.Content>
+    </Menu>
   );
 }

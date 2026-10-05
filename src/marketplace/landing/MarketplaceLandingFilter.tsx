@@ -1,5 +1,4 @@
 import { CaretDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
-import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Card, Stack } from 'react-bootstrap';
@@ -7,7 +6,7 @@ import { Form, useForm } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Popover, PopoverContent, PopoverTrigger } from 'waldur-ui';
 
 import { getInitialValues, syncFiltersToURL } from '@/core/filters';
 import { SubmitButton } from '@/form';
@@ -96,8 +95,8 @@ export const MarketplaceLandingFilter = () => {
       onSubmit={apply}
       initialValues={getInitialValues()}
       render={({ handleSubmit, values }) => (
-        <RadixPopover.Root open={show} onOpenChange={setShow} modal={false}>
-          <RadixPopover.Trigger asChild>
+        <Popover open={show} onOpenChange={setShow}>
+          <PopoverTrigger asChild>
             <BaseButton
               type="button"
               id="marketplace-landing-filter-toggle"
@@ -115,71 +114,59 @@ export const MarketplaceLandingFilter = () => {
                 </>
               }
             />
-          </RadixPopover.Trigger>
-          <RadixPopover.Portal>
-            <RadixPopover.Content
-              align="end"
-              sideOffset={2}
-              // react-bootstrap's Dropdown.Menu auto-generated this pointing
-              // at the Toggle's id; Radix has no equivalent auto-wiring, so
-              // it has to be set explicitly here — both for a11y and because
-              // the E2E suite's MarketplaceFilter.open() page object asserts
-              // on this exact selector.
-              aria-labelledby="marketplace-landing-filter-toggle"
-              // position-static: the Radix popper wrapper is the positioned
-              // element here, and leaving `.dropdown-menu`'s own
-              // `position: absolute` in place takes this panel out of that
-              // wrapper's flow and collapses its measured size — reported
-              // live as its own contents (Apply button, select clear icon)
-              // landing outside the viewport. Same fix as ActionsDropdown.tsx's
-              // own Content, and the systemic issue described there.
-              className="dropdown-menu show p-0 border-0 min-w-400px position-static"
-              // Mirrors the original Bootstrap Dropdown's autoClose={false}:
-              // OrganizationAutocomplete/ProjectAutocomplete portal their own
-              // react-select menu to document.body, outside this popover's
-              // DOM subtree, so Radix's default dismiss-on-outside-click
-              // would close the whole filter the moment either is opened.
-              // Only the explicit Cancel/Apply handlers below call
-              // setShow(false).
-              onInteractOutside={(event) => event.preventDefault()}
-            >
-              <Card className="menu menu-sub menu-sub-dropdown menu-gray-800 menu-hover-bg-light menu-hover-title-primary fs-5 show shadow-sm m-0">
-                <Card.Body
-                  as="form"
-                  onSubmit={handleSubmit}
-                  className="d-flex flex-column gap-8"
-                >
-                  <div>
-                    <Card.Title as="div" className="h3 mb-5">
-                      {translate('Filter by organization/project')}
-                    </Card.Title>
-                    <Card.Subtitle className="fw-normal text-muted">
-                      {translate(
-                        'Filter results by chosen organization and project',
-                      )}
-                    </Card.Subtitle>
-                  </div>
-                  <LandingFilterFields values={values} />
+          </PopoverTrigger>
+          <PopoverContent
+            align="end"
+            sideOffset={2}
+            // react-bootstrap's Dropdown.Menu auto-generated this pointing
+            // at the Toggle's id; Radix has no equivalent auto-wiring, so
+            // it has to be set explicitly here — both for a11y and because
+            // the E2E suite's MarketplaceFilter.open() page object asserts
+            // on this exact selector.
+            aria-labelledby="marketplace-landing-filter-toggle"
+            // A form, not a menu, so a plain Popover. The Card draws the
+            // panel's border; the content keeps the menus' layer, so it
+            // stacks like the other dropdowns, and Metronic's dropdown
+            // entrance (on Content so that Radix holds it back until the
+            // panel is positioned, see waldur-design-tokens/animations.css).
+            className="z-dropdown-menu min-w-400px border-0 animate-[waldur-menu-enter-up_0.3s_ease] motion-reduce:animate-none"
+          >
+            <Card className="fs-5 shadow-sm m-0">
+              <Card.Body
+                as="form"
+                onSubmit={handleSubmit}
+                className="d-flex flex-column gap-8"
+              >
+                <div>
+                  <Card.Title as="div" className="h3 mb-5">
+                    {translate('Filter by organization/project')}
+                  </Card.Title>
+                  <Card.Subtitle className="fw-normal text-muted">
+                    {translate(
+                      'Filter results by chosen organization and project',
+                    )}
+                  </Card.Subtitle>
+                </div>
+                <LandingFilterFields values={values} />
 
-                  <Stack direction="horizontal" gap={4}>
-                    <BaseButton
-                      variant="tertiary"
-                      className="flex-equal"
-                      onClick={() => setShow(false)}
-                      label={translate('Cancel')}
-                      size="lg"
-                    />
-                    <SubmitButton
-                      submitting={false}
-                      className="flex-equal"
-                      label={translate('Apply')}
-                    />
-                  </Stack>
-                </Card.Body>
-              </Card>
-            </RadixPopover.Content>
-          </RadixPopover.Portal>
-        </RadixPopover.Root>
+                <Stack direction="horizontal" gap={4}>
+                  <BaseButton
+                    variant="tertiary"
+                    className="flex-equal"
+                    onClick={() => setShow(false)}
+                    label={translate('Cancel')}
+                    size="lg"
+                  />
+                  <SubmitButton
+                    submitting={false}
+                    className="flex-equal"
+                    label={translate('Apply')}
+                  />
+                </Stack>
+              </Card.Body>
+            </Card>
+          </PopoverContent>
+        </Popover>
       )}
     />
   );

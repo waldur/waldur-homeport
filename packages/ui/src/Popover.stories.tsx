@@ -3,12 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { BaseButton } from './BaseButton';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from './DropdownMenu';
+import { Menu } from './Menu';
 import { Popover, PopoverContent, PopoverTrigger } from './Popover';
 
 const meta: Meta<typeof Popover> = {
@@ -32,9 +27,9 @@ type Story = StoryObj<typeof Popover>;
 /**
  * The case that makes this component necessary: a text input inside the
  * floating panel. Typing here must reach the input. The same content
- * inside a DropdownMenu would route keystrokes to the menu's typeahead
+ * inside a Menu would route keystrokes to the menu's typeahead
  * instead, which is why the table filter popups cannot migrate to
- * DropdownMenu.
+ * Menu.
  */
 export const WithFormControls: Story = {
   render: () => {
@@ -50,7 +45,7 @@ export const WithFormControls: Story = {
               iconNode={<FunnelSimpleIcon weight="bold" />}
             />
           </PopoverTrigger>
-          <PopoverContent align="start">
+          <PopoverContent align="start" className="w-72 p-4">
             <div className="flex flex-col gap-[12px]">
               <label
                 className="text-sm font-medium text-[var(--surface-text-primary)]"
@@ -96,21 +91,26 @@ export const BaseButtonAsTrigger: Story = {
             iconNode={<GearIcon weight="bold" />}
           />
         </PopoverTrigger>
-        <PopoverContent>
+        <PopoverContent className="w-72 p-4">
           <div className="text-sm">Popover from a tooltipped icon button.</div>
         </PopoverContent>
       </Popover>
 
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <Menu>
+        <Menu.Trigger asChild>
           <BaseButton size="lg" variant="secondary" label="Actions" />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Duplicate</DropdownMenuItem>
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </Menu.Trigger>
+        <Menu.Content
+          className="py-[12px] text-[14px] font-medium"
+          align="start"
+        >
+          <Menu.Item>Edit</Menu.Item>
+          <Menu.Item>Duplicate</Menu.Item>
+          <Menu.Item className="text-[var(--pill-danger-text)] menu-row-active:text-[var(--pill-danger-text)]">
+            Delete
+          </Menu.Item>
+        </Menu.Content>
+      </Menu>
     </div>
   ),
 };

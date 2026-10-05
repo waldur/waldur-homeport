@@ -4,7 +4,7 @@ import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { translate } from '@/i18n';
 import { isOfferingTypeSchedulable } from '@/marketplace/common/registry';
 import { ARCHIVED } from '@/marketplace/offerings/store/constants';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useCustomer, useUser } from '@/workspace/hooks';
 import { checkIsOwner } from '@/workspace/selectors';
 
@@ -33,14 +33,14 @@ export const GoogleCalendarActions: FC<GoogleCalendarActionsProps> = ({
   }
 
   return (
-    <ActionsDropdownComponent
+    <ActionsMenu
       label={translate('Google Calendar')}
-      labeled
+      toggle="labeled"
       variant="tertiary"
     >
       <GoogleCalendarSyncAction offering={offering} />
       <GoogleCalendarPublishAction offering={offering} />
       <GoogleCalendarUnpublishAction offering={offering} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

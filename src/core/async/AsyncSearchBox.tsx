@@ -1,4 +1,3 @@
-import * as RadixPopover from '@radix-ui/react-popover';
 import {
   InfiniteData,
   QueryFunction,
@@ -7,9 +6,10 @@ import {
 import { debounce } from 'lodash-es';
 import { useCallback, useState } from 'react';
 
+import { Popover, PopoverAnchor, PopoverContent } from 'waldur-ui';
+
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
-import { PopoverMenuContent } from '@/navigation/NavMenu';
 import { DataPage, processApiResponse, SdkFunction } from '@/table/api';
 
 import { InfiniteList } from './InfiniteList';
@@ -86,8 +86,8 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
 
   return (
     <div id="search-box-wrapper" className={wrapperClassName}>
-      <RadixPopover.Root open={open} onOpenChange={setOpen} modal={false}>
-        <RadixPopover.Anchor asChild>
+      <Popover open={open} onOpenChange={setOpen} modal={false}>
+        <PopoverAnchor asChild>
           {/* Positions the popover only; aria-hidden here hid the input. */}
           <div>
             <FilterBox
@@ -102,13 +102,16 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
               className={className}
             />
           </div>
-        </RadixPopover.Anchor>
-        <PopoverMenuContent
+        </PopoverAnchor>
+        <PopoverContent
           // Keeps focus in the search input instead of Radix's default
           // of moving it into the panel on open — the user is mid-typing.
           onOpenAutoFocus={(e) => e.preventDefault()}
-          placement="bottom-start"
-          className="search-results-dropdown menu menu-column border mw-400px mh-300px py-2"
+          align="start"
+          sideOffset={2}
+          // Search results, not menu rows: a plain popover, kept on the nav
+          // menus' layer with their background and entrance.
+          className="search-results-dropdown z-nav-menu flex flex-col bg-[var(--menu-bg)] mw-400px mh-300px py-2 animate-[waldur-menu-enter-up_0.3s_ease] data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease] motion-reduce:animate-none"
         >
           <div className="overflow-auto">
             <InfiniteList
@@ -117,8 +120,8 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
               emptyMessage={emptyMessage}
             />
           </div>
-        </PopoverMenuContent>
-      </RadixPopover.Root>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };

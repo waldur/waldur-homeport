@@ -18,7 +18,7 @@ import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { validateIPv4CIDR } from '@/openstack/openstack-security-groups/rule-editor/CIDRField';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -267,9 +267,9 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
       defaultOpen
       className={classNames('bg-gray-50', className)}
       actions={
-        <ActionsDropdownComponent
+        <ActionsMenu
           variant="secondary"
-          labeled
+          toggle="labeled"
           label={
             <>
               <span className="svg-icon svg-icon-2">
@@ -278,7 +278,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
               {translate('Add rule')}
             </>
           }
-          drop="down"
+          side="bottom"
         >
           <ActionItem title={translate('Custom rule')} action={addCustomRule} />
           <ActionItem
@@ -291,7 +291,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
             }
             action={addDefaultRules}
           />
-        </ActionsDropdownComponent>
+        </ActionsMenu>
       }
     >
       {rules.length === 0 ? (
@@ -410,7 +410,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
             cardBordered={false}
             className="bg-gray-50 mt-n5 pb-0"
             rowActions={({ row }) => (
-              <ActionsDropdownComponent>
+              <ActionsMenu>
                 <ActionItem
                   title={translate('Remove')}
                   iconNode={<TrashIcon weight="bold" />}
@@ -431,7 +431,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
                   }
                   action={() => addDescription(row.uuid)}
                 />
-              </ActionsDropdownComponent>
+              </ActionsMenu>
             )}
           />
         </div>

@@ -132,9 +132,21 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
       </div>
       <PopoverContent
         align="start"
-        className="z-[var(--z-index-picker-popover)] w-auto p-0"
-        // The calendar focuses its selected day (or today) itself.
-        onOpenAutoFocus={(event) => event.preventDefault()}
+        // Scrolls inside the space Radix measures rather than growing
+        // past the bottom of the screen.
+        className="z-picker-popover max-h-(--radix-popover-content-available-height) overflow-y-auto"
+        // Focus the day react-day-picker marks as focused (the selected day,
+        // or today), not Radix's first focusable, the previous-month arrow.
+        // The calendar also focuses it itself, from an effect, but inside a
+        // modal dialog that runs before this popover's focus scope pauses
+        // the dialog's trap, which pulls focus straight back. Radix fires
+        // this once the scope is in place.
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+          (event.currentTarget as HTMLElement)
+            .querySelector<HTMLElement>('[data-focused="true"] button')
+            ?.focus();
+        }}
       >
         {children}
       </PopoverContent>

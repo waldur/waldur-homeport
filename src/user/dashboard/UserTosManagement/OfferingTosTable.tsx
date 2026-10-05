@@ -88,7 +88,7 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
         {
           title: translate('Actions'),
           render: ({ row }) => (
-            <ActionsDropdown {...({ drop: 'end' } as any)}>
+            <ActionsDropdown side="right">
               <ViewTosAction
                 tos={row}
                 offering={offering}

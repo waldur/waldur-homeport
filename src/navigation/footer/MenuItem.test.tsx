@@ -9,20 +9,15 @@ import { useFooterLinks } from './useFooterLinks';
 vi.mock('./useFooterLinks');
 
 /**
- * Regression test for a real production crash: MenuItem is rendered in
- * three places, and only one of them (MobileMenu's *grouped* case) puts
- * it inside a real Radix menu (FooterDropdown.tsx's NavMenuContent). The
- * other two — FooterLinks.tsx's desktop layout, and MobileMenu's own
- * *ungrouped* case — render it standalone, with no Root/Content anywhere
- * above it. MenuItem was briefly converted to a RadixDropdownMenu.Item
- * internally, which throws "`MenuItem` must be used within `Menu`" the
- * instant it renders outside one — caught live in production, not in
- * review, because FooterLinks.test.tsx mocks MenuItem entirely and so
- * could never have exercised this path. MenuItem.tsx is deliberately
- * plain (not a Radix Item) precisely because of this — see its own
- * top-of-file comment.
+ * Regression test for a real production crash: a Radix menu item throws
+ * "`MenuItem` must be used within `Menu`" outside a menu. The footer's
+ * links render in three places: standalone in FooterLinks.tsx's desktop
+ * layout and in MobileMenu's *ungrouped* case (MenuItem, a plain link),
+ * and inside a real FooterDropdown menu in MobileMenu's *grouped* case
+ * (FooterDropdownLink, a Radix item). FooterLinks.test.tsx mocks MenuItem
+ * entirely, so only this file exercises the real hosts.
  */
-describe('MenuItem renders correctly in all three of its real host contexts', () => {
+describe('footer links render correctly in all three of their real host contexts', () => {
   it('FooterLinks desktop layout: standalone, no menu ancestor', () => {
     vi.mocked(useFooterLinks).mockReturnValue({
       isMd: false,

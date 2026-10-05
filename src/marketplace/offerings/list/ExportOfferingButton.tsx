@@ -5,12 +5,13 @@ import {
   OfferingExportParametersRequest,
 } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { ExportOfferingDialog } from './ExportOfferingDialog';
@@ -94,11 +95,11 @@ export const ExportOfferingButton = ({ row }: ExportOfferingButtonProps) => {
   };
 
   return (
-    <ActionsDropdownItem onSelect={openExportDialog}>
-      <span className="svg-icon svg-icon-2">
-        <DownloadSimpleIcon weight="bold" />
-      </span>
+    <Menu.Item
+      icon={<DownloadSimpleIcon weight="bold" />}
+      onSelect={openExportDialog}
+    >
       {translate('Export')}
-    </ActionsDropdownItem>
+    </Menu.Item>
   );
 };

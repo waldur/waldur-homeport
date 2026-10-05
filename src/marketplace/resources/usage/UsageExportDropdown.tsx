@@ -1,19 +1,12 @@
-import {
-  FileCsvIcon,
-  FileXlsIcon,
-  PrinterIcon,
-  FilePngIcon,
-} from '@phosphor-icons/react';
 import { init } from 'echarts';
 import { sum, uniq } from 'lodash-es';
 import { useCallback } from 'react';
 import { ProjectUser, OfferingComponent } from 'waldur-js-client';
 
+import { ChartExportDropdown } from '@/core/ChartExportDropdown';
 import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import exportAs from '@/table/exporters';
 import { ExportData } from '@/table/exporters/types';
 
@@ -255,30 +248,13 @@ export const UsageExportDropdown = (props: UsageExportDropdownProps) => {
   const exportUsages = useUsageExport(props);
 
   return (
-    <ActionDropdownButton variant="tertiary" title={translate('Export all')}>
-      <ActionItem
-        title={translate('PNG')}
-        action={() => exportUsages('png')}
-        iconNode={<FilePngIcon weight="bold" />}
-      />
-
-      <ActionItem
-        title={translate('PDF')}
-        action={() => exportUsages('pdf')}
-        iconNode={<PrinterIcon weight="bold" />}
-      />
-
-      <ActionItem
-        title={translate('CSV')}
-        action={() => exportUsages('csv')}
-        iconNode={<FileCsvIcon weight="bold" />}
-      />
-
-      <ActionItem
-        title={translate('Excel')}
-        action={() => exportUsages('excel')}
-        iconNode={<FileXlsIcon weight="bold" />}
-      />
-    </ActionDropdownButton>
+    <ChartExportDropdown
+      label={translate('Export all')}
+      size="lg"
+      onExportPng={() => exportUsages('png')}
+      onExportPdf={() => exportUsages('pdf')}
+      onExportCsv={() => exportUsages('csv')}
+      onExportExcel={() => exportUsages('excel')}
+    />
   );
 };

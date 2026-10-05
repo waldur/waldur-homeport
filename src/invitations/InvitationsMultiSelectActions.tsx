@@ -1,7 +1,8 @@
 import { Invitation } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import { useUser } from '@/workspace/hooks';
 
 import { MultiCancelAction } from './MultiCancelAction';
@@ -17,10 +18,15 @@ export const InvitationsMultiSelectActions = ({
 }) => {
   const user = useUser();
   return (
-    <ActionDropdownButton variant="primary" title={translate('All actions')}>
-      <MultiResendAction rows={rows} refetch={refetch} />
-      <MultiCancelAction rows={rows} refetch={refetch} />
-      {user.is_staff && <MultiDeleteAction rows={rows} refetch={refetch} />}
-    </ActionDropdownButton>
+    <Menu>
+      <Menu.TriggerButton variant="primary">
+        {translate('All actions')}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom">
+        <MultiResendAction rows={rows} refetch={refetch} />
+        <MultiCancelAction rows={rows} refetch={refetch} />
+        {user.is_staff && <MultiDeleteAction rows={rows} refetch={refetch} />}
+      </Menu.Content>
+    </Menu>
   );
 };

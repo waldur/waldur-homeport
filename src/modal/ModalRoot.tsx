@@ -1,30 +1,39 @@
 import { ErrorBoundary } from '@sentry/react';
 import React, { FunctionComponent } from 'react';
-import { Modal } from 'react-bootstrap';
 
 import { DirtyFormContext } from '@/core/DirtyFormContext';
 import { ErrorMessage } from '@/ErrorMessage';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
-import './ModalRoot.css';
+import { ModalShell } from './ModalShell';
 
 export const ModalRoot: FunctionComponent = () => {
-  const { modalComponent, modalProps, closeDialog, confirm } = useModal();
+  const { modalComponent, modalProps, closeDialog, confirm, returnFocusRef } =
+    useModal();
   const {
     formId: _formId,
     modalStyle,
-    // Filter out custom props that shouldn't be passed to Modal DOM element
+    enforceFocus: _enforceFocus,
     resolve: _resolve,
     initialValues: _initialValues,
     roleTypes: _roleTypes,
     refetch: _refetch,
     change: _change,
-    ...rest
+    className,
+    dialogClassName,
+    backdropClassName,
+    size,
+    centered = true,
+    scrollable = true,
+    keyboard,
+    backdrop,
+    animation,
   } = modalProps || {};
 
   const [isDirtyContext, setIsDirtyContext] = React.useState(false);
   const isDirtyForm = isDirtyContext;
+
   const onHide = async () => {
     if (isDirtyForm) {
       try {
@@ -46,15 +55,32 @@ export const ModalRoot: FunctionComponent = () => {
     }
     closeDialog();
   };
+
+  const handleCloseAutoFocus = (event: Event) => {
+    const target = returnFocusRef?.current;
+    if (returnFocusRef) returnFocusRef.current = null;
+    if (target?.isConnected) {
+      event.preventDefault();
+      target.focus();
+    }
+  };
+
   return (
-    <Modal
-      show={modalComponent ? true : false}
+    <ModalShell
+      open={Boolean(modalComponent)}
       onHide={onHide}
-      style={modalStyle}
-      centered
-      enforceFocus={false}
-      scrollable
-      {...rest}
+      title={modalProps?.title}
+      size={size}
+      centered={centered}
+      scrollable={scrollable}
+      className={className}
+      dialogClassName={dialogClassName}
+      backdropClassName={backdropClassName}
+      modalStyle={modalStyle}
+      keyboard={keyboard}
+      backdrop={backdrop}
+      animation={animation}
+      onCloseAutoFocus={handleCloseAutoFocus}
     >
       <ErrorBoundary fallback={ErrorMessage}>
         <DirtyFormContext.Provider value={{ setIsDirty: setIsDirtyContext }}>
@@ -66,6 +92,6 @@ export const ModalRoot: FunctionComponent = () => {
             : null}
         </DirtyFormContext.Provider>
       </ErrorBoundary>
-    </Modal>
+    </ModalShell>
   );
 };

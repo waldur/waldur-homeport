@@ -14,19 +14,21 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 
 ## UI patterns
 
-| Guide                                                                    | Covers                                                                                                  |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| [component-library.md](component-library.md)                             | Reusable UI components: buttons, modals, tables, filters — with prop references                         |
-| [button-ui-guide.md](button-ui-guide.md)                                 | Comprehensive button UI guide: BaseButton, tokens, tooltips, toggles, segmented controls                |
-| [ui-consistency-guidelines.md](ui-consistency-guidelines.md)             | Empty states, buttons, loading indicators, tooltips, null-value display                                 |
-| [tables.md](tables.md)                                                   | `useTable`, columns, filters, row actions, export                                                       |
-| [forms.md](forms.md)                                                     | React Final Form, `*Group` / `*EditField` / `*Filter` patterns, `TabbedSection`                         |
-| [filter-migration-guide.md](table/filter-migration-guide.md)             | Generated table filters from the OpenAPI schema                                                         |
-| [theme.md](theme.md)                                                     | Dark mode and theming, including third-party components                                                 |
-| [design-tokens.md](design-tokens.md)                                     | Colour ramps as data: `tokens/colors.json`, the generator, what is and isn't generated                  |
-| [menu-navigation.md](menu-navigation.md)                                 | Sidebar menu structure and state-based routing                                                          |
-| [sidebar.md](sidebar.md)                                                 | Sidebar navigation architecture, design tokens, components, and recipes                                 |
-| [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Bootstrap → Tailwind/shadcn migration: cascade layers, token extraction, visual-parity test methodology |
+| Guide                                                                    | Covers                                                                                                                     |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| [component-library.md](component-library.md)                             | Reusable UI components: buttons, modals, tables, filters — with prop references                                            |
+| [button-ui-guide.md](button-ui-guide.md)                                 | Comprehensive button UI guide: BaseButton, tokens, tooltips, toggles, segmented controls                                   |
+| [ui-consistency-guidelines.md](ui-consistency-guidelines.md)             | Empty states, buttons, loading indicators, tooltips, null-value display                                                    |
+| [tables.md](tables.md)                                                   | `useTable`, columns, filters, row actions, export                                                                          |
+| [forms.md](forms.md)                                                     | React Final Form, `*Group` / `*EditField` / `*Filter` patterns, `TabbedSection`                                            |
+| [filter-migration-guide.md](table/filter-migration-guide.md)             | Generated table filters from the OpenAPI schema                                                                            |
+| [theme.md](theme.md)                                                     | Dark mode and theming, including third-party components                                                                    |
+| [design-tokens.md](design-tokens.md)                                     | Colour ramps as data: `tokens/colors.json`, the generator, what is and isn't generated                                     |
+| [menu-navigation.md](menu-navigation.md)                                 | Sidebar menu structure and state-based routing                                                                             |
+| [sidebar.md](sidebar.md)                                                 | Sidebar navigation architecture, design tokens, components, and recipes                                                    |
+| [tailwind-shadcn-migration-notes.md](tailwind-shadcn-migration-notes.md) | Bootstrap → Tailwind/shadcn migration: cascade layers, token extraction, visual-parity test methodology                    |
+| [e2e-locators.md](e2e-locators.md)                                       | How waldur-integration-testing locates menus, tabs and filters (roles and test ids), and what replaced the old class names |
+| [menus.md](menus.md)                                                     | Menus, dropdowns and popovers: which component to use, recipes, rules, how the looks work, testing                         |
 
 ## API and data
 

@@ -3,7 +3,7 @@ import { FC, Fragment, useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { MatrixRoom } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Menu } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -28,8 +28,6 @@ import { ROOM_STATE_VARIANT, stateLabel } from '@/matrix/MatrixRoomStateBadge';
 import { canOpenInExternalClient } from '@/matrix/utils';
 import { useModal } from '@/modal/actions';
 import { NoResult } from '@/navigation/header/search/NoResult';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
-import { ActionsDropdownSeparator } from '@/table/ActionsDropdown';
 import { renderFieldOrDash } from '@/table/utils';
 import {
   getProject,
@@ -95,14 +93,19 @@ const RoomActions: FC<{
         />
       )}
       {groups.length > 0 && (
-        <ActionDropdownButton title={translate('All actions')} align="end">
-          {groups.map((item, index) => (
-            <Fragment key={index}>
-              {index > 0 && <ActionsDropdownSeparator />}
-              {item}
-            </Fragment>
-          ))}
-        </ActionDropdownButton>
+        <Menu>
+          <Menu.TriggerButton size="lg">
+            {translate('All actions')}
+          </Menu.TriggerButton>
+          <Menu.Content look="actions" side="bottom" align="end">
+            {groups.map((item, index) => (
+              <Fragment key={index}>
+                {index > 0 && <Menu.Separator />}
+                {item}
+              </Fragment>
+            ))}
+          </Menu.Content>
+        </Menu>
       )}
     </div>
   );

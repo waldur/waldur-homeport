@@ -1,7 +1,6 @@
 import {
   BellIcon,
   BuildingsIcon,
-  CheckIcon,
   PlusIcon,
   QuestionIcon,
   SidebarSimpleIcon,
@@ -9,11 +8,7 @@ import {
 } from '@phosphor-icons/react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import {
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from './DropdownMenu';
+import { Menu } from './Menu';
 import { Avatar, IconButton, OrgSwitcher, SearchField, TopBar } from './TopBar';
 
 const meta: Meta<typeof TopBar> = {
@@ -22,7 +17,7 @@ const meta: Meta<typeof TopBar> = {
     docs: {
       description: {
         component:
-          'New dashboard primitive — OrgSwitcher is a real Radix DropdownMenu and IconButton pairs with the Tooltip primitive (see TopBar.tsx); SearchField stays presentational, no real search wiring.',
+          'New dashboard primitive — OrgSwitcher is the waldur-ui Menu and IconButton pairs with the Tooltip primitive (see TopBar.tsx); SearchField stays presentational, no real search wiring.',
       },
     },
   },
@@ -42,20 +37,23 @@ export const OrganisationAdminExample: Story = {
             label="Toggle sidebar"
           />
           <OrgSwitcher badge="NO" name="NordFusion Biotech">
-            <DropdownMenuLabel>Organisations</DropdownMenuLabel>
-            <DropdownMenuItem>
-              <CheckIcon size={16} weight="bold" />
-              NordFusion Biotech
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <BuildingsIcon size={16} weight="bold" />
-              Acme Cloud Research
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <PlusIcon size={16} weight="bold" />
+            <Menu.Label>Organisations</Menu.Label>
+            {/* The current organisation is highlighted, as the main app's
+                current row; no check mark. */}
+            <Menu.RadioGroup value="nordfusion">
+              <Menu.RadioItem value="nordfusion">
+                <BuildingsIcon size={16} weight="bold" className="me-[13px]" />
+                NordFusion Biotech
+              </Menu.RadioItem>
+              <Menu.RadioItem value="acme">
+                <BuildingsIcon size={16} weight="bold" className="me-[13px]" />
+                Acme Cloud Research
+              </Menu.RadioItem>
+            </Menu.RadioGroup>
+            <Menu.Separator />
+            <Menu.Item icon={<PlusIcon weight="bold" />}>
               Add organisation
-            </DropdownMenuItem>
+            </Menu.Item>
           </OrgSwitcher>
         </>
       }

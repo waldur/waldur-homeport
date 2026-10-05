@@ -21,17 +21,11 @@
    without this those utilities are never generated here. */
 @import 'waldur-design-tokens/zIndex.css';
 
-/* Same override as the main app's own src/tailwind.css: OrgDashboardMock.tsx
-   sets data-theme via the shared waldur/theme/name localStorage key, not an
-   OS-level preference, so Tailwind's dark: variant needs to key off that
-   attribute — its own default (prefers-color-scheme) would ignore this
-   app's manual toggle entirely. Most dark-mode styling here is unaffected
-   either way (surfaceColors.css/buttonColors.css's :root[data-theme='dark']
-   blocks are plain CSS, not gated by this variant at all — a token's
-   *value* just changes), but any component that needs a literal dark:
-   utility (e.g. StatCard.tsx's dark:bg override) needs this to actually
-   engage. */
-@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+/* dark: keys off data-theme, which OrgDashboardMock.tsx sets via the shared
+   waldur/theme/name localStorage key (Tailwind's default dark: follows the
+   OS preference and would ignore this app's toggle). Also the menu and tab
+   variants waldur-ui's DropdownMenu uses. */
+@import 'waldur-design-tokens/variants.css';
 
 /* Same bridge the main app's own src/tailwind.css uses: --font-sans reads
    the runtime-injected --waldur-font-family custom property rather than a
@@ -60,3 +54,4 @@
    auto-detection only worked for waldur-homeport's own Storybook config
    because it happens to share this same repository. */
 @source '../../../packages/ui/src';
+@source '../../../packages/shell/src';

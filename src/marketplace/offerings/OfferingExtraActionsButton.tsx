@@ -1,12 +1,11 @@
 import { FC } from 'react';
 import { Offering } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownSeparator,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { OfferingStateActions } from './actions/OfferingStateActions';
@@ -36,13 +35,13 @@ export const OfferingExtraActionsButton: FC<
   }
 
   return (
-    <ActionsDropdownComponent labeled size="lg" variant="tertiary">
+    <ActionsMenu toggle="labeled" size="lg" variant="tertiary">
       {showPreview && <PreviewOfferingAction offering={offering} />}
       {showVersionHistory && (
         <OfferingVersionHistoryAction offering={offering} />
       )}
       {showLifecycle && (showPreview || showVersionHistory) && (
-        <ActionsDropdownSeparator />
+        <Menu.Separator />
       )}
       {showLifecycle && (
         <OfferingStateActions
@@ -51,6 +50,6 @@ export const OfferingExtraActionsButton: FC<
           asMenuItems
         />
       )}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

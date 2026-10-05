@@ -40,3 +40,87 @@
 .modal-backdrop.confirm-backdrop {
   z-index: 1060;
 }
+
+/* Modal enter & exit animations for Radix Dialog */
+.modal-backdrop[data-state='open'] {
+  animation: modalBackdropFadeIn 0.15s linear;
+}
+.modal-backdrop[data-state='closed'] {
+  animation: modalBackdropFadeOut 0.15s linear forwards;
+}
+
+@keyframes modalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes modalBackdropFadeOut {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.modal[data-state='open'] {
+  animation: modalFadeIn 0.15s linear;
+}
+.modal[data-state='closed'] {
+  animation: modalFadeOut 0.15s linear forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Modal dialog slide (matches Bootstrap's $modal-fade-transform) */
+.modal[data-state='open'] .modal-dialog {
+  animation: modalSlideIn 0.3s ease-out;
+}
+.modal[data-state='closed'] .modal-dialog {
+  animation: modalSlideOut 0.15s ease-in forwards;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translate(0, -50px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes modalSlideOut {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translate(0, -50px);
+  }
+}
+
+/* Escape hatch when animation is disabled via animation={false} */
+.modal.modal-no-animation,
+.modal.modal-no-animation .modal-dialog,
+.modal-backdrop.modal-no-animation {
+  animation: none !important;
+}

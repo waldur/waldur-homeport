@@ -874,9 +874,6 @@ $dropdown-box-shadow: if(
   0px 0px 30px rgba(0, 0, 0, 0.3),
   0px 0px 50px 0px rgba(82, 63, 105, 0.15)
 ) !default;
-$dropdown-border-radius: $border-radius !default;
-$dropdown-border-width: 0 !default;
-$dropdown-bg: $body-bg !default;
 
 // Pagination
 
@@ -1130,57 +1127,6 @@ $drawer: (
   overlay-bg-color: if(isDarkMode(), rgba($black, 0.4), rgba($black, 0.2)),
   // Offcanvas overlay background color
   overlay-animation-speed: 0.3s,
-) !default;
-
-// Menu
-$menu: (
-  dropdown: (
-    box-shadow: $dropdown-box-shadow,
-    z-index: 105,
-    background-color: $body-bg,
-    border-radius: $border-radius,
-    animation: true,
-    animation-speed: 0.3s,
-    animation-move-offset: 0.75rem,
-  ),
-  accordion: (
-    indention: 1rem,
-    arrow-transition: transform 0.3s ease,
-  ),
-  item: (
-    self: (
-      padding-y: 0.15rem,
-      padding-x: 0,
-    ),
-  ),
-  link: (
-    self: (
-      padding-y: 0.615rem,
-      padding-x: 0.923rem,
-      border-bottom: (
-        hover: 4px solid #78bf69,
-        show: 4px solid #78bf69,
-        here: 4px solid #78bf69,
-        active: 4px solid #78bf69,
-      ),
-    ),
-    icon: (
-      width: 1.54rem,
-      space: 0.616rem,
-    ),
-    bullet: (
-      width: 1.25rem,
-      space: 0.616rem,
-    ),
-    badge: (
-      space: 0.616rem,
-    ),
-    arrow: (
-      height: 1.3rem,
-      width: 1.3rem,
-      space: 0.616rem,
-    ),
-  ),
 ) !default;
 
 // Custom scrollbar

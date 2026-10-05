@@ -1,0 +1,149 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`menu looks > keeps the action menu panel and rows 1`] = `
+[
+  "bg-[var(--menu-bg)]",
+  "block",
+  "list-none",
+  "m-[0px]",
+  "min-w-[130px]",
+  "py-[6.5px]",
+  "rounded-lg",
+  "shadow-[var(--dropdown-shadow)]",
+  "text-[13px]",
+  "text-start",
+  "z-dropdown-menu",
+]
+`;
+
+exports[`menu looks > keeps the action menu panel and rows 2`] = `
+[
+  "[&>svg:first-child]:me-[12px]",
+  "[&>svg:first-child]:shrink-0",
+  "[&>svg:first-child]:size-[20px]",
+  "[&_.svg-icon>svg]:size-[20px]",
+  "[&_.svg-icon]:inline-flex",
+  "[&_.svg-icon]:items-center",
+  "[&_.svg-icon]:justify-center",
+  "[&_.svg-icon]:me-[12px]",
+  "[&_.svg-icon]:shrink-0",
+  "[&_.svg-icon]:size-[20px]",
+  "action-row-active:bg-[var(--menu-item-hover-bg)]",
+  "action-row-active:text-[var(--menu-item-hover-text)]",
+  "action-row-disabled:pointer-events-none",
+  "action-row-disabled:text-[var(--menu-item-muted-text)]",
+  "flex",
+  "focus-visible:outline-offset-[calc(var(--focus-ring-width)*-1)]",
+  "font-medium",
+  "hover:focus-visible:outline-none",
+  "items-center",
+  "leading-none",
+  "no-underline",
+  "px-[16px]",
+  "py-[10px]",
+  "text-[14px]",
+  "text-[var(--menu-item-strong-text)]",
+  "text-start",
+  "w-full",
+  "whitespace-nowrap",
+]
+`;
+
+exports[`menu looks > keeps the action menu panel and rows 3`] = `
+[
+  "block",
+  "m-0",
+  "px-[16px]",
+  "py-[6.5px]",
+  "text-[12.025px]",
+  "text-[var(--menu-item-text)]",
+  "whitespace-nowrap",
+]
+`;
+
+exports[`menu looks > keeps the action menu panel and rows 4`] = `
+[
+  "border-[var(--surface-card-border)]",
+  "border-t",
+  "h-0",
+  "m-0",
+  "overflow-hidden",
+]
+`;
+
+exports[`menu looks > keeps the nav panels 1`] = `
+[
+  "animate-[waldur-menu-enter-up_0.3s_ease]",
+  "bg-[var(--menu-bg)]",
+  "data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease]",
+  "flex",
+  "flex-col",
+  "list-none",
+  "m-[0px]",
+  "max-h-(--radix-dropdown-menu-content-available-height)",
+  "motion-reduce:animate-none",
+  "overflow-x-hidden",
+  "overflow-y-auto",
+  "p-[0px]",
+  "rounded-lg",
+  "shadow-[var(--dropdown-shadow)]",
+  "z-nav-menu",
+]
+`;
+
+exports[`menu looks > keeps the nav panels 2`] = `
+[
+  "animate-[waldur-menu-enter-up_0.3s_ease]",
+  "bg-[var(--menu-bg)]",
+  "data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease]",
+  "data-[state=closed]:hidden",
+  "flex",
+  "flex-col",
+  "list-none",
+  "m-[0px]",
+  "motion-reduce:animate-none",
+  "p-[0px]",
+  "rounded-lg",
+  "shadow-[var(--dropdown-shadow)]",
+  "z-nav-menu",
+]
+`;
+
+exports[`menu looks > keeps the nav row, with its density and tone variants 1`] = `
+[
+  "[&>svg:first-child]:me-[12px]",
+  "[&>svg:first-child]:shrink-0",
+  "[&>svg:first-child]:size-[20px]",
+  "[&_.svg-icon>svg]:size-[20px]",
+  "[&_.svg-icon]:inline-flex",
+  "[&_.svg-icon]:items-center",
+  "[&_.svg-icon]:justify-center",
+  "[&_.svg-icon]:me-[12px]",
+  "[&_.svg-icon]:shrink-0",
+  "[&_.svg-icon]:size-[20px]",
+  "cursor-pointer",
+  "data-disabled:cursor-not-allowed",
+  "data-disabled:text-[var(--menu-item-disabled-text)]",
+  "duration-200",
+  "flex",
+  "focus-visible:outline-offset-[calc(var(--focus-ring-width)*-1)]",
+  "group-data-[density=base]/menu:leading-[inherit]",
+  "group-data-[density=base]/menu:px-[12px]",
+  "group-data-[density=base]/menu:py-[8px]",
+  "group-data-[density=compact]/menu:leading-[inherit]",
+  "group-data-[density=compact]/menu:px-[9.75px]",
+  "group-data-[density=compact]/menu:py-[8px]",
+  "group-data-[tone=strong]/menu:not-data-disabled:text-[var(--menu-item-strong-text)]",
+  "hover:focus-visible:outline-none",
+  "items-center",
+  "leading-[1.432]",
+  "menu-row-active:bg-[var(--menu-item-hover-bg)]",
+  "menu-row-active:text-[var(--menu-item-hover-text)]",
+  "no-underline",
+  "px-[16px]",
+  "py-[10px]",
+  "select-none",
+  "text-[var(--menu-item-text)]",
+  "transition-colors",
+]
+`;

@@ -35,6 +35,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns
 - `forms.md` - React Final Form and VStepperForm patterns
+- `menus.md` - Menus, dropdowns and popovers: `Menu`, `MenuPopover`, `ActionsMenu`, row actions
 - `tables.md` - Modular index for useTable, columns, filters, row actions, export, and visual customizations
 - `table/filter-migration-guide.md` - Generated table filters from OpenAPI schema
 - `development-setup.md` - Build, environment, tooling
@@ -156,12 +157,24 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 - **Edit Field Architecture** — for any read-only-with-edit row in a details/settings panel, use the pre-bound `*EditField` exports from `@/form/editFields` inside an `EditFieldProvider` (see `docs/forms.md`). Never write a monolithic switch-style `EditFieldDialog` — those have been removed.
 
   ```tsx
-  import { EditFieldProvider, StringEditField, BooleanEditField } from '@/form/editFields';
+  import {
+    EditFieldProvider,
+    StringEditField,
+    BooleanEditField,
+  } from '@/form/editFields';
 
   <EditFieldProvider scope={offering} callback={update}>
-    <StringEditField name="service_attributes.backend_url" label={translate('API URL')} required />
-    <BooleanEditField name="service_attributes.verify_ssl" label={translate('Verify SSL')} hideLabel />
-  </EditFieldProvider>
+    <StringEditField
+      name="service_attributes.backend_url"
+      label={translate('API URL')}
+      required
+    />
+    <BooleanEditField
+      name="service_attributes.verify_ssl"
+      label={translate('Verify SSL')}
+      hideLabel
+    />
+  </EditFieldProvider>;
   ```
 
   - `callback` receives a partial PATCH body like `{ service_attributes: { backend_url: 'x' } }` (built via `lodash.set` from the field's `name` path). The backend endpoint must accept partial updates.

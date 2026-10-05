@@ -18,7 +18,7 @@ import { PullActionItem } from '@/resource/actions/PullActionItem';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 const EditHealthMonitorDialog: FC<
   ActionDialogProps<OpenStackHealthMonitor>
@@ -145,7 +145,7 @@ export const HealthMonitorRowActions: FC<HealthMonitorRowActionsProps> = ({
   row,
   fetch,
 }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <DialogActionItem
       title={translate('Edit')}
       modalComponent={EditHealthMonitorDialogLazy}
@@ -159,5 +159,5 @@ export const HealthMonitorRowActions: FC<HealthMonitorRowActionsProps> = ({
       refetch={fetch}
     />
     <DestroyHealthMonitorButton resource={row} refetch={fetch} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );

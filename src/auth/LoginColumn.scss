@@ -40,7 +40,11 @@
   gap: 0.5rem;
 }
 
-.login-footer .menu {
+.login-footer.footer-top {
+  margin-top: 0;
+}
+
+.login-footer .footer-links {
   flex-grow: 1;
   justify-content: space-between;
   align-items: center;

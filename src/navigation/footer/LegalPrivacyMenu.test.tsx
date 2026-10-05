@@ -6,21 +6,18 @@ import { useModal } from '@/modal/actions';
 
 import { LegalPrivacyMenu } from './LegalPrivacyMenu';
 
-// FooterDropdown now hosts its children in a real Radix DropdownMenu (see
-// FooterDropdown.tsx) -- LegalPrivacyMenu's own rows are real
-// RadixDropdownMenu.Item elements, which throw outside that context, so
-// the mock has to provide one rather than a plain <div>.
+// FooterDropdown hosts its rows in waldur-ui's Menu (see FooterDropdown.tsx);
+// the mock keeps the title and renders the rows in an open Menu, so they
+// render as real menu items.
 vi.mock('./FooterDropdown', async () => {
-  const RadixDropdownMenu = await import('@radix-ui/react-dropdown-menu');
+  const { Menu } = await import('waldur-ui');
   return {
     FooterDropdown: ({ title, children }: any) => (
       <div data-testid="legal-privacy-dropdown">
         <span>{title}</span>
-        <RadixDropdownMenu.Root open modal={false}>
-          <RadixDropdownMenu.Portal>
-            <RadixDropdownMenu.Content>{children}</RadixDropdownMenu.Content>
-          </RadixDropdownMenu.Portal>
-        </RadixDropdownMenu.Root>
+        <Menu open>
+          <Menu.Content>{children}</Menu.Content>
+        </Menu>
       </div>
     ),
   };

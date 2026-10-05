@@ -1,14 +1,14 @@
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { ActionsPopover } from './ActionsPopover';
 
 export const ModalActionsButton = (props) => (
-  <ActionsDropdownComponent
-    labeled={props.labeled}
-    drop={props.drop}
+  <ActionsMenu
+    toggle={props.labeled ? 'labeled' : 'kebab'}
+    side={props.side}
     disabled={props.disabled}
     size={props.size}
   >
     <ActionsPopover {...props} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );

@@ -1,11 +1,10 @@
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC } from 'react';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { AddDropdownToggle } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { AssignOfferingUserButton } from './AssignOfferingUserButton';
@@ -48,30 +47,19 @@ export const OfferingTeamAddDropdown: FC<OfferingTeamAddDropdownProps> = ({
     : undefined;
 
   return (
-    <RadixDropdownMenu.Root modal={false}>
-      <RadixDropdownMenu.Trigger asChild>
-        <AddDropdownToggle size="lg" />
-      </RadixDropdownMenu.Trigger>
-      <RadixDropdownMenu.Portal>
-        <RadixDropdownMenu.Content
-          align="start"
-          sideOffset={2}
-          className="dropdown-menu show position-static"
-        >
-          <InviteOfferingUserButton
-            offering={offering}
-            refetch={refetch}
-            disabled={isPrivate}
-            tooltip={tooltip}
-          />
-          <AssignOfferingUserButton
-            offering={offering}
-            refetch={refetch}
-            disabled={isPrivate}
-            tooltip={tooltip}
-          />
-        </RadixDropdownMenu.Content>
-      </RadixDropdownMenu.Portal>
-    </RadixDropdownMenu.Root>
+    <ActionsMenu side="bottom" toggle="add" size="lg" align="start">
+      <InviteOfferingUserButton
+        offering={offering}
+        refetch={refetch}
+        disabled={isPrivate}
+        tooltip={tooltip}
+      />
+      <AssignOfferingUserButton
+        offering={offering}
+        refetch={refetch}
+        disabled={isPrivate}
+        tooltip={tooltip}
+      />
+    </ActionsMenu>
   );
 };

@@ -7,16 +7,15 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { BooleanField } from '@/table/BooleanField';
 import { SLUG_COLUMN } from '@/table/slug';
@@ -52,8 +51,8 @@ const RowActions = ({ row }) => {
   }
 
   return (
-    <ActionsDropdownComponent
-      drop="down"
+    <ActionsMenu
+      side="bottom"
       align="start"
       disabled={!canDeploy}
       tooltip={
@@ -63,7 +62,7 @@ const RowActions = ({ row }) => {
       }
       size="sm"
     >
-      <ActionsDropdownItem
+      <Menu.Item
         onClick={() => {
           if (canDeploy) {
             setTimeout(() => {
@@ -76,8 +75,8 @@ const RowActions = ({ row }) => {
         disabled={!canDeploy}
       >
         {translate('Deploy')}
-      </ActionsDropdownItem>
-    </ActionsDropdownComponent>
+      </Menu.Item>
+    </ActionsMenu>
   );
 };
 

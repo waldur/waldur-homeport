@@ -2,10 +2,10 @@ import { CheckIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { ChangelogReleaseSummary } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 // The page shows either every entry pending for this deployment, or what one
 // release introduced.
@@ -51,25 +51,29 @@ export const ReleasePicker: FC<ReleasePickerProps> = ({
   const selectedIcon = (selected: boolean) =>
     selected ? <CheckIcon weight="bold" /> : <span />;
   return (
-    <ActionDropdownButton
-      variant="tertiary"
-      title={getViewTitle(view, releases)}
-    >
-      {hasPending && (
-        <ActionItem
-          title={translate('Pending upgrade')}
-          action={() => onChange(PENDING_VIEW)}
-          iconNode={selectedIcon(view === PENDING_VIEW)}
-        />
-      )}
-      {releases.map((release) => (
-        <ActionItem
-          key={release.version}
-          title={getReleaseLabel(release)}
-          action={() => onChange(release.version)}
-          iconNode={selectedIcon(view === release.version)}
-        />
-      ))}
-    </ActionDropdownButton>
+    <Menu>
+      <Menu.TriggerButton variant="tertiary" size="lg">
+        {getViewTitle(view, releases)}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom">
+        {hasPending && (
+          <Menu.Item
+            icon={selectedIcon(view === PENDING_VIEW)}
+            onSelect={() => onChange(PENDING_VIEW)}
+          >
+            {translate('Pending upgrade')}
+          </Menu.Item>
+        )}
+        {releases.map((release) => (
+          <Menu.Item
+            key={release.version}
+            icon={selectedIcon(view === release.version)}
+            onSelect={() => onChange(release.version)}
+          >
+            {getReleaseLabel(release)}
+          </Menu.Item>
+        ))}
+      </Menu.Content>
+    </Menu>
   );
 };

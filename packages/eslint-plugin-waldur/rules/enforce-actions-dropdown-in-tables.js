@@ -30,10 +30,7 @@ const FORBIDDEN_DIRECT_COMPONENTS = [
 ];
 
 // Components that ARE allowed as direct returns from rowActions
-const ALLOWED_WRAPPER_COMPONENTS = [
-  'ActionsDropdown',
-  'ActionsDropdownComponent',
-];
+const ALLOWED_WRAPPER_COMPONENTS = ['ActionsDropdown', 'ActionsMenu'];
 
 export default {
   meta: {

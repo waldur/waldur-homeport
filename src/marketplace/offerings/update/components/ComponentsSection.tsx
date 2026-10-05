@@ -4,7 +4,7 @@ import { OfferingComponent } from 'waldur-js-client';
 import { translate } from '@/i18n';
 import { BillingTypeBadge } from '@/marketplace/common/billingTypes';
 import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@/openstack/constants';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -19,7 +19,7 @@ import { SwitchModesDropdown } from './SwitchModesDropdown';
 
 const RowActions = ({ row, refetch, offering }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <EditComponentButton
         offering={offering}
         refetch={refetch}
@@ -32,7 +32,7 @@ const RowActions = ({ row, refetch, offering }) => {
           refetch={refetch}
         />
       )}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 

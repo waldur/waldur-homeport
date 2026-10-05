@@ -1,9 +1,8 @@
 import { useMediaDeviceSelect } from '@livekit/components-react';
 import { GearSixIcon } from '@phosphor-icons/react';
-import * as RadixPopover from '@radix-ui/react-popover';
 import { FC } from 'react';
 
-import { Select } from 'waldur-ui';
+import { Popover, PopoverContent, PopoverTrigger, Select } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -64,8 +63,8 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
   ];
 
   return (
-    <RadixPopover.Root modal={false}>
-      <RadixPopover.Trigger asChild>
+    <Popover>
+      <PopoverTrigger asChild>
         <button
           type="button"
           className="lk-button"
@@ -73,23 +72,22 @@ export const CallSettingsMenu: FC<CallSettingsMenuProps> = ({ container }) => {
         >
           <GearSixIcon size={20} weight="bold" />
         </button>
-      </RadixPopover.Trigger>
-      <RadixPopover.Portal container={container ?? undefined}>
-        <RadixPopover.Content
-          side="top"
-          sideOffset={2}
-          // The docked call belongs to MatrixCallHost's React tree, not the
-          // drawer's, so the drawer would read clicks here as a click away.
-          data-drawer-inside=""
-          className="call-device-settings-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden p-4"
-        >
-          <div className="call-device-settings">
-            {kinds.map(({ kind, label }) => (
-              <DeviceSelect key={kind} kind={kind} label={label} />
-            ))}
-          </div>
-        </RadixPopover.Content>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+      </PopoverTrigger>
+      <PopoverContent
+        container={container ?? undefined}
+        side="top"
+        sideOffset={2}
+        // The docked call belongs to MatrixCallHost's React tree, not the
+        // drawer's, so the drawer would read clicks here as a click away.
+        data-dialog-inside=""
+        className="call-device-settings-popover p-4"
+      >
+        <div className="call-device-settings">
+          {kinds.map(({ kind, label }) => (
+            <DeviceSelect key={kind} kind={kind} label={label} />
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };

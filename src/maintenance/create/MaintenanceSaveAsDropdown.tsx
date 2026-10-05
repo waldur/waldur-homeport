@@ -6,7 +6,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
 
@@ -34,8 +34,8 @@ export const MaintenanceSaveAsDropdown: FC<OwnProps> = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionsDropdownComponent
-      labeled
+    <ActionsMenu
+      toggle="labeled"
       label={
         <>
           <span className="svg-icon svg-icon-2">
@@ -44,9 +44,9 @@ export const MaintenanceSaveAsDropdown: FC<OwnProps> = ({
           {translate('Save as')}
         </>
       }
-      className="min-w-125px"
-      menuClassName="min-w-150px"
-      drop="down"
+      toggleClassName="min-w-125px"
+      className="min-w-150px"
+      side="bottom"
     >
       <ActionItem
         title={translate('Template')}
@@ -64,6 +64,6 @@ export const MaintenanceSaveAsDropdown: FC<OwnProps> = ({
         }
         iconNode={<FilePlusIcon weight="bold" />}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

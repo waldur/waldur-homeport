@@ -12,7 +12,7 @@ import {
   BASIC_OFFERING_TYPE,
   SUPPORT_OFFERING_TYPE,
 } from '@/support/constants';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { CancelOrderButton } from '../details/CancelOrderButton';
@@ -127,11 +127,11 @@ export const OrderActionsButton = ({
     showSetAsErredButton ||
     showConsumerActions ||
     showRetryButton ? (
-    <ActionsDropdownComponent
+    <ActionsMenu
       label={translate('Actions')}
-      labeled
+      toggle="labeled"
       size="lg"
-      drop="down"
+      side="bottom"
     >
       {showRetryButton && <RetryOrderButton row={order} refetch={loadData} />}
       {showMarkAsDoneButton && (
@@ -146,6 +146,6 @@ export const OrderActionsButton = ({
       {showConsumerActions && (
         <OrderConsumerActions order={order} offering={offering} />
       )}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   ) : null;
 };

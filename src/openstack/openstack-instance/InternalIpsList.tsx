@@ -6,7 +6,7 @@ import {
 import { OpenStackNestedPort } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
@@ -23,13 +23,13 @@ const RowActions = ({
   instance: OpenStackInstance;
   refetch: () => void;
 }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <SetAllowedAddressPairsAction
       resource={row}
       instance={instance}
       refetch={refetch}
     />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );
 
 export const InternalIpsList: FunctionComponent<{

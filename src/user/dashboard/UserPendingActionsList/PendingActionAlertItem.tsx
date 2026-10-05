@@ -114,7 +114,7 @@ export const PendingActionAlertItem: FC<{
               actions={remainingActions}
               labeled
               variant="text-secondary"
-              drop="down"
+              side="bottom"
             />
           )}
         </div>

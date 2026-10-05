@@ -1,12 +1,11 @@
 import { FunctionComponent } from 'react';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
 import { ProviderActionContext } from '@/marketplace/resources/actions/ProviderActionContext';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { ActionItemType } from './types';
@@ -27,7 +26,7 @@ interface ResourceActionComponentProps {
   marketplaceResource?: any;
   refetch?(): void;
   labeled?: boolean;
-  drop?: 'up' | 'down' | 'start' | 'end';
+  side?: 'top' | 'right' | 'bottom' | 'left';
   size?: 'sm' | 'lg';
 }
 
@@ -51,22 +50,18 @@ export const ResourceActionComponent: FunctionComponent<
   );
 
   return (
-    <ActionsDropdownComponent
-      labeled={props.labeled}
-      onToggle={props.onToggle}
+    <ActionsMenu
+      toggle={props.labeled ? 'labeled' : 'kebab'}
+      onOpenChange={props.onToggle}
       disabled={props.disabled}
-      drop={props.drop}
+      side={props.side}
       size={props.size}
     >
       {props.open ? (
         props.loading ? (
-          <ActionsDropdownItem disabled>
-            {translate('Loading actions')}
-          </ActionsDropdownItem>
+          <Menu.Item disabled>{translate('Loading actions')}</Menu.Item>
         ) : props.error ? (
-          <ActionsDropdownItem disabled>
-            {translate('Unable to load actions')}
-          </ActionsDropdownItem>
+          <Menu.Item disabled>{translate('Unable to load actions')}</Menu.Item>
         ) : props.customerResourceActions ||
           props.staffActions ||
           extraAndResourceTypeActions?.length > 0 ? (
@@ -126,11 +121,9 @@ export const ResourceActionComponent: FunctionComponent<
             )}
           </>
         ) : (
-          <ActionsDropdownItem disabled>
-            {translate('There are no actions.')}
-          </ActionsDropdownItem>
+          <Menu.Item disabled>{translate('There are no actions.')}</Menu.Item>
         )
       ) : null}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

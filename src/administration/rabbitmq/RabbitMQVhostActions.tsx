@@ -2,15 +2,12 @@ import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownHeader,
-  ActionsDropdownItem,
-  ActionsDropdownSeparator,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import {
   deleteRabbitMQQueues,
@@ -201,46 +198,42 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
   const isPending = purgeMutation.isPending || deleteMutation.isPending;
 
   return (
-    <ActionsDropdownComponent
+    <ActionsMenu
       disabled={isPending || !hasAnyMatchingQueues}
       tooltip={!hasAnyMatchingQueues}
     >
-      <ActionsDropdownHeader>
-        {translate('Purge messages')}
-      </ActionsDropdownHeader>
+      <Menu.Label>{translate('Purge messages')}</Menu.Label>
       {PRESET_PATTERNS.map((preset) => {
         const count = countMatchingQueues(preset.pattern);
         return (
-          <ActionsDropdownItem
+          <Menu.Item
             key={`purge-${preset.pattern}`}
+            icon={<EraserIcon weight="bold" />}
             onSelect={() => handlePurgePattern(preset.pattern)}
             disabled={count === 0}
           >
-            <EraserIcon size={18} weight="bold" className="me-2" />
             {translate('Purge {label}', { label: preset.label })}{' '}
             <span className="text-muted">({count})</span>
-          </ActionsDropdownItem>
+          </Menu.Item>
         );
       })}
-      <ActionsDropdownSeparator />
-      <ActionsDropdownHeader>
-        {translate('Delete queues')}
-      </ActionsDropdownHeader>
+      <Menu.Separator />
+      <Menu.Label>{translate('Delete queues')}</Menu.Label>
       {PRESET_PATTERNS.map((preset) => {
         const count = countMatchingQueues(preset.pattern);
         return (
-          <ActionsDropdownItem
+          <Menu.Item
             key={`delete-${preset.pattern}`}
+            icon={<TrashIcon weight="bold" />}
             onSelect={() => handleDeletePattern(preset.pattern)}
             disabled={count === 0}
             className="text-danger"
           >
-            <TrashIcon size={18} weight="bold" className="me-2" />
             {translate('Delete {label}', { label: preset.label })}{' '}
             <span className="text-muted">({count})</span>
-          </ActionsDropdownItem>
+          </Menu.Item>
         );
       })}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

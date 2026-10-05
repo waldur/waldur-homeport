@@ -1,14 +1,12 @@
 import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useNotify } from '@/store/notify';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-  ActionsDropdownSeparator,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import {
   deleteRabbitMQQueues,
@@ -112,19 +110,21 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
   const isPending = isPurging || isDeleting;
 
   return (
-    <ActionsDropdownComponent disabled={isPending}>
-      <ActionsDropdownItem onSelect={() => handlePurge()}>
-        <EraserIcon size={18} weight="bold" className="me-2" />
+    <ActionsMenu disabled={isPending}>
+      <Menu.Item
+        icon={<EraserIcon weight="bold" />}
+        onSelect={() => handlePurge()}
+      >
         {translate('Purge messages')}
-      </ActionsDropdownItem>
-      <ActionsDropdownSeparator />
-      <ActionsDropdownItem
+      </Menu.Item>
+      <Menu.Separator />
+      <Menu.Item
+        icon={<TrashIcon weight="bold" />}
         onSelect={() => handleDelete()}
         className="text-danger"
       >
-        <TrashIcon size={18} weight="bold" className="me-2" />
         {translate('Delete queue')}
-      </ActionsDropdownItem>
-    </ActionsDropdownComponent>
+      </Menu.Item>
+    </ActionsMenu>
   );
 };

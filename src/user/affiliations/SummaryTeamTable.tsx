@@ -10,7 +10,7 @@ import { renderRoleExpirationDate } from '@/customer/team/TeamTableComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
@@ -42,9 +42,9 @@ const projectUserMandatoryFields = [
 
 const RowActions = ({ row }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <UserDetailsButton userId={row.user_uuid || row.uuid} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 

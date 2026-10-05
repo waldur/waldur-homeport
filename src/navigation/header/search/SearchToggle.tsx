@@ -1,8 +1,7 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
-import * as RadixPopover from '@radix-ui/react-popover';
 import { KeyboardEvent as ReactKeyboardEvent, useEffect, useRef } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { Popover, PopoverAnchor, PopoverContent, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { getTabbableAfter, getTabbables } from '@/navigation/tabbables';
@@ -104,14 +103,14 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
   };
 
   return (
-    <RadixPopover.Root open={show} onOpenChange={setShow} modal={false}>
+    <Popover open={show} onOpenChange={setShow} modal={false}>
       {/*
         Anchor, not Trigger: opening isn't one clickable element here — it's
         the compact button, the mobile button, or acting on the inline
         desktop SearchInput, each already calling setShow(true) directly.
         Anchor only gives Content something to position against.
       */}
-      <RadixPopover.Anchor asChild>
+      <PopoverAnchor asChild>
         <div
           className="d-flex align-items-center"
           id="searchContainer"
@@ -156,35 +155,33 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
             </>
           )}
         </div>
-      </RadixPopover.Anchor>
-      <RadixPopover.Portal>
-        <RadixPopover.Content
-          ref={contentRef}
-          id="GlobalSearch"
-          side="bottom"
-          align="start"
-          sideOffset={2}
-          className="z-header-popover rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden"
-          onOpenAutoFocus={handleOpenAutoFocus}
-          onCloseAutoFocus={handleCloseAutoFocus}
-          onPointerDownOutside={() => {
-            pointerDownOutsideRef.current = true;
-          }}
-          onKeyDown={handleContentKeyDown}
-        >
-          <SearchPopover
-            result={result}
-            usersResult={usersResult}
-            query={query}
-            show={show}
-            setQuery={setQuery}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            isStaffOrSupportUser={isStaffOrSupportUser}
-            close={() => setShow(false)}
-          />
-        </RadixPopover.Content>
-      </RadixPopover.Portal>
-    </RadixPopover.Root>
+      </PopoverAnchor>
+      <PopoverContent
+        ref={contentRef}
+        id="GlobalSearch"
+        side="bottom"
+        align="start"
+        sideOffset={2}
+        className="z-header-popover"
+        onOpenAutoFocus={handleOpenAutoFocus}
+        onCloseAutoFocus={handleCloseAutoFocus}
+        onPointerDownOutside={() => {
+          pointerDownOutsideRef.current = true;
+        }}
+        onKeyDown={handleContentKeyDown}
+      >
+        <SearchPopover
+          result={result}
+          usersResult={usersResult}
+          query={query}
+          show={show}
+          setQuery={setQuery}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isStaffOrSupportUser={isStaffOrSupportUser}
+          close={() => setShow(false)}
+        />
+      </PopoverContent>
+    </Popover>
   );
 };

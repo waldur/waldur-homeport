@@ -1,54 +1,50 @@
 import { CopyIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
-import { FormControl, InputGroup } from 'react-bootstrap';
+import classNames from 'classnames';
 
-import { BaseButton } from 'waldur-ui';
+import { buttonVariants, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
 /**
- * Plain content inside UserDropdown's NavMenuContent, not a NavMenuItem —
- * see ThemeSwitcher's comment. This row holds a readonly token field and
- * its own Copy button; selecting either shouldn't dismiss the menu.
+ * The user's API token, masked, with a Copy button: a menu item, so arrow
+ * keys reach it. Choosing the row copies the token; the field and the
+ * button are its look only, hidden from screen readers (the token is a
+ * secret), which hear "Copy API token". The menu stays open.
  */
-export const UserToken = ({ token }) => {
+export const UserToken = ({ token }: { token: string }) => {
   const { showSuccess } = useNotify();
 
-  const onClick = useCallback(() => {
-    navigator.clipboard.writeText(token).then(() => {
-      showSuccess(translate('Token has been copied'));
-    });
-  }, [token]);
-
   return (
-    <div className="menu-item">
-      <div className="menu-link bg-transparent">
-        <span className="menu-title me-2 text-nowrap">
-          {translate('API token')}
+    <Menu.CopyItem
+      value={token}
+      aria-label={translate('Copy API token')}
+      onCopied={() => showSuccess(translate('Token has been copied'))}
+    >
+      <span className="flex grow items-center me-2 text-nowrap">
+        {translate('API token')}
+      </span>
+      <span className="input-group" aria-hidden="true">
+        {/* Sized like the <input> this replaces: contain:inline-size stops the
+            token text from widening it. */}
+        <span
+          className="form-control form-control-sm form-control-solid h-30px overflow-hidden whitespace-nowrap [contain:inline-size]"
+          style={{ fontFamily: 'text-security-disc' }}
+        >
+          {token}
         </span>
-        <InputGroup>
-          <FormControl
-            value={token}
-            readOnly={true}
-            className="form-control-solid h-30px"
-            size="sm"
-            placeholder={translate('Token')}
-            style={{
-              fontFamily: 'text-security-disc',
-            }}
-          />
-
-          <BaseButton
-            size="sm"
-            variant="primary"
-            className="px-3 h-30px"
-            onClick={onClick}
-            label={translate('Copy')}
-            iconNode={<CopyIcon weight="bold" />}
-          />
-        </InputGroup>
-      </div>
-    </div>
+        <span
+          className={classNames(
+            buttonVariants({ variant: 'primary', size: 'sm' }),
+            'px-3 h-30px',
+          )}
+        >
+          <span className="inline-flex size-4 shrink-0 items-center justify-center [&>svg]:size-4">
+            <CopyIcon weight="bold" />
+          </span>
+          {translate('Copy')}
+        </span>
+      </span>
+    </Menu.CopyItem>
   );
 };

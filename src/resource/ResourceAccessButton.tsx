@@ -3,13 +3,13 @@ import {
   CaretDownIcon,
   CopyIcon,
 } from '@phosphor-icons/react';
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC, useCallback, useMemo } from 'react';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { BaseButton, Menu, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { getResourceAccessEndpoints, isSshFormat } from './utils';
 
@@ -67,58 +67,60 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     return null;
   }
   return (
-    <RadixDropdownMenu.Root>
-      <RadixDropdownMenu.Trigger asChild>
+    <ActionsMenu
+      side="bottom"
+      toggle={
         <BaseButton
           variant="tertiary"
           label={translate('Access resource')}
           iconNode={<CaretDownIcon weight="bold" />}
           iconRight
         />
-      </RadixDropdownMenu.Trigger>
-      <RadixDropdownMenu.Portal>
-        <RadixDropdownMenu.Content
-          align="end"
-          sideOffset={2}
-          className="dropdown-menu show position-static"
+      }
+      align="end"
+    >
+      {endpoints.map((endpoint, index) => (
+        <Menu.Item
+          key={index}
+          asChild
+          className="d-flex justify-content-between px-5 py-3"
         >
-          {endpoints.map((endpoint, index) => (
-            <RadixDropdownMenu.Item key={index} asChild>
-              <a
-                href={endpoint.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="dropdown-item d-flex justify-content-between text-anchor text-primary px-5 py-3"
-              >
-                <span className="d-flex flex-center me-6">
-                  <span className="svg-icon svg-icon-2 svg-icon-primary">
-                    <ArrowSquareOutIcon weight="bold" />
-                  </span>
-                  {endpoint.name}
-                </span>
-                <Tooltip
-                  label={
-                    isSshFormat(endpoint.url) && resource.username
-                      ? extendURLWithUsername(endpoint.url)
-                      : endpoint.url
-                  }
-                >
-                  <BaseButton
-                    variant="text-primary"
-                    onClick={(e) => {
-                      copyText(endpoint.url);
-                      e.preventDefault();
-                    }}
-                    iconNode={<CopyIcon weight="bold" />}
-                    className="h-20px"
-                    size="sm"
-                  />
-                </Tooltip>
-              </a>
-            </RadixDropdownMenu.Item>
-          ))}
-        </RadixDropdownMenu.Content>
-      </RadixDropdownMenu.Portal>
-    </RadixDropdownMenu.Root>
+          <a
+            href={endpoint.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            // On the link, not the row: the row's classes go through
+            // tailwind-merge, which reads `text-anchor` and `text-primary`
+            // as two colours and drops `text-anchor`; Slot only joins them.
+            className="text-anchor text-primary"
+          >
+            <span className="d-flex flex-center me-6">
+              <span className="svg-icon svg-icon-2 svg-icon-primary me-[12px]">
+                <ArrowSquareOutIcon weight="bold" />
+              </span>
+              {endpoint.name}
+            </span>
+            <Tooltip
+              label={
+                isSshFormat(endpoint.url) && resource.username
+                  ? extendURLWithUsername(endpoint.url)
+                  : endpoint.url
+              }
+            >
+              <BaseButton
+                variant="text-primary"
+                onClick={(e) => {
+                  copyText(endpoint.url);
+                  e.preventDefault();
+                }}
+                iconNode={<CopyIcon weight="bold" />}
+                className="h-20px"
+                size="sm"
+              />
+            </Tooltip>
+          </a>
+        </Menu.Item>
+      ))}
+    </ActionsMenu>
   );
 };

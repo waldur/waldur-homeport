@@ -1,32 +1,42 @@
 import { MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
+import { FormCheck } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Menu } from 'waldur-ui';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { translate } from '@/i18n';
 import { useTheme } from '@/theme/useTheme';
 
 /**
- * Rendered as plain content inside UserDropdown's NavMenuContent, not
- * wrapped in NavMenuItem: it holds a real checkbox the user toggles
- * in place, and Radix's Item defaults to closing the menu on selection —
- * exactly the opposite of what a persistent settings toggle wants.
+ * The user menu's dark-theme toggle: a menuitemcheckbox, so arrow keys
+ * reach it and a screen reader announces it as on or off. It shows the
+ * app's Bootstrap switch, as a visual only: the row is the control, and
+ * choosing it keeps the menu open.
  */
 export const ThemeSwitcher: FunctionComponent = () => {
   const { theme, toggleTheme } = useTheme();
+  const dark = theme === 'dark';
 
   return (
-    <div className="menu-item">
-      <div className="menu-link bg-transparent">
-        <AwesomeCheckbox
-          label={translate('Dark theme')}
-          value={theme === 'dark'}
-          onChange={toggleTheme}
-          className="align-items-center"
+    <Menu.CheckboxItem
+      checked={dark}
+      onCheckedChange={toggleTheme}
+      indicator={null}
+    >
+      <span className="form-check form-check-custom form-switch form-check-solid align-items-center">
+        {/* AwesomeCheckbox's markup, as a visual: not focusable, hidden
+            from screen readers, and not a click target of its own. */}
+        <FormCheck
+          type="checkbox"
+          checked={dark}
+          readOnly
+          tabIndex={-1}
+          aria-hidden="true"
+          className="pointer-events-none"
         />
-      </div>
-    </div>
+        <FormCheck.Label>{translate('Dark theme')}</FormCheck.Label>
+      </span>
+    </Menu.CheckboxItem>
   );
 };
 
