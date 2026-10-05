@@ -11,22 +11,13 @@ import {
 
 import { BaseButton, Menu } from 'waldur-ui';
 
+import { saveFile } from '@/core/saveFile';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
 
 import { ScheduleUpgradeDialog } from './ScheduleUpgradeDialog';
 import { UpgradeCommandsDialog } from './UpgradeCommandsDialog';
-
-const downloadMarkdown = (filename: string, markdown: string) => {
-  const blob = new Blob([markdown], { type: 'text/markdown' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-};
 
 export const ChangelogToolbar: FC = () => {
   const { openDialog } = useModal();
@@ -71,9 +62,9 @@ export const ChangelogToolbar: FC = () => {
   const downloadReport = useCallback(
     () =>
       withReport((report) =>
-        downloadMarkdown(
+        saveFile(
+          new Blob([report.report], { type: 'text/markdown' }),
           `waldur-upgrade-${report.current_version}-to-${report.latest_version}.md`,
-          report.report,
         ),
       ),
     [withReport],
