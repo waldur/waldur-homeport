@@ -822,8 +822,9 @@
     top: calc(100% + 6px);
     left: 0;
     z-index: 10;
-    width: 240px;
-    max-width: 240px;
+    // emoji-mart sizes itself from perLine and emojiButtonSize; a fixed width
+    // here leaves an empty strip beside it, so right-anchoring misses the edge.
+    width: max-content;
     max-height: 220px;
     overflow: hidden;
     box-shadow:
@@ -833,15 +834,23 @@
 
     //noinspection CssInvalidHtmlTagReference
     em-emoji-picker {
-      width: 240px;
-      max-width: 240px;
       max-height: 220px;
+      // emoji-mart's :host sets min-height: 230px, which beats max-height and
+      // pushes the picker's bottom edge past the clipping wrapper.
+      min-height: 0;
     }
   }
 
   .tc-msg-reactions-toolbar .tc-msg-emoji-popover {
     top: auto;
     bottom: calc(100% + 6px);
+  }
+
+  // Own messages anchor the toolbar to the bubble's right edge; the picker
+  // has to follow or it runs past .tc-stream, which clips horizontally.
+  .tc-msg.mine .tc-msg-reactions-toolbar .tc-msg-emoji-popover {
+    left: auto;
+    right: 0;
   }
 
   .tc-msg-reactions-toolbar.is-below .tc-msg-emoji-popover,
