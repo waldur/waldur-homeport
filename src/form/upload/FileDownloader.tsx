@@ -3,19 +3,13 @@ import { ReactNode, useState } from 'react';
 
 import { get } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { saveFile } from '@/core/saveFile';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
 
 export const downloadFile = async (url: string, name: string) => {
   const blob = await get<Blob>(url);
-  const href = window.URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.setAttribute('download', name);
-  link.href = href;
-  document.body.appendChild(link);
-  link.click();
-  link.parentNode?.removeChild(link);
-  window.URL.revokeObjectURL(href);
+  saveFile(blob, name);
 };
 
 interface FileDownloaderProps {

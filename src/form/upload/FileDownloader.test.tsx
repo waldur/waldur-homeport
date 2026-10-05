@@ -39,11 +39,22 @@ describe('FileDownloader', () => {
   it('downloads via authenticated GET instead of navigating to the file URL', async () => {
     const user = userEvent.setup();
     vi.spyOn(api, 'get').mockResolvedValue(mockBlob as any);
+    const click = vi
+      .spyOn(HTMLAnchorElement.prototype, 'click')
+      .mockImplementation(function (this: HTMLAnchorElement) {
+        expect(this).toHaveAttribute('href', 'blob:file');
+        expect(this).toHaveAttribute('download', mockName);
+        expect(this.isConnected).toBe(true);
+      });
 
     render(<FileDownloader url={mockUrl} name={mockName} />);
     await user.click(screen.getByRole('button'));
 
     expect(api.get).toHaveBeenCalledWith(mockUrl);
+    expect(URL.createObjectURL).toHaveBeenCalledWith(mockBlob);
+    expect(click).toHaveBeenCalledOnce();
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    expect(URL.revokeObjectURL).toHaveBeenCalledWith('blob:file');
   });
 
   it('shows loading spinner while downloading', async () => {
