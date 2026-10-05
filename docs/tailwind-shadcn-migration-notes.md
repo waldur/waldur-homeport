@@ -34,10 +34,11 @@ Architectural reference and design system manual for Tailwind CSS v4, shadcn UI,
 3. [Legacy Button CSS Retirement](#legacy-button-css-retirement)
 4. [Legacy Menu CSS Retirement](#legacy-menu-css-retirement)
 5. [Legacy Dropdown CSS Retirement](#legacy-dropdown-css-retirement)
-6. [Linting & Guardrails](#linting-guardrails)
+6. [Legacy Pagination CSS Retirement](#legacy-pagination-css-retirement)
+7. [Linting & Guardrails](#linting-guardrails)
    - [Restricted Imports](#restricted-imports)
    - [Custom ESLint Rules Matrix](#custom-eslint-rules-matrix)
-7. [Storybook & Testing Toolchain](#storybook-testing-toolchain)
+8. [Storybook & Testing Toolchain](#storybook-testing-toolchain)
    - [Storybook Environment & Vitest](#storybook-environment-vitest)
    - [Visual E2E Specs](#visual-e2e-specs)
    - [Retired Visual Parity Suite](#retired-visual-parity-suite)
@@ -54,7 +55,7 @@ Waldur Homeport operates on two active UI component patterns:
 1. **Modern Tailwind / Radix Primitives (`packages/ui`, exported as `waldur-ui`)**
    - Built with pure Tailwind v4 utilities and CSS design tokens from `packages/design-tokens`.
    - Free of all Bootstrap and Metronic classes, SCSS variables, and runtime mixins.
-   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `Menu`, `MenuPopover`, `Switch`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, `LoadingSpinner`, `Accordion`, `AccordionCard`, and `Collapsible`.
+   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `Menu`, `MenuPopover`, `Switch`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, `LoadingSpinner`, `Accordion`, `AccordionCard`, `Collapsible`, and `TablePagination` (with `Pagination` and `PageSizeSelect`).
    - Exports `buttonVariants()`, `ButtonVariant` and `ButtonSize` so elements that cannot be a `BaseButton` (links, Radix triggers that need a specific child shape) still get the exact same classes.
 
 2. **Transitional Shells (Radix Engine with Themed Skins)**
@@ -79,6 +80,7 @@ Waldur Homeport operates on two active UI component patterns:
 | **Expandable panel group**    | `Accordion`                 | `waldur-ui`   | Radix Accordion, `single` / `multiple`, open header in runtime brand colour; closed panels unmount | `react-bootstrap` `Accordion`                               |
 | **Single expandable panel**   | `Collapsible`               | `waldur-ui`   | Radix Collapsible, unstyled; `keepMounted` keeps form fields mounted while closed                  | `react-bootstrap` `Collapse`, `useAccordionButton`          |
 | **Sidebar Navigation**        | `Sidebar`, `Sheet`          | `waldur-ui`   | Collapsible desktop rail + mobile Radix Sheet                                                      | Metronic sidebar JS                                         |
+| **Table pagination**          | `TablePagination`           | `waldur-ui`   | `--pagination-*` tokens; `bordered={false}` under a non-table list; desktop/mobile layouts         | `react-bootstrap` `Pagination`, `page-link` markup          |
 | **Table Actions**             | `ActionsMenu`               | `@/table`     | `Menu` in the actions look, with the kebab / labeled / Add toggles                                 | `react-bootstrap` `DropdownButton`                          |
 | **Header Chrome Menu**        | `Menu`                      | `waldur-ui`   | `Menu` in the nav look; `openOnHover="desktop"` for hover triggers                                 | N/A                                                         |
 | **Slide-Over Drawer**         | `DrawerRoot`                | `@/drawer`    | Radix Dialog with CSS keyframe transitions                                                         | N/A                                                         |
@@ -509,6 +511,33 @@ Once no component relied on a Bootstrap `.dropdown-*` class for its styling, the
 
 ---
 
+## Legacy Pagination CSS Retirement
+
+The table pager moved from `src/table/` (react-bootstrap `Pagination` plus hand-written `page-item`/`page-link` markup) to `waldur-ui`'s `TablePagination`, so micro-apps get the same pager. Its colours are the `--pagination-*` tokens in `surfaceColors.css`. Each token maps to the ramp step that the old compiled light and dark stylesheets used.
+
+### Removed
+
+- `@import 'bootstrap/scss/pagination'` and Metronic's `core/components/_pagination.scss` (the `.pagination`/`.page-item`/`.page-link` base, plus `pagination-circle`, `pagination-outline`, `-sm`/`-lg` and icon variants nothing rendered).
+- The `$pagination-*` variables in `core/components/_variables.scss` and `_variables.custom.scss`, and `$table-pagination-padding-y`.
+- The `.card.card-table .table-pagination` block in `custom/_table.scss`: its colours, sizes, border and padding are now the component's own.
+
+### Kept
+
+- The `table-pagination` class on the pager's root, unstyled by the pager itself, so the padding rules for full-width, grid and nested tables in `custom/_table.scss` keep applying. The nested-table `padding-top` is now `!important`, because the component sets its padding with a Tailwind utility, which outranks the bootstrap layer.
+- The helpdesk list's container query, which now switches between `[data-pagination-layout='desktop']` and `[data-pagination-layout='mobile']` instead of the old `.d-md-block`/`.d-md-none` wrappers.
+
+**How it was verified**: the compiled light and dark stylesheets were diffed with `postcss` as for the dropdowns. 89 rules disappeared from each, every one with `pagination`, `page-item` or `page-link` in its selector, and exactly three changed: the `!important` padding and the two helpdesk selectors. Before the switch, the old and new pager were rendered in Storybook in both themes and their computed styles and element positions compared.
+
+**Known consequences**:
+
+- Outside a `.card-table` (the two form-field lists that page their rows), the old pager fell back to Bootstrap's defaults: a brand-coloured hover and a white-on-brand current page, which had poor contrast in dark mode. Those lists now use the same neutral look as every table, without the top border (`bordered={false}`).
+- Page buttons use `min-width: 40px` instead of a fixed 40px width, so 4-digit page numbers no longer overflow the button.
+- Prev/next lose their `$body-bg` background. It was the card colour anyway, so nothing visible changes.
+- Keyboard focus uses the app's shared focus ring (`focusRing.css`) rather than the old brand-200 box-shadow, and only for keyboard focus (`:focus-visible`), not on click.
+- The label and item-count text are 12px instead of 12.35px (`0.95rem`), because the component is sized in pixels so that it looks the same at a micro-app's 16px root.
+
+---
+
 ## Linting & Guardrails
 
 ### Restricted Imports
@@ -524,6 +553,7 @@ Configured in `eslint.config.js` via `no-restricted-imports` (`RESTRICTED_IMPORT
 | `Button`                                              | `BaseButton` from `waldur-ui` (or `SubmitButton` / `CloseDialogButton` where they fit) |
 | `DropdownButton`                                      | `ActionsDropdown`                                                                      |
 | `Accordion`, `AccordionContext`, `useAccordionButton` | `Accordion` or `Collapsible` from `waldur-ui`                                          |
+| `Pagination`, `PageItem`                              | `TablePagination` (or `Pagination` for page numbers alone) from `waldur-ui`            |
 
 Two Radix packages are restricted too, everywhere except `packages/ui` (where `Menu` / `MenuPopover` wrap them):
 

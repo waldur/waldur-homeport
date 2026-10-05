@@ -96,8 +96,10 @@
         padding-bottom: 16px;
         padding-left: 0;
       }
+      // !important: waldur-ui's TablePagination sets its padding with a
+      // Tailwind utility, which outranks this bootstrap-layer rule.
       .table-pagination {
-        padding-top: 0.5rem;
+        padding-top: 0.5rem !important;
       }
 
       .search-no-result,
@@ -415,58 +417,6 @@
     .table-pagination {
       padding-left: $card-px !important;
       padding-right: $card-px !important;
-    }
-  }
-
-  .table-pagination {
-    padding-top: $table-pagination-padding-y;
-    border-top: 1px solid $border-secondary;
-
-    .page-item {
-      .page-link {
-        color: $text-quaternary;
-        width: 40px;
-        height: 40px;
-        transition: $transition-base;
-        @include svg-icon-color($fg-quinary);
-      }
-      .page-link:focus {
-        background-color: $bg-primary_hover;
-        box-shadow: $ring-primary-200;
-      }
-      .page-link:active,
-      .page-link:hover,
-      &.active .page-link {
-        color: $text-secondary;
-        background-color: $bg-primary_hover;
-        @include svg-icon-color($fg-quaternary);
-      }
-      &.disabled .page-link {
-        color: $fg-disabled;
-      }
-
-      &.next,
-      &.previous {
-        .page-link {
-          width: 28px;
-          height: 28px;
-          padding: 0;
-        }
-      }
-    }
-
-    // Page size selector
-    .form-select {
-      color: $dark;
-      width: auto;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      @include svg-bg-icon(arrow-bottom, $fg-quinary);
-      background-position: 100%;
-
-      option {
-        background-color: $body-bg;
-      }
     }
   }
 

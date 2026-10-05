@@ -5,7 +5,7 @@ import {
   ThHTMLAttributes,
 } from 'react';
 
-import { cn } from './cn';
+import { cn } from '../cn';
 
 /**
  * shadcn's actual Table recipe (a scroll-container div wrapping <table>,

@@ -67,6 +67,24 @@
   --table-row-border: var(--color-gray-100);
   --table-row-hover-bg: var(--color-gray-50);
 
+  /* Table pagination (waldur-ui TablePagination). Unlike most of this
+     file, these have a real Metronic source: the `.card.card-table
+     .table-pagination` rules in src/metronic/sass/custom/_table.scss,
+     read from the compiled light/dark stylesheets and checked against
+     the running pager with getComputedStyle. Page numbers and the
+     range/label text use --pagination-text; the current page and hover
+     use --pagination-text-current on --pagination-hover-bg. The
+     prev/next carets sat one step lighter than the text
+     (--pagination-icon), which is also the disabled colour. */
+  --pagination-text: var(--color-gray-500);
+  --pagination-text-current: var(--color-gray-700);
+  --pagination-text-disabled: var(--color-gray-400);
+  --pagination-icon: var(--color-gray-400);
+  --pagination-icon-hover: var(--color-gray-500);
+  --pagination-hover-bg: var(--color-gray-50);
+  --pagination-border: var(--color-gray-200);
+  --pagination-select-text: var(--color-gray-900);
+
   /* Unlike the rest of this file, these DO have a real Metronic source.
      --dropdown-shadow is $dropdown-box-shadow as
      src/metronic/sass/_variables.custom.scss overrides it (also
@@ -206,6 +224,16 @@
   --table-header-text: var(--color-gray-dark-400);
   --table-row-border: var(--color-gray-dark-800);
   --table-row-hover-bg: var(--color-gray-dark-900);
+
+  /* Same source as the light block, from the compiled dark stylesheet. */
+  --pagination-text: var(--color-gray-dark-400);
+  --pagination-text-current: var(--color-gray-dark-300);
+  --pagination-text-disabled: var(--color-gray-dark-500);
+  --pagination-icon: var(--color-gray-dark-500);
+  --pagination-icon-hover: var(--color-gray-dark-400);
+  --pagination-hover-bg: var(--color-gray-dark-800);
+  --pagination-border: var(--color-gray-dark-800);
+  --pagination-select-text: var(--color-gray-dark-50);
 
   /* The custom $dropdown-box-shadow keeps core's dark value, so both
      tokens agree here. */

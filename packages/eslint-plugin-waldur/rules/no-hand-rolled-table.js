@@ -16,7 +16,7 @@
  */
 
 // The shared table implementation, markup that is not a data table, and
-// packages/ui/src/Table.tsx — the shadcn-recipe table primitive
+// packages/ui/src/Table/Table.tsx — the shadcn-recipe table primitive
 // (DataTable.tsx builds on it) for standalone micro-apps (apps/*), which
 // deliberately can't depend on @/table/Table (Redux table-store +
 // Bootstrap coupled to homeport's own src/). See docs/micro-apps.md and
@@ -24,7 +24,7 @@
 const ALLOWED_FILES = [
   'src/table/',
   'src/core/RichTextEditor',
-  'packages/ui/src/Table.tsx',
+  'packages/ui/src/Table/Table.tsx',
   // A grid of form inputs, one per offering component, inside a dialog -- not
   // a list of data. @/table/Table brings a fetch cycle, an action bar, a
   // reserved min-height and column sizing meant for a page of rows, all of

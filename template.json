@@ -4653,7 +4653,8 @@
   },
   "Apps": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "shell"
     }
   },
   "Appservice": {},
@@ -23309,6 +23310,11 @@
       "feature_area": "changelog"
     }
   },
+  "Help": {
+    "context": {
+      "feature_area": "shell"
+    }
+  },
   "Help me manage my accounts": {
     "context": {
       "feature_area": "ai-assistant"
@@ -23676,6 +23682,11 @@
     }
   },
   "Hostname of FreeIPA server.": {},
+  "Hour": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "Hourly roll-ups": {
     "context": {
       "primary_ui_type": "title",
@@ -30585,6 +30596,11 @@
       "feature_area": "analytics"
     }
   },
+  "Minute": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "Minutes the announcement banner stays visible after maintenance completes": {},
   "Mirrors a membership in SURF Research Access Management (SRAM). Changes made here are overwritten by the next SRAM push.": {},
   "Miss": {
@@ -32001,7 +32017,7 @@
   },
   "Next page": {
     "context": {
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "Next project group GID: {next}": {
@@ -32042,6 +32058,11 @@
   "Next version": {
     "context": {
       "feature_area": "shared"
+    }
+  },
+  "Next year": {
+    "context": {
+      "feature_area": "DatePicker"
     }
   },
   "No": {
@@ -37573,6 +37594,11 @@
     }
   },
   "Page is not found": {},
+  "Page sections": {
+    "context": {
+      "feature_area": "ScrollSpy"
+    }
+  },
   "Page tabs": {
     "context": {
       "feature_area": "navigation"
@@ -37599,6 +37625,11 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "Pagination": {
+    "context": {
+      "feature_area": "pagination"
     }
   },
   "Paid": {
@@ -40352,7 +40383,7 @@
   },
   "Previous page": {
     "context": {
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "Previous period": {
@@ -40374,6 +40405,11 @@
   "Previous version": {
     "context": {
       "feature_area": "shared"
+    }
+  },
+  "Previous year": {
+    "context": {
+      "feature_area": "DatePicker"
     }
   },
   "Previously saved credit value for this organization: {currency} {credits}": {
@@ -48128,7 +48164,7 @@
   },
   "Rows per page": {
     "context": {
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "Rows that deliberately stay with the archived source offerings: their own plans and components, consents, offering-level policies and roles. They are not moved, and the sources are archived rather than deleted.": {
@@ -49888,6 +49924,11 @@
   "Select or type a value": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "Select or type to add a new option...": {
+    "context": {
+      "feature_area": "select"
     }
   },
   "Select or type to add tags...": {
@@ -58207,6 +58248,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "thread"
+    }
+  },
+  "Toggle": {
+    "context": {
+      "feature_area": "ui"
     }
   },
   "Toggle camera": {
@@ -73475,7 +73521,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "{hours} h": {
@@ -75282,6 +75328,19 @@
         }
       },
       "feature_area": "service-desk"
+    }
+  },
+  "{start} to {end}": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "DatePicker"
     }
   },
   "{start} → {end} ({zone})": {

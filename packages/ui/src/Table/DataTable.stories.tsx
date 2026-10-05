@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import { StatusPill, StatusTone } from '../StatusPill';
+
 import { DataTable, DataTableColumn } from './DataTable';
-import { StatusPill, StatusTone } from './StatusPill';
 
 interface ProjectRow {
   name: string;

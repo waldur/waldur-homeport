@@ -107,6 +107,22 @@ const RESTRICTED_IMPORTS = [
     message:
       'Use Accordion or Collapsible from "waldur-ui" instead of react-bootstrap/Accordion.',
   },
+  {
+    name: 'react-bootstrap',
+    importNames: ['Pagination', 'PageItem'],
+    message:
+      'Use TablePagination (or Pagination for the page numbers alone) from "waldur-ui" instead of react-bootstrap. The Bootstrap pagination CSS has been removed.',
+  },
+  {
+    name: 'react-bootstrap/Pagination',
+    message:
+      'Use TablePagination or Pagination from "waldur-ui" instead of react-bootstrap/Pagination.',
+  },
+  {
+    name: 'react-bootstrap/PageItem',
+    message:
+      'Use TablePagination or Pagination from "waldur-ui" instead of react-bootstrap/PageItem.',
+  },
 ];
 
 // Menus and popovers are built from waldur-ui's Menu / MenuPopover (see

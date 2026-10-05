@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, TablePagination } from 'waldur-ui';
 
 import { usePagination } from '@/core/usePagination';
 import { required, requiredArray } from '@/core/validators';
@@ -12,7 +12,6 @@ import { SelectField } from '@/form';
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
 import { categoryAutocomplete } from '@/marketplace/common/autocompletes';
-import { TablePagination } from '@/table/TablePagination';
 
 interface FieldValue {
   remote_category?;
@@ -148,6 +147,7 @@ const FieldsListGroup = ({
         showPageSizeSelector
         updatePageSize={changePageSize}
         gotoPage={setPage}
+        bordered={false}
       />
     </div>
   );
