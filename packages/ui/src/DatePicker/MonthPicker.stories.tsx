@@ -121,9 +121,7 @@ export const Clear: Story = {
   render: () => <Harness initial={new Date(2026, 5, 1)} />,
   play: async ({ canvasElement }) => {
     const field = fieldContainer(canvasElement);
-    await userEvent.click(
-      within(field).getByRole('button', { name: 'Remove' }),
-    );
+    await userEvent.click(within(field).getByRole('button', { name: 'Clear' }));
     await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
     await expect(displayValue(field)).toBe('');
   },

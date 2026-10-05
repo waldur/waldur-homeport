@@ -132,13 +132,11 @@ export const Clear: Story = {
   render: () => <Harness initial={june15} />,
   play: async ({ canvasElement }) => {
     const field = fieldContainer(canvasElement);
-    await userEvent.click(
-      within(field).getByRole('button', { name: 'Remove' }),
-    );
+    await userEvent.click(within(field).getByRole('button', { name: 'Clear' }));
     await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
     await expect(displayValue(field)).toBe('');
     await expect(
-      within(field).queryByRole('button', { name: 'Remove' }),
+      within(field).queryByRole('button', { name: 'Clear' }),
     ).toBeNull();
   },
 };
@@ -148,7 +146,7 @@ export const NotClearable: Story = {
   play: async ({ canvasElement }) => {
     await expect(
       within(fieldContainer(canvasElement)).queryByRole('button', {
-        name: 'Remove',
+        name: 'Clear',
       }),
     ).toBeNull();
   },
@@ -262,7 +260,7 @@ export const Disabled: Story = {
     await expect(isTriggerDisabled(field)).toBe(true);
     await expect(displayValue(field)).toBe('2026-06-15');
     await expect(
-      within(field).queryByRole('button', { name: 'Remove' }),
+      within(field).queryByRole('button', { name: 'Clear' }),
     ).toBeNull();
     await userEvent.click(getTrigger(field), { pointerEventsCheck: 0 });
     await expect(isCalendarOpen()).toBe(false);

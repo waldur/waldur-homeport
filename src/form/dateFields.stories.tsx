@@ -69,7 +69,7 @@ export const DateFieldClearStoresNull: Story = {
   play: async ({ canvasElement }) => {
     await userEvent.click(
       within(fieldContainer(canvasElement)).getByRole('button', {
-        name: 'Remove',
+        name: 'Clear',
       }),
     );
     await waitFor(() => expect(readFormValue(canvasElement)).toBeNull());
