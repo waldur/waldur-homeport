@@ -1,18 +1,21 @@
 import {
+  ChartBarIcon,
   CubeIcon,
   FlagIcon,
   ListBulletsIcon,
   QuestionIcon,
 } from '@phosphor-icons/react';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { ProjectMetric, ResourceMetric } from 'waldur-js-client';
 
-import { Badge, Tooltip } from 'waldur-ui';
+import { getCssVar } from 'waldur-design-tokens';
+import { Badge, BaseButton, Tooltip } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { lazyComponent } from '@/core/lazyComponent';
 import { getCostWidgetChartOptions } from '@/dashboard/chart';
+import { useChartThemeColors } from '@/dashboard/chartColors';
 import { getChartBrandColor } from '@/dashboard/constants';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
@@ -26,6 +29,12 @@ import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 
+import {
+  assignColorSlots,
+  OTHER_GROUP,
+  SPLIT_RAMPS,
+  splitSeries,
+} from './splitSeries';
 import { useMetricSeries } from './useMetricSeries';
 
 const MetricBreakdownDialog = lazyComponent(() =>
@@ -41,6 +50,8 @@ const MetricGoalDialog = lazyComponent(() =>
 );
 
 const TREND_DAYS = 90;
+const CHART_HEIGHT = 200;
+
 // The axis starts at the first day with data, but never shows fewer days
 // than this, so a week-old metric is not stretched into three bars.
 const MIN_AXIS_DAYS = 14;
@@ -80,6 +91,14 @@ export const MetricCard: FC<{
   const user = useUser();
   const metric = item.offering_metric;
   const isCounter = metric.kind === 'counter';
+  // Values of different groups can be stacked only when they add up: counts,
+  // and levels the offering adds up across resources.
+  const additive = isCounter || metric.project_aggregation !== 'mean';
+  const attributes = metric.attribute_keys ?? [];
+  // The chart is split by the first attribute unless the user picks another
+  // one, or the total, from the card's menu.
+  const [splitBy, setSplitBy] = useState<string | null>(attributes[0] ?? null);
+  const theme = useChartThemeColors();
   const days = useMemo(trendDays, []);
   const { data } = useMetricSeries({
     offering_metric_uuid: metric.uuid,
@@ -89,11 +108,14 @@ export const MetricCard: FC<{
     start: days[0].toISOString(),
     granularity: 'day',
     aggregate: 'last',
+    ...(splitBy ? { group_by: splitBy } : {}),
   });
-  const points = data?.series?.[0]?.points ?? [];
+  const points = useMemo(
+    () => (data?.series ?? []).flatMap((series) => series.points),
+    [data],
+  );
   const projectItem = 'goal' in item ? item : null;
   const goal = projectItem?.goal;
-  const attributes = metric.attribute_keys ?? [];
   const period = getGoalPeriodOptions().find(
     (o) => o.value === item.period,
   )?.label;
@@ -119,6 +141,10 @@ export const MetricCard: FC<{
     const from = first < 0 ? 0 : Math.min(first, days.length - MIN_AXIS_DAYS);
     return days.slice(Math.max(from, 0));
   }, [points, days]);
+  const groups = useMemo(
+    () => (splitBy ? splitSeries(data?.series ?? [], splitBy, additive) : null),
+    [data, splitBy, additive],
+  );
   const chartOptions = useMemo(() => {
     const byDay = new Map(
       points.map((point) => [
@@ -126,19 +152,38 @@ export const MetricCard: FC<{
         point.value === null ? null : Number(point.value),
       ]),
     );
-    const base = getCostWidgetChartOptions(
-      [
-        {
-          name: metric.name,
-          type: isCounter ? 'bar' : 'line',
-          // A day without data is a gap, not a zero.
+    const palette = SPLIT_RAMPS.map((ramp) => getCssVar(`--color-${ramp}-500`));
+    const slots = assignColorSlots((groups ?? []).map((group) => group.key));
+    const series = groups
+      ? groups.map((group) => ({
+          name: group.key === OTHER_GROUP ? translate('Other') : group.key,
+          type: isCounter ? ('bar' as const) : ('line' as const),
+          stack: additive ? 'split' : undefined,
+          areaStyle: !isCounter && additive ? { opacity: 0.3 } : undefined,
+          showSymbol: false,
           data: axisDays.map((day) => {
-            const value = byDay.get(dayKey(day));
+            const value = group.byDay.get(dayKey(day));
             return { value: value === undefined ? null : value };
           }),
-          color: getChartBrandColor(),
-        },
-      ],
+          color:
+            group.key === OTHER_GROUP
+              ? theme.neutral
+              : palette[slots.get(group.key)],
+        }))
+      : [
+          {
+            name: metric.name,
+            type: isCounter ? ('bar' as const) : ('line' as const),
+            // A day without data is a gap, not a zero.
+            data: axisDays.map((day) => {
+              const value = byDay.get(dayKey(day));
+              return { value: value === undefined ? null : value };
+            }),
+            color: getChartBrandColor(),
+          },
+        ];
+    const base = getCostWidgetChartOptions(
+      series,
       // A counter's goal is for a whole period; drawing it over daily bars
       // would compare a month's target with one day's count.
       goal && !isCounter
@@ -155,15 +200,69 @@ export const MetricCard: FC<{
     );
     return {
       ...base,
-      legend: { show: false },
-      grid: { ...base.grid, top: 8 },
+      // Stacked segments are square; only a single bar gets round corners.
+      series: groups
+        ? base.series.map((serie) => ({
+            ...serie,
+            data: (serie.data as any[]).map((datum) =>
+              datum ? { ...datum, itemStyle: { borderRadius: 0 } } : datum,
+            ),
+          }))
+        : base.series,
+      legend: groups
+        ? {
+            ...base.legend,
+            type: 'scroll',
+            top: undefined,
+            right: undefined,
+            bottom: 0,
+            left: 0,
+            // Long values (module names) are cut; the tooltip has them whole.
+            textStyle: {
+              fontSize: 11,
+              color: theme.text,
+              width: 110,
+              overflow: 'truncate',
+            },
+            tooltip: { show: true },
+          }
+        : { show: false },
+      grid: { ...base.grid, top: 8, bottom: groups ? 28 : base.grid.bottom },
       yAxis: base.yAxis.map((axis) => ({
         ...axis,
         splitNumber: 2,
         axisLabel: { hideOverlap: true },
       })),
     };
-  }, [points, axisDays, goal, isCounter, metric]);
+  }, [points, groups, axisDays, goal, isCounter, additive, metric, theme]);
+
+  const openGoal = () =>
+    openDialog(MetricGoalDialog, {
+      resolve: {
+        offeringMetric: metric,
+        project,
+        goal: projectItem.goal_is_project ? goal : null,
+        refetch,
+      },
+    });
+  const goalBadge = goal ? (
+    <Badge
+      variant={
+        projectItem.goal_met === null
+          ? 'neutral'
+          : projectItem.goal_met
+            ? 'success'
+            : 'warning'
+      }
+      shape="pill"
+      tone="outline"
+    >
+      {translate('Goal {comparator} {value}', {
+        comparator: goal.comparator === 'ge' ? '≥' : '≤',
+        value: formatFigure(Number(goal.value), metric.unit),
+      })}
+    </Badge>
+  ) : null;
 
   const hasChange = Boolean(item.previous) && item.current !== null;
   const change = hasChange
@@ -196,23 +295,38 @@ export const MetricCard: FC<{
       }
       title={formatFigure(item.current, metric.unit)}
       meta={
+        // The goal is where people look for it: on the card. Whoever may
+        // change it can click it; a card without one offers to set one.
         goal ? (
-          <Badge
-            variant={
-              projectItem.goal_met === null
-                ? 'neutral'
-                : projectItem.goal_met
-                  ? 'success'
-                  : 'warning'
-            }
-            shape="pill"
-            tone="outline"
-          >
-            {translate('Goal {comparator} {value}', {
-              comparator: goal.comparator === 'ge' ? '≥' : '≤',
-              value: formatFigure(Number(goal.value), metric.unit),
-            })}
-          </Badge>
+          canSetGoal ? (
+            <Tooltip
+              label={
+                projectItem.goal_is_project
+                  ? translate('Edit project goal')
+                  : translate(
+                      "The service's default goal. Click to set this project's own.",
+                    )
+              }
+            >
+              <button
+                type="button"
+                className="border-0 bg-transparent p-0"
+                onClick={openGoal}
+              >
+                {goalBadge}
+              </button>
+            </Tooltip>
+          ) : (
+            goalBadge
+          )
+        ) : canSetGoal ? (
+          <BaseButton
+            variant="text-primary"
+            size="sm"
+            iconNode={<FlagIcon weight="bold" />}
+            label={translate('Set goal')}
+            onClick={openGoal}
+          />
         ) : undefined
       }
       right={
@@ -235,6 +349,33 @@ export const MetricCard: FC<{
         ) : undefined
       }
       actions={[
+        ...(canSetGoal
+          ? [
+              {
+                label: projectItem.goal_is_project
+                  ? translate('Edit project goal')
+                  : translate('Set project goal'),
+                icon: <FlagIcon weight="bold" />,
+                callback: openGoal,
+              },
+            ]
+          : []),
+        ...attributes
+          .filter((attribute) => attribute !== splitBy)
+          .map((attribute) => ({
+            label: translate('Split chart by {attribute}', { attribute }),
+            icon: <ChartBarIcon weight="bold" />,
+            callback: () => setSplitBy(attribute),
+          })),
+        ...(splitBy
+          ? [
+              {
+                label: translate('Show total only'),
+                icon: <ChartBarIcon weight="bold" />,
+                callback: () => setSplitBy(null),
+              },
+            ]
+          : []),
         ...attributes.map((attribute) => ({
           label: translate('Breakdown by {attribute}', { attribute }),
           icon: <ListBulletsIcon weight="bold" />,
@@ -255,34 +396,15 @@ export const MetricCard: FC<{
               },
             ]
           : []),
-        ...(canSetGoal
-          ? [
-              {
-                label: projectItem.goal_is_project
-                  ? translate('Edit project goal')
-                  : translate('Set project goal'),
-                icon: <FlagIcon weight="bold" />,
-                callback: () =>
-                  openDialog(MetricGoalDialog, {
-                    resolve: {
-                      offeringMetric: metric,
-                      project,
-                      goal: projectItem.goal_is_project ? goal : null,
-                      refetch,
-                    },
-                  }),
-              },
-            ]
-          : []),
       ]}
     >
       {points.length ? (
-        <EChart options={chartOptions} height="160px" />
+        <EChart options={chartOptions} height={`${CHART_HEIGHT}px`} />
       ) : (
         // Same height as a chart, so cards in a row line up.
         <div
           className="d-flex align-items-center justify-content-center text-muted fs-7"
-          style={{ height: 160 }}
+          style={{ height: CHART_HEIGHT }}
         >
           {translate('No data reported yet.')}
         </div>
