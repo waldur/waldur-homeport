@@ -1,4 +1,3 @@
-import { Card } from 'react-bootstrap';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { configureStore } from 'redux-mock-store';
@@ -14,9 +13,9 @@ import { TableState } from './types';
  * app. Consolidated here after three story files independently invented
  * overlapping versions of the same Redux/Modal wiring (a bare no-op store
  * for `Table.stories.tsx`, a real seeded `redux-mock-store` hand-rolled
- * inside `TableFiltersMenu.stories.tsx`, an inline `<Card>` wrapper inside
- * `TablePagination.stories.tsx`) — a fourth story file needing any of this
- * should import it from here, not write a fourth version.
+ * inside `TableFiltersMenu.stories.tsx`, an inline `<Card>` wrapper for
+ * the pagination stories) — a fourth story file needing any of this should
+ * import it from here, not write a fourth version.
  */
 
 const noop = () => undefined;
@@ -136,19 +135,3 @@ export const withSeededTableStore =
       </ModalProvider>
     </Provider>
   );
-
-/**
- * `Table.tsx`'s outer `<Card className="card-table">` — needed standalone
- * wherever a story renders a piece of the table family whose CSS is scoped
- * under that ancestor, rather than the whole `<Table>`. Confirmed necessary
- * for `TablePagination`: `custom/_table.scss` recolors the active page to
- * the app's neutral gray only under `.card.card-table .table-pagination
- * .page-item.active .page-link` — without this wrapper it falls through to
- * Bootstrap's plain (and, in this theme, green) `$primary` default instead.
- * `card-bordered` matches `TABLE_DEFAULT_PROPS.cardBordered`'s real default.
- */
-export const withCardTable = (Story: () => React.ReactElement) => (
-  <Card className="card-table card-bordered">
-    <Story />
-  </Card>
-);

@@ -79,8 +79,25 @@ export type { StatCardProps } from './StatCard';
 export { StatusPill } from './StatusPill';
 export type { StatusPillProps, StatusTone } from './StatusPill';
 
-export { DataTable } from './DataTable';
-export type { DataTableColumn, DataTableProps } from './DataTable';
+export { DataTable } from './Table';
+export type { DataTableColumn, DataTableProps } from './Table';
+
+export {
+  buildPaginationItems,
+  PAGE_SIZE_COMPACT,
+  PAGE_SIZES,
+  PageSizeSelect,
+  Pagination,
+  TablePagination,
+} from './Table';
+export type {
+  PageSizeSelectProps,
+  PaginationItem,
+  PaginationOptions,
+  PaginationProps,
+  PaginationState,
+  TablePaginationProps,
+} from './Table';
 
 export {
   SIDEBAR_ICON_BUTTON_CLASSNAME,

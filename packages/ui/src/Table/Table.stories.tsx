@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { StatusPill } from './StatusPill';
+import { StatusPill } from '../StatusPill';
+
 import {
   Table,
   TableBody,

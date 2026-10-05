@@ -3,7 +3,7 @@ import { Fragment, ReactNode, useCallback, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, useField } from 'react-final-form';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { Tooltip, BaseButton, TablePagination } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { usePagination } from '@/core/usePagination';
@@ -19,7 +19,6 @@ import {
   ExistingRoleHit,
   getExistingRoleMessage,
 } from '@/permissions/existingRoles';
-import { TablePagination } from '@/table/TablePagination';
 
 import { findVerdictForRow, isVerdictForRow, RowVerdict } from '../rowVerdicts';
 
@@ -408,6 +407,7 @@ export const EmailsListGroup = ({
         showPageSizeSelector
         updatePageSize={changePageSize}
         gotoPage={setPage}
+        bordered={false}
       />
     </div>
   );

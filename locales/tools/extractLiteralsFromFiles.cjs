@@ -365,12 +365,16 @@ class EnhancedTranslationExtractor {
   inferFeatureArea(pathParts) {
     if (pathParts.length < 2) return 'general';
 
-    // Take the most specific path segment that's not a filename
+    // Take the most specific path segment that's not a filename. `src` is
+    // skipped so a file directly in packages/<name>/src/ gets <name>.
     const specificParts = pathParts
       .slice(0, -1)
       .filter(
         (part) =>
-          !part.includes('.') && part !== 'components' && part !== 'forms',
+          !part.includes('.') &&
+          part !== 'components' &&
+          part !== 'forms' &&
+          part !== 'src',
       );
 
     return specificParts[specificParts.length - 1] || 'general';
@@ -1154,8 +1158,20 @@ class EnhancedTranslationExtractor {
     const srcDir = path.join(rootDir, 'src');
     const outputFile = path.join(rootDir, outputFileName);
 
-    // Get all TypeScript files
-    const tsFiles = this.getAllTSFiles(srcDir);
+    // Get all TypeScript files: the app's own src/, then each workspace
+    // package's src/ (waldur-ui and friends call translate() too, and their
+    // strings are served from the same locales/*.json). src/ goes first so a
+    // string used in both keeps its src/ feature area. Package unit tests are
+    // skipped: i18n-runtime's own tests translate fixture strings.
+    const packagesDir = path.join(rootDir, 'packages');
+    const packageFiles = fs
+      .readdirSync(packagesDir)
+      .sort()
+      .map((name) => path.join(packagesDir, name, 'src'))
+      .filter((dir) => fs.existsSync(dir))
+      .flatMap((dir) => this.getAllTSFiles(dir))
+      .filter((file) => !/\.test\.tsx?$/.test(file));
+    const tsFiles = [...this.getAllTSFiles(srcDir), ...packageFiles];
     console.log(`📁 Found ${tsFiles.length} TypeScript files`);
 
     // Process all files with enhanced error handling

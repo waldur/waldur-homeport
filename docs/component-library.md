@@ -13,7 +13,7 @@ The application features a comprehensive set of reusable UI components organized
 | **Table**               | `src/table/Table.tsx`               | Main table component       | Filtering, sorting, pagination, column visibility, export   |
 | **ActionsDropdown**     | `src/table/ActionsDropdown.tsx`     | Dropdown for table actions | Row actions with `ActionItem`; a wrapper over `ActionsMenu` |
 | **ExpandableContainer** | `src/table/ExpandableContainer.tsx` | Collapsible row details    | Table row expansion, detail views                           |
-| **TablePagination**     | `src/table/TablePagination.tsx`     | Pagination controls        | Page navigation, size selection                             |
+| **TablePagination**     | `waldur-ui`                         | Pagination controls        | Page navigation, size selection                             |
 
 ### Menus and Popovers
 

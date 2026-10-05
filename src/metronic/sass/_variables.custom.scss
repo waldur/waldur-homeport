@@ -167,11 +167,3 @@ $progress-box-shadow: unset;
 $progress-bar-color: $white;
 // The live brand colour, not the build-time $primary: tenants re-brand at runtime.
 $progress-bar-bg: var(--bs-primary);
-
-// Pagination
-$pagination-item-height: 2.154rem !default; // Custom variable
-$pagination-item-space: 0.154rem !default; // Custom variable
-$pagination-item-space-tablet-and-mobile: 0.154rem !default; // Custom variable
-
-// Tables
-$table-pagination-padding-y: 0.925rem;

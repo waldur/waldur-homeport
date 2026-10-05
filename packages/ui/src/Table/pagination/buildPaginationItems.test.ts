@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { buildPaginationItems, PaginationItem } from './Pagination';
+import { buildPaginationItems, PaginationItem } from './buildPaginationItems';
 
 // Compact view that's easier to assert against. Skips the navigation
 // items (first/prev/next/last) — they're tested separately. Pages are
