@@ -6,6 +6,9 @@ import { BaseButton } from 'waldur-ui';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 const CampaignDialog = lazyComponent(() =>
   import('./CampaignDialog').then((module) => ({
@@ -13,10 +16,12 @@ const CampaignDialog = lazyComponent(() =>
   })),
 );
 
-export const CampaignCreateButton: FunctionComponent<{ refetch }> = ({
-  refetch,
-}) => {
+export const CampaignCreateButton: FunctionComponent<{
+  refetch;
+  customerId: string;
+}> = ({ refetch, customerId }) => {
   const { openDialog } = useModal();
+  const user = useUser();
   const callback = () =>
     openDialog(CampaignDialog, {
       dialogClassName: 'modal-dialog-centered',
@@ -25,6 +30,16 @@ export const CampaignCreateButton: FunctionComponent<{ refetch }> = ({
       },
       size: 'lg',
     });
+  // Support may create campaigns on the API without holding a role.
+  if (
+    !user?.is_support &&
+    !hasPermission(user, {
+      permission: PermissionEnum.MANAGE_CAMPAIGN,
+      customerId,
+    })
+  ) {
+    return null;
+  }
   return (
     <BaseButton
       onClick={callback}

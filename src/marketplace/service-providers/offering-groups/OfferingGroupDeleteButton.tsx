@@ -5,7 +5,10 @@ import {
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
+import { useUser } from '@/workspace/hooks';
 
 interface OfferingGroupDeleteButtonProps {
   row: OfferingGroup;
@@ -15,6 +18,7 @@ interface OfferingGroupDeleteButtonProps {
 export const OfferingGroupDeleteButton = (
   props: OfferingGroupDeleteButtonProps,
 ) => {
+  const user = useUser();
   const { mutate, isPending } = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceOfferingGroupsDestroy({ path: { uuid: props.row.uuid! } }),
@@ -32,6 +36,15 @@ export const OfferingGroupDeleteButton = (
     },
     errorMessage: translate('Unable to remove offering group.'),
   });
+
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.DELETE_OFFERING,
+      customerId: props.row.customer_uuid,
+    })
+  ) {
+    return null;
+  }
 
   return (
     <RemovalActionItem
