@@ -114,11 +114,11 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
         </PopoverTrigger>
         {showClear ? (
           <BaseButton
-            variant="tertiary"
+            variant="text-secondary"
             size="sm"
-            className="absolute top-1/2 right-[8px] -translate-y-1/2 rounded-full"
+            className="absolute top-1/2 right-[8px] -translate-y-1/2"
             onClick={onClear}
-            tooltip={translate('Remove')}
+            tooltip={translate('Clear')}
             iconNode={<XIcon weight="bold" />}
           />
         ) : (
