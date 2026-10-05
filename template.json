@@ -68989,7 +68989,7 @@
   "You do not have permission to perform this action.": {
     "context": {
       "primary_ui_type": "error_message",
-      "feature_area": "import-users"
+      "feature_area": "offering-users"
     }
   },
   "You do not have permission to view this user's data access information.": {

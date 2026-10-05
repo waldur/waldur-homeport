@@ -82,7 +82,12 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
       ]}
       showPageSizeSelector={true}
       verboseName={translate('campaigns')}
-      tableActions={<CampaignCreateButton refetch={props.fetch} />}
+      tableActions={
+        <CampaignCreateButton
+          refetch={props.fetch}
+          customerId={provider.customer_uuid}
+        />
+      }
       hasQuery={true}
       rowActions={ProviderCampaignActions}
       expandableRow={ExpandableRow}

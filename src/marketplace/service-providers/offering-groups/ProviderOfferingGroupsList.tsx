@@ -11,11 +11,14 @@ import { formatDateTime } from '@/core/dateUtils';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
 import { CustomerResourcesListPlaceholder } from '@/marketplace/resources/list/CustomerResourcesListPlaceholder';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { OfferingGroupCreateButton } from './OfferingGroupCreateButton';
@@ -129,6 +132,7 @@ export const ProviderOfferingGroupsList = ({
 }: {
   provider?: ServiceProvider;
 }) => {
+  const user = useUser();
   const filter = useMemo(
     () => (provider ? { customer_uuid: provider.customer_uuid } : undefined),
     [provider?.customer_uuid],
@@ -142,7 +146,12 @@ export const ProviderOfferingGroupsList = ({
       tableKey="marketplace-provider-offering-groups"
       filter={filter}
       customerUrl={provider.customer as string}
-      showCreateButton
+      showCreateButton={Boolean(
+        hasPermission(user, {
+          permission: PermissionEnum.CREATE_OFFERING,
+          customerId: provider.customer_uuid,
+        }),
+      )}
     />
   );
 };

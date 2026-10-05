@@ -28,10 +28,14 @@ export const UserImportButton: FC<UserImportButtonProps> = ({
   const user = useUser();
   const { openDialog } = useModal();
 
-  const canCreateOfferingUser = hasPermission(user, {
-    permission: PermissionEnum.CREATE_OFFERING_USER,
-    customerId: provider?.customer_uuid,
-  });
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.CREATE_OFFERING_USER,
+      customerId: provider?.customer_uuid,
+    })
+  ) {
+    return null;
+  }
 
   return (
     <ActionItem
@@ -44,12 +48,6 @@ export const UserImportButton: FC<UserImportButtonProps> = ({
         })
       }
       iconNode={<UploadSimpleIcon weight="bold" />}
-      disabled={!canCreateOfferingUser}
-      tooltip={
-        !canCreateOfferingUser
-          ? translate('You do not have permission to perform this action.')
-          : undefined
-      }
     />
   );
 };
