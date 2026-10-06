@@ -174,10 +174,8 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
               className={classNames(
                 'leading-none [&>svg]:size-[20px]',
                 ICON_COLOR_CLASSNAMES[props.iconColor ?? 'gray-400'],
-                // The row's own disabled colour never reaches the icon: this
-                // span sets an explicit text colour, so the icon kept full
-                // strength beside a dimmed label. Fade it the same way the
-                // label and the tooltip marker are faded.
+                // This span sets its own colour, so the row's disabled
+                // colour never reaches the icon. Fade it like the label.
                 props.disabled && 'opacity-50',
               )}
             >

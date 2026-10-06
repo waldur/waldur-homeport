@@ -68,11 +68,9 @@ export const ActionsPopover = ({
       <ActionList hideGroupName hideNonImportant>
         <ActionsList {...value} refetch={refetch} />
       </ActionList>
-      {/* A menu item, so that arrow keys reach it and selecting it closes
-          the menu before the dialog opens. A separator sets it apart from
-          the actions above it, and it stays centred — the only thing it keeps
-          of its old button costume. Its colour, underline (none) and hover
-          fill are the panel's, like every other row. */}
+      {/* A menu item, so that arrow keys reach it and selecting it closes the
+          menu before the dialog opens. Centred and behind a separator to set
+          it apart; everything else is the panel's own row styling. */}
       <Menu.Separator />
       <Menu.Item onSelect={callback} className="justify-center text-center">
         {translate('Show all')}
