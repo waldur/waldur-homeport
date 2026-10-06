@@ -81,11 +81,10 @@ export const ResourceActionComponent: FunctionComponent<
               anything to the resource. Deliberately outside Menu.Item — a row
               overrides a nested button's own colour and hover, so inside one
               it stops looking like a button at all. */}
-          <div className="p-1">
+          <div className="flex justify-center p-1">
             <BaseButton
-              variant="text-primary"
+              variant="text-secondary"
               size="sm"
-              className="w-full justify-center"
               label={translate('Show all')}
               onClick={showAll}
             />
