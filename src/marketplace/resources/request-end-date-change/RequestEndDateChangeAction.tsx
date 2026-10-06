@@ -1,4 +1,5 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
+import { useMemo } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -23,11 +24,25 @@ const RequestEndDateChangeFlowDialog = lazyComponent(() =>
 const validators = [validateState('OK')];
 
 export const RequestEndDateChangeAction: ActionItemType = ({
-  resource,
+  marketplaceResource,
+  resource: pluginResource,
   refetch,
   ...rest
 }) => {
   const user = useUser();
+  // Plugin menus (OpenStack, ActionButtonResource) pass the plugin resource,
+  // which carries no end date or project end date; the dialog needs both, so
+  // prefer the marketplace resource loaded beside it.
+  const resource = useMemo(
+    () =>
+      marketplaceResource
+        ? {
+            ...marketplaceResource,
+            marketplace_resource_uuid: marketplaceResource.uuid,
+          }
+        : pluginResource,
+    [marketplaceResource, pluginResource],
+  );
   const { tooltip, disabled } = useValidators(validators, resource);
   const action = useModalDialogCallback(
     RequestEndDateChangeFlowDialog,
