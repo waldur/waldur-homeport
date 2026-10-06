@@ -692,6 +692,11 @@
   "A custom .png image file for login page": {},
   "A custom PNG icon for Keycloak login button": {},
   "A custom favicon .png image file": {},
+  "A deactivated user cannot see or answer a request.": {
+    "context": {
+      "feature_area": "dashboard"
+    }
+  },
   "A deleted key cannot be edited.": {
     "context": {
       "feature_area": "api-keys"
@@ -3716,16 +3721,6 @@
   "Allow live volume resize of system and data volumes.": {
     "context": {
       "feature_area": "openstack"
-    }
-  },
-  "Allow marketplace to function as a catalogue only.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
-  "Allow marketplace to serve only as aggregator of call info.": {
-    "context": {
-      "feature_area": "features"
     }
   },
   "Allow restoring terminated resources": {
@@ -18535,11 +18530,6 @@
       "feature_area": "openstack-subnet"
     }
   },
-  "Enabled display of call management functionality.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
   "Enabled display of experimental or mocked components in marketplace.": {
     "context": {
       "feature_area": "features"
@@ -27670,6 +27660,11 @@
       "feature_area": "roles"
     }
   },
+  "List calls that are run outside Waldur: each call links to an external URL where applications are made, and rounds, proposals and reviews are hidden.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "List course accounts": {
     "context": {
       "primary_ui_type": "label",
@@ -35920,6 +35915,11 @@
       "feature_area": "providers"
     }
   },
+  "Open support request": {
+    "context": {
+      "feature_area": "staff-request"
+    }
+  },
   "Open support tickets": {
     "context": {
       "primary_ui_type": "title"
@@ -39995,6 +39995,11 @@
   "Postal code": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Posted as the first comment of the request. The recipient is notified the same way as for any other comment, and their reply comes back to you.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "Potential": {
@@ -48244,6 +48249,11 @@
       "action_type": "create"
     }
   },
+  "Run the marketplace as a catalogue: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Run the preview first.": {
     "context": {
       "feature_area": "wizard"
@@ -51762,6 +51772,11 @@
     }
   },
   "Show available bot commands": {},
+  "Show call management: the call-managing organization's workspace, providers' requests for offerings, and proposal reports. Independent of SERVICE_ACCESS_MODE, which governs how applicants reach services.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Show chart": {
     "context": {
       "feature_area": "plan-usage"
@@ -52924,6 +52939,11 @@
   "Start IP is not within the CIDR range": {
     "context": {
       "feature_area": "openstack-network"
+    }
+  },
+  "Start a conversation with a user. They see the request in their support list and can reply to it.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "Start and end time must be in the future.": {
@@ -64867,7 +64887,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "actions"
+      "feature_area": "robot-accounts"
     }
   },
   "Updating": {
@@ -69168,6 +69188,11 @@
   "You can't join this organization with your current account details. Access is limited to certain users as defined by the organization manager.": {
     "context": {
       "feature_area": "join-organization"
+    }
+  },
+  "You cannot address a request to yourself.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "You cannot unselect the current UI language": {
