@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import {
   marketplaceResourcesList,
@@ -20,6 +20,7 @@ import { getUUID } from '@/core/utils';
 import { translate } from '@/i18n';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
 import { ProjectLink } from '@/project/ProjectLink';
+import { AwardComparisonRow } from '@/proposals/awardedResources';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { ResourceLink } from '@/resource/ResourceLink';
@@ -30,8 +31,36 @@ import { renderFieldOrDash } from '@/table/utils';
 
 import '@/proposals/flushTable.scss';
 
-/** A request row carrying the resource it produced, if any. */
-type AllocatedRequest = RequestedResource & { allocated?: Resource | null };
+import { AwardChangeBadge } from './AwardComparison';
+
+/**
+ * One line of the outcome: what was asked for, what was awarded when an award
+ * exists, and the resource that came of it.
+ */
+interface OutcomeRow {
+  uuid: string;
+  requestedName?: string;
+  awardedName?: string;
+  change?: AwardComparisonRow['change'];
+  resource: string | null;
+  allocated?: Resource | null;
+}
+
+const fromRequest = (row: RequestedResource): OutcomeRow => ({
+  uuid: row.uuid,
+  requestedName: row.requested_offering.offering_name,
+  resource: row.resource,
+});
+
+// Allocation provisions the award, so it is the award's items that carry the
+// resources; a request the award dropped produced nothing.
+const fromAward = (row: AwardComparisonRow): OutcomeRow => ({
+  uuid: row.uuid,
+  requestedName: row.requested?.requested_offering.offering_name,
+  awardedName: row.awarded?.requested_offering.offering_name,
+  change: row.change,
+  resource: row.awarded?.resource ?? null,
+});
 
 const tableChrome = {
   // Nested inside a card that already draws a border and its own inset, so the
@@ -132,11 +161,23 @@ const AllocatedTeamTable: FC<{
   );
 };
 
-const AllocationOutcome: FC<{ proposal: Proposal; projectUuid: string }> = ({
-  proposal,
-  projectUuid,
-}) => {
+const AllocationOutcome: FC<{
+  proposal: Proposal;
+  projectUuid: string;
+  awardRows?: AwardComparisonRow[];
+}> = ({ proposal, projectUuid, awardRows }) => {
   const project = useAllocatedProject(projectUuid);
+
+  // The award arrives after the table first fetches; keyed on it so the rows
+  // are rebuilt from the award once it is in hand.
+  const awardFilter = useMemo(
+    () => ({
+      award: awardRows
+        ?.map((row) => `${row.uuid}:${row.awarded?.resource ?? ''}`)
+        .join(','),
+    }),
+    [awardRows],
+  );
 
   // Each request records the resource it produced but not its state, so the
   // live states come from the project in a second call. Requests whose offering
@@ -144,14 +185,18 @@ const AllocationOutcome: FC<{ proposal: Proposal; projectUuid: string }> = ({
   // for, got none" is the point of this table.
   const resources = useTable({
     table: `ProposalAllocatedResources-${proposal.uuid}`,
+    filter: awardFilter,
     fetchData: async () => {
-      const rows: AllocatedRequest[] = await getAllPages<RequestedResource>(
-        (page) =>
-          proposalProposalsResourcesList({
-            path: { uuid: proposal.uuid },
-            query: { page, page_size: MAX_PAGE_SIZE },
-          }),
-      );
+      const rows: OutcomeRow[] = awardRows?.length
+        ? awardRows.map(fromAward)
+        : (
+            await getAllPages<RequestedResource>((page) =>
+              proposalProposalsResourcesList({
+                path: { uuid: proposal.uuid },
+                query: { page, page_size: MAX_PAGE_SIZE },
+              }),
+            )
+          ).map(fromRequest);
       if (!rows.some((row) => row.resource)) {
         return { rows, resultCount: rows.length };
       }
@@ -245,15 +290,30 @@ const AllocationOutcome: FC<{ proposal: Proposal; projectUuid: string }> = ({
       </Row>
 
       <h6 className="text-secondary fw-bold mb-3">{translate('Resources:')}</h6>
-      <Table<AllocatedRequest>
+      <Table<OutcomeRow>
         {...resources}
         {...tableChrome}
         verboseName={translate('requested resources')}
         columns={[
           {
             title: translate('Requested'),
-            render: ({ row }) => <>{row.requested_offering.offering_name}</>,
+            render: ({ row }) => <>{renderFieldOrDash(row.requestedName)}</>,
           },
+          ...(awardRows?.length
+            ? [
+                {
+                  title: translate('Awarded'),
+                  render: ({ row }: { row: OutcomeRow }) => (
+                    <div className="d-flex flex-wrap gap-2 align-items-center">
+                      {row.awardedName && <span>{row.awardedName}</span>}
+                      {row.change && row.change !== 'unchanged' && (
+                        <AwardChangeBadge change={row.change} />
+                      )}
+                    </div>
+                  ),
+                },
+              ]
+            : []),
           {
             // The created resource is named after the project, so its name is
             // identical on every row and says nothing; the state, linked
@@ -300,11 +360,16 @@ const AllocationOutcome: FC<{ proposal: Proposal; projectUuid: string }> = ({
  * Renders once allocate_proposal() has run, which is the same request that
  * makes the proposal accepted.
  */
-export const AllocationOutcomeSection: FC<{ proposal: Proposal }> = ({
-  proposal,
-}) => {
+export const AllocationOutcomeSection: FC<{
+  proposal: Proposal;
+  awardRows?: AwardComparisonRow[];
+}> = ({ proposal, awardRows }) => {
   const projectUuid = getUUID(proposal.project);
   return projectUuid ? (
-    <AllocationOutcome proposal={proposal} projectUuid={projectUuid} />
+    <AllocationOutcome
+      proposal={proposal}
+      projectUuid={projectUuid}
+      awardRows={awardRows}
+    />
   ) : null;
 };

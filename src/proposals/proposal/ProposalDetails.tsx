@@ -13,6 +13,16 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission, userHasRole } from '@/permissions/hasPermission';
+import {
+  asCostRow,
+  compareAward,
+  hasReachedAllocationDecision,
+  canEditAward,
+  isAwardDecisionOpen,
+  isAwardSectionShown,
+  useAwardedResources,
+  withAwardedResourcesStep,
+} from '@/proposals/awardedResources';
 import { useCallFixedDuration } from '@/proposals/callQueries';
 import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
@@ -31,6 +41,7 @@ import {
   AllocationOutcomeSection,
   AllocationStartBanner,
 } from './AllocationOutcomeSection';
+import { AwardedResourcesSection } from './AwardedResourcesSection';
 import { AwardResponseActions } from './AwardResponseActions';
 import { ComplianceSummary } from './create/ComplianceSummary';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
@@ -132,6 +143,45 @@ export const ProposalDetails = ({
     canEditStepChecklist ||
     (activeStep?.step === 'technical_assessment' && !isApplicant);
 
+  // The award exists once the allocation decision has opened. Reviewers and
+  // panel members are never shown it, so they are not asked; the applicant is
+  // asked and the backend answers 403 until the decision is released, which
+  // the query settles as "not shown".
+  const canQueryAwards =
+    hasReachedAllocationDecision(proposal, workflowStates) && !isReviewerOnly;
+  // Not while the decision is held for the round's publication: the backend
+  // refuses award edits then, until the decision is reopened.
+  const awardsEditable = canEditAward(
+    canEditStepChecklist,
+    proposal,
+    activeStep,
+  );
+  const { data: awards } = useAwardedResources(proposal.uuid, canQueryAwards);
+  const awardRows = useMemo(
+    () =>
+      awards?.length
+        ? compareAward((resourceRows as any[]) ?? [], awards)
+        : undefined,
+    [awards, resourceRows],
+  );
+
+  // The progress rail lists the award section whenever it is on the page.
+  const navSteps = useMemo(
+    () =>
+      withAwardedResourcesStep(
+        formSteps,
+        canQueryAwards && isAwardSectionShown(awards, awardsEditable),
+      ),
+    [formSteps, canQueryAwards, awards, awardsEditable],
+  );
+
+  // Once an award exists and may be read, it is what will be provisioned, so
+  // the sidebar totals it rather than the request — and says so.
+  const costRows = useMemo(
+    () => (awards?.length ? awards.map(asCostRow) : resourceRows || []),
+    [awards, resourceRows],
+  );
+
   if (isLoading) {
     return <LoadingSpinner />;
   } else if (error) {
@@ -142,7 +192,7 @@ export const ProposalDetails = ({
     <SidebarLayout.Container>
       <SidebarLayout.Body className="mb-10">
         <AllocationStartBanner proposal={proposal} />
-        <AllocationOutcomeSection proposal={proposal} />
+        <AllocationOutcomeSection proposal={proposal} awardRows={awardRows} />
         <ProposalDetailsOverviewStep
           id="step-general"
           params={{ proposal, canViewReviews: isCallManagerView }}
@@ -153,7 +203,19 @@ export const ProposalDetails = ({
             <ComplianceSummary proposal={proposal} />
           </div>
         )}
-        <ResourceRequestsSummary proposal={proposal} reviews={reviews} />
+        <ResourceRequestsSummary
+          proposal={proposal}
+          reviews={reviews}
+          awardRows={awardRows}
+        />
+        {canQueryAwards && (
+          <AwardedResourcesSection
+            proposal={proposal}
+            editable={awardsEditable}
+            decisionOpen={isAwardDecisionOpen(proposal, activeStep)}
+            decisionHeld={proposal.decision_held === true}
+          />
+        )}
         {activeStep?.checklist_status?.has_checklist && !isApplicant && (
           // Applicants don't fill evaluation-step checklists on the detail page
           // (they can't view them either — the backend 403s), so rendering the
@@ -181,12 +243,13 @@ export const ProposalDetails = ({
       </SidebarLayout.Body>
       <SidebarLayout.Sidebar transparent>
         <Panel title={translate('Progress')} cardBordered className="mb-5">
-          <FormSteps steps={formSteps} hideStatusIcons />
+          <FormSteps steps={navSteps} hideStatusIcons />
         </Panel>
         <ProposalCostTotal
-          rows={resourceRows || []}
+          rows={costRows}
           fixedDurationDays={fixedDurationDays}
           panel
+          title={awards?.length ? translate('Summary of the award') : undefined}
         />
         {isCallManagerView && review && !isReviewInFinalState(review.state) && (
           <BaseButton
@@ -224,7 +287,11 @@ export const ProposalDetails = ({
         )}
         {/* Applicant-facing award accept/decline (self-gates on the
             award_response step + the proposal creator). */}
-        <AwardResponseActions proposal={proposal} refetch={refetch} />
+        <AwardResponseActions
+          proposal={proposal}
+          refetch={refetch}
+          awardRows={awardRows}
+        />
       </SidebarLayout.Sidebar>
     </SidebarLayout.Container>
   );

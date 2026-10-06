@@ -191,6 +191,7 @@ const PrepaidMonthsSelector = ({
     const offered = monthOptions.map((opt) => opt.value);
     const current = Number(selectedMonths);
     if (offered.includes(current)) return;
+    if (mode.keepStored && !(current > 0)) return;
     const wanted =
       current > 0
         ? current
@@ -206,7 +207,14 @@ const PrepaidMonthsSelector = ({
     if (snapped !== undefined) {
       form.change(mode.name, snapped);
     }
-  }, [monthOptions, selectedMonths, storedEndDate, mode.name, form]);
+  }, [
+    monthOptions,
+    selectedMonths,
+    storedEndDate,
+    mode.name,
+    mode.keepStored,
+    form,
+  ]);
 
   // The length is what the applicant chooses, but `attributes.end_date` is what
   // allocation reads: it converts that date back into a number of months and
@@ -214,14 +222,14 @@ const PrepaidMonthsSelector = ({
   // outlasts drafting. Clearing the date would leave the backend with no period
   // at all, and a twelve-month subscription would be billed as one month.
   useEffect(() => {
-    if (!selectedMonths) return;
+    if (!selectedMonths || mode.keepStored) return;
     const endDate = DateTime.now()
       .plus({ months: Number(selectedMonths) })
       .toISODate();
     if (storedEndDate !== endDate) {
       form.change('attributes.end_date', endDate);
     }
-  }, [selectedMonths, storedEndDate, form]);
+  }, [selectedMonths, storedEndDate, mode.keepStored, form]);
 
   // Bare numbers: the label carries the unit.
   const selectOptions = useMemo(

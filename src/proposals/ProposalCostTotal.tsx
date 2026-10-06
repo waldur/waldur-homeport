@@ -17,6 +17,8 @@ interface ProposalCostTotalProps {
   fixedDurationDays?: number | null;
   /** Fills its container instead of sitting against the table's right edge. */
   panel?: boolean;
+  /** The panel's heading; says what is totalled when it is not the request. */
+  title?: string;
 }
 
 /** What the proposal adds up to, and how long the project it awards will run. */
@@ -24,6 +26,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
   rows,
   fixedDurationDays,
   panel,
+  title,
 }) => {
   const total = sumRequestedResourceCosts(rows ?? []);
   const duration = getProjectDuration(
@@ -103,7 +106,11 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
 
   if (panel) {
     return (
-      <Panel title={translate('Summary')} cardBordered className="mb-5">
+      <Panel
+        title={title ?? translate('Summary')}
+        cardBordered
+        className="mb-5"
+      >
         {body}
       </Panel>
     );

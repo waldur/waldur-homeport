@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { PublicOfferingDetails } from 'waldur-js-client';
+import { OfferingComponent, PublicOfferingDetails } from 'waldur-js-client';
 
 import { filterOfferingComponents } from '@/marketplace/common/registry';
 import { getBillingPeriods } from '@/marketplace/common/utils';
@@ -63,15 +63,15 @@ interface ComponentLike {
   is_prepaid?: boolean;
 }
 
+const isRequestable = (component: ComponentLike) =>
+  component.billing_type === 'limit' ||
+  (component.billing_type === 'one' && component.is_prepaid);
+
 const namesAnyAmount = (
   components: ComponentLike[],
   limits: Record<string, number> | null | undefined,
 ) => {
-  const requestable = components.filter(
-    (component) =>
-      component.billing_type === 'limit' ||
-      (component.billing_type === 'one' && component.is_prepaid),
-  );
+  const requestable = components.filter(isRequestable);
   if (!requestable.length) {
     return true;
   }
@@ -80,21 +80,37 @@ const namesAnyAmount = (
   );
 };
 
-/** Row-level form of the same rule, for the proposal's completion check. */
-export const hasRequestedAmount = (row: RequestedResourceLike): boolean => {
-  const requestedOffering = row?.requested_offering;
-  const limits =
-    row?.limits && Object.keys(row.limits).length
-      ? row.limits
-      : ((row?.attributes?.limits as Record<string, number>) ?? {});
-  return namesAnyAmount(
-    filterOfferingComponents({
-      type: requestedOffering?.offering_type,
-      components: (requestedOffering?.components as any) || [],
-    } as Pick<PublicOfferingDetails, 'type' | 'components'>) as any,
-    limits,
+/**
+ * The amounts a row names. Legacy rows carry them inside attributes; see the
+ * migration that lifted them into `limits`.
+ */
+export const getRowLimits = (
+  row: RequestedResourceLike,
+): Record<string, number> =>
+  row?.limits && Object.keys(row.limits).length
+    ? row.limits
+    : ((row?.attributes?.limits as Record<string, number>) ?? {});
+
+/** The components of the row's offering that an amount can be named for. */
+export const getRequestableComponents = (
+  requestedOffering: RequestedOfferingLike | undefined,
+): OfferingComponent[] =>
+  filterOfferingComponents({
+    type: requestedOffering?.offering_type,
+    components: (requestedOffering?.components as any) || [],
+  } as Pick<PublicOfferingDetails, 'type' | 'components'>).filter(
+    isRequestable,
   );
-};
+
+/** Row-level form of the same rule, for the proposal's completion check. */
+export const hasRequestedAmount = (row: RequestedResourceLike): boolean =>
+  namesAnyAmount(
+    filterOfferingComponents({
+      type: row?.requested_offering?.offering_type,
+      components: (row?.requested_offering?.components as any) || [],
+    } as Pick<PublicOfferingDetails, 'type' | 'components'>) as any,
+    getRowLimits(row),
+  );
 
 /**
  * Cost of one plan at one set of limits.
@@ -189,15 +205,9 @@ export const getRequestedResourceCost = (
   row: RequestedResourceLike,
 ): RequestedResourceCost => {
   const requestedOffering = row?.requested_offering;
-  // Legacy rows carry the amounts inside attributes; see the migration that
-  // lifted them into `limits`.
-  const limits =
-    row?.limits && Object.keys(row.limits).length
-      ? row.limits
-      : ((row?.attributes?.limits as Record<string, number>) ?? {});
   return computeRequestedCost(
     requestedOffering?.plan_details,
-    limits,
+    getRowLimits(row),
     {
       type: requestedOffering?.offering_type,
       components: requestedOffering?.components,
