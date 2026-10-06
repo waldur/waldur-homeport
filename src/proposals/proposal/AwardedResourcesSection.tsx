@@ -215,12 +215,11 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
     [openDialog, proposal],
   );
 
-  // Still loading shows the card with a spinner; once loaded, the same rule
-  // as the page's progress rail decides.
-  if (
-    awards.data !== undefined &&
-    !isAwardSectionShown(awards.data, editable)
-  ) {
+  // Nothing until the award has loaded: an applicant is refused it until the
+  // decision is released, and a card shown meanwhile would tell them that a
+  // decision is under way. Once loaded, the same rule as the page's progress
+  // rail decides; a failure other than that refusal is reported.
+  if (!awards.error && !isAwardSectionShown(awards.data, editable)) {
     return null;
   }
 
@@ -263,7 +262,7 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
       }
       defaultOpen
     >
-      {awards.isLoading || requests.isLoading ? (
+      {requests.isLoading ? (
         <LoadingSpinner />
       ) : awards.error ? (
         <LoadingErred

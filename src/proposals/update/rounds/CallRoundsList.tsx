@@ -9,15 +9,20 @@ import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
 import { Call } from '@/proposals/types';
-import { getRoundStatus } from '@/proposals/utils';
-import { getCallReadOnlyReason } from '@/proposals/utils';
+import {
+  getCallReadOnlyReason,
+  getRoundMenuAccess,
+  getRoundStatus,
+} from '@/proposals/utils';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
+import { useUser } from '@/workspace/hooks';
 
 import { RoundCreateButton } from './RoundCreateButton';
 import { RoundExpandableRow } from './RoundExpandableRow';
+import { RoundLifecycleBadge } from './RoundLifecycleBadge';
 import { RoundRowActions } from './RoundRowActions';
 
 interface CallRoundsListProps {
@@ -47,51 +52,85 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
   const renderRoundState = (row: ProtectedRound) => {
     const roundState = getRoundStatus(row);
     return (
-      <StateIndicator
-        label={roundState.label}
-        variant={roundState.color}
-        tone="outline"
-        shape="pill"
-      />
+      <div className="d-flex flex-wrap gap-2">
+        <StateIndicator
+          label={roundState.label}
+          variant={roundState.color}
+          tone="outline"
+          shape="pill"
+        />
+        <RoundLifecycleBadge
+          state={row.lifecycle_state}
+          heldDecisionsCount={row.held_decisions_count}
+        />
+      </div>
     );
   };
 
+  const user = useUser();
+  // Editing a round needs CALL.UPDATE; its lifecycle needs CALL.CLOSE_ROUNDS,
+  // which a role may carry without the other.
+  const menuAccess = getRoundMenuAccess(user, call, Boolean(isReadOnly));
+  const canUpdate = menuAccess?.canUpdate ?? false;
+  const canCloseRounds = menuAccess?.canCloseRounds ?? false;
+
   const RowActions = useCallback(
     (props: { row: ProtectedRound }) =>
-      isReadOnly ? (
-        <ActionsDropdown disabled tooltip={getCallReadOnlyReason(call)} />
+      canUpdate || canCloseRounds ? (
+        <RoundRowActions
+          row={props.row}
+          refetch={refetch}
+          call={call}
+          canUpdate={canUpdate}
+          canCloseRounds={canCloseRounds}
+        />
       ) : (
-        <RoundRowActions row={props.row} refetch={refetch} call={call} />
+        <ActionsDropdown disabled tooltip={getCallReadOnlyReason(call)} />
       ),
-    [refetch, call, isReadOnly],
+    [refetch, call, canUpdate, canCloseRounds],
   );
 
   const ExpandableRow = useCallback(
-    (props: { row: ProtectedRound }) => <RoundExpandableRow row={props.row} />,
-    [],
+    (props: { row: ProtectedRound }) => (
+      <RoundExpandableRow row={props.row} call={call} />
+    ),
+    [call],
   );
 
   return (
     <Table<ProtectedRound>
       {...tableProps}
       id="rounds"
+      // Columns without a width keep a 150px floor; six of them pushed the
+      // table past the call edit page at laptop widths and slid the State
+      // column under the sticky actions. These widths add up to the table and
+      // let the cells wrap instead.
       columns={[
         {
           title: translate('Round ID'),
-          render: ({ row }) => <code className="fw-bold">{row.slug}</code>,
+          render: ({ row }) => (
+            <code className="fw-bold text-break">{row.slug}</code>
+          ),
           copyField: (row) => row.slug,
+          width: '22%',
+          ellipsis: false,
         },
         {
           title: translate('Start date'),
           render: ({ row }) => <>{formatDateTime(row.start_time)}</>,
+          width: '16%',
+          ellipsis: false,
         },
         {
           title: translate('Cutoff date'),
           render: ({ row }) => <>{formatDateTime(row.cutoff_time)}</>,
+          width: '16%',
+          ellipsis: false,
         },
         {
           title: translate('Proposals'),
           render: ({ row }) => <>{row.proposals.length}</>,
+          width: '9%',
         },
         {
           title: translate('Reviews'),
@@ -102,10 +141,15 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
             );
             return <>{totalReviews}</>;
           },
+          width: '9%',
         },
         {
           title: translate('State'),
           render: ({ row }) => renderRoundState(row),
+          // The status, the lifecycle stage and the held-decisions count wrap
+          // onto a second line rather than run under the sticky actions.
+          width: '28%',
+          ellipsis: false,
         },
       ]}
       title={

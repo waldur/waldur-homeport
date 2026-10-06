@@ -20,8 +20,8 @@ import { useCustomer } from '@/workspace/hooks';
 import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 
-import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
+import { ProposalStateBadge } from './ProposalStateBadge';
 
 export const CustomerProposalsList: FC = () => {
   const customer = useCustomer();
@@ -89,7 +89,7 @@ export const CustomerProposalsList: FC = () => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <ProposalBadge state={row.state} />,
+          render: ({ row }) => <ProposalStateBadge row={row} />,
           filter: 'state',
           inlineFilter: (row) =>
             ProposalStatesOptions.filter((s) => s.value === row.state),

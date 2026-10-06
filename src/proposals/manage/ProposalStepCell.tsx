@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { StepEnum } from 'waldur-js-client';
 
+import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import {
@@ -27,7 +28,9 @@ import {
 export const ProposalStepCell: FC<{
   callUuid: string;
   step: StepEnum | null | undefined;
-}> = ({ callUuid, step }) => {
+  /** The step's decision is made and held until the round publishes. */
+  decisionHeld?: boolean | null;
+}> = ({ callUuid, step, decisionHeld }) => {
   const { data: steps } = useQuery({
     queryKey: callWorkflowStepsKey(callUuid),
     queryFn: () => fetchCallWorkflowSteps(callUuid),
@@ -52,7 +55,12 @@ export const ProposalStepCell: FC<{
   return (
     <div className="d-flex flex-column">
       <span>{stepLabel(step)}</span>
-      {role ? (
+      {decisionHeld ? (
+        // Nobody owes a move on the proposal: it waits for the round.
+        <span className="text-muted fs-7">
+          {translate('Held until the round publishes results')}
+        </span>
+      ) : role ? (
         <span className="text-muted fs-7">{responsibleRoleLabel(role)}</span>
       ) : null}
     </div>

@@ -24,8 +24,8 @@ import { renderFieldOrDash } from '@/table/utils';
 import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 
-import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
+import { ProposalStateBadge } from './ProposalStateBadge';
 
 export const AdminProposalsList: FC<any> = ({ ...props }) => {
   const values = useFilterValues('AdminProposalsList');
@@ -125,11 +125,11 @@ export const AdminProposalsList: FC<any> = ({ ...props }) => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <ProposalBadge state={row.state} />,
+          render: ({ row }) => <ProposalStateBadge row={row} />,
           filter: 'state',
           inlineFilter: (row) =>
             getProposalStateOptions().filter((s) => s.value === row.state),
-          keys: ['state'],
+          keys: ['state', 'decision_held'],
           id: 'state',
         },
       ]}

@@ -9,7 +9,7 @@ import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
-import { canAccessCallManagement } from '../utils';
+import { canAccessCallManagement, canOpenCallEditPage } from '../utils';
 
 export const CallTabs = ({ call }: { call: Call }) => {
   const router = useRouter();
@@ -18,15 +18,17 @@ export const CallTabs = ({ call }: { call: Call }) => {
     router.stateService.go(state, { call_uuid: call.uuid });
 
   const user = useUser();
-  // Who gets the call's management tab strip -- the same rule that guards the
-  // pages themselves, see `canAccessCallManagement`: editors, organization
-  // owners (team management only) and support (read-only).
+  // Who gets the call's management tab strip -- the same rules that guard the
+  // pages themselves: `canAccessCallManagement` for Manage (editors,
+  // organization owners for team management, support read-only), and
+  // `canOpenCallEditPage` for Edit, which also admits a round closer.
   const canManage = useMemo(
     () => canAccessCallManagement(user, call),
     [user, call],
   );
+  const canEdit = useMemo(() => canOpenCallEditPage(user, call), [user, call]);
 
-  if (!canManage) return null;
+  if (!canEdit) return null;
 
   return (
     <Tab.Container defaultActiveKey={state.name} onSelect={goTo}>
@@ -56,14 +58,16 @@ export const CallTabs = ({ call }: { call: Call }) => {
             </Nav.Link>
           </Nav.Item>
         )}
-        <Nav.Item>
-          <Nav.Link
-            eventKey="protected-call.manage"
-            className="text-center min-w-60px"
-          >
-            {translate('Manage')}
-          </Nav.Link>
-        </Nav.Item>
+        {canManage ? (
+          <Nav.Item>
+            <Nav.Link
+              eventKey="protected-call.manage"
+              className="text-center min-w-60px"
+            >
+              {translate('Manage')}
+            </Nav.Link>
+          </Nav.Item>
+        ) : null}
         <Nav.Item>
           <Nav.Link
             eventKey="protected-call.main"

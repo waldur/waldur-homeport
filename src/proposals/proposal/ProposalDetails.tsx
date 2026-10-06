@@ -165,8 +165,15 @@ export const ProposalDetails = ({
   // panel members are never shown it, so they are not asked; the applicant is
   // asked and the backend answers 403 until the decision is released, which
   // the query settles as "not shown".
+  // The Applicant tab previews the page as the applicant has it, and the
+  // applicant is not shown a decision held for the round's publication, nor
+  // the award it grants. `decision_held` is true only for the call team.
+  const awardHeldFromApplicant =
+    !isCallManagerView && proposal.decision_held === true;
   const canQueryAwards =
-    hasReachedAllocationDecision(proposal, workflowStates) && !isReviewerOnly;
+    hasReachedAllocationDecision(proposal, workflowStates) &&
+    !isReviewerOnly &&
+    !awardHeldFromApplicant;
   // Not while the decision is held for the round's publication: the backend
   // refuses award edits then, until the decision is reopened.
   const awardsEditable = canEditAward(
@@ -174,7 +181,9 @@ export const ProposalDetails = ({
     proposal,
     activeStep,
   );
-  const { data: awards } = useAwardedResources(proposal.uuid, canQueryAwards);
+  const awardsQuery = useAwardedResources(proposal.uuid, canQueryAwards);
+  // A disabled query still hands back what the Call manager tab cached.
+  const awards = canQueryAwards ? awardsQuery.data : undefined;
   const awardRows = useMemo(
     () =>
       awards?.length
