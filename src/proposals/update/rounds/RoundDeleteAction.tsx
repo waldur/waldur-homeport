@@ -9,6 +9,16 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
+/**
+ * Whether the round holds any proposal. The backend refuses to delete such a
+ * round, so the action is disabled up front. `has_proposals` counts every
+ * proposal whoever asks; the proposals list may leave out what the viewer is
+ * not shown, so it only stands in where the flag is absent.
+ */
+const roundHasProposals = (
+  row: ProtectedRound & { has_proposals?: boolean },
+): boolean => row.has_proposals ?? (row.proposals?.length ?? 0) > 0;
+
 interface RoundDeleteActionProps {
   row: ProtectedRound;
   refetch: () => void;
@@ -45,7 +55,7 @@ export const RoundDeleteAction: FC<RoundDeleteActionProps> = ({
     },
   });
 
-  const hasProposals = row.proposals?.length > 0;
+  const hasProposals = roundHasProposals(row);
 
   return (
     <RemovalActionItem

@@ -208,6 +208,28 @@ describe('AwardedResourcesSection', () => {
     expect(container).toBeEmptyDOMElement();
   });
 
+  // An applicant is refused the award until it is released. A card shown
+  // while that answer is on its way would tell them a decision is under way.
+  it('renders nothing while the award is loading', async () => {
+    vi.mocked(proposalProposalsAwardedResourcesList).mockImplementation(
+      () => new Promise(() => undefined) as any,
+    );
+
+    const { container } = renderSection(
+      <AwardedResourcesSection
+        proposal={proposal}
+        editable={false}
+        decisionOpen
+      />,
+    );
+
+    await waitFor(() =>
+      expect(proposalProposalsAwardedResourcesList).toHaveBeenCalled(),
+    );
+    expect(container).toBeEmptyDOMElement();
+    expect(screen.queryByText(/Being decided/)).not.toBeInTheDocument();
+  });
+
   it('tells the call team a held award is closed to edits', async () => {
     vi.mocked(proposalProposalsAwardedResourcesList).mockImplementation(() =>
       page(awards),

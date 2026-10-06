@@ -153,3 +153,101 @@ describe('WorkflowTimeline on a call that evaluates at the round cut-off', () =>
     expect(screen.queryByText(CUTOFF_NOTE)).not.toBeInTheDocument();
   });
 });
+
+describe('WorkflowTimeline with a decision held for the round', () => {
+  const HELD_NOTE = 'Held until the round publishes results';
+  const inReview = { ...proposal, state: 'in_review' };
+  // The call team's payload: the decision is recorded, the next step has not
+  // started.
+  const held = [
+    step({
+      step: 'allocation_decision',
+      step_name: 'Allocation decision',
+      outcome: 'declined',
+    }),
+    step({
+      step: 'award_response',
+      step_name: 'Award response',
+      status: 'pending',
+    }),
+  ];
+
+  beforeEach(() => {
+    vi.mocked(proposalProposalsWorkflowStatesList).mockResolvedValue({
+      data: held,
+    } as any);
+    vi.mocked(useUser).mockReturnValue({ uuid: 'call-manager-uuid' } as any);
+  });
+
+  it('marks the decision as held and presents no later step as current', async () => {
+    renderWithProviders(
+      <WorkflowTimeline
+        proposal={{ ...inReview, decision_held: true }}
+        showDetails
+      />,
+    );
+    expect(await screen.findByText(HELD_NOTE)).toBeInTheDocument();
+    expect(screen.getByText('Not awarded (tentative)')).toBeInTheDocument();
+    expect(screen.queryByRole('listitem', { current: 'step' })).toBeNull();
+  });
+
+  // The call team's payload has the decision recorded; the applicant's still
+  // shows it under way. Reading the applicant's view, the team must see what
+  // the applicant sees, not a tracker that has skipped to the next step.
+  it('shows the call team the decision still under way in the applicant view', async () => {
+    vi.mocked(proposalProposalsWorkflowStatesList).mockResolvedValue({
+      data: held.map((s) =>
+        s.step_name === 'Allocation decision'
+          ? { ...s, applicant_visible: false }
+          : s,
+      ),
+    } as any);
+    renderWithProviders(
+      <WorkflowTimeline proposal={{ ...inReview, decision_held: true }} />,
+    );
+    const current = await screen.findByRole('listitem', { current: 'step' });
+    expect(current).toHaveTextContent('Decision');
+    expect(current).not.toHaveTextContent('Award response');
+    expect(screen.queryByText(HELD_NOTE)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Not awarded (tentative)'),
+    ).not.toBeInTheDocument();
+  });
+
+  // A held rejection carries its reason in the call team's payload. On an
+  // applicant-visible step it must not paint the applicant's view as failed.
+  it('shows a held rejection as still under way in the applicant view', async () => {
+    vi.mocked(proposalProposalsWorkflowStatesList).mockResolvedValue({
+      data: held.map((s) =>
+        s.step_name === 'Allocation decision'
+          ? {
+              ...s,
+              outcome: 'rejected',
+              outcome_reason: 'Out of scope',
+              rejection_reason: 'Out of scope',
+              completed_at: '2026-09-01T10:00:00Z',
+              completed_by: 'Call manager',
+            }
+          : s,
+      ),
+    } as any);
+    renderWithProviders(
+      <WorkflowTimeline proposal={{ ...inReview, decision_held: true }} />,
+    );
+    const current = await screen.findByRole('listitem', { current: 'step' });
+    expect(current).toHaveTextContent('Allocation decision');
+    expect(screen.queryByText('Not reached')).not.toBeInTheDocument();
+  });
+
+  it('says nothing of a hold when no decision is held', async () => {
+    renderWithProviders(
+      <WorkflowTimeline
+        proposal={{ ...inReview, decision_held: false }}
+        showDetails
+      />,
+    );
+    expect(await screen.findByText('Award response')).toBeInTheDocument();
+    expect(screen.queryByText(HELD_NOTE)).not.toBeInTheDocument();
+    expect(screen.queryByRole('listitem', { current: 'step' })).not.toBeNull();
+  });
+});

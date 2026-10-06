@@ -19,6 +19,7 @@ import {
 import { ProgressStep, ProgressSteps } from '@/wizard';
 import { useUser } from '@/workspace/hooks';
 
+import { HELD_DECISION_STEP, heldDecisionLabel } from '../roundLifecycle';
 import { Proposal } from '../types';
 import {
   outcomeLabel,
@@ -69,8 +70,29 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
     // coarse tracker below takes over.
     if (showDetails) return live;
     if (!showsWorkflowSteps()) return [];
-    return getApplicantTimeline(live);
-  }, [data, showDetails]);
+    // The call team reading the applicant's view gets their own payload, in
+    // which a held decision is already recorded. The applicant's shows that
+    // step still under way, so the view is rebuilt from that: otherwise the
+    // tracker would skip past the decision and present the next step as
+    // current.
+    const asApplicantSees = proposal.decision_held
+      ? live.map((s) =>
+          s.step === HELD_DECISION_STEP
+            ? {
+                ...s,
+                // What the backend strips from the applicant's payload.
+                status: 'active' as const,
+                outcome: null,
+                outcome_reason: '',
+                rejection_reason: null,
+                completed_at: null,
+                completed_by: null,
+              }
+            : s,
+        )
+      : live;
+    return getApplicantTimeline(asApplicantSees);
+  }, [data, showDetails, proposal.decision_held]);
 
   // The step where the workflow stopped advancing — the proposal's failure
   // point. Everything after it is unreachable and rendered struck-through, so
@@ -152,6 +174,19 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
     };
   }, [active, showDetails, isApplicant, awaitingCutoff]);
 
+  // A decision held for the round's publication: recorded on the allocation
+  // decision step, but nothing after it happens until the round publishes.
+  // Only the call team is told (decision_held is null for everyone else, and
+  // their payload shows the step still active).
+  // The applicant's view never shows the hold, even to the call team.
+  const heldIndex = useMemo(
+    () =>
+      showDetails && proposal.decision_held
+        ? visibleStates.findIndex((s) => s.step === HELD_DECISION_STEP)
+        : -1,
+    [showDetails, proposal.decision_held, visibleStates],
+  );
+
   const steps = useMemo<ProgressStep[]>(() => {
     // Compact per-step detail: "<status> · <owner> · <date>" on one line, with
     // the outcome (if any) on a second — keeps the tracker from stacking four
@@ -188,6 +223,26 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
       description: awaitingCutoff && statusLine ? [statusLine.text] : undefined,
     };
     const rest = visibleStates.map<ProgressStep>((s, index) => {
+      if (heldIndex !== -1 && index >= heldIndex) {
+        const isHeld = index === heldIndex;
+        return {
+          key: s.step,
+          label: s.step_name,
+          completed: isHeld,
+          // Nothing is under way while the decision waits for the round, so
+          // no later step may be highlighted as the current one.
+          disabled: !isHeld,
+          variant: isHeld ? 'warning' : undefined,
+          description: isHeld
+            ? [
+                translate('Held until the round publishes results'),
+                heldDecisionLabel(s.outcome),
+              ]
+            : showDetails
+              ? [statusLabel(s.status)]
+              : undefined,
+        };
+      }
       const isFailure = failureIndex !== -1 && index === failureIndex;
       const isAfterFailure = failureIndex !== -1 && index > failureIndex;
       const hasReason = s.rejection_reason !== null;
@@ -256,7 +311,14 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
       };
     });
     return [submission, ...rest];
-  }, [visibleStates, showDetails, failureIndex, statusLine, awaitingCutoff]);
+  }, [
+    visibleStates,
+    showDetails,
+    failureIndex,
+    statusLine,
+    awaitingCutoff,
+    heldIndex,
+  ]);
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) {

@@ -85,7 +85,7 @@ describe('applicant timeline', () => {
       }),
     ]);
 
-    expect(names(result)).toEqual(['In review', 'Name of expert_review']);
+    expect(names(result)).toEqual(['Evaluation', 'Name of expert_review']);
     expect(result[0].status).toBe('active');
   });
 
@@ -112,7 +112,7 @@ describe('applicant timeline', () => {
     ]);
 
     expect(result.every((s) => s.status === 'completed')).toBe(false);
-    expect(names(result).at(-1)).toBe('In review');
+    expect(names(result).at(-1)).toBe('Decision');
   });
 
   it('withholds every detail the flag covers, not just the name', () => {
@@ -138,7 +138,7 @@ describe('applicant timeline', () => {
     ]);
 
     expect(result[0]).toMatchObject({
-      step_name: 'In review',
+      step_name: 'Evaluation',
       step_description: '',
       responsible_role: null,
       outcome: null,
@@ -149,8 +149,8 @@ describe('applicant timeline', () => {
     });
   });
 
-  // The buttons render beside the tracker either way, so "In review" here would
-  // contradict the page around it.
+  // The buttons render beside the tracker either way, so a stage name here
+  // would contradict the page around it.
   it('names the one internal step the applicant has to act on', () => {
     const result = getApplicantTimeline([
       step({

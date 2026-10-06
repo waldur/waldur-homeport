@@ -707,6 +707,11 @@
       "feature_area": "metrics"
     }
   },
+  "A document is already recorded. Choose a file only to replace it.": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "A gauge is a level read at a moment; a counter counts what happened. Fixed once data exists.": {
     "context": {
       "feature_area": "metrics"
@@ -2817,6 +2822,22 @@
     }
   },
   "Adopt the groups your directory already holds, with their GIDs, under Accounts > Project groups.": {},
+  "Adopted on": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
+  "Adopting document": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
+  "Adoption": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Adoption document": {},
   "Advance immediately on completion": {
     "context": {
       "feature_area": "workflow"
@@ -4362,6 +4383,11 @@
   "Applicant visible": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "Applicants learn the decision": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Applicants must give a purchase order reference or attach the document before the proposal can be submitted. The provider sets this on the offering; the call keeps the setting it had when the offering was added.": {
@@ -6471,6 +6497,16 @@
       "feature_area": "deploy"
     }
   },
+  "As each decision is made": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
+  "As each decision is made announces every allocation decision to its applicant at once. Together for the whole round holds the decisions of a round, which the call team sees as tentative, until a call manager publishes the round's results; then every applicant is told at the same time. Cannot be changed while decisions are held.": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
   "As requested": {},
   "Ask about offerings…": {
     "context": {
@@ -7539,7 +7575,11 @@
       "feature_area": "policies"
     }
   },
-  "Awaiting your response": {},
+  "Awaiting your response": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Award": {
     "context": {
       "feature_area": "managed-projects"
@@ -7597,6 +7637,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "proposal"
+    }
+  },
+  "Awarded (tentative)": {
+    "context": {
+      "feature_area": "proposals"
     }
   },
   "Awarded resource has been added.": {
@@ -8203,6 +8248,11 @@
   "Block completing this step until the checklist’s required questions are answered.": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "Block completion until every proposal is decided": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Block creation of new resources": {
@@ -10506,6 +10556,22 @@
       "feature_area": "call"
     }
   },
+  "Close round": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "rounds"
+    }
+  },
+  "Close round \"{name}\" now? Its cut-off moves to this moment and no more proposals can be submitted to it.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "rounds"
+    }
+  },
   "Close rounds": {
     "context": {
       "primary_ui_type": "label",
@@ -10514,7 +10580,8 @@
   },
   "Closed": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "proposals"
     }
   },
   "Closed issues (this month)": {
@@ -11109,6 +11176,21 @@
   "Complete review": {
     "context": {
       "feature_area": "core"
+    }
+  },
+  "Complete round": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
+  "Complete round {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "lifecycle"
     }
   },
   "Complete step": {
@@ -14947,9 +15029,20 @@
       "feature_area": "debug"
     }
   },
+  "Decide them before completing the round, or change the round's rule to reject them automatically.": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "Decided and held until the round publishes its results: what the allocation decision grants, beside the request. Reopen the decision to change it.": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Deciding": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "proposals"
     }
   },
   "Decimal places": {
@@ -14977,6 +15070,21 @@
         }
       },
       "feature_area": "proposal"
+    }
+  },
+  "Decision held": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
+  "Decision lapsed (tentative)": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
+  "Decision started": {
+    "context": {
+      "feature_area": "rounds"
     }
   },
   "Decline": {
@@ -16903,6 +17011,11 @@
       "feature_area": "node"
     }
   },
+  "Document": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
   "Document has been removed.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -17026,6 +17139,11 @@
   "Download YAML": {
     "context": {
       "feature_area": "site-agent"
+    }
+  },
+  "Download document": {
+    "context": {
+      "feature_area": "rounds"
     }
   },
   "Download report": {
@@ -17345,6 +17463,11 @@
       "feature_area": "actions"
     }
   },
+  "Each is rejected where it stands and its applicant is told at once.": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "Each mount point should be used once at most.": {
     "context": {
       "feature_area": "create"
@@ -17482,6 +17605,11 @@
   "Edit access subnet": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Edit adoption record": {
+    "context": {
+      "feature_area": "rounds"
     }
   },
   "Edit affiliate link": {
@@ -19611,10 +19739,21 @@
       "feature_area": "policies"
     }
   },
+  "Evaluating": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "proposals"
+    }
+  },
   "Evaluation": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "feedback"
+    }
+  },
+  "Evaluation and results": {
+    "context": {
+      "feature_area": "rounds"
     }
   },
   "Evaluation failed.": {
@@ -19632,7 +19771,17 @@
       "feature_area": "policies"
     }
   },
+  "Evaluation of the submitted proposals starts.": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
   "Evaluation results": {},
+  "Evaluation started": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
   "Evaluation starts": {
     "context": {
       "feature_area": "configuration"
@@ -19723,6 +19872,11 @@
   "Every call ends in an allocation decision.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "Every decision held for this round is announced to its applicant now and carried out: awarded proposals continue to the award response or are allocated, the others are rejected.": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "Every field, including the amount requested per offering component and the review scores.": {
@@ -22031,6 +22185,16 @@
       "feature_area": "roles"
     }
   },
+  "For example, the board changed the outcome when adopting the list": {
+    "context": {
+      "feature_area": "workflow"
+    }
+  },
+  "For example, the decision reference": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "For marketplace-only mode, where applicants request access to an offering instead of submitting a proposal to a call.": {
     "context": {
       "feature_area": "roles"
@@ -23394,6 +23558,16 @@
           "type": "unknown"
         }
       }
+    }
+  },
+  "Held decisions": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Held until the round publishes results": {
+    "context": {
+      "feature_area": "manage"
     }
   },
   "Hello": {
@@ -34224,6 +34398,11 @@
     }
   },
   "Not awarded": {},
+  "Not awarded (tentative)": {
+    "context": {
+      "feature_area": "proposals"
+    }
+  },
   "Not carried over": {},
   "Not configured": {
     "context": {
@@ -34336,6 +34515,11 @@
         }
       },
       "feature_area": "auto-provisioning-rules"
+    }
+  },
+  "Not recorded": {
+    "context": {
+      "feature_area": "rounds"
     }
   },
   "Not removed": {
@@ -34483,6 +34667,11 @@
   "Nothing is scheduled to end: the credit has no expiry date, and neither the project nor its resources have an end date.": {
     "context": {
       "feature_area": "policy-watch"
+    }
+  },
+  "Nothing more happens in a completed round.": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "Nothing on this plan is billed per period — usage is charged per reported quantity — so it follows the other plans of this offering, which lets customers switch between them.": {
@@ -35763,6 +35952,16 @@
       "feature_area": "create"
     }
   },
+  "Only a round of an active call can be closed.": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Only a round of an active call can move on.": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
   "Only a single IP address (/{prefix}) is allowed.": {
     "context": {
       "variables": {
@@ -36519,6 +36718,11 @@
   "Optional. Used by browser clients when the homeserver URL above is Docker-internal or otherwise unreachable from the browser.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "Optional. Without one, a deadline that has passed is cleared and one still ahead is kept.": {
+    "context": {
+      "feature_area": "workflow"
     }
   },
   "Optional: specify a different category for the imported offering. If not set, uses the category from the export data.": {
@@ -42087,6 +42291,11 @@
     }
   },
   "Proposals accepted": {},
+  "Proposals still without a decision will be rejected automatically": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "Proposals:": {
     "context": {
       "feature_area": "update"
@@ -42695,6 +42904,18 @@
       "feature_area": "team"
     }
   },
+  "Publish again to release the held decisions first.": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Publish anyway": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "lifecycle",
+      "action_type": "create"
+    }
+  },
   "Publish as Google Calendar": {
     "context": {
       "feature_area": "integration"
@@ -42703,6 +42924,23 @@
   "Publish profile": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Publish results": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "lifecycle",
+      "action_type": "create"
+    }
+  },
+  "Publish results of {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "lifecycle"
     }
   },
   "Publish reviewer profile": {
@@ -42719,6 +42957,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "referral"
+    }
+  },
+  "Published before all decisions were made": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Published by": {
+    "context": {
+      "feature_area": "rounds"
     }
   },
   "Published by the service provider.": {
@@ -43615,6 +43863,11 @@
       "feature_area": "project"
     }
   },
+  "Reason for publishing early": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "Reason for the adjustment": {
     "context": {
       "feature_area": "credits"
@@ -43727,6 +43980,21 @@
   "Record a group your directory already holds, so the project keeps its GID and Waldur never hands that GID to anything else. The project needs no resource yet.": {
     "context": {
       "feature_area": "project-groups"
+    }
+  },
+  "Record adoption": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Record adoption of {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "lifecycle"
     }
   },
   "Record notification has been sent to organization owners.": {
@@ -44099,6 +44367,11 @@
   "Reject the proposal at the current step?": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Reject them automatically": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Rejected": {
@@ -45002,6 +45275,13 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "renew-allocation"
+    }
+  },
+  "Reopen decision": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "proposal",
+      "action_type": "create"
     }
   },
   "Reorder column {title}": {
@@ -47023,6 +47303,17 @@
       "feature_area": "remote-offering-sync"
     }
   },
+  "Results published": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "proposals"
+    }
+  },
+  "Results published with failures": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "Results: {count}": {
     "context": {
       "variables": {
@@ -47071,7 +47362,9 @@
   },
   "Retry": {
     "context": {
-      "feature_area": "ai-assistant"
+      "primary_ui_type": "submit_button",
+      "feature_area": "ai-assistant",
+      "action_type": "create"
     }
   },
   "Retry has been triggered.": {
@@ -53044,6 +53337,11 @@
       "feature_area": "organizations"
     }
   },
+  "Stage": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
   "Stage {stage} of {total} — {label}": {
     "context": {
       "variables": {
@@ -53158,6 +53456,12 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "list"
+    }
+  },
+  "Start deciding": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "rounds"
     }
   },
   "Start of the date range to sync": {
@@ -55427,6 +55731,12 @@
       "feature_area": "manage"
     }
   },
+  "The adoption has been recorded.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "lifecycle"
+    }
+  },
   "The affiliation has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -55442,6 +55752,11 @@
   "The affiliations profile attribute is not enabled for this platform.": {
     "context": {
       "feature_area": "users"
+    }
+  },
+  "The allocation decision becomes active again with its outcome cleared, and the proposal counts as undecided until it is decided anew. The applicant is not notified. The reopening is recorded in the event log of the proposal, without the reason or the outcome taken back, and the applicant's team sees that entry only once the round publishes its results.": {
+    "context": {
+      "feature_area": "workflow"
     }
   },
   "The announcement has been updated.": {
@@ -55657,6 +55972,18 @@
   "The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "The deadline must be in the future.": {},
+  "The decision has been reopened.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "workflow"
+    }
+  },
+  "The decisions on these proposals could not be carried out": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "The default security group cannot be deleted.": {
@@ -56436,6 +56763,16 @@
       "feature_area": "projects"
     }
   },
+  "The proposals of round \"{name}\" have been evaluated and go to the decision body. Continue?": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "rounds"
+    }
+  },
   "The public view is currently inactive as this call is archived or draft.": {
     "context": {
       "feature_area": "details"
@@ -56501,6 +56838,12 @@
       "feature_area": "review"
     }
   },
+  "The results of the round have been published.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "lifecycle"
+    }
+  },
   "The review process has two stages. Stage 1 (this section) builds the reviewer pool - inviting experts to participate in the call. Stage 2 assigns specific proposals to accepted pool members for review.": {
     "context": {
       "feature_area": "reviewer-pool"
@@ -56541,6 +56884,39 @@
   "The room must be active to open it in a Matrix client.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "The round could not be completed yet": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
+  "The round has been closed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "rounds"
+    }
+  },
+  "The round has been completed": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
+  "The round has been completed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "lifecycle"
+    }
+  },
+  "The round has moved to the decision stage.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "rounds"
+    }
+  },
+  "The round stays open. Retry once the cause is fixed.": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "The rows this count covers, with the value each one carries now and the value it carries after the merge.": {
@@ -56845,9 +57221,19 @@
       "feature_area": "policy-watch"
     }
   },
+  "Their decisions will be announced as they are made. To publish the others now, give a reason; it is recorded on the round.": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "Their offering supports access subnets, but no address is listed for them.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Their release failed when the results were published. Publish the results again to release them, then complete the round.": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "Theme": {
@@ -57140,6 +57526,16 @@
       "feature_area": "wizard"
     }
   },
+  "These proposals could not be rejected": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
+  "These proposals had no decision and were rejected; their applicants have been told:": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "These restrictions are configured at the organization level and apply to all projects within this organization.": {
     "context": {
       "feature_area": "restrictions"
@@ -57178,6 +57574,11 @@
   "These values are required to generate a working appservice registration. They will be saved to Matrix settings.": {
     "context": {
       "feature_area": "matrix"
+    }
+  },
+  "They stay held and their applicants have not been told. Retry once the cause is fixed.": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "They total {total} and cannot be drawn without this credit.": {
@@ -57277,6 +57678,11 @@
   "This call allocates on decision — no allocation date is needed. Change the allocation timing on the Configuration tab to set a fixed date.": {
     "context": {
       "feature_area": "rounds"
+    }
+  },
+  "This call announces each decision as it is made, so publishing only records that the round has reached this stage.": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "This call has a conflict of interest policy. No proposals are shared with you yet: when specific proposals are assigned to you, you will be asked to declare any conflicts before you review them.": {
@@ -58490,6 +58896,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "thread"
+    }
+  },
+  "Together for the whole round": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Toggle": {
@@ -60066,6 +60477,12 @@
       "feature_area": "roles"
     }
   },
+  "Unable to close the round.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "rounds"
+    }
+  },
   "Unable to complete onboarding approval.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -60076,6 +60493,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "core"
+    }
+  },
+  "Unable to complete the round.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "lifecycle"
     }
   },
   "Unable to complete the workflow step.": {
@@ -62017,6 +62440,12 @@
       "feature_area": "invitations"
     }
   },
+  "Unable to publish the results.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "lifecycle"
+    }
+  },
   "Unable to pull marketplace resource.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -62034,6 +62463,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "UserPendingActionsList"
+    }
+  },
+  "Unable to record the adoption.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "lifecycle"
     }
   },
   "Unable to recover project.": {
@@ -62492,6 +62927,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "canned-responses"
+    }
+  },
+  "Unable to reopen the decision.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "workflow"
     }
   },
   "Unable to replicate OpenStack tenant.": {
@@ -62999,6 +63440,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "passkeys"
+    }
+  },
+  "Unable to start the decision stage.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "rounds"
     }
   },
   "Unable to start your review of this proposal.": {
@@ -64261,6 +64708,34 @@
       "feature_area": "booking"
     }
   },
+  "Undecided proposals at completion": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
+  "Undecided proposals rule": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Undecided proposals when a round is completed": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
+  "Undecided proposals: {rule} ({source}).": {
+    "context": {
+      "variables": {
+        "rule": {
+          "type": "unknown"
+        },
+        "source": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "lifecycle"
+    }
+  },
   "Undo": {
     "context": {
       "feature_area": "offering-merges"
@@ -64630,6 +65105,16 @@
   "Unset panel chair": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "Unsubmitted drafts are cancelled.": {
+    "context": {
+      "feature_area": "rounds"
+    }
+  },
+  "Unsubmitted drafts move to the call's next round; if there is none, they are cancelled.": {
+    "context": {
+      "feature_area": "rounds"
     }
   },
   "Unsupported JSON format - expected export format with \"data\" property": {
@@ -65735,6 +66220,17 @@
     }
   },
   "Use the SCOPE.NAME format, e.g. PROJECT.RESEARCHER.": {},
+  "Use the call's setting ({rule})": {
+    "context": {
+      "primary_ui_type": "label",
+      "variables": {
+        "rule": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "lifecycle"
+    }
+  },
   "Use these tabs to manage different aspects of the reviewer pool:": {
     "context": {
       "feature_area": "reviewer-pool"
@@ -68302,6 +68798,21 @@
       "feature_area": "offering-merges"
     }
   },
+  "What completing a round does with proposals that still have no decision. Blocking refuses to complete the round until each is decided; rejecting rejects each where it stands and tells its applicant. A round can override this rule.": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
+  "What completing round \"{name}\" does with proposals that still have no decision.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "lifecycle"
+    }
+  },
   "What do you want to achieve by using Waldur? Please describe your main objectives or expected outcomes.": {},
   "What happens": {
     "context": {
@@ -68443,6 +68954,11 @@
   "When a round closes, move unsubmitted drafts to the next round instead of cancelling them. Applicants keep their content and are notified by email. Drafts are cancelled as before when the call has no later round.": {
     "context": {
       "feature_area": "configuration"
+    }
+  },
+  "When and how the round's results were adopted by the body entitled to adopt them.": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "When carryover is enabled, unused allocation from the previous period carries over, capped at {pct}% of the base allocation:": {
@@ -68596,6 +69112,11 @@
   "When set, resources are automatically paused or downscaled once reported usage in the current period reaches a limit-based component’s limit, and the restriction is lifted when usage drops below it again. Leave empty to disable.": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "When the round is completed": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "When to deactivate a federated user.": {},
@@ -71734,6 +72255,11 @@
       "feature_area": "dashboard"
     }
   },
+  "set for this round": {
+    "context": {
+      "feature_area": "lifecycle"
+    }
+  },
   "single {brace}": {
     "context": {
       "variables": {
@@ -71846,6 +72372,11 @@
   "the assistant": {
     "context": {
       "feature_area": "anonymous"
+    }
+  },
+  "the call's setting": {
+    "context": {
+      "feature_area": "lifecycle"
     }
   },
   "the credit no longer draws": {
@@ -72546,6 +73077,46 @@
       "feature_area": "UserPendingActionsList"
     }
   },
+  "{count} decision(s) are still held": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "lifecycle"
+    }
+  },
+  "{count} decision(s) of this round could not be carried out when its results were published and are still held. Publishing again retries them.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "lifecycle"
+    }
+  },
+  "{count} decision(s) waiting to be released": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "rounds"
+    }
+  },
+  "{count} decision(s) waiting to be released when the round publishes its results": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "rounds"
+    }
+  },
   "{count} duplicate records were removed.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -72614,6 +73185,16 @@
         }
       },
       "feature_area": "details"
+    }
+  },
+  "{count} held": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "rounds"
     }
   },
   "{count} hour": {
@@ -73122,6 +73703,26 @@
         }
       },
       "feature_area": "project"
+    }
+  },
+  "{count} proposal(s) have no decision yet": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "lifecycle"
+    }
+  },
+  "{count} proposal(s) of this round have no decision yet": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "lifecycle"
     }
   },
   "{count} proposals will be used for matching.": {
@@ -75555,6 +76156,19 @@
       },
       "feature_area": "openstack-subnet",
       "action_type": "navigate"
+    }
+  },
+  "{rule} ({source})": {
+    "context": {
+      "variables": {
+        "rule": {
+          "type": "unknown"
+        },
+        "source": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "rounds"
     }
   },
   "{scopeName} credit usage history": {

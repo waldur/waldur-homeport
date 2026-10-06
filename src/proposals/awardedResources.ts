@@ -10,6 +10,7 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { translate } from '@/i18n';
 import { PREPAID_DURATION_MONTHS } from '@/proposals/prepaidDuration';
 import { getRowLimits } from '@/proposals/requestedResourceCost';
+import { HELD_DECISION_STEP } from '@/proposals/roundLifecycle';
 import { Proposal } from '@/proposals/types';
 
 export const awardedResourcesKey = (proposalUuid: string) =>
@@ -59,8 +60,7 @@ export const useAwardedResources = (proposalUuid: string, enabled: boolean) =>
 export const isAwardDecisionOpen = (
   proposal: Pick<Proposal, 'decision_held'>,
   activeStep: Pick<ProposalWorkflowStepInstance, 'step'> | undefined,
-) =>
-  activeStep?.step === 'allocation_decision' && proposal.decision_held !== true;
+) => activeStep?.step === HELD_DECISION_STEP && proposal.decision_held !== true;
 
 /**
  * Whether the viewer is offered the award editor: a call manager (or staff)

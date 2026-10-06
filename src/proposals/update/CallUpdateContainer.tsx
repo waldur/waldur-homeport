@@ -22,7 +22,7 @@ import { CallTabs } from '../details/CallTabs';
 import { SetPanelChairButton } from '../team/SetPanelChairButton';
 import { TeamSection } from '../team/TeamSection';
 import {
-  canAccessCallManagement,
+  canOpenCallEditPage,
   canUpdateCall,
   useCallBreadcrumbItems,
 } from '../utils';
@@ -275,7 +275,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
     // The route carries no permission guard -- `data.permissions` hooks run
     // against Redux state only, so they cannot answer "may this user edit
     // *this* call". Checked here instead, where the call is in hand.
-    canAccessCallManagement(user, call) ? (
+    canOpenCallEditPage(user, call) ? (
       <Body refetch={refetch} loading={isRefetching} call={call} />
     ) : (
       <AccessDeniedPage />

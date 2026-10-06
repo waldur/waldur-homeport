@@ -22,8 +22,8 @@ import {
   ComplianceStatusBadge,
   formatComplianceStatus,
 } from '../proposal/ComplianceStatusBadge';
-import { ProposalBadge } from '../proposal/ProposalBadge';
 import { ProposalRowActions } from '../proposal/ProposalRowActions';
+import { ProposalStateBadge } from '../proposal/ProposalStateBadge';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 import { Call } from '../types';
 import { canExportCall } from '../utils';
@@ -124,9 +124,13 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
           // this manager rather than on a reviewer or the applicant.
           title: translate('Step'),
           render: ({ row }) => (
-            <ProposalStepCell callUuid={call.uuid} step={row.workflow_step} />
+            <ProposalStepCell
+              callUuid={call.uuid}
+              step={row.workflow_step}
+              decisionHeld={row.decision_held}
+            />
           ),
-          keys: ['workflow_step'],
+          keys: ['workflow_step', 'decision_held'],
           id: 'step',
         },
         // Round ID and Ending are properties of the round, identical on every
@@ -140,8 +144,8 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <ProposalBadge state={row.state} />,
-          keys: ['state'],
+          render: ({ row }) => <ProposalStateBadge row={row} />,
+          keys: ['state', 'decision_held'],
           id: 'state',
           filter: 'state',
           inlineFilter: (row) =>

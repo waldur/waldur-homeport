@@ -216,6 +216,39 @@ export const canUpdateCall = (user: User, call: Call): boolean =>
     }),
   );
 
+/**
+ * Whether the user may drive a round's lifecycle: close it early, start the
+ * decision stage, publish its results, complete it and record its adoption.
+ * The backend asks for CALL.CLOSE_ROUNDS alone, held on the call or on its
+ * managing organisation, and not for CALL.UPDATE: a role may carry either
+ * without the other.
+ */
+export const canCloseRounds = (user: User, call: Call): boolean =>
+  Boolean(
+    hasPermission(user, {
+      permission: PermissionEnum.CLOSE_ROUNDS,
+      scopeId: call?.uuid,
+      callOrganizerId: call?.manager_uuid,
+    }),
+  );
+
+/**
+ * What the rounds table offers on a round: editing it (CALL.UPDATE on a call
+ * that is not archived) and its lifecycle actions (CALL.CLOSE_ROUNDS). Null
+ * when neither applies, and the row menu is shown disabled.
+ */
+export const getRoundMenuAccess = (
+  user: User,
+  call: Call,
+  isReadOnly: boolean,
+): { canUpdate: boolean; canCloseRounds: boolean } | null => {
+  const canUpdate = !isReadOnly;
+  const closeRounds = call?.state !== 'archived' && canCloseRounds(user, call);
+  return canUpdate || closeRounds
+    ? { canUpdate, canCloseRounds: closeRounds }
+    : null;
+};
+
 /** Mirrors the backend gate on the export endpoints. Narrower than
  * `canAccessCallManagement`, which also admits organization owners. */
 export const canExportCall = (user: User, call: Call): boolean =>
@@ -243,6 +276,37 @@ export const canAccessCallManagement = (user: User, call: Call): boolean =>
   canUpdateCall(user, call) ||
   checkIsOwnerOrStaff({ uuid: call?.customer_uuid } as any, user) ||
   Boolean(checkIsStaffOrSupport(user));
+
+/**
+ * Whether the user may open the call's Edit page, where its rounds are
+ * listed. Everyone `canAccessCallManagement` admits, and also whoever holds
+ * CALL.CLOSE_ROUNDS on the call or its managing organisation without
+ * CALL.UPDATE: they drive the rounds' lifecycle from the rounds table and get
+ * every other part of the page read-only. The Manage page stays theirs only
+ * if `canAccessCallManagement` says so.
+ */
+export const canOpenCallEditPage = (user: User, call: Call): boolean =>
+  canAccessCallManagement(user, call) || canCloseRounds(user, call);
+
+/**
+ * Whether the user is on the call's team in any role: a manager, organiser,
+ * reviewer or panel member, an owner of the call's organisation, or staff and
+ * support. Those are the people the backend lets read the call through the
+ * protected endpoints, where the rounds carry their lifecycle and adoption
+ * record. Applicants and anonymous visitors only ever see the public call.
+ */
+export const isOnCallTeam = (
+  user: User | null | undefined,
+  call: Call | null | undefined,
+): boolean =>
+  Boolean(user && call) &&
+  (Boolean(
+    user.permissions?.some(
+      (permission) =>
+        permission.scope_type === 'call' && permission.scope_uuid === call.uuid,
+    ),
+  ) ||
+    canAccessCallManagement(user, call));
 
 /**
  * Whether the user may manage the call's reviewers — invite to the pool,

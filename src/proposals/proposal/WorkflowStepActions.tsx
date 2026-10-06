@@ -1,4 +1,5 @@
 import {
+  ArrowCounterClockwiseIcon,
   ArrowRightIcon,
   CheckCircleIcon,
   XCircleIcon,
@@ -25,6 +26,7 @@ import {
   fetchProposalWorkflowStates,
   proposalWorkflowStatesKey,
 } from '../workflow/queries';
+import { ReopenDecisionDialog } from '../workflow/ReopenDecisionDialog';
 
 interface WorkflowStepActionsProps {
   proposal: Proposal;
@@ -67,6 +69,27 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
 
   // A manager may complete/reject any non-applicant step; award_response is the
   // applicant's own action (surfaced elsewhere). Staff may act on any.
+  // Reopening a held decision is narrower than acting on a step: staff, or
+  // CALL.UPDATE on the call or its managing organisation, and never the
+  // applicant (mirrors the backend's user_can_manage_held_decision). Support
+  // sees the held decision but may not change it.
+  // Only before the round publishes its results: a decision still held after
+  // that is one whose release failed, which publishing again retries and the
+  // backend refuses to reopen.
+  const roundPublished =
+    proposal.round?.lifecycle_state === 'results_published' ||
+    proposal.round?.lifecycle_state === 'closed';
+  const canReopenDecision =
+    proposal.decision_held === true &&
+    !roundPublished &&
+    (user?.is_staff ||
+      (user?.uuid !== proposal.created_by_uuid &&
+        hasPermission(user, {
+          permission: PermissionEnum.UPDATE_CALL,
+          scopeId: proposal.call_uuid,
+          callOrganizerId: proposal.call_managing_organisation_uuid,
+        })));
+
   const canActOnActiveStep =
     !!activeStep &&
     (user?.is_staff ||
@@ -114,11 +137,25 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
     invalidateQueries: [{ queryKey: proposalWorkflowStatesKey(proposal.uuid) }],
   });
 
-  if (!canManage) return null;
+  if (!canManage && !canReopenDecision) return null;
 
   return (
     <>
-      {awaitingManualAdvance && (
+      {canReopenDecision && (
+        <BaseButton
+          variant="tertiary"
+          onClick={() =>
+            openDialog(ReopenDecisionDialog, {
+              resolve: { proposal, refetch },
+            })
+          }
+          className="w-100 mt-2"
+          iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+          label={translate('Reopen decision')}
+          size="lg"
+        />
+      )}
+      {canManage && awaitingManualAdvance && (
         <BaseButton
           variant="primary"
           onClick={() => advanceStep.mutate()}
@@ -129,7 +166,7 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
           size="lg"
         />
       )}
-      {canActOnActiveStep && (
+      {canManage && canActOnActiveStep && (
         <>
           <BaseButton
             variant="primary"

@@ -3,6 +3,26 @@ import { ProposalWorkflowStepInstance } from 'waldur-js-client';
 import { translate } from '@/i18n';
 
 /**
+ * What an internal step is called on the applicant's tracker: the stage it
+ * stands for, never the call's own name for it. Reusing the proposal's
+ * "In review" badge read as a step back into review once a review step had
+ * already been ticked off.
+ */
+const placeholderName = (step: string): string => {
+  switch (step) {
+    case 'award_response':
+      // The one internal step the applicant has to act on: the response
+      // buttons render beside the tracker either way, so a stage name here
+      // would contradict the page around it.
+      return translate('Awaiting your response');
+    case 'allocation_decision':
+      return translate('Decision');
+    default:
+      return translate('Evaluation');
+  }
+};
+
+/**
  * A step the call keeps internal, reduced to the one fact the applicant needs:
  * that it is the stage they are sitting at.
  *
@@ -17,13 +37,7 @@ const anonymise = (
   step: ProposalWorkflowStepInstance,
 ): ProposalWorkflowStepInstance => ({
   ...step,
-  step_name:
-    step.step === 'award_response'
-      ? // The one internal step the applicant has to act on: the response
-        // buttons render beside the tracker either way, so "In review" here
-        // would contradict the page around it.
-        translate('Awaiting your response')
-      : translate('In review'),
+  step_name: placeholderName(step.step),
   step_description: '',
   responsible_role: null,
   outcome: null,
@@ -47,7 +61,8 @@ const anonymise = (
  * marks the first non-completed entry as the current one — so removing it
  * either promotes a later step and names a stage the proposal has not reached,
  * or, where every remaining entry is completed, paints the whole tracker as
- * finished on a proposal still under review. It is stood up unnamed instead.
+ * finished on a proposal still under review. It is stood up under the name of
+ * its stage instead.
  *
  * Only one step is ever active, so no two placeholders can appear at once and
  * the count of internal steps stays hidden.
