@@ -46,13 +46,19 @@ export const ResourceActionComponent: FunctionComponent<
 }) => {
   const { openDialog } = useModal();
 
-  // Only the marketplace menu is long enough to need collapsing: it carries
-  // the customer, provider and staff groups, twenty-odd rows between them.
-  const isLongMenu = Boolean(
-    listProps.customerResourceActions?.length ||
-    listProps.providerResourceActions?.length ||
-    listProps.staffActions?.length,
-  );
+  // Collapse the row menu only. It is the one that covers the screen: the
+  // kebab sits at the edge of a table row and its panel opens over the page.
+  // The labeled Actions button on a resource's own page is somewhere the user
+  // navigated to on purpose, and both that page and the e2e suite expect its
+  // full list. Collapsing also needs the marketplace groups to collapse — a
+  // menu of type actions alone is a few rows already.
+  const isLongMenu =
+    !labeled &&
+    Boolean(
+      listProps.customerResourceActions?.length ||
+      listProps.providerResourceActions?.length ||
+      listProps.staffActions?.length,
+    );
 
   const showAll = () =>
     openDialog(ModalActionsDialog, {

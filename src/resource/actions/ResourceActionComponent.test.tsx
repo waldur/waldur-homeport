@@ -22,7 +22,21 @@ const EditAction = makeAction('Edit');
 const PullAction = makeAction('Pull');
 const ShowUsageAction = makeAction('Show usage');
 
+// The row menu, opened from its kebab. Only this one collapses — the labeled
+// Actions button on a resource's own page keeps its full list.
 const renderMenu = async (props) => {
+  const result = renderWithProviders(
+    <ResourceActionComponent
+      open
+      resource={{ uuid: 'resource-uuid' }}
+      {...props}
+    />,
+  );
+  await userEvent.click(screen.getAllByRole('button')[0]);
+  return result;
+};
+
+const renderLabelledMenu = async (props) => {
   const result = renderWithProviders(
     <ResourceActionComponent
       open
@@ -82,6 +96,16 @@ describe('ResourceActionComponent', () => {
 
     expect(screen.getByText('Pull')).toBeInTheDocument();
     expect(screen.getByText('Show all')).toBeInTheDocument();
+  });
+
+  it("keeps the full list on a resource's own page", async () => {
+    await renderLabelledMenu({
+      customerResourceActions: [EditAction],
+      staffActions: [ShowUsageAction],
+    });
+
+    expect(screen.getByText('Resource actions')).toBeInTheDocument();
+    expect(screen.queryByText('Show all')).not.toBeInTheDocument();
   });
 
   it('drops the group captions in the menu', async () => {
