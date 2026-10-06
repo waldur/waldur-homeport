@@ -70,6 +70,20 @@ describe('ResourceActionComponent', () => {
     expect(screen.queryByText('Show all')).not.toBeInTheDocument();
   });
 
+  it("keeps the resource's own operations beside the collapsed groups", async () => {
+    // A VMware VM's Start/Stop/Reset arrive as extraActions. They are not
+    // flagged important, but they are the point of the menu — the e2e suite
+    // drives them from it, and the collapse exists to make room for them.
+    await renderMenu({
+      extraActions: [PullAction],
+      customerResourceActions: [EditAction],
+      staffActions: [ShowUsageAction],
+    });
+
+    expect(screen.getByText('Pull')).toBeInTheDocument();
+    expect(screen.getByText('Show all')).toBeInTheDocument();
+  });
+
   it('drops the group captions in the menu', async () => {
     await renderMenu({
       customerResourceActions: [EditAction],

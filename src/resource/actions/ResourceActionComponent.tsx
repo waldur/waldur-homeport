@@ -86,8 +86,23 @@ export const ResourceActionComponent: FunctionComponent<
         <ResourceActionsList {...listProps} />
       ) : (
         <>
+          {/* The resource's own operations (Start, Stop, Reset, …) stay in
+              the menu whatever happens: they are what the menu is for, and
+              burying them behind "Show all" is what the collapse is meant to
+              spare them from. Only the marketplace, provider and staff groups
+              are filtered down to the important few. */}
+          <ResourceActionsList
+            {...listProps}
+            customerResourceActions={undefined}
+            providerResourceActions={undefined}
+            staffActions={undefined}
+          />
           <ActionList hideGroupName hideNonImportant>
-            <ResourceActionsList {...listProps} />
+            <ResourceActionsList
+              {...listProps}
+              extraActions={undefined}
+              resourceTypeActions={undefined}
+            />
           </ActionList>
           <Menu.Separator />
           {/* A button, not an action row: it opens a dialog rather than doing
