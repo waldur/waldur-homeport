@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, PropsWithChildren, useCallback } from 'react';
 
-import { Menu } from 'waldur-ui';
+import { BaseButton, Menu } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -68,17 +68,20 @@ export const ActionsPopover = ({
       <ActionList hideGroupName hideNonImportant>
         <ActionsList {...value} refetch={refetch} />
       </ActionList>
-      {/* A menu item, so that arrow keys reach it and selecting it closes
-          the menu before the dialog opens. It keeps the look of the
-          text-primary BaseButton it replaces: centred, underlined, in the
-          panel's text colour, with the button's light brand background when
-          highlighted. */}
-      <Menu.Item
-        onSelect={callback}
-        className="my-1 justify-center rounded-md px-[8px] py-[4px] text-center text-sm leading-5 font-medium tracking-[0.56px] underline text-inherit action-row-active:bg-[var(--btn-secondary-bg)] action-row-active:text-inherit"
-      >
-        {translate('Show all')}
-      </Menu.Item>
+      {/* A button, not an action row: it opens a dialog rather than doing
+          anything to the resource. Deliberately outside Menu.Item — a row
+          overrides a nested button's own colour and hover, so inside one it
+          stops looking like a button at all. Same shape as the generic menu's
+          in ResourceActionComponent. */}
+      <Menu.Separator />
+      <div className="flex justify-center p-1">
+        <BaseButton
+          variant="text-secondary"
+          size="sm"
+          label={translate('Show all')}
+          onClick={callback}
+        />
+      </div>
     </>
   ) : null;
 };
