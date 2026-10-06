@@ -11,6 +11,7 @@ import { GRID_BREAKPOINTS, SHORT_STALE_TIME } from '@/core/constants';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import { useUser } from '@/workspace/hooks';
 import { checkHasNonProjectPermissions } from '@/workspace/selectors';
 
@@ -45,12 +46,9 @@ export const useFooterLinks = () => {
       MarketplaceFeatures.show_call_management_functionality,
     );
 
-    const hideMarketplace = isFeatureVisible(
-      MarketplaceFeatures.hide_marketplace_from_end_users,
-    );
     const showMarketplace =
       ENV.plugins.WALDUR_CORE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS &&
-      (!hideMarketplace || user?.is_staff);
+      canUseMarketplaceShopUi(user);
 
     const hideOrgInfo = isFeatureVisible(
       MarketplaceFeatures.hide_organization_information_from_project_members,

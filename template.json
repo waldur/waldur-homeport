@@ -22666,7 +22666,11 @@
       "feature_area": "openstack-instance"
     }
   },
-  "Go to marketplace": {},
+  "Go to marketplace": {
+    "context": {
+      "feature_area": "list"
+    }
+  },
   "Go to order": {
     "context": {
       "feature_area": "resource-pending"
