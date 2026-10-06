@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { useTable } from '@/table/useTable';
 import { renderWithProviders } from '@/test/harness';
 
@@ -32,19 +33,20 @@ const row = {
   expiration_time: '2025-12-31T23:59:59Z',
 };
 const tableId = 'team-table-test';
-const store = mockStore({
-  tables: {
-    [tableId]: {
-      loading: false,
-      entities: { [rowId]: row },
-      order: [rowId],
-      pagination: { pageSize: 10, resultCount: 1, currentPage: 1 },
-      toggled: {},
-      activeColumns: {},
-      columnPositions: [],
+const storeWith = (member: Record<string, unknown>) =>
+  mockStore({
+    tables: {
+      [tableId]: {
+        loading: false,
+        entities: { [rowId]: member },
+        order: [rowId],
+        pagination: { pageSize: 10, resultCount: 1, currentPage: 1 },
+        toggled: {},
+        activeColumns: {},
+        columnPositions: [],
+      },
     },
-  },
-});
+  });
 
 // Renders the real TeamTableComponent through the real Table (TableLoader),
 // so the feature-gated `!hideExpiration && {…}` column entry actually flows
@@ -63,9 +65,9 @@ const Harness: FC<{ hideExpiration?: boolean }> = ({ hideExpiration }) => {
   );
 };
 
-const renderTable = (hideExpiration?: boolean) =>
+const renderTable = (hideExpiration?: boolean, member = row) =>
   renderWithProviders(
-    <Provider store={store}>
+    <Provider store={storeWith(member)}>
       <DrawerProvider>
         <Harness hideExpiration={hideExpiration} />
       </DrawerProvider>
@@ -97,5 +99,22 @@ describe('TeamTableComponent falsy column guard', () => {
 
     expect(await screen.findByText('Role expiration')).toBeInTheDocument();
     await assertHeaderBodyAligned();
+  });
+});
+
+describe('TeamTableComponent with concealed member identity', () => {
+  // A reviewer may receive team rows without the member's name, username,
+  // image or email when the call conceals them: each identity cell shows a
+  // dash rather than a blank.
+  it('shows a dash in every identity cell', async () => {
+    renderTable(true, { uuid: rowId, role_name: 'owner' } as typeof row);
+
+    await screen.findByText('Username');
+    const cells = screen.getAllByRole('cell');
+    const dashed = cells.filter(
+      (cell) => cell.textContent === DASH_ESCAPE_CODE,
+    );
+    // Member, email and username.
+    expect(dashed).toHaveLength(3);
   });
 });

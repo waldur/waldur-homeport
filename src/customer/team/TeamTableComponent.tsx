@@ -110,7 +110,7 @@ export const TeamTableComponent = <
       },
       {
         title: translate('Username'),
-        render: ({ row }) => getField(row, 'username'),
+        render: ({ row }) => getField(row, 'username') || DASH_ESCAPE_CODE,
         export: getKey('username'),
         id: 'username',
         keys: [getKey('username')],

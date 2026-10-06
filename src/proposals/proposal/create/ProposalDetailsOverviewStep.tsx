@@ -127,14 +127,18 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
             <ProjectDurationNote duration={projectDuration} />
           </Col>
         )}
-        <Col sm={6}>
-          <Field
-            label={translate('Created by')}
-            value={proposal.created_by_name}
-            labelCol={5}
-            valueCol={7}
-          />
-        </Col>
+        {/* The applicant's name is withheld from evaluators when the call
+            conceals it; leave the row out rather than show an empty cell. */}
+        {proposal.created_by_name && (
+          <Col sm={6}>
+            <Field
+              label={translate('Created by')}
+              value={proposal.created_by_name}
+              labelCol={5}
+              valueCol={7}
+            />
+          </Col>
+        )}
       </Row>
     </VStepperFormStepCard>
   );

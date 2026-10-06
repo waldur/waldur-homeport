@@ -1,6 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { createRef, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Form } from 'react-final-form';
 import {
   proposalProposalsRetrieve,
@@ -19,6 +26,7 @@ import { useTitle } from '@/navigation/title';
 import { ProposalReview } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
 
+import { useShowsComplianceSection } from '../create/ComplianceSummary';
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
 
 import { ConflictOfInterestNotice } from './ConflictOfInterestNotice';
@@ -69,7 +77,11 @@ export const ProposalReviewCreatePage = () => {
     }
   }, [data]);
 
-  const formSteps = createReviewSteps;
+  const hasCompliance = useShowsComplianceSection(data?.proposal);
+  const formSteps = useMemo(
+    () => createReviewSteps(hasCompliance),
+    [hasCompliance],
+  );
   const stepRefs = useRef([]);
   stepRefs.current = formSteps.map(
     (_, i) => stepRefs.current[i] ?? createRef(),
@@ -148,6 +160,7 @@ export const ProposalReviewCreatePage = () => {
               </SidebarLayout.Body>
               <SidebarLayout.Sidebar transparent>
                 <CreatePageSidebar
+                  steps={formSteps}
                   review={reviewObject}
                   proposal={data.proposal}
                   refetch={refetch}

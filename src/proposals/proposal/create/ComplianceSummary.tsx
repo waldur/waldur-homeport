@@ -14,6 +14,8 @@ import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 import { useNotify } from '@/store/notify';
 
+import { proposalHasCompliance } from './complianceUtils';
+
 /** Rendered twice below — the loading card and the loaded one — so the two
  *  cannot drift apart when the wording changes. */
 const complianceSubtitle = () =>
@@ -23,22 +25,23 @@ const complianceSubtitle = () =>
         'Compliance questions answered when the request was submitted.',
       );
 
-interface ComplianceSummaryProps {
-  proposal: Proposal;
-}
-
-export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
+/**
+ * The applicant's compliance answers. Resolves to null when the call has no
+ * checklist or the viewer may not read the answers, so a caller can leave the
+ * section out. Shared by the section and the page that lists it in its
+ * navigation, which then issue one request between them.
+ */
+const useProposalComplianceChecklist = (
+  proposalUuid: string | undefined,
+  enabled = true,
+) => {
   const { showErrorResponse } = useNotify();
 
-  const {
-    data: checklistData,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['ProposalChecklistSummary', proposal.uuid],
+  return useQuery({
+    queryKey: ['ProposalChecklistSummary', proposalUuid],
     queryFn: () =>
       proposalProposalsChecklistRetrieve({
-        path: { uuid: proposal.uuid },
+        path: { uuid: proposalUuid },
         query: { include_all: true },
       })
         .then((response) => response.data)
@@ -62,13 +65,51 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
           );
           throw err;
         }),
+    enabled: enabled && !!proposalUuid,
     refetchOnWindowFocus: false,
     staleTime: SHORT_STALE_TIME,
   });
+};
+
+/**
+ * Whether a page lists the compliance section for the current viewer: the
+ * proposal was submitted under a checklist and the viewer may read the
+ * answers. Listed while the answers load, so the navigation does not jump;
+ * dropped once they turn out to be unavailable, since the section then
+ * renders nothing for the navigation to point at.
+ */
+export const useShowsComplianceSection = (
+  proposal: Pick<Proposal, 'uuid' | 'compliance_status'> | undefined,
+): boolean => {
+  const mayHaveCompliance = proposalHasCompliance(proposal);
+  const { data, error } = useProposalComplianceChecklist(
+    proposal?.uuid,
+    mayHaveCompliance,
+  );
+  return mayHaveCompliance && data !== null && !error;
+};
+
+interface ComplianceSummaryProps {
+  proposal: Proposal;
+  /** Anchor for in-page navigation, set while loading too so a link to the
+   *  section lands on it from the start. */
+  id?: string;
+}
+
+export const ComplianceSummary: FC<ComplianceSummaryProps> = ({
+  proposal,
+  id,
+}) => {
+  const {
+    data: checklistData,
+    isLoading,
+    error,
+  } = useProposalComplianceChecklist(proposal.uuid);
 
   if (isLoading) {
     return (
       <AccordionCard
+        id={id}
         title={translate('Compliance checklist')}
         subtitle={complianceSubtitle()}
         defaultOpen={false}
@@ -84,6 +125,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
 
   return (
     <AccordionCard
+      id={id}
       title={translate('Compliance checklist')}
       subtitle={complianceSubtitle()}
       defaultOpen={false}

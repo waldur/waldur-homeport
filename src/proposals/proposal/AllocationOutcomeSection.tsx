@@ -150,7 +150,9 @@ const AllocatedTeamTable: FC<{
       columns={[
         {
           title: translate('Member'),
-          render: ({ row }) => <>{row.user_full_name || row.user_username}</>,
+          render: ({ row }) => (
+            <>{renderFieldOrDash(row.user_full_name || row.user_username)}</>
+          ),
         },
         {
           title: translate('Project role'),

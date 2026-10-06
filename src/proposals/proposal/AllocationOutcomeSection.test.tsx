@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import { ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
@@ -11,6 +11,7 @@ import {
 } from 'waldur-js-client';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { renderWithProviders } from '@/test/harness';
 
 import { AllocationOutcomeSection } from './AllocationOutcomeSection';
@@ -160,5 +161,25 @@ describe('AllocationOutcomeSection', () => {
     expect(
       screen.queryByText('No roles were granted on the project.'),
     ).not.toBeInTheDocument();
+  });
+  // A reviewer may receive the granted members without their name or username
+  // when the call conceals them: the member cell shows a dash, not a blank.
+  it('shows a dash for a member whose identity is concealed', async () => {
+    vi.mocked(projectsRetrieve).mockImplementation(
+      () =>
+        Promise.resolve({ data: { name: 'P', customer_name: 'Org' } }) as any,
+    );
+    vi.mocked(projectsListUsersList).mockImplementation(() =>
+      page([{ role_name: 'Project member' }]),
+    );
+    vi.mocked(proposalProposalsResourcesList).mockImplementation(() =>
+      page([]),
+    );
+
+    renderSection(<AllocationOutcomeSection proposal={proposal} />);
+
+    const row = await screen.findByRole('row', { name: /Project member/ });
+    const [memberCell] = within(row).getAllByRole('cell');
+    expect(memberCell).toHaveTextContent(DASH_ESCAPE_CODE);
   });
 });
