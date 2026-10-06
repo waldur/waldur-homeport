@@ -67,7 +67,9 @@ export const BreadcrumbSearchItem = ({
         // through aria-activedescendant, not focused.
         tabIndex={-1}
         aria-current={item.isCurrent ? 'page' : undefined}
-        className="d-flex flex-grow-1 min-w-0 text-dark text-hover-primary align-items-center py-2 ps-5"
+        // pe-4 keeps a long title off the favourite star, which always holds
+        // its place beside the link; as padding it stays part of the link.
+        className="d-flex flex-grow-1 min-w-0 text-dark text-hover-primary align-items-center py-2 ps-5 pe-4"
       >
         {/* Decorative: the title follows, so the option isn't named by
             the avatar's initials too. */}

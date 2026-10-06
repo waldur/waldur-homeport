@@ -51,7 +51,7 @@ export const SearchItem = (props: SearchItemProps) => {
       <Link
         state={props.to}
         params={props.params}
-        className="search-result-item__link d-flex text-dark text-hover-primary align-items-center"
+        className="search-result-item__link d-flex text-dark text-hover-primary align-items-center me-4"
         onClick={(e) => {
           if (props.onClick) {
             props.onClick(props);
@@ -74,7 +74,14 @@ export const SearchItem = (props: SearchItemProps) => {
           )}
         </div>
       </Link>
-      <div className="search-result-item__controls ms-auto d-flex">
+      {/*
+        The link's me-4 keeps the trailing controls the same distance from the
+        title that the avatar keeps on the other side, and gap-2 separates them
+        from each other. The distance sits on the link rather than as padding
+        here: the controls are lifted above the link's stretched overlay, so
+        their padding would be a strip of the row that no longer opens it.
+      */}
+      <div className="search-result-item__controls ms-auto d-flex gap-2">
         {props.badge && <div>{props.badge}</div>}
         {props.actions}
         {props.addFavoritePage && (
