@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { proposalReviewsReject } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -13,16 +13,13 @@ import { ProposalCostTotal } from '@/proposals/ProposalCostTotal';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import { useProposalResourceRows } from '@/proposals/useProposalResourceRows';
 import { isReviewInFinalState } from '@/proposals/utils';
+import { VStepperFormStep } from '@/wizard';
 
-import { createReviewSteps } from './steps/steps';
 import { SubmitReviewDialog } from './SubmitReviewDialog';
 
-const tabs = createReviewSteps.map((step) => ({
-  key: step.id,
-  title: step.label,
-}));
-
 interface CreatePageSidebarProps {
+  /** The sections rendered on the page, in order. */
+  steps: VStepperFormStep[];
   review: ProposalReview;
   /** Whose requests the summary totals. */
   proposal: Proposal;
@@ -30,11 +27,18 @@ interface CreatePageSidebarProps {
 }
 
 export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
+  steps,
   review,
   proposal,
   refetch,
 }) => {
   const { openDialog } = useModal();
+  // A stable identity matters: ScrollSpyNav re-derives the sections it
+  // tracks whenever this array changes.
+  const tabs = useMemo(
+    () => steps.map((step) => ({ key: step.id, title: step.label })),
+    [steps],
+  );
   // The applicant sees this total beside their own form; a reviewer weighing
   // the proposal needs the same figure, and the steps below only show the
   // per-row costs.

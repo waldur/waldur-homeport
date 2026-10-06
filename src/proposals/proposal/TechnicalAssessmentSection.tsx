@@ -10,8 +10,7 @@ import { usesCallVocabulary } from '@/proposals/presentation';
 import { Proposal } from '@/proposals/types';
 
 import { ReviewComment } from './create-review/ReviewComment';
-
-const TECHNICAL_ASSESSMENT_STEP = 'technical_assessment';
+import { TECHNICAL_ASSESSMENT_STEP } from './technicalAssessmentAccess';
 
 // Map a technical reviewer's decision to a semantic badge colour.
 const getDecisionVariant = (label: string | null | undefined) => {
@@ -24,16 +23,22 @@ const getDecisionVariant = (label: string | null | undefined) => {
 
 interface TechnicalAssessmentSectionProps {
   proposal: Proposal;
+  /**
+   * Whether the viewer may read the assessments at all (see
+   * canViewTechnicalAssessment). A reviewer may not, and asking would only
+   * be refused.
+   */
+  enabled: boolean;
 }
 
-// Threaded read-only view of every technical reviewer's assessment (WAL-9337).
-// Self-hides when the viewer isn't permitted (backend returns 403) or no
-// assessment has been submitted yet. Reviewers submit their own decision via the
-// step checklist (StepChecklistSection); this section is the call manager's (and,
-// when configured, the applicant's) consolidated view.
+// Threaded read-only view of every technical reviewer's assessment. Hidden
+// from a viewer who may not read it, and until an assessment is submitted.
+// Reviewers submit their own decision via the step checklist
+// (StepChecklistSection); this section is the call manager's (and, when
+// configured, the applicant's) consolidated view.
 export const TechnicalAssessmentSection: FC<
   TechnicalAssessmentSectionProps
-> = ({ proposal }) => {
+> = ({ proposal, enabled }) => {
   const { data: groups } = useQuery({
     queryKey: ['ProposalTechnicalAssessment', proposal.uuid],
     queryFn: () =>
@@ -44,9 +49,10 @@ export const TechnicalAssessmentSection: FC<
         .then((response) => response.data ?? [])
         .catch(() => []),
     refetchOnWindowFocus: false,
+    enabled,
   });
 
-  if (!groups || groups.length === 0) {
+  if (!enabled || !groups || groups.length === 0) {
     return null;
   }
 

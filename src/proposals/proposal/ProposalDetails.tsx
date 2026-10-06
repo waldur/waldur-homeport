@@ -1,7 +1,7 @@
 import { ChatTextIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { AccordionCard, BaseButton } from 'waldur-ui';
 
@@ -43,7 +43,10 @@ import {
 } from './AllocationOutcomeSection';
 import { AwardedResourcesSection } from './AwardedResourcesSection';
 import { AwardResponseActions } from './AwardResponseActions';
-import { ComplianceSummary } from './create/ComplianceSummary';
+import {
+  ComplianceSummary,
+  useShowsComplianceSection,
+} from './create/ComplianceSummary';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
 import { ProposalDetailsOverviewStep } from './create/ProposalDetailsOverviewStep';
 import { ResourceRequestsSummary } from './create/ResourceRequestsSummary';
@@ -54,6 +57,10 @@ import {
 } from './create/utils';
 import { SubmitReviewDialog } from './create-review/SubmitReviewDialog';
 import { StepChecklistSection } from './StepChecklistSection';
+import {
+  canViewTechnicalAssessment,
+  TECHNICAL_ASSESSMENT_STEP,
+} from './technicalAssessmentAccess';
 import { TechnicalAssessmentSection } from './TechnicalAssessmentSection';
 import { WorkflowStepActions } from './WorkflowStepActions';
 
@@ -77,16 +84,21 @@ export const ProposalDetails = ({
 }: ProposalDetails) => {
   const { state } = useCurrentStateAndParams();
 
-  // Calculate steps based on proposal compliance status (same logic as submission step)
-  const proposalHasCompliance = proposal.compliance_status !== null;
+  // Listed only for a viewer who may read the answers; see
+  // useShowsComplianceSection.
+  const hasCompliance = useShowsComplianceSection(proposal);
+  // The team card opens by default when there is no compliance section above
+  // it. It follows that until the viewer folds or unfolds it themselves, so a
+  // section that turns out to be unavailable leaves the team open.
+  const [teamOpen, setTeamOpen] = useState<boolean>();
 
   const formSteps = useMemo(() => {
-    const fakeCallForSteps = proposalHasCompliance
+    const fakeCallForSteps = hasCompliance
       ? { compliance_checklist: 'exists' }
       : undefined;
     const steps = createProposalSteps(fakeCallForSteps);
     return steps;
-  }, [proposalHasCompliance]);
+  }, [hasCompliance]);
 
   const { openDialog } = useModal();
   const user = useUser();
@@ -139,9 +151,15 @@ export const ProposalDetails = ({
     !userHasRole(user, 'CALL.MANAGER', proposal.call_uuid) &&
     (userHasRole(user, 'CALL.REVIEWER', proposal.call_uuid) ||
       userHasRole(user, 'CALL.PANEL_MEMBER', proposal.call_uuid));
+  const canReadTechnicalAssessment = canViewTechnicalAssessment({
+    user,
+    proposal,
+    workflowStates,
+    resourceRows,
+  });
   const canEditActiveStepChecklist =
     canEditStepChecklist ||
-    (activeStep?.step === 'technical_assessment' && !isApplicant);
+    (activeStep?.step === TECHNICAL_ASSESSMENT_STEP && !isApplicant);
 
   // The award exists once the allocation decision has opened. Reviewers and
   // panel members are never shown it, so they are not asked; the applicant is
@@ -198,7 +216,7 @@ export const ProposalDetails = ({
           params={{ proposal, canViewReviews: isCallManagerView }}
         />
         <ProjectDetailsSummary proposal={proposal} reviews={reviews} />
-        {proposalHasCompliance && (
+        {hasCompliance && (
           <div id="step-compliance">
             <ComplianceSummary proposal={proposal} />
           </div>
@@ -227,12 +245,16 @@ export const ProposalDetails = ({
             refetch={refetch}
           />
         )}
-        <TechnicalAssessmentSection proposal={proposal} />
+        <TechnicalAssessmentSection
+          proposal={proposal}
+          enabled={canReadTechnicalAssessment}
+        />
         <AccordionCard
           id="step-team"
           title={translate('Project team')}
           subtitle={translate('Team members and their roles in the project.')}
-          defaultOpen={!proposalHasCompliance}
+          isOpen={teamOpen ?? !hasCompliance}
+          onToggle={setTeamOpen}
         >
           <ProposalUsersListSummary
             scope={proposal}

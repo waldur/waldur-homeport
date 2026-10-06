@@ -7,11 +7,13 @@ import { describe, it, expect } from 'vitest';
 
 import { ModalProvider } from '@/modal/ModalContext';
 
+import { DASH_ESCAPE_CODE } from './constants';
 import { FilterContextProvider } from './FilterContextProvider';
 import { StringFilter } from './filters';
 import { tableInitialReducer } from './store';
 import { TableBody } from './TableBody';
 import { TableFilters } from './TableFilters';
+import { renderFieldOrDash } from './utils';
 
 export const ROW_UUID = 1;
 
@@ -281,5 +283,33 @@ describe('TableBody inline filter shortcut (hasFilterMenu regression)', () => {
     await user.click(inlineTrigger as HTMLElement);
     expect(inlineTrigger).toHaveAttribute('data-state', 'open');
     expect(await screen.findByText('Filter by')).toBeInTheDocument();
+  });
+});
+
+describe('TableBody copy button', () => {
+  const copyColumns = [
+    {
+      title: 'Member',
+      render: ({ row }) => renderFieldOrDash(row.name),
+      copyField: (row) => row.name,
+    },
+  ];
+
+  it('offers copying a cell that has a value', () => {
+    renderWrapper({
+      columns: copyColumns,
+      rows: [{ uuid: 1, name: 'Jane Roe' }],
+    });
+    expect(
+      screen.getByRole('button', { name: 'Copy to clipboard' }),
+    ).toBeInTheDocument();
+  });
+
+  it('offers nothing to copy when the value is missing', () => {
+    renderWrapper({ columns: copyColumns, rows: [{ uuid: 1, name: null }] });
+    expect(screen.getByText(DASH_ESCAPE_CODE)).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Copy to clipboard' }),
+    ).not.toBeInTheDocument();
   });
 });

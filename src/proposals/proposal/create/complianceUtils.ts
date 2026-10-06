@@ -64,3 +64,12 @@ export const extractComplianceAnswers = (
 
   return complianceAnswers;
 };
+
+/**
+ * True when the proposal was submitted under a compliance checklist. A proposal
+ * without one carries a null status; the checklist endpoint is the authority on
+ * whether the viewer may read the answers.
+ */
+export const proposalHasCompliance = (
+  proposal: { compliance_status?: unknown } | null | undefined,
+): boolean => !!proposal && proposal.compliance_status !== null;
