@@ -1066,6 +1066,26 @@
       "action_type": "create"
     }
   },
+  "Accept \"{name}\"? The awarded resources will be provisioned.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "proposal"
+    }
+  },
+  "Accept \"{name}\"? The awarded resources will be provisioned. They differ from what was requested; see Awarded resources.": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "proposal"
+    }
+  },
   "Accept \"{name}\"? The requested resources will be provisioned.": {
     "context": {
       "variables": {
@@ -2046,6 +2066,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Add awarded resource": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Add binding": {
     "context": {
       "feature_area": "personal-access-tokens"
@@ -2200,6 +2225,11 @@
   "Add individual redirect URIs that are allowed for this provider. Must be origin-only (HTTPS unless localhost, no paths/query/fragments, no trailing slashes). Leave empty to fall back to the HOMEPORT_URL branding setting (Administration → Branding) — verify that value is correct, otherwise SSO logins will redirect to the wrong host.": {
     "context": {
       "feature_area": "providers"
+    }
+  },
+  "Add item": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Add key": {
@@ -3987,6 +4017,11 @@
   "Amount of RAM in GB allocated to each load balancer node": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Amounts": {
+    "context": {
+      "primary_ui_type": "title"
     }
   },
   "An IPv4 or IPv6 network with its prefix length, for example 192.168.42.0/24 or 2001:db8::/64.": {
@@ -6436,6 +6471,7 @@
       "feature_area": "deploy"
     }
   },
+  "As requested": {},
   "Ask about offerings…": {
     "context": {
       "feature_area": "anonymous"
@@ -7557,6 +7593,36 @@
       "primary_ui_type": "label"
     }
   },
+  "Awarded": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "proposal"
+    }
+  },
+  "Awarded resource has been added.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "proposal"
+    }
+  },
+  "Awarded resource has been removed.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "proposal"
+    }
+  },
+  "Awarded resource has been updated.": {
+    "context": {
+      "primary_ui_type": "success_message",
+      "feature_area": "proposal"
+    }
+  },
+  "Awarded resources": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "proposals"
+    }
+  },
   "Back": {
     "context": {
       "feature_area": "consumption"
@@ -7854,6 +7920,11 @@
   "Behind pace": {
     "context": {
       "feature_area": "policy-watch"
+    }
+  },
+  "Being decided: what the allocation decision grants so far, beside the request.": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Belgium": {},
@@ -9687,6 +9758,7 @@
       "feature_area": "metrics"
     }
   },
+  "Changed": {},
   "Changed options": {
     "context": {
       "primary_ui_type": "title",
@@ -10897,6 +10969,11 @@
       "feature_area": "roles"
     }
   },
+  "Compare the amounts and offerings under Awarded resources before you respond.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Compare with": {
     "context": {
       "feature_area": "roles"
@@ -11456,6 +11533,11 @@
   "Configure at least one additional trusted user with root-level privileges and SSH access to the VM as a backup.": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "Configure award": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Configure checklists for organization onboarding process. View and edit existing checklists or create new ones.": {
@@ -14865,6 +14947,11 @@
       "feature_area": "debug"
     }
   },
+  "Decided and held until the round publishes its results: what the allocation decision grants, beside the request. Reopen the decision to change it.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Decimal places": {
     "context": {
       "feature_area": "update"
@@ -16290,6 +16377,11 @@
       "feature_area": "type-based"
     }
   },
+  "Differs from the request": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Digest configuration updated successfully.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -17450,6 +17542,11 @@
   "Edit available affiliations": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Edit awarded resource": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Edit canned response": {
@@ -31066,6 +31163,7 @@
       "feature_area": "project"
     }
   },
+  "Moved": {},
   "Mr": {
     "context": {
       "primary_ui_type": "label"
@@ -32312,6 +32410,11 @@
   "No allowed redirect URIs configured. The system will fall back to the HOMEPORT_URL setting. For multi-homeport deployments, at least one URI should be specified.": {
     "context": {
       "feature_area": "providers"
+    }
+  },
+  "No amount awarded yet.": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "No archived chats": {
@@ -34120,6 +34223,7 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "Not awarded": {},
   "Not carried over": {},
   "Not configured": {
     "context": {
@@ -34364,6 +34468,11 @@
   "Nothing here": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Nothing is awarded yet.": {
+    "context": {
+      "feature_area": "proposal"
     }
   },
   "Nothing is left running, so the credit stops being drawn. Any balance left at that point is still subject to the minimum monthly draw.": {
@@ -36349,6 +36458,11 @@
   "Optional note for the service provider, e.g. a PO number.": {
     "context": {
       "feature_area": "change-limits"
+    }
+  },
+  "Optional note on why the award differs from the request": {
+    "context": {
+      "feature_area": "resource-requests-step"
     }
   },
   "Optional notes about this assignment (visible to managers only).": {
@@ -39101,6 +39215,29 @@
   "Plan price": {
     "context": {
       "feature_area": "plan"
+    }
+  },
+  "Plan: {plan}": {
+    "context": {
+      "variables": {
+        "plan": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal"
+    }
+  },
+  "Plan: {plan} (requested {requested})": {
+    "context": {
+      "variables": {
+        "plan": {
+          "type": "unknown"
+        },
+        "requested": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal"
     }
   },
   "Planned maintenance windows and service updates": {
@@ -44354,6 +44491,12 @@
       "feature_area": "team"
     }
   },
+  "Remove awarded resource": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "proposal"
+    }
+  },
   "Remove component": {
     "context": {
       "feature_area": "options"
@@ -44604,6 +44747,16 @@
         }
       },
       "feature_area": "metrics"
+    }
+  },
+  "Remove {offering} from the award?": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal"
     }
   },
   "Remove {value}": {
@@ -45440,6 +45593,16 @@
     }
   },
   "Requested offerings, matched by offering and provider name on import.": {},
+  "Requested on {offering}": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "proposal"
+    }
+  },
   "Requested pausing": {
     "context": {
       "primary_ui_type": "title",
@@ -45463,6 +45626,11 @@
     }
   },
   "Requested resources": {},
+  "Requested:": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Requesting of new resources has been temporarily paused": {
     "context": {
       "feature_area": "access"
@@ -53850,6 +54018,11 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Summary of the award": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "Sunday": {
     "context": {
       "primary_ui_type": "label"
@@ -55303,6 +55476,11 @@
       "feature_area": "anonymous"
     }
   },
+  "The award differs from your request": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "The backend may not keep this precision": {
     "context": {
       "feature_area": "update"
@@ -56483,6 +56661,11 @@
   "The starting price covers what the plan fixes. Components you size yourself and metered usage are charged on top, at the rates above.": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "The step cannot be completed yet": {
+    "context": {
+      "feature_area": "workflow"
     }
   },
   "The subnet is created but left unrouted. Attach it later from a router, or connect it from the subnet itself.": {
@@ -58230,6 +58413,16 @@
   "To verify your right to represent a company in Estonia, we need to confirm your identity through the national authentication service (TARA).": {},
   "To verify your right to represent a company, we need to confirm your identity using supported authentication methods. This helps us keep the onboarding process secure.": {},
   "To verify your right to represent a company, we need to confirm your identity. This helps us ensure secure business registration.": {},
+  "To {offering}": {
+    "context": {
+      "variables": {
+        "offering": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
   "ToS acceptance statistics": {
     "context": {
       "feature_area": "tos"
@@ -62162,6 +62355,12 @@
       "feature_area": "auto-provisioning-rules"
     }
   },
+  "Unable to remove the awarded resource.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "proposal"
+    }
+  },
   "Unable to remove the external gateway.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -62579,6 +62778,12 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "roles"
+    }
+  },
+  "Unable to save the awarded resource.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "proposal"
     }
   },
   "Unable to save the mappings.": {
@@ -68147,6 +68352,16 @@
       "feature_area": "offering-merges"
     }
   },
+  "What the allocation decision granted, beside the request.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
+  "What the allocation decision grants. It starts as a copy of the request: change amounts, move an item to another offering of the call, or add and remove items.": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "What the merge changes": {
     "context": {
       "primary_ui_type": "title",
@@ -70027,6 +70242,11 @@
       "feature_area": "pubsub"
     }
   },
+  "awarded resources": {
+    "context": {
+      "feature_area": "proposal"
+    }
+  },
   "becomes": {
     "context": {
       "feature_area": "offering-merges"
@@ -71323,6 +71543,16 @@
   },
   "requested resources": {
     "context": {
+      "feature_area": "proposal"
+    }
+  },
+  "requested {amount}": {
+    "context": {
+      "variables": {
+        "amount": {
+          "type": "number"
+        }
+      },
       "feature_area": "proposal"
     }
   },

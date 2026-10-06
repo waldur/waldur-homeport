@@ -47,7 +47,9 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
           </span>
         </div>
       ) : null}
-      {showPurchaseOrder ? (
+      {/* A purchase order authorises what the applicant asked to spend; the
+          award does not collect another one. */}
+      {showPurchaseOrder && !props.data?.award ? (
         <PurchaseOrderFields
           isRequired={isRequired}
           existingAttachment={props.data?.existingAttachment}

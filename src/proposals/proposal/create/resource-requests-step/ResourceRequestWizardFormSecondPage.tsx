@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FunctionComponent, useEffect, useMemo } from 'react';
-import { useForm, useFormState } from 'react-final-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 import {
   marketplacePublicOfferingsRetrieve,
   proposalPublicCallsRetrieve,
@@ -11,6 +11,7 @@ import { SHORT_STALE_TIME, UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
+import { SelectField, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import { PrepaidMonthsModeProvider } from '@/marketplace/details/plan/prepaidDurationMode';
@@ -28,6 +29,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
   });
   const form = useForm();
   const { offering, mainOffering, plan, limits, attributes } = values;
+  const isAward = Boolean(props.data?.award);
 
   // A call that fixes the duration caps the subscription inside it.
   const { data: call } = useQuery({
@@ -47,8 +49,12 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
         ? DateTime.now().plus({ days: call.fixed_duration_in_days }).toISODate()
         : undefined,
       maxMonths: call?.max_prepaid_duration_months,
+      // An award keeps the period its item carries: it is not seeded with one
+      // the item never had, and no end date is measured from today — the
+      // award is provisioned from its length.
+      keepStored: isAward,
     }),
-    [call?.fixed_duration_in_days, call?.max_prepaid_duration_months],
+    [call?.fixed_duration_in_days, call?.max_prepaid_duration_months, isAward],
   );
 
   const queryData = useQuery({
@@ -84,6 +90,12 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
     } as unknown as typeof queryData.data;
   }, [queryData.data, offering]);
 
+  // Archived plans cannot be awarded; the backend refuses them.
+  const planOptions = useMemo(
+    () => (offeringDetails?.plans ?? []).filter((p: any) => !p.archived),
+    [offeringDetails],
+  );
+
   // Store the main offering, so that we can access to it in other steps
   useEffect(() => {
     if (offeringDetails && mainOffering?.uuid !== offeringDetails.uuid) {
@@ -114,14 +126,38 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
             <strong>{translate('Offering')}: </strong>
             {offeringDetails.category_title} / {offeringDetails.name}
           </p>
+          {isAward && (
+            // The award may put an item on another plan of its offering than
+            // the one the call offers; the request always takes the call's.
+            <Field<any> name="plan">
+              {({ input, meta }) => (
+                <div className="mb-5">
+                  <label className="form-label fw-bold" htmlFor={input.name}>
+                    {translate('Plan')}
+                  </label>
+                  <SelectField
+                    input={input}
+                    meta={meta}
+                    options={planOptions}
+                    getOptionValue={(option) => option.uuid}
+                    getOptionLabel={(option) => option.name}
+                    placeholder={translate('Select plan...')}
+                    noUpdateOnBlur
+                  />
+                </div>
+              )}
+            </Field>
+          )}
           {typeof plan === 'object' && (
             <>
               <div className="d-flex gap-6 border-bottom mb-5">
                 <div className="flex-grow-1">
-                  <p className="mb-0">
-                    <strong>{translate('Plan')}: </strong>
-                    {plan?.name}
-                  </p>
+                  {!isAward && (
+                    <p className="mb-0">
+                      <strong>{translate('Plan')}: </strong>
+                      {plan?.name}
+                    </p>
+                  )}
                 </div>
                 <PlanDescriptionButton />
               </div>
@@ -135,6 +171,16 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
                 />
               </PrepaidMonthsModeProvider>
             </>
+          )}
+          {isAward && (
+            <TextGroup
+              name="description"
+              label={translate('Description')}
+              maxLength={1000}
+              placeholder={translate(
+                'Optional note on why the award differs from the request',
+              )}
+            />
           )}
         </div>
       ) : queryData.isError ? (

@@ -11,6 +11,12 @@ export interface PrepaidMonthsMode {
   maxEndDate?: string;
   /** The cap in whole months as the backend states it; the tooltip names it. */
   maxMonths?: number | null;
+  /**
+   * Leaves the record's own period alone: no length is seeded where it has
+   * none, and no end date is derived from today. For editing a record whose
+   * period only changes when someone picks one.
+   */
+  keepStored?: boolean;
 }
 
 const PrepaidMonthsModeContext = createContext<PrepaidMonthsMode | null>(null);

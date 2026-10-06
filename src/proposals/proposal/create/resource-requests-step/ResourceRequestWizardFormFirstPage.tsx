@@ -87,23 +87,34 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
         ) : (
           <Field<any> name="offering" validate={required}>
             {({ input, meta }) => (
-              <SelectField
-                input={input}
-                meta={meta}
-                options={options}
-                isClearable={true}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.offering_name}
-                placeholder={translate('Select offering...')}
-                isLoading={isLoading}
-                noUpdateOnBlur
-                onChange={(value) => {
-                  input.onChange(value);
-                  if (value?.uuid !== offering?.uuid) {
-                    change('plan', value?.plan);
-                  }
-                }}
-              />
+              <>
+                <label className="form-label fw-bold" htmlFor={input.name}>
+                  {translate('Offering')}
+                </label>
+                <SelectField
+                  input={input}
+                  meta={meta}
+                  options={options}
+                  isClearable={true}
+                  getOptionValue={(option) => option.uuid}
+                  getOptionLabel={(option) => option.offering_name}
+                  placeholder={translate('Select offering...')}
+                  isLoading={isLoading}
+                  noUpdateOnBlur
+                  onChange={(value) => {
+                    input.onChange(value);
+                    if (value?.uuid !== offering?.uuid) {
+                      change('plan', value?.plan);
+                      // Amounts and options belong to the offering they were
+                      // entered for: carried over, they name components and
+                      // options the new offering does not have, and the
+                      // backend refuses the lot.
+                      change('limits', {});
+                      change('attributes', {});
+                    }
+                  }}
+                />
+              </>
             )}
           </Field>
         )}

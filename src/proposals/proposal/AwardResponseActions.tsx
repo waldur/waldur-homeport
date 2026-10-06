@@ -3,10 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { proposalProposalsCompleteWorkflowStep } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { AwardComparisonRow, awardDiffers } from '@/proposals/awardedResources';
 import { usesCallVocabulary } from '@/proposals/presentation';
 import { useUser } from '@/workspace/hooks';
 
@@ -21,6 +22,8 @@ import { isProposalApplicant } from './applicantTimeline';
 interface AwardResponseActionsProps {
   proposal: Proposal;
   refetch: () => void;
+  /** The award set against the request, once the applicant may read it. */
+  awardRows?: AwardComparisonRow[];
 }
 
 // Applicant-facing accept/decline control for the award_response step (WAL-9349).
@@ -31,8 +34,14 @@ interface AwardResponseActionsProps {
 export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
   proposal,
   refetch,
+  awardRows,
 }) => {
   const user = useUser();
+  // What is provisioned on acceptance is the award, which the allocation
+  // decision may have changed; the applicant should not accept thinking it is
+  // their request.
+  const hasAward = Boolean(awardRows?.length);
+  const differs = hasAward && awardDiffers(awardRows);
 
   const { data } = useQuery({
     queryKey: proposalWorkflowStatesKey(proposal.uuid),
@@ -58,15 +67,25 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
       title: usesCallVocabulary()
         ? translate('Accept award')
         : translate('Accept'),
-      body: usesCallVocabulary()
-        ? translate(
-            'Accept the award for "{name}"? The requested resources will be provisioned.',
-            { name: proposal.name },
-          )
-        : translate(
-            'Accept "{name}"? The requested resources will be provisioned.',
-            { name: proposal.name },
-          ),
+      body: hasAward
+        ? differs
+          ? translate(
+              'Accept "{name}"? The awarded resources will be provisioned. They differ from what was requested; see Awarded resources.',
+              { name: proposal.name },
+            )
+          : translate(
+              'Accept "{name}"? The awarded resources will be provisioned.',
+              { name: proposal.name },
+            )
+        : usesCallVocabulary()
+          ? translate(
+              'Accept the award for "{name}"? The requested resources will be provisioned.',
+              { name: proposal.name },
+            )
+          : translate(
+              'Accept "{name}"? The requested resources will be provisioned.',
+              { name: proposal.name },
+            ),
     },
     successMessage: usesCallVocabulary()
       ? translate('Award accepted.')
@@ -122,6 +141,17 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
 
   return (
     <>
+      {differs && (
+        <AlertItem
+          variant="warning"
+          type="floating"
+          className="mt-2"
+          title={translate('The award differs from your request')}
+          body={translate(
+            'Compare the amounts and offerings under Awarded resources before you respond.',
+          )}
+        />
+      )}
       <BaseButton
         variant="primary"
         onClick={() => acceptAward.mutate()}
