@@ -1,7 +1,13 @@
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback, useMemo } from 'react';
-import { NestedRound, ProtectedRound } from 'waldur-js-client';
+import {
+  NestedRound,
+  proposalPublicCallsCheckEligibilityRetrieve,
+  ProtectedRound,
+} from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -42,8 +48,36 @@ export const usePublicCallApply = (
     return items.find((item) => item.status.value === 'open') || null;
   }, [call, preferredRound]);
 
-  const hidden =
-    isFeatureVisible(MarketplaceFeatures.call_only) && !call.external_url;
+  const callOnly = isFeatureVisible(MarketplaceFeatures.call_only);
+  const hidden = callOnly && !call.external_url;
+
+  // Asked only where the answer can be "no": the endpoint needs a user, and in
+  // call-only mode Apply leaves for the call's external site. Unrestricted
+  // calls skip it, so a list of call cards costs no request per card.
+  // A strict boolean: react-query reads `enabled: undefined` as enabled.
+  const checksEligibility =
+    !!user && call.has_eligibility_restrictions === true && !callOnly;
+  const { data: eligibility, isLoading: eligibilityLoading } = useQuery({
+    queryKey: ['PublicCallEligibility', call.uuid, user?.uuid],
+    queryFn: () =>
+      proposalPublicCallsCheckEligibilityRetrieve({
+        path: { uuid: call.uuid },
+      }).then((response) => response.data),
+    enabled: checksEligibility,
+    staleTime: SHORT_STALE_TIME,
+    refetchOnWindowFocus: false,
+  });
+  // A failed check leaves Apply enabled: proposal creation re-validates the
+  // user, so the backend still refuses an ineligible applicant.
+  const ineligible = eligibility?.is_eligible === false;
+
+  const disabledReason = !activeRound
+    ? translate('No open round available.')
+    : ineligible
+      ? translate('You are not eligible to apply to this call.')
+      : eligibilityLoading
+        ? translate('Checking eligibility…')
+        : undefined;
 
   const handleApply = useCallback(
     (e?: React.MouseEvent) => {
@@ -53,6 +87,10 @@ export const usePublicCallApply = (
           toParams: { call_uuid: call.uuid },
         });
         showInfo(translate('Please log in to submit a proposal.'));
+        e?.preventDefault();
+        return;
+      }
+      if (ineligible) {
         e?.preventDefault();
         return;
       }
@@ -71,8 +109,8 @@ export const usePublicCallApply = (
       }
       e?.preventDefault();
     },
-    [activeRound, user, router, call],
+    [activeRound, ineligible, user, router, call],
   );
 
-  return { activeRound, hidden, handleApply };
+  return { activeRound, hidden, handleApply, ineligible, disabledReason };
 };
