@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
+import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { inActionsMenu, renderWithProviders } from '@/test/harness';
@@ -86,5 +87,20 @@ describe('OpenstackTenantActions', () => {
       .queryAllByRole('menuitem')
       .map((el) => el.textContent);
     expect(buttonLabels).not.toContain('Change quotas');
+  });
+
+  it('offers an end date change request to a user who cannot set the date', async () => {
+    vi.mocked(marketplaceResourcesOfferingRetrieve).mockResolvedValue({
+      data: {
+        plugin_options: { enable_resource_end_date_change_requests: true },
+        components: [],
+      },
+    } as any);
+
+    renderComponent({ is_staff: false, permissions: [] });
+
+    expect(
+      await screen.findByText('Request end date change'),
+    ).toBeInTheDocument();
   });
 });
