@@ -7,18 +7,6 @@
     padding-right: 1.85rem;
   }
 
-  [data-testid='action-item'],
-  [role='option'],
-  [role='menuitem'] {
-    &:is(:hover, :focus, :active, [data-highlighted], .active):not(
-        [data-disabled],
-        :disabled,
-        .disabled
-      ) {
-      box-shadow: inset 3px 0 0 var(--bs-primary);
-    }
-  }
-
   .input-group {
     width: 100% !important;
   }
