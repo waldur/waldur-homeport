@@ -59,6 +59,17 @@ describe('ResourceActionComponent', () => {
     expect(screen.getByText('Show all')).toBeInTheDocument();
   });
 
+  it("keeps a nested resource's few type actions in the menu", async () => {
+    // A router or subnet carries only its own actions; collapsing three rows
+    // behind "Show all" would hide them for no gain, and the e2e suite drives
+    // them straight from the menu.
+    await renderMenu({ resourceTypeActions: [PullAction, ShowUsageAction] });
+
+    expect(screen.getByText('Pull')).toBeInTheDocument();
+    expect(screen.getByText('Show usage')).toBeInTheDocument();
+    expect(screen.queryByText('Show all')).not.toBeInTheDocument();
+  });
+
   it('drops the group captions in the menu', async () => {
     await renderMenu({
       customerResourceActions: [EditAction],

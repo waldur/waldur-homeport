@@ -46,6 +46,14 @@ export const ResourceActionComponent: FunctionComponent<
 }) => {
   const { openDialog } = useModal();
 
+  // Only the marketplace menu is long enough to need collapsing: it carries
+  // the customer, provider and staff groups, twenty-odd rows between them.
+  const isLongMenu = Boolean(
+    listProps.customerResourceActions?.length ||
+    listProps.providerResourceActions?.length ||
+    listProps.staffActions?.length,
+  );
+
   const showAll = () =>
     openDialog(ModalActionsDialog, {
       name: listProps.resource?.name,
@@ -71,6 +79,11 @@ export const ResourceActionComponent: FunctionComponent<
         <Menu.Item disabled>{translate('Loading actions')}</Menu.Item>
       ) : error ? (
         <Menu.Item disabled>{translate('Unable to load actions')}</Menu.Item>
+      ) : !isLongMenu ? (
+        // A nested resource (router, subnet, port) carries only its own few
+        // type actions. Collapsing those behind "Show all" would hide a
+        // three-row menu behind a click, so they stay as they were.
+        <ResourceActionsList {...listProps} />
       ) : (
         <>
           <ActionList hideGroupName hideNonImportant>
