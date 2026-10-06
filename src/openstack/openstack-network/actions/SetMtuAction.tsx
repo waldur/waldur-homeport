@@ -6,11 +6,13 @@ import { validateState } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 
+import { validateNetworkOwnerAction } from './validators';
+
 const SetMtuDialog = lazyComponent(() =>
   import('./SetMtuDialog').then((module) => ({ default: module.SetMtuDialog })),
 );
 
-const validators = [validateState('OK')];
+const validators = [validateState('OK'), validateNetworkOwnerAction];
 
 export const SetMtuAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem
