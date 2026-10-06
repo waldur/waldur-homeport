@@ -57540,6 +57540,16 @@
       "feature_area": "steps"
     }
   },
+  "This network is shared by your cloud provider. Only the provider can change it.": {},
+  "This network is shared with you by {tenant}. Only its owner can change it.": {
+    "context": {
+      "variables": {
+        "tenant": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "This offering": {
     "context": {
       "feature_area": "roles"

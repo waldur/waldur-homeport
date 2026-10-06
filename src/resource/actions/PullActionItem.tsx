@@ -1,12 +1,12 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { ReactElement } from 'react';
+import { ReactElement, useMemo } from 'react';
 
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ActionItem } from './ActionItem';
 import { validateState } from './base';
-import { ActionContext } from './types';
+import { ActionContext, ActionValidator } from './types';
 import { useValidators } from './useValidators';
 
 interface PullActionItemProps<T> {
@@ -16,6 +16,8 @@ interface PullActionItemProps<T> {
   iconClass?: string;
   as?;
   refetch?;
+  /** Checks on top of the state and backend ID ones every pull needs. */
+  validators?: ActionValidator<T>[];
 }
 
 const hasBackendId = (ctx: ActionContext) =>
@@ -23,7 +25,7 @@ const hasBackendId = (ctx: ActionContext) =>
     ? undefined
     : translate('Resource does not have backend ID.');
 
-const validators = [validateState('OK', 'ERRED'), hasBackendId];
+const baseValidators = [validateState('OK', 'ERRED'), hasBackendId];
 
 export const PullActionItem = <
   T extends { uuid?: string; backend_id?: string },
@@ -37,6 +39,13 @@ export const PullActionItem = <
     refetch: props.refetch,
   });
 
+  const validators = useMemo(
+    () =>
+      props.validators
+        ? [...baseValidators, ...props.validators]
+        : baseValidators,
+    [props.validators],
+  );
   const { tooltip, disabled } = useValidators(validators, props.resource);
 
   return (

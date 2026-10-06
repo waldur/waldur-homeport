@@ -6,13 +6,15 @@ import { validateState } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 
+import { validateNetworkOwnerAction } from './validators';
+
 const ShareNetworkDialog = lazyComponent(() =>
   import('./ShareNetworkDialog').then((module) => ({
     default: module.ShareNetworkDialog,
   })),
 );
 
-const validators = [validateState('OK')];
+const validators = [validateState('OK'), validateNetworkOwnerAction];
 
 export const ShareNetworkAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem

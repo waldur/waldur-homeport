@@ -6,13 +6,15 @@ import { validateState } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 
+import { validateNetworkOwnerAction } from './validators';
+
 const EditNetworkDialog = lazyComponent(() =>
   import('./EditNetworkDialog').then((module) => ({
     default: module.EditNetworkDialog,
   })),
 );
 
-const validators = [validateState('OK')];
+const validators = [validateState('OK'), validateNetworkOwnerAction];
 
 export const EditNetworkAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem

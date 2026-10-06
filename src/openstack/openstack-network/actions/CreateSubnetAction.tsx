@@ -6,13 +6,15 @@ import { validateState } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 
+import { validateNetworkOwnerAction } from './validators';
+
 const CreateSubnetDialog = lazyComponent(() =>
   import('./CreateSubnetDialog').then((module) => ({
     default: module.CreateSubnetDialog,
   })),
 );
 
-const validators = [validateState('OK')];
+const validators = [validateState('OK'), validateNetworkOwnerAction];
 
 export const CreateSubnetAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem
