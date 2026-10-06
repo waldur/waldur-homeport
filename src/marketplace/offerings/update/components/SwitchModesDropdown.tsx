@@ -2,7 +2,7 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { OfferingSectionProps } from '../types';
 
@@ -11,8 +11,8 @@ import { SwitchBillingModeAction } from './SwitchBillingModeAction';
 
 export const SwitchModesDropdown: FC<OfferingSectionProps> = (props) => {
   return (
-    <ActionsDropdownComponent
-      labeled
+    <ActionsMenu
+      toggle="labeled"
       label={
         <>
           <ArrowsClockwiseIcon weight="bold" className="me-1" />
@@ -23,6 +23,6 @@ export const SwitchModesDropdown: FC<OfferingSectionProps> = (props) => {
     >
       <SwitchBillingModeAction {...props} />
       <ChangeStorageModeAction {...props} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

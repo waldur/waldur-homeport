@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { ActionsDropdownComponent } from './ActionsDropdown';
+import { ActionsMenu } from './ActionsDropdown';
 import { TableExportButton } from './TableExportButton';
 import { TableProps } from './types';
 
@@ -12,13 +12,13 @@ interface TableMoreActionsProps extends TableProps {
 
 export const TableMoreActions: FC<TableMoreActionsProps> = (props) => {
   return (
-    <ActionsDropdownComponent
-      labeled
-      drop="down"
+    <ActionsMenu
+      toggle="labeled"
+      side="bottom"
       size={props.size ?? props.dropdownActionsSize ?? 'lg'}
     >
       {props.showExport && <TableExportButton {...props} asDropdownItem />}
       {props.actions}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

@@ -23,7 +23,11 @@ import { useUser } from '@/workspace/hooks';
 import { ReviewCheck } from '@/workspace/ReviewCheck';
 import { getImpersonatorUser } from '@/workspace/selectors';
 
-import { LayoutContext, LayoutContextInterface } from './context';
+import {
+  LayoutContext,
+  LayoutContextInterface,
+  useExtraAnnouncementBars,
+} from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppFooter } from './footer/AppFooter';
 import { Announcements } from './header/announcements/Announcements';
@@ -56,8 +60,8 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
   const [fullPage, setFullPage] = useState(false);
   const [PageHero, setPageHero] = useState<React.ReactNode>(null);
   const [PageBar, setPageBar] = useState<React.ReactNode>(null);
-  const [ExtraAnnouncementBar, setExtraAnnouncementBar] =
-    useState<React.ReactNode>(null);
+  const [ExtraAnnouncementBars, setExtraAnnouncementBar] =
+    useExtraAnnouncementBars();
   const [ExtraToolbar, setExtraToolbar] = useState<React.ReactNode>(null);
   const { state: sidebarState, setOpenMobile } = useSidebar();
 
@@ -164,7 +168,7 @@ const LayoutContent: React.FC<PropsWithChildren> = ({ children }) => {
                   <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
                 )}
                 <BreadcrumbMain mobile />
-                <Announcements extraAnnouncement={ExtraAnnouncementBar} />
+                <Announcements extraAnnouncement={ExtraAnnouncementBars} />
                 <WarningBar />
                 <OfferingUsersWarningBar />
                 <RemovedProjectWarningBar />

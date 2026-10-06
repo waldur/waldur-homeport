@@ -1,4 +1,21 @@
 .search-result-item {
+  position: relative;
+
+  // The link and the trailing controls are siblings, so the link has to be
+  // stretched back over the row to keep the whole row clickable. The
+  // controls are lifted above that overlay so they stay clickable in turn.
+  &__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &__controls {
+    position: relative;
+    z-index: 2;
+  }
+
   .btn-fav {
     background-color: transparent;
     border: none;
@@ -17,9 +34,12 @@
   }
 
   // Zero opacity still leaves the button in the tab order, so focus on the row
-  // or on the star itself reveals it the way hovering the row does.
+  // or on the star itself reveals it the way hovering the row does; so does
+  // the keyboard highlight of a breadcrumb dropdown's row (a downshift option).
   &:hover .btn-fav,
   &:focus-within .btn-fav,
+  &.active .btn-fav,
+  &:has([aria-selected='true']) .btn-fav,
   .btn-fav.show {
     opacity: 1;
     pointer-events: auto;

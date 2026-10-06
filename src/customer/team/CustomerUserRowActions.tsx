@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { CustomerUser } from 'waldur-js-client';
 
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { UserDetailsButton } from '@/user/UserDetailsButton';
 
 import { AddProjectUserButton } from './AddProjectUserButton';
@@ -17,11 +17,11 @@ export const CustomerUserRowActions: FunctionComponent<
   CustomerUserRowActionsProps
 > = ({ row, refetch }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <UserDetailsButton userId={row.uuid} />
       <UserEditButton customer={row} refetch={refetch} />
       <AddProjectUserButton customer={row} refetch={refetch} asDropdownItem />
       <UserRemoveButton customer={row} refetch={refetch} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

@@ -9,6 +9,7 @@ import { FC, useCallback, useState } from 'react';
 import { AlertItem } from 'waldur-ui';
 import { BaseButton } from 'waldur-ui';
 
+import { saveFile } from '@/core/saveFile';
 import { MonacoEditor } from '@/form/MonacoEditor';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -39,14 +40,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
 
   const handleDownload = useCallback(() => {
     const blob = new Blob([config], { type: 'text/yaml' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'waldur-site-agent-config.yaml';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    saveFile(blob, 'waldur-site-agent-config.yaml');
   }, [config]);
 
   // Check if config contains placeholder secrets

@@ -6,7 +6,7 @@ import { GroupInvitationCancelButton } from '@/invitations/GroupInvitationCancel
 import { GroupInvitationDeleteButton } from '@/invitations/GroupInvitationDeleteButton';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser, useCustomer } from '@/workspace/hooks';
 
 interface GroupInvitationRowActionsProps {
@@ -24,10 +24,10 @@ export const GroupInvitationRowActions: FunctionComponent<
     customerId: customer.uuid,
   });
   return canCancel ? (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <GroupInvitationEditButton row={row} refetch={refetch} />
       <GroupInvitationCancelButton invitation={row} refetch={refetch} />
       <GroupInvitationDeleteButton row={row} refetch={refetch} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   ) : null;
 };

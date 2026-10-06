@@ -10,7 +10,7 @@ Use the `rowActions` prop to render action menus on each row.
 
 ### 1. Dropdown Action Menu (Recommended)
 
-For a clean and consistent UI, group row-level actions into a 3-dots dropdown menu using `ActionsDropdownComponent` and `ActionItem`:
+For a clean and consistent UI, group row-level actions into a 3-dots dropdown menu using `ActionsDropdown` (or `ActionsMenu`) and `ActionItem`:
 
 ```tsx
 import { FC } from 'react';
@@ -18,7 +18,7 @@ import { PencilSimple, Trash } from '@phosphor-icons/react';
 
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 interface RowActionsProps {
   row: MyRowType;
@@ -34,7 +34,7 @@ export const RowActions: FC<RowActionsProps> = ({ row, refetch }) => {
   }
 
   return (
-    <ActionsDropdownComponent>
+    <ActionsDropdown>
       <ActionItem
         title={translate('Edit')}
         action={() => handleEdit(row)}
@@ -47,7 +47,7 @@ export const RowActions: FC<RowActionsProps> = ({ row, refetch }) => {
         className="text-danger"
         iconColor="danger"
       />
-    </ActionsDropdownComponent>
+    </ActionsDropdown>
   );
 };
 
@@ -56,19 +56,19 @@ export const RowActions: FC<RowActionsProps> = ({ row, refetch }) => {
   {...tableProps}
   columns={columns}
   rowActions={({ row }) => <RowActions row={row} refetch={tableProps.fetch} />}
-/>
+/>;
 ```
 
 #### ActionItem Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `title` | `string` | Action label text. |
-| `action` | `() => void` | Click handler callback. |
-| `iconNode` | `ReactNode` | Icon element (use Phosphor icons with `weight="bold"`). |
-| `disabled` | `boolean` | Disables the menu item. |
-| `className` | `string` | Custom CSS class string (e.g. `'text-danger'`). |
-| `iconColor` | `string` | Visual variant color theme (e.g. `'danger'`, `'success'`). |
+| Property    | Type         | Description                                                |
+| ----------- | ------------ | ---------------------------------------------------------- |
+| `title`     | `string`     | Action label text.                                         |
+| `action`    | `() => void` | Click handler callback.                                    |
+| `iconNode`  | `ReactNode`  | Icon element (use Phosphor icons with `weight="bold"`).    |
+| `disabled`  | `boolean`    | Disables the menu item.                                    |
+| `className` | `string`     | Custom CSS class string (e.g. `'text-danger'`).            |
+| `iconColor` | `string`     | Visual variant color theme (e.g. `'danger'`, `'success'`). |
 
 ### 2. Inline Row Action Buttons
 
@@ -89,7 +89,7 @@ const RowActions = ({ row }) => (
   </div>
 );
 
-<Table {...tableProps} columns={columns} rowActions={RowActions} />
+<Table {...tableProps} columns={columns} rowActions={RowActions} />;
 ```
 
 ---
@@ -110,7 +110,7 @@ const ExpandableRowContent = ({ row }) => (
   {...tableProps}
   columns={columns}
   expandableRow={ExpandableRowContent}
-/>
+/>;
 ```
 
 ### Conditional Expandability (`isRowExpandable`)
@@ -142,13 +142,15 @@ import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const BulkDeleteButton = ({ rows, refetch }) => {
   const { mutate, isPending } = useManagedMutation({
-    mutationFn: () => deleteMultipleItems(rows.map(r => r.uuid)),
+    mutationFn: () => deleteMultipleItems(rows.map((r) => r.uuid)),
     successMessage: translate('Selected items deleted.'),
     refetch,
     confirmation: {
       title: translate('Delete selected items'),
-      body: translate('Are you sure you want to delete {count} items?', { count: rows.length }),
-    }
+      body: translate('Are you sure you want to delete {count} items?', {
+        count: rows.length,
+      }),
+    },
   });
 
   return (
@@ -166,5 +168,5 @@ const BulkDeleteButton = ({ rows, refetch }) => {
   columns={columns}
   enableMultiSelect
   multiSelectActions={BulkDeleteButton}
-/>
+/>;
 ```

@@ -184,3 +184,38 @@
     overflow: hidden;
   }
 }
+
+/**
+ * Dropdown/menu panel entrance (waldur-ui's DropdownMenu, NavMenu and
+ * popover panels), ported from Metronic's menu-sub-dropdown-animation-*:
+ * fade in while sliding 0.75rem toward the trigger, 0.3s ease. `-up` is the
+ * default (the panel starts below its resting place); `-down` is for a
+ * panel that opens upwards (data-side="top").
+ *
+ * Keyframes, not a `@starting-style` transition: until Radix has measured
+ * the panel, it parks the popper wrapper off-screen and forces
+ * `animation: none` on the content, so an animation starts only once the
+ * panel is in place. A transition is not held back and plays out while the
+ * panel is still off-screen, so it visibly jumps in.
+ */
+@keyframes waldur-menu-enter-up {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes waldur-menu-enter-down {
+  from {
+    opacity: 0;
+    translate: 0 -0.75rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}

@@ -110,11 +110,11 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'call_only',
-        description: translate('Allow marketplace to serve only as aggregator of call info.'),
+        description: translate('List calls that are run outside Waldur: each call links to an external URL where applications are made, and rounds, proposals and reviews are hidden.'),
       },
       {
         key: 'catalogue_only',
-        description: translate('Allow marketplace to function as a catalogue only.'),
+        description: translate('Run the marketplace as a catalogue: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.'),
       },
       {
         key: 'conceal_audit_log_from_end_users',
@@ -174,7 +174,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'show_call_management_functionality',
-        description: translate('Enabled display of call management functionality.'),
+        description: translate('Show call management: the call-managing organization\'s workspace, providers\' requests for offerings, and proposal reports. Independent of SERVICE_ACCESS_MODE, which governs how applicants reach services.'),
       },
       {
         key: 'show_experimental_ui_components',

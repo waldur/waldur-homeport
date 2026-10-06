@@ -49,6 +49,7 @@ const MEDIA_MSGTYPES: Record<string, PreviewKind> = {
 function classifyMessage(content: any): PreviewInfo {
   const msgtype: string = content.msgtype ?? 'm.text';
   const mediaKind = MEDIA_MSGTYPES[msgtype];
+  const body = typeof content.body === 'string' ? content.body : '';
 
   if (mediaKind) {
     // MSC3245 marks an m.audio clip as a voice note — surface a distinct
@@ -60,8 +61,8 @@ function classifyMessage(content: any): PreviewInfo {
       typeof content.info?.size === 'number' ? content.info.size : undefined;
     return {
       kind: isVoice ? 'voice' : mediaKind,
-      text: content.body ?? '',
-      fileName: content.body ?? '',
+      text: body,
+      fileName: body,
       fileSize: size,
     };
   }
@@ -72,7 +73,7 @@ function classifyMessage(content: any): PreviewInfo {
     content.format === 'org.matrix.custom.html' &&
     typeof content.formatted_body === 'string'
       ? htmlToPlainText(content.formatted_body)
-      : (content.body ?? '');
+      : body;
   return { kind: 'text', text };
 }
 

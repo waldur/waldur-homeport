@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { OpenStackPool } from 'waldur-js-client';
 
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { AddHealthMonitorAction } from './actions/AddHealthMonitorAction';
 import { AddMemberAction } from './actions/AddMemberAction';
@@ -15,11 +15,11 @@ interface PoolRowActionsProps {
 }
 
 export const PoolRowActions: FC<PoolRowActionsProps> = ({ row, fetch }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <AddMemberAction resource={row} refetch={fetch} />
     <AddHealthMonitorAction resource={row} refetch={fetch} />
     <EditPoolAction resource={row} refetch={fetch} />
     <PullPoolAction resource={row} refetch={fetch} />
     <DestroyPoolButton resource={row} refetch={fetch} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );

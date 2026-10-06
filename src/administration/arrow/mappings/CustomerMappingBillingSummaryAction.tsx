@@ -1,10 +1,11 @@
 import { ChartBarIcon } from '@phosphor-icons/react';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
 
 const CustomerBillingSummaryDialog = lazyComponent(() =>
   import('./CustomerBillingSummaryDialog').then((module) => ({
@@ -20,15 +21,16 @@ export const CustomerMappingBillingSummaryAction = ({
   const { openDialog } = useModal();
 
   return (
-    <ActionItem
-      title={translate('Billing summary')}
-      action={() => {
+    <Menu.Item
+      icon={<ChartBarIcon weight="bold" />}
+      onSelect={() => {
         openDialog(CustomerBillingSummaryDialog, {
           resolve: { mapping: row },
           size: 'xl',
         });
       }}
-      iconNode={<ChartBarIcon weight="bold" />}
-    />
+    >
+      {translate('Billing summary')}
+    </Menu.Item>
   );
 };

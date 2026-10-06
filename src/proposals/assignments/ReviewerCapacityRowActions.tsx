@@ -6,7 +6,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 const EditCapacityDialog = lazyComponent(() =>
   import('./EditCapacityDialog').then((m) => ({
@@ -31,12 +31,12 @@ export const ReviewerCapacityRowActions: FC<
   }, [row, refetch, openDialog]);
 
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <ActionItem
         title={translate('Edit capacity')}
         action={handleEdit}
         iconNode={<PencilSimpleIcon weight="bold" />}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

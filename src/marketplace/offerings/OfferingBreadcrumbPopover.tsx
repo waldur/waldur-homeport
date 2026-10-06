@@ -3,7 +3,6 @@ import { Offering, ServiceProvider } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { BreadcrumbDropdown } from '@/navigation/header/breadcrumb/BreadcrumbDropdown';
-import { BreadcrumbSearchItem } from '@/navigation/header/breadcrumb/BreadcrumbSearchItem';
 
 import { getStates } from './list/OfferingStateFilter';
 
@@ -35,20 +34,17 @@ export const OfferingBreadcrumbPopover = ({
         options: getStates(),
       },
     ]}
-    RowComponent={({ row }) => (
-      <BreadcrumbSearchItem
-        to={
-          page === 'edit'
-            ? 'marketplace-offering-update'
-            : 'marketplace-offering-details'
-        }
-        params={{ offering_uuid: row.uuid }}
-        image={row.thumbnail}
-        title={row.name}
-        subtitle={row.category_title}
-        isCurrent={row.uuid === offering?.uuid}
-      />
-    )}
+    getItem={(row) => ({
+      to:
+        page === 'edit'
+          ? 'marketplace-offering-update'
+          : 'marketplace-offering-details',
+      params: { offering_uuid: row.uuid },
+      image: row.thumbnail,
+      title: row.name,
+      subtitle: row.category_title,
+      isCurrent: row.uuid === offering?.uuid,
+    })}
     emptyMessage={translate('There are no offerings.')}
     close={close}
   />

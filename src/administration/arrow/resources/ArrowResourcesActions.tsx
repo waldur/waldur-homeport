@@ -1,7 +1,7 @@
 import type { Resource } from 'waldur-js-client';
 
 import { SetBackendIdAction } from '@/marketplace/resources/SetBackendIdAction';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { SyncConsumptionHistoryAction } from './SyncConsumptionHistoryAction';
 import { ViewConsumptionHistoryAction } from './ViewConsumptionHistoryAction';
@@ -16,10 +16,10 @@ export const ArrowResourcesActions = ({
   refetch,
 }: ArrowResourcesActionsProps) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <SetBackendIdAction resource={row} refetch={refetch} />
       <ViewConsumptionHistoryAction row={row} refetch={refetch} />
       <SyncConsumptionHistoryAction row={row} refetch={refetch} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

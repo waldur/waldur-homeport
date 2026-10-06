@@ -18,10 +18,7 @@ import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import {
-  ActionsDropdown,
-  ActionsDropdownComponent,
-} from '@/table/ActionsDropdown';
+import { ActionsDropdown, ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
@@ -93,14 +90,14 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
             {translate('Team')}
           </span>
           <div className="d-flex align-items-center gap-2">
-            <ActionsDropdownComponent
-              labeled
+            <ActionsMenu
+              toggle="labeled"
               size="sm"
               variant="tertiary"
               label={translate('Actions')}
             >
               <ResourcePermissionsLogButton scopeUrl={projectScopeUrl} />
-            </ActionsDropdownComponent>
+            </ActionsMenu>
             {canManage && resource ? (
               <ResourceTeamAddDropdown
                 scope="resource_project"

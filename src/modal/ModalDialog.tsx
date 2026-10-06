@@ -1,10 +1,13 @@
+import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { Modal } from 'react-bootstrap';
 
 import { FeaturedIcon, FeaturedIconVariant } from 'waldur-ui';
 
 import { RadialBg } from '@/navigation/header/search/RadialBg';
+
+import { ModalShellContext } from './ModalShell';
 
 interface ModalDialogProps {
   title?: ReactNode;
@@ -25,6 +28,24 @@ interface ModalDialogProps {
   extraClassName?: string;
   onHide?(): void;
 }
+
+/**
+ * The visible title. In a ModalShell that has no name of its own (a string
+ * `title`), it names the dialog, as Radix's Dialog.Title.
+ */
+const ModalTitle: FC<{ children: ReactNode }> = ({ children }) => {
+  const shell = useContext(ModalShellContext);
+  const title = (
+    <Modal.Title className="fw-bold" as="h3">
+      {children}
+    </Modal.Title>
+  );
+  return shell && !shell.named && children ? (
+    <Dialog.Title asChild>{title}</Dialog.Title>
+  ) : (
+    title
+  );
+};
 
 export const ModalDialog: FC<ModalDialogProps> = ({
   closeButton = true,
@@ -69,9 +90,7 @@ export const ModalDialog: FC<ModalDialogProps> = ({
               />
             </>
           )}
-          <Modal.Title className="fw-bold" as="h3">
-            {title}
-          </Modal.Title>
+          <ModalTitle>{title}</ModalTitle>
           {subtitle && <h6 className="modal-subtitle">{subtitle}</h6>}
         </div>
         {actions}

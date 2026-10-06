@@ -9,12 +9,6 @@ import { inActionsMenu } from '@/test/harness';
 
 import { EditModalButton } from './EditModalButton';
 
-vi.mock('@/marketplace/resources/actions/ResourceActionMenuContext', () => ({
-  ResourceActionMenuContext: {
-    Provider: ({ children }: { children: React.ReactNode }) => children,
-  },
-}));
-
 interface MockRow {
   uuid: string;
   name: string;

@@ -15,7 +15,7 @@ import { useOrderFormData } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableProps } from '@/table/types';
@@ -40,13 +40,13 @@ const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
     });
   };
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <ActionItem
         title={translate('Show rules')}
         action={callback}
         iconNode={<EyeIcon weight="bold" />}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 

@@ -117,11 +117,11 @@
 // letting the desktop one wrap or clip. Above the threshold the default desktop
 // pager stays, so the page numbers are kept whenever there is room for them.
 @container helpdesk-list (max-width: 680px) {
-  .helpdesk-expanded-list .table-pagination.d-md-block {
+  .helpdesk-expanded-list [data-pagination-layout='desktop'] {
     display: none !important;
   }
 
-  .helpdesk-expanded-list .table-pagination.d-md-none {
+  .helpdesk-expanded-list [data-pagination-layout='mobile'] {
     display: flex !important;
   }
 }

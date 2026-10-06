@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
 import { translate } from '@/i18n';
 import { GenericPermission } from '@/permissions/types';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { TeamScopeType } from './teamApi';
 import { UserRemoveButton, useCanRemoveTeamMember } from './UserRemoveButton';
@@ -79,7 +79,7 @@ export const UsersList: FC<UsersListProps> = ({
           ? null
           : ({ row }) =>
               canRemove(row) || rowHasExtra(row) ? (
-                <ActionsDropdownComponent>
+                <ActionsMenu>
                   {rowHasExtra(row) ? <ExtraRowActions row={row} /> : null}
                   {canRemove(row) ? (
                     <UserRemoveButton
@@ -91,11 +91,11 @@ export const UsersList: FC<UsersListProps> = ({
                       disabledReason={getRemoveDisabledReason?.(row)}
                     />
                   ) : null}
-                </ActionsDropdownComponent>
+                </ActionsMenu>
               ) : (
-                <ActionsDropdownComponent disabled tooltip>
+                <ActionsMenu disabled tooltip>
                   {null}
-                </ActionsDropdownComponent>
+                </ActionsMenu>
               )
       }
       footer={tableFooter}

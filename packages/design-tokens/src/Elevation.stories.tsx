@@ -22,7 +22,7 @@ export const ShadowsAndRadius: Story = {
         <h3 className="text-base font-semibold text-[var(--surface-text-primary)] mb-4">
           Elevation & Shadows
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="flex flex-col items-center justify-center p-6 rounded-md bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] shadow-[var(--card-shadow)] h-32 text-center">
             <span className="text-sm font-medium text-[var(--surface-text-primary)]">
               Card Shadow
@@ -44,6 +44,18 @@ export const ShadowsAndRadius: Story = {
             </span>
             <span className="text-[11px] text-[var(--surface-text-secondary)] mt-2">
               Floating popovers & menus
+            </span>
+          </div>
+
+          <div className="flex flex-col items-center justify-center p-6 rounded-md bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] shadow-[var(--overlay-shadow)] h-32 text-center">
+            <span className="text-sm font-medium text-[var(--surface-text-primary)]">
+              Overlay Shadow
+            </span>
+            <span className="font-mono text-xs text-[var(--surface-text-muted)] mt-1">
+              --overlay-shadow
+            </span>
+            <span className="text-[11px] text-[var(--surface-text-secondary)] mt-2">
+              Dialogs & toasts
             </span>
           </div>
 

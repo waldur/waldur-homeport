@@ -9,6 +9,7 @@ import { FC, useCallback, useState } from 'react';
 import { AlertItem } from 'waldur-ui';
 import { BaseButton } from 'waldur-ui';
 
+import { saveFile } from '@/core/saveFile';
 import { MonacoEditor } from '@/form/MonacoEditor';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -37,14 +38,7 @@ export const LdapAgentEnvPreview: FC<LdapAgentEnvPreviewProps> = ({
 
   const handleDownload = useCallback(() => {
     const blob = new Blob([config], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'refresh-glauth-config.env';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    saveFile(blob, 'refresh-glauth-config.env');
   }, [config]);
 
   const hasPlaceholders = config.includes('CHANGEME');

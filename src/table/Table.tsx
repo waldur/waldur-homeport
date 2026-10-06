@@ -11,6 +11,8 @@ import { Card, Stack } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
 import { useMediaQuery } from 'react-responsive';
 
+import { TablePagination } from 'waldur-ui';
+
 import { GRID_BREAKPOINTS } from '@/core/constants';
 
 import { TableContent } from './components/content';
@@ -20,7 +22,6 @@ import { TableProvider } from './context';
 import { FilterContextProvider } from './FilterContextProvider';
 import { HiddenActionsMessage } from './HiddenActionsMessage';
 import { TableFilters } from './TableFilters';
-import { TablePagination } from './TablePagination';
 import { TableRefreshButton } from './TableRefreshButton';
 import { TableTabs } from './TableTabs';
 import { Column, PinnedColumns, PinnedOffsets, TableProps } from './types';

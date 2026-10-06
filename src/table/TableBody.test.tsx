@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
 import { describe, it, expect } from 'vitest';
@@ -119,6 +119,55 @@ describe('TableBody', () => {
  * does not work anymore". Fixed by anchoring the Portal's `container`
  * back inside `#kt_content_container`.
  */
+describe('TableBody row actions', () => {
+  // Holds state, like an open row-action menu does.
+  const Counter = () => {
+    const [count, setCount] = useState(0);
+    return (
+      <button type="button" onClick={() => setCount((c) => c + 1)}>
+        Clicked {count}
+      </button>
+    );
+  };
+
+  // What a refetch produces: new row objects, and a new inline rowActions
+  // arrow from the re-rendering parent. Untyped like renderWrapper's props.
+  const freshProps = (): any => ({
+    columns: COLUMNS,
+    rows: ROWS.map((row) => ({ ...row })),
+    rowActions: () => <Counter />,
+  });
+
+  // A refetch hands TableBody new row objects, and the parent hands it a new
+  // inline rowActions arrow on the same render. The cell must stay mounted,
+  // or an open menu closes under the user.
+  it('keeps the row-actions cell mounted when rows and rowActions are recreated', async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(
+      <table>
+        <TableBody {...freshProps()} />
+      </table>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Clicked 0' }));
+
+    rerender(
+      <table>
+        <TableBody {...freshProps()} />
+      </table>,
+    );
+
+    expect(
+      screen.getByRole('button', { name: 'Clicked 1' }),
+    ).toBeInTheDocument();
+  });
+
+  it('still renders a memo component passed as rowActions', () => {
+    const Memoized = memo(() => <span>Memo actions</span>);
+    renderWrapper({ rowActions: Memoized });
+    expect(screen.getByText('Memo actions')).toBeInTheDocument();
+  });
+});
+
 describe('TableBody inline filter shortcut (hasFilterMenu regression)', () => {
   const FILTER_COLUMNS = [
     {

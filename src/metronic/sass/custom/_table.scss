@@ -96,8 +96,10 @@
         padding-bottom: 16px;
         padding-left: 0;
       }
+      // !important: waldur-ui's TablePagination sets its padding with a
+      // Tailwind utility, which outranks this bootstrap-layer rule.
       .table-pagination {
-        padding-top: 0.5rem;
+        padding-top: 0.5rem !important;
       }
 
       .search-no-result,
@@ -119,10 +121,6 @@
         align-items: center;
         justify-content: center;
         gap: 0.75rem;
-      }
-
-      .dropdown-toggle:before {
-        display: none;
       }
     }
 
@@ -422,58 +420,6 @@
     }
   }
 
-  .table-pagination {
-    padding-top: $table-pagination-padding-y;
-    border-top: 1px solid $border-secondary;
-
-    .page-item {
-      .page-link {
-        color: $text-quaternary;
-        width: 40px;
-        height: 40px;
-        transition: $transition-base;
-        @include svg-icon-color($fg-quinary);
-      }
-      .page-link:focus {
-        background-color: $bg-primary_hover;
-        box-shadow: $ring-primary-200;
-      }
-      .page-link:active,
-      .page-link:hover,
-      &.active .page-link {
-        color: $text-secondary;
-        background-color: $bg-primary_hover;
-        @include svg-icon-color($fg-quaternary);
-      }
-      &.disabled .page-link {
-        color: $fg-disabled;
-      }
-
-      &.next,
-      &.previous {
-        .page-link {
-          width: 28px;
-          height: 28px;
-          padding: 0;
-        }
-      }
-    }
-
-    // Page size selector
-    .form-select {
-      color: $dark;
-      width: auto;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      @include svg-bg-icon(arrow-bottom, $fg-quinary);
-      background-position: 100%;
-
-      option {
-        background-color: $body-bg;
-      }
-    }
-  }
-
   &.field-table {
     tr {
       cursor: pointer;
@@ -497,36 +443,12 @@
   }
 }
 
-// Filters menu and its inputs
-.drawer .filter-container,
-.card.card-table .table-filters-menu {
+// Sidebar filters (TableFilterContainer.tsx in the filter drawer)
+.drawer .filter-container {
   white-space: normal;
 
   .filter-field {
     padding-top: 0;
-  }
-
-  .menu-item .menu-link {
-    min-height: 40px;
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  // Column filter
-  &.column-filter {
-    text-transform: none;
-    text-align: start;
-    height: 0;
-    width: 0;
-
-    .menu-link {
-      display: none;
-    }
-  }
-}
-.card.card-table th:not(:first-child) .table-filters-menu.column-filter {
-  .menu-sub-dropdown {
-    margin-left: -125px !important;
   }
 }
 
@@ -724,11 +646,4 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 // Standalone table header
 .table-standalone-header {
   margin-bottom: 24px;
-}
-
-// The columns popover portals to <body>, so tables inside a modal or drawer
-// need the popover tier to show it above them; a plain `z-50` opens it hidden
-// behind the modal.
-.table-columns-popover {
-  z-index: $zindex-popover;
 }

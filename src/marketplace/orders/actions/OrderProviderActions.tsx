@@ -86,7 +86,7 @@ export const OrderProviderActions = ({
         user?.is_staff ? OrderUnlinkButton : null,
       ].filter(Boolean)}
       labeled={labeledDropdown}
-      drop="down"
+      side="bottom"
       size={size || 'lg'}
     />
   );

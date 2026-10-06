@@ -1,10 +1,8 @@
 import { Resource } from 'waldur-js-client';
 
-import { ButtonSize } from 'waldur-ui';
+import { ButtonSize, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
-import { ActionsDropdownSeparator } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { MultiChangeLimitsAction } from './MultiChangeLimitsAction';
@@ -34,32 +32,33 @@ export const ResourceMultiSelectAction = ({
 }) => {
   const user = useUser();
   return (
-    <ActionDropdownButton
-      variant="primary"
-      title={translate('All actions')}
-      size={size}
-    >
-      <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
-      <MultiChangeLimitsAction rows={rows} refetch={refetch} />
-      <MultiSetEndDateAction rows={rows} refetch={refetch} />
-      <MultiEditOptionsAction rows={rows} refetch={refetch} />
-      <MultiStopAction rows={rows} refetch={refetch} />
-      <MultiStartAction rows={rows} refetch={refetch} />
-      <MultiRestartAction rows={rows} refetch={refetch} />
-      <MultiPullAction rows={rows} refetch={refetch} />
-      <MultiMoveAction rows={rows} refetch={refetch} />
-      <ActionsDropdownSeparator className="border-top m-0" />
-      <MultiTerminateAction rows={rows} refetch={refetch} />
-      {user.is_staff && (
-        <>
-          <ActionsDropdownSeparator className="border-top m-0" />
-          <MultiPlacementMapAction rows={rows} />
-          <MultiSetDownscaledAction rows={rows} refetch={refetch} />
-          <MultiSetPausedAction rows={rows} refetch={refetch} />
-          <MultiSetErredAction rows={rows} refetch={refetch} />
-          <MultiUnlinkAction rows={rows} refetch={refetch} />
-        </>
-      )}
-    </ActionDropdownButton>
+    <Menu>
+      <Menu.TriggerButton variant="primary" size={size}>
+        {translate('All actions')}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom">
+        <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
+        <MultiChangeLimitsAction rows={rows} refetch={refetch} />
+        <MultiSetEndDateAction rows={rows} refetch={refetch} />
+        <MultiEditOptionsAction rows={rows} refetch={refetch} />
+        <MultiStopAction rows={rows} refetch={refetch} />
+        <MultiStartAction rows={rows} refetch={refetch} />
+        <MultiRestartAction rows={rows} refetch={refetch} />
+        <MultiPullAction rows={rows} refetch={refetch} />
+        <MultiMoveAction rows={rows} refetch={refetch} />
+        <Menu.Separator className="border-top m-0" />
+        <MultiTerminateAction rows={rows} refetch={refetch} />
+        {user.is_staff && (
+          <>
+            <Menu.Separator className="border-top m-0" />
+            <MultiPlacementMapAction rows={rows} />
+            <MultiSetDownscaledAction rows={rows} refetch={refetch} />
+            <MultiSetPausedAction rows={rows} refetch={refetch} />
+            <MultiSetErredAction rows={rows} refetch={refetch} />
+            <MultiUnlinkAction rows={rows} refetch={refetch} />
+          </>
+        )}
+      </Menu.Content>
+    </Menu>
   );
 };

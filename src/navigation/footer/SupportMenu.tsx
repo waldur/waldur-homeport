@@ -1,5 +1,7 @@
 import { CopyIcon } from '@phosphor-icons/react';
 
+import { Menu } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { DocsLink } from '@/navigation/header/DocsLink';
@@ -9,25 +11,23 @@ import { FooterDropdown } from './FooterDropdown';
 import { IssuesLink } from './IssuesLink';
 
 /**
- * Plain content, not a Radix menu item: this is a repeatable "copy to
- * clipboard" affordance (the user may copy the same value more than
- * once, or copy it and then look at another row), so it must not trigger
- * Radix's default select-and-close behaviour — same reasoning as
- * UserDropdown.tsx's UserToken/UserIpAddress Copy buttons.
+ * A contact value (the support email or phone) that copies when chosen: a
+ * menu item, so arrow keys reach it, that stays open, since the user may
+ * copy it more than once or copy it and then look at another row.
  */
-const SupportSubMenuItem = ({ title, onCopy }) =>
+const SupportSubMenuItem = ({ title, onCopied }) =>
   title ? (
-    <li className="menu-item">
-      <button
-        type="button"
-        className="menu-link px-3 cursor-pointer overflow-hidden"
-        onClick={() => onCopy(title)}
+    <li>
+      <Menu.CopyItem
+        value={title}
+        onCopied={onCopied}
+        className="overflow-hidden"
       >
-        <span className="menu-title text-nowrap text-truncate">{title}</span>
-        <span className="menu-badge ms-2">
+        <span className="grow text-truncate">{title}</span>
+        <span className="ms-2 shrink-0" aria-hidden="true">
           <CopyIcon weight="bold" />
         </span>
-      </button>
+      </Menu.CopyItem>
     </li>
   ) : null;
 
@@ -40,11 +40,7 @@ export const SupportMenu = () => {
     ENV.plugins.WALDUR_CORE.SITE_PHONE
   );
 
-  const copyText = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      showSuccess(translate('Text has been copied'));
-    });
-  };
+  const showCopied = () => showSuccess(translate('Text has been copied'));
 
   if (!showSupport) return null;
 
@@ -54,11 +50,11 @@ export const SupportMenu = () => {
       <DocsLink />
       <SupportSubMenuItem
         title={ENV.plugins.WALDUR_CORE.SITE_EMAIL}
-        onCopy={copyText}
+        onCopied={showCopied}
       />
       <SupportSubMenuItem
         title={ENV.plugins.WALDUR_CORE.SITE_PHONE}
-        onCopy={copyText}
+        onCopied={showCopied}
       />
     </FooterDropdown>
   );

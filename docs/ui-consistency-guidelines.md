@@ -431,20 +431,24 @@ if (error) {
 ### 4.3 Pagination Rules
 
 ```tsx
+import { TablePagination } from 'waldur-ui';
+
 import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@/table/constants';
 
 // PAGE_SIZE_COMPACT = 5 (for embedded/secondary tables)
 // PAGE_SIZE_FULL = 10 (for primary tables)
 
-// Hide pagination when items ≤ PAGE_SIZE_COMPACT
-{
-  pagination.resultCount > PAGE_SIZE_COMPACT && (
-    <TablePagination {...pagination} />
-  );
-}
-
-// Show item count
-// Format: "Showing 1-10 of 100"
+// TablePagination hides itself when items ≤ PAGE_SIZE_COMPACT, and shows
+// the item count ("11-20 of 42 items"). <Table> renders it for you; render
+// it yourself only for a paged list that is not a <Table>, such as a list
+// of form fields — there, drop the table's top border:
+<TablePagination
+  {...pagination}
+  hasRows={rows.length > 0}
+  gotoPage={setPage}
+  updatePageSize={setPageSize}
+  bordered={false}
+/>;
 ```
 
 ---

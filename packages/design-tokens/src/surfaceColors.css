@@ -67,17 +67,40 @@
   --table-row-border: var(--color-gray-100);
   --table-row-hover-bg: var(--color-gray-50);
 
-  /* Unlike the rest of this file, these two DO have a real Metronic
-     source: src/metronic/sass/core/components/_variables.scss's $menu
-     map (dropdown.box-shadow, consumed by Metronic's own data-kt-menu
-     dropdowns — see UserDropdown.tsx's ThemeSwitcher) and its $drawer map
+  /* Table pagination (waldur-ui TablePagination). Unlike most of this
+     file, these have a real Metronic source: the `.card.card-table
+     .table-pagination` rules in src/metronic/sass/custom/_table.scss,
+     read from the compiled light/dark stylesheets and checked against
+     the running pager with getComputedStyle. Page numbers and the
+     range/label text use --pagination-text; the current page and hover
+     use --pagination-text-current on --pagination-hover-bg. The
+     prev/next carets sat one step lighter than the text
+     (--pagination-icon), which is also the disabled colour. */
+  --pagination-text: var(--color-gray-500);
+  --pagination-text-current: var(--color-gray-700);
+  --pagination-text-disabled: var(--color-gray-400);
+  --pagination-icon: var(--color-gray-400);
+  --pagination-icon-hover: var(--color-gray-500);
+  --pagination-hover-bg: var(--color-gray-50);
+  --pagination-border: var(--color-gray-200);
+  --pagination-select-text: var(--color-gray-900);
+
+  /* Unlike the rest of this file, these DO have a real Metronic source.
+     --dropdown-shadow is $dropdown-box-shadow as
+     src/metronic/sass/_variables.custom.scss overrides it (also
+     $popover-box-shadow and the $menu map's dropdown shadow), checked
+     against the live app's dropdowns with getComputedStyle. The drawer
+     tokens are core/components/_variables.scss's $drawer map
      (box-shadow/overlay-bg-color, Metronic's mobile slide-in panel,
-     directly analogous to Sheet.tsx). Read from the SCSS source
-     (`$dropdown-box-shadow`/`$drawer`'s `if(isDarkMode(), ...)` branches),
-     not live-measured via getComputedStyle the way buttonColors.css's
-     values are — there's no easy unauthenticated page to measure a real
-     one from. */
-  --dropdown-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+     directly analogous to Sheet.tsx), read from the SCSS source.
+
+     --overlay-shadow is the core $dropdown-box-shadow that the custom
+     override replaced. Dialog.tsx and Toast.tsx were built on it before
+     the override was noticed, and keep it so they don't change. */
+  --dropdown-shadow:
+    0 12px 16px -4px rgba(16, 24, 40, 0.1),
+    0 4px 6px -2px rgba(16, 24, 40, 0.0005);
+  --overlay-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
   --drawer-shadow: 0px 1px 9px -3px rgba(0, 0, 0, 0.05);
   --drawer-overlay-bg: rgba(0, 0, 0, 0.2);
 
@@ -98,6 +121,38 @@
      nowhere else in this package. */
   --modal-backdrop-bg: rgba(16, 24, 40, 0.7);
   --modal-backdrop-blur: 3px;
+
+  /* The menus' nav look (waldur-ui's Menu, see docs/menus.md), ported from
+     Metronic's .menu-sub-dropdown with the menu-gray-600/menu-state-bg-gray
+     theme: the panel is $body-bg, rows are $gray-600 ($gray-700 for the
+     strong tone), a hovered/highlighted/active row is $gray-700 on $gray-50,
+     a disabled row is $gray-400, and the light background (the language
+     pill, the shell's token field) is $light ($gray-100; dark mode reads
+     $gray-100 directly). The dark values are the mirrored gray-dark steps,
+     since the SCSS $gray-N is theme-inverted (see colorParity.test.ts). */
+  --menu-bg: #ffffff;
+  --menu-item-text: var(--color-gray-600);
+  --menu-item-strong-text: var(--color-gray-700);
+  --menu-item-hover-text: var(--color-gray-700);
+  --menu-item-light-bg: var(--color-gray-100);
+  --menu-item-hover-bg: var(--color-gray-50);
+  --menu-item-disabled-text: var(--color-gray-400);
+  /* Action menus' disabled row: Bootstrap's $dropdown-link-disabled-color. */
+  --menu-item-muted-text: var(--color-gray-500);
+  /* The invite dialog's role picker: a highlighted row's brand text, on
+     --menu-item-light-bg (Metronic's menu-state-title-primary). */
+  --menu-item-brand-text: var(--waldur-brand-700);
+
+  /* The page tabs (src/navigation/TabsList.tsx), ported from Metronic's
+     menu-gray-500 + menu-state-bg-light-primary: $gray-500 tabs, and a
+     hovered or current tab in $text-brand-primary on $bg-brand-primary_alt.
+     The caret is $fg-quaternary, and $fg-brand-primary when its tab is
+     current, hovered or open. Footer links are menu-brand: $brand. */
+  --page-tab-text: var(--color-gray-500);
+  --page-tab-active-text: var(--waldur-brand-900);
+  --page-tab-active-bg: var(--waldur-brand-50);
+  --page-tab-caret-active: var(--waldur-brand-600);
+  --footer-link-text: var(--waldur-brand-600);
 
   /* Same real-source reasoning as the shadow tokens above, from
      src/metronic/sass/core/components/_card.scss's .card rule:
@@ -170,7 +225,20 @@
   --table-row-border: var(--color-gray-dark-800);
   --table-row-hover-bg: var(--color-gray-dark-900);
 
+  /* Same source as the light block, from the compiled dark stylesheet. */
+  --pagination-text: var(--color-gray-dark-400);
+  --pagination-text-current: var(--color-gray-dark-300);
+  --pagination-text-disabled: var(--color-gray-dark-500);
+  --pagination-icon: var(--color-gray-dark-500);
+  --pagination-icon-hover: var(--color-gray-dark-400);
+  --pagination-hover-bg: var(--color-gray-dark-800);
+  --pagination-border: var(--color-gray-dark-800);
+  --pagination-select-text: var(--color-gray-dark-50);
+
+  /* The custom $dropdown-box-shadow keeps core's dark value, so both
+     tokens agree here. */
   --dropdown-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  --overlay-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
   --drawer-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   --drawer-overlay-bg: rgba(0, 0, 0, 0.4);
 
@@ -180,6 +248,22 @@
      blur is unbranched in the source, so --modal-backdrop-blur isn't
      redefined here. */
   --modal-backdrop-bg: rgba(245, 245, 246, 0.5);
+
+  --menu-bg: var(--color-gray-dark-950);
+  --menu-item-text: var(--color-gray-dark-300);
+  --menu-item-strong-text: var(--color-gray-dark-200);
+  --menu-item-hover-text: var(--color-gray-dark-200);
+  --menu-item-light-bg: var(--color-gray-dark-800);
+  --menu-item-hover-bg: var(--color-gray-dark-900);
+  --menu-item-disabled-text: var(--color-gray-dark-500);
+  --menu-item-muted-text: var(--color-gray-dark-400);
+  --menu-item-brand-text: var(--waldur-brand-200);
+
+  --page-tab-text: var(--color-gray-dark-400);
+  --page-tab-active-text: var(--color-gray-dark-50);
+  --page-tab-active-bg: var(--color-gray-dark-800);
+  --page-tab-caret-active: var(--waldur-brand-500);
+  --footer-link-text: var(--waldur-brand-300);
 
   --card-shadow: none;
   --card-border-color: var(--surface-card-border);

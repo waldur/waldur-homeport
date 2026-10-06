@@ -12,8 +12,8 @@ export const FooterLinks = () => {
 
   return (
     <ul
-      className={`menu menu-brand fw-bold order-1 ${
-        isMd ? 'justify-content-between w-100' : 'gap-8px'
+      className={`footer-links m-0 flex list-none p-0 fw-bold order-1 ${
+        isMd ? 'justify-content-between w-100' : 'gap-[8px]'
       }`}
     >
       {isMd ? (

@@ -1,11 +1,9 @@
+import { CaretUpIcon } from '@phosphor-icons/react';
 import React from 'react';
 
-import {
-  NavMenu,
-  NavMenuContent,
-  NavMenuTrigger,
-  useHoverMenu,
-} from '@/navigation/NavMenu';
+import { Menu } from 'waldur-ui';
+
+import { FOOTER_LINK_CLASSNAME } from '@/navigation/footer/MenuItem';
 
 interface FooterDropdownProps {
   title: string;
@@ -13,12 +11,9 @@ interface FooterDropdownProps {
 }
 
 /**
- * On Radix's DropdownMenu, not NavMenuItem/NavMenuContent's usual
- * `<div>`/`.menu-item` shape — this is a direct `<li>` child of
- * FooterLinks.tsx's `<ul>`, and NavMenuContent's own `asChild` composes a
- * `<ul>` for its content the same way, so the nested MenuItem `<li>`s
- * stay valid list children (Metronic styles the submenu by class, not
- * tag, so the tag swap costs nothing visually).
+ * A direct `<li>` child of FooterLinks.tsx's `<ul>`. Menu.Content's
+ * `asChild` composes a `<ul>` for its content, so its rows
+ * (FooterDropdownItems.tsx) are `<li>`s too.
  *
  * Each FooterDropdown is its own independent Radix Root — there is no
  * shared parent menu to nest a Sub under; FooterLinks.tsx's own
@@ -28,47 +23,39 @@ interface FooterDropdownProps {
  * its own, so that attribute is dropped there rather than carried
  * forward unused.
  *
- * Hover-to-open at `lg`+ is `useHoverMenu` (@/navigation/NavMenu) — see
- * that hook's own comment for why a top-level trigger needs this by hand.
+ * Hover-to-open at `lg`+ is waldur-ui Menu's `openOnHover="desktop"`.
  */
+
 export const FooterDropdown: React.FC<FooterDropdownProps> = ({
   title,
   children,
 }) => {
-  const { open, setOpen, hoverHandlers, triggerHandlers } = useHoverMenu();
-
   return (
-    <li className="menu-item" data-testid="footer-dropdown">
-      <NavMenu open={open} onOpenChange={setOpen} modal={false}>
-        <NavMenuTrigger asChild>
+    <li data-testid="footer-dropdown">
+      <Menu openOnHover="desktop">
+        <Menu.Trigger asChild>
           {/* A <button>, not a <span>: the trigger has to be reachable by
               keyboard (WCAG 2.1.1). */}
-          <button type="button" className="menu-link px-3" {...triggerHandlers}>
-            <span className="menu-title">{title}</span>
-            <span className="menu-arrow rotate-active-90" />
+          <button type="button" className={FOOTER_LINK_CLASSNAME}>
+            {title}
+            <CaretUpIcon
+              size={16.9}
+              weight="bold"
+              className="ms-[8px] shrink-0"
+            />
           </button>
-        </NavMenuTrigger>
-        <NavMenuContent
+        </Menu.Trigger>
+        <Menu.Content
           asChild
-          placement="top-end"
-          // menu-gray-600/menu-state-bg-gray, the same pairing
-          // UserDropdown.tsx/LanguageSelectorDropdown.tsx use, were missing
-          // here entirely -- so a row backed by a real <a> (DocsLink,
-          // LegalPrivacyMenu's Privacy policy/Terms of service) fell through
-          // to Bootstrap's own `a { color: var(--waldur-brand-700) }` (green)
-          // while a row backed by a plain RadixDropdownMenu.Item or <button>
-          // (IssuesLink, Cookie settings, the email/phone copy rows)
-          // inherited the ambient dark text color instead -- two different
-          // colors in the same menu depending on which element a row
-          // happened to be built from, reported live. Also restores the
-          // [data-highlighted] hover background this app's other Metronic
-          // menus already get from menu-state-bg-gray.
-          className="p-2 min-w-200px menu-gray-600 menu-state-bg-gray"
-          {...hoverHandlers}
+          side="top"
+          align="end"
+          className="p-[6.5px] min-w-200px"
+          // Metronic's base row padding with the footer's `px-3`.
+          density="compact"
         >
           <ul>{children}</ul>
-        </NavMenuContent>
-      </NavMenu>
+        </Menu.Content>
+      </Menu>
     </li>
   );
 };

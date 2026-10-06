@@ -6,14 +6,11 @@ import {
 } from '@phosphor-icons/react';
 import { User, usersPartialUpdate } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Menu, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownItem,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 export const UserBulkActions = ({
   rows,
@@ -70,66 +67,59 @@ export const UserBulkActions = ({
   const isLoading = isActivating || isDeactivating;
 
   return (
-    <ActionsDropdownComponent labeled drop="down">
-      <div className="d-flex align-items-center">
-        <ActionsDropdownItem
-          className="flex-grow-1"
-          onSelect={() => activate()}
-          disabled={isLoading || inactiveUsers.length === 0}
-        >
-          {isActivating ? (
-            <SpinnerIcon
-              size={20}
-              className="animation-spin me-2"
-              weight="bold"
-            />
+    <ActionsMenu toggle="labeled" side="bottom">
+      <Menu.Item
+        icon={
+          isActivating ? (
+            <SpinnerIcon className="animation-spin" weight="bold" />
           ) : (
-            <CheckIcon size={20} className="me-2" weight="bold" />
-          )}
-          {translate('Activate')}
-        </ActionsDropdownItem>
-        {/* A disabled ActionsDropdownItem gets pointer-events: none, so the
-            tooltip has to sit on a separate, non-disabled sibling rather
-            than wrap the item itself -- same trick ActionItem.tsx uses. */}
-        {inactiveUsers.length === 0 && (
-          <Tooltip
-            label={translate('None of the selected users are inactive.')}
-          >
-            <QuestionIcon
-              size={16}
-              weight="bold"
-              className="ms-1 me-3 text-muted"
-            />
-          </Tooltip>
-        )}
-      </div>
-      <div className="d-flex align-items-center">
-        <ActionsDropdownItem
-          className="flex-grow-1"
-          onSelect={() => deactivate()}
-          disabled={isLoading || activeUsers.length === 0}
-        >
-          {isDeactivating ? (
-            <SpinnerIcon
-              size={20}
-              className="animation-spin me-2"
-              weight="bold"
-            />
+            <CheckIcon weight="bold" />
+          )
+        }
+        trailing={
+          inactiveUsers.length === 0 ? (
+            <Tooltip
+              label={translate('None of the selected users are inactive.')}
+            >
+              <QuestionIcon
+                size={16}
+                weight="bold"
+                className="text-[var(--menu-item-muted-text)]"
+              />
+            </Tooltip>
+          ) : undefined
+        }
+        onSelect={() => activate()}
+        disabled={isLoading || inactiveUsers.length === 0}
+      >
+        {translate('Activate')}
+      </Menu.Item>
+      <Menu.Item
+        icon={
+          isDeactivating ? (
+            <SpinnerIcon className="animation-spin" weight="bold" />
           ) : (
-            <ProhibitIcon size={20} className="me-2" weight="bold" />
-          )}
-          {translate('Deactivate')}
-        </ActionsDropdownItem>
-        {activeUsers.length === 0 && (
-          <Tooltip label={translate('None of the selected users are active.')}>
-            <QuestionIcon
-              size={16}
-              weight="bold"
-              className="ms-1 me-3 text-muted"
-            />
-          </Tooltip>
-        )}
-      </div>
-    </ActionsDropdownComponent>
+            <ProhibitIcon weight="bold" />
+          )
+        }
+        trailing={
+          activeUsers.length === 0 ? (
+            <Tooltip
+              label={translate('None of the selected users are active.')}
+            >
+              <QuestionIcon
+                size={16}
+                weight="bold"
+                className="text-[var(--menu-item-muted-text)]"
+              />
+            </Tooltip>
+          ) : undefined
+        }
+        onSelect={() => deactivate()}
+        disabled={isLoading || activeUsers.length === 0}
+      >
+        {translate('Deactivate')}
+      </Menu.Item>
+    </ActionsMenu>
   );
 };

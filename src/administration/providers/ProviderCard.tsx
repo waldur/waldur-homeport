@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { Menu } from 'waldur-ui';
+
 import { OIDC_TYPES } from '@/auth/providers/constants';
 import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 const CreateProviderDialog = lazyComponent(() =>
   import('./CreateProviderDialog').then((module) => ({
@@ -108,57 +108,60 @@ export const ProviderCard: FC<ProviderCardProps> = ({
             <div className="flex-grow-1">
               <h1 className="fs-2 text-nowrap fw-boldest">{title}</h1>
               <p className="fs-6 text-dark">{description}</p>
-              <ActionDropdownButton
-                variant={
-                  provider?.is_active === true
-                    ? 'primary'
-                    : provider?.is_active === false
-                      ? 'warning'
-                      : 'tertiary'
-                }
-                title={
-                  provider?.is_active === true
+              <Menu>
+                <Menu.TriggerButton
+                  size="lg"
+                  variant={
+                    provider?.is_active === true
+                      ? 'primary'
+                      : provider?.is_active === false
+                        ? 'warning'
+                        : 'tertiary'
+                  }
+                >
+                  {provider?.is_active === true
                     ? translate('Enabled')
                     : provider?.is_active === false
                       ? translate('Disabled')
-                      : translate('Not configured')
-                }
-              >
-                {provider ? (
-                  <>
-                    {editable && (
-                      <ActionsDropdownItem onSelect={updateProvider}>
-                        {translate('Edit')}
-                      </ActionsDropdownItem>
-                    )}
-                    {editable && OIDC_TYPES.includes(type) && (
-                      <ActionsDropdownItem onSelect={openDiscovery}>
-                        {translate('Re-discover')}
-                      </ActionsDropdownItem>
-                    )}
-                    <ActionsDropdownItem onSelect={showUsers}>
-                      {translate('Users')}
-                    </ActionsDropdownItem>
-                    {provider.is_active &&
-                      OIDC_TYPES.includes(provider.provider) && (
-                        <ActionsDropdownItem onSelect={showDetails}>
-                          {translate('Details')}
-                        </ActionsDropdownItem>
+                      : translate('Not configured')}
+                </Menu.TriggerButton>
+                <Menu.Content look="actions" side="bottom">
+                  {provider ? (
+                    <>
+                      {editable && (
+                        <Menu.Item onSelect={updateProvider}>
+                          {translate('Edit')}
+                        </Menu.Item>
                       )}
-                  </>
-                ) : (
-                  <>
-                    <ActionsDropdownItem onSelect={createProvider}>
-                      {translate('Add identity provider')}
-                    </ActionsDropdownItem>
-                    {OIDC_TYPES.includes(type) && (
-                      <ActionsDropdownItem onSelect={openDiscovery}>
-                        {translate('Discovery wizard')}
-                      </ActionsDropdownItem>
-                    )}
-                  </>
-                )}
-              </ActionDropdownButton>
+                      {editable && OIDC_TYPES.includes(type) && (
+                        <Menu.Item onSelect={openDiscovery}>
+                          {translate('Re-discover')}
+                        </Menu.Item>
+                      )}
+                      <Menu.Item onSelect={showUsers}>
+                        {translate('Users')}
+                      </Menu.Item>
+                      {provider.is_active &&
+                        OIDC_TYPES.includes(provider.provider) && (
+                          <Menu.Item onSelect={showDetails}>
+                            {translate('Details')}
+                          </Menu.Item>
+                        )}
+                    </>
+                  ) : (
+                    <>
+                      <Menu.Item onSelect={createProvider}>
+                        {translate('Add identity provider')}
+                      </Menu.Item>
+                      {OIDC_TYPES.includes(type) && (
+                        <Menu.Item onSelect={openDiscovery}>
+                          {translate('Discovery wizard')}
+                        </Menu.Item>
+                      )}
+                    </>
+                  )}
+                </Menu.Content>
+              </Menu>
             </div>
           </div>
         </div>

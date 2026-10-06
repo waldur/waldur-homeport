@@ -1,8 +1,9 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { DropdownLink } from './DropdownLink';
 
@@ -11,17 +12,15 @@ export const OpenPublicOffering = ({
 }: {
   row: ProviderOfferingDetails;
 }) => (
-  <ActionsDropdownItem asChild>
+  <Menu.Item asChild>
     <DropdownLink
       state="public-offering.marketplace-public-offering"
       params={{
         uuid: row.uuid,
       }}
+      icon={<ShoppingCartIcon weight="bold" />}
     >
-      <span className="svg-icon svg-icon-2">
-        <ShoppingCartIcon weight="bold" />
-      </span>
       {translate('Open public page')}
     </DropdownLink>
-  </ActionsDropdownItem>
+  </Menu.Item>
 );

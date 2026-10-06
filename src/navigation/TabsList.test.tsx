@@ -1,10 +1,16 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
 import { forwardRef } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { TabsList } from './TabsList';
+
+// The current tab's link carries aria-current="page".
+const isCurrent = (testId: string) =>
+  within(screen.getByTestId(testId)).queryByRole('link', {
+    current: 'page',
+  }) !== null;
 
 const tabs = vi.hoisted(() => ({ current: [] as any[] }));
 
@@ -152,8 +158,8 @@ describe('TabsList', () => {
 
     render(<TabsList />);
 
-    expect(screen.getByTestId('tab-user-details')).toHaveClass('here');
-    expect(screen.getByTestId('tab-reviewer')).not.toHaveClass('here');
+    expect(isCurrent('tab-user-details')).toBe(true);
+    expect(isCurrent('tab-reviewer')).toBe(false);
   });
 
   it('skips a hidden tab, which is never rendered', () => {
@@ -162,7 +168,7 @@ describe('TabsList', () => {
 
     render(<TabsList />);
 
-    expect(screen.getByTestId('tab-reviewer')).toHaveClass('here');
+    expect(isCurrent('tab-reviewer')).toBe(true);
   });
 
   it('leaves tabs pointing at another state alone', () => {
@@ -171,7 +177,7 @@ describe('TabsList', () => {
 
     render(<TabsList />);
 
-    expect(screen.getByTestId('tab-profile-freeipa')).not.toHaveClass('here');
+    expect(isCurrent('tab-profile-freeipa')).toBe(false);
   });
 
   // A stale or mistyped ?tab= also renders the first tab, so it is highlighted.
@@ -181,8 +187,8 @@ describe('TabsList', () => {
 
     render(<TabsList />);
 
-    expect(screen.getByTestId('tab-user-details')).toHaveClass('here');
-    expect(screen.getByTestId('tab-reviewer')).not.toHaveClass('here');
+    expect(isCurrent('tab-user-details')).toBe(true);
+    expect(isCurrent('tab-reviewer')).toBe(false);
   });
 
   it('skips a parent tab whose children are all hidden', () => {
@@ -208,7 +214,38 @@ describe('TabsList', () => {
 
     render(<TabsList />);
 
-    expect(screen.getByTestId('tab-reviewer')).toHaveClass('here');
+    expect(isCurrent('tab-reviewer')).toBe(true);
+  });
+
+  it('marks a parent tab current when one of its children is open', () => {
+    tabs.current = [
+      {
+        title: 'Offerings',
+        children: [{ title: 'HPC', to: 'public.offerings' }],
+      },
+      pageTabs[1],
+    ];
+    mockRouterOn('public.offerings');
+
+    render(<TabsList />);
+
+    expect(screen.getByRole('button', { name: 'Offerings' })).toHaveAttribute(
+      'aria-current',
+      'true',
+    );
+    expect(isCurrent('tab-reviewer')).toBe(false);
+  });
+
+  it('renders a disabled tab without a link, marked disabled', () => {
+    tabs.current = [{ ...pageTabs[1], disabled: true }];
+    mockRouterOn('profile-freeipa');
+
+    render(<TabsList />);
+
+    expect(screen.queryByRole('link')).not.toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-node-access
+    const tab = screen.getByText('Reviewer profile').closest('a');
+    expect(tab).toHaveAttribute('data-disabled');
   });
 
   it('still prefers the tab the URL names', () => {
@@ -217,7 +254,7 @@ describe('TabsList', () => {
 
     render(<TabsList />);
 
-    expect(screen.getByTestId('tab-reviewer')).toHaveClass('here');
-    expect(screen.getByTestId('tab-user-details')).not.toHaveClass('here');
+    expect(isCurrent('tab-reviewer')).toBe(true);
+    expect(isCurrent('tab-user-details')).toBe(false);
   });
 });

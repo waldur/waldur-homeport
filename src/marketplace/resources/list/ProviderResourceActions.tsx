@@ -11,7 +11,7 @@ interface ProviderResourceActionsProps {
   resource: Resource;
   refetch(): void;
   labeled?: boolean;
-  drop?: 'up' | 'down' | 'start' | 'end';
+  side?: 'top' | 'right' | 'bottom' | 'left';
   disabled?: boolean;
   size?: 'sm' | 'lg';
   /** Actions that make no sense where the menu is shown. */
@@ -20,7 +20,7 @@ interface ProviderResourceActionsProps {
 
 export const ProviderResourceActions: FunctionComponent<
   ProviderResourceActionsProps
-> = ({ resource, refetch, labeled, drop, disabled, size, excludeActions }) => {
+> = ({ resource, refetch, labeled, side, disabled, size, excludeActions }) => {
   const [open, onToggle] = useBoolean(false);
   const providerActions = useMemo(
     () =>
@@ -40,7 +40,7 @@ export const ProviderResourceActions: FunctionComponent<
       resource={resource}
       refetch={refetch}
       labeled={labeled}
-      drop={drop}
+      side={side}
       disabled={disabled}
       size={size}
     />

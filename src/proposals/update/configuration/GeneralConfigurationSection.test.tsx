@@ -123,3 +123,54 @@ describe('GeneralConfigurationSection evaluation start', () => {
     });
   });
 });
+
+describe('GeneralConfigurationSection draft carry-over', () => {
+  const call = {
+    uuid: 'call-uuid',
+    customer_uuid: 'customer-uuid',
+    evaluation_start: 'on_submission',
+    order_author: 'applicant',
+    has_proposals: false,
+    carry_over_drafts: false,
+  } as any;
+
+  it('shows whether drafts carry over to the next round', () => {
+    renderWithProviders(
+      <GeneralConfigurationSection
+        call={{ ...call, carry_over_drafts: true }}
+        refetch={vi.fn()}
+      />,
+    );
+    expect(
+      screen.getByText('Carry unsubmitted drafts over to the next round'),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId('edit-carry_over_drafts')).toBeInTheDocument();
+  });
+
+  it('saves the carry-over setting on the call', async () => {
+    const user = userEvent.setup();
+    const refetch = vi.fn();
+    vi.mocked(proposalProtectedCallsPartialUpdate).mockResolvedValue({
+      data: {},
+    } as any);
+    renderWithProviders(
+      <GeneralConfigurationSection call={call} refetch={refetch} />,
+    );
+
+    await user.click(screen.getByTestId('edit-carry_over_drafts'));
+    const { openDialog } = useModal();
+    const [, dialogProps] = vi.mocked(openDialog).mock.lastCall as any;
+    renderWithProviders(<EditFieldDialog {...dialogProps} />);
+
+    await user.click(screen.getByRole('checkbox'));
+    await user.click(screen.getByRole('button', { name: 'Confirm' }));
+
+    await waitFor(() => {
+      expect(proposalProtectedCallsPartialUpdate).toHaveBeenCalledWith({
+        path: { uuid: 'call-uuid' },
+        body: { carry_over_drafts: true },
+      });
+      expect(refetch).toHaveBeenCalled();
+    });
+  });
+});

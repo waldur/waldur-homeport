@@ -230,6 +230,14 @@ export interface TableProps<RowType = any> extends TableState {
   initialSorting?: Sorting;
   expandableRow?: React.ComponentType<{ row: RowType; fetch }>;
   expandableRowClassName?: string;
+  /**
+   * Rendered in each row's actions cell. Usually an inline arrow, which is
+   * called as a render function (TableBody's RowActionsCell) so that a new
+   * arrow on every parent render doesn't remount the cell and close an open
+   * menu. Any hooks it calls therefore belong to that cell: don't switch
+   * between two different hook-using components while the table is shown
+   * (switching to `undefined`, which removes the cell, is fine).
+   */
   rowActions?: React.ComponentType<{ row: RowType; fetch }>;
   toggleRow?(row: any): void;
   toggled?: Record<string, boolean>;

@@ -13,6 +13,22 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
   };
 }
 
+// jsdom does not implement matchMedia. No query matches by default, which
+// reads as a desktop-width viewport; a test that needs another answer stubs
+// it with vi.stubGlobal('matchMedia', ...).
+if (typeof window !== 'undefined' && !window.matchMedia) {
+  window.matchMedia = (query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addEventListener() {},
+    removeEventListener() {},
+    addListener() {},
+    removeListener() {},
+    dispatchEvent: () => false,
+  });
+}
+
 // jsdom does not implement IntersectionObserver. This mock stores the latest
 // observer instance and its callback so tests can simulate intersections via
 // globalThis.__triggerIntersection(entries).

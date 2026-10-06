@@ -23,7 +23,7 @@ import { PullActionItem } from '@/resource/actions/PullActionItem';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { poolAutocomplete } from './poolAutocomplete';
 
@@ -168,7 +168,7 @@ export const ListenerRowActions: FC<ListenerRowActionsProps> = ({
   row,
   fetch,
 }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <DialogActionItem
       title={translate('Edit')}
       modalComponent={EditListenerDialogLazy}
@@ -182,5 +182,5 @@ export const ListenerRowActions: FC<ListenerRowActionsProps> = ({
       refetch={fetch}
     />
     <DestroyListenerButton resource={row} refetch={fetch} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );

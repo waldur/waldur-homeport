@@ -3,7 +3,6 @@ import {
   DotsThreeVerticalIcon,
   TrashIcon,
 } from '@phosphor-icons/react';
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FC, forwardRef } from 'react';
 import { ThreadSession } from 'waldur-js-client';
 
@@ -11,6 +10,7 @@ import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 interface ThreadItemMenuProps {
   threadId: string;
@@ -65,34 +65,26 @@ const ThreadItemMenu: FC<ThreadItemMenuProps> = ({
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- stopPropagation wrapper
     <div className="aui-history-item-menu" onClick={(e) => e.stopPropagation()}>
-      <RadixDropdownMenu.Root modal={false}>
-        <RadixDropdownMenu.Trigger asChild>
-          <ThreadItemMenuToggle />
-        </RadixDropdownMenu.Trigger>
-        <RadixDropdownMenu.Portal
-          container={getThreadItemMenuPortalContainer()}
-        >
-          <RadixDropdownMenu.Content
-            align="end"
-            sideOffset={2}
-            className="dropdown-menu show position-static"
-          >
-            <ActionItem
-              title={isArchived ? translate('Unarchive') : translate('Archive')}
-              action={() => onAction(threadId)}
-              iconNode={
-                isArchived ? (
-                  <ArrowCounterClockwiseIcon weight="bold" />
-                ) : (
-                  <TrashIcon weight="bold" />
-                )
-              }
-              iconColor={isArchived ? 'gray-400' : 'danger'}
-              className={isArchived ? undefined : 'text-danger'}
-            />
-          </RadixDropdownMenu.Content>
-        </RadixDropdownMenu.Portal>
-      </RadixDropdownMenu.Root>
+      <ActionsMenu
+        side="bottom"
+        toggle={<ThreadItemMenuToggle />}
+        container={getThreadItemMenuPortalContainer()}
+        align="end"
+      >
+        <ActionItem
+          title={isArchived ? translate('Unarchive') : translate('Archive')}
+          action={() => onAction(threadId)}
+          iconNode={
+            isArchived ? (
+              <ArrowCounterClockwiseIcon weight="bold" />
+            ) : (
+              <TrashIcon weight="bold" />
+            )
+          }
+          iconColor={isArchived ? 'gray-400' : 'danger'}
+          className={isArchived ? undefined : 'text-danger'}
+        />
+      </ActionsMenu>
     </div>
   );
 };

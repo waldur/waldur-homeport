@@ -92,7 +92,7 @@ export const MultiSelect: Story = {
  * despite its name, never actually shows it. `TableStoryBulkDeleteButton`
  * mirrors `docs/table/row-actions.md`'s own `BulkDeleteButton` reference
  * example almost verbatim — a bare `RemovalActionButton`, not nested in a
- * dropdown (compare `ActionDropdownButton`-wrapped multi-action menus like
+ * dropdown (compare `Menu.TriggerButton`-wrapped multi-action menus like
  * `BatchProjectActions.tsx`, a heavier real pattern this doesn't attempt to
  * cover). */
 export const MultiSelectWithBulkActions: Story = {

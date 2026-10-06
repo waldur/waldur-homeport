@@ -1,5 +1,5 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import { ComponentProps } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from './cn';
 
@@ -34,16 +34,21 @@ import { cn } from './cn';
  * Metronic sets `$popover-box-shadow: $dropdown-box-shadow` and
  * `$popover-border-radius: $border-radius` — a popover and a dropdown are
  * deliberately the same floating surface in this design system, so the
- * panel below reuses the same --dropdown-shadow token and rounded-md
- * radius DropdownMenu.tsx's own panel uses, rather than introducing a
+ * panel below reuses the same --dropdown-shadow token and rounded-lg
+ * radius (8px, the custom $border-radius) DropdownMenu.tsx's own panel uses, rather than introducing a
  * second surface treatment. It is intentionally not shared as one exported
  * constant: the menu panel also carries menu-only concerns (p-1 item
  * gutter, min-w-40, the Metronic menu entrance) that a popover holding
  * arbitrary content must not inherit.
  *
- * Motion is Bootstrap's own `.fade` (opacity .15s linear), not the
- * dropdown's slide — the react-bootstrap popovers this replaces animate
- * through that class and nothing else.
+ * It has no motion of its own: a panel that wants the menus' entrance
+ * adds `animate-[waldur-menu-enter-up_0.3s_ease]`. (An opacity transition
+ * keyed on data-state never ran: Radix mounts the panel already open and
+ * unmounts it on close.)
+ *
+ * A panel of command rows is a `Menu`; a panel of filter or picker rows
+ * styled as menu rows is a `MenuPopover`. Everything else (forms, search
+ * results, a column picker) is a Popover.
  */
 export const Popover = PopoverPrimitive.Root;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
@@ -51,31 +56,37 @@ export const PopoverPortal = PopoverPrimitive.Portal;
 export const PopoverAnchor = PopoverPrimitive.Anchor;
 export const PopoverClose = PopoverPrimitive.Close;
 
-export function PopoverContent({
-  className,
-  align = 'center',
-  sideOffset = 4,
-  ...props
-}: ComponentProps<typeof PopoverPrimitive.Content>) {
-  return (
-    <PopoverPrimitive.Portal>
+/**
+ * A floating card: the card surface (border, background, the dropdown
+ * shadow, an 8px radius) on Bootstrap's popover layer, and nothing else —
+ * no width, padding or height cap, since every panel lays out its own
+ * content. A panel that may outgrow the screen caps itself, e.g. with
+ * `max-h-(--radix-popover-content-available-height) overflow-y-auto`.
+ */
+export const PopoverContent = forwardRef<
+  HTMLDivElement,
+  ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & {
+    /** Where the panel is portaled (default: document.body). */
+    container?: HTMLElement;
+  }
+>(
+  (
+    { className, align = 'center', sideOffset = 4, container, ...props },
+    ref,
+  ) => (
+    <PopoverPrimitive.Portal container={container}>
       <PopoverPrimitive.Content
+        ref={ref}
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          'z-50 w-72 rounded-md border p-4 shadow-[var(--dropdown-shadow)] outline-hidden',
+          'z-popover rounded-lg border shadow-[var(--dropdown-shadow)] outline-hidden',
           'border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] text-[var(--surface-text-primary)]',
-          // Same reasoning as DropdownMenu's panel: Radix sets this CSS var
-          // to the real distance between the trigger and the viewport edge,
-          // so tall content (a long filter form) scrolls inside the popover
-          // instead of growing past the bottom of the screen unreachably.
-          'max-h-(--radix-popover-content-available-height) overflow-y-auto',
-          'transition-opacity duration-150 [transition-timing-function:linear]',
-          'data-[state=closed]:opacity-0 data-[state=open]:opacity-100',
           className,
         )}
         {...props}
       />
     </PopoverPrimitive.Portal>
-  );
-}
+  ),
+);
+PopoverContent.displayName = 'PopoverContent';

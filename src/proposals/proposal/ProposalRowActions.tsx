@@ -4,7 +4,7 @@ import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import {
   CreateManualAssignmentDialog,
@@ -22,7 +22,7 @@ export const ProposalRowActions = ({ row, refetch }) => {
 
   // Never empty now: the document is always available.
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       {canCreateReview && (
         <>
           <ActionItem
@@ -43,6 +43,6 @@ export const ProposalRowActions = ({ row, refetch }) => {
         </>
       )}
       <DownloadProposalPdfAction proposal={row} asDropdownItem />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

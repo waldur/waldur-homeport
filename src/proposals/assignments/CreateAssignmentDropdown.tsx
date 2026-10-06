@@ -3,13 +3,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { proposalProtectedCallsGenerateAssignments } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 const CreateManualAssignmentDialog = lazyComponent(() =>
   import('./CreateManualAssignmentDialog').then((module) => ({
@@ -62,21 +62,25 @@ export const CreateAssignmentDropdown: FC<CreateAssignmentDropdownProps> = ({
   });
 
   return (
-    <ActionDropdownButton
-      title={translate('Create assignment')}
-      variant="primary"
-    >
-      <ActionItem
-        title={translate('Manual assignment')}
-        action={handleManualAssignment}
-        iconNode={<UserPlusIcon weight="bold" />}
-      />
-      <ActionItem
-        title={translate('Generate assignments')}
-        action={() => generateMutation.mutate()}
-        iconNode={<SparkleIcon weight="bold" />}
-        disabled={generateMutation.isPending}
-      />
-    </ActionDropdownButton>
+    <Menu>
+      <Menu.TriggerButton variant="primary" size="lg">
+        {translate('Create assignment')}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom">
+        <Menu.Item
+          icon={<UserPlusIcon weight="bold" />}
+          onSelect={handleManualAssignment}
+        >
+          {translate('Manual assignment')}
+        </Menu.Item>
+        <Menu.Item
+          icon={<SparkleIcon weight="bold" />}
+          onSelect={() => generateMutation.mutate()}
+          disabled={generateMutation.isPending}
+        >
+          {translate('Generate assignments')}
+        </Menu.Item>
+      </Menu.Content>
+    </Menu>
   );
 };

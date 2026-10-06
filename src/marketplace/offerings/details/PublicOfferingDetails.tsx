@@ -5,6 +5,7 @@ import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 import { usePermissionView } from '@/auth/PermissionLayout';
 import { translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
+import { ActionsUnavailable } from '@/table/ActionsDropdown';
 
 interface PublicOfferingDetailsProps {
   offering: Offering;
@@ -61,11 +62,19 @@ export const PublicOfferingDetails: FunctionComponent<
         offering.state === 'Unavailable' && 'disabled-view',
       )}
     >
-      <tabSpec.component
-        offering={offering}
-        category={category}
-        canDeploy={canDeploy}
-      />
+      <ActionsUnavailable
+        reason={
+          offering.state === 'Unavailable'
+            ? translate('This offering is unavailable.')
+            : undefined
+        }
+      >
+        <tabSpec.component
+          offering={offering}
+          category={category}
+          canDeploy={canDeploy}
+        />
+      </ActionsUnavailable>
     </div>
   ) : null;
 };

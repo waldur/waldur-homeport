@@ -1,33 +1,37 @@
 import { Link } from '@/core/Link';
 
 /**
- * Deliberately plain — NOT a Radix menu item, even though it renders
- * inside a real Radix menu in one of its three call sites
- * (MobileMenu.tsx's grouped case, nested in FooterDropdown.tsx's
- * NavMenuContent). The other two — FooterLinks.tsx's desktop layout and
- * MobileMenu.tsx's own ungrouped case — render this as a *standalone*
- * top-level footer nav link, with no Root/Content anywhere above it.
- * A RadixDropdownMenu.Item (tried first, reverted here) throws
- * "`MenuItem` must be used within `Menu`" the instant it renders outside
- * one — real production crash, not a hypothetical. A component with
- * more than one host has to work correctly in *its narrowest* host, not
- * its richest one.
+ * A standalone footer bar link (FooterLinks.tsx's desktop layout and
+ * MobileMenu.tsx's ungrouped case). Deliberately not a Radix menu item:
+ * those throw outside a menu. Inside a FooterDropdown, use
+ * FooterDropdownLink (FooterDropdownItems.tsx) instead.
  */
+/**
+ * A footer bar link, ported from Metronic's `.menu-brand .menu-link` with
+ * the `px-3` every call site used: brand-coloured, 8px x 9.75px. Shared
+ * with FooterDropdown's trigger.
+ */
+export const FOOTER_LINK_CLASSNAME =
+  'flex cursor-pointer items-center px-[9.75px] py-[8px] text-[var(--footer-link-text)] no-underline';
+
 export const MenuItem = ({
   label,
   state,
   icon,
-  className = 'px-3',
 }: {
   label: string;
   state: string;
   icon?: React.ReactNode;
-  className?: string;
 }) => (
-  <li className="menu-item">
-    <Link className={`menu-link ${className}`} state={state}>
-      {icon && <span className="menu-icon">{icon}</span>}
-      <span className="menu-title">{label}</span>
+  <li>
+    <Link className={FOOTER_LINK_CLASSNAME} state={state}>
+      {icon && (
+        <span className="me-[8px] flex w-[20px] shrink-0 items-center justify-center">
+          {icon}
+        </span>
+      )}
+      {/* A span, so Link doesn't give the label its `text-anchor` style. */}
+      <span>{label}</span>
     </Link>
   </li>
 );

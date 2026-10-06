@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
-import { Variant } from 'react-bootstrap/esm/types';
 
 import { ButtonVariant } from 'waldur-ui';
 
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
 import { DialogSizeType } from '@/modal/types';
 import { ActionValidator } from '@/resource/actions/types';
+
+import type { ActionIconColor } from './ActionItem';
 
 type ModalComponentProps<T> = React.ComponentType<{
   resolve: any & { resource: T };
@@ -37,6 +38,6 @@ export interface DialogActionProps<T>
   extraResolve?: any;
   iconClass?: string;
   iconNode?: ReactNode;
-  iconColor?: Variant;
+  iconColor?: ActionIconColor;
   actionId?: ResourceAction;
 }

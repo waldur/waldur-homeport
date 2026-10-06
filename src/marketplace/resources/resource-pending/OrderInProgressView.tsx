@@ -5,17 +5,20 @@ import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
 import { Badge } from 'waldur-ui';
 
-import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
 import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
 import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
+import { canReviewOrderAsConsumer } from '@/marketplace/orders/actions/selectors';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { ProgressSteps } from '@/wizard';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceViewChangeButton } from './ResourceViewChangeButton';
 import {
+  formatTimelineEntry,
   hasResourceChangePlanRequest,
   hasResourceLimitChangeRequest,
 } from './utils';
@@ -26,17 +29,26 @@ const OrderInProgressActions: FC<{
   refetch(): void;
   providerView?: boolean;
 }> = ({ resource, offering, refetch, providerView }) => {
+  const user = useUser();
   if (resource.order_in_progress.state === 'pending-consumer') {
-    // Consumer approval is not the provider's to give; an empty menu helps no one.
-    if (providerView) return null;
+    // Consumer approval is not the provider's to give, and approve/decline
+    // each hide themselves without the matching permission — on the order
+    // page, which has no providerView, that left a trigger opening onto
+    // nothing.
+    if (
+      providerView ||
+      !canReviewOrderAsConsumer(user, resource.order_in_progress)
+    ) {
+      return null;
+    }
     return (
-      <ActionsDropdownComponent labeled size="sm" drop="down">
+      <ActionsMenu toggle="labeled" size="sm" side="bottom">
         <OrderConsumerActions
           order={resource.order_in_progress}
           offering={offering}
           refetch={refetch}
         />
-      </ActionsDropdownComponent>
+      </ActionsMenu>
     );
   }
   if (
@@ -85,14 +97,17 @@ export const getSteps = (
   steps.push({
     label: translate('Order created'),
     description: [
-      [
-        resource.order_in_progress.created_by_full_name,
-        formatDateTime(resource.order_in_progress.created),
-      ].join(', '),
+      formatTimelineEntry(
+        order.created_by_full_name || order.created_by_username,
+        order.created,
+      ),
     ],
     completed: true,
   });
 
+  // Orders predating review bookkeeping moved on without one; they are still
+  // approved, just without a reviewer line.
+  const consumerReviewed = Boolean(order.consumer_reviewed_at);
   const isStep2Completed = order.state !== 'pending-consumer';
   const purchaseOrderNeeded =
     !isStep2Completed &&
@@ -100,12 +115,15 @@ export const getSteps = (
     !order.attachment;
   const step2Description: any[] = [];
   if (isStep2Completed) {
-    step2Description.push(
-      [
-        order.consumer_reviewed_by_full_name,
-        formatDateTime(order.consumer_reviewed_at),
-      ].join(', '),
-    );
+    if (consumerReviewed) {
+      step2Description.push(
+        formatTimelineEntry(
+          order.consumer_reviewed_by_full_name ||
+            order.consumer_reviewed_by_username,
+          order.consumer_reviewed_at,
+        ),
+      );
+    }
   } else {
     step2Description.push(translate('Pending organization approval'));
     if (purchaseOrderNeeded) {
@@ -125,14 +143,15 @@ export const getSteps = (
     label: isStep2Completed
       ? translate('Approved')
       : translate('Pending approval'),
-    description: step2Description,
+    description: step2Description.length ? step2Description : undefined,
     completed: isStep2Completed,
     ...(purchaseOrderNeeded && { variant: 'warning' as const }),
   });
 
-  const isStep3Completed = !['pending-consumer', 'pending-provider'].includes(
-    order.state,
-  );
+  // Provider approval cannot have happened before consumer approval did.
+  const isStep3Completed =
+    isStep2Completed &&
+    !['pending-consumer', 'pending-provider'].includes(order.state);
   steps.push({
     label: isStep3Completed
       ? translate('Approved')
@@ -140,11 +159,11 @@ export const getSteps = (
     description: isStep3Completed
       ? [
           order.provider_reviewed_at
-            ? [
+            ? formatTimelineEntry(
                 order.provider_reviewed_by_full_name ||
                   translate('By provider'),
-                formatDateTime(order.provider_reviewed_at),
-              ].join(', ')
+                order.provider_reviewed_at,
+              )
             : translate('Auto-approved'),
         ]
       : [translate('Pending provider approval')],
@@ -214,12 +233,14 @@ export const getSteps = (
                 ? translate('Rejected')
                 : translate('Done'),
         ]
-      : [
+      : // The step has not happened yet: describing it as a success read as
+        // though a pending order had already provisioned its resource.
+        [
           order.type === 'Create'
-            ? translate('Resource successfully created')
+            ? translate('Pending resource creation')
             : order.type === 'Terminate'
-              ? translate('Resource successfully terminated')
-              : translate('Resource successfully updated'),
+              ? translate('Pending resource termination')
+              : translate('Pending resource update'),
         ],
     completed: isStep4Completed,
     variant: isStep4Failed ? 'danger' : 'primary',

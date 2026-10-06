@@ -25,6 +25,38 @@ export interface SwitchProps extends Omit<
  * live instance in this app to measure the rendered px from — so those
  * are a standard toggle-switch size instead.
  */
+/**
+ * The switch's look on its own, with no input: for a control that already
+ * has its own semantics, such as Menu.CheckboxItem (role="menuitemcheckbox").
+ */
+export function SwitchVisual({
+  checked,
+  className,
+}: {
+  checked: boolean;
+  className?: string;
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        'relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors',
+        checked
+          ? 'bg-[var(--waldur-brand-color)]'
+          : 'bg-[var(--surface-hover-bg)]',
+        className,
+      )}
+    >
+      <span
+        className={cn(
+          'inline-block size-4 rounded-full bg-white shadow transition-transform',
+          checked ? 'translate-x-[18px]' : 'translate-x-0.5',
+        )}
+      />
+    </span>
+  );
+}
+
 export function Switch({
   checked,
   onCheckedChange,
@@ -34,10 +66,7 @@ export function Switch({
   return (
     <label
       className={cn(
-        'relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--waldur-brand-color)] has-[:focus-visible]:ring-offset-2',
-        checked
-          ? 'bg-[var(--waldur-brand-color)]'
-          : 'bg-[var(--surface-hover-bg)]',
+        'relative inline-flex shrink-0 cursor-pointer rounded-full has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--waldur-brand-color)] has-[:focus-visible]:ring-offset-2',
         className,
       )}
     >
@@ -48,12 +77,7 @@ export function Switch({
         className="sr-only"
         {...props}
       />
-      <span
-        className={cn(
-          'inline-block size-4 rounded-full bg-white shadow transition-transform',
-          checked ? 'translate-x-[18px]' : 'translate-x-0.5',
-        )}
-      />
+      <SwitchVisual checked={checked} />
     </label>
   );
 }

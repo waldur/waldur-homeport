@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { AssignmentBatchList } from 'waldur-js-client';
 
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { CancelAction } from './CancelAction';
 import { ExtendDeadlineAction } from './ExtendDeadlineAction';
@@ -25,12 +25,12 @@ export const AssignmentBatchRowActions: FC<AssignmentBatchRowActionsProps> = ({
   }
 
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       {canSend && <SendAction row={row} refetch={refetch} />}
       {canExtendDeadline && (
         <ExtendDeadlineAction row={row} refetch={refetch} />
       )}
       {canCancel && <CancelAction row={row} refetch={refetch} />}
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

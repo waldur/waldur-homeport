@@ -4,7 +4,7 @@ import { marketplaceServiceProvidersListUsersList } from 'waldur-js-client';
 import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
 import { translate } from '@/i18n';
 import { GenericPermission } from '@/permissions/types';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { useTable } from '@/table/useTable';
 import { useCustomer } from '@/workspace/hooks';
@@ -14,9 +14,9 @@ import { UserRemoveButton } from './UserRemoveButton';
 
 const RowActions = ({ row, fetch }) => {
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <UserRemoveButton user={row} refetch={fetch} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 

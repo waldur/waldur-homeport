@@ -8,7 +8,7 @@ import {
   OfferingMergeIssue,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, Tooltip } from 'waldur-ui';
+import { AlertItem, Badge, Menu, Tooltip } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -16,7 +16,7 @@ import { DropdownLink } from '@/marketplace/offerings/list/DropdownLink';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { ActionsDropdown, ActionsDropdownItem } from '@/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher, createFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -46,17 +46,15 @@ const EditOfferingAction = ({
     // asChild so the row *is* the link: Radix merges its menuitem
     // semantics and keyboard handling onto DropdownLink's own anchor
     // instead of nesting an anchor inside a menuitem div.
-    <ActionsDropdownItem asChild>
+    <Menu.Item asChild>
       <DropdownLink
         state="admin-marketplace-offering-update"
         params={{ offering_uuid: row.uuid, uuid: customerUuid }}
+        icon={<PencilSimpleIcon weight="bold" />}
       >
-        <span className="svg-icon svg-icon-2">
-          <PencilSimpleIcon weight="bold" />
-        </span>
         {translate('Edit offering')}
       </DropdownLink>
-    </ActionsDropdownItem>
+    </Menu.Item>
   );
 };
 

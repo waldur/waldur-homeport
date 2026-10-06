@@ -16,6 +16,7 @@
     "./focusRing.css": "./src/focusRing.css",
     "./animations.css": "./src/animations.css",
     "./zIndex.css": "./src/zIndex.css",
+    "./variants.css": "./src/variants.css",
     "./fonts.css": "./src/fonts.css"
   },
   "dependencies": {

@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { marketplaceRobotAccountsCreate, usersList } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesRobotAccountUsersList,
+  marketplaceRobotAccountsCreate,
+} from 'waldur-js-client';
 
 import { LATIN_NAME_PATTERN } from '@/core/utils';
 import { createLoadOptions } from '@/form/select';
@@ -16,15 +19,40 @@ export interface RobotAccountFormData {
   responsible_user: { url: string; full_name: string; email: string };
 }
 
-export const useRobotAccountFields = (resource) => {
+// Locking the username needs the offering's effective account settings, which
+// only the marketplace resource carries: the policy may be inherited from the
+// service provider, so the offering's own plugin option is just a fallback for
+// an older API.
+export const isUsernameManagedByProvider = (resource: {
+  offering_account_settings?: {
+    username_generation_policy?: { value?: string };
+  };
+  offering_plugin_options?: { username_generation_policy?: string };
+}) =>
+  (resource.offering_account_settings?.username_generation_policy?.value ??
+    resource.offering_plugin_options?.username_generation_policy) ===
+  'service_provider';
+
+// `resourceUuid` is the marketplace resource the robot account belongs to. The
+// backend lists only the users such an account may link, so people who have
+// not accepted the offering's Terms of Service are never offered.
+export const useRobotAccountFields = ({
+  resourceUuid,
+  usernameManagedByProvider,
+}: {
+  resourceUuid: string;
+  usernameManagedByProvider: boolean;
+}) => {
   const loadUsers = useMemo(
     () =>
-      createLoadOptions(usersList, 'full_name', {
-        project_uuid: resource.project_uuid,
-        field: ['full_name', 'email', 'url', 'uuid'],
-        o: ['full_name'],
-      }),
-    [resource.project_uuid],
+      createLoadOptions(
+        marketplaceProviderResourcesRobotAccountUsersList,
+        // Matches full name, username or email, not just the name.
+        'user_keyword',
+        {},
+        { uuid: resourceUuid },
+      ),
+    [resourceUuid],
   );
 
   return [
@@ -41,13 +69,7 @@ export const useRobotAccountFields = (resource) => {
       maxlength: 32,
       type: 'string',
       pattern: LATIN_NAME_PATTERN,
-      // The effective policy may be inherited from the service provider, so
-      // the offering's own plugin option is only a fallback for an older API.
-      disabled:
-        (resource.offering_account_settings?.username_generation_policy
-          ?.value ??
-          resource.offering_plugin_options?.username_generation_policy) ===
-        'service_provider',
+      disabled: usernameManagedByProvider,
       disabled_tooltip: translate('Username is managed by service provider.'),
     },
     {
@@ -101,7 +123,10 @@ export const CreateRobotAccountDialog = ({
     refetch: refetch,
   });
 
-  const fields = useRobotAccountFields(resource);
+  const fields = useRobotAccountFields({
+    resourceUuid: resource.uuid,
+    usernameManagedByProvider: isUsernameManagedByProvider(resource),
+  });
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create robot account')}

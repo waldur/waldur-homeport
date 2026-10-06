@@ -11,6 +11,7 @@ import { ChangeLimitsAction } from '@/marketplace/resources/change-limits/Change
 import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
 import { ShowUsageAction } from '@/marketplace/resources/list/ShowUsageAction';
 import { RenewAllocationActionAction } from '@/marketplace/resources/renew-allocation/RenewAllocationAction';
+import { RequestEndDateChangeAction } from '@/marketplace/resources/request-end-date-change/RequestEndDateChangeAction';
 import { TerminateAction } from '@/marketplace/resources/terminate/TerminateAction';
 import { SetResourceErredAction } from '@/resource/actions/SetResourceErredAction';
 import { SetResourceOkAction } from '@/resource/actions/SetResourceOkAction';
@@ -36,6 +37,7 @@ export const OpenstackTenantActions = (props) => (
       <ChangePlanAction {...props} />
       <ChangeLimitsAction {...props} />
       <RenewAllocationActionAction {...props} />
+      <RequestEndDateChangeAction {...props} />
       <ShowUsageAction {...props} />
     </ActionGroup>
 

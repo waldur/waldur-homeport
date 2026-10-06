@@ -154,7 +154,7 @@ describe('TableFiltersMenu', () => {
     // fields and filter control itself - this is bug - dropdown menu is
     // not needed in this case." Fixed in TableFilterItem.tsx: the one
     // row matching `openName` now renders its field directly (no
-    // collapsed menu-link row, no nested Popover of its own), and every
+    // collapsed button row, no nested Popover of its own), and every
     // other row renders nothing at all inside a column-header instance.
     const user = userEvent.setup();
     renderMenu({
@@ -178,7 +178,7 @@ describe('TableFiltersMenu', () => {
     await user.click(screen.getByRole('button', { name: 'Filter by column' }));
     expect(await screen.findByPlaceholderText('Catalog')).toBeInTheDocument();
     // The non-target sibling's own row/label must not appear anywhere —
-    // not as a collapsed menu-link row, not as its own field.
+    // not as a collapsed button row, not as its own field.
     expect(screen.queryByText('Vendor')).not.toBeInTheDocument();
     expect(screen.queryByPlaceholderText('Vendor')).not.toBeInTheDocument();
   });

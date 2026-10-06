@@ -8,7 +8,7 @@ import { FAST_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { Field } from '@/resource/summary';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -140,12 +140,12 @@ export const AssignmentBatchExpandableRow: FC<
         minHeight="auto"
         rowActions={({ row: item }) =>
           item.status === 'coi_blocked' ? (
-            <ActionsDropdownComponent>
+            <ActionsMenu>
               <ForceUnblockAssignmentAction
                 item={item}
                 refetchBatch={refetchBatch}
               />
-            </ActionsDropdownComponent>
+            </ActionsMenu>
           ) : null
         }
       />

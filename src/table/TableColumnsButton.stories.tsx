@@ -158,10 +158,10 @@ export const Open: Story = {
   },
 };
 
-const getDropdownItem = (text: string): HTMLElement => {
-  const row = Array.from(document.querySelectorAll('.dropdown-item')).find(
-    (el) => el.textContent?.includes(text),
-  );
+const getColumnRow = (text: string): HTMLElement => {
+  const row = Array.from(
+    document.querySelectorAll('[data-testid="column-row"]'),
+  ).find((el) => el.textContent?.includes(text));
   if (!row) throw new Error(`"${text}" row not found`);
   return row as HTMLElement;
 };
@@ -176,12 +176,11 @@ export const ToggleColumn: Story = {
       canvas.getByRole('button', { name: 'Toggle visible columns' }),
     );
 
-    await waitFor(() => getDropdownItem('Region'));
-    const regionRow = getDropdownItem('Region');
-    // The checkbox is a bare `<input>` with no `<label>` (see
-    // ColumnsPopover's SortableItem) — clicking the outer row instead
-    // hits its own `role="button"` drag-sortable wrapper (dnd-kit's
-    // `useSortable` listeners), not the checkbox's onChange.
+    await waitFor(() => getColumnRow('Region'));
+    const regionRow = getColumnRow('Region');
+    // The checkbox is properly associated with its label; clicking the
+    // checkbox or its label toggles the state, while drag reordering is
+    // isolated to the dedicated drag handle button.
     const checkbox = regionRow.querySelector(
       'input[type="checkbox"]',
     ) as HTMLInputElement;
@@ -211,7 +210,9 @@ export const SearchColumns: Story = {
     await userEvent.type(search, 'Region');
 
     await waitFor(() => {
-      const items = Array.from(document.querySelectorAll('.dropdown-item'));
+      const items = Array.from(
+        document.querySelectorAll('[data-testid="column-row"]'),
+      );
       expect(items).toHaveLength(1);
       expect(items[0].textContent).toContain('Region');
     });
@@ -230,7 +231,7 @@ export const WithRowActions: Story = {
     await userEvent.click(
       canvas.getByRole('button', { name: 'Toggle visible columns' }),
     );
-    await waitFor(() => getDropdownItem('Actions'));
+    await waitFor(() => getColumnRow('Actions'));
   },
 };
 

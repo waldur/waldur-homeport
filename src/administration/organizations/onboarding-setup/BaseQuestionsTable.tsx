@@ -24,7 +24,7 @@ import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useNotify } from '@/store/notify';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableWithPortal } from '@/table/types';
@@ -418,7 +418,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
   ];
 
   const rowActions = ({ row }) => (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <ActionItem
         action={() => handleEditQuestion(row)}
         title={translate('Edit')}
@@ -428,7 +428,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
         action={() => handleDeleteQuestion(row)}
         title={translate('Delete')}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 
   const tableActions = (

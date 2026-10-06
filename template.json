@@ -692,6 +692,11 @@
   "A custom .png image file for login page": {},
   "A custom PNG icon for Keycloak login button": {},
   "A custom favicon .png image file": {},
+  "A deactivated user cannot see or answer a request.": {
+    "context": {
+      "feature_area": "dashboard"
+    }
+  },
   "A deleted key cannot be edited.": {
     "context": {
       "feature_area": "api-keys"
@@ -1643,6 +1648,27 @@
       "feature_area": "policies"
     }
   },
+  "Actions for {name}": {
+    "context": {
+      "primary_ui_type": "title",
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "actions"
+    }
+  },
+  "Actions found: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "actions"
+    }
+  },
   "Actions taken": {
     "context": {
       "feature_area": "policies"
@@ -2551,6 +2577,11 @@
   "Added to a project you already belong to. Provisioning starts as soon as the order is approved.": {
     "context": {
       "feature_area": "access"
+    }
+  },
+  "Added to favourites": {
+    "context": {
+      "feature_area": "breadcrumb"
     }
   },
   "Adding comments is not available": {
@@ -3692,16 +3723,6 @@
       "feature_area": "openstack"
     }
   },
-  "Allow marketplace to function as a catalogue only.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
-  "Allow marketplace to serve only as aggregator of call info.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
   "Allow restoring terminated resources": {
     "context": {
       "feature_area": "integration"
@@ -4627,7 +4648,8 @@
   },
   "Apps": {
     "context": {
-      "primary_ui_type": "title"
+      "primary_ui_type": "title",
+      "feature_area": "shell"
     }
   },
   "Appservice": {},
@@ -8727,7 +8749,7 @@
   },
   "CSV": {
     "context": {
-      "feature_area": "usage"
+      "feature_area": "core"
     }
   },
   "CSV (max. 10 MB)": {
@@ -9289,6 +9311,11 @@
         }
       },
       "action_type": "read"
+    }
+  },
+  "Carry unsubmitted drafts over to the next round": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Carryover": {
@@ -10242,7 +10269,7 @@
   },
   "Clear": {
     "context": {
-      "feature_area": "search"
+      "feature_area": "form"
     }
   },
   "Clear (None)": {
@@ -10625,6 +10652,63 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "admin"
+    }
+  },
+  "Column {title} was dropped at position {position} of {total}.": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "position": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "Column {title} was dropped.": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "Column {title} was moved over position {position} of {total}.": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        },
+        "position": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "Columns": {
+    "context": {
+      "feature_area": "table"
+    }
+  },
+  "Columns found: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "table"
     }
   },
   "Combined": {
@@ -12200,6 +12284,11 @@
   "Copy": {
     "context": {
       "feature_area": "changelog"
+    }
+  },
+  "Copy API token": {
+    "context": {
+      "feature_area": "header"
     }
   },
   "Copy applicant-data visibility settings.": {
@@ -18446,11 +18535,6 @@
       "feature_area": "openstack-subnet"
     }
   },
-  "Enabled display of call management functionality.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
   "Enabled display of experimental or mocked components in marketplace.": {
     "context": {
       "feature_area": "features"
@@ -19679,7 +19763,7 @@
   },
   "Excel": {
     "context": {
-      "feature_area": "usage"
+      "feature_area": "core"
     }
   },
   "Excel or CSV (max. 10 MB)": {
@@ -19968,7 +20052,7 @@
   "Export": {
     "context": {
       "primary_ui_type": "submit_button",
-      "feature_area": "core",
+      "feature_area": "list",
       "action_type": "create"
     }
   },
@@ -19990,26 +20074,6 @@
   "Export as": {
     "context": {
       "feature_area": "table"
-    }
-  },
-  "Export as CSV": {
-    "context": {
-      "feature_area": "core"
-    }
-  },
-  "Export as PDF": {
-    "context": {
-      "feature_area": "core"
-    }
-  },
-  "Export as PNG": {
-    "context": {
-      "feature_area": "core"
-    }
-  },
-  "Export as XLSX": {
-    "context": {
-      "feature_area": "core"
     }
   },
   "Export call": {
@@ -23241,6 +23305,11 @@
       "feature_area": "changelog"
     }
   },
+  "Help": {
+    "context": {
+      "feature_area": "shell"
+    }
+  },
   "Help me manage my accounts": {
     "context": {
       "feature_area": "ai-assistant"
@@ -23608,6 +23677,11 @@
     }
   },
   "Hostname of FreeIPA server.": {},
+  "Hour": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "Hourly roll-ups": {
     "context": {
       "primary_ui_type": "title",
@@ -27531,11 +27605,7 @@
   },
   "Link URL in hero section of HomePort landing page.": {},
   "Link URL to support portal. Rendered as a shortcut on dashboard": {},
-  "Link invoice": {
-    "context": {
-      "feature_area": "payments"
-    }
-  },
+  "Link invoice": {},
   "Link to Waldur Resource": {},
   "Link to compensation InvoiceItem (if adjustment needed)": {},
   "Link to external maintenance page or ticket": {
@@ -27593,6 +27663,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "List calls that are run outside Waldur: each call links to an external URL where applications are made, and rounds, proposals and reviews are hidden.": {
+    "context": {
+      "feature_area": "features"
     }
   },
   "List course accounts": {
@@ -30521,6 +30596,11 @@
       "feature_area": "analytics"
     }
   },
+  "Minute": {
+    "context": {
+      "feature_area": "DatePicker"
+    }
+  },
   "Minutes the announcement banner stays visible after maintenance completes": {},
   "Mirrors a membership in SURF Research Access Management (SRAM). Changes made here are overwritten by the next SRAM push.": {},
   "Miss": {
@@ -31937,7 +32017,7 @@
   },
   "Next page": {
     "context": {
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "Next project group GID: {next}": {
@@ -31978,6 +32058,11 @@
   "Next version": {
     "context": {
       "feature_area": "shared"
+    }
+  },
+  "Next year": {
+    "context": {
+      "feature_area": "DatePicker"
     }
   },
   "No": {
@@ -32107,9 +32192,25 @@
       "feature_area": "policies"
     }
   },
+  "No action matches \"{query}\".": {
+    "context": {
+      "variables": {
+        "query": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "actions",
+      "action_type": "filter"
+    }
+  },
   "No actions available for this user.": {
     "context": {
       "feature_area": "team"
+    }
+  },
+  "No actions found": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "No active calls right now": {
@@ -32349,6 +32450,11 @@
   "No classification data found": {
     "context": {
       "feature_area": "project-classification"
+    }
+  },
+  "No columns found": {
+    "context": {
+      "feature_area": "table"
     }
   },
   "No columns to configure": {
@@ -33263,6 +33369,11 @@
   "No projects found for this user": {
     "context": {
       "feature_area": "openportal"
+    }
+  },
+  "No projects found.": {
+    "context": {
+      "feature_area": "create"
     }
   },
   "No projects match the filters.": {
@@ -35809,6 +35920,11 @@
       "feature_area": "providers"
     }
   },
+  "Open support request": {
+    "context": {
+      "feature_area": "staff-request"
+    }
+  },
   "Open support tickets": {
     "context": {
       "primary_ui_type": "title"
@@ -36334,7 +36450,7 @@
   },
   "Order": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "events"
     }
   },
@@ -37316,7 +37432,7 @@
   },
   "PDF": {
     "context": {
-      "feature_area": "usage"
+      "feature_area": "core"
     }
   },
   "PDF (max. 10 MB)": {
@@ -37362,7 +37478,7 @@
   },
   "PNG": {
     "context": {
-      "feature_area": "usage"
+      "feature_area": "core"
     }
   },
   "PO reference": {
@@ -37483,6 +37599,16 @@
     }
   },
   "Page is not found": {},
+  "Page sections": {
+    "context": {
+      "feature_area": "ScrollSpy"
+    }
+  },
+  "Page tabs": {
+    "context": {
+      "feature_area": "navigation"
+    }
+  },
   "Page {page} of {total}": {
     "context": {
       "variables": {
@@ -37504,6 +37630,11 @@
         }
       },
       "feature_area": "reports"
+    }
+  },
+  "Pagination": {
+    "context": {
+      "feature_area": "pagination"
     }
   },
   "Paid": {
@@ -38049,6 +38180,21 @@
   "Pending provider orders": {
     "context": {
       "feature_area": "confirmation-drawer"
+    }
+  },
+  "Pending resource creation": {
+    "context": {
+      "feature_area": "resource-pending"
+    }
+  },
+  "Pending resource termination": {
+    "context": {
+      "feature_area": "resource-pending"
+    }
+  },
+  "Pending resource update": {
+    "context": {
+      "feature_area": "resource-pending"
     }
   },
   "Pending review": {
@@ -38753,6 +38899,16 @@
   "Pick two different periods to see the comparison.": {
     "context": {
       "feature_area": "views"
+    }
+  },
+  "Picked up column {title}. Use arrow keys to reorder, space to drop.": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
     }
   },
   "Pie": {
@@ -39846,6 +40002,11 @@
       "feature_area": "details"
     }
   },
+  "Posted as the first comment of the request. The recipient is notified the same way as for any other comment, and their reply comes back to you.": {
+    "context": {
+      "feature_area": "staff-request"
+    }
+  },
   "Potential": {
     "context": {
       "primary_ui_type": "label",
@@ -40067,6 +40228,16 @@
       "feature_area": "roles"
     }
   },
+  "Press {shortcut} to add the highlighted item to favourites or remove it.": {
+    "context": {
+      "variables": {
+        "shortcut": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "breadcrumb"
+    }
+  },
   "Preview": {
     "context": {
       "primary_ui_type": "submit_button",
@@ -40237,7 +40408,7 @@
   },
   "Previous page": {
     "context": {
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "Previous period": {
@@ -40259,6 +40430,11 @@
   "Previous version": {
     "context": {
       "feature_area": "shared"
+    }
+  },
+  "Previous year": {
+    "context": {
+      "feature_area": "DatePicker"
     }
   },
   "Previously saved credit value for this organization: {currency} {credits}": {
@@ -44441,6 +44617,11 @@
       "feature_area": "roles"
     }
   },
+  "Removed from favourites": {
+    "context": {
+      "feature_area": "breadcrumb"
+    }
+  },
   "Removed organizations cannot be restored!": {
     "context": {
       "feature_area": "details"
@@ -44664,6 +44845,26 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "renew-allocation"
+    }
+  },
+  "Reorder column {title}": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "Reordering was cancelled. Column {title} returned to its original position.": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
     }
   },
   "Repeats": {
@@ -45620,7 +45821,8 @@
   },
   "Resource actions": {
     "context": {
-      "feature_area": "openstack-instance"
+      "primary_ui_type": "title",
+      "feature_area": "actions"
     }
   },
   "Resource already has this plan.": {
@@ -46037,21 +46239,6 @@
   "Resource statistics by state and offering": {
     "context": {
       "feature_area": "reporting"
-    }
-  },
-  "Resource successfully created": {
-    "context": {
-      "feature_area": "resource-pending"
-    }
-  },
-  "Resource successfully terminated": {
-    "context": {
-      "feature_area": "resource-pending"
-    }
-  },
-  "Resource successfully updated": {
-    "context": {
-      "feature_area": "resource-pending"
     }
   },
   "Resource sync has been scheduled.": {
@@ -46662,6 +46849,16 @@
   "Result of last run": {
     "context": {
       "feature_area": "remote-offering-sync"
+    }
+  },
+  "Results: {count}": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "breadcrumb"
     }
   },
   "Resume": {
@@ -47977,7 +48174,7 @@
   },
   "Rows per page": {
     "context": {
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "Rows that deliberately stay with the archived source offerings: their own plans and components, consents, offering-level policies and roles. They are not moved, and the sources are archived rather than deleted.": {
@@ -48055,6 +48252,11 @@
       "primary_ui_type": "submit_button",
       "feature_area": "auto-provisioning-rules",
       "action_type": "create"
+    }
+  },
+  "Run the marketplace as a catalogue: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.": {
+    "context": {
+      "feature_area": "features"
     }
   },
   "Run the preview first.": {
@@ -48842,6 +49044,11 @@
       "feature_area": "reviewer-discovery"
     }
   },
+  "Search actions": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Search again": {
     "context": {
       "feature_area": "endpoints"
@@ -48902,6 +49109,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "Search columns": {
+    "context": {
+      "feature_area": "table"
+    }
+  },
   "Search docs": {
     "context": {
       "primary_ui_type": "label",
@@ -48932,6 +49144,11 @@
   "Search offerings...": {
     "context": {
       "feature_area": "landing"
+    }
+  },
+  "Search results": {
+    "context": {
+      "feature_area": "breadcrumb"
     }
   },
   "Search...": {
@@ -49722,6 +49939,11 @@
   "Select or type a value": {
     "context": {
       "feature_area": "restrictions"
+    }
+  },
+  "Select or type to add a new option...": {
+    "context": {
+      "feature_area": "select"
     }
   },
   "Select or type to add tags...": {
@@ -51555,6 +51777,11 @@
     }
   },
   "Show available bot commands": {},
+  "Show call management: the call-managing organization's workspace, providers' requests for offerings, and proposal reports. Independent of SERVICE_ACCESS_MODE, which governs how applicants reach services.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Show chart": {
     "context": {
       "feature_area": "plan-usage"
@@ -52717,6 +52944,11 @@
   "Start IP is not within the CIDR range": {
     "context": {
       "feature_area": "openstack-network"
+    }
+  },
+  "Start a conversation with a user. They see the request in their support list and can reply to it.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "Start and end time must be in the future.": {
@@ -57208,6 +57440,11 @@
       "feature_area": "offerings"
     }
   },
+  "This offering is unavailable.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "This offering requires a purchase order. Give its reference, attach the document, or both. You can save the request now and add it before submitting the access request.": {
     "context": {
       "feature_area": "proposals"
@@ -58036,6 +58273,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "thread"
+    }
+  },
+  "Toggle": {
+    "context": {
+      "feature_area": "ui"
     }
   },
   "Toggle camera": {
@@ -64650,7 +64892,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "actions"
+      "feature_area": "robot-accounts"
     }
   },
   "Updating": {
@@ -65192,6 +65434,11 @@
   "Use an existing namespace": {
     "context": {
       "feature_area": "template"
+    }
+  },
+  "Use arrow keys to navigate matching actions and press Enter to select.": {
+    "context": {
+      "feature_area": "actions"
     }
   },
   "Use default ({value})": {
@@ -67954,6 +68201,11 @@
       "feature_area": "workflow-steps"
     }
   },
+  "When a round closes, move unsubmitted drafts to the next round instead of cancelling them. Applicants keep their content and are notified by email. Drafts are cancelled as before when the call has no later round.": {
+    "context": {
+      "feature_area": "configuration"
+    }
+  },
   "When carryover is enabled, unused allocation from the previous period carries over, capped at {pct}% of the base allocation:": {
     "context": {
       "variables": {
@@ -68946,6 +69198,11 @@
   "You can't join this organization with your current account details. Access is limited to certain users as defined by the organization manager.": {
     "context": {
       "feature_area": "join-organization"
+    }
+  },
+  "You cannot address a request to yourself.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "You cannot unselect the current UI language": {
@@ -73299,7 +73556,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "table"
+      "feature_area": "pagination"
     }
   },
   "{hours} h": {
@@ -75108,6 +75365,19 @@
       "feature_area": "service-desk"
     }
   },
+  "{start} to {end}": {
+    "context": {
+      "variables": {
+        "start": {
+          "type": "unknown"
+        },
+        "end": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "DatePicker"
+    }
+  },
   "{start} → {end} ({zone})": {
     "context": {
       "variables": {
@@ -75225,8 +75495,7 @@
         "type": {
           "type": "unknown"
         }
-      },
-      "feature_area": "details"
+      }
     }
   },
   "{usage} / {limit} ({percent}%)": {

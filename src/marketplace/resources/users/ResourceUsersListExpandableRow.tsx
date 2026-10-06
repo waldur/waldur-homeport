@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect } from 'react';
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createClientPaginatedFetcher } from '@/table/api';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -68,10 +68,10 @@ const RowActions: FunctionComponent<{
     expiration_time: grant.expiration_time,
   } as any;
   return (
-    <ActionsDropdownComponent>
+    <ActionsMenu>
       <UpdateUserExpirationAction row={syntheticRow} refetch={refetch} />
       <DeleteUserAction row={syntheticRow} refetch={refetch} />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };
 

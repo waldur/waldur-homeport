@@ -1,7 +1,8 @@
-import * as RadixDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, RenderOptions } from '@testing-library/react';
 import { ReactElement, ReactNode } from 'react';
+
+import { Menu } from 'waldur-ui';
 
 /**
  * Creates a QueryClient pre-configured for tests:
@@ -63,7 +64,7 @@ export const createTestWrapper = ({
 };
 
 /**
- * Wraps a row-action component (anything built on ActionsDropdownItem) in an
+ * Wraps a row-action component (anything built on Menu.Item) in an
  * already-open Radix menu.
  *
  * Radix's menu item reads its context on render and throws "`MenuItem` must
@@ -76,13 +77,11 @@ export const createTestWrapper = ({
  *   renderWithProviders(inActionsMenu(<DeleteCreditButton row={row} />));
  */
 export const inActionsMenu = (children: ReactNode) => (
-  <RadixDropdownMenu.Root open modal={false}>
+  <Menu open>
     {/* No Trigger: it would render a real <button> into the container and
         break the "this action renders nothing" assertions that check for an
         empty container. The Content only needs an anchor for positioning,
         which is irrelevant in jsdom. */}
-    <RadixDropdownMenu.Portal>
-      <RadixDropdownMenu.Content>{children}</RadixDropdownMenu.Content>
-    </RadixDropdownMenu.Portal>
-  </RadixDropdownMenu.Root>
+    <Menu.Content look="actions">{children}</Menu.Content>
+  </Menu>
 );

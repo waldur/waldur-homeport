@@ -2,12 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { BaseButton } from './BaseButton';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from './DropdownMenu';
 import { LanguageMenu, LanguageOption } from './LanguageMenu';
+import { Menu } from './Menu';
 
 const LANGUAGES: LanguageOption[] = [
   { code: 'en', label: 'English' },
@@ -24,7 +20,7 @@ const meta: Meta<typeof LanguageMenu> = {
     docs: {
       description: {
         component:
-          'Language switcher submenu component integrated into DropdownMenu with country flags and radio selection semantics.',
+          'Language switcher submenu component inside a Menu, with country flags and radio selection semantics.',
       },
     },
   },
@@ -38,18 +34,18 @@ export const Default: Story = {
     const [current, setCurrent] = useState<LanguageOption>(LANGUAGES[0]);
     return (
       <div className="p-12">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+        <Menu>
+          <Menu.Trigger asChild>
             <BaseButton variant="secondary" label="Preferences" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
+          </Menu.Trigger>
+          <Menu.Content className="py-[12px] text-[14px] font-medium w-56">
             <LanguageMenu
               currentLanguage={current}
               languageChoices={LANGUAGES}
               onLanguageChange={setCurrent}
             />
-          </DropdownMenuContent>
-        </DropdownMenu>
+          </Menu.Content>
+        </Menu>
       </div>
     );
   },

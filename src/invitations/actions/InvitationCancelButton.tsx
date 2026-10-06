@@ -2,9 +2,10 @@ import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { userInvitationsCancel } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
@@ -52,12 +53,13 @@ export const InvitationCancelButton = ({ row, refetch }) => {
   }, [user, customer, row]);
 
   return (
-    <ActionItem
-      action={() => mutate()}
-      title={translate('Cancel')}
-      iconNode={<ProhibitIcon weight="bold" />}
+    <Menu.Item
+      onSelect={() => mutate()}
+      icon={<ProhibitIcon weight="bold" />}
       disabled={isDisabled || isPending}
       tooltip={tooltip}
-    />
+    >
+      {translate('Cancel')}
+    </Menu.Item>
   );
 };

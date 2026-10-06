@@ -21,7 +21,7 @@ import {
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, Menu } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -36,11 +36,6 @@ import { useOrganizationGroups } from '@/marketplace/common/utils';
 import { ComponentLimitsField } from '@/marketplace/offerings/details/policies/ComponentLimitsField';
 import { useModal } from '@/modal/actions';
 import { useNotify } from '@/store/notify';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
-import {
-  ActionsDropdownItem,
-  ActionsDropdownSeparator,
-} from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { OfferingSectionProps } from '../types';
@@ -172,25 +167,30 @@ const PolicyInfoDropdown: FC<{
   }, [policyUuid]);
 
   return (
-    <ActionDropdownButton title={translate('Policy info')}>
-      <ActionsDropdownItem onSelect={openSummary}>
-        <QuestionIcon weight="bold" className="me-2" />
-        {translate('How it works')}
-      </ActionsDropdownItem>
-      <ActionsDropdownItem onSelect={openPreview}>
-        <EyeIcon weight="bold" className="me-2" />
-        {translate('Preview impact')}
-      </ActionsDropdownItem>
-      {policyUuid && (
-        <>
-          <ActionsDropdownSeparator />
-          <ActionsDropdownItem onSelect={openExecutionLog}>
-            <ClockCounterClockwiseIcon weight="bold" className="me-2" />
-            {translate('Execution log')}
-          </ActionsDropdownItem>
-        </>
-      )}
-    </ActionDropdownButton>
+    <Menu>
+      <Menu.TriggerButton size="lg">
+        {translate('Policy info')}
+      </Menu.TriggerButton>
+      <Menu.Content look="actions" side="bottom">
+        <Menu.Item icon={<QuestionIcon weight="bold" />} onSelect={openSummary}>
+          {translate('How it works')}
+        </Menu.Item>
+        <Menu.Item icon={<EyeIcon weight="bold" />} onSelect={openPreview}>
+          {translate('Preview impact')}
+        </Menu.Item>
+        {policyUuid && (
+          <>
+            <Menu.Separator />
+            <Menu.Item
+              icon={<ClockCounterClockwiseIcon weight="bold" />}
+              onSelect={openExecutionLog}
+            >
+              {translate('Execution log')}
+            </Menu.Item>
+          </>
+        )}
+      </Menu.Content>
+    </Menu>
   );
 };
 

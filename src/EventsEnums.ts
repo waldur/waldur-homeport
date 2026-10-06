@@ -311,6 +311,7 @@ export const ProposalEnum = {
   proposal_canceled: 'proposal_canceled',
   proposal_document_added: 'proposal_document_added',
   proposal_document_removed: 'proposal_document_removed',
+  proposal_draft_carried_over: 'proposal_draft_carried_over',
   proposal_workflow_advanced: 'proposal_workflow_advanced',
 };
 

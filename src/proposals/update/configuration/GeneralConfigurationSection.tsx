@@ -192,6 +192,17 @@ export const GeneralConfigurationSection: FC<
               translate('On submission')
             }
           />
+          <BooleanEditField
+            name="carry_over_drafts"
+            label={translate('Carry unsubmitted drafts over to the next round')}
+            description={translate(
+              'When a round closes, move unsubmitted drafts to the next round instead of cancelling them. Applicants keep their content and are notified by email. Drafts are cancelled as before when the call has no later round.',
+            )}
+            disabled={props.isReadOnly}
+            renderValue={(value) =>
+              value ? translate('Yes') : translate('No')
+            }
+          />
           <AsyncSelectEditField
             name="compliance_checklist"
             label={translate('Compliance checklist')}

@@ -1,10 +1,9 @@
 import { MoneyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { buttonVariants } from 'waldur-ui';
+import { buttonVariants, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useCustomer } from '@/workspace/hooks';
 
 import { Invoice } from '../types';
@@ -40,15 +39,17 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
     </a>
   ) : (
     // asChild: the row *is* the link, same reasoning as every other
-    // link-shaped ActionsDropdownItem in this migration (see
+    // link-shaped Menu.Item in this migration (see
     // OpenPublicOffering.tsx / MatrixChatHeader.tsx).
-    <ActionsDropdownItem asChild>
+    <Menu.Item asChild>
       <a href={row.payment_url} target="_self" rel="noopener noreferrer">
-        <span className="svg-icon svg-icon-2">
+        <span className="menu-item-icon inline-flex shrink-0 items-center justify-center size-[20px] me-[12px] [&>svg]:size-[20px] leading-none">
           <MoneyIcon weight="bold" />
         </span>
-        {translate('Pay')}
+        <span className="menu-item-label flex-1 min-w-0">
+          {translate('Pay')}
+        </span>
       </a>
-    </ActionsDropdownItem>
+    </Menu.Item>
   );
 };

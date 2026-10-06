@@ -1,6 +1,7 @@
 import { translate } from '@/i18n';
 
 import { FooterDropdown } from './FooterDropdown';
+import { FooterDropdownLink } from './FooterDropdownItems';
 import { MenuItem } from './MenuItem';
 
 export const MobileMenu = ({ dynamicItems }) => {
@@ -10,7 +11,11 @@ export const MobileMenu = ({ dynamicItems }) => {
     return (
       <FooterDropdown title={translate('More')}>
         {dynamicItems.map((item) => (
-          <MenuItem key={item.id} {...item} className="px-3" />
+          <FooterDropdownLink
+            key={item.id}
+            label={item.label}
+            state={item.state}
+          />
         ))}
       </FooterDropdown>
     );

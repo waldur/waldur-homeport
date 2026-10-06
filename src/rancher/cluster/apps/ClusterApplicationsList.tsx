@@ -7,7 +7,7 @@ import {
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import {
   RancherClusterFilter,
@@ -23,10 +23,10 @@ import { ApplicationDeleteButton } from './ApplicationDeleteButton';
 import { ApplicationDetailsButton } from './ApplicationDetailsButton';
 
 const ApplicationActions = ({ row }) => (
-  <ActionsDropdownComponent>
+  <ActionsMenu>
     <ApplicationDetailsButton application={row} />
     <ApplicationDeleteButton application={row} />
-  </ActionsDropdownComponent>
+  </ActionsMenu>
 );
 
 export const ClusterApplicationsList: FunctionComponent<

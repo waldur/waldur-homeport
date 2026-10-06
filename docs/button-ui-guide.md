@@ -37,7 +37,7 @@ Comprehensive architectural reference, design system manual, and practical usage
 6. [Dropdown & Menu Toggles](#6-dropdown-menu-toggles)
    - [Why Action Toggles Use `buttonVariants()` Instead of `BaseButton`](#why-action-toggles-use-buttonvariants-instead-of-basebutton)
    - [Caret Rotation Animation (`ButtonCaret`)](#caret-rotation-animation-buttoncaret)
-   - [Required Marker Classes (`dropdown-toggle`, `no-arrow`, `btn-icon`)](#required-marker-classes-dropdown-toggle-no-arrow-btn-icon)
+   - [Unavailable Actions](#unavailable-actions)
    - [Centralized Icon Sizing in Toggles](#centralized-icon-sizing-in-toggles)
 7. [Segmented Controls & View Switchers](#7-segmented-controls-view-switchers)
    - [SegmentedControl vs. BaseButton](#segmentedcontrol-vs-basebutton)
@@ -75,11 +75,11 @@ Both share the exact same [`class-variance-authority`](https://cva.style/docs) (
 
 Buttons are implemented with exact, predictable pixel heights across three standardized tiers:
 
-| Size | Height   | Padding (`px` / `py`) | Typography & Line Height          | Corner Radius      | Icon Size                  | Default Context                                        |
-| :--- | :------- | :-------------------- | :-------------------------------- | :----------------- | :------------------------- | :----------------------------------------------------- |
-| `sm` | **28px** | `px-[8px] py-[4px]`   | `text-sm leading-5` (14px/20px)   | `rounded-md` (6px) | 16px (`size-4` wrapper)    | Table rows, filter bars, inline badges, popovers       |
-| `md` | **36px** | `px-[12px] py-[8px]`  | `text-sm leading-5` (14px/20px)   | `rounded-lg` (8px) | 20px (`size-5` wrapper)    | **Default size**. Page actions, card headers, toolbars |
-| `lg` | **44px** | `px-[16px] py-[10px]` | `text-base leading-6` (16px/24px) | `rounded-lg` (8px) | 20px (`size-5` wrapper)    | Form submissions, dialog footers, primary hero CTAs    |
+| Size | Height   | Padding (`px` / `py`) | Typography & Line Height          | Corner Radius      | Icon Size               | Default Context                                        |
+| :--- | :------- | :-------------------- | :-------------------------------- | :----------------- | :---------------------- | :----------------------------------------------------- |
+| `sm` | **28px** | `px-[8px] py-[4px]`   | `text-sm leading-5` (14px/20px)   | `rounded-md` (6px) | 16px (`size-4` wrapper) | Table rows, filter bars, inline badges, popovers       |
+| `md` | **36px** | `px-[12px] py-[8px]`  | `text-sm leading-5` (14px/20px)   | `rounded-lg` (8px) | 20px (`size-5` wrapper) | **Default size**. Page actions, card headers, toolbars |
+| `lg` | **44px** | `px-[16px] py-[10px]` | `text-base leading-6` (16px/24px) | `rounded-lg` (8px) | 20px (`size-5` wrapper) | Form submissions, dialog footers, primary hero CTAs    |
 
 > [!NOTE]
 > The default size is `md` (36px). `BaseButton` and `buttonVariants()` default to `size="md"` when omitted.
@@ -152,15 +152,15 @@ ButtonVariant =
 
 ### Solid & Bordered Variants
 
-| Variant          | Purpose & Hierarchy                                  | Light Mode Appearance                                                                                                             | Active Press Appearance                         |
-| :--------------- | :--------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
-| `primary`        | Main call-to-action on a page or dialog              | Solid brand fill (`brand-600`), white text                                                                                        | Darker brand fill (`brand-800`), shadow cleared |
-| `secondary`      | Supporting action complementary to primary           | Two-tone: brand tint (`brand-50`), brand border (`brand-300`), plum text (`brand-900`), and vibrant magenta icon (`brand-500`)    | Darker brand tint (`brand-300`), brand text     |
-| `tertiary`       | Default neutral button for tables, headers, toolbars | Solid white, subtle gray border (`gray-300`), dark gray text                                                                      | Light gray fill (`gray-100`), shadow cleared    |
-| `tertiary-ghost` | Low-emphasis action with no idle border              | Transparent background, tertiary text                                                                                             | Light gray fill (`gray-100`), shadow cleared    |
-| `danger`         | Destructive actions (Delete, Terminate, Revoke)      | Error tint (`error-50`), red border & text                                                                                        | Vivid red fill (`error-500`), white text        |
-| `warning`        | Cautionary actions requiring warning                 | Warning tint (`warning-50`), amber border & text                                                                                  | Vivid amber fill (`warning-600`), white text    |
-| `success`        | Confirmation / affirmative actions (Approve, Accept) | Success tint (`success-50`), green border & text                                                                                  | Vivid green fill (`success-500`), white text    |
+| Variant          | Purpose & Hierarchy                                  | Light Mode Appearance                                                                                                          | Active Press Appearance                         |
+| :--------------- | :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| `primary`        | Main call-to-action on a page or dialog              | Solid brand fill (`brand-600`), white text                                                                                     | Darker brand fill (`brand-800`), shadow cleared |
+| `secondary`      | Supporting action complementary to primary           | Two-tone: brand tint (`brand-50`), brand border (`brand-300`), plum text (`brand-900`), and vibrant magenta icon (`brand-500`) | Darker brand tint (`brand-300`), brand text     |
+| `tertiary`       | Default neutral button for tables, headers, toolbars | Solid white, subtle gray border (`gray-300`), dark gray text                                                                   | Light gray fill (`gray-100`), shadow cleared    |
+| `tertiary-ghost` | Low-emphasis action with no idle border              | Transparent background, tertiary text                                                                                          | Light gray fill (`gray-100`), shadow cleared    |
+| `danger`         | Destructive actions (Delete, Terminate, Revoke)      | Error tint (`error-50`), red border & text                                                                                     | Vivid red fill (`error-500`), white text        |
+| `warning`        | Cautionary actions requiring warning                 | Warning tint (`warning-50`), amber border & text                                                                               | Vivid amber fill (`warning-600`), white text    |
+| `success`        | Confirmation / affirmative actions (Approve, Accept) | Success tint (`success-50`), green border & text                                                                               | Vivid green fill (`success-500`), white text    |
 
 ### Text Variants
 
@@ -506,7 +506,7 @@ import { ProjectLink } from '@/project/ProjectLink';
 
 ## 6. Dropdown & Menu Toggles
 
-Action dropdown toggles—such as [`TableDropdownToggle`](../src/table/ActionsDropdown.tsx), `AddDropdownToggle`, and `ActionDropdownButton.Toggle`—render dropdown triggers inside tables, card headers, and toolbars.
+Action dropdown toggles—such as [`TableDropdownToggle`](../src/table/ActionsDropdown.tsx) and `AddDropdownToggle`—render dropdown triggers inside tables and toolbars. For standalone dropdown buttons, use `Menu.TriggerButton` (which wraps `BaseButton` with `ButtonCaret`).
 
 ### Why Action Toggles Use `buttonVariants()` Instead of `BaseButton`
 
@@ -517,11 +517,8 @@ Action toggles render a direct `<button>` element styled with `buttonVariants({ 
 <button
   ref={ref}
   type="button"
-  className={cn(
-    buttonVariants({ variant, size }),
-    'dropdown-toggle no-arrow',
-    className,
-  )}
+  className={cn('group/toggle', buttonVariants({ variant, size }), className)}
+  data-testid="actions-toggle"
   disabled={disabled}
   data-disabled={disabled ? '' : undefined}
   {...rest}
@@ -531,31 +528,17 @@ Action toggles render a direct `<button>` element styled with `buttonVariants({ 
 </button>
 ```
 
-**Rationale:**
-
-1. **Direct Child Selector for Caret Animation**: The rotating caret animation is governed by:
-
-   ```css
-   .dropdown-toggle[data-state='open'] > .rotate-toggle-180 {
-     transform: rotate(180deg);
-   }
-   ```
-
-   `BaseButton` wraps its `iconNode` inside an intermediate `<span>` wrapper. That extra wrapper prevents the `> .rotate-toggle-180` child combinator from matching. Rendering a raw `<button>` with `buttonVariants({ variant, size })` and `<ButtonCaret size={size} />` ensures the caret remains a direct child.
-
-2. **Clean Radix Trigger Composition**: `RadixDropdownMenu.Trigger asChild` clones its immediate child, attaching ref and handlers. Rendering `<button>` directly ensures zero intermediate DOM layers.
+A Radix `Trigger asChild` (`Menu.Trigger`, `MenuPopover.Trigger`) clones its immediate child, attaching ref and handlers, so the toggle is the element Radix marks open.
 
 ### Caret Rotation Animation (`ButtonCaret`)
 
-When a Radix dropdown opens, it injects `data-state="open"` onto the trigger button. `<ButtonCaret size={size} />` includes the `.rotate-toggle-180` class, which smoothly rotates the icon 180 degrees using CSS transitions.
+When a Radix menu opens, it sets `data-state="open"` on its trigger. A toggle marks itself `group/toggle`, and `<ButtonCaret />` carries `group-data-[state=open]/toggle:rotate-180` with a 0.3s transition, so the caret flips while its own toggle is open, at any depth inside it. A toggle that isn't a Radix trigger passes `isOpen` instead.
 
-### Required Marker Classes (`dropdown-toggle`, `no-arrow`, `btn-icon`)
+### Unavailable Actions
 
-Toggles retain three specific utility classes:
+On an unavailable offering, the page wraps itself in `<ActionsUnavailable reason={…}>` (`src/table/ActionsDropdown.tsx`). Every action menu inside renders its toggle disabled, with the reason in a tooltip, and doesn't open, as the [UI guidelines](ui-consistency-guidelines.md) ask of a control that is temporarily unavailable. The tooltip sits on a focusable wrapper, because a disabled button gets no pointer events.
 
-- **`dropdown-toggle`**: Required for CSS caret rotation and for read-only view hiding rules (`table .dropdown-toggle { display: none !important }`).
-- **`no-arrow`**: Suppresses Bootstrap's legacy CSS `::after` caret pseudo-element, since toggles render an explicit Phosphor `CaretDownIcon`.
-- **`btn-icon`**: An inert marker used by read-only view stylesheets to hide icon-only toggles in panels and cards (`.dropdown-toggle.btn-icon { display: none }`).
+Tests find a toggle by `data-testid="actions-toggle"`, or the icon-only kebab by its accessible name, "Actions".
 
 ### Centralized Icon Sizing in Toggles
 
@@ -721,7 +704,7 @@ Used in forms that track dirty/unsaved state.
 
 | ESLint Rule                                     | Severity | What It Enforces                                                                                                                                                          |
 | :---------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `no-restricted-imports`                         | `error`  | Blocks importing `Button` or `DropdownButton` from `react-bootstrap`. Directs developers to `BaseButton`, `SubmitButton`, `CloseDialogButton`, or `ActionDropdownButton`. |
+| `no-restricted-imports`                         | `error`  | Blocks importing `Button` or `DropdownButton` from `react-bootstrap`. Directs developers to `BaseButton`, `SubmitButton`, `CloseDialogButton`, or `Menu.TriggerButton`. |
 | `waldur-custom/no-bootstrap-button-markup`      | `error`  | Blocks `<button className="btn ...">`, `<a className="btn ...">`, and any hand-rolled Bootstrap button markup.                                                            |
 | `waldur-custom/enforce-disabled-button-tooltip` | `error`  | Enforces that every disabled `<BaseButton>` has a `tooltip` or `disabledReason` explaining why the action is unavailable.                                                 |
 | `waldur-custom/enforce-dialog-button-order`     | `error`  | Enforces standard dialog button order: dismissive buttons (`CloseDialogButton`) on the left, affirmative/submission buttons (`SubmitButton`) on the right.                |

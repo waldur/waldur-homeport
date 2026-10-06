@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { ButtonVariant } from 'waldur-ui';
+import { ButtonVariant, Menu } from 'waldur-ui';
 
 import { ServiceDeskProviderLogo } from '@/administration/service-desk/ServiceDeskProviderLogo';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -15,8 +15,6 @@ import { formatJsxTemplate, translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
 import { useModal } from '@/modal/actions';
 import { SettingsDescription } from '@/SettingsDescription';
-import { ActionDropdownButton } from '@/table/ActionDropdownButton';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 
 import { FieldRow } from '../settings/FieldRow';
 import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
@@ -140,24 +138,26 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                 </p>
               )}
               <div className="mt-auto">
-                <ActionDropdownButton
-                  variant={state.variant}
-                  title={state.title}
-                >
-                  {isAtlassian && !isConfigured && (
-                    <ActionsDropdownItem onSelect={openDiscovery}>
-                      {translate('Discovery wizard')}
-                    </ActionsDropdownItem>
-                  )}
-                  <ActionsDropdownItem onSelect={openConfigure}>
-                    {translate('Edit')}
-                  </ActionsDropdownItem>
-                  {isAtlassian && isConfigured && (
-                    <ActionsDropdownItem onSelect={openDiscovery}>
-                      {translate('Re-discover')}
-                    </ActionsDropdownItem>
-                  )}
-                </ActionDropdownButton>
+                <Menu>
+                  <Menu.TriggerButton variant={state.variant} size="lg">
+                    {state.title}
+                  </Menu.TriggerButton>
+                  <Menu.Content look="actions" side="bottom">
+                    {isAtlassian && !isConfigured && (
+                      <Menu.Item onSelect={openDiscovery}>
+                        {translate('Discovery wizard')}
+                      </Menu.Item>
+                    )}
+                    <Menu.Item onSelect={openConfigure}>
+                      {translate('Edit')}
+                    </Menu.Item>
+                    {isAtlassian && isConfigured && (
+                      <Menu.Item onSelect={openDiscovery}>
+                        {translate('Re-discover')}
+                      </Menu.Item>
+                    )}
+                  </Menu.Content>
+                </Menu>
               </div>
             </div>
           </div>

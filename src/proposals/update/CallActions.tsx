@@ -11,6 +11,8 @@ import {
   proposalProtectedCallsArchive,
 } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { fetchResultCount } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -21,10 +23,7 @@ import { RoleType } from '@/permissions/types';
 import { getPermissionDisabledTooltip } from '@/permissions/utils';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
-import {
-  ActionsDropdownComponent,
-  ActionsDropdownSeparator,
-} from '@/table/ActionsDropdown';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
@@ -207,11 +206,11 @@ export const CallActions: FC<CallActionsProps> = ({
 
   if (call.state === 'draft') {
     return (
-      <ActionsDropdownComponent
-        labeled
-        drop="down"
+      <ActionsMenu
+        toggle="labeled"
+        side="bottom"
         variant="secondary"
-        className={className}
+        toggleClassName={className}
       >
         <ActionItem
           title={translate('Activate')}
@@ -236,17 +235,17 @@ export const CallActions: FC<CallActionsProps> = ({
           tooltip={noDuplicateTooltip}
         />
         {exportItem}
-      </ActionsDropdownComponent>
+      </ActionsMenu>
     );
   }
 
   if (call.state === 'archived') {
     return (
-      <ActionsDropdownComponent
-        labeled
-        drop="down"
+      <ActionsMenu
+        toggle="labeled"
+        side="bottom"
         variant="secondary"
-        className={className}
+        toggleClassName={className}
       >
         <ActionItem
           title={translate('Activate')}
@@ -262,17 +261,17 @@ export const CallActions: FC<CallActionsProps> = ({
           tooltip={noDuplicateTooltip}
         />
         {exportItem}
-      </ActionsDropdownComponent>
+      </ActionsMenu>
     );
   }
 
   // Active state: show dropdown with Duplicate + Archive
   return (
-    <ActionsDropdownComponent
-      labeled
-      drop="down"
+    <ActionsMenu
+      toggle="labeled"
+      side="bottom"
       variant="secondary"
-      className={className}
+      toggleClassName={className}
     >
       <ActionItem
         title={translate('Duplicate call')}
@@ -282,7 +281,7 @@ export const CallActions: FC<CallActionsProps> = ({
         tooltip={noDuplicateTooltip}
       />
       {exportItem}
-      <ActionsDropdownSeparator className="border-secondary" />
+      <Menu.Separator className="border-secondary" />
       <ActionItem
         title={translate('Archive')}
         action={() => editCallState('archive', translate('Archive'))}
@@ -292,6 +291,6 @@ export const CallActions: FC<CallActionsProps> = ({
         disabled={!canUpdate}
         tooltip={noUpdateTooltip}
       />
-    </ActionsDropdownComponent>
+    </ActionsMenu>
   );
 };

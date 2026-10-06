@@ -2,10 +2,11 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
+import { Menu } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionsDropdownItem } from '@/table/ActionsDropdown';
 import { useUser } from '@/workspace/hooks';
 
 import { DropdownLink } from './DropdownLink';
@@ -33,19 +34,17 @@ export const EditOfferingButton = ({
   }
 
   return (
-    <ActionsDropdownItem asChild>
+    <Menu.Item asChild>
       <DropdownLink
         state={targetState}
         params={{
           offering_uuid: row.uuid,
           uuid: row.customer_uuid,
         }}
+        icon={<PencilSimpleIcon weight="bold" />}
       >
-        <span className="svg-icon svg-icon-2">
-          <PencilSimpleIcon weight="bold" />
-        </span>
         {translate('Edit')}
       </DropdownLink>
-    </ActionsDropdownItem>
+    </Menu.Item>
   );
 };
