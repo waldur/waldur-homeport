@@ -3,6 +3,7 @@ import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
@@ -26,16 +27,21 @@ type CallReviewerPoolExtended = CallReviewerPool & {
 const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
   const isPending = row.invitation_status === 'pending';
 
-  // Only show actions for pending invitations
+  // Settled invitations have nothing to act on; the disabled menu keeps the
+  // column aligned with every other row.
   if (!isPending) {
-    return null;
+    return (
+      <ActionsMenu size="sm" disabled tooltip>
+        {null}
+      </ActionsMenu>
+    );
   }
 
   return (
-    <div className="d-flex gap-2">
+    <ActionsMenu size="sm">
       <AcceptInvitationAction row={row} />
       <DeclineInvitationAction row={row} />
-    </div>
+    </ActionsMenu>
   );
 };
 

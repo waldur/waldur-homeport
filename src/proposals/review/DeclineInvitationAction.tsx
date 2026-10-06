@@ -2,10 +2,9 @@ import { XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { CallReviewerPool, callReviewerPoolsDecline } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
-
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 interface DeclineInvitationActionProps {
   row: CallReviewerPool;
@@ -40,13 +39,13 @@ export const DeclineInvitationAction: FC<DeclineInvitationActionProps> = ({
   });
 
   return (
-    <BaseButton
-      onClick={mutate}
-      label={translate('Decline')}
+    <ActionItem
+      title={translate('Decline')}
+      action={mutate}
       iconNode={<XIcon weight="bold" />}
-      variant="danger"
-      pending={isPending}
-      size="sm"
+      iconColor="danger"
+      className="text-[var(--color-error-600)] dark:text-[var(--color-error-400)]"
+      disabled={isPending}
     />
   );
 };
