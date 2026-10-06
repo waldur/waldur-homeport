@@ -36,6 +36,18 @@ function upsertMessage(
   return next;
 }
 
+function rememberReactionTargets(
+  targets: Map<string, string>,
+  events: any[],
+): void {
+  for (const event of events) {
+    if (event.getType?.() !== 'm.reaction') continue;
+    const targetId = event.getContent?.()?.['m.relates_to']?.event_id;
+    const eventId = event.getId?.();
+    if (targetId && eventId) targets.set(eventId, targetId);
+  }
+}
+
 export function useMatrixRoom() {
   const { client, activeRoomId, activeRoomUuid, connectionState } =
     useMatrixClient();
@@ -59,6 +71,10 @@ export function useMatrixRoom() {
   activeRoomIdRef.current = activeRoomId;
   // Event id of the last receipt sent — dedupes repeated mark-read triggers.
   const lastReceiptEventIdRef = useRef<string | null>(null);
+  // Reaction event id → the message it annotates. By the time Room.redaction
+  // fires, matrix-js-sdk has already stripped the reaction's content, so its
+  // m.relates_to can no longer say which message to refresh.
+  const reactionTargetsRef = useRef(new Map<string, string>());
 
   // Load initial messages from room timeline (resets state on room change)
   useEffect(() => {
@@ -67,6 +83,7 @@ export function useMatrixRoom() {
     setTypingUsers([]);
     setHasOlderMessages(true);
     lastReceiptEventIdRef.current = null;
+    reactionTargetsRef.current = new Map();
 
     if (!client || !activeRoomId || connectionState !== 'connected') {
       setLoading(true);
@@ -81,6 +98,7 @@ export function useMatrixRoom() {
     }
 
     const timeline = room.getLiveTimeline().getEvents();
+    rememberReactionTargets(reactionTargetsRef.current, timeline);
     const myUserId = client.getUserId() ?? '';
     const { aggregates, reactors } = aggregateReactions(timeline, myUserId);
     const mapped = (
@@ -101,6 +119,19 @@ export function useMatrixRoom() {
   useEffect(() => {
     if (!client || !activeRoomId) return;
 
+    const refreshReactions = (eventRoom: any, targetId: string) => {
+      const { reactions, reactors } = aggregateReactionsForTarget(
+        eventRoom.getLiveTimeline().getEvents(),
+        targetId,
+        client.getUserId() ?? '',
+      );
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.eventId === targetId ? { ...m, reactions, reactors } : m,
+        ),
+      );
+    };
+
     const onTimeline = (event: any, eventRoom: any) => {
       if (eventRoom?.roomId !== activeRoomId) return;
 
@@ -111,17 +142,8 @@ export function useMatrixRoom() {
       if (event.getType?.() === 'm.reaction') {
         const targetId = event.getContent?.()?.['m.relates_to']?.event_id;
         if (!targetId) return;
-        const myUserId = client.getUserId() ?? '';
-        const { reactions, reactors } = aggregateReactionsForTarget(
-          eventRoom.getLiveTimeline().getEvents(),
-          targetId,
-          myUserId,
-        );
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.eventId === targetId ? { ...m, reactions, reactors } : m,
-          ),
-        );
+        rememberReactionTargets(reactionTargetsRef.current, [event]);
+        refreshReactions(eventRoom, targetId);
         return;
       }
 
@@ -158,20 +180,9 @@ export function useMatrixRoom() {
       const redactedType = redactedEvent?.getType?.();
 
       if (redactedType === 'm.reaction') {
-        const targetId =
-          redactedEvent.getContent?.()?.['m.relates_to']?.event_id;
+        const targetId = reactionTargetsRef.current.get(redactedId);
         if (!targetId) return;
-        const myUserId = client.getUserId() ?? '';
-        const { reactions, reactors } = aggregateReactionsForTarget(
-          eventRoom.getLiveTimeline().getEvents(),
-          targetId,
-          myUserId,
-        );
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.eventId === targetId ? { ...m, reactions, reactors } : m,
-          ),
-        );
+        refreshReactions(eventRoom, targetId);
         return;
       }
 
@@ -192,6 +203,15 @@ export function useMatrixRoom() {
       }
       // Other event types (state/membership redactions) don't affect the
       // displayed message list.
+    };
+
+    // The homeserver rejected a redaction we had already applied locally; the
+    // SDK restores the reaction, so bring its chip back.
+    const onRedactionCancelled = (redactionEvent: any, eventRoom: any) => {
+      if (eventRoom?.roomId !== activeRoomId) return;
+      const redactedId: string | undefined = redactionEvent?.event?.redacts;
+      const targetId = redactedId && reactionTargetsRef.current.get(redactedId);
+      if (targetId) refreshReactions(eventRoom, targetId);
     };
 
     // Fires when matrix-js-sdk swaps a local-echo for the real server event
@@ -226,27 +246,23 @@ export function useMatrixRoom() {
       if (type !== 'm.reaction') return;
       const targetId = event.getContent?.()?.['m.relates_to']?.event_id;
       if (!targetId) return;
-      const myUserId = client.getUserId() ?? '';
-      const { reactions, reactors } = aggregateReactionsForTarget(
-        eventRoom.getLiveTimeline().getEvents(),
-        targetId,
-        myUserId,
-      );
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.eventId === targetId ? { ...m, reactions, reactors } : m,
-        ),
-      );
+      rememberReactionTargets(reactionTargetsRef.current, [event]);
+      refreshReactions(eventRoom, targetId);
     };
 
     client.on('Room.timeline' as any, onTimeline);
     client.on('Room.redaction' as any, onRedaction);
+    client.on('Room.redactionCancelled' as any, onRedactionCancelled);
     client.on('Room.localEchoUpdated' as any, onLocalEchoUpdated);
     client.on('RoomMember.typing' as any, onTyping);
 
     return () => {
       client.removeListener('Room.timeline' as any, onTimeline);
       client.removeListener('Room.redaction' as any, onRedaction);
+      client.removeListener(
+        'Room.redactionCancelled' as any,
+        onRedactionCancelled,
+      );
       client.removeListener('Room.localEchoUpdated' as any, onLocalEchoUpdated);
       client.removeListener('RoomMember.typing' as any, onTyping);
     };
@@ -267,6 +283,7 @@ export function useMatrixRoom() {
       // initial-load effect for the new room is already managing its state.
       if (activeRoomIdRef.current !== targetRoomId) return;
       const timeline = room.getLiveTimeline().getEvents();
+      rememberReactionTargets(reactionTargetsRef.current, timeline);
       const myUserId = client.getUserId() ?? '';
       const { aggregates, reactors } = aggregateReactions(timeline, myUserId);
       const mapped = (
