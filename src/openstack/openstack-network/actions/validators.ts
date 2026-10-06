@@ -6,7 +6,7 @@ import { ActionContext } from '@/resource/actions/types';
 /** Mirrors the backend's check for these actions: any role on the network's
  * project or organization, whatever it is. Unknown permissions count as a role,
  * so an action is never disabled on a guess. */
-const hasRoleOnOwner = (
+export const hasRoleOnOwner = (
   user: ActionContext['user'],
   network: Pick<OpenStackNetwork, 'project_uuid' | 'customer_uuid'>,
 ): boolean =>

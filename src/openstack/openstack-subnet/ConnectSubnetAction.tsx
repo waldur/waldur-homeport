@@ -6,12 +6,16 @@ import { AsyncActionItem } from '@/resource/actions/AsyncActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionItemType } from '@/resource/actions/types';
 
+import { validateSubnetOwnerAction } from './validators';
+
+const validators = [validateState('OK'), validateSubnetOwnerAction];
+
 export const ConnectSubnetAction: ActionItemType = ({ resource, refetch }) => (
   <AsyncActionItem
     title={translate('Connect subnet')}
     apiMethod={(uuid: string) => openstackSubnetsConnect({ path: { uuid } })}
     resource={resource}
-    validators={[validateState('OK')]}
+    validators={validators}
     refetch={refetch}
     iconNode={<PlugsConnectedIcon weight="bold" />}
   />

@@ -57897,6 +57897,16 @@
       "feature_area": "actions"
     }
   },
+  "This subnet is shared by your cloud provider. Only the provider can change it.": {},
+  "This subnet is shared with you by {tenant}. Only its owner can change it.": {
+    "context": {
+      "variables": {
+        "tenant": {
+          "type": "unknown"
+        }
+      }
+    }
+  },
   "This support user has no backend ID, so it has no duplicates to merge.": {
     "context": {
       "feature_area": "support-users"
