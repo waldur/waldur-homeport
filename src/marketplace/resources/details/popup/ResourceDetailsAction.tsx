@@ -15,6 +15,7 @@ const ResourceDetailsDialog = lazyComponent(() =>
 export const ResourceDetailsAction: ActionItemType = ({ resource }) => (
   <DialogActionItem
     title={translate('View details')}
+    important
     modalComponent={ResourceDetailsDialog}
     resource={resource}
     iconNode={<EyeIcon weight="bold" />}

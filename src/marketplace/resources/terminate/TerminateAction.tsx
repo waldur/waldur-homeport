@@ -104,6 +104,7 @@ export const TerminateAction: FC<TerminateActionProps> = ({
   return (
     <ActionItem
       title={translate('Terminate')}
+      important
       action={() => mutation.mutate()}
       tooltip={tooltip}
       disabled={disabled}

@@ -43,6 +43,7 @@ export const EditAction: ActionItemType = ({ resource, refetch }) => {
     <DialogActionItem
       validators={validators}
       title={translate('Edit')}
+      important
       modalComponent={EditDialog}
       resource={resource}
       extraResolve={{ refetch }}
