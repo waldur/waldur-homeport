@@ -692,6 +692,11 @@
   "A custom .png image file for login page": {},
   "A custom PNG icon for Keycloak login button": {},
   "A custom favicon .png image file": {},
+  "A deactivated user cannot see or answer a request.": {
+    "context": {
+      "feature_area": "dashboard"
+    }
+  },
   "A deleted key cannot be edited.": {
     "context": {
       "feature_area": "api-keys"
@@ -35915,6 +35920,11 @@
       "feature_area": "providers"
     }
   },
+  "Open support request": {
+    "context": {
+      "feature_area": "staff-request"
+    }
+  },
   "Open support tickets": {
     "context": {
       "primary_ui_type": "title"
@@ -39990,6 +40000,11 @@
   "Postal code": {
     "context": {
       "feature_area": "details"
+    }
+  },
+  "Posted as the first comment of the request. The recipient is notified the same way as for any other comment, and their reply comes back to you.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "Potential": {
@@ -52929,6 +52944,11 @@
   "Start IP is not within the CIDR range": {
     "context": {
       "feature_area": "openstack-network"
+    }
+  },
+  "Start a conversation with a user. They see the request in their support list and can reply to it.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "Start and end time must be in the future.": {
@@ -69178,6 +69198,11 @@
   "You can't join this organization with your current account details. Access is limited to certain users as defined by the organization manager.": {
     "context": {
       "feature_area": "join-organization"
+    }
+  },
+  "You cannot address a request to yourself.": {
+    "context": {
+      "feature_area": "staff-request"
     }
   },
   "You cannot unselect the current UI language": {

@@ -33,6 +33,7 @@ import { UserDetailsButton } from './UserDetailsButton';
 import { UserEditButton } from './UserEditButton';
 import { UserFilter } from './UserFilter';
 import { UserImpersonateButton } from './UserImpersonateButton';
+import { UserSupportRequestButton } from './UserSupportRequestButton';
 import { UserTableActions } from './UserTableActions';
 
 const renderFieldOrDash = (field) => {
@@ -149,6 +150,7 @@ const RowActions = ({ row, fetch }: { row: User; fetch? }) => {
         UserEditButton,
         RecalculateUserActionsButton,
         UserImpersonateButton,
+        UserSupportRequestButton,
         UserDetailsButton,
         UserDeleteButton,
       ]}
