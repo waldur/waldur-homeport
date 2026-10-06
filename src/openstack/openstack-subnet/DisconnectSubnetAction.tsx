@@ -6,6 +6,10 @@ import { AsyncActionItem } from '@/resource/actions/AsyncActionItem';
 import { validateState } from '@/resource/actions/base';
 import { ActionItemType } from '@/resource/actions/types';
 
+import { validateSubnetOwnerAction } from './validators';
+
+const validators = [validateState('OK'), validateSubnetOwnerAction];
+
 export const DisconnectSubnetAction: ActionItemType = ({
   resource,
   refetch,
@@ -14,7 +18,7 @@ export const DisconnectSubnetAction: ActionItemType = ({
     title={translate('Disconnect subnet')}
     apiMethod={(uuid: string) => openstackSubnetsDisconnect({ path: { uuid } })}
     resource={resource}
-    validators={[validateState('OK')]}
+    validators={validators}
     refetch={refetch}
     iconNode={<PlugsIcon weight="bold" />}
   />

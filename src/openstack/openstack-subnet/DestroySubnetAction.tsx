@@ -4,7 +4,9 @@ import { validateState } from '@/resource/actions/base';
 import { DestroyActionItem } from '@/resource/actions/DestroyActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 
-const validators = [validateState('OK', 'ERRED')];
+import { validateSubnetOwnerAction } from './validators';
+
+const validators = [validateState('OK', 'ERRED'), validateSubnetOwnerAction];
 
 export const DestroySubnetAction: ActionItemType = ({ resource, refetch }) => (
   <DestroyActionItem
