@@ -70,10 +70,13 @@ export const ActionsPopover = ({
       </ActionList>
       {/* A menu item, so that arrow keys reach it and selecting it closes
           the menu before the dialog opens. A separator sets it apart from
-          the actions above it; the row itself carries no styling of its own,
-          so it reads and highlights like every other row in the panel. */}
+          the actions above it, and it stays centred — the only thing it keeps
+          of its old button costume. Its colour, underline (none) and hover
+          fill are the panel's, like every other row. */}
       <Menu.Separator />
-      <Menu.Item onSelect={callback}>{translate('Show all')}</Menu.Item>
+      <Menu.Item onSelect={callback} className="justify-center text-center">
+        {translate('Show all')}
+      </Menu.Item>
     </>
   ) : null;
 };
