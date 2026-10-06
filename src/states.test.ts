@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import { states } from './states';
-import { canAccessServiceProviderWorkspace } from './workspace/selectors';
+import {
+  canAccessProviderOffering,
+  canAccessServiceProviderWorkspace,
+} from './workspace/selectors';
 
 /**
  * TabsList renders a parent tab's own trigger as a link to
@@ -47,7 +50,13 @@ describe('abstract states shown as tabs', () => {
  * A child state that declares its own `data.permissions` replaces the ones it
  * would inherit, so every guarded page under the provider workspace has to
  * repeat the workspace guard or a typed address bypasses it.
+ * The offering manage and edit pages are the exception: their guard still
+ * allows the workspace, and also an offering manager of that organization.
  */
+const OFFERING_PAGE_GUARD = {
+  'marketplace-offering-details': canAccessProviderOffering,
+  'marketplace-offering-update': canAccessProviderOffering,
+};
 describe('provider workspace states', () => {
   const parentOf = (state) =>
     state.parent ??
@@ -72,6 +81,11 @@ describe('provider workspace states', () => {
   it.each(providerStates.map((state) => [state.name, state]))(
     '%s is guarded by the workspace access check',
     (_name, state) => {
+      const offeringGuard = OFFERING_PAGE_GUARD[state.name];
+      if (offeringGuard) {
+        expect(state.data.permissions).toContain(offeringGuard);
+        return;
+      }
       const guarded = ancestry(state).find((s) => s.data?.permissions);
       expect(guarded?.data.permissions).toContain(
         canAccessServiceProviderWorkspace,

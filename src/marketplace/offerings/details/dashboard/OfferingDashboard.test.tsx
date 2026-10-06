@@ -52,6 +52,7 @@ const offering = { uuid: 'offering-uuid', customer_uuid: PROVIDER_CUSTOMER };
 
 const ANALYST = 'Provider analyst';
 const OPERATOR = 'Provider operator';
+const EDITOR = 'Provider editor';
 
 const providerUser = (role_name: string) => ({
   is_staff: false,
@@ -77,11 +78,25 @@ beforeAll(() => {
       permissions: [PermissionEnum.GET_SERVICE_PROVIDER_STATISTICS],
     },
     { name: OPERATOR, permissions: [PermissionEnum.LIST_ORDERS] },
+    { name: EDITOR, permissions: [PermissionEnum.UPDATE_OFFERING] },
   ] as typeof ENV.roles;
 });
 
 afterAll(() => {
   ENV.roles = originalRoles;
+});
+
+const offeringUser = (role_name: string) => ({
+  is_staff: false,
+  is_support: false,
+  permissions: [
+    {
+      scope_type: 'offering',
+      scope_uuid: offering.uuid,
+      customer_uuid: PROVIDER_CUSTOMER,
+      role_name,
+    },
+  ],
 });
 
 const renderDashboard = () =>
@@ -103,12 +118,32 @@ describe.each([false, true])(
       }
     });
 
-    it('hides the statistics cards from a provider role without statistics', () => {
-      (useUser as Mock).mockReturnValue(providerUser(OPERATOR));
+    it.each([
+      ['a provider role listing orders', providerUser(OPERATOR)],
+      ['an offering role listing orders', offeringUser(OPERATOR)],
+    ])('shows the statistics cards to %s', (_label, user) => {
+      (useUser as Mock).mockReturnValue(user);
       renderDashboard();
-      expect(screen.queryByText('components usage')).not.toBeInTheDocument();
-      expect(screen.queryByText('resources and users')).not.toBeInTheDocument();
+      expect(screen.getByText('components usage')).toBeInTheDocument();
+      if (!small) {
+        expect(screen.getByText('resources and users')).toBeInTheDocument();
+      }
     });
+
+    it.each([
+      ['a provider role', providerUser(EDITOR)],
+      ['an offering role', offeringUser(EDITOR)],
+    ])(
+      'hides the statistics cards from %s without statistics or orders',
+      (_label, user) => {
+        (useUser as Mock).mockReturnValue(user);
+        renderDashboard();
+        expect(screen.queryByText('components usage')).not.toBeInTheDocument();
+        expect(
+          screen.queryByText('resources and users'),
+        ).not.toBeInTheDocument();
+      },
+    );
 
     it('shows the statistics cards to support', () => {
       (useUser as Mock).mockReturnValue({
