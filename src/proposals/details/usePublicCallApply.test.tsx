@@ -1,5 +1,8 @@
-import { renderHook } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook as baseRenderHook, waitFor } from '@testing-library/react';
+import { ReactNode } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { proposalPublicCallsCheckEligibilityRetrieve } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
 import { useUser } from '@/workspace/hooks';
@@ -9,6 +12,17 @@ import { usePublicCallApply } from './usePublicCallApply';
 vi.mock('@/features/connect', () => ({
   isFeatureVisible: vi.fn(),
 }));
+
+// The hook now queries eligibility, so every render needs a query client.
+const renderHook = <T,>(hook: () => T) => {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  const wrapper = ({ children }: { children: ReactNode }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+  return baseRenderHook(hook, { wrapper });
+};
 
 const round = (uuid: string, status: string) => ({
   uuid,
@@ -72,6 +86,95 @@ describe('usePublicCallApply', () => {
         usePublicCallApply(call(chosen), chosen as any),
       );
       expect(result.current.activeRound).toBeNull();
+    });
+  });
+
+  describe('applicant eligibility', () => {
+    const restricted = (...rounds) => ({
+      ...call(...rounds),
+      has_eligibility_restrictions: true,
+    });
+    const eligibility = (is_eligible: boolean) =>
+      vi
+        .mocked(proposalPublicCallsCheckEligibilityRetrieve)
+        .mockResolvedValue({ data: { is_eligible, restrictions: [] } } as any);
+
+    it('refuses an ineligible applicant and says why', async () => {
+      eligibility(false);
+      const { result } = renderHook(() =>
+        usePublicCallApply(restricted(round('r-open', 'open'))),
+      );
+      await waitFor(() => expect(result.current.ineligible).toBe(true));
+      expect(result.current.disabledReason).toBe(
+        'You are not eligible to apply to this call.',
+      );
+    });
+
+    it('lets an eligible applicant apply', async () => {
+      eligibility(true);
+      const { result } = renderHook(() =>
+        usePublicCallApply(restricted(round('r-open', 'open'))),
+      );
+      await waitFor(() =>
+        expect(result.current.disabledReason).toBeUndefined(),
+      );
+      expect(result.current.ineligible).toBe(false);
+    });
+
+    it('waits for the answer before offering Apply', () => {
+      vi.mocked(proposalPublicCallsCheckEligibilityRetrieve).mockReturnValue(
+        new Promise(() => undefined) as any,
+      );
+      const { result } = renderHook(() =>
+        usePublicCallApply(restricted(round('r-open', 'open'))),
+      );
+      expect(result.current.disabledReason).toBe('Checking eligibility…');
+    });
+
+    // Proposal creation re-validates the user, so the backend stays the
+    // authority when the check itself cannot answer.
+    it('leaves Apply enabled when the check fails', async () => {
+      vi.mocked(proposalPublicCallsCheckEligibilityRetrieve).mockRejectedValue(
+        new Error('boom'),
+      );
+      const { result } = renderHook(() =>
+        usePublicCallApply(restricted(round('r-open', 'open'))),
+      );
+      await waitFor(() =>
+        expect(result.current.disabledReason).toBeUndefined(),
+      );
+      expect(result.current.ineligible).toBe(false);
+    });
+
+    it('names the missing round before eligibility', async () => {
+      eligibility(false);
+      const { result } = renderHook(() =>
+        usePublicCallApply(restricted(round('r-past', 'ended'))),
+      );
+      await waitFor(() => expect(result.current.ineligible).toBe(true));
+      expect(result.current.disabledReason).toBe('No open round available.');
+    });
+
+    it('does not ask about a call without restrictions', () => {
+      const { result } = renderHook(() =>
+        usePublicCallApply(call(round('r-open', 'open'))),
+      );
+      expect(result.current.disabledReason).toBeUndefined();
+      expect(
+        proposalPublicCallsCheckEligibilityRetrieve,
+      ).not.toHaveBeenCalled();
+    });
+
+    // The endpoint needs a user; Apply sends an anonymous visitor to log in.
+    it('does not ask for an anonymous visitor', () => {
+      vi.mocked(useUser).mockReturnValue(null as any);
+      const { result } = renderHook(() =>
+        usePublicCallApply(restricted(round('r-open', 'open'))),
+      );
+      expect(result.current.disabledReason).toBeUndefined();
+      expect(
+        proposalPublicCallsCheckEligibilityRetrieve,
+      ).not.toHaveBeenCalled();
     });
   });
 });

@@ -9944,6 +9944,11 @@
       "action_type": "create"
     }
   },
+  "Checking eligibility…": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Checking system health status and verifying all services are operational...": {
     "context": {
       "feature_area": "dashboard"
@@ -69358,6 +69363,11 @@
       "feature_area": "users"
     }
   },
+  "You are not eligible to apply to this call.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "You are on the first step": {
     "context": {
       "feature_area": "organization-create"
@@ -69823,6 +69833,11 @@
   "Your OpenStack project — the scope that owns all the networks, routers, and instances below.": {},
   "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:": {},
   "Your access lasts as long as the longest subscription requested.": {},
+  "Your account does not satisfy the applicant eligibility requirements of this call.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Your account is not part of any organization. Your view will be restricted.": {
     "context": {
       "feature_area": "auth"

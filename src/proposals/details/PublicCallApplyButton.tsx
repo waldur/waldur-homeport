@@ -26,7 +26,10 @@ export const PublicCallApplyButton: FC<PublicCallApplyButtonProps> = ({
   className,
   size,
 }) => {
-  const { activeRound, hidden, handleApply } = usePublicCallApply(call, round);
+  const { hidden, handleApply, disabledReason } = usePublicCallApply(
+    call,
+    round,
+  );
 
   if (hidden) return null;
 
@@ -37,10 +40,8 @@ export const PublicCallApplyButton: FC<PublicCallApplyButtonProps> = ({
       className={className}
       onClick={handleApply}
       label={title}
-      disabled={!activeRound}
-      disabledReason={
-        !activeRound ? translate('No open round available.') : undefined
-      }
+      disabled={!!disabledReason}
+      disabledReason={disabledReason}
     />
   );
 };

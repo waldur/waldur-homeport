@@ -9,7 +9,7 @@ import { Call } from '../types';
 import { usePublicCallApply } from './usePublicCallApply';
 
 export const PublicCallApplyAction: FC<{ call: Call }> = ({ call }) => {
-  const { activeRound, hidden, handleApply } = usePublicCallApply(call);
+  const { hidden, handleApply, disabledReason } = usePublicCallApply(call);
 
   if (hidden) return null;
 
@@ -18,8 +18,8 @@ export const PublicCallApplyAction: FC<{ call: Call }> = ({ call }) => {
       title={translate('Apply to call')}
       action={handleApply}
       iconNode={<PaperPlaneTiltIcon weight="bold" />}
-      disabled={!activeRound}
-      tooltip={!activeRound ? translate('No open round available.') : undefined}
+      disabled={!!disabledReason}
+      tooltip={disabledReason}
     />
   );
 };
