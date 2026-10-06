@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, PropsWithChildren, useCallback } from 'react';
 
-import { Menu } from 'waldur-ui';
+import { BaseButton, Menu } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -68,13 +68,20 @@ export const ActionsPopover = ({
       <ActionList hideGroupName hideNonImportant>
         <ActionsList {...value} refetch={refetch} />
       </ActionList>
-      {/* A menu item, so that arrow keys reach it and selecting it closes the
-          menu before the dialog opens. Centred and behind a separator to set
-          it apart; everything else is the panel's own row styling. */}
+      {/* A button, not an action row: it opens a dialog rather than doing
+          anything to the resource. Deliberately outside Menu.Item — a row
+          overrides a nested button's own colour and hover, so inside one it
+          stops looking like a button at all. Same shape as the generic menu's
+          in ResourceActionComponent. */}
       <Menu.Separator />
-      <Menu.Item onSelect={callback} className="justify-center text-center">
-        {translate('Show all')}
-      </Menu.Item>
+      <div className="flex justify-center p-1">
+        <BaseButton
+          variant="text-secondary"
+          size="sm"
+          label={translate('Show all')}
+          onClick={callback}
+        />
+      </div>
     </>
   ) : null;
 };
