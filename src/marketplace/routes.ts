@@ -18,18 +18,9 @@ import {
   isStaff,
 } from '@/workspace/selectors';
 
+import { canAccessMarketplaceRouteGuard as canAccessMarketplace } from './canUseMarketplaceShopUi';
 import { fetchProvider, fetchProviderCustomer } from './resolve';
 import { getMarketplaceTitle } from './title';
-
-const canAccessMarketplace = (state) => {
-  const hideFromEndUsers = isFeatureVisible(
-    MarketplaceFeatures.hide_marketplace_from_end_users,
-  );
-  if (!hideFromEndUsers) {
-    return true;
-  }
-  return isStaff(state);
-};
 
 export const states: StateDeclaration[] = [
   {
@@ -761,9 +752,6 @@ export const states: StateDeclaration[] = [
         default: module.OrderDetailsContainer,
       })),
     ),
-    data: {
-      permissions: [canAccessMarketplace],
-    },
     params: {
       tab: {
         dynamic: true,

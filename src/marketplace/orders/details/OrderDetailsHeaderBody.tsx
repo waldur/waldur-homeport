@@ -6,6 +6,7 @@ import { Badge } from 'waldur-ui';
 import { Link } from '@/core/Link';
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { Field } from '@/resource/summary';
 import { useUser } from '@/workspace/hooks';
@@ -57,6 +58,7 @@ const PurchaseOrderBadge = ({ order, offering }) => {
 
 export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
   const user = useUser();
+  const showOfferingLink = canUseMarketplaceShopUi(user);
   const showPurchaseOrder =
     offering?.plugin_options?.enable_purchase_order_upload ||
     offering?.plugin_options?.require_purchase_order_upload;
@@ -107,13 +109,17 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
         <Field
           label={translate('Offering')}
           value={
-            <Link
-              state="public-offering.marketplace-public-offering"
-              params={{ uuid: order.offering_uuid }}
-              className="text-link"
-            >
-              {order.offering_name}
-            </Link>
+            showOfferingLink ? (
+              <Link
+                state="public-offering.marketplace-public-offering"
+                params={{ uuid: order.offering_uuid }}
+                className="text-link"
+              >
+                {order.offering_name}
+              </Link>
+            ) : (
+              order.offering_name
+            )
           }
           labelClass="w-100px"
           labelCol="auto"

@@ -5,6 +5,7 @@ import { useEffect, useMemo } from 'react';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import {
   getServiceAccessMode,
   isMarketplaceVisible,
@@ -93,14 +94,13 @@ export const UnifiedSidebar = () => {
   if (!user) {
     return null;
   }
-  const canAccessMarketplace =
-    !isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) ||
-    user.is_staff;
+  const canAccessMarketplace = canUseMarketplaceShopUi(user);
 
   const canCreateOrder = hasPermissionOnAnyScope(
     user,
     PermissionEnum.CREATE_ORDER,
   );
+  const showAddResource = canCreateOrder && canUseMarketplaceShopUi(user);
 
   const canAccessOrganization =
     !isFeatureVisible(
@@ -123,7 +123,7 @@ export const UnifiedSidebar = () => {
 
   return (
     <Sidebar>
-      {canCreateOrder ? (
+      {showAddResource ? (
         <MarketplaceTrigger
           disabled={shouldBlockNavigation}
           disabledTooltip={disabledTooltip}

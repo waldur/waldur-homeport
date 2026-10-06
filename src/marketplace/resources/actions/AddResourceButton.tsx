@@ -5,8 +5,10 @@ import { marketplaceResourcesOfferingForSubresourcesList } from 'waldur-js-clien
 import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n/translate';
+import { canUseMarketplaceShopUi } from '@/marketplace/canUseMarketplaceShopUi';
 import { OfferingLink } from '@/marketplace/links/OfferingLink';
 import { Resource } from '@/resource/types';
+import { useUser } from '@/workspace/hooks';
 
 interface AddResourceButtonProps {
   resource: Resource;
@@ -14,6 +16,9 @@ interface AddResourceButtonProps {
 }
 
 export const AddResourceButton = (props: AddResourceButtonProps) => {
+  const user = useUser();
+  const showShopUi = canUseMarketplaceShopUi(user);
+
   const { data: value, isLoading: loading } = useQuery({
     queryKey: ['AddResourceButton', props.resource],
 
@@ -21,7 +26,12 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
       marketplaceResourcesOfferingForSubresourcesList({
         path: { uuid: props.resource.marketplace_resource_uuid },
       }).then((r) => r.data),
+    enabled: showShopUi && !!props.resource.marketplace_resource_uuid,
   });
+
+  if (!showShopUi) {
+    return null;
+  }
 
   const relatedOfferingUuid =
     value?.find((offering) => offering.type === props.offeringType)?.uuid ??
