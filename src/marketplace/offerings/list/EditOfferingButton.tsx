@@ -21,6 +21,7 @@ export const EditOfferingButton = ({
   const canUpdateOffering = hasPermission(user, {
     permission: PermissionEnum.UPDATE_OFFERING,
     customerId: row.customer_uuid,
+    offeringId: row.uuid,
   });
 
   const { state } = useCurrentStateAndParams();

@@ -5,6 +5,7 @@ import { PermissionEnum, RoleEnum } from '@/permissions/enums';
 import { type RootState } from '@/store/reducers';
 
 import {
+  canAccessProviderOffering,
   canAccessServiceProviderWorkspace,
   canViewServiceProviderTeam,
   checkCanAccessServiceProvider,
@@ -451,5 +452,142 @@ describe('service provider access for custom roles', () => {
         state({ is_staff: false, is_support: true, permissions: [] }),
       ),
     ).toBe(true);
+  });
+});
+
+describe('canAccessProviderOffering', () => {
+  let originalRoles;
+
+  beforeEach(() => {
+    originalRoles = ENV.roles;
+    ENV.roles = [
+      ...originalRoles,
+      {
+        name: RoleEnum.OFFERING_MANAGER,
+        permissions: [PermissionEnum.UPDATE_OFFERING],
+      },
+      {
+        name: RoleEnum.CUSTOMER_READER,
+        permissions: [PermissionEnum.VIEW_CUSTOMER_TEAM],
+      },
+      {
+        name: 'CUSTOM.OFFERING_EDITOR',
+        permissions: [PermissionEnum.UPDATE_OFFERING],
+      },
+    ] as any;
+  });
+
+  afterEach(() => {
+    ENV.roles = originalRoles;
+  });
+
+  const state = (user) =>
+    ({ workspace: { user, customer: { uuid: 'provider_a' } } }) as RootState;
+  const transition = (offering_uuid: string, uuid = 'provider_a') => ({
+    params: () => ({ uuid, offering_uuid }),
+  });
+
+  const offeringManager = {
+    is_staff: false,
+    is_support: false,
+    permissions: [
+      {
+        scope_type: 'offering',
+        scope_uuid: 'offering-a',
+        customer_uuid: 'provider_a',
+        role_name: RoleEnum.OFFERING_MANAGER,
+      },
+    ],
+  } as any;
+
+  it('lets an offering manager open that offering', () => {
+    expect(
+      canAccessProviderOffering(
+        state(offeringManager),
+        transition('offering-a'),
+      ),
+    ).toBe(true);
+  });
+
+  it('refuses a different offering', () => {
+    expect(
+      canAccessProviderOffering(
+        state(offeringManager),
+        transition('offering-b'),
+      ),
+    ).toBe(false);
+  });
+
+  it('refuses an organization reader', () => {
+    const reader = {
+      is_staff: false,
+      is_support: false,
+      permissions: [
+        {
+          scope_type: 'customer',
+          scope_uuid: 'provider_a',
+          customer_uuid: 'provider_a',
+          role_name: RoleEnum.CUSTOMER_READER,
+        },
+      ],
+    } as any;
+    expect(
+      canAccessProviderOffering(state(reader), transition('offering-a')),
+    ).toBe(false);
+  });
+
+  it('still opens the pages to the provider workspace and to a custom role', () => {
+    expect(
+      canAccessProviderOffering(
+        state({ is_staff: false, is_support: true, permissions: [] }),
+        transition('offering-a'),
+      ),
+    ).toBe(true);
+    const editor = {
+      is_staff: false,
+      is_support: false,
+      permissions: [
+        {
+          scope_type: 'customer',
+          scope_uuid: 'provider_a',
+          customer_uuid: 'provider_a',
+          role_name: 'CUSTOM.OFFERING_EDITOR',
+        },
+      ],
+    } as any;
+    expect(
+      canAccessProviderOffering(state(editor), transition('offering-b')),
+    ).toBe(true);
+  });
+
+  const organizationEditor = {
+    is_staff: false,
+    is_support: false,
+    permissions: [
+      {
+        scope_type: 'customer',
+        scope_uuid: 'provider_a',
+        customer_uuid: 'provider_a',
+        role_name: 'CUSTOM.OFFERING_EDITOR',
+      },
+    ],
+  } as any;
+
+  it('reads the organization from the route, not the open workspace', () => {
+    const noWorkspace = {
+      workspace: { user: organizationEditor, customer: null },
+    } as RootState;
+    expect(
+      canAccessProviderOffering(noWorkspace, transition('offering-a')),
+    ).toBe(true);
+  });
+
+  it('refuses an organization editor on another organization', () => {
+    expect(
+      canAccessProviderOffering(
+        state(organizationEditor),
+        transition('offering-c', 'provider_b'),
+      ),
+    ).toBe(false);
   });
 });

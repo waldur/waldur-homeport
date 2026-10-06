@@ -10,6 +10,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
 import { checkServiceProviderPermission } from '@/workspace/selectors';
 
@@ -27,13 +28,20 @@ interface OwnProps {
 export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.xl });
   const user = useUser();
-  // Usage and state counters are provider statistics; a role that can open
-  // the offering without that right would only get an error card.
-  const canSeeStatistics = checkServiceProviderPermission(
-    { uuid: offering.customer_uuid },
-    user,
-    PermissionEnum.GET_SERVICE_PROVIDER_STATISTICS,
-  );
+  // Usage and state counters need provider statistics or the right to list
+  // this offering's orders, as the API checks; a role that can open the
+  // offering with neither would only get an error card.
+  const canSeeStatistics =
+    checkServiceProviderPermission(
+      { uuid: offering.customer_uuid },
+      user,
+      PermissionEnum.GET_SERVICE_PROVIDER_STATISTICS,
+    ) ||
+    !!hasPermission(user, {
+      permission: PermissionEnum.LIST_ORDERS,
+      offeringId: offering.uuid,
+      customerId: offering.customer_uuid,
+    });
   const [agentIdentity, setAgentIdentity] = useState(null);
 
   const {

@@ -270,12 +270,14 @@ export function attachTransitions() {
 
   router.transitionService.onStart(
     {
-      to: (state) =>
+      to: (state, transition) =>
         state.data &&
         state.data.permissions &&
         !state.data.permissions.every((permission) => {
           try {
-            return permission(store.getState());
+            // The transition carries route params. Guards that only need the
+            // store ignore the second argument.
+            return permission(store.getState(), transition);
           } catch {
             // Swallow errors if permission check fails.
             return true;

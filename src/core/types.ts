@@ -28,7 +28,7 @@ interface DataDeclaration {
   breadcrumb?(): string;
   skipBreadcrumb?: boolean;
   priority?: number;
-  permissions: Array<(state) => boolean>;
+  permissions: Array<(state, transition?) => boolean>;
   useExtraTabs?: boolean;
   skipHero?: boolean;
   workspace?: string;

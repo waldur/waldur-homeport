@@ -10,6 +10,7 @@ import { translate } from '@/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
 import { PermissionEnum } from '@/permissions/enums';
 import {
+  canAccessProviderOffering,
   canAccessServiceProviderWorkspace,
   canViewServiceProviderTeam,
   hasServiceProviderPermission,
@@ -97,6 +98,9 @@ export const states: StateDeclaration[] = [
     parent: 'provider-offering-details',
     data: {
       skipHero: true,
+      // Replaces the inherited workspace guard so an offering manager can open
+      // this offering without a role on the provider workspace.
+      permissions: [canAccessProviderOffering],
     },
   },
 
@@ -733,6 +737,9 @@ export const states: StateDeclaration[] = [
     parent: 'provider-offering-update',
     data: {
       skipHero: true,
+      // Replaces the inherited workspace guard so an offering manager can open
+      // this offering without a role on the provider workspace.
+      permissions: [canAccessProviderOffering],
     },
   },
 

@@ -147,6 +147,28 @@ export const canAccessServiceProviderWorkspace = (state: RootState): boolean =>
   checkCanAccessServiceProvider(getCustomer(state), getUser(state));
 
 /**
+ * Route guard for an offering's manage and edit pages. The provider workspace
+ * still may. So may OFFERING.UPDATE on this offering or on its organization.
+ * Both ids come from the route params the permission hook forwards: the guard
+ * runs before the page resolves its organization, so the store still holds
+ * whichever one was open before.
+ */
+export const canAccessProviderOffering = (
+  state: RootState,
+  transition?: { params: () => { uuid?: string; offering_uuid?: string } },
+): boolean => {
+  const params = transition?.params();
+  return (
+    canAccessServiceProviderWorkspace(state) ||
+    !!hasPermission(getUser(state), {
+      permission: PermissionEnum.UPDATE_OFFERING,
+      customerId: params?.uuid ?? getCustomer(state)?.uuid,
+      offeringId: params?.offering_uuid,
+    })
+  );
+};
+
+/**
  * Does the user hold `permission` on the provider organization? Support staff
  * always do, as they had every provider tab before any tab was guarded.
  */

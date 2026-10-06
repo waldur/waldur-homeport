@@ -19,9 +19,10 @@ import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementB
 import { useTitle } from '@/navigation/title';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { TableRefreshButton } from '@/table/TableRefreshButton';
-import { useCustomer, useUser } from '@/workspace/hooks';
-import { checkIsOwner, checkIsServiceManager } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { useOfferingAccessibility } from '../common/cards/useOfferingAccessibility';
 import { getLabel } from '../common/registry';
@@ -45,7 +46,6 @@ interface OfferingViewHeroProps {
 export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
   const router = useRouter();
   const { state } = useCurrentStateAndParams();
-  const customer = useCustomer();
   const user = useUser();
 
   const offering = props.offering;
@@ -95,11 +95,13 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
     'marketplace-offering-update',
   ].includes(state.name);
 
-  const canManageAndEditOfferings = useMemo(() => {
-    const ownerOrStaff = user?.is_staff || checkIsOwner(customer, user);
-    const serviceManager = checkIsServiceManager(customer, user);
-    return ownerOrStaff || serviceManager;
-  }, [customer, user]);
+  const canManageAndEditOfferings =
+    !!offering &&
+    !!hasPermission(user, {
+      permission: PermissionEnum.UPDATE_OFFERING,
+      offeringId: offering.uuid,
+      customerId: offering.customer_uuid,
+    });
 
   if (props.isLoading) {
     return <LoadingSpinner />;
