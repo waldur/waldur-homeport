@@ -69,16 +69,11 @@ export const ActionsPopover = ({
         <ActionsList {...value} refetch={refetch} />
       </ActionList>
       {/* A menu item, so that arrow keys reach it and selecting it closes
-          the menu before the dialog opens. It keeps the look of the
-          text-primary BaseButton it replaces: centred, underlined, in the
-          panel's text colour, with the button's light brand background when
-          highlighted. */}
-      <Menu.Item
-        onSelect={callback}
-        className="my-1 justify-center rounded-md px-[8px] py-[4px] text-center text-sm leading-5 font-medium tracking-[0.56px] underline text-inherit action-row-active:bg-[var(--btn-secondary-bg)] action-row-active:text-inherit"
-      >
-        {translate('Show all')}
-      </Menu.Item>
+          the menu before the dialog opens. A separator sets it apart from
+          the actions above it; the row itself carries no styling of its own,
+          so it reads and highlights like every other row in the panel. */}
+      <Menu.Separator />
+      <Menu.Item onSelect={callback}>{translate('Show all')}</Menu.Item>
     </>
   ) : null;
 };
