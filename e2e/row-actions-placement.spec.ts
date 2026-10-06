@@ -125,7 +125,11 @@ async function mockApi(page: Page) {
   // The slow one: the menu is open and positioned before this resolves.
   await page.route('**/api/openstacktenant-instances/**', async (route) => {
     await new Promise((resolve) => setTimeout(resolve, ACTIONS_DELAY_MS));
-    const index = route.request().url().match(/i(\d+)\//)?.[1] ?? '0';
+    const index =
+      route
+        .request()
+        .url()
+        .match(/i(\d+)\//)?.[1] ?? '0';
     return route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -160,12 +164,15 @@ test.describe('Table row actions menu placement', () => {
     await page.goto('/all-resources/');
 
     const rows = page.locator('table tbody tr');
-    await expect(rows.first()).toBeVisible();
+    // The row itself, not just the first one: loading skeletons also render
+    // as rows, so indexing before this row exists can measure a placeholder.
+    await expect(rows.nth(ROW_INDEX)).toBeVisible();
 
     const toggle = rows
       .nth(ROW_INDEX)
       .locator('button[aria-haspopup="menu"]')
       .last();
+    await expect(toggle).toBeVisible();
     await toggle.scrollIntoViewIfNeeded();
     const toggleBox = await toggle.boundingBox();
     expect(toggleBox).not.toBeNull();
@@ -192,10 +199,12 @@ test.describe('Table row actions menu placement', () => {
     }));
     expect(scrollWidth).toBeLessThanOrEqual(innerWidth);
 
-    // Beside its own button, not a few hundred pixels away. The menu may be
-    // shifted up to fit a tall list, so the assertion is that it still spans
-    // the button's row rather than that their tops coincide.
-    expect(menuBox!.y).toBeLessThanOrEqual(toggleBox!.y + toggleBox!.height);
-    expect(menuBox!.y + menuBox!.height).toBeGreaterThanOrEqual(toggleBox!.y);
+    // Beside its own button. A tall list is shifted up to fit the window, so
+    // the tops need not coincide — but the panel must still cover the button
+    // it belongs to. Measured: it used to span 17-465 against a button
+    // centred at 489, and now spans 444-900.
+    const toggleCentre = toggleBox!.y + toggleBox!.height / 2;
+    expect(menuBox!.y).toBeLessThanOrEqual(toggleCentre);
+    expect(menuBox!.y + menuBox!.height).toBeGreaterThanOrEqual(toggleCentre);
   });
 });
