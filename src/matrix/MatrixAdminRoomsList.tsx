@@ -47,15 +47,21 @@ const STAFF_ACTIONS = [
   DisableChatButton,
 ];
 
-// Support is a read/observer role that may also join rooms to help; the
-// admin/destructive actions stay staff-only (and are 403-gated server-side).
+// Mirrors the API: support joins rooms to help, syncs their members and
+// exports their history, as those who may create the room do. The room's
+// lifecycle is staff's.
 const SUPPORT_ACTIONS = [
   OpenInTeamChatButton,
   OpenInMatrixButton,
   JoinLeaveRoomButton,
+  SyncMembersButton,
+  ExportHistoryButton,
 ];
 
-const RowActions: FC<{ row: MatrixRoom; fetch(): void }> = ({ row, fetch }) => {
+export const RowActions: FC<{ row: MatrixRoom; fetch(): void }> = ({
+  row,
+  fetch,
+}) => {
   const staff = useSelector(isStaffSelector);
   const staffOrSupport = useSelector(isStaffOrSupportSelector);
   if (!staffOrSupport) return null;

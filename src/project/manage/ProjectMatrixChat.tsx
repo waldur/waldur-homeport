@@ -11,6 +11,7 @@ import { StateIndicator } from '@/core/StateIndicator';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { canCreateMatrixRoom } from '@/matrix/canCreateMatrixRoom';
+import { canManageMatrixRoom } from '@/matrix/canManageMatrixRoom';
 import { useProjectMatrixRooms } from '@/matrix/chat/useProjectMatrixRooms';
 import { CreateMatrixRoomDialog } from '@/matrix/CreateMatrixRoomDialog';
 import { MatrixExportsList } from '@/matrix/MatrixExportsList';
@@ -32,7 +33,6 @@ import { renderFieldOrDash } from '@/table/utils';
 import {
   getProject,
   getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
   isStaff as isStaffSelector,
 } from '@/workspace/selectors';
 
@@ -42,12 +42,12 @@ import {
 // healthy, otherwise whatever fixes the current state.
 const RoomActions: FC<{
   room: MatrixRoom;
-  isOwnerOrStaff: boolean;
+  canManage: boolean;
   staff: boolean;
   refetch(): void;
-}> = ({ room, isOwnerOrStaff, staff, refetch }) => {
+}> = ({ room, canManage, staff, refetch }) => {
   const isActive = room.state === 'active';
-  const canSync = isOwnerOrStaff && isActive;
+  const canSync = canManage && isActive;
   const canRetry =
     staff &&
     (room.state === 'creating' ||
@@ -113,9 +113,8 @@ const RoomActions: FC<{
 
 const HistoryExportsCard: FC<{
   room: MatrixRoom;
-  isOwnerOrStaff: boolean;
   refetch(): void;
-}> = ({ room, isOwnerOrStaff, refetch }) => {
+}> = ({ room, refetch }) => {
   const [refreshSlot, setRefreshSlot] = useState<HTMLDivElement | null>(null);
   // No exports are ever produced on a non-active room, so refetching is a
   // no-op. The room can transition back to active, so disable with an
@@ -148,7 +147,7 @@ const HistoryExportsCard: FC<{
               size="lg"
             />
           )}
-          {isOwnerOrStaff && isActive && (
+          {isActive && (
             <ExportHistoryButton row={room} refetch={refetch} as={BaseButton} />
           )}
         </div>
@@ -165,10 +164,10 @@ const HistoryExportsCard: FC<{
 
 const RoomDetails: FC<{
   room: MatrixRoom;
-  isOwnerOrStaff: boolean;
+  canManage: boolean;
   staff: boolean;
   refetch(): void;
-}> = ({ room, isOwnerOrStaff, staff, refetch }) => (
+}> = ({ room, canManage, staff, refetch }) => (
   <>
     <FormTable.Card
       title={translate('Chat room')}
@@ -176,7 +175,7 @@ const RoomDetails: FC<{
       actions={
         <RoomActions
           room={room}
-          isOwnerOrStaff={isOwnerOrStaff}
+          canManage={canManage}
           staff={staff}
           refetch={refetch}
         />
@@ -213,18 +212,14 @@ const RoomDetails: FC<{
       </FormTable>
     </FormTable.Card>
 
-    <HistoryExportsCard
-      room={room}
-      isOwnerOrStaff={isOwnerOrStaff}
-      refetch={refetch}
-    />
+    {/* The API lists exports only for those who manage the room. */}
+    {canManage && <HistoryExportsCard room={room} refetch={refetch} />}
   </>
 );
 
 export const ProjectMatrixChat: FC = () => {
   const project = useSelector(getProject);
   const user = useSelector(getUser);
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const staff = useSelector(isStaffSelector);
   const { openDialog } = useModal();
 
@@ -281,7 +276,7 @@ export const ProjectMatrixChat: FC = () => {
   return (
     <RoomDetails
       room={room}
-      isOwnerOrStaff={isOwnerOrStaff}
+      canManage={canManageMatrixRoom(user, project)}
       staff={staff}
       refetch={refetch}
     />

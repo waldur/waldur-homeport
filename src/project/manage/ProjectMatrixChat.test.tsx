@@ -64,6 +64,7 @@ const MANAGER = {
     },
   ],
 };
+const SUPPORT = { is_staff: false, is_support: true };
 const OTHER_CUSTOMER_OWNER = {
   is_staff: false,
   permissions: [
@@ -82,6 +83,14 @@ const grantRoomCreation = (roleNames: string[]) =>
     roleNames.map((name) => ({
       name,
       permissions: [PermissionEnum.CREATE_MATRIX_ROOM],
+    })) as any,
+  );
+
+const grantPermissions = (roles: Record<string, string[]>) =>
+  vi.spyOn(ENV, 'roles', 'get').mockReturnValue(
+    Object.entries(roles).map(([name, permissions]) => ({
+      name,
+      permissions,
     })) as any,
   );
 
@@ -227,6 +236,52 @@ describe('ProjectMatrixChat', () => {
       screen.getByRole('button', { name: 'Open in team chat' }),
     ).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /All actions/ })).toBeNull();
+  });
+
+  // Whoever may create the room manages it, as in the API.
+  it.each([
+    ['staff', STAFF],
+    ['support', SUPPORT],
+    ['a customer owner', OWNER],
+  ])('lets %s sync members and export the history', async (_, user) => {
+    renderTab('active', user);
+
+    expect(screen.getByText('History exports')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Export history' }),
+    ).toBeInTheDocument();
+    await openRoomMenu();
+    expect(
+      screen.getByRole('menuitem', { name: 'Sync members' }),
+    ).toBeInTheDocument();
+  });
+
+  it('lets a project manager manage the room once their role may create it', () => {
+    grantRoomCreation([RoleEnum.PROJECT_MANAGER]);
+    renderTab('active', MANAGER);
+
+    expect(
+      screen.getByRole('button', { name: 'Export history' }),
+    ).toBeInTheDocument();
+  });
+
+  // The API lists no exports for them, so the card would only ever be empty.
+  it.each([
+    [
+      'a project manager, who edits the project but cannot create the room',
+      MANAGER,
+      { [RoleEnum.PROJECT_MANAGER]: [PermissionEnum.UPDATE_PROJECT] },
+    ],
+    ['an owner whose role cannot create the room', OWNER, {}],
+  ])('hides history exports from %s', (_, user, roles) => {
+    grantPermissions(roles);
+    renderTab('active', user);
+
+    expect(
+      screen.getByRole('button', { name: 'Open in team chat' }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText('History exports')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Export history' })).toBeNull();
   });
 
   it('promotes Retry out of the menu while the room is errored', async () => {
