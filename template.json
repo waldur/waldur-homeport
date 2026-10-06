@@ -3718,16 +3718,6 @@
       "feature_area": "openstack"
     }
   },
-  "Allow marketplace to function as a catalogue only.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
-  "Allow marketplace to serve only as aggregator of call info.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
   "Allow restoring terminated resources": {
     "context": {
       "feature_area": "integration"
@@ -9316,6 +9306,11 @@
         }
       },
       "action_type": "read"
+    }
+  },
+  "Carry unsubmitted drafts over to the next round": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "Carryover": {
@@ -18535,11 +18530,6 @@
       "feature_area": "openstack-subnet"
     }
   },
-  "Enabled display of call management functionality.": {
-    "context": {
-      "feature_area": "features"
-    }
-  },
   "Enabled display of experimental or mocked components in marketplace.": {
     "context": {
       "feature_area": "features"
@@ -27668,6 +27658,11 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "roles"
+    }
+  },
+  "List calls that are run outside Waldur: each call links to an external URL where applications are made, and rounds, proposals and reviews are hidden.": {
+    "context": {
+      "feature_area": "features"
     }
   },
   "List course accounts": {
@@ -48244,6 +48239,11 @@
       "action_type": "create"
     }
   },
+  "Run the marketplace as a catalogue: offerings can be browsed but not ordered, order lists and pricing are hidden, and anonymous visitors land on the marketplace instead of the login page.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Run the preview first.": {
     "context": {
       "feature_area": "wizard"
@@ -51762,6 +51762,11 @@
     }
   },
   "Show available bot commands": {},
+  "Show call management: the call-managing organization's workspace, providers' requests for offerings, and proposal reports. Independent of SERVICE_ACCESS_MODE, which governs how applicants reach services.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Show chart": {
     "context": {
       "feature_area": "plan-usage"
@@ -64867,7 +64872,7 @@
           "type": "unknown"
         }
       },
-      "feature_area": "actions"
+      "feature_area": "robot-accounts"
     }
   },
   "Updating": {
@@ -68174,6 +68179,11 @@
   "When a granted proposal takes effect: immediately on the decision, or on the fixed allocation date set per round.": {
     "context": {
       "feature_area": "workflow-steps"
+    }
+  },
+  "When a round closes, move unsubmitted drafts to the next round instead of cancelling them. Applicants keep their content and are notified by email. Drafts are cancelled as before when the call has no later round.": {
+    "context": {
+      "feature_area": "configuration"
     }
   },
   "When carryover is enabled, unused allocation from the previous period carries over, capped at {pct}% of the base allocation:": {
