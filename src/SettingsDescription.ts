@@ -2285,6 +2285,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'MATRIX_HISTORY_EXPORT_RETENTION_DAYS',
+        description: translate('Days to keep Matrix room history exports, files included, before they are deleted. Each room\'s newest completed export is kept regardless of age. Set to 0 or less to keep them forever.'),
+        default: 90,
+        type: 'integer',
+      },
+      {
         key: 'MATRIX_USER_REGISTRATION_SECRET',
         description: translate('Shared secret for Matrix user registration.'),
         default: '',
