@@ -471,6 +471,11 @@
       "feature_area": "roles"
     }
   },
+  "1 package": {
+    "context": {
+      "feature_area": "software-catalogs"
+    }
+  },
   "1 release with breaking changes": {
     "context": {
       "feature_area": "changelog"
@@ -52457,6 +52462,11 @@
     }
   },
   "Show the About us page and its link in the footer.": {},
+  "Show the Reporting menu with organisation-scoped reports to organisation owners.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Show the affected rows": {
     "context": {
       "feature_area": "offering-merges"
@@ -73522,6 +73532,16 @@
         }
       },
       "feature_area": "roles"
+    }
+  },
+  "{count} packages": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "software-catalogs"
     }
   },
   "{count} pending changes": {

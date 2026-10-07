@@ -1,6 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-final-form';
-import { marketplaceSoftwareCatalogsList, Offering } from 'waldur-js-client';
+import {
+  CatalogSummary,
+  marketplaceSoftwareCatalogsList,
+  Offering,
+  SoftwareCatalog,
+} from 'waldur-js-client';
 
 import { AsyncSelectGroup, SelectGroup } from '@/form';
 import { createLoadOptions } from '@/form/select';
@@ -10,11 +15,28 @@ import { SoftwareCatalogCpuTargetFields } from './SoftwareCatalogCpuTargetFields
 
 const loadCatalogs = createLoadOptions(marketplaceSoftwareCatalogsList, 'name');
 
+/** List options include package count and type; the offering link's catalog does not. */
+const formatCatalogOptionLabel = (
+  option: SoftwareCatalog | (CatalogSummary & { package_count?: number }),
+) => {
+  const title = [option.name, option.version].filter(Boolean).join(' ');
+  const count =
+    option.package_count == null
+      ? ''
+      : option.package_count === 1
+        ? ` (${translate('1 package')})`
+        : ` (${translate('{count} packages', { count: option.package_count })})`;
+  const type =
+    'catalog_type_display' in option
+      ? option.catalog_type_display || option.catalog_type
+      : undefined;
+  return type ? `${title}${count} - ${type}` : `${title}${count}`;
+};
+
 export const SoftwareCatalogForm: FunctionComponent<{
   isEdit?: boolean;
-  initialCatalog?: any;
   offering?: Offering;
-}> = ({ isEdit = false, initialCatalog, offering }) => {
+}> = ({ isEdit = false, offering }) => {
   const form = useForm();
   const partitionOptions = useMemo(
     () =>
@@ -33,19 +55,9 @@ export const SoftwareCatalogForm: FunctionComponent<{
         placeholder={translate('Select software catalog...')}
         loadOptions={loadCatalogs}
         getOptionValue={(option) => option.uuid}
-        getOptionLabel={(option) =>
-          `${option.name} ${option.version} (${option.package_count} packages) - ${option.catalog_type_display || option.catalog_type || 'Unknown type'}`
-        }
+        getOptionLabel={formatCatalogOptionLabel}
         disabled={isEdit}
         noOptionsMessage={() => translate('No results found')}
-        format={(value) =>
-          isEdit && initialCatalog && !value
-            ? {
-                ...initialCatalog,
-                label: `${initialCatalog.name} ${initialCatalog.version}${initialCatalog.package_count ? ` (${initialCatalog.package_count} packages)` : ''} - ${initialCatalog.catalog_type_display || initialCatalog.catalog_type || 'Unknown type'}`,
-              }
-            : value
-        }
         onChange={() => {
           form.batch(() => {
             form.change('enabled_cpu_family', []);
