@@ -16477,6 +16477,11 @@
       "primary_ui_type": "label"
     }
   },
+  "Diff view": {
+    "context": {
+      "feature_area": "version-history"
+    }
+  },
   "Difference": {
     "context": {
       "primary_ui_type": "title",
@@ -21713,6 +21718,11 @@
       "feature_area": "landing"
     }
   },
+  "Filter conversations": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Filter for IAAS/SAAS classification. Optional — used to pre-filter billing export data.": {},
   "Filter for IaaS/SaaS classification (optional)": {
     "context": {
@@ -26609,6 +26619,7 @@
   },
   "JSON": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "version-history"
     }
   },
@@ -30360,6 +30371,7 @@
   },
   "Mentions": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "chat"
     }
   },
@@ -43484,6 +43496,11 @@
       "feature_area": "actions"
     }
   },
+  "Quick extend options": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "Quick shortcut has been created": {
     "context": {
       "primary_ui_type": "success_message",
@@ -53922,7 +53939,7 @@
   },
   "Submission in progress": {
     "context": {
-      "feature_area": "details"
+      "feature_area": "actions"
     }
   },
   "Submission settings": {
@@ -54892,6 +54909,7 @@
   },
   "Table": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "database-stats"
     }
   },
@@ -65084,6 +65102,7 @@
   },
   "Unread": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "chat"
     }
   },

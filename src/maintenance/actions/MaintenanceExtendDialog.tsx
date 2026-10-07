@@ -8,7 +8,7 @@ import {
   maintenanceAnnouncementsPartialUpdate,
 } from 'waldur-js-client';
 
-import { SegmentedControl } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { formatMediumDateTime, parseDate } from '@/core/dateUtils';
 import { DateTimeField } from '@/form/DateTimeField';
@@ -147,21 +147,28 @@ const ExtendForm: FC<ExtendFormProps> = ({
 
         <BSForm.Group className="mb-4">
           <BSForm.Label>{translate('Quick extend')}</BSForm.Label>
-          <div>
-            <SegmentedControl
-              aria-label={translate('Quick extend')}
-              size="sm"
-              options={QUICK_OFFSETS.map((offset) => ({
-                value: offset.key,
-                label: offset.label,
-                disabled: submitting,
-              }))}
-              value={activeQuickKey || ''}
-              onValueChange={(value) => {
-                const offset = QUICK_OFFSETS.find((o) => o.key === value);
-                if (offset) applyQuickOffset(offset.key, offset.minutes);
-              }}
-            />
+          <div
+            role="group"
+            aria-label={translate('Quick extend options')}
+            className="d-flex flex-wrap gap-2"
+          >
+            {QUICK_OFFSETS.map((offset) => {
+              const isSelected = activeQuickKey === offset.key;
+              return (
+                <BaseButton
+                  key={offset.key}
+                  size="sm"
+                  variant={isSelected ? 'secondary' : 'tertiary'}
+                  disabled={submitting}
+                  disabledReason={
+                    submitting ? translate('Submission in progress') : undefined
+                  }
+                  onClick={() => applyQuickOffset(offset.key, offset.minutes)}
+                  label={offset.label}
+                  aria-pressed={isSelected}
+                />
+              );
+            })}
           </div>
         </BSForm.Group>
 

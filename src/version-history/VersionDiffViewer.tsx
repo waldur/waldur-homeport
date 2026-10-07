@@ -1,8 +1,10 @@
 import { DiffEditor } from '@monaco-editor/react';
 import * as monacoEditor from 'monaco-editor';
 import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
-import { Nav, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { VersionHistory } from 'waldur-js-client';
+
+import { SegmentedControl, SegmentedControlOption } from 'waldur-ui';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { initMonaco } from '@/form/monacoSetup';
@@ -46,6 +48,14 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
     [diffs],
   );
 
+  const viewModeOptions: SegmentedControlOption<ViewMode>[] = useMemo(
+    () => [
+      { value: 'table', label: translate('Table') },
+      { value: 'json', label: translate('JSON') },
+    ],
+    [],
+  );
+
   if (!currentVersion) {
     return (
       <div className="d-flex justify-content-center align-items-center h-100 text-muted fs-6">
@@ -65,26 +75,13 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
             tone="outline"
           />
         </div>
-        <Nav variant="pills" className="nav-pills-sm">
-          <Nav.Item>
-            <Nav.Link
-              active={viewMode === 'table'}
-              onClick={() => setViewMode('table')}
-              className="cursor-pointer"
-            >
-              {translate('Table')}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              active={viewMode === 'json'}
-              onClick={() => setViewMode('json')}
-              className="cursor-pointer"
-            >
-              {translate('JSON')}
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
+        <SegmentedControl<ViewMode>
+          aria-label={translate('Diff view')}
+          size="sm"
+          options={viewModeOptions}
+          value={viewMode}
+          onValueChange={setViewMode}
+        />
       </div>
 
       <div className="flex-grow-1 overflow-auto">
