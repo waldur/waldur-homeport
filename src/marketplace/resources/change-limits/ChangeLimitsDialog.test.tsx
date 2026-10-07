@@ -297,7 +297,7 @@ describe('ChangeLimitsDialog', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Boolean Component')).toBeInTheDocument();
-      // Checkboxes in Waldur often use AwesomeCheckbox which renders as an input[type="checkbox"]
+      // Switches and checkboxes in Waldur render a native input[type="checkbox"]
       expect(screen.getByRole('checkbox')).toBeInTheDocument();
     });
   });

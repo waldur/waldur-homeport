@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { Select } from '@/form/select';
+import { SwitchField } from '@/form/SwitchField';
 import { translate } from '@/i18n';
 
 import './VmOverviewFilter.scss';
@@ -20,10 +20,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
       <form className="form-inline" id="vm-overview-filter">
         <Field name="shared" type="checkbox">
           {({ input }) => (
-            <AwesomeCheckboxField
-              input={input}
-              label={translate('Show shared')}
-            />
+            <SwitchField input={input} label={translate('Show shared')} />
           )}
         </Field>
 

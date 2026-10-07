@@ -1,4 +1,3 @@
-import { AwesomeCheckboxField } from './AwesomeCheckboxField';
 import { BoxNumberField } from './BoxNumberField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { CountrySelectField } from './CountrySelectField';
@@ -12,6 +11,7 @@ import { SecretField } from './SecretField';
 import { AsyncSelectField } from './select/AsyncSelectField';
 import { SelectField } from './select/SelectField';
 import { StringField } from './StringField';
+import { SwitchField } from './SwitchField';
 import { TextField } from './TextField';
 import { withEditField } from './withEditField';
 
@@ -23,7 +23,7 @@ export const SecretEditField = withEditField(SecretField);
 export const TextEditField = withEditField(TextField);
 export const NumberEditField = withEditField(NumberField);
 export const SelectEditField = withEditField(SelectField);
-export const BooleanEditField = withEditField(AwesomeCheckboxField, {
+export const BooleanEditField = withEditField(SwitchField, {
   passLabelToControl: true,
 });
 export const DateEditField = withEditField(DateField);

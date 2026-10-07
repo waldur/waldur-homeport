@@ -23,8 +23,9 @@ import {
   QuestionAdminRequest,
 } from 'waldur-js-client';
 
+import { Checkbox } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -441,12 +442,11 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             footer={
               <>
                 {!isEdit && (
-                  <AwesomeCheckbox
-                    type="checkbox"
+                  <Checkbox
                     label={translate('Create another')}
                     disabled={submitting}
-                    value={createAnother}
-                    onChange={setCreateAnother}
+                    checked={createAnother}
+                    onCheckedChange={setCreateAnother}
                     className="me-auto"
                     id="check-another"
                   />

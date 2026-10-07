@@ -355,7 +355,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                 name="is_enabled"
                 label={translate('Step enabled')}
                 disabled={enableBlocked}
-                help_text={enableHelpText}
+                description={enableHelpText}
               />
             )}
 
@@ -383,7 +383,6 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
               label={translate('Transition mode options')}
               required={true}
               choices={transitionModeChoices}
-              gap={3}
               validate={required}
             />
 
@@ -421,7 +420,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                   name="blind_review"
                   spaceless={true}
                   label={translate('Blind review')}
-                  help_text={translate(
+                  description={translate(
                     "Evaluators cannot see each other's assessments.",
                   )}
                 />
@@ -430,7 +429,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                   name="requires_coi_confirmation"
                   spaceless={true}
                   label={translate('Conflict of interest confirmation')}
-                  help_text={translate(
+                  description={translate(
                     'Evaluator must confirm absence of conflict of interest.',
                   )}
                 />
@@ -456,7 +455,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
                   name="include_award_response"
                   spaceless={true}
                   label={translate('Include award response')}
-                  help_text={translate(
+                  description={translate(
                     'Require the applicant to explicitly accept or decline the award before provisioning.',
                   )}
                 />
@@ -479,7 +478,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
               <BooleanGroup
                 name="checklist_required"
                 label={translate('Checklist required')}
-                help_text={translate(
+                description={translate(
                   'Block completing this step until the checklist’s required questions are answered.',
                 )}
               />
@@ -493,7 +492,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
               // default and the flag is now honoured on the applicant's
               // tracker, so a call manager who reads only the on-case will not
               // realise the step is hidden from applicants until one asks.
-              help_text={translate(
+              description={translate(
                 'On, applicants see this step by name on their progress tracker. Off, they see only that their proposal is in review while it runs.',
               )}
             />

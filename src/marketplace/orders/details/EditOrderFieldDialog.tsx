@@ -7,9 +7,8 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Switch } from 'waldur-ui';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { composeValidators } from '@/core/validators';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
@@ -106,10 +105,12 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
       <Field
         name={`limits.${c.type}`}
         render={(fieldProps) => (
-          <AwesomeCheckbox
+          <Switch
             label={c.name}
-            value={fieldProps.input.value === 1}
-            onChange={(value) => fieldProps.input.onChange(value ? 1 : 0)}
+            checked={fieldProps.input.value === 1}
+            onCheckedChange={(value) =>
+              fieldProps.input.onChange(value ? 1 : 0)
+            }
           />
         )}
       />

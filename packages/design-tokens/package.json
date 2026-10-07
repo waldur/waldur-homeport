@@ -12,6 +12,7 @@
     "./colors.css": "./src/colors.css",
     "./buttonColors.css": "./src/buttonColors.css",
     "./surfaceColors.css": "./src/surfaceColors.css",
+    "./checkColors.css": "./src/checkColors.css",
     "./sidebarColors.css": "./src/sidebarColors.css",
     "./focusRing.css": "./src/focusRing.css",
     "./animations.css": "./src/animations.css",

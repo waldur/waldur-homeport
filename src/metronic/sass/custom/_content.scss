@@ -53,7 +53,10 @@
     pointer-events: none !important;
   }
 
-  .form-check {
+  // A checkbox/radio/switch's label (CheckLabel): the input is a sibling of
+  // its label, linked by `for`. The input is covered by the rule above, but a
+  // click on its label would still toggle it.
+  label[for] {
     cursor: not-allowed !important;
     pointer-events: none !important;
   }

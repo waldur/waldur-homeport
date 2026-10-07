@@ -2,10 +2,8 @@ import { ComponentProps } from 'react';
 
 import { AsyncSelect } from 'waldur-ui';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { lazyOnce } from '@/core/lazyOnce';
 
-import { AwesomeCheckboxField } from './AwesomeCheckboxField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { CountrySelectField } from './CountrySelectField';
 import { DateField } from './DateField';
@@ -16,11 +14,13 @@ import { ImageField } from './ImageField';
 import type MarkdownEditor from './MarkdownEditor';
 import type { MonacoField } from './MonacoField';
 import { NumberField } from './NumberField';
+import { RadioGroupField } from './RadioGroupField';
 import { SecretField } from './SecretField';
 import { CreatableSelectField } from './select/CreatableSelectField';
 import { SelectField } from './select/SelectField';
 import { SliderNumberField } from './SliderNumberField';
 import { StringField } from './StringField';
+import { SwitchField } from './SwitchField';
 import { TextField } from './TextField';
 import { TimezoneField } from './TimezoneField';
 import { withFormGroup } from './withFormGroup';
@@ -46,10 +46,10 @@ export const TextGroup = withFormGroup(TextField);
 export const NumberGroup = withFormGroup(NumberField);
 export const AsyncSelectGroup = withFormGroup(AsyncSelect);
 export const CreatableSelectGroup = withFormGroup(CreatableSelectField);
-export const BooleanGroup = withFormGroup(AwesomeCheckboxField, {
+export const BooleanGroup = withFormGroup(SwitchField, {
   passLabelToControl: true,
 });
-export const RadioGroup = withFormGroup(AwesomeRadioButton, {
+export const RadioGroup = withFormGroup(RadioGroupField, {
   passLabelToControl: true,
 });
 export const DateGroup = withFormGroup(DateField);

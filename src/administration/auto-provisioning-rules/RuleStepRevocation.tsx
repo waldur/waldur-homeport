@@ -88,8 +88,7 @@ export const RuleStepRevocation: FC<WizardFormStepProps> = (props) => {
         tooltip={translate(
           'Keeps roles in step with the identity provider, the way SCIM group membership does.',
         )}
-        tooltipEnd
-        alignMiddle
+        align="center"
         className="w-100"
       />
       {values.revoke_when_unmatched && (

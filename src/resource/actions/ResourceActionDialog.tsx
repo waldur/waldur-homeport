@@ -167,8 +167,7 @@ const ResourceActionDialogInner: FC<any> = ({
             name={props.name}
             {...props}
             choices={field.choices}
-            direction={field.direction}
-            justify={field.justify}
+            orientation={field.direction}
           />
         );
       }

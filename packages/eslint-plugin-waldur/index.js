@@ -1,3 +1,4 @@
+import checkNeedsAccessibleName from './rules/check-needs-accessible-name.js';
 import enforceActionsDropdownInTables from './rules/enforce-actions-dropdown-in-tables.js';
 import enforceBadgeIconPatterns from './rules/enforce-badge-icon-patterns.js';
 import enforceBadgePropsConsistency from './rules/enforce-badge-props-consistency.js';
@@ -7,12 +8,12 @@ import enforceBreadcrumbColors from './rules/enforce-breadcrumb-colors.js';
 import enforceDialogButtonOrder from './rules/enforce-dialog-button-order.js';
 import enforceDisabledButtonTooltip from './rules/enforce-disabled-button-tooltip.js';
 import enforceFeaturedIcon from './rules/enforce-featured-icon.js';
-import enforceFormcheckComponents from './rules/enforce-formcheck-components.js';
 import enforceNavTabsPattern from './rules/enforce-nav-tabs-pattern.js';
 import enforceNoResultWithCta from './rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
+import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
@@ -40,7 +41,8 @@ export default {
     'no-hand-rolled-modal-footer': noHandRolledModalFooter,
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,
-    'enforce-formcheck-components': enforceFormcheckComponents,
+    'no-bootstrap-form-check': noBootstrapFormCheck,
+    'check-needs-accessible-name': checkNeedsAccessibleName,
     'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
     'prefer-classnames-utility': preferClassnamesUtility,
     'enforce-render-field-or-dash': enforceRenderFieldOrDash,

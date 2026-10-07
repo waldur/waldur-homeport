@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from 'react';
 import { Project, projectCreditsList } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -95,8 +96,8 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
               label={row.label}
               value={
                 row.key === 'apply_as_minimal_consumption' ? (
-                  <AwesomeCheckbox
-                    value={!!row.value}
+                  <Switch
+                    checked={!!row.value}
                     label={
                       row.value ? translate('Enabled') : translate('Disabled')
                     }

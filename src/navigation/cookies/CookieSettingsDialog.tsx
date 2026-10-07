@@ -1,7 +1,8 @@
 import { CookieIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -32,8 +33,9 @@ const CookieCategory: FC<CookieCategoryProps> = ({
         <div className="fw-bold">{title}</div>
         <div className="text-muted fs-7">{description}</div>
       </div>
-      <AwesomeCheckbox
-        value={value}
+      <Switch
+        aria-label={title}
+        checked={value}
         disabled={disabled}
         className="mb-0 flex-shrink-0"
       />

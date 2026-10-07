@@ -11,11 +11,11 @@ import { ENV } from '@/core/config';
 import { WarnCard } from '@/core/WarnCard';
 import { SelectField, SubmitButton, TextField } from '@/form';
 import { FormGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { MonacoField } from '@/form/MonacoField';
 import { StringField } from '@/form/StringField';
+import { SwitchField } from '@/form/SwitchField';
 import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -227,10 +227,7 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
               ) : item.type === 'boolean' ? (
                 <Field name="value" type="checkbox">
                   {({ input }) => (
-                    <AwesomeCheckboxField
-                      input={input}
-                      label={item.description}
-                    />
+                    <SwitchField input={input} label={item.description} />
                   )}
                 </Field>
               ) : item.type === 'image_field' ? (

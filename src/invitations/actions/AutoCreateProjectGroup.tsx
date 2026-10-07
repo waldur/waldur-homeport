@@ -34,7 +34,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
       <BooleanGroup
         name="auto_create_project"
         label={translate('Auto-create project')}
-        alignMiddle
+        align="center"
         disabled={values?.type === 'public' || disabled}
       />
       {values?.auto_create_project && (
@@ -56,7 +56,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
             label={translate(
               'Allow users to provide custom project name and description',
             )}
-            alignMiddle
+            align="center"
             disabled={disabled}
           />
           <BooleanGroup
@@ -64,7 +64,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
             label={translate(
               'Allow users to create multiple projects from this invitation',
             )}
-            alignMiddle
+            align="center"
             disabled={disabled}
           />
         </>

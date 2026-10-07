@@ -3,13 +3,14 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { Radio, Tooltip } from 'waldur-ui';
 
 import {
   CustomComponentInputProps,
   SelectDialogFieldChoice,
   SelectDialogFieldColumn,
 } from '@/form/types';
+import { translate } from '@/i18n';
 
 import './ChoicesTable.scss';
 
@@ -59,8 +60,9 @@ export const ChoicesTable: FC<ChoicesTableProps> = ({
                     <ProhibitIcon weight="bold" />
                   </Tooltip>
                 ) : (
-                  <input
-                    type="radio"
+                  <Radio
+                    aria-label={translate('Select row')}
+                    size="sm"
                     checked={
                       props.input.value &&
                       choice.uuid === props.input.value.uuid

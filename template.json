@@ -50083,6 +50083,11 @@
       "feature_area": "roles"
     }
   },
+  "Select all components": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Select all rows": {
     "context": {
       "feature_area": "table"
@@ -50618,7 +50623,7 @@
   },
   "Select row": {
     "context": {
-      "feature_area": "table"
+      "feature_area": "form"
     }
   },
   "Select saved filter": {
@@ -52882,7 +52887,7 @@
   },
   "Skip records with errors": {
     "context": {
-      "feature_area": "import-usage"
+      "feature_area": "import"
     }
   },
   "Skipped": {

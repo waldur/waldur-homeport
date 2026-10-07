@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { components } from 'react-select';
 
+import { SelectOption } from 'waldur-ui';
+
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import {
   AsyncSelect,
@@ -33,14 +35,14 @@ const renderIcon = (src: string, imgStyle: any) =>
 export const Option = (props) => {
   const img = renderIcon(props.data.thumbnail, { width: 19 });
   return (
-    <components.Option {...props}>
+    <SelectOption {...props}>
       <div className="d-flex align-items-center">
         {img}
         <span className="ellipsis-lines ellipsis-lines-2">
           {`${props.data.category_title} / ${props.data.name}`}
         </span>
       </div>
-    </components.Option>
+    </SelectOption>
   );
 };
 

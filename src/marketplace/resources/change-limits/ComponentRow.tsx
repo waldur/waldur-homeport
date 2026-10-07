@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field as FinalFormField } from 'react-final-form';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { composeValidators } from '@/core/validators';
 import { NumberField } from '@/form';
 import { translate } from '@/i18n';
@@ -34,10 +35,10 @@ interface ComponentRowProps {
 const CellWrapper: FC<any> = (props) => (
   <Form.Group as="td" onClick={(e) => e.stopPropagation()}>
     {props.offeringComponent.is_boolean ? (
-      <AwesomeCheckbox
+      <Switch
         label=""
-        value={parseInt(props.input.value) === 1}
-        onChange={(value) => props.input.onChange(value ? 1 : 0)}
+        checked={parseInt(props.input.value) === 1}
+        onCheckedChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
     ) : (
       <NumberField

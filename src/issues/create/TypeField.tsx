@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { components } from 'react-select';
 
+import { SelectOption } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { SelectGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -8,9 +10,9 @@ import { translate } from '@/i18n';
 import { IssueTypeRenderer } from './IssueTypeRenderer';
 
 const Option: FunctionComponent<any> = (props) => (
-  <components.Option {...props}>
+  <SelectOption {...props}>
     <IssueTypeRenderer {...props.data} />
-  </components.Option>
+  </SelectOption>
 );
 
 const SingleValue: FunctionComponent<any> = (props) => (

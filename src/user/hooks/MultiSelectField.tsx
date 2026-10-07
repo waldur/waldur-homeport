@@ -1,8 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { FormCheck, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { Checkbox, Tooltip } from 'waldur-ui';
 
 export const MultiSelectField: FunctionComponent<{ input; options }> = ({
   input,
@@ -16,26 +16,27 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
   >
     {options.map((option, index) => (
       <ListGroupItem key={index} className="py-3" disabled={option.disabled}>
-        <FormCheck id={`checkbox-${index}`}>
-          <FormCheck.Input
-            type="checkbox"
-            checked={input.value[option.key] || false}
-            onChange={(e: React.ChangeEvent<any>) =>
-              input.onChange({ ...input.value, [option.key]: e.target.checked })
-            }
-          />
-
-          <FormCheck.Label className="d-flex justify-content-between">
-            {option.title}
-            {option.help_text && (
-              <div>
+        <Checkbox
+          id={`checkbox-${index}`}
+          checked={input.value[option.key] || false}
+          disabled={option.disabled}
+          onChange={(e) =>
+            input.onChange({
+              ...input.value,
+              [option.key]: e.target.checked,
+            })
+          }
+          label={
+            <span className="d-flex justify-content-between gap-2">
+              {option.title}
+              {option.help_text && (
                 <Tooltip label={option.help_text} autoWidth={true}>
                   <QuestionIcon weight="bold" />
                 </Tooltip>
-              </div>
-            )}
-          </FormCheck.Label>
-        </FormCheck>
+              )}
+            </span>
+          }
+        />
         {option.subtitle && <small>{option.subtitle}</small>}
       </ListGroupItem>
     ))}

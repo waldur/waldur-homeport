@@ -105,7 +105,6 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           name="auth_method"
           label={translate('Authentication method')}
           choices={getAtlassianAuthMethodChoices()}
-          gap={3}
           required
         />
       </div>

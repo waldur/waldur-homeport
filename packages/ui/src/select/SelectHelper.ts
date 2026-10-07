@@ -5,6 +5,7 @@ import {
   MultiSelectOption,
   MultiSelectValue,
   SelectDropdownIndicator,
+  SelectOption,
 } from './components';
 
 export const reorderOptions = (options, value, getOptionValue, isMulti) => {
@@ -75,6 +76,7 @@ export const composeComponents = (components: any, isMulti: boolean) => {
     ClearIndicator: FilterSelectClearIndicator,
     DropdownIndicator: SelectDropdownIndicator,
     Input: MetronicInput,
+    Option: SelectOption,
   };
 
   if (isMulti) {

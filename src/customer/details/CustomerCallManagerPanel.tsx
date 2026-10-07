@@ -7,7 +7,8 @@ import {
   callManagingOrganisationsList,
 } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -84,10 +85,10 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
       </Card.Header>
       <Card.Body>
         {errorInfo && <LoadingErred loadData={refetch} />}
-        <AwesomeCheckbox
+        <Switch
           label={translate('Enable call manager')}
-          value={customer.call_managing_organization_uuid ? true : false}
-          onChange={toggleCallManager}
+          checked={customer.call_managing_organization_uuid ? true : false}
+          onCheckedChange={toggleCallManager}
           disabled={loadingToggle}
         />
       </Card.Body>

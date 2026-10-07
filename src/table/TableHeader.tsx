@@ -1,9 +1,8 @@
 import { CaretDownIcon, PushPinIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
-import { FormCheck } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { Checkbox, Tooltip } from 'waldur-ui';
 
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { translate } from '@/i18n';
@@ -344,11 +343,10 @@ export const TableHeader: FC<TableHeaderProps> = ({
             />
           ) : enableMultiSelect ? (
             <th style={{ width: '10px', paddingLeft: '16px', paddingRight: 0 }}>
-              <FormCheck
+              <Checkbox
                 ref={refCheck}
                 data-testid="select-all"
                 aria-label={translate('Select all rows')}
-                className="form-check form-check-custom form-check-md"
                 checked={isAllSelected}
                 onChange={() => onSelectAllRows(rows)}
               />

@@ -1,10 +1,11 @@
 import { FC, useEffect, useMemo } from 'react';
-import { FormCheck } from 'react-bootstrap';
 import { Field, Form, FormSpy } from 'react-final-form';
 import {
   customersUpdateProjectDigestConfigUpdate,
   ProjectDigestConfigRequest,
 } from 'waldur-js-client';
+
+import { Checkbox } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { BooleanGroup, SelectGroup, NumberGroup } from '@/form';
@@ -177,12 +178,8 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
                     render={({ input }) => (
                       <>
                         {availableSections.map((section) => (
-                          <FormCheck
-                            key={section.key}
-                            className="form-check-custom mb-2"
-                            type="checkbox"
+                          <Checkbox
                             id={`section-${section.key}`}
-                            label={section.title}
                             checked={
                               Array.isArray(input.value) &&
                               input.value.includes(section.key)
@@ -201,6 +198,9 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
                               }
                               input.onChange(currentSections);
                             }}
+                            key={section.key}
+                            className="mb-2"
+                            label={section.title}
                           />
                         ))}
                       </>

@@ -1,12 +1,13 @@
 import { FunnelSimpleIcon, GearSixIcon, XIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { ComponentType, FC, createElement, useCallback } from 'react';
-import { FormCheck, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
   BaseButton,
   ButtonSize,
+  Checkbox,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -60,12 +61,18 @@ const ColumnsPopover: FC<{
           menuItem({ look: 'actions' }),
           'd-flex align-items-center gap-2',
         )}
+        aria-pressed={Boolean(activeColumns[column.id])}
         onClick={() => onToggle(column)}
       >
-        <FormCheck
-          className="form-check form-check-custom form-check-sm min-h-auto"
+        {/* A visual only: the button is the control, and an input inside a
+            button would be a second, nested one. */}
+        <Checkbox
+          size="sm"
           checked={Boolean(activeColumns[column.id])}
-          onChange={(e) => e.preventDefault()}
+          readOnly
+          tabIndex={-1}
+          aria-hidden="true"
+          className="pointer-events-none"
         />
         {column.title}
       </button>

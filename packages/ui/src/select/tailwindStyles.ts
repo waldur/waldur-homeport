@@ -197,19 +197,6 @@ export const getSelectTailwindClassNames = <
         isDisabled && 'metronic-select__option--is-disabled',
       );
 
-      // Single-select's selected row gets the same checkmark the old
-      // SCSS drew via the app's shared `--checkbox-bg` custom property
-      // (a complete `url(...)`, see _root.scss). Multi-select skips it —
-      // MultiSelectOption already renders its own checkbox.
-      const checkmarkClasses =
-        !isMulti &&
-        isSelected &&
-        cn(
-          "after:content-[''] after:block after:shrink-0",
-          'after:w-[16px] after:h-[16px] after:scale-125',
-          'after:bg-no-repeat after:bg-center after:[background-image:var(--checkbox-bg)]',
-        );
-
       const colorClasses = cn(
         isSelected
           ? 'bg-[var(--surface-hover-bg)] text-[var(--surface-text-primary)]'
@@ -223,34 +210,33 @@ export const getSelectTailwindClassNames = <
       // `flex!`/`text-[…]!` are gotcha #1: react-select's Option forces
       // `display: block` and `fontSize: inherit` unconditionally.
       // `justify-between` only for single-select: it pushes the row's
-      // one real child away from the `::after` checkmark on the far
-      // right (a pseudo-element counts as a flex item). Multi-select
-      // renders two real children (checkbox, label) that `justify-
-      // between` would shove apart instead of keeping together — the
-      // old SCSS scoped this the same way, to
-      // `:not(.metronic-select__menu-list--is-multi)` only.
-      // `[&>*]:grow` (also single-select only, as in the old SCSS) lets a
-      // custom Option's content fill the row, so anything it right-aligns
+      // content away from the selected row's check (SelectOption's
+      // `[data-select-check]`) on the far right. Multi-select renders two
+      // real children (checkbox, label) that `justify-between` would shove
+      // apart instead of keeping together — the old SCSS scoped this the
+      // same way, to `:not(.metronic-select__menu-list--is-multi)` only.
+      // The `grow` rule (also single-select only, as in the old SCSS) lets
+      // a custom Option's content fill the row, so anything it right-aligns
       // (RoleOption's type badge, UserListOptionInline's icons) stays at the
-      // far edge instead of collapsing onto the label.
+      // far edge instead of collapsing onto the label; it and the table
+      // filter's `line-clamp-2` skip the check, which keeps its own size.
       if (isTableFilter) {
         return cn(
           stateClasses,
           'flex! items-center gap-[8px] h-[40px] px-[12px] py-[2px]',
-          !isMulti && 'justify-between [&>*]:grow',
+          !isMulti
+            ? 'justify-between [&>*:not([data-select-check])]:grow [&>*:not([data-select-check])]:line-clamp-2'
+            : '[&>label]:line-clamp-2',
           'cursor-pointer select-none transition-colors text-[14px]!',
-          '[&>*]:line-clamp-2',
-          checkmarkClasses,
           colorClasses,
         );
       }
 
       return cn(
         stateClasses,
-        'flex! items-center px-[16px] py-[10px] cursor-pointer select-none transition-colors text-[14.3px]!',
-        // `gap-[8px]` keeps the content clear of the selected row's checkmark.
-        !isMulti && 'justify-between gap-[8px] [&>*]:grow',
-        checkmarkClasses,
+        'flex! items-center gap-[8px] px-[16px] py-[10px] cursor-pointer select-none transition-colors text-[14.3px]!',
+        // `gap-[8px]` keeps the content clear of the selected row's check.
+        !isMulti && 'justify-between [&>*:not([data-select-check])]:grow',
         colorClasses,
       );
     },

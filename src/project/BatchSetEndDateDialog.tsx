@@ -76,7 +76,7 @@ export const BatchSetEndDateDialog: FC<BatchSetEndDateDialogProps> = (
               <BooleanGroup
                 name="clear"
                 label={translate('Clear end date')}
-                help_text={translate(
+                description={translate(
                   'Remove the end date so projects are not scheduled for expiration.',
                 )}
               />

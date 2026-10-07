@@ -8,7 +8,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
-import { Card, FormCheck } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field, Form, useFormState, useForm } from 'react-final-form';
 import { components } from 'react-select';
 import {
@@ -21,7 +21,7 @@ import {
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton, Menu } from 'waldur-ui';
+import { AlertItem, BaseButton, Menu, Switch } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -605,19 +605,16 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
 
   const enableToggle = (
     <div className="mb-6">
-      <FormCheck
-        type="switch"
+      <Switch
         id="slurm-policy-toggle"
         checked={isPolicyEnabled}
-        onChange={(e) => handleTogglePolicy(e.target.checked)}
+        onCheckedChange={handleTogglePolicy}
         disabled={isSubmitting}
         label={translate('Enable SLURM Periodic Usage Policy')}
-      />
-      <div className="form-text">
-        {translate(
+        description={translate(
           'When enabled, allows configuration of SLURM-specific usage policies. When disabled, removes any existing policies from the backend.',
         )}
-      </div>
+      />
     </div>
   );
 

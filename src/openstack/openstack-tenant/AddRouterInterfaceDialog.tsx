@@ -98,7 +98,7 @@ export const AddRouterInterfaceDialog = ({
                 label={translate('Type')}
                 required
                 choices={typeChoices}
-                direction="horizontal"
+                orientation="horizontal"
               />
               <SelectGroup
                 name="resource"

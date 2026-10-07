@@ -195,8 +195,7 @@ export {
 } from './segmentedStyles';
 export type { SegmentedVariant } from './segmentedStyles';
 
-export { Switch } from './Switch';
-export type { SwitchProps } from './Switch';
+export * from './Check';
 
 export { Avatar, IconButton, OrgSwitcher, SearchField, TopBar } from './TopBar';
 export type {
@@ -233,6 +232,7 @@ export {
   MultiSelectValue,
   Select,
   SelectDropdownIndicator,
+  SelectOption,
   useAsyncSelect,
   useSelect,
   WindowedSelect,

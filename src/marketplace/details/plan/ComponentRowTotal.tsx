@@ -1,4 +1,5 @@
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -34,11 +35,11 @@ export const ComponentRowTotal = (props: {
       <td colSpan={2} className="col-md-auto col-actions">
         <div className="d-flex align-items-center justify-content-end gap-4">
           {props.period && props.setPeriod && (
-            <AwesomeCheckbox
+            <Switch
               label={translate('Yearly estimate')}
-              value={props.period === 'monthly' ? false : true}
+              checked={props.period === 'monthly' ? false : true}
               size="sm"
-              onChange={(value) =>
+              onCheckedChange={(value) =>
                 props.setPeriod(value ? 'annual' : 'monthly')
               }
             />

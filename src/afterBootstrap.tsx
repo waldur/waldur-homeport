@@ -10,21 +10,6 @@ import {
 } from './i18n/LanguageUtilsService';
 import { attachTransitions } from './transitions';
 
-const generateCheckboxSvgUrl = (color) => {
-  const svg = `<svg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M11 1.25L4.125 8.125L1 5' stroke='${color}' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/></svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-};
-
-const generateCheckboxIndeterminateSvgUrl = (color) => {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='${color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/></svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-};
-
-const generateRadioSvgUrl = (color) => {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='${color}'/></svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-};
-
 function initCssVariables() {
   initBrandTokens(getBrandColor());
 
@@ -40,20 +25,6 @@ function initCssVariables() {
   document.documentElement.style.setProperty(
     '--waldur-font-size-adjust',
     String(fontSizeAdjust[fontFamily] ?? 1),
-  );
-
-  // Generate checkbox & radio bg
-  document.documentElement.style.setProperty(
-    '--checkbox-bg',
-    generateCheckboxSvgUrl('#fff'),
-  );
-  document.documentElement.style.setProperty(
-    '--checkbox-indeterminate-bg',
-    generateCheckboxIndeterminateSvgUrl('#fff'),
-  );
-  document.documentElement.style.setProperty(
-    '--radio-bg',
-    generateRadioSvgUrl('#fff'),
   );
 }
 

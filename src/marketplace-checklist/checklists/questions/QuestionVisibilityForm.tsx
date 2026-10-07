@@ -127,8 +127,7 @@ export const FieldsListGroup = ({
               value: 'or',
             },
           ]}
-          direction="horizontal"
-          justify="start"
+          orientation="horizontal"
           disabled={fields.length < 2}
           tooltip={
             fields.length < 2

@@ -27,7 +27,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
         description={translate(
           'Automatically approve permission requests from users matching the specified rules.',
         )}
-        alignMiddle
+        align="center"
         disabled={disabled}
       />
       <CommaSeparatedListGroup

@@ -12,8 +12,9 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
+import { Switch } from 'waldur-ui';
+
 import { getAllPages } from '@/core/api';
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
@@ -123,9 +124,9 @@ export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
                   <BootstrapForm.Label className="mb-0">
                     {translate('Connected subnets')}
                   </BootstrapForm.Label>
-                  <AwesomeCheckbox
-                    value={hasCustomIp}
-                    onChange={toggleCustomIp}
+                  <Switch
+                    checked={hasCustomIp}
+                    onCheckedChange={toggleCustomIp}
                     size="sm"
                     className="align-self-center"
                     label={translate('Custom IP configuration')}

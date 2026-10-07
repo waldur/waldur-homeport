@@ -18,12 +18,12 @@ import {
   StringField,
   TextField,
 } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { FormFieldError } from '@/form/FormFieldError';
 import { FormGroupProps } from '@/form/FormGroup';
 import { AsyncSelectField } from '@/form/select/AsyncSelectField';
 import { SelectMultiBooleanGroup } from '@/form/SelectMultiBooleanGroup';
+import { SwitchField } from '@/form/SwitchField';
 import { TimeSelectField } from '@/form/TimeSelectField';
 import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
@@ -224,10 +224,10 @@ export const getComponentAndParams = (option, key, customer, loaders?: any) => {
       break;
 
     case 'boolean':
-      OptionField = AwesomeCheckboxField;
+      OptionField = SwitchField;
       params = {
         hideLabel: true,
-        help_text: option.help_text,
+        description: option.help_text,
         tooltip: '',
       };
       break;
@@ -434,8 +434,8 @@ export const OptionsForm = ({
                     component={OptionField}
                     validate={validateFn}
                     {...fieldParams}
-                    {...(OptionField === AwesomeCheckboxField
-                      ? { label: option.label, help_text: option.help_text }
+                    {...(OptionField === SwitchField
+                      ? { label: option.label, description: option.help_text }
                       : {})}
                   />
                 );

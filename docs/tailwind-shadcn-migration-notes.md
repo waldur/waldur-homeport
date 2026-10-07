@@ -3,7 +3,7 @@
 Current architecture and implementation guidance for Tailwind CSS v4, shadcn UI, and Radix UI in Waldur Homeport. Covers framework coexistence, design tokens, component standards, styling conventions, linting guardrails, and testing.
 
 > [!NOTE]
-> **Status**: every button in the app is rendered by `BaseButton` (or by `buttonVariants()` on an element that cannot be a `BaseButton`), and the legacy Bootstrap/Metronic `.btn` CSS has been deleted. Every menu and menu-like popover is built from `waldur-ui`'s `Menu` / `MenuPopover`. The remaining Bootstrap-backed UI is layout, forms, tables, modals and the shells listed under [Component Systems Overview](#component-systems-overview). New UI is built on `waldur-ui`.
+> **Status**: every button in the app is rendered by `BaseButton` (or by `buttonVariants()` on an element that cannot be a `BaseButton`), and the legacy Bootstrap/Metronic `.btn` CSS has been deleted. Every menu and menu-like popover is built from `waldur-ui`'s `Menu` / `MenuPopover`. Every checkbox, radio and switch is a `waldur-ui` `Checkbox` / `Radio` / `Switch`, and the Bootstrap/Metronic `.form-check` CSS has been deleted. The remaining Bootstrap-backed UI is layout, forms, tables, modals and the shells listed under [Component Systems Overview](#component-systems-overview). New UI is built on `waldur-ui`.
 
 ---
 
@@ -25,6 +25,7 @@ Current architecture and implementation guidance for Tailwind CSS v4, shadcn UI,
    - [Badge](#badge)
    - [Tooltip](#tooltip)
    - [Popover](#popover)
+   - [Checkbox, Radio & Switch](#checkbox-radio-switch)
    - [Buttons](#buttons)
    - [Sidebar & Mobile Sheet](#sidebar-mobile-sheet)
    - [Content Drawer (`#kt_drawer`)](#content-drawer-kt-drawer)
@@ -50,7 +51,7 @@ Waldur Homeport operates on two active UI component patterns:
 1. **Modern Tailwind / Radix Primitives (`packages/ui`, exported as `waldur-ui`)**
    - Built with pure Tailwind v4 utilities and CSS design tokens from `packages/design-tokens`.
    - Free of all Bootstrap and Metronic classes, SCSS variables, and runtime mixins.
-   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `Menu`, `MenuPopover`, `Switch`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, `LoadingSpinner`, `Accordion`, `AccordionCard`, `Collapsible`, and `TablePagination` (with `Pagination` and `PageSizeSelect`).
+   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `Menu`, `MenuPopover`, `Checkbox`, `Radio`, `Switch`, `RadioGroup`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, `LoadingSpinner`, `Accordion`, `AccordionCard`, `Collapsible`, and `TablePagination` (with `Pagination` and `PageSizeSelect`).
    - Exports `buttonVariants()`, `ButtonVariant` and `ButtonSize` so elements that cannot be a `BaseButton` (links, Radix triggers that need a specific child shape) still get the exact same classes.
 
 2. **Transitional Shells (Radix Engine with Themed Skins)**
@@ -63,22 +64,24 @@ Waldur Homeport operates on two active UI component patterns:
 
 ### Component Standards & Usage Guide
 
-| UI Element                    | Standard Component          | Package       | Usage & Styling Notes                                                                              | Prohibited                                                  |
-| :---------------------------- | :-------------------------- | :------------ | :------------------------------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| **Alert / Banner**            | `AlertItem`                 | `waldur-ui`   | Pure Tailwind, `--surface-card-border`, 5 variants                                                 | `react-bootstrap` `Alert`                                   |
-| **Badge / Pill**              | `Badge`                     | `waldur-ui`   | 15 variants × 3 tones, structural `border-[1px]`                                                   | `react-bootstrap` `Badge`                                   |
-| **Tooltip**                   | `Tooltip`                   | `waldur-ui`   | Radix Tooltip (hover/focus) + Popover (click fallback)                                             | `react-bootstrap` `Tooltip`, `OverlayTrigger`               |
-| **Popover**                   | `Popover`, `PopoverContent` | `waldur-ui`   | Radix Popover with `--surface-card-*` tokens                                                       | `react-bootstrap` `Popover`                                 |
-| **Button**                    | `BaseButton`                | `waldur-ui`   | 12 variants × 3 sizes, inset `box-shadow` border, outline focus ring, semantic button tokens       | `react-bootstrap` `Button`, hand-written `btn` class markup |
-| **Link styled as button**     | `Link` with `buttonVariant` | `@/core/Link` | Same classes as `BaseButton` via `buttonVariants()`; keeps anchor semantics and routing            | `<a className="btn …">`                                     |
-| **Mutually exclusive choice** | `SegmentedControl`          | `waldur-ui`   | Radix RadioGroup, `neutral` / `brand` variants, button sizes                                       | `react-bootstrap` `ToggleButtonGroup`, `btn-group` markup   |
-| **Expandable panel group**    | `Accordion`                 | `waldur-ui`   | Radix Accordion, `single` / `multiple`, open header in runtime brand colour; closed panels unmount | `react-bootstrap` `Accordion`                               |
-| **Single expandable panel**   | `Collapsible`               | `waldur-ui`   | Radix Collapsible, unstyled; `keepMounted` keeps form fields mounted while closed                  | `react-bootstrap` `Collapse`, `useAccordionButton`          |
-| **Sidebar Navigation**        | `Sidebar`, `Sheet`          | `waldur-ui`   | Collapsible desktop rail + mobile Radix Sheet                                                      | Metronic sidebar JS                                         |
-| **Table pagination**          | `TablePagination`           | `waldur-ui`   | `--pagination-*` tokens; `bordered={false}` under a non-table list; desktop/mobile layouts         | `react-bootstrap` `Pagination`, `page-link` markup          |
-| **Table Actions**             | `ActionsMenu`               | `@/table`     | `Menu` in the actions look, with the kebab / labeled / Add toggles                                 | `react-bootstrap` `DropdownButton`                          |
-| **Header Chrome Menu**        | `Menu`                      | `waldur-ui`   | `Menu` in the nav look; `openOnHover="desktop"` for hover triggers                                 | N/A                                                         |
-| **Slide-Over Drawer**         | `DrawerRoot`                | `@/drawer`    | Radix Dialog with CSS keyframe transitions                                                         | N/A                                                         |
+| UI Element                    | Standard Component          | Package       | Usage & Styling Notes                                                                                                              | Prohibited                                                          |
+| :---------------------------- | :-------------------------- | :------------ | :--------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------ |
+| **Alert / Banner**            | `AlertItem`                 | `waldur-ui`   | Pure Tailwind, `--surface-card-border`, 5 variants                                                                                 | `react-bootstrap` `Alert`                                           |
+| **Badge / Pill**              | `Badge`                     | `waldur-ui`   | 15 variants × 3 tones, structural `border-[1px]`                                                                                   | `react-bootstrap` `Badge`                                           |
+| **Tooltip**                   | `Tooltip`                   | `waldur-ui`   | Radix Tooltip (hover/focus) + Popover (click fallback)                                                                             | `react-bootstrap` `Tooltip`, `OverlayTrigger`                       |
+| **Popover**                   | `Popover`, `PopoverContent` | `waldur-ui`   | Radix Popover with `--surface-card-*` tokens                                                                                       | `react-bootstrap` `Popover`                                         |
+| **Button**                    | `BaseButton`                | `waldur-ui`   | 12 variants × 3 sizes, inset `box-shadow` border, outline focus ring, semantic button tokens                                       | `react-bootstrap` `Button`, hand-written `btn` class markup         |
+| **Link styled as button**     | `Link` with `buttonVariant` | `@/core/Link` | Same classes as `BaseButton` via `buttonVariants()`; keeps anchor semantics and routing                                            | `<a className="btn …">`                                             |
+| **Checkbox / radio**          | `Checkbox`, `Radio`         | `waldur-ui`   | Hidden native input + drawn box and SVG mark, `md` 20px / `sm` 16px, `--check-*` tokens; `label` / `description` / `tooltip` props | `react-bootstrap` `FormCheck` / `Form.Check`, `form-check*` classes |
+| **On/off toggle**             | `Switch`                    | `waldur-ui`   | Hidden native checkbox + drawn track and knob, `md` 44×24 / `sm` 36×20, `--switch-*` tokens                                        | `type="switch"` `FormCheck`, `form-switch*` classes                 |
+| **Mutually exclusive choice** | `SegmentedControl`          | `waldur-ui`   | Radix RadioGroup, `neutral` / `brand` variants, button sizes                                                                       | `react-bootstrap` `ToggleButtonGroup`, `btn-group` markup           |
+| **Expandable panel group**    | `Accordion`                 | `waldur-ui`   | Radix Accordion, `single` / `multiple`, open header in runtime brand colour; closed panels unmount                                 | `react-bootstrap` `Accordion`                                       |
+| **Single expandable panel**   | `Collapsible`               | `waldur-ui`   | Radix Collapsible, unstyled; `keepMounted` keeps form fields mounted while closed                                                  | `react-bootstrap` `Collapse`, `useAccordionButton`                  |
+| **Sidebar Navigation**        | `Sidebar`, `Sheet`          | `waldur-ui`   | Collapsible desktop rail + mobile Radix Sheet                                                                                      | Metronic sidebar JS                                                 |
+| **Table pagination**          | `TablePagination`           | `waldur-ui`   | `--pagination-*` tokens; `bordered={false}` under a non-table list; desktop/mobile layouts                                         | `react-bootstrap` `Pagination`, `page-link` markup                  |
+| **Table Actions**             | `ActionsMenu`               | `@/table`     | `Menu` in the actions look, with the kebab / labeled / Add toggles                                                                 | `react-bootstrap` `DropdownButton`                                  |
+| **Header Chrome Menu**        | `Menu`                      | `waldur-ui`   | `Menu` in the nav look; `openOnHover="desktop"` for hover triggers                                                                 | N/A                                                                 |
+| **Slide-Over Drawer**         | `DrawerRoot`                | `@/drawer`    | Radix Dialog with CSS keyframe transitions                                                                                         | N/A                                                                 |
 
 The _Prohibited_ column is convention; the subset that lint enforces is listed under [Linting & Guardrails](#linting-guardrails) (`ToggleButtonGroup` and `btn-group` markup are not).
 
@@ -337,6 +340,22 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ---
 
+### Checkbox, Radio & Switch
+
+`packages/ui/src/Check/`: `Checkbox.tsx`, `Radio.tsx`, `RadioGroup.tsx` and `Switch.tsx` (exported from `waldur-ui` through `Check/index.ts`), plus the internal `CheckLabel.tsx` (label row), `CheckMark.tsx` (the check path, also drawn by the select) and `checkStyles.ts` (class recipes); colours in `waldur-design-tokens/checkColors.css`.
+
+- **Hidden input + `peer`**: each control is a box holding a native `<input>` that is invisible (`opacity-0`, not `sr-only`) and on top, so it still takes clicks, focus, keyboard and form state, followed by elements that draw the control and read the input's state with `peer-*`: the box and the check/dash SVGs (`Checkbox`), the circle and dot (`Radio`), the track and knob (`Switch`). No background images or data URIs; marks are `currentColor` (`--check-mark` / `--check-mark-disabled`). Compound states use arbitrary peer variants (`peer-[:checked:disabled]:`, `peer-[:hover:enabled:not(:checked)]:`). `className` and `hidden` go on the box (layout); every other prop, and the `ref`, reach the input. Indeterminate styling is checkbox-only: `:indeterminate` also matches every radio in a group with nothing selected.
+- **Motion** matches the legacy `$form-check-transition`: colours and border fade and the switch knob slides over 0.15s `ease-in-out` (written `ease-[ease-in-out]`; Tailwind's `ease-in-out` is a different curve), and `motion-reduce:transition-none` turns it off, as Bootstrap's `transition` mixin did. The marks appear instantly, as the background images did.
+- **`SwitchVisual`** is the switch's look as a `<span>` with no input, for `Menu.CheckboxItem`, which already has `role="menuitemcheckbox"`.
+- **Sizes** are the legacy ones at the 13px root, in px: checkbox/radio `md` 20px (radius 6px) and `sm` 16px (radius 4px); switch `md` 44×24 and `sm` 36×20. The legacy controls were rem-sized, so they shrank about 8% at the 12px mobile root; these do not.
+- **Tokens** (`--check-*`, `--switch-*`) map one-to-one onto the SCSS tokens the old stylesheet used (`$border-primary`, `$bg-brand-solid`, `$bg-disabled_subtle`, `$fg-senary`, …); the file's header lists every mapping. Only colours live there: the marks are elements (below).
+- **Labels are props**: `Checkbox`, `Radio` and `Switch` take `label`, `description`, `tooltip`, `align` and `inline`. With any of them the control renders its whole row (the internal `CheckLabel`): control, then a 14px/20px `<label htmlFor>` naming it and a muted description linked with `aria-describedby`, 8px apart. Without them it renders bare, for tables (give it an `aria-label`). `align` defaults to `start` (the control stays on the first line when the label wraps), except a `Switch` without a description, which centres; a 16px control in `start` drops 2px on its own; `Switch` rows are `inline` by default, as the legacy switches were. All three report `onCheckedChange(boolean)` (`Checkbox` also keeps native `onChange`); `className` goes on the outermost element.
+- **`RadioGroup`**: options in, one value out (`value` / `onValueChange`), like `SegmentedControl`, but as native radios in a `<fieldset>` whose `<legend>` is `label`, with `description`, per-option `description` / `tooltip` / `disabled`, `orientation` and a generated `name`. Disabling the group disables every option through the fieldset. Use `SegmentedControl` to switch a view, `RadioGroup` for a form question.
+- **react-final-form**: `SwitchField` and `RadioGroupField` (`src/form`) only map `input` onto the control. `BooleanGroup` / `BooleanEditField` / `BooleanFilter` and the form-level `RadioGroup` keep their names; with `passLabelToControl` the control draws the field's `label`, `tooltip` and `description`, and `FormGroup` adds only spacing, required mark and errors. The old `AwesomeCheckbox`, `AwesomeCheckboxField` and `AwesomeRadioButton` are gone, along with their `help_text` (now `description`), `alignMiddle` (now `align="center"`), `tooltipEnd`, `direction` (now `orientation`), `justify` and `gap` props.
+- **Enforcement**: the custom rule `no-bootstrap-form-check` reports `FormCheck`, `Form.Check` (under any local name for `Form`) and any `form-check*` / `form-switch*` class token.
+
+---
+
 ### Buttons
 
 Three primitives in `waldur-ui` (`packages/ui/src`) and `Link` in `@/core/Link` make up the application's unified button architecture:
@@ -490,18 +509,18 @@ Implemented in `packages/eslint-plugin-waldur` and enabled as `waldur-custom/*` 
 
 #### Visual patterns
 
-| Rule Name                          | Severity | Enforced Pattern                                                           |
-| :--------------------------------- | :------- | :------------------------------------------------------------------------- |
-| `enforce-badge-icon-patterns`      | `error`  | Enforces 12px icon sizing inside `Badge` components.                       |
-| `enforce-badge-props-consistency`  | `error`  | Validates `variant`, `tone` and `shape` prop combinations on `Badge`.      |
-| `no-manual-icon-colors-in-badges`  | `error`  | Prevents manual colour classes on icons rendered inside `Badge`.           |
-| `enforce-badge-right-icon-pattern` | `error`  | Standardizes right-side action icon styling in badges.                     |
-| `enforce-featured-icon`            | `error`  | Requires `FeaturedIcon` (with `tone`/`size`) for highlighted icon emblems. |
-| `enforce-phosphor-icon-weight`     | `error`  | Consistent `weight` prop on Phosphor icons.                                |
-| `enforce-border-radius-tokens`     | `error`  | Design-token radius classes instead of hard-coded values.                  |
-| `enforce-nav-tabs-pattern`         | `error`  | Navigation tabs use the `nav-line-tabs` class.                             |
-| `enforce-breadcrumb-colors`        | `error`  | Breadcrumb links use the `$text-brand-secondary` token.                    |
-| `enforce-formcheck-components`     | `error`  | React Bootstrap `FormCheck` instead of custom form-control markup.         |
+| Rule Name                          | Severity | Enforced Pattern                                                                                                          |
+| :--------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------ |
+| `enforce-badge-icon-patterns`      | `error`  | Enforces 12px icon sizing inside `Badge` components.                                                                      |
+| `enforce-badge-props-consistency`  | `error`  | Validates `variant`, `tone` and `shape` prop combinations on `Badge`.                                                     |
+| `no-manual-icon-colors-in-badges`  | `error`  | Prevents manual colour classes on icons rendered inside `Badge`.                                                          |
+| `enforce-badge-right-icon-pattern` | `error`  | Standardizes right-side action icon styling in badges.                                                                    |
+| `enforce-featured-icon`            | `error`  | Requires `FeaturedIcon` (with `tone`/`size`) for highlighted icon emblems.                                                |
+| `enforce-phosphor-icon-weight`     | `error`  | Consistent `weight` prop on Phosphor icons.                                                                               |
+| `enforce-border-radius-tokens`     | `error`  | Design-token radius classes instead of hard-coded values.                                                                 |
+| `enforce-nav-tabs-pattern`         | `error`  | Navigation tabs use the `nav-line-tabs` class.                                                                            |
+| `enforce-breadcrumb-colors`        | `error`  | Breadcrumb links use the `$text-brand-secondary` token.                                                                   |
+| `no-bootstrap-form-check`          | `error`  | `Checkbox` / `Radio` / `Switch` from `waldur-ui`; no `FormCheck`, `Form.Check` or `form-check*` / `form-switch*` classes. |
 
 #### Code hygiene
 

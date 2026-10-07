@@ -2,7 +2,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { pick } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { FormCheck } from 'react-bootstrap';
 import { Form, FormRenderProps, useField } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
@@ -13,7 +12,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import { Badge, BaseButton, Checkbox } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { formatDate, formatISODate, parseDate } from '@/core/dateUtils';
@@ -252,12 +251,12 @@ const FormModalComponent: FC<
                 />
               </div>
 
-              <FormCheck
+              <Checkbox
                 id="confirm-update-termination-dates"
-                type="checkbox"
-                className="form-check-custom form-check-sm pt-3"
+                size="sm"
                 checked={confirm}
                 onChange={(value) => setConfirm(value.target.checked)}
+                className="pt-3"
                 label={translate(
                   'Update all selected resource termination dates to match project end date',
                 )}

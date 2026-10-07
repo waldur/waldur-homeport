@@ -20,10 +20,10 @@ import {
   GearIcon,
 } from '@phosphor-icons/react';
 import { FC, ReactNode, useId, useMemo, useState } from 'react';
-import { FormCheck } from 'react-bootstrap';
 
 import {
   BaseButton,
+  Checkbox,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -89,10 +89,10 @@ const SortableItem: FC<SortableItemProps> = ({
         htmlFor={checkboxId}
         className="d-flex align-items-center flex-grow-1 cursor-pointer m-0"
       >
-        <FormCheck
+        <Checkbox
           id={checkboxId}
-          type="checkbox"
-          className="form-check form-check-custom form-check-sm min-h-auto me-[12px]"
+          size="sm"
+          className="me-[12px]"
           checked={Boolean(isActive)}
           onChange={onClick}
           aria-label={typeof title === 'string' ? title : undefined}
@@ -260,11 +260,11 @@ const ColumnsPopover = ({
                     htmlFor={actionsCheckboxId}
                     className="d-flex align-items-center flex-grow-1 cursor-pointer m-0"
                   >
-                    <FormCheck
+                    <Checkbox
                       id={actionsCheckboxId}
                       key={activeColumns[COLUMN_ACTIONS_KEY]}
-                      type="checkbox"
-                      className="form-check form-check-custom form-check-sm min-h-auto me-[12px]"
+                      size="sm"
+                      className="me-[12px]"
                       checked={Boolean(activeColumns[COLUMN_ACTIONS_KEY])}
                       onChange={() =>
                         toggleColumn(COLUMN_ACTIONS_KEY, {

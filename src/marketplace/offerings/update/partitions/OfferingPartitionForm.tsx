@@ -104,12 +104,12 @@ export const OfferingPartitionForm: FC = () => {
       <BooleanGroup
         label={translate('Exclusive topology access required')}
         name="exclusive_topo"
-        alignMiddle
+        align="center"
       />
       <BooleanGroup
         label={translate('Exclusive user access required')}
         name="exclusive_user"
-        alignMiddle
+        align="center"
       />
       {/* Scheduling Configuration */}
       <GroupHeader>{translate('Scheduling configuration')}</GroupHeader>
@@ -120,7 +120,7 @@ export const OfferingPartitionForm: FC = () => {
       <BooleanGroup
         label={translate('Require reservation for job allocation')}
         name="req_resv"
-        alignMiddle
+        align="center"
       />
     </>
   );

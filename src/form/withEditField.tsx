@@ -10,7 +10,6 @@ import { SecretField as PlainSecretField } from '@/marketplace/common/SecretFiel
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import { useUser } from '@/workspace/hooks';
 
-import { AwesomeCheckboxField } from './AwesomeCheckboxField';
 import { BoxNumberField } from './BoxNumberField';
 import { CommaSeparatedListField } from './CommaSeparatedListField';
 import { useEditFieldContext } from './EditFieldContext';
@@ -18,6 +17,7 @@ import { FieldEditButton } from './FieldEditButton';
 import FormTable from './FormTable';
 import { NumberField } from './NumberField';
 import { SecretField as FormSecretField } from './SecretField';
+import { SwitchField } from './SwitchField';
 import { TextField } from './TextField';
 
 /** Props accepted by an edit field produced via withEditField. */
@@ -63,7 +63,7 @@ interface WithEditFieldOptions {
    * If not provided, falls back to auto-detection based on WrappedComponent identity.
    */
   displayValue?: (value: any, props: any) => ReactNode;
-  /** When true, label is forwarded to the control (e.g. for checkbox fields) */
+  /** When true, the label also names the control in the edit dialog (e.g. for switches) */
   passLabelToControl?: boolean;
 }
 
@@ -145,6 +145,10 @@ export function withEditField<P extends object>(
 
     // Collect fieldProps to pass to the edit dialog
     const fieldProps: Record<string, any> = { ...fieldSpecificProps };
+    // A control that draws its own label has no heading to be named by in the
+    // dialog (the heading is the dialog's title), so it takes the label as its
+    // accessible name.
+    if (options?.passLabelToControl) fieldProps['aria-label'] = label;
     if (required != null) fieldProps.required = required;
     if (validate != null) fieldProps.validate = validate;
     if (format != null) fieldProps.format = format;
@@ -229,7 +233,7 @@ function getDefaultDisplayValue(
   if (Component === FormSecretField) {
     return <PlainSecretField value={value} />;
   }
-  if (Component === AwesomeCheckboxField) {
+  if (Component === SwitchField) {
     return <CheckOrX value={value} />;
   }
   if (Component === CommaSeparatedListField) {

@@ -129,10 +129,10 @@ export const ControlStates: Story = {
 };
 
 /**
- * Single-select's selected row draws a checkmark via a `::after`
- * pseudo-element (reusing `--checkbox-bg`, the same SVG the app's native
- * checkboxes use); multi-select renders its own checkbox per row instead
- * (`MultiSelectOption` in components.tsx) and skips the checkmark. Both
+ * Single-select's selected row ends in a check (`SelectOption` in
+ * components.tsx renders the Checkbox's `CheckMark` SVG); multi-select
+ * renders a checkbox per row instead (`MultiSelectOption`) and skips the
+ * check. Both
  * open with `menuIsOpen` — react-select treats that prop as making the menu
  * *fully* controlled, so `onMenuOpen`/`onMenuClose` no-ops have to come
  * along with it or the initial open render is silently dropped. The default
