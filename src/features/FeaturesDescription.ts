@@ -25,6 +25,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable onboarding functionality.'),
       },
       {
+        key: 'show_organisation_reporting',
+        description: translate('Show the Reporting menu with organisation-scoped reports to organisation owners.'),
+      },
+      {
         key: 'show_permission_reviews',
         description: translate('Allows to show permission reviews tab and popups for organisations.'),
       },
