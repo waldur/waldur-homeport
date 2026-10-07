@@ -6,6 +6,7 @@ import { Badge } from 'waldur-ui';
 
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { InvitationStatusBadge } from '@/proposals/update/reviewer-pool/InvitationStatusBadge';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -20,32 +21,6 @@ type CallReviewerPoolExtended = CallReviewerPool & {
   reviews_completed?: number;
   coi_count?: number;
   coi_by_severity?: Record<string, number>;
-};
-
-const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
-  status,
-  statusDisplay,
-}) => {
-  const variant = useMemo(() => {
-    switch (status) {
-      case 'accepted':
-        return 'success';
-      case 'pending':
-        return 'warning';
-      case 'declined':
-        return 'danger';
-      case 'expired':
-        return 'secondary';
-      default:
-        return 'primary';
-    }
-  }, [status]);
-
-  return (
-    <Badge variant={variant} size="sm" shape="pill" tone="outline">
-      {statusDisplay}
-    </Badge>
-  );
 };
 
 export const MyCallsPage: FC = () => {
@@ -80,7 +55,7 @@ export const MyCallsPage: FC = () => {
         id: 'status',
         title: translate('Status'),
         render: ({ row }: { row: CallReviewerPoolExtended }) => (
-          <StatusBadge
+          <InvitationStatusBadge
             status={row.invitation_status}
             statusDisplay={row.invitation_status_display}
           />

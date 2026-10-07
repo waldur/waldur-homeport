@@ -1,53 +1,52 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
 import { Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
-import { translate } from '@/i18n';
+export const getInvitationStatusVariant = (status: string) => {
+  switch (status) {
+    case 'accepted':
+      return 'success';
+    case 'pending':
+      return 'warning';
+    case 'declined':
+      return 'danger';
+    case 'expired':
+      return 'secondary';
+    default:
+      return 'primary';
+  }
+};
 
 interface InvitationStatusBadgeProps {
   status: string;
   statusDisplay: string;
+  /**
+   * Explains a pending invitation to someone waiting on it. The reviewer pool
+   * passes one for the call manager; a reviewer reading their own invitation
+   * needs none, so it is left out there.
+   */
+  pendingHint?: string;
 }
 
 export const InvitationStatusBadge: FC<InvitationStatusBadgeProps> = ({
   status,
   statusDisplay,
-}) => {
-  const variant = useMemo(() => {
-    switch (status) {
-      case 'accepted':
-        return 'success';
-      case 'pending':
-        return 'warning';
-      case 'declined':
-        return 'danger';
-      case 'expired':
-        return 'secondary';
-      default:
-        return 'primary';
+  pendingHint,
+}) => (
+  <Badge
+    variant={getInvitationStatusVariant(status)}
+    rightIcon={
+      status === 'pending' && pendingHint ? (
+        <Tooltip label={pendingHint}>
+          <QuestionIcon size={14} weight="bold" />
+        </Tooltip>
+      ) : undefined
     }
-  }, [status]);
-
-  return (
-    <Badge
-      variant={variant}
-      rightIcon={
-        status === 'pending' ? (
-          <Tooltip
-            label={translate(
-              'This reviewer has not yet accepted the invitation or created a profile.',
-            )}
-          >
-            <QuestionIcon size={14} weight="bold" />
-          </Tooltip>
-        ) : undefined
-      }
-      shape="pill"
-      tone="outline"
-    >
-      {statusDisplay}
-    </Badge>
-  );
-};
+    shape="pill"
+    tone="outline"
+  >
+    {statusDisplay}
+  </Badge>
+);

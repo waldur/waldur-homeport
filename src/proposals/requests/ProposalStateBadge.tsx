@@ -27,7 +27,7 @@ export const ProposalStateBadge: FC<{ state: ProposalState }> = ({ state }) => {
     return null;
   }
   return (
-    <Badge variant={getProposalStateVariant(state)} tone="outline">
+    <Badge variant={getProposalStateVariant(state)} shape="pill" tone="outline">
       {formatProposalState(state)}
     </Badge>
   );

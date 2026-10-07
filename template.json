@@ -14958,6 +14958,7 @@
   "Days an archived offering metric keeps its data before it is purged.": {},
   "Days given to reviewers to complete reviews": {},
   "Days of inactivity after which pseudonymous bookkeeping rows (SessionBinding, AnonymousChatBudget) are purged. Active blocks are always retained until they expire. Set to -1 to disable.": {},
+  "Days to keep Matrix room history exports, files included, before they are deleted. Each room's newest completed export is kept regardless of age. Set to 0 or less to keep them forever.": {},
   "Deactivate": {
     "context": {
       "primary_ui_type": "submit_button",
