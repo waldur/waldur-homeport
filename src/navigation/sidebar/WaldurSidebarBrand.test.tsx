@@ -87,7 +87,7 @@ describe('WaldurSidebarBrand', () => {
 
     renderBrand();
 
-    const logos = screen.getAllByAltText('logo');
+    const logos = screen.getAllByAltText('Waldur');
     expect(logos).toHaveLength(2);
 
     const mobileLogo = logos.find((img) =>
@@ -110,14 +110,14 @@ describe('WaldurSidebarBrand', () => {
     );
   });
 
-  it('hides the single logo in collapsed rail when SIDEBAR_LOGO_MOBILE is not configured', () => {
+  it('keeps the single logo readable but visually hidden in collapsed rail when SIDEBAR_LOGO_MOBILE is not configured', () => {
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO = 'logo.png';
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE = undefined;
 
     renderBrand();
 
-    const logo = screen.getByAltText('logo');
+    const logo = screen.getByAltText('Waldur');
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveClass('group-data-[collapsible=icon]/panel:hidden');
+    expect(logo).toHaveClass('group-data-[collapsible=icon]/panel:sr-only');
   });
 });
