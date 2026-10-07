@@ -1,7 +1,7 @@
 import { WarningIcon } from '@phosphor-icons/react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { HelpIcon } from './HelpIcon';
 import { WarningTip } from './WarningTip';
@@ -31,6 +31,32 @@ describe('HelpIcon', () => {
     );
     await userEvent.click(screen.getByRole('button'));
     expect(onSubmit).not.toHaveBeenCalled();
+  });
+});
+
+describe('HelpIcon on a touch screen', () => {
+  const original = window.matchMedia;
+  beforeEach(() => {
+    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+      matches: query === '(hover: none)',
+      media: query,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    })) as unknown as typeof window.matchMedia;
+  });
+  afterEach(() => {
+    window.matchMedia = original;
+  });
+
+  it('opens its text on tap and closes on Escape', async () => {
+    render(<HelpIcon label="Explains the field" />);
+    expect(screen.queryByText('Explains the field')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Help' }));
+    expect(await screen.findByText('Explains the field')).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() =>
+      expect(screen.queryByText('Explains the field')).not.toBeInTheDocument(),
+    );
   });
 });
 

@@ -1,10 +1,40 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import type { Icon, IconWeight } from '@phosphor-icons/react';
-import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
+import {
+  ButtonHTMLAttributes,
+  forwardRef,
+  ReactNode,
+  useSyncExternalStore,
+} from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { cn } from './cn';
 import { Tooltip, TooltipProps } from './Tooltip';
+
+// Matches on a touch screen. Where matchMedia is missing or reports nothing
+// (jsdom), the tooltip keeps its hover behaviour.
+const NO_HOVER_QUERY = '(hover: none)';
+
+const subscribeToNoHover = (onChange: () => void) => {
+  if (typeof window.matchMedia !== 'function') {
+    return () => undefined;
+  }
+  const query = window.matchMedia(NO_HOVER_QUERY);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
+};
+
+const getNoHover = () =>
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia(NO_HOVER_QUERY).matches;
+
+/**
+ * Whether the primary pointer cannot hover. A touch screen cannot, and a tap on
+ * a hover-only tooltip trigger shows nothing, so the help would be
+ * unreachable there.
+ */
+const useNoHover = () =>
+  useSyncExternalStore(subscribeToNoHover, getNoHover, () => false);
 
 const TONE_CLASS = {
   muted: 'text-[var(--surface-text-muted)]',
@@ -37,6 +67,9 @@ export interface HelpIconProps extends Omit<
  * and says nothing to a screen reader. Use this instead; the lint rule
  * `waldur-custom/no-tooltip-on-bare-icon` reports the bare form.
  *
+ * On a touch screen (no hover) the tooltip opens on tap instead, and closes
+ * on a tap outside or Escape.
+ *
  * Place it beside a check control's `<label>`, not inside it: a click on it
  * would toggle the control, and a button inside a label is a second control
  * the label names.
@@ -56,22 +89,26 @@ export const HelpIcon = forwardRef<HTMLButtonElement, HelpIconProps>(
       ...rest
     },
     ref,
-  ) => (
-    <Tooltip label={label} side={side} {...tooltipProps}>
-      <button
-        ref={ref}
-        type="button"
-        aria-label={ariaLabel}
-        className={cn(
-          'm-0 inline-flex shrink-0 cursor-help border-0 bg-transparent p-0 align-middle leading-none',
-          TONE_CLASS[tone],
-          className,
-        )}
-        {...rest}
-      >
-        <IconComponent weight={weight} size={size} aria-hidden="true" />
-      </button>
-    </Tooltip>
-  ),
+  ) => {
+    // Hover where the pointer can hover; tap-to-open on touch screens.
+    const trigger = useNoHover() ? 'click' : 'hover';
+    return (
+      <Tooltip label={label} side={side} trigger={trigger} {...tooltipProps}>
+        <button
+          ref={ref}
+          type="button"
+          aria-label={ariaLabel}
+          className={cn(
+            'm-0 inline-flex shrink-0 cursor-help border-0 bg-transparent p-0 align-middle leading-none',
+            TONE_CLASS[tone],
+            className,
+          )}
+          {...rest}
+        >
+          <IconComponent weight={weight} size={size} aria-hidden="true" />
+        </button>
+      </Tooltip>
+    );
+  },
 );
 HelpIcon.displayName = 'HelpIcon';
