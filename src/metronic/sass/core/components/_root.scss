@@ -62,8 +62,4 @@
   --bs-primary-950: var(--waldur-brand-950);
 
   --bs-secondary: var(--waldur-brand-50);
-
-  --checkbox-bg: url("data:image/svg+xml,<svg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M11 1.25L4.125 8.125L1 5' stroke='#{$form-check-input-checked-color}' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  --checkbox-indeterminate-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-indeterminate-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/></svg>");
-  --radio-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$form-check-input-checked-color}'/></svg>");
 }

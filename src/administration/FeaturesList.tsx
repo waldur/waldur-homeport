@@ -20,8 +20,8 @@ import { SaveButton } from '@/core/SaveButton';
 import { FeaturesDescription } from '@/features/FeaturesDescription';
 import { FeatureSection } from '@/features/types';
 import { DeploymentFeatures } from '@/FeaturesEnums';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import FormTable from '@/form/FormTable';
+import { SwitchField } from '@/form/SwitchField';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { useNotify } from '@/store/notify';
@@ -52,8 +52,9 @@ const FeatureSectionContent = ({ section }: { section: FeatureSection }) => (
         actions={
           <Field name={`${section.key}.${item.key}`} type="checkbox">
             {({ input }) => (
-              <AwesomeCheckboxField
+              <SwitchField
                 input={input}
+                aria-label={item.description}
                 data-testid={`${section.key}.${item.key}`}
               />
             )}

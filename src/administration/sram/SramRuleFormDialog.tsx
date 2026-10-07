@@ -238,8 +238,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
               tooltip={translate(
                 'An inactive rule grants nothing and revokes the roles it granted.',
               )}
-              tooltipEnd
-              alignMiddle
+              align="center"
               className="w-100"
             />
 

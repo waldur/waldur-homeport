@@ -1,6 +1,6 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useState } from 'react';
-import { Card, FormCheck, Spinner, Table } from 'react-bootstrap';
+import { Card, Spinner, Table } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import {
   openstackDiscoveryDiscoverExternalNetworks,
@@ -10,7 +10,7 @@ import {
   openstackDiscoveryDiscoverVolumeTypes,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BaseButton } from 'waldur-ui';
+import { AlertItem, Badge, BaseButton, Radio } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatFilesize } from '@/core/utils';
@@ -185,9 +185,9 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 >
                   <Card.Body>
                     <div className="d-flex align-items-start">
-                      <FormCheck
-                        type="radio"
+                      <Radio
                         className="me-3"
+                        aria-label={network.name}
                         checked={
                           values.selectedExternalNetworkId === network.id
                         }

@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import { AccordionCard, AlertItem, Tooltip } from 'waldur-ui';
+import { AccordionCard, AlertItem, Switch, Tooltip } from 'waldur-ui';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { BooleanGroup, MonacoGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { FormStepProps } from '@/marketplace/deploy/types';
@@ -16,10 +15,11 @@ export const FormStartupScriptStep = (props: FormStepProps) => {
     ? null
     : translate('This field is only editable when startup script is enabled.');
   const quickAction = (
-    <AwesomeCheckbox
-      value={scriptEnabled}
+    <Switch
+      aria-label={scriptLabel}
+      checked={scriptEnabled}
       size="sm"
-      onChange={setScriptEnabled}
+      onCheckedChange={setScriptEnabled}
       className="align-self-center"
     />
   );

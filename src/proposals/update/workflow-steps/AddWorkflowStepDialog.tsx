@@ -304,7 +304,6 @@ export const AddWorkflowStepDialog: FC<Props> = ({ resolve }) => {
                 label={translate('Transition mode options')}
                 required={true}
                 choices={transitionModeChoices}
-                gap={3}
                 validate={required}
               />
 

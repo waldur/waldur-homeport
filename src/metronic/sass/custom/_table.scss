@@ -130,7 +130,7 @@
 
       // When a row badge is rendered, nudge the checkbox/radio right so the
       // absolutely-positioned icon doesn't sit flush against it.
-      &:has(.error-mark) .form-check {
+      &:has(.error-mark) > span:has(> input) {
         margin-left: 6px;
       }
 

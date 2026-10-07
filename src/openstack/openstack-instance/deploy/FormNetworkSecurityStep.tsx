@@ -24,10 +24,9 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { AlertItem, Tooltip, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, Switch, Tooltip } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { UI_STALE_TIME } from '@/core/constants';
 import { required } from '@/core/validators';
 import { BaseStringField, FieldError, SelectGroup } from '@/form';
@@ -532,9 +531,9 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           <Form.Label className="fs-6 fw-bolder mb-0">
             {translate('Network')}
           </Form.Label>
-          <AwesomeCheckbox
-            value={customIpEnabled}
-            onChange={setCustomIpEnabled}
+          <Switch
+            checked={customIpEnabled}
+            onCheckedChange={setCustomIpEnabled}
             size="sm"
             className="align-self-center"
             label={translate('Custom IP configuration')}
@@ -563,9 +562,9 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
                   : undefined
               }
             >
-              <AwesomeCheckbox
-                value={!portSecurityEnabled}
-                onChange={() => {
+              <Switch
+                checked={!portSecurityEnabled}
+                onCheckedChange={() => {
                   userTouchedRef.current = true;
                   setPortSecurityEnabled(!portSecurityEnabled);
                 }}

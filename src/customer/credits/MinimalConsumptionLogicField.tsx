@@ -9,7 +9,7 @@ export const MinimalConsumptionLogicField: FC = () => (
   <RadioGroup
     name="minimal_consumption_logic"
     label={translate('Minimal consumption logic')}
-    direction="horizontal"
+    orientation="horizontal"
     choices={minimalConsumptionLogicOptions}
   />
 );

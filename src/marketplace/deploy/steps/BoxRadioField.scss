@@ -1,4 +1,4 @@
-.form-check-boxes-wrapper {
+.box-radio-wrapper {
   height: 100%;
 
   // Horizontal items
@@ -6,7 +6,7 @@
     display: flex;
     flex-wrap: wrap;
 
-    .form-check-box {
+    .box-radio {
       display: inline-block;
       position: relative;
       width: 145px;
@@ -25,7 +25,7 @@
         outline: 1px solid var(--bs-primary);
         border-color: var(--bs-primary) !important;
 
-        .form-check-info {
+        .box-radio-info {
           background-color: var(--bs-primary) !important;
           color: var(--bs-body-bg) !important;
 
@@ -34,7 +34,7 @@
           }
         }
 
-        .form-check-wrapper i {
+        .box-radio-media i {
           color: var(--bs-primary) !important;
         }
       }
@@ -43,14 +43,14 @@
         opacity: 0.65;
       }
 
-      .form-check-header {
+      .box-radio-header {
         display: block;
         overflow: hidden;
         cursor: pointer;
         border-top-left-radius: 0.35rem;
         border-top-right-radius: 0.35rem;
 
-        .form-check-wrapper {
+        .box-radio-media {
           overflow: hidden;
           text-align: center;
           padding: 5px;
@@ -70,7 +70,7 @@
         }
       }
 
-      .form-check-info {
+      .box-radio-info {
         text-align: center;
         padding: 0.3rem 0.5rem;
         margin: 0;
@@ -87,7 +87,7 @@
           justify-content: space-between;
         }
 
-        .form-check-label {
+        .box-radio-label {
           font-weight: 600;
           font-size: 10px;
           display: -webkit-box;
@@ -96,7 +96,7 @@
           overflow: hidden;
         }
 
-        .form-check-metadata {
+        .box-radio-metadata {
           display: block;
           font-size: 10px;
           text-overflow: ellipsis;
@@ -109,7 +109,7 @@
 
   // Vertical items
   &.vertical {
-    .form-check-box {
+    .box-radio {
       display: flex;
       gap: 16px;
       column-gap: 16px;
@@ -131,12 +131,12 @@
         opacity: 0.65;
       }
 
-      .form-check-header {
+      .box-radio-header {
         display: flex;
         align-items: center;
         flex-grow: 1;
 
-        .form-check-wrapper {
+        .box-radio-media {
           margin-right: 16px;
         }
         img,
@@ -147,7 +147,7 @@
         }
       }
 
-      .form-check-info {
+      .box-radio-info {
         display: flex;
         gap: 16px;
         column-gap: 16px;
@@ -160,7 +160,7 @@
 
     // Radio button at the left
     &.left-radio {
-      .form-check-box {
+      .box-radio {
         flex-direction: row-reverse;
         align-items: baseline;
         gap: 10px;
@@ -169,12 +169,12 @@
     }
   }
 
-  &.hoverable .form-check-box:hover {
+  &.hoverable .box-radio:hover {
     border: 1px solid var(--bs-primary);
   }
 
   &.align-top {
-    .form-check-header {
+    .box-radio-header {
       align-items: start !important;
     }
   }

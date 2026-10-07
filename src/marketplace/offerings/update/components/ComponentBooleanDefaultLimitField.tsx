@@ -10,7 +10,7 @@ export const ComponentBooleanDefaultLimitField: FunctionComponent = () => (
     parse={(v) => (v ? 1 : 0)}
     format={Boolean}
     size="sm"
-    alignMiddle
+    align="center"
     space={5}
   />
 );

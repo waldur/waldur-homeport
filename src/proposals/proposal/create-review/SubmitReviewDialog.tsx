@@ -8,7 +8,7 @@ import {
 import { BaseButton } from 'waldur-ui';
 
 import { SubmitButton, TextGroup } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SwitchField } from '@/form/SwitchField';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -175,7 +175,7 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
               <div className="mt-4">
                 <Field name="coi_confirmed" type="checkbox">
                   {(props) => (
-                    <AwesomeCheckboxField
+                    <SwitchField
                       {...props}
                       label={translate(
                         'I confirm I have no conflict of interest with this proposal',

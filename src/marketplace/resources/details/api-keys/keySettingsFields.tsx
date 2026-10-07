@@ -15,7 +15,7 @@ import { translate } from '@/i18n';
 import { componentLabel } from './keyLimits';
 import { KeyComponent } from './types';
 
-const ModelsField: FC<{
+export const ModelsField: FC<{
   name: string;
   label: string;
   options: string[];

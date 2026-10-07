@@ -11,7 +11,7 @@ const ADAPTER_TO_GROUP = {
   SliderNumberField: 'SliderNumberGroup',
   SecretField: 'SecretGroup',
   CommaSeparatedListField: 'CommaSeparatedListGroup',
-  AwesomeCheckboxField: 'BooleanGroup',
+  SwitchField: 'BooleanGroup',
   SelectField: 'SelectGroup',
   CreatableSelectField: 'CreatableSelectGroup',
   DateField: 'DateGroup',
@@ -24,7 +24,7 @@ const ADAPTER_TO_GROUP = {
   FileUploadField: 'FileUploadGroup',
   MarkdownEditor: 'MarkdownGroup',
   AsyncSelect: 'AsyncSelectGroup',
-  AwesomeRadioButton: 'RadioGroup',
+  RadioGroupField: 'RadioGroup',
 };
 
 const DISALLOWED_ADAPTERS = new Set(Object.keys(ADAPTER_TO_GROUP));

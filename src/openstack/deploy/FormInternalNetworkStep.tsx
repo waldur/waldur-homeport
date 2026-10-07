@@ -1,6 +1,7 @@
 import { useToggle } from 'react-use';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { BooleanGroup, StringGroup } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -21,9 +22,9 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
       disabledTooltip={props.disabledTooltip}
       actions={
         <div className="ms-auto">
-          <AwesomeCheckbox
-            value={advancedEnabled}
-            onChange={setAdvancedEnabled}
+          <Switch
+            checked={advancedEnabled}
+            onCheckedChange={setAdvancedEnabled}
             size="sm"
             className="align-self-center"
             label={translate('Advanced configuration')}

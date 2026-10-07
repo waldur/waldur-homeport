@@ -1,7 +1,6 @@
 import { LockIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   AccessSubnet,
   accessSubnetsList,
@@ -9,7 +8,7 @@ import {
   marketplacePublicOfferingsList,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Checkbox, Tooltip } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
@@ -256,15 +255,8 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
             ? 'applies_to_portal'
             : `offering:${target.key}`,
         render: ({ row }) => (
-          // Composed rather than the shorthand <Form.Check type="checkbox" />:
-          // the shorthand's .form-check wrapper adds 1.5em of left padding and
-          // pulls the input back by the same amount, which in a centred cell
-          // puts the box over the edge and clips it. Dropping that padding and
-          // the input's float centres it cleanly.
-          <Form.Check className="d-flex justify-content-center ps-0 mb-0">
-            <Form.Check.Input
-              type="checkbox"
-              className="float-none m-0"
+          <div className="d-flex justify-content-center">
+            <Checkbox
               aria-label={`${row.inet} — ${target.label}`}
               checked={isChecked(row, target.key)}
               disabled={
@@ -278,7 +270,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
               }
               onChange={() => toggle(row, target)}
             />
-          </Form.Check>
+          </div>
         ),
       })),
       {

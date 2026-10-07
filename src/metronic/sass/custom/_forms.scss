@@ -17,8 +17,7 @@
 
 /* FORM CONTROL (INPUT) */
 .form-control,
-.form-select,
-.form-check-input {
+.form-select {
   &:hover:not(:disabled):not([readonly]):not(:checked):not(:focus):not(
       .is-invalid
     ) {
@@ -93,13 +92,6 @@
     padding-right: 1rem;
     pointer-events: none;
     border: 1px solid transparent;
-  }
-}
-
-/* CHECKBOX */
-.form-check {
-  &-label {
-    font-size: $font-size-lg;
   }
 }
 

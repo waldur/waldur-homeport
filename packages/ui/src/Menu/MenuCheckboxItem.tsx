@@ -1,8 +1,8 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
 
+import { SwitchVisual } from '../Check';
 import { cn } from '../cn';
-import { SwitchVisual } from '../Switch';
 
 import { useMenuItemClassName } from './MenuItem';
 
@@ -12,8 +12,7 @@ import { useMenuItemClassName } from './MenuItem';
  * app's settings toggles do. Choosing it keeps the menu open, so the change
  * can be seen, unless `onSelect` says otherwise.
  *
- * `indicator` replaces the switch, for an app that has its own look for it
- * (the main app's Bootstrap switch); `null` shows none.
+ * `indicator` replaces the switch; `null` shows none.
  */
 export const MenuCheckboxItem = forwardRef<
   HTMLDivElement,

@@ -1,12 +1,12 @@
 import { PlusIcon, XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback } from 'react';
-import { Form, FormCheck } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field, useForm } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Checkbox } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -42,27 +42,27 @@ const filterFlavor = (node, flavor) => {
 const BooleanGroup = ({ groupName, options, input, groupClassName }) => (
   <Form.Group controlId={groupName} className={groupClassName}>
     {options.map((option, index) => (
-      <FormCheck inline key={index}>
-        <FormCheck.Label htmlFor={`${option.name}-checkbox-${index}`}>
-          {option.label}
-        </FormCheck.Label>
-        <FormCheck.Input
-          name={`${input.name}[${index}]`}
-          id={`${option.name}-checkbox-${index}`}
-          type="checkbox"
-          value={option.name}
-          checked={(input.value || []).indexOf(option.name) !== -1}
-          onChange={(e) => {
-            const newValue = [...(input.value || [])];
-            if (e.target.checked) {
-              newValue.push(option.name);
-            } else {
-              newValue.splice(newValue.indexOf(option.name), 1);
-            }
-            return input.onChange(newValue);
-          }}
-        />
-      </FormCheck>
+      <Checkbox
+        name={`${input.name}[${index}]`}
+        id={`${option.name}-checkbox-${index}`}
+        value={option.name}
+        checked={(input.value || []).indexOf(option.name) !== -1}
+        onChange={(e) => {
+          const newValue = [...(input.value || [])];
+          if (e.target.checked) {
+            newValue.push(option.name);
+          } else {
+            newValue.splice(newValue.indexOf(option.name), 1);
+          }
+          return input.onChange(newValue);
+        }}
+        key={index}
+        inline
+        align="center"
+        // Label above the box, as in the node-roles column headers.
+        className="flex-col-reverse gap-[2px]"
+        label={option.label}
+      />
     ))}
   </Form.Group>
 );

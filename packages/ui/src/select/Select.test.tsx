@@ -28,6 +28,28 @@ describe('Select component', () => {
     });
   });
 
+  it('ends the selected single-select row in a check element', async () => {
+    render(
+      <Select
+        variant="tableFilter"
+        options={options}
+        value={{ value: 'b', label: 'B' }}
+        onBlur={() => {}}
+      />,
+    );
+
+    await waitFor(() => {
+      const [selected, ...others] = screen.getAllByRole('option');
+      expect(selected).toHaveTextContent('B');
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(selected.querySelector('svg[data-select-check]')).not.toBeNull();
+      for (const option of others) {
+        // eslint-disable-next-line testing-library/no-node-access
+        expect(option.querySelector('svg[data-select-check]')).toBeNull();
+      }
+    });
+  });
+
   it('renders multi-select with selected values at top when menu opens', async () => {
     const selectedValues = [
       { value: 'c', label: 'C' },
@@ -50,6 +72,34 @@ describe('Select component', () => {
       expect(renderedOptions[0]).toHaveTextContent('A');
       expect(renderedOptions[1]).toHaveTextContent('C');
       expect(renderedOptions[2]).toHaveTextContent('B');
+
+      // Checkbox is rendered for each option (visual with aria-hidden="true")
+      // eslint-disable-next-line testing-library/no-node-access
+      const checkboxA = renderedOptions[0].querySelector<HTMLInputElement>(
+        'input[type="checkbox"]',
+      );
+      // eslint-disable-next-line testing-library/no-node-access
+      const checkboxC = renderedOptions[1].querySelector<HTMLInputElement>(
+        'input[type="checkbox"]',
+      );
+      // eslint-disable-next-line testing-library/no-node-access
+      const checkboxB = renderedOptions[2].querySelector<HTMLInputElement>(
+        'input[type="checkbox"]',
+      );
+      expect(checkboxA).toBeInTheDocument();
+      expect(checkboxA?.checked).toBe(true);
+      expect(checkboxC).toBeInTheDocument();
+      expect(checkboxC?.checked).toBe(true);
+      expect(checkboxB).toBeInTheDocument();
+      expect(checkboxB?.checked).toBe(false);
+
+      // Checkbox wrapper preserves inline-grid and is not line-clamped
+      // eslint-disable-next-line testing-library/no-node-access
+      const wrapperA = checkboxA?.closest('span');
+      expect(wrapperA).toHaveClass('inline-grid!');
+      expect(renderedOptions[0]).not.toHaveClass(
+        '[&>*:not([data-select-check])]:line-clamp-2',
+      );
     });
   });
 });

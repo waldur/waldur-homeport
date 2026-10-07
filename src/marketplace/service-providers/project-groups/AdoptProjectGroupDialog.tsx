@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Form as BootstrapForm } from 'react-bootstrap';
 import { Field, Form, useForm, useFormState } from 'react-final-form';
 import {
   marketplaceServiceProviderProjectGroupsAdoptableProjectsList,
@@ -11,7 +10,7 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Switch } from 'waldur-ui';
 
 import { OWN_ERROR_STATE } from '@/core/queryRetry';
 import { required } from '@/core/validators';
@@ -224,19 +223,18 @@ export const AdoptProjectGroupDialog: FC<AdoptProjectGroupDialogProps> = ({
               <AlertItem variant="error" title={submitError} className="mb-4" />
             )}
             {user.is_staff && (
-              <BootstrapForm.Check
-                type="switch"
+              <Switch
                 id="adopt-any-project"
+                checked={anyProject}
+                onCheckedChange={(checked) => {
+                  setAnyProject(checked);
+                  form.change('project', undefined);
+                }}
+                disabled={submitting}
                 className="mb-2"
                 label={translate(
                   'Show all projects, not only those using this service provider',
                 )}
-                checked={anyProject}
-                onChange={(event) => {
-                  setAnyProject(event.target.checked);
-                  form.change('project', undefined);
-                }}
-                disabled={submitting}
               />
             )}
             <AsyncSelectGroup

@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Form } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
+import { Checkbox } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -62,12 +64,11 @@ export const AccessSubnetScopeFields = ({
     <Form.Group className="mb-4">
       <Form.Label>{translate('Applies to')}</Form.Label>
 
-      <Form.Check
-        type="checkbox"
+      <Checkbox
         id="access-subnet-portal-scope"
-        label={ENV.plugins.WALDUR_CORE.SITE_NAME}
         checked={appliesToPortal}
         onChange={(e) => onChange('applies_to_portal', e.target.checked)}
+        label={ENV.plugins.WALDUR_CORE.SITE_NAME}
       />
       {appliesToPortal && (
         <Form.Text className="d-block text-warning mb-2">
@@ -87,13 +88,12 @@ export const AccessSubnetScopeFields = ({
         </Form.Text>
       ) : (
         available.map((offering) => (
-          <Form.Check
-            key={offering.uuid}
-            type="checkbox"
+          <Checkbox
             id={`access-subnet-offering-${offering.uuid}`}
-            label={offering.name}
             checked={offerings.includes(offering.uuid)}
             onChange={() => toggleOffering(offering.uuid)}
+            key={offering.uuid}
+            label={offering.name}
           />
         ))
       )}

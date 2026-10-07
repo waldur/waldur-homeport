@@ -6,7 +6,7 @@ import {
   marketplaceServiceProvidersOfferingsList,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, Checkbox } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -199,10 +199,12 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
             style={{ maxHeight: '200px', overflowY: 'auto' }}
           >
             {offerings.map((offering) => (
-              <Form.Check
-                key={offering.uuid}
-                type="checkbox"
+              <Checkbox
                 id={`offering-${offering.uuid}`}
+                checked={selectedOfferings.includes(offering.uuid)}
+                onChange={() => handleOfferingToggle(offering.uuid)}
+                key={offering.uuid}
+                className="mb-2"
                 label={
                   <span>
                     {offering.name}
@@ -211,9 +213,6 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
                     </span>
                   </span>
                 }
-                checked={selectedOfferings.includes(offering.uuid)}
-                onChange={() => handleOfferingToggle(offering.uuid)}
-                className="mb-2"
               />
             ))}
           </div>
@@ -229,12 +228,11 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       {(fixedOffering || (offerings && offerings.length > 0)) && (
         <>
           <Form.Group className="mb-4">
-            <Form.Check
-              type="checkbox"
+            <Checkbox
               id="include-policy-settings"
-              label={translate('Include SLURM policy settings')}
               checked={includePolicySettings}
               onChange={(e) => setIncludePolicySettings(e.target.checked)}
+              label={translate('Include SLURM policy settings')}
             />
             <Form.Text className="text-muted">
               {translate(

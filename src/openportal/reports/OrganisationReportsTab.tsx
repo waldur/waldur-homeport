@@ -12,6 +12,7 @@ import {
   AlertItem,
   Badge,
   BaseButton,
+  Checkbox,
   DatePicker,
   DateRangePicker,
   parseDateValue,
@@ -157,29 +158,29 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
           </Col>
         </Row>
         <div className="d-flex align-items-center gap-4 mb-3 flex-wrap">
-          <Form.Check
+          <Checkbox
             id="dlg-showFinished"
-            className="mb-0"
-            label={translate('Finished')}
             checked={showFinished}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setShowFinished(e.target.checked)
             }
-          />
-          <Form.Check
-            id="dlg-showInGrace"
             className="mb-0"
-            label={translate('In grace period')}
+            label={translate('Finished')}
+          />
+          <Checkbox
+            id="dlg-showInGrace"
             checked={showInGrace}
             disabled={!showFinished}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setShowInGrace(e.target.checked)
             }
+            className="mb-0"
+            label={translate('In grace period')}
           />
         </div>
 
         <div className="d-flex align-items-center gap-2 mb-2">
-          <Form.Check
+          <Checkbox
             id="select-all-visible"
             checked={allVisibleSelected && visible.length > 0}
             onChange={toggleAll}
@@ -208,11 +209,11 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
           )}
           {visible.map((p) => (
             <div key={p.uuid} className="d-flex align-items-start gap-2 py-1">
-              <Form.Check
+              <Checkbox
                 id={`proj-${p.uuid}`}
-                className="mt-1"
                 checked={draft.has(p.uuid)}
                 onChange={() => toggle(p.uuid)}
+                className="mt-1"
                 label={
                   <span className="flex-grow-1" style={{ cursor: 'pointer' }}>
                     <span className="fw-semibold">{p.name}</span>
@@ -904,24 +905,24 @@ export const OrganisationReportsTab: FC = () => {
 
             {/* Project status checkboxes */}
             <div className="d-flex align-items-center gap-4 mb-3 flex-wrap">
-              <Form.Check
+              <Checkbox
                 id="includeFinished"
-                className="mb-0"
-                label={translate('Finished')}
                 checked={includeFinished}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setIncludeFinished(e.target.checked)
                 }
-              />
-              <Form.Check
-                id="includeInGrace"
                 className="mb-0"
-                label={translate('In grace period')}
+                label={translate('Finished')}
+              />
+              <Checkbox
+                id="includeInGrace"
                 checked={includeInGrace}
                 disabled={!includeFinished}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setIncludeInGrace(e.target.checked)
                 }
+                className="mb-0"
+                label={translate('In grace period')}
               />
             </div>
 

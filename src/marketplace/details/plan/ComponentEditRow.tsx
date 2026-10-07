@@ -3,7 +3,8 @@ import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { PublicOfferingDetails, Offering } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { composeValidators } from '@/core/validators';
 import {
   formatIntField,
@@ -35,10 +36,10 @@ const RowWrapper = (
     hidePrices={props.concealBillingInfo}
   >
     {props.offeringComponent.is_boolean ? (
-      <AwesomeCheckbox
+      <Switch
         label=""
-        value={parseInt(props.input.value) === 1}
-        onChange={(value) => props.input.onChange(value ? 1 : 0)}
+        checked={parseInt(props.input.value) === 1}
+        onCheckedChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
     ) : (
       <Form.Control
@@ -89,10 +90,10 @@ const RowWrapper2 = (
     className="control"
   >
     {props.offeringComponent.is_boolean ? (
-      <AwesomeCheckbox
+      <Switch
         label=""
-        value={parseInt(props.input.value) === 1}
-        onChange={(value) => props.input.onChange(value ? 1 : 0)}
+        checked={parseInt(props.input.value) === 1}
+        onCheckedChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
     ) : (
       <MeasuredUnitInput

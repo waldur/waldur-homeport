@@ -111,7 +111,7 @@ describe('FieldsListGroup', () => {
     await userEvent.click(equalToOption);
 
     // Now the value field should be enabled
-    // Since it's boolean, it renders an AwesomeCheckboxGroup which renders a checkbox
+    // Since it's boolean, it renders a BooleanGroup, a Switch over a native checkbox
     const valueCheckbox = screen.getByLabelText(/Value/i);
     expect(valueCheckbox).toBeEnabled();
     expect(valueCheckbox.tagName).toBe('INPUT');

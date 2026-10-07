@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo, useState } from 'react';
-import { FormCheck } from 'react-bootstrap';
 import {
   AffiliatedOrganization,
   affiliatedOrganizationsList,
@@ -11,7 +10,7 @@ import {
   projectsUpdateAffiliation,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Radio } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -109,10 +108,10 @@ export const UpdateAffiliationDialog: FunctionComponent<
       {
         title: translate('Selected'),
         render: ({ row }: { row: AffiliatedOrganization }) => (
-          <FormCheck
-            type="radio"
+          <Radio
             name="affiliation-row"
             id={`affiliation-${row.uuid}`}
+            aria-label={row.name}
             checked={selectedUuid === row.uuid}
             onChange={() => setSelectedUuid(row.uuid)}
           />
@@ -186,8 +185,7 @@ export const UpdateAffiliationDialog: FunctionComponent<
                     'Pick from the affiliations configured for this organization.',
                   )}
             </span>
-            <FormCheck
-              type="radio"
+            <Radio
               name="affiliation-row"
               id="affiliation-none"
               checked={selectedUuid === null}

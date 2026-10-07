@@ -13,10 +13,9 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { FormCheck } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 
-import { BaseButton, Tooltip, MenuPopover } from 'waldur-ui';
+import { BaseButton, Checkbox, MenuPopover, Radio, Tooltip } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { FieldErrorMessage } from '@/form/FieldError';
@@ -519,20 +518,27 @@ const TableRow = memo<TableRowProps>(
                       </Tooltip>
                     )
                   )}
-                  <FormCheck
-                    name={fieldProps.input.name}
-                    type={fieldType}
-                    aria-label={translate('Select row')}
-                    className="form-check form-check-custom"
-                    checked={isChecked}
-                    onChange={handleFieldChange}
-                    onClick={(e) => e.stopPropagation()}
-                  />
+                  {fieldType === 'radio' ? (
+                    <Radio
+                      name={fieldProps.input.name}
+                      aria-label={translate('Select row')}
+                      checked={isChecked}
+                      onChange={handleFieldChange}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  ) : (
+                    <Checkbox
+                      name={fieldProps.input.name}
+                      aria-label={translate('Select row')}
+                      checked={isChecked}
+                      onChange={handleFieldChange}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  )}
                 </>
               ) : (
-                <FormCheck
+                <Checkbox
                   aria-label={translate('Select row')}
-                  className="form-check form-check-custom form-check-md"
                   checked={isChecked}
                   onChange={handleSelectRow}
                 />

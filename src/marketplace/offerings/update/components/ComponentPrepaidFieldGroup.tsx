@@ -42,7 +42,7 @@ export const ComponentPrepaidFieldGroup: FC<{
       <BooleanGroup
         name="is_prepaid"
         label={translate('Pre-paid component')}
-        help_text={getPrepaidDescription()}
+        description={getPrepaidDescription()}
         space={5}
       />
       {isPrepaid ? (

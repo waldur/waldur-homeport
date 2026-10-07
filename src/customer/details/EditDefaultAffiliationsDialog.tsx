@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import { FormCheck } from 'react-bootstrap';
 import {
   AffiliatedOrganization,
   affiliatedOrganizationsList,
@@ -8,7 +7,7 @@ import {
   customersUpdateDefaultAffiliations,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Checkbox } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { SubmitButton } from '@/form';
@@ -93,9 +92,9 @@ export const EditDefaultAffiliationsDialog: FunctionComponent<
       {
         title: translate('Enabled'),
         render: ({ row }: { row: AffiliatedOrganization }) => (
-          <FormCheck
-            type="checkbox"
+          <Checkbox
             id={`default-affiliation-${row.uuid}`}
+            aria-label={row.name}
             checked={selectedUuids.has(row.uuid)}
             onChange={() => toggle(row.uuid)}
           />

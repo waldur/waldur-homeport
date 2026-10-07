@@ -1,8 +1,8 @@
 import { KeyIcon, ProhibitIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { OptionProps, components } from 'react-select';
+import { OptionProps } from 'react-select';
 
-import { Tooltip } from 'waldur-ui';
+import { SelectOption, Tooltip } from 'waldur-ui';
 
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
@@ -20,7 +20,7 @@ type UserListOptionInlineProps = OptionProps<{
 const size = 32;
 
 export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
-  <components.Option {...props}>
+  <SelectOption {...props}>
     <style>
       {`
           #registration-method-tooltip {
@@ -62,5 +62,5 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
         </Tooltip>
       </div>
     </div>
-  </components.Option>
+  </SelectOption>
 );

@@ -1,7 +1,6 @@
 import { FC, useContext } from 'react';
 
 import { SelectField } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { DateField } from '@/form/DateField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { NumberField } from '@/form/NumberField';
@@ -9,6 +8,7 @@ import { RangeDateField } from '@/form/RangeDateField';
 import { RangeNumberField } from '@/form/RangeNumberField';
 import { AsyncSelect } from '@/form/select';
 import { StringField } from '@/form/StringField';
+import { SwitchField } from '@/form/SwitchField';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { useNormalizeSelectFilterValue } from './normalizeFilterValue';
@@ -46,7 +46,7 @@ export const AsyncSelectFilter: FC<any> = (props) => {
   );
 };
 
-export const BooleanFilter = withTableFilter(AwesomeCheckboxField, {
+export const BooleanFilter = withTableFilter(SwitchField, {
   passLabelToControl: true,
 });
 

@@ -154,7 +154,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                     <BooleanGroup
                       data-testid={`country_${country.value}`}
                       name={`countries.${country.value}`}
-                      alignMiddle
+                      align="center"
                       className="d-flex justify-content-between flex-row-reverse w-100"
                       size="sm"
                       label={

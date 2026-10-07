@@ -6,7 +6,7 @@ import {
   supportUsersMerge,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Checkbox } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { formatJsxTemplate, translate } from '@/i18n';
@@ -103,8 +103,8 @@ export const SupportUserMergeDialog = ({ resolve }) => {
             {candidates.map((candidate) => (
               <li key={candidate.uuid} className="mb-2">
                 <label className="d-flex align-items-center gap-2">
-                  <input
-                    type="checkbox"
+                  <Checkbox
+                    size="sm"
                     checked={selected.includes(candidate.uuid)}
                     onChange={() => toggle(candidate.uuid)}
                   />

@@ -77,7 +77,9 @@ const preview: Preview = {
           'Forms',
           [
             'Select',
-            'Switch',
+            'Check controls',
+            ['Checkbox', 'Switch', 'Radio', 'Form fields', 'Disabled view'],
+            'Edit fields',
             'Date & time',
             [
               'Calendar',

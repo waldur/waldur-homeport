@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { customerCreditsList } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -130,8 +131,8 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
               label={row.label}
               value={
                 row.key === 'apply_as_minimal_consumption' ? (
-                  <AwesomeCheckbox
-                    value={!!row.value}
+                  <Switch
+                    checked={!!row.value}
                     label={
                       row.value ? translate('Enabled') : translate('Disabled')
                     }

@@ -60,7 +60,7 @@ export function withFormGroup<P extends object>(
       input,
       label: options?.passLabelToControl ? undefined : label,
       required,
-      description,
+      description: options?.passLabelToControl ? undefined : description,
       tooltip: options?.passLabelToControl ? undefined : tooltip,
       help,
       tooltipEnd,
@@ -79,8 +79,10 @@ export function withFormGroup<P extends object>(
       meta: forceTouched ? { ...meta, touched: true } : meta, // Pass meta to FormGroup so it can render FieldError natively
     };
 
+    // A control that owns its label (a switch, a radio group) also draws its
+    // tooltip, description and required mark, beside or under that label.
     const componentProps = options?.passLabelToControl
-      ? { ...rest, label, tooltip, tooltipEnd }
+      ? { ...rest, label, tooltip, description, required }
       : rest;
 
     // The rest of the props are intended for the WrappedComponent, including `input` bindings

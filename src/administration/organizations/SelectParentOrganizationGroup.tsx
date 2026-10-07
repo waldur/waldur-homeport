@@ -2,20 +2,22 @@ import { FC } from 'react';
 import { components } from 'react-select';
 import { OrganizationGroup } from 'waldur-js-client';
 
+import { SelectOption } from 'waldur-ui';
+
 import { organizationGroupAutocomplete } from '@/customer/list/autcompletes';
 import { RIGHT_ARROW_HTML } from '@/customer/list/constants';
 import { AsyncSelectGroup } from '@/form';
 import { translate } from '@/i18n';
 
 const OrganizationGroupFieldOption: FC<any> = (props) => (
-  <components.Option {...props}>
+  <SelectOption {...props}>
     {props.data.parent_name ? (
       <>
         {props.data.parent_name} {RIGHT_ARROW_HTML}{' '}
       </>
     ) : null}
     {props.data.name}
-  </components.Option>
+  </SelectOption>
 );
 
 const OrganizationGroupFieldSingleValue: FC<any> = (props) => {

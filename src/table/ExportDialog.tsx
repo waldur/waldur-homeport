@@ -85,7 +85,6 @@ export const ExportDialog = (props: ExportDialogProps) => {
                   label={translate('Content')}
                   disabled={submitting}
                   // Without it each description crowds the next option's label.
-                  gap={3}
                   choices={[
                     {
                       value: 'visible',

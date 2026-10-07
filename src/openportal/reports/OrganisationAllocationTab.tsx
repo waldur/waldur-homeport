@@ -39,12 +39,13 @@ import {
   AlertItem,
   Badge,
   BaseButton,
+  Checkbox,
   DatePicker,
   DateRangePicker,
-  SegmentedControl,
-  Tooltip,
   parseDateValue,
+  SegmentedControl,
   toIsoDate,
+  Tooltip,
 } from 'waldur-ui';
 
 import { getNextPageUrl } from '@/core/api';
@@ -518,7 +519,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
         </Row>
 
         <div className="d-flex align-items-center gap-2 mb-2">
-          <Form.Check
+          <Checkbox
             id="alloc-select-all"
             checked={allVisibleSelected && visible.length > 0}
             onChange={toggleAll}
@@ -551,47 +552,42 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
           )}
           {visible.map((p) => (
             <div key={p.uuid} className="py-1">
-              <Form.Check className="d-flex align-items-start gap-2 mb-0">
-                <Form.Check.Input
-                  id={`alloc-proj-${p.uuid}`}
-                  className="mt-1 m-0"
-                  checked={draft.has(p.uuid)}
-                  onChange={() => toggle(p.uuid)}
-                />
-                <Form.Check.Label
-                  htmlFor={`alloc-proj-${p.uuid}`}
-                  className="flex-grow-1"
-                  style={{ cursor: 'pointer' }}
-                >
-                  <span className="fw-semibold">{p.name}</span>
-                  {(p.start_date || p.end_date) && (
-                    <span className="text-muted small ms-2">
-                      {p.start_date ?? '?'} →{' '}
-                      {p.end_date ?? translate('ongoing')}
-                    </span>
-                  )}
-                  {p.is_in_grace_period && (
-                    <Badge
-                      variant="warning"
-                      tone="outline"
-                      className="ms-2"
-                      style={{ fontSize: '0.7em' }}
-                    >
-                      {translate('In grace')}
-                    </Badge>
-                  )}
-                  {p.is_expired && !p.is_in_grace_period && (
-                    <Badge
-                      variant="neutral"
-                      tone="outline"
-                      className="ms-2"
-                      style={{ fontSize: '0.7em' }}
-                    >
-                      {translate('Finished')}
-                    </Badge>
-                  )}
-                </Form.Check.Label>
-              </Form.Check>
+              <Checkbox
+                id={`alloc-proj-${p.uuid}`}
+                checked={draft.has(p.uuid)}
+                onChange={() => toggle(p.uuid)}
+                label={
+                  <>
+                    <span className="fw-semibold">{p.name}</span>
+                    {(p.start_date || p.end_date) && (
+                      <span className="text-muted small ms-2">
+                        {p.start_date ?? '?'} →{' '}
+                        {p.end_date ?? translate('ongoing')}
+                      </span>
+                    )}
+                    {p.is_in_grace_period && (
+                      <Badge
+                        variant="warning"
+                        tone="outline"
+                        className="ms-2"
+                        style={{ fontSize: '0.7em' }}
+                      >
+                        {translate('In grace')}
+                      </Badge>
+                    )}
+                    {p.is_expired && !p.is_in_grace_period && (
+                      <Badge
+                        variant="neutral"
+                        tone="outline"
+                        className="ms-2"
+                        style={{ fontSize: '0.7em' }}
+                      >
+                        {translate('Finished')}
+                      </Badge>
+                    )}
+                  </>
+                }
+              />
             </div>
           ))}
         </div>

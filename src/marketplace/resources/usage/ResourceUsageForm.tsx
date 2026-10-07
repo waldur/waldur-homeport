@@ -25,7 +25,6 @@ import {
 
 import { BaseButton, Menu, Tooltip } from 'waldur-ui';
 
-import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
 import { UI_STALE_TIME } from '@/core/constants';
 import { parseDate } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -37,6 +36,7 @@ import {
   SelectGroup,
   StringGroup,
 } from '@/form';
+import { RadioGroupField } from '@/form/RadioGroupField';
 import { translate } from '@/i18n';
 import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 
@@ -486,13 +486,12 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                       defaultValue={MISSING_USAGE_POLICY_DEFAULT}
                     >
                       {({ input }) => (
-                        <AwesomeRadioButton
+                        <RadioGroupField
                           input={input}
                           label={translate(
                             'When no usage is reported for the next month',
                           )}
                           choices={getMissingUsagePolicyChoices()}
-                          gap={2}
                         />
                       )}
                     </Field>

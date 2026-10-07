@@ -10,8 +10,11 @@ import {
   ControlProps,
   DropdownIndicatorProps,
   MultiValueProps,
+  OptionProps,
 } from 'react-select';
 
+import { Checkbox } from '../Check';
+import { CheckMark } from '../Check/CheckMark';
 import { Tag } from '../Tag';
 import { Tooltip } from '../Tooltip';
 
@@ -78,33 +81,37 @@ export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
   </components.Control>
 );
 
+/**
+ * react-select's Option plus, on a single-select's selected row, a check at
+ * the end. The default Option of every single-select (see composeComponents);
+ * a custom Option keeps the check by rendering this instead of react-select's
+ * `components.Option`. Multi-select rows show a Checkbox instead.
+ */
+export const SelectOption = ({ children, ...props }: OptionProps<any, any>) => (
+  <components.Option {...props}>
+    {children}
+    {!props.isMulti && props.isSelected && (
+      <CheckMark
+        data-select-check=""
+        className="w-[12px] shrink-0 grow-0 text-[var(--waldur-brand-600)]"
+      />
+    )}
+  </components.Option>
+);
+
 export const MultiSelectOption = (props) => {
   return (
     <components.Option {...props}>
-      <input
-        type="checkbox"
-        // `border-[1px]`, not `border`: same Bootstrap `.border { ...
-        // !important }` name collision as the select control (see
-        // tailwindStyles.ts) — this checkbox's border-color was stuck on
-        // Bootstrap's default instead of `--waldur-border-primary`.
-        //
-        // `appearance-none` is load-bearing, not decoration: without it the
-        // browser renders its own native checkbox chrome, which ignores
-        // author `border`/`border-radius`/`background` entirely — confirmed
-        // live (the unchecked box measured `border-width: 0px`,
-        // `appearance: auto` despite every one of those classes being
-        // present). The old Bootstrap `.form-check-input` checkbox this
-        // replaced sets `appearance: none` itself for the same reason, so
-        // this has to draw its own checked-state fill and checkmark — reuses
-        // `--checkbox-bg`, the same checkmark SVG data-URI the single-select
-        // checkmark pseudo-element below already draws from `--root.scss`.
-        // Colors and radius are pinned to what that old checkbox actually
-        // measured live: brand-600 fill (not -500), 4px radius.
-        className="appearance-none w-[16px] h-[16px] rounded-[4px] border-[1px] border-solid border-[var(--waldur-border-primary)] checked:bg-[var(--waldur-brand-600)] checked:border-[var(--waldur-brand-600)] checked:bg-no-repeat checked:bg-center checked:[background-image:var(--checkbox-bg)] flex-shrink-0 cursor-pointer"
+      {/* A visual only: react-select's option is the control. Same box as
+          every other checkbox (16px, brand-600 fill, 4px radius). */}
+      <Checkbox
+        size="sm"
         checked={props.isSelected}
         readOnly
+        tabIndex={-1}
+        aria-hidden="true"
       />
-      <label className="ml-[8px] cursor-pointer">{props.label}</label>
+      <label className="cursor-pointer">{props.label}</label>
     </components.Option>
   );
 };

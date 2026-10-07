@@ -202,7 +202,10 @@ export default tseslint
         'waldur-custom/enforce-dialog-button-order': 'error',
         'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',
-        'waldur-custom/enforce-formcheck-components': 'error',
+        // Zero instances remain: every checkbox, radio and switch is a waldur-ui
+        // Checkbox/Radio/Switch, and the .form-check styles are deleted.
+        'waldur-custom/no-bootstrap-form-check': 'error',
+        'waldur-custom/check-needs-accessible-name': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
@@ -275,6 +278,12 @@ export default tseslint
         // 'import/no-named-as-default': 'error',
         'require-await': 'error',
         'jsx-a11y/no-autofocus': ['error', { ignoreNonDOM: true }],
+        // waldur-ui's Checkbox, Radio and Switch render a native <input>, so a
+        // <label> wrapping one is labelled the same as one wrapping <input>.
+        'jsx-a11y/label-has-associated-control': [
+          'error',
+          { controlComponents: ['Checkbox', 'Radio', 'Switch'] },
+        ],
         'no-restricted-globals': [
           'error',
           {

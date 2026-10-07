@@ -141,6 +141,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 
 - Use the `waldur-ui` pickers (`DatePicker`, `DateRangePicker`, `MonthPicker`; `DateField`/`DateGroup` in forms) — never a native `<input type="date">`, `datetime-local`, `time`, `month` or `week`. Linter enforces this; see `docs/forms.md` → "Date & Time Pickers"
 
+- Use `waldur-ui`'s `Checkbox`, `Radio`, `Switch` (each takes `label` / `description` / `tooltip` and `checked` + `onCheckedChange`) and `RadioGroup` (options in, value out); in react-final-form use `BooleanGroup` / `RadioGroup` from `@/form` — never react-bootstrap `FormCheck` / `Form.Check` or `form-check*` / `form-switch*` classes. Linter enforces this (`no-bootstrap-form-check`)
+
 - Use **generated filters** for table filter components (see `docs/table/filter-migration-guide.md`):
   1. Add config to `generate-filters-config.yaml`
   2. Run `node generate-filters.cjs`

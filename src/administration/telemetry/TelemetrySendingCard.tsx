@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { featureValues } from 'waldur-js-client';
 
+import { Switch } from 'waldur-ui';
+
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
 import { DeploymentFeatures } from '@/FeaturesEnums';
@@ -52,10 +53,11 @@ export const TelemetrySendingCard = () => {
           descriptionClassName="text-gray-600"
           value={<TelemetryExampleButton />}
           actions={
-            <AwesomeCheckbox
+            <Switch
               id="telemetry-send-metrics"
-              value={enabled}
-              onChange={toggle}
+              aria-label={translate('Send telemetry metrics')}
+              checked={enabled}
+              onCheckedChange={toggle}
               disabled={submitting}
               data-testid={DeploymentFeatures.send_metrics}
             />

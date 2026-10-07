@@ -2,7 +2,8 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { ENV } from '@/core/config';
 import { CountryFlagIcon } from '@/core/CountryFlagIcon';
 import { Panel } from '@/core/Panel';
@@ -119,12 +120,12 @@ export const AdministrationLanguages: FunctionComponent = () => {
         {filteredLanguages.map((language: { code: string; label: string }) => (
           <Col key={language.code} sm={6} md={4}>
             <div className="border-bottom py-5">
-              <AwesomeCheckbox
+              <Switch
                 data-testid={`language_${language.code}`}
                 className="d-flex justify-content-between flex-row-reverse align-items-center"
                 size="sm"
-                value={selectedLanguages.includes(language.code)}
-                onChange={() => handleLanguageChange(language.code)}
+                checked={selectedLanguages.includes(language.code)}
+                onCheckedChange={() => handleLanguageChange(language.code)}
                 label={
                   <div className="d-flex align-items-center">
                     <CountryFlagIcon

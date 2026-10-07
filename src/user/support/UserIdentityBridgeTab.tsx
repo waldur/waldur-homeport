@@ -8,9 +8,8 @@ import {
   usersPartialUpdate,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Switch } from 'waldur-ui';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { formatDateTime } from '@/core/dateUtils';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -178,9 +177,9 @@ const IdentityManagerSettings: FC<{ user: User }> = ({ user }) => {
       <FormTable.Item
         label={translate('Identity manager')}
         value={
-          <AwesomeCheckbox
-            value={isManager}
-            onChange={toggleIdentityManager}
+          <Switch
+            checked={isManager}
+            onCheckedChange={toggleIdentityManager}
             label={isManager ? translate('Enabled') : translate('Disabled')}
             disabled={toggleMutation.isPending}
           />

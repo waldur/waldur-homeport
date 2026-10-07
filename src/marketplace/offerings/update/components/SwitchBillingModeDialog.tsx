@@ -8,6 +8,8 @@ import {
   SwitchBillingModeRequest,
 } from 'waldur-js-client';
 
+import { Radio } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { getBillingTypeLabel } from '@/marketplace/common/billingTypes';
@@ -169,12 +171,12 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
                           : ''
                       }`}
                     >
-                      <input
-                        type="radio"
+                      <Radio
+                        size="sm"
                         {...input}
                         value={mode.value}
                         checked={input.value === mode.value}
-                        className="mt-1"
+                        className="mt-[2px]"
                       />
                       <div>
                         <div className="fw-bold">{mode.label}</div>

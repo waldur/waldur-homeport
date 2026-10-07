@@ -78,12 +78,12 @@ Central foundation for marketplace offering deployment flows:
 
 ```typescript
 interface VStepperFormStep {
-  label: string;                    // Display name
-  id: string;                      // Unique identifier
-  component: React.ComponentType;   // React component
-  fields?: Array<string>;          // Form fields
-  required?: boolean;              // Mandatory step
-  isActive?: (data) => boolean;    // Dynamic visibility
+  label: string; // Display name
+  id: string; // Unique identifier
+  component: React.ComponentType; // React component
+  fields?: Array<string>; // Form fields
+  required?: boolean; // Mandatory step
+  isActive?: (data) => boolean; // Dynamic visibility
 }
 ```
 
@@ -94,7 +94,7 @@ Dynamic form field selection system:
 ### Supported Field Types
 
 - `string` - StringField for basic text input
-- `boolean` - AwesomeCheckboxField for toggles
+- `boolean` - SwitchField for toggles
 - `email_field` - EmailField with validation
 - `text_field` - TextField for multi-line text
 - `integer` - NumberField for numeric input
@@ -107,7 +107,7 @@ const FieldRow = ({ field, ...rest }) =>
   field.type === 'string' ? (
     <StringField {...rest} />
   ) : field.type === 'boolean' ? (
-    <AwesomeCheckboxField {...rest} />
+    <SwitchField {...rest} />
   ) : (
     <StringField {...rest} />
   );

@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { Panel } from '@/core/Panel';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -76,9 +77,9 @@ export const UserStatus = ({ user }: { user: User }) => {
       title={translate('Account status')}
       cardBordered
       actions={
-        <AwesomeCheckbox
-          value={isActive}
-          onChange={toggleUserStatus}
+        <Switch
+          checked={isActive}
+          onCheckedChange={toggleUserStatus}
           label={isActive ? translate('Active') : translate('Disabled')}
         />
       }

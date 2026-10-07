@@ -3,7 +3,8 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { BasePublicPlan } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 import { ENV } from '@/core/config';
 import { composeValidators } from '@/core/validators';
@@ -84,10 +85,10 @@ const CellWrapper: FC<any> = (props) => {
   return (
     <Form.Group as="td" onClick={(e) => e.stopPropagation()}>
       {props.offeringComponent.is_boolean ? (
-        <AwesomeCheckbox
+        <Switch
           label=""
-          value={parseInt(props.input.value) === 1}
-          onChange={(value) => props.input.onChange(value ? 1 : 0)}
+          checked={parseInt(props.input.value) === 1}
+          onCheckedChange={(value) => props.input.onChange(value ? 1 : 0)}
         />
       ) : (
         <InputGroup className="input-group-number">

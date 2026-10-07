@@ -1,0 +1,83 @@
+/**
+ * Checkbox, radio and switch tokens for waldur-ui's Checkbox, Radio, Switch
+ * and CheckField.
+ *
+ * Every value is the one the Bootstrap/Metronic `.form-check` stylesheet
+ * resolved to (src/metronic/sass/core/components/forms/_form-check.scss and
+ * the `$form-check-*` / `$form-switch-*` overrides in _variables.custom.scss),
+ * translated from the SCSS tokens in _tokens.scss:
+ *
+ *   box/radio bg          $body-bg               white / gray-25
+ *   box/radio border      $border-primary        gray-300 / gray-200
+ *   checked fill          $bg-brand-solid        brand-600 in both themes
+ *   disabled bg           $bg-disabled_subtle    gray-50
+ *   disabled border       $border-disabled       gray-300 / gray-200
+ *   mark                  white                  white
+ *   disabled mark         $fg-senary             gray-300
+ *   switch track          $bg-tertiary           gray-100
+ *   switch track border   $border-secondary      gray-200 / gray-100
+ *   switch track hover    $bg-quaternary         gray-200
+ *   switch disabled track $bg-disabled           gray-100
+ *   switch on + disabled  $brand-200             brand-200 / brand-700
+ *   label                 $text-secondary        gray-700 / gray-600
+ *   label disabled        $text-disabled         gray-300 / gray-400
+ *   description           $text-quaternary       gray-500
+ *
+ * The SCSS dark theme flips the gray ramp in place ($gray-100 is #1f242f
+ * there); the tokens read the physical `gray-dark` ramp instead, so the dark
+ * column above maps 25→950, 50→900, 100→800, 200→700, 300→600, 400→500,
+ * 500→400, 600→300.
+ *
+ * The check, dash and dot are elements the components render (inline SVG
+ * in `currentColor`), so only their colours live here.
+ */
+@import './colors.css';
+
+:root {
+  --check-bg: #ffffff;
+  --check-border: var(--color-gray-300);
+  --check-border-hover: var(--waldur-brand-600);
+  --check-checked-bg: var(--waldur-brand-600);
+  --check-disabled-bg: var(--color-gray-50);
+  --check-disabled-border: var(--color-gray-300);
+  --check-focus-ring: var(--focus-ring-color, var(--waldur-brand-600));
+  /* The check, dash and radio dot (drawn in currentColor by the components). */
+  --check-mark: #ffffff;
+  --check-mark-disabled: var(--color-gray-300);
+
+  --switch-track: var(--color-gray-100);
+  --switch-track-border: var(--color-gray-200);
+  --switch-track-hover: var(--color-gray-200);
+  --switch-track-checked: var(--waldur-brand-600);
+  --switch-track-disabled: var(--color-gray-100);
+  --switch-track-checked-disabled: var(--waldur-brand-200);
+  --switch-knob: #ffffff;
+  --switch-knob-border: var(--color-gray-300);
+  --switch-knob-disabled: var(--color-gray-300);
+  --switch-knob-checked-disabled: #ffffff;
+
+  --check-label: var(--color-gray-700);
+  --check-label-disabled: var(--color-gray-300);
+  --check-description: var(--color-gray-500);
+}
+
+:root[data-theme='dark'] {
+  --check-bg: var(--color-gray-dark-950);
+  --check-border: var(--color-gray-dark-700);
+  --check-disabled-bg: var(--color-gray-dark-900);
+  --check-disabled-border: var(--color-gray-dark-700);
+  --check-mark-disabled: var(--color-gray-dark-600);
+
+  --switch-track: var(--color-gray-dark-800);
+  --switch-track-border: var(--color-gray-dark-800);
+  --switch-track-hover: var(--color-gray-dark-700);
+  --switch-track-disabled: var(--color-gray-dark-800);
+  --switch-track-checked-disabled: var(--waldur-brand-700);
+  --switch-knob-border: var(--color-gray-dark-700);
+  --switch-knob-disabled: var(--color-gray-dark-600);
+  --switch-knob-checked-disabled: var(--color-gray-dark-950);
+
+  --check-label: var(--color-gray-dark-300);
+  --check-label-disabled: var(--color-gray-dark-500);
+  --check-description: var(--color-gray-dark-400);
+}

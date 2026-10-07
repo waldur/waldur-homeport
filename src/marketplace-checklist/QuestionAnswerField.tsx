@@ -10,13 +10,13 @@ import {
   StringField,
   TextField,
 } from '@/form';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { CountrySelectField } from '@/form/CountrySelectField';
 import { DateField } from '@/form/DateField';
 import { DateTimeField } from '@/form/DateTimeField';
 import { EmailField } from '@/form/EmailField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { PhoneNumberField } from '@/form/PhoneNumberField';
+import { SwitchField } from '@/form/SwitchField';
 import { YearField } from '@/form/YearField';
 import { translate } from '@/i18n';
 import { ChecklistFileUpload } from '@/marketplace-checklist/ChecklistFileUpload';
@@ -31,7 +31,7 @@ import {
 const questionComponent: Record<QuestionTypeEnum, ComponentType> = {
   text_input: StringField,
   text_area: TextField,
-  boolean: AwesomeCheckboxField,
+  boolean: SwitchField,
   number: NumberField,
   date: DateField,
   datetime: DateTimeField,

@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
 import { InvoicePolicyEnum } from 'waldur-js-client';
+
+import { RadioGroup } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -39,29 +40,26 @@ export const InvoicePolicyChoice: FC<{
   onChange(value: InvoicePolicyEnum): void;
   toRewriteByPolicy?: Record<string, number>;
 }> = ({ value, onChange, toRewriteByPolicy }) => (
-  <div className="d-flex flex-column gap-4">
-    {getInvoicePolicyOptions().map((option) => (
-      <Form.Check
-        key={option.value}
-        type="radio"
-        id={`invoice-policy-${option.value}`}
-        name="invoice_policy"
-        checked={value === option.value}
-        onChange={() => onChange(option.value)}
-        label={
-          <div>
-            <div className="fw-semibold">{option.label}</div>
-            <div className="text-muted fs-7">{option.description}</div>
-            {toRewriteByPolicy?.[option.value] !== undefined && (
-              <div className="text-muted fs-7">
-                {translate('Invoice items rewritten: {count}', {
-                  count: toRewriteByPolicy[option.value],
-                })}
-              </div>
-            )}
-          </div>
-        }
-      />
-    ))}
-  </div>
+  <RadioGroup
+    aria-label={translate('Invoice policy')}
+    name="invoice_policy"
+    value={value}
+    onValueChange={onChange}
+    options={getInvoicePolicyOptions().map((option) => ({
+      value: option.value,
+      label: <span className="fw-semibold">{option.label}</span>,
+      description: (
+        <>
+          {option.description}
+          {toRewriteByPolicy?.[option.value] !== undefined && (
+            <div>
+              {translate('Invoice items rewritten: {count}', {
+                count: toRewriteByPolicy[option.value],
+              })}
+            </div>
+          )}
+        </>
+      ),
+    }))}
+  />
 );

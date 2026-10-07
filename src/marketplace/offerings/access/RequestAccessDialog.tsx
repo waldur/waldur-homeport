@@ -1,8 +1,10 @@
 import { PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Col, FormCheck, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { Customer, Offering, Project } from 'waldur-js-client';
+
+import { Radio } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { SubmitButton } from '@/form';
@@ -57,10 +59,10 @@ const MethodChoice: FC<{ method: AccessMethod }> = ({ method }) => (
           input.checked ? 'border-primary bg-light-primary' : ''
         }`}
       >
-        <FormCheck
+        <Radio
           {...input}
-          type="radio"
           id={`access-method-${method.key}`}
+          align="start"
           label={
             <span className="d-flex flex-column">
               <span className="fw-bold">{method.label}</span>

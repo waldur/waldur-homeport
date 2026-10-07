@@ -2,9 +2,8 @@ import * as Tabs from '@radix-ui/react-tabs';
 import classNames from 'classnames';
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import { Badge, BadgeVariant } from 'waldur-ui';
+import { Badge, BadgeVariant, Checkbox } from 'waldur-ui';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -168,26 +167,26 @@ const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
       <p className="text-muted text-sm font-medium leading-5 mb-4">
         {activeGroup.label}
       </p>
-      <AwesomeCheckbox
+      <Checkbox
         id="permission-select-all"
         className="min-h-[22px] mb-2"
-        type="checkbox"
         size="sm"
         label={translate('Select all')}
-        value={allShownSelected}
-        onChange={onToggleShown}
+        checked={allShownSelected}
+        onCheckedChange={onToggleShown}
       />
       <hr className="mt-0 mb-2" />
       {shown.map((option: PermissionOption) => (
-        <AwesomeCheckbox
+        <Checkbox
           className="min-h-[22px] mb-2"
           key={option.value}
           id={`permission-${option.value}`}
-          type="checkbox"
           size="sm"
           label={option.label}
-          value={selectedSet.has(option.value)}
-          onChange={(checked: boolean) => onToggleOption(option.value, checked)}
+          checked={selectedSet.has(option.value)}
+          onCheckedChange={(checked: boolean) =>
+            onToggleOption(option.value, checked)
+          }
         />
       ))}
     </Tabs.Content>

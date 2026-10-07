@@ -9,8 +9,9 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
+import { Switch } from 'waldur-ui';
+
 import { getAllPages } from '@/core/api';
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { isMatchPattern, required } from '@/core/validators';
 import { SelectGroup } from '@/form';
@@ -89,9 +90,9 @@ export const FixedIPsField: FC<{
     <Form.Group>
       <div className="d-flex justify-content-between mb-5">
         <Form.Label className="mb-0">{translate('Fixed IPs')}</Form.Label>
-        <AwesomeCheckbox
-          value={customIpEnabled}
-          onChange={toggleCustomIp}
+        <Switch
+          checked={customIpEnabled}
+          onCheckedChange={toggleCustomIp}
           size="sm"
           className="align-self-center"
           label={translate('Custom IP configuration')}

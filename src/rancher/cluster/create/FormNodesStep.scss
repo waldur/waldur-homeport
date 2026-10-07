@@ -9,25 +9,4 @@
       }
     }
   }
-
-  .node-roles {
-    .form-check {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-left: 0;
-      margin-right: 0;
-
-      label {
-        display: block;
-        color: var(--bs-dark);
-        margin-bottom: 2px;
-      }
-
-      input {
-        display: block;
-        margin: 0;
-      }
-    }
-  }
 }

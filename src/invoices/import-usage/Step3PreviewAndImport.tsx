@@ -1,5 +1,4 @@
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
-import { FormCheck } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { useToggle } from 'react-use';
 
@@ -9,6 +8,7 @@ import { Badge } from 'waldur-ui';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
+import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
 import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
@@ -55,17 +55,6 @@ const WithTooltip = ({ label = '', len = 24 }) =>
   ) : (
     label || DASH_ESCAPE_CODE
   );
-
-const SkipErrorsCheck = ({ checked, onChange }) => (
-  <FormCheck
-    id="confirm-skip-errors"
-    type="checkbox"
-    className="form-check-custom form-check-sm border-top pt-3"
-    checked={checked}
-    onChange={onChange}
-    label={translate('Skip records with errors')}
-  />
-);
 
 export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
   const { showError } = useNotify();

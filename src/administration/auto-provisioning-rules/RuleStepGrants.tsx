@@ -59,8 +59,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
         tooltip={translate(
           'If enabled, the customer name will be taken from the user’s organization provided by IdP.',
         )}
-        tooltipEnd
-        alignMiddle
+        align="center"
         className="w-100"
         onChange={() => change('customer', null)}
       />
@@ -129,8 +128,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
         tooltip={translate(
           'Create (or join) a project for each matched user. Disable for a rule that only grants an organization role.',
         )}
-        tooltipEnd
-        alignMiddle
+        align="center"
         className="w-100"
       />
       {values.create_project !== false && (

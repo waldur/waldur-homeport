@@ -4,7 +4,8 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useForm } from 'react-final-form';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { required } from '@/core/validators';
 import { isFeatureVisible } from '@/features/connect';
 import { OpenstackFeatures } from '@/FeaturesEnums';
@@ -277,9 +278,10 @@ export const FormAbstractVolumeFields = (
             tooltipEnd
             quickAction={
               props.optional && (
-                <AwesomeCheckbox
-                  value={fieldsEnabled}
-                  onChange={toggleFields}
+                <Switch
+                  aria-label={props.typeTitle}
+                  checked={fieldsEnabled}
+                  onCheckedChange={toggleFields}
                   size="sm"
                   className="align-self-center"
                 />
@@ -300,9 +302,10 @@ export const FormAbstractVolumeFields = (
           quickAction={
             <>
               {!showTypeField && props.optional && (
-                <AwesomeCheckbox
-                  value={fieldsEnabled}
-                  onChange={toggleFields}
+                <Switch
+                  aria-label={props.sizeTitle}
+                  checked={fieldsEnabled}
+                  onCheckedChange={toggleFields}
                   size="sm"
                   className="align-self-center ms-auto"
                 />

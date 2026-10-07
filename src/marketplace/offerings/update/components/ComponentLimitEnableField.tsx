@@ -10,7 +10,7 @@ export const ComponentLimitEnableField: React.FC = () => (
     format={(v) => v !== null && typeof v != 'undefined'}
     parse={(v) => (v ? 0 : null)}
     size="sm"
-    alignMiddle
+    align="center"
     space={5}
   />
 );

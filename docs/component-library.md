@@ -29,18 +29,19 @@ See the [menus guide](menus.md) for when to use which, recipes and how the looks
 
 ### Forms and Input Components
 
-| Component                | Location                          | Description            | Key Features                                    |
-| ------------------------ | --------------------------------- | ---------------------- | ----------------------------------------------- |
-| **WizardForm**           | `src/wizard/WizardForm.tsx`       | Multi-step form wizard | Step navigation, validation, progress indicator |
-| **VStepperFormStepCard** | `src/wizard/VStepperFormStep.tsx` | Card-based form step   | Loading state, disabled state with tooltip      |
-| **AwesomeCheckbox**      | `src/core/AwesomeCheckbox.tsx`    | Enhanced checkbox      | Switch-style, tooltip support                   |
-| **SelectField**          | `src/form/SelectField.tsx`        | Dropdown selection     | Options, search, validation                     |
-| **StringField**          | `src/form/StringField.tsx`        | Text input field       | Validation, placeholder, help text              |
-| **NumberField**          | `src/form/NumberField.tsx`        | Numeric input          | Min/max validation, step control                |
-| **DateField**            | `src/form/DateField.tsx`          | Date picker            | Date selection, validation                      |
-| **FileUploadField**      | `src/form/FileUploadField.tsx`    | File upload            | Drag & drop, validation                         |
-| **MarkdownEditor**       | `src/form/MarkdownEditor.tsx`     | Markdown editor        | Preview, syntax highlighting                    |
-| **SecretField**          | `src/form/SecretField.tsx`        | Password/secret input  | Show/hide toggle, validation                    |
+| Component                     | Location                          | Description            | Key Features                                                                    |
+| ----------------------------- | --------------------------------- | ---------------------- | ------------------------------------------------------------------------------- |
+| **WizardForm**                | `src/wizard/WizardForm.tsx`       | Multi-step form wizard | Step navigation, validation, progress indicator                                 |
+| **VStepperFormStepCard**      | `src/wizard/VStepperFormStep.tsx` | Card-based form step   | Loading state, disabled state with tooltip                                      |
+| **Checkbox / Radio / Switch** | `waldur-ui`                       | Check controls         | `label`/`description`/`tooltip` props, `md`/`sm`, `checked` + `onCheckedChange` |
+| **RadioGroup**                | `waldur-ui`                       | Set of radio options   | Options in, value out; fieldset + legend, `orientation`                         |
+| **SelectField**               | `src/form/SelectField.tsx`        | Dropdown selection     | Options, search, validation                                                     |
+| **StringField**               | `src/form/StringField.tsx`        | Text input field       | Validation, placeholder, help text                                              |
+| **NumberField**               | `src/form/NumberField.tsx`        | Numeric input          | Min/max validation, step control                                                |
+| **DateField**                 | `src/form/DateField.tsx`          | Date picker            | Date selection, validation                                                      |
+| **FileUploadField**           | `src/form/FileUploadField.tsx`    | File upload            | Drag & drop, validation                                                         |
+| **MarkdownEditor**            | `src/form/MarkdownEditor.tsx`     | Markdown editor        | Preview, syntax highlighting                                                    |
+| **SecretField**               | `src/form/SecretField.tsx`        | Password/secret input  | Show/hide toggle, validation                                                    |
 
 ### Button Components
 
@@ -432,7 +433,7 @@ const FieldRow = ({ field, ...rest }) =>
   field.type === 'string' ? (
     <StringField {...rest} />
   ) : field.type === 'boolean' ? (
-    <AwesomeCheckboxField
+    <SwitchField
       label={getKeyTitle(field.key)}
       hideLabel
       className="mt-3"
@@ -456,7 +457,7 @@ const FieldRow = ({ field, ...rest }) =>
 The application supports these field types:
 
 - **`string`** - Basic text input using `StringField`
-- **`boolean`** - Checkbox using `AwesomeCheckboxField`
+- **`boolean`** - Switch using `SwitchField`
 - **`email_field`** - Email input with validation using `EmailField`
 - **`text_field`** - Multi-line text using `TextField`
 - **`integer`** - Numeric input using `NumberField`
@@ -858,7 +859,7 @@ This guards against three real failure modes that otherwise produce a "ghost" ac
 import { BooleanFilter } from '@/table';
 ```
 
-Combines `TableFilterItem` and `AwesomeCheckboxField`. Usually used with `parse={(v) => v || undefined}` to remove filter when unchecked.
+Combines `TableFilterItem` and `SwitchField`. Usually used with `parse={(v) => v || undefined}` to remove filter when unchecked.
 
 ---
 

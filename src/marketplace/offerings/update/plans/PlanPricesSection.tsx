@@ -71,10 +71,9 @@ export const PlanPricesSection: FC<PlanPricesSectionProps> = ({
         <BooleanGroup
           name="is_free"
           label={translate('This plan is free')}
-          // help_text, not description: the toggle renders its own supporting
-          // line inside the label, where ComponentPrepaidFieldGroup puts it.
-          // FormGroup's description lands under the whole control instead.
-          help_text={translate(
+          // The switch draws the description under its own label, where
+          // ComponentPrepaidFieldGroup puts it.
+          description={translate(
             'Customers can order it at no cost. Nothing is charged for any component.',
           )}
           space={5}

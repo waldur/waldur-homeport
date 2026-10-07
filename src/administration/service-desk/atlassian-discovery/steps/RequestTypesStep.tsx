@@ -1,10 +1,10 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { FormCheck, Spinner, Table } from 'react-bootstrap';
+import { Spinner, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, Checkbox } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -152,8 +152,8 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
         <thead>
           <tr>
             <th style={{ width: 40 }}>
-              <FormCheck
-                type="checkbox"
+              <Checkbox
+                aria-label={translate('Select all')}
                 checked={selectedCount === values.requestTypes.length}
                 onChange={toggleAll}
               />
@@ -171,12 +171,15 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
               onClick={() => toggleSelection(rt.id)}
             >
               <td>
-                <FormCheck
-                  type="checkbox"
+                <Checkbox
+                  aria-label={rt.name}
                   checked={(values.selectedRequestTypeIds || []).includes(
                     rt.id,
                   )}
                   onChange={() => toggleSelection(rt.id)}
+                  // The row toggles on click too; without this a click on
+                  // the box toggles twice and nothing changes.
+                  onClick={(e) => e.stopPropagation()}
                 />
               </td>
               <td className="fw-bold">{rt.name}</td>

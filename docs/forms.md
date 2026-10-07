@@ -26,12 +26,16 @@ import { SubmitButton, StringGroup } from '@/form';
   onSubmit={onSubmit}
   render={({ handleSubmit, submitting, invalid }) => (
     <form onSubmit={handleSubmit}>
-      <StringGroup name="organization" label={translate('Organization')} required />
+      <StringGroup
+        name="organization"
+        label={translate('Organization')}
+        required
+      />
       <StringGroup name="name" label={translate('Name')} required />
       <SubmitButton submitting={submitting} disabled={invalid} />
     </form>
   )}
-/>
+/>;
 ```
 
 ## Autonomous Field Group Architecture (*Group Pattern)
@@ -63,7 +67,7 @@ import { translate } from '@/i18n';
     validate={validateProjectName}
     maxLength={150}
   />
-</FormGroup>
+</FormGroup>;
 ```
 
 ### ✅ Good Example: Autonomous Group (Modern)
@@ -80,7 +84,7 @@ import { translate } from '@/i18n';
   required
   validate={validateProjectName}
   maxLength={150}
-/>
+/>;
 ```
 
 ### Rationale & Benefits
@@ -145,16 +149,17 @@ For details / settings panels that show a value with an inline edit affordance, 
 
 Each base field control has three siblings:
 
-| Base Control           | Form Group (`withFormGroup`) | Edit Field (`withEditField`) | Table Filter (`withTableFilter`) |
-| ---------------------- | ---------------------------- | ---------------------------- | --------------------------------- |
-| `StringField`          | `StringGroup`                | `StringEditField`            | `StringFilter`                    |
-| `SelectField`          | `SelectGroup`                | `SelectEditField`            | `SelectFilter`                    |
-| `NumberField`          | `NumberGroup`                | `NumberEditField`            | `NumberFilter`                    |
-| `SecretField`          | `SecretGroup`                | `SecretEditField`            | —                                 |
-| `EmailField`           | `EmailGroup`                 | `EmailEditField`             | —                                 |
-| `AwesomeCheckboxField` | `BooleanGroup`               | `BooleanEditField`           | `BooleanFilter`                   |
-| `DateField`            | `DateGroup`                  | `DateEditField`              | —                                 |
-| `MarkdownEditor`       | `MarkdownGroup`              | `MarkdownEditField`          | —                                 |
+| Base Control      | Form Group (`withFormGroup`) | Edit Field (`withEditField`) | Table Filter (`withTableFilter`) |
+| ----------------- | ---------------------------- | ---------------------------- | -------------------------------- |
+| `StringField`     | `StringGroup`                | `StringEditField`            | `StringFilter`                   |
+| `SelectField`     | `SelectGroup`                | `SelectEditField`            | `SelectFilter`                   |
+| `NumberField`     | `NumberGroup`                | `NumberEditField`            | `NumberFilter`                   |
+| `SecretField`     | `SecretGroup`                | `SecretEditField`            | —                                |
+| `EmailField`      | `EmailGroup`                 | `EmailEditField`             | —                                |
+| `SwitchField`     | `BooleanGroup`               | `BooleanEditField`           | `BooleanFilter`                  |
+| `RadioGroupField` | `RadioGroup`                 | —                            | —                                |
+| `DateField`       | `DateGroup`                  | `DateEditField`              | —                                |
+| `MarkdownEditor`  | `MarkdownGroup`              | `MarkdownEditField`          | —                                |
 
 Exports live in `@/form/editFields`. To make a custom field editable, run the base component through the HOC:
 
@@ -198,7 +203,7 @@ import FormTable from '@/form/FormTable';
       hideLabel
     />
   </FormTable>
-</EditFieldProvider>
+</EditFieldProvider>;
 ```
 
 ### Callback contract
@@ -237,8 +242,16 @@ import { StringEditField, SecretEditField } from '@/form/editFields';
 
 export const MyPluginCredentialsSection = (props) => (
   <BaseCredentialsSection {...props}>
-    <StringEditField name="service_attributes.api_url" label={translate('API URL')} required />
-    <SecretEditField name="secret_options.api_token" label={translate('API token')} required />
+    <StringEditField
+      name="service_attributes.api_url"
+      label={translate('API URL')}
+      required
+    />
+    <SecretEditField
+      name="secret_options.api_token"
+      label={translate('API token')}
+      required
+    />
   </BaseCredentialsSection>
 );
 ```
@@ -461,15 +474,13 @@ import { ModalDialog } from '@/modal/ModalDialog';
     <form onSubmit={handleSubmit}>
       <ModalDialog
         title={translate('New Project')}
-        footer={
-          <SubmitButton submitting={submitting} disabled={invalid} />
-        }
+        footer={<SubmitButton submitting={submitting} disabled={invalid} />}
       >
         <ResourceForm />
       </ModalDialog>
     </form>
   )}
-/>
+/>;
 ```
 
 ## Advanced Tooling
@@ -489,7 +500,7 @@ import { DirtyStateReporter } from '@/core/DirtyFormContext';
       <StringGroup name="name" label={translate('Name')} />
     </form>
   )}
-/>
+/>;
 ```
 
 ## Tabbed Sections (`TabbedSection`)
@@ -499,13 +510,21 @@ When building complex forms with many fields, use the `TabbedSection` component 
 ### Example Usage
 
 ```tsx
-import { EditFieldProvider, StringEditField, BooleanEditField } from '@/form/editFields';
+import {
+  EditFieldProvider,
+  StringEditField,
+  BooleanEditField,
+} from '@/form/editFields';
 import { TabbedSection } from '@/form/TabbedSection';
 import { translate } from '@/i18n';
 
 export const MySettingsPanel = ({ settings, update, canUpdate }) => (
   <EditFieldProvider scope={settings} callback={update}>
-    <TabbedSection title={translate('Settings')} enableSearch hideActions={!canUpdate}>
+    <TabbedSection
+      title={translate('Settings')}
+      enableSearch
+      hideActions={!canUpdate}
+    >
       <TabbedSection.Tab id="general" title={translate('General')}>
         <StringEditField name="name" label={translate('Name')} />
         <BooleanEditField name="is_active" label={translate('Active')} />

@@ -4,7 +4,7 @@ import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, SelectOption } from 'waldur-ui';
 
 import { WindowedSelect } from '@/form/select';
 import { translate } from '@/i18n';
@@ -52,7 +52,7 @@ const Control = (props) => (
 );
 
 const ListOption: FC<OptionProps & { remove }> = (props) => (
-  <components.Option {...props}>
+  <SelectOption {...props}>
     <div className="d-flex justify-content-between align-items-center">
       {props.children}
       <BaseButton
@@ -64,7 +64,7 @@ const ListOption: FC<OptionProps & { remove }> = (props) => (
         size="sm"
       />
     </div>
-  </components.Option>
+  </SelectOption>
 );
 
 interface SavedFilterSelectProps {

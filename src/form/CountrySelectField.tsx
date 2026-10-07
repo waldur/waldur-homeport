@@ -3,6 +3,8 @@ import { FC } from 'react';
 import { components } from 'react-select';
 import { customersCountriesList } from 'waldur-js-client';
 
+import { SelectOption } from 'waldur-ui';
+
 import { STALE_TIME } from '@/core/constants';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 
@@ -21,9 +23,9 @@ const CountryRenderer = ({ value, label }: CountryOption) => (
 );
 
 const Option: FC<any> = (props) => (
-  <components.Option {...props}>
+  <SelectOption {...props}>
     <CountryRenderer {...props.data} />
-  </components.Option>
+  </SelectOption>
 );
 
 const SingleValue: FC<any> = (props) => (

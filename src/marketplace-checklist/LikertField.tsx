@@ -1,5 +1,6 @@
 import { FC, useMemo } from 'react';
-import { Form } from 'react-bootstrap';
+
+import { Radio } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -75,16 +76,15 @@ export const LikertField: FC<LikertFieldProps> = ({
       aria-disabled={disabled || undefined}
     >
       {options.map((opt) => (
-        <Form.Check
-          key={String(opt.value)}
-          type="radio"
+        <Radio
           id={`${input.name}-${opt.value}`}
           name={input.name}
           checked={input.value === opt.value}
           onChange={() => input.onChange(opt.value)}
-          label={opt.label}
           readOnly={disabled}
           tabIndex={disabled ? -1 : undefined}
+          key={String(opt.value)}
+          label={opt.label}
         />
       ))}
     </div>

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Checkbox } from 'waldur-ui';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 import { SelectField } from '@/form';
 import { FormGroup } from '@/form';
 import { translate } from '@/i18n';
@@ -123,8 +122,7 @@ export const K8sKubernetesConfigSection: React.FC<
         )}
 
         <FormGroup space={5}>
-          <AwesomeCheckbox
-            type="checkbox"
+          <Checkbox
             label={translate('Install Longhorn distributed storage')}
             description={
               longhornDescription ||
@@ -133,23 +131,22 @@ export const K8sKubernetesConfigSection: React.FC<
               )
             }
             id="install-longhorn"
-            value={installLonghorn}
-            onChange={onLonghornChange}
+            checked={installLonghorn}
+            onCheckedChange={onLonghornChange}
           />
         </FormGroup>
 
         {getLoadBalancerMode(defaultConfigs) === 'optional' &&
           onLoadBalancerChange && (
             <FormGroup space={5}>
-              <AwesomeCheckbox
-                type="checkbox"
+              <Checkbox
                 label={translate('Include load balancer nodes')}
                 description={translate(
                   'Add dedicated load balancer nodes for ingress and service exposure.',
                 )}
                 id="include-load-balancer"
-                value={loadBalancer}
-                onChange={onLoadBalancerChange}
+                checked={loadBalancer}
+                onCheckedChange={onLoadBalancerChange}
               />
             </FormGroup>
           )}

@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
-import { Form } from 'react-bootstrap';
+
+import { Checkbox } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { Panel } from '@/core/Panel';
@@ -33,9 +34,8 @@ export const DangerActionPanel: FC<DangerActionPanelProps> = (props) => {
       }
     >
       {props.panelDescription}
-      <Form.Check
+      <Checkbox
         id="confirm-deletion"
-        type="checkbox"
         checked={confirm}
         onChange={(value) => setConfirm(value.target.checked)}
         label={props.checkboxLabel}

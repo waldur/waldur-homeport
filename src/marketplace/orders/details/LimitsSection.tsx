@@ -1,14 +1,14 @@
 import { PencilSimpleIcon, XIcon } from '@phosphor-icons/react';
 import { isEmpty } from 'lodash-es';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Card, FormCheck, Stack } from 'react-bootstrap';
+import { Card, Stack } from 'react-bootstrap';
 import {
   OrderDetails,
   PublicOfferingDetails,
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { BaseButton, Menu } from 'waldur-ui';
+import { BaseButton, Checkbox, Menu } from 'waldur-ui';
 
 import { EditAction } from '@/form/EditAction';
 import { translate } from '@/i18n';
@@ -157,10 +157,10 @@ export const LimitsSection = ({
                     paddingRight: 0,
                   }}
                 >
-                  <FormCheck
+                  <Checkbox
                     ref={headerCheckRef}
                     data-testid="select-all"
-                    className="form-check form-check-custom form-check-md"
+                    aria-label={translate('Select all components')}
                     checked={isAllSelected}
                     onChange={toggleAll}
                   />
@@ -180,8 +180,8 @@ export const LimitsSection = ({
               <tr key={id}>
                 {editable && (
                   <td style={{ paddingLeft: '16px', paddingRight: 0 }}>
-                    <FormCheck
-                      className="form-check form-check-custom form-check-md"
+                    <Checkbox
+                      aria-label={component.name}
                       checked={selected.includes(component.type)}
                       onChange={() => toggleOne(component.type)}
                     />

@@ -2,7 +2,8 @@ import { FC, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import { paymentProfilesCreate, paymentProfilesEnable } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Checkbox } from 'waldur-ui';
+
 import { getPaymentProfileTypeOptions } from '@/customer/payment-profiles/utils';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -79,9 +80,9 @@ export const PaymentProfileCreateDialog: FC<any> = (props) => {
             <Field
               name="enabled"
               render={({ input }) => (
-                <AwesomeCheckbox
-                  {...input}
-                  type="checkbox"
+                <Checkbox
+                  checked={!!input.value}
+                  onCheckedChange={input.onChange}
                   id="payment-profile-enabled"
                   label={translate('Enable profile after creation')}
                 />

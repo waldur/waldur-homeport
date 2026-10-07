@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
 import { MatrixRoom, matrixRoomsDisable } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Switch } from 'waldur-ui';
+
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -56,10 +57,10 @@ export const DisableChatRoomDialog: FC<DisableChatRoomDialogProps> = ({
           { name: resolve.room.room_name },
         )}
       </p>
-      <AwesomeCheckbox
+      <Switch
         label={translate('Also delete chat history exports')}
-        value={deleteHistory}
-        onChange={setDeleteHistory}
+        checked={deleteHistory}
+        onCheckedChange={setDeleteHistory}
       />
     </ModalDialog>
   );

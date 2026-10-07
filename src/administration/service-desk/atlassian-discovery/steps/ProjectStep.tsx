@@ -1,10 +1,10 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useState, useEffect } from 'react';
-import { Card, FormCheck, Spinner } from 'react-bootstrap';
+import { Card, Spinner } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverProjects } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, Radio } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -141,9 +141,9 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
             >
               <Card.Body>
                 <div className="d-flex align-items-start">
-                  <FormCheck
-                    type="radio"
+                  <Radio
                     className="me-3"
+                    aria-label={project.name}
                     checked={values.selectedProjectId === project.id}
                     onChange={() =>
                       form.change('selectedProjectId', project.id)

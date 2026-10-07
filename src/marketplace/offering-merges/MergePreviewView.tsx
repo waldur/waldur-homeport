@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import { Form } from 'react-bootstrap';
 import {
   OfferingMergeIssue,
   OfferingMergePreview,
   OfferingMergeStateEnum,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Checkbox } from 'waldur-ui';
 
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
@@ -121,14 +120,13 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
                 }
                 body={
                   onAcknowledge ? (
-                    <Form.Check
-                      type="checkbox"
+                    <Checkbox
                       id={`${tableId}-ack-${warning.code}`}
-                      label={translate('I understand the consequences.')}
                       checked={acknowledged?.includes(warning.code) ?? false}
                       onChange={(event) =>
                         onAcknowledge(warning.code, event.target.checked)
                       }
+                      label={translate('I understand the consequences.')}
                     />
                   ) : undefined
                 }

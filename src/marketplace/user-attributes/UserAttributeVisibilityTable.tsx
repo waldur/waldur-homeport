@@ -6,9 +6,9 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
 import { isFeatureVisible } from '@/features/connect';
-import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { FieldEditButton } from '@/form/FieldEditButton';
 import FormTable from '@/form/FormTable';
+import { SwitchField } from '@/form/SwitchField';
 import { translate } from '@/i18n';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 import { useUser } from '@/workspace/hooks';
@@ -96,7 +96,7 @@ export const UserAttributeVisibilityTable: FC<
                     scope={config}
                     name={field.key}
                     callback={update}
-                    fieldComponent={AwesomeCheckboxField}
+                    fieldComponent={SwitchField}
                     hideLabel={field.hideLabel}
                   />
                 </>
