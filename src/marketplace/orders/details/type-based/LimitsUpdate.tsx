@@ -1,7 +1,6 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -94,9 +93,7 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
             render: ({ row }) => (
               <>
                 {row.name}
-                <Tooltip label={row.type}>
-                  <QuestionIcon weight="bold" className="ms-1" />
-                </Tooltip>
+                <HelpIcon label={row.type} className="ms-1" />
               </>
             ),
             className: 'text-nowrap',

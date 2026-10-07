@@ -1,9 +1,8 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, ReactNode } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 export interface ReadOnlyChildProps {
   input: {
@@ -67,9 +66,7 @@ export const ReadOnlyFormControl: FunctionComponent<
   const labelNode = tooltip ? (
     <div className="d-flex justify-content-between flex-grow-1">
       <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>
-      <Tooltip label={tooltip} side="left">
-        <QuestionIcon size={20} weight="bold" className="text-gray-500" />
-      </Tooltip>
+      <HelpIcon label={tooltip} side="left" size={20} />
     </div>
   ) : (
     <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>

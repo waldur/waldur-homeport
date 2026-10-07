@@ -182,8 +182,9 @@ describe('CallEligibilitySection', () => {
         // eslint-disable-next-line testing-library/no-node-access
         .closest('tr') as HTMLElement;
       expect(row).toBeInTheDocument();
-      // eslint-disable-next-line testing-library/no-node-access
-      expect(row.querySelector('.text-warning')).toBeInTheDocument();
+      expect(
+        within(row).getByRole('button', { name: 'Warning' }),
+      ).toBeInTheDocument();
     });
 
     it('always offers email patterns, since email is a core attribute', () => {

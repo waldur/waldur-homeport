@@ -6,10 +6,9 @@ import {
   OpenstackTenantsSetQuotasData,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, WarningTip } from 'waldur-ui';
 
 import { DirtyStateReporter } from '@/core/DirtyFormContext';
-import { WarnTip } from '@/core/WarnTip';
 import { NumberField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
@@ -307,11 +306,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
   // Marketplace-managed badge: canonical WarnTip after the label
   const marketplaceIcon = row.marketplaceManaged ? (
     <span data-testid={`marketplace-managed-${row.name}`}>
-      <WarnTip
-        id={`marketplace-managed-${row.name}`}
-        label={MARKETPLACE_MANAGED_TOOLTIP}
-        hasSpace
-      />
+      <WarningTip label={MARKETPLACE_MANAGED_TOOLTIP} className="ms-1" />
     </span>
   ) : null;
 

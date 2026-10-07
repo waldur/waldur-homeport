@@ -1,4 +1,3 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   OnboardingVerification,
@@ -6,7 +5,7 @@ import {
   OnboardingVerificationStatusEnum,
 } from 'waldur-js-client';
 
-import { BadgeVariant, Tooltip } from 'waldur-ui';
+import { BadgeVariant, HelpIcon } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -85,9 +84,7 @@ export const getOnboardingVerificationColumns = (options?: {
         <>
           <BooleanField value={row.can_customer_be_created} />
           {row.customer_creation_error_message && (
-            <Tooltip label={row.customer_creation_error_message}>
-              <QuestionIcon weight="bold" />
-            </Tooltip>
+            <HelpIcon label={row.customer_creation_error_message} />
           )}
         </>
       ),

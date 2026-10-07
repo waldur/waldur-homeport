@@ -1,4 +1,3 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import {
@@ -7,7 +6,7 @@ import {
   anonymousChatInteractionsKpiRetrieve,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatUsageValue } from '@/core/formatNumber';
@@ -142,13 +141,11 @@ export const AnonymousChatPanel: FunctionComponent = () => {
               label: (
                 <>
                   {translate('Click-through')}{' '}
-                  <Tooltip
+                  <HelpIcon
                     label={translate(
                       'Offering links opened ÷ interactions. Repeat clicks on the same offering count separately, so this can exceed 100%. Only links the assistant is recorded as having shown are counted.',
                     )}
-                  >
-                    <QuestionIcon weight="bold" />
-                  </Tooltip>
+                  />
                 </>
               ),
               value: asPercent(kpi.click_through_rate),
@@ -157,7 +154,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
               label: (
                 <>
                   {translate('Clarification')}{' '}
-                  <Tooltip
+                  <HelpIcon
                     label={translate(
                       'Interactions where the assistant asked a clarifying question instead of recommending — {count} of {total}.',
                       {
@@ -166,9 +163,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
                         total: kpi.interactions_total.toLocaleString(),
                       },
                     )}
-                  >
-                    <QuestionIcon weight="bold" />
-                  </Tooltip>
+                  />
                 </>
               ),
               value: asPercent(kpi.clarification_rate),
@@ -180,14 +175,12 @@ export const AnonymousChatPanel: FunctionComponent = () => {
               label: (
                 <>
                   {translate('Tokens')}{' '}
-                  <Tooltip
+                  <HelpIcon
                     label={translate('{input} input / {output} output', {
                       input: formatUsageValue(kpi.input_tokens_total),
                       output: formatUsageValue(kpi.output_tokens_total),
                     })}
-                  >
-                    <QuestionIcon weight="bold" />
-                  </Tooltip>
+                  />
                 </>
               ),
               value: formatUsageValue(
@@ -214,14 +207,12 @@ export const AnonymousChatPanel: FunctionComponent = () => {
         label: (
           <>
             {translate('Reviewed')}{' '}
-            <Tooltip
+            <HelpIcon
               label={translate(
                 'Threads carrying an LLM judge verdict ({coverage} of all threads). The nightly pass only picks up threads idle for 6+ hours, so the newest ones are always unjudged — but a count stuck at zero means review is switched off or failing.',
                 { coverage: asPercent(kpi.review_coverage) },
               )}
-            >
-              <QuestionIcon weight="bold" />
-            </Tooltip>
+            />
           </>
         ),
         value: kpi.reviewed_total.toLocaleString(),
@@ -230,13 +221,11 @@ export const AnonymousChatPanel: FunctionComponent = () => {
         label: (
           <>
             {translate('Avg resolution')}{' '}
-            <Tooltip
+            <HelpIcon
               label={translate(
                 "The judge's 1–5 rating of how well the assistant resolved the visitor's request, averaged over judged threads only.",
               )}
-            >
-              <QuestionIcon weight="bold" />
-            </Tooltip>
+            />
           </>
         ),
         value:
@@ -248,13 +237,11 @@ export const AnonymousChatPanel: FunctionComponent = () => {
         label: (
           <>
             {translate('Hallucinations')}{' '}
-            <Tooltip
+            <HelpIcon
               label={translate(
                 'Share of judged threads where the judge flagged a claim the tool results did not support. Expand a thread to read what it caught.',
               )}
-            >
-              <QuestionIcon weight="bold" />
-            </Tooltip>
+            />
           </>
         ),
         value: asPercent(kpi.hallucination_rate),
@@ -263,7 +250,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
         label: (
           <>
             {translate('Top intent')}{' '}
-            <Tooltip
+            <HelpIcon
               label={
                 topIntent
                   ? translate(
@@ -275,9 +262,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
                     )
                   : translate('No threads have been judged yet.')
               }
-            >
-              <QuestionIcon weight="bold" />
-            </Tooltip>
+            />
           </>
         ),
         value: topIntent ? topIntent[0] : translate('N/A'),
@@ -286,14 +271,12 @@ export const AnonymousChatPanel: FunctionComponent = () => {
         label: (
           <>
             {translate('Review tokens')}{' '}
-            <Tooltip
+            <HelpIcon
               label={translate('{input} input / {output} output', {
                 input: formatUsageValue(kpi.review_input_tokens_total),
                 output: formatUsageValue(kpi.review_output_tokens_total),
               })}
-            >
-              <QuestionIcon weight="bold" />
-            </Tooltip>
+            />
           </>
         ),
         value: formatUsageValue(

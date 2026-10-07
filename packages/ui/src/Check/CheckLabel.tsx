@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
 import { cn } from '../cn';
+import { HelpIcon } from '../HelpIcon';
 
-import { CheckHelp } from './CheckHelp';
 import { CheckSize } from './checkStyles';
 
 /** The label props every check control (Checkbox, Radio, Switch) takes. */
@@ -93,7 +93,7 @@ export function CheckLabel({
                 {label}
               </label>
             )}
-            {tooltip && <CheckHelp tooltip={tooltip} />}
+            {tooltip && <HelpIcon label={tooltip} />}
           </div>
         )}
         {description && (

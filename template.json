@@ -11828,7 +11828,6 @@
   },
   "Confirmed amount from Arrow billing export. Empty until reconciliation is run.": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -25682,7 +25681,6 @@
   },
   "Interactions where the assistant asked a clarifying question instead of recommending — {count} of {total}.": {
     "context": {
-      "primary_ui_type": "label",
       "variables": {
         "count": {
           "type": "number"
@@ -34076,7 +34074,6 @@
   },
   "No threads have been judged yet.": {
     "context": {
-      "primary_ui_type": "label",
       "feature_area": "ai-assistant"
     }
   },
@@ -35375,7 +35372,6 @@
   },
   "Offering links opened ÷ interactions. Repeat clicks on the same offering count separately, so this can exceed 100%. Only links the assistant is recorded as having shown are counted.": {
     "context": {
-      "primary_ui_type": "label",
       "feature_area": "ai-assistant"
     }
   },
@@ -38583,7 +38579,6 @@
   },
   "Pending: provisional amount from Arrow API. Finalized: confirmed by billing export. Reconciled: adjustment applied if final differs from consumed.": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "consumption"
     }
   },
@@ -52114,7 +52109,6 @@
   },
   "Share of judged threads where the judge flagged a claim the tool results did not support. Expand a thread to read what it caught.": {
     "context": {
-      "primary_ui_type": "label",
       "feature_area": "ai-assistant"
     }
   },
@@ -52655,7 +52649,6 @@
   },
   "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.": {
     "context": {
-      "primary_ui_type": "title",
       "feature_area": "organizations"
     }
   },
@@ -56326,7 +56319,6 @@
   },
   "The judge's 1–5 rating of how well the assistant resolved the visitor's request, averaged over judged threads only.": {
     "context": {
-      "primary_ui_type": "label",
       "feature_area": "ai-assistant"
     }
   },
@@ -58528,7 +58520,6 @@
   },
   "Threads carrying an LLM judge verdict ({coverage} of all threads). The nightly pass only picks up threads idle for 6+ hours, so the newest ones are always unjudged — but a count stuck at zero means review is switched off or failing.": {
     "context": {
-      "primary_ui_type": "label",
       "variables": {
         "coverage": {
           "type": "unknown"
@@ -73402,7 +73393,6 @@
   },
   "{count} of {reviewed} judged threads. Categories are derived from the marketplace catalog, so the set differs between deployments.": {
     "context": {
-      "primary_ui_type": "label",
       "variables": {
         "count": {
           "type": "number"
@@ -74505,7 +74495,6 @@
   },
   "{input} input / {output} output": {
     "context": {
-      "primary_ui_type": "label",
       "variables": {
         "input": {
           "type": "unknown"

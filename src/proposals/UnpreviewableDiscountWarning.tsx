@@ -1,7 +1,6 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { WarningTip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -35,13 +34,5 @@ export const UnpreviewableDiscountWarning: FC<
     { components: affected.join(', ') },
   );
 
-  return (
-    <Tooltip label={message}>
-      {/* The icon is the only thing carrying this warning, so it needs a name
-              of its own — a tooltip alone never reaches a screen reader. */}
-      <span role="img" aria-label={message}>
-        <WarningCircleIcon weight="bold" className="text-warning" />
-      </span>
-    </Tooltip>
-  );
+  return <WarningTip label={message} aria-label={message} />;
 };

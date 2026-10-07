@@ -3,14 +3,13 @@ import {
   CubeIcon,
   FlagIcon,
   ListBulletsIcon,
-  QuestionIcon,
 } from '@phosphor-icons/react';
 import { FC, useMemo, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { ProjectMetric, ResourceMetric } from 'waldur-js-client';
 
 import { getCssVar } from 'waldur-design-tokens';
-import { Badge, BaseButton, Tooltip } from 'waldur-ui';
+import { Badge, BaseButton, HelpIcon, Tooltip } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -275,22 +274,20 @@ export const MetricCard: FC<{
       cardTitle={
         <>
           {metric.name}{' '}
-          <Tooltip
+          <HelpIcon
             label={translate('Reported by {offering}', {
               offering: metric.offering_name,
             })}
-            body={
-              isCounter
+            tooltipProps={{
+              body: isCounter
                 ? translate('The figure is the total for {period}.', {
                     period: period?.toLowerCase(),
                   })
                 : translate('The figure is the latest level in {period}.', {
                     period: period?.toLowerCase(),
-                  })
-            }
-          >
-            <QuestionIcon weight="bold" className="text-muted" />
-          </Tooltip>
+                  }),
+            }}
+          />
         </>
       }
       title={formatFigure(item.current, metric.unit)}

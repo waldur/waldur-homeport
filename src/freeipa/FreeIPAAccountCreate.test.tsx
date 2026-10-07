@@ -34,7 +34,7 @@ describe('FreeIPAAccountCreate', () => {
 
     expect(screen.getByText('Username')).toBeInTheDocument();
     expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /create/i })).toBeInTheDocument();
   });
 
   it('should initialize with fixed username', () => {
@@ -61,7 +61,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     const usernameInput = screen.getByLabelText(/Username/i);
-    const submitButton = screen.getByRole('button');
+    const submitButton = screen.getByRole('button', { name: /create/i });
 
     // Clear the input to test validation
     await userEvent.clear(usernameInput);
@@ -76,7 +76,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     const usernameInput = screen.getByLabelText(/Username/i);
-    const submitButton = screen.getByRole('button');
+    const submitButton = screen.getByRole('button', { name: /create/i });
 
     // Test invalid username pattern
     await userEvent.clear(usernameInput);
@@ -94,7 +94,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     const usernameInput = screen.getByLabelText(/Username/i);
-    const submitButton = screen.getByRole('button');
+    const submitButton = screen.getByRole('button', { name: /create/i });
 
     // Test username too short
     await userEvent.clear(usernameInput);
@@ -112,7 +112,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     const usernameInput = screen.getByLabelText(/Username/i);
-    const submitButton = screen.getByRole('button');
+    const submitButton = screen.getByRole('button', { name: /create/i });
 
     // Test username too long (32 - 5 prefix = 27 max, so 28 should fail)
     const longUsername = 'a'.repeat(28);
@@ -137,7 +137,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     const usernameInput = screen.getByLabelText(/Username/i);
-    const submitButton = screen.getByRole('button');
+    const submitButton = screen.getByRole('button', { name: /create/i });
 
     // Enter valid username
     await userEvent.clear(usernameInput);
@@ -161,7 +161,7 @@ describe('FreeIPAAccountCreate', () => {
     renderComponent();
 
     const usernameInput = screen.getByLabelText(/Username/i);
-    const submitButton = screen.getByRole('button');
+    const submitButton = screen.getByRole('button', { name: /create/i });
 
     // Enter valid username
     await userEvent.clear(usernameInput);

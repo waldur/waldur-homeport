@@ -14,6 +14,7 @@ import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
+import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
@@ -42,6 +43,7 @@ export default {
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,
     'no-bootstrap-form-check': noBootstrapFormCheck,
+    'no-tooltip-on-bare-icon': noTooltipOnBareIcon,
     'check-needs-accessible-name': checkNeedsAccessibleName,
     'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
     'prefer-classnames-utility': preferClassnamesUtility,

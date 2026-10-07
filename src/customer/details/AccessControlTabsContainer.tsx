@@ -1,8 +1,7 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { PermissionEnum } from '@/permissions/enums';
@@ -70,13 +69,7 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
                   <Nav.Link as="button" eventKey={tab.key}>
                     {tab.title}
                     {tab.tooltip && (
-                      <Tooltip label={tab.tooltip}>
-                        <QuestionIcon
-                          size={16}
-                          weight="bold"
-                          className="ms-2 text-muted"
-                        />
-                      </Tooltip>
+                      <HelpIcon label={tab.tooltip} className="ms-2" />
                     )}
                   </Nav.Link>
                 </Nav.Item>

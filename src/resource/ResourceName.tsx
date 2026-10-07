@@ -1,6 +1,4 @@
-import { WarningIcon } from '@phosphor-icons/react';
-
-import { Tooltip } from 'waldur-ui';
+import { WarningTip } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -22,11 +20,10 @@ interface ResourceNameProps {
 
 const ResourceWarning = (props: ResourceNameProps) =>
   props.resource.is_link_valid === false ? (
-    <Tooltip
+    <WarningTip
       label={translate('Provider does not comply with project policies')}
-    >
-      <WarningIcon className="text-muted ms-1" weight="bold" />
-    </Tooltip>
+      className="ms-1"
+    />
   ) : null;
 
 export const ResourceName = (props: ResourceNameProps) =>

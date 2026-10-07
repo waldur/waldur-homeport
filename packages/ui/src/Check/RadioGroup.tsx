@@ -1,8 +1,8 @@
 import { FocusEventHandler, ReactNode, useId } from 'react';
 
 import { cn } from '../cn';
+import { HelpIcon } from '../HelpIcon';
 
-import { CheckHelp } from './CheckHelp';
 import { CheckSize } from './checkStyles';
 import { Radio } from './Radio';
 
@@ -93,7 +93,7 @@ export function RadioGroup<T extends RadioValue = string>({
                 </span>
               )}
             </span>
-            {tooltip && <CheckHelp tooltip={tooltip} />}
+            {tooltip && <HelpIcon label={tooltip} />}
           </div>
         </legend>
       )}

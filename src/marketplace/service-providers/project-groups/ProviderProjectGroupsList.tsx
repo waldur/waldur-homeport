@@ -1,8 +1,4 @@
-import {
-  ArrowsClockwiseIcon,
-  QuestionIcon,
-  UploadSimpleIcon,
-} from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon, UploadSimpleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import {
   marketplaceServiceProviderProjectGroupsList,
@@ -11,7 +7,7 @@ import {
   User,
 } from 'waldur-js-client';
 
-import { Badge, Tooltip } from 'waldur-ui';
+import { Badge, HelpIcon } from 'waldur-ui';
 
 import { CreateModalButton } from '@/core/buttons';
 import { formatDateTime } from '@/core/dateUtils';
@@ -225,19 +221,7 @@ const ProjectGroupsTable: FC<{ provider: ServiceProvider }> = ({
           row.gid == null ? (
             <span className="d-inline-flex align-items-center gap-1 text-muted">
               {translate('Not assigned')}
-              {/* A button, so the explanation is reachable by keyboard. */}
-              <Tooltip
-                id={`project-group-gid-${row.uuid}`}
-                label={NO_GID_EXPLANATION()}
-              >
-                <button
-                  type="button"
-                  className="text-anchor text-muted d-inline-flex"
-                  aria-label={NO_GID_EXPLANATION()}
-                >
-                  <QuestionIcon size={14} weight="bold" />
-                </button>
-              </Tooltip>
+              <HelpIcon label={NO_GID_EXPLANATION()} size={14} />
             </span>
           ) : (
             <>{row.gid}</>

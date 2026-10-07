@@ -206,6 +206,9 @@ export default tseslint
         // Checkbox/Radio/Switch, and the .form-check styles are deleted.
         'waldur-custom/no-bootstrap-form-check': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
+        // Existing call sites are migrated to HelpIcon incrementally; promote to
+        // 'error' once the count is zero.
+        'waldur-custom/no-tooltip-on-bare-icon': 'warn',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',

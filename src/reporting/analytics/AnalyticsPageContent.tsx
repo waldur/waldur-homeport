@@ -1,8 +1,7 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { AnalyticsCapability, AnalyticsMode, DrillDownDataItem } from './types';
 import { WhatIfSimulator } from './WhatIfSimulator';
@@ -50,9 +49,7 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
                     className="d-flex align-items-center gap-2"
                   >
                     {config.label}
-                    <Tooltip label={config.description}>
-                      <QuestionIcon size={16} weight="bold" />
-                    </Tooltip>
+                    <HelpIcon label={config.description} />
                   </Nav.Link>
                 </Nav.Item>
               );

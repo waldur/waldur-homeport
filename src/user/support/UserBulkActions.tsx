@@ -1,12 +1,7 @@
-import {
-  CheckIcon,
-  ProhibitIcon,
-  QuestionIcon,
-  SpinnerIcon,
-} from '@phosphor-icons/react';
+import { CheckIcon, ProhibitIcon, SpinnerIcon } from '@phosphor-icons/react';
 import { User, usersPartialUpdate } from 'waldur-js-client';
 
-import { Menu, Tooltip } from 'waldur-ui';
+import { HelpIcon, Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useBatchMutation } from '@/modal/useBatchMutation';
@@ -78,15 +73,9 @@ export const UserBulkActions = ({
         }
         trailing={
           inactiveUsers.length === 0 ? (
-            <Tooltip
+            <HelpIcon
               label={translate('None of the selected users are inactive.')}
-            >
-              <QuestionIcon
-                size={16}
-                weight="bold"
-                className="text-[var(--menu-item-muted-text)]"
-              />
-            </Tooltip>
+            />
           ) : undefined
         }
         onSelect={() => activate()}
@@ -104,15 +93,9 @@ export const UserBulkActions = ({
         }
         trailing={
           activeUsers.length === 0 ? (
-            <Tooltip
+            <HelpIcon
               label={translate('None of the selected users are active.')}
-            >
-              <QuestionIcon
-                size={16}
-                weight="bold"
-                className="text-[var(--menu-item-muted-text)]"
-              />
-            </Tooltip>
+            />
           ) : undefined
         }
         onSelect={() => deactivate()}

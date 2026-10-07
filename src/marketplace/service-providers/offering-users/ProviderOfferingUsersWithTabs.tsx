@@ -1,7 +1,6 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo, useState } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
@@ -42,12 +41,10 @@ const ProviderOfferingUsersListTab = ({ portal, provider }) => {
 
 // The difference between the tabs is told on the tabs themselves, so the card
 // header stays free for the toolbar.
-const tabTitle = (id: string, title: string, help: string) => (
+const tabTitle = (title: string, help: string) => (
   <span className="d-inline-flex align-items-center gap-1">
     {title}
-    <Tooltip id={id} label={help}>
-      <QuestionIcon size={14} weight="bold" className="text-muted" />
-    </Tooltip>
+    <HelpIcon label={help} size={14} />
   </span>
 );
 
@@ -70,7 +67,6 @@ export const ProviderOfferingUsersWithTabs = ({ provider }) => {
       {
         key: 'users',
         title: tabTitle(
-          'offering-users-help',
           translate('Offering users'),
           translate(
             'A person’s account on one offering: one row for each offering the person uses.',
@@ -83,7 +79,6 @@ export const ProviderOfferingUsersWithTabs = ({ provider }) => {
       _tabs.push({
         key: 'provider-accounts',
         title: tabTitle(
-          'provider-accounts-help',
           translate('Provider accounts'),
           translate(
             'The one account a person has on all offerings that share accounts, with the same username, POSIX UID and home directory.',

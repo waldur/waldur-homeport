@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { Resource } from 'waldur-js-client';
 
+import { WarningTip } from 'waldur-ui';
+
 import { formatDate } from '@/core/dateUtils';
-import { WarnTip } from '@/core/WarnTip';
 import { translate } from '@/i18n';
 
 interface ResourceTerminationDateFieldProps {
@@ -22,12 +23,11 @@ export const ResourceTerminationDateField: FC<
     <>
       {format ? formatDate(terminationDate) : terminationDate}
       {row.end_date && row.end_date > terminationDate && (
-        <WarnTip
-          id={row.uuid}
+        <WarningTip
           label={translate(
             'Resource will terminate at project end as termination date exceeds project duration.',
           )}
-          hasSpace
+          className="ms-1"
         />
       )}
     </>

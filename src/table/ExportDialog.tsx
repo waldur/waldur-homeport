@@ -1,9 +1,8 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import createDecorator from 'final-form-calculate';
 import { useMemo } from 'react';
 import { Form } from 'react-final-form';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { SubmitButton, SelectGroup, BooleanGroup, RadioGroup } from '@/form';
@@ -131,7 +130,7 @@ export const ExportDialog = (props: ExportDialogProps) => {
                 label={
                   <>
                     {translate('All pages')}
-                    <Tooltip
+                    <HelpIcon
                       label={
                         values.content === 'full'
                           ? translate(
@@ -141,9 +140,9 @@ export const ExportDialog = (props: ExportDialogProps) => {
                               'Disable this to export only the rows on the current page',
                             )
                       }
-                    >
-                      <QuestionIcon size={20} weight="bold" className="ms-2" />
-                    </Tooltip>
+                      size={20}
+                      className="ms-2"
+                    />
                   </>
                 }
                 hideLabel

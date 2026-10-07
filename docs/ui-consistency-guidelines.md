@@ -683,6 +683,27 @@ import { StateIndicator } from '@/core/StateIndicator';
 > in a separate `Tooltip` — it already handles the disabled-only visibility
 > and keeps the DOM structure stable across enabled/disabled toggles.
 
+### 8.0 Icons that carry a tooltip
+
+Never wrap a bare icon in `Tooltip`: an icon is an `<svg>`, so the tooltip is
+hover-only and screen readers get nothing. Use `HelpIcon` (a "?" button) or
+`WarningTip` (warning colour) from `waldur-ui`. Both render a focusable button,
+show the tooltip on focus, and default to a translated "Help" / "Warning"
+`aria-label`:
+
+```tsx
+import { HelpIcon, WarningTip } from 'waldur-ui';
+
+<HelpIcon label={translate('Explains the field')} />
+<WarningTip label={translate('Exceeds the limit')} className="ms-1" />
+// Extra Tooltip props go in tooltipProps; pass `icon` / `weight` / `size` to vary the glyph.
+<HelpIcon label={content} tooltipProps={{ autoWidth: true }} />
+```
+
+Don't place them inside another interactive element (a button, a `<label>` of a
+check control, a select option). The lint rule
+`waldur-custom/no-tooltip-on-bare-icon` reports the bare form.
+
 ### 8.1 Usage Guidelines
 
 Use tooltips for:

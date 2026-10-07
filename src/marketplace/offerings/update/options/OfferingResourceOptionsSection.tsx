@@ -1,7 +1,6 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -18,13 +17,12 @@ export const OfferingResourceOptionsSection: FC<OfferingSectionProps> = (
       title={
         <>
           {translate('Resource options')}{' '}
-          <Tooltip
+          <HelpIcon
             label={translate(
               'If you want user to be able to modify resource options after creation, please configure options for user below',
             )}
-          >
-            <QuestionIcon size={20} weight="bold" className="text-muted" />
-          </Tooltip>
+            size={20}
+          />
         </>
       }
       verboseName={translate('resource options')}

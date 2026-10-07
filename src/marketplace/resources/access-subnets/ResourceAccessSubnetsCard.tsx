@@ -1,4 +1,3 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Card, Table as BsTable } from 'react-bootstrap';
 import {
@@ -8,7 +7,7 @@ import {
   accessSubnetsList,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 import { translate } from '@/i18n';
@@ -87,17 +86,12 @@ export const ResourceAccessSubnetsCard: FunctionComponent<
         title={
           <>
             {translate('Access subnets')}
-            <Tooltip
+            <HelpIcon
               label={translate(
                 'Defined for this organization and offering, and applied to all of its resources of that offering. Managed under the organization’s access control.',
               )}
-            >
-              <QuestionIcon
-                size={16}
-                weight="bold"
-                className="ms-2 text-muted"
-              />
-            </Tooltip>
+              className="ms-2"
+            />
           </>
         }
         columns={[

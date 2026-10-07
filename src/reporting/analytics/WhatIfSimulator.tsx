@@ -2,7 +2,6 @@ import {
   ArrowCounterClockwiseIcon,
   CaretDownIcon,
   CaretUpIcon,
-  QuestionIcon,
   TrendDownIcon,
   TrendUpIcon,
 } from '@phosphor-icons/react';
@@ -10,7 +9,7 @@ import classNames from 'classnames';
 import { FC, useCallback } from 'react';
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 
-import { BaseButton, Tooltip } from 'waldur-ui';
+import { BaseButton, HelpIcon, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
@@ -225,14 +224,10 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
           {/* Parameter inputs */}
           {params.map((param) => (
             <div key={param.id} className="mb-3">
-              <Form.Label className="d-flex align-items-center gap-2 mb-2">
-                {param.label}
-                {param.description && (
-                  <Tooltip label={param.description}>
-                    <QuestionIcon size={16} weight="bold" />
-                  </Tooltip>
-                )}
-              </Form.Label>
+              <div className="d-flex align-items-center gap-2 mb-2">
+                <Form.Label className="mb-0">{param.label}</Form.Label>
+                {param.description && <HelpIcon label={param.description} />}
+              </div>
               <ParamInput
                 param={param}
                 value={paramValues[param.id]}

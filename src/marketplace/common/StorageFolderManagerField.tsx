@@ -1,9 +1,8 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { Select } from '@/form/select';
 import { FormField } from '@/form/types';
@@ -367,9 +366,7 @@ const QuotaSummaryCard = ({
           <Col md={6}>
             <strong>
               {translate('File/Directory Quotas (Inodes)')}{' '}
-              <Tooltip label={inodeTooltip}>
-                <QuestionIcon weight="bold" size={16} className="text-muted" />
-              </Tooltip>
+              <HelpIcon label={inodeTooltip} />
             </strong>
             <div>
               {translate('Soft')}:{' '}
