@@ -52457,6 +52457,11 @@
     }
   },
   "Show the About us page and its link in the footer.": {},
+  "Show the Reporting menu with organisation-scoped reports to organisation owners.": {
+    "context": {
+      "feature_area": "features"
+    }
+  },
   "Show the affected rows": {
     "context": {
       "feature_area": "offering-merges"

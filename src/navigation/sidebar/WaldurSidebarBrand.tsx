@@ -108,7 +108,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
           className="max-h-7 max-w-[190px] group-data-[collapsible=icon]/panel:hidden"
         />
       ) : (
-        <h3 className="m-0 truncate text-[18px] font-semibold text-[var(--nav-item-text)] group-data-[collapsible=icon]/panel:hidden">
+        <h3 className="m-0 truncate text-[18px] font-semibold text-[var(--nav-item-text)] group-data-[collapsible=icon]/panel:sr-only">
           {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
         </h3>
       )}

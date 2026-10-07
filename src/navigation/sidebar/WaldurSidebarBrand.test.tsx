@@ -73,6 +73,14 @@ describe('WaldurSidebarBrand', () => {
     expect(screen.getByText('Waldur')).toBeInTheDocument();
   });
 
+  it('keeps the deployment title as the link name in collapsed rail', () => {
+    renderBrand();
+    expect(screen.getByRole('link', { name: 'Waldur' })).toBeInTheDocument();
+    expect(screen.getByText('Waldur')).toHaveClass(
+      'group-data-[collapsible=icon]/panel:sr-only',
+    );
+  });
+
   it('renders both mobile mark and full logo without a hidden parent wrapper in collapsed rail', () => {
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO = 'logo.png';
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE = 'logo-mobile.png';
