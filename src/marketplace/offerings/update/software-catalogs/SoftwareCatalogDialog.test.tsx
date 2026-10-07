@@ -55,7 +55,13 @@ const mockEessiCatalogB: any = {
 
 const mockSpackLink: any = {
   uuid: 'software-catalog-uuid',
-  catalog: mockSpackCatalog,
+  package_count: 100,
+  catalog: {
+    uuid: 'spack-catalog-uuid',
+    name: 'Test Catalog',
+    version: '1.0',
+    supports_cpu_target_restrictions: false,
+  },
   enabled_cpu_family: ['x86_64'],
   enabled_cpu_microarchitectures: ['zen3'],
   partition: { uuid: 'partition1-uuid', partition_name: 'Partition 1' },
@@ -114,12 +120,43 @@ describe('SoftwareCatalogDialog', () => {
     expect(screen.getByText('Add')).toBeInTheDocument();
   });
 
+  it('labels a locked catalog from the offering link without inventing missing fields', () => {
+    renderComponent('edit', {
+      ...mockEessiLink,
+      package_count: 3401,
+      catalog: {
+        uuid: 'eessi-catalog-uuid',
+        name: 'EESSI',
+        version: '2025.06',
+        supports_cpu_target_restrictions: true,
+      },
+    });
+
+    expect(
+      screen.getByText('EESSI 2025.06 (3401 packages)'),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/undefined/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Unknown type/)).not.toBeInTheDocument();
+  });
+
+  it('uses the singular package label when the link has one package', () => {
+    renderComponent('edit', {
+      ...mockSpackLink,
+      package_count: 1,
+    });
+
+    expect(
+      screen.getByText('Test Catalog 1.0 (1 package)'),
+    ).toBeInTheDocument();
+  });
+
   it('renders "edit" mode for Spack without CPU restriction fields', () => {
     renderComponent('edit');
     expect(screen.getByText('Edit software catalog')).toBeInTheDocument();
     expect(
-      screen.getByText(/Test Catalog 1.0 \(100 packages\) - Spack/),
+      screen.getByText('Test Catalog 1.0 (100 packages)'),
     ).toBeInTheDocument();
+    expect(screen.queryByText(/Unknown type/)).not.toBeInTheDocument();
     expect(
       screen.queryByLabelText('Enabled CPU family'),
     ).not.toBeInTheDocument();

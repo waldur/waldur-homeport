@@ -39,7 +39,11 @@ export const SoftwareCatalogDialog: FC<SoftwareCatalogDialogProps> = ({
         return {};
       case 'edit':
         return {
-          catalog: softwareCatalog.catalog,
+          catalog: {
+            ...softwareCatalog.catalog,
+            // Count lives on the offering link, not on the nested catalog summary.
+            package_count: softwareCatalog.package_count,
+          },
           enabled_cpu_family: softwareCatalog.enabled_cpu_family || [],
           enabled_cpu_microarchitectures:
             softwareCatalog.enabled_cpu_microarchitectures || [],
@@ -52,9 +56,7 @@ export const SoftwareCatalogDialog: FC<SoftwareCatalogDialogProps> = ({
 
   const saveCatalogMutation = useManagedMutation<any, any, any>({
     mutationFn: (formData) => {
-      const catalogForCpuRestrictions =
-        formData.catalog ??
-        (mode === 'edit' ? softwareCatalog?.catalog : undefined);
+      const catalogForCpuRestrictions = formData.catalog;
       const supportsCpu = catalogSupportsCpuTargetRestrictions(
         catalogForCpuRestrictions,
       );
@@ -128,13 +130,7 @@ export const SoftwareCatalogDialog: FC<SoftwareCatalogDialogProps> = ({
   const config = getDialogConfig();
 
   const renderFormContent = () => {
-    return (
-      <SoftwareCatalogForm
-        isEdit={mode === 'edit'}
-        initialCatalog={mode === 'edit' ? softwareCatalog?.catalog : undefined}
-        offering={offering}
-      />
-    );
+    return <SoftwareCatalogForm isEdit={mode === 'edit'} offering={offering} />;
   };
 
   const getFooter = (submitting: boolean, invalid: boolean) => {
