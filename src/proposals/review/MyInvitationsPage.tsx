@@ -3,6 +3,7 @@ import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { InvitationStatusBadge } from '@/proposals/update/reviewer-pool/InvitationStatusBadge';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -41,10 +42,8 @@ const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
   );
 };
 
-// invitation_status is read by the row actions rather than by a column, so
-// the sparse-field request has to ask for it explicitly.
-// invitation_status drives the row actions but is not a column, so the
-// sparse-field request has to ask for it explicitly.
+// The row actions read invitation_status even when the Status column is
+// hidden, so the sparse-field request always asks for it.
 const mandatoryFields = ['uuid', 'invitation_expires_at', 'invitation_status'];
 
 export const MyInvitationsPage: FC = () => {
@@ -120,8 +119,13 @@ export const MyInvitationsPage: FC = () => {
           },
           {
             title: translate('Status'),
-            render: ({ row }) => <>{row.invitation_status_display}</>,
-            keys: ['invitation_status_display'],
+            render: ({ row }) => (
+              <InvitationStatusBadge
+                status={row.invitation_status}
+                statusDisplay={row.invitation_status_display}
+              />
+            ),
+            keys: ['invitation_status', 'invitation_status_display'],
             id: 'status',
           },
         ]}

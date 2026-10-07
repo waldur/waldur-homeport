@@ -7,6 +7,7 @@ import {
 import { formatDate } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { StateLabel } from '@/marketplace/resources/projects/StateLabel';
 import { requestStateLabel, showsCallColumns } from '@/proposals/presentation';
 import { createFetcher } from '@/table/api';
 import {
@@ -140,7 +141,13 @@ export const ResourceRequestsList: FC<ResourceRequestsListProps> = ({
           // Empty until the proposal is approved and the resource is created.
           title: translate('Resource state'),
           orderField: 'resource__state',
-          render: ({ row }) => renderFieldOrDash(row.resource_state),
+          // Badged like the proposal state beside it: a plain string in one
+          // column and a badge in the next read as two different kinds of
+          // value.
+          render: ({ row }) =>
+            renderFieldOrDash(
+              row.resource_state && <StateLabel state={row.resource_state} />,
+            ),
         },
       ].filter(Boolean),
     [offeringUuid],

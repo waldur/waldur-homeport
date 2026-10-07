@@ -37,6 +37,9 @@ export const ReviewerInvitationStatus: FC<ReviewerInvitationStatusProps> = ({
       <InvitationStatusBadge
         status={row.invitation_status}
         statusDisplay={row.invitation_status_display}
+        pendingHint={translate(
+          'This reviewer has not yet accepted the invitation or created a profile.',
+        )}
       />
       {row.invitation_status === 'pending' &&
         isExpiringS(row.invitation_expires_at) && (
