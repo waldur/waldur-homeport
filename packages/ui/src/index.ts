@@ -12,6 +12,9 @@ export * from './Menu';
 export { CopyButton } from './CopyButton';
 export type { CopyButtonProps } from './CopyButton';
 export { LoadingSpinner } from './LoadingSpinner';
+export { HelpIcon } from './HelpIcon';
+export type { HelpIconProps } from './HelpIcon';
+export { WarningTip } from './WarningTip';
 export { Tooltip } from './Tooltip';
 export type { TooltipProps } from './Tooltip';
 

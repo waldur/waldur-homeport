@@ -1,4 +1,4 @@
-import { BuildingsIcon, QuestionIcon } from '@phosphor-icons/react';
+import { BuildingsIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import {
@@ -7,7 +7,7 @@ import {
   projectsPartialUpdate,
 } from 'waldur-js-client';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { BaseButton, HelpIcon } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -108,13 +108,7 @@ export const ProjectMembershipRestrictions: FC<
       title={
         <span className="d-flex align-items-center gap-2">
           {translate('Membership restrictions')}
-          <Tooltip label={getRestrictionsTooltip()}>
-            <QuestionIcon
-              size={16}
-              weight="bold"
-              className="text-muted cursor-pointer"
-            />
-          </Tooltip>
+          <HelpIcon label={getRestrictionsTooltip()} />
         </span>
       }
       cardBordered

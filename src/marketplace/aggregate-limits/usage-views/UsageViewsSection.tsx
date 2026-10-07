@@ -1,4 +1,3 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { Col, Nav, Row } from 'react-bootstrap';
@@ -8,7 +7,7 @@ import {
   marketplaceProjectUsageComponentsUsageRetrieve,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -130,9 +129,7 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
           title={
             <>
               {translate('Per-offering usage views')}{' '}
-              <Tooltip label={activeVariant.hint}>
-                <QuestionIcon weight="bold" />
-              </Tooltip>
+              <HelpIcon label={activeVariant.hint} />
             </>
           }
           actions={

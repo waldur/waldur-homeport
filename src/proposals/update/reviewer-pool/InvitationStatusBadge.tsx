@@ -1,7 +1,6 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 export const getInvitationStatusVariant = (status: string) => {
@@ -39,9 +38,7 @@ export const InvitationStatusBadge: FC<InvitationStatusBadgeProps> = ({
     variant={getInvitationStatusVariant(status)}
     rightIcon={
       status === 'pending' && pendingHint ? (
-        <Tooltip label={pendingHint}>
-          <QuestionIcon size={14} weight="bold" />
-        </Tooltip>
+        <HelpIcon label={pendingHint} size={14} />
       ) : undefined
     }
     shape="pill"

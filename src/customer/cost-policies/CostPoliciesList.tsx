@@ -1,11 +1,10 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import {
   marketplaceProjectEstimatedCostPoliciesList,
   MarketplaceProjectEstimatedCostPoliciesListData,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -76,13 +75,12 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
           title: (
             <>
               {translate('Action triggered')}{' '}
-              <Tooltip
+              <HelpIcon
                 label={translate(
                   "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
                 )}
-              >
-                <QuestionIcon size={18} weight="bold" />
-              </Tooltip>
+                size={18}
+              />
             </>
           ),
           render: ({ row }) => (

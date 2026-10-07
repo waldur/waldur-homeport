@@ -1,9 +1,8 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FunctionComponent, ReactNode, useMemo } from 'react';
 import { Col, ColProps, Row } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon, Tooltip } from 'waldur-ui';
 
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -74,15 +73,7 @@ export const Field: FunctionComponent<FieldProps> = ({
         className={classNames('text-gray-500', props.valueClass)}
       >
         {props.value || props.children || DASH_ESCAPE_CODE}
-        {props.tooltip && (
-          <Tooltip label={props.tooltip}>
-            <QuestionIcon
-              size={16}
-              weight="bold"
-              className="text-gray-400 ms-1"
-            />
-          </Tooltip>
-        )}
+        {props.tooltip && <HelpIcon label={props.tooltip} className="ms-1" />}
         {props.hasCopy && (
           <CopyToClipboardButton
             value={props.value}

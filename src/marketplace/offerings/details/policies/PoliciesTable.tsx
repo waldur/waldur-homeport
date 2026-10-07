@@ -1,8 +1,7 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { BooleanBadge } from '@/core/BooleanBadge';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -93,13 +92,12 @@ export const PoliciesTable: FC<TableProps> = ({ columns, ...props }) => {
           title: (
             <>
               {translate('Action triggered')}{' '}
-              <Tooltip
+              <HelpIcon
                 label={translate(
                   "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
                 )}
-              >
-                <QuestionIcon size={18} weight="bold" />
-              </Tooltip>
+                size={18}
+              />
             </>
           ),
           render: ({ row }) => <BooleanBadge value={row.has_fired} />,

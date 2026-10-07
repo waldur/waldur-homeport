@@ -1,9 +1,8 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { ResourceUsageChart } from '@/marketplace/resources/usage/ResourceUsageChart';
 
@@ -40,11 +39,10 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
         <Tab
           title={
             <>
-              <Tooltip
+              <HelpIcon
                 label={getBillingTypeLabelOrDash(component.billing_type)}
-              >
-                <QuestionIcon size={18} weight="bold" className="text-muted" />
-              </Tooltip>{' '}
+                size={18}
+              />{' '}
               {component.name}
             </>
           }

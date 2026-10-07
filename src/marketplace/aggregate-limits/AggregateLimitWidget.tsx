@@ -1,9 +1,9 @@
-import { EyeIcon, QuestionIcon } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { ComponentsUsageStats } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { Tooltip, BaseButton } from 'waldur-ui';
+import { BaseButton, HelpIcon } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { lazyComponent } from '@/core/lazyComponent';
@@ -118,11 +118,9 @@ export const AggregateLimitWidget = ({
   const TitleWithTip = () => (
     <>
       {title}{' '}
-      <Tooltip
+      <HelpIcon
         label={translate('You are viewing the chart in log scale mode.')}
-      >
-        <QuestionIcon weight="bold" />
-      </Tooltip>
+      />
     </>
   );
 

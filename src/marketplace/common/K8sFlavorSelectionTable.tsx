@@ -1,14 +1,9 @@
-import {
-  CheckIcon,
-  QuestionIcon,
-  XIcon,
-  MagnifyingGlassIcon,
-} from '@phosphor-icons/react';
+import { CheckIcon, XIcon, MagnifyingGlassIcon } from '@phosphor-icons/react';
 import React, { useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
-import { buttonVariants, cn, Tooltip } from 'waldur-ui';
+import { HelpIcon, buttonVariants, cn } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatFilesize } from '@/core/utils';
@@ -241,16 +236,14 @@ export const K8sFlavorSelectionTable: React.FC<
           {selectedFlavor ? selectedFlavor.name : translate('Select...')}
         </span>
         {selectedFlavor ? (
-          <Tooltip
+          <HelpIcon
             label={
               <div className="text-start">
                 <span className="d-block">vCPUs: {selectedFlavor.vcpus}</span>
                 <span>RAM: {formatFilesize(selectedFlavor.ram)}</span>
               </div>
             }
-          >
-            <QuestionIcon weight="bold" size={16} className="text-gray-400" />
-          </Tooltip>
+          />
         ) : null}
         {selectedFlavor ? (
           <XIcon

@@ -1,8 +1,7 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import React, { PropsWithChildren } from 'react';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { formatCurrency } from '@/core/formatCurrency';
@@ -38,9 +37,7 @@ export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
       <td>
         <p>
           {props.offeringComponent.name}{' '}
-          <Tooltip label={props.offeringComponent.type}>
-            <QuestionIcon weight="bold" />
-          </Tooltip>
+          <HelpIcon label={props.offeringComponent.type} />
         </p>
       </td>
       <td className={props.className}>{props.children}</td>

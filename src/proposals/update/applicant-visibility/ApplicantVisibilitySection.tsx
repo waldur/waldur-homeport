@@ -1,11 +1,10 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   CallApplicantVisibilityConfigRequest,
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import { AlertItem, HelpIcon } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { UserAttributeVisibilityTable } from '@/marketplace/user-attributes/UserAttributeVisibilityTable';
@@ -21,13 +20,14 @@ interface ApplicantVisibilitySectionProps {
 const TITLE = (
   <>
     {translate('Applicant data visibility')}{' '}
-    <Tooltip
+    <HelpIcon
       label={translate(
         'Control which applicant fields are visible to reviewers during evaluation. When no custom configuration exists, the global default is applied.',
       )}
-    >
-      <QuestionIcon size={20} weight="fill" className="mx-2 text-muted" />
-    </Tooltip>
+      size={20}
+      weight="fill"
+      className="mx-2"
+    />
   </>
 );
 

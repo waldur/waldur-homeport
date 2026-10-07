@@ -1,4 +1,3 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Form } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
@@ -9,7 +8,7 @@ import {
   ProviderOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
@@ -45,7 +44,7 @@ const FieldsListMapping = ({
               <tr key={component}>
                 <td className="text-dark">
                   {fields.value[i].remote_category}
-                  <Tooltip
+                  <HelpIcon
                     label={
                       <>
                         <p className="fw-bold text-start mb-1">
@@ -64,13 +63,9 @@ const FieldsListMapping = ({
                         </ul>
                       </>
                     }
-                  >
-                    <QuestionIcon
-                      size={20}
-                      weight="bold"
-                      className="text-gray-500 cursor-pointer text-hover-muted ms-2"
-                    />
-                  </Tooltip>
+                    size={20}
+                    className="ms-2"
+                  />
                 </td>
                 <td>
                   <Field

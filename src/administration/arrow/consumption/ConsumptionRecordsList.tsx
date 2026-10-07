@@ -1,11 +1,10 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import {
   adminArrowConsumptionRecordsList,
   ArrowConsumptionRecord,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -102,13 +101,12 @@ export const ConsumptionRecordsList: FunctionComponent<
           title: (
             <>
               {translate('Final')}{' '}
-              <Tooltip
+              <HelpIcon
                 label={translate(
                   'Confirmed amount from Arrow billing export. Empty until reconciliation is run.',
                 )}
-              >
-                <QuestionIcon size={18} weight="bold" />
-              </Tooltip>
+                size={18}
+              />
             </>
           ),
           render: ({ row }) =>
@@ -122,13 +120,12 @@ export const ConsumptionRecordsList: FunctionComponent<
           title: (
             <>
               {translate('Status')}{' '}
-              <Tooltip
+              <HelpIcon
                 label={translate(
                   'Pending: provisional amount from Arrow API. Finalized: confirmed by billing export. Reconciled: adjustment applied if final differs from consumed.',
                 )}
-              >
-                <QuestionIcon size={18} weight="bold" />
-              </Tooltip>
+                size={18}
+              />
             </>
           ),
           render: ({ row }) => (

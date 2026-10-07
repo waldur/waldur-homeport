@@ -2,12 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { marketplaceResourcesList, Project } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, WarningTip } from 'waldur-ui';
 
 import { getAllPages } from '@/core/api';
 import { FAST_STALE_TIME } from '@/core/constants';
 import { formatDate, parseDate } from '@/core/dateUtils';
-import { WarnTip } from '@/core/WarnTip';
 import { translate } from '@/i18n';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -82,15 +81,15 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
       )}
       {endDates?.length
         ? endDates.some((date) => parseDate(date) > projectEndDate) && (
-            <WarnTip
-              id={row.uuid}
+            <WarningTip
               label={translate(
                 "Some of the resources' termination dates are beyond the project end date. Resource termination will begin on the project's end date.",
               )}
-              hasSpace
-              autoWidth
-              className="w-100"
-              contentClassName="mw-300px"
+              className="ms-1"
+              tooltipProps={{
+                autoWidth: true,
+                contentClassName: 'mw-300px',
+              }}
             />
           )
         : null}

@@ -1,4 +1,3 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import {
@@ -8,7 +7,7 @@ import {
   MyAssignmentItem,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { FAST_STALE_TIME } from '@/core/constants';
@@ -152,17 +151,12 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
                       <Badge variant="danger" size="sm" tone="outline">
                         {translate('COI detected')}
                       </Badge>
-                      <Tooltip
+                      <HelpIcon
                         label={translate(
                           'A potential conflict of interest was detected for this proposal. It may be blocked from assignment.',
                         )}
-                      >
-                        <QuestionIcon
-                          size={14}
-                          weight="bold"
-                          className="text-muted"
-                        />
-                      </Tooltip>
+                        size={14}
+                      />
                     </span>
                   ) : (
                     <span className="text-muted">-</span>
@@ -287,17 +281,12 @@ export const MyAssignmentsPage: FC = () => {
                     <Badge variant="danger" size="sm" tone="outline">
                       {translate('Expired')}
                     </Badge>
-                    <Tooltip
+                    <HelpIcon
                       label={translate(
                         'The response window for this assignment batch has passed.',
                       )}
-                    >
-                      <QuestionIcon
-                        size={14}
-                        weight="bold"
-                        className="text-muted"
-                      />
-                    </Tooltip>
+                      size={14}
+                    />
                   </span>
                 )}
               </>

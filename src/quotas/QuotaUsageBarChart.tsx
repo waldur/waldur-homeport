@@ -2,7 +2,7 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { Tooltip, WarningTip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { Quota } from '@/openstack/types';
@@ -60,9 +60,11 @@ export const QuotaUsageBarChartDescription = ({ quota, hideLabel = false }) => (
     <p className="mb-0">
       {!hideLabel && formatQuotaName(quota.name)}
       {exceeds(quota) && (
-        <Tooltip label={translate('Quota usage exceeds available limit.')}>
-          <WarningIcon className="text-warning ms-1" size={16} weight="bold" />
-        </Tooltip>
+        <WarningTip
+          label={translate('Quota usage exceeds available limit.')}
+          icon={WarningIcon}
+          className="ms-1"
+        />
       )}
     </p>
     <span>{getSummary(quota)}</span>

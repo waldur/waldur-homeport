@@ -1,4 +1,3 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import {
@@ -7,7 +6,7 @@ import {
   OfferingUserAttributeConfig,
 } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
@@ -18,13 +17,13 @@ import { OfferingEditPanelProps } from './types';
 const TITLE = (
   <>
     {translate('User attribute exposure')}{' '}
-    <Tooltip
+    <HelpIcon
       label={translate(
         'Configure which user profile attributes are exposed to this service provider when users are provisioned. Exposed attributes become visible in the OfferingUser API responses.',
       )}
-    >
-      <QuestionIcon size={24} weight="fill" className="mx-2 text-muted" />
-    </Tooltip>
+      size={24}
+      className="mx-2"
+    />
   </>
 );
 

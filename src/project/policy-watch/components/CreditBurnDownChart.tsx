@@ -1,9 +1,8 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 
 import { generateBrandColors } from 'waldur-design-tokens';
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { EChart } from '@/core/EChart';
@@ -299,11 +298,7 @@ const ChartBlock: FC<{
   <>
     <div className="d-flex align-items-center gap-2 mb-2">
       <h5 className="mb-0">{title}</h5>
-      {hint && (
-        <Tooltip label={hint}>
-          <QuestionIcon weight="bold" />
-        </Tooltip>
-      )}
+      {hint && <HelpIcon label={hint} />}
     </div>
     <EChart options={options} height="320px" />
   </>

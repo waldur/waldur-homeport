@@ -1,9 +1,9 @@
-import { PlusIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, ReactNode, useCallback, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, useField } from 'react-final-form';
 
-import { Tooltip, BaseButton, TablePagination } from 'waldur-ui';
+import { BaseButton, HelpIcon, TablePagination } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { usePagination } from '@/core/usePagination';
@@ -260,13 +260,11 @@ export const EmailsListGroup = ({
                     <td className="id-column">
                       {ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
                         translate('Civil number')}{' '}
-                      <Tooltip
+                      <HelpIcon
                         label={translate(
                           'Must start with a country prefix ie EE34501234215',
                         )}
-                      >
-                        <QuestionIcon weight="bold" />
-                      </Tooltip>
+                      />
                     </td>
                   )}
                   <td className="role-column">{translate('Role')}</td>

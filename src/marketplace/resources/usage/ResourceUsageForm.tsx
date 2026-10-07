@@ -1,8 +1,4 @@
-import {
-  DotsThreeIcon,
-  QuestionIcon,
-  WarningCircleIcon,
-} from '@phosphor-icons/react';
+import { DotsThreeIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
 import {
@@ -23,7 +19,7 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { BaseButton, Menu, Tooltip } from 'waldur-ui';
+import { BaseButton, HelpIcon, Menu, Tooltip } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { parseDate } from '@/core/dateUtils';
@@ -332,19 +328,15 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                         </Tooltip>
                       )}
                       {component.name}
-                      <Tooltip
+                      <HelpIcon
                         label={
                           isHidden
                             ? null
                             : getBillingTypeLabelOrDash(component.billing_type)
                         }
-                      >
-                        <QuestionIcon
-                          size={18}
-                          weight="bold"
-                          className="ms-1"
-                        />
-                      </Tooltip>
+                        size={18}
+                        className="ms-1"
+                      />
                     </Nav.Link>
                   </Nav.Item>
                 );
@@ -398,17 +390,13 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                               </Tooltip>
                             )}
                             {component.name}
-                            <Tooltip
+                            <HelpIcon
                               label={getBillingTypeLabelOrDash(
                                 component.billing_type,
                               )}
-                            >
-                              <QuestionIcon
-                                size={18}
-                                weight="bold"
-                                className="ms-1"
-                              />
-                            </Tooltip>
+                              size={18}
+                              className="ms-1"
+                            />
                           </Menu.Item>
                         ))}
                       </div>

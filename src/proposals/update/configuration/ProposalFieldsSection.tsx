@@ -1,8 +1,8 @@
-import { QuestionIcon, WarningIcon } from '@phosphor-icons/react';
+import { WarningIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { Select, Tooltip } from 'waldur-ui';
+import { HelpIcon, Select, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import FormTable from '@/form/FormTable';
@@ -33,13 +33,14 @@ interface ProposalFieldsSectionProps {
 const TITLE = (
   <>
     {translate('Project details fields')}{' '}
-    <Tooltip
+    <HelpIcon
       label={translate(
         'Choose what this call asks applicants for. Name and project duration are always required. A field cannot be made required once the call has proposals.',
       )}
-    >
-      <QuestionIcon size={20} weight="fill" className="mx-2 text-muted" />
-    </Tooltip>
+      size={20}
+      weight="fill"
+      className="mx-2"
+    />
   </>
 );
 

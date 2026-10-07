@@ -1,8 +1,7 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import { AlertItem, HelpIcon } from 'waldur-ui';
 
 import { EligibilityRestrictionFormItems } from '@/core/restrictions';
 import { EditFieldProvider } from '@/form/editFields';
@@ -50,9 +49,11 @@ export const CallEligibilitySection: FC<CallEligibilitySectionProps> = ({
       title={
         <>
           {translate('Applicant eligibility')}{' '}
-          <Tooltip label={getEligibilityTooltip()}>
-            <QuestionIcon size={20} weight="fill" className="mx-2 text-muted" />
-          </Tooltip>
+          <HelpIcon
+            label={getEligibilityTooltip()}
+            size={20}
+            className="mx-2"
+          />
         </>
       }
       className="card-bordered mb-5"

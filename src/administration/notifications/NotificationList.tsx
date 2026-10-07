@@ -1,8 +1,8 @@
-import { PencilSimpleIcon, QuestionIcon } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Notification, notificationMessagesList } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon, Tooltip } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -56,9 +56,7 @@ export const NotificationList = () => {
                 </Tooltip>
               )}
               {row.description && (
-                <Tooltip label={row.description}>
-                  <QuestionIcon weight="bold" className="ms-2" />
-                </Tooltip>
+                <HelpIcon label={row.description} className="ms-2" />
               )}
             </>
           ),

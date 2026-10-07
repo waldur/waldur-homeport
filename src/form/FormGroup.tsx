@@ -1,12 +1,10 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
 import { FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 
-import { TooltipProps } from 'waldur-ui';
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon, TooltipProps } from 'waldur-ui';
 
 import { FieldError } from './FieldError';
 
@@ -76,17 +74,26 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     [propsControlId, id, input?.name],
   );
 
+  // The help icon is a button, so it sits beside the <label>, not inside it:
+  // inside, it would be one of the control's labels and be announced as part
+  // of its name.
   const labelNode = !hideLabel && (label || tooltip) && (
-    <Form.Label className={classNames({ required, 'me-auto': true })}>
+    <>
       {tooltip && !tooltipEnd && (
         <>
-          <Tooltip label={tooltip} {...tooltipProps}>
-            <QuestionIcon weight="bold" size={20} className="text-muted" />
-          </Tooltip>{' '}
+          <HelpIcon
+            label={tooltip}
+            size={20}
+            tooltipProps={tooltipProps}
+          />{' '}
         </>
       )}
-      {label}
-    </Form.Label>
+      {label && (
+        <Form.Label className={classNames({ required, 'me-auto': true })}>
+          {label}
+        </Form.Label>
+      )}
+    </>
   );
 
   const mainContent = (
@@ -105,13 +112,11 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           {labelNode && <span className="me-auto">{labelNode}</span>}
           {quickAction}
           {tooltip && tooltipEnd && (
-            <Tooltip label={tooltip} {...tooltipProps}>
-              <QuestionIcon
-                weight="bold"
-                size={16}
-                className="align-self-center ms-2 mb-2 text-muted"
-              />
-            </Tooltip>
+            <HelpIcon
+              label={tooltip}
+              className="ms-2 mb-2 h-5 items-center"
+              tooltipProps={tooltipProps}
+            />
           )}
         </div>
       ) : (

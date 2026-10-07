@@ -1,7 +1,6 @@
-import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 
-import { Tooltip } from 'waldur-ui';
+import { HelpIcon } from 'waldur-ui';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { translate } from '@/i18n';
@@ -40,9 +39,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
           <tr>
             <th>
               {props.resolve.component.name}
-              <Tooltip label={props.resolve.component.type}>
-                <QuestionIcon weight="bold" className="mx-1" />
-              </Tooltip>
+              <HelpIcon label={props.resolve.component.type} className="mx-1" />
               <span className="fw-normal fst-italic">
                 (
                 {props.resolve.component.measured_unit
