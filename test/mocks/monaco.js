@@ -12,6 +12,11 @@ vi.mock('@monaco-editor/react', () => {
         },
       });
     }),
+    DiffEditor: vi.fn(({ 'data-testid': testId }) => {
+      return React.createElement('div', {
+        'data-testid': testId || 'monaco-diff-editor',
+      });
+    }),
   };
 });
 

@@ -1,7 +1,10 @@
-import classNames from 'classnames';
 import { FC, useMemo, useState } from 'react';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  SegmentedControl,
+  SegmentedControlOption,
+} from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
@@ -144,14 +147,13 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
   const isEmpty = visibleRooms.length === 0;
   const isFiltered = filter !== 'all' || search.trim().length > 0;
 
-  const segment = (key: RoomFilter, label: string) => (
-    <button
-      type="button"
-      className={classNames('tc-segment-item', { active: filter === key })}
-      onClick={() => setFilter(key)}
-    >
-      {label}
-    </button>
+  const filterOptions: SegmentedControlOption<RoomFilter>[] = useMemo(
+    () => [
+      { value: 'all', label: translate('All') },
+      { value: 'unread', label: translate('Unread') },
+      { value: 'mentions', label: translate('Mentions') },
+    ],
+    [],
   );
 
   return (
@@ -163,11 +165,13 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <div className="tc-segment" role="tablist">
-          {segment('all', translate('All'))}
-          {segment('unread', translate('Unread'))}
-          {segment('mentions', translate('Mentions'))}
-        </div>
+        <SegmentedControl<RoomFilter>
+          aria-label={translate('Filter conversations')}
+          options={filterOptions}
+          value={filter}
+          onValueChange={setFilter}
+          className="self-start"
+        />
       </div>
 
       {isEmpty ? (

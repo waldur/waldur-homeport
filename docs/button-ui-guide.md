@@ -554,6 +554,9 @@ Toggle buttons and standalone icons use the centralized sizing helper `getButton
 
 When an interface presents mutually exclusive options that change what a view **shows** (filtering a table, toggling between card/list mode, switching chart date ranges) rather than navigating to a different page, use [SegmentedControl](../packages/ui/src/SegmentedControl.tsx) (`packages/ui/src/SegmentedControl.tsx`).
 
+> [!TIP]
+> For the comprehensive component selection guide across view lenses, action shortcuts, tabbed panels, and navigation, see the [Accessibility Decision Matrix](a11y-decision-matrix.md).
+
 ### SegmentedControl vs. BaseButton
 
 ```tsx
@@ -702,13 +705,13 @@ Used in forms that track dirty/unsaved state.
 
 ### ESLint Rules Matrix
 
-| ESLint Rule                                     | Severity | What It Enforces                                                                                                                                                          |
-| :---------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ESLint Rule                                     | Severity | What It Enforces                                                                                                                                                        |
+| :---------------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `no-restricted-imports`                         | `error`  | Blocks importing `Button` or `DropdownButton` from `react-bootstrap`. Directs developers to `BaseButton`, `SubmitButton`, `CloseDialogButton`, or `Menu.TriggerButton`. |
-| `waldur-custom/no-bootstrap-button-markup`      | `error`  | Blocks `<button className="btn ...">`, `<a className="btn ...">`, and any hand-rolled Bootstrap button markup.                                                            |
-| `waldur-custom/enforce-disabled-button-tooltip` | `error`  | Enforces that every disabled `<BaseButton>` has a `tooltip` or `disabledReason` explaining why the action is unavailable.                                                 |
-| `waldur-custom/enforce-dialog-button-order`     | `error`  | Enforces standard dialog button order: dismissive buttons (`CloseDialogButton`) on the left, affirmative/submission buttons (`SubmitButton`) on the right.                |
-| `waldur-custom/no-edit-button-size-override`    | `error`  | Blocks overriding `size="sm"` on `EditButton`; requires using `CompactEditButton` instead.                                                                                |
+| `waldur-custom/no-bootstrap-button-markup`      | `error`  | Blocks `<button className="btn ...">`, `<a className="btn ...">`, and any hand-rolled Bootstrap button markup.                                                          |
+| `waldur-custom/enforce-disabled-button-tooltip` | `error`  | Enforces that every disabled `<BaseButton>` has a `tooltip` or `disabledReason` explaining why the action is unavailable.                                               |
+| `waldur-custom/enforce-dialog-button-order`     | `error`  | Enforces standard dialog button order: dismissive buttons (`CloseDialogButton`) on the left, affirmative/submission buttons (`SubmitButton`) on the right.              |
+| `waldur-custom/no-edit-button-size-override`    | `error`  | Blocks overriding `size="sm"` on `EditButton`; requires using `CompactEditButton` instead.                                                                              |
 
 ### Converting Legacy Call Sites
 

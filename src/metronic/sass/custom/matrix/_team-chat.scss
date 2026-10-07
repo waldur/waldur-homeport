@@ -19,48 +19,6 @@
     padding: 1.23rem $card-px 0.923rem;
   }
 
-  // All / Unread / Mentions room filter: a button group whose neighbours
-  // collapse their borders into single dividers so it reads as one pill.
-  .tc-segment {
-    align-self: flex-start;
-    display: inline-flex;
-    // Figma Shadow/xs - $box-shadow-xs is too diffuse and reads as a glitch.
-    filter: drop-shadow(0 1px 2px rgba($gray-900, 0.05));
-  }
-
-  .tc-segment-item {
-    padding: 0.769rem 1.23rem;
-    border: 1px solid $border-primary;
-    background: $bg-primary;
-    color: $text-secondary;
-    font-size: $font-size-lg;
-    font-weight: 500;
-    line-height: 1.4;
-    cursor: pointer;
-
-    & + & {
-      margin-left: -1px;
-    }
-
-    &:first-child {
-      border-radius: $border-radius 0 0 $border-radius;
-    }
-
-    &:last-child {
-      border-radius: 0 $border-radius $border-radius 0;
-    }
-
-    &:hover:not(.active) {
-      background: $bg-secondary;
-    }
-
-    &.active {
-      position: relative;
-      z-index: 1;
-      background: $bg-tertiary;
-    }
-  }
-
   .tc-list {
     flex: 1;
     min-height: 0;
