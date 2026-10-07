@@ -40,7 +40,7 @@ export const AdministrationProfile = ({
     return {
       label: healthy ? translate('Healthy') : translate('Error'),
       className: healthy
-        ? 'border border-success text-success'
+        ? 'border border-success text-[var(--pill-success-text)]'
         : 'border border-danger text-danger',
     };
   };
@@ -108,7 +108,7 @@ export const AdministrationProfile = ({
               logoTopLabel={healthStatus.label}
               logoBottomLabel="Operator"
               logoTopClass={healthStatus.className}
-              logoBottomClass="bg-gray-400 text-white"
+              logoBottomClass="bg-[var(--pill-neutral-bg)] text-[var(--pill-neutral-text)]"
             />
           </Col>
           <Col>
