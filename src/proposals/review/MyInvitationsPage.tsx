@@ -3,6 +3,7 @@ import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
@@ -26,20 +27,25 @@ type CallReviewerPoolExtended = CallReviewerPool & {
 const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
   const isPending = row.invitation_status === 'pending';
 
-  // Only show actions for pending invitations
+  // Settled invitations have nothing to act on; the disabled menu keeps the
+  // column aligned with every other row.
   if (!isPending) {
-    return null;
+    return <ActionsDropdown disabled tooltip />;
   }
 
   return (
-    <div className="d-flex gap-2">
+    <ActionsDropdown row={row}>
       <AcceptInvitationAction row={row} />
       <DeclineInvitationAction row={row} />
-    </div>
+    </ActionsDropdown>
   );
 };
 
-const mandatoryFields = ['uuid', 'invitation_expires_at'];
+// invitation_status is read by the row actions rather than by a column, so
+// the sparse-field request has to ask for it explicitly.
+// invitation_status drives the row actions but is not a column, so the
+// sparse-field request has to ask for it explicitly.
+const mandatoryFields = ['uuid', 'invitation_expires_at', 'invitation_status'];
 
 export const MyInvitationsPage: FC = () => {
   const tabs = useMyReviewsTabs();

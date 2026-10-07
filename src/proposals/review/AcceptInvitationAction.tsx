@@ -2,10 +2,9 @@ import { CheckIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { CallReviewerPool, callReviewerPoolsAccept } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
-
 import { translate } from '@/i18n';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 interface AcceptInvitationActionProps {
   row: CallReviewerPool;
@@ -40,13 +39,11 @@ export const AcceptInvitationAction: FC<AcceptInvitationActionProps> = ({
   });
 
   return (
-    <BaseButton
-      onClick={mutate}
-      label={translate('Accept')}
+    <ActionItem
+      title={translate('Accept')}
+      action={mutate}
       iconNode={<CheckIcon weight="bold" />}
-      variant="success"
-      pending={isPending}
-      size="sm"
+      disabled={isPending}
     />
   );
 };
