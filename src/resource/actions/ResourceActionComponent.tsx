@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { BaseButton, Menu } from 'waldur-ui';
+import { Menu } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ActionList } from '@/marketplace/resources/actions/ActionList';
@@ -12,6 +12,7 @@ import {
   ResourceActionsList,
   ResourceActionsListProps,
 } from './ResourceActionsList';
+import { ShowAllMenuItem } from './ShowAllMenuItem';
 
 interface ResourceActionComponentProps extends ResourceActionsListProps {
   onToggle?: (isOpen: boolean) => void;
@@ -110,19 +111,7 @@ export const ResourceActionComponent: FunctionComponent<
               resourceTypeActions={undefined}
             />
           </ActionList>
-          <Menu.Separator />
-          {/* A button, not an action row: it opens a dialog rather than doing
-              anything to the resource. Deliberately outside Menu.Item — a row
-              overrides a nested button's own colour and hover, so inside one
-              it stops looking like a button at all. */}
-          <div className="flex justify-center p-1">
-            <BaseButton
-              variant="text-secondary"
-              size="sm"
-              label={translate('Show all')}
-              onClick={showAll}
-            />
-          </div>
+          <ShowAllMenuItem onSelect={showAll} />
         </>
       )}
     </ActionsMenu>

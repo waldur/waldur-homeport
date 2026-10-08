@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, PropsWithChildren, useCallback } from 'react';
 
-import { BaseButton, Menu } from 'waldur-ui';
-
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { ShowAllMenuItem } from '@/resource/actions/ShowAllMenuItem';
 
 import { ActionList } from './ActionList';
 import { loadData } from './loadData';
@@ -68,20 +67,7 @@ export const ActionsPopover = ({
       <ActionList hideGroupName hideNonImportant>
         <ActionsList {...value} refetch={refetch} />
       </ActionList>
-      {/* A button, not an action row: it opens a dialog rather than doing
-          anything to the resource. Deliberately outside Menu.Item — a row
-          overrides a nested button's own colour and hover, so inside one it
-          stops looking like a button at all. Same shape as the generic menu's
-          in ResourceActionComponent. */}
-      <Menu.Separator />
-      <div className="flex justify-center p-1">
-        <BaseButton
-          variant="text-secondary"
-          size="sm"
-          label={translate('Show all')}
-          onClick={callback}
-        />
-      </div>
+      <ShowAllMenuItem onSelect={callback} />
     </>
   ) : null;
 };

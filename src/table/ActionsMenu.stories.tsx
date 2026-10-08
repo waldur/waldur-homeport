@@ -15,6 +15,7 @@ import { Menu, MenuPopover } from 'waldur-ui';
 import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
 import { ActionList } from '@/marketplace/resources/actions/ActionList';
 import { ActionItem } from '@/resource/actions/ActionItem';
+import { ShowAllMenuItem } from '@/resource/actions/ShowAllMenuItem';
 
 import {
   ActionsDropdown,
@@ -52,6 +53,7 @@ export default meta;
 type Story = StoryObj<typeof ActionsMenu>;
 
 const noop = () => undefined;
+const showAllSpy = fn();
 
 // A panel shown open in a story keeps focus where it is, so that several
 // can be open at once (see Menu.stories.tsx).
@@ -385,6 +387,48 @@ export const ActionListFiltering: Story = {
       'Restart',
     ]);
     await expect(rows[0].tagName).toBe('BUTTON');
+  },
+};
+
+/**
+ * The collapsed resource menu is operable from the keyboard alone: the arrow
+ * keys walk the quick actions down to "Show all" (it is a menu item, so focus
+ * reaches it), and Enter closes the menu and opens the full-actions dialog.
+ * Regression test for a "Show all" that was a plain button beside the items,
+ * which the arrow keys skipped.
+ */
+export const ShowAllKeyboard: Story = {
+  args: { onOpenChange: fn() },
+  render: (args) => (
+    <ActionsMenu toggle="labeled" side="bottom" align="start" {...args}>
+      <ActionList hideNonImportant hideGroupName>
+        <ResourceActions />
+      </ActionList>
+      <ShowAllMenuItem onSelect={showAllSpy} />
+    </ActionsMenu>
+  ),
+  play: async ({ canvasElement }) => {
+    showAllSpy.mockClear();
+    const toggle = within(canvasElement).getByRole('button', {
+      name: 'Actions',
+    });
+    toggle.focus();
+    await userEvent.keyboard('{Enter}');
+    await screen.findByTestId('actions-menu');
+
+    // Arrow down through the quick actions until Show all has focus; the
+    // loop is bounded so a skipped row fails the story rather than hanging.
+    const showAll = await screen.findByRole('menuitem', { name: 'Show all' });
+    for (let i = 0; i < 10 && document.activeElement !== showAll; i += 1) {
+      await userEvent.keyboard('{ArrowDown}');
+    }
+    await expect(showAll).toHaveFocus();
+
+    await userEvent.keyboard('{Enter}');
+    await expect(showAllSpy).toHaveBeenCalledTimes(1);
+    await waitFor(() =>
+      expect(screen.queryByTestId('actions-menu')).not.toBeInTheDocument(),
+    );
   },
 };
 
