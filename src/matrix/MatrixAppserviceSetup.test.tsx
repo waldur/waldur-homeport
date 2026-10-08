@@ -1,5 +1,5 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import type { QueryClient } from '@tanstack/react-query';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { useNotify } from '@/store/notify';
+import { createTestQueryClient, renderWithProviders } from '@/test/harness';
 
 import { MatrixAppserviceSetupDialog } from './MatrixAppserviceSetup';
 
@@ -18,18 +19,8 @@ const h = vi.hoisted(() => ({
   setupMutation: vi.fn(),
 }));
 
-const renderDialog = (queryClient?: QueryClient) => {
-  const client =
-    queryClient ??
-    new QueryClient({
-      defaultOptions: { queries: { retry: false } },
-    });
-  return render(
-    <QueryClientProvider client={client}>
-      <MatrixAppserviceSetupDialog />
-    </QueryClientProvider>,
-  );
-};
+const renderDialog = (queryClient?: QueryClient) =>
+  renderWithProviders(<MatrixAppserviceSetupDialog />, { queryClient });
 
 describe('MatrixAppserviceSetupDialog', () => {
   beforeEach(() => {
@@ -356,9 +347,7 @@ describe('MatrixAppserviceSetupDialog', () => {
       MATRIX_USER_REGISTRATION_SECRET: 'pre-set',
     };
 
-    const queryClient = new QueryClient({
-      defaultOptions: { queries: { retry: false } },
-    });
+    const queryClient = createTestQueryClient();
     const invalidateSpy = vi.spyOn(queryClient, 'invalidateQueries');
 
     const user = userEvent.setup();

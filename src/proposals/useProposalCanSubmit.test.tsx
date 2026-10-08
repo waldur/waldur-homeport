@@ -1,8 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, renderHook, waitFor } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { act, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { proposalProposalsRetrieve } from 'waldur-js-client';
+
+import { renderHookWithProviders } from '@/test/harness';
 
 import {
   invalidateProposalCanSubmit,
@@ -14,20 +14,10 @@ const refused = {
   error: 'Requested amounts are missing for the following offerings: HPC.',
 };
 
-const setup = () => {
-  const queryClient = new QueryClient();
-  const wrapper = ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-  const { result, rerender } = renderHook(
-    ({ proposal }) => useProposalCanSubmit(proposal),
-    {
-      wrapper,
-      initialProps: { proposal: { uuid: 'p1', can_submit: refused } },
-    },
-  );
-  return { queryClient, result, rerender };
-};
+const setup = () =>
+  renderHookWithProviders(({ proposal }) => useProposalCanSubmit(proposal), {
+    initialProps: { proposal: { uuid: 'p1', can_submit: refused } },
+  });
 
 describe('useProposalCanSubmit', () => {
   beforeEach(() => vi.clearAllMocks());

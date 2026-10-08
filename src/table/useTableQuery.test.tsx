@@ -1,23 +1,18 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { retryServerErrors } from '@/core/queryRetry';
+import { createTestQueryClient, renderHookWithProviders } from '@/test/harness';
 
 import { useTableQuery } from './useTableQuery';
 
 // The app's default rule, with no delay between attempts.
-const createWrapper = () => {
-  const client = new QueryClient({
+const createRetryClient = () =>
+  createTestQueryClient({
     defaultOptions: {
       queries: { retry: retryServerErrors(), retryDelay: 0 },
     },
   });
-  return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={client}>{children}</QueryClientProvider>
-  );
-};
 
 const options = (fetchData, retry?) => ({
   table: 'retry-test',
@@ -34,9 +29,9 @@ const failingWith = (status: number) =>
   vi.fn(() => Promise.reject({ response: { status }, status }));
 
 const runUntilError = async (fetchData, retry?) => {
-  const { result } = renderHook(
+  const { result } = renderHookWithProviders(
     () => useTableQuery(options(fetchData, retry) as any),
-    { wrapper: createWrapper() },
+    { queryClient: createRetryClient() },
   );
   await waitFor(() => expect(result.current.error).toBeTruthy());
 };

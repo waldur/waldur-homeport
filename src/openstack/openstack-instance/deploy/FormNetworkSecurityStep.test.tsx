@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import arrayMutators from 'final-form-arrays';
 import { Form } from 'react-final-form';
@@ -9,6 +8,7 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
 import { mockListResponse } from '@/test/utils';
 
 import { FormNetworkSecurityStep } from './FormNetworkSecurityStep';
@@ -55,29 +55,24 @@ const offering = { scope_uuid: 'tenant-1', quotas: [] } as any;
 
 const renderStep = (initialValues: any = {}) => {
   let latestValues: any;
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  const result = render(
-    <QueryClientProvider client={queryClient}>
-      <Form
-        onSubmit={vi.fn()}
-        mutators={{ ...arrayMutators }}
-        initialValues={initialValues}
-        subscription={{ values: true }}
-        render={({ values, handleSubmit }) => {
-          latestValues = values;
-          return (
-            <form onSubmit={handleSubmit}>
-              <FormNetworkSecurityStep
-                id="step-network-security"
-                offering={offering}
-              />
-            </form>
-          );
-        }}
-      />
-    </QueryClientProvider>,
+  const result = renderWithProviders(
+    <Form
+      onSubmit={vi.fn()}
+      mutators={{ ...arrayMutators }}
+      initialValues={initialValues}
+      subscription={{ values: true }}
+      render={({ values, handleSubmit }) => {
+        latestValues = values;
+        return (
+          <form onSubmit={handleSubmit}>
+            <FormNetworkSecurityStep
+              id="step-network-security"
+              offering={offering}
+            />
+          </form>
+        );
+      }}
+    />,
   );
   return {
     ...result,

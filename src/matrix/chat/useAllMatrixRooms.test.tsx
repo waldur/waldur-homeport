@@ -1,9 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
-import { FC, PropsWithChildren } from 'react';
+import { waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { matrixRoomsList } from 'waldur-js-client';
 
+import { renderHookWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { useAllMatrixRooms } from './useAllMatrixRooms';
@@ -21,15 +20,6 @@ vi.mock('./useRoomMemberNames', () => ({
   useAllRoomMemberNames: () => new Map(),
 }));
 
-const makeWrapper = (): FC<PropsWithChildren> => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-};
-
 describe('useAllMatrixRooms — authentication gate', () => {
   beforeEach(() => {
     vi.mocked(matrixRoomsList).mockResolvedValue({ data: [] } as any);
@@ -46,7 +36,7 @@ describe('useAllMatrixRooms — authentication gate', () => {
   it('does not fetch the rooms list while unauthenticated', async () => {
     vi.mocked(useUser).mockReturnValue(null as any);
 
-    renderHook(() => useAllMatrixRooms(), { wrapper: makeWrapper() });
+    renderHookWithProviders(() => useAllMatrixRooms());
     // Flush the mount effects so any query the hook scheduled would have fired.
     await Promise.resolve();
 
@@ -56,7 +46,7 @@ describe('useAllMatrixRooms — authentication gate', () => {
   it('fetches the rooms list once a user is present', async () => {
     vi.mocked(useUser).mockReturnValue({ uuid: 'user-1' } as any);
 
-    renderHook(() => useAllMatrixRooms(), { wrapper: makeWrapper() });
+    renderHookWithProviders(() => useAllMatrixRooms());
 
     await waitFor(() => expect(matrixRoomsList).toHaveBeenCalled());
   });

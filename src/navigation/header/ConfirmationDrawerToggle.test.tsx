@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -8,6 +7,7 @@ import { marketplaceProjectUpdateRequestsCount } from 'waldur-js-client';
 import { useDrawer, useIsDrawerOpenWith } from '@/drawer/actions';
 import { DrawerExpandToolbar } from '@/drawer/DrawerExpandToolbar';
 import { DRAWER_SHELL_CLASS } from '@/drawer/shellClasses';
+import { renderWithProviders } from '@/test/harness';
 
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 
@@ -51,18 +51,8 @@ describe('ConfirmationDrawerToggle', () => {
     vi.mocked(useIsDrawerOpenWith).mockReturnValue(false);
   });
 
-  const renderComponent = () => {
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: { retry: false },
-      },
-    });
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <ConfirmationDrawerToggle />
-      </QueryClientProvider>,
-    );
-  };
+  const renderComponent = () =>
+    renderWithProviders(<ConfirmationDrawerToggle />);
 
   it('renders pending confirmations toggle button', () => {
     renderComponent();

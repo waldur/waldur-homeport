@@ -1,10 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import type { QueryClient } from '@tanstack/react-query';
+import { act, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { chatThreadsStatsRetrieve } from 'waldur-js-client';
 
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
+import { renderWithProviders } from '@/test/harness';
 
 import { SupportAIAssistantLogsList } from './SupportAIAssistantLogsList';
 
@@ -40,14 +41,9 @@ const tableFetch = vi.fn();
 let queryClient: QueryClient;
 
 const renderList = () => {
-  queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <SupportAIAssistantLogsList />
-    </QueryClientProvider>,
-  );
+  const result = renderWithProviders(<SupportAIAssistantLogsList />);
+  queryClient = result.queryClient;
+  return result;
 };
 
 describe('SupportAIAssistantLogsList', () => {

@@ -1,8 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
 import { describe, expect, it, vi } from 'vitest';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { getComponentAndParams, OptionsForm } from './OptionsForm';
@@ -27,29 +28,23 @@ vi.mock('./K8sClusterConfigurationForm', () => ({
   ),
 }));
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: false } },
-});
-
 describe('OptionsForm Integration', () => {
   const renderForm = (options: any, initialValues = {}, formProps = {}) => {
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <Form
-          onSubmit={vi.fn()}
-          initialValues={initialValues}
-          render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <OptionsForm
-                options={options}
-                customer={{ uuid: 'test-customer-uuid' } as any}
-                {...formProps}
-              />
-              <button type="submit">Submit</button>
-            </form>
-          )}
-        />
-      </QueryClientProvider>,
+    return renderWithProviders(
+      <Form
+        onSubmit={vi.fn()}
+        initialValues={initialValues}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <OptionsForm
+              options={options}
+              customer={{ uuid: 'test-customer-uuid' } as any}
+              {...formProps}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        )}
+      />,
     );
   };
 
@@ -69,19 +64,17 @@ describe('OptionsForm Integration', () => {
 
     const renderWithSubmit = (initialValues = {}) => {
       const onSubmit = vi.fn();
-      render(
-        <QueryClientProvider client={queryClient}>
-          <Form
-            onSubmit={onSubmit}
-            initialValues={initialValues}
-            render={({ handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
-                <OptionsForm options={backupOptions as any} />
-                <button type="submit">Submit</button>
-              </form>
-            )}
-          />
-        </QueryClientProvider>,
+      renderWithProviders(
+        <Form
+          onSubmit={onSubmit}
+          initialValues={initialValues}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <OptionsForm options={backupOptions as any} />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        />,
       );
       return onSubmit;
     };
@@ -133,18 +126,16 @@ describe('OptionsForm Integration', () => {
 
     const renderWithSubmit = () => {
       const onSubmit = vi.fn();
-      render(
-        <QueryClientProvider client={queryClient}>
-          <Form
-            onSubmit={onSubmit}
-            render={({ handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
-                <OptionsForm options={slugOptions as any} />
-                <button type="submit">Submit</button>
-              </form>
-            )}
-          />
-        </QueryClientProvider>,
+      renderWithProviders(
+        <Form
+          onSubmit={onSubmit}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <OptionsForm options={slugOptions as any} />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        />,
       );
       return onSubmit;
     };

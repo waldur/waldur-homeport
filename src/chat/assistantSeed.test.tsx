@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { FC, ReactNode } from 'react';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -13,6 +12,7 @@ import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
 import { useDrawer } from '@/drawer/actions';
 import { DrawerProvider } from '@/drawer/DrawerContext';
 import { DrawerRoot } from '@/drawer/DrawerRoot';
+import { renderWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { openUnifiedChatDrawer } from './openUnifiedChatDrawer';
@@ -80,22 +80,18 @@ const Harness: FC = () => {
 };
 
 const Wrapper: FC<{ children: ReactNode }> = ({ children }) => (
-  <QueryClientProvider
-    client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}
-  >
-    <ThreadProvider>
-      <AnonymousThreadProvider>
-        <DrawerProvider>
-          {children}
-          <DrawerRoot />
-        </DrawerProvider>
-      </AnonymousThreadProvider>
-    </ThreadProvider>
-  </QueryClientProvider>
+  <ThreadProvider>
+    <AnonymousThreadProvider>
+      <DrawerProvider>
+        {children}
+        <DrawerRoot />
+      </DrawerProvider>
+    </AnonymousThreadProvider>
+  </ThreadProvider>
 );
 
 const setup = () =>
-  render(
+  renderWithProviders(
     <Wrapper>
       <Harness />
     </Wrapper>,
