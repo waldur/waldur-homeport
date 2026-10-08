@@ -38,7 +38,7 @@ const getStatusIcon = (isWorking: boolean, hasError: boolean) => {
 };
 
 const getStatusColorClass = (isWorking: boolean) =>
-  isWorking ? 'text-success' : 'text-danger';
+  isWorking ? 'text-[var(--pill-success-text)]' : 'text-danger';
 
 const HealthInfoItem = ({
   title,
@@ -123,7 +123,7 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
               />
             )}
             <span
-              className={`fw-semibold ${allWorking ? 'text-success' : 'text-danger'}`}
+              className={`fw-semibold ${allWorking ? 'text-[var(--pill-success-text)]' : 'text-danger'}`}
             >
               {workingCount}/{totalCount} {translate('services healthy')}
             </span>
