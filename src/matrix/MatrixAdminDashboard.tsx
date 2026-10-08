@@ -1,4 +1,4 @@
-import { GearSixIcon, PlugsIcon } from '@phosphor-icons/react';
+import { GearSixIcon, StethoscopeIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -76,9 +76,9 @@ export const MatrixAdminDashboard = () => {
           {staff && (
             <>
               <BaseButton
-                label={translate('Check connectivity')}
+                label={translate('Diagnostics')}
                 onClick={openDiagnostics}
-                iconNode={<PlugsIcon weight="bold" />}
+                iconNode={<StethoscopeIcon weight="bold" />}
                 variant="tertiary"
                 size="lg"
               />

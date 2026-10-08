@@ -9949,11 +9949,6 @@
       "feature_area": "reviewer-pool"
     }
   },
-  "Check connectivity": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
   "Check for updates": {
     "context": {
       "feature_area": "marketplace"
@@ -12073,11 +12068,6 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "database-stats"
-    }
-  },
-  "Connectivity diagnostics": {
-    "context": {
-      "feature_area": "matrix"
     }
   },
   "Consent given": {
@@ -16459,6 +16449,11 @@
   "Device owner": {
     "context": {
       "feature_area": "openstack-tenant"
+    }
+  },
+  "Diagnostics": {
+    "context": {
+      "feature_area": "matrix"
     }
   },
   "Diagonal Split": {
@@ -29682,6 +29677,11 @@
   "Matrix chat": {
     "context": {
       "feature_area": "administration"
+    }
+  },
+  "Matrix diagnostics": {
+    "context": {
+      "feature_area": "matrix"
     }
   },
   "Matrix homeserver URL used by browser clients. Falls back to MATRIX_HOMESERVER_URL when blank. Set this when the homeserver is reachable from servers and browsers at different addresses (e.g. a Docker-internal name vs. a public Caddy-proxied URL).": {},
