@@ -4,7 +4,10 @@ import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { Checkbox, Tooltip } from 'waldur-ui';
 
-import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import {
+  CaretDownSmallIcon,
+  CaretUpSmallIcon,
+} from '@/core/CaretUpDownButtons';
 import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
@@ -48,6 +51,72 @@ interface TableHeaderProps {
   toggleColumnPin?(id: string): void;
 }
 
+const getSortMode = (column: Column, sorting: Sorting) =>
+  column.orderField && sorting && column.orderField === sorting.field
+    ? sorting.mode
+    : undefined;
+
+const SortToggle: FC<{
+  column: Column;
+  sorting: Sorting;
+  sort: TableHeaderProps['onSortClick'];
+}> = ({ column, sorting, sort }) => {
+  const mode = getSortMode(column, sorting);
+  const previousMode = useRef(mode);
+  const wasSorted = previousMode.current !== undefined;
+  useEffect(() => {
+    previousMode.current = mode;
+  }, [mode]);
+
+  // One control per column (rather than separate up/down buttons) so it can
+  // meet the 24×24 px target size: none → ascending → descending → none.
+  const onClick = () =>
+    mode === 'asc'
+      ? sort({ field: column.orderField, mode: 'desc' })
+      : mode === 'desc'
+        ? sort({ field: null, mode: undefined })
+        : sort({ field: column.orderField, mode: 'asc' });
+
+  const name =
+    typeof column.title === 'string' ? column.title : column.orderField;
+  const label =
+    mode === 'asc'
+      ? translate('{name}: sorted ascending. Sort descending', { name })
+      : mode === 'desc'
+        ? translate('{name}: sorted descending. Clear sorting', { name })
+        : translate('{name}: not sorted. Sort ascending', { name });
+  // Screen readers don't reliably re-read a focused button whose label
+  // changed, so the new order is also announced through a live region.
+  const announcement =
+    mode === 'asc'
+      ? translate('Sorted by {name}, ascending', { name })
+      : mode === 'desc'
+        ? translate('Sorted by {name}, descending', { name })
+        : wasSorted
+          ? translate('Sorting by {name} cleared', { name })
+          : '';
+
+  return (
+    <>
+      <button
+        type="button"
+        className="text-btn sort-toggle"
+        data-testid="sort-toggle"
+        aria-label={label}
+        onClick={onClick}
+      >
+        <CaretUpSmallIcon className={mode === 'asc' ? 'active' : undefined} />
+        <CaretDownSmallIcon
+          className={mode === 'desc' ? 'active' : undefined}
+        />
+      </button>
+      <span className="visually-hidden" aria-live="polite">
+        {announcement}
+      </span>
+    </>
+  );
+};
+
 function renderSortingIcon(
   column: Column,
   sorting: Sorting,
@@ -56,33 +125,7 @@ function renderSortingIcon(
   if (!column.orderField || !sorting) {
     return null;
   }
-  const onClickSort = (mode: Sorting['mode']) =>
-    (column.orderField !== sorting.field || sorting.mode !== mode) &&
-    sort({ field: column.orderField, mode });
-
-  return (
-    <span>
-      <CaretUpDownButtons
-        className="sorting-buttons"
-        onClickUp={() => onClickSort('asc')}
-        onClickDown={() => onClickSort('desc')}
-        upClassName={
-          column.orderField === sorting.field &&
-          sorting.mode === 'asc' &&
-          'active'
-        }
-        downClassName={
-          column.orderField === sorting.field &&
-          sorting.mode === 'desc' &&
-          'active'
-        }
-        upTestId="sort-asc"
-        downTestId="sort-desc"
-        upLabel={translate('Sort ascending')}
-        downLabel={translate('Sort descending')}
-      />
-    </span>
-  );
+  return <SortToggle column={column} sorting={sorting} sort={sort} />;
 }
 
 const WithThMeta = (children, meta) =>
@@ -134,6 +177,13 @@ const TableTh = ({
         : style
     }
     data-pin-key={pinKey}
+    aria-sort={
+      getSortMode(column, currentSorting) === 'asc'
+        ? 'ascending'
+        : getSortMode(column, currentSorting) === 'desc'
+          ? 'descending'
+          : undefined
+    }
   >
     <div className="th-content">
       <div className="th-main">

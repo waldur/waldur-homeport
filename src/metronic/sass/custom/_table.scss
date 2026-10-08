@@ -36,11 +36,11 @@
       svg {
         color: $gray-400;
       }
-      &.sorting-column .sorting-buttons > button {
+      &.sorting-column .sort-toggle {
         &:hover svg {
           color: $gray-500;
         }
-        &.active svg {
+        svg.active {
           color: $brand;
         }
       }
@@ -202,6 +202,24 @@
     > td > *,
     > td .td-data > * {
       vertical-align: middle;
+    }
+
+    // WCAG 2.2 SC 2.5.8: the copy button is at least 24×24 px. Its icon is
+    // 1em, so the negative side margins hand the extra width back. The height
+    // stays inside the cell: ellipsis cells clip overflow, which would cut off
+    // both the hit area and the focus ring.
+    > td .copy-to-clipboard-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      min-height: 24px;
+      margin: 0 calc((1em - 24px) / 2);
+      vertical-align: middle;
+
+      &:focus-visible {
+        outline-offset: -2px;
+      }
     }
 
     // Keyboard focus reveals a cell's filter shortcut just as hovering the row

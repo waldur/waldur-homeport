@@ -50,9 +50,30 @@ describe('TableHeader', () => {
       currentSorting: { field: 'name', mode: 'asc' },
     });
 
-    const sortDescButton = screen.getAllByTestId('sort-desc')[0];
-    await user.click(sortDescButton);
+    await user.click(screen.getAllByTestId('sort-toggle')[0]);
     expect(onSortClick).toHaveBeenCalledWith({ field: 'name', mode: 'desc' });
+  });
+
+  it('sorts an unsorted column ascending', async () => {
+    const onSortClick = vi.fn();
+    renderTableHeader({
+      onSortClick,
+      currentSorting: { field: 'email', mode: 'desc' },
+    });
+
+    await user.click(screen.getAllByTestId('sort-toggle')[0]);
+    expect(onSortClick).toHaveBeenCalledWith({ field: 'name', mode: 'asc' });
+  });
+
+  it('clears sorting after descending', async () => {
+    const onSortClick = vi.fn();
+    renderTableHeader({
+      onSortClick,
+      currentSorting: { field: 'name', mode: 'desc' },
+    });
+
+    await user.click(screen.getAllByTestId('sort-toggle')[0]);
+    expect(onSortClick).toHaveBeenCalledWith({ field: null, mode: undefined });
   });
 
   it('shows select all checkbox when multiSelect is enabled', async () => {
@@ -128,8 +149,7 @@ describe('TableHeader', () => {
       ] as any,
     });
 
-    expect(screen.queryByTestId('sort-asc')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('sort-desc')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('sort-toggle')).not.toBeInTheDocument();
   });
 
   it('should render expandable indicator inside first data column header', () => {

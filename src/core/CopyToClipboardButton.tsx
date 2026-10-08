@@ -50,7 +50,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
       className={classNames(
         buttonVariant
           ? buttonVariants({ variant: buttonVariant, iconOnly: true })
-          : 'text-btn',
+          : 'text-btn copy-to-clipboard-btn',
         buttonClassName,
       )}
       type="button"

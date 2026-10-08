@@ -53150,14 +53150,42 @@
   },
   "Sort ascending": {
     "context": {
-      "feature_area": "analytics",
-      "action_type": "sort"
+      "feature_area": "analytics"
     }
   },
   "Sort descending": {
     "context": {
-      "feature_area": "analytics",
-      "action_type": "sort"
+      "feature_area": "analytics"
+    }
+  },
+  "Sorted by {name}, ascending": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "Sorted by {name}, descending": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "Sorting by {name} cleared": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
     }
   },
   "Source": {
@@ -74917,6 +74945,36 @@
         }
       },
       "feature_area": "proposal"
+    }
+  },
+  "{name}: not sorted. Sort ascending": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "{name}: sorted ascending. Sort descending": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
+    }
+  },
+  "{name}: sorted descending. Clear sorting": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "table"
     }
   },
   "{name}: {value} h ({percent}%)": {
