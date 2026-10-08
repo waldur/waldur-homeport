@@ -69,6 +69,10 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
         ? sidebarLogoUrl
         : undefined;
 
+  const logoAlt = translate('{title} logo', {
+    title: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
+  });
+
   const logo = (
     <Link state="profile.details">
       {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
@@ -81,12 +85,12 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
               with no brand mark at all. */}
           <img
             src={sidebarLogoMobileUrl}
-            alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+            alt={logoAlt}
             className="hidden max-h-7 max-w-12 group-data-[collapsible=icon]/panel:block"
           />
           <img
             src={sidebarLogo}
-            alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+            alt={logoAlt}
             // w-full, not just max-h-7 max-w-[190px] — the old Metronic
             // .logo class only caps max-height, leaving width auto so
             // the browser scales it to the image's own aspect ratio;
@@ -104,7 +108,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
         // rendering a truncated/oversized full wordmark into ~48px.
         <img
           src={sidebarLogo}
-          alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+          alt={logoAlt}
           className="max-h-7 max-w-[190px] group-data-[collapsible=icon]/panel:sr-only"
         />
       ) : (

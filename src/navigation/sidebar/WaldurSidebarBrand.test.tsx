@@ -87,7 +87,7 @@ describe('WaldurSidebarBrand', () => {
 
     renderBrand();
 
-    const logos = screen.getAllByAltText('Waldur');
+    const logos = screen.getAllByAltText('Waldur logo');
     expect(logos).toHaveLength(2);
 
     const mobileLogo = logos.find((img) =>
@@ -116,7 +116,7 @@ describe('WaldurSidebarBrand', () => {
 
     renderBrand();
 
-    const logo = screen.getByAltText('Waldur');
+    const logo = screen.getByAltText('Waldur logo');
     expect(logo).toBeInTheDocument();
     expect(logo).toHaveClass('group-data-[collapsible=icon]/panel:sr-only');
   });

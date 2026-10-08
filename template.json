@@ -76315,6 +76315,15 @@
       "feature_area": "mass-actions"
     }
   },
+  "{title} logo": {
+    "context": {
+      "variables": {
+        "title": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "{total} committed, {rollback}% rollback rate": {
     "context": {
       "variables": {
