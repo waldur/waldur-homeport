@@ -2298,16 +2298,16 @@ export const SettingsDescription = [
       },
       {
         key: 'MATRIX_USER_ID_FORMAT',
-        description: translate('Format for generating Matrix user IDs: username, uuid, or email_local.'),
+        description: translate('Format for generating Matrix user IDs: username, uuid, or email_local. Applies only to users provisioned afterwards; existing users keep their Matrix ID.'),
         default: 'username',
         type: 'string',
       },
       {
         key: 'MATRIX_EXTERNAL_LOGIN_METHOD',
-        description: translate('How users sign in to an external Matrix client such as Element: \'none\' (Waldur offers no external sign-in), \'password\' (a password Waldur derives for each user), or \'oidc\' (single sign-on configured on the homeserver). Switching away from \'password\' does not revoke passwords already shown or sign out external clients.'),
+        description: translate('How users sign in to an external Matrix client such as Element: \'none\' (Waldur offers no external sign-in), \'password\' (for testing and sites without an identity provider: users generate a password in Waldur; needs the Waldur bot to be a homeserver admin), or \'oidc\' (single sign-on configured on the homeserver; use this in production). Switching away from \'password\' revokes no generated password and signs out no external client; to refuse password logins, set login_with_password = false on the homeserver.'),
         default: 'none',
         type: 'choice_field',
-        options: [{ value: 'none', label: 'None: Waldur offers no external sign-in' }, { value: 'password', label: 'Password derived for each user' }, { value: 'oidc', label: 'Single sign-on through the homeserver' }],
+        options: [{ value: 'none', label: 'None: Waldur offers no external sign-in' }, { value: 'password', label: 'Password the user generates in Waldur' }, { value: 'oidc', label: 'Single sign-on through the homeserver' }],
       },
       {
         key: 'MATRIX_LIVEKIT_KEY',
