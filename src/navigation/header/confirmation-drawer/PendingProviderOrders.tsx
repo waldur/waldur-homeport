@@ -55,7 +55,7 @@ export const PendingProviderOrders: React.FC<{}> = () => {
       {...tableProps}
       placeholderActions={<OrderTablePlaceholderActions />}
       columns={columns}
-      title={translate('Orders')}
+      title={translate('Pending provider orders')}
       verboseName={translate('Orders')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
