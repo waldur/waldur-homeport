@@ -23,17 +23,19 @@
   padding-right: 0 !important;
 }
 
+// The filter toggle's 24 px box already carries 4 px either side of its
+// 16 px icon, which is the gap the title used to have.
 .filter-column .th-main > button,
 .filter-column .th-main > .th-wrapper > button {
-  margin-left: 4px;
+  margin: -4px -4px -4px 0;
 }
 
 .sorting-column .th-main > span,
 .sorting-column .th-main > .th-wrapper > span {
   vertical-align: middle;
 
-  .sorting-buttons {
-    margin-left: 4px;
+  .sort-toggle {
+    margin: -4px -4px -4px 0;
   }
 }
 
@@ -56,4 +58,36 @@
     align-items: center;
     flex-shrink: 0;
   }
+}
+
+// WCAG 2.2 SC 2.5.8: header controls are at least 24×24 px. The negative
+// margin gives the extra hit area back, so the header looks unchanged.
+.th-content .sort-toggle,
+.th-content .pin-toggle,
+.th-content .column-filter-toggle,
+.cell-with-expander-header .all-rows-expander {
+  min-width: 24px;
+  min-height: 24px;
+  justify-content: center;
+}
+
+.th-content .sort-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.th-content .pin-toggle,
+.th-content .column-filter-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+
+.th-content .pin-toggle {
+  margin: -4px;
+}
+
+.cell-with-expander-header .all-rows-expander {
+  margin: -2px;
 }

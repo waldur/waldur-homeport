@@ -197,7 +197,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     >
                       <button
                         aria-label="Copy to clipboard"
-                        class="text-btn"
+                        class="text-btn copy-to-clipboard-btn"
                         type="button"
                       >
                         <span
@@ -223,7 +223,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       >
                         <button
                           aria-label="Copy to clipboard"
-                          class="text-btn"
+                          class="text-btn copy-to-clipboard-btn"
                           type="button"
                         >
                           <span
@@ -255,7 +255,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     >
                       <button
                         aria-label="Copy to clipboard"
-                        class="text-btn"
+                        class="text-btn copy-to-clipboard-btn"
                         type="button"
                       >
                         <span
