@@ -1,13 +1,16 @@
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { useBreadcrumbs } from '@/navigation/context';
 import { IBreadcrumbItem } from '@/navigation/types';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import {
   getCategoryConfig,
+  getCustomerScopedReports,
   getVisibleReports,
   ReportCategory,
   ReportDefinition,
@@ -81,6 +84,7 @@ export const useReportBreadcrumbs = ({
   category,
   additionalItems = EMPTY_ITEMS,
 }: UseReportBreadcrumbsOptions) => {
+  const isStaff = useSelector(isStaffOrSupport);
   const config = category ? categoryConfig[category] : null;
   const currentReportDef = config?.reports?.find(
     (r) => r.key === currentReport,
@@ -88,8 +92,12 @@ export const useReportBreadcrumbs = ({
   const reportTitle = currentReportDef?.title || currentReport;
 
   // Filtered exactly as the category page and the tab list filter it, so the
-  // dropdown never offers a report those two leave out.
-  const visibleReports = useMemo(() => getVisibleReports(config), [config]);
+  // dropdown never offers a report those two leave out. Organization owners
+  // have no category pages, only the reports of their landing page.
+  const visibleReports = useMemo(
+    () => (isStaff ? getVisibleReports(config) : getCustomerScopedReports()),
+    [config, isStaff],
+  );
 
   // Only show dropdown if there are multiple visible reports and no additional items
   const hasMultipleReports = visibleReports.length > 1;
@@ -104,11 +112,15 @@ export const useReportBreadcrumbs = ({
               text: translate('Reporting'),
               to: 'reporting-dashboard',
             },
-            {
-              key: 'category',
-              text: config.title,
-              to: `reporting-${category}-list`,
-            },
+            ...(isStaff
+              ? [
+                  {
+                    key: 'category',
+                    text: config.title,
+                    to: `reporting-${category}-list`,
+                  },
+                ]
+              : []),
             {
               key: 'report',
               text: reportTitle,
@@ -135,6 +147,7 @@ export const useReportBreadcrumbs = ({
           ],
     [
       config,
+      isStaff,
       reportTitle,
       additionalItems,
       category,

@@ -1,3 +1,4 @@
+import { BuildingsIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useState, useMemo, useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
@@ -8,12 +9,14 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { FormGroup } from '@/form';
 import { AsyncSelect, Select } from '@/form/select';
 import { translate } from '@/i18n';
-import {
-  organizationAutocomplete,
-  projectAutocomplete,
-} from '@/marketplace/common/autocompletes';
+import { projectAutocomplete } from '@/marketplace/common/autocompletes';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
+import { ReportingOrganization } from '../access';
+import {
+  ReportingOrganizationSelect,
+  useReportingOrganization,
+} from '../ReportingOrganizationSelect';
 import { ReportingTitle } from '../ReportingTitle';
 
 import { ResourceLimitsHistoryChart } from './ResourceLimitsHistoryChart';
@@ -27,11 +30,6 @@ import {
   useResourceUsageHistory,
 } from './useResourceHistory';
 
-interface OrganizationOption {
-  uuid: string;
-  name: string;
-}
-
 interface ProjectOption {
   uuid: string;
   name: string;
@@ -40,15 +38,12 @@ interface ProjectOption {
 }
 
 export const ProjectDetailPage: FC = () => {
-  const loadOrganizations = useMemo(() => organizationAutocomplete(), []);
-
   const { params } = useCurrentStateAndParams();
   const router = useRouter();
   const projectUuid = params.project_uuid;
 
-  // State for organization selection
-  const [selectedOrganization, setSelectedOrganization] =
-    useState<OrganizationOption | null>(null);
+  const { organization: selectedOrganization, canSelectAny } =
+    useReportingOrganization();
 
   // State for project selection
   const [selectedProject, setSelectedProject] = useState<ProjectOption | null>(
@@ -90,11 +85,15 @@ export const ProjectDetailPage: FC = () => {
             customer_name: project.customer_name,
           });
           // Also set the organization
-          if (project.customer_uuid && project.customer_name) {
-            setSelectedOrganization({
-              uuid: project.customer_uuid,
-              name: project.customer_name,
-            });
+          if (
+            project.customer_uuid &&
+            project.customer_uuid !== params.organization_uuid
+          ) {
+            router.stateService.go(
+              '.',
+              { organization_uuid: project.customer_uuid },
+              { location: 'replace' },
+            );
           }
         })
         .catch(() => {
@@ -108,13 +107,13 @@ export const ProjectDetailPage: FC = () => {
   }, [projectUuid]);
 
   // Handle organization selection change
-  const handleOrganizationChange = (org: OrganizationOption | null) => {
-    setSelectedOrganization(org);
+  const handleOrganizationChange = (org: ReportingOrganization | null) => {
     // Reset downstream selections
     setSelectedProject(null);
     setSelectedResource(null);
     setSelectedType(null);
     router.stateService.go('reporting-project-detail', {
+      organization_uuid: org?.uuid ?? null,
       project_uuid: null,
     });
   };
@@ -198,11 +197,17 @@ export const ProjectDetailPage: FC = () => {
 
   const hasError = limitsError || usageError;
 
+  const projectOutOfScope =
+    !canSelectAny &&
+    selectedProject &&
+    selectedProject.customer_uuid !== selectedOrganization?.uuid;
+
   // Render content based on project selection state
   const renderContent = () => {
     if (!selectedOrganization) {
       return (
         <NoResult
+          icon={<BuildingsIcon weight="bold" size={24} />}
           title={translate('Select an organization')}
           message={translate(
             'Choose an organization from the dropdown above to view its projects.',
@@ -212,7 +217,7 @@ export const ProjectDetailPage: FC = () => {
       );
     }
 
-    if (!projectUuid) {
+    if (!projectUuid || projectOutOfScope) {
       return (
         <NoResult
           title={translate('Select a project')}
@@ -284,26 +289,11 @@ export const ProjectDetailPage: FC = () => {
 
   return (
     <>
-      <ReportingTitle reportKey="project-detail" />
+      <ReportingTitle reportKey="project-detail" showControlsOnMobile>
+        <ReportingOrganizationSelect onChange={handleOrganizationChange} />
+      </ReportingTitle>
       {/* Filters */}
       <div className="d-flex flex-wrap gap-6 mb-6">
-        <FormGroup
-          label={translate('Organization')}
-          className="flex-grow-1 mw-400px"
-        >
-          <AsyncSelect
-            placeholder={translate('Select organization...')}
-            loadOptions={loadOrganizations}
-            defaultOptions
-            value={selectedOrganization}
-            onChange={handleOrganizationChange}
-            getOptionValue={(option: OrganizationOption) => option.uuid}
-            getOptionLabel={(option: OrganizationOption) => option.name}
-            isClearable
-            noOptionsMessage={() => translate('No organizations')}
-          />
-        </FormGroup>
-
         <FormGroup
           label={translate('Project')}
           className="flex-grow-1 mw-400px"

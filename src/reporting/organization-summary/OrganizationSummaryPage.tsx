@@ -1,35 +1,31 @@
+import { BuildingsIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Form, useFormState } from 'react-final-form';
 
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 
+import {
+  ReportingOrganizationSelect,
+  useReportingOrganization,
+} from '../ReportingOrganizationSelect';
 import { ReportingTitle } from '../ReportingTitle';
 
-import { OrganizationFilter } from './OrganizationFilter';
 import { OrganizationResourcesTable } from './OrganizationResourcesTable';
 
-const OrganizationSummaryContent: FC = () => {
-  const { values } = useFormState();
-  const customerUuid = values?.organization?.uuid;
+export const OrganizationSummaryPage: FC = () => {
+  const { organization } = useReportingOrganization();
 
   return (
     <>
-      <ReportingTitle reportKey="organization-summary">
-        <div className="d-flex align-items-center gap-4">
-          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
-            {translate('Organization')}:
-          </label>
-          <div style={{ minWidth: 200 }}>
-            <OrganizationFilter />
-          </div>
-        </div>
+      <ReportingTitle reportKey="organization-summary" showControlsOnMobile>
+        <ReportingOrganizationSelect />
       </ReportingTitle>
 
-      {customerUuid ? (
-        <OrganizationResourcesTable customerUuid={customerUuid} />
+      {organization ? (
+        <OrganizationResourcesTable customerUuid={organization.uuid} />
       ) : (
         <NoResult
+          icon={<BuildingsIcon weight="bold" size={24} />}
           title={translate('Select an organization')}
           message={translate(
             'Choose an organization from the dropdown above to view resource statistics and usage data.',
@@ -40,14 +36,3 @@ const OrganizationSummaryContent: FC = () => {
     </>
   );
 };
-
-export const OrganizationSummaryPage: FC = () => (
-  <Form
-    onSubmit={() => {}}
-    render={({ handleSubmit }) => (
-      <form onSubmit={handleSubmit}>
-        <OrganizationSummaryContent />
-      </form>
-    )}
-  />
-);

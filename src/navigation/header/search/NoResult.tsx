@@ -13,6 +13,7 @@ import './NoResult.scss';
 interface NoResultProps {
   title?: string;
   message?: ReactNode;
+  icon?: ReactNode;
   actions?: ReactNode;
   buttonTitle?: string;
   // Explicitly marks this empty state as having no actionable CTA.
@@ -26,6 +27,7 @@ interface NoResultProps {
 export const NoResult: FC<NoResultProps> = ({
   title = translate('No results found'),
   message = '',
+  icon = <MagnifyingGlassIcon weight="bold" size={24} />,
   actions,
   buttonTitle = translate('Clear search'),
   callback,
@@ -44,9 +46,7 @@ export const NoResult: FC<NoResultProps> = ({
     >
       <RadialBg className="background" />
       <div className="text-center d-flex flex-column align-items-center pb-10 position-relative z-index-1">
-        <div className="icon-square icon-lg search-icon">
-          <MagnifyingGlassIcon weight="bold" size={24} />
-        </div>
+        <div className="icon-square icon-lg search-icon">{icon}</div>
 
         <div>
           <h4>{title}</h4>

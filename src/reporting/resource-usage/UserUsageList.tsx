@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import {
   ComponentUserUsage,
   marketplaceComponentUserUsagesList,
@@ -12,19 +12,20 @@ import { ResourceLink } from '@/resource/ResourceLink';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
-import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
-import { ReportingTitle } from '../ReportingTitle';
+import { CustomerScopedReport } from '../CustomerScopedReport';
 import { usageTableTabs } from '../utils';
 
 import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
-import { selectResourceUsageFilter } from './ResourceUsageList';
+import {
+  useScopedUsageFilter,
+  withoutOrganizationColumn,
+} from './ResourceUsageList';
 import { UsageExpandableRow } from './UserUsageExpandableRow';
 
-export const UserUsageList: FC = () => {
-  const values = useFilterValues('UserUsageReports');
-  const filter = useMemo(() => selectResourceUsageFilter(values), [values]);
+const UserUsageTable: FC<{ customerUuid?: string }> = ({ customerUuid }) => {
+  const filter = useScopedUsageFilter('UserUsageReports', customerUuid);
 
   const tableProps = useTable({
     table: 'UserUsageReports',
@@ -113,21 +114,24 @@ export const UserUsageList: FC = () => {
   ];
 
   return (
-    <>
-      <ReportingTitle reportKey="user-usage" />
-      <Table
-        {...tableProps}
-        columns={columns}
-        tabs={usageTableTabs}
-        verboseName={translate('Usages')}
-        showPageSizeSelector={true}
-        enableExport={true}
-        expandableRow={({ row }) => (
-          <UsageExpandableRow row={row} type="user-usage" />
-        )}
-        filters={<ResourceUsageFilter />}
-        formId={FORM_ID}
-      />
-    </>
+    <Table
+      {...tableProps}
+      columns={withoutOrganizationColumn(columns, customerUuid)}
+      tabs={usageTableTabs}
+      verboseName={translate('Usages')}
+      showPageSizeSelector={true}
+      enableExport={true}
+      expandableRow={({ row }) => (
+        <UsageExpandableRow row={row} type="user-usage" />
+      )}
+      filters={<ResourceUsageFilter customerUuid={customerUuid} />}
+      formId={FORM_ID}
+    />
   );
 };
+
+export const UserUsageList: FC = () => (
+  <CustomerScopedReport reportKey="user-usage">
+    {(customerUuid) => <UserUsageTable customerUuid={customerUuid} />}
+  </CustomerScopedReport>
+);

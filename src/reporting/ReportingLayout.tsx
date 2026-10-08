@@ -8,7 +8,9 @@ import { SegmentedControl } from 'waldur-ui';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { useFullPage } from '@/navigation/context';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
+import { CustomerReportingLanding } from './CustomerReportingLanding';
 import { getReportingTabs } from './tabs';
 
 export const ReportingPeriodContext = createContext(0);
@@ -24,6 +26,18 @@ export const ReportingLayout: FC = () => {
   const isDashboard = state.name === 'reporting-dashboard';
 
   const tabs = useMemo(() => getReportingTabs(workspace), [workspace]);
+  const isStaff = useSelector(isStaffOrSupport);
+
+  // Organization owners reach only the landing page under this layout; the
+  // category tabs and their lists stay staff/support only.
+  if (!isStaff) {
+    return (
+      <div className="container-fluid py-9">
+        <h1 className="mb-5">{translate('Reporting')}</h1>
+        <CustomerReportingLanding />
+      </div>
+    );
+  }
 
   return (
     <div className="container-fluid py-9">
