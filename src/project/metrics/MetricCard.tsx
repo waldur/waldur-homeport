@@ -20,6 +20,7 @@ import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
 import {
   formatFigure,
+  getChangeLabel,
   getGoalPeriodOptions,
 } from '@/marketplace/metrics/options';
 import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
@@ -329,7 +330,7 @@ export const MetricCard: FC<{
       right={
         hasChange ? (
           <Col xs="auto" className="align-self-center">
-            <Tooltip label={translate('Change vs the previous period')}>
+            <Tooltip label={getChangeLabel(item.period)}>
               <span>
                 <ChangesAmountBadge
                   changes={change}
