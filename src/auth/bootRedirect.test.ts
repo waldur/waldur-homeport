@@ -90,7 +90,11 @@ function run({
     win.fetch = fetch;
   }
   new Function('window', source)(win);
-  return { replace, fetch };
+  return {
+    replace,
+    fetch,
+    decision: win.waldurBootRedirect as Promise<boolean> | undefined,
+  };
 }
 
 const expectedUrl = (extra = '') =>
@@ -210,6 +214,24 @@ describe('boot-redirect.js', () => {
     await flush();
     expect(fetch).not.toHaveBeenCalled();
     expect(replace).not.toHaveBeenCalled();
+  });
+
+  it('publishes the decision to navigate for the application', async () => {
+    const { decision, replace } = run();
+    await expect(decision).resolves.toBe(true);
+    expect(replace).toHaveBeenCalled();
+  });
+
+  it.each([
+    ['no default provider', { probe: { type: 'basic', status: 404 } }],
+    ['a backend that is unreachable', { probe: new Error('network') }],
+  ])('publishes a decision to stay for %s', async (_label, scenario) => {
+    const { decision } = run(scenario);
+    await expect(decision).resolves.toBe(false);
+  });
+
+  it('publishes nothing when it does not even probe', () => {
+    expect(run({ pathname: '/projects/abc/' }).decision).toBeUndefined();
   });
 
   it('survives storage accessors that throw', async () => {

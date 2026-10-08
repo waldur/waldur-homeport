@@ -338,6 +338,11 @@ first paint, so the entry graph is kept deliberately small:
   without a default provider, without the route, or unreachable leaves the
   visitor on the application's own login page. Whether a session exists is
   decided from web storage in the script, since only the browser can see it.
+  The script publishes its decision as `window.waldurBootRedirect`, and
+  `src/index.tsx` does not render while the visitor is being sent away:
+  Firefox cancels the page's in-flight requests when a navigation starts, and
+  an app booting alongside the redirect would see its lazy chunks fail and
+  reload, cancelling the redirect (`src/core/bootGuard.ts`).
 - `yarn build:check` (`scripts/bundle-budget.mjs`, run by the `Check cold-path
   budget` CI job on every MR) fails when the entry script plus its
   `modulepreload`s exceed the gzip budget, or when echarts, matrix-js-sdk,
