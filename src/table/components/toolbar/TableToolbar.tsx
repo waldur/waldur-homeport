@@ -2,11 +2,9 @@ import { XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { createElement, useCallback } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, useBreakpointDown } from 'waldur-ui';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { titleCase } from '@/core/utils';
 import { translate } from '@/i18n';
 
@@ -45,7 +43,7 @@ export function TableToolbarActions() {
     filtersStorage,
   } = useTableContext();
 
-  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+  const isSm = useBreakpointDown('sm');
 
   // Handler for filter button click
   const onClickFilterButton = useCallback(

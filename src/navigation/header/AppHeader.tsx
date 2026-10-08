@@ -1,14 +1,12 @@
 import { CaretLeftIcon, ListIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 
-import { useSidebar, BaseButton, Tooltip } from 'waldur-ui';
+import { useSidebar, BaseButton, Tooltip, useBreakpointDown } from 'waldur-ui';
 
 import { isAssistantEnabled } from '@/ai-assistant/utils';
 import { DEFAULT_REDIRECT_STATE, isSignInStep } from '@/auth/authNavigation';
 import { getIconUrl } from '@/core/api';
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
@@ -59,7 +57,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   // appear when either is available — not just when support is enabled.
   const showSupportDrawer = hasSupportSelector() || isMatrixChatEnabled();
 
-  const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.lg });
+  const isSmallScr = useBreakpointDown('lg');
   const showGoBack = Boolean(state.data?.showGoBack);
 
   const onGoBack = () => {

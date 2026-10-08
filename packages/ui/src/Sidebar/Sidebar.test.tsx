@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { useEffect, useState } from 'react';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { setViewport } from '../testing/viewport';
 import { WaldurLogo } from '../WaldurLogo';
 
 import {
@@ -53,19 +54,6 @@ beforeAll(() => {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.stubGlobal(
-    'matchMedia',
-    vi.fn().mockImplementation((query: string) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    })),
-  );
 });
 
 describe('SidebarProvider & useSidebar', () => {
@@ -231,14 +219,7 @@ describe('SidebarRoot (<Sidebar />)', () => {
   });
 
   it('renders mobile Sheet drawer when isMobile is true and suppresses hardcoded close button', () => {
-    vi.stubGlobal(
-      'matchMedia',
-      vi.fn().mockImplementation(() => ({
-        matches: true,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      })),
-    );
+    setViewport('mobile');
 
     const OpenMobileSidebar = ({ children }: { children: React.ReactNode }) => {
       const { setOpenMobile } = useSidebar();

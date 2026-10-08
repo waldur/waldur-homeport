@@ -1,5 +1,4 @@
 import { Col, Row } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { ResourceComponentItem } from './ResourceComponentItem';
@@ -15,8 +14,6 @@ export const ResourceComponents = ({
   >;
   components: OfferingComponent[];
 }) => {
-  const isSmallScreen = useMediaQuery({ maxWidth: 320 });
-
   if (components.length <= 2) {
     return (
       <div className="d-flex flex-column gap-4">
@@ -36,13 +33,7 @@ export const ResourceComponents = ({
     <>
       <Row>
         {components.slice(0, 4).map((component) => (
-          <Col
-            key={component.type}
-            xs={isSmallScreen ? 12 : 6}
-            sm={6}
-            md={12}
-            xl={6}
-          >
+          <Col key={component.type} xs={12} sm={6} md={12} xl={6}>
             <ResourceComponentItem resource={resource} component={component} />
           </Col>
         ))}

@@ -1,17 +1,14 @@
-import { act, render } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { FC, useEffect } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { setViewport } from 'waldur-ui';
 
 const h = vi.hoisted(() => ({
   drawerMountCount: 0,
   matrixClient: {} as any,
   rooms: {} as any,
   call: {} as any,
-  isAtLeastMd: true,
-}));
-
-vi.mock('react-responsive', () => ({
-  useMediaQuery: () => h.isAtLeastMd,
 }));
 
 vi.mock('./useMatrixClient', () => ({
@@ -55,7 +52,6 @@ const ROOMS = [
 
 beforeEach(() => {
   h.drawerMountCount = 0;
-  h.isAtLeastMd = true;
   h.matrixClient = {
     connect: vi.fn(),
     connectionState: 'connected',
@@ -127,5 +123,37 @@ describe('MatrixChatPanel — call stability across expand', () => {
       await Promise.resolve();
     });
     expect(h.drawerMountCount).toBe(1);
+  });
+});
+
+describe('MatrixChatPanel — responsive dock layout', () => {
+  it('does not dock sidebar on mobile even when drawer is expanded', async () => {
+    setViewport('mobile');
+    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+    const drawer = document.getElementById('kt_drawer')!;
+    await act(async () => {
+      drawer.dataset.expanded = 'true';
+      await Promise.resolve();
+    });
+
+    render(<MatrixChatPanel defaultRoomUuid="room-1" />);
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByTestId('room-list').parentElement).toHaveClass('d-none');
+  });
+
+  it('docks sidebar on desktop when drawer is expanded', async () => {
+    setViewport('desktop');
+    // eslint-disable-next-line no-restricted-syntax, testing-library/no-node-access
+    const drawer = document.getElementById('kt_drawer')!;
+    await act(async () => {
+      drawer.dataset.expanded = 'true';
+      await Promise.resolve();
+    });
+
+    render(<MatrixChatPanel defaultRoomUuid="room-1" />);
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(screen.getByTestId('room-list').parentElement).not.toHaveClass(
+      'd-none',
+    );
   });
 });

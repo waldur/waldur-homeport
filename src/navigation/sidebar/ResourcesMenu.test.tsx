@@ -52,14 +52,6 @@ describe('ResourcesMenu', () => {
         disconnect() {}
       },
     );
-    vi.stubGlobal(
-      'matchMedia',
-      vi.fn().mockReturnValue({
-        matches: false,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      }),
-    );
     vi.mocked(getCategoryGroups).mockResolvedValue([] as any);
     vi.mocked(marketplaceGlobalCategoriesRetrieve).mockResolvedValue({
       data: { 'cat-1': 42 },

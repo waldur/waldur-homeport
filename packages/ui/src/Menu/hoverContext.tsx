@@ -1,9 +1,6 @@
 import { createContext, PointerEvent, useRef } from 'react';
 
-import { useIsMobile } from '../useIsMobile';
-
-// The app's own desktop breakpoint (Bootstrap's `lg`).
-const DESKTOP_BREAKPOINT = 992;
+import { useBreakpointDown } from '../useMediaQuery';
 
 export interface HoverHandlers {
   trigger: {
@@ -30,7 +27,7 @@ export const useHoverOpen = (
   open: boolean,
   setOpen: (open: boolean) => void,
 ) => {
-  const isMobile = useIsMobile(DESKTOP_BREAKPOINT);
+  const isMobile = useBreakpointDown('lg');
   const enabled = mode === true || !isMobile;
   const closeTimeout = useRef<ReturnType<typeof setTimeout>>();
   // Hover has already opened the menu by the time a mouse clicks the

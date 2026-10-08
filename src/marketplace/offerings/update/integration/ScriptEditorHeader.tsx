@@ -10,12 +10,10 @@ import {
 } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
-import { BaseButton, Menu, MenuPopover } from 'waldur-ui';
+import { BaseButton, Menu, MenuPopover, useBreakpointDown } from 'waldur-ui';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Link } from '@/core/Link';
 import { FilterBox } from '@/form/FilterBox';
@@ -117,7 +115,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
     return items.concat(envLinks);
   }, [query, envItems]);
 
-  const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.xl });
+  const isSmallScr = useBreakpointDown('xl');
 
   return (
     <>

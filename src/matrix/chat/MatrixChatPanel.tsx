@@ -9,14 +9,14 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useMediaQuery } from 'react-responsive';
+
+import { useBreakpointUp } from 'waldur-ui';
 
 import {
   getChatDrawerPreference,
   setChatDrawerPreference,
   useChatDrawerPreference,
 } from '@/chat/chatDrawerPreferences';
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
 import { translate } from '@/i18n';
 
@@ -54,7 +54,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
   // drawer or the standalone Communication page — matching the AI history
   // sidebar. Otherwise the panel is just the open conversation.
   const drawerExpanded = useDrawerExpanded();
-  const isAtLeastMd = useMediaQuery({ minWidth: GRID_BREAKPOINTS.md });
+  const isAtLeastMd = useBreakpointUp('md');
   const showDock = (drawerExpanded || Boolean(forceDock)) && isAtLeastMd;
 
   const [selectedRoomUuid, setSelectedRoomUuid] = useState<string | null>(

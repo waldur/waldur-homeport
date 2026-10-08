@@ -584,11 +584,7 @@ Run one spec with `yarn playwright test focus-ring --project=visual --workers=1`
      );
      ```
 
-   - `matchMedia`: `react-responsive` captures `window.matchMedia` at module load time. Mock `react-responsive` directly rather than mutating `window.matchMedia`:
-
-     ```typescript
-     vi.mock('react-responsive', () => ({ useMediaQuery: vi.fn() }));
-     ```
+   - `matchMedia` & Virtual Viewport: `waldur-ui`'s `useMediaQuery`, `useBreakpointDown`, and `useBreakpointUp` read `window.matchMedia` dynamically via React 18's `useSyncExternalStore`. In tests (jsdom), `test/setupTests.js` initializes the query-aware virtual viewport controller (`setupVirtualViewport()`), defaulting to 1440px desktop with hover enabled and automatic `afterEach` teardown (`resetViewport()`). In responsive test suites, never stub `matchMedia` blindly with `vi.stubGlobal`; instead call `setViewport('mobile' | 'desktop' | BreakpointKey | px | { hover: false })` from `waldur-ui/testing` (or re-exported from `@/test/harness`).
 
 3. **Headless Browser Animation Polling**: CDP/Playwright tabs in automated modes skip compositing animation frames if backgrounded. `setTimeout` polling of `getAnimations()` may read `currentTime: 0`. Trigger a screenshot capture or force a reflow to guarantee paint completion.
 4. **Tailwind only generates classes it can read literally**: Tailwind v4 scans source files for complete class strings. A class assembled at runtime (`` `[&>svg]:h-[${px}]` ``) is never generated, so it silently does nothing. `BaseButton`'s icons rendered at 16px instead of 20px for exactly this reason. Write the class as a literal and pass the varying part through a CSS custom property (`style={{ '--icon-size': px }}` with `[&>svg]:h-[var(--icon-size)]`), or choose between whole literal classes. Classes inside HTML strings (chart tooltips) are scanned too, provided they are literals — `buttonVariants()` returns literals.

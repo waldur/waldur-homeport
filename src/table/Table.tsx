@@ -9,11 +9,8 @@ import React, {
 } from 'react';
 import { Card, Stack } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
-import { useMediaQuery } from 'react-responsive';
 
-import { TablePagination } from 'waldur-ui';
-
-import { GRID_BREAKPOINTS } from '@/core/constants';
+import { TablePagination, useBreakpointDown } from 'waldur-ui';
 
 import { TableContent } from './components/content';
 import { TableToolbar, TableToolbarActions } from './components/toolbar';
@@ -498,7 +495,7 @@ function Table<RowType = any>(props: TableProps<RowType>) {
     initColumnPositions,
   } = props;
 
-  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+  const isSm = useBreakpointDown('sm');
 
   const filterPosition =
     isSm && originalFilterPosition === 'menu'

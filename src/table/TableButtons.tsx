@@ -1,7 +1,6 @@
 import { FunctionComponent, useCallback } from 'react';
-import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
+import { useBreakpointDown } from 'waldur-ui';
 
 import { TableColumnButton } from './TableColumnsButton';
 import { TableDisplayModeButton } from './TableDisplayModeButton';
@@ -17,7 +16,7 @@ interface TableButtonsProps extends TableProps {
 }
 
 export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
-  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+  const isSm = useBreakpointDown('sm');
 
   const showExportInDropdown =
     (props.enableExport && props.showExportInDropdown) ||

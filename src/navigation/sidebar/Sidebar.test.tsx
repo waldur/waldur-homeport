@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { useEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { SidebarProvider, useSidebar } from 'waldur-ui';
+import { setViewport, SidebarProvider, useSidebar } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 
@@ -58,14 +58,6 @@ describe('Sidebar', () => {
         disconnect() {}
       },
     );
-    vi.stubGlobal(
-      'matchMedia',
-      vi.fn().mockReturnValue({
-        matches: false,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      }),
-    );
   });
 
   it('renders brand, menu content and footer', () => {
@@ -97,14 +89,7 @@ describe('Sidebar', () => {
   });
 
   it('renders the mobile drawer as a dialog when open', () => {
-    vi.stubGlobal(
-      'matchMedia',
-      vi.fn().mockReturnValue({
-        matches: true, // below the mobile breakpoint
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      }),
-    );
+    setViewport('mobile');
 
     render(
       <SidebarProvider>

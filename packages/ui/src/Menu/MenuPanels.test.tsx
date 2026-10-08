@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { CSSProperties } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
+import { setViewport } from '../testing/viewport';
+
 import { Menu, MenuPopover } from './Menu';
 
 describe('Menu.Content', () => {
@@ -278,13 +280,7 @@ describe('openOnHover="desktop"', () => {
   });
 
   it('lets a click toggle the menu below lg, where hover does nothing', async () => {
-    // Below lg: the `(max-width: 991px)` query matches.
-    vi.stubGlobal('matchMedia', (query: string) => ({
-      matches: true,
-      media: query,
-      addEventListener() {},
-      removeEventListener() {},
-    }));
+    setViewport('md');
     const user = userEvent.setup();
     render(<HoverMenu />);
     const trigger = screen.getByRole('button', { name: 'Offerings' });

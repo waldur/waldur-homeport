@@ -2,12 +2,10 @@ import { LockOpenIcon, XIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useMediaQuery } from 'react-responsive';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, useBreakpointDown } from 'waldur-ui';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { GroupInvitationTokenStorage } from '@/core/StorageManager';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -30,7 +28,7 @@ const filter = {
 export const AvailableOrganizationsToJoin: FC = () => {
   const user = useUser();
 
-  const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+  const isSmallScr = useBreakpointDown('sm');
 
   const tableProps = useTable({
     table: 'PublicGroupInvitations',
@@ -138,27 +136,13 @@ export const AvailableOrganizationsToJoin: FC = () => {
                     {translate('Request access')}
                   </SubmitButton>
                 ) : values?.invitation?.uuid ? (
-                  isSmallScr ? (
-                    <BaseButton
-                      onClick={() =>
-                        continueToAutentification(values.invitation)
-                      }
-                      label={translate('Continue to autentification')}
-                      variant="primary"
-                      className="ms-6"
-                      size="sm"
-                    />
-                  ) : (
-                    <BaseButton
-                      onClick={() =>
-                        continueToAutentification(values.invitation)
-                      }
-                      label={translate('Continue to autentification')}
-                      variant="primary"
-                      className="ms-6"
-                      size="lg"
-                    />
-                  )
+                  <BaseButton
+                    onClick={() => continueToAutentification(values.invitation)}
+                    label={translate('Continue to autentification')}
+                    variant="primary"
+                    className="ms-6"
+                    size={isSmallScr ? 'sm' : 'lg'}
+                  />
                 ) : null}
               </div>
             }

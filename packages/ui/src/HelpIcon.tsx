@@ -1,40 +1,11 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import type { Icon, IconWeight } from '@phosphor-icons/react';
-import {
-  ButtonHTMLAttributes,
-  forwardRef,
-  ReactNode,
-  useSyncExternalStore,
-} from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { cn } from './cn';
 import { Tooltip, TooltipProps } from './Tooltip';
-
-// Matches on a touch screen. Where matchMedia is missing or reports nothing
-// (jsdom), the tooltip keeps its hover behaviour.
-const NO_HOVER_QUERY = '(hover: none)';
-
-const subscribeToNoHover = (onChange: () => void) => {
-  if (typeof window.matchMedia !== 'function') {
-    return () => undefined;
-  }
-  const query = window.matchMedia(NO_HOVER_QUERY);
-  query.addEventListener('change', onChange);
-  return () => query.removeEventListener('change', onChange);
-};
-
-const getNoHover = () =>
-  typeof window.matchMedia === 'function' &&
-  window.matchMedia(NO_HOVER_QUERY).matches;
-
-/**
- * Whether the primary pointer cannot hover. A touch screen cannot, and a tap on
- * a hover-only tooltip trigger shows nothing, so the help would be
- * unreachable there.
- */
-const useNoHover = () =>
-  useSyncExternalStore(subscribeToNoHover, getNoHover, () => false);
+import { useNoHover } from './useMediaQuery';
 
 const TONE_CLASS = {
   muted: 'text-[var(--surface-text-muted)]',

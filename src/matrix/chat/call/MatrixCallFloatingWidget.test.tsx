@@ -22,6 +22,8 @@ vi.mock('./useMatrixCall', () => ({
   }),
 }));
 
+import { setViewport } from '@/test/harness';
+
 import { MatrixCallFloatingWidget } from './MatrixCallFloatingWidget';
 import { MatrixCallPortalProvider } from './MatrixCallPortalProvider';
 
@@ -47,16 +49,10 @@ describe('MatrixCallFloatingWidget — chrome', () => {
 
 describe('MatrixCallFloatingWidget — drag', () => {
   it('updates position on pointer drag', () => {
-    Object.defineProperty(window, 'innerWidth', {
-      value: 1024,
-      configurable: true,
-    });
-    Object.defineProperty(window, 'innerHeight', {
-      value: 768,
-      configurable: true,
-    });
+    setViewport({ width: 1024, height: 768 });
 
     render(<MatrixCallFloatingWidget roomName="X" />, { wrapper });
+
     // eslint-disable-next-line testing-library/no-node-access
     const header = screen.getByText('X').closest('div')!;
 

@@ -183,7 +183,34 @@ export {
 } from './Sheet';
 export type { SheetContentProps } from './Sheet';
 
-export { useIsMobile } from './useIsMobile';
+export {
+  BREAKPOINTS,
+  resolveBreakpointPx,
+  useBreakpointBetween,
+  useBreakpointDown,
+  useBreakpointUp,
+  useMediaQuery,
+  useNoHover,
+} from './useMediaQuery';
+export type { BreakpointKey } from './useMediaQuery';
+
+export {
+  DEFAULT_VIEWPORT,
+  VIEWPORT_WIDTHS,
+  createVirtualMediaQueryList,
+  evaluateCondition,
+  evaluateMediaQuery,
+  getViewportState,
+  resetViewport,
+  setupVirtualViewport,
+  setViewport,
+} from './testing/viewport';
+export type {
+  NamedViewport,
+  ViewportOptions,
+  ViewportState,
+  ViewportTarget,
+} from './testing/viewport';
 
 export { SegmentedControl } from './SegmentedControl';
 export type {

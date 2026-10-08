@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useEffect, useMemo, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
 import {
   ComponentUsage,
   ComponentUserUsage,
@@ -11,10 +10,10 @@ import {
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
-import { SegmentedControl } from 'waldur-ui';
+import { SegmentedControl, useBreakpointDown } from 'waldur-ui';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@/core/constants';
+import { UI_STALE_TIME } from '@/core/constants';
 import { EChart } from '@/core/EChart';
 import { formatUsageValue } from '@/core/formatNumber';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -53,7 +52,7 @@ export const UsageExpandableRow = ({
     staleTime: Infinity,
   });
 
-  const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.lg });
+  const isSmallScr = useBreakpointDown('lg');
 
   const periodOptions = useMemo(() => {
     if (!resource?.created) return [{ value: 6, label: translate('6 months') }];

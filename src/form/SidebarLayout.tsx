@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
+
+import { useBreakpointDown } from 'waldur-ui';
 
 import { useFullPage } from '@/navigation/context';
 
@@ -51,7 +52,7 @@ const Sidebar: FC<
     hideOnVertical?: boolean;
   }>
 > = (props) => {
-  const isVMode = useMediaQuery({ maxWidth: 1200 });
+  const isVMode = useBreakpointDown('xl');
   useFullPage();
 
   return !props.transparent ? (

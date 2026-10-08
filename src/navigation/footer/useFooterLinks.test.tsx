@@ -1,12 +1,11 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { useMediaQuery } from 'react-responsive';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { userGroupInvitationsCount } from 'waldur-js-client';
 
 import * as AuthService from '@/auth/AuthService';
 import { ENV } from '@/core/config';
 import { isFeatureVisible } from '@/features/connect';
-import { createTestWrapper } from '@/test/harness';
+import { createTestWrapper, setViewport } from '@/test/harness';
 import { mockListResponse } from '@/test/utils';
 import { useUser } from '@/workspace/hooks';
 
@@ -14,7 +13,6 @@ import { useFooterLinks } from './useFooterLinks';
 
 vi.mock('@/auth/AuthService');
 vi.mock('@/features/connect');
-vi.mock('react-responsive');
 
 describe('useFooterLinks', () => {
   beforeEach(() => {
@@ -26,7 +24,7 @@ describe('useFooterLinks', () => {
   });
 
   it('returns desktop config when isMd is false', async () => {
-    vi.mocked(useMediaQuery).mockReturnValue(false);
+    setViewport('desktop');
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(true);
     vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
     vi.mocked(isFeatureVisible).mockReturnValue(true);
@@ -48,7 +46,7 @@ describe('useFooterLinks', () => {
   });
 
   it('returns mobile (modal) config when isMd is true', async () => {
-    vi.mocked(useMediaQuery).mockReturnValue(true);
+    setViewport('mobile');
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(false);
     vi.mocked(isFeatureVisible).mockReturnValue(true);
     vi.mocked(userGroupInvitationsCount).mockResolvedValue(
@@ -78,7 +76,7 @@ describe('useFooterLinks', () => {
   });
 
   it('shows Join Organization on desktop for authenticated user with permissions', async () => {
-    vi.mocked(useMediaQuery).mockReturnValue(false);
+    setViewport('desktop');
     vi.mocked(AuthService.isAuthenticated).mockReturnValue(true);
     vi.mocked(useUser).mockReturnValue({ username: 'user' } as any);
     vi.mocked(isFeatureVisible).mockReturnValue(false); // hide_organization_information... = false

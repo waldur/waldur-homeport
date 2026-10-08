@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { Project, projectsList } from 'waldur-js-client';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
+import { useBreakpointUp, useMediaQuery } from 'waldur-ui';
+
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { defaultCurrency } from '@/core/formatCurrency';
 import { OrganizationLink } from '@/customer/list/OrganizationLink';
@@ -312,9 +312,9 @@ export const ProjectsList = () => {
   // Default to grid view if visible rows fit nicely
   const CARDS_PER_ROW_XL = 3;
   const CARDS_PER_ROW_MD = 2;
-  const isXlScreen = useMediaQuery({ minWidth: GRID_BREAKPOINTS.xl });
+  const isXlScreen = useBreakpointUp('xl');
   // Reduce visible rows on shorter viewports (e.g., 13" laptop vs 16" laptop)
-  const isShortViewport = useMediaQuery({ maxHeight: 900 });
+  const isShortViewport = useMediaQuery('(max-height: 900px)');
   const VISIBLE_ROWS = isShortViewport ? 2 : 3;
   const gridThreshold = isXlScreen
     ? VISIBLE_ROWS * CARDS_PER_ROW_XL
