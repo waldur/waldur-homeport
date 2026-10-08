@@ -28,6 +28,8 @@ const isOneLine = (error) => {
 interface FieldErrorProps {
   error?: string | object | Array<any>;
   center?: boolean;
+  /** Lets the input reference the message via aria-describedby. */
+  id?: string;
 }
 
 export const FieldErrorMessage: FunctionComponent<FieldErrorProps> = ({
@@ -60,9 +62,10 @@ export const FieldErrorMessage: FunctionComponent<FieldErrorProps> = ({
 export const FieldError: FunctionComponent<FieldErrorProps> = ({
   error,
   center,
+  id,
 }) => {
   return error ? (
-    <Form.Text className="text-danger" as="div">
+    <Form.Text id={id} className="text-danger" as="div">
       <FieldErrorMessage error={error} center={center} />
     </Form.Text>
   ) : null;
