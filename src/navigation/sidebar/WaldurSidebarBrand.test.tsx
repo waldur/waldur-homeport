@@ -65,13 +65,21 @@ describe('WaldurSidebarBrand', () => {
     expect(screen.getByText('Waldur')).toBeInTheDocument();
   });
 
+  it('keeps the deployment title as the link name in collapsed rail', () => {
+    renderBrand();
+    expect(screen.getByRole('link', { name: 'Waldur' })).toBeInTheDocument();
+    expect(screen.getByText('Waldur')).toHaveClass(
+      'group-data-[collapsible=icon]/panel:sr-only',
+    );
+  });
+
   it('renders both mobile mark and full logo without a hidden parent wrapper in collapsed rail', () => {
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO = 'logo.png';
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE = 'logo-mobile.png';
 
     renderBrand();
 
-    const logos = screen.getAllByAltText('logo');
+    const logos = screen.getAllByAltText('Waldur logo');
     expect(logos).toHaveLength(2);
 
     const mobileLogo = logos.find((img) =>
@@ -94,14 +102,14 @@ describe('WaldurSidebarBrand', () => {
     );
   });
 
-  it('hides the single logo in collapsed rail when SIDEBAR_LOGO_MOBILE is not configured', () => {
+  it('keeps the single logo readable but visually hidden in collapsed rail when SIDEBAR_LOGO_MOBILE is not configured', () => {
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO = 'logo.png';
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE = undefined;
 
     renderBrand();
 
-    const logo = screen.getByAltText('logo');
+    const logo = screen.getByAltText('Waldur logo');
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveClass('group-data-[collapsible=icon]/panel:hidden');
+    expect(logo).toHaveClass('group-data-[collapsible=icon]/panel:sr-only');
   });
 });
