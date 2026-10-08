@@ -18,7 +18,7 @@ import { Column } from '@/table/types';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
-import { ReportingTitle } from '../ReportingTitle';
+import { CustomerScopedReport } from '../CustomerScopedReport';
 import { usageTableTabs } from '../utils';
 
 import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
@@ -56,9 +56,37 @@ export const selectResourceUsageFilter = (usageFilter: any) => {
   return filter;
 };
 
-export const ResourceUsageList: FC = () => {
-  const values = useFilterValues('ResourceUsageReports');
-  const filter = useMemo(() => selectResourceUsageFilter(values), [values]);
+/**
+ * Usage filter of a report optionally scoped to one organization. The scope
+ * wins over a `customer_uuid` table filter carried in the URL.
+ */
+export const useScopedUsageFilter = (table: string, customerUuid?: string) => {
+  const values = useFilterValues(table);
+  return useMemo(() => {
+    const filter = selectResourceUsageFilter(values);
+    if (customerUuid) {
+      filter.customer_uuid = customerUuid;
+    }
+    return filter;
+  }, [values, customerUuid]);
+};
+
+/**
+ * The organization column and its filter say nothing once the report is
+ * scoped to a single organization.
+ */
+export const withoutOrganizationColumn = <T,>(
+  columns: Array<Column<T>>,
+  customerUuid?: string,
+) =>
+  customerUuid
+    ? columns.filter((column) => column.filter !== 'customer_uuid')
+    : columns;
+
+const ResourceUsageTable: FC<{ customerUuid?: string }> = ({
+  customerUuid,
+}) => {
+  const filter = useScopedUsageFilter('ResourceUsageReports', customerUuid);
 
   const tableProps = useTable({
     table: 'ResourceUsageReports',
@@ -148,21 +176,24 @@ export const ResourceUsageList: FC = () => {
   ];
 
   return (
-    <>
-      <ReportingTitle reportKey="resource-usage" />
-      <Table
-        {...tableProps}
-        columns={columns}
-        tabs={usageTableTabs}
-        verboseName={translate('Usages')}
-        showPageSizeSelector={true}
-        enableExport={true}
-        expandableRow={({ row }) => (
-          <UsageExpandableRow row={row} type="resource-usage" />
-        )}
-        filters={<ResourceUsageFilter />}
-        formId={FORM_ID}
-      />
-    </>
+    <Table
+      {...tableProps}
+      columns={withoutOrganizationColumn(columns, customerUuid)}
+      tabs={usageTableTabs}
+      verboseName={translate('Usages')}
+      showPageSizeSelector={true}
+      enableExport={true}
+      expandableRow={({ row }) => (
+        <UsageExpandableRow row={row} type="resource-usage" />
+      )}
+      filters={<ResourceUsageFilter customerUuid={customerUuid} />}
+      formId={FORM_ID}
+    />
   );
 };
+
+export const ResourceUsageList: FC = () => (
+  <CustomerScopedReport reportKey="resource-usage">
+    {(customerUuid) => <ResourceUsageTable customerUuid={customerUuid} />}
+  </CustomerScopedReport>
+);

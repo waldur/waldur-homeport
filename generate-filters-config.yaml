@@ -777,6 +777,21 @@ overrides:
       label: Created before
       component: DateField
 
+  # Resources of one organization in the Organization summary report. The
+  # organization is fixed by the page; "Include terminated" stays manual as it
+  # rewrites the state filter.
+  organization_summary_resources:
+    operationId: marketplace_resources_list
+    filters:
+      - created
+      - created_before
+    created:
+      label: Created after
+      component: DateField
+    created_before:
+      label: Created before
+      component: DateField
+
   proposal_my_requested_resources:
     filters:
       - proposal_state

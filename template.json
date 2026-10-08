@@ -10222,6 +10222,11 @@
       "feature_area": "organization-summary"
     }
   },
+  "Choose an organization from the dropdown above to view this report.": {
+    "context": {
+      "feature_area": "reporting"
+    }
+  },
   "Choose an organization role, a project role, or both.": {},
   "Choose how to request this offering": {
     "context": {
@@ -11364,6 +11369,11 @@
       "feature_area": "offerings"
     }
   },
+  "Component usage attributed to individual team members": {
+    "context": {
+      "feature_area": "reporting"
+    }
+  },
   "Component usage chart": {
     "context": {
       "feature_area": "expandable"
@@ -11373,6 +11383,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "component-policies"
+    }
+  },
+  "Component-level usage for each resource over the selected period": {
+    "context": {
+      "feature_area": "reporting"
     }
   },
   "Components": {
@@ -46356,6 +46371,11 @@
       "feature_area": "usage-trends"
     }
   },
+  "Resource count, estimated cost and cloud quota usage of this organization": {
+    "context": {
+      "feature_area": "reporting"
+    }
+  },
   "Resource creation trend (12 months)": {
     "context": {
       "feature_area": "provider"
@@ -46532,6 +46552,11 @@
   "Resource lifecycle": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Resource limit and usage history of a single project": {
+    "context": {
+      "feature_area": "reporting"
     }
   },
   "Resource limit and usage history over time": {
@@ -47013,6 +47038,11 @@
   "Resources keep their values under this name, so it cannot be changed. To pair with another order option, delete this option and add a new one.": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Resources of the organization by project, with limits and usage": {
+    "context": {
+      "feature_area": "reporting"
     }
   },
   "Resources paused status updated.": {
@@ -50178,6 +50208,11 @@
   "Select an organization to join and request access.": {
     "context": {
       "feature_area": "join-organization"
+    }
+  },
+  "Select an organization to view its reports": {
+    "context": {
+      "feature_area": "reporting"
     }
   },
   "Select an outcome...": {
@@ -70327,6 +70362,16 @@
   "You need approval to finish purchasing of services.": {
     "context": {
       "feature_area": "actions"
+    }
+  },
+  "You own {count} organizations. Pick one from the filter above to load the reports recommended for that organization.": {
+    "context": {
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "reporting"
     }
   },
   "You will be added as a reviewer on this call (if you are not already) and taken to your review of this proposal. Other reviewers’ reviews are not affected. Continue?": {

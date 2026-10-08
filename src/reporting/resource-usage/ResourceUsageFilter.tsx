@@ -21,21 +21,25 @@ interface MissingUsagePolicyOption {
 
 const options = makeLastTwelveMonthsFilterPeriods();
 
-export const ResourceUsageFilter: FunctionComponent = () => {
+interface ResourceUsageFilterProps {
+  /** Organization the report is scoped to; hides the organization filter */
+  customerUuid?: string;
+}
+
+export const ResourceUsageFilter: FunctionComponent<
+  ResourceUsageFilterProps
+> = ({ customerUuid }) => {
   const { table } = useContext(TableFilterContext);
   const values = useFilterValues(table);
   // Global staff report: use backend keys so it doesn't pick up the workspace
   // organization/project context (?organization=/?project=).
-  const customer = values?.customer_uuid;
+  const customer = customerUuid ?? values?.customer_uuid?.uuid;
 
   return (
     <>
       <AccountingPeriodFilter options={options} />
-      <OrganizationFilter name="customer_uuid" />
-      <ProjectFilter
-        name="project_uuid"
-        customer_uuid={customer ? customer.uuid : null}
-      />
+      {!customerUuid && <OrganizationFilter name="customer_uuid" />}
+      <ProjectFilter name="project_uuid" customer_uuid={customer ?? null} />
       <OfferingFilter
         badgeValue={(value) =>
           value?.category_title

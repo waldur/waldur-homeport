@@ -9,10 +9,18 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
 import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { BooleanFilter } from '@/table';
 import { createFetcher } from '@/table/api';
+import {
+  OrganizationSummaryResourcesFilter,
+  OrganizationSummaryResourcesFilterFormId,
+  selectOrganizationSummaryResourcesFilter,
+} from '@/table/generated/OrganizationSummaryResourcesFilter';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
+import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
@@ -148,14 +156,31 @@ const collectOptionKeys = (resources: Resource[]): string[] => {
   return Array.from(keys).sort();
 };
 
+const TABLE_ID = 'OrganizationResourcesTable';
+
+// Without terminated resources only projects that still have live resources
+// show up, i.e. the active projects of the organization.
+const OrganizationResourcesFilter: FC = () => (
+  <>
+    <BooleanFilter
+      title={translate('Include terminated')}
+      name="include_terminated"
+      badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
+      label={translate('Include terminated')}
+    />
+    <OrganizationSummaryResourcesFilter />
+  </>
+);
+
 export const OrganizationResourcesTable: FC<
   OrganizationResourcesTableProps
 > = ({ customerUuid, componentMap }) => {
+  const values = useFilterValues(TABLE_ID);
   const filter = useMemo(
     () => ({
+      ...selectOrganizationSummaryResourcesFilter(values),
       customer_uuid: customerUuid,
-      // Exclude terminated
-      state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+      ...(!values?.include_terminated && { state: NON_TERMINATED_STATES }),
       field: [
         'uuid',
         'name',
@@ -174,11 +199,12 @@ export const OrganizationResourcesTable: FC<
         'customer_name',
       ],
     }),
-    [customerUuid],
+    [customerUuid, values],
   );
 
   const tableProps = useTable({
-    table: 'OrganizationResourcesTable',
+    table: TABLE_ID,
+    syncFiltersToURL: true,
     fetchData: createFetcher(marketplaceResourcesList),
     filter,
   });
@@ -343,6 +369,8 @@ export const OrganizationResourcesTable: FC<
       showPageSizeSelector
       initialSorting={{ field: 'created', mode: 'asc' }}
       enableExport
+      filters={<OrganizationResourcesFilter />}
+      formId={OrganizationSummaryResourcesFilterFormId}
     />
   );
 };

@@ -1,3 +1,15 @@
+import {
+  BuildingsIcon,
+  FolderIcon,
+  GaugeIcon,
+  GlobeSimpleIcon,
+  Icon,
+  PulseIcon,
+  StackIcon,
+  TrendUpIcon,
+  UserListIcon,
+} from '@phosphor-icons/react';
+
 import { isFeatureVisible } from '@/features/connect';
 import {
   FeaturesEnum,
@@ -15,6 +27,7 @@ import {
   isStaffOrSupport,
 } from '@/workspace/selectors';
 
+import { CUSTOMER_SCOPED_REPORTS } from './access';
 import { AnalyticsMode } from './analytics';
 import { isReportingScreenEnabled } from './screens';
 
@@ -25,6 +38,10 @@ export interface ReportDefinition {
   key: string;
   title: string;
   description?: string;
+  /** Description shown to organization owners, where the report is scoped to one organization */
+  scopedDescription?: string;
+  /** Icon of the report card shown to organization owners */
+  icon?: Icon;
   state: string;
   /** Optional feature flag - report only visible when feature is enabled */
   feature?: FeaturesEnum;
@@ -56,18 +73,30 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
       reports: [
         {
           key: 'resource-usage',
+          icon: GaugeIcon,
+          scopedDescription: translate(
+            'Component-level usage for each resource over the selected period',
+          ),
           title: translate('Usage'),
           description: translate('Resource usage metrics across organizations'),
           state: 'reporting-resource-usage',
         },
         {
           key: 'user-usage',
+          icon: UserListIcon,
+          scopedDescription: translate(
+            'Component usage attributed to individual team members',
+          ),
           title: translate('Usage by user'),
           description: translate('Usage metrics broken down by user'),
           state: 'reporting-user-usage',
         },
         {
           key: 'quotas',
+          icon: StackIcon,
+          scopedDescription: translate(
+            'Resource count, estimated cost and cloud quota usage of this organization',
+          ),
           title: translate('Quotas'),
           description: translate('Organization quota limits and usage'),
           state: 'reporting-quotas',
@@ -85,18 +114,24 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
         },
         {
           key: 'usage-monitoring',
+          icon: PulseIcon,
           title: translate('Usage monitoring'),
           description: translate('Detect missing or anomalous usage reports'),
           state: 'reporting-usage-monitoring',
         },
         {
           key: 'usage-trends',
+          icon: TrendUpIcon,
           title: translate('Usage trends'),
           description: translate('Year-over-year usage analysis and growth'),
           state: 'reporting-usage-trends',
         },
         {
           key: 'organization-summary',
+          icon: BuildingsIcon,
+          scopedDescription: translate(
+            'Resources of the organization by project, with limits and usage',
+          ),
           title: translate('Organization summary'),
           description: translate(
             'Resources, limits, and usage by organization',
@@ -105,12 +140,17 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
         },
         {
           key: 'project-detail',
+          icon: FolderIcon,
+          scopedDescription: translate(
+            'Resource limit and usage history of a single project',
+          ),
           title: translate('Project detail'),
           description: translate('Resource limit and usage history over time'),
           state: 'reporting-project-detail',
         },
         {
           key: 'resources-geography',
+          icon: GlobeSimpleIcon,
           title: translate('Geographic distribution'),
           description: translate(
             'Resources by country, organization group, and offering',
@@ -439,4 +479,16 @@ export const getVisibleReports = (
       (!report.isExperimental || showExperimental) &&
       !report.isHidden,
   );
+};
+
+/**
+ * Reports listed to organization owners, in CUSTOMER_SCOPED_REPORTS order.
+ */
+export const getCustomerScopedReports = (): ReportDefinition[] => {
+  const reports = Object.values(getCategoryConfig()).flatMap((category) =>
+    getVisibleReports(category),
+  );
+  return CUSTOMER_SCOPED_REPORTS.map((key) =>
+    reports.find((report) => report.key === key),
+  ).filter(Boolean);
 };

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { customerQuotasList } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -13,15 +13,23 @@ import Table from '@/table/Table';
 import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 
-import { ReportingTitle } from '../ReportingTitle';
+import { CustomerScopedReport } from '../CustomerScopedReport';
 
 import { getQuotas } from './constants';
 import { QuotasAnalytics } from './QuotasAnalytics';
 import { CustomerQuota } from './types';
 
-export const CustomerQuotasList = () => {
+const CustomerQuotasTable: FC<{ customerUuid?: string }> = ({
+  customerUuid,
+}) => {
   const values = useFilterValues('CustomerQuotasList');
-  const filter = useMemo(() => selectCustomerQuotasFilter(values), [values]);
+  const filter = useMemo(
+    () => ({
+      ...selectCustomerQuotasFilter(values),
+      ...(customerUuid && { customer_uuid: customerUuid }),
+    }),
+    [values, customerUuid],
+  );
   const tableProps = useTable({
     table: 'CustomerQuotasList',
     syncFiltersToURL: true,
@@ -35,45 +43,45 @@ export const CustomerQuotasList = () => {
   const activeQuota = getQuotas(true).find((q) => q.key === filter?.quota_name);
 
   return (
-    <>
-      <ReportingTitle reportKey="quotas" />
-      <Table<CustomerQuota>
-        {...tableProps}
-        columns={[
-          {
-            title: translate('Name'),
-            render: ({ row }) => <>{row.customer_name}</>,
-            copyField: (row) => row.customer_name,
-            orderField: 'name',
-          },
-          {
-            title: translate('Abbreviation'),
-            render: ({ row }) => <>{row.customer_abbreviation}</>,
-          },
-          {
-            title: translate('Value'),
-            render: ({ row }) => (
-              <>
-                {activeQuota?.tooltipValueFormatter
-                  ? activeQuota.tooltipValueFormatter(row.value)
-                  : row.value}
-              </>
-            ),
+    <Table<CustomerQuota>
+      {...tableProps}
+      columns={[
+        {
+          title: translate('Name'),
+          render: ({ row }) => <>{row.customer_name}</>,
+          copyField: (row) => row.customer_name,
+          orderField: 'name',
+        },
+        {
+          title: translate('Abbreviation'),
+          render: ({ row }) => <>{row.customer_abbreviation}</>,
+        },
+        {
+          title: translate('Value'),
+          render: ({ row }) => (
+            <>
+              {activeQuota?.tooltipValueFormatter
+                ? activeQuota.tooltipValueFormatter(row.value)
+                : row.value}
+            </>
+          ),
 
-            orderField: 'value',
-          },
-        ]}
-        showPageSizeSelector={true}
-        filters={<CustomerQuotasFilter />}
-        hideClearFilters
-        tableActions={
-          <QuotasAnalytics
-            data={tableProps.rows}
-            loading={tableProps.loading}
-          />
-        }
-        formId={CustomerQuotasFilterFormId}
-      />
-    </>
+          orderField: 'value',
+        },
+      ]}
+      showPageSizeSelector={true}
+      filters={<CustomerQuotasFilter />}
+      hideClearFilters
+      tableActions={
+        <QuotasAnalytics data={tableProps.rows} loading={tableProps.loading} />
+      }
+      formId={CustomerQuotasFilterFormId}
+    />
   );
 };
+
+export const CustomerQuotasList: FC = () => (
+  <CustomerScopedReport reportKey="quotas">
+    {(customerUuid) => <CustomerQuotasTable customerUuid={customerUuid} />}
+  </CustomerScopedReport>
+);

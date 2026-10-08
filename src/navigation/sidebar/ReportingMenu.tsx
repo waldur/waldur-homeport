@@ -4,6 +4,7 @@ import { FC, useMemo } from 'react';
 import { translate } from '@/i18n';
 import { useUser } from '@/workspace/hooks';
 
+import { checkCanAccessCustomerReporting } from '../../reporting/access';
 import { hasAnyReportingEnabled } from '../../reporting/screens';
 
 import { MenuItem } from './MenuItem';
@@ -20,7 +21,8 @@ export const ReportingMenu: FC<ReportingMenuProps> = ({
   const user = useUser();
   const isStaff = user?.is_staff || user?.is_support;
   const anyEnabled = useMemo(() => hasAnyReportingEnabled(), []);
-  const visible = isStaff && anyEnabled;
+  const visible =
+    (isStaff && anyEnabled) || checkCanAccessCustomerReporting(user);
   if (!visible) {
     return null;
   }
