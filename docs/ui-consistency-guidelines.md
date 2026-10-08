@@ -841,23 +841,31 @@ translate('{count} item', '{count} items', { count });
 
 ## 11. Responsive Behavior
 
-### 11.1 Breakpoints
+### 11.1 Breakpoints & Media Query Hooks
+
+Always prefer pure CSS/Tailwind responsive utility classes (`sm:`, `md:`, `lg:`, `max-md:`, etc.) for purely visual layout, hiding/showing elements, and spacing. When React component logic, state, or conditional data fetching must adapt to viewport width, use the typed breakpoint helpers from `waldur-ui`:
 
 ```tsx
-import { GRID_BREAKPOINTS } from '@/core/constants';
+import { useBreakpointDown, useBreakpointUp, useMediaQuery } from 'waldur-ui';
 
-// GRID_BREAKPOINTS = { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400 }
+// Strictly below breakpoint (boundary-safe: max-width: bp - 1px)
+const isSm = useBreakpointDown('sm'); // < 576px
+const isMd = useBreakpointDown('md'); // < 768px
+const isMobile = useBreakpointDown('lg'); // < 992px
 
-import { useMediaQuery } from 'react-responsive';
+// At or above breakpoint (min-width: bp)
+const isDesktop = useBreakpointUp('lg'); // >= 992px
+const isWide = useBreakpointUp('xl'); // >= 1200px
 
-const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
-const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
+// Device capabilities
+const cannotHover = useMediaQuery('(hover: none)');
 ```
 
 ### 11.2 Filter Position Adaptation
 
 ```tsx
 // Automatically converts 'menu' to 'sidebar' on small screens
+const isSm = useBreakpointDown('sm');
 const filterPosition =
   isSm && originalPosition === 'menu' ? 'sidebar' : originalPosition;
 ```

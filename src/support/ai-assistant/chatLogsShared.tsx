@@ -1,13 +1,16 @@
 import { ThumbsDownIcon, ThumbsUpIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { ActionTakenEnum, InjectionSeverityEnum } from 'waldur-js-client';
 
-import { BadgeVariant, HelpIcon, Tooltip } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import {
+  Badge,
+  BadgeVariant,
+  HelpIcon,
+  Tooltip,
+  useBreakpointUp,
+} from 'waldur-ui';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { formatDateTime, formatShortDateTime } from '@/core/dateUtils';
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
@@ -151,7 +154,7 @@ export const MessageGutter: FunctionComponent<
   outputTokens,
   children,
 }) => {
-  const isDesktop = useMediaQuery({ minWidth: GRID_BREAKPOINTS.sm });
+  const isDesktop = useBreakpointUp('sm');
   const formatDate = isDesktop ? formatDateTime : formatShortDateTime;
 
   return (

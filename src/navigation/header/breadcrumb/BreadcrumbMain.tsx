@@ -1,15 +1,15 @@
 import classNames from 'classnames';
 import { useContext } from 'react';
-import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
+import { useBreakpointDown } from 'waldur-ui';
+
 import { LayoutContext } from '@/navigation/context';
 
 import { Breadcrumbs } from './Breadcrumbs';
 
 export const BreadcrumbMain = ({ mobile = false }: { mobile?: boolean }) => {
   const { breadcrumbs } = useContext(LayoutContext);
-  const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
+  const isMd = useBreakpointDown('md');
 
   if (!breadcrumbs?.length) return null;
 

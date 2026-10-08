@@ -2,11 +2,9 @@ import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useMediaQuery } from 'react-responsive';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, useBreakpointDown } from 'waldur-ui';
 
-import { GRID_BREAKPOINTS } from '@/core/constants';
 import { translate } from '@/i18n';
 
 import { clearAllFilters } from './actions';
@@ -39,7 +37,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
     props.applyFiltersFn(true);
   }, [props, dispatch]);
 
-  const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
+  const isMd = useBreakpointDown('md');
   const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (

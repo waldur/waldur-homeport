@@ -79,9 +79,11 @@ export const createTestWrapper = ({
 export const inActionsMenu = (children: ReactNode) => (
   <Menu open>
     {/* No Trigger: it would render a real <button> into the container and
-        break the "this action renders nothing" assertions that check for an
-        empty container. The Content only needs an anchor for positioning,
-        which is irrelevant in jsdom. */}
+          break the "this action renders nothing" assertions that check for an
+          empty container. The Content only needs an anchor for positioning,
+          which is irrelevant in jsdom. */}
     <Menu.Content look="actions">{children}</Menu.Content>
   </Menu>
 );
+
+export { setViewport } from 'waldur-ui';

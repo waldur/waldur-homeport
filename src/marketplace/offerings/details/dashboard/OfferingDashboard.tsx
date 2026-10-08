@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
 import { marketplaceSiteAgentIdentitiesList, Offering } from 'waldur-js-client';
 
+import { useBreakpointDown } from 'waldur-ui';
+
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
-import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@/core/constants';
+import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
@@ -26,7 +27,7 @@ interface OwnProps {
 }
 
 export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
-  const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.xl });
+  const isSmallScr = useBreakpointDown('xl');
   const user = useUser();
   // Usage and state counters need provider statistics or the right to list
   // this offering's orders, as the API checks; a role that can open the

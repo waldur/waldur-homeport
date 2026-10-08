@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 import { cn } from '../cn';
-import { useIsMobile } from '../useIsMobile';
+import { BreakpointKey, useBreakpointDown } from '../useMediaQuery';
 
 import { SidebarContext, SidebarContextProps } from './context';
 
@@ -28,10 +28,10 @@ export interface SidebarProviderProps extends ComponentProps<'div'> {
   /** Callback fired when the desktop open state changes. */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Viewport breakpoint (in pixels) below which the sidebar shifts to mobile drawer mode.
+   * Viewport breakpoint (in pixels or BreakpointKey) below which the sidebar shifts to mobile drawer mode.
    * Defaults to 768px (standard md breakpoint).
    */
-  mobileBreakpoint?: number;
+  mobileBreakpoint?: BreakpointKey | number;
   /**
    * Whether to render an outer layout `<div>` establishing `--sidebar-width` variables.
    * When `false`, variables are injected into `document.documentElement`, allowing
@@ -55,7 +55,7 @@ export function SidebarProvider({
   children,
   ...props
 }: SidebarProviderProps) {
-  const isMobile = useIsMobile(mobileBreakpoint);
+  const isMobile = useBreakpointDown(mobileBreakpoint ?? 'md');
   const [openMobile, setOpenMobile] = useState(false);
   const [openState, setOpenState] = useState(defaultOpen);
   const open = openProp ?? openState;

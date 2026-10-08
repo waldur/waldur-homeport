@@ -1,5 +1,4 @@
 import { Col, Row } from 'react-bootstrap';
-import { useMediaQuery } from 'react-responsive';
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -22,8 +21,6 @@ interface ResourceComponentsDialogProps {
 export const ResourceComponentsDialog: React.FC<
   ResourceComponentsDialogProps
 > = ({ resolve }) => {
-  const isSmallScreen = useMediaQuery({ maxWidth: 320 });
-
   return (
     <ModalDialog
       title={translate('Components')}
@@ -37,13 +34,7 @@ export const ResourceComponentsDialog: React.FC<
     >
       <Row>
         {resolve.components.map((component) => (
-          <Col
-            key={component.type}
-            xs={isSmallScreen ? 12 : 6}
-            sm={6}
-            md={4}
-            lg={3}
-          >
+          <Col key={component.type} xs={12} sm={6} md={4} lg={3}>
             <ResourceComponentItem
               resource={resolve.resource as any}
               component={component}

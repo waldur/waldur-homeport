@@ -1,13 +1,14 @@
 import { GlobeSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import { userGroupInvitationsCount } from 'waldur-js-client';
+
+import { useBreakpointDown } from 'waldur-ui';
 
 import * as AuthService from '@/auth/AuthService';
 import { fetchResultCount } from '@/core/api';
 import { ENV } from '@/core/config';
-import { GRID_BREAKPOINTS, SHORT_STALE_TIME } from '@/core/constants';
+import { SHORT_STALE_TIME } from '@/core/constants';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
@@ -17,7 +18,7 @@ import { checkHasNonProjectPermissions } from '@/workspace/selectors';
 
 export const useFooterLinks = () => {
   const user = useUser();
-  const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
+  const isMd = useBreakpointDown('md');
   const hasNonProjectPerms = useMemo(
     () => checkHasNonProjectPermissions(user),
     [user],

@@ -1,9 +1,10 @@
 import { WarningIcon } from '@phosphor-icons/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { HelpIcon } from './HelpIcon';
+import { setViewport } from './testing/viewport';
 import { WarningTip } from './WarningTip';
 
 describe('HelpIcon', () => {
@@ -35,17 +36,8 @@ describe('HelpIcon', () => {
 });
 
 describe('HelpIcon on a touch screen', () => {
-  const original = window.matchMedia;
   beforeEach(() => {
-    window.matchMedia = vi.fn().mockImplementation((query: string) => ({
-      matches: query === '(hover: none)',
-      media: query,
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-    })) as unknown as typeof window.matchMedia;
-  });
-  afterEach(() => {
-    window.matchMedia = original;
+    setViewport({ hover: false });
   });
 
   it('opens its text on tap and closes on Escape', async () => {

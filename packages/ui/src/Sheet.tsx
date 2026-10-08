@@ -23,7 +23,7 @@ import { cn } from './cn';
  * internally, and a plain function component can't receive one. Omitting
  * this here once produced a real, reproducible "Function components cannot
  * be given refs" warning the moment Sidebar's mobile Sheet path mounted
- * (see useIsMobile.ts's own comment for why that path mounts more often
+ * (see useBreakpointDown's own comment for why that path mounts more often
  * than its "only below 768px" name suggests) — same class of Radix
  * Slot-composition issue TopBar.tsx's IconButton documents for
  * Menu.Trigger asChild.
