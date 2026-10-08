@@ -1,19 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook } from '@testing-library/react';
-import { FC, PropsWithChildren } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourceApiKeysRevealRetrieve } from 'waldur-js-client';
 
-import { useRevealedApiKey } from './useResourceApiKeys';
+import { renderHookWithProviders } from '@/test/harness';
 
-const wrapper = (): FC<PropsWithChildren> => {
-  const client = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return ({ children }) => (
-    <QueryClientProvider client={client}>{children}</QueryClientProvider>
-  );
-};
+import { useRevealedApiKey } from './useResourceApiKeys';
 
 describe('useRevealedApiKey', () => {
   beforeEach(() => vi.clearAllMocks());
@@ -23,9 +13,7 @@ describe('useRevealedApiKey', () => {
       data: { uuid: 'k1', api_key: 'sk-secret' },
     } as any);
 
-    const { result } = renderHook(() => useRevealedApiKey('k1'), {
-      wrapper: wrapper(),
-    });
+    const { result } = renderHookWithProviders(() => useRevealedApiKey('k1'));
 
     expect(
       vi.mocked(marketplaceResourceApiKeysRevealRetrieve),

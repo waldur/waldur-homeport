@@ -1,11 +1,13 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import type { QueryClient } from '@tanstack/react-query';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   anonymousChatInteractionsConversationsList,
   anonymousChatInteractionsKpiRetrieve,
 } from 'waldur-js-client';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { AnonymousChatPanel } from './AnonymousChatPanel';
 
@@ -37,14 +39,9 @@ vi.mock('@/table/useFilterValues', () => ({ useFilterValues: () => ({}) }));
 let queryClient: QueryClient;
 
 const renderPanel = () => {
-  queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <AnonymousChatPanel />
-    </QueryClientProvider>,
-  );
+  const result = renderWithProviders(<AnonymousChatPanel />);
+  queryClient = result.queryClient;
+  return result;
 };
 
 const request = { tableKey: 't', currentPage: 1, pageSize: 10, filter: {} };

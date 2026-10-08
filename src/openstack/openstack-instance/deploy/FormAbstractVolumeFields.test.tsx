@@ -1,10 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form, FormSpy } from 'react-final-form';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { openstackVolumeTypesList } from 'waldur-js-client';
 
+import { renderWithProviders } from '@/test/harness';
 import { mockListResponse } from '@/test/utils';
 
 import { FormAbstractVolumeFields } from './FormAbstractVolumeFields';
@@ -22,34 +22,29 @@ const STORAGE_QUOTA = { name: 'storage', limit: 102400, usage: 51200 };
 const VOLUME_TYPE_QUOTA = { name: 'gigabytes_ssd', limit: 100, usage: 50 };
 
 const renderFields = (quotas: any[]) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <Form
-        onSubmit={vi.fn()}
-        subscription={{ values: true }}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <FormAbstractVolumeFields
-              id="step-volume"
-              offering={
-                {
-                  uuid: 'offering-1',
-                  scope_uuid: 'tenant-1',
-                  quotas,
-                } as any
-              }
-              typeField="system_volume_type"
-              sizeField="system_volume_size"
-              typeTitle="System volume type"
-              sizeTitle="System volume size"
-            />
-          </form>
-        )}
-      />
-    </QueryClientProvider>,
+  return renderWithProviders(
+    <Form
+      onSubmit={vi.fn()}
+      subscription={{ values: true }}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <FormAbstractVolumeFields
+            id="step-volume"
+            offering={
+              {
+                uuid: 'offering-1',
+                scope_uuid: 'tenant-1',
+                quotas,
+              } as any
+            }
+            typeField="system_volume_type"
+            sizeField="system_volume_size"
+            typeTitle="System volume type"
+            sizeTitle="System volume size"
+          />
+        </form>
+      )}
+    />,
   );
 };
 
@@ -142,9 +137,6 @@ const renderInstanceVolumes = (
   quotas: any[],
   initialValues: Record<string, any>,
 ) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
   const offering = {
     uuid: 'offering-1',
     scope_uuid: 'tenant-1',
@@ -152,42 +144,40 @@ const renderInstanceVolumes = (
   } as any;
   const errors: { current: Record<string, string> } = { current: {} };
   const values: { current: Record<string, any> } = { current: {} };
-  render(
-    <QueryClientProvider client={queryClient}>
-      <Form
-        onSubmit={vi.fn()}
-        initialValues={initialValues}
-        subscription={{ values: true }}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <FormAbstractVolumeFields
-              id="step-volume"
-              offering={offering}
-              {...SYSTEM_VOLUME}
-              siblingVolumes={[DATA_VOLUME]}
-              typeTitle="System volume type"
-              sizeTitle="System volume size"
-            />
-            <FormAbstractVolumeFields
-              id="step-volume"
-              offering={offering}
-              {...DATA_VOLUME}
-              siblingVolumes={[SYSTEM_VOLUME]}
-              optional
-              typeTitle="Data volume type"
-              sizeTitle="Data volume size"
-            />
-            <FormSpy
-              subscription={{ errors: true, values: true }}
-              onChange={(state) => {
-                errors.current = state.errors;
-                values.current = state.values;
-              }}
-            />
-          </form>
-        )}
-      />
-    </QueryClientProvider>,
+  renderWithProviders(
+    <Form
+      onSubmit={vi.fn()}
+      initialValues={initialValues}
+      subscription={{ values: true }}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <FormAbstractVolumeFields
+            id="step-volume"
+            offering={offering}
+            {...SYSTEM_VOLUME}
+            siblingVolumes={[DATA_VOLUME]}
+            typeTitle="System volume type"
+            sizeTitle="System volume size"
+          />
+          <FormAbstractVolumeFields
+            id="step-volume"
+            offering={offering}
+            {...DATA_VOLUME}
+            siblingVolumes={[SYSTEM_VOLUME]}
+            optional
+            typeTitle="Data volume type"
+            sizeTitle="Data volume size"
+          />
+          <FormSpy
+            subscription={{ errors: true, values: true }}
+            onChange={(state) => {
+              errors.current = state.errors;
+              values.current = state.values;
+            }}
+          />
+        </form>
+      )}
+    />,
   );
   return { errors, values };
 };

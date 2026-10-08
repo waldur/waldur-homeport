@@ -1,11 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceGlobalCategoriesRetrieve } from 'waldur-js-client';
 
 import { SidebarProvider } from 'waldur-ui';
 
 import { getCategoryGroups } from '@/marketplace/common/api';
+import { createTestQueryClient, renderWithProviders } from '@/test/harness';
 
 import { ResourcesMenu } from './ResourcesMenu';
 import { useOfferingCategories } from './utils';
@@ -67,9 +67,7 @@ describe('ResourcesMenu', () => {
 
     vi.mocked(useOfferingCategories).mockReturnValue([frozenCategory as any]);
 
-    const queryClient = new QueryClient({
-      defaultOptions: { queries: { retry: false } },
-    });
+    const queryClient = createTestQueryClient();
 
     // Seed counters query cache so counters are immediately available
     queryClient.setQueryData(
@@ -78,12 +76,11 @@ describe('ResourcesMenu', () => {
     );
 
     expect(() =>
-      render(
-        <QueryClientProvider client={queryClient}>
-          <SidebarProvider>
-            <ResourcesMenu user={{ uuid: 'user-1' } as any} open={true} />
-          </SidebarProvider>
-        </QueryClientProvider>,
+      renderWithProviders(
+        <SidebarProvider>
+          <ResourcesMenu user={{ uuid: 'user-1' } as any} open={true} />
+        </SidebarProvider>,
+        { queryClient },
       ),
     ).not.toThrow();
 

@@ -1,23 +1,16 @@
-import { QueryClientProvider } from '@tanstack/react-query';
-import { renderHook, waitFor } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceProjectPosixGroupsList } from 'waldur-js-client';
 
 import { queryClient } from '@/core/queryClient';
 import { isFeatureVisible } from '@/features/connect';
 import { router } from '@/router';
+import { renderHookWithProviders } from '@/test/harness';
 
 import { useProjectPosixGroups } from './useProjectPosixGroups';
 
 vi.mock('@/error/utils', () => ({ goToNotFound: vi.fn() }));
 vi.mock('@/features/connect', () => ({ isFeatureVisible: vi.fn(() => true) }));
-
-// The app's own client, with its global error handler: a failed query
-// without the opt-out sends the whole page to an error page.
-const wrapper = ({ children }: { children: ReactNode }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-);
 
 // What the SDK's fetch client rejects with: the body's keys plus the
 // transport fields that its error interceptor puts next to them.
@@ -30,13 +23,18 @@ const serverError = {
 };
 
 describe('useProjectPosixGroups error handling', () => {
+  afterEach(() => {
+    queryClient.clear();
+  });
+
   it('keeps the page in place on a server error, for the tab to show it', async () => {
     vi.mocked(router.stateService.target).mockClear();
     vi.mocked(marketplaceProjectPosixGroupsList).mockRejectedValue(serverError);
 
-    const { result } = renderHook(() => useProjectPosixGroups('p-500'), {
-      wrapper,
-    });
+    const { result } = renderHookWithProviders(
+      () => useProjectPosixGroups('p-500'),
+      { queryClient },
+    );
 
     await waitFor(() => expect(result.current.isError).toBe(true), {
       timeout: 4000,
@@ -68,9 +66,10 @@ describe('useProjectPosixGroups where POSIX pools are off', () => {
   it('does not ask for the groups', async () => {
     vi.mocked(isFeatureVisible).mockReturnValue(false);
     vi.mocked(marketplaceProjectPosixGroupsList).mockClear();
-    const { result } = renderHook(() => useProjectPosixGroups('project-off'), {
-      wrapper,
-    });
+    const { result } = renderHookWithProviders(
+      () => useProjectPosixGroups('project-off'),
+      { queryClient },
+    );
 
     await new Promise((resolve) => setTimeout(resolve, 50));
     expect(marketplaceProjectPosixGroupsList).not.toHaveBeenCalled();

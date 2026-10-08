@@ -1,8 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from '@uirouter/react';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { BreadcrumbDropdown } from './BreadcrumbDropdown';
 
@@ -46,26 +47,20 @@ const fetcher = vi.fn(() =>
 const close = vi.fn();
 
 const renderDropdown = () =>
-  render(
-    <QueryClientProvider
-      client={
-        new QueryClient({ defaultOptions: { queries: { retry: false } } })
-      }
-    >
-      <BreadcrumbDropdown
-        // The fake fetcher has no SDK types to infer queryField from.
-        {...({ fetcher, queryField: 'query' } as any)}
-        queryKey="projects"
-        getItem={(row) => ({
-          to: 'project.dashboard',
-          params: { uuid: row.uuid },
-          title: row.name,
-          isCurrent: row.uuid === 'alpha',
-        })}
-        placeholder="Type in name of project..."
-        close={close}
-      />
-    </QueryClientProvider>,
+  renderWithProviders(
+    <BreadcrumbDropdown
+      // The fake fetcher has no SDK types to infer queryField from.
+      {...({ fetcher, queryField: 'query' } as any)}
+      queryKey="projects"
+      getItem={(row) => ({
+        to: 'project.dashboard',
+        params: { uuid: row.uuid },
+        title: row.name,
+        isCurrent: row.uuid === 'alpha',
+      })}
+      placeholder="Type in name of project..."
+      close={close}
+    />,
   );
 
 // The search box is a combobox and the rows are the options of its listbox:

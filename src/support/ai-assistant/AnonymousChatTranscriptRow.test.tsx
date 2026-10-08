@@ -1,10 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { anonymousChatInteractionsBySessionList } from 'waldur-js-client';
 
 import '@/ai-assistant/lib/registry/registerComponents';
+import { renderWithProviders } from '@/test/harness';
 
 import { AnonymousChatTranscriptRow } from './AnonymousChatTranscriptRow';
 
@@ -26,16 +26,10 @@ const markdown = (content: string) => ({
 });
 
 const renderRow = () =>
-  render(
-    <QueryClientProvider
-      client={
-        new QueryClient({ defaultOptions: { queries: { retry: false } } })
-      }
-    >
-      <AnonymousChatTranscriptRow
-        row={{ session_id: 's1', user_slug: 'u1' } as any}
-      />
-    </QueryClientProvider>,
+  renderWithProviders(
+    <AnonymousChatTranscriptRow
+      row={{ session_id: 's1', user_slug: 'u1' } as any}
+    />,
   );
 
 describe('AnonymousChatTranscriptRow', () => {

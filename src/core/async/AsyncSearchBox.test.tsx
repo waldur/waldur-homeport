@@ -1,7 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { AsyncSearchBox } from './AsyncSearchBox';
 
@@ -27,7 +28,6 @@ describe('AsyncSearchBox', () => {
   );
 
   const renderSearchBox = () => {
-    const queryClient = new QueryClient();
     // Shape matches what processApiResponse (waldur-api-client) actually
     // reads: `result.data` as the raw row array (no parser is passed, so
     // it's cast directly), plus a real fetch-like `response.headers` for
@@ -46,15 +46,13 @@ describe('AsyncSearchBox', () => {
       },
     });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <AnyAsyncSearchBox
-          fetcher={fetcher}
-          queryKey="AsyncSearchBoxRegressionTest"
-          queryField="query"
-          RowComponent={RowComponent}
-        />
-      </QueryClientProvider>,
+    renderWithProviders(
+      <AnyAsyncSearchBox
+        fetcher={fetcher}
+        queryKey="AsyncSearchBoxRegressionTest"
+        queryField="query"
+        RowComponent={RowComponent}
+      />,
     );
     return { fetcher };
   };

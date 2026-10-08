@@ -1,10 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { renderHook as baseRenderHook, waitFor } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { proposalPublicCallsCheckEligibilityRetrieve } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@/features/connect';
+import { renderHookWithProviders as renderHook } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
 import { usePublicCallApply } from './usePublicCallApply';
@@ -12,17 +11,6 @@ import { usePublicCallApply } from './usePublicCallApply';
 vi.mock('@/features/connect', () => ({
   isFeatureVisible: vi.fn(),
 }));
-
-// The hook now queries eligibility, so every render needs a query client.
-const renderHook = <T,>(hook: () => T) => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  const wrapper = ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
-  return baseRenderHook(hook, { wrapper });
-};
 
 const round = (uuid: string, status: string) => ({
   uuid,

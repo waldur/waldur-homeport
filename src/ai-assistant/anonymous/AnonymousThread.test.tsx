@@ -3,24 +3,22 @@ import {
   ThreadMessageLike,
   useExternalStoreRuntime,
 } from '@assistant-ui/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { FC } from 'react';
 import { beforeAll, describe, it, expect, vi } from 'vitest';
 
 import { convertMessage } from '@/ai-assistant/lib/messages/messageUtils';
 import { ENV } from '@/core/config';
+import { renderWithProviders } from '@/test/harness';
 
 import { AnonymousChatPanel } from './AnonymousChatPanel';
 import { AnonymousThread } from './AnonymousThread';
 import { AnonymousThreadProvider } from './AnonymousThreadProvider';
 
-const queryClient = new QueryClient();
-
 // Drives AnonymousThread against a pre-seeded external store so a message can be
 // placed in a terminal error state without running the async stream pipeline.
-// The QueryClientProvider lets the real feedback buttons (useManagedMutation ->
-// useQueryClient) mount when a message carries feedback attribution.
+// renderWithProviders supplies the QueryClient needed when feedback buttons
+// (useManagedMutation -> useQueryClient) mount when a message carries feedback attribution.
 const SeededThread: FC<{
   messages: ThreadMessageLike[];
   isRunning?: boolean;
@@ -32,11 +30,9 @@ const SeededThread: FC<{
     onNew: async () => {},
   });
   return (
-    <QueryClientProvider client={queryClient}>
-      <AssistantRuntimeProvider runtime={runtime}>
-        <AnonymousThread />
-      </AssistantRuntimeProvider>
-    </QueryClientProvider>
+    <AssistantRuntimeProvider runtime={runtime}>
+      <AnonymousThread />
+    </AssistantRuntimeProvider>
   );
 };
 
@@ -60,7 +56,7 @@ beforeAll(() => {
 
 describe('AnonymousChatPanel', () => {
   it('shows a welcome naming the assistant', () => {
-    render(
+    renderWithProviders(
       <AnonymousThreadProvider>
         <AnonymousChatPanel />
       </AnonymousThreadProvider>,
@@ -69,7 +65,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('shows the AI-disclaimer reminder on the empty welcome state', () => {
-    render(
+    renderWithProviders(
       <AnonymousThreadProvider>
         <AnonymousChatPanel />
       </AnonymousThreadProvider>,
@@ -78,7 +74,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('renders the prompt-injection warning when the backend flags one', () => {
-    render(
+    renderWithProviders(
       <SeededThread
         messages={[
           { id: 'u1', role: 'user', content: [{ type: 'text', text: 'hi' }] },
@@ -104,7 +100,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('shows the AI-disclaimer sub-text under the composer once a conversation starts', () => {
-    render(
+    renderWithProviders(
       <SeededThread
         messages={[
           { id: 'u1', role: 'user', content: [{ type: 'text', text: 'hi' }] },
@@ -129,7 +125,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('does not show loading dots on an earlier errored message while a newer turn is running', () => {
-    render(
+    renderWithProviders(
       <SeededThread
         isRunning
         messages={[
@@ -165,7 +161,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('does not show loading dots on a warning-only message while a newer turn is running', () => {
-    render(
+    renderWithProviders(
       <SeededThread
         isRunning
         messages={[
@@ -201,7 +197,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('surfaces the error when an assistant message fails (e.g. rate limit)', () => {
-    render(
+    renderWithProviders(
       <SeededThread
         messages={[
           { id: 'u1', role: 'user', content: [{ type: 'text', text: 'GPU' }] },
@@ -222,7 +218,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('offers copy + feedback on a finished, attributed reply', () => {
-    render(
+    renderWithProviders(
       <SeededThread
         messages={[
           { id: 'u1', role: 'user', content: [{ type: 'text', text: 'GPU' }] },
@@ -251,7 +247,7 @@ describe('AnonymousChatPanel', () => {
   });
 
   it('offers copy even when the reply has no feedback attribution', () => {
-    render(
+    renderWithProviders(
       <SeededThread
         messages={[
           { id: 'u1', role: 'user', content: [{ type: 'text', text: 'GPU' }] },
@@ -276,7 +272,7 @@ describe('AnonymousChatPanel', () => {
   it('offers feedback (but not copy) on an attributed reply that produced no blocks', () => {
     // A guardrail refusal / warning-only turn carries attribution but no
     // renderable blocks — feedback must still be reachable to rate it.
-    render(
+    renderWithProviders(
       <SeededThread
         messages={[
           { id: 'u1', role: 'user', content: [{ type: 'text', text: 'GPU' }] },

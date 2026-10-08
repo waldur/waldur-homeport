@@ -1,7 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { act, renderHook } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { usersPartialUpdate } from 'waldur-js-client';
+
+import { renderHookWithProviders } from '@/test/harness';
 
 import { useUpdateUser } from './useUpdateUser';
 
@@ -23,16 +24,10 @@ describe('useUpdateUser', () => {
       data: { uuid: 'user-9' },
     } as any);
 
-    const queryClient = new QueryClient();
+    const { result, queryClient } = renderHookWithProviders(() =>
+      useUpdateUser({ uuid: 'user-9' } as any),
+    );
     const invalidateSpy = vi.spyOn(queryClient, 'invalidateQueries');
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
-
-    const { result } = renderHook(
-      () => useUpdateUser({ uuid: 'user-9' } as any),
-      { wrapper },
-    );
 
     await act(async () => {
       await result.current.callback({ first_name: 'Jane' });
@@ -49,15 +44,8 @@ describe('useUpdateUser', () => {
       vi.mocked(usersPartialUpdate).mockResolvedValue({
         data: { uuid: 'user-9' },
       } as any);
-      const queryClient = new QueryClient();
-      const wrapper = ({ children }: { children: React.ReactNode }) => (
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      );
-      const { result } = renderHook(
-        () => useUpdateUser({ uuid: 'user-9' } as any),
-        { wrapper },
+      const { result } = renderHookWithProviders(() =>
+        useUpdateUser({ uuid: 'user-9' } as any),
       );
       await act(async () => {
         await result.current.callback(data);

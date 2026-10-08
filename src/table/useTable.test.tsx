@@ -1,12 +1,11 @@
-import { QueryClientProvider } from '@tanstack/react-query';
-import { act, renderHook } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { combineReducers, legacy_createStore as createStore } from 'redux';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { DrawerProvider } from '@/drawer/DrawerContext';
-import { createTestQueryClient } from '@/test/harness';
+import { renderHookWithProviders } from '@/test/harness';
 
 import { reducer as tableReducer } from './store';
 import { useTable } from './useTable';
@@ -31,13 +30,10 @@ const createTestStore = (initialState = {}) => {
 };
 
 const createWrapper = (store: ReturnType<typeof createTestStore>) => {
-  const queryClient = createTestQueryClient();
   return ({ children }: { children: ReactNode }) => (
-    <QueryClientProvider client={queryClient}>
-      <DrawerProvider>
-        <Provider store={store}>{children}</Provider>
-      </DrawerProvider>
-    </QueryClientProvider>
+    <DrawerProvider>
+      <Provider store={store}>{children}</Provider>
+    </DrawerProvider>
   );
 };
 
@@ -57,7 +53,7 @@ describe('useTable', () => {
   describe('initialization', () => {
     it('returns table state with default values', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -84,7 +80,7 @@ describe('useTable', () => {
 
     it('returns all required functions', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -118,7 +114,7 @@ describe('useTable', () => {
       const store = createTestStore();
       const testFilter = { customer_uuid: 'test-uuid', status: 'active' };
 
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -134,7 +130,7 @@ describe('useTable', () => {
     it('returns undefined filter when no filter is provided', () => {
       const store = createTestStore();
 
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -150,7 +146,7 @@ describe('useTable', () => {
   describe('pagination actions', () => {
     it('gotoPage updates current page', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -168,7 +164,7 @@ describe('useTable', () => {
 
     it('updatePageSize updates page size', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -186,7 +182,7 @@ describe('useTable', () => {
 
     it('resetPagination resets to page 1', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -210,7 +206,7 @@ describe('useTable', () => {
   describe('sorting actions', () => {
     it('sortList updates sorting state', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -232,7 +228,7 @@ describe('useTable', () => {
   describe('query actions', () => {
     it('setQuery updates query state', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -252,7 +248,7 @@ describe('useTable', () => {
   describe('display mode actions', () => {
     it('setDisplayMode updates mode state', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -274,7 +270,7 @@ describe('useTable', () => {
   describe('row selection actions', () => {
     it('selectRow adds row to selected rows', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -294,7 +290,7 @@ describe('useTable', () => {
 
     it('selectAllRows sets all rows as selected', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -317,7 +313,7 @@ describe('useTable', () => {
 
     it('resetSelection clears selected rows', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -341,7 +337,7 @@ describe('useTable', () => {
   describe('row toggle actions', () => {
     it('toggleRow expands/collapses row', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -367,7 +363,7 @@ describe('useTable', () => {
   describe('column actions', () => {
     it('toggleColumn updates active columns', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -386,7 +382,7 @@ describe('useTable', () => {
 
     it('initColumnPositions sets column order', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -404,7 +400,7 @@ describe('useTable', () => {
 
     it('swapColumns reorders columns', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -429,7 +425,7 @@ describe('useTable', () => {
   describe('filter actions', () => {
     it('setFilter adds filter to storage', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -457,7 +453,7 @@ describe('useTable', () => {
 
     it('setFilterPosition updates filter position', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -477,7 +473,7 @@ describe('useTable', () => {
 
     it('applyFiltersFn sets apply filters flag', () => {
       const store = createTestStore();
-      const { result } = renderHook(
+      const { result } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -501,7 +497,7 @@ describe('useTable', () => {
       const store = createTestStore();
       const wrapper = createWrapper(store);
 
-      const { result: result1 } = renderHook(
+      const { result: result1 } = renderHookWithProviders(
         () =>
           useTable({
             table: 'Table1',
@@ -510,7 +506,7 @@ describe('useTable', () => {
         { wrapper },
       );
 
-      const { result: result2 } = renderHook(
+      const { result: result2 } = renderHookWithProviders(
         () =>
           useTable({
             table: 'Table2',
@@ -543,7 +539,7 @@ describe('useTable', () => {
         refetch: vi.fn(),
       });
 
-      const { result, rerender } = renderHook(
+      const { result, rerender } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',
@@ -593,7 +589,7 @@ describe('useTable', () => {
         refetch: vi.fn(),
       });
 
-      const { result, rerender } = renderHook(
+      const { result, rerender } = renderHookWithProviders(
         () =>
           useTable({
             table: 'TestTable',

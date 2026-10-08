@@ -1,6 +1,7 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
+import { renderWithProviders } from '@/test/harness';
 
 import { BackendHealthStatusIndicator } from './BackendHealthStatusIndicator';
 
@@ -8,11 +9,7 @@ const renderWithStatus = (status: Record<string, string>) => {
   vi.spyOn(global, 'fetch').mockResolvedValue({
     json: () => Promise.resolve(status),
   } as Response);
-  render(
-    <QueryClientProvider client={new QueryClient()}>
-      <BackendHealthStatusIndicator />
-    </QueryClientProvider>,
-  );
+  renderWithProviders(<BackendHealthStatusIndicator />);
 };
 
 describe('BackendHealthStatusIndicator', () => {
