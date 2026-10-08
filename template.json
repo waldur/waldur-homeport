@@ -52243,11 +52243,7 @@
       "feature_area": "features"
     }
   },
-  "Show all": {
-    "context": {
-      "feature_area": "actions"
-    }
-  },
+  "Show all": {},
   "Show all months": {
     "context": {
       "feature_area": "tos"
