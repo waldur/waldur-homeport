@@ -24,6 +24,13 @@
 // Everything else (deep links, invitations, an existing session) falls
 // through to the application, whose LandingPage keeps the same redirect as a
 // fallback.
+//
+// The decision is published as window.waldurBootRedirect, a promise that
+// resolves to true once the navigation has been started. The application
+// waits for it before rendering: Firefox cancels a page's in-flight requests
+// as soon as a navigation begins, so an application booting alongside the
+// redirect sees its lazy chunks fail, and its reload-on-preload-error handler
+// would then cancel the redirect and start the race again.
 (function (win) {
   'use strict';
 
@@ -105,7 +112,7 @@
     target += '&ui_locales=' + encodeURIComponent(lang);
   }
 
-  win
+  win.waldurBootRedirect = win
     .fetch(target + '&probe=1', {
       // A backend that predates the probe answers the OIDC redirect instead
       // of 204; manual keeps the browser from following it here, and the
@@ -115,9 +122,13 @@
       cache: 'no-store',
     })
     .then(function (response) {
-      if (response.status === 204) {
-        location.replace(target);
+      if (response.status !== 204) {
+        return false;
       }
+      location.replace(target);
+      return true;
     })
-    .catch(function () {});
+    .catch(function () {
+      return false;
+    });
 })(window);

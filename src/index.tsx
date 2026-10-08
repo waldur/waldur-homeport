@@ -14,11 +14,20 @@ import './vendor';
 import './tailwind.css';
 import './sass/noscript.scss';
 import { Application } from './Application';
+import {
+  isLeavingForIdentityProvider,
+  reloadAfterPreloadError,
+} from './core/bootGuard';
 
 window.addEventListener('vite:preloadError', () => {
-  window.location.reload();
+  reloadAfterPreloadError();
 });
 
-const domNode = document.getElementById('react-root');
-const root = createRoot(domNode);
-root.render(<Application />);
+isLeavingForIdentityProvider().then((leaving) => {
+  if (leaving) {
+    return;
+  }
+  const domNode = document.getElementById('react-root');
+  const root = createRoot(domNode);
+  root.render(<Application />);
+});
