@@ -14,10 +14,14 @@ export const QuotaProgressBar = ({
 }) => {
   return (
     <ProgressBar
-      variant={percent < 33 ? 'primary' : percent < 66 ? 'warning' : 'danger'}
-      now={percent}
-      aria-label={label}
       className={classNames('w-100', height && `h-${height}px`, className)}
-    />
+    >
+      {/* The nested bar carries role="progressbar", so it takes the label. */}
+      <ProgressBar
+        variant={percent < 33 ? 'primary' : percent < 66 ? 'warning' : 'danger'}
+        now={percent}
+        aria-label={label}
+      />
+    </ProgressBar>
   );
 };
