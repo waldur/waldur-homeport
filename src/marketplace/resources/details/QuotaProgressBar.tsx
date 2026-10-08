@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { ProgressBar } from 'react-bootstrap';
 
 export const QuotaProgressBar = ({
   percent,
@@ -12,16 +11,28 @@ export const QuotaProgressBar = ({
   className?: string;
   label?: string;
 }) => {
+  // 0/0 quotas yield NaN, an invalid aria-valuenow that screen readers skip.
+  const value = Number.isFinite(percent) ? percent : 0;
+  const variant = value < 33 ? 'primary' : value < 66 ? 'warning' : 'danger';
+  // The full-width track carries the role, so screen readers can reach it
+  // even when the filled part is 0px wide.
   return (
-    <ProgressBar
-      className={classNames('w-100', height && `h-${height}px`, className)}
+    <div
+      role="progressbar"
+      aria-label={label}
+      aria-valuenow={value}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      className={classNames(
+        'progress w-100',
+        height && `h-${height}px`,
+        className,
+      )}
     >
-      {/* The nested bar carries role="progressbar", so it takes the label. */}
-      <ProgressBar
-        variant={percent < 33 ? 'primary' : percent < 66 ? 'warning' : 'danger'}
-        now={percent}
-        aria-label={label}
+      <div
+        className={`progress-bar bg-${variant}`}
+        style={{ width: `${value}%` }}
       />
-    </ProgressBar>
+    </div>
   );
 };
