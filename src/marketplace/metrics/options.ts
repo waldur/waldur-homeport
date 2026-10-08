@@ -32,6 +32,14 @@ export const getGoalPeriodOptions = (): {
   { value: 'rolling_30d', label: translate('Last 30 days') },
 ];
 
+/** What a card's change badge compares the figure with. */
+export const getChangeLabel = (period: string) =>
+  period === 'rolling_30d'
+    ? translate('Change vs the previous 30 days')
+    : period === 'quarter'
+      ? translate('Change vs the same days of the previous quarter')
+      : translate('Change vs the same days of the previous month');
+
 /**
  * The window a card's figure covers, for people reading a breakdown of it:
  * a calendar period runs from its first day (UTC) up to now.

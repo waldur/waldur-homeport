@@ -9818,11 +9818,9 @@
       "feature_area": "accounts"
     }
   },
-  "Change vs the previous period": {
-    "context": {
-      "feature_area": "metrics"
-    }
-  },
+  "Change vs the previous 30 days": {},
+  "Change vs the same days of the previous month": {},
+  "Change vs the same days of the previous quarter": {},
   "Changed": {},
   "Changed options": {
     "context": {
