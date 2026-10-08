@@ -7765,6 +7765,16 @@
       "feature_area": "details"
     }
   },
+  "Backend status: all services working": {
+    "context": {
+      "feature_area": "footer"
+    }
+  },
+  "Backend status: some services failing": {
+    "context": {
+      "feature_area": "footer"
+    }
+  },
   "Backend sync": {
     "context": {
       "primary_ui_type": "label",
