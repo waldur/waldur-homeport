@@ -23,7 +23,7 @@ export const MatrixDiagnosticsDialog: FC = () => {
 
   return (
     <ModalDialog
-      title={translate('Connectivity diagnostics')}
+      title={translate('Matrix diagnostics')}
       footer={
         <div className="d-flex justify-content-between w-100">
           <CloseDialogButton />
