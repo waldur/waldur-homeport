@@ -68,19 +68,59 @@ export interface CallMembershipTiming {
   expires: number;
 }
 
+/**
+ * A LiveKit focus as MatrixRTC memberships advertise it (MSC4195): the
+ * lk-jwt-compatible token service, and the Matrix room it serves the call of.
+ */
+export interface LiveKitFocus {
+  type: 'livekit';
+  livekit_service_url: string;
+  livekit_alias?: string;
+}
+
+export function makeLiveKitFocus(
+  serviceUrl: string,
+  roomId: string,
+): LiveKitFocus {
+  return {
+    type: 'livekit',
+    livekit_service_url: serviceUrl,
+    livekit_alias: roomId,
+  };
+}
+
+export function isLiveKitFocus(value: unknown): value is LiveKitFocus {
+  const focus = value as LiveKitFocus | null;
+  return (
+    typeof focus === 'object' &&
+    focus !== null &&
+    focus.type === 'livekit' &&
+    typeof focus.livekit_service_url === 'string' &&
+    focus.livekit_service_url !== ''
+  );
+}
+
 export function makeCallMembershipContent(
+  userId: string,
   deviceId: string,
   { createdTs, expires }: CallMembershipTiming,
+  foci: LiveKitFocus[] = [],
 ) {
   return {
     application: CALL_APPLICATION,
     call_id: '',
     scope: 'm.room',
     device_id: deviceId,
+    // The LiveKit identity of this device: the one lk-jwt's /sfu/get issues,
+    // and the one matrix-js-sdk assumes for a state-event membership anyway.
+    membershipID: `${userId}:${deviceId}`,
     created_ts: createdTs,
     expires,
+    // The focus this device would host the call on. Members that follow the
+    // oldest membership, as this device does, use the first entry of the
+    // oldest member's list; Element Call finds no focus when it is empty.
     focus_active: { type: 'livekit', focus_selection: 'oldest_membership' },
-    foci_preferred: [],
+    foci_preferred: foci,
   };
 }
 

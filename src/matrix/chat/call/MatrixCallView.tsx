@@ -46,6 +46,7 @@ import { formatDisplayName } from '../utils';
 
 import { getCallDeviceId } from './callMembership';
 import { CallSettingsMenu } from './CallSettingsMenu';
+import { computeLiveKitIdentities } from './liveKitIdentity';
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import { CallMemberInfo } from './types';
 import { useFullscreen } from './useFullscreen';
@@ -54,25 +55,6 @@ import { useMatrixCall } from './useMatrixCall';
 // LiveKit log level is set inside MatrixCallView's mount effect so the
 // module-level side effect can't clobber another consumer of livekit-client
 // loaded later in the bundle.
-
-// Mirrors element-hq/lk-jwt-service processSFURequest in main.go:
-//   lkIdentity = unpaddedBase64(sha256(JSON.stringify([userId, claimedDeviceId, memberId])))
-// We send member.id === claimed_device_id === deviceId in useLiveKitToken.ts,
-// so all three slots collapse to (userId, deviceId, deviceId). deviceId is the
-// Matrix client's device (getCallDeviceId), the one in the call.member key.
-async function computeLiveKitIdentity(
-  userId: string,
-  deviceId: string,
-): Promise<string | null> {
-  if (!userId || !deviceId) return null;
-  const raw = JSON.stringify([userId, deviceId, deviceId]);
-  const buffer = await crypto.subtle.digest(
-    'SHA-256',
-    new TextEncoder().encode(raw),
-  );
-  const padded = btoa(String.fromCharCode(...new Uint8Array(buffer)));
-  return padded.replace(/=+$/, '');
-}
 
 interface IdentityEntry {
   userId: string;
@@ -89,8 +71,12 @@ function useIdentityNameMap(entries: IdentityEntry[]): Map<string, string> {
     async function build() {
       const next = new Map<string, string>();
       for (const e of entries) {
-        const identity = await computeLiveKitIdentity(e.userId, e.deviceId);
-        if (identity) next.set(identity, e.displayName);
+        for (const identity of await computeLiveKitIdentities(
+          e.userId,
+          e.deviceId,
+        )) {
+          next.set(identity, e.displayName);
+        }
       }
       if (!cancelled) {
         setMap(next);

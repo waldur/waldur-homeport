@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CALL_MEMBER_EVENT,
   makeCallMemberStateKey,
+  makeLiveKitFocus,
   MEMBERSHIP_EXPIRY_MS,
   MEMBERSHIP_REFRESH_HEADROOM_MS,
   MEMBERSHIP_REFRESH_RETRY_MS,
@@ -195,6 +196,29 @@ describe('announcing call membership', () => {
       created_ts: 123,
       expires: MEMBERSHIP_EXPIRY_MS,
       focus_active: { type: 'livekit' },
+      membershipID: '@alice:s:DEV1',
+    });
+  });
+
+  it('publishes its LiveKit focus in foci_preferred', async () => {
+    const client = fakeClient('@alice:s');
+    const focus = makeLiveKitFocus('https://lk.test', '!r:s');
+    await announceCallJoin(
+      client,
+      '!r:s',
+      'DEV1',
+      { createdTs: 123, expires: MEMBERSHIP_EXPIRY_MS },
+      [focus],
+    );
+    expect(client.sendStateEvent.mock.calls[0][2]).toMatchObject({
+      focus_active: { type: 'livekit', focus_selection: 'oldest_membership' },
+      foci_preferred: [
+        {
+          type: 'livekit',
+          livekit_service_url: 'https://lk.test',
+          livekit_alias: '!r:s',
+        },
+      ],
     });
   });
 });

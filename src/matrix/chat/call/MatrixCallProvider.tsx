@@ -18,11 +18,13 @@ import {
   CALL_MEMBER_EVENT,
   CallMembershipTiming,
   getCallDeviceId,
+  LiveKitFocus,
   MEMBERSHIP_EXPIRY_MS,
   sendLeaveOnUnload,
   startMembershipRefresh,
 } from './callMembership';
 import { MatrixCallContext } from './MatrixCallContext';
+import { findActiveFocus } from './parseCallMembers';
 import { CallState, LiveKitCredentials } from './types';
 import {
   announceCallJoin,
@@ -40,7 +42,7 @@ export const CALL_CONNECT_TIMEOUT_MS = 15_000;
 export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
   const { client, activeRoomId, activeRoomUuid, connectionState } =
     useMatrixClient();
-  const { rtcAvailable, discover, acquireToken } = useLiveKitToken();
+  const { rtcAvailable, discover, getFocus, acquireToken } = useLiveKitToken();
   const user = useUser();
 
   const [callState, setCallState] = useState<CallState>('idle');
@@ -53,6 +55,8 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
   const inCallRef = useRef(false);
   // The published membership of the current call: join time and validity.
   const membershipRef = useRef<CallMembershipTiming | null>(null);
+  // The foci the published membership advertises; kept for re-publishing.
+  const fociRef = useRef<LiveKitFocus[]>([]);
   const announceLockRef = useRef<Promise<unknown>>(Promise.resolve());
 
   const queueAnnounce = useCallback(
@@ -113,12 +117,23 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
     // Publish the membership first: the call token is only issued for a
     // device that is a member of the room's call.
     const deviceId = getCallDeviceId(client);
+    // Who is in the call already decides its focus; read it before our own
+    // membership lands, which would otherwise be the oldest to a slow sync.
+    const activeFocus = findActiveFocus(
+      client.getRoom?.(targetRoomId),
+      Date.now(),
+      { userId: client.getUserId?.() || '', deviceId },
+    );
+    const ownFocus = await getFocus(targetRoomId);
+    if (callGenerationRef.current !== generation) return;
+    const foci = ownFocus ? [ownFocus] : [];
+    fociRef.current = foci;
     const timing = { createdTs: Date.now(), expires: MEMBERSHIP_EXPIRY_MS };
     membershipRef.current = timing;
     inCallRef.current = true;
     try {
       await queueAnnounce(() =>
-        announceCallJoin(client, targetRoomId, deviceId, timing),
+        announceCallJoin(client, targetRoomId, deviceId, timing, foci),
       );
     } catch {
       if (callGenerationRef.current !== generation) return;
@@ -132,7 +147,7 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
     // endCall has already queued the leave for the membership above.
     if (callGenerationRef.current !== generation) return;
 
-    const creds = await acquireToken(targetRoomId);
+    const creds = await acquireToken(targetRoomId, activeFocus);
     if (callGenerationRef.current !== generation) return;
     if (!creds) {
       // Withdraw the membership published above. Stay anchored to the room so
@@ -150,7 +165,14 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
 
     setCredentials(creds);
     setCallState('connecting');
-  }, [activeRoomId, activeRoomUuid, client, acquireToken, queueAnnounce]);
+  }, [
+    activeRoomId,
+    activeRoomUuid,
+    client,
+    getFocus,
+    acquireToken,
+    queueAnnounce,
+  ]);
 
   const endCall = useCallback(
     (errorMessage?: string) => {
@@ -196,7 +218,7 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
     const stateKey = getCallMemberStateKey(client, callRoomId, deviceId);
     const stop = startMembershipRefresh(membershipRef.current, (timing) =>
       queueAnnounce(() =>
-        announceCallJoin(client, callRoomId, deviceId, timing),
+        announceCallJoin(client, callRoomId, deviceId, timing, fociRef.current),
       ).then(() => {
         if (membershipRef.current) membershipRef.current = timing;
       }),
@@ -221,7 +243,7 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       const timing = membershipRef.current;
       if (!timing) return;
       queueAnnounce(() =>
-        announceCallJoin(client, callRoomId, deviceId, timing),
+        announceCallJoin(client, callRoomId, deviceId, timing, fociRef.current),
       ).catch(() => undefined);
     };
     client.on?.(RoomStateEvent.Events, onStateEvent);

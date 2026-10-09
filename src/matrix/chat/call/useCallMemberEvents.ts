@@ -9,6 +9,7 @@ import {
   CALL_MEMBER_EVENT,
   CallMembershipTiming,
   getCallDeviceId,
+  LiveKitFocus,
   makeCallMemberStateKey,
   makeCallMembershipContent,
   timerDelay,
@@ -117,12 +118,13 @@ export async function announceCallJoin(
   roomId: string,
   deviceId: string,
   timing: CallMembershipTiming,
+  foci: LiveKitFocus[] = [],
 ): Promise<void> {
   if (!client || !roomId) return;
   await client.sendStateEvent(
     roomId,
     CALL_MEMBER_EVENT,
-    makeCallMembershipContent(deviceId, timing),
+    makeCallMembershipContent(client.getUserId() || '', deviceId, timing, foci),
     getCallMemberStateKey(client, roomId, deviceId),
   );
 }

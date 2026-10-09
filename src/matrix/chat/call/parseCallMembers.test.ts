@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { parseCallMembers } from './parseCallMembers';
+import { findActiveFocus, parseCallMembers } from './parseCallMembers';
 
 const CALL_MEMBER_EVENT = 'org.matrix.msc3401.call.member';
 
@@ -215,5 +215,176 @@ describe('parseCallMembers', () => {
         'dev3',
       ]);
     });
+  });
+});
+
+// What Element Call (matrix-js-sdk 40 MembershipManager, compatibility mode)
+// writes under `_@user:server_DEVICE_m.call`.
+const elementMembership = (overrides: any = {}) => ({
+  application: 'm.call',
+  call_id: '',
+  scope: 'm.room',
+  device_id: 'ELEMENTDEV',
+  membershipID: '@drawerb:localhost:ELEMENTDEV',
+  expires: 14_400_000,
+  'm.call.intent': 'video',
+  focus_active: { type: 'livekit', focus_selection: 'multi_sfu' },
+  foci_preferred: [
+    { type: 'livekit', livekit_service_url: 'https://hs.test/livekit' },
+  ],
+  ...overrides,
+});
+
+describe('Element Call memberships', () => {
+  const now = 1_000_000;
+
+  it('lists an Element Call device, its first publish having no created_ts', () => {
+    const room = buildRoom([
+      buildSessionEvent('@drawerb:localhost', elementMembership(), now - 5),
+    ]);
+    expect(parseCallMembers(room, now)).toEqual([
+      {
+        userId: '@drawerb:localhost',
+        deviceId: 'ELEMENTDEV',
+        expiresAt: now - 5 + 14_400_000,
+      },
+    ]);
+  });
+
+  it('ignores memberships of another call in the room', () => {
+    const room = buildRoom([
+      buildSessionEvent(
+        '@drawerb:localhost',
+        elementMembership({ call_id: 'breakout' }),
+        now - 5,
+      ),
+    ]);
+    expect(parseCallMembers(room, now)).toEqual([]);
+  });
+
+  it("follows the oldest member's preferred focus", () => {
+    const room = buildRoom([
+      buildSessionEvent(
+        '@owner:localhost',
+        {
+          ...elementMembership({ device_id: 'WALDUR', created_ts: now - 10 }),
+          focus_active: {
+            type: 'livekit',
+            focus_selection: 'oldest_membership',
+          },
+          foci_preferred: [],
+        },
+        now,
+      ),
+      buildSessionEvent(
+        '@drawerb:localhost',
+        elementMembership({ created_ts: now - 100 }),
+        now,
+      ),
+    ]);
+    expect(findActiveFocus(room, now)).toEqual({
+      type: 'livekit',
+      livekit_service_url: 'https://hs.test/livekit',
+    });
+  });
+
+  it('has no active focus when the oldest member advertises none', () => {
+    const room = buildRoom([
+      buildSessionEvent(
+        '@owner:localhost',
+        elementMembership({ created_ts: now - 100, foci_preferred: [] }),
+        now,
+      ),
+      buildSessionEvent(
+        '@drawerb:localhost',
+        elementMembership({ created_ts: now - 10 }),
+        now,
+      ),
+    ]);
+    expect(findActiveFocus(room, now)).toBeNull();
+  });
+
+  it('skips our own device when choosing the focus', () => {
+    const room = buildRoom([
+      buildSessionEvent(
+        '@drawerb:localhost',
+        elementMembership({ created_ts: now - 100 }),
+        now,
+      ),
+    ]);
+    expect(
+      findActiveFocus(room, now, {
+        userId: '@drawerb:localhost',
+        deviceId: 'ELEMENTDEV',
+      }),
+    ).toBeNull();
+  });
+
+  it('ignores a membership claiming to be valid far into the future', () => {
+    const room = buildRoom([
+      buildSessionEvent(
+        '@mallory:localhost',
+        elementMembership({
+          device_id: 'MALLORY',
+          created_ts: 1,
+          expires: 1e15,
+          foci_preferred: [
+            { type: 'livekit', livekit_service_url: 'https://evil.test' },
+          ],
+        }),
+        now,
+      ),
+      buildSessionEvent(
+        '@drawerb:localhost',
+        elementMembership({ created_ts: now - 100 }),
+        now,
+      ),
+    ]);
+    expect(findActiveFocus(room, now)).toEqual({
+      type: 'livekit',
+      livekit_service_url: 'https://hs.test/livekit',
+    });
+    expect(parseCallMembers(room, now).map((m) => m.deviceId)).toEqual([
+      'ELEMENTDEV',
+    ]);
+  });
+
+  it('ignores a membership created in the future', () => {
+    const room = buildRoom([
+      buildSessionEvent(
+        '@mallory:localhost',
+        elementMembership({
+          device_id: 'MALLORY',
+          created_ts: now + 60 * 60 * 1000,
+          expires: 1000,
+        }),
+        now,
+      ),
+    ]);
+    expect(findActiveFocus(room, now)).toBeNull();
+    expect(parseCallMembers(room, now)).toEqual([]);
+  });
+
+  it('ignores a legacy membership valid far into the future', () => {
+    const room = buildRoom([
+      buildEvent('@mallory:localhost', [
+        { device_id: 'dev1', created_ts: 1, expires: 1e15 },
+      ]),
+    ]);
+    expect(parseCallMembers(room, now)).toEqual([]);
+  });
+
+  it('keeps a long call whose refreshed expiry is near', () => {
+    const hour = 60 * 60 * 1000;
+    const later = 1_700_000_000_000;
+    const room = buildRoom([
+      buildSessionEvent(
+        '@drawerb:localhost',
+        elementMembership({ created_ts: later - 5 * hour, expires: 6 * hour }),
+        later,
+      ),
+    ]);
+    expect(findActiveFocus(room, later)).not.toBeNull();
+    expect(parseCallMembers(room, later)).toHaveLength(1);
   });
 });
