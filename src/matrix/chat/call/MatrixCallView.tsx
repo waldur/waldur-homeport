@@ -9,7 +9,6 @@ import {
   LiveKitRoom,
   ParticipantTile,
   RoomAudioRenderer,
-  TrackToggle,
   useLayoutContext,
   useLocalParticipant,
   usePinnedTracks,
@@ -46,6 +45,7 @@ import { formatDisplayName } from '../utils';
 
 import { getCallDeviceId } from './callMembership';
 import { CallSettingsMenu } from './CallSettingsMenu';
+import { CallTrackToggle } from './CallTrackToggle';
 import { computeLiveKitIdentities } from './liveKitIdentity';
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import { CallMemberInfo } from './types';
@@ -315,21 +315,18 @@ const CallStage: FC<{
           internally, so the .lk-* styling is unchanged. The four primary
           controls (mic, camera, screen-share, end-call) match the mockup. */}
       <div className="lk-control-bar">
-        <Tooltip label={translate('Toggle microphone')} side="top">
-          <span>
-            <TrackToggle source={Track.Source.Microphone} />
-          </span>
-        </Tooltip>
-        <Tooltip label={translate('Toggle camera')} side="top">
-          <span>
-            <TrackToggle source={Track.Source.Camera} />
-          </span>
-        </Tooltip>
-        <Tooltip label={translate('Share your screen')} side="top">
-          <span>
-            <TrackToggle source={Track.Source.ScreenShare} />
-          </span>
-        </Tooltip>
+        <CallTrackToggle
+          source={Track.Source.Microphone}
+          label={translate('Toggle microphone')}
+        />
+        <CallTrackToggle
+          source={Track.Source.Camera}
+          label={translate('Toggle camera')}
+        />
+        <CallTrackToggle
+          source={Track.Source.ScreenShare}
+          label={translate('Share your screen')}
+        />
         {/* Settings / fullscreen / PiP live on the control bar alongside the
             primary controls. Hidden in the cramped floating widget. */}
         {!compact && (
