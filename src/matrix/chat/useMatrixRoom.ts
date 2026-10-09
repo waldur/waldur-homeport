@@ -250,7 +250,19 @@ export function useMatrixRoom() {
       refreshReactions(eventRoom, targetId);
     };
 
+    // An event decrypted after it reached the timeline: drop its stand-in row
+    // (it may turn out to be a reaction) and route it like a new event.
+    const onDecrypted = (event: any) => {
+      if (event?.getRoomId?.() !== activeRoomId) return;
+      const eventRoom = client.getRoom(activeRoomId);
+      if (!eventRoom) return;
+      const id = event.getId?.();
+      setMessages((prev) => prev.filter((m) => m.eventId !== id));
+      onTimeline(event, eventRoom);
+    };
+
     client.on('Room.timeline' as any, onTimeline);
+    client.on('Event.decrypted' as any, onDecrypted);
     client.on('Room.redaction' as any, onRedaction);
     client.on('Room.redactionCancelled' as any, onRedactionCancelled);
     client.on('Room.localEchoUpdated' as any, onLocalEchoUpdated);
@@ -258,6 +270,7 @@ export function useMatrixRoom() {
 
     return () => {
       client.removeListener('Room.timeline' as any, onTimeline);
+      client.removeListener('Event.decrypted' as any, onDecrypted);
       client.removeListener('Room.redaction' as any, onRedaction);
       client.removeListener(
         'Room.redactionCancelled' as any,

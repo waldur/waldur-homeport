@@ -1,5 +1,7 @@
 import type { MatrixClient } from 'matrix-js-sdk';
 
+import type { CryptoState } from './crypto';
+
 export interface ReactionAggregate {
   /** The reaction key — typically a unicode emoji, e.g. "👍". */
   key: string;
@@ -41,6 +43,11 @@ export interface MatrixChatMessage {
   waveform?: number[];
   /** Clip length in ms (from `org.matrix.msc1767.audio.duration` or info.duration). */
   durationMs?: number;
+  /**
+   * Sent in clear into an encrypted room: whoever wrote it bypassed
+   * encryption (or the homeserver injected it), so it is shown as such.
+   */
+  unencrypted?: boolean;
 }
 
 export type MatrixConnectionState =
@@ -77,4 +84,11 @@ export interface MatrixChatContextValue {
    * "not a member" state instead of an empty placeholder.
    */
   roomAccessDenied: boolean;
+  /** End-to-end encryption of the current client; see `./crypto`. */
+  cryptoState: CryptoState;
+  /**
+   * Replace an encryption identity Waldur can't unlock. Only on the user's
+   * explicit request: the keys only the old backup held are lost.
+   */
+  resetCryptoIdentity: () => Promise<void>;
 }

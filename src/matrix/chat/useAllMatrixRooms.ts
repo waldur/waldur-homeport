@@ -38,7 +38,11 @@ interface RoomLiveState {
 // Event types that can surface as a conversation-list preview. Anything else
 // (topic/name/avatar churn, redactions) is skipped so the row keeps showing the
 // last meaningful line.
-const PREVIEWABLE_EVENT_TYPES = new Set(['m.room.message', 'm.room.member']);
+const PREVIEWABLE_EVENT_TYPES = new Set([
+  'm.room.message',
+  'm.room.member',
+  'm.room.encrypted',
+]);
 
 interface RoomLiveMap {
   [roomId: string]: RoomLiveState;
@@ -216,13 +220,20 @@ export function useAllMatrixRooms() {
     };
     // accountData (e.g. push-rule/mute changes) is global — full refresh.
     const onAccountData = () => refreshLiveState();
+    // The preview of an encrypted room changes once its last event decrypts.
+    const onDecrypted = (event: any) => {
+      const room = client.getRoom(event?.getRoomId?.());
+      if (room) onRoomEvent(event, room);
+    };
 
     client.on('Room.timeline' as any, onRoomEvent);
+    client.on('Event.decrypted' as any, onDecrypted);
     client.on('Room.receipt' as any, onRoomEvent);
     client.on('accountData' as any, onAccountData);
 
     return () => {
       client.removeListener('Room.timeline' as any, onRoomEvent);
+      client.removeListener('Event.decrypted' as any, onDecrypted);
       client.removeListener('Room.receipt' as any, onRoomEvent);
       client.removeListener('accountData' as any, onAccountData);
     };

@@ -12791,6 +12791,12 @@
       "feature_area": "chat"
     }
   },
+  "Could not reset chat encryption.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "chat"
+    }
+  },
   "Could not update mute setting.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -18823,6 +18829,27 @@
       "feature_area": "actions"
     }
   },
+  "Encrypted conversations cannot be read or written. Unencrypted ones still work.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Encrypted message": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "action_type": "read"
+    }
+  },
+  "Encrypted messages cannot be read": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Encryption is unavailable in this browser": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "End": {
     "context": {
       "primary_ui_type": "title"
@@ -21636,6 +21663,7 @@
       "feature_area": "manage"
     }
   },
+  "Files cannot be shared in encrypted conversations yet.": {},
   "Files created": {
     "context": {
       "feature_area": "database-stats"
@@ -22350,7 +22378,7 @@
       "feature_area": "table"
     }
   },
-  "Format for generating Matrix user IDs: username, uuid, or email_local.": {},
+  "Format for generating Matrix user IDs: username, uuid, or email_local. Applies only to users provisioned afterwards; existing users keep their Matrix ID.": {},
   "Format hint": {
     "context": {
       "feature_area": "integration"
@@ -24164,7 +24192,7 @@
     }
   },
   "How users reach services. 'calls': only through calls for proposals, no marketplace navigation. 'marketplace': the marketplace is the single entry point; calls are reached through an offering and proposals are tracked in the user profile. 'both': marketplace and calls are browsable independently. Navigation only — the API serves the same data in every mode.": {},
-  "How users sign in to an external Matrix client such as Element: 'none' (Waldur offers no external sign-in), 'password' (a password Waldur derives for each user), or 'oidc' (single sign-on configured on the homeserver). Switching away from 'password' does not revoke passwords already shown or sign out external clients.": {},
+  "How users sign in to an external Matrix client such as Element: 'none' (Waldur offers no external sign-in), 'password' (for testing and sites without an identity provider: users generate a password in Waldur; needs the Waldur bot to be a homeserver admin), or 'oidc' (single sign-on configured on the homeserver; use this in production). Switching away from 'password' revokes no generated password and signs out no external client; to refuse password logins, set login_with_password = false on the homeserver.": {},
   "How would you like to sign in?": {
     "context": {
       "feature_area": "layouts"
@@ -34472,6 +34500,11 @@
   "Not connected": {
     "context": {
       "feature_area": "site-agents"
+    }
+  },
+  "Not encrypted": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Not equal to": {
@@ -46180,10 +46213,20 @@
       "feature_area": "integration"
     }
   },
+  "Reset chat encryption?": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Reset circuit breaker": {
     "context": {
       "primary_ui_type": "title",
       "feature_area": "pubsub"
+    }
+  },
+  "Reset encryption": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Reset metrics": {
@@ -56044,6 +56087,7 @@
       "feature_area": "service-providers"
     }
   },
+  "The conversation is still loading. Try again shortly.": {},
   "The credit has expired, so nothing is drawn from it any more and there is no rate to project from.": {
     "context": {
       "feature_area": "views"
@@ -61180,6 +61224,7 @@
       "feature_area": "review"
     }
   },
+  "Unable to decrypt this message.": {},
   "Unable to delete QoS profile.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -70483,6 +70528,16 @@
   "Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enrol using a phone or a security key from the next prompt.": {
     "context": {
       "feature_area": "passkeys"
+    }
+  },
+  "Your chat encryption keys can no longer be unlocked. Resetting creates new keys. Messages Waldur keeps a copy of become readable again; any others sent to you while encrypted are lost.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Your chat encryption keys could not be unlocked in this session.": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Your chat session has ended.": {

@@ -67,10 +67,12 @@ export const openRoom = async (roomUuid: string): Promise<string | null> => {
 /**
  * Build matrix-js-sdk's tokenRefreshFunction. It exchanges the refresh token
  * with a plain fetch, because client.refreshToken() would wait on the very
- * refresh in progress. A rejected exchange falls back to a new Waldur session.
- * Throwing `LogoutError` (the SDK's TokenRefreshLogoutError) ends the session;
- * any other error fails the request that needed the refresh, and the sync
- * loop tries again later.
+ * refresh in progress. A rejected exchange throws `LogoutError` (the SDK's
+ * TokenRefreshLogoutError), which signs the client out; the provider then asks
+ * Waldur for a new session on a new client. A new session is a new device, and
+ * a client's end-to-end encryption belongs to its device, so the old client
+ * can't carry on with new tokens. Any other error fails the request that
+ * needed the refresh, and the sync loop tries again later.
  */
 export const createTokenRefreshFunction =
   (homeserverUrl: string, LogoutError: typeof TokenRefreshLogoutError) =>
@@ -95,14 +97,9 @@ export const createTokenRefreshFunction =
     if (!REFRESH_REJECTED.includes(response.status)) {
       throw new Error(`Matrix token refresh failed with ${response.status}`);
     }
-
-    const session = await startSession();
-    if (!session) {
-      throw new LogoutError(new Error('Waldur refused a new chat session.'));
-    }
-    // The new session is on a new device; the client keeps its old device ID,
-    // which only matters for end-to-end encryption, which the drawer does not use.
-    return sessionTokens(session);
+    throw new LogoutError(
+      new Error(`Matrix rejected the refresh token with ${response.status}.`),
+    );
   };
 
 const isUnauthorized = (outcome: unknown) =>

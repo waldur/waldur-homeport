@@ -112,6 +112,10 @@ export function classifyPreviewEvent(
 ): PreviewInfo {
   if (!content) return { kind: 'none', text: '' };
   if (eventType === 'm.room.message') return classifyMessage(content);
+  // Still encrypted: not decrypted yet, or it can't be.
+  if (eventType === 'm.room.encrypted') {
+    return { kind: 'text', text: translate('Encrypted message') };
+  }
   if (eventType === 'm.room.member') {
     return classifyMembership(content, membershipContext ?? {});
   }

@@ -30,6 +30,7 @@ describe('useMatrixFileUpload with an expired access token', () => {
       whoami: vi.fn().mockResolvedValue({}),
       getAccessToken: () => 'token',
       sendMessage: vi.fn().mockResolvedValue({}),
+      getRoom: () => ({ hasEncryptionStateEvent: () => false }),
     };
     const { result } = renderHook(() => useMatrixFileUpload());
     const file = new File(['notes'], 'notes.txt', { type: 'text/plain' });
@@ -47,5 +48,47 @@ describe('useMatrixFileUpload with an expired access token', () => {
       expect.objectContaining({ url: 'mxc://hs/file' }),
     );
     expect(NotifyService.error).not.toHaveBeenCalled();
+  });
+});
+
+describe('useMatrixFileUpload in an encrypted room', () => {
+  it('refuses before any byte is uploaded', async () => {
+    h.client = {
+      uploadContent: vi.fn(),
+      sendMessage: vi.fn(),
+      getRoom: () => ({ hasEncryptionStateEvent: () => true }),
+    };
+    const { result } = renderHook(() => useMatrixFileUpload());
+    const file = new File(['secret'], 'secret.txt', { type: 'text/plain' });
+
+    let sent: boolean;
+    await act(async () => {
+      sent = await result.current.uploadFile(file);
+    });
+
+    expect(sent).toBe(false);
+    expect(h.client.uploadContent).not.toHaveBeenCalled();
+    expect(NotifyService.error).toHaveBeenCalled();
+  });
+});
+
+describe('useMatrixFileUpload in a room the client does not know yet', () => {
+  it('waits for a room that is still loading, which may be encrypted', async () => {
+    h.client = {
+      uploadContent: vi.fn(),
+      sendMessage: vi.fn(),
+      getRoom: () => null,
+    };
+    const { result } = renderHook(() => useMatrixFileUpload());
+
+    let sent: boolean;
+    await act(async () => {
+      sent = await result.current.uploadFile(
+        new File(['x'], 'x.txt', { type: 'text/plain' }),
+      );
+    });
+
+    expect(sent).toBe(false);
+    expect(h.client.uploadContent).not.toHaveBeenCalled();
   });
 });
