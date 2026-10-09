@@ -27,6 +27,12 @@ vi.mock('./useLiveKitToken', () => ({
   useLiveKitToken: () => ({
     rtcAvailable: h.rtcAvailable,
     discover: h.discover,
+    getFocus: (roomId: string) =>
+      Promise.resolve({
+        type: 'livekit',
+        livekit_service_url: 'https://lk.test',
+        livekit_alias: roomId,
+      }),
     acquireToken: h.acquireToken,
     error: h.tokenError,
   }),

@@ -2,7 +2,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useMatrixClient } from '../useMatrixClient';
 
-import { getCallDeviceId } from './callMembership';
+import {
+  getCallDeviceId,
+  LiveKitFocus,
+  makeLiveKitFocus,
+} from './callMembership';
 import { LiveKitCredentials } from './types';
 
 interface WellKnownFocus {
@@ -11,10 +15,80 @@ interface WellKnownFocus {
   livekit_alias?: string;
 }
 
+// The MatrixRTC slot of a room's call, as matrix-js-sdk names it (application
+// m.call, call id ROOM). lk-jwt derives the LiveKit room from room id + slot,
+// so every client must use this one to meet in the same LiveKit room.
+const CALL_SLOT_ID = 'm.call#ROOM';
+
+/**
+ * A token service URL reduced to origin + path, trailing slashes stripped, so
+ * two spellings of one service compare equal. Null for anything that is not
+ * an absolute http(s) URL.
+ */
+function normaliseServiceUrl(url: unknown): string | null {
+  if (typeof url !== 'string' || url === '') return null;
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return null;
+  }
+  if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return null;
+  return `${parsed.origin}${parsed.pathname.replace(/\/+$/, '')}`;
+}
+
+// Plain ws: to the SFU only where the page itself is not on TLS anyway.
+function insecureSfuAllowed(): boolean {
+  if (import.meta.env.DEV) return true;
+  const { protocol, hostname } = window.location;
+  return (
+    protocol === 'http:' &&
+    ['localhost', '127.0.0.1', '[::1]'].includes(hostname)
+  );
+}
+
+/**
+ * The LiveKit credentials of a token service response. Throws unless both
+ * are strings and the SFU URL is wss: (or ws: where `allowInsecure`).
+ */
+export function readLiveKitCredentials(
+  data: unknown,
+  allowInsecure: boolean,
+): LiveKitCredentials {
+  const { url, jwt } = (data ?? {}) as Record<string, unknown>;
+  if (typeof jwt !== 'string' || jwt === '') {
+    throw new Error('Token service response has no LiveKit token');
+  }
+  if (typeof url !== 'string' || url === '') {
+    throw new Error('Token service response has no LiveKit URL');
+  }
+  let protocol: string;
+  try {
+    protocol = new URL(url).protocol;
+  } catch {
+    throw new Error('Token service response has an invalid LiveKit URL');
+  }
+  if (protocol !== 'wss:' && !(protocol === 'ws:' && allowInsecure)) {
+    throw new Error(
+      `Token service response has a LiveKit URL with protocol ${protocol}; wss: is required`,
+    );
+  }
+  return { url, jwt };
+}
+
 export const useLiveKitToken = () => {
   const { client } = useMatrixClient();
   const [rtcAvailable, setRtcAvailable] = useState(false);
+  // The URL the browser sends token requests to (the Vite proxy in dev).
   const livekitUrlRef = useRef<string | null>(null);
+  // The URL as the homeserver advertises it: what memberships carry, so other
+  // clients (Element Call) recognise the focus as the one they use.
+  const advertisedUrlRef = useRef<string | null>(null);
+  // Every token service this deployment runs, normalised, mapped to the URL
+  // to send requests to. Only these are followed when another member's
+  // membership names the call's focus: any room member can publish one, and
+  // the request carries this user's OpenID token.
+  const trustedServicesRef = useRef<Map<string, string>>(new Map());
   const discoveredRef = useRef(false);
   // Separate abort controllers for the two flows. discover() runs once on
   // connect; acquireToken() runs per call attempt. Sharing one ref would
@@ -60,14 +134,37 @@ export const useLiveKitToken = () => {
         data['org.matrix.msc4143.rtc_transports'] ||
         [];
 
-      const lkFocus = foci.find((f) => f.type === 'livekit');
+      const lkFoci = Array.isArray(foci)
+        ? foci.filter(
+            (f) =>
+              f?.type === 'livekit' &&
+              typeof f.livekit_service_url === 'string' &&
+              f.livekit_service_url !== '',
+          )
+        : [];
+      const lkFocus = lkFoci[0];
       if (lkFocus?.livekit_service_url) {
         let serviceUrl = lkFocus.livekit_service_url;
+        advertisedUrlRef.current = serviceUrl.replace(/\/+$/, '');
 
         // In dev, rewrite to Vite proxy to avoid CORS
-        if (import.meta.env.DEV && !serviceUrl.startsWith('/lk-jwt')) {
+        const viaProxy = import.meta.env.DEV;
+        if (viaProxy && !serviceUrl.startsWith('/lk-jwt')) {
           serviceUrl = '/lk-jwt';
         }
+
+        const trusted = new Map<string, string>();
+        const trust = (url: unknown, requestUrl: string) => {
+          const key = normaliseServiceUrl(url);
+          if (key && !trusted.has(key)) trusted.set(key, requestUrl);
+        };
+        for (const focus of lkFoci) {
+          const raw = focus.livekit_service_url as string;
+          trust(raw, viaProxy ? serviceUrl : raw.replace(/\/+$/, ''));
+        }
+        // The service the dev proxy forwards to.
+        if (viaProxy) trust(import.meta.env.VITE_LK_JWT_URL, serviceUrl);
+        trustedServicesRef.current = trusted;
 
         livekitUrlRef.current = serviceUrl;
         discoveredRef.current = true;
@@ -86,8 +183,21 @@ export const useLiveKitToken = () => {
     }
   }, [client]);
 
+  /** The focus this device advertises in its call membership. */
+  const getFocus = useCallback(
+    async (roomId: string): Promise<LiveKitFocus | null> => {
+      await discover();
+      const url = advertisedUrlRef.current;
+      return url ? makeLiveKitFocus(url, roomId) : null;
+    },
+    [discover],
+  );
+
   const acquireToken = useCallback(
-    async (roomId: string): Promise<LiveKitCredentials | null> => {
+    async (
+      roomId: string,
+      activeFocus?: LiveKitFocus | null,
+    ): Promise<LiveKitCredentials | null> => {
       if (!client) return null;
 
       const controller = new AbortController();
@@ -97,14 +207,16 @@ export const useLiveKitToken = () => {
       acquireAbortRef.current = controller;
 
       try {
-        const serviceUrl = await discover();
-        if (!serviceUrl || controller.signal.aborted) {
-          return null;
-        }
-
-        // Get Matrix OpenID token
-        const openIdToken = await client.getOpenIdToken();
+        const ownServiceUrl = await discover();
         if (controller.signal.aborted) return null;
+        // Follow the oldest member's focus only when it is one of our own
+        // services; any other, ours. The LiveKit room is the same either way:
+        // lk-jwt derives it from the Matrix room, which is the focus alias.
+        const activeKey = normaliseServiceUrl(activeFocus?.livekit_service_url);
+        const serviceUrl =
+          (activeKey && trustedServicesRef.current.get(activeKey)) ||
+          ownServiceUrl;
+        if (!serviceUrl) return null;
 
         // The Matrix device this tab's session runs on, the same one the
         // call.member state key names.
@@ -112,26 +224,39 @@ export const useLiveKitToken = () => {
         const userId = client.getUserId() || '';
         if (!deviceId) return null;
 
-        // Exchange for LiveKit JWT. The SFURequest shape (room_id/slot_id/member)
-        // is only served on /get_token; /sfu/get is the legacy endpoint and
-        // rejects it from lk-jwt 0.6.0 on.
-        const res = await fetch(`${serviceUrl}/get_token`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
+        const post = (path: string, body: object) =>
+          fetch(`${serviceUrl}${path}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+            signal: controller.signal,
+          });
+
+        // The legacy endpoint, as Element Call does for state-event
+        // memberships ("compatibility" mode): it puts every client in the
+        // LiveKit room of slot m.call#ROOM, under the identity
+        // `<user>:<device>` that Element Call looks participants up by.
+        let res = await post('/sfu/get', {
+          room: roomId,
+          openid_token: await client.getOpenIdToken(),
+          device_id: deviceId,
+        });
+        if (controller.signal.aborted) return null;
+        if (res.status === 404 || res.status === 405) {
+          // A service without the legacy endpoint: the MatrixRTC request,
+          // for the same slot, so the call still shares Element's room.
+          res = await post('/get_token', {
             room_id: roomId,
-            slot_id: '0',
-            openid_token: openIdToken,
+            slot_id: CALL_SLOT_ID,
+            openid_token: await client.getOpenIdToken(),
             member: {
-              id: deviceId,
+              id: `${userId}:${deviceId}`,
               claimed_user_id: userId,
               claimed_device_id: deviceId,
             },
-          }),
-          signal: controller.signal,
-        });
-
-        if (controller.signal.aborted) return null;
+          });
+          if (controller.signal.aborted) return null;
+        }
 
         if (!res.ok) {
           const text = await res.text();
@@ -141,14 +266,18 @@ export const useLiveKitToken = () => {
         const data = await res.json();
         if (controller.signal.aborted) return null;
 
+        const credentials = readLiveKitCredentials(data, insecureSfuAllowed());
+
         // In dev, the response URL may contain Docker-internal hostnames
         // (e.g. ws://livekit:7880). Rewrite to localhost for the browser.
-        let lkUrl: string = data.url;
         if (import.meta.env.DEV) {
-          lkUrl = lkUrl.replace(/^ws:\/\/livekit:/, 'ws://localhost:');
+          credentials.url = credentials.url.replace(
+            /^ws:\/\/livekit:/,
+            'ws://localhost:',
+          );
         }
 
-        return { url: lkUrl, jwt: data.jwt };
+        return credentials;
       } catch {
         return null;
       }
@@ -156,5 +285,5 @@ export const useLiveKitToken = () => {
     [client, discover],
   );
 
-  return { rtcAvailable, discover, acquireToken };
+  return { rtcAvailable, discover, getFocus, acquireToken };
 };

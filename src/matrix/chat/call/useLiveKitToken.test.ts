@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { useLiveKitToken } from './useLiveKitToken';
+import { readLiveKitCredentials, useLiveKitToken } from './useLiveKitToken';
 
 const openIdToken = {
   access_token: 'openid-secret',
@@ -21,25 +21,29 @@ vi.mock('../useMatrixClient', () => ({
   }),
 }));
 
+const wellKnown = {
+  ok: true,
+  json: () =>
+    Promise.resolve({
+      'org.matrix.msc4143.rtc_foci': [
+        { type: 'livekit', livekit_service_url: 'https://lk.test' },
+      ],
+    }),
+};
+const tokenResponse = {
+  ok: true,
+  status: 200,
+  json: () => Promise.resolve({ url: 'wss://lk.test/sfu', jwt: 'jwt' }),
+};
+
 describe('useLiveKitToken', () => {
   afterEach(() => vi.unstubAllGlobals());
 
-  it('exchanges the OpenID token at lk-jwt /get_token with the SFURequest body', async () => {
+  it('asks /sfu/get as Element Call does, so both share one LiveKit room', async () => {
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce({
-        ok: true,
-        json: () =>
-          Promise.resolve({
-            'org.matrix.msc4143.rtc_foci': [
-              { type: 'livekit', livekit_service_url: 'https://lk.test' },
-            ],
-          }),
-      })
-      .mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve({ url: 'wss://lk.test/sfu', jwt: 'jwt' }),
-      });
+      .mockResolvedValueOnce(wellKnown)
+      .mockResolvedValueOnce(tokenResponse);
     vi.stubGlobal('fetch', fetchMock);
 
     const { result } = renderHook(() => useLiveKitToken());
@@ -50,19 +54,193 @@ describe('useLiveKitToken', () => {
 
     expect(credentials).toEqual({ url: 'wss://lk.test/sfu', jwt: 'jwt' });
     const [url, init] = fetchMock.mock.calls[1];
-    // lk-jwt serves the SFURequest shape (room_id/slot_id/member) only on
-    // /get_token; /sfu/get is the legacy endpoint and rejects it from 0.6.0.
+    expect(url).toMatch(/\/sfu\/get$/);
+    expect(JSON.parse(init.body)).toEqual({
+      room: '!room:hs.test',
+      openid_token: openIdToken,
+      device_id: 'WALDURDEV1',
+    });
+  });
+
+  it('falls back to /get_token for slot m.call#ROOM without the legacy endpoint', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(wellKnown)
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+        text: () => Promise.resolve(''),
+      })
+      .mockResolvedValueOnce(tokenResponse);
+    vi.stubGlobal('fetch', fetchMock);
+
+    const { result } = renderHook(() => useLiveKitToken());
+    let credentials;
+    await act(async () => {
+      credentials = await result.current.acquireToken('!room:hs.test');
+    });
+
+    expect(credentials).toEqual({ url: 'wss://lk.test/sfu', jwt: 'jwt' });
+    const [url, init] = fetchMock.mock.calls[2];
     expect(url).toMatch(/\/get_token$/);
     expect(JSON.parse(init.body)).toMatchObject({
       room_id: '!room:hs.test',
-      slot_id: '0',
+      slot_id: 'm.call#ROOM',
       openid_token: openIdToken,
-      // The Matrix device, the same one the call.member state key names.
       member: {
-        id: 'WALDURDEV1',
+        id: '@me:hs.test:WALDURDEV1',
         claimed_user_id: '@me:hs.test',
         claimed_device_id: 'WALDURDEV1',
       },
     });
+  });
+
+  it('advertises the focus as the homeserver names it, aliased to the room', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(wellKnown));
+    const { result } = renderHook(() => useLiveKitToken());
+    let focus;
+    await act(async () => {
+      focus = await result.current.getFocus('!room:hs.test');
+    });
+    expect(focus).toEqual({
+      type: 'livekit',
+      livekit_service_url: 'https://lk.test',
+      livekit_alias: '!room:hs.test',
+    });
+  });
+
+  it('never sends the OpenID token to a focus that is not ours', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(wellKnown)
+      .mockResolvedValueOnce(tokenResponse);
+    vi.stubGlobal('fetch', fetchMock);
+    const { result } = renderHook(() => useLiveKitToken());
+    await act(async () => {
+      await result.current.acquireToken('!room:hs.test', {
+        type: 'livekit',
+        livekit_service_url: 'https://evil.test/',
+        livekit_alias: '!room:hs.test',
+      });
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock.mock.calls[1][0]).toBe('/lk-jwt/sfu/get');
+    for (const [url] of fetchMock.mock.calls) {
+      expect(String(url)).not.toContain('evil.test');
+    }
+  });
+
+  describe('outside dev', () => {
+    beforeEach(() => vi.stubEnv('DEV', false));
+    afterEach(() => vi.unstubAllEnvs());
+
+    const twoFoci = {
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          'org.matrix.msc4143.rtc_foci': [
+            { type: 'livekit', livekit_service_url: 'https://lk.test' },
+            { type: 'livekit', livekit_service_url: 'https://lk2.test/jwt/' },
+          ],
+        }),
+    };
+
+    const requestUrlFor = async (focusUrl: string) => {
+      const fetchMock = vi
+        .fn()
+        .mockResolvedValueOnce(twoFoci)
+        .mockResolvedValueOnce(tokenResponse);
+      vi.stubGlobal('fetch', fetchMock);
+      const { result } = renderHook(() => useLiveKitToken());
+      let credentials;
+      await act(async () => {
+        credentials = await result.current.acquireToken('!room:hs.test', {
+          type: 'livekit',
+          livekit_service_url: focusUrl,
+          livekit_alias: '!room:hs.test',
+        });
+      });
+      expect(credentials).toEqual({ url: 'wss://lk.test/sfu', jwt: 'jwt' });
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+      return fetchMock.mock.calls[1][0];
+    };
+
+    it("follows the oldest member's focus when it is one of ours", async () => {
+      expect(await requestUrlFor('https://LK2.test/jwt')).toBe(
+        'https://lk2.test/jwt/sfu/get',
+      );
+    });
+
+    it('uses our own service for a focus that only looks like ours', async () => {
+      for (const url of [
+        'https://evil.test',
+        'https://lk.test.evil.test',
+        'https://lk.test@evil.test',
+        'https:\\\\evil.test',
+        'https://lk2.test/jwt/../other',
+        'https://lk2.test/other',
+        'https://lk2.test:8443/jwt',
+        'http://lk.test',
+        '/lk-jwt',
+      ]) {
+        expect(await requestUrlFor(url)).toBe('https://lk.test/sfu/get');
+      }
+    });
+  });
+
+  it('rejects a token response that is not a LiveKit URL and token', async () => {
+    for (const body of [
+      { url: 'wss://lk.test/sfu', jwt: 42 },
+      { url: 'https://lk.test/sfu', jwt: 'jwt' },
+      { url: ['wss://lk.test/sfu'], jwt: 'jwt' },
+      { jwt: 'jwt' },
+    ]) {
+      vi.stubGlobal(
+        'fetch',
+        vi
+          .fn()
+          .mockResolvedValueOnce(wellKnown)
+          .mockResolvedValueOnce({
+            ok: true,
+            status: 200,
+            json: () => Promise.resolve(body),
+          }),
+      );
+      const { result } = renderHook(() => useLiveKitToken());
+      let credentials;
+      await act(async () => {
+        credentials = await result.current.acquireToken('!room:hs.test');
+      });
+      expect(credentials).toBeNull();
+    }
+  });
+});
+
+describe('readLiveKitCredentials', () => {
+  it('accepts wss:', () => {
+    expect(
+      readLiveKitCredentials({ url: 'wss://lk.test', jwt: 'jwt' }, false),
+    ).toEqual({ url: 'wss://lk.test', jwt: 'jwt' });
+  });
+
+  it('accepts ws: only where insecure transport is allowed', () => {
+    const data = { url: 'ws://localhost:7880', jwt: 'jwt' };
+    expect(readLiveKitCredentials(data, true)).toEqual(data);
+    expect(() => readLiveKitCredentials(data, false)).toThrow(
+      /wss: is required/,
+    );
+  });
+
+  it('rejects other schemes and malformed values', () => {
+    expect(() =>
+      readLiveKitCredentials({ url: 'https://lk.test', jwt: 'jwt' }, true),
+    ).toThrow(/wss: is required/);
+    expect(() =>
+      readLiveKitCredentials({ url: 'not a url', jwt: 'jwt' }, true),
+    ).toThrow(/invalid LiveKit URL/);
+    expect(() =>
+      readLiveKitCredentials({ url: 'wss://lk.test' }, true),
+    ).toThrow(/no LiveKit token/);
+    expect(() => readLiveKitCredentials(null, true)).toThrow();
   });
 });
