@@ -97,7 +97,7 @@ export const K8sNodeGroupCard: React.FC<NodeGroupCardProps> = ({
           shape="pill"
           tone="outline"
         >
-          {nodeGroup.type.toUpperCase()}
+          {isStorageGroup ? translate('Storage') : translate('Worker')}
         </Badge>
         {canRemove && (
           <BaseButton

@@ -22350,7 +22350,7 @@
       "feature_area": "table"
     }
   },
-  "Format for generating Matrix user IDs: username, uuid, or email_local.": {},
+  "Format for generating Matrix user IDs: username, uuid, or email_local. Applies only to users provisioned afterwards; existing users keep their Matrix ID.": {},
   "Format hint": {
     "context": {
       "feature_area": "integration"
@@ -24164,7 +24164,7 @@
     }
   },
   "How users reach services. 'calls': only through calls for proposals, no marketplace navigation. 'marketplace': the marketplace is the single entry point; calls are reached through an offering and proposals are tracked in the user profile. 'both': marketplace and calls are browsable independently. Navigation only — the API serves the same data in every mode.": {},
-  "How users sign in to an external Matrix client such as Element: 'none' (Waldur offers no external sign-in), 'password' (a password Waldur derives for each user), or 'oidc' (single sign-on configured on the homeserver). Switching away from 'password' does not revoke passwords already shown or sign out external clients.": {},
+  "How users sign in to an external Matrix client such as Element: 'none' (Waldur offers no external sign-in), 'password' (for testing and sites without an identity provider: users generate a password in Waldur; needs the Waldur bot to be a homeserver admin), or 'oidc' (single sign-on configured on the homeserver; use this in production). Switching away from 'password' revokes no generated password and signs out no external client; to refuse password logins, set login_with_password = false on the homeserver.": {},
   "How would you like to sign in?": {
     "context": {
       "feature_area": "layouts"
@@ -69519,7 +69519,8 @@
   },
   "Worker": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "common"
     }
   },
   "Worker - Application workloads": {
