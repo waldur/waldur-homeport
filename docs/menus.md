@@ -379,7 +379,7 @@ Radix portals every panel and submenu to `document.body`, so CSS inheritance nev
 
 That is why one row component works in a menu, a popover and a dialog list. A Radix menu item outside a menu would throw.
 
-For an element that must look like a row without being one (a custom picker row), take the classes from the context: `const className = useMenuItemClassName();` (`SupportMenu.tsx`, `RoleAndProjectSelectField.tsx`).
+For an element that must look like a row without being one (a custom picker row), take the classes from the context: `const className = useMenuItemClassName();` (`SupportMenu.tsx`).
 
 ---
 

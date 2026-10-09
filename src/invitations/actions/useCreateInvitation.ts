@@ -7,6 +7,7 @@ import { PermissionMap } from '@/permissions/enums';
 import { checkScope } from '@/permissions/hasPermission';
 import { useUser, useCustomer, useProject } from '@/workspace/hooks';
 
+import { getInvitationDialogSize } from './create/getInvitationDialogSize';
 import { InvitationContext } from './types';
 
 const InvitationCreateDialog = lazyComponent(() =>
@@ -25,7 +26,7 @@ export const useCreateInvitation = (
   const { openDialog } = useModal();
   const callback = () =>
     openDialog(InvitationCreateDialog, {
-      size: 'xl',
+      size: getInvitationDialogSize(),
       resolve: { ...context, user, customer },
     });
 

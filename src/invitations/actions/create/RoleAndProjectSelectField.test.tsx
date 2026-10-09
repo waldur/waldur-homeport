@@ -1,25 +1,11 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
 
-/**
- * Regression coverage for the Radix conversion: this popup used
- * Metronic's own imperative menu JS throughout to close (a global
- * "hide all dropdowns" call), and a real search input inside a nested
- * Metronic-driven flyout for the project sub-list. It's a controlled
- * Radix Popover now (open/close threaded through the `close` callback
- * instead of that global call), with the project search staying a
- * plain input — no Radix Menu collection anywhere in this tree to steal
- * its keystrokes.
- */
 describe('RoleAndProjectSelectField', () => {
-  beforeAll(() => {
-    // downshift scrolls the highlighted row into view; jsdom has no layout.
-    Element.prototype.scrollIntoView = vi.fn();
-  });
   const roles = [
     {
       uuid: 'r1',
@@ -35,6 +21,14 @@ describe('RoleAndProjectSelectField', () => {
       content_type: 'project',
       is_active: true,
     },
+    {
+      uuid: 'r3',
+      name: 'manager',
+      description: 'Manager',
+      content_type: 'project',
+      is_active: false,
+      tooltip: 'Only one manager is allowed.',
+    },
   ] as any;
 
   const customer = {
@@ -45,193 +39,183 @@ describe('RoleAndProjectSelectField', () => {
     ],
   } as any;
 
-  const renderField = (onSubmit = vi.fn()) => {
-    render(
-      <Form
-        onSubmit={onSubmit}
-        render={() => (
-          <RoleAndProjectSelectField
-            name="assignment"
-            roles={roles}
-            customer={customer}
-            currentProject={undefined}
-          />
-        )}
-      />,
-    );
-  };
-
-  it('selecting a non-project role closes the popup', async () => {
-    const user = userEvent.setup();
-    renderField();
-
-    await user.click(screen.getByPlaceholderText('Select...'));
-    await user.click(screen.getByText('Administrator'));
-
-    expect(screen.queryByText('Member')).not.toBeInTheDocument();
-  });
-
-  it('selecting a project role reveals the project search, which accepts a full word', async () => {
-    const user = userEvent.setup();
-    renderField();
-
-    await user.click(screen.getByPlaceholderText('Select...'));
-    await user.click(screen.getByText('Member'));
-
-    const search = await screen.findByPlaceholderText('Search for project');
-    await user.type(search, 'One');
-    expect(search).toHaveValue('One');
-    expect(screen.getByText('Project One')).toBeInTheDocument();
-    expect(screen.queryByText('Project Two')).not.toBeInTheDocument();
-  });
-
-  it('selecting a project closes the popup', async () => {
-    const user = userEvent.setup();
-    renderField();
-
-    await user.click(screen.getByPlaceholderText('Select...'));
-    await user.click(screen.getByText('Member'));
-    await screen.findByPlaceholderText('Search for project');
-
-    const projectOne = screen.getByText('Project One');
-    const projectTwo = screen.getByText('Project Two');
-
-    // Project One is initially selected by role click:
-    expect(projectOne).toHaveClass('active');
-    expect(projectOne).toHaveClass('cursor-pointer');
-    expect(projectOne).not.toHaveClass('data-disabled:cursor-not-allowed');
-
-    // Project Two is unselected, enabled with strong text and pointer cursor:
-    expect(projectTwo).toHaveClass('cursor-pointer');
-    expect(projectTwo).toHaveClass('text-[var(--menu-item-strong-text)]');
-    expect(projectTwo).not.toHaveClass('data-disabled:cursor-not-allowed');
-
-    await user.click(projectTwo);
-
-    expect(
-      screen.queryByPlaceholderText('Search for project'),
-    ).not.toBeInTheDocument();
-  });
-
-  // A caller (e.g. InviteUserButton.tsx) can hand this field an empty
-  // `roles` array when its own offering-scoped role fetch comes back
-  // empty. Silently rendering nothing there reads as a broken/stuck
-  // popup rather than an empty one -- reported live.
-  it('shows an explanatory message instead of an empty popup when there are no roles', async () => {
-    const user = userEvent.setup();
+  const renderField = ({
+    roles: fieldRoles = roles,
+    customer: fieldCustomer = customer,
+    currentProject = undefined,
+    initialValues = undefined,
+    ...fieldProps
+  }: Record<string, any> = {}) => {
+    let values;
+    let errors;
     render(
       <Form
         onSubmit={vi.fn()}
-        render={() => (
-          <RoleAndProjectSelectField
-            name="assignment"
-            roles={[]}
-            customer={customer}
-            currentProject={undefined}
-          />
-        )}
+        initialValues={initialValues}
+        render={({ values: formValues, errors: formErrors }) => {
+          values = formValues;
+          errors = formErrors;
+          return (
+            <>
+              <RoleAndProjectSelectField
+                name="assignment"
+                roles={fieldRoles}
+                customer={fieldCustomer}
+                currentProject={currentProject}
+                {...fieldProps}
+              />
+              <button type="button">Next field</button>
+            </>
+          );
+        }}
       />,
     );
+    const getValues = () => values;
+    getValues.errors = () => errors;
+    return getValues;
+  };
 
-    await user.click(screen.getByPlaceholderText('Select...'));
+  it('selects a project-level role and a project with the keyboard only', async () => {
+    const user = userEvent.setup();
+    const getValues = renderField();
+
+    await user.tab();
+    const roleInput = screen.getByRole('combobox', { name: 'Role' });
+    expect(roleInput).toHaveFocus();
+
+    // Open, move to Member, select.
+    await user.keyboard('{ArrowDown}{ArrowDown}{Enter}');
+    expect(getValues().assignment).toEqual({
+      role: roles[1],
+      project: customer.projects[0],
+    });
+
+    // Tab moves on to the project picker, which follows the role.
+    await user.tab();
+    const projectInput = screen.getByRole('combobox', { name: 'Project' });
+    expect(projectInput).toHaveFocus();
+
+    await user.keyboard('{ArrowDown}{ArrowDown}{Enter}');
+    expect(getValues().assignment).toEqual({
+      role: roles[1],
+      project: customer.projects[1],
+    });
+
+    // Tab leaves the field in document order, not to the end of the page.
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Next field' })).toHaveFocus();
+  });
+
+  it('exposes combobox state and closes with Escape', async () => {
+    const user = userEvent.setup();
+    renderField();
+
+    await user.tab();
+    const roleInput = screen.getByRole('combobox', { name: 'Role' });
+    expect(roleInput).toHaveAttribute('aria-expanded', 'false');
+
+    await user.keyboard('{ArrowDown}');
+    expect(roleInput).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+
+    await user.keyboard('{Escape}');
+    expect(roleInput).toHaveAttribute('aria-expanded', 'false');
+    expect(roleInput).toHaveFocus();
+  });
+
+  it('selecting an organization-level role clears the project and hides its picker', async () => {
+    const user = userEvent.setup();
+    const getValues = renderField();
+
+    await user.tab();
+    await user.keyboard('{ArrowDown}{Enter}');
+
+    expect(getValues().assignment).toEqual({ role: roles[0], project: null });
+    expect(
+      screen.queryByRole('combobox', { name: 'Project' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('shows an unavailable role as disabled, with its reason', async () => {
+    const user = userEvent.setup();
+    renderField();
+
+    await user.tab();
+    await user.keyboard('{ArrowDown}');
+
+    const manager = screen.getByRole('option', { name: /Manager/ });
+    expect(manager).toHaveAttribute('aria-disabled', 'true');
+    expect(manager).toHaveTextContent('Only one manager is allowed.');
+  });
+
+  it('uses the dialog project instead of asking for one', async () => {
+    const user = userEvent.setup();
+    const project = { uuid: 'p9', name: 'Current' } as any;
+    const getValues = renderField({ currentProject: project });
+
+    await user.tab();
+    await user.keyboard('{ArrowDown}{ArrowDown}{Enter}');
+
+    expect(getValues().assignment).toEqual({ role: roles[1], project });
+    expect(
+      screen.queryByRole('combobox', { name: 'Project' }),
+    ).not.toBeInTheDocument();
+  });
+
+  it('says so when there are no roles', async () => {
+    const user = userEvent.setup();
+    renderField({ roles: [] });
+
+    await user.tab();
+    await user.keyboard('{ArrowDown}');
     expect(screen.getByText('No roles available.')).toBeInTheDocument();
   });
 
-  it('keyboard navigates and selects a project with ArrowDown and Enter', async () => {
+  it('requires a project for a project-level role', async () => {
     const user = userEvent.setup();
-    renderField();
-
-    await user.click(screen.getByPlaceholderText('Select...'));
-    await user.click(screen.getByText('Member'));
-
-    const search = await screen.findByPlaceholderText('Search for project');
-    expect(search).toBeInTheDocument();
-
-    // Verify combobox and listbox ARIA structure
-    expect(search).toHaveAttribute('role', 'combobox');
-    const projectListbox = screen.getByRole('listbox', {
-      name: 'Projects',
+    const getValues = renderField({
+      customer: { ...customer, projects: [], projects_count: 1 },
     });
-    expect(projectListbox).toBeInTheDocument();
-    const options = within(projectListbox).getAllByRole('option');
-    expect(options).toHaveLength(2);
 
-    // Arrow down moves from default Project One to Project Two, and Enter selects
-    await user.keyboard('{ArrowDown}{Enter}');
+    await user.tab();
+    await user.keyboard('{ArrowDown}{ArrowDown}{Enter}');
 
-    expect(
-      screen.queryByPlaceholderText('Search for project'),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.getByDisplayValue('Member - Project Two'),
-    ).toBeInTheDocument();
+    expect(getValues().assignment.project).toBeUndefined();
+    expect(getValues.errors().assignment).toBe('Select a project.');
   });
 
-  it('opens dropdown via keyboard (ArrowDown, Space, Enter) on the trigger', async () => {
-    const user = userEvent.setup();
-    renderField();
+  it('shows the selected role in disabled selects', () => {
+    renderField({
+      disabled: true,
+      initialValues: {
+        assignment: { role: roles[1], project: customer.projects[1] },
+      },
+    });
 
-    const trigger = screen.getByPlaceholderText('Select...');
-    trigger.focus();
-
-    // ArrowDown opens the dropdown
-    await user.keyboard('{ArrowDown}');
-    expect(
-      await screen.findByRole('option', { name: 'Administrator' }),
-    ).toBeInTheDocument();
-
-    // Escape closes the dropdown
-    await user.keyboard('{Escape}');
-    expect(
-      screen.queryByRole('option', { name: 'Administrator' }),
-    ).not.toBeInTheDocument();
-
-    // Enter opens the dropdown
-    await user.keyboard('{Enter}');
-    expect(
-      await screen.findByRole('option', { name: 'Administrator' }),
-    ).toBeInTheDocument();
-
-    // Escape closes again
-    await user.keyboard('{Escape}');
-    expect(
-      screen.queryByRole('option', { name: 'Administrator' }),
-    ).not.toBeInTheDocument();
-
-    // Space opens the dropdown
-    await user.keyboard(' ');
-    expect(
-      await screen.findByRole('option', { name: 'Administrator' }),
-    ).toBeInTheDocument();
+    // react-select hides a disabled select's input from the accessibility
+    // tree, so find it by its label; the selected value still shows.
+    expect(screen.getByLabelText('Role')).toBeDisabled();
+    expect(screen.getByLabelText('Project')).toBeDisabled();
+    expect(screen.getByText('Member')).toBeInTheDocument();
+    expect(screen.getByText('Project Two')).toBeInTheDocument();
+    expect(screen.queryByText('[object Object]')).not.toBeInTheDocument();
   });
 
-  it('navigates roles with ArrowDown/ArrowUp and selects with Enter', async () => {
+  it('names the selects after the given labels', async () => {
     const user = userEvent.setup();
-    renderField();
-
-    const trigger = screen.getByPlaceholderText('Select...');
-    trigger.focus();
-    await user.keyboard('{ArrowDown}');
-
-    const adminOption = await screen.findByRole('option', {
-      name: 'Administrator',
+    renderField({
+      roleLabel: 'Role for a@example.com',
+      projectLabel: 'Project for a@example.com',
     });
-    expect(adminOption).toHaveFocus();
 
-    // ArrowDown moves focus to Member
-    await user.keyboard('{ArrowDown}');
-    const memberOption = screen.getByRole('option', { name: 'Member' });
-    expect(memberOption).toHaveFocus();
+    await user.tab();
+    await user.keyboard('{ArrowDown}{ArrowDown}{Enter}');
 
-    // ArrowUp moves focus back to Administrator
-    await user.keyboard('{ArrowUp}');
-    expect(adminOption).toHaveFocus();
-
-    // Enter selects Administrator and closes popup
-    await user.keyboard('{Enter}');
     expect(
-      screen.queryByRole('option', { name: 'Administrator' }),
-    ).not.toBeInTheDocument();
-    expect(screen.getByDisplayValue('Administrator')).toBeInTheDocument();
+      screen.getByRole('combobox', { name: 'Role for a@example.com' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox', { name: 'Project for a@example.com' }),
+    ).toBeInTheDocument();
   });
 });

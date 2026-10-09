@@ -6717,11 +6717,6 @@
       "feature_area": "component-policies"
     }
   },
-  "At least one email is required": {
-    "context": {
-      "feature_area": "create"
-    }
-  },
   "At least one mapping is required": {
     "context": {
       "feature_area": "remote-offering-sync"
@@ -6742,7 +6737,11 @@
       "feature_area": "options"
     }
   },
-  "At least one user is required": {},
+  "At least one user is required": {
+    "context": {
+      "feature_area": "create"
+    }
+  },
   "At least one user is required.": {
     "context": {
       "feature_area": "import-users"
@@ -41663,6 +41662,26 @@
   },
   "Project field name": {},
   "Project field name.": {},
+  "Project for row {number}": {
+    "context": {
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "Project for {email}": {
+    "context": {
+      "variables": {
+        "email": {
+          "type": "email"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
   "Project grants": {
     "context": {
       "feature_area": "team"
@@ -48253,6 +48272,26 @@
       "feature_area": "team"
     }
   },
+  "Role for row {number}": {
+    "context": {
+      "variables": {
+        "number": {
+          "type": "number"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
+  "Role for {email}": {
+    "context": {
+      "variables": {
+        "email": {
+          "type": "email"
+        }
+      },
+      "feature_area": "create"
+    }
+  },
   "Role group": {
     "context": {
       "primary_ui_type": "label",
@@ -50094,6 +50133,7 @@
       "feature_area": "project-digest"
     }
   },
+  "Select a project.": {},
   "Select a project...": {
     "context": {
       "feature_area": "import"
@@ -57525,7 +57565,7 @@
   },
   "There are no projects.": {
     "context": {
-      "feature_area": "actions"
+      "feature_area": "create"
     }
   },
   "There are no proposals in this round.": {

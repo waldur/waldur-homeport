@@ -85,6 +85,8 @@
   --btn-text-primary-color: var(--waldur-brand-700);
   --btn-text-secondary-color: var(--color-gray-700);
   --btn-text-danger-color: var(--color-error-700);
+  /* Icons take fg-error-primary, not the text colour. */
+  --btn-text-danger-icon: var(--color-error-600);
   --btn-text-warning-color: var(--color-warning-600);
   --btn-text-success-color: var(--color-success-700);
 
@@ -153,6 +155,7 @@
   --btn-text-primary-pressed: var(--color-gray-dark-50);
   --btn-text-secondary-color: var(--color-gray-dark-300);
   --btn-text-danger-color: var(--color-error-200);
+  --btn-text-danger-icon: var(--color-error-500);
   --btn-text-warning-color: var(--color-warning-300);
   --btn-text-success-color: var(--color-success-200);
 }
