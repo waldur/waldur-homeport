@@ -61264,7 +61264,12 @@
       "feature_area": "review"
     }
   },
-  "Unable to decrypt this message.": {},
+  "Unable to decrypt this message.": {
+    "context": {
+      "primary_ui_type": "text_content",
+      "action_type": "read"
+    }
+  },
   "Unable to delete QoS profile.": {
     "context": {
       "primary_ui_type": "error_message",

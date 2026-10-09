@@ -147,3 +147,91 @@ describe('useMatrixRoom reactions', () => {
     ]);
   });
 });
+
+// Mirrors matrix-js-sdk: an event is m.room.encrypted until decryption is
+// attempted; a failed attempt reports it as an m.bad.encrypted m.room.message.
+function encryptedEvent(eventId: string, ts: number) {
+  let state: 'pending' | 'failed' | 'decrypted' = 'pending';
+  return {
+    getType: () =>
+      state === 'pending' ? 'm.room.encrypted' : 'm.room.message',
+    getId: () => eventId,
+    getRoomId: () => ROOM_ID,
+    getTxnId: () => undefined,
+    getSender: () => '@other:server',
+    getTs: () => ts,
+    getContent: () =>
+      state === 'failed'
+        ? { msgtype: 'm.bad.encrypted', body: '** Unable to decrypt: x **' }
+        : state === 'decrypted'
+          ? { msgtype: 'm.text', body: 'secret' }
+          : {},
+    isDecryptionFailure: () => state === 'failed',
+    isEncrypted: () => true,
+    isRedacted: () => false,
+    setState: (next: typeof state) => {
+      state = next;
+    },
+  };
+}
+
+const timedMessage = (eventId: string, ts: number) => ({
+  ...messageEvent(eventId),
+  getTs: () => ts,
+});
+
+describe('useMatrixRoom decryption', () => {
+  beforeEach(() => {
+    timeline.length = 0;
+  });
+
+  it('keeps a decrypted message in its timeline position', async () => {
+    const encrypted = encryptedEvent('enc-2', 2);
+    timeline.push(
+      timedMessage('msg-1', 1),
+      encrypted,
+      timedMessage('msg-3', 3),
+    );
+    const { result } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(2));
+
+    act(() => {
+      encrypted.setState('decrypted');
+      client.emit('Event.decrypted', encrypted);
+    });
+
+    expect(result.current.messages.map((m) => m.eventId)).toEqual([
+      'msg-1',
+      'enc-2',
+      'msg-3',
+    ]);
+    expect(result.current.messages[1].body).toBe('secret');
+  });
+
+  it('updates a failed decryption in place once it succeeds', async () => {
+    const encrypted = encryptedEvent('enc-2', 2);
+    encrypted.setState('failed');
+    timeline.push(
+      timedMessage('msg-1', 1),
+      encrypted,
+      timedMessage('msg-3', 3),
+    );
+    const { result } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(3));
+    expect(result.current.messages[1].body).toBe(
+      'Unable to decrypt this message.',
+    );
+
+    act(() => {
+      encrypted.setState('decrypted');
+      client.emit('Event.decrypted', encrypted);
+    });
+
+    expect(result.current.messages.map((m) => m.eventId)).toEqual([
+      'msg-1',
+      'enc-2',
+      'msg-3',
+    ]);
+    expect(result.current.messages[1].body).toBe('secret');
+  });
+});

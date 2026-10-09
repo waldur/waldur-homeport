@@ -43,6 +43,14 @@ describe('mapEventToMessage', () => {
       isDecryptionFailure: () => failed,
     }) as any;
 
+  it('does not let a sender claim the undecryptable notice style', () => {
+    const spoof = makeEvent({
+      msgtype: UNDECRYPTABLE_MESSAGE_TYPE,
+      body: 'Unable to decrypt this message.',
+    });
+    expect(mapEventToMessage(spoof)?.type).toBe('m.text');
+  });
+
   it('waits for an encrypted event to be decrypted', () => {
     expect(mapEventToMessage(encrypted(false))).toBeNull();
   });
@@ -87,6 +95,23 @@ describe('mapEventToMessage', () => {
       expect.objectContaining({
         eventId: '$evt1',
         sender: '@bob:s',
+        type: UNDECRYPTABLE_MESSAGE_TYPE,
+        body: 'Unable to decrypt this message.',
+      }),
+    );
+  });
+
+  it('shows a notice, not the SDK error, for a failed decryption', () => {
+    // matrix-js-sdk reports a failed decryption as an m.room.message.
+    const failed = {
+      ...makeEvent({
+        msgtype: 'm.bad.encrypted',
+        body: '** Unable to decrypt: DecryptionError: no session **',
+      }),
+      isDecryptionFailure: () => true,
+    } as any;
+    expect(mapEventToMessage(failed)).toEqual(
+      expect.objectContaining({
         type: UNDECRYPTABLE_MESSAGE_TYPE,
         body: 'Unable to decrypt this message.',
       }),

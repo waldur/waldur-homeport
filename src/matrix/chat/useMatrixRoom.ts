@@ -36,6 +36,42 @@ function upsertMessage(
   return next;
 }
 
+/**
+ * Put a message decrypted after it reached the timeline where it belongs. A row
+ * it already has (a failed decryption that later succeeded) is updated in
+ * place; otherwise it goes before the first row that comes after it in the
+ * room's timeline, so the list isn't regrouped by when each event finished
+ * decrypting. Rows not in the timeline (local echoes) count as the newest.
+ */
+function placeDecryptedMessage(
+  prev: MatrixChatMessage[],
+  msg: MatrixChatMessage,
+  timelineEvents: any[],
+): MatrixChatMessage[] {
+  if (
+    prev.some(
+      (m) =>
+        m.eventId === msg.eventId ||
+        (msg.txnId != null && m.txnId === msg.txnId),
+    )
+  ) {
+    return upsertMessage(prev, msg);
+  }
+  const positions = new Map<string, number>();
+  timelineEvents.forEach((e, i) => {
+    const id = e.getId?.();
+    if (id) positions.set(id, i);
+  });
+  const position = positions.get(msg.eventId);
+  const idx = prev.findIndex((m) =>
+    position === undefined
+      ? m.timestamp > msg.timestamp
+      : (positions.get(m.eventId) ?? Infinity) > position,
+  );
+  if (idx === -1) return [...prev, msg];
+  return [...prev.slice(0, idx), msg, ...prev.slice(idx)];
+}
+
 function rememberReactionTargets(
   targets: Map<string, string>,
   events: any[],
@@ -250,15 +286,43 @@ export function useMatrixRoom() {
       refreshReactions(eventRoom, targetId);
     };
 
-    // An event decrypted after it reached the timeline: drop its stand-in row
-    // (it may turn out to be a reaction) and route it like a new event.
+    // An event decrypted after it reached the timeline (failed decryptions
+    // fire this too). A reaction drops any stand-in row and updates its
+    // target; a message takes its timeline position rather than being
+    // appended, so rows don't regroup by when decryption finished.
     const onDecrypted = (event: any) => {
       if (event?.getRoomId?.() !== activeRoomId) return;
       const eventRoom = client.getRoom(activeRoomId);
       if (!eventRoom) return;
       const id = event.getId?.();
-      setMessages((prev) => prev.filter((m) => m.eventId !== id));
-      onTimeline(event, eventRoom);
+      if (event.getType?.() === 'm.reaction') {
+        setMessages((prev) => prev.filter((m) => m.eventId !== id));
+        onTimeline(event, eventRoom);
+        return;
+      }
+      const msg = mapEventToMessage(event, eventRoom);
+      if (!msg) {
+        setMessages((prev) => prev.filter((m) => m.eventId !== id));
+        return;
+      }
+      const myUserId = client.getUserId() ?? '';
+      setMessages((prev) => {
+        const events = eventRoom.getLiveTimeline().getEvents();
+        const { reactions, reactors } = aggregateReactionsForTarget(
+          events,
+          msg.eventId,
+          myUserId,
+        );
+        return placeDecryptedMessage(
+          prev,
+          {
+            ...msg,
+            reactions: reactions.length ? reactions : undefined,
+            reactors,
+          },
+          events,
+        );
+      });
     };
 
     client.on('Room.timeline' as any, onTimeline);
