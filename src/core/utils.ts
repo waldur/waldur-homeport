@@ -165,6 +165,8 @@ const EXCEPTIONS: Record<string, string> = {
   url: 'URL',
   id: 'ID',
   api: 'API',
+  eessi: 'EESSI',
+  tos: 'ToS',
 };
 
 export const titleCase = (input: string) => {
