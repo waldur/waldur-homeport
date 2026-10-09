@@ -2273,6 +2273,12 @@ export const SettingsDescription = [
         type: 'string',
       },
       {
+        key: 'MATRIX_TOKENS_MANAGED_BY',
+        description: translate('Set to \'deployment\' by the init_matrix_settings management command to record that the appservice tokens come from the deployment\'s own secret and are re-seeded on every sync. While it is set, the Setup wizard refuses to rotate them, because the rotation would be reverted at the next deploy while the homeserver kept the old registration. Blank means the deployment was configured by hand and the wizard owns the tokens. Clear it when the deployment stops seeding Matrix, so the wizard can rotate them again.'),
+        default: '',
+        type: 'string',
+      },
+      {
         key: 'MATRIX_HISTORY_EXPORT_ENABLED',
         description: translate('Enable periodic history export of Matrix rooms.'),
         default: false,
@@ -2292,7 +2298,7 @@ export const SettingsDescription = [
       },
       {
         key: 'MATRIX_USER_REGISTRATION_SECRET',
-        description: translate('Shared secret for Matrix user registration.'),
+        description: translate('Registration token the homeserver requires for sign-up (its registration_token). With zero-touch setup it is also the homeserver\'s registration_shared_secret, which can create homeserver admins. Protect it like the appservice tokens.'),
         default: '',
         type: 'secret_field',
       },
@@ -2310,14 +2316,20 @@ export const SettingsDescription = [
         options: [{ value: 'none', label: 'None: Waldur offers no external sign-in' }, { value: 'password', label: 'Password the user generates in Waldur' }, { value: 'oidc', label: 'Single sign-on through the homeserver' }],
       },
       {
+        key: 'MATRIX_SSO_REGISTRATION_METHOD',
+        description: translate('With MATRIX_EXTERNAL_LOGIN_METHOD \'oidc\': the registration method of the Waldur users who sign in to Waldur through the identity provider the homeserver\'s single sign-on uses, i.e. that identity provider\'s name in Waldur, such as \'keycloak\'. Waldur gives a Matrix account only to those users, because the homeserver signs in any subject of that provider to the account its claim names. While blank, no user is given a Matrix account.'),
+        default: '',
+        type: 'string',
+      },
+      {
         key: 'MATRIX_LIVEKIT_KEY',
-        description: translate('LiveKit API key for the call SFU (Calls observability tab).'),
+        description: translate('LiveKit API key for the call SFU.'),
         default: '',
         type: 'string',
       },
       {
         key: 'MATRIX_LIVEKIT_SECRET',
-        description: translate('LiveKit API secret used to mint the admin token.'),
+        description: translate('LiveKit API secret used to mint admin and call tokens.'),
         default: '',
         type: 'secret_field',
       },
@@ -2326,6 +2338,12 @@ export const SettingsDescription = [
         description: translate('Internal LiveKit base URL. Falls back to http://livekit:7880 when blank.'),
         default: '',
         type: 'url_field',
+      },
+      {
+        key: 'MATRIX_LIVEKIT_PUBLIC_URL',
+        description: translate('Public LiveKit signaling URL that browsers connect to for calls, e.g. wss://matrix.example.org. Waldur issues call tokens only when this and the LiveKit key and secret are set.'),
+        default: '',
+        type: 'string',
       },
     ],
   },
