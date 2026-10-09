@@ -67,11 +67,21 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
           </Tab>
           {isFeatureVisible(UserFeatures.ssh_keys) ? (
             <Tab eventKey={4} title={translate('Keys')}>
-              <KeysList user={user} hasActionBar={false} />
+              <KeysList
+                user={user}
+                hasActionBar={false}
+                fullWidth
+                cardBordered={false}
+              />
             </Tab>
           ) : null}
           <Tab eventKey={5} title={translate('Remote accounts')}>
-            <UserOfferingList user={user} hasActionBar={false} />
+            <UserOfferingList
+              user={user}
+              hasActionBar={false}
+              fullWidth
+              cardBordered={false}
+            />
           </Tab>
           {currentUser.is_staff ||
           currentUser.is_support ||
@@ -81,6 +91,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
                 user={user}
                 hasActionBar={false}
                 fullWidth
+                cardBordered={false}
               />
             </Tab>
           ) : null}
