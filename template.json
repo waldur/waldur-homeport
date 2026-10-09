@@ -1400,6 +1400,16 @@
       "feature_area": "roles"
     }
   },
+  "Access to the camera was denied. Allow it in your browser settings and try again.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
+  "Access to the microphone was denied. Allow it in your browser settings and try again.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
   "Access token": {
     "context": {
       "feature_area": "auth"
@@ -12794,6 +12804,21 @@
     "context": {
       "primary_ui_type": "error_message",
       "feature_area": "chat"
+    }
+  },
+  "Could not share your screen.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
+  "Could not turn on the camera.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
+  "Could not turn on the microphone.": {
+    "context": {
+      "action_type": "read"
     }
   },
   "Could not update mute setting.": {
@@ -32735,6 +32760,11 @@
       "feature_area": "passkeys"
     }
   },
+  "No camera was found.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
   "No cap": {
     "context": {
       "feature_area": "usage-views"
@@ -33418,6 +33448,11 @@
   "No metrics yet": {
     "context": {
       "feature_area": "metrics"
+    }
+  },
+  "No microphone was found.": {
+    "context": {
+      "action_type": "read"
     }
   },
   "No more subnets available": {
@@ -49594,6 +49629,11 @@
       "feature_area": "matching"
     }
   },
+  "Screen sharing is blocked. Allow screen recording for your browser in the system settings.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
   "Screenshots": {
     "context": {
       "primary_ui_type": "label",
@@ -56031,6 +56071,11 @@
       "feature_area": "call-management"
     }
   },
+  "The camera is in use by another application.": {
+    "context": {
+      "action_type": "read"
+    }
+  },
   "The category group has been created.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -56705,6 +56750,11 @@
   "The message was not sent": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "The microphone is in use by another application.": {
+    "context": {
+      "action_type": "read"
     }
   },
   "The minimum port number should not exceed the maximum port number.": {
@@ -70568,6 +70618,11 @@
   "Your application will be available in your dashboard with the relevant submitted information. If your application is rejected, it will remain available for 30 days so you can review the feedback. After this period, it will be automatically removed.": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "Your browser does not support screen sharing.": {
+    "context": {
+      "action_type": "read"
     }
   },
   "Your browser reports no built-in authenticator (Touch ID, Windows Hello). You can still enrol using a phone or a security key from the next prompt.": {
