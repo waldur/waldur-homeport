@@ -29,6 +29,7 @@ Removing a hook below breaks that suite without failing anything in HomePort, as
 | `.table-filters-menu:not(.column-filter)`              | `get_by_role("dialog", name="Add filter")`                                                                   | yes                     |
 | `#filter-item-<name> .menu-link`                       | `get_by_role("button", name=<filter title>)` inside that dialog                                              | yes                     |
 | `.menu-content.filter-field`                           | `.filter-field`                                                                                              | yes                     |
-| `[data-kt-menu-trigger='click']` (role picker trigger) | `[data-testid="role-project-select"]`                                                                        | no                      |
-| `.role-project-select-popup`                           | `[data-testid="role-project-select-popup"]`                                                                  | no                      |
-| `.role-project-select-popup .menu-item`                | `[data-testid="role-project-select-option"]`                                                                 | no                      |
+| `[data-kt-menu-trigger='click']` (role picker trigger) | `[data-testid="role-project-select"]`, then `get_by_role("combobox", name="Role for <email>")`               | no                      |
+| `.role-project-select-popup .menu-item`                | `get_by_role("option", name=…)`, not scoped to the row                                                       | no                      |
+
+The role picker is two selects since waldur/waldur-homeport!7762: Role, then Project for a project-level role (`name="Project for <email>"`). Each is named after its row's email, or `Role for row <n>` while the email is empty. Their menus are portalled to `<body>`, so look up options on the page, not inside the row.

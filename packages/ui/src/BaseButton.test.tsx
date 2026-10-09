@@ -183,6 +183,28 @@ describe('BaseButton two-tone secondary variant', () => {
     );
   });
 
+  it('gives text-danger icons their own token and resets it on hover, focus and disabled', () => {
+    render(
+      <BaseButton
+        variant="text-danger"
+        tooltip="Remove"
+        iconNode={<span data-testid="trash-icon">trash</span>}
+      />,
+    );
+    const button = screen.getByRole('button', { name: 'Remove' });
+    expect(button).toHaveClass(
+      '[--btn-icon-color:var(--btn-text-danger-icon)]',
+    );
+    expect(button).toHaveClass('hover:[--btn-icon-color:currentColor]');
+    expect(button).toHaveClass('focus-visible:[--btn-icon-color:currentColor]');
+    expect(button).toHaveClass(
+      'disabled:[--btn-icon-color:var(--btn-disabled-text)]',
+    );
+    expect(button).toHaveClass(
+      'data-disabled:[--btn-icon-color:var(--btn-disabled-text)]',
+    );
+  });
+
   it('does not set --btn-icon-color on monochromatic variants like primary', () => {
     render(
       <BaseButton

@@ -5,6 +5,7 @@ import { marketplaceOfferingRolesList } from 'waldur-js-client';
 import { getAllPages } from '@/core/api';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { getInvitationDialogSize } from '@/invitations/actions/create/getInvitationDialogSize';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/notify';
@@ -57,7 +58,7 @@ export const InviteUserButton: FC<ScopeArgs> = (props) => {
         enableBulkUpload: true,
         refetch: props.refetch,
       },
-      size: 'xl',
+      size: getInvitationDialogSize(),
     });
   }, [props, openDialog, showErrorResponse]);
 

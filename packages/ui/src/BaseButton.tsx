@@ -110,10 +110,11 @@ export const buttonVariants = cva(
         'text-danger': [
           'shadow-[inset_0_0_0_1px_transparent]',
           'bg-[transparent] text-[var(--btn-text-danger-color)]',
-          'hover:bg-[var(--btn-danger-bg-hover)] hover:text-[var(--btn-danger-text)]',
-          'focus-visible:bg-[var(--btn-danger-bg)] focus-visible:text-[var(--btn-danger-text)] focus-visible:[outline:2px_solid_var(--btn-danger-focus-ring)] focus-visible:[outline-offset:0px]',
+          '[--btn-icon-color:var(--btn-text-danger-icon)]',
+          'hover:bg-[var(--btn-danger-bg-hover)] hover:text-[var(--btn-danger-text)] hover:[--btn-icon-color:currentColor]',
+          'focus-visible:bg-[var(--btn-danger-bg)] focus-visible:text-[var(--btn-danger-text)] focus-visible:[--btn-icon-color:currentColor] focus-visible:[outline:2px_solid_var(--btn-danger-focus-ring)] focus-visible:[outline-offset:0px]',
           'active:bg-[transparent] active:shadow-none',
-          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)]',
+          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] disabled:[--btn-icon-color:var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)] data-disabled:[--btn-icon-color:var(--btn-disabled-text)]',
         ].join(' '),
         'text-warning': [
           'shadow-[inset_0_0_0_1px_transparent]',

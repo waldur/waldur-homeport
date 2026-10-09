@@ -22,8 +22,8 @@ import { cn } from './cn';
  * A large share of waldur-homeport's Metronic `menu-sub-dropdown` popups
  * are not menus in that sense. They render filter fields, selects, date
  * pickers, search boxes and Cancel/Apply footers (TableFiltersMenu /
- * TableFilterItem, AsyncSearchBox, MarketplaceLandingFilter, BoxRadioField,
- * RoleAndProjectSelectField), and TableColumnsButton is already a
+ * TableFilterItem, AsyncSearchBox, MarketplaceLandingFilter, BoxRadioField),
+ * and TableColumnsButton is already a
  * react-bootstrap Popover rather than a Dropdown. Those all belong here.
  * The rule of thumb when migrating one: if it contains anything the user
  * types into or drags, it is a Popover; if every child is a command row,

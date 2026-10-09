@@ -24,7 +24,8 @@ const ROLES_FIXTURE = [
     name: 'manager',
     description: 'Manager',
     content_type: 'project',
-    is_active: true,
+    is_active: false,
+    tooltip: 'Only one manager is allowed.',
   },
 ] as any;
 
@@ -91,15 +92,13 @@ const RoleAndProjectSelectFieldHarness: React.FC<HarnessProps> = ({
 );
 
 /**
- * `RoleAndProjectSelectField` is a compound selector allowing users to assign
- * both a role (customer-level or project-level) and an associated project in a single
- * popover workflow.
+ * `RoleAndProjectSelectField` assigns a role and, for a project-level role,
+ * the project it applies to. It is two standard selects: the project select
+ * appears under the role once a project-level role is chosen, unless the
+ * dialog is already scoped to a project.
  *
- * It uses a Radix Popover with an accessible listbox for roles and an accessible
- * `downshift` combobox for project filtering and keyboard selection.
- *
- * Popover content is portaled to `document.body`, so interactive `play` tests query
- * via `screen`.
+ * Select menus are portaled to `document.body`, so `play` tests query via
+ * `screen`.
  */
 const meta: Meta<typeof RoleAndProjectSelectFieldHarness> = {
   title: 'Forms/RoleAndProjectSelectField',
@@ -113,164 +112,98 @@ export default meta;
 type Story = StoryObj<typeof RoleAndProjectSelectFieldHarness>;
 
 /**
- * Default closed state with the "Select..." placeholder.
+ * Default empty state with the "Select..." placeholder.
  */
 export const Default: Story = {
   render: () => <RoleAndProjectSelectFieldHarness />,
 };
 
 /**
- * Selecting a customer-level role (Administrator) closes the popup immediately
- * without requiring project selection.
+ * An organization-level role needs no project.
  */
 export const SelectCustomerRole: Story = {
   render: () => <RoleAndProjectSelectFieldHarness />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Open popup
-    await userEvent.click(canvas.getByPlaceholderText('Select...'));
+    await userEvent.click(canvas.getByRole('combobox', { name: 'Role' }));
+    await userEvent.click(
+      await screen.findByRole('option', { name: 'Administrator' }),
+    );
 
-    // Select Administrator
-    const adminOption = await screen.findByRole('option', {
-      name: 'Administrator',
-    });
-    await userEvent.click(adminOption);
-
-    // Verify popup closed and form value updated
-    await waitFor(() => {
-      expect(
-        screen.queryByRole('option', { name: 'Member' }),
-      ).not.toBeInTheDocument();
-    });
     expect(canvas.getByTestId('selected-role')).toHaveTextContent(
       'Administrator',
     );
     expect(canvas.getByTestId('selected-project')).toHaveTextContent('None');
-    expect(canvas.getByDisplayValue('Administrator')).toBeInTheDocument();
+    expect(
+      canvas.queryByRole('combobox', { name: 'Project' }),
+    ).not.toBeInTheDocument();
   },
 };
 
 /**
- * Selecting a project role displays the project combobox on the right, allowing
- * the user to click to pick a project.
+ * A project-level role reveals the project select below it.
  */
 export const SelectProjectRoleAndProject: Story = {
   render: () => <RoleAndProjectSelectFieldHarness />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Open popup
-    await userEvent.click(canvas.getByPlaceholderText('Select...'));
-
-    // Select Member
-    const memberOption = await screen.findByRole('option', { name: 'Member' });
-    await userEvent.click(memberOption);
-
-    // The project combobox and listbox should be visible
-    const projectTwo = await screen.findByRole('option', {
-      name: 'Project Two',
-    });
-    await expect(projectTwo).toHaveClass('cursor-pointer');
-    await expect(projectTwo).toHaveClass('text-[var(--menu-item-strong-text)]');
-    await expect(projectTwo).not.toHaveClass(
-      'data-disabled:cursor-not-allowed',
+    await userEvent.click(canvas.getByRole('combobox', { name: 'Role' }));
+    await userEvent.click(
+      await screen.findByRole('option', { name: 'Member' }),
     );
-    await userEvent.click(projectTwo);
 
-    // Verify popup closed and values selected
-    await waitFor(() => {
-      expect(
-        screen.queryByPlaceholderText('Search for project'),
-      ).not.toBeInTheDocument();
-    });
+    await userEvent.click(canvas.getByRole('combobox', { name: 'Project' }));
+    await userEvent.click(
+      await screen.findByRole('option', { name: 'Project Two' }),
+    );
+
     expect(canvas.getByTestId('selected-role')).toHaveTextContent('Member');
     expect(canvas.getByTestId('selected-project')).toHaveTextContent(
       'Project Two',
     );
-    expect(
-      canvas.getByDisplayValue('Member - Project Two'),
-    ).toBeInTheDocument();
   },
 };
 
 /**
- * Typing in the project combobox filters projects via `downshift`, and hitting Enter
- * selects the highlighted result.
+ * Keyboard only: arrow keys move, Enter picks, Tab goes on to the project.
  */
-export const FilterProjectsAndSelectOnEnter: Story = {
+export const KeyboardOnly: Story = {
   render: () => <RoleAndProjectSelectFieldHarness />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.click(canvas.getByPlaceholderText('Select...'));
-    await userEvent.click(
-      await screen.findByRole('option', { name: 'Member' }),
+    canvas.getByRole('combobox', { name: 'Role' }).focus();
+    await userEvent.keyboard('{ArrowDown}{ArrowDown}{Enter}');
+    await userEvent.tab();
+    await expect(
+      canvas.getByRole('combobox', { name: 'Project' }),
+    ).toHaveFocus();
+    await userEvent.type(
+      canvas.getByRole('combobox', { name: 'Project' }),
+      'Two{Enter}',
     );
 
-    const searchInput =
-      await screen.findByPlaceholderText('Search for project');
-    await userEvent.type(searchInput, 'Two{Enter}');
-
-    await waitFor(() => {
-      expect(
-        screen.queryByPlaceholderText('Search for project'),
-      ).not.toBeInTheDocument();
-    });
-    expect(
-      canvas.getByDisplayValue('Member - Project Two'),
-    ).toBeInTheDocument();
-    expect(canvas.getByTestId('selected-project')).toHaveTextContent(
-      'Project Two',
+    await waitFor(() =>
+      expect(canvas.getByTestId('selected-project')).toHaveTextContent(
+        'Project Two',
+      ),
     );
   },
 };
 
 /**
- * Verifies accessibility (ARIA combobox, listbox, options) and keyboard navigation:
- * navigating with ArrowDown and selecting with Enter.
+ * An unavailable role is disabled and says why in the list.
  */
-export const KeyboardNavigationA11y: Story = {
+export const UnavailableRole: Story = {
   render: () => <RoleAndProjectSelectFieldHarness />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
-    await userEvent.click(canvas.getByPlaceholderText('Select...'));
-    await userEvent.click(
-      await screen.findByRole('option', { name: 'Member' }),
-    );
-
-    // Verify accessible combobox
-    const searchInput = await screen.findByRole('combobox', {
-      name: 'Search for project',
-    });
-    expect(searchInput).toHaveAttribute('aria-autocomplete', 'list');
-
-    // Verify accessible listboxes
-    const rolesListbox = screen.getByRole('listbox', { name: 'Roles' });
-    expect(rolesListbox).toBeInTheDocument();
-
-    const projectsListbox = screen.getByRole('listbox', { name: 'Projects' });
-    expect(projectsListbox).toBeInTheDocument();
-
-    // Verify options inside projects listbox
-    const projectOptions = within(projectsListbox).getAllByRole('option');
-    expect(projectOptions).toHaveLength(2);
-
-    // Keyboard navigation: ArrowDown moves to Project Two, Enter selects
-    await userEvent.keyboard('{ArrowDown}{Enter}');
-
-    await waitFor(() => {
-      expect(
-        screen.queryByPlaceholderText('Search for project'),
-      ).not.toBeInTheDocument();
-    });
-    expect(
-      canvas.getByDisplayValue('Member - Project Two'),
-    ).toBeInTheDocument();
-    expect(canvas.getByTestId('selected-project')).toHaveTextContent(
-      'Project Two',
-    );
+    await userEvent.click(canvas.getByRole('combobox', { name: 'Role' }));
+    const manager = await screen.findByRole('option', { name: /Manager/ });
+    expect(manager).toHaveAttribute('aria-disabled', 'true');
+    expect(manager).toHaveTextContent('Only one manager is allowed.');
   },
 };
 
@@ -281,56 +214,21 @@ export const EmptyRoles: Story = {
   render: () => <RoleAndProjectSelectFieldHarness roles={[]} />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByPlaceholderText('Select...'));
+    await userEvent.click(canvas.getByRole('combobox', { name: 'Role' }));
     expect(await screen.findByText('No roles available.')).toBeInTheDocument();
   },
 };
 
 /**
- * Opens the dropdown via keyboard (ArrowDown, Space, Enter) directly from
- * the focused trigger input without any mouse clicks, and navigates roles.
- */
-export const OpenViaKey: Story = {
-  render: () => <RoleAndProjectSelectFieldHarness />,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const trigger = canvas.getByPlaceholderText('Select...');
-    trigger.focus();
-
-    // Open via ArrowDown
-    await userEvent.keyboard('{ArrowDown}');
-    const adminOption = await screen.findByRole('option', {
-      name: 'Administrator',
-    });
-    expect(adminOption).toBeInTheDocument();
-
-    // Navigate to Member via ArrowDown
-    await userEvent.keyboard('{ArrowDown}');
-    const memberOption = screen.getByRole('option', { name: 'Member' });
-    expect(memberOption).toHaveFocus();
-
-    // Navigate back to Administrator via ArrowUp
-    await userEvent.keyboard('{ArrowUp}');
-    expect(adminOption).toHaveFocus();
-
-    // Close via Escape
-    await userEvent.keyboard('{Escape}');
-    await waitFor(() => {
-      expect(
-        screen.queryByRole('option', { name: 'Administrator' }),
-      ).not.toBeInTheDocument();
-    });
-  },
-};
-
-/**
- * Disabled state renders a plain disabled FormControl.
+ * Disabled state renders the role select disabled.
  */
 export const Disabled: Story = {
   render: () => <RoleAndProjectSelectFieldHarness disabled />,
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const input = canvas.getByPlaceholderText('Select...');
+    // react-select hides a disabled select's input from the accessibility
+    // tree, so find it by its label.
+    const input = canvasElement.querySelector('input[aria-label="Role"]');
     await expect(input).toBeDisabled();
+    await expect(within(canvasElement).getByText('Select...')).toBeVisible();
   },
 };

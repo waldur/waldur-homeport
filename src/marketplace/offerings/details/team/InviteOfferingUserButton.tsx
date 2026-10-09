@@ -4,6 +4,7 @@ import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
+import { getInvitationDialogSize } from '@/invitations/actions/create/getInvitationDialogSize';
 import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { useUser } from '@/workspace/hooks';
@@ -52,7 +53,7 @@ export const InviteOfferingUserButton: FC<InviteOfferingUserButtonProps> = ({
         enableBulkUpload: true,
         refetch,
       },
-      size: 'xl',
+      size: getInvitationDialogSize(),
     });
   }, [openDialog, user, offering, roles, refetch]);
 

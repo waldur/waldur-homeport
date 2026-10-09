@@ -135,3 +135,81 @@ describe('EmailsListGroup row feedback', () => {
     expect(visibleEmails()).toEqual(rows.slice(0, 5).map((row) => row.email));
   });
 });
+
+describe('EmailsListGroup remove button', () => {
+  const renderRows = (count: number) => {
+    let formApi: FormApi<any>;
+    renderWithProviders(
+      <Form
+        onSubmit={() => undefined}
+        mutators={{ ...arrayMutators }}
+        initialValues={{ rows: rows.slice(0, count) }}
+        render={({ form }) => {
+          formApi = form;
+          return (
+            <EmailsListGroupWrapper
+              roles={[memberRole]}
+              customer={{ uuid: 'customer-uuid', projects: [project] }}
+              project={project}
+              disabled={false}
+            />
+          );
+        }}
+      />,
+    );
+    return () => formApi;
+  };
+
+  it('stays reachable by keyboard but does nothing when only one row is left', async () => {
+    const user = userEvent.setup();
+    const getForm = renderRows(1);
+
+    const remove = screen.getByRole('button', { name: 'Remove' });
+    expect(remove).toHaveAttribute('aria-disabled', 'true');
+    expect(remove).not.toBeDisabled();
+
+    remove.focus();
+    expect(remove).toHaveFocus();
+    await user.keyboard('{Enter}');
+    expect(getForm().getState().values.rows).toHaveLength(1);
+  });
+
+  it('removes a row from the keyboard', async () => {
+    const user = userEvent.setup();
+    const getForm = renderRows(2);
+
+    const [remove] = screen.getAllByRole('button', { name: 'Remove' });
+    expect(remove).not.toHaveAttribute('aria-disabled');
+
+    remove.focus();
+    await user.keyboard('{Enter}');
+    expect(getForm().getState().values.rows).toHaveLength(1);
+  });
+});
+
+describe('EmailsListGroup role picker names', () => {
+  it('names each row role picker after its email, or its row number', () => {
+    renderWithProviders(
+      <Form
+        onSubmit={() => undefined}
+        mutators={{ ...arrayMutators }}
+        initialValues={{ rows: [rows[0], {}] }}
+        render={() => (
+          <EmailsListGroupWrapper
+            roles={[memberRole]}
+            customer={{ uuid: 'customer-uuid', projects: [project] }}
+            project={project}
+            disabled={false}
+          />
+        )}
+      />,
+    );
+
+    expect(
+      screen.getByRole('combobox', { name: 'Role for user1@example.com' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox', { name: 'Role for row 2' }),
+    ).toBeInTheDocument();
+  });
+});
