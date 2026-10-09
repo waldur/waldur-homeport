@@ -120,6 +120,24 @@ yarn info vite version
 
 - `VITE_API_URL` - Backend API endpoint (defaults to <http://localhost:8000>/)
 
+The dev-server proxy settings below are read from the shell environment when
+`vite` starts, not from `.env` files:
+
+- `VITE_PROXY_TARGET` - Where the dev server proxies `/api` (defaults to `VITE_API_URL`)
+
+- `VITE_LK_JWT_URL` - lk-jwt-service the dev server proxies `/lk-jwt` to, for
+  Matrix calls. In dev the call code always sends its token requests to
+  `/lk-jwt`, whatever the homeserver's `.well-known` advertises, to avoid CORS.
+  Unset, it falls back to <http://localhost:8090>, the port of mastermind's
+  bundled `docker/matrix-dev` stack, and the dev server prints a warning at
+  start-up. Set it whenever you run another call stack, or with several stacks
+  on one machine: the fallback silently reaches whichever stack owns port 8090,
+  and the call then fails or joins a different stack's LiveKit.
+
+  ```bash
+  VITE_LK_JWT_URL=http://localhost:8190 yarn start
+  ```
+
 ## Backend Integration
 
 Integrates with Waldur MasterMind REST API requiring CORS configuration on the backend for local development.

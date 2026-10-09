@@ -1,3 +1,4 @@
+import { MatrixEvent, RoomStateEvent } from 'matrix-js-sdk';
 import {
   FC,
   PropsWithChildren,
@@ -13,26 +14,28 @@ import { useUser } from '@/workspace/hooks';
 
 import { useMatrixClient } from '../useMatrixClient';
 
+import {
+  CALL_MEMBER_EVENT,
+  CallMembershipTiming,
+  getCallDeviceId,
+  MEMBERSHIP_EXPIRY_MS,
+  sendLeaveOnUnload,
+  startMembershipRefresh,
+} from './callMembership';
 import { MatrixCallContext } from './MatrixCallContext';
 import { CallState, LiveKitCredentials } from './types';
 import {
   announceCallJoin,
   announceCallLeave,
-  CALL_MEMBER_REFRESH_MS,
+  getCallMemberStateKey,
   useCallMemberEvents,
 } from './useCallMemberEvents';
 import { useLiveKitToken } from './useLiveKitToken';
-
-const DEVICE_ID_KEY = 'waldur_matrix_device_id';
 
 // LiveKit silently retries an unreachable SFU instead of failing, so a call
 // that never reaches `connected` would sit on the spinner forever. Bound the
 // attempt and surface it as a dismissible error.
 export const CALL_CONNECT_TIMEOUT_MS = 15_000;
-
-function getDeviceId(): string {
-  return sessionStorage.getItem(DEVICE_ID_KEY) || '';
-}
 
 export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
   const { client, activeRoomId, activeRoomUuid, connectionState } =
@@ -48,6 +51,8 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
   const [callRoomUuid, setCallRoomUuid] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const inCallRef = useRef(false);
+  // The published membership of the current call: join time and validity.
+  const membershipRef = useRef<CallMembershipTiming | null>(null);
   const announceLockRef = useRef<Promise<unknown>>(Promise.resolve());
 
   const queueAnnounce = useCallback(
@@ -105,16 +110,39 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
     setCallState('discovering');
     setError(null);
 
-    const creds = await acquireToken(targetRoomId);
-    // Bail if endCall ran (or another startCall superseded us) while the token
-    // was in flight — otherwise we'd publish a call membership the user's own
-    // UI no longer reflects.
-    if (callGenerationRef.current !== generation) {
+    // Publish the membership first: the call token is only issued for a
+    // device that is a member of the room's call.
+    const deviceId = getCallDeviceId(client);
+    const timing = { createdTs: Date.now(), expires: MEMBERSHIP_EXPIRY_MS };
+    membershipRef.current = timing;
+    inCallRef.current = true;
+    try {
+      await queueAnnounce(() =>
+        announceCallJoin(client, targetRoomId, deviceId, timing),
+      );
+    } catch {
+      if (callGenerationRef.current !== generation) return;
+      inCallRef.current = false;
+      membershipRef.current = null;
+      setCallState('error');
+      setError(translate('Could not connect to the call.'));
       return;
     }
+    // Bail if endCall ran (or another startCall superseded us) meanwhile;
+    // endCall has already queued the leave for the membership above.
+    if (callGenerationRef.current !== generation) return;
+
+    const creds = await acquireToken(targetRoomId);
+    if (callGenerationRef.current !== generation) return;
     if (!creds) {
-      // Stay anchored to the room so the error panel docks in place; the raw
-      // token/SFU failure stays in the network response, never shown to the user.
+      // Withdraw the membership published above. Stay anchored to the room so
+      // the error panel docks in place; the raw token/SFU failure stays in the
+      // network response, never shown to the user.
+      inCallRef.current = false;
+      membershipRef.current = null;
+      queueAnnounce(() =>
+        announceCallLeave(client, targetRoomId, deviceId),
+      ).catch(() => undefined);
       setCallState('error');
       setError(translate('Could not connect to the call.'));
       return;
@@ -122,12 +150,7 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
 
     setCredentials(creds);
     setCallState('connecting');
-    inCallRef.current = true;
-
-    await queueAnnounce(() =>
-      announceCallJoin(client, targetRoomId, getDeviceId()),
-    );
-  }, [activeRoomId, activeRoomUuid, client, acquireToken]);
+  }, [activeRoomId, activeRoomUuid, client, acquireToken, queueAnnounce]);
 
   const endCall = useCallback(
     (errorMessage?: string) => {
@@ -135,9 +158,16 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       callGenerationRef.current++;
       const roomId = callRoomIdRef.current;
       if (inCallRef.current && clientRef.current && roomId) {
-        queueAnnounce(() => announceCallLeave(clientRef.current, roomId));
+        queueAnnounce(() =>
+          announceCallLeave(
+            clientRef.current,
+            roomId,
+            getCallDeviceId(clientRef.current),
+          ),
+        );
       }
       inCallRef.current = false;
+      membershipRef.current = null;
       setCredentials(null);
       setCallState(errorMessage ? 'error' : 'idle');
       // An errored call stays anchored to its room so the panel docks there; a
@@ -156,20 +186,51 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
     setCallState('connected');
   }, []);
 
-  // MEMBERSHIP_EXPIRY_MS is short so stale tabs drop quickly. While we're
-  // actually connected, re-publish the membership so it doesn't expire on us.
+  // Keep the membership alive for as long as the call runs: re-publish it once,
+  // shortly before it expires, rather than on a heartbeat. Each publish is a
+  // room state event, so a heartbeat floods the room's history.
+  const inCall = callState === 'connecting' || callState === 'connected';
   useEffect(() => {
-    if (callState !== 'connecting' && callState !== 'connected') return;
-    if (!client || !callRoomId) return;
-    const interval = setInterval(() => {
+    if (!inCall || !client || !callRoomId || !membershipRef.current) return;
+    const deviceId = getCallDeviceId(client);
+    const stateKey = getCallMemberStateKey(client, callRoomId, deviceId);
+    const stop = startMembershipRefresh(membershipRef.current, (timing) =>
       queueAnnounce(() =>
-        announceCallJoin(client, callRoomId, getDeviceId()),
-      ).catch(() => {
-        // Best-effort — the next tick will retry.
-      });
-    }, CALL_MEMBER_REFRESH_MS);
-    return () => clearInterval(interval);
-  }, [client, callRoomId, callState, queueAnnounce]);
+        announceCallJoin(client, callRoomId, deviceId, timing),
+      ).then(() => {
+        if (membershipRef.current) membershipRef.current = timing;
+      }),
+    );
+    // React cleanup does not run when the tab closes; leave from pagehide so
+    // other members don't see this device in the call until it expires.
+    const onPageHide = () => sendLeaveOnUnload(client, callRoomId, stateKey);
+    window.addEventListener('pagehide', onPageHide);
+    // Outside rooms with owned state keys (MSC3757) any member allowed to send
+    // call.member events can overwrite this device's key, e.g. with `{}`. If
+    // someone else does while we are in the call, publish ours again.
+    const myUserId = client.getUserId?.();
+    const onStateEvent = (event: MatrixEvent) => {
+      if (
+        event.getRoomId() !== callRoomId ||
+        event.getType() !== CALL_MEMBER_EVENT ||
+        event.getStateKey() !== stateKey ||
+        event.getSender() === myUserId
+      ) {
+        return;
+      }
+      const timing = membershipRef.current;
+      if (!timing) return;
+      queueAnnounce(() =>
+        announceCallJoin(client, callRoomId, deviceId, timing),
+      ).catch(() => undefined);
+    };
+    client.on?.(RoomStateEvent.Events, onStateEvent);
+    return () => {
+      stop();
+      window.removeEventListener('pagehide', onPageHide);
+      client.removeListener?.(RoomStateEvent.Events, onStateEvent);
+    };
+  }, [client, callRoomId, inCall, queueAnnounce]);
 
   useEffect(() => {
     if (callState !== 'connecting') return;
@@ -188,7 +249,11 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
         // swallow the rejection so it doesn't surface as an unhandled
         // promise during logout / page navigation.
         queueAnnounce(() =>
-          announceCallLeave(clientRef.current, callRoomIdRef.current!),
+          announceCallLeave(
+            clientRef.current,
+            callRoomIdRef.current!,
+            getCallDeviceId(clientRef.current),
+          ),
         ).catch(() => undefined);
       }
     };

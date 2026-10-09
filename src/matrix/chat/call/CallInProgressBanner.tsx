@@ -7,19 +7,18 @@ import { translate } from '@/i18n';
 
 import { useMatrixClient } from '../useMatrixClient';
 
+import { getCallDeviceId } from './callMembership';
 import { useMatrixCall } from './useMatrixCall';
-
-const DEVICE_ID_KEY = 'waldur_matrix_device_id';
 
 export const CallInProgressBanner: FC = () => {
   const { callState, callMembers, startCall } = useMatrixCall();
-  const { userId } = useMatrixClient();
+  const { client, userId } = useMatrixClient();
 
   // Only show when we're not in a call but others are
   if (callState !== 'idle' && callState !== 'error') return null;
   if (callMembers.length === 0) return null;
 
-  const myDeviceId = sessionStorage.getItem(DEVICE_ID_KEY) || '';
+  const myDeviceId = getCallDeviceId(client);
   const otherMembers = callMembers.filter(
     (m) => m.userId !== userId || m.deviceId !== myDeviceId,
   );

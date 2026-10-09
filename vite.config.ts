@@ -8,6 +8,27 @@ import svgr from 'vite-plugin-svgr';
 
 import reactDisplayNamePlugin from './vite-plugin-react-displayname';
 
+// In dev the call code sends every lk-jwt token request to /lk-jwt (see
+// useLiveKitToken.ts), so this proxy decides which LiveKit a call reaches.
+const DEFAULT_LK_JWT_URL = 'http://localhost:8090';
+
+// Unset, /lk-jwt falls back to the bundled matrix-dev stack's port, which on a
+// machine running several stacks is whichever one holds it. Say so up front
+// instead of letting a call fail, or join another stack's room, later.
+const lkJwtWarningPlugin = (): PluginOption => ({
+  name: 'waldur-lk-jwt-warning',
+  apply: 'serve',
+  configureServer(server) {
+    if (process.env.VITE_LK_JWT_URL) return;
+    server.config.logger.warn(
+      `VITE_LK_JWT_URL is not set: Matrix calls will proxy /lk-jwt to ` +
+        `${DEFAULT_LK_JWT_URL} (mastermind's docker/matrix-dev). Set ` +
+        `VITE_LK_JWT_URL to your stack's lk-jwt-service; see ` +
+        `docs/development-setup.md.`,
+    );
+  },
+});
+
 // Tailwind ships in the real app bundle now (src/index.tsx imports
 // tailwind.css), not just in Storybook — it is the prerequisite for using
 // packages/ui's Tailwind/Radix primitives anywhere in src/. .storybook/
@@ -26,6 +47,7 @@ const plugins: PluginOption[] = [
   }),
   markdownPlugin({ mode: [Mode.REACT] }),
   reactDisplayNamePlugin(),
+  lkJwtWarningPlugin(),
 ];
 
 export default defineConfig({
@@ -45,7 +67,7 @@ export default defineConfig({
         secure: process.env.VITE_PROXY_SECURE !== 'false',
       },
       '/lk-jwt': {
-        target: process.env.VITE_LK_JWT_URL || 'http://localhost:8090',
+        target: process.env.VITE_LK_JWT_URL || DEFAULT_LK_JWT_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/lk-jwt/, ''),
       },

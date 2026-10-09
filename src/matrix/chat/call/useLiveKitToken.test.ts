@@ -16,6 +16,7 @@ vi.mock('../useMatrixClient', () => ({
       getHomeserverUrl: () => 'https://hs.test',
       getOpenIdToken: () => Promise.resolve(openIdToken),
       getUserId: () => '@me:hs.test',
+      getDeviceId: () => 'WALDURDEV1',
     },
   }),
 }));
@@ -56,7 +57,12 @@ describe('useLiveKitToken', () => {
       room_id: '!room:hs.test',
       slot_id: '0',
       openid_token: openIdToken,
-      member: { claimed_user_id: '@me:hs.test' },
+      // The Matrix device, the same one the call.member state key names.
+      member: {
+        id: 'WALDURDEV1',
+        claimed_user_id: '@me:hs.test',
+        claimed_device_id: 'WALDURDEV1',
+      },
     });
   });
 });

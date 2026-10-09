@@ -3,16 +3,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useMatrixClient } from '../useMatrixClient';
 
+import { getCallDeviceId, timerDelay } from './callMembership';
 import { parseCallMembers } from './parseCallMembers';
-
-const DEVICE_ID_KEY = 'waldur_matrix_device_id';
 
 export interface RoomCallState {
   participantCount: number;
-}
-
-function getDeviceId(): string {
-  return sessionStorage.getItem(DEVICE_ID_KEY) || '';
 }
 
 function mapsEqual(
@@ -43,7 +38,7 @@ export function useAllRoomCallStates(
     let nextExpiry: number | null = null;
     if (!client) return { states: map, nextExpiry };
     const myUserId = client.getUserId();
-    const myDeviceId = getDeviceId();
+    const myDeviceId = getCallDeviceId(client);
     const now = Date.now();
     for (const id of roomIds) {
       const room = client.getRoom(id);
@@ -92,8 +87,7 @@ export function useAllRoomCallStates(
       // sending its leave never produces one, so the row would stay lit until
       // the next unrelated state churn.
       if (nextExpiry !== null) {
-        const delay = Math.max(0, nextExpiry - Date.now()) + 100;
-        timer = setTimeout(update, delay);
+        timer = setTimeout(update, timerDelay(nextExpiry - Date.now() + 100));
       }
     };
     update();

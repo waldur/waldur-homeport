@@ -36,9 +36,15 @@ vi.mock('./useCallMemberEvents', () => ({
   useCallMemberEvents: () => ({ callMembers: h.callMembers }),
   announceCallJoin: vi.fn().mockResolvedValue(undefined),
   announceCallLeave: vi.fn().mockResolvedValue(undefined),
-  CALL_MEMBER_REFRESH_MS: 10_000,
+  getCallMemberStateKey: (_client: any, _roomId: string, deviceId: string) =>
+    `_@me:s_${deviceId}_m.call`,
 }));
 
+import {
+  MEMBERSHIP_EXPIRY_MS,
+  MEMBERSHIP_REFRESH_HEADROOM_MS,
+  MEMBERSHIP_REFRESH_RETRY_MS,
+} from './callMembership';
 import { MatrixCallContext } from './MatrixCallContext';
 import {
   CALL_CONNECT_TIMEOUT_MS,
@@ -47,7 +53,12 @@ import {
 import { announceCallJoin, announceCallLeave } from './useCallMemberEvents';
 
 beforeEach(() => {
-  h.client = { getUserId: () => '@me:s' };
+  h.client = {
+    getUserId: () => '@me:s',
+    getDeviceId: () => 'dev-1',
+    on: vi.fn(),
+    removeListener: vi.fn(),
+  };
   h.activeRoomId = '!abc:s';
   h.activeRoomUuid = 'uuid-1';
   h.connectionState = 'connected';
@@ -56,7 +67,6 @@ beforeEach(() => {
   h.acquireToken.mockResolvedValue({ url: 'wss://lk', jwt: 'tok' });
   vi.mocked(announceCallJoin).mockClear();
   vi.mocked(announceCallLeave).mockClear();
-  sessionStorage.setItem('waldur_matrix_device_id', 'dev-1');
 });
 
 const wrapper: FC<PropsWithChildren> = ({ children }) => (
@@ -102,7 +112,7 @@ describe('MatrixCallProvider', () => {
     expect(result.current.callRoomUuid).toBeNull();
   });
 
-  it('re-announces call membership periodically while connected', async () => {
+  it('re-announces call membership only shortly before it expires', async () => {
     vi.useFakeTimers({ shouldAdvanceTime: true });
     try {
       const { result } = renderHook(useCtx, { wrapper });
@@ -111,52 +121,76 @@ describe('MatrixCallProvider', () => {
       });
       act(() => result.current.markConnected());
 
-      expect(vi.mocked(announceCallJoin)).toHaveBeenCalledTimes(1);
+      const join = vi.mocked(announceCallJoin);
+      expect(join).toHaveBeenCalledTimes(1);
+      const first = join.mock.calls[0][3];
+      expect(join.mock.calls[0][2]).toBe('dev-1');
+      expect(first.expires).toBe(MEMBERSHIP_EXPIRY_MS);
 
+      // No heartbeat: well into the membership's life, nothing more is sent.
       await act(async () => {
-        await vi.advanceTimersByTimeAsync(11_000);
+        await vi.advanceTimersByTimeAsync(
+          MEMBERSHIP_EXPIRY_MS - MEMBERSHIP_REFRESH_HEADROOM_MS - 1_000,
+        );
       });
-      expect(vi.mocked(announceCallJoin)).toHaveBeenCalledTimes(2);
+      expect(join).toHaveBeenCalledTimes(1);
 
+      // Just before expiry it is re-sent once, joined-at unchanged.
       await act(async () => {
-        await vi.advanceTimersByTimeAsync(10_000);
+        await vi.advanceTimersByTimeAsync(2_000);
       });
-      expect(vi.mocked(announceCallJoin)).toHaveBeenCalledTimes(3);
+      expect(join).toHaveBeenCalledTimes(2);
+      const second = join.mock.calls[1][3];
+      expect(second.createdTs).toBe(first.createdTs);
+      expect(second.expires).toBeGreaterThan(
+        2 * MEMBERSHIP_EXPIRY_MS - MEMBERSHIP_REFRESH_HEADROOM_MS - 1_000,
+      );
 
       act(() => result.current.endCall());
+      // The leave is queued behind earlier announces; let it run.
+      await act(() => vi.advanceTimersByTimeAsync(0));
+      expect(vi.mocked(announceCallLeave)).toHaveBeenCalledWith(
+        h.client,
+        '!abc:s',
+        'dev-1',
+      );
       await act(async () => {
-        await vi.advanceTimersByTimeAsync(10_000);
+        await vi.advanceTimersByTimeAsync(2 * MEMBERSHIP_EXPIRY_MS);
       });
-      expect(vi.mocked(announceCallJoin)).toHaveBeenCalledTimes(3);
+      expect(join).toHaveBeenCalledTimes(2);
     } finally {
       vi.useRealTimers();
     }
   });
 
-  it('heartbeat ticks while still connecting', async () => {
+  it('retries a failed membership refresh', async () => {
     vi.useFakeTimers({ shouldAdvanceTime: true });
     try {
-      vi.mocked(announceCallJoin).mockClear();
+      const join = vi.mocked(announceCallJoin);
+      join
+        .mockResolvedValueOnce(undefined)
+        .mockRejectedValueOnce(new Error('network'))
+        .mockResolvedValue(undefined);
       const { result } = renderHook(useCtx, { wrapper });
       await act(async () => {
         await result.current.startCall();
       });
-      expect(result.current.callState).toBe('connecting');
-      // startCall itself triggers an initial announceCallJoin
-      const callsAfterStart = vi.mocked(announceCallJoin).mock.calls.length;
+      act(() => result.current.markConnected());
 
-      // Advance past CALL_MEMBER_REFRESH_MS (10_000ms) — heartbeat should tick
       await act(async () => {
-        await vi.advanceTimersByTimeAsync(11_000);
+        await vi.advanceTimersByTimeAsync(
+          MEMBERSHIP_EXPIRY_MS - MEMBERSHIP_REFRESH_HEADROOM_MS + 1_000,
+        );
       });
+      expect(join).toHaveBeenCalledTimes(2);
 
-      expect(vi.mocked(announceCallJoin).mock.calls.length).toBeGreaterThan(
-        callsAfterStart,
-      );
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(MEMBERSHIP_REFRESH_RETRY_MS + 1_000);
+      });
+      expect(join).toHaveBeenCalledTimes(3);
+      act(() => result.current.endCall());
     } finally {
       vi.useRealTimers();
-      vi.mocked(announceCallJoin).mockClear();
-      vi.mocked(announceCallLeave).mockClear();
     }
   });
 
@@ -224,6 +258,76 @@ describe('MatrixCallProvider', () => {
     // The raw SFU/token error must never reach the user.
     expect(result.current.error).toBeTruthy();
     expect(result.current.error).not.toContain('errcode');
+    // The membership published before the token request is withdrawn.
+    await act(async () => {
+      await Promise.resolve();
+    });
+    expect(vi.mocked(announceCallLeave)).toHaveBeenCalledWith(
+      h.client,
+      '!abc:s',
+      'dev-1',
+    );
+  });
+
+  it('publishes the membership before requesting the call token', async () => {
+    const order: string[] = [];
+    vi.mocked(announceCallJoin).mockImplementationOnce(() => {
+      order.push('join');
+      return Promise.resolve();
+    });
+    h.acquireToken.mockImplementationOnce(() => {
+      order.push('token');
+      return Promise.resolve({ url: 'wss://lk', jwt: 'tok' });
+    });
+    const { result } = renderHook(useCtx, { wrapper });
+    await act(async () => {
+      await result.current.startCall();
+    });
+    expect(order).toEqual(['join', 'token']);
+    expect(vi.mocked(announceCallJoin).mock.calls[0][2]).toBe('dev-1');
+    expect(result.current.callState).toBe('connecting');
+  });
+
+  it('fails the call without a token request when publishing fails', async () => {
+    vi.mocked(announceCallJoin).mockRejectedValueOnce(new Error('forbidden'));
+    const { result } = renderHook(useCtx, { wrapper });
+    await act(async () => {
+      await result.current.startCall();
+    });
+    expect(h.acquireToken).not.toHaveBeenCalled();
+    expect(result.current.callState).toBe('error');
+  });
+
+  it('re-publishes the membership when someone else clears it', async () => {
+    const { result } = renderHook(useCtx, { wrapper });
+    await act(async () => {
+      await result.current.startCall();
+    });
+    act(() => result.current.markConnected());
+    const handler = h.client.on.mock.calls.at(-1)[1];
+    const stateEvent = (sender: string, stateKey: string) => ({
+      getRoomId: () => '!abc:s',
+      getType: () => 'org.matrix.msc3401.call.member',
+      getStateKey: () => stateKey,
+      getSender: () => sender,
+    });
+    const join = vi.mocked(announceCallJoin);
+    const before = join.mock.calls.length;
+
+    // Our own writes and other devices' keys are left alone.
+    await act(async () => {
+      handler(stateEvent('@me:s', '_@me:s_dev-1_m.call'));
+      handler(stateEvent('@mallory:s', '_@me:s_dev-2_m.call'));
+      await Promise.resolve();
+    });
+    expect(join.mock.calls.length).toBe(before);
+
+    await act(async () => {
+      handler(stateEvent('@mallory:s', '_@me:s_dev-1_m.call'));
+      await Promise.resolve();
+    });
+    expect(join.mock.calls.length).toBe(before + 1);
+    expect(join.mock.calls.at(-1)?.[3]).toEqual(join.mock.calls[0][3]);
   });
 
   it('keeps the room anchored on endCall(message) so the error can dock', async () => {

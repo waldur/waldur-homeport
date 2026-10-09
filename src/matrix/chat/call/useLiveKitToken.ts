@@ -2,18 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useMatrixClient } from '../useMatrixClient';
 
+import { getCallDeviceId } from './callMembership';
 import { LiveKitCredentials } from './types';
-
-const DEVICE_ID_KEY = 'waldur_matrix_device_id';
-
-function getOrCreateDeviceId(): string {
-  let deviceId = sessionStorage.getItem(DEVICE_ID_KEY);
-  if (!deviceId) {
-    deviceId = crypto.randomUUID();
-    sessionStorage.setItem(DEVICE_ID_KEY, deviceId);
-  }
-  return deviceId;
-}
 
 interface WellKnownFocus {
   type: string;
@@ -116,8 +106,11 @@ export const useLiveKitToken = () => {
         const openIdToken = await client.getOpenIdToken();
         if (controller.signal.aborted) return null;
 
-        const deviceId = getOrCreateDeviceId();
+        // The Matrix device this tab's session runs on, the same one the
+        // call.member state key names.
+        const deviceId = getCallDeviceId(client);
         const userId = client.getUserId() || '';
+        if (!deviceId) return null;
 
         // Exchange for LiveKit JWT. The SFURequest shape (room_id/slot_id/member)
         // is only served on /get_token; /sfu/get is the legacy endpoint and

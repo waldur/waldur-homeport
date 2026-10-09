@@ -44,13 +44,12 @@ import { useUser } from '@/workspace/hooks';
 import { useMatrixClient } from '../useMatrixClient';
 import { formatDisplayName } from '../utils';
 
+import { getCallDeviceId } from './callMembership';
 import { CallSettingsMenu } from './CallSettingsMenu';
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import { CallMemberInfo } from './types';
 import { useFullscreen } from './useFullscreen';
 import { useMatrixCall } from './useMatrixCall';
-
-const DEVICE_ID_KEY = 'waldur_matrix_device_id';
 
 // LiveKit log level is set inside MatrixCallView's mount effect so the
 // module-level side effect can't clobber another consumer of livekit-client
@@ -59,7 +58,8 @@ const DEVICE_ID_KEY = 'waldur_matrix_device_id';
 // Mirrors element-hq/lk-jwt-service processSFURequest in main.go:
 //   lkIdentity = unpaddedBase64(sha256(JSON.stringify([userId, claimedDeviceId, memberId])))
 // We send member.id === claimed_device_id === deviceId in useLiveKitToken.ts,
-// so all three slots collapse to (userId, deviceId, deviceId).
+// so all three slots collapse to (userId, deviceId, deviceId). deviceId is the
+// Matrix client's device (getCallDeviceId), the one in the call.member key.
 async function computeLiveKitIdentity(
   userId: string,
   deviceId: string,
@@ -452,7 +452,7 @@ const MatrixCallView: FC<{
     markConnected,
     callMembers,
   } = useMatrixCall();
-  const { userId } = useMatrixClient();
+  const { client, userId } = useMatrixClient();
   const currentUser = useUser();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -465,7 +465,7 @@ const MatrixCallView: FC<{
     currentUser?.full_name || (userId ? formatDisplayName(userId) : '');
 
   const identityEntries = useMemo<IdentityEntry[]>(() => {
-    const myDeviceId = sessionStorage.getItem(DEVICE_ID_KEY) || '';
+    const myDeviceId = getCallDeviceId(client);
     const entries: IdentityEntry[] = callMembers.map((m: CallMemberInfo) => ({
       userId: m.userId,
       deviceId: m.deviceId,
@@ -479,7 +479,7 @@ const MatrixCallView: FC<{
       });
     }
     return entries;
-  }, [callMembers, userId, displayName]);
+  }, [callMembers, client, userId, displayName]);
 
   const identityMap = useIdentityNameMap(identityEntries);
 
