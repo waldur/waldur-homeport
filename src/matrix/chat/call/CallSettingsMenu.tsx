@@ -1,10 +1,18 @@
 import { useMediaDeviceSelect } from '@livekit/components-react';
 import { GearSixIcon } from '@phosphor-icons/react';
+import { Track } from 'livekit-client';
 import { FC } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger, Select } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { useNotify } from '@/store/notify';
+
+import {
+  CallDeviceSource,
+  classifyCallDeviceError,
+  getCallDeviceErrorMessage,
+} from './callDeviceErrors';
 
 interface CallSettingsMenuProps {
   /**
@@ -22,9 +30,45 @@ interface DeviceSelectProps {
   label: string;
 }
 
+const DEVICE_SOURCES: Partial<Record<MediaDeviceKind, CallDeviceSource>> = {
+  audioinput: Track.Source.Microphone,
+  videoinput: Track.Source.Camera,
+};
+
+const getGenericSwitchError = (kind: MediaDeviceKind): string => {
+  switch (kind) {
+    case 'videoinput':
+      return translate('Could not switch the camera.');
+    case 'audioinput':
+      return translate('Could not switch the microphone.');
+    default:
+      return translate('Could not switch the speaker.');
+  }
+};
+
+const getSwitchErrorMessage = (error: Error, kind: MediaDeviceKind): string => {
+  const source = DEVICE_SOURCES[kind];
+  if (!source || classifyCallDeviceError(error, source) === 'other') {
+    return getGenericSwitchError(kind);
+  }
+  return (
+    getCallDeviceErrorMessage(error, source) ?? getGenericSwitchError(kind)
+  );
+};
+
 const DeviceSelect: FC<DeviceSelectProps> = ({ kind, label }) => {
+  const { showError } = useNotify();
   const { devices, activeDeviceId, setActiveMediaDevice } =
     useMediaDeviceSelect({ kind });
+  // LiveKit only moves activeDeviceId once the switch has succeeded, so after
+  // a failure the select falls back to the device that is still in use.
+  const switchDevice = async (deviceId: string) => {
+    try {
+      await setActiveMediaDevice(deviceId);
+    } catch (error) {
+      showError(getSwitchErrorMessage(error as Error, kind));
+    }
+  };
   const options = devices.map((d) => ({
     value: d.deviceId,
     label: d.label || translate('Unknown device'),
@@ -37,7 +81,7 @@ const DeviceSelect: FC<DeviceSelectProps> = ({ kind, label }) => {
       <Select
         options={options}
         value={value}
-        onChange={(option: any) => option && setActiveMediaDevice(option.value)}
+        onChange={(option: any) => option && switchDevice(option.value)}
         isSearchable={false}
         menuPlacement="auto"
         // Inline in the popover rather than a fixed menu portalled elsewhere,

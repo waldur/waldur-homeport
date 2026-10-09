@@ -12811,6 +12811,21 @@
       "action_type": "read"
     }
   },
+  "Could not switch the camera.": {
+    "context": {
+      "feature_area": "call"
+    }
+  },
+  "Could not switch the microphone.": {
+    "context": {
+      "feature_area": "call"
+    }
+  },
+  "Could not switch the speaker.": {
+    "context": {
+      "feature_area": "call"
+    }
+  },
   "Could not turn on the camera.": {
     "context": {
       "action_type": "read"
