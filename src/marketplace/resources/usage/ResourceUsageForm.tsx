@@ -5,6 +5,7 @@ import {
   FunctionComponent,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -86,32 +87,58 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
   // Controlled so the overflow menu, which sits outside the tab Nav, can
   // switch tabs too.
   const [activeTab, setActiveTab] = useState(props.components[0]?.uuid);
+  const [promotedTab, setPromotedTab] = useState<string>();
 
-  const handleWindowResize = useCallback(
-    debounce(() => {
-      if (!refNav?.current) return;
-      const tabs = Array.from<HTMLElement>(refNav.current.children);
-      const wrappedItems = [];
-      if (!tabs?.length) return;
-      const firstTab = tabs[0].getBoundingClientRect();
-      for (let i = 0; i < tabs.length; i++) {
-        const currItem = tabs[i].getBoundingClientRect();
-        if (firstTab && firstTab.top < currItem.top) {
-          if (props.components[i]) {
-            wrappedItems.push(props.components[i]);
-          }
+  // A component picked from the overflow goes first, so the tab row always
+  // names the component being edited, even when only one tab fits.
+  const orderedComponents = useMemo(() => {
+    const promoted = props.components.find((c) => c.uuid === promotedTab);
+    return promoted
+      ? [promoted, ...props.components.filter((c) => c !== promoted)]
+      : props.components;
+  }, [props.components, promotedTab]);
+
+  const selectTab = (uuid: string | null) => {
+    // Promotion is recorded on pick rather than derived from the measurement:
+    // once promoted the tab no longer wraps, and a derived flag would drop it
+    // back into the overflow on the next measure.
+    if (wrappedComponents.some((c) => c.uuid === uuid)) {
+      setPromotedTab(uuid);
+    }
+    setActiveTab(uuid);
+  };
+
+  const measureWrappedComponents = useCallback(() => {
+    if (!refNav?.current) return;
+    const tabs = Array.from<HTMLElement>(refNav.current.children);
+    const wrappedItems = [];
+    if (!tabs?.length) return;
+    const firstTab = tabs[0].getBoundingClientRect();
+    for (let i = 0; i < tabs.length; i++) {
+      const currItem = tabs[i].getBoundingClientRect();
+      if (firstTab && firstTab.top < currItem.top) {
+        if (orderedComponents[i]) {
+          wrappedItems.push(orderedComponents[i]);
         }
       }
-      setWrappedComponents(wrappedItems);
-    }, 100),
-    [refNav?.current, props.components],
+    }
+    setWrappedComponents(wrappedItems);
+  }, [orderedComponents]);
+
+  const handleWindowResize = useMemo(
+    () => debounce(measureWrappedComponents, 100),
+    [measureWrappedComponents],
   );
+
+  // Before paint, so a reordered row never flashes with the promoted tab
+  // collapsed and the displaced one spilling onto a second line.
+  useLayoutEffect(measureWrappedComponents, [measureWrappedComponents]);
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
-    handleWindowResize();
     return () => {
       window.removeEventListener('resize', handleWindowResize);
+      handleWindowResize.cancel();
     };
   }, [handleWindowResize]);
 
@@ -295,14 +322,14 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
         )}
       </div>
       {props.components.length > 0 && (
-        <Tab.Container activeKey={activeTab} onSelect={setActiveTab}>
+        <Tab.Container activeKey={activeTab} onSelect={selectTab}>
           <div className="d-flex">
             <Nav
               ref={refNav}
               variant="tabs"
               className="nav-line-tabs flex-grow-1 mb-4"
             >
-              {props.components.map((component) => {
+              {orderedComponents.map((component) => {
                 const isHidden = wrappedComponents.some(
                   (c) => component.uuid === c.uuid,
                 );
@@ -371,7 +398,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                           <Menu.Item
                             key={component.uuid}
                             className="d-flex justify-content-between"
-                            onClick={() => setActiveTab(component.uuid)}
+                            onClick={() => selectTab(component.uuid)}
                           >
                             {Boolean(errors.components?.[component.type]) && (
                               <Tooltip
