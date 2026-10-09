@@ -8,7 +8,11 @@ import {
   useAllRoomCallStates,
 } from './call/useAllRoomCallStates';
 import { isRoomMuted } from './mute';
-import { classifyPreviewEvent, PreviewKind } from './previewClassifier';
+import {
+  classifyPreviewEvent,
+  PreviewKind,
+  undecryptablePreview,
+} from './previewClassifier';
 import { useMatrixClient } from './useMatrixClient';
 import { useMemberMatrixRooms } from './useMemberMatrixRooms';
 import { useAllRoomMemberNames } from './useRoomMemberNames';
@@ -49,7 +53,7 @@ interface RoomLiveMap {
 }
 
 /** Pull unread counts and the last message straight from the Matrix client. */
-function readRoomLiveState(
+export function readRoomLiveState(
   client: any,
   room: any,
   ownUserId: string | null,
@@ -91,10 +95,14 @@ function readRoomLiveState(
           room.getMember?.(targetId)?.name,
         )
       : undefined;
-    const info = classifyPreviewEvent(type, content, {
-      prevMembership: event.getPrevContent?.()?.membership,
-      targetName,
-    });
+    // A failed decryption reads as an m.room.message whose body is
+    // matrix-js-sdk's raw error text, so it is caught before classifying.
+    const info = event.isDecryptionFailure?.()
+      ? undecryptablePreview()
+      : classifyPreviewEvent(type, content, {
+          prevMembership: event.getPrevContent?.()?.membership,
+          targetName,
+        });
     if (info.kind === 'none') continue;
 
     preview = info.text;

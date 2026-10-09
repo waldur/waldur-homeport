@@ -19,11 +19,11 @@ export function mapEventToMessage(
   room?: Room,
 ): MatrixChatMessage | null {
   const type = event.getType();
-  if (type === 'm.room.encrypted') {
-    // Still being decrypted: it shows up once matrix-js-sdk emits
-    // Event.decrypted. Only an event that can't be decrypted gets a row, so it
-    // doesn't silently vanish from the conversation.
-    if (!event.isDecryptionFailure()) return null;
+  // Checked before the type: once decryption fails, matrix-js-sdk reports the
+  // event as an m.room.message (msgtype m.bad.encrypted) whose body is its own
+  // untranslated error text. Such an event keeps a row with a notice, so it
+  // doesn't silently vanish from the conversation.
+  if (event.isDecryptionFailure?.()) {
     const senderId = event.getSender();
     return {
       eventId: event.getId(),
@@ -35,6 +35,8 @@ export function mapEventToMessage(
       type: UNDECRYPTABLE_MESSAGE_TYPE,
     };
   }
+  // Still being decrypted: it shows up once matrix-js-sdk emits
+  // Event.decrypted.
   if (type !== 'm.room.message') return null;
 
   const content = event.getContent();
@@ -82,7 +84,12 @@ export function mapEventToMessage(
     senderDisplayName: member?.name || formatDisplayName(senderId),
     body,
     timestamp: event.getTs(),
-    type: content.msgtype || 'm.text',
+    // The undecryptable type is Waldur's own; a sender who claims it gets a
+    // plain text message, not the notice style.
+    type:
+      content.msgtype && content.msgtype !== UNDECRYPTABLE_MESSAGE_TYPE
+        ? content.msgtype
+        : 'm.text',
     url: typeof content.url === 'string' ? content.url : undefined,
     info: content.info,
     mentionedUserIds,

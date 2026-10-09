@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { MatrixMessageItem } from './MatrixMessageItem';
 import { MatrixChatMessage } from './types';
+import { mapEventToMessage } from './utils';
 
 // Text messages never touch the Matrix client, but the hook is called
 // unconditionally. Stub the context so the renderer can mount.
@@ -120,5 +121,32 @@ describe('MatrixMessageItem does not render raw HTML in untrusted bodies', () =>
     );
     // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     expect(container.querySelector('img')).toBeNull();
+  });
+});
+
+describe('MatrixMessageItem decryption failure', () => {
+  it('renders a notice instead of the SDK error text', () => {
+    const event = {
+      getType: () => 'm.room.message',
+      getContent: () => ({
+        msgtype: 'm.bad.encrypted',
+        body: '** Unable to decrypt: DecryptionError: no session **',
+      }),
+      getSender: () => '@alice:server',
+      getId: () => 'evt-1',
+      getTs: () => 1000,
+      isDecryptionFailure: () => true,
+    } as any;
+    render(
+      <MatrixMessageItem
+        message={mapEventToMessage(event)!}
+        isOwn={false}
+        senderName="Alice"
+      />,
+    );
+    expect(
+      screen.getByText('Unable to decrypt this message.'),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/DecryptionError/)).not.toBeInTheDocument();
   });
 });

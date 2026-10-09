@@ -105,6 +105,11 @@ function classifyMembership(content: any, ctx: MembershipContext): PreviewInfo {
   return { kind: 'none', text: '' };
 }
 
+/** Preview for an event matrix-js-sdk failed to decrypt. */
+export function undecryptablePreview(): PreviewInfo {
+  return { kind: 'text', text: translate('Unable to decrypt this message.') };
+}
+
 export function classifyPreviewEvent(
   eventType: string,
   content: any,

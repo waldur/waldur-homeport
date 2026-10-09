@@ -5,7 +5,7 @@ import { matrixRoomsList } from 'waldur-js-client';
 import { renderHookWithProviders } from '@/test/harness';
 import { useUser } from '@/workspace/hooks';
 
-import { useAllMatrixRooms } from './useAllMatrixRooms';
+import { readRoomLiveState, useAllMatrixRooms } from './useAllMatrixRooms';
 
 // waldur-js-client is auto-mocked globally (test/mocks/modal.js); just give the
 // shared list call a resolved value here.
@@ -49,5 +49,38 @@ describe('useAllMatrixRooms — authentication gate', () => {
     renderHookWithProviders(() => useAllMatrixRooms());
 
     await waitFor(() => expect(matrixRoomsList).toHaveBeenCalled());
+  });
+});
+
+describe('readRoomLiveState — preview', () => {
+  it('shows a notice, not the SDK error, for a failed decryption', () => {
+    const event = {
+      getType: () => 'm.room.message',
+      getContent: () => ({
+        msgtype: 'm.bad.encrypted',
+        body: '** Unable to decrypt: DecryptionError: no session **',
+      }),
+      getSender: () => '@bob:server',
+      getTs: () => 1000,
+      isDecryptionFailure: () => true,
+    };
+    const room = {
+      roomId: '!room:server',
+      getUnreadNotificationCount: () => 0,
+      getLiveTimeline: () => ({ getEvents: () => [event] }),
+      getMember: () => null,
+    };
+    const client = { isInitialSyncComplete: () => false };
+
+    const state = readRoomLiveState(
+      client,
+      room,
+      '@me:server',
+      'Me',
+      new Map(),
+    );
+
+    expect(state.preview).toBe('Unable to decrypt this message.');
+    expect(state.preview).not.toContain('DecryptionError');
   });
 });
