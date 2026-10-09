@@ -7,6 +7,7 @@ import {
   listToDict,
   getUUID,
   pick,
+  titleCase,
   truncate,
   LATIN_NAME_PATTERN,
 } from './utils';
@@ -202,5 +203,20 @@ describe('formatPhoneNumber', () => {
         }),
       ).toBe('+1');
     });
+  });
+});
+
+describe('titleCase', () => {
+  it('capitalizes only the first word', () => {
+    expect(titleCase('software catalog version')).toBe(
+      'Software catalog version',
+    );
+  });
+
+  it('keeps known acronyms uppercase', () => {
+    expect(titleCase('software catalog eessi api url')).toBe(
+      'Software catalog EESSI API URL',
+    );
+    expect(titleCase('auto approve user tos')).toBe('Auto approve user ToS');
   });
 });
