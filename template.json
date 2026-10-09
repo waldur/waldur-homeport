@@ -12492,6 +12492,11 @@
       "feature_area": "reviewer-pool"
     }
   },
+  "Copy it now: it will not be shown again.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Copy mermaid source": {
     "context": {
       "feature_area": "TenantTopology"
@@ -22782,6 +22787,11 @@
       "feature_area": "site-agent"
     }
   },
+  "Generate a new password": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Generate api secret code": {
     "context": {
       "primary_ui_type": "label",
@@ -22807,7 +22817,7 @@
   },
   "Generate password": {
     "context": {
-      "feature_area": "template"
+      "feature_area": "matrix"
     }
   },
   "Generate reviewer matches": {
@@ -22835,6 +22845,11 @@
         }
       },
       "feature_area": "assignments"
+    }
+  },
+  "Generating a password replaces any Matrix password set before.": {
+    "context": {
+      "feature_area": "matrix"
     }
   },
   "Generating configuration for:": {
@@ -25073,6 +25088,7 @@
       "feature_area": "project-groups"
     }
   },
+  "In your Matrix client, enter the homeserver and sign in with single sign-on.": {},
   "In-depth analysis of organization quota limits and usage projections": {
     "context": {
       "feature_area": "reporting"
@@ -36526,11 +36542,6 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "proposal"
-    }
-  },
-  "Opens matrix.to, which hands the room over to your Matrix client.": {
-    "context": {
-      "feature_area": "matrix"
     }
   },
   "Openstack": {
@@ -52728,11 +52739,7 @@
       "feature_area": "auth"
     }
   },
-  "Sign in to your Matrix client with these details. Treat the password like any other.": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
+  "Sign in to your Matrix client with these details.": {},
   "Sign in with local account": {
     "context": {
       "feature_area": "auth"
@@ -58375,11 +58382,6 @@
       "feature_area": "questions"
     }
   },
-  "This server uses single sign-on. In your Matrix client, enter the homeserver below and sign in with single sign-on.": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
   "This session has expired. Please start a new conversation.": {
     "context": {
       "feature_area": "anonymous"
@@ -61768,6 +61770,12 @@
   "Unable to find:": {
     "context": {
       "feature_area": "comments"
+    }
+  },
+  "Unable to generate a Matrix password.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "matrix"
     }
   },
   "Unable to generate matches.": {
