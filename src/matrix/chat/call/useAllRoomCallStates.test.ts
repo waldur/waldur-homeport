@@ -8,13 +8,12 @@ vi.mock('../useMatrixClient', () => ({
   useMatrixClient: () => useMatrixClientMock(),
 }));
 
-const DEVICE_ID_KEY = 'waldur_matrix_device_id';
-
 function buildClient(roomsByRoomId: Record<string, any>) {
   const listeners: Array<() => void> = [];
   return {
     listeners,
     getUserId: () => '@me:localhost',
+    getDeviceId: () => 'my-device',
     getRoom: (id: string) => roomsByRoomId[id] ?? null,
     on: (_: any, fn: () => void) => listeners.push(fn),
     removeListener: (_: any, fn: () => void) => {
@@ -41,7 +40,6 @@ function event(senderId: string, memberships: any[]) {
 
 describe('useAllRoomCallStates', () => {
   beforeEach(() => {
-    sessionStorage.setItem(DEVICE_ID_KEY, 'my-device');
     useMatrixClientMock.mockReset();
   });
 

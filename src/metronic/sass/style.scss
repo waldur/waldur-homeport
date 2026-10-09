@@ -12,3 +12,7 @@ $mode: default;
 @layer bootstrap {
   @import 'init-styles';
 }
+
+// Unlayered on purpose: these override @livekit/components-styles, which is
+// itself unlayered and would beat anything inside a layer.
+@import 'custom/matrix/call-livekit';
