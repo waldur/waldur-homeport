@@ -23,10 +23,14 @@ import { UserPosixIdentitiesButton } from './UserPosixIdentitiesButton';
 interface OwnProps {
   user?: User;
   hasActionBar?: boolean;
+  fullWidth?: boolean;
+  cardBordered?: boolean;
 }
 
 export const UserOfferingList: FunctionComponent<OwnProps> = ({
   hasActionBar = true,
+  fullWidth,
+  cardBordered = true,
   ...props
 }) => {
   const { params } = useCurrentStateAndParams();
@@ -113,6 +117,8 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       showPageSizeSelector={true}
       hasQuery={!filterAttention}
       hasActionBar={hasActionBar}
+      fullWidth={fullWidth}
+      cardBordered={cardBordered}
       filters={
         filterAttention ? undefined : (
           <ProviderOfferingUsersFilter hasOrganizationColumn={true} />

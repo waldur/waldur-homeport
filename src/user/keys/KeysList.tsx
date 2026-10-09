@@ -30,10 +30,12 @@ const KeysListRowActions = ({ row, fetch }) => {
   );
 };
 
-export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
-  user,
-  hasActionBar = true,
-}) => {
+export const KeysList: FunctionComponent<{
+  user;
+  hasActionBar?: boolean;
+  fullWidth?: boolean;
+  cardBordered?: boolean;
+}> = ({ user, hasActionBar = true, fullWidth, cardBordered = true }) => {
   const currentUser = useUser();
   const isSelf = user.uuid === currentUser.uuid;
   const filter = useMemo(
@@ -101,6 +103,8 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
       enableExport={true}
       expandableRow={KeysListExpandableRow}
       hasActionBar={hasActionBar}
+      fullWidth={fullWidth}
+      cardBordered={cardBordered}
     />
   );
 };

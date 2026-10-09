@@ -27,6 +27,7 @@ interface UserAffiliationsListProps {
   user;
   hasActionBar?: boolean;
   fullWidth?: boolean;
+  cardBordered?: boolean;
 }
 
 interface UserAffiliationsFilterValues {
@@ -40,7 +41,7 @@ interface UserAffiliationsFilterValues {
 
 export const UserAffiliationsList: FunctionComponent<
   UserAffiliationsListProps
-> = ({ user, hasActionBar = true, fullWidth }) => {
+> = ({ user, hasActionBar = true, fullWidth, cardBordered = true }) => {
   const values = useFilterValues('UserAffiliationsList');
   const formValues = (values as UserAffiliationsFilterValues) || {
     scope_type: undefined,
@@ -256,6 +257,7 @@ export const UserAffiliationsList: FunctionComponent<
       rowActions={UserAffiliationsRowActions}
       hasActionBar={hasActionBar}
       fullWidth={fullWidth}
+      cardBordered={cardBordered}
       enableMultiSelect={hasActionBar}
       multiSelectActions={
         hasActionBar ? UserAffiliationsBulkRemoveButton : undefined
