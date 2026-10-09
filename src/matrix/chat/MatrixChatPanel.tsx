@@ -23,6 +23,7 @@ import { translate } from '@/i18n';
 import { MatrixCallPortalContext } from './call/MatrixCallPortalContext';
 import { useMatrixCall } from './call/useMatrixCall';
 import { MatrixChatDrawer } from './MatrixChatDrawer';
+import { MatrixEncryptionNotice } from './MatrixEncryptionNotice';
 import { MatrixRoomList } from './MatrixRoomList';
 import { useAllMatrixRooms } from './useAllMatrixRooms';
 import { useMatrixClient } from './useMatrixClient';
@@ -215,16 +216,21 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
       return hideRoomList ? accessDeniedContent : noRoomSelectedContent;
     if (roomAccessDenied) return accessDeniedContent;
     return (
-      <MatrixChatDrawer
-        key={detailRoomUuid}
-        roomUuid={detailRoomUuid}
-        roomAlias={detailRoomAlias}
-        roomName={(detailRoom as any)?.room_name}
-        projectUuid={(detailRoom as any)?.scope_uuid}
-        onBack={
-          showDock || hideRoomList ? undefined : () => changeCompactView('list')
-        }
-      />
+      <>
+        <MatrixEncryptionNotice />
+        <MatrixChatDrawer
+          key={detailRoomUuid}
+          roomUuid={detailRoomUuid}
+          roomAlias={detailRoomAlias}
+          roomName={(detailRoom as any)?.room_name}
+          projectUuid={(detailRoom as any)?.scope_uuid}
+          onBack={
+            showDock || hideRoomList
+              ? undefined
+              : () => changeCompactView('list')
+          }
+        />
+      </>
     );
   };
 

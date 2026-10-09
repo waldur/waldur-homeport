@@ -14,7 +14,7 @@ import { MessageReactionToolbar } from './MessageReactionToolbar';
 import { withFreshAccessToken } from './session';
 import { MatrixChatMessage } from './types';
 import { useMatrixClient } from './useMatrixClient';
-import { formatTime, sanitizeName } from './utils';
+import { formatTime, sanitizeName, UNDECRYPTABLE_MESSAGE_TYPE } from './utils';
 import { VoiceMessagePlayer } from './voice/VoiceMessagePlayer';
 
 /**
@@ -230,6 +230,10 @@ const MediaContent: FC<{
 }> = ({ message, memberNames, currentUserId }) => {
   const httpUrl = useAuthenticatedMediaUrl(message.url);
 
+  if (message.type === UNDECRYPTABLE_MESSAGE_TYPE) {
+    return <em className="text-muted">{message.body}</em>;
+  }
+
   if (!message.url) {
     return (
       <TextBody
@@ -410,6 +414,11 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
             memberNames={memberNames}
             currentUserId={currentUserId}
           />
+          {message.unencrypted && (
+            <div className="text-danger small">
+              {translate('Not encrypted')}
+            </div>
+          )}
           <MessageReactionToolbar
             eventId={message.eventId}
             reactions={message.reactions}

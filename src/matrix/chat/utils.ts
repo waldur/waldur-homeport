@@ -7,11 +7,34 @@ import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
 import { MatrixChatMessage, ReactionAggregate } from './types';
 
+/** Message type of the row standing in for an event that can't be decrypted. */
+export const UNDECRYPTABLE_MESSAGE_TYPE = 'waldur.undecryptable';
+
+/** Whether an edit was delivered in clear (one still being sent can't be judged). */
+const isClearEdit = (edit: MatrixEvent | null | undefined) =>
+  Boolean(edit && !edit.status && !edit.isEncrypted());
+
 export function mapEventToMessage(
   event: MatrixEvent,
   room?: Room,
 ): MatrixChatMessage | null {
   const type = event.getType();
+  if (type === 'm.room.encrypted') {
+    // Still being decrypted: it shows up once matrix-js-sdk emits
+    // Event.decrypted. Only an event that can't be decrypted gets a row, so it
+    // doesn't silently vanish from the conversation.
+    if (!event.isDecryptionFailure()) return null;
+    const senderId = event.getSender();
+    return {
+      eventId: event.getId(),
+      sender: senderId,
+      senderDisplayName:
+        room?.getMember(senderId)?.name || formatDisplayName(senderId),
+      body: translate('Unable to decrypt this message.'),
+      timestamp: event.getTs(),
+      type: UNDECRYPTABLE_MESSAGE_TYPE,
+    };
+  }
   if (type !== 'm.room.message') return null;
 
   const content = event.getContent();
@@ -66,6 +89,14 @@ export function mapEventToMessage(
     isVoice,
     waveform,
     durationMs,
+    // A local echo is not encrypted until it is sent; only a delivered event
+    // can be judged.
+    unencrypted:
+      (Boolean(room?.hasEncryptionStateEvent?.()) &&
+        !event.status &&
+        // An edit replaces the shown text, so it counts as much as the original.
+        (!event.isEncrypted() || isClearEdit(event.replacingEvent?.()))) ||
+      undefined,
   };
 }
 

@@ -11,6 +11,7 @@ import {
   mapEventToMessage,
   resolveMemberName,
   sanitizeName,
+  UNDECRYPTABLE_MESSAGE_TYPE,
 } from './utils';
 
 // @/core/config is mocked globally (test/setupTests.js); override just the
@@ -36,6 +37,62 @@ const makeEvent = (content: any, type = 'm.room.message') =>
   }) as any;
 
 describe('mapEventToMessage', () => {
+  const encrypted = (failed: boolean) =>
+    ({
+      ...makeEvent({}, 'm.room.encrypted'),
+      isDecryptionFailure: () => failed,
+    }) as any;
+
+  it('waits for an encrypted event to be decrypted', () => {
+    expect(mapEventToMessage(encrypted(false))).toBeNull();
+  });
+
+  it('flags a message sent in clear into an encrypted room', () => {
+    const room = {
+      getMember: () => null,
+      hasEncryptionStateEvent: () => true,
+    } as any;
+    const event = (encrypted: boolean, status: string | null = null) =>
+      ({
+        ...makeEvent({ msgtype: 'm.text', body: 'hi' }),
+        isEncrypted: () => encrypted,
+        status,
+      }) as any;
+
+    expect(mapEventToMessage(event(false), room)?.unencrypted).toBe(true);
+    expect(mapEventToMessage(event(true), room)?.unencrypted).toBeUndefined();
+    // An edit sent in clear replaces the shown text, so it is flagged too.
+    const edited = {
+      ...event(true),
+      replacingEvent: () => ({ isEncrypted: () => false }),
+    } as any;
+    expect(mapEventToMessage(edited, room)?.unencrypted).toBe(true);
+    // The user's own edit is encrypted only as it is sent.
+    const editing = {
+      ...event(true),
+      replacingEvent: () => ({
+        isEncrypted: () => false,
+        status: 'encrypting',
+      }),
+    } as any;
+    expect(mapEventToMessage(editing, room)?.unencrypted).toBeUndefined();
+    // A local echo is not encrypted until it is sent.
+    expect(
+      mapEventToMessage(event(false, 'sending'), room)?.unencrypted,
+    ).toBeUndefined();
+  });
+
+  it('keeps a row for an event that cannot be decrypted', () => {
+    expect(mapEventToMessage(encrypted(true))).toEqual(
+      expect.objectContaining({
+        eventId: '$evt1',
+        sender: '@bob:s',
+        type: UNDECRYPTABLE_MESSAGE_TYPE,
+        body: 'Unable to decrypt this message.',
+      }),
+    );
+  });
+
   it('keeps a media message that has an empty body', () => {
     const msg = mapEventToMessage(
       makeEvent({

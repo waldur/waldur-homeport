@@ -60,61 +60,22 @@ describe('createTokenRefreshFunction', () => {
     expect(matrixSessionMock).not.toHaveBeenCalled();
   });
 
-  it('starts a new Waldur session when Matrix rejects the refresh', async () => {
-    fetchMock.mockResolvedValue(
-      jsonResponse(401, {
-        errcode: 'M_UNKNOWN_TOKEN',
-        error: 'Refresh token has already been used.',
-      }),
-    );
-    const session = {
-      device_id: 'WALDUR_WEB_NEW',
-      access_token: 'access-3',
-      refresh_token: 'refresh-3',
-      expires_in_ms: 300000,
-    };
-    matrixSessionMock.mockResolvedValue({ data: session } as any);
-
-    const tokens = await refresh()('refresh-1');
-
-    expect(tokens).toEqual({
-      accessToken: 'access-3',
-      refreshToken: 'refresh-3',
-      expiry: new Date(NOW + 300000),
-    });
-  });
-
-  it.each([401, 403, 404])(
-    'ends the session when Waldur refuses a new one with %i',
+  it.each([401, 403])(
+    'signs the client out when Matrix rejects the refresh with %i',
     async (status) => {
       fetchMock.mockResolvedValue(
-        jsonResponse(403, { errcode: 'M_FORBIDDEN', error: 'unrecognized' }),
+        jsonResponse(status, {
+          errcode: 'M_UNKNOWN_TOKEN',
+          error: 'Refresh token has already been used.',
+        }),
       );
-      matrixSessionMock.mockRejectedValue({
-        detail: 'Not authenticated.',
-        response: { status },
-      });
 
       await expect(refresh()('refresh-1')).rejects.toBeInstanceOf(LogoutError);
+      // A new session is a new device: the provider starts a new client for
+      // it, instead of this one carrying on with another device's tokens.
+      expect(matrixSessionMock).not.toHaveBeenCalled();
     },
   );
-
-  it('retries later when Waldur cannot start a session right now', async () => {
-    fetchMock.mockResolvedValue(
-      jsonResponse(401, { errcode: 'M_UNKNOWN_TOKEN', error: 'expired' }),
-    );
-    const throttled = {
-      detail: 'Request was throttled.',
-      response: { status: 429 },
-    };
-    matrixSessionMock.mockRejectedValue(throttled);
-
-    const error = await refresh()('refresh-1').catch((e) => e);
-
-    // Anything but the SDK's logout error leaves the session to be retried.
-    expect(error).toBe(throttled);
-    expect(error).not.toBeInstanceOf(LogoutError);
-  });
 
   it('retries later when the homeserver cannot be reached', async () => {
     fetchMock.mockRejectedValue(new TypeError('Failed to fetch'));

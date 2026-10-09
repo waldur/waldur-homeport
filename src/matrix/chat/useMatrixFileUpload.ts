@@ -38,6 +38,19 @@ function getImageDimensions(
  * queue, so files are previewed and only sent when the user submits — never
  * the instant they're picked.
  */
+// Why an upload to this room must wait, or null if it may proceed. A room the
+// client hasn't synced yet may be encrypted, so it is refused rather than guessed.
+const uploadRefusal = (client: any, roomId: string): string | null => {
+  const room = client.getRoom?.(roomId);
+  if (!room) {
+    return translate('The conversation is still loading. Try again shortly.');
+  }
+  if (room.hasEncryptionStateEvent?.()) {
+    return translate('Files cannot be shared in encrypted conversations yet.');
+  }
+  return null;
+};
+
 export function useMatrixFileUpload() {
   const { client, activeRoomId } = useMatrixClient();
   const { draft, setFiles } = useMatrixComposerDraft(activeRoomId);
@@ -74,6 +87,14 @@ export function useMatrixFileUpload() {
       buildContent?: (mxcUrl: string) => Record<string, any>,
     ): Promise<boolean> => {
       if (!file || !client || !activeRoomId) return false;
+      // Attachments are not encrypted yet: uploading one to an encrypted room
+      // would leave the file readable on the homeserver. Refused before any
+      // byte is sent.
+      const refusal = uploadRefusal(client, activeRoomId);
+      if (refusal) {
+        NotifyService.error(refusal);
+        return false;
+      }
 
       setUploading(true);
       try {

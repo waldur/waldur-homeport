@@ -3,6 +3,13 @@ import { describe, expect, it } from 'vitest';
 import { classifyPreviewEvent } from './previewClassifier';
 
 describe('classifyPreviewEvent', () => {
+  it('previews an event that is still encrypted', () => {
+    expect(classifyPreviewEvent('m.room.encrypted', {})).toEqual({
+      kind: 'text',
+      text: 'Encrypted message',
+    });
+  });
+
   it('previews a message whose body is not a string as empty', () => {
     expect(
       classifyPreviewEvent('m.room.message', { msgtype: 'm.text', body: 42 }),
