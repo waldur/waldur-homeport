@@ -16,7 +16,7 @@ interface WellKnownFocus {
 }
 
 // The MatrixRTC slot of a room's call, as matrix-js-sdk names it (application
-// m.call, call id ROOM). lk-jwt derives the LiveKit room from room id + slot,
+// m.call, call id ROOM). The token service derives the LiveKit room from room id + slot,
 // so every client must use this one to meet in the same LiveKit room.
 const CALL_SLOT_ID = 'm.call#ROOM';
 
@@ -79,7 +79,7 @@ export function readLiveKitCredentials(
 export const useLiveKitToken = () => {
   const { client } = useMatrixClient();
   const [rtcAvailable, setRtcAvailable] = useState(false);
-  // The URL the browser sends token requests to (the Vite proxy in dev).
+  // The URL the browser sends token requests to.
   const livekitUrlRef = useRef<string | null>(null);
   // The URL as the homeserver advertises it: what memberships carry, so other
   // clients (Element Call) recognise the focus as the one they use.
@@ -144,14 +144,16 @@ export const useLiveKitToken = () => {
         : [];
       const lkFocus = lkFoci[0];
       if (lkFocus?.livekit_service_url) {
-        let serviceUrl = lkFocus.livekit_service_url;
-        advertisedUrlRef.current = serviceUrl.replace(/\/+$/, '');
-
-        // In dev, rewrite to Vite proxy to avoid CORS
-        const viaProxy = import.meta.env.DEV;
-        if (viaProxy && !serviceUrl.startsWith('/lk-jwt')) {
-          serviceUrl = '/lk-jwt';
-        }
+        advertisedUrlRef.current = lkFocus.livekit_service_url.replace(
+          /\/+$/,
+          '',
+        );
+        // In dev, VITE_LK_JWT_URL may name the token service to call instead
+        // of the advertised one, e.g. the API of another local stack.
+        const devServiceUrl = import.meta.env.DEV
+          ? normaliseServiceUrl(import.meta.env.VITE_LK_JWT_URL)
+          : null;
+        const serviceUrl = devServiceUrl || advertisedUrlRef.current;
 
         const trusted = new Map<string, string>();
         const trust = (url: unknown, requestUrl: string) => {
@@ -160,10 +162,9 @@ export const useLiveKitToken = () => {
         };
         for (const focus of lkFoci) {
           const raw = focus.livekit_service_url as string;
-          trust(raw, viaProxy ? serviceUrl : raw.replace(/\/+$/, ''));
+          trust(raw, devServiceUrl || raw.replace(/\/+$/, ''));
         }
-        // The service the dev proxy forwards to.
-        if (viaProxy) trust(import.meta.env.VITE_LK_JWT_URL, serviceUrl);
+        if (devServiceUrl) trust(devServiceUrl, devServiceUrl);
         trustedServicesRef.current = trusted;
 
         livekitUrlRef.current = serviceUrl;
@@ -211,7 +212,7 @@ export const useLiveKitToken = () => {
         if (controller.signal.aborted) return null;
         // Follow the oldest member's focus only when it is one of our own
         // services; any other, ours. The LiveKit room is the same either way:
-        // lk-jwt derives it from the Matrix room, which is the focus alias.
+        // the token service derives it from the Matrix room, the focus alias.
         const activeKey = normaliseServiceUrl(activeFocus?.livekit_service_url);
         const serviceUrl =
           (activeKey && trustedServicesRef.current.get(activeKey)) ||
