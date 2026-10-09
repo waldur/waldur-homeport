@@ -124,7 +124,7 @@ describe('useLiveKitToken', () => {
       });
     });
     expect(fetchMock).toHaveBeenCalledTimes(2);
-    expect(fetchMock.mock.calls[1][0]).toBe('/lk-jwt/sfu/get');
+    expect(fetchMock.mock.calls[1][0]).toBe('https://lk.test/sfu/get');
     for (const [url] of fetchMock.mock.calls) {
       expect(String(url)).not.toContain('evil.test');
     }
@@ -181,9 +181,106 @@ describe('useLiveKitToken', () => {
         'https://lk2.test/other',
         'https://lk2.test:8443/jwt',
         'http://lk.test',
-        '/lk-jwt',
+        '/sfu',
       ]) {
         expect(await requestUrlFor(url)).toBe('https://lk.test/sfu/get');
+      }
+    });
+  });
+
+  describe('with VITE_LK_JWT_URL in dev', () => {
+    beforeEach(() =>
+      vi.stubEnv(
+        'VITE_LK_JWT_URL',
+        'http://localhost:10790/api/matrix/livekit/',
+      ),
+    );
+    afterEach(() => vi.unstubAllEnvs());
+
+    const requestUrlFor = async (focusUrl?: string) => {
+      const fetchMock = vi
+        .fn()
+        .mockResolvedValueOnce(wellKnown)
+        .mockResolvedValueOnce(tokenResponse);
+      vi.stubGlobal('fetch', fetchMock);
+      const { result } = renderHook(() => useLiveKitToken());
+      await act(async () => {
+        await result.current.acquireToken(
+          '!room:hs.test',
+          focusUrl
+            ? {
+                type: 'livekit',
+                livekit_service_url: focusUrl,
+                livekit_alias: '!room:hs.test',
+              }
+            : null,
+        );
+      });
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+      return fetchMock.mock.calls[1][0];
+    };
+
+    const devService = 'http://localhost:10790/api/matrix/livekit/sfu/get';
+
+    it('calls it directly in place of the advertised service', async () => {
+      expect(await requestUrlFor()).toBe(devService);
+      expect(await requestUrlFor('https://lk.test')).toBe(devService);
+      expect(
+        await requestUrlFor('http://localhost:10790/api/matrix/livekit'),
+      ).toBe(devService);
+    });
+
+    it('still never sends the OpenID token to another focus', async () => {
+      expect(await requestUrlFor('https://evil.test')).toBe(devService);
+    });
+
+    it('keeps advertising the focus the homeserver names', async () => {
+      vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(wellKnown));
+      const { result } = renderHook(() => useLiveKitToken());
+      let focus;
+      await act(async () => {
+        focus = await result.current.getFocus('!room:hs.test');
+      });
+      expect(focus).toMatchObject({ livekit_service_url: 'https://lk.test' });
+    });
+  });
+
+  describe('with VITE_LK_JWT_URL in a production build', () => {
+    const devServiceUrl = 'http://localhost:10790/api/matrix/livekit';
+
+    beforeEach(() => {
+      vi.stubEnv('DEV', false);
+      vi.stubEnv('VITE_LK_JWT_URL', devServiceUrl);
+    });
+    afterEach(() => vi.unstubAllEnvs());
+
+    it('ignores it and asks the advertised service', async () => {
+      for (const focusUrl of [undefined, devServiceUrl]) {
+        const fetchMock = vi
+          .fn()
+          .mockResolvedValueOnce(wellKnown)
+          .mockResolvedValueOnce(tokenResponse);
+        vi.stubGlobal('fetch', fetchMock);
+        const { result } = renderHook(() => useLiveKitToken());
+        let credentials;
+        await act(async () => {
+          credentials = await result.current.acquireToken(
+            '!room:hs.test',
+            focusUrl
+              ? {
+                  type: 'livekit',
+                  livekit_service_url: focusUrl,
+                  livekit_alias: '!room:hs.test',
+                }
+              : null,
+          );
+        });
+        expect(credentials).toEqual({ url: 'wss://lk.test/sfu', jwt: 'jwt' });
+        expect(fetchMock).toHaveBeenCalledTimes(2);
+        expect(fetchMock.mock.calls[1][0]).toBe('https://lk.test/sfu/get');
+        for (const [url] of fetchMock.mock.calls) {
+          expect(String(url)).not.toContain('localhost:10790');
+        }
       }
     });
   });
