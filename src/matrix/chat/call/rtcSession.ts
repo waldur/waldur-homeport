@@ -11,10 +11,11 @@ import {
   makeCallMemberStateKey,
   sendLeaveOnUnload,
 } from './callMembership';
+import { keyGatedClient } from './keyGatedClient';
 import { isValidCallMemberEvent } from './parseCallMembers';
 
 type MatrixRTCModule = typeof import('matrix-js-sdk/lib/matrixrtc');
-type CallSession = InstanceType<MatrixRTCModule['MatrixRTCSession']>;
+export type CallSession = InstanceType<MatrixRTCModule['MatrixRTCSession']>;
 
 // matrix-js-sdk does not export MatrixRTC from its root.
 const loadMatrixRTC = (): Promise<MatrixRTCModule> =>
@@ -27,6 +28,9 @@ const ROOM_CALL_SLOT = { application: 'm.call', id: 'ROOM' };
  * Membership timing: valid for an hour, re-published two minutes before it
  * runs out, which browsers' throttled background timers still meet.
  */
+// No sticky events (`unstableSendStickyEvents`): with them, our media key
+// would belong to a hashed identity instead of `user:device`, which the call
+// token is for and which the E2EE worker sends under (see keepDecrypting).
 const CALL_SESSION_CONFIG = {
   membershipEventExpiryMs: 60 * 60 * 1000,
   membershipEventExpiryHeadroomMs: 2 * 60 * 1000,
@@ -99,12 +103,16 @@ export interface CallSessionHandle {
  * Joins the room's call as this device with matrix-js-sdk's MatrixRTC
  * session, which publishes and refreshes the call membership as Element Call
  * does. The session is our own rather than the client's `matrixRTC` one, so
- * that it reads only valid memberships.
+ * that it reads only valid memberships and takes only authentic media keys.
+ * With `encrypt`, it also exchanges media keys with the other members:
+ * Olm-encrypted to every device with a call membership, rotated when one
+ * leaves.
  */
 export async function joinCallSession(
   client: MatrixClient,
   room: Room,
   foci: { type: string }[],
+  { encrypt = false }: { encrypt?: boolean } = {},
 ): Promise<CallSessionHandle> {
   const {
     MatrixRTCSession,
@@ -113,7 +121,7 @@ export async function joinCallSession(
     Status,
   } = await loadMatrixRTC();
   const session = new MatrixRTCSession(
-    client,
+    keyGatedClient(client, room.roomId),
     sessionRoom(room),
     {
       ...ROOM_CALL_SLOT,
@@ -189,7 +197,7 @@ export async function joinCallSession(
       { userId, deviceId, memberId: `${userId}:${deviceId}` },
       foci as any,
       undefined,
-      { ...CALL_SESSION_CONFIG, manageMediaKeys: false },
+      { ...CALL_SESSION_CONFIG, manageMediaKeys: encrypt },
     );
   } catch (error) {
     void leave(1000);

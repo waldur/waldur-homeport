@@ -13497,7 +13497,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"livekit-client@npm:^2.17.1":
+"livekit-client@npm:2.20.0":
   version: 2.20.0
   resolution: "livekit-client@npm:2.20.0"
   dependencies:
@@ -19596,7 +19596,7 @@ __metadata:
     leaflet: "npm:^1.9.4"
     leaflet-geosearch: "npm:^3.11.1"
     lint-staged: "npm:^17.0.8"
-    livekit-client: "npm:^2.17.1"
+    livekit-client: "npm:2.20.0"
     lodash-es: "npm:^4.18.0"
     luxon: "npm:^3.7.2"
     madge: "npm:^8.0.0"

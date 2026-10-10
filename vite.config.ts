@@ -90,6 +90,11 @@ export default defineConfig({
   define: {
     global: 'globalThis',
   },
+  optimizeDeps: {
+    // Imported only by the call E2EE worker, so the dev server would find it
+    // when the first encrypted call starts and reload the page, ending it.
+    include: ['livekit-client/e2ee-worker'],
+  },
   build: {
     sourcemap: true,
   },

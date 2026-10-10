@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { FC, PropsWithChildren, useContext } from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const h = vi.hoisted(() => ({
   client: null as any,
@@ -56,6 +56,7 @@ import {
 const fakeHandle = (joined: Promise<void> = Promise.resolve()) => {
   let lose!: () => void;
   const handle = {
+    session: { id: h.handles.length },
     joined,
     lost: new Promise<void>((r) => (lose = r)),
     lose: () => lose(),
@@ -140,10 +141,69 @@ describe('MatrixCallProvider', () => {
           livekit_alias: '!abc:s',
         },
       ],
+      { encrypt: false },
     );
+    expect(result.current.encrypted).toBe(false);
 
     act(() => result.current.endCall());
     expect(h.handles[0].leave).toHaveBeenCalledTimes(1);
+  });
+
+  describe('in an encrypted room', () => {
+    beforeEach(() => {
+      h.client.getRoom = (roomId: string) => ({
+        roomId,
+        hasEncryptionStateEvent: () => true,
+      });
+    });
+    afterEach(() => vi.unstubAllGlobals());
+
+    it('encrypts the call and joins under the keyed identity', async () => {
+      vi.stubGlobal('RTCRtpScriptTransform', class {});
+      const { result } = renderHook(useCtx, { wrapper });
+      await act(async () => {
+        await result.current.startCall();
+      });
+
+      expect(h.joinCallSession.mock.calls[0][3]).toEqual({ encrypt: true });
+      expect(h.acquireToken.mock.calls[0][2]).toEqual({ encrypted: true });
+      expect(result.current.encrypted).toBe(true);
+      expect(result.current.callSession).toBe(h.handles[0].session);
+    });
+
+    it('stays encrypted when the room state no longer says so', async () => {
+      vi.stubGlobal('RTCRtpScriptTransform', class {});
+      h.client.getRoom = (roomId: string) => ({
+        roomId,
+        hasEncryptionStateEvent: () => false,
+      });
+      h.client.getCrypto = () => ({
+        isEncryptionEnabledInRoom: () => Promise.resolve(true),
+      });
+      const { result } = renderHook(useCtx, { wrapper });
+      await act(async () => {
+        await result.current.startCall();
+      });
+
+      expect(h.joinCallSession.mock.calls[0][3]).toEqual({ encrypt: true });
+      expect(result.current.encrypted).toBe(true);
+    });
+
+    it('refuses to join from a browser that cannot encrypt media', async () => {
+      vi.stubGlobal('RTCRtpScriptTransform', undefined);
+      vi.stubGlobal('RTCRtpSender', class {});
+      const { result } = renderHook(useCtx, { wrapper });
+      await act(async () => {
+        await result.current.startCall();
+      });
+
+      expect(h.joinCallSession).not.toHaveBeenCalled();
+      expect(h.acquireToken).not.toHaveBeenCalled();
+      expect(result.current.callState).toBe('error');
+      expect(result.current.error).toBe(
+        "This browser can't take part in encrypted calls.",
+      );
+    });
   });
 
   it('endCall(message) surfaces the message via context error', async () => {

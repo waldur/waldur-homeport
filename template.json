@@ -12727,7 +12727,6 @@
   },
   "Could not connect to the call.": {
     "context": {
-      "primary_ui_type": "error_message",
       "feature_area": "call"
     }
   },
@@ -19050,6 +19049,11 @@
   "End time": {
     "context": {
       "feature_area": "deploy"
+    }
+  },
+  "End-to-end encrypted": {
+    "context": {
+      "feature_area": "call"
     }
   },
   "End-to-end flow": {
@@ -34704,6 +34708,16 @@
   "Not shared: this offering holds its own accounts": {
     "context": {
       "feature_area": "integration"
+    }
+  },
+  "Not shown, not end-to-end encrypted: {names}": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        }
+      },
+      "feature_area": "call"
     }
   },
   "Not signed in": {
@@ -57978,6 +57992,12 @@
   "This batch has expired. Setting a new deadline will reactivate it and allow the reviewer to respond.": {
     "context": {
       "feature_area": "assignments"
+    }
+  },
+  "This browser can't take part in encrypted calls.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "call"
     }
   },
   "This browser does not support passkeys. Try a recent version of Chrome, Safari, Edge or Firefox.": {

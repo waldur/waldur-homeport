@@ -19,6 +19,7 @@ import '@livekit/components-styles';
 import {
   CornersInIcon,
   CornersOutIcon,
+  LockSimpleIcon,
   PhoneSlashIcon,
   PictureInPictureIcon,
 } from '@phosphor-icons/react';
@@ -43,12 +44,14 @@ import { useUser } from '@/workspace/hooks';
 import { useMatrixClient } from '../useMatrixClient';
 import { formatDisplayName } from '../utils';
 
+import { CallEncryptionNotice } from './CallEncryptionNotice';
 import { getCallDeviceId } from './callMembership';
 import { CallSettingsMenu } from './CallSettingsMenu';
 import { CallTrackToggle } from './CallTrackToggle';
 import { computeLiveKitIdentities } from './liveKitIdentity';
 import { MatrixCallPortalContext } from './MatrixCallPortalContext';
 import { CallMemberInfo } from './types';
+import { useEncryptedRoom } from './useEncryptedRoom';
 import { useFullscreen } from './useFullscreen';
 import { useMatrixCall } from './useMatrixCall';
 
@@ -169,9 +172,15 @@ const COMPACT_SPEAKER_DEBOUNCE_MS = 2000;
 
 const CallStage: FC<{
   compact?: boolean;
+  encrypted?: boolean;
   containerRef: RefObject<HTMLElement>;
   fullscreenTarget?: HTMLElement | null;
-}> = ({ compact = false, containerRef, fullscreenTarget }) => {
+}> = ({
+  compact = false,
+  encrypted = false,
+  containerRef,
+  fullscreenTarget,
+}) => {
   // Fullscreen the host's relocation container (the unit that travels between
   // dock / floating widget / PiP), not the inner view — otherwise the host
   // moves the element out from under fullscreen. Falls back to the view itself
@@ -386,6 +395,17 @@ const CallStage: FC<{
             )}
           </>
         )}
+        {encrypted && !compact && (
+          <Tooltip label={translate('End-to-end encrypted')} side="top">
+            <span
+              className="lk-button"
+              aria-label={translate('End-to-end encrypted')}
+              role="img"
+            >
+              <LockSimpleIcon size={20} weight="bold" />
+            </span>
+          </Tooltip>
+        )}
         <Tooltip label={translate('Leave call')} side="top">
           <DisconnectButton>
             <PhoneSlashIcon size={20} weight="bold" />
@@ -434,6 +454,8 @@ const MatrixCallView: FC<{
     endCall,
     markConnected,
     callMembers,
+    encrypted,
+    callSession,
   } = useMatrixCall();
   const { client, userId } = useMatrixClient();
   const currentUser = useUser();
@@ -466,6 +488,15 @@ const MatrixCallView: FC<{
 
   const identityMap = useIdentityNameMap(identityEntries);
 
+  const encryptedRoom = useEncryptedRoom(
+    encrypted,
+    callSession,
+    `${userId}:${getCallDeviceId(client)}`,
+    () => endCall(translate('Could not connect to the call.')),
+  );
+  // An encrypted call connects only once its room encrypts what it publishes.
+  const roomReady = !encrypted || !!encryptedRoom;
+
   // Cover the LiveKit handshake so the bare ParticipantTile placeholder doesn't
   // flash into the dock between discovering and connected. The error state is
   // handled separately so a failed call shows why instead of spinning forever.
@@ -478,8 +509,9 @@ const MatrixCallView: FC<{
       className={`matrix-call-view flex-grow-1 overflow-hidden${compact ? ' matrix-call-view--compact' : ''}`}
       data-lk-theme="default"
     >
-      {credentials && (
+      {credentials && roomReady && (
         <LiveKitRoom
+          room={encryptedRoom}
           serverUrl={credentials.url}
           token={credentials.jwt}
           connect
@@ -500,10 +532,12 @@ const MatrixCallView: FC<{
           <LayoutContextProvider>
             <CallStage
               compact={compact}
+              encrypted={encrypted}
               containerRef={containerRef}
               fullscreenTarget={fullscreenTarget}
             />
           </LayoutContextProvider>
+          {encrypted && <CallEncryptionNotice identityMap={identityMap} />}
           <RoomAudioRenderer />
           <NameOverrider
             containerRef={containerRef}
