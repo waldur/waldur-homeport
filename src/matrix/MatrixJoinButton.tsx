@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import {
   MatrixCredentials,
   matrixCredentialsPassword,
+  matrixCredentialsRecoveryKey,
   matrixCredentialsRetrieve,
 } from 'waldur-js-client';
 
@@ -31,7 +32,7 @@ interface MatrixCredentialsDialogProps {
 
 // Laid out like FieldWithCopy, which copies what it shows; here the copy must
 // not need revealing first. Reveal is for retyping by hand.
-const MaskedPassword: FC<{ value: string }> = ({ value }) => {
+const MaskedSecret: FC<{ value: string }> = ({ value }) => {
   const [revealed, setRevealed] = useState(false);
   return (
     <div className="d-flex justify-content-between align-items-center">
@@ -87,7 +88,7 @@ const GeneratedPassword: FC = () => {
       <div aria-live="polite">
         {password && (
           <>
-            <MaskedPassword key={generation} value={password} />
+            <MaskedSecret key={generation} value={password} />
             <small className="text-muted d-block">
               {translate('Copy it now: it will not be shown again.')}
             </small>
@@ -114,6 +115,58 @@ const GeneratedPassword: FC = () => {
           )}
         </small>
       )}
+    </>
+  );
+};
+
+// The key that unlocks the user's encrypted history in another Matrix client.
+// Fetched only when asked for, as each fetch is recorded, and kept only while
+// the dialog is open.
+const RecoveryKey: FC = () => {
+  const [recoveryKey, setRecoveryKey] = useState<string | null>();
+  const { mutate, isPending } = useManagedMutation({
+    mutationFn: () =>
+      matrixCredentialsRecoveryKey().then((r) => r.data.recovery_key),
+    onSuccess: (key) => setRecoveryKey(key),
+    errorMessage: translate('Unable to load your recovery key.'),
+    closeModal: false,
+    gcTime: 0,
+  });
+  if (recoveryKey === undefined) {
+    return (
+      <>
+        <BaseButton
+          label={translate('Show recovery key')}
+          onClick={() => mutate(undefined)}
+          pending={isPending}
+          variant="secondary"
+          size="sm"
+        />
+        <small className="text-muted d-block mt-2">
+          {translate(
+            'Your Matrix client asks for it to read your encrypted messages.',
+          )}
+        </small>
+      </>
+    );
+  }
+  if (recoveryKey === null) {
+    return (
+      <p className="text-muted mb-0">
+        {translate(
+          'Waldur holds no recovery key for you yet. Open the chat in Waldur first: it sets up encryption, or asks for the recovery key you already use in another Matrix app.',
+        )}
+      </p>
+    );
+  }
+  return (
+    <>
+      <MaskedSecret value={recoveryKey} />
+      <small className="text-muted d-block">
+        {translate(
+          'Enter it when your Matrix client asks for a recovery key or security key. Anyone who has it can read your encrypted messages, so do not share it.',
+        )}
+      </small>
     </>
   );
 };
@@ -151,6 +204,10 @@ const CredentialsContent: FC<{
           />
         </>
       )}
+      <FormTable.Item
+        label={translate('Recovery key')}
+        value={<RecoveryKey />}
+      />
       {roomAlias && (
         <FormTable.Item
           label={translate('Room alias')}

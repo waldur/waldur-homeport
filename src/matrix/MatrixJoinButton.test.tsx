@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   matrixCredentialsPassword,
+  matrixCredentialsRecoveryKey,
   matrixCredentialsRetrieve,
 } from 'waldur-js-client';
 
@@ -36,6 +37,7 @@ describe('MatrixCredentialsDialog', () => {
   afterEach(() => {
     vi.mocked(matrixCredentialsRetrieve).mockReset();
     vi.mocked(matrixCredentialsPassword).mockReset();
+    vi.mocked(matrixCredentialsRecoveryKey).mockReset();
     vi.mocked(useNotify().showErrorResponse).mockClear();
     vi.mocked(useModal().closeDialog).mockClear();
   });
@@ -341,6 +343,76 @@ describe('MatrixCredentialsDialog', () => {
     await waitFor(() =>
       expect(queryClient.getMutationCache().getAll()).toHaveLength(0),
     );
+  });
+
+  // Element needs the key to read encrypted history; each fetch is recorded,
+  // so it is fetched only on request, and shown masked until revealed.
+  it('shows the recovery key only when asked, masked', async () => {
+    const user = userEvent.setup();
+    vi.mocked(matrixCredentialsRecoveryKey).mockResolvedValue({
+      data: { recovery_key: 'EsSz ykH7 LCZx 7Cae' },
+    } as any);
+    openDialog({ method: 'oidc', ...IDENTITY });
+    const show = await screen.findByRole('button', {
+      name: 'Show recovery key',
+    });
+    expect(matrixCredentialsRecoveryKey).not.toHaveBeenCalled();
+
+    await user.click(show);
+
+    const reveal = await screen.findByRole('button', { name: 'Reveal' });
+    expect(screen.queryByText('EsSz ykH7 LCZx 7Cae')).toBeNull();
+    await user.click(reveal);
+    expect(screen.getByText('EsSz ykH7 LCZx 7Cae')).toBeTruthy();
+    expect(matrixCredentialsRecoveryKey).toHaveBeenCalledTimes(1);
+    expect(useModal().closeDialog).not.toHaveBeenCalled();
+  });
+
+  it('says when Waldur holds no recovery key that works', async () => {
+    const user = userEvent.setup();
+    vi.mocked(matrixCredentialsRecoveryKey).mockResolvedValue({
+      data: { recovery_key: null },
+    } as any);
+    openDialog({ method: 'password', ...IDENTITY });
+
+    await user.click(
+      await screen.findByRole('button', { name: 'Show recovery key' }),
+    );
+
+    expect(
+      await screen.findByText(/Waldur holds no recovery key for you yet/),
+    ).toBeTruthy();
+    expect(screen.queryByRole('button', { name: 'Reveal' })).toBeNull();
+  });
+
+  it('does not keep the recovery key once the dialog closes', async () => {
+    const user = userEvent.setup();
+    vi.mocked(matrixCredentialsRecoveryKey).mockResolvedValue({
+      data: { recovery_key: 'EsSz ykH7 LCZx 7Cae' },
+    } as any);
+    const { queryClient, unmount } = openDialog({
+      method: 'oidc',
+      ...IDENTITY,
+    });
+    await user.click(
+      await screen.findByRole('button', { name: 'Show recovery key' }),
+    );
+    await screen.findByRole('button', { name: 'Reveal' });
+
+    unmount();
+
+    await waitFor(() =>
+      expect(queryClient.getMutationCache().getAll()).toHaveLength(0),
+    );
+  });
+
+  it('offers no recovery key when external clients are switched off', async () => {
+    openDialog({ method: 'none', ...IDENTITY });
+
+    await screen.findByText(
+      'External Matrix clients are not enabled on this server.',
+    );
+    expect(screen.queryByText('Show recovery key')).toBeNull();
   });
 
   it('reports a password that could not be generated', async () => {

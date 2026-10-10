@@ -18,4 +18,5 @@ export const MatrixChatContext = createContext<MatrixChatContextValue>({
   roomAccessDenied: false,
   cryptoState: 'off',
   resetCryptoIdentity: async () => {},
+  importCryptoRecoveryKey: async () => {},
 });
