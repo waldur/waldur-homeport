@@ -446,6 +446,95 @@
     background: rgba($warning-500, 0.12);
   }
 
+  // A reply's parent was jumped to.
+  .tc-msg.is-highlighted .tc-bubble {
+    box-shadow: 0 0 0 2px $border-brand;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .tc-bubble--editing {
+    width: 90%;
+  }
+
+  // Quote of the replied-to message at the top of a reply's bubble.
+  .tc-reply-quote {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0.462rem;
+    padding: 0.308rem 0.615rem;
+    border: 0;
+    border-inline-start: 3px solid $border-brand;
+    border-radius: $border-radius-sm;
+    background: $bg-tertiary;
+    color: $text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.4;
+    text-align: start;
+    white-space: normal;
+
+    &:is(button) {
+      cursor: pointer;
+
+      &:hover {
+        background: $bg-quaternary;
+      }
+    }
+
+    &.is-unavailable {
+      border-inline-start-color: $border-primary;
+      font-style: italic;
+    }
+  }
+
+  .tc-reply-quote__sender {
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .tc-reply-quote__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .tc-msg-edited {
+    display: inline-block;
+    margin-inline-start: 0.308rem;
+    font-size: $font-size-sm;
+    color: $text-tertiary;
+  }
+
+  .tc-msg-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.462rem;
+  }
+
+  .tc-msg-editor__input {
+    width: 100%;
+    padding: 0.308rem 0.462rem;
+    border: 1px solid $border-primary;
+    border-radius: $border-radius;
+    background: $bg-primary;
+    color: $text-primary;
+    font-size: $font-size-lg;
+    line-height: 1.5;
+    resize: vertical;
+
+    &:focus {
+      outline: 0;
+      border-color: $border-brand;
+    }
+  }
+
+  .tc-msg-editor__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.462rem;
+  }
+
   .tc-file-card {
     display: flex;
     align-items: center;
@@ -710,7 +799,10 @@
   }
 
   .tc-msg:hover .tc-msg-reactions-toolbar,
-  .tc-msg:focus-within .tc-msg-reactions-toolbar {
+  .tc-msg:focus-within .tc-msg-reactions-toolbar,
+  // An open actions menu is portaled out of the message, so neither hover nor
+  // focus-within holds the toolbar while it is open.
+  .tc-msg-reactions-toolbar:has([aria-expanded='true']) {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -836,6 +928,38 @@
     background: $bg-primary;
     box-shadow: $box-shadow-xs;
     overflow: hidden;
+  }
+
+  .tc-composer-reply {
+    display: flex;
+    align-items: center;
+    gap: 0.615rem;
+    padding: 0.462rem 0.923rem;
+    border-bottom: 1px solid $border-primary;
+    background: $bg-secondary;
+  }
+
+  .tc-composer-reply__body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 0.615rem;
+    border-inline-start: 3px solid $border-brand;
+    font-size: $font-size-base;
+    line-height: 1.4;
+  }
+
+  .tc-composer-reply__title {
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .tc-composer-reply__text {
+    overflow: hidden;
+    color: $text-secondary;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .tc-composer-input-row {

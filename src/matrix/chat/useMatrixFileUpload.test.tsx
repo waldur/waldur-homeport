@@ -330,3 +330,62 @@ describe('useMatrixFileUpload in a room the client does not know yet', () => {
     expect(h.client.uploadContent).not.toHaveBeenCalled();
   });
 });
+
+describe('useMatrixFileUpload with extra content', () => {
+  const reply = {
+    'm.mentions': { user_ids: ['@alice:hs'] },
+    'm.relates_to': { 'm.in_reply_to': { event_id: '$p' } },
+  };
+  const upload = async (
+    buildContent?: (media: UploadedMedia) => Record<string, any>,
+  ) => {
+    const { result } = renderHook(() => useMatrixFileUpload());
+    await act(async () => {
+      await result.current.uploadFile(
+        new File(['x'], 'x.ogg', { type: 'audio/ogg' }),
+        buildContent,
+        reply,
+      );
+    });
+    return h.client.sendMessage.mock.calls[0];
+  };
+  const client = (encrypted: boolean) => ({
+    uploadContent: vi.fn().mockResolvedValue({ content_uri: 'mxc://hs/f' }),
+    getAccessToken: () => 'token',
+    sendMessage: vi.fn().mockResolvedValue({}),
+    getRoom: () => ({ hasEncryptionStateEvent: () => encrypted }),
+  });
+
+  it('adds the fields to a file sent in clear, as a reply does', async () => {
+    h.client = client(false);
+    const [, content] = await upload();
+    expect(content).toMatchObject({ url: 'mxc://hs/f', ...reply });
+  });
+
+  it('puts them in the content of an encrypted file, which the SDK encrypts', async () => {
+    h.client = client(true);
+    const [roomId, content, ...rest] = await upload();
+    expect(roomId).toBe('!room:hs');
+    // One content object, carrying `file`: nothing goes beside it.
+    expect(rest).toEqual([]);
+    expect(content).toMatchObject({
+      file: { url: 'mxc://hs/f', v: 'v2' },
+      ...reply,
+    });
+    expect(content).not.toHaveProperty('url');
+  });
+
+  it('adds them to custom content too, as a voice reply does', async () => {
+    h.client = client(true);
+    const [, content] = await upload((media) => ({
+      msgtype: 'm.audio',
+      body: 'voice',
+      ...media,
+    }));
+    expect(content).toMatchObject({
+      msgtype: 'm.audio',
+      file: { url: 'mxc://hs/f' },
+      ...reply,
+    });
+  });
+});

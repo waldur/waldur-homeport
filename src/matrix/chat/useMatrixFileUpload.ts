@@ -133,6 +133,9 @@ export function useMatrixFileUpload() {
       // `buildContent` receives the freshly uploaded media (a `url`, or an
       // encrypted `file`) so the caller doesn't have to upload separately.
       buildContent?: (media: UploadedMedia) => Record<string, any>,
+      // Fields added to the event content, such as the relation that makes it
+      // a reply. They go into the content the SDK encrypts, next to `file`.
+      extraContent?: Record<string, any>,
     ): Promise<boolean> => {
       if (!file || !client || !activeRoomId) return false;
       const room = client.getRoom?.(activeRoomId);
@@ -163,7 +166,10 @@ export function useMatrixFileUpload() {
         }
 
         if (buildContent) {
-          await client.sendMessage(activeRoomId, buildContent(media) as any);
+          await client.sendMessage(activeRoomId, {
+            ...buildContent(media),
+            ...extraContent,
+          } as any);
           return true;
         }
 
@@ -178,7 +184,10 @@ export function useMatrixFileUpload() {
           },
         };
 
-        await client.sendMessage(activeRoomId, content as any);
+        await client.sendMessage(activeRoomId, {
+          ...content,
+          ...extraContent,
+        } as any);
         return true;
       } catch {
         NotifyService.error(translate('Upload failed.'));

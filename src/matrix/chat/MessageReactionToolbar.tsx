@@ -1,6 +1,6 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 
 import { translate } from '@/i18n';
 
@@ -30,9 +30,15 @@ const QUICK_ROW: readonly QuickEmoji[] = [
 interface Props {
   eventId: string;
   reactions: ReactionAggregate[] | undefined;
+  /** Further message actions, after the emoji. */
+  children?: ReactNode;
 }
 
-export const MessageReactionToolbar: FC<Props> = ({ eventId, reactions }) => {
+export const MessageReactionToolbar: FC<Props> = ({
+  eventId,
+  reactions,
+  children,
+}) => {
   const { react, unreact } = useReactions({ eventId, reactions });
   const { triggerRef, toggle, open, picker } = useEmojiPicker(react);
   const toolbarRef = useRef<HTMLDivElement>(null);
@@ -94,7 +100,7 @@ export const MessageReactionToolbar: FC<Props> = ({ eventId, reactions }) => {
         'is-picker-down': pickerFlipDown,
       })}
       role="toolbar"
-      aria-label={translate('React to message')}
+      aria-label={translate('Message actions')}
     >
       {QUICK_ROW.map((emoji) => {
         const reactedByMe = reactions?.some(
@@ -130,6 +136,7 @@ export const MessageReactionToolbar: FC<Props> = ({ eventId, reactions }) => {
         <PlusIcon size={14} weight="bold" />
       </button>
       {picker}
+      {children}
     </div>
   );
 };

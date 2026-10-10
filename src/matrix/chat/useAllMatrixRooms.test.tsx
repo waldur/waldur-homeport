@@ -84,3 +84,57 @@ describe('readRoomLiveState — preview', () => {
     expect(state.preview).not.toContain('DecryptionError');
   });
 });
+
+describe('readRoomLiveState — edits', () => {
+  const event = (id: string, content: any, sender = '@bob:server') => ({
+    getType: () => 'm.room.message',
+    getId: () => id,
+    getContent: () => content,
+    getWireContent: () => content,
+    getSender: () => sender,
+    getTs: () => 1000,
+    isRedacted: () => false,
+    isState: () => false,
+  });
+  const preview = (events: any[]) =>
+    readRoomLiveState(
+      { isInitialSyncComplete: () => false },
+      {
+        roomId: '!room:server',
+        getUnreadNotificationCount: () => 0,
+        getLiveTimeline: () => ({ getEvents: () => events }),
+        getMember: () => null,
+      },
+      '@me:server',
+      'Me',
+      new Map(),
+    ).preview;
+  const editOf = (body: string, sender?: string) =>
+    event(
+      `$edit-${body}`,
+      {
+        msgtype: 'm.text',
+        body: `* ${body}`,
+        'm.new_content': { msgtype: 'm.text', body },
+        'm.relates_to': { rel_type: 'm.replace', event_id: '$orig' },
+      },
+      sender,
+    );
+
+  it("previews a message's valid edit, not the edit event", () => {
+    const original = event('$orig', { msgtype: 'm.text', body: 'typo' });
+    expect(preview([original, editOf('fixed')])).toBe('fixed');
+  });
+
+  it("ignores another sender's edit, even one the SDK applied", () => {
+    const forged = editOf('forged', '@mallory:server');
+    const original = {
+      ...event('$orig', { msgtype: 'm.text', body: 'typo' }),
+      // matrix-js-sdk's own aggregation, checked only for the sender.
+      getContent: () => ({ msgtype: 'm.text', body: 'forged' }),
+      getOriginalContent: () => ({ msgtype: 'm.text', body: 'typo' }),
+      replacingEvent: () => forged,
+    };
+    expect(preview([original, forged])).toBe('typo');
+  });
+});

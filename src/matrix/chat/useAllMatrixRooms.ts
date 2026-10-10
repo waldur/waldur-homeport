@@ -7,6 +7,7 @@ import {
   RoomCallState,
   useAllRoomCallStates,
 } from './call/useAllRoomCallStates';
+import { getDisplayedContent, getReplacedEventId } from './messageRelations';
 import { isRoomMuted } from './mute';
 import {
   classifyPreviewEvent,
@@ -81,7 +82,9 @@ export function readRoomLiveState(
     const event = events[i];
     const type = event.getType?.();
     if (!PREVIEWABLE_EVENT_TYPES.has(type)) continue;
-    const content = event.getContent?.() ?? {};
+    // An edit is previewed through the message it edits, not as "* text",
+    // and only a valid edit is: getContent() would take any from the sender.
+    if (getReplacedEventId(event)) continue;
 
     // Member events are state events: the affected user is the state key, and
     // the prior membership lives in prev_content. Resolve the target to the
@@ -99,10 +102,16 @@ export function readRoomLiveState(
     // matrix-js-sdk's raw error text, so it is caught before classifying.
     const info = event.isDecryptionFailure?.()
       ? undecryptablePreview()
-      : classifyPreviewEvent(type, content, {
-          prevMembership: event.getPrevContent?.()?.membership,
-          targetName,
-        });
+      : classifyPreviewEvent(
+          type,
+          type === 'm.room.message'
+            ? getDisplayedContent(event, room).content
+            : (event.getContent?.() ?? {}),
+          {
+            prevMembership: event.getPrevContent?.()?.membership,
+            targetName,
+          },
+        );
     if (info.kind === 'none') continue;
 
     preview = info.text;

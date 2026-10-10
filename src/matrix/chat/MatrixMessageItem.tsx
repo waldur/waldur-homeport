@@ -8,6 +8,10 @@ import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { getChatAvatarColor } from './chatColors';
+import { MatrixMessageActions } from './MatrixMessageActions';
+import { useMatrixMessageActions } from './MatrixMessageActionsContext';
+import { MatrixMessageEditor } from './MatrixMessageEditor';
+import { MatrixReplyQuote } from './MatrixReplyQuote';
 import { MessageReactionChips } from './MessageReactionChips';
 import { MessageReactionToolbar } from './MessageReactionToolbar';
 import { MatrixChatMessage } from './types';
@@ -155,6 +159,8 @@ interface MatrixMessageItemProps {
   continuation?: boolean;
   memberNames?: Map<string, string>;
   currentUserId?: string | null;
+  /** The message this one replies to, when it is in the loaded timeline. */
+  replyParent?: MatrixChatMessage;
 }
 
 const MediaContent: FC<{
@@ -297,7 +303,10 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
   continuation = false,
   memberNames,
   currentUserId,
+  replyParent,
 }) => {
+  const { editingEventId } = useMatrixMessageActions();
+  const editing = editingEventId === message.eventId && !message.redacted;
   const cleanName = sanitizeName(senderName);
   // Own messages are right-aligned with no avatar (the design distinguishes them
   // by the green bubble + read receipt), so the avatar column is built lazily for
@@ -344,6 +353,7 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
         )}
         <div
           className={classNames('tc-bubble', {
+            'tc-bubble--editing': editing,
             // Image/video render flush — the padded, tinted bubble around a
             // picture reads as a thick frame.
             'tc-bubble--media':
@@ -351,26 +361,49 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
               ['m.image', 'm.sticker', 'm.video'].includes(message.type),
           })}
         >
-          <MediaContent
-            message={message}
-            memberNames={memberNames}
-            currentUserId={currentUserId}
-          />
+          {message.replyToEventId && !message.redacted && (
+            <MatrixReplyQuote
+              parentId={message.replyToEventId}
+              parent={replyParent}
+              memberNames={memberNames}
+              currentUserId={currentUserId}
+            />
+          )}
+          {message.redacted ? (
+            <em className="text-muted">{translate('Message deleted')}</em>
+          ) : editing ? (
+            <MatrixMessageEditor message={message} />
+          ) : (
+            <MediaContent
+              message={message}
+              memberNames={memberNames}
+              currentUserId={currentUserId}
+            />
+          )}
+          {message.edited && !editing && (
+            <span className="tc-msg-edited">{translate('(edited)')}</span>
+          )}
           {message.unencrypted && (
             <div className="text-danger small">
               {translate('Not encrypted')}
             </div>
           )}
-          <MessageReactionToolbar
+          {!message.redacted && !editing && (
+            <MessageReactionToolbar
+              eventId={message.eventId}
+              reactions={message.reactions}
+            >
+              <MatrixMessageActions message={message} />
+            </MessageReactionToolbar>
+          )}
+        </div>
+        {!message.redacted && (
+          <MessageReactionChips
             eventId={message.eventId}
             reactions={message.reactions}
+            reactors={message.reactors ?? {}}
           />
-        </div>
-        <MessageReactionChips
-          eventId={message.eventId}
-          reactions={message.reactions}
-          reactors={message.reactors ?? {}}
-        />
+        )}
       </div>
     </div>
   );
