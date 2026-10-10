@@ -683,7 +683,6 @@
       "feature_area": "openstack"
     }
   },
-  "A configuration file that must be added to the Matrix homeserver to register Waldur as an appservice. Contains tokens, bot user ID, webhook URL, and namespace declarations.": {},
   "A conflict is a person who has different usernames on different offerings of this service provider, for example because the offerings generate usernames differently.": {
     "context": {
       "feature_area": "accounts"
@@ -1011,7 +1010,7 @@
       "feature_area": "ai-assistant"
     }
   },
-  "AS and HS tokens are already configured. Running setup again will generate new tokens and overwrite the existing ones. You will need to update your homeserver configuration with the new registration YAML.": {
+  "AS and HS tokens are already configured": {
     "context": {
       "feature_area": "matrix"
     }
@@ -12556,19 +12555,9 @@
       "feature_area": "details"
     }
   },
-  "Copy the generated registration YAML to your homeserver configuration directory": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
   "Copy the proposal evaluation step definitions.": {
     "context": {
       "feature_area": "details"
-    }
-  },
-  "Copy this YAML to your Matrix homeserver appservice configuration and restart the homeserver.": {
-    "context": {
-      "feature_area": "matrix"
     }
   },
   "Copy to Clipboard": {
@@ -23700,6 +23689,11 @@
       "feature_area": "changelog"
     }
   },
+  "Helm and Docker Compose deployments supply the tokens and, by default, register the appservice on every deploy, so they show no Setup button. On other installations, Setup generates the tokens and a registration YAML, which you then register on the homeserver.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Help": {
     "context": {
       "feature_area": "shell"
@@ -24636,6 +24630,11 @@
   "Idle in transaction": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "If Helm or Docker Compose still set up Matrix on this installation, do not run Setup. It replaces the tokens the deployment supplies, and the next deploy then fails: \"Constance holds appservice tokens that were not seeded by the deployment and differ from the supplied ones\". Rotate the tokens where the deployment keeps them and redeploy instead.": {
+    "context": {
+      "feature_area": "matrix"
     }
   },
   "If True, service providers only see offering users whose profiles have all exposed attributes filled (per OfferingUserAttributeConfig).": {},
@@ -28275,8 +28274,8 @@
       "feature_area": "steps"
     }
   },
-  "LiveKit API key for the call SFU (Calls observability tab).": {},
-  "LiveKit API secret used to mint the admin token.": {},
+  "LiveKit API key for the call SFU.": {},
+  "LiveKit API secret used to mint admin and call tokens.": {},
   "LiveKit is not configured.": {
     "context": {
       "feature_area": "livekit"
@@ -35853,6 +35852,24 @@
       "feature_area": "database-stats"
     }
   },
+  "On Synapse, add the YAML file to app_service_config_files and restart the homeserver": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
+  "On Tuwunel, run {command} with MATRIX_ADMIN_TOKEN set, or with MATRIX_BOOTSTRAP_PASSWORD set and the homeserver's registration_shared_secret equal to the registration secret (see \"Registering on Tuwunel from the command line\" in the admin guide); or send {adminCommand} with the YAML in the admin room": {
+    "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        },
+        "adminCommand": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "matrix"
+    }
+  },
   "On decision": {
     "context": {
       "primary_ui_type": "label"
@@ -42966,6 +42983,7 @@
       "feature_area": "openstack-floating-ips"
     }
   },
+  "Public LiveKit signaling URL that browsers connect to for calls, e.g. wss://matrix.example.org. Waldur issues call tokens only when this and the LiveKit key and secret are set.": {},
   "Public access": {
     "context": {
       "feature_area": "common"
@@ -44376,8 +44394,16 @@
       "feature_area": "roles"
     }
   },
-  "Register the YAML file in your homeserver settings (e.g., app_service_config_files in Synapse, or the equivalent for your homeserver)": {
+  "Register this YAML on the homeserver. On Tuwunel, run {command} with MATRIX_ADMIN_TOKEN set, or with MATRIX_BOOTSTRAP_PASSWORD set and the homeserver's registration_shared_secret equal to the registration secret (see \"Registering on Tuwunel from the command line\" in the admin guide); or send {adminCommand} with the YAML in the admin room. On Synapse, add it to app_service_config_files and restart the homeserver. Do not run Setup again: it generates new tokens.": {
     "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        },
+        "adminCommand": {
+          "type": "unknown"
+        }
+      },
       "feature_area": "matrix"
     }
   },
@@ -44414,6 +44440,11 @@
     }
   },
   "Registration secret": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
+  "Registration token the homeserver requires for sign-up (its registration_token). With zero-touch setup it is also the homeserver's registration_shared_secret, which can create homeserver admins. Protect it like the appservice tokens.": {
     "context": {
       "feature_area": "matrix"
     }
@@ -47305,11 +47336,6 @@
       "primary_ui_type": "title"
     }
   },
-  "Restart the homeserver — it will begin sending events to the Waldur webhook": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
   "Restart the refresh-glauth-config service service to apply the new configuration.": {
     "context": {
       "feature_area": "site-agent"
@@ -48947,6 +48973,20 @@
     "context": {
       "primary_ui_type": "label",
       "feature_area": "celery"
+    }
+  },
+  "Running Setup again generates new tokens and overwrites the existing ones, and chat stops working until the homeserver has the new registration. {command} replaces the old registration itself. If you register by hand, send {unregister} in the admin room first, then register the new YAML. On Synapse, replace the file and restart the homeserver.": {
+    "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        },
+        "unregister": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "matrix",
+      "action_type": "create"
     }
   },
   "Running accounting": {
@@ -51981,6 +52021,11 @@
       "feature_area": "posix-id-pools"
     }
   },
+  "Set by the deployment on every deploy. Change it there and redeploy.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Set by the longest subscription requested.": {},
   "Set columns in {name} category": {
     "context": {
@@ -52203,6 +52248,7 @@
       "feature_area": "mappings"
     }
   },
+  "Set to 'deployment' by the init_matrix_settings management command to record that the appservice tokens come from the deployment's own secret and are re-seeded on every sync. While it is set, the Setup wizard refuses to rotate them, because the rotation would be reverted at the next deploy while the homeserver kept the old registration. Blank means the deployment was configured by hand and the wizard owns the tokens. Clear it when the deployment stops seeding Matrix, so the wizard can rotate them again.": {},
   "Set to draft": {
     "context": {
       "feature_area": "actions"
@@ -52342,15 +52388,9 @@
       "feature_area": "database-stats"
     }
   },
-  "Shared secret configured in your homeserver for user registration.": {
-    "context": {
-      "feature_area": "matrix"
-    }
-  },
   "Shared secret expected in the X-Webhook-Secret header of inbound JIRA webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour). Configure your JIRA automation/webhook to send the same value to enable authentication.": {},
   "Shared secret expected in the X-Webhook-Secret header of inbound SMAX webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).": {},
   "Shared secret expected in the X-Webhook-Secret header of inbound Zammad webhook deliveries. If empty, authentication is not enforced and the receiver accepts unauthenticated requests (legacy behaviour).": {},
-  "Shared secret for Matrix user registration.": {},
   "Shared user password": {
     "context": {
       "feature_area": "integration"
@@ -56255,6 +56295,16 @@
       }
     }
   },
+  "The deployment writes these settings on every deploy, so they are locked on this page: {settings}.": {
+    "context": {
+      "variables": {
+        "settings": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "matrix"
+    }
+  },
   "The digest can include the following sections, depending on which plugins are installed:": {
     "context": {
       "feature_area": "project-digest"
@@ -57038,6 +57088,7 @@
     }
   },
   "The quantity is the limit the customer requests multiplied by the length of the subscription in months, not the plan amount.": {},
+  "The registration that makes Waldur an appservice on the homeserver: tokens, bot user ID, webhook URL, and namespace declarations. Synapse reads it from a file; Tuwunel takes it through the admin room.": {},
   "The relay accepted the message": {
     "context": {
       "feature_area": "email"
@@ -57250,11 +57301,6 @@
   "The settings changed since the preview. Preview again to apply them.": {
     "context": {
       "feature_area": "accounts"
-    }
-  },
-  "The setup process generates authentication tokens and a registration YAML that must be added to your Matrix homeserver configuration.": {
-    "context": {
-      "feature_area": "matrix"
     }
   },
   "The setup wizard guides you through connecting to Arrow and mapping customers to Waldur organizations.": {
@@ -57813,6 +57859,11 @@
   "These scopes are recommended based on the discovered claim mappings.": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "These settings are managed by the deployment": {
+    "context": {
+      "feature_area": "matrix"
     }
   },
   "These settings come from the deployment configuration and cannot be changed here. Edit override.conf.py — the Helm values or the docker-compose .env file — and restart the services.": {
@@ -58998,6 +59049,11 @@
       "feature_area": "details"
     }
   },
+  "To change them or rotate the appservice tokens, change them where the deployment keeps them and redeploy: for Helm, in the values and Secrets; for Docker Compose, in .env, with the appservice tokens in secrets.env on the secrets volume (see Token rotation in the Matrix chat add-on docs). A change made here some other way is reverted at the next deploy. Clear \"Matrix tokens managed by\" only if the deployment no longer sets up Matrix.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "To correct details of your organization, please send an email to {supportEmail} highlighting the errors in current details. Thank you!": {
     "context": {
       "variables": {
@@ -59970,7 +60026,7 @@
       "feature_area": "email"
     }
   },
-  "Two shared secrets generated during setup. The AS token authenticates Waldur when calling the homeserver API. The HS token authenticates the homeserver when sending events to Waldur via webhook.": {},
+  "Two shared secrets, generated by Setup or supplied by the deployment. The AS token authenticates Waldur when calling the homeserver API. The HS token authenticates the homeserver when sending events to Waldur via webhook.": {},
   "Two-Stage Reviewer Workflow:": {
     "context": {
       "feature_area": "reviewer-pool"
@@ -69603,6 +69659,7 @@
   },
   "WirtschaftsCompass API server URL": {},
   "WirtschaftsCompass API token": {},
+  "With MATRIX_EXTERNAL_LOGIN_METHOD 'oidc': the registration method of the Waldur users who sign in to Waldur through the identity provider the homeserver's single sign-on uses, i.e. that identity provider's name in Waldur, such as 'keycloak'. Waldur gives a Matrix account only to those users, because the homeserver signs in any subject of that provider to the account its claim names. While blank, no user is given a Matrix account.": {},
   "With errors": {
     "context": {
       "primary_ui_type": "label",

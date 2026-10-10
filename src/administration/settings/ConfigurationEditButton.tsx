@@ -10,7 +10,15 @@ const ConfigurationEditDialog = lazyComponent(() =>
   })),
 );
 
-export const ConfigurationEditButton = ({ item, value }) => {
+export const ConfigurationEditButton = ({
+  item,
+  value,
+  disabledReason,
+}: {
+  item: any;
+  value: any;
+  disabledReason?: string;
+}) => {
   const { openDialog } = useModal();
   const openFormDialog = useCallback(
     () =>
@@ -24,5 +32,11 @@ export const ConfigurationEditButton = ({ item, value }) => {
     [],
   );
 
-  return <CompactEditButton onClick={openFormDialog} />;
+  return (
+    <CompactEditButton
+      onClick={openFormDialog}
+      disabled={Boolean(disabledReason)}
+      disabledReason={disabledReason}
+    />
+  );
 };

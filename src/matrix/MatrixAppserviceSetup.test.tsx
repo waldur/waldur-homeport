@@ -75,6 +75,42 @@ describe('MatrixAppserviceSetupDialog', () => {
     ).toBeInTheDocument();
   });
 
+  it('warns that rotating tokens a deployment still supplies fails its next deploy', async () => {
+    // Setup is offered again once the ownership marker is cleared. If the
+    // deployment still seeds Matrix, the rotated tokens differ from its own
+    // and init_matrix_settings refuses on the next deploy.
+    h.statusData = { as_token_configured: true, hs_token_configured: true };
+    h.settingsData = {
+      MATRIX_HOMESERVER_URL: 'https://matrix.example.com',
+      MATRIX_HOMESERVER_DOMAIN: 'matrix.example.com',
+      MATRIX_USER_REGISTRATION_SECRET: 'pre-set',
+    };
+
+    renderDialog();
+
+    expect(
+      await screen.findByText('AS and HS tokens are already configured'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/do not run Setup.*the next deploy then fails/),
+    ).toBeInTheDocument();
+  });
+
+  it('shows no token warning before any tokens exist', async () => {
+    h.settingsData = {
+      MATRIX_HOMESERVER_URL: 'https://matrix.example.com',
+      MATRIX_HOMESERVER_DOMAIN: 'matrix.example.com',
+      MATRIX_USER_REGISTRATION_SECRET: 'pre-set',
+    };
+
+    renderDialog();
+
+    await screen.findByLabelText(/Waldur URL/i);
+    expect(
+      screen.queryByText('AS and HS tokens are already configured'),
+    ).not.toBeInTheDocument();
+  });
+
   it('starts on the homeserver step when all three prereqs are missing', async () => {
     h.settingsData = {
       MATRIX_HOMESERVER_URL: '',
