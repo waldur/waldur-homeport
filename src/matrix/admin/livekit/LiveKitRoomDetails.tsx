@@ -2,6 +2,9 @@ import {
   BroadcastIcon,
   MicrophoneIcon,
   MicrophoneSlashIcon,
+  MonitorIcon,
+  SpeakerHighIcon,
+  SpeakerSlashIcon,
   VideoCameraIcon,
   VideoCameraSlashIcon,
 } from '@phosphor-icons/react';
@@ -21,13 +24,29 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
 import {
-  formatTrackKind,
   formatTrackResolution,
+  formatTrackSource,
   getErrorDetail,
+  getTrackEncryption,
   isVideoTrack,
 } from './liveKitFormatters';
 
 const TrackGlyph: FC<{ track: LiveKitTrack }> = ({ track }) => {
+  if (track.source === 'SCREEN_SHARE') {
+    return (
+      <MonitorIcon
+        weight="bold"
+        className={track.muted ? 'text-muted' : undefined}
+      />
+    );
+  }
+  if (track.source === 'SCREEN_SHARE_AUDIO') {
+    return track.muted ? (
+      <SpeakerSlashIcon weight="bold" className="text-muted" />
+    ) : (
+      <SpeakerHighIcon weight="bold" />
+    );
+  }
   if (isVideoTrack(track)) {
     return track.muted ? (
       <VideoCameraSlashIcon weight="bold" className="text-muted" />
@@ -42,14 +61,44 @@ const TrackGlyph: FC<{ track: LiveKitTrack }> = ({ track }) => {
   );
 };
 
+const EncryptionBadge: FC<{ track: LiveKitTrack }> = ({ track }) => {
+  switch (getTrackEncryption(track)) {
+    case 'gcm':
+      return (
+        <Badge variant="success" tone="light">
+          {translate('Encrypted')}
+        </Badge>
+      );
+    case 'custom':
+      return (
+        <Badge variant="info" tone="light">
+          {translate('Encrypted (custom)')}
+        </Badge>
+      );
+    case 'none':
+      return (
+        <Badge variant="warning" tone="light">
+          {translate('Not encrypted')}
+        </Badge>
+      );
+    default:
+      return (
+        <Badge variant="neutral" tone="light">
+          {translate('Encryption unknown')}
+        </Badge>
+      );
+  }
+};
+
 const TrackRow: FC<{ track: LiveKitTrack }> = ({ track }) => {
   const resolution = formatTrackResolution(track);
   return (
     <div className="d-flex align-items-center gap-2 text-muted fs-7">
       <TrackGlyph track={track} />
-      <span>{formatTrackKind(track)}</span>
+      <span>{formatTrackSource(track)}</span>
       {resolution && <span>{resolution}</span>}
       {track.muted && <span>({translate('muted')})</span>}
+      <EncryptionBadge track={track} />
     </div>
   );
 };

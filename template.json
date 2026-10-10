@@ -9227,7 +9227,7 @@
   "Camera": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "call"
+      "feature_area": "livekit"
     }
   },
   "Campaign end date": {
@@ -18905,6 +18905,16 @@
       "feature_area": "actions"
     }
   },
+  "Encrypted": {
+    "context": {
+      "feature_area": "livekit"
+    }
+  },
+  "Encrypted (custom)": {
+    "context": {
+      "feature_area": "livekit"
+    }
+  },
   "Encrypted conversations cannot be read or written. Unencrypted ones still work.": {
     "context": {
       "feature_area": "chat"
@@ -18930,6 +18940,11 @@
   "Encryption is unavailable in this browser": {
     "context": {
       "feature_area": "chat"
+    }
+  },
+  "Encryption unknown": {
+    "context": {
+      "feature_area": "livekit"
     }
   },
   "End": {
@@ -30833,7 +30848,7 @@
   "Microphone": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "call"
+      "feature_area": "livekit"
     }
   },
   "Min": {
@@ -34658,7 +34673,7 @@
   },
   "Not encrypted": {
     "context": {
-      "feature_area": "chat"
+      "feature_area": "livekit"
     }
   },
   "Not equal to": {
@@ -49823,6 +49838,16 @@
   "Scoring methods": {
     "context": {
       "feature_area": "matching"
+    }
+  },
+  "Screen share": {
+    "context": {
+      "feature_area": "livekit"
+    }
+  },
+  "Screen share audio": {
+    "context": {
+      "feature_area": "livekit"
     }
   },
   "Screen sharing is blocked. Allow screen recording for your browser in the system settings.": {

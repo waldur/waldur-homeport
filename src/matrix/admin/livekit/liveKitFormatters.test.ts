@@ -1,10 +1,25 @@
 import { describe, expect, it } from 'vitest';
+import { LiveKitTrack } from 'waldur-js-client';
 
 import {
   formatTrackResolution,
+  formatTrackSource,
   getErrorDetail,
+  getTrackEncryption,
   isNotConfiguredError,
 } from './liveKitFormatters';
+
+const track = (overrides: Partial<LiveKitTrack> = {}): LiveKitTrack => ({
+  sid: 'TR_1',
+  name: '',
+  type: 'VIDEO',
+  muted: false,
+  width: 0,
+  height: 0,
+  source: 'CAMERA',
+  encryption: 'GCM',
+  ...overrides,
+});
 
 describe('liveKitFormatters', () => {
   describe('getErrorDetail', () => {
@@ -43,25 +58,60 @@ describe('liveKitFormatters', () => {
 
   describe('formatTrackResolution', () => {
     it('formats video tracks that carry dimensions', () => {
-      expect(
-        formatTrackResolution({
-          type: 'VIDEO',
-          width: 1280,
-          height: 720,
-        } as any),
-      ).toBe('1280×720');
+      expect(formatTrackResolution(track({ width: 1280, height: 720 }))).toBe(
+        '1280×720',
+      );
     });
 
     it('returns null for audio tracks', () => {
       expect(
-        formatTrackResolution({ type: 'AUDIO', width: 0, height: 0 } as any),
+        formatTrackResolution(track({ type: 'AUDIO', source: 'MICROPHONE' })),
       ).toBeNull();
     });
 
     it('returns null for a video track without dimensions', () => {
+      expect(formatTrackResolution(track())).toBeNull();
+    });
+  });
+
+  describe('getTrackEncryption', () => {
+    it('reads the values LiveKit reports', () => {
+      expect(getTrackEncryption(track({ encryption: 'GCM' }))).toBe('gcm');
+      expect(getTrackEncryption(track({ encryption: 'CUSTOM' }))).toBe(
+        'custom',
+      );
+      expect(getTrackEncryption(track({ encryption: 'NONE' }))).toBe('none');
+    });
+
+    it('takes anything else as unknown, never as encrypted', () => {
+      for (const encryption of ['gcm', 'AES', '']) {
+        expect(getTrackEncryption(track({ encryption }))).toBe('unknown');
+      }
+    });
+  });
+
+  describe('formatTrackSource', () => {
+    it('names the source', () => {
+      expect(formatTrackSource(track({ source: 'SCREEN_SHARE' }))).toBe(
+        'Screen share',
+      );
       expect(
-        formatTrackResolution({ type: 'VIDEO', width: 0, height: 0 } as any),
-      ).toBeNull();
+        formatTrackSource(
+          track({ type: 'AUDIO', source: 'SCREEN_SHARE_AUDIO' }),
+        ),
+      ).toBe('Screen share audio');
+    });
+
+    it('falls back to the track type for an unknown source', () => {
+      expect(
+        formatTrackSource(track({ type: 'AUDIO', source: 'UNKNOWN' })),
+      ).toBe('Audio');
+    });
+
+    it('falls back to the raw type when that is unknown too', () => {
+      expect(formatTrackSource(track({ type: 'DATA', source: '' }))).toBe(
+        'DATA',
+      );
     });
   });
 });
