@@ -1,5 +1,6 @@
 import type { MatrixClient } from 'matrix-js-sdk';
 
+import type { EncryptedFile } from './attachmentCrypto';
 import type { CryptoState } from './crypto';
 
 export interface ReactionAggregate {
@@ -10,6 +11,9 @@ export interface ReactionAggregate {
   /** The current user's reaction event_id — needed to redact (unreact). */
   myEventId?: string;
 }
+
+/** Where an uploaded attachment is: a plain `url`, or an encrypted `file`. */
+export type UploadedMedia = { url: string } | { file: EncryptedFile };
 
 export interface MatrixChatMessage {
   eventId: string;
@@ -26,6 +30,10 @@ export interface MatrixChatMessage {
   type: string;
   /** mxc:// or https:// URL for media messages */
   url?: string;
+  /** Encrypted media: where the ciphertext is and how to decrypt it. */
+  file?: EncryptedFile;
+  /** The event carried an encrypted `file` that failed validation. */
+  fileInvalid?: boolean;
   /** Media metadata (mimetype, width, height, size) */
   info?: { mimetype?: string; w?: number; h?: number; size?: number };
   reactions?: ReactionAggregate[];

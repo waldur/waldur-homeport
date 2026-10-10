@@ -21691,7 +21691,6 @@
       "feature_area": "manage"
     }
   },
-  "Files cannot be shared in encrypted conversations yet.": {},
   "Files created": {
     "context": {
       "feature_area": "database-stats"
@@ -57973,6 +57972,11 @@
   "This assistant is powered by AI and may produce inaccurate or incomplete responses. Always verify critical information before acting on it.": {
     "context": {
       "feature_area": "ai-assistant"
+    }
+  },
+  "This attachment could not be decrypted.": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "This batch has expired. Setting a new deadline will reactivate it and allow the reviewer to respond.": {

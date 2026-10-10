@@ -5,6 +5,7 @@ import { stripHtml } from '@/core/sanitize';
 import { translate } from '@/i18n';
 import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
+import { parseEncryptedFile } from './attachmentCrypto';
 import { MatrixChatMessage, ReactionAggregate } from './types';
 
 /** Message type of the row standing in for an event that can't be decrypted. */
@@ -77,6 +78,13 @@ export function mapEventToMessage(
         ? content.info.duration
         : undefined;
 
+  // Encrypted media carries `file` instead of `url`. A malformed one is kept
+  // as such, so it shows an error rather than falling back to a clear `url`.
+  const file =
+    isMediaMsg && content.file !== undefined
+      ? parseEncryptedFile(content.file)
+      : undefined;
+
   return {
     eventId: event.getId(),
     txnId: event.getTxnId?.() ?? undefined,
@@ -91,6 +99,8 @@ export function mapEventToMessage(
         ? content.msgtype
         : 'm.text',
     url: typeof content.url === 'string' ? content.url : undefined,
+    file: file ?? undefined,
+    fileInvalid: file === null || undefined,
     info: content.info,
     mentionedUserIds,
     isVoice,
@@ -106,6 +116,11 @@ export function mapEventToMessage(
       undefined,
   };
 }
+
+/** Whether a message carries an attachment, encrypted or not. */
+export const hasMedia = (
+  message: Pick<MatrixChatMessage, 'url' | 'file' | 'fileInvalid'>,
+) => Boolean(message.url || message.file || message.fileInvalid);
 
 /**
  * Resolve a Matrix user ID to their canonical Waldur full name.
