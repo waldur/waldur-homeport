@@ -12,7 +12,7 @@ export const formatTrackResolution = (track: LiveKitTrack): string | null =>
     ? `${track.width}×${track.height}`
     : null;
 
-export const formatTrackKind = (track: LiveKitTrack): string => {
+const formatTrackKind = (track: LiveKitTrack): string => {
   switch (track.type) {
     case 'AUDIO':
       return translate('Audio');
@@ -20,6 +20,43 @@ export const formatTrackKind = (track: LiveKitTrack): string => {
       return translate('Video');
     default:
       return track.type;
+  }
+};
+
+// What a track carries, from LiveKit's track source; its type when the source
+// is not known.
+export const formatTrackSource = (track: LiveKitTrack): string => {
+  switch (track.source) {
+    case 'CAMERA':
+      return translate('Camera');
+    case 'MICROPHONE':
+      return translate('Microphone');
+    case 'SCREEN_SHARE':
+      return translate('Screen share');
+    case 'SCREEN_SHARE_AUDIO':
+      return translate('Screen share audio');
+    default:
+      return formatTrackKind(track);
+  }
+};
+
+// How the publisher encrypts the track, from LiveKit's own names: GCM is
+// LiveKit's end-to-end encryption, which calls in encrypted rooms use; CUSTOM
+// another end-to-end scheme, unexpected here; NONE media that only the
+// connection to LiveKit encrypts, so LiveKit can decode it. Anything else is
+// unknown, and never counts as encrypted.
+export type TrackEncryption = 'gcm' | 'custom' | 'none' | 'unknown';
+
+export const getTrackEncryption = (track: LiveKitTrack): TrackEncryption => {
+  switch (track.encryption) {
+    case 'GCM':
+      return 'gcm';
+    case 'CUSTOM':
+      return 'custom';
+    case 'NONE':
+      return 'none';
+    default:
+      return 'unknown';
   }
 };
 
