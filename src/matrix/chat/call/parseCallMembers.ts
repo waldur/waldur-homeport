@@ -67,6 +67,30 @@ function isRoomCallSession(content: any): boolean {
   );
 }
 
+// When a per-device membership of the room's call stops being valid, or null
+// when the event is not one, or not valid now.
+function sessionValidUntil(event: any, now: number): number | null {
+  const content = event.getContent?.() ?? {};
+  if (!isRoomCallSession(content)) return null;
+  // The first publish may omit created_ts; it is then the event's own time.
+  const createdTs =
+    content.created_ts === undefined ? event.getTs?.() : content.created_ts;
+  if (!isPositiveNumber(createdTs)) return null;
+  const expires = readExpires(content.expires, DEFAULT_SESSION_EXPIRY_MS);
+  if (expires === null) return null;
+  return validUntil(createdTs, expires, now);
+}
+
+/**
+ * Whether a call member state event is a per-device membership of the room's
+ * call that is valid now. matrix-js-sdk's call session reads only these: it
+ * checks neither `expires` nor `created_ts`, and a crafted value would reach
+ * its timers.
+ */
+export function isValidCallMemberEvent(event: any, now: number): boolean {
+  return !!event.getSender?.() && sessionValidUntil(event, now) !== null;
+}
+
 // Two layouts share the event type:
 // - per-device (MSC4143): state key `_@user:server_DEVICE_m.call`, the content
 //   is one membership, `{}` once the device has left;
@@ -108,14 +132,7 @@ export function parseCallMembers(room: Room, now: number): RawCallMember[] {
       continue;
     }
 
-    if (!isRoomCallSession(content)) continue;
-    // The first publish may omit created_ts; it is then the event's own time.
-    const createdTs =
-      content.created_ts === undefined ? event.getTs?.() : content.created_ts;
-    if (!isPositiveNumber(createdTs)) continue;
-    const expires = readExpires(content.expires, DEFAULT_SESSION_EXPIRY_MS);
-    if (expires === null) continue;
-    const expiresAt = validUntil(createdTs, expires, now);
+    const expiresAt = sessionValidUntil(event, now);
     if (expiresAt === null) continue;
     add({
       userId: senderId,
