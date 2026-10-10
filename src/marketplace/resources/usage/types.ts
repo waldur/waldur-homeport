@@ -20,4 +20,5 @@ export interface UsageReportContext {
   project_name?: string;
   backend_id?: string;
   userUsage?: boolean;
+  refetch?(): void;
 }

@@ -22,7 +22,13 @@ const ResourceCreateUsageDialog = lazyComponent(() =>
 
 const validators = [validateState('OK')];
 
-export const ReportUserUsageAction = ({ resource }: { resource: Resource }) => {
+export const ReportUserUsageAction = ({
+  resource,
+  refetch,
+}: {
+  resource: Resource;
+  refetch?(): void;
+}) => {
   const { openDialog } = useModal();
 
   const callback = (props: UsageReportContext) => {
@@ -65,6 +71,7 @@ export const ReportUserUsageAction = ({ resource }: { resource: Resource }) => {
           customer_name: resource.customer_name,
           project_name: resource.project_name,
           backend_id: resource.backend_id,
+          refetch,
         })
       }
       actionId={ResourceAction.REPORT_USAGE}
