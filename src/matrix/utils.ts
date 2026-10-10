@@ -40,3 +40,8 @@ export const getMatrixRoomUrl = (roomAlias?: string): string | null => {
   const alias = roomAlias.startsWith('#') ? roomAlias : `#${roomAlias}`;
   return `https://matrix.to/#/${encodeURIComponent(alias)}`;
 };
+
+// Registers the appservice on Tuwunel through its admin room; Synapse has no
+// such route. The URL is where the homeserver reaches Waldur, as in Setup.
+export const REGISTER_APPSERVICE_COMMAND =
+  'waldur register_matrix_appservice --url <Waldur URL>';

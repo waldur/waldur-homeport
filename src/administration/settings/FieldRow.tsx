@@ -105,9 +105,17 @@ interface FieldRowProps {
   value: any;
   onEdit?: any;
   isLoading?: boolean;
+  // Set when the value cannot be edited here; shown as the edit button's tooltip.
+  editDisabledReason?: string;
 }
 
-export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
+export const FieldRow = ({
+  item,
+  value,
+  onEdit,
+  isLoading,
+  editDisabledReason,
+}: FieldRowProps) => {
   return (
     <FormTable.Item
       key={item.key}
@@ -180,7 +188,11 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
         ) : item.type === 'json_list_field' ? (
           <CompactEditButton onClick={onEdit} />
         ) : (
-          <ConfigurationEditButton item={item} value={value} />
+          <ConfigurationEditButton
+            item={item}
+            value={value}
+            disabledReason={editDisabledReason}
+          />
         )
       }
     />

@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import { Form } from 'react-final-form';
 import {
   adminMatrixAppserviceSetup,
-  adminMatrixAppserviceStatusRetrieve,
   overrideSettingsRetrieve,
 } from 'waldur-js-client';
 
@@ -13,10 +12,13 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { required } from '@/core/validators';
 import { SecretGroup, StringGroup, SubmitButton } from '@/form';
-import { translate } from '@/i18n';
+import { formatJsxTemplate, translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
+
+import { useMatrixAppserviceStatus } from './useMatrixAppserviceStatus';
+import { REGISTER_APPSERVICE_COMMAND } from './utils';
 
 type Step = 'loading' | 'error' | 'prereqs' | 'main' | 'result';
 
@@ -29,10 +31,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
   const [step, setStep] = useState<Step>('loading');
   const [initialStep, setInitialStep] = useState<Step | null>(null);
 
-  const statusQuery = useQuery({
-    queryKey: ['matrixAppserviceStatus'],
-    queryFn: () => adminMatrixAppserviceStatusRetrieve().then((r) => r.data),
-  });
+  const statusQuery = useMatrixAppserviceStatus();
   const statusData = statusQuery.data;
 
   const settingsQuery = useQuery({
@@ -255,7 +254,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                     name="user_registration_secret"
                     label={translate('Registration secret')}
                     description={translate(
-                      'Shared secret configured in your homeserver for user registration.',
+                      "Registration token the homeserver requires for sign-up (its registration_token). With zero-touch setup it is also the homeserver's registration_shared_secret, which can create homeserver admins. Protect it like the appservice tokens.",
                     )}
                     required
                     spaceless
@@ -272,9 +271,32 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                     type="floating"
                     variant="warning"
                     className="mb-4"
-                    title={translate(
-                      'AS and HS tokens are already configured. Running setup again will generate new tokens and overwrite the existing ones. You will need to update your homeserver configuration with the new registration YAML.',
-                    )}
+                    title={translate('AS and HS tokens are already configured')}
+                    body={
+                      <>
+                        <p>
+                          {translate(
+                            'Running Setup again generates new tokens and overwrites the existing ones, and chat stops working until the homeserver has the new registration. {command} replaces the old registration itself. If you register by hand, send {unregister} in the admin room first, then register the new YAML. On Synapse, replace the file and restart the homeserver.',
+                            {
+                              command: (
+                                <code>{REGISTER_APPSERVICE_COMMAND}</code>
+                              ),
+                              unregister: (
+                                <code>
+                                  !admin appservices unregister waldur
+                                </code>
+                              ),
+                            },
+                            formatJsxTemplate,
+                          )}
+                        </p>
+                        <p className="mb-0">
+                          {translate(
+                            'If Helm or Docker Compose still set up Matrix on this installation, do not run Setup. It replaces the tokens the deployment supplies, and the next deploy then fails: "Constance holds appservice tokens that were not seeded by the deployment and differ from the supplied ones". Rotate the tokens where the deployment keeps them and redeploy instead.',
+                          )}
+                        </p>
+                      </>
+                    }
                   />
                 )}
                 <StringGroup
@@ -301,7 +323,12 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                 <h5>{translate('Registration YAML')}</h5>
                 <p className="text-muted">
                   {translate(
-                    'Copy this YAML to your Matrix homeserver appservice configuration and restart the homeserver.',
+                    'Register this YAML on the homeserver. On Tuwunel, run {command} with MATRIX_ADMIN_TOKEN set, or with MATRIX_BOOTSTRAP_PASSWORD set and the homeserver\'s registration_shared_secret equal to the registration secret (see "Registering on Tuwunel from the command line" in the admin guide); or send {adminCommand} with the YAML in the admin room. On Synapse, add it to app_service_config_files and restart the homeserver. Do not run Setup again: it generates new tokens.',
+                    {
+                      command: <code>{REGISTER_APPSERVICE_COMMAND}</code>,
+                      adminCommand: <code>!admin appservices register</code>,
+                    },
+                    formatJsxTemplate,
                   )}
                 </p>
                 <div className="position-relative">
