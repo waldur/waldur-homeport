@@ -30,11 +30,14 @@ vi.mock('./crypto', async (importOriginal) => {
     startCrypto: vi.fn(),
     setUpEncryption: vi.fn(),
     resetEncryption: vi.fn(),
+    importRecoveryKey: vi.fn(),
   };
 });
 
 import {
   CryptoConflict,
+  CryptoSessionEnded,
+  importRecoveryKey,
   resetEncryption,
   setUpEncryption,
   startCrypto,
@@ -200,6 +203,50 @@ describe('MatrixChatProvider encryption', () => {
 
     expect(resetEncryption).toHaveBeenCalledWith(h.client, expect.anything());
     expect(ctx.cryptoState).toBe('ready');
+  });
+
+  it('unlocks a locked identity with the key the user brings', async () => {
+    vi.mocked(setUpEncryption).mockResolvedValue('locked');
+    vi.mocked(importRecoveryKey).mockResolvedValue(undefined);
+    await connectAndSync();
+    await waitFor(() => expect(ctx.cryptoState).toBe('locked'));
+
+    await act(() => ctx.importCryptoRecoveryKey('EsTA XFpR'));
+
+    expect(importRecoveryKey).toHaveBeenCalledWith(
+      h.client,
+      expect.anything(),
+      'EsTA XFpR',
+    );
+    expect(ctx.cryptoState).toBe('ready');
+  });
+
+  it('stays locked when the key the user brings is refused', async () => {
+    vi.mocked(setUpEncryption).mockResolvedValue('locked');
+    vi.mocked(importRecoveryKey).mockRejectedValue(new Error('wrong key'));
+    await connectAndSync();
+    await waitFor(() => expect(ctx.cryptoState).toBe('locked'));
+
+    await act(async () => {
+      await expect(ctx.importCryptoRecoveryKey('EsTA XFpR')).rejects.toThrow(
+        'wrong key',
+      );
+    });
+
+    expect(ctx.cryptoState).toBe('locked');
+  });
+
+  it('fails an import once the session has ended, rather than seem to succeed', async () => {
+    vi.mocked(setUpEncryption).mockResolvedValue('locked');
+    await connectAndSync();
+    await waitFor(() => expect(ctx.cryptoState).toBe('locked'));
+    const importKey = ctx.importCryptoRecoveryKey;
+    act(() => ctx.disconnect());
+
+    await expect(importKey('EsTA XFpR')).rejects.toBeInstanceOf(
+      CryptoSessionEnded,
+    );
+    expect(importRecoveryKey).not.toHaveBeenCalled();
   });
 
   it('restarts for another window at most once a minute', async () => {

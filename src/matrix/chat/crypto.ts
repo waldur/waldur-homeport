@@ -1,3 +1,4 @@
+import { captureMessage } from '@sentry/react';
 import type { MatrixClient } from 'matrix-js-sdk';
 import type { GeneratedSecretStorageKey } from 'matrix-js-sdk/lib/crypto-api';
 import type { UIAuthCallback } from 'matrix-js-sdk/lib/interactive-auth';
@@ -20,9 +21,11 @@ import {
  * Tuwunel accepts a user's first cross-signing keys without a password but
  * refuses to replace them, so the first setup is careful: Waldur grants one
  * window a lease, secret storage is created first, and the recovery key is
- * escrowed before anything is uploaded. An identity Waldur can't unlock can
- * only be reset with a temporary password Waldur sets, and only when the user
- * asks for it, since a reset loses the keys only the old backup held.
+ * escrowed before anything is uploaded. An identity Waldur can't unlock was
+ * often set up, or reset, in another client such as Element, so the user is
+ * asked for that client's recovery key first and Waldur escrows it. Otherwise
+ * it can only be reset with a temporary password Waldur sets, and only when the
+ * user asks for it, since a reset loses the keys only the old backup held.
  */
 
 export type CryptoState =
@@ -102,7 +105,21 @@ const asConflict = (error: unknown): CryptoConflict | null => {
   );
 };
 
-const takeLease = async (kind: 'bootstrap' | 'reset') => {
+/** The chat session ended while encryption was being unlocked. */
+export class CryptoSessionEnded extends Error {
+  constructor() {
+    super('The chat session has ended');
+  }
+}
+
+/** A recovery key the user entered that does not open their secret storage. */
+export class WrongRecoveryKey extends Error {
+  constructor() {
+    super('The recovery key does not unlock secret storage');
+  }
+}
+
+const takeLease = async (kind: 'bootstrap' | 'reset' | 'import') => {
   try {
     return (await matrixCryptoLease({ body: { kind } })).data;
   } catch (error) {
@@ -158,17 +175,58 @@ export const startCrypto = async (client: MatrixClient) => {
     .setDeviceIsolationMode(new OnlySignedDevicesIsolationMode());
 };
 
+// The secret-storage name matrix-js-sdk keeps the dehydration key under.
+const DEHYDRATION_SECRET = 'org.matrix.msc3814';
+
+/**
+ * Whether a dehydration key is stored under the current secret-storage key.
+ * Another client can replace secret storage and leave the old one encrypted
+ * only under the old key. Element's identity reset does exactly that, and
+ * also blanks the old key's description, so isStored reports nothing at all.
+ * Either way rehydrating would fail; with no key at all there is nothing to
+ * rehydrate either.
+ */
+const dehydrationKeyReadable = async (client: MatrixClient) => {
+  const storedUnder = await client.secretStorage.isStored(DEHYDRATION_SECRET);
+  const keyId = await client.secretStorage.getDefaultKeyId();
+  return Boolean(keyId && storedUnder?.[keyId]);
+};
+
+/**
+ * Start device dehydration. It only delivers the room keys sent while the user
+ * had no drawer open, so a failure is logged and never fails the setup or the
+ * unlock around it.
+ */
 const startDehydration = async (
   client: MatrixClient,
   createNewKey: boolean,
 ) => {
   const crypto = client.getCrypto()!;
-  if (!(await crypto.isDehydrationSupported())) return;
-  // Rehydrating picks up the room keys sent while the user had no drawer
-  // open, and leaves a fresh dehydrated device behind.
-  await crypto.startDehydration(
-    createNewKey ? { createNewKey: true } : { rehydrate: true },
-  );
+  try {
+    if (!(await crypto.isDehydrationSupported())) return;
+    if (!createNewKey && !(await dehydrationKeyReadable(client))) {
+      // The old dehydrated device can't be opened any more; a new key under
+      // the current secret-storage key starts afresh.
+      await crypto.startDehydration({ createNewKey: true, rehydrate: false });
+      return;
+    }
+    // Rehydrating picks up the room keys sent while the user had no drawer
+    // open, and leaves a fresh dehydrated device behind.
+    await crypto.startDehydration(
+      createNewKey ? { createNewKey: true } : { rehydrate: true },
+    );
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('Matrix chat could not start device dehydration:', error);
+    // Reported so a failure that persists is seen: messages sent while the
+    // user has no drawer open then never reach them. The error's kind only,
+    // never its message, which comes from crypto code.
+    captureMessage('Matrix chat could not start device dehydration', {
+      level: 'warning',
+      tags: { feature: 'matrix-chat' },
+      extra: { error: (error as Error)?.name ?? typeof error },
+    });
+  }
 };
 
 /** First session of a user without an identity on the homeserver. */
@@ -269,6 +327,37 @@ export const setUpEncryption = async (
   holder.set(key, keyId);
   await unlock(client, holder);
   return 'ready';
+};
+
+/**
+ * Unlock with a recovery key the user brings from another client, and escrow
+ * it, so later sessions unlock as usual. The key is checked against secret
+ * storage before it leaves the browser, and Waldur checks it again.
+ */
+export const importRecoveryKey = async (
+  client: MatrixClient,
+  holder: SecretStorageKeyHolder,
+  recoveryKey: string,
+) => {
+  const { decodeRecoveryKey, encodeRecoveryKey } = await loadCryptoApi();
+  let key: Uint8Array<ArrayBuffer>;
+  try {
+    // Pasted keys may come split over lines; decoding drops only spaces.
+    key = decodeRecoveryKey(recoveryKey.replace(/\s+/g, ''));
+  } catch {
+    throw new WrongRecoveryKey();
+  }
+  const keyId = await secretStorageKeyIdOpenedBy(client, key);
+  if (!keyId) throw new WrongRecoveryKey();
+  const { lease } = await takeLease('import');
+  try {
+    // Escrowed in the canonical form, as Waldur shows it back to the user.
+    await escrow(lease, encodeRecoveryKey(key)!);
+  } finally {
+    await releaseLease(lease);
+  }
+  holder.set(key, keyId);
+  await unlock(client, holder);
 };
 
 /** Answer the homeserver's password prompt with Waldur's temporary password. */

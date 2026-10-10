@@ -12862,6 +12862,7 @@
       "action_type": "read"
     }
   },
+  "Could not unlock chat encryption. Please try again.": {},
   "Could not update mute setting.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -18920,6 +18921,12 @@
       "feature_area": "chat"
     }
   },
+  "Encryption is being reset.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Encryption is being set up in another window. Try again in a moment.": {},
   "Encryption is unavailable in this browser": {
     "context": {
       "feature_area": "chat"
@@ -19433,6 +19440,11 @@
       "feature_area": "call"
     }
   },
+  "Enter it when your Matrix client asks for a recovery key or security key. Anyone who has it can read your encrypted messages, so do not share it.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Enter keywords separated by commas.": {
     "context": {
       "feature_area": "reviewer-discovery"
@@ -19447,6 +19459,11 @@
   "Enter reason for rejection": {
     "context": {
       "feature_area": "proposal"
+    }
+  },
+  "Enter recovery key": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Enter remote role name": {
@@ -19505,6 +19522,11 @@
   "Enter your password": {
     "context": {
       "feature_area": "auth"
+    }
+  },
+  "Enter your recovery key first.": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Enter your username": {
@@ -44340,6 +44362,11 @@
       "feature_area": "policies"
     }
   },
+  "Recovery key": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Recovery timeout": {
     "context": {
       "feature_area": "pubsub"
@@ -52773,6 +52800,11 @@
       "feature_area": "broadcasts"
     }
   },
+  "Show recovery key": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Show removed": {
     "context": {
       "feature_area": "projects"
@@ -58684,6 +58716,7 @@
       "feature_area": "common"
     }
   },
+  "This recovery key does not unlock your chat encryption. Check that it is the latest one your Matrix app showed you.": {},
   "This request cannot be updated in its current state.": {
     "context": {
       "feature_area": "issues"
@@ -62759,6 +62792,12 @@
       "feature_area": "organizations"
     }
   },
+  "Unable to load your recovery key.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "matrix"
+    }
+  },
   "Unable to locate email information": {
     "context": {
       "primary_ui_type": "error_message",
@@ -65457,6 +65496,16 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "mass-actions"
+    }
+  },
+  "Unlock": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Unlock chat encryption": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Unmark as downscaled": {
@@ -69022,6 +69071,16 @@
     }
   },
   "Waldur deployment settings": {},
+  "Waldur holds no recovery key for you yet. Open the chat in Waldur first: it sets up encryption, or asks for the recovery key you already use in another Matrix app.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
+  "Waldur keeps it for you, so you are asked for it only once.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Waldur offering": {
     "context": {
       "feature_area": "vendorOfferings"
@@ -70833,6 +70892,11 @@
       "feature_area": "organization-create"
     }
   },
+  "Your Matrix client asks for it to read your encrypted messages.": {
+    "context": {
+      "feature_area": "matrix"
+    }
+  },
   "Your OpenStack project — the scope that owns all the networks, routers, and instances below.": {},
   "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:": {},
   "Your access lasts as long as the longest subscription requested.": {},
@@ -70861,12 +70925,18 @@
       "feature_area": "passkeys"
     }
   },
+  "Your chat encryption changed in the meantime. Reload the chat.": {},
   "Your chat encryption keys can no longer be unlocked. Resetting creates new keys. Messages Waldur keeps a copy of become readable again; any others sent to you while encrypted are lost.": {
     "context": {
       "feature_area": "chat"
     }
   },
-  "Your chat encryption keys could not be unlocked in this session.": {
+  "Your chat encryption keys could not be unlocked in this session. If you set up or reset encryption in another Matrix app, such as Element, enter the recovery key it gave you. Reset encryption only if you have no recovery key.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Your chat encryption was set up or changed in another Matrix app, such as Element. Enter the recovery key that app gave you to read your encrypted messages here.": {
     "context": {
       "feature_area": "chat"
     }
@@ -70876,6 +70946,7 @@
       "feature_area": "chat"
     }
   },
+  "Your chat session has ended. Close this dialog and open the chat again.": {},
   "Your comment...": {
     "context": {
       "feature_area": "service-providers"

@@ -13,7 +13,9 @@ import { useUser } from '@/workspace/hooks';
 
 import {
   CryptoConflict,
+  CryptoSessionEnded,
   CryptoState,
+  importRecoveryKey,
   resetEncryption,
   SecretStorageKeyHolder,
   setUpEncryption,
@@ -635,6 +637,24 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   }, []);
 
+  // Escrow the recovery key the user brings from another client, such as
+  // Element, when Waldur's own doesn't unlock the identity.
+  const importCryptoRecoveryKey = useCallback(async (recoveryKey: string) => {
+    const client = clientRef.current;
+    const keyHolder = keyHolderRef.current;
+    // The session ended while the dialog was open; say so rather than close
+    // it as if the key had been taken.
+    if (!client || !keyHolder) throw new CryptoSessionEnded();
+    const unlocking = importRecoveryKey(client, keyHolder, recoveryKey);
+    cryptoSetupRef.current = unlocking;
+    try {
+      await unlocking;
+      if (clientRef.current === client) setCryptoState('ready');
+    } finally {
+      if (cryptoSetupRef.current === unlocking) cryptoSetupRef.current = null;
+    }
+  }, []);
+
   // Cleanup on unmount — funnel through disconnect() so the onSync listener
   // is detached and the React state is reset on the way out.
   useEffect(() => {
@@ -656,6 +676,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       roomAccessDenied,
       cryptoState,
       resetCryptoIdentity,
+      importCryptoRecoveryKey,
     }),
     [
       connectionState,
@@ -668,6 +689,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
       roomAccessDenied,
       cryptoState,
       resetCryptoIdentity,
+      importCryptoRecoveryKey,
     ],
   );
 

@@ -1,3 +1,4 @@
+import { captureMessage } from '@sentry/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   matrixCryptoEscrow,
@@ -7,17 +8,26 @@ import {
 
 import {
   CryptoConflict,
+  importRecoveryKey,
   resetEncryption,
   SecretStorageKeyHolder,
   setUpEncryption,
   startCrypto,
+  WrongRecoveryKey,
 } from './crypto';
+
+vi.mock('@sentry/react', () => ({ captureMessage: vi.fn() }));
 
 class OnlySignedDevicesIsolationMode {}
 
 vi.mock('matrix-js-sdk/lib/crypto-api', () => ({
   OnlySignedDevicesIsolationMode,
-  decodeRecoveryKey: (key: string) => new TextEncoder().encode(key),
+  decodeRecoveryKey: (key: string) => {
+    if (key.startsWith('bad')) throw new Error('Incorrect parity');
+    return new TextEncoder().encode(key);
+  },
+  encodeRecoveryKey: (key: Uint8Array) =>
+    `canonical:${new TextDecoder().decode(key)}`,
 }));
 
 const leaseMock = vi.mocked(matrixCryptoLease);
@@ -102,6 +112,8 @@ const makeClient = (
         { algorithm: 'aes', iv: 'iv', mac: 'mac' },
       ]),
       checkKey: resolved(() => options.keyOpens ?? true),
+      // Where the dehydration key is stored: under the current key by default.
+      isStored: resolved(() => ({ K1: {} })),
     },
   };
   return client as any;
@@ -307,6 +319,174 @@ describe('chat encryption', () => {
       ),
     ).toBe('locked');
     expect(client.secretStorage.checkKey).not.toHaveBeenCalled();
+  });
+
+  it('escrows a key from another client once it opens secret storage, then unlocks', async () => {
+    const client = makeClient({ identity: true });
+    escrowMock.mockImplementation(() => {
+      client.calls.push('escrow');
+      return Promise.resolve({} as any);
+    });
+    const holder = new SecretStorageKeyHolder();
+
+    await importRecoveryKey(client, holder, ' EsSz ykH7\nLCZx 7Cae ');
+
+    expect(client.secretStorage.checkKey).toHaveBeenCalledWith(
+      new TextEncoder().encode('EsSzykH7LCZx7Cae'),
+      expect.anything(),
+    );
+    expect(leaseMock).toHaveBeenCalledWith({ body: { kind: 'import' } });
+    expect(escrowMock).toHaveBeenCalledWith({
+      body: { lease: 'lease-1', recovery_key: 'canonical:EsSzykH7LCZx7Cae' },
+    });
+    expect(releaseMock).toHaveBeenCalledWith({ body: { lease: 'lease-1' } });
+    // Escrowed first, then the session signs itself in with the key; nothing
+    // is replaced on the homeserver.
+    expect(client.calls).toEqual([
+      'escrow',
+      'bootstrapCrossSigning',
+      'crossSignDevice',
+      'loadBackupKey',
+      'enableBackup',
+      'dehydration:{"rehydrate":true}',
+    ]);
+    expect(
+      await holder.callbacks.getSecretStorageKey({ keys: { K1: {} } }),
+    ).toEqual(['K1', new TextEncoder().encode('EsSzykH7LCZx7Cae')]);
+  });
+
+  it('sends a key that does not open secret storage nowhere', async () => {
+    const client = makeClient({ identity: true, keyOpens: false });
+
+    await expect(
+      importRecoveryKey(client, new SecretStorageKeyHolder(), KEY),
+    ).rejects.toBeInstanceOf(WrongRecoveryKey);
+    expect(leaseMock).not.toHaveBeenCalled();
+    expect(escrowMock).not.toHaveBeenCalled();
+  });
+
+  it('refuses text that is not a recovery key before anything else', async () => {
+    const client = makeClient({ identity: true });
+
+    await expect(
+      importRecoveryKey(client, new SecretStorageKeyHolder(), 'bad key'),
+    ).rejects.toBeInstanceOf(WrongRecoveryKey);
+    expect(client.secretStorage.checkKey).not.toHaveBeenCalled();
+    expect(leaseMock).not.toHaveBeenCalled();
+  });
+
+  it('does not unlock with a key Waldur refused, and releases the lease', async () => {
+    const client = makeClient({ identity: true });
+    escrowMock.mockRejectedValue({
+      state: 'wrong_key',
+      response: { status: 409, headers: new Headers() },
+    });
+
+    const error = await importRecoveryKey(
+      client,
+      new SecretStorageKeyHolder(),
+      KEY,
+    ).catch((e) => e);
+
+    expect(error).toBeInstanceOf(CryptoConflict);
+    expect(error.state).toBe('wrong_key');
+    expect(releaseMock).toHaveBeenCalledWith({ body: { lease: 'lease-1' } });
+    expect(client.crypto.bootstrapCrossSigning).not.toHaveBeenCalled();
+  });
+
+  it('starts dehydration afresh when another app left its key under an old secret-storage key', async () => {
+    const client = makeClient({ identity: true });
+    client.secretStorage.isStored = resolved(() => ({ OLD: {} }));
+
+    await importRecoveryKey(client, new SecretStorageKeyHolder(), KEY);
+
+    expect(client.crypto.startDehydration).toHaveBeenCalledWith({
+      createNewKey: true,
+      rehydrate: false,
+    });
+  });
+
+  it("starts dehydration afresh after Element's identity reset blanked the old key", async () => {
+    // Element's reset leaves the dehydration key encrypted under the old key
+    // but empties that key's description, so isStored finds nothing usable.
+    const client = makeClient({ identity: true });
+    client.secretStorage.isStored = resolved(() => null);
+
+    await importRecoveryKey(client, new SecretStorageKeyHolder(), KEY);
+
+    expect(client.crypto.startDehydration).toHaveBeenCalledWith({
+      createNewKey: true,
+      rehydrate: false,
+    });
+  });
+
+  it('rehydrates with a dehydration key stored under the current key', async () => {
+    const client = makeClient({ identity: true });
+
+    await setUpEncryption(
+      client,
+      { recovery_key: KEY },
+      new SecretStorageKeyHolder(),
+    );
+
+    expect(client.crypto.startDehydration).toHaveBeenCalledWith({
+      rehydrate: true,
+    });
+  });
+
+  it('unlocks even when dehydration fails', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const failing = () => {
+      const client = makeClient({ identity: true });
+      client.crypto.startDehydration = vi.fn(() =>
+        Promise.reject(
+          new Error('getSecretStorageKey callback returned falsey'),
+        ),
+      );
+      return client;
+    };
+
+    // An import, once the key is escrowed...
+    await expect(
+      importRecoveryKey(failing(), new SecretStorageKeyHolder(), KEY),
+    ).resolves.toBeUndefined();
+    expect(escrowMock).toHaveBeenCalled();
+    // ...and the next session, unlocking with the escrowed key.
+    expect(
+      await setUpEncryption(
+        failing(),
+        { recovery_key: KEY },
+        new SecretStorageKeyHolder(),
+      ),
+    ).toBe('ready');
+    expect(warn).toHaveBeenCalled();
+    // Reported, without the error's own text.
+    expect(captureMessage).toHaveBeenCalledWith(
+      'Matrix chat could not start device dehydration',
+      expect.objectContaining({ extra: { error: 'Error' } }),
+    );
+    expect(JSON.stringify(vi.mocked(captureMessage).mock.calls)).not.toContain(
+      'falsey',
+    );
+    warn.mockRestore();
+  });
+
+  it('reports a key Waldur already holds as not locked', async () => {
+    leaseMock.mockRejectedValue({
+      state: 'not_locked',
+      detail: 'Encryption can be unlocked; no reset.',
+      status: 409,
+      response: { status: 409, headers: new Headers() },
+    });
+
+    const error = await importRecoveryKey(
+      makeClient({ identity: true }),
+      new SecretStorageKeyHolder(),
+      KEY,
+    ).catch((e) => e);
+
+    expect(error).toBeInstanceOf(CryptoConflict);
+    expect(error.state).toBe('not_locked');
   });
 
   it('answers only for the key id it was bound to', async () => {

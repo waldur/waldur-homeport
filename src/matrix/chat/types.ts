@@ -105,4 +105,10 @@ export interface MatrixChatContextValue {
    * explicit request: the keys only the old backup held are lost.
    */
   resetCryptoIdentity: () => Promise<void>;
+  /**
+   * Unlock an identity Waldur can't unlock with the recovery key the user
+   * holds from another client, and escrow it. Rejects with WrongRecoveryKey
+   * when the key does not open the user's secret storage.
+   */
+  importCryptoRecoveryKey: (recoveryKey: string) => Promise<void>;
 }
