@@ -135,6 +135,7 @@ describe('MatrixChatHeader', () => {
       MatrixCredentialsDialog,
       {
         resolve: { roomAlias: '#llm:server' },
+        size: 'lg',
       },
     );
   });
