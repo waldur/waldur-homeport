@@ -26,6 +26,10 @@ vi.mock('./useRoomMemberNames', () => ({
 }));
 
 import { MatrixComposerDraftProvider } from './MatrixComposerDraftContext';
+import {
+  MatrixMessageActions,
+  MatrixMessageActionsProvider,
+} from './MatrixMessageActionsContext';
 import { MatrixMessageInput } from './MatrixMessageInput';
 
 const wrapper: FC<PropsWithChildren> = ({ children }) =>
@@ -138,5 +142,118 @@ describe('PendingAttachments object-URL lifecycle', () => {
 
     createSpy.mockRestore();
     revokeSpy.mockRestore();
+  });
+});
+
+describe('MatrixMessageInput replies', () => {
+  const parent = {
+    eventId: '$parent',
+    sender: '@alice:s',
+    senderDisplayName: 'Alice',
+    body: 'the question',
+    timestamp: 1,
+    type: 'm.text',
+  };
+  const actions = (
+    overrides: Partial<MatrixMessageActions> = {},
+  ): MatrixMessageActions => ({
+    replyTo: parent,
+    startReply: vi.fn(),
+    cancelReply: vi.fn(),
+    editingEventId: null,
+    startEdit: vi.fn(),
+    cancelEdit: vi.fn(),
+    editLastOwnMessage: vi.fn(() => true),
+    saveEdit: vi.fn(),
+    deleteMessage: vi.fn(),
+    canEdit: () => true,
+    canDelete: () => true,
+    ...overrides,
+  });
+  const renderInput = (
+    value: MatrixMessageActions,
+    { uploadFile = vi.fn(), pendingFiles = [] as File[] } = {},
+  ) =>
+    render(
+      <MatrixMessageActionsProvider value={value}>
+        <MatrixMessageInput
+          uploadFile={uploadFile}
+          uploading={false}
+          pendingFiles={pendingFiles}
+          addFiles={vi.fn()}
+          removePending={vi.fn()}
+          setPending={vi.fn()}
+          clearPending={vi.fn()}
+        />
+      </MatrixMessageActionsProvider>,
+      { wrapper },
+    );
+
+  it('sends the text as a reply to the quoted message', async () => {
+    const user = userEvent.setup();
+    const value = actions();
+    renderInput(value);
+
+    expect(screen.getByText('Replying to Alice')).toBeInTheDocument();
+    expect(screen.getByText('the question')).toBeInTheDocument();
+    const textarea = screen.getByRole('textbox');
+    expect(textarea).toHaveFocus();
+    await user.type(textarea, 'the answer{Enter}');
+
+    await waitFor(() =>
+      expect(h.client.sendMessage).toHaveBeenCalledWith('!room:s', {
+        msgtype: 'm.text',
+        body: 'the answer',
+        'm.mentions': { user_ids: ['@alice:s'] },
+        'm.relates_to': { 'm.in_reply_to': { event_id: '$parent' } },
+      }),
+    );
+    expect(value.cancelReply).toHaveBeenCalled();
+    expect(h.client.sendTextMessage).not.toHaveBeenCalled();
+  });
+
+  it('sends files without text as a reply through the first file', async () => {
+    const user = userEvent.setup();
+    const value = actions();
+    const uploadFile = vi.fn().mockResolvedValue(true);
+    const files = [
+      new File(['a'], 'a.txt', { type: 'text/plain' }),
+      new File(['b'], 'b.txt', { type: 'text/plain' }),
+    ];
+    renderInput(value, { uploadFile, pendingFiles: files });
+    await user.click(screen.getByRole('button', { name: 'Send' }));
+
+    await waitFor(() => expect(uploadFile).toHaveBeenCalledTimes(2));
+    expect(uploadFile).toHaveBeenNthCalledWith(1, files[0], undefined, {
+      'm.mentions': { user_ids: ['@alice:s'] },
+      'm.relates_to': { 'm.in_reply_to': { event_id: '$parent' } },
+    });
+    expect(uploadFile).toHaveBeenNthCalledWith(
+      2,
+      files[1],
+      undefined,
+      undefined,
+    );
+    expect(value.cancelReply).toHaveBeenCalled();
+  });
+
+  it('cancels the reply with Escape', async () => {
+    const user = userEvent.setup();
+    const value = actions();
+    renderInput(value);
+    await user.type(screen.getByRole('textbox'), '{Escape}');
+    expect(value.cancelReply).toHaveBeenCalled();
+  });
+
+  it('edits the last own message with Up in an empty composer', async () => {
+    const user = userEvent.setup();
+    const value = actions({ replyTo: null });
+    renderInput(value);
+    const textarea = screen.getByRole('textbox');
+    await user.type(textarea, 'x{ArrowUp}');
+    expect(value.editLastOwnMessage).not.toHaveBeenCalled();
+    await user.clear(textarea);
+    await user.type(textarea, '{ArrowUp}');
+    expect(value.editLastOwnMessage).toHaveBeenCalled();
   });
 });

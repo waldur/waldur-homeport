@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
 } from 'react';
 
@@ -66,6 +67,11 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
   onLoadOlder,
   onReadLatest,
 }) => {
+  // Replies quote their parent from the loaded messages.
+  const messagesById = useMemo(
+    () => new Map(messages.map((m) => [m.eventId, m])),
+    [messages],
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const wasAtBottomRef = useRef(true);
@@ -302,6 +308,11 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
                 continuation={isContinuation(messages, i)}
                 memberNames={memberNames}
                 currentUserId={userId}
+                replyParent={
+                  msg.replyToEventId
+                    ? messagesById.get(msg.replyToEventId)
+                    : undefined
+                }
               />
             </Fragment>
           ))}

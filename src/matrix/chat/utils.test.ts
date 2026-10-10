@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { ENV } from '@/core/config';
 
+import { REDACTED_MESSAGE_TYPE } from './messageRelations';
 import { MatrixChatMessage } from './types';
 import {
   aggregateReactions,
@@ -51,6 +52,13 @@ describe('mapEventToMessage', () => {
     expect(mapEventToMessage(spoof)?.type).toBe('m.text');
   });
 
+  it('does not let a sender claim the deleted-message style', () => {
+    const spoof = makeEvent({ msgtype: REDACTED_MESSAGE_TYPE, body: 'x' });
+    const message = mapEventToMessage(spoof);
+    expect(message?.type).toBe('m.text');
+    expect(message?.redacted).toBeUndefined();
+  });
+
   it('waits for an encrypted event to be decrypted', () => {
     expect(mapEventToMessage(encrypted(false))).toBeNull();
   });
@@ -69,20 +77,35 @@ describe('mapEventToMessage', () => {
 
     expect(mapEventToMessage(event(false), room)?.unencrypted).toBe(true);
     expect(mapEventToMessage(event(true), room)?.unencrypted).toBeUndefined();
-    // An edit sent in clear replaces the shown text, so it is flagged too.
+    const edit = (status: string | null = null) =>
+      ({
+        ...makeEvent({
+          msgtype: 'm.text',
+          body: '* hello',
+          'm.new_content': { msgtype: 'm.text', body: 'hello' },
+          'm.relates_to': { rel_type: 'm.replace', event_id: '$evt1' },
+        }),
+        getId: () => '$edit',
+        isEncrypted: () => false,
+        status,
+      }) as any;
+    // An edit in clear of an encrypted message is not applied at all: the
+    // homeserver could have written it.
     const edited = {
       ...event(true),
-      replacingEvent: () => ({ isEncrypted: () => false }),
+      replacingEvent: () => edit(),
     } as any;
-    expect(mapEventToMessage(edited, room)?.unencrypted).toBe(true);
+    expect(mapEventToMessage(edited, room)?.body).toBe('hi');
+    expect(mapEventToMessage(edited, room)?.edited).toBeUndefined();
+    expect(mapEventToMessage(edited, room)?.unencrypted).toBeUndefined();
     // The user's own edit is encrypted only as it is sent.
     const editing = {
       ...event(true),
-      replacingEvent: () => ({
-        isEncrypted: () => false,
-        status: 'encrypting',
-      }),
+      replacingEvent: () => edit('encrypting'),
     } as any;
+    expect(mapEventToMessage(editing, room)).toEqual(
+      expect.objectContaining({ body: 'hello', edited: true }),
+    );
     expect(mapEventToMessage(editing, room)?.unencrypted).toBeUndefined();
     // A local echo is not encrypted until it is sent.
     expect(
@@ -474,5 +497,111 @@ describe('aggregateReactionsForTarget', () => {
       '👍': ['@a:s', '@b:s'],
       '🎉': ['@a:s'],
     });
+  });
+});
+
+describe('mapEventToMessage edits, replies and deletions', () => {
+  const event = (
+    id: string,
+    content: Record<string, any>,
+    extra: Record<string, any> = {},
+  ) =>
+    ({
+      getType: () => 'm.room.message',
+      getContent: () => content,
+      getSender: () => '@bob:s',
+      getId: () => id,
+      getTs: () => 1000,
+      isRedacted: () => false,
+      ...extra,
+    }) as any;
+  const edit = (body: string, sender = '@bob:s', ts = 2000) =>
+    event(
+      `$edit-${body}`,
+      {
+        msgtype: 'm.text',
+        body: `* ${body}`,
+        'm.new_content': { msgtype: 'm.text', body },
+        'm.relates_to': { rel_type: 'm.replace', event_id: '$orig' },
+      },
+      { getSender: () => sender, getTs: () => ts },
+    );
+  const original = event('$orig', { msgtype: 'm.text', body: 'typo' });
+
+  it('gives an edit no row of its own', () => {
+    expect(mapEventToMessage(edit('fixed'))).toBeNull();
+  });
+
+  it('gives an undecryptable edit no row either', () => {
+    const failed = {
+      ...edit('fixed'),
+      isDecryptionFailure: () => true,
+    } as any;
+    expect(mapEventToMessage(failed)).toBeNull();
+  });
+
+  it('shows the latest edit and marks the message edited', () => {
+    const index = new Map([
+      ['$orig', [edit('first'), edit('second', undefined, 3000)]],
+    ]);
+    expect(mapEventToMessage(original, undefined, index)).toEqual(
+      expect.objectContaining({ body: 'second', edited: true }),
+    );
+  });
+
+  it('searches the room for edits when given no index', () => {
+    const room = {
+      getMember: () => null,
+      getLiveTimeline: () => ({ getEvents: () => [original, edit('fixed')] }),
+      getPendingEvents: () => [],
+    } as any;
+    expect(mapEventToMessage(original, room)?.body).toBe('fixed');
+  });
+
+  it("ignores another sender's edit, even one the SDK applied", () => {
+    const forged = edit('forged', '@mallory:s');
+    const replaced = {
+      ...original,
+      // matrix-js-sdk's own aggregation, which the row must not trust.
+      getContent: () => forged.getContent()['m.new_content'],
+      getOriginalContent: () => ({ msgtype: 'm.text', body: 'typo' }),
+      replacingEvent: () => forged,
+    } as any;
+    const message = mapEventToMessage(
+      replaced,
+      undefined,
+      new Map([['$orig', [forged]]]),
+    );
+    expect(message?.body).toBe('typo');
+    expect(message?.edited).toBeUndefined();
+  });
+
+  it('keeps a deleted message as a placeholder without its content', () => {
+    const deleted = event('$orig', {}, { isRedacted: () => true });
+    expect(mapEventToMessage(deleted)).toEqual(
+      expect.objectContaining({
+        eventId: '$orig',
+        body: '',
+        redacted: true,
+        type: REDACTED_MESSAGE_TYPE,
+      }),
+    );
+    const deletedEncrypted = event(
+      '$enc',
+      {},
+      { isRedacted: () => true, getType: () => 'm.room.encrypted' },
+    );
+    expect(mapEventToMessage(deletedEncrypted)?.redacted).toBe(true);
+  });
+
+  it('reads the replied-to message and drops the quote fallback', () => {
+    const reply = event('$reply', {
+      msgtype: 'm.text',
+      body: '> <@alice:s> question\n\nanswer',
+      'm.relates_to': { 'm.in_reply_to': { event_id: '$q' } },
+    });
+    expect(mapEventToMessage(reply)).toEqual(
+      expect.objectContaining({ body: 'answer', replyToEventId: '$q' }),
+    );
   });
 });

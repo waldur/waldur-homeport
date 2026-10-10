@@ -56,6 +56,12 @@ export interface MatrixChatMessage {
    * encryption (or the homeserver injected it), so it is shown as such.
    */
   unencrypted?: boolean;
+  /** The message this one replies to (`m.in_reply_to`). */
+  replyToEventId?: string;
+  /** Shown as replaced by a valid edit from its sender. */
+  edited?: boolean;
+  /** Deleted (redacted): shown as a placeholder, without its content. */
+  redacted?: boolean;
 }
 
 export type MatrixConnectionState =

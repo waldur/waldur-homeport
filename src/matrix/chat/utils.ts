@@ -6,20 +6,55 @@ import { translate } from '@/i18n';
 import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
 import { parseEncryptedFile } from './attachmentCrypto';
+import {
+  getReplacedEventId,
+  getReplyToEventId,
+  getDisplayedContent,
+  REDACTED_MESSAGE_TYPE,
+  stripReplyFallback,
+} from './messageRelations';
 import { MatrixChatMessage, ReactionAggregate } from './types';
 
 /** Message type of the row standing in for an event that can't be decrypted. */
 export const UNDECRYPTABLE_MESSAGE_TYPE = 'waldur.undecryptable';
 
-/** Whether an edit was delivered in clear (one still being sent can't be judged). */
-const isClearEdit = (edit: MatrixEvent | null | undefined) =>
-  Boolean(edit && !edit.status && !edit.isEncrypted());
+// Types Waldur gives its own stand-in rows; a sender can't claim them.
+const INTERNAL_MESSAGE_TYPES = new Set([
+  UNDECRYPTABLE_MESSAGE_TYPE,
+  REDACTED_MESSAGE_TYPE,
+]);
 
+/**
+ * Map a timeline event to a message row, or null when it has none.
+ *
+ * `editsIndex` holds the loaded edit events by the id of the message they
+ * edit (see `indexEdits`); without it the room's events are searched, which
+ * is fine for one event but not for a whole timeline.
+ */
 export function mapEventToMessage(
   event: MatrixEvent,
   room?: Room,
+  editsIndex?: Map<string, MatrixEvent[]>,
 ): MatrixChatMessage | null {
+  // An edit changes the message it replaces and has no row of its own, even
+  // when it can't be decrypted.
+  if (getReplacedEventId(event)) return null;
   const type = event.getType();
+  if (event.isRedacted?.()) {
+    // Other redacted events (reactions, state) have no row to keep.
+    if (type !== 'm.room.message' && type !== 'm.room.encrypted') return null;
+    const senderId = event.getSender();
+    return {
+      eventId: event.getId(),
+      sender: senderId,
+      senderDisplayName:
+        room?.getMember(senderId)?.name || formatDisplayName(senderId),
+      body: '',
+      timestamp: event.getTs(),
+      type: REDACTED_MESSAGE_TYPE,
+      redacted: true,
+    };
+  }
   // Checked before the type: once decryption fails, matrix-js-sdk reports the
   // event as an m.room.message (msgtype m.bad.encrypted) whose body is its own
   // untranslated error text. Such an event keeps a row with a notice, so it
@@ -40,7 +75,8 @@ export function mapEventToMessage(
   // Event.decrypted.
   if (type !== 'm.room.message') return null;
 
-  const content = event.getContent();
+  const { content, edit } = getDisplayedContent(event, room, editsIndex);
+  const replyToEventId = getReplyToEventId(event);
   const isMediaMsg =
     content.msgtype === 'm.image' ||
     content.msgtype === 'm.video' ||
@@ -49,7 +85,8 @@ export function mapEventToMessage(
   // Drop only bodyless *text* events. Media/voice notes carry their payload in
   // url/info/MSC fields and are valid with an empty body (some clients omit it).
   // Event content is whatever the sender wrote, not necessarily strings.
-  const body = typeof content.body === 'string' ? content.body : '';
+  let body = typeof content.body === 'string' ? content.body : '';
+  if (replyToEventId) body = stripReplyFallback(body);
   if (!body && !isMediaMsg) return null;
 
   const senderId = event.getSender();
@@ -92,10 +129,11 @@ export function mapEventToMessage(
     senderDisplayName: member?.name || formatDisplayName(senderId),
     body,
     timestamp: event.getTs(),
-    // The undecryptable type is Waldur's own; a sender who claims it gets a
+    // The stand-in types are Waldur's own; a sender who claims one gets a
     // plain text message, not the notice style.
     type:
-      content.msgtype && content.msgtype !== UNDECRYPTABLE_MESSAGE_TYPE
+      typeof content.msgtype === 'string' &&
+      !INTERNAL_MESSAGE_TYPES.has(content.msgtype)
         ? content.msgtype
         : 'm.text',
     url: typeof content.url === 'string' ? content.url : undefined,
@@ -111,9 +149,12 @@ export function mapEventToMessage(
     unencrypted:
       (Boolean(room?.hasEncryptionStateEvent?.()) &&
         !event.status &&
-        // An edit replaces the shown text, so it counts as much as the original.
-        (!event.isEncrypted() || isClearEdit(event.replacingEvent?.()))) ||
+        // An edit in clear of an encrypted message is never applied (see
+        // isValidEdit), so only the original is judged.
+        !event.isEncrypted()) ||
       undefined,
+    replyToEventId,
+    edited: edit ? true : undefined,
   };
 }
 

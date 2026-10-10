@@ -227,6 +227,11 @@
       "feature_area": "personal-access-tokens"
     }
   },
+  "(edited)": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "(empty message)": {
     "context": {
       "feature_area": "support"
@@ -731,6 +736,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "languages"
+    }
+  },
+  "A message cannot be empty. Delete it instead.": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM.": {
@@ -7015,7 +7025,8 @@
   },
   "Audio": {
     "context": {
-      "feature_area": "livekit"
+      "feature_area": "livekit",
+      "action_type": "read"
     }
   },
   "Audio & video settings": {
@@ -9317,6 +9328,11 @@
   "Cancel organization creation": {
     "context": {
       "feature_area": "organization-create"
+    }
+  },
+  "Cancel reply": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Cancel request": {
@@ -12747,6 +12763,28 @@
       "feature_area": "create"
     }
   },
+  "Could not delete the message ({detail}).": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "detail": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
+  "Could not edit the message ({detail}).": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "detail": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
   "Could not finish setting up the call. Anything already created is left behind as a draft call.": {
     "context": {
       "primary_ui_type": "error_message",
@@ -15765,6 +15803,11 @@
       "feature_area": "offering-merges"
     }
   },
+  "Delete message?": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Delete offering": {
     "context": {
       "primary_ui_type": "label",
@@ -17906,6 +17949,11 @@
   "Edit member": {
     "context": {
       "feature_area": "openstack-lbaas"
+    }
+  },
+  "Edit message": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Edit metadata": {
@@ -21597,7 +21645,8 @@
   "File": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "onboarding-setup"
+      "feature_area": "onboarding-setup",
+      "action_type": "read"
     }
   },
   "File Details": {
@@ -23054,6 +23103,16 @@
   "Go to the Resources tab and find the resource with an Arrow backend ID": {
     "context": {
       "feature_area": "settings"
+    }
+  },
+  "Go to the message from {sender}": {
+    "context": {
+      "variables": {
+        "sender": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "chat"
     }
   },
   "Goal for {metric} in {project}": {
@@ -24753,7 +24812,8 @@
   "Image": {
     "context": {
       "primary_ui_type": "title",
-      "feature_area": "images"
+      "feature_area": "images",
+      "action_type": "read"
     }
   },
   "Image has been added.": {
@@ -28490,6 +28550,11 @@
       "feature_area": "views"
     }
   },
+  "Loading original message...": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Loading per-project split…": {
     "context": {
       "feature_area": "views"
@@ -30561,9 +30626,20 @@
       "feature_area": "rabbitmq"
     }
   },
+  "Message actions": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Message counts": {
     "context": {
       "feature_area": "pubsub"
+    }
+  },
+  "Message deleted": {
+    "context": {
+      "feature_area": "chat",
+      "action_type": "read"
     }
   },
   "Message input": {
@@ -31363,6 +31439,11 @@
   "More information": {
     "context": {
       "feature_area": "access"
+    }
+  },
+  "More message actions": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "More tabs": {
@@ -37598,6 +37679,11 @@
   "Original Price": {
     "context": {
       "feature_area": "billing"
+    }
+  },
+  "Original message is unavailable": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "Orphaned resources": {
@@ -43960,11 +44046,6 @@
       "feature_area": "details"
     }
   },
-  "React to message": {
-    "context": {
-      "feature_area": "chat"
-    }
-  },
   "React with {label}": {
     "context": {
       "variables": {
@@ -45595,9 +45676,29 @@
       "feature_area": "details"
     }
   },
+  "Reply": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "Reply-to address": {
     "context": {
       "feature_area": "email"
+    }
+  },
+  "Replying to yourself": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
+  "Replying to {name}": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "feature_area": "chat"
     }
   },
   "Report": {
@@ -56828,8 +56929,30 @@
       "feature_area": "email"
     }
   },
+  "The message is deleted for everyone in this conversation. This cannot be undone.": {
+    "context": {
+      "feature_area": "chat"
+    }
+  },
   "The message to show when OIDC account creation is blocked for uninvited users. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
   "The message to show when an existing account is refused at login because its email no longer matches OIDC_ALLOWED_USER_EMAIL_PATTERNS. Kept separate from the account creation message so a long-standing user is not told their account cannot be created. URLs are rendered as clickable links; include the scheme (e.g. https://example.com) so bare URLs are linked.": {},
+  "The message was deleted, but its earlier versions could not all be found. Some may remain on the server.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "feature_area": "chat"
+    }
+  },
+  "The message was deleted, but {count} of its earlier versions could not be.": {
+    "context": {
+      "primary_ui_type": "error_message",
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "feature_area": "chat"
+    }
+  },
   "The message was not sent": {
     "context": {
       "feature_area": "email"
@@ -68315,7 +68438,8 @@
   },
   "Video": {
     "context": {
-      "feature_area": "livekit"
+      "feature_area": "livekit",
+      "action_type": "read"
     }
   },
   "Video Background": {
@@ -68592,7 +68716,8 @@
   },
   "Voice message": {
     "context": {
-      "feature_area": "chat"
+      "feature_area": "chat",
+      "action_type": "read"
     }
   },
   "Voice messages are not supported in this browser.": {
@@ -70165,6 +70290,11 @@
         }
       },
       "feature_area": "service-accounts"
+    }
+  },
+  "You are deleting another member’s message. It is deleted for everyone in this conversation. This cannot be undone.": {
+    "context": {
+      "feature_area": "chat"
     }
   },
   "You are going to cancel invitation by {name}. This action cannot be undone.": {

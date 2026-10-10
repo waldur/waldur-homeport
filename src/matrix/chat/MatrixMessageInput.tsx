@@ -23,12 +23,25 @@ import { Image } from '@/core/Image';
 import { translate } from '@/i18n';
 
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
+import { useMatrixMessageActions } from './MatrixMessageActionsContext';
+import { MatrixComposerReplyBar } from './MatrixReplyQuote';
+import {
+  buildReplyContent,
+  buildReplyFields,
+  buildTextContent,
+  MentionCandidate,
+} from './messageContent';
 import { useMatrixClient } from './useMatrixClient';
+import { useMentionCandidates } from './useMentionCandidates';
 import { useRoomMemberNames } from './useRoomMemberNames';
-import { isBotUser, resolveMemberName } from './utils';
+import { getSenderName } from './utils';
 
 interface MatrixMessageInputProps {
-  uploadFile: (file: File) => Promise<boolean>;
+  uploadFile: (
+    file: File,
+    buildContent?: undefined,
+    extraContent?: Record<string, any>,
+  ) => Promise<boolean>;
   uploading: boolean;
   pendingFiles: File[];
   addFiles: (files: File[]) => void;
@@ -59,11 +72,6 @@ interface MatrixMessageInputProps {
   onCancelRecording?: () => void;
   /** Stop recording, then upload and send the clip. */
   onSendVoice?: () => void;
-}
-
-interface MentionCandidate {
-  userId: string;
-  displayName: string;
 }
 
 /** mm:ss for a millisecond duration; clamps negatives to 0. */
@@ -181,26 +189,14 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Get room members for mention autocomplete
-  const members: MentionCandidate[] = useMemo(() => {
-    if (!client || !activeRoomId) return [];
-    const room = client.getRoom(activeRoomId);
-    if (!room) return [];
-    return (
-      room
-        .getJoinedMembers()
-        .map((m: any) => ({
-          userId: m.userId as string,
-          displayName: resolveMemberName(m.userId, memberNames, m.name),
-        }))
-        // Exclude self and the appservice bot — the bot isn't a mentionable user.
-        .filter(
-          (m: MentionCandidate) => m.userId !== userId && !isBotUser(m.userId),
-        )
-        .sort((a: MentionCandidate, b: MentionCandidate) =>
-          a.displayName.localeCompare(b.displayName),
-        )
-    );
-  }, [client, activeRoomId, userId, memberNames]);
+  const members = useMentionCandidates();
+  const { replyTo, cancelReply, editLastOwnMessage } =
+    useMatrixMessageActions();
+
+  // Starting a reply puts the cursor in the composer to write it.
+  useEffect(() => {
+    if (replyTo) textareaRef.current?.focus();
+  }, [replyTo]);
 
   const filteredMentions = useMemo(() => {
     if (!mentionQuery) return [];
@@ -319,10 +315,21 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
         // Post staged attachments first. Keep any that fail staged (and keep
         // the text) so a partial failure is retryable instead of silently
         // dropping files; uploadFile already surfaced the error toast.
+        // An open reply goes with the text, or with the first file when
+        // there is no text.
+        const reply = replyTo
+          ? buildReplyFields(replyTo.eventId, replyTo.sender, userId)
+          : undefined;
         if (files.length > 0) {
           const failed: File[] = [];
-          for (const file of files) {
-            const ok = await uploadFile(file);
+          for (const [i, file] of files.entries()) {
+            const replyHere = reply && !text && i === 0;
+            const ok = await uploadFile(
+              file,
+              undefined,
+              replyHere ? reply : undefined,
+            );
+            if (ok && replyHere) cancelReply();
             if (!ok) failed.push(file);
           }
           if (failed.length > 0) {
@@ -333,51 +340,21 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
         }
         if (!text) return;
 
-        // Build mention pills for Matrix spec (org.matrix.msc3952).
-        // Escape first so message text can't inject HTML, then sort members
-        // longest-name-first so "@Alice Smith" is matched before "@Alice" and
-        // isn't corrupted by the shorter prefix.
-        const escapeHtml = (s: string) =>
-          s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        const escapeRegExp = (s: string) =>
-          s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-        const mentionedUserIds: string[] = [];
-        let htmlBody = escapeHtml(text);
-
-        const sortedMembers = [...members].sort(
-          (a, b) => b.displayName.length - a.displayName.length,
-        );
-        for (const member of sortedMembers) {
-          const mentionText = `@${member.displayName}`;
-          if (text.includes(mentionText)) {
-            const pattern = new RegExp(
-              escapeRegExp(escapeHtml(mentionText)),
-              'g',
-            );
-            const replaced = htmlBody.replace(
-              pattern,
-              `<a href="https://matrix.to/#/${encodeURIComponent(member.userId)}">${escapeHtml(member.displayName)}</a>`,
-            );
-            // Only register the user_id mention if the replacement actually
-            // fired. Names with characters that escape away (e.g. raw "<")
-            // would otherwise be listed in m.mentions without appearing in
-            // the body — receivers would silently ping the wrong people.
-            if (replaced !== htmlBody) {
-              mentionedUserIds.push(member.userId);
-              htmlBody = replaced;
-            }
-          }
-        }
-
-        if (mentionedUserIds.length > 0) {
-          await client.sendMessage(activeRoomId, {
-            msgtype: 'm.text',
-            body: text,
-            format: 'org.matrix.custom.html',
-            formatted_body: htmlBody,
-            'm.mentions': { user_ids: mentionedUserIds },
-          } as any);
+        // Mention pills for the Matrix spec (org.matrix.msc3952).
+        const content = buildTextContent(text, members);
+        if (replyTo) {
+          await client.sendMessage(
+            activeRoomId,
+            buildReplyContent(
+              content,
+              replyTo.eventId,
+              replyTo.sender,
+              userId,
+            ) as any,
+          );
+          cancelReply();
+        } else if (content['m.mentions']) {
+          await client.sendMessage(activeRoomId, content as any);
         } else {
           await client.sendTextMessage(activeRoomId, text);
         }
@@ -401,6 +378,9 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       setPending,
       clearPending,
       setMessage,
+      replyTo,
+      cancelReply,
+      userId,
     ],
   );
 
@@ -456,9 +436,36 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         sendMessage();
+        return;
+      }
+      if (e.key === 'Escape' && replyTo) {
+        e.preventDefault();
+        cancelReply();
+        return;
+      }
+      // Up in an empty composer edits the user's last message, as in other
+      // chat clients.
+      if (
+        e.key === 'ArrowUp' &&
+        !message &&
+        pendingFiles.length === 0 &&
+        editLastOwnMessage()
+      ) {
+        e.preventDefault();
       }
     },
-    [sendMessage, mentionQuery, filteredMentions, mentionIndex, acceptMention],
+    [
+      sendMessage,
+      mentionQuery,
+      filteredMentions,
+      mentionIndex,
+      acceptMention,
+      replyTo,
+      cancelReply,
+      message,
+      pendingFiles.length,
+      editLastOwnMessage,
+    ],
   );
 
   // Update mention state on cursor movement (click, arrow keys in text)
@@ -513,6 +520,17 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
           accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.zip,.tar.gz"
           onChange={handleFileSelect}
         />
+        {!recording && replyTo && (
+          <MatrixComposerReplyBar
+            message={replyTo}
+            senderName={
+              replyTo.sender === userId
+                ? null
+                : getSenderName(replyTo, memberNames)
+            }
+            onCancel={cancelReply}
+          />
+        )}
         {!recording && (
           <PendingAttachments files={pendingFiles} onRemove={removePending} />
         )}

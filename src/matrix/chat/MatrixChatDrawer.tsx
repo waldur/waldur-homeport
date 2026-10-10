@@ -25,10 +25,15 @@ import { MatrixCallDockSlot } from './call/MatrixCallDockSlot';
 import { MatrixCallPortalContext } from './call/MatrixCallPortalContext';
 import { useMatrixCall } from './call/useMatrixCall';
 import { MatrixChatHeader } from './MatrixChatHeader';
+import {
+  MatrixMessageActionsProvider,
+  useMatrixMessageActionsValue,
+} from './MatrixMessageActionsContext';
 import { MatrixMessageInput } from './MatrixMessageInput';
 import { MatrixMessageList } from './MatrixMessageList';
 import { MatrixSyncStatus } from './MatrixSyncStatus';
 import { MatrixTypingIndicator } from './MatrixTypingIndicator';
+import { buildReplyFields } from './messageContent';
 import { useAllMatrixRooms } from './useAllMatrixRooms';
 import { useMatrixClient } from './useMatrixClient';
 import { useMatrixFileUpload } from './useMatrixFileUpload';
@@ -80,29 +85,6 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     recorder.start().catch(() => {});
   }, [recorder]);
 
-  const sendVoiceMessage = useCallback(async () => {
-    setSendingVoice(true);
-    try {
-      const result = await recorder.stop();
-      if (!result) return;
-      const { blob, durationMs } = result;
-      const { waveform } = await generateWaveform(blob);
-      await uploadFile(
-        new File([blob], 'voice-message', { type: blob.type }),
-        (media) =>
-          buildVoiceContent({
-            media,
-            mimetype: blob.type,
-            size: blob.size,
-            durationMs,
-            waveform,
-          }),
-      );
-    } finally {
-      setSendingVoice(false);
-    }
-  }, [recorder, uploadFile]);
-
   // The room member list may omit the current user; their Waldur full name is
   // authoritative, so add it so own messages never fall back to the (emoji-
   // laden) Matrix display name.
@@ -122,6 +104,36 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     hasOlderMessages,
     loadOlderMessages,
   } = useMatrixRoom();
+  const messageActions = useMatrixMessageActionsValue(messages);
+
+  const sendVoiceMessage = useCallback(async () => {
+    // A reply being written goes with the voice message.
+    const { replyTo, cancelReply } = messageActions;
+    setSendingVoice(true);
+    try {
+      const result = await recorder.stop();
+      if (!result) return;
+      const { blob, durationMs } = result;
+      const { waveform } = await generateWaveform(blob);
+      const sent = await uploadFile(
+        new File([blob], 'voice-message', { type: blob.type }),
+        (media) =>
+          buildVoiceContent({
+            media,
+            mimetype: blob.type,
+            size: blob.size,
+            durationMs,
+            waveform,
+          }),
+        replyTo
+          ? buildReplyFields(replyTo.eventId, replyTo.sender, userId)
+          : undefined,
+      );
+      if (sent && replyTo) cancelReply();
+    } finally {
+      setSendingVoice(false);
+    }
+  }, [recorder, uploadFile, messageActions, userId]);
 
   // Connect on mount
   useEffect(() => {
@@ -164,166 +176,168 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
     (connectionState === 'error' && messages.length === 0 && !showCallView);
 
   return (
-    <Dropzone
-      noClick
-      noKeyboard
-      disabled={connectionState !== 'connected'}
-      onDrop={(files) => addFiles(files)}
-    >
-      {({ getRootProps, getInputProps, isDragActive }) => (
-        <div
-          {...getRootProps({
-            className: 'team-chat h-100 d-flex flex-column position-relative',
-          })}
-        >
-          <input {...getInputProps()} />
-          {isDragActive && (
-            <div className="tc-dropzone-overlay">
-              <div className="tc-dropzone-card">
-                <CloudArrowUpIcon size={36} weight="bold" />
-                <span>{translate('Drop files to attach')}</span>
+    <MatrixMessageActionsProvider value={messageActions}>
+      <Dropzone
+        noClick
+        noKeyboard
+        disabled={connectionState !== 'connected'}
+        onDrop={(files) => addFiles(files)}
+      >
+        {({ getRootProps, getInputProps, isDragActive }) => (
+          <div
+            {...getRootProps({
+              className: 'team-chat h-100 d-flex flex-column position-relative',
+            })}
+          >
+            <input {...getInputProps()} />
+            {isDragActive && (
+              <div className="tc-dropzone-overlay">
+                <div className="tc-dropzone-card">
+                  <CloudArrowUpIcon size={36} weight="bold" />
+                  <span>{translate('Drop files to attach')}</span>
+                </div>
               </div>
-            </div>
-          )}
-          <MatrixChatHeader
-            roomUuid={roomUuid}
-            roomName={
-              roomName ||
-              allRooms.find((r) => r.uuid === roomUuid)?.room_name ||
-              translate('Chat')
-            }
-            roomAlias={roomAlias}
-            projectUuid={projectUuid}
-            onBack={onBack}
-          />
+            )}
+            <MatrixChatHeader
+              roomUuid={roomUuid}
+              roomName={
+                roomName ||
+                allRooms.find((r) => r.uuid === roomUuid)?.room_name ||
+                translate('Chat')
+              }
+              roomAlias={roomAlias}
+              projectUuid={projectUuid}
+              onBack={onBack}
+            />
 
-          {messages.length > 0 && (
-            <MatrixSyncStatus state={connectionState} error={error} />
-          )}
+            {messages.length > 0 && (
+              <MatrixSyncStatus state={connectionState} error={error} />
+            )}
 
-          <CallInProgressBanner />
+            <CallInProgressBanner />
 
-          {showCrossRoomBanner && (
-            <div className="d-flex align-items-center gap-2 px-4 py-2 bg-light-success border-bottom">
-              <PhoneIcon size={16} className="text-success" weight="fill" />
-              <span className="text-sm flex-grow-1">
-                {translate('Call in progress in {room}', {
-                  room:
-                    (callRoom as any)?.room_name ?? translate('another room'),
-                })}
-              </span>
-              <BaseButton
-                variant="success"
-                size="sm"
-                onClick={requestReturnToCall}
-                label={translate('Return to call')}
-              />
-            </div>
-          )}
-
-          <div className="flex-grow-1 overflow-hidden d-flex flex-column">
-            {showConnectionError && (
-              <div className="flex-grow-1 d-flex align-items-center justify-content-center p-4">
-                <LoadingErred
-                  loadData={() => connect(roomUuid)}
-                  message={
-                    sessionEnded
-                      ? translate('Your chat session has ended.')
-                      : error ||
-                        translate('Could not connect to the chat server.')
-                  }
+            {showCrossRoomBanner && (
+              <div className="d-flex align-items-center gap-2 px-4 py-2 bg-light-success border-bottom">
+                <PhoneIcon size={16} className="text-success" weight="fill" />
+                <span className="text-sm flex-grow-1">
+                  {translate('Call in progress in {room}', {
+                    room:
+                      (callRoom as any)?.room_name ?? translate('another room'),
+                  })}
+                </span>
+                <BaseButton
+                  variant="success"
+                  size="sm"
+                  onClick={requestReturnToCall}
+                  label={translate('Return to call')}
                 />
               </div>
             )}
-            {showCallView && (
-              <div
-                className="position-relative overflow-hidden"
-                style={{
-                  display: 'flex',
-                  flex: showChat ? '0 0 60%' : '1 1 auto',
-                }}
-              >
-                <MatrixCallDockSlot roomId={activeRoomId} />
-                {callLive && (
-                  <div
-                    className="position-absolute"
-                    style={{ top: 8, right: 8, zIndex: 2 }}
-                  >
-                    <Tooltip
-                      label={
-                        chatVisible
-                          ? translate('Hide chat')
-                          : translate('Show chat')
-                      }
-                      side="left"
+
+            <div className="flex-grow-1 overflow-hidden d-flex flex-column">
+              {showConnectionError && (
+                <div className="flex-grow-1 d-flex align-items-center justify-content-center p-4">
+                  <LoadingErred
+                    loadData={() => connect(roomUuid)}
+                    message={
+                      sessionEnded
+                        ? translate('Your chat session has ended.')
+                        : error ||
+                          translate('Could not connect to the chat server.')
+                    }
+                  />
+                </div>
+              )}
+              {showCallView && (
+                <div
+                  className="position-relative overflow-hidden"
+                  style={{
+                    display: 'flex',
+                    flex: showChat ? '0 0 60%' : '1 1 auto',
+                  }}
+                >
+                  <MatrixCallDockSlot roomId={activeRoomId} />
+                  {callLive && (
+                    <div
+                      className="position-absolute"
+                      style={{ top: 8, right: 8, zIndex: 2 }}
                     >
-                      <BaseButton
-                        onClick={() => setChatVisible((v) => !v)}
-                        aria-label={
+                      <Tooltip
+                        label={
                           chatVisible
                             ? translate('Hide chat')
                             : translate('Show chat')
                         }
-                        variant="tertiary"
-                        size="sm"
-                        iconNode={
-                          chatVisible ? (
-                            <ArrowsOutSimpleIcon weight="bold" />
-                          ) : (
-                            <ArrowsInSimpleIcon weight="bold" />
-                          )
-                        }
-                      />
-                    </Tooltip>
-                  </div>
-                )}
-              </div>
+                        side="left"
+                      >
+                        <BaseButton
+                          onClick={() => setChatVisible((v) => !v)}
+                          aria-label={
+                            chatVisible
+                              ? translate('Hide chat')
+                              : translate('Show chat')
+                          }
+                          variant="tertiary"
+                          size="sm"
+                          iconNode={
+                            chatVisible ? (
+                              <ArrowsOutSimpleIcon weight="bold" />
+                            ) : (
+                              <ArrowsInSimpleIcon weight="bold" />
+                            )
+                          }
+                        />
+                      </Tooltip>
+                    </div>
+                  )}
+                </div>
+              )}
+              {showChat && !showConnectionError && (
+                <div className="flex-grow-1 overflow-hidden d-flex flex-column">
+                  <MatrixMessageList
+                    messages={messages}
+                    userId={userId}
+                    memberNames={resolvedMemberNames}
+                    memberImages={memberImages}
+                    loading={loading || connectionState === 'connecting'}
+                    loadingOlder={loadingOlder}
+                    hasOlderMessages={hasOlderMessages}
+                    onLoadOlder={loadOlderMessages}
+                    onReadLatest={markRoomRead}
+                  />
+                </div>
+              )}
+            </div>
+
+            {showChat && !showConnectionError && (
+              <MatrixTypingIndicator
+                typingUsers={typingUsers}
+                memberImages={memberImages}
+              />
             )}
             {showChat && !showConnectionError && (
-              <div className="flex-grow-1 overflow-hidden d-flex flex-column">
-                <MatrixMessageList
-                  messages={messages}
-                  userId={userId}
-                  memberNames={resolvedMemberNames}
-                  memberImages={memberImages}
-                  loading={loading || connectionState === 'connecting'}
-                  loadingOlder={loadingOlder}
-                  hasOlderMessages={hasOlderMessages}
-                  onLoadOlder={loadOlderMessages}
-                  onReadLatest={markRoomRead}
+              <div className="tc-composer-dock">
+                <MatrixMessageInput
+                  uploadFile={uploadFile}
+                  uploading={uploading}
+                  pendingFiles={pendingFiles}
+                  addFiles={addFiles}
+                  removePending={removePending}
+                  setPending={setPending}
+                  clearPending={clearPending}
+                  onStartRecording={startRecording}
+                  recordingSupported={recorder.supported}
+                  recording={recorder.state === 'recording' || sendingVoice}
+                  recordingElapsedMs={recorder.elapsedMs}
+                  sendingVoice={sendingVoice}
+                  onCancelRecording={recorder.cancel}
+                  onSendVoice={sendVoiceMessage}
                 />
               </div>
             )}
           </div>
-
-          {showChat && !showConnectionError && (
-            <MatrixTypingIndicator
-              typingUsers={typingUsers}
-              memberImages={memberImages}
-            />
-          )}
-          {showChat && !showConnectionError && (
-            <div className="tc-composer-dock">
-              <MatrixMessageInput
-                uploadFile={uploadFile}
-                uploading={uploading}
-                pendingFiles={pendingFiles}
-                addFiles={addFiles}
-                removePending={removePending}
-                setPending={setPending}
-                clearPending={clearPending}
-                onStartRecording={startRecording}
-                recordingSupported={recorder.supported}
-                recording={recorder.state === 'recording' || sendingVoice}
-                recordingElapsedMs={recorder.elapsedMs}
-                sendingVoice={sendingVoice}
-                onCancelRecording={recorder.cancel}
-                onSendVoice={sendVoiceMessage}
-              />
-            </div>
-          )}
-        </div>
-      )}
-    </Dropzone>
+        )}
+      </Dropzone>
+    </MatrixMessageActionsProvider>
   );
 };
