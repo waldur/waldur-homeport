@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
-import { HelpIcon } from 'waldur-ui';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
 import { AnalyticsCapability, AnalyticsMode, DrillDownDataItem } from './types';
 import { WhatIfSimulator } from './WhatIfSimulator';
@@ -32,64 +32,60 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
   const supportsWhySo = capability.supportedModes.includes('why-so');
 
   return (
-    <Card className="card-bordered">
-      <Card.Header className="border-bottom-0">
-        <Tab.Container
-          activeKey={activeMode}
-          onSelect={(k) => setActiveMode(k as AnalyticsMode)}
-        >
-          <Nav variant="tabs" className="nav-line-tabs">
-            {capability.supportedModes.map((mode) => {
-              const config = modeConfig[mode];
-              return (
-                <Nav.Item key={mode}>
-                  <Nav.Link
-                    as="button"
-                    eventKey={mode}
-                    className="d-flex align-items-center gap-2"
-                  >
-                    {config.label}
-                    <HelpIcon label={config.description} />
-                  </Nav.Link>
-                </Nav.Item>
-              );
-            })}
-          </Nav>
-        </Tab.Container>
-      </Card.Header>
+    <Tabs
+      value={activeMode}
+      onValueChange={(k) => setActiveMode(k as AnalyticsMode)}
+    >
+      <Card className="card-bordered">
+        <Card.Header className="border-bottom-0">
+          <TabsList scrollable>
+            {capability.supportedModes.map((mode) => (
+              <TabsTrigger
+                key={mode}
+                value={mode}
+                hint={modeConfig[mode].description}
+              >
+                {modeConfig[mode].label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Card.Header>
 
-      <Card.Body>
-        {activeMode === 'what-if' &&
-          supportsWhatIf &&
-          capability.simulationParams &&
-          capability.calculateSimulation && (
-            <WhatIfSimulator
-              params={capability.simulationParams}
-              calculate={capability.calculateSimulation}
-              data={data}
-            />
-          )}
+        <Card.Body>
+          <TabsContent value={activeMode}>
+            {activeMode === 'what-if' &&
+              supportsWhatIf &&
+              capability.simulationParams &&
+              capability.calculateSimulation && (
+                <WhatIfSimulator
+                  params={capability.simulationParams}
+                  calculate={capability.calculateSimulation}
+                  data={data}
+                />
+              )}
 
-        {activeMode === 'why-so' &&
-          supportsWhySo &&
-          capability.initialDimension && (
-            <WhySoDrillDown
-              initialData={drillDownData}
-              initialDimension={capability.initialDimension}
-              valueLabel={capability.whySoValueLabel}
-              onDrillDown={async (item, currentDimension) => {
-                const path = capability.drillDownPaths?.find(
-                  (p) => p.from === currentDimension,
-                );
-                if (path?.fetchData) {
-                  const fetchedData = await path.fetchData(item.id);
-                  return { data: fetchedData, dimension: path.to };
-                }
-                return null;
-              }}
-            />
-          )}
-      </Card.Body>
-    </Card>
+            {activeMode === 'why-so' &&
+              supportsWhySo &&
+              capability.initialDimension && (
+                <WhySoDrillDown
+                  initialData={drillDownData}
+                  initialDimension={capability.initialDimension}
+                  valueLabel={capability.whySoValueLabel}
+                  onDrillDown={async (item, currentDimension) => {
+                    const path = capability.drillDownPaths?.find(
+                      (p) => p.from === currentDimension,
+                    );
+                    if (path?.fetchData) {
+                      const fetchedData = await path.fetchData(item.id);
+                      return { data: fetchedData, dimension: path.to };
+                    }
+                    return null;
+                  }}
+                />
+              )}
+          </TabsContent>
+        </Card.Body>
+      </Card>
+    </Tabs>
   );
 };

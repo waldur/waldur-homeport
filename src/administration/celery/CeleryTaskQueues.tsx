@@ -1,12 +1,18 @@
 import { useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   CeleryScheduledTask,
   CeleryStatsResponse,
   CeleryTask,
 } from 'waldur-js-client';
 
-import { AccordionCard, Badge } from 'waldur-ui';
+import {
+  AccordionCard,
+  Badge,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -72,36 +78,38 @@ export const CeleryTaskQueues = ({
       className="mb-6"
       defaultOpen
     >
-      <Tab.Container activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap border-0 mb-4">
+      <Tabs
+        mount="all"
+        value={activeTab}
+        onValueChange={(k) => setActiveTab(k)}
+      >
+        <TabsList bordered={false} className="mb-4">
           {tabs.map((tab) => (
-            <Nav.Item key={tab.key} className="text-nowrap">
-              <Nav.Link as="button" eventKey={tab.key} className="py-4">
-                {tab.title}
-                <Badge
-                  variant={tab.variant}
-                  size="sm"
-                  tone="light"
-                  className="ms-2"
-                >
-                  {tab.count}
-                </Badge>
-              </Nav.Link>
-            </Nav.Item>
+            <TabsTrigger key={tab.key} value={tab.key} className="py-4">
+              {tab.title}
+              <Badge
+                variant={tab.variant}
+                size="sm"
+                tone="light"
+                className="ms-2"
+              >
+                {tab.count}
+              </Badge>
+            </TabsTrigger>
           ))}
-        </Nav>
-        <Tab.Content>
-          <Tab.Pane eventKey="active" active={activeTab === 'active'}>
+        </TabsList>
+        <>
+          <TabsContent value="active">
             <CeleryTaskTable tasks={activeTasks} showDuration />
-          </Tab.Pane>
-          <Tab.Pane eventKey="reserved" active={activeTab === 'reserved'}>
+          </TabsContent>
+          <TabsContent value="reserved">
             <CeleryTaskTable tasks={reservedTasks} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="scheduled" active={activeTab === 'scheduled'}>
+          </TabsContent>
+          <TabsContent value="scheduled">
             <CeleryTaskTable tasks={scheduledTasks} />
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+          </TabsContent>
+        </>
+      </Tabs>
     </AccordionCard>
   );
 };

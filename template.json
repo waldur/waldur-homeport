@@ -6629,7 +6629,7 @@
   },
   "Assigned tickets": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "support-users"
     }
   },
@@ -6981,7 +6981,7 @@
   },
   "Attachments": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "issue-templates"
     }
   },
@@ -10997,7 +10997,7 @@
   "Comment prefix with user info.": {},
   "Comments": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "support-users"
     }
   },
@@ -12372,6 +12372,7 @@
   },
   "Content is overridden": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "notifications"
     }
   },
@@ -23689,6 +23690,7 @@
   },
   "Health Monitor": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "openstack-lbaas"
     }
   },
@@ -24039,6 +24041,7 @@
   },
   "History exports": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "matrix"
     }
   },
@@ -28355,6 +28358,7 @@
   },
   "Listeners": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "rabbitmq"
     }
   },
@@ -29169,7 +29173,7 @@
   "Malta": {},
   "Manage": {
     "context": {
-      "primary_ui_type": "text_content",
+      "primary_ui_type": "title",
       "feature_area": "offerings"
     }
   },
@@ -40451,6 +40455,7 @@
   },
   "Pools": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "openstack-lbaas"
     }
   },
@@ -41408,7 +41413,7 @@
   },
   "Profile": {
     "context": {
-      "primary_ui_type": "text_content",
+      "primary_ui_type": "title",
       "feature_area": "join-organization"
     }
   },
@@ -43110,7 +43115,7 @@
   },
   "Public": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "invitations"
     }
   },
@@ -45785,7 +45790,7 @@
   },
   "Reported tickets": {
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "feature_area": "support-users"
     }
   },
@@ -49074,6 +49079,7 @@
   },
   "Rules": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "openstack-security-groups"
     }
   },
@@ -50138,6 +50144,7 @@
   },
   "Security group rules": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "openstack-lbaas"
     }
   },
@@ -55388,6 +55395,11 @@
   "Tables needing vacuum": {
     "context": {
       "feature_area": "database-stats"
+    }
+  },
+  "Tabs": {
+    "context": {
+      "feature_area": "Tabs"
     }
   },
   "Tag": {
@@ -66573,6 +66585,11 @@
       "feature_area": "reporting"
     }
   },
+  "Usage view": {
+    "context": {
+      "feature_area": "usage-views"
+    }
+  },
   "Usage {sign} 100%": {
     "context": {
       "variables": {
@@ -68524,6 +68541,7 @@
   "Video URL for the video-background login page layout. Supports MP4 format. Leave empty to use default sample video.": {},
   "View": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "organizations"
     }
   },

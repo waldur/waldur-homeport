@@ -1,15 +1,10 @@
 import '@testing-library/jest-dom';
-import * as Tabs from '@radix-ui/react-tabs';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { SegmentedControl } from './SegmentedControl';
-import {
-  segmentedItemClassName,
-  segmentedListClassName,
-} from './segmentedStyles';
 
 const OPTIONS = [
   { value: 'requests', label: 'By request' },
@@ -158,45 +153,6 @@ describe('SegmentedControl', () => {
       expect(item).toHaveClass('px-6');
       expect(item).not.toHaveClass('px-[12px]');
     }
-  });
-
-  // A switch that owns tab panels (the sign-in form) is Radix Tabs, whose
-  // selected segment is `data-state="active"`, not RadioGroup's `checked`.
-  it('styles Radix tab triggers with the same segments', () => {
-    render(
-      <Tabs.Root defaultValue="a">
-        <Tabs.List
-          aria-label="Method"
-          className={segmentedListClassName({ fullWidth: true })}
-        >
-          <Tabs.Trigger
-            value="a"
-            className={segmentedItemClassName({ fullWidth: true })}
-          >
-            A
-          </Tabs.Trigger>
-          <Tabs.Trigger
-            value="b"
-            className={segmentedItemClassName({ fullWidth: true })}
-          >
-            B
-          </Tabs.Trigger>
-        </Tabs.List>
-        <Tabs.Content value="a">panel a</Tabs.Content>
-      </Tabs.Root>,
-    );
-
-    const active = screen.getByRole('tab', { name: 'A' });
-    expect(active).toHaveAttribute('data-state', 'active');
-    expect(active).toHaveClass(
-      'flex-1',
-      'data-[state=active]:bg-[var(--btn-tertiary-bg-pressed)]',
-    );
-    expect(screen.getByRole('tablist')).toHaveClass(
-      'flex',
-      'w-full',
-      'self-center',
-    );
   });
 
   describe('variant', () => {

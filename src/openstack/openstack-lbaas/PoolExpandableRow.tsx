@@ -1,5 +1,4 @@
-import { FC, useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
 import {
   OpenStackHealthMonitor,
   OpenStackPool,
@@ -11,6 +10,7 @@ import {
 import { translate } from '@/i18n';
 import { ResourceState } from '@/resource/state/ResourceState';
 import { createFetcher } from '@/table/api';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -121,34 +121,24 @@ const HealthMonitorTable: FC<{ poolUuid: string }> = ({ poolUuid }) => {
 };
 
 export const PoolExpandableRow: FC<PoolExpandableRowProps> = ({ row }) => {
-  const [activeTab, setActiveTab] = useState('members');
-
   return (
     <ExpandableContainer>
-      <Tab.Container
-        activeKey={activeTab}
-        onSelect={setActiveTab}
-        unmountOnExit
-      >
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
-          <Nav.Item>
-            <Nav.Link eventKey="members">{translate('Members')}</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="health-monitor">
-              {translate('Health Monitor')}
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="members">
-            <MembersTable poolUuid={row.uuid} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="health-monitor">
-            <HealthMonitorTable poolUuid={row.uuid} />
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+      <EmbeddedTabs
+        defaultValue="members"
+        listClassName="mb-4"
+        tabs={[
+          {
+            key: 'members',
+            title: translate('Members'),
+            content: <MembersTable poolUuid={row.uuid} />,
+          },
+          {
+            key: 'health-monitor',
+            title: translate('Health Monitor'),
+            content: <HealthMonitorTable poolUuid={row.uuid} />,
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

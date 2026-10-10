@@ -178,6 +178,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-workers',
     url: 'workers/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./system-management/WorkersPage').then((module) => ({
@@ -192,6 +193,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-database',
     url: 'database/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./system-management/DatabasePage').then((module) => ({
@@ -206,6 +208,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-logging-telemetry',
     url: 'logging-telemetry/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./system-management/LoggingTelemetryPage').then((module) => ({
@@ -346,6 +349,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-site-agents',
     url: 'site-agents/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./site-agents/SiteAgentManagement').then((module) => ({
@@ -375,6 +379,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-branding',
     url: 'branding/?tab&q',
+    params: { tab: { dynamic: true }, q: { dynamic: true } },
     parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./settings/AdministrationBranding').then((module) => ({
@@ -404,6 +409,11 @@ export const states: StateDeclaration[] = [
     name: 'admin-service-desk-settings',
     url: 'service-desk-settings/?tab',
     parent: 'admin-configuration',
+    // Switching tabs only rewrites ?tab; without `dynamic` UI-Router would
+    // exit and re-enter the state, remounting the whole page.
+    params: {
+      tab: { dynamic: true },
+    },
     component: lazyComponent(() =>
       import('./service-desk/AdministrationServiceDesk').then((module) => ({
         default: module.AdministrationServiceDesk,
@@ -451,6 +461,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-marketplace-settings',
     url: 'marketplace/?tab&q',
+    params: { tab: { dynamic: true }, q: { dynamic: true } },
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
       import('./marketplace/AdministrationMarketplace').then((module) => ({
@@ -480,6 +491,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-features',
     url: 'features/?tab&q',
+    params: { tab: { dynamic: true }, q: { dynamic: true } },
     parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./FeaturesList').then((module) => ({
@@ -494,6 +506,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-organization-credits-cost-policies',
     url: 'credits-cost-policies/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./organizations-compliance/CreditsCostPoliciesPage').then(
@@ -511,6 +524,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-organization-project-settings',
     url: 'organization-project-settings/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./organizations-compliance/OrganizationProjectSettingsPage').then(
@@ -527,6 +541,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-classifiers',
     url: 'classifiers/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./organizations-compliance/ClassifiersPage').then((module) => ({
@@ -541,6 +556,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-compliance',
     url: 'compliance/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./organizations-compliance/CompliancePage').then((module) => ({
@@ -691,6 +707,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-service-accounts',
     url: 'service-accounts/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./service-accounts/ServiceAccountsTable').then((module) => ({
@@ -708,6 +725,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-course-accounts',
     url: 'course-accounts/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-organizations-compliance',
     // Never rendered: the redirect fires first. `component` is required by the
     // local StateDeclaration type.
@@ -740,6 +758,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-marketplace-categories',
     url: 'categories/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
       import('./marketplace/CatalogueStructurePage').then((module) => ({
@@ -820,6 +839,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-software-catalog-settings',
     url: 'software-catalog/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
       import('./marketplace/AdministrationSoftwareCatalog').then((module) => ({
@@ -852,6 +872,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-identity',
     url: 'identity/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./providers/IdentityProvidersList').then((module) => ({
@@ -866,6 +887,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-roles',
     url: 'roles/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./roles/RolesPage').then((module) => ({
@@ -909,6 +931,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-sram-integration',
     url: 'sram-integration/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./sram/SramIntegrationPage').then((module) => ({
@@ -1002,6 +1025,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-call-management-settings',
     url: 'call-management-settings/?tab&q',
+    params: { tab: { dynamic: true }, q: { dynamic: true } },
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./call-management/AdministrationCallManagement').then(
@@ -1019,6 +1043,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-matrix-chat',
     url: 'matrix-chat/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('@/matrix/MatrixAdminDashboard').then((module) => ({
@@ -1035,6 +1060,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-arrow',
     url: 'arrow/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./arrow/ArrowDashboard').then((module) => ({

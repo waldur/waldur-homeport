@@ -1,7 +1,8 @@
 import { UserGearIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -54,59 +55,88 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
           loadData={refetch}
         />
       ) : user ? (
-        <Tabs
-          defaultActiveKey={1}
-          unmountOnExit={true}
-          className="nav-line-tabs mb-4"
-        >
-          <Tab eventKey={1} title={translate('Details')}>
-            <UserDetailsTable user={user} />
-          </Tab>
-          <Tab eventKey={3} title={translate('Audit log')}>
-            <UserEvents user={user} />
-          </Tab>
-          {isFeatureVisible(UserFeatures.ssh_keys) ? (
-            <Tab eventKey={4} title={translate('Keys')}>
-              <KeysList
+        <Tabs mount="active" defaultValue="details">
+          <TabsList className="mb-4">
+            <TabsTrigger value="details">{translate('Details')}</TabsTrigger>
+            <TabsTrigger value="audit-log">
+              {translate('Audit log')}
+            </TabsTrigger>
+            {isFeatureVisible(UserFeatures.ssh_keys) ? (
+              <TabsTrigger value="keys">{translate('Keys')}</TabsTrigger>
+            ) : null}
+            <TabsTrigger value="remote-accounts">
+              {translate('Remote accounts')}
+            </TabsTrigger>
+            {currentUser.is_staff ||
+            currentUser.is_support ||
+            currentUser.uuid === user.uuid ? (
+              <TabsTrigger value="roles-and-permissions">
+                {translate('Roles and permissions')}
+              </TabsTrigger>
+            ) : null}
+            {isFeatureVisible(UserFeatures.show_data_access) &&
+              (currentUser.is_staff || currentUser.is_support) && (
+                <TabsTrigger value="data-access">
+                  {translate('Data access')}
+                </TabsTrigger>
+              )}
+            {isFeatureVisible(UserFeatures.show_identity_bridge) &&
+              currentUser.is_staff && (
+                <TabsTrigger value="identity-bridge">
+                  {translate('Identity Bridge')}
+                </TabsTrigger>
+              )}
+          </TabsList>
+          <div className="tab-content">
+            <TabsContent value="details">
+              <UserDetailsTable user={user} />
+            </TabsContent>
+            <TabsContent value="audit-log">
+              <UserEvents user={user} />
+            </TabsContent>
+            {isFeatureVisible(UserFeatures.ssh_keys) ? (
+              <TabsContent value="keys">
+                <KeysList
+                  user={user}
+                  hasActionBar={false}
+                  fullWidth
+                  cardBordered={false}
+                />
+              </TabsContent>
+            ) : null}
+            <TabsContent value="remote-accounts">
+              <UserOfferingList
                 user={user}
                 hasActionBar={false}
                 fullWidth
                 cardBordered={false}
               />
-            </Tab>
-          ) : null}
-          <Tab eventKey={5} title={translate('Remote accounts')}>
-            <UserOfferingList
-              user={user}
-              hasActionBar={false}
-              fullWidth
-              cardBordered={false}
-            />
-          </Tab>
-          {currentUser.is_staff ||
-          currentUser.is_support ||
-          currentUser.uuid === user.uuid ? (
-            <Tab eventKey={6} title={translate('Roles and permissions')}>
-              <UserAffiliationsList
-                user={user}
-                hasActionBar={false}
-                fullWidth
-                cardBordered={false}
-              />
-            </Tab>
-          ) : null}
-          {isFeatureVisible(UserFeatures.show_data_access) &&
-            (currentUser.is_staff || currentUser.is_support) && (
-              <Tab eventKey={7} title={translate('Data access')}>
-                <DataAccessDialogContent user={user} />
-              </Tab>
-            )}
-          {isFeatureVisible(UserFeatures.show_identity_bridge) &&
-            currentUser.is_staff && (
-              <Tab eventKey={8} title={translate('Identity Bridge')}>
-                <UserIdentityBridgeTab user={user} />
-              </Tab>
-            )}
+            </TabsContent>
+            {currentUser.is_staff ||
+            currentUser.is_support ||
+            currentUser.uuid === user.uuid ? (
+              <TabsContent value="roles-and-permissions">
+                <UserAffiliationsList
+                  user={user}
+                  hasActionBar={false}
+                  fullWidth
+                  cardBordered={false}
+                />
+              </TabsContent>
+            ) : null}
+            {isFeatureVisible(UserFeatures.show_data_access) &&
+              (currentUser.is_staff || currentUser.is_support) && (
+                <TabsContent value="data-access">
+                  <DataAccessDialogContent user={user} />
+                </TabsContent>
+              )}
+            {isFeatureVisible(UserFeatures.show_identity_bridge) &&
+              currentUser.is_staff && (
+                <TabsContent value="identity-bridge">
+                  <UserIdentityBridgeTab user={user} />
+                </TabsContent>
+              )}
+          </div>
         </Tabs>
       ) : null}
     </ModalDialog>

@@ -1,4 +1,5 @@
 import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import {
   useCallback,
@@ -8,11 +9,19 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
-import { BaseButton, Badge, Menu } from 'waldur-ui';
+import {
+  BaseButton,
+  Badge,
+  Menu,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
 import { ENV } from '@/core/config';
@@ -24,11 +33,10 @@ import FormTable from '@/form/FormTable';
 import { SwitchField } from '@/form/SwitchField';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { useUrlTab } from '@/navigation/useUrlTab';
 import { useNotify } from '@/store/notify';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
-
-import { useSettingsUrlSync } from './settings/useSettingsUrlSync';
 
 // Plugin sections that will be grouped into a single "Plugins" tab
 const PLUGIN_SECTION_KEYS = ['openstack', 'rancher'];
@@ -105,8 +113,9 @@ const FEATURES_TABS = [
 
 export const FeaturesList = () => {
   const { showErrorResponse, showSuccess } = useNotify();
-  const { activeKey, handleSelect, defaultActiveKey, params, state, router } =
-    useSettingsUrlSync(FEATURES_TABS);
+  const { state, params } = useCurrentStateAndParams();
+  const router = useRouter();
+  const { activeKey, handleSelect } = useUrlTab(FEATURES_TABS, 'tab');
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [hiddenTabKeys, setHiddenTabKeys] = useState<Set<string>>(new Set());
@@ -115,7 +124,7 @@ export const FeaturesList = () => {
     const el = scrollRef.current;
     if (!el) return;
     const containerRect = el.getBoundingClientRect();
-    const items = el.querySelectorAll('.nav-item');
+    const items = el.querySelectorAll('[role="tab"]');
     const hidden = new Set<string>();
     items.forEach((item, i) => {
       const rect = item.getBoundingClientRect();
@@ -145,9 +154,7 @@ export const FeaturesList = () => {
     const el = scrollRef.current;
     if (!el) return;
     const index = FEATURES_TABS.findIndex((t) => t.key === tabKey);
-    const tabEl = el.querySelector(
-      `.nav-item:nth-child(${index + 1})`,
-    ) as HTMLElement;
+    const tabEl = el.querySelectorAll<HTMLElement>('[role="tab"]')[index];
     if (tabEl && tabEl.scrollIntoView) {
       tabEl.scrollIntoView({
         behavior: 'smooth',
@@ -247,11 +254,7 @@ export const FeaturesList = () => {
               </div>
             </Card.Header>
             <Card.Body style={{ paddingTop: 8 }}>
-              <Tab.Container
-                defaultActiveKey={defaultActiveKey}
-                activeKey={activeKey}
-                onSelect={handleSelect}
-              >
+              <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
                 <div
                   className="d-flex align-items-end gap-1"
                   style={{ borderBottom: '1px solid var(--bs-border-color)' }}
@@ -267,42 +270,36 @@ export const FeaturesList = () => {
                       marginBottom: -2,
                     }}
                   >
-                    <Nav
-                      variant="tabs"
-                      className="nav-line-tabs flex-nowrap border-bottom-0"
+                    <TabsList
+                      bordered={false}
                       style={{ minWidth: 'max-content' }}
                     >
                       {FEATURES_TABS.map((tab) => {
                         const filteredCount = getFilteredCount(tab.key);
                         const hasMatches = filteredCount > 0;
                         return (
-                          <Nav.Item
+                          <TabsTrigger
                             key={tab.key}
                             style={{ whiteSpace: 'nowrap' }}
+                            value={tab.key}
+                            disabled={!hasMatches && !!query}
+                            className={!hasMatches && query ? 'text-muted' : ''}
                           >
-                            <Nav.Link
-                              eventKey={tab.key}
-                              disabled={!hasMatches && !!query}
-                              className={
-                                !hasMatches && query ? 'text-muted' : ''
-                              }
-                            >
-                              {tab.title}
-                              {query && (
-                                <Badge
-                                  variant="secondary"
-                                  size="sm"
-                                  tone="light"
-                                  className="ms-2"
-                                >
-                                  {filteredCount}
-                                </Badge>
-                              )}
-                            </Nav.Link>
-                          </Nav.Item>
+                            {tab.title}
+                            {query && (
+                              <Badge
+                                variant="secondary"
+                                size="sm"
+                                tone="light"
+                                className="ms-2"
+                              >
+                                {filteredCount}
+                              </Badge>
+                            )}
+                          </TabsTrigger>
                         );
                       })}
-                    </Nav>
+                    </TabsList>
                   </div>
                   {hiddenTabKeys.size > 0 && (
                     <ActionsMenu
@@ -392,14 +389,14 @@ export const FeaturesList = () => {
                   />
                 )}
                 {!(query && tabsWithMatches.length === 0) && (
-                  <Tab.Content>
+                  <>
                     {FEATURES_TABS.map((tab) => {
                       if (tab.isPluginsTab) {
                         const hasAnyItems = pluginSections.some(
                           (s) => s.items.length > 0,
                         );
                         return (
-                          <Tab.Pane key={tab.key} eventKey={tab.key}>
+                          <TabsContent key={tab.key} value={tab.key}>
                             {hasAnyItems || !query ? (
                               pluginSections.map((section) => (
                                 <FeatureSectionPanel
@@ -418,7 +415,7 @@ export const FeaturesList = () => {
                                 buttonTitle={translate('Clear search')}
                               />
                             )}
-                          </Tab.Pane>
+                          </TabsContent>
                         );
                       }
 
@@ -428,7 +425,7 @@ export const FeaturesList = () => {
                       if (!section) return null;
 
                       return (
-                        <Tab.Pane key={tab.key} eventKey={tab.key}>
+                        <TabsContent key={tab.key} value={tab.key}>
                           {section.items.length > 0 ? (
                             <FeatureSectionContent section={section} />
                           ) : (
@@ -441,12 +438,12 @@ export const FeaturesList = () => {
                               buttonTitle={translate('Clear search')}
                             />
                           )}
-                        </Tab.Pane>
+                        </TabsContent>
                       );
                     })}
-                  </Tab.Content>
+                  </>
                 )}
-              </Tab.Container>
+              </Tabs>
             </Card.Body>
           </Card>
         </form>

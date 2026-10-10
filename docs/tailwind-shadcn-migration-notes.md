@@ -518,7 +518,7 @@ Implemented in `packages/eslint-plugin-waldur` and enabled as `waldur-custom/*` 
 | `enforce-featured-icon`            | `error`  | Requires `FeaturedIcon` (with `tone`/`size`) for highlighted icon emblems.                                                |
 | `enforce-phosphor-icon-weight`     | `error`  | Consistent `weight` prop on Phosphor icons.                                                                               |
 | `enforce-border-radius-tokens`     | `error`  | Design-token radius classes instead of hard-coded values.                                                                 |
-| `enforce-nav-tabs-pattern`         | `error`  | Navigation tabs use the `nav-line-tabs` class.                                                                            |
+| `no-bootstrap-tabs`                | `error`  | `Tabs` / `TabNav` from `waldur-ui`; no react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes.                             |
 | `enforce-breadcrumb-colors`        | `error`  | Breadcrumb links use the `$text-brand-secondary` token.                                                                   |
 | `no-bootstrap-form-check`          | `error`  | `Checkbox` / `Radio` / `Switch` from `waldur-ui`; no `FormCheck`, `Form.Check` or `form-check*` / `form-switch*` classes. |
 

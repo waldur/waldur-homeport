@@ -148,7 +148,7 @@ export type TableWithPortal<T = {}> = {
 } & T;
 
 export interface TableTab {
-  key: string | number;
+  key: string;
   title: ReactNode;
   state?: string;
   params?: Record<string, any>;
@@ -158,7 +158,7 @@ export interface TableTab {
   /**
    * Local-state mode: when set, clicking the tab calls this callback
    * instead of navigating via ui-router state.go(). Use together with
-   * `active` so TableTabs knows which tab to highlight without reading
+   * `active` so TableNav knows which tab to highlight without reading
    * URL params. Useful when multiple instances of the table coexist on
    * one page and a single URL param can't disambiguate them (e.g.
    * sub-tabs inside expandable rows).

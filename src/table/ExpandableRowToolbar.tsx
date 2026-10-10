@@ -1,7 +1,6 @@
 import { FunnelSimpleIcon, GearSixIcon, XIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { ComponentType, FC, createElement, useCallback } from 'react';
-import { Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -134,10 +133,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
       )}
       <div className="ms-sm-auto d-flex align-items-center gap-3">
         {hasSelection && (
-          <Stack
-            direction="horizontal"
-            className="fw-normal text-dark gap-2 align-items-center"
-          >
+          <div className="d-flex align-items-center fw-normal text-dark gap-2">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
@@ -148,7 +144,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
             <span className="fs-7">
               ({selectedRows.length}) {translate('Selected')}
             </span>
-          </Stack>
+          </div>
         )}
         {hasSelection &&
           multiSelectActions &&

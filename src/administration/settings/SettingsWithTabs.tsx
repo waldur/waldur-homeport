@@ -1,20 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { useUrlTab } from '@/navigation/useUrlTab';
 import { SettingsDescription } from '@/SettingsDescription';
 import { TableQuery } from '@/table/TableQuery';
 
 import { FieldRow } from './FieldRow';
-import { useSettingsUrlSync } from './useSettingsUrlSync';
 import { getKeyTitle } from './utils';
 
 export interface SettingsTab {
@@ -44,8 +45,9 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
   getItemIsLoading,
   className,
 }) => {
-  const { activeKey, handleSelect, defaultActiveKey, params, state, router } =
-    useSettingsUrlSync(tabs, syncWithUrlKey);
+  const { state, params } = useCurrentStateAndParams();
+  const router = useRouter();
+  const { activeKey, handleSelect } = useUrlTab(tabs, syncWithUrlKey);
 
   // Sync search query with URL
   const query = (params.q as string) || '';
@@ -116,41 +118,35 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
         </Card.Header>
       )}
       <Card.Body>
-        <Tab.Container
-          defaultActiveKey={defaultActiveKey}
-          activeKey={activeKey}
-          onSelect={handleSelect}
-          unmountOnExit
-        >
-          <Nav variant="tabs" className="nav-line-tabs mb-5">
+        <Tabs mount="active" value={activeKey} onValueChange={handleSelect}>
+          <TabsList className="mb-5">
             {tabs.map((tab) => {
               const filteredCount = getFilteredCount(tab.key);
               const hasMatches = filteredCount > 0;
               return (
-                <Nav.Item key={tab.key}>
-                  <Nav.Link
-                    eventKey={tab.key}
-                    className={!hasMatches && query ? 'text-muted' : ''}
-                  >
-                    {tab.title}
-                    {query && (
-                      <Badge
-                        variant={hasMatches ? 'primary' : 'neutral'}
-                        shape="pill"
-                        tone="light"
-                        className="ms-2"
-                      >
-                        {filteredCount}
-                      </Badge>
-                    )}
-                  </Nav.Link>
-                </Nav.Item>
+                <TabsTrigger
+                  key={tab.key}
+                  value={tab.key}
+                  className={!hasMatches && query ? 'text-muted' : ''}
+                >
+                  {tab.title}
+                  {query && (
+                    <Badge
+                      variant={hasMatches ? 'primary' : 'neutral'}
+                      shape="pill"
+                      tone="light"
+                      className="ms-2"
+                    >
+                      {filteredCount}
+                    </Badge>
+                  )}
+                </TabsTrigger>
               );
             })}
-          </Nav>
-          <Tab.Content>
+          </TabsList>
+          <>
             {filteredGroups.map(({ tab, items }) => (
-              <Tab.Pane key={tab.key} eventKey={tab.key}>
+              <TabsContent key={tab.key} value={tab.key}>
                 {items.length > 0 ? (
                   <FormTable>
                     {items.map((item) => (
@@ -172,10 +168,10 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
                     {translate('No matching settings in this section.')}
                   </p>
                 )}
-              </Tab.Pane>
+              </TabsContent>
             ))}
-          </Tab.Content>
-        </Tab.Container>
+          </>
+        </Tabs>
       </Card.Body>
     </Card>
   );

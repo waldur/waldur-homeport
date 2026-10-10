@@ -1,8 +1,9 @@
 import { PencilIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { marketplaceOfferingTermsOfServiceUpdate } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { SafeMarkdown } from '@/core/SafeMarkdown';
 import { required } from '@/core/validators';
@@ -106,37 +107,46 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
               {values.add_as === 'markdown' && (
                 <FormGroup label={translate('Terms of Service')} required>
                   <Tabs
-                    activeKey={activeTab}
-                    onSelect={(k) => setActiveTab(k)}
-                    className="mb-3"
-                    id="tos-edit-tabs"
+                    mount="all"
+                    value={activeTab}
+                    onValueChange={(k) => setActiveTab(k)}
                   >
-                    <Tab eventKey="write" title={translate('Write')}>
-                      <div className="markdown-editor-wrapper">
-                        <Field name="terms_of_service" validate={required}>
-                          {({ input, meta }) => (
-                            <MarkdownEditor
-                              input={input}
-                              meta={meta}
-                              autoFocus
-                            />
-                          )}
-                        </Field>
-                      </div>
-                    </Tab>
-                    <Tab eventKey="preview" title={translate('Preview')}>
-                      <div className="markdown-editor-wrapper markdown-editor-preview">
-                        {values.terms_of_service ? (
-                          <SafeMarkdown text={values.terms_of_service} />
-                        ) : (
-                          <div className="text-muted">
-                            {translate(
-                              'No content to preview. Switch to Write tab to add content.',
+                    <TabsList className="mb-3">
+                      <TabsTrigger value="write">
+                        {translate('Write')}
+                      </TabsTrigger>
+                      <TabsTrigger value="preview">
+                        {translate('Preview')}
+                      </TabsTrigger>
+                    </TabsList>
+                    <div className="tab-content">
+                      <TabsContent value="write">
+                        <div className="markdown-editor-wrapper">
+                          <Field name="terms_of_service" validate={required}>
+                            {({ input, meta }) => (
+                              <MarkdownEditor
+                                input={input}
+                                meta={meta}
+                                autoFocus
+                              />
                             )}
-                          </div>
-                        )}
-                      </div>
-                    </Tab>
+                          </Field>
+                        </div>
+                      </TabsContent>
+                      <TabsContent value="preview">
+                        <div className="markdown-editor-wrapper markdown-editor-preview">
+                          {values.terms_of_service ? (
+                            <SafeMarkdown text={values.terms_of_service} />
+                          ) : (
+                            <div className="text-muted">
+                              {translate(
+                                'No content to preview. Switch to Write tab to add content.',
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </TabsContent>
+                    </div>
                   </Tabs>
                 </FormGroup>
               )}

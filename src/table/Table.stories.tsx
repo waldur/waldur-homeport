@@ -42,7 +42,7 @@ import Table from './Table';
  * unset, rather than reading Redux or context. So `Table.filtersAndLayout
  * .stories.tsx`'s filter stories need nothing beyond this same decorator.
  *
- * Deliberately still out of scope for this pass: tabs (`TableTabs`/
+ * Deliberately still out of scope for this pass: tabs (`TableNav`/
  * `TableWithTabs`, needs the real `@uirouter/react` router singleton) and
  * the export button (`useTableExport` calls `getTableOptions(table)`,
  * which reads a module-level registry only the real `useTable()` hook

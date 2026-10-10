@@ -1,13 +1,14 @@
 import { FingerprintIcon } from '@phosphor-icons/react';
-import * as Tabs from '@radix-ui/react-tabs';
 import { useEffect, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 
 import {
   AlertItem,
   BaseButton,
-  segmentedItemClassName,
-  segmentedListClassName,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
 } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
@@ -212,29 +213,24 @@ export const SigninForm = () => {
             <Field
               name="signin_by"
               render={({ input }) => (
-                <Tabs.Root
+                <Tabs
                   value={input.value}
                   onValueChange={input.onChange}
                   className="w-100 mb-5"
                 >
-                  <Tabs.List
-                    className={segmentedListClassName({ fullWidth: true })}
+                  <TabsList
+                    variant="segmented"
+                    fullWidth
                     aria-label={translate('Sign in method')}
                   >
-                    <Tabs.Trigger
-                      value="username"
-                      className={segmentedItemClassName({ fullWidth: true })}
-                    >
+                    <TabsTrigger value="username">
                       {translate('Username')}
-                    </Tabs.Trigger>
-                    <Tabs.Trigger
-                      value="token"
-                      className={segmentedItemClassName({ fullWidth: true })}
-                    >
+                    </TabsTrigger>
+                    <TabsTrigger value="token">
                       {translate('Access token')}
-                    </Tabs.Trigger>
-                  </Tabs.List>
-                  <Tabs.Content value="username">
+                    </TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="username">
                     <StringGroup
                       name="username"
                       label={translate('Username')}
@@ -249,8 +245,8 @@ export const SigninForm = () => {
                       className="text-start"
                       space={8}
                     />
-                  </Tabs.Content>
-                  <Tabs.Content value="token">
+                  </TabsContent>
+                  <TabsContent value="token">
                     <PasswordGroup
                       name="token"
                       label={translate('Access token')}
@@ -262,8 +258,8 @@ export const SigninForm = () => {
                       className="text-start"
                       space={8}
                     />
-                  </Tabs.Content>
-                </Tabs.Root>
+                  </TabsContent>
+                </Tabs>
               )}
             />
 

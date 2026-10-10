@@ -1,6 +1,8 @@
 import { FC, useMemo, useState } from 'react';
-import { Col, Nav, Row, Stack, Tab } from 'react-bootstrap';
+import { Col, Row, Stack } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useTheme } from '@/theme/useTheme';
@@ -42,9 +44,7 @@ const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
 export const ClusterStatistics: FC<{
   resourceScope: RancherCluster;
 }> = ({ resourceScope }) => {
-  const [activeKey, setActiveKey] = useState<string | number | null>(
-    'capacity',
-  );
+  const [activeKey, setActiveKey] = useState('capacity');
 
   const nodesCount = useMemo(
     () => resourceScope?.nodes.length || 0,
@@ -63,16 +63,13 @@ export const ClusterStatistics: FC<{
   );
 
   return (
-    <Tab.Container activeKey={activeKey} onSelect={setActiveKey}>
-      <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-        <Nav.Item>
-          <Nav.Link eventKey="capacity">{translate('Capacity')}</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="storage">{translate('Storage')}</Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Tab.Content className="pt-10">
+    <Tabs value={activeKey} onValueChange={setActiveKey}>
+      <TabsList>
+        <TabsTrigger value="capacity">{translate('Capacity')}</TabsTrigger>
+        <TabsTrigger value="storage">{translate('Storage')}</TabsTrigger>
+      </TabsList>
+      {/* Both tabs show the same figures until WAL-8880 splits them. */}
+      <TabsContent value={activeKey} className="pt-10">
         <Row className="g-5 mb-10">
           <Col sm={4}>
             <StatisticsCard
@@ -161,7 +158,7 @@ export const ClusterStatistics: FC<{
             />
           </Col>
         </Row>
-      </Tab.Content>
-    </Tab.Container>
+      </TabsContent>
+    </Tabs>
   );
 };

@@ -355,8 +355,14 @@
     }
   }
 
+  // A card body inside a tab panel keeps its top padding. Keyed off the
+  // panel's role, which both waldur-ui's TabsContent and the old Bootstrap
+  // Tab.Pane carry; `.tab-content` (Bootstrap's panel wrapper) is kept for the
+  // few places that still set it by hand.
   &:not(.grid-table)
-    .card-body:not(.tab-content .card-body):not(.card-solid .card-body) {
+    .card-body:not(.tab-content .card-body):not(
+      [role='tabpanel'] .card-body
+    ):not(.card-solid .card-body) {
     padding-top: 0;
   }
 

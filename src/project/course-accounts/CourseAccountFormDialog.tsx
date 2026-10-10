@@ -5,7 +5,6 @@ import {
 } from '@phosphor-icons/react';
 import Papa from 'papaparse';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { useToggle } from 'react-use';
 import {
@@ -15,7 +14,13 @@ import {
   marketplaceCourseAccountsCreateBulk,
 } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { EmailGroup, SubmitButton, TextGroup } from '@/form';
@@ -282,52 +287,60 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
               }
             >
               <Tabs
-                defaultActiveKey="single"
-                activeKey={activeTab}
-                id="create-course-tabs"
-                className="nav nav-stretch nav-line-tabs mb-4"
-                unmountOnExit
-                onSelect={goToTab}
+                mount="active"
+                defaultValue="single"
+                value={activeTab}
+                onValueChange={goToTab}
               >
-                <Tab eventKey="single" title={translate('Single account')}>
-                  <EmailGroup
-                    label={translate('Email')}
-                    required
-                    name="email"
-                    placeholder={translate('e.g. Courseaccount@example.com')}
-                    validate={activeTab === 'single' ? required : undefined}
-                  />
-                  <TextGroup
-                    name="description"
-                    placeholder={translate('e.g. Used for automated backups')}
-                    spaceless
-                    label={translate('Description')}
-                  />
-                </Tab>
-                <Tab eventKey="batch" title={translate('Batch import')}>
-                  <WizardStepIndicator
-                    steps={stepsBatch}
-                    value={stepsBatch[step]}
-                    onClick={(_, index) => {
-                      if (invalid) return;
-                      if (index === 2 && createdAccounts.length === 0) return;
-                      setStep(index);
-                    }}
-                  />
-                  {step === 0 ? (
-                    <Step1UploadFile />
-                  ) : step === 1 ? (
-                    <Step2PreviewAndCreate
-                      skipErrors={skipErrors}
-                      setSkipErrors={setSkipErrors}
+                <TabsList className="flex-wrap mb-4">
+                  <TabsTrigger value="single">
+                    {translate('Single account')}
+                  </TabsTrigger>
+                  <TabsTrigger value="batch">
+                    {translate('Batch import')}
+                  </TabsTrigger>
+                </TabsList>
+                <div className="tab-content">
+                  <TabsContent value="single">
+                    <EmailGroup
+                      label={translate('Email')}
+                      required
+                      name="email"
+                      placeholder={translate('e.g. Courseaccount@example.com')}
+                      validate={activeTab === 'single' ? required : undefined}
                     />
-                  ) : (
-                    <Step3CreationProgress
-                      createdAccounts={createdAccounts}
-                      projectUuid={project.uuid}
+                    <TextGroup
+                      name="description"
+                      placeholder={translate('e.g. Used for automated backups')}
+                      spaceless
+                      label={translate('Description')}
                     />
-                  )}
-                </Tab>
+                  </TabsContent>
+                  <TabsContent value="batch">
+                    <WizardStepIndicator
+                      steps={stepsBatch}
+                      value={stepsBatch[step]}
+                      onClick={(_, index) => {
+                        if (invalid) return;
+                        if (index === 2 && createdAccounts.length === 0) return;
+                        setStep(index);
+                      }}
+                    />
+                    {step === 0 ? (
+                      <Step1UploadFile />
+                    ) : step === 1 ? (
+                      <Step2PreviewAndCreate
+                        skipErrors={skipErrors}
+                        setSkipErrors={setSkipErrors}
+                      />
+                    ) : (
+                      <Step3CreationProgress
+                        createdAccounts={createdAccounts}
+                        projectUuid={project.uuid}
+                      />
+                    )}
+                  </TabsContent>
+                </div>
               </Tabs>
             </ModalDialog>
           </form>

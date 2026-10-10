@@ -151,6 +151,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'public-offering.marketplace-public-offering',
     url: '/marketplace-public-offering/:uuid/?tab',
+    params: { tab: { dynamic: true } },
     component: lazyComponent(() =>
       import('./offerings/details/PublicOfferingDetailsContainer').then(
         (module) => ({ default: module.PublicOfferingDetailsContainer }),
@@ -267,6 +268,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-providers.details',
     url: ':customer_uuid/?tab',
+    params: { tab: { dynamic: true } },
     component: lazyComponent(() =>
       import('./service-providers/details/ProviderDetailsContainer').then(
         (module) => ({ default: module.ProviderDetailsContainer }),
@@ -654,6 +656,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-user-manage',
     parent: 'marketplace-provider-user-manage-container',
     url: 'users/:user_uuid/?tab',
+    params: { tab: { dynamic: true } },
     component: lazyComponent(() =>
       import('@/user/UserManage').then((module) => ({
         default: module.UserManage,
@@ -969,6 +972,7 @@ export const states: StateDeclaration[] = [
     name: 'admin-marketplace-offerings',
     parent: 'admin-marketplace',
     url: 'offerings/?tab',
+    params: { tab: { dynamic: true } },
     component: lazyComponent(() =>
       import('@/administration/marketplace/OfferingsPage').then((module) => ({
         default: module.OfferingsPage,

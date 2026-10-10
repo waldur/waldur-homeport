@@ -1,13 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import {
   marketplaceSlurmPeriodicUsagePoliciesCommandHistoryList,
   marketplaceSlurmPeriodicUsagePoliciesEvaluationLogsList,
   SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
+import {
+  BadgeVariant,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
@@ -282,17 +287,23 @@ export const SlurmPolicyExecutionLogDialog: FC<
   return (
     <ModalDialog title={translate('Policy execution log')} bodyClassName="p-0">
       <div className="p-4">
-        <Tabs
-          defaultActiveKey="evaluations"
-          unmountOnExit
-          className="nav-line-tabs mb-4"
-        >
-          <Tab eventKey="evaluations" title={translate('Evaluation history')}>
-            <EvaluationHistoryTab policyUuid={policyUuid} />
-          </Tab>
-          <Tab eventKey="commands" title={translate('Command history')}>
-            <CommandHistoryTab policyUuid={policyUuid} />
-          </Tab>
+        <Tabs mount="active" defaultValue="evaluations">
+          <TabsList className="mb-4">
+            <TabsTrigger value="evaluations">
+              {translate('Evaluation history')}
+            </TabsTrigger>
+            <TabsTrigger value="commands">
+              {translate('Command history')}
+            </TabsTrigger>
+          </TabsList>
+          <div className="tab-content">
+            <TabsContent value="evaluations">
+              <EvaluationHistoryTab policyUuid={policyUuid} />
+            </TabsContent>
+            <TabsContent value="commands">
+              <CommandHistoryTab policyUuid={policyUuid} />
+            </TabsContent>
+          </div>
         </Tabs>
       </div>
     </ModalDialog>

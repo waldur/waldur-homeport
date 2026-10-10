@@ -2,9 +2,15 @@ import { LockIcon, PlusIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
-import { Col, Nav, Row, Tab } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { formatPhoneNumber } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -470,106 +476,48 @@ export const SearchPopover = ({
         className="px-5 mb-6"
       />
 
-      <Tab.Container
-        activeKey={activeTab}
-        onSelect={(key) => setActiveTab(key)}
+      <Tabs
+        mount="all"
+        value={activeTab}
+        onValueChange={(key) => setActiveTab(key)}
       >
-        {/*
-          Firefox makes any scrollable box a Tab stop (Chrome only when it holds
-          nothing focusable), so without this the first Tab landed on the row
-          itself and the two browsers differed. Tab lands on the selected tab
-          and the arrows switch tabs; a tab scrolls into view as it takes focus.
-          py-1 leaves room for the line-tab focus ring, which is drawn outside
-          the tab and would otherwise be clipped by this scroll box.
-        */}
-        <div className="overflow-auto py-1" tabIndex={-1}>
-          <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-            <Nav.Item className="text-nowrap ms-5">
-              <Nav.Link eventKey="all">
-                {translate('All results')}
-                {Boolean(result.data) && (
-                  <Badge
-                    variant="neutral"
-                    shape="pill"
-                    tone="outline"
-                    className="ms-2"
-                  >
-                    {result.data.resultsCount}
-                  </Badge>
-                )}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="text-nowrap">
-              <Nav.Link eventKey="organizations">
-                {translate('Organizations')}
-                {Boolean(result.data) && (
-                  <Badge
-                    variant="neutral"
-                    shape="pill"
-                    tone="outline"
-                    className="ms-2"
-                  >
-                    {result.data.customersCount}
-                  </Badge>
-                )}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="text-nowrap">
-              <Nav.Link eventKey="projects">
-                {translate('Projects')}
-                {Boolean(result.data) && (
-                  <Badge
-                    variant="neutral"
-                    shape="pill"
-                    tone="outline"
-                    className="ms-2"
-                  >
-                    {result.data.projectsCount}
-                  </Badge>
-                )}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item
-              className={
-                isStaffOrSupportUser ? 'text-nowrap' : 'text-nowrap me-5'
-              }
+        <TabsList scrollable>
+          <TabsTrigger
+            className="ms-5"
+            value="all"
+            count={result.data?.resultsCount}
+          >
+            {translate('All results')}
+          </TabsTrigger>
+          <TabsTrigger
+            value="organizations"
+            count={result.data?.customersCount}
+          >
+            {translate('Organizations')}
+          </TabsTrigger>
+          <TabsTrigger value="projects" count={result.data?.projectsCount}>
+            {translate('Projects')}
+          </TabsTrigger>
+          <TabsTrigger
+            className={isStaffOrSupportUser ? undefined : 'me-5'}
+            value="resources"
+            count={result.data?.resourcesCount}
+          >
+            {translate('Resources')}
+          </TabsTrigger>
+          {isStaffOrSupportUser && (
+            <TabsTrigger
+              className="me-5"
+              value="users"
+              count={usersResult?.data?.usersCount}
             >
-              <Nav.Link eventKey="resources">
-                {translate('Resources')}
-                {Boolean(result.data) && (
-                  <Badge
-                    variant="neutral"
-                    shape="pill"
-                    tone="outline"
-                    className="ms-2"
-                  >
-                    {result.data.resourcesCount}
-                  </Badge>
-                )}
-              </Nav.Link>
-            </Nav.Item>
-            {isStaffOrSupportUser && (
-              <Nav.Item className="text-nowrap me-5">
-                <Nav.Link eventKey="users">
-                  <LockIcon size={14} className="me-1" weight="bold" />
-                  {translate('Users')}
-                  {Boolean(usersResult?.data) && (
-                    <Badge
-                      variant="neutral"
-                      shape="pill"
-                      tone="outline"
-                      className="ms-2"
-                    >
-                      {usersResult.data.usersCount}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </Nav.Item>
-            )}
-          </Nav>
-        </div>
-        <Tab.Content className="overflow-auto min-h-200px">
-          <Tab.Pane eventKey="all">
+              <LockIcon size={14} className="me-1" weight="bold" />
+              {translate('Users')}
+            </TabsTrigger>
+          )}
+        </TabsList>
+        <div className="tab-content overflow-auto min-h-200px">
+          <TabsContent value="all">
             <AllResultsTabContent
               result={result}
               clearSearch={clearSearch}
@@ -584,8 +532,8 @@ export const SearchPopover = ({
               removeFavorite={removeFavorite}
               close={close}
             />
-          </Tab.Pane>
-          <Tab.Pane eventKey="organizations">
+          </TabsContent>
+          <TabsContent value="organizations">
             <OrganizationsTabContent
               result={result}
               clearSearch={clearSearch}
@@ -595,8 +543,8 @@ export const SearchPopover = ({
               removeFavorite={removeFavorite}
               close={close}
             />
-          </Tab.Pane>
-          <Tab.Pane eventKey="projects">
+          </TabsContent>
+          <TabsContent value="projects">
             <ProjectsTabContent
               result={result}
               clearSearch={clearSearch}
@@ -606,8 +554,8 @@ export const SearchPopover = ({
               removeFavorite={removeFavorite}
               close={close}
             />
-          </Tab.Pane>
-          <Tab.Pane eventKey="resources">
+          </TabsContent>
+          <TabsContent value="resources">
             <ResourcesTabContent
               result={result}
               clearSearch={clearSearch}
@@ -617,19 +565,19 @@ export const SearchPopover = ({
               removeFavorite={removeFavorite}
               close={close}
             />
-          </Tab.Pane>
+          </TabsContent>
           {isStaffOrSupportUser && (
-            <Tab.Pane eventKey="users">
+            <TabsContent value="users">
               <UsersTabContent
                 usersResult={usersResult}
                 clearSearch={clearSearch}
                 addRecentSearch={addRecentSearch}
                 close={close}
               />
-            </Tab.Pane>
+            </TabsContent>
           )}
-        </Tab.Content>
-      </Tab.Container>
+        </div>
+      </Tabs>
     </div>
   );
 };

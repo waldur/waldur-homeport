@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Card, Nav } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { OpenStackInstance, openstackPortsRetrieve } from 'waldur-js-client';
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { getUUID } from '@/core/utils';
-import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 import { TablePlaceholder } from '@/table/TablePlaceholder';
@@ -115,66 +116,61 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
         </div>
       </Card.Header>
       <Card.Body className="min-h-300px">
-        {ports?.length > 0 && (
-          <TableTabsContainer
-            onSelect={setActiveKey}
-            defaultActiveKey="resource"
-          >
-            <div className="overflow-auto">
-              <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-                <Nav.Item className="text-nowrap">
-                  <Nav.Link eventKey="resource">
-                    {translate('Resource')}
-                  </Nav.Link>
-                </Nav.Item>
-                {ports.map((tab) => (
-                  <Nav.Item key={tab} className="text-nowrap">
-                    <Nav.Link eventKey={tab}>{tab}</Nav.Link>
-                  </Nav.Item>
-                ))}
-              </Nav>
-            </div>
-          </TableTabsContainer>
-        )}
-        {activeKey === 'resource' ? (
-          <>
-            {props.resourceScope.security_groups.length === 0 && (
-              <Placeholder
-                message={translate(
-                  'Instance does not have any security groups yet.',
+        <Tabs value={activeKey} onValueChange={setActiveKey}>
+          {ports?.length > 0 && (
+            <TabsList scrollable>
+              <TabsTrigger value="resource">
+                {translate('Resource')}
+              </TabsTrigger>
+              {ports.map((tab) => (
+                <TabsTrigger key={tab} value={tab}>
+                  {tab}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          )}
+          <TabsContent value={activeKey}>
+            {activeKey === 'resource' ? (
+              <>
+                {props.resourceScope.security_groups.length === 0 && (
+                  <Placeholder
+                    message={translate(
+                      'Instance does not have any security groups yet.',
+                    )}
+                    refetch={props.refetch}
+                  />
                 )}
-                refetch={props.refetch}
-              />
-            )}
-            {props.resourceScope.security_groups.length > 0 && (
-              <OpenStackSecurityGroupsTable
-                securityGroups={props.resourceScope.security_groups}
-              />
-            )}
-          </>
-        ) : isLoadingPort ? (
-          <LoadingSpinner />
-        ) : errorPort ? (
-          <LoadingErred loadData={refetchPort} />
-        ) : !activePortSecurityGroups?.length ? (
-          translate('Instance port does not have any security groups yet.')
-        ) : (
-          <>
-            {activePortSecurityGroups.length === 0 && (
-              <Placeholder
-                message={translate(
-                  'Instance port does not have any security groups yet.',
+                {props.resourceScope.security_groups.length > 0 && (
+                  <OpenStackSecurityGroupsTable
+                    securityGroups={props.resourceScope.security_groups}
+                  />
                 )}
-                refetch={props.refetch}
-              />
+              </>
+            ) : isLoadingPort ? (
+              <LoadingSpinner />
+            ) : errorPort ? (
+              <LoadingErred loadData={refetchPort} />
+            ) : !activePortSecurityGroups?.length ? (
+              translate('Instance port does not have any security groups yet.')
+            ) : (
+              <>
+                {activePortSecurityGroups.length === 0 && (
+                  <Placeholder
+                    message={translate(
+                      'Instance port does not have any security groups yet.',
+                    )}
+                    refetch={props.refetch}
+                  />
+                )}
+                {activePortSecurityGroups.length > 0 && (
+                  <OpenStackSecurityGroupsTable
+                    securityGroups={activePortSecurityGroups}
+                  />
+                )}
+              </>
             )}
-            {activePortSecurityGroups.length > 0 && (
-              <OpenStackSecurityGroupsTable
-                securityGroups={activePortSecurityGroups}
-              />
-            )}
-          </>
-        )}
+          </TabsContent>
+        </Tabs>
       </Card.Body>
     </Card>
   );

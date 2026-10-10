@@ -24,7 +24,7 @@ export const OfferingTeamTab: FC<{ offering: Offering }> = (props) => {
         key: 'active',
         title: translate('Active'),
         params: { team_tab: 'active' },
-        // Landing on ?tab=permissions carries no team_tab, so TableTabs finds
+        // Landing on ?tab=permissions carries no team_tab, so TableNav finds
         // no param match and would highlight neither tab. `default` is its
         // fallback for exactly that case.
         default: true,

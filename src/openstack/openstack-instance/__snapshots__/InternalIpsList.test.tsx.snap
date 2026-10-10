@@ -10,10 +10,10 @@ exports[`InternalIpsList > renders list 1`] = `
       data-testid="table-toolbar"
     >
       <div
-        class="card-toolbar g-0 gap-4 w-100 row"
+        class="card-toolbar d-flex flex-wrap align-items-center gap-4 w-100"
       >
         <div
-          class="order-0 col"
+          class="flex-grow-1 order-0"
           data-testid="table-toolbar-title-container"
         >
           <div
@@ -52,7 +52,7 @@ exports[`InternalIpsList > renders list 1`] = `
           </div>
         </div>
         <div
-          class="order-2 order-sm-2 d-flex align-items-center flex-wrap flex-sm-nowrap text-nowrap gap-4 ms-auto justify-content-end col"
+          class="flex-grow-1 order-2 order-sm-2 d-flex align-items-center flex-wrap flex-sm-nowrap text-nowrap gap-4 ms-auto justify-content-end"
         >
           <div
             class="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4"

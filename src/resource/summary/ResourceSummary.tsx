@@ -1,5 +1,6 @@
 import { ComponentType, FunctionComponent, ReactNode } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import * as ResourceSummaryRegistry from '@/resource/summary/registry';
@@ -12,7 +13,7 @@ interface ResourceSummaryProps {
   hasMultiSelect?: boolean;
   extraTabs?: Array<{
     title: ReactNode;
-    eventKey: string | number;
+    eventKey: string;
     component: ComponentType;
   }>;
 }
@@ -43,33 +44,35 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
             {SummaryComponent && <SummaryComponent resource={props.resource} />}
           </>
         ) : (
-          <Tab.Container defaultActiveKey="details" unmountOnExit={true}>
-            <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
-              <Nav.Item>
-                <Nav.Link eventKey="details">{translate('Details')}</Nav.Link>
-              </Nav.Item>
+          <Tabs mount="active" defaultValue="details">
+            <TabsList className="mb-4">
+              <TabsTrigger value="details">{translate('Details')}</TabsTrigger>
               {props.extraTabs &&
                 props.extraTabs.map((tab) => (
-                  <Nav.Item key={tab.eventKey} className="text-nowrap">
-                    <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
-                  </Nav.Item>
+                  <TabsTrigger
+                    key={tab.eventKey}
+
+                    value={tab.eventKey}
+                  >
+                    {tab.title}
+                  </TabsTrigger>
                 ))}
-            </Nav>
-            <Tab.Content className="overflow-auto">
-              <Tab.Pane eventKey="details">
+            </TabsList>
+            <div className="overflow-auto">
+              <TabsContent value="details">
                 <ResourceSummaryBase resource={props.resource} />
                 {SummaryComponent && (
                   <SummaryComponent resource={props.resource} />
                 )}
-              </Tab.Pane>
+              </TabsContent>
               {props.extraTabs &&
                 props.extraTabs.map((tab) => (
-                  <Tab.Pane key={tab.eventKey} eventKey={tab.eventKey}>
+                  <TabsContent key={tab.eventKey} value={tab.eventKey}>
                     <tab.component />
-                  </Tab.Pane>
+                  </TabsContent>
                 ))}
-            </Tab.Content>
-          </Tab.Container>
+            </div>
+          </Tabs>
         )}
       </ExpandableContainer>
     );

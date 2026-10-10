@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   SupportUser,
   SupportUserAttachmentBrief,
@@ -9,30 +8,15 @@ import {
   supportUsersConnectionsRetrieve,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
-
 import { formatDateTime } from '@/core/dateUtils';
 import { Link } from '@/core/Link';
-import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
 import { translate } from '@/i18n';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-
-// Mirrors the tab header of the organization/project expandable rows. Counts
-// come from the list row, so they render before the connections query lands.
-const NavItem = ({ title, eventKey, count }) => (
-  <Nav.Item className="text-nowrap">
-    <Nav.Link eventKey={eventKey}>
-      {title}
-      <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
-        {count || 0}
-      </Badge>
-    </Nav.Link>
-  </Nav.Item>
-);
 
 type ConnectionsSlice = keyof SupportUserConnections;
 
@@ -164,72 +148,64 @@ export const SupportUserConnectionsRow: FC<{ row: SupportUser }> = ({
   row,
 }) => (
   <ExpandableContainer>
-    <TableTabsContainer
-      defaultActiveKey="reported"
-      unmountOnExit={true}
+    <EmbeddedTabs
+      framed
+      defaultValue="reported"
       className="min-h-375px"
-    >
-      <div className="overflow-auto">
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-          <NavItem
-            title={translate('Reported tickets')}
-            eventKey="reported"
-            count={row.reported_issues_count}
-          />
-          <NavItem
-            title={translate('Assigned tickets')}
-            eventKey="assigned"
-            count={row.assigned_issues_count}
-          />
-          <NavItem
-            title={translate('Comments')}
-            eventKey="comments"
-            count={row.comments_count}
-          />
-          <NavItem
-            title={translate('Attachments')}
-            eventKey="attachments"
-            count={row.attachments_count}
-          />
-        </Nav>
-      </div>
-      <Tab.Content className="overflow-auto">
-        <Tab.Pane eventKey="reported">
-          <ConnectionsTable<SupportUserIssueBrief>
-            supportUserUuid={row.uuid}
-            slice="reported_issues"
-            columns={issueColumns}
-            verboseName={translate('reported tickets')}
-          />
-        </Tab.Pane>
-
-        <Tab.Pane eventKey="assigned">
-          <ConnectionsTable<SupportUserIssueBrief>
-            supportUserUuid={row.uuid}
-            slice="assigned_issues"
-            columns={issueColumns}
-            verboseName={translate('assigned tickets')}
-          />
-        </Tab.Pane>
-
-        <Tab.Pane eventKey="comments">
-          <ConnectionsTable<SupportUserCommentBrief>
-            supportUserUuid={row.uuid}
-            slice="comments"
-            columns={commentColumns}
-            verboseName={translate('comments')}
-          />
-        </Tab.Pane>
-
-        <Tab.Pane eventKey="attachments">
-          <ConnectionsTable<SupportUserAttachmentBrief>
-            supportUserUuid={row.uuid}
-            slice="attachments"
-            columns={attachmentColumns}
-            verboseName={translate('attachments')}
-          />
-        </Tab.Pane>
-      </Tab.Content>
-    </TableTabsContainer>
+      tabs={[
+        {
+          key: 'reported',
+          title: translate('Reported tickets'),
+          count: row.reported_issues_count ?? 0,
+          content: (
+            <ConnectionsTable<SupportUserIssueBrief>
+              supportUserUuid={row.uuid}
+              slice="reported_issues"
+              columns={issueColumns}
+              verboseName={translate('reported tickets')}
+            />
+          ),
+        },
+        {
+          key: 'assigned',
+          title: translate('Assigned tickets'),
+          count: row.assigned_issues_count ?? 0,
+          content: (
+            <ConnectionsTable<SupportUserIssueBrief>
+              supportUserUuid={row.uuid}
+              slice="assigned_issues"
+              columns={issueColumns}
+              verboseName={translate('assigned tickets')}
+            />
+          ),
+        },
+        {
+          key: 'comments',
+          title: translate('Comments'),
+          count: row.comments_count ?? 0,
+          content: (
+            <ConnectionsTable<SupportUserCommentBrief>
+              supportUserUuid={row.uuid}
+              slice="comments"
+              columns={commentColumns}
+              verboseName={translate('comments')}
+            />
+          ),
+        },
+        {
+          key: 'attachments',
+          title: translate('Attachments'),
+          count: row.attachments_count ?? 0,
+          content: (
+            <ConnectionsTable<SupportUserAttachmentBrief>
+              supportUserUuid={row.uuid}
+              slice="attachments"
+              columns={attachmentColumns}
+              verboseName={translate('attachments')}
+            />
+          ),
+        },
+      ]}
+    />
   </ExpandableContainer>
 );

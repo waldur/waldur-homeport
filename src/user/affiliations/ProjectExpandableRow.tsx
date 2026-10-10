@@ -1,6 +1,5 @@
 import { useQueries } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import { Project, projectsListUsersCount } from 'waldur-js-client';
 
 import { getResourcesCount } from '@/administration/api';
@@ -8,12 +7,10 @@ import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
 import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
 import { canViewTeam } from '@/permissions/teamVisibility';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { useUser } from '@/workspace/hooks';
 
-import { TableTabsContainer } from '../../customer/list/TableTabsContainer';
-
-import { NavItem } from './OrganizationExpandableRow';
 import { SummaryResourcesTable } from './SummaryResourcesTable';
 import { SummaryTeamTable } from './SummaryTeamTable';
 
@@ -49,41 +46,30 @@ export const ProjectExpandableRow: FC<OwnProps> = (props) => {
   });
   return (
     <ExpandableContainer>
-      <TableTabsContainer
-        defaultActiveKey="resources"
-        unmountOnExit={true}
+      <EmbeddedTabs
+        framed
+        defaultValue="resources"
         className="min-h-375px"
-      >
-        <div className="overflow-auto">
-          <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-            <NavItem
-              title={translate('Resources')}
-              eventKey="resources"
-              count={resourcesCount.data}
-              countLoading={resourcesCount.isLoading}
-            />
-
-            {showTeam && (
-              <NavItem
-                title={translate('Team')}
-                eventKey="team"
-                count={teamCount.data}
-                countLoading={teamCount.isLoading}
-              />
-            )}
-          </Nav>
-        </div>
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="resources">
-            <SummaryResourcesTable scope={props.row} context="project" />
-          </Tab.Pane>
-          {showTeam && (
-            <Tab.Pane eventKey="team">
-              <SummaryTeamTable scope={props.row} context="project" />
-            </Tab.Pane>
-          )}
-        </Tab.Content>
-      </TableTabsContainer>
+        tabs={[
+          {
+            key: 'resources',
+            title: translate('Resources'),
+            count: resourcesCount.data,
+            countLoading: resourcesCount.isLoading,
+            content: (
+              <SummaryResourcesTable scope={props.row} context="project" />
+            ),
+          },
+          {
+            key: 'team',
+            title: translate('Team'),
+            count: teamCount.data,
+            countLoading: teamCount.isLoading,
+            hidden: !showTeam,
+            content: <SummaryTeamTable scope={props.row} context="project" />,
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

@@ -1,6 +1,7 @@
 import { CopySimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -19,10 +20,15 @@ export const ResourceDetailsDialog: FC<ActionDialogProps> = ({
       iconColor="success"
       bodyClassName="h-350px"
     >
-      <Tabs defaultActiveKey={1} unmountOnExit={true} className="nav-line-tabs">
-        <Tab eventKey={1} title={translate('Details')}>
-          <ResourceDetailsTable resource={resource} />
-        </Tab>
+      <Tabs mount="active" defaultValue="details">
+        <TabsList>
+          <TabsTrigger value="details">{translate('Details')}</TabsTrigger>
+        </TabsList>
+        <div className="tab-content">
+          <TabsContent value="details">
+            <ResourceDetailsTable resource={resource} />
+          </TabsContent>
+        </div>
       </Tabs>
     </ModalDialog>
   );

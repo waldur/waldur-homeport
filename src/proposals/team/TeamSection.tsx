@@ -1,13 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { FC, ReactNode, useCallback, useMemo, useRef } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   proposalProposalsListUsersList,
   proposalProtectedCallsListUsersList,
   userInvitationsList,
 } from 'waldur-js-client';
 
-import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
 import { BaseEventsList } from '@/events/BaseEventsList';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -16,7 +15,8 @@ import { GenericInvitationContext } from '@/invitations/types';
 import { RoleEnum } from '@/permissions/enums';
 import { GenericPermission } from '@/permissions/types';
 import { createFetcher } from '@/table/api';
-import { TableTabs } from '@/table/TableTabs';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
+import { TableNav } from '@/table/TableNav';
 import { useTable } from '@/table/useTable';
 
 import { CALL_REVIEWERS_QUERY_KEY } from '../constants';
@@ -165,7 +165,7 @@ export const TeamSection: FC<
       {props.hasTeamTabs &&
         !isFeatureVisible(MarketplaceFeatures.call_only) && (
           <Card.Header className="table-tabs border-bottom align-items-stretch py-0 min-h-auto">
-            <TableTabs
+            <TableNav
               tabs={[
                 {
                   key: 'reviewers',
@@ -184,83 +184,76 @@ export const TeamSection: FC<
           </Card.Header>
         )}
       <Card.Body className="pt-0">
-        <TableTabsContainer
-          defaultActiveKey="users"
-          unmountOnExit
+        {/* Invitations and the permissions log are management surfaces the
+            backend denies to reviewers; in read-only (review) mode we show
+            only the team roster so the info matches the viewer's role. */}
+        <EmbeddedTabs
+          defaultValue="users"
           className="min-h-175px"
-        >
-          <div className="overflow-auto">
-            <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-              <Nav.Item className="text-nowrap">
-                <Nav.Link eventKey="users">{translate('Users')}</Nav.Link>
-              </Nav.Item>
-              {/* Invitations and the permissions log are management surfaces the
-                  backend denies to reviewers; in read-only (review) mode we show
-                  only the team roster so the info matches the viewer's role. */}
-              {showManagementTabs && (
+          tabs={[
+            {
+              key: 'users',
+              title: translate('Users'),
+              content: (
                 <>
-                  <Nav.Item className="text-nowrap">
-                    <Nav.Link eventKey="invitations">
-                      {translate('Invitations')}
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item className="text-nowrap">
-                    <Nav.Link eventKey="permissions">
-                      {translate('Permissions')}
-                    </Nav.Link>
-                  </Nav.Item>
+                  {rules?.teamNote && !props.readOnlyMode ? (
+                    <p className="text-muted py-3 mb-0">{rules.teamNote}</p>
+                  ) : null}
+                  <UsersList
+                    table={usersTable}
+                    scope={props.scope}
+                    hideRole={hideRole}
+                    cardBordered={false}
+                    hasActionBar={false}
+                    fullWidth
+                    expandableRow={
+                      props.roles?.includes(RoleEnum.CALL_REVIEWER)
+                        ? ReviewerExpandableRow
+                        : undefined
+                    }
+                    readOnly={props.readOnlyMode || rules?.readOnly}
+                    extraRowActions={props.extraRowActions}
+                    hasExtraRowActions={props.hasExtraRowActions}
+                    roleSuffix={props.roleSuffix}
+                    canRemoveRow={rules?.canRemoveRow}
+                    getRemoveDisabledReason={rules?.getRemoveDisabledReason}
+                    scopeType={scopeType}
+                    refetch={refetchUsers}
+                  />
                 </>
-              )}
-            </Nav>
-          </div>
-          <Tab.Content className="overflow-auto">
-            <Tab.Pane eventKey="users">
-              {rules?.teamNote && !props.readOnlyMode ? (
-                <p className="text-muted py-3 mb-0">{rules.teamNote}</p>
-              ) : null}
-              <UsersList
-                table={usersTable}
-                scope={props.scope}
-                hideRole={hideRole}
-                cardBordered={false}
-                hasActionBar={false}
-                fullWidth
-                expandableRow={
-                  props.roles?.includes(RoleEnum.CALL_REVIEWER)
-                    ? ReviewerExpandableRow
-                    : undefined
-                }
-                readOnly={props.readOnlyMode || rules?.readOnly}
-                extraRowActions={props.extraRowActions}
-                hasExtraRowActions={props.hasExtraRowActions}
-                roleSuffix={props.roleSuffix}
-                canRemoveRow={rules?.canRemoveRow}
-                getRemoveDisabledReason={rules?.getRemoveDisabledReason}
-                scopeType={scopeType}
-                refetch={refetchUsers}
-              />
-            </Tab.Pane>
-            <Tab.Pane eventKey="invitations">
-              <InvitationsList
-                table={invitationsTable}
-                hideRole={hideRole}
-                cardBordered={false}
-                hasActionBar={false}
-                fullWidth
-              />
-            </Tab.Pane>
-            <Tab.Pane eventKey="permissions">
-              <BaseEventsList
-                table={`permissions-log${props.scope.url}`}
-                filter={eventsFilter}
-                cardBordered={false}
-                hasActionBar={false}
-                fullWidth
-                minHeight="auto"
-              />
-            </Tab.Pane>
-          </Tab.Content>
-        </TableTabsContainer>
+              ),
+            },
+            {
+              key: 'invitations',
+              title: translate('Invitations'),
+              hidden: !showManagementTabs,
+              content: (
+                <InvitationsList
+                  table={invitationsTable}
+                  hideRole={hideRole}
+                  cardBordered={false}
+                  hasActionBar={false}
+                  fullWidth
+                />
+              ),
+            },
+            {
+              key: 'permissions',
+              title: translate('Permissions'),
+              hidden: !showManagementTabs,
+              content: (
+                <BaseEventsList
+                  table={`permissions-log${props.scope.url}`}
+                  filter={eventsFilter}
+                  cardBordered={false}
+                  hasActionBar={false}
+                  fullWidth
+                  minHeight="auto"
+                />
+              ),
+            },
+          ]}
+        />
 
         <FieldReviewComments
           reviews={props.reviews}

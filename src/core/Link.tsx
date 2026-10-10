@@ -23,6 +23,9 @@ interface LinkProps {
   'aria-current'?: React.AriaAttributes['aria-current'];
 }
 
+const isModifiedClick = (e: React.MouseEvent) =>
+  e.button > 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey;
+
 /**
  * forwardRef so this can compose under a Radix `asChild` trigger/item —
  * Slot clones its child and attaches the ref Radix needs (a menu item's
@@ -72,7 +75,11 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         onClick={(e) => {
           sref.onClick?.(e);
           onClick?.(e);
-          e.preventDefault();
+          // Leave a modified click (Ctrl/Cmd/Shift/Alt) and a `target` link
+          // to the browser, so "open in new tab" and `target="_blank"` work.
+          if (!(isModifiedClick(e) || target)) {
+            e.preventDefault();
+          }
         }}
         className={cn(
           buttonVariant &&

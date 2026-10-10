@@ -1,50 +1,42 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Card, Tab, Tabs } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { Tooltip } from 'waldur-ui';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { translate } from '@/i18n';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { formatHeader } from './NotificationForm';
+
+import './NotificationExpandableRow.scss';
 
 export const NotificationExpandableRow: FunctionComponent<{
   row;
 }> = ({ row }) => {
   return (
     <ExpandableContainer>
-      <div className="tabs-container tabs-scrollable">
-        <Tabs
-          defaultActiveKey="tab-0"
-          id="notification-templates-tabs"
-          className="nav-line-tabs"
-          unmountOnExit
-          mountOnEnter
-        >
-          {row.templates.map((template, index: number) => (
-            <Tab
-              title={
-                <>
-                  {template.is_content_overridden ? (
-                    <div>
-                      {formatHeader(template.path)}
-                      <Tooltip label={translate('Content is overridden')}>
-                        <PencilSimpleIcon
-                          weight="bold"
-                          className="svg-icon svg-icon-5 ms-3"
-                        />
-                      </Tooltip>
-                    </div>
-                  ) : (
-                    formatHeader(template.path)
-                  )}
-                </>
-              }
-              key={index}
-              eventKey={`tab-${index}`}
-            >
+      <div className="notification-templates-tabs">
+        <EmbeddedTabs
+          defaultValue={row.templates[0]?.path}
+          tabs={row.templates.map((template) => ({
+            key: template.path,
+            title: template.is_content_overridden ? (
+              <span className="d-inline-flex align-items-center">
+                {formatHeader(template.path)}
+                <Tooltip label={translate('Content is overridden')}>
+                  <PencilSimpleIcon
+                    weight="bold"
+                    className="svg-icon svg-icon-5 ms-3"
+                  />
+                </Tooltip>
+              </span>
+            ) : (
+              formatHeader(template.path)
+            ),
+            content: (
               <Card className="card-bordered card-solid">
                 <Card.Header className="min-h-auto">
                   <h6 className="mb-0 fw-bold">
@@ -64,9 +56,9 @@ export const NotificationExpandableRow: FunctionComponent<{
                   </pre>
                 </Card.Body>
               </Card>
-            </Tab>
-          ))}
-        </Tabs>
+            ),
+          }))}
+        />
       </div>
     </ExpandableContainer>
   );

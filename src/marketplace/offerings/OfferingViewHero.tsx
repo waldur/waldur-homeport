@@ -1,14 +1,15 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
-import { Nav, Tab, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { TabNav } from 'waldur-ui';
 
 import { ANNOUNCEMENT_ICON } from '@/administration/utils';
 import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
@@ -44,7 +45,6 @@ interface OfferingViewHeroProps {
 }
 
 export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
-  const router = useRouter();
   const { state } = useCurrentStateAndParams();
   const user = useUser();
 
@@ -71,16 +71,21 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
     [offering],
   );
 
-  const goTo = (stateName) =>
-    router.stateService.go(
-      stateName,
-      stateName === 'public-offering.marketplace-public-offering'
-        ? { uuid: offering.uuid }
-        : {
-            offering_uuid: offering.uuid,
-            uuid: offering.customer_uuid,
-          },
-    );
+  const isAdmin = isDescendantOf('admin', state);
+  const manageState = isAdmin
+    ? 'admin-marketplace-offering-details'
+    : 'marketplace-offering-details';
+  const editState = isAdmin
+    ? 'admin-marketplace-offering-update'
+    : 'marketplace-offering-update';
+
+  const getParams = (stateName: string) =>
+    stateName === 'public-offering.marketplace-public-offering'
+      ? { uuid: offering.uuid }
+      : {
+          offering_uuid: offering.uuid,
+          uuid: offering.customer_uuid,
+        };
 
   const { isDisabled: isNotAccessible, disabledButtonTooltip } =
     useOfferingAccessibility(offering);
@@ -117,66 +122,66 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
   return (
     <div className="container-fluid my-5">
       {canManageAndEditOfferings && (
-        <Tab.Container defaultActiveKey={state.name} onSelect={goTo}>
-          <Nav variant="tabs" className="nav-line-tabs mb-4">
-            {offering.state === 'Draft' ? (
-              <Nav.Item>
-                <Tooltip
-                  label={translate(
-                    'The public view is currently inactive as this offering is in draft status.',
-                  )}
-                >
-                  <span>
-                    <Nav.Link
-                      disabled
-                      className="d-flex align-items-center text-center min-w-60px"
-                      data-testid="offering-tab-public"
-                    >
+        <TabNav
+          activeKey={state.name}
+          listClassName="mb-4"
+          items={[
+            offering.state === 'Draft'
+              ? {
+                  key: 'public-offering.marketplace-public-offering',
+                  title: (
+                    <>
                       {translate('Public')}
                       <QuestionIcon size={18} className="ms-1" weight="bold" />
-                    </Nav.Link>
-                  </span>
-                </Tooltip>
-              </Nav.Item>
-            ) : (
-              <Nav.Item>
-                <Nav.Link
-                  eventKey="public-offering.marketplace-public-offering"
-                  className="text-center min-w-60px"
-                  data-testid="offering-tab-public"
-                >
-                  {translate('Public')}
-                </Nav.Link>
-              </Nav.Item>
-            )}
-            <Nav.Item>
-              <Nav.Link
-                eventKey={
-                  isDescendantOf('admin', state)
-                    ? 'admin-marketplace-offering-details'
-                    : 'marketplace-offering-details'
+                    </>
+                  ),
+                  disabled: true,
+                  tooltip: translate(
+                    'The public view is currently inactive as this offering is in draft status.',
+                  ),
+                  className: 'text-center min-w-60px',
+                  testId: 'offering-tab-public',
                 }
-                className="text-center min-w-60px"
-                data-testid="offering-tab-manage"
-              >
-                {translate('Manage')}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                eventKey={
-                  isDescendantOf('admin', state)
-                    ? 'admin-marketplace-offering-update'
-                    : 'marketplace-offering-update'
-                }
-                className="text-center min-w-60px"
-                data-testid="offering-tab-edit"
-              >
-                {translate('Edit')}
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Tab.Container>
+              : {
+                  key: 'public-offering.marketplace-public-offering',
+                  title: translate('Public'),
+                  link: (
+                    <Link
+                      state="public-offering.marketplace-public-offering"
+                      params={getParams(
+                        'public-offering.marketplace-public-offering',
+                      )}
+                    />
+                  ),
+                  className: 'text-center min-w-60px',
+                  testId: 'offering-tab-public',
+                },
+            {
+              key: manageState,
+              title: translate('Manage'),
+              link: (
+                <Link
+                  state={manageState}
+                  params={getParams('marketplace-offering-details')}
+                />
+              ),
+              className: 'text-center min-w-60px',
+              testId: 'offering-tab-manage',
+            },
+            {
+              key: editState,
+              title: translate('Edit'),
+              link: (
+                <Link
+                  state={editState}
+                  params={getParams('marketplace-offering-update')}
+                />
+              ),
+              className: 'text-center min-w-60px',
+              testId: 'offering-tab-edit',
+            },
+          ]}
+        />
       )}
       <PublicDashboardHero
         hideQuickSection

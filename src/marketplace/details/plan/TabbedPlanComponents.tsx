@@ -1,5 +1,4 @@
 import { ComponentType, FunctionComponent, ReactNode } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   BasePublicPlan,
@@ -8,6 +7,8 @@ import {
   PublicOfferingDetails,
   Offering,
 } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -94,7 +95,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
     : 'periodic-' + LIMIT_PERIODS.find((per) => canShowTab(per));
 
   const tabs: Array<{
-    eventKey: string | number;
+    eventKey: string;
     title: ReactNode;
     content: ReactNode;
   }> = [
@@ -160,29 +161,30 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
 
   return (
     <div className="plan-details-container">
-      <Tab.Container defaultActiveKey={defaultActiveKey}>
-        {/* TABS */}
-        <Nav variant="tabs" className="nav-line-tabs">
+      <Tabs mount="all" defaultValue={defaultActiveKey}>
+        {/* TABS — 16px between the bar and the table under it. */}
+        <TabsList className="mb-[16px]">
           {tabs.map((tab) => (
-            <Nav.Item key={tab.eventKey}>
-              <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
-            </Nav.Item>
+            <TabsTrigger key={tab.eventKey} value={tab.eventKey}>
+              {tab.title}
+            </TabsTrigger>
           ))}
           {/* WarningTooltip reads submit errors via useFormState, so it must
               not render outside a <Form> — e.g. the read-only proposal
               resource-request view passes viewMode with no surrounding form. */}
           {!props.viewMode && <WarningTooltip />}
-        </Nav>
+        </TabsList>
 
         {/* CONTENT */}
-        <Tab.Content>
+        {/* The first row's own top padding is dropped so the two gaps do not add up to 32px. */}
+        <div className="tab-content [&_table.form-table_tr:first-child>*]:pt-0">
           {tabs.map((tab) => (
-            <Tab.Pane key={tab.eventKey} eventKey={tab.eventKey}>
+            <TabsContent key={tab.eventKey} value={tab.eventKey}>
               {tab.content}
-            </Tab.Pane>
+            </TabsContent>
           ))}
-        </Tab.Content>
-      </Tab.Container>
+        </div>
+      </Tabs>
     </div>
   );
 };
@@ -200,7 +202,7 @@ interface TabbedPlanComponents {
   prepaidDurationMonths?: number;
   extraTabs?: Array<{
     title: ReactNode;
-    eventKey: string | number;
+    eventKey: string;
     component: ComponentType;
   }>;
 }

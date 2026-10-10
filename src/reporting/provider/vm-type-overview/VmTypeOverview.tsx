@@ -1,6 +1,8 @@
 import React from 'react';
-import { Card, Tab, Tabs } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { FormSpy } from 'react-final-form';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -20,22 +22,25 @@ export const VmTypeOverview: React.FC = () => {
 
         return (
           <Card>
-            <Tabs
-              defaultActiveKey={1}
-              id="vm-overview"
-              mountOnEnter
-              unmountOnExit
-            >
-              <Tab eventKey={1} title={translate('Images')}>
-                <Card>
-                  <ImagesList />
-                </Card>
-              </Tab>
-              <Tab eventKey={2} title={translate('Flavors')}>
-                <Card>
-                  <FlavorsList />
-                </Card>
-              </Tab>
+            <Tabs mount="active" defaultValue="images">
+              <TabsList>
+                <TabsTrigger value="images">{translate('Images')}</TabsTrigger>
+                <TabsTrigger value="flavors">
+                  {translate('Flavors')}
+                </TabsTrigger>
+              </TabsList>
+              <div className="tab-content">
+                <TabsContent value="images">
+                  <Card>
+                    <ImagesList />
+                  </Card>
+                </TabsContent>
+                <TabsContent value="flavors">
+                  <Card>
+                    <FlavorsList />
+                  </Card>
+                </TabsContent>
+              </div>
             </Tabs>
           </Card>
         );

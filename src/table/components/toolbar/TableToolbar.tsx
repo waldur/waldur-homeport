@@ -1,7 +1,7 @@
 import { XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { createElement, useCallback } from 'react';
-import { Card, Col, Row, Stack } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { BaseButton, useBreakpointDown } from 'waldur-ui';
 
@@ -92,11 +92,8 @@ export function TableToolbarActions() {
     <>
       {/* Multi-select actions */}
       {selectedRows?.length > 0 && slots.multiSelectActions && (
-        <Col
-          xs="auto"
-          className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-4"
-        >
-          <Stack direction="horizontal" className="fw-normal text-dark me-2">
+        <div className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-4">
+          <div className="d-flex align-items-center fw-normal text-dark me-2">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
@@ -108,7 +105,7 @@ export function TableToolbarActions() {
             <span>
               ({selectedRows?.length}) {translate('Selected')}
             </span>
-          </Stack>
+          </div>
           {createElement(slots.multiSelectActions, {
             rows: selectedRows,
             refetch: () => {
@@ -116,15 +113,14 @@ export function TableToolbarActions() {
               actions.resetSelection();
             },
           })}
-        </Col>
+        </div>
       )}
 
       {/* Right side: search, filters and table actions */}
       {(config.hasQuery || showActionsColumn) && (
-        <Col
-          xs
+        <div
           className={classNames(
-            'order-2 order-sm-2 d-flex align-items-center flex-wrap',
+            'flex-grow-1 order-2 order-sm-2 d-flex align-items-center flex-wrap',
             // In a tabbed card's header the toolbar shares the width with the
             // card title; let search and buttons wrap instead of overflowing.
             // Kept in place so a standalone table's classes are unchanged.
@@ -194,7 +190,7 @@ export function TableToolbarActions() {
               />
             </div>
           )}
-        </Col>
+        </div>
       )}
     </>
   );
@@ -214,7 +210,10 @@ export function TableToolbarTitle() {
   }
 
   return (
-    <Col xs className="order-0" data-testid="table-toolbar-title-container">
+    <div
+      className="flex-grow-1 order-0"
+      data-testid="table-toolbar-title-container"
+    >
       <Card.Title>
         {!config.hideTitle && (
           <div className="me-2">
@@ -234,7 +233,7 @@ export function TableToolbarTitle() {
           <TableRefreshButton fetch={actions.fetch} loading={loading} />
         )}
       </Card.Title>
-    </Col>
+    </div>
   );
 }
 
@@ -256,10 +255,10 @@ export function TableToolbar() {
       className={classNames('border-bottom', display.headerClassName)}
       data-testid="table-toolbar"
     >
-      <Row className="card-toolbar g-0 gap-4 w-100">
+      <div className="card-toolbar d-flex flex-wrap align-items-center gap-4 w-100">
         <TableToolbarTitle />
         {!portal?.toolbar && <TableToolbarActions />}
-      </Row>
+      </div>
     </Card.Header>
   );
 }

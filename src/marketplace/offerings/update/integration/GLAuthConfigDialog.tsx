@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import { ProviderOfferingDetails as Offering } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { MonacoEditor } from '@/form/MonacoEditor';
@@ -45,23 +46,19 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
         <CloseDialogButton label={translate('Close')} className="w-150px" />
       }
     >
-      <Tab.Container
-        activeKey={view}
-        onSelect={(k) => k && setView(k as View)}
-        mountOnEnter
+      <Tabs
+        mount="visited"
+        value={view}
+        onValueChange={(k) => k && setView(k as View)}
       >
-        <Nav variant="tabs" className="nav-line-tabs mb-5">
-          <Nav.Item>
-            <Nav.Link eventKey="toml">{translate('TOML config')}</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="tree" disabled={!hasTree}>
-              {translate('Directory')}
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <Tab.Content>
-          <Tab.Pane eventKey="toml" mountOnEnter={false}>
+        <TabsList className="mb-5">
+          <TabsTrigger value="toml">{translate('TOML config')}</TabsTrigger>
+          <TabsTrigger value="tree" disabled={!hasTree}>
+            {translate('Directory')}
+          </TabsTrigger>
+        </TabsList>
+        <>
+          <TabsContent value="toml">
             {hasConfig ? (
               <div className="border rounded overflow-hidden">
                 <MonacoEditor
@@ -76,8 +73,8 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
                 {translate('No configuration has been set.')}
               </p>
             )}
-          </Tab.Pane>
-          <Tab.Pane eventKey="tree" unmountOnExit={false}>
+          </TabsContent>
+          <TabsContent value="tree">
             {hasTree ? (
               <GLAuthTreeView tree={props.resolve.tree as GlauthTree} />
             ) : (
@@ -85,9 +82,9 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
                 {translate('No tree data available.')}
               </p>
             )}
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+          </TabsContent>
+        </>
+      </Tabs>
     </ModalDialog>
   );
 };

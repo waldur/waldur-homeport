@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { ResourceUsageChart } from '@/marketplace/resources/usage/ResourceUsageChart';
 
@@ -27,28 +26,21 @@ interface ResourceUsageTabsProps {
 export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
   props,
 ) => (
-  <div className="tabs-container">
-    <Tabs
-      defaultActiveKey="tab-0"
-      id="resource-usage-component-tabs"
-      unmountOnExit
-      mountOnEnter
-      className="nav-line-tabs icon-align"
-    >
-      {props.components.map((component, index: number) => (
-        <Tab
-          title={
-            <>
-              <HelpIcon
-                label={getBillingTypeLabelOrDash(component.billing_type)}
-                size={18}
-              />{' '}
-              {component.name}
-            </>
-          }
-          key={index}
-          eventKey={`tab-${index}`}
+  <Tabs mount="active" defaultValue={props.components[0]?.type}>
+    <TabsList className="icon-align">
+      {props.components.map((component) => (
+        <TabsTrigger
+          key={component.type}
+          value={component.type}
+          hint={getBillingTypeLabelOrDash(component.billing_type)}
         >
+          {component.name}
+        </TabsTrigger>
+      ))}
+    </TabsList>
+    <div className="tab-content">
+      {props.components.map((component, index: number) => (
+        <TabsContent key={component.type} value={component.type}>
           {props.displayMode === 'table' ? (
             <ResourceUsageTable
               offeringComponent={component}
@@ -67,8 +59,8 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
               />
             </div>
           )}
-        </Tab>
+        </TabsContent>
       ))}
-    </Tabs>
-  </div>
+    </div>
+  </Tabs>
 );

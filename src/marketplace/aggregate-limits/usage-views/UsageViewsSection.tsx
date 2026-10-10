@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Col, Nav, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import {
   Project,
   marketplaceCustomerUsageComponentsUsageRetrieve,
   marketplaceProjectUsageComponentsUsageRetrieve,
 } from 'waldur-js-client';
 
-import { HelpIcon } from 'waldur-ui';
+import { HelpIcon, Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -124,67 +124,74 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
   return (
     <Row className="mt-3">
       <Col xs={12} className="mb-5">
-        <Panel
-          cardBordered
-          title={
-            <>
-              {translate('Per-offering usage views')}{' '}
-              <HelpIcon label={activeVariant.hint} />
-            </>
-          }
-          actions={
-            variants.length > 1 && (
-              <Nav
-                variant="tabs"
-                className="nav-line-tabs flex-nowrap border-0"
-                activeKey={activeVariant.key}
-                onSelect={(k) => k && setVariant(k as Variant)}
-              >
-                {variants.map((v) => (
-                  <Nav.Item key={v.key}>
-                    <Nav.Link eventKey={v.key} title={v.hint}>
-                      {v.label}
-                    </Nav.Link>
-                  </Nav.Item>
-                ))}
-              </Nav>
-            )
-          }
+        <Tabs
+          value={activeVariant.key}
+          onValueChange={(k) => setVariant(k as Variant)}
         >
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <>
-              {activeVariant.key === 'per-offering-bars' && (
-                <PerOfferingBarsWidget
-                  project={project}
-                  customer={customer}
-                  data={data || { components: [] }}
-                  isLoading={isLoading}
-                  error={error}
-                  refetch={refetch}
-                />
+          <Panel
+            cardBordered
+            title={
+              <>
+                {translate('Per-offering usage views')}{' '}
+                <HelpIcon label={activeVariant.hint} />
+              </>
+            }
+            actions={
+              variants.length > 1 && (
+                // Labels wrap onto a second line on a narrow card instead of
+                // the strip scrolling, as the Bootstrap strip did.
+                <TabsList bordered={false} aria-label={translate('Usage view')}>
+                  {variants.map((v) => (
+                    <TabsTrigger
+                      key={v.key}
+                      value={v.key}
+                      title={v.hint}
+                      className="whitespace-normal text-start"
+                    >
+                      {v.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              )
+            }
+          >
+            <TabsContent value={activeVariant.key}>
+              {isLoading ? (
+                <LoadingSpinner />
+              ) : (
+                <>
+                  {activeVariant.key === 'per-offering-bars' && (
+                    <PerOfferingBarsWidget
+                      project={project}
+                      customer={customer}
+                      data={data || { components: [] }}
+                      isLoading={isLoading}
+                      error={error}
+                      refetch={refetch}
+                    />
+                  )}
+                  {activeVariant.key === 'treemap' && (
+                    <TreemapView components={components} />
+                  )}
+                  {activeVariant.key === 'limit-horizon' && (
+                    <LimitHorizonView
+                      project={project}
+                      customer={customer}
+                      components={components}
+                    />
+                  )}
+                  {activeVariant.key === 'period-over-period' && (
+                    <PeriodOverPeriodView
+                      project={project}
+                      customer={customer}
+                      components={components}
+                    />
+                  )}
+                </>
               )}
-              {activeVariant.key === 'treemap' && (
-                <TreemapView components={components} />
-              )}
-              {activeVariant.key === 'limit-horizon' && (
-                <LimitHorizonView
-                  project={project}
-                  customer={customer}
-                  components={components}
-                />
-              )}
-              {activeVariant.key === 'period-over-period' && (
-                <PeriodOverPeriodView
-                  project={project}
-                  customer={customer}
-                  components={components}
-                />
-              )}
-            </>
-          )}
-        </Panel>
+            </TabsContent>
+          </Panel>
+        </Tabs>
       </Col>
     </Row>
   );

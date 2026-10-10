@@ -1,7 +1,9 @@
-import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 
+import { TabNav } from 'waldur-ui';
+
+import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
@@ -18,34 +20,30 @@ const PageHero = ({ project }) => {
 
   const canEdit = canEditProject(user, { customer, project });
 
-  const router = useRouter();
   const { state } = useCurrentStateAndParams();
-  const goTo = (stateName) =>
-    router.stateService.go(stateName, { uuid: project.uuid });
+  const params = { uuid: project.uuid };
 
   return (
     <div className="container-fluid my-5">
       {canEdit && (
-        <Tab.Container defaultActiveKey={state.name} onSelect={goTo}>
-          <Nav variant="tabs" className="nav-line-tabs mb-4">
-            <Nav.Item>
-              <Nav.Link
-                eventKey="project.dashboard"
-                className="text-center min-w-60px"
-              >
-                {translate('View')}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                eventKey="project-manage"
-                className="text-center min-w-60px"
-              >
-                {translate('Edit')}
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Tab.Container>
+        <TabNav
+          activeKey={state.name}
+          listClassName="mb-4"
+          items={[
+            {
+              key: 'project.dashboard',
+              title: translate('View'),
+              link: <Link state="project.dashboard" params={params} />,
+              className: 'text-center min-w-60px',
+            },
+            {
+              key: 'project-manage',
+              title: translate('Edit'),
+              link: <Link state="project-manage" params={params} />,
+              className: 'text-center min-w-60px',
+            },
+          ]}
+        />
       )}
       <ProjectProfile project={project} />
     </div>

@@ -1,7 +1,7 @@
 import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
-import { Col, Row, Tab, Tabs } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import {
   marketplaceOrdersApproveByConsumer,
   marketplaceOrdersRejectByConsumer,
@@ -11,7 +11,14 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import {
+  Badge,
+  BaseButton,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
@@ -415,20 +422,25 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
           loadData={refetchOrder}
         />
       ) : order ? (
-        <Tabs
-          defaultActiveKey="summary"
-          className="nav-line-tabs mb-4"
-          unmountOnExit
-        >
-          <Tab eventKey="summary" title={translate('Summary')}>
-            <OrderSummaryTab order={order} />
-          </Tab>
-          <Tab eventKey="attributes" title={translate('Attributes')}>
-            <OrderAttributesTab order={order} />
-          </Tab>
-          <Tab eventKey="metadata" title={translate('Metadata')}>
-            <OrderMetadataTab order={order} offering={offering} />
-          </Tab>
+        <Tabs mount="active" defaultValue="summary">
+          <TabsList className="mb-4">
+            <TabsTrigger value="summary">{translate('Summary')}</TabsTrigger>
+            <TabsTrigger value="attributes">
+              {translate('Attributes')}
+            </TabsTrigger>
+            <TabsTrigger value="metadata">{translate('Metadata')}</TabsTrigger>
+          </TabsList>
+          <div className="tab-content">
+            <TabsContent value="summary">
+              <OrderSummaryTab order={order} />
+            </TabsContent>
+            <TabsContent value="attributes">
+              <OrderAttributesTab order={order} />
+            </TabsContent>
+            <TabsContent value="metadata">
+              <OrderMetadataTab order={order} offering={offering} />
+            </TabsContent>
+          </div>
         </Tabs>
       ) : (
         <div className="text-muted">

@@ -12,6 +12,7 @@
 @import 'waldur-design-tokens/checkColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
 @import 'waldur-design-tokens/sidebarColors.css';
+@import 'waldur-design-tokens/tabColors.css';
 /* Modal enter/exit keyframes waldur-ui's Dialog references by name — see
    that file's own comment on why Radix's Presence needs keyframes rather
    than transitions. Values are waldur-homeport's real Bootstrap modal

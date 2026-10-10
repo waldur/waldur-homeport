@@ -1,17 +1,14 @@
 import { FC, useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   MatrixRoom,
   MatrixRoomMember,
   matrixRoomsMembersList,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
-
 import { formatDateTime } from '@/core/dateUtils';
-import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -19,19 +16,6 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { MatrixExportsList } from './MatrixExportsList';
-
-const NavItem = ({ title, eventKey, count }) => (
-  <Nav.Item className="text-nowrap">
-    <Nav.Link eventKey={eventKey}>
-      {title}
-      {count !== undefined && (
-        <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
-          {count}
-        </Badge>
-      )}
-    </Nav.Link>
-  </Nav.Item>
-);
 
 const memberStateLabel = (state: string) => {
   switch (state) {
@@ -102,33 +86,25 @@ const MembersTable: FC<{ roomUuid: string }> = ({ roomUuid }) => {
 
 export const MatrixRoomExpandableRow: FC<{ row: MatrixRoom }> = ({ row }) => (
   <ExpandableContainer>
-    <TableTabsContainer
-      defaultActiveKey="history"
-      unmountOnExit
+    <EmbeddedTabs
+      framed
+      defaultValue="history"
       className="min-h-375px"
-    >
-      <div className="overflow-auto">
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-          <NavItem
-            title={translate('History exports')}
-            eventKey="history"
-            count={undefined}
-          />
-          <NavItem
-            title={translate('Members')}
-            eventKey="members"
-            count={row.members_count}
-          />
-        </Nav>
-      </div>
-      <Tab.Content className="overflow-auto">
-        <Tab.Pane eventKey="history">
-          <MatrixExportsList room_uuid={row.uuid} hasActionBar={false} />
-        </Tab.Pane>
-        <Tab.Pane eventKey="members">
-          <MembersTable roomUuid={row.uuid} />
-        </Tab.Pane>
-      </Tab.Content>
-    </TableTabsContainer>
+      tabs={[
+        {
+          key: 'history',
+          title: translate('History exports'),
+          content: (
+            <MatrixExportsList room_uuid={row.uuid} hasActionBar={false} />
+          ),
+        },
+        {
+          key: 'members',
+          title: translate('Members'),
+          count: row.members_count,
+          content: <MembersTable roomUuid={row.uuid} />,
+        },
+      ]}
+    />
   </ExpandableContainer>
 );

@@ -1,12 +1,12 @@
 import { useQueries } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import { projectsRetrieve, Offering, Project } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDate } from '@/core/dateUtils';
-import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { formatPhoneNumber } from '@/core/utils';
 import { getCustomer } from '@/customer/utils';
@@ -103,95 +103,107 @@ export const DetailsOverviewDialog: FC<{
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <Tabs
-          defaultActiveKey={1}
-          unmountOnExit={true}
-          className="nav-line-tabs"
-        >
-          {customer.error ? (
-            <LoadingErred loadData={customer.refetch} />
-          ) : customer.data ? (
-            <Tab eventKey={1} title={translate('Organization')}>
-              <FormTable hideActions alignTop className="gy-5">
-                <FormTable.Item
-                  label={translate('Name')}
-                  value={withCopy(customer.data.name)}
-                />
-
-                <FormTable.Item
-                  label={translate('Contact info')}
-                  group
-                  value={[
-                    customer.data.contact_details,
-                    customer.data.email,
-                    formatPhoneNumber(customer.data.phone_number),
-                  ]
-                    .filter(Boolean)
-                    .map((v) => withCopy(v))}
-                />
-              </FormTable>
-            </Tab>
-          ) : null}
-          {project.error ? (
-            <LoadingErred loadData={project.refetch} />
-          ) : project.data ? (
-            <Tab eventKey={2} title={translate('Project')}>
-              <FormTable hideActions alignTop className="gy-5">
-                <FormTable.Item
-                  label={translate('Name')}
-                  value={withCopy(project.data.data.name)}
-                />
-
-                <FormTable.Item
-                  label={translate('End date')}
-                  value={withCopy(
-                    project.data.data.end_date
-                      ? formatDate(project.data.data.end_date)
-                      : null,
-                  )}
-                />
-              </FormTable>
-            </Tab>
-          ) : null}
-          {props.offering && (
-            <Tab eventKey={3} title={translate('Offering')}>
-              <FormTable hideActions alignTop className="gy-5">
-                <FormTable.Item
-                  label={translate('Name')}
-                  value={withCopy(props.offering.name)}
-                />
-
-                <FormTable.Item
-                  label={translate('Type')}
-                  value={withCopy(getLabel(props.offering.type))}
-                />
-
-                {props.offering.parent_name && (
+        <Tabs mount="active" defaultValue="organization">
+          <TabsList>
+            {customer.data ? (
+              <TabsTrigger value="organization">
+                {translate('Organization')}
+              </TabsTrigger>
+            ) : null}
+            {project.data ? (
+              <TabsTrigger value="project">{translate('Project')}</TabsTrigger>
+            ) : null}
+            {props.offering && (
+              <TabsTrigger value="offering">
+                {translate('Offering')}
+              </TabsTrigger>
+            )}
+            {provider.data ? (
+              <TabsTrigger value="service-provider">
+                {translate('Service provider')}
+              </TabsTrigger>
+            ) : null}
+          </TabsList>
+          <div className="tab-content">
+            {customer.data ? (
+              <TabsContent value="organization">
+                <FormTable hideActions alignTop className="gy-5">
                   <FormTable.Item
-                    label={translate('Parent offering')}
-                    value={withCopy(getLabel(props.offering.parent_name))}
+                    label={translate('Name')}
+                    value={withCopy(customer.data.name)}
                   />
-                )}
-              </FormTable>
-            </Tab>
-          )}
-          {provider.error ? (
-            <LoadingErred loadData={provider.refetch} />
-          ) : provider.data ? (
-            <Tab eventKey={4} title={translate('Service provider')}>
-              <FormTable hideActions alignTop className="gy-5">
-                <FormTable.Item
-                  label={translate('Name')}
-                  value={withCopy(provider.data.customer_name)}
-                />
 
-                <FormTable.Item
-                  label={translate('Description')}
-                  value={withCopy(provider.data.description)}
-                />
-              </FormTable>
-            </Tab>
-          ) : null}
+                  <FormTable.Item
+                    label={translate('Contact info')}
+                    group
+                    value={[
+                      customer.data.contact_details,
+                      customer.data.email,
+                      formatPhoneNumber(customer.data.phone_number),
+                    ]
+                      .filter(Boolean)
+                      .map((v) => withCopy(v))}
+                  />
+                </FormTable>
+              </TabsContent>
+            ) : null}
+            {project.data ? (
+              <TabsContent value="project">
+                <FormTable hideActions alignTop className="gy-5">
+                  <FormTable.Item
+                    label={translate('Name')}
+                    value={withCopy(project.data.data.name)}
+                  />
+
+                  <FormTable.Item
+                    label={translate('End date')}
+                    value={withCopy(
+                      project.data.data.end_date
+                        ? formatDate(project.data.data.end_date)
+                        : null,
+                    )}
+                  />
+                </FormTable>
+              </TabsContent>
+            ) : null}
+            {props.offering && (
+              <TabsContent value="offering">
+                <FormTable hideActions alignTop className="gy-5">
+                  <FormTable.Item
+                    label={translate('Name')}
+                    value={withCopy(props.offering.name)}
+                  />
+
+                  <FormTable.Item
+                    label={translate('Type')}
+                    value={withCopy(getLabel(props.offering.type))}
+                  />
+
+                  {props.offering.parent_name && (
+                    <FormTable.Item
+                      label={translate('Parent offering')}
+                      value={withCopy(getLabel(props.offering.parent_name))}
+                    />
+                  )}
+                </FormTable>
+              </TabsContent>
+            )}
+            {provider.data ? (
+              <TabsContent value="service-provider">
+                <FormTable hideActions alignTop className="gy-5">
+                  <FormTable.Item
+                    label={translate('Name')}
+                    value={withCopy(provider.data.customer_name)}
+                  />
+
+                  <FormTable.Item
+                    label={translate('Description')}
+                    value={withCopy(provider.data.description)}
+                  />
+                </FormTable>
+              </TabsContent>
+            ) : null}
+          </div>
         </Tabs>
       )}
     </ModalDialog>

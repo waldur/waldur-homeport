@@ -52,14 +52,15 @@ The application uses a unified button system built on Tailwind v4 and Radix UI. 
 
 #### Core Button Components
 
-| Component             | Location                          | Description                    | Key Features                                                                                   |
-| --------------------- | --------------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |
-| **BaseButton**        | `waldur-ui`                       | General purpose action button  | Direct Tooltip, loading spinner, icon support, 12 variants, sizes (`sm`, `md` [default], `lg`) |
-| **SubmitButton**      | `src/form/SubmitButton.tsx`       | Form submission                | Loading spinner, disabled states, large size (`lg` default, `sm` for compact)                  |
-| **CompactEditButton** | `src/form/CompactEditButton.tsx`  | Edit button for key-value rows | Used in key-value component where label and edit button appear in the same row                 |
-| **CloseDialogButton** | `src/modal/CloseDialogButton.tsx` | Modal cancel/close             | Auto-closes dialog, customizable label, large size (`lg` default)                              |
-| **SaveButton**        | `src/core/SaveButton.tsx`         | Form save with dirty state     | Tracks form changes, dirty badge indicator, conditional visibility                             |
-| **SegmentedControl**  | `waldur-ui`                       | View switcher (a lens)         | Radix RadioGroup: arrows select, one tab stop; `segmentedItemClassName` styles `Tabs.Trigger`  |
+| Component             | Location                          | Description                                    | Key Features                                                                                                                         |
+| --------------------- | --------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **BaseButton**        | `waldur-ui`                       | General purpose action button                  | Direct Tooltip, loading spinner, icon support, 12 variants, sizes (`sm`, `md` [default], `lg`)                                       |
+| **SubmitButton**      | `src/form/SubmitButton.tsx`       | Form submission                                | Loading spinner, disabled states, large size (`lg` default, `sm` for compact)                                                        |
+| **CompactEditButton** | `src/form/CompactEditButton.tsx`  | Edit button for key-value rows                 | Used in key-value component where label and edit button appear in the same row                                                       |
+| **CloseDialogButton** | `src/modal/CloseDialogButton.tsx` | Modal cancel/close                             | Auto-closes dialog, customizable label, large size (`lg` default)                                                                    |
+| **SaveButton**        | `src/core/SaveButton.tsx`         | Form save with dirty state                     | Tracks form changes, dirty badge indicator, conditional visibility                                                                   |
+| **Tabs / TabNav**     | `waldur-ui`                       | Tab bars: panels on the page, or router-driven | `Tabs` (`mount`, `activationMode`), `TabNav` (`items` with router `link`s); `EmbeddedTabs` for table panels — see [tabs.md](tabs.md) |
+| **SegmentedControl**  | `waldur-ui`                       | View switcher (a lens)                         | Radix RadioGroup: arrows select, one tab stop; for panels use `TabsList variant="segmented"`                                         |
 
 #### Button Selection Guide
 

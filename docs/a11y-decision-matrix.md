@@ -11,7 +11,7 @@ Follow this decision order to determine the correct component:
 1. **Does it change the URL or navigate to another page/state?**<br>➔ **Navigation Link** (`@/core/Link` or `<nav>` + `<a>`).
 2. **Does it trigger an immediate action, preset, or calculation?**<br>➔ **Action Button Group** (`BaseButton` with `role="group"` and optional `aria-pressed`).
 3. **Can multiple options be active simultaneously?**<br>➔ **Multi-select Buttons / Checkboxes** (`role="group"` with `aria-pressed` or `Checkbox`).
-4. **Does each option own a distinct, large content panel?**<br>➔ **Tabs Pattern** (Radix `Tabs` styled via `segmentedListClassName` / `segmentedItemClassName`).
+4. **Does each option own a distinct, large content panel?**<br>➔ **Tabs** (`Tabs` from `waldur-ui`; see [tabs.md](tabs.md), which also covers the segmented look).
 5. **Is it a question in a submission form with validation errors?**<br>➔ **Form RadioGroup** (`RadioGroup` inside `<fieldset>` + `<legend>`).
 6. **Does it switch a display lens, interval, or in-memory list filter?**<br>➔ **View Lens / Filter** (`SegmentedControl` with `role="radiogroup"`).
 
@@ -19,14 +19,14 @@ Follow this decision order to determine the correct component:
 
 ## 2. Comparative Matrix
 
-| UI Pattern                   | Standard Component                  | Underlying Semantics                                                     | Keyboard Model                                                                                                          | Valid Contexts                                                                               | Prohibited Anti-Patterns                                                       |
-| :--------------------------- | :---------------------------------- | :----------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
-| **View Lens / Filter**       | `SegmentedControl` (`waldur-ui`)    | `role="radiogroup"`<br>`role="radio"`<br>`aria-checked`                  | Single <kbd>Tab</kbd> stop;<br><kbd>←</kbd> / <kbd>→</kbd> select option                                                | Filtering a list in place (All/Unread), chart intervals (Day/Month), diff modes (Table/JSON) | **Never** use for actions (+1h extend), routing tabs, or tab panels            |
-| **Action Preset / Shortcut** | Group of `BaseButton` (`waldur-ui`) | `role="group"`<br>`<button>`<br>`aria-pressed`                           | Normal <kbd>Tab</kbd> stop per button;<br><kbd>Enter</kbd> / <kbd>Space</kbd> activates                                 | Offset buttons (+30m, +1h), preset calculators, filter clearers                              | **Never** use `SegmentedControl` (radios imply persistent state, not actions)  |
-| **Tabbed Panels**            | Radix `Tabs` (or `Tab.Container`)   | `role="tablist"`<br>`role="tab"`<br>`role="tabpanel"`<br>`aria-controls` | Single <kbd>Tab</kbd> stop;<br><kbd>←</kbd> / <kbd>→</kbd> moves tabs;<br><kbd>Space</kbd> / <kbd>Enter</kbd> activates | Swapping major DOM sections (e.g. Overview vs Settings vs Audit Log)                         | **Never** use `SegmentedControl` without `role="tabpanel"` and `aria-controls` |
-| **Page Navigation**          | `@/core/Link` or `<nav>` + `<a>`    | `<nav aria-label="...">`<br>`<a href="...">`                             | Normal <kbd>Tab</kbd> per link;<br><kbd>Enter</kbd> navigates;<br>Right-click "Open in new tab"                         | UI-Router state tabs (`TableTabs`), page headers, sidebar links                              | **Never** use `SegmentedControl` or `<button>` for URL transitions             |
-| **Form Question**            | `RadioGroup` (`waldur-ui`)          | `<fieldset>`<br>`<legend>`<br>native `<input type="radio">`              | Single <kbd>Tab</kbd> stop;<br>Arrow keys select                                                                        | Standard form questions with error messages and form serialization                           | Don't use `SegmentedControl` when validation errors or descriptions are needed |
-| **Multi-Select Filter**      | Button group with `aria-pressed`    | `role="group"`<br>`<button aria-pressed="...">`                          | <kbd>Tab</kbd> between buttons;<br><kbd>Space</kbd> toggles                                                             | Filter tags, multi-select chips, facet bars                                                  | `SegmentedControl` strictly supports one active value                          |
+| UI Pattern                   | Standard Component                              | Underlying Semantics                                                     | Keyboard Model                                                                                                          | Valid Contexts                                                                               | Prohibited Anti-Patterns                                                       |
+| :--------------------------- | :---------------------------------------------- | :----------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
+| **View Lens / Filter**       | `SegmentedControl` (`waldur-ui`)                | `role="radiogroup"`<br>`role="radio"`<br>`aria-checked`                  | Single <kbd>Tab</kbd> stop;<br><kbd>←</kbd> / <kbd>→</kbd> select option                                                | Filtering a list in place (All/Unread), chart intervals (Day/Month), diff modes (Table/JSON) | **Never** use for actions (+1h extend), routing tabs, or tab panels            |
+| **Action Preset / Shortcut** | Group of `BaseButton` (`waldur-ui`)             | `role="group"`<br>`<button>`<br>`aria-pressed`                           | Normal <kbd>Tab</kbd> stop per button;<br><kbd>Enter</kbd> / <kbd>Space</kbd> activates                                 | Offset buttons (+30m, +1h), preset calculators, filter clearers                              | **Never** use `SegmentedControl` (radios imply persistent state, not actions)  |
+| **Tabbed Panels**            | `Tabs` (`waldur-ui`, Radix; [tabs.md](tabs.md)) | `role="tablist"`<br>`role="tab"`<br>`role="tabpanel"`<br>`aria-controls` | Single <kbd>Tab</kbd> stop;<br><kbd>←</kbd> / <kbd>→</kbd> moves tabs;<br><kbd>Space</kbd> / <kbd>Enter</kbd> activates | Swapping major DOM sections (e.g. Overview vs Settings vs Audit Log)                         | **Never** use `SegmentedControl` without `role="tabpanel"` and `aria-controls` |
+| **Page Navigation**          | `@/core/Link` or `<nav>` + `<a>`                | `<nav aria-label="...">`<br>`<a href="...">`                             | Normal <kbd>Tab</kbd> per link;<br><kbd>Enter</kbd> navigates;<br>Right-click "Open in new tab"                         | UI-Router state tabs (`TableNav`), page headers, sidebar links                               | **Never** use `SegmentedControl` or `<button>` for URL transitions             |
+| **Form Question**            | `RadioGroup` (`waldur-ui`)                      | `<fieldset>`<br>`<legend>`<br>native `<input type="radio">`              | Single <kbd>Tab</kbd> stop;<br>Arrow keys select                                                                        | Standard form questions with error messages and form serialization                           | Don't use `SegmentedControl` when validation errors or descriptions are needed |
+| **Multi-Select Filter**      | Button group with `aria-pressed`                | `role="group"`<br>`<button aria-pressed="...">`                          | <kbd>Tab</kbd> between buttons;<br><kbd>Space</kbd> toggles                                                             | Filter tags, multi-select chips, facet bars                                                  | `SegmentedControl` strictly supports one active value                          |
 
 ---
 
@@ -124,73 +124,9 @@ export const QuickExtendSection = ({ onApply, activeKey, submitting }) => (
 
 ---
 
-### Pattern 3: Segmented Tab Panels (Radix `Tabs` with Segmented Styling)
+### Pattern 3: Page & Route Navigation (`TabNav` / `@/core/Link`)
 
-When you want the sleek segmented look (inset shadows, connected borders) for full tab panels:
-
-```tsx
-// ✅ CORRECT: Real tabs with segmented styling
-import * as Tabs from '@radix-ui/react-tabs';
-import { segmentedListClassName, segmentedItemClassName } from 'waldur-ui';
-import { translate } from '@/i18n';
-
-export const SettingsTabs = () => (
-  <Tabs.Root defaultValue="account">
-    <Tabs.List className={segmentedListClassName({ fullWidth: true })}>
-      <Tabs.Trigger
-        value="account"
-        className={segmentedItemClassName({ size: 'md', fullWidth: true })}
-      >
-        {translate('Account')}
-      </Tabs.Trigger>
-      <Tabs.Trigger
-        value="security"
-        className={segmentedItemClassName({ size: 'md', fullWidth: true })}
-      >
-        {translate('Security')}
-      </Tabs.Trigger>
-    </Tabs.List>
-
-    <Tabs.Content value="account">{/* Account panel */}</Tabs.Content>
-    <Tabs.Content value="security">{/* Security panel */}</Tabs.Content>
-  </Tabs.Root>
-);
-```
-
-**Why this is superior to `SegmentedControl`:**
-
-- Emits WAI-ARIA `role="tablist"`, `role="tab"`, and `role="tabpanel"`.
-- Establishes `aria-controls` links from triggers to content containers.
-- Assistive technologies announce `"Tab 1 of 2"` and support shortcuts to navigate into the active panel.
-
----
-
-### Pattern 4: Page & Route Navigation (`TableTabs` / `@/core/Link`)
-
-When selecting a tab changes the URL or router state (`router.stateService.go`):
-
-```tsx
-// ✅ CORRECT: URL navigation bar
-import { Nav } from 'react-bootstrap';
-import { Link } from '@/core/Link';
-
-export const NavigationBar = ({ tabs, activeState }) => (
-  <nav aria-label={translate('Secondary navigation')}>
-    <Nav variant="tabs" className="nav-line-tabs">
-      {tabs.map((tab) => (
-        <Nav.Item key={tab.key}>
-          <Link
-            state={tab.state}
-            className={`nav-link ${tab.state === activeState ? 'active' : ''}`}
-          >
-            {tab.title}
-          </Link>
-        </Nav.Item>
-      ))}
-    </Nav>
-  </nav>
-);
-```
+When selecting a tab changes the URL or router state, the items must stay real links. Give each `TabNav` item a `link: <Link … />`; see [tabs.md](tabs.md) for the markup.
 
 **Prohibited Anti-Pattern:**
 
@@ -205,7 +141,7 @@ Before choosing or migrating a switcher component, run this checklist:
 - [ ] **What happens on click?**
   - Updates URL/route? ➔ **Use `Link` / `<nav>`**.
   - Triggers calculation or modal action? ➔ **Use `BaseButton` (`role="group"` + `aria-pressed`)**.
-  - Swaps a large tab panel? ➔ **Use Radix `Tabs` with `segmentedItemClassName`**.
+  - Swaps a large tab panel? ➔ **Use `Tabs`** (see [tabs.md](tabs.md)).
   - Filters or changes view parameters in place? ➔ **Use `SegmentedControl`**.
 - [ ] **Does `SegmentedControl` have an accessible label?**
   - Every `<SegmentedControl>` must have `aria-label={translate('...')}` or `aria-labelledby`.

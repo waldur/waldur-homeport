@@ -605,7 +605,7 @@ Under flexbox's default `align-items: stretch`, a control placed in a flex row a
 
 ### Shared Styling with Real Tab Panels (`SigninForm`)
 
-When options own full tab panels, use Radix `Tabs` rather than `SegmentedControl`. However, import `segmentedListClassName` and `segmentedItemClassName` from `waldur-ui` to style the `Tabs.List` and `Tabs.Trigger` elements so they visually match `SegmentedControl` identically.
+When options own full tab panels, use `waldur-ui`'s `Tabs` with `<TabsList variant="segmented">` rather than `SegmentedControl`; the triggers then share `SegmentedControl`'s segment styles (see [tabs.md](tabs.md)).
 
 ---
 

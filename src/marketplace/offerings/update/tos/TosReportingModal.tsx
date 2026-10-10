@@ -7,7 +7,14 @@ import {
   marketplaceProviderOfferingsTosStatsRetrieve,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import {
+  AlertItem,
+  BaseButton,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -139,23 +146,18 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
           />
         )}
         {selectedOffering && !isLoading && !error && data && (
-          <>
+          <Tabs
+            value={selectedView}
+            onValueChange={(value) => setSelectedView(value as ViewType)}
+          >
             <div className="d-flex justify-content-between align-items-center mb-4">
-              <ul className="nav nav-tabs nav-line-tabs">
+              <TabsList>
                 {viewOptions.map((option) => (
-                  <li className="nav-item" key={option.value}>
-                    <button
-                      type="button"
-                      className={`nav-link ${
-                        selectedView === option.value ? 'active' : ''
-                      }`}
-                      onClick={() => setSelectedView(option.value)}
-                    >
-                      {option.label}
-                    </button>
-                  </li>
+                  <TabsTrigger key={option.value} value={option.value}>
+                    {option.label}
+                  </TabsTrigger>
                 ))}
-              </ul>
+              </TabsList>
               <BaseButton
                 variant="tertiary"
                 size="sm"
@@ -172,25 +174,27 @@ export const TosReportingModal: FC<TosReportingModalProps> = ({
               />
             </div>
 
-            {mode === 'chart' ? (
-              <>
-                {selectedView === 'versionAdoption' && (
-                  <TosVersionAdoptionChart data={data} />
-                )}
-                {selectedView === 'consentStatus' && (
-                  <TosConsentStatusChart data={data} />
-                )}
-                {selectedView === 'acceptedTrend' && (
-                  <TosAcceptedTrendChart data={data} />
-                )}
-                {selectedView === 'revokedTrend' && (
-                  <TosRevokedTrendChart data={data} />
-                )}
-              </>
-            ) : (
-              <TosDataTables data={data} selectedTable={selectedView} />
-            )}
-          </>
+            <TabsContent value={selectedView}>
+              {mode === 'chart' ? (
+                <>
+                  {selectedView === 'versionAdoption' && (
+                    <TosVersionAdoptionChart data={data} />
+                  )}
+                  {selectedView === 'consentStatus' && (
+                    <TosConsentStatusChart data={data} />
+                  )}
+                  {selectedView === 'acceptedTrend' && (
+                    <TosAcceptedTrendChart data={data} />
+                  )}
+                  {selectedView === 'revokedTrend' && (
+                    <TosRevokedTrendChart data={data} />
+                  )}
+                </>
+              ) : (
+                <TosDataTables data={data} selectedTable={selectedView} />
+              )}
+            </TabsContent>
+          </Tabs>
         )}
       </Modal.Body>
     </Modal>

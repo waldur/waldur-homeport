@@ -1,6 +1,5 @@
 import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import {
   Checklist,
@@ -12,6 +11,8 @@ import {
   onboardingQuestionMetadataCreate,
   onboardingQuestionMetadataUpdate,
 } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
@@ -217,17 +218,20 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
               </>
             }
           >
-            <Tabs
-              defaultActiveKey="general"
-              id="question-tabs"
-              className="nav-line-tabs mb-5"
-            >
-              <Tab eventKey="general" title={translate('General')}>
-                <QuestionGeneralForm
-                  values={values}
-                  checklist={mockChecklist}
-                />
-              </Tab>
+            <Tabs mount="all" defaultValue="general">
+              <TabsList className="mb-5">
+                <TabsTrigger value="general">
+                  {translate('General')}
+                </TabsTrigger>
+              </TabsList>
+              <div className="tab-content">
+                <TabsContent value="general">
+                  <QuestionGeneralForm
+                    values={values}
+                    checklist={mockChecklist}
+                  />
+                </TabsContent>
+              </div>
             </Tabs>
           </ModalDialog>
         </form>

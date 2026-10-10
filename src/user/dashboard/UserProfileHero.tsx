@@ -1,10 +1,10 @@
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
-import { Nav } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
-import { Tooltip } from 'waldur-ui';
+import { TabNav } from 'waldur-ui';
 
+import { Link } from '@/core/Link';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -28,8 +28,6 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
   error,
 }) => {
   const { state } = useCurrentStateAndParams();
-  const router = useRouter();
-  const goTo = (stateName: string) => router.stateService.go(stateName);
 
   const isValidUser = useMemo(
     () =>
@@ -53,46 +51,30 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
     <LoadingErred loadData={refetch} />
   ) : (
     <div className="container-fluid my-5">
-      <Nav variant="tabs" className="nav-line-tabs mb-4">
-        {showViewTab && (
-          <Nav.Item>
-            {isValidUser ? (
-              <Nav.Link
-                as="button"
-                type="button"
-                className="text-center min-w-60px"
-                active={!editActive}
-                onClick={() => goTo('profile.details')}
-              >
-                {translate('View')}
-              </Nav.Link>
-            ) : (
-              // The tooltip has to wrap the link from the outside: a
-              // disabled nav link stops receiving hover, so a tooltip
-              // nested inside it would never open. Same arrangement as the
-              // draft-offering tab in OfferingViewHero.
-              <Tooltip label={disabledReason}>
-                <span>
-                  <Nav.Link disabled className="text-center min-w-60px">
-                    {translate('View')}
-                  </Nav.Link>
-                </span>
-              </Tooltip>
-            )}
-          </Nav.Item>
-        )}
-        <Nav.Item>
-          <Nav.Link
-            as="button"
-            type="button"
-            className="text-center min-w-60px"
-            active={editActive}
-            onClick={() => goTo('profile-manage')}
-          >
-            {translate('Edit')}
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <TabNav
+        listClassName="mb-4"
+        activeKey={editActive ? 'edit' : 'view'}
+        items={[
+          ...(showViewTab
+            ? [
+                {
+                  key: 'view',
+                  title: translate('View'),
+                  link: <Link state="profile.details" />,
+                  className: 'text-center min-w-60px',
+                  disabled: !isValidUser,
+                  tooltip: isValidUser ? undefined : disabledReason,
+                },
+              ]
+            : []),
+          {
+            key: 'edit',
+            title: translate('Edit'),
+            link: <Link state="profile-manage" />,
+            className: 'text-center min-w-60px',
+          },
+        ]}
+      />
       <UserProfile user={user} />
     </div>
   );

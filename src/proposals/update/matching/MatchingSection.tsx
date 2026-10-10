@@ -1,16 +1,23 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FC, useCallback, useMemo } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { FC } from 'react';
+import { Card } from 'react-bootstrap';
 import { proposalProtectedCallsMatchingConfigurationRetrieve } from 'waldur-js-client';
 
-import { AlertItem, Tooltip } from 'waldur-ui';
+import {
+  AlertItem,
+  Tooltip,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { useUrlTab } from '@/navigation/useUrlTab';
 import { Call } from '@/proposals/types';
 
 import { EditMatchingSettingButton } from './EditMatchingSettingButton';
@@ -142,29 +149,15 @@ const tabs = [
   { key: 'constraints', title: translate('Constraints'), rows: constraintRows },
 ];
 
-const DEFAULT_MATCHING_TAB = 'affinity';
-
 export const MatchingSection: FC<MatchingSectionProps> = ({
   call,
   refetch,
   isReadOnly,
 }) => {
-  const { state, params } = useCurrentStateAndParams();
-  const router = useRouter();
-
-  // Get active tab from URL or default to 'affinity'
-  const activeTab = useMemo(
-    () => params.matching_tab || DEFAULT_MATCHING_TAB,
-    [params.matching_tab],
-  );
-
-  const handleTabSelect = useCallback(
-    (key: string | null) => {
-      if (key) {
-        router.stateService.go(state.name, { ...params, matching_tab: key });
-      }
-    },
-    [router, state, params],
+  const { activeKey: activeTab, handleSelect: handleTabSelect } = useUrlTab(
+    tabs,
+    'matching_tab',
+    { history: 'push' },
   );
 
   // Fetch matching configuration
@@ -224,21 +217,17 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
         </div>
       </Card.Header>
       <Card.Body>
-        <Tab.Container
-          activeKey={activeTab}
-          onSelect={handleTabSelect}
-          unmountOnExit
-        >
-          <Nav variant="tabs" className="nav-line-tabs mb-5">
+        <Tabs mount="active" value={activeTab} onValueChange={handleTabSelect}>
+          <TabsList className="mb-5">
             {tabs.map((tab) => (
-              <Nav.Item key={tab.key}>
-                <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
-              </Nav.Item>
+              <TabsTrigger key={tab.key} value={tab.key}>
+                {tab.title}
+              </TabsTrigger>
             ))}
-          </Nav>
-          <Tab.Content>
+          </TabsList>
+          <>
             {/* Affinity calculation tab */}
-            <Tab.Pane eventKey="affinity">
+            <TabsContent value="affinity">
               <FormTable>
                 {affinityRows.map((row) => (
                   <FormTable.Item
@@ -272,10 +261,10 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                   },
                 )}
               />
-            </Tab.Pane>
+            </TabsContent>
 
             {/* Constraints tab */}
-            <Tab.Pane eventKey="constraints">
+            <TabsContent value="constraints">
               <FormTable>
                 {constraintRows.map((row) => (
                   <FormTable.Item
@@ -295,9 +284,9 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
                   />
                 ))}
               </FormTable>
-            </Tab.Pane>
-          </Tab.Content>
-        </Tab.Container>
+            </TabsContent>
+          </>
+        </Tabs>
       </Card.Body>
     </Card>
   );

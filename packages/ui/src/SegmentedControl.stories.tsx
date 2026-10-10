@@ -1,13 +1,9 @@
 import { EnvelopeSimpleIcon, LinkSimpleIcon } from '@phosphor-icons/react';
-import * as Tabs from '@radix-ui/react-tabs';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 
 import { SegmentedControl } from './SegmentedControl';
-import {
-  segmentedItemClassName,
-  segmentedListClassName,
-} from './segmentedStyles';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tabs';
 
 const meta: Meta<typeof SegmentedControl> = {
   title: 'Actions/SegmentedControl',
@@ -154,37 +150,23 @@ export const BesideTallerSibling: Story = {
 };
 
 /**
- * The same segments on Radix Tabs, for a switch that owns tab panels (the
- * sign-in form's Username / Access token). Selected is `data-state="active"`
- * there rather than `checked`; `segmentedItemClassName` covers both.
+ * The same segments as tabs that own panels (the sign-in form's Username /
+ * Access token): `TabsList variant="segmented"` from waldur-ui's Tabs.
  */
 export const AsTabsWithPanels: Story = {
   render: () => (
-    <Tabs.Root defaultValue="username" className="w-full max-w-sm p-6">
-      <Tabs.List
-        aria-label="Sign in method"
-        className={segmentedListClassName({ fullWidth: true })}
-      >
-        <Tabs.Trigger
-          value="username"
-          className={segmentedItemClassName({ fullWidth: true })}
-        >
-          Username
-        </Tabs.Trigger>
-        <Tabs.Trigger
-          value="token"
-          className={segmentedItemClassName({ fullWidth: true })}
-        >
-          Access token
-        </Tabs.Trigger>
-      </Tabs.List>
-      <Tabs.Content value="username" className="pt-4 text-sm">
+    <Tabs defaultValue="username" className="w-full max-w-sm p-6">
+      <TabsList variant="segmented" fullWidth aria-label="Sign in method">
+        <TabsTrigger value="username">Username</TabsTrigger>
+        <TabsTrigger value="token">Access token</TabsTrigger>
+      </TabsList>
+      <TabsContent value="username" className="pt-4 text-sm">
         Username and password fields
-      </Tabs.Content>
-      <Tabs.Content value="token" className="pt-4 text-sm">
+      </TabsContent>
+      <TabsContent value="token" className="pt-4 text-sm">
         Token field
-      </Tabs.Content>
-    </Tabs.Root>
+      </TabsContent>
+    </Tabs>
   ),
 };
 

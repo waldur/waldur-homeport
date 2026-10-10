@@ -41,6 +41,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     {
       visible:
         !!props.offering.full_description || !!props.offering.description,
+      key: 'description',
       title: translate('Description'),
       component: () => (
         <SafeMarkdown
@@ -61,6 +62,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
         // would quote plans the customer is not charged by.
         props.offering.billable !== false &&
         !props.concealBillingInfo,
+      key: 'pricing',
       title: translate('Pricing'),
       component: () => <PublicOfferingPricing offering={props.offering} />,
     },
@@ -71,6 +73,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
           MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
         ) &&
         !props.offering.plugin_options?.conceal_billing_data,
+      key: 'components',
       title: translate('Components'),
       component: () => (
         <PublicOfferingComponentsTable
@@ -82,6 +85,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     },
     {
       visible: basicSections.length > 0,
+      key: 'features',
       title: translate('Features'),
       component: () => (
         <AttributesTable attributes={attributes} sections={basicSections} />
@@ -89,11 +93,13 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     },
     {
       visible: props.offering.screenshots.length > 0,
+      key: 'images',
       title: translate('Images'),
       component: () => <ImagesTab images={props.offering.screenshots} />,
     },
     {
       visible: Boolean(props.offering.latitude && props.offering.longitude),
+      key: 'provider-location',
       title: translate('Provider location'),
       component: () => <ProviderLocationTab offering={props.offering} />,
     },
@@ -102,6 +108,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
   standaloneSections.forEach((section) => {
     tabs.push({
       visible: true,
+      key: `section-${section.key}`,
       title: section.title,
       component: () => (
         <AttributesTable attributes={attributes} sections={[section]} />

@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { ReactNode, useMemo } from 'react';
-import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import {
   EDUTEAMS_IDP,
@@ -19,11 +21,11 @@ import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { useUrlTab } from '@/navigation/useUrlTab';
 import { SettingsDescription } from '@/SettingsDescription';
 
 import { getIdentityProviders } from '../api';
 import { FieldRow } from '../settings/FieldRow';
-import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
 
 import { IdentityBridgeTab } from './IdentityBridgeTab';
 import { ProviderCard } from './ProviderCard';
@@ -223,7 +225,7 @@ export const IdentityProvidersList = () => {
     return result;
   }, []);
 
-  const { activeKey, handleSelect } = useSettingsUrlSync(tabs);
+  const { activeKey, handleSelect } = useUrlTab(tabs, 'tab');
 
   const {
     data: providersData,
@@ -286,19 +288,21 @@ export const IdentityProvidersList = () => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <Tab.Container activeKey={activeKey} onSelect={handleSelect}>
-          <Nav variant="tabs" className="nav-line-tabs mb-5">
+        <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
+          <TabsList className="mb-5">
             {tabs.map((tab) => (
-              <Nav.Item key={tab.key}>
-                <Nav.Link eventKey={tab.key} className="cursor-pointer">
-                  {tab.title}
-                </Nav.Link>
-              </Nav.Item>
+              <TabsTrigger
+                key={tab.key}
+                value={tab.key}
+                className="cursor-pointer"
+              >
+                {tab.title}
+              </TabsTrigger>
             ))}
-          </Nav>
-          <Tab.Content>
+          </TabsList>
+          <>
             {tabs.map((tab) => (
-              <Tab.Pane key={tab.key} eventKey={tab.key}>
+              <TabsContent key={tab.key} value={tab.key}>
                 {tab.key === 'identity-bridge' ? (
                   <>
                     <SettingsTabContent
@@ -338,10 +342,10 @@ export const IdentityProvidersList = () => {
                     refetchSettings={refetchSettings}
                   />
                 )}
-              </Tab.Pane>
+              </TabsContent>
             ))}
-          </Tab.Content>
-        </Tab.Container>
+          </>
+        </Tabs>
       </Card.Body>
     </Card>
   );
