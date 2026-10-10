@@ -54,6 +54,7 @@ const makeClient = () => {
     logout: vi.fn(() => Promise.resolve()),
     getRoom: vi.fn(() => ({ getMyMembership: () => 'join' })),
     joinRoom: vi.fn(),
+    matrixRTC: { start: vi.fn() },
     http: {
       tokenManager: {
         opts: { refreshToken: 'refresh-1' } as { refreshToken?: string },
@@ -129,6 +130,10 @@ describe('MatrixChatProvider', () => {
     const { tokenManager } = h.createClient.mock.results[0].value.http;
     expect(vi.isMockFunction(tokenManager.doTokenRefresh)).toBe(false);
     expect(tokenManager.latestTokenRefreshExpiry).toBeInstanceOf(Date);
+    // Calls run their own MatrixRTC session; the client's per-room ones stay
+    // off.
+    const { matrixRTC } = h.createClient.mock.results[0].value;
+    expect(vi.isMockFunction(matrixRTC.start)).toBe(false);
     expect(ctx.activeRoomId).toBe('!room:example.com');
     expect(ctx.roomAccessDenied).toBe(false);
   });

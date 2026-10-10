@@ -576,6 +576,13 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
           restartSession(roomUuid);
         });
 
+        // matrix-js-sdk starts a MatrixRTC session for every room after the
+        // first sync. Calls run on their own session (call/rtcSession.ts),
+        // and these read call memberships unchecked: an `expires` that any
+        // room member can set would spin their expiry timers.
+        const rtcSessions = (client as any).matrixRTC;
+        if (rtcSessions) rtcSessions.start = () => undefined;
+
         // Detached pending events: reactions/relations local echo calls
         // Room.getPendingEvents(), which throws unless ordering is detached.
         // Without this, reacting to a freshly-sent message fails with

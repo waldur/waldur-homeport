@@ -7,11 +7,7 @@ import { resolveMemberName } from '../utils';
 
 import {
   CALL_MEMBER_EVENT,
-  CallMembershipTiming,
   getCallDeviceId,
-  LiveKitFocus,
-  makeCallMemberStateKey,
-  makeCallMembershipContent,
   timerDelay,
 } from './callMembership';
 import { parseCallMembers } from './parseCallMembers';
@@ -97,52 +93,3 @@ export const useCallMemberEvents = (
 
   return { callMembers, isOtherMemberInCall };
 };
-
-// The call lives in a specific room; tying the announce target to whatever
-// room the user is currently viewing breaks as soon as they switch rooms
-// mid-call. These helpers take the target room explicitly.
-export function getCallMemberStateKey(
-  client: any,
-  roomId: string,
-  deviceId: string,
-): string {
-  return makeCallMemberStateKey(
-    client.getUserId() || '',
-    deviceId,
-    client.getRoom?.(roomId)?.getVersion?.() || '',
-  );
-}
-
-export async function announceCallJoin(
-  client: any,
-  roomId: string,
-  deviceId: string,
-  timing: CallMembershipTiming,
-  foci: LiveKitFocus[] = [],
-): Promise<void> {
-  if (!client || !roomId) return;
-  await client.sendStateEvent(
-    roomId,
-    CALL_MEMBER_EVENT,
-    makeCallMembershipContent(client.getUserId() || '', deviceId, timing, foci),
-    getCallMemberStateKey(client, roomId, deviceId),
-  );
-}
-
-export async function announceCallLeave(
-  client: any,
-  roomId: string,
-  deviceId: string,
-): Promise<void> {
-  if (!client || !roomId) return;
-  try {
-    await client.sendStateEvent(
-      roomId,
-      CALL_MEMBER_EVENT,
-      {},
-      getCallMemberStateKey(client, roomId, deviceId),
-    );
-  } catch {
-    // Best effort — tab may be closing
-  }
-}

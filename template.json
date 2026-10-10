@@ -56126,6 +56126,11 @@
       "feature_area": "call-management"
     }
   },
+  "The call was disconnected.": {
+    "context": {
+      "feature_area": "call"
+    }
+  },
   "The camera is in use by another application.": {
     "context": {
       "action_type": "read"

@@ -2,29 +2,15 @@
 //
 // Each device publishes its own `org.matrix.msc3401.call.member` state event
 // under a per-device state key, so two devices of one user never overwrite
-// each other. The layout matches matrix-js-sdk's MembershipManager (what
-// Element Call uses): `_@user:server_DEVICE_m.call`, without the leading
-// underscore in rooms whose version grants owned state keys (MSC3757/MSC3779).
-//
-// The membership stays valid until `created_ts + expires`. Instead of
-// re-sending on a short heartbeat, the publisher re-sends once, shortly
-// before that moment, with `created_ts` unchanged and `expires` extended —
-// again as matrix-js-sdk does, since `created_ts` orders members for focus
-// selection and must keep meaning "joined at".
+// each other: `_@user:server_DEVICE_m.call`, without the leading underscore in
+// rooms whose version grants owned state keys (MSC3757/MSC3779).
+// matrix-js-sdk's MatrixRTC session publishes and refreshes this device's
+// membership (see rtcSession.ts); the helpers here read the others' and
+// withdraw ours from a closing tab.
 
 export const CALL_MEMBER_EVENT = 'org.matrix.msc3401.call.member';
 const CALL_APPLICATION = 'm.call';
 const LEGACY_CALL_APPLICATION = 'org.matrix.msc3401.call';
-
-/** How long one published membership stays valid. */
-export const MEMBERSHIP_EXPIRY_MS = 60 * 60 * 1000;
-/**
- * How long before expiry the membership is re-published. Generous because
- * browsers throttle timers in background tabs to about once a minute.
- */
-export const MEMBERSHIP_REFRESH_HEADROOM_MS = 2 * 60 * 1000;
-/** Retry delay after a failed refresh. */
-export const MEMBERSHIP_REFRESH_RETRY_MS = 15 * 1000;
 
 // setTimeout fires at once for anything above a signed 32-bit delay, and for
 // NaN. Delays here derive from `expires` that any room member can write, so a
@@ -61,13 +47,6 @@ export function isCallApplication(application: unknown): boolean {
   );
 }
 
-export interface CallMembershipTiming {
-  /** When this device joined; kept across refreshes. */
-  createdTs: number;
-  /** Validity, counted from createdTs. */
-  expires: number;
-}
-
 /**
  * A LiveKit focus as MatrixRTC memberships advertise it (MSC4195): the
  * lk-jwt-compatible token service, and the Matrix room it serves the call of.
@@ -98,80 +77,6 @@ export function isLiveKitFocus(value: unknown): value is LiveKitFocus {
     typeof focus.livekit_service_url === 'string' &&
     focus.livekit_service_url !== ''
   );
-}
-
-export function makeCallMembershipContent(
-  userId: string,
-  deviceId: string,
-  { createdTs, expires }: CallMembershipTiming,
-  foci: LiveKitFocus[] = [],
-) {
-  return {
-    application: CALL_APPLICATION,
-    call_id: '',
-    scope: 'm.room',
-    device_id: deviceId,
-    // The LiveKit identity of this device: the one lk-jwt's /sfu/get issues,
-    // and the one matrix-js-sdk assumes for a state-event membership anyway.
-    membershipID: `${userId}:${deviceId}`,
-    created_ts: createdTs,
-    expires,
-    // The focus this device would host the call on. Members that follow the
-    // oldest membership, as this device does, use the first entry of the
-    // oldest member's list; Element Call finds no focus when it is empty.
-    focus_active: { type: 'livekit', focus_selection: 'oldest_membership' },
-    foci_preferred: foci,
-  };
-}
-
-/**
- * Keeps a published membership alive: waits until shortly before it expires,
- * then calls `send` with an extended `expires`. Returns a stop function.
- */
-export function startMembershipRefresh(
-  initial: CallMembershipTiming,
-  send: (timing: CallMembershipTiming) => Promise<unknown>,
-): () => void {
-  let current = initial;
-  let timer: ReturnType<typeof setTimeout> | null = null;
-  let stopped = false;
-
-  const schedule = (delay: number) => {
-    if (stopped) return;
-    timer = setTimeout(fire, timerDelay(delay));
-  };
-
-  const fire = () => {
-    timer = null;
-    const next: CallMembershipTiming = {
-      createdTs: current.createdTs,
-      expires: Date.now() - current.createdTs + MEMBERSHIP_EXPIRY_MS,
-    };
-    send(next).then(
-      () => {
-        current = next;
-        schedule(
-          current.createdTs +
-            current.expires -
-            MEMBERSHIP_REFRESH_HEADROOM_MS -
-            Date.now(),
-        );
-      },
-      () => schedule(MEMBERSHIP_REFRESH_RETRY_MS),
-    );
-  };
-
-  schedule(
-    current.createdTs +
-      current.expires -
-      MEMBERSHIP_REFRESH_HEADROOM_MS -
-      Date.now(),
-  );
-
-  return () => {
-    stopped = true;
-    if (timer) clearTimeout(timer);
-  };
 }
 
 /**
