@@ -3,9 +3,12 @@ import { useCallback, useState } from 'react';
 import { translate } from '@/i18n';
 import { NotifyService } from '@/store/notify';
 
+import { encryptAttachment } from './attachmentCrypto';
 import { useMatrixComposerDraft } from './MatrixComposerDraftContext';
 import { AUDIO_TYPES, IMAGE_TYPES, VIDEO_TYPES } from './mediaTypes';
+import { parseMxcUrl } from './mxc';
 import { withFreshAccessToken } from './session';
+import { UploadedMedia } from './types';
 import { useMatrixClient } from './useMatrixClient';
 
 function getMsgType(mimeType: string) {
@@ -32,25 +35,70 @@ function getImageDimensions(
   });
 }
 
+// Why an upload to this room must wait, or null if it may proceed. A room the
+// client hasn't synced yet may be encrypted, so it is refused rather than guessed.
+const uploadRefusal = (room: any): string | null =>
+  room
+    ? null
+    : translate('The conversation is still loading. Try again shortly.');
+
+const upload = async (
+  client: any,
+  body: Blob,
+  opts: Record<string, unknown>,
+): Promise<string> => {
+  const uploadResponse: any = await withFreshAccessToken(client, () =>
+    client.uploadContent(body, opts),
+  );
+  const mxcUrl =
+    typeof uploadResponse === 'string'
+      ? uploadResponse
+      : uploadResponse?.content_uri;
+  // Embedded in the event as is, so it must be one receivers can fetch.
+  if (!parseMxcUrl(mxcUrl))
+    throw new Error('Invalid content_uri in upload response');
+  return mxcUrl;
+};
+
+// Mirrors how matrix-js-sdk decides to encrypt the event itself: the state
+// event, or the crypto store's memory of it, which a homeserver that drops or
+// resets the state event cannot erase.
+const isRoomEncrypted = async (
+  client: any,
+  room: any,
+  roomId: string,
+): Promise<boolean> =>
+  Boolean(room.hasEncryptionStateEvent?.()) ||
+  Boolean(await client.getCrypto?.()?.isEncryptionEnabledInRoom(roomId));
+
+// In an encrypted room the homeserver gets only ciphertext, with no name and
+// no type; both travel inside the encrypted event instead.
+const uploadMedia = async (
+  client: any,
+  file: File,
+  encrypted: boolean,
+): Promise<UploadedMedia> => {
+  if (!encrypted) {
+    return {
+      url: await upload(client, file, { name: file.name, type: file.type }),
+    };
+  }
+  const { ciphertext, file: encryptedFile } = await encryptAttachment(
+    await file.arrayBuffer(),
+  );
+  const url = await upload(client, new Blob([ciphertext]), {
+    type: 'application/octet-stream',
+    includeFilename: false,
+  });
+  return { file: { ...encryptedFile, url } };
+};
+
 /**
  * Stages files for upload and posts them to the active room on demand. The
  * attach button and the chat panel's drag-and-drop both feed the same pending
  * queue, so files are previewed and only sent when the user submits — never
  * the instant they're picked.
  */
-// Why an upload to this room must wait, or null if it may proceed. A room the
-// client hasn't synced yet may be encrypted, so it is refused rather than guessed.
-const uploadRefusal = (client: any, roomId: string): string | null => {
-  const room = client.getRoom?.(roomId);
-  if (!room) {
-    return translate('The conversation is still loading. Try again shortly.');
-  }
-  if (room.hasEncryptionStateEvent?.()) {
-    return translate('Files cannot be shared in encrypted conversations yet.');
-  }
-  return null;
-};
-
 export function useMatrixFileUpload() {
   const { client, activeRoomId } = useMatrixClient();
   const { draft, setFiles } = useMatrixComposerDraft(activeRoomId);
@@ -80,17 +128,15 @@ export function useMatrixFileUpload() {
   const uploadFile = useCallback(
     async (
       file: File,
-      // Lets callers (voice messages) supply the resolved mxc URL and override
-      // the default file content with custom event fields — e.g. the MSC3245
-      // `m.audio` + waveform payload. `buildContent` receives the freshly
-      // uploaded mxc URL so the caller doesn't have to upload separately.
-      buildContent?: (mxcUrl: string) => Record<string, any>,
+      // Lets callers (voice messages) override the default file content with
+      // custom event fields — e.g. the MSC3245 `m.audio` + waveform payload.
+      // `buildContent` receives the freshly uploaded media (a `url`, or an
+      // encrypted `file`) so the caller doesn't have to upload separately.
+      buildContent?: (media: UploadedMedia) => Record<string, any>,
     ): Promise<boolean> => {
       if (!file || !client || !activeRoomId) return false;
-      // Attachments are not encrypted yet: uploading one to an encrypted room
-      // would leave the file readable on the homeserver. Refused before any
-      // byte is sent.
-      const refusal = uploadRefusal(client, activeRoomId);
+      const room = client.getRoom?.(activeRoomId);
+      const refusal = uploadRefusal(room);
       if (refusal) {
         NotifyService.error(refusal);
         return false;
@@ -98,42 +144,39 @@ export function useMatrixFileUpload() {
 
       setUploading(true);
       try {
-        const uploadResponse: any = await withFreshAccessToken(client, () =>
-          (client as any).uploadContent(file, {
-            name: file.name,
-            type: file.type,
-          }),
-        );
-        const mxcUrl =
-          typeof uploadResponse === 'string'
-            ? uploadResponse
-            : uploadResponse?.content_uri;
+        const msgtype = getMsgType(file.type);
+        // Measured before the upload, so on the usual path nothing is awaited
+        // between the last encryption check and sendMessage. The re-upload
+        // below does await, but only ever towards encryption, the safe side.
+        const dimensions =
+          !buildContent && msgtype === 'm.image'
+            ? await getImageDimensions(file)
+            : null;
 
-        if (!mxcUrl) throw new Error('No content_uri in upload response');
+        const encrypted = await isRoomEncrypted(client, room, activeRoomId);
+        let media = await uploadMedia(client, file, encrypted);
+        // The room can turn encrypted while a clear upload is in flight. The
+        // event would then be encrypted around a link to a clear file, so the
+        // clear copy is left unreferenced and the file goes up encrypted.
+        if (!encrypted && (await isRoomEncrypted(client, room, activeRoomId))) {
+          media = await uploadMedia(client, file, true);
+        }
 
         if (buildContent) {
-          await client.sendMessage(activeRoomId, buildContent(mxcUrl) as any);
+          await client.sendMessage(activeRoomId, buildContent(media) as any);
           return true;
         }
 
-        const msgtype = getMsgType(file.type);
         const content: Record<string, any> = {
           msgtype,
           body: file.name,
-          url: mxcUrl,
+          ...media,
           info: {
             mimetype: file.type,
             size: file.size,
+            ...(dimensions && { w: dimensions.width, h: dimensions.height }),
           },
         };
-
-        if (msgtype === 'm.image') {
-          const dimensions = await getImageDimensions(file);
-          if (dimensions) {
-            content.info.w = dimensions.width;
-            content.info.h = dimensions.height;
-          }
-        }
 
         await client.sendMessage(activeRoomId, content as any);
         return true;

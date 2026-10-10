@@ -89,9 +89,9 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
       const { waveform } = await generateWaveform(blob);
       await uploadFile(
         new File([blob], 'voice-message', { type: blob.type }),
-        (mxcUrl) =>
+        (media) =>
           buildVoiceContent({
-            url: mxcUrl,
+            media,
             mimetype: blob.type,
             size: blob.size,
             durationMs,

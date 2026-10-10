@@ -1,7 +1,10 @@
 import { translate } from '@/i18n';
 
+import type { UploadedMedia } from '../types';
+
 interface VoiceContentOpts {
-  url: string;
+  // The uploaded clip: a plain `url`, or an encrypted `file`.
+  media: UploadedMedia;
   mimetype: string;
   size: number;
   durationMs: number;
@@ -9,10 +12,9 @@ interface VoiceContentOpts {
   waveform: number[];
 }
 
-interface VoiceMessageContent {
+type VoiceMessageContent = UploadedMedia & {
   msgtype: 'm.audio';
   body: string;
-  url: string;
   info: {
     mimetype: string;
     size: number;
@@ -23,10 +25,10 @@ interface VoiceMessageContent {
     duration: number;
     waveform: number[];
   };
-}
+};
 
 export function buildVoiceContent(opts: VoiceContentOpts): VoiceMessageContent {
-  const { url, mimetype, size, durationMs, waveform } = opts;
+  const { media, mimetype, size, durationMs, waveform } = opts;
 
   const scaledWaveform = waveform.map((v) =>
     Math.min(1024, Math.max(0, Math.round(v * 1024))),
@@ -35,7 +37,7 @@ export function buildVoiceContent(opts: VoiceContentOpts): VoiceMessageContent {
   return {
     msgtype: 'm.audio',
     body: translate('Voice message'),
-    url,
+    ...media,
     info: {
       mimetype,
       size,
