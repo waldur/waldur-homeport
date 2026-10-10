@@ -6,7 +6,7 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { renderWithProviders } from '@/test/harness';
+import { createTestQueryClient, renderWithProviders } from '@/test/harness';
 
 import { getProviderUsageComponents } from './api';
 import { ResourceCreateUsageDialog } from './ResourceCreateUsageDialog';
@@ -230,6 +230,26 @@ describe('ResourceCreateUsageDialog', () => {
     ).toBeInTheDocument();
     await expectOverflowMenuToOffer(user, /Component 1/, /Component 2/);
     rectSpy.mockRestore();
+  });
+
+  it('refreshes the resource and its usage history after a report is submitted', async () => {
+    const user = userEvent.setup();
+    vi.mocked(getProviderUsageComponents).mockResolvedValue(mockData);
+    vi.mocked(marketplaceComponentUsagesSetUsage).mockResolvedValue({} as any);
+    const refetch = vi.fn();
+    const queryClient = createTestQueryClient();
+    const usageHistoryKey = ['UsageCard', { uuid: 'test-uuid' }, 1];
+    queryClient.setQueryData(usageHistoryKey, { usages: [] });
+
+    renderWithProviders(
+      <ResourceCreateUsageDialog resolve={{ ...props.resolve, refetch }} />,
+      { queryClient },
+    );
+    await user.type(await screen.findByPlaceholderText('Amount *'), '10');
+    await user.click(screen.getByText('Submit usage report'));
+
+    await waitFor(() => expect(refetch).toHaveBeenCalledTimes(1));
+    expect(queryClient.getQueryState(usageHistoryKey).isInvalidated).toBe(true);
   });
 
   it('submits form with usage values', async () => {

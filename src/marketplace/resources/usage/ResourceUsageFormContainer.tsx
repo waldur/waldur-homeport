@@ -12,9 +12,8 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ResourceUsageForm } from './ResourceUsageForm';
 import { ResourceUsageSubmitButton } from './ResourceUsageSubmitButton';
@@ -51,10 +50,6 @@ const mapComponents = (components: BaseComponentUsage[], userUsage = false) =>
 export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
   props,
 ) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-
-  const { closeDialog } = useModal();
-
   const initialValues = props.periods
     ? {
         period: props.periods[0],
@@ -67,10 +62,10 @@ export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
       }
     : {};
 
-  const onSubmit = async ({ period, components, user, username }) => {
-    const isUserUsage = props.params.userUsage;
+  const mutation = useManagedMutation({
+    mutationFn: async ({ period, components, user, username }) => {
+      const isUserUsage = props.params.userUsage;
 
-    try {
       if (isUserUsage) {
         // Report user usage
         const promises = Object.keys(components).map((key) => {
@@ -102,12 +97,19 @@ export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
           body: requestBody,
         });
       }
-      showSuccess(translate('Usage report has been submitted.'));
-      closeDialog();
-    } catch (error: any) {
-      // Show user-friendly error notification (existing pattern)
-      showErrorResponse(error, translate('Unable to submit usage report.'));
+    },
+    successMessage: translate('Usage report has been submitted.'),
+    errorMessage: translate('Unable to submit usage report.'),
+    refetch: props.params.refetch,
+    // The usage history chart has its own query, which the resource refetch
+    // doesn't reach.
+    invalidateQueries: [{ queryKey: ['UsageCard'] }],
+  });
 
+  const onSubmit = async (values) => {
+    try {
+      await mutation.mutateAsync(values);
+    } catch (error: any) {
       // Return form-level errors for React Final Form
       if (error.response?.status === 400 && error.response?.data) {
         return error.response.data; // Field-level validation errors
