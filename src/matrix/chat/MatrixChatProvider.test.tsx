@@ -1,5 +1,4 @@
 import { act, render, waitFor } from '@testing-library/react';
-import { TokenRefreshLogoutError } from 'matrix-js-sdk';
 import { FC, useContext } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
@@ -55,6 +54,13 @@ const makeClient = () => {
     logout: vi.fn(() => Promise.resolve()),
     getRoom: vi.fn(() => ({ getMyMembership: () => 'join' })),
     joinRoom: vi.fn(),
+    http: {
+      tokenManager: {
+        opts: { refreshToken: 'refresh-1' } as { refreshToken?: string },
+        latestTokenRefreshExpiry: undefined as Date | undefined,
+        doTokenRefresh: vi.fn(),
+      },
+    },
   };
 };
 
@@ -116,9 +122,13 @@ describe('MatrixChatProvider', () => {
         deviceId: SESSION.device_id,
         accessToken: SESSION.access_token,
         refreshToken: SESSION.refresh_token,
-        tokenRefreshFunction: expect.any(Function),
       }),
     );
+    // Waldur's sessions refresh through Matrix /refresh, starting from the
+    // expiry the session came with.
+    const { tokenManager } = h.createClient.mock.results[0].value.http;
+    expect(vi.isMockFunction(tokenManager.doTokenRefresh)).toBe(false);
+    expect(tokenManager.latestTokenRefreshExpiry).toBeInstanceOf(Date);
     expect(ctx.activeRoomId).toBe('!room:example.com');
     expect(ctx.roomAccessDenied).toBe(false);
   });
@@ -283,12 +293,10 @@ describe('MatrixChatProvider', () => {
     );
     renderProvider();
     await act(() => ctx.connect('room-uuid'));
-    const { tokenRefreshFunction } = h.createClient.mock.calls[0][0];
+    const { tokenManager } = h.createClient.mock.results[0].value.http;
     vi.mocked(matrixSession).mockRejectedValue({ response: { status: 401 } });
 
-    await expect(tokenRefreshFunction('refresh-1')).rejects.toBeInstanceOf(
-      TokenRefreshLogoutError,
-    );
+    await expect(tokenManager.doTokenRefresh()).resolves.toBe('logout');
     vi.unstubAllGlobals();
   });
 
