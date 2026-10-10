@@ -133,7 +133,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   // Waldur provisioned the user's Matrix account, so show how to sign in to it
   // before handing the room over.
   const handleOpenExternal = () =>
-    openDialog(MatrixCredentialsDialog, { resolve: { roomAlias } });
+    openDialog(MatrixCredentialsDialog, { resolve: { roomAlias }, size: 'lg' });
   const showExternal = Boolean(roomAlias) && canOpenInExternalClient();
 
   const handleMute = async () => {

@@ -59,6 +59,7 @@ export const OpenInMatrixButton: FC<MatrixRoomActionsProps> = ({ row, as }) => {
   const handleJoin = useCallback(() => {
     openDialog(MatrixCredentialsDialog, {
       resolve: { roomAlias: row.room_alias },
+      size: 'lg',
     });
   }, [openDialog, row.room_alias]);
 
