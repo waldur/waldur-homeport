@@ -76,6 +76,21 @@ export function readLiveKitCredentials(
   return { url, jwt };
 }
 
+/** The participant identity a LiveKit access token grants, if readable. */
+function liveKitTokenIdentity(jwt: string): string | undefined {
+  try {
+    const payload = jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+    const claims = JSON.parse(
+      new TextDecoder().decode(
+        Uint8Array.from(atob(payload), (c) => c.charCodeAt(0)),
+      ),
+    );
+    return typeof claims.sub === 'string' ? claims.sub : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 export const useLiveKitToken = () => {
   const { client } = useMatrixClient();
   const [rtcAvailable, setRtcAvailable] = useState(false);
@@ -198,6 +213,7 @@ export const useLiveKitToken = () => {
     async (
       roomId: string,
       activeFocus?: LiveKitFocus | null,
+      { encrypted = false }: { encrypted?: boolean } = {},
     ): Promise<LiveKitCredentials | null> => {
       if (!client) return null;
 
@@ -243,7 +259,10 @@ export const useLiveKitToken = () => {
           device_id: deviceId,
         });
         if (controller.signal.aborted) return null;
-        if (res.status === 404 || res.status === 405) {
+        // Media keys are bound to the `<user>:<device>` identity; the
+        // MatrixRTC endpoint may issue another, so encrypted calls stay on
+        // the legacy one.
+        if (!encrypted && (res.status === 404 || res.status === 405)) {
           // A service without the legacy endpoint: the MatrixRTC request,
           // for the same slot, so the call still shares Element's room.
           res = await post('/get_token', {
@@ -268,6 +287,12 @@ export const useLiveKitToken = () => {
         if (controller.signal.aborted) return null;
 
         const credentials = readLiveKitCredentials(data, insecureSfuAllowed());
+        if (
+          encrypted &&
+          liveKitTokenIdentity(credentials.jwt) !== `${userId}:${deviceId}`
+        ) {
+          throw new Error('The call token is for another identity');
+        }
 
         // In dev, the response URL may contain Docker-internal hostnames
         // (e.g. ws://livekit:7880). Rewrite to localhost for the browser.

@@ -9,6 +9,8 @@ export const MatrixCallContext = createContext<MatrixCallContextValue>({
   callRoomId: null,
   callRoomUuid: null,
   rtcAvailable: false,
+  encrypted: false,
+  callSession: null,
   error: null,
   startCall: async () => {},
   endCall: () => {},

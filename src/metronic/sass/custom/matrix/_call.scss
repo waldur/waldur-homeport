@@ -62,3 +62,24 @@
     color: $text-secondary;
   }
 }
+
+.matrix-call-view__notice {
+  position: absolute;
+  top: 0.615rem;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.462rem;
+  max-width: calc(100% - 1.231rem);
+  padding: 0.308rem 0.769rem;
+  border-radius: 0.462rem;
+  background-color: if(
+    isDarkMode(),
+    rgba($warning-500, 0.15),
+    $bg-warning-primary
+  );
+  color: $warning-700;
+  font-size: $font-size-sm;
+}

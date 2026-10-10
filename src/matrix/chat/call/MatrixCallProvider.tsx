@@ -13,10 +13,11 @@ import { useUser } from '@/workspace/hooks';
 
 import { useMatrixClient } from '../useMatrixClient';
 
+import { canEncryptCallMedia } from './callEncryption';
 import { getCallDeviceId } from './callMembership';
 import { MatrixCallContext } from './MatrixCallContext';
 import { findActiveFocus } from './parseCallMembers';
-import { CallSessionHandle, joinCallSession } from './rtcSession';
+import { CallSession, CallSessionHandle, joinCallSession } from './rtcSession';
 import { CallState, LiveKitCredentials } from './types';
 import { useCallMemberEvents } from './useCallMemberEvents';
 import { useLiveKitToken } from './useLiveKitToken';
@@ -47,6 +48,8 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
   const [callRoomId, setCallRoomId] = useState<string | null>(null);
   const [callRoomUuid, setCallRoomUuid] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [encrypted, setEncrypted] = useState(false);
+  const [callSession, setCallSession] = useState<CallSession | null>(null);
   const inCallRef = useRef(false);
   // The MatrixRTC session of the current call, which owns our membership.
   const sessionRef = useRef<CallSessionHandle | null>(null);
@@ -56,6 +59,7 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
   const leaveSession = useCallback(() => {
     const handle = sessionRef.current;
     sessionRef.current = null;
+    setCallSession(null);
     if (handle) leavingRef.current = handle.leave(CALL_LEAVE_TIMEOUT_MS);
   }, []);
 
@@ -117,14 +121,14 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
 
     // From here on, a logout or the session ending cancels this start.
     inCallRef.current = true;
-    const fail = () => {
+    const fail = (message = translate('Could not connect to the call.')) => {
       // Nothing of this attempt, such as a late lost membership, may replace
       // the error below.
       callGenerationRef.current++;
       inCallRef.current = false;
       leaveSession();
       setCallState('error');
-      setError(translate('Could not connect to the call.'));
+      setError(message);
     };
 
     // Publish the membership first: the call token is only issued for a
@@ -143,12 +147,29 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       fail();
       return;
     }
+    // Element Call encrypts every call in an encrypted room; a member
+    // joining in clear could neither see nor hear it. Crypto also remembers
+    // a room it has seen encrypted, should its state no longer say so.
+    const encrypt =
+      !!room.hasEncryptionStateEvent?.() ||
+      !!(await client
+        .getCrypto?.()
+        ?.isEncryptionEnabledInRoom(targetRoomId)
+        .catch(() => false));
+    if (callGenerationRef.current !== generation) return;
+    if (encrypt && !canEncryptCallMedia()) {
+      fail(translate("This browser can't take part in encrypted calls."));
+      return;
+    }
+    setEncrypted(encrypt);
     // A membership withdrawn just before must not land after the new one.
     await leavingRef.current;
     if (callGenerationRef.current !== generation) return;
     let handle: CallSessionHandle;
     try {
-      handle = await joinCallSession(client, room, ownFocus ? [ownFocus] : []);
+      handle = await joinCallSession(client, room, ownFocus ? [ownFocus] : [], {
+        encrypt,
+      });
     } catch {
       if (callGenerationRef.current === generation) fail();
       return;
@@ -159,6 +180,7 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
     sessionRef.current = handle;
+    setCallSession(handle.session);
     try {
       await withTimeout(handle.joined, CALL_CONNECT_TIMEOUT_MS);
     } catch {
@@ -176,7 +198,9 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       }
     });
 
-    const creds = await acquireToken(targetRoomId, activeFocus);
+    const creds = await acquireToken(targetRoomId, activeFocus, {
+      encrypted: encrypt,
+    });
     if (callGenerationRef.current !== generation) return;
     if (!creds) {
       // Withdraw the membership published above. Stay anchored to the room so
@@ -254,6 +278,8 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       callRoomId,
       callRoomUuid,
       rtcAvailable,
+      encrypted,
+      callSession,
       error,
       startCall,
       endCall,
@@ -266,6 +292,8 @@ export const MatrixCallProvider: FC<PropsWithChildren> = ({ children }) => {
       callRoomId,
       callRoomUuid,
       rtcAvailable,
+      encrypted,
+      callSession,
       error,
       startCall,
       endCall,

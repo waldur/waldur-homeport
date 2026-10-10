@@ -95,6 +95,65 @@ describe('useLiveKitToken', () => {
     });
   });
 
+  describe('for an encrypted call', () => {
+    // A LiveKit token whose participant identity is `sub`.
+    const jwtFor = (sub: string) =>
+      `h.${btoa(JSON.stringify({ sub })).replace(/=+$/, '')}.s`;
+    const tokenFor = (sub: string) => ({
+      ok: true,
+      status: 200,
+      json: () =>
+        Promise.resolve({ url: 'wss://lk.test/sfu', jwt: jwtFor(sub) }),
+    });
+    const acquire = async (fetchMock: ReturnType<typeof vi.fn>) => {
+      vi.stubGlobal('fetch', fetchMock);
+      const { result } = renderHook(() => useLiveKitToken());
+      let credentials;
+      await act(async () => {
+        credentials = await result.current.acquireToken('!room:hs.test', null, {
+          encrypted: true,
+        });
+      });
+      return credentials;
+    };
+
+    it('joins under the identity its media keys are bound to', async () => {
+      const credentials = await acquire(
+        vi
+          .fn()
+          .mockResolvedValueOnce(wellKnown)
+          .mockResolvedValueOnce(tokenFor('@me:hs.test:WALDURDEV1')),
+      );
+      expect(credentials).toEqual({
+        url: 'wss://lk.test/sfu',
+        jwt: jwtFor('@me:hs.test:WALDURDEV1'),
+      });
+    });
+
+    it('refuses a token for another identity', async () => {
+      const credentials = await acquire(
+        vi
+          .fn()
+          .mockResolvedValueOnce(wellKnown)
+          .mockResolvedValueOnce(tokenFor('9f2c1e')),
+      );
+      expect(credentials).toBeNull();
+    });
+
+    it('does not fall back to /get_token', async () => {
+      const fetchMock = vi
+        .fn()
+        .mockResolvedValueOnce(wellKnown)
+        .mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          text: () => Promise.resolve(''),
+        });
+      expect(await acquire(fetchMock)).toBeNull();
+      expect(fetchMock).toHaveBeenCalledTimes(2);
+    });
+  });
+
   it('advertises the focus as the homeserver names it, aliased to the room', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(wellKnown));
     const { result } = renderHook(() => useLiveKitToken());
