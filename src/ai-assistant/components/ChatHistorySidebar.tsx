@@ -2,10 +2,15 @@ import { useAssistantRuntime } from '@assistant-ui/react';
 import { PlusIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Nav } from 'react-bootstrap';
 import { chatThreadsArchive, chatThreadsUnarchive } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import {
   groupThreadsByDate,
@@ -132,30 +137,23 @@ export const ChatHistorySidebar: FC = () => {
         </div>
       )}
       {!collapsed && (
-        <>
-          <Nav variant="tabs" className="nav-line-tabs w-100">
-            <Nav.Item className="flex-fill text-center">
-              <Nav.Link
-                as="button"
-                active={!showArchived}
-                onClick={() => setShowArchived(false)}
-                className="w-100"
-              >
-                {translate('Active')}
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="flex-fill text-center">
-              <Nav.Link
-                as="button"
-                active={showArchived}
-                onClick={() => setShowArchived(true)}
-                className="w-100"
-              >
-                {translate('Archived')}
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <div className="aui-history-list">
+        <Tabs
+          value={showArchived ? 'archived' : 'active'}
+          onValueChange={(value) => setShowArchived(value === 'archived')}
+          className="contents"
+        >
+          <TabsList className="w-100">
+            <TabsTrigger value="active" className="flex-1">
+              {translate('Active')}
+            </TabsTrigger>
+            <TabsTrigger value="archived" className="flex-1">
+              {translate('Archived')}
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent
+            value={showArchived ? 'archived' : 'active'}
+            className="aui-history-list"
+          >
             {isLoading ? (
               <LoadingSpinner />
             ) : groups.length === 0 ? (
@@ -195,8 +193,8 @@ export const ChatHistorySidebar: FC = () => {
                 </div>
               ))
             )}
-          </div>
-        </>
+          </TabsContent>
+        </Tabs>
       )}
     </div>
   );

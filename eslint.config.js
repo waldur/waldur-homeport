@@ -205,6 +205,8 @@ export default tseslint
         // Zero instances remain: every checkbox, radio and switch is a waldur-ui
         // Checkbox/Radio/Switch, and the .form-check styles are deleted.
         'waldur-custom/no-bootstrap-form-check': 'error',
+        'waldur-custom/no-bootstrap-tabs': 'error',
+        'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
         // Existing call sites are migrated to HelpIcon incrementally; promote to
         // 'error' once the count is zero.
@@ -219,7 +221,6 @@ export default tseslint
 
         // Design system rules
         'waldur-custom/enforce-featured-icon': 'error',
-        'waldur-custom/enforce-nav-tabs-pattern': 'error',
         'waldur-custom/enforce-border-radius-tokens': 'error',
         'waldur-custom/enforce-breadcrumb-colors': 'error',
         'waldur-custom/no-redundant-vi-mock': 'error',
@@ -299,6 +300,15 @@ export default tseslint
             paths: [...RESTRICTED_IMPORTS, ...RADIX_MENU_IMPORTS],
           },
         ],
+      },
+    },
+    {
+      // Route definitions only: other objects with a `url` (API paths such as
+      // `…?q=…`) are not UI-Router states.
+      files: ['src/**/*routes*.ts'],
+      ignores: ['**/*.test.ts'],
+      rules: {
+        'waldur-custom/dynamic-tab-params': 'error',
       },
     },
     {

@@ -10,7 +10,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import { Field, useField, useForm } from 'react-final-form';
 import {
   ComponentUserUsage,
@@ -20,7 +19,16 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { BaseButton, HelpIcon, Menu, Tooltip } from 'waldur-ui';
+import {
+  BaseButton,
+  HelpIcon,
+  Menu,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Tooltip,
+} from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { parseDate } from '@/core/dateUtils';
@@ -322,56 +330,54 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
         )}
       </div>
       {props.components.length > 0 && (
-        <Tab.Container activeKey={activeTab} onSelect={selectTab}>
+        <Tabs mount="all" value={activeTab} onValueChange={selectTab}>
           <div className="d-flex">
-            <Nav
-              ref={refNav}
-              variant="tabs"
-              className="nav-line-tabs flex-grow-1 mb-4"
-            >
+            <TabsList ref={refNav} className="flex-wrap flex-grow-1 mb-4">
               {orderedComponents.map((component) => {
                 const isHidden = wrappedComponents.some(
                   (c) => component.uuid === c.uuid,
                 );
                 return (
-                  <Nav.Item key={component.uuid} className={isHidden && 'h-0'}>
-                    <Nav.Link eventKey={component.uuid}>
-                      {Boolean(errors.components?.[component.type]) && (
-                        <Tooltip
-                          label={
-                            isHidden ? null : (
-                              <FieldError
-                                error={errors.components[component.type]}
-                              />
-                            )
-                          }
-                          autoWidth
-                        >
-                          <WarningCircleIcon
-                            size={18}
-                            weight="bold"
-                            className="text-danger me-1"
-                          />
-                        </Tooltip>
-                      )}
-                      {component.name}
-                      <HelpIcon
+                  <TabsTrigger
+                    key={component.uuid}
+                    value={component.uuid}
+                    hint={
+                      isHidden
+                        ? undefined
+                        : getBillingTypeLabelOrDash(component.billing_type)
+                    }
+                    className={
+                      isHidden
+                        ? 'invisible h-0 overflow-hidden !p-0 border-0'
+                        : undefined
+                    }
+                  >
+                    {Boolean(errors.components?.[component.type]) && (
+                      <Tooltip
                         label={
-                          isHidden
-                            ? null
-                            : getBillingTypeLabelOrDash(component.billing_type)
+                          isHidden ? null : (
+                            <FieldError
+                              error={errors.components[component.type]}
+                            />
+                          )
                         }
-                        size={18}
-                        className="ms-1"
-                      />
-                    </Nav.Link>
-                  </Nav.Item>
+                        autoWidth
+                      >
+                        <WarningCircleIcon
+                          size={18}
+                          weight="bold"
+                          className="text-danger me-1"
+                        />
+                      </Tooltip>
+                    )}
+                    {component.name}
+                  </TabsTrigger>
                 );
               })}
-            </Nav>
+            </TabsList>
             {wrappedComponents.length > 0 ? (
-              <Nav variant="tabs" className="nav-line-tabs mb-4">
-                <Nav.Item>
+              <div className="d-flex align-items-end border-bottom mb-4">
+                <div>
                   <Menu>
                     <div className="position-relative d-inline-flex">
                       <Menu.Trigger asChild>
@@ -429,15 +435,15 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                       </div>
                     </Menu.Content>
                   </Menu>
-                </Nav.Item>
-              </Nav>
+                </div>
+              </div>
             ) : (
               <div className="w-35px" />
             )}
           </div>
-          <Tab.Content>
+          <>
             {props.components.map((component) => (
-              <Tab.Pane key={component.uuid} eventKey={component.uuid}>
+              <TabsContent key={component.uuid} value={component.uuid}>
                 <div>
                   <div className="mb-7">
                     {component.description && (
@@ -512,10 +518,10 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                     </Field>
                   )}
                 </div>
-              </Tab.Pane>
+              </TabsContent>
             ))}
-          </Tab.Content>
-        </Tab.Container>
+          </>
+        </Tabs>
       )}
     </div>
   );

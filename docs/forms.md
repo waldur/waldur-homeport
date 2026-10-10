@@ -540,7 +540,7 @@ export const MySettingsPanel = ({ settings, update, canUpdate }) => (
 
 ### Key Features
 
-1. **URL Synchronization**: Automatically syncs the active tab to the URL query string using `useSettingsUrlSync`, allowing users to share links to specific tabs.
+1. **URL Synchronization**: Automatically syncs the active tab to the URL query string using `useUrlTab` (`@/navigation/useUrlTab`), allowing users to share links to specific tabs.
 2. **Built-in Search (`enableSearch`)**: When enabled, provides a search input that filters fields across all tabs by matching against their `label` and `description` props.
 3. **Auto-jump**: When searching, if the current tab yields no results, it automatically jumps to the first tab containing matching fields.
 4. **Field Counters**: Displays a badge on each tab showing the number of matching fields during a search.

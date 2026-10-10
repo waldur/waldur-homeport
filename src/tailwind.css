@@ -20,6 +20,7 @@
 @import 'waldur-design-tokens/checkColors.css';
 @import 'waldur-design-tokens/surfaceColors.css';
 @import 'waldur-design-tokens/sidebarColors.css';
+@import 'waldur-design-tokens/tabColors.css';
 /* Not used by the app's own Bootstrap modals, which bring their own
    motion — this is for packages/ui's Radix Dialog/Sheet primitives.
    Keyframe names are namespaced, so nothing else picks them up. */

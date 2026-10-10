@@ -69,6 +69,50 @@ describe('Link', () => {
     expect(onClick).not.toHaveBeenCalled();
   });
 
+  // React handles the click at the root, so a document listener sees whether
+  // the link prevented the browser's own navigation.
+  const recordPrevented = () => {
+    const prevented: boolean[] = [];
+    const listener = (e: MouseEvent) => prevented.push(e.defaultPrevented);
+    document.addEventListener('click', listener);
+    return {
+      prevented,
+      stop: () => document.removeEventListener('click', listener),
+    };
+  };
+
+  it('leaves a Ctrl/Cmd click to the browser so it can open a new tab', async () => {
+    const user = userEvent.setup();
+    render(<Link state="profile.details">Profile</Link>);
+    const link = screen.getByText('Profile');
+    const { prevented, stop } = recordPrevented();
+
+    await user.keyboard('{Control>}');
+    await user.click(link);
+    await user.keyboard('{/Control}{Meta>}');
+    await user.click(link);
+    await user.keyboard('{/Meta}');
+    await user.click(link);
+    stop();
+
+    expect(prevented).toEqual([false, false, true]);
+  });
+
+  it('leaves a target link to the browser', async () => {
+    const user = userEvent.setup();
+    render(
+      <Link state="about.tos" target="_blank">
+        Terms
+      </Link>,
+    );
+    const { prevented, stop } = recordPrevented();
+
+    await user.click(screen.getByText('Terms'));
+    stop();
+
+    expect(prevented).toEqual([false]);
+  });
+
   it('styles a plain text link as an anchor', () => {
     render(<Link state="profile.details">Profile</Link>);
 

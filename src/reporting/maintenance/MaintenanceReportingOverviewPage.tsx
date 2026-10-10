@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import { FC, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -64,36 +65,27 @@ export const MaintenanceReportingOverviewPage: FC = () => {
       ) : announcements?.length ? (
         <>
           {stats && <MaintenanceSummaryCards stats={stats} />}
-          <Tab.Container
-            activeKey={activeTab}
-            onSelect={(k) => setActiveTab(k as MaintenanceViewTab)}
-            unmountOnExit
+          <Tabs
+            mount="active"
+            value={activeTab}
+            onValueChange={(k) => setActiveTab(k as MaintenanceViewTab)}
           >
-            <Nav
-              variant="tabs"
-              className="nav-line-tabs flex-nowrap mb-6 border-0"
-            >
-              <Nav.Item>
-                <Nav.Link as="button" eventKey="table">
-                  {translate('Table')}
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link as="button" eventKey="timeline">
-                  {translate('Timeline')}
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
+            <TabsList bordered={false} className="mb-6">
+              <TabsTrigger value="table">{translate('Table')}</TabsTrigger>
+              <TabsTrigger value="timeline">
+                {translate('Timeline')}
+              </TabsTrigger>
+            </TabsList>
 
-            <Tab.Content>
-              <Tab.Pane eventKey="table" mountOnEnter>
+            <>
+              <TabsContent value="table">
                 <MaintenanceTableView announcements={announcements} />
-              </Tab.Pane>
-              <Tab.Pane eventKey="timeline" mountOnEnter>
+              </TabsContent>
+              <TabsContent value="timeline">
                 <MaintenanceTimelineView announcements={announcements} />
-              </Tab.Pane>
-            </Tab.Content>
-          </Tab.Container>
+              </TabsContent>
+            </>
+          </Tabs>
         </>
       ) : (
         <NoResult

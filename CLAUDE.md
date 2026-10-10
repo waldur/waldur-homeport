@@ -35,6 +35,7 @@ For detailed guidance, see `docs/` — full index with one-line descriptions in 
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns
 - `forms.md` - React Final Form and VStepperForm patterns
+- `tabs.md` - Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, migrating off Bootstrap `Nav`/`Tab`
 - `menus.md` - Menus, dropdowns and popovers: `Menu`, `MenuPopover`, `ActionsMenu`, row actions
 - `tables.md` - Modular index for useTable, columns, filters, row actions, export, and visual customizations
 - `table/filter-migration-guide.md` - Generated table filters from OpenAPI schema
@@ -138,6 +139,8 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   Reference: `src/marketplace/resources/projects/ResourceUserInvitationsList.tsx`
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
+
+- Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section — never react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes. Linter enforces this (`no-bootstrap-tabs`); see `docs/tabs.md`
 
 - Use the `waldur-ui` pickers (`DatePicker`, `DateRangePicker`, `MonthPicker`; `DateField`/`DateGroup` in forms) — never a native `<input type="date">`, `datetime-local`, `time`, `month` or `week`. Linter enforces this; see `docs/forms.md` → "Date & Time Pickers"
 

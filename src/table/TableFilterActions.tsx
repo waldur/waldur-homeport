@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BaseButton } from 'waldur-ui';
@@ -69,7 +68,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
   };
 
   return (
-    <Stack direction="horizontal" gap={2}>
+    <div className="d-flex align-items-center gap-2">
       <BaseButton
         size="sm"
         variant="text-primary"
@@ -93,6 +92,6 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
         onClick={applyCallback}
         label={translate('Apply')}
       />
-    </Stack>
+    </div>
   );
 };

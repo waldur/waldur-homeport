@@ -1,8 +1,5 @@
-import { FC, useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
 import { OrderDetails } from 'waldur-js-client';
-
-import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { FileDownloader } from '@/form/upload/FileDownloader';
@@ -12,6 +9,7 @@ import {
   toPlanBilling,
 } from '@/marketplace/details/plan/billingMode';
 import { Field } from '@/resource/summary';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -75,13 +73,6 @@ const NestedKeyValueTable: FC<{
     />
   );
 };
-
-/** Tab counter, same treatment the global search popover gives its tabs. */
-const TabCount: FC<{ count: number }> = ({ count }) => (
-  <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
-    {count}
-  </Badge>
-);
 
 const MetadataTab: FC<{ order: OrderDetails }> = ({ order }) => (
   <>
@@ -151,8 +142,6 @@ const MetadataTab: FC<{ order: OrderDetails }> = ({ order }) => (
 export const PendingOrderExpandableRow: FC<{ row: OrderDetails }> = ({
   row: order,
 }) => {
-  const [activeTab, setActiveTab] = useState('metadata');
-
   const attributes = (order.attributes ?? {}) as Record<string, unknown>;
   const oldLimits = (attributes.old_limits ?? null) as Record<
     string,
@@ -189,61 +178,46 @@ export const PendingOrderExpandableRow: FC<{ row: OrderDetails }> = ({
     // past its edge. `fluid` makes it take the width it is actually given, and
     // the tables shrink with the panel instead.
     <ExpandableContainer className="fluid">
-      <Tab.Container
-        activeKey={activeTab}
-        onSelect={setActiveTab}
-        unmountOnExit
-      >
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
-          {/* d-flex on the item + align-items-center on the link: a tab
-              carrying a count badge is taller than a bare label, so without
-              this its underline sits lower than Metadata's. */}
-          <Nav.Item className="d-flex">
-            <Nav.Link eventKey="metadata" className="d-flex align-items-center">
-              {translate('Metadata')}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item className="d-flex">
-            <Nav.Link eventKey="limits" className="d-flex align-items-center">
-              {translate('Limits')}
-              <TabCount count={limitRows.length} />
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item className="d-flex">
-            <Nav.Link
-              eventKey="attributes"
-              className="d-flex align-items-center"
-            >
-              {translate('User submitted fields')}
-              <TabCount count={attributeRows.length} />
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="metadata">
-            <MetadataTab order={order} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="limits">
-            <NestedKeyValueTable
-              table={`pending-order-limits-${order.uuid}`}
-              rows={limitRows}
-              keyLabel={translate('Component')}
-              valueLabel={translate('Limit')}
-              hasPrevious={Boolean(oldLimits)}
-              verboseName={translate('limits')}
-            />
-          </Tab.Pane>
-          <Tab.Pane eventKey="attributes">
-            <NestedKeyValueTable
-              table={`pending-order-attributes-${order.uuid}`}
-              rows={attributeRows}
-              keyLabel={translate('Field')}
-              valueLabel={translate('Value')}
-              verboseName={translate('fields')}
-            />
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+      <EmbeddedTabs
+        defaultValue="metadata"
+        listClassName="mb-4"
+        tabs={[
+          {
+            key: 'metadata',
+            title: translate('Metadata'),
+            content: <MetadataTab order={order} />,
+          },
+          {
+            key: 'limits',
+            title: translate('Limits'),
+            count: limitRows.length,
+            content: (
+              <NestedKeyValueTable
+                table={`pending-order-limits-${order.uuid}`}
+                rows={limitRows}
+                keyLabel={translate('Component')}
+                valueLabel={translate('Limit')}
+                hasPrevious={Boolean(oldLimits)}
+                verboseName={translate('limits')}
+              />
+            ),
+          },
+          {
+            key: 'attributes',
+            title: translate('User submitted fields'),
+            count: attributeRows.length,
+            content: (
+              <NestedKeyValueTable
+                table={`pending-order-attributes-${order.uuid}`}
+                rows={attributeRows}
+                keyLabel={translate('Field')}
+                valueLabel={translate('Value')}
+                verboseName={translate('fields')}
+              />
+            ),
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

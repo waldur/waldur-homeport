@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import {
   proposalPublicCallsRetrieve,
   type ProposalReview,
 } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
@@ -63,67 +64,79 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
         <LoadingErred loadData={refetch} />
       ) : (
         <Tabs
-          // The Call tab is eventKey 1, but it does not render without call
+          mount="active"
+          // The Call tab is value "1", but it does not render without call
           // context — leaving the default pointing at it opens the dialog with
           // nothing selected. Fall through to Round, then to the first review.
-          defaultActiveKey={
+          defaultValue={
             showsCallContext() && call
-              ? 1
+              ? 'call'
               : showsCallContext()
-                ? 2
+                ? 'round'
                 : `review-${(reviews ?? [])[0]?.uuid}`
           }
-          unmountOnExit={true}
-          className="nav-line-tabs"
         >
-          {call && showsCallContext() ? (
-            <Tab eventKey={1} title={translate('Call')}>
-              <FormTable hideActions alignTop className="gy-5">
-                <FormTable.Item
-                  label={translate('Name')}
-                  value={<FieldWithCopy value={call.name} />}
-                />
+          <TabsList>
+            {call && showsCallContext() ? (
+              <TabsTrigger value="call">{translate('Call')}</TabsTrigger>
+            ) : null}
+            {showsCallContext() ? (
+              <TabsTrigger value="round">{translate('Round')}</TabsTrigger>
+            ) : null}
+            {(reviews ?? []).map((review) => (
+              <TabsTrigger key={review.uuid} value={`review-${review.uuid}`}>
+                {translate('Review from {name}', {
+                  name:
+                    review.reviewer_full_name || review.anonymous_reviewer_name,
+                })}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          <div className="tab-content">
+            {call && showsCallContext() ? (
+              <TabsContent value="call">
+                <FormTable hideActions alignTop className="gy-5">
+                  <FormTable.Item
+                    label={translate('Name')}
+                    value={<FieldWithCopy value={call.name} />}
+                  />
 
-                <FormTable.Item
-                  label={translate('Reference code')}
-                  value={<FieldWithCopy value={(call as any).reference_code} />}
-                />
-              </FormTable>
-            </Tab>
-          ) : null}
-          {showsCallContext() ? (
-            <Tab eventKey={2} title={translate('Round')}>
-              <FormTable hideActions alignTop className="gy-5">
-                <FormTable.Item
-                  label={translate('Cutoff date')}
-                  value={
-                    <FieldWithCopy
-                      value={
-                        <EndingField
-                          endDate={proposal.round.cutoff_time}
-                          dateFirst
-                        />
-                      }
-                    />
-                  }
-                />
-              </FormTable>
-            </Tab>
-          ) : null}
-          {(reviews ?? []).map((review) => (
-            <Tab
-              key={review.uuid}
-              eventKey={`review-${review.uuid}`}
-              title={translate('Review from {name}', {
-                name:
-                  review.reviewer_full_name || review.anonymous_reviewer_name,
-              })}
-            >
-              <div className="pt-4">
-                <ReviewDetails review={review} />
-              </div>
-            </Tab>
-          ))}
+                  <FormTable.Item
+                    label={translate('Reference code')}
+                    value={
+                      <FieldWithCopy value={(call as any).reference_code} />
+                    }
+                  />
+                </FormTable>
+              </TabsContent>
+            ) : null}
+            {showsCallContext() ? (
+              <TabsContent value="round">
+                <FormTable hideActions alignTop className="gy-5">
+                  <FormTable.Item
+                    label={translate('Cutoff date')}
+                    value={
+                      <FieldWithCopy
+                        value={
+                          <EndingField
+                            endDate={proposal.round.cutoff_time}
+                            dateFirst
+                          />
+                        }
+                      />
+                    }
+                  />
+                </FormTable>
+              </TabsContent>
+            ) : null}
+            {(reviews ?? []).map((review) => (
+              <TabsContent key={review.uuid} value={`review-${review.uuid}`}>
+                <div className="pt-4">
+                  <ReviewDetails review={review} />
+                </div>
+              </TabsContent>
+            ))}
+          </div>
         </Tabs>
       )}
     </ModalDialog>

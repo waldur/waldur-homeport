@@ -6,7 +6,7 @@ When rendering multiple tables within tabs, use the `TableWithTabs` wrapper comp
 
 ## Table with Tabs Wrapper Component (`TableWithTabs`)
 
-`TableWithTabs` (`src/table/TableWithTabs.tsx`) is a layout wrapper that renders standard Bootstrap Nav tabs. Each tab maps to a lazy-loaded child component.
+`TableWithTabs` (`src/table/TableWithTabs.tsx`) is a layout wrapper that renders waldur-ui `Tabs` (see [tabs.md](../tabs.md)). Each tab maps to a lazy-loaded child component.
 
 This wrapper manages:
 
@@ -58,15 +58,15 @@ export const ChecklistManagement = () => {
 
 ## Component Properties
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `title` | `ReactNode` | Card title text / elements. |
-| `subtitle` | `ReactNode` | Optional card subtitle. |
-| `tabs` | `TableTab[]` | Array of tab settings (each must have a `component` key). |
-| `syncWithUrlKey` | `string` | Query parameter key used to sync the active tab in the URL (optional). |
-| `data` | `Record<string, any>` | Optional properties/payload automatically passed down to all child tab components. |
-| `headerActions` | `ReactNode` | Actions rendered directly next to the tab navigation list. |
-| `actions` | `ReactNode` or `Array<{ activeKeys, component }>` | Actions rendered in the header toolbar. |
+| Property         | Type                                              | Description                                                                        |
+| ---------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `title`          | `ReactNode`                                       | Card title text / elements.                                                        |
+| `subtitle`       | `ReactNode`                                       | Optional card subtitle.                                                            |
+| `tabs`           | `TableTab[]`                                      | Array of tab settings (each must have a `component` key).                          |
+| `syncWithUrlKey` | `string`                                          | Query parameter key used to sync the active tab in the URL (optional).             |
+| `data`           | `Record<string, any>`                             | Optional properties/payload automatically passed down to all child tab components. |
+| `headerActions`  | `ReactNode`                                       | Actions rendered directly next to the tab navigation list.                         |
+| `actions`        | `ReactNode` or `Array<{ activeKeys, component }>` | Actions rendered in the header toolbar.                                            |
 
 ---
 

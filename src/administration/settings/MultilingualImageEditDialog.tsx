@@ -1,8 +1,13 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 import { ConstanceSettingsRequest, overrideSettings } from 'waldur-js-client';
 
-import { BaseButton } from 'waldur-ui';
+import {
+  BaseButton,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from 'waldur-ui';
 
 import { formDataOptions } from '@/core/api';
 import { ENV } from '@/core/config';
@@ -117,28 +122,37 @@ export const MultilingualImageEditDialog: FC<
     >
       <p className="text-muted mb-4">{item.description}</p>
       <Tabs
-        activeKey={activeTab}
-        onSelect={(k) => setActiveTab(k || languageChoices[0]?.code)}
-        className="mb-4"
+        mount="all"
+        value={activeTab}
+        onValueChange={(k) => setActiveTab(k || languageChoices[0]?.code)}
       >
-        {languageChoices.map((lang) => (
-          <Tab key={lang.code} eventKey={lang.code} title={lang.label}>
-            <div className="pt-4">
-              <WideImageField
-                input={{
-                  name: `image_${lang.code}`,
-                  value: images[lang.code],
-                  onChange: (value) => handleImageChange(lang.code, value),
-                  onBlur: () => {},
-                  onDragStart: () => {},
-                  onDrop: () => {},
-                  onFocus: () => {},
-                }}
-                initialValue={resolve.initialValues?.[lang.code]}
-              />
-            </div>
-          </Tab>
-        ))}
+        <TabsList className="mb-4">
+          {languageChoices.map((lang) => (
+            <TabsTrigger key={lang.code} value={lang.code}>
+              {lang.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        <div className="tab-content">
+          {languageChoices.map((lang) => (
+            <TabsContent key={lang.code} value={lang.code}>
+              <div className="pt-4">
+                <WideImageField
+                  input={{
+                    name: `image_${lang.code}`,
+                    value: images[lang.code],
+                    onChange: (value) => handleImageChange(lang.code, value),
+                    onBlur: () => {},
+                    onDragStart: () => {},
+                    onDrop: () => {},
+                    onFocus: () => {},
+                  }}
+                  initialValue={resolve.initialValues?.[lang.code]}
+                />
+              </div>
+            </TabsContent>
+          ))}
+        </div>
       </Tabs>
     </ModalDialog>
   );

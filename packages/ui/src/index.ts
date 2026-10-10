@@ -219,10 +219,6 @@ export type {
   SegmentedValue,
 } from './SegmentedControl';
 
-export {
-  segmentedItemClassName,
-  segmentedListClassName,
-} from './segmentedStyles';
 export type { SegmentedVariant } from './segmentedStyles';
 
 export * from './Check';
@@ -314,3 +310,25 @@ export type { CollapsibleProps } from './Collapsible';
 
 export { AccordionCard } from './AccordionCard';
 export type { AccordionCardProps } from './AccordionCard';
+
+export {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  TabNav,
+  tabListVariants,
+  tabTriggerVariants,
+  resolveTabValue,
+} from './Tabs';
+export type {
+  TabsProps,
+  TabsListProps,
+  TabsTriggerProps,
+  TabsContentProps,
+  TabMountMode,
+  TabsItem,
+  TabNavProps,
+  TabNavItemDef,
+  TabStyleProps,
+} from './Tabs';

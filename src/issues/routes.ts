@@ -217,6 +217,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support-ai-assistant-logs',
     url: 'ai-assistant-logs/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'support-logs',
     component: lazyComponent(() =>
       import('@/support/ai-assistant/SupportAIAssistantDashboard').then(
@@ -271,6 +272,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     params: {
+      tab: { dynamic: true },
       section: {
         dynamic: true,
       },
@@ -402,6 +404,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support-onboarding',
     url: 'onboarding/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'support-customer-support',
     component: lazyComponent(() =>
       import('@/administration/organizations/OrganizationOnboardingTabs').then(

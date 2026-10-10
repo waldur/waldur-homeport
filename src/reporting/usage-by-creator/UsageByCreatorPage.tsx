@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -16,32 +17,29 @@ export const UsageByCreatorPage: FC = () => {
   return (
     <>
       <ReportingTitle reportKey="usage-by-creator" />
-      <Tab.Container
-        activeKey={activeTab}
-        onSelect={(k) => setActiveTab(k as TabKey)}
+      <Tabs
+        mount="visited"
+        value={activeTab}
+        onValueChange={(k) => setActiveTab(k as TabKey)}
       >
-        <Nav variant="tabs" className="nav-line-tabs mb-6">
-          <Nav.Item>
-            <Nav.Link as="button" eventKey="affiliation">
-              {translate('By affiliation')}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as="button" eventKey="org-type">
-              {translate('By organization type')}
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
+        <TabsList className="mb-6">
+          <TabsTrigger value="affiliation">
+            {translate('By affiliation')}
+          </TabsTrigger>
+          <TabsTrigger value="org-type">
+            {translate('By organization type')}
+          </TabsTrigger>
+        </TabsList>
 
-        <Tab.Content>
-          <Tab.Pane eventKey="affiliation" mountOnEnter>
+        <>
+          <TabsContent value="affiliation">
             <AffiliationUsageTab />
-          </Tab.Pane>
-          <Tab.Pane eventKey="org-type" mountOnEnter>
+          </TabsContent>
+          <TabsContent value="org-type">
             <OrgTypeUsageTab />
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+          </TabsContent>
+        </>
+      </Tabs>
     </>
   );
 };

@@ -19767,6 +19767,7 @@ __metadata:
     "@radix-ui/react-radio-group": "npm:^1.4.7"
     "@radix-ui/react-scroll-area": "npm:^1.2.14"
     "@radix-ui/react-slot": "npm:^1.3.3"
+    "@radix-ui/react-tabs": "npm:^1.1.3"
     "@radix-ui/react-toast": "npm:^1.2.23"
     "@radix-ui/react-tooltip": "npm:^1.2.16"
     "@types/luxon": "npm:^3.7.2"

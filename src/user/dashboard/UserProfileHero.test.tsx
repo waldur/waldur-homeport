@@ -41,21 +41,30 @@ describe('UserProfileHero', () => {
     );
   });
 
-  it('renders View and Edit as buttons, not a tablist', () => {
+  it('renders View and Edit as links, not a tablist', () => {
     render(<UserProfileHero user={staffUser} />);
 
     expect(screen.queryByRole('tablist')).not.toBeInTheDocument();
     expect(screen.queryByRole('tab')).not.toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'View' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'View' })).toHaveAttribute(
+      'href',
+      'profile.details',
+    );
+    expect(screen.getByRole('link', { name: 'Edit' })).toHaveAttribute(
+      'href',
+      'profile-manage',
+    );
   });
 
   it('marks View as active on the details route', () => {
     render(<UserProfileHero user={staffUser} />);
 
-    expect(screen.getByRole('button', { name: 'View' })).toHaveClass('active');
-    expect(screen.getByRole('button', { name: 'Edit' })).not.toHaveClass(
-      'active',
+    expect(screen.getByRole('link', { name: 'View' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+    expect(screen.getByRole('link', { name: 'Edit' })).not.toHaveAttribute(
+      'aria-current',
     );
   });
 
@@ -63,9 +72,12 @@ describe('UserProfileHero', () => {
     setCurrentState('profile-manage');
     render(<UserProfileHero user={staffUser} />);
 
-    expect(screen.getByRole('button', { name: 'Edit' })).toHaveClass('active');
+    expect(screen.getByRole('link', { name: 'Edit' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
     expect(
-      screen.queryByRole('button', { name: 'View' }),
+      screen.queryByRole('link', { name: 'View' }),
     ).not.toBeInTheDocument();
   });
 });

@@ -1,6 +1,7 @@
 import { FC, useState, useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import { Form, useFormState } from 'react-final-form';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
@@ -38,33 +39,27 @@ const OpenstackInstancesPageTable: FC = () => {
         summary && <OpenstackInstancesSummaryCards summary={summary} />
       )}
 
-      <Tab.Container
-        activeKey={activeTab}
-        onSelect={(k) => setActiveTab(k)}
-        unmountOnExit
+      <Tabs
+        mount="active"
+        value={activeTab}
+        onValueChange={(k) => setActiveTab(k)}
       >
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-6 border-0">
-          <Nav.Item>
-            <Nav.Link as="button" eventKey="instances">
-              {translate('Instances')}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as="button" eventKey="aggregated">
-              {translate('Aggregated')}
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
+        <TabsList bordered={false} className="mb-6">
+          <TabsTrigger value="instances">{translate('Instances')}</TabsTrigger>
+          <TabsTrigger value="aggregated">
+            {translate('Aggregated')}
+          </TabsTrigger>
+        </TabsList>
 
-        <Tab.Content>
-          <Tab.Pane eventKey="instances" mountOnEnter>
+        <>
+          <TabsContent value="instances">
             <OpenstackInstancesTable />
-          </Tab.Pane>
-          <Tab.Pane eventKey="aggregated" mountOnEnter>
+          </TabsContent>
+          <TabsContent value="aggregated">
             <OpenstackInstancesAggregateView />
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+          </TabsContent>
+        </>
+      </Tabs>
     </>
   );
 };

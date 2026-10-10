@@ -1,0 +1,27 @@
+// Space taken by the table around an expandable row's content (includes the
+// 300px aside), so the tab strip can scroll sideways instead of widening it.
+$table-sides-space: 495px;
+
+.notification-templates-tabs {
+  width: 100%;
+
+  .expandable-container & {
+    width: calc(100vw - $table-sides-space);
+  }
+  [data-kt-aside-minimize='on'] .expandable-container & {
+    width: calc(
+      100vw - $table-sides-space + 226px
+    ); // 226px free on aside minimized
+  }
+}
+
+// Mobile screens
+@media (max-width: 992px) {
+  .notification-templates-tabs {
+    .expandable-container & {
+      width: calc(
+        100vw - $table-sides-space + 300px + 30px
+      ); // 300px from aside hidden + 30px from container, space released
+    }
+  }
+}

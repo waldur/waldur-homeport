@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   ResourceProject,
   marketplaceResourceProjectsListUsersList,
@@ -11,7 +10,6 @@ import {
 
 import { fetchResultCount, fixURL } from '@/core/api';
 import Avatar from '@/core/Avatar';
-import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
 import { renderRoleExpirationDate } from '@/customer/team/TeamTableComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
@@ -21,10 +19,10 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown, ActionsMenu } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { NavItem } from '@/user/affiliations/OrganizationExpandableRow';
 import { RoleField } from '@/user/affiliations/RoleField';
 import { useUser } from '@/workspace/hooks';
 
@@ -80,143 +78,138 @@ export const ResourceProjectExpandable: FC<ResourceProjectExpandableProps> = ({
 
   return (
     <ExpandableContainer className="border rounded">
-      <TableTabsContainer
-        defaultActiveKey="active"
-        unmountOnExit={true}
-        className="with-header"
-      >
-        <div className="d-flex align-items-center justify-content-between gap-4 px-4 py-3 border-bottom">
-          <span className="fs-5 fw-bold text-gray-900">
-            {translate('Team')}
-          </span>
-          <div className="d-flex align-items-center gap-2">
-            <ActionsMenu
-              toggle="labeled"
-              size="sm"
-              variant="tertiary"
-              label={translate('Actions')}
-            >
-              <ResourcePermissionsLogButton scopeUrl={projectScopeUrl} />
-            </ActionsMenu>
-            {canManage && resource ? (
-              <ResourceTeamAddDropdown
-                scope="resource_project"
+      <EmbeddedTabs
+        defaultValue="active"
+        header={
+          <div className="d-flex align-items-center justify-content-between gap-4 px-4 py-3 border-bottom">
+            <span className="fs-5 fw-bold text-gray-900">
+              {translate('Team')}
+            </span>
+            <div className="d-flex align-items-center gap-2">
+              <ActionsMenu
+                toggle="labeled"
+                size="sm"
+                variant="tertiary"
+                label={translate('Actions')}
+              >
+                <ResourcePermissionsLogButton scopeUrl={projectScopeUrl} />
+              </ActionsMenu>
+              {canManage && resource ? (
+                <ResourceTeamAddDropdown
+                  scope="resource_project"
+                  scopeUuid={project.uuid}
+                  scopeUrl={projectScopeUrl}
+                  scopeLabel={project.name}
+                  projectUuid={resource.project_uuid}
+                  customerUuid={resource.customer_uuid}
+                  offering={offering}
+                  size="sm"
+                  refetch={tableProps.fetch}
+                />
+              ) : null}
+            </div>
+          </div>
+        }
+        tabs={[
+          {
+            key: 'active',
+            title: translate('Active'),
+            count: tableProps.pagination.resultCount,
+            countLoading: tableProps.loading,
+            content: (
+              <Table
+                {...tableProps}
+                columns={[
+                  {
+                    title: translate('Member'),
+                    render: ({ row }) => (
+                      <div className="content-wrapper gap-2">
+                        <Avatar
+                          src={row.user_image}
+                          name={row.user_full_name}
+                          circle
+                        />
+                        <p className="mb-0">
+                          {row.user_full_name || DASH_ESCAPE_CODE}
+                        </p>
+                      </div>
+                    ),
+                    copyField: (row) => row.user_full_name,
+                  },
+                  isFeatureVisible(UserFeatures.show_username) && {
+                    title: translate('Username'),
+                    render: ({ row }) => row.user_username,
+                    copyField: (row) => row.user_username,
+                    className: 'w-25',
+                  },
+                  {
+                    title: translate('Email'),
+                    render: ({ row }) => row.user_email || DASH_ESCAPE_CODE,
+                    copyField: (row) => row.user_email,
+                  },
+                  {
+                    title: translate('Role in project'),
+                    render: RoleField,
+                    className: 'w-25',
+                  },
+                  {
+                    title: translate('Role expiration'),
+                    render: ({ row }) => renderRoleExpirationDate(row),
+                    className: 'w-45px',
+                  },
+                ]}
+                verboseName={translate('team members')}
+                hasActionBar={false}
+                hoverShadow={false}
+                cardBordered={false}
+                initialPageSize={5}
+                minHeight="auto"
+                rowActions={({ row }) => {
+                  if (!canManage) return null;
+                  const actionRow = {
+                    ...row,
+                    scope_type: 'resource_project' as const,
+                    scope_uuid: project.uuid,
+                  };
+                  return (
+                    <ActionsDropdown
+                      row={actionRow}
+                      refetch={tableProps.fetch}
+                      size="sm"
+                    >
+                      <UpdateUserExpirationAction
+                        row={actionRow}
+                        refetch={tableProps.fetch}
+                      />
+                      <DeleteUserAction
+                        row={actionRow}
+                        refetch={tableProps.fetch}
+                      />
+                    </ActionsDropdown>
+                  );
+                }}
+              />
+            ),
+          },
+          {
+            key: 'invitations',
+            title: translate('Invitations'),
+            count: invitationsCount.data,
+            countLoading: invitationsCount.isLoading,
+            content: (
+              <ResourceUserInvitationsList
+                resource={resource}
+                offering={offering}
                 scopeUuid={project.uuid}
                 scopeUrl={projectScopeUrl}
                 scopeLabel={project.name}
-                projectUuid={resource.project_uuid}
-                customerUuid={resource.customer_uuid}
-                offering={offering}
-                size="sm"
-                refetch={tableProps.fetch}
+                contentType="resource_project"
+                hasActionBar={false}
               />
-            ) : null}
-          </div>
-        </div>
-        <div className="overflow-auto">
-          <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-            <NavItem
-              title={translate('Active')}
-              eventKey="active"
-              count={tableProps.pagination.resultCount}
-              countLoading={tableProps.loading}
-            />
-            <NavItem
-              title={translate('Invitations')}
-              eventKey="invitations"
-              count={invitationsCount.data}
-              countLoading={invitationsCount.isLoading}
-            />
-          </Nav>
-        </div>
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="active">
-            <Table
-              {...tableProps}
-              columns={[
-                {
-                  title: translate('Member'),
-                  render: ({ row }) => (
-                    <div className="content-wrapper gap-2">
-                      <Avatar
-                        src={row.user_image}
-                        name={row.user_full_name}
-                        circle
-                      />
-                      <p className="mb-0">
-                        {row.user_full_name || DASH_ESCAPE_CODE}
-                      </p>
-                    </div>
-                  ),
-                  copyField: (row) => row.user_full_name,
-                },
-                isFeatureVisible(UserFeatures.show_username) && {
-                  title: translate('Username'),
-                  render: ({ row }) => row.user_username,
-                  copyField: (row) => row.user_username,
-                  className: 'w-25',
-                },
-                {
-                  title: translate('Email'),
-                  render: ({ row }) => row.user_email || DASH_ESCAPE_CODE,
-                  copyField: (row) => row.user_email,
-                },
-                {
-                  title: translate('Role in project'),
-                  render: RoleField,
-                  className: 'w-25',
-                },
-                {
-                  title: translate('Role expiration'),
-                  render: ({ row }) => renderRoleExpirationDate(row),
-                  className: 'w-45px',
-                },
-              ]}
-              verboseName={translate('team members')}
-              hasActionBar={false}
-              hoverShadow={false}
-              cardBordered={false}
-              initialPageSize={5}
-              minHeight="auto"
-              rowActions={({ row }) => {
-                if (!canManage) return null;
-                const actionRow = {
-                  ...row,
-                  scope_type: 'resource_project' as const,
-                  scope_uuid: project.uuid,
-                };
-                return (
-                  <ActionsDropdown
-                    row={actionRow}
-                    refetch={tableProps.fetch}
-                    size="sm"
-                  >
-                    <UpdateUserExpirationAction
-                      row={actionRow}
-                      refetch={tableProps.fetch}
-                    />
-                    <DeleteUserAction
-                      row={actionRow}
-                      refetch={tableProps.fetch}
-                    />
-                  </ActionsDropdown>
-                );
-              }}
-            />
-          </Tab.Pane>
-          <Tab.Pane eventKey="invitations">
-            <ResourceUserInvitationsList
-              resource={resource}
-              offering={offering}
-              scopeUuid={project.uuid}
-              scopeUrl={projectScopeUrl}
-              scopeLabel={project.name}
-              contentType="resource_project"
-              hasActionBar={false}
-            />
-          </Tab.Pane>
-        </Tab.Content>
-      </TableTabsContainer>
+            ),
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

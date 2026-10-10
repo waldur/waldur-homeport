@@ -1,0 +1,28 @@
+/**
+ * Tab color tokens for waldur-ui's Tabs and TabNav primitives.
+ *
+ * The underline look maps directly to the Metronic .nav-line-tabs metrics and
+ * the brand ramp. Hover uses a neutral underline and text, so a hovered tab
+ * never looks like the selected one.
+ */
+@import './colors.css';
+
+:root {
+  --tabs-text: var(--color-gray-500);
+  --tabs-text-hover: var(--color-gray-700);
+  --tabs-text-active: var(--waldur-brand-900);
+  --tabs-text-disabled: var(--color-gray-300);
+  --tabs-indicator: var(--waldur-brand-500);
+  --tabs-indicator-hover: var(--color-gray-300);
+  --tabs-border: var(--color-gray-200);
+}
+
+:root[data-theme='dark'] {
+  --tabs-text: var(--color-gray-dark-400);
+  --tabs-text-hover: var(--color-gray-dark-200);
+  --tabs-text-active: var(--color-gray-dark-50);
+  --tabs-text-disabled: var(--color-gray-dark-600);
+  --tabs-indicator: var(--waldur-brand-400);
+  --tabs-indicator-hover: var(--color-gray-dark-600);
+  --tabs-border: var(--color-gray-dark-800);
+}

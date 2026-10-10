@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { required } from '@/core/validators';
 import { MonacoGroup, TextGroup } from '@/form';
@@ -34,25 +35,22 @@ const NotificationTabs = ({
   const [activeKey, setActiveKey] = useState<string>(firstKey);
 
   return (
-    <Tab.Container
-      activeKey={activeKey}
-      onSelect={(key) => key && setActiveKey(key)}
+    <Tabs
+      mount="all"
+      value={activeKey}
+      onValueChange={(key) => key && setActiveKey(key)}
     >
-      <Nav variant="tabs" className="nav-line-tabs mb-3">
+      <TabsList className="mb-3">
         {fields.value.map((template) => (
-          <Nav.Item key={template.path}>
-            <Nav.Link eventKey={template.path}>
-              {formatHeader(template.path)}
-            </Nav.Link>
-          </Nav.Item>
+          <TabsTrigger key={template.path} value={template.path}>
+            {formatHeader(template.path)}
+          </TabsTrigger>
         ))}
-        <Nav.Item>
-          <Nav.Link eventKey="variables">
-            {translate('Available variables')}
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
-      <Tab.Content>
+        <TabsTrigger value="variables">
+          {translate('Available variables')}
+        </TabsTrigger>
+      </TabsList>
+      <>
         {fields.map((name, index) => {
           const template = fields.value[index];
           const isRich =
@@ -60,7 +58,7 @@ const NotificationTabs = ({
             template.path.endsWith('message.txt');
           const isSubject = template.path.endsWith('subject.txt');
           return (
-            <Tab.Pane key={template.path} eventKey={template.path}>
+            <TabsContent key={template.path} value={template.path}>
               {isRich ? (
                 <MonacoGroup
                   name={`${name}.content`}
@@ -76,14 +74,14 @@ const NotificationTabs = ({
                   validate={required}
                 />
               )}
-            </Tab.Pane>
+            </TabsContent>
           );
         })}
-        <Tab.Pane eventKey="variables">
+        <TabsContent value="variables">
           <VariablesPane schema={schema} />
-        </Tab.Pane>
-      </Tab.Content>
-    </Tab.Container>
+        </TabsContent>
+      </>
+    </Tabs>
   );
 };
 

@@ -1,14 +1,21 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
-import { Card, Nav } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   ReviewerProfile,
   reviewerProfilesPublish,
   reviewerProfilesUnpublish,
 } from 'waldur-js-client';
 
-import { Badge, BaseButton } from 'waldur-ui';
+import {
+  Badge,
+  BaseButton,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
@@ -123,91 +130,88 @@ export const ReviewerProfilePanel = ({
   ];
 
   return (
-    <Card className="card-bordered">
-      <Card.Header className="border-bottom-0 pt-4">
-        <div className="d-flex flex-column flex-lg-row w-100 gap-4">
-          {/* Left side: Title, refresh, and status badges */}
-          <div className="d-flex flex-column">
-            <div className="d-flex align-items-center gap-2 mb-2">
-              <h3 className="mb-0">{translate('Reviewer profile')}</h3>
-              {profile.is_published ? (
-                <Badge variant="success" tone="outline">
-                  {translate('Published')}
-                </Badge>
-              ) : (
-                <Badge variant="neutral" tone="outline">
-                  {translate('Not published')}
-                </Badge>
+    <Tabs value={activeTab} onValueChange={(key) => onTabChange(key as TabKey)}>
+      <Card className="card-bordered">
+        <Card.Header className="border-bottom-0 pt-4">
+          <div className="d-flex flex-column flex-lg-row w-100 gap-4">
+            {/* Left side: Title, refresh, and status badges */}
+            <div className="d-flex flex-column">
+              <div className="d-flex align-items-center gap-2 mb-2">
+                <h3 className="mb-0">{translate('Reviewer profile')}</h3>
+                {profile.is_published ? (
+                  <Badge variant="success" tone="outline">
+                    {translate('Published')}
+                  </Badge>
+                ) : (
+                  <Badge variant="neutral" tone="outline">
+                    {translate('Not published')}
+                  </Badge>
+                )}
+                <BaseButton
+                  variant="text-secondary"
+                  size="sm"
+                  onClick={handleRefresh}
+                  disabled={isRefreshing}
+                  disabledReason={translate('Refreshing...')}
+                  iconNode={
+                    <ArrowsClockwiseIcon
+                      size={16}
+                      weight="bold"
+                      className={isRefreshing ? 'animation-spin' : ''}
+                    />
+                  }
+                />
+              </div>
+              {profile.is_published && profile.published_at && (
+                <span className="text-muted fw-normal fs-7">
+                  {translate('Published {date}', {
+                    date: formatDateTime(profile.published_at),
+                  })}
+                </span>
               )}
-              <BaseButton
-                variant="text-secondary"
-                size="sm"
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-                disabledReason={translate('Refreshing...')}
-                iconNode={
-                  <ArrowsClockwiseIcon
-                    size={16}
-                    weight="bold"
-                    className={isRefreshing ? 'animation-spin' : ''}
-                  />
-                }
-              />
             </div>
-            {profile.is_published && profile.published_at && (
-              <span className="text-muted fw-normal fs-7">
-                {translate('Published {date}', {
-                  date: formatDateTime(profile.published_at),
-                })}
-              </span>
-            )}
-          </div>
 
-          {/* Right side: Controls */}
-          <div className="d-flex flex-wrap align-items-center gap-3 ms-lg-auto">
-            <ReviewerProfileAddDropdown profile={profile} />
-            {profile.is_published ? (
-              <BaseButton
-                variant="danger"
-                onClick={handleUnpublish}
-                pending={isPublishing}
-                label={translate('Unpublish profile')}
-                size="lg"
-              />
-            ) : (
-              <BaseButton
-                variant="primary"
-                onClick={handlePublish}
-                pending={isPublishing}
-                label={translate('Publish profile')}
-                size="lg"
-              />
-            )}
+            {/* Right side: Controls */}
+            <div className="d-flex flex-wrap align-items-center gap-3 ms-lg-auto">
+              <ReviewerProfileAddDropdown profile={profile} />
+              {profile.is_published ? (
+                <BaseButton
+                  variant="danger"
+                  onClick={handleUnpublish}
+                  pending={isPublishing}
+                  label={translate('Unpublish profile')}
+                  size="lg"
+                />
+              ) : (
+                <BaseButton
+                  variant="primary"
+                  onClick={handlePublish}
+                  pending={isPublishing}
+                  label={translate('Publish profile')}
+                  size="lg"
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </Card.Header>
-      {/* Tabs navigation */}
-      <Card.Header className="border-bottom align-items-stretch py-0 min-h-auto">
-        <Nav
-          variant="tabs"
-          className="nav-line-tabs flex-nowrap mx-0 border-0 pt-4 pb-2"
-        >
-          {tabs.map((tab) => (
-            <Nav.Item key={tab.key}>
-              <Nav.Link
-                active={activeTab === tab.key}
-                onClick={() => onTabChange(tab.key)}
-                className="cursor-pointer"
-              >
+        </Card.Header>
+        {/* Tabs navigation */}
+        <Card.Header className="border-bottom align-items-stretch py-0 min-h-auto">
+          <TabsList
+            scrollable
+            scrollClassName="flex-grow-1 pt-4"
+            bordered={false}
+          >
+            {tabs.map((tab) => (
+              <TabsTrigger key={tab.key} value={tab.key}>
                 {tab.title}
-              </Nav.Link>
-            </Nav.Item>
-          ))}
-        </Nav>
-      </Card.Header>
-      <Card.Body className={activeTab === 'info' ? 'pt-4' : 'pt-0 pb-0'}>
-        {children}
-      </Card.Body>
-    </Card>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Card.Header>
+        <Card.Body className={activeTab === 'info' ? 'pt-4' : 'pt-0 pb-0'}>
+          <TabsContent value={activeTab}>{children}</TabsContent>
+        </Card.Body>
+      </Card>
+    </Tabs>
   );
 };

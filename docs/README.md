@@ -17,6 +17,7 @@ Guides for working on Waldur HomePort. Start with [development-setup.md](develop
 | Guide                                                                    | Covers                                                                                                                     |
 | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
 | [component-library.md](component-library.md)                             | Reusable UI components: buttons, modals, tables, filters — with prop references                                            |
+| [tabs.md](tabs.md)                                                       | Tabs: `Tabs`, `TabNav`, `EmbeddedTabs`, mount modes, tokens, gotchas, migrating off Bootstrap `Nav`/`Tab`                  |
 | [a11y-decision-matrix.md](a11y-decision-matrix.md)                       | Accessibility decision matrix: SegmentedControl vs Tabs vs Action Buttons vs Nav                                           |
 | [button-ui-guide.md](button-ui-guide.md)                                 | Comprehensive button UI guide: BaseButton, tokens, tooltips, toggles, segmented controls                                   |
 | [ui-consistency-guidelines.md](ui-consistency-guidelines.md)             | Empty states, buttons, loading indicators, tooltips, null-value display                                                    |

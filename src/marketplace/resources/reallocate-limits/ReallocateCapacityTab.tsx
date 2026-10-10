@@ -1,9 +1,9 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Form, Nav, Tab } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { AsyncSelect } from '@/form/select';
 import { translate } from '@/i18n';
@@ -221,21 +221,22 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
           loading={false}
         />
       ) : (
-        <Tab.Container
-          activeKey={activeComponentTab}
-          onSelect={(key) => setActiveComponentTab(key as string)}
+        <Tabs
+          mount="all"
+          value={activeComponentTab}
+          onValueChange={(key) => setActiveComponentTab(key as string)}
         >
-          <Nav variant="tabs" className="nav-line-tabs mb-4">
+          <TabsList className="mb-4">
             {components.map((component) => (
-              <Nav.Item key={component.type}>
-                <Nav.Link eventKey={component.type}>{component.name}</Nav.Link>
-              </Nav.Item>
+              <TabsTrigger key={component.type} value={component.type}>
+                {component.name}
+              </TabsTrigger>
             ))}
-          </Nav>
+          </TabsList>
 
-          <Tab.Content>
+          <>
             {components.map((component) => (
-              <Tab.Pane key={component.type} eventKey={component.type}>
+              <TabsContent key={component.type} value={component.type}>
                 <ResourceSelectionTable
                   component={component}
                   resources={resources}
@@ -244,10 +245,10 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
                   onAllocationChange={handleAllocationChange}
                   loading={false}
                 />
-              </Tab.Pane>
+              </TabsContent>
             ))}
-          </Tab.Content>
-        </Tab.Container>
+          </>
+        </Tabs>
       )}
     </div>
   );

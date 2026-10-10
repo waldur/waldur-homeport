@@ -44,7 +44,9 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
             </Card.Subtitle>
           )}
         </div>
-        <div className="card-toolbar">{actions}</div>
+        {/* Never wider than the header, so a wide toolbar (e.g. a scrollable
+            tab strip) wraps or scrolls instead of overflowing the card. */}
+        <div className="card-toolbar max-w-full">{actions}</div>
       </Card.Header>
     )}
     <Card.Body className={bodyClassName}>{children}</Card.Body>

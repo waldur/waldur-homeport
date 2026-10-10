@@ -18,7 +18,8 @@
     "./animations.css": "./src/animations.css",
     "./zIndex.css": "./src/zIndex.css",
     "./variants.css": "./src/variants.css",
-    "./fonts.css": "./src/fonts.css"
+    "./fonts.css": "./src/fonts.css",
+    "./tabColors.css": "./src/tabColors.css"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",

@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   Project,
   marketplaceServiceProvidersProjectPermissionsList,
@@ -9,11 +8,9 @@ import {
 import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
-import { NavItem } from '@/user/affiliations/OrganizationExpandableRow';
 import { SummaryTeamTable } from '@/user/affiliations/SummaryTeamTable';
-
-import { TableTabsContainer } from '../../customer/list/TableTabsContainer';
 
 import { ProviderProjectMetadataPanel } from './ProviderProjectMetadataPanel';
 
@@ -45,42 +42,36 @@ export const ProviderProjectExpandableRow: FC<OwnProps> = ({
 
   return (
     <ExpandableContainer>
-      <TableTabsContainer
-        defaultActiveKey="team"
-        unmountOnExit={true}
+      <EmbeddedTabs
+        framed
+        defaultValue="team"
         className="min-h-375px"
-      >
-        <div className="overflow-auto">
-          <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-            <NavItem
-              title={translate('Team')}
-              eventKey="team"
-              count={teamCount}
-              countLoading={teamCountLoading}
-            />
-            <NavItem
-              title={translate('Metadata')}
-              eventKey="metadata"
-              count={row.project_metadata?.length}
-              countLoading={false}
-            />
-          </Nav>
-        </div>
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="team">
-            <SummaryTeamTable
-              scope={row}
-              context="project"
-              fetchData={fetchData}
-              filter={{ scope_uuid: row.uuid }}
-              hideActions
-            />
-          </Tab.Pane>
-          <Tab.Pane eventKey="metadata">
-            <ProviderProjectMetadataPanel answers={row.project_metadata} />
-          </Tab.Pane>
-        </Tab.Content>
-      </TableTabsContainer>
+        tabs={[
+          {
+            key: 'team',
+            title: translate('Team'),
+            count: teamCount,
+            countLoading: teamCountLoading,
+            content: (
+              <SummaryTeamTable
+                scope={row}
+                context="project"
+                fetchData={fetchData}
+                filter={{ scope_uuid: row.uuid }}
+                hideActions
+              />
+            ),
+          },
+          {
+            key: 'metadata',
+            title: translate('Metadata'),
+            count: row.project_metadata?.length ?? 0,
+            content: (
+              <ProviderProjectMetadataPanel answers={row.project_metadata} />
+            ),
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

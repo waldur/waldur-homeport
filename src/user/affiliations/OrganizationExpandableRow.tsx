@@ -1,22 +1,19 @@
 import { useQueries, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   ProjectsListData,
   projectsCount as fetchProjectsCount,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
-
 import { getResourcesCount } from '@/administration/api';
 import { fetchResultCount } from '@/core/api';
-import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
 import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { BatchProjectActions } from '@/project/BatchProjectActions';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
   ExpandableRowToolbar,
@@ -25,7 +22,6 @@ import {
 import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
-import { TableTabsContainer } from '../../customer/list/TableTabsContainer';
 import { getCustomerUsersCount } from '../../customer/team/utils';
 
 import { SummaryOrganizationProjects } from './SummaryOrganizationProjects';
@@ -46,17 +42,6 @@ const getProjectsOptionalColumns = (): ExpandableRowToolbarColumn[] => [
     keys: ['created'],
   },
 ];
-
-export const NavItem = ({ title, eventKey, count, countLoading }) => (
-  <Nav.Item className="text-nowrap">
-    <Nav.Link eventKey={eventKey}>
-      {title}
-      <Badge variant="neutral" shape="pill" tone="outline" className="ms-2">
-        {countLoading ? <LoadingSpinnerSimple /> : count || 0}
-      </Badge>
-    </Nav.Link>
-  </Nav.Item>
-);
 
 interface OwnProps {
   row: Customer;
@@ -155,54 +140,45 @@ export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
           optionalColumns={activeOptionalColumns}
           onRefetch={refetchAffectedData}
         />
-        <TableTabsContainer
-          defaultActiveKey="projects"
-          activeKey={activeTab}
-          onSelect={(k) => k && setActiveTab(k)}
-          unmountOnExit={true}
+        <EmbeddedTabs
+          framed
+          defaultValue="projects"
+          value={activeTab}
+          onValueChange={setActiveTab}
           className="min-h-375px"
-        >
-          <div className="overflow-auto">
-            <Nav
-              variant="tabs"
-              className="nav-line-tabs flex-nowrap border-start-0 border-end-0 rounded-0"
-            >
-              <NavItem
-                title={translate('Projects')}
-                eventKey="projects"
-                count={projectsCount.data}
-                countLoading={projectsCount.isLoading}
-              />
-
-              <NavItem
-                title={translate('Resources')}
-                eventKey="resources"
-                count={resourcesCount.data}
-                countLoading={resourcesCount.isLoading}
-              />
-
-              {canListUsers && (
-                <NavItem
-                  title={translate('Team')}
-                  eventKey="team"
-                  count={teamCount.data}
-                  countLoading={teamCount.isLoading}
+          listClassName="rounded-none border-x-[0px]"
+          tabs={[
+            {
+              key: 'projects',
+              title: translate('Projects'),
+              count: projectsCount.data,
+              countLoading: projectsCount.isLoading,
+              content: <SummaryOrganizationProjects customer={props.row} />,
+            },
+            {
+              key: 'resources',
+              title: translate('Resources'),
+              count: resourcesCount.data,
+              countLoading: resourcesCount.isLoading,
+              content: (
+                <SummaryResourcesTable
+                  scope={props.row}
+                  context="organization"
                 />
-              )}
-            </Nav>
-          </div>
-          <Tab.Content className="overflow-auto">
-            <Tab.Pane eventKey="projects">
-              <SummaryOrganizationProjects customer={props.row} />
-            </Tab.Pane>
-            <Tab.Pane eventKey="resources">
-              <SummaryResourcesTable scope={props.row} context="organization" />
-            </Tab.Pane>
-            <Tab.Pane eventKey="team">
-              <SummaryTeamTable scope={props.row} context="organization" />
-            </Tab.Pane>
-          </Tab.Content>
-        </TableTabsContainer>
+              ),
+            },
+            {
+              key: 'team',
+              title: translate('Team'),
+              count: teamCount?.data,
+              countLoading: teamCount?.isLoading,
+              hidden: !canListUsers,
+              content: (
+                <SummaryTeamTable scope={props.row} context="organization" />
+              ),
+            },
+          ]}
+        />
       </div>
     </ExpandableContainer>
   );

@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { FC, useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   Proposal,
   ProposalReview,
@@ -18,6 +17,7 @@ import { RateStars } from '@/proposals/proposal/create-review/RateStars';
 import { ReviewStateRenderer } from '@/proposals/review/ReviewStateRenderer';
 import { Field } from '@/resource/summary';
 import { createFetcher } from '@/table/api';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -139,45 +139,38 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
         />
       )}
 
-      <Tab.Container defaultActiveKey="reviews" unmountOnExit={true}>
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
-          <Nav.Item>
-            <Nav.Link eventKey="reviews">
-              {translate('Reviews')} ({reviewsCount})
-            </Nav.Link>
-          </Nav.Item>
-          {checklistData && (
-            <Nav.Item>
-              <Nav.Link eventKey="compliance">
-                {translate('Compliance')} ({questionsCount})
-              </Nav.Link>
-            </Nav.Item>
-          )}
-        </Nav>
-
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="reviews">
-            <Table
-              {...tableProps}
-              columns={columns}
-              minHeight="auto"
-              hideRefresh
-              verboseName={translate('Reviews')}
-              equalColWidth
-              hasActionBar={false}
-              rowActions={ProposalReviewsRowActions}
-              showPageSizeSelector
-              initialPageSize={5}
-            />
-          </Tab.Pane>
-
-          {checklistData && (
-            <Tab.Pane eventKey="compliance">
-              <ComplianceContent data={checklistData} />
-            </Tab.Pane>
-          )}
-        </Tab.Content>
-      </Tab.Container>
+      <EmbeddedTabs
+        defaultValue="reviews"
+        listClassName="mb-4"
+        tabs={[
+          {
+            key: 'reviews',
+            title: translate('Reviews'),
+            count: reviewsCount,
+            content: (
+              <Table
+                {...tableProps}
+                columns={columns}
+                minHeight="auto"
+                hideRefresh
+                verboseName={translate('Reviews')}
+                equalColWidth
+                hasActionBar={false}
+                rowActions={ProposalReviewsRowActions}
+                showPageSizeSelector
+                initialPageSize={5}
+              />
+            ),
+          },
+          {
+            key: 'compliance',
+            title: translate('Compliance'),
+            count: questionsCount,
+            hidden: !checklistData,
+            content: <ComplianceContent data={checklistData} />,
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
-import { Nav } from 'react-bootstrap';
+import { useId, useMemo, useState } from 'react';
 import { ComponentsUsageStatsPerOffering, Project } from 'waldur-js-client';
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
 import { EChart } from '@/core/EChart';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -41,6 +42,7 @@ export const PerOfferingBarsWidget = ({
   }, [data]);
 
   const [activeType, setActiveType] = useState<string | undefined>();
+  const labelId = useId();
   const effectiveType = activeType ?? componentTypes[0]?.type;
 
   const filteredData = useMemo(() => {
@@ -78,35 +80,8 @@ export const PerOfferingBarsWidget = ({
 
   const showComponentTypeTabs = componentTypes.length > 1;
 
-  return (
+  const chart = (
     <>
-      {showComponentTypeTabs && (
-        <div className="d-flex align-items-center gap-2 mb-2 flex-wrap">
-          <small className="text-secondary fw-medium">
-            {translate('Component type')}:
-          </small>
-          <Nav
-            variant="tabs"
-            className="nav-line-tabs"
-            activeKey={effectiveType}
-            onSelect={(key) => key && setActiveType(key)}
-          >
-            {componentTypes.map(({ type, name }) => (
-              <Nav.Item key={type}>
-                <Nav.Link eventKey={type} title={`type=${type}`}>
-                  {name}
-                  <small
-                    className="text-muted ms-1"
-                    style={{ fontWeight: 400 }}
-                  >
-                    ({type})
-                  </small>
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-        </div>
-      )}
       <div className="d-flex align-items-center gap-2 mb-1">
         <small className="text-secondary">
           {translate(
@@ -116,5 +91,30 @@ export const PerOfferingBarsWidget = ({
       </div>
       <EChart options={options} height="200px" />
     </>
+  );
+
+  if (!showComponentTypeTabs) {
+    return chart;
+  }
+
+  return (
+    <Tabs value={effectiveType} onValueChange={setActiveType}>
+      <div className="d-flex align-items-center gap-2 mb-2 flex-wrap">
+        <small id={labelId} className="text-secondary fw-medium">
+          {translate('Component type')}:
+        </small>
+        <TabsList aria-labelledby={labelId}>
+          {componentTypes.map(({ type, name }) => (
+            <TabsTrigger key={type} value={type} title={`type=${type}`}>
+              {name}
+              <small className="text-muted ms-1" style={{ fontWeight: 400 }}>
+                ({type})
+              </small>
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </div>
+      <TabsContent value={effectiveType}>{chart}</TabsContent>
+    </Tabs>
   );
 };

@@ -46,7 +46,7 @@ export interface PlanDetailsTableProps extends PricesData {
   startDate?: string;
   extraTabs?: Array<{
     title: ReactNode;
-    eventKey: string | number;
+    eventKey: string;
     component: ComponentType;
   }>;
 }

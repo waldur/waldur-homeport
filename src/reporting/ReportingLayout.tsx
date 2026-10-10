@@ -1,9 +1,8 @@
 import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, createContext, useMemo, useState } from 'react';
-import { Nav } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { SegmentedControl } from 'waldur-ui';
+import { SegmentedControl, TabNav } from 'waldur-ui';
 
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
@@ -57,20 +56,15 @@ export const ReportingLayout: FC = () => {
         )}
       </div>
 
-      <Nav variant="tabs" className="nav-line-tabs fs-5 fw-bold mb-5">
-        {tabs.map((tab) => (
-          <Nav.Item key={tab.state}>
-            <Nav.Link
-              as={Link}
-              state={tab.state}
-              active={router.stateService.includes(tab.state)}
-              className="text-decoration-none"
-            >
-              <span>{tab.title}</span>
-            </Nav.Link>
-          </Nav.Item>
-        ))}
-      </Nav>
+      <TabNav
+        listClassName="mb-5"
+        items={tabs.map((tab) => ({
+          key: tab.state,
+          title: tab.title,
+          link: <Link state={tab.state} />,
+          active: router.stateService.includes(tab.state),
+        }))}
+      />
 
       <ReportingPeriodContext.Provider value={months}>
         <UIView />

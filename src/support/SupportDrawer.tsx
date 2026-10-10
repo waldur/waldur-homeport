@@ -1,8 +1,7 @@
 import { ChatsCircleIcon, LifebuoyIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useRef } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { useDrawerExpanded } from '@/drawer/useDrawerExpanded';
 import { translate } from '@/i18n';
@@ -60,61 +59,58 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
   }, [isFreshDeepLink, deepLinkKey, activeTab, storedTab]);
 
   return (
-    <Tab.Container
-      activeKey={activeTab}
-      onSelect={(key) => key && setSupportTab(key as SupportDrawerTab)}
+    <Tabs
+      mount="all"
+      value={activeTab}
+      onValueChange={(key) => key && setSupportTab(key as SupportDrawerTab)}
     >
       <div className="support-drawer h-100 d-flex flex-column">
         {(showChat || showHelpdesk) && (
           <div className="support-drawer-tabs flex-shrink-0">
-            <Nav variant="tabs" className="nav-line-tabs">
+            <TabsList>
               {showChat && (
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="chat"
-                    className="d-flex align-items-center gap-2"
-                  >
-                    <ChatsCircleIcon size={16} weight="bold" />
-                    {translate('Team chat')}
-                    {matrixUnread > 0 && (
-                      <Badge variant="primary" shape="pill" tone="light">
-                        {matrixUnread > 99 ? '99+' : matrixUnread}
-                      </Badge>
-                    )}
-                  </Nav.Link>
-                </Nav.Item>
+                <TabsTrigger
+                  value="chat"
+                  className="d-flex align-items-center gap-2"
+                >
+                  <ChatsCircleIcon size={16} weight="bold" />
+                  {translate('Team chat')}
+                  {matrixUnread > 0 && (
+                    <Badge variant="primary" shape="pill" tone="light">
+                      {matrixUnread > 99 ? '99+' : matrixUnread}
+                    </Badge>
+                  )}
+                </TabsTrigger>
               )}
               {showHelpdesk && (
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="helpdesk"
-                    className="d-flex align-items-center gap-2"
-                  >
-                    <LifebuoyIcon size={16} weight="bold" />
-                    {translate('Helpdesk')}
-                  </Nav.Link>
-                </Nav.Item>
+                <TabsTrigger
+                  value="helpdesk"
+                  className="d-flex align-items-center gap-2"
+                >
+                  <LifebuoyIcon size={16} weight="bold" />
+                  {translate('Helpdesk')}
+                </TabsTrigger>
               )}
-            </Nav>
+            </TabsList>
           </div>
         )}
 
-        {/* Panes stay mounted across tab switches (Tab.Pane default) so the
+        {/* Panes stay mounted across tab switches (the old Bootstrap default) so the
             Team chat keeps its Matrix connection and any active call alive
             while the user is on the Helpdesk tab. */}
-        <Tab.Content className="flex-grow-1 overflow-hidden">
+        <div className="flex-grow-1 overflow-hidden">
           {showChat && (
-            <Tab.Pane eventKey="chat" className="h-100">
+            <TabsContent value="chat" className="h-100">
               <div className="h-100 w-100 d-flex flex-column">
                 <MatrixChatPanel
                   defaultRoomUuid={defaultRoomUuid}
                   defaultRoomAlias={matrixRoomAlias}
                 />
               </div>
-            </Tab.Pane>
+            </TabsContent>
           )}
           {showHelpdesk && (
-            <Tab.Pane eventKey="helpdesk" className="h-100">
+            <TabsContent value="helpdesk" className="h-100">
               {drawerExpanded ? (
                 <div className="support-drawer-helpdesk support-drawer-helpdesk--expanded h-100 w-100">
                   <HelpdeskExpanded />
@@ -124,10 +120,10 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
                   <QuickIssueContainer />
                 </div>
               )}
-            </Tab.Pane>
+            </TabsContent>
           )}
-        </Tab.Content>
+        </div>
       </div>
-    </Tab.Container>
+    </Tabs>
   );
 };

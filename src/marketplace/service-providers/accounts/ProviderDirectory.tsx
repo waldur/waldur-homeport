@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import {
   marketplaceServiceProvidersGlauthTreeRetrieve,
   marketplaceServiceProvidersGlauthUsersConfigRetrieve,
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { CopyToClipboard } from '@/core/CopyToClipboard';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -106,22 +106,19 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
                 className="mb-4"
               />
             ))}
-            <Tab.Container
-              activeKey={view}
-              onSelect={(key) => key && setView(key as View)}
+            <Tabs
+              mount="visited"
+              value={view}
+              onValueChange={(key) => key && setView(key as View)}
             >
-              <Nav variant="tabs" className="nav-line-tabs mb-5">
-                <Nav.Item>
-                  <Nav.Link eventKey="toml">
-                    {translate('TOML config')}
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="tree">{translate('Directory')}</Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <Tab.Content>
-                <Tab.Pane eventKey="toml">
+              <TabsList className="mb-5">
+                <TabsTrigger value="toml">
+                  {translate('TOML config')}
+                </TabsTrigger>
+                <TabsTrigger value="tree">{translate('Directory')}</TabsTrigger>
+              </TabsList>
+              <>
+                <TabsContent value="toml">
                   <div className="border rounded overflow-hidden">
                     <MonacoEditor
                       value={config}
@@ -130,8 +127,8 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
                       readOnly
                     />
                   </div>
-                </Tab.Pane>
-                <Tab.Pane eventKey="tree" mountOnEnter>
+                </TabsContent>
+                <TabsContent value="tree">
                   <GLAuthTreeView
                     tree={{
                       // The tree view names its root after one offering; here
@@ -146,9 +143,9 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
                       robot_accounts: tree.robot_accounts,
                     }}
                   />
-                </Tab.Pane>
-              </Tab.Content>
-            </Tab.Container>
+                </TabsContent>
+              </>
+            </Tabs>
           </>
         )}
       </Card.Body>

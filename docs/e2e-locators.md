@@ -31,5 +31,10 @@ Removing a hook below breaks that suite without failing anything in HomePort, as
 | `.menu-content.filter-field`                           | `.filter-field`                                                                                              | yes                     |
 | `[data-kt-menu-trigger='click']` (role picker trigger) | `[data-testid="role-project-select"]`, then `get_by_role("combobox", name="Role for <email>")`               | no                      |
 | `.role-project-select-popup .menu-item`                | `get_by_role("option", name=…)`, not scoped to the row                                                       | no                      |
+| `.nav-tabs` / `.nav-line-tabs` (router tab bar)        | `nav[aria-label="Tabs"]` (`TAB_BAR` in `homeport_hooks.py`); a page hero, table sub-tabs or reporting        | no                      |
+| `get_by_role("tab")` in a router tab bar               | `get_by_role("link", name=…)`, or `"button"` for a disabled tab (`tab_item()`)                               | no                      |
+| `.card-body .nav-tabs` (in-page section tabs)          | `[role="tablist"]` with `get_by_role("tab", name=…)` (`SECTION_TABS`)                                        | yes                     |
+
+Tab bars moved to waldur-ui's `TabNav` / `Tabs` in waldur/waldur-homeport!7825; the suite matches both markups since waldur/waldur-integration-testing!193. A router tab bar's `aria-label` defaults to "Tabs"; keep that default (or update `TAB_BAR`) when labelling a bar.
 
 The role picker is two selects since waldur/waldur-homeport!7762: Role, then Project for a project-level role (`name="Project for <email>"`). Each is named after its row's email, or `Role for row <n>` while the email is empty. Their menus are portalled to `<body>`, so look up options on the page, not inside the row.

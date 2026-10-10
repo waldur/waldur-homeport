@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useEffect, useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { FC, useEffect, useMemo } from 'react';
 import {
   OpenStackLoadBalancer,
   OpenStackListener,
@@ -23,6 +22,7 @@ import { SecurityGroupRulesList } from '@/openstack/openstack-security-groups/Se
 import { ResourceState } from '@/resource/state/ResourceState';
 import { ResourceSummaryBase } from '@/resource/summary/ResourceSummaryBase';
 import { createClientPaginatedFetcher, createFetcher } from '@/table/api';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -381,53 +381,48 @@ const FloatingIpDetails: FC<{ floatingIpUrl?: string | null }> = ({
 export const LoadBalancerExpandableRow: FC<LoadBalancerExpandableRowProps> = ({
   row,
 }) => {
-  const [activeTab, setActiveTab] = useState('details');
   return (
     <ExpandableContainer>
-      <Tab.Container
-        activeKey={activeTab}
-        onSelect={setActiveTab}
-        unmountOnExit
-      >
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
-          <Nav.Item>
-            <Nav.Link eventKey="details">{translate('Details')}</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="security-groups">
-              {translate('Security group rules')}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="listeners">{translate('Listeners')}</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="pools">{translate('Pools')}</Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="details">
-            <ResourceSummaryBase resource={row} />
-            <VipPortDetails
-              vipPortUrl={row.vip_port}
-              tenantUuid={row.tenant_uuid}
-            />
-            <FloatingIpDetails floatingIpUrl={row.attached_floating_ip} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="security-groups">
-            <SecurityGroupsTab
-              loadBalancerUuid={row.uuid}
-              vipPort={row.vip_port}
-            />
-          </Tab.Pane>
-          <Tab.Pane eventKey="listeners">
-            <ListenersTable loadBalancerUuid={row.uuid} />
-          </Tab.Pane>
-          <Tab.Pane eventKey="pools">
-            <PoolsTable loadBalancerUuid={row.uuid} />
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+      <EmbeddedTabs
+        defaultValue="details"
+        listClassName="mb-4"
+        tabs={[
+          {
+            key: 'details',
+            title: translate('Details'),
+            content: (
+              <>
+                <ResourceSummaryBase resource={row} />
+                <VipPortDetails
+                  vipPortUrl={row.vip_port}
+                  tenantUuid={row.tenant_uuid}
+                />
+                <FloatingIpDetails floatingIpUrl={row.attached_floating_ip} />
+              </>
+            ),
+          },
+          {
+            key: 'security-groups',
+            title: translate('Security group rules'),
+            content: (
+              <SecurityGroupsTab
+                loadBalancerUuid={row.uuid}
+                vipPort={row.vip_port}
+              />
+            ),
+          },
+          {
+            key: 'listeners',
+            title: translate('Listeners'),
+            content: <ListenersTable loadBalancerUuid={row.uuid} />,
+          },
+          {
+            key: 'pools',
+            title: translate('Pools'),
+            content: <PoolsTable loadBalancerUuid={row.uuid} />,
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

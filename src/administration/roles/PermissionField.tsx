@@ -1,8 +1,15 @@
-import * as Tabs from '@radix-ui/react-tabs';
 import classNames from 'classnames';
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import { Badge, BadgeVariant, Checkbox } from 'waldur-ui';
+import {
+  Badge,
+  BadgeVariant,
+  Checkbox,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from 'waldur-ui';
 
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
@@ -117,7 +124,7 @@ const PermissionGroupTab: FC<PermissionGroupTabProps> = ({
   const coverage = getCoverage(entity.selectedCount, entity.options.length);
 
   return (
-    <Tabs.Trigger
+    <TabsTrigger
       key={entity.label}
       value={entity.label}
       disabled={entity.matches.length === 0}
@@ -138,7 +145,7 @@ const PermissionGroupTab: FC<PermissionGroupTabProps> = ({
       >
         {coverage.label}
       </Badge>
-    </Tabs.Trigger>
+    </TabsTrigger>
   );
 };
 
@@ -160,7 +167,7 @@ const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
     shown.length > 0 && shown.every((option) => selectedSet.has(option.value));
 
   return (
-    <Tabs.Content
+    <TabsContent
       value={activeGroup.label}
       className="border-t md:border-t-0 md:border-l border-[var(--waldur-border-secondary)] pt-4 md:ps-4 outline-none"
     >
@@ -189,7 +196,7 @@ const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
           }
         />
       ))}
-    </Tabs.Content>
+    </TabsContent>
   );
 };
 
@@ -253,7 +260,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
           callback={() => setQuery('')}
         />
       ) : (
-        <Tabs.Root
+        <Tabs
           value={activeKey}
           onValueChange={setActiveKey}
           orientation="vertical"
@@ -263,9 +270,10 @@ export const PermissionField = (props: PermissionFieldProps) => {
             <p className="text-muted text-sm font-medium leading-5 mb-4">
               {translate('Permissions')}
             </p>
-            <Tabs.List
+            <TabsList
               aria-label={translate('Permissions')}
-              className="flex flex-col m-0 p-0"
+              bordered={false}
+              className="flex-col"
             >
               {groups.map((entity) => (
                 <PermissionGroupTab
@@ -274,7 +282,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
                   isActive={activeKey === entity.label}
                 />
               ))}
-            </Tabs.List>
+            </TabsList>
           </div>
 
           <PermissionOptionsPanel
@@ -283,7 +291,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
             onToggleOption={toggleOption}
             onToggleShown={toggleShown}
           />
-        </Tabs.Root>
+        </Tabs>
       )}
     </div>
   );

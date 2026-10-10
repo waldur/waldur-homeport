@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
 import {
   CallReviewerPool,
   conflictsOfInterestList,
@@ -21,6 +20,7 @@ import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { Field } from '@/resource/summary';
 import { createClientPaginatedFetcher } from '@/table/api';
+import { EmbeddedTabs } from '@/table/EmbeddedTabs';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -334,113 +334,116 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
 
   return (
     <ExpandableContainer>
-      <Tab.Container defaultActiveKey="profile" unmountOnExit={true}>
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
-          <Nav.Item>
-            <Nav.Link eventKey="profile">{translate('Profile')}</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="coi">
-              {translate('COI')} ({coiCount})
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="affiliations">
-              {translate('Affiliations')} ({affiliationsCount})
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="expertise">
-              {translate('Expertise')} ({expertiseCount})
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="publications">
-              {translate('Publications')} ({publicationsCount})
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-        <Tab.Content className="overflow-auto">
-          <Tab.Pane eventKey="profile">
-            {profile ? (
+      <EmbeddedTabs
+        defaultValue="profile"
+        listClassName="mb-4"
+        tabs={[
+          {
+            key: 'profile',
+            title: translate('Profile'),
+            content: (
               <>
-                <Field
-                  label={translate('ORCID iD')}
-                  value={
-                    profile.orcid_id ? (
-                      <a
-                        href={`https://orcid.org/${profile.orcid_id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="d-inline-flex align-items-center gap-1"
-                      >
-                        <OrcidLogo size={16} />
-                        https://orcid.org/{profile.orcid_id}
-                      </a>
-                    ) : (
-                      <span className="text-muted">
-                        {translate('Not connected')}
-                      </span>
-                    )
-                  }
-                />
-                <Field
-                  label={translate('Reviews completed')}
-                  value={profile.stats?.total_reviews_completed ?? 0}
-                />
-                <Field
-                  label={translate('Biography')}
-                  value={
-                    profile.biography || (
-                      <span className="text-muted">
-                        {translate('Not provided')}
-                      </span>
-                    )
-                  }
-                />
+                {profile ? (
+                  <>
+                    <Field
+                      label={translate('ORCID iD')}
+                      value={
+                        profile.orcid_id ? (
+                          <a
+                            href={`https://orcid.org/${profile.orcid_id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="d-inline-flex align-items-center gap-1"
+                          >
+                            <OrcidLogo size={16} />
+                            https://orcid.org/{profile.orcid_id}
+                          </a>
+                        ) : (
+                          <span className="text-muted">
+                            {translate('Not connected')}
+                          </span>
+                        )
+                      }
+                    />
+                    <Field
+                      label={translate('Reviews completed')}
+                      value={profile.stats?.total_reviews_completed ?? 0}
+                    />
+                    <Field
+                      label={translate('Biography')}
+                      value={
+                        profile.biography || (
+                          <span className="text-muted">
+                            {translate('Not provided')}
+                          </span>
+                        )
+                      }
+                    />
+                  </>
+                ) : (
+                  <p className="text-muted">
+                    {translate('No reviewer profile found.')}
+                  </p>
+                )}
               </>
-            ) : (
-              <p className="text-muted">
-                {translate('No reviewer profile found.')}
-              </p>
-            )}
-          </Tab.Pane>
-
-          <Tab.Pane eventKey="coi">
-            <COITable conflicts={conflicts} />
-          </Tab.Pane>
-
-          <Tab.Pane eventKey="affiliations">
-            {affiliationsCount === 0 ? (
-              <p className="text-muted">
-                {translate('No affiliations added.')}
-              </p>
-            ) : (
-              <AffiliationsTable affiliations={profile.affiliations} />
-            )}
-          </Tab.Pane>
-
-          <Tab.Pane eventKey="expertise">
-            {expertiseCount === 0 ? (
-              <p className="text-muted">
-                {translate('No expertise keywords added.')}
-              </p>
-            ) : (
-              <ExpertiseTable expertise={profile.expertise_set} />
-            )}
-          </Tab.Pane>
-
-          <Tab.Pane eventKey="publications">
-            {publicationsCount === 0 ? (
-              <p className="text-muted">
-                {translate('No publications added.')}
-              </p>
-            ) : (
-              <PublicationsTable publications={profile.publications} />
-            )}
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+            ),
+          },
+          {
+            key: 'coi',
+            title: translate('COI'),
+            count: coiCount,
+            content: <COITable conflicts={conflicts} />,
+          },
+          {
+            key: 'affiliations',
+            title: translate('Affiliations'),
+            count: affiliationsCount,
+            content: (
+              <>
+                {affiliationsCount === 0 ? (
+                  <p className="text-muted">
+                    {translate('No affiliations added.')}
+                  </p>
+                ) : (
+                  <AffiliationsTable affiliations={profile.affiliations} />
+                )}
+              </>
+            ),
+          },
+          {
+            key: 'expertise',
+            title: translate('Expertise'),
+            count: expertiseCount,
+            content: (
+              <>
+                {expertiseCount === 0 ? (
+                  <p className="text-muted">
+                    {translate('No expertise keywords added.')}
+                  </p>
+                ) : (
+                  <ExpertiseTable expertise={profile.expertise_set} />
+                )}
+              </>
+            ),
+          },
+          {
+            key: 'publications',
+            title: translate('Publications'),
+            count: publicationsCount,
+            content: (
+              <>
+                {publicationsCount === 0 ? (
+                  <p className="text-muted">
+                    {translate('No publications added.')}
+                  </p>
+                ) : (
+                  <PublicationsTable publications={profile.publications} />
+                )}
+              </>
+            ),
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

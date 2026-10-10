@@ -46,6 +46,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-dashboard',
     url: '?tab',
+    params: { tab: { dynamic: true } },
     parent: 'reporting-dashboard-layout',
     component: lazyComponent(() =>
       import('./GrowthPage').then((module) => ({
@@ -570,6 +571,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-offering-usage',
     url: 'offering-usage/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'reporting-provider',
     component: lazyComponent(() =>
       import('./provider/OfferingComponentUsageList').then((module) => ({
@@ -808,6 +810,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-openstack-instances',
     url: 'openstack-instances/?tab',
+    params: { tab: { dynamic: true } },
     parent: 'reporting-provider',
     component: lazyComponent(() =>
       import('./openstack-instances/OpenstackInstancesPage').then((m) => ({

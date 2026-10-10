@@ -21,15 +21,17 @@ const EDGE_RADIUS: Record<ButtonSize, string> = {
 };
 
 // Selected fill per variant and per primitive (RadioGroup `checked`, Tabs
-// `active`), each spelled out in full — see the note on EDGE_RADIUS.
+// `aria-selected`), each spelled out in full — see the note on EDGE_RADIUS.
+// Tabs key off `aria-selected`, not `data-state="active"`: a Tooltip around a
+// tab overwrites `data-state` with its own.
 const SELECTED = {
   neutral: [
     'data-[state=checked]:bg-[var(--btn-tertiary-bg-pressed)] data-[state=checked]:hover:bg-[var(--btn-tertiary-bg-pressed)] data-[state=checked]:focus-visible:bg-[var(--btn-tertiary-bg-pressed)]',
-    'data-[state=active]:bg-[var(--btn-tertiary-bg-pressed)] data-[state=active]:hover:bg-[var(--btn-tertiary-bg-pressed)] data-[state=active]:focus-visible:bg-[var(--btn-tertiary-bg-pressed)]',
+    'aria-selected:bg-[var(--btn-tertiary-bg-pressed)] aria-selected:hover:bg-[var(--btn-tertiary-bg-pressed)] aria-selected:focus-visible:bg-[var(--btn-tertiary-bg-pressed)]',
   ],
   brand: [
     'data-[state=checked]:bg-[var(--btn-primary-bg)] data-[state=checked]:text-[var(--btn-primary-text)] data-[state=checked]:hover:bg-[var(--btn-primary-bg-hover)] data-[state=checked]:focus-visible:bg-[var(--btn-primary-bg-hover)] data-[state=checked]:active:bg-[var(--btn-primary-bg-pressed)] data-[state=checked]:shadow-[inset_0_0_0_1px_transparent]',
-    'data-[state=active]:bg-[var(--btn-primary-bg)] data-[state=active]:text-[var(--btn-primary-text)] data-[state=active]:hover:bg-[var(--btn-primary-bg-hover)] data-[state=active]:focus-visible:bg-[var(--btn-primary-bg-hover)] data-[state=active]:active:bg-[var(--btn-primary-bg-pressed)] data-[state=active]:shadow-[inset_0_0_0_1px_transparent]',
+    'aria-selected:bg-[var(--btn-primary-bg)] aria-selected:text-[var(--btn-primary-text)] aria-selected:hover:bg-[var(--btn-primary-bg-hover)] aria-selected:focus-visible:bg-[var(--btn-primary-bg-hover)] aria-selected:active:bg-[var(--btn-primary-bg-pressed)] aria-selected:shadow-[inset_0_0_0_1px_transparent]',
   ],
 } as const;
 
@@ -79,7 +81,7 @@ export const segmentedItemClassName = ({
     'relative -ml-px rounded-none first:ml-0',
     EDGE_RADIUS[size],
     fullWidth && 'flex-1',
-    'focus-visible:z-[2] data-[state=checked]:z-[1] data-[state=active]:z-[1]',
+    'focus-visible:z-[2] data-[state=checked]:z-[1] aria-selected:z-[1]',
     SELECTED[variant],
     className,
   );

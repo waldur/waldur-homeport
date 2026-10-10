@@ -5,8 +5,10 @@ import {
   useRouter,
 } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
 
+import { TabNav } from 'waldur-ui';
+
+import { Link } from '@/core/Link';
 import { CustomerProfile } from '@/customer/dashboard/CustomerProfile';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
@@ -43,8 +45,7 @@ const getDashboardState = (state: StateDeclaration) => {
 
 const PageHero = ({ customer }) => {
   const router = useRouter();
-  const goTo = (state) =>
-    router.stateService.go(state, { uuid: customer.uuid });
+  const params = { uuid: customer.uuid };
 
   const user = useUser();
   const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
@@ -114,48 +115,42 @@ const PageHero = ({ customer }) => {
   return (
     <div className="container-fluid my-5">
       {showTabs && (
-        <Tabs
-          defaultActiveKey={dashboardState}
-          className="nav-line-tabs mb-4"
-          onSelect={goTo}
-        >
-          {!isServiceManagerOnly && (
-            <Tab
-              eventKey="organization.dashboard"
-              title={translate('Customer')}
-              data-testid="organization-tab-customer"
-            />
-          )}
-
-          {showCallManagement && (
-            <Tab
-              eventKey="call-management.dashboard"
-              title={translate('Call management')}
-              data-testid="organization-tab-call-management"
-            />
-          )}
-          {showServiceProvider && (
-            <Tab
-              eventKey="marketplace-provider-dashboard"
-              title={translate('Service provider')}
-              data-testid="organization-tab-service-provider"
-            />
-          )}
-          {showHelpdesk && (
-            <Tab
-              eventKey="provider-helpdesk-overview"
-              title={translate('Helpdesk')}
-              data-testid="organization-tab-helpdesk"
-            />
-          )}
-          {canViewCustomerManagement && (
-            <Tab
-              eventKey="organization-manage"
-              title={translate('Edit')}
-              data-testid="organization-tab-edit"
-            />
-          )}
-        </Tabs>
+        <TabNav
+          activeKey={dashboardState}
+          className="mb-4"
+          items={[
+            !isServiceManagerOnly && {
+              key: 'organization.dashboard',
+              title: translate('Customer'),
+              testId: 'organization-tab-customer',
+            },
+            showCallManagement && {
+              key: 'call-management.dashboard',
+              title: translate('Call management'),
+              testId: 'organization-tab-call-management',
+            },
+            showServiceProvider && {
+              key: 'marketplace-provider-dashboard',
+              title: translate('Service provider'),
+              testId: 'organization-tab-service-provider',
+            },
+            showHelpdesk && {
+              key: 'provider-helpdesk-overview',
+              title: translate('Helpdesk'),
+              testId: 'organization-tab-helpdesk',
+            },
+            canViewCustomerManagement && {
+              key: 'organization-manage',
+              title: translate('Edit'),
+              testId: 'organization-tab-edit',
+            },
+          ]
+            .filter(Boolean)
+            .map((item) => ({
+              ...item,
+              link: <Link state={item.key} params={params} />,
+            }))}
+        />
       )}
       <CustomerProfile
         customer={customer}

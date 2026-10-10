@@ -1,12 +1,12 @@
 import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Tabs, TabsContent, TabsList, TabsTrigger } from 'waldur-ui';
 
-import { useSettingsUrlSync } from '@/administration/settings/useSettingsUrlSync';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { NoResult } from '@/navigation/header/search/NoResult';
+import { useUrlTab } from '@/navigation/useUrlTab';
 import { TableQuery } from '@/table/TableQuery';
 
 interface TabProps {
@@ -48,16 +48,13 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
   }, [children]);
 
   // Use the url sync
-  // useSettingsUrlSync takes an array of { key: string, title: string }.
+  // useUrlTab takes an array of { key: string, title: string }.
   const tabDefs = useMemo(
     () => tabs.map((tab) => ({ key: tab.props.id, title: tab.props.title })),
     [tabs],
   );
 
-  const { activeKey, handleSelect, defaultActiveKey } = useSettingsUrlSync(
-    tabDefs,
-    syncKey,
-  );
+  const { activeKey, handleSelect } = useUrlTab(tabDefs, syncKey);
 
   // 2. Filter fields
   const processedTabs = useMemo(() => {
@@ -113,62 +110,54 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
         </Card.Header>
       )}
       <Card.Body>
-        <Tab.Container
-          defaultActiveKey={defaultActiveKey}
-          activeKey={activeKey}
-          onSelect={(key) => key && handleSelect(key)}
-          unmountOnExit
-        >
+        <Tabs value={activeKey} onValueChange={handleSelect} mount="active">
           {enableSearch && (
             <div className="d-flex justify-content-end mb-3">
               <TableQuery query={query} setQuery={setQuery} />
             </div>
           )}
-          <Nav variant="tabs" className="nav-line-tabs mb-5">
+          <TabsList className="mb-5">
             {processedTabs.map((tab) => {
               const disabled = hasQuery && tab.count === 0;
               return (
-                <Nav.Item key={tab.id}>
-                  <Nav.Link
-                    eventKey={tab.id}
-                    disabled={disabled}
-                    className={disabled ? 'text-muted' : ''}
-                  >
-                    {tab.title}
-                    {enableSearch && hasQuery && (
-                      <Badge
-                        variant="secondary"
-                        size="sm"
-                        tone="light"
-                        className="ms-2"
-                      >
-                        {tab.count}
-                      </Badge>
-                    )}
-                  </Nav.Link>
-                </Nav.Item>
+                <TabsTrigger
+                  key={tab.id}
+                  value={tab.id}
+                  disabled={disabled}
+                  className={disabled ? 'text-muted' : undefined}
+                >
+                  {tab.title}
+                  {enableSearch && hasQuery && (
+                    <Badge
+                      variant="secondary"
+                      size="sm"
+                      tone="light"
+                      className="ms-2"
+                    >
+                      {tab.count}
+                    </Badge>
+                  )}
+                </TabsTrigger>
               );
             })}
-          </Nav>
-          <Tab.Content>
-            {processedTabs.map((tab) => (
-              <Tab.Pane key={tab.id} eventKey={tab.id}>
-                {tab.fields.length > 0 ? (
-                  <FormTable hideActions={hideActions}>{tab.fields}</FormTable>
-                ) : (
-                  <NoResult
-                    title={translate('No results found')}
-                    message={translate(
-                      'No matching fields. Try a different search term.',
-                    )}
-                    callback={() => setQuery('')}
-                    buttonTitle={translate('Clear search')}
-                  />
-                )}
-              </Tab.Pane>
-            ))}
-          </Tab.Content>
-        </Tab.Container>
+          </TabsList>
+          {processedTabs.map((tab) => (
+            <TabsContent key={tab.id} value={tab.id}>
+              {tab.fields.length > 0 ? (
+                <FormTable hideActions={hideActions}>{tab.fields}</FormTable>
+              ) : (
+                <NoResult
+                  title={translate('No results found')}
+                  message={translate(
+                    'No matching fields. Try a different search term.',
+                  )}
+                  callback={() => setQuery('')}
+                  buttonTitle={translate('Clear search')}
+                />
+              )}
+            </TabsContent>
+          ))}
+        </Tabs>
       </Card.Body>
     </Card>
   );

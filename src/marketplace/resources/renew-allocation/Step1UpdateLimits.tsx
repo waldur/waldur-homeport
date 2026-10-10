@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
-import { Card, Tab, Tabs } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { defaultCurrency } from '@/core/formatCurrency';
@@ -203,20 +205,23 @@ export const Step1UpdateLimits: FC<OwnProps> = (props) => {
     <WizardModal {...props}>
       {isMulti ? (
         <Tabs
-          id="resources-limits-change"
-          className="nav nav-stretch nav-line-tabs mb-4"
-          unmountOnExit
-          mountOnEnter
+          mount="active"
+          defaultValue={resources[0] ? getUuid(resources[0]) : undefined}
         >
-          {resources.map((resource) => (
-            <Tab
-              key={resource.uuid}
-              eventKey={getUuid(resource)}
-              title={resource.name}
-            >
-              <UpdateLimitsTable resource={resource} />
-            </Tab>
-          ))}
+          <TabsList className="flex-wrap mb-4">
+            {resources.map((resource) => (
+              <TabsTrigger key={resource.uuid} value={getUuid(resource)}>
+                {resource.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          <div className="tab-content">
+            {resources.map((resource) => (
+              <TabsContent key={resource.uuid} value={getUuid(resource)}>
+                <UpdateLimitsTable resource={resource} />
+              </TabsContent>
+            ))}
+          </div>
         </Tabs>
       ) : (
         <UpdateLimitsTable resource={resources[0]} />

@@ -1,4 +1,5 @@
 import checkNeedsAccessibleName from './rules/check-needs-accessible-name.js';
+import dynamicTabParams from './rules/dynamic-tab-params.js';
 import enforceActionsDropdownInTables from './rules/enforce-actions-dropdown-in-tables.js';
 import enforceBadgeIconPatterns from './rules/enforce-badge-icon-patterns.js';
 import enforceBadgePropsConsistency from './rules/enforce-badge-props-consistency.js';
@@ -8,22 +9,23 @@ import enforceBreadcrumbColors from './rules/enforce-breadcrumb-colors.js';
 import enforceDialogButtonOrder from './rules/enforce-dialog-button-order.js';
 import enforceDisabledButtonTooltip from './rules/enforce-disabled-button-tooltip.js';
 import enforceFeaturedIcon from './rules/enforce-featured-icon.js';
-import enforceNavTabsPattern from './rules/enforce-nav-tabs-pattern.js';
 import enforceNoResultWithCta from './rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
-import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
+import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
 import noEditButtonSizeOverride from './rules/no-edit-button-size-override.js';
 import noHandRolledModalFooter from './rules/no-hand-rolled-modal-footer.js';
 import noHandRolledTable from './rules/no-hand-rolled-table.js';
+import noInteractiveInTabTrigger from './rules/no-interactive-in-tab-trigger.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
 import noNativeDateInput from './rules/no-native-date-input.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
+import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
 import preferClassnamesUtility from './rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.js';
@@ -42,7 +44,10 @@ export default {
     'no-hand-rolled-modal-footer': noHandRolledModalFooter,
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,
+    'dynamic-tab-params': dynamicTabParams,
     'no-bootstrap-form-check': noBootstrapFormCheck,
+    'no-bootstrap-tabs': noBootstrapTabs,
+    'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,
     'check-needs-accessible-name': checkNeedsAccessibleName,
     'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
@@ -56,7 +61,6 @@ export default {
 
     // Design system rules
     'enforce-featured-icon': enforceFeaturedIcon,
-    'enforce-nav-tabs-pattern': enforceNavTabsPattern,
     'enforce-border-radius-tokens': enforceBorderRadiusTokens,
     'enforce-breadcrumb-colors': enforceBreadcrumbColors,
     'enforce-noresult-with-cta': enforceNoResultWithCta,

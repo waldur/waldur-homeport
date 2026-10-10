@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
-import { Card, Nav, Tab } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
-import { AlertItem } from 'waldur-ui';
+import { AlertItem, Tabs, TabsList, TabsTrigger, TabsContent } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -79,42 +79,39 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
           </Card.Title>
         </Card.Header>
         <Card.Body>
-          <Tab.Container
-            activeKey={activeKey}
-            onSelect={(k) => setActiveKey(k as SubTabKey)}
+          <Tabs
+            mount="all"
+            value={activeKey}
+            onValueChange={(k) => setActiveKey(k as SubTabKey)}
           >
-            <Nav variant="tabs" className="nav-line-tabs mb-4">
-              <Nav.Item>
-                <Nav.Link as="button" eventKey="visibility">
-                  {translate('Who can access')}
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link as="button" eventKey="history">
-                  {translate('Access history')}
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
+            <TabsList className="mb-4">
+              <TabsTrigger value="visibility">
+                {translate('Who can access')}
+              </TabsTrigger>
+              <TabsTrigger value="history">
+                {translate('Access history')}
+              </TabsTrigger>
+            </TabsList>
 
-            <Tab.Content>
-              <Tab.Pane eventKey="visibility">
+            <>
+              <TabsContent value="visibility">
                 {activeKey === 'visibility' && (
                   <DataAccessVisibility
                     data={data}
                     isViewerStaffOrSupport={isViewerStaffOrSupport}
                   />
                 )}
-              </Tab.Pane>
-              <Tab.Pane eventKey="history">
+              </TabsContent>
+              <TabsContent value="history">
                 {activeKey === 'history' && (
                   <DataAccessHistory
                     userUuid={user.uuid}
                     isViewerStaffOrSupport={isViewerStaffOrSupport}
                   />
                 )}
-              </Tab.Pane>
-            </Tab.Content>
-          </Tab.Container>
+              </TabsContent>
+            </>
+          </Tabs>
         </Card.Body>
       </Card>
     </>
