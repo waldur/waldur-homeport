@@ -100,7 +100,7 @@
     "luxon": "^3.7.2",
     "markdown-to-jsx": "^7.7.4",
     "marked": "^18.0.3",
-    "matrix-js-sdk": "^40.2.0-rc.0",
+    "matrix-js-sdk": "~43.0.0",
     "mermaid": "^11.16.1",
     "monaco-editor": "^0.52.2",
     "papaparse": "^5.2.2",

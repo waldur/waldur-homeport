@@ -18,6 +18,9 @@ const REFRESH_REJECTED = [401, 403];
 // While a refresh is pending the SDK holds every other request behind it, so
 // a refresh the homeserver never answers would freeze the whole client.
 const REQUEST_TIMEOUT_MS = 15_000;
+// A request still refused after this many refreshes signs the client out
+// rather than refreshing for it forever.
+const MAX_REFRESHES_PER_REQUEST = 5;
 
 // The SDK's error interceptor attaches the Response to the thrown body.
 const httpStatus = (error: unknown): number | undefined =>
@@ -65,14 +68,14 @@ export const openRoom = async (roomUuid: string): Promise<string | null> => {
 };
 
 /**
- * Build matrix-js-sdk's tokenRefreshFunction. It exchanges the refresh token
- * with a plain fetch, because client.refreshToken() would wait on the very
- * refresh in progress. A rejected exchange throws `LogoutError` (the SDK's
- * TokenRefreshLogoutError), which signs the client out; the provider then asks
- * Waldur for a new session on a new client. A new session is a new device, and
- * a client's end-to-end encryption belongs to its device, so the old client
- * can't carry on with new tokens. Any other error fails the request that
- * needed the refresh, and the sync loop tries again later.
+ * Build the exchange of a refresh token for new tokens. It uses a plain fetch,
+ * because client.refreshToken() would wait on the very refresh in progress. A
+ * rejected exchange throws `LogoutError` (the SDK's TokenRefreshLogoutError),
+ * which signs the client out; the provider then asks Waldur for a new session
+ * on a new client. A new session is a new device, and a client's end-to-end
+ * encryption belongs to its device, so the old client can't carry on with new
+ * tokens. Any other error fails the request that needed the refresh, and the
+ * sync loop tries again later.
  */
 export const createTokenRefreshFunction =
   (homeserverUrl: string, LogoutError: typeof TokenRefreshLogoutError) =>
@@ -101,6 +104,67 @@ export const createTokenRefreshFunction =
       new Error(`Matrix rejected the refresh token with ${response.status}.`),
     );
   };
+
+type TokenRefresh = (refreshToken: string) => Promise<AccessTokens>;
+
+// The SDK's token manager owns refreshing: it refreshes shortly before expiry
+// and on an unknown token, shares one refresh between concurrent requests and
+// holds them behind it. Only its exchange step is OAuth-specific.
+interface SdkTokenManager {
+  opts: { accessToken?: string; refreshToken?: string };
+  latestTokenRefreshExpiry?: Date;
+  doTokenRefresh: (
+    attempt?: number,
+  ) => Promise<'success' | 'failure' | 'logout'>;
+}
+
+/**
+ * Make the client refresh its tokens with `refresh`. matrix-js-sdk refreshes
+ * only OAuth-native sessions and signs any other session out once its access
+ * token expires, while Waldur's sessions use the plain Matrix /refresh. This
+ * replaces the token manager's exchange step and keeps the rest of it.
+ * Returns false when the token manager is not where it used to be: the client
+ * still works, and is signed out when its access token expires. Once
+ * `isActive` returns false the client is being discarded, and a refresh
+ * waiting out its backoff is dropped. A first refresh still runs, so that the
+ * logout of a discarded client can renew an expired token.
+ */
+export const installTokenRefresh = (
+  client: MatrixClient,
+  refresh: TokenRefresh,
+  LogoutError: typeof TokenRefreshLogoutError,
+  expiry: Date | undefined,
+  isActive: () => boolean = () => true,
+): boolean => {
+  const manager: SdkTokenManager | undefined = (client.http as any)
+    ?.tokenManager;
+  if (typeof manager?.doTokenRefresh !== 'function' || !manager.opts) {
+    return false;
+  }
+  manager.latestTokenRefreshExpiry = expiry;
+  manager.doTokenRefresh = async (attempt) => {
+    const refreshToken = manager.opts.refreshToken;
+    if (!refreshToken) return 'logout';
+    if (attempt && attempt > MAX_REFRESHES_PER_REQUEST) return 'logout';
+    if (attempt && attempt > 1) {
+      // Back off as the SDK does, up to 32 seconds.
+      await new Promise((resolve) =>
+        setTimeout(resolve, 1000 * Math.min(32, 2 ** attempt)),
+      );
+      if (!isActive()) return 'logout';
+    }
+    try {
+      const tokens = await refresh(refreshToken);
+      manager.opts.accessToken = tokens.accessToken;
+      manager.opts.refreshToken = tokens.refreshToken;
+      manager.latestTokenRefreshExpiry = tokens.expiry;
+      return 'success';
+    } catch (error) {
+      return error instanceof LogoutError ? 'logout' : 'failure';
+    }
+  };
+  return true;
+};
 
 const isUnauthorized = (outcome: unknown) =>
   httpStatus(outcome) === 401 || (outcome as any)?.httpStatus === 401;

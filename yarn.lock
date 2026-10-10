@@ -416,6 +416,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^8.0.0":
+  version: 8.0.7
+  resolution: "@babel/runtime@npm:8.0.7"
+  checksum: 10c0/7ff1ca2d452a3359dc63bd36b25ff219ef04dfefbf7186900f1c296e55ade2ccc7f88dd2eb9d58ed253e3bde58fae97b9e40d80220ebfe510c99f7cf54837603
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/template@npm:7.29.7"
@@ -2568,10 +2575,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@matrix-org/matrix-sdk-crypto-wasm@npm:^17.0.0":
-  version: 17.1.0
-  resolution: "@matrix-org/matrix-sdk-crypto-wasm@npm:17.1.0"
-  checksum: 10c0/6b6503f5228bb55307e8439a552acfa53d62413340bb4cd7bb280da88130ff7359a00b7a80ee59f4e82560196bcfd62b822f830b849cddb69c26677ad3716746
+"@matrix-org/matrix-sdk-crypto-wasm@npm:^18.7.0":
+  version: 18.9.0
+  resolution: "@matrix-org/matrix-sdk-crypto-wasm@npm:18.9.0"
+  checksum: 10c0/415030114c82eb5eb88015da6ff172092de0f4e4142d9d266d1d62ef3975808134e6c93b5ed26c3cbc399fc7dd920234bbc4b0d9e02c50c4d9fa4f9c0ed1a1e3
   languageName: node
   linkType: hard
 
@@ -9233,10 +9240,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"content-type@npm:^1.0.4":
-  version: 1.0.5
-  resolution: "content-type@npm:1.0.5"
-  checksum: 10c0/b76ebed15c000aee4678c3707e0860cb6abd4e680a598c0a26e17f0bfae723ec9cc2802f0ff1bc6e4d80603719010431d2231018373d4dde10f9ccff9dadf5af
+"content-type@npm:^3.0.0":
+  version: 3.1.1
+  resolution: "content-type@npm:3.1.1"
+  checksum: 10c0/a9ff3f2afac5aae1356f545e19fc0d6dca644ee3bf694b788f178185954bfe46ba51ca309950e40e07681290da0b7934652fdb5b7fa4ec1e7d43cb71bd703e1f
   languageName: node
   linkType: hard
 
@@ -12659,7 +12666,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-network-error@npm:^1.1.0":
+"is-network-error@npm:^1.3.0":
   version: 1.3.2
   resolution: "is-network-error@npm:1.3.2"
   checksum: 10c0/37edc576497b21d022754b49203358ee80fdac4a11a71a09687f38ad789ec437dd930c223301df39f1c920566692b31345e0108ae720996e592cab3879eca74f
@@ -13119,13 +13126,6 @@ __metadata:
     readable-stream: "npm:~2.3.6"
     setimmediate: "npm:^1.0.5"
   checksum: 10c0/58e01ec9c4960383fb8b38dd5f67b83ccc1ec215bf74c8a5b32f42b6e5fb79fada5176842a11409c4051b5b94275044851814a31076bf49e1be218d3ef57c863
-  languageName: node
-  linkType: hard
-
-"jwt-decode@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "jwt-decode@npm:4.0.0"
-  checksum: 10c0/de75bbf89220746c388cf6a7b71e56080437b77d2edb29bae1c2155048b02c6b8c59a3e5e8d6ccdfd54f0b8bda25226e491a4f1b55ac5f8da04cfbadec4e546c
   languageName: node
   linkType: hard
 
@@ -13800,35 +13800,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"matrix-js-sdk@npm:^40.2.0-rc.0":
-  version: 40.2.0
-  resolution: "matrix-js-sdk@npm:40.2.0"
+"matrix-js-sdk@npm:~43.0.0":
+  version: 43.0.0
+  resolution: "matrix-js-sdk@npm:43.0.0"
   dependencies:
-    "@babel/runtime": "npm:^7.12.5"
-    "@matrix-org/matrix-sdk-crypto-wasm": "npm:^17.0.0"
+    "@babel/runtime": "npm:^8.0.0"
+    "@matrix-org/matrix-sdk-crypto-wasm": "npm:^18.7.0"
     another-json: "npm:^0.2.0"
     bs58: "npm:^6.0.0"
-    content-type: "npm:^1.0.4"
-    jwt-decode: "npm:^4.0.0"
+    content-type: "npm:^3.0.0"
     loglevel: "npm:^1.9.2"
     matrix-events-sdk: "npm:0.0.1"
-    matrix-widget-api: "npm:^1.16.1"
-    oidc-client-ts: "npm:^3.0.1"
-    p-retry: "npm:7"
+    matrix-widget-api: "npm:^1.19.0"
+    p-retry: "npm:8"
     sdp-transform: "npm:^3.0.0"
     unhomoglyph: "npm:^1.0.6"
-    uuid: "npm:13"
-  checksum: 10c0/d5f958f1ebcb0be9b6f7bdc3445b48803bca724116afa7d2274675f04597db9fa1b6dd69c2eb6adf6c19fc52a1811825a59aa95faeb7c86ae6adc6de5cc7bbee
+  checksum: 10c0/7631a02e210888a47e32e2d068e300aba7bc46e454e50cb86547d1070c5d4af8c2f479edd2fae56dabf90b3e369d0dba33f09a04e1dbdda20e3d56a2efff203f
   languageName: node
   linkType: hard
 
-"matrix-widget-api@npm:^1.16.1":
-  version: 1.17.0
-  resolution: "matrix-widget-api@npm:1.17.0"
+"matrix-widget-api@npm:^1.19.0":
+  version: 1.20.0
+  resolution: "matrix-widget-api@npm:1.20.0"
   dependencies:
     "@types/events": "npm:^3.0.0"
     events: "npm:^3.2.0"
-  checksum: 10c0/3651c860900149ecc2fe74640b47687bab8a347eb718a522085189e2b84efe462c9d81c1e8caff08d122f0b3e9cef8303a5802837673e5c9b465f7624c56a8f3
+  checksum: 10c0/4d14f85197253f3284ce120a2dca47951aa45a1ed4510669fa9341ab84da36a5cee7c32696b040a2b351410d7247884ecb979e5e6f0ada63e449527fd5a2f8bb
   languageName: node
   linkType: hard
 
@@ -14989,15 +14986,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oidc-client-ts@npm:^3.0.1":
-  version: 3.5.0
-  resolution: "oidc-client-ts@npm:3.5.0"
-  dependencies:
-    jwt-decode: "npm:^4.0.0"
-  checksum: 10c0/93cbb62adbfeee4bf705199a94e5790217f211b85dd988827e555481d4e605a5263292b740f29765ac01528b99486f57bbd96679ffca53d7ef76d8f7f7c9f979
-  languageName: node
-  linkType: hard
-
 "on-headers@npm:~1.1.0":
   version: 1.1.0
   resolution: "on-headers@npm:1.1.0"
@@ -15457,12 +15445,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-retry@npm:7":
-  version: 7.1.1
-  resolution: "p-retry@npm:7.1.1"
+"p-retry@npm:8":
+  version: 8.0.1
+  resolution: "p-retry@npm:8.0.1"
   dependencies:
-    is-network-error: "npm:^1.1.0"
-  checksum: 10c0/d72fb15dace25b8bf72c97a13c8a630ad1deb4667e708955e8806ee38f1d70e9611598ebe57bd9677349256e024a5599292f99aabb203143e0e13f1735e30818
+    is-network-error: "npm:^1.3.0"
+  checksum: 10c0/3ce078a179ba2303d29d516db57abed71abd940c29aff292f97f64e2682777b0cb2b03321f4e3badb8185137a3a85cc003ba8060a769b179a5ba8059e7ecdd2c
   languageName: node
   linkType: hard
 
@@ -19258,15 +19246,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:13":
-  version: 13.0.2
-  resolution: "uuid@npm:13.0.2"
-  bin:
-    uuid: dist-node/bin/uuid
-  checksum: 10c0/32c7ee84fa7c7966cc09b3a1514a752a8e2f609f15c00033fbaedc0255d577d1877b839f11ee537f37e587bbc620bbb98c3b3a1482931b8ed47d79497cd7a7cd
-  languageName: node
-  linkType: hard
-
 "uuid@npm:^11.1.0 || ^12 || ^13 || ^14.0.0":
   version: 14.0.1
   resolution: "uuid@npm:14.0.1"
@@ -19623,7 +19602,7 @@ __metadata:
     madge: "npm:^8.0.0"
     markdown-to-jsx: "npm:^7.7.4"
     marked: "npm:^18.0.3"
-    matrix-js-sdk: "npm:^40.2.0-rc.0"
+    matrix-js-sdk: "npm:~43.0.0"
     mermaid: "npm:^11.16.1"
     mock-match-media: "npm:^0.4.3"
     monaco-editor: "npm:^0.52.2"

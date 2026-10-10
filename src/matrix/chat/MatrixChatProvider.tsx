@@ -19,10 +19,12 @@ import {
   setUpEncryption,
   startCrypto,
 } from './crypto';
+import { homeserverFetch } from './homeserverFetch';
 import { MatrixChatContext } from './MatrixChatContext';
 import { getMatrixErrorMessage } from './matrixErrorMessage';
 import {
   createTokenRefreshFunction,
+  installTokenRefresh,
   openRoom,
   sessionTokens,
   startSession,
@@ -352,7 +354,7 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
           return;
         }
 
-        // Explicit MemoryStore: matrix-js-sdk 40.x currently defaults to
+        // Explicit MemoryStore: matrix-js-sdk currently defaults to
         // an in-memory store, but a future bump that flips to IndexedDB
         // would silently persist tokens and message history past Waldur
         // logout. Pin the store so the contract is local-and-ephemeral.
@@ -368,16 +370,30 @@ export const MatrixChatProvider: FC<PropsWithChildren> = ({ children }) => {
           deviceId: session.device_id,
           accessToken: tokens.accessToken,
           refreshToken: tokens.refreshToken,
-          tokenRefreshFunction: createTokenRefreshFunction(
-            session.homeserver_url,
-            sdk.TokenRefreshLogoutError,
-          ),
           // Silence the SDK's verbose FetchHttpApi/sync debug logs.
           // Keep warn/error so real problems still surface.
           logger: quietMatrixLogger,
           ...(Store ? { store: new Store({ localStorage: undefined }) } : {}),
           cryptoCallbacks: keyHolder.callbacks,
+          fetchFn: homeserverFetch,
         });
+
+        const refreshes = installTokenRefresh(
+          client,
+          createTokenRefreshFunction(
+            session.homeserver_url,
+            sdk.TokenRefreshLogoutError,
+          ),
+          sdk.TokenRefreshLogoutError,
+          tokens.expiry,
+          () => clientRef.current === client,
+        );
+        if (!refreshes) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            'Matrix chat cannot refresh its tokens and will sign in again when they expire.',
+          );
+        }
 
         // Disable TURN server polling — not needed for text chat,
         // and Tuwunel doesn't implement the endpoint. Feature-detect so

@@ -1,7 +1,17 @@
+import {
+  createClient,
+  HttpApiEvent,
+  TokenRefreshError,
+  TokenRefreshLogoutError,
+} from 'matrix-js-sdk';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { matrixSession } from 'waldur-js-client';
 
-import { createTokenRefreshFunction, withFreshAccessToken } from './session';
+import {
+  createTokenRefreshFunction,
+  installTokenRefresh,
+  withFreshAccessToken,
+} from './session';
 
 const matrixSessionMock = vi.mocked(matrixSession);
 
@@ -212,5 +222,192 @@ describe('withFreshAccessToken', () => {
 
     expect(response.status).toBe(401);
     expect(run).toHaveBeenCalledTimes(2);
+  });
+});
+
+// Against a real client, so an SDK upgrade that moves its token handling
+// fails here rather than signing chats out every few minutes.
+describe('installTokenRefresh', () => {
+  const unknownToken = () =>
+    jsonResponse(401, {
+      errcode: 'M_UNKNOWN_TOKEN',
+      error: 'Access token has expired',
+      soft_logout: true,
+    });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  const setup = (expiry?: Date, isActive?: () => boolean) => {
+    const fetchFn = vi.fn();
+    const client = createClient({
+      baseUrl: HOMESERVER,
+      userId: '@alice:example.com',
+      accessToken: 'access-1',
+      refreshToken: 'refresh-1',
+      fetchFn,
+    });
+    const refresh = vi.fn();
+    expect(
+      installTokenRefresh(
+        client,
+        refresh,
+        TokenRefreshLogoutError,
+        expiry,
+        isActive,
+      ),
+    ).toBe(true);
+    const loggedOut = vi.fn();
+    client.on(HttpApiEvent.SessionLoggedOut, loggedOut);
+    const bearers = () =>
+      fetchMock(fetchFn).map(([, init]) =>
+        new Headers(init?.headers).get('Authorization'),
+      );
+    return { client, fetchFn, refresh, loggedOut, bearers };
+  };
+  const fetchMock = (fn: ReturnType<typeof vi.fn>) =>
+    fn.mock.calls as [string, RequestInit | undefined][];
+
+  const whoamiOk = () => jsonResponse(200, { user_id: '@alice:example.com' });
+
+  it('refreshes an expired token and retries the request', async () => {
+    const { client, fetchFn, refresh, loggedOut, bearers } = setup();
+    fetchFn
+      .mockResolvedValueOnce(unknownToken())
+      .mockResolvedValueOnce(whoamiOk());
+    refresh.mockResolvedValue({
+      accessToken: 'access-2',
+      refreshToken: 'refresh-2',
+    });
+
+    await client.whoami();
+
+    expect(refresh).toHaveBeenCalledWith('refresh-1');
+    expect(bearers()).toEqual(['Bearer access-1', 'Bearer access-2']);
+    expect(client.getAccessToken()).toBe('access-2');
+    expect(client.getRefreshToken()).toBe('refresh-2');
+    expect(loggedOut).not.toHaveBeenCalled();
+  });
+
+  it('shares one refresh between concurrent requests', async () => {
+    const { client, fetchFn, refresh, bearers } = setup();
+    fetchFn
+      .mockResolvedValueOnce(unknownToken())
+      .mockResolvedValueOnce(unknownToken())
+      .mockImplementation(() => Promise.resolve(whoamiOk()));
+    refresh.mockResolvedValue({
+      accessToken: 'access-2',
+      refreshToken: 'refresh-2',
+    });
+
+    await Promise.all([client.whoami(), client.whoami()]);
+
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(bearers().slice(2)).toEqual(['Bearer access-2', 'Bearer access-2']);
+  });
+
+  it('does not refresh for a discarded client', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout'] });
+    let active = true;
+    const { client, fetchFn, refresh } = setup(undefined, () => active);
+    fetchFn.mockImplementation(() => Promise.resolve(unknownToken()));
+    refresh.mockResolvedValue({ accessToken: 'access-2', refreshToken: 'r' });
+
+    const request = client.whoami();
+    const outcome = expect(request).rejects.toMatchObject({
+      errcode: 'M_UNKNOWN_TOKEN',
+    });
+    await vi.advanceTimersByTimeAsync(0);
+    active = false;
+    await vi.runAllTimersAsync();
+    await outcome;
+
+    expect(refresh).toHaveBeenCalledTimes(1);
+  });
+
+  it('refreshes before a request once the token is due', async () => {
+    const { client, fetchFn, refresh, bearers } = setup(
+      new Date(Date.now() - 1000),
+    );
+    fetchFn.mockImplementation(() => Promise.resolve(whoamiOk()));
+    refresh.mockResolvedValue({
+      accessToken: 'access-2',
+      refreshToken: 'refresh-2',
+      expiry: new Date(Date.now() + 300000),
+    });
+
+    await client.whoami();
+    await client.whoami();
+
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(bearers()).toEqual(['Bearer access-2', 'Bearer access-2']);
+  });
+
+  it('signs the client out when Matrix rejects the refresh', async () => {
+    const { client, fetchFn, refresh, loggedOut } = setup();
+    fetchFn.mockResolvedValue(unknownToken());
+    refresh.mockRejectedValue(
+      new TokenRefreshLogoutError(new Error('rejected')),
+    );
+
+    await expect(client.whoami()).rejects.toMatchObject({
+      errcode: 'M_UNKNOWN_TOKEN',
+    });
+    expect(loggedOut).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the session when the refresh fails for another reason', async () => {
+    const { client, fetchFn, refresh, loggedOut } = setup();
+    fetchFn.mockResolvedValue(unknownToken());
+    refresh.mockRejectedValue(new Error('network down'));
+
+    await expect(client.whoami()).rejects.toBeInstanceOf(TokenRefreshError);
+    expect(loggedOut).not.toHaveBeenCalled();
+    expect(client.getRefreshToken()).toBe('refresh-1');
+  });
+
+  it('signs out a token rejected long before its expiry', async () => {
+    const { client, fetchFn, refresh, loggedOut } = setup(
+      new Date(Date.now() + 300000),
+    );
+    fetchFn.mockResolvedValue(unknownToken());
+
+    await expect(client.whoami()).rejects.toMatchObject({
+      errcode: 'M_UNKNOWN_TOKEN',
+    });
+    expect(refresh).not.toHaveBeenCalled();
+    expect(loggedOut).toHaveBeenCalledTimes(1);
+  });
+
+  it('signs out a request refused after every refresh', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout'] });
+    const { client, fetchFn, refresh, loggedOut } = setup();
+    fetchFn.mockImplementation(() => Promise.resolve(unknownToken()));
+    let n = 0;
+    refresh.mockImplementation(() =>
+      Promise.resolve({ accessToken: `access-${++n + 1}`, refreshToken: 'r' }),
+    );
+
+    const request = client.whoami();
+    const outcome = expect(request).rejects.toMatchObject({
+      errcode: 'M_UNKNOWN_TOKEN',
+    });
+    await vi.runAllTimersAsync();
+    await outcome;
+
+    expect(refresh).toHaveBeenCalledTimes(5);
+    expect(loggedOut).toHaveBeenCalledTimes(1);
+  });
+
+  it('reports a client without the token manager', () => {
+    expect(
+      installTokenRefresh(
+        { http: {} } as any,
+        vi.fn(),
+        TokenRefreshLogoutError,
+        undefined,
+      ),
+    ).toBe(false);
   });
 });
