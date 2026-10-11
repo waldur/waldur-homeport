@@ -61,6 +61,9 @@ export const SupportDrawer: FC<SupportDrawerProps> = ({
   return (
     <Tabs
       mount="all"
+      // The tabs root is a wrapper div of its own: it must pass the drawer's
+      // height on, or the chat timeline grows with its messages and can't scroll.
+      className="h-100 d-flex flex-column"
       value={activeTab}
       onValueChange={(key) => key && setSupportTab(key as SupportDrawerTab)}
     >
