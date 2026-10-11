@@ -28,6 +28,11 @@ const config: StorybookConfig = {
     return Promise.resolve(
       mergeConfig(viteConfig, {
         plugins: [tailwindcss()],
+        server: {
+          // Sibling Claude Code worktrees hold full copies of the repo;
+          // watching them exhausts the inotify limit (ENOSPC).
+          watch: { ignored: ['**/.claude/worktrees/**'] },
+        },
         resolve: {
           alias: {
             '@': path.resolve(__dirname, '../src/'),
