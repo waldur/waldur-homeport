@@ -618,7 +618,7 @@ export const SettingsDescription = [
       {
         key: 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE',
         description: translate('Type of support backend. Possible values: basic, atlassian, zammad, smax.'),
-        default: 'atlassian',
+        default: 'basic',
         type: 'choice_field',
         options: [{ value: 'basic', label: 'Basic' }, { value: 'atlassian', label: 'Atlassian' }, { value: 'zammad', label: 'Zammad' }, { value: 'smax', label: 'SMAX' }],
       },
