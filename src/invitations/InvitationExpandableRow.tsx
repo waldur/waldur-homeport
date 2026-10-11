@@ -7,15 +7,15 @@ import { translate } from '@/i18n';
 import { formatRoleType } from '@/permissions/utils';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 
+import { getInvitationLink } from './utils';
+
 export const InvitationExpandableRow: React.FC<{
   row: Invitation;
 }> = ({ row }) => (
   <ExpandableContainer hasMultiSelect>
     <p>
       <b>{translate('Invitation link')}: </b>
-      <CopyToClipboardContainer
-        value={`${location.origin}/invitation/${row.uuid}/`}
-      />
+      <CopyToClipboardContainer value={getInvitationLink(row)} />
     </p>
     {row.civil_number && (
       <p>
