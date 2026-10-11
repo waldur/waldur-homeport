@@ -69,7 +69,7 @@ export interface ScrollSpyNavProps extends Omit<
 }
 
 export const SCROLLSPY_NAV_LINK_BASE =
-  'nav-link w-full flex-1 block py-3 px-4 m-0 font-semibold border-y-0 border-r-0 border-l-2 rounded-none transition-colors cursor-pointer text-sm leading-5 no-underline [&>*]:w-full';
+  'w-full flex-1 block py-3 px-4 m-0 font-semibold border-y-0 border-r-0 border-l-2 rounded-none transition-colors cursor-pointer text-sm leading-5 no-underline [&>*]:w-full';
 
 export const SCROLLSPY_NAV_LINK_ACTIVE =
   'border-l-brand-600 text-brand-600 font-semibold active';

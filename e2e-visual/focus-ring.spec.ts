@@ -4,6 +4,7 @@ import { contrastRatio, parseColor } from 'waldur-design-tokens/contrast';
 
 import { buttonVariants } from '../packages/ui/src/BaseButton';
 import { navMenuRowClassName } from '../packages/ui/src/DropdownMenu';
+import { tabTriggerVariants } from '../packages/ui/src/Tabs';
 
 /**
  * Asserts that keyboard focus produces a *visible* indicator, with enough
@@ -51,11 +52,7 @@ const FIXTURES = `
     <button class="${button('tertiary')}" data-ring="unlayered-override">Neumorphic</button>
   </div>
   <a href="#" class="${navMenuRowClassName()}" data-ring="nav-menu-row">Menu row</a>
-  <ul class="nav nav-tabs nav-line-tabs">
-    <li class="nav-item">
-      <a href="#" class="nav-link" data-ring="nav-line-tab">View</a>
-    </li>
-  </ul>
+  <button type="button" role="tab" class="${tabTriggerVariants()}" data-ring="nav-line-tab">View</button>
 </div>`;
 
 const CASES = [
@@ -112,12 +109,7 @@ async function focusByKeyboardAndMeasure(page: Page, ring: string) {
       if (!active) return null;
       const styled = active;
       if (styled.dataset?.ring !== target) return null;
-      const ringHost =
-        target === 'nav-line-tab' ? styled.closest('.nav-item') : styled;
-      const ringSource =
-        target === 'nav-line-tab' && ringHost
-          ? getComputedStyle(ringHost, '::before')
-          : getComputedStyle(styled);
+      const ringSource = getComputedStyle(styled);
       return {
         outlineWidth: parseFloat(ringSource.outlineWidth),
         outlineStyle: ringSource.outlineStyle,
