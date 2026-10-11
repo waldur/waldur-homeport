@@ -1,7 +1,11 @@
 import { InfoIcon } from '@phosphor-icons/react';
-import { SubmitRequestResponse } from 'waldur-js-client';
+import { Invitation, SubmitRequestResponse } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+
+export function getInvitationLink(invitation: Pick<Invitation, 'uuid'>) {
+  return `${location.origin}/invitation/${invitation.uuid}/`;
+}
 
 export function getGroupInvitationLink(invitation) {
   return `${location.origin}/user-group-invitation/${invitation.uuid}/`;

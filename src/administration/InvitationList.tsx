@@ -20,6 +20,7 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { RoleField } from '@/user/affiliations/RoleField';
 
+import { InvitationLinkExpandableRow } from './InvitationLinkExpandableRow';
 import { InvitationScopeLink } from './InvitationScopeLink';
 
 export const InvitationList: FunctionComponent = () => {
@@ -94,6 +95,7 @@ export const InvitationList: FunctionComponent = () => {
       ]}
       verboseName={translate('invitations')}
       hasQuery={true}
+      expandableRow={InvitationLinkExpandableRow}
       formId={UserInvitationsFilterFormId}
     />
   );
