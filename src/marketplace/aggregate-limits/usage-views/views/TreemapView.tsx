@@ -8,6 +8,7 @@ import { getBrandColor } from '@/core/utils';
 import { useChartThemeColors } from '@/dashboard/chartColors';
 import { translate } from '@/i18n';
 
+import { splitUsage } from '../../utils';
 import { MixBanner } from '../MixBanner';
 import { ComponentRow, detectMix } from '../mixDetection';
 
@@ -34,8 +35,9 @@ function rowValue(r: ComponentRow, mode: SizeMode): number {
   if (mode === 'limit') return r.limit ?? 0;
   if (mode === 'pct') {
     if (!r.limit || r.limit <= 0) return 0;
-    const used = r.billing_type === 'limit' ? r.limit_usage || 0 : r.usage || 0;
-    return Math.round((used / r.limit) * 1000) / 10;
+    // The cap covers live resources only.
+    const { live } = splitUsage(r);
+    return Math.round((live / r.limit) * 1000) / 10;
   }
   return r.billing_type === 'limit' ? r.limit_usage || 0 : r.usage || 0;
 }

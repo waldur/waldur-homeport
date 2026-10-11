@@ -13,6 +13,7 @@ export enum CustomerFeatures {
 
 export enum DashboardFeatures {
   spend_forecast = 'dashboard.spend_forecast',
+  usage_include_terminated = 'dashboard.usage_include_terminated',
   usage_limit_horizon = 'dashboard.usage_limit_horizon',
   usage_per_offering_bars = 'dashboard.usage_per_offering_bars',
   usage_period_over_period = 'dashboard.usage_period_over_period',

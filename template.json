@@ -282,6 +282,11 @@
       "feature_area": "ai-assistant"
     }
   },
+  "(removed)": {
+    "context": {
+      "feature_area": "views"
+    }
+  },
   "(today)": {
     "context": {
       "feature_area": "project"
@@ -25462,6 +25467,11 @@
       "feature_area": "details"
     }
   },
+  "Include terminated resources": {
+    "context": {
+      "feature_area": "dashboard"
+    }
+  },
   "Include terms of service": {
     "context": {
       "feature_area": "list"
@@ -26246,7 +26256,7 @@
   },
   "Invitation link": {
     "context": {
-      "feature_area": "invitations"
+      "feature_area": "administration"
     }
   },
   "Invitation link has been copied": {
@@ -27673,6 +27683,11 @@
   "Less than or equal": {
     "context": {
       "primary_ui_type": "label"
+    }
+  },
+  "Let usage charts include terminated resources: an organization dashboard switch, and a removed project's own usage. While off, the usage endpoints ignore include_terminated.": {
+    "context": {
+      "feature_area": "features"
     }
   },
   "Lets customers change the number entered for a Component Formula order option after ordering. The change is ordered with the recalculated limits and price. It uses the formulas and bounds of that order option.": {},
@@ -55840,6 +55855,12 @@
       "primary_ui_type": "label"
     }
   },
+  "Terminated resources": {},
+  "Terminated resources' usage is shown separately and does not count against limits: for the current month in the usage widgets, and for each offering's limit period in the per-offering views.": {
+    "context": {
+      "feature_area": "dashboard"
+    }
+  },
   "Terminating": {
     "context": {
       "primary_ui_type": "label"
@@ -58881,6 +58902,11 @@
   "This token won't be shown again, but you can regenerate it later.": {
     "context": {
       "feature_area": "service-accounts"
+    }
+  },
+  "This usage comes from terminated resources only. They no longer hold a cap, so there is no limit to plot it against; the other views show it.": {
+    "context": {
+      "feature_area": "views"
     }
   },
   "This user": {
@@ -66516,6 +66542,11 @@
     "context": {
       "primary_ui_type": "title",
       "feature_area": "reporting"
+    }
+  },
+  "Usage of terminated resources is included in the totals, but only active resources are listed.": {
+    "context": {
+      "feature_area": "aggregate-limits"
     }
   },
   "Usage percentage": {

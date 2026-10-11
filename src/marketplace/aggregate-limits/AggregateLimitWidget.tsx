@@ -24,6 +24,8 @@ interface AggregateLimitWidgetProps {
   refetch(): void;
   error: any;
   type?: 'monthly' | 'all';
+  /** Usage includes terminated resources, reported in a separate series. */
+  includeTerminated?: boolean;
 }
 
 const AggregateLimitDetailsDialog = lazyComponent(() =>
@@ -46,6 +48,7 @@ export const AggregateLimitWidget = ({
   error,
   refetch,
   type = 'all',
+  includeTerminated,
 }: AggregateLimitWidgetProps) => {
   const { openDialog } = useModal();
   const isProject = !!project;
@@ -65,6 +68,7 @@ export const AggregateLimitWidget = ({
             resolve: {
               project,
               components: data?.components,
+              includeTerminated,
             },
             size: 'lg',
           })
@@ -72,10 +76,11 @@ export const AggregateLimitWidget = ({
             resolve: {
               customer,
               components: data?.components,
+              includeTerminated,
             },
             size: 'lg',
           }),
-    [project, customer, data, isProject],
+    [project, customer, data, isProject, includeTerminated],
   );
 
   const viewAllComponents = useCallback(

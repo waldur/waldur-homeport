@@ -73,25 +73,43 @@ const VARIANTS: VariantInfo[] = [
 interface Props {
   project?: Project;
   customer?: Customer;
+  /** Also count terminated resources; their usage is shown apart from live usage. */
+  includeTerminated?: boolean;
 }
+
+const getVisibleVariants = () =>
+  VARIANTS.filter((v) => isFeatureVisible(v.feature));
+
+/** Whether UsageViewsSection renders anything at all. */
+export const hasVisibleUsageViews = () => getVisibleVariants().length > 0;
 
 /**
  * Gate: renders nothing — and fetches nothing — unless at least one view is
  * enabled. Kept free of hooks so the early return cannot reorder them.
  */
-export const UsageViewsSection: FC<Props> = ({ project, customer }) => {
-  const variants = VARIANTS.filter((v) => isFeatureVisible(v.feature));
+export const UsageViewsSection: FC<Props> = ({
+  project,
+  customer,
+  includeTerminated,
+}) => {
+  const variants = getVisibleVariants();
   if (!variants.length || !(project ?? customer)) {
     return null;
   }
   return (
-    <UsageViews project={project} customer={customer} variants={variants} />
+    <UsageViews
+      project={project}
+      customer={customer}
+      includeTerminated={includeTerminated}
+      variants={variants}
+    />
   );
 };
 
 const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
   project,
   customer,
+  includeTerminated,
   variants,
 }) => {
   const isProject = !!project;
@@ -104,13 +122,17 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
         ? 'exp-project-components-usage'
         : 'exp-customer-components-usage',
       scope?.uuid,
+      includeTerminated,
     ],
     queryFn: () => {
       if (!scope?.uuid) return null;
       const fetcher = isProject
         ? marketplaceProjectUsageComponentsUsageRetrieve
         : marketplaceCustomerUsageComponentsUsageRetrieve;
-      return fetcher({ path: { uuid: scope.uuid } }).then((r) => r.data);
+      return fetcher({
+        path: { uuid: scope.uuid },
+        query: { include_terminated: includeTerminated },
+      }).then((r) => r.data);
     },
     enabled: !!scope?.uuid,
     refetchOnWindowFocus: false,
@@ -177,6 +199,7 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
                     <LimitHorizonView
                       project={project}
                       customer={customer}
+                      includeTerminated={includeTerminated}
                       components={components}
                     />
                   )}
@@ -184,6 +207,7 @@ const UsageViews: FC<Props & { variants: VariantInfo[] }> = ({
                     <PeriodOverPeriodView
                       project={project}
                       customer={customer}
+                      includeTerminated={includeTerminated}
                       components={components}
                     />
                   )}

@@ -47,6 +47,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Show credit burn-down with a projected exhaustion date on the project dashboard.'),
       },
       {
+        key: 'usage_include_terminated',
+        description: translate('Let usage charts include terminated resources: an organization dashboard switch, and a removed project\'s own usage. While off, the usage endpoints ignore include_terminated.'),
+      },
+      {
         key: 'usage_limit_horizon',
         description: translate('Show a saturation bar per offering component against a timeline, with the current date and the next limit reset marked.'),
       },

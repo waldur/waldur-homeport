@@ -16,6 +16,7 @@ import { getUserLocale } from '@/i18n/LanguageUtilsService';
 import { NoResult } from '@/navigation/header/search/NoResult';
 import { Customer } from '@/workspace/types';
 
+import { TERMINATED_SERIES_NAME, splitUsage } from '../../utils';
 import { LimitPeriodChip } from '../LimitPeriodChip';
 import { MixBanner } from '../MixBanner';
 import { ComponentRow, detectMix } from '../mixDetection';
@@ -24,6 +25,7 @@ interface Props {
   project?: Project;
   customer?: Customer;
   components: ComponentRow[];
+  includeTerminated?: boolean;
 }
 
 interface RowData {
@@ -37,7 +39,10 @@ interface RowData {
   periodLabel: string | null;
   start: number;
   end: number;
+  /** Usage of live resources; the cap covers only these. */
   used: number;
+  /** Usage of terminated resources, drawn after `used` but not held against the cap. */
+  terminated: number;
   limit: number;
   fillRatio: number;
   measuredUnit: string;
@@ -67,6 +72,7 @@ export const LimitHorizonView: FC<Props> = ({
   project,
   customer,
   components,
+  includeTerminated,
 }) => {
   const mix = useMemo(() => detectMix(components), [components]);
   const isProject = !!project;
@@ -85,7 +91,7 @@ export const LimitHorizonView: FC<Props> = ({
       .map((r) => {
         const start = new Date((r as any).current_period_start).getTime();
         const end = new Date((r as any).current_period_end).getTime();
-        const used = r.limit_usage || 0;
+        const { live: used, terminated } = splitUsage(r);
         const fillRatio = r.limit ? used / r.limit : 0;
         return {
           label: `${r.offering_name} · ${r.name} · [${r.type}]`,
@@ -99,6 +105,7 @@ export const LimitHorizonView: FC<Props> = ({
           start,
           end,
           used,
+          terminated,
           limit: r.limit ?? 0,
           fillRatio,
           measuredUnit: r.measured_unit,
@@ -117,6 +124,7 @@ export const LimitHorizonView: FC<Props> = ({
         customer?.uuid,
         r.offeringUuid,
         r.componentType,
+        includeTerminated,
       ],
       queryFn: () => {
         if (!customer?.uuid || isProject) return Promise.resolve(null);
@@ -126,6 +134,7 @@ export const LimitHorizonView: FC<Props> = ({
             offering_uuid: r.offeringUuid,
             component_type: r.componentType,
             period_offset: 0,
+            include_terminated: includeTerminated,
           },
         } as any).then((res: any) => res.data);
       },
@@ -136,7 +145,10 @@ export const LimitHorizonView: FC<Props> = ({
 
   // Map row index → list of {project_name, usage} for the tooltip.
   const projectBreakdownByIndex = useMemo(() => {
-    const m: Record<number, { name: string; usage: number }[]> = {};
+    const m: Record<
+      number,
+      { name: string; usage: number; isRemoved: boolean }[]
+    > = {};
     byProjectQueries.forEach((q, i) => {
       const projects = (q.data as any)?.projects;
       if (Array.isArray(projects)) {
@@ -144,6 +156,7 @@ export const LimitHorizonView: FC<Props> = ({
           .map((p: any) => ({
             name: p.project_name,
             usage: Number(p.usage || p.total_usage || 0),
+            isRemoved: Boolean(p.is_removed),
           }))
           .sort((a: any, b: any) => b.usage - a.usage);
       }
@@ -153,6 +166,7 @@ export const LimitHorizonView: FC<Props> = ({
 
   const todayMs = Date.now();
   const tc = getChartThemeColors();
+  const hasTerminated = rows.some((r) => r.terminated > 0);
   const banner = (
     <MixBanner
       mix={mix}
@@ -175,14 +189,28 @@ export const LimitHorizonView: FC<Props> = ({
   );
 
   if (!rows.length) {
+    // Terminated resources hold no cap, so usage that only they reported
+    // (e.g. a removed project's) has nothing to be plotted against.
+    const onlyTerminatedUsage = (components ?? []).some(
+      (r) =>
+        r.billing_type === 'limit' &&
+        !r.limit &&
+        (r.limit_usage_terminated || 0) > 0,
+    );
     return (
       <>
         {banner}
         <NoResult
           title={translate('Nothing to plot')}
-          message={translate(
-            'This view needs components with a cap and period bounds; none were found here.',
-          )}
+          message={
+            onlyTerminatedUsage
+              ? translate(
+                  'This usage comes from terminated resources only. They no longer hold a cap, so there is no limit to plot it against; the other views show it.',
+                )
+              : translate(
+                  'This view needs components with a cap and period bounds; none were found here.',
+                )
+          }
           noAction
         />
       </>
@@ -202,6 +230,7 @@ export const LimitHorizonView: FC<Props> = ({
     const startMs = api.value(1);
     const endMs = api.value(2);
     const ratio = api.value(3);
+    const terminatedRatio = api.value(4);
     const fillRatio = Math.min(ratio, 1);
     const overflowRatio = Math.max(0, ratio - 1);
 
@@ -236,6 +265,23 @@ export const LimitHorizonView: FC<Props> = ({
         style: { fill: fillColor },
       },
     ];
+
+    // Terminated resources' usage follows the live fill inside the track. It
+    // does not count against the cap, so it never turns the row red.
+    const terminatedW = w * Math.min(terminatedRatio, 1 - fillRatio);
+    if (terminatedW > 0) {
+      children.push({
+        type: 'rect',
+        shape: {
+          x: x + usedW,
+          y: yCenter - height / 2,
+          width: terminatedW,
+          height,
+          r: 3,
+        },
+        style: { fill: tc.muted, opacity: 0.6 },
+      });
+    }
 
     if (overflowW > 0) {
       // Overage hatch beyond the cap (visualised as a darker red bar past
@@ -285,6 +331,9 @@ export const LimitHorizonView: FC<Props> = ({
           period,
           `${translate('Period')}: ${formatDate(r.start)} → <strong>${formatDate(r.end)}</strong>`,
           `${translate('Used')}: <strong>${r.used.toLocaleString()}</strong> / ${r.limit.toLocaleString()} ${r.measuredUnit} (${pct}%)`,
+          r.terminated > 0
+            ? `${TERMINATED_SERIES_NAME()}: <strong>${r.terminated.toLocaleString()}</strong> ${r.measuredUnit}`
+            : '',
           `<small style="color:#6938ef">↻ ${translate('Next reset')}: ${formatDate(r.end)}</small>`,
         ];
 
@@ -302,7 +351,10 @@ export const LimitHorizonView: FC<Props> = ({
             const rows2 = top
               .map((p) => {
                 const share = Math.round((p.usage / total) * 100);
-                return `<div style="display:flex;justify-content:space-between;gap:8px"><span>${p.name}</span><span><strong>${p.usage.toLocaleString()}</strong> ${r.measuredUnit} <small>(${share}%)</small></span></div>`;
+                const name = p.isRemoved
+                  ? `${p.name} <small style="color:#667085">${translate('(removed)')}</small>`
+                  : p.name;
+                return `<div style="display:flex;justify-content:space-between;gap:8px"><span>${name}</span><span><strong>${p.usage.toLocaleString()}</strong> ${r.measuredUnit} <small>(${share}%)</small></span></div>`;
               })
               .join('');
             headerLines.push(
@@ -319,7 +371,7 @@ export const LimitHorizonView: FC<Props> = ({
             );
           }
         }
-        return headerLines.join('<br/>');
+        return headerLines.filter(Boolean).join('<br/>');
       },
     },
     grid: {
@@ -377,8 +429,14 @@ export const LimitHorizonView: FC<Props> = ({
         renderItem,
         // y first, then the two x dimensions — see renderItem comment for why.
         encode: { x: [1, 2], y: 0 },
-        dimensions: ['rowIndex', 'start', 'end', 'ratio'],
-        data: rows.map((r, i) => [i, r.start, r.end, r.fillRatio]),
+        dimensions: ['rowIndex', 'start', 'end', 'ratio', 'terminatedRatio'],
+        data: rows.map((r, i) => [
+          i,
+          r.start,
+          r.end,
+          r.fillRatio,
+          r.limit ? r.terminated / r.limit : 0,
+        ]),
         markLine: {
           symbol: 'none',
           silent: true,
@@ -483,6 +541,21 @@ export const LimitHorizonView: FC<Props> = ({
           />
           {translate('Next reset')}
         </span>
+        {hasTerminated && (
+          <span className="d-inline-flex align-items-center gap-1">
+            <span
+              style={{
+                display: 'inline-block',
+                width: 10,
+                height: 10,
+                borderRadius: 2,
+                background: tc.muted,
+                opacity: 0.6,
+              }}
+            />
+            {TERMINATED_SERIES_NAME()}
+          </span>
+        )}
         {rows[0]?.limitPeriod && (
           <LimitPeriodChip
             limitPeriod={rows[0].limitPeriod}

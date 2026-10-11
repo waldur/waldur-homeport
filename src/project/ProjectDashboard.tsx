@@ -17,7 +17,7 @@ import { filterComponentsWithUsage } from '@/customer/dashboard/utils';
 import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
 import { TeamWidget } from '@/dashboard/TeamWidget';
 import { isFeatureVisible } from '@/features/connect';
-import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { DashboardFeatures, MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
 import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
@@ -97,6 +97,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   });
 
   const isProjectRemoved = Boolean(project?.is_removed);
+  // All of a removed project's resources are terminated, so its usage only
+  // shows when terminated resources are counted.
+  const includeTerminated =
+    isProjectRemoved &&
+    isFeatureVisible(DashboardFeatures.usage_include_terminated);
 
   const {
     data: aggregateLimitData,
@@ -104,12 +109,13 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     error: aggregateLimitError,
     refetch: aggregateLimitRefetch,
   } = useQuery({
-    queryKey: ['project-stats', project?.uuid],
+    queryKey: ['project-stats', project?.uuid, includeTerminated],
 
     queryFn: () =>
-      projectsStatsRetrieve({ path: { uuid: project?.uuid } }).then(
-        (r) => r.data,
-      ),
+      projectsStatsRetrieve({
+        path: { uuid: project?.uuid },
+        query: { include_terminated: includeTerminated },
+      }).then((r) => r.data),
 
     refetchOnWindowFocus: false,
     staleTime: SHORT_STALE_TIME,
@@ -121,12 +127,20 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     error: aggregateLimitErrorForCurrentMonth,
     refetch: aggregateLimitRefetchForCurrentMonth,
   } = useQuery({
-    queryKey: ['project-stats', project?.uuid, 'current-month'],
+    queryKey: [
+      'project-stats',
+      project?.uuid,
+      'current-month',
+      includeTerminated,
+    ],
 
     queryFn: () =>
       projectsStatsRetrieve({
         path: { uuid: project?.uuid },
-        query: { for_current_month: true },
+        query: {
+          for_current_month: true,
+          include_terminated: includeTerminated,
+        },
       }).then((r) => r.data),
 
     refetchOnWindowFocus: false,
@@ -298,6 +312,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
               error={aggregateLimitErrorForCurrentMonth}
               refetch={aggregateLimitRefetchForCurrentMonth}
               type="monthly"
+              includeTerminated={includeTerminated}
             />
           </Col>
         )}
@@ -309,6 +324,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
               isLoading={isAggregateLimitLoading}
               error={aggregateLimitError}
               refetch={aggregateLimitRefetch}
+              includeTerminated={includeTerminated}
             />
           </Col>
         )}
@@ -322,7 +338,10 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           view ships behind its own dashboard.usage_* feature flag and the
           section renders nothing until an operator enables one. */}
       {showBillingInfo && <ProjectCreditHealthBlock project={project} />}
-      <UsageViewsSection project={project} />
+      <UsageViewsSection
+        project={project}
+        includeTerminated={includeTerminated}
+      />
       <ProjectPosixGroupsWidget project={project} />
     </>
   );
