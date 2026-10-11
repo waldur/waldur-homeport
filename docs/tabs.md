@@ -1,6 +1,6 @@
 # Tabs
 
-Every tab bar in HomePort is built from `waldur-ui` primitives (`Tabs`, `TabNav`) or from a wrapper over them (`EmbeddedTabs`, `TableWithTabs`, `TableNav`, `TabbedSection`). The Bootstrap/Metronic `.nav` stylesheet and react-bootstrap's `Tab`, `Tabs` and `Nav` are gone, and the `waldur-custom/no-bootstrap-tabs` lint rule keeps them out (see [Lint rule](#lint-rule)).
+Every tab bar in HomePort is built from `waldur-ui` primitives (`Tabs`, `TabNav`) or from a wrapper over them (`EmbeddedTabs`, `TableWithTabs`, `TableNav`, `TabbedSection`). The Bootstrap/Metronic `.nav` stylesheet and react-bootstrap's `Tab`, `Tabs` and `Nav` are gone, and the `waldur-custom/no-bootstrap-tabs` lint rule keeps them out.
 
 ## Choosing a tab component
 
@@ -250,21 +250,3 @@ Use this instead of `SegmentedControl` whenever each option owns a distinct, lar
 - **Query by role in tests**: `getByRole('tab', { name })` for `Tabs`, `getByRole('link', { name })` for `TabNav` link tabs and `getByRole('button', { name })` for its button tabs. `aria-selected` marks the open `Tabs` trigger; `aria-current="page"` marks the current link and `aria-current="true"` the current button.
 - **No controls inside a trigger.** A `HelpIcon`, button, link or input inside a tab's button is invalid HTML and muddles the tab's name. Use `hint`, `tooltip` or `count`; `waldur-custom/no-interactive-in-tab-trigger` reports the rest in `TabsTrigger`. `TabNav` titles are data, so keep controls out of them too.
 - **Don't reach into the DOM by class.** `.nav-item`, `.nav-link` and `.active` no longer exist on tab bars; measure or select `[role="tab"]` instead.
-
-## Migrating old code
-
-| Bootstrap                                        | Now                                                              |
-| ------------------------------------------------ | ---------------------------------------------------------------- |
-| `Tab.Container activeKey onSelect`               | `Tabs value onValueChange`                                       |
-| `defaultActiveKey`                               | `defaultValue` (string)                                          |
-| `unmountOnExit` / `mountOnEnter` / neither       | `mount="active"` / `"visited"` / `"all"`                         |
-| `Nav variant="tabs" className="nav-line-tabs …"` | `TabsList` (or `TabNav`'s `listClassName`); keep only the extras |
-| `Nav.Item` + `Nav.Link eventKey`                 | `TabsTrigger value` (or a `TabNav` item); drop the `Nav.Item`    |
-| `Tab.Content` / `Tab.Pane eventKey`              | a plain `div` / `TabsContent value` (or the `items` data form)   |
-| `<Tabs><Tab eventKey title>…</Tab></Tabs>`       | `Tabs` + `TabsList` of triggers + `TabsContent` panels           |
-| bar with no `Tab.Pane` (router-driven)           | `TabNav` with link `items`                                       |
-| table panels in an expandable row                | `EmbeddedTabs`                                                   |
-
-## Lint rule
-
-`waldur-custom/no-bootstrap-tabs` (error) reports react-bootstrap `Tab`, `Tabs`, `Nav` and their parts, `Navbar` and `NavDropdown`, by named or deep-path import, and any `nav`, `nav-item`, `nav-link`, `nav-tabs`, `nav-pills`, `nav-line-tabs` (and similar) class token, since those classes no longer style anything. `.tab-content` and `btn-nav-item` are allowed. It also reports `@radix-ui/react-tabs` imported outside `waldur-ui`'s own Tabs. `waldur-custom/no-interactive-in-tab-trigger` (error) reports a `HelpIcon`, button, link or form control inside a `TabsTrigger`. A third rule, `waldur-custom/dynamic-tab-params`, covers route definitions (see the Gotchas section).
