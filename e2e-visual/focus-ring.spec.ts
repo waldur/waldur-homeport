@@ -2,8 +2,8 @@ import { test, expect, Page } from '@playwright/test';
 
 import { contrastRatio, parseColor } from 'waldur-design-tokens/contrast';
 
-import { buttonVariants } from '../packages/ui/src/BaseButton';
-import { navMenuRowClassName } from '../packages/ui/src/DropdownMenu';
+import { buttonVariants } from '../packages/ui/src/Button';
+import { menuItem } from '../packages/ui/src/Menu';
 import { tabTriggerVariants } from '../packages/ui/src/Tabs';
 
 /**
@@ -51,7 +51,7 @@ const FIXTURES = `
   <div class="layout-neumorphism-card">
     <button class="${button('tertiary')}" data-ring="unlayered-override">Neumorphic</button>
   </div>
-  <a href="#" class="${navMenuRowClassName()}" data-ring="nav-menu-row">Menu row</a>
+  <a href="#" class="${menuItem({ look: 'nav' })}" data-ring="nav-menu-row">Menu row</a>
   <button type="button" role="tab" class="${tabTriggerVariants()}" data-ring="nav-line-tab">View</button>
 </div>`;
 

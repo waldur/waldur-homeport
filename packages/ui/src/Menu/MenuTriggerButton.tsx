@@ -1,7 +1,7 @@
 import { forwardRef, ReactNode } from 'react';
 
-import { BaseButton, BaseButtonProps } from '../BaseButton';
-import { ButtonCaret } from '../ButtonCaret';
+import { BaseButton, BaseButtonProps } from '../Button';
+import { ButtonCaret } from '../Button';
 import { cn } from '../cn';
 
 import { MenuTrigger } from './MenuTrigger';

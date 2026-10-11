@@ -8,7 +8,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ReactNode, useState } from 'react';
 import { expect, fn, screen, userEvent, waitFor, within } from 'storybook/test';
 
-import { BaseButton } from '../BaseButton';
+import { BaseButton } from '../Button';
 
 import { Menu, MenuPopover } from './Menu';
 

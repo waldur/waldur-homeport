@@ -1,8 +1,8 @@
 import { CaretUpDownIcon, SquaresFourIcon } from '@phosphor-icons/react';
 import { ReactNode } from 'react';
 
+import { ICON_BUTTON_BASE_CLASSNAME } from '../Button';
 import { cn } from '../cn';
-import { ICON_BUTTON_BASE_CLASSNAME } from '../iconButtonStyles';
 
 import { useSidebarSubDepth } from './context';
 import {

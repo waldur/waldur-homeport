@@ -1,8 +1,8 @@
 import { SidebarSimpleIcon } from '@phosphor-icons/react';
 import { ComponentProps, ReactNode } from 'react';
 
+import { ICON_BUTTON_BASE_CLASSNAME } from '../Button';
 import { cn } from '../cn';
-import { ICON_BUTTON_BASE_CLASSNAME } from '../iconButtonStyles';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '../Sheet';
 
 import { useSidebar } from './context';

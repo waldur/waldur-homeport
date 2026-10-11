@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ComponentProps, useRef, useState } from 'react';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 
-import { BaseButton } from '../BaseButton';
+import { BaseButton } from '../Button';
 
 import {
   DateRangePicker,

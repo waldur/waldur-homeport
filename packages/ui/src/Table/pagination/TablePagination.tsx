@@ -1,7 +1,7 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { translate } from 'waldur-i18n-runtime';
 
-import { BaseButton } from '../../BaseButton';
+import { BaseButton } from '../../Button';
 import { cn } from '../../cn';
 
 import { PAGE_SIZE_COMPACT } from './constants';

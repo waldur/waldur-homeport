@@ -103,7 +103,7 @@ describe('z-index tokens', () => {
   });
 
   it("matches the literal default in waldur-ui's Tooltip", () => {
-    const tooltip = read('../../ui/src/Tooltip.tsx');
+    const tooltip = read('../../ui/src/Tooltip/Tooltip.tsx');
     expect(tooltip).toMatch(new RegExp(`zIndex = ${token('tooltip')},`));
   });
 });

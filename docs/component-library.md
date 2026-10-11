@@ -224,7 +224,7 @@ export const MyEditButton = ({ row, refetch }) => (
 | Component          | Location                                          | Description        | Key Features                         |
 | ------------------ | ------------------------------------------------- | ------------------ | ------------------------------------ |
 | **Panel**          | `src/core/Panel.tsx`                              | Basic card panel   | Header, actions, flexible content    |
-| **AccordionCard**  | `waldur-ui` (`packages/ui/src/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling |
+| **AccordionCard**  | `waldur-ui` (`packages/ui/src/AccordionCard/AccordionCard.tsx`) | Collapsible card   | Toggle functionality, custom styling |
 | **WidgetCard**     | `src/dashboard/WidgetCard.tsx`                    | Dashboard widget   | Flexible layout, action dropdown     |
 | **StatisticsCard** | `src/core/StatisticsCard.tsx`                     | Statistics display | Large value display, "View all" link |
 
@@ -260,7 +260,7 @@ export const MyEditButton = ({ row, refetch }) => (
 | ------------------------- | ------------------------------------ | ------------------ | ------------------------------- |
 | **CopyToClipboard**       | `src/core/CopyToClipboard.tsx`       | Copy functionality | Click to copy, success feedback |
 | **CopyToClipboardButton** | `src/core/CopyToClipboardButton.tsx` | Copy button        | Icon button, tooltip            |
-| **Tooltip**               | `packages/ui/src/Tooltip.tsx`        | Tooltip wrapper    | Help text, positioning          |
+| **Tooltip**               | `packages/ui/src/Tooltip/Tooltip.tsx`        | Tooltip wrapper    | Help text, positioning          |
 | **ProgressSteps**         | `src/wizard/ProgressSteps.tsx`       | Step indicator     | Multi-step processes, progress  |
 
 ## Component Design Principles

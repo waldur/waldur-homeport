@@ -19,7 +19,7 @@ import { LoadingSpinner } from '../LoadingSpinner';
 import {
   segmentedItemClassName,
   segmentedListClassName,
-} from '../segmentedStyles';
+} from '../SegmentedControl';
 import { Tooltip } from '../Tooltip';
 
 import { resolveTabValue } from './resolveTabValue';
