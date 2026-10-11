@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { ProgressBar } from 'react-bootstrap';
+
+import { Progress } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -46,12 +47,7 @@ export const StageProgress: FC<StageProgressProps> = ({
           )
         )}
       </div>
-      <ProgressBar
-        striped
-        animated
-        now={indeterminate ? 100 : pct}
-        style={{ height: 8 }}
-      />
+      {indeterminate ? <Progress indeterminate /> : <Progress value={pct} />}
     </div>
   );
 };

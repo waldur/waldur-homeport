@@ -1,4 +1,6 @@
-import { ProgressBar, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
+
+import { Progress } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -44,10 +46,7 @@ export const OrgPerformanceTable = () => {
           title: translate('Compliance rate'),
           render: ({ row }) => (
             <Stack>
-              <ProgressBar
-                now={row.compliance}
-                className="h-8px shadow-none w-100 mt-1"
-              />
+              <Progress value={row.compliance} className="mt-1" />
               <small className="d-block text-end fw-bolder">
                 {row.compliance}%
               </small>

@@ -6,10 +6,10 @@ import {
   OfferingMergeUndoReport,
 } from 'waldur-js-client';
 
-import { AlertItem, BaseButton } from 'waldur-ui';
+import { AlertItem, BaseButton, Progress } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { ProgressBar } from '@/core/ProgressBar';
+import { PercentProgress } from '@/core/PercentProgress';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
@@ -72,10 +72,9 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
       </span>
       {progress ? (
         <>
-          <ProgressBar
-            now={progress.steps_done}
+          <PercentProgress
+            value={progress.steps_done}
             max={Math.max(progress.steps_total, 1)}
-            showValue
           />
           <span className="text-muted fs-7">
             {translate(
@@ -91,7 +90,7 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
           </span>
         </>
       ) : (
-        <ProgressBar now={0} max={1} />
+        <Progress value={0} />
       )}
     </div>
   );

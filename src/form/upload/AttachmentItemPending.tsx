@@ -1,9 +1,8 @@
 import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { ProgressBar } from 'react-bootstrap';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, Progress } from 'waldur-ui';
 
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
@@ -50,11 +49,11 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
             {translate('Try again')}
           </button>
         ) : progress || progress === 0 ? (
-          <ProgressBar
-            animated={!progress}
-            now={progress || 100}
-            className="h-8px mt-2"
-          />
+          progress ? (
+            <Progress className="mt-2" value={progress} />
+          ) : (
+            <Progress className="mt-2" indeterminate />
+          )
         ) : null}
       </div>
       <div>

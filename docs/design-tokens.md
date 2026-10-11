@@ -105,6 +105,15 @@ They live with the tokens they document, so a token change and its story change 
   `--surface-*`/`--btn-*`/`--pill-*` files.
 - **Non-colour scales** — spacing, type, radii, shadows.
 
+## Component token files
+
+Component tokens are plain CSS files in `packages/design-tokens/src/` (`checkColors.css`,
+`progressColors.css`, …), imported by `src/tailwind.css`. They are hand-written: they reference
+ramp steps (`var(--color-gray-100)`) and the runtime brand variable, never raw hex, and redeclare
+only what differs in `:root[data-theme='dark']`. `progressColors.css` holds the `--progress-*`
+fills, track, label colours and heights; `progressTokens.test.ts` checks that every variant has
+a fill and label, that fills match `Badge` `solid`, and that labels stay readable.
+
 ## Adding or changing a value
 
 1. Edit `tokens/colors.json`.

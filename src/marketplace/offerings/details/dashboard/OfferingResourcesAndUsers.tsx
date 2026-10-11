@@ -9,14 +9,12 @@ import {
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { ProgressBar } from 'react-bootstrap';
 import {
   marketplaceProviderOfferingsStateCountersRetrieve,
   Offering,
 } from 'waldur-js-client';
 
-import { BadgeVariant } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
+import { Badge, Progress, type ProgressVariant } from 'waldur-ui';
 
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -29,7 +27,7 @@ interface OwnProps {
 }
 
 const infoState: Array<{
-  variant: BadgeVariant;
+  variant: ProgressVariant;
   states: string[];
   icon: any;
 }> = [
@@ -81,19 +79,16 @@ const InfoRow = ({
       />
       <tr>
         <td className="pt-0 ps-0" colSpan={3}>
-          <ProgressBar className="shadow-none w-100 h-8px mb-5">
-            {statistics.map((stat) => (
-              <ProgressBar
-                key={stat.state}
-                variant={
-                  infoState.find((c) => c.states.includes(stat.state))
-                    ?.variant || 'default'
-                }
-                now={stat.count}
-                max={max}
-              />
-            ))}
-          </ProgressBar>
+          <Progress
+            className="mb-5"
+            max={max}
+            segments={statistics.map((stat) => ({
+              value: stat.count,
+              variant:
+                infoState.find((c) => c.states.includes(stat.state))?.variant ||
+                'neutral',
+            }))}
+          />
           <div className="d-flex flex-wrap gap-2">
             {statistics.map((stat) => {
               const state = infoState.find((c) =>

@@ -219,3 +219,27 @@
     translate: 0 0;
   }
 }
+
+/**
+ * Progress indeterminate sweep: a bar `--progress-indeterminate-width` wide
+ * travels across the track. The keyframe is in percentages of the bar's own
+ * width, so it needs no knowledge of the track size.
+ */
+@keyframes waldur-progress-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}
+
+/* A sweep that stops would read as an empty bar, so under reduced motion the
+   unknown-progress bar becomes a static, half-transparent full bar. */
+@media (prefers-reduced-motion: reduce) {
+  [data-progress-indeterminate] {
+    animation: none !important;
+    width: 100% !important;
+    opacity: 0.5;
+  }
+}

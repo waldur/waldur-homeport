@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Col, ProgressBar, Row, Table } from 'react-bootstrap';
+import { Col, Row, Table } from 'react-bootstrap';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, Progress } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -44,10 +44,10 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
                 {formatPercent(data.buffer_cache_hit_ratio)}
               </span>
             </div>
-            <ProgressBar
-              now={data.buffer_cache_hit_ratio ?? 0}
+            <Progress
+              value={data.buffer_cache_hit_ratio ?? 0}
               variant={getProgressVariant(bufferHealth)}
-              style={{ height: '8px' }}
+              label={translate('Buffer cache')}
             />
           </div>
           <div>
@@ -57,10 +57,10 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
                 {formatPercent(data.index_hit_ratio)}
               </span>
             </div>
-            <ProgressBar
-              now={data.index_hit_ratio ?? 0}
+            <Progress
+              value={data.index_hit_ratio ?? 0}
               variant={getProgressVariant(indexHealth)}
-              style={{ height: '8px' }}
+              label={translate('Index cache')}
             />
           </div>
         </Col>

@@ -293,7 +293,7 @@ const TokenSummary = ({ quota }) => {
             <span className="token-label">{p.label}</span>
             <QuotaProgressBar
               percent={percent ?? 0}
-              height={4}
+              size="xs"
               className="flex-grow-1"
               label={typeof p.label === 'string' ? p.label : undefined}
             />

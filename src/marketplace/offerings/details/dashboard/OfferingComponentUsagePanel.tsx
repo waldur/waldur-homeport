@@ -5,6 +5,8 @@ import {
   Offering,
 } from 'waldur-js-client';
 
+import { Progress } from 'waldur-ui';
+
 import { UI_STALE_TIME } from '@/core/constants';
 import { formatUsageValue } from '@/core/formatNumber';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -88,19 +90,17 @@ export const OfferingComponentUsagePanel: FC<
                               {usage.toFixed(1)}%
                             </span>
                           </div>
-                          <div className="progress h-6px w-100">
-                            <div
-                              className={`progress-bar bg-${
-                                usage < 50
-                                  ? 'primary'
-                                  : usage < 80
-                                    ? 'warning'
-                                    : 'danger'
-                              }`}
-                              role="progressbar"
-                              style={{ width: `${Math.min(usage, 100)}%` }}
-                            />
-                          </div>
+                          <Progress
+                            size="sm"
+                            value={usage}
+                            variant={
+                              usage < 50
+                                ? 'primary'
+                                : usage < 80
+                                  ? 'warning'
+                                  : 'danger'
+                            }
+                          />
                         </div>
                       }
                     />

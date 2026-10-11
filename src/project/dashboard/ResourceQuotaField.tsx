@@ -1,6 +1,6 @@
 import { OfferingComponent } from 'waldur-js-client';
 
-import { ProgressBar } from '@/core/ProgressBar';
+import { PercentProgress } from '@/core/PercentProgress';
 import { getUsagePercentOfLimitComponent } from '@/marketplace/resources/details/QuotaCell';
 import { getQuotaCellProps } from '@/marketplace/resources/details/ResourceComponentItem';
 
@@ -21,10 +21,9 @@ export const ResourceQuotaField = ({
     quotaProps.usage,
   );
   return progressBar ? (
-    <ProgressBar
-      now={percent}
+    <PercentProgress
+      value={percent}
       variant={percent > 66 ? 'danger' : percent > 33 ? 'warning' : undefined}
-      showValue
       compact
     />
   ) : (

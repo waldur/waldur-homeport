@@ -1,19 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { ProgressBar } from 'react-bootstrap';
 import {
   Resource,
   marketplaceSlurmPeriodicUsagePoliciesPreviewImpact,
 } from 'waldur-js-client';
 
-import { AlertItem, Badge, BadgeVariant } from 'waldur-ui';
+import { AlertItem, Badge, BadgeVariant, Progress } from 'waldur-ui';
 
 import { SECOND } from '@/core/constants';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-
-import './SlurmPolicyPreview.scss';
 
 interface ThresholdVisualizationProps {
   allocation: number;
@@ -47,26 +44,27 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
         {translate('Threshold Visualization')}
       </h6>
       <div className="position-relative">
-        <ProgressBar style={{ height: '30px' }} className="threshold-progress">
-          <ProgressBar
-            variant="success"
-            now={notificationPct}
-            key={1}
-            label={translate('Normal')}
-          />
-          <ProgressBar
-            variant="warning"
-            now={slowdownPct}
-            key={2}
-            label={translate('Notification')}
-          />
-          <ProgressBar
-            variant="danger"
-            now={gracePct}
-            key={3}
-            label={translate('Grace')}
-          />
-        </ProgressBar>
+        <Progress
+          size="lg"
+          label={translate('Threshold Visualization')}
+          segments={[
+            {
+              variant: 'success',
+              value: notificationPct,
+              label: translate('Normal'),
+            },
+            {
+              variant: 'warning',
+              value: slowdownPct,
+              label: translate('Notification'),
+            },
+            {
+              variant: 'danger',
+              value: gracePct,
+              label: translate('Grace'),
+            },
+          ]}
+        />
         {currentUsagePct !== undefined && (
           <div
             className="position-absolute top-0 bottom-0"

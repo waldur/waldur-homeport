@@ -14,6 +14,7 @@ import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
 import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
+import noBootstrapProgress from './rules/no-bootstrap-progress.js';
 import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
 import noDirectClientUsage from './rules/no-direct-client-usage.js';
 import noDirectFieldAdapter from './rules/no-direct-field-adapter.js';
@@ -46,6 +47,7 @@ export default {
     'no-edit-button-size-override': noEditButtonSizeOverride,
     'dynamic-tab-params': dynamicTabParams,
     'no-bootstrap-form-check': noBootstrapFormCheck,
+    'no-bootstrap-progress': noBootstrapProgress,
     'no-bootstrap-tabs': noBootstrapTabs,
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,

@@ -1,8 +1,7 @@
 import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { ProgressBar } from 'react-bootstrap';
 
-import { Tooltip, WarningTip } from 'waldur-ui';
+import { Progress, Tooltip, WarningTip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { Quota } from '@/openstack/types';
@@ -86,19 +85,14 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
 
             <Tooltip label={<ProgressTooltipMessage quota={quota} />}>
               <span className="quota-progress">
-                <ProgressBar>
-                  <ProgressBar
-                    variant="primary"
-                    now={(quota.usage * 100) / quota.limit}
-                    key={1}
-                  />
-
-                  <ProgressBar
-                    variant="warning"
-                    now={(quota.required * 100) / quota.limit}
-                    key={2}
-                  />
-                </ProgressBar>
+                <Progress
+                  size="xs"
+                  max={quota.limit}
+                  segments={[
+                    { value: quota.usage, variant: 'primary' },
+                    { value: quota.required, variant: 'warning' },
+                  ]}
+                />
               </span>
             </Tooltip>
           </div>

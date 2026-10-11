@@ -1,8 +1,8 @@
 import { FC, useEffect } from 'react';
-import { ProgressBar, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 import { ServiceProviderComplianceOverview } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, Progress } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { createClientPaginatedFetcher } from '@/table/api';
@@ -44,10 +44,7 @@ export const ComplianceExpandableRow: FC<{
             title: translate('Overall score'),
             render: ({ row }) => (
               <Stack>
-                <ProgressBar
-                  now={row.overall_score}
-                  className="h-8px shadow-none w-100 mt-1"
-                />
+                <Progress value={row.overall_score} className="mt-1" />
                 <small className="d-block text-end text-gray-700">
                   {row.overall_score}%
                 </small>

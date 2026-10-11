@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { ProgressBar } from '@/core/ProgressBar';
+import { Progress } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface CapacityIndicatorProps {
@@ -20,12 +21,11 @@ export const CapacityIndicator: FC<CapacityIndicatorProps> = ({
   const variant = ratio >= 1 ? 'danger' : ratio >= 0.75 ? 'warning' : 'success';
   return (
     <div className="d-flex align-items-center gap-2" style={{ minWidth: 90 }}>
-      <ProgressBar
-        now={Math.min(open, max)}
+      <Progress
+        size="sm"
+        value={Math.min(open, max)}
         max={max}
         variant={variant}
-        neutralTrack
-        className="h-6px shadow-none"
       />
       <small className="text-nowrap">
         {open}/{max}

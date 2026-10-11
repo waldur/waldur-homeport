@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { AccordionCard, Tooltip } from 'waldur-ui';
+import { AccordionCard, Progress, Tooltip } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import Table from '@/table/Table';
@@ -125,14 +125,8 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
               return (
                 <div className="d-flex align-items-center justify-content-end">
                   <span className="text-muted me-2">{percentage}%</span>
-                  <div
-                    className="progress h-6px w-50px"
-                    style={{ minWidth: '50px' }}
-                  >
-                    <div
-                      className="progress-bar bg-primary"
-                      style={{ width: `${percentage}%` }}
-                    />
+                  <div style={{ width: '50px' }}>
+                    <Progress size="sm" value={Number(percentage)} />
                   </div>
                 </div>
               );

@@ -2,6 +2,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import { marketplaceComponentUsageMonthlyList } from 'waldur-js-client';
 
+import { Progress } from 'waldur-ui';
+
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
 import { OfferingComponentUsage } from '@/marketplace/offerings/types';
@@ -89,15 +91,13 @@ export const OfferingComponentUsageList = () => {
               </span>
               <span className="fw-bold text-dark">{usage.toFixed(1)}%</span>
             </div>
-            <div className="progress h-6px w-100">
-              <div
-                className={`progress-bar bg-${
-                  usage < 50 ? 'primary' : usage < 80 ? 'warning' : 'danger'
-                }`}
-                role="progressbar"
-                style={{ width: `${Math.min(usage, 100)}%` }}
-              />
-            </div>
+            <Progress
+              size="sm"
+              value={usage}
+              variant={
+                usage < 50 ? 'primary' : usage < 80 ? 'warning' : 'danger'
+              }
+            />
           </div>
         );
       },

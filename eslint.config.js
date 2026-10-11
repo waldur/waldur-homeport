@@ -205,6 +205,9 @@ export default tseslint
         // Zero instances remain: every checkbox, radio and switch is a waldur-ui
         // Checkbox/Radio/Switch, and the .form-check styles are deleted.
         'waldur-custom/no-bootstrap-form-check': 'error',
+        // Zero instances remain: every progress bar is a waldur-ui Progress and
+        // the .progress styles are deleted.
+        'waldur-custom/no-bootstrap-progress': 'error',
         'waldur-custom/no-bootstrap-tabs': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
