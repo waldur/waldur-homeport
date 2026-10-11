@@ -1,10 +1,9 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
-import { Badge, FeaturedIcon } from 'waldur-ui';
+import { AlertItem, Badge } from 'waldur-ui';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { AccessDeniedPage } from '@/error/AccessDeniedPage';
@@ -45,29 +44,19 @@ import { WorkflowStepsSection } from './workflow-steps/WorkflowStepsSection';
 
 const PageHero = ({ call, refetch }) => (
   <>
-    {/* eslint-disable waldur-custom/enforce-featured-icon */}
     {call.state === 'archived' && (
-      <div className="d-flex align-items-center gap-3 bg-light-warning text-warning border-bottom py-3 px-8">
-        <FeaturedIcon
-          icon={<WarningCircleIcon weight="bold" />}
-          size="sm"
-          variant="warning"
-        />
-        <div className="flex-grow-1">
-          <span className="fw-semibold">
-            {translate('This call is archived and read-only.')}
-          </span>{' '}
-          <span>
-            {translate(
-              'All items can be browsed, but not edited. To make changes, activate the call first.',
-            )}
-          </span>
-        </div>
-        <CallActions call={call} refetch={refetch} />
-      </div>
+      <AlertItem
+        variant="warning"
+        iconSize="sm"
+        iconClassName="mt-0"
+        title={translate('This call is archived and read-only.')}
+        body={translate(
+          'All items can be browsed, but not edited. To make changes, activate the call first.',
+        )}
+        actions={<CallActions call={call} refetch={refetch} />}
+        className="bg-light-warning border-b border-[var(--surface-card-border)] py-3 px-8"
+      />
     )}
-    {/* Re-enable lint rules after the archived banner section */}
-    {/* eslint-enable waldur-custom/enforce-featured-icon */}
     <div className="container-fluid my-5">
       <CallTabs call={call} />
       <CallUpdateHero call={call} refetch={refetch} />

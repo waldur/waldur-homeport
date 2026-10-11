@@ -3,7 +3,6 @@ import { Field, useFormState } from 'react-final-form';
 import { AlertItem, BaseButton } from 'waldur-ui';
 
 import { required, redirectURI, validateRedirectURLs } from '@/core/validators';
-import { WarnCard } from '@/core/WarnCard';
 import {
   BooleanGroup,
   CommaSeparatedListGroup,
@@ -117,9 +116,11 @@ const AllowedRedirectsField = () => {
 
             {isEmpty && (
               <div className="mt-3">
-                <WarnCard
+                <AlertItem
+                  type="floating"
+                  variant="warning"
                   title={translate('Warning')}
-                  description={translate(
+                  body={translate(
                     'No allowed redirect URIs configured. The system will fall back to the HOMEPORT_URL setting. For multi-homeport deployments, at least one URI should be specified.',
                   )}
                 />

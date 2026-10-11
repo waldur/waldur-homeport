@@ -8,7 +8,6 @@ import { AlertItem, Badge, BaseButton } from 'waldur-ui';
 
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { WarnCard } from '@/core/WarnCard';
 import { translate } from '@/i18n';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -179,9 +178,11 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
         </Card.Header>
         <Card.Body>
           {claimsNotExposed && (
-            <WarnCard
+            <AlertItem
+              type="floating"
+              variant="warning"
               title={translate('Claims not exposed')}
-              description={translate(
+              body={translate(
                 'This identity provider does not expose its supported claims in the discovery document. You can manually add claim names below based on your IdP documentation.',
               )}
             />

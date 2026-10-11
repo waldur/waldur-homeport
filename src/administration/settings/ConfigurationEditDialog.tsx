@@ -4,11 +4,11 @@ import { Field, Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
 import { DEFAULT_PRIMARY_COLORS } from 'waldur-design-tokens';
+import { AlertItem } from 'waldur-ui';
 
 import { VisualLayoutSelector } from '@/auth/VisualLayoutSelector';
 import { formDataOptions } from '@/core/api';
 import { ENV } from '@/core/config';
-import { WarnCard } from '@/core/WarnCard';
 import { SelectField, SubmitButton, TextField } from '@/form';
 import { FormGroup } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
@@ -201,9 +201,11 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                   {item.key === 'SIDEBAR_STYLE' &&
                     values.value === SIDEBAR_STYLE_PRIMARY && (
                       <div className="mt-3">
-                        <WarnCard
+                        <AlertItem
+                          type="floating"
+                          variant="warning"
                           title={translate('Warning')}
-                          description={translate(
+                          body={translate(
                             'Using the primary color as a sidebar color might affect contrast and usability.',
                           )}
                         />
