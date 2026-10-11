@@ -33,12 +33,13 @@ const requiredFields: MarketplaceResourcesListData['query']['field'] = [
 ];
 
 export const AggregateLimitDetailsDialog = ({
-  resolve: { project, customer, components },
+  resolve: { project, customer, components, includeTerminated },
 }: {
   resolve: {
     project?: Project;
     customer?: Customer;
     components: ComponentsUsageStats['components'];
+    includeTerminated?: boolean;
   };
 }) => {
   const { showErrorResponse } = useNotify();
@@ -165,6 +166,14 @@ export const AggregateLimitDetailsDialog = ({
           />
         </div>
       </div>
+
+      {includeTerminated && (
+        <p className="text-muted fs-7 mb-2">
+          {translate(
+            'Usage of terminated resources is included in the totals, but only active resources are listed.',
+          )}
+        </p>
+      )}
 
       <Table
         {...tableProps}

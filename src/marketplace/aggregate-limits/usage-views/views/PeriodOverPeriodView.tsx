@@ -13,6 +13,7 @@ import { Select } from '@/form/select';
 import { translate } from '@/i18n';
 import { Customer } from '@/workspace/types';
 
+import { TERMINATED_SERIES_NAME } from '../../utils';
 import { ComponentOptionLabel } from '../ComponentOptionLabel';
 import { MixBanner } from '../MixBanner';
 import { ComponentRow, detectMix } from '../mixDetection';
@@ -22,6 +23,7 @@ interface Props {
   project?: Project;
   customer?: Customer;
   components: ComponentRow[];
+  includeTerminated?: boolean;
 }
 
 interface SelectableTarget {
@@ -57,6 +59,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
   project,
   customer,
   components,
+  includeTerminated,
 }) => {
   const mix = detectMix(components);
   const targets = useMemo(() => buildTargets(components ?? []), [components]);
@@ -98,6 +101,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         offering_uuid: target.uuid,
         component_type: target.type,
         period_offset: offset,
+        include_terminated: includeTerminated,
       },
     };
     const fetcher = isProject
@@ -107,13 +111,27 @@ export const PeriodOverPeriodView: FC<Props> = ({
   };
 
   const { data: current } = useQuery({
-    queryKey: ['exp-pop-A', scope?.uuid, target?.uuid, target?.type, offsetA],
+    queryKey: [
+      'exp-pop-A',
+      scope?.uuid,
+      target?.uuid,
+      target?.type,
+      offsetA,
+      includeTerminated,
+    ],
     queryFn: () => fetchOne(offsetA),
     enabled: !!scope?.uuid && !!target,
     staleTime: SHORT_STALE_TIME,
   });
   const { data: previous } = useQuery({
-    queryKey: ['exp-pop-B', scope?.uuid, target?.uuid, target?.type, offsetB],
+    queryKey: [
+      'exp-pop-B',
+      scope?.uuid,
+      target?.uuid,
+      target?.type,
+      offsetB,
+      includeTerminated,
+    ],
     queryFn: () => fetchOne(offsetB),
     enabled:
       !!scope?.uuid && !!target && offsetA !== offsetB && periodOpts.length > 1,
@@ -126,6 +144,15 @@ export const PeriodOverPeriodView: FC<Props> = ({
     // in previous — same bucket position within the period (week 1 vs week 1, etc.).
     const labels = current.buckets.map((_b: any, i: number) => `#${i + 1}`);
     const currentSeries = current.buckets.map((b: any) => b.usage);
+    // The current period's line shows live resources' usage, with terminated
+    // resources' usage stacked on top of it; totals and Δ stay on all usage.
+    const currentTerminated = current.buckets.map(
+      (b: any) => b.usage_terminated || 0,
+    );
+    const hasTerminated = currentTerminated.some((v: number) => v > 0);
+    const currentLive = currentSeries.map(
+      (v: number, i: number) => v - currentTerminated[i],
+    );
     const previousSeries = (previous?.buckets ?? []).map((b: any) => b.usage);
 
     const currentTotal = currentSeries.reduce(
@@ -151,10 +178,24 @@ export const PeriodOverPeriodView: FC<Props> = ({
         symbol: 'circle',
         symbolSize: 6,
         color: tc.brand500,
-        data: currentSeries,
+        data: hasTerminated ? currentLive : currentSeries,
         areaStyle: { opacity: 0.18 },
+        ...(hasTerminated ? { stack: 'current' } : {}),
       },
     ];
+    if (hasTerminated) {
+      seriesList.push({
+        name: TERMINATED_SERIES_NAME(),
+        type: 'line',
+        smooth: true,
+        symbol: 'none',
+        stack: 'current',
+        color: tc.muted,
+        lineStyle: { width: 1 },
+        areaStyle: { opacity: 0.25 },
+        data: currentTerminated,
+      });
+    }
     if (previousSeries.length) {
       seriesList.push({
         name: previous?.current_period_label

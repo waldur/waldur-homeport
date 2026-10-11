@@ -4,6 +4,7 @@ import { ComponentsUsageStats } from 'waldur-js-client';
 import { generateBrandColors } from 'waldur-design-tokens';
 
 import { getBrandColor } from '@/core/utils';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { CHART_BAR_ROUNDING } from '@/dashboard/constants';
 import { translate } from '@/i18n';
 
@@ -16,6 +17,33 @@ type ComponentStats = ComponentsUsageStats['components'][number];
 export function getComponentKey(component: ComponentStats): string {
   return `${component.type}__${component.billing_type}`;
 }
+
+interface UsageFields {
+  billing_type?: string;
+  usage?: number;
+  limit_usage?: number;
+  usage_terminated?: number;
+  limit_usage_terminated?: number;
+}
+
+/**
+ * Split a component's usage into what live resources used and what came from
+ * terminated ones. The cap only covers live resources, so remaining capacity
+ * and percent of cap are computed from `live`.
+ */
+export function splitUsage(component: UsageFields): {
+  live: number;
+  terminated: number;
+} {
+  const isLimit = component.billing_type === 'limit';
+  const total = (isLimit ? component.limit_usage : component.usage) || 0;
+  const terminated =
+    (isLimit ? component.limit_usage_terminated : component.usage_terminated) ||
+    0;
+  return { live: Math.max(0, total - terminated), terminated };
+}
+
+export const TERMINATED_SERIES_NAME = () => translate('Terminated resources');
 
 export function getComponentDisplayName(
   component: ComponentStats,
@@ -59,23 +87,29 @@ export function useAggregateLimitChart(
     );
 
     const usageData = [];
+    const terminatedData = [];
     const remainingData = [];
 
     for (let i = 0; i < components.length; i++) {
       const component = components[i];
 
-      const rawUsageValue =
-        component.billing_type === 'limit'
-          ? component.limit_usage
-          : component.usage;
-      const usageValue = Math.max(rawUsageValue || 0, 0.1);
+      const { live, terminated } = splitUsage(component);
+      const rawUsageValue = live;
+      const usageValue = Math.max(rawUsageValue, 0.1);
 
       usageData.push({
         value: usageValue,
-        rawValue: rawUsageValue || 0,
+        rawValue: rawUsageValue,
         tooltipLabel: `${component.name} (${component.measured_unit})`,
         componentType: component.type,
         billingType: component.billing_type,
+        measured_unit: component.measured_unit,
+      });
+
+      terminatedData.push({
+        value: terminated > 0 ? terminated : null,
+        rawValue: terminated,
+        componentType: component.type,
         measured_unit: component.measured_unit,
       });
 
@@ -83,7 +117,7 @@ export function useAggregateLimitChart(
       let rawRemainingValue = 0;
 
       if (component.limit != null) {
-        rawRemainingValue = Math.max(0, component.limit - (rawUsageValue || 0));
+        rawRemainingValue = Math.max(0, component.limit - rawUsageValue);
         remainingValue = rawRemainingValue > 0 ? rawRemainingValue : 0.1;
       }
 
@@ -96,6 +130,11 @@ export function useAggregateLimitChart(
       });
     }
 
+    const hasTerminated = terminatedData.some((d) => d.rawValue > 0);
+    const usageName = translate('Usage');
+    const limitName = translate('Limit');
+    const terminatedName = TERMINATED_SERIES_NAME();
+
     const options = {
       tooltip: {
         trigger: 'axis',
@@ -106,7 +145,8 @@ export function useAggregateLimitChart(
           },
         },
         formatter: function (params) {
-          const usageBar = params[0];
+          const bySeries = (name) => params.find((p) => p.seriesName === name);
+          const usageBar = bySeries(usageName) ?? params[0];
           const component = components[usageBar.dataIndex];
 
           if (!component) {
@@ -124,16 +164,24 @@ export function useAggregateLimitChart(
             ? ` (${component.measured_unit})<br/>`
             : '<br/>';
           tooltip += `<small>${billingTypeLabel} </small><br/>`;
-          tooltip += `${params[0].marker} ${translate('Usage')}: ${usageValue} ${component.measured_unit}<br/>`;
+          tooltip += `${usageBar.marker} ${usageName}: ${usageValue} ${component.measured_unit}<br/>`;
 
-          if (component.limit != null) {
-            tooltip += `${params[1].marker} ${translate('Limit')}: ${component.limit} ${component.measured_unit}`;
+          const terminatedBar = bySeries(terminatedName);
+          if (terminatedBar?.data?.rawValue > 0) {
+            tooltip += `${terminatedBar.marker} ${terminatedName}: ${terminatedBar.data.rawValue} ${component.measured_unit}<br/>`;
+          }
+
+          const limitBar = bySeries(limitName);
+          if (component.limit != null && limitBar) {
+            tooltip += `${limitBar.marker} ${limitName}: ${component.limit} ${component.measured_unit}`;
           }
           return tooltip;
         },
       },
       legend: {
-        data: [translate('Usage'), translate('Limit')],
+        data: hasTerminated
+          ? [usageName, terminatedName, limitName]
+          : [usageName, limitName],
         icon: 'circle',
         itemWidth: 8,
         itemHeight: 8,
@@ -203,7 +251,7 @@ export function useAggregateLimitChart(
           : [],
       series: [
         {
-          name: translate('Usage'),
+          name: usageName,
           type: 'bar',
           stack: 'total',
           emphasis: {
@@ -216,8 +264,25 @@ export function useAggregateLimitChart(
           data: usageData,
           color: brandColors[300],
         },
+        ...(hasTerminated
+          ? [
+              {
+                name: terminatedName,
+                type: 'bar',
+                stack: 'total',
+                emphasis: {
+                  focus: 'series',
+                },
+                itemStyle: {
+                  borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
+                },
+                data: terminatedData,
+                color: getChartThemeColors().muted,
+              },
+            ]
+          : []),
         {
-          name: translate('Limit'),
+          name: limitName,
           type: 'bar',
           stack: 'total',
           emphasis: {

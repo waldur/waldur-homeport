@@ -4,9 +4,12 @@ import { ComponentsUsageStatsPerOffering } from 'waldur-js-client';
 import { generateBrandColors } from 'waldur-design-tokens';
 
 import { getBrandColor } from '@/core/utils';
+import { getChartThemeColors } from '@/dashboard/chartColors';
 import { CHART_BAR_ROUNDING } from '@/dashboard/constants';
 import { translate } from '@/i18n';
 import { numberFormatter } from '@/i18n/LanguageUtilsService';
+
+import { TERMINATED_SERIES_NAME, splitUsage } from '../utils';
 
 interface ChartResult {
   options: any;
@@ -37,16 +40,13 @@ export function useAggregateLimitChart(
     const xAxisData = components.map((component) => component.offering_name);
 
     const usageData = [];
+    const terminatedData = [];
     const remainingData = [];
 
     for (let i = 0; i < components.length; i++) {
       const component = components[i];
 
-      const rawUsageValue =
-        component.billing_type === 'limit'
-          ? component.limit_usage
-          : component.usage;
-      const usageValue = rawUsageValue || 0;
+      const { live: usageValue, terminated } = splitUsage(component);
 
       usageData.push({
         value: usageValue,
@@ -54,6 +54,13 @@ export function useAggregateLimitChart(
         tooltipLabel: `${component.name} (${component.measured_unit})`,
         componentType: component.type,
         billingType: component.billing_type,
+        measured_unit: component.measured_unit,
+      });
+
+      terminatedData.push({
+        value: terminated > 0 ? terminated : null,
+        rawValue: terminated,
+        componentType: component.type,
         measured_unit: component.measured_unit,
       });
 
@@ -76,6 +83,11 @@ export function useAggregateLimitChart(
       }
     }
 
+    const hasTerminated = terminatedData.some((d) => d.rawValue > 0);
+    const usageName = translate('Usage');
+    const limitName = translate('Limit');
+    const terminatedName = TERMINATED_SERIES_NAME();
+
     const options = {
       tooltip: {
         trigger: 'axis',
@@ -86,7 +98,8 @@ export function useAggregateLimitChart(
           },
         },
         formatter: function (params) {
-          const usageBar = params[0];
+          const bySeries = (name) => params.find((p) => p.seriesName === name);
+          const usageBar = bySeries(usageName) ?? params[0];
           const component = components[usageBar.dataIndex];
 
           if (!component) {
@@ -105,10 +118,16 @@ export function useAggregateLimitChart(
             tooltip += ` · ${component.current_period_label}`;
           }
           tooltip += `</small><br/>`;
-          tooltip += `${params[0].marker} ${translate('Usage')}: ${numberFormatter.format(usageValue || 0)} ${component.measured_unit}<br/>`;
+          tooltip += `${usageBar.marker} ${usageName}: ${numberFormatter.format(usageValue || 0)} ${component.measured_unit}<br/>`;
 
-          if (component.limit != null) {
-            tooltip += `${params[1].marker} ${translate('Limit')}: ${numberFormatter.format(component.limit)} ${component.measured_unit}`;
+          const terminatedBar = bySeries(terminatedName);
+          if (terminatedBar?.data?.rawValue > 0) {
+            tooltip += `${terminatedBar.marker} ${terminatedName}: ${numberFormatter.format(terminatedBar.data.rawValue)} ${component.measured_unit}<br/>`;
+          }
+
+          const limitBar = bySeries(limitName);
+          if (component.limit != null && limitBar) {
+            tooltip += `${limitBar.marker} ${limitName}: ${numberFormatter.format(component.limit)} ${component.measured_unit}`;
             if (component.limit > 0) {
               const pct = Math.round(
                 ((usageValue || 0) / component.limit) * 100,
@@ -120,7 +139,9 @@ export function useAggregateLimitChart(
         },
       },
       legend: {
-        data: [translate('Usage'), translate('Limit')],
+        data: hasTerminated
+          ? [usageName, terminatedName, limitName]
+          : [usageName, limitName],
         icon: 'circle',
         itemWidth: 8,
         itemHeight: 8,
@@ -183,7 +204,7 @@ export function useAggregateLimitChart(
           : [],
       series: [
         {
-          name: translate('Usage'),
+          name: usageName,
           type: 'bar',
           stack: 'total',
           emphasis: {
@@ -196,8 +217,25 @@ export function useAggregateLimitChart(
           data: usageData,
           color: brandColors[300],
         },
+        ...(hasTerminated
+          ? [
+              {
+                name: terminatedName,
+                type: 'bar',
+                stack: 'total',
+                emphasis: {
+                  focus: 'series',
+                },
+                itemStyle: {
+                  borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
+                },
+                data: terminatedData,
+                color: getChartThemeColors().muted,
+              },
+            ]
+          : []),
         {
-          name: translate('Limit'),
+          name: limitName,
           type: 'bar',
           stack: 'total',
           emphasis: {
