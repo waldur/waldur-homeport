@@ -3,8 +3,9 @@ import { FunctionComponent, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { formatISODate, parseDate } from '@/core/dateUtils';
-import { WarnCard } from '@/core/WarnCard';
 import { SubmitButton, DateGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -107,9 +108,11 @@ export const EditResourceEndDateDialog: FunctionComponent<
                 />
 
                 {exceedsProjectEndDate && (
-                  <WarnCard
+                  <AlertItem
+                    type="floating"
+                    variant="warning"
                     title={translate('Date conflict')}
-                    description={
+                    body={
                       <>
                         {translate(
                           'The selected termination date ({terminationDate}) is after the project end date ({endDate}). The resource will be terminated on the project end date regardless of this setting.',

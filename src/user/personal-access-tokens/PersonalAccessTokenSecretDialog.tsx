@@ -1,12 +1,8 @@
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  WarningCircleIcon,
-} from '@phosphor-icons/react';
+import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
-import { FeaturedIcon } from 'waldur-ui';
+import { AlertItem } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
@@ -49,21 +45,14 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       title={translate('Personal access token created')}
       footer={<CloseDialogButton label={translate('Done')} />}
     >
-      <Card className="card-bordered bg-light-warning mb-4">
-        <Card.Body className="d-flex align-items-center gap-3 p-4">
-          <FeaturedIcon
-            icon={<WarningCircleIcon weight="bold" />}
-            variant="warning"
-          />
-          <div>
-            <div className="fw-bold">
-              {translate(
-                'Make sure to copy your personal access token now. You will not be able to see it again.',
-              )}
-            </div>
-          </div>
-        </Card.Body>
-      </Card>
+      <AlertItem
+        type="floating"
+        variant="warning"
+        title={translate(
+          'Make sure to copy your personal access token now. You will not be able to see it again.',
+        )}
+        className="mb-4"
+      />
 
       <div className="mb-3">
         <Form.Label className="fw-bold">{translate('Token name')}</Form.Label>

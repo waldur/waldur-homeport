@@ -1,4 +1,5 @@
-import { WarnCard } from '@/core/WarnCard';
+import { AlertItem } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 
 interface AcceptTosWarningProps {
@@ -10,14 +11,15 @@ export const AcceptTosWarning = ({
   isSelf = true,
   userName,
 }: AcceptTosWarningProps) => (
-  <WarnCard
-    prominent
+  <AlertItem
+    type="floating"
+    variant="warning"
     title={
       isSelf
         ? translate('Action required: Accept terms and conditions')
         : translate('Pending: Terms and conditions not accepted')
     }
-    description={
+    body={
       isSelf
         ? translate(
             'You must accept the Terms of Service and privacy policy to access all features. To accept, please check the box below.',

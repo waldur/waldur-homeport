@@ -6,8 +6,9 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { AlertItem } from 'waldur-ui';
+
 import { formatISODate, parseDate } from '@/core/dateUtils';
-import { WarnCard } from '@/core/WarnCard';
 import { SubmitButton, DateGroup, TextGroup } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
@@ -94,9 +95,11 @@ export const AdjustResourceDatesDialog: FunctionComponent<
               </>
             }
           >
-            <WarnCard
+            <AlertItem
+              type="floating"
+              variant="warning"
               title={translate('No automatic billing changes')}
-              description={translate(
+              body={translate(
                 'Adjusting these dates does not regenerate invoices. Issue credits or refunds separately if needed.',
               )}
               className="mb-5"
