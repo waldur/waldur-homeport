@@ -396,13 +396,16 @@ export const TabsContent = forwardRef<
 
   // Radix unmounts an inactive panel unless `forceMount` is set, and then
   // renders it with `hidden={false}`, so a kept-mounted panel is hidden here.
+  // Otherwise `hidden` is left out entirely: Radix spreads our props over its
+  // own `hidden={!present}`, so even `hidden={undefined}` would unhide the
+  // empty shell of every inactive panel (an invisible Tab stop).
   const keepMounted = mount !== 'active' || Boolean(forceMount);
   return (
     <TabsPrimitive.Content
       ref={ref}
       value={value}
       forceMount={keepMounted || undefined}
-      hidden={keepMounted ? !isActive : undefined}
+      {...(keepMounted ? { hidden: !isActive } : {})}
       className={cn(
         'outline-none',
         keepMounted && !isActive && 'hidden',

@@ -113,6 +113,35 @@ describe('Tabs', () => {
     expect(screen.getByText('Panel 2')).toBeInTheDocument();
   });
 
+  it('hides the empty panel of an inactive tab with mount="active"', async () => {
+    const user = userEvent.setup();
+    render(
+      <Tabs defaultValue="tab1" mount="active">
+        <TabsList>
+          <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+          <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+        </TabsList>
+        <TabsContent value="tab1">Panel 1</TabsContent>
+        <TabsContent value="tab2">Panel 2</TabsContent>
+      </Tabs>,
+    );
+    // Radix leaves an empty, focusable shell for an inactive panel; without
+    // `hidden` it is an invisible Tab stop and an empty region to a screen reader.
+    const panel = (state: string) =>
+      screen
+        .getAllByRole('tabpanel', { hidden: true })
+        .find((el) => el.getAttribute('data-state') === state);
+
+    expect(panel('inactive')).toHaveAttribute('hidden');
+    expect(panel('active')).not.toHaveAttribute('hidden');
+
+    await user.click(screen.getByRole('tab', { name: 'Tab 2' }));
+
+    expect(panel('inactive')).toHaveAttribute('hidden');
+    expect(panel('active')).toHaveTextContent('Panel 2');
+    expect(panel('active')).not.toHaveAttribute('hidden');
+  });
+
   it('handles mount="visited" by preserving visited panels in DOM with hidden attribute', async () => {
     const user = userEvent.setup();
     render(
