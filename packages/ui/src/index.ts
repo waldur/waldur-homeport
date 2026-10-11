@@ -222,6 +222,7 @@ export type {
 export type { SegmentedVariant } from './segmentedStyles';
 
 export * from './Check';
+export * from './Progress';
 
 export { Avatar, IconButton, OrgSwitcher, SearchField, TopBar } from './TopBar';
 export type {

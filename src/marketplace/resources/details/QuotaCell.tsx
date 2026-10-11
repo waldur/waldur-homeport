@@ -69,7 +69,7 @@ export const QuotaCell = ({
 
       <QuotaProgressBar
         percent={percent}
-        height={4}
+        size="xs"
         className="mt-1"
         label={typeof title === 'string' ? title : undefined}
       />

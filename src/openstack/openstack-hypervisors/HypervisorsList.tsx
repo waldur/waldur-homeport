@@ -1,4 +1,4 @@
-import { CSSProperties, FC } from 'react';
+import { FC } from 'react';
 import { Stack } from 'react-bootstrap';
 import {
   Hypervisor,
@@ -6,7 +6,8 @@ import {
   OpenstackHypervisorsListData,
 } from 'waldur-js-client';
 
-import { ProgressBar } from '@/core/ProgressBar';
+import { Progress } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { createFetcher } from '@/table/api';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
@@ -20,16 +21,8 @@ const UsageCell: FC<{ used: number; total: number; unit?: string }> = ({
   total,
   unit,
 }) => (
-  <Stack
-    style={
-      {
-        minWidth: 120,
-        '--progress-bar-color': 'var(--waldur-utility-indigo-400)',
-        '--progress-track-color': 'var(--waldur-utility-blue-400)',
-      } as CSSProperties
-    }
-  >
-    <ProgressBar now={used} max={total} className="progress-themed" />
+  <Stack style={{ minWidth: 120 }}>
+    <Progress value={used} max={total} variant="indigo" />
     <span className="text-end fs-7 text-secondary mt-1">
       {used}/{total}
       {unit ? ` ${unit}` : ''}

@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Card, ProgressBar } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
-import { Tooltip } from 'waldur-ui';
+import { Progress, Tooltip } from 'waldur-ui';
 
 import { formatUsageValue } from '@/core/formatNumber';
 import { translate } from '@/i18n';
@@ -51,12 +51,13 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
               </span>
             </Tooltip>
           ) : max ? (
-            <ProgressBar
-              now={value}
-              max={max}
-              variant={variant}
-              className={`bg-light-${variant} shadow-none flex-grow-1 mw-80px h-8px mb-3`}
-            />
+            <div className="flex-grow-1 mw-80px mb-3">
+              <Progress
+                value={value}
+                max={max}
+                variant={variant ?? undefined}
+              />
+            </div>
           ) : null}
         </div>
       </Card.Body>

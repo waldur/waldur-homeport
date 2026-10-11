@@ -71,7 +71,7 @@ const renderUsageCell = (percentage: number | null) => {
     <div className="d-flex align-items-center gap-2">
       <QuotaProgressBar
         percent={percentage}
-        height={6}
+        size="sm"
         className="flex-grow-1"
         label={translate('Usage')}
       />

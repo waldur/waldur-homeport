@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
+import { Progress } from 'waldur-ui';
+
 import { formatUsageValue } from '@/core/formatNumber';
-import { ProgressBar } from '@/core/ProgressBar';
 import { translate } from '@/i18n';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -39,11 +40,12 @@ export const UsageMeter: FC<{ reading: ComponentUsage }> = ({ reading }) => {
         </span>
       </div>
       {limit !== undefined && (
-        <ProgressBar
-          now={used ?? 0}
+        <Progress
+          className="mt-1"
+          value={used ?? 0}
           max={limit}
           variant={getMeterVariant(reading.ratio)}
-          neutralTrack
+          label={componentLabel(component)}
         />
       )}
     </div>
@@ -61,11 +63,12 @@ export const ApiKeyUsageSummary: FC<{ reading?: ComponentUsage }> = ({
           {Math.round(reading.ratio ?? 0)}%
         </span>
       </div>
-      <ProgressBar
-        now={reading.used ?? 0}
+      <Progress
+        className="mt-1"
+        value={reading.used ?? 0}
         max={reading.limit}
         variant={getMeterVariant(reading.ratio)}
-        neutralTrack
+        label={componentLabel(reading.component)}
       />
     </div>
   ) : (

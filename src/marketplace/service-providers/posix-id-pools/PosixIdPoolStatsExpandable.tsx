@@ -7,7 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
-import { ProgressBar } from '@/core/ProgressBar';
+import { PercentProgress } from '@/core/PercentProgress';
 import { translate } from '@/i18n';
 
 import { roundUtilization } from './poolRanges';
@@ -29,9 +29,8 @@ const NamespaceStats: FunctionComponent<{
     <div className="fw-bold mb-1">{label}</div>
     {stats ? (
       <>
-        <ProgressBar
-          now={roundUtilization(stats.utilization)}
-          showValue
+        <PercentProgress
+          value={roundUtilization(stats.utilization)}
           compact
           variant={utilizationVariant(stats.utilization, threshold)}
         />

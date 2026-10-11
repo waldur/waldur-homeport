@@ -8,7 +8,7 @@ import {
 import { Badge } from 'waldur-ui';
 
 import { formatDateTime } from '@/core/dateUtils';
-import { ProgressBar } from '@/core/ProgressBar';
+import { PercentProgress } from '@/core/PercentProgress';
 import { translate } from '@/i18n';
 import { CustomerResourcesListPlaceholder } from '@/marketplace/resources/list/CustomerResourcesListPlaceholder';
 import { createFetcher } from '@/table/api';
@@ -129,9 +129,8 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
         title: translate('UID utilization'),
         render: ({ row }: { row: PosixIdPool }) => (
           <div style={{ minWidth: 90 }}>
-            <ProgressBar
-              now={roundUtilization(row.uid_utilization)}
-              showValue
+            <PercentProgress
+              value={roundUtilization(row.uid_utilization)}
               compact
               variant={utilizationVariant(row.uid_utilization ?? 0)}
             />
@@ -142,9 +141,8 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
         title: translate('GID utilization'),
         render: ({ row }: { row: PosixIdPool }) => (
           <div style={{ minWidth: 90 }}>
-            <ProgressBar
-              now={roundUtilization(row.gid_utilization)}
-              showValue
+            <PercentProgress
+              value={roundUtilization(row.gid_utilization)}
               compact
               variant={utilizationVariant(row.gid_utilization ?? 0)}
             />
@@ -158,9 +156,8 @@ const PosixIdPoolsListView: FunctionComponent<PosixIdPoolsListViewProps> = ({
             <>{renderFieldOrDash(null)}</>
           ) : (
             <div style={{ minWidth: 90 }}>
-              <ProgressBar
-                now={roundUtilization(row.group_gid_utilization)}
-                showValue
+              <PercentProgress
+                value={roundUtilization(row.group_gid_utilization)}
                 compact
                 variant={utilizationVariant(row.group_gid_utilization)}
               />

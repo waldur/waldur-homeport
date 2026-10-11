@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import { callReviewerPoolsList, CallReviewerPool } from 'waldur-js-client';
 
+import { Progress } from 'waldur-ui';
+
 import { translate } from '@/i18n';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
 import { canManageCallReviews } from '@/proposals/utils';
@@ -78,21 +80,17 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
             : 0;
           return (
             <div className="d-flex align-items-center gap-2">
-              <div
-                className="progress flex-grow-1"
-                style={{ height: '8px', minWidth: '60px' }}
-              >
-                <div
-                  className={`progress-bar ${
-                    percentage >= 100
-                      ? 'bg-danger'
-                      : percentage >= 80
-                        ? 'bg-warning'
-                        : 'bg-success'
-                  }`}
-                  style={{ width: `${Math.min(percentage, 100)}%` }}
-                />
-              </div>
+              <Progress
+                className="flex-grow-1 min-w-[60px]"
+                value={percentage}
+                variant={
+                  percentage >= 100
+                    ? 'danger'
+                    : percentage >= 80
+                      ? 'warning'
+                      : 'success'
+                }
+              />
               <small className="text-muted">{percentage}%</small>
             </div>
           );

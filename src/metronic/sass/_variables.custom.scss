@@ -124,15 +124,3 @@ $breadcrumb-divider-color: $fg-quinary !default;
 $breadcrumb-item-padding-x: 0.923rem !default;
 $breadcrumb-color: $link-color !default; // Custom variable
 $breadcrumb-active-color: $text-quaternary !default;
-
-// Progress
-$progress-height: 8px;
-$progress-bg: if(
-  isDarkMode(),
-  $bg-brand-primary_alt !important,
-  $bg-brand-primary_alt
-);
-$progress-box-shadow: unset;
-$progress-bar-color: $white;
-// The live brand colour, not the build-time $primary: tenants re-brand at runtime.
-$progress-bar-bg: var(--bs-primary);

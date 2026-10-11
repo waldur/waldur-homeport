@@ -1,0 +1,94 @@
+/**
+ * Progress tokens for waldur-ui's Progress.
+ *
+ * Fills mirror Badge's `solid` tone, so a bar and a badge of the same variant
+ * are the same colour in both themes (Badge.tsx BADGE_STYLES). `primary` reads
+ * the live brand variable, not a ramp step, because tenants re-brand at
+ * runtime. `secondary` is not a bar variant: on Badge it is a pale brand tint,
+ * which would vanish against the neutral track.
+ *
+ * The track is always neutral (the same grays as the switch track). Tinting it
+ * with the variant made an empty meter read as a full one.
+ *
+ * Heights are plain px: the root font size is 13px, so rem would distort them.
+ */
+@import './colors.css';
+
+:root {
+  --progress-track: var(--color-gray-100);
+  --progress-segment-divider: var(--progress-track);
+
+  --progress-fill-primary: var(--waldur-brand-600);
+  --progress-fill-success: var(--color-success-600);
+  --progress-fill-warning: var(--color-warning-600);
+  --progress-fill-danger: var(--color-error-600);
+  --progress-fill-info: var(--color-info-600);
+  --progress-fill-neutral: var(--color-gray-600);
+  --progress-fill-purple: var(--color-purple-500);
+  --progress-fill-blue: var(--color-blue-500);
+  --progress-fill-indigo: var(--color-indigo-500);
+  --progress-fill-moss: var(--color-moss-500);
+  --progress-fill-pink: var(--color-pink-500);
+  --progress-fill-teal: var(--color-teal-500);
+  --progress-fill-orange: var(--color-orange-500);
+  --progress-fill-rose: var(--color-rose-500);
+
+  /* Text drawn inside a `lg` bar: white or gray-900, whichever reads better
+     on the fill (white on the mid-tone fills fails AA). The contrast test
+     keeps these honest. */
+  --progress-label-primary: #ffffff;
+  --progress-label-success: var(--color-gray-900);
+  --progress-label-warning: var(--color-gray-900);
+  --progress-label-danger: #ffffff;
+  --progress-label-info: #ffffff;
+  --progress-label-neutral: #ffffff;
+  --progress-label-purple: #ffffff;
+  --progress-label-blue: var(--color-gray-900);
+  --progress-label-indigo: var(--color-gray-900);
+  --progress-label-moss: var(--color-gray-900);
+  --progress-label-pink: var(--color-gray-900);
+  --progress-label-teal: var(--color-gray-900);
+  --progress-label-orange: var(--color-gray-900);
+  --progress-label-rose: var(--color-gray-900);
+
+  --progress-height-xs: 4px;
+  --progress-height-sm: 6px;
+  --progress-height-md: 8px;
+  --progress-height-lg: 24px;
+  --progress-radius: 9999px;
+  /* A pill would clip the first and last characters of an inner label. */
+  --progress-radius-lg: 6px;
+
+  --progress-transition: width 300ms ease-out;
+  --progress-indeterminate-width: 40%;
+  --progress-indeterminate-duration: 1.4s;
+}
+
+:root[data-theme='dark'] {
+  --progress-track: var(--color-gray-dark-800);
+
+  --progress-fill-success: var(--color-success-500);
+  --progress-fill-warning: var(--color-warning-500);
+  --progress-fill-danger: var(--color-error-500);
+  --progress-fill-info: var(--color-info-300);
+  --progress-fill-neutral: var(--color-gray-dark-400);
+  --progress-fill-purple: var(--color-purple-400);
+  --progress-fill-blue: var(--color-blue-400);
+  --progress-fill-indigo: var(--color-indigo-400);
+  --progress-fill-moss: var(--color-moss-400);
+  --progress-fill-pink: var(--color-pink-400);
+  --progress-fill-teal: var(--color-teal-400);
+  --progress-fill-orange: var(--color-orange-400);
+  --progress-fill-rose: var(--color-rose-400);
+
+  --progress-label-danger: var(--color-gray-900);
+  --progress-label-info: var(--color-gray-900);
+  --progress-label-neutral: var(--color-gray-900);
+  --progress-label-purple: var(--color-gray-900);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --progress-transition: none;
+  }
+}

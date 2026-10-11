@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Col, ProgressBar, Row, Table } from 'react-bootstrap';
+import { Col, Row, Table } from 'react-bootstrap';
 
-import { AccordionCard } from 'waldur-ui';
+import { AccordionCard, Progress } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 
@@ -79,12 +79,17 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
           <h6 className="text-uppercase text-muted mb-3">
             {translate('Utilization')}
           </h6>
-          <ProgressBar
-            now={data.utilization_percent}
-            variant={progressVariant}
-            label={`${data.utilization_percent.toFixed(1)}%`}
+          <Progress
+            size="lg"
             className="mb-3"
-            style={{ height: '24px' }}
+            label={translate('Connections')}
+            segments={[
+              {
+                value: data.utilization_percent,
+                variant: progressVariant,
+                label: `${data.utilization_percent.toFixed(1)}%`,
+              },
+            ]}
           />
           <small className="text-muted">
             {translate('Max connections: {max}', { max: data.max_connections })}
