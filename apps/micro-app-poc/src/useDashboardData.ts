@@ -13,13 +13,13 @@ import {
   projectsList,
   projectsListUsersCount,
 } from 'waldur-js-client';
-import { StatusTone } from 'waldur-ui';
+import { BadgeVariant } from 'waldur-ui';
 
 export interface ProjectRow {
   uuid: string;
   name: string;
   status: string;
-  statusTone: StatusTone;
+  statusTone: BadgeVariant;
   members: number | string;
   monthlySpend: string;
 }
@@ -64,7 +64,7 @@ function formatEurAmount(value: string): string {
  * from actual fields, not an invented value. */
 function deriveProjectStatus(project: { end_date?: string | null }): {
   status: string;
-  tone: StatusTone;
+  tone: BadgeVariant;
 } {
   const isPast = project.end_date
     ? new Date(project.end_date).getTime() < Date.now()

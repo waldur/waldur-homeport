@@ -52,7 +52,7 @@ Waldur Homeport operates on two active UI component patterns:
 1. **Modern Tailwind / Radix Primitives (`packages/ui`, exported as `waldur-ui`)**
    - Built with pure Tailwind v4 utilities and CSS design tokens from `packages/design-tokens`.
    - Free of all Bootstrap and Metronic classes, SCSS variables, and runtime mixins.
-   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `Menu`, `MenuPopover`, `Checkbox`, `Radio`, `Switch`, `RadioGroup`, `Progress`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatusPill`, `StatCard`, `CopyButton`, `LoadingSpinner`, `Accordion`, `AccordionCard`, `Collapsible`, and `TablePagination` (with `Pagination` and `PageSizeSelect`).
+   - Includes `BaseButton`, `SegmentedControl`, `AlertItem`, `Badge`, `Tooltip`, `Popover`, `Sidebar`, `Sheet`, `Dialog`, `Menu`, `MenuPopover`, `Checkbox`, `Radio`, `Switch`, `RadioGroup`, `Progress`, `Tag`, `Card`, `Avatar`, `Toast`, `FeaturedIcon`, `StatCard`, `CopyButton`, `LoadingSpinner`, `Accordion`, `AccordionCard`, `Collapsible`, and `TablePagination` (with `Pagination` and `PageSizeSelect`).
    - Exports `buttonVariants()`, `ButtonVariant` and `ButtonSize` so elements that cannot be a `BaseButton` (links, Radix triggers that need a specific child shape) still get the exact same classes.
 
 2. **Transitional Shells (Radix Engine with Themed Skins)**

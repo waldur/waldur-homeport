@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
 
-import { Badge } from '../Badge';
+import { Badge, type BadgeVariant } from '../Badge';
 import { Card, CardContent, CardTitle } from '../Card';
 import { cn } from '../cn';
-import { StatusTone } from '../StatusPill';
 
 /**
  * Ports a real, single, reusable KPI-tile component — src/core/StatsCard.tsx
@@ -46,7 +45,7 @@ export interface StatCardProps {
   hint?: ReactNode;
   trend?: {
     label: string;
-    tone?: StatusTone;
+    tone?: BadgeVariant;
   };
   className?: string;
 }

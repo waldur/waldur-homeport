@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 import { AppShell } from 'waldur-shell';
 import {
+  Badge,
   BaseButton,
   Card,
   CardContent,
@@ -12,7 +13,6 @@ import {
   OrgSwitcher,
   SidebarModeCard,
   StatCard,
-  StatusPill,
   WaldurLogo,
 } from 'waldur-ui';
 
@@ -54,7 +54,11 @@ export const OrgDashboardMock = () => {
     {
       key: 'status',
       header: translate('Status'),
-      render: (row) => <StatusPill label={row.status} tone={row.statusTone} />,
+      render: (row) => (
+        <Badge variant={row.statusTone} shape="pill" tone="light" hasBullet>
+          {row.status}
+        </Badge>
+      ),
     },
     {
       key: 'members',
