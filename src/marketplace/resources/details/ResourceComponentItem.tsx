@@ -13,6 +13,7 @@ interface ResourceComponentItemProps {
   component: OfferingComponent;
   resource: any;
   expanded?: boolean;
+  stacked?: boolean;
 }
 
 const normalize = (value: number, factor: number) => {
@@ -99,6 +100,7 @@ export const ResourceComponentItem = ({
   component,
   resource,
   expanded = false,
+  stacked = false,
 }: ResourceComponentItemProps) => {
   const props = getQuotaCellProps(component, resource);
 
@@ -112,9 +114,12 @@ export const ResourceComponentItem = ({
   if (expanded) {
     return (
       <QuotaSingleView
-        {...props}
+        usage={props.usage}
+        limit={props.limit}
+        title={props.title}
         billingType={billingType}
         displayUnit={props.displayUnit}
+        stacked={stacked}
         limitFrequency={
           component.billing_type === 'limit' &&
           (limitPeriodMap[limitPeriod as string] || translate('Monthly'))

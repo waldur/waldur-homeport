@@ -14294,11 +14294,6 @@
       "feature_area": "actions"
     }
   },
-  "Current usage": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
   "Current usage: {usage}": {
     "context": {
       "variables": {
@@ -23252,6 +23247,7 @@
   },
   "Grace": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policies"
     }
   },
@@ -27830,11 +27826,6 @@
         }
       },
       "feature_area": "reallocate-limits"
-    }
-  },
-  "Limit frequency": {
-    "context": {
-      "feature_area": "details"
     }
   },
   "Limit horizon": {
@@ -35021,6 +35012,7 @@
   },
   "Notification": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policies"
     }
   },
@@ -59457,7 +59449,7 @@
   },
   "Toggle": {
     "context": {
-      "feature_area": "ui"
+      "feature_area": "AccordionCard"
     }
   },
   "Toggle camera": {
