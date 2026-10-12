@@ -66,8 +66,8 @@ Waldur HomePort's button architecture is built on top of [Tailwind CSS v4](https
 
 Every button in the application is rendered either by:
 
-1. [`BaseButton`](../packages/ui/src/BaseButton.tsx) (`import { BaseButton } from 'waldur-ui'`), or
-2. [`buttonVariants()`](../packages/ui/src/BaseButton.tsx) applied to elements that cannot be a `<button>` (e.g. router `<Link>`, custom Radix triggers).
+1. [`BaseButton`](../packages/ui/src/Button/BaseButton.tsx) (`import { BaseButton } from 'waldur-ui'`), or
+2. [`buttonVariants()`](../packages/ui/src/Button/BaseButton.tsx) applied to elements that cannot be a `<button>` (e.g. router `<Link>`, custom Radix triggers).
 
 Both share the exact same [`class-variance-authority`](https://cva.style/docs) (`cva`) definition, ensuring identical typography, heights, paddings, state tokens, focus rings, and transitions across the entire codebase.
 
@@ -291,7 +291,7 @@ Because `pointer-events` remain enabled on `<button disabled>`, the native `<but
 
 ### The `alwaysMount` Lifecycle Guarantee
 
-`Tooltip` provides an `alwaysMount` prop (`packages/ui/src/Tooltip.tsx`). When a button specifies `tooltip` or `disabledReason`, `BaseButton` sets `alwaysMount={true}` on the `Tooltip`.
+`Tooltip` provides an `alwaysMount` prop (`packages/ui/src/Tooltip/Tooltip.tsx`). When a button specifies `tooltip` or `disabledReason`, `BaseButton` sets `alwaysMount={true}` on the `Tooltip`.
 
 - Even when the button is currently enabled and `effectiveTooltip` is `undefined`, `alwaysMount` ensures the Radix `Tooltip.Root` and `Tooltip.Trigger` remain mounted in the DOM tree.
 - When the button transitions to disabled (triggering `disabledReason`), the JSX tree structure remains 100% identical.
@@ -418,7 +418,7 @@ When `label` is omitted and `iconNode` is supplied, `BaseButton` automatically a
 When `pending={true}`:
 
 1. The button is automatically disabled (`isDisabled = disabled || pending`).
-2. The regular icon is swapped for [LoadingSpinner](../packages/ui/src/LoadingSpinner.tsx).
+2. The regular icon is swapped for [LoadingSpinner](../packages/ui/src/LoadingSpinner/LoadingSpinner.tsx).
 3. The spinner applies `-me-[3.25px]` when a label is present to counteract the `gap-2` flex spacing, keeping the spinner positioned at the exact visual offset expected alongside the text.
 4. Button width remains visually balanced without layout jumps.
 
@@ -552,7 +552,7 @@ Toggle buttons and standalone icons use the centralized sizing helper `getButton
 
 ## 7. Segmented Controls & View Switchers
 
-When an interface presents mutually exclusive options that change what a view **shows** (filtering a table, toggling between card/list mode, switching chart date ranges) rather than navigating to a different page, use [SegmentedControl](../packages/ui/src/SegmentedControl.tsx) (`packages/ui/src/SegmentedControl.tsx`).
+When an interface presents mutually exclusive options that change what a view **shows** (filtering a table, toggling between card/list mode, switching chart date ranges) rather than navigating to a different page, use [SegmentedControl](../packages/ui/src/SegmentedControl/SegmentedControl.tsx) (`packages/ui/src/SegmentedControl/SegmentedControl.tsx`).
 
 > [!TIP]
 > For the comprehensive component selection guide across view lenses, action shortcuts, tabbed panels, and navigation, see the [Accessibility Decision Matrix](a11y-decision-matrix.md).
@@ -595,7 +595,7 @@ import { SegmentedControl } from 'waldur-ui';
 
 ### Flexbox Alignment Safeguard (`self-center`)
 
-In [`segmentedStyles.ts`](../packages/ui/src/segmentedStyles.ts), the control list declares:
+In [`segmentedStyles.ts`](../packages/ui/src/SegmentedControl/segmentedStyles.ts), the control list declares:
 
 ```css
 inline-flex self-center

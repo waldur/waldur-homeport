@@ -2,7 +2,7 @@ import { CalendarBlankIcon, XIcon } from '@phosphor-icons/react';
 import { CSSProperties, FC, ReactNode, useEffect, useState } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
-import { BaseButton } from '../BaseButton';
+import { BaseButton } from '../Button';
 import { cn } from '../cn';
 import { Popover, PopoverContent, PopoverTrigger } from '../Popover';
 

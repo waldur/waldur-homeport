@@ -265,7 +265,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ### AlertItem
 
-`packages/ui/src/AlertItem.tsx` (exported from `waldur-ui`).
+`packages/ui/src/AlertItem/` (exported from `waldur-ui`).
 
 - **Architecture**: Pure Tailwind utilities and CSS design tokens (`--surface-card-border`).
 - **Typography & Proportions**:
@@ -278,7 +278,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ### Badge
 
-`packages/ui/src/Badge.tsx` (exported from `waldur-ui`).
+`packages/ui/src/Badge/` (exported from `waldur-ui`).
 
 - **Variants & Tones**: 15 semantic variants (`primary`, `secondary`, `success`, `warning`, `danger`, `info`, `neutral`, `purple`, `blue`, `indigo`, `moss`, `pink`, `teal`, `orange`, `rose`) × 3 tones (`solid`, `light`, `outline`) × 4 shapes (`rounded`, `pill`, `circle`, `roundless`).
 - **Structural 1px Border**: Uses `border-[1px]` paired with `border-transparent` on solid/light tones to maintain uniform dimensions without subpixel shift across tones.
@@ -293,7 +293,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ### Tooltip
 
-`packages/ui/src/Tooltip.tsx` (exported from `waldur-ui`).
+`packages/ui/src/Tooltip/` (exported from `waldur-ui`).
 
 - **Dual Engine Architecture**:
   - `trigger="hover"` (default): Uses `@radix-ui/react-tooltip` with pointer enter/leave delays and keyboard focus detection.
@@ -308,7 +308,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ### Popover
 
-`packages/ui/src/Popover.tsx` (exported from `waldur-ui`).
+`packages/ui/src/Popover/` (exported from `waldur-ui`).
 
 - **Design Token Styling**: Styled with semantic tokens:
 
@@ -329,7 +329,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ### Accordion & Collapsible
 
-`packages/ui/src/Accordion.tsx` and `packages/ui/src/Collapsible.tsx` (exported from `waldur-ui`).
+`packages/ui/src/Accordion/` and `packages/ui/src/Collapsible/` (exported from `waldur-ui`).
 
 - **Accordion** is the shadcn recipe on Radix Accordion: each trigger is a real `<button>` inside an `<h3>` (Bootstrap/Metronic heading margin and type reset), with `aria-expanded`/`aria-controls` and arrow/Home/End keys between headers. Use `type="multiple"` where several panels stay open (table filters sidebar).
 - **Brand colour**: the open header is `text-brand-700` / `dark:text-brand-200`, the runtime tenant ramp. The chevron is a Phosphor icon in `currentColor`, so it always matches — react-bootstrap's version baked the build-time default green into a data-URI SVG.
@@ -568,7 +568,7 @@ The former `enforce-button-variants` rule was deleted: the variant list lives in
   CHOKIDAR_USEPOLLING=1 yarn vitest run --project=storybook
   ```
 
-- **Stories to look at**: `Actions/BaseButton` (`packages/ui/src/BaseButton.stories.tsx`: playground, every state, sizes, icon-only, realistic usage), `Actions/SegmentedControl` (variants, sizes, `BesideTallerSibling`, `AsTabsWithPanels`), and `src/table/ActionsMenu.stories.tsx`.
+- **Stories to look at**: `Actions/BaseButton` (`packages/ui/src/Button/BaseButton.stories.tsx`: playground, every state, sizes, icon-only, realistic usage), `Actions/SegmentedControl` (variants, sizes, `BesideTallerSibling`, `AsTabsWithPanels`), and `src/table/ActionsMenu.stories.tsx`.
 - **Storybook is not the app**: it applies the theme through `storybook-addon-pseudo-states`, which rewrites `:focus-visible` / `:hover` selectors. See the pitfall below before trusting a `:not(:focus-visible)` result there.
 
 ---
@@ -580,7 +580,7 @@ The former `enforce-button-variants` rule was deleted: the variant list lives in
 - **`focus-ring.spec.ts`**: asserts that keyboard focus produces a _visible_ indicator with at least 3:1 contrast (WCAG 2.4.7 and 1.4.11), in light and dark. Its fixtures are built from `buttonVariants()` on the `actions-basebutton--playground` story's stylesheet and cover the places a ring was once suppressed: elevation utilities (`shadow-sm`), an unlayered page stylesheet setting a `box-shadow`, a menu row (`navMenuRowClassName()`) and `nav-line-tabs`. The `primary` case is a recorded contrast gap (`test.fail()`): a brand ring on a brand-filled button is about 1.6:1. `.btn-no-focus` is deliberately not a fixture — see the pseudo-states pitfall.
 - **`stat-card-parity.spec.ts`**, **`charts.spec.ts`**, **`wizards.spec.ts`**: parity and screenshot checks for other components; `visualParityHarness.ts` holds the shared pixel-diff and chromaticity helpers.
 
-Run one spec with `yarn playwright test focus-ring --project=visual --workers=1` (a filter, not a path; passing a path is read as a project name). Playwright executes specs in Node, so a spec may import `packages/ui/src/BaseButton` directly but not the `waldur-ui` barrel, whose modules touch `document` at import time.
+Run one spec with `yarn playwright test focus-ring --project=visual --workers=1` (a filter, not a path; passing a path is read as a project name). Playwright executes specs in Node, so a spec may import `packages/ui/src/Button` directly but not the `waldur-ui` barrel, whose modules touch `document` at import time.
 
 ---
 
