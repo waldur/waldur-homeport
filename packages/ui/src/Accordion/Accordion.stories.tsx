@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CSSProperties, ReactNode, useState } from 'react';
 
-import { Select } from '../select';
+import { Select } from '../Select';
 
 import {
   Accordion,

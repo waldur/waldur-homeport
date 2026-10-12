@@ -1,7 +1,7 @@
 // The core select primitives (Select, AsyncSelect, CreatableSelect,
 // AsyncCreatableSelect, WindowedSelect, useSelect/useAsyncSelect, the custom
 // react-select sub-components, and their prop types) live in
-// packages/ui/src/select — they have no react-final-form coupling, so they
+// packages/ui/src/Select — they have no react-final-form coupling, so they
 // were elevated there as a real design-system primitive. This directory
 // keeps only what's genuinely react-final-form-specific: the `*Field`
 // components that adapt a Field's `input`/`meta` shape onto those
