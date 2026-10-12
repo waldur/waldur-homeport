@@ -16,16 +16,18 @@ export const ResourceComponents = ({
 }) => {
   if (components.length <= 2) {
     return (
-      <div className="d-flex flex-column gap-4">
+      <Row className="gy-4">
         {components.map((component) => (
-          <ResourceComponentItem
-            key={component.type}
-            expanded
-            resource={resource}
-            component={component}
-          />
+          <Col key={component.type} xs={12} sm={12 / components.length}>
+            <ResourceComponentItem
+              expanded
+              stacked={components.length === 2}
+              resource={resource}
+              component={component}
+            />
+          </Col>
         ))}
-      </div>
+      </Row>
     );
   }
 
