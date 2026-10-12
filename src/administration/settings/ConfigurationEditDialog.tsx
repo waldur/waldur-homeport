@@ -204,6 +204,7 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                         <AlertItem
                           type="floating"
                           variant="warning"
+                          role="alert"
                           title={translate('Warning')}
                           body={translate(
                             'Using the primary color as a sidebar color might affect contrast and usability.',

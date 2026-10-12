@@ -181,6 +181,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
             <AlertItem
               type="floating"
               variant="warning"
+              role="alert"
               title={translate('Claims not exposed')}
               body={translate(
                 'This identity provider does not expose its supported claims in the discovery document. You can manually add claim names below based on your IdP documentation.',

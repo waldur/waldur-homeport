@@ -119,6 +119,7 @@ const AllowedRedirectsField = () => {
                 <AlertItem
                   type="floating"
                   variant="warning"
+                  role="alert"
                   title={translate('Warning')}
                   body={translate(
                     'No allowed redirect URIs configured. The system will fall back to the HOMEPORT_URL setting. For multi-homeport deployments, at least one URI should be specified.',

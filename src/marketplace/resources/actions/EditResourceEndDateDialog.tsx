@@ -111,6 +111,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                   <AlertItem
                     type="floating"
                     variant="warning"
+                    role="alert"
                     title={translate('Date conflict')}
                     body={
                       <>

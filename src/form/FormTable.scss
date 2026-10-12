@@ -101,7 +101,9 @@
     border: 0 !important;
     box-shadow: none !important;
   }
-  tr:not(:last-child) > * {
+  // A row marked `border-0` belongs with the row below it (a label above its
+  // meter, say), so it gets no divider.
+  tr:not(:last-child, .border-0) > * {
     border-bottom: 1px solid var(--bs-border-color) !important;
   }
 }
