@@ -98,6 +98,7 @@ export const AdjustResourceDatesDialog: FunctionComponent<
             <AlertItem
               type="floating"
               variant="warning"
+              role="alert"
               title={translate('No automatic billing changes')}
               body={translate(
                 'Adjusting these dates does not regenerate invoices. Issue credits or refunds separately if needed.',

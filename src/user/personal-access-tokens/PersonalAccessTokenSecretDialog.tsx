@@ -51,7 +51,8 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
         title={translate(
           'Make sure to copy your personal access token now. You will not be able to see it again.',
         )}
-        className="mb-4"
+        // The secret is shown only once: keep the tinted warning surface.
+        className="mb-4 bg-warning-50 dark:bg-warning-900"
       />
 
       <div className="mb-3">
