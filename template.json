@@ -23247,6 +23247,7 @@
   },
   "Grace": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policies"
     }
   },
@@ -35011,6 +35012,7 @@
   },
   "Notification": {
     "context": {
+      "primary_ui_type": "label",
       "feature_area": "policies"
     }
   },
@@ -59447,7 +59449,7 @@
   },
   "Toggle": {
     "context": {
-      "feature_area": "ui"
+      "feature_area": "AccordionCard"
     }
   },
   "Toggle camera": {
