@@ -196,7 +196,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
               secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
             }
             description={translate(
-              'Holders of these roles are emailed about every new order for this offering, regardless of whether the order needs approval. Names are resolved on your organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most {n} roles. Visible only to users who can manage the integration settings of this offering.',
+              'Holders of these roles are emailed about every new order for this offering once it is approved on the consumer side, or when it is placed if it needs no consumer approval. Names are resolved on your organization and on the offering itself. Users who disabled notifications in their profile are skipped. At most {n} roles. Visible only to users who can manage the integration settings of this offering.',
               { n: MAX_ORDER_NOTIFICATION_RECIPIENTS },
             )}
           />
@@ -209,7 +209,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
               secretOptionsHidden ? SECRET_OPTIONS_HIDDEN_REASON : undefined
             }
             description={translate(
-              'Email addresses notified about every new order for this offering, regardless of whether the order needs approval. Intended for mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most {n} addresses, comma-separated. Visible only to users who can manage the integration settings of this offering.',
+              'Email addresses notified about every new order for this offering once it is approved on the consumer side, or when it is placed if it needs no consumer approval. Intended for mailboxes which do not belong to a Waldur user, so these addresses are notified even if a user with the same address disabled notifications. At most {n} addresses, comma-separated. Visible only to users who can manage the integration settings of this offering.',
               { n: MAX_ORDER_NOTIFICATION_RECIPIENTS },
             )}
           />
