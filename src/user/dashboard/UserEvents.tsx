@@ -5,10 +5,12 @@ import { useFilterValues } from '@/table/useFilterValues';
 
 import { UserEventsFilter, UserEventsFilterFormId } from './UserEventsFilter';
 
-export const UserEvents: FC<{ user?; hasActionBar? }> = ({
-  user,
-  hasActionBar = true,
-}) => {
+export const UserEvents: FC<{
+  user?;
+  hasActionBar?;
+  fullWidth?: boolean;
+  cardBordered?: boolean;
+}> = ({ user, hasActionBar = true, fullWidth, cardBordered }) => {
   const tableId = `user-events-${user.uuid}`;
   const values = useFilterValues(tableId);
   const includeRelated = Boolean(values?.include_related);
@@ -33,6 +35,8 @@ export const UserEvents: FC<{ user?; hasActionBar? }> = ({
       formId={UserEventsFilterFormId}
       filters={<UserEventsFilter />}
       hasActionBar={hasActionBar}
+      fullWidth={fullWidth}
+      cardBordered={cardBordered}
     />
   );
 };

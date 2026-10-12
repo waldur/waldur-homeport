@@ -33,29 +33,31 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
       {loading ? (
         <LoadingSpinner />
       ) : value ? (
-        <table className="table table-hover no-margins table-row-bordered mb-0">
-          <thead>
-            <tr>
-              <th>{translate('Check name')}</th>
-              <th>{translate('Status')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(value).map(([key, value]: any, index: number) => (
-              <tr key={index}>
-                <td>{key}</td>
-                <td>
-                  <StateIndicator
-                    label={value}
-                    variant={value === 'working' ? 'primary' : 'danger'}
-                    tone="outline"
-                    shape="pill"
-                  />
-                </td>
+        <div className="table-responsive">
+          <table className="table table-hover no-margins table-row-bordered mb-0">
+            <thead>
+              <tr>
+                <th>{translate('Check name')}</th>
+                <th>{translate('Status')}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {Object.entries(value).map(([key, value]: any, index: number) => (
+                <tr key={index}>
+                  <td>{key}</td>
+                  <td>
+                    <StateIndicator
+                      label={value}
+                      variant={value === 'working' ? 'primary' : 'danger'}
+                      tone="outline"
+                      shape="pill"
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : null}
     </ModalDialog>
   );

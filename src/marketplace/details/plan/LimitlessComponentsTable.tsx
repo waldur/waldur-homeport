@@ -17,42 +17,44 @@ export const LimitlessComponentsTable = ({
   const shouldConcealPrices =
     isFeatureVisible(MarketplaceFeatures.conceal_prices) || concealBillingInfo;
   return (
-    <table className="table align-middle table-row-bordered fs-6 gy-4 no-footer">
-      <thead>
-        <tr className="align-middle">
-          <th>{translate('Component name')}</th>
-          <th>{translate('Unit')}</th>
-          {!shouldConcealPrices && (
-            <th>
-              {translate('Price per unit')}
-              <PriceTooltip />
-            </th>
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {components.map((component, index) => (
-          <tr key={index}>
-            <td>
-              <p>{component.name}</p>
-            </td>
-            <td>
-              <p>{component.measured_unit}</p>
-            </td>
+    <div className="table-responsive mb-4">
+      <table className="table align-middle table-row-bordered fs-6 gy-4 no-footer">
+        <thead>
+          <tr className="align-middle">
+            <th>{translate('Component name')}</th>
+            <th>{translate('Unit')}</th>
             {!shouldConcealPrices && (
-              <td>
-                <p>
-                  {formatCurrency(
-                    component.price,
-                    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-                    4,
-                  )}
-                </p>
-              </td>
+              <th>
+                {translate('Price per unit')}
+                <PriceTooltip />
+              </th>
             )}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {components.map((component, index) => (
+            <tr key={index}>
+              <td>
+                <p>{component.name}</p>
+              </td>
+              <td>
+                <p>{component.measured_unit}</p>
+              </td>
+              {!shouldConcealPrices && (
+                <td>
+                  <p>
+                    {formatCurrency(
+                      component.price,
+                      ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                      4,
+                    )}
+                  </p>
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };

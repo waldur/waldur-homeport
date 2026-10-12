@@ -4,6 +4,7 @@ import { User } from 'waldur-js-client';
 import { HelpIcon, Tooltip } from 'waldur-ui';
 import { Badge } from 'waldur-ui';
 
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { FieldWithCopy } from '@/core/FieldWithCopy';
 import { formatPhoneNumber } from '@/core/utils';
@@ -11,6 +12,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { UserFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 import { formatUserIsActive, formatUserStatus } from '@/user/support/utils';
 import { useUser } from '@/workspace/hooks';
 import { checkIsStaffOrSupport } from '@/workspace/selectors';
@@ -78,18 +80,28 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
       <FormTable.Item
         label={translate('Registration method')}
         value={
-          <div className="d-inline-flex align-items-center gap-2">
-            <FieldWithCopy value={props.user.identity_provider_label} />
-            {props.user.should_protect_user_details && (
-              <Tooltip
-                label={translate(
-                  'Profile fields (organization, name, email) are managed by the identity provider and cannot be edited in Waldur.',
-                )}
-              >
-                <Badge variant="purple" tone="outline">
-                  {translate('Details protected')}
-                </Badge>
-              </Tooltip>
+          <div className="d-flex justify-content-between align-items-center gap-2">
+            <div className="d-flex align-items-center gap-2">
+              {renderFieldOrDash(props.user.identity_provider_label)}
+              {props.user.should_protect_user_details && (
+                <Tooltip
+                  label={translate(
+                    'Profile fields (organization, name, email) are managed by the identity provider and cannot be edited in Waldur.',
+                  )}
+                >
+                  <Badge variant="purple" tone="outline">
+                    {translate('Details protected')}
+                  </Badge>
+                </Tooltip>
+              )}
+            </div>
+            {props.user.identity_provider_label && (
+              <CopyToClipboardButton
+                value={props.user.identity_provider_label}
+                size={20}
+                className="mb-0 mt-0"
+                buttonClassName="text-gray-500"
+              />
             )}
           </div>
         }

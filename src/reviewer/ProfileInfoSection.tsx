@@ -110,7 +110,7 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
 
   return (
     <EditFieldProvider scope={profile} callback={updateProfileCallback}>
-      <FormTable bordered={false}>
+      <FormTable>
         <StringEditField
           name="orcid_id"
           label={translate('ORCID iD')}

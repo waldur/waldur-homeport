@@ -124,48 +124,50 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     <div className={props.formGroupClassName}>
       <div className={props.columnClassName}>
         {hasExtraRows && (
-          <Table className="table align-middle table-row-bordered fs-6 gy-4 no-footer">
-            <thead>
-              <HeaderRow
-                periods={!activeFixedPriceProfile ? props.periods : []}
-                concealBillingInfo={props.concealBillingInfo}
-              />
-            </thead>
-            <tbody>
-              {fixedRows.length > 0 && (
-                <FixedRows
-                  components={fixedRows}
+          <div className="table-responsive mb-4">
+            <Table className="table align-middle table-row-bordered fs-6 gy-4 no-footer">
+              <thead>
+                <HeaderRow
+                  periods={!activeFixedPriceProfile ? props.periods : []}
                   concealBillingInfo={props.concealBillingInfo}
                 />
-              )}
-              {!props.viewMode &&
-                otherLimitedRows.length > 0 &&
-                fixedRows.length > 0 && (
-                  <tr className="text-center">
-                    <td colSpan={3 + props.periods.length}>
-                      {translate(
-                        'Please enter desired values in the rows below:',
-                      )}
-                    </td>
-                  </tr>
+              </thead>
+              <tbody>
+                {fixedRows.length > 0 && (
+                  <FixedRows
+                    components={fixedRows}
+                    concealBillingInfo={props.concealBillingInfo}
+                  />
                 )}
-              {otherLimitedRows.length > 0 && (
-                <UsageRows
-                  components={otherLimitedRows}
-                  viewMode={props.viewMode}
-                  concealBillingInfo={props.concealBillingInfo}
-                />
-              )}
-              {!activeFixedPriceProfile && !props.concealBillingInfo ? (
-                <tr>
-                  <td colSpan={3}>{translate('Total')}</td>
-                  {props.totalPeriods.map((price, index) => (
-                    <td key={index}>{defaultCurrency(price)}</td>
-                  ))}
-                </tr>
-              ) : null}
-            </tbody>
-          </Table>
+                {!props.viewMode &&
+                  otherLimitedRows.length > 0 &&
+                  fixedRows.length > 0 && (
+                    <tr className="text-center">
+                      <td colSpan={3 + props.periods.length}>
+                        {translate(
+                          'Please enter desired values in the rows below:',
+                        )}
+                      </td>
+                    </tr>
+                  )}
+                {otherLimitedRows.length > 0 && (
+                  <UsageRows
+                    components={otherLimitedRows}
+                    viewMode={props.viewMode}
+                    concealBillingInfo={props.concealBillingInfo}
+                  />
+                )}
+                {!activeFixedPriceProfile && !props.concealBillingInfo ? (
+                  <tr>
+                    <td colSpan={3}>{translate('Total')}</td>
+                    {props.totalPeriods.map((price, index) => (
+                      <td key={index}>{defaultCurrency(price)}</td>
+                    ))}
+                  </tr>
+                ) : null}
+              </tbody>
+            </Table>
+          </div>
         )}
         {usageRows.length > 0 && (
           <>
