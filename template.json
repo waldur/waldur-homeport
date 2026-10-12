@@ -70018,7 +70018,8 @@
   },
   "Worker": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "common"
     }
   },
   "Worker - Application workloads": {
