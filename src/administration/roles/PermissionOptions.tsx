@@ -416,6 +416,10 @@ export const PermissionOptions = [
         value: 'PROJECT.REVIEW_MEMBERSHIP',
       },
       {
+        label: translate('Set slug'),
+        value: 'PROJECT.SET_SLUG',
+      },
+      {
         label: translate('Update metadata'),
         value: 'PROJECT.UPDATE_METADATA',
       },
@@ -515,6 +519,10 @@ export const PermissionOptions = [
       {
         label: translate('Set end date for resource'),
         value: 'RESOURCE.SET_END_DATE',
+      },
+      {
+        label: translate('Set slug for resource'),
+        value: 'RESOURCE.SET_SLUG',
       },
       {
         label: translate('Set state for resource'),
