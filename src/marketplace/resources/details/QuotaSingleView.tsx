@@ -31,7 +31,8 @@ export const QuotaSingleView = ({
   const percent = getUsagePercentOfLimitComponent(limit, usage);
 
   const details = [
-    { label: translate('Type'), value: billingType },
+    // Volumes carry no billing settings, only a size.
+    billingType && { label: translate('Type'), value: billingType },
     displayUnit && { label: translate('Unit'), value: displayUnit },
     limitFrequency && {
       label: translate('Limit period'),
