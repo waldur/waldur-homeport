@@ -16,18 +16,15 @@ import { useUser } from '@/workspace/hooks';
 interface TabLabelWithCountProps {
   label: string;
   count?: number;
-  variant?: 'primary' | 'warning' | 'danger' | 'success' | 'secondary';
 }
 
-const TabLabelWithCount = ({
-  label,
-  count,
-  variant = 'primary',
-}: TabLabelWithCountProps) => (
+// One neutral counter per tab, as the call state tabs do (see call-tabs.tsx):
+// a colour per tab reads as a status, which a count is not.
+const TabLabelWithCount = ({ label, count }: TabLabelWithCountProps) => (
   <span className="d-flex align-items-center gap-2">
     {label}
     {count !== undefined && count > 0 && (
-      <Badge variant={variant} size="sm" shape="pill" tone="light">
+      <Badge variant="secondary" size="sm" shape="pill" tone="outline">
         {count}
       </Badge>
     )}
@@ -101,7 +98,6 @@ export const useMyReviewsTabs = (): TableTab[] => {
           <TabLabelWithCount
             label={translate('Reviews')}
             count={reviewsCount}
-            variant="primary"
           />
         ),
         state: 'reviews-all-reviews',
@@ -112,7 +108,6 @@ export const useMyReviewsTabs = (): TableTab[] => {
           <TabLabelWithCount
             label={translate('Assignments')}
             count={assignmentsCount}
-            variant="warning"
           />
         ),
         state: 'reviews-assignments',
@@ -123,7 +118,6 @@ export const useMyReviewsTabs = (): TableTab[] => {
           <TabLabelWithCount
             label={translate('Invitations')}
             count={invitationsCount}
-            variant="primary"
           />
         ),
         state: 'reviews-invitations',
@@ -131,11 +125,7 @@ export const useMyReviewsTabs = (): TableTab[] => {
       {
         key: 'calls',
         title: (
-          <TabLabelWithCount
-            label={translate('Calls')}
-            count={callsCount}
-            variant="success"
-          />
+          <TabLabelWithCount label={translate('Calls')} count={callsCount} />
         ),
         state: 'reviews-calls',
       },
