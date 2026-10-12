@@ -35,89 +35,91 @@ export const TotalLimitComponentsTable: FunctionComponent<
   );
 
   return (
-    <Table className="table align-middle table-row-bordered fs-6 gy-4 no-footer">
-      <thead>
-        <tr className="align-middle">
-          <th className="col-sm-1">{translate('Component name')}</th>
-          <th className="col-sm-1">{translate('Unit')}</th>
-          <th className="col-md-2 col-sm-3">{translate('Quantity')}</th>
-          {!shouldConcealPrices && !props.hidePrices && (
-            <th>
-              {translate('Price per unit')}
-              <PriceTooltip />
-            </th>
-          )}
-          {!props.hidePrices && <th>{translate('Subtotal')}</th>}
-        </tr>
-      </thead>
-      <tbody>
-        {props.components.map((component, index) => {
-          const validate = useMemo(
-            () => getOfferingComponentValidator(component),
-            [component.min_value, component.max_value],
-          );
-          const validateValue = composeValidators(...validate);
+    <div className="table-responsive mb-4">
+      <Table className="table align-middle table-row-bordered fs-6 gy-4 no-footer">
+        <thead>
+          <tr className="align-middle">
+            <th className="col-sm-1">{translate('Component name')}</th>
+            <th className="col-sm-1">{translate('Unit')}</th>
+            <th className="col-md-2 col-sm-3">{translate('Quantity')}</th>
+            {!shouldConcealPrices && !props.hidePrices && (
+              <th>
+                {translate('Price per unit')}
+                <PriceTooltip />
+              </th>
+            )}
+            {!props.hidePrices && <th>{translate('Subtotal')}</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {props.components.map((component, index) => {
+            const validate = useMemo(
+              () => getOfferingComponentValidator(component),
+              [component.min_value, component.max_value],
+            );
+            const validateValue = composeValidators(...validate);
 
-          return (
-            <tr key={index}>
-              <td>{component.name}</td>
-              <td>{renderFieldOrDash(component.measured_unit)}</td>
-              <td>
-                {props.viewMode ? (
-                  component.amount
-                ) : (
-                  <Field
-                    name={`limits.${component.type}`}
-                    parse={getLimitParser(component)}
-                    format={formatIntField}
-                    validate={validateValue}
-                  >
-                    {({ input, meta }) => (
-                      <InputField
-                        input={input}
-                        meta={meta}
-                        type="number"
-                        step={getLimitStep(component)}
-                        className="px-2"
-                      />
+            return (
+              <tr key={index}>
+                <td>{component.name}</td>
+                <td>{renderFieldOrDash(component.measured_unit)}</td>
+                <td>
+                  {props.viewMode ? (
+                    component.amount
+                  ) : (
+                    <Field
+                      name={`limits.${component.type}`}
+                      parse={getLimitParser(component)}
+                      format={formatIntField}
+                      validate={validateValue}
+                    >
+                      {({ input, meta }) => (
+                        <InputField
+                          input={input}
+                          meta={meta}
+                          type="number"
+                          step={getLimitStep(component)}
+                          className="px-2"
+                        />
+                      )}
+                    </Field>
+                  )}
+                </td>
+                {!shouldConcealPrices && !props.hidePrices && (
+                  <td>
+                    {formatCurrency(
+                      component.price,
+                      ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                      4,
                     )}
-                  </Field>
+                  </td>
+                )}
+                {!props.hidePrices && (
+                  <td>
+                    {formatCurrency(
+                      component.subTotal,
+                      ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                      4,
+                    )}
+                  </td>
+                )}
+              </tr>
+            );
+          })}
+          {!props.hidePrices && (
+            <tr>
+              <td colSpan={3}>{translate('Total')}</td>
+              <td>
+                {formatCurrency(
+                  props.total,
+                  ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                  4,
                 )}
               </td>
-              {!shouldConcealPrices && !props.hidePrices && (
-                <td>
-                  {formatCurrency(
-                    component.price,
-                    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-                    4,
-                  )}
-                </td>
-              )}
-              {!props.hidePrices && (
-                <td>
-                  {formatCurrency(
-                    component.subTotal,
-                    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-                    4,
-                  )}
-                </td>
-              )}
             </tr>
-          );
-        })}
-        {!props.hidePrices && (
-          <tr>
-            <td colSpan={3}>{translate('Total')}</td>
-            <td>
-              {formatCurrency(
-                props.total,
-                ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-                4,
-              )}
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </Table>
+          )}
+        </tbody>
+      </Table>
+    </div>
   );
 };

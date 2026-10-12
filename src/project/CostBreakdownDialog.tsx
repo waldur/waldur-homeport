@@ -18,30 +18,32 @@ export const CostBreakdownDialog = ({
         <ScopeSubtitle label={translate('Project name')} name={project.name} />
       }
     >
-      <table className="table table-hover mb-0">
-        <thead>
-          <tr>
-            <th>{translate('Name')}</th>
-            <th className="text-end">{translate('Unit price')}</th>
-            <th className="text-end">{translate('Quantity')}</th>
-            <th className="text-end">{translate('Total')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item, index) => (
-            <tr key={index}>
-              <td>{item.name}</td>
-              <td className="text-end">
-                {defaultCurrency(Number(item.unit_price))}
-                {item.unit !== 'quantity' &&
-                  getPlanUnitAbbr(item.unit as BillingUnit)}
-              </td>
-              <td className="text-end">{Number(item.quantity)}</td>
-              <td className="text-end">{defaultCurrency(item.price)}</td>
+      <div className="table-responsive">
+        <table className="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>{translate('Name')}</th>
+              <th className="text-end">{translate('Unit price')}</th>
+              <th className="text-end">{translate('Quantity')}</th>
+              <th className="text-end">{translate('Total')}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item, index) => (
+              <tr key={index}>
+                <td>{item.name}</td>
+                <td className="text-end">
+                  {defaultCurrency(Number(item.unit_price))}
+                  {item.unit !== 'quantity' &&
+                    getPlanUnitAbbr(item.unit as BillingUnit)}
+                </td>
+                <td className="text-end">{Number(item.quantity)}</td>
+                <td className="text-end">{defaultCurrency(item.price)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </ModalDialog>
   );
 };

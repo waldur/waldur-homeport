@@ -80,7 +80,7 @@ export const PeriodicTab = ({
 
   return (
     <section className="plan-details-section">
-      <FormTable bordered={false}>
+      <FormTable>
         {!limitPeriod ||
           (limitPeriod === 'month' && (
             <>

@@ -171,28 +171,30 @@ export const AnnouncementDetailsDialog: FC<{
     return (
       <div className="mt-4">
         <h6>{translate('Affected Offerings')}:</h6>
-        <Table size="sm" className="mt-2">
-          <thead>
-            <tr>
-              <th>{translate('Offering Name')}</th>
-              <th>{translate('Impact Level')}</th>
-              <th>{translate('Description')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {view.affectedOfferings.map((offering, index) => (
-              <tr key={offering.uuid || index}>
-                <td>{renderFieldOrDash(offering.name)}</td>
-                <td>
-                  {renderFieldOrDash(
-                    offering.impactLevelDisplay || offering.impactLevel,
-                  )}
-                </td>
-                <td>{renderFieldOrDash(offering.impactDescription)}</td>
+        <div className="table-responsive mt-2">
+          <Table size="sm">
+            <thead>
+              <tr>
+                <th>{translate('Offering Name')}</th>
+                <th>{translate('Impact Level')}</th>
+                <th>{translate('Description')}</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {view.affectedOfferings.map((offering, index) => (
+                <tr key={offering.uuid || index}>
+                  <td>{renderFieldOrDash(offering.name)}</td>
+                  <td>
+                    {renderFieldOrDash(
+                      offering.impactLevelDisplay || offering.impactLevel,
+                    )}
+                  </td>
+                  <td>{renderFieldOrDash(offering.impactDescription)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </div>
     );
   };

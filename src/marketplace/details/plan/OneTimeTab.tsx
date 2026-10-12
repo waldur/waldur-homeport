@@ -41,7 +41,7 @@ export const OneTimeTab = ({
 
   return (
     <section className="plan-details-section">
-      <FormTable bordered={false}>
+      <FormTable>
         {/* One */}
         {oneTime.initialRows.length > 0 && (
           <FixedRows
