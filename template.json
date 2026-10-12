@@ -14294,11 +14294,6 @@
       "feature_area": "actions"
     }
   },
-  "Current usage": {
-    "context": {
-      "feature_area": "details"
-    }
-  },
   "Current usage: {usage}": {
     "context": {
       "variables": {
@@ -27830,11 +27825,6 @@
         }
       },
       "feature_area": "reallocate-limits"
-    }
-  },
-  "Limit frequency": {
-    "context": {
-      "feature_area": "details"
     }
   },
   "Limit horizon": {
