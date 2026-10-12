@@ -34,7 +34,7 @@ const ALLOWED_FILES = [
   // Storybook demo of the tableCell select variant embedded in a row -- a
   // two-cell illustration, not a data table, and packages/ui can't depend on
   // @/table/Table (app-coupled, see the note above) regardless.
-  'packages/ui/src/select/Select.stories.tsx',
+  'packages/ui/src/Select/Select.stories.tsx',
 ];
 
 export default {

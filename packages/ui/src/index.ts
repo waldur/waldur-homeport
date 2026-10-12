@@ -25,7 +25,7 @@ export * from './Progress';
 export * from './ScrollArea';
 export * from './ScrollSpy';
 export * from './SegmentedControl';
-export * from './select';
+export * from './Select';
 export * from './Sheet';
 export * from './Sidebar';
 export * from './StatCard';
