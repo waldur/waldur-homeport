@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { StatusPill } from '../StatusPill';
+import { Badge } from '../Badge';
 
 import {
   Table,
@@ -47,7 +47,9 @@ export const Default: Story = {
               <TableCell>OpenStack Cloud</TableCell>
               <TableCell className="font-mono text-xs">192.168.10.12</TableCell>
               <TableCell>
-                <StatusPill label="Active" tone="success" />
+                <Badge variant="success" shape="pill" tone="light" hasBullet>
+                  Active
+                </Badge>
               </TableCell>
               <TableCell className="text-right font-medium">
                 85.00 EUR
@@ -58,7 +60,9 @@ export const Default: Story = {
               <TableCell>PostgreSQL Cluster</TableCell>
               <TableCell className="font-mono text-xs">192.168.10.45</TableCell>
               <TableCell>
-                <StatusPill label="Running" tone="neutral" />
+                <Badge variant="neutral" shape="pill" tone="light" hasBullet>
+                  Running
+                </Badge>
               </TableCell>
               <TableCell className="text-right font-medium">
                 120.00 EUR
@@ -71,7 +75,9 @@ export const Default: Story = {
               <TableCell>Kubernetes Pod</TableCell>
               <TableCell className="font-mono text-xs">192.168.10.88</TableCell>
               <TableCell>
-                <StatusPill label="Risk" tone="warning" />
+                <Badge variant="warning" shape="pill" tone="light" hasBullet>
+                  Risk
+                </Badge>
               </TableCell>
               <TableCell className="text-right font-medium">
                 25.00 EUR

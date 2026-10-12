@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { StatusPill, StatusTone } from '../StatusPill';
+import { Badge, type BadgeVariant } from '../Badge';
 
 import { DataTable, DataTableColumn } from './DataTable';
 
 interface ProjectRow {
   name: string;
   status: string;
-  statusTone: StatusTone;
+  statusTone: BadgeVariant;
   members: number;
   monthlySpend: string;
 }
@@ -48,7 +48,11 @@ const columns: DataTableColumn<ProjectRow>[] = [
   {
     key: 'status',
     header: 'Status',
-    render: (row) => <StatusPill label={row.status} tone={row.statusTone} />,
+    render: (row) => (
+      <Badge variant={row.statusTone} shape="pill" tone="light" hasBullet>
+        {row.status}
+      </Badge>
+    ),
   },
   { key: 'members', header: 'Members', render: (row) => row.members },
   {
