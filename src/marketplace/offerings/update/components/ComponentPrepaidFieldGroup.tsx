@@ -47,7 +47,7 @@ export const ComponentPrepaidFieldGroup: FC<{
       />
       {isPrepaid ? (
         <>
-          <Row className="g-5 mb-5">
+          <Row className="g-5 mb-5 align-items-end">
             <Col xs>
               <NumberGroup
                 name="min_prepaid_duration"
@@ -69,21 +69,8 @@ export const ComponentPrepaidFieldGroup: FC<{
                 spaceless
               />
             </Col>
-            <Col xs={4}>
-              <SelectGroup
-                name="overage_component"
-                options={props.offering.components.filter(
-                  (component) => component.billing_type == 'usage',
-                )}
-                getOptionValue={(option: OfferingComponent) => option.uuid}
-                getOptionLabel={(option: OfferingComponent) => option.name}
-                simpleValue
-                label={translate('Overage component')}
-                spaceless
-              />
-            </Col>
           </Row>
-          <Row className="g-5">
+          <Row className="g-5 mb-5 align-items-end">
             <Col xs>
               <NumberGroup
                 name="min_renewal_duration"
@@ -106,6 +93,17 @@ export const ComponentPrepaidFieldGroup: FC<{
               />
             </Col>
           </Row>
+          <SelectGroup
+            name="overage_component"
+            options={props.offering.components.filter(
+              (component) => component.billing_type == 'usage',
+            )}
+            getOptionValue={(option: OfferingComponent) => option.uuid}
+            getOptionLabel={(option: OfferingComponent) => option.name}
+            simpleValue
+            label={translate('Overage component')}
+            spaceless
+          />
         </>
       ) : null}
     </ComponentAccountingTypeWrapper>
