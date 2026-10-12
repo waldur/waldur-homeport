@@ -14718,6 +14718,11 @@
       "feature_area": "rabbitmq"
     }
   },
+  "DNS hostnames pushed as SCIM entitlements when SCIM entitlements are enabled. Stored lowercased. Do not use ssh:// URLs, user@host, or host:port. These hosts are not shown in the resource access dropdown.": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "DNS name servers": {
     "context": {
       "feature_area": "actions"
@@ -19454,6 +19459,11 @@
   "Enter fullscreen": {
     "context": {
       "feature_area": "call"
+    }
+  },
+  "Enter hostnames separated by commas, e.g. login.example.org": {
+    "context": {
+      "feature_area": "integration"
     }
   },
   "Enter it when your Matrix client asks for a recovery key or security key. Anyone who has it can read your encrypted messages, so do not share it.": {
@@ -25484,7 +25494,7 @@
     }
   },
   "Include the prefix length, for example 192.168.42.0/24 or 2001:db8::/64.": {},
-  "Include this offering in outbound SCIM entitlement sync for SSH login-node access. An SSH access endpoint alone is not enough; this option must be enabled. Also requires SCIM_MEMBERSHIP_SYNC_ENABLED on the deployment.": {
+  "Include this offering in outbound SCIM entitlement sync for SSH login-node access. Login hosts are configured in SCIM login nodes below, not as SSH access endpoints. Also requires SCIM_MEMBERSHIP_SYNC_ENABLED on the deployment.": {
     "context": {
       "feature_area": "integration"
     }
@@ -49217,6 +49227,11 @@
     }
   },
   "SCIM attribute holding the value matched against SCIM_USER_MATCH_WALDUR_ATTRIBUTE, e.g. userName, emails, or an extension path such as urn:mace:surf.nl:sram:scim:extension:User.eduPersonUniqueId.": {},
+  "SCIM login nodes": {
+    "context": {
+      "feature_area": "integration"
+    }
+  },
   "SCIM user synchronization has been scheduled.": {
     "context": {
       "primary_ui_type": "success_message",
@@ -50848,7 +50863,7 @@
   },
   "Select or type to add a new option...": {
     "context": {
-      "feature_area": "select"
+      "feature_area": "Select"
     }
   },
   "Select or type to add tags...": {
