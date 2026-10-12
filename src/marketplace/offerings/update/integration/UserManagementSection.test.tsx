@@ -132,6 +132,28 @@ describe('DefaultUserManagementSection account settings', () => {
     ).toBeInTheDocument();
   });
 
+  it('shows SCIM login nodes when SCIM entitlements are enabled', () => {
+    renderSection('offering-users', {
+      ...inheritedOffering,
+      plugin_options: {
+        ...inheritedOffering.plugin_options,
+        enable_scim_entitlements: true,
+        scim_login_nodes: ['login.example.org', 'login2.example.org'],
+      },
+    });
+
+    expect(screen.getByText('SCIM login nodes')).toBeInTheDocument();
+    expect(
+      screen.getByText('login.example.org, login2.example.org'),
+    ).toBeInTheDocument();
+  });
+
+  it('hides SCIM login nodes when SCIM entitlements are disabled', () => {
+    renderSection('offering-users');
+
+    expect(screen.queryByText('SCIM login nodes')).not.toBeInTheDocument();
+  });
+
   it('blocks combining robot-account mode with automatic offering users', () => {
     const { unmount } = renderSection('offering-users', {
       ...inheritedOffering,
