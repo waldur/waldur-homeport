@@ -8,6 +8,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import {
   BooleanEditField,
+  CommaSeparatedListEditField,
   EditFieldProvider,
   SelectEditField,
   StringEditField,
@@ -108,6 +109,8 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
   );
   // enable_posix_account defaults to true; only an explicit false disables it.
   const posixEnabled = pluginOptions?.enable_posix_account !== false;
+  const scimEntitlementsEnabled =
+    pluginOptions?.enable_scim_entitlements === true;
 
   const uidSource = pluginOptions?.uid_source;
   const gidSource = pluginOptions?.gid_source;
@@ -212,9 +215,21 @@ export const DefaultUserManagementSection: FC<OfferingEditPanelProps> = (
             name="plugin_options.enable_scim_entitlements"
             label={translate('Enable SCIM entitlements')}
             description={translate(
-              'Include this offering in outbound SCIM entitlement sync for SSH login-node access. An SSH access endpoint alone is not enough; this option must be enabled. Also requires SCIM_MEMBERSHIP_SYNC_ENABLED on the deployment.',
+              'Include this offering in outbound SCIM entitlement sync for SSH login-node access. Login hosts are configured in SCIM login nodes below, not as SSH access endpoints. Also requires SCIM_MEMBERSHIP_SYNC_ENABLED on the deployment.',
             )}
           />
+          {scimEntitlementsEnabled && (
+            <CommaSeparatedListEditField
+              name="plugin_options.scim_login_nodes"
+              label={translate('SCIM login nodes')}
+              placeholder={translate(
+                'Enter hostnames separated by commas, e.g. login.example.org',
+              )}
+              description={translate(
+                'DNS hostnames pushed as SCIM entitlements when SCIM entitlements are enabled. Stored lowercased. Do not use ssh:// URLs, user@host, or host:port. These hosts are not shown in the resource access dropdown.',
+              )}
+            />
+          )}
           {props.offering.type === SITE_AGENT_PLUGIN && (
             <SelectEditField
               name="plugin_options.account_name_generation_policy"
