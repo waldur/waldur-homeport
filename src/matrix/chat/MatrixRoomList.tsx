@@ -95,6 +95,15 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
     [summaries],
   );
 
+  const filterOptions: SegmentedControlOption<RoomFilter>[] = useMemo(
+    () => [
+      { value: 'all', label: translate('All') },
+      { value: 'unread', label: translate('Unread') },
+      { value: 'mentions', label: translate('Mentions') },
+    ],
+    [],
+  );
+
   if (collapsed) {
     return (
       <div className="team-chat tc-sidebar tc-sidebar--collapsed">
@@ -146,15 +155,6 @@ export const MatrixRoomList: FC<MatrixRoomListProps> = ({
   const hasRooms = activeRooms.length > 0;
   const isEmpty = visibleRooms.length === 0;
   const isFiltered = filter !== 'all' || search.trim().length > 0;
-
-  const filterOptions: SegmentedControlOption<RoomFilter>[] = useMemo(
-    () => [
-      { value: 'all', label: translate('All') },
-      { value: 'unread', label: translate('Unread') },
-      { value: 'mentions', label: translate('Mentions') },
-    ],
-    [],
-  );
 
   return (
     <div className="team-chat tc-sidebar">
