@@ -146,12 +146,10 @@
   /* The page tabs (src/navigation/TabsList.tsx), ported from Metronic's
      menu-gray-500 + menu-state-bg-light-primary: $gray-500 tabs, and a
      hovered or current tab in $text-brand-primary on $bg-brand-primary_alt.
-     The caret is $fg-quaternary, and $fg-brand-primary when its tab is
-     current, hovered or open. Footer links are menu-brand: $brand. */
+     The caret takes its tab label colour. Footer links are menu-brand: $brand. */
   --page-tab-text: var(--color-gray-500);
   --page-tab-active-text: var(--waldur-brand-900);
   --page-tab-active-bg: var(--waldur-brand-50);
-  --page-tab-caret-active: var(--waldur-brand-600);
   --footer-link-text: var(--waldur-brand-600);
 
   /* Same real-source reasoning as the shadow tokens above, from
@@ -262,7 +260,6 @@
   --page-tab-text: var(--color-gray-dark-400);
   --page-tab-active-text: var(--color-gray-dark-50);
   --page-tab-active-bg: var(--color-gray-dark-800);
-  --page-tab-caret-active: var(--waldur-brand-500);
   --footer-link-text: var(--waldur-brand-300);
 
   --card-shadow: none;
