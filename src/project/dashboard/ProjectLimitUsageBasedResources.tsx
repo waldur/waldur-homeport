@@ -30,13 +30,16 @@ import { useFilterValues } from '@/table/useFilterValues';
 import { useTable } from '@/table/useTable';
 import { useProject } from '@/workspace/hooks';
 
+import { getOfferingComponentsKey } from './offeringComponentsKey';
 import { ResourceQuotaField } from './ResourceQuotaField';
 import { ResourceRateField } from './ResourceRateField';
 import { withResourceComponentsLoader } from './withResourceComponentsLoader';
 
 const QuotaField = withResourceComponentsLoader(ResourceQuotaField);
+// The component can be missing (offerings still loading or not visible), so
+// read its type defensively instead of crashing the whole dashboard.
 const RenewalField = withResourceComponentsLoader(({ row, component }) =>
-  row.renewal_date?.[component.type]
+  component && row.renewal_date?.[component.type]
     ? formatDate(row.renewal_date[component.type])
     : 'N/A',
 );
@@ -85,9 +88,9 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
     mandatoryFields,
   });
 
-  // Generate a key to fetch components of offerings
+  // Cache key for the components of the offerings on this page
   const componentsKey = useMemo(
-    () => uniq(tableProps.rows.map((row) => row.offering_uuid.slice(0, 5))),
+    () => getOfferingComponentsKey(tableProps.rows),
     [tableProps],
   );
 
