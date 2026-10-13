@@ -39,6 +39,12 @@
   }
 }
 
+// A filter toggle follows: overhanging into it would cover part of its
+// 24×24 px target (WCAG 2.2 SC 2.5.8).
+.sorting-column.filter-column .th-main .sort-toggle {
+  margin-right: 0;
+}
+
 // Header cell layout: pin toggle sits right after the title/sorting/filter,
 // not at the far edge of the cell where it reads as the next column's icon.
 .th-content {
@@ -85,7 +91,7 @@
 }
 
 .th-content .pin-toggle {
-  margin: -4px;
+  margin: -4px -4px -4px 0;
 }
 
 .cell-with-expander-header .all-rows-expander {
