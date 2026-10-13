@@ -5,6 +5,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
 import {
+  Badge,
   ButtonVariant,
   Menu,
   Tabs,
@@ -23,6 +24,7 @@ import { hasSupport } from '@/issues/hooks';
 import { useModal } from '@/modal/actions';
 import { useUrlTab } from '@/navigation/useUrlTab';
 import { SettingsDescription } from '@/SettingsDescription';
+import { useUser } from '@/workspace/hooks';
 
 import { FieldRow } from '../settings/FieldRow';
 import { SupportUsersList } from '../support-users/SupportUsersList';
@@ -79,6 +81,7 @@ const AtlassianSummary = ({ settings }) => {
 };
 
 const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
+  const canEdit = Boolean(useUser()?.is_staff);
   const { openDialog } = useModal();
   const isAtlassian = serviceDeskProvider === 'atlassian';
   const isConfigured = isProviderConfigured(serviceDeskProvider, initialValues);
@@ -145,26 +148,41 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                 </p>
               )}
               <div className="mt-auto">
-                <Menu>
-                  <Menu.TriggerButton variant={state.variant} size="lg">
+                {canEdit ? (
+                  <Menu>
+                    <Menu.TriggerButton variant={state.variant} size="lg">
+                      {state.title}
+                    </Menu.TriggerButton>
+                    <Menu.Content look="actions" side="bottom">
+                      {isAtlassian && !isConfigured && (
+                        <Menu.Item onSelect={openDiscovery}>
+                          {translate('Discovery wizard')}
+                        </Menu.Item>
+                      )}
+                      <Menu.Item onSelect={openConfigure}>
+                        {translate('Edit')}
+                      </Menu.Item>
+                      {isAtlassian && isConfigured && (
+                        <Menu.Item onSelect={openDiscovery}>
+                          {translate('Re-discover')}
+                        </Menu.Item>
+                      )}
+                    </Menu.Content>
+                  </Menu>
+                ) : (
+                  <Badge
+                    variant={
+                      state.variant === 'primary'
+                        ? 'primary'
+                        : state.variant === 'warning'
+                          ? 'warning'
+                          : 'neutral'
+                    }
+                    tone="light"
+                  >
                     {state.title}
-                  </Menu.TriggerButton>
-                  <Menu.Content look="actions" side="bottom">
-                    {isAtlassian && !isConfigured && (
-                      <Menu.Item onSelect={openDiscovery}>
-                        {translate('Discovery wizard')}
-                      </Menu.Item>
-                    )}
-                    <Menu.Item onSelect={openConfigure}>
-                      {translate('Edit')}
-                    </Menu.Item>
-                    {isAtlassian && isConfigured && (
-                      <Menu.Item onSelect={openDiscovery}>
-                        {translate('Re-discover')}
-                      </Menu.Item>
-                    )}
-                  </Menu.Content>
-                </Menu>
+                  </Badge>
+                )}
               </div>
             </div>
           </div>

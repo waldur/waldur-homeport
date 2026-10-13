@@ -6,6 +6,7 @@ import { CompactEditButton } from '@/form/CompactEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { SecretField } from '@/marketplace/common/SecretField';
+import { useUser } from '@/workspace/hooks';
 
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { CountryListField } from './CountryListField';
@@ -116,6 +117,21 @@ export const FieldRow = ({
   isLoading,
   editDisabledReason,
 }: FieldRowProps) => {
+  const canEdit = Boolean(useUser()?.is_staff);
+  const actions = !canEdit ? undefined : item.type === 'country_list_field' ? (
+    <CountryListEditButton onEdit={onEdit} />
+  ) : item.type === 'multilingual_image_field' ? (
+    <MultilingualImageEditButton item={item} value={value} />
+  ) : item.type === 'json_list_field' ? (
+    <CompactEditButton onClick={onEdit} />
+  ) : (
+    <ConfigurationEditButton
+      item={item}
+      value={value}
+      disabledReason={editDisabledReason}
+    />
+  );
+
   return (
     <FormTable.Item
       key={item.key}
@@ -180,21 +196,7 @@ export const FieldRow = ({
           value
         )
       }
-      actions={
-        item.type === 'country_list_field' ? (
-          <CountryListEditButton onEdit={onEdit} />
-        ) : item.type === 'multilingual_image_field' ? (
-          <MultilingualImageEditButton item={item} value={value} />
-        ) : item.type === 'json_list_field' ? (
-          <CompactEditButton onClick={onEdit} />
-        ) : (
-          <ConfigurationEditButton
-            item={item}
-            value={value}
-            disabledReason={editDisabledReason}
-          />
-        )
-      }
+      actions={actions}
     />
   );
 };

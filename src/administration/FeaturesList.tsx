@@ -37,41 +37,55 @@ import { useUrlTab } from '@/navigation/useUrlTab';
 import { useNotify } from '@/store/notify';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 import { TableQuery } from '@/table/TableQuery';
+import { useUser } from '@/workspace/hooks';
 
 // Plugin sections that will be grouped into a single "Plugins" tab
 const PLUGIN_SECTION_KEYS = ['openstack', 'rancher'];
 
-const FeatureSectionContent = ({ section }: { section: FeatureSection }) => (
-  <FormTable>
-    {section.items.map((item) => (
-      <FormTable.Item
-        key={item.key}
-        description={
-          <>
-            {item.description}
-            {`${section.key}.${item.key}` ===
-            DeploymentFeatures.send_metrics ? (
-              <div>
-                <TelemetryExampleButton />
-              </div>
-            ) : null}
-          </>
-        }
-        actions={
-          <Field name={`${section.key}.${item.key}`} type="checkbox">
-            {({ input }) => (
-              <SwitchField
-                input={input}
-                aria-label={item.description}
-                data-testid={`${section.key}.${item.key}`}
-              />
-            )}
-          </Field>
-        }
-      />
-    ))}
-  </FormTable>
-);
+const FeatureSectionContent = ({ section }: { section: FeatureSection }) => {
+  const canEdit = Boolean(useUser()?.is_staff);
+  return (
+    <FormTable>
+      {section.items.map((item) => (
+        <FormTable.Item
+          key={item.key}
+          description={
+            <>
+              {item.description}
+              {`${section.key}.${item.key}` ===
+              DeploymentFeatures.send_metrics ? (
+                <div>
+                  <TelemetryExampleButton />
+                </div>
+              ) : null}
+            </>
+          }
+          actions={
+            canEdit ? (
+              <Field name={`${section.key}.${item.key}`} type="checkbox">
+                {({ input }) => (
+                  <SwitchField
+                    input={input}
+                    aria-label={item.description}
+                    data-testid={`${section.key}.${item.key}`}
+                  />
+                )}
+              </Field>
+            ) : (
+              <Field name={`${section.key}.${item.key}`}>
+                {({ input }) => (
+                  <span>
+                    {input.value ? translate('Yes') : translate('No')}
+                  </span>
+                )}
+              </Field>
+            )
+          }
+        />
+      ))}
+    </FormTable>
+  );
+};
 
 const FeatureSectionPanel = ({
   section,
@@ -113,6 +127,7 @@ const FEATURES_TABS = [
 
 export const FeaturesList = () => {
   const { showErrorResponse, showSuccess } = useNotify();
+  const canEdit = Boolean(useUser()?.is_staff);
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
   const { activeKey, handleSelect } = useUrlTab(FEATURES_TABS, 'tab');
@@ -245,12 +260,14 @@ export const FeaturesList = () => {
               </div>
               <div className="card-toolbar d-flex align-items-center gap-4 flex-nowrap">
                 <TableQuery query={query} setQuery={setQuery} />
-                <SaveButton
-                  type="submit"
-                  onClick={handleSubmit}
-                  submitting={submitting}
-                  dirty={dirty}
-                />
+                {canEdit && (
+                  <SaveButton
+                    type="submit"
+                    onClick={handleSubmit}
+                    submitting={submitting}
+                    dirty={dirty}
+                  />
+                )}
               </div>
             </Card.Header>
             <Card.Body style={{ paddingTop: 8 }}>

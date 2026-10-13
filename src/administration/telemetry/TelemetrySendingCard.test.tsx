@@ -5,16 +5,31 @@ import { featureValues } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { TelemetrySendingCard } from './TelemetrySendingCard';
 
 describe('TelemetrySendingCard', () => {
   beforeEach(() => {
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
     ENV.FEATURES = {
       deployment: { send_metrics: true, enable_disclaimer_area: true },
     } as any;
     vi.clearAllMocks();
     vi.mocked(featureValues).mockReset();
+  });
+
+  it('shows the current value without a switch for support', () => {
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      is_support: true,
+    } as any);
+    render(<TelemetrySendingCard />);
+
+    expect(
+      screen.queryByTestId('deployment.send_metrics'),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Yes')).toBeInTheDocument();
   });
 
   it('reflects the current feature value', () => {
