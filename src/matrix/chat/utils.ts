@@ -7,6 +7,11 @@ import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
 import { parseEncryptedFile } from './attachmentCrypto';
 import {
+  CALL_STARTED_MESSAGE_TYPE,
+  CallTransition,
+  isCallTransitionType,
+} from './call/callTimeline';
+import {
   getReplacedEventId,
   getReplyToEventId,
   getDisplayedContent,
@@ -23,6 +28,39 @@ const INTERNAL_MESSAGE_TYPES = new Set([
   UNDECRYPTABLE_MESSAGE_TYPE,
   REDACTED_MESSAGE_TYPE,
 ]);
+
+const isInternalMessageType = (type: string) =>
+  INTERNAL_MESSAGE_TYPES.has(type) || isCallTransitionType(type);
+
+const memberDisplayName = (userId: string, room?: Room) =>
+  room?.getMember(userId)?.name || formatDisplayName(userId);
+
+/**
+ * The row marking where the room's call started or ended, at the call member
+ * event that did it (see `findCallTransitions`).
+ */
+export function mapCallTransitionToMessage(
+  event: MatrixEvent,
+  { type, participants }: CallTransition,
+  room?: Room,
+): MatrixChatMessage {
+  const senderId = event.getSender();
+  return {
+    eventId: event.getId(),
+    sender: senderId,
+    senderDisplayName: memberDisplayName(senderId, room),
+    body: '',
+    timestamp: event.getTs(),
+    type,
+    callParticipants:
+      type === CALL_STARTED_MESSAGE_TYPE
+        ? participants.map((userId) => ({
+            userId,
+            displayName: memberDisplayName(userId, room),
+          }))
+        : undefined,
+  };
+}
 
 /**
  * Map a timeline event to a message row, or null when it has none.
@@ -133,7 +171,7 @@ export function mapEventToMessage(
     // plain text message, not the notice style.
     type:
       typeof content.msgtype === 'string' &&
-      !INTERNAL_MESSAGE_TYPES.has(content.msgtype)
+      !isInternalMessageType(content.msgtype)
         ? content.msgtype
         : 'm.text',
     url: typeof content.url === 'string' ? content.url : undefined,

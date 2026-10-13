@@ -1,17 +1,24 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import {
+  CALL_ENDED_MESSAGE_TYPE,
+  CALL_STARTED_MESSAGE_TYPE,
+} from './call/callTimeline';
 import { useMatrixRoom } from './useMatrixRoom';
 
 const ROOM_ID = '!room:server';
 const ME = '@me:server';
 
-const { client, room, timeline } = vi.hoisted(() => {
+const { client, room, timeline, currentState } = vi.hoisted(() => {
   const listeners = new Map<string, Set<(...args: any[]) => void>>();
   const timeline: any[] = [];
+  // The room's call member state, as after the last timeline event.
+  const currentState: any[] = [];
   const room = {
     roomId: '!room:server',
     getLiveTimeline: () => ({ getEvents: () => timeline }),
+    currentState: { getStateEvents: () => currentState },
     findEventById: (id: string) => timeline.find((e) => e.getId() === id),
     getMember: () => null,
   };
@@ -30,7 +37,7 @@ const { client, room, timeline } = vi.hoisted(() => {
       listeners.get(name)?.forEach((fn) => fn(...args));
     },
   };
-  return { client, room, timeline };
+  return { client, room, timeline, currentState };
 });
 
 vi.mock('./useMatrixClient', () => ({
@@ -46,13 +53,13 @@ vi.mock('./useRoomMemberNames', () => ({
   useRoomMemberNames: () => new Map(),
 }));
 
-function messageEvent(eventId: string) {
+function messageEvent(eventId: string, ts = 0) {
   return {
     getType: () => 'm.room.message',
     getId: () => eventId,
     getTxnId: () => undefined,
     getSender: () => '@other:server',
-    getTs: () => 0,
+    getTs: () => ts,
     getContent: () => ({ msgtype: 'm.text', body: 'hey' }),
     isRedacted: () => false,
   };
@@ -384,5 +391,209 @@ describe('useMatrixRoom edits and deletions', () => {
       expect.objectContaining({ eventId: 'msg-1', redacted: true, body: '' }),
     );
     expect(result.current.messages[0].reactions).toBeUndefined();
+  });
+});
+
+function callMemberEvent(
+  eventId: string,
+  content: any,
+  ts: number,
+  sender = '@other:server',
+  prevContent: any = {},
+) {
+  return {
+    getType: () => 'org.matrix.msc3401.call.member',
+    getId: () => eventId,
+    getStateKey: () => `_${sender}_DEV_m.call`,
+    getSender: () => sender,
+    getTs: () => ts,
+    getContent: () => content,
+    getPrevContent: () => prevContent,
+    getUnsigned: () => ({}),
+    isRedacted: () => false,
+  };
+}
+
+// A first publish: matrix-js-sdk leaves `created_ts` out until a refresh.
+const callJoin = (eventId: string, ts: number, sender?: string) =>
+  callMemberEvent(
+    eventId,
+    {
+      application: 'm.call',
+      call_id: '',
+      device_id: 'DEV',
+      expires: 60 * 60 * 1000,
+    },
+    ts,
+    sender,
+  );
+
+// A call member event arriving live: it joins the timeline and replaces its
+// state key's entry in the room's state.
+function receiveLive(event: ReturnType<typeof callMemberEvent>) {
+  act(() => {
+    timeline.push(event);
+    const idx = currentState.findIndex(
+      (e) => e.getStateKey() === event.getStateKey(),
+    );
+    if (idx === -1) currentState.push(event);
+    else currentState[idx] = event;
+    client.emit('Room.timeline', event, room, false);
+  });
+}
+
+describe('useMatrixRoom call rows', () => {
+  const T0 = 1_700_000_000_000;
+  const MINUTE = 60_000;
+
+  beforeEach(() => {
+    timeline.length = 0;
+    currentState.length = 0;
+  });
+
+  it('marks where a loaded call started and ended', async () => {
+    timeline.push(
+      messageEvent('msg-1'),
+      callJoin('join-1', T0),
+      callMemberEvent('leave-1', {}, T0 + 1000),
+    );
+    const { result } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(3));
+
+    expect(result.current.messages.map((m) => [m.eventId, m.type])).toEqual([
+      ['msg-1', 'm.text'],
+      ['join-1', CALL_STARTED_MESSAGE_TYPE],
+      ['leave-1', CALL_ENDED_MESSAGE_TYPE],
+    ]);
+    expect(result.current.messages[1].sender).toBe('@other:server');
+  });
+
+  it('adds a row when a call starts or ends live', async () => {
+    timeline.push(messageEvent('msg-1'));
+    const { result } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(1));
+
+    const join = callJoin('join-1', T0);
+    act(() => {
+      timeline.push(join);
+      client.emit('Room.timeline', join, room, false);
+    });
+    const leave = callMemberEvent('leave-1', {}, T0 + 1000);
+    act(() => {
+      timeline.push(leave);
+      client.emit('Room.timeline', leave, room, false);
+    });
+
+    expect(result.current.messages.map((m) => m.type)).toEqual([
+      'm.text',
+      CALL_STARTED_MESSAGE_TYPE,
+      CALL_ENDED_MESSAGE_TYPE,
+    ]);
+  });
+
+  it('adds whoever joins a running call to its start row', async () => {
+    timeline.push(messageEvent('msg-1'));
+    const { result } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(1));
+
+    for (const event of [
+      callJoin('join-1', T0),
+      callJoin('join-2', T0 + 1000, '@third:server'),
+    ]) {
+      act(() => {
+        timeline.push(event);
+        client.emit('Room.timeline', event, room, false);
+      });
+    }
+
+    expect(result.current.messages.map((m) => m.type)).toEqual([
+      'm.text',
+      CALL_STARTED_MESSAGE_TYPE,
+    ]);
+    expect(
+      result.current.messages[1].callParticipants?.map((p) => p.userId),
+    ).toEqual(['@other:server', '@third:server']);
+  });
+
+  // Older history is re-mapped as a whole once scrollback finishes; a row
+  // added per event would land at the bottom of the list.
+  it('leaves call events from scrollback to the history re-map', async () => {
+    timeline.push(messageEvent('msg-1'));
+    const { result } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(1));
+
+    const join = callJoin('join-0', T0);
+    act(() => {
+      timeline.unshift(join);
+      client.emit('Room.timeline', join, room, true);
+    });
+
+    expect(result.current.messages).toHaveLength(1);
+  });
+
+  // The live rows must be the ones the room shows once it is opened again.
+  it('agrees with a reload when a call from before the history ends live', async () => {
+    const running = callJoin('join-0', T0 - MINUTE);
+    currentState.push(running);
+    timeline.push(messageEvent('msg-1', T0));
+    const { result, unmount } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(1));
+
+    const third = callJoin('join-1', T0 + 10 * MINUTE, '@third:server');
+    receiveLive(third);
+    receiveLive(
+      callMemberEvent(
+        'leave-1',
+        {},
+        T0 + 20 * MINUTE,
+        '@third:server',
+        third.getContent(),
+      ),
+    );
+    receiveLive(
+      callMemberEvent(
+        'leave-0',
+        {},
+        T0 + 30 * MINUTE,
+        '@other:server',
+        running.getContent(),
+      ),
+    );
+
+    const rows = (messages: any[]) => messages.map((m) => [m.eventId, m.type]);
+    expect(rows(result.current.messages)).toEqual([
+      ['msg-1', 'm.text'],
+      ['leave-0', CALL_ENDED_MESSAGE_TYPE],
+    ]);
+
+    unmount();
+    const reloaded = renderHook(() => useMatrixRoom());
+    await waitFor(() =>
+      expect(reloaded.result.current.messages).toHaveLength(2),
+    );
+    expect(rows(reloaded.result.current.messages)).toEqual(
+      rows(result.current.messages),
+    );
+  });
+
+  it('leaves the rows alone when a refresh changes none of them', async () => {
+    const join = callJoin('join-1', T0);
+    timeline.push(messageEvent('msg-1', T0 - MINUTE), join);
+    currentState.push(join);
+    const { result } = renderHook(() => useMatrixRoom());
+    await waitFor(() => expect(result.current.messages).toHaveLength(2));
+    const before = result.current.messages;
+
+    receiveLive(
+      callMemberEvent(
+        'refresh-1',
+        { ...join.getContent(), created_ts: T0 },
+        T0 + 50 * MINUTE,
+        '@other:server',
+        join.getContent(),
+      ),
+    );
+
+    expect(result.current.messages).toBe(before);
   });
 });

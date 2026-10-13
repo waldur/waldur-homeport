@@ -328,6 +328,17 @@
     }
   }
 
+  // Where the room's call started or ended: one quiet centred line, without
+  // the day separator's rules so the two don't read alike.
+  .tc-call-event {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.462rem;
+    font-size: $font-size-sm;
+    color: $fg-tertiary;
+  }
+
   .tc-msg {
     display: grid;
     grid-template-columns: 40px 1fr;

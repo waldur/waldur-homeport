@@ -98,9 +98,17 @@ export function isValidCallMemberEvent(event: any, now: number): boolean {
 //   array for all of that user's devices.
 // Both are read while clients move from the legacy layout to the per-device one.
 export function parseCallMembers(room: Room, now: number): RawCallMember[] {
-  const events = (room.currentState as any).getStateEvents(
-    CALL_MEMBER_EVENT,
-  ) as any[];
+  return parseCallMemberEvents(
+    (room.currentState as any).getStateEvents(CALL_MEMBER_EVENT),
+    now,
+  );
+}
+
+/** The memberships valid at `now` among a set of call member state events. */
+export function parseCallMemberEvents(
+  events: any[],
+  now: number,
+): RawCallMember[] {
   const byDevice = new Map<string, RawCallMember>();
 
   const add = (member: RawCallMember) => {

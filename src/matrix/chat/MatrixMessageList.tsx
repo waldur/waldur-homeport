@@ -12,6 +12,8 @@ import {
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 
+import { isCallTransitionType } from './call/callTimeline';
+import { CallTimelineRow } from './call/CallTimelineRow';
 import { MatrixMessageItem } from './MatrixMessageItem';
 import { MatrixChatMessage } from './types';
 import { formatDateSeparator, getSenderName } from './utils';
@@ -48,6 +50,7 @@ function isContinuation(messages: MatrixChatMessage[], index: number): boolean {
   const current = messages[index];
   const previous = messages[index - 1];
   return (
+    !isCallTransitionType(previous.type) &&
     current.sender === previous.sender &&
     current.timestamp - previous.timestamp < CONTINUATION_WINDOW_MS
   );
@@ -300,20 +303,29 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
                   <span>{formatDateSeparator(msg.timestamp)}</span>
                 </div>
               )}
-              <MatrixMessageItem
-                message={msg}
-                isOwn={msg.sender === userId}
-                senderName={getSenderName(msg, memberNames)}
-                senderImage={memberImages.get(msg.sender)}
-                continuation={isContinuation(messages, i)}
-                memberNames={memberNames}
-                currentUserId={userId}
-                replyParent={
-                  msg.replyToEventId
-                    ? messagesById.get(msg.replyToEventId)
-                    : undefined
-                }
-              />
+              {isCallTransitionType(msg.type) ? (
+                <CallTimelineRow
+                  message={msg}
+                  senderName={getSenderName(msg, memberNames)}
+                  memberNames={memberNames}
+                  currentUserId={userId}
+                />
+              ) : (
+                <MatrixMessageItem
+                  message={msg}
+                  isOwn={msg.sender === userId}
+                  senderName={getSenderName(msg, memberNames)}
+                  senderImage={memberImages.get(msg.sender)}
+                  continuation={isContinuation(messages, i)}
+                  memberNames={memberNames}
+                  currentUserId={userId}
+                  replyParent={
+                    msg.replyToEventId
+                      ? messagesById.get(msg.replyToEventId)
+                      : undefined
+                  }
+                />
+              )}
             </Fragment>
           ))}
           <div ref={bottomRef} />

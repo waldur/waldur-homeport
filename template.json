@@ -9078,6 +9078,11 @@
       "feature_area": "details"
     }
   },
+  "Call ended": {
+    "context": {
+      "feature_area": "call"
+    }
+  },
   "Call export file (.yaml, .yml or .json, max. 10 MB)": {
     "context": {
       "feature_area": "transfer"
@@ -23428,6 +23433,15 @@
   "Group by:": {
     "context": {
       "feature_area": "metadata"
+    }
+  },
+  "Group call started: {names}": {
+    "context": {
+      "variables": {
+        "names": {
+          "type": "string"
+        }
+      }
     }
   },
   "Group invitation": {
@@ -52410,7 +52424,13 @@
   "Set slug": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "resources"
+      "feature_area": "roles"
+    }
+  },
+  "Set slug for resource": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "Set state for resource": {
@@ -70899,6 +70919,7 @@
       "feature_area": "reporting"
     }
   },
+  "You started a call": {},
   "You will be added as a reviewer on this call (if you are not already) and taken to your review of this proposal. Other reviewers’ reviews are not affected. Continue?": {
     "context": {
       "feature_area": "proposal"
@@ -75508,6 +75529,15 @@
         }
       },
       "feature_area": "project"
+    }
+  },
+  "{name} started a call": {
+    "context": {
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      }
     }
   },
   "{name} was created as a draft. Some parts could not be matched on this portal and were skipped:": {

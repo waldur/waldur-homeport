@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { ENV } from '@/core/config';
 
+import { CALL_STARTED_MESSAGE_TYPE } from './call/callTimeline';
 import { REDACTED_MESSAGE_TYPE } from './messageRelations';
 import { MatrixChatMessage } from './types';
 import {
@@ -57,6 +58,11 @@ describe('mapEventToMessage', () => {
     const message = mapEventToMessage(spoof);
     expect(message?.type).toBe('m.text');
     expect(message?.redacted).toBeUndefined();
+  });
+
+  it('does not let a sender claim the call-started style', () => {
+    const spoof = makeEvent({ msgtype: CALL_STARTED_MESSAGE_TYPE, body: 'x' });
+    expect(mapEventToMessage(spoof)?.type).toBe('m.text');
   });
 
   it('waits for an encrypted event to be decrypted', () => {
