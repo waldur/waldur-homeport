@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 import { FC, useState } from 'react';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
+import {
+  CALL_ENDED_MESSAGE_TYPE,
+  CALL_STARTED_MESSAGE_TYPE,
+} from './call/callTimeline';
 import { MatrixMessageItem } from './MatrixMessageItem';
 import { MatrixMessageList } from './MatrixMessageList';
 import { MatrixChatMessage } from './types';
@@ -104,6 +108,80 @@ describe('MatrixMessageList memoization', () => {
     await user.click(screen.getByText('bump'));
 
     expect(itemMock).not.toHaveBeenCalled();
+  });
+});
+
+describe('MatrixMessageList call rows', () => {
+  const callRow = (
+    eventId: string,
+    timestamp: number,
+    type: string,
+  ): MatrixChatMessage => ({ ...message(eventId, timestamp), body: '', type });
+
+  it('shows where a call started and ended instead of message rows', () => {
+    renderList({
+      messages: [
+        message('evt-1', 1000),
+        callRow('join-1', 2000, CALL_STARTED_MESSAGE_TYPE),
+        callRow('leave-1', 3000, CALL_ENDED_MESSAGE_TYPE),
+      ],
+      memberNames: new Map([['@alice:server', 'Alice Smith']]),
+    });
+
+    expect(screen.getByText('Alice Smith started a call')).toBeInTheDocument();
+    expect(screen.getByText('Call ended')).toBeInTheDocument();
+    expect(screen.getAllByTestId('msg')).toHaveLength(1);
+  });
+
+  it('lists who was on a group call on its start', () => {
+    renderList({
+      messages: [
+        {
+          ...callRow('join-1', 2000, CALL_STARTED_MESSAGE_TYPE),
+          callParticipants: [
+            { userId: '@alice:server', displayName: 'alice' },
+            { userId: '@me:server', displayName: 'me' },
+          ],
+        },
+      ],
+      memberNames: new Map([['@alice:server', 'Alice Smith']]),
+    });
+
+    expect(
+      screen.getByText('Group call started: Alice Smith, You'),
+    ).toBeInTheDocument();
+  });
+
+  it('tells the user when they started the call themselves', () => {
+    renderList({
+      messages: [
+        {
+          ...callRow('join-1', 2000, CALL_STARTED_MESSAGE_TYPE),
+          sender: '@me:server',
+        },
+      ],
+    });
+
+    expect(screen.getByText('You started a call')).toBeInTheDocument();
+  });
+
+  // The call row sits between the two messages, so the second one must show
+  // its sender again rather than read as part of the first.
+  it('does not group a message with one sent before the call row', () => {
+    const itemMock = vi.mocked(MatrixMessageItem);
+    itemMock.mockClear();
+    renderList({
+      messages: [
+        message('evt-1', 1000),
+        callRow('join-1', 2000, CALL_STARTED_MESSAGE_TYPE),
+        message('evt-2', 3000),
+      ],
+    });
+
+    const second = itemMock.mock.calls.find(
+      ([props]) => props.message.eventId === 'evt-2',
+    );
+    expect(second?.[0].continuation).toBe(false);
   });
 });
 

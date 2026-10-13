@@ -62,6 +62,8 @@ export interface MatrixChatMessage {
   edited?: boolean;
   /** Deleted (redacted): shown as a placeholder, without its content. */
   redacted?: boolean;
+  /** On the row where the room's call started: who has been on it. */
+  callParticipants?: Array<{ userId: string; displayName: string }>;
 }
 
 export type MatrixConnectionState =

@@ -1,5 +1,13 @@
+import { isEqual } from 'lodash-es';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { CALL_MEMBER_EVENT } from './call/callMembership';
+import {
+  CallTransition,
+  callStateAtTimelineStart,
+  findCallTransitions,
+  isCallTransitionType,
+} from './call/callTimeline';
 import {
   getReplacedEventId,
   getRoomEvents,
@@ -12,6 +20,7 @@ import { useRoomMemberNames } from './useRoomMemberNames';
 import {
   aggregateReactions,
   aggregateReactionsForTarget,
+  mapCallTransitionToMessage,
   mapEventToMessage,
   resolveMemberName,
 } from './utils';
@@ -42,13 +51,14 @@ function upsertMessage(
 }
 
 /**
- * Put a message decrypted after it reached the timeline where it belongs. A row
- * it already has (a failed decryption that later succeeded) is updated in
- * place; otherwise it goes before the first row that comes after it in the
- * room's timeline, so the list isn't regrouped by when each event finished
- * decrypting. Rows not in the timeline (local echoes) count as the newest.
+ * Put a row that comes in after its event reached the timeline (a message
+ * decrypted late, a call row) where it belongs. A row it already has (a failed
+ * decryption that later succeeded) is updated in place; otherwise it goes
+ * before the first row that comes after it in the room's timeline, so the list
+ * isn't regrouped by when each row came in. Rows not in the timeline (local
+ * echoes) count as the newest.
  */
-function placeDecryptedMessage(
+function placeMessage(
   prev: MatrixChatMessage[],
   msg: MatrixChatMessage,
   timelineEvents: any[],
@@ -75,6 +85,47 @@ function placeDecryptedMessage(
   );
   if (idx === -1) return [...prev, msg];
   return [...prev.slice(0, idx), msg, ...prev.slice(idx)];
+}
+
+const sameCallRow = (a: MatrixChatMessage, b: MatrixChatMessage) =>
+  a.type === b.type &&
+  a.senderDisplayName === b.senderDisplayName &&
+  isEqual(a.callParticipants, b.callParticipants);
+
+/**
+ * Bring the call rows in line with the room's call transitions. Those are
+ * worked out from the room's state, which a new member event changes too, so
+ * earlier rows can come or go, not only its own; rebuilding them keeps the
+ * list the same as a reload would show. Unchanged rows are kept, and the list
+ * itself when none changed, so a membership refresh re-renders nothing.
+ */
+function syncCallRows(
+  prev: MatrixChatMessage[],
+  transitions: Map<string, CallTransition>,
+  room: any,
+  timelineEvents: any[],
+): MatrixChatMessage[] {
+  const existing = new Map(
+    prev.filter((m) => isCallTransitionType(m.type)).map((m) => [m.eventId, m]),
+  );
+  const rows: MatrixChatMessage[] = [];
+  for (const [eventId, transition] of transitions) {
+    const event = room.findEventById(eventId);
+    if (!event) continue;
+    const row = mapCallTransitionToMessage(event, transition, room);
+    const kept = existing.get(eventId);
+    rows.push(kept && sameCallRow(kept, row) ? kept : row);
+  }
+  if (
+    rows.length === existing.size &&
+    rows.every((row) => existing.get(row.eventId) === row)
+  ) {
+    return prev;
+  }
+  return rows.reduce(
+    (next, row) => placeMessage(next, row, timelineEvents),
+    prev.filter((m) => !isCallTransitionType(m.type)),
+  );
 }
 
 function rememberReactionTargets(
@@ -110,11 +161,20 @@ function mapTimeline(
   editTargets: Map<string, string>,
 ): MatrixChatMessage[] {
   const editsIndex = indexEdits(getRoomEvents(room));
+  const callTransitions = findCallTransitions(
+    callStateAtTimelineStart(room, timeline),
+    timeline,
+  );
   const { aggregates, reactors } = aggregateReactions(timeline, myUserId);
   return (
     timeline
       .filter((e) => !editTargets.has(e.getId?.()))
-      .map((e) => mapEventToMessage(e, room, editsIndex))
+      .map((e) => {
+        const callTransition = callTransitions.get(e.getId?.());
+        return callTransition
+          ? mapCallTransitionToMessage(e, callTransition, room)
+          : mapEventToMessage(e, room, editsIndex);
+      })
       .filter(Boolean) as MatrixChatMessage[]
   ).map((msg) => ({
     ...msg,
@@ -240,8 +300,29 @@ export function useMatrixRoom() {
       return true;
     };
 
-    const onTimeline = (event: any, eventRoom: any) => {
+    const onTimeline = (
+      event: any,
+      eventRoom: any,
+      toStartOfTimeline?: boolean,
+    ) => {
       if (eventRoom?.roomId !== activeRoomId) return;
+
+      // A call member event has a row only where it starts or ends the call,
+      // which depends on the memberships before it; a join in between
+      // updates the start's row instead. Scrollback is left to the history
+      // re-map in loadOlderMessages.
+      if (event.getType?.() === CALL_MEMBER_EVENT) {
+        if (toStartOfTimeline) return;
+        const events = eventRoom.getLiveTimeline().getEvents();
+        const transitions = findCallTransitions(
+          callStateAtTimelineStart(eventRoom, events),
+          events,
+        );
+        setMessages((prev) =>
+          syncCallRows(prev, transitions, eventRoom, events),
+        );
+        return;
+      }
 
       // Reactions update an existing message's reactions[] rather than
       // appending a new row to the stream. Scope the recompute to the one
@@ -396,7 +477,7 @@ export function useMatrixRoom() {
           msg.eventId,
           myUserId,
         );
-        return placeDecryptedMessage(
+        return placeMessage(
           prev,
           {
             ...msg,
