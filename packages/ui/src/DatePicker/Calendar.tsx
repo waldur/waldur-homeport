@@ -77,8 +77,11 @@ export function Calendar({
         ),
         // Positioned for the caption dropdowns' option grid.
         month: cn('relative flex flex-col', defaults.month),
+        // Stacked over the caption — the positioned month would otherwise
+        // paint on top and swallow the arrows' clicks — but click-through
+        // between the arrows, where the caption dropdowns sit.
         nav: cn(
-          'absolute inset-x-0 top-0 flex h-[40px] items-center justify-between',
+          'pointer-events-none absolute inset-x-0 top-0 z-[1] flex h-[40px] items-center justify-between',
           defaults.nav,
         ),
         button_previous: cn(navButton, defaults.button_previous),
@@ -213,7 +216,7 @@ const dayShape =
   'mx-auto flex size-[39px] items-center justify-center rounded-full leading-none';
 
 const navButton = cn(
-  'inline-flex size-[40px] items-center justify-center p-0 select-none',
+  'pointer-events-auto inline-flex size-[40px] items-center justify-center p-0 select-none',
   'hover:text-[var(--waldur-brand-600)]',
   'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
   // Hide the navigation arrow past minDate/maxDate rather than dimming it.
