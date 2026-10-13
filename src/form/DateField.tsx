@@ -1,7 +1,12 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 
-import { DateBound, DatePicker, parseDateValue } from 'waldur-ui';
+import {
+  DateBound,
+  DatePicker,
+  DatePickerProps,
+  parseDateValue,
+} from 'waldur-ui';
 
 import { FormField } from './types';
 
@@ -12,6 +17,8 @@ interface DateFieldProps extends FormField {
   enable?: Array<(date: Date) => boolean>;
   /** Always-visible calendar instead of a popup. */
   inline?: boolean;
+  /** `'dropdown'` adds month/year dropdowns — e.g. for a birth date. */
+  captionLayout?: DatePickerProps['captionLayout'];
   placeholder?: string;
   solid?: boolean;
   /** Open the calendar on mount — set by the table's date filters. */
@@ -25,6 +32,7 @@ export const DateField: FunctionComponent<DateFieldProps> = ({
   maxDate,
   enable,
   inline,
+  captionLayout,
   placeholder,
   solid,
   disabled,
@@ -41,6 +49,7 @@ export const DateField: FunctionComponent<DateFieldProps> = ({
     maxDate={maxDate}
     enable={enable}
     inline={inline}
+    captionLayout={captionLayout}
     placeholder={placeholder}
     solid={solid}
     disabled={disabled}

@@ -141,6 +141,16 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
         // modal dialog that runs before this popover's focus scope pauses
         // the dialog's trap, which pulls focus straight back. Radix fires
         // this once the scope is in place.
+        // Escape in a caption dropdown's option grid closes just the grid.
+        onEscapeKeyDown={(event) => {
+          if (
+            (event.target as Element | null)?.closest?.(
+              '[data-slot="calendar-dropdown-panel"]',
+            )
+          ) {
+            event.preventDefault();
+          }
+        }}
         onOpenAutoFocus={(event) => {
           event.preventDefault();
           (event.currentTarget as HTMLElement)

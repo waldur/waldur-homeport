@@ -1,9 +1,21 @@
-import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
-import { ComponentProps, useEffect, useRef } from 'react';
+import {
+  CaretDownIcon,
+  CaretLeftIcon,
+  CaretRightIcon,
+} from '@phosphor-icons/react';
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  ComponentProps,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Day,
   DayButton,
   DayPicker,
+  DropdownProps,
   getDefaultClassNames,
   useDayPicker,
 } from 'react-day-picker';
@@ -30,6 +42,11 @@ import { cn } from '../cn';
  *   ISO date for any `[data-day]` lookup).
  * - Default class names (`rdp-*`) are kept alongside the utilities so the
  *   navigation buttons and range states stay addressable.
+ * - `captionLayout="dropdown"` swaps the caption for month and year
+ *   dropdowns (react-day-picker's custom `Dropdown` component, see
+ *   https://daypicker.dev/guides/custom-components) — for dates far from
+ *   today, such as a birth date. Without `startMonth`/`endMonth` the years
+ *   run from 100 years ago to this year.
  */
 export function Calendar({
   className,
@@ -58,7 +75,8 @@ export function Calendar({
           'relative flex flex-col gap-[24px] md:flex-row',
           defaults.months,
         ),
-        month: cn('flex flex-col', defaults.month),
+        // Positioned for the caption dropdowns' option grid.
+        month: cn('relative flex flex-col', defaults.month),
         nav: cn(
           'absolute inset-x-0 top-0 flex h-[40px] items-center justify-between',
           defaults.nav,
@@ -68,6 +86,10 @@ export function Calendar({
         month_caption: cn(
           'mb-[12px] flex h-[40px] items-center justify-center',
           defaults.month_caption,
+        ),
+        dropdowns: cn(
+          'flex items-center justify-center gap-[4px]',
+          defaults.dropdowns,
         ),
         caption_label: cn(
           'text-[16px] font-medium select-none',
@@ -135,6 +157,8 @@ export function Calendar({
           ),
         Day: CalendarDay,
         DayButton: CalendarDayButton,
+        MonthsDropdown: CalendarMonthsDropdown,
+        YearsDropdown: CalendarYearsDropdown,
         ...components,
       }}
       {...props}
@@ -257,3 +281,142 @@ function CalendarDayButton({
     />
   );
 }
+
+/**
+ * A month or year dropdown in the caption. Not a native `<select>`: its
+ * option list is drawn by the browser, which inside the popover (and the
+ * modal dialogs around it, with their focus traps and `pointer-events:
+ * none` on <body>) closed again as soon as it opened. Instead the button
+ * opens a grid of the options over the days, like MonthPicker's months;
+ * a pick goes to react-day-picker's `onChange` as a select's would.
+ */
+function CalendarDropdown({
+  options,
+  value,
+  onChange,
+  disabled,
+  className,
+  columns,
+  'aria-label': ariaLabel,
+}: DropdownProps & { columns: number }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLSpanElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const selected = options?.find((option) => option.value === value);
+
+  useEffect(() => {
+    if (!open) return;
+    const panel = panelRef.current;
+    const current = panel?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    if (panel && current) {
+      // Centre the current option; scrollIntoView would scroll the popover
+      // and the page as well.
+      panel.scrollTop =
+        current.offsetTop - (panel.clientHeight - current.offsetHeight) / 2;
+      current.focus({ preventScroll: true });
+    }
+    // A press anywhere else closes the grid (another dropdown, a nav arrow).
+    const closeOnOutside = (event: PointerEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener('pointerdown', closeOnOutside, true);
+    return () =>
+      document.removeEventListener('pointerdown', closeOnOutside, true);
+  }, [open]);
+
+  const close = () => {
+    setOpen(false);
+    buttonRef.current?.focus();
+  };
+
+  // DatePickerPopover leaves an Escape from the grid to us.
+  const closeOnEscape = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      event.stopPropagation();
+      close();
+    }
+  };
+
+  const pick = (next: number) => {
+    onChange?.({
+      target: { value: String(next) },
+    } as ChangeEvent<HTMLSelectElement>);
+    close();
+  };
+
+  return (
+    // Not positioned: the grid lays itself over the whole month (rdp-month).
+    <span ref={rootRef} data-slot="calendar-dropdown">
+      <button
+        ref={buttonRef}
+        type="button"
+        aria-label={ariaLabel}
+        aria-expanded={open}
+        disabled={disabled}
+        onClick={() => setOpen((wasOpen) => !wasOpen)}
+        className={cn(
+          'inline-flex h-[32px] items-center gap-[4px] rounded-[6px] ps-[8px] pe-[6px]',
+          'text-[16px] font-medium whitespace-nowrap text-[var(--bs-gray-900)] select-none',
+          'hover:bg-[var(--bs-gray-100)] dark:hover:bg-[var(--bs-gray-200)]',
+          'aria-expanded:bg-[var(--bs-gray-100)] dark:aria-expanded:bg-[var(--bs-gray-200)]',
+          'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
+          'disabled:pointer-events-none',
+          className,
+        )}
+      >
+        {selected?.label}
+        <CaretDownIcon
+          className={cn(
+            'size-[14px] transition-transform',
+            open && 'rotate-180',
+          )}
+          weight="bold"
+        />
+      </button>
+      {open ? (
+        <div
+          ref={panelRef}
+          role="group"
+          aria-label={ariaLabel}
+          data-slot="calendar-dropdown-panel"
+          className="absolute inset-x-0 top-[52px] bottom-0 z-10 grid content-start gap-y-[8px] overflow-y-auto bg-[var(--surface-card-bg)] py-[4px]"
+          style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+        >
+          {options?.map((option) => {
+            const isSelected = option.value === value;
+            return (
+              <button
+                key={option.value}
+                type="button"
+                aria-pressed={isSelected}
+                data-value={option.value}
+                disabled={option.disabled}
+                onClick={() => pick(option.value)}
+                onKeyDown={closeOnEscape}
+                className={cn(
+                  'mx-auto flex h-[39px] w-full max-w-[80px] items-center justify-center rounded-full leading-none',
+                  'hover:bg-(--calendar-band) hover:font-medium hover:text-[var(--bs-gray-900)]',
+                  'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
+                  'disabled:pointer-events-none disabled:text-[var(--bs-gray-300)] dark:disabled:text-[var(--bs-gray-400)]',
+                  isSelected &&
+                    'bg-[var(--waldur-brand-600)] font-medium text-white hover:bg-[var(--waldur-brand-600)] hover:text-white dark:bg-[var(--waldur-brand-400)] dark:text-[var(--bs-gray-900)]',
+                )}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+    </span>
+  );
+}
+
+const CalendarMonthsDropdown = (props: DropdownProps) => (
+  <CalendarDropdown {...props} columns={3} />
+);
+
+const CalendarYearsDropdown = (props: DropdownProps) => (
+  <CalendarDropdown {...props} columns={4} />
+);

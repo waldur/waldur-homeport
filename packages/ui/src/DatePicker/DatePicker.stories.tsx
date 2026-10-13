@@ -12,6 +12,7 @@ import {
   closePicker,
   daysFromToday,
   displayValue,
+  dropdownOptions,
   ensureOpen,
   fieldContainer,
   firstWeekday,
@@ -23,6 +24,7 @@ import {
   isTriggerDisabled,
   openPicker,
   pickDay,
+  pickMonthAndYear,
   placeholderText,
   readFormValue,
   selectedDays,
@@ -250,6 +252,39 @@ export const Inline: Story = {
       expect(readFormValue(canvasElement)).toBe('2026-06-20T00:00'),
     );
     await expect(selectedDays()).toEqual(['2026-06-20']);
+  },
+};
+
+/**
+ * `captionLayout="dropdown"` — month and year dropdowns in the caption for
+ * dates far from today, such as a birth date. With `maxDate` the years end
+ * at its year (later months are disabled); they start 100 years back.
+ */
+export const YearAndMonthDropdowns: Story = {
+  render: () => (
+    <Harness
+      captionLayout="dropdown"
+      maxDate="today"
+      placeholder="Birth date"
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await openPicker(field);
+    const now = DateTime.now();
+    const years = await dropdownOptions('year');
+    await expect(years.at(0).value).toBe(now.year - 100);
+    await expect(years.at(-1).value).toBe(now.year);
+    await expect(years.find((year) => year.selected).value).toBe(now.year);
+    // Escape closes the option grid, not the calendar.
+    await userEvent.keyboard('{Escape}');
+    await expect(isCalendarOpen()).toBe(true);
+    await pickMonthAndYear('1990-03');
+    await pickDay('1990-03-21');
+    await waitFor(() =>
+      expect(readFormValue(canvasElement)).toBe('1990-03-21T00:00'),
+    );
+    await expect(displayValue(field)).toBe('1990-03-21');
   },
 };
 

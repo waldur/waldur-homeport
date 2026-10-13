@@ -315,6 +315,10 @@ Radix popover); `waldur-ui` also exports the pieces for custom pickers
   calendar; a datetime bound also clamps the picked time.
 - `enable` takes predicates a day must match (e.g. first of the month only);
   `inline` renders the calendar without a popup.
+- `captionLayout="dropdown"` (on `DatePicker`/`DateField`/`DateEditField`)
+  replaces the caption with month and year dropdowns — use it for dates far
+  from today, like a birth date. Years span `minDate`–`maxDate`, else the
+  last 100 years.
 - Closing the popup calls `input.onBlur`, so validation shows without a submit.
 - `DateFilter`, `DateTimeFilter` and `DateRangeFilter` open their calendar as
   soon as the filter is picked (`autoOpen`), as select filters show their menu.

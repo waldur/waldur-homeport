@@ -92,6 +92,80 @@ const navButton = (calendar: HTMLElement, direction: 'next' | 'prev') =>
     direction === 'next' ? '.rdp-button_next' : '.rdp-button_previous',
   );
 
+const captionDropdown = (calendar: HTMLElement, which: 'month' | 'year') => {
+  const button = calendar.querySelector<HTMLButtonElement>(
+    which === 'month' ? '.rdp-months_dropdown' : '.rdp-years_dropdown',
+  );
+  if (!button) throw new Error(`No ${which} dropdown in the calendar`);
+  return button;
+};
+
+const openDropdown = async (
+  which: 'month' | 'year',
+  calendar = getCalendar(),
+) => {
+  const button = captionDropdown(calendar, which);
+  if (button.getAttribute('aria-expanded') !== 'true') {
+    await userEvent.click(button);
+  }
+  const panel = button.parentElement?.querySelector<HTMLElement>(
+    '[data-slot="calendar-dropdown-panel"]',
+  );
+  if (!panel) throw new Error(`The ${which} dropdown did not open`);
+  return panel;
+};
+
+/**
+ * Options of the caption's month or year dropdown (`captionLayout`); opens
+ * it, and leaves it open.
+ */
+export const dropdownOptions = async (
+  which: 'month' | 'year',
+  calendar = getCalendar(),
+) =>
+  Array.from(
+    (await openDropdown(which, calendar)).querySelectorAll<HTMLButtonElement>(
+      '[data-value]',
+    ),
+  ).map((option) => ({
+    value: Number(option.dataset.value),
+    label: option.textContent,
+    disabled: option.disabled,
+    selected: option.getAttribute('aria-pressed') === 'true',
+  }));
+
+const pickDropdownOption = async (
+  which: 'month' | 'year',
+  value: number,
+  calendar = getCalendar(),
+) => {
+  const panel = await openDropdown(which, calendar);
+  const option = panel.querySelector<HTMLButtonElement>(
+    `[data-value="${value}"]`,
+  );
+  if (!option) throw new Error(`No ${which} option ${value}`);
+  await userEvent.click(option);
+};
+
+/**
+ * Pages the calendar to `month` (`yyyy-MM`) through the caption's year
+ * and month dropdowns.
+ */
+export const pickMonthAndYear = async (
+  month: string,
+  calendar = getCalendar(),
+) => {
+  const dt = DateTime.fromFormat(month, 'yyyy-MM');
+  await pickDropdownOption('year', dt.year, calendar);
+  // react-day-picker numbers months from 0.
+  await pickDropdownOption('month', dt.month - 1, getCalendar());
+  await waitFor(() => {
+    if (!visibleMonths().includes(month)) {
+      throw new Error(`Calendar did not page to ${month}`);
+    }
+  });
+};
+
 /** Whether the calendar refuses to page further in `direction`. */
 export const isNavDisabled = (
   direction: 'next' | 'prev',
