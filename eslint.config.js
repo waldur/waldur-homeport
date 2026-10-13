@@ -315,6 +315,17 @@ export default tseslint
       },
     },
     {
+      // Off elsewhere until its existing violations are fixed. Homeport's
+      // tests run without React's hook-order check, so a hook after an early
+      // return passes them and only breaks in the browser. Test files are
+      // left out: hooks called inside vi.mock factories trip the rule.
+      files: ['src/matrix/**/*.{ts,tsx}'],
+      ignores: ['**/*.test.{ts,tsx}'],
+      rules: {
+        'react-hooks/rules-of-hooks': 'error',
+      },
+    },
+    {
       // waldur-ui is where Menu and MenuPopover wrap Radix.
       files: ['packages/ui/**/*.{ts,tsx}'],
       rules: {
