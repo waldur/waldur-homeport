@@ -10,9 +10,11 @@ import { DeploymentFeatures } from '@/FeaturesEnums';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 export const TelemetrySendingCard = () => {
   const { showErrorResponse, showSuccess } = useNotify();
+  const canEdit = Boolean(useUser()?.is_staff);
   const [enabled, setEnabled] = useState(() =>
     isFeatureVisible(DeploymentFeatures.send_metrics),
   );
@@ -53,14 +55,18 @@ export const TelemetrySendingCard = () => {
           descriptionClassName="text-gray-600"
           value={<TelemetryExampleButton />}
           actions={
-            <Switch
-              id="telemetry-send-metrics"
-              aria-label={translate('Send telemetry metrics')}
-              checked={enabled}
-              onCheckedChange={toggle}
-              disabled={submitting}
-              data-testid={DeploymentFeatures.send_metrics}
-            />
+            canEdit ? (
+              <Switch
+                id="telemetry-send-metrics"
+                aria-label={translate('Send telemetry metrics')}
+                checked={enabled}
+                onCheckedChange={toggle}
+                disabled={submitting}
+                data-testid={DeploymentFeatures.send_metrics}
+              />
+            ) : (
+              <span>{enabled ? translate('Yes') : translate('No')}</span>
+            )
           }
         />
       </FormTable>

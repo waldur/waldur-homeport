@@ -6,6 +6,7 @@ import { featureValues } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { FeaturesList } from './FeaturesList';
 
@@ -37,6 +38,7 @@ vi.mock('@/features/FeaturesDescription', () => ({
 
 describe('FeaturesList', () => {
   beforeEach(() => {
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
     ENV.FEATURES = {
       billing: {
         enabled: true,
@@ -51,6 +53,21 @@ describe('FeaturesList', () => {
       params: {},
     });
     vi.mocked(featureValues).mockReset();
+  });
+
+  it('shows feature values without switches for support', () => {
+    vi.mocked(useUser).mockReturnValue({
+      is_staff: false,
+      is_support: true,
+    } as any);
+    render(<FeaturesList />);
+
+    expect(screen.queryByTestId('billing.enabled')).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /Save/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Yes')).toBeInTheDocument();
+    expect(screen.getByText('No')).toBeInTheDocument();
   });
 
   it('renders all feature sections', () => {

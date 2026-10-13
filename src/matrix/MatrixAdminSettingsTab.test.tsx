@@ -7,6 +7,7 @@ import {
 
 import { getKeyTitle } from '@/administration/settings/utils';
 import { renderWithProviders } from '@/test/harness';
+import { useUser } from '@/workspace/hooks';
 
 import { MatrixAdminSettingsTab } from './MatrixAdminSettingsTab';
 import {
@@ -38,6 +39,9 @@ const renderTab = (marker: string, extra: Record<string, unknown> = {}) => {
 
 describe('MatrixAdminSettingsTab', () => {
   beforeEach(() => {
+    // The settings pencil is staff-only. These cases are the disabled reason
+    // a staff user sees when the deployment owns the value.
+    vi.mocked(useUser).mockReturnValue({ is_staff: true } as any);
     vi.mocked(adminMatrixAppserviceStatusRetrieve).mockResolvedValue({
       data: { transaction_count: 0 },
     } as any);

@@ -13,6 +13,7 @@ import { useLanguageSelector } from '@/i18n/useLanguageSelector';
 import { LanguageCountry } from '@/navigation/header/LanguageSelectorDropdown';
 import { useNotify } from '@/store/notify';
 import { TableQuery } from '@/table/TableQuery';
+import { useUser } from '@/workspace/hooks';
 
 export const AdministrationLanguages: FunctionComponent = () => {
   const [query, setQuery] = useState('');
@@ -22,6 +23,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
     useState<string[]>(initialLanguages);
   const { showError, showErrorResponse, showSuccess } = useNotify();
   const { currentLanguage } = useLanguageSelector();
+  const canEdit = Boolean(useUser()?.is_staff);
 
   const hasChanges = useMemo(() => {
     const currentSorted = [...selectedLanguages].sort();
@@ -107,12 +109,14 @@ export const AdministrationLanguages: FunctionComponent = () => {
       actions={
         <div className="d-flex align-items-center">
           <TableQuery query={query} setQuery={setQuery} />
-          <SaveButton
-            className="ms-4"
-            onClick={saveLanguageOptions}
-            submitting={submitting}
-            dirty={hasChanges}
-          />
+          {canEdit && (
+            <SaveButton
+              className="ms-4"
+              onClick={saveLanguageOptions}
+              submitting={submitting}
+              dirty={hasChanges}
+            />
+          )}
         </div>
       }
     >
@@ -120,13 +124,27 @@ export const AdministrationLanguages: FunctionComponent = () => {
         {filteredLanguages.map((language: { code: string; label: string }) => (
           <Col key={language.code} sm={6} md={4}>
             <div className="border-bottom py-5">
-              <Switch
-                data-testid={`language_${language.code}`}
-                className="d-flex justify-content-between flex-row-reverse align-items-center"
-                size="sm"
-                checked={selectedLanguages.includes(language.code)}
-                onCheckedChange={() => handleLanguageChange(language.code)}
-                label={
+              {canEdit ? (
+                <Switch
+                  data-testid={`language_${language.code}`}
+                  className="d-flex justify-content-between flex-row-reverse align-items-center"
+                  size="sm"
+                  checked={selectedLanguages.includes(language.code)}
+                  onCheckedChange={() => handleLanguageChange(language.code)}
+                  label={
+                    <div className="d-flex align-items-center">
+                      <CountryFlagIcon
+                        countryCode={
+                          LanguageCountry[language.code] || language.code
+                        }
+                        className="me-2"
+                      />
+                      {language.label}
+                    </div>
+                  }
+                />
+              ) : (
+                <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
                     <CountryFlagIcon
                       countryCode={
@@ -136,8 +154,13 @@ export const AdministrationLanguages: FunctionComponent = () => {
                     />
                     {language.label}
                   </div>
-                }
-              />
+                  <span>
+                    {selectedLanguages.includes(language.code)
+                      ? translate('Yes')
+                      : translate('No')}
+                  </span>
+                </div>
+              )}
             </div>
           </Col>
         ))}
