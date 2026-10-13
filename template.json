@@ -32627,7 +32627,7 @@
   "No": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "affiliates"
+      "feature_area": "administration"
     }
   },
   "No Arrow customer mappings found": {
@@ -70263,7 +70263,7 @@
   "Yes": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "affiliates"
+      "feature_area": "administration"
     }
   },
   "Yes/No": {

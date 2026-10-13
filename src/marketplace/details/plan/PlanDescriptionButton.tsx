@@ -1,7 +1,7 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { useFormState } from 'react-final-form';
 
-import { BaseButton } from 'waldur-ui';
+import { BaseButton, ButtonSize } from 'waldur-ui';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -10,6 +10,7 @@ import { useModal } from '@/modal/actions';
 
 interface PlanDescriptionButtonProps {
   planDescription?: string;
+  size?: ButtonSize;
 }
 
 const PlanDescription = lazyComponent(() =>
@@ -47,7 +48,7 @@ export const PlanDescriptionButton = (props: PlanDescriptionButtonProps) => {
       onClick={handleClick}
       iconNode={<EyeIcon weight="bold" />}
       variant="tertiary"
-      size="lg"
+      size={props.size ?? 'lg'}
     />
   );
 };
