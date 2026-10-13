@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { CSSProperties, FC } from 'react';
+import { ComponentProps, CSSProperties, FC } from 'react';
 import { translate } from 'waldur-i18n-runtime';
 
 import { Calendar } from './Calendar';
@@ -33,6 +33,12 @@ export interface DatePickerProps {
   enable?: Array<(date: Date) => boolean>;
   /** Render the calendar in place, always visible, instead of in a popup. */
   inline?: boolean;
+  /**
+   * `'dropdown'` puts month and year dropdowns in the caption, for dates
+   * far from today (a birth date); `'dropdown-months'`/`'dropdown-years'`
+   * show just one. Years span `minDate`–`maxDate`, else the last 100 years.
+   */
+  captionLayout?: ComponentProps<typeof Calendar>['captionLayout'];
   placeholder?: string;
   disabled?: boolean;
   solid?: boolean;
@@ -60,6 +66,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   maxDate,
   enable,
   inline,
+  captionLayout,
   placeholder,
   disabled,
   solid,
@@ -121,6 +128,7 @@ export const DatePicker: FC<DatePickerProps> = ({
         defaultMonth={value ?? undefined}
         weekStartsOn={1}
         locale={locale}
+        captionLayout={captionLayout}
         disabled={disabled ? true : disabledDays}
         {...boundsToMonths(minDate, maxDate)}
       />
