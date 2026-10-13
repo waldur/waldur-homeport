@@ -58,14 +58,29 @@
     font-weight: 600;
   }
 
+  // LiveKit draws the encryption lock (and the screen-share icon) bare beside
+  // the name at full size and colour, while the muted mic sits in its own
+  // smaller, dimmed indicator. Scale and colour them alike so the chip reads
+  // as one row of status icons. The icons carry no viewBox, so a CSS width
+  // would crop them instead of resizing them.
+  .lk-participant-metadata-item:not(.lk-connection-quality) > svg,
+  .lk-track-muted-indicator-microphone svg,
+  .lk-track-muted-indicator-camera svg {
+    color: $text-secondary;
+    transform: scale(0.72);
+  }
+
   .lk-track-muted-indicator-microphone,
   .lk-track-muted-indicator-camera {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    svg {
-      transform: scale(0.72);
+    // The tile shows the mic indicator only while muted, so LiveKit's dimming
+    // of the muted state says nothing and only makes the mic paler than the
+    // lock.
+    &[data-lk-muted='true'] {
+      opacity: 1;
     }
   }
 
