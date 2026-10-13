@@ -166,6 +166,25 @@ export const pickMonthAndYear = async (
   });
 };
 
+/**
+ * Throws unless `el` is what a pointer at its centre would hit. userEvent
+ * dispatches to the element it is given whatever lies on top of it, so
+ * without this an overlapping caption would not stop a click on the
+ * month arrows the way it stops a real one.
+ */
+const assertNotCovered = (el: HTMLElement, name: string) => {
+  const rect = el.getBoundingClientRect();
+  const hit = document.elementFromPoint(
+    rect.left + rect.width / 2,
+    rect.top + rect.height / 2,
+  );
+  if (!hit || !el.contains(hit)) {
+    throw new Error(
+      `The ${name} is covered by ${hit?.outerHTML.slice(0, 120) ?? 'nothing'}`,
+    );
+  }
+};
+
 /** Whether the calendar refuses to page further in `direction`. */
 export const isNavDisabled = (
   direction: 'next' | 'prev',
@@ -193,17 +212,29 @@ const goToMonth = async (date: DateLike, calendar = getCalendar()) => {
     if (isNavDisabled(direction, calendar)) {
       return;
     }
-    const button = navButton(calendar, direction);
-    if (!button) throw new Error(`No ${direction} month button`);
-    if (isNavDisabled(direction, calendar)) return false;
-    await userEvent.click(button);
-    await waitFor(() => {
-      if (visibleMonths(calendar)[0] === months[0]) {
-        throw new Error('Month did not change');
-      }
-    });
+    await pageMonth(direction, calendar);
   }
   throw new Error(`Could not navigate to ${target}`);
+};
+
+/**
+ * Clicks the calendar's previous/next month arrow, as a pointer would, and
+ * waits for the month to change.
+ */
+export const pageMonth = async (
+  direction: 'next' | 'prev',
+  calendar = getCalendar(),
+) => {
+  const button = navButton(calendar, direction);
+  if (!button) throw new Error(`No ${direction} month button`);
+  assertNotCovered(button, `${direction} month button`);
+  const before = visibleMonths(calendar)[0];
+  await userEvent.click(button);
+  await waitFor(() => {
+    if (visibleMonths(calendar)[0] === before) {
+      throw new Error('Month did not change');
+    }
+  });
 };
 
 export const isDayDisabled = async (

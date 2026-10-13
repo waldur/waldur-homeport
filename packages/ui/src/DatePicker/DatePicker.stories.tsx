@@ -23,6 +23,7 @@ import {
   isTimeDisabled,
   isTriggerDisabled,
   openPicker,
+  pageMonth,
   pickDay,
   pickMonthAndYear,
   placeholderText,
@@ -285,6 +286,33 @@ export const YearAndMonthDropdowns: Story = {
       expect(readFormValue(canvasElement)).toBe('1990-03-21T00:00'),
     );
     await expect(displayValue(field)).toBe('1990-03-21');
+  },
+};
+
+/**
+ * The month arrows still page the calendar next to the caption dropdowns:
+ * the dropdowns must not cover them.
+ */
+export const ArrowsBesideDropdowns: Story = {
+  render: () => (
+    <Harness
+      captionLayout="dropdown"
+      maxDate="today"
+      placeholder="Birth date"
+    />
+  ),
+  play: async ({ canvasElement }) => {
+    const field = fieldContainer(canvasElement);
+    await openPicker(field);
+    const thisMonth = DateTime.now().toFormat('yyyy-MM');
+    const lastMonth = DateTime.now().minus({ months: 1 }).toFormat('yyyy-MM');
+    await expect(visibleMonths()).toEqual([thisMonth]);
+    await pageMonth('prev');
+    await expect(visibleMonths()).toEqual([lastMonth]);
+    await pageMonth('next');
+    await expect(visibleMonths()).toEqual([thisMonth]);
+    // The dropdowns between the arrows still open.
+    await expect((await dropdownOptions('month')).length).toBe(12);
   },
 };
 
