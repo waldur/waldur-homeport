@@ -355,7 +355,6 @@ export const OrganizationCreatePage: FC = () => {
                       {step === 1 && (
                         <OrganizationCreateStep2
                           getChecklistData={getChecklistData}
-                          onSubmitDisabledChange={handleSubmitDisabledChange}
                         />
                       )}
                       {step === 2 && (

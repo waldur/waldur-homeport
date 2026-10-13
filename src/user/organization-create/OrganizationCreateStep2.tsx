@@ -1,10 +1,7 @@
 import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
-import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Form as BootstrapForm, Card, Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
-
-import { BaseButton } from 'waldur-ui';
 
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -23,7 +20,10 @@ import { useUser } from '@/workspace/hooks';
 
 import { ChecklistQuestionField } from './ChecklistQuestionField';
 import { getAuthMethodInfo } from './constants';
-import { PersonIdentifierFieldsRenderer } from './PersonIdentifierFieldsRenderer';
+import {
+  PersonIdentifierFieldConfig,
+  PersonIdentifierFieldsRenderer,
+} from './PersonIdentifierFieldsRenderer';
 import { OrganizationCreateFormValues } from './types';
 import { QuestionWithMetadata } from './utils';
 
@@ -35,15 +35,12 @@ interface OrganizationCreateStep2Props {
     checklistCustomerUuid: string;
     checklistIntentUuid: string;
   }>;
-  onSubmitDisabledChange?: (disabled: boolean, reason?: string) => void;
 }
 
 export const OrganizationCreateStep2: FunctionComponent<
   OrganizationCreateStep2Props
 > = (props) => {
-  const { onSubmitDisabledChange } = props;
   const form = useForm();
-  const router = useRouter();
   const { values } = useFormState<OrganizationCreateFormValues>({
     subscription: { values: true },
   });
@@ -78,41 +75,26 @@ export const OrganizationCreateStep2: FunctionComponent<
     return false;
   };
 
-  // D&B (Dun & Bradstreet) methods source the person's identity — name, date
-  // of birth, personnummer — from the user's account (populated by the eID
-  // login / profile), never from a form field the applicant types. So instead
-  // of the editable fallback, an incomplete profile must be completed first.
-  const isDnb = validationMethod.startsWith('dnb_');
-
-  // Labels of the account fields the current method needs but the profile is
-  // missing — shown so the user knows exactly what to add to their profile.
-  const getMissingProfileLabels = (): string[] => {
+  // D&B (Dun & Bradstreet) methods read the person's identity from the
+  // account and fall back to the form per field, so ask only for what the
+  // profile is missing — the profile may not expose e.g. date of birth.
+  const getMissingFieldsConfig = (): PersonIdentifierFieldConfig | null => {
     const pif = fieldConfig?.person_identifier_fields;
-    if (!pif || !user) return [];
-    if (pif.type === 'string') {
-      return user[pif.field] ? [] : [pif.label];
+    if (!validationMethod.startsWith('dnb_') || pif?.type !== 'object') {
+      return fieldConfig;
     }
-    if (pif.type === 'object') {
-      return Object.entries(pif.fields)
-        .filter(([fieldName]) => !user[fieldName])
-        .map(([, spec]) => spec.label);
-    }
-    return [];
+    return {
+      ...fieldConfig,
+      person_identifier_fields: {
+        ...pif,
+        fields: Object.fromEntries(
+          Object.entries(pif.fields).filter(
+            ([fieldName]) => !user?.[fieldName],
+          ),
+        ),
+      },
+    };
   };
-  const missingProfileLabels = getMissingProfileLabels().join(', ');
-
-  // Block advancing while a D&B profile is incomplete: the account can't yet
-  // supply the required identity, and there is no form field to fall back on.
-  // The reason travels to the footer button so the disabled Next explains why.
-  const blockForIncompleteProfile = isDnb && !hasRequiredFields();
-  useEffect(() => {
-    onSubmitDisabledChange?.(
-      blockForIncompleteProfile,
-      blockForIncompleteProfile
-        ? translate('Complete your profile to continue.')
-        : undefined,
-    );
-  }, [blockForIncompleteProfile, onSubmitDisabledChange]);
 
   const updateUploadedFiles = useCallback(
     (files: AttachmentUploading[]) => {
@@ -246,37 +228,6 @@ export const OrganizationCreateStep2: FunctionComponent<
                         </div>
                       </Card.Body>
                     </Card>
-                  ) : isDnb ? (
-                    <Card className="card-bordered mb-4">
-                      <Card.Body className="d-flex gap-3">
-                        <div className="flex-shrink-0">
-                          <InfoIcon size={24} weight="duotone" />
-                        </div>
-                        <div className="flex-grow-1">
-                          <div className="fw-semibold text-gray-800 mb-1">
-                            {translate('Complete your profile to continue')}
-                          </div>
-                          <div className="text-gray-700 mb-3">
-                            {missingProfileLabels
-                              ? translate(
-                                  'This check uses your identity from your account, but your profile is missing: {attributes}. Add it to your profile to continue.',
-                                  { attributes: missingProfileLabels },
-                                )
-                              : translate(
-                                  'This check uses your identity from your account. Complete your profile to continue.',
-                                )}
-                          </div>
-                          <BaseButton
-                            variant="primary"
-                            size="sm"
-                            onClick={() =>
-                              router.stateService.go('profile-manage')
-                            }
-                            label={translate('Complete profile')}
-                          />
-                        </div>
-                      </Card.Body>
-                    </Card>
                   ) : (
                     <>
                       <Card className="card-bordered mb-4">
@@ -297,7 +248,7 @@ export const OrganizationCreateStep2: FunctionComponent<
 
                       {fieldConfig && (
                         <PersonIdentifierFieldsRenderer
-                          fieldConfig={fieldConfig}
+                          fieldConfig={getMissingFieldsConfig()}
                           loading={false}
                         />
                       )}
