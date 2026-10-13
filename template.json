@@ -672,7 +672,7 @@
     }
   },
   "A /0 mask is not allowed: it matches every address.": {},
-  "A Matrix protocol mechanism that allows Waldur to register as a service on the homeserver. The homeserver pushes events to Waldur via a webhook, and Waldur can create rooms, invite users, and send messages on behalf of a bot user.": {},
+  "A Matrix protocol mechanism that allows Waldur to register as a service on the homeserver. The homeserver pushes events to Waldur via a webhook, and Waldur can create rooms and invite users on behalf of a bot user. Messages are sent by the Matrix bot.": {},
   "A POSIX-friendly unique identifier for the offering.": {
     "context": {
       "feature_area": "overview"
@@ -736,7 +736,7 @@
       "feature_area": "steps"
     }
   },
-  "A human-readable room address (e.g., #waldur-a1b2c3d4:matrix.example.com). Waldur generates aliases based on the project UUID.": {},
+  "A human-readable room address (e.g., #waldur-0f8e3c2a9b7d4e6f8a1c5b3d7e9f2a4c:matrix.example.com). Waldur generates aliases based on the project UUID.": {},
   "A list of languages available for selection has been updated": {
     "context": {
       "primary_ui_type": "success_message",
@@ -831,6 +831,7 @@
   },
   "A reserved external IP allocated to the tenant; can be attached to a port to expose an instance.": {},
   "A rule that does not create a project must grant an organization role.": {},
+  "A separate, long-running process (waldur matrix_bot) that signs in as the bot user and is the encrypted member of every Waldur room. It answers commands, posts every message Waldur sends to a room, and exports history with the room keys it holds. Run exactly one: a second process refuses to start.": {},
   "A service can only report the metrics its offering adopts.": {
     "context": {
       "feature_area": "metrics"
@@ -17604,7 +17605,7 @@
       "feature_area": "service-providers"
     }
   },
-  "Each project can have one chat room. Rooms are created by project owners and automatically populated with project members. Owners can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.": {
+  "Each project can have one chat room. Rooms are created by organization owners (or any role with the \"Create matrix room\" permission), staff and support, and automatically populated with project members. Only staff can disable a room (kicking all members and exporting history) and later re-enable it or delete it entirely.": {
     "context": {
       "feature_area": "matrix"
     }
@@ -29903,6 +29904,7 @@
       "feature_area": "matrix"
     }
   },
+  "Matrix bot": {},
   "Matrix chat": {
     "context": {
       "feature_area": "administration"
@@ -29925,7 +29927,7 @@
       "feature_area": "matrix"
     }
   },
-  "Matrix permission system. Project owners and admins get elevated power levels (50+), allowing them to manage the room. Regular members get the default level (0).": {},
+  "Matrix permission system. Project admins and organization owners (any role with the \"Create matrix room\" permission) get level 50, which Element shows as Moderator; staff and support get it when they join a room. Everyone else gets the default level (0). Inviting, removing members and changing room settings need level 100, which only the bot holds.": {},
   "Matrix rooms": {
     "context": {
       "feature_area": "matrix"
@@ -56753,8 +56755,13 @@
       "feature_area": "offering-merges"
     }
   },
-  "The homeserver pushes room events to Waldur via the appservice webhook. Waldur processes bot commands and ignores other events.": {
+  "The homeserver pushes room events to Waldur via the appservice webhook, which only acknowledges them. The Matrix bot, a separate process ({command}) and the encrypted member of every room, reads the rooms through its own sync and answers commands. If commands go unanswered, check that this process is running.": {
     "context": {
+      "variables": {
+        "command": {
+          "type": "unknown"
+        }
+      },
       "feature_area": "matrix"
     }
   },
@@ -69305,7 +69312,7 @@
       "feature_area": "matrix"
     }
   },
-  "Webhook event processing": {
+  "Webhook and Matrix bot": {
     "context": {
       "feature_area": "matrix"
     }
