@@ -52410,7 +52410,13 @@
   "Set slug": {
     "context": {
       "primary_ui_type": "label",
-      "feature_area": "resources"
+      "feature_area": "roles"
+    }
+  },
+  "Set slug for resource": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "Set state for resource": {

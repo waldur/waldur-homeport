@@ -164,12 +164,11 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
             aria-current={active ? 'true' : undefined}
           >
             {parentTab.title}
-            {/* gray-500, brand while the tab is hovered, current or open;
-                flips to point up while open. */}
+            {/* Takes the label's colour; flips to point up while open. */}
             <CaretDownIcon
               size={16.9}
               weight="bold"
-              className="ms-[8px] shrink-0 text-[var(--page-tab-text)] transition-[rotate] duration-300 group-hover:text-[var(--page-tab-caret-active)] group-aria-[current]:text-[var(--page-tab-caret-active)] group-data-[state=open]:rotate-180 group-data-[state=open]:text-[var(--page-tab-caret-active)]"
+              className="ms-[8px] shrink-0 transition-[rotate] duration-300 group-data-[state=open]:rotate-180"
             />
           </button>
         </Menu.Trigger>
