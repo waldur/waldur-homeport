@@ -290,6 +290,22 @@ describe('scrollable lists', () => {
     );
   });
 
+  it('wraps a list that is not scrollable and keeps a scrollable one on one row', () => {
+    render(
+      <Tabs defaultValue="a">
+        <TabsList data-testid="wrapping">
+          <TabsTrigger value="a">A</TabsTrigger>
+        </TabsList>
+        <TabsList scrollable data-testid="scrolling">
+          <TabsTrigger value="b">B</TabsTrigger>
+        </TabsList>
+      </Tabs>,
+    );
+
+    expect(screen.getByTestId('wrapping')).toHaveClass('flex-wrap');
+    expect(screen.getByTestId('scrolling')).not.toHaveClass('flex-wrap');
+  });
+
   it('frames a scrollable TabNav list', () => {
     render(
       <TabNav

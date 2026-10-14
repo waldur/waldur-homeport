@@ -208,7 +208,7 @@ export const Step1UpdateLimits: FC<OwnProps> = (props) => {
           mount="active"
           defaultValue={resources[0] ? getUuid(resources[0]) : undefined}
         >
-          <TabsList className="flex-wrap mb-4">
+          <TabsList className="mb-4">
             {resources.map((resource) => (
               <TabsTrigger key={resource.uuid} value={getUuid(resource)}>
                 {resource.name}

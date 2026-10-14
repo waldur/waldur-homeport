@@ -332,7 +332,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
       {props.components.length > 0 && (
         <Tabs mount="all" value={activeTab} onValueChange={selectTab}>
           <div className="d-flex">
-            <TabsList ref={refNav} className="flex-wrap flex-grow-1 mb-4">
+            <TabsList ref={refNav} className="flex-grow-1 mb-4">
               {orderedComponents.map((component) => {
                 const isHidden = wrappedComponents.some(
                   (c) => component.uuid === c.uuid,
