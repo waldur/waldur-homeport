@@ -50,7 +50,7 @@ export const RecentSearchItem = ({ item }) => {
           className="text-secondary me-4"
         />
       )}
-      <span className="fs-6 font-semibold flex-grow-1">{item.title}</span>
+      <span className="fs-6 flex-grow-1">{item.title}</span>
       <ArrowClockwiseIcon size={20} className="text-primary" weight="bold" />
     </Link>
   );

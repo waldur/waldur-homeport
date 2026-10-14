@@ -57,7 +57,7 @@ export const CookieSettingsDialog: FC<CookieSettingsDialogProps> = ({
         <Link
           state="about.privacy"
           label={translate('View Privacy Policy')}
-          className="text-brand font-semibold"
+          className="text-brand"
           onClick={close}
         />
         <div className="d-flex gap-3">

@@ -23,7 +23,7 @@ interface ClusterInfoRowProps {
 const ClusterInfoRow: FC<ClusterInfoRowProps> = ({ label, value }) => (
   <div className="d-flex justify-content-between py-1">
     <span className="text-quaternary">{label}</span>
-    <span className="font-semibold">{value}</span>
+    <span>{value}</span>
   </div>
 );
 
@@ -69,31 +69,31 @@ const RabbitMQClusterOverviewContent: FC<
           <tbody>
             <tr>
               <td className="text-quaternary">{translate('Connections')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(objectTotals.connections ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
               <td className="text-quaternary">{translate('Channels')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(objectTotals.channels ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
               <td className="text-quaternary">{translate('Exchanges')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(objectTotals.exchanges ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
               <td className="text-quaternary">{translate('Queues')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(objectTotals.queues ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
               <td className="text-quaternary">{translate('Consumers')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(objectTotals.consumers ?? 0).toLocaleString()}
               </td>
             </tr>
@@ -109,19 +109,19 @@ const RabbitMQClusterOverviewContent: FC<
           <tbody>
             <tr>
               <td className="text-quaternary">{translate('Total messages')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(queueTotals.messages ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
               <td className="text-quaternary">{translate('Ready')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(queueTotals.messages_ready ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
               <td className="text-quaternary">{translate('Unacknowledged')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {(queueTotals.messages_unacknowledged ?? 0).toLocaleString()}
               </td>
             </tr>

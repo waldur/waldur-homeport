@@ -29,19 +29,13 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Total resources'),
         render: ({ row }) => (
-          <span className="font-semibold">
-            {row.total_resources.toLocaleString()}
-          </span>
+          <span>{row.total_resources.toLocaleString()}</span>
         ),
         export: (row) => row.total_resources,
       },
       {
         title: translate('Total usage'),
-        render: ({ row }) => (
-          <span className="font-semibold">
-            {row.total_usage.toLocaleString()}
-          </span>
-        ),
+        render: ({ row }) => <span>{row.total_usage.toLocaleString()}</span>,
         export: (row) => row.total_usage,
       },
     ];

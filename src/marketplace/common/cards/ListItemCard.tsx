@@ -57,10 +57,7 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
                 </ImagePlaceholder>
               )}
               <div className="overflow-hidden">
-                <div
-                  className="font-semibold ellipsis"
-                  style={{ fontSize: 16 }}
-                >
+                <div className="ellipsis" style={{ fontSize: 16 }}>
                   {offering.name}
                 </div>
                 <div

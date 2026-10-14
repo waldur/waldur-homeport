@@ -139,7 +139,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   </p>
                   {Boolean(choice.metadata) &&
                     (['string', 'number'].includes(typeof choice.metadata) ? (
-                      <p className="fs-6 font-semibold text-quaternary mb-0">
+                      <p className="fs-6 text-quaternary mb-0">
                         {choice.metadata}
                       </p>
                     ) : (

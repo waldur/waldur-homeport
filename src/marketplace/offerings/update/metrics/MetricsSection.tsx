@@ -55,7 +55,7 @@ export const MetricsSection: FC<OfferingSectionProps> = (props) => {
           {
             title: translate('Metric'),
             render: ({ row }) => (
-              <span className="text-primary font-semibold">{row.name}</span>
+              <span className="text-primary">{row.name}</span>
             ),
           },
           {

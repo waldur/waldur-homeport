@@ -54,7 +54,7 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
           {!data.is_replica && data.wal_bytes != null && (
             <tr>
               <td className="text-quaternary">{translate('WAL size')}</td>
-              <td className="font-semibold text-end">
+              <td className="text-end">
                 {formatFilesize(data.wal_bytes, 'B')}
               </td>
             </tr>
@@ -65,7 +65,7 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
                 {translate('Replication lag')}
               </td>
               <td
-                className={`font-semibold text-end ${hasReplicationLag ? 'text-warning' : 'text-success'}`}
+                className={`text-end ${hasReplicationLag ? 'text-warning' : 'text-success'}`}
               >
                 {data.replication_lag_bytes != null
                   ? formatFilesize(data.replication_lag_bytes, 'B')

@@ -309,9 +309,7 @@ export const tableStoryColumns: Column<TableStoryRow>[] = [
   {
     id: 'name',
     title: 'Name',
-    render: ({ row }) => (
-      <span className="font-semibold text-primary">{row.name}</span>
-    ),
+    render: ({ row }) => <span className="text-primary">{row.name}</span>,
   },
   {
     id: 'status',

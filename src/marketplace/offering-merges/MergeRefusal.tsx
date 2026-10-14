@@ -56,7 +56,7 @@ export const MergeRefusalAlert: FC<{
           {refusal.detail && <span>{refusal.detail}</span>}
           {blockers.length > 0 && (
             <div>
-              <div className="font-semibold">{translate('Blockers')}</div>
+              <div>{translate('Blockers')}</div>
               <ul className="mb-0">
                 {blockers.map((blocker, index) => (
                   <li key={`${blocker.code}-${index}`}>
@@ -69,9 +69,7 @@ export const MergeRefusalAlert: FC<{
           )}
           {missing.length > 0 && (
             <div>
-              <div className="font-semibold">
-                {translate('Warnings not acknowledged')}
-              </div>
+              <div>{translate('Warnings not acknowledged')}</div>
               <ul className="mb-0">
                 {missing.map((code) => (
                   <li key={code}>

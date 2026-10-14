@@ -135,9 +135,7 @@ export const MatrixCallFloatingWidget = forwardRef<
         style={{ cursor: 'grab', userSelect: 'none', touchAction: 'none' }}
         onPointerDown={onPointerDown}
       >
-        <span className="font-semibold flex-grow-1 text-truncate">
-          {roomName}
-        </span>
+        <span className="flex-grow-1 text-truncate">{roomName}</span>
         <BaseButton
           variant="tertiary"
           size="sm"

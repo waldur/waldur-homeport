@@ -48,7 +48,7 @@ const tableColumns: Column<ClassificationUsageRow>[] = [
   {
     title: translate('Industry Category'),
     render: ({ row }) => (
-      <span className="font-semibold">
+      <span>
         {row.category === 'true'
           ? translate('Industry')
           : translate('Academic')}

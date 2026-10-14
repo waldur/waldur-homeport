@@ -89,7 +89,7 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
               sortedStringify(beforeVal) !== sortedStringify(afterVal);
             return (
               <tr key={key} className={differs ? 'table-warning' : undefined}>
-                <td className="font-semibold align-top">{key}</td>
+                <td className="align-top">{key}</td>
                 <td className="align-top">{renderValue(beforeVal)}</td>
                 <td className="align-top">{renderValue(afterVal)}</td>
               </tr>

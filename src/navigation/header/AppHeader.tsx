@@ -116,7 +116,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             {Boolean(user) && showGoBack && (
               <BaseButton
                 variant="text-primary"
-                className="me-3 py-0 align-self-center font-semibold fs-5"
+                className="me-3 py-0 align-self-center fs-5"
                 onClick={onGoBack}
                 tooltip={translate('Go back')}
                 style={{ width: '108px', height: '36px' }}

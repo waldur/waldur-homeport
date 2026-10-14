@@ -70,7 +70,7 @@ const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
           <XCircleIcon size={16} weight="bold" className={iconClass} />
         )}
       </td>
-      <td className="font-semibold">{result.name}</td>
+      <td>{result.name}</td>
       <td>{valueOf(result.rule_value)}</td>
       <td>{valueOf(result.user_value)}</td>
       <td className="text-quaternary">{result.reason}</td>
@@ -247,7 +247,7 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
             <dd className="col-sm-8">
               {Object.entries(result.user_claims).map(([claim, values]) => (
                 <div key={claim}>
-                  <span className="font-semibold">{claim}</span>:{' '}
+                  <span>{claim}</span>:{' '}
                   {renderFieldOrDash((values as string[]).join(', '))}
                 </div>
               ))}
@@ -313,9 +313,7 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
             }
           >
             <div>
-              <label className="form-label font-semibold">
-                {translate('Target user')}
-              </label>
+              <label className="form-label">{translate('Target user')}</label>
               <AsyncSelectGroup
                 name="user"
                 validate={required}

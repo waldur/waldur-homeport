@@ -39,7 +39,7 @@ export const CallDurationPolicy: FC<{
   const cap = resolvePrepaidMonthsCap(call);
   return (
     <>
-      <span className="font-semibold">{formatProjectDuration({ days })}</span>
+      <span>{formatProjectDuration({ days })}</span>
       <span className="text-quaternary ms-2">
         {cap
           ? translate('Prepaid subscriptions {cap}.', {

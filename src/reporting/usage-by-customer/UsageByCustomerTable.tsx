@@ -42,15 +42,13 @@ export const UsageByCustomerTable: FC<Props> = ({
       },
       {
         title: translate('Resources OK'),
-        render: ({ row }) => (
-          <span className="font-semibold">{row.resources_ok}</span>
-        ),
+        render: ({ row }) => <span>{row.resources_ok}</span>,
         export: (row) => row.resources_ok,
       },
       {
         title: translate('Resources erred'),
         render: ({ row }) => (
-          <span className={row.resources_erred > 0 ? 'font-semibold' : ''}>
+          <span className={row.resources_erred > 0 ? '' : ''}>
             {row.resources_erred}
           </span>
         ),
@@ -58,17 +56,13 @@ export const UsageByCustomerTable: FC<Props> = ({
       },
       {
         title: translate('Total resources'),
-        render: ({ row }) => (
-          <span className="font-semibold">{row.resources_total}</span>
-        ),
+        render: ({ row }) => <span>{row.resources_total}</span>,
         export: (row) => row.resources_total,
       },
       {
         title: translate('Total cost'),
         render: ({ row }) => (
-          <span className="font-semibold">
-            {defaultCurrency(parseFloat(row.total_cost))}
-          </span>
+          <span>{defaultCurrency(parseFloat(row.total_cost))}</span>
         ),
         export: (row) => row.total_cost,
       },

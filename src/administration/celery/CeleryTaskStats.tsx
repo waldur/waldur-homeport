@@ -113,11 +113,7 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
             title: translate('Executions'),
             orderField: 'count',
             className: 'text-end',
-            render: ({ row }) => (
-              <span className="font-semibold">
-                {row.count.toLocaleString()}
-              </span>
-            ),
+            render: ({ row }) => <span>{row.count.toLocaleString()}</span>,
           },
           {
             title: translate('Percentage'),

@@ -25,7 +25,7 @@ const FindingRow: FC<{ finding: EmailFinding }> = ({ finding }) => (
       {ICONS[finding.level] ?? ICONS.WARNING}
     </div>
     <div>
-      <div className="font-semibold">{finding.title}</div>
+      <div>{finding.title}</div>
       {finding.detail && (
         <div className="text-quaternary">{finding.detail}</div>
       )}

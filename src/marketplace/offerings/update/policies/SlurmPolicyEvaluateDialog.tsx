@@ -160,7 +160,7 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
           {data.resources.map((r) => (
             <tr key={r.resource_uuid}>
               <td>
-                <span className="font-semibold">{r.resource_name}</span>
+                <span>{r.resource_name}</span>
                 <br />
                 <code className="small">{r.resource_uuid}</code>
               </td>
@@ -246,7 +246,7 @@ const EvaluateResults: FC<{ data: SlurmPolicyEvaluateResponse }> = ({
           {data.resources.map((r) => (
             <tr key={r.resource_uuid}>
               <td>
-                <span className="font-semibold">{r.resource_name}</span>
+                <span>{r.resource_name}</span>
                 <br />
                 <code className="small">{r.resource_uuid}</code>
               </td>

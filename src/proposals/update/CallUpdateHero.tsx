@@ -55,9 +55,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
           </div>
           <div className="d-flex align-items-center gap-2">
             <span className="fs-7 text-tertiary">{translate('Part of:')}</span>
-            <span className="fs-7 font-medium text-brand">
-              {call.customer_name}
-            </span>
+            <span className="fs-7 text-brand">{call.customer_name}</span>
           </div>
           <div className="d-flex flex-wrap gap-3 mt-1">
             {call.start_date && (

@@ -55,9 +55,7 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
     <div className="d-flex align-items-start gap-2 mt-4 mb-4 text-success fs-7">
       <CheckCircleIcon size={16} weight="fill" className="flex-shrink-0 mt-1" />
       <span>
-        <span className="font-semibold">
-          {translate('Order will be auto-approved')}
-        </span>
+        <span>{translate('Order will be auto-approved')}</span>
         <br />
         {translate(
           'Estimated monthly cost ({monthly}) is at or below the project limit ({limit}).',
@@ -73,9 +71,7 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
         className="flex-shrink-0 mt-1"
       />
       <span>
-        <span className="font-semibold">
-          {translate('Order will need consumer approval')}
-        </span>
+        <span>{translate('Order will need consumer approval')}</span>
         <br />
         {hasUsageComponent
           ? translate(

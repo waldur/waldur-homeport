@@ -65,12 +65,10 @@ export const SearchItem = (props: SearchItemProps) => {
           circle
         />
 
-        <div className="d-flex flex-column justify-content-start font-semibold">
-          <span className="fs-6 font-semibold">{props.title}</span>
+        <div className="d-flex flex-column justify-content-start">
+          <span className="fs-6">{props.title}</span>
           {Boolean(props.subtitle) && (
-            <span className="fs-7 font-semibold text-quaternary">
-              {props.subtitle}
-            </span>
+            <span className="fs-7 text-quaternary">{props.subtitle}</span>
           )}
         </div>
       </Link>

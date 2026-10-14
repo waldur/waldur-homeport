@@ -341,7 +341,7 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
               ? `small text-truncate font-monospace ${
                   isWaldur ? 'fst-italic text-info' : 'text-secondary'
                 }`
-              : 'font-semibold text-brand text-truncate font-monospace'
+              : 'text-brand text-truncate font-monospace'
           }
           title={
             isWaldur

@@ -188,7 +188,7 @@ export const RemoteProjectDetail = () => {
         <Card className="mb-4">
           <Card.Body>
             <details>
-              <summary className="font-semibold cursor-pointer">
+              <summary className="cursor-pointer">
                 {translate('Sync details')}
                 {!row.last_confirmed_details && (
                   <Badge
@@ -218,7 +218,7 @@ export const RemoteProjectDetail = () => {
         <Card className="mb-4">
           <Card.Body>
             <details>
-              <summary className="font-semibold cursor-pointer">
+              <summary className="cursor-pointer">
                 {translate('Pending sync')}
               </summary>
               <div className="mt-3">

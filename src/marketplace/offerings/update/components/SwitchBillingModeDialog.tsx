@@ -79,7 +79,7 @@ const ImpactPreview: FC<{
       <div className="d-flex flex-column gap-1">
         {affected.map((c: any) => (
           <div key={c.uuid} className="d-flex align-items-center gap-2 fs-7">
-            <span className="font-semibold">{c.name}</span>
+            <span>{c.name}</span>
             <span className="text-quaternary">
               {getBillingTypeLabel(c.billing_type)}
             </span>

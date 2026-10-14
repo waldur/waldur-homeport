@@ -17,7 +17,7 @@ export const ActionContext: FC<{ row: ExtendedUserAction }> = ({ row }) => {
             state="organization.dashboard"
             params={{ uuid: row.organization_uuid }}
             label={row.organization_name}
-            className="small font-medium"
+            className="small"
           />
         </div>
       )}
@@ -28,7 +28,7 @@ export const ActionContext: FC<{ row: ExtendedUserAction }> = ({ row }) => {
             state="project.dashboard"
             params={{ uuid: row.project_uuid }}
             label={row.project_name}
-            className="small font-medium"
+            className="small"
           />
         </div>
       )}

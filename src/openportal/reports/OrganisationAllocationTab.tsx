@@ -553,7 +553,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                 onChange={() => toggle(p.uuid)}
                 label={
                   <>
-                    <span className="font-semibold">{p.name}</span>
+                    <span>{p.name}</span>
                     {(p.start_date || p.end_date) && (
                       <span className="text-quaternary small ms-2">
                         {p.start_date ?? '?'} →{' '}
@@ -1117,7 +1117,7 @@ export const OrganisationAllocationTab: FC = () => {
       {showLoadPrompt && !loadTriggered && (
         <Card className="mb-4">
           <Card.Body>
-            <p className="mb-1 font-semibold">
+            <p className="mb-1">
               {translate('Allocation data not yet loaded')}
             </p>
             <p className="mb-3 text-quaternary small">
@@ -1267,7 +1267,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="font-semibold d-flex align-items-center gap-3">
+          <Card.Header className="d-flex align-items-center gap-3">
             <span>{translate('Predicted allocation burn-down')}</span>
 
             {chartOptions && (
@@ -1325,7 +1325,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Consumption chart ───────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="font-semibold d-flex align-items-center gap-3">
+          <Card.Header className="d-flex align-items-center gap-3">
             <span>{translate('Predicted daily consumption')}</span>
 
             {consumptionOptions && (
@@ -1447,7 +1447,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Concerning projects ─────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="font-semibold d-flex align-items-center gap-2">
+          <Card.Header className="d-flex align-items-center gap-2">
             <span>{translate('Concerning Projects')}</span>
             {slowStart.length +
               inactive.length +
@@ -1491,7 +1491,7 @@ export const OrganisationAllocationTab: FC = () => {
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="font-semibold" style={{ minWidth: 120 }}>
+                    <span style={{ minWidth: 120 }}>
                       {translate('Slow start')}:
                     </span>
                     {translate(
@@ -1527,7 +1527,7 @@ export const OrganisationAllocationTab: FC = () => {
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="font-semibold" style={{ minWidth: 120 }}>
+                    <span style={{ minWidth: 120 }}>
                       {translate('Inactive')}:
                     </span>
                     {translate(
@@ -1577,7 +1577,7 @@ export const OrganisationAllocationTab: FC = () => {
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="font-semibold" style={{ minWidth: 120 }}>
+                    <span style={{ minWidth: 120 }}>
                       {translate('Nearly depleted')}:
                     </span>
                     {translate(
@@ -1619,7 +1619,7 @@ export const OrganisationAllocationTab: FC = () => {
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="font-semibold" style={{ minWidth: 120 }}>
+                    <span style={{ minWidth: 120 }}>
                       {translate('Off track')}:
                     </span>
                     {translate(

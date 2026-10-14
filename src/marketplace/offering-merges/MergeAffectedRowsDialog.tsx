@@ -47,9 +47,7 @@ const ValueChange: FC<{ row: OfferingMergeAffectedRow }> = ({ row }) => (
         <span className="text-quaternary fs-8 text-nowrap pt-1">
           {translate('becomes')}
         </span>
-        <span className="font-semibold">
-          {renderFieldOrDash(row.new_value)}
-        </span>
+        <span>{renderFieldOrDash(row.new_value)}</span>
       </span>
     )}
   </div>

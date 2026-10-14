@@ -230,9 +230,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
       />
       <div className="d-flex flex-wrap align-items-center gap-3 mb-2">
         <div className="d-flex align-items-center gap-1 small">
-          <span className="text-secondary font-medium">
-            {translate('Levels')}:
-          </span>
+          <span className="text-secondary">{translate('Levels')}:</span>
           <Badge
             variant="indigo"
             shape="roundless"

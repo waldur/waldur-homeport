@@ -63,7 +63,7 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
   const progress = merge.progress;
   return (
     <div className="d-flex flex-column gap-2" data-testid="merge-progress">
-      <span className="font-semibold">
+      <span>
         {merge.state === 'undoing'
           ? translate('Undoing the merge…')
           : merge.state === 'queued'

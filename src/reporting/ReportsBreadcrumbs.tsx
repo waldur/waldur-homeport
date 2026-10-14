@@ -41,7 +41,7 @@ const ReportDropdownItem: FC<{
       className="d-flex text-primary hover:text-brand align-items-center py-2 px-5 hover:bg-primary-hover"
       onClick={close}
     >
-      <span className="fs-6 font-semibold">{report.title}</span>
+      <span className="fs-6">{report.title}</span>
     </Link>
   </div>
 );

@@ -150,7 +150,7 @@ export const OrganizationCreateStep1: FunctionComponent<
                       <InfoIcon size={24} weight="duotone" />
                     </div>
                     <div className="flex-grow-1">
-                      <div className="font-semibold text-primary mb-1">
+                      <div className="text-primary mb-1">
                         {methodInfo.title}
                       </div>
                       <div className="text-secondary">

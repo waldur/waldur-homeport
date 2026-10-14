@@ -87,9 +87,7 @@ export const CeleryTaskTable = ({
           title: translate('Task name'),
           render: ({ row }) => (
             <Tooltip label={row.name}>
-              <span className="text-primary font-semibold">
-                {truncateTaskName(row.name)}
-              </span>
+              <span className="text-primary">{truncateTaskName(row.name)}</span>
             </Tooltip>
           ),
         },
