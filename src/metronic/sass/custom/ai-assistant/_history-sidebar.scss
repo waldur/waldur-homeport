@@ -1,9 +1,3 @@
-.aui-chat-page-layout {
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-
 // Sidebar hidden by default
 #kt_drawer:not([data-expanded='true']):not([data-history-open='true'])
   .aui-history-sidebar {
@@ -89,28 +83,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-// Toggle button — same style as sidebar collapse icon
-.aui-history-toggle-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border: none;
-  background: transparent;
-  border-radius: $border-radius-lg;
-  cursor: pointer;
-
-  svg {
-    width: 20px;
-    height: 20px;
-    color: var(--text-quinary);
-  }
-
-  &:hover {
-    background-color: var(--bg-secondary);
-  }
 }
 
 .aui-icon-rotate-180 {

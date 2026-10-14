@@ -135,10 +135,6 @@ body {
     @extend .ellipsis-lines;
     -webkit-line-clamp: 3;
   }
-  &-4 {
-    @extend .ellipsis-lines;
-    -webkit-line-clamp: 4;
-  }
 }
 
 .btn-text-align {

@@ -182,41 +182,6 @@
   }
 }
 
-.aui-thread-scroll-to-bottom {
-  position: absolute;
-  bottom: calc(100% + 1rem);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 9999px;
-
-  border: 1px solid var(--border-primary);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: $box-shadow;
-  transition:
-    background-color 100ms ease,
-    box-shadow 100ms ease;
-
-  &:disabled {
-    visibility: hidden;
-  }
-
-  &:hover {
-    background-color: var(--bg-primary-hover);
-    transform: translateX(-50%) translateY(-1px);
-  }
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-}
-
 .aui-composer-wrapper,
 #kt_drawer .aui-composer-wrapper {
   width: 100%;
@@ -485,14 +450,6 @@
   }
 }
 
-.aui-assistant-action-bar-root {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 1.1rem;
-  margin-left: 0;
-}
-
 .aui-button-ghost {
   border-radius: 100px;
   background-color: transparent;
@@ -521,13 +478,6 @@
   position: relative;
 }
 
-.aui-user-action-bar-wrapper {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  gap: 4px;
-}
-
 .aui-user-message-content {
   padding: 0.8rem 1rem;
   border-radius: $border-radius-xl;
@@ -550,16 +500,6 @@
 .aui-user-message-content p,
 .aui-assistant-message-content p {
   margin: 0 !important;
-}
-
-.aui-user-action-bar-root {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 1.1rem;
-  margin-left: 0;
-  color: var(--text-secondary);
-  padding-left: 4px;
 }
 
 .aui-edit-composer-wrapper {
