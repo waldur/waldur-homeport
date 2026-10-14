@@ -108,7 +108,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
     const totalFields = fieldEntries.length;
 
     return (
-      <div className="mb-4">
+      <div>
         <h6 className="mb-3">
           {translate('Personal identification required')}
         </h6>
@@ -134,6 +134,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
                     validate={validate}
                     description={fieldSpec.description}
                     placeholder={fieldSpec.example}
+                    spaceless
                   />
                 ) : (
                   <StringGroup
@@ -144,6 +145,7 @@ export const PersonIdentifierFieldsRenderer: FunctionComponent<
                     description={fieldSpec.description}
                     placeholder={fieldSpec.example}
                     maxLength={fieldSpec.max_length}
+                    spaceless
                   />
                 )}
               </Col>
