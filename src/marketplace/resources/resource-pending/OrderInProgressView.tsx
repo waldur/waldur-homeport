@@ -148,10 +148,32 @@ export const getSteps = (
     ...(purchaseOrderNeeded && { variant: 'warning' as const }),
   });
 
+  // Provider review only starts once the project does, so the project wait
+  // comes before the provider step.
+  if (order.state === 'pending-project') {
+    // The order is held until the project itself starts. The order's own start
+    // date is validated to be no earlier than the project start date, so when it
+    // is set it is the effective provisioning date; otherwise only the project
+    // start date gates it, and that date is not exposed on the resource.
+    steps.push({
+      label: translate('Pending project start'),
+      description: [
+        order.start_date
+          ? `${translate('Scheduled to start on')}: ${formatDate(
+              order.start_date,
+            )}`
+          : translate('Waiting for the project to start'),
+      ],
+      completed: false, // This is the current, active step
+    });
+  }
+
   // Provider approval cannot have happened before consumer approval did.
   const isStep3Completed =
     isStep2Completed &&
-    !['pending-consumer', 'pending-provider'].includes(order.state);
+    !['pending-consumer', 'pending-project', 'pending-provider'].includes(
+      order.state,
+    );
   steps.push({
     label: isStep3Completed
       ? translate('Approved')
@@ -170,23 +192,7 @@ export const getSteps = (
     completed: isStep3Completed,
   });
 
-  if (order.state === 'pending-project') {
-    // The order is held until the project itself starts. The order's own start
-    // date is validated to be no earlier than the project start date, so when it
-    // is set it is the effective provisioning date; otherwise only the project
-    // start date gates it, and that date is not exposed on the resource.
-    steps.push({
-      label: translate('Pending project start'),
-      description: [
-        order.start_date
-          ? `${translate('Scheduled to start on')}: ${formatDate(
-              order.start_date,
-            )}`
-          : translate('Waiting for the project to start'),
-      ],
-      completed: false, // This is the current, active step
-    });
-  } else if (order.state === 'pending-start-date') {
+  if (order.state === 'pending-start-date') {
     steps.push({
       label: translate('Scheduled'),
       description: [

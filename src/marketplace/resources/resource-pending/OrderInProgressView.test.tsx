@@ -107,4 +107,15 @@ describe('getSteps', () => {
 
     expect(creation.completed).toBe(false);
   });
+
+  it('keeps provider approval pending while the project has not started', () => {
+    const steps = getSteps(buildResource({ state: 'pending-project' }));
+    const waitingIndex = steps.findIndex(
+      (step) => step.label === 'Pending project start',
+    );
+    const provider = steps[waitingIndex + 1] as any;
+
+    expect(provider.completed).toBe(false);
+    expect(provider.description[0]).toBe('Pending provider approval');
+  });
 });
