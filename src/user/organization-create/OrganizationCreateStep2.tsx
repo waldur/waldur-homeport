@@ -1,7 +1,10 @@
 import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
+import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Form as BootstrapForm, Card, Col, Row } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
+
+import { BaseButton } from 'waldur-ui';
 
 import { ACCEPTED_FILE_TYPES } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
@@ -35,12 +38,15 @@ interface OrganizationCreateStep2Props {
     checklistCustomerUuid: string;
     checklistIntentUuid: string;
   }>;
+  onSubmitDisabledChange?: (disabled: boolean, reason?: string) => void;
 }
 
 export const OrganizationCreateStep2: FunctionComponent<
   OrganizationCreateStep2Props
 > = (props) => {
+  const { onSubmitDisabledChange } = props;
   const form = useForm();
+  const router = useRouter();
   const { values } = useFormState<OrganizationCreateFormValues>({
     subscription: { values: true },
   });
@@ -76,25 +82,51 @@ export const OrganizationCreateStep2: FunctionComponent<
   };
 
   // D&B (Dun & Bradstreet) methods read the person's identity from the
-  // account and fall back to the form per field, so ask only for what the
-  // profile is missing — the profile may not expose e.g. date of birth.
-  const getMissingFieldsConfig = (): PersonIdentifierFieldConfig | null => {
-    const pif = fieldConfig?.person_identifier_fields;
-    if (!validationMethod.startsWith('dnb_') || pif?.type !== 'object') {
-      return fieldConfig;
-    }
-    return {
-      ...fieldConfig,
-      person_identifier_fields: {
-        ...pif,
-        fields: Object.fromEntries(
-          Object.entries(pif.fields).filter(
-            ([fieldName]) => !user?.[fieldName],
-          ),
-        ),
-      },
-    };
-  };
+  // account. A missing name is completed on the profile, where names are
+  // always editable (and D&B Denmark only reads them from the account). Any
+  // other missing field — e.g. date of birth, which the profile may hide — is
+  // asked for here; the rest of the identity is filled from the account when
+  // the validation runs.
+  const isDnb = validationMethod.startsWith('dnb_');
+  const pif = fieldConfig?.person_identifier_fields;
+  const missingNameLabels =
+    isDnb && pif?.type === 'object' && user
+      ? Object.entries(pif.fields)
+          .filter(
+            ([fieldName]) =>
+              ['first_name', 'last_name'].includes(fieldName) &&
+              !user[fieldName],
+          )
+          .map(([, spec]) => spec.label)
+      : [];
+  const missingProfileLabels = missingNameLabels.join(', ');
+
+  const getMissingFieldsConfig = (): PersonIdentifierFieldConfig | null =>
+    isDnb && pif?.type === 'object'
+      ? {
+          ...fieldConfig,
+          person_identifier_fields: {
+            ...pif,
+            fields: Object.fromEntries(
+              Object.entries(pif.fields).filter(
+                ([fieldName]) => !user?.[fieldName],
+              ),
+            ),
+          },
+        }
+      : fieldConfig;
+
+  // Block advancing while a D&B name is missing from the profile.
+  // The reason travels to the footer button so the disabled Next explains why.
+  const blockForIncompleteProfile = missingNameLabels.length > 0;
+  useEffect(() => {
+    onSubmitDisabledChange?.(
+      blockForIncompleteProfile,
+      blockForIncompleteProfile
+        ? translate('Complete your profile to continue.')
+        : undefined,
+    );
+  }, [blockForIncompleteProfile, onSubmitDisabledChange]);
 
   const updateUploadedFiles = useCallback(
     (files: AttachmentUploading[]) => {
@@ -225,6 +257,37 @@ export const OrganizationCreateStep2: FunctionComponent<
                               'This will be used to check your company representative rights.',
                             )}
                           </div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  ) : blockForIncompleteProfile ? (
+                    <Card className="card-bordered mb-4">
+                      <Card.Body className="d-flex gap-3">
+                        <div className="flex-shrink-0">
+                          <InfoIcon size={24} weight="duotone" />
+                        </div>
+                        <div className="flex-grow-1">
+                          <div className="fw-semibold text-gray-800 mb-1">
+                            {translate('Complete your profile to continue')}
+                          </div>
+                          <div className="text-gray-700 mb-3">
+                            {missingProfileLabels
+                              ? translate(
+                                  'This check uses your identity from your account, but your profile is missing: {attributes}. Add it to your profile to continue.',
+                                  { attributes: missingProfileLabels },
+                                )
+                              : translate(
+                                  'This check uses your identity from your account. Complete your profile to continue.',
+                                )}
+                          </div>
+                          <BaseButton
+                            variant="primary"
+                            size="sm"
+                            onClick={() =>
+                              router.stateService.go('profile-manage')
+                            }
+                            label={translate('Complete profile')}
+                          />
                         </div>
                       </Card.Body>
                     </Card>
