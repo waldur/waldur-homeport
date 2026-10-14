@@ -226,7 +226,7 @@ const TabNavItem = ({
           role="presentation"
           // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
-          className="inline-flex cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring-color,var(--waldur-brand-600))] focus-visible:rounded-[var(--focus-ring-radius,6px)]"
+          className="inline-flex cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring-color,var(--brand-600))] focus-visible:rounded-[var(--focus-ring-radius,6px)]"
         >
           {trigger}
         </span>

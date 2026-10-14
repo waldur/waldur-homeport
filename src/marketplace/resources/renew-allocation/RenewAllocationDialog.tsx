@@ -156,7 +156,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   if (!resources.length) {
     return (
-      <div className="text-muted p-5">
+      <div className="text-quaternary p-5">
         {translate('No resource available for renewal.')}
       </div>
     );

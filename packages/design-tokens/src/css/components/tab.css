@@ -1,0 +1,30 @@
+/**
+ * Tab color tokens for waldur-ui's Tabs and TabNav primitives.
+ *
+ * The underline look maps directly to the Metronic .nav-line-tabs metrics and
+ * the brand ramp. Hover uses a neutral underline and text, so a hovered tab
+ * never looks like the selected one.
+ *
+ * The --page-tab-* tokens are the app's page tab strip
+ * (src/navigation/TabsList.tsx), a different look from --tabs-*.
+ *
+ * Each token reads a semantic role, so it needs no dark-mode block: the role
+ * switches with the theme.
+ */
+:root {
+  --tabs-text: var(--text-quaternary);
+  --tabs-text-hover: var(--text-secondary);
+  --tabs-text-active: var(--text-brand-primary);
+  --tabs-text-disabled: var(--text-senary);
+  --tabs-indicator: var(--fg-brand-accent);
+  --tabs-indicator-hover: var(--text-senary);
+  --tabs-border: var(--border-secondary);
+
+  /* The page tabs (src/navigation/TabsList.tsx), ported from Metronic's
+     menu-gray-500 + menu-state-bg-light-primary: $gray-500 tabs, and a
+     hovered or current tab in $text-brand-primary on $bg-brand-primary_alt.
+     The caret takes its tab label colour. */
+  --page-tab-text: var(--text-quaternary);
+  --page-tab-active-text: var(--text-brand-primary);
+  --page-tab-active-bg: var(--bg-brand-primary-alt);
+}

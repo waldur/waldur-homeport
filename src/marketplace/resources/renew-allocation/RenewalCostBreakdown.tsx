@@ -37,7 +37,7 @@ const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
         {item.component_name}
         {delta}
       </td>
-      <td className="text-muted">
+      <td className="text-quaternary">
         {defaultCurrency(item.unit_price)}/
         {item.billing_type === 'prepaid'
           ? translate('mo')
@@ -121,7 +121,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
       <h6 className="mb-3">{translate('Estimated cost breakdown')}</h6>
       <Table size="sm" borderless>
         <thead>
-          <tr className="border-bottom">
+          <tr className="border-b-[1px] border-b-secondary">
             <th>{translate('Component')}</th>
             <th>{translate('Details')}</th>
             <th className="text-end">{translate('Cost')}</th>
@@ -132,11 +132,14 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
             <ComponentRow key={item.component_type} item={item} />
           ))}
           {subscriptionItems.length > 0 && limitItems.length > 0 && (
-            <tr className="border-top">
-              <td colSpan={2} className="text-end text-muted fw-semibold small">
+            <tr className="border-t-[1px] border-t-secondary">
+              <td
+                colSpan={2}
+                className="text-end text-quaternary font-semibold small"
+              >
                 {translate('Subscription subtotal')}
               </td>
-              <td className="text-end text-nowrap fw-semibold">
+              <td className="text-end text-nowrap font-semibold">
                 {defaultCurrency(data.subscription_total)}
               </td>
             </tr>
@@ -145,22 +148,25 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
             <ComponentRow key={item.component_type} item={item} />
           ))}
           {limitItems.length > 0 && subscriptionItems.length > 0 && (
-            <tr className="border-top">
-              <td colSpan={2} className="text-end text-muted fw-semibold small">
+            <tr className="border-t-[1px] border-t-secondary">
+              <td
+                colSpan={2}
+                className="text-end text-quaternary font-semibold small"
+              >
                 {translate('Limit change subtotal')}
               </td>
-              <td className="text-end text-nowrap fw-semibold">
+              <td className="text-end text-nowrap font-semibold">
                 {defaultCurrency(data.limit_change_total)}
               </td>
             </tr>
           )}
         </tbody>
         <tfoot>
-          <tr className="border-top">
-            <td colSpan={2} className="text-end fw-bold">
+          <tr className="border-t-[1px] border-t-secondary">
+            <td colSpan={2} className="text-end font-medium">
               {translate('Total')}
             </td>
-            <td className="text-end text-nowrap fw-bold fs-5">
+            <td className="text-end text-nowrap font-medium fs-5">
               {defaultCurrency(data.total)}
             </td>
           </tr>

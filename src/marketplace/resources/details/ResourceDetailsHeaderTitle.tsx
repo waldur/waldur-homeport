@@ -22,7 +22,7 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
         <h3 className="mb-0 me-2 min-w-0 text-break">{resource.name}</h3>
         <CopyToClipboardButton
           value={resource.name}
-          className="text-hover-primary cursor-pointer"
+          className="hover:text-brand cursor-pointer"
           size={20}
         />
 

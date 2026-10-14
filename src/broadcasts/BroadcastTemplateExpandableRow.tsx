@@ -14,7 +14,7 @@ export const BroadcastTemplateExpandableRow: FunctionComponent<{
   <ExpandableContainer>
     <Card className="broadcast-template card-bordered card-solid">
       <Card.Header>
-        <h6 className="mb-0 fw-bold">{translate('Body')}</h6>
+        <h6 className="mb-0 font-medium">{translate('Body')}</h6>
       </Card.Header>
       <Card.Body>
         <SafeMarkdown text={row.body} smallTitles />

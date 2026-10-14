@@ -27,7 +27,7 @@ export const PublicOfferingPricing: FC<PublicOfferingPricingProps> = ({
       hasVariablePricing(offering) ? (
         // Same treatment as a report description (see ReportingTitle):
         // Panel's own subtitle renders bold at fs-6.
-        <span className="fw-normal">
+        <span className="font-normal">
           {translate(
             'The starting price covers what the plan fixes. Components you size yourself and metered usage are charged on top, at the rates above.',
           )}

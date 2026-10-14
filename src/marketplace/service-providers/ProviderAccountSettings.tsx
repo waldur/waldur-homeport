@@ -44,7 +44,7 @@ interface ProviderAccountSettingsProps {
 // Show what an offering without its own value falls back to instead, so an
 // empty row is not read as "nothing happens".
 const renderNotSet = (fallback: string) => (
-  <span className="text-muted">
+  <span className="text-quaternary">
     {translate('Not set, offerings default to {value}', { value: fallback })}
   </span>
 );
@@ -120,7 +120,7 @@ export const ProviderAccountSettings: FC<ProviderAccountSettingsProps> = ({
         )
       }
     >
-      <p className="text-muted mb-6">
+      <p className="text-quaternary mb-6">
         {translate(
           'How the accounts people get on your offerings are named and set up.',
         )}{' '}

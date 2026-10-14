@@ -191,7 +191,7 @@ export const ReviewerInvitationAccept: FC = () => {
             <h3 className="text-danger mb-4">
               {translate('Invalid invitation')}
             </h3>
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'This invitation link is invalid or has expired. Please contact the call manager for a new invitation.',
               )}
@@ -215,7 +215,7 @@ export const ReviewerInvitationAccept: FC = () => {
             <h3 className="mb-4">
               {translate('Invitation already processed')}
             </h3>
-            <p className="text-muted">
+            <p className="text-quaternary">
               {invitation.invitation_status === 'accepted'
                 ? translate('You have already accepted this invitation.')
                 : translate('This invitation has been declined or expired.')}
@@ -240,10 +240,10 @@ export const ReviewerInvitationAccept: FC = () => {
   return (
     <Container fluid className="py-10">
       <div className="mb-6">
-        <h1 className="fs-2 fw-semibold mb-1">
+        <h1 className="fs-2 font-semibold mb-1">
           {translate('You have been invited to review')}
         </h1>
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate(
             'Review and respond to the invitation below. Your decision helps the call manager build a balanced reviewer pool.',
           )}
@@ -268,8 +268,8 @@ export const ReviewerInvitationAccept: FC = () => {
       {/* COI Policy (informational - disclosure happens at assignment stage) */}
       <COIPolicyCard config={invitation.coi_configuration} />
 
-      <div className="position-sticky bottom-0 z-index-2 d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between gap-4 border rounded bg-body px-6 py-4">
-        <div className="d-none d-md-flex align-items-center gap-2 flex-fill text-muted">
+      <div className="position-sticky bottom-0 z-index-2 d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between gap-4 border rounded bg-primary px-6 py-4">
+        <div className="d-none d-md-flex align-items-center gap-2 flex-fill text-quaternary">
           {hasCOIPolicy(invitation.coi_configuration) && (
             <>
               <InfoIcon size={18} weight="bold" className="flex-shrink-0" />

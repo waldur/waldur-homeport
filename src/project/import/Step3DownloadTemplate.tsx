@@ -60,7 +60,7 @@ export const Step3DownloadTemplate: FC<Step3Props> = ({
   }, [template]);
 
   return (
-    <div className="text-muted">
+    <div className="text-quaternary">
       <p className="mb-6">
         {importType === 'projects_only'
           ? translate(

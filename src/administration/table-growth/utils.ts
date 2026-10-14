@@ -4,9 +4,9 @@ export const getGrowthClass = (
   value: number | null,
   threshold: number,
 ): string => {
-  if (value == null) return 'text-muted';
+  if (value == null) return 'text-quaternary';
   if (value < 0) return 'text-success';
-  if (value > threshold) return 'text-danger fw-bold';
+  if (value > threshold) return 'text-danger font-medium';
   return '';
 };
 

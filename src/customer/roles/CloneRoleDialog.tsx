@@ -101,7 +101,7 @@ export const CloneRoleDialog: FC<{ resolve: CloneRoleDialogResolve }> = ({
                     ))}
                   </div>
                 ) : (
-                  <span className="text-muted">
+                  <span className="text-quaternary">
                     {translate('This role has no permissions.')}
                   </span>
                 )}

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Avatar from '@/core/Avatar';
 import { translate } from '@/i18n';
 
-import { getChatAvatarColor } from './chatColors';
+import { getChatAvatarClass } from './chatColors';
 
 interface TypingUser {
   userId: string;
@@ -37,19 +37,16 @@ export const MatrixTypingIndicator: FC<MatrixTypingIndicatorProps> = ({
   return (
     <div className="tc-typing">
       <div className="tc-typing__avatars">
-        {typingUsers.slice(0, 3).map((u) => {
-          const color = getChatAvatarColor(u.userId);
-          return (
-            <Avatar
-              key={u.userId}
-              name={u.name}
-              src={memberImages?.get(u.userId)}
-              size={20}
-              circle
-              labelClassName={`bg-light-${color} text-${color}`}
-            />
-          );
-        })}
+        {typingUsers.slice(0, 3).map((u) => (
+          <Avatar
+            key={u.userId}
+            name={u.name}
+            src={memberImages?.get(u.userId)}
+            size={20}
+            circle
+            labelClassName={getChatAvatarClass(u.userId)}
+          />
+        ))}
       </div>
       <span className="tc-typing__dots" aria-hidden="true">
         <span />

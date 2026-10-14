@@ -178,7 +178,7 @@ export const ResourceLimitChangeInfo = ({
                               reverseColor
                             />
                             {component.priceSuffix && (
-                              <span className="text-muted ms-1">
+                              <span className="text-quaternary ms-1">
                                 {component.priceSuffix}
                               </span>
                             )}
@@ -188,13 +188,13 @@ export const ResourceLimitChangeInfo = ({
                     </tr>
                   ))}
                   {data.periodTotals.map((row) => (
-                    <tr className="fw-bolder" key={row.chargeMode}>
+                    <tr className="font-semibold" key={row.chargeMode}>
                       <td colSpan={4}>
-                        <span className="text-dark">
+                        <span className="text-primary">
                           {translate('Estimated impact')} ({row.label})
                         </span>
                       </td>
-                      <td className="text-dark">
+                      <td className="text-primary">
                         {defaultCurrency(row.changedTotal, false, true)}
                         {row.priceSuffix}
                       </td>

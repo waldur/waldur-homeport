@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 
 export const LoadingSpinnerSimple = ({ className, ...rest }: IconProps) => {
   const textClass =
-    className && className.includes('text-') ? '' : 'text-primary';
+    className && className.includes('text-') ? '' : 'text-brand';
   return (
     <SpinnerIcon
       className={classNames('animation-spin', textClass, className)}
@@ -29,6 +29,6 @@ export const LoadingSpinner: FunctionComponent<LoadingSpinnerProps> = ({
       {}
       <LoadingSpinnerSimple />
     </h1>
-    {helpText && <p className="text-muted mt-3 mb-0">{helpText}</p>}
+    {helpText && <p className="text-quaternary mt-3 mb-0">{helpText}</p>}
   </div>
 );

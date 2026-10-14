@@ -100,7 +100,7 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
               </>
             }
           >
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'The name shown to users for this role, in each language. The role code is edited separately.',
               )}

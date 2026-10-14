@@ -64,13 +64,13 @@ export const PendingRequestDialog: FC<PendingRequestDialogProps> = ({
         </>
       }
     >
-      <p className="text-gray-700">
+      <p className="text-secondary">
         {translate(
           'You already have a pending request to change the project end date.',
         )}
       </p>
       {request.requested_end_date && (
-        <p className="text-gray-700 mt-2">
+        <p className="text-secondary mt-2">
           {translate('Requested end date')}:{' '}
           {formatDate(request.requested_end_date)}
         </p>

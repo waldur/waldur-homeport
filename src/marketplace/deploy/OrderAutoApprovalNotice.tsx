@@ -55,7 +55,7 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
     <div className="d-flex align-items-start gap-2 mt-4 mb-4 text-success fs-7">
       <CheckCircleIcon size={16} weight="fill" className="flex-shrink-0 mt-1" />
       <span>
-        <span className="fw-semibold">
+        <span className="font-semibold">
           {translate('Order will be auto-approved')}
         </span>
         <br />
@@ -66,14 +66,14 @@ export const OrderAutoApprovalNotice: FC<OrderAutoApprovalNoticeProps> = ({
       </span>
     </div>
   ) : (
-    <div className="d-flex align-items-start gap-2 mt-4 mb-4 text-muted fs-7">
+    <div className="d-flex align-items-start gap-2 mt-4 mb-4 text-quaternary fs-7">
       <ClockCounterClockwiseIcon
         size={16}
         weight="bold"
         className="flex-shrink-0 mt-1"
       />
       <span>
-        <span className="fw-semibold">
+        <span className="font-semibold">
           {translate('Order will need consumer approval')}
         </span>
         <br />

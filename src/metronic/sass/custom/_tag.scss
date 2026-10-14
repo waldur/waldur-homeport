@@ -1,7 +1,7 @@
 .tag {
-  background-color: $bg-primary;
-  color: $text-secondary;
-  border: 1px solid $border-primary;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
   border-radius: $border-radius-sm;
   padding: 1px 8px;
   display: flex;

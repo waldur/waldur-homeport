@@ -170,11 +170,14 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
           shouldConcealPrices || data.periodTotals.length === 0 ? null : (
             <>
               {data.periodTotals.map((row) => (
-                <tr className="fw-bolder" key={row.chargeMode}>
-                  <td colSpan={columnCount - 1} className="text-dark text-end">
+                <tr className="font-semibold" key={row.chargeMode}>
+                  <td
+                    colSpan={columnCount - 1}
+                    className="text-primary text-end"
+                  >
                     {translate('{label} change', { label: row.label })}
                   </td>
-                  <td className="text-dark">
+                  <td className="text-primary">
                     {defaultCurrency(row.changedTotal, false, true)}
                     {row.priceSuffix}
                   </td>

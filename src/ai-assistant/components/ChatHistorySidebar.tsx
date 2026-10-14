@@ -167,7 +167,9 @@ export const ChatHistorySidebar: FC = () => {
             ) : (
               groups.map((group) => (
                 <div key={group.label} className="aui-history-group">
-                  <div className="fw-bold fs-7 text-muted">{group.label}</div>
+                  <div className="font-medium fs-7 text-quaternary">
+                    {group.label}
+                  </div>
                   {group.threads.map((thread) => {
                     const isActive = thread.uuid === currentThreadId;
                     const isRunning =

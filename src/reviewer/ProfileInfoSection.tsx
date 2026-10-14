@@ -81,7 +81,7 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
             {orcidUrl}
           </a>
           {profile.orcid_last_sync && (
-            <small className="text-muted">
+            <small className="text-quaternary">
               {translate('Synced {date}', {
                 date: formatDateTime(profile.orcid_last_sync),
               })}
@@ -90,7 +90,9 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
         </div>
       );
     }
-    return <span className="text-muted">{translate('Not connected')}</span>;
+    return (
+      <span className="text-quaternary">{translate('Not connected')}</span>
+    );
   };
 
   const renderOrcidActions = () => {
@@ -126,7 +128,9 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
           rows={4}
           renderValue={(value) =>
             value || (
-              <span className="text-muted">{translate('Not provided')}</span>
+              <span className="text-quaternary">
+                {translate('Not provided')}
+              </span>
             )
           }
         />
@@ -138,7 +142,9 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
             Array.isArray(value) && value.length ? (
               value.join(', ')
             ) : (
-              <span className="text-muted">{translate('Not provided')}</span>
+              <span className="text-quaternary">
+                {translate('Not provided')}
+              </span>
             )
           }
         />

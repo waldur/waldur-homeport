@@ -19,10 +19,10 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="announcement-group d-print-none">
+    <div className="print:hidden">
       <button
         type="button"
-        className="announcement-group-header bar bg-body w-100 p-0 d-flex align-items-center"
+        className="flex min-h-[55px] w-full items-center border-b border-secondary bg-primary p-0 text-inherit"
         onClick={() => setExpanded((value) => !value)}
         aria-expanded={expanded}
       >
@@ -31,26 +31,22 @@ export const AnnouncementGroup: FC<AnnouncementGroupProps> = ({
             <InfoIcon weight="bold" />
           </div>
           <div className="flex-grow-1 text-start">
-            <strong className="fw-bold d-block fs-6">
+            <strong className="font-medium d-block fs-6">
               {translate('{count} announcements', {
                 count: announcements.length,
               })}
             </strong>
-            <span className="text-muted fs-6">
+            <span className="text-quaternary fs-6">
               {translate('Planned maintenance windows and service updates')}
             </span>
           </div>
           {expanded ? (
-            <CaretUpIcon
-              weight="bold"
-              size={20}
-              className="announcement-group-caret"
-            />
+            <CaretUpIcon weight="bold" size={20} className="text-quaternary" />
           ) : (
             <CaretDownIcon
               weight="bold"
               size={20}
-              className="announcement-group-caret"
+              className="text-quaternary"
             />
           )}
         </div>

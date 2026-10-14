@@ -74,7 +74,7 @@ export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
         // `valueContainer` classNames carry no padding of their own.
         // Confirmed live: the old deployment's icon-to-text gap measures
         // ~10px, matching `me-3` (0.75rem) at this app's 13px root font-size.
-        className="text-gray-500 me-3"
+        className="text-quaternary me-3"
       />
     )}
     {children}
@@ -93,7 +93,7 @@ export const SelectOption = ({ children, ...props }: OptionProps<any, any>) => (
     {!props.isMulti && props.isSelected && (
       <CheckMark
         data-select-check=""
-        className="w-[12px] shrink-0 grow-0 text-[var(--waldur-brand-600)]"
+        className="w-[12px] shrink-0 grow-0 text-brand"
       />
     )}
   </components.Option>

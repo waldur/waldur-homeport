@@ -38,27 +38,27 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
       >
         <tbody>
           <tr>
-            <td className="text-muted">{translate('Committed')}</td>
-            <td className="fw-semibold text-end text-success">
+            <td className="text-quaternary">{translate('Committed')}</td>
+            <td className="font-semibold text-end text-success">
               {formatNumber(data.committed)}
             </td>
           </tr>
           <tr>
-            <td className="text-muted">{translate('Rolled back')}</td>
-            <td className="fw-semibold text-end">
+            <td className="text-quaternary">{translate('Rolled back')}</td>
+            <td className="font-semibold text-end">
               {formatNumber(data.rolled_back)}
             </td>
           </tr>
           <tr>
-            <td className="text-muted">{translate('Rollback ratio')}</td>
+            <td className="text-quaternary">{translate('Rollback ratio')}</td>
             <td
-              className={`fw-semibold text-end ${rollbackHealth === 'danger' ? 'text-danger' : rollbackHealth === 'warning' ? 'text-warning' : ''}`}
+              className={`font-semibold text-end ${rollbackHealth === 'danger' ? 'text-danger' : rollbackHealth === 'warning' ? 'text-warning' : ''}`}
             >
               {formatPercent(data.rollback_ratio_percent)}
             </td>
           </tr>
           <tr>
-            <td className="text-muted">
+            <td className="text-quaternary">
               <div className="d-flex align-items-center">
                 {translate('Deadlocks')}
                 {hasDeadlocks && (
@@ -71,7 +71,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
               </div>
             </td>
             <td
-              className={`fw-semibold text-end ${hasDeadlocks ? 'text-danger' : ''}`}
+              className={`font-semibold text-end ${hasDeadlocks ? 'text-danger' : ''}`}
             >
               {data.deadlocks}
             </td>

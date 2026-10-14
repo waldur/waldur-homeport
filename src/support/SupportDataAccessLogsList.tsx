@@ -96,7 +96,7 @@ export const SupportDataAccessLogsList = () => {
       {
         title: translate('IP address'),
         render: ({ row }: { row: GlobalUserDataAccessLog }) => (
-          <code className="text-muted">
+          <code className="text-quaternary">
             {renderFieldOrDash(row.ip_address)}
           </code>
         ),

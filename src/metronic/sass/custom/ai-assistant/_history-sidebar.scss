@@ -105,11 +105,11 @@
   svg {
     width: 20px;
     height: 20px;
-    color: $gray-400;
+    color: var(--text-quinary);
   }
 
   &:hover {
-    background-color: $gray-50;
+    background-color: var(--bg-secondary);
   }
 }
 
@@ -126,10 +126,10 @@
 
 .aui-history-header-title {
   font-family: $font-family-sans-serif;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   font-size: $h3-font-size;
   line-height: 1.5;
-  color: $gray-700;
+  color: var(--text-secondary);
 }
 
 // Lower the chat/support drawer z-index so header dropdowns (z-index: 105)
@@ -212,18 +212,18 @@
   overflow: visible;
   position: relative;
   font-family: $font-family-sans-serif;
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
   font-size: $font-size-lg;
   line-height: 1.5;
-  color: $gray-900;
+  color: var(--text-primary);
 
   &:hover {
-    background-color: $gray-50; // fill_VIWCCM
+    background-color: var(--bg-secondary); // fill_VIWCCM
   }
 
   &.active {
-    background-color: $gray-50;
-    font-weight: 500;
+    background-color: var(--bg-secondary);
+    font-weight: var(--font-weight-medium);
   }
 
   &:hover .aui-history-item-menu-trigger {
@@ -254,7 +254,7 @@
 .aui-history-empty {
   padding: 16px;
   text-align: center;
-  color: $gray-400;
+  color: var(--text-quinary);
   font-size: $font-size-sm;
 }
 
@@ -270,9 +270,9 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: $primary;
+  background-color: var(--bg-brand-solid);
   flex-shrink: 0;
-  animation: animationBlink 1s steps(5, start) infinite;
+  animation: animation-blink 1s steps(5, start) infinite;
 }
 
 // Pulsing running indicator
@@ -280,7 +280,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: $primary;
+  background-color: var(--bg-brand-solid);
   flex-shrink: 0;
   animation: aui-pulse 1.5s ease-in-out infinite;
 }

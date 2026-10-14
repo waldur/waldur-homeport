@@ -97,7 +97,7 @@ const AllowedRedirectsField: FC = () => {
             />
 
             {currentHomeportUrl && (
-              <small className="d-block mt-2 text-muted">
+              <small className="d-block mt-2 text-quaternary">
                 {translate('Current application origin: {url}', {
                   url: currentHomeportUrl,
                 })}
@@ -151,7 +151,7 @@ export const ConfigurationStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       <h4 className="mb-4">{translate('Provider Configuration')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate('Configure additional settings for the identity provider.')}
       </p>
       <StringGroup

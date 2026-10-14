@@ -71,9 +71,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
           {userData.short_name && (
             <Field
               label={translate('Short name')}
-              value={
-                <code className="text-primary">{userData.short_name}</code>
-              }
+              value={<code className="text-brand">{userData.short_name}</code>}
               space={2}
               labelCol={4}
               valueCol={8}
@@ -114,7 +112,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
     return (
       <Card>
         <Card.Body>
-          <div className="text-center text-muted py-4">
+          <div className="text-center text-quaternary py-4">
             {translate('No projects found for this user')}
           </div>
         </Card.Body>
@@ -136,7 +134,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
           {Object.entries(projects).map(([projectId, project]) => (
             <div key={projectId} className="border rounded p-3">
               <div className="mb-3">
-                <h5 className="mb-1 fw-bold">{project.name}</h5>
+                <h5 className="mb-1 font-medium">{project.name}</h5>
                 <div>
                   <Badge variant="primary" tone="light">
                     {projectId}
@@ -148,25 +146,28 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                 Array.isArray(project.resources) &&
                 project.resources.length > 0 && (
                   <div>
-                    <h6 className="mb-2 text-muted fw-semibold">
+                    <h6 className="mb-2 text-quaternary font-semibold">
                       {translate('Resources ({count})', {
                         count: project.resources.length,
                       })}
                     </h6>
                     <div className="d-flex flex-column gap-2">
                       {project.resources.map((resource, index) => (
-                        <div key={index} className="bg-light rounded p-3">
+                        <div
+                          key={index}
+                          className="bg-tertiary dark:bg-quaternary rounded p-3"
+                        >
                           <div className="d-flex justify-content-between align-items-start flex-wrap gap-2">
                             <div className="flex-grow-1">
-                              <div className="fw-semibold text-dark">
+                              <div className="font-semibold text-primary">
                                 {resource.name}
                               </div>
                             </div>
                             <div className="text-end">
-                              <small className="text-muted d-block">
+                              <small className="text-quaternary d-block">
                                 {translate('Username')}
                               </small>
-                              <code className="bg-secondary bg-opacity-25 px-2 py-1 rounded">
+                              <code className="bg-tertiary dark:bg-gray-800 px-2 py-1 rounded">
                                 {resource.username}
                               </code>
                             </div>
@@ -178,7 +179,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                 )}
 
               {(!project.resources || project.resources.length === 0) && (
-                <div className="text-muted fst-italic">
+                <div className="text-quaternary fst-italic">
                   {translate('No resources in this project')}
                 </div>
               )}
@@ -221,7 +222,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
       </Card.Header>
       <Card.Body>
         <div className="mb-3">
-          <p className="text-muted mb-3">
+          <p className="text-quaternary mb-3">
             {translate(
               'Search by email, short name, project name, or project ID',
             )}
@@ -253,7 +254,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
 
         {isFetching && (
           <div className="text-center py-4">
-            <div className="spinner-border text-primary" role="status">
+            <div className="spinner-border text-brand" role="status">
               <span className="visually-hidden">{translate('Loading...')}</span>
             </div>
           </div>

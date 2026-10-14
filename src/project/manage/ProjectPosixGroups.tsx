@@ -57,7 +57,7 @@ const SECTION_TABLE_PROPS = {
   placeholderHasRetry: false,
   className: 'mt-5',
   headerClassName: 'min-h-40px py-0',
-  titleClassName: 'h4 fw-bold text-gray-700',
+  titleClassName: 'h4 font-medium text-secondary',
   minHeight: 'auto',
 } as const;
 
@@ -88,7 +88,9 @@ const ProviderGroupsTable: FC<{ projectUuid: string }> = ({ projectUuid }) => {
         title: translate('GID'),
         render: ({ row }: { row: ProjectPosixGroup }) =>
           row.gid == null ? (
-            <span className="text-muted">{translate('Not assigned yet')}</span>
+            <span className="text-quaternary">
+              {translate('Not assigned yet')}
+            </span>
           ) : (
             <code>{row.gid}</code>
           ),
@@ -222,7 +224,7 @@ const ProjectPosixGroupsLists: FC<{ projectUuid: string }> = ({
   projectUuid,
 }) => (
   <>
-    <p className="text-muted">
+    <p className="text-quaternary">
       {translate(
         'Group IDs (GIDs) assigned to this project: its one group at each service provider, and the groups held per offering.',
       )}

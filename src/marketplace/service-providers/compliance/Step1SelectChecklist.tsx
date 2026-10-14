@@ -68,7 +68,7 @@ export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
           headerClassName="px-0"
           cardBordered={false}
           fullWidth
-          className="mt-n5 border-bottom"
+          className="mt-n5 border-b-[1px] border-b-secondary"
           minHeight="auto"
           hoverable
           fieldType="radio"

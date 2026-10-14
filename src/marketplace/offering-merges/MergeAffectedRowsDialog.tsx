@@ -39,15 +39,17 @@ const ValueChange: FC<{ row: OfferingMergeAffectedRow }> = ({ row }) => (
   <div className="d-flex flex-column gap-1">
     <span>{renderFieldOrDash(row.old_value)}</span>
     {row.kept_on_source ? (
-      <span className="text-muted fs-8">
+      <span className="text-quaternary fs-8">
         {translate('Unchanged: it stays on the archived source.')}
       </span>
     ) : (
       <span className="d-flex align-items-start gap-2">
-        <span className="text-muted fs-8 text-nowrap pt-1">
+        <span className="text-quaternary fs-8 text-nowrap pt-1">
           {translate('becomes')}
         </span>
-        <span className="fw-semibold">{renderFieldOrDash(row.new_value)}</span>
+        <span className="font-semibold">
+          {renderFieldOrDash(row.new_value)}
+        </span>
       </span>
     )}
   </div>

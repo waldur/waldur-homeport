@@ -11,9 +11,16 @@ import { PROGRESS_FILL, PROGRESS_SIZE } from './progressStyles';
 const read = (relative: string) =>
   readFileSync(fileURLToPath(new URL(relative, import.meta.url)), 'utf8');
 
-const PROGRESS_CSS = read('../../../design-tokens/src/progressColors.css');
-const ANIMATIONS_CSS = read('../../../design-tokens/src/animations.css');
-const RAMPS_CSS = read('../../../design-tokens/src/colorRamps.css');
+const PROGRESS_CSS = read(
+  '../../../design-tokens/src/css/components/progress.css',
+);
+const ANIMATIONS_CSS = read(
+  '../../../design-tokens/src/css/tailwind/animations.css',
+);
+const RAMPS_CSS = read(
+  '../../../design-tokens/src/css/primitives/colorRamps.css',
+);
+const STATUS_CSS = read('../../../design-tokens/src/css/semantic/status.css');
 
 const variants = Object.keys(PROGRESS_FILL);
 
@@ -36,6 +43,10 @@ const declarations = (css: string) =>
 const light = declarations(block(PROGRESS_CSS, ':root'));
 const dark = declarations(block(PROGRESS_CSS, ":root[data-theme='dark']"));
 const ramps = declarations(RAMPS_CSS);
+const status = {
+  light: declarations(block(STATUS_CSS, ':root')),
+  dark: declarations(block(STATUS_CSS, ":root[data-theme='dark']")),
+};
 
 describe('progress tokens', () => {
   it('declares a fill for every variant, in the light theme', () => {
@@ -62,10 +73,19 @@ describe('progress tokens', () => {
   // `primary` reads the runtime brand variable; every other fill is the
   // colour Badge uses for its `solid` tone, in both themes.
   it('matches the Badge solid fill for each variant', () => {
-    const color = (classes: string, prefix: string) =>
-      classes.match(
-        new RegExp(`(?:^|\\s)${prefix}bg-([a-z]+(?:-dark)?-\\d+)`),
-      )?.[1];
+    // A ramp class (`bg-success-600`), a status utility (`bg-success`, the
+    // -solid slot) or a token (`bg-[var(--status-x)]`), as the var() a
+    // progress token would hold.
+    const color = (classes: string, prefix: string) => {
+      const m = classes.match(
+        new RegExp(
+          `(?:^|\\s)${prefix}bg-(?:\\[(var\\(--[\\w-]+\\))\\]|([a-z]+(?:-dark)?-\\d+)|(success|warning|danger)(?=\\s|$))`,
+        ),
+      );
+      if (!m) return undefined;
+      if (m[3]) return `var(--status-${m[3]}-solid)`;
+      return m[1] ?? `var(--color-${m[2]})`;
+    };
     for (const variant of variants) {
       if (variant === 'primary') {
         continue;
@@ -74,22 +94,28 @@ describe('progress tokens', () => {
       const badgeLight = color(solid, '');
       const badgeDark = color(solid, 'dark:') ?? badgeLight;
       expect(light[`--progress-fill-${variant}`], `light ${variant}`).toBe(
-        `var(--color-${badgeLight})`,
+        badgeLight,
       );
       expect(
         { ...light, ...dark }[`--progress-fill-${variant}`],
         `dark ${variant}`,
-      ).toBe(`var(--color-${badgeDark})`);
+      ).toBe(badgeDark);
     }
   });
 
   // Each label is white or gray-900, whichever reads better on its fill; the
   // weakest pairing (indigo, light) is 4.40:1, just under AA's 4.5.
   it('keeps every inner label readable on its fill', () => {
-    const resolve = (value: string | undefined): string | undefined => {
-      const m = value?.match(/^var\((--[\w-]+)\)$/);
-      return m ? resolve(ramps[m[1]]) : value;
-    };
+    const resolver =
+      (theme: 'light' | 'dark') =>
+      (value: string | undefined): string | undefined => {
+        const m = value?.match(/^var\((--[\w-]+)\)$/);
+        if (!m) return value;
+        return resolver(theme)(
+          ramps[m[1]] ??
+            { ...status.light, ...(theme === 'dark' ? status.dark : {}) }[m[1]],
+        );
+      };
     const failures: string[] = [];
     for (const variant of variants) {
       if (variant === 'primary') {
@@ -99,6 +125,7 @@ describe('progress tokens', () => {
         ['light', light],
         ['dark', { ...light, ...dark }],
       ] as const) {
+        const resolve = resolver(theme);
         const fill = resolve(tokens[`--progress-fill-${variant}`]) as string;
         const label = resolve(tokens[`--progress-label-${variant}`]) as string;
         const ratio = contrastRatio(fill, label);

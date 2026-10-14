@@ -58,7 +58,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
 
   if (!currentVersion) {
     return (
-      <div className="d-flex justify-content-center align-items-center h-100 text-muted fs-6">
+      <div className="d-flex justify-content-center align-items-center h-100 text-quaternary fs-6">
         {translate('Select a version to view details')}
       </div>
     );
@@ -66,9 +66,9 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
 
   return (
     <div className="d-flex flex-column h-100">
-      <div className="d-flex justify-content-between align-items-center px-5 py-4 border-bottom">
-        <div className="d-flex align-items-center">
-          <span className="fw-bold me-2">{translate('Changes')}:</span>
+      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
+        <div className="d-flex align-items-center text-nowrap">
+          <span className="font-medium me-2">{translate('Changes')}:</span>
           <StateIndicator
             label={`${changedCount} ${translate('field(s) changed')}`}
             variant={changedCount > 0 ? 'warning' : 'secondary'}
@@ -117,35 +117,37 @@ const TableDiffView: FunctionComponent<{
 }> = ({ diffs }) => {
   if (diffs.length === 0) {
     return (
-      <div className="text-center text-muted py-10 fs-6">
+      <div className="text-center text-quaternary py-10 fs-6">
         {translate('No fields to display')}
       </div>
     );
   }
 
   return (
+    // The column minimums apply from md up: on a phone the three columns
+    // share the width, and long values (emails, UUIDs) break instead.
     <Table responsive className="table-row-bordered align-middle mb-0">
       <thead>
-        <tr className="fw-bold fs-7 text-uppercase text-muted">
-          <th className="ps-5 min-w-150px">{translate('Field')}</th>
-          <th className="min-w-200px">{translate('Previous')}</th>
-          <th className="min-w-200px">{translate('Current')}</th>
+        <tr className="font-medium fs-7 text-uppercase text-quaternary">
+          <th className="ps-5 md:min-w-[150px]">{translate('Field')}</th>
+          <th className="md:min-w-[200px]">{translate('Previous')}</th>
+          <th className="md:min-w-[200px]">{translate('Current')}</th>
         </tr>
       </thead>
       <tbody>
         {diffs.map((diff) => (
           <tr
             key={diff.field}
-            className={diff.changed ? 'bg-light-warning' : ''}
+            className={diff.changed ? 'bg-warning-subtle' : ''}
           >
-            <td className="ps-5 fw-semibold">{diff.label}</td>
+            <td className="ps-5 font-semibold">{diff.label}</td>
             <td>
-              <pre className="mb-0 fs-7 text-muted text-wrap bg-transparent">
+              <pre className="mb-0 fs-7 text-quaternary text-wrap text-break bg-transparent">
                 {formatFieldValue(diff.oldValue)}
               </pre>
             </td>
             <td>
-              <pre className="mb-0 fs-7 text-wrap bg-transparent">
+              <pre className="mb-0 fs-7 text-wrap text-break bg-transparent">
                 {formatFieldValue(diff.newValue)}
               </pre>
             </td>
@@ -177,12 +179,15 @@ const JsonDiffView: FunctionComponent<{
 
   useEffect(() => {
     return () => {
-      // Dispose models after the DiffEditor widget has been disposed
-      // (child cleanup runs before parent cleanup).
-      // We use keepCurrentOriginalModel/keepCurrentModifiedModel to prevent
-      // @monaco-editor/react from disposing models before the widget,
-      // which causes "TextModel got disposed before DiffEditorWidget model got reset".
-      const model = editorRef.current?.getModel();
+      // keepCurrentOriginalModel/keepCurrentModifiedModel stop
+      // @monaco-editor/react from disposing the models, so they are disposed
+      // here. On unmount React runs this (parent) cleanup before the
+      // DiffEditor's own, while the widget still holds the models: detach
+      // them first, or Monaco throws "TextModel got disposed before
+      // DiffEditorWidget model got reset".
+      const editor = editorRef.current;
+      const model = editor?.getModel();
+      editor?.setModel(null);
       model?.original?.dispose();
       model?.modified?.dispose();
       editorRef.current = null;

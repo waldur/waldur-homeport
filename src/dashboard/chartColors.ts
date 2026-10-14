@@ -24,10 +24,12 @@ import { useTheme } from '@/theme/useTheme';
  * changes; `useChartThemeColors` does that for them.
  *
  * The colour ramps (`--color-<ramp>-<step>`) are always there (`@theme static`)
- * and physical, so `ramp()` is the same value in either theme. It is also the
- * fallback for the Bootstrap variables, three of which (`--bs-secondary-bg`,
- * `--bs-secondary-color`, `--bs-card-bg`) the compiled stylesheet does not
- * define, so those three are, today, light-theme values in dark mode too.
+ * and physical, so `ramp()` is the same value in either theme. The track and
+ * muted colours use it directly, so they are the same light-theme grays in dark
+ * mode: they used to read `--bs-secondary-bg` and `--bs-secondary-color`,
+ * which the Bootstrap we ship (5.1.3) never defined, so the ramp was always
+ * the value that rendered. The text, surface and border colours read the
+ * design tokens and follow the theme.
  */
 const ramp = (name: string, step: number) =>
   getCssVar(`--color-${name}-${step}`);
@@ -40,17 +42,17 @@ export const getChartThemeColors = () => {
     brand500: brand[500],
     brand600: brand[600],
     /** Secondary / remaining / inactive series (gray-300). */
-    neutral: getCssVar('--waldur-utility-gray-300', ramp('gray', 300)),
+    neutral: ramp('gray', 300),
     /** Track / background fill (gray-200). */
-    track: getCssVar('--bs-secondary-bg', ramp('gray', 200)),
+    track: ramp('gray', 200),
     /** Axis / muted label text (gray-500). */
-    muted: getCssVar('--bs-secondary-color', ramp('gray', 500)),
-    /** Strong body text (gray-700). */
-    text: getCssVar('--bs-body-color', ramp('gray', 700)),
+    muted: ramp('gray', 500),
+    /** Strong body text (--text-primary: gray-900, gray-dark-25 in dark). */
+    text: getCssVar('--text-primary', ramp('gray', 900)),
     /** Card / canvas background, for gaps and borders drawn inside a chart. */
-    surface: getCssVar('--bs-card-bg', getCssVar('--surface-card-bg')),
+    surface: getCssVar('--card-bg'),
     /** Divider between chart elements. */
-    border: getCssVar('--bs-border-color', ramp('gray', 200)),
+    border: getCssVar('--border-secondary', ramp('gray', 200)),
     /** success-600 */
     success: ramp('success', 600),
     /** warning-600 */

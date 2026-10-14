@@ -299,7 +299,7 @@ export const OrganizationCreatePage: FC = () => {
       <SidebarLayout.Header>
         <div className="w-100">
           <h1 className="mb-2">{translate('Create organization')}</h1>
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate(
               'Register your organization with automatic business verification',
             )}
@@ -374,7 +374,7 @@ export const OrganizationCreatePage: FC = () => {
                     </div>
 
                     {/* Footer buttons */}
-                    <div className="d-flex justify-content-between mt-5 pt-5 border-top">
+                    <div className="d-flex justify-content-between mt-5 pt-5 border-t-[1px] border-t-secondary">
                       <BaseButton
                         variant="secondary"
                         onClick={prevStep}

@@ -566,7 +566,7 @@ export const LimitHorizonView: FC<Props> = ({
       </div>
       <EChart options={options} height={`${chartHeight}px`} width="100%" />
       {skipped > 0 && (
-        <small className="d-block text-muted mt-2">
+        <small className="d-block text-quaternary mt-2">
           {translate('Skipped')}: {skipped}{' '}
           {translate('limit row(s) without configured caps or period bounds.')}
         </small>

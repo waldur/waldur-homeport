@@ -37,7 +37,7 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
       onValueChange={(k) => setActiveMode(k as AnalyticsMode)}
     >
       <Card className="card-bordered">
-        <Card.Header className="border-bottom-0">
+        <Card.Header className="border-b-0">
           <TabsList scrollable>
             {capability.supportedModes.map((mode) => (
               <TabsTrigger

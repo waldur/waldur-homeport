@@ -19,7 +19,7 @@
     /* react-select isn't a native control, so the fieldset can't disable
        it; native inputs and buttons use their own :disabled styles. */
     .metronic-select__control {
-      background-color: var(--bs-gray-50);
+      background-color: var(--bg-secondary);
       cursor: not-allowed;
     }
 

@@ -280,7 +280,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
       />
       <div className="d-flex flex-wrap align-items-center gap-3 mb-3">
         <div className="d-flex align-items-center gap-2">
-          <small className="text-secondary fw-medium">
+          <small className="text-secondary font-medium">
             {translate('Offering · component')}:
           </small>
           <div style={{ minWidth: 320 }}>
@@ -321,7 +321,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         {target?.limit_period && target.limit_period !== 'total' ? (
           <>
             <div className="d-flex align-items-center gap-2">
-              <small className="text-secondary fw-medium">
+              <small className="text-secondary font-medium">
                 {translate('Period A')}:
               </small>
               <div style={{ minWidth: 160 }}>
@@ -344,7 +344,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
               </div>
             </div>
             <div className="d-flex align-items-center gap-2">
-              <small className="text-secondary fw-medium">
+              <small className="text-secondary font-medium">
                 {translate('Period B')}:
               </small>
               <div style={{ minWidth: 160 }}>
@@ -373,7 +373,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
             )}
           </>
         ) : (
-          <small className="text-muted">
+          <small className="text-quaternary">
             {translate(
               'Selected target uses limit_period=total — there is only one lifetime period to plot.',
             )}
@@ -381,7 +381,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         )}
       </div>
       {!options ? (
-        <div className="text-center py-5 text-muted">
+        <div className="text-center py-5 text-quaternary">
           {translate('Loading or no data for the selected target.')}
         </div>
       ) : (

@@ -245,7 +245,7 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Detection Flow */}
         <section>
           <h4 className="mb-4">{translate('Detection flow')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'When Conflict of Interest detection is triggered, the system checks each reviewer against each proposal for potential conflicts.',
             )}
@@ -261,7 +261,7 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
         {/* COI Types Reference */}
         <section>
           <h4 className="mb-4">{translate('Conflict types reference')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Each conflict type has a severity level and a handling action based on your configuration.',
             )}
@@ -269,20 +269,20 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Type')}</th>
                   <th>{translate('Description')}</th>
                   <th>{translate('Severity')}</th>
                   <th>{translate('Handling')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {allTypes.map((type) => {
                   const info = COI_TYPE_INFO[type];
                   const handling = getHandlingLabel(type, config);
                   return (
                     <tr key={type}>
-                      <td className="fw-bold text-gray-800">{info.label}</td>
+                      <td className="font-medium text-primary">{info.label}</td>
                       <td>{info.description}</td>
                       <td>
                         <Badge
@@ -313,7 +313,7 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Status Workflow */}
         <section>
           <h4 className="mb-4">{translate('Status workflow')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'After a conflict of interest is detected, it progresses through these states based on reviewer and manager actions.',
             )}

@@ -82,10 +82,12 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
       {filteredReports.map((report) => (
         <Col key={report.key} md={6} xl={4}>
           <Link state={report.state}>
-            <Card className="card-bordered card-solid h-100 p-5 d-flex border-hover-primary cursor-pointer">
-              <p className="text-dark fw-bold fs-4 mb-1">{report.title}</p>
+            <Card className="card-bordered card-solid h-100 p-5 d-flex hover:border-brand cursor-pointer">
+              <p className="text-primary font-medium fs-4 mb-1">
+                {report.title}
+              </p>
               {report.description && (
-                <p className="text-muted my-2">{report.description}</p>
+                <p className="text-quaternary my-2">{report.description}</p>
               )}
               <AnalyticsColumn report={report} />
             </Card>

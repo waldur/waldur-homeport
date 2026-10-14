@@ -57,7 +57,7 @@ const renderCandidates = (conflict: ProviderUsernameConflict) => (
     {conflict.candidates.map((candidate) => (
       <li key={candidate.username}>
         <strong>{candidate.username}</strong>{' '}
-        <span className="text-muted">
+        <span className="text-quaternary">
           {candidateEvidence(candidate).join(' · ')}
         </span>
       </li>

@@ -1,0 +1,17 @@
+/**
+ * Layer 2: semantic roles. Each file names what a colour is for and defines
+ * it for both themes, reading only the primitives:
+ *
+ *   background.css   neutral surfaces and fills (--page-bg, --bg-*)
+ *   borders.css      neutral borders and lines (--border-*)
+ *   text.css         the neutral content scale (--text-*)
+ *   status.css       the status matrix (--status-*)
+ *   elevation.css    shadows for floating layers
+ *   brand.css        every brand role, and the focus ring
+ */
+@import './background.css';
+@import './borders.css';
+@import './text.css';
+@import './status.css';
+@import './elevation.css';
+@import './brand.css';

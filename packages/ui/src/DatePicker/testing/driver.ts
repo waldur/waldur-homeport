@@ -186,7 +186,7 @@ const assertNotCovered = (el: HTMLElement, name: string) => {
 };
 
 /** Whether the calendar refuses to page further in `direction`. */
-export const isNavDisabled = (
+const isNavDisabled = (
   direction: 'next' | 'prev',
   calendar = getCalendar(),
 ) => {

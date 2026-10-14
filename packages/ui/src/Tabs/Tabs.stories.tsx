@@ -172,7 +172,7 @@ export const ActivationModes: Story = {
     <div className="p-6 max-w-xl space-y-6">
       {(['automatic', 'manual'] as const).map((mode) => (
         <div key={mode}>
-          <p className="text-xs text-[var(--surface-text-secondary)] mb-1">
+          <p className="text-xs text-quaternary mb-1">
             activationMode=&quot;{mode}&quot;
           </p>
           <Tabs defaultValue="one" activationMode={mode}>
@@ -234,7 +234,7 @@ export const MountModes: Story = {
     <div className="p-6 max-w-xl space-y-6">
       {(['active', 'visited', 'all'] as const).map((mode) => (
         <div key={mode}>
-          <p className="text-xs text-[var(--surface-text-secondary)] mb-1">
+          <p className="text-xs text-quaternary mb-1">
             mount=&quot;{mode}&quot;
           </p>
           <Tabs defaultValue="a" mount={mode}>
@@ -258,7 +258,7 @@ export const MountModes: Story = {
 export const MountVisitedForm: Story = {
   render: () => (
     <div className="p-6 max-w-xl">
-      <p className="text-xs text-[var(--surface-text-secondary)] mb-2">
+      <p className="text-xs text-quaternary mb-2">
         Typing into an input in Tab 1 and navigating to Tab 2 preserves input
         state because mount=&quot;visited&quot; keeps visited tabs mounted in
         DOM.
@@ -408,7 +408,7 @@ export const RouterTabNav: Story = {
           activeKey={currentTab}
           onSelect={setCurrentTab}
         />
-        <div className="p-4 text-sm text-[var(--surface-text-secondary)]">
+        <div className="p-4 text-sm text-quaternary">
           Router currently simulating active route:{' '}
           <strong>{String(currentTab)}</strong>
         </div>

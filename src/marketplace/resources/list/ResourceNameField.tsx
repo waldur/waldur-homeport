@@ -22,7 +22,7 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
       <PublicResourceLink row={row} providerUuid={providerUuid} />
       <CopyToClipboardButton
         value={row.name}
-        className="text-hover-primary cursor-pointer d-inline-block"
+        className="hover:text-brand cursor-pointer d-inline-block"
       />
       <ResourceFlags resource={row} />
       <PublicMaintenanceBadge offeringUuid={row.offering_uuid} />

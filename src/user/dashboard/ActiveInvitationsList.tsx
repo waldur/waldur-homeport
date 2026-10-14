@@ -41,7 +41,7 @@ export const ActiveInvitationsList: FunctionComponent<
 
   if (!data || data.length === 0) {
     return (
-      <div className="text-muted text-center py-4">
+      <div className="text-quaternary text-center py-4">
         {translate('No pending invitations')}
       </div>
     );
@@ -52,7 +52,7 @@ export const ActiveInvitationsList: FunctionComponent<
       {data.map((invitation) => (
         <InvitationAlertItem key={invitation.uuid} invitation={invitation} />
       ))}
-      <p className="text-muted mt-4 mb-0">
+      <p className="text-quaternary mt-4 mb-0">
         {translate('Check your email for the invitation link to accept.')}
       </p>
     </div>

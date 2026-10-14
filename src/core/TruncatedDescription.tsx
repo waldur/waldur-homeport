@@ -32,7 +32,7 @@ export const TruncatedDescription: FC<TruncatedDescriptionProps> = ({
       {collapsed ? truncate(text, { length: max }) : text}
       <button
         type="button"
-        className="text-anchor fw-bold"
+        className="text-anchor font-medium"
         onClick={onClick || setCollapsed}
       >
         &nbsp;

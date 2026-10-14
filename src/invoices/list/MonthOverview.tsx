@@ -36,7 +36,7 @@ const OverviewItemTr = ({ title, value }) => {
   return (
     <tr>
       <td className="text-decoration-underline w-100 py-3">{title}</td>
-      <td className="text-muted text-nowrap">{value}</td>
+      <td className="text-quaternary text-nowrap">{value}</td>
     </tr>
   );
 };
@@ -89,7 +89,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                   <EstimatedCost />
                   <h4 className="mb-4">{date}</h4>
                 </div>
-                <span className="text-dark ms-4 svg-icon svg-icon-2">
+                <span className="text-primary ms-4 svg-icon svg-icon-2">
                   {costTrend === -1 ? (
                     <ArrowDownIcon size={20} weight="bold" />
                   ) : costTrend === 1 ? (
@@ -118,7 +118,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             <div className="d-flex flex-column justify-content-between align-items-end h-100">
               <div>
                 {showTotalSection && (
-                  <table className="fw-bold fs-8 w-75">
+                  <table className="font-medium fs-8 w-75">
                     <tbody>
                       {!isAccountingMode && (
                         <OverviewItemTr

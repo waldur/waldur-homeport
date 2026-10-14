@@ -8,8 +8,28 @@ code:not([class*='language-']) {
   line-height: inherit;
   font-size: inherit;
   background-color: $code-bg;
+
+  @include dark-theme {
+    color: #e493c6;
+    background-color: var(--bg-quaternary);
+  }
   padding: $code-padding;
   margin: $code-margin;
   box-shadow: $code-box-shadow;
   @include border-radius($code-border-radius);
+}
+
+// Bootstrap's reboot colours every code element with $code-color.
+code {
+  @include dark-theme {
+    color: #e493c6;
+  }
+}
+
+// --bg-primary-solid is as dark as the page in dark mode; the key needs to
+// stand out from it.
+kbd {
+  @include dark-theme {
+    background-color: var(--bg-quaternary);
+  }
 }

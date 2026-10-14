@@ -81,14 +81,14 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
       </Card.Header>
       <Card.Body>
         {tree.offerings.length === 0 ? (
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate(
               'No offering of this service provider shares accounts yet. Set the account scope to per service provider, and enable automatic creation of offering users on the offerings.',
             )}
           </p>
         ) : (
           <>
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'One directory for the offerings that share accounts: {offerings}. Each person appears once, with the groups of all those offerings.',
                 {

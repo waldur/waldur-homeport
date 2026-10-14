@@ -57,7 +57,7 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
       <div className="d-flex justify-content-between mb-8">
         <div>
           {resource.attributes.schedules.map((sch, i) => (
-            <span key={i} className="d-block fw-bold">
+            <span key={i} className="d-block font-medium">
               {parseDate(sch.start).toFormat("dd'.'MM'.'yyyy HH:mm")}
               {' - '}
               {parseDate(sch.end).toFormat("dd'.'MM'.'yyyy HH:mm")}
@@ -70,7 +70,7 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
       </div>
 
       <div className="mb-8">
-        <div className="fw-bolder">{resource.customer_name}</div>
+        <div className="font-semibold">{resource.customer_name}</div>
         <div>{resource.project_name}</div>
       </div>
 

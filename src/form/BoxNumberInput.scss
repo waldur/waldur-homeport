@@ -4,8 +4,8 @@
     text-align: center;
     padding: 0.68rem 2.7rem;
     min-width: 116px;
-    font-weight: 500;
-    color: var(--bs-gray-500);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-quaternary);
 
     /* Hide arrows */
 
@@ -21,7 +21,7 @@
 
     &:focus,
     &:active {
-      color: var(--bs-primary);
+      color: var(--brand-color);
     }
   }
 

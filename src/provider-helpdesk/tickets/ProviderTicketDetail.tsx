@@ -33,7 +33,7 @@ const ProviderDetailActions: FC<{ issue: Issue; refetch: () => void }> = ({
   return (
     <>
       <div className="d-flex align-items-center gap-2">
-        <span className="text-muted">{translate('Assignee')}:</span>
+        <span className="text-quaternary">{translate('Assignee')}:</span>
         <AssigneeSelect
           ticketUuid={issue.uuid}
           status={ticket?.status}

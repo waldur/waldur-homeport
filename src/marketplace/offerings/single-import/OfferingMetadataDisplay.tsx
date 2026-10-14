@@ -70,7 +70,7 @@ export const OfferingMetadataDisplay: FunctionComponent<
             <h6>{translate('Offering Information')}</h6>
             <p>
               <strong>{translate('Name:')}</strong>{' '}
-              <span className="text-muted">{metadata.offering_name}</span>
+              <span className="text-quaternary">{metadata.offering_name}</span>
             </p>
             {offeringInfo.type && (
               <p>
@@ -93,7 +93,9 @@ export const OfferingMetadataDisplay: FunctionComponent<
             {offeringInfo.category_name && (
               <p>
                 <strong>{translate('Category:')}</strong>{' '}
-                <span className="text-muted">{offeringInfo.category_name}</span>
+                <span className="text-quaternary">
+                  {offeringInfo.category_name}
+                </span>
               </p>
             )}
           </Col>
@@ -102,7 +104,7 @@ export const OfferingMetadataDisplay: FunctionComponent<
             <p>
               <ClockIcon size={16} className="me-1" weight="bold" />
               <strong>{translate('Processed:')}</strong>{' '}
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {formatDateTime(metadata.export_timestamp)}
               </span>
             </p>

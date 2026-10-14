@@ -78,10 +78,10 @@ const StepNameCell = ({ row }: { row: CallWorkflowStep }) => {
     <div className="d-flex align-items-center gap-2">
       {def?.mandatory && (
         <Tooltip label={translate('Mandatory step. Cannot be removed.')}>
-          <LockSimpleIcon size={14} weight="bold" className="text-muted" />
+          <LockSimpleIcon size={14} weight="bold" className="text-quaternary" />
         </Tooltip>
       )}
-      <span className="fw-semibold">{name}</span>
+      <span className="font-semibold">{name}</span>
       {disabled && (
         <Badge variant="neutral" size="sm" shape="pill" tone="outline">
           {translate('Disabled')}
@@ -189,7 +189,7 @@ export const WorkflowStepsSection: FC<WorkflowStepsSectionProps> = ({
       render: ({ row }) => {
         const description = stepDefinition(row.step)?.description;
         return description ? (
-          <span className="text-muted">{description}</span>
+          <span className="text-quaternary">{description}</span>
         ) : (
           renderFieldOrDash(null)
         );

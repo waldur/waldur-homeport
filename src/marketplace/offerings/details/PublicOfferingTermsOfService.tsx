@@ -54,7 +54,7 @@ export const PublicOfferingTermsOfService: FunctionComponent<
       <Card className="card-bordered mb-10">
         <Card.Body>
           <div className="text-center py-3">
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate('No Terms of Service available.')}
             </p>
           </div>
@@ -94,7 +94,7 @@ export const PublicOfferingTermsOfService: FunctionComponent<
 
         {!hasTextContent && !hasExternalLink && (
           <div className="text-center py-3">
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate('No Terms of Service content available.')}
             </p>
           </div>

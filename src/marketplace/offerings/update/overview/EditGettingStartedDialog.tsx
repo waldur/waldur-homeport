@@ -62,7 +62,7 @@ export const EditGettingStartedDialog: FC<{
                             <InfoIcon
                               size={16}
                               weight="fill"
-                              className="text-muted ms-1"
+                              className="text-quaternary ms-1"
                             />
                           </span>
                         </Tooltip>
@@ -74,7 +74,7 @@ export const EditGettingStartedDialog: FC<{
               </Col>
               <Col
                 xs="auto"
-                className="border-end border-gray-300 border-2 mx-5 p-0"
+                className="border-e-2 border-divider-medium mx-5 p-0"
               />
 
               <Col className="pb-20">

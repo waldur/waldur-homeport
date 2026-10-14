@@ -344,7 +344,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
     // the highlight through the rows (options) and Enter opens one. The
     // backend filters, so downshift doesn't filter locally.
     <div>
-      <div className="d-flex border-bottom py-2 pe-3">
+      <div className="d-flex border-b-[1px] border-b-secondary py-2 pe-3">
         <FilterBox
           {...getInputProps({
             type: 'search',
@@ -392,7 +392,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
         )}
       </div>
       {filterOpen && (
-        <div className="d-flex border-bottom py-1 px-5">
+        <div className="d-flex border-b-[1px] border-b-secondary py-1 px-5">
           {filters.map((filter) => (
             <Field
               key={filter.field}
@@ -417,13 +417,15 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
       >
         {context.status === 'pending' ? (
           <div role="progressbar" aria-label={translate('Loading')}>
-            <p className="text-center text-dark mb-0">{translate('Loading')}</p>
+            <p className="text-center text-primary mb-0">
+              {translate('Loading')}
+            </p>
           </div>
         ) : context.status === 'error' ? (
-          <p className="text-center text-dark mb-0">{translate('Error')}</p>
+          <p className="text-center text-primary mb-0">{translate('Error')}</p>
         ) : rows.length === 0 ? (
           typeof emptyMessage === 'string' ? (
-            <p className="text-center text-dark mb-0">{emptyMessage}</p>
+            <p className="text-center text-primary mb-0">{emptyMessage}</p>
           ) : (
             emptyMessage
           )
@@ -447,7 +449,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
             {context.hasNextPage && (
               <div
                 ref={sentinelRef}
-                className="text-center py-2 text-muted fs-7"
+                className="text-center py-2 text-quaternary fs-7"
               >
                 {context.isFetchingNextPage
                   ? translate('Loading more...')

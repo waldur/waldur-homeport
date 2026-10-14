@@ -321,7 +321,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
             {step === 'result' && result && (
               <div>
                 <h5>{translate('Registration YAML')}</h5>
-                <p className="text-muted">
+                <p className="text-quaternary">
                   {translate(
                     'Register this YAML on the homeserver. On Tuwunel, run {command} with MATRIX_ADMIN_TOKEN set, or with MATRIX_BOOTSTRAP_PASSWORD set and the homeserver\'s registration_shared_secret equal to the registration secret (see "Registering on Tuwunel from the command line" in the admin guide); or send {adminCommand} with the YAML in the admin room. On Synapse, add it to app_service_config_files and restart the homeserver. Do not run Setup again: it generates new tokens.',
                     {
@@ -332,7 +332,7 @@ export const MatrixAppserviceSetupDialog: FC = () => {
                   )}
                 </p>
                 <div className="position-relative">
-                  <pre className="bg-light p-4 rounded">
+                  <pre className="bg-tertiary dark:bg-quaternary p-4 rounded">
                     {result.registration_yaml}
                   </pre>
                   <div className="position-absolute top-0 end-0 m-2">

@@ -45,7 +45,7 @@ export const SelectStep: FC<SelectStepProps> = ({
     // them. Start a new merge to pick others.
     return (
       <div className="d-flex flex-column gap-4">
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate(
             'The offerings are fixed once the draft exists. Delete the draft and start a new merge to pick others.',
           )}
@@ -76,7 +76,7 @@ export const SelectStep: FC<SelectStepProps> = ({
 
   return (
     <div className="d-flex flex-column gap-4">
-      <p className="text-muted mb-0">
+      <p className="text-quaternary mb-0">
         {translate(
           'Resources, orders, usage and history of the sources move to the target; the sources are archived. Basic, Support and site agent offerings merge between themselves; any other type only into an offering of the same type.',
         )}

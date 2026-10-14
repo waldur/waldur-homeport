@@ -26,7 +26,7 @@ export const InvitationAlertItem: FC<InvitationAlertItemProps> = ({
       titleAfter={<ExpiryBadge expires={invitation.expires} />}
       body={
         <div>
-          <div className="text-muted">
+          <div className="text-quaternary">
             {inviterName
               ? translate('Invited by {inviter} to join as {role} ({type})', {
                   inviter: inviterName,
@@ -39,7 +39,7 @@ export const InvitationAlertItem: FC<InvitationAlertItemProps> = ({
                 })}
           </div>
           {invitation.extra_invitation_text && (
-            <div className="text-muted mt-1 fst-italic">
+            <div className="text-quaternary mt-1 fst-italic">
               "{invitation.extra_invitation_text}"
             </div>
           )}

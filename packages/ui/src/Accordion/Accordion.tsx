@@ -28,10 +28,7 @@ export const AccordionItem = forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn(
-      'border-b border-[var(--surface-card-border)] last:border-b-0',
-      className,
-    )}
+    className={cn('border-b border-secondary last:border-b-0', className)}
     {...props}
   />
 ));
@@ -57,9 +54,9 @@ export const AccordionTrigger = forwardRef<
       ref={ref}
       className={cn(
         'group flex flex-1 items-center justify-between gap-4 px-6 py-5 text-left',
-        'text-sm font-semibold text-[var(--surface-text-primary)]',
-        'transition-colors hover:bg-[var(--surface-hover-bg)]',
-        'data-[state=open]:bg-[var(--surface-hover-bg)] data-[state=open]:text-brand-700 dark:data-[state=open]:text-brand-200',
+        'text-sm font-semibold text-primary',
+        'transition-colors hover:bg-primary-hover',
+        'data-[state=open]:bg-primary-hover data-[state=open]:text-brand-700 dark:data-[state=open]:text-brand-200',
         'disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
@@ -89,7 +86,7 @@ export const AccordionContent = forwardRef<
       onScroll?.(event);
     }}
     className={cn(
-      'text-sm text-[var(--surface-text-primary)]',
+      'text-sm text-primary',
       // Accordion's Content is Collapsible's under the hood, so Radix sets
       // --radix-collapsible-content-height here too. The keyframes clip
       // (overflow: hidden) only while animating, so an open panel lets a

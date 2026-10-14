@@ -82,7 +82,7 @@ export const ServiceProcessesDetailsDialog: FC<{
       ) : error ? (
         <LoadingErred loadData={refetch} />
       ) : !data?.processors?.length ? (
-        <p className="text-muted text-center">
+        <p className="text-quaternary text-center">
           {translate('There are no processes.')}
         </p>
       ) : (

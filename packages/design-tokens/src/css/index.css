@@ -1,0 +1,21 @@
+/**
+ * Main aggregate entry point for all shared Waldur design tokens.
+ *
+ * 3-Layer Architecture:
+ * 1. Primitives: Raw scales and foundations (colors, fonts, type, spacing, radius, z-index, motion)
+ * 2. Semantic: Theme-aware visual roles (backgrounds, borders, text, status, elevation, focus)
+ * 3. Components: Component-scoped design tokens for waldur-ui
+ *
+ * Plus fonts.css (@font-face rules) and tailwind/: the Tailwind wiring that
+ * is not a token -- the semantic utilities (theme.css), custom variants
+ * (variants.css) and keyframes and motion utilities (animations.css) -- so
+ * every consumer gets the same utilities, not only waldur-homeport.
+ */
+
+@import './fonts.css';
+@import './primitives/index.css';
+@import './semantic/index.css';
+@import './components/index.css';
+@import './tailwind/theme.css';
+@import './tailwind/variants.css';
+@import './tailwind/animations.css';

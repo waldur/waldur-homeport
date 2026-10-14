@@ -1,10 +1,10 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { FeaturedIcon, BaseButton } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
+import { LayoutWarningBar } from '@/navigation/LayoutWarningBar';
 import { router } from '@/router';
 
 import { usePendingOfferingUsers } from './hooks/usePendingOfferingUsers';
@@ -33,30 +33,21 @@ export const OfferingUsersWarningBar: FC = () => {
   };
 
   return (
-    <div className="layout-warning-bar bar-warning">
-      <div className="container-fluid w-100 d-flex align-items-center gap-2">
-        <FeaturedIcon
-          icon={<WarningCircleIcon weight="bold" />}
-          variant="warning"
-          size="sm"
-        />
-        <p className="text-start fs-6 mb-0">
-          <strong className="fw-bold">
-            {translate('Action required for some accounts.')}
-          </strong>{' '}
-          {translate(
-            'You have {count} accounts that require attention to complete setup.',
-            { count },
-          )}
-        </p>
+    <LayoutWarningBar
+      title={translate('Action required for some accounts.')}
+      actions={
         <BaseButton
           variant="tertiary"
           onClick={handleViewAccounts}
-          className="ms-auto"
           label={translate('View accounts')}
           size="sm"
         />
-      </div>
-    </div>
+      }
+    >
+      {translate(
+        'You have {count} accounts that require attention to complete setup.',
+        { count },
+      )}
+    </LayoutWarningBar>
   );
 };

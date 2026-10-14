@@ -51,7 +51,7 @@ export const Field: FunctionComponent<FieldProps> = ({
         sm={props.isStuck || labelWidth ? 'auto' : props.labelCol || 3}
         style={labelStyle}
         className={classNames(
-          'field-label text-gray-700 fw-bold',
+          'field-label text-secondary font-medium',
           props.labelClass,
         )}
       >
@@ -70,7 +70,7 @@ export const Field: FunctionComponent<FieldProps> = ({
       <Col
         xs={props.xs}
         sm={props.isStuck ? undefined : props.valueCol || 9}
-        className={classNames('text-gray-500', props.valueClass)}
+        className={classNames('text-quaternary', props.valueClass)}
       >
         {props.value || props.children || DASH_ESCAPE_CODE}
         {props.tooltip && <HelpIcon label={props.tooltip} className="ms-1" />}
@@ -78,7 +78,7 @@ export const Field: FunctionComponent<FieldProps> = ({
           <CopyToClipboardButton
             value={props.value}
             size={17}
-            className="mx-2 text-hover-primary cursor-pointer d-inline z-index-1"
+            className="mx-2 hover:text-brand cursor-pointer d-inline z-index-1"
           />
         )}
       </Col>

@@ -1,4 +1,4 @@
-import { buttonVariants } from 'waldur-ui';
+import { buttonVariants, cn } from 'waldur-ui';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
@@ -6,8 +6,7 @@ import { translate } from '@/i18n';
 export const HeroButton = () =>
   ENV.plugins.WALDUR_CORE.HERO_LINK_URL ? (
     <a
-      className={`${buttonVariants({ variant: 'primary' })} mt-3`}
-      style={{ fontWeight: 'bold' }}
+      className={cn(buttonVariants({ variant: 'primary' }), 'mt-3 font-bold')}
       href={ENV.plugins.WALDUR_CORE.HERO_LINK_URL}
     >
       {ENV.plugins.WALDUR_CORE.HERO_LINK_LABEL || translate('Learn more')}

@@ -50,7 +50,7 @@ export const NoResult: FC<NoResultProps> = ({
 
         <div>
           <h4>{title}</h4>
-          <div className="d-flex flex-column align-items-center text-tertiary fs-6">
+          <div className="d-flex flex-column align-items-center text-quaternary fs-6">
             {message !== null &&
               (message || (
                 <p className="mb-0">

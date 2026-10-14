@@ -56,7 +56,7 @@ export const ReviewImportTab: FunctionComponent = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate('No special import options enabled')}
             </p>
           )}

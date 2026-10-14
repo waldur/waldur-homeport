@@ -21,7 +21,7 @@ export const RecentSearchItem = ({ item }) => {
 
   return (
     <Link
-      className="d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
+      className="d-flex text-primary hover:text-brand align-items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)]"
       state={item.to}
       params={item.params}
       onClick={() => {
@@ -30,24 +30,28 @@ export const RecentSearchItem = ({ item }) => {
       }}
     >
       {item.type === 'organization' ? (
-        <BuildingsIcon size={22} weight="bold" className="text-gray-700 me-4" />
+        <BuildingsIcon
+          size={22}
+          weight="bold"
+          className="text-secondary me-4"
+        />
       ) : item.type === 'project' ? (
         <ClipboardTextIcon
           size={22}
           weight="bold"
-          className="text-gray-700 me-4"
+          className="text-secondary me-4"
         />
       ) : item.type === 'user' ? (
-        <UserIcon size={22} weight="bold" className="text-gray-700 me-4" />
+        <UserIcon size={22} weight="bold" className="text-secondary me-4" />
       ) : (
         <SquaresFourIcon
           size={22}
           weight="bold"
-          className="text-gray-700 me-4"
+          className="text-secondary me-4"
         />
       )}
-      <span className="fs-6 fw-semibold flex-grow-1">{item.title}</span>
-      <ArrowClockwiseIcon size={20} className="text-dark" weight="bold" />
+      <span className="fs-6 font-semibold flex-grow-1">{item.title}</span>
+      <ArrowClockwiseIcon size={20} className="text-primary" weight="bold" />
     </Link>
   );
 };

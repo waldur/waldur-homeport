@@ -65,8 +65,8 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
               title: translate('Call'),
               render: ({ row }: { row: SubmittableRound }) => (
                 <span className="d-flex flex-column">
-                  <span className="fw-bold">{row.call.name}</span>
-                  <span className="text-muted fs-7">
+                  <span className="font-medium">{row.call.name}</span>
+                  <span className="text-quaternary fs-7">
                     {row.call.customer_name}
                   </span>
                 </span>
@@ -86,7 +86,7 @@ export const RoundSelectTable: FC<RoundSelectTableProps> = ({
                   organisation instead: the same disambiguation without the
                   word the rest of this flow has dropped. */}
               {!showCallColumn && spansSeveralCalls && spansSeveralOrgs ? (
-                <span className="text-muted fs-7">
+                <span className="text-quaternary fs-7">
                   {row.call.customer_name}
                 </span>
               ) : null}

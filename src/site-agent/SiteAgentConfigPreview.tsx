@@ -111,7 +111,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
         />
       </div>
 
-      <div className="mt-3 text-muted small">
+      <div className="mt-3 text-quaternary small">
         <p className="mb-1">
           <strong>{translate('Next steps:')}</strong>
         </p>

@@ -277,7 +277,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
                   ) : checklistQuery.data ? (
                     <>
                       {checklistQuery.data.name}
-                      <span className="text-muted ms-2">
+                      <span className="text-quaternary ms-2">
                         (
                         {translate('{count} questions', {
                           count: checklistQuery.data.questions_count,

@@ -69,7 +69,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   }
   return (
     <ActionItem
-      className="text-danger border-top"
+      className="text-danger border-t-[1px] border-t-secondary"
       iconColor="danger"
       title={translate('Remove')}
       action={mutate}

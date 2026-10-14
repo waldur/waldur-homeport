@@ -72,7 +72,7 @@ const validateFileField = (value) => {
 
 export const Step2UploadFile: FC<WizardFormStepProps> = (props) => (
   <WizardForm {...props}>
-    <div className="text-muted">
+    <div className="text-quaternary">
       <p className="mb-6">
         {translate('Upload your completed organization template file')}
       </p>

@@ -43,6 +43,6 @@ export const tabTriggerVariants = ({ className }: TabStyleProps = {}) =>
     '[&:not([aria-selected=true]):not([aria-current]):not([aria-disabled=true]):hover]:text-[var(--tabs-text-hover)] [&:not([aria-selected=true]):not([aria-current]):not([aria-disabled=true]):hover]:border-b-[var(--tabs-indicator-hover)]',
     'aria-selected:border-b-[var(--tabs-indicator)] aria-selected:text-[var(--tabs-text-active)] [&[aria-current]]:border-b-[var(--tabs-indicator)] [&[aria-current]]:text-[var(--tabs-text-active)]',
     'aria-disabled:text-[var(--tabs-text-disabled)] aria-disabled:border-b-transparent aria-disabled:cursor-not-allowed',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring-color,var(--waldur-brand-600))] focus-visible:rounded-[var(--focus-ring-radius,6px)]',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring-color,var(--brand-600))] focus-visible:rounded-[var(--focus-ring-radius,6px)]',
     className,
   );

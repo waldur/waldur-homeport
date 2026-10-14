@@ -203,13 +203,13 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <h3 className="mb-0 lh-1">{offering.name}</h3>
               <CopyToClipboardButton
                 value={offering.name}
-                className="text-hover-primary cursor-pointer"
+                className="hover:text-brand cursor-pointer"
                 size={20}
               />
 
               <OfferingStateField offering={offering} hasBullet />
             </div>
-            <p className="text-muted fs-7 mb-0">
+            <p className="text-quaternary fs-7 mb-0">
               {translate('By {organization}', {
                 organization: offering.customer_name,
               })}
@@ -231,10 +231,10 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <Table className="mb-0 px-0 h-auto fs-7 w-auto mt-1">
                 <tbody>
                   <tr>
-                    <th className="fw-bold w-150px p-0 pe-3">
+                    <th className="font-medium w-150px p-0 pe-3">
                       {translate('Shared/Billing enabled')}:
                     </th>
-                    <td className="text-muted p-0">
+                    <td className="text-quaternary p-0">
                       {(offering.shared ? translate('Yes') : translate('No')) +
                         '/' +
                         (offering.billable
@@ -243,10 +243,10 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <th className="fw-bold w-100px p-0 pe-3">
+                    <th className="font-medium w-100px p-0 pe-3">
                       {translate('Type')}:
                     </th>
-                    <td className="text-muted p-0">
+                    <td className="text-quaternary p-0">
                       {getLabel(offering.type)}
                     </td>
                   </tr>

@@ -111,7 +111,7 @@ export const AnnouncementDetailsDialog: FC<{
 
     if (headerParts.length === 0) return null;
 
-    return <div className="text-muted mb-3">{headerParts.join(', ')}</div>;
+    return <div className="text-quaternary mb-3">{headerParts.join(', ')}</div>;
   };
 
   const renderMaintenanceFields = () => {

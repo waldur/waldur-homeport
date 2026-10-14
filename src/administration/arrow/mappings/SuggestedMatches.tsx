@@ -91,7 +91,7 @@ export const SuggestedMatches: FC<SuggestedMatchesProps> = ({
                 <td>
                   <span className="small">{suggestion.license_reference}</span>
                   {suggestion.license_name && (
-                    <div className="text-muted small">
+                    <div className="text-quaternary small">
                       {suggestion.license_name}
                     </div>
                   )}

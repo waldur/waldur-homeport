@@ -30,7 +30,7 @@ export const GrantSourceIndicator: FunctionComponent<{
   if (!label) {
     return (
       <Tooltip label={translate('Granted by a person.')}>
-        <span className="text-muted d-inline-flex align-items-center gap-1">
+        <span className="text-quaternary d-inline-flex align-items-center gap-1">
           <UserIcon size={16} weight="bold" />
           {translate('Manual')}
         </span>
@@ -44,7 +44,7 @@ export const GrantSourceIndicator: FunctionComponent<{
         { source },
       )}
     >
-      <span className="text-primary d-inline-flex align-items-center gap-1">
+      <span className="text-brand d-inline-flex align-items-center gap-1">
         <RobotIcon size={16} weight="bold" />
         {label}
       </span>

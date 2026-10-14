@@ -31,7 +31,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
           <WarningIcon size={64} className="text-warning" weight="duotone" />
         </div>
         <h3 className="mb-4">{translate('Profile required')}</h3>
-        <p className="text-muted mb-6">
+        <p className="text-quaternary mb-6">
           {translate(
             'To accept this invitation, you need to complete the following steps:',
           )}
@@ -84,7 +84,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
           ) : null}
         </div>
         {hasProfile && !isPublished && (
-          <p className="text-muted mt-4 small">
+          <p className="text-quaternary mt-4 small">
             {translate(
               'Publishing your profile will make it visible to call managers for reviewer discovery.',
             )}

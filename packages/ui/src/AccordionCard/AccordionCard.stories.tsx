@@ -77,7 +77,7 @@ export const Small: Story = {
   args: {
     title: 'Advanced settings',
     size: 'sm',
-    className: 'bg-[var(--surface-page-bg)]',
+    className: 'bg-[var(--page-bg)]',
     titleClassName: 'text-[length:1.077rem]',
     defaultOpen: true,
     children: 'Card body content.',
@@ -88,13 +88,13 @@ export const Small: Story = {
 export const SmallWarning: Story = {
   args: {
     title: (
-      <span className="flex items-center gap-2 text-[color:var(--pill-warning-text)]">
+      <span className="flex items-center gap-2 text-[color:var(--status-warning-fg)]">
         <WarningCircleIcon weight="bold" size={20} />
         Membership restrictions apply
       </span>
     ),
     size: 'sm',
-    className: 'bg-[var(--pill-warning-bg)]',
+    className: 'bg-warning-subtle',
     titleClassName: 'text-[length:1.077rem]',
     defaultOpen: true,
     children: 'Card body content.',

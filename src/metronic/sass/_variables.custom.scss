@@ -4,39 +4,73 @@
 // are not accessible in this file but you can override any global variable as shown below:
 //
 
-// Brand colors map
-$brands: (
-  '25': $brand-25,
-  '50': $brand-50,
-  '100': $brand-100,
-  '200': $brand-200,
-  '300': $brand-300,
-  '400': $brand-400,
-  '500': $brand-500,
-  '600': $brand-600,
-  '700': $brand-700,
-  '800': $brand-800,
-  '900': $brand-900,
-) !default;
-
-$brands-rgb: (
-  '50': $brand-50-rgb,
-  '200': $brand-200-rgb,
-  '400': $brand-400-rgb,
-  '600': $brand-600-rgb,
-  '900': $brand-900-rgb,
-) !default;
-
-// Body
+// Neutral roles
 //
-// Settings for the `<body>` element.
-$body-bg: if(isDarkMode(), $gray-25, $white) !default;
+// Bootstrap's and Metronic's neutral colours read the design tokens, so one
+// stylesheet serves both themes. Each is the token with the same value in
+// both themes as the theme-inverted SCSS gray it replaces, except the
+// gray-900/gray-800 text (#101828/#f5f5f6, #182230/#f0f1f1), which becomes
+// --text-primary (#101828/#fafafa) as text-gray-800 did.
+$body-bg: var(--bg-primary) !default;
+$body-color: var(--text-primary) !default;
+$headings-color: var(--text-primary) !default;
+$text-muted: var(--text-quaternary);
+$page-bg: var(--bg-secondary) !default;
+$card-bg: var(--bg-primary) !default;
+$modal-content-bg: var(--bg-primary) !default;
+$form-label-color: var(--text-primary) !default;
+$form-text-color: var(--text-quaternary) !default;
+$input-plaintext-color: var(--text-secondary) !default;
+$input-group-addon-bg: var(--bg-tertiary) !default;
+$input-group-addon-color: var(--text-primary) !default;
+$btn-link-disabled-color: var(--text-tertiary) !default;
+$list-group-color: var(--text-primary) !default;
+$list-group-hover-bg: var(--bg-tertiary) !default;
+$list-group-disabled-color: var(--text-tertiary) !default;
+$list-group-action-color: var(--text-secondary) !default;
+$list-group-action-active-bg: var(--bg-quaternary) !default;
+$blockquote-footer-color: var(--text-tertiary) !default;
+$figure-caption-color: var(--text-tertiary) !default;
+$form-select-disabled-bg: var(--bg-quaternary) !default;
+$form-range-track-bg: var(--border-divider-medium) !default;
+$form-range-thumb-disabled-bg: var(--text-quaternary) !default;
+$thumbnail-border-color: var(--border-primary) !default;
+$border-dashed-color: var(--border-divider-medium) !default; // Custom variable
+// White text on a dark key in both themes (in dark mode the inverted $gray-900
+// made it near-white); dark mode's key is in core/components/_code.scss.
+$kbd-bg: var(--bg-primary-solid) !default;
+// Dark navy veil; dark mode's lighter one is in custom/_modal.scss.
+$modal-backdrop-bg: rgba(css-color(gray, 900), 0.7) !default;
+$table-color: var(--text-primary) !default;
+$table-active-bg: var(--bg-tertiary) !default;
+$table-hover-bg: var(--bg-tertiary) !default;
+$table-striped-bg: color-mix(
+  in srgb,
+  var(--bg-tertiary) 75%,
+  transparent
+) !default;
+// Bootstrap builds its text and background utility maps from $body-color and
+// $body-bg with to-rgb(), which needs a Sass colour. Bootstrap emits no colour
+// utilities here (_utilities.scss), so the maps are empty.
+$utilities-text: () !default;
+$utilities-bg: () !default;
+// Bootstrap generates a .table-{color} for each colour by mixing it with
+// $body-bg in Sass. The two the app uses are written with the tokens in
+// core/components/_tables.scss.
+$table-variants: () !default;
+// Bootstrap's shade-color() and tint-color() need a Sass colour; color-mix()
+// is the same mix, done by the browser.
+$form-file-button-hover-bg: color-mix(
+  in srgb,
+  var(--bg-tertiary) 95%,
+  #000
+) !default;
 
 // Links
 //
 // Style anchor elements.
-$link-color: $text-brand-secondary !default;
-$link-hover-color: $text-brand-secondary !default;
+$link-color: var(--text-brand-secondary) !default;
+$link-hover-color: var(--text-brand-secondary) !default;
 
 // -----------------------------
 // Components
@@ -54,6 +88,22 @@ $card-px: 1.85rem !default;
 
 // Buttons + Forms
 //
+
+// The brand is the tenant's runtime --brand-* ramp, not the static $primary
+// Bootstrap compiles with. These are the Bootstrap outputs that would
+// otherwise paint the compile-time default green: the shared focus glow
+// (inputs, selects, .btn-close), the active list-group row and the range
+// thumb. None of them goes through a Sass colour function, so a CSS
+// variable is safe here.
+$input-btn-focus-color: color-mix(
+  in srgb,
+  var(--focus-ring-color) 25%,
+  transparent
+) !default;
+$list-group-active-bg: var(--bg-brand-solid) !default;
+$list-group-active-border-color: var(--bg-brand-solid) !default;
+$form-range-thumb-bg: var(--bg-brand-solid) !default;
+$form-range-thumb-active-bg: var(--bg-brand-tertiary) !default;
 
 $input-btn-padding-y: 0.538rem !default;
 $input-btn-padding-y-sm: 0.39rem !default;
@@ -74,28 +124,80 @@ $btn-disabled-opacity: 1 !default;
 $input-padding-y: 0.692rem !default;
 $input-padding-x: 0.925rem !default;
 $input-font-size: 1.08rem !default;
-$input-font-weight: 400 !default;
+$input-font-weight: var(--font-weight-normal) !default;
+// Bootstrap's own default is a raw 300.
+$lead-font-weight: var(--font-weight-light) !default;
 
-$input-color: $text-primary !default;
-$input-placeholder-color: $text-placeholder !default;
-$input-bg: $bg-primary !default;
-$input-border-color: $border-primary !default;
+$input-color: var(--text-primary) !default;
+$input-placeholder-color: var(--text-quaternary) !default;
+$input-bg: var(--bg-primary) !default;
+$input-border-color: var(--border-primary) !default;
 $input-box-shadow: unset !default;
-$input-disabled-bg: $bg-disabled_subtle !default;
-$input-disabled-color: $text-disabled !default; // Custom variable
-$input-focus-border-color: $border-brand !default;
-$input-focus-box-shadow: 0 0 0 1px $border-brand !default;
+$input-disabled-bg: var(--bg-secondary) !default;
+$input-disabled-color: var(--text-disabled) !default; // Custom variable
+$input-readonly-bg: var(--bg-primary) !default; // Custom variable
+// Filled inputs (.form-control-solid): a tertiary surface, quaternary when
+// focused. In dark mode that is a dark fill with light text, where the
+// inverted grays gave a mid-gray (#61646c) one with dim (#94969c) text.
+$input-solid-bg: var(--bg-tertiary) !default; // Custom variable
+$input-solid-bg-focus: var(--bg-quaternary) !default; // Custom variable
+$input-solid-color: var(--text-secondary) !default; // Custom variable
+$input-focus-border-color: var(--border-brand) !default;
+$input-focus-box-shadow: 0 0 0 1px var(--border-brand) !default;
 
-$form-feedback-invalid-color: $border-error;
-$form-focus-feedback-invalid-color: $border-error-solid; // Custom variable
-$form-feedback-icon-invalid-color: $fg-error-secondary;
+// Form validation. The state colours are the status tokens with the values
+// the theme-inverted ramps gave: invalid is --status-danger-border
+// (#fda29b / #f97066) and its focus --status-danger-solid (#d92d20 /
+// #f04438). Valid is --status-success-solid, which is #12b76a in dark mode
+// (#6ce9a6 before).
+$form-feedback-valid-color: var(--status-success-solid);
+$form-feedback-invalid-color: var(--status-danger-border);
+$form-focus-feedback-invalid-color: var(
+  --status-danger-solid
+); // Custom variable
+
+// The icons are data URIs: light colours here, dark ones in
+// core/components/_dark-icons.scss.
+$form-feedback-icon-valid: svg-feedback-valid(css-color(success, 600));
+$form-feedback-icon-invalid: svg-feedback-invalid(css-color(error, 500));
+$form-select-indicator-color: css-color(gray, 600) !default;
+
+// Bootstrap passes each state's entries to form-validation-state() as named
+// arguments. Its defaults for the tooltip and the focus ring run Sass colour
+// functions on the colour, so they are given here, the same mixes in
+// color-mix(); the (unused) tooltips keep their black text.
+$form-validation-states: (
+  'valid': (
+    'color': $form-feedback-valid-color,
+    'icon': $form-feedback-icon-valid,
+    'tooltip-color': #000,
+    'tooltip-bg-color': color-mix(
+        in srgb,
+        $form-feedback-valid-color 90%,
+        transparent
+      ),
+    'focus-box-shadow': 0 0 0 0.25rem
+      color-mix(in srgb, $form-feedback-valid-color 25%, transparent),
+  ),
+  'invalid': (
+    'color': $form-feedback-invalid-color,
+    'icon': $form-feedback-icon-invalid,
+    'tooltip-color': #000,
+    'tooltip-bg-color': color-mix(
+        in srgb,
+        $form-feedback-invalid-color 90%,
+        transparent
+      ),
+    'focus-box-shadow': 0 0 0 0.25rem
+      color-mix(in srgb, $form-feedback-invalid-color 25%, transparent),
+  ),
+);
 
 // Dropdowns
-$dropdown-box-shadow: if(
-  isDarkMode(),
-  0px 0px 30px rgba(0, 0, 0, 0.3),
-  (0 12px 16px -4px rgba($gray-900, 0.1), 0 4px 6px -2px rgba($gray-900, 0.05%))
-) !default;
+// Dark mode: 0px 0px 30px rgba(0, 0, 0, 0.3), in _tables.scss.
+$dropdown-box-shadow:
+  0 12px 16px -4px rgba(css-color(gray, 900), 0.1),
+  0 4px 6px -2px rgba(css-color(gray, 900), 0.05%) !default;
 
 // Modals
 
@@ -119,8 +221,8 @@ $modal-md: 544px !default;
 $modal-sm: 400px !default;
 
 // Breadcrumbs
-$breadcrumb-divider: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="6.26358" y1="18.4759" x2="14.0116" y2="1.86025" stroke="#{$fg-quinary}" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/></svg>') !default;
-$breadcrumb-divider-color: $fg-quinary !default;
+$breadcrumb-divider: svg-breadcrumb-divider(css-color(gray, 400)) !default;
+$breadcrumb-divider-color: var(--text-quinary) !default;
 $breadcrumb-item-padding-x: 0.923rem !default;
 $breadcrumb-color: $link-color !default; // Custom variable
-$breadcrumb-active-color: $text-quaternary !default;
+$breadcrumb-active-color: var(--text-quaternary) !default;

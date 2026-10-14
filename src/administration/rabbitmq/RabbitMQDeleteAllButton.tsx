@@ -50,7 +50,7 @@ export const RabbitMQDeleteAllButton: FC<RabbitMQDeleteAllButtonProps> = ({
       const typedValue = await confirm(
         translate('WARNING: Mass queue deletion'),
         <>
-          <p className="text-danger fw-bold">
+          <p className="text-danger font-medium">
             {translate(
               'You are about to DELETE ALL subscription queues across ALL users.',
             )}

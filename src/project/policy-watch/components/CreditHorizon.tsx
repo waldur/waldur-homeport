@@ -62,7 +62,7 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
   <WidgetCard cardTitle={translate('What happens next')} className="mb-5">
     <div className="separator mt-4 mb-5" />
     {events.length === 0 ? (
-      <p className="text-muted mb-0">
+      <p className="text-quaternary mb-0">
         {translate(
           'Nothing is scheduled to end: the credit has no expiry date, and neither the project nor its resources have an end date.',
         )}
@@ -84,14 +84,16 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
                 variant={TONE_VARIANT[event.tone]}
                 size="sm"
               />
-              {!isLast && <div className="border-start flex-grow-1 my-2" />}
+              {!isLast && (
+                <div className="border-l-[1px] border-l-secondary flex-grow-1 my-2" />
+              )}
             </div>
             <div className={isLast ? 'mb-0' : 'mb-5'}>
               <div className="d-flex flex-wrap align-items-baseline gap-2">
-                <span className="fw-bold">{event.title}</span>
-                <small className="text-muted">{metaLabel(event)}</small>
+                <span className="font-medium">{event.title}</span>
+                <small className="text-quaternary">{metaLabel(event)}</small>
               </div>
-              <div className="text-muted">{event.consequence}</div>
+              <div className="text-quaternary">{event.consequence}</div>
             </div>
           </div>
         );

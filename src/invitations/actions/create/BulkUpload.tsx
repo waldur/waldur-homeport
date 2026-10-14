@@ -94,18 +94,18 @@ export const BulkUpload: FC<OwnProps> = (props) => {
     <div className="border rounded px-2 mb-7">
       <Row className="h-60px align-items-center gx-5 fs-6">
         <Col xs="auto" className="ps-6">
-          <FileIcon weight="bold" size={22} className="text-muted" />
+          <FileIcon weight="bold" size={22} className="text-quaternary" />
         </Col>
         <Col>
           <Stack
             direction="horizontal"
             gap={2}
-            className="align-items-center fw-bold"
+            className="align-items-center font-medium"
           >
-            <span className="fw-bold">{file.name}</span>
+            <span className="font-medium">{file.name}</span>
             <CheckCircleIcon size={16} weight="fill" className="text-success" />
           </Stack>
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate('{count} users', { count: importedUsersCount })}
             {' - '}
             {translate('{percentage}% uploaded', { percentage: 100 })}
@@ -122,12 +122,12 @@ export const BulkUpload: FC<OwnProps> = (props) => {
       </Row>
     </div>
   ) : (
-    <Row className="border-top border-bottom h-60px align-items-center mb-7 fs-6">
+    <Row className="border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary h-60px align-items-center mb-7 fs-6">
       <Col>
-        <p className="fs-6 fw-bold text-gray-700 mb-0">
+        <p className="fs-6 font-medium text-secondary mb-0">
           {translate('Bulk import contacts')}
         </p>
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate(
             'Import your mailing list from a .csv file. You can download an {example}',
             {

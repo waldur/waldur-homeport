@@ -57,10 +57,16 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
                 </ImagePlaceholder>
               )}
               <div className="overflow-hidden">
-                <div className="fw-semibold ellipsis" style={{ fontSize: 16 }}>
+                <div
+                  className="font-semibold ellipsis"
+                  style={{ fontSize: 16 }}
+                >
                   {offering.name}
                 </div>
-                <div className="text-muted ellipsis" style={{ fontSize: 14 }}>
+                <div
+                  className="text-quaternary ellipsis"
+                  style={{ fontSize: 14 }}
+                >
                   {offering.customer_name}
                 </div>
               </div>
@@ -69,7 +75,7 @@ export const ListItemCard: FC<OfferingCardVariantProps> = ({
             {/* Description */}
             {offering.description && (
               <div
-                className="text-muted ellipsis-lines-2"
+                className="text-quaternary ellipsis-lines-2"
                 style={{ fontSize: 14 }}
               >
                 {offering.description}

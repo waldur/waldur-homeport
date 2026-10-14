@@ -14,9 +14,7 @@ import { BaseButton, Card } from 'waldur-ui';
 const renderFallback: FallbackRender = ({ error }) => (
   <Card className="m-6 flex flex-col items-center gap-3 p-8 text-center">
     <p className="text-lg font-semibold">{translate('Something went wrong')}</p>
-    <p className="text-sm text-[var(--surface-text-muted)]">
-      {(error as Error)?.message}
-    </p>
+    <p className="text-sm text-quinary">{(error as Error)?.message}</p>
     <BaseButton
       label={translate('Reload')}
       variant="primary"

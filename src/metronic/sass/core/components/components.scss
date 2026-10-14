@@ -3,7 +3,7 @@
 //
 
 // Bootstrap components
-@import 'bootstrap/scss/root';
+@import 'root';
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
 @import 'bootstrap/scss/images';
@@ -13,7 +13,7 @@
 @import 'bootstrap/scss/breadcrumb';
 // Bootstrap's forms partial minus forms/form-check: checkboxes, radios and
 // switches are waldur-ui Checkbox/Radio/Switch (waldur-design-tokens/
-// checkColors.css), so .form-check / .form-switch / .btn-check are gone.
+// check.css), so .form-check / .form-switch / .btn-check are gone.
 @import 'bootstrap/scss/forms/labels';
 @import 'bootstrap/scss/forms/form-text';
 @import 'bootstrap/scss/forms/form-control';
@@ -24,22 +24,30 @@
 @import 'bootstrap/scss/forms/validation';
 @import 'bootstrap/scss/transitions';
 @import 'bootstrap/scss/card';
+// list-group and helpers generate a .list-group-item-{color} and a
+// .link-{color} for every $theme-colors key, in compile-time (and, in dark
+// mode, theme-inverted) colours. Nothing uses them: colour comes from the
+// design tokens. Import both with no theme colours so only the structural
+// rules remain.
+$_theme-colors: $theme-colors;
+$theme-colors: ();
 @import 'bootstrap/scss/list-group';
+$theme-colors: $_theme-colors;
 @import 'bootstrap/scss/close';
 @import 'bootstrap/scss/modal';
 @import 'bootstrap/scss/spinners';
 
 // Bootstrap helpers
+$theme-colors: ();
 @import 'bootstrap/scss/helpers';
+$theme-colors: $_theme-colors;
 
 // Bootstrap utilities
 @import 'utilities';
 @import 'bootstrap/scss/utilities/api';
 
 // Custom components
-@import 'root';
 @import 'helpers';
-@import 'animation';
 @import 'separator';
 @import 'card';
 @import 'buttons';
@@ -55,6 +63,6 @@
 @import 'drawer';
 @import 'rotate';
 @import 'scroll';
-@import 'stepper';
 @import 'consent-dialog';
 @import 'print-mode';
+@import 'dark-icons';

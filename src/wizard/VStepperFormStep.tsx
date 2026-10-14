@@ -90,7 +90,7 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
             <div>
               <h4 className="mb-0">{props.title}</h4>
               {props.subtitle && (
-                <small className="fs-6 fw-normal d-block mt-2">
+                <small className="fs-6 font-normal d-block mt-2">
                   {props.subtitle}
                 </small>
               )}

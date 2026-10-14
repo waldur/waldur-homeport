@@ -99,7 +99,7 @@ export const TechnicalAssessmentSection: FC<
                 .map((comment) => (
                   <p
                     key={comment.question_uuid}
-                    className="mb-0 mt-2 fw-normal text-gray-800"
+                    className="mb-0 mt-2 font-normal text-primary"
                   >
                     {comment.answer_display}
                   </p>

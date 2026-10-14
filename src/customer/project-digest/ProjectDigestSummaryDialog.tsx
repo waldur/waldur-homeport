@@ -15,7 +15,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
       <div className="d-flex flex-column gap-8">
         <section>
           <h4 className="mb-4">{translate('Overview')}</h4>
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate(
               'Project digest sends periodic email summaries to project members, giving them an overview of each project they belong to. Digests include information such as active resources, project timelines, and team composition.',
             )}
@@ -24,7 +24,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
 
         <section>
           <h4 className="mb-4">{translate('How it works')}</h4>
-          <ol className="text-muted mb-0">
+          <ol className="text-quaternary mb-0">
             <li className="mb-2">
               {translate(
                 'An organization owner enables digest emails and chooses the frequency (weekly, bi-weekly, or monthly) and the delivery day.',
@@ -55,7 +55,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
 
         <section>
           <h4 className="mb-4">{translate('Available sections')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'The digest can include the following sections, depending on which plugins are installed:',
             )}
@@ -63,14 +63,14 @@ export const ProjectDigestSummaryDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Section')}</th>
                   <th>{translate('Description')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Resource Usage')}
                   </td>
                   <td>
@@ -80,7 +80,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Project Timeline')}
                   </td>
                   <td>
@@ -90,7 +90,9 @@ export const ProjectDigestSummaryDialog: FC = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">{translate('Team')}</td>
+                  <td className="font-medium text-primary">
+                    {translate('Team')}
+                  </td>
                   <td>
                     {translate(
                       'Summarizes the number of project members grouped by role.',
@@ -107,14 +109,14 @@ export const ProjectDigestSummaryDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Frequency')}</th>
                   <th>{translate('Description')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Weekly')}
                   </td>
                   <td>
@@ -124,7 +126,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Bi-weekly')}
                   </td>
                   <td>
@@ -134,7 +136,7 @@ export const ProjectDigestSummaryDialog: FC = () => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Monthly')}
                   </td>
                   <td>

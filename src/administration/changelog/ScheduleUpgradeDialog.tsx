@@ -90,7 +90,7 @@ export const ScheduleUpgradeDialog: FC<ScheduleUpgradeDialogProps> = ({
               />
             }
           >
-            <p className="text-muted mb-4">
+            <p className="text-quaternary mb-4">
               {translate(
                 'This creates a maintenance announcement visible to all users, informing them about the scheduled upgrade window.',
               )}

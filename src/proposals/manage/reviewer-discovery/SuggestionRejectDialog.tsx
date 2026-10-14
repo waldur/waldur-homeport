@@ -77,7 +77,7 @@ export const SuggestionRejectDialog = ({
             }
           >
             <div className="size-lg">
-              <p className="text-muted mb-4">
+              <p className="text-quaternary mb-4">
                 {translate(
                   'Are you sure you want to reject {name} as a reviewer suggestion?',
                   { name: resolve.suggestion.reviewer_name },

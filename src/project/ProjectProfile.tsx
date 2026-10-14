@@ -89,14 +89,14 @@ const ProjectKindCard = ({ project }: ProjectProfileProps) => {
         </span>
       </div>
       <div>
-        <h6 className="fw-bold">
+        <h6 className="font-medium">
           {project.kind === 'course'
             ? translate('This is project course type')
             : project.kind === 'public'
               ? translate('This is project public type')
               : 'N/A'}
         </h6>
-        <p className="fs-6 text-muted">
+        <p className="fs-6 text-quaternary">
           {project.kind === 'course'
             ? translate(
                 'This course project enables creation of short-lived course accounts.',
@@ -130,7 +130,7 @@ const ProjectEndDate = ({ project }: ProjectProfileProps) => {
   let className = '';
   let suffix: string | null = null;
   if (project.is_in_grace_period) {
-    className = 'text-warning fw-semibold';
+    className = 'text-warning font-semibold';
     const daysLeft = Math.max(
       0,
       Math.ceil((effectiveEndDateObj.getTime() - today.getTime()) / 86400000),
@@ -139,12 +139,12 @@ const ProjectEndDate = ({ project }: ProjectProfileProps) => {
       n: String(daysLeft),
     });
   } else if (daysSinceEffectiveEnd > 0) {
-    className = 'text-danger fw-semibold';
+    className = 'text-danger font-semibold';
     suffix = translate('(expired {n} days ago)', {
       n: String(daysSinceEffectiveEnd),
     });
   } else if (daysToEnd >= 0 && daysToEnd <= APPROACHING_DAYS) {
-    className = 'text-warning fw-semibold';
+    className = 'text-warning font-semibold';
     suffix =
       daysToEnd === 0
         ? translate('(today)')

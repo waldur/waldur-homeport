@@ -1,0 +1,78 @@
+/**
+ * The status matrix: the one source for every colour that signals a state
+ * (success, warning, danger, info, neutral) — alerts, badges, health indicators,
+ * validation errors, destructive menu items, status dots, focus rings on an
+ * invalid control. Composed from the ramps in colors.css.
+ *
+ * Slots, per intent:
+ *   -bg      tinted surface (a pill, a banner, a highlighted row)
+ *   -border  subtle border, on a neutral or a tinted surface
+ *   -solid   saturated fill or ring (a focus ring on an invalid control)
+ *   -fg      text, icons and dots, on a neutral surface AND on -bg. One slot
+ *            for both: each step is picked to clear WCAG AA (4.5:1) on the
+ *            card, the page and its own -bg in each theme, which
+ *            statusContrast.test.ts enforces.
+ *
+ * `info` and `neutral` have only -bg and -fg.
+ *
+ * `danger`, not `error`: roles are named by intent, like the button and
+ * ActionItem variants; `error` is only the name of the red ramp.
+ *
+ * Tailwind utilities (tailwind/theme.css), named like Bootstrap 5.3's:
+ * `text-warning` is -fg, `bg-warning` and `border-warning` are -solid,
+ * `bg-warning-subtle` and `border-warning-subtle` are -bg and -border
+ * (`text-info` / `bg-info-subtle`, `text-neutral` / `bg-neutral-subtle` for
+ * the two-slot intents). The no-raw-status-ramp
+ * lint rule reports raw success/warning/error ramp steps, and autofixes the
+ * arbitrary form of a slot that has a named utility.
+ *
+ * Both themes are defined in this file.
+ */
+@import '../primitives/colors.css';
+
+:root {
+  --status-success-bg: var(--color-success-50);
+  --status-success-border: var(--color-success-300);
+  --status-success-solid: var(--color-success-600);
+  --status-success-fg: var(--color-success-700);
+
+  --status-warning-bg: var(--color-warning-50);
+  --status-warning-border: var(--color-warning-300);
+  --status-warning-solid: var(--color-warning-600);
+  --status-warning-fg: var(--color-warning-700);
+
+  --status-danger-bg: var(--color-error-50);
+  --status-danger-border: var(--color-error-300);
+  --status-danger-solid: var(--color-error-600);
+  --status-danger-fg: var(--color-error-700);
+
+  --status-info-bg: var(--color-info-50);
+  --status-info-fg: var(--color-info-600);
+
+  --status-neutral-bg: var(--color-gray-100);
+  --status-neutral-fg: var(--color-gray-600);
+}
+
+:root[data-theme='dark'] {
+  --status-success-bg: var(--color-success-900);
+  --status-success-border: var(--color-success-400);
+  --status-success-solid: var(--color-success-500);
+  --status-success-fg: var(--color-success-400);
+
+  --status-warning-bg: var(--color-warning-900);
+  --status-warning-border: var(--color-warning-400);
+  --status-warning-solid: var(--color-warning-500);
+  --status-warning-fg: var(--color-warning-400);
+
+  --status-danger-bg: var(--color-error-900);
+  --status-danger-border: var(--color-error-400);
+  --status-danger-solid: var(--color-error-500);
+  /* 300, not 400 like the others: error-400 on error-900 is 3.5:1. */
+  --status-danger-fg: var(--color-error-300);
+
+  --status-info-bg: var(--color-info-900);
+  --status-info-fg: var(--color-info-300);
+
+  --status-neutral-bg: var(--color-gray-dark-800);
+  --status-neutral-fg: var(--color-gray-dark-400);
+}

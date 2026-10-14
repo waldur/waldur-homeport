@@ -46,7 +46,7 @@ export const OfferingTosNotification: FC<OfferingTosNotificationProps> = ({
 
   if (hasTos && hasPrivacyPolicy) {
     return (
-      <p className="text-center text-gray-400 fs-6 mb-0">
+      <p className="text-center text-quinary fs-6 mb-0">
         {translate(
           'You also agree to the service provider’s <tos>terms of service</tos> and provider’s <pp>privacy policy</pp>.',
           {
@@ -73,7 +73,7 @@ export const OfferingTosNotification: FC<OfferingTosNotificationProps> = ({
 
   if (hasTos) {
     return (
-      <p className="text-center text-gray-400 fs-6 mb-0">
+      <p className="text-center text-quinary fs-6 mb-0">
         {translate(
           'You also agree to the service provider’s <tos>terms of service</tos>.',
           {
@@ -93,7 +93,7 @@ export const OfferingTosNotification: FC<OfferingTosNotificationProps> = ({
 
   if (hasPrivacyPolicy) {
     return (
-      <p className="text-center text-gray-400 fs-6 mb-0">
+      <p className="text-center text-quinary fs-6 mb-0">
         {translate(
           'You also agree to the service provider’s <pp>privacy policy</pp>.',
           {

@@ -33,7 +33,7 @@ const AccordionSection: FC<AccordionSectionProps> = ({
   return (
     <div
       className="aui-disclosure-section border"
-      style={{ backgroundColor: 'var(--bs-body-bg)' }}
+      style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <div
         className="d-flex align-items-center justify-content-between px-5 py-4 cursor-pointer"
@@ -48,18 +48,18 @@ const AccordionSection: FC<AccordionSectionProps> = ({
         }}
       >
         <div className="d-flex align-items-center gap-3">
-          <span className="text-primary">{icon}</span>
-          <span className="fw-bold fs-6">{title}</span>
+          <span className="text-brand">{icon}</span>
+          <span className="font-medium fs-6">{title}</span>
         </div>
         {open ? (
-          <CaretUpIcon size={16} weight="bold" className="text-muted" />
+          <CaretUpIcon size={16} weight="bold" className="text-quaternary" />
         ) : (
-          <CaretDownIcon size={16} weight="bold" className="text-muted" />
+          <CaretDownIcon size={16} weight="bold" className="text-quaternary" />
         )}
       </div>
       {open && (
         <div className="px-5 pb-5 pt-0">
-          <div className="text-muted lh-lg">{children}</div>
+          <div className="text-quaternary lh-lg">{children}</div>
         </div>
       )}
     </div>
@@ -73,10 +73,12 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
     <div className="d-flex flex-column align-items-center flex-grow-1 overflow-auto py-8 px-5">
       <div className="text-center mb-8">
         <div className="mb-4">
-          <SparkleIcon size={32} weight="duotone" className="text-primary" />
+          <SparkleIcon size={32} weight="duotone" className="text-brand" />
         </div>
-        <h2 className="fw-bold fs-3 mb-2">{translate('Before you begin')}</h2>
-        <p className="text-muted fs-6 mb-0">
+        <h2 className="font-medium fs-3 mb-2">
+          {translate('Before you begin')}
+        </h2>
+        <p className="text-quaternary fs-6 mb-0">
           {translate(
             'Please review the following information about the AI Assistant.',
           )}
@@ -150,7 +152,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
       <div className="w-100" style={{ maxWidth: 520 }}>
         <BaseButton
           variant="primary"
-          className="w-100 py-3 fw-bold fs-6"
+          className="w-100 py-3 font-medium fs-6"
           onClick={onAcknowledge}
           label={translate('I understand')}
         />

@@ -31,7 +31,9 @@ export const ComponentRowTotal = (props: {
     : null;
   return (
     <tr className="total">
-      <th className="col-md title fs-4 fw-normal">{translate('Total')}</th>
+      {/* `!`: FormTable.scss's unlayered `.form-table th` sets 500, which
+          outranks a plain utility; the total row is regular weight. */}
+      <th className="col-md title fs-4 font-normal!">{translate('Total')}</th>
       <td colSpan={2} className="col-md-auto col-actions">
         <div className="d-flex align-items-center justify-content-end gap-4">
           {props.period && props.setPeriod && (
@@ -44,7 +46,7 @@ export const ComponentRowTotal = (props: {
               }
             />
           )}
-          <span className="fs-4 text-gray-700 min-w-150px text-end">
+          <span className="fs-4 text-secondary min-w-150px text-end">
             {usageAmount
               ? usageAmount
               : !props.isFloor

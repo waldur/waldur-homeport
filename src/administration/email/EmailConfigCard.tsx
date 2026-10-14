@@ -7,7 +7,7 @@ import { translate } from '@/i18n';
 
 import type { EmailDiagnostics } from './api';
 
-const dash = <span className="text-muted">&mdash;</span>;
+const dash = <span className="text-quaternary">&mdash;</span>;
 
 const yesNo = (value: boolean) => (value ? translate('Yes') : translate('No'));
 
@@ -29,7 +29,7 @@ export const EmailConfigCard: FC<EmailConfigCardProps> = ({ data }) => {
       defaultOpen
       className="mb-6"
     >
-      <p className="text-muted">
+      <p className="text-quaternary">
         {translate(
           'These settings come from the deployment configuration and cannot be changed here. Edit override.conf.py — the Helm values or the docker-compose .env file — and restart the services.',
         )}

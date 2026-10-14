@@ -14,10 +14,15 @@ export const K8sFormSection: FC<PropsWithChildren<K8sFormSectionProps>> = ({
   children,
 }) => {
   return (
-    <div className={classNames('mb-4', topSeparator && 'pt-5 border-top')}>
+    <div
+      className={classNames(
+        'mb-4',
+        topSeparator && 'pt-5 border-t-[1px] border-t-secondary',
+      )}
+    >
       <div className="mb-5">
         <h6 className="text-secondary">{title}</h6>
-        {subtitle && <p className="text-muted">{subtitle}</p>}
+        {subtitle && <p className="text-quaternary">{subtitle}</p>}
       </div>
       <div>{children}</div>
     </div>

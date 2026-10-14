@@ -5,7 +5,7 @@
   border-radius: 7px;
   flex-shrink: 0;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 .image-placeholder.circle {
   border-radius: 50%;

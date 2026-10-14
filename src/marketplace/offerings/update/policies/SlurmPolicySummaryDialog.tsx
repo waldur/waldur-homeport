@@ -155,7 +155,7 @@ const PreviewCommands: FC<{ config: SlurmPolicyConfig }> = ({ config }) => {
 
   if (error || !data?.preview_commands?.length) {
     return (
-      <p className="text-muted fst-italic">
+      <p className="text-quaternary fst-italic">
         {translate('Preview commands are not available.')}
       </p>
     );
@@ -165,13 +165,13 @@ const PreviewCommands: FC<{ config: SlurmPolicyConfig }> = ({ config }) => {
     <div className="table-responsive">
       <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
         <thead>
-          <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+          <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
             <th>{translate('Type')}</th>
             <th>{translate('Description')}</th>
             <th>{translate('Shell command')}</th>
           </tr>
         </thead>
-        <tbody className="text-gray-600">
+        <tbody className="text-tertiary">
           {data.preview_commands.map((cmd, idx) => (
             <tr key={idx}>
               <td>
@@ -296,7 +296,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Section 1: End-to-end flow */}
         <section>
           <h4 className="mb-4">{translate('End-to-end flow')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'When component usage is reported, the system evaluates the policy and takes action based on configured thresholds.',
             )}
@@ -312,7 +312,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Section 2: Base allocation source */}
         <section>
           <h4 className="mb-4">{translate('Base allocation')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'The base allocation for each TRES component is read from the resource limits (set at provisioning time from plan components). Each offering can define multiple components (e.g. cpu, mem, gpu, billing) — the policy evaluates limits per component.',
             )}
@@ -321,20 +321,20 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
             <div className="table-responsive">
               <table className="table align-middle table-row-bordered fs-7 gy-3 gx-5">
                 <thead>
-                  <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                  <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                     <th>{translate('Plan')}</th>
                     <th>{translate('Component')}</th>
                     <th>{translate('Type')}</th>
                     <th>{translate('Amount')}</th>
                   </tr>
                 </thead>
-                <tbody className="text-gray-600">
+                <tbody className="text-tertiary">
                   {planAllocations.flatMap((plan) =>
                     plan.components.map((comp, idx) => (
                       <tr key={`${plan.planName}-${idx}`}>
                         {idx === 0 ? (
                           <td
-                            className="fw-bold text-gray-800"
+                            className="font-medium text-primary"
                             rowSpan={plan.components.length}
                           >
                             {plan.planName}
@@ -354,7 +354,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
               </table>
             </div>
           ) : (
-            <p className="text-muted fst-italic">
+            <p className="text-quaternary fst-italic">
               {translate('No plans with components found for this offering.')}
             </p>
           )}
@@ -363,7 +363,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Section 3: Usage calculation */}
         <section>
           <h4 className="mb-4">{translate('Usage calculation')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Usage percentage is calculated by comparing current consumption against the total available allocation, which may include carryover from the previous period.',
             )}
@@ -376,13 +376,13 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           </div>
 
           <h5 className="mt-6 mb-4">{translate('Carryover formula')}</h5>
-          <p className="text-muted mb-2">
+          <p className="text-quaternary mb-2">
             {translate(
               'When carryover is enabled, unused allocation from the previous period carries over, capped at {pct}% of the base allocation:',
               { pct: carryoverPct },
             )}
           </p>
-          <pre className="bg-light rounded p-4 fs-7 mb-4">
+          <pre className="bg-tertiary dark:bg-quaternary rounded p-4 fs-7 mb-4">
             {[
               `unused    = max(0, base − previous_usage)`,
               `cap       = ${carryoverPct}% × base`,
@@ -394,7 +394,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h5 className="mb-4">
             {translate('Numerical example with current settings')}
           </h5>
-          <p className="text-muted mb-2">
+          <p className="text-quaternary mb-2">
             {translate(
               'Given base allocation of {base} Nh, previous usage of {prev} Nh, and current usage of {current} Nh:',
               {
@@ -406,9 +406,9 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           </p>
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-7 gy-3 gx-5">
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 <tr>
-                  <td className="fw-bold text-gray-800 w-250px">
+                  <td className="font-medium text-primary w-250px">
                     {translate('Unused from previous period')}
                   </td>
                   <td>
@@ -419,7 +419,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Carryover cap')}
                   </td>
                   <td>
@@ -429,7 +429,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Carryover')}
                   </td>
                   <td>
@@ -440,7 +440,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Total allocation')}
                   </td>
                   <td>
@@ -451,7 +451,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Usage percentage')}
                   </td>
                   <td>
@@ -462,7 +462,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Result')}
                   </td>
                   <td>
@@ -493,7 +493,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Section 4: Action thresholds */}
         <section>
           <h4 className="mb-4">{translate('Action thresholds')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Actions are triggered when usage crosses these thresholds. Each action can be independently enabled or disabled.',
             )}
@@ -529,20 +529,22 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Threshold')}</th>
                   <th>{translate('Condition')}</th>
                   <th>{translate('Action')}</th>
                   <th>{translate('Status')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {thresholds.map((row) => {
                   const isEnabled =
                     row.setting === null || actions.includes(row.setting);
                   return (
                     <tr key={row.threshold}>
-                      <td className="fw-bold text-gray-800">{row.threshold}</td>
+                      <td className="font-medium text-primary">
+                        {row.threshold}
+                      </td>
                       <td>{row.condition}</td>
                       <td>{row.action}</td>
                       <td>
@@ -567,7 +569,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Section 5: SLURM commands generated */}
         <section>
           <h4 className="mb-4">{translate('SLURM commands generated')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'The site agent executes these sacctmgr commands on the SLURM cluster to enforce the policy. The commands below are generated from the current configuration using example values (allocation: 1000, previous usage: 600).',
             )}
@@ -578,7 +580,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Section 6: Site agent communication */}
         <section>
           <h4 className="mb-4">{translate('Site agent communication')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Waldur communicates with the SLURM cluster through a STOMP message broker and the site agent.',
             )}
@@ -596,7 +598,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-4">
             {translate('Multiple offerings on same SLURM cluster')}
           </h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'When multiple Waldur offerings target the same SLURM cluster, each offering maps to a separate SLURM account. SLURM uses a hierarchical Fair Tree algorithm where usage propagates up the account tree.',
             )}
@@ -604,14 +606,14 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-7 gy-3 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Aspect')}</th>
                   <th>{translate('Behavior')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Fairshare')}
                   </td>
                   <td>
@@ -621,7 +623,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('TRES limits')}
                   </td>
                   <td>
@@ -632,7 +634,9 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">{translate('QoS')}</td>
+                  <td className="font-medium text-primary">
+                    {translate('QoS')}
+                  </td>
                   <td>
                     {translate(
                       'QoS levels (normal/slowdown/blocked) are set per account. Different offerings can have different QoS states simultaneously.',
@@ -640,7 +644,7 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
                   </td>
                 </tr>
                 <tr>
-                  <td className="fw-bold text-gray-800">
+                  <td className="font-medium text-primary">
                     {translate('Usage tracking')}
                   </td>
                   <td>
@@ -659,10 +663,10 @@ export const SlurmPolicySummaryDialog: FC<Props> = ({ resolve }) => {
           <h4 className="mb-4">{translate('Current configuration summary')}</h4>
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {configSummary.map((row) => (
                   <tr key={row.label}>
-                    <td className="fw-bold text-gray-800 w-200px">
+                    <td className="font-medium text-primary w-200px">
                       {row.label}
                     </td>
                     <td>

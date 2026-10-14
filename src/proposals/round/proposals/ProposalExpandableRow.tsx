@@ -47,7 +47,7 @@ const renderReviewScoreField = ({ row }) => {
 const ComplianceContent: FC<{ data: any }> = ({ data }) => {
   if (!data.questions?.length) {
     return (
-      <p className="text-muted">{translate('No compliance questions.')}</p>
+      <p className="text-quaternary">{translate('No compliance questions.')}</p>
     );
   }
 

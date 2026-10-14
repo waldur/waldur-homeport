@@ -45,7 +45,7 @@ export const OfferViaCallDetailsStep: FC<WizardStepProps> = (props) => {
       <span>
         {option.name}
         {option.abbreviation && (
-          <span className="text-muted ms-2">({option.abbreviation})</span>
+          <span className="text-quaternary ms-2">({option.abbreviation})</span>
         )}
         {callManagerUuids?.has(option.uuid) && (
           <Badge variant="info" shape="pill" tone="outline" className="ms-2">

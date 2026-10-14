@@ -340,7 +340,7 @@ const ResourceActions = () => (
 const ShowAllActions = () => {
   const [query, setQuery] = useState('');
   return (
-    <div className="w-[320px] rounded-lg border border-[var(--surface-card-border)]">
+    <div className="w-[320px] rounded-lg border-[1px] border-secondary">
       <input
         aria-label="Search actions"
         placeholder="Search…"

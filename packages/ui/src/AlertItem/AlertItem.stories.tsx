@@ -41,7 +41,7 @@ export const VariantMatrix: Story = {
     <div className="flex flex-col gap-6">
       {TYPES.map((type) => (
         <div key={type}>
-          <div className="text-sm text-neutral-500 mb-2">type="{type}"</div>
+          <div className="text-sm text-quaternary mb-2">type="{type}"</div>
           <div className="flex flex-col max-w-[480px]">
             {VARIANTS.map((variant) => (
               <AlertItem

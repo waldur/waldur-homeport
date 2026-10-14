@@ -64,7 +64,7 @@ export const GroupInvitationsList: FunctionComponent = () => {
           title: translate('Created by'),
           render: ({ row }) => row.created_by_full_name,
           export: (row) => row.created_by_full_name,
-          className: 'text-dark',
+          className: 'text-primary',
         },
         {
           title: translate('Role'),

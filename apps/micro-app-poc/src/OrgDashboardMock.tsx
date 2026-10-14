@@ -142,11 +142,11 @@ export const OrgDashboardMock = () => {
           <div>
             {/* Breadcrumb/heading track the sidebar: the mode card's own
                 title, then whichever nav item is active. */}
-            <div className="text-sm text-[var(--surface-text-muted)]">
+            <div className="text-sm text-quinary">
               {currentMode?.title} &gt; {translate('Overview')}
             </div>
             <h1 className="text-2xl font-semibold">{translate('Overview')}</h1>
-            <p className="mt-1 text-sm text-[var(--surface-text-secondary)]">
+            <p className="mt-1 text-sm text-quaternary">
               {translate(
                 'Invoices and cost analytics for the selected organisation.',
               )}

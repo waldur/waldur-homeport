@@ -81,7 +81,7 @@ export const BookingResourcesCalendar: FunctionComponent<
       </Col>
       {dates && dates[0] ? (
         <Col className="p-4 d-flex flex-column">
-          <h2 className="fw-bold">
+          <h2 className="font-medium">
             {parseDate(dates[0]).toFormat('dd LLLL yyyy')}
           </h2>
           <div className="timeline-list d-flex flex-grow-1 scroll-y mh-225px">
@@ -114,8 +114,8 @@ export const BookingResourcesCalendar: FunctionComponent<
           <div className="pt-10 pb-5">
             <CalendarIcon className="display-5" weight="bold" />
           </div>
-          <div className="pb-15 fw-bold">
-            <h3 className="text-gray-600 fs-5 mb-2">
+          <div className="pb-15 font-medium">
+            <h3 className="text-tertiary fs-5 mb-2">
               {translate('Select a date')}
             </h3>
           </div>

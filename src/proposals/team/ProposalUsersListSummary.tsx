@@ -66,7 +66,7 @@ export const ProposalUsersListSummary: FC<{
         </div>
       ) : null}
       {rules.teamNote ? (
-        <p className="text-muted py-3 mb-0">{rules.teamNote}</p>
+        <p className="text-quaternary py-3 mb-0">{rules.teamNote}</p>
       ) : null}
       <UsersList
         table={usersTable}

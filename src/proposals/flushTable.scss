@@ -32,7 +32,7 @@
   // that card the table would bleed into the next heading, so the closing line
   // is drawn on the scroll wrapper rather than fighting that rule.
   .table-responsive {
-    border-bottom: 1px solid var(--bs-border-color);
+    border-bottom: 1px solid var(--border-secondary);
   }
 
   .table {

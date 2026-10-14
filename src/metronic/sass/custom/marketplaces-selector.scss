@@ -26,38 +26,24 @@
       overflow-y: auto;
     }
     .list-group-item {
-      background-color: $white !important;
-      color: $black !important;
+      background-color: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
       border: 0;
       &:hover {
-        background-color: $gray-50 !important;
+        background-color: var(--bg-secondary) !important;
         color: unset !important;
       }
       &.active {
-        background-color: $gray-100 !important;
+        background-color: var(--bg-tertiary) !important;
         color: unset !important;
         z-index: unset;
-      }
-      @if isDarkMode() {
-        color: $white !important;
-        background-color: $gray-25 !important;
-        &:hover {
-          background-color: $gray-50 !important;
-        }
-        &.active {
-          background-color: $gray-100 !important;
-        }
       }
     }
 
     // Group header rows (CategoriesPanel) should not look like a selected
     // category while expanded
     .category-group > .list-group-item.active {
-      @if isDarkMode() {
-        background-color: $gray-50 !important;
-      } @else {
-        background-color: $gray-50 !important;
-      }
+      background-color: var(--bg-secondary) !important;
     }
   }
 
@@ -88,31 +74,31 @@
     }
 
     .list-group-item {
-      background-color: if(isDarkMode(), $gray-25, $white);
-      color: if(isDarkMode(), $gray-700, $black) !important;
+      background-color: var(--bg-primary);
+      color: var(--text-primary) !important;
       border: 0;
 
       &:hover {
-        background-color: if(isDarkMode(), $gray-100, $gray-50);
+        background-color: var(--bg-secondary);
       }
       &.active {
-        background-color: if(isDarkMode(), $gray-200, $gray-100);
+        background-color: var(--bg-tertiary);
         .title {
-          color: if(isDarkMode(), $white, $black);
+          color: var(--text-primary);
         }
         .description {
-          color: if(isDarkMode(), $gray-600, $gray-500);
+          color: var(--text-quaternary);
         }
       }
       &.disabled {
-        background-color: if(isDarkMode(), $gray-200, #f6f8fa) !important;
+        background-color: var(--bg-secondary) !important;
         opacity: 0.5;
         .title {
-          color: if(isDarkMode(), $light-inverse, $gray-700) !important;
+          color: var(--text-quinary) !important;
         }
       }
       .description {
-        color: $gray-500;
+        color: var(--text-quaternary);
       }
     }
   }

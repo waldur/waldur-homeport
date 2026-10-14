@@ -117,7 +117,7 @@ export const FormDialog: Story = {
             <div className="flex flex-col gap-3 my-2">
               <label
                 htmlFor="dialog-proj-name"
-                className="text-xs font-semibold text-[var(--surface-text-primary)]"
+                className="text-xs font-semibold text-primary"
               >
                 Project Name
               </label>
@@ -126,7 +126,7 @@ export const FormDialog: Story = {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. HPC Research Q4"
-                className="rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] px-3 py-2 text-sm text-[var(--surface-text-primary)] outline-hidden focus:border-[var(--waldur-brand-color)]"
+                className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-3 py-2 text-sm text-primary outline-hidden focus:border-brand"
               />
             </div>
             <DialogFooter>

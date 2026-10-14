@@ -163,7 +163,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
       }
       secondary
       defaultOpen
-      className="mb-5 bg-gray-50"
+      className="mb-5 bg-secondary"
     >
       {/* OpenStack Infrastructure Selection */}
       <FormGroup
@@ -197,7 +197,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
           label={
             <>
               {translate('Controller nodes (Mandatory)')}:
-              <span className="text-quaternary fw-normal d-block">
+              <span className="text-quaternary font-normal d-block">
                 {translate(
                   'Kubernetes control plane components (API server, etcd, scheduler)',
                 )}
@@ -244,7 +244,7 @@ const DatacenterCard: React.FC<DatacenterCardProps> = ({
                 ? translate('Load balancer nodes (Mandatory)')
                 : translate('Load balancer nodes')}
               :
-              <span className="text-quaternary fw-normal d-block">
+              <span className="text-quaternary font-normal d-block">
                 {translate(
                   'External load balancers for ingress and service exposure',
                 )}

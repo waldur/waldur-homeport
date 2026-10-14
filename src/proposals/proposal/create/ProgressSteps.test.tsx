@@ -15,8 +15,8 @@ import { ProgressSteps, getSteps } from './ProgressSteps';
  * The rendered tests assert against the real `@/wizard` ProgressSteps DOM via
  * accessible queries only (no reaching into @/wizard's internal markup):
  *   - each step is role="listitem" with aria-label={label}
- *   - a completed step gets the CSS class "completed"
- *   - the auto-detected "current" step gets class "current" + aria-current="step"
+ *   - a completed step has data-state="completed"
+ *   - the auto-detected "current" step has aria-current="step"
  *
  * The danger-variant styling (red icon/title, the custom ✕ marker) is decided
  * by `getSteps` itself and rendered by @/wizard from the returned step model.
@@ -36,8 +36,10 @@ const getStep = (label: string) =>
 const queryStep = (label: string) =>
   screen.queryByRole('listitem', { name: label });
 
-const isCompleted = (step: HTMLElement) => step.classList.contains('completed');
-const isCurrent = (step: HTMLElement) => step.classList.contains('current');
+const isCompleted = (step: HTMLElement) =>
+  step.getAttribute('data-state') === 'completed';
+const isCurrent = (step: HTMLElement) =>
+  step.getAttribute('aria-current') === 'step';
 
 describe('proposal create ProgressSteps', () => {
   it('renders three default steps for a draft proposal with none completed', () => {

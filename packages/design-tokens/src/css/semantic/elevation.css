@@ -1,0 +1,33 @@
+/**
+ * Shadows for floating layers.
+ *
+ *   --dropdown-shadow   dropdowns, menus and popovers
+ *   --overlay-shadow    dialogs and toasts
+ *
+ * --dropdown-shadow is Metronic's $dropdown-box-shadow as
+ * src/metronic/sass/_variables.custom.scss overrides it (also
+ * $popover-box-shadow and the $menu map's dropdown shadow), checked against
+ * the live app's dropdowns with getComputedStyle.
+ *
+ * --overlay-shadow is the core $dropdown-box-shadow that override replaced.
+ * Dialog.tsx and Toast.tsx were built on it before the override was noticed,
+ * and keep it so they don't change.
+ *
+ * The card shadow (--card-shadow, card.css) and the drawer shadow
+ * (--drawer-shadow, sheet.css) are still component tokens.
+ *
+ * Both themes are defined in this file.
+ */
+:root {
+  --dropdown-shadow:
+    0 12px 16px -4px rgba(16, 24, 40, 0.1),
+    0 4px 6px -2px rgba(16, 24, 40, 0.0005);
+  --overlay-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+}
+
+:root[data-theme='dark'] {
+  /* The custom $dropdown-box-shadow keeps core's dark value, so both shadows
+     are the same in dark. */
+  --dropdown-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  --overlay-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+}

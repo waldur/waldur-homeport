@@ -372,7 +372,7 @@ describe('ScrollSpy Suite', () => {
 
       expect(activeLink).toHaveAttribute('aria-current', 'true');
       expect(activeLink).toHaveClass('active');
-      expect(activeLink).toHaveClass('text-brand-600');
+      expect(activeLink).toHaveClass('text-brand');
 
       expect(inactiveLink).not.toHaveAttribute('aria-current');
       expect(inactiveLink).not.toHaveClass('active');

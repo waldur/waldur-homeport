@@ -27,11 +27,11 @@ const CookieCategory: FC<CookieCategoryProps> = ({
   value,
   disabled,
 }) => (
-  <div className="cookie-settings-category border-bottom py-4">
+  <div className="cookie-settings-category border-b-[1px] border-b-secondary py-4">
     <div className="d-flex align-items-start justify-content-between gap-3">
       <div>
-        <div className="fw-bold">{title}</div>
-        <div className="text-muted fs-7">{description}</div>
+        <div className="font-medium">{title}</div>
+        <div className="text-quaternary fs-7">{description}</div>
       </div>
       <Switch
         aria-label={title}
@@ -57,7 +57,7 @@ export const CookieSettingsDialog: FC<CookieSettingsDialogProps> = ({
         <Link
           state="about.privacy"
           label={translate('View Privacy Policy')}
-          className="text-primary fw-semibold"
+          className="text-brand font-semibold"
           onClick={close}
         />
         <div className="d-flex gap-3">

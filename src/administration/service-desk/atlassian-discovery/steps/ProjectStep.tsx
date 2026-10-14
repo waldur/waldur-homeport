@@ -122,7 +122,7 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Select Service Desk Project')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Select the Service Desk project that will be used for support tickets.',
         )}
@@ -134,7 +134,7 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
             <Card
               className={`cursor-pointer h-100 ${
                 values.selectedProjectId === project.id
-                  ? 'border-primary border-2'
+                  ? 'border-brand border-2'
                   : 'border-secondary'
               }`}
               onClick={() => form.change('selectedProjectId', project.id)}
@@ -152,10 +152,10 @@ export const ProjectStep: FC<WizardStepProps> = (props) => {
                   <div>
                     <h5 className="mb-1">
                       {project.name}{' '}
-                      <span className="text-muted">({project.key})</span>
+                      <span className="text-quaternary">({project.key})</span>
                     </h5>
                     {project.description && (
-                      <p className="text-muted mb-0 small">
+                      <p className="text-quaternary mb-0 small">
                         {project.description}
                       </p>
                     )}

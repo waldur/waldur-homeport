@@ -19,16 +19,16 @@ export const PageBarFilters = () => {
   if (!filters?.length) return null;
 
   return (
-    <div className="container-fluid bg-body">
+    <div className="container-fluid bg-primary">
       <div className="d-flex overflow-auto py-2">
         <div className="d-flex align-items-center gap-4 text-nowrap w-100">
-          <span className="fw-bold">{translate('Filtered by')}:</span>
+          <span className="font-medium">{translate('Filtered by')}:</span>
           {filters.map((item) => (
             <Stack
               key={item.name}
               direction="horizontal"
               gap={2}
-              className="fw-bold"
+              className="font-medium"
             >
               {item.label}
               <Badge

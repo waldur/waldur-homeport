@@ -164,12 +164,12 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
         ]}
         totalRow={(columnCount) =>
           shouldConcealPrices ? null : (
-            <tr className="fw-bolder">
-              <td colSpan={columnCount - 2} className="text-dark text-end">
+            <tr className="font-semibold">
+              <td colSpan={columnCount - 2} className="text-primary text-end">
                 {translate('Total renewal cost')}
               </td>
-              <td className="text-dark">{defaultCurrency(monthlyTotal)}</td>
-              <td className="text-dark">
+              <td className="text-primary">{defaultCurrency(monthlyTotal)}</td>
+              <td className="text-primary">
                 {defaultCurrency(monthlyTotal * attributes.extension_months)}
               </td>
             </tr>

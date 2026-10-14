@@ -131,7 +131,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                 <div>
                   <p
                     className={classNames(
-                      'fs-6 fw-bold mb-0',
+                      'fs-6 font-medium mb-0',
                       ellipsisTitle && 'ellipsis-lines-1',
                     )}
                   >
@@ -139,7 +139,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   </p>
                   {Boolean(choice.metadata) &&
                     (['string', 'number'].includes(typeof choice.metadata) ? (
-                      <p className="fs-6 fw-semibold text-muted mb-0">
+                      <p className="fs-6 font-semibold text-quaternary mb-0">
                         {choice.metadata}
                       </p>
                     ) : (
@@ -231,7 +231,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                           {selectedVersions[index].label}
                         </div>
                       </div>
-                      <span className="fs-1 fw-light">
+                      <span className="fs-1 font-light">
                         <CaretDownIcon weight="bold" />
                       </span>
                     </div>
@@ -240,7 +240,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   {/* Options menu */}
                   <Menu.Content
                     align="start"
-                    className="border fw-bold rounded-0 mw-250px fs-6 py-3"
+                    className="border font-medium rounded-0 mw-250px fs-6 py-3"
                     // Compact rows, as in the footer menus.
                     density="compact"
                   >

@@ -68,12 +68,12 @@ export const CreditBreakdownCard: FC<Props> = ({ breakdown }) => {
   return (
     <>
       <div className="d-flex justify-content-between align-items-baseline mb-2 gap-3">
-        <span className="text-muted">
+        <span className="text-quaternary">
           {translate('Allocated {amount}', {
             amount: defaultCurrency(granted),
           })}
         </span>
-        <span className="text-muted">
+        <span className="text-quaternary">
           {translate('{pct}% consumed', { pct: consumedPct.toFixed(0) })}
         </span>
       </div>

@@ -76,7 +76,7 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
             date: formatDate(row.effective_end_date),
           })}
         >
-          <span className="ms-1 fs-8 text-muted">+{graceDays}d</span>
+          <span className="ms-1 fs-8 text-quaternary">+{graceDays}d</span>
         </Tooltip>
       )}
       {endDates?.length

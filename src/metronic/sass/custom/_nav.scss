@@ -1,17 +1,14 @@
 .btn-nav-item {
   width: 40px;
   height: 40px;
-  background-color: $bg-primary;
+  background-color: var(--bg-primary);
   border-radius: $border-radius-sm;
   transition: $transition-base;
   outline: none;
   border: none;
 
-  i {
-    color: $gray-400;
-  }
   .svg-icon {
-    @include svg-icon-color($gray-400);
+    @include svg-icon-color(var(--text-quinary));
   }
 
   // `aria-expanded`: the drawer this button opens is showing. The drawer takes
@@ -21,13 +18,10 @@
   &:active,
   &:hover,
   &[aria-expanded='true'] {
-    background-color: $btn-secondary-bg;
+    background-color: var(--btn-secondary-bg);
 
-    i {
-      color: $text-brand-secondary;
-    }
     .svg-icon {
-      @include svg-icon-color($text-brand-secondary);
+      @include svg-icon-color(var(--text-brand-secondary));
     }
   }
 

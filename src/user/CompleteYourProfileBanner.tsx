@@ -16,7 +16,10 @@ interface CompleteYourProfileBannerProps {
 export const CompleteYourProfileBanner = ({
   blockedPageLabel,
 }: CompleteYourProfileBannerProps) => (
-  <div className="h-60px bg-body border-bottom" role="status">
+  <div
+    className="h-60px bg-primary border-b-[1px] border-b-secondary"
+    role="status"
+  >
     <div className="container-fluid d-flex align-items-center h-100">
       <div className="d-flex align-items-center">
         <FeaturedIcon

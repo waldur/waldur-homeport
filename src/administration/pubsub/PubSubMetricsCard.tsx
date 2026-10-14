@@ -33,40 +33,44 @@ export const PubSubMetricsCard: FC = () => {
       ) : data ? (
         <Row>
           <Col lg={6}>
-            <h6 className="text-uppercase text-muted mb-3">
+            <h6 className="text-uppercase text-quaternary mb-3">
               {translate('Message counts')}
             </h6>
             <Table size="sm" borderless className="mb-0">
               <tbody>
                 <tr>
-                  <td className="text-muted">{translate('Messages sent')}</td>
-                  <td className="fw-semibold text-end text-success">
+                  <td className="text-quaternary">
+                    {translate('Messages sent')}
+                  </td>
+                  <td className="font-semibold text-end text-success">
                     {formatNumber(data.messages_sent)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">{translate('Messages failed')}</td>
+                  <td className="text-quaternary">
+                    {translate('Messages failed')}
+                  </td>
                   <td
-                    className={`fw-semibold text-end ${data.messages_failed > 0 ? 'text-danger' : ''}`}
+                    className={`font-semibold text-end ${data.messages_failed > 0 ? 'text-danger' : ''}`}
                   >
                     {formatNumber(data.messages_failed)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Messages retried')}
                   </td>
                   <td
-                    className={`fw-semibold text-end ${data.messages_retried > 0 ? 'text-warning' : ''}`}
+                    className={`font-semibold text-end ${data.messages_retried > 0 ? 'text-warning' : ''}`}
                   >
                     {formatNumber(data.messages_retried)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Messages skipped')}
                   </td>
-                  <td className="fw-semibold text-end">
+                  <td className="font-semibold text-end">
                     {formatNumber(data.messages_skipped)}
                   </td>
                 </tr>
@@ -74,42 +78,42 @@ export const PubSubMetricsCard: FC = () => {
             </Table>
           </Col>
           <Col lg={6}>
-            <h6 className="text-uppercase text-muted mb-3">
+            <h6 className="text-uppercase text-quaternary mb-3">
               {translate('Additional metrics')}
             </h6>
             <Table size="sm" borderless className="mb-0">
               <tbody>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Circuit breaker trips')}
                   </td>
                   <td
-                    className={`fw-semibold text-end ${data.circuit_breaker_trips > 0 ? 'text-warning' : ''}`}
+                    className={`font-semibold text-end ${data.circuit_breaker_trips > 0 ? 'text-warning' : ''}`}
                   >
                     {formatNumber(data.circuit_breaker_trips)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Rate limiter rejections')}
                   </td>
-                  <td className="fw-semibold text-end">
+                  <td className="font-semibold text-end">
                     {formatNumber(data.rate_limiter_rejections)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Average publish time')}
                   </td>
-                  <td className="fw-semibold text-end">
+                  <td className="font-semibold text-end">
                     {formatLatency(data.avg_publish_time_ms)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Last publish time')}
                   </td>
-                  <td className="fw-semibold text-end">
+                  <td className="font-semibold text-end">
                     {formatTimestamp(data.last_publish_time)}
                   </td>
                 </tr>
@@ -118,7 +122,7 @@ export const PubSubMetricsCard: FC = () => {
           </Col>
         </Row>
       ) : (
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate('Failed to load metrics.')}
         </p>
       )}

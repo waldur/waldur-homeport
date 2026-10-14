@@ -8,16 +8,16 @@ To make table integration rules, properties, and layouts easier to navigate, the
 
 ## Documentation Pillars
 
-| Pillar | Description |
-| :--- | :--- |
-| **[Pillar 1: Getting Started](./table/getting-started.md)** | Core import rules, Null/Empty wrappers (`renderFieldOrDash`), and a basic example. |
-| **[Pillar 2: Data Fetching & Type Safety](./table/fetching.md)** | `fetchData` handlers, `createFetcher` (SDK functions), custom mock fetchers, `createClientPaginatedFetcher` (static lists), search query input (`queryField`), and type safety. |
-| **[Pillar 3: Column Setup & Configuration](./table/column-setup.md)** | Column parameters (width, alignment, copying, ellipsis, click blocking), sorting, optional columns, and key fetching. |
-| **[Pillar 4: Row Actions & Selection](./table/row-actions.md)** | 3-dots action menus (`ActionsDropdown` + `ActionItem`), row expansion (`isRowExpandable`), multi-select, and bulk toolbars. |
-| **[Pillar 5: Filters & URL Sync](./table/filters.md)** | OpenAPI generated filters, Redux caching, syncing to URL query formatting (`uuid::name`), and cell inline filtering. |
-| **[Pillar 6: Visual Customizations](./table/visual-customizations.md)** | Grid layouts (`gridItem` + `gridSize` + `gridSpace`), custom empty placeholders, header titles, styling class triggers, and standalone mode. |
-| **[Pillar 7: Layout Wrappers & Portals](./table/layout-wrappers.md)** | Rendering multiple tables within tabs (`TableWithTabs`) and forwarding rendering portals (`portal`). |
-| **[Pillar 8: Form Integration](./table/form-integration.md)** | Embedding tables as input fields in `react-final-form` (`fieldType`, `fieldName`, `rowValidate`). |
+| Pillar                                                                  | Description                                                                                                                                                                     |
+| :---------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **[Pillar 1: Getting Started](./table/getting-started.md)**             | Core import rules, Null/Empty wrappers (`renderFieldOrDash`), and a basic example.                                                                                              |
+| **[Pillar 2: Data Fetching & Type Safety](./table/fetching.md)**        | `fetchData` handlers, `createFetcher` (SDK functions), custom mock fetchers, `createClientPaginatedFetcher` (static lists), search query input (`queryField`), and type safety. |
+| **[Pillar 3: Column Setup & Configuration](./table/column-setup.md)**   | Column parameters (width, alignment, copying, ellipsis, click blocking), sorting, optional columns, and key fetching.                                                           |
+| **[Pillar 4: Row Actions & Selection](./table/row-actions.md)**         | 3-dots action menus (`ActionsDropdown` + `ActionItem`), row expansion (`isRowExpandable`), multi-select, and bulk toolbars.                                                     |
+| **[Pillar 5: Filters & URL Sync](./table/filters.md)**                  | OpenAPI generated filters, Redux caching, syncing to URL query formatting (`uuid::name`), and cell inline filtering.                                                            |
+| **[Pillar 6: Visual Customizations](./table/visual-customizations.md)** | Grid layouts (`gridItem` + `gridSize` + `gridSpace`), custom empty placeholders, header titles, styling class triggers, and standalone mode.                                    |
+| **[Pillar 7: Layout Wrappers & Portals](./table/layout-wrappers.md)**   | Rendering multiple tables within tabs (`TableWithTabs`) and forwarding rendering portals (`portal`).                                                                            |
+| **[Pillar 8: Form Integration](./table/form-integration.md)**           | Embedding tables as input fields in `react-final-form` (`fieldType`, `fieldName`, `rowValidate`).                                                                               |
 
 ---
 
@@ -108,7 +108,7 @@ export const ReviewerPoolSection = ({ call }) => {
         render: ({ row }) => (
           <div>
             <div className="fw-bold">{row.reviewer_name}</div>
-            <small className="text-muted">{row.reviewer_email}</small>
+            <small className="text-quaternary">{row.reviewer_email}</small>
           </div>
         ),
         keys: ['reviewer_name', 'reviewer_email'],

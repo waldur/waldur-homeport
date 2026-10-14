@@ -58,9 +58,9 @@ export const PublicationsSection = ({
       title: translate('Title'),
       render: ({ row }) => (
         <div>
-          <div className="fw-bold">{row.title}</div>
+          <div className="font-medium">{row.title}</div>
           {row.doi && (
-            <small className="text-muted">
+            <small className="text-quaternary">
               DOI:{' '}
               <ExternalLink
                 url={`https://doi.org/${row.doi}`}

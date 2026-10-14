@@ -266,7 +266,7 @@ const SearchableListQuestion: FC<{
           <div className="d-flex flex-column" style={{ minWidth: 0 }}>
             <span>{opt.label}</span>
             {opt.description && (
-              <small className="text-muted">{opt.description}</small>
+              <small className="text-quaternary">{opt.description}</small>
             )}
           </div>
         )}

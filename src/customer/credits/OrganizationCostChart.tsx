@@ -33,11 +33,11 @@ export const OrganizationCostChart: FC = () => {
     <Accordion
       type="single"
       collapsible
-      className="mb-7 rounded-md border-[1px] border-solid border-[var(--surface-card-border)]"
+      className="mb-7 rounded-md border-[1px] border-solid border-secondary"
     >
       <AccordionItem value="chart">
         <AccordionTrigger>
-          <div className="fw-bolder">
+          <div className="font-semibold">
             {translate('Organization invoice history')}
             {isLoading && <LoadingSpinnerSimple className="ms-2" />}
           </div>
@@ -47,7 +47,7 @@ export const OrganizationCostChart: FC = () => {
             <LoadingErred loadData={refetch} />
           ) : options ? (
             <>
-              <div className="fw-bold text-muted text-end">
+              <div className="font-medium text-quaternary text-end">
                 {translate('Total for the year')}
                 {': '}
                 {defaultCurrency(chart?.total)}

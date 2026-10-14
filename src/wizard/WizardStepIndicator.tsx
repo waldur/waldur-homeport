@@ -40,7 +40,7 @@ export const WizardStepIndicator: FC<WizardStepIndicatorProps> = (props) => {
       <ProgressSteps
         steps={steps}
         onClick={props.onClick}
-        bgClass="bg-body"
+        bgClass="bg-primary"
         className="mt-4 mb-4"
       />
     </div>

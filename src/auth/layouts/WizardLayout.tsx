@@ -45,7 +45,7 @@ export const WizardLayout = () => {
         return (
           <div className="layout-wizard-step">
             <h2>{translate('Welcome')}</h2>
-            <p className="text-muted">
+            <p className="text-quaternary">
               {ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}
             </p>
             <BaseButton
@@ -62,7 +62,7 @@ export const WizardLayout = () => {
         return (
           <div className="layout-wizard-step">
             <h2>{translate('Choose Sign-in Method')}</h2>
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate('How would you like to sign in?')}
             </p>
             <div className="layout-wizard-methods">

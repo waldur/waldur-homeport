@@ -65,7 +65,7 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
           framed &&
             !header &&
             // Arbitrary values on purpose: Bootstrap's `.border` is !important and would win.
-            'rounded-t-[0.475rem] border-[1px] border-[color:var(--bs-border-color)] pl-[12px]',
+            'rounded-t-[0.475rem] border-[1px] border-secondary pl-[12px]',
           listClassName,
         ),
       }}

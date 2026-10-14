@@ -37,7 +37,7 @@ export const ComplianceExpandableRow: FC<{
           {
             title: translate('Offering'),
             render: ({ row }) => (
-              <span className="text-dark">{row.offering_name}</span>
+              <span className="text-primary">{row.offering_name}</span>
             ),
           },
           {
@@ -45,7 +45,7 @@ export const ComplianceExpandableRow: FC<{
             render: ({ row }) => (
               <Stack>
                 <Progress value={row.overall_score} className="mt-1" />
-                <small className="d-block text-end text-gray-700">
+                <small className="d-block text-end text-secondary">
                   {row.overall_score}%
                 </small>
               </Stack>

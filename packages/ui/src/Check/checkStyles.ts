@@ -8,7 +8,7 @@ export type CheckSize = 'sm' | 'md';
  * fill, check, dash, dot, track, knob — and read the input's state through
  * Tailwind's `peer-*` variants. No background images, no data URIs.
  *
- * Colours come from waldur-design-tokens/checkColors.css. `border-[1px]`,
+ * Colours come from waldur-design-tokens/check.css. `border-[1px]`,
  * not `border`: Bootstrap's `.border` utility is `!important` and would
  * replace the colour (see the class-name collision table in
  * docs/tailwind-shadcn-migration-notes.md).

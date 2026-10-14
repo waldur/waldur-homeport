@@ -76,7 +76,7 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
             );
           }
           return (
-            <span className="text-muted">
+            <span className="text-quaternary">
               {row.accessor_category || getAccessorCategory(row.accessor_type)}
             </span>
           );
@@ -118,7 +118,7 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
         {
           title: translate('IP address'),
           render: ({ row }: { row: DataAccessHistoryEntry }) => (
-            <code className="text-muted small">
+            <code className="text-quaternary small">
               {renderFieldOrDash(row.ip_address)}
             </code>
           ),
@@ -127,11 +127,11 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
           title: translate('Context'),
           render: ({ row }: { row: DataAccessHistoryEntry }) =>
             row.context?.endpoint ? (
-              <code className="text-muted small">
+              <code className="text-quaternary small">
                 {String(row.context.method)} {String(row.context.endpoint)}
               </code>
             ) : (
-              <span className="text-muted">-</span>
+              <span className="text-quaternary">-</span>
             ),
         },
       );

@@ -114,7 +114,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                       size="sm"
                     />
                     <div className="d-flex flex-wrap fs-6 ellipsis">
-                      <span className="fw-normal me-1">
+                      <span className="font-normal me-1">
                         {translate('Selected organization')}:
                       </span>
                       <b className="ellipsis mw-lg-200px mw-xl-300px">

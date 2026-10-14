@@ -32,11 +32,11 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
   return (
     <Card className="card-bordered mb-5">
       <Card.Body>
-        <p className="fs-6 fw-bold text-muted mb-1">{title}</p>
+        <p className="fs-6 font-medium text-quaternary mb-1">{title}</p>
         <div className="d-flex justify-content-between align-items-end">
           <h1 className="display-6 mb-0">
             {formatUsageValue(value, true)}
-            <span className="ms-1 fs-2 fw-bold">{unit}</span>
+            <span className="ms-1 fs-2 font-medium">{unit}</span>
           </h1>
           {changes ? (
             <Tooltip label={translate('Changes in the last month')}>

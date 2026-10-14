@@ -55,7 +55,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
               actions?.length,
             )}
           >
-            <Card.Title as="div" className="fw-bold flex-grow-1 h4 mb-0">
+            <Card.Title as="div" className="font-medium flex-grow-1 h4 mb-0">
               {cardTitle}
             </Card.Title>
             {cardAction && (
@@ -74,7 +74,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
                       <DotsThreeVerticalIcon
                         size={20}
                         weight="bold"
-                        className="text-gray-400"
+                        className="text-quinary"
                       />
                     }
                   />
@@ -101,7 +101,10 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
                       {title}
                     </h1>
                     {meta && (
-                      <Col xs="auto" className="text-gray-700 text-nowrap fs-6">
+                      <Col
+                        xs="auto"
+                        className="text-secondary text-nowrap fs-6"
+                      >
                         {meta}
                       </Col>
                     )}

@@ -6,9 +6,9 @@ import { translate } from '@/i18n';
 export const ComponentAccountingTypeWrapper: FC<PropsWithChildren> = ({
   children,
 }) => (
-  <Card className="card-bordered card-solid bg-gray-50 min-h-175px">
+  <Card className="card-bordered card-solid bg-secondary min-h-175px">
     <Card.Body className="p-4">
-      <Card.Title as="h6" className="fw-bold mb-5">
+      <Card.Title as="h6" className="font-medium mb-5">
         {translate('Accounting type settings')}
       </Card.Title>
       {children}

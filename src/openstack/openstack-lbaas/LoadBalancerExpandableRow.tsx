@@ -214,7 +214,9 @@ const SecurityGroupsTab: FC<{
 
   if (!portUuid) {
     return (
-      <p className="text-muted py-3">{translate('No VIP port assigned.')}</p>
+      <p className="text-quaternary py-3">
+        {translate('No VIP port assigned.')}
+      </p>
     );
   }
   if (isLoading) return <LoadingSpinner />;
@@ -293,9 +295,9 @@ const VipPortDetails: FC<{
   const portLabel = port?.name || port?.uuid || portUuid;
 
   return (
-    <div className="mt-4 border-top pt-4">
+    <div className="mt-4 border-t-[1px] border-t-secondary pt-4">
       <div className="row mb-2">
-        <div className="col-sm-3 fw-bold text-muted">
+        <div className="col-sm-3 font-medium text-quaternary">
           {translate('VIP port')}
         </div>
         <div className="col-sm-9">
@@ -316,7 +318,7 @@ const VipPortDetails: FC<{
       </div>
       {ipAddresses && (
         <div className="row mb-2">
-          <div className="col-sm-3 fw-bold text-muted">
+          <div className="col-sm-3 font-medium text-quaternary">
             {translate('VIP port IPs')}
           </div>
           <div className="col-sm-9">{ipAddresses}</div>
@@ -324,7 +326,7 @@ const VipPortDetails: FC<{
       )}
       {port?.mac_address && (
         <div className="row mb-2">
-          <div className="col-sm-3 fw-bold text-muted">
+          <div className="col-sm-3 font-medium text-quaternary">
             {translate('MAC address')}
           </div>
           <div className="col-sm-9">{port.mac_address}</div>
@@ -332,7 +334,7 @@ const VipPortDetails: FC<{
       )}
       {port?.network_name && (
         <div className="row mb-2">
-          <div className="col-sm-3 fw-bold text-muted">
+          <div className="col-sm-3 font-medium text-quaternary">
             {translate('Network')}
           </div>
           <div className="col-sm-9">{port.network_name}</div>
@@ -362,15 +364,15 @@ const FloatingIpDetails: FC<{ floatingIpUrl?: string | null }> = ({
   if (!floatingIpUrl) return null;
 
   return (
-    <div className="mt-4 border-top pt-4">
+    <div className="mt-4 border-t-[1px] border-t-secondary pt-4">
       <div className="row mb-2">
-        <div className="col-sm-3 fw-bold text-muted">
+        <div className="col-sm-3 font-medium text-quaternary">
           {translate('Floating IP')}
         </div>
         <div className="col-sm-9">
           {floatingIp?.address ? floatingIp.address : renderFieldOrDash(null)}
           {floatingIp?.name && (
-            <span className="text-muted ms-2">({floatingIp.name})</span>
+            <span className="text-quaternary ms-2">({floatingIp.name})</span>
           )}
         </div>
       </div>

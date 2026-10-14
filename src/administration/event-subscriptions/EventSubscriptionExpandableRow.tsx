@@ -22,27 +22,27 @@ export const EventSubscriptionExpandableRow: FC<
           <table className="table table-sm">
             <tbody>
               <tr>
-                <td className="text-muted">{translate('UUID')}</td>
+                <td className="text-quaternary">{translate('UUID')}</td>
                 <td>
                   <code>{row.uuid}</code>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('User UUID')}</td>
+                <td className="text-quaternary">{translate('User UUID')}</td>
                 <td>
                   <code>{row.user_uuid}</code>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Username')}</td>
+                <td className="text-quaternary">{translate('Username')}</td>
                 <td>{row.user_username}</td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Full name')}</td>
+                <td className="text-quaternary">{translate('Full name')}</td>
                 <td>{renderFieldOrDash(row.user_full_name)}</td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Source IP')}</td>
+                <td className="text-quaternary">{translate('Source IP')}</td>
                 <td>
                   <code>{renderFieldOrDash(row.source_ip)}</code>
                 </td>
@@ -68,7 +68,7 @@ export const EventSubscriptionExpandableRow: FC<
                         <code>{obj.object_type}</code>
                       </td>
                       <td>
-                        <code className="text-muted">
+                        <code className="text-quaternary">
                           {obj.offering_uuid?.substring(0, 8)}...
                         </code>
                       </td>
@@ -78,7 +78,7 @@ export const EventSubscriptionExpandableRow: FC<
               </table>
             </div>
           ) : (
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate('No observable objects configured')}
             </p>
           )}

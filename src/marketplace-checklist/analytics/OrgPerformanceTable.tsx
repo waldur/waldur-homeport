@@ -47,7 +47,7 @@ export const OrgPerformanceTable = () => {
           render: ({ row }) => (
             <Stack>
               <Progress value={row.compliance} className="mt-1" />
-              <small className="d-block text-end fw-bolder">
+              <small className="d-block text-end font-semibold">
                 {row.compliance}%
               </small>
             </Stack>

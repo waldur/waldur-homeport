@@ -109,7 +109,7 @@ export const PlanPriceCell: FC<PlanPriceCellProps> = ({ plan, offering }) => {
         ? translate('From {price}', { price: headline.text })
         : headline.text}
       {headline.quotesOneComponent && status.priced.length > 1 && (
-        <span className="text-muted ms-1">
+        <span className="text-quaternary ms-1">
           {translate('+{count} more', { count: status.priced.length - 1 })}
         </span>
       )}

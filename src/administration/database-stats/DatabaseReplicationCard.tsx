@@ -40,7 +40,7 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
       >
         <tbody>
           <tr>
-            <td className="text-muted">{translate('Role')}</td>
+            <td className="text-quaternary">{translate('Role')}</td>
             <td className="text-end">
               <Badge
                 variant={data.is_replica ? 'info' : 'primary'}
@@ -53,17 +53,19 @@ export const DatabaseReplicationCard: FC<DatabaseReplicationCardProps> = ({
           </tr>
           {!data.is_replica && data.wal_bytes != null && (
             <tr>
-              <td className="text-muted">{translate('WAL size')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('WAL size')}</td>
+              <td className="font-semibold text-end">
                 {formatFilesize(data.wal_bytes, 'B')}
               </td>
             </tr>
           )}
           {data.is_replica && (
             <tr>
-              <td className="text-muted">{translate('Replication lag')}</td>
+              <td className="text-quaternary">
+                {translate('Replication lag')}
+              </td>
               <td
-                className={`fw-semibold text-end ${hasReplicationLag ? 'text-warning' : 'text-success'}`}
+                className={`font-semibold text-end ${hasReplicationLag ? 'text-warning' : 'text-success'}`}
               >
                 {data.replication_lag_bytes != null
                   ? formatFilesize(data.replication_lag_bytes, 'B')

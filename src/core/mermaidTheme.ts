@@ -59,7 +59,7 @@ const BRAND_STEPS: Record<
  * Mermaid `themeVariables` for the current theme, read from the theme's CSS
  * variables: the grays from the ramps (`--color-gray-N`, `--color-gray-dark-N`,
  * always present because the ramps are `@theme static`), the brand colours from
- * `--waldur-brand-N` and the diagram background from `--surface-card-bg`. Mermaid draws SVG from plain values, so
+ * `--brand-N` and the diagram background from `--card-bg`. Mermaid draws SVG from plain values, so
  * it cannot take `var()` and has to be given resolved colours.
  */
 export function getMermaidThemeVariables(isDarkMode: boolean) {
@@ -83,7 +83,7 @@ export function getMermaidThemeVariables(isDarkMode: boolean) {
 
   // Background colors
   const tertiaryColor = gray('tertiary');
-  const backgroundColor = getCssVar('--surface-card-bg');
+  const backgroundColor = getCssVar('--card-bg');
   const noteBkgColor = gray('note');
   const noteBorderColor = gray('border');
 

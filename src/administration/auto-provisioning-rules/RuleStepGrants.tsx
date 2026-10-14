@@ -77,13 +77,13 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
                 )}
               </div>
               {protectedMethods.length === 0 ? (
-                <div className="fw-semibold mt-2">
+                <div className="font-semibold mt-2">
                   {translate(
                     'Warning: PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS is empty — no user will currently match.',
                   )}
                 </div>
               ) : (
-                <div className="text-muted small mt-1">
+                <div className="text-quaternary small mt-1">
                   {translate('Protected registration methods: {methods}', {
                     methods: protectedMethods.join(', '),
                   })}

@@ -4,7 +4,7 @@
 // layer whatever their specificity. The theme wraps all Waldur styles in
 // `@layer bootstrap` (see style.scss), so these overrides would lose to
 // LiveKit there. They are imported outside that layer instead, from
-// style.scss and style.dark.scss, and win on specificity: every selector here
+// style.scss, and win on specificity: every selector here
 // is scoped under the call view's root class, one class above LiveKit's own.
 //
 // Keep this file to rules that override LiveKit; the rest of the call UI
@@ -37,7 +37,7 @@
 
   .lk-participant-placeholder svg,
   .lk-participant-placeholder svg path {
-    fill: $gray-400;
+    fill: var(--text-quinary);
   }
 
   // The name chip sits over the video feed, so it carries its own blurred
@@ -47,15 +47,15 @@
   // matches the mockup.
   .lk-participant-metadata-item {
     padding: 0.308rem 0.769rem;
-    background-color: rgba($bg-primary, 0.85);
-    color: $text-primary;
-    border: 1px solid $border-primary;
+    background-color: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
     border-radius: 6px;
     backdrop-filter: blur(4px);
   }
 
   .lk-participant-name {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   // LiveKit draws the encryption lock (and the screen-share icon) bare beside
@@ -66,7 +66,7 @@
   .lk-participant-metadata-item:not(.lk-connection-quality) > svg,
   .lk-track-muted-indicator-microphone svg,
   .lk-track-muted-indicator-camera svg {
-    color: $text-secondary;
+    color: var(--text-quaternary);
     transform: scale(0.72);
   }
 
@@ -103,34 +103,38 @@
     }
 
     .lk-disconnect-button {
-      background-color: $danger-500;
+      @include mirrored-ramp-color(background-color, error, 500);
       color: $white;
       border-color: transparent;
 
       &:hover {
-        background-color: $danger-600;
+        @include mirrored-ramp-color(background-color, error, 600);
       }
     }
   }
 }
 
 // LiveKit ships only a dark theme. Re-point its variables at our design tokens
-// so the call view follows the app theme. Tokens resolve per compiled
-// stylesheet (style.scss vs style.dark.scss), so this one block themes both
-// light and dark; the attribute selector outranks LiveKit's own definitions.
+// so the call view follows the app theme. The tokens resolve per theme, so
+// this one block themes both light and dark; the attribute selector outranks
+// LiveKit's own definitions.
 .matrix-call-view[data-lk-theme='default'] {
-  color-scheme: if(isDarkMode(), dark, light);
-  --lk-bg: #{$bg-tertiary};
-  --lk-bg2: #{$bg-primary};
-  --lk-bg3: #{$bg-secondary};
-  --lk-bg4: #{$bg-secondary};
-  --lk-bg5: #{$gray-200};
-  --lk-fg: #{$text-primary};
-  --lk-fg2: #{$text-secondary};
-  --lk-fg3: #{$text-tertiary};
-  --lk-border-color: #{$border-primary};
-  --lk-accent-bg: #{$success-500};
-  --lk-danger: #{$danger-500};
+  color-scheme: light;
+
+  @include dark-theme {
+    color-scheme: dark;
+  }
+  --lk-bg: var(--bg-tertiary);
+  --lk-bg2: var(--bg-primary);
+  --lk-bg3: var(--bg-secondary);
+  --lk-bg4: var(--bg-secondary);
+  --lk-bg5: var(--bg-quaternary);
+  --lk-fg: var(--text-primary);
+  --lk-fg2: var(--text-secondary);
+  --lk-fg3: var(--text-tertiary);
+  --lk-border-color: var(--border-primary);
+  @include mirrored-ramp-color(--lk-accent-bg, success, 500);
+  @include mirrored-ramp-color(--lk-danger, error, 500);
 }
 
 .matrix-call-view--compact {

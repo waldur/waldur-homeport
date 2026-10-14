@@ -249,8 +249,8 @@ export const CreateManualAssignmentDialog: FC<
       }
       return (
         <div>
-          <div className="fw-bold">{option.label}</div>
-          <small className="text-muted">
+          <div className="font-medium">{option.label}</div>
+          <small className="text-quaternary">
             {option.email} ({option.currentAssignments}/{option.maxAssignments}{' '}
             {translate('assigned')})
           </small>

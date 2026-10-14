@@ -64,14 +64,16 @@ export const OfferingComponentUsageList = () => {
   const columns: Column<OfferingComponentUsage>[] = [
     {
       title: translate('Offering'),
-      render: ({ row }) => <span className="fw-bold">{row.offering_name}</span>,
+      render: ({ row }) => (
+        <span className="font-medium">{row.offering_name}</span>
+      ),
       filter: 'offering',
       orderField: 'offering_name',
     },
     {
       title: translate('Component'),
       render: ({ row }) => (
-        <span className="fw-bold">{row.component_name}</span>
+        <span className="font-medium">{row.component_name}</span>
       ),
       orderField: 'component_name',
     },
@@ -83,13 +85,15 @@ export const OfferingComponentUsageList = () => {
           row.usage_percent !== undefined ? Number(row.usage_percent) : 0;
         return (
           <div className="d-flex flex-column gap-1" style={{ minWidth: 150 }}>
-            <div className="d-flex justify-content-between fs-7 text-muted">
+            <div className="d-flex justify-content-between fs-7 text-quaternary">
               <span>
                 {formatUsageValue(row.total_consumed, true)} /{' '}
                 {formatUsageValue(row.total_allocated, true)}{' '}
                 {row.measured_unit}
               </span>
-              <span className="fw-bold text-dark">{usage.toFixed(1)}%</span>
+              <span className="font-medium text-primary">
+                {usage.toFixed(1)}%
+              </span>
             </div>
             <Progress
               size="sm"

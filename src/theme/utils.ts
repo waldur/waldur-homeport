@@ -3,13 +3,16 @@ import { ENV } from '@/core/config';
 import * as ThemeStorage from './ThemeStorage';
 import { ThemeName } from './types';
 
-const hrefs = {
-  dark: () => import('@/metronic/sass/style.dark.scss?url'),
-  light: () => import('@/metronic/sass/style.scss?url'),
-};
+const THEMES: ThemeName[] = ['light', 'dark'];
 
 let styleTag: HTMLLinkElement;
 
+/**
+ * Applies a theme. The Metronic stylesheet is one file for both themes: its
+ * colours read the design tokens, and the few dark-only rules key off
+ * data-theme (the dark-theme mixin), like Tailwind's dark: variant. So
+ * switching theme is just this attribute; the stylesheet is injected once.
+ */
 export function loadTheme(theme: ThemeName) {
   if (!styleTag) {
     styleTag = document.createElement('link');
@@ -17,14 +20,10 @@ export function loadTheme(theme: ThemeName) {
     styleTag.type = 'text/css';
     styleTag.crossOrigin = '';
     document.head.appendChild(styleTag);
+    import('@/metronic/sass/style.scss?url').then((url) => {
+      styleTag.href = url.default as string;
+    });
   }
-  hrefs[theme]().then((url) => {
-    styleTag.href = url.default as string;
-  });
-  // Mirrors the active theme onto the DOM so consumers that can't read
-  // ThemeContext (CSS, e.g. Tailwind's dark: variant in the migration spike)
-  // still have a signal to key off. The stylesheet swap above remains the
-  // source of truth for existing Bootstrap/Metronic styling.
   document.documentElement.setAttribute('data-theme', theme);
 }
 
@@ -33,7 +32,7 @@ export const getInitialTheme = () => {
   if (ENV.plugins?.WALDUR_CORE.DISABLE_DARK_THEME) {
     return 'light';
   }
-  if (hrefs[ThemeStorage.getTheme()]) {
+  if (THEMES.includes(ThemeStorage.getTheme())) {
     return ThemeStorage.getTheme();
   }
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {

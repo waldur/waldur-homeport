@@ -145,7 +145,7 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
               {failure}
             </Form.Text>
           )}
-          <Form.Text id="matrix-recovery-key-help" className="text-muted">
+          <Form.Text id="matrix-recovery-key-help" className="text-quaternary">
             {translate(
               'Waldur keeps it for you, so you are asked for it only once.',
             )}

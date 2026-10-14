@@ -33,7 +33,7 @@ export const ImportReviewTab = () => {
       <Field
         label={translate('Organization')}
         value={renderFieldOrDash(formData.customer.name)}
-        labelClass="fw-bolder"
+        labelClass="font-semibold"
       />
 
       <Field
@@ -41,16 +41,16 @@ export const ImportReviewTab = () => {
         value={renderFieldOrDash(
           formData.offerings.map((o) => o.name).join(', '),
         )}
-        labelClass="fw-bolder"
+        labelClass="font-semibold"
       />
 
       <div>
-        <label className="field-label text-gray-700 fw-bolder mb-4">
+        <label className="field-label text-secondary font-semibold mb-4">
           {translate('Selected mappings')}:
         </label>
         <table className="table align-middle table-row-bordered mb-3">
           <thead>
-            <tr className="text-muted fs-7 fw-bold">
+            <tr className="text-quaternary fs-7 font-medium">
               <td>{translate('Remote category')}</td>
               <td>{translate('Offerings')}</td>
               <td>{translate('Local category')}</td>
@@ -59,8 +59,8 @@ export const ImportReviewTab = () => {
           <tbody className="fs-6">
             {tableData.map((data) => (
               <tr key={data.uuid}>
-                <td className="text-dark">{data.remote_category}</td>
-                <td className="text-dark">
+                <td className="text-primary">{data.remote_category}</td>
+                <td className="text-primary">
                   <Tooltip label={data.offering}>
                     <span>{data.offering}</span>
                   </Tooltip>

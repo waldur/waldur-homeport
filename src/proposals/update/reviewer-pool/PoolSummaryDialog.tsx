@@ -135,7 +135,7 @@ export const PoolSummaryDialog: FC = () => {
         {/* Main Flow Diagram */}
         <section>
           <h4 className="mb-4">{translate('Pool construction workflow')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Build your reviewer pool by finding experts and inviting them to participate. Only accepted pool members can receive proposal assignments.',
             )}
@@ -151,7 +151,7 @@ export const PoolSummaryDialog: FC = () => {
         {/* Invitation Status */}
         <section>
           <h4 className="mb-4">{translate('Invitation statuses')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate('Pool invitations progress through these states:')}
           </p>
           <div className="border rounded p-4 mb-4">
@@ -163,12 +163,12 @@ export const PoolSummaryDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Status')}</th>
                   <th>{translate('Description')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {INVITATION_STATUSES.map((item) => (
                   <tr key={item.status}>
                     <td>
@@ -187,7 +187,7 @@ export const PoolSummaryDialog: FC = () => {
         {/* Tab Overview */}
         <section>
           <h4 className="mb-4">{translate('Reviewer pool tabs')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Use these tabs to manage different aspects of the reviewer pool:',
             )}
@@ -195,15 +195,15 @@ export const PoolSummaryDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Tab')}</th>
                   <th>{translate('Purpose')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {POOL_TABS.map((item) => (
                   <tr key={item.tab}>
-                    <td className="fw-bold text-gray-800">{item.tab}</td>
+                    <td className="font-medium text-primary">{item.tab}</td>
                     <td>{item.description}</td>
                   </tr>
                 ))}
@@ -215,7 +215,7 @@ export const PoolSummaryDialog: FC = () => {
         {/* Finding Reviewers */}
         <section>
           <h4 className="mb-4">{translate('Finding reviewers')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate('There are two ways to add reviewers to your pool:')}
           </p>
           <div className="row g-4">
@@ -225,7 +225,7 @@ export const PoolSummaryDialog: FC = () => {
                   <h5 className="card-title">
                     {translate('Discovery (recommended)')}
                   </h5>
-                  <p className="card-text text-muted">
+                  <p className="card-text text-quaternary">
                     {translate(
                       'Use the Discovery tab to automatically find reviewers whose expertise matches your call or proposals. The system analyzes reviewer profiles, publications, and expertise keywords to suggest the best matches.',
                     )}
@@ -242,7 +242,7 @@ export const PoolSummaryDialog: FC = () => {
               <div className="card card-bordered h-100">
                 <div className="card-body">
                   <h5 className="card-title">{translate('Direct invite')}</h5>
-                  <p className="card-text text-muted">
+                  <p className="card-text text-quaternary">
                     {translate(
                       'If you already know who you want to invite, use the "Invite by email" button to send invitations directly. The reviewer will receive an email with a link to accept or decline.',
                     )}

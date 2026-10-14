@@ -45,7 +45,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
       <Menu.SubTrigger>
         <span className="relative flex grow items-center">
           {translate('Language')}
-          <span className="d-flex flex-center gap-2 fs-8 rounded bg-light px-3 py-1 position-absolute translate-middle-y top-50 end-0">
+          <span className="d-flex flex-center gap-2 fs-8 rounded bg-tertiary dark:bg-quaternary px-3 py-1 position-absolute translate-middle-y top-50 end-0">
             {currentLanguage.label}{' '}
             <CountryFlagIcon
               countryCode={LanguageCountry[currentLanguage.code]}
@@ -55,7 +55,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
         </span>
       </Menu.SubTrigger>
 
-      <Menu.SubContent className="fw-bold w-175px py-4">
+      <Menu.SubContent className="font-medium w-175px py-4">
         {languageChoices.map((language) => (
           <Menu.Item
             key={language.code}

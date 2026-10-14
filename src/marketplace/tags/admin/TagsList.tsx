@@ -53,7 +53,7 @@ export const TagsList: FunctionComponent<Partial<TableWithPortal>> = ({
             <>
               {formatDateTime(row.created)}
               {row.created_by_full_name && (
-                <span className="text-muted ms-2">
+                <span className="text-quaternary ms-2">
                   {translate('by {name}', { name: row.created_by_full_name })}
                 </span>
               )}

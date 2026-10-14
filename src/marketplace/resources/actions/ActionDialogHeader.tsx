@@ -16,7 +16,7 @@ export const ActionDialogHeader = ({
 }) => (
   <Modal.Header closeButton className="without-border pb-0">
     {/* A heading, with the h4 look of Modal.Title's default div. */}
-    <Modal.Title as="h2" className="fw-bold h4">
+    <Modal.Title as="h2" className="font-medium h4">
       {marketplaceResource ? (
         <div className="d-flex flex-column-auto align-items-stretch gap-3 flex-grow-1">
           <Tooltip label={marketplaceResource.category_title}>

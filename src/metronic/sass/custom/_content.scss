@@ -29,24 +29,24 @@
     pointer-events: none !important;
 
     &:not(.nav-link) {
-      color: $fg-disabled !important;
+      color: var(--text-quinary) !important;
     }
     &:not(.btn-icon):not(.text-btn):not(.text-link):not(.nav-link):not(
         .text-anchor
       ) {
-      background-color: $btn-bg-disable !important;
-      border-color: $btn-bg-disable !important;
+      background-color: var(--btn-disabled-bg) !important;
+      border-color: var(--btn-disabled-bg) !important;
     }
     &.btn-icon {
-      background-color: $bg-disabled_subtle !important;
+      background-color: var(--bg-secondary) !important;
       border-color: transparent !important;
     }
 
-    @include svg-icon-color($fg-disabled, true);
+    @include svg-icon-color(var(--text-quinary), true);
   }
 
   input {
-    border-color: $border-disabled !important;
+    border-color: var(--border-primary) !important;
     color: $input-disabled-color !important;
     background-color: $input-disabled-bg !important;
     cursor: not-allowed !important;

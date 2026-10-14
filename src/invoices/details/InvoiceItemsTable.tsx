@@ -175,7 +175,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
               size="sm"
               shape="pill"
               tone="outline"
-              className="fw-bold ms-2"
+              className="font-medium ms-2"
             >
               {translate('Agreement no:')} {customer.agreement_number}
             </Badge>

@@ -149,7 +149,7 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
         title: translate('Offering username'),
         render: ({ row }) =>
           row.provider_account ? (
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('From the provider account')}
             </span>
           ) : (
@@ -303,7 +303,7 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
         <div className="d-flex justify-content-start mb-3">
           <div ref={refToolbar}>{/* Portal destination */}</div>
         </div>
-        <div className="d-flex justify-content-between text-muted mb-3">
+        <div className="d-flex justify-content-between text-quaternary mb-3">
           <span>
             {validation.invalid === 0
               ? translate('{n} valid', { n: validation.valid })

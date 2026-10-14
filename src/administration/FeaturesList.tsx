@@ -102,7 +102,7 @@ const FeatureSectionPanel = ({
     {hasItems ? (
       <FeatureSectionContent section={section} />
     ) : (
-      <p className="text-muted p-5 mb-0">
+      <p className="text-quaternary p-5 mb-0">
         {translate('No matching features in this section.')}
       </p>
     )}
@@ -274,7 +274,9 @@ export const FeaturesList = () => {
               <Tabs mount="all" value={activeKey} onValueChange={handleSelect}>
                 <div
                   className="d-flex align-items-end gap-1"
-                  style={{ borderBottom: '1px solid var(--bs-border-color)' }}
+                  style={{
+                    borderBottom: '1px solid var(--border-secondary)',
+                  }}
                 >
                   <div
                     ref={scrollRef}
@@ -300,7 +302,9 @@ export const FeaturesList = () => {
                             style={{ whiteSpace: 'nowrap' }}
                             value={tab.key}
                             disabled={!hasMatches && !!query}
-                            className={!hasMatches && query ? 'text-muted' : ''}
+                            className={
+                              !hasMatches && query ? 'text-quaternary' : ''
+                            }
                           >
                             {tab.title}
                             {query && (
@@ -374,8 +378,8 @@ export const FeaturesList = () => {
                   )}
                 </div>
                 {query && tabsWithMatches.length > 0 && (
-                  <div className="d-flex align-items-center gap-2 pt-3 pb-4 flex-wrap border-bottom">
-                    <span className="text-muted fs-7">
+                  <div className="d-flex align-items-center gap-2 pt-3 pb-4 flex-wrap border-b-[1px] border-b-secondary">
+                    <span className="text-quaternary fs-7">
                       {translate('{count} results found in:', {
                         count: totalResults,
                       })}

@@ -102,7 +102,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
                   />
                 )}
               </div>
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {formatNumber(data.metrics.messages_sent)} {translate('sent')}
               </span>
             </div>
@@ -118,7 +118,7 @@ export const PubSubOverviewCards: FC<PubSubOverviewCardsProps> = ({ data }) => {
               <strong className="display-4 text-info">
                 {formatNumber(data.metrics.messages_failed)}
               </strong>
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {translate('avg {ms}ms', { ms: data.metrics.avg_latency_ms })}
               </span>
             </div>

@@ -225,7 +225,11 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
               <Tooltip
                 label={translate('Added by staff. It cannot be changed here.')}
               >
-                <LockIcon size={14} weight="bold" className="ms-2 text-muted" />
+                <LockIcon
+                  size={14}
+                  weight="bold"
+                  className="ms-2 text-quaternary"
+                />
               </Tooltip>
             )}
           </span>
@@ -239,7 +243,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
               { offering: target.label },
             )}
           >
-            <span className="text-muted text-decoration-underline-dotted">
+            <span className="text-quaternary text-decoration-underline-dotted">
               {target.label}
             </span>
           </Tooltip>

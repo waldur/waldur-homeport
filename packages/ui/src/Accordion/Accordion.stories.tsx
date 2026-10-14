@@ -126,7 +126,7 @@ const FiltersFrame = ({
   children: ReactNode;
   style?: CSSProperties;
 }) => (
-  <div className="max-w-sm bg-[var(--surface-card-bg)] p-4" style={style}>
+  <div className="max-w-sm bg-[var(--card-bg)] p-4" style={style}>
     {children}
   </div>
 );
@@ -177,7 +177,7 @@ export const Single: Story = {
 /**
  * A tenant with a non-default brand colour: the open header and its
  * chevron follow it. (`--color-brand-*` is overridden on the wrapper; the
- * app sets `--waldur-brand-*` on :root at load.)
+ * app sets `--brand-*` on :root at load.)
  */
 export const CustomBrand: Story = {
   render: () => (
@@ -234,11 +234,11 @@ const PERMISSION_GROUPS = [
  */
 export const Boxed: Story = {
   render: () => (
-    <div className="max-w-md bg-[var(--surface-page-bg)] p-6">
+    <div className="max-w-md bg-[var(--page-bg)] p-6">
       <Accordion
         type="multiple"
         defaultValue={['project']}
-        className="rounded-md border-[1px] border-solid border-[var(--surface-card-border)] bg-[var(--surface-card-bg)]"
+        className="rounded-md border-[1px] border-solid border-secondary bg-[var(--card-bg)]"
       >
         {PERMISSION_GROUPS.map((group) => (
           <AccordionItem key={group.value} value={group.value}>

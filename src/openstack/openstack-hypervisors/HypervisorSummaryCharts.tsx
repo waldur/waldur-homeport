@@ -19,11 +19,11 @@ import { computeUsage, formatMemory } from './utils';
 const useChartPalette = () =>
   useMemo(() => {
     return {
-      used: getCssVar('--waldur-utility-indigo-400'),
-      available: getCssVar('--waldur-utility-blue-400'),
-      total: getCssVar('--waldur-utility-teal-400'),
-      warning: getCssVar('--waldur-utility-warning-400'),
-      empty: getCssVar('--waldur-utility-gray-300'),
+      used: getCssVar('--color-indigo-400'),
+      available: getCssVar('--color-blue-400'),
+      total: getCssVar('--color-teal-400'),
+      warning: getCssVar('--color-warning-400'),
+      empty: getCssVar('--color-gray-300'),
     };
   }, []);
 
@@ -109,7 +109,7 @@ const ChartItem: FC<ChartItemProps> = ({
       <div className="d-flex flex-column gap-1">
         <span className="d-flex align-items-center gap-2 fs-7">
           <span
-            className="rounded-circle d-inline-block"
+            className="rounded-full d-inline-block"
             style={{ width: 8, height: 8, backgroundColor: usedColor }}
           />
           {usedLabel}
@@ -117,7 +117,7 @@ const ChartItem: FC<ChartItemProps> = ({
         {isOvercommitted && overcommittedLabel ? (
           <span className="d-flex align-items-center gap-2 fs-7 text-warning">
             <span
-              className="rounded-circle d-inline-block"
+              className="rounded-full d-inline-block"
               style={{ width: 8, height: 8, backgroundColor: warningColor }}
             />
             {overcommittedLabel}
@@ -125,7 +125,7 @@ const ChartItem: FC<ChartItemProps> = ({
         ) : (
           <span className="d-flex align-items-center gap-2 fs-7">
             <span
-              className="rounded-circle d-inline-block"
+              className="rounded-full d-inline-block"
               style={{ width: 8, height: 8, backgroundColor: availableColor }}
             />
             {availableLabel}
@@ -133,7 +133,7 @@ const ChartItem: FC<ChartItemProps> = ({
         )}
         <span className="d-flex align-items-center gap-2 fs-7">
           <span
-            className="rounded-circle d-inline-block"
+            className="rounded-full d-inline-block"
             style={{ width: 8, height: 8, backgroundColor: totalColor }}
           />
           {totalLabel}
@@ -190,7 +190,7 @@ export const HypervisorSummaryCharts: FC<{
 
   return (
     <Card className="mb-6 card-bordered">
-      <Card.Header className="border-bottom">
+      <Card.Header className="border-b-[1px] border-b-secondary">
         <Card.Title>
           <span className="h3">{translate('Hypervisor summary')}</span>
         </Card.Title>

@@ -15,7 +15,7 @@ export const CapacityIndicator: FC<CapacityIndicatorProps> = ({
   max,
 }) => {
   if (!max) {
-    return <span className="text-muted">{translate('Unlimited')}</span>;
+    return <span className="text-quaternary">{translate('Unlimited')}</span>;
   }
   const ratio = open / max;
   const variant = ratio >= 1 ? 'danger' : ratio >= 0.75 ? 'warning' : 'success';

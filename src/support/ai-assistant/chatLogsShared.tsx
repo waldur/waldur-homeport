@@ -107,7 +107,7 @@ export const TokenUsageBadge: FunctionComponent<{
   if (inputTokens == null && outputTokens == null) return null;
   return (
     <Tooltip label={label}>
-      <span className="text-muted text-nowrap">
+      <span className="text-quaternary text-nowrap">
         {prefix}
         {inputTokens != null && <>↓ {formatUsageValue(inputTokens)}</>}
         {inputTokens != null && outputTokens != null && ' / '}
@@ -158,7 +158,7 @@ export const MessageGutter: FunctionComponent<
   const formatDate = isDesktop ? formatDateTime : formatShortDateTime;
 
   return (
-    <div className="message-gutter d-flex flex-column gap-2 text-muted">
+    <div className="message-gutter d-flex flex-column gap-2 text-quaternary">
       <div>
         <Badge variant={SENDER_BADGES[sender].variant} size="sm" tone="outline">
           {SENDER_BADGES[sender].label}
@@ -226,7 +226,7 @@ export const FeedbackStrip: FunctionComponent<
     <div
       className={classNames(
         'message-feedback mt-1 px-3 py-2 rounded border small',
-        `bg-light-${variant}`,
+        positive ? 'bg-success-subtle' : 'bg-danger-subtle',
       )}
     >
       <Badge

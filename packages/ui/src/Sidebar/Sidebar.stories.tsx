@@ -258,7 +258,7 @@ export const AccordionHierarchy: Story = {
 /** Long scrollable menu demonstrating the custom Radix ScrollArea with scrollbar thumb styling. */
 export const ScrollableContent: Story = {
   render: () => (
-    <div className="h-[500px] w-[300px] overflow-hidden rounded-xl border border-[var(--surface-sidebar-border)] shadow-md">
+    <div className="h-[500px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
       <SidebarProvider className="min-h-0 h-full w-full">
         <Sidebar collapsible="none" className="h-full w-full">
           <SidebarHeader className="gap-2">
@@ -367,7 +367,7 @@ export const CollapsedHoverToExpand: Story = {
           </SidebarSection>
         </SidebarContent>
       </Sidebar>
-      <div className="p-4 text-sm text-[var(--surface-text-secondary)]">
+      <div className="p-4 text-sm text-quaternary">
         Content area — should not shift when the sidebar hover-expands.
       </div>
     </SidebarProvider>
@@ -401,10 +401,10 @@ interface ThemedSidebarProps {
 
 const ThemedSidebarPreview = ({ styleName }: ThemedSidebarProps) => (
   <div data-sidebar-style={styleName} className="flex flex-col">
-    <div className="mb-2 text-xs font-semibold tracking-wider text-[var(--surface-text-secondary)] uppercase">
+    <div className="mb-2 text-xs font-semibold tracking-wider text-quaternary uppercase">
       {styleName}
     </div>
-    <div className="h-[550px] w-[300px] overflow-hidden rounded-xl border border-[var(--surface-sidebar-border)] shadow-md">
+    <div className="h-[550px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
       <SidebarProvider className="min-h-0 h-full w-full">
         <Sidebar collapsible="none" className="h-full w-full">
           <SidebarHeader className="gap-2">
@@ -474,10 +474,10 @@ export const InteractiveStyle: StoryObj<{ style: SidebarStyle }> = {
   },
   render: (args) => (
     <div data-sidebar-style={args.style} className="p-6">
-      <div className="mb-3 text-xs font-semibold tracking-wider text-[var(--surface-text-secondary)] uppercase">
+      <div className="mb-3 text-xs font-semibold tracking-wider text-quaternary uppercase">
         Current style: {args.style}
       </div>
-      <div className="h-[650px] w-[300px] overflow-hidden rounded-xl border border-[var(--surface-sidebar-border)] shadow-md">
+      <div className="h-[650px] w-[300px] overflow-hidden rounded-xl border-[1px] border-[var(--sidebar-border)] shadow-md">
         <SidebarProvider className="min-h-0 h-full w-full">
           <Sidebar collapsible="none" className="h-full w-full">
             <SidebarHeader className="gap-4">

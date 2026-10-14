@@ -16,14 +16,14 @@ function initCssVariables() {
   // Font family
   const fontFamily = ENV.plugins.WALDUR_CORE.FONT_FAMILY || 'Inter';
   document.documentElement.style.setProperty(
-    '--waldur-font-family',
+    '--font-family',
     `${fontFamily}, Helvetica, sans-serif`,
   );
   const fontSizeAdjust: Record<string, number> = {
     'Maven Pro': 1.08,
   };
   document.documentElement.style.setProperty(
-    '--waldur-font-size-adjust',
+    '--font-size-adjust',
     String(fontSizeAdjust[fontFamily] ?? 1),
   );
 }

@@ -114,7 +114,7 @@ export function UserMenu() {
             // that component uses (d-none d-md-flex).
             <div className="hidden flex-col items-start md:flex">
               {!currentUser.isStaff && (
-                <span className="text-xs text-[var(--surface-text-muted)]">
+                <span className="text-xs text-quinary">
                   {translate('Hello')}
                 </span>
               )}
@@ -124,14 +124,14 @@ export function UserMenu() {
                   $font-weight-bold to 500 (Bootstrap's own default is
                   700). See StatCard.tsx's comment on the same weight
                   scale for the SCSS source. */}
-              <span className="text-sm font-medium text-[var(--surface-text-primary)]">
+              <span className="text-sm font-medium text-primary">
                 {currentUser.firstName}
               </span>
               {currentUser.isStaff && (
                 // Metronic's real Staff badge is
                 // `<Badge variant="purple" outline pill>`
                 // (UserDropdownMenu.tsx) — now a direct, real Badge
-                // variant/tone/pill combination (see badgeColors.css),
+                // variant/tone/pill combination (see BADGE_STYLES in Badge.tsx),
                 // not a hand-rolled color override the way it was before
                 // Badge grew a real variant/tone system.
                 <Badge
@@ -164,7 +164,7 @@ export function UserMenu() {
               />
               <div className="flex min-w-0 flex-col">
                 {/* .fw-bolder fs-5 there: 15px, weight 600. */}
-                <span className="truncate text-[14.95px] font-semibold text-[var(--surface-text-primary)]">
+                <span className="truncate text-[14.95px] font-semibold text-primary">
                   {currentUser.fullName}
                 </span>
                 {/* .text-muted fs-7 there: 12px, gray-500. */}

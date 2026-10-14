@@ -208,7 +208,7 @@ export const MatchingSection: FC<MatchingSectionProps> = ({
               )}
               autoWidth
             >
-              <InfoIcon weight="bold" className="text-muted" />
+              <InfoIcon weight="bold" className="text-quaternary" />
             </Tooltip>
           </h3>
         </Card.Title>

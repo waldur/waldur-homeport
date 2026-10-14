@@ -120,7 +120,7 @@ const FlavorSelectionModal: React.FC<FlavorSelectionModalProps> = ({
             )}
             subtitle={
               showMinimalSettingsLabels && (
-                <span className="text-muted">
+                <span className="text-quaternary">
                   {translate('Minimal requirements:')}
                   {minimalSettings.minimal_worker_vcpus && (
                     <> {minimalSettings.minimal_worker_vcpus}+ vCPUs</>
@@ -249,7 +249,7 @@ export const K8sFlavorSelectionTable: React.FC<
           <XIcon
             weight="bold"
             size={16}
-            className="text-gray-400 text-hover-quaternary ms-auto"
+            className="text-quinary hover:text-quaternary cursor-pointer ms-auto"
             onClick={(e) => {
               e.stopPropagation();
               onFlavorSelect(null);
@@ -259,7 +259,7 @@ export const K8sFlavorSelectionTable: React.FC<
           <MagnifyingGlassIcon
             weight="bold"
             size={16}
-            className="text-gray-400 ms-auto"
+            className="text-quinary ms-auto"
           />
         )}
       </button>

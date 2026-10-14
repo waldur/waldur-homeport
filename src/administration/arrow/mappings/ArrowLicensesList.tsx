@@ -23,13 +23,13 @@ export const ArrowLicensesList: FC<ArrowLicensesListProps> = ({ licenses }) => (
     </Card.Header>
     <Card.Body className="p-0">
       {!licenses || licenses.length === 0 ? (
-        <div className="text-center text-muted py-6">
+        <div className="text-center text-quaternary py-6">
           {translate('No licenses found in Arrow billing export')}
         </div>
       ) : (
         <div className="table-responsive" style={{ maxHeight: '300px' }}>
           <Table className="mb-0" size="sm">
-            <thead className="sticky-top bg-white">
+            <thead className="sticky-top bg-primary">
               <tr>
                 <th>{translate('License Reference')}</th>
                 <th>{translate('Vendor')}</th>

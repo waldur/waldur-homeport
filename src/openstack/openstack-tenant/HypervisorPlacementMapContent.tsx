@@ -66,7 +66,7 @@ const InstanceRow: FC<{
   indent?: boolean;
 }> = ({ inst, indent }) => (
   <tr>
-    <td className={indent ? 'ps-8 fw-semibold' : 'ps-4 fw-semibold'}>
+    <td className={indent ? 'ps-8 font-semibold' : 'ps-4 font-semibold'}>
       {inst.name}
     </td>
     <td>{renderFieldOrDash(inst.cores)}</td>
@@ -101,14 +101,14 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
         return (
           <div key={group.hostname} className="border rounded">
             {/* Hypervisor header */}
-            <div className="d-flex align-items-center gap-2 px-4 py-3 border-bottom bg-light-primary">
+            <div className="d-flex align-items-center gap-2 px-4 py-3 border-b-[1px] border-b-secondary bg-brand-subtle">
               {isUnassigned ? (
                 <QuestionIcon className="text-warning" weight="bold" />
               ) : (
-                <CpuIcon className="text-primary" weight="bold" />
+                <CpuIcon className="text-brand" weight="bold" />
               )}
-              <span className="fw-bold">{group.hostname}</span>
-              <span className="text-muted ms-auto fs-7">
+              <span className="font-medium">{group.hostname}</span>
+              <span className="text-quaternary ms-auto fs-7">
                 {group.instances.length === 1
                   ? translate('1 VM')
                   : translate('{count} VMs', {
@@ -124,7 +124,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
             <div className="table-responsive">
               <table className="table table-row-bordered align-middle fs-7 mb-0">
                 <thead>
-                  <tr className="text-muted fw-bold fs-8 text-uppercase">
+                  <tr className="text-quaternary font-medium fs-8 text-uppercase">
                     <th className="ps-4">{translate('Instance')}</th>
                     <th>{translate('vCPU')}</th>
                     <th>{translate('RAM')}</th>
@@ -138,16 +138,16 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
                   {serverGroups.map((sg) => (
                     <>
                       <tr key={sg.key}>
-                        <td colSpan={6} className="ps-4 py-2 bg-light-info">
+                        <td colSpan={6} className="ps-4 py-2 bg-info-subtle">
                           <UsersThreeIcon
                             className="text-info me-2"
                             weight="bold"
                             size={16}
                           />
-                          <span className="fw-bold text-info fs-8">
+                          <span className="font-medium text-info fs-8">
                             {sg.name}
                           </span>
-                          <span className="text-muted fs-8 ms-2">
+                          <span className="text-quaternary fs-8 ms-2">
                             {sg.policy}
                           </span>
                         </td>
@@ -165,8 +165,11 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
                   {/* Ungrouped instances */}
                   {ungrouped.length > 0 && hasAnyServerGroups && (
                     <tr>
-                      <td colSpan={6} className="ps-4 py-2 bg-light">
-                        <span className="text-muted fs-8 fw-bold">
+                      <td
+                        colSpan={6}
+                        className="ps-4 py-2 bg-tertiary dark:bg-quaternary"
+                      >
+                        <span className="text-quaternary fs-8 font-medium">
                           {translate('No server group')}
                         </span>
                       </td>

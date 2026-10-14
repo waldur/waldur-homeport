@@ -126,7 +126,7 @@ const RoundResultsSection: FunctionComponent<RoundExpandableRowProps> = ({
                 <FileDownloader
                   url={row.adoption_document}
                   name={adoptionDocumentName(row.adoption_document)}
-                  className="text-btn text-hover-primary d-inline-flex align-items-center"
+                  className="text-btn hover:text-brand d-inline-flex align-items-center"
                 >
                   <DownloadSimpleIcon weight="bold" className="me-1" />
                   {translate('Download document')}
@@ -146,7 +146,9 @@ const SectionTitle: FunctionComponent<{
   title: string;
   className?: string;
 }> = ({ title, className }) => (
-  <div className={`fw-bold text-muted mb-3 ${className || ''}`}>{title}</div>
+  <div className={`font-medium text-quaternary mb-3 ${className || ''}`}>
+    {title}
+  </div>
 );
 
 export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({

@@ -17,7 +17,7 @@ const meta: Meta<typeof ProgressSteps> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-6 bg-body" style={{ minWidth: 600 }}>
+      <div className="p-6 bg-primary" style={{ minWidth: 600 }}>
         <Story />
       </div>
     ),
@@ -161,7 +161,7 @@ export const Interactive: Story = {
           steps={steps}
           onClick={(_, idx) => setCurrentIndex(idx)}
         />
-        <div className="text-center text-muted small">
+        <div className="text-center text-quaternary small">
           Click any step to switch the active step (current: Step{' '}
           {currentIndex + 1})
         </div>

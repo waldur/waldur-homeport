@@ -18,7 +18,7 @@ export const EnvironmentVariablesList: FunctionComponent<any> = (props) => (
         ))
       ) : (
         <tr>
-          <td className="text-center text-muted">
+          <td className="text-center text-quaternary">
             {translate('No variable defined')}
           </td>
         </tr>

@@ -20,7 +20,7 @@ export const SharedAccountsValue: FC<SharedAccountsValueProps> = ({
 }) => {
   if (!shared) {
     return (
-      <span className="text-muted">
+      <span className="text-quaternary">
         {translate('Not shared: this offering holds its own accounts')}
       </span>
     );
@@ -30,7 +30,7 @@ export const SharedAccountsValue: FC<SharedAccountsValueProps> = ({
     .map((item) => item.name);
   if (!others.length) {
     return (
-      <span className="text-muted">
+      <span className="text-quaternary">
         {translate('No other offering of this service provider yet')}
       </span>
     );
@@ -79,7 +79,7 @@ export const PosixIdPoolSummary: FC<PosixIdPoolSummaryProps> = ({
   return (
     <div className="d-flex flex-column align-items-start">
       <span>{ranges.join(' · ')}</span>
-      <small className="text-muted">
+      <small className="text-quaternary">
         {pool.offering === offeringUuid
           ? translate('Pool of this offering')
           : translate('Service provider pool')}

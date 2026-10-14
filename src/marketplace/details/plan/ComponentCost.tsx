@@ -21,7 +21,7 @@ export const ComponentCost = ({ component }: { component: Component }) => (
         })}
       </span>
     ) : component.discountDeferred ? (
-      <span className="ms-2 text-muted">
+      <span className="ms-2 text-quaternary">
         {translate('Volume discount applied on your invoice')}
       </span>
     ) : null}

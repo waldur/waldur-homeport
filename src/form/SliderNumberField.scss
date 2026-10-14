@@ -24,7 +24,7 @@
         top: 0;
         left: 10px;
         height: 8px;
-        background-color: var(--waldur-border-secondary);
+        background-color: var(--border-secondary);
         width: calc(100% - 20px);
         border-radius: 4px;
       }
@@ -34,7 +34,7 @@
         top: 0;
         left: 0;
         height: 8px;
-        background-color: var(--waldur-border-brand-solid);
+        background-color: var(--color-brand-600);
         border-radius: 4px;
       }
     }
@@ -98,14 +98,14 @@
       height: 24px;
       width: 24px;
       border-radius: 50%;
-      background: var(--waldur-bg-primary);
-      border: 1.5px solid var(--waldur-border-brand-solid);
+      background: var(--card-bg);
+      border: 1.5px solid var(--color-brand-600);
       cursor: pointer;
       transition: box-shadow 0.2s;
     }
 
     &::-webkit-slider-thumb:hover {
-      box-shadow: 0 0 0 1px var(--waldur-border-brand-solid);
+      box-shadow: 0 0 0 1px var(--color-brand-600);
     }
 
     &::-webkit-slider-thumb:active {

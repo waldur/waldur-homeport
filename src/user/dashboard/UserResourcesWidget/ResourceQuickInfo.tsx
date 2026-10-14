@@ -94,7 +94,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
         <div className="d-flex justify-content-between align-items-start mb-2">
           <div className="flex-grow-1">
             <h5 className="mb-1">{resource.name}</h5>
-            <small className="text-muted">
+            <small className="text-quaternary">
               {resource.offering_name} ({resource.category_title})
             </small>
           </div>
@@ -108,12 +108,12 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
 
         {/* Offering description */}
         {offering?.description && (
-          <p className="text-muted fs-7 mb-3">{offering.description}</p>
+          <p className="text-quaternary fs-7 mb-3">{offering.description}</p>
         )}
 
         {/* Components section */}
         {isLoadingOffering ? (
-          <div className="d-flex align-items-center text-muted mb-3">
+          <div className="d-flex align-items-center text-quaternary mb-3">
             {}
             <LoadingSpinnerSimple className="me-2" />
             <span className="fs-7">{translate('Loading details...')}</span>
@@ -121,7 +121,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
         ) : (
           components.length > 0 && (
             <div className="mb-3">
-              <div className="text-muted fs-7 fw-bold mb-2">
+              <div className="text-quaternary fs-7 font-medium mb-2">
                 {translate('Components')}
               </div>
               <Row className="g-2">
@@ -130,18 +130,20 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                   .map((component) => (
                     <Col key={component.type} xs={6} md={3}>
                       <div className="border rounded p-2 text-center">
-                        <div className="fw-bold">
+                        <div className="font-medium">
                           {component.limit
                             ? `${component.usage}/${component.limit}`
                             : component.usage}
                         </div>
-                        <div className="text-muted fs-8">{component.title}</div>
+                        <div className="text-quaternary fs-8">
+                          {component.title}
+                        </div>
                       </div>
                     </Col>
                   ))}
               </Row>
               {components.length > MAX_COMPONENTS_DISPLAY && (
-                <div className="text-muted fs-8 mt-1">
+                <div className="text-quaternary fs-8 mt-1">
                   {translate('+{count} more', {
                     count: components.length - MAX_COMPONENTS_DISPLAY,
                   })}
@@ -154,7 +156,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
         {/* Access endpoints */}
         {endpoints.length > 0 && (
           <div className="mb-3">
-            <div className="text-muted fs-7 fw-bold mb-2">
+            <div className="text-quaternary fs-7 font-medium mb-2">
               {translate('Access resource')}
             </div>
             <div className="d-flex flex-wrap gap-2">
@@ -167,7 +169,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
                     href={endpoint.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary text-decoration-none d-flex align-items-center me-2"
+                    className="text-brand text-decoration-none d-flex align-items-center me-2"
                   >
                     <ArrowSquareOutIcon
                       size={14}

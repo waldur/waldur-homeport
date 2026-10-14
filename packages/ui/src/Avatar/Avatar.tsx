@@ -5,13 +5,12 @@ import { cn } from '../cn';
 /**
  * shadcn's actual Avatar recipe (wraps @radix-ui/react-avatar's
  * Root/Image/Fallback — see https://ui.shadcn.com/docs/components/avatar)
- * — background/text colors point at
- * waldur-design-tokens/surfaceColors.css's --badge-brand-* tokens instead
- * of shadcn's own default palette. TopBar's exported `Avatar` (a simple
+ * — background/text colors use a solid brand-600 background with white text
+ * instead of shadcn's own default palette. TopBar's exported `Avatar` (a simple
  * `initials`-only convenience wrapper) composes these.
  *
  * Deliberately NOT --nav-item-active-*: those became SIDEBAR_STYLE-variable
- * (see surfaceColors.css) and some variants use low-contrast fills
+ * (see sidebar.css) and some variants use low-contrast fills
  * (rgba(255,255,255,0.15), pale accent-light tints) unsuitable for a
  * generic colored-initials badge that has nothing to do with sidebar nav
  * state.
@@ -45,7 +44,7 @@ export const AvatarFallback = ({
 }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) => (
   <AvatarPrimitive.Fallback
     className={cn(
-      'flex size-full items-center justify-center rounded-full bg-[var(--badge-brand-bg)] text-xs font-semibold text-[var(--badge-brand-text)]',
+      'flex size-full items-center justify-center rounded-full bg-brand-600 text-xs font-semibold text-white',
       className,
     )}
     {...props}

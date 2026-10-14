@@ -55,7 +55,7 @@ export const AgentServicesList: FC<TableWithPortal> = ({ portal }) => {
   const columns: Column<AgentService>[] = [
     {
       title: translate('Name'),
-      render: ({ row }) => <span className="fw-bold">{row.name}</span>,
+      render: ({ row }) => <span className="font-medium">{row.name}</span>,
       keys: ['name'],
       id: 'name',
     },
@@ -68,7 +68,7 @@ export const AgentServicesList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('Mode'),
       render: ({ row }) => (
-        <code className="text-muted">{row.mode || DASH_ESCAPE_CODE}</code>
+        <code className="text-quaternary">{row.mode || DASH_ESCAPE_CODE}</code>
       ),
       keys: ['mode'],
       id: 'mode',

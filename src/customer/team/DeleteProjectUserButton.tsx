@@ -44,7 +44,7 @@ export const DeleteProjectUserButton: React.FC<
   });
   return (
     <ActionItem
-      className="text-danger border-top"
+      className="text-danger border-t-[1px] border-t-secondary"
       iconColor="danger"
       title={translate('Remove')}
       action={() => deleteMutation.mutate()}

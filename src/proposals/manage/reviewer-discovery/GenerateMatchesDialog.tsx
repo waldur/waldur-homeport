@@ -231,11 +231,11 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* Call description preview */}
               {values.source?.value === 'call_description' && (
-                <div className="border rounded p-3 bg-light mb-4">
-                  <div className="fw-bold mb-2">{resolve.call.name}</div>
+                <div className="border rounded p-3 bg-tertiary dark:bg-quaternary mb-4">
+                  <div className="font-medium mb-2">{resolve.call.name}</div>
                   {resolve.call.description ? (
                     <div
-                      className="text-muted small"
+                      className="text-quaternary small"
                       style={{
                         maxHeight: '100px',
                         overflow: 'auto',
@@ -253,9 +253,9 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* All proposals info */}
               {values.source?.value === 'all_proposals' && (
-                <div className="border rounded p-3 bg-light mb-4">
+                <div className="border rounded p-3 bg-tertiary dark:bg-quaternary mb-4">
                   {proposalsLoading ? (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Loading proposals...')}
                     </span>
                   ) : proposals && proposals.length > 0 ? (
@@ -327,7 +327,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
 
               {/* Advanced options */}
               <details className="mb-4">
-                <summary className="cursor-pointer text-muted">
+                <summary className="cursor-pointer text-quaternary">
                   {translate('Advanced options')}
                 </summary>
                 <div className="mt-3">
@@ -342,9 +342,9 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                       className="form-range"
                     />
                     <div className="d-flex justify-content-between">
-                      <small className="text-muted">0%</small>
+                      <small className="text-quaternary">0%</small>
                       <strong>{values.min_threshold || 0}%</strong>
-                      <small className="text-muted">100%</small>
+                      <small className="text-quaternary">100%</small>
                     </div>
                   </FormGroup>
                 </div>

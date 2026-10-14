@@ -79,7 +79,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
             size={24}
           />
         </div>
-        <span className={classNames('flex-grow-1', { 'fw-bold': isGroup })}>
+        <span className={classNames('flex-grow-1', { 'font-medium': isGroup })}>
           {item.title}
         </span>
         {'offering_count' in item && item.offering_count !== undefined && (
@@ -93,7 +93,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
 
   return (
     <Card className={cardClassName}>
-      <Card.Header className="border-bottom">
+      <Card.Header className="border-b-[1px] border-b-secondary">
         <Card.Title>
           <span className="h3">{translate('Categories')}</span>
         </Card.Title>

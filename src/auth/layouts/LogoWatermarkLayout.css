@@ -1,6 +1,6 @@
 .layout-logo-watermark {
   min-height: 100vh;
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -58,5 +58,5 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  border-top: 1px solid var(--bs-border-color);
+  border-top: 1px solid var(--border-secondary);
 }

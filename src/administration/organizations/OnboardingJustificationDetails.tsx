@@ -110,7 +110,7 @@ export const OnboardingJustificationDetails: FC<
                     </h3>
                     <hr className="my-4" />
 
-                    <h4 className="fw-bold mb-3">
+                    <h4 className="font-medium mb-3">
                       {translate('Organization info')}
                     </h4>
                     {Object.entries(
@@ -130,7 +130,7 @@ export const OnboardingJustificationDetails: FC<
               {verification?.onboarding_metadata &&
                 Object.keys(verification.onboarding_metadata).length > 0 && (
                   <>
-                    <h4 className="fw-bold mb-3">
+                    <h4 className="font-medium mb-3">
                       {translate('User answers')}
                     </h4>
                     {Object.entries(verification.onboarding_metadata).map(
@@ -150,7 +150,7 @@ export const OnboardingJustificationDetails: FC<
               {justification?.supporting_documentation &&
                 justification.supporting_documentation.length > 0 && (
                   <>
-                    <h4 className="fw-bold mb-3">
+                    <h4 className="font-medium mb-3">
                       {translate('Attached documents')}
                     </h4>
                     <Row className="mb-3">
@@ -174,7 +174,7 @@ export const OnboardingJustificationDetails: FC<
                 (justification.error_message ||
                   justification.error_traceback) && (
                   <>
-                    <h4 className="fw-bold mb-3">
+                    <h4 className="font-medium mb-3">
                       {translate('Automatic validation logs')}
                     </h4>
                     <Field
@@ -192,7 +192,7 @@ export const OnboardingJustificationDetails: FC<
                 <>
                   <hr className="my-4" />
 
-                  <h4 className="fw-bold mb-3">{translate('Notes')}</h4>
+                  <h4 className="font-medium mb-3">{translate('Notes')}</h4>
                   <Row className="mb-3">
                     <Col xs={12} md={6}>
                       <FormField name="staff_notes">

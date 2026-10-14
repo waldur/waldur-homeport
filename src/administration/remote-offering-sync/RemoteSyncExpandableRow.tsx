@@ -40,7 +40,7 @@ export const RemoteSyncExpandableRow: FC<{
           {
             title: translate('Remote category name'),
             render: ({ row }) => (
-              <span className="text-dark">
+              <span className="text-primary">
                 <FieldWithCopy value={row.remote_category_name} />
               </span>
             ),
@@ -66,7 +66,7 @@ export const RemoteSyncExpandableRow: FC<{
         initialSorting={{ field: 'remote_category', mode: 'desc' }}
         placeholderComponent={
           <div>
-            <p className="text-muted text-center">
+            <p className="text-quaternary text-center">
               {translate('No items found')}
             </p>
           </div>

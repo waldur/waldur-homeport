@@ -51,7 +51,7 @@ const getCoverage = (
       : { label: translate('Partial'), variant: 'warning' };
 
 const TAB_TRIGGER_BASE =
-  'flex items-center justify-between w-full min-h-[36px] py-[7px] px-3 border-y-0 border-r-0 border-l-2 rounded-none bg-transparent text-sm leading-5 text-left cursor-pointer transition-colors hover:text-brand-600 disabled:opacity-40 disabled:cursor-not-allowed';
+  'flex items-center justify-between w-full min-h-[36px] py-[7px] px-3 border-y-0 border-r-0 border-l-2 rounded-none bg-transparent text-sm leading-5 text-left cursor-pointer transition-colors hover:text-brand disabled:opacity-40 disabled:cursor-not-allowed';
 
 /**
  * Custom hook managing search filtering across permission groups,
@@ -131,8 +131,8 @@ const PermissionGroupTab: FC<PermissionGroupTabProps> = ({
       className={classNames(
         TAB_TRIGGER_BASE,
         isActive
-          ? 'border-l-brand-600 text-brand-600 font-semibold active'
-          : 'border-l-transparent text-[var(--surface-text-secondary)] font-medium',
+          ? 'border-l-brand text-brand font-semibold active'
+          : 'border-l-transparent text-quaternary font-medium',
       )}
     >
       <span>{entity.label}</span>
@@ -169,9 +169,9 @@ const PermissionOptionsPanel: FC<PermissionOptionsPanelProps> = ({
   return (
     <TabsContent
       value={activeGroup.label}
-      className="border-t md:border-t-0 md:border-l border-[var(--waldur-border-secondary)] pt-4 md:ps-4 outline-none"
+      className="border-t md:border-t-0 md:border-l border-secondary pt-4 md:ps-4 outline-none"
     >
-      <p className="text-muted text-sm font-medium leading-5 mb-4">
+      <p className="text-quaternary text-sm font-medium leading-5 mb-4">
         {activeGroup.label}
       </p>
       <Checkbox
@@ -267,7 +267,7 @@ export const PermissionField = (props: PermissionFieldProps) => {
           className="grid grid-cols-1 md:grid-cols-2 flex-1"
         >
           <div className="pt-4 md:pe-4">
-            <p className="text-muted text-sm font-medium leading-5 mb-4">
+            <p className="text-quaternary text-sm font-medium leading-5 mb-4">
               {translate('Permissions')}
             </p>
             <TabsList

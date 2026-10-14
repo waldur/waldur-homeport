@@ -102,7 +102,7 @@ export const AllocationUnitsMappingField: FunctionComponent<
       <div className="mb-3">
         {hasMappings ? (
           <>
-            <div className="text-muted mb-2">
+            <div className="text-quaternary mb-2">
               {translate('Current mappings:')}
             </div>
             <ul className="list-group mb-3">
@@ -128,12 +128,14 @@ export const AllocationUnitsMappingField: FunctionComponent<
             </ul>
           </>
         ) : (
-          <div className="text-muted mb-3">
+          <div className="text-quaternary mb-3">
             {translate('No mappings added yet.')}
           </div>
         )}
 
-        <div className="text-muted mb-2">{translate('Add a new mapping:')}</div>
+        <div className="text-quaternary mb-2">
+          {translate('Add a new mapping:')}
+        </div>
 
         <div className="row mb-3 align-items-end">
           <div className="col-md-5">

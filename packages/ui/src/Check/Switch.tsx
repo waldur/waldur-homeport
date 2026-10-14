@@ -43,7 +43,7 @@ export interface SwitchProps
  * outermost element; `ref`, `id`, `checked`, `aria-*` and `data-*` reach the
  * input. Sizes are the legacy `.form-switch` (44×24) and `.form-switch-sm`
  * (36×20) at the app's 13px root font-size; colours come from
- * waldur-design-tokens/checkColors.css.
+ * waldur-design-tokens/check.css.
  */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (

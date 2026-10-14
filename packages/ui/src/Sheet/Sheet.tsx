@@ -10,11 +10,11 @@ import { cn } from '../cn';
  * panel — see https://ui.shadcn.com/docs/components/sheet), ported for
  * Sidebar.tsx's mobile behavior (the desktop sidebar becomes a Sheet below
  * the mobile breakpoint). Colors point at
- * waldur-design-tokens/surfaceColors.css tokens instead of shadcn's own
+ * the waldur-design-tokens tokens instead of shadcn's own
  * default palette. The overlay background (--drawer-overlay-bg) and
  * content shadow (--drawer-shadow) are Metronic's own real "Drawer"
  * component values (its closest real equivalent to a slide-in Sheet), not
- * generic Tailwind defaults — see surfaceColors.css's comment on those
+ * generic Tailwind defaults — see waldur-design-tokens/sheet.css's comment on those
  * tokens.
  *
  * SheetOverlay/SheetContent/SheetTitle/SheetDescription are forwardRef —
@@ -62,7 +62,7 @@ export const SheetOverlay = forwardRef<
       // focus"). Letting Radix mount/unmount this normally (present only
       // while genuinely open or mid-exit-animation) keeps those
       // side-effects scoped to real open state instead.
-      // z-mobile-drawer (110, packages/design-tokens/src/zIndex.css), not z-50 — Metronic's
+      // z-mobile-drawer (110, packages/design-tokens/src/css/zIndex.css), not z-50 — Metronic's
       // mobile drawer (.aside.drawer-mobile-on) sits at z-index: 110,
       // above its own header's z-index: 100 — measured live, and distinct
       // from the desktop panel's z-sidebar-panel (105, Sidebar.tsx's matching
@@ -92,7 +92,7 @@ const sheetVariants = cva(
   // data-[state=closed]:pointer-events-none: this node is still present
   // (not yet unmounted) during the closing slide-out transition, same
   // reasoning as SheetOverlay's own matching class.
-  'fixed z-mobile-drawer flex flex-col gap-4 border-[var(--surface-sidebar-border)] bg-[var(--surface-sidebar-bg)] text-[var(--surface-text-primary)] shadow-[var(--drawer-shadow)] transition-transform duration-300 ease-in-out data-[state=closed]:pointer-events-none',
+  'fixed z-mobile-drawer flex flex-col gap-4 border-[var(--sidebar-border)] bg-[var(--sidebar-bg)] text-primary shadow-[var(--drawer-shadow)] transition-transform duration-300 ease-in-out data-[state=closed]:pointer-events-none',
   {
     variants: {
       side: {
@@ -171,10 +171,7 @@ export const SheetTitle = forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
-    className={cn(
-      'font-semibold text-[var(--surface-text-primary)]',
-      className,
-    )}
+    className={cn('font-semibold text-primary', className)}
     {...props}
   />
 ));
@@ -186,7 +183,7 @@ export const SheetDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cn('text-sm text-[var(--surface-text-muted)]', className)}
+    className={cn('text-sm text-quinary', className)}
     {...props}
   />
 ));

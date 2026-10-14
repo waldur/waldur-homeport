@@ -27,7 +27,7 @@ const Pair = ({ caseId }: { caseId: CaseId }) => (
         value="128"
         footer={
           caseId === 'with-hint' ? (
-            <span className="text-muted">vs last month</span>
+            <span className="text-quaternary">vs last month</span>
           ) : undefined
         }
       />

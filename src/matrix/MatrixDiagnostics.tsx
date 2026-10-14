@@ -70,9 +70,11 @@ export const MatrixDiagnosticsDialog: FC = () => {
                     />
                   )}
                 </td>
-                <td className="fw-bold text-nowrap pe-4">{check.label}</td>
+                <td className="font-medium text-nowrap pe-4">{check.label}</td>
                 <td>
-                  <span className={check.ok ? 'text-muted' : 'text-danger'}>
+                  <span
+                    className={check.ok ? 'text-quaternary' : 'text-danger'}
+                  >
                     {check.detail}
                   </span>
                 </td>

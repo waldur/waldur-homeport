@@ -138,7 +138,7 @@ export const TosEditDialog = ({ resolve: { tos, refetch } }) => {
                           {values.terms_of_service ? (
                             <SafeMarkdown text={values.terms_of_service} />
                           ) : (
-                            <div className="text-muted">
+                            <div className="text-quaternary">
                               {translate(
                                 'No content to preview. Switch to Write tab to add content.',
                               )}

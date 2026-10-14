@@ -136,7 +136,7 @@ const PrepaidEndDateSelector = ({
             />
           </div>
           {endDate && (
-            <div className="text-muted small mt-1">
+            <div className="text-quaternary small mt-1">
               {dateRangeText} ({durationText})
             </div>
           )}

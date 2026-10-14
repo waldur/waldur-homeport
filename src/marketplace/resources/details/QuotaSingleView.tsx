@@ -42,7 +42,7 @@ export const QuotaSingleView = ({
 
   return (
     <div className="d-flex flex-column">
-      <span className="fw-bold text-dark text-nowrap ellipsis">
+      <span className="font-medium text-primary text-nowrap ellipsis">
         {limit
           ? `${formatUsageValue(usage)} / ${formatUsageValue(limit)}`
           : formatUsageValue(usage)}{' '}
@@ -69,10 +69,10 @@ export const QuotaSingleView = ({
         <Row className="mt-3">
           {details.map((detail) => (
             <Col key={detail.label}>
-              <span className="text-gray-700 fw-bold d-block mb-1">
+              <span className="text-secondary font-medium d-block mb-1">
                 {detail.label}:
               </span>
-              <span className="text-gray-500">{detail.value}</span>
+              <span className="text-quaternary">{detail.value}</span>
             </Col>
           ))}
         </Row>

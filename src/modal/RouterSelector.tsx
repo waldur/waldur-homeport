@@ -27,7 +27,7 @@ export const RouterSelector = ({ routerValue, setRouterValue, tenantUuid }) => {
     <div className="mt-3">
       <Form.Label>
         {translate('Router')}{' '}
-        <span className="text-muted">({translate('Optional')})</span>
+        <span className="text-quaternary">({translate('Optional')})</span>
       </Form.Label>
       <AsyncSelect
         key={tenantUuid}

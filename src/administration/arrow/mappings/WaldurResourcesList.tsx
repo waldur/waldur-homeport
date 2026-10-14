@@ -25,13 +25,13 @@ export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
     </Card.Header>
     <Card.Body className="p-0">
       {!resources || resources.length === 0 ? (
-        <div className="text-center text-muted py-6">
+        <div className="text-center text-quaternary py-6">
           {translate('No resources found for this customer')}
         </div>
       ) : (
         <div className="table-responsive" style={{ maxHeight: '300px' }}>
           <Table className="mb-0" size="sm">
-            <thead className="sticky-top bg-white">
+            <thead className="sticky-top bg-primary">
               <tr>
                 <th>{translate('Resource')}</th>
                 <th>{translate('Project')}</th>
@@ -54,7 +54,9 @@ export const WaldurResourcesList: FC<WaldurResourcesListProps> = ({
                         {resource.backend_id}
                       </span>
                     ) : (
-                      <span className="text-muted">{translate('Not set')}</span>
+                      <span className="text-quaternary">
+                        {translate('Not set')}
+                      </span>
                     )}
                   </td>
                   <td>

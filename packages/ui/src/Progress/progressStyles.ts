@@ -5,7 +5,7 @@ export type ProgressVariant = Exclude<BadgeVariant, 'secondary'>;
 export type ProgressSize = 'xs' | 'sm' | 'md' | 'lg';
 
 // Static strings, one per variant, so Tailwind's scanner sees every class.
-// The colours live in waldur-design-tokens/progressColors.css.
+// The colours live in waldur-design-tokens/progress.css.
 export const PROGRESS_FILL: Record<ProgressVariant, string> = {
   primary: 'bg-[var(--progress-fill-primary)]',
   success: 'bg-[var(--progress-fill-success)]',
@@ -30,7 +30,7 @@ export const PROGRESS_SIZE: Record<ProgressSize, string> = {
   lg: 'h-[var(--progress-height-lg)] rounded-[var(--progress-radius-lg)] text-[0.85rem] font-medium',
 };
 
-// Text colour for a label drawn inside a segment (see progressColors.css).
+// Text colour for a label drawn inside a segment (see progress.css).
 export const PROGRESS_LABEL: Record<ProgressVariant, string> = {
   primary: 'text-[var(--progress-label-primary)]',
   success: 'text-[var(--progress-label-success)]',

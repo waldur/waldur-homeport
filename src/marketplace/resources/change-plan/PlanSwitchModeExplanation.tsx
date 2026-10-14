@@ -82,7 +82,7 @@ export const PlanSwitchModeExplanation: FC<PlanSwitchModeExplanationProps> = ({
                 </li>
               ))}
               {!concealPrices && (
-                <li className="fw-bold">
+                <li className="font-medium">
                   {translate('Fee: {amount}', {
                     amount: defaultCurrency(total),
                   })}

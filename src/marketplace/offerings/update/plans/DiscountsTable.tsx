@@ -13,7 +13,7 @@ export const DiscountsTable: FunctionComponent<DiscountsTableProps> = ({
   components,
 }) =>
   components.length === 0 ? (
-    <p className="text-muted">
+    <p className="text-quaternary">
       {translate('This offering has no components.')}
     </p>
   ) : (

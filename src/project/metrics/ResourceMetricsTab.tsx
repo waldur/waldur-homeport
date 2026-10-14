@@ -38,7 +38,7 @@ export const ResourceMetricsTab: FC<{ resource: Resource }> = ({
   }
   return (
     <>
-      <p className="text-muted mb-6">
+      <p className="text-quaternary mb-6">
         {translate(
           "This resource's own figures. Goals apply to the project's combined figure, on the project's Metrics tab.",
         )}

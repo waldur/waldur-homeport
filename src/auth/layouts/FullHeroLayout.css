@@ -35,7 +35,7 @@
 }
 
 .layout-full-hero-login {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   border-radius: 12px;
   padding: 2rem;
   width: 100%;
@@ -54,7 +54,7 @@
 }
 
 .layout-full-hero-text h1 {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   margin-bottom: 1.5rem;
 }

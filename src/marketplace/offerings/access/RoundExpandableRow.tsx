@@ -14,7 +14,7 @@ const Line: FC<{ label: string; value?: string | null }> = ({
 }) =>
   value ? (
     <div className="d-flex gap-2">
-      <span className="text-muted" style={{ minWidth: 160 }}>
+      <span className="text-quaternary" style={{ minWidth: 160 }}>
         {label}
       </span>
       <span>{value}</span>
@@ -90,7 +90,7 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
         </div>
       ) : null}
       {call.description ? (
-        <div className="text-muted mt-2">{call.description}</div>
+        <div className="text-quaternary mt-2">{call.description}</div>
       ) : null}
       {call.external_url ? (
         <a

@@ -18,7 +18,7 @@ export const CategoryThumbnail: FC<CategoryThumbnailProps> = ({
   size = 18,
   fallbackSize,
   circle,
-  fallbackClassName = 'text-muted',
+  fallbackClassName = 'text-quaternary',
 }) =>
   icon ? (
     <Avatar name={title} src={icon} circle={circle} size={size} />

@@ -71,7 +71,7 @@ export const ResourcesMenuFilters = () => {
                   {filterItem.value?.abbreviation || filterItem.value?.name}
                 </span>
                 {/* Not the shared RemoveFilterBadgeButton: its own
-                    text-gray-400/text-hover-gray-500 classes are Bootstrap
+                    text-quinary/text-hover-gray-500 classes are Bootstrap
                     utilities marked !important in Metronic's (unlayered)
                     stylesheet, which no Tailwind utility class can ever
                     override — including with Tailwind's own `!` modifier,

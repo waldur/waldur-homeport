@@ -26,7 +26,7 @@ const OfferingListItem: FC<{ row: any }> = ({ row }) => {
 
   return (
     <OfferingDetailsLink offering_uuid={row.uuid}>
-      <div className="d-flex text-dark bg-hover-primary-50 align-items-center px-4 py-2">
+      <div className="d-flex text-primary hover:bg-[var(--bg-brand-primary-alt)] align-items-center px-4 py-2 cursor-pointer">
         <div className="flex-shrink-0 me-4">
           {row.thumbnail ? (
             <Image src={row.thumbnail} size={24} circle />
@@ -43,9 +43,9 @@ const OfferingListItem: FC<{ row: any }> = ({ row }) => {
             </div>
           )}
         </div>
-        <div className="flex-grow-1 d-flex flex-column justify-content-start fw-semibold ellipsis">
-          <span className="fs-4 fw-semibold ellipsis">{row.name}</span>
-          <span className="fs-7 fw-semibold text-muted ellipsis">
+        <div className="flex-grow-1 d-flex flex-column justify-content-start font-semibold ellipsis">
+          <span className="fs-4 font-semibold ellipsis">{row.name}</span>
+          <span className="fs-7 font-semibold text-quaternary ellipsis">
             <TextWithoutFormatting html={truncate(row.description, 60)} />
           </span>
         </div>

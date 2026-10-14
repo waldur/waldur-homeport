@@ -76,7 +76,7 @@ export const RunStep: FC<RunStepProps> = ({
 
       {!settled && (
         <div className="d-flex flex-column gap-3 align-items-start">
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate(
               'The merge runs in the background. This page follows its progress and can be reloaded or left at any time.',
             )}

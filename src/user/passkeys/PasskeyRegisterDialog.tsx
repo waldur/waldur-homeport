@@ -131,7 +131,7 @@ export const PasskeyRegisterDialog: FunctionComponent<
               />
             }
           >
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'Give this passkey a name you will recognise later, then follow your device prompt. Nothing secret leaves your device.',
               )}

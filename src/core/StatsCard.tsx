@@ -18,7 +18,7 @@ export const StatsCard: FC<StatsCardProps> = ({
   <div className="card card-flush card-bordered h-100">
     <div className="card-body d-flex py-5 flex-column">
       <div className="d-flex justify-content-between align-items-start gap-2">
-        <div className="fs-6 fw-bold text-quaternary">{label}</div>
+        <div className="fs-6 font-medium text-quaternary">{label}</div>
         {icon}
       </div>
       <div className="flex-grow-1 mt-3">

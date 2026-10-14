@@ -132,7 +132,7 @@ export const ReviewerProfilePanel = ({
   return (
     <Tabs value={activeTab} onValueChange={(key) => onTabChange(key as TabKey)}>
       <Card className="card-bordered">
-        <Card.Header className="border-bottom-0 pt-4">
+        <Card.Header className="border-b-0 pt-4">
           <div className="d-flex flex-column flex-lg-row w-100 gap-4">
             {/* Left side: Title, refresh, and status badges */}
             <div className="d-flex flex-column">
@@ -163,7 +163,7 @@ export const ReviewerProfilePanel = ({
                 />
               </div>
               {profile.is_published && profile.published_at && (
-                <span className="text-muted fw-normal fs-7">
+                <span className="text-quaternary font-normal fs-7">
                   {translate('Published {date}', {
                     date: formatDateTime(profile.published_at),
                   })}
@@ -195,7 +195,7 @@ export const ReviewerProfilePanel = ({
           </div>
         </Card.Header>
         {/* Tabs navigation */}
-        <Card.Header className="border-bottom align-items-stretch py-0 min-h-auto">
+        <Card.Header className="border-b-[1px] border-b-secondary align-items-stretch py-0 min-h-auto">
           <TabsList
             scrollable
             scrollClassName="flex-grow-1 pt-4"

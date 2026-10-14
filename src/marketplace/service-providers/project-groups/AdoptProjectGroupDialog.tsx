@@ -214,7 +214,7 @@ export const AdoptProjectGroupDialog: FC<AdoptProjectGroupDialogProps> = ({
               />
             }
           >
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'Record a group your directory already holds, so the project keeps its GID and Waldur never hands that GID to anything else. The project needs no resource yet.',
               )}

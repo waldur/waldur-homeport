@@ -46,13 +46,13 @@ export const BillingSyncItemsDialog = ({
           <LoadingSpinner />
         </div>
       ) : displayItems.length === 0 ? (
-        <div className="text-center text-muted py-6">
+        <div className="text-center text-quaternary py-6">
           {translate('No items found')}
         </div>
       ) : (
         <div className="table-responsive" style={{ maxHeight: '500px' }}>
           <Table striped bordered hover size="sm">
-            <thead className="sticky-top bg-white">
+            <thead className="sticky-top bg-primary">
               <tr>
                 <th>{translate('Line Reference')}</th>
                 <th>{translate('Subscription')}</th>

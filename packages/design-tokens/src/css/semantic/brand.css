@@ -1,0 +1,92 @@
+/**
+ * Brand roles: every token that paints the tenant's brand colour, read from
+ * the runtime --brand-* ramp (initBrandTokens(); bridged to Tailwind in
+ * tailwind/theme.css), plus the focus ring, which is drawn in brand.
+ *
+ * Brand is tenant-configurable, so these are the semantic roles that change
+ * with the tenant as well as with the theme. Neutral surfaces, text and lines
+ * are in background.css, text.css and borders.css.
+ *
+ * In Tailwind, `text-brand`, `border-brand` and `outline-brand` are
+ * --text-brand; the other roles use the arbitrary form
+ * (`bg-[var(--bg-brand-solid)]`). In SCSS, read these instead of $primary,
+ * which compiles to a static default green.
+ *
+ * Both themes are defined in this file.
+ */
+@import '../primitives/colors.css';
+
+:root {
+  /* Surfaces */
+  --bg-brand-primary: var(--brand-50);
+  --bg-brand-primary-alt: var(--brand-50);
+  --bg-brand-secondary: var(--brand-100);
+  /* One step stronger than --bg-brand-secondary (SCSS $brand-200): the
+     secondary button's hover and a checked switch's disabled track. */
+  --bg-brand-tertiary: var(--brand-200);
+  --bg-brand-solid: var(--brand-600);
+  /* A brand-tinted surface under neutral text: a selected option or row, an
+     intro panel, an icon tile. `bg-brand-subtle`, like the status matrix's
+     `bg-*-subtle`. */
+  --bg-brand-subtle: var(--brand-50);
+
+  /* Borders */
+  --border-brand: var(--brand-300);
+  --border-brand-solid: var(--brand-600);
+
+  /* Text and marks */
+  /* Brand text and lines on a neutral surface: the tenant colour itself
+     (--brand-600). `text-brand`, `border-brand`, `outline-brand`. */
+  --text-brand: var(--brand-color);
+  --text-brand-primary: var(--brand-900);
+  --text-brand-secondary: var(--brand-700);
+  --text-primary-on-brand: #ffffff;
+  --fg-brand-primary: var(--brand-600);
+  --fg-brand-secondary: var(--brand-500);
+  /* A brand mark one step lighter than --fg-brand-primary: the selected
+     tab's underline and the secondary button's icon. */
+  --fg-brand-accent: var(--brand-500);
+
+  /* Focus ring: one ring for everything that doesn't bring its own.
+     Buttons already draw a brand ring (button.css's --btn-*-focus-ring, and
+     Metronic's .btn:focus-visible), but links, breadcrumbs, sidebar rows and
+     anything else with no focus styling of its own fell through to the
+     browser default -- blue on Chrome/Safari, so keyboard users saw two
+     different rings depending on what they landed on. Same brand steps as
+     the button rings: 600 on light, 500 on dark, where the ramp is lighter
+     against dark surfaces. */
+  --focus-ring-color: var(--brand-600);
+  --focus-ring-width: 2px;
+  /* 0, like every button in the app -- a ring that hugs one control and floats
+     off the next is the inconsistency this ring exists to remove. */
+  --focus-ring-offset: 0;
+  /* Corner for controls that have none of their own -- links, icon-only text
+     buttons, anything with a tabindex -- so their ring is not the one square
+     box in a row of rounded ones. A control with its own radius keeps it. */
+  --focus-ring-radius: 6px;
+}
+
+:root[data-theme='dark'] {
+  --bg-brand-primary: var(--brand-500);
+  --bg-brand-primary-alt: var(--color-gray-dark-800);
+  --bg-brand-secondary: var(--brand-600);
+  --bg-brand-tertiary: var(--brand-700);
+  --bg-brand-solid: var(--brand-600);
+  --bg-brand-subtle: var(--brand-900);
+
+  --border-brand: var(--brand-400);
+  --border-brand-solid: var(--brand-500);
+
+  --text-brand-primary: var(--color-gray-dark-50);
+  --text-brand-secondary: var(--color-gray-dark-300);
+  /* The tenant colour is a 600-weight step, too dark for the dark surfaces:
+     the default #307300 on --bg-secondary is 2.9:1, under both the 4.5:1
+     text and the 3:1 non-text minimum. 300 is 8.3:1. */
+  --text-brand: var(--brand-300);
+  --text-primary-on-brand: var(--color-gray-dark-50);
+  --fg-brand-primary: var(--brand-500);
+  --fg-brand-secondary: var(--color-gray-dark-300);
+  --fg-brand-accent: var(--brand-400);
+
+  --focus-ring-color: var(--brand-500);
+}

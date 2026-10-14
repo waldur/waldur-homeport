@@ -45,7 +45,7 @@ export const ProvisioningStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Provisioning Configuration')}</h4>
-      <p className="text-muted mb-6">
+      <p className="text-quaternary mb-6">
         {translate(
           'Configure flavor filtering, console access, network, and operational settings. All fields are optional.',
         )}

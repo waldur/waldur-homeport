@@ -1,6 +1,6 @@
 .layout-tabbed {
   min-height: 100vh;
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   display: flex;
   flex-direction: column;
 }
@@ -29,14 +29,10 @@
 .layout-tabbed-tabs {
   display: flex;
   gap: 4px;
-  background: var(--bs-gray-200);
+  background: var(--bg-quaternary);
   padding: 4px;
   border-radius: 10px;
   margin-bottom: 1.5rem;
-}
-
-[data-theme='dark'] .layout-tabbed-tabs {
-  background: var(--bs-gray-800);
 }
 
 .layout-tabbed-tab {
@@ -45,23 +41,19 @@
   border: none;
   background: transparent;
   border-radius: 8px;
-  font-weight: 500;
-  color: var(--bs-gray-600);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .layout-tabbed-tab:hover {
-  color: var(--bs-gray-800);
-}
-
-[data-theme='dark'] .layout-tabbed-tab:hover {
-  color: var(--bs-gray-300);
+  color: var(--text-primary);
 }
 
 .layout-tabbed-tab.active {
-  background: var(--waldur-bg-primary);
-  color: var(--bs-body-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -74,5 +66,5 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  border-top: 1px solid var(--bs-border-color);
+  border-top: 1px solid var(--border-secondary);
 }

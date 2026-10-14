@@ -16,22 +16,7 @@
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css' layer(utilities);
-@import 'waldur-design-tokens/buttonColors.css';
-@import 'waldur-design-tokens/checkColors.css';
-@import 'waldur-design-tokens/progressColors.css';
-@import 'waldur-design-tokens/surfaceColors.css';
-@import 'waldur-design-tokens/sidebarColors.css';
-@import 'waldur-design-tokens/tabColors.css';
-/* Not used by the app's own Bootstrap modals, which bring their own
-   motion — this is for packages/ui's Radix Dialog/Sheet primitives.
-   Keyframe names are namespaced, so nothing else picks them up. */
-@import 'waldur-design-tokens/animations.css';
-@import 'waldur-design-tokens/colors.css';
-@import 'waldur-design-tokens/focusRing.css';
-@import 'waldur-design-tokens/zIndex.css';
-/* dark:, menu-row-active:, action-row-active:, action-row-disabled: and
-   tab-active:. See that file for each selector. */
-@import 'waldur-design-tokens/variants.css';
+@import 'waldur-design-tokens/index.css';
 
 /* The app's one focus ring, for everything that doesn't style its own —
    links, breadcrumbs, sidebar rows, anything with tabindex. In `base`, so
@@ -130,46 +115,6 @@
   }
 }
 
-/* Metronic forces a 13px root font-size !important; Tailwind's rem-based
-   scale silently resizes against that instead of the assumed 16px. Cascade
-   layering doesn't fix this (it decides which declaration wins, not what a
-   rem-relative value computes to) — these are explicit px overrides instead. */
-@theme {
-  --spacing: 4px;
-  --text-xs: 12px;
-  --text-xs--line-height: 16px;
-  --text-sm: 14px;
-  --text-sm--line-height: 20px;
-  --text-base: 16px;
-  --text-base--line-height: 24px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  /* Not --radius-xl/2xl/3xl: those are Tailwind's own reserved keys (own
-     defaults ~12/16/24px depending on root font-size), and giving one of
-     them this value would silently change what "rounded-2xl" means for any
-     future non-packages/ui caller expecting Tailwind's real default. This
-     is Dialog's modal content and Sidebar's mode-switcher card specifically
-     (both visibly rounder than rounded-lg's 8px, both pair with
-     bg-[var(--surface-card-bg)]) — a genuinely new, one-off value, not a
-     Tailwind scale step, hence the non-reserved name. */
-  --radius-modal: 20px;
-
-  /* Same names, same values as Bootstrap's $grid-breakpoints
-     (metronic/sass/core/components/_variables.scss) and GRID_BREAKPOINTS in
-     src/core/constants.ts, so `lg:` means 992px whether it is written as a
-     Tailwind variant, a Bootstrap `.d-lg-*` class, an SCSS media query or a
-     useMediaQuery() call. Tailwind's own defaults (640/1024/1280/1536) would
-     make it a fourth, different `lg`. px, not rem: the root font-size is
-     forced to 13px/12px, and rem in a media query is the browser's initial
-     16px anyway, so rem values here would be a trap. `md` (768) already
-     matched. */
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
-  --breakpoint-2xl: 1400px;
-}
-
 /* Tailwind's `visibility` utility set includes a class literally named
    `.collapse` (`{ visibility: collapse }` — the third state alongside
    `visible`/`invisible`, meant for hiding table rows/columns without
@@ -204,21 +149,4 @@
   .collapse {
     visibility: visible !important;
   }
-}
-
-/* Same clash: src/ uses `bg-gray-50` as Metronic's theme-aware panel
-   background; Tailwind's version stays light in dark mode. */
-@layer bootstrap {
-  .bg-gray-50 {
-    background-color: var(--bs-gray-50) !important;
-  }
-}
-
-@theme {
-  --font-sans: var(--waldur-font-family), Helvetica, sans-serif;
-
-  --color-bg-primary: var(--waldur-bg-primary);
-  --color-border-secondary: var(--waldur-border-secondary);
-  --color-border-brand-solid: var(--waldur-border-brand-solid);
-  --color-border-danger: var(--waldur-border-danger);
 }

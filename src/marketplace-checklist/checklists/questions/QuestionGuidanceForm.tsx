@@ -65,7 +65,11 @@ const FieldsListGroup = ({
         {fields.map((name, i) => (
           <div
             key={name + i}
-            className={i + 1 < fields.length ? 'border-bottom mb-3' : undefined}
+            className={
+              i + 1 < fields.length
+                ? 'border-b-[1px] border-b-secondary mb-3'
+                : undefined
+            }
           >
             <Stack direction="horizontal" gap={3}>
               <SelectGroup

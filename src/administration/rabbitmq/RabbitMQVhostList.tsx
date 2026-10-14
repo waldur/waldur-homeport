@@ -60,7 +60,9 @@ export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
       {
         title: translate('Total messages'),
         render: ({ row }: { row: RmqVhostStats }) => (
-          <span className="fw-bold">{row.total_messages.toLocaleString()}</span>
+          <span className="font-medium">
+            {row.total_messages.toLocaleString()}
+          </span>
         ),
       },
       {
@@ -75,7 +77,7 @@ export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
 
   if (data.vhosts.length === 0) {
     return (
-      <div className="text-center text-muted py-10">
+      <div className="text-center text-quaternary py-10">
         {translate('No subscription queues found')}
       </div>
     );

@@ -21,7 +21,7 @@ export const CreateProfilePrompt: FC = () => {
         <h3 className="mb-5">
           {translate('You do not have a reviewer profile yet.')}
         </h3>
-        <p className="text-muted mb-5">
+        <p className="text-quaternary mb-5">
           {translate(
             'Create a reviewer profile to manage your affiliations, expertise, and publications for proposal reviews.',
           )}

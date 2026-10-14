@@ -48,7 +48,7 @@ export const ComponentOptionLabel: FC<Props> = ({ option, compact }) => {
         {option.offering_name} · {option.component_name}
       </div>
       <div className="d-flex align-items-center gap-2 mt-1">
-        <small className="text-muted">{billingLabel}</small>
+        <small className="text-quaternary">{billingLabel}</small>
         <LimitPeriodChip
           billingType={option.billing_type}
           limitPeriod={option.limit_period}

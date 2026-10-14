@@ -48,7 +48,7 @@ const EmptyOfferingListPlaceholder: FunctionComponent = () => (
 
 const LoadingRow: FunctionComponent<{ style: CSSProperties }> = ({ style }) => (
   <ListGroupItem className="text-center" style={style}>
-    <span className="text-muted">{translate('Fetching')}</span>
+    <span className="text-quaternary">{translate('Fetching')}</span>
   </ListGroupItem>
 );
 
@@ -88,7 +88,7 @@ const OfferingListItem: FunctionComponent<{
               <div className="symbol">
                 <ImagePlaceholder width="40px" height="40px">
                   {abbreviation && (
-                    <div className="symbol-label fs-6 fw-bold">
+                    <div className="symbol-label fs-6 font-medium">
                       {abbreviation}
                     </div>
                   )}
@@ -282,14 +282,14 @@ export const OfferingsPanel: FunctionComponent<OfferingsPanelProps> = ({
     <div className="offering-listing">
       <button
         type="button"
-        className="btn-back text-anchor fw-bold p-2 ms-5 my-2"
+        className="btn-back text-anchor font-medium p-2 ms-5 my-2"
         onClick={goBack}
       >
         <CaretLeftIcon size={14} weight="bold" />
         {translate('Go back to categories')}
       </button>
-      <div className="divider border-bottom mx-7" />
-      <h6 className="text-gray-700 fw-bold mt-4 mb-2 ms-7">
+      <div className="divider border-b-[1px] border-b-secondary mx-7" />
+      <h6 className="text-secondary font-medium mt-4 mb-2 ms-7">
         {translate('Offerings')}
       </h6>
       {itemCount === 0 ? (

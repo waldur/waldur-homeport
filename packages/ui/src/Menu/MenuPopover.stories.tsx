@@ -60,7 +60,7 @@ export const NavFilterList: Story = {
         <MenuPopover.Content
           {...STAY_OPEN}
           align="start"
-          className="w-[250px] py-[9.75px] fw-bold"
+          className="w-[250px] py-[9.75px] font-medium"
         >
           {['Organization', 'Project', 'State', 'Offering'].map((name) => (
             <MenuPopover.Item key={name}>

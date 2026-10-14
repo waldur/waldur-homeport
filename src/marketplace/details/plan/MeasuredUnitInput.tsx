@@ -53,7 +53,7 @@ export const MeasuredUnitInput = ({
         />
 
         {component.measured_unit && (
-          <InputGroup.Text className="text-muted" id={unitId}>
+          <InputGroup.Text className="text-quaternary" id={unitId}>
             {component.measured_unit}
           </InputGroup.Text>
         )}

@@ -38,7 +38,7 @@ export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
           </Card.Title>
           {subtitle && (
             <Card.Subtitle
-              className={classNames('text-muted mt-1', subtitleClassName)}
+              className={classNames('text-quaternary mt-1', subtitleClassName)}
             >
               <p className="fs-6 mb-0">{subtitle}</p>
             </Card.Subtitle>

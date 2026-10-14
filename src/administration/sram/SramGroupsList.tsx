@@ -89,7 +89,7 @@ export const SramGroupsList: FC = () => {
           <div>
             <RoleField row={{ role_name: row.role_name }} />
             <div>
-              <small className="text-muted">{row.role_name}</small>
+              <small className="text-quaternary">{row.role_name}</small>
             </div>
           </div>
         ) : (

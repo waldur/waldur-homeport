@@ -48,7 +48,7 @@ const renderValue = (key: string, value: unknown): ReactNode => {
   if (key === 'SRAM_PLACEHOLDER_ROLE_TEMPLATE') {
     if (!value) {
       return (
-        <span className="text-muted">
+        <span className="text-quaternary">
           {translate('Not set: placeholder roles carry no permissions.')}
         </span>
       );

@@ -17,11 +17,11 @@ export const CheckoutPricingRow = ({
 }: CheckoutPricingRowProps) => (
   <div
     className={classNames(
-      'd-flex justify-content-between mb-5 text-gray-700',
+      'd-flex justify-content-between mb-5 text-secondary',
       className,
     )}
   >
-    <div className={total ? 'fw-bold' : 'text-muted'}>{label}</div>
-    <div className="text-end fw-bold">{renderFieldOrDash(value)}</div>
+    <div className={total ? 'font-medium' : 'text-quaternary'}>{label}</div>
+    <div className="text-end font-medium">{renderFieldOrDash(value)}</div>
   </div>
 );

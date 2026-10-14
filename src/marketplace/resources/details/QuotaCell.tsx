@@ -30,7 +30,7 @@ const CellDescription = ({
   description,
 }: QuotaCellProps) => (
   <>
-    <span className="fw-bolder fs-7 text-dark text-nowrap ellipsis">
+    <span className="font-semibold fs-7 text-primary text-nowrap ellipsis">
       {title}
       {description && (
         <>
@@ -39,7 +39,7 @@ const CellDescription = ({
         </>
       )}
     </span>
-    <span className="fw-bolder fs-7 text-dark text-nowrap ellipsis">
+    <span className="font-semibold fs-7 text-primary text-nowrap ellipsis">
       {limit
         ? `${formatUsageValue(usage)}/${formatUsageValue(limit)}`
         : formatUsageValue(usage)}

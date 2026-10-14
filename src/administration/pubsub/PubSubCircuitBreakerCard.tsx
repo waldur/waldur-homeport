@@ -53,13 +53,13 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
       ) : data ? (
         <Row>
           <Col lg={6}>
-            <h6 className="text-uppercase text-muted mb-3">
+            <h6 className="text-uppercase text-quaternary mb-3">
               {translate('Current state')}
             </h6>
             <Table size="sm" borderless className="mb-0">
               <tbody>
                 <tr>
-                  <td className="text-muted">{translate('State')}</td>
+                  <td className="text-quaternary">{translate('State')}</td>
                   <td className="text-end">
                     <Badge variant={getBadgeVariant(health)} tone="outline">
                       {formatCircuitBreakerState(data.state)}
@@ -67,40 +67,50 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">{translate('Failure count')}</td>
-                  <td className="fw-semibold text-end">{data.failure_count}</td>
+                  <td className="text-quaternary">
+                    {translate('Failure count')}
+                  </td>
+                  <td className="font-semibold text-end">
+                    {data.failure_count}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">{translate('Success count')}</td>
-                  <td className="fw-semibold text-end">{data.success_count}</td>
+                  <td className="text-quaternary">
+                    {translate('Success count')}
+                  </td>
+                  <td className="font-semibold text-end">
+                    {data.success_count}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">{translate('Last failure')}</td>
-                  <td className="fw-semibold text-end">
+                  <td className="text-quaternary">
+                    {translate('Last failure')}
+                  </td>
+                  <td className="font-semibold text-end">
                     {formatTimestamp(data.last_failure_time)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Last state change')}
                   </td>
-                  <td className="fw-semibold text-end">
+                  <td className="font-semibold text-end">
                     {formatTimestamp(data.last_state_change)}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Failure threshold')}
                   </td>
-                  <td className="fw-semibold text-end">
+                  <td className="font-semibold text-end">
                     {data.config.failure_threshold}
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {translate('Recovery timeout')}
                   </td>
-                  <td className="fw-semibold text-end">
+                  <td className="font-semibold text-end">
                     {data.config.recovery_timeout}s
                   </td>
                 </tr>
@@ -108,16 +118,18 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
             </Table>
           </Col>
           <Col lg={6}>
-            <h6 className="text-uppercase text-muted mb-3">
+            <h6 className="text-uppercase text-quaternary mb-3">
               {translate('State history')}
             </h6>
             {data.state_history && data.state_history.length > 0 ? (
               <Table size="sm" borderless className="mb-0">
                 <thead>
                   <tr>
-                    <th className="text-muted">{translate('Time')}</th>
-                    <th className="text-muted">{translate('Transition')}</th>
-                    <th className="text-muted">{translate('Reason')}</th>
+                    <th className="text-quaternary">{translate('Time')}</th>
+                    <th className="text-quaternary">
+                      {translate('Transition')}
+                    </th>
+                    <th className="text-quaternary">{translate('Reason')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -129,7 +141,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                       <td>
                         {transition.from_state && (
                           <>
-                            <span className="text-muted">
+                            <span className="text-quaternary">
                               {formatCircuitBreakerState(transition.from_state)}
                             </span>
                             <span className="mx-1">&rarr;</span>
@@ -146,7 +158,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                         </Badge>
                       </td>
                       <td
-                        className="text-muted text-truncate"
+                        className="text-quaternary text-truncate"
                         title={transition.reason}
                       >
                         {transition.reason}
@@ -156,14 +168,14 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                 </tbody>
               </Table>
             ) : (
-              <p className="text-muted mb-0">
+              <p className="text-quaternary mb-0">
                 {translate('No state transitions recorded.')}
               </p>
             )}
           </Col>
         </Row>
       ) : (
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate('Failed to load circuit breaker details.')}
         </p>
       )}

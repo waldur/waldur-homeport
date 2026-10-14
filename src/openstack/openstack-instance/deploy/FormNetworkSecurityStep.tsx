@@ -482,7 +482,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
       disabled={props.disabled}
       disabledTooltip={props.disabledTooltip}
     >
-      <div className="mb-5 mt-n4 border-bottom">
+      <div className="mb-5 mt-n4 border-b-[1px] border-b-secondary">
         {showSshKeyWarning && (
           <AlertItem
             variant="warning"
@@ -522,13 +522,13 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           cardBordered={false}
           minHeight="auto"
           headerClassName="mx-0"
-          titleClassName="fs-6 text-gray-700"
+          titleClassName="fs-6 text-secondary"
         />
       </div>
 
-      <Form.Group className="mb-2 border-bottom">
+      <Form.Group className="mb-2 border-b-[1px] border-b-secondary">
         <div className="d-flex justify-content-between mb-5">
-          <Form.Label className="fs-6 fw-bolder mb-0">
+          <Form.Label className="fs-6 font-semibold mb-0">
             {translate('Network')}
           </Form.Label>
           <Switch
@@ -553,7 +553,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           cardBordered={false}
           minHeight="auto"
           headerClassName="mx-0"
-          titleClassName="fs-6 text-gray-700"
+          titleClassName="fs-6 text-secondary"
           tableActions={
             <div
               style={
@@ -569,7 +569,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
                   setPortSecurityEnabled(!portSecurityEnabled);
                 }}
                 size="sm"
-                className="align-self-center fw-normal"
+                className="align-self-center font-normal"
                 label={translate('Disable port security')}
               />
             </div>
@@ -577,7 +577,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
         />
       </div>
       {!portSecurityEnabled && (
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate(
             'Port security is disabled. Security groups will not be applied. Use this for VM-based routers that manage their own firewall.',
           )}

@@ -87,7 +87,7 @@ export const CeleryTaskTable = ({
           title: translate('Task name'),
           render: ({ row }) => (
             <Tooltip label={row.name}>
-              <span className="text-dark fw-semibold">
+              <span className="text-primary font-semibold">
                 {truncateTaskName(row.name)}
               </span>
             </Tooltip>
@@ -97,7 +97,7 @@ export const CeleryTaskTable = ({
           title: translate('Task ID'),
           render: ({ row }) => (
             <div className="d-flex align-items-center">
-              <code className="text-muted fs-7">{row.id.slice(0, 8)}</code>
+              <code className="text-quaternary fs-7">{row.id.slice(0, 8)}</code>
               <CopyButton value={row.id} />
             </div>
           ),
@@ -114,9 +114,9 @@ export const CeleryTaskTable = ({
           title: translate('Worker PID'),
           render: ({ row }) =>
             row.worker_pid ? (
-              <span className="text-dark">{row.worker_pid}</span>
+              <span className="text-primary">{row.worker_pid}</span>
             ) : (
-              <span className="text-muted">-</span>
+              <span className="text-quaternary">-</span>
             ),
         },
         {

@@ -197,7 +197,7 @@ const GroupRangeFields: FC<{ pool?: PosixIdPool; submitting: boolean }> = ({
 }) => (
   <>
     <h6 className="mt-2 mb-1">{translate('Project group GIDs')}</h6>
-    <p className="text-muted fs-7 mb-3">
+    <p className="text-quaternary fs-7 mb-3">
       {translate(
         'Optional. Reserves GIDs for the one POSIX group each project gets at this service provider. Without it, project groups take GIDs from the GID range shared with users’ primary groups. Set it before enabling project groups in the account settings.',
       )}
@@ -221,7 +221,7 @@ const GroupRangeFields: FC<{ pool?: PosixIdPool; submitting: boolean }> = ({
       </div>
     </div>
     {pool?.next_group_gid != null && (
-      <p className="text-muted fs-7 mb-3" data-testid="next-group-gid">
+      <p className="text-quaternary fs-7 mb-3" data-testid="next-group-gid">
         {translate('Next project group GID: {next}', {
           next: pool.next_group_gid,
         })}
@@ -373,7 +373,7 @@ export const PosixIdPoolFormDialog: FC<PosixIdPoolFormDialogProps> = (
                 />
               )}
               <RangeGuidance pool={pool} siblings={siblings} />
-              <p className="text-muted fs-7 mb-3">
+              <p className="text-quaternary fs-7 mb-3">
                 {translate(
                   'Define at least one range. Leave a range empty to source it externally — for example UIDs from an OIDC claim while GIDs are allocated by Waldur.',
                 )}

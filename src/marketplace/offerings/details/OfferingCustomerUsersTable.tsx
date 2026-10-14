@@ -19,10 +19,10 @@ const UserNameColumn = ({ row }) => (
       state="marketplace-provider-user-manage"
       params={{ user_uuid: row.uuid }}
       label={renderFieldOrDash(row.full_name)}
-      className="fw-bold"
+      className="font-medium"
     />
     {row.organization ? (
-      <p className="text-muted mb-0">{row.organization}</p>
+      <p className="text-quaternary mb-0">{row.organization}</p>
     ) : null}
   </>
 );

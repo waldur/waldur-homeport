@@ -29,7 +29,7 @@ export const ChecklistsBulkRemoveButton = ({ rows, refetch }: OwnProps) => {
             {rows.map((row) => (
               <li key={row.uuid}>
                 {row.name}{' '}
-                <span className="text-muted">
+                <span className="text-quaternary">
                   (
                   {translate('{count} questions', {
                     count: row.questions_count,

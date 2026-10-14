@@ -18,11 +18,11 @@ export const TosConsentStatusChart: FC<TosConsentStatusChartProps> = ({
 
   return (
     <div
-      className="border border-secondary rounded"
+      className="border-[1px] border-secondary rounded"
       style={{ padding: '16px' }}
     >
       <h6 className="mb-3">{translate('Consent status breakdown')}</h6>
-      <div className="text-muted mb-3">
+      <div className="text-quaternary mb-3">
         {translate('Total users')}: {renderFieldOrDash(data.total_users_count)}
       </div>
       <EChart options={chartOptions} height="250px" />

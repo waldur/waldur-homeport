@@ -56,15 +56,15 @@ const ResourceDemandExpandableRow: FC<{ row: ResourceDemandStat }> = ({
         {translate('approved')} / {row.approved_count + row.pending_count}{' '}
         {translate('reviewed')})
       </p>
-      <BootstrapTable className="table-row-bordered table-expandable table-rounded border border-gray-200 overflow-hidden">
+      <BootstrapTable className="table-row-bordered table-expandable table-rounded border-[1px] border-divider overflow-hidden">
         <thead className="align-middle">
           <tr>
-            <th className="bg-gray-100">{translate('Metric')}</th>
-            <th className="bg-gray-100">{translate('Requested')}</th>
-            <th className="bg-gray-100">{translate('Approved')}</th>
+            <th className="bg-tertiary">{translate('Metric')}</th>
+            <th className="bg-tertiary">{translate('Requested')}</th>
+            <th className="bg-tertiary">{translate('Approved')}</th>
           </tr>
         </thead>
-        <tbody className="align-middle bg-white">
+        <tbody className="align-middle bg-primary">
           {Object.keys(row.total_requested_limits).map((key) => (
             <tr key={key}>
               <td>
@@ -85,8 +85,8 @@ const columns: Column<ResourceDemandStat>[] = [
     title: translate('Offering'),
     render: ({ row }) => (
       <div className="d-flex flex-column">
-        <span className="fw-semibold">{row.offering_name}</span>
-        <span className="text-muted fs-8">{row.provider_name}</span>
+        <span className="font-semibold">{row.offering_name}</span>
+        <span className="text-quaternary fs-8">{row.provider_name}</span>
       </div>
     ),
   },

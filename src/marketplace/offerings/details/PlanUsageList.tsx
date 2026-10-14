@@ -14,21 +14,23 @@ interface OwnProps {
 
 const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
   <div className="plan">
-    <h4 className="fw-bold mb-4">{plan.plan_name}:</h4>
-    <table className="text-gray-600 w-100 mb-10">
+    <h4 className="font-medium mb-4">{plan.plan_name}:</h4>
+    <table className="text-tertiary w-100 mb-10">
       <tbody>
         <tr>
-          <th className="w-50 text-gray-700 fw-bold">
+          <th className="w-50 text-secondary font-medium">
             {translate('Active count')}:
           </th>
           <td>{plan.usage}</td>
         </tr>
         <tr>
-          <th className="w-50 text-gray-700 fw-bold">{translate('Limit')}:</th>
+          <th className="w-50 text-secondary font-medium">
+            {translate('Limit')}:
+          </th>
           <td>{renderFieldOrDash(plan.limit)}</td>
         </tr>
         <tr>
-          <th className="w-50 text-gray-700 fw-bold">
+          <th className="w-50 text-secondary font-medium">
             {translate('Remaining')}:
           </th>
           <td>{plan.remaining === null ? 'N/A' : plan.remaining}</td>
@@ -49,7 +51,9 @@ export const PlanUsageList: FC<OwnProps> = (props) => {
       </Card.Header>
       <Card.Body>
         {!props.plansUsage?.length && (
-          <div className="text-muted">{translate('There are no plans')}</div>
+          <div className="text-quaternary">
+            {translate('There are no plans')}
+          </div>
         )}
         {props.plansUsage &&
           props.plansUsage.map((plan) => (

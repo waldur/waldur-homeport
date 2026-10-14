@@ -49,7 +49,7 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
   loadBalancerTooltip,
 }) => {
   return (
-    <Card className="card-bordered card-sm bg-gray-50">
+    <Card className="card-bordered card-sm bg-secondary">
       <Card.Header>
         <Card.Title as="h6" className="fs-6 text-secondary">
           {translate('Total cluster resources')}

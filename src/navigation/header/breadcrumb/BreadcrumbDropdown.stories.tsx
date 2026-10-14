@@ -58,7 +58,7 @@ const StoryRouter = ({ children }: { children: ReactNode }) => {
 const CurrentPage = () => {
   const { state, params } = useCurrentStateAndParams();
   return (
-    <p className="mt-4 text-[13px] text-[var(--surface-text-secondary)]">
+    <p className="mt-4 text-[13px] text-quaternary">
       Current page:{' '}
       <span data-testid="current-page">
         {state?.name === PROJECT_STATE ? params.uuid : '(none)'}
@@ -187,7 +187,7 @@ const ProjectSwitcher = ({
   emptyMessage = 'There are no projects.',
   filters,
 }: ProjectSwitcherProps) => (
-  <div className="w-[400px] rounded-lg border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] pb-2 shadow-[var(--dropdown-shadow)]">
+  <div className="w-[400px] rounded-lg border-[1px] border-secondary bg-[var(--card-bg)] pb-2 shadow-[var(--dropdown-shadow)]">
     <BreadcrumbDropdown
       // The fake fetcher has no SDK types to infer queryField from.
       {...({ fetcher, queryField: 'query' } as any)}

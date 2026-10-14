@@ -18,7 +18,7 @@ const AsyncEstimatedCost = ({ customer }) => {
   }
   return (
     <>
-      <p className="text-muted text-uppercase fw-bolder mb-0">
+      <p className="text-quaternary text-uppercase font-semibold mb-0">
         {translate('Estimated cost')}
       </p>
       <h2 className="mb-0">

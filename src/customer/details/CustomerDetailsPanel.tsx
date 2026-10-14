@@ -105,7 +105,7 @@ const ProjectMetadataSchemaValue: FC<{ customer }> = ({ customer }) => {
   return (
     <>
       {data.name}
-      <span className="text-muted ms-2">
+      <span className="text-quaternary ms-2">
         ({translate('{count} questions', { count: data.questions_count })})
       </span>
     </>

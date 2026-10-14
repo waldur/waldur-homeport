@@ -20,7 +20,7 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
       </div>
       <CopyToClipboardButton
         value={order.attributes.name || order.resource_name}
-        className="text-hover-primary cursor-pointer"
+        className="hover:text-brand cursor-pointer"
         size={20}
       />
 

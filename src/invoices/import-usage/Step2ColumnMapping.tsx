@@ -41,8 +41,10 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <div className="text-muted">
-        <h6 className="fw-bold mb-5">{translate('Map columns to fields')}</h6>
+      <div className="text-quaternary">
+        <h6 className="font-medium mb-5">
+          {translate('Map columns to fields')}
+        </h6>
         <p className="mb-4">
           {translate(
             'Select which columns from your file correspond to each field.',
@@ -124,15 +126,15 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
         {previewRows.length > 0 && (
           <>
             <hr />
-            <h6 className="fw-bold mb-3">{translate('Preview')}</h6>
-            <p className="text-muted mb-3">
+            <h6 className="font-medium mb-3">{translate('Preview')}</h6>
+            <p className="text-quaternary mb-3">
               {translate('Showing first {count} rows with mapped values', {
                 count: previewRows.length,
               })}
             </p>
             <div className="table-responsive">
               <BsTable bordered hover size="sm">
-                <thead className="bg-light">
+                <thead className="bg-tertiary dark:bg-quaternary">
                   <tr>
                     <th>{translate('Customer')}</th>
                     <th>{translate('Item name')}</th>

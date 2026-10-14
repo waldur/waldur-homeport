@@ -24,7 +24,7 @@ export const BatchProjectActions = ({
     <Menu.Content look="actions" side="bottom">
       <BatchMoveProjectAction rows={rows} refetch={refetch} />
       <BatchSetEndDateAction rows={rows} refetch={refetch} />
-      <Menu.Separator className="border-top m-0" />
+      <Menu.Separator className="border-t-[1px] border-t-secondary m-0" />
       <BatchDeleteProjectAction rows={rows} refetch={refetch} />
     </Menu.Content>
   </Menu>

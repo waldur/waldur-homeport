@@ -201,7 +201,7 @@ export const UserDashboard: FC = () => {
                 }
                 isLoading={false}
                 hasItems={true}
-                backgroundColor="bg-info"
+                backgroundColor="bg-info-600"
                 onClick={openResourcesDialog}
               />
             </Col>

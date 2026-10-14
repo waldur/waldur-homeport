@@ -127,7 +127,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
                 <TabsTrigger
                   key={tab.key}
                   value={tab.key}
-                  className={!hasMatches && query ? 'text-muted' : ''}
+                  className={!hasMatches && query ? 'text-quaternary' : ''}
                 >
                   {tab.title}
                   {query && (
@@ -164,7 +164,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
                     ))}
                   </FormTable>
                 ) : (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No matching settings in this section.')}
                   </p>
                 )}

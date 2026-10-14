@@ -39,7 +39,7 @@ const LimitChangesSummary: FC<{
 
   if (changes.length === 0) {
     return (
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate('No limit changes — current limits will be maintained.')}
       </p>
     );
@@ -50,7 +50,7 @@ const LimitChangesSummary: FC<{
       <h6 className="mb-2">{translate('Limit changes')}</h6>
       <Table size="sm" borderless className="mb-0">
         <thead>
-          <tr className="border-bottom">
+          <tr className="border-b-[1px] border-b-secondary">
             <th>{translate('Component')}</th>
             <th className="text-end">{translate('Current')}</th>
             <th className="text-center">{translate('')}</th>
@@ -61,11 +61,11 @@ const LimitChangesSummary: FC<{
           {changes.map((c) => (
             <tr key={c.type}>
               <td>{c.name}</td>
-              <td className="text-end text-muted">
+              <td className="text-end text-quaternary">
                 {c.current} {c.unit}
               </td>
               <td className="text-center">→</td>
-              <td className="text-end fw-semibold">
+              <td className="text-end font-semibold">
                 {c.new} {c.unit}
               </td>
             </tr>

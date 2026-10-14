@@ -30,11 +30,11 @@ export const ViewConsumptionHistoryDialog = ({
       title={translate('Consumption history')}
       subtitle={
         <>
-          <span className="fw-bold">{resource.name}</span>
+          <span className="font-medium">{resource.name}</span>
           {resource.backend_id && (
             <>
               {' '}
-              <span className="text-muted">({resource.backend_id})</span>
+              <span className="text-quaternary">({resource.backend_id})</span>
             </>
           )}
         </>
@@ -46,7 +46,7 @@ export const ViewConsumptionHistoryDialog = ({
       ) : error ? (
         <div className="text-danger">{translate('Failed to load data')}</div>
       ) : !data || data.length === 0 ? (
-        <div className="text-muted">
+        <div className="text-quaternary">
           {translate('No consumption records found for this resource.')}
         </div>
       ) : (

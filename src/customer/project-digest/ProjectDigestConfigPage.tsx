@@ -108,7 +108,7 @@ export const ProjectDigestConfigPage: FC = () => {
           </>
         }
       >
-        <p className="text-muted mb-5">
+        <p className="text-quaternary mb-5">
           {translate(
             'Configure periodic email digests sent to project members, summarizing project status including resources, timelines, and team information.',
           )}

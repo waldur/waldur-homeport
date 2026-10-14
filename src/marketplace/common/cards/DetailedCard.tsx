@@ -49,7 +49,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
     >
       <Card className="card-bordered h-100 overflow-hidden cursor-pointer border-hover-brand">
         {/* Image section */}
-        <div className="h-120px d-flex flex-center border-bottom bg-light-primary">
+        <div className="h-120px d-flex flex-center border-b-[1px] border-b-secondary bg-brand-subtle">
           {image ? (
             <img
               alt={offering.name}
@@ -78,10 +78,10 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
               </ImagePlaceholder>
             )}
             <div className="overflow-hidden">
-              <div className="fs-4 fw-bold ellipsis-lines-2">
+              <div className="fs-4 font-medium ellipsis-lines-2">
                 {offering.name}
               </div>
-              <div className="text-muted small ellipsis">
+              <div className="text-quaternary small ellipsis">
                 {!isRestricted
                   ? offering.customer_name
                   : [offering.customer_name, offering.project_name]
@@ -93,7 +93,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
 
           {/* Description */}
           {offering.description ? (
-            <p className="text-muted small ellipsis-lines-3 mb-4 flex-grow-1">
+            <p className="text-quaternary small ellipsis-lines-3 mb-4 flex-grow-1">
               {offering.description}
             </p>
           ) : (
@@ -103,7 +103,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
           {/* Badges */}
           <div className="d-flex flex-wrap gap-2 mb-4">
             {offering.category_title && (
-              <Badge variant="neutral" tone="outline" className="fw-normal">
+              <Badge variant="neutral" tone="outline" className="font-normal">
                 {offering.category_title}
               </Badge>
             )}
@@ -127,7 +127,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
                   variant="purple"
                   leftIcon={<QuestionIcon size={12} weight="bold" />}
                   tone="outline"
-                  className="fw-normal"
+                  className="font-normal"
                 >
                   {translate('Restricted')}
                 </Badge>
@@ -143,7 +143,7 @@ export const DetailedCard: FC<OfferingCardVariantProps> = ({
                   variant="neutral"
                   leftIcon={<LockSimpleIcon size={12} weight="bold" />}
                   tone="outline"
-                  className="fw-normal"
+                  className="font-normal"
                 >
                   {translate('Inaccessible')}
                 </Badge>

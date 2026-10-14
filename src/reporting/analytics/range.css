@@ -2,10 +2,10 @@
   /* Use the CSS variable passed from React, defaulting to 0% */
   background: linear-gradient(
     to right,
-    var(--bs-primary) 0%,
-    var(--bs-primary) var(--range-progress, 0%),
-    var(--bs-gray-200) var(--range-progress, 0%),
-    var(--bs-gray-200) 100%
+    var(--brand-color) 0%,
+    var(--brand-color) var(--range-progress, 0%),
+    var(--bg-quaternary) var(--range-progress, 0%),
+    var(--bg-quaternary) 100%
   ) !important;
 
   height: 0.25rem !important;

@@ -75,17 +75,17 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
           <Field
             label={translate('Name')}
             value={value.offering.name}
-            valueClass="text-gray-700"
+            valueClass="text-secondary"
           />
           <Field
             label={translate('Service provider')}
             value={value.offering.customer_name}
-            valueClass="text-gray-700"
+            valueClass="text-secondary"
           />
           <Field
             label={translate('Parent offering')}
             value={value.offering.parent_name}
-            valueClass="text-gray-700"
+            valueClass="text-secondary"
           />
           <OfferingTabsComponent tabs={value.tabs} />
         </>

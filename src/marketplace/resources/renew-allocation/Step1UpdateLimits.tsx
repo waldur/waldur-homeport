@@ -47,7 +47,7 @@ const OneTimeComponentsSummary: FC<{
 
   if (oneTimeComponents.length === 0) {
     return (
-      <div className="text-muted">
+      <div className="text-quaternary">
         {translate(
           'This offering has no adjustable limits. Continue to extend the allocation period.',
         )}
@@ -85,7 +85,7 @@ const OneTimeComponentsSummary: FC<{
                       <td>
                         <strong>{component.name}</strong>
                         {component.description && (
-                          <div className="text-muted small">
+                          <div className="text-quaternary small">
                             {component.description}
                           </div>
                         )}
@@ -110,7 +110,7 @@ const OneTimeComponentsSummary: FC<{
           </div>
         </Card.Body>
       </Card>
-      <p className="text-muted mt-3">
+      <p className="text-quaternary mt-3">
         {translate(
           'The renewal cost will be calculated based on the extension period selected in the next step.',
         )}

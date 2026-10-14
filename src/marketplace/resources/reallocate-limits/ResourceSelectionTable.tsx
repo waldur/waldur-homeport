@@ -73,7 +73,7 @@ const AllocationInputCell: FC<{
       <td>
         <div>
           <strong>{resource.name}</strong>
-          <div className="text-muted small">
+          <div className="text-quaternary small">
             {resource.customer_name} / {resource.project_name}
           </div>
         </div>
@@ -154,20 +154,20 @@ const AllocationInputCell: FC<{
             </InputGroup>
           </div>
         ) : (
-          <span className="text-muted">—</span>
+          <span className="text-quaternary">—</span>
         )}
       </td>
       <td>
         {isSelected ? (
           <span>{newLimit}</span>
         ) : (
-          <span className="text-muted">—</span>
+          <span className="text-quaternary">—</span>
         )}
       </td>
       <td>
         {isSelected ? (
           change === 0 ? (
-            <span className="text-muted">{change}</span>
+            <span className="text-quaternary">{change}</span>
           ) : (
             <Badge
               variant={change > 0 ? 'success' : 'danger'}
@@ -178,7 +178,7 @@ const AllocationInputCell: FC<{
             </Badge>
           )
         ) : (
-          <span className="text-muted">—</span>
+          <span className="text-quaternary">—</span>
         )}
       </td>
     </tr>
@@ -232,7 +232,7 @@ export const ResourceSelectionTable: FC<ResourceSelectionTableProps> = ({
       </div>
 
       <div className="table-responsive">
-        <Table className="table-row-bordered table-expandable align-middle table-rounded border border-gray-200">
+        <Table className="table-row-bordered table-expandable align-middle table-rounded border-[1px] border-divider">
           <thead>
             <tr>
               <th>{translate('Resource name')}</th>

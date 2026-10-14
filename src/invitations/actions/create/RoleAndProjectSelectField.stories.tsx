@@ -68,7 +68,7 @@ const RoleAndProjectSelectFieldHarness: React.FC<HarnessProps> = ({
         />
         <FormSpy subscription={{ values: true }}>
           {({ values }) => (
-            <div className="mt-6 p-3 bg-light rounded text-muted fs-7">
+            <div className="mt-6 p-3 bg-tertiary dark:bg-quaternary rounded text-quaternary fs-7">
               <div>
                 <strong>Selected Role:</strong>{' '}
                 <span data-testid="selected-role">

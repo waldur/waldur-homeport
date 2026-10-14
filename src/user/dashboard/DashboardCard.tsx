@@ -36,14 +36,14 @@ export const DashboardCard: FC<DashboardCardProps> = ({
       <Card.Body className="d-flex align-items-center">
         <div className="symbol symbol-50px me-4 flex-shrink-0">
           <div
-            className={`symbol-label ${isClickable ? backgroundColor : 'bg-gray-300'}`}
+            className={`symbol-label ${isClickable ? backgroundColor : 'bg-gray-300 dark:bg-gray-dark-600'}`}
           >
             {icon}
           </div>
         </div>
         <div className="flex-grow-1">
           <Card.Title className="mb-1 h5">{title}</Card.Title>
-          <p className="text-muted mb-0 fs-7">{message}</p>
+          <p className="text-quaternary mb-0 fs-7">{message}</p>
         </div>
       </Card.Body>
     </Card>

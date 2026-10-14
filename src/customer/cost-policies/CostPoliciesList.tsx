@@ -87,7 +87,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
             <div className="d-flex align-items-center gap-2">
               <BooleanBadge value={row.has_fired} />
               {row.has_fired && row.affected_resources_count > 0 && (
-                <span className="text-muted fs-7">
+                <span className="text-quaternary fs-7">
                   {translate('{count} resources', {
                     count: row.affected_resources_count,
                   })}

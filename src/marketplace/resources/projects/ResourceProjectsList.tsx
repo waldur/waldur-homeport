@@ -29,7 +29,7 @@ import { StateLabel } from './StateLabel';
 
 const NameCell: FC<{ row: ResourceProject }> = ({ row }) =>
   row.is_removed ? (
-    <span className="text-muted">
+    <span className="text-quaternary">
       <s>{row.name}</s>{' '}
       <Badge variant="danger" shape="pill" tone="outline" className="fs-8 ms-1">
         {translate('Removed')}

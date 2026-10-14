@@ -92,7 +92,7 @@ const RestrictedView = () => {
             <ShieldWarningIcon weight="bold" />
           </span>
           <h3 className="text-danger mb-4">{pageMessage.title}</h3>
-          <p className="mb-10 text-dark mw-400px text-center">
+          <p className="mb-10 text-primary mw-400px text-center">
             {pageMessage.message}
           </p>
           <Link state="profile.details" buttonVariant="primary">

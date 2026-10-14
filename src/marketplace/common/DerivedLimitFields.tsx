@@ -32,7 +32,7 @@ const DerivedQuantities = ({
   }
   const components = getComponentsByType(offering?.components);
   return (
-    <div className="d-flex flex-column gap-1 form-text text-muted mt-2 mb-0">
+    <div className="d-flex flex-column gap-1 form-text text-quaternary mt-2 mb-0">
       {types.map((type) => {
         const component = components[type];
         const name = component?.name || type;
@@ -40,7 +40,7 @@ const DerivedQuantities = ({
         return (
           <div key={type}>
             {name === hideNameOf ? null : `${name}: `}
-            <strong className="text-body">
+            <strong className="text-primary">
               {renderFieldOrDash(value?.toLocaleString())}
               {value !== undefined && component?.measured_unit
                 ? ` ${component.measured_unit}`

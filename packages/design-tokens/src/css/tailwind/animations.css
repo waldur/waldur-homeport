@@ -1,0 +1,273 @@
+/**
+ * Modal enter/exit keyframes, matching what waldur-homeport's own real
+ * Bootstrap modal does — the exact source values, not an approximation:
+ *
+ * - dialog:   `transform: translate(0, -50px)` → `none` over
+ *             `.3s ease-out` ($modal-fade-transform/$modal-show-transform/
+ *             $modal-transition, none of which this app overrides), while
+ *             the modal container itself fades opacity over `.15s linear`
+ *             ($transition-fade, applied via Bootstrap's own `.fade`).
+ *             Both live in one keyframe rather than two stacked
+ *             animations: opacity simply finishes at the 50% mark of the
+ *             .3s run, which *is* .15s. Radix's Presence tracks a single
+ *             animationName per node to decide when an exiting node may
+ *             unmount, so one animation is also the safe shape.
+ * - backdrop: opacity 0 → 1 over `.15s linear`, Bootstrap's
+ *             `.modal-backdrop.fade`/`.show` pair. The alpha stays in
+ *             --modal-backdrop-bg rather than in this animation's end
+ *             state — see dialog.css's comment on why that
+ *             separation matters for the blur.
+ *
+ * Keyframes, not CSS transitions: Radix's Presence detects an exit
+ * animation by reading the node's computed animationName and waiting for
+ * animationend. A pure transition leaves animationName 'none', so the
+ * node unmounts on the spot and no exit is ever seen (and, on enter, Radix
+ * sets data-state="open" before first paint, so there's no closed state
+ * for a transition to start from either).
+ *
+ * The reduced-motion block is Bootstrap's own behavior too — its
+ * transition() mixin emits `transition: none` under
+ * prefers-reduced-motion. animation-duration is collapsed rather than set
+ * to `none` so animationend still fires and Radix still unmounts.
+ */
+
+@keyframes waldur-modal-enter {
+  from {
+    opacity: 0;
+    transform: translate(0, -50px);
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes waldur-modal-exit {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, -50px);
+  }
+}
+
+@keyframes waldur-backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes waldur-backdrop-exit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/**
+ * Toast enter/exit — a plain slide-in-from-the-right + fade, and its
+ * reverse. There's no legacy Bootstrap toast to match parity against here
+ * (unlike the modal keyframes above), so these are a from-scratch pick
+ * rather than a measured value: right, since that's also the Toast
+ * Provider's swipeDirection, so an entering and a dismissed-by-swipe toast
+ * travel the same axis. Also plays for a completed swipe dismissal, not
+ * just the timer/close-button case — see Toast.tsx's own comment on why a
+ * swipe-specific exit isn't worth the extra keyframe.
+ */
+@keyframes waldur-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes waldur-toast-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-waldur-animated] {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/**
+ * Sidebar accordion slide, matching Metronic's
+ * kt-menu-accordion-down/-up at the same 250ms ease-out.
+ * Animates a `height` custom property rather than
+ * `height` itself directly against Radix's own
+ * --radix-collapsible-content-height: that var is written into a plain ref
+ * inside Radix's CollapsibleContentImpl (not React state), so it never
+ * reaches the DOM before a component's very first open — waldur-ui's
+ * SidebarMenuAccordion measures scrollHeight itself into real state
+ * instead, and writes it here as --sidebar-accordion-height, falling back
+ * to Radix's var only if that measurement hasn't landed yet.
+ */
+@keyframes waldur-sidebar-accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(
+      --sidebar-accordion-height,
+      var(--radix-collapsible-content-height)
+    );
+  }
+}
+
+@keyframes waldur-sidebar-accordion-up {
+  from {
+    height: var(
+      --sidebar-accordion-height,
+      var(--radix-collapsible-content-height)
+    );
+  }
+  to {
+    height: 0;
+  }
+}
+
+/**
+ * waldur-ui Accordion / Collapsible open-close slide, at the sidebar
+ * accordion's 250ms ease-out. Radix sets --radix-collapsible-content-height
+ * on both (Accordion's Content is a Collapsible Content), measured in a
+ * layout effect before the opening frame is painted.
+ *
+ * `overflow: hidden` lives in the keyframes, not on the element: it must
+ * clip only while the height animates (as Bootstrap's `.collapsing` did).
+ * Left on an open panel it clips anything that pops out of it — a
+ * react-select menu — and react-select's scroll-menu-into-view then scrolls
+ * the clipped panel itself, hiding the top of the field.
+ */
+@keyframes waldur-collapsible-down {
+  from {
+    height: 0;
+    overflow: hidden;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    overflow: hidden;
+  }
+}
+
+@keyframes waldur-collapsible-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+    overflow: hidden;
+  }
+  to {
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+/**
+ * Dropdown/menu panel entrance (waldur-ui's DropdownMenu, NavMenu and
+ * popover panels), ported from Metronic's menu-sub-dropdown-animation-*:
+ * fade in while sliding 0.75rem toward the trigger, 0.3s ease. `-up` is the
+ * default (the panel starts below its resting place); `-down` is for a
+ * panel that opens upwards (data-side="top").
+ *
+ * Keyframes, not a `@starting-style` transition: until Radix has measured
+ * the panel, it parks the popper wrapper off-screen and forces
+ * `animation: none` on the content, so an animation starts only once the
+ * panel is in place. A transition is not held back and plays out while the
+ * panel is still off-screen, so it visibly jumps in.
+ */
+@keyframes waldur-menu-enter-up {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes waldur-menu-enter-down {
+  from {
+    opacity: 0;
+    translate: 0 -0.75rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/**
+ * Progress indeterminate sweep: a bar `--progress-indeterminate-width` wide
+ * travels across the track. The keyframe is in percentages of the bar's own
+ * width, so it needs no knowledge of the track size.
+ */
+@keyframes waldur-progress-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}
+
+/* A sweep that stops would read as an empty bar, so under reduced motion the
+   unknown-progress bar becomes a static, half-transparent full bar. */
+@media (prefers-reduced-motion: reduce) {
+  [data-progress-indeterminate] {
+    animation: none !important;
+    width: 100% !important;
+    opacity: 0.5;
+  }
+}
+
+/**
+ * Generic utility animations ported from Metronic:
+ * - .animation-blink: Blinking cursor / bullet indicator
+ * - .animation-spin: Continuous rotation for loading spinners
+ */
+@keyframes animation-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.animation-blink {
+  animation: animation-blink 1s steps(5, start) infinite;
+}
+
+@keyframes animation-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.animation-spin {
+  animation: animation-spin 2s infinite linear;
+}

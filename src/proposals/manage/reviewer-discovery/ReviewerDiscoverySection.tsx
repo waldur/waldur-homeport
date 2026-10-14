@@ -90,7 +90,7 @@ const AffinityScoreWithTooltip: FC<{ row: ReviewerSuggestion }> = ({ row }) => {
       <div>
         {translate('Text similarity')}: {formatScore(row.text_score)}
       </div>
-      <div className="mt-1 pt-1 border-top">
+      <div className="mt-1 pt-1 border-t-[1px] border-t-secondary">
         <strong>
           {translate('Combined')}: {formatScore(row.affinity_score)}
         </strong>
@@ -100,7 +100,7 @@ const AffinityScoreWithTooltip: FC<{ row: ReviewerSuggestion }> = ({ row }) => {
 
   return (
     <Tooltip label={tooltipContent} side="top" autoWidth>
-      <div className="fw-bold text-success cursor-pointer">
+      <div className="font-medium text-success cursor-pointer">
         {formatScore(row.affinity_score)}
         <InfoIcon className="ms-1" size={14} weight="bold" />
       </div>
@@ -176,13 +176,15 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
 
   if (rows.length === 0) {
     return (
-      <span className="text-muted">{translate('No suggestions selected')}</span>
+      <span className="text-quaternary">
+        {translate('No suggestions selected')}
+      </span>
     );
   }
 
   return (
     <div className="d-flex gap-2 align-items-center">
-      <span className="text-muted me-2">
+      <span className="text-quaternary me-2">
         {translate('{count} selected', { count: rows.length })}
       </span>
       {pendingRows.length > 0 && (
@@ -265,7 +267,7 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
         render: ({ row }: { row: ReviewerSuggestion }) => (
           <div>
             <div className="d-flex align-items-center gap-2">
-              <span className="fw-bold">{row.reviewer_name}</span>
+              <span className="font-medium">{row.reviewer_name}</span>
               <BaseButton
                 variant="secondary"
                 size="sm"
@@ -279,7 +281,7 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
             </div>
             {row.reviewer_biography && (
               <div
-                className="text-muted small mt-1"
+                className="text-quaternary small mt-1"
                 style={{
                   maxWidth: '300px',
                   overflow: 'hidden',
@@ -328,14 +330,16 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
           const topProposals = row.top_matching_proposals || [];
 
           if (matchedKeywords.length === 0 && topProposals.length === 0) {
-            return <span className="text-muted">-</span>;
+            return <span className="text-quaternary">-</span>;
           }
 
           return (
             <div className="d-flex flex-column gap-1">
               {matchedKeywords.length > 0 && (
                 <div>
-                  <small className="text-muted">{translate('Keywords')}:</small>{' '}
+                  <small className="text-quaternary">
+                    {translate('Keywords')}:
+                  </small>{' '}
                   <span className="small">
                     {matchedKeywords.slice(0, 3).join(', ')}
                     {matchedKeywords.length > 3 && '...'}
@@ -344,7 +348,9 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
               )}
               {topProposals.length > 0 && (
                 <div>
-                  <small className="text-muted">{translate('Best for')}:</small>{' '}
+                  <small className="text-quaternary">
+                    {translate('Best for')}:
+                  </small>{' '}
                   <span className="small">
                     {topProposals
                       .slice(0, 2)
@@ -382,7 +388,7 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
               <>
                 <div>{row.reviewed_by_name}</div>
                 {row.reviewed_at && (
-                  <small className="text-muted">
+                  <small className="text-quaternary">
                     {formatDate(row.reviewed_at)}
                   </small>
                 )}
@@ -423,7 +429,7 @@ const ReviewerDiscoverySectionTable: FC<ReviewerDiscoverySectionProps> = ({
       filters={<ReviewerSuggestionsFilter />}
       rowActions={canManage ? SuggestionRowActions : undefined}
       rowClass={({ row }) =>
-        row.status === 'rejected' ? 'bg-light-danger' : ''
+        row.status === 'rejected' ? 'bg-danger-subtle' : ''
       }
       enableMultiSelect={canManage}
       multiSelectActions={canManage ? BulkActions : undefined}

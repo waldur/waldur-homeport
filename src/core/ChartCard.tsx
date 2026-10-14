@@ -60,9 +60,9 @@ export const ChartCard: React.FC<ChartCardProps> = ({
     <Card className="h-100 card-bordered">
       <Card.Header className="align-items-center border-0 pt-5 pb-2 min-h-60px">
         <Card.Title className="align-items-start flex-column m-0">
-          <span className="card-label fw-bold text-gray-900">{title}</span>
+          <span className="card-label font-medium text-primary">{title}</span>
           {summary && (
-            <span className="text-tertiary fs-7 fw-normal">{summary}</span>
+            <span className="text-quaternary fs-7 font-normal">{summary}</span>
           )}
         </Card.Title>
         <div className="card-toolbar d-flex gap-4 m-0">

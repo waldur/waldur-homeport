@@ -1,5 +1,8 @@
-import { FunctionComponent, useMemo, useState } from 'react';
+import { ArrowLeftIcon } from '@phosphor-icons/react';
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { VersionHistory } from 'waldur-js-client';
+
+import { BaseButton, useBreakpointUp } from 'waldur-ui';
 
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
@@ -34,6 +37,33 @@ export const VersionHistoryDialog: FunctionComponent<
   );
   const [timestampVersion, setTimestampVersion] =
     useState<VersionHistory | null>(null);
+  // Below md there is no room for the list and the diff side by side, so a
+  // phone shows one at a time: the list, then the picked revision's diff.
+  const isWide = useBreakpointUp('md');
+  const [mobilePane, setMobilePane] = useState<'list' | 'diff'>('list');
+  const showList = isWide || mobilePane === 'list';
+  const showDiff = isWide || mobilePane === 'diff';
+  const listRef = useRef<HTMLDivElement>(null);
+  const backRef = useRef<HTMLButtonElement>(null);
+  const paneChanged = useRef(false);
+
+  // Switching panes unmounts the focused control, so move focus to where the
+  // user lands: the back button, or the revision they came back from.
+  useEffect(() => {
+    if (isWide || !paneChanged.current) return;
+    if (mobilePane === 'diff') {
+      backRef.current?.focus();
+    } else {
+      listRef.current
+        ?.querySelector<HTMLButtonElement>('[aria-current="true"]')
+        ?.focus();
+    }
+  }, [mobilePane, isWide]);
+
+  const showPane = (pane: 'list' | 'diff') => {
+    paneChanged.current = true;
+    setMobilePane(pane);
+  };
 
   // Auto-select the first (current) version when data loads
   const effectiveSelectedVersion = useMemo(() => {
@@ -64,11 +94,13 @@ export const VersionHistoryDialog: FunctionComponent<
   const handleSelectVersion = (version: VersionHistory) => {
     setSelectedVersion(version);
     setTimestampVersion(null);
+    showPane('diff');
   };
 
   const handleTimestampVersionLoaded = (version: VersionHistory) => {
     setTimestampVersion(version);
     setSelectedVersion(null);
+    showPane('diff');
   };
 
   return (
@@ -78,10 +110,10 @@ export const VersionHistoryDialog: FunctionComponent<
       bodyClassName="p-0"
     >
       <div className="d-flex flex-column" style={{ height: '70vh' }}>
-        {/* Toolbar */}
-        <div className="d-flex justify-content-between align-items-center px-5 py-4 border-bottom">
-          <div className="d-flex align-items-center gap-2">
-            <span className="text-muted fs-7">{translate('Total')}:</span>
+        {/* Toolbar: wraps onto two rows on a phone. */}
+        <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
+          <div className="d-flex align-items-center gap-2 text-nowrap">
+            <span className="text-quaternary fs-7">{translate('Total')}:</span>
             <StateIndicator
               label={`${versions.length} ${translate('versions')}`}
               variant="info"
@@ -97,30 +129,48 @@ export const VersionHistoryDialog: FunctionComponent<
 
         {/* Main content */}
         <div className="d-flex flex-grow-1 overflow-hidden">
-          {/* Timeline panel */}
-          <div
-            className="border-end overflow-auto"
-            style={{ width: '380px', minWidth: '320px' }}
-          >
-            <div className="fw-bold fs-6 px-5 py-4 border-bottom">
-              {translate('Revisions')}
+          {showList && (
+            <div
+              ref={listRef}
+              className={
+                isWide
+                  ? 'border-r-[1px] border-r-secondary overflow-auto w-[380px] min-w-[320px] shrink-0'
+                  : 'overflow-auto w-full'
+              }
+            >
+              <div className="font-medium fs-6 px-5 py-4 border-b-[1px] border-b-secondary">
+                {translate('Revisions')}
+              </div>
+              <VersionHistoryTimeline
+                versions={versions}
+                selectedVersionId={effectiveSelectedVersion?.id || null}
+                onSelectVersion={handleSelectVersion}
+                isLoading={isLoading}
+              />
             </div>
-            <VersionHistoryTimeline
-              versions={versions}
-              selectedVersionId={effectiveSelectedVersion?.id || null}
-              onSelectVersion={handleSelectVersion}
-              isLoading={isLoading}
-            />
-          </div>
+          )}
 
-          {/* Diff panel */}
-          <div className="flex-grow-1 overflow-hidden d-flex flex-column">
-            <VersionDiffViewer
-              entityType={entityType}
-              currentVersion={effectiveSelectedVersion}
-              previousVersion={previousVersion}
-            />
-          </div>
+          {showDiff && (
+            <div className="flex-grow-1 overflow-hidden d-flex flex-column min-w-0">
+              {!isWide && (
+                <div className="px-3 py-2 border-b-[1px] border-b-secondary">
+                  <BaseButton
+                    ref={backRef}
+                    variant="text-secondary"
+                    size="sm"
+                    iconNode={<ArrowLeftIcon weight="bold" />}
+                    label={translate('Revisions')}
+                    onClick={() => showPane('list')}
+                  />
+                </div>
+              )}
+              <VersionDiffViewer
+                entityType={entityType}
+                currentVersion={effectiveSelectedVersion}
+                previousVersion={previousVersion}
+              />
+            </div>
+          )}
         </div>
       </div>
     </ModalDialog>

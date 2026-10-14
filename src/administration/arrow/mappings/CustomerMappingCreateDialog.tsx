@@ -232,22 +232,22 @@ export const CustomerMappingCreateDialog = ({
               render={({ input }) =>
                 input.value ? (
                   <div className="mb-4 p-3 border rounded">
-                    <small className="text-muted d-block mb-1">
+                    <small className="text-quaternary d-block mb-1">
                       {translate('Selected Arrow Customer')}
                     </small>
                     <div>
                       <strong>{input.value.companyName}</strong>
                     </div>
-                    <div className="text-muted">
+                    <div className="text-quaternary">
                       {translate('Reference')}: {input.value.reference}
                     </div>
                     {input.value.email && (
-                      <div className="text-muted">
+                      <div className="text-quaternary">
                         {translate('Email')}: {input.value.email}
                       </div>
                     )}
                     {(input.value.city || input.value.countryCode) && (
-                      <div className="text-muted">
+                      <div className="text-quaternary">
                         {translate('Location')}: {input.value.city}
                         {input.value.city && input.value.countryCode && ', '}
                         {input.value.countryCode}

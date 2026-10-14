@@ -1,4 +1,5 @@
 import { colorLightness, hexToRgb } from './colorMath';
+import { readableOn } from './contrast';
 
 // Waldur's default green brand palette — used both as the out-of-the-box
 // brand color and as the pre-computed ramp returned when the tenant hasn't
@@ -46,6 +47,11 @@ export const generateBrandColors = (color: string) => {
     const colorRgb = hexToRgb(_color);
     Object.assign(brandColors, { [key]: _color, [key + '-rgb']: colorRgb });
   });
+
+  // Text on a brand-400 fill (the dark theme's selected date). Black or
+  // white, whichever reads: no one colour does across tenant hues, as
+  // brand-400 is light for a green or yellow brand and dark for a blue one.
+  brandColors['on-400'] = readableOn(brandColors['400']) ?? '#000';
 
   return brandColors;
 };

@@ -11,10 +11,10 @@ import { useTextTruncation } from './useTextTruncation';
 
 interface AnnouncementBarProps {
   icon: Icon;
-  /** Also drives the `bar-{variant}` background class — only success/
-   * warning/danger have a real `.bar-{variant}` rule (_alerts.scss); `info`/
-   * `neutral`/`primary` still color the icon correctly via FeaturedIcon but
-   * render on the plain `bg-body` background, same as `colored: false`. */
+  /** With `colored`, also tints the bar — only success/warning/danger have a
+   * tint (COLORED_CLASSES); `info`/`neutral`/`primary` still colour the icon
+   * via FeaturedIcon but render on the plain page background, same as
+   * `colored: false`. */
   variant: FeaturedIconVariant;
   /** Inline label used by non-announcement bars (offering/order/resource). */
   label?: ReactNode;
@@ -30,6 +30,17 @@ interface AnnouncementBarProps {
   colored?: boolean;
   hasColon?: boolean;
 }
+
+// Each bar is one row of a flush stack: a single bottom border divides
+// adjacent bars, with no gaps and no doubled borders.
+const BAR_CLASSES =
+  'flex min-h-[55px] items-center border-b border-secondary print:hidden';
+
+const COLORED_CLASSES: Partial<Record<FeaturedIconVariant, string>> = {
+  success: 'bg-success-subtle text-success',
+  warning: 'bg-warning-subtle text-warning',
+  danger: 'bg-danger-subtle text-danger',
+};
 
 export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   label,
@@ -53,19 +64,18 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   );
 
   const showMoreButton = onShowMore && isTruncated;
-  const messageClass = variant && colored ? undefined : 'text-muted';
+  const colorClass = colored ? COLORED_CLASSES[variant] : undefined;
+  const messageClass = colored ? undefined : 'text-quaternary';
 
   return (
     <div
-      className={classNames(
-        'bar d-print-none',
-        variant && colored ? `bar-${variant}` : 'bg-body',
-      )}
+      className={classNames(BAR_CLASSES, colorClass ?? 'bg-primary')}
+      data-variant={variant}
     >
       <div
         className={classNames(
-          'container-fluid w-100 d-flex align-items-center gap-2 py-2',
-          ellipsis && 'ellipsis',
+          'container-fluid flex w-full items-center gap-[6.5px] py-[6.5px]',
+          ellipsis && 'truncate',
         )}
       >
         <FeaturedIcon
@@ -75,10 +85,10 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
 
         <div
           ref={textRef}
-          className={classNames('text-start fs-6 mb-0', ellipsis && 'ellipsis')}
+          className={classNames('text-start text-sm', ellipsis && 'truncate')}
         >
           {label ? (
-            <strong className="fw-bold">
+            <strong className="font-medium">
               {label}
               {hasColon ? ': ' : ' '}
             </strong>
@@ -87,7 +97,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
             // "by … :" byline (the "who"), then the body message.
             <>
               {title ? (
-                <strong className="fw-semibold">{title}. </strong>
+                <strong className="font-semibold">{title}. </strong>
               ) : null}
               {provider ? (
                 <span className={messageClass}>
@@ -106,7 +116,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
           <BaseButton
             variant="tertiary"
             size="sm"
-            className="flex-shrink-0 ms-auto"
+            className="ms-auto shrink-0"
             onClick={onAction}
             label={actionLabel}
           />
@@ -114,7 +124,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
         {showMoreButton && (
           <button
             type="button"
-            className="text-anchor flex-shrink-0"
+            className="shrink-0 cursor-pointer whitespace-nowrap border-0 bg-transparent p-0 text-sm text-[var(--text-brand-secondary)] hover:underline"
             onClick={onShowMore}
             aria-label={
               label || title

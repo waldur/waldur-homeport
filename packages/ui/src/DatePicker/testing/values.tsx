@@ -35,7 +35,7 @@ export const ValueReadout = ({
   value: unknown;
   testId?: string;
 }) => (
-  <div className="mt-[16px] text-[12px] text-[var(--surface-text-muted)]">
+  <div className="mt-[16px] text-[12px] text-quinary">
     {label}:{' '}
     <code data-testid={testId}>
       {JSON.stringify(serializeDateValue(value))}

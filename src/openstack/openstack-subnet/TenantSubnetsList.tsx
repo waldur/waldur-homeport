@@ -120,7 +120,7 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
             ) : row.is_connected ? (
               <>{row.router_name}</>
             ) : (
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {translate('{router} (disconnected)', {
                   router: row.router_name,
                 })}

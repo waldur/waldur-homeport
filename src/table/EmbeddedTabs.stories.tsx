@@ -25,9 +25,7 @@ export default meta;
 type Story = StoryObj<typeof EmbeddedTabs>;
 
 const Placeholder = ({ children }: { children: string }) => (
-  <div className="p-4 text-sm text-[var(--surface-text-secondary)]">
-    {children}
-  </div>
+  <div className="p-4 text-sm text-quaternary">{children}</div>
 );
 
 const tabs = [
@@ -112,9 +110,7 @@ export const WithHeader: Story = {
     header: (
       <div className="flex items-center justify-between gap-4 px-4 py-3 border-b">
         <span className="text-sm font-bold">Team</span>
-        <span className="text-xs text-[var(--surface-text-secondary)]">
-          header actions
-        </span>
+        <span className="text-xs text-quaternary">header actions</span>
       </div>
     ),
     tabs,

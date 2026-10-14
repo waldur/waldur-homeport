@@ -16,12 +16,12 @@ export const InfiniteList = <RowType,>({
   emptyMessage: ReactNode;
 }) =>
   context.status === 'pending' ? (
-    <p className="text-center text-dark mb-0">{translate('Loading')}</p>
+    <p className="text-center text-primary mb-0">{translate('Loading')}</p>
   ) : context.status === 'error' ? (
-    <p className="text-center text-dark mb-0">{translate('Error')}</p>
+    <p className="text-center text-primary mb-0">{translate('Error')}</p>
   ) : context.data.pages[0].rows.length === 0 ? (
     typeof emptyMessage === 'string' ? (
-      <p className="text-center text-dark mb-0">{emptyMessage}</p>
+      <p className="text-center text-primary mb-0">{emptyMessage}</p>
     ) : (
       emptyMessage
     )

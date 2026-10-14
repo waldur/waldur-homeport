@@ -94,7 +94,7 @@ export const Looks: Story = {
           <Menu.Separator />
           <Menu.Item
             icon={<TrashIcon weight="bold" />}
-            className="text-[var(--pill-danger-text)] action-row-active:text-[var(--pill-danger-text)]"
+            className="text-danger action-row-active:text-danger"
           >
             Delete
           </Menu.Item>
@@ -418,7 +418,7 @@ export const ItemKinds: Story = {
           <Menu.Item>Closing button</Menu.Item>
         </MenuPopover.Content>
       </MenuPopover>
-      <div className="w-[200px] rounded-lg border border-[var(--surface-card-border)]">
+      <div className="w-[200px] rounded-lg border-[1px] border-secondary">
         <Menu.Item look="actions">Plain button</Menu.Item>
       </div>
     </Gallery>

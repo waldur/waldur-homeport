@@ -72,7 +72,7 @@ export const SearchInput = ({
 
         {/* Keyboard shortcut hint */}
         {showShortcut && !query && (
-          <span className="position-absolute top-50 end-0 translate-middle-y me-4 z-index-5 text-gray-700 fs-8 bg-gray-200 px-2 py-1 rounded">
+          <span className="position-absolute top-50 end-0 translate-middle-y me-4 z-index-5 text-secondary fs-8 bg-quaternary px-2 py-1 rounded">
             {shortcutHint}
           </span>
         )}
@@ -80,7 +80,7 @@ export const SearchInput = ({
         {/* Loading */}
         {show && isLoading ? (
           <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-4 z-index-5">
-            <span className="spinner-border h-15px w-15px align-middle text-gray-400" />
+            <span className="spinner-border h-15px w-15px align-middle text-quinary" />
           </span>
         ) : null}
         {/* Clear button */}

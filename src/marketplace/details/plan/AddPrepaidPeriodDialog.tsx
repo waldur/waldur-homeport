@@ -97,7 +97,7 @@ const PrepaidFormContent = ({
                 {...datePickerConstraints}
               />
               {durationInMonths !== null && (
-                <div className="text-muted mt-1 small">
+                <div className="text-quaternary mt-1 small">
                   {translate('Duration: {count} months', {
                     count: durationInMonths,
                   })}

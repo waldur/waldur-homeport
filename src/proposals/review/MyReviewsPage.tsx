@@ -91,7 +91,7 @@ export const MyReviewsPage: FC = () => {
               {
                 title: translate('Proposal name'),
                 render: ({ row }) => (
-                  <span className="text-gray-700 fw-bold">
+                  <span className="text-secondary font-medium">
                     {row.proposal_name}
                   </span>
                 ),

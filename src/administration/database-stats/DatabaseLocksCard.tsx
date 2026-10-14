@@ -35,13 +35,13 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
       >
         <tbody>
           <tr>
-            <td className="text-muted">{translate('Total locks')}</td>
-            <td className="fw-semibold text-end">
+            <td className="text-quaternary">{translate('Total locks')}</td>
+            <td className="font-semibold text-end">
               {data.total_locks.toLocaleString()}
             </td>
           </tr>
           <tr>
-            <td className="text-muted">{translate('Waiting locks')}</td>
+            <td className="text-quaternary">{translate('Waiting locks')}</td>
             <td className="text-end">
               {data.waiting_locks > 0 ? (
                 <Badge
@@ -52,12 +52,12 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
                   {data.waiting_locks}
                 </Badge>
               ) : (
-                <span className="fw-semibold text-success">0</span>
+                <span className="font-semibold text-success">0</span>
               )}
             </td>
           </tr>
           <tr>
-            <td className="text-muted">
+            <td className="text-quaternary">
               {translate('Access exclusive locks')}
             </td>
             <td className="text-end">
@@ -66,7 +66,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
                   {data.access_exclusive_locks}
                 </Badge>
               ) : (
-                <span className="fw-semibold">0</span>
+                <span className="font-semibold">0</span>
               )}
             </td>
           </tr>

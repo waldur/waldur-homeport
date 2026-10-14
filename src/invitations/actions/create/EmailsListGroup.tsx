@@ -254,7 +254,7 @@ export const EmailsListGroup = ({
           <Form.Group>
             <table className="table h-auto table-fixed align-top px-0 gy-2 mb-0">
               <thead>
-                <tr className="fs-6 fw-bold">
+                <tr className="fs-6 font-medium">
                   {/* Fixed-layout table: one column without a width takes
                       the free space, so Email does when Civil number is
                       hidden. */}

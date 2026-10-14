@@ -213,8 +213,10 @@ const PresetSelector: FC = () => {
   return (
     <div className="mb-6">
       <div className="d-flex align-items-center gap-2 mb-3">
-        <LightningIcon weight="bold" className="text-primary" />
-        <span className="fw-semibold">{translate('Quick Configuration')}</span>
+        <LightningIcon weight="bold" className="text-brand" />
+        <span className="font-semibold">
+          {translate('Quick Configuration')}
+        </span>
       </div>
       <div className="row g-3">
         {policyPresets.map((preset) => (
@@ -222,17 +224,17 @@ const PresetSelector: FC = () => {
             <Card
               className={`h-100 cursor-pointer border-2 ${
                 selectedPreset === preset.key
-                  ? 'border-primary bg-light-primary'
+                  ? 'border-brand bg-brand-subtle'
                   : 'border-light-dark'
               }`}
               onClick={() => applyPreset(preset)}
               style={{ cursor: 'pointer' }}
             >
               <Card.Body className="p-3">
-                <Card.Title className="fs-7 fw-bold mb-2">
+                <Card.Title className="fs-7 font-medium mb-2">
                   {preset.label}
                 </Card.Title>
-                <Card.Text className="fs-8 text-gray-600 mb-0">
+                <Card.Text className="fs-8 text-tertiary mb-0">
                   {preset.description}
                 </Card.Text>
               </Card.Body>
@@ -623,7 +625,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
       <Panel
         title={panelTitle}
         subtitle={panelSubtitle}
-        titleClassName="fw-normal"
+        titleClassName="font-normal"
         cardBordered
       >
         {enableToggle}
@@ -641,7 +643,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
         <Panel
           title={panelTitle}
           subtitle={panelSubtitle}
-          titleClassName="fw-normal"
+          titleClassName="font-normal"
           cardBordered
           actions={
             <div className="d-flex gap-3">

@@ -52,17 +52,21 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
           'Make sure to copy your personal access token now. You will not be able to see it again.',
         )}
         // The secret is shown only once: keep the tinted warning surface.
-        className="mb-4 bg-warning-50 dark:bg-warning-900"
+        className="mb-4 bg-warning-subtle"
       />
 
       <div className="mb-3">
-        <Form.Label className="fw-bold">{translate('Token name')}</Form.Label>
+        <Form.Label className="font-medium">
+          {translate('Token name')}
+        </Form.Label>
         <div>{tokenName}</div>
       </div>
 
       <div className="mb-3">
-        <Form.Label className="fw-bold">{translate('Your token')}</Form.Label>
-        <div className="d-flex align-items-center gap-2 p-3 bg-light rounded">
+        <Form.Label className="font-medium">
+          {translate('Your token')}
+        </Form.Label>
+        <div className="d-flex align-items-center gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
           <button
             className="text-btn flex-shrink-0"
             type="button"
@@ -82,10 +86,10 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       </div>
 
       <div>
-        <Form.Label className="fw-bold">
+        <Form.Label className="font-medium">
           {translate('Example usage')}
         </Form.Label>
-        <div className="d-flex align-items-start gap-2 p-3 bg-light rounded">
+        <div className="d-flex align-items-start gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
           <code className="flex-grow-1 text-break">
             {showSecret ? curlExample : maskedCurlExample}
           </code>

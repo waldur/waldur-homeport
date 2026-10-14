@@ -145,7 +145,7 @@ export const ForceImportConsumptionDialog = ({
 
   const renderFormPhase = () => (
     <>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Force import consumption data from Arrow, including finalized periods. Select a resource and date range to preview.',
         )}
@@ -165,7 +165,7 @@ export const ForceImportConsumptionDialog = ({
           noOptionsMessage={() => translate('No resources with backend ID')}
           isClearable
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate(
             'Only resources with an Arrow license reference are shown',
           )}
@@ -204,7 +204,7 @@ export const ForceImportConsumptionDialog = ({
 
   const renderPreviewPhase = () => (
     <>
-      <p className="text-muted mb-3">
+      <p className="text-quaternary mb-3">
         {translate('Preview of consumption data from Arrow for {resource}.', {
           resource: selectedResource?.name,
         })}
@@ -310,7 +310,7 @@ export const ForceImportConsumptionDialog = ({
                 {importMutation.data.periods_skipped}
               </li>
               {importMutation.data.periods_no_data > 0 && (
-                <li className="text-muted">
+                <li className="text-quaternary">
                   {translate('Periods with no data')}:{' '}
                   {importMutation.data.periods_no_data}
                 </li>
@@ -393,11 +393,11 @@ export const ForceImportConsumptionDialog = ({
       subtitle={
         selectedResource && (
           <>
-            <span className="fw-bold">{selectedResource.name}</span>
+            <span className="font-medium">{selectedResource.name}</span>
             {selectedResource.backend_id && (
               <>
                 {' '}
-                <span className="text-muted">
+                <span className="text-quaternary">
                   ({selectedResource.backend_id})
                 </span>
               </>

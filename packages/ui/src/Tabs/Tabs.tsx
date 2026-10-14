@@ -340,7 +340,7 @@ export const TabsTrigger = forwardRef<
             size={16}
             weight="bold"
             aria-hidden="true"
-            className="ms-2 shrink-0 text-[var(--surface-text-muted)]"
+            className="ms-2 shrink-0 text-quinary"
           />
         ) : null}
         {countLoading || count !== undefined ? (
@@ -364,7 +364,7 @@ export const TabsTrigger = forwardRef<
               role="presentation"
               // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
               tabIndex={0}
-              className="inline-flex cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring-color,var(--waldur-brand-600))] focus-visible:rounded-[var(--focus-ring-radius,6px)]"
+              className="inline-flex cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--focus-ring-color,var(--brand-600))] focus-visible:rounded-[var(--focus-ring-radius,6px)]"
             >
               {triggerNode}
             </span>

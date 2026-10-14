@@ -160,7 +160,7 @@ export const AccountOptionsPreviewDialog: FC<
                 </>
               }
             >
-              <p className="text-muted">
+              <p className="text-quaternary">
                 {translate(
                   'Change the settings and preview what they do before applying them. Nothing is saved until you apply.',
                 )}

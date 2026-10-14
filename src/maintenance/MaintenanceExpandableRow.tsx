@@ -35,7 +35,7 @@ export const MaintenanceExpandableRow: FC<{
           {
             title: translate('Offering name'),
             render: ({ row }) => (
-              <span className="text-dark">{row.offering_name}</span>
+              <span className="text-primary">{row.offering_name}</span>
             ),
           },
           {

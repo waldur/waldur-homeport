@@ -4,13 +4,14 @@
 
 // Base
 .card {
-  @if ($card-border-enabled) {
-    border: $card-border-width $card-border-style $card-border-color;
-  } @else {
-    border: 0;
-  }
-
+  border: 0;
   box-shadow: $card-box-shadow;
+
+  // Dark mode draws the card's edge with a border instead of a shadow.
+  @include dark-theme {
+    border: $card-border-width $card-border-style $card-border-color;
+    box-shadow: none;
+  }
 
   // Header
   .card-header {
@@ -41,28 +42,17 @@
         margin-right: 0.75rem;
         line-height: 0;
 
-        i {
-          font-size: 1.25rem;
-          color: $gray-600;
-          line-height: 0;
-
-          &:after,
-          &:before {
-            line-height: 0;
-          }
-        }
-
         .svg-icon {
           @include svg-icon-size(24px);
-          @include svg-icon-color($gray-600);
+          @include svg-icon-color(var(--text-tertiary));
         }
       }
 
       &,
       .card-label {
-        font-weight: 500;
+        font-weight: var(--font-weight-medium);
         font-size: 1.275rem;
-        color: $dark;
+        color: var(--text-primary);
       }
 
       .card-label {
@@ -175,6 +165,10 @@
   &.card-shadow {
     box-shadow: $card-box-shadow;
     border: 0;
+
+    @include dark-theme {
+      box-shadow: none;
+    }
   }
 
   &.card-widget {
@@ -242,6 +236,10 @@
 
 .card-shadow {
   box-shadow: $card-box-shadow;
+
+  @include dark-theme {
+    box-shadow: none;
+  }
 }
 
 .card-py {

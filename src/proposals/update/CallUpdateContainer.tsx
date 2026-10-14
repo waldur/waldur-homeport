@@ -54,7 +54,7 @@ const PageHero = ({ call, refetch }) => (
           'All items can be browsed, but not edited. To make changes, activate the call first.',
         )}
         actions={<CallActions call={call} refetch={refetch} />}
-        className="bg-light-warning border-b border-[var(--surface-card-border)] py-3 px-8"
+        className="bg-warning-subtle border-b border-secondary py-3 px-8"
       />
     )}
     <div className="container-fluid my-5">

@@ -1,7 +1,11 @@
 @import '../core/components/_variables';
 
 .tos-content-preview {
-  background-color: if(isDarkMode(), $gray-200, $gray-100);
+  background-color: var(--bg-tertiary);
+
+  @include dark-theme {
+    background-color: var(--bg-quaternary);
+  }
   padding: 16px;
   min-height: 300px;
   max-height: 500px;

@@ -30,7 +30,7 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
         {/* Header with name and email */}
         <div className="d-flex align-items-start gap-3">
           <div
-            className="d-flex align-items-center justify-content-center rounded-circle bg-light-primary text-primary"
+            className="d-flex align-items-center justify-content-center rounded-full bg-brand-subtle text-brand"
             style={{ width: 64, height: 64, fontSize: 24 }}
           >
             {suggestion.reviewer_name
@@ -42,37 +42,41 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
           </div>
           <div>
             <h4 className="mb-1">{suggestion.reviewer_name}</h4>
-            <div className="text-muted">{suggestion.reviewer_email}</div>
+            <div className="text-quaternary">{suggestion.reviewer_email}</div>
           </div>
         </div>
 
         {/* Biography */}
         {suggestion.reviewer_biography && (
           <div>
-            <h6 className="text-muted mb-2">{translate('Biography')}</h6>
+            <h6 className="text-quaternary mb-2">{translate('Biography')}</h6>
             <p className="mb-0">{suggestion.reviewer_biography}</p>
           </div>
         )}
 
         {/* Affinity Scores */}
         <div>
-          <h6 className="text-muted mb-2">{translate('Match scores')}</h6>
+          <h6 className="text-quaternary mb-2">{translate('Match scores')}</h6>
           <div className="d-flex gap-4">
             <div>
-              <div className="text-muted small">{translate('Affinity')}</div>
-              <div className="fs-4 fw-bold text-success">
+              <div className="text-quaternary small">
+                {translate('Affinity')}
+              </div>
+              <div className="fs-4 font-medium text-success">
                 {formatScore(suggestion.affinity_score)}
               </div>
             </div>
             <div>
-              <div className="text-muted small">{translate('Keywords')}</div>
-              <div className="fs-4 fw-bold">
+              <div className="text-quaternary small">
+                {translate('Keywords')}
+              </div>
+              <div className="fs-4 font-medium">
                 {formatScore(suggestion.keyword_score)}
               </div>
             </div>
             <div>
-              <div className="text-muted small">{translate('Text')}</div>
-              <div className="fs-4 fw-bold">
+              <div className="text-quaternary small">{translate('Text')}</div>
+              <div className="fs-4 font-medium">
                 {formatScore(suggestion.text_score)}
               </div>
             </div>

@@ -62,8 +62,8 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
         ) : error ? (
           <LoadingErred loadData={refetch} />
         ) : options.length === 0 ? (
-          <div className="text-center text-muted">
-            <h2 className="text-muted">
+          <div className="text-center text-quaternary">
+            <h2 className="text-quaternary">
               {translate('There are no offerings to request')}
             </h2>
             {hasPlanlessOfferings ? (
@@ -88,7 +88,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
           <Field<any> name="offering" validate={required}>
             {({ input, meta }) => (
               <>
-                <label className="form-label fw-bold" htmlFor={input.name}>
+                <label className="form-label font-medium" htmlFor={input.name}>
                   {translate('Offering')}
                 </label>
                 <SelectField

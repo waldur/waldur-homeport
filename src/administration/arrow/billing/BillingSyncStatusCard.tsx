@@ -32,7 +32,7 @@ export const BillingSyncStatusCard = () => {
       <Card.Body>
         <Row>
           <Col md={3}>
-            <div className="text-muted small mb-1">
+            <div className="text-quaternary small mb-1">
               {translate('Sync Status')}
             </div>
             <Badge
@@ -46,26 +46,26 @@ export const BillingSyncStatusCard = () => {
             </Badge>
           </Col>
           <Col md={3}>
-            <div className="text-muted small mb-1">
+            <div className="text-quaternary small mb-1">
               {translate('Pending Records')}
             </div>
-            <span className="fw-bold">
+            <span className="font-medium">
               {renderFieldOrDash((status as any)?.pending_count)}
             </span>
           </Col>
           <Col md={3}>
-            <div className="text-muted small mb-1">
+            <div className="text-quaternary small mb-1">
               {translate('Synced Records')}
             </div>
-            <span className="fw-bold">
+            <span className="font-medium">
               {renderFieldOrDash((status as any)?.synced_count)}
             </span>
           </Col>
           <Col md={3}>
-            <div className="text-muted small mb-1">
+            <div className="text-quaternary small mb-1">
               {translate('Failed Records')}
             </div>
-            <span className="fw-bold text-danger">
+            <span className="font-medium text-danger">
               {renderFieldOrDash((status as any)?.failed_count)}
             </span>
           </Col>

@@ -25,7 +25,7 @@ export const ResourceShowMoreComponents = ({
   return (
     <button
       type="button"
-      className="text-anchor fw-bold"
+      className="text-anchor font-medium"
       onClick={() =>
         openDialog(ResourceComponentsDialog, {
           resolve: { resource, components },

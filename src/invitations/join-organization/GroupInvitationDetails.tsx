@@ -20,7 +20,7 @@ export const GroupInvitationDetails = ({
         />
       }
     >
-      <h6 className="text-gray-700">
+      <h6 className="text-secondary">
         {resolve.invitation.scope_type === 'customer'
           ? translate('Organization')
           : resolve.invitation.scope_type === 'project'
@@ -28,15 +28,15 @@ export const GroupInvitationDetails = ({
             : resolve.invitation.scope_type}
         :
       </h6>
-      <p className="text-muted">{resolve.invitation.scope_name}</p>
+      <p className="text-quaternary">{resolve.invitation.scope_name}</p>
       {resolve.invitation.custom_text && (
         <>
-          <h6 className="text-gray-700">{translate('Message')}:</h6>
-          <p className="text-muted">{resolve.invitation.custom_text}</p>
+          <h6 className="text-secondary">{translate('Message')}:</h6>
+          <p className="text-quaternary">{resolve.invitation.custom_text}</p>
         </>
       )}
-      <h6 className="text-gray-700">{translate('Description')}:</h6>
-      <p className="text-muted">{resolve.invitation.scope_description}</p>
+      <h6 className="text-secondary">{translate('Description')}:</h6>
+      <p className="text-quaternary">{resolve.invitation.scope_description}</p>
     </ModalDialog>
   );
 };

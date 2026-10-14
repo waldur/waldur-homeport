@@ -1,6 +1,5 @@
 .carousel-layout {
   min-height: 100vh;
-  background-color: var(--bs-tertiary-bg);
 
   .carousel-section {
     > .card-header {
@@ -34,20 +33,20 @@
     padding: 1rem;
     min-width: 120px;
     max-width: 120px;
-    background: var(--bs-body-bg);
-    border: 1px solid var(--bs-border-color);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-secondary);
     border-radius: 8px;
     text-decoration: none;
-    color: var(--bs-body-color);
+    color: var(--text-primary);
     transition: border-color 0.2s ease;
     flex-shrink: 0;
 
     &:hover {
-      border-color: var(--waldur-brand-color);
+      border-color: var(--brand-color);
     }
 
     &:active {
-      outline: 2px solid var(--waldur-brand-color);
+      outline: 2px solid var(--brand-color);
       outline-offset: -2px;
       border-color: transparent;
     }
@@ -58,15 +57,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--bs-border-color);
+      border: 1px solid var(--border-secondary);
       border-radius: 8px;
       margin-bottom: 0.75rem;
-      color: var(--bs-secondary-color);
     }
 
     .category-title {
       font-size: 0.875rem;
-      font-weight: 600;
+      font-weight: var(--font-weight-semibold);
       text-align: center;
       white-space: nowrap;
       overflow: hidden;

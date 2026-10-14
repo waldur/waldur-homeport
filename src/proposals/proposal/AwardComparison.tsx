@@ -55,14 +55,14 @@ export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
       <span
         className={
           row.change === 'removed'
-            ? 'text-muted text-decoration-line-through'
+            ? 'text-quaternary text-decoration-line-through'
             : undefined
         }
       >
         {offering.offering_name}
       </span>
       {planName && (
-        <span className="text-muted fs-7">
+        <span className="text-quaternary fs-7">
           {planChanged
             ? translate('Plan: {plan} (requested {requested})', {
                 plan: planName,
@@ -72,7 +72,7 @@ export const AwardOfferingCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
         </span>
       )}
       {row.change === 'moved' && (
-        <span className="text-muted fs-7">
+        <span className="text-quaternary fs-7">
           {translate('Requested on {offering}', {
             offering: row.requested.requested_offering.offering_name,
           })}
@@ -112,7 +112,7 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
 
   if (!awarded) {
     return (
-      <div className="d-flex flex-column gap-1 text-muted">
+      <div className="d-flex flex-column gap-1 text-quaternary">
         {components.map((component) => (
           <span key={component.type}>
             {component.name}:{' '}
@@ -136,13 +136,13 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
         return (
           <span key={component.type}>
             {component.name}:{' '}
-            <span className={differs ? 'fw-bold' : undefined}>
+            <span className={differs ? 'font-medium' : undefined}>
               {formatAmount(value, component.measured_unit)}
             </span>
             {differs && (
               // Its own line, so a narrow column wraps between the figures
               // rather than inside one.
-              <span className="d-block text-muted fs-7">
+              <span className="d-block text-quaternary fs-7">
                 {translate('requested {amount}', {
                   amount: formatAmount(asked, component.measured_unit),
                 })}
@@ -152,7 +152,7 @@ export const AwardAmountsCell: FC<{ row: AwardComparisonRow }> = ({ row }) => {
         );
       })}
       {requested && !sameOffering && (
-        <span className="text-muted fs-7">
+        <span className="text-quaternary fs-7">
           {translate('Requested:')}{' '}
           {getRequestableComponents(requested.requested_offering).map(
             (component, index) => (

@@ -62,7 +62,7 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
               {attachment.mime_type &&
               attachment.mime_type.startsWith('image') ? (
                 <button
-                  className="text-btn text-hover-primary"
+                  className="text-btn hover:text-brand"
                   onClick={openModal}
                 >
                   <ImageFetcher
@@ -82,8 +82,8 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
             </div>
           )}
           <div className="attachment-item__body">
-            <h6 className="fw-bold text-secondary">{fileName}</h6>
-            <p className="fs-6 text-muted">
+            <h6 className="font-medium text-secondary">{fileName}</h6>
+            <p className="fs-6 text-quaternary">
               {[
                 attachment.file_size
                   ? formatFilesize(attachment.file_size, 'B')
@@ -100,12 +100,12 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
           <div className="attachment-item__thumb">
             <WarningIcon
               size={iconSize}
-              className="text-gray-400"
+              className="text-quinary"
               weight="bold"
             />
           </div>
           <div className="attachment-item__body align-self-center">
-            <h6 className="fw-bold text-secondary">
+            <h6 className="font-medium text-secondary">
               {translate('Attachment is broken.')}
             </h6>
           </div>

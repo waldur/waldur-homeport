@@ -54,32 +54,32 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
             />
           </div>
           <div className="d-flex align-items-center gap-2">
-            <span className="fs-7 text-gray-600">{translate('Part of:')}</span>
-            <span className="fs-7 fw-medium text-primary">
+            <span className="fs-7 text-tertiary">{translate('Part of:')}</span>
+            <span className="fs-7 font-medium text-brand">
               {call.customer_name}
             </span>
           </div>
           <div className="d-flex flex-wrap gap-3 mt-1">
             {call.start_date && (
               <span className="fs-7">
-                <span className="fw-bold">{translate('Start date:')}</span>{' '}
-                <span className="text-gray-600">
+                <span className="font-medium">{translate('Start date:')}</span>{' '}
+                <span className="text-tertiary">
                   {formatDate(call.start_date)}
                 </span>
               </span>
             )}
             {call.end_date && (
               <span className="fs-7">
-                <span className="fw-bold">{translate('End date:')}</span>{' '}
-                <span className="text-gray-600">
+                <span className="font-medium">{translate('End date:')}</span>{' '}
+                <span className="text-tertiary">
                   {formatDate(call.end_date)}
                 </span>
               </span>
             )}
             {typeof proposalsCount === 'number' && (
               <span className="fs-7">
-                <span className="fw-bold">{translate('Proposals:')}</span>{' '}
-                <span className="text-gray-600">{proposalsCount}</span>
+                <span className="font-medium">{translate('Proposals:')}</span>{' '}
+                <span className="text-tertiary">{proposalsCount}</span>
               </span>
             )}
           </div>

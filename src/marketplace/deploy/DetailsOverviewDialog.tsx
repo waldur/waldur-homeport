@@ -30,7 +30,7 @@ const withCopy = (value) => {
           value={value}
           size={20}
           className="mb-0 mt-0"
-          buttonClassName="text-gray-500"
+          buttonClassName="text-quaternary"
         />
       )}
     </div>

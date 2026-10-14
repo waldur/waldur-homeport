@@ -71,7 +71,7 @@ const getColumns = (
       return (
         <>
           {renderNumberOrDash(price)}
-          {charge && <div className="text-muted small">{charge}</div>}
+          {charge && <div className="text-quaternary small">{charge}</div>}
         </>
       );
     },

@@ -44,7 +44,7 @@ export const SupportSystemLogsExpandableRow: FC<
       {traceback && (
         <Field label={translate('Traceback')}>
           <pre
-            className="text-gray-500 fs-7 mb-0"
+            className="text-quaternary fs-7 mb-0"
             style={{ whiteSpace: 'pre-wrap' }}
           >
             {traceback}

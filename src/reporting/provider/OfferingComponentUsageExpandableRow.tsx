@@ -139,7 +139,7 @@ export const OfferingComponentUsageExpandableRow: FC<
                   onValueChange={setPeriod}
                 />
                 {row.measured_unit && (
-                  <span className="fs-7 text-muted">
+                  <span className="fs-7 text-quaternary">
                     {translate('Metric')}: {row.measured_unit}
                   </span>
                 )}
@@ -161,7 +161,7 @@ export const OfferingComponentUsageExpandableRow: FC<
                         {formatUsageValue(usageData[usageData.length - 1])}
                       </span>
                       {limitData.length > 0 && (
-                        <span className="text-muted">
+                        <span className="text-quaternary">
                           {translate('Current limit')}:{' '}
                           {formatUsageValue(limitData[limitData.length - 1])}
                         </span>

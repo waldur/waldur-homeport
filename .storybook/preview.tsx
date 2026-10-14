@@ -2,7 +2,7 @@ import type { Preview } from '@storybook/react-vite';
 import { useEffect } from 'react';
 import { sb } from 'storybook/test';
 
-import { generateBrandColors, hexToRgb } from 'waldur-design-tokens';
+import { initBrandTokens } from 'waldur-design-tokens';
 
 import { ENV } from '@/core/config';
 import { getBrandColor } from '@/core/utils';
@@ -14,7 +14,7 @@ import '../src/tailwind.css';
 sb.mock(import('../src/core/api.ts'));
 
 /**
- * Seeds --waldur-brand-* the same way afterBootstrap.tsx's
+ * Seeds brand tokens the same way afterBootstrap.tsx's
  * initCssVariables() does at real app load — every story needs this since
  * Storybook never runs the real app's bootstrap path. See
  * docs/tailwind-shadcn-migration-notes.md.
@@ -30,15 +30,7 @@ function seedBrandVars() {
       },
     } as any;
   }
-  const hex = getBrandColor();
-  document.documentElement.style.setProperty('--waldur-brand-color', hex);
-  document.documentElement.style.setProperty(
-    '--waldur-brand-color-rgb',
-    hexToRgb(hex),
-  );
-  Object.entries(generateBrandColors(hex)).forEach(([key, color]) => {
-    document.documentElement.style.setProperty(`--waldur-brand-${key}`, color);
-  });
+  initBrandTokens(getBrandColor());
 }
 
 /**
@@ -71,7 +63,14 @@ const preview: Preview = {
       storySort: {
         order: [
           'Foundations',
-          ['Colors', 'Typography', 'Elevation'],
+          [
+            'Colors',
+            'Semantic Colors',
+            'Typography',
+            'Elevation',
+            'Layout',
+            'Component Tokens',
+          ],
           'Actions',
           ['BaseButton', 'CopyButton'],
           'Forms',

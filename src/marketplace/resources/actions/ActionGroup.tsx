@@ -23,7 +23,7 @@ export const ActionGroup = ({ title, children }) => {
       {hideGroupName ? null : (
         <Menu.Label
           id={labelId}
-          className="action-group-label py-[10px] text-muted fw-bolder fs-7"
+          className="action-group-label py-[10px] text-quaternary font-semibold fs-7"
         >
           {title}
         </Menu.Label>

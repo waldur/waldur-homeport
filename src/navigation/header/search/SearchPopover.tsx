@@ -47,13 +47,13 @@ interface TabContentProps
 }
 
 const SectionTitle = ({ title, className = '' }) => (
-  <h6 className={classNames('text-gray-700 fw-bold mb-3 mx-5', className)}>
+  <h6 className={classNames('text-secondary font-medium mb-3 mx-5', className)}>
     {title}
   </h6>
 );
 
 const SectionNoResult = () => (
-  <p className="text-muted mb-5 mx-5">{translate('No result found')}</p>
+  <p className="text-quaternary mb-5 mx-5">{translate('No result found')}</p>
 );
 
 const AllResultsTabContent = ({
@@ -76,7 +76,7 @@ const AllResultsTabContent = ({
         {Boolean(recentSearchItems?.length) && (
           <div className="mb-3">
             <div className="d-flex align-items-center justify-content-between mx-5 mb-3">
-              <h6 className="text-gray-700 fw-bold mb-0">
+              <h6 className="text-secondary font-medium mb-0">
                 {translate('Recent')}
               </h6>
               <BaseButton
@@ -124,7 +124,7 @@ const AllResultsTabContent = ({
           )}
         </div>
       </Col>
-      <Col md={12} lg={6} className="bg-gray-50 pb-5 px-0">
+      <Col md={12} lg={6} className="bg-secondary pb-5 px-0">
         {result.data?.resultsCount ? (
           <>
             <div className="mb-3 mt-5">

@@ -24,14 +24,14 @@ export const HiddenActionsMessage: FunctionComponent<
         className="me-2"
       />
 
-      <div className="fw-bold">
+      <div className="font-medium">
         <p className="mb-1">{translate('Action column is hidden.')}</p>
-        <p className="text-muted mb-1">
+        <p className="text-quaternary mb-1">
           {translate('Some functionality may not be accessible.')}
         </p>
         <button
           type="button"
-          className="text-anchor fw-bold"
+          className="text-anchor font-medium"
           onClick={() => toggleColumn(COLUMN_ACTIONS_KEY, { keys: [] }, true)}
         >
           {translate('Restore column')}

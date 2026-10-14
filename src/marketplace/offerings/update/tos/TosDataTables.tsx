@@ -24,7 +24,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
     <>
       {selectedTable === 'versionAdoption' && (
         <div
-          className="border border-secondary rounded"
+          className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
           <h6 className="mb-3">{translate('Version adoption')}</h6>
@@ -46,7 +46,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={2} className="text-center text-muted">
+                    <td colSpan={2} className="text-center text-quaternary">
                       {translate('No data available')}
                     </td>
                   </tr>
@@ -59,7 +59,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
 
       {selectedTable === 'consentStatus' && (
         <div
-          className="border border-secondary rounded"
+          className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
           <h6 className="mb-3">{translate('Consent status breakdown')}</h6>
@@ -96,7 +96,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
 
       {selectedTable === 'acceptedTrend' && (
         <div
-          className="border border-secondary rounded"
+          className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
           <h6 className="mb-3">{translate('Accepted consents trend')}</h6>
@@ -121,7 +121,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={2} className="text-center text-muted">
+                    <td colSpan={2} className="text-center text-quaternary">
                       {translate('No data available')}
                     </td>
                   </tr>
@@ -148,7 +148,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
 
       {selectedTable === 'revokedTrend' && (
         <div
-          className="border border-secondary rounded"
+          className="border-[1px] border-secondary rounded"
           style={{ padding: '16px' }}
         >
           <h6 className="mb-3">{translate('Revoked consents trend')}</h6>
@@ -173,7 +173,7 @@ export const TosDataTables: FC<TosDataTablesProps> = ({
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={2} className="text-center text-muted">
+                    <td colSpan={2} className="text-center text-quaternary">
                       {translate('No data available')}
                     </td>
                   </tr>

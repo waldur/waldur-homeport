@@ -11,7 +11,7 @@ export const ResourceEndDateConflictBar = () => {
   if (!show) return null;
 
   return (
-    <div className="bar bg-body border-bottom h-60px">
+    <div className="bar bg-primary border-b-[1px] border-b-secondary h-60px">
       <div className="container-fluid w-100 d-flex align-items-center gap-2">
         <FeaturedIcon
           icon={<WarningCircleIcon weight="bold" />}
@@ -19,10 +19,10 @@ export const ResourceEndDateConflictBar = () => {
           size="sm"
         />
         <p className="text-start fs-7">
-          <strong className="fw-bold">
+          <strong className="font-medium">
             {translate('Date conflict.')}&nbsp;
           </strong>
-          <span className="text-muted">
+          <span className="text-quaternary">
             {translate(
               'Termination date exceeds project end date. Resource termination will start from the project end date.',
             )}

@@ -129,7 +129,7 @@ const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
         </MenuPopover.Trigger>
         <MenuPopover.Content
           align="start"
-          className="w-auto min-w-150px py-1 fw-bold"
+          className="w-auto min-w-150px py-1 font-medium"
         >
           <MenuPopover.Item
             className="px-[16.25px] py-[9.75px]"

@@ -284,7 +284,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
 
                 {hasEditableComponents ? (
                   <>
-                    <p className="text-muted">
+                    <p className="text-quaternary">
                       {translate(
                         'The new limits below will be applied to all {count} selected VPCs.',
                         { count },

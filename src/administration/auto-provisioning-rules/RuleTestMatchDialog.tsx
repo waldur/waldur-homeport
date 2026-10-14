@@ -55,7 +55,7 @@ const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
     return String(value);
   };
   const iconClass = !result.configured
-    ? 'text-muted'
+    ? 'text-quaternary'
     : result.matched
       ? 'text-success'
       : 'text-danger';
@@ -70,10 +70,10 @@ const FilterRow: FC<{ result: FilterCheckResult }> = ({ result }) => {
           <XCircleIcon size={16} weight="bold" className={iconClass} />
         )}
       </td>
-      <td className="fw-semibold">{result.name}</td>
+      <td className="font-semibold">{result.name}</td>
       <td>{valueOf(result.rule_value)}</td>
       <td>{valueOf(result.user_value)}</td>
-      <td className="text-muted">{result.reason}</td>
+      <td className="text-quaternary">{result.reason}</td>
     </tr>
   );
 };
@@ -110,13 +110,13 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
         ) : (
           <XCircleIcon size={24} weight="bold" className={verdictClass} />
         )}
-        <span className={`fs-5 fw-bold ${verdictClass}`}>
+        <span className={`fs-5 font-medium ${verdictClass}`}>
           {result.would_provision
             ? translate('Would provision')
             : translate('Blocked')}
         </span>
         {result.resolved_project_name && (
-          <span className="text-muted">
+          <span className="text-quaternary">
             {projectActionLabel(
               result.project_action,
               result.resolved_project_name,
@@ -247,7 +247,7 @@ const ResultPanel: FC<{ result: RuleTestMatchResponse }> = ({ result }) => {
             <dd className="col-sm-8">
               {Object.entries(result.user_claims).map(([claim, values]) => (
                 <div key={claim}>
-                  <span className="fw-semibold">{claim}</span>:{' '}
+                  <span className="font-semibold">{claim}</span>:{' '}
                   {renderFieldOrDash((values as string[]).join(', '))}
                 </div>
               ))}
@@ -313,7 +313,7 @@ export const RuleTestMatchDialog: FC<RuleTestMatchDialogProps> = ({
             }
           >
             <div>
-              <label className="form-label fw-semibold">
+              <label className="form-label font-semibold">
                 {translate('Target user')}
               </label>
               <AsyncSelectGroup

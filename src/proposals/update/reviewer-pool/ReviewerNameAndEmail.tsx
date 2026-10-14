@@ -16,8 +16,8 @@ export const ReviewerNameAndEmail: FC<ReviewerNameAndEmailProps> = ({
   if (hasProfile) {
     return (
       <div>
-        <div className="fw-bold">{row.reviewer_name}</div>
-        <small className="text-muted">{row.reviewer_email}</small>
+        <div className="font-medium">{row.reviewer_name}</div>
+        <small className="text-quaternary">{row.reviewer_email}</small>
       </div>
     );
   }
@@ -25,9 +25,11 @@ export const ReviewerNameAndEmail: FC<ReviewerNameAndEmailProps> = ({
   // Email invitation without profile
   return (
     <div>
-      <div className="fw-bold">{row.invited_email || row.reviewer_email}</div>
+      <div className="font-medium">
+        {row.invited_email || row.reviewer_email}
+      </div>
       {row.invited_user_name && (
-        <div className="text-muted small mt-1">
+        <div className="text-quaternary small mt-1">
           {translate('Matched user: {name}', {
             name: row.invited_user_name,
           })}

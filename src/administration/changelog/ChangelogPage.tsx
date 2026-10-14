@@ -57,7 +57,7 @@ const RiskCell = ({ row }: { row: ChangelogEntry }) => {
 
 const TitleCell = ({ row }: { row: ChangelogEntry }) => (
   <div>
-    <span className="fw-bold">{row.title}</span>
+    <span className="font-medium">{row.title}</span>
     {row.highlight && (
       <Badge variant="primary" shape="pill" className="ms-2">
         {translate('Key')}

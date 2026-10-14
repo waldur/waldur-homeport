@@ -43,7 +43,7 @@ export const RabbitMQQueueConfigPopover: FC<
     queue.queue_mode != null;
 
   if (!hasAnyConfig) {
-    return <span className="text-muted">-</span>;
+    return <span className="text-quaternary">-</span>;
   }
 
   const configItems: { label: string; value: string }[] = [];
@@ -113,14 +113,14 @@ export const RabbitMQQueueConfigPopover: FC<
 
   const popoverContent = (
     <>
-      <div className="mb-2 fw-bold">{translate('Queue configuration')}</div>
+      <div className="mb-2 font-medium">{translate('Queue configuration')}</div>
       <div>
         <table className="table table-sm table-borderless mb-0">
           <tbody>
             {configItems.map((item, index) => (
               <tr key={index}>
-                <td className="text-muted pe-3">{item.label}</td>
-                <td className="fw-semibold">
+                <td className="text-quaternary pe-3">{item.label}</td>
+                <td className="font-semibold">
                   <code>{item.value}</code>
                 </td>
               </tr>

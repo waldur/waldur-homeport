@@ -236,7 +236,7 @@ const MyAction = ({ resource }) => {
 
 **Visual requirements**:
 
-- Disabled buttons use design token colors (e.g., `text-muted`, `btn-disabled`) - NOT opacity
+- Disabled buttons use design token colors (e.g., `--text-disabled`, the `--btn-*-disabled` tokens) - NOT opacity
 - Opacity is reserved for overlays only; components use solid colors for predictability, accessibility, and theming
 - Keep the same width to prevent layout shift
 - Use `aria-disabled` for accessibility
@@ -308,7 +308,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 {
   loading && data.length > 0 && (
     <div className="text-center py-2">
-      <LoadingSpinnerIcon className="text-muted" />
+      <LoadingSpinnerIcon className="text-quaternary" />
     </div>
   );
 }
@@ -670,18 +670,37 @@ import { StateIndicator } from '@/core/StateIndicator';
 **Custom variants** (for differentiation within same category):
 `pink`, `blue`, `teal`, `indigo`, `purple`, `rose`, `orange`, `moss`
 
+### 7.3 Status Colours Outside a Component
+
+Prefer `StateIndicator`, `Badge`, `AlertItem` or `FeaturedIcon` with a `variant`: they already
+read the status matrix. When a custom element has to carry a state colour (a banner, a
+highlighted row, a validation message), use the matrix tokens, never a raw ramp step:
+
+```tsx
+// Good - adapts to dark mode, contrast-checked on every surface
+<div className="bg-warning-subtle text-warning">…</div>
+<span className="text-danger">{error}</span>
+<div className="border-[1px] border-danger-subtle">…</div>
+
+// Bad - needs a dark: twin, unchecked contrast, drifts from Badge/AlertItem
+<div className="bg-warning-50 text-warning-700 dark:bg-warning-900">…</div>
+```
+
+| Slot                       | Use                                                  |
+| -------------------------- | ---------------------------------------------------- |
+| `--status-{intent}-bg`     | Tinted surface                                       |
+| `--status-{intent}-border` | Subtle border                                        |
+| `--status-{intent}-solid`  | Saturated fill or focus ring                         |
+| `--status-{intent}-fg`     | Text, icons and dots, on a neutral surface or on -bg |
+
+`{intent}` is `success`, `warning` or `danger` (`neutral` has `-bg` and `-fg`). The
+`waldur-custom/no-raw-status-ramp` lint rule reports raw `success-N` / `warning-N` / `error-N`
+utilities. Details and values:
+[design-tokens.md § State colours](design-tokens.md).
+
 ---
 
 ## 8. Tooltips
-
-> **Stale examples below**: `@/core/Tooltip` and its `Tip` export no longer
-> exist — the current component is `Tooltip` from `waldur-ui`, and its
-> actual prop API (`label`, `side`, `alwaysMount`, `trigger`, wrapping the
-> triggering element as `children`) differs from the `id`/`body`/`theme`
-> props shown in 8.1 and 8.2 below. For a disabled button specifically,
-> prefer `BaseButton`'s own `disabledReason` prop (see 2.2) over wrapping it
-> in a separate `Tooltip` — it already handles the disabled-only visibility
-> and keeps the DOM structure stable across enabled/disabled toggles.
 
 ### 8.0 Icons that carry a tooltip
 
@@ -714,45 +733,77 @@ Use tooltips for:
 - **Icons without labels**: Describe the element's purpose
 - **Complex terms**: Provide definitions
 
+When the tooltip explains a control or an icon, its trigger must be focusable,
+so it opens on keyboard focus too and screen readers can reach it. Prefer a
+component that already does this over wrapping something yourself:
+
 ```tsx
-import { Tip } from '@/core/Tooltip';
+import { CopyIcon } from '@phosphor-icons/react';
+import { BaseButton, HelpIcon, Tooltip } from 'waldur-ui';
 
-// Basic tooltip
-<Tip label={translate('Copy to clipboard')} id="copy-btn">
-  <CopyIcon />
-</Tip>
+// Icon-only button: BaseButton's own `tooltip`. With no visible label it is
+// also the button's accessible name.
+<BaseButton
+  variant="tertiary"
+  iconNode={<CopyIcon weight="bold" />}
+  tooltip={translate('Copy to clipboard')}
+  onClick={copy}
+/>
 
-// Tooltip with body (title + description)
-<Tip
+// Explaining a field or term: HelpIcon, a focusable "?" button.
+// Extra Tooltip props (title + description) go in tooltipProps.
+<HelpIcon
   label={translate('Resource limits')}
-  body={translate('Maximum amount of resources that can be allocated.')}
-  id="limits-info"
->
-  <InfoIcon />
-</Tip>
+  tooltipProps={{
+    body: translate('Maximum amount of resources that can be allocated.'),
+  }}
+/>
 
-// Light theme tooltip
-<Tip label={fullText} id="text-tooltip" theme="light">
+// Truncated text: wrap the text itself; the full value is in the tooltip.
+<Tooltip label={fullText}>
   <span className="ellipsis">{truncatedText}</span>
-</Tip>
+</Tooltip>
 ```
+
+Wrap something in `Tooltip` directly only when it is already focusable (a
+link, a button) or is text, as above. Never wrap a bare icon: see 8.0.
+`Tooltip` also takes `side`, `theme` (`'dark'`, the default, inverts against
+the page; `'light'` stays a dark bubble in both themes), `autoWidth`,
+`trigger="click"` and `alwaysMount`.
 
 ### 8.2 Disabled Element Tooltip Pattern
 
-From `ActionItem` - use question icon for disabled action explanation:
+A disabled control takes no pointer events, so a tooltip wrapped around it
+never opens. Use the component's own prop instead:
 
 ```tsx
-import { QuestionIcon } from '@phosphor-icons/react';
+// Disabled button: BaseButton shows disabledReason as its tooltip while
+// disabled, and keeps the same DOM structure across enabled/disabled
+// toggles (no remount, no lost focus).
+<BaseButton
+  variant="primary"
+  label={translate('Submit')}
+  disabled={!canSubmit}
+  disabledReason={translate('Fill in all required fields first')}
+  onClick={submit}
+/>
 
-// When action is disabled, show question icon with tooltip
-{
-  props.disabled && props.tooltip && (
-    <Tip label={props.tooltip} id={`disabled-reason-${id}`}>
-      <QuestionIcon size={20} weight="bold" className="text-muted ms-1" />
-    </Tip>
-  );
-}
+// Disabled menu action: ActionItem takes `disabled` and `tooltip`, and
+// shows the reason as an icon beside the row. The icon is aria-hidden: the
+// row itself carries the reason through aria-describedby, because a menu row
+// cannot contain a second focusable control.
+<ActionItem
+  title={translate('Delete')}
+  action={remove}
+  disabled={!canDelete}
+  tooltip={translate('Only an organization owner can delete it')}
+/>
 ```
+
+Do not hand-roll the `ActionItem` icon elsewhere: outside a menu row, use
+`HelpIcon` beside the control (8.0), which is focusable and named. The
+`enforce-disabled-button-tooltip` lint rule requires a reason on a disabled
+`BaseButton`.
 
 ---
 
@@ -807,7 +858,7 @@ translate('{count} item', '{count} items', { count });
 <button
   aria-disabled={isDisabled}
   onClick={!isDisabled ? handleClick : undefined}
-  className={isDisabled ? 'text-muted' : ''}
+  className={isDisabled ? 'text-[var(--text-disabled)]' : ''}
 >
   {label}
 </button>

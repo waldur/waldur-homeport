@@ -265,7 +265,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
       subtitle={field.help_text}
       secondary
       defaultOpen
-      className={classNames('bg-gray-50', className)}
+      className={classNames('bg-secondary', className)}
       actions={
         <ActionsMenu
           variant="secondary"
@@ -408,7 +408,7 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
             equalColWidth
             fullWidth
             cardBordered={false}
-            className="bg-gray-50 mt-n5 pb-0"
+            className="bg-secondary mt-n5 pb-0"
             rowActions={({ row }) => (
               <ActionsMenu>
                 <ActionItem

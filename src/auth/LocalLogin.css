@@ -16,11 +16,11 @@
    collapsed until this is clicked. Styling it as a filled primary CTA inverts
    that hierarchy. */
 .login-with-local-account-button {
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   font-size: 12px;
   line-height: 15px;
   text-decoration: underline;
-  color: var(--waldur-brand-color);
+  color: var(--brand-color);
   margin-bottom: 1rem;
   border: 0;
   background: transparent;

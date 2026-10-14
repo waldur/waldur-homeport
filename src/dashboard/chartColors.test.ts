@@ -16,7 +16,7 @@ const RAMP_VARS: Record<string, string> = {
   '--color-gray-200': '#000200',
   '--color-gray-300': '#000300',
   '--color-gray-500': '#000500',
-  '--color-gray-700': '#000700',
+  '--color-gray-900': '#000900',
   '--color-success-600': '#016000',
   '--color-warning-600': '#026000',
   '--color-warning-400': '#024000',
@@ -46,19 +46,19 @@ describe('getChartThemeColors', () => {
     expect(colors.info).toBe('#046000');
   });
 
-  it('falls back to the gray ramp when a Bootstrap variable is missing', () => {
+  it('falls back to the gray ramp when a surface token is missing', () => {
     setRamps();
     const colors = getChartThemeColors();
     expect(colors.neutral).toBe('#000300');
     expect(colors.track).toBe('#000200');
     expect(colors.muted).toBe('#000500');
-    expect(colors.text).toBe('#000700');
+    expect(colors.text).toBe('#000900');
     expect(colors.border).toBe('#000200');
   });
 
-  it('prefers the Bootstrap variable when it is defined', () => {
+  it('prefers the surface token when it is defined', () => {
     setRamps();
-    root.style.setProperty('--bs-border-color', '#123456');
+    root.style.setProperty('--border-secondary', '#123456');
     expect(getChartThemeColors().border).toBe('#123456');
   });
 

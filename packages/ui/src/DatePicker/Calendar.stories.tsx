@@ -106,9 +106,7 @@ export const WeekdayNamesFitInEveryLocale: Story = {
     <div className="flex flex-wrap gap-[16px]">
       {LOCALES.map(([name, locale]) => (
         <div key={name}>
-          <div className="px-[24px] text-[12px] text-[var(--surface-text-muted)]">
-            {name}
-          </div>
+          <div className="px-[24px] text-[12px] text-quinary">{name}</div>
           <Calendar
             mode="single"
             defaultMonth={june15}

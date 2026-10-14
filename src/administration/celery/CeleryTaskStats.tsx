@@ -114,7 +114,9 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
             orderField: 'count',
             className: 'text-end',
             render: ({ row }) => (
-              <span className="fw-semibold">{row.count.toLocaleString()}</span>
+              <span className="font-semibold">
+                {row.count.toLocaleString()}
+              </span>
             ),
           },
           {
@@ -124,7 +126,7 @@ export const CeleryTaskStats = ({ total }: CeleryTaskStatsProps) => {
               const percentage = ((row.count / totalCount) * 100).toFixed(1);
               return (
                 <div className="d-flex align-items-center justify-content-end">
-                  <span className="text-muted me-2">{percentage}%</span>
+                  <span className="text-quaternary me-2">{percentage}%</span>
                   <div style={{ width: '50px' }}>
                     <Progress size="sm" value={Number(percentage)} />
                   </div>

@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 // the theme (a hex literal) stands out.
 vi.mock('waldur-design-tokens', () => ({
   getCssVar: (name: string) => name,
-  getBrandVar: (step: number) => `--waldur-brand-${step}`,
+  getBrandVar: (step: number) => `--brand-${step}`,
 }));
 
 import { getMermaidThemeVariables } from './mermaidTheme';
@@ -37,10 +37,8 @@ describe('getMermaidThemeVariables', () => {
   });
 
   it('takes the background from the card surface in both themes', () => {
-    expect(getMermaidThemeVariables(false).background).toBe(
-      '--surface-card-bg',
-    );
-    expect(getMermaidThemeVariables(true).background).toBe('--surface-card-bg');
+    expect(getMermaidThemeVariables(false).background).toBe('--card-bg');
+    expect(getMermaidThemeVariables(true).background).toBe('--card-bg');
   });
 
   it('flags the dark theme', () => {

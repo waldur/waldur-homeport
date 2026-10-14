@@ -109,7 +109,7 @@ export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
           {
             title: translate('Arrow State'),
             render: ({ row }) => (
-              <span className="text-muted">{row.arrow_state}</span>
+              <span className="text-quaternary">{row.arrow_state}</span>
             ),
           },
           {

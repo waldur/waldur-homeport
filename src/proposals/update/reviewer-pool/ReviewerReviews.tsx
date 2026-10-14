@@ -17,7 +17,7 @@ export const ReviewerReviews: FC<ReviewerReviewsProps> = ({ row }) => {
   const total = inProgress + completed;
 
   if (total === 0) {
-    return <span className="text-muted">-</span>;
+    return <span className="text-quaternary">-</span>;
   }
 
   return (

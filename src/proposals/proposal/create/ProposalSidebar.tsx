@@ -87,7 +87,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
       {props.editable && (
         <>
           {props.canSubmitProposal === false ? (
-            <p className="text-muted mb-0" data-testid="submit-by-manager">
+            <p className="text-quaternary mb-0" data-testid="submit-by-manager">
               {translate('Only a proposal manager can submit the proposal.')}
             </p>
           ) : (

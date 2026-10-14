@@ -5,8 +5,8 @@
   flex-direction: column;
   height: 100%;
   min-height: 0;
-  background: $bg-primary;
-  color: $text-primary;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   font-family: $font-family-sans-serif;
 
   // $card-px is the drawer header + tab strip inset, so the search box,
@@ -39,11 +39,11 @@
     text-align: start;
 
     &:hover {
-      background: $bg-secondary;
+      background: var(--bg-secondary);
     }
 
     &.active {
-      background: $bg-secondary;
+      background: var(--bg-secondary);
     }
   }
 
@@ -82,15 +82,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: $font-size-lg;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     line-height: 1.4;
-    color: $text-secondary;
+    color: var(--text-secondary);
   }
 
   .tc-row-time {
     flex: 0 0 auto;
     font-size: $font-size-sm;
-    color: $text-quaternary;
+    color: var(--text-quaternary);
     font-variant-numeric: tabular-nums;
   }
 
@@ -105,7 +105,7 @@
     min-width: 0;
     font-size: $font-size-lg;
     line-height: 1.4;
-    color: $text-quaternary;
+    color: var(--text-quaternary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -145,9 +145,9 @@
     // Fixed box around the px-sized file glyph.
     width: 32px;
     height: 32px;
-    border: 1px solid $border-secondary;
+    border: 1px solid var(--border-secondary);
     border-radius: $border-radius;
-    color: $fg-tertiary;
+    color: var(--text-tertiary);
   }
 
   .tc-row-file-meta {
@@ -160,26 +160,26 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-weight: 500;
-    color: $text-secondary;
+    font-weight: var(--font-weight-medium);
+    color: var(--text-secondary);
   }
 
   .tc-row-file-size {
-    color: $text-quaternary;
+    color: var(--text-quaternary);
   }
 
   .tc-row.unread .tc-row-title,
   .tc-row.unread .tc-row-preview {
-    color: $text-primary;
+    color: var(--text-primary);
   }
 
   .tc-row.unread .tc-row-title {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   .tc-row-muted {
     flex: 0 0 auto;
-    color: $fg-disabled;
+    color: var(--text-quinary);
   }
 
   // Unread count: a soft pill that follows the deployment brand colour.
@@ -192,17 +192,17 @@
     align-items: center;
     justify-content: center;
     border-radius: 1.23rem;
-    background: $bg-brand-primary;
-    border: 1px solid $border-brand;
-    color: $text-brand-secondary;
+    background: var(--bg-brand-primary);
+    border: 1px solid var(--border-brand);
+    color: var(--text-brand-secondary);
     font-size: $font-size-sm;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     font-variant-numeric: tabular-nums;
 
     &.mention {
-      background: $bg-error-primary;
-      border-color: $border-error;
-      color: $text-error-primary;
+      background: var(--status-danger-bg);
+      border-color: var(--status-danger-border);
+      color: var(--status-danger-fg);
     }
   }
 
@@ -213,7 +213,7 @@
     align-items: center;
     gap: 0.923rem;
     padding: 0.923rem $card-px;
-    border-bottom: 1px solid $border-secondary;
+    border-bottom: 1px solid var(--border-secondary);
 
     .symbol {
       flex-shrink: 0;
@@ -234,14 +234,14 @@
     border: 0;
     border-radius: 99px;
     background: transparent;
-    color: $text-secondary;
+    color: var(--text-secondary);
     font-size: $font-size-lg;
     white-space: nowrap;
 
     &:hover,
     &[aria-describedby] {
-      background: $bg-secondary;
-      color: $text-primary;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
     }
   }
 
@@ -266,11 +266,11 @@
     cursor: pointer;
 
     &:hover {
-      background: $bg-secondary;
+      background: var(--bg-secondary);
     }
 
     &.active {
-      background: $bg-brand-secondary;
+      background: var(--bg-brand-secondary);
     }
   }
 
@@ -318,13 +318,13 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: $border-secondary;
+      background: var(--border-secondary);
     }
 
     span {
       font-size: $font-size-lg;
-      font-weight: 500;
-      color: $fg-tertiary;
+      font-weight: var(--font-weight-medium);
+      color: var(--text-tertiary);
     }
   }
 
@@ -336,7 +336,7 @@
     justify-content: center;
     gap: 0.462rem;
     font-size: $font-size-sm;
-    color: $fg-tertiary;
+    color: var(--text-tertiary);
   }
 
   .tc-msg {
@@ -389,13 +389,13 @@
     gap: 0.462rem;
     margin-bottom: 2px;
     font-size: $font-size-base;
-    font-weight: 600;
-    color: $text-primary;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
 
     .tc-msg-when {
       font-size: 0.808rem;
-      font-weight: 500;
-      color: $fg-disabled;
+      font-weight: var(--font-weight-medium);
+      color: var(--text-quinary);
       font-variant-numeric: tabular-nums;
     }
   }
@@ -403,7 +403,7 @@
   .tc-msg-receipt {
     width: 14px;
     height: 14px;
-    color: $fg-success-secondary;
+    color: var(--status-success-fg);
     flex-shrink: 0;
   }
 
@@ -417,18 +417,18 @@
     width: max-content;
     max-width: 90%;
     padding: 0.615rem 1.23rem;
-    border: 1px solid $border-secondary;
+    border: 1px solid var(--border-secondary);
     border-radius: 0 $border-radius-xl $border-radius-xl $border-radius-xl;
-    background: $bg-secondary;
-    color: $text-primary;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     font-size: $font-size-lg;
     line-height: 1.5;
     overflow-wrap: break-word;
     white-space: pre-wrap;
 
     a {
-      color: $text-brand-secondary;
-      font-weight: 500;
+      color: var(--text-brand-secondary);
+      font-weight: var(--font-weight-medium);
     }
 
     img,
@@ -439,9 +439,9 @@
   }
 
   .tc-msg.mine .tc-bubble {
-    background: $bg-primary;
+    background: var(--bg-primary);
     border-radius: $border-radius-xl 0 $border-radius-xl $border-radius-xl;
-    color: $text-primary;
+    color: var(--text-primary);
   }
 
   // Media renders flush: no tinted padding/border framing the picture.
@@ -454,12 +454,12 @@
   }
 
   .tc-msg.mentions-me .tc-bubble {
-    background: rgba($warning-500, 0.12);
+    @include mirrored-ramp-color(background, warning, 500, 0.12);
   }
 
   // A reply's parent was jumped to.
   .tc-msg.is-highlighted .tc-bubble {
-    box-shadow: 0 0 0 2px $border-brand;
+    box-shadow: 0 0 0 2px var(--border-brand);
     transition: box-shadow 0.2s ease;
   }
 
@@ -475,10 +475,10 @@
     margin-bottom: 0.462rem;
     padding: 0.308rem 0.615rem;
     border: 0;
-    border-inline-start: 3px solid $border-brand;
+    border-inline-start: 3px solid var(--border-brand);
     border-radius: $border-radius-sm;
-    background: $bg-tertiary;
-    color: $text-secondary;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
     font-size: $font-size-base;
     line-height: 1.4;
     text-align: start;
@@ -488,19 +488,19 @@
       cursor: pointer;
 
       &:hover {
-        background: $bg-quaternary;
+        background: var(--bg-quaternary);
       }
     }
 
     &.is-unavailable {
-      border-inline-start-color: $border-primary;
+      border-inline-start-color: var(--border-primary);
       font-style: italic;
     }
   }
 
   .tc-reply-quote__sender {
-    font-weight: 600;
-    color: $text-primary;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
   }
 
   .tc-reply-quote__text {
@@ -514,7 +514,7 @@
     display: inline-block;
     margin-inline-start: 0.308rem;
     font-size: $font-size-sm;
-    color: $text-tertiary;
+    color: var(--text-tertiary);
   }
 
   .tc-msg-editor {
@@ -526,17 +526,17 @@
   .tc-msg-editor__input {
     width: 100%;
     padding: 0.308rem 0.462rem;
-    border: 1px solid $border-primary;
+    border: 1px solid var(--border-primary);
     border-radius: $border-radius;
-    background: $bg-primary;
-    color: $text-primary;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     font-size: $font-size-lg;
     line-height: 1.5;
     resize: vertical;
 
     &:focus {
       outline: 0;
-      border-color: $border-brand;
+      border-color: var(--border-brand);
     }
   }
 
@@ -559,9 +559,9 @@
       place-items: center;
       width: 32px;
       height: 32px;
-      border: 1px solid $border-secondary;
+      border: 1px solid var(--border-secondary);
       border-radius: $border-radius;
-      color: $fg-tertiary;
+      color: var(--text-tertiary);
 
       svg {
         width: 16px;
@@ -576,7 +576,7 @@
     }
 
     .tc-file-card__name {
-      font-weight: 500;
+      font-weight: var(--font-weight-medium);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -584,7 +584,7 @@
 
     .tc-file-card__size {
       font-size: $font-size-sm;
-      color: $text-secondary;
+      color: var(--text-secondary);
       font-variant-numeric: tabular-nums;
     }
   }
@@ -605,12 +605,12 @@
     padding: 0;
     border: 0;
     border-radius: 50%;
-    background: $bg-brand-solid;
+    background: var(--bg-brand-solid);
     color: $white;
     cursor: pointer;
 
     &:hover {
-      background: $brand-700;
+      background: var(--btn-primary-bg-hover);
     }
 
     svg {
@@ -636,18 +636,18 @@
     flex: 1;
     min-width: 2px;
     border-radius: 99px;
-    background: $border-primary;
+    background: var(--border-primary);
     transition: background 0.1s ease;
 
     &.is-played {
-      background: $bg-brand-solid;
+      background: var(--bg-brand-solid);
     }
   }
 
   .tc-voice__time {
     flex-shrink: 0;
     font-size: $font-size-sm;
-    color: $text-secondary;
+    color: var(--text-secondary);
     font-variant-numeric: tabular-nums;
   }
 
@@ -665,19 +665,19 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: $danger-500;
+    @include mirrored-ramp-color(background, error, 500);
     animation: tc-voice-pulse 1.2s ease-in-out infinite;
   }
 
   .tc-voice-recorder__time {
     font-variant-numeric: tabular-nums;
-    font-weight: 600;
-    color: $text-primary;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
   }
 
   .tc-voice-recorder__label {
     font-size: $font-size-sm;
-    color: $text-secondary;
+    color: var(--text-secondary);
   }
 
   .tc-msg-reactions {
@@ -698,9 +698,9 @@
     gap: 0.308rem;
     padding: 2px 0.615rem;
     border-radius: 99px;
-    background: $bg-primary;
-    color: $text-primary;
-    border: 1px solid $border-primary;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
     font-size: 0.923rem;
     line-height: 1.6;
     cursor: pointer;
@@ -710,22 +710,22 @@
 
     &:hover,
     &:focus-visible {
-      border-color: $border-brand-solid;
+      border-color: var(--border-brand-solid);
     }
 
     &.is-mine {
-      background: $bg-brand-secondary;
-      color: $text-brand-primary;
-      border-color: $border-brand-solid;
+      background: var(--bg-brand-secondary);
+      color: var(--text-brand-primary);
+      border-color: var(--border-brand-solid);
     }
   }
 
   .tc-msg-reactions__count {
-    font-weight: 600;
-    color: $text-secondary;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
 
     .is-mine & {
-      color: $text-brand-primary;
+      color: var(--text-brand-primary);
     }
   }
 
@@ -742,8 +742,8 @@
     align-items: center;
     gap: 2px;
     padding: 0.308rem;
-    background: $bg-primary;
-    border: 1px solid $border-primary;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
     border-radius: 99px;
     box-shadow:
       0 4px 14px rgba(0, 0, 0, 0.08),
@@ -763,9 +763,9 @@
       left: 18px;
       width: 10px;
       height: 10px;
-      background: $bg-primary;
-      border-right: 1px solid $border-primary;
-      border-bottom: 1px solid $border-primary;
+      background: var(--bg-primary);
+      border-right: 1px solid var(--border-primary);
+      border-bottom: 1px solid var(--border-primary);
       transform: rotate(45deg);
       pointer-events: none;
     }
@@ -799,8 +799,8 @@
       top: -5px;
       border-right: none;
       border-bottom: none;
-      border-left: 1px solid $border-primary;
-      border-top: 1px solid $border-primary;
+      border-left: 1px solid var(--border-primary);
+      border-top: 1px solid var(--border-primary);
     }
 
     &::before {
@@ -830,7 +830,7 @@
     padding: 0;
     border: 0;
     background: transparent;
-    color: $text-primary;
+    color: var(--text-primary);
     cursor: pointer;
     border-radius: 99px;
     font-size: 1.154rem;
@@ -840,7 +840,7 @@
       transform 0.12s ease;
 
     &:hover {
-      background: $bg-secondary;
+      background: var(--bg-secondary);
       transform: scale(1.08);
     }
 
@@ -849,13 +849,13 @@
     }
 
     &.is-active {
-      background: $bg-brand-secondary;
+      background: var(--bg-brand-secondary);
     }
 
     svg {
       width: 14px;
       height: 14px;
-      color: $text-secondary;
+      color: var(--text-secondary);
       pointer-events: none;
     }
   }
@@ -863,18 +863,18 @@
   .tc-msg-reactions-toolbar__divider {
     width: 1px;
     height: 16px;
-    background: $border-primary;
+    background: var(--border-primary);
     margin: 0 2px;
     pointer-events: none;
   }
 
   .tc-msg-reactions-toolbar__more {
-    color: $text-secondary;
+    color: var(--text-secondary);
 
     &:hover {
-      background: $bg-secondary;
+      background: var(--bg-secondary);
       transform: none;
-      color: $text-primary;
+      color: var(--text-primary);
     }
   }
 
@@ -934,9 +934,9 @@
   .tc-composer {
     display: flex;
     flex-direction: column;
-    border: 1px solid $border-primary;
+    border: 1px solid var(--border-primary);
     border-radius: $border-radius;
-    background: $bg-primary;
+    background: var(--bg-primary);
     box-shadow: $box-shadow-xs;
     overflow: hidden;
   }
@@ -946,8 +946,8 @@
     align-items: center;
     gap: 0.615rem;
     padding: 0.462rem 0.923rem;
-    border-bottom: 1px solid $border-primary;
-    background: $bg-secondary;
+    border-bottom: 1px solid var(--border-primary);
+    background: var(--bg-secondary);
   }
 
   .tc-composer-reply__body {
@@ -956,19 +956,19 @@
     display: flex;
     flex-direction: column;
     padding-inline-start: 0.615rem;
-    border-inline-start: 3px solid $border-brand;
+    border-inline-start: 3px solid var(--border-brand);
     font-size: $font-size-base;
     line-height: 1.4;
   }
 
   .tc-composer-reply__title {
-    font-weight: 600;
-    color: $text-primary;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
   }
 
   .tc-composer-reply__text {
     overflow: hidden;
-    color: $text-secondary;
+    color: var(--text-secondary);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -986,10 +986,10 @@
     position: absolute;
     right: 0.462rem;
     top: 0.462rem;
-    color: $text-secondary;
+    color: var(--text-secondary);
 
     &:hover:not(:disabled) {
-      color: $text-brand-primary;
+      color: var(--text-brand-primary);
     }
   }
 
@@ -998,8 +998,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.308rem 0.769rem;
-    border-top: 1px solid $border-primary;
-    background: $bg-secondary;
+    border-top: 1px solid var(--border-primary);
+    background: var(--bg-secondary);
   }
 
   .tc-composer-button {
@@ -1010,8 +1010,8 @@
     border: 0;
     border-radius: $border-radius;
     background: transparent;
-    color: $text-secondary;
-    font-weight: 500;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
 
     svg {
       width: 1.25rem;
@@ -1019,19 +1019,19 @@
     }
 
     &:hover:not(:disabled) {
-      background: $bg-tertiary;
+      background: var(--bg-tertiary);
     }
 
     &:disabled {
-      color: $text-disabled;
+      color: var(--text-disabled);
       cursor: not-allowed;
     }
 
     &.send {
-      color: $brand-700;
+      color: var(--text-brand-secondary);
 
       &:disabled {
-        color: $text-disabled;
+        color: var(--text-disabled);
       }
     }
   }
@@ -1045,8 +1045,8 @@
     overflow-y: auto;
     z-index: 10;
     padding: 0.308rem 0;
-    background: $bg-primary;
-    border: 1px solid $border-primary;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
     border-radius: $border-radius;
     box-shadow: $box-shadow;
   }
@@ -1060,7 +1060,7 @@
     border: 0;
     text-align: start;
     background: transparent;
-    color: $text-primary;
+    color: var(--text-primary);
     font-size: $font-size-base;
     line-height: 1.4;
     cursor: pointer;
@@ -1073,23 +1073,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: $bg-tertiary;
-      color: $text-secondary;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
       font-size: $font-size-sm;
-      font-weight: 600;
+      font-weight: var(--font-weight-semibold);
     }
 
     .tc-mention-item__name {
-      font-weight: 600;
+      font-weight: var(--font-weight-semibold);
     }
 
     &.is-active {
-      background: $bg-brand-solid;
-      color: $text-primary_on-brand;
+      background: var(--bg-brand-solid);
+      color: var(--text-primary-on-brand);
 
       .tc-mention-item__avatar {
         background: rgba(0, 0, 0, 0.15);
-        color: $text-primary_on-brand;
+        color: var(--text-primary-on-brand);
       }
     }
   }
@@ -1098,7 +1098,7 @@
   // self-mention is signalled by the whole-bubble tint (.tc-msg.mentions-me),
   // so the inline tag stays neutral.
   .tc-mention-tag {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   // Height mirrors the AI assistant composer (.aui-composer-input).
@@ -1110,14 +1110,14 @@
     padding: 0.308rem 2.462rem 0.308rem 0.462rem;
     border: 0;
     background: transparent;
-    color: $text-primary;
+    color: var(--text-primary);
     font-size: $font-size-lg;
     line-height: 1.5;
     resize: none;
     overflow-x: hidden;
 
     &::placeholder {
-      color: $text-placeholder;
+      color: var(--text-quaternary);
     }
 
     &:focus {
@@ -1125,7 +1125,7 @@
     }
 
     &:disabled {
-      color: $text-placeholder;
+      color: var(--text-quaternary);
     }
 
     @include media-breakpoint-down(lg) {
@@ -1142,7 +1142,7 @@
     justify-content: center;
     padding: 1.846rem;
     text-align: center;
-    color: $text-secondary;
+    color: var(--text-secondary);
   }
 }
 
@@ -1224,7 +1224,7 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  background: rgba($text-brand-primary, 0.06);
+  background: color-mix(in srgb, var(--text-brand-primary) 6%, transparent);
 }
 
 .tc-dropzone-card {
@@ -1233,14 +1233,14 @@
   align-items: center;
   gap: 0.615rem;
   padding: 1.846rem 2.462rem;
-  background: $bg-primary;
-  border: 2px dashed $text-brand-primary;
+  background: var(--bg-primary);
+  border: 2px dashed var(--text-brand-primary);
   border-radius: $border-radius-lg;
   box-shadow:
     0 6px 18px rgba(0, 0, 0, 0.1),
     0 1px 3px rgba(0, 0, 0, 0.04);
-  color: $text-brand-primary;
-  font-weight: 600;
+  color: var(--text-brand-primary);
+  font-weight: var(--font-weight-semibold);
 }
 
 // Staged-attachment chips sit inside the composer card, above the input row;
@@ -1250,7 +1250,7 @@
   flex-wrap: wrap;
   gap: 0.615rem;
   padding: 0.615rem 0.923rem;
-  border-bottom: 1px solid $border-secondary;
+  border-bottom: 1px solid var(--border-secondary);
 }
 
 @keyframes tc-voice-pulse {
@@ -1291,7 +1291,7 @@
 
   // Overlap, each notched out of the next with a ring in the surface colour.
   .symbol {
-    box-shadow: 0 0 0 1.5px $bg-primary;
+    box-shadow: 0 0 0 1.5px var(--bg-primary);
     border-radius: 50%;
   }
 
@@ -1309,7 +1309,7 @@
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: $text-quaternary;
+    background: var(--text-quaternary);
     animation: tc-typing-bounce 1.2s ease-in-out infinite;
 
     &:nth-child(2) {

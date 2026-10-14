@@ -119,7 +119,7 @@ export const AssignOfferingUserDialog: FC<{
               />
             ) : roles.length === 0 && !rolesLoading ? (
               <FormGroup label={translate('Role')} required>
-                <p className="text-muted mb-0">
+                <p className="text-quaternary mb-0">
                   {translate(
                     'No roles are available for this offering in your organization.',
                   )}

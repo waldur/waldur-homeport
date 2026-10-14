@@ -52,7 +52,7 @@ export const TelemetrySendingCard = () => {
           tooltip={translate(
             'Operators can force this off at deploy time with WALDUR_TELEMETRY_ENABLED=false, which overrides this setting.',
           )}
-          descriptionClassName="text-gray-600"
+          descriptionClassName="text-tertiary"
           value={<TelemetryExampleButton />}
           actions={
             canEdit ? (

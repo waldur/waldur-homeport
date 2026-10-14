@@ -269,11 +269,11 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   const hasLimitChangeRequest = hasResourceLimitChangeRequest(resource);
   return (
     <div className="container-fluid mt-6">
-      <Card className="card-bordered border-gray-300 border-dashed border-1 overflow-hidden">
+      <Card className="card-bordered border-divider-medium border-dashed border-1 overflow-hidden">
         <Card.Body className="d-flex flex-column flex-sm-row align-items-center gap-4">
           <ProgressSteps
             steps={steps}
-            bgClass="bg-body"
+            bgClass="bg-primary"
             className="flex-grow-1"
           />
 

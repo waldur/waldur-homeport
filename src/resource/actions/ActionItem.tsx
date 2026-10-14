@@ -19,20 +19,18 @@ export type ActionIconColor =
 
 // What Metronic's svg-icon-<colour> classes drew, in both themes (measured
 // in the app): the icon's paths take the span's colour (fill=currentColor).
+// The semantic roles switch with the theme; purple is a categorical hue with
+// no role, so it keeps its own dark step.
 const ICON_COLOR_CLASSNAMES: Record<ActionIconColor, string> = {
-  'gray-400':
-    'text-[var(--color-gray-400)] dark:text-[var(--color-gray-dark-500)]',
-  danger: 'text-[var(--color-error-600)] dark:text-[var(--color-error-400)]',
-  success:
-    'text-[var(--color-success-600)] dark:text-[var(--color-success-400)]',
-  warning:
-    'text-[var(--color-warning-600)] dark:text-[var(--color-warning-400)]',
-  info: 'text-[var(--color-purple-600)] dark:text-[var(--color-purple-300)]',
+  'gray-400': 'text-quinary',
+  danger: 'text-danger',
+  success: 'text-success',
+  warning: 'text-warning',
+  info: 'text-info',
 };
 
 // Bootstrap's text-dark, in both themes.
-const STAFF_ICON_CLASSNAME =
-  'ms-1 me-3 text-[var(--color-gray-900)] dark:text-[var(--color-gray-dark-50)]';
+const STAFF_ICON_CLASSNAME = 'ms-1 me-3 text-primary';
 
 export interface ActionItemProps {
   title: string;

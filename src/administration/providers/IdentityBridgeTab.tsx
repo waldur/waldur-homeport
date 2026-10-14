@@ -84,7 +84,9 @@ export const IdentityBridgeTab: FC = () => {
                     <td>
                       <span
                         className={
-                          isd.stale_user_count > 0 ? 'text-warning fw-bold' : ''
+                          isd.stale_user_count > 0
+                            ? 'text-warning font-medium'
+                            : ''
                         }
                       >
                         {isd.stale_user_count}

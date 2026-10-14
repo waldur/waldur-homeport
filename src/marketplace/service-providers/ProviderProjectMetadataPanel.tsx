@@ -38,7 +38,7 @@ export const ProviderProjectMetadataPanel = ({
                     answer={{ answer_data: item.answer } as unknown as Answer}
                   />
                   {item.modified && (
-                    <div className="text-muted small">
+                    <div className="text-quaternary small">
                       {translate('Last updated:')}{' '}
                       {formatDateTime(item.modified)}
                     </div>

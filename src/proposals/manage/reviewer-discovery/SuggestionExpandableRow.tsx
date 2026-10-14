@@ -60,7 +60,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
   if (topProposals.length === 0 && matchedKeywords.length === 0) {
     return (
       <ExpandableContainer className="p-4">
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate('No detailed match information available.')}
         </p>
       </ExpandableContainer>
@@ -72,7 +72,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
       {/* Matched Keywords Section */}
       {matchedKeywords.length > 0 && (
         <div className="mb-4">
-          <h6 className="fw-bold mb-3">
+          <h6 className="font-medium mb-3">
             {translate('Matched expertise keywords')}
           </h6>
           <div className="d-flex flex-wrap gap-2">
@@ -88,13 +88,13 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
       {/* Top Proposals Section */}
       {topProposals.length > 0 && (
         <div>
-          <h6 className="fw-bold mb-3">
+          <h6 className="font-medium mb-3">
             {translate('Best matching proposals')}
           </h6>
           <div className="table-responsive">
             <table className="table table-sm table-row-bordered">
               <thead>
-                <tr className="fw-bold text-muted">
+                <tr className="font-medium text-quaternary">
                   <th>{translate('Proposal')}</th>
                   <th className="text-center">{translate('Affinity')}</th>
                   <th className="text-center">{translate('COI status')}</th>
@@ -106,7 +106,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
                     <td>
                       <div>
                         {proposal.slug && (
-                          <span className="text-muted me-2">
+                          <span className="text-quaternary me-2">
                             {proposal.slug}:
                           </span>
                         )}
@@ -114,7 +114,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
                       </div>
                     </td>
                     <td className="text-center">
-                      <span className="fw-bold text-success">
+                      <span className="font-medium text-success">
                         {formatScore(proposal.affinity)}
                       </span>
                     </td>
@@ -131,8 +131,8 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
 
       {/* Source Type Info */}
       {row.source_type && (
-        <div className="mt-3 pt-3 border-top">
-          <small className="text-muted">
+        <div className="mt-3 pt-3 border-t-[1px] border-t-secondary">
+          <small className="text-quaternary">
             {translate('Match source')}:{' '}
             {row.source_type_display || row.source_type}
           </small>

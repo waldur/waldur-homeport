@@ -36,7 +36,7 @@ const ProviderOverviewContent: FC<{ providerUuid: string }> = ({
       <span style={{ fontSize: '32px' }}>{value}</span>
       {change !== undefined && (
         <span
-          className={`fs-7 fw-normal ${change >= 0 ? 'text-success' : 'text-danger'}`}
+          className={`fs-7 font-normal ${change >= 0 ? 'text-success' : 'text-danger'}`}
         >
           {change >= 0 ? '+' : ''}
           {change}

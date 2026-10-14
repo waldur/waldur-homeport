@@ -22,10 +22,10 @@ const formatEntryTimestamp = (date: Date): string => {
 };
 
 const StructuredEntry = ({ entry }: { entry: ParsedInternalNote }) => (
-  <div className="d-flex align-items-start gap-2 py-2 border-bottom border-gray-300 border-bottom-dashed">
+  <div className="d-flex align-items-start gap-2 py-2 border-b-[1px] border-divider-medium border-dashed">
     {entry.timestamp && (
       <div
-        className="text-muted small flex-shrink-0"
+        className="text-quaternary small flex-shrink-0"
         title={entry.timestamp.toISOString()}
         style={{ minWidth: '10ch' }}
       >

@@ -16,7 +16,7 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
     <Row className="g-4">
       {Boolean(row.plan) && (
         <Col md={5} xxl={4}>
-          <h6 className="text-gray-700 mb-3">
+          <h6 className="text-secondary mb-3">
             {translate('Resource template')}
           </h6>
           <Field
@@ -33,7 +33,7 @@ export const RuleExpandableRow: FC<RuleExpandableRowProps> = ({ row }) => (
         </Col>
       )}
       <Col xs={6}>
-        <h6 className="text-gray-700 mb-3">{translate('Attributes')}</h6>
+        <h6 className="text-secondary mb-3">{translate('Attributes')}</h6>
         <Field
           label={translate('Email patterns')}
           value={

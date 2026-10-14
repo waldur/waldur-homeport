@@ -275,7 +275,7 @@ export const TopologyLegend: FC<Props> = ({ nodeTypes, edgeStyles }) => {
     <div className="mt-4">
       {items.length > 0 ? (
         <>
-          <h6 className="text-muted text-uppercase fs-7 fw-bold mb-3">
+          <h6 className="text-quaternary text-uppercase fs-7 font-medium mb-3">
             {translate('Legend')}
           </h6>
           <div className="row g-3">
@@ -290,8 +290,8 @@ export const TopologyLegend: FC<Props> = ({ nodeTypes, edgeStyles }) => {
                     />
                   </div>
                   <div className="small">
-                    <div className="fw-bold">{item.label}</div>
-                    <div className="text-muted">{item.description}</div>
+                    <div className="font-medium">{item.label}</div>
+                    <div className="text-quaternary">{item.description}</div>
                   </div>
                 </div>
               </div>
@@ -301,7 +301,7 @@ export const TopologyLegend: FC<Props> = ({ nodeTypes, edgeStyles }) => {
       ) : null}
       {edgeItems.length > 0 ? (
         <>
-          <h6 className="text-muted text-uppercase fs-7 fw-bold mt-4 mb-3">
+          <h6 className="text-quaternary text-uppercase fs-7 font-medium mt-4 mb-3">
             {translate('Edges')}
           </h6>
           <div className="row g-3">
@@ -310,8 +310,8 @@ export const TopologyLegend: FC<Props> = ({ nodeTypes, edgeStyles }) => {
                 <div className="d-flex gap-3 align-items-center">
                   <EdgeSwatch kind={item.kind} />
                   <div className="small">
-                    <div className="fw-bold">{item.label}</div>
-                    <div className="text-muted">{item.description}</div>
+                    <div className="font-medium">{item.label}</div>
+                    <div className="text-quaternary">{item.description}</div>
                   </div>
                 </div>
               </div>

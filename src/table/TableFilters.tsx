@@ -54,7 +54,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
           {props.filtersStorage.map((item) => (
             <div
               key={item.name}
-              className="d-flex align-items-center flex-nowrap fw-bolder text-dark fs-7 gap-2"
+              className="d-flex align-items-center flex-nowrap font-semibold text-primary fs-7 gap-2"
             >
               {item.label}
               {item.component && <item.component />}

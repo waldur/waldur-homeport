@@ -42,7 +42,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
               shape="pill"
             />
           </div>
-          <p className="text-muted fs-7 mb-0">{call.customer_name}</p>
+          <p className="text-quaternary fs-7 mb-0">{call.customer_name}</p>
         </>
       }
       quickBody={

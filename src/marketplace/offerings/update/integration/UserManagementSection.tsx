@@ -66,7 +66,7 @@ const renderIdSource = (value: string) =>
   ) : (
     <div className="d-flex flex-column align-items-start">
       <span>{translate('POSIX ID pool')}</span>
-      <small className="text-muted">{translate('Default')}</small>
+      <small className="text-quaternary">{translate('Default')}</small>
     </div>
   );
 

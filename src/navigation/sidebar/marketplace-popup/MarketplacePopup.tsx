@@ -108,7 +108,7 @@ const MarketplacePopupForm: FC<{ categoryUuid?: string }> = ({
             </Col>
           </Row>
         </div>
-        <div className="border-bottom mx-7" />
+        <div className="border-b-[1px] border-b-secondary mx-7" />
         <DataLoader
           filter={filter}
           customer={values?.organization}

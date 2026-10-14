@@ -224,7 +224,7 @@ describe('TabbedSection', () => {
 
     await waitFor(() => {
       const tab2Link = screen.getByRole('tab', { name: /Tab 2/ });
-      expect(tab2Link).toHaveClass('text-muted');
+      expect(tab2Link).toHaveClass('text-quaternary');
       expect(tab2Link).toBeDisabled();
       expect(tab2Link).toHaveAttribute('aria-disabled', 'true');
     });

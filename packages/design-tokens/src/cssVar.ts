@@ -24,11 +24,11 @@ export function getCssVar(name: string, fallback = ''): string {
 export type BrandStep = keyof typeof DEFAULT_PRIMARY_COLORS;
 
 /**
- * `--waldur-brand-<step>`, the tenant's brand ramp that initBrandTokens() writes
+ * `--brand-<step>`, the tenant's brand ramp that initBrandTokens() writes
  * to <html> at bootstrap. Falls back to the same step of the default green
  * ramp when the variable is not there (a test, a page that never ran the
  * bootstrap), so callers do not need a hex copy of their own.
  */
 export function getBrandVar(step: BrandStep): string {
-  return getCssVar(`--waldur-brand-${step}`, DEFAULT_PRIMARY_COLORS[step]);
+  return getCssVar(`--brand-${step}`, DEFAULT_PRIMARY_COLORS[step]);
 }

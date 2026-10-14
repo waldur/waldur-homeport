@@ -30,7 +30,11 @@
     &:focus,
     &.focus {
       background-color: $input-solid-bg-focus;
-      border-color: if(isDarkMode(), $gray-400, $input-solid-bg-focus);
+      border-color: $input-solid-bg-focus;
+
+      @include dark-theme {
+        border-color: var(--border-divider-strong);
+      }
       color: $input-solid-color;
       transition: $transition-input;
     }
@@ -59,13 +63,13 @@
 
 // Placeholder colors
 .placeholder-gray-400 {
-  @include placeholder($gray-400);
+  @include placeholder(var(--text-quinary));
 }
 .placeholder-gray-500 {
-  @include placeholder($gray-500);
+  @include placeholder(var(--text-quaternary));
 }
 .placeholder-gray-700 {
-  @include placeholder($gray-700);
+  @include placeholder(var(--text-secondary));
 }
 .placeholder-white {
   @include placeholder($white);

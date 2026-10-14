@@ -39,14 +39,14 @@ export const OrganizationReviewStatus: FunctionComponent<
           <ClockCountdownIcon
             size={34}
             weight="bold"
-            className="text-gray-600"
+            className="text-tertiary"
           />
         </div>
 
-        <h3 className="mb-3 fw-bold">{translate('Review in progress')}</h3>
+        <h3 className="mb-3 font-medium">{translate('Review in progress')}</h3>
 
         <p
-          className="text-muted mb-6 fs-5"
+          className="text-quaternary mb-6 fs-5"
           style={{ maxWidth: '600px', margin: '0 auto' }}
         >
           {translate(
@@ -57,27 +57,27 @@ export const OrganizationReviewStatus: FunctionComponent<
         <div className="mb-6">
           <div className="text-center">
             <div className="mb-2">
-              <span className="fw-bold text-gray-700">
+              <span className="font-medium text-secondary">
                 {translate('Company')}:
               </span>{' '}
-              <span className="text-gray-500">{displayName}</span>
+              <span className="text-quaternary">{displayName}</span>
             </div>
             <div>
-              <span className="fw-bold text-gray-700">
+              <span className="font-medium text-secondary">
                 {translate('Submitted')}:
               </span>{' '}
-              <span className="text-gray-500">
+              <span className="text-quaternary">
                 {submittedAt} at {submittedTime}
               </span>
             </div>
           </div>
         </div>
 
-        <h4 className="mb-3 fw-bold">
+        <h4 className="mb-3 font-medium">
           {translate('Data storage information')}
         </h4>
         <p
-          className="text-muted mb-6 fs-5"
+          className="text-quaternary mb-6 fs-5"
           style={{ maxWidth: '600px', margin: '0 auto' }}
         >
           {translate(

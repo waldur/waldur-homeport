@@ -10,8 +10,8 @@ body {
     display: flex;
     align-items: center;
     font-size: 14px;
-    font-weight: bold;
-    color: $gray-700;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-secondary);
     margin: 0 $card-px;
     padding: $card-header-py 0;
   }
@@ -24,9 +24,9 @@ body {
       padding-left: $card-px;
       padding-right: $card-px;
       min-height: 48px;
-      color: $gray-900;
+      color: var(--text-primary);
       font-size: $font-size-lg;
-      background-color: $gray-50;
+      background-color: var(--bg-secondary);
     }
   }
 
@@ -54,15 +54,19 @@ body {
 
 /* LIST-GROUP & ITEMS */
 .list-group-item {
-  background-color: $dark-inverse;
+  background-color: var(--bg-primary);
+
+  @include dark-theme {
+    background-color: var(--bg-tertiary);
+  }
 
   &:hover {
-    background-color: $gray-200;
+    background-color: var(--bg-quaternary);
   }
   &.active {
-    color: $gray-900;
-    background-color: $gray-200;
-    border-color: $gray-200;
+    color: var(--text-primary);
+    background-color: var(--bg-quaternary);
+    border-color: var(--border-divider);
   }
 }
 
@@ -101,8 +105,8 @@ body {
 }
 
 .image-placeholder {
-  color: $gray-500;
-  background-color: $gray-100;
+  color: var(--text-quaternary);
+  background-color: var(--bg-tertiary);
 }
 
 /* Typography */
@@ -149,11 +153,11 @@ body {
   margin: 0;
   padding: 0;
   cursor: pointer;
-  color: $dark;
+  color: var(--text-primary);
   text-decoration: underline;
 
   &:hover {
-    color: $brand;
+    color: var(--text-brand-secondary);
     text-decoration: none;
   }
 }
@@ -174,15 +178,15 @@ body {
     transition: $transition-base;
   }
   &:disabled {
-    color: $text-disabled;
+    color: var(--text-disabled);
     cursor: not-allowed;
     text-decoration: none !important;
   }
 
   &.text-anchor-danger {
-    color: $text-error-primary;
+    color: var(--status-danger-fg);
     &:hover {
-      color: $text-error-primary;
+      color: var(--status-danger-fg);
     }
   }
 }

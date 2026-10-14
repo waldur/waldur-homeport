@@ -71,7 +71,7 @@ interface SummaryFieldProps {
 
 const SummaryField: React.FC<SummaryFieldProps> = ({ label, value }) => (
   <span>
-    <strong className="text-gray-700">{label}</strong>: {value}
+    <strong className="text-secondary">{label}</strong>: {value}
   </span>
 );
 
@@ -249,7 +249,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
 
   return (
     <div>
-      <div className="text-gray-500 mb-4">
+      <div className="text-quaternary mb-4">
         <SummaryField
           label={translate('Client organization')}
           value={props.params.customer_name}
@@ -300,7 +300,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
         )}
       </div>
       {/* Render User and Username for User usage report */}
-      <div className="text-gray-500 mb-4">
+      <div className="text-quaternary mb-4">
         {isUserUsage && (
           <>
             {teamError ? (
@@ -376,7 +376,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
               })}
             </TabsList>
             {wrappedComponents.length > 0 ? (
-              <div className="d-flex align-items-end border-bottom mb-4">
+              <div className="d-flex align-items-end border-b-[1px] border-b-secondary mb-4">
                 <div>
                   <Menu>
                     <div className="position-relative d-inline-flex">
@@ -449,7 +449,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                     {component.description && (
                       <div
                         id={`${component.type}-description`}
-                        className="text-muted mb-2"
+                        className="text-quaternary mb-2"
                       >
                         {component.description}
                       </div>

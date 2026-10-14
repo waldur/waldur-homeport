@@ -126,7 +126,7 @@ export const IssueDetailsTab = ({
               )}
             </p>
             {isStaffOrSupport && (
-              <p className="mb-0 text-muted">
+              <p className="mb-0 text-quaternary">
                 <small>
                   {translate('Staff info: No active RequestTypes found.')}
                 </small>

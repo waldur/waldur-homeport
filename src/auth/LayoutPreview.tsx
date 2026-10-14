@@ -11,10 +11,10 @@ export const LayoutPreview: React.FC<LayoutPreviewProps> = ({
   type,
   brandColor,
 }) => {
-  const bg = 'var(--bs-gray-200)';
-  const card = 'var(--waldur-bg-primary, #ffffff)';
-  const border = 'var(--bs-border-color, #dee2e6)';
-  const textMuted = 'var(--bs-gray-400)';
+  const bg = 'var(--bg-quaternary)';
+  const card = 'var(--bg-primary, #ffffff)';
+  const border = 'var(--border-secondary, #dee2e6)';
+  const textMuted = 'var(--text-quinary)';
 
   switch (type) {
     /* --- CLASSIC --- */

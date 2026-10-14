@@ -46,7 +46,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
       />
       <table className="table table-row-bordered table-hover align-middle mb-0">
         <thead>
-          <tr className="fw-bold text-muted">
+          <tr className="font-medium text-quaternary">
             <th style={{ width: 24 }} />
             <th>{translate('Room')}</th>
             <th>{translate('SID')}</th>
@@ -71,7 +71,7 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
                       <CaretRightIcon weight="bold" />
                     )}
                   </td>
-                  <td className="fw-bold">{room.name}</td>
+                  <td className="font-medium">{room.name}</td>
                   <td>
                     <code>{room.sid}</code>
                   </td>
@@ -89,7 +89,10 @@ export const LiveKitRoomsTable: FC<LiveKitRoomsTableProps> = ({ data }) => {
                 </tr>
                 {isOpen && (
                   <tr>
-                    <td colSpan={6} className="bg-light px-4 py-2">
+                    <td
+                      colSpan={6}
+                      className="bg-tertiary dark:bg-quaternary px-4 py-2"
+                    >
                       <LiveKitRoomDetails roomName={room.name} />
                     </td>
                   </tr>

@@ -13,9 +13,9 @@ export const SimpleTable = <T = any,>({
 }) => {
   return (
     <div className="table-responsive">
-      <Table className="table table-row-bordered table-row-gray-200 align-middle gs-0 gy-3 p-0 m-0 text-start text-gray-600">
+      <Table className="table table-row-bordered table-row-gray-200 align-middle gs-0 gy-3 p-0 m-0 text-start text-tertiary">
         <thead>
-          <tr className="fw-bold text-muted fs-7 gs-0">
+          <tr className="font-medium text-quaternary fs-7 gs-0">
             {columns.map((column, index) => (
               <th key={index} className={column.headerClassName}>
                 {column.title}

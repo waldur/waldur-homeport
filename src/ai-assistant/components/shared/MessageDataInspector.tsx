@@ -89,7 +89,10 @@ const InspectorSection: FC<InspectorSectionProps> = ({
         )}
       </div>
       {expanded && (
-        <pre id={panelId} className="p-2 rounded bg-light small mb-0 mt-1">
+        <pre
+          id={panelId}
+          className="p-2 rounded bg-tertiary dark:bg-quaternary small mb-0 mt-1"
+        >
           <code>{text}</code>
         </pre>
       )}

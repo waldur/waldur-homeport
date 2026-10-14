@@ -73,11 +73,13 @@ export const ComponentDiscountEditor: FunctionComponent<
   const canUseTierBuilder = parseFormulaToTiers(currentFormula) !== null;
 
   return (
-    <div className="mb-8 border-bottom pb-6">
+    <div className="mb-8 border-b-[1px] border-b-secondary pb-6">
       <div className="mb-3">
         <strong>{component.name}</strong>
         {component.measured_unit && (
-          <span className="text-muted ms-2">({component.measured_unit})</span>
+          <span className="text-quaternary ms-2">
+            ({component.measured_unit})
+          </span>
         )}
         <BillingTypeBadge component={component} className="ms-2" />
       </div>
@@ -96,13 +98,15 @@ export const ComponentDiscountEditor: FunctionComponent<
       {mode === 'tiers' ? (
         <>
           {tiers.length === 0 && (
-            <p className="text-muted mb-3">
+            <p className="text-quaternary mb-3">
               {translate('No discount — add a tier to grant one.')}
             </p>
           )}
           {tiers.map((tier, index) => (
             <div className="d-flex align-items-center gap-2 mb-2" key={index}>
-              <span className="text-muted">{translate('when usage ≥')}</span>
+              <span className="text-quaternary">
+                {translate('when usage ≥')}
+              </span>
               <input
                 type="number"
                 className="form-control"
@@ -118,7 +122,7 @@ export const ComponentDiscountEditor: FunctionComponent<
                 value={tier.percent}
                 onChange={(e) => updateTier(index, 'percent', e.target.value)}
               />
-              <span className="text-muted">{translate('% off')}</span>
+              <span className="text-quaternary">{translate('% off')}</span>
               <BaseButton
                 type="button"
                 variant="danger"
@@ -150,7 +154,7 @@ export const ComponentDiscountEditor: FunctionComponent<
             />
           </div>
           {tiers.length > 0 && (
-            <div className="d-flex align-items-center gap-2 mt-4 text-muted">
+            <div className="d-flex align-items-center gap-2 mt-4 text-quaternary">
               {translate('Preview: at usage')}
               <input
                 type="number"
@@ -176,7 +180,7 @@ export const ComponentDiscountEditor: FunctionComponent<
               />
             )}
           </Field>
-          <p className="text-muted mt-1 mb-2">
+          <p className="text-quaternary mt-1 mb-2">
             {translate(
               'Percentage discount as a function of the usage (bound to `usage`), clamped to 0-100. Functions: MIN, MAX, LN, LOG10, FLOOR, CEIL, POW, ABS.',
             )}

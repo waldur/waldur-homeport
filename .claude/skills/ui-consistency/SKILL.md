@@ -14,7 +14,9 @@ Ensures consistent, accessible UI across Waldur HomePort.
 ```tsx
 // ALWAYS use renderFieldOrDash - never || 'N/A' or || ''
 import { renderFieldOrDash } from '@/table/utils';
-{renderFieldOrDash(value)}
+{
+  renderFieldOrDash(value);
+}
 ```
 
 ### Disabled Buttons
@@ -24,7 +26,9 @@ import { renderFieldOrDash } from '@/table/utils';
 // disabledReason prop over wrapping it in a separate Tooltip
 <BaseButton
   disabled={disabled}
-  disabledReason={disabled ? translate('Resource must be in OK state') : undefined}
+  disabledReason={
+    disabled ? translate('Resource must be in OK state') : undefined
+  }
   label={translate('Action')}
 />
 ```
@@ -44,7 +48,7 @@ import { renderFieldOrDash } from '@/table/utils';
 
 ```tsx
 // Use solid color tokens - NEVER opacity
-className={isDisabled ? 'text-muted' : ''}  // correct
+className={isDisabled ? 'text-quaternary' : ''}  // correct
 className={isDisabled ? 'opacity-50' : ''}  // wrong
 ```
 
@@ -86,7 +90,7 @@ Before completing UI work, verify:
 - [ ] All null/undefined values use `renderFieldOrDash()`
 - [ ] Disabled buttons have tooltips explaining why
 - [ ] Empty states use `NoResult` with CTA
-- [ ] No `opacity-50` for disabled states (use `text-muted`)
+- [ ] No `opacity-50` for disabled states (use `text-quaternary`)
 - [ ] Permissions checked with `hasPermission()` utility
 - [ ] Buttons hidden (not disabled) when user permanently lacks access
 - [ ] Filter tables show filter toggle even when empty

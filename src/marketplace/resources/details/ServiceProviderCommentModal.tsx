@@ -20,10 +20,10 @@ export const ServiceProviderCommentModal: FC<
     >
       {commentUrl && (
         <div className="mb-4">
-          <div className="text-gray-700 fw-bold mb-2">
+          <div className="text-secondary font-medium mb-2">
             {translate('Service provider URL')}:
           </div>
-          <div className="text-gray-500">
+          <div className="text-quaternary">
             <a href={commentUrl} target="_blank" rel="noopener noreferrer">
               {commentUrl}
             </a>
@@ -31,10 +31,10 @@ export const ServiceProviderCommentModal: FC<
         </div>
       )}
       <div>
-        <div className="text-gray-700 fw-bold mb-2">
+        <div className="text-secondary font-medium mb-2">
           {translate('Comment')}:
         </div>
-        <div className="text-gray-500">
+        <div className="text-quaternary">
           <SafeMarkdown text={comment} />
         </div>
       </div>

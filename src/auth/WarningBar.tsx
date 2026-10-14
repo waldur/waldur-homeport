@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import { ReactNode, useContext } from 'react';
+
+import { LayoutWarningBar } from '@/navigation/LayoutWarningBar';
 
 import { PermissionContext } from './PermissionLayout';
 
@@ -16,25 +17,17 @@ export default function WarningBar() {
     'title' in banner
   )
     return (
-      <div
-        className={
-          permission === 'restricted'
-            ? 'layout-warning-bar bar-danger'
-            : 'layout-warning-bar bar-warning'
+      <LayoutWarningBar
+        variant={permission === 'restricted' ? 'danger' : 'warning'}
+        title={
+          banner.title && banner.message ? `${banner.title}:` : banner.title
         }
+        icon={null}
+        centered
+        className={banner?.options?.className}
       >
-        <div
-          className={classNames(
-            'w-100 text-center',
-            banner?.options?.className,
-          )}
-        >
-          <p className="mb-0 py-2">
-            <strong>{banner.title}</strong>
-            {Boolean(banner.title && banner.message) && ':'} {banner.message}
-          </p>
-        </div>
-      </div>
+        {banner.message}
+      </LayoutWarningBar>
     );
 
   return null;

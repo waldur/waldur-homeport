@@ -60,7 +60,7 @@ export const CustomerDashboardChart: FunctionComponent<
               cardTitle={
                 <>
                   {costChart.chart.title}
-                  <small className="text-muted fs-7 ms-4 fw-normal">
+                  <small className="text-quaternary fs-7 ms-4 font-normal">
                     ({translate('Current month’s cost')}:{' '}
                     {costChart.chart.current})
                   </small>

@@ -95,7 +95,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             <div ref={previewRef} className="symbol-label" />
           ) : (
             <ImagePlaceholder width={`${size}px`} height={`${size}px`} circle>
-              <div className="symbol-label fs-2 fw-bold w-100 h-100">
+              <div className="symbol-label fs-2 font-medium w-100 h-100">
                 {props.alt}
               </div>
             </ImagePlaceholder>
@@ -103,7 +103,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
         </div>
       </div>
       <div>
-        <p className="text-gray-700 fs-6">
+        <p className="text-secondary fs-6">
           {max !== Infinity
             ? translate('Upload an image JPG or PNG, under {maxSize}', {
                 maxSize: formatFilesize(max, 'B'),

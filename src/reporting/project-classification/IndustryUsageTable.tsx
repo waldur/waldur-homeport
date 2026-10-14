@@ -48,7 +48,7 @@ const tableColumns: Column<ClassificationUsageRow>[] = [
   {
     title: translate('Industry Category'),
     render: ({ row }) => (
-      <span className="fw-semibold">
+      <span className="font-semibold">
         {row.category === 'true'
           ? translate('Industry')
           : translate('Academic')}
@@ -61,11 +61,11 @@ const tableColumns: Column<ClassificationUsageRow>[] = [
   },
   {
     title: translate('Usage'),
-    render: ({ row }) => <span className="fw-bold">{row.usage}</span>,
+    render: ({ row }) => <span className="font-medium">{row.usage}</span>,
   },
   {
     title: translate('Limit'),
-    render: ({ row }) => <span className="text-muted">{row.limit}</span>,
+    render: ({ row }) => <span className="text-quaternary">{row.limit}</span>,
   },
 ];
 

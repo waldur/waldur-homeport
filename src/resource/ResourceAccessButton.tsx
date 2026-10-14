@@ -90,9 +90,9 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             // On the link, not the row: the row's classes go through
-            // tailwind-merge, which reads `text-anchor` and `text-primary`
+            // tailwind-merge, which reads `text-anchor` and `text-brand`
             // as two colours and drops `text-anchor`; Slot only joins them.
-            className="text-anchor text-primary"
+            className="text-anchor text-brand"
           >
             <span className="d-flex flex-center me-6">
               <span className="svg-icon svg-icon-2 svg-icon-primary me-[12px]">

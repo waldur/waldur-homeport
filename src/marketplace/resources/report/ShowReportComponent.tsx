@@ -22,7 +22,7 @@ export const ShowReportComponent: FunctionComponent<
       type="single"
       collapsible
       defaultValue="0"
-      className="rounded-md border-[1px] border-solid border-[var(--surface-card-border)]"
+      className="rounded-md border-[1px] border-solid border-secondary"
     >
       {props.report.map((section, index) => (
         <AccordionItem value={index.toString()} key={index}>

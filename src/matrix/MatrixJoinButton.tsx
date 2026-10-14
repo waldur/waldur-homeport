@@ -55,7 +55,7 @@ const MaskedSecret: FC<{ value: string }> = ({ value }) => {
           value={value}
           size={20}
           className="mb-0 mt-0"
-          buttonClassName="text-gray-500"
+          buttonClassName="text-quaternary"
         />
       </div>
     </div>
@@ -89,7 +89,7 @@ const GeneratedPassword: FC = () => {
         {password && (
           <>
             <MaskedSecret key={generation} value={password} />
-            <small className="text-muted d-block">
+            <small className="text-quaternary d-block">
               {translate('Copy it now: it will not be shown again.')}
             </small>
           </>
@@ -109,7 +109,7 @@ const GeneratedPassword: FC = () => {
         className={password ? 'mt-2' : undefined}
       />
       {!password && (
-        <small className="text-muted d-block mt-2">
+        <small className="text-quaternary d-block mt-2">
           {translate(
             'Generating a password replaces any Matrix password set before.',
           )}
@@ -142,7 +142,7 @@ const RecoveryKey: FC = () => {
           variant="secondary"
           size="sm"
         />
-        <small className="text-muted d-block mt-2">
+        <small className="text-quaternary d-block mt-2">
           {translate(
             'Your Matrix client asks for it to read your encrypted messages.',
           )}
@@ -152,7 +152,7 @@ const RecoveryKey: FC = () => {
   }
   if (recoveryKey === null) {
     return (
-      <p className="text-muted mb-0">
+      <p className="text-quaternary mb-0">
         {translate(
           'Waldur holds no recovery key for you yet. Open the chat in Waldur first: it sets up encryption, or asks for the recovery key you already use in another Matrix app.',
         )}
@@ -162,7 +162,7 @@ const RecoveryKey: FC = () => {
   return (
     <>
       <MaskedSecret value={recoveryKey} />
-      <small className="text-muted d-block">
+      <small className="text-quaternary d-block">
         {translate(
           'Enter it when your Matrix client asks for a recovery key or security key. Anyone who has it can read your encrypted messages, so do not share it.',
         )}
@@ -178,7 +178,7 @@ const CredentialsContent: FC<{
   // An admin may have switched external clients off since this page loaded.
   if (credentials.method === 'none') {
     return (
-      <p className="text-muted">
+      <p className="text-quaternary">
         {translate('External Matrix clients are not enabled on this server.')}
       </p>
     );

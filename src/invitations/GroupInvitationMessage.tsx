@@ -11,7 +11,7 @@ export const GroupInvitationMessage: FunctionComponent<{
   <>
     <p className="mb-3">{formatInvitation(invitation, invitation.is_public)}</p>
     {invitation.custom_text && (
-      <p className="text-muted mb-3">{invitation.custom_text}</p>
+      <p className="text-quaternary mb-3">{invitation.custom_text}</p>
     )}
     <p className="mb-0">
       {invitation.is_public

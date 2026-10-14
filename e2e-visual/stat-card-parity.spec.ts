@@ -46,7 +46,7 @@ const { gotoParity, expectPixelParity } = createParityHarness({
     // Measured ceiling across all 4 cases: max 0.37 (out of 255). Set to 3 —
     // ~8x margin over that noise floor, while staying far below the ~11
     // signal this check actually measured for a real bug caught while
-    // building this spec (dark mode's --surface-card-bg token was one gray
+    // building this spec (dark mode's --card-bg token was one gray
     // step too light for StatCard's bordered variant — see StatCard.tsx's
     // dark:bg override comment).
     chromaticityTolerance: 3,

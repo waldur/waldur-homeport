@@ -16,7 +16,7 @@ interface OwnProps {
 
 const EmptyPendingItemsPlaceholder = () => {
   return (
-    <h6 className="text-gray-600">{translate('No pending confirmations')}</h6>
+    <h6 className="text-tertiary">{translate('No pending confirmations')}</h6>
   );
 };
 
@@ -43,7 +43,7 @@ export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
         </div>
       )}
       {showProviderOrders && props.pendingProvidersCount > 0 && (
-        <div className="border-bottom pb-5 mb-5">
+        <div className="border-b-[1px] border-b-secondary pb-5 mb-5">
           <PendingProviderOrders />
         </div>
       )}

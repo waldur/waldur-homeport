@@ -201,7 +201,9 @@ const OrderAttributesTab: FC<{ order: OrderDetails }> = ({ order }) => {
 
   if (entries.length === 0) {
     return (
-      <div className="text-muted">{translate('No attributes submitted.')}</div>
+      <div className="text-quaternary">
+        {translate('No attributes submitted.')}
+      </div>
     );
   }
 
@@ -443,7 +445,7 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
           </div>
         </Tabs>
       ) : (
-        <div className="text-muted">
+        <div className="text-quaternary">
           {translate('No order information available.')}
         </div>
       )}

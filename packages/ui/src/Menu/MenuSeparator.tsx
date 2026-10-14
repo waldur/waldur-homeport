@@ -12,9 +12,8 @@ export const menuSeparator = cva('', {
   variants: {
     look: {
       // A gray-200 rule with 6.5px above and below.
-      nav: 'my-[6.5px] h-0 border-b border-[var(--surface-card-border)]',
-      actions:
-        'm-0 h-0 overflow-hidden border-t border-[var(--surface-card-border)]',
+      nav: 'my-[6.5px] h-0 border-b border-secondary',
+      actions: 'm-0 h-0 overflow-hidden border-t border-secondary',
     },
   },
   defaultVariants: { look: 'actions' },

@@ -9,11 +9,10 @@ import { buildPaginationItems } from './buildPaginationItems';
  * Shared by the page numbers, the ellipsis and the prev/next buttons. Sizes
  * are pixels, not rem: the app's root font size is 13px (12px on mobile),
  * a micro-app's is the browser's 16px, and the pager should look the same
- * in both. `bg-[transparent]` rather than `bg-transparent`, which collides
- * with Bootstrap's `!important` utility of the same name.
+ * in both.
  */
 export const PAGINATION_ITEM_CLASSNAME =
-  'inline-flex items-center justify-center rounded-[8px] bg-[transparent] text-[14px] font-medium transition-[color,background-color] duration-200';
+  'inline-flex items-center justify-center rounded-[8px] bg-transparent text-[14px] font-medium transition-[color,background-color] duration-200';
 
 const PAGE_CLASSNAME = cn(
   PAGINATION_ITEM_CLASSNAME,

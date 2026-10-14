@@ -19,7 +19,7 @@ export const OfferingCostsTable: FC = () => {
     {
       title: translate('Offering'),
       render: ({ row }) => (
-        <span className="fw-semibold">{row.offering_name}</span>
+        <span className="font-semibold">{row.offering_name}</span>
       ),
       export: 'offering_name',
       exportTitle: translate('Offering'),
@@ -27,7 +27,7 @@ export const OfferingCostsTable: FC = () => {
     {
       title: translate('Cost'),
       render: ({ row }) => (
-        <span className="fw-bold">{defaultCurrency(row.cost)}</span>
+        <span className="font-medium">{defaultCurrency(row.cost)}</span>
       ),
       export: (row) => defaultCurrency(row.cost),
       exportTitle: translate('Cost'),

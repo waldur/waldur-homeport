@@ -102,9 +102,7 @@ export const ReadOnlyFormControl: FunctionComponent<
         />
       )}
       {description && (
-        <Form.Text muted={true} className="mb-0">
-          {description}
-        </Form.Text>
+        <Form.Text className="mb-0 text-quaternary">{description}</Form.Text>
       )}
       {addon && <span className="form-control-addon">{addon}</span>}
     </div>

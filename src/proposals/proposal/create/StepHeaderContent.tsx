@@ -14,12 +14,12 @@ export const StepHeaderContent: FC<StepHeaderContentProps> = ({
 }) => (
   <div className="d-flex align-items-center gap-2">
     {metadata && (
-      <span className="text-muted fw-semibold fs-7">{metadata}</span>
+      <span className="text-quaternary font-semibold fs-7">{metadata}</span>
     )}
     {isCompleted ? (
       <CheckCircleIcon weight="bold" className="text-success" size={20} />
     ) : isRequired ? (
-      <CircleIcon weight="bold" className="text-muted" size={20} />
+      <CircleIcon weight="bold" className="text-quaternary" size={20} />
     ) : null}
   </div>
 );

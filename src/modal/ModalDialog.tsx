@@ -36,7 +36,7 @@ interface ModalDialogProps {
 const ModalTitle: FC<{ children: ReactNode }> = ({ children }) => {
   const shell = useContext(ModalShellContext);
   const title = (
-    <Modal.Title className="fw-bold" as="h3">
+    <Modal.Title className="font-medium" as="h3">
       {children}
     </Modal.Title>
   );

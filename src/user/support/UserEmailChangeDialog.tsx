@@ -53,7 +53,9 @@ export const UserEmailChangeDialog: FunctionComponent<{
             className="form-control-solid"
           />
 
-          <Form.Text muted>{translate('Request has been sent')}</Form.Text>
+          <Form.Text className="text-quaternary">
+            {translate('Request has been sent')}
+          </Form.Text>
         </>
       ) : (
         <Form.Control
@@ -63,7 +65,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
         />
       )}
       {isProtected && (
-        <Form.Text muted>
+        <Form.Text className="text-quaternary">
           {translate('Synchronized from identity provider')}
         </Form.Text>
       )}

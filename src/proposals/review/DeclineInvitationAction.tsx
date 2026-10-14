@@ -44,7 +44,7 @@ export const DeclineInvitationAction: FC<DeclineInvitationActionProps> = ({
       action={mutate}
       iconNode={<XIcon weight="bold" />}
       iconColor="danger"
-      className="text-[var(--color-error-600)] dark:text-[var(--color-error-400)]"
+      className="text-danger"
       disabled={isPending}
     />
   );

@@ -26,7 +26,7 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
   const tooltipContent = (
     <div>
       <strong>{offering.name}</strong>
-      <div className="text-muted small">{offering.customer_name}</div>
+      <div className="text-quaternary small">{offering.customer_name}</div>
       {offering.description && (
         <div className="mt-2 small">{offering.description}</div>
       )}
@@ -58,10 +58,16 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
                 </ImagePlaceholder>
               )}
               <div className="flex-grow-1 overflow-hidden">
-                <div className="fw-semibold ellipsis" style={{ fontSize: 16 }}>
+                <div
+                  className="font-semibold ellipsis"
+                  style={{ fontSize: 16 }}
+                >
                   {offering.name}
                 </div>
-                <div className="text-muted ellipsis" style={{ fontSize: 14 }}>
+                <div
+                  className="text-quaternary ellipsis"
+                  style={{ fontSize: 14 }}
+                >
                   {offering.customer_name}
                 </div>
               </div>

@@ -167,7 +167,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
         />
       ) : (
         <>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate('Select the external network for the offering.')}
           </p>
           <div className="row g-3 mb-6">
@@ -176,7 +176,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 <Card
                   className={`cursor-pointer h-100 ${
                     values.selectedExternalNetworkId === network.id
-                      ? 'border-primary border-2'
+                      ? 'border-brand border-2'
                       : 'border-secondary'
                   }`}
                   onClick={() =>
@@ -204,7 +204,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                             </Badge>
                           )}
                         </h5>
-                        <div className="d-flex align-items-center text-muted small mb-1">
+                        <div className="d-flex align-items-center text-quaternary small mb-1">
                           <code>{network.id}</code>
                           <CopyToClipboardButton
                             value={network.id}
@@ -214,7 +214,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                           />
                         </div>
                         {network.subnets.length > 0 && (
-                          <div className="text-muted small">
+                          <div className="text-quaternary small">
                             {network.subnets
                               .map((s) => `${s.name} (${s.cidr})`)
                               .join(', ')}
@@ -254,7 +254,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 )}
               </Field>
             ) : (
-              <p className="text-muted mb-0">
+              <p className="text-quaternary mb-0">
                 {translate('No instance availability zones found.')}
               </p>
             )}
@@ -282,7 +282,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                 )}
               </Field>
             ) : (
-              <p className="text-muted mb-0">
+              <p className="text-quaternary mb-0">
                 {translate('No volume availability zones found.')}
               </p>
             )}
@@ -305,7 +305,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
               {values.volumeTypes.map((vt) => (
                 <tr key={vt.id}>
                   <td>{vt.name}</td>
-                  <td className="text-muted">
+                  <td className="text-quaternary">
                     {renderFieldOrDash(vt.description)}
                   </td>
                 </tr>

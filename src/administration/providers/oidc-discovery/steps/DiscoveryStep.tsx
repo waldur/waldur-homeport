@@ -100,7 +100,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
       <WizardModal {...props} submitDisabled>
         <div className="text-center py-10">
           <LoadingSpinner />
-          <p className="mt-4 text-muted">
+          <p className="mt-4 text-quaternary">
             {translate('Discovering OIDC metadata from identity provider...')}
           </p>
         </div>
@@ -132,7 +132,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
   if (!discoveryResult) {
     return (
       <WizardModal {...props} submitDisabled>
-        <div className="text-center py-10 text-muted">
+        <div className="text-center py-10 text-quaternary">
           {translate('No discovery results available.')}
         </div>
       </WizardModal>
@@ -142,7 +142,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       <h4 className="mb-4">{translate('Discovery Results')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'The following information was discovered from your identity provider.',
         )}
@@ -158,7 +158,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               {Object.entries(discoveryResult.endpoints || {}).map(
                 ([key, value]) => (
                   <tr key={key}>
-                    <td className="text-muted" style={{ width: '30%' }}>
+                    <td className="text-quaternary" style={{ width: '30%' }}>
                       {key.replace(/_/g, ' ')}
                     </td>
                     <td>
@@ -213,7 +213,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               ))}
             </div>
           ) : (
-            <p className="text-muted mb-4">
+            <p className="text-quaternary mb-4">
               {translate('No claims discovered. Add claims manually below.')}
             </p>
           )}
@@ -248,7 +248,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               <h5 className="mb-0">{translate('Suggested Scopes')}</h5>
             </Card.Header>
             <Card.Body>
-              <p className="text-muted mb-2">
+              <p className="text-quaternary mb-2">
                 {translate(
                   'These scopes are recommended based on the discovered claim mappings.',
                 )}
@@ -271,7 +271,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
               <h5 className="mb-0">{translate('Mappable User Fields')}</h5>
             </Card.Header>
             <Card.Body>
-              <p className="text-muted mb-2">
+              <p className="text-quaternary mb-2">
                 {translate(
                   '{count} Waldur user fields can be mapped to OIDC claims.',
                   { count: discoveryResult.waldur_fields.length },
@@ -291,7 +291,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                       <td>
                         <code>{field.field}</code>
                       </td>
-                      <td className="text-muted">{field.description}</td>
+                      <td className="text-quaternary">{field.description}</td>
                       <td>
                         {field.available_claims.length > 0 ? (
                           <span className="text-success">
@@ -300,7 +300,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                               ` +${field.available_claims.length - 2}`}
                           </span>
                         ) : (
-                          <span className="text-muted">
+                          <span className="text-quaternary">
                             {translate('None')}
                           </span>
                         )}
@@ -310,7 +310,7 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
                 </tbody>
               </Table>
               {discoveryResult.waldur_fields.length > 5 && (
-                <p className="text-muted mt-2 mb-0">
+                <p className="text-quaternary mt-2 mb-0">
                   {translate('...and {count} more fields', {
                     count: discoveryResult.waldur_fields.length - 5,
                   })}

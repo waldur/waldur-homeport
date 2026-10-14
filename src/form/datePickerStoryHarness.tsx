@@ -53,7 +53,7 @@ export const DateFieldHarness = ({
         {children}
         <FormSpy subscription={{ values: true, touched: true }}>
           {({ values, touched }) => (
-            <dl className="mt-6 fs-7 text-muted">
+            <dl className="mt-6 fs-7 text-quaternary">
               <dt>Form value</dt>
               <dd>
                 <code data-testid="form-value">

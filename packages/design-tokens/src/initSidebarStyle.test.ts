@@ -14,7 +14,7 @@ describe('resolveSidebarStyle', () => {
   });
 
   it("resolves 'auto' to whichever style shares the page theme's name", () => {
-    // Regression test: sidebarColors.css's five styles are all fixed,
+    // Regression test: sidebar.css's five styles are all fixed,
     // unconditional looks (see that file's own comment on why an earlier
     // version's [data-theme='dark'] inversion for 'dark'/'light' was a
     // mistaken port, not intentional) — so the plain, name-matching

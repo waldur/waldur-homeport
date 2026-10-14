@@ -98,7 +98,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
     >
       <div
         data-slot="month-calendar"
-        className="w-[328px] px-[24px] py-[20px] text-[14px] text-[var(--bs-gray-700)] dark:text-[var(--bs-gray-600)]"
+        className="w-[328px] px-[24px] py-[20px] text-[14px] text-secondary"
       >
         <div className="mb-[12px] flex h-[40px] items-center justify-between">
           <button
@@ -141,14 +141,18 @@ export const MonthPicker: FC<MonthPickerProps> = ({
                 onClick={() => pick(month)}
                 className={cn(
                   'mx-auto flex h-[39px] w-[80px] items-center justify-center rounded-full leading-none',
-                  'hover:bg-[var(--waldur-brand-50)] hover:font-medium hover:text-[var(--bs-gray-900)] dark:hover:bg-[var(--waldur-brand-400)]',
+                  'hover:bg-brand-subtle hover:font-medium hover:text-primary',
                   'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
-                  'disabled:pointer-events-none disabled:text-[var(--bs-gray-300)] dark:disabled:text-[var(--bs-gray-400)]',
+                  'disabled:pointer-events-none disabled:text-[var(--text-disabled)]',
                   month.equals(thisMonth) &&
                     !selected &&
-                    'bg-[var(--bs-gray-200)] font-medium',
-                  selected &&
-                    'bg-[var(--waldur-brand-600)] font-medium text-white hover:bg-[var(--waldur-brand-600)] hover:text-white dark:bg-[var(--waldur-brand-400)] dark:text-[var(--bs-gray-900)]',
+                    'bg-quaternary font-medium',
+                  // Keyed on data-selected, like Calendar's data-edge: the data
+                  // variant outranks hover:, so a hovered selected month keeps
+                  // its fill.
+                  selected && 'font-medium',
+                  'data-[selected]:bg-brand-600 data-[selected]:text-white',
+                  'dark:data-[selected]:bg-brand-400 dark:data-[selected]:text-[var(--brand-on-400)]',
                 )}
               >
                 {format(month.toJSDate(), 'LLL', { locale })}
@@ -163,7 +167,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
 
 const navButton = cn(
   'inline-flex size-[40px] items-center justify-center p-0 select-none',
-  'hover:text-[var(--waldur-brand-600)]',
+  'hover:text-brand',
   'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
   // As in Calendar: hidden, not dimmed, past the bounds.
   'disabled:invisible',

@@ -11,7 +11,9 @@ export const HeroSection = ({ item }: { item: Category | CategoryGroup }) => (
         <img src={item.icon} alt="" className="category-hero-icon" />
       )}
       <div>
-        <h1 className="fs-1 fw-bold mb-0 category-hero-title">{item.title}</h1>
+        <h1 className="fs-1 font-medium mb-0 category-hero-title">
+          {item.title}
+        </h1>
         {item.description && (
           <p className="mb-0 mt-1 category-hero-description">
             {item.description}

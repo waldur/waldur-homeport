@@ -101,7 +101,7 @@ export const PosixGroupsTable = ({
       hideRefresh
       className="mt-7"
       headerClassName="min-h-40px py-0"
-      titleClassName="h4 fw-bold text-gray-700"
+      titleClassName="h4 font-medium text-secondary"
       minHeight="auto"
     />
   );
@@ -170,7 +170,7 @@ const PosixIdentifiersTable = ({
       hideRefresh
       className="mt-7"
       headerClassName="min-h-40px py-0"
-      titleClassName="h4 fw-bold text-gray-700"
+      titleClassName="h4 font-medium text-secondary"
       minHeight="auto"
     />
   );
@@ -347,7 +347,7 @@ export const OfferingUsersExpandableRow = ({
         hideRefresh
         className="mt-7"
         headerClassName="min-h-40px py-0"
-        titleClassName="h4 fw-bold text-gray-700"
+        titleClassName="h4 font-medium text-secondary"
         minHeight="auto"
         rowActions={
           showExperimentalUiComponents

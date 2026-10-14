@@ -36,7 +36,10 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
           <dl className="row mb-0">
             {componentTypes.map((type) => (
               <>
-                <dt className="col-6 fw-normal text-muted" key={`${type}-t`}>
+                <dt
+                  className="col-6 font-normal text-quaternary"
+                  key={`${type}-t`}
+                >
                   {type}
                 </dt>
                 <dd className="col-6 mb-1" key={`${type}-v`}>
@@ -47,7 +50,7 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
             ))}
           </dl>
         ) : (
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate('No per-component quota is configured.')}
           </p>
         )}
@@ -56,17 +59,17 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
         <h6>{translate('Policy')}</h6>
         {matchedPolicy ? (
           <dl className="row mb-0">
-            <dt className="col-6 fw-normal text-muted">
+            <dt className="col-6 font-normal text-quaternary">
               {translate('Threshold')}
             </dt>
             <dd className="col-6 mb-1">{matchedPolicy.thresholdLabel}</dd>
-            <dt className="col-6 fw-normal text-muted">
+            <dt className="col-6 font-normal text-quaternary">
               {translate('Action')}
             </dt>
             <dd className="col-6 mb-1">{matchedPolicy.actionLabel}</dd>
             {matchedPolicy.etaDays !== null && (
               <>
-                <dt className="col-6 fw-normal text-muted">
+                <dt className="col-6 font-normal text-quaternary">
                   {translate('Fires in')}
                 </dt>
                 <dd className="col-6 mb-1">
@@ -80,7 +83,7 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
             )}
           </dl>
         ) : (
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate('No usage policy governs this resource.')}
           </p>
         )}
@@ -92,13 +95,13 @@ const ResourceHealthDetails: FC<{ row: ResourceHealth }> = ({ row }) => {
                 {policyTypeLabel}
                 {attribution.scope_name && <> — {attribution.scope_name}</>}
                 {attribution.timestamp && (
-                  <span className="d-block text-muted">
+                  <span className="d-block text-quaternary">
                     {formatMediumDateTime(attribution.timestamp)}
                   </span>
                 )}
               </p>
             ) : (
-              <p className="text-muted mb-0">
+              <p className="text-quaternary mb-0">
                 {translate('Manually set — no policy attribution recorded.')}
               </p>
             )}
@@ -125,7 +128,7 @@ export const ProjectResourceLimitDetails: FC<{ row: Resource }> = ({ row }) => {
   const health = data.perResource.find((r) => r.resource.uuid === row.uuid);
   if (!health) {
     return (
-      <p className="text-muted mb-0">
+      <p className="text-quaternary mb-0">
         {translate(
           'No limit or policy details are available for this resource.',
         )}

@@ -141,7 +141,7 @@ export const MarketplaceLandingFilter = () => {
                   <Card.Title as="div" className="h3 mb-5">
                     {translate('Filter by organization/project')}
                   </Card.Title>
-                  <Card.Subtitle className="fw-normal text-muted">
+                  <Card.Subtitle className="font-normal text-quaternary">
                     {translate(
                       'Filter results by chosen organization and project',
                     )}

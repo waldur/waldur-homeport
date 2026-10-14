@@ -44,7 +44,7 @@ export const InvitationFAQCard: FC = () => {
             <AccordionTrigger className="px-0 py-4 hover:bg-transparent data-[state=open]:bg-transparent">
               {question}
             </AccordionTrigger>
-            <AccordionContent className="px-0 pt-0 pb-4 text-muted">
+            <AccordionContent className="px-0 pt-0 pb-4 text-quaternary">
               {answer}
             </AccordionContent>
           </AccordionItem>

@@ -3,7 +3,7 @@ import { BaseButton } from 'waldur-ui';
 import { translate } from '@/i18n';
 
 export const AnnouncementError = ({ refetch }) => (
-  <div className="bar bar-warning">
+  <div className="flex min-h-[55px] items-center border-b border-secondary bg-warning-subtle text-warning">
     <div>
       <p>
         {translate('Unable to load announcements')}

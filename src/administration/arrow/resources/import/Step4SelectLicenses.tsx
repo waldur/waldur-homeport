@@ -44,10 +44,12 @@ const AvailableLicenseTable = ({
           title: translate('License'),
           render: ({ row }) => (
             <div>
-              <div className="fw-bold">
+              <div className="font-medium">
                 {row.friendly_name || row.offer_name}
               </div>
-              <div className="text-muted small">{row.license_reference}</div>
+              <div className="text-quaternary small">
+                {row.license_reference}
+              </div>
             </div>
           ),
         },
@@ -91,7 +93,7 @@ const LinkedLicensesTable = ({
 
   return (
     <div className="mt-5">
-      <h6 className="text-muted mb-3">
+      <h6 className="text-quaternary mb-3">
         {translate('Already imported licenses')}
       </h6>
       <Table<ArrowLicense>
@@ -101,7 +103,7 @@ const LinkedLicensesTable = ({
           {
             title: translate('License'),
             render: ({ row }) => (
-              <div className="text-muted">
+              <div className="text-quaternary">
                 <div>{row.friendly_name || row.offer_name}</div>
                 <div className="small">{row.license_reference}</div>
               </div>
@@ -110,7 +112,7 @@ const LinkedLicensesTable = ({
           {
             title: translate('SKU'),
             render: ({ row }) => (
-              <span className="text-muted">{row.offer_sku}</span>
+              <span className="text-quaternary">{row.offer_sku}</span>
             ),
           },
           {
@@ -178,7 +180,7 @@ export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
         </div>
       ) : (
         <div>
-          <p className="text-muted mb-5">
+          <p className="text-quaternary mb-5">
             {translate(
               'Select the Arrow licenses to import as Waldur resources.',
             )}

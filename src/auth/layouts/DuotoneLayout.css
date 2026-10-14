@@ -10,7 +10,7 @@
 }
 
 .layout-duotone-login {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   display: flex;
   flex-direction: column;
 }
@@ -36,7 +36,7 @@
 
 .layout-duotone-footer {
   padding: 1rem;
-  border-top: 1px solid var(--bs-border-color);
+  border-top: 1px solid var(--border-secondary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,7 +85,7 @@
 }
 
 .layout-duotone-hero-content h1 {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   max-width: 400px;
 }

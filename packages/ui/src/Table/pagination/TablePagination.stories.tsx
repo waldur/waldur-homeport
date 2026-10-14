@@ -9,7 +9,7 @@ import { TablePagination } from './TablePagination';
  * width, so the stories below pin `globals.viewport`.
  *
  * Colours come from the `--pagination-*` tokens in
- * waldur-design-tokens/surfaceColors.css, so the pager looks the same
+ * waldur-design-tokens/table.css, so the pager looks the same
  * standalone, in a homeport table card or in a micro-app.
  */
 const meta: Meta<typeof TablePagination> = {
@@ -17,7 +17,7 @@ const meta: Meta<typeof TablePagination> = {
   component: TablePagination,
   decorators: [
     (Story) => (
-      <div className="bg-[var(--surface-card-bg)]">
+      <div className="bg-[var(--card-bg)]">
         <Story />
       </div>
     ),

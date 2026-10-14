@@ -75,8 +75,8 @@ export const UserTosManagementSection: FC = () => {
               />
             )}
             <div>
-              <div className="fw-bold">{row.name}</div>
-              <div className="text-muted small">{row.customer_name}</div>
+              <div className="font-medium">{row.name}</div>
+              <div className="text-quaternary small">{row.customer_name}</div>
             </div>
           </div>
         ),
@@ -109,7 +109,7 @@ export const UserTosManagementSection: FC = () => {
               />
             );
           }
-          return <span className="text-muted">-</span>;
+          return <span className="text-quaternary">-</span>;
         },
       },
     ],

@@ -147,7 +147,7 @@ export const SubmitReviewDialog: FC<SubmitReviewDialogProps> = ({
                           onChange={(value) => fieldProps.input.onChange(value)}
                         />
                       </div>
-                      <span className="text-gray-700 mt-2">
+                      <span className="text-secondary mt-2">
                         {fieldProps.input.value === 1
                           ? translate('1 star')
                           : translate('{count} stars', {

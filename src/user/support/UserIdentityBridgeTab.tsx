@@ -42,7 +42,7 @@ const FreshnessDot: FC<{ ageDays: number }> = ({ ageDays }) => {
   return (
     <span className="d-inline-flex align-items-center gap-2">
       <span
-        className={`rounded-circle ${color}`}
+        className={`rounded-full ${color}`}
         style={{ width: 8, height: 8, display: 'inline-block' }}
       />
       {label}
@@ -318,7 +318,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
       {status.effective_bridge_fields?.length > 0 && (
         <div>
           <h5 className="mb-4">{translate('Effective bridge fields')}</h5>
-          <p className="text-muted mb-3">
+          <p className="text-quaternary mb-3">
             {translate('These fields can be synced via the Identity Bridge.')}
           </p>
           <div className="d-flex flex-wrap gap-2">

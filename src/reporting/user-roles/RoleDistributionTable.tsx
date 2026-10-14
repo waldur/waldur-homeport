@@ -18,9 +18,9 @@ const columns: Column<CustomerMemberCount>[] = [
     title: translate('Organization'),
     render: ({ row }) => (
       <div>
-        <span className="fw-semibold">{row.name}</span>
+        <span className="font-semibold">{row.name}</span>
         {row.abbreviation && (
-          <span className="text-muted ms-2">({row.abbreviation})</span>
+          <span className="text-quaternary ms-2">({row.abbreviation})</span>
         )}
       </div>
     ),
@@ -28,7 +28,7 @@ const columns: Column<CustomerMemberCount>[] = [
   {
     title: translate('Members'),
     render: ({ row }) => (
-      <span className="fw-bold">
+      <span className="font-medium">
         {row.count != null ? row.count.toLocaleString() : '—'}
       </span>
     ),

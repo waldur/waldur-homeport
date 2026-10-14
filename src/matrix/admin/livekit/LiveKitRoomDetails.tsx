@@ -36,26 +36,26 @@ const TrackGlyph: FC<{ track: LiveKitTrack }> = ({ track }) => {
     return (
       <MonitorIcon
         weight="bold"
-        className={track.muted ? 'text-muted' : undefined}
+        className={track.muted ? 'text-quaternary' : undefined}
       />
     );
   }
   if (track.source === 'SCREEN_SHARE_AUDIO') {
     return track.muted ? (
-      <SpeakerSlashIcon weight="bold" className="text-muted" />
+      <SpeakerSlashIcon weight="bold" className="text-quaternary" />
     ) : (
       <SpeakerHighIcon weight="bold" />
     );
   }
   if (isVideoTrack(track)) {
     return track.muted ? (
-      <VideoCameraSlashIcon weight="bold" className="text-muted" />
+      <VideoCameraSlashIcon weight="bold" className="text-quaternary" />
     ) : (
       <VideoCameraIcon weight="bold" />
     );
   }
   return track.muted ? (
-    <MicrophoneSlashIcon weight="bold" className="text-muted" />
+    <MicrophoneSlashIcon weight="bold" className="text-quaternary" />
   ) : (
     <MicrophoneIcon weight="bold" />
   );
@@ -93,7 +93,7 @@ const EncryptionBadge: FC<{ track: LiveKitTrack }> = ({ track }) => {
 const TrackRow: FC<{ track: LiveKitTrack }> = ({ track }) => {
   const resolution = formatTrackResolution(track);
   return (
-    <div className="d-flex align-items-center gap-2 text-muted fs-7">
+    <div className="d-flex align-items-center gap-2 text-quaternary fs-7">
       <TrackGlyph track={track} />
       <span>{formatTrackSource(track)}</span>
       {resolution && <span>{resolution}</span>}
@@ -106,9 +106,9 @@ const TrackRow: FC<{ track: LiveKitTrack }> = ({ track }) => {
 const ParticipantRow: FC<{ participant: LiveKitParticipant }> = ({
   participant,
 }) => (
-  <div className="border-bottom py-3">
+  <div className="border-b-[1px] border-b-secondary py-3">
     <div className="d-flex align-items-center justify-content-between">
-      <span className="fw-bold">{participant.identity}</span>
+      <span className="font-medium">{participant.identity}</span>
       <Badge
         variant={participant.state === 'ACTIVE' ? 'success' : 'neutral'}
         tone="light"
@@ -116,7 +116,7 @@ const ParticipantRow: FC<{ participant: LiveKitParticipant }> = ({
         {participant.state}
       </Badge>
     </div>
-    <div className="text-muted fs-7 mb-2 d-flex align-items-center gap-2">
+    <div className="text-quaternary fs-7 mb-2 d-flex align-items-center gap-2">
       {participant.is_publisher && (
         <span className="d-flex align-items-center gap-1">
           <BroadcastIcon weight="bold" /> {translate('Publisher')}
@@ -181,7 +181,7 @@ export const LiveKitRoomDetails: FC<LiveKitRoomDetailsProps> = ({
     );
   }
   return (
-    <p className="text-muted mb-0">
+    <p className="text-quaternary mb-0">
       {translate('No participants in this room.')}
     </p>
   );

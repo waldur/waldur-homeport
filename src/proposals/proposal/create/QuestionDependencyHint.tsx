@@ -45,7 +45,7 @@ export const QuestionDependencyHint: FC<QuestionDependencyHintProps> = ({
   }
 
   return (
-    <div className="d-flex align-items-center gap-1 text-muted small mb-2">
+    <div className="d-flex align-items-center gap-1 text-quaternary small mb-2">
       <ArrowBendDownRightIcon size={14} weight="bold" />
       <span>
         {translate('Shown based on: {questions}', {

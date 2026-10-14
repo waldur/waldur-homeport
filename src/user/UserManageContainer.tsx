@@ -84,7 +84,7 @@ const DataAccessTab = lazyComponent(() =>
 );
 
 const NotAllowedTab = () => (
-  <p className="text-muted text-center">{translate('Not allowed')}</p>
+  <p className="text-quaternary text-center">{translate('Not allowed')}</p>
 );
 
 export const UserManageContainer = ({ isPersonal }) => {

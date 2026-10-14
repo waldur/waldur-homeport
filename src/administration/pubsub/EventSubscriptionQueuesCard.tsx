@@ -38,11 +38,11 @@ export const EventSubscriptionQueuesCard: FC = () => {
         <Table size="sm" borderless className="mb-0">
           <thead>
             <tr>
-              <th className="text-muted">{translate('Object type')}</th>
-              <th className="text-muted">{translate('Queue name')}</th>
-              <th className="text-muted">{translate('Vhost')}</th>
-              <th className="text-muted">{translate('Offering')}</th>
-              <th className="text-muted">{translate('Created')}</th>
+              <th className="text-quaternary">{translate('Object type')}</th>
+              <th className="text-quaternary">{translate('Queue name')}</th>
+              <th className="text-quaternary">{translate('Vhost')}</th>
+              <th className="text-quaternary">{translate('Offering')}</th>
+              <th className="text-quaternary">{translate('Created')}</th>
             </tr>
           </thead>
           <tbody>
@@ -52,21 +52,23 @@ export const EventSubscriptionQueuesCard: FC = () => {
                 <td className="text-truncate" style={{ maxWidth: '250px' }}>
                   {queue.queue_name}
                 </td>
-                <td className="text-muted">{queue.vhost}</td>
+                <td className="text-quaternary">{queue.vhost}</td>
                 <td
-                  className="text-truncate text-muted"
+                  className="text-truncate text-quaternary"
                   style={{ maxWidth: '150px' }}
                   title={queue.offering_uuid}
                 >
                   {queue.offering_uuid}
                 </td>
-                <td className="text-muted">{formatDateTime(queue.created)}</td>
+                <td className="text-quaternary">
+                  {formatDateTime(queue.created)}
+                </td>
               </tr>
             ))}
           </tbody>
         </Table>
       ) : (
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate('No event subscription queues found.')}
         </p>
       )}

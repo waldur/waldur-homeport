@@ -246,7 +246,7 @@ export const StepChecklistSection: FC<StepChecklistSectionProps> = ({
                       />
                     )}
                     {question.user_guidance && (
-                      <div className="form-text text-muted">
+                      <div className="form-text text-quaternary">
                         {question.user_guidance}
                       </div>
                     )}

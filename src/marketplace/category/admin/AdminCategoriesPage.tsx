@@ -150,7 +150,7 @@ export const AdminCategoriesPage: FunctionComponent<
                   {group.title}
                 </Link>
               ) : (
-                <span className="text-warning fw-bold">
+                <span className="text-warning font-medium">
                   {translate('Unknown group')}
                 </span>
               );

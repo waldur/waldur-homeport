@@ -6,7 +6,7 @@ import { translate } from '@/i18n';
 import { validateNonNegative } from '@/marketplace/common/utils';
 
 const GroupHeader = ({ children }) => (
-  <h4 className="text-gray-700 mb-4">{children}</h4>
+  <h4 className="text-secondary mb-4">{children}</h4>
 );
 
 const NonNegativeField = ({ label, name }) => (

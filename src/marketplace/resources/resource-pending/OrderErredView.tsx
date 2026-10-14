@@ -170,7 +170,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
         <Card.Body className="d-flex flex-column flex-sm-row align-items-center gap-4">
           <ProgressSteps
             steps={steps}
-            bgClass="bg-body"
+            bgClass="bg-primary"
             className="flex-grow-1"
           />
 

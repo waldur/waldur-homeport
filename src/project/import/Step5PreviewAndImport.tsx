@@ -303,7 +303,7 @@ export const Step5PreviewAndImport: FC<Step5Props> = ({
       <div className="d-flex justify-content-start mb-3">
         <div ref={refToolbar}>{/* Portal destination */}</div>
       </div>
-      <div className="d-flex justify-content-between text-muted mb-3">
+      <div className="d-flex justify-content-between text-quaternary mb-3">
         {importType === 'projects_only' ? (
           <span>
             {data.length} {translate('Projects')}

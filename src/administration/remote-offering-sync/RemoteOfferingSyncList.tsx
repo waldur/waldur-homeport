@@ -46,7 +46,9 @@ export const RemoteOfferingSyncList: FunctionComponent = () => {
       columns={[
         {
           title: translate('Remote server URL'),
-          render: ({ row }) => <span className="text-dark">{row.api_url}</span>,
+          render: ({ row }) => (
+            <span className="text-primary">{row.api_url}</span>
+          ),
         },
         {
           title: translate('Remote organization'),

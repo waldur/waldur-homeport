@@ -80,18 +80,20 @@ export const CustomerMappingsList: FunctionComponent<
           title: translate('Arrow Customer'),
           render: ({ row }) => (
             <div>
-              <span className="text-dark fw-bold">
+              <span className="text-primary font-medium">
                 {row.arrow_company_name}
               </span>
               <br />
-              <span className="text-muted small">{row.arrow_reference}</span>
+              <span className="text-quaternary small">
+                {row.arrow_reference}
+              </span>
             </div>
           ),
         },
         {
           title: translate('Waldur Organization'),
           render: ({ row }) => (
-            <span className="text-dark">{row.waldur_customer_name}</span>
+            <span className="text-primary">{row.waldur_customer_name}</span>
           ),
           filter: 'waldur_customer_uuid',
         },

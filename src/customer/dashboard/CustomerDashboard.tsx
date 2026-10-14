@@ -122,7 +122,7 @@ export const CustomerDashboard: FunctionComponent = () => {
               className="d-flex flex-wrap align-items-center justify-content-end gap-3 mb-5"
             >
               {includeTerminated && (
-                <span className="text-muted fs-7">
+                <span className="text-quaternary fs-7">
                   {translate(
                     "Terminated resources' usage is shown separately and does not count against limits: for the current month in the usage widgets, and for each offering's limit period in the per-offering views.",
                   )}

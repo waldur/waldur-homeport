@@ -47,7 +47,7 @@ const PlaygroundText: TextMessagePartComponent = ({ text }) => {
   return (
     <>
       {reasoning ? (
-        <details className="text-muted fs-8 mb-2" open={reasoningOpen}>
+        <details className="text-quaternary fs-8 mb-2" open={reasoningOpen}>
           <summary className="cursor-pointer">{translate('Reasoning')}</summary>
           <div style={{ whiteSpace: 'pre-wrap' }}>{reasoning}</div>
         </details>

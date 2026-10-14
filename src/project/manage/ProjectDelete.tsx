@@ -31,9 +31,9 @@ export const ProjectDelete: FC<ProjectDeleteProps> = ({ project }) => {
         />
       }
     >
-      <ul className="text-gray-700">
+      <ul className="text-secondary">
         {project.is_removed ? (
-          <li className="text-muted">
+          <li className="text-quaternary">
             {translate(
               'This project has already been removed and cannot be deleted again.',
             )}

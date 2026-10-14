@@ -377,7 +377,7 @@ export const SystemUsageTab: FC = () => {
       {showLoadPrompt && !loadTriggered && (
         <Card className="mb-4">
           <Card.Body>
-            <p className="mb-2 fw-semibold">
+            <p className="mb-2 font-semibold">
               {translate('System usage data not yet loaded')}
             </p>
 
@@ -389,7 +389,7 @@ export const SystemUsageTab: FC = () => {
               onMonthChange={setFilterMonth}
             />
 
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'Fetches all OpenPortal usage and storage reports across every project in the system. Filtering to a specific year or month will be much faster.',
               )}
@@ -492,7 +492,7 @@ export const SystemUsageTab: FC = () => {
         !reportsError &&
         allUsage.length === 0 &&
         allStorage.length === 0 && (
-          <p className="text-muted">
+          <p className="text-quaternary">
             {translate('No OpenPortal reports found.')}
           </p>
         )}
@@ -528,7 +528,7 @@ export const SystemUsageTab: FC = () => {
       {/* ── Charts ────────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && (
         <Card className="mb-4">
-          <Card.Header className="fw-semibold">
+          <Card.Header className="font-semibold">
             {translate('Usage')}
           </Card.Header>
           <Card.Body>
@@ -543,7 +543,7 @@ export const SystemUsageTab: FC = () => {
 
       {activeStorage.length > 0 && nameMaps !== undefined && (
         <Card className="mb-4">
-          <Card.Header className="fw-semibold">
+          <Card.Header className="font-semibold">
             {translate('Storage')}
           </Card.Header>
           <Card.Body>

@@ -77,7 +77,7 @@
     tr {
       border-bottom-width: 1px;
       border-bottom-style: solid;
-      border-bottom-color: $border-secondary;
+      border-bottom-color: var(--border-secondary);
     }
 
     tfoot {
@@ -93,7 +93,7 @@
     tr {
       border-bottom-width: 1px;
       border-bottom-style: dashed;
-      border-bottom-color: $border-secondary;
+      border-bottom-color: var(--border-secondary);
     }
 
     tfoot {
@@ -104,12 +104,11 @@
     }
   }
 
-  // Row border colors
-  @each $color, $value in $grays {
-    &.table-row-gray-#{$color} {
-      tr {
-        border-bottom-color: $value;
-      }
+  // Row border colour. Metronic generated one per gray step; the app uses
+  // only gray-200, which is the divider.
+  &.table-row-gray-200 {
+    tr {
+      border-bottom-color: var(--border-divider);
     }
   }
 }
@@ -161,8 +160,13 @@
   left: 50%;
   @include border-radius($border-radius);
   box-shadow: $dropdown-box-shadow;
-  background-color: $bg-primary-solid;
-  color: if(isDarkMode(), $gray-700, $gray-600);
+  background-color: var(--bg-primary-solid);
+
+  @include dark-theme {
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  }
+  // Light text on the dark --bg-primary-solid pill, in both themes.
+  color: var(--color-gray-dark-200);
   font-weight: $font-weight-bold;
   margin: 0 !important;
   width: auto;
@@ -236,4 +240,31 @@
       }
     }
   }
+}
+
+// The table variants in use (Bootstrap's are not generated: $table-variants).
+// Bootstrap's maths, in color-mix(): striped, active and hover move the row
+// background 5%, 10% and 7.5% towards the text colour.
+@mixin waldur-table-variant($bg, $color) {
+  --bs-table-bg: #{$bg};
+  --bs-table-striped-bg: color-mix(in srgb, #{$bg} 95%, #{$color});
+  --bs-table-striped-color: #{$color};
+  --bs-table-active-bg: color-mix(in srgb, #{$bg} 90%, #{$color});
+  --bs-table-active-color: #{$color};
+  --bs-table-hover-bg: color-mix(in srgb, #{$bg} 92.5%, #{$color});
+  --bs-table-hover-color: #{$color};
+  color: #{$color};
+  border-color: color-mix(in srgb, #{$bg} 90%, #{$color});
+}
+
+.table-light {
+  @include waldur-table-variant(var(--bg-tertiary), var(--text-primary));
+}
+
+// 20% of the solid warning over the page, as Bootstrap's 80% tint over white.
+.table-warning {
+  @include waldur-table-variant(
+    color-mix(in srgb, var(--status-warning-solid) 20%, var(--bg-primary)),
+    var(--text-primary)
+  );
 }

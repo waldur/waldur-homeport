@@ -110,7 +110,7 @@ const AllocationPoolsList: FunctionComponent<
   return (
     <>
       {fields.length === 0 && (
-        <p className="text-muted">
+        <p className="text-quaternary">
           {translate('No allocation pools defined. Default pool will be used.')}
         </p>
       )}
@@ -191,7 +191,7 @@ export const InternalNetworkAllocationPool: FunctionComponent = () => (
   <Form.Group>
     <Form.Label>{translate('Internal network allocation pool')}</Form.Label>
     <FieldArray name="allocation_pools" component={AllocationPoolsList} />
-    <Form.Text className="text-muted">
+    <Form.Text className="text-quaternary">
       {translate(
         'Define IP range that will be used for automatic assignment to instances.',
       )}

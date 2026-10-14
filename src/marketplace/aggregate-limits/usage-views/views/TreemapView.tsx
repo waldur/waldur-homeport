@@ -230,7 +230,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
       />
       <div className="d-flex flex-wrap align-items-center gap-3 mb-2">
         <div className="d-flex align-items-center gap-1 small">
-          <span className="text-secondary fw-medium">
+          <span className="text-secondary font-medium">
             {translate('Levels')}:
           </span>
           <Badge
@@ -283,7 +283,7 @@ export const TreemapView: FC<Props> = ({ components }) => {
           onValueChange={setMode}
         />
         {disablePct && (
-          <small className="text-muted">
+          <small className="text-quaternary">
             {translate(
               '“% of limit” is disabled because no limits exist on these offerings.',
             )}

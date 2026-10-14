@@ -16,7 +16,7 @@ export const ProviderLocationTab: FunctionComponent<
 
   if (!hasLocation) {
     return (
-      <h6 className="text-center text-muted my-10">
+      <h6 className="text-center text-quaternary my-10">
         {translate('No location available')}
       </h6>
     );

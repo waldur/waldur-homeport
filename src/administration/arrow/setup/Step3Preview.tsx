@@ -67,7 +67,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Preview Settings')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Review the settings below before saving. These will configure the Arrow integration.',
         )}
@@ -81,7 +81,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('API URL')}
                 </td>
                 <td>
@@ -91,7 +91,9 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
               {values.partnerInfo && (
                 <>
                   <tr>
-                    <td className="text-muted">{translate('Partner Name')}</td>
+                    <td className="text-quaternary">
+                      {translate('Partner Name')}
+                    </td>
                     <td>
                       {String(
                         (values.partnerInfo as Record<string, unknown>)
@@ -100,7 +102,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <td className="text-muted">
+                    <td className="text-quaternary">
                       {translate('Partner Reference')}
                     </td>
                     <td>
@@ -144,7 +146,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
                         <td>
                           {arrowRef}
                           {arrowCustomer && (
-                            <span className="text-muted ms-2">
+                            <span className="text-quaternary ms-2">
                               ({arrowCustomer.companyName})
                             </span>
                           )}
@@ -157,7 +159,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
               </tbody>
             </Table>
           ) : (
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('No customer mappings configured')}
             </span>
           )}
@@ -170,7 +172,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
             <h5 className="mb-0">{translate('Available Export Types')}</h5>
           </Card.Header>
           <Card.Body>
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'These billing export types are available from your Arrow account. Compatible types have all required fields.',
               )}
@@ -187,9 +189,11 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
                 {values.exportTypes.map((et) => (
                   <tr key={et.reference}>
                     <td>
-                      <span className="fw-bold">{et.name}</span>
+                      <span className="font-medium">{et.name}</span>
                       <br />
-                      <span className="text-muted small">{et.reference}</span>
+                      <span className="text-quaternary small">
+                        {et.reference}
+                      </span>
                     </td>
                     <td>
                       {et.recommended ? (
@@ -207,7 +211,7 @@ export const Step3Preview: FC<WizardStepProps> = (props) => {
                       )}
                     </td>
                     <td>
-                      <small className="text-muted">
+                      <small className="text-quaternary">
                         {translate('{found}/{total} required', {
                           found: et.required_fields_found,
                           total: et.required_fields_total,

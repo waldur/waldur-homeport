@@ -51,7 +51,7 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
       const typedValue = await confirm(
         translate('WARNING: Mass queue purge'),
         <>
-          <p className="text-danger fw-bold">
+          <p className="text-danger font-medium">
             {translate(
               'You are about to purge ALL subscription queues across ALL users.',
             )}

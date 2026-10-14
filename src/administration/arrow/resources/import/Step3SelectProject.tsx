@@ -15,7 +15,7 @@ export const Step3SelectProject: FC<WizardFormStepProps> = (props) => {
   return (
     <WizardForm {...props}>
       <div>
-        <p className="text-muted mb-5">
+        <p className="text-quaternary mb-5">
           {translate(
             'Select the project within {customer} where resources will be created.',
             { customer: <strong>{customerName}</strong> },

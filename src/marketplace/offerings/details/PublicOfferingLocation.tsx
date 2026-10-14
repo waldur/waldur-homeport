@@ -26,14 +26,14 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
         </PublicOfferingCardTitle>
         <Row>
           <Col xs={12} lg className="mb-5 mb-lg-0">
-            <div className="map bg-gray-300 w-100 h-100 min-h-300px">
+            <div className="map bg-gray-300 dark:bg-gray-dark-600 w-100 h-100 min-h-300px">
               {offering.latitude && offering.longitude ? (
                 <LeafletMap
                   latitude={offering.latitude}
                   longitude={offering.longitude}
                 />
               ) : (
-                <div className="d-flex align-items-center justify-content-center h-100 display-5 text-muted">
+                <div className="d-flex align-items-center justify-content-center h-100 display-5 text-quaternary">
                   {translate('No location available')}
                 </div>
               )}
@@ -41,7 +41,7 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
           </Col>
           {showExperimentalUiComponents && (
             <Col xs={12} lg={4}>
-              <div className="bg-gray-100 p-10 h-100">
+              <div className="bg-tertiary p-10 h-100">
                 <PublicOfferingCardTitle>
                   {translate('Availability:')}
                 </PublicOfferingCardTitle>
@@ -50,7 +50,7 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
                     <li className="mb-2" key={i}>
                       <Link
                         state=""
-                        className="text-decoration-underline text-dark text-hover-primary"
+                        className="text-decoration-underline text-primary hover:text-brand"
                       >
                         link {i}
                       </Link>

@@ -55,8 +55,10 @@ const MethodChoice: FC<{ method: AccessMethod }> = ({ method }) => (
   <Field<AccessMethodKey> name="method" type="radio" value={method.key}>
     {({ input }) => (
       <div
-        className={`border rounded p-4 ${
-          input.checked ? 'border-primary bg-light-primary' : ''
+        // border-[1px], not Bootstrap's .border: its !important colour would
+        // override the selected state's border-brand.
+        className={`rounded border-[1px] p-4 ${
+          input.checked ? 'border-brand bg-brand-subtle' : 'border-secondary'
         }`}
       >
         <Radio
@@ -65,8 +67,8 @@ const MethodChoice: FC<{ method: AccessMethod }> = ({ method }) => (
           align="start"
           label={
             <span className="d-flex flex-column">
-              <span className="fw-bold">{method.label}</span>
-              <span className="text-muted fs-7">{method.description}</span>
+              <span className="font-medium">{method.label}</span>
+              <span className="text-quaternary fs-7">{method.description}</span>
             </span>
           }
         />
@@ -180,8 +182,8 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                 {values.method === 'order' && offering.shared ? (
                   <div>
                     {methods.length > 1 ? <hr className="mt-0" /> : null}
-                    <div className="fw-bold">{translate('Project')}</div>
-                    <div className="text-muted fs-7 mb-4">
+                    <div className="font-medium">{translate('Project')}</div>
+                    <div className="text-quaternary fs-7 mb-4">
                       {translate(
                         'The resource is created in the project you pick.',
                       )}
@@ -208,12 +210,12 @@ export const RequestAccessDialog: FC<RequestAccessDialogProps> = (props) => {
                 {values.method === 'apply' && rounds.length > 1 ? (
                   <div>
                     {methods.length > 1 ? <hr className="mt-0" /> : null}
-                    <div className="fw-bold">
+                    <div className="font-medium">
                       {usesCallVocabulary()
                         ? translate('Round')
                         : translate('Submission deadline')}
                     </div>
-                    <div className="text-muted fs-7 mb-4">
+                    <div className="text-quaternary fs-7 mb-4">
                       {usesCallVocabulary()
                         ? translate(
                             'Your proposal is reviewed under the call and round you pick.',

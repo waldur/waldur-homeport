@@ -218,7 +218,7 @@ export const StorageFolderManagerField = ({
   return (
     <div className="storage-folder-manager">
       {field.help_text && (
-        <div className="form-text text-muted mb-3">{field.help_text}</div>
+        <div className="form-text text-quaternary mb-3">{field.help_text}</div>
       )}
 
       <StorageTypeAndPermissions
@@ -325,7 +325,7 @@ const HardQuotaOverride = ({
           placeholder={translate('Optional override')}
           isInvalid={!!hardQuotaError}
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate('Leave empty to use default multiplier.')}
         </Form.Text>
         {hardQuotaError && (
@@ -348,7 +348,7 @@ const QuotaSummaryCard = ({
   );
 
   return (
-    <Card className="mt-3 bg-light">
+    <Card className="mt-3 bg-tertiary dark:bg-quaternary">
       <Card.Header>
         <h6>{translate('Calculated Quotas')}</h6>
       </Card.Header>

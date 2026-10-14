@@ -168,7 +168,7 @@ export const AggregateLimitDetailsDialog = ({
       </div>
 
       {includeTerminated && (
-        <p className="text-muted fs-7 mb-2">
+        <p className="text-quaternary fs-7 mb-2">
           {translate(
             'Usage of terminated resources is included in the totals, but only active resources are listed.',
           )}

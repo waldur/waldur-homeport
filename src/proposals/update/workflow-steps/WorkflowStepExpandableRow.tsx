@@ -72,7 +72,7 @@ const renderEvaluators = (row: CallWorkflowStep) => {
       {users.map((user) => (
         <li key={user.uuid} className="d-flex align-items-center gap-2">
           <span>{user.full_name || user.username}</span>
-          <span className="text-muted">
+          <span className="text-quaternary">
             {user.username} · {user.email}
           </span>
           {user.is_panel_chair && (

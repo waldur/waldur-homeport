@@ -47,7 +47,7 @@ export const MyCallsPage: FC = () => {
         id: 'call',
         title: translate('Call'),
         render: ({ row }: { row: CallReviewerPoolExtended }) => (
-          <span className="fw-bold">{row.call_name}</span>
+          <span className="font-medium">{row.call_name}</span>
         ),
         keys: ['call_name'],
       },
@@ -70,7 +70,7 @@ export const MyCallsPage: FC = () => {
           const completed = row.reviews_completed || 0;
           const total = inProgress + completed;
           if (total === 0) {
-            return <span className="text-muted">-</span>;
+            return <span className="text-quaternary">-</span>;
           }
           return (
             <div className="d-flex gap-1">
@@ -110,7 +110,7 @@ export const MyCallsPage: FC = () => {
         render: ({ row }: { row: CallReviewerPoolExtended }) => {
           const coiCount = row.coi_count || 0;
           if (coiCount === 0) {
-            return <span className="text-muted">-</span>;
+            return <span className="text-quaternary">-</span>;
           }
           const bySeverity = row.coi_by_severity || {};
           return (

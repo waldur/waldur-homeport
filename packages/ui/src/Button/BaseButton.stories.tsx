@@ -172,7 +172,7 @@ const StateGrid = ({
           {variants.map((variant) => (
             <th
               key={variant}
-              className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
+              className="px-3 pb-3 text-left text-sm font-medium text-quaternary"
             >
               {VARIANT_LABELS[variant] ?? variant}
             </th>
@@ -182,7 +182,7 @@ const StateGrid = ({
       <tbody>
         {STATES.map((state) => (
           <tr key={state}>
-            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
               {STATE_LABELS[state]}
             </th>
             {variants.map((variant) => (
@@ -324,7 +324,7 @@ const IconOnlyGrid = ({ size }: { size: ButtonSize }) => (
           {ICON_ONLY_STATES.map((state) => (
             <th
               key={state}
-              className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
+              className="px-3 pb-3 text-left text-sm font-medium text-quaternary"
             >
               {ICON_ONLY_STATE_LABELS[state]}
             </th>
@@ -334,7 +334,7 @@ const IconOnlyGrid = ({ size }: { size: ButtonSize }) => (
       <tbody>
         {ICON_ONLY_VARIANTS.map((variant) => (
           <tr key={variant}>
-            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+            <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
               {VARIANT_LABELS[variant] ?? variant}
             </th>
             {ICON_ONLY_STATES.map((state) => (
@@ -422,7 +422,7 @@ const SizeGrid = () => (
           {SIZES.map((size) => (
             <th
               key={size}
-              className="px-3 pb-3 text-left text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]"
+              className="px-3 pb-3 text-left text-sm font-medium text-quaternary"
             >
               {size} ({SIZE_HEIGHTS[size]})
             </th>
@@ -431,7 +431,7 @@ const SizeGrid = () => (
       </thead>
       <tbody>
         <tr>
-          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
             Label
           </th>
           {SIZES.map((size) => (
@@ -441,7 +441,7 @@ const SizeGrid = () => (
           ))}
         </tr>
         <tr>
-          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
             Label + icon
           </th>
           {SIZES.map((size) => (
@@ -456,7 +456,7 @@ const SizeGrid = () => (
           ))}
         </tr>
         <tr>
-          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-[var(--surface-text-secondary,#6b7280)]">
+          <th className="whitespace-nowrap px-2 py-3 text-right align-middle text-sm font-medium text-quaternary">
             Icon only
           </th>
           {SIZES.map((size) => (
@@ -497,12 +497,8 @@ export const Sizes: Story = {
 // that job inside the canvas instead.
 const SectionHeader = ({ title, hint }: { title: string; hint: string }) => (
   <div className="mb-3">
-    <h3 className="text-sm font-semibold text-[var(--surface-text-primary,#111827)]">
-      {title}
-    </h3>
-    <p className="text-sm text-[var(--surface-text-secondary,#6b7280)]">
-      {hint}
-    </p>
+    <h3 className="text-sm font-semibold text-primary">{title}</h3>
+    <p className="text-sm text-quaternary">{hint}</p>
   </div>
 );
 
@@ -526,7 +522,7 @@ export const RealisticUsage: Story = {
           title="Dialog footer"
           hint="CloseDialogButton (tertiary) + a primary submit — the standard modal footer pairing."
         />
-        <div className="flex justify-end gap-3 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+        <div className="flex justify-end gap-3 border-t border-primary pt-4">
           <BaseButton variant="tertiary" size="lg" label="Cancel" />
           <BaseButton variant="primary" size="lg" label="Save" />
         </div>
@@ -537,7 +533,7 @@ export const RealisticUsage: Story = {
           title="Destructive confirmation footer"
           hint="Same layout, danger replacing primary — the delete-confirmation shape."
         />
-        <div className="flex justify-end gap-3 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+        <div className="flex justify-end gap-3 border-t border-primary pt-4">
           <BaseButton variant="tertiary" size="lg" label="Cancel" />
           <BaseButton variant="danger" size="lg" label="Delete" />
         </div>
@@ -548,7 +544,7 @@ export const RealisticUsage: Story = {
           title="Wizard footer"
           hint="Back (icon-left, tertiary) on the far side, Continue (icon-right, primary) advancing — matches WizardModal's default footer."
         />
-        <div className="flex items-center justify-between border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+        <div className="flex items-center justify-between border-t border-primary pt-4">
           <BaseButton
             variant="tertiary"
             size="lg"
@@ -570,7 +566,7 @@ export const RealisticUsage: Story = {
           title="Table toolbar"
           hint="Icon-only utility buttons (search, filter) beside a labeled primary action — a table's action bar."
         />
-        <div className="flex items-center gap-2 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+        <div className="flex items-center gap-2 border-t border-primary pt-4">
           <BaseButton
             variant="tertiary"
             size="lg"
@@ -598,7 +594,7 @@ export const RealisticUsage: Story = {
           title="Inline row actions"
           hint="Low-emphasis text-* variants for actions attached to a single list row — never the full-weight Contained colors here."
         />
-        <div className="flex items-center justify-between rounded-md border border-[var(--surface-border,#e5e7eb)] px-4 py-3">
+        <div className="flex items-center justify-between rounded-md border-[1px] border-primary px-4 py-3">
           <span className="text-sm">acc-prod-eu-west-1</span>
           <div className="flex gap-1">
             <BaseButton
@@ -622,7 +618,7 @@ export const RealisticUsage: Story = {
           title="Page header actions (Two-tone secondary)"
           hint="Secondary buttons feature two-tone brand styling: dark plum text paired with a vibrant magenta icon for signature brand actions."
         />
-        <div className="flex items-center gap-3 border-t border-[var(--surface-border,#e5e7eb)] pt-4">
+        <div className="flex items-center gap-3 border-t border-primary pt-4">
           <BaseButton
             variant="secondary"
             size="md"

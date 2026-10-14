@@ -17,13 +17,13 @@ export const StatWidgetCard: FC<StatWidgetCardProps> = ({
   return (
     <Card className="card-bordered h-100">
       <Card.Body className="py-6">
-        <div className="fs-6 text-muted fw-bold mb-1">{label}</div>
+        <div className="fs-6 text-quaternary font-medium mb-1">{label}</div>
         <Stack
           direction="horizontal"
           gap={2}
           className="justify-content-between"
         >
-          <div className="display-6 fw-boldest">{value}</div>
+          <div className="display-6 font-bold">{value}</div>
           <ChangesAmountBadge
             changes={changes}
             showOnInfinity

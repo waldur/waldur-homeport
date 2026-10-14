@@ -124,7 +124,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
                   key={tab.id}
                   value={tab.id}
                   disabled={disabled}
-                  className={disabled ? 'text-muted' : undefined}
+                  className={disabled ? 'text-quaternary' : undefined}
                 >
                   {tab.title}
                   {enableSearch && hasQuery && (

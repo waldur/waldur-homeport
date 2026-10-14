@@ -72,7 +72,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
               {row.wait_event_type}
             </Badge>
           ) : (
-            <span className="text-muted">-</span>
+            <span className="text-quaternary">-</span>
           ),
       },
       {
@@ -106,7 +106,7 @@ export const DatabaseActiveQueries: FC<DatabaseActiveQueriesProps> = ({
       className="mb-6"
     >
       {data.queries.length === 0 ? (
-        <p className="text-muted mb-0">{translate('No active queries')}</p>
+        <p className="text-quaternary mb-0">{translate('No active queries')}</p>
       ) : (
         <Table<ActiveQuery>
           {...tableProps}

@@ -37,27 +37,29 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Tuple statistics')}
           </h6>
           <Table size="sm" borderless className="mb-0">
             <tbody>
               <tr>
-                <td className="text-muted">{translate('Live tuples')}</td>
-                <td className="fw-semibold text-end">
+                <td className="text-quaternary">{translate('Live tuples')}</td>
+                <td className="font-semibold text-end">
                   {formatNumber(data.total_live_tuples)}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Dead tuples')}</td>
-                <td className="fw-semibold text-end">
+                <td className="text-quaternary">{translate('Dead tuples')}</td>
+                <td className="font-semibold text-end">
                   {formatNumber(data.total_dead_tuples)}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Dead tuple ratio')}</td>
+                <td className="text-quaternary">
+                  {translate('Dead tuple ratio')}
+                </td>
                 <td
-                  className={`fw-semibold text-end ${deadTupleHealth === 'danger' ? 'text-danger' : deadTupleHealth === 'warning' ? 'text-warning' : ''}`}
+                  className={`font-semibold text-end ${deadTupleHealth === 'danger' ? 'text-danger' : deadTupleHealth === 'warning' ? 'text-warning' : ''}`}
                 >
                   {formatPercent(data.dead_tuple_ratio_percent)}
                 </td>
@@ -66,23 +68,23 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
           </Table>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Vacuum status')}
           </h6>
           <Table size="sm" borderless className="mb-0">
             <tbody>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Tables needing vacuum')}
                 </td>
                 <td
-                  className={`fw-semibold text-end ${data.tables_needing_vacuum > 0 ? 'text-warning' : ''}`}
+                  className={`font-semibold text-end ${data.tables_needing_vacuum > 0 ? 'text-warning' : ''}`}
                 >
                   {data.tables_needing_vacuum}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   <div className="d-flex align-items-center">
                     {translate('Oldest transaction age')}
                     {hasTransactionAgeWarning && (
@@ -95,7 +97,7 @@ export const DatabaseMaintenanceCard: FC<DatabaseMaintenanceCardProps> = ({
                   </div>
                 </td>
                 <td
-                  className={`fw-semibold text-end ${hasTransactionAgeWarning ? 'text-danger' : ''}`}
+                  className={`font-semibold text-end ${hasTransactionAgeWarning ? 'text-danger' : ''}`}
                 >
                   {data.oldest_transaction_age != null
                     ? formatNumber(data.oldest_transaction_age)

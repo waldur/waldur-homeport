@@ -95,7 +95,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
   }
 
   return (
-    <div className="aui-resource-list-block border rounded bg-light p-3">
+    <div className="aui-resource-list-block border rounded bg-tertiary dark:bg-quaternary p-3">
       <div className="d-flex align-items-center justify-content-between mb-2 gap-2 flex-wrap">
         <div className="d-flex align-items-center gap-2">
           <TableIcon weight="bold" />
@@ -109,7 +109,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
         <div className="d-flex flex-column gap-1 small">
           {filterRows.map((f) => (
             <div key={f.key} className="d-flex gap-2">
-              <span className="text-muted" style={{ minWidth: 90 }}>
+              <span className="text-quaternary" style={{ minWidth: 90 }}>
                 {f.key}
               </span>
               <span className="text-break">{f.value}</span>
@@ -117,7 +117,7 @@ const OfflineResourceList: FC<UIBlockProps> = ({ block }) => {
           ))}
         </div>
       ) : (
-        <div className="small text-muted fst-italic">
+        <div className="small text-quaternary fst-italic">
           {translate('No filters applied')}
         </div>
       )}

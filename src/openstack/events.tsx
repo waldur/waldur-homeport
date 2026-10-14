@@ -113,7 +113,7 @@ export const SecurityGroupRulesDiff: FC<{ context: RulesChangedContext }> = ({
               <li key={`m-${i}`} className="font-monospace">
                 {formatSecurityGroupRule(entry.old)} →{' '}
                 {formatSecurityGroupRule(entry.new)}{' '}
-                <span className="text-muted">
+                <span className="text-quaternary">
                   [{entry.changed_fields.join(', ')}]
                 </span>
               </li>

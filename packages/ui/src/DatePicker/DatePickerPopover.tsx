@@ -85,27 +85,26 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
                 ? 'min-h-[28px] py-[4.5px] ps-[8px] pe-[32px] text-[14px]'
                 : 'min-h-[40px] py-[6px] ps-[11px] pe-[40px] text-[14.3px]',
               solid
-                ? 'border-transparent bg-[var(--bs-gray-100)]'
-                : 'border-[var(--color-border-secondary)] bg-[var(--waldur-bg-primary)] hover:border-[var(--waldur-brand-500)]',
+                ? 'border-transparent bg-tertiary'
+                : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum
+                  'border-secondary bg-primary hover:border-brand-500',
               // Open reads as focused while its calendar is showing.
-              'outline-none focus-visible:border-[var(--waldur-brand-300)] focus-visible:ring-1 focus-visible:ring-[var(--waldur-brand-300)]',
-              'data-[state=open]:border-[var(--waldur-brand-300)] data-[state=open]:ring-1 data-[state=open]:ring-[var(--waldur-brand-300)]',
-              'dark:focus-visible:border-[var(--waldur-brand-400)] dark:focus-visible:ring-[var(--waldur-brand-400)]',
-              'dark:data-[state=open]:border-[var(--waldur-brand-400)] dark:data-[state=open]:ring-[var(--waldur-brand-400)]',
-              'disabled:cursor-not-allowed disabled:bg-[var(--waldur-bg-disabled-subtle)] disabled:hover:border-[var(--color-border-secondary)]',
+              'outline-none focus-visible:border-[var(--border-brand)] focus-visible:ring-1 focus-visible:ring-[var(--border-brand)]',
+              'data-[state=open]:border-[var(--border-brand)] data-[state=open]:ring-1 data-[state=open]:ring-[var(--border-brand)]',
+              'disabled:cursor-not-allowed disabled:bg-secondary disabled:hover:border-secondary',
             )}
           >
             {displayValue ? (
               <span
                 data-slot="date-picker-value"
-                className="truncate leading-normal text-[var(--surface-text-primary)]"
+                className="truncate leading-normal text-primary"
               >
                 {displayValue}
               </span>
             ) : (
               <span
                 data-slot="date-picker-placeholder"
-                className="truncate leading-normal text-[var(--surface-text-secondary)]"
+                className="truncate leading-normal text-quaternary"
               >
                 {placeholder}
               </span>
@@ -126,7 +125,7 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
             aria-hidden
             weight="bold"
             size={size === 'sm' ? 16 : 20}
-            className="pointer-events-none absolute top-1/2 right-[12px] -translate-y-1/2 text-[var(--surface-text-muted)]"
+            className="pointer-events-none absolute top-1/2 right-[12px] -translate-y-1/2 text-quinary"
           />
         )}
       </div>

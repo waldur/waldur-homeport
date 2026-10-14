@@ -470,7 +470,7 @@ export const OfferingMergeWizard: FC = () => {
           </div>
           <div className="flex-grow-1 min-w-0">
             {!editable && step > STEP_SELECT && step < STEP_RUN && (
-              <p className="text-muted">
+              <p className="text-quaternary">
                 {translate(
                   'The merge is {state}; its mappings can no longer change.',
                   { state: getMergeStateLabel(merge.state) },
@@ -478,7 +478,7 @@ export const OfferingMergeWizard: FC = () => {
               </p>
             )}
             <div className="wizard-body-vertical">{renderStep()}</div>
-            <div className="d-flex justify-content-between mt-5 pt-5 border-top">
+            <div className="d-flex justify-content-between mt-5 pt-5 border-t-[1px] border-t-secondary">
               <BaseButton
                 label={translate('Back')}
                 variant="tertiary"

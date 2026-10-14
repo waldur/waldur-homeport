@@ -234,11 +234,11 @@ export const OrganizationCreateStep2: FunctionComponent<
                           />
                         </div>
                         <div className="flex-grow-1">
-                          <div className="fw-semibold text-gray-800 mb-1">
+                          <div className="font-semibold text-primary mb-1">
                             {translate('Personal identity received')}
                             {user?.civil_number && `: ${user.civil_number}`}
                           </div>
-                          <div className="text-gray-700">
+                          <div className="text-secondary">
                             {translate(
                               'This will be used to check your company representative rights.',
                             )}
@@ -253,10 +253,10 @@ export const OrganizationCreateStep2: FunctionComponent<
                           <InfoIcon size={24} weight="duotone" />
                         </div>
                         <div className="flex-grow-1">
-                          <div className="fw-semibold text-gray-800 mb-1">
+                          <div className="font-semibold text-primary mb-1">
                             {translate('Complete your profile to continue')}
                           </div>
-                          <div className="text-gray-700 mb-3">
+                          <div className="text-secondary mb-3">
                             {missingProfileLabels
                               ? translate(
                                   'This check uses your identity from your account, but your profile is missing: {attributes}. Add it to your profile to continue.',
@@ -285,10 +285,10 @@ export const OrganizationCreateStep2: FunctionComponent<
                             <InfoIcon size={24} weight="duotone" />
                           </div>
                           <div className="flex-grow-1">
-                            <div className="fw-semibold text-gray-800 mb-1">
+                            <div className="font-semibold text-primary mb-1">
                               {translate('Why do we need this?')}
                             </div>
-                            <div className="text-gray-700">
+                            <div className="text-secondary">
                               {methodInfo.description}
                             </div>
                           </div>
@@ -323,7 +323,7 @@ export const OrganizationCreateStep2: FunctionComponent<
 
           {isManual && (
             <div className="pt-2">
-              <p className="text-gray-700 mb-6">
+              <p className="text-secondary mb-6">
                 {translate(
                   'Please provide your organization details. Supporting documents will help speed up the review process.',
                 )}
@@ -354,7 +354,7 @@ export const OrganizationCreateStep2: FunctionComponent<
               {/* Documentation Upload Section */}
               <div className="mt-8">
                 <BootstrapForm.Group>
-                  <BootstrapForm.Label className="fs-6 fw-semibold mb-2">
+                  <BootstrapForm.Label className="fs-6 font-semibold mb-2">
                     {translate('Optional information and supporting documents')}
                   </BootstrapForm.Label>
                   <UploadContainer
@@ -376,7 +376,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                       />
                     )}
                   />
-                  <p className="mb-0 mt-1 text-muted small">
+                  <p className="mb-0 mt-1 text-quaternary small">
                     {translate(
                       'To speed up the review process, provide as much data as possible',
                     )}

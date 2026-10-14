@@ -93,7 +93,7 @@ export function TableToolbarActions() {
       {/* Multi-select actions */}
       {selectedRows?.length > 0 && slots.multiSelectActions && (
         <div className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-4">
-          <div className="d-flex align-items-center fw-normal text-dark me-2">
+          <div className="d-flex align-items-center font-normal text-primary me-2">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
@@ -223,7 +223,7 @@ export function TableToolbarTitle() {
                 (display.verboseName && titleCase(display.verboseName))}
             </span>
             {Boolean(display.subtitle) && (
-              <small className="fs-6 fw-normal d-block mt-4px">
+              <small className="fs-6 font-normal d-block mt-4px">
                 {display.subtitle}
               </small>
             )}
@@ -252,7 +252,10 @@ export function TableToolbar() {
 
   return (
     <Card.Header
-      className={classNames('border-bottom', display.headerClassName)}
+      className={classNames(
+        'border-b-[1px] border-b-secondary',
+        display.headerClassName,
+      )}
       data-testid="table-toolbar"
     >
       <div className="card-toolbar d-flex flex-wrap align-items-center gap-4 w-100">

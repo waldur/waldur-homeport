@@ -122,8 +122,8 @@ export const MatrixCallFloatingWidget = forwardRef<
         bottom: effectivePos.y,
         width: WIDGET_WIDTH,
         height: WIDGET_HEIGHT,
-        background: 'var(--bs-body-bg)',
-        border: '1px solid var(--bs-border-color)',
+        background: 'var(--bg-primary)',
+        border: '1px solid var(--border-secondary)',
         borderRadius: 8,
         display: 'flex',
         flexDirection: 'column',
@@ -131,11 +131,11 @@ export const MatrixCallFloatingWidget = forwardRef<
       }}
     >
       <div
-        className="d-flex align-items-center gap-2 px-2 py-1 border-bottom"
+        className="d-flex align-items-center gap-2 px-2 py-1 border-b-[1px] border-b-secondary"
         style={{ cursor: 'grab', userSelect: 'none', touchAction: 'none' }}
         onPointerDown={onPointerDown}
       >
-        <span className="fw-semibold flex-grow-1 text-truncate">
+        <span className="font-semibold flex-grow-1 text-truncate">
           {roomName}
         </span>
         <BaseButton

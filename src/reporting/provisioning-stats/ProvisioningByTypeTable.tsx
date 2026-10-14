@@ -26,13 +26,13 @@ const columns: Column<TypeRow>[] = [
   {
     title: translate('Order type'),
     render: ({ row }) => (
-      <span className="fw-semibold">{TYPE_LABELS[row.type] || row.type}</span>
+      <span className="font-semibold">{TYPE_LABELS[row.type] || row.type}</span>
     ),
   },
   {
     title: translate('Count'),
     render: ({ row }) => (
-      <span className="fw-bold">{row.count.toLocaleString()}</span>
+      <span className="font-medium">{row.count.toLocaleString()}</span>
     ),
   },
 ];

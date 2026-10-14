@@ -92,7 +92,9 @@ export const ConditionalCascadeField = ({
 
   return (
     <div className="conditional-cascade">
-      {tooltip && <div className="form-text text-muted mb-3">{tooltip}</div>}
+      {tooltip && (
+        <div className="form-text text-quaternary mb-3">{tooltip}</div>
+      )}
       {steps.map((step) => {
         const isEnabled = isStepEnabled(step);
         const choices = getChoicesForStep(step);

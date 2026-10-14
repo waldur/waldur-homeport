@@ -133,7 +133,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
       )}
       <div className="ms-sm-auto d-flex align-items-center gap-3">
         {hasSelection && (
-          <div className="d-flex align-items-center fw-normal text-dark gap-2">
+          <div className="d-flex align-items-center font-normal text-primary gap-2">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}

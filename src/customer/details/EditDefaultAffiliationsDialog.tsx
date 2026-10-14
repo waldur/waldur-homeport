@@ -155,7 +155,7 @@ export const EditDefaultAffiliationsDialog: FunctionComponent<
       }
     >
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <span className="text-muted">
+        <span className="text-quaternary">
           {selectedUuids.size === 0
             ? translate('No affiliations enabled')
             : selectedUuids.size === 1

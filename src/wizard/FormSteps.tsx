@@ -110,12 +110,12 @@ export const FormSteps: FC<{
           className={classNames(
             'd-flex justify-content-between align-items-center w-100',
             (hasCriticalErrors || hasNormalErrors) && 'has-error',
-            isDisabled && 'text-muted',
+            isDisabled && 'text-quaternary',
           )}
         >
           {step.label}
           {hideStatusIcons ? null : isDisabled ? (
-            <LockIcon weight="bold" className="text-muted" size={20} />
+            <LockIcon weight="bold" className="text-quaternary" size={20} />
           ) : step.fields && hasCriticalErrors ? (
             <Tooltip
               label={<FieldErrorMessage error={criticalErrors} />}
@@ -139,7 +139,7 @@ export const FormSteps: FC<{
           ) : completedSteps[i] ? (
             <CheckCircleIcon weight="bold" className="text-success" size={20} />
           ) : step.required ? (
-            <CircleIcon weight="bold" className="text-muted" size={20} />
+            <CircleIcon weight="bold" className="text-quaternary" size={20} />
           ) : null}
         </div>
       ),

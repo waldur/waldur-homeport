@@ -1,12 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+import elevationCss from './css/semantic/elevation.css?raw';
+import {
+  parseTokenFile,
+  type Token,
+  type TokenFile,
+} from './stories/tokenSource';
+import { Prose, TokenPage, TokenTable, Mono } from './stories/TokenTable';
+
 const meta: Meta = {
   title: 'Foundations/Elevation',
   parameters: {
     docs: {
       description: {
         component:
-          'Shadow tokens and border radius definitions used to establish visual hierarchy, floating elevation layers, and container shapes.',
+          'Shadow tokens that lift a surface off the page: the semantic elevation layer (semantic/elevation.css) and the component shadows that compose with it. Corner radius is on Foundations/Layout.',
       },
     },
   },
@@ -15,145 +23,62 @@ export default meta;
 
 type Story = StoryObj;
 
-export const ShadowsAndRadius: Story = {
-  render: () => (
-    <div className="p-6 bg-[var(--surface-page-bg)] space-y-10 max-w-4xl">
-      <div>
-        <h3 className="text-base font-semibold text-[var(--surface-text-primary)] mb-4">
-          Elevation & Shadows
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="flex flex-col items-center justify-center p-6 rounded-md bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] shadow-[var(--card-shadow)] h-32 text-center">
-            <span className="text-sm font-medium text-[var(--surface-text-primary)]">
-              Card Shadow
-            </span>
-            <span className="font-mono text-xs text-[var(--surface-text-muted)] mt-1">
-              --card-shadow
-            </span>
-            <span className="text-[11px] text-[var(--surface-text-secondary)] mt-2">
-              Default surface container
-            </span>
-          </div>
+const components = import.meta.glob<string>('./css/components/*.css', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
 
-          <div className="flex flex-col items-center justify-center p-6 rounded-md bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] shadow-[var(--dropdown-shadow)] h-32 text-center">
-            <span className="text-sm font-medium text-[var(--surface-text-primary)]">
-              Dropdown Shadow
-            </span>
-            <span className="font-mono text-xs text-[var(--surface-text-muted)] mt-1">
-              --dropdown-shadow
-            </span>
-            <span className="text-[11px] text-[var(--surface-text-secondary)] mt-2">
-              Floating popovers & menus
-            </span>
-          </div>
+const elevation = parseTokenFile(elevationCss);
+/** Every shadow a component file declares, with the file it comes from. */
+const componentShadows: (Token & { file: string })[] = Object.entries(
+  components,
+).flatMap(([path, css]) =>
+  parseTokenFile(css)
+    .tokens.filter((t) => /shadow/.test(t.name))
+    .map((t) => ({ ...t, file: path.replace('./css/', '') })),
+);
+const shadowFile: TokenFile = {
+  doc: '',
+  blocks: ['light', 'dark'],
+  tokens: [
+    ...elevation.tokens.filter((t) => /shadow/.test(t.name)),
+    ...componentShadows,
+  ],
+};
 
-          <div className="flex flex-col items-center justify-center p-6 rounded-md bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] shadow-[var(--overlay-shadow)] h-32 text-center">
-            <span className="text-sm font-medium text-[var(--surface-text-primary)]">
-              Overlay Shadow
-            </span>
-            <span className="font-mono text-xs text-[var(--surface-text-muted)] mt-1">
-              --overlay-shadow
-            </span>
-            <span className="text-[11px] text-[var(--surface-text-secondary)] mt-2">
-              Dialogs & toasts
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center justify-center p-6 rounded-md bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] shadow-[var(--drawer-shadow)] h-32 text-center">
-            <span className="text-sm font-medium text-[var(--surface-text-primary)]">
-              Drawer Shadow
-            </span>
-            <span className="font-mono text-xs text-[var(--surface-text-muted)] mt-1">
-              --drawer-shadow
-            </span>
-            <span className="text-[11px] text-[var(--surface-text-secondary)] mt-2">
-              Mobile sheet & drawers
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="text-base font-semibold text-[var(--surface-text-primary)] mb-4">
-          Border Radius Scale
-        </h3>
-        <p className="text-[11px] text-[var(--surface-text-secondary)] mb-3 max-w-2xl">
-          <strong>md</strong>/<strong>lg</strong>/<strong>modal</strong> are
-          pinned to an exact px value in src/tailwind.css's{' '}
-          <code className="font-mono">--radius-*</code> theme block, so they
-          render identically everywhere. The rest (<strong>xs</strong>/
-          <strong>sm</strong>/<strong>xl</strong>) are Tailwind's own
-          un-overridden rem-based defaults — accurate here, but this app forces
-          a 13px root font-size in production
-          (waldur-homeport/src/metronic/sass/layout/_variables.scss), which
-          shrinks them below what's shown below; verify against the real app
-          before relying on one of these three for a new pixel-exact design.
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-xs text-center">
-            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              xs
-            </span>
-            <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Tailwind default
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-sm text-center">
-            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              sm
-            </span>
-            <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Tailwind default
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-md text-center">
-            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              md (6px, pinned)
-            </span>
-            <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Cards, buttons sm
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-lg text-center">
-            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              lg (8px, pinned)
-            </span>
-            <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Badges, buttons lg, accordions
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-xl text-center">
-            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              xl
-            </span>
-            <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Tailwind default
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-modal text-center">
-            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              modal (20px, pinned)
-            </span>
-            <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Dialog content, sidebar mode card
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-full text-center">
-            <span className="text-xs font-semibold text-[var(--surface-text-primary)]">
-              full
-            </span>
-            <span className="text-[10px] text-[var(--surface-text-muted)]">
-              Pills, Avatars
-            </span>
-          </div>
-        </div>
-      </div>
+function ShadowCard({ token }: { token: Token & { file?: string } }) {
+  return (
+    <div
+      className="flex h-32 flex-col items-center justify-center rounded-md bg-[var(--card-bg)] p-4 text-center"
+      style={{ boxShadow: `var(${token.name})` }}
+    >
+      <Mono className="text-xs font-semibold text-primary">{token.name}</Mono>
+      <span className="mt-1 text-[11px] text-quinary">
+        {token.file ?? 'semantic/elevation.css'}
+      </span>
+      {token.note && (
+        <span className="mt-2 line-clamp-3 text-[11px] text-quaternary">
+          <Prose text={token.note} />
+        </span>
+      )}
     </div>
+  );
+}
+
+/**
+ * Each shadow on a card, as the page renders it in the current theme, then
+ * its light and dark source values.
+ */
+export const Shadows: Story = {
+  render: () => (
+    <TokenPage title="Elevation" intro={elevation.doc}>
+      <div className="mb-8 grid grid-cols-1 gap-8 p-2 sm:grid-cols-2 lg:grid-cols-4">
+        {shadowFile.tokens.map((t) => (
+          <ShadowCard key={t.name} token={t} />
+        ))}
+      </div>
+      <TokenTable file={shadowFile} />
+    </TokenPage>
   ),
 };
