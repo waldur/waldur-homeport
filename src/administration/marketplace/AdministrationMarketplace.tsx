@@ -29,6 +29,11 @@ const MARKETPLACE_TABS: SettingsTab[] = [
     groupName: translate('Affiliates'),
   },
   {
+    key: 'vat',
+    title: translate('VAT'),
+    groupName: translate('VAT'),
+  },
+  {
     key: 'slurm-policy',
     title: translate('SLURM policy'),
     groupName: translate('SLURM Policy'),

@@ -187,6 +187,8 @@ const AddressTab: FC<CustomerEditPanelProps> = (props) => {
         label={translate('Country')}
         parse={clearToBlank}
         renderValue={() => props.customer.country_name}
+        // EU VAT rules follow the country, so only staff may change it.
+        isStaffOnly={Boolean(ENV.plugins.WALDUR_CORE?.VAT_TAXATION_ENABLED)}
       />
       <StringEditField name="city" label={translate('City')} />
       <StringEditField name="state" label={translate('State')} />
