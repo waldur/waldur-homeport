@@ -66,7 +66,7 @@ export const BreadcrumbSearchItem = ({
         aria-current={item.isCurrent ? 'page' : undefined}
         // pe-4 keeps a long title off the favourite star, which always holds
         // its place beside the link; as padding it stays part of the link.
-        className="d-flex flex-grow-1 min-w-0 text-primary hover:text-brand align-items-center py-2 ps-5 pe-4"
+        className="d-flex flex-grow-1 min-w-0 text-brand align-items-center py-2 ps-5 pe-4"
       >
         {/* Decorative: the title follows, so the option isn't named by
             the avatar's initials too. */}

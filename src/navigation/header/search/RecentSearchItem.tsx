@@ -21,7 +21,7 @@ export const RecentSearchItem = ({ item }) => {
 
   return (
     <Link
-      className="d-flex text-primary hover:text-brand align-items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)]"
+      className="d-flex text-brand align-items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)]"
       state={item.to}
       params={item.params}
       onClick={() => {

@@ -51,7 +51,7 @@ export const SearchItem = (props: SearchItemProps) => {
       <Link
         state={props.to}
         params={props.params}
-        className="search-result-item__link d-flex text-primary hover:text-brand align-items-center me-4"
+        className="search-result-item__link d-flex text-brand align-items-center me-4"
         onClick={(e) => {
           if (props.onClick) {
             props.onClick(props);

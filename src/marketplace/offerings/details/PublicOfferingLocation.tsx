@@ -50,7 +50,7 @@ export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
                     <li className="mb-2" key={i}>
                       <Link
                         state=""
-                        className="text-decoration-underline text-primary hover:text-brand"
+                        className="text-decoration-underline text-brand"
                       >
                         link {i}
                       </Link>
