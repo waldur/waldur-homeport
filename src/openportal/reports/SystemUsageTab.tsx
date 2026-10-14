@@ -377,7 +377,7 @@ export const SystemUsageTab: FC = () => {
       {showLoadPrompt && !loadTriggered && (
         <Card className="mb-4">
           <Card.Body>
-            <p className="mb-2 font-semibold">
+            <p className="mb-2">
               {translate('System usage data not yet loaded')}
             </p>
 
@@ -528,9 +528,7 @@ export const SystemUsageTab: FC = () => {
       {/* ── Charts ────────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && (
         <Card className="mb-4">
-          <Card.Header className="font-semibold">
-            {translate('Usage')}
-          </Card.Header>
+          <Card.Header>{translate('Usage')}</Card.Header>
           <Card.Body>
             <UsageReportVis
               reports={activeUsage}
@@ -543,9 +541,7 @@ export const SystemUsageTab: FC = () => {
 
       {activeStorage.length > 0 && nameMaps !== undefined && (
         <Card className="mb-4">
-          <Card.Header className="font-semibold">
-            {translate('Storage')}
-          </Card.Header>
+          <Card.Header>{translate('Storage')}</Card.Header>
           <Card.Body>
             <StorageReportVis
               reports={activeStorage}

@@ -58,9 +58,7 @@ const HealthInfoItem = ({
           {message}
         </span>
       </div>
-      <div className="health-title font-semibold text-secondary small">
-        {title}
-      </div>
+      <div className="health-title text-secondary small">{title}</div>
     </div>
   );
 
@@ -122,9 +120,7 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
                 weight="bold"
               />
             )}
-            <span
-              className={`font-semibold ${allWorking ? 'text-success' : 'text-danger'}`}
-            >
+            <span className={`${allWorking ? 'text-success' : 'text-danger'}`}>
               {workingCount}/{totalCount} {translate('services healthy')}
             </span>
           </div>

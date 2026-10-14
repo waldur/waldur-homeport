@@ -18,9 +18,7 @@ export const OfferingCostsTable: FC = () => {
   const columns: Column<OfferingCost>[] = [
     {
       title: translate('Offering'),
-      render: ({ row }) => (
-        <span className="font-semibold">{row.offering_name}</span>
-      ),
+      render: ({ row }) => <span>{row.offering_name}</span>,
       export: 'offering_name',
       exportTitle: translate('Offering'),
     },

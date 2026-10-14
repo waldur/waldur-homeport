@@ -49,7 +49,7 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
       </div>
       <div className="d-none d-md-flex flex-column align-items-start justify-content-center">
         {!user?.is_staff && (
-          <span className="text-quaternary fs-7 font-semibold lh-1 mb-2">
+          <span className="text-quaternary fs-7 lh-1 mb-2">
             {translate('Hello')}
           </span>
         )}

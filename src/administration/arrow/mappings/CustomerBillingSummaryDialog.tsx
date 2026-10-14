@@ -214,7 +214,7 @@ export const CustomerBillingSummaryDialog: FC<
                           <td className="text-end">
                             {line.quantity ? String(line.quantity) : '1'}
                           </td>
-                          <td className="text-end font-semibold">
+                          <td className="text-end">
                             {line.sell_price
                               ? defaultCurrency(line.sell_price)
                               : DASH_ESCAPE_CODE}
@@ -292,7 +292,7 @@ export const CustomerBillingSummaryDialog: FC<
                               {line.license_reference}
                             </span>
                           </td>
-                          <td className="text-end font-semibold">
+                          <td className="text-end">
                             {line.sell_price ? (
                               defaultCurrency(line.sell_price)
                             ) : line.error ? (

@@ -81,7 +81,7 @@ const StepNameCell = ({ row }: { row: CallWorkflowStep }) => {
           <LockSimpleIcon size={14} weight="bold" className="text-quaternary" />
         </Tooltip>
       )}
-      <span className="font-semibold">{name}</span>
+      <span>{name}</span>
       {disabled && (
         <Badge variant="neutral" size="sm" shape="pill" tone="outline">
           {translate('Disabled')}

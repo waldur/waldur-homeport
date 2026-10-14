@@ -66,9 +66,7 @@ const InstanceRow: FC<{
   indent?: boolean;
 }> = ({ inst, indent }) => (
   <tr>
-    <td className={indent ? 'ps-8 font-semibold' : 'ps-4 font-semibold'}>
-      {inst.name}
-    </td>
+    <td className={indent ? 'ps-8' : 'ps-4'}>{inst.name}</td>
     <td>{renderFieldOrDash(inst.cores)}</td>
     <td>{inst.ram != null ? formatRam(inst.ram) : '\u2014'}</td>
     <td>{renderFieldOrDash(inst.customer_name)}</td>

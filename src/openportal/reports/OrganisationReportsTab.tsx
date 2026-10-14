@@ -216,7 +216,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                 className="mt-1"
                 label={
                   <span className="flex-grow-1" style={{ cursor: 'pointer' }}>
-                    <span className="font-semibold">{p.name}</span>
+                    <span>{p.name}</span>
                     {(p.start_date || p.end_date) && (
                       <span className="text-quaternary small ms-2">
                         {p.start_date ?? '?'} →{' '}
@@ -859,9 +859,7 @@ export const OrganisationReportsTab: FC = () => {
       {showLoadPrompt && !projectsLoading && !reportsLoading && (
         <Card className="mb-4">
           <Card.Body>
-            <p className="mb-2 font-semibold">
-              {translate('Usage reports not yet loaded')}
-            </p>
+            <p className="mb-2">{translate('Usage reports not yet loaded')}</p>
 
             {/* Project pre-filters */}
             <Row className="g-2 mb-3">
@@ -1066,9 +1064,7 @@ export const OrganisationReportsTab: FC = () => {
       {/* ── Charts ───────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && !showLoadPrompt && (
         <Card className="mb-4">
-          <Card.Header className="font-semibold">
-            {translate('Usage')}
-          </Card.Header>
+          <Card.Header>{translate('Usage')}</Card.Header>
           <Card.Body>
             <UsageReportVis
               reports={activeUsage}
@@ -1083,9 +1079,7 @@ export const OrganisationReportsTab: FC = () => {
         nameMaps !== undefined &&
         !showLoadPrompt && (
           <Card className="mb-4">
-            <Card.Header className="font-semibold">
-              {translate('Storage')}
-            </Card.Header>
+            <Card.Header>{translate('Storage')}</Card.Header>
             <Card.Body>
               <StorageReportVis
                 reports={activeStorage}

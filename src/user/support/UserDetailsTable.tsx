@@ -124,7 +124,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
             <div className="d-flex flex-column gap-1">
               {Object.entries(props.user.details).map(([claim, value]) => (
                 <div key={claim}>
-                  <span className="font-semibold me-2">{claim}</span>
+                  <span className="me-2">{claim}</span>
                   <FieldWithCopy
                     value={
                       Array.isArray(value) ? value.join(', ') : String(value)

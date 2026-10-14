@@ -36,7 +36,7 @@ export const DatabaseTableStats: FC<DatabaseTableStatsProps> = ({ data }) => {
               <td>
                 <code>{row.table_name}</code>
               </td>
-              <td className="text-end font-semibold">
+              <td className="text-end">
                 {formatFilesize(row.total_size, 'B')}
               </td>
               <td className="text-end">{formatFilesize(row.data_size, 'B')}</td>

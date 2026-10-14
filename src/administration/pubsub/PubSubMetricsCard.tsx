@@ -42,7 +42,7 @@ export const PubSubMetricsCard: FC = () => {
                   <td className="text-quaternary">
                     {translate('Messages sent')}
                   </td>
-                  <td className="font-semibold text-end text-success">
+                  <td className="text-end text-success">
                     {formatNumber(data.messages_sent)}
                   </td>
                 </tr>
@@ -51,7 +51,7 @@ export const PubSubMetricsCard: FC = () => {
                     {translate('Messages failed')}
                   </td>
                   <td
-                    className={`font-semibold text-end ${data.messages_failed > 0 ? 'text-danger' : ''}`}
+                    className={`text-end ${data.messages_failed > 0 ? 'text-danger' : ''}`}
                   >
                     {formatNumber(data.messages_failed)}
                   </td>
@@ -61,7 +61,7 @@ export const PubSubMetricsCard: FC = () => {
                     {translate('Messages retried')}
                   </td>
                   <td
-                    className={`font-semibold text-end ${data.messages_retried > 0 ? 'text-warning' : ''}`}
+                    className={`text-end ${data.messages_retried > 0 ? 'text-warning' : ''}`}
                   >
                     {formatNumber(data.messages_retried)}
                   </td>
@@ -70,7 +70,7 @@ export const PubSubMetricsCard: FC = () => {
                   <td className="text-quaternary">
                     {translate('Messages skipped')}
                   </td>
-                  <td className="font-semibold text-end">
+                  <td className="text-end">
                     {formatNumber(data.messages_skipped)}
                   </td>
                 </tr>
@@ -88,7 +88,7 @@ export const PubSubMetricsCard: FC = () => {
                     {translate('Circuit breaker trips')}
                   </td>
                   <td
-                    className={`font-semibold text-end ${data.circuit_breaker_trips > 0 ? 'text-warning' : ''}`}
+                    className={`text-end ${data.circuit_breaker_trips > 0 ? 'text-warning' : ''}`}
                   >
                     {formatNumber(data.circuit_breaker_trips)}
                   </td>
@@ -97,7 +97,7 @@ export const PubSubMetricsCard: FC = () => {
                   <td className="text-quaternary">
                     {translate('Rate limiter rejections')}
                   </td>
-                  <td className="font-semibold text-end">
+                  <td className="text-end">
                     {formatNumber(data.rate_limiter_rejections)}
                   </td>
                 </tr>
@@ -105,7 +105,7 @@ export const PubSubMetricsCard: FC = () => {
                   <td className="text-quaternary">
                     {translate('Average publish time')}
                   </td>
-                  <td className="font-semibold text-end">
+                  <td className="text-end">
                     {formatLatency(data.avg_publish_time_ms)}
                   </td>
                 </tr>
@@ -113,7 +113,7 @@ export const PubSubMetricsCard: FC = () => {
                   <td className="text-quaternary">
                     {translate('Last publish time')}
                   </td>
-                  <td className="font-semibold text-end">
+                  <td className="text-end">
                     {formatTimestamp(data.last_publish_time)}
                   </td>
                 </tr>

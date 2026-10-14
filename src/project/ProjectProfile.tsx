@@ -130,7 +130,7 @@ const ProjectEndDate = ({ project }: ProjectProfileProps) => {
   let className = '';
   let suffix: string | null = null;
   if (project.is_in_grace_period) {
-    className = 'text-warning font-semibold';
+    className = 'text-warning';
     const daysLeft = Math.max(
       0,
       Math.ceil((effectiveEndDateObj.getTime() - today.getTime()) / 86400000),
@@ -139,12 +139,12 @@ const ProjectEndDate = ({ project }: ProjectProfileProps) => {
       n: String(daysLeft),
     });
   } else if (daysSinceEffectiveEnd > 0) {
-    className = 'text-danger font-semibold';
+    className = 'text-danger';
     suffix = translate('(expired {n} days ago)', {
       n: String(daysSinceEffectiveEnd),
     });
   } else if (daysToEnd >= 0 && daysToEnd <= APPROACHING_DAYS) {
-    className = 'text-warning font-semibold';
+    className = 'text-warning';
     suffix =
       daysToEnd === 0
         ? translate('(today)')

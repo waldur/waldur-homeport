@@ -133,12 +133,12 @@ const DrillDownRow: FC<{
               />
             )}
           </div>
-          <span className={item.canDrillDown ? 'font-semibold' : ''}>
+          <span className={item.canDrillDown ? '' : ''}>
             {item.renderLabel ? item.renderLabel(item) : item.label}
           </span>
         </td>
         <td className="text-end">
-          <span className="font-semibold">{item.value.toLocaleString()}</span>
+          <span>{item.value.toLocaleString()}</span>
         </td>
         <td className="text-end" style={{ width: '100px' }}>
           <span className="text-quaternary">{item.percentage.toFixed(1)}%</span>

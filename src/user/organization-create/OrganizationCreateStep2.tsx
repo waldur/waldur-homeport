@@ -234,7 +234,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                           />
                         </div>
                         <div className="flex-grow-1">
-                          <div className="font-semibold text-primary mb-1">
+                          <div className="text-primary mb-1">
                             {translate('Personal identity received')}
                             {user?.civil_number && `: ${user.civil_number}`}
                           </div>
@@ -253,7 +253,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                           <InfoIcon size={24} weight="duotone" />
                         </div>
                         <div className="flex-grow-1">
-                          <div className="font-semibold text-primary mb-1">
+                          <div className="text-primary mb-1">
                             {translate('Complete your profile to continue')}
                           </div>
                           <div className="text-secondary mb-3">
@@ -285,7 +285,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                             <InfoIcon size={24} weight="duotone" />
                           </div>
                           <div className="flex-grow-1">
-                            <div className="font-semibold text-primary mb-1">
+                            <div className="text-primary mb-1">
                               {translate('Why do we need this?')}
                             </div>
                             <div className="text-secondary">
@@ -354,7 +354,7 @@ export const OrganizationCreateStep2: FunctionComponent<
               {/* Documentation Upload Section */}
               <div className="mt-8">
                 <BootstrapForm.Group>
-                  <BootstrapForm.Label className="fs-6 font-semibold mb-2">
+                  <BootstrapForm.Label className="fs-6 mb-2">
                     {translate('Optional information and supporting documents')}
                   </BootstrapForm.Label>
                   <UploadContainer

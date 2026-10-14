@@ -36,9 +36,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
         <tbody>
           <tr>
             <td className="text-quaternary">{translate('Total locks')}</td>
-            <td className="font-semibold text-end">
-              {data.total_locks.toLocaleString()}
-            </td>
+            <td className="text-end">{data.total_locks.toLocaleString()}</td>
           </tr>
           <tr>
             <td className="text-quaternary">{translate('Waiting locks')}</td>
@@ -52,7 +50,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
                   {data.waiting_locks}
                 </Badge>
               ) : (
-                <span className="font-semibold text-success">0</span>
+                <span className="text-success">0</span>
               )}
             </td>
           </tr>
@@ -66,7 +64,7 @@ export const DatabaseLocksCard: FC<DatabaseLocksCardProps> = ({ data }) => {
                   {data.access_exclusive_locks}
                 </Badge>
               ) : (
-                <span className="font-semibold">0</span>
+                <span>0</span>
               )}
             </td>
           </tr>

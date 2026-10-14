@@ -93,11 +93,7 @@ const detailsTableColumns: Column<UserAffiliationDetail>[] = [
   {
     title: translate('Organization'),
     orderField: 'organization',
-    render: ({ row }) => (
-      <span className="font-semibold">
-        {renderFieldOrDash(row.organization)}
-      </span>
-    ),
+    render: ({ row }) => <span>{renderFieldOrDash(row.organization)}</span>,
     export: 'organization',
   },
   {

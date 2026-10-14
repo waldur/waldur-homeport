@@ -76,16 +76,14 @@ const columns: Column<ReviewProgressStat>[] = [
     title: translate('Reviewer'),
     render: ({ row }) => (
       <div className="d-flex flex-column">
-        <span className="font-semibold">{row.reviewer_name}</span>
+        <span>{row.reviewer_name}</span>
         <span className="text-quaternary fs-8">{row.reviewer_email}</span>
       </div>
     ),
   },
   {
     title: translate('Assigned'),
-    render: ({ row }) => (
-      <span className="font-semibold">{row.total_assigned}</span>
-    ),
+    render: ({ row }) => <span>{row.total_assigned}</span>,
   },
   {
     title: translate('Completion'),

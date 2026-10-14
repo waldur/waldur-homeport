@@ -87,9 +87,7 @@ export const WorkflowSequencePreview: FC<WorkflowSequencePreviewProps> = ({
                 className="text-quaternary d-block"
               />
             </span>
-            <div className="mt-3 font-medium small text-secondary">
-              {definition.name}
-            </div>
+            <div className="mt-3 small text-secondary">{definition.name}</div>
             <div className="text-quaternary fs-8 mt-1">
               {configured?.duration_in_days
                 ? translate('{count}d', {

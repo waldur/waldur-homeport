@@ -46,7 +46,7 @@ function flattenUsageData(
 const tableColumns: Column<ClassificationUsageRow>[] = [
   {
     title: translate('OECD Category'),
-    render: ({ row }) => <span className="font-semibold">{row.category}</span>,
+    render: ({ row }) => <span>{row.category}</span>,
   },
   {
     title: translate('Component'),

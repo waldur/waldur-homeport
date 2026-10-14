@@ -39,20 +39,18 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
         <tbody>
           <tr>
             <td className="text-quaternary">{translate('Committed')}</td>
-            <td className="font-semibold text-end text-success">
+            <td className="text-end text-success">
               {formatNumber(data.committed)}
             </td>
           </tr>
           <tr>
             <td className="text-quaternary">{translate('Rolled back')}</td>
-            <td className="font-semibold text-end">
-              {formatNumber(data.rolled_back)}
-            </td>
+            <td className="text-end">{formatNumber(data.rolled_back)}</td>
           </tr>
           <tr>
             <td className="text-quaternary">{translate('Rollback ratio')}</td>
             <td
-              className={`font-semibold text-end ${rollbackHealth === 'danger' ? 'text-danger' : rollbackHealth === 'warning' ? 'text-warning' : ''}`}
+              className={`text-end ${rollbackHealth === 'danger' ? 'text-danger' : rollbackHealth === 'warning' ? 'text-warning' : ''}`}
             >
               {formatPercent(data.rollback_ratio_percent)}
             </td>
@@ -70,9 +68,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
                 )}
               </div>
             </td>
-            <td
-              className={`font-semibold text-end ${hasDeadlocks ? 'text-danger' : ''}`}
-            >
+            <td className={`text-end ${hasDeadlocks ? 'text-danger' : ''}`}>
               {data.deadlocks}
             </td>
           </tr>

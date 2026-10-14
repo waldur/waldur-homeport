@@ -40,9 +40,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           <div className="mb-4">
             <div className="d-flex justify-content-between mb-1">
               <span>{translate('Buffer cache')}</span>
-              <span className="font-semibold">
-                {formatPercent(data.buffer_cache_hit_ratio)}
-              </span>
+              <span>{formatPercent(data.buffer_cache_hit_ratio)}</span>
             </div>
             <Progress
               value={data.buffer_cache_hit_ratio ?? 0}
@@ -53,9 +51,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           <div>
             <div className="d-flex justify-content-between mb-1">
               <span>{translate('Index cache')}</span>
-              <span className="font-semibold">
-                {formatPercent(data.index_hit_ratio)}
-              </span>
+              <span>{formatPercent(data.index_hit_ratio)}</span>
             </div>
             <Progress
               value={data.index_hit_ratio ?? 0}
@@ -74,7 +70,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
                 <td className="text-quaternary">
                   {translate('Shared buffers')}
                 </td>
-                <td className="font-semibold text-end">
+                <td className="text-end">
                   <code>{data.shared_buffers}</code>
                 </td>
               </tr>
@@ -82,7 +78,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
                 <td className="text-quaternary">
                   {translate('Effective cache size')}
                 </td>
-                <td className="font-semibold text-end">
+                <td className="text-end">
                   <code>{data.effective_cache_size}</code>
                 </td>
               </tr>

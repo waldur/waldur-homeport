@@ -39,7 +39,7 @@ const LinkFields = ({
   label: string;
 }) => (
   <div className="mb-3">
-    <div className="font-semibold mb-1">{label}</div>
+    <div className="mb-1">{label}</div>
     <div className="row g-2">
       <div className="col-sm-5">
         <StringGroup

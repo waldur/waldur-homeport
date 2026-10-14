@@ -559,12 +559,10 @@ const FieldMappingTable: FC<FieldMappingTableProps> = ({
         {fields.map((field, idx) => (
           <tr key={idx}>
             <td>
-              <span className="text-brand font-semibold">
-                {field.arrowField}
-              </span>
+              <span className="text-brand">{field.arrowField}</span>
             </td>
             <td>
-              <span className="font-semibold">{field.waldurField}</span>
+              <span>{field.waldurField}</span>
             </td>
             <td className="text-quaternary">{field.description}</td>
           </tr>
@@ -786,7 +784,7 @@ export const ArrowHowItWorksDialog: FC = () => {
                     'Compensation items are created for any discrepancies',
                   )}{' '}
                   (
-                  <span className="font-semibold">
+                  <span>
                     adjustment = final_{priceSource} - consumed_{priceSource}
                   </span>
                   )
@@ -963,7 +961,7 @@ export const ArrowHowItWorksDialog: FC = () => {
                 {SYNC_STATES.map((item) => (
                   <tr key={item.state}>
                     <td className="font-medium text-primary">
-                      <span className="font-semibold">{item.state}</span>
+                      <span>{item.state}</span>
                     </td>
                     <td>{item.description}</td>
                   </tr>

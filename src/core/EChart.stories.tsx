@@ -132,7 +132,7 @@ export const ActionsToolbarStandalone: Story = {
           Export toolbar actions rendered via <code>EChartActions</code>:
         </div>
         <div className="d-flex align-items-center justify-content-between p-3 border rounded bg-tertiary dark:bg-quaternary">
-          <span className="font-semibold">Monthly Cloud Analytics</span>
+          <span>Monthly Cloud Analytics</span>
           <EChartActions
             chartInstance={mockChartInstance}
             exportPdf={true}

@@ -59,11 +59,11 @@ export const PubSubTopQueuesCard: FC = () => {
                   {queue.name}
                 </td>
                 <td
-                  className={`font-semibold text-end ${queue.messages > 1000 ? 'text-warning' : ''}`}
+                  className={`text-end ${queue.messages > 1000 ? 'text-warning' : ''}`}
                 >
                   {formatNumber(queue.messages)}
                 </td>
-                <td className="font-semibold text-end">{queue.consumers}</td>
+                <td className="text-end">{queue.consumers}</td>
               </tr>
             ))}
           </tbody>

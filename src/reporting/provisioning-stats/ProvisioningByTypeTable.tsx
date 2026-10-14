@@ -25,9 +25,7 @@ const TYPE_LABELS: { [key: string]: string } = {
 const columns: Column<TypeRow>[] = [
   {
     title: translate('Order type'),
-    render: ({ row }) => (
-      <span className="font-semibold">{TYPE_LABELS[row.type] || row.type}</span>
-    ),
+    render: ({ row }) => <span>{TYPE_LABELS[row.type] || row.type}</span>,
   },
   {
     title: translate('Count'),

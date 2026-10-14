@@ -44,22 +44,18 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
             <tbody>
               <tr>
                 <td className="text-quaternary">{translate('Active')}</td>
-                <td className="font-semibold text-end">
-                  {data.active.toLocaleString()}
-                </td>
+                <td className="text-end">{data.active.toLocaleString()}</td>
               </tr>
               <tr>
                 <td className="text-quaternary">{translate('Idle')}</td>
-                <td className="font-semibold text-end">
-                  {data.idle.toLocaleString()}
-                </td>
+                <td className="text-end">{data.idle.toLocaleString()}</td>
               </tr>
               <tr>
                 <td className="text-quaternary">
                   {translate('Idle in transaction')}
                 </td>
                 <td
-                  className={`font-semibold text-end ${data.idle_in_transaction > 5 ? 'text-warning' : ''}`}
+                  className={`text-end ${data.idle_in_transaction > 5 ? 'text-warning' : ''}`}
                 >
                   {data.idle_in_transaction.toLocaleString()}
                 </td>
@@ -67,7 +63,7 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
               <tr>
                 <td className="text-quaternary">{translate('Waiting')}</td>
                 <td
-                  className={`font-semibold text-end ${data.waiting > 0 ? 'text-danger' : ''}`}
+                  className={`text-end ${data.waiting > 0 ? 'text-danger' : ''}`}
                 >
                   {data.waiting.toLocaleString()}
                 </td>

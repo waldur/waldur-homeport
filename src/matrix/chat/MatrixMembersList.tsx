@@ -22,7 +22,7 @@ export const MatrixMembersList: FC = () => {
 
   return (
     <div className="tc-members p-3">
-      <div className="font-semibold mb-2">
+      <div className="mb-2">
         {translate('Members')} ({members.length})
       </div>
       <div className="d-flex flex-column gap-1">

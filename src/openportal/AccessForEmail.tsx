@@ -159,7 +159,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                         >
                           <div className="d-flex justify-content-between align-items-start flex-wrap gap-2">
                             <div className="flex-grow-1">
-                              <div className="font-semibold text-primary">
+                              <div className="text-primary">
                                 {resource.name}
                               </div>
                             </div>

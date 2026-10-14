@@ -58,9 +58,7 @@ export const DeployPageTotalCard: FC<
                 'After this order is created, a purchase order document (PDF) will need to be uploaded before it can be approved.',
               )}
             >
-              <span className="font-semibold">
-                {translate('Purchase order will be required')}
-              </span>
+              <span>{translate('Purchase order will be required')}</span>
             </Tooltip>
           </div>
         ) : offering?.plugin_options?.enable_purchase_order_upload ? (

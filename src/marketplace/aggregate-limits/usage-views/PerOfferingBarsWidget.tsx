@@ -100,7 +100,7 @@ export const PerOfferingBarsWidget = ({
   return (
     <Tabs value={effectiveType} onValueChange={setActiveType}>
       <div className="d-flex align-items-center gap-2 mb-2 flex-wrap">
-        <small id={labelId} className="text-secondary font-medium">
+        <small id={labelId} className="text-secondary">
           {translate('Component type')}:
         </small>
         <TabsList aria-labelledby={labelId}>

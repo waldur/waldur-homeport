@@ -280,7 +280,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
       />
       <div className="d-flex flex-wrap align-items-center gap-3 mb-3">
         <div className="d-flex align-items-center gap-2">
-          <small className="text-secondary font-medium">
+          <small className="text-secondary">
             {translate('Offering · component')}:
           </small>
           <div style={{ minWidth: 320 }}>
@@ -321,9 +321,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
         {target?.limit_period && target.limit_period !== 'total' ? (
           <>
             <div className="d-flex align-items-center gap-2">
-              <small className="text-secondary font-medium">
-                {translate('Period A')}:
-              </small>
+              <small className="text-secondary">{translate('Period A')}:</small>
               <div style={{ minWidth: 160 }}>
                 <Select
                   size="sm"
@@ -344,9 +342,7 @@ export const PeriodOverPeriodView: FC<Props> = ({
               </div>
             </div>
             <div className="d-flex align-items-center gap-2">
-              <small className="text-secondary font-medium">
-                {translate('Period B')}:
-              </small>
+              <small className="text-secondary">{translate('Period B')}:</small>
               <div style={{ minWidth: 160 }}>
                 <Select
                   size="sm"

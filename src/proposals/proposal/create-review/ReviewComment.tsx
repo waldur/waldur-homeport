@@ -34,7 +34,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
         circle
       />
 
-      <div className="font-semibold">
+      <div>
         <FormLabel className="mb-0">
           {props.title}
           {Boolean(props.time) && (

@@ -70,23 +70,19 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                   <td className="text-quaternary">
                     {translate('Failure count')}
                   </td>
-                  <td className="font-semibold text-end">
-                    {data.failure_count}
-                  </td>
+                  <td className="text-end">{data.failure_count}</td>
                 </tr>
                 <tr>
                   <td className="text-quaternary">
                     {translate('Success count')}
                   </td>
-                  <td className="font-semibold text-end">
-                    {data.success_count}
-                  </td>
+                  <td className="text-end">{data.success_count}</td>
                 </tr>
                 <tr>
                   <td className="text-quaternary">
                     {translate('Last failure')}
                   </td>
-                  <td className="font-semibold text-end">
+                  <td className="text-end">
                     {formatTimestamp(data.last_failure_time)}
                   </td>
                 </tr>
@@ -94,7 +90,7 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                   <td className="text-quaternary">
                     {translate('Last state change')}
                   </td>
-                  <td className="font-semibold text-end">
+                  <td className="text-end">
                     {formatTimestamp(data.last_state_change)}
                   </td>
                 </tr>
@@ -102,17 +98,13 @@ export const PubSubCircuitBreakerCard: FC<PubSubCircuitBreakerCardProps> = ({
                   <td className="text-quaternary">
                     {translate('Failure threshold')}
                   </td>
-                  <td className="font-semibold text-end">
-                    {data.config.failure_threshold}
-                  </td>
+                  <td className="text-end">{data.config.failure_threshold}</td>
                 </tr>
                 <tr>
                   <td className="text-quaternary">
                     {translate('Recovery timeout')}
                   </td>
-                  <td className="font-semibold text-end">
-                    {data.config.recovery_timeout}s
-                  </td>
+                  <td className="text-end">{data.config.recovery_timeout}s</td>
                 </tr>
               </tbody>
             </Table>

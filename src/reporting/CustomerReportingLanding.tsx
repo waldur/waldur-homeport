@@ -23,18 +23,14 @@ const ReportCard: FC<{ report: ReportDefinition }> = ({ report }) => {
               <Glyph size={24} weight="bold" />
             </div>
           )}
-          <span className="text-primary font-semibold fs-5">
-            {report.title}
-          </span>
+          <span className="text-primary fs-5">{report.title}</span>
         </div>
         <p className="text-quaternary mb-0">
           {report.scopedDescription || report.description}
         </p>
       </Card.Body>
       <Card.Footer className="d-flex justify-content-end py-3 px-4">
-        <Link state={report.state} className="font-semibold">
-          {translate('View details')}
-        </Link>
+        <Link state={report.state}>{translate('View details')}</Link>
       </Card.Footer>
     </Card>
   );

@@ -120,7 +120,7 @@ export const ResourceRequestsSummary = ({
       title={translate('Resource requests')}
       actions={
         chosen ? (
-          <span className="text-quaternary font-semibold fs-7">{chosen}</span>
+          <span className="text-quaternary fs-7">{chosen}</span>
         ) : undefined
       }
       subtitle={

@@ -82,7 +82,7 @@ export const OrdersFilter: FC<OrdersFilterProps> = ({
       <div className="d-flex align-items-center gap-4">
         <label
           className={classNames(
-            'text-quaternary font-semibold whitespace-nowrap',
+            'text-quaternary whitespace-nowrap',
             inCardHeader ? 'fs-6' : 'fs-7',
           )}
         >

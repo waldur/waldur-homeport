@@ -175,7 +175,7 @@ export const ProviderResourcesPage: FC = () => {
           <>
             <ReportingTitle reportKey="provider-resources">
               <div className="d-flex align-items-center gap-4">
-                <label className="text-quaternary fs-7 font-semibold whitespace-nowrap">
+                <label className="text-quaternary fs-7 whitespace-nowrap">
                   {translate('Provider')}:
                 </label>
                 <div style={{ minWidth: 200 }}>

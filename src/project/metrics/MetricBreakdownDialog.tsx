@@ -96,10 +96,10 @@ export const MetricBreakdownDialog: FC<{
                   state="marketplace-resource-details"
                   params={{ resource_uuid: row.resourceUuid, tab: 'metrics' }}
                   label={row.label}
-                  className="text-primary font-semibold"
+                  className="text-primary"
                 />
               ) : (
-                <span className="text-primary font-semibold">{row.label}</span>
+                <span className="text-primary">{row.label}</span>
               ),
           },
           {

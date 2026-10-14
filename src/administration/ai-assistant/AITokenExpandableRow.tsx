@@ -144,9 +144,7 @@ const QuotaUsageDisplay: FC<{ quota: TokenQuotaUsageResponse }> = ({
     () => [
       {
         title: translate('Period'),
-        render: ({ row }) => (
-          <span className="font-semibold">{row.period}</span>
-        ),
+        render: ({ row }) => <span>{row.period}</span>,
         id: 'period',
       },
       {

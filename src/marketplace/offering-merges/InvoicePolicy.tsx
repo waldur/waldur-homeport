@@ -47,7 +47,7 @@ export const InvoicePolicyChoice: FC<{
     onValueChange={onChange}
     options={getInvoicePolicyOptions().map((option) => ({
       value: option.value,
-      label: <span className="font-semibold">{option.label}</span>,
+      label: <span>{option.label}</span>,
       description: (
         <>
           {option.description}

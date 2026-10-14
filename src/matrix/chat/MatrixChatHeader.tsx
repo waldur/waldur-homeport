@@ -230,10 +230,10 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
             state="project.dashboard"
             params={{ uuid: projectUuid }}
             label={roomName}
-            className="font-semibold text-truncate"
+            className="text-truncate"
           />
         ) : (
-          <span className="font-semibold text-truncate">{roomName}</span>
+          <span className="text-truncate">{roomName}</span>
         )}
         {members.length > 0 && (
           <Popover>

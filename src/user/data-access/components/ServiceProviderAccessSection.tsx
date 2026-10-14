@@ -70,9 +70,7 @@ export const ServiceProviderAccessSection: FC<
           secondary
         >
           <div className="mb-3">
-            <div className="font-semibold mb-2">
-              {translate('Exposed fields')}
-            </div>
+            <div className="mb-2">{translate('Exposed fields')}</div>
             <div className="d-flex flex-wrap gap-1">
               {provider.exposed_fields.map((field) => (
                 <Badge
@@ -107,9 +105,7 @@ export const ServiceProviderAccessSection: FC<
             provider.provider_team &&
             provider.provider_team.length > 0 && (
               <div className="mt-4">
-                <div className="font-semibold mb-2">
-                  {translate('Provider team members')}
-                </div>
+                <div className="mb-2">{translate('Provider team members')}</div>
                 <Table responsive hover size="sm" className="mb-0">
                   <thead>
                     <tr>

@@ -90,7 +90,7 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
         <BaseButton
           variant="warning"
           size="sm"
-          className="text-orange-600 dark:text-orange-400 font-semibold px-4 py-2 ms-3"
+          className="text-orange-600 dark:text-orange-400 px-4 py-2 ms-3"
           onClick={handleViewTos}
           label={translate('Review in profile')}
         />

@@ -120,7 +120,7 @@ export const RabbitMQQueueConfigPopover: FC<
             {configItems.map((item, index) => (
               <tr key={index}>
                 <td className="text-quaternary pe-3">{item.label}</td>
-                <td className="font-semibold">
+                <td>
                   <code>{item.value}</code>
                 </td>
               </tr>

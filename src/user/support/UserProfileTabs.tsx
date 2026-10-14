@@ -951,7 +951,7 @@ const buildStaffFields = ({
             <div className="d-flex flex-column gap-1">
               {claims.map(([claim, value]) => (
                 <div key={claim}>
-                  <span className="font-semibold me-2">{claim}</span>
+                  <span className="me-2">{claim}</span>
                   <span className="text-quaternary">
                     {Array.isArray(value) ? value.join(', ') : String(value)}
                   </span>

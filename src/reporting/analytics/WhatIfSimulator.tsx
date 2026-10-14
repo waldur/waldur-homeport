@@ -87,10 +87,7 @@ const ParamInput: FC<{
           // @ts-ignore
           style={{ '--range-progress': `${percentage}%` }}
         />
-        <span
-          className="text-nowrap font-semibold"
-          style={{ minWidth: '60px' }}
-        >
+        <span className="text-nowrap" style={{ minWidth: '60px' }}>
           {numValue}
           {param.unit && (
             <span className="text-quaternary ms-1">{param.unit}</span>
@@ -156,7 +153,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
     <div className="row align-items-center py-3">
       {/* Column 1: Label */}
       <div className="col-4">
-        <span className="font-semibold">{result.label}</span>
+        <span>{result.label}</span>
         {result.unit && (
           <span className="text-quaternary ms-1">({result.unit})</span>
         )}

@@ -47,7 +47,7 @@ export const DatabaseQueryPerformanceCard: FC<
                   {translate('Sequential scans')}
                 </td>
                 <td
-                  className={`font-semibold text-end ${hasHighSeqScans ? 'text-warning' : ''}`}
+                  className={`text-end ${hasHighSeqScans ? 'text-warning' : ''}`}
                 >
                   {formatNumber(data.seq_scan_count)}
                 </td>
@@ -62,7 +62,7 @@ export const DatabaseQueryPerformanceCard: FC<
               </tr>
               <tr>
                 <td className="text-quaternary">{translate('Index scans')}</td>
-                <td className="font-semibold text-end text-success">
+                <td className="text-end text-success">
                   {formatNumber(data.index_scan_count)}
                 </td>
               </tr>
@@ -105,7 +105,7 @@ export const DatabaseQueryPerformanceCard: FC<
                   </div>
                 </td>
                 <td
-                  className={`font-semibold text-end ${data.temp_files_count > 0 ? 'text-warning' : ''}`}
+                  className={`text-end ${data.temp_files_count > 0 ? 'text-warning' : ''}`}
                 >
                   {formatNumber(data.temp_files_count)}
                 </td>
@@ -113,7 +113,7 @@ export const DatabaseQueryPerformanceCard: FC<
               <tr>
                 <td className="text-quaternary">{translate('Total size')}</td>
                 <td
-                  className={`font-semibold text-end ${hasTempFilesWarning ? 'text-danger' : ''}`}
+                  className={`text-end ${hasTempFilesWarning ? 'text-danger' : ''}`}
                 >
                   {formatFilesize(data.temp_files_bytes, 'B')}
                 </td>

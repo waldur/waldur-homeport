@@ -214,9 +214,7 @@ const PresetSelector: FC = () => {
     <div className="mb-6">
       <div className="d-flex align-items-center gap-2 mb-3">
         <LightningIcon weight="bold" className="text-brand" />
-        <span className="font-semibold">
-          {translate('Quick Configuration')}
-        </span>
+        <span>{translate('Quick Configuration')}</span>
       </div>
       <div className="row g-3">
         {policyPresets.map((preset) => (

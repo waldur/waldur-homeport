@@ -22,7 +22,7 @@ export const ProvisioningFilter: FC<ProvisioningFilterProps> = ({
 }) => {
   return (
     <div className="d-flex align-items-center gap-4">
-      <label className="text-quaternary fs-7 font-semibold">
+      <label className="text-quaternary fs-7">
         {translate('Time period')}:
       </label>
       <div style={{ minWidth: 200 }}>

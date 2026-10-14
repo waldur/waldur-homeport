@@ -133,13 +133,10 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
           ))}
           {subscriptionItems.length > 0 && limitItems.length > 0 && (
             <tr className="border-t-[1px] border-t-secondary">
-              <td
-                colSpan={2}
-                className="text-end text-quaternary font-semibold small"
-              >
+              <td colSpan={2} className="text-end text-quaternary small">
                 {translate('Subscription subtotal')}
               </td>
-              <td className="text-end text-nowrap font-semibold">
+              <td className="text-end text-nowrap">
                 {defaultCurrency(data.subscription_total)}
               </td>
             </tr>
@@ -149,13 +146,10 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
           ))}
           {limitItems.length > 0 && subscriptionItems.length > 0 && (
             <tr className="border-t-[1px] border-t-secondary">
-              <td
-                colSpan={2}
-                className="text-end text-quaternary font-semibold small"
-              >
+              <td colSpan={2} className="text-end text-quaternary small">
                 {translate('Limit change subtotal')}
               </td>
-              <td className="text-end text-nowrap font-semibold">
+              <td className="text-end text-nowrap">
                 {defaultCurrency(data.limit_change_total)}
               </td>
             </tr>

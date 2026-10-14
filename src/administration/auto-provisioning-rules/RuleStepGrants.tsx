@@ -77,7 +77,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
                 )}
               </div>
               {protectedMethods.length === 0 ? (
-                <div className="font-semibold mt-2">
+                <div className="mt-2">
                   {translate(
                     'Warning: PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS is empty — no user will currently match.',
                   )}

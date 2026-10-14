@@ -28,28 +28,18 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Total resources'),
         render: ({ row }) => (
-          <span className="font-semibold">
-            {row.total_resources.toLocaleString()}
-          </span>
+          <span>{row.total_resources.toLocaleString()}</span>
         ),
         export: (row) => row.total_resources,
       },
       {
         title: translate('Total usage'),
-        render: ({ row }) => (
-          <span className="font-semibold">
-            {row.total_usage.toLocaleString()}
-          </span>
-        ),
+        render: ({ row }) => <span>{row.total_usage.toLocaleString()}</span>,
         export: (row) => row.total_usage,
       },
       {
         title: translate('Total cost'),
-        render: ({ row }) => (
-          <span className="font-semibold">
-            {defaultCurrency(row.total_cost)}
-          </span>
-        ),
+        render: ({ row }) => <span>{defaultCurrency(row.total_cost)}</span>,
         export: (row) => row.total_cost,
       },
     ];

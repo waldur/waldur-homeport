@@ -61,13 +61,13 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                       {formatNumber(data.total_dlq_messages)}
                     </Badge>
                   ) : (
-                    <span className="font-semibold text-success">0</span>
+                    <span className="text-success">0</span>
                   )}
                 </td>
               </tr>
               <tr>
                 <td className="text-quaternary">{translate('DLQ count')}</td>
-                <td className="font-semibold text-end">{data.dlq_count}</td>
+                <td className="text-end">{data.dlq_count}</td>
               </tr>
             </tbody>
           </Table>
@@ -101,12 +101,10 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                       >
                         {queue.queue_name}
                       </td>
-                      <td className="font-semibold text-end text-warning">
+                      <td className="text-end text-warning">
                         {formatNumber(queue.messages)}
                       </td>
-                      <td className="font-semibold text-end">
-                        {queue.consumers}
-                      </td>
+                      <td className="text-end">{queue.consumers}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -65,7 +65,7 @@ const LimitChangesSummary: FC<{
                 {c.current} {c.unit}
               </td>
               <td className="text-center">→</td>
-              <td className="text-end font-semibold">
+              <td className="text-end">
                 {c.new} {c.unit}
               </td>
             </tr>

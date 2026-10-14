@@ -140,7 +140,7 @@ const TableDiffView: FunctionComponent<{
             key={diff.field}
             className={diff.changed ? 'bg-warning-subtle' : ''}
           >
-            <td className="ps-5 font-semibold">{diff.label}</td>
+            <td className="ps-5">{diff.label}</td>
             <td>
               <pre className="mb-0 fs-7 text-quaternary text-wrap text-break bg-transparent">
                 {formatFieldValue(diff.oldValue)}

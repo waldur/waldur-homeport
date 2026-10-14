@@ -75,7 +75,7 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
   return (
     <div className="row mb-4 align-items-start">
       <div className="col-md-4">
-        <Form.Label className="font-semibold">{field.field}</Form.Label>
+        <Form.Label>{field.field}</Form.Label>
         <small className="d-block text-quaternary">{field.description}</small>
       </div>
       <div className="col-md-8">
