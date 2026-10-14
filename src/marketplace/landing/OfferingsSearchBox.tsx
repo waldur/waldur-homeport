@@ -1,5 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { FC, useMemo } from 'react';
+import classNames from 'classnames';
+import { useMemo } from 'react';
 import {
   marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
@@ -7,9 +8,13 @@ import {
 
 import { Tooltip } from 'waldur-ui';
 
-import { AsyncSearchBox } from '@/core/async/AsyncSearchBox';
+import {
+  AsyncSearchBox,
+  AsyncSearchBoxItemProps,
+} from '@/core/async/AsyncSearchBox';
 import { Image } from '@/core/Image';
 import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { Link } from '@/core/Link';
 import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
 import { truncate } from '@/core/utils';
 import { isFeatureVisible } from '@/features/connect';
@@ -18,55 +23,107 @@ import { translate } from '@/i18n';
 import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 import { useCustomer, useProject } from '@/workspace/hooks';
 
-import { OfferingDetailsLink } from '../links/OfferingDetailsLink';
-import { OfferingLink } from '../links/OfferingLink';
+/** An offering among the results: it opens the offering's details page. */
+export interface OfferingSearchItem {
+  to: string;
+  params: { uuid: string };
+  name: string;
+  description?: string;
+  thumbnail?: string;
+}
 
-const OfferingListItem: FC<{ row: any }> = ({ row }) => {
-  const abbreviation = useMemo(() => getItemAbbreviation(row), [row]);
+export const getOfferingSearchItem = (row: {
+  uuid?: string;
+  name?: string;
+  description?: string;
+  thumbnail?: string;
+}): OfferingSearchItem => ({
+  to: 'public-offering.marketplace-public-offering',
+  params: { uuid: row.uuid },
+  name: row.name,
+  description: row.description,
+  thumbnail: row.thumbnail,
+});
+
+export const offeringSearchItemToString = (item: OfferingSearchItem) =>
+  item.name;
+
+/**
+ * A row of the results: the option is the link to the offering's details,
+ * so a pointer can still open it in a new tab. An option takes no
+ * interactive children, so "Add resource" sits beside it, for the pointer
+ * only; the keyboard reaches it on the details page.
+ */
+export const OfferingSearchResult = ({
+  item,
+  highlighted,
+  itemProps,
+  close,
+}: AsyncSearchBoxItemProps<OfferingSearchItem>) => {
+  const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
 
   return (
-    <OfferingDetailsLink offering_uuid={row.uuid}>
-      <div className="d-flex text-primary hover:bg-[var(--bg-brand-primary-alt)] align-items-center px-4 py-2 cursor-pointer">
-        <div className="flex-shrink-0 me-4">
-          {row.thumbnail ? (
-            <Image src={row.thumbnail} size={24} circle />
+    <div
+      className={classNames(
+        // The hover background, also on the highlighted row, so the keyboard
+        // highlight looks like the pointer's; the brand bar marks it besides.
+        'd-flex align-items-center pe-4 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)]',
+        highlighted && 'active shadow-[inset_3px_0_0_var(--brand-color)]',
+      )}
+    >
+      <Link
+        {...itemProps}
+        state={item.to}
+        params={item.params}
+        // Focus stays in the search box; the option is highlighted through
+        // aria-activedescendant, not focused.
+        tabIndex={-1}
+        className="d-flex flex-grow-1 min-w-0 align-items-center text-primary hover:text-brand ps-4 pe-2 py-2"
+      >
+        {/* Decorative: the name follows. */}
+        <span aria-hidden="true" className="flex-shrink-0 me-4">
+          {item.thumbnail ? (
+            <Image src={item.thumbnail} size={24} circle />
           ) : (
-            <div className="symbol">
-              <ImagePlaceholder
-                width="24px"
-                height="24px"
-                circle
-                className="fs-8"
-              >
-                {abbreviation}
-              </ImagePlaceholder>
+            <ImagePlaceholder
+              width="24px"
+              height="24px"
+              circle
+              className="fs-8"
+            >
+              {abbreviation}
+            </ImagePlaceholder>
+          )}
+        </span>
+        {/* Blocks, not spans, so the option's name has a break between
+            them. */}
+        <div className="d-flex flex-column min-w-0">
+          <div className="fs-4 ellipsis">{item.name}</div>
+          {Boolean(item.description) && (
+            <div className="fs-7 text-quaternary ellipsis">
+              <TextWithoutFormatting html={truncate(item.description, 60)} />
             </div>
           )}
         </div>
-        <div className="flex-grow-1 d-flex flex-column justify-content-start font-semibold ellipsis">
-          <span className="fs-4 font-semibold ellipsis">{row.name}</span>
-          <span className="fs-7 font-semibold text-quaternary ellipsis">
-            <TextWithoutFormatting html={truncate(row.description, 60)} />
+      </Link>
+      {!isFeatureVisible(MarketplaceFeatures.catalogue_only) && (
+        <Tooltip label={translate('Add resource')}>
+          <span aria-hidden="true" className="flex-shrink-0">
+            <Link
+              state="marketplace-offering-public"
+              params={{ offering_uuid: item.params.uuid }}
+              buttonVariant="text-primary"
+              buttonSize="sm"
+              buttonIconOnly
+              tabIndex={-1}
+              onClick={close}
+            >
+              <PlusCircleIcon weight="bold" size={19.5} />
+            </Link>
           </span>
-        </div>
-        {!isFeatureVisible(MarketplaceFeatures.catalogue_only) && (
-          <div className="flex-shrink-0">
-            <Tooltip label={translate('Add resource')}>
-              <span>
-                <OfferingLink
-                  offering_uuid={row.uuid}
-                  buttonVariant="text-primary"
-                  buttonSize="sm"
-                  buttonIconOnly
-                >
-                  <PlusCircleIcon weight="bold" size={19.5} />
-                </OfferingLink>
-              </span>
-            </Tooltip>
-          </div>
-        )}
-      </div>
-    </OfferingDetailsLink>
+        </Tooltip>
+      )}
+    </div>
   );
 };
 
@@ -101,12 +158,14 @@ export const OfferingsSearchBox = () => {
       queryKey="marketplace-public-offerings"
       queryField="keyword"
       params={params}
-      RowComponent={OfferingListItem}
+      getItem={getOfferingSearchItem}
+      itemToString={offeringSearchItemToString}
+      renderItem={(props) => <OfferingSearchResult {...props} />}
       placeholder={translate('Search offerings...')}
       emptyMessage={translate(
         'No offerings match your search. To find organisations, projects or resources, use the search in the top bar.',
       )}
-      className="w-400px"
+      wrapperClassName="landing-hero__search-box w-full max-w-[432px] px-4"
     />
   );
 };

@@ -79,12 +79,10 @@ export const BreadcrumbSearchItem = ({
         </span>
         {/* Blocks, not spans, so the option's name has a break between
             them ("Project Organization", not "ProjectOrganization"). */}
-        <div className="d-flex flex-column justify-content-start font-semibold">
-          <div className="fs-6 font-semibold">{item.title}</div>
+        <div className="d-flex flex-column justify-content-start">
+          <div className="fs-6">{item.title}</div>
           {Boolean(item.subtitle) && (
-            <div className="fs-7 font-semibold text-quaternary">
-              {item.subtitle}
-            </div>
+            <div className="fs-7 text-quaternary">{item.subtitle}</div>
           )}
         </div>
       </Link>
