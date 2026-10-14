@@ -2222,6 +2222,23 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('VAT'),
+    items: [
+      {
+        key: 'VAT_TAXATION_ENABLED',
+        description: translate('Calculate invoice VAT from EU VAT rules and rates instead of the organization\'s default tax percent.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'VAT_OSS_ENABLED',
+        description: translate('Charge EU private persons the VAT rate of their own country (One-Stop Shop). When disabled, the operator\'s country rate is used, which is only allowed while the operator\'s cross-border sales to EU private persons stay under EUR 10,000 a year.'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
+  {
     description: translate('Matrix chat'),
     items: [
       {
