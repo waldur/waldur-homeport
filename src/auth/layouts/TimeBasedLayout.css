@@ -34,12 +34,12 @@
 
 .layout-time-based-greeting h2 {
   font-size: 1.75rem;
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
   margin: 0;
 }
 
 .layout-time-based-card {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   border-radius: 16px;
   padding: 2.5rem;
   width: 100%;

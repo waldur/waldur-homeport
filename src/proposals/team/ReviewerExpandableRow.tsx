@@ -191,7 +191,9 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
   if (!profile) {
     return (
       <ExpandableContainer>
-        <p className="text-muted">{translate('No reviewer profile found.')}</p>
+        <p className="text-quaternary">
+          {translate('No reviewer profile found.')}
+        </p>
       </ExpandableContainer>
     );
   }
@@ -221,7 +223,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
                         https://orcid.org/{profile.orcid_id}
                       </a>
                     ) : (
-                      <span className="text-muted">
+                      <span className="text-quaternary">
                         {translate('Not connected')}
                       </span>
                     )
@@ -235,7 +237,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
                   label={translate('Biography')}
                   value={
                     profile.biography || (
-                      <span className="text-muted">
+                      <span className="text-quaternary">
                         {translate('Not provided')}
                       </span>
                     )
@@ -251,7 +253,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
             content: (
               <>
                 {affiliationsCount === 0 ? (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No affiliations added.')}
                   </p>
                 ) : (
@@ -267,7 +269,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
             content: (
               <>
                 {expertiseCount === 0 ? (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No expertise keywords added.')}
                   </p>
                 ) : (
@@ -283,7 +285,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
             content: (
               <>
                 {publicationsCount === 0 ? (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No publications added.')}
                   </p>
                 ) : (

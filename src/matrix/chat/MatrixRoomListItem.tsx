@@ -15,7 +15,7 @@ import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
 import { RoomCallState } from './call/useAllRoomCallStates';
-import { getChatAvatarColor } from './chatColors';
+import { getChatAvatarClass } from './chatColors';
 import { PreviewKind } from './previewClassifier';
 import { formatRelativeTime } from './utils';
 
@@ -122,7 +122,6 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
   onClick,
 }) => {
   const isUnread = unreadCount > 0;
-  const color = getChatAvatarColor(uuid);
 
   // Media/voice/system events are renderable previews even when the message body
   // is empty (the icon + filename carry the meaning); only text/none with an
@@ -152,7 +151,7 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
           name={name}
           size={48}
           circle
-          labelClassName={`bg-light-${color} text-${color}`}
+          labelClassName={getChatAvatarClass(uuid)}
         />
       </div>
       <div className="tc-row-meta">

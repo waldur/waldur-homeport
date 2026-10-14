@@ -63,7 +63,7 @@ exports[`menu looks > keeps the action menu panel and rows 3`] = `
 
 exports[`menu looks > keeps the action menu panel and rows 4`] = `
 [
-  "border-[var(--surface-card-border)]",
+  "border-secondary",
   "border-t",
   "h-0",
   "m-0",

@@ -9,7 +9,7 @@ import { cn } from '../cn';
  * https://ui.shadcn.com/docs/components/dialog) — the centered-modal
  * sibling of Sheet.tsx, which ports the same Radix Dialog primitive as a
  * slide-in panel. Everything Sheet.tsx's own comment explains applies
- * verbatim here: surfaceColors.css tokens instead of shadcn's palette,
+ * verbatim here: design tokens instead of shadcn's palette,
  * plain data-state-keyed transitions rather than the tailwindcss-animate
  * utilities (that plugin isn't installed), and forwardRef on every
  * primitive Radix attaches a ref to.
@@ -21,7 +21,7 @@ import { cn } from '../cn';
  * The backdrop and the enter/exit motion are waldur-homeport's own real
  * Bootstrap modal, value for value: a gray-900/70% scrim with
  * `backdrop-filter: blur(3px)` (--modal-backdrop-bg/--modal-backdrop-blur,
- * see surfaceColors.css), the dialog sliding down from -50px over .3s
+ * see waldur-design-tokens/dialog.css), the dialog sliding down from -50px over .3s
  * ease-out, and both fading over .15s linear. That motion is keyframes
  * from waldur-design-tokens/animations.css rather than the
  * data-state-keyed transitions Sheet.tsx uses — see that file's comment
@@ -87,7 +87,7 @@ export const DialogContent = forwardRef<
       data-waldur-animated=""
       className={cn(
         'fixed inset-0 z-50 m-auto flex h-fit w-[calc(100%-2rem)] max-w-lg flex-col gap-6',
-        'max-h-[calc(100vh-4rem)] overflow-y-auto rounded-modal bg-[var(--surface-card-bg)] p-6 text-[var(--surface-text-primary)] shadow-[var(--overlay-shadow)]',
+        'max-h-[calc(100vh-4rem)] overflow-y-auto rounded-modal bg-[var(--card-bg)] p-6 text-primary shadow-[var(--overlay-shadow)]',
         'animate-[waldur-modal-enter_.3s_ease-out] data-[state=closed]:animate-[waldur-modal-exit_.3s_ease-out]',
         className,
       )}
@@ -127,10 +127,7 @@ export const DialogTitle = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn(
-      'text-2xl font-semibold text-[var(--surface-text-primary)]',
-      className,
-    )}
+    className={cn('text-2xl font-semibold text-primary', className)}
     {...props}
   />
 ));
@@ -142,7 +139,7 @@ export const DialogDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-[var(--surface-text-secondary)]', className)}
+    className={cn('text-quaternary', className)}
     {...props}
   />
 ));

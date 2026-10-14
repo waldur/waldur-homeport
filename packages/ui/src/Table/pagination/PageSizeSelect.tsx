@@ -29,7 +29,7 @@ export const PageSizeSelect = ({ pageSize, onChange }: PageSizeSelectProps) => {
           id={id}
           value={pageSize}
           onChange={(event) => onChange(parseInt(event.target.value, 10))}
-          className="cursor-pointer appearance-none rounded-[6px] border-[1px] border-solid border-[color:transparent] bg-[transparent] py-[5px] pl-[6.5px] pr-[16px] text-[12px] leading-[1.43] text-[var(--pagination-select-text)] [&>option]:bg-[var(--surface-card-bg)]"
+          className="cursor-pointer appearance-none rounded-[6px] border-[1px] border-solid border-[color:transparent] bg-transparent py-[5px] pl-[6.5px] pr-[16px] text-[12px] leading-[1.43] text-[var(--pagination-select-text)] [&>option]:bg-[var(--card-bg)]"
         >
           {PAGE_SIZES.map((option) => (
             <option value={option} key={option}>

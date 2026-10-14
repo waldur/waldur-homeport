@@ -8,8 +8,8 @@ import { Tooltip, TooltipProps } from '../Tooltip';
 import { useNoHover } from '../useMediaQuery';
 
 const TONE_CLASS = {
-  muted: 'text-[var(--surface-text-muted)]',
-  warning: 'text-[var(--pill-warning-dot)]',
+  muted: 'text-quinary',
+  warning: 'text-warning',
 } as const;
 
 export interface HelpIconProps extends Omit<

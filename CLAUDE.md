@@ -140,6 +140,15 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
 
+- **Font weight is one scale**: `font-light` (300, display only), `font-normal`, `font-medium`, `font-semibold`, `font-bold` (700); SCSS reads `var(--font-weight-*)`. Never Bootstrap `fw-*` (retired; Metronic's `fw-bold` was 500, not 700), `font-black`/`font-[600]`, or an inline `fontWeight` (linter: `require-weight-scale`, which autofixes `fw-*`; see `docs/design-tokens.md` → "Font weight")
+
+- **Colours come from semantic tokens** (see `docs/design-tokens.md`):
+  - Neutral text/icons use the one scale `text-primary` … `text-senary` (= `var(--text-primary)` …); surfaces `bg-primary` … `bg-quaternary`; borders `border-primary` / `border-secondary` / `border-divider`. A semantic utility is always the token of the same name. Brand is `text-brand` / `border-brand` / `outline-brand`.
+  - Bootstrap emits no colour classes: `text-danger`, `text-muted`, `text-dark`, `bg-light`, `border-bottom`, … paint nothing (linter: `no-bootstrap-color-utility`, which names the replacement). A bottom rule is `border-b-[1px] border-b-secondary`; see `docs/design-tokens.md` → "Bootstrap colour utilities".
+  - State colours use the status matrix through its utilities: `text-danger` (the `-fg` slot), `bg-danger` / `border-danger` (`-solid`), `bg-danger-subtle` / `border-danger-subtle` (`-bg` / `-border`); same for `success`/`warning`, plus `text-neutral` / `bg-neutral-subtle`. Never raw `success-N`/`warning-N`/`error-N` utilities, nor `text-[var(--status-danger-fg)]` (linter: `no-raw-status-ramp`, which autofixes the latter).
+  - Never pair Bootstrap's `border` class with a Tailwind border colour — Bootstrap's `!important` colour wins. Use `border-[1px] border-secondary` (linter autofixes).
+  - In SCSS, paint brand with `var(--bg-brand-solid)` / `var(--fg-brand-primary)` / `var(--brand-600)`, never `$primary` (a static compile-time green).
+
 - Use `waldur-ui`'s `Tabs` (state-driven panels) or `TabNav` (router-driven: `items` with `link: <Link … />`), and `EmbeddedTabs` (`@/table/EmbeddedTabs`) for tabs inside an expandable row or card section — never react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes. Linter enforces this (`no-bootstrap-tabs`); see `docs/tabs.md`
 
 - Use the `waldur-ui` pickers (`DatePicker`, `DateRangePicker`, `MonthPicker`; `DateField`/`DateGroup` in forms) — never a native `<input type="date">`, `datetime-local`, `time`, `month` or `week`. Linter enforces this; see `docs/forms.md` → "Date & Time Pickers"

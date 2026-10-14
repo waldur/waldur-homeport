@@ -1,0 +1,44 @@
+/**
+ * The neutral content scale: one ladder for text AND icons, strongest first.
+ *
+ *   --text-primary     headings, primary content
+ *   --text-secondary   body copy, strong labels
+ *   --text-tertiary    supporting text, menu items
+ *   --text-quaternary  muted text, subtitles, placeholders
+ *   --text-quinary     faint text, decorative icons
+ *   --text-senary      disabled marks, inactive indicators
+ *
+ *   --text-disabled    disabled input and date-picker text
+ *   --fg-white         white text or icon, the same in both themes
+ *
+ * Every step of the scale is a distinct gray in both themes. The names match
+ * the Tailwind utilities (text-primary … text-senary; tailwind/theme.css), so
+ * a class and a var() with the same name are the same colour. Brand text and
+ * marks are in brand.css, state text (--status-*-fg) in status.css.
+ *
+ * Both themes are defined in this file.
+ */
+@import '../primitives/colors.css';
+
+:root {
+  --text-primary: var(--color-gray-900);
+  --text-secondary: var(--color-gray-700);
+  --text-tertiary: var(--color-gray-600);
+  --text-quaternary: var(--color-gray-500);
+  --text-quinary: var(--color-gray-400);
+  --text-senary: var(--color-gray-300);
+  /* The date pickers' and inputs' disabled text: $gray-300 in light, $gray-400
+     in dark, one step brighter than --text-senary there. */
+  --text-disabled: var(--color-gray-300);
+  --fg-white: #ffffff;
+}
+
+:root[data-theme='dark'] {
+  --text-primary: var(--color-gray-dark-25);
+  --text-secondary: var(--color-gray-dark-200);
+  --text-tertiary: var(--color-gray-dark-300);
+  --text-quaternary: var(--color-gray-dark-400);
+  --text-quinary: var(--color-gray-dark-500);
+  --text-senary: var(--color-gray-dark-600);
+  --text-disabled: var(--color-gray-dark-500);
+}

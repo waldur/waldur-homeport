@@ -37,34 +37,40 @@ export const DatabaseQueryPerformanceCard: FC<
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Scan statistics')}
           </h6>
           <Table size="sm" borderless className="mb-0">
             <tbody>
               <tr>
-                <td className="text-muted">{translate('Sequential scans')}</td>
+                <td className="text-quaternary">
+                  {translate('Sequential scans')}
+                </td>
                 <td
-                  className={`fw-semibold text-end ${hasHighSeqScans ? 'text-warning' : ''}`}
+                  className={`font-semibold text-end ${hasHighSeqScans ? 'text-warning' : ''}`}
                 >
                   {formatNumber(data.seq_scan_count)}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted ps-4">{translate('Rows fetched')}</td>
-                <td className="text-end text-muted">
+                <td className="text-quaternary ps-4">
+                  {translate('Rows fetched')}
+                </td>
+                <td className="text-end text-quaternary">
                   {formatNumber(data.seq_scan_rows)}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Index scans')}</td>
-                <td className="fw-semibold text-end text-success">
+                <td className="text-quaternary">{translate('Index scans')}</td>
+                <td className="font-semibold text-end text-success">
                   {formatNumber(data.index_scan_count)}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted ps-4">{translate('Rows fetched')}</td>
-                <td className="text-end text-muted">
+                <td className="text-quaternary ps-4">
+                  {translate('Rows fetched')}
+                </td>
+                <td className="text-end text-quaternary">
                   {formatNumber(data.index_scan_rows)}
                 </td>
               </tr>
@@ -80,13 +86,13 @@ export const DatabaseQueryPerformanceCard: FC<
           )}
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Temporary files')}
           </h6>
           <Table size="sm" borderless className="mb-0">
             <tbody>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   <div className="d-flex align-items-center">
                     {translate('Files created')}
                     {data.temp_files_count > 0 && (
@@ -99,15 +105,15 @@ export const DatabaseQueryPerformanceCard: FC<
                   </div>
                 </td>
                 <td
-                  className={`fw-semibold text-end ${data.temp_files_count > 0 ? 'text-warning' : ''}`}
+                  className={`font-semibold text-end ${data.temp_files_count > 0 ? 'text-warning' : ''}`}
                 >
                   {formatNumber(data.temp_files_count)}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Total size')}</td>
+                <td className="text-quaternary">{translate('Total size')}</td>
                 <td
-                  className={`fw-semibold text-end ${hasTempFilesWarning ? 'text-danger' : ''}`}
+                  className={`font-semibold text-end ${hasTempFilesWarning ? 'text-danger' : ''}`}
                 >
                   {formatFilesize(data.temp_files_bytes, 'B')}
                 </td>

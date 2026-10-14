@@ -167,7 +167,7 @@ export const Step4UploadFile: FC<Step4Props> = ({ context: { customer } }) => {
   const importType = values?.import_type;
 
   return (
-    <div className="text-muted">
+    <div className="text-quaternary">
       <p className="mb-6">
         {importType === 'projects_only'
           ? translate('Upload your completed project template file')

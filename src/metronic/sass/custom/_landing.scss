@@ -4,14 +4,14 @@ $bg-height: 232px;
   position: relative;
   height: $bg-height;
   width: 100%;
-  background-color: $brand-900;
+  background-color: var(--brand-900);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 
   &.has-overlay::before {
     content: ' ';
-    background-color: rgba($brand-900-rgb, 0.4);
+    background-color: rgba(var(--brand-900-rgb), 0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -19,12 +19,14 @@ $bg-height: 232px;
     height: $bg-height;
   }
 
-  @if (isDarkMode()) {
+  @include dark-theme {
     background-color: $black !important;
     &::before {
       background-color: rgba($black, 0.4) !important;
     }
-  } @else {
+  }
+
+  @include light-theme {
     &.bg-mode-light,
     &.bg-mode-accent {
       background-position: 50% 40%;
@@ -37,9 +39,9 @@ $bg-height: 232px;
       }
     }
     &.bg-mode-accent {
-      background-color: var(--waldur-brand-50-rgb);
+      background-color: var(--brand-50-rgb);
       &::before {
-        background-color: rgba(var(--waldur-brand-100-rgb), 0.6);
+        background-color: rgba(var(--brand-100-rgb), 0.6);
       }
     }
   }
@@ -67,14 +69,18 @@ $bg-height: 232px;
     h1,
     h2 {
       color: #fff;
-      font-weight: 500;
+      font-weight: var(--font-weight-medium);
       text-align: center;
 
       .calls-landing.bg-mode-accent &,
       .calls-landing.bg-mode-light &,
       .marketplace-landing.bg-mode-accent &,
       .marketplace-landing.bg-mode-light & {
-        color: if(isDarkMode(), #fff, $dark);
+        color: var(--text-primary);
+
+        @include dark-theme {
+          color: #fff;
+        }
       }
     }
 
@@ -96,26 +102,37 @@ $bg-height: 232px;
 
     #search-box-wrapper {
       input {
-        color: if(isDarkMode(), $gray-400, $brand-500);
-        @include placeholder(if(isDarkMode(), $gray-400, $brand-500));
-        background-color: if(isDarkMode(), #000, $brand-950);
-        border-color: if(isDarkMode(), $gray-300, $brand-300);
+        color: var(--brand-500);
+        @include placeholder(var(--brand-500));
+        background-color: var(--brand-950);
+        border-color: var(--brand-300);
+
+        @include dark-theme {
+          color: var(--color-gray-dark-500);
+          @include placeholder(var(--color-gray-dark-500));
+          background-color: #000;
+          border-color: var(--color-gray-dark-600);
+        }
       }
       svg path {
-        fill: if(isDarkMode(), $gray-400, $brand-500);
+        fill: var(--brand-500);
+
+        @include dark-theme {
+          fill: var(--color-gray-dark-500);
+        }
       }
 
-      @if (isDarkMode() == false) {
+      @include light-theme {
         .bg-mode-light &,
         .bg-mode-accent & {
           input {
-            color: $gray-700;
-            @include placeholder($gray-700);
+            color: var(--text-secondary);
+            @include placeholder(var(--text-secondary));
             background-color: white;
-            border-color: $gray-300;
+            border-color: var(--border-primary);
           }
           svg path {
-            fill: $gray-500;
+            fill: var(--text-quaternary);
           }
         }
       }

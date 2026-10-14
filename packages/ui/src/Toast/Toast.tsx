@@ -107,7 +107,7 @@ export const Toast = ({
       )}
     >
       <AlertItem
-        className="items-start gap-4 rounded-[12px] bg-[var(--surface-card-bg)] shadow-[var(--overlay-shadow)]"
+        className="items-start gap-4 rounded-[12px] bg-[var(--card-bg)] shadow-[var(--overlay-shadow)]"
         iconSize="md"
         iconClassName="-m-[9px]"
         type="floating"
@@ -158,7 +158,7 @@ export const Toast = ({
               <button
                 type="button"
                 aria-label={translate('Dismiss')}
-                className="inline-flex size-5 items-center justify-center text-[var(--surface-text-muted)]"
+                className="inline-flex size-5 items-center justify-center text-quinary"
               >
                 <XIcon size={20} weight="regular" />
               </button>

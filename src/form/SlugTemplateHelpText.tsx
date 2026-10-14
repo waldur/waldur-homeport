@@ -13,7 +13,7 @@ interface SlugTemplateHelpTextProps {
 export const SlugTemplateHelpText = ({
   placeholders,
 }: SlugTemplateHelpTextProps) => (
-  <div className="form-text text-muted mt-2">
+  <div className="form-text text-quaternary mt-2">
     <p className="mb-2">{translate('Supported placeholders:')}</p>
     <table className="table table-sm table-borderless mb-0">
       <tbody>
@@ -23,7 +23,7 @@ export const SlugTemplateHelpText = ({
               <code>{`{${p.name}}`}</code>
             </td>
             <td>{p.description}</td>
-            <td className="text-muted">
+            <td className="text-quaternary">
               {translate('e.g.')} <code>{p.example}</code>
             </td>
           </tr>

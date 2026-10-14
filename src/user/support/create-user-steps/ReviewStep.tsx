@@ -20,13 +20,13 @@ const ReviewRow = ({
   value: React.ReactNode;
 }) => (
   <tr>
-    <td className="fw-bold text-nowrap pe-4">{label}</td>
+    <td className="font-medium text-nowrap pe-4">{label}</td>
     <td>{renderFieldOrDash(value)}</td>
   </tr>
 );
 
 const BooleanLabel = ({ value }: { value: boolean }) => (
-  <span className={value ? 'text-success' : 'text-muted'}>
+  <span className={value ? 'text-success' : 'text-quaternary'}>
     {value ? translate('Yes') : translate('No')}
   </span>
 );
@@ -38,7 +38,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       {editMode && (
-        <p className="text-muted mb-4">
+        <p className="text-quaternary mb-4">
           {translate('Review the changes below and click Save to apply them.')}
         </p>
       )}
@@ -47,7 +47,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           <tr>
             <td
               colSpan={2}
-              className="fw-bolder text-uppercase text-muted fs-7 pb-2 pt-0"
+              className="font-semibold text-uppercase text-quaternary fs-7 pb-2 pt-0"
             >
               {translate('Account')}
             </td>
@@ -76,9 +76,11 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
               ) : values.password ? (
                 <span className="text-success">{translate('Will be set')}</span>
               ) : editMode ? (
-                <span className="text-muted">{translate('No changes')}</span>
+                <span className="text-quaternary">
+                  {translate('No changes')}
+                </span>
               ) : (
-                <span className="text-muted">{translate('Not set')}</span>
+                <span className="text-quaternary">{translate('Not set')}</span>
               )
             }
           />
@@ -86,7 +88,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           <tr>
             <td
               colSpan={2}
-              className="fw-bolder text-uppercase text-muted fs-7 pb-2 pt-6"
+              className="font-semibold text-uppercase text-quaternary fs-7 pb-2 pt-6"
             >
               {translate('Personal information')}
             </td>
@@ -135,7 +137,7 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
               <tr>
                 <td
                   colSpan={2}
-                  className="fw-bolder text-uppercase text-muted fs-7 pb-2 pt-6"
+                  className="font-semibold text-uppercase text-quaternary fs-7 pb-2 pt-6"
                 >
                   {translate('Identity & Profile')}
                 </td>

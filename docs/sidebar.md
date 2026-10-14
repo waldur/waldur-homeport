@@ -161,14 +161,14 @@ When the viewport width is below `mobileBreakpoint`:
 
 ## Theming & Design Tokens
 
-Sidebar styling is entirely powered by CSS custom properties defined in `@waldur/design-tokens/src/sidebarColors.css`.
+Sidebar styling is entirely powered by CSS custom properties defined in `@waldur/design-tokens/src/sidebar.css`.
 
 ### Token Reference
 
 | Token                         | Description                                       |
 | ----------------------------- | ------------------------------------------------- |
-| `--surface-sidebar-bg`        | Background color of the sidebar panel             |
-| `--surface-sidebar-border`    | Border color between the sidebar and main content |
+| `--sidebar-bg`        | Background color of the sidebar panel             |
+| `--sidebar-border`    | Border color between the sidebar and main content |
 | `--nav-item-text`             | Color of navigation item labels and text          |
 | `--nav-item-icon`             | Color of navigation item icons and caret glyphs   |
 | `--nav-item-hover-bg`         | Background color on row hover                     |

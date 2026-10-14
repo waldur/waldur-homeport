@@ -17,7 +17,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
 }) => (
   <ExpandableContainer>
     {/* Description */}
-    <p className="text-muted mb-3">{row.description}</p>
+    <p className="text-quaternary mb-3">{row.description}</p>
 
     {/* Security details */}
     {row.security && (
@@ -87,7 +87,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
             <li key={i} className={action.automatic ? 'text-success' : ''}>
               {action.description}
               {action.automatic && (
-                <span className="ms-1 text-muted">
+                <span className="ms-1 text-quaternary">
                   ({translate('automatic')})
                 </span>
               )}
@@ -114,7 +114,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
               </strong>
               {row.affected_resources_count !== undefined && (
                 <div className="d-flex justify-content-between small mb-1">
-                  <span className="text-muted">
+                  <span className="text-quaternary">
                     {translate('Affected resources')}
                   </span>
                   <strong>
@@ -124,7 +124,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
               )}
               {row.affected_users_count !== undefined && (
                 <div className="d-flex justify-content-between small mb-1">
-                  <span className="text-muted">
+                  <span className="text-quaternary">
                     {translate('Affected users')}
                   </span>
                   <strong>{row.affected_users_count.toLocaleString()}</strong>
@@ -153,7 +153,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                   >,
                 ).map(([key, val]) => (
                   <div key={key} className="small mb-2">
-                    <code className="text-primary">{key}</code>
+                    <code className="text-brand">{key}</code>
                     {val.is_customized && (
                       <Badge
                         variant="warning"
@@ -165,7 +165,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                       </Badge>
                     )}
                     {val.current_value && (
-                      <div className="text-muted mt-1">
+                      <div className="text-quaternary mt-1">
                         {translate('Current')}: <code>{val.current_value}</code>
                         <br />
                         {translate('Default')}: <code>{val.default_value}</code>
@@ -212,7 +212,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
     {/* Relevance reasons + Components */}
     <div className="d-flex align-items-center justify-content-between">
       {row.relevance_reasons && row.relevance_reasons.length > 0 && (
-        <div className="small text-muted">
+        <div className="small text-quaternary">
           <strong>{translate('Why relevant')}:</strong>{' '}
           {row.relevance_reasons.join(', ')}
         </div>

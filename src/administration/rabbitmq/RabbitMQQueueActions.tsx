@@ -80,7 +80,7 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
       title: translate('Delete queue'),
       body: (
         <>
-          <p className="text-danger fw-bold">
+          <p className="text-danger font-medium">
             {translate('Are you sure you want to DELETE this queue entirely?')}
           </p>
           <p>

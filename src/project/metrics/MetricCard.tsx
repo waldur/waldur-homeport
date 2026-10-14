@@ -401,7 +401,7 @@ export const MetricCard: FC<{
       ) : (
         // Same height as a chart, so cards in a row line up.
         <div
-          className="d-flex align-items-center justify-content-center text-muted fs-7"
+          className="d-flex align-items-center justify-content-center text-quaternary fs-7"
           style={{ height: CHART_HEIGHT }}
         >
           {translate('No data reported yet.')}

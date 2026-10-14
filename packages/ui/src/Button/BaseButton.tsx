@@ -8,7 +8,7 @@ import { Tooltip, type TooltipProps } from '../Tooltip';
 /**
  * BaseButton - Core button component for waldur-ui.
  *
- * Colors are defined in waldur-design-tokens/buttonColors.css.
+ * Colors are defined in waldur-design-tokens/button.css.
  * Supports variants, sizes, icon placement, tooltips, and loading states.
  */
 /**
@@ -54,14 +54,14 @@ export const buttonVariants = cva(
           'active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
-        // Explicit disabled:bg-[transparent] ensures hover styling is suppressed when disabled.
+        // Explicit disabled:bg-transparent ensures hover styling is suppressed when disabled.
         'tertiary-ghost': [
           'shadow-[inset_0_0_0_1px_transparent]',
-          'bg-[transparent] text-[var(--btn-tertiary-text)]',
+          'bg-transparent text-[var(--btn-tertiary-text)]',
           'hover:bg-[var(--btn-tertiary-bg-hover)]',
           'active:bg-[var(--btn-tertiary-bg-pressed)] active:shadow-none',
           'focus-visible:bg-[var(--btn-tertiary-bg-hover)] focus-visible:[outline:2px_solid_var(--btn-tertiary-focus-ring)] focus-visible:[outline-offset:0px]',
-          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)]',
+          'disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         // danger, warning, success switch text to high-contrast white on active press.
         danger: [
@@ -89,48 +89,48 @@ export const buttonVariants = cva(
           'focus-visible:bg-[var(--btn-success-bg)] focus-visible:shadow-[inset_0_0_0_1px_var(--btn-success-bg)] focus-visible:[outline:2px_solid_var(--btn-success-focus-ring)] focus-visible:[outline-offset:0px]',
           'disabled:shadow-[inset_0_0_0_1px_transparent] disabled:bg-[var(--btn-disabled-bg)] disabled:text-[var(--btn-disabled-text)] data-disabled:shadow-[inset_0_0_0_1px_transparent] data-disabled:bg-[var(--btn-disabled-bg)] data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
-        // Explicit active:bg-[transparent] keeps text buttons transparent while pressed.
+        // Explicit active:bg-transparent keeps text buttons transparent while pressed.
         'text-primary': [
           'shadow-[inset_0_0_0_1px_transparent]',
-          'bg-[transparent] text-[var(--btn-text-primary-color)]',
+          'bg-transparent text-[var(--btn-text-primary-color)]',
           'hover:bg-[var(--btn-secondary-bg)]',
           'focus-visible:bg-[var(--btn-secondary-bg-hover)] focus-visible:[outline:2px_solid_var(--btn-primary-focus-ring)] focus-visible:[outline-offset:0px]',
-          'active:bg-[transparent] active:text-[var(--btn-text-primary-pressed)] active:shadow-none',
-          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)]',
+          'active:bg-transparent active:text-[var(--btn-text-primary-pressed)] active:shadow-none',
+          'disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         'text-secondary': [
           'shadow-[inset_0_0_0_1px_transparent]',
-          'bg-[transparent] text-[var(--btn-text-secondary-color)]',
+          'bg-transparent text-[var(--btn-text-secondary-color)]',
           'hover:bg-[var(--btn-text-secondary-hover-bg)]',
           'focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px]',
-          'active:bg-[transparent] active:shadow-none',
-          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)]',
+          'active:bg-transparent active:shadow-none',
+          'disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         // Updates text color to the corresponding interactive tone on hover and focus.
         'text-danger': [
           'shadow-[inset_0_0_0_1px_transparent]',
-          'bg-[transparent] text-[var(--btn-text-danger-color)]',
+          'bg-transparent text-[var(--btn-text-danger-color)]',
           '[--btn-icon-color:var(--btn-text-danger-icon)]',
           'hover:bg-[var(--btn-danger-bg-hover)] hover:text-[var(--btn-danger-text)] hover:[--btn-icon-color:currentColor]',
           'focus-visible:bg-[var(--btn-danger-bg)] focus-visible:text-[var(--btn-danger-text)] focus-visible:[--btn-icon-color:currentColor] focus-visible:[outline:2px_solid_var(--btn-danger-focus-ring)] focus-visible:[outline-offset:0px]',
-          'active:bg-[transparent] active:shadow-none',
-          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] disabled:[--btn-icon-color:var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)] data-disabled:[--btn-icon-color:var(--btn-disabled-text)]',
+          'active:bg-transparent active:shadow-none',
+          'disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] disabled:[--btn-icon-color:var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)] data-disabled:[--btn-icon-color:var(--btn-disabled-text)]',
         ].join(' '),
         'text-warning': [
           'shadow-[inset_0_0_0_1px_transparent]',
-          'bg-[transparent] text-[var(--btn-text-warning-color)]',
+          'bg-transparent text-[var(--btn-text-warning-color)]',
           'hover:bg-[var(--btn-warning-bg-hover)] hover:text-[var(--btn-warning-text)]',
           'focus-visible:bg-[var(--btn-warning-bg)] focus-visible:text-[var(--btn-warning-text)] focus-visible:[outline:2px_solid_var(--btn-warning-focus-ring)] focus-visible:[outline-offset:0px]',
-          'active:bg-[transparent] active:shadow-none',
-          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)]',
+          'active:bg-transparent active:shadow-none',
+          'disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
         'text-success': [
           'shadow-[inset_0_0_0_1px_transparent]',
-          'bg-[transparent] text-[var(--btn-text-success-color)]',
+          'bg-transparent text-[var(--btn-text-success-color)]',
           'hover:bg-[var(--btn-success-bg-hover)] hover:text-[var(--btn-success-text)]',
           'focus-visible:bg-[var(--btn-success-bg)] focus-visible:text-[var(--btn-success-text)] focus-visible:[outline:2px_solid_var(--btn-success-focus-ring)] focus-visible:[outline-offset:0px]',
-          'active:bg-[transparent] active:shadow-none',
-          'disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)]',
+          'active:bg-transparent active:shadow-none',
+          'disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)]',
         ].join(' '),
       },
       // Heights derived from padding and line-height:

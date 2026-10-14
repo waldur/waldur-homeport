@@ -66,8 +66,8 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <div className="text-muted">
-        <h6 className="fw-bold mb-5">
+      <div className="text-quaternary">
+        <h6 className="font-medium mb-5">
           1. {translate('Select billing period')}
         </h6>
         <Row className="mb-6">
@@ -101,7 +101,7 @@ export const Step1UploadFile: FC<Step1Props> = (props) => {
 
         <hr />
 
-        <h6 className="fw-bold mb-5">2. {translate('Upload your file')}</h6>
+        <h6 className="font-medium mb-5">2. {translate('Upload your file')}</h6>
         <Field
           name="file"
           validate={validateFile}

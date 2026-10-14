@@ -63,7 +63,7 @@ const CategoryListItem: FunctionComponent<
         )}
         <h5 className="title lh-1 mb-0">{truncate(item.title)}</h5>
         {item.offering_count > 0 && (
-          <span className="lh-1 text-gray-700 fs-5 ms-auto">
+          <span className="lh-1 text-secondary fs-5 ms-auto">
             {item.offering_count === 1
               ? translate('{count} offering', { count: 1 })
               : translate('{count} offerings', {
@@ -94,7 +94,7 @@ const CategoryGroupListItem: FunctionComponent<{
       >
         <CaretRightIcon
           weight="bold"
-          className="size-4 text-gray-700 rotate-90"
+          className="size-4 text-secondary rotate-90"
         />
       </CategoryListItem>
       <CollapsibleContent>
@@ -128,11 +128,11 @@ export const CategoriesPanel: FunctionComponent<{
   return (
     <div className="category-listing">
       <div className="d-flex align-items-center ms-7 mt-2">
-        <h6 className="text-gray-700 fw-bold my-2 me-4">
+        <h6 className="text-secondary font-medium my-2 me-4">
           {translate('Categories')}
         </h6>
         {loading && (
-          <span className="animation-spin text-gray-700 lh-1">
+          <span className="animation-spin text-secondary lh-1">
             <ArrowsClockwiseIcon size={16} weight="bold" />
           </span>
         )}

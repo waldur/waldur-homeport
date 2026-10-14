@@ -116,7 +116,7 @@ const EventConsumersTable: FC = () => {
       {
         title: translate('Owner'),
         render: ({ row }: { row: EventConsumer }) => (
-          <span className="fw-bold">
+          <span className="font-medium">
             {row.user_full_name || row.user_username}
           </span>
         ),
@@ -159,7 +159,7 @@ const EventConsumersTable: FC = () => {
           const stats = queueStats.get(getConsumerQueueName(row.uuid));
           return stats
             ? renderFieldOrDash(
-                <span className="fw-bold">
+                <span className="font-medium">
                   {stats.messages.toLocaleString()}
                 </span>,
               )

@@ -9,7 +9,7 @@ import { ArrowCustomerMappingAutocomplete } from '../../mappings/ArrowCustomerMa
 export const Step1SelectCustomer: FC<WizardFormStepProps> = (props) => (
   <WizardForm {...props}>
     <div>
-      <p className="text-muted mb-5">
+      <p className="text-quaternary mb-5">
         {translate(
           'Select the Arrow customer mapping to import licenses from.',
         )}

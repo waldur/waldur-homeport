@@ -48,15 +48,12 @@ export const BreadcrumbSearchItem = ({
   return (
     <div
       className={classNames(
-        // bg-state-primary-50: the hover background, also on .active, the
-        // highlighted row, so the keyboard highlight looks like the
-        // pointer's in either theme (Metronic compiles it per theme). The
-        // brand bar marks it besides: it is a keyboard user's only focus
-        // indicator. The current row is not tinted: bg-light-primary
-        // resolves to this same primary-50, so it read as permanently
-        // hovered and gave no hover feedback; aria-current marks it instead.
-        'search-result-item d-flex align-items-center pe-5 bg-state-primary-50',
-        highlighted && 'active shadow-[inset_3px_0_0_var(--bs-primary)]',
+        // The hover background, also on .active, the
+        // highlighted row, so the keyboard highlight looks like the pointer's. The brand bar
+        // marks it besides: it is a keyboard user's only focus indicator. The current row is
+        // not tinted: aria-current marks it instead.
+        'search-result-item d-flex align-items-center pe-5 hover:bg-[var(--bg-brand-primary-alt)] [&.active]:bg-[var(--bg-brand-primary-alt)] cursor-pointer',
+        highlighted && 'active shadow-[inset_3px_0_0_var(--brand-color)]',
       )}
     >
       <Link
@@ -69,7 +66,7 @@ export const BreadcrumbSearchItem = ({
         aria-current={item.isCurrent ? 'page' : undefined}
         // pe-4 keeps a long title off the favourite star, which always holds
         // its place beside the link; as padding it stays part of the link.
-        className="d-flex flex-grow-1 min-w-0 text-dark text-hover-primary align-items-center py-2 ps-5 pe-4"
+        className="d-flex flex-grow-1 min-w-0 text-primary hover:text-brand align-items-center py-2 ps-5 pe-4"
       >
         {/* Decorative: the title follows, so the option isn't named by
             the avatar's initials too. */}
@@ -82,10 +79,12 @@ export const BreadcrumbSearchItem = ({
         </span>
         {/* Blocks, not spans, so the option's name has a break between
             them ("Project Organization", not "ProjectOrganization"). */}
-        <div className="d-flex flex-column justify-content-start fw-semibold">
-          <div className="fs-6 fw-semibold">{item.title}</div>
+        <div className="d-flex flex-column justify-content-start font-semibold">
+          <div className="fs-6 font-semibold">{item.title}</div>
           {Boolean(item.subtitle) && (
-            <div className="fs-7 fw-semibold text-muted">{item.subtitle}</div>
+            <div className="fs-7 font-semibold text-quaternary">
+              {item.subtitle}
+            </div>
           )}
         </div>
       </Link>
@@ -99,7 +98,7 @@ export const BreadcrumbSearchItem = ({
         {favorite ? (
           <StarIcon size={20} weight="fill" className="text-warning" />
         ) : (
-          <StarIcon size={20} className="text-dark" weight="bold" />
+          <StarIcon size={20} className="text-primary" weight="bold" />
         )}
       </button>
     </div>

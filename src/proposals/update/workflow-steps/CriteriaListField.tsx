@@ -17,7 +17,7 @@ export const CriteriaListField: FC<OwnProps> = ({ name }) => (
     {({ fields }) => (
       <div className="d-flex flex-column gap-2">
         {fields.length === 0 && (
-          <div className="text-muted small">
+          <div className="text-quaternary small">
             {translate('No criteria defined yet.')}
           </div>
         )}

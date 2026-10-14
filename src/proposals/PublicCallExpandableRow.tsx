@@ -28,18 +28,18 @@ export const PublicCallExpandableRow: FunctionComponent<{
   return (
     <ExpandableContainer>
       <Row>
-        <Col xs={12} className="text-dark mb-2">
+        <Col xs={12} className="text-primary mb-2">
           {row.description ? (
             <Card className="card-bordered card-solid">
               <Card.Header>
-                <h6 className="mb-0 fw-bold">{translate('Description')}</h6>
+                <h6 className="mb-0 font-medium">{translate('Description')}</h6>
               </Card.Header>
               <Card.Body>
                 <SafeMarkdown text={row.description} smallTitles />
               </Card.Body>
             </Card>
           ) : (
-            <p className="text-muted fst-italic fs-7 mb-0">
+            <p className="text-quaternary fst-italic fs-7 mb-0">
               {translate('No description')}
             </p>
           )}
@@ -56,7 +56,7 @@ export const PublicCallExpandableRow: FunctionComponent<{
           </Col>
         ) : (
           <Col xs={12}>
-            <p className="text-muted fst-italic fs-7 mb-0">
+            <p className="text-quaternary fst-italic fs-7 mb-0">
               {translate('No active round')}
             </p>
           </Col>

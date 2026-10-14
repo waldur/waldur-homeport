@@ -261,7 +261,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
               body={s.rejection_reason ?? ''}
               autoWidth
             >
-              <InfoIcon size={16} weight="bold" className="text-gray-600" />
+              <InfoIcon size={16} weight="bold" className="text-tertiary" />
             </Tooltip>
           </span>
         );
@@ -323,7 +323,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
   if (isLoading) return <LoadingSpinner />;
   if (isError) {
     return (
-      <div className="text-muted small">
+      <div className="text-quaternary small">
         {translate('Could not load workflow progress.')}
       </div>
     );
@@ -335,7 +335,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
     return (
       <ProposalStateSteps
         proposal={proposal}
-        bgClass="bg-body"
+        bgClass="bg-primary"
         note={statusLine}
       />
     );
@@ -343,12 +343,12 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
 
   return (
     <Panel cardBordered className="overflow-hidden">
-      <ProgressSteps steps={steps} bgClass="bg-body" />
+      <ProgressSteps steps={steps} bgClass="bg-primary" />
       {/* Whether the call team has to press a button is their business, not
           the applicant's: from outside, parked and working both read as
           waiting. */}
       {showDetails && awaitingManualAdvance && (
-        <div className="text-muted small mt-2 px-4 pb-3">
+        <div className="text-quaternary small mt-2 px-4 pb-3">
           {translate('Awaiting call manager approval to advance.')}
         </div>
       )}

@@ -35,7 +35,7 @@ export const PubSubIssuesCard: FC<PubSubIssuesCardProps> = ({ issues }) => {
           ))}
         </div>
       ) : (
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate(
             'No issues detected. PubSub system is operating normally.',
           )}

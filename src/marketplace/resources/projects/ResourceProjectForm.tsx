@@ -213,7 +213,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
             <TextGroup name="description" label={translate('Description')} />
             {limitComponents.length > 0 && (
               <div className="mb-7">
-                <label className="form-label fw-bold">
+                <label className="form-label font-medium">
                   {translate('Limits')}
                   {limitsRequired && (
                     <span className="text-danger ms-1" aria-hidden="true">
@@ -221,7 +221,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                     </span>
                   )}
                 </label>
-                <p className="form-text text-muted mt-0 mb-2">
+                <p className="form-text text-quaternary mt-0 mb-2">
                   {limitsRequired
                     ? translate(
                         'Required: every component must have a value greater than zero.',
@@ -304,7 +304,7 @@ export const ResourceProjectForm: FC<ResourceProjectFormProps> = ({
                                   )}
                                 </Field>
                               </td>
-                              <td className="text-muted">
+                              <td className="text-quaternary">
                                 {renderFieldOrDash(hint)}
                               </td>
                             </tr>

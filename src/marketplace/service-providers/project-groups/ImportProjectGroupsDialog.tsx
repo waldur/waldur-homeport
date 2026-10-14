@@ -95,7 +95,7 @@ export const ImportProjectGroupsDialog: FC<ImportProjectGroupsDialogProps> = ({
               />
             }
           >
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'Adopt groups your directory already holds, one per line: the project’s UUID or short name, the GID and, optionally, the group name, separated by commas. Either every line is imported or, if any is refused, none.',
               )}

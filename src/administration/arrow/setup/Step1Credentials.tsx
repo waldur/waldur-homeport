@@ -68,7 +68,7 @@ export const Step1Credentials: FC<WizardStepProps> = (props) => {
     <WizardModal {...props} renderFooter={renderFooter}>
       <div className="mb-6">
         <h4 className="mb-4">{translate('Arrow API Credentials')}</h4>
-        <p className="text-muted mb-4">
+        <p className="text-quaternary mb-4">
           {translate(
             'Enter your Arrow API credentials to connect your ArrowSphere account.',
           )}

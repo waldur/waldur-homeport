@@ -70,7 +70,7 @@ export const UserPermissionRequestsList: FC<OwnProps> = ({
       hoverShadow={false}
       hideRefresh
       headerClassName="py-0 min-h-45px"
-      titleClassName="fs-6 fw-bolder text-gray-700"
+      titleClassName="fs-6 font-semibold text-secondary"
       rowActions={UserPermissionRequestRowActions}
     />
   );

@@ -191,7 +191,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
         )}
         <div
           className={classNames('p-3 rounded chat-log-bubble', {
-            'border-start border-3':
+            'border-l-[1px] border-l-secondary border-3':
               selectedMessage.is_flagged || feedbackSentiment !== null,
             'border-danger':
               selectedMessage.is_flagged || feedbackSentiment === 'negative',
@@ -200,7 +200,9 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
           })}
         >
           {blocks.length === 0 ? (
-            <span className="text-muted">{translate('(empty message)')}</span>
+            <span className="text-quaternary">
+              {translate('(empty message)')}
+            </span>
           ) : isAssistant ? (
             blocks.map((block) => {
               const Component = uiRegistry.getComponent(block.key);
@@ -258,7 +260,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                 );
               })()}
             {selectedMessage.feedback_submitted_at && (
-              <span className="message-feedback-time text-muted">
+              <span className="message-feedback-time text-quaternary">
                 <span className="time-full">
                   {formatDateTime(selectedMessage.feedback_submitted_at)}
                 </span>
@@ -303,7 +305,7 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
       if (!allMessages || allMessages.length === 0) {
         return (
           <ExpandableContainer>
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('No messages in this thread.')}
             </span>
           </ExpandableContainer>
@@ -314,7 +316,7 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
         <ExpandableContainer>
           <OfflineBlockContext.Provider value={true}>
             <div className="d-flex flex-column">
-              <div className="d-flex align-items-center gap-2 pb-2 border-bottom">
+              <div className="d-flex align-items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
                 <strong>{row.name}</strong>
                 <TokenUsageBadge
                   id={`title-gen-tokens-${row.uuid}`}

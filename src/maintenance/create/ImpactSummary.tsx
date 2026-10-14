@@ -154,8 +154,8 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
       <div
         className={
           compact
-            ? 'text-muted'
-            : 'border rounded p-5 text-muted text-center bg-light'
+            ? 'text-quaternary'
+            : 'border rounded p-5 text-quaternary text-center bg-tertiary dark:bg-quaternary'
         }
       >
         {translate('Select offerings to see who will be notified.')}
@@ -166,22 +166,26 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
   const loading = isLoading || isFetching;
 
   return (
-    <div className={compact ? '' : 'border rounded p-4 bg-light'}>
+    <div
+      className={
+        compact ? '' : 'border rounded p-4 bg-tertiary dark:bg-quaternary'
+      }
+    >
       {!compact && <h6 className="mb-3">{translate('Estimated impact')}</h6>}
       <div className="d-flex gap-4 flex-wrap mb-3">
         <div>
-          <div className="text-muted small">
+          <div className="text-quaternary small">
             {translate('Distinct customers')}
           </div>
-          <div className="fs-2 fw-bold">
+          <div className="fs-2 font-medium">
             {loading ? '…' : stats.customerCount}
           </div>
         </div>
         <div>
-          <div className="text-muted small">
+          <div className="text-quaternary small">
             {translate('Total affected resources')}
           </div>
-          <div className="fs-2 fw-bold">
+          <div className="fs-2 font-medium">
             {loading ? '…' : stats.totalResources}
           </div>
         </div>
@@ -204,7 +208,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
 
       {stats.topCustomers.length > 0 && (
         <>
-          <div className="text-muted small mb-2">
+          <div className="text-quaternary small mb-2">
             {translate('Top affected customers')}
           </div>
           <ul className="list-unstyled mb-0">
@@ -214,7 +218,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
                 className="d-flex align-items-center gap-2 mb-2"
               >
                 <span
-                  className="symbol symbol-30px"
+                  className="symbol symbol-30px font-semibold"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -223,7 +227,6 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
                     height: 30,
                     borderRadius: '50%',
                     backgroundColor: '#e4e6ef',
-                    fontWeight: 600,
                   }}
                 >
                   {getInitials(customer.name)}
@@ -231,7 +234,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
                 <span className="flex-grow-1 text-truncate">
                   {customer.name}
                 </span>
-                <span className="text-muted small">
+                <span className="text-quaternary small">
                   {translate('{count} resources', {
                     count: customer.resourceCount,
                   })}
@@ -240,7 +243,7 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
             ))}
           </ul>
           {stats.remainingCustomers ? (
-            <div className="text-muted small">
+            <div className="text-quaternary small">
               {translate('+{count} more', { count: stats.remainingCustomers })}
             </div>
           ) : null}

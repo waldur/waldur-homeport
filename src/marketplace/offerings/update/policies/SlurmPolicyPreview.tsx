@@ -40,7 +40,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
 
   return (
     <div className="mb-6">
-      <h6 className="fw-semibold mb-3">
+      <h6 className="font-semibold mb-3">
         {translate('Threshold Visualization')}
       </h6>
       <div className="position-relative">
@@ -79,14 +79,13 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
             })}
           >
             <div
-              className="position-absolute"
+              className="position-absolute font-bold"
               style={{
                 top: '-20px',
                 left: '-30px',
                 width: '60px',
                 textAlign: 'center',
                 fontSize: '10px',
-                fontWeight: 'bold',
               }}
             >
               {translate('Current')}
@@ -94,7 +93,7 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
           </div>
         )}
       </div>
-      <div className="d-flex justify-content-between mt-2 small text-muted">
+      <div className="d-flex justify-content-between mt-2 small text-quaternary">
         <span>0</span>
         <span>
           {notificationThreshold.toLocaleString()} (80%)
@@ -145,18 +144,20 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
 }) => {
   return (
     <div className="mb-6">
-      <h6 className="fw-semibold mb-3">{translate('Carryover Calculation')}</h6>
+      <h6 className="font-semibold mb-3">
+        {translate('Carryover Calculation')}
+      </h6>
       <div className="border rounded p-3">
         <div className="row">
           <div className="col-md-6">
             <div className="mb-2">
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {translate('Previous Usage')}:{' '}
               </span>
               <strong>{previousUsage.toLocaleString()}</strong>
             </div>
             <div className="mb-2">
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {translate('Carryover Factor')}:{' '}
               </span>
               <strong>{carryoverFactor}%</strong>
@@ -164,22 +165,26 @@ const CarryoverDetails: FC<CarryoverDetailsProps> = ({
           </div>
           <div className="col-md-6">
             <div className="mb-2">
-              <span className="text-muted">{translate('Unused')}: </span>
+              <span className="text-quaternary">{translate('Unused')}: </span>
               <strong>{unused.toLocaleString()}</strong>
             </div>
             <div className="mb-2">
-              <span className="text-muted">{translate('Carryover Cap')}: </span>
+              <span className="text-quaternary">
+                {translate('Carryover Cap')}:{' '}
+              </span>
               <strong>{carryoverCap.toLocaleString()}</strong>
             </div>
             <div className="mb-2">
-              <span className="text-muted">{translate('Carryover')}: </span>
+              <span className="text-quaternary">
+                {translate('Carryover')}:{' '}
+              </span>
               <strong className="text-success">
                 +{carryover.toLocaleString()}
               </strong>
             </div>
           </div>
         </div>
-        <div className="mt-2 small text-muted">
+        <div className="mt-2 small text-quaternary">
           {translate('Formula: carryover = min(unused, {pct}% × base)', {
             pct: carryoverFactor,
           })}
@@ -205,8 +210,8 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
   if (!carryoverEnabled) {
     return (
       <div className="mb-6">
-        <h6 className="fw-semibold mb-3">{translate('Carryover')}</h6>
-        <div className="text-muted">
+        <h6 className="font-semibold mb-3">{translate('Carryover')}</h6>
+        <div className="text-quaternary">
           {translate(
             'Carryover is disabled. Unused allocation will not carry over to the next period.',
           )}
@@ -217,16 +222,18 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
 
   return (
     <div className="mb-6">
-      <h6 className="fw-semibold mb-3">{translate('Carryover Calculation')}</h6>
+      <h6 className="font-semibold mb-3">
+        {translate('Carryover Calculation')}
+      </h6>
       <div className="border rounded p-3">
         <div className="d-flex align-items-center mb-2">
           <span className="me-2">{translate('Base Allocation')}</span>
-          <span className="fw-bold">{baseAllocation.toLocaleString()}</span>
+          <span className="font-medium">{baseAllocation.toLocaleString()}</span>
         </div>
         {unusedCarryover > 0 && (
           <div className="d-flex align-items-center mb-2">
             <span className="me-2">+ {translate('Unused Carryover')}</span>
-            <span className="fw-bold text-success">
+            <span className="font-medium text-success">
               +{unusedCarryover.toLocaleString()}
             </span>
           </div>
@@ -234,7 +241,7 @@ const CarryoverInfo: FC<CarryoverInfoProps> = ({
         <hr />
         <div className="d-flex align-items-center">
           <span className="me-2">{translate('Total Allocation')}</span>
-          <span className="fw-bold fs-5">
+          <span className="font-medium fs-5">
             {totalAllocation.toLocaleString()}
           </span>
         </div>
@@ -248,6 +255,12 @@ interface DateProjection {
   date: string | null;
   status: 'never' | 'exceeded' | 'projected';
 }
+
+const PROJECTION_CLASSES = {
+  warning: 'text-warning',
+  info: 'text-info',
+  danger: 'text-danger',
+};
 
 interface DateProjectionsProps {
   projections: {
@@ -267,14 +280,14 @@ const DateProjections: FC<DateProjectionsProps> = ({
   const renderProjection = (
     label: string,
     projection: DateProjection,
-    variant: 'warning' | 'info' | 'danger',
+    variant: keyof typeof PROJECTION_CLASSES,
   ) => {
     let statusText: string;
     let statusClass: string;
 
     if (projection.status === 'exceeded') {
       statusText = translate('Already exceeded');
-      statusClass = 'text-danger fw-bold';
+      statusClass = 'text-danger font-medium';
     } else if (projection.status === 'never') {
       statusText = translate('Never at current rate');
       statusClass = 'text-success';
@@ -282,12 +295,12 @@ const DateProjections: FC<DateProjectionsProps> = ({
       statusText = projection.date
         ? `${formatDate(projection.date)} (${translate('{days} days', { days: projection.days })})`
         : translate('Unknown');
-      statusClass = `text-${variant}`;
+      statusClass = PROJECTION_CLASSES[variant];
     }
 
     return (
       <div className="mb-2">
-        <span className="text-muted">{label}: </span>
+        <span className="text-quaternary">{label}: </span>
         <span className={statusClass}>{statusText}</span>
       </div>
     );
@@ -312,18 +325,18 @@ const DateProjections: FC<DateProjectionsProps> = ({
 
   return (
     <div className="mb-6">
-      <h6 className="fw-semibold mb-3">{translate('Date Projections')}</h6>
+      <h6 className="font-semibold mb-3">{translate('Date Projections')}</h6>
       <div className="border rounded p-3">
         {currentQosStatus && (
           <div className="mb-3">
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('Current QoS Status')}:{' '}
             </span>
             <Badge variant={getQosStatusBadge(currentQosStatus).variant}>
               {getQosStatusBadge(currentQosStatus).label}
             </Badge>
             {usagePercentage !== undefined && (
-              <span className="ms-2 text-muted">
+              <span className="ms-2 text-quaternary">
                 ({usagePercentage.toFixed(1)}% {translate('of allocation')})
               </span>
             )}
@@ -344,7 +357,7 @@ const DateProjections: FC<DateProjectionsProps> = ({
           projections.blocked,
           'danger',
         )}
-        <div className="mt-3 small text-muted">
+        <div className="mt-3 small text-quaternary">
           {translate(
             'Projections are based on average daily usage rate. Actual dates may vary.',
           )}
@@ -413,7 +426,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
 
   if (error || !preview) {
     return (
-      <div className="text-muted">
+      <div className="text-quaternary">
         {translate(
           'Preview not available. Configure the policy to see impact calculations.',
         )}
@@ -440,7 +453,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
                 {preview.current_usage.toLocaleString()}
                 {preview.daily_usage_rate !== undefined &&
                   preview.daily_usage_rate > 0 && (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {' '}
                       ({preview.daily_usage_rate.toFixed(2)}{' '}
                       {translate('per day avg')})
@@ -611,7 +624,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
         </div>
       )}
 
-      <div className="small text-muted mt-4">
+      <div className="small text-quaternary mt-4">
         <strong>{translate('Note')}: </strong>
         {resource
           ? translate(

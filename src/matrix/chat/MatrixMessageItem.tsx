@@ -7,7 +7,7 @@ import Avatar from '@/core/Avatar';
 import { formatFilesize } from '@/core/utils';
 import { translate } from '@/i18n';
 
-import { getChatAvatarColor } from './chatColors';
+import { getChatAvatarClass } from './chatColors';
 import { MatrixMessageActions } from './MatrixMessageActions';
 import { useMatrixMessageActions } from './MatrixMessageActionsContext';
 import { MatrixMessageEditor } from './MatrixMessageEditor';
@@ -171,7 +171,7 @@ const MediaContent: FC<{
   const httpUrl = useAuthenticatedMediaUrl(message);
 
   if (message.type === UNDECRYPTABLE_MESSAGE_TYPE) {
-    return <em className="text-muted">{message.body}</em>;
+    return <em className="text-quaternary">{message.body}</em>;
   }
 
   if (!hasMedia(message)) {
@@ -188,7 +188,7 @@ const MediaContent: FC<{
   if (!httpUrl) {
     // Still loading the blob
     return (
-      <div className="text-muted" style={{ fontSize: '0.8rem' }}>
+      <div className="text-quaternary" style={{ fontSize: '0.8rem' }}>
         Loading {message.body}...
       </div>
     );
@@ -204,7 +204,7 @@ const MediaContent: FC<{
 
   if (httpUrl === MEDIA_UNAVAILABLE) {
     return (
-      <div className="text-muted" style={{ fontSize: '0.8rem' }}>
+      <div className="text-quaternary" style={{ fontSize: '0.8rem' }}>
         {translate('Attachment unavailable')} ({message.body})
       </div>
     );
@@ -256,7 +256,7 @@ const MediaContent: FC<{
           <audio controls style={{ maxWidth: '100%' }}>
             <source src={httpUrl} type={message.info?.mimetype} />
           </audio>
-          <div className="text-muted" style={{ fontSize: '0.75rem' }}>
+          <div className="text-quaternary" style={{ fontSize: '0.75rem' }}>
             {message.body}
           </div>
         </div>
@@ -313,14 +313,13 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
   // other people's messages only.
   const renderAvatar = () => {
     if (continuation) return <span />;
-    const color = getChatAvatarColor(message.sender);
     return (
       <Avatar
         name={cleanName}
         src={senderImage}
         size={40}
         circle
-        labelClassName={`bg-light-${color} text-${color}`}
+        labelClassName={getChatAvatarClass(message.sender)}
       />
     );
   };
@@ -370,7 +369,7 @@ export const MatrixMessageItem: FC<MatrixMessageItemProps> = ({
             />
           )}
           {message.redacted ? (
-            <em className="text-muted">{translate('Message deleted')}</em>
+            <em className="text-quaternary">{translate('Message deleted')}</em>
           ) : editing ? (
             <MatrixMessageEditor message={message} />
           ) : (

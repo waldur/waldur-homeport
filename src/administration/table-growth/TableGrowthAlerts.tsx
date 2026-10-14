@@ -35,7 +35,7 @@ export const TableGrowthAlerts: FC<TableGrowthAlertsProps> = ({ alerts }) => {
             <div key={tableName} className="mt-2">
               <code>{tableName}</code>
               {tableAlerts.map((alert) => (
-                <span key={alert.period} className="ms-2 text-muted">
+                <span key={alert.period} className="ms-2 text-quaternary">
                   {alert.period === 'weekly'
                     ? translate('Weekly: {actual}% (threshold: {threshold}%)', {
                         actual: alert.actual.toFixed(1),

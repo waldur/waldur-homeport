@@ -17,7 +17,7 @@ export const LonghornWorkerWarning: FunctionComponent<{}> = () => {
     <Form.Text
       className={classNames('mb-0', {
         'text-danger': longhornSelected,
-        'text-muted': !longhornSelected,
+        'text-quaternary': !longhornSelected,
       })}
     >
       {longhornSelected

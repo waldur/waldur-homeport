@@ -105,7 +105,7 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
         {freedCapacitySummary && ` - ${freedCapacitySummary}`}
       </p>
       <div className="table-responsive">
-        <Table className="table-row-bordered table-expandable align-middle table-rounded border border-gray-200">
+        <Table className="table-row-bordered table-expandable align-middle table-rounded border-[1px] border-divider">
           <thead>
             <tr>
               <th>{translate('Component')}</th>

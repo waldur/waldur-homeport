@@ -48,15 +48,15 @@ const OfferingNameColumn = ({ row }: { row: ProviderOffering }) => (
 );
 
 const CategoryColumn = ({ row }: { row: ProviderOffering }) => (
-  <span className="text-muted">{row.category_title}</span>
+  <span className="text-quaternary">{row.category_title}</span>
 );
 
 const ResourcesColumn = ({ row }: { row: ProviderOffering }) => (
-  <span className="fw-bold">{row.resources_count || 0}</span>
+  <span className="font-medium">{row.resources_count || 0}</span>
 );
 
 const TypeColumn = ({ row }: { row: ProviderOffering }) => (
-  <span className="text-muted">{getLabel(row.type)}</span>
+  <span className="text-quaternary">{getLabel(row.type)}</span>
 );
 
 const columns: Column<ProviderOffering>[] = [
@@ -182,7 +182,7 @@ export const ProviderOfferingsPage: FC = () => {
           <>
             <ReportingTitle reportKey="provider-offerings">
               <div className="d-flex align-items-center gap-4">
-                <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+                <label className="text-quaternary fs-7 font-semibold whitespace-nowrap">
                   {translate('Provider')}:
                 </label>
                 <div style={{ minWidth: 200 }}>

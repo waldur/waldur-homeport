@@ -286,7 +286,7 @@ const RemoteSyncRenderer = ({
         <BooleanGroup
           name="is_active"
           label={translate('Enable synchronization')}
-          className="text-gray-700"
+          className="text-secondary"
         />
       </ModalDialog>
     </form>

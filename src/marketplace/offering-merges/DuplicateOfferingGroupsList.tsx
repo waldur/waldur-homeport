@@ -223,7 +223,7 @@ export const DuplicateOfferingGroupsList: FunctionComponent = () => {
           render: ({ row }) => (
             <>
               {renderFieldOrDash(row.tenant_name)}{' '}
-              <span className="text-muted">#{row.tenant_id}</span>
+              <span className="text-quaternary">#{row.tenant_id}</span>
             </>
           ),
         },

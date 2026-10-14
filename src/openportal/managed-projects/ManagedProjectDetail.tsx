@@ -203,7 +203,7 @@ export const ManagedProjectDetail = () => {
               ))}
             </div>
           ) : (
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('No members assigned.')}
             </span>
           )}
@@ -260,8 +260,11 @@ export const ManagedProjectDetail = () => {
           {details?.notes && details.notes.length > 0 ? (
             <div className="d-flex flex-column gap-2">
               {details.notes.map((note, index) => (
-                <div key={index} className="border-bottom pb-2">
-                  <div className="text-muted small">
+                <div
+                  key={index}
+                  className="border-b-[1px] border-b-secondary pb-2"
+                >
+                  <div className="text-quaternary small">
                     {note.author} &middot; {formatDateTime(note.timestamp)}
                   </div>
                   <div>{note.text}</div>
@@ -269,7 +272,9 @@ export const ManagedProjectDetail = () => {
               ))}
             </div>
           ) : (
-            <span className="text-muted">{translate('No notes yet.')}</span>
+            <span className="text-quaternary">
+              {translate('No notes yet.')}
+            </span>
           )}
         </Card.Body>
       </Card>

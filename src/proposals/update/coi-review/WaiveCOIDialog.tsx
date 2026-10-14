@@ -68,7 +68,7 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
               </>
             }
           >
-            <p className="text-muted mb-4">
+            <p className="text-quaternary mb-4">
               {translate(
                 'Waiving allows the reviewer to continue despite the conflict. A management plan is required to document how the conflict will be managed.',
               )}

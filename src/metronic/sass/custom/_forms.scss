@@ -3,14 +3,14 @@
 .col-form-label,
 .form-label {
   font-size: $font-size-lg; // fs-6
-  font-weight: 500; // fw-bold
-  color: $text-secondary;
+  font-weight: var(--font-weight-medium); // fw-bold
+  color: var(--text-secondary);
 }
 
 .form-text {
   font-size: $font-size-lg;
-  font-weight: 400;
-  color: $text-tertiary;
+  font-weight: var(--font-weight-normal);
+  color: var(--text-tertiary);
   display: block;
   line-height: 1;
 }
@@ -21,7 +21,7 @@
   &:hover:not(:disabled):not([readonly]):not(:checked):not(:focus):not(
       .is-invalid
     ) {
-    border-color: var(--bs-primary);
+    border-color: var(--brand-500);
   }
 }
 
@@ -45,11 +45,11 @@
   }
 
   &.form-control-solid {
-    border-color: $gray-300;
+    border-color: var(--border-primary);
 
     &:focus,
     &:active {
-      border-color: $gray-400;
+      border-color: var(--border-divider-strong);
     }
 
     &.is-invalid {
@@ -99,7 +99,7 @@
 .input-group {
   .input-group-text {
     background-color: transparent;
-    color: $gray-500;
+    color: var(--text-quaternary);
     font-size: 1.24rem;
   }
 
@@ -148,9 +148,9 @@
       z-index: 6;
 
       > button {
-        color: $fg-quinary;
+        color: var(--text-quinary);
         &:hover {
-          color: $fg-quaternary;
+          color: var(--text-quaternary);
         }
 
         svg {
@@ -198,7 +198,7 @@
       z-index: 5;
 
       @include svg-icon-size(20px);
-      @include svg-icon-color($fg-quinary);
+      @include svg-icon-color(var(--text-quinary));
     }
   }
 

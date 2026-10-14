@@ -73,7 +73,7 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
       <DataAccessSummaryCards summary={data.summary} />
 
       <Card className="card-bordered">
-        <Card.Header className="border-bottom">
+        <Card.Header className="border-b-[1px] border-b-secondary">
           <Card.Title>
             <h3>{translate('Data access')}</h3>
           </Card.Title>

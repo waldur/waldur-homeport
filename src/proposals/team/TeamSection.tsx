@@ -164,7 +164,7 @@ export const TeamSection: FC<
       </Card.Header>
       {props.hasTeamTabs &&
         !isFeatureVisible(MarketplaceFeatures.call_only) && (
-          <Card.Header className="table-tabs border-bottom align-items-stretch py-0 min-h-auto">
+          <Card.Header className="table-tabs border-b-[1px] border-b-secondary align-items-stretch py-0 min-h-auto">
             <TableNav
               tabs={[
                 {
@@ -197,7 +197,9 @@ export const TeamSection: FC<
               content: (
                 <>
                   {rules?.teamNote && !props.readOnlyMode ? (
-                    <p className="text-muted py-3 mb-0">{rules.teamNote}</p>
+                    <p className="text-quaternary py-3 mb-0">
+                      {rules.teamNote}
+                    </p>
                   ) : null}
                   <UsersList
                     table={usersTable}

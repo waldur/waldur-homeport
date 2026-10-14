@@ -59,7 +59,7 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
       <FormTable detailsMode className="gy-5">
         {!agentIdentity || empty ? (
           <tr>
-            <td colSpan={3} className="text-muted text-center">
+            <td colSpan={3} className="text-quaternary text-center">
               {translate('Agent information not available.')}
             </td>
           </tr>

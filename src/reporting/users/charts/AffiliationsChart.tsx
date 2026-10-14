@@ -94,7 +94,9 @@ const detailsTableColumns: Column<UserAffiliationDetail>[] = [
     title: translate('Organization'),
     orderField: 'organization',
     render: ({ row }) => (
-      <span className="fw-semibold">{renderFieldOrDash(row.organization)}</span>
+      <span className="font-semibold">
+        {renderFieldOrDash(row.organization)}
+      </span>
     ),
     export: 'organization',
   },
@@ -108,14 +110,14 @@ const detailsTableColumns: Column<UserAffiliationDetail>[] = [
     title: translate('Category'),
     orderField: 'category',
     render: ({ row }) => (
-      <span className="text-muted">{getCategoryLabel(row.category)}</span>
+      <span className="text-quaternary">{getCategoryLabel(row.category)}</span>
     ),
     export: (row) => getCategoryLabel(row.category),
   },
   {
     title: translate('Identifier'),
     render: ({ row }) => (
-      <span className="text-muted font-monospace">
+      <span className="text-quaternary font-monospace">
         {renderFieldOrDash(row.identifier)}
       </span>
     ),
@@ -124,7 +126,7 @@ const detailsTableColumns: Column<UserAffiliationDetail>[] = [
   {
     title: translate('Users'),
     orderField: 'count',
-    render: ({ row }) => <span className="fw-bold">{row.count}</span>,
+    render: ({ row }) => <span className="font-medium">{row.count}</span>,
     export: 'count',
   },
 ];

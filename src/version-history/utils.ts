@@ -216,3 +216,17 @@ export function serializeForDiff(data: Record<string, unknown>): string {
 
   return JSON.stringify(filtered, null, 2);
 }
+
+export const isPolicyComment = (comment: string | undefined): boolean =>
+  !!comment?.startsWith('Policy action');
+
+export const formatPolicyComment = (comment: string): string => {
+  const match = comment.match(
+    /^Policy action '(\w+)': (\w+) changed from (\S+) to (\S+)\. Policy: (\w+) [a-f0-9]+\.(?: Scope: ([^.]*)\.)?(?: Created by: [^.]*\.)?(.*)?$/,
+  );
+  if (!match) return comment;
+  const [, , field, oldVal, newVal, policyClass, scope, extra] = match;
+  let formatted = `${field}: ${oldVal} → ${newVal} (${scope || policyClass})`;
+  if (extra?.trim()) formatted += ` ${extra.trim()}`;
+  return formatted;
+};

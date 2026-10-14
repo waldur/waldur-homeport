@@ -16,7 +16,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
   props,
 ) => (
   <div className="card">
-    <div className="card-body mb-2 border-bottom">
+    <div className="card-body mb-2 border-b-[1px] border-b-secondary">
       <form className="form-inline" id="vm-overview-filter">
         <Field name="shared" type="checkbox">
           {({ input }) => (

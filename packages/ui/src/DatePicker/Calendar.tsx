@@ -65,7 +65,9 @@ export function Calendar({
       fixedWeeks={fixedWeeks}
       className={cn(
         'px-[24px] py-[20px] text-[14px] [--cell-size:40px]',
-        '[--calendar-band:var(--waldur-brand-50)] dark:[--calendar-band:var(--waldur-brand-400)]',
+        // The band is the faint brand step in both themes (50 / 900), so the
+        // day text on it stays the body colour, and only the edges are vivid.
+        '[--calendar-band:var(--bg-brand-subtle)]',
         textSecondary,
         className,
       )}
@@ -114,7 +116,7 @@ export function Calendar({
         // row breaks it), half cells under the round start and end.
         range_middle: cn(
           'bg-(--calendar-band) first:rounded-s-full last:rounded-e-full',
-          '[&>button]:font-medium [&>button]:text-[var(--bs-gray-900)]',
+          '[&>button]:font-medium [&>button]:text-primary',
           defaults.range_middle,
         ),
         range_start: cn(
@@ -128,10 +130,10 @@ export function Calendar({
           defaults.range_end,
         ),
         today: cn(
-          '[&>button]:bg-[var(--bs-gray-200)] [&>button]:font-medium',
+          '[&>button]:bg-quaternary [&>button]:font-medium',
           defaults.today,
         ),
-        outside: cn('text-[var(--bs-gray-500)]', defaults.outside),
+        outside: cn('text-quaternary', defaults.outside),
         disabled: cn(disabledText, defaults.disabled),
         // Days before startMonth/after endMonth: react-day-picker renders
         // nothing for them; CalendarDay below shows them as disabled.
@@ -208,16 +210,18 @@ function weekdayFormat(dateLib: DateLib, options: DateLibOptions): string {
   return pattern;
 }
 
-const textSecondary =
-  'text-[var(--bs-gray-700)] dark:text-[var(--bs-gray-600)]';
-const disabledText = 'text-[var(--bs-gray-300)] dark:text-[var(--bs-gray-400)]';
+// The pickers' body text: --text-secondary is gray-700, and the subdued
+// gray-dark-300 in dark mode, as it was when it read --bs-gray-700 /
+// dark:--bs-gray-600.
+const textSecondary = 'text-secondary';
+const disabledText = 'text-[var(--text-disabled)]';
 
 const dayShape =
   'mx-auto flex size-[39px] items-center justify-center rounded-full leading-none';
 
 const navButton = cn(
   'pointer-events-auto inline-flex size-[40px] items-center justify-center p-0 select-none',
-  'hover:text-[var(--waldur-brand-600)]',
+  'hover:text-brand',
   'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
   // Hide the navigation arrow past minDate/maxDate rather than dimming it.
   'disabled:invisible aria-disabled:invisible',
@@ -273,11 +277,11 @@ function CalendarDayButton({
       data-edge={edge || undefined}
       className={cn(
         dayShape,
-        'hover:bg-(--calendar-band) hover:font-medium hover:text-[var(--bs-gray-900)]',
+        'hover:bg-(--calendar-band) hover:font-medium hover:text-primary',
         'disabled:pointer-events-none',
         'focus-visible:relative focus-visible:z-10 focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
-        'data-[edge]:bg-[var(--waldur-brand-600)] data-[edge]:font-medium data-[edge]:text-white',
-        'dark:data-[edge]:bg-[var(--waldur-brand-400)] dark:data-[edge]:text-[var(--bs-gray-900)]',
+        'data-[edge]:bg-brand-600 data-[edge]:font-medium data-[edge]:text-white',
+        'dark:data-[edge]:bg-brand-400 dark:data-[edge]:text-[var(--brand-on-400)]',
         className,
       )}
       {...props}
@@ -360,9 +364,9 @@ function CalendarDropdown({
         onClick={() => setOpen((wasOpen) => !wasOpen)}
         className={cn(
           'inline-flex h-[32px] items-center gap-[4px] rounded-[6px] ps-[8px] pe-[6px]',
-          'text-[16px] font-medium whitespace-nowrap text-[var(--bs-gray-900)] select-none',
-          'hover:bg-[var(--bs-gray-100)] dark:hover:bg-[var(--bs-gray-200)]',
-          'aria-expanded:bg-[var(--bs-gray-100)] dark:aria-expanded:bg-[var(--bs-gray-200)]',
+          'text-[16px] font-medium whitespace-nowrap text-primary select-none',
+          'hover:bg-tertiary',
+          'aria-expanded:bg-tertiary',
           'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
           'disabled:pointer-events-none',
           className,
@@ -383,7 +387,7 @@ function CalendarDropdown({
           role="group"
           aria-label={ariaLabel}
           data-slot="calendar-dropdown-panel"
-          className="absolute inset-x-0 top-[52px] bottom-0 z-10 grid content-start gap-y-[8px] overflow-y-auto bg-[var(--surface-card-bg)] py-[4px]"
+          className="absolute inset-x-0 top-[52px] bottom-0 z-10 grid content-start gap-y-[8px] overflow-y-auto bg-[var(--card-bg)] py-[4px]"
           style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
         >
           {options?.map((option) => {
@@ -399,11 +403,11 @@ function CalendarDropdown({
                 onKeyDown={closeOnEscape}
                 className={cn(
                   'mx-auto flex h-[39px] w-full max-w-[80px] items-center justify-center rounded-full leading-none',
-                  'hover:bg-(--calendar-band) hover:font-medium hover:text-[var(--bs-gray-900)]',
+                  'hover:bg-(--calendar-band) hover:font-medium hover:text-primary',
                   'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
-                  'disabled:pointer-events-none disabled:text-[var(--bs-gray-300)] dark:disabled:text-[var(--bs-gray-400)]',
+                  'disabled:pointer-events-none disabled:text-[var(--text-disabled)]',
                   isSelected &&
-                    'bg-[var(--waldur-brand-600)] font-medium text-white hover:bg-[var(--waldur-brand-600)] hover:text-white dark:bg-[var(--waldur-brand-400)] dark:text-[var(--bs-gray-900)]',
+                    'bg-brand-600 font-medium text-white hover:bg-brand-600 hover:text-white dark:bg-brand-400 dark:text-[var(--brand-on-400)]',
                 )}
               >
                 {option.label}

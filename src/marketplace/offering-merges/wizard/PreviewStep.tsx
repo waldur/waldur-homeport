@@ -31,7 +31,7 @@ export const PreviewStep: FC<PreviewStepProps> = ({
   return (
     <div className="d-flex flex-column gap-5">
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate(
             'The preview counts what moves, lists what blocks the merge and what needs your acknowledgement. Changing a mapping discards it.',
           )}

@@ -127,7 +127,7 @@ export const EditResourceEndDateDialog: FunctionComponent<
                           },
                         )}
                         <button
-                          className="text-anchor fw-bold d-block mt-2"
+                          className="text-anchor font-medium d-block mt-2"
                           type="button"
                           onClick={() => {
                             form.change(

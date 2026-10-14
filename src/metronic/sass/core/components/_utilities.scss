@@ -110,6 +110,44 @@ $utilities: map-merge(
   )
 );
 
+// Colour comes from Tailwind and the design tokens, so Bootstrap emits no
+// colour utility at all: no .text-*, .bg-* or .border-* colour class, and no
+// .border-top/-end/-bottom/-start (which set a colour too). Bootstrap's are
+// `!important` in the `bootstrap` layer, which outranks every Tailwind utility:
+// a class Tailwind also defines silently painted Bootstrap's colour, theme-
+// inverted in dark mode, and no `dark:`/`hover:` variant beside it applied.
+// src/tailwindBootstrapColors.test.ts checks the compiled CSS stays that way.
+$utilities: map-remove(
+  $utilities,
+  'color',
+  'background-color',
+  'border-color',
+  'border-top',
+  'border-end',
+  'border-bottom',
+  'border-start'
+);
+
+// Font weight comes from Tailwind's scale (primitives/typography.css), so no
+// .fw-* either. Bootstrap's names meant other weights than Tailwind's (here
+// fw-bold was 500, Tailwind's font-bold is 700) and were `!important`, so the
+// same word painted two weights depending on the prefix.
+$utilities: map-remove($utilities, 'font-weight');
+
+// `.border-0` too: Tailwind's sets the same zero width, and Bootstrap's
+// `border: 0 !important` would beat any responsive or state variant beside it.
+$utilities: map-merge(
+  $utilities,
+  (
+    'border': map-merge(
+        map-get($utilities, 'border'),
+        (
+          values: map-remove(map-get(map-get($utilities, 'border'), values), 0),
+        )
+      ),
+  )
+);
+
 .content-wrapper {
   display: flex;
   flex-direction: row;

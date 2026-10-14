@@ -42,7 +42,7 @@ export const FormulaChangePreview: FC<{ resource: Resource; name: string }> = ({
   }
   return (
     <div className="mt-6">
-      <p className="text-muted">
+      <p className="text-quaternary">
         {translate(
           'The change is ordered with the limits calculated from the new value:',
         )}

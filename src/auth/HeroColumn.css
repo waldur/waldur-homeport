@@ -20,7 +20,7 @@
 }
 
 .hero-text h1 {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   color: white;
   text-transform: uppercase;
 }

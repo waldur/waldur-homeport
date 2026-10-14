@@ -52,7 +52,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
       {
         title: translate('Offerings'),
         render: ({ row }) => (
-          <span className="text-muted">
+          <span className="text-quaternary">
             {row.affected_offerings.length} {translate('offerings')}
           </span>
         ),
@@ -64,7 +64,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
             <span className="d-block text-nowrap">
               {formatMediumDateTime(row.scheduled_start)}
             </span>
-            <span className="d-block text-nowrap text-muted">
+            <span className="d-block text-nowrap text-quaternary">
               {formatMediumDateTime(row.scheduled_end)}
             </span>
           </>
@@ -74,7 +74,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
         title: translate('Actual'),
         render: ({ row }) => {
           if (!row.actual_start && !row.actual_end) {
-            return <span className="text-muted">{DASH_ESCAPE_CODE}</span>;
+            return <span className="text-quaternary">{DASH_ESCAPE_CODE}</span>;
           }
           return (
             <>
@@ -83,7 +83,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
                   ? formatMediumDateTime(row.actual_start)
                   : DASH_ESCAPE_CODE}
               </span>
-              <span className="d-block text-nowrap text-muted">
+              <span className="d-block text-nowrap text-quaternary">
                 {row.actual_end
                   ? formatMediumDateTime(row.actual_end)
                   : DASH_ESCAPE_CODE}

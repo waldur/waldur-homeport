@@ -160,7 +160,7 @@ export const SramRulePreviewDialog: FC<SramRulePreviewDialogProps> = ({
             {row.group.display_name}
             <SramGroupKindBadge kind={row.group.kind} />
           </div>
-          <small className="text-muted">{row.group.urn}</small>
+          <small className="text-quaternary">{row.group.urn}</small>
         </div>
       ),
       id: 'group',

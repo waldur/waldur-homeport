@@ -142,3 +142,54 @@ const isNativeElement = (node) =>
 /** Native element tag name, or null for components and member expressions. */
 export const getNativeElementName = (node) =>
   isNativeElement(node) ? node.name.name : null;
+
+export const CLASS_HELPERS = /^(?:classNames|classnames|cn|clsx|cx|twMerge)$/;
+const TEST_CALLS = /^(?:it|test|describe)$/;
+/** Wrappers a class list passes through on its way to an attribute. */
+const PASS_THROUGH = new Set([
+  'ConditionalExpression',
+  'LogicalExpression',
+  'JSXExpressionContainer',
+  'TemplateLiteral',
+]);
+
+/**
+ * A string that holds a name, not a class list: `variant="text-danger"` (a
+ * BaseButton variant), `{ 'text-danger': 'Error' }`, `tone === 'text-danger'`,
+ * `type Tone = 'text-danger'`, a test title.
+ */
+export const notAClassList = (node) => {
+  let child = node;
+  let parent = node.parent;
+  while (parent && PASS_THROUGH.has(parent.type)) {
+    child = parent;
+    parent = parent.parent;
+  }
+  if (!parent) return false;
+  switch (parent.type) {
+    // Class lists also travel in props like backgroundColor="bg-info".
+    case 'JSXAttribute':
+      return parent.name.name === 'variant';
+    case 'Property':
+      if (parent.key === child && !parent.computed) {
+        const call = parent.parent?.parent;
+        return !(
+          call?.type === 'CallExpression' &&
+          CLASS_HELPERS.test(call.callee.name ?? '')
+        );
+      }
+      return (parent.key.name ?? parent.key.value) === 'variant';
+    case 'TSLiteralType':
+    case 'BinaryExpression':
+    case 'SwitchCase':
+      return true;
+    case 'CallExpression': {
+      const callee = parent.callee.object ?? parent.callee;
+      return (
+        parent.arguments[0] === child && TEST_CALLS.test(callee.name ?? '')
+      );
+    }
+    default:
+      return false;
+  }
+};

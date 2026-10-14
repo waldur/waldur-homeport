@@ -72,10 +72,10 @@ export const SCROLLSPY_NAV_LINK_BASE =
   'w-full flex-1 block py-3 px-4 m-0 font-semibold border-y-0 border-r-0 border-l-2 rounded-none transition-colors cursor-pointer text-sm leading-5 no-underline [&>*]:w-full';
 
 export const SCROLLSPY_NAV_LINK_ACTIVE =
-  'border-l-brand-600 text-brand-600 font-semibold active';
+  'border-l-brand text-brand font-semibold active';
 
 export const SCROLLSPY_NAV_LINK_INACTIVE =
-  'border-l-transparent text-[var(--surface-text-secondary)] hover:text-brand-600 hover:border-l-transparent [&_.has-error]:text-warning';
+  'border-l-transparent text-quaternary hover:text-brand hover:border-l-transparent [&_.has-error]:text-warning';
 
 /**
  * ScrollSpyNav renders an accessible, responsive navigation menu that observes

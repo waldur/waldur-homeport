@@ -191,7 +191,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
               count: visible.length,
             })}
           />
-          <span className="ms-auto text-muted small">
+          <span className="ms-auto text-quaternary small">
             {translate('{count} of {total} selected', {
               count: draft.size,
               total: projects.length,
@@ -203,7 +203,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
           className="border rounded p-2"
         >
           {visible.length === 0 && (
-            <p className="text-muted small mb-0 p-2">
+            <p className="text-quaternary small mb-0 p-2">
               {translate('No projects match the filters.')}
             </p>
           )}
@@ -216,9 +216,9 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                 className="mt-1"
                 label={
                   <span className="flex-grow-1" style={{ cursor: 'pointer' }}>
-                    <span className="fw-semibold">{p.name}</span>
+                    <span className="font-semibold">{p.name}</span>
                     {(p.start_date || p.end_date) && (
-                      <span className="text-muted small ms-2">
+                      <span className="text-quaternary small ms-2">
                         {p.start_date ?? '?'} →{' '}
                         {p.end_date ?? translate('ongoing')}
                       </span>
@@ -767,7 +767,7 @@ export const OrganisationReportsTab: FC = () => {
 
         {projects && projects.length > 0 && (
           <div className="d-flex align-items-center gap-2">
-            <span className="text-muted small">
+            <span className="text-quaternary small">
               {translate('{count} of {total} {project} selected', {
                 count: effectiveSelected.size,
                 total: projects.length,
@@ -826,7 +826,7 @@ export const OrganisationReportsTab: FC = () => {
         {loadTriggered && (
           <div className="ms-auto d-flex align-items-center gap-2">
             {projectsCacheAge && (
-              <span className="text-muted small">
+              <span className="text-quaternary small">
                 {translate('Cached {age}', {
                   age: formatCacheAge(projectsCacheAge),
                 })}
@@ -859,7 +859,7 @@ export const OrganisationReportsTab: FC = () => {
       {showLoadPrompt && !projectsLoading && !reportsLoading && (
         <Card className="mb-4">
           <Card.Body>
-            <p className="mb-2 fw-semibold">
+            <p className="mb-2 font-semibold">
               {translate('Usage reports not yet loaded')}
             </p>
 
@@ -933,7 +933,7 @@ export const OrganisationReportsTab: FC = () => {
               onMonthChange={setFilterMonth}
             />
 
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'Fetches reports for each project in parallel — this may take 15–30 seconds for large organisations. Tip: selecting a year or month limits projects to those active during that period, which is usually the fastest way to narrow the load for large organisations.',
               )}
@@ -1026,7 +1026,7 @@ export const OrganisationReportsTab: FC = () => {
         allUsage.length === 0 &&
         allStorage.length === 0 &&
         selectedUuids.length > 0 && (
-          <p className="text-muted">
+          <p className="text-quaternary">
             {translate(
               'No OpenPortal reports found for the selected projects.',
             )}
@@ -1066,7 +1066,7 @@ export const OrganisationReportsTab: FC = () => {
       {/* ── Charts ───────────────────────────────────────────────────── */}
       {activeUsage.length > 0 && nameMaps !== undefined && !showLoadPrompt && (
         <Card className="mb-4">
-          <Card.Header className="fw-semibold">
+          <Card.Header className="font-semibold">
             {translate('Usage')}
           </Card.Header>
           <Card.Body>
@@ -1083,7 +1083,7 @@ export const OrganisationReportsTab: FC = () => {
         nameMaps !== undefined &&
         !showLoadPrompt && (
           <Card className="mb-4">
-            <Card.Header className="fw-semibold">
+            <Card.Header className="font-semibold">
               {translate('Storage')}
             </Card.Header>
             <Card.Body>

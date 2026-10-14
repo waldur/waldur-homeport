@@ -52,7 +52,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
           </p>
           {plans.length && (
             <>
-              <div className="d-flex gap-6 pb-6 border-bottom mb-7">
+              <div className="d-flex gap-6 pb-6 border-b-[1px] border-b-secondary mb-7">
                 <div className="flex-grow-1">
                   <PlanSelectField plans={plans} offering={queryData.data} />
                 </div>

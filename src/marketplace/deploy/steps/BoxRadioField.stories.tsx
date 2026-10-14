@@ -75,7 +75,7 @@ const meta: Meta<typeof BoxRadioField> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-6 bg-[var(--surface-page-bg)] min-h-[360px] rounded-lg">
+      <div className="p-6 bg-[var(--page-bg)] min-h-[360px] rounded-lg">
         <Story />
       </div>
     ),
@@ -95,6 +95,7 @@ const OS_IMAGE_CHOICES: BoxRadioChoice[] = [
     value: 'ubuntu',
     label: 'Ubuntu',
     image: (
+      // eslint-disable-next-line waldur-custom/require-dark-pair -- the vendor's logo colour
       <span className="text-[#E95420] text-3xl">
         <LinuxLogoIcon weight="fill" size={40} />
       </span>
@@ -109,6 +110,7 @@ const OS_IMAGE_CHOICES: BoxRadioChoice[] = [
     value: 'debian',
     label: 'Debian',
     image: (
+      // eslint-disable-next-line waldur-custom/require-dark-pair -- the vendor's logo colour
       <span className="text-[#A80030] text-3xl">
         <LinuxLogoIcon weight="bold" size={40} />
       </span>
@@ -122,6 +124,7 @@ const OS_IMAGE_CHOICES: BoxRadioChoice[] = [
     value: 'rocky',
     label: 'Rocky Linux',
     image: (
+      // eslint-disable-next-line waldur-custom/require-dark-pair -- the vendor's logo colour
       <span className="text-[#10B981] text-3xl">
         <LinuxLogoIcon weight="duotone" size={40} />
       </span>
@@ -135,6 +138,7 @@ const OS_IMAGE_CHOICES: BoxRadioChoice[] = [
     value: 'windows',
     label: 'Windows Server',
     image: (
+      // eslint-disable-next-line waldur-custom/require-dark-pair -- the vendor's logo colour
       <span className="text-[#0078D4] text-3xl">
         <WindowsLogoIcon weight="fill" size={40} />
       </span>
@@ -152,7 +156,7 @@ const FLAVOR_CHOICES: BoxRadioChoice[] = [
     label: 'm1.nano',
     metadata: '1 vCPU · 1 GB RAM · 10 GB Disk',
     image: (
-      <span className="text-[var(--surface-text-muted)]">
+      <span className="text-quinary">
         <CpuIcon size={36} weight="duotone" />
       </span>
     ),
@@ -162,7 +166,7 @@ const FLAVOR_CHOICES: BoxRadioChoice[] = [
     label: 'm1.small',
     metadata: '1 vCPU · 2 GB RAM · 20 GB Disk',
     image: (
-      <span className="text-[var(--surface-text-muted)]">
+      <span className="text-quinary">
         <CpuIcon size={36} weight="duotone" />
       </span>
     ),
@@ -172,7 +176,7 @@ const FLAVOR_CHOICES: BoxRadioChoice[] = [
     label: 'm1.medium',
     metadata: '2 vCPU · 4 GB RAM · 40 GB Disk',
     image: (
-      <span className="text-[var(--surface-text-muted)]">
+      <span className="text-quinary">
         <HardDrivesIcon size={36} weight="duotone" />
       </span>
     ),
@@ -182,7 +186,7 @@ const FLAVOR_CHOICES: BoxRadioChoice[] = [
     label: 'm1.large',
     metadata: '4 vCPU · 8 GB RAM · 80 GB Disk',
     image: (
-      <span className="text-[var(--surface-text-muted)]">
+      <span className="text-quinary">
         <HardDrivesIcon size={36} weight="duotone" />
       </span>
     ),
@@ -192,7 +196,7 @@ const FLAVOR_CHOICES: BoxRadioChoice[] = [
     label: 'm1.xlarge',
     metadata: '8 vCPU · 16 GB RAM · 160 GB Disk',
     image: (
-      <span className="text-[var(--surface-text-muted)]">
+      <span className="text-quinary">
         <DatabaseIcon size={36} weight="duotone" />
       </span>
     ),
@@ -206,7 +210,7 @@ const PROVISION_TYPE_CHOICES: BoxRadioChoice[] = [
     metadata:
       'Connect cloud provider via credentials and sync existing resources',
     image: (
-      <span className="text-[var(--primary)]">
+      <span className="text-brand">
         <CloudIcon size={32} weight="bold" />
       </span>
     ),
@@ -217,7 +221,7 @@ const PROVISION_TYPE_CHOICES: BoxRadioChoice[] = [
     metadata:
       'Upload a Terraform, Helm, or Kubernetes manifest package to initialize',
     image: (
-      <span className="text-[var(--primary)]">
+      <span className="text-brand">
         <UploadSimpleIcon size={32} weight="bold" />
       </span>
     ),
@@ -228,7 +232,7 @@ const PROVISION_TYPE_CHOICES: BoxRadioChoice[] = [
     metadata:
       'Create an empty project workspace and provision resources manually',
     image: (
-      <span className="text-[var(--primary)]">
+      <span className="text-brand">
         <SparkleIcon size={32} weight="bold" />
       </span>
     ),
@@ -283,11 +287,9 @@ const BoxRadioFieldHarness = ({
         choices={choices}
         {...props}
       />
-      <div className="p-3 bg-[var(--surface-card-bg)] border border-[var(--surface-card-border)] rounded-md text-xs font-mono text-[var(--surface-text-muted)] flex items-center justify-between">
+      <div className="p-3 bg-[var(--card-bg)] border-[1px] border-secondary rounded-md text-xs font-mono text-quinary flex items-center justify-between">
         <span>Current input.value:</span>
-        <span className="font-bold text-[var(--surface-text-primary)]">
-          {JSON.stringify(value)}
-        </span>
+        <span className="font-bold text-primary">{JSON.stringify(value)}</span>
       </div>
     </div>
   );
@@ -432,7 +434,7 @@ export const VerticalCustomPlaceholder: Story = {
         defaultValue="backend"
         vertical
         imagePlaceholder={
-          <span className="text-[var(--surface-text-muted)] text-2xl">
+          <span className="text-quinary text-2xl">
             <FileCodeIcon weight="duotone" size={32} />
           </span>
         }

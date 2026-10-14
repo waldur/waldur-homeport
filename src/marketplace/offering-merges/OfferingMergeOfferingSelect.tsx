@@ -28,8 +28,8 @@ const OfferingOptionLabel: FC<{ option: MergeOfferingOption }> = ({
   option,
 }) => (
   <div className="d-flex flex-column">
-    <span className="fw-semibold">{option.name}</span>
-    <span className="text-muted fs-7">
+    <span className="font-semibold">{option.name}</span>
+    <span className="text-quaternary fs-7">
       {[getLabel(option.type), option.state, option.customer_name]
         .filter(Boolean)
         .join(' · ')}

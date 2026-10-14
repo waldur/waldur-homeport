@@ -1,7 +1,7 @@
 @use 'sass:color';
 
 .dropzone {
-  border: 3px dashed $gray-300;
+  border: 3px dashed var(--border-divider-medium);
   padding: 16px 24px;
   border-radius: 12px;
 }
@@ -10,16 +10,9 @@
   font-size: 14px;
   text-align: center;
 
-  i,
   span {
     display: inline-block;
     vertical-align: middle;
-  }
-
-  i {
-    margin-right: 10px;
-    font-size: 22px;
-    color: $gray-300;
   }
 }
 
@@ -33,7 +26,7 @@
   bottom: 0;
   left: 0;
   padding: 20px;
-  border: 2px solid $border-brand;
+  border: 2px solid var(--border-brand);
   border-radius: 12px;
   text-align: center;
   z-index: 2;
@@ -42,7 +35,7 @@
 .dropzone__overlay-message {
   display: none;
   padding: 20px 30px;
-  border: 2px solid $border-brand;
+  border: 2px solid var(--border-brand);
   border-radius: 8px;
   max-width: 250px;
   background-color: $white;
@@ -74,14 +67,9 @@
       width: 100%;
       height: 100%;
       text-decoration: none;
-
-      i {
-        display: block;
-        font-size: 50px;
-      }
     }
 
-    @include svg-icon-color($fg-quinary);
+    @include svg-icon-color(var(--text-quinary));
   }
 
   .attachment-item__body {
@@ -107,7 +95,7 @@
     inset: 0;
     padding: 20px;
     background: color.adjust(#fff, $alpha: -0.5);
-    border: 1px dashed $border-error;
+    border: 1px dashed var(--status-danger-border);
     border-radius: 8px;
     text-align: center;
     z-index: 2;
@@ -115,11 +103,11 @@
 
   // On error
   &.attachment-error {
-    border: 2px solid $border-error;
+    border: 2px solid var(--status-danger-border);
     padding: 14px;
 
     .attachment-item__thumb {
-      @include svg-icon-color($fg-error-secondary);
+      @include svg-icon-color(var(--status-danger-fg));
     }
   }
 }

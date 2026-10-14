@@ -7,57 +7,6 @@
     background-color: transparent;
     box-shadow: none;
   }
-
-  .stepper {
-    &.stepper-pills {
-      &.stepper-column {
-        .stepper-item {
-          padding: 0;
-
-          &:last-child .stepper-line {
-            display: none;
-          }
-        }
-
-        .stepper-line {
-          width: 19px;
-        }
-      }
-
-      .stepper-item {
-        &.completed .stepper-label .stepper-title {
-          color: var(--bs-primary);
-        }
-
-        .stepper-label .stepper-title {
-          font-weight: 500;
-          font-size: 0.85rem;
-          margin-bottom: 0;
-        }
-
-        .stepper-label {
-          cursor: pointer;
-
-          &:hover .stepper-title {
-            text-decoration: underline;
-          }
-        }
-
-        .stepper-icon {
-          width: unset;
-          height: 30px;
-          background-color: transparent !important;
-
-          &.error {
-            i {
-              font-size: 22.7px;
-              color: var(--bs-active-warning);
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
 @media (width <= 1650px) {

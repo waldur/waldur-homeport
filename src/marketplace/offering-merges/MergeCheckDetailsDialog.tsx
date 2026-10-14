@@ -20,7 +20,7 @@ const DetailsValue: FC<{ value: unknown }> = ({ value }) => {
   }
   if (Array.isArray(value)) {
     if (value.length === 0) {
-      return <span className="text-muted">{translate('Empty list')}</span>;
+      return <span className="text-quaternary">{translate('Empty list')}</span>;
     }
     return (
       <ul className="mb-0 ps-4">
@@ -35,13 +35,15 @@ const DetailsValue: FC<{ value: unknown }> = ({ value }) => {
   if (typeof value === 'object') {
     const entries = Object.entries(value);
     if (entries.length === 0) {
-      return <span className="text-muted">{translate('Nothing here')}</span>;
+      return (
+        <span className="text-quaternary">{translate('Nothing here')}</span>
+      );
     }
     return (
       <dl className="row mb-0">
         {entries.map(([key, item]) => (
           <Fragment key={key}>
-            <dt className="col-sm-4 text-break fw-semibold">
+            <dt className="col-sm-4 text-break font-semibold">
               {humanizeDetailsKey(key)}
             </dt>
             <dd className="col-sm-8 mb-2 text-break">
@@ -88,7 +90,7 @@ export const MergeCheckDetailsDialog: FC<MergeCheckDetailsDialogProps> = ({
   >
     <DetailsValue value={check.details ?? null} />
     <details className="mt-5" data-testid="merge-check-raw">
-      <summary className="text-muted">{translate('Raw payload')}</summary>
+      <summary className="text-quaternary">{translate('Raw payload')}</summary>
       <pre className="fs-8 mb-0 mt-2 overflow-auto">
         {JSON.stringify(check.details ?? null, null, 2)}
       </pre>

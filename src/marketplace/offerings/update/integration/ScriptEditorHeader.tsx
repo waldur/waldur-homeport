@@ -193,7 +193,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
             placeholder={translate('Search...')}
             onChange={(e) => setQuery(e.target.value)}
             inputClassName="border-0 shadow-none"
-            className="border-bottom"
+            className="border-b-[1px] border-b-secondary"
             autoFocus
           />
 
@@ -210,7 +210,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
                     <ArrowSquareOutIcon
                       weight="bold"
                       size={20}
-                      className="text-muted"
+                      className="text-quaternary"
                     />
                   </Link>
                 ) : (
@@ -228,7 +228,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
                         )}
                       </span>
                       <span>{option.label}</span>
-                      <span className="text-muted ms-3">
+                      <span className="text-quaternary ms-3">
                         {option.type === 'environ'
                           ? 'ENV'
                           : option.type === 'options'

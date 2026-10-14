@@ -283,11 +283,11 @@ export const EditScriptDialog = ({
                     titleClassName="fs-6"
                   >
                     {scriptExecutionResult ? (
-                      <pre className="text-primary mb-0">
+                      <pre className="text-brand mb-0">
                         {scriptExecutionResult}
                       </pre>
                     ) : (
-                      <i className="text-muted">
+                      <i className="text-quaternary">
                         {translate('Nothing to show')}
                       </i>
                     )}

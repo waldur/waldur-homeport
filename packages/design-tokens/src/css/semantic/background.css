@@ -1,0 +1,50 @@
+/**
+ * Neutral surfaces and fills.
+ *
+ *   --page-bg             the page behind the content
+ *   --card-bg             a card or panel on the page
+ *
+ *   --bg-primary          the base surface: menus, checkboxes, controls
+ *   --bg-primary-hover    a hovered or highlighted row on that surface
+ *   --bg-secondary        a faint panel or alternate section
+ *   --bg-tertiary         tiles, chips, avatars, a switch track
+ *   --bg-quaternary       a stronger fill: a selected row or day, hover on
+ *                         a --bg-tertiary fill
+ *   --bg-primary-solid    a dark solid fill (the table loading message)
+ *
+ * The --bg-* names match the Tailwind utilities (bg-primary, bg-secondary, …;
+ * tailwind/theme.css), so a class and a var() with the same name are the same
+ * colour. Brand fills are in brand.css, state tints (--status-*-bg) in
+ * status.css. A colour read by one waldur-ui component family goes in that
+ * component's own file (card.css, table.css, …), not here.
+ *
+ * Both themes are defined in this file.
+ */
+@import '../primitives/colors.css';
+
+:root {
+  --page-bg: var(--color-gray-50);
+  --card-bg: #ffffff;
+
+  --bg-primary: #ffffff;
+  --bg-primary-hover: var(--color-gray-50);
+  --bg-secondary: var(--color-gray-50);
+  --bg-tertiary: var(--color-gray-100);
+  --bg-quaternary: var(--color-gray-200);
+  --bg-primary-solid: var(--color-gray-900);
+}
+
+:root[data-theme='dark'] {
+  --page-bg: var(--color-gray-dark-950);
+  --card-bg: var(--color-gray-dark-900);
+
+  --bg-primary: var(--color-gray-dark-950);
+  /* gray-dark-800, one step lighter than --card-bg: at gray-dark-900 a
+     hovered or focused row was invisible against its own menu (seen on the
+     select dropdown's options). */
+  --bg-primary-hover: var(--color-gray-dark-800);
+  --bg-secondary: var(--color-gray-dark-900);
+  --bg-tertiary: var(--color-gray-dark-800);
+  --bg-quaternary: var(--color-gray-dark-700);
+  --bg-primary-solid: var(--color-gray-dark-900);
+}

@@ -32,8 +32,8 @@ export const ProviderDashboardChart: FunctionComponent<
               <EChart options={value[0].options} height="100px" />
             </Col>
             <Col>
-              <h1 className="fw-bold">{value[0].chart.current}</h1>
-              <h5 className="fw-bold text-uppercase mb-5">
+              <h1 className="font-medium">{value[0].chart.current}</h1>
+              <h5 className="font-medium text-uppercase mb-5">
                 {value[0].chart.title}
               </h5>
               <ChangesAmountBadge

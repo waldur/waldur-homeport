@@ -70,10 +70,10 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
         title={translate('Import resource')}
         subtitle={
           <>
-            <span className="fw-bolder">
+            <span className="font-semibold">
               {translate('Step {step}: ', { step })}
             </span>
-            <span className="fw-bold">
+            <span className="font-medium">
               {step === 1
                 ? translate('Select target organization and project')
                 : step === 2
@@ -166,7 +166,7 @@ const ResourceImportDialogForm: FC<{ categoryUuid?: string }> = ({
                   </Col>
                 </Row>
               </div>
-              <div className="border-bottom mx-7" />
+              <div className="border-b-[1px] border-b-secondary mx-7" />
               <DataLoader
                 filter={filter}
                 customer={organization}

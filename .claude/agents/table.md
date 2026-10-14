@@ -73,10 +73,10 @@ Never display raw values directly, and do not use fallbacks like `|| 'N/A'`. **A
 import { renderFieldOrDash } from '@/table/utils';
 
 // ✅ CORRECT
-render: ({ row }) => renderFieldOrDash(row.description)
+render: ({ row }) => renderFieldOrDash(row.description);
 
 // ❌ WRONG
-render: ({ row }) => row.description || 'N/A'
+render: ({ row }) => row.description || 'N/A';
 ```
 
 ### 4. Row Action Patterns
@@ -166,7 +166,9 @@ export const UsersList = () => {
       filters={<UsersFilter />}
       hasQuery
       hasOptionalColumns
-      rowActions={({ row }) => <RowActions row={row} refetch={tableProps.fetch} />}
+      rowActions={({ row }) => (
+        <RowActions row={row} refetch={tableProps.fetch} />
+      )}
     />
   );
 };
@@ -177,12 +179,12 @@ export const UsersList = () => {
 ## Agent Troubleshooting Checklist
 
 - [ ] **Are there endless API calls?**
-  *Check*: Ensure the `filter` object passed to `useTable` is memoized with `useMemo`. Ensure callbacks like `onFetch` or inline handlers are stable.
+      _Check_: Ensure the `filter` object passed to `useTable` is memoized with `useMemo`. Ensure callbacks like `onFetch` or inline handlers are stable.
 - [ ] **Are fields blank in optional columns or exports?**
-  *Check*: When `hasOptionalColumns` is enabled, the Table component queries the API for specific fields to optimize payload size. If a column renders a nested field or uses properties not specified in `keys` (or `mandatoryFields` / `exportKeys`), those fields will be missing from the API response. Add all required fields to `keys` or `exportKeys`.
+      _Check_: When `hasOptionalColumns` is enabled, the Table component queries the API for specific fields to optimize payload size. If a column renders a nested field or uses properties not specified in `keys` (or `mandatoryFields` / `exportKeys`), those fields will be missing from the API response. Add all required fields to `keys` or `exportKeys`.
 - [ ] **Do imports fail?**
-  *Check*: Make sure `Table`, `useTable`, `createFetcher`, and `ActionsDropdown` are imported directly from subpaths, not barrel `@/table`.
+      _Check_: Make sure `Table`, `useTable`, `createFetcher`, and `ActionsDropdown` are imported directly from subpaths, not barrel `@/table`.
 - [ ] **Do subtabs lose context?**
-  *Check*: Make sure parent URL parameters are explicitly preserved in nested tab `params`.
+      _Check_: Make sure parent URL parameters are explicitly preserved in nested tab `params`.
 - [ ] **Does table actions portal display empty?**
-  *Check*: Ensure the child table forwarded the `portal` prop passed by the parent `TableWithTabs` layout.
+      _Check_: Ensure the child table forwarded the `portal` prop passed by the parent `TableWithTabs` layout.

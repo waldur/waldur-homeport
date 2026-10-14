@@ -65,7 +65,7 @@ const ConnectionCounts = ({ row }: { row: SupportUser }) => {
           <span
             className={classNames(
               'd-inline-flex align-items-center gap-1',
-              !item.value && 'text-muted',
+              !item.value && 'text-quaternary',
             )}
           >
             {item.icon}

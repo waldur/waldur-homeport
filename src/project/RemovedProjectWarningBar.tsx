@@ -1,14 +1,12 @@
-import {
-  WarningCircleIcon,
-  ArrowCounterClockwiseIcon,
-} from '@phosphor-icons/react';
+import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { FeaturedIcon, BaseButton } from 'waldur-ui';
+import { BaseButton } from 'waldur-ui';
 
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
+import { LayoutWarningBar } from '@/navigation/LayoutWarningBar';
 import { useProject } from '@/workspace/hooks';
 
 import { ProjectRecoveryModal } from './ProjectRecoveryModal';
@@ -34,28 +32,21 @@ export const RemovedProjectWarningBar: FC = () => {
   };
 
   return (
-    <div className="layout-warning-bar bar-warning">
-      <div className="container-fluid w-100 d-flex align-items-center gap-2">
-        <FeaturedIcon
-          icon={<WarningCircleIcon weight="bold" />}
-          variant="warning"
-          size="sm"
-        />
-        <p className="text-start fs-6 mb-0">
-          <strong className="fw-bold">{translate('Project Removed')}: </strong>
-          {translate(
-            'This project has been removed. All resources have been terminated and user roles have been revoked.',
-          )}
-        </p>
+    <LayoutWarningBar
+      title={`${translate('Project Removed')}:`}
+      actions={
         <BaseButton
           onClick={openRecoveryModal}
           label={translate('Recover Project')}
           iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
           variant="warning"
-          className="ms-auto"
           size="sm"
         />
-      </div>
-    </div>
+      }
+    >
+      {translate(
+        'This project has been removed. All resources have been terminated and user roles have been revoked.',
+      )}
+    </LayoutWarningBar>
   );
 };

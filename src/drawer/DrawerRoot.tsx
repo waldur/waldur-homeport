@@ -70,7 +70,7 @@ export const DrawerRoot: FunctionComponent = () => {
         ref={contentRef}
         id="kt_drawer"
         className={classNames(
-          'bg-body drawer drawer-end',
+          'bg-primary drawer drawer-end',
           drawerProps.shellClass,
           { 'drawer-on': isOpen },
         )}
@@ -96,12 +96,12 @@ export const DrawerRoot: FunctionComponent = () => {
           <div className="card-header" id="kt_drawer_header">
             <div>
               <Dialog.Title asChild>
-                <h3 className="card-title fw-bolder text-dark fs-3">
+                <h3 className="card-title font-semibold text-primary fs-3">
                   {drawerProps.title}
                 </h3>
               </Dialog.Title>
               {drawerProps.subtitle && (
-                <h6 className="text-muted card-subtitle fw-bold">
+                <h6 className="text-quaternary card-subtitle font-medium">
                   {drawerProps.subtitle}
                 </h6>
               )}

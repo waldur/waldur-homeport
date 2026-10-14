@@ -56,7 +56,7 @@ export const GrowthPage: FC = () => {
     // reads as "nothing was added", not as "we could not ask".
     if (addedErred)
       return (
-        <span className="text-muted fs-7">
+        <span className="text-quaternary fs-7">
           {translate('Growth data unavailable')}
         </span>
       );
@@ -64,10 +64,8 @@ export const GrowthPage: FC = () => {
     const grew = count > 0;
     return (
       <>
-        {/* A flat period is `default` + `outline`, the design system's neutral
-            badge. `secondary` + `light` is the one combination to avoid here:
-            badgeColors.css reproduces Metronic's bug where its text and
-            background are the same colour, so "+0" renders as an empty pill. */}
+        {/* A flat period is `neutral` + `outline`, the design system's neutral
+            badge. */}
         <Badge
           variant={grew ? 'success' : 'neutral'}
           size="sm"
@@ -79,7 +77,7 @@ export const GrowthPage: FC = () => {
         </Badge>
         {/* Captioned with the window the counts came from, not the live
             toggle: the two differ while the next period is still loading. */}
-        <span className="text-muted fs-7">
+        <span className="text-quaternary fs-7">
           {translate('in the last {months} months', { months: added.months })}
         </span>
       </>

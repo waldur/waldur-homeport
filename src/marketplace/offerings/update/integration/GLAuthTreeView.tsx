@@ -292,7 +292,7 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
       ref={dragHandle}
       style={positionStyle}
       className={`ldap-tree-row d-flex align-items-stretch ${
-        node.isSelected ? 'bg-light-primary' : ''
+        node.isSelected ? 'bg-brand-subtle' : ''
       }`}
       onClick={handleToggle}
       onKeyDown={handleKey}
@@ -301,13 +301,16 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
       tabIndex={0}
     >
       {guides.map((_, i) => (
+        // Metronic's $border-dashed-color ($gray-300). Arbitrary values, as
+        // Metronic's own .border-gray-300 is !important and theme-inverted.
         <span
           key={i}
           aria-hidden="true"
-          className="ldap-tree-guide flex-shrink-0"
+          className="ldap-tree-guide flex-shrink-0 border-[color:var(--color-gray-300)] dark:border-[color:var(--color-gray-dark-600)]"
           style={{
             width: INDENT_PX,
-            borderLeft: '1px dashed var(--bs-gray-300)',
+            borderLeftWidth: 1,
+            borderLeftStyle: 'dashed',
             marginLeft: i === 0 ? 4 : 0,
           }}
         />
@@ -338,7 +341,7 @@ const NodeRow: FC<NodeRendererProps<TreeNodeData>> = ({
               ? `small text-truncate font-monospace ${
                   isWaldur ? 'fst-italic text-info' : 'text-secondary'
                 }`
-              : 'fw-semibold text-primary text-truncate font-monospace'
+              : 'font-semibold text-brand text-truncate font-monospace'
           }
           title={
             isWaldur
@@ -375,7 +378,7 @@ const renderAttribute = (line: string, isWaldur: boolean) => {
         {isWaldur ? '※ ' : ''}
         {name}:
       </span>{' '}
-      <span className={isWaldur ? 'text-info' : 'text-primary'}>{value}</span>
+      <span className={isWaldur ? 'text-info' : 'text-brand'}>{value}</span>
     </>
   );
 };
@@ -409,7 +412,7 @@ export const GLAuthTreeView: FC<{ tree: GlauthTree }> = ({ tree }) => {
           setSearch(e.target.value)
         }
       />
-      <div className="border rounded bg-body">
+      <div className="border rounded bg-primary">
         <Tree<TreeNodeData>
           data={data}
           openByDefault

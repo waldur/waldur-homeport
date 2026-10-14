@@ -30,7 +30,7 @@ export const IdentityStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       {!hasAnyField && (
-        <p className="text-muted">
+        <p className="text-quaternary">
           {translate(
             'No additional identity fields are enabled in this deployment.',
           )}

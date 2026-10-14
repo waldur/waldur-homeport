@@ -80,7 +80,7 @@ const SortableItem: FC<SortableItemProps> = ({
         ref={setActivatorNodeRef}
         {...attributes}
         {...listeners}
-        className="inline-flex items-center justify-center size-[20px] shrink-0 p-0 me-[12px] cursor-grab active:cursor-grabbing border-0 bg-transparent text-gray-500 hover:text-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary rounded"
+        className="inline-flex items-center justify-center size-[20px] shrink-0 p-0 me-[12px] cursor-grab active:cursor-grabbing border-0 bg-transparent text-quaternary hover:text-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand rounded"
         aria-label={translate('Reorder column {title}', { title: labelText })}
       >
         <DotsSixVerticalIcon weight="bold" size={16} />
@@ -282,7 +282,7 @@ const ColumnsPopover = ({
         </DndContext>
 
         {matches.length === 0 && (
-          <div className="text-muted text-center py-4 fs-7">
+          <div className="text-quaternary text-center py-4 fs-7">
             {translate('No columns found')}
           </div>
         )}

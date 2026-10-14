@@ -9,7 +9,7 @@ interface StaffOnlyIndicatorProps {
 }
 
 export const StaffOnlyIndicator = ({
-  className = 'text-dark me-1',
+  className = 'text-primary me-1',
 }: StaffOnlyIndicatorProps) => (
   <Tooltip label={translate('Staff action')}>
     <IdentificationBadgeIcon size={22} weight="bold" className={className} />

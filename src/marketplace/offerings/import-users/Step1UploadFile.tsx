@@ -105,15 +105,17 @@ export const Step1UploadFile: FC<WizardFormStepProps> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <div className="text-muted">
-        <h6 className="fw-bold mb-5">1. {translate('Download template')}</h6>
+      <div className="text-quaternary">
+        <h6 className="font-medium mb-5">
+          1. {translate('Download template')}
+        </h6>
         <DownloadTemplateItem
           name={getTemplateName()}
           size={fileSize}
           onClick={onDownloadClick}
         />
         <hr />
-        <h6 className="fw-bold mb-5">2. {translate('Upload your file')}</h6>
+        <h6 className="font-medium mb-5">2. {translate('Upload your file')}</h6>
         <Field
           name="file"
           validate={validateFileField}

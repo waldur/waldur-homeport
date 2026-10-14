@@ -75,13 +75,13 @@ $aside-config: (
   padding-x: 12px,
   margin-x: 1.3rem,
   menu-indention: 0.75rem,
-  bg-color: var(--waldur-brand-950),
-  bg-color-dark: if(isDarkMode(), $gray-25, $gray-950),
-  logo-bg-color: var(--waldur-brand-950),
-  logo-bg-color-dark: if(isDarkMode(), $gray-25, $gray-950),
-  border-right: if(isDarkMode(), 0, 1px solid $border-color),
-  scrollbar-color: if(isDarkMode(), $gray-200, #3b3b64),
-  scrollbar-hover-color: if(isDarkMode(), $gray-300, lighten(#3b3b64, 3%)),
+  bg-color: var(--brand-950),
+  bg-color-dark: $gray-950,
+  logo-bg-color: var(--brand-950),
+  logo-bg-color-dark: $gray-950,
+  border-right: 1px solid $border-color,
+  scrollbar-color: #3b3b64,
+  scrollbar-hover-color: lighten(#3b3b64, 3%),
   font-size: 14px,
   icon-size: 20px,
   // Aside width for desktop mode
@@ -91,11 +91,7 @@ $aside-config: (
   // Aside box shadow
   box-shadow: none,
   // Minimized hover box shadow
-  minimized-hover-box-shadow: if(
-      isDarkMode(),
-      none,
-      5px 0px 10px rgba(70, 78, 95, 0.075)
-    ),
+  minimized-hover-box-shadow: 5px 0px 10px rgba(70, 78, 95, 0.075),
 ) !default;
 
 // Footer

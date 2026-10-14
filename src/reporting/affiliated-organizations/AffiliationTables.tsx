@@ -11,7 +11,7 @@ import { renderFieldOrDash } from '@/table/utils';
 import { AffiliationCountryRow, AffiliationRow } from './useAffiliationReport';
 
 const hero = (content: ReactNode) => (
-  <span className="fw-bold text-dark">{content}</span>
+  <span className="font-medium text-primary">{content}</span>
 );
 
 /** Flag and label share a flex line: the 24px sprite is scaled, not resized,

@@ -90,7 +90,7 @@ export const FlavorTable = ({
 
   const rowClass = useCallback(
     ({ row }: { row: OpenStackFlavor }) =>
-      exceeds(row, formValues) ? 'text-muted' : '',
+      exceeds(row, formValues) ? 'text-quaternary' : '',
     [exceeds, formValues],
   );
 
@@ -135,7 +135,7 @@ export const FlavorTable = ({
       hasActionBar={false}
       cardBordered={false}
       fullWidth
-      className="mt-n5 border-bottom"
+      className="mt-n5 border-b-[1px] border-b-secondary"
       minHeight="auto"
       hoverable
       fieldType="radio"

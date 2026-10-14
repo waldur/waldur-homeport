@@ -59,7 +59,8 @@ table .expandable-container {
 
         // th
         &.field-label {
-          font-weight: bold;
+          // No weight here: Field.tsx, the only field-label in a row, sets
+          // font-medium itself, which this unlayered rule would override.
           text-align: -internal-center;
 
           padding-right: 60px;
@@ -91,19 +92,19 @@ table .expandable-container {
         margin-bottom: 0;
 
         thead > tr {
-          background-color: var(--bs-gray-100);
+          background-color: var(--bg-tertiary);
 
           > th.header-actions,
           > th.pinned {
-            background-color: var(--bs-gray-100);
+            background-color: var(--bg-tertiary);
           }
         }
         tbody > tr {
-          background-color: var(--bs-gray-50);
+          background-color: var(--bg-secondary);
 
           > td.row-actions,
           > td.pinned {
-            background-color: var(--bs-gray-50);
+            background-color: var(--bg-secondary);
           }
         }
       }

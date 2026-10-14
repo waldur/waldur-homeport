@@ -14,7 +14,7 @@ export const RestrictionsValue: FC<RestrictionsValueProps> = ({
   emptyMessage = translate('No restrictions configured'),
 }) => {
   if (!values || values.length === 0) {
-    return <span className="text-muted fst-italic">{emptyMessage}</span>;
+    return <span className="text-quaternary fst-italic">{emptyMessage}</span>;
   }
   return (
     <div className="d-flex flex-wrap gap-2">

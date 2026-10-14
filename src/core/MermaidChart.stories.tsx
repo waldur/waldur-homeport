@@ -23,7 +23,7 @@ const withStoryTheme: Decorator = (Story, context) => {
   }, [theme]);
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme: () => {} }}>
-      <div className="min-h-[240px] bg-[var(--surface-card-bg)] p-6">
+      <div className="min-h-[240px] bg-[var(--card-bg)] p-6">
         <Story />
       </div>
     </ThemeContext.Provider>
@@ -38,7 +38,7 @@ const meta: Meta<typeof MermaidChart> = {
     docs: {
       description: {
         component:
-          'Renders Mermaid diagram source as SVG, themed from the design tokens: grays from the ramps (`gray` for light UI, `gray-dark` for dark), the diagram background from `--surface-card-bg`, brand colours from `--waldur-brand-*`. Mermaid draws from resolved colours, so it is configured on every render and redraws when the theme changes: flip the Theme toolbar to see it. `securityLevel` is `strict`, so `click` directives are stripped.',
+          'Renders Mermaid diagram source as SVG, themed from the design tokens: grays from the ramps (`gray` for light UI, `gray-dark` for dark), the diagram background from `--card-bg`, brand colours from `--brand-*`. Mermaid draws from resolved colours, so it is configured on every render and redraws when the theme changes: flip the Theme toolbar to see it. `securityLevel` is `strict`, so `click` directives are stripped.',
       },
     },
   },
@@ -191,9 +191,7 @@ const Gallery = () => (
   <div className="grid gap-8 md:grid-cols-2">
     {GALLERY.map(([title, code]) => (
       <section key={title}>
-        <h4 className="mb-2 text-sm font-semibold text-[var(--surface-text-primary)]">
-          {title}
-        </h4>
+        <h4 className="mb-2 text-sm font-semibold text-primary">{title}</h4>
         <MermaidChart code={code} />
       </section>
     ))}

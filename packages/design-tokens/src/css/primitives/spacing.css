@@ -1,0 +1,9 @@
+/**
+ * Spacing scale token override.
+ *
+ * Pins base spacing unit to 4px to prevent fractional rem compression at
+ * non-standard root font sizes.
+ */
+@theme {
+  --spacing: 4px;
+}

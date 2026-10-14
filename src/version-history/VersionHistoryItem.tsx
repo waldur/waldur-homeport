@@ -2,14 +2,14 @@ import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
+import { Badge, cn } from 'waldur-ui';
 
 import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { getAbbreviation } from '@/core/utils';
 import { translate } from '@/i18n';
 
-import './VersionHistoryItem.scss';
+import { formatPolicyComment, isPolicyComment } from './utils';
 
 interface VersionHistoryItemProps {
   version: VersionHistory;
@@ -20,9 +20,9 @@ interface VersionHistoryItemProps {
 }
 
 const nameToColor = (name: string) => {
-  const colors = ['primary', 'success', 'info', 'warning', 'danger'];
+  const colors = ['primary', 'success', 'info', 'warning', 'danger'] as const;
   const hash = hashStr(name);
-  const index = hash % colors.length;
+  const index = (hash >>> 0) % colors.length;
   return colors[index] || 'primary';
 };
 
@@ -36,36 +36,31 @@ const hashStr = (str: string) => {
   return hash;
 };
 
-const isPolicyComment = (comment: string | undefined): boolean =>
-  !!comment?.startsWith('Policy action');
-
-const formatPolicyComment = (comment: string): string => {
-  const match = comment.match(
-    /^Policy action '(\w+)': (\w+) changed from (\S+) to (\S+)\. Policy: (\w+) [a-f0-9]+\.(?: Scope: ([^.]*)\.)?(?: Created by: [^.]*\.)?(.*)?$/,
-  );
-  if (!match) return comment;
-  const [, , field, oldVal, newVal, policyClass, scope, extra] = match;
-  let formatted = `${field}: ${oldVal} → ${newVal} (${scope || policyClass})`;
-  if (extra?.trim()) formatted += ` ${extra.trim()}`;
-  return formatted;
+const AVATAR_COLOR_CLASSES: Record<string, string> = {
+  primary: 'bg-brand-subtle text-brand',
+  success: 'bg-success-subtle text-success',
+  info: 'bg-info-subtle text-info',
+  warning: 'bg-warning-subtle text-warning',
+  danger: 'bg-danger-subtle text-danger',
 };
 
-const VersionAvatar: FunctionComponent<{ version: VersionHistory }> = ({
-  version,
-}) => {
-  const userName =
-    (version.revision_user as { full_name?: string })?.full_name ||
-    (version.revision_user as { username?: string })?.username ||
-    'System';
+const VersionAvatar: FunctionComponent<{
+  userName: string;
+  isFirst: boolean;
+}> = ({ userName, isFirst }) => {
   const color = nameToColor(userName);
 
+  // Decorative: the name is spelled out beside it.
   return (
-    <div className="timeline-icon symbol symbol-circle symbol-32px me-4">
-      <div
-        className={`symbol-label fs-5 fw-bold bg-light-${color} text-${color}`}
-      >
-        {getAbbreviation(userName)}
-      </div>
+    <div
+      className={cn(
+        'timeline-icon z-10 shrink-0 mr-4 size-8 rounded-full flex items-center justify-center text-xs font-medium border-b-4 border-[var(--bg-primary)]',
+        !isFirst && 'border-t-4 border-[var(--bg-primary)]',
+        AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary,
+      )}
+      aria-hidden="true"
+    >
+      {getAbbreviation(userName)}
     </div>
   );
 };
@@ -89,26 +84,43 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
         ? translate('Initial')
         : `v${totalVersions - versionIndex}`;
 
+  // Bootstrap's .text-muted is the same secondary tone, but !important, so
+  // the selected row could not lift it: on the dark selected fill it reads
+  // 4:1, so it steps up to the subdued tone there.
+  const mutedText = isSelected
+    ? 'text-quaternary dark:text-tertiary'
+    : 'text-quaternary';
+
+  // A list item holding a native button: the button is what is announced and
+  // focused, and stretched-link makes the whole row its click target. The
+  // selected revision is the one the diff shows, hence aria-current. Button
+  // content must be phrasing content, so the text blocks are spans.
   return (
-    <div
-      className={`version-history-item timeline-item cursor-pointer rounded ${isSelected ? 'bg-light-primary' : ''}`}
-      onClick={onSelect}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onSelect();
-        }
-      }}
+    <li
+      className={cn(
+        'timeline-item relative rounded transition-colors',
+        isSelected ? 'bg-brand-subtle' : 'hover:bg-primary-hover',
+        'has-[>button:focus-visible]:outline-[var(--focus-ring-width)] has-[>button:focus-visible]:outline-[var(--focus-ring-color)] has-[>button:focus-visible]:outline-offset-[var(--focus-ring-offset)] has-[>button:focus-visible]:outline-solid',
+      )}
     >
-      <div className="timeline-line w-30px" />
-      <VersionAvatar version={version} />
-      <div className="timeline-content py-2 pe-3">
-        <div className="d-flex justify-content-between align-items-start">
-          <div className="flex-grow-1">
-            <div className="fs-7 text-muted">
-              <span className="fw-bold fs-6 me-3">{userName}</span>
+      <div
+        className="timeline-line w-[30px] border-l-2 border-secondary"
+        aria-hidden="true"
+      />
+      <VersionAvatar userName={userName} isFirst={versionIndex === 0} />
+      <button
+        type="button"
+        className={cn(
+          'timeline-content stretched-link block w-full py-2 pr-3 border-0 bg-transparent text-left text-inherit focus-visible:outline-none mb-0 pb-3',
+          versionIndex !== 0 && 'mt-1',
+        )}
+        aria-current={isSelected || undefined}
+        onClick={onSelect}
+      >
+        <span className="flex justify-between items-start">
+          <span className="block grow min-w-0">
+            <span className={cn('block text-xs', mutedText)}>
+              <span className="font-medium text-sm mr-3">{userName}</span>
               {isPolicyComment(version.revision_comment) && (
                 <Badge
                   variant="warning"
@@ -116,31 +128,34 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
                   leftIcon={<ShieldWarningIcon weight="bold" />}
                   shape="pill"
                   tone="outline"
-                  className="me-2"
+                  className="mr-2"
                 >
                   {translate('Policy')}
                 </Badge>
               )}
-              <span title={formatMediumDateTime(version.revision_date)}>
+              <time
+                dateTime={version.revision_date}
+                title={formatMediumDateTime(version.revision_date)}
+              >
                 {formatRelative(version.revision_date)}
-              </span>
-            </div>
+              </time>
+            </span>
             {version.revision_comment && (
-              <div className="fs-7 text-muted mt-1">
+              <span className={cn('block text-xs mt-1 break-words', mutedText)}>
                 {isPolicyComment(version.revision_comment)
                   ? formatPolicyComment(version.revision_comment)
                   : version.revision_comment}
-              </div>
+              </span>
             )}
-          </div>
+          </span>
           <StateIndicator
             label={versionLabel}
             variant={versionIndex === 0 ? 'success' : 'secondary'}
             tone="outline"
             shape="pill"
           />
-        </div>
-      </div>
-    </div>
+        </span>
+      </button>
+    </li>
   );
 };

@@ -94,7 +94,7 @@ export const MyInvitationsPage: FC = () => {
           {
             title: translate('Call'),
             render: ({ row }) => (
-              <span className="fw-bold">{row.call_name}</span>
+              <span className="font-medium">{row.call_name}</span>
             ),
             keys: ['call_name'],
             id: 'call',
@@ -111,7 +111,7 @@ export const MyInvitationsPage: FC = () => {
               row.invitation_expires_at ? (
                 <>{formatDateTime(row.invitation_expires_at)}</>
               ) : (
-                <span className="text-muted">-</span>
+                <span className="text-quaternary">-</span>
               ),
             keys: ['invitation_expires_at'] as any,
             id: 'expires',

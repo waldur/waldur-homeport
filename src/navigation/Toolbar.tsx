@@ -70,7 +70,7 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
           className="d-flex align-items-stretch overflow-auto"
         >
           <nav ref={tabsWrapperRef} aria-label={translate('Page tabs')}>
-            <ul className="m-0 flex w-full list-none items-stretch gap-[8px] p-0 fs-6 fw-bolder my-5 my-lg-0">
+            <ul className="m-0 flex w-full list-none items-stretch gap-[8px] p-0 fs-6 font-semibold my-5 my-lg-0">
               <TabsList />
             </ul>
           </nav>

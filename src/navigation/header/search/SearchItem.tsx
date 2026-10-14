@@ -47,11 +47,11 @@ export const SearchItem = (props: SearchItemProps) => {
     useOrganizationAndProjectAutocompletesForResources();
 
   return (
-    <div className="search-result-item d-flex align-items-center py-2 px-5 bg-hover-primary-50">
+    <div className="search-result-item d-flex align-items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)] cursor-pointer">
       <Link
         state={props.to}
         params={props.params}
-        className="search-result-item__link d-flex text-dark text-hover-primary align-items-center me-4"
+        className="search-result-item__link d-flex text-primary hover:text-brand align-items-center me-4"
         onClick={(e) => {
           if (props.onClick) {
             props.onClick(props);
@@ -65,10 +65,10 @@ export const SearchItem = (props: SearchItemProps) => {
           circle
         />
 
-        <div className="d-flex flex-column justify-content-start fw-semibold">
-          <span className="fs-6 fw-semibold">{props.title}</span>
+        <div className="d-flex flex-column justify-content-start font-semibold">
+          <span className="fs-6 font-semibold">{props.title}</span>
           {Boolean(props.subtitle) && (
-            <span className="fs-7 fw-semibold text-muted">
+            <span className="fs-7 font-semibold text-quaternary">
               {props.subtitle}
             </span>
           )}
@@ -111,7 +111,7 @@ export const SearchItem = (props: SearchItemProps) => {
             {isFav ? (
               <StarIcon size={20} weight="fill" className="text-warning" />
             ) : (
-              <StarIcon size={20} className="text-dark" weight="bold" />
+              <StarIcon size={20} className="text-primary" weight="bold" />
             )}
           </button>
         )}

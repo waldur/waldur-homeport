@@ -114,12 +114,12 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
           <Card>
             <Card.Body className="text-center p-10">
               <div className="mb-5">
-                <span className="svg-icon svg-icon-3x text-primary">
+                <span className="svg-icon svg-icon-3x text-brand">
                   <FingerprintIcon weight="bold" />
                 </span>
               </div>
               <h2 className="mb-4">{translate('Add a passkey to continue')}</h2>
-              <p className="text-muted mb-8">
+              <p className="text-quaternary mb-8">
                 {translate(
                   'This deployment requires a passkey for administrator accounts. Add one now to carry on — it takes a moment, and you can use your device screen lock or a security key.',
                 )}
@@ -134,7 +134,7 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
                 size="lg"
               />
               {user?.username && (
-                <p className="text-muted mt-6 mb-0">
+                <p className="text-quaternary mt-6 mb-0">
                   {translate('Signed in as {username}', {
                     username: user.username,
                   })}

@@ -12,7 +12,7 @@ export const ReviewerCoi: FC<ReviewerCoiProps> = ({ row }) => {
   const coiCount = row.coi_count || 0;
 
   if (coiCount === 0) {
-    return <span className="text-muted">-</span>;
+    return <span className="text-quaternary">-</span>;
   }
 
   const bySeverity = row.coi_by_severity || {};

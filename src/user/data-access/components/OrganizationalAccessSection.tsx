@@ -57,7 +57,7 @@ export const OrganizationalAccessSection: FC<
         defaultOpen={false}
         className="mb-4"
       >
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {isViewerStaffOrSupport
             ? translate(
                 'No organizational access. This user is not a member of any organization or project.',
@@ -95,7 +95,7 @@ export const OrganizationalAccessSection: FC<
       defaultOpen={false}
       className="mb-4"
     >
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {isViewerStaffOrSupport
           ? translate(
               "Other members of these organizations and projects can see this user's basic profile information.",
@@ -130,7 +130,7 @@ export const OrganizationalAccessSection: FC<
                   {row.role}
                 </Badge>
               ) : (
-                <span className="text-muted">-</span>
+                <span className="text-quaternary">-</span>
               ),
           },
           {

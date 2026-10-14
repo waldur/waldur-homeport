@@ -118,7 +118,7 @@ export const MermaidChart: FC<MermaidChartProps> = ({ code, className }) => {
     return (
       <div className={className} style={{ minHeight: '200px' }}>
         <div className="d-flex justify-content-center align-items-center h-100">
-          <div className="spinner-border text-primary" role="status">
+          <div className="spinner-border text-brand" role="status">
             <span className="visually-hidden">{translate('Loading...')}</span>
           </div>
         </div>

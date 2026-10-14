@@ -108,7 +108,9 @@ export const useRequestToAccessOrganization = () => {
                   "You can't join this organization with your current account details. Access is limited to certain users as defined by the organization manager.",
                 )}
               </p>
-              <p className="fw-bolder">{translate('Restriction details')}:</p>
+              <p className="font-semibold">
+                {translate('Restriction details')}:
+              </p>
               <FieldErrorMessage error={errorMessage} />
             </div>
           );

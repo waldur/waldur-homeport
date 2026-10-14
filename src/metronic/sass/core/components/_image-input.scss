@@ -78,7 +78,11 @@
   &.image-input-outline {
     .image-input-wrapper {
       border: 3px solid $body-bg;
-      box-shadow: if(isDarkMode(), $box-shadow, $box-shadow-sm);
+      box-shadow: $box-shadow-sm;
+
+      @include dark-theme {
+        box-shadow: $box-shadow;
+      }
     }
   }
 }

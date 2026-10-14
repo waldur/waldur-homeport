@@ -257,7 +257,7 @@ export const getResourceAllListColumns = (
             {row.project_effective_end_date &&
               row.project_end_date &&
               row.project_effective_end_date !== row.project_end_date && (
-                <span className="text-muted ms-1">
+                <span className="text-quaternary ms-1">
                   (+
                   {Math.round(
                     (new Date(row.project_effective_end_date).getTime() -

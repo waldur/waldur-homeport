@@ -132,7 +132,10 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
             <Field<any> name="plan">
               {({ input, meta }) => (
                 <div className="mb-5">
-                  <label className="form-label fw-bold" htmlFor={input.name}>
+                  <label
+                    className="form-label font-medium"
+                    htmlFor={input.name}
+                  >
                     {translate('Plan')}
                   </label>
                   <SelectField
@@ -150,7 +153,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
           )}
           {typeof plan === 'object' && (
             <>
-              <div className="d-flex gap-6 border-bottom mb-5">
+              <div className="d-flex gap-6 border-b-[1px] border-b-secondary mb-5">
                 <div className="flex-grow-1">
                   {!isAward && (
                     <p className="mb-0">

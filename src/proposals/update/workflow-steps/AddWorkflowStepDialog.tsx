@@ -103,7 +103,7 @@ const formatStepOption = (
   meta: { context: 'menu' | 'value' },
 ) => (
   <div className="d-flex align-items-center justify-content-between gap-2">
-    <span className={option.isDisabled ? 'text-muted' : undefined}>
+    <span className={option.isDisabled ? 'text-quaternary' : undefined}>
       {option.label}
     </span>
     {meta.context === 'menu' && option.description && (
@@ -115,7 +115,7 @@ const formatStepOption = (
 
         zIndex={10000}
       >
-        <QuestionIcon weight="regular" size={16} className="text-muted" />
+        <QuestionIcon weight="regular" size={16} className="text-quaternary" />
       </Tooltip>
     )}
   </div>

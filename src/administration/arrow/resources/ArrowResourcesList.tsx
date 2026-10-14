@@ -70,7 +70,9 @@ export const ArrowResourcesList: FunctionComponent<
             <ResourceLink
               uuid={row.uuid}
               label={
-                <span className="fw-bold">{row.name || DASH_ESCAPE_CODE}</span>
+                <span className="font-medium">
+                  {row.name || DASH_ESCAPE_CODE}
+                </span>
               }
             />
           ),
@@ -95,7 +97,7 @@ export const ArrowResourcesList: FunctionComponent<
             row.backend_id ? (
               <span>{row.backend_id}</span>
             ) : (
-              <span className="text-muted">{DASH_ESCAPE_CODE}</span>
+              <span className="text-quaternary">{DASH_ESCAPE_CODE}</span>
             ),
         },
         {

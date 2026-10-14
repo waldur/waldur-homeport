@@ -4,71 +4,97 @@ This guide documents how dark/light theme switching is implemented in Waldur Hom
 
 ## Architecture Overview
 
-The app uses **two separate compiled stylesheets** that are dynamically loaded based on the selected theme:
+The theme is one attribute: `data-theme="light|dark"` on `<html>`. Everything follows it:
 
-- `src/metronic/sass/style.scss` - Light theme (`$mode: default`)
-- `src/metronic/sass/style.dark.scss` - Dark theme (`$mode: dark`)
-
-SCSS variables use the `isDarkMode()` function to return different values at compile time:
+- **Design tokens.** Every semantic token file has a `:root[data-theme='dark']` block, so
+  `var(--bg-primary)` and friends switch.
+- **Tailwind.** The `dark:` variant keys off the same attribute.
+- **Bootstrap / Metronic.** `src/metronic/sass/style.scss` is **one stylesheet for both themes**:
+  its colours read the tokens, and the few pairings no token has use the `dark-theme` mixin
+  (`core/base/mixins/_theme.scss`), which emits `:where([data-theme='dark']) &` — the same
+  specificity as the rule it overrides:
 
 ```scss
-// Generated into _color-ramps.scss from packages/design-tokens/tokens/colors.json
-$gray-50: if(isDarkMode(), #161b26, #f9fafb);
-$gray-100: if(isDarkMode(), #1f242f, #f2f4f7);
-$gray-900: if(isDarkMode(), #f5f5f6, #101828);
+.list-group-item {
+  background-color: var(--bg-primary);
+
+  @include dark-theme {
+    background-color: var(--bg-tertiary);
+  }
+}
 ```
+
+There used to be a second, dark compile (`style.dark.scss`, `$mode: dark`, with the SCSS ramps
+inverted by `isDarkMode()`), swapped in when the theme changed. It is gone; don't reintroduce a
+theme-specific SCSS value. A colour inside an SVG data URI, which a `var()` cannot reach, is a
+function of its colour (`_svg-icons.scss`) with a dark override in `_dark-icons.scss`;
+`css-color(gray-dark, 500)` gives the CSS ramp value as Sass.
 
 ## Key Files
 
-| File | Purpose |
-|------|---------|
-| `src/theme/ThemeProvider.tsx` | React context provider for theme state |
-| `src/theme/useTheme.ts` | Hook to access current theme |
-| `src/theme/ThemeStorage.ts` | localStorage persistence |
-| `src/theme/utils.ts` | Dynamic CSS loading, initial theme detection |
-| `src/theme/ThemeSwitcher.tsx` | UI toggle component |
-| `src/metronic/sass/_tokens.scss` | Semantic design tokens |
-| `src/metronic/sass/_colors.scss` | Derived color variables (`$success`, `$text-muted`, brand ramp, …) |
-| `src/metronic/sass/_color-ramps.scss` | Theme-aware color ramps — **generated**, edit `packages/design-tokens/tokens/colors.json` (see [design-tokens.md](design-tokens.md)) |
-| `src/metronic/sass/core/base/functions/_mode.scss` | `isDarkMode()` SCSS function |
+| File                                             | Purpose                                                                                                                              |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `src/theme/ThemeProvider.tsx`                    | React context provider for theme state                                                                                               |
+| `src/theme/useTheme.ts`                          | Hook to access current theme                                                                                                         |
+| `src/theme/ThemeStorage.ts`                      | localStorage persistence                                                                                                             |
+| `src/theme/utils.ts`                             | Injects the Metronic stylesheet once, sets `data-theme`, initial theme detection                                                     |
+| `src/theme/ThemeSwitcher.tsx`                    | UI toggle component                                                                                                                  |
+| `src/metronic/sass/_tokens.scss`                 | Ring and focus-ring variables                                                                                                        |
+| `src/metronic/sass/_colors.scss`                 | Derived color variables (`$success`, `$text-muted`, brand ramp, …)                                                                   |
+| `src/metronic/sass/_color-ramps.scss`            | Theme-aware color ramps — **generated**, edit `packages/design-tokens/tokens/colors.json` (see [design-tokens.md](design-tokens.md)) |
+| `src/metronic/sass/core/base/mixins/_theme.scss` | `dark-theme` / `light-theme` mixins, `mirrored-ramp-color()`                                                                         |
 
 ## Theme Initialization Flow
 
 1. `Application.tsx` wraps the app with `ThemeProvider`
 2. `ThemeProvider` calls `getInitialTheme()` which checks:
-  - localStorage for saved preference
-  - OS `prefers-color-scheme` setting
-  - Falls back to 'light'
-3. `loadTheme()` dynamically imports the appropriate stylesheet
-4. User toggles update localStorage and reload the CSS
+   - localStorage for saved preference
+   - OS `prefers-color-scheme` setting
+   - Falls back to 'light'
+3. `loadTheme()` injects the Metronic stylesheet (once) and sets `data-theme` on `<html>`,
+   which switches the CSS custom properties, Tailwind's `dark:` variant and the Metronic
+   `dark-theme` rules
+4. User toggles update localStorage and `data-theme`; nothing is reloaded
 
 ## Usage Patterns
 
-### Pattern 1: Bootstrap Utility Classes (Recommended)
+### Pattern 1: Semantic Tailwind Utilities (Recommended)
 
-For simple styling, use Bootstrap utility classes that automatically adapt to the theme:
+Use the semantic utilities. Each one is exactly the design token of the same name, so it
+follows the theme without a `dark:` twin:
 
 ```tsx
-// Good - theme-aware classes
-<div className="bg-secondary p-4">
+// Good - semantic utilities, theme-aware
+<div className="bg-secondary rounded-md border-[1px] border-secondary p-4">
   <h6 className="text-primary">Title</h6>
-  <p className="text-muted">Description</p>
+  <p className="text-quaternary">Description</p>
 </div>
 
 // Avoid - Bootstrap Alert components don't always adapt text colors properly
 <Alert variant="info">This may have contrast issues in dark mode</Alert>
 ```
 
-**Common theme-aware classes:**
+**Theme-aware utilities** (full reference in
+[design-tokens.md](design-tokens.md)):
 
-| Class | Light Mode | Dark Mode |
-|-------|------------|-----------|
-| `bg-primary` | White | Dark gray |
-| `bg-secondary` | Light gray (#f9fafb) | Dark gray (#161b26) |
-| `text-primary` | Dark text | Light text |
-| `text-secondary` | Gray text | Lighter gray text |
-| `text-muted` | Muted gray | Muted light gray |
-| `border-primary` | Light border | Dark border |
+| Utility                         | Token                               | Light → Dark                  |
+| ------------------------------- | ----------------------------------- | ----------------------------- |
+| `bg-primary`                    | `--bg-primary`                      | White → near-black            |
+| `bg-secondary`                  | `--bg-secondary`                    | gray-50 → dark gray           |
+| `bg-tertiary` / `bg-quaternary` | `--bg-tertiary` / `--bg-quaternary` | gray-100 / 200 → darker grays |
+| `text-primary` … `text-senary`  | `--text-primary` … `--text-senary`  | gray-900 … 300 → light grays  |
+| `border-primary`                | `--border-primary`                  | Control border                |
+| `border-secondary`              | `--border-secondary`                | Card border                   |
+| `text-brand`                    | `--brand-color`                     | Brand (tenant colour)         |
+
+For the brand colour use `text-brand` (and `border-brand`, `outline-brand`). State colours (success, warning, danger) use the
+status matrix: `bg-warning-subtle text-warning`.
+
+**Bootstrap emits no colour utilities**: its old class names (`text-muted`, `text-success`,
+`bg-light`, …) paint nothing, and every colour class is Tailwind's (`text-muted` →
+`text-quaternary`). Never pair Bootstrap's `border` class with a Tailwind border colour: the
+colour never paints (use `border-[1px]`). See
+[design-tokens.md § Bootstrap colour utilities](design-tokens.md).
 
 ### Pattern 2: useTheme() Hook
 
@@ -90,73 +116,77 @@ const MyComponent = () => {
 };
 ```
 
-### Pattern 3: SCSS Design Tokens
+### Pattern 3: CSS Custom Properties in SCSS & CSS
 
-When writing custom SCSS, use the semantic design tokens:
+When writing custom SCSS or CSS, use semantic CSS custom properties directly:
 
 ```scss
 .my-component {
-  background-color: $bg-primary;      // Adapts automatically
-  color: $text-primary;               // Adapts automatically
-  border: 1px solid $border-primary;  // Adapts automatically
+  background-color: var(--bg-primary); // Adapts automatically
+  color: var(--text-primary); // Adapts automatically
+  border: 1px solid var(--border-primary); // Adapts automatically
 }
 ```
 
-**Available tokens** (from `_tokens.scss`):
+**Common semantic tokens** (defined in `packages/design-tokens/src/css/semantic/`; the full
+list with values is in [design-tokens.md § Semantic roles](design-tokens.md)):
 
 ```scss
 // Backgrounds
-$bg-primary        // Main background
-$bg-primary_hover  // Hover state
-$bg-secondary      // Secondary/card background
-$bg-tertiary       // Tertiary background
+var(--bg-primary)        // Base surface
+var(--bg-primary-hover)  // Hover/highlight on that surface
+var(--bg-secondary)      // Faint panel
+var(--bg-tertiary)       // Tiles, chips
+var(--bg-quaternary)     // Stronger fill
 
-// Text
-$text-primary      // Primary text
-$text-secondary    // Secondary text
-$text-tertiary     // Tertiary/disabled text
+// Text and icons: one neutral scale, strongest first
+var(--text-primary)      // Headings, primary content
+var(--text-secondary)    // Body copy
+var(--text-tertiary)     // Supporting text
+var(--text-quaternary)   // Muted text, placeholders
+var(--text-quinary)      // Faint text, decorative icons
+var(--text-senary)       // Disabled marks
+var(--text-disabled)     // Disabled input text
 
 // Borders
-$border-primary    // Primary borders
-$border-secondary  // Subtle borders
+var(--border-primary)    // Control borders
+var(--border-secondary)  // Card borders
+var(--border-divider)    // A drawn line
+
+// States: --status-{success,warning,danger}-{bg,border,solid,fg}
+var(--status-danger-fg)  // Error text/icon, AA on any surface
+var(--status-warning-bg) // Warning tint
+
+// Brand (runtime, per tenant): never $primary in SCSS
+var(--bg-brand-solid)
+var(--border-brand-solid)
+var(--fg-brand-primary)
 ```
 
 ### Pattern 4: CSS Custom Properties
 
 For runtime theming needs, use CSS custom properties:
 
-```scss
-// Defined in _root.scss
+```css
+/* Defined in packages/design-tokens/src/css/semantic/background.css */
 :root {
-  --waldur-bg-primary: #{$bg-primary};
-  --waldur-border-secondary: #{$border-secondary};
+  --bg-primary: #ffffff;
 }
 
-// Usage
+/* Usage */
 .component {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
 }
 ```
 
 ## Common Pitfalls
 
-### Bootstrap Alert Components
+### Static Brand Colour in SCSS
 
-Bootstrap Alert components (`<Alert variant="info">`) may not properly adapt text colors in dark mode. Instead, use custom styled divs:
-
-```tsx
-// Instead of this:
-<Alert variant="info">
-  <Alert.Heading>Title</Alert.Heading>
-  Content here
-</Alert>
-
-// Use this:
-<div className="rounded border border-primary bg-secondary p-4">
-  <h6 className="text-primary mb-2">Title</h6>
-  <p className="text-muted mb-0">Content here</p>
-</div>
-```
+`$primary` and `$primary-N` compile to a static default green; the tenant's brand is the runtime
+`--brand-*` ramp. Paint brand in SCSS with `var(--bg-brand-solid)`, `var(--fg-brand-primary)`,
+`var(--brand-600)` and so on, never `$primary`. See
+[design-tokens.md § The brand colour in SCSS](design-tokens.md).
 
 ### Hardcoded Colors
 
@@ -166,8 +196,8 @@ Avoid hardcoding colors that won't adapt:
 // Bad - won't adapt to dark mode
 <div style={{ backgroundColor: '#f5f5f5', color: '#333' }}>
 
-// Good - uses theme-aware classes
-<div className="bg-secondary text-primary">
+// Good - semantic utilities follow the theme
+<div className="bg-secondary text-secondary">
 ```
 
 ### Third-Party Components
@@ -182,7 +212,8 @@ Components like react-select, Monaco Editor, and ECharts need explicit theme con
 
 1. Toggle theme using the switcher in the user dropdown menu
 2. Check that:
-  - Text is readable against backgrounds
-  - Borders are visible but not harsh
-  - Interactive elements have visible hover states
-  - Third-party components match the overall theme
+
+- Text is readable against backgrounds
+- Borders are visible but not harsh
+- Interactive elements have visible hover states
+- Third-party components match the overall theme

@@ -57,7 +57,7 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
   ).sort();
 
   if (keys.length === 0) {
-    return <span className="text-muted">{renderFieldOrDash(null)}</span>;
+    return <span className="text-quaternary">{renderFieldOrDash(null)}</span>;
   }
 
   return (
@@ -89,7 +89,7 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
               sortedStringify(beforeVal) !== sortedStringify(afterVal);
             return (
               <tr key={key} className={differs ? 'table-warning' : undefined}>
-                <td className="fw-semibold align-top">{key}</td>
+                <td className="font-semibold align-top">{key}</td>
                 <td className="align-top">{renderValue(beforeVal)}</td>
                 <td className="align-top">{renderValue(afterVal)}</td>
               </tr>

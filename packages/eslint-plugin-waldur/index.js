@@ -12,7 +12,10 @@ import enforceFeaturedIcon from './rules/enforce-featured-icon.js';
 import enforceNoResultWithCta from './rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './rules/enforce-render-field-or-dash.js';
+import noBootstrapBorderWithTailwindColor from './rules/no-bootstrap-border-with-tailwind-color.js';
 import noBootstrapButtonMarkup from './rules/no-bootstrap-button-markup.js';
+import noBootstrapColorUtility from './rules/no-bootstrap-color-utility.js';
+import noBootstrapCssVars from './rules/no-bootstrap-css-vars.js';
 import noBootstrapFormCheck from './rules/no-bootstrap-form-check.js';
 import noBootstrapProgress from './rules/no-bootstrap-progress.js';
 import noBootstrapTabs from './rules/no-bootstrap-tabs.js';
@@ -24,12 +27,15 @@ import noHandRolledTable from './rules/no-hand-rolled-table.js';
 import noInteractiveInTabTrigger from './rules/no-interactive-in-tab-trigger.js';
 import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.js';
 import noNativeDateInput from './rules/no-native-date-input.js';
+import noRawStatusRamp from './rules/no-raw-status-ramp.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
 import preferClassnamesUtility from './rules/prefer-classnames-utility.js';
 import preferMutateOverMutateAsync from './rules/prefer-mutate-over-mutateAsync.js';
+import requireDarkPair from './rules/require-dark-pair.js';
+import requireWeightScale from './rules/require-weight-scale.js';
 
 export default {
   rules: {
@@ -46,8 +52,15 @@ export default {
     'no-direct-client-usage': noDirectClientUsage,
     'no-edit-button-size-override': noEditButtonSizeOverride,
     'dynamic-tab-params': dynamicTabParams,
+    'no-bootstrap-css-vars': noBootstrapCssVars,
     'no-bootstrap-form-check': noBootstrapFormCheck,
     'no-bootstrap-progress': noBootstrapProgress,
+    'no-bootstrap-border-with-tailwind-color':
+      noBootstrapBorderWithTailwindColor,
+    'no-raw-status-ramp': noRawStatusRamp,
+    'require-dark-pair': requireDarkPair,
+    'require-weight-scale': requireWeightScale,
+    'no-bootstrap-color-utility': noBootstrapColorUtility,
     'no-bootstrap-tabs': noBootstrapTabs,
     'no-interactive-in-tab-trigger': noInteractiveInTabTrigger,
     'no-tooltip-on-bare-icon': noTooltipOnBareIcon,

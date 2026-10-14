@@ -90,13 +90,15 @@ export const PendingActionAlertItem: FC<{
           ) : (
             <>
               {row.description && (
-                <div className="text-muted small mb-2">{row.description}</div>
+                <div className="text-quaternary small mb-2">
+                  {row.description}
+                </div>
               )}
               <ActionContext row={row} />
             </>
           )}
           {row.silenced_until && (
-            <div className="text-muted mt-2 small">
+            <div className="text-quaternary mt-2 small">
               <BellSlashIcon size={14} className="me-1" weight="bold" />
               {translate('Silenced until {date}', {
                 date: new Date(row.silenced_until).toLocaleDateString(),

@@ -109,7 +109,7 @@ export const OrganizationCreateStep1: FunctionComponent<
       <Card className="border-0 shadow-sm">
         <Card.Body className="p-8">
           <h4 className="mb-4">{translate('Select verification method')}</h4>
-          <p className="text-gray-700 mb-6">
+          <p className="text-secondary mb-6">
             {translate(
               'Choose how you would like to verify your organization. Automatic verification provides instant results if your company is registered in the selected business register.',
             )}
@@ -132,7 +132,7 @@ export const OrganizationCreateStep1: FunctionComponent<
           {loading && (
             <div className="mt-4">
               <LoadingSpinner />
-              <p className="text-center text-muted mt-2">
+              <p className="text-center text-quaternary mt-2">
                 {translate('Loading required fields...')}
               </p>
             </div>
@@ -150,10 +150,10 @@ export const OrganizationCreateStep1: FunctionComponent<
                       <InfoIcon size={24} weight="duotone" />
                     </div>
                     <div className="flex-grow-1">
-                      <div className="fw-semibold text-gray-800 mb-1">
+                      <div className="font-semibold text-primary mb-1">
                         {methodInfo.title}
                       </div>
-                      <div className="text-gray-700">
+                      <div className="text-secondary">
                         {methodInfo.description}
                       </div>
                     </div>

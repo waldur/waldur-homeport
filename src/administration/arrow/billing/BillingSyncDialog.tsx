@@ -137,7 +137,7 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
           isClearable={false}
           isDisabled={isPending}
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate('Select the billing period to sync')}
         </Form.Text>
       </Form.Group>
@@ -157,7 +157,7 @@ export const BillingSyncDialog = ({ resolve }: BillingSyncDialogProps) => {
           isClearable
           isDisabled={isPending}
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate(
             'Leave empty to sync all resources. Select a resource to sync only its billing lines.',
           )}

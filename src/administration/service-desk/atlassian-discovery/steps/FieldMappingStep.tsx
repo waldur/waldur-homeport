@@ -147,7 +147,7 @@ export const FieldMappingStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Field Mapping')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Map Waldur fields to Atlassian custom fields. These mappings allow Waldur to automatically populate issue fields.',
         )}

@@ -20,7 +20,7 @@ const StepBox: FC<StepBoxProps> = ({ step, title, description, items }) => (
         {translate('Step {n}', { n: String(step) })}
       </Badge>
     </div>
-    <p className="text-muted mb-3">{description}</p>
+    <p className="text-quaternary mb-3">{description}</p>
     <ul className="list-unstyled d-flex flex-column gap-2 mb-0">
       {items.map((item) => (
         <li key={item} className="d-flex align-items-start gap-2">
@@ -62,7 +62,7 @@ export const TwoStageWorkflowCard: FC = () => (
         <ArrowRightIcon
           size={20}
           weight="bold"
-          className="text-muted rotate-[90deg] md:rotate-[0deg]"
+          className="text-quaternary rotate-[90deg] md:rotate-[0deg]"
         />
       </div>
       <StepBox

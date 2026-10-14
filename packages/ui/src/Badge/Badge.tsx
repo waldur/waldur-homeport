@@ -25,64 +25,64 @@ export type BadgeTone = 'solid' | 'light' | 'outline';
 export type BadgeShape = 'rounded' | 'pill' | 'circle' | 'roundless';
 
 /**
- * Replaces badgeColors.css completely.
  * Maps 15 Variants × 3 Tones directly to Tailwind classes.
  * Dark mode handles exact overrides (e.g. `dark:bg-brand-950`).
  *
  * Note: `solid` and `light` tones use `border-transparent` because
  * the `border-[1px]` is structural. Visually, a transparent border
  * over a background color is identical to setting `border-color: same-as-bg`.
+ *
+ * `info` and `neutral` solid fills turn light in dark mode, so their label
+ * turns dark there too (as the Progress labels do).
  */
 export const BADGE_STYLES: Record<BadgeVariant, Record<BadgeTone, string>> = {
   primary: {
-    solid: 'border-transparent bg-brand-600 text-white dark:bg-brand-600',
-    light:
-      'border-transparent bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-300',
+    solid: 'border-transparent bg-[var(--bg-brand-solid)] text-white',
+    light: 'border-transparent bg-brand-50 text-brand dark:bg-brand-950',
     outline:
-      'bg-brand-50 border-brand-200 text-brand-700 dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200',
+      'bg-brand-subtle border-brand-200 text-brand-700 dark:border-brand-700 dark:text-brand-200',
   },
   secondary: {
     solid:
       'border-transparent bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300',
-    light:
-      'border-transparent bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-300',
+    light: 'border-transparent bg-brand-50 text-brand dark:bg-brand-950',
     outline:
-      'bg-brand-50 border-brand-200 text-brand-700 dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200',
+      'bg-brand-subtle border-brand-200 text-brand-700 dark:border-brand-700 dark:text-brand-200',
   },
   success: {
-    solid: 'border-transparent bg-success-600 text-white dark:bg-success-500',
-    light:
-      'border-transparent bg-success-50 text-success-600 dark:bg-success-950 dark:text-success-400',
+    solid: 'border-transparent bg-success text-white',
+    light: 'border-transparent bg-success-subtle text-success',
     outline:
-      'bg-success-50 border-success-200 text-success-700 dark:bg-success-900 dark:border-success-700 dark:text-success-200',
+      // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- the outline tone's 200/700 border steps sit outside the status matrix
+      'bg-success-subtle border-success-200 text-success-700 dark:border-success-700 dark:text-success-200',
   },
   warning: {
-    solid: 'border-transparent bg-warning-600 text-white dark:bg-warning-500',
-    light:
-      'border-transparent bg-warning-50 text-warning-600 dark:bg-warning-950 dark:text-warning-400',
+    solid: 'border-transparent bg-warning text-white',
+    light: 'border-transparent bg-warning-subtle text-warning',
     outline:
-      'bg-warning-50 border-warning-200 text-warning-700 dark:bg-warning-900 dark:border-warning-700 dark:text-warning-200',
+      // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- the outline tone's 200/700 border steps sit outside the status matrix
+      'bg-warning-subtle border-warning-200 text-warning-700 dark:border-warning-700 dark:text-warning-200',
   },
   danger: {
-    solid: 'border-transparent bg-error-600 text-white dark:bg-error-500',
-    light:
-      'border-transparent bg-error-50 text-error-600 dark:bg-error-950 dark:text-error-400',
+    solid: 'border-transparent bg-danger text-white',
+    light: 'border-transparent bg-danger-subtle text-danger',
     outline:
-      'bg-error-50 border-error-200 text-error-700 dark:bg-error-900 dark:border-error-700 dark:text-error-200',
+      // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- the outline tone's 200/700 border steps sit outside the status matrix
+      'bg-danger-subtle border-error-200 text-error-700 dark:border-error-700 dark:text-error-200',
   },
   info: {
-    solid: 'border-transparent bg-info-600 text-white dark:bg-info-300',
-    light:
-      'border-transparent bg-info-50 text-info-600 dark:bg-info-900 dark:text-info-300',
+    solid:
+      'border-transparent bg-info-600 text-white dark:bg-info-300 dark:text-gray-900',
+    light: 'border-transparent bg-info-subtle text-info',
     outline:
-      'bg-info-50 border-info-200 text-info-700 dark:bg-info-900 dark:border-info-700 dark:text-info-200',
+      'bg-info-subtle border-info-200 text-info-700 dark:border-info-700 dark:text-info-200',
   },
   neutral: {
-    solid: 'border-transparent bg-gray-600 text-white dark:bg-gray-dark-400',
-    light:
-      'border-transparent bg-gray-50 text-gray-600 dark:bg-gray-dark-800 dark:text-gray-dark-400',
+    solid:
+      'border-transparent bg-gray-600 text-white dark:bg-gray-dark-400 dark:text-gray-900',
+    light: 'border-transparent bg-gray-50 text-tertiary dark:bg-gray-dark-800',
     outline:
-      'bg-gray-100 border-gray-300 text-gray-700 dark:bg-gray-dark-800 dark:border-gray-dark-600 dark:text-gray-dark-300',
+      'bg-tertiary border-gray-300 text-secondary dark:border-gray-dark-600',
   },
   purple: {
     solid: 'border-transparent bg-purple-500 text-white dark:bg-purple-400',

@@ -34,10 +34,10 @@ export const Default: Story = {
 export const ColoredVariants: Story = {
   render: () => (
     <div className="flex gap-6 p-6 items-center">
-      <LoadingSpinner size={24} className="text-[var(--waldur-brand-color)]" />
-      <LoadingSpinner size={24} className="text-[var(--color-success-600)]" />
-      <LoadingSpinner size={24} className="text-[var(--color-warning-600)]" />
-      <LoadingSpinner size={24} className="text-[var(--color-error-600)]" />
+      <LoadingSpinner size={24} className="text-brand" />
+      <LoadingSpinner size={24} className="text-success" />
+      <LoadingSpinner size={24} className="text-warning" />
+      <LoadingSpinner size={24} className="text-danger" />
     </div>
   ),
 };

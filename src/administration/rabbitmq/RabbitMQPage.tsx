@@ -32,7 +32,7 @@ export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
       <div className="pt-5">
         <div className="text-center py-10">
           <LoadingSpinner />
-          <p className="text-muted mt-4">
+          <p className="text-quaternary mt-4">
             {translate('Fetching RabbitMQ statistics, please standby...')}
           </p>
         </div>

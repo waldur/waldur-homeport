@@ -14,7 +14,7 @@ const read = (relative: string) =>
   readFileSync(fileURLToPath(new URL(relative, import.meta.url)), 'utf8');
 
 const token = (name: string): number => {
-  const m = read('./zIndex.css').match(
+  const m = read('./css/primitives/zIndex.css').match(
     new RegExp(`--z-index-${name}:\\s*(\\d+);`),
   );
   if (!m) {
@@ -95,7 +95,7 @@ describe('z-index tokens', () => {
   it("is known to every layer list in waldur-ui's cn()", () => {
     const cn = read('../../ui/src/cn.ts');
     const tokens = [
-      ...read('./zIndex.css').matchAll(/--z-index-([\w-]+):/g),
+      ...read('./css/primitives/zIndex.css').matchAll(/--z-index-([\w-]+):/g),
     ].map((m) => m[1]);
     for (const name of new Set(tokens)) {
       expect(cn).toContain(`'${name}'`);

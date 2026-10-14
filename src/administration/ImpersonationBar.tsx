@@ -35,7 +35,7 @@ export const ImpersonationBar = () => {
 
   return (
     <div className="impersonation-bar d-flex align-items-center justify-content-between h-100 container-fluid gap-4">
-      <Stack direction="horizontal" gap={4} className="fw-bold">
+      <Stack direction="horizontal" gap={4} className="font-medium">
         <div className="icon">
           <WarningCircleIcon size={20} weight="bold" />
         </div>

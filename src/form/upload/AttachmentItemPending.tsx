@@ -34,10 +34,10 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
       </div>
 
       <div className="attachment-item__body">
-        <h6 className="fw-bold text-secondary">
+        <h6 className="font-medium text-secondary">
           {error ? translate('Upload failed, please try again') : file.name}
         </h6>
-        <p className="fs-6 text-muted">
+        <p className="fs-6 text-quaternary">
           {error ? file.name : formatFilesize(file.size, 'B')}
         </p>
         {error ? (

@@ -1,0 +1,103 @@
+/**
+ * Tailwind utilities for the semantic colour roles: `text-primary` …
+ * `text-senary`, `bg-primary` … `bg-quaternary`, `bg-primary-hover`,
+ * `border-primary` / `-secondary` / `-tertiary` / `-divider`.
+ *
+ * Lives in the package, imported by index.css, so every consumer gets the
+ * same utilities: waldur-ui and shell use them, and an app that imports
+ * waldur-design-tokens/index.css but not waldur-homeport's own
+ * src/tailwind.css (the micro-apps) would otherwise compile those classes to
+ * nothing.
+ *
+ * Each role uses Tailwind's property-scoped key (--text-color-*,
+ * --background-color-*, --border-color-*) rather than --color-*: a --color-*
+ * entry fans out to every colour utility, and a text gray is not a
+ * background. The rule is that a utility and the var() of the same name are
+ * the same colour: `text-tertiary` is var(--text-tertiary)
+ * (semantic/text.css), `bg-secondary` is var(--bg-secondary)
+ * (background.css), `border-primary` is var(--border-primary) (borders.css).
+ *
+ * In waldur-homeport, Bootstrap no longer emits .text-/.bg-/.border- primary
+ * or -secondary (src/metronic/sass/core/components/_utilities.scss), so
+ * these are the only definitions there.
+ *
+ * State colours read the status matrix (semantic/status.css), named like
+ * Bootstrap 5.3's: `text-danger` is the -fg slot, `bg-danger` and
+ * `border-danger` the -solid fill, `bg-danger-subtle` and
+ * `border-danger-subtle` the tinted -bg and -border. Same for success and
+ * warning; info and neutral have `text-*` and `bg-*-subtle` only. Bootstrap no
+ * longer emits its own classes of these names.
+ *
+ * Brand: `text-brand`, `border-brand` and `outline-brand` are var(--text-brand)
+ * (semantic/brand.css: the tenant colour in light, a lighter step in dark).
+ * Lines read it too, not --border-brand, which is the pale tint for a brand
+ * surface's edge. A solid brand fill is `bg-[var(--bg-brand-solid)]`. The
+ * --color-brand-N keys bridge the runtime ramp (initBrandTokens()) as
+ * `bg-brand-50`, `text-brand-700`, …: physical steps, like `gray-N`, so a
+ * tint needs its dark mirror (`bg-brand-subtle`).
+ *
+ * This file is every utility whose value is a variable defined elsewhere;
+ * the primitives (colorRamps.css, radius.css, …) declare their own utilities,
+ * since there the variable is the token.
+ */
+@theme {
+  --text-color-primary: var(--text-primary);
+  --text-color-secondary: var(--text-secondary);
+  --text-color-tertiary: var(--text-tertiary);
+  --text-color-quaternary: var(--text-quaternary);
+  --text-color-quinary: var(--text-quinary);
+  --text-color-senary: var(--text-senary);
+
+  --background-color-primary: var(--bg-primary);
+  --background-color-primary-hover: var(--bg-primary-hover);
+  --background-color-secondary: var(--bg-secondary);
+  --background-color-tertiary: var(--bg-tertiary);
+  --background-color-quaternary: var(--bg-quaternary);
+
+  --border-color-primary: var(--border-primary);
+  --border-color-secondary: var(--border-secondary);
+  --border-color-tertiary: var(--border-tertiary);
+  --border-color-divider: var(--border-divider);
+  --border-color-divider-medium: var(--border-divider-medium);
+
+  --text-color-success: var(--status-success-fg);
+  --text-color-warning: var(--status-warning-fg);
+  --text-color-danger: var(--status-danger-fg);
+  --text-color-info: var(--status-info-fg);
+  --text-color-neutral: var(--status-neutral-fg);
+
+  --background-color-success: var(--status-success-solid);
+  --background-color-warning: var(--status-warning-solid);
+  --background-color-danger: var(--status-danger-solid);
+  --background-color-success-subtle: var(--status-success-bg);
+  --background-color-warning-subtle: var(--status-warning-bg);
+  --background-color-danger-subtle: var(--status-danger-bg);
+  --background-color-info-subtle: var(--status-info-bg);
+  --background-color-neutral-subtle: var(--status-neutral-bg);
+
+  --background-color-brand-subtle: var(--bg-brand-subtle);
+
+  --border-color-success: var(--status-success-solid);
+  --border-color-warning: var(--status-warning-solid);
+  --border-color-danger: var(--status-danger-solid);
+  --border-color-success-subtle: var(--status-success-border);
+  --border-color-warning-subtle: var(--status-warning-border);
+  --border-color-danger-subtle: var(--status-danger-border);
+
+  --text-color-brand: var(--text-brand);
+  --border-color-brand: var(--text-brand);
+  --outline-color-brand: var(--text-brand);
+
+  --color-brand-25: var(--brand-25);
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+}

@@ -151,7 +151,9 @@ export const TeamTableComponent = <
                   />
                 </>
               )}
-              {suffix && <span className="text-muted small">{suffix}</span>}
+              {suffix && (
+                <span className="text-quaternary small">{suffix}</span>
+              )}
             </span>
           );
         },

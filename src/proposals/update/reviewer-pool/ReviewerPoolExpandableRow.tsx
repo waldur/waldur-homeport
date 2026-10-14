@@ -225,7 +225,9 @@ const COITable: FC<{ conflicts: ConflictOfInterest[] }> = ({ conflicts }) => {
 
   if (conflicts.length === 0) {
     return (
-      <p className="text-muted">{translate('No conflicts of interest.')}</p>
+      <p className="text-quaternary">
+        {translate('No conflicts of interest.')}
+      </p>
     );
   }
 
@@ -359,7 +361,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
                             https://orcid.org/{profile.orcid_id}
                           </a>
                         ) : (
-                          <span className="text-muted">
+                          <span className="text-quaternary">
                             {translate('Not connected')}
                           </span>
                         )
@@ -373,7 +375,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
                       label={translate('Biography')}
                       value={
                         profile.biography || (
-                          <span className="text-muted">
+                          <span className="text-quaternary">
                             {translate('Not provided')}
                           </span>
                         )
@@ -381,7 +383,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
                     />
                   </>
                 ) : (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No reviewer profile found.')}
                   </p>
                 )}
@@ -401,7 +403,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
             content: (
               <>
                 {affiliationsCount === 0 ? (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No affiliations added.')}
                   </p>
                 ) : (
@@ -417,7 +419,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
             content: (
               <>
                 {expertiseCount === 0 ? (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No expertise keywords added.')}
                   </p>
                 ) : (
@@ -433,7 +435,7 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
             content: (
               <>
                 {publicationsCount === 0 ? (
-                  <p className="text-muted">
+                  <p className="text-quaternary">
                     {translate('No publications added.')}
                   </p>
                 ) : (

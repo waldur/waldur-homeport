@@ -32,15 +32,11 @@ export const Playground: Story = {};
 
 export const ContextUsage: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--surface-page-bg)] space-y-4 max-w-md">
-      <div className="flex items-center justify-between p-3 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)]">
+    <div className="p-6 bg-[var(--page-bg)] space-y-4 max-w-md">
+      <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
         <div>
-          <div className="text-xs text-[var(--surface-text-muted)]">
-            API Token
-          </div>
-          <div className="font-mono text-xs text-[var(--surface-text-primary)]">
-            ab73...9f12
-          </div>
+          <div className="text-xs text-quinary">API Token</div>
+          <div className="font-mono text-xs text-primary">ab73...9f12</div>
         </div>
         <CopyButton
           value="ab7349128502391298492849"
@@ -49,14 +45,10 @@ export const ContextUsage: Story = {
         />
       </div>
 
-      <div className="flex items-center justify-between p-3 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)]">
+      <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
         <div>
-          <div className="text-xs text-[var(--surface-text-muted)]">
-            Public IP
-          </div>
-          <div className="font-mono text-xs text-[var(--surface-text-primary)]">
-            192.168.1.42
-          </div>
+          <div className="text-xs text-quinary">Public IP</div>
+          <div className="font-mono text-xs text-primary">192.168.1.42</div>
         </div>
         <CopyButton
           value="192.168.1.42"

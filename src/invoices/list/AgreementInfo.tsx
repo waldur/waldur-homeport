@@ -38,6 +38,11 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
         .reduce((a, b) => a + b, 0);
     },
   });
+  // The paid total differs from the contract sum: flag it.
+  const paidMismatch =
+    activeFixedPricePaymentProfile &&
+    Number(activeFixedPricePaymentProfile.attributes.contract_sum) !==
+      totalOfSumPaid;
   return (
     <>
       {activeFixedPricePaymentProfile ? (
@@ -70,16 +75,8 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
                 {' '}
                 {translate('Total paid')}{' '}
                 <span
-                  style={
-                    Number(
-                      activeFixedPricePaymentProfile.attributes.contract_sum,
-                    ) !== totalOfSumPaid
-                      ? {
-                          color: 'red',
-                          fontWeight: 'bold',
-                        }
-                      : null
-                  }
+                  className={paidMismatch ? 'font-bold' : undefined}
+                  style={paidMismatch ? { color: 'red' } : undefined}
                 >
                   {defaultCurrency(totalOfSumPaid)}
                 </span>

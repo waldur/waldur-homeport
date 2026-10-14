@@ -176,7 +176,7 @@ export const OfferingMergeDetails: FC = () => {
               tableId={`OfferingMergeDetails-${merge.uuid}`}
             />
           ) : (
-            <p className="text-muted mb-0">
+            <p className="text-quaternary mb-0">
               {translate(
                 'No stored preview. It is computed in the wizard and discarded when a mapping changes.',
               )}

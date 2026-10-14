@@ -123,7 +123,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
       <Row className="mb-n1">
         {filteredLanguages.map((language: { code: string; label: string }) => (
           <Col key={language.code} sm={6} md={4}>
-            <div className="border-bottom py-5">
+            <div className="border-b-[1px] border-b-secondary py-5">
               {canEdit ? (
                 <Switch
                   data-testid={`language_${language.code}`}

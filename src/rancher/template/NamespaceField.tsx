@@ -16,7 +16,7 @@ const NamespaceSwitcher: FunctionComponent = () => (
     name="useNewNamespace"
     component={(fieldProps) => (
       <button
-        className="text-btn text-dark"
+        className="text-btn text-primary"
         type="button"
         onClick={() => fieldProps.input.onChange(!fieldProps.input.value)}
       >

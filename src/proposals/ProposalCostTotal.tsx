@@ -58,7 +58,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
               value={
                 <>
                   {defaultCurrency(total.monthly)}
-                  <span className="text-muted">{translate(' /mo')}</span>
+                  <span className="text-quaternary">{translate(' /mo')}</span>
                 </>
               }
               labelCol={12}
@@ -95,8 +95,10 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
       )}
       {showsFigures && (
         <div className="d-flex justify-content-between align-items-center fs-3">
-          <span className="fw-normal text-gray-700">{translate('Total')}:</span>
-          <span className="fw-bold text-gray-900">
+          <span className="font-normal text-secondary">
+            {translate('Total')}:
+          </span>
+          <span className="font-medium text-primary">
             {defaultCurrency(total.monthly + total.oneTime)}
           </span>
         </div>
@@ -117,7 +119,10 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
   }
   return (
     <div className="d-flex justify-content-end mt-4">
-      <div className="border-top pt-3" style={{ minWidth: 320 }}>
+      <div
+        className="border-t-[1px] border-t-secondary pt-3"
+        style={{ minWidth: 320 }}
+      >
         {body}
       </div>
     </div>

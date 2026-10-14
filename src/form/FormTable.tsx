@@ -39,7 +39,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
       {i === 0 && props.description ? (
         <th className={row ? 'col-md-4' : 'col-md-auto'} rowSpan={titleRowSpan}>
           <div className="d-flex align-items-center">
-            <label htmlFor={props.htmlFor} className="title fw-medium mb-0">
+            <label htmlFor={props.htmlFor} className="title font-medium mb-0">
               {props.label}
               {props.required && <span className="text-danger ms-1">*</span>}
               {props.colon && ':'}
@@ -59,7 +59,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
             <Tooltip label={props.description}>
               <div
                 className={classNames(
-                  'description fw-normal',
+                  'description font-normal',
                   props.descriptionClassName,
                 )}
               >
@@ -69,7 +69,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
           ) : (
             <div
               className={classNames(
-                'description fw-normal',
+                'description font-normal',
                 props.descriptionClassName,
               )}
             >

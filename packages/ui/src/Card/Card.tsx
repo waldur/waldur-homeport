@@ -6,12 +6,12 @@ import { cn } from '../cn';
  * shadcn's actual Card recipe (Card/CardHeader/CardTitle/CardDescription/
  * CardContent/CardFooter as plain div wrappers — see
  * https://ui.shadcn.com/docs/components/card) — background/border point at
- * waldur-design-tokens/surfaceColors.css's --surface-card-* tokens instead
+ * waldur-design-tokens' --card-bg / --border-secondary tokens instead
  * of shadcn's own default palette. StatCard composes these rather than
  * duplicating the card shell.
  *
  * Shadow/border/radius/padding are Metronic's real .card values (see
- * src/metronic/sass/core/components/_card.scss and surfaceColors.css's
+ * src/metronic/sass/core/components/_card.scss and waldur-design-tokens/card.css's
  * comment on --card-shadow/--card-border-color), not shadcn defaults or
  * guesses: real cards rely on the shadow alone in light mode (no border)
  * and flip to a border with no shadow in dark mode, at ~6px radius
@@ -32,8 +32,8 @@ export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
-        'rounded-md border text-[var(--surface-text-primary)]',
-        'border-[var(--card-border-color)] bg-[var(--surface-card-bg)] shadow-[var(--card-shadow)]',
+        'rounded-md border-[1px] text-primary',
+        'border-[var(--card-border-color)] bg-[var(--card-bg)] shadow-[var(--card-shadow)]',
         className,
       )}
       {...props}
@@ -72,10 +72,7 @@ export function CardTitle({
       // explicit m-0 (Tailwind's `utilities` layer, ranked above
       // `bootstrap`) closes the gap regardless of layer order or which host
       // app renders this.
-      className={cn(
-        'm-0 text-sm font-medium text-[var(--surface-text-secondary)]',
-        className,
-      )}
+      className={cn('m-0 text-sm font-medium text-quaternary', className)}
       {...props}
     >
       {children}
@@ -92,7 +89,7 @@ export function CardDescription({
       // m-0: same Bootstrap-Reboot-margin leak as CardTitle above (Reboot
       // also sets <p> margin-bottom: 1rem) — pre-empted here even though no
       // current consumer has hit it yet.
-      className={cn('m-0 text-sm text-[var(--surface-text-muted)]', className)}
+      className={cn('m-0 text-sm text-quinary', className)}
       {...props}
     />
   );

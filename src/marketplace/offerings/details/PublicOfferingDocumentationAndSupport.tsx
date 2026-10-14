@@ -24,7 +24,9 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
       <div className="d-flex flex-column gap-4">
         {offering.documentation_url && (
           <div>
-            <p className="fw-bold mb-1">{translate('Service documentation')}</p>
+            <p className="font-medium mb-1">
+              {translate('Service documentation')}
+            </p>
             <a
               href={offering.documentation_url}
               target="_blank"
@@ -40,7 +42,7 @@ export const PublicOfferingDocumentationAndSupport: FunctionComponent<
         )}
         {offering.helpdesk_url && (
           <div>
-            <p className="fw-bold mb-1">{translate('Service support')}</p>
+            <p className="font-medium mb-1">{translate('Service support')}</p>
             <a
               href={offering.helpdesk_url}
               target="_blank"

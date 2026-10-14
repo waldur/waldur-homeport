@@ -20,7 +20,7 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Organization type'),
         render: ({ row }) => (
-          <span className="fw-bold">
+          <span className="font-medium">
             {row.organization_type || translate('Unknown')}
           </span>
         ),
@@ -29,7 +29,7 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Total resources'),
         render: ({ row }) => (
-          <span className="fw-semibold">
+          <span className="font-semibold">
             {row.total_resources.toLocaleString()}
           </span>
         ),
@@ -38,7 +38,7 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Total usage'),
         render: ({ row }) => (
-          <span className="fw-semibold">
+          <span className="font-semibold">
             {row.total_usage.toLocaleString()}
           </span>
         ),

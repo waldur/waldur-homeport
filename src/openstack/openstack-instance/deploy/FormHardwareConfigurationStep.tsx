@@ -72,7 +72,7 @@ export const FormHardwareConfigurationStep = (props: FormStepProps) => {
         fieldName="attributes.flavor"
         query={query}
       />
-      <div className="border-bottom my-5">
+      <div className="border-b-[1px] border-b-secondary my-5">
         <FormAbstractVolumeFields
           {...props}
           typeTitle={translate('System volume type')}

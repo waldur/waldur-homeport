@@ -25,11 +25,11 @@ export const MatrixSyncStatus: FC<MatrixSyncStatusProps> = ({
       text: error || translate('Connection error'),
     },
     disconnected: {
-      bg: 'bg-secondary text-white',
+      bg: 'bg-neutral-subtle text-neutral',
       text: translate('Disconnected'),
     },
     ended: {
-      bg: 'bg-secondary text-white',
+      bg: 'bg-neutral-subtle text-neutral',
       text: translate('Session ended'),
     },
   };

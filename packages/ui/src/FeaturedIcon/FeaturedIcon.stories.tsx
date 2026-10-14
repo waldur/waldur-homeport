@@ -99,11 +99,11 @@ export const Matrix: Story = {
     <div className="flex flex-col gap-10 p-2">
       {TONES.map((tone) => (
         <section key={tone} className="flex flex-col gap-4">
-          <div className="flex items-baseline gap-2 border-b border-[var(--surface-border)] pb-2">
-            <h3 className="text-base font-semibold capitalize text-[var(--surface-text)]">
+          <div className="flex items-baseline gap-2 border-b border-primary pb-2">
+            <h3 className="text-base font-semibold capitalize text-primary">
               Tone: {tone}
             </h3>
-            <span className="text-xs text-[var(--surface-text-muted)]">
+            <span className="text-xs text-quinary">
               {tone === 'outline'
                 ? 'Two-ring transparent badge with subtle outer ring border'
                 : 'Single flat light tint background fill'}
@@ -112,7 +112,7 @@ export const Matrix: Story = {
 
           <div className="flex flex-col gap-1 overflow-x-auto">
             {/* Header row */}
-            <div className="grid grid-cols-[120px_repeat(4,1fr)] items-center border-b border-[var(--surface-border)] pb-2.5 text-xs font-mono uppercase text-[var(--surface-text-muted)]">
+            <div className="grid grid-cols-[120px_repeat(4,1fr)] items-center border-b border-primary pb-2.5 text-xs font-mono uppercase text-quinary">
               <div className="font-medium">Variant</div>
               {SIZES.map((size) => (
                 <div
@@ -130,13 +130,13 @@ export const Matrix: Story = {
             </div>
 
             {/* Variant rows */}
-            <div className="divide-y divide-[var(--surface-border)]">
+            <div className="divide-y divide-primary">
               {DISPLAY_VARIANTS.map((variant) => (
                 <div
                   key={variant}
                   className="grid grid-cols-[120px_repeat(4,1fr)] items-center py-3"
                 >
-                  <div className="font-mono text-xs font-semibold text-[var(--surface-text)]">
+                  <div className="font-mono text-xs font-semibold text-primary">
                     {variant}
                   </div>
                   {SIZES.map((size) => (
@@ -168,14 +168,14 @@ export const Matrix: Story = {
 export const ToneComparison: Story = {
   render: () => (
     <div className="flex flex-col gap-4 p-2">
-      <div className="grid grid-cols-3 gap-4 pb-2 border-b border-[var(--surface-border)] text-xs font-mono uppercase text-[var(--surface-text-muted)]">
+      <div className="grid grid-cols-3 gap-4 pb-2 border-b border-primary text-xs font-mono uppercase text-quinary">
         <div>Variant</div>
         <div>Outline (Default)</div>
         <div>Solid</div>
       </div>
       {DISPLAY_VARIANTS.map((variant) => (
         <div key={variant} className="grid grid-cols-3 items-center gap-4 py-1">
-          <span className="font-mono text-xs font-semibold text-[var(--surface-text)]">
+          <span className="font-mono text-xs font-semibold text-primary">
             {variant}
           </span>
           <div>
@@ -207,7 +207,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex flex-col gap-6 p-2">
       <div>
-        <h4 className="text-xs font-mono uppercase text-[var(--surface-text-muted)] mb-3">
+        <h4 className="text-xs font-mono uppercase text-quinary mb-3">
           Outline Tone Sizes
         </h4>
         <div className="flex items-end gap-6">
@@ -219,7 +219,7 @@ export const Sizes: Story = {
                 tone="outline"
                 size={size}
               />
-              <div className="flex flex-col items-center text-xs text-[var(--surface-text-muted)]">
+              <div className="flex flex-col items-center text-xs text-quinary">
                 <span className="font-semibold">{size}</span>
                 <span className="text-[10px]">
                   {SIZE_LABELS[size].outlinePx}px
@@ -231,7 +231,7 @@ export const Sizes: Story = {
       </div>
 
       <div>
-        <h4 className="text-xs font-mono uppercase text-[var(--surface-text-muted)] mb-3">
+        <h4 className="text-xs font-mono uppercase text-quinary mb-3">
           Solid Tone Sizes
         </h4>
         <div className="flex items-end gap-6">
@@ -243,7 +243,7 @@ export const Sizes: Story = {
                 tone="solid"
                 size={size}
               />
-              <div className="flex flex-col items-center text-xs text-[var(--surface-text-muted)]">
+              <div className="flex flex-col items-center text-xs text-quinary">
                 <span className="font-semibold">{size}</span>
                 <span className="text-[10px]">
                   {SIZE_LABELS[size].solidPx}px

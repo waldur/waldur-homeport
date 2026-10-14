@@ -67,10 +67,10 @@ describe('FormSteps', () => {
       // Other steps should have lock icon and muted text
       const planTab = screen.getByTestId('tab-step-plan');
       expect(within(planTab).getByTestId('LockIcon')).toBeInTheDocument();
-      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-quaternary');
     });
 
-    it('applies text-muted class to disabled step labels', () => {
+    it('applies text-quaternary class to disabled step labels', () => {
       render(
         <FormSteps
           steps={baseSteps}
@@ -80,7 +80,7 @@ describe('FormSteps', () => {
       );
 
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-quaternary');
     });
   });
 
@@ -217,7 +217,7 @@ describe('FormSteps', () => {
 
       // Plan is both disabled and completed - disabled should win
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-quaternary');
       // Should not have success check icon
       expect(
         within(planTab).queryByTestId('CheckCircleIcon'),
@@ -236,7 +236,7 @@ describe('FormSteps', () => {
 
       // Plan is disabled with error - disabled should win
       const planTab = screen.getByTestId('tab-step-plan');
-      expect(within(planTab).getByText('Plan')).toHaveClass('text-muted');
+      expect(within(planTab).getByText('Plan')).toHaveClass('text-quaternary');
       expect(
         within(planTab).queryByTestId('WarningCircleIcon'),
       ).not.toBeInTheDocument();

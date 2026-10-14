@@ -10,7 +10,7 @@ $white: #ffffff !default;
 $black: #000000 !default;
 
 $text-muted: $gray-500 !default;
-$backdrop-color: if(isDarkMode(), $gray-50, $gray-900); // Custom variable
+$backdrop-color: $gray-900; // Custom variable
 
 // Bootstrap custom colors
 $red: #dc3545 !default;
@@ -21,36 +21,10 @@ $cyan: #0dcaf0 !default;
 // Bootstrap contextual colors
 // Dark colors
 $dark: $gray-900 !default; // Bootstrap variable
-$dark-active: if(
-  isDarkMode(),
-  darken($gray-900, 9%),
-  darken($gray-900, 3%)
-) !default;
-$dark-light: #253629 !default; // Custom variable
-$dark-inverse: if(isDarkMode(), $gray-100, $white) !default; // Custom variable
 $dark-always: #181c32 !default; // Custom variable
 
 // Light colors
-$light: if(isDarkMode(), $gray-300, $gray-100) !default; // Bootstrap variable
-$light-active: if(
-  isDarkMode(),
-  $gray-400,
-  $gray-200
-) !default; // Custom variable
-$light-inverse: if(
-  isDarkMode(),
-  $gray-800,
-  $gray-600
-) !default; // Custom variable
-$lighten: rgba($light, 0.5); // Custom variable
-
-// White colors
-$white-active: $gray-100 !default; // Custom variable
-$white-inverse: if(
-  isDarkMode(),
-  $gray-200,
-  $gray-600
-) !default; // Custom variable
+$light: $gray-100 !default; // Bootstrap variable
 
 // -----------------------------
 
@@ -58,137 +32,11 @@ $white-inverse: if(
 // Primary base
 
 // Primary
-$primary: if(
-  isDarkMode(),
-  $primary-300,
-  $primary-600
-) !default; // Bootstrap variable
-$primary-active: if(isDarkMode(), $primary-200, $primary-700) !default;
-$primary-light: $primary-50 !default;
-$primary-inverse: #fff !default;
+$primary: $primary-600 !default; // Bootstrap variable
 
-// Brand
-$brand-25: if(isDarkMode(), var(--waldur-brand-950), var(--waldur-brand-25));
-$brand-50: if(isDarkMode(), var(--waldur-brand-900), var(--waldur-brand-50));
-$brand-100: if(isDarkMode(), var(--waldur-brand-800), var(--waldur-brand-100));
-$brand-200: if(isDarkMode(), var(--waldur-brand-700), var(--waldur-brand-200));
-$brand-300: if(isDarkMode(), var(--waldur-brand-600), var(--waldur-brand-300));
-$brand-400: if(isDarkMode(), var(--waldur-brand-500), var(--waldur-brand-400));
-$brand-500: if(isDarkMode(), var(--waldur-brand-400), var(--waldur-brand-500));
-$brand-600: if(isDarkMode(), var(--waldur-brand-300), var(--waldur-brand-600));
-$brand-700: if(isDarkMode(), var(--waldur-brand-200), var(--waldur-brand-700));
-$brand-800: if(isDarkMode(), var(--waldur-brand-100), var(--waldur-brand-800));
-$brand-900: if(isDarkMode(), var(--waldur-brand-50), var(--waldur-brand-900));
-$brand-950: if(isDarkMode(), var(--waldur-brand-25), var(--waldur-brand-950));
-$brand: $brand-600;
-$brand-active: $brand-700;
-$brand-light: $brand-50;
-$brand-inverse: #ffffff;
-$brand-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-300-rgb),
-  var(--waldur-brand-600-rgb)
-);
-$brand-50-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-900-rgb),
-  var(--waldur-brand-50-rgb)
-);
-$brand-200-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-700-rgb),
-  var(--waldur-brand-200-rgb)
-);
-$brand-400-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-500-rgb),
-  var(--waldur-brand-400-rgb)
-);
-$brand-600-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-300-rgb),
-  var(--waldur-brand-600-rgb)
-);
-$brand-900-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-50-rgb),
-  var(--waldur-brand-900-rgb)
-);
-
-// Secondary
-$secondary: $primary-50 !default; // Bootstrap variable
-$secondary-active: $primary-200 !default;
-$secondary-inverse: $primary-700 !default;
-
-// Success
-$success: $success-600 !default; // Bootstrap variable
-$success-active: $success-700 !default;
-$success-light: $success-50 !default;
-$success-inverse: #ffffff !default;
-
-// Info
-$info: $info-600 !default; // Bootstrap variable
-$info-active: $info-700 !default;
-$info-light: $info-50 !default;
-$info-inverse: #ffffff !default;
-
-// Danger
-$danger: $danger-600 !default; // Bootstrap variable
-$danger-active: $danger-700 !default;
-$danger-light: $danger-50 !default;
-$danger-inverse: #ffffff !default;
-
-// Warning
-$warning: $warning-600 !default; // Bootstrap variable
-$warning-active: $warning-700 !default;
-$warning-light: $warning-50 !default;
-$warning-inverse: #ffffff !default;
-
-// Custom colors
-// Pink
-$pink: $pink-500 !default;
-$pink-active: if(isDarkMode(), $pink-600, $pink-700) !default;
-$pink-light: if(isDarkMode(), $pink-950, $pink-50) !default;
-$pink-inverse: $white !default;
-
-// Blue
-$blue: $blue-500 !default;
-$blue-active: if(isDarkMode(), $blue-600, $blue-700) !default;
-$blue-light: if(isDarkMode(), $blue-950, $blue-50) !default;
-$blue-inverse: $white !default;
-
-// Teal (Blue light)
-$teal: $teal-500 !default;
-$teal-active: if(isDarkMode(), $teal-600, $teal-700) !default;
-$teal-light: if(isDarkMode(), $teal-950, $teal-50) !default;
-$teal-inverse: $white !default;
-
-// Indigo
-$indigo: $indigo-500 !default;
-$indigo-active: if(isDarkMode(), $indigo-600, $indigo-700) !default;
-$indigo-light: if(isDarkMode(), $indigo-950, $indigo-50) !default;
-$indigo-inverse: $white !default;
-
-// Purple
-$purple: $purple-500 !default;
-$purple-active: if(isDarkMode(), $purple-600, $purple-700) !default;
-$purple-light: if(isDarkMode(), $purple-950, $purple-50) !default;
-$purple-inverse: $white !default;
-
-// Rose
-$rose: $rose-500 !default;
-$rose-active: if(isDarkMode(), $rose-600, $rose-700) !default;
-$rose-light: if(isDarkMode(), $rose-950, $rose-50) !default;
-$rose-inverse: $white !default;
-
-// Orange
-$orange: $orange-500 !default;
-$orange-active: if(isDarkMode(), $orange-600, $orange-700) !default;
-$orange-light: if(isDarkMode(), $orange-950, $orange-50) !default;
-$orange-inverse: $white !default;
-
-// Moss
-$moss: $moss-500 !default;
-$moss-active: if(isDarkMode(), $moss-600, $moss-700) !default;
-$moss-light: if(isDarkMode(), $moss-950, $moss-50) !default;
-$moss-inverse: $white !default;
+// Bootstrap variables
+$secondary: $primary-50 !default;
+$success: $success-600 !default;
+$info: $info-600 !default;
+$danger: $danger-600 !default;
+$warning: $warning-600 !default;

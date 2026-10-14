@@ -98,8 +98,8 @@ export const QuestionGeneralForm = ({
           <QuestionLikertFields />
           <hr className="my-5" />
           <div
-            className="bg-light border rounded p-3 mb-5"
-            style={{ borderColor: 'var(--bs-border-color)' }}
+            className="bg-tertiary dark:bg-quaternary border rounded p-3 mb-5"
+            style={{ borderColor: 'var(--border-secondary)' }}
           >
             <div
               role="button"
@@ -115,7 +115,7 @@ export const QuestionGeneralForm = ({
               }}
               aria-expanded={previewOpen}
             >
-              <span className="fs-6 text-gray-700" style={{ fontWeight: 600 }}>
+              <span className="fs-6 text-secondary font-semibold">
                 {translate('Preview')}
               </span>
               {previewOpen ? (

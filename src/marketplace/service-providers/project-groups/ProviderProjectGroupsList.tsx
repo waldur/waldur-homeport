@@ -219,7 +219,7 @@ const ProjectGroupsTable: FC<{ provider: ServiceProvider }> = ({
         title: translate('GID'),
         render: ({ row }: { row: ServiceProviderProjectGroup }) =>
           row.gid == null ? (
-            <span className="d-inline-flex align-items-center gap-1 text-muted">
+            <span className="d-inline-flex align-items-center gap-1 text-quaternary">
               {translate('Not assigned')}
               <HelpIcon label={NO_GID_EXPLANATION()} size={14} />
             </span>
@@ -234,7 +234,9 @@ const ProjectGroupsTable: FC<{ provider: ServiceProvider }> = ({
         title: translate('Project'),
         render: ({ row }: { row: ServiceProviderProjectGroup }) =>
           row.project_uuid == null ? (
-            <span className="text-muted">{translate('Deleted project')}</span>
+            <span className="text-quaternary">
+              {translate('Deleted project')}
+            </span>
           ) : canOpenProject(user, row) ? (
             <Link
               state="project.dashboard"

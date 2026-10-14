@@ -21,14 +21,21 @@ import { PolicyWatchData } from '../types';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-const Metric: FC<{ value: ReactNode; caption: ReactNode; tone?: string }> = ({
-  value,
-  caption,
-  tone,
-}) => (
+const TONE_CLASSES = {
+  danger: 'text-danger',
+  warning: 'text-warning',
+};
+
+const Metric: FC<{
+  value: ReactNode;
+  caption: ReactNode;
+  tone?: keyof typeof TONE_CLASSES;
+}> = ({ value, caption, tone }) => (
   <>
-    <span className={tone ? `text-${tone}` : undefined}>{value}</span>
-    <span className="d-block fs-6 fw-normal text-muted mt-1">{caption}</span>
+    <span className={tone ? TONE_CLASSES[tone] : undefined}>{value}</span>
+    <span className="d-block fs-6 font-normal text-quaternary mt-1">
+      {caption}
+    </span>
   </>
 );
 
@@ -36,7 +43,7 @@ const Metric: FC<{ value: ReactNode; caption: ReactNode; tone?: string }> = ({
  *  obvious from its label. */
 const MetricTip: FC<{ id?: string; label: string }> = ({ label }) => (
   <Tooltip label={label}>
-    <InfoIcon weight="bold" className="text-muted" />
+    <InfoIcon weight="bold" className="text-quaternary" />
   </Tooltip>
 );
 

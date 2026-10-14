@@ -20,15 +20,19 @@ const ICONS = {
 };
 
 const FindingRow: FC<{ finding: EmailFinding }> = ({ finding }) => (
-  <li className="d-flex gap-3 py-3 border-bottom">
+  <li className="d-flex gap-3 py-3 border-b-[1px] border-b-secondary">
     <div className="flex-shrink-0 pt-1">
       {ICONS[finding.level] ?? ICONS.WARNING}
     </div>
     <div>
-      <div className="fw-semibold">{finding.title}</div>
-      {finding.detail && <div className="text-muted">{finding.detail}</div>}
+      <div className="font-semibold">{finding.title}</div>
+      {finding.detail && (
+        <div className="text-quaternary">{finding.detail}</div>
+      )}
       {finding.remediation && (
-        <div className="text-muted fst-italic mt-1">{finding.remediation}</div>
+        <div className="text-quaternary fst-italic mt-1">
+          {finding.remediation}
+        </div>
       )}
     </div>
   </li>

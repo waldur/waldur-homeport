@@ -111,7 +111,7 @@ export const SetPartitionQoSDialog: FC<SetPartitionQoSDialogProps> = ({
               iconNode={<ListChecksIcon weight="bold" />}
               iconColor="success"
             >
-              <p className="text-muted">
+              <p className="text-quaternary">
                 {translate(
                   'Select which QoS profiles jobs may request in this partition. An empty list permits all of the offering QoS.',
                 )}

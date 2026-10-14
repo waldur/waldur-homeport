@@ -65,7 +65,7 @@ interface QuotaUsageRow {
 
 const renderUsageCell = (percentage: number | null) => {
   if (percentage === null) {
-    return <span className="text-muted">{DASH_ESCAPE_CODE}</span>;
+    return <span className="text-quaternary">{DASH_ESCAPE_CODE}</span>;
   }
   return (
     <div className="d-flex align-items-center gap-2">
@@ -84,7 +84,7 @@ const renderUsageCell = (percentage: number | null) => {
 
 const renderRemainingCell = (remaining: number | null) => {
   if (remaining === null) {
-    return <span className="text-muted">Unlimited</span>;
+    return <span className="text-quaternary">Unlimited</span>;
   }
   return <>{remaining.toLocaleString()}</>;
 };
@@ -144,7 +144,9 @@ const QuotaUsageDisplay: FC<{ quota: TokenQuotaUsageResponse }> = ({
     () => [
       {
         title: translate('Period'),
-        render: ({ row }) => <span className="fw-semibold">{row.period}</span>,
+        render: ({ row }) => (
+          <span className="font-semibold">{row.period}</span>
+        ),
         id: 'period',
       },
       {
@@ -292,7 +294,7 @@ export const AITokenExpandableRow: FC<AITokenUsageFormProps> = ({
         {`${translate('AI assistant token usage for')} ${row.full_name || row.username}`}
       </h4>
       {quota && <QuotaUsageDisplay quota={quota} />}
-      <small className="text-muted">
+      <small className="text-quaternary">
         {translate(
           'Leave empty for system default. Use -1 for unlimited. Non-negative number for specific limit.',
         )}

@@ -77,10 +77,10 @@ export const Playground: Story = {};
  */
 export const VariantToneMatrix: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--surface-page-bg)] space-y-6">
+    <div className="p-6 bg-[var(--page-bg)] space-y-6">
       {TONES.map((tone) => (
         <div key={tone}>
-          <h4 className="text-xs uppercase font-mono text-[var(--surface-text-muted)] mb-3">
+          <h4 className="text-xs uppercase font-mono text-quinary mb-3">
             Tone: {tone}
           </h4>
           <div className="flex flex-wrap gap-2">
@@ -128,7 +128,9 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex flex-col gap-4 p-6">
       <div className="flex items-center gap-3">
-        <span className="text-xs font-mono text-gray-500 w-24">Standard:</span>
+        <span className="text-xs font-mono text-quaternary w-24">
+          Standard:
+        </span>
         <Badge variant="success" size="sm" tone="outline">
           Small (sm)
         </Badge>
@@ -140,7 +142,7 @@ export const Sizes: Story = {
         </Badge>
       </div>
       <div className="flex items-center gap-3">
-        <span className="text-xs font-mono text-gray-500 w-24">Pill:</span>
+        <span className="text-xs font-mono text-quaternary w-24">Pill:</span>
         <Badge variant="primary" size="sm" shape="pill" tone="light">
           Small (sm)
         </Badge>
@@ -371,7 +373,7 @@ export const CountersAndOverflow: Story = {
   render: () => (
     <div className="flex flex-col gap-5 p-6">
       <div>
-        <h5 className="text-xs uppercase font-mono text-gray-500 mb-2">
+        <h5 className="text-xs uppercase font-mono text-quaternary mb-2">
           Numeric Counter Badges
         </h5>
         <div className="flex items-center gap-3">
@@ -391,11 +393,11 @@ export const CountersAndOverflow: Story = {
       </div>
 
       <div>
-        <h5 className="text-xs uppercase font-mono text-gray-500 mb-2">
+        <h5 className="text-xs uppercase font-mono text-quaternary mb-2">
           Constrained Container & Text Truncation
         </h5>
         <div className="w-48 p-3 border rounded bg-white dark:bg-neutral-900 flex flex-col gap-2">
-          <span className="text-xs text-gray-400">Container width: 192px</span>
+          <span className="text-xs text-quinary">Container width: 192px</span>
           <Badge
             variant="secondary"
             tone="outline"
@@ -463,7 +465,7 @@ export const Circle: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-6 p-6">
       <div className="flex flex-col items-center gap-2">
-        <span className="text-xs text-gray-500">Default (md)</span>
+        <span className="text-xs text-quaternary">Default (md)</span>
         <div className="flex items-center gap-2">
           <Badge variant="primary" shape="circle">
             1
@@ -480,7 +482,7 @@ export const Circle: Story = {
         </div>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <span className="text-xs text-gray-500">Small (sm)</span>
+        <span className="text-xs text-quaternary">Small (sm)</span>
         <div className="flex items-center gap-2">
           <Badge variant="primary" size="sm" shape="circle">
             1
@@ -497,7 +499,7 @@ export const Circle: Story = {
         </div>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <span className="text-xs text-gray-500">Large (lg)</span>
+        <span className="text-xs text-quaternary">Large (lg)</span>
         <div className="flex items-center gap-2">
           <Badge variant="primary" size="lg" shape="circle">
             1

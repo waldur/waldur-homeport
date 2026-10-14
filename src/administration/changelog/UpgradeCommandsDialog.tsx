@@ -20,16 +20,14 @@ const CommandBlock: FunctionComponent<{ title: string; command: string }> = ({
 }) => (
   <div className="mt-[16px]">
     <div className="mb-[6px] flex items-center justify-between gap-[8px]">
-      <span className="font-medium text-[var(--surface-text-primary)]">
-        {title}
-      </span>
+      <span className="font-medium text-primary">{title}</span>
       <CopyButton
         value={command}
         label={translate('Copy')}
         copiedLabel={translate('Copied')}
       />
     </div>
-    <pre className="m-0 overflow-x-auto whitespace-pre rounded-md border-[1px] border-[var(--surface-card-border)] bg-[var(--surface-page-bg)] p-[12px] font-mono text-[var(--surface-text-primary)]">
+    <pre className="m-0 overflow-x-auto whitespace-pre rounded-md border-[1px] border-secondary bg-[var(--page-bg)] p-[12px] font-mono text-primary">
       {command}
     </pre>
   </div>
@@ -43,7 +41,7 @@ export const UpgradeCommandsDialog: FunctionComponent<
     closeButton
     footer={<CloseDialogButton label={translate('Close')} />}
   >
-    <p className="text-[var(--surface-text-secondary)]">
+    <p className="text-quaternary">
       {translate(
         'Review the command for your deployment method and run it where Waldur is deployed. Back up the database first.',
       )}

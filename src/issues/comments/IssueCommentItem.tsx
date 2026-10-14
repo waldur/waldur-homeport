@@ -41,6 +41,14 @@ const hashStr = (str: string) => {
   return hash;
 };
 
+const AVATAR_COLOR_CLASSES: Record<string, string> = {
+  primary: 'bg-brand-subtle text-brand',
+  success: 'bg-success-subtle text-success',
+  info: 'bg-info-subtle text-info',
+  warning: 'bg-warning-subtle text-warning',
+  danger: 'bg-danger-subtle text-danger',
+};
+
 const CommentAvatar = ({ comment }) => {
   const color = nameToColor(comment.author_name);
 
@@ -51,7 +59,7 @@ const CommentAvatar = ({ comment }) => {
         name={comment.author_name}
         size={32}
         circle
-        labelClassName={`fs-5 fw-bold bg-light-${color} text-${color}`}
+        labelClassName={`fs-5 font-medium ${AVATAR_COLOR_CLASSES[color] || AVATAR_COLOR_CLASSES.primary}`}
       />
     </div>
   );
@@ -76,11 +84,11 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
       <div className="timeline-content">
         <div className="d-flex justify-content-between gap-5 gap-md-20">
           <div>
-            <div className="fs-7 text-muted">
+            <div className="fs-7 text-quaternary">
               <button
                 onClick={openUserDialog}
                 type="button"
-                className="text-btn text-gray-700 fw-bold text-hover-primary fs-6 me-3"
+                className="text-btn text-secondary font-medium hover:text-brand fs-6 me-3"
               >
                 {comment.author_name}
               </button>
@@ -94,7 +102,7 @@ export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
                 </span>
               )}
             </div>
-            <div className="fs-6 text-muted">
+            <div className="fs-6 text-quaternary">
               {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE ===
               'atlassian' ? (
                 <FormattedJira text={comment.description} />

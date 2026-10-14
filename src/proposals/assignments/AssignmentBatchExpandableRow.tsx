@@ -64,7 +64,7 @@ export const AssignmentBatchExpandableRow: FC<
   if (!batch) {
     return (
       <ExpandableContainer>
-        <p className="text-muted">{translate('No data available.')}</p>
+        <p className="text-quaternary">{translate('No data available.')}</p>
       </ExpandableContainer>
     );
   }
@@ -82,8 +82,8 @@ export const AssignmentBatchExpandableRow: FC<
             title: translate('Proposal'),
             render: ({ row: item }) => (
               <div>
-                <div className="fw-bold">{item.proposal_name}</div>
-                <small className="text-muted">{item.proposal_slug}</small>
+                <div className="font-medium">{item.proposal_name}</div>
+                <small className="text-quaternary">{item.proposal_slug}</small>
               </div>
             ),
           },
@@ -123,13 +123,13 @@ export const AssignmentBatchExpandableRow: FC<
                   {translate('COI detected')} ({item.coi_count})
                 </Badge>
               ) : (
-                <span className="text-muted">-</span>
+                <span className="text-quaternary">-</span>
               ),
           },
           {
             title: translate('Decline reason'),
             render: ({ row: item }) => (
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {renderFieldOrDash(item.decline_reason)}
               </span>
             ),

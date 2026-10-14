@@ -2,14 +2,25 @@
 // SVG Icon
 //
 
+// The colour modifiers in use, read from the design tokens so one stylesheet
+// serves both themes. The gray steps are the theme-inverted SCSS grays, which
+// are exactly the neutral text scale.
+$svg-icon-colors: (
+  'primary': var(--brand-color),
+  'success': var(--status-success-fg),
+  'dark': var(--text-primary),
+  'gray-300': var(--text-senary),
+  'gray-600': var(--text-tertiary),
+  'gray-700': var(--text-secondary),
+);
+
 .svg-icon {
   line-height: 1;
 
   @include svg-icon-size(get($font-sizes, 5));
-  @include svg-icon-color($text-muted);
+  @include svg-icon-color(var(--text-quaternary));
 
-  // Theme colors
-  @each $name, $color in $theme-text-colors {
+  @each $name, $color in $svg-icon-colors {
     &.svg-icon-#{$name} {
       @include svg-icon-color($color, true);
     }

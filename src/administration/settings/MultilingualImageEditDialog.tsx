@@ -120,7 +120,7 @@ export const MultilingualImageEditDialog: FC<
         </>
       }
     >
-      <p className="text-muted mb-4">{item.description}</p>
+      <p className="text-quaternary mb-4">{item.description}</p>
       <Tabs
         mount="all"
         value={activeTab}

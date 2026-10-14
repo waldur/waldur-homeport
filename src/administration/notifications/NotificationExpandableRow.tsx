@@ -39,7 +39,7 @@ export const NotificationExpandableRow: FunctionComponent<{
             content: (
               <Card className="card-bordered card-solid">
                 <Card.Header className="min-h-auto">
-                  <h6 className="mb-0 fw-bold">
+                  <h6 className="mb-0 font-medium">
                     {translate('Notification template')}
                   </h6>
                   <CopyToClipboard
@@ -47,11 +47,11 @@ export const NotificationExpandableRow: FunctionComponent<{
                     value={template.content}
                     textButton
                     rightIcon
-                    className="my-2 text-hover-primary"
+                    className="my-2 hover:text-brand"
                   />
                 </Card.Header>
                 <Card.Body className="p-8">
-                  <pre className="text-gray-700 fs-6 mb-0">
+                  <pre className="text-secondary fs-6 mb-0">
                     {template.content}
                   </pre>
                 </Card.Body>

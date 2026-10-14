@@ -59,7 +59,7 @@ export const UserProfile = ({
     >
       <Stack
         direction="horizontal"
-        className="flex-wrap text-gray-500 lh-1"
+        className="flex-wrap text-quaternary lh-1"
         gap={5}
       >
         {user.job_title && (

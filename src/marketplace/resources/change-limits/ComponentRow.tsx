@@ -70,7 +70,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         <td>
           {renderFieldOrDash(component.newLimit)} {component.measured_unit}
           {derived ? (
-            <div className="form-text text-muted">
+            <div className="form-text text-quaternary">
               {translate('Calculated from the order options')}
             </div>
           ) : null}

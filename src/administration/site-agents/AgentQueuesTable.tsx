@@ -49,7 +49,7 @@ export const AgentQueuesTable: FC<AgentQueuesTableProps> = ({
       {
         title: translate('Messages'),
         render: ({ row }: { row: AgentQueueInfo }) => (
-          <span className="fw-bold">{row.messages.toLocaleString()}</span>
+          <span className="font-medium">{row.messages.toLocaleString()}</span>
         ),
       },
       {

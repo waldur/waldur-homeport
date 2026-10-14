@@ -38,7 +38,7 @@ export const AgentProcessorsList: FC<TableWithPortal> = ({ portal }) => {
   const columns: Column<AgentProcessor>[] = [
     {
       title: translate('Name'),
-      render: ({ row }) => <span className="fw-bold">{row.name}</span>,
+      render: ({ row }) => <span className="font-medium">{row.name}</span>,
       keys: ['name'],
       id: 'name',
     },
@@ -51,7 +51,7 @@ export const AgentProcessorsList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('Backend type'),
       render: ({ row }) => (
-        <code className="text-primary">{row.backend_type}</code>
+        <code className="text-brand">{row.backend_type}</code>
       ),
       keys: ['backend_type'],
       id: 'backend_type',

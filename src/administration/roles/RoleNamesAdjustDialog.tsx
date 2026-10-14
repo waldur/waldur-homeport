@@ -180,7 +180,7 @@ const ScopeStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <p className="text-muted">
+      <p className="text-quaternary">
         {translate(
           'Choose which roles to rename, then select a preset to fill in their names. You can adjust individual names in the next step.',
         )}
@@ -209,7 +209,7 @@ const ScopeStep: FC<WizardStepProps> = (props) => {
         // Said rather than hidden, like other empty choices: the scope keeps
         // its current names, which the next step lets you edit.
         <FormGroup label={translate('Preset')}>
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate(
               'No presets are available for this scope. You can edit the names yourself in the next step.',
             )}
@@ -252,7 +252,7 @@ const RoleNameField = ({
       validate={notBlank}
       quickAction={
         preset ? (
-          <span className="small text-muted d-flex align-items-center gap-2">
+          <span className="small text-quaternary d-flex align-items-center gap-2">
             {translate('Preset: {name}', { name: preset })}
             {value !== preset && (
               <BaseButton
@@ -292,7 +292,7 @@ const NamesStep: FC<WizardStepProps> = (props) => {
 
   return (
     <WizardModal {...props}>
-      <p className="text-muted">
+      <p className="text-quaternary">
         {translate(
           'Only the default-language name is changed; edit other languages with "Edit name translations".',
         )}

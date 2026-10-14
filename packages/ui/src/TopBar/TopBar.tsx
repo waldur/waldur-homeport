@@ -30,7 +30,7 @@ export const TopBar = ({ left, center, right, className }: TopBarProps) => (
   <header
     className={cn(
       'flex h-16 shrink-0 items-center gap-4 border-b px-4',
-      'border-[var(--surface-sidebar-border)] bg-[var(--surface-page-bg)]',
+      'border-[var(--sidebar-border)] bg-[var(--page-bg)]',
       className,
     )}
   >
@@ -76,22 +76,22 @@ export const OrgSwitcher = ({
           // flex items default to min-width:auto, which ignores flex-shrink
           // and any child's own truncate class otherwise.
           'flex min-w-0 items-center gap-2 rounded-lg px-2 py-1.5 text-sm font-medium',
-          // --surface-hover-bg, not --nav-item-hover-bg: OrgSwitcher sits in
+          // --bg-primary-hover, not --nav-item-hover-bg: OrgSwitcher sits in
           // the TopBar, not the sidebar, so it shouldn't inherit the
           // sidebar's own SIDEBAR_STYLE-driven hover color.
-          'text-[var(--surface-text-primary)] hover:bg-[var(--surface-hover-bg)]',
+          'text-primary hover:bg-primary-hover',
           className,
         )}
       >
         {badge && (
-          <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--badge-brand-bg)] text-xs font-semibold text-[var(--badge-brand-text)]">
+          <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-brand-600 text-xs font-semibold text-white">
             {badge}
           </span>
         )}
         <span className="truncate">{name}</span>
         <CaretDownIcon
           size={14}
-          className="shrink-0 text-[var(--surface-text-muted)]"
+          className="shrink-0 text-quinary"
           weight="bold"
         />
       </button>
@@ -121,15 +121,15 @@ export const SearchField = ({
 }: SearchFieldProps) => (
   <div
     className={cn(
-      'flex w-full max-w-md items-center gap-2 rounded-lg border px-3 py-2 text-sm',
-      'border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] text-[var(--surface-text-muted)]',
+      'flex w-full max-w-md items-center gap-2 rounded-lg border-[1px] px-3 py-2 text-sm',
+      'border-secondary bg-[var(--card-bg)] text-quinary',
       className,
     )}
   >
     <MagnifyingGlassIcon size={16} weight="bold" />
     <span className="flex-1 text-left">{placeholder}</span>
     {shortcutHint && (
-      <kbd className="rounded border border-[var(--surface-card-border)] px-1.5 py-0.5 text-xs">
+      <kbd className="rounded border-[1px] border-secondary px-1.5 py-0.5 text-xs">
         {shortcutHint}
       </kbd>
     )}
@@ -170,14 +170,14 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       >
         {icon}
         {hasIndicator && (
-          // --pill-success-dot, not danger: Metronic's real equivalent
+          // --status-success-fg, not danger: Metronic's real equivalent
           // (HeaderButtonBullet, src/navigation/header/HeaderButtonBullet.tsx)
           // defaults to `variant = 'success'` (green) for "there's something
           // new here" — every one of its real callers (ConfirmationDrawerToggle,
           // QuickIssueDrawerToggle) uses that default. Danger/red is reserved
           // for an actual error state, which this generic "has notifications"
           // dot isn't.
-          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[var(--pill-success-dot)]" />
+          <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-[var(--status-success-fg)]" />
         )}
       </button>
     </Tooltip>

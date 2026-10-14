@@ -35,13 +35,13 @@ const ReportDropdownItem: FC<{
   isCurrent: boolean;
   close: () => void;
 }> = ({ report, isCurrent, close }) => (
-  <div className={classNames(isCurrent && 'bg-light-primary')}>
+  <div className={classNames(isCurrent && 'bg-brand-subtle')}>
     <Link
       state={report.state}
-      className="d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-light"
+      className="d-flex text-primary hover:text-brand align-items-center py-2 px-5 hover:bg-primary-hover"
       onClick={close}
     >
-      <span className="fs-6 fw-semibold">{report.title}</span>
+      <span className="fs-6 font-semibold">{report.title}</span>
     </Link>
   </div>
 );

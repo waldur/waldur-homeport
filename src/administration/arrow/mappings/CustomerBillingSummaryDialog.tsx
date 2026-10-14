@@ -62,19 +62,19 @@ export const CustomerBillingSummaryDialog: FC<
                   <Table borderless size="sm" className="mb-0">
                     <tbody>
                       <tr>
-                        <td className="text-muted">
+                        <td className="text-quaternary">
                           {translate('Arrow Reference')}
                         </td>
                         <td>{data.arrow_reference}</td>
                       </tr>
                       <tr>
-                        <td className="text-muted">
+                        <td className="text-quaternary">
                           {translate('Arrow Company')}
                         </td>
                         <td>{data.arrow_company_name}</td>
                       </tr>
                       <tr>
-                        <td className="text-muted">
+                        <td className="text-quaternary">
                           {translate('Waldur Organization')}
                         </td>
                         <td>{data.waldur_customer_name}</td>
@@ -86,25 +86,27 @@ export const CustomerBillingSummaryDialog: FC<
                   <Table borderless size="sm" className="mb-0">
                     <tbody>
                       <tr>
-                        <td className="text-muted">{translate('Period')}</td>
+                        <td className="text-quaternary">
+                          {translate('Period')}
+                        </td>
                         <td>
                           <strong>{data.period}</strong>
                         </td>
                       </tr>
                       <tr>
-                        <td className="text-muted">
+                        <td className="text-quaternary">
                           {translate('Total resources')}
                         </td>
                         <td>{data.total_customer_resources}</td>
                       </tr>
                       <tr>
-                        <td className="text-muted">
+                        <td className="text-quaternary">
                           {translate('With license ref (backend_id)')}
                         </td>
                         <td>{data.resources_with_backend_id}</td>
                       </tr>
                       <tr>
-                        <td className="text-muted">
+                        <td className="text-quaternary">
                           {translate('Consumption fetched')}
                         </td>
                         <td>
@@ -112,7 +114,7 @@ export const CustomerBillingSummaryDialog: FC<
                             className={
                               data.matched_resources > 0
                                 ? 'text-success'
-                                : 'text-muted'
+                                : 'text-quaternary'
                             }
                           >
                             {data.matched_resources}
@@ -164,20 +166,22 @@ export const CustomerBillingSummaryDialog: FC<
               </Card.Title>
               {data.billing_available && data.billing_lines.length > 0 && (
                 <div className="text-end">
-                  <div className="small text-muted">{translate('Total')}</div>
+                  <div className="small text-quaternary">
+                    {translate('Total')}
+                  </div>
                   <strong>{defaultCurrency(data.billing_total_sell)}</strong>
                 </div>
               )}
             </Card.Header>
             <Card.Body className="p-0">
               {!data.billing_available ? (
-                <div className="text-center text-muted py-6">
+                <div className="text-center text-quaternary py-6">
                   {translate(
                     'Billing export not available yet for this period. Final billing data is typically available after the month ends.',
                   )}
                 </div>
               ) : data.billing_lines.length === 0 ? (
-                <div className="text-center text-muted py-6">
+                <div className="text-center text-quaternary py-6">
                   {translate(
                     'No billing lines found for this customer in the current period',
                   )}
@@ -210,7 +214,7 @@ export const CustomerBillingSummaryDialog: FC<
                           <td className="text-end">
                             {line.quantity ? String(line.quantity) : '1'}
                           </td>
-                          <td className="text-end fw-semibold">
+                          <td className="text-end font-semibold">
                             {line.sell_price
                               ? defaultCurrency(line.sell_price)
                               : DASH_ESCAPE_CODE}
@@ -218,12 +222,12 @@ export const CustomerBillingSummaryDialog: FC<
                         </tr>
                       ))}
                     </tbody>
-                    <tfoot className="border-top">
+                    <tfoot className="border-t-[1px] border-t-secondary">
                       <tr>
-                        <td colSpan={4} className="text-end fw-bold">
+                        <td colSpan={4} className="text-end font-medium">
                           {translate('Total')}
                         </td>
-                        <td className="text-end fw-bold">
+                        <td className="text-end font-medium">
                           {defaultCurrency(data.billing_total_sell)}
                         </td>
                       </tr>
@@ -245,7 +249,9 @@ export const CustomerBillingSummaryDialog: FC<
               {data.consumption_lines.length > 0 &&
                 data.consumption_total_sell && (
                   <div className="text-end">
-                    <div className="small text-muted">{translate('Total')}</div>
+                    <div className="small text-quaternary">
+                      {translate('Total')}
+                    </div>
                     <strong>
                       {defaultCurrency(data.consumption_total_sell)}
                     </strong>
@@ -254,7 +260,7 @@ export const CustomerBillingSummaryDialog: FC<
             </Card.Header>
             <Card.Body className="p-0">
               {data.consumption_lines.length === 0 ? (
-                <div className="text-center text-muted py-6">
+                <div className="text-center text-quaternary py-6">
                   {data.total_customer_resources === 0
                     ? translate(
                         'No resources found for this customer in Waldur',
@@ -286,7 +292,7 @@ export const CustomerBillingSummaryDialog: FC<
                               {line.license_reference}
                             </span>
                           </td>
-                          <td className="text-end fw-semibold">
+                          <td className="text-end font-semibold">
                             {line.sell_price ? (
                               defaultCurrency(line.sell_price)
                             ) : line.error ? (
@@ -301,12 +307,12 @@ export const CustomerBillingSummaryDialog: FC<
                       ))}
                     </tbody>
                     {data.consumption_total_sell && (
-                      <tfoot className="border-top">
+                      <tfoot className="border-t-[1px] border-t-secondary">
                         <tr>
-                          <td colSpan={2} className="text-end fw-bold">
+                          <td colSpan={2} className="text-end font-medium">
                             {translate('Total')}
                           </td>
-                          <td className="text-end fw-bold">
+                          <td className="text-end font-medium">
                             {defaultCurrency(data.consumption_total_sell)}
                           </td>
                         </tr>
@@ -322,7 +328,7 @@ export const CustomerBillingSummaryDialog: FC<
           {data.billing_lines.length === 0 &&
             data.consumption_lines.length === 0 &&
             !data.error && (
-              <div className="text-center text-muted py-6">
+              <div className="text-center text-quaternary py-6">
                 {translate(
                   'No billing or consumption data found for this customer in the current period.',
                 )}

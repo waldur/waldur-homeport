@@ -45,10 +45,10 @@ const RestrictionsSection: FC<RestrictionsSectionProps> = ({
 
   return (
     <div className="mb-4">
-      <h6 className="fw-bold mb-3">{title}</h6>
+      <h6 className="font-medium mb-3">{title}</h6>
       {emailPatterns.length > 0 && (
         <div className="mb-2">
-          <span className="text-muted me-2">
+          <span className="text-quaternary me-2">
             {translate('Email patterns')}:
           </span>
           <RestrictionsValue values={emailPatterns} />
@@ -56,13 +56,15 @@ const RestrictionsSection: FC<RestrictionsSectionProps> = ({
       )}
       {affiliations.length > 0 && (
         <div className="mb-2">
-          <span className="text-muted me-2">{translate('Affiliations')}:</span>
+          <span className="text-quaternary me-2">
+            {translate('Affiliations')}:
+          </span>
           <RestrictionsValue values={affiliations} />
         </div>
       )}
       {identitySources.length > 0 && (
         <div className="mb-2">
-          <span className="text-muted me-2">
+          <span className="text-quaternary me-2">
             {translate('Identity sources')}:
           </span>
           <RestrictionsValue values={identitySources} />
@@ -70,13 +72,15 @@ const RestrictionsSection: FC<RestrictionsSectionProps> = ({
       )}
       {nationalities.length > 0 && (
         <div className="mb-2">
-          <span className="text-muted me-2">{translate('Nationalities')}:</span>
+          <span className="text-quaternary me-2">
+            {translate('Nationalities')}:
+          </span>
           <RestrictionsValue values={nationalities} />
         </div>
       )}
       {organizationTypes.length > 0 && (
         <div className="mb-2">
-          <span className="text-muted me-2">
+          <span className="text-quaternary me-2">
             {translate('Organization types')}:
           </span>
           <RestrictionsValue values={organizationTypes} />
@@ -84,7 +88,7 @@ const RestrictionsSection: FC<RestrictionsSectionProps> = ({
       )}
       {assuranceLevels.length > 0 && (
         <div className="mb-2">
-          <span className="text-muted me-2">
+          <span className="text-quaternary me-2">
             {translate('Assurance levels')}:
           </span>
           <RestrictionsValue values={assuranceLevels} />
@@ -165,11 +169,11 @@ export const RestrictionsInfoCard: FC<RestrictionsInfoCardProps> = ({
           {translate('Membership restrictions apply')}
         </span>
       }
-      className={classNames('bg-light-warning', className || 'mb-5')}
+      className={classNames('bg-warning-subtle', className || 'mb-5')}
       titleClassName="fs-6"
       size="sm"
     >
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Only users matching the following criteria can accept this invitation. Users must satisfy at least one criterion from each configured restriction type.',
         )}

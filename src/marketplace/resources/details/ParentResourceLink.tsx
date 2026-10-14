@@ -45,7 +45,7 @@ export const ParentResourceLink = ({ resource }: { resource: Resource }) => {
   const { state, params } = useCurrentStateAndParams();
   const inProviderWorkspace = isDescendantOf('marketplace-provider', state);
   return resource.parent_uuid && resource.parent_name ? (
-    <p className="text-muted fs-7 mb-0">
+    <p className="text-quaternary fs-7 mb-0">
       {inProviderWorkspace ? (
         <ParentLink
           parent_name={resource.parent_name}

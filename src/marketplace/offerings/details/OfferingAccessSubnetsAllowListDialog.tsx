@@ -61,7 +61,7 @@ export const OfferingAccessSubnetsAllowListDialog = ({
         )
       }
     >
-      <p className="text-muted">
+      <p className="text-quaternary">
         {translate(
           'Minimal set of CIDRs covering all access subnets of this offering (per-resource subnets merged with the provider defaults), ready to feed an external firewall allow-list.',
         )}

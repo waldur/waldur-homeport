@@ -98,7 +98,7 @@ export const SlurmPolicyEvaluateDialog: FC<SlurmPolicyEvaluateDialogProps> = ({
         </div>
       }
     >
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Dry run shows what actions would be triggered without applying changes. Evaluate runs the full evaluation synchronously — it applies actions and creates evaluation logs.',
         )}
@@ -137,13 +137,15 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
   <div>
     <h6>
       {translate('Dry run results')}
-      <span className="text-muted ms-2 fw-normal">
+      <span className="text-quaternary ms-2 font-normal">
         {translate('Period')}: {data.billing_period} |{' '}
         {translate('Grace limit')}: {data.grace_limit_percentage.toFixed(0)}%
       </span>
     </h6>
     {data.resources.length === 0 ? (
-      <p className="text-muted">{translate('No active resources found.')}</p>
+      <p className="text-quaternary">
+        {translate('No active resources found.')}
+      </p>
     ) : (
       <Table striped bordered size="sm" responsive>
         <thead>
@@ -158,7 +160,7 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
           {data.resources.map((r) => (
             <tr key={r.resource_uuid}>
               <td>
-                <span className="fw-semibold">{r.resource_name}</span>
+                <span className="font-semibold">{r.resource_name}</span>
                 <br />
                 <code className="small">{r.resource_uuid}</code>
               </td>
@@ -194,7 +196,7 @@ const DryRunResults: FC<{ data: SlurmPolicyDryRunResponse }> = ({ data }) => (
               </td>
               <td>
                 {r.would_trigger.length === 0 ? (
-                  <span className="text-muted">{translate('None')}</span>
+                  <span className="text-quaternary">{translate('None')}</span>
                 ) : (
                   r.would_trigger.map((action) => (
                     <Badge
@@ -222,12 +224,14 @@ const EvaluateResults: FC<{ data: SlurmPolicyEvaluateResponse }> = ({
   <div>
     <h6>
       {translate('Evaluation results')}
-      <span className="text-muted ms-2 fw-normal">
+      <span className="text-quaternary ms-2 font-normal">
         {translate('Period')}: {data.billing_period}
       </span>
     </h6>
     {data.resources.length === 0 ? (
-      <p className="text-muted">{translate('No active resources found.')}</p>
+      <p className="text-quaternary">
+        {translate('No active resources found.')}
+      </p>
     ) : (
       <Table striped bordered size="sm" responsive>
         <thead>
@@ -242,7 +246,7 @@ const EvaluateResults: FC<{ data: SlurmPolicyEvaluateResponse }> = ({
           {data.resources.map((r) => (
             <tr key={r.resource_uuid}>
               <td>
-                <span className="fw-semibold">{r.resource_name}</span>
+                <span className="font-semibold">{r.resource_name}</span>
                 <br />
                 <code className="small">{r.resource_uuid}</code>
               </td>
@@ -251,7 +255,7 @@ const EvaluateResults: FC<{ data: SlurmPolicyEvaluateResponse }> = ({
               </td>
               <td>
                 {(r.actions_taken as string[]).length === 0 ? (
-                  <span className="text-muted">{translate('None')}</span>
+                  <span className="text-quaternary">{translate('None')}</span>
                 ) : (
                   (r.actions_taken as string[]).map((action) => (
                     <Badge
@@ -305,7 +309,7 @@ const StateTransition: FC<{
     changes.push(translate('Un-downscaled'));
 
   if (changes.length === 0) {
-    return <span className="text-muted">{translate('No change')}</span>;
+    return <span className="text-quaternary">{translate('No change')}</span>;
   }
 
   return <span>{changes.join(', ')}</span>;

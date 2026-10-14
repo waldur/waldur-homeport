@@ -42,10 +42,9 @@ const getBadgeColorClass = (summary?: ChangelogSummary) => {
     summary?.security_alert?.max_urgency === 'critical' ||
     summary?.has_breaking_changes
   )
-    return 'text-[var(--color-error-600)]';
-  if (summary?.security_alert?.max_urgency === 'high')
-    return 'text-[var(--color-warning-600)]';
-  return 'text-[var(--color-success-600)]';
+    return 'text-danger';
+  if (summary?.security_alert?.max_urgency === 'high') return 'text-warning';
+  return 'text-success';
 };
 
 export const AppFooter: FunctionComponent = () => {
@@ -132,7 +131,7 @@ export const AppFooter: FunctionComponent = () => {
     <div className="footer d-flex flex-column">
       <div className="py-4 d-flex flex-lg-column">
         <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between fs-6">
-          <div className="text-dark fw-bold order-2 order-md-1 icon-align">
+          <div className="text-primary font-medium order-2 order-md-1 icon-align">
             {user && (
               <>
                 {translate('Version')}: {ENV.buildId}

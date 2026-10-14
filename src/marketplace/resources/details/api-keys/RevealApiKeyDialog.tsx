@@ -95,11 +95,11 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
             {translate('Unable to reveal the API key.')}
           </div>
         ) : (
-          <div className="d-flex align-items-center gap-2 text-muted">
+          <div className="d-flex align-items-center gap-2 text-quaternary">
             <LoadingSpinnerSimple /> {translate('Revealing…')}
           </div>
         )}
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate(
             'Keep this key secret. You can reveal it again anytime, or rotate it if it is ever exposed.',
           )}

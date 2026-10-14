@@ -53,20 +53,24 @@ export const VendorOfferingMappingsList: FunctionComponent<
         {
           title: translate('Arrow Vendor'),
           render: ({ row }) => (
-            <span className="fw-bold text-dark">{row.arrow_vendor_name}</span>
+            <span className="font-medium text-primary">
+              {row.arrow_vendor_name}
+            </span>
           ),
         },
         {
           title: translate('Waldur Offering'),
           render: ({ row }) => (
             <div>
-              <span className="text-dark">
+              <span className="text-primary">
                 {row.offering_name || DASH_ESCAPE_CODE}
               </span>
               {row.offering_type && (
                 <>
                   <br />
-                  <span className="text-muted small">{row.offering_type}</span>
+                  <span className="text-quaternary small">
+                    {row.offering_type}
+                  </span>
                 </>
               )}
             </div>
@@ -75,7 +79,7 @@ export const VendorOfferingMappingsList: FunctionComponent<
         {
           title: translate('Plan'),
           render: ({ row }) => (
-            <span className="text-dark">
+            <span className="text-primary">
               {row.plan_name || DASH_ESCAPE_CODE}
             </span>
           ),

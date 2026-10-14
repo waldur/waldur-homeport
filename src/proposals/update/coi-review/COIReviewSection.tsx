@@ -117,7 +117,7 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
       {
         title: translate('Reviewer'),
         render: ({ row }: { row: ConflictOfInterest }) => (
-          <span className="fw-bold">{row.reviewer_name}</span>
+          <span className="font-medium">{row.reviewer_name}</span>
         ),
         id: 'reviewer',
         keys: ['reviewer_name'],

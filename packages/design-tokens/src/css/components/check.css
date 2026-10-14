@@ -1,0 +1,62 @@
+/**
+ * Checkbox, radio and switch tokens for waldur-ui's Checkbox, Radio, Switch
+ * and CheckField.
+ *
+ * Every value is the one the Bootstrap/Metronic `.form-check` stylesheet
+ * resolved to (src/metronic/sass/core/components/forms/_form-check.scss and
+ * the `$form-check-*` / `$form-switch-*` overrides in _variables.custom.scss),
+ * translated from the SCSS tokens in _tokens.scss:
+ *
+ *   box/radio bg          $body-bg               white / gray-25
+ *   box/radio border      $border-primary        gray-300 / gray-200
+ *   checked fill          $bg-brand-solid        brand-600 in both themes
+ *   disabled bg           $bg-disabled_subtle    gray-50
+ *   disabled border       $border-disabled       gray-300 / gray-200
+ *   mark                  white                  white
+ *   disabled mark         $fg-senary             gray-300
+ *   switch track          $bg-tertiary           gray-100
+ *   switch track border   $border-secondary      gray-200 / gray-100
+ *   switch track hover    $bg-quaternary         gray-200
+ *   switch disabled track $bg-disabled           gray-100
+ *   switch on + disabled  $brand-200             brand-200 / brand-700
+ *   label                 $text-secondary        gray-700 / gray-600
+ *   label disabled        $text-disabled         gray-300 / gray-400
+ *   description           $text-quaternary       gray-500
+ *
+ * Each token reads the semantic role with that light and dark value (the
+ * SCSS dark theme flips the gray ramp in place, so the dark column above is
+ * the mirrored gray-dark step: 25→950, 50→900, 100→800, 200→700, 300→600,
+ * 400→500, 500→400, 600→300). The roles switch with the theme, so this file
+ * has no dark-mode block.
+ *
+ * The check, dash and dot are elements the components render (inline SVG
+ * in `currentColor`), so only their colours live here.
+ */
+:root {
+  --check-bg: var(--bg-primary);
+  --check-border: var(--border-primary);
+  /* Hover previews the checked fill, so it is the same brand colour. */
+  --check-border-hover: var(--bg-brand-solid);
+  --check-checked-bg: var(--bg-brand-solid);
+  --check-disabled-bg: var(--bg-secondary);
+  --check-disabled-border: var(--border-primary);
+  --check-focus-ring: var(--focus-ring-color);
+  /* The check, dash and radio dot (drawn in currentColor by the components). */
+  --check-mark: var(--fg-white);
+  --check-mark-disabled: var(--text-senary);
+
+  --switch-track: var(--bg-tertiary);
+  --switch-track-border: var(--border-secondary);
+  --switch-track-hover: var(--bg-quaternary);
+  --switch-track-checked: var(--bg-brand-solid);
+  --switch-track-disabled: var(--bg-tertiary);
+  --switch-track-checked-disabled: var(--bg-brand-tertiary);
+  --switch-knob: var(--fg-white);
+  --switch-knob-border: var(--border-primary);
+  --switch-knob-disabled: var(--text-senary);
+  --switch-knob-checked-disabled: var(--bg-primary);
+
+  --check-label: var(--text-secondary);
+  --check-label-disabled: var(--text-disabled);
+  --check-description: var(--text-quaternary);
+}

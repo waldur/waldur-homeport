@@ -29,11 +29,11 @@ const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
         ]}
       />
       <div>
-        <span className="d-block text-muted mb-1">{title}</span>
-        <span className="d-block text-muted mb-1">
+        <span className="d-block text-quaternary mb-1">{title}</span>
+        <span className="d-block text-quaternary mb-1">
           {value}/{total} {unit}
         </span>
-        <span className="d-block fw-bold">
+        <span className="d-block font-medium">
           {total ? Number((value / total) * 100).toFixed(1) : 0}%
         </span>
       </div>
@@ -90,7 +90,7 @@ export const ClusterStatistics: FC<{
 
         <Row className="mb-10 g-10">
           <Col xs="auto">
-            <h4 className="fw-bold mb-7">{translate('Pods')}</h4>
+            <h4 className="font-medium mb-7">{translate('Pods')}</h4>
             <StatisticPieChartItem
               title={translate('Used')}
               unit="cores"
@@ -100,7 +100,7 @@ export const ClusterStatistics: FC<{
             />
           </Col>
           <Col xs="auto">
-            <h4 className="fw-bold mb-7">{translate('CPU')}</h4>
+            <h4 className="font-medium mb-7">{translate('CPU')}</h4>
             <Stack direction="horizontal" gap={10}>
               <StatisticPieChartItem
                 title={translate('Reserved')}
@@ -119,7 +119,7 @@ export const ClusterStatistics: FC<{
             </Stack>
           </Col>
           <Col xs="auto">
-            <h4 className="fw-bold mb-7">{translate('Memory')}</h4>
+            <h4 className="font-medium mb-7">{translate('Memory')}</h4>
             <Stack direction="horizontal" gap={10}>
               <StatisticPieChartItem
                 title={translate('Reserved')}
@@ -139,7 +139,7 @@ export const ClusterStatistics: FC<{
           </Col>
         </Row>
 
-        <h4 className="fw-bold mb-7">{translate('Network')}</h4>
+        <h4 className="font-medium mb-7">{translate('Network')}</h4>
         <Row className="g-5 mb-10">
           <Col sm={4}>
             <NetworkStatisticsCard

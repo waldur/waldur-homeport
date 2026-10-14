@@ -79,14 +79,14 @@ export const OfferingComponentUsagePanel: FC<
                           className="d-flex flex-column gap-1"
                           style={{ minWidth: 150 }}
                         >
-                          <div className="d-flex justify-content-between fs-7 text-muted">
+                          <div className="d-flex justify-content-between fs-7 text-quaternary">
                             <span>
                               {formatUsageValue(row.total_consumed, true)} /{' '}
                               {formatUsageValue(row.total_allocated, true)}{' '}
                               {row.measured_unit}
                             </span>
 
-                            <span className="fw-bold text-dark">
+                            <span className="font-medium text-primary">
                               {usage.toFixed(1)}%
                             </span>
                           </div>
@@ -108,7 +108,7 @@ export const OfferingComponentUsagePanel: FC<
                 })
             ) : (
               <tr>
-                <td colSpan={2} className="text-center text-muted py-5">
+                <td colSpan={2} className="text-center text-quaternary py-5">
                   {translate('No usage data available.')}
                 </td>
               </tr>

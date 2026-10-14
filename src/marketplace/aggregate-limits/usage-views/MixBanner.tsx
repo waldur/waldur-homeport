@@ -50,7 +50,9 @@ export const MixBanner: FC<MixBannerProps> = ({
         </strong>{' '}
         {normalization}
       </span>
-      {scenarioNote && <span className="text-muted">· {scenarioNote}</span>}
+      {scenarioNote && (
+        <span className="text-quaternary">· {scenarioNote}</span>
+      )}
     </div>
   );
 };

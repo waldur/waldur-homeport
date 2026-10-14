@@ -1,0 +1,35 @@
+/**
+ * Tokens for waldur-ui's Dialog. Part of the design-tokens
+ * package (imported by index.css), so every app that renders
+ * a Dialog gets them.
+ *
+ * Both themes are defined in this file.
+ */
+:root {
+  /* The real modal backdrop, distinct from the Sheet's drawer overlay:
+     Bootstrap's $modal-backdrop-bg as this app overrides it
+     (src/metronic/sass/core/components/_variables.scss:
+     `rgba($backdrop-color, .7)`, with $backdrop-color = $gray-900 in
+     light mode — hence gray-900 at 70% here), plus the blur that
+     src/metronic/sass/custom/_modal.scss adds on top
+     (`.modal-backdrop.show { backdrop-filter: blur(3px) }`).
+
+     The alpha belongs to the color, not to an opacity: that same file
+     pins $modal-backdrop-opacity to 1 with the comment "Opacity breaks
+     the blur filter of backdrop". Dialog.tsx animates opacity 0 → 1 on
+     enter/exit only, so the resting state is always the full-alpha
+     color. Written as a literal rgba() like every other value in this
+     block — a var() inside rgba() isn't valid, and color-mix() appears
+     nowhere else in this package. */
+  --modal-backdrop-bg: rgba(16, 24, 40, 0.7);
+  --modal-backdrop-blur: 3px;
+}
+
+:root[data-theme='dark'] {
+  /* $modal-backdrop-bg's own isDarkMode() branch: rgba($gray-50, .5),
+     and $backdrop-color's dark $gray-50 is this file's dark ramp step
+     (#f5f5f6) — a light scrim over a dark page, not a darker one. The
+     blur is unbranched in the source, so --modal-backdrop-blur isn't
+     redefined here. */
+  --modal-backdrop-bg: rgba(245, 245, 246, 0.5);
+}

@@ -366,7 +366,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               {Boolean(props.subtitle) && (
                 <p
                   className={classNames(
-                    'fs-4 fw-normal d-block text-muted mb-0',
+                    'fs-4 font-normal d-block text-quaternary mb-0',
                     props.hideRefresh && 'mt-2',
                   )}
                 >
@@ -409,7 +409,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
           {/* Tabs */}
           {props.tabs?.length ? (
-            <Card.Header className="table-tabs border-bottom align-items-stretch py-0 min-h-auto">
+            <Card.Header className="table-tabs border-b-[1px] border-b-secondary align-items-stretch py-0 min-h-auto">
               <TableNav tabs={props.tabs} />
             </Card.Header>
           ) : null}
@@ -420,10 +420,14 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                 (props.filterPosition === 'sidebar' &&
                   props.filtersStorage.length > 0)) && (
                 <Card.Header
-                  className={classNames('border-bottom min-h-auto py-2', {
-                    'd-none':
-                      !showFilterMenuToggle && props.filterPosition === 'menu',
-                  })}
+                  className={classNames(
+                    'border-b-[1px] border-b-secondary min-h-auto py-2',
+                    {
+                      'd-none':
+                        !showFilterMenuToggle &&
+                        props.filterPosition === 'menu',
+                    },
+                  )}
                 >
                   <TableFilters
                     table={props.table}
@@ -445,7 +449,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
           {!closedHiddenActionsMessage &&
             props.hasOptionalColumns &&
             props.activeColumns[COLUMN_ACTIONS_KEY] === false && (
-              <Card.Header className="border-bottom">
+              <Card.Header className="border-b-[1px] border-b-secondary">
                 <HiddenActionsMessage
                   toggleColumn={props.toggleColumn}
                   close={() => setClosedHiddenActionsMessage(true)}

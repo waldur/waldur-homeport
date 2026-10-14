@@ -57,11 +57,13 @@ export const ProposalStepCell: FC<{
       <span>{stepLabel(step)}</span>
       {decisionHeld ? (
         // Nobody owes a move on the proposal: it waits for the round.
-        <span className="text-muted fs-7">
+        <span className="text-quaternary fs-7">
           {translate('Held until the round publishes results')}
         </span>
       ) : role ? (
-        <span className="text-muted fs-7">{responsibleRoleLabel(role)}</span>
+        <span className="text-quaternary fs-7">
+          {responsibleRoleLabel(role)}
+        </span>
       ) : null}
     </div>
   );

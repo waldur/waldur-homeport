@@ -37,7 +37,7 @@ const DrillDownChange: FC<{ change?: DrillDownDataItem['change'] }> = ({
   change,
 }) => {
   if (!change) {
-    return <span className="text-muted">—</span>;
+    return <span className="text-quaternary">—</span>;
   }
 
   const changeDirection = change.direction;
@@ -61,7 +61,7 @@ const DrillDownChange: FC<{ change?: DrillDownDataItem['change'] }> = ({
       tone="outline"
       className={classNames(
         'd-inline-flex align-items-center gap-1',
-        changeDirection === 'stable' && 'text-muted',
+        changeDirection === 'stable' && 'text-quaternary',
       )}
     >
       {change.percent > 0 ? '+' : ''}
@@ -114,7 +114,7 @@ const DrillDownRow: FC<{
       <tr
         className={classNames(
           item.canDrillDown && 'cursor-pointer hover-bg-light',
-          isExpanded && 'bg-light',
+          isExpanded && 'bg-tertiary dark:bg-quaternary',
         )}
         onClick={toggleExpand}
       >
@@ -133,15 +133,15 @@ const DrillDownRow: FC<{
               />
             )}
           </div>
-          <span className={item.canDrillDown ? 'fw-semibold' : ''}>
+          <span className={item.canDrillDown ? 'font-semibold' : ''}>
             {item.renderLabel ? item.renderLabel(item) : item.label}
           </span>
         </td>
         <td className="text-end">
-          <span className="fw-semibold">{item.value.toLocaleString()}</span>
+          <span className="font-semibold">{item.value.toLocaleString()}</span>
         </td>
         <td className="text-end" style={{ width: '100px' }}>
-          <span className="text-muted">{item.percentage.toFixed(1)}%</span>
+          <span className="text-quaternary">{item.percentage.toFixed(1)}%</span>
         </td>
         {showChange && (
           <td className="text-end" style={{ width: '100px' }}>
@@ -258,10 +258,10 @@ const WhySoDrillDownTable: FC<{
           setSortOrder('desc');
         }}
         upClassName={classNames(
-          sortColumn === column && sortOrder === 'asc' && 'text-primary',
+          sortColumn === column && sortOrder === 'asc' && 'text-brand',
         )}
         downClassName={classNames(
-          sortColumn === column && sortOrder === 'desc' && 'text-primary',
+          sortColumn === column && sortOrder === 'desc' && 'text-brand',
         )}
         upLabel={translate('Sort ascending')}
         downLabel={translate('Sort descending')}
@@ -281,10 +281,10 @@ const WhySoDrillDownTable: FC<{
         )}
       >
         <thead>
-          <tr className="text-muted fs-8 text-uppercase fw-bold border-bottom">
+          <tr className="text-quaternary fs-8 text-uppercase font-medium border-b-[1px] border-b-secondary">
             <th
               className={classNames(
-                'border-0 cursor-pointer user-select-none hover-text-primary text-nowrap',
+                'border-0 cursor-pointer user-select-none hover:text-brand text-nowrap',
               )}
               onClick={() => toggleSort('label')}
             >
@@ -292,14 +292,14 @@ const WhySoDrillDownTable: FC<{
               <HeaderSort column="label" />
             </th>
             <th
-              className="text-end border-0 cursor-pointer user-select-none hover-text-primary text-nowrap"
+              className="text-end border-0 cursor-pointer user-select-none hover:text-brand text-nowrap"
               onClick={() => toggleSort('value')}
             >
               {resolvedValueLabel}
               <HeaderSort column="value" />
             </th>
             <th
-              className="text-end border-0 cursor-pointer user-select-none hover-text-primary text-nowrap"
+              className="text-end border-0 cursor-pointer user-select-none hover:text-brand text-nowrap"
               onClick={() => toggleSort('share')}
             >
               {translate('Share')}
@@ -307,7 +307,7 @@ const WhySoDrillDownTable: FC<{
             </th>
             {hasChanges && (
               <th
-                className="text-end border-0 cursor-pointer user-select-none hover-text-primary text-nowrap"
+                className="text-end border-0 cursor-pointer user-select-none hover:text-brand text-nowrap"
                 onClick={() => toggleSort('change')}
               >
                 {translate('Change')}

@@ -20,13 +20,15 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
     const cols: Column<AffiliationAggregation>[] = [
       {
         title: translate('Affiliation'),
-        render: ({ row }) => <span className="fw-bold">{row.affiliation}</span>,
+        render: ({ row }) => (
+          <span className="font-medium">{row.affiliation}</span>
+        ),
         export: (row) => row.affiliation,
       },
       {
         title: translate('Total resources'),
         render: ({ row }) => (
-          <span className="fw-semibold">
+          <span className="font-semibold">
             {row.total_resources.toLocaleString()}
           </span>
         ),
@@ -35,7 +37,7 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Total usage'),
         render: ({ row }) => (
-          <span className="fw-semibold">
+          <span className="font-semibold">
             {row.total_usage.toLocaleString()}
           </span>
         ),
@@ -44,7 +46,9 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Total cost'),
         render: ({ row }) => (
-          <span className="fw-semibold">{defaultCurrency(row.total_cost)}</span>
+          <span className="font-semibold">
+            {defaultCurrency(row.total_cost)}
+          </span>
         ),
         export: (row) => row.total_cost,
       },

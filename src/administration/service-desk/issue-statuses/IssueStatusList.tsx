@@ -66,7 +66,7 @@ export const IssueStatusList: FC = () => {
             <InfoIcon
               size={18}
               weight="bold"
-              className="text-muted cursor-pointer"
+              className="text-quaternary cursor-pointer"
             />
           </Tooltip>
         </span>

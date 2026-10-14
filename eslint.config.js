@@ -209,6 +209,23 @@ export default tseslint
         // the .progress styles are deleted.
         'waldur-custom/no-bootstrap-progress': 'error',
         'waldur-custom/no-bootstrap-tabs': 'error',
+        // Bootstrap's .border is !important in an earlier layer, so a Tailwind
+        // border colour next to it never paints. Autofixes to border-[1px].
+        'waldur-custom/no-bootstrap-border-with-tailwind-color': 'error',
+        // State colours come from the status matrix (semantic/status.css);
+        // deliberate exceptions carry an eslint-disable with the reason.
+        'waldur-custom/no-raw-status-ramp': 'error',
+        // A ramp step, white or a hex is the same colour in both themes: use a
+        // semantic utility or give it a dark: partner in the same class list.
+        'waldur-custom/require-dark-pair': 'error',
+        // Font weight is one scale (font-light … font-bold); Bootstrap's fw-*
+        // are retired, and their "bold" was 500. Autofixes fw-* classes.
+        'waldur-custom/require-weight-scale': 'error',
+        // Bootstrap emits no colour utility any more: its old class names
+        // (text-danger, bg-light, border-bottom, …) paint nothing.
+        'waldur-custom/no-bootstrap-color-utility': 'error',
+        // Zero instances remain: every --bs-* read in TS/TSX is a design token.
+        'waldur-custom/no-bootstrap-css-vars': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
         'waldur-custom/check-needs-accessible-name': 'error',
         // Existing call sites are migrated to HelpIcon incrementally; promote to
@@ -372,6 +389,52 @@ export default tseslint
         'no-prototype-builtins': 'off',
         '@typescript-eslint/no-require-imports': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
+    {
+      // Node build scripts inside the workspace packages.
+      files: ['packages/*/scripts/**/*.mjs'],
+      languageOptions: {
+        globals: {
+          ...globals.node,
+        },
+      },
+      rules: {
+        'no-console': 'off',
+      },
+    },
+    {
+      // Tests assert class names (toHaveClass('ring-brand-50'), RuleTester
+      // fixtures); nothing there is rendered.
+      files: ['**/*.test.ts', '**/*.test.tsx'],
+      rules: {
+        'waldur-custom/require-dark-pair': 'off',
+        'waldur-custom/require-weight-scale': 'off',
+      },
+    },
+    {
+      // The rule's own fixtures contain the variables it flags.
+      files: [
+        'packages/eslint-plugin-waldur/rules/no-bootstrap-css-vars.test.ts',
+      ],
+      rules: { 'waldur-custom/no-bootstrap-css-vars': 'off' },
+    },
+    {
+      // The rules' own fixtures contain the class lists they flag.
+      files: [
+        'packages/eslint-plugin-waldur/rules/no-bootstrap-border-with-tailwind-color.test.ts',
+        'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.test.ts',
+        'packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.test.ts',
+        // The rules themselves (class lists, built names), and the test that
+        // checks the list against Bootstrap.
+        'packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.js',
+        'packages/eslint-plugin-waldur/rules/no-raw-status-ramp.js',
+        'src/tailwindBootstrapColors.test.ts',
+      ],
+      rules: {
+        'waldur-custom/no-bootstrap-color-utility': 'off',
+        'waldur-custom/no-bootstrap-border-with-tailwind-color': 'off',
+        'waldur-custom/no-raw-status-ramp': 'off',
       },
     },
     {

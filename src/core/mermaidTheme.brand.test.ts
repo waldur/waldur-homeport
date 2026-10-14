@@ -43,7 +43,7 @@ describe('brand colours in the Mermaid theme', () => {
 
     it('follow the tenant brand ramp when it is set', () => {
       for (const step of Object.values(steps)) {
-        root.style.setProperty(`--waldur-brand-${step}`, `#00${step % 100}00`);
+        root.style.setProperty(`--brand-${step}`, `#00${step % 100}00`);
       }
       const vars = getMermaidThemeVariables(isDark) as unknown as Record<
         string,

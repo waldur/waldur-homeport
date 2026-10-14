@@ -37,7 +37,7 @@
 }
 
 .layout-bottom-sheet-hero-content h1 {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -50,7 +50,7 @@
 }
 
 .layout-bottom-sheet-panel {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   border-radius: 24px 24px 0 0;
   margin-top: -24px;
   position: relative;
@@ -61,7 +61,7 @@
 .layout-bottom-sheet-handle {
   width: 40px;
   height: 4px;
-  background: var(--bs-gray-400);
+  background: var(--border-divider-strong);
   border-radius: 2px;
   margin: 12px auto;
 }
@@ -78,5 +78,5 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  border-top: 1px solid var(--bs-border-color);
+  border-top: 1px solid var(--border-secondary);
 }

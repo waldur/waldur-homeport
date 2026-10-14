@@ -175,7 +175,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               components={usageRows}
               concealBillingInfo={props.concealBillingInfo}
             />
-            <p className="text-muted mt-2 mb-4 fs-7">
+            <p className="text-quaternary mt-2 mb-4 fs-7">
               {hasExtraRows
                 ? translate(
                     'Additionally service provider can charge for usage of the following components',
@@ -194,7 +194,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               viewMode={props.viewMode}
               hidePrices={props.concealBillingInfo}
             />
-            <p className="text-muted mt-2 mb-4 fs-7">
+            <p className="text-quaternary mt-2 mb-4 fs-7">
               {translate(
                 'Fee applied according to the maximum value reported by service provider over the whole active state of resource.',
               )}
@@ -207,7 +207,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               components={initialRows}
               concealBillingInfo={props.concealBillingInfo}
             />
-            <p className="text-muted mt-2 mb-4 fs-7">
+            <p className="text-quaternary mt-2 mb-4 fs-7">
               {translate('A one-time fee applied on activation.')}
             </p>
           </>
@@ -220,7 +220,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               viewMode={true}
               hidePrices={props.concealBillingInfo}
             />
-            <p className="text-muted mt-2 mb-4 fs-7">
+            <p className="text-quaternary mt-2 mb-4 fs-7">
               {props.startDate && props.endDate
                 ? (() => {
                     const totalMonths = calculateMonthsDifference(
@@ -256,7 +256,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               components={switchRows}
               concealBillingInfo={props.concealBillingInfo}
             />
-            <p className="text-muted mt-2 mb-4 fs-7">
+            <p className="text-quaternary mt-2 mb-4 fs-7">
               {translate('Fee applied each time this plan is activated.')}
             </p>
           </>

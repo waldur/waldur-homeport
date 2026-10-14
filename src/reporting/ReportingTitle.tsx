@@ -72,7 +72,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
         <div>
           <h1 className="mb-0 fs-1x">{report.title}</h1>
           {description && (
-            <p className="text-gray-500 fs-7 mb-0 mt-1">{description}</p>
+            <p className="text-quaternary fs-7 mb-0 mt-1">{description}</p>
           )}
         </div>
       </div>

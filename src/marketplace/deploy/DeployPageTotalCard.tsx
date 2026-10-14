@@ -32,11 +32,11 @@ export const DeployPageTotalCard: FC<
           header
         ) : (
           <>
-            <h3 className="fw-normal text-gray-700 mb-0">
+            <h3 className="font-normal text-secondary mb-0">
               {translate('Total')}:
             </h3>
             <div className="card-toolbar">
-              <h3 className="fw-bold mb-0">
+              <h3 className="font-medium mb-0">
                 {shouldConcealPrices ? DASH_ESCAPE_CODE : total}
               </h3>
             </div>
@@ -58,7 +58,7 @@ export const DeployPageTotalCard: FC<
                 'After this order is created, a purchase order document (PDF) will need to be uploaded before it can be approved.',
               )}
             >
-              <span className="fw-semibold">
+              <span className="font-semibold">
                 {translate('Purchase order will be required')}
               </span>
             </Tooltip>

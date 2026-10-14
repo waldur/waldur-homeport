@@ -221,7 +221,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Affinity Computation Flow */}
         <section>
           <h4 className="mb-4">{translate('Affinity computation flow')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'When you click "Compute matrix", the system calculates how well each reviewer matches each proposal based on their expertise and the proposal content.',
             )}
@@ -240,16 +240,16 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th>{translate('Method')}</th>
                   <th>{translate('Description')}</th>
                   <th>{translate('Formula')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {SCORING_METHODS.map((method) => (
                   <tr key={method.method}>
-                    <td className="fw-bold text-gray-800">
+                    <td className="font-medium text-primary">
                       {method.label}
                       {method.method === currentMethod && (
                         <Badge
@@ -263,7 +263,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
                     </td>
                     <td>{method.description}</td>
                     <td>
-                      <code className="text-primary">{method.formula}</code>
+                      <code className="text-brand">{method.formula}</code>
                     </td>
                   </tr>
                 ))}
@@ -275,14 +275,14 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Data Sources */}
         <section>
           <h4 className="mb-4">{translate('Data sources')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'The following data is used to compute affinity scores:',
             )}
           </p>
           {DATA_SOURCES.map((source) => (
             <div key={source.source} className="mb-4">
-              <h6 className="fw-bold">{source.source}</h6>
+              <h6 className="font-medium">{source.source}</h6>
               <ul className="mb-0">
                 {source.fields.map((field) => (
                   <li key={field.field}>
@@ -297,7 +297,7 @@ export const MatchingSummaryDialog: FC<Props> = ({ resolve }) => {
         {/* Assignment Algorithm */}
         <section>
           <h4 className="mb-4">{translate('Assignment algorithm')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Once affinity scores are computed, an assignment algorithm can be used to optimally assign reviewers to proposals while respecting constraints.',
             )}

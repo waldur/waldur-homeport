@@ -33,7 +33,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
     onClick={props.onClick}
   >
     {(props.image || props.placeholder) && (
-      <div className="h-85px d-flex flex-center border-bottom">
+      <div className="h-85px d-flex flex-center border-b-[1px] border-b-secondary">
         {props.image ? (
           <img
             alt="model-card"
@@ -72,7 +72,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         >
           <Card.Title
             className={classNames(
-              'fs-4 fw-bold',
+              'fs-4 font-medium',
               'ellipsis-lines-' + ellipsisLines,
               'model-card-title',
               !props.subtitle && 'mb-0',
@@ -81,7 +81,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
             {props.titleNode || props.title}
           </Card.Title>
           {props.subtitle && (
-            <Card.Subtitle className="text-gray-600 fw-bold ellipsis">
+            <Card.Subtitle className="text-tertiary font-medium ellipsis">
               {props.subtitle}
             </Card.Subtitle>
           )}
@@ -91,7 +91,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         (typeof props.body === 'object' ? (
           props.body
         ) : (
-          <Card.Text className="text-muted fs-6 flex-grow-1 flex-shrink-0 ellipsis-lines-3">
+          <Card.Text className="text-quaternary fs-6 flex-grow-1 flex-shrink-0 ellipsis-lines-3">
             {props.body}
           </Card.Text>
         ))}

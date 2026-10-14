@@ -74,7 +74,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
                 {
                   button: (child) => (
                     <button
-                      className="text-anchor fw-bold"
+                      className="text-anchor font-medium"
                       type="button"
                       onClick={chooseFile}
                       disabled={rest.disabled}

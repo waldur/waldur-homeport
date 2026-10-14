@@ -71,6 +71,6 @@ describe('AlertItem', () => {
       />,
     );
     const el = screen.getByTestId('alert-item');
-    expect(el).toHaveClass('p-[1.23rem]', 'rounded-[0.475rem]', 'border');
+    expect(el).toHaveClass('p-[1.23rem]', 'rounded-[0.475rem]', 'border-[1px]');
   });
 });

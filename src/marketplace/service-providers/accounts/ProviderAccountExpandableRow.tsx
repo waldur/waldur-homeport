@@ -95,7 +95,7 @@ export const ProviderAccountExpandableRow = ({
             title: translate('Account'),
             render: ({ row }) =>
               row.service_provider_account_uuid === account.uuid ? (
-                <span className="text-muted">{translate('Shared')}</span>
+                <span className="text-quaternary">{translate('Shared')}</span>
               ) : (
                 <>
                   {renderFieldOrDash(row.username)}{' '}
@@ -119,7 +119,7 @@ export const ProviderAccountExpandableRow = ({
         hideRefresh
         className="mt-7"
         headerClassName="min-h-40px py-0"
-        titleClassName="h4 fw-bold text-gray-700"
+        titleClassName="h4 font-medium text-secondary"
         minHeight="auto"
       />
     </ExpandableContainer>

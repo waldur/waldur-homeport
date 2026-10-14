@@ -13,7 +13,7 @@ export const OfferingNameColumn = ({ row }) => {
         {row.name}
         <BackendIdTip backendId={row.backend_id} />
       </Link>
-      <div className="text-gray">{row.category_title}</div>
+      <div className="text-tertiary">{row.category_title}</div>
     </>
   );
 };

@@ -58,7 +58,7 @@ const FieldsListGroup = ({
   return (
     <div id="category-mapping-rules">
       <Form.Group>
-        <table className="table table-row-bordered border-bottom mb-3">
+        <table className="table table-row-bordered border-b-[1px] border-b-secondary mb-3">
           <thead>
             <tr>
               <td className="w-50">{translate('Remote category')}</td>

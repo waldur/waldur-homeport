@@ -40,7 +40,7 @@ export const DecoratedField: React.FC<OwnProps> = (props) => (
         }
       />
 
-      <Form.Text muted={true}>{props.description}</Form.Text>
+      <Form.Text className="text-quaternary">{props.description}</Form.Text>
     </Form.Group>
   </Col>
 );

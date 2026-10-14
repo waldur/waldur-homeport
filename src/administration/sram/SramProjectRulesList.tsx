@@ -26,7 +26,7 @@ const ListCell: FC<{ value: unknown; emptyLabel: string }> = ({
 }) => {
   const items = toStringList(value);
   if (!items.length) {
-    return <span className="text-muted">{emptyLabel}</span>;
+    return <span className="text-quaternary">{emptyLabel}</span>;
   }
   return (
     <span className="d-inline-flex flex-wrap gap-1">
@@ -95,7 +95,7 @@ export const SramProjectRulesList: FC = () => {
       title: translate('Projects'),
       render: ({ row }) => (
         <div>
-          <div className="text-muted small">
+          <div className="text-quaternary small">
             {translate('{field}, {match}', {
               field: getOptionLabel(
                 getProjectFieldOptions(),

@@ -43,7 +43,7 @@ export const VersionStateAtTimestamp: FunctionComponent<
 
   return (
     <div className="d-flex align-items-center gap-3">
-      <Form.Label className="mb-0 text-nowrap text-muted fs-7">
+      <Form.Label className="mb-0 text-nowrap text-quaternary fs-7">
         {translate('State at:')}
       </Form.Label>
       <DatePicker

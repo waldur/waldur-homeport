@@ -13,7 +13,7 @@ export const CostEstimatedChangeView = ({
   message: string;
 }) => (
   <Card className="card-bordered">
-    <Card.Body className="d-flex align-items-center fw-bold p-5">
+    <Card.Body className="d-flex align-items-center font-medium p-5">
       <div className="icon-square me-5">
         <InfoIcon weight="bold" />
       </div>

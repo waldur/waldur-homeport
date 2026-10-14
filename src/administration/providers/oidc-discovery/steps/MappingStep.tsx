@@ -75,8 +75,8 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
   return (
     <div className="row mb-4 align-items-start">
       <div className="col-md-4">
-        <Form.Label className="fw-semibold">{field.field}</Form.Label>
-        <small className="d-block text-muted">{field.description}</small>
+        <Form.Label className="font-semibold">{field.field}</Form.Label>
+        <small className="d-block text-quaternary">{field.description}</small>
       </div>
       <div className="col-md-8">
         <Form.Select
@@ -125,7 +125,7 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
 
         {field.suggested_claims.length > 0 && (
           <div className="mt-1">
-            <small className="text-muted">
+            <small className="text-quaternary">
               {translate('Suggested:')}
               {field.suggested_claims.map((claim) => (
                 <Badge
@@ -244,7 +244,7 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       <h4 className="mb-4">{translate('Claim Mapping')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Map OIDC claims from your identity provider to Waldur user profile fields. Only enabled profile attributes are shown.',
         )}
@@ -262,7 +262,7 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
       <Card className="mb-4">
         <Card.Body>
           {enabledFields.length === 0 ? (
-            <p className="text-muted mb-0">
+            <p className="text-quaternary mb-0">
               {translate(
                 'No mappable user fields are enabled. Check your profile attribute settings.',
               )}

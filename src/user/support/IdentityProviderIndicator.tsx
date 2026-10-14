@@ -28,11 +28,11 @@ export const IdentityProviderIndicator = ({
       </div>
     </Tooltip>
     <div className="ms-5 d-flex flex-column">
-      <span className="text-gray-500 text-hover-primary fw-bold">
+      <span className="text-quaternary hover:text-brand font-medium">
         {user.identity_provider_label}
       </span>
       {hasLabel && (
-        <span className="text-gray-400 fw-bold">
+        <span className="text-quinary font-medium">
           {translate('Identity provider')}
         </span>
       )}

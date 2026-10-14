@@ -69,7 +69,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                   />
                 )}
               </div>
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {data.connections.active + data.connections.idle} /{' '}
                 {data.connections.max_connections}
               </span>
@@ -190,7 +190,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
               <strong className="display-4 text-info">
                 {formatFilesize(data.database_size.total_size_bytes, 'B')}
               </strong>
-              <span className="text-muted">
+              <span className="text-quaternary">
                 {data.database_size.database_name}
               </span>
             </div>

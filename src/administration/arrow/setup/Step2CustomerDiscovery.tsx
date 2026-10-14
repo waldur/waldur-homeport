@@ -119,7 +119,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
       <WizardModal {...props} renderFooter={renderFooter}>
         <div className="text-center py-10">
           <LoadingSpinner />
-          <p className="mt-4 text-muted">
+          <p className="mt-4 text-quaternary">
             {translate('Discovering Arrow customers...')}
           </p>
         </div>
@@ -143,7 +143,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Map Arrow Customers to Waldur')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Select which Waldur organization each Arrow customer should be mapped to. High-confidence suggestions are pre-selected.',
         )}
@@ -160,7 +160,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
       ) : (
         <div className="table-responsive mb-4" style={{ maxHeight: '400px' }}>
           <BTable striped bordered hover size="sm">
-            <thead className="sticky-top bg-white">
+            <thead className="sticky-top bg-primary">
               <tr>
                 <th>{translate('Arrow Customer')}</th>
                 <th>{translate('Reference')}</th>
@@ -204,7 +204,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
                       />
                       {suggestion?.suggested_waldur_customer &&
                         !suggestion.existing_mapping && (
-                          <small className="text-muted">
+                          <small className="text-quaternary">
                             {translate('Suggested: {name}', {
                               name: suggestion.suggested_waldur_customer.name,
                             })}
@@ -220,7 +220,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
       )}
 
       <div className="d-flex align-items-center">
-        <span className="text-muted">
+        <span className="text-quaternary">
           {translate('{count} mappings selected', { count: mappingCount })}
         </span>
       </div>

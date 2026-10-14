@@ -1,47 +1,11 @@
 /**
- * Unlike waldur-homeport main src/tailwind.css, this needs none of the
- * Metronic-workaround theme overrides (--spacing, --text-*, --radius-*
- * pinned to px). There is no Metronic here forcing a 13px root font-size,
- * so Tailwind default rem scale (assuming the standard 16px) is already
- * correct. That in itself is a small piece of portability evidence: those
- * overrides are a homeport-specific patch, not something BaseButton
- * requires to render correctly.
+ * Shared Tailwind entry point for micro-apps.
+ *
+ * Inherits all core Waldur design tokens (typography, spacing, radius, breakpoints,
+ * surfaces, and color palettes) via waldur-design-tokens/index.css.
  */
 @import 'tailwindcss';
-@import 'waldur-design-tokens/buttonColors.css';
-@import 'waldur-design-tokens/checkColors.css';
-@import 'waldur-design-tokens/surfaceColors.css';
-@import 'waldur-design-tokens/sidebarColors.css';
-@import 'waldur-design-tokens/tabColors.css';
-/* Modal enter/exit keyframes waldur-ui's Dialog references by name — see
-   that file's own comment on why Radix's Presence needs keyframes rather
-   than transitions. Values are waldur-homeport's real Bootstrap modal
-   motion. */
-@import 'waldur-design-tokens/animations.css';
-@import 'waldur-design-tokens/colors.css';
-/* z-sidebar-panel / z-mobile-drawer, which waldur-ui's Sidebar and Sheet use:
-   without this those utilities are never generated here. */
-@import 'waldur-design-tokens/zIndex.css';
-
-/* dark: keys off data-theme, which OrgDashboardMock.tsx sets via the shared
-   waldur/theme/name localStorage key (Tailwind's default dark: follows the
-   OS preference and would ignore this app's toggle). Also the menu and tab
-   variants waldur-ui's DropdownMenu uses. */
-@import 'waldur-design-tokens/variants.css';
-
-/* Same bridge the main app's own src/tailwind.css uses: --font-sans reads
-   the runtime-injected --waldur-font-family custom property rather than a
-   hardcoded font name. App.tsx sets it — synchronously to 'Inter' at
-   module load (so this variable is never unset on first paint; an unset
-   var() here would invalidate the whole font-family value, falling back
-   to Tailwind's generic system-font stack, not just skip to the next
-   fallback name — see docs/tailwind-shadcn-migration-notes.md's brand
-   token note for the same pitfall), then again from
-   ENV.plugins.WALDUR_CORE.FONT_FAMILY once fetchRuntimeConfig() resolves,
-   same as afterBootstrap.tsx's initCssVariables(). */
-@theme {
-  --font-sans: var(--waldur-font-family), Helvetica, sans-serif;
-}
+@import 'waldur-design-tokens/index.css';
 
 /* Tailwind v4's automatic content detection scans outward from this file
    toward the nearest .git/package.json root, but stops at this app's own

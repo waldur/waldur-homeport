@@ -12,7 +12,7 @@ export const UserAgreementsExpandableRow: FunctionComponent<{
   <ExpandableContainer>
     <Card className="card-bordered card-solid">
       <Card.Header>
-        <h6 className="mb-0 fw-bold">{translate('Content')}</h6>
+        <h6 className="mb-0 font-medium">{translate('Content')}</h6>
       </Card.Header>
       <Card.Body>
         <SafeMarkdown text={row.content} smallTitles />

@@ -96,7 +96,7 @@ export const AdoptProviderAccountsDialog: FC<
                 )}
               />
             )}
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'Choose the username to keep for each person. Their accounts on the other offerings are renamed to it and take over its POSIX UID and home directory.',
               )}

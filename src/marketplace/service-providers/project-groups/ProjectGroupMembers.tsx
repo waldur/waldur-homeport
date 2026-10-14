@@ -9,7 +9,7 @@ export const ProjectGroupMembers: FC<{ members?: string[] }> = ({
   members,
 }) => (
   <div className="px-4 py-2">
-    <div className="fw-bold mb-2">{translate('Members')}</div>
+    <div className="font-medium mb-2">{translate('Members')}</div>
     {members?.length ? (
       <div className="d-flex flex-wrap gap-2">
         {members.map((username) => (
@@ -19,7 +19,7 @@ export const ProjectGroupMembers: FC<{ members?: string[] }> = ({
         ))}
       </div>
     ) : (
-      <p className="text-muted fs-7 mb-0">
+      <p className="text-quaternary fs-7 mb-0">
         {translate(
           'No members: nobody in the project has an active account at this service provider.',
         )}

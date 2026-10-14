@@ -134,7 +134,7 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
                     <div>
                       <div>{option.name}</div>
                       {option.description ? (
-                        <small className="text-muted">
+                        <small className="text-quaternary">
                           {option.description}
                         </small>
                       ) : null}
@@ -148,7 +148,7 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
               />
             ) : (
               <FormGroup label={translate('Role')} required>
-                <p className="text-muted mb-0">
+                <p className="text-quaternary mb-0">
                   {resolve.scope === 'resource_project'
                     ? translate(
                         'No roles have been set up for project members yet. The service provider needs to add at least one role before users can be invited.',

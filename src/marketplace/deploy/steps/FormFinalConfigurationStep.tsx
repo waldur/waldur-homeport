@@ -47,7 +47,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         maxLength={1000}
         label={translate('Description')}
       />
-      <div className="mb-7 border-bottom" />
+      <div className="mb-7 border-b-[1px] border-b-secondary" />
       {isStartDateEnabled && !startDateEmbeddedInPrepaid && (
         <DateGroup
           name="start_date"

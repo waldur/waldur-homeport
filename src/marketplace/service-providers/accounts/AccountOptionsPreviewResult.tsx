@@ -62,7 +62,7 @@ const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
   <div className="border rounded p-5 mb-4">
     <h5 className="mb-3">{offering.name}</h5>
     {offering.changed.length === 0 ? (
-      <p className="text-muted mb-0">
+      <p className="text-quaternary mb-0">
         {translate(
           'Nothing changes: the offering sets these values itself or they stay the same.',
         )}
@@ -75,7 +75,7 @@ const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
             return (
               <li key={name}>
                 {SETTING_LABELS[name]?.() ?? name}:{' '}
-                <span className="text-muted">
+                <span className="text-quaternary">
                   {renderFieldOrDash(setting.before.value)}
                 </span>{' '}
                 → <strong>{renderFieldOrDash(setting.after.value)}</strong>
@@ -94,7 +94,7 @@ const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
           )}
         </p>
         {offering.provider_accounts_kept > 0 && (
-          <p className="text-muted">
+          <p className="text-quaternary">
             {translate(
               '{count} provider account(s) keep their username, home directory and login shell.',
               { count: offering.provider_accounts_kept },
@@ -102,7 +102,7 @@ const OfferingPreview: FC<{ offering: OfferingAccountPreview }> = ({
           </p>
         )}
         {offering.accounts_keeping_home_or_shell > 0 && (
-          <p className="text-muted">
+          <p className="text-quaternary">
             {translate(
               '{count} existing account(s) keep their home directory and login shell; the change applies to accounts created later.',
               { count: offering.accounts_keeping_home_or_shell },

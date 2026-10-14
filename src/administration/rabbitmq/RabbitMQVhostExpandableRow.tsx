@@ -100,7 +100,9 @@ export const RabbitMQVhostExpandableRow: FC<
         {
           title: translate('Messages'),
           render: ({ row: queue }: { row: RmqQueueStats }) => (
-            <span className="fw-bold">{queue.messages.toLocaleString()}</span>
+            <span className="font-medium">
+              {queue.messages.toLocaleString()}
+            </span>
           ),
         },
         {
@@ -158,7 +160,7 @@ export const RabbitMQVhostExpandableRow: FC<
                           : translate('Not owned by a site agent')
                   }
                 >
-                  <span className="text-primary">
+                  <span className="text-brand">
                     {consumerUuid.substring(0, 8)}...
                   </span>
                 </Tooltip>
@@ -202,7 +204,9 @@ export const RabbitMQVhostExpandableRow: FC<
   if (row.queues.length === 0) {
     return (
       <ExpandableContainer>
-        <p className="text-muted">{translate('No queues in this vhost')}</p>
+        <p className="text-quaternary">
+          {translate('No queues in this vhost')}
+        </p>
       </ExpandableContainer>
     );
   }

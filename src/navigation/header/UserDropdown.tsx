@@ -49,11 +49,11 @@ const UserMenuToggle = forwardRef<HTMLButtonElement>((props, ref) => {
       </div>
       <div className="d-none d-md-flex flex-column align-items-start justify-content-center">
         {!user?.is_staff && (
-          <span className="text-muted fs-7 fw-semibold lh-1 mb-2">
+          <span className="text-quaternary fs-7 font-semibold lh-1 mb-2">
             {translate('Hello')}
           </span>
         )}
-        <span className="text-dark fs-base fw-bold lh-1">
+        <span className="text-primary fs-base font-medium lh-1">
           {user ? user.first_name : translate('Guest')}
         </span>
         {user?.is_staff && (
@@ -84,17 +84,17 @@ const UserMenuHeader = ({ user }: { user: ReturnType<typeof useUser> }) => (
       )}
     </div>
     <div className="d-flex flex-column">
-      <div className="fw-bolder d-flex align-items-center fs-5">
+      <div className="font-semibold d-flex align-items-center fs-5">
         {user ? user.full_name : translate('Guest')}
       </div>
       {user ? (
         // The classes the email had as a Link (Link's text-anchor, which
         // replaced text-muted): the brand link colour.
-        <span className="fw-bold text-hover-primary fs-7 text-anchor">
+        <span className="font-medium hover:text-brand fs-7 text-anchor">
           {user.email}
         </span>
       ) : (
-        <span className="fw-bold text-muted fs-7">
+        <span className="font-medium text-quaternary fs-7">
           {translate('Not signed in')}
         </span>
       )}
@@ -109,7 +109,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
       <Menu.Trigger asChild>
         <UserMenuToggle />
       </Menu.Trigger>
-      <Menu.Content align="end" className="fw-bold py-4 fs-6 w-275px">
+      <Menu.Content align="end" className="font-medium py-4 fs-6 w-275px">
         {/* The header: a row that links to the profile, so the keyboard
             reaches it like any other row. */}
         {user ? (

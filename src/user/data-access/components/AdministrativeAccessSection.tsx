@@ -27,11 +27,11 @@ export const AdministrativeAccessSection: FC<
     {data.staff_count !== undefined && data.support_count !== undefined && (
       <div className="d-flex gap-6 mb-4">
         <div>
-          <span className="text-muted">{translate('Staff')}: </span>
+          <span className="text-quaternary">{translate('Staff')}: </span>
           <strong>{data.staff_count}</strong>
         </div>
         <div>
-          <span className="text-muted">{translate('Support')}: </span>
+          <span className="text-quaternary">{translate('Support')}: </span>
           <strong>{data.support_count}</strong>
         </div>
       </div>

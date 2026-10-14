@@ -347,7 +347,7 @@ export const WorkflowStepConfigDialog: FC<Props> = ({ resolve }) => {
             }
           >
             {definition && (
-              <p className="text-muted mb-4">{definition.description}</p>
+              <p className="text-quaternary mb-4">{definition.description}</p>
             )}
 
             {showEnableSwitch && (

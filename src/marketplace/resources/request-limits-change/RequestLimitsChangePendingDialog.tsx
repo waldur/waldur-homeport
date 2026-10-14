@@ -53,7 +53,7 @@ export const RequestLimitsChangePendingDialog: FC<Props> = ({
         </>
       }
     >
-      <p className="text-gray-700">
+      <p className="text-secondary">
         {translate(
           'You already have a pending request to change limits for resource {name}.',
           { name: request.resource_name },

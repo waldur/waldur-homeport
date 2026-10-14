@@ -29,7 +29,7 @@ export const StageProgress: FC<StageProgressProps> = ({
 
   return (
     <div className="mb-3">
-      <div className="d-flex justify-content-between small text-muted mb-1">
+      <div className="d-flex justify-content-between small text-quaternary mb-1">
         <span>
           {translate('Stage {stage} of {total} — {label}', {
             stage,

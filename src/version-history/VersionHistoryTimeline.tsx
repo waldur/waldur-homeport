@@ -17,8 +17,14 @@ export const VersionHistoryTimeline: FunctionComponent<
 > = ({ versions, selectedVersionId, onSelectVersion, isLoading }) => {
   if (isLoading) {
     return (
-      <div className="d-flex justify-content-center align-items-center py-10 text-muted fs-6">
-        <span className="spinner-border spinner-border-sm text-primary me-3" />
+      <div
+        className="d-flex justify-content-center align-items-center py-10 text-quaternary fs-6"
+        role="status"
+      >
+        <span
+          className="spinner-border spinner-border-sm text-brand me-3"
+          aria-hidden="true"
+        />
         {translate('Loading history...')}
       </div>
     );
@@ -26,14 +32,17 @@ export const VersionHistoryTimeline: FunctionComponent<
 
   if (versions.length === 0) {
     return (
-      <div className="text-center text-muted py-10 fs-6">
+      <div className="text-center text-quaternary py-10 fs-6">
         {translate('No version history available.')}
       </div>
     );
   }
 
   return (
-    <div className="timeline timeline-border-dashed px-5 py-5">
+    <ul
+      className="timeline timeline-border-dashed list-unstyled mb-0 px-5 py-5"
+      aria-label={translate('Revisions')}
+    >
       {versions.map((version, index) => (
         <VersionHistoryItem
           key={version.id}
@@ -44,6 +53,6 @@ export const VersionHistoryTimeline: FunctionComponent<
           totalVersions={versions.length}
         />
       ))}
-    </div>
+    </ul>
   );
 };

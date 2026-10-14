@@ -64,29 +64,33 @@ export const CustomerMappingExpandableRow: FC<
         {/* Summary stats */}
         <div className="d-flex gap-4 mb-4 flex-wrap">
           <div>
-            <span className="text-muted">{translate('Total resources:')}</span>{' '}
+            <span className="text-quaternary">
+              {translate('Total resources:')}
+            </span>{' '}
             <strong>{data.total_customer_resources}</strong>
           </div>
           <div>
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('With license ref (backend_id):')}
             </span>{' '}
             <strong>{data.resources_with_backend_id}</strong>
           </div>
           <div>
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('Consumption fetched:')}
             </span>{' '}
             <strong
               className={
-                data.matched_resources > 0 ? 'text-success' : 'text-muted'
+                data.matched_resources > 0 ? 'text-success' : 'text-quaternary'
               }
             >
               {data.matched_resources}
             </strong>
           </div>
           <div>
-            <span className="text-muted">{translate('Billing lines:')}</span>{' '}
+            <span className="text-quaternary">
+              {translate('Billing lines:')}
+            </span>{' '}
             <strong>{data.billing_lines?.length || 0}</strong>
           </div>
         </div>
@@ -162,7 +166,7 @@ export const CustomerMappingExpandableRow: FC<
         {data.billing_lines && data.billing_lines.length > 0 && (
           <div className="mb-4">
             <h6 className="mb-2">{translate('Arrow Billing Lines')}</h6>
-            <p className="text-muted small mb-2">
+            <p className="text-quaternary small mb-2">
               {translate(
                 'These are the license references from Arrow billing export. Resources with matching backend_id will show consumption data.',
               )}
@@ -196,7 +200,7 @@ export const CustomerMappingExpandableRow: FC<
               </tbody>
             </Table>
             {data.billing_lines.length > 10 && (
-              <div className="text-muted small mt-1">
+              <div className="text-quaternary small mt-1">
                 {translate('Showing 10 of {total} billing lines', {
                   total: data.billing_lines.length,
                 })}
@@ -207,14 +211,14 @@ export const CustomerMappingExpandableRow: FC<
 
         {/* Empty state */}
         {data.total_customer_resources === 0 && (
-          <div className="text-center text-muted py-4">
+          <div className="text-center text-quaternary py-4">
             {translate('No resources found for this customer in Waldur.')}
           </div>
         )}
 
         {data.total_customer_resources > 0 &&
           data.resources_with_backend_id === 0 && (
-            <div className="text-center text-muted py-4">
+            <div className="text-center text-quaternary py-4">
               <p className="mb-2">
                 {translate('No resources have backend_id set.')}
               </p>

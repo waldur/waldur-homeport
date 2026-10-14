@@ -349,7 +349,7 @@ import { ActionList } from '@/marketplace/resources/actions/ActionList';
 | `actions` | row actions, "Add" and toolbar menus                  | page background, 8px radius, 6.5px vertical padding, 130px minimum width | gray-700, 14px, weight 500, 10×16px, highlight on gray-50 |
 | `card`    | popovers with their own layout (`MenuPopover` only)   | 1px border, card background, dropdown shadow, no padding                 | none: the content lays itself out                         |
 
-The looks were measured against the Metronic and Bootstrap menus they replaced. Colours come from the `--menu-*` tokens in `packages/design-tokens/src/surfaceColors.css` (light and dark), the shadow from `--dropdown-shadow`. `packages/ui/src/Menu/menuLooks.test.ts` snapshots every class set, so a change there is a visible change: update the snapshot only on purpose.
+The looks were measured against the Metronic and Bootstrap menus they replaced. Colours come from the `--menu-*` tokens in `packages/design-tokens/src/css/components/menu.css` (light and dark), the shadow from `--dropdown-shadow`. `packages/ui/src/Menu/menuLooks.test.ts` snapshots every class set, so a change there is a visible change: update the snapshot only on purpose.
 
 ### Row options (nav look)
 
@@ -360,7 +360,7 @@ The looks were measured against the Metronic and Bootstrap menus they replaced. 
 
 Set them on the panel: `<Menu.Content density="compact">`, `<MenuPopover.Content tone="strong">`. They are plain CSS: the panel is a `group/menu` carrying `data-density` / `data-tone`, and the row classes include group variants for them. A submenu is portaled out of its parent panel, so it doesn't inherit them; give `Menu.SubContent` its own.
 
-A row is highlighted, gray-700 on gray-50 (the `menu-row-active:` variant in `packages/design-tokens/src/variants.css`), when it is hovered, keyboard-highlighted (`[data-highlighted]`), an open submenu's trigger (`[data-state=open]`), the checked radio row (`[data-state=checked]`) or the current page (`.active`). Disabled rows never are.
+A row is highlighted, gray-700 on gray-50 (the `menu-row-active:` variant in `packages/design-tokens/src/css/tailwind/variants.css`), when it is hovered, keyboard-highlighted (`[data-highlighted]`), an open submenu's trigger (`[data-state=open]`), the checked radio row (`[data-state=checked]`) or the current page (`.active`). Disabled rows never are.
 
 ### Look and kind travel through context
 

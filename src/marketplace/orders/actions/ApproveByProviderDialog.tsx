@@ -72,7 +72,7 @@ const OptionRow: FC<{
   return (
     <tr>
       <td>{option?.label || optionKey}</td>
-      <td className="text-muted">
+      <td className="text-quaternary">
         <OptionValue option={option} value={submittedValue} />
       </td>
       <td>

@@ -38,7 +38,7 @@ const getStatusIcon = (isWorking: boolean, hasError: boolean) => {
 };
 
 const getStatusColorClass = (isWorking: boolean) =>
-  isWorking ? 'text-[var(--pill-success-text)]' : 'text-danger';
+  isWorking ? 'text-success' : 'text-danger';
 
 const HealthInfoItem = ({
   title,
@@ -54,11 +54,11 @@ const HealthInfoItem = ({
     <div className="text-center">
       <div className="d-flex justify-content-center align-items-center mb-2">
         {getStatusIcon(isWorking, hasError)}
-        <span className={`ms-2 fw-bold ${getStatusColorClass(isWorking)}`}>
+        <span className={`ms-2 font-medium ${getStatusColorClass(isWorking)}`}>
           {message}
         </span>
       </div>
-      <div className="health-title fw-semibold text-gray-700 small">
+      <div className="health-title font-semibold text-secondary small">
         {title}
       </div>
     </div>
@@ -74,7 +74,7 @@ const HealthInfoItem = ({
             </>
           }
         >
-          <div className="p-3 border rounded bg-light-danger cursor-pointer h-100">
+          <div className="p-3 border rounded bg-danger-subtle cursor-pointer h-100">
             {statusContent}
           </div>
         </Tooltip>
@@ -84,7 +84,7 @@ const HealthInfoItem = ({
 
   return (
     <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
-      <div className="p-3 border rounded bg-light-success h-100">
+      <div className="p-3 border rounded bg-success-subtle h-100">
         {statusContent}
       </div>
     </Col>
@@ -123,7 +123,7 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
               />
             )}
             <span
-              className={`fw-semibold ${allWorking ? 'text-[var(--pill-success-text)]' : 'text-danger'}`}
+              className={`font-semibold ${allWorking ? 'text-success' : 'text-danger'}`}
             >
               {workingCount}/{totalCount} {translate('services healthy')}
             </span>

@@ -64,7 +64,7 @@ export const OfferingServices: FC<OwnProps> = ({ agentIdentity }) => {
       <FormTable detailsMode className="gy-5">
         {!services?.length ? (
           <tr>
-            <td colSpan={3} className="text-muted text-center">
+            <td colSpan={3} className="text-quaternary text-center">
               {translate('There are no services yet.')}
             </td>
           </tr>

@@ -54,7 +54,7 @@ export const ChangelogSummaryDialog: FunctionComponent<
         <p className="fs-5 mb-1">
           {currentVersion} &rarr; <strong>{latestVersion}</strong>
         </p>
-        <p className="text-muted">
+        <p className="text-quaternary">
           {getVersionsBehindLabel(summary.versions_behind)}
         </p>
       </div>

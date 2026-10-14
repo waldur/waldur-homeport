@@ -44,7 +44,7 @@ export const EventSubscriptionsList: FC<Partial<TableWithPortal>> = ({
     {
       title: translate('UUID'),
       render: ({ row }) => (
-        <code className="text-muted">{row.uuid.substring(0, 8)}...</code>
+        <code className="text-quaternary">{row.uuid.substring(0, 8)}...</code>
       ),
       copyField: (row) => row.uuid,
       keys: ['uuid'],
@@ -53,7 +53,7 @@ export const EventSubscriptionsList: FC<Partial<TableWithPortal>> = ({
     {
       title: translate('User'),
       render: ({ row }) => (
-        <span className="fw-bold">
+        <span className="font-medium">
           {row.user_full_name || row.user_username}
         </span>
       ),
@@ -69,7 +69,9 @@ export const EventSubscriptionsList: FC<Partial<TableWithPortal>> = ({
     {
       title: translate('Source IP'),
       render: ({ row }) => (
-        <code className="text-muted">{row.source_ip || DASH_ESCAPE_CODE}</code>
+        <code className="text-quaternary">
+          {row.source_ip || DASH_ESCAPE_CODE}
+        </code>
       ),
       keys: ['source_ip'],
       id: 'source_ip',

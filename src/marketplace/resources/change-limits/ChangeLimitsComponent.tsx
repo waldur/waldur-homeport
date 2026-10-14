@@ -90,7 +90,7 @@ export const ChangeLimitsComponent: React.FC<ChangeLimitsComponentProps> = ({
   return (
     <div>
       {!readOnly && hasPairedOption ? (
-        <p className="text-muted">
+        <p className="text-quaternary">
           {translate(
             'Limits calculated from the options follow them: change an option on the Options tab to change them.',
           )}

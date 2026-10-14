@@ -32,7 +32,7 @@ export const AttachmentRow: FC<AttachmentRowProps> = ({
       size="md"
     />
     <div className="flex-grow-1 ms-3 align-items-center d-flex">
-      <span className="text-muted fs-5">
+      <span className="text-quaternary fs-5">
         {value ? (
           <>
             {value.name} ({formatFilesize(value.size, 'B')})

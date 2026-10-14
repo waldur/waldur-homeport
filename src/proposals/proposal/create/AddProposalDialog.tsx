@@ -240,7 +240,7 @@ export const AddProposalDialog: FC<AddProposalDialogProps> = (props) => {
                     project ends up called, so show the whole thing rather than
                     describing the rule in prose. */}
                 {projectName ? (
-                  <div className="text-muted fs-7 mt-2">
+                  <div className="text-quaternary fs-7 mt-2">
                     {translate(
                       'Project name: {name}',
                       { name: <strong>{projectName}</strong> },

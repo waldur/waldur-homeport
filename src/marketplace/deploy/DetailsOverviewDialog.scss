@@ -1,10 +1,10 @@
 .resource-details-overview .form-table {
   .title {
-    color: var(--bs-gray-700);
-    font-weight: 600;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-semibold);
   }
   .value {
-    color: var(--bs-gray-500);
-    font-weight: 400;
+    color: var(--text-quaternary);
+    font-weight: var(--font-weight-normal);
   }
 }

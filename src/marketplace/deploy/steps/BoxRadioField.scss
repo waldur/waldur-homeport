@@ -11,7 +11,7 @@
       position: relative;
       width: 145px;
       border-radius: 0.5rem;
-      border: 1px solid var(--bs-border-color);
+      border: 1px solid var(--border-secondary);
       margin: 1px;
       margin-bottom: 1.5rem;
       transition: all 0.2s ease-in-out;
@@ -22,20 +22,20 @@
       }
 
       &.active {
-        outline: 1px solid var(--bs-primary);
-        border-color: var(--bs-primary) !important;
+        outline: 1px solid var(--brand-color);
+        border-color: var(--brand-color) !important;
 
         .box-radio-info {
-          background-color: var(--bs-primary) !important;
-          color: var(--bs-body-bg) !important;
+          background-color: var(--brand-color) !important;
+          color: var(--bg-primary) !important;
 
           i {
-            color: var(--bs-body-bg) !important;
+            color: var(--bg-primary) !important;
           }
         }
 
         .box-radio-media i {
-          color: var(--bs-primary) !important;
+          color: var(--brand-color) !important;
         }
       }
 
@@ -58,7 +58,7 @@
           align-items: center;
           justify-content: center;
           height: 60px;
-          font-weight: bold;
+          font-weight: var(--font-weight-bold);
           font-size: 2rem;
         }
 
@@ -88,7 +88,7 @@
         }
 
         .box-radio-label {
-          font-weight: 600;
+          font-weight: var(--font-weight-semibold);
           font-size: 10px;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -116,15 +116,15 @@
       height: 100%;
       position: relative;
       border-radius: 8px;
-      border: 1px solid var(--bs-border-color);
+      border: 1px solid var(--border-secondary);
       padding: 1.23rem;
       margin: 1px 1px 8px 1px;
       transition: all 0.2s ease-in-out;
       cursor: pointer;
 
       &.active {
-        outline: 1px solid var(--bs-primary);
-        border-color: var(--bs-primary) !important;
+        outline: 1px solid var(--brand-color);
+        border-color: var(--brand-color) !important;
       }
 
       &.disabled {
@@ -170,7 +170,7 @@
   }
 
   &.hoverable .box-radio:hover {
-    border: 1px solid var(--bs-primary);
+    border: 1px solid var(--brand-color);
   }
 
   &.align-top {

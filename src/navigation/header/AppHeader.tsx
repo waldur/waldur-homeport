@@ -85,7 +85,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
               <Link
                 state={user ? 'profile.details' : null}
-                className="d-lg-none text-dark"
+                className="d-lg-none text-primary"
               >
                 {imageUrl ? (
                   <img
@@ -116,7 +116,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             {Boolean(user) && showGoBack && (
               <BaseButton
                 variant="text-primary"
-                className="me-3 py-0 align-self-center fw-semibold fs-5"
+                className="me-3 py-0 align-self-center font-semibold fs-5"
                 onClick={onGoBack}
                 tooltip={translate('Go back')}
                 style={{ width: '108px', height: '36px' }}
@@ -134,7 +134,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             {Boolean(user) && <ConfirmationDrawerToggle />}
             {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
             {Boolean(user) && isSmallScr && (
-              <span className="h-40px border-end align-self-center ms-1" />
+              <span className="h-40px border-r-[1px] border-r-secondary align-self-center ms-1" />
             )}
             <div className="d-flex align-items-center ms-3">
               <UserDropdownMenu />

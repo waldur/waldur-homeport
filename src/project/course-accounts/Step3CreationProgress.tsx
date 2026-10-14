@@ -93,7 +93,7 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
 
   if (!createdAccounts.length) {
     return (
-      <p className="text-muted text-center">
+      <p className="text-quaternary text-center">
         {translate('No accounts were created.')}
       </p>
     );

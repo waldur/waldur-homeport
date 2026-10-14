@@ -122,7 +122,7 @@ export const OrganizationCreateStep3: FunctionComponent<
               <h5 className="mt-6 mb-3">
                 {translate('Verifying your company...')}
               </h5>
-              <p className="text-muted">
+              <p className="text-quaternary">
                 {translate(
                   'Please wait while we check your company information in the business registry.',
                 )}
@@ -131,16 +131,16 @@ export const OrganizationCreateStep3: FunctionComponent<
           ) : validationResult ? (
             <>
               {getStatusIcon()}
-              <h3 className="mb-3 fw-bold">{getStatusTitle()}</h3>
+              <h3 className="mb-3 font-medium">{getStatusTitle()}</h3>
               <p
-                className="text-muted mb-0 fs-5 mb-20"
+                className="text-quaternary mb-0 fs-5 mb-20"
                 style={{ maxWidth: '500px', margin: '0 auto' }}
               >
                 {getStatusMessage()}
               </p>
             </>
           ) : (
-            <p className="text-muted mb-0">
+            <p className="text-quaternary mb-0">
               {translate('No validation results available.')}
             </p>
           )}

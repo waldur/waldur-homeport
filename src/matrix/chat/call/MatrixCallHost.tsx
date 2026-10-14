@@ -163,7 +163,7 @@ export const MatrixCallHost: FC = () => {
         cloneStylesheetsInto(win.document);
         win.document.body.style.margin = '0';
         win.document.body.style.height = '100vh';
-        win.document.body.style.background = 'var(--bs-body-bg, #1e1e1e)';
+        win.document.body.style.background = 'var(--bg-primary, #1e1e1e)';
         const onUnload = () => {
           setPipWindow(null);
           setIsInDocumentPiP(false);

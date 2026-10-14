@@ -9,7 +9,7 @@ interface CountryListFieldProps {
 export const CountryListField: FunctionComponent<CountryListFieldProps> = ({
   value = [],
 }) => (
-  <span className="text-muted">
+  <span className="text-quaternary">
     {translate('{count} countries selected', {
       count: Array.isArray(value) ? value.length : 0,
     })}

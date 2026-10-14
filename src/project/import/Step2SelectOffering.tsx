@@ -63,7 +63,7 @@ export const Step2SelectOffering: FC<Step2Props> = ({
                   }
                 }}
               />
-              <Form.Text className="text-muted">
+              <Form.Text className="text-quaternary">
                 {translate(
                   'Select an offering type to generate the appropriate template with resource fields.',
                 )}
@@ -74,9 +74,9 @@ export const Step2SelectOffering: FC<Step2Props> = ({
         />
       </Form.Group>
       {offering && (
-        <Card className="card-bordered text-muted bg-gray-50 offering-components">
+        <Card className="card-bordered text-quaternary bg-secondary offering-components">
           <Card.Body className="p-5">
-            <p className="fw-bold mb-0">
+            <p className="font-medium mb-0">
               {offering?.components?.length
                 ? translate('This offering includes the following components:')
                 : translate('The offering has no components!')}

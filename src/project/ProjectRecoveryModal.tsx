@@ -149,7 +149,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
           >
             <div className="mb-4">
               <h5>{translate('Project Recovery')}</h5>
-              <p className="text-muted mb-3">
+              <p className="text-quaternary mb-3">
                 {translate(
                   'You are about to recover the removed project "{projectName}". This action will:',
                   { projectName: project.name },

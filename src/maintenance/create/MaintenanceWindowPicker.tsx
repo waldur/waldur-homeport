@@ -163,7 +163,7 @@ export const MaintenanceWindowPicker: FC<FieldRenderProps<WindowValue>> = (
         />
       </div>
       {hasFullRange ? (
-        <div className="text-muted mt-2">
+        <div className="text-quaternary mt-2">
           {formatDuration(value[0] as Date, value[1] as Date)}
         </div>
       ) : null}

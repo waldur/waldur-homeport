@@ -33,7 +33,7 @@ const CONFIGURED_SIDEBAR_STYLES: readonly ConfiguredSidebarStyle[] = [
 /**
  * ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE is typed as a plain `string` in the
  * main app's own src/auth/types.ts, not a union, so a stale/typo'd backend
- * value shouldn't set an attribute surfaceColors.css has no rule for
+ * value shouldn't set an attribute sidebar.css has no rule for
  * (which would fall through to the unstyled shadcn defaults).
  */
 export function isConfiguredSidebarStyle(

@@ -40,7 +40,7 @@ export const ErrorTraceDialog: FallbackRender = (props) => {
   return (
     <ModalDialog title={translate('Error trace')}>
       <div
-        className="text-muted mh-300px scroll-y"
+        className="text-quaternary mh-300px scroll-y"
         style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
       >
         {props.componentStack || describeError(props.error as Error)}

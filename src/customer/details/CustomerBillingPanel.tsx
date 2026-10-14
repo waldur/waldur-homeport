@@ -68,11 +68,11 @@ const VatCodeValue: FC<{
     {ENV.plugins.WALDUR_CORE?.VAT_TAXATION_ENABLED &&
       isEuVatCode(value, country) &&
       (verified ? (
-        <Badge variant="success" tone="outline" className="ms-2">
+        <Badge variant="success" tone="outline" className="ml-2">
           {translate('Verified in VIES')}
         </Badge>
       ) : (
-        <Badge variant="warning" tone="outline" className="ms-2">
+        <Badge variant="warning" tone="outline" className="ml-2">
           {translate('Not verified')}
         </Badge>
       ))}
@@ -87,7 +87,7 @@ const VatRateValue: FC<{ customer: CustomerEditPanelProps['customer'] }> = ({
   ) : (
     <>
       {`${Number(customer.vat_percent)}%`}
-      <div className="text-muted fs-7">{customer.vat_rule}</div>
+      <div className="text-quaternary text-xs">{customer.vat_rule}</div>
     </>
   );
 

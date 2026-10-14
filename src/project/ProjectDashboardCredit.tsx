@@ -80,7 +80,7 @@ export const ProjectDashboardCredit = ({
         cardTitle={
           <>
             {chart.title}
-            <small className="text-muted fs-7 ms-4 fw-normal">
+            <small className="text-quaternary fs-7 ms-4 font-normal">
               (
               {translate('{date} balance', {
                 date: formatDate(DateTime.now().startOf('month')),

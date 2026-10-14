@@ -163,7 +163,7 @@ export const TableStoryCompactGridItem = ({ row }: { row: TableStoryRow }) => (
       </Badge>
     }
     body={
-      <div className="text-muted small">
+      <div className="text-quaternary small">
         {row.region} · {row.monthlyCost}/mo
       </div>
     }
@@ -310,7 +310,7 @@ export const tableStoryColumns: Column<TableStoryRow>[] = [
     id: 'name',
     title: 'Name',
     render: ({ row }) => (
-      <span className="fw-semibold text-dark">{row.name}</span>
+      <span className="font-semibold text-primary">{row.name}</span>
     ),
   },
   {

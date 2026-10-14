@@ -50,7 +50,7 @@ const ViaCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
   if (row.nexthop) return <code>{row.nexthop}</code>;
   if (row.source === 'connected') {
     return (
-      <span className="text-muted">
+      <span className="text-quaternary">
         {translate('on-link')}
         {row.port_backend_id ? (
           <>
@@ -64,7 +64,7 @@ const ViaCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
       </span>
     );
   }
-  return <span className="text-muted">—</span>;
+  return <span className="text-quaternary">—</span>;
 };
 
 const SubnetCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
@@ -73,7 +73,7 @@ const SubnetCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
       <>
         <span>{row.subnet_name}</span>
         {row.subnet_cidr ? (
-          <span className="text-muted ms-2">{row.subnet_cidr}</span>
+          <span className="text-quaternary ms-2">{row.subnet_cidr}</span>
         ) : null}
       </>
     );
@@ -83,12 +83,12 @@ const SubnetCell: FC<{ row: EffectiveRoute }> = ({ row }) => {
   }
   if (row.source === 'static') {
     return (
-      <span className="text-muted fst-italic">
+      <span className="text-quaternary fst-italic">
         {translate('beyond connected and default routes')}
       </span>
     );
   }
-  return <span className="text-muted">—</span>;
+  return <span className="text-quaternary">—</span>;
 };
 
 const DestinationCell: FC<{ row: EffectiveRoute }> = ({ row }) => (
@@ -175,7 +175,7 @@ export const EffectiveRoutesCard: FC<Props> = ({ routerUuid }) => {
       </Card.Header>
       <Card.Body>
         {rows.length === 0 ? (
-          <div className="text-muted">
+          <div className="text-quaternary">
             {translate(
               'No routes — attach an interface or set a gateway to populate this table.',
             )}

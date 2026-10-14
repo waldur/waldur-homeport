@@ -69,7 +69,7 @@ const BooleanIndicator: FC<{ value: boolean | undefined; label?: string }> = ({
     </Tooltip>
   ) : (
     <Tooltip label={label || translate('No')}>
-      <XIcon size={16} weight="bold" className="text-muted" />
+      <XIcon size={16} weight="bold" className="text-quaternary" />
     </Tooltip>
   );
 };
@@ -229,7 +229,7 @@ export const OrganizationResourcesTable: FC<
             <Link state="project.dashboard" params={{ uuid: row.project_uuid }}>
               {renderFieldOrDash(row.project_name)}
             </Link>
-            <div className="d-flex align-items-center text-muted fs-8 mt-1">
+            <div className="d-flex align-items-center text-quaternary fs-8 mt-1">
               <span className="text-truncate" style={{ maxWidth: '150px' }}>
                 {formatUuidNoDashes(row.project_uuid)}
               </span>
@@ -255,7 +255,7 @@ export const OrganizationResourcesTable: FC<
             >
               {renderFieldOrDash(row.name || row.offering_name)}
             </Link>
-            <div className="d-flex align-items-center text-muted fs-8 mt-1">
+            <div className="d-flex align-items-center text-quaternary fs-8 mt-1">
               <span className="text-truncate" style={{ maxWidth: '150px' }}>
                 {formatUuidNoDashes(row.uuid)}
               </span>

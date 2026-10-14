@@ -27,7 +27,7 @@ const SoftwarePackageList: FC<{ packages: NestedParentSoftware[] }> = ({
         {idx > 0 && ', '}
         {pkg.name}
         {pkg.versions?.length > 0 && (
-          <span className="text-muted"> ({pkg.versions.join(', ')})</span>
+          <span className="text-quaternary"> ({pkg.versions.join(', ')})</span>
         )}
       </span>
     ))}

@@ -35,7 +35,7 @@ export const WizardFormThirdPage: FunctionComponent<
             disabled={submitting}
           />
         ) : (
-          <p className="text-muted mb-0">
+          <p className="text-quaternary mb-0">
             {translate(
               'This call allocates on decision — no allocation date is needed. Change the allocation timing on the Configuration tab to set a fixed date.',
             )}

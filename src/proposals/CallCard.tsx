@@ -38,7 +38,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
           <div className="d-flex justify-content-between align-items-center">
             <Stack direction="horizontal" gap={1}>
               {!nextRound ? (
-                <div className="text-muted">{translate('No rounds')}</div>
+                <div className="text-quaternary">{translate('No rounds')}</div>
               ) : nextRound.status.label === 'Open' ? (
                 <Badge variant="warning" shape="pill" tone="outline">
                   {translate('Cutoff')}
@@ -46,7 +46,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
                   {formatRelativeWithHour(nextRound.cutoff_time)}
                 </Badge>
               ) : nextRound.status.label === 'Ended' ? (
-                <div className="text-muted">
+                <div className="text-quaternary">
                   {translate('Cutoff')}
                   {': '}
                   <strong>{formatDate(nextRound.cutoff_time)}</strong>

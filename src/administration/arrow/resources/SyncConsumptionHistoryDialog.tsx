@@ -84,11 +84,11 @@ export const SyncConsumptionHistoryDialog = ({
       title={translate('Sync consumption history')}
       subtitle={
         <>
-          <span className="fw-bold">{resource.name}</span>
+          <span className="font-medium">{resource.name}</span>
           {resource.backend_id && (
             <>
               {' '}
-              <span className="text-muted">({resource.backend_id})</span>
+              <span className="text-quaternary">({resource.backend_id})</span>
             </>
           )}
         </>
@@ -105,7 +105,7 @@ export const SyncConsumptionHistoryDialog = ({
         </>
       }
     >
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Fetch historical consumption data from Arrow and create usage records for billing.',
         )}
@@ -124,7 +124,7 @@ export const SyncConsumptionHistoryDialog = ({
           clearable={false}
           disabled={mutation.isPending}
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate('Start of the date range to sync')}
         </Form.Text>
       </Form.Group>
@@ -142,7 +142,7 @@ export const SyncConsumptionHistoryDialog = ({
           clearable={false}
           disabled={mutation.isPending}
         />
-        <Form.Text className="text-muted">
+        <Form.Text className="text-quaternary">
           {translate('End of the date range to sync')}
         </Form.Text>
       </Form.Group>

@@ -65,10 +65,10 @@ export const ImageCard: FC<OfferingCardVariantProps> = ({
             </ImagePlaceholder>
           )}
           <div className="overflow-hidden">
-            <div className="fw-semibold ellipsis" style={{ fontSize: 16 }}>
+            <div className="font-semibold ellipsis" style={{ fontSize: 16 }}>
               {offering.name}
             </div>
-            <div className="text-muted ellipsis" style={{ fontSize: 14 }}>
+            <div className="text-quaternary ellipsis" style={{ fontSize: 14 }}>
               {offering.customer_name}
             </div>
           </div>

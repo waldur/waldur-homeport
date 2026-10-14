@@ -109,7 +109,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
         {
           title: translate('Round ID'),
           render: ({ row }) => (
-            <code className="fw-bold text-break">{row.slug}</code>
+            <code className="font-medium text-break">{row.slug}</code>
           ),
           copyField: (row) => row.slug,
           width: '22%',

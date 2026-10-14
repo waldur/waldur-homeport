@@ -91,7 +91,7 @@ export const LimitPeriodChip: FC<Props> = ({
       tooltip={window ? `${familyLabel} · ${window}` : familyLabel}
     >
       {familyLabel}
-      {window && <span className="ms-1 fw-normal">· {window}</span>}
+      {window && <span className="ms-1 font-normal">· {window}</span>}
     </Badge>
   );
 };

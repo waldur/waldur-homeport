@@ -33,15 +33,11 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
 }) => (
   <Badge
     rightIcon={
-      active ? (
-        <LoadingSpinnerSimple
-          className={
-            props.tone === 'light' || props.tone === 'outline'
-              ? `text-${props.variant}`
-              : `badge-${props.variant}`
-          }
-        />
-      ) : undefined
+      // The spinner takes the badge's own text colour, whatever the variant
+      // and tone: the solid label colour (white, or dark on the light dark-mode
+      // info and neutral fills), the variant colour on light and outline ones
+      // (brand for primary and secondary).
+      active ? <LoadingSpinnerSimple className="text-current" /> : undefined
     }
     {...props}
     data-testid={props['data-testid'] || 'default-state-indicator'}

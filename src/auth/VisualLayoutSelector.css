@@ -6,9 +6,9 @@
 
 .group-title {
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
-  color: var(--bs-gray-500);
+  color: var(--text-quaternary);
   margin-bottom: 1rem;
   letter-spacing: 0.1em;
   display: flex;
@@ -19,7 +19,7 @@
 .group-title::after {
   content: '';
   height: 1px;
-  background: var(--bs-border-color);
+  background: var(--border-secondary);
   flex: 1;
 }
 
@@ -50,21 +50,21 @@
   aspect-ratio: 100 / 60;
   border-radius: 8px;
   overflow: hidden;
-  border: 2px solid var(--bs-border-color);
-  background: var(--bs-gray-100);
+  border: 2px solid var(--border-secondary);
+  background: var(--bg-tertiary);
   margin-bottom: 0.5rem;
 }
 
 .layout-item.active .layout-canvas {
-  border-color: var(--bs-primary);
-  box-shadow: 0 0 0 1px var(--bs-primary);
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 1px var(--brand-color);
 }
 
 .check-overlay {
   position: absolute;
   top: 6px;
   right: 6px;
-  background: var(--bs-primary);
+  background: var(--brand-color);
   color: white;
   width: 20px;
   height: 20px;
@@ -76,14 +76,10 @@
 
 .layout-name {
   font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--bs-body-color);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
 }
 
 .layout-item.active .layout-name {
-  color: var(--bs-primary);
-}
-
-[data-theme='dark'] .layout-canvas {
-  background: var(--bs-gray-900);
+  color: var(--brand-color);
 }

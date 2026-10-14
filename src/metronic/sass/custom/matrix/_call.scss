@@ -7,8 +7,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.923rem;
-  background: $bg-tertiary;
-  color: $text-secondary;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
 }
 
 .matrix-call-view__error {
@@ -22,26 +22,20 @@
   gap: 0.923rem;
   padding: 1.231rem;
   text-align: center;
-  background: $bg-tertiary;
-  color: $text-secondary;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
 }
 
 .call-in-progress-banner {
   gap: 1.23rem;
   padding: 0.769rem $card-px;
-  // $bg-warning-primary is a bright solid in dark mode; keep the light mock
-  // colour but use a subtle amber wash over the dark surface instead.
-  background-color: if(
-    isDarkMode(),
-    rgba($warning-500, 0.15),
-    $bg-warning-primary
-  );
-  border-bottom: 1px solid $border-secondary;
+  background-color: var(--status-warning-bg);
+  border-bottom: 1px solid var(--border-secondary);
 
   .call-in-progress-banner__label {
     font-size: $font-size-lg;
-    font-weight: 600;
-    color: $warning-700;
+    font-weight: var(--font-weight-semibold);
+    color: var(--status-warning-fg);
   }
 }
 
@@ -58,8 +52,8 @@
 
   .call-device-settings__label {
     margin-bottom: 0.308rem;
-    font-weight: 600;
-    color: $text-secondary;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
   }
 }
 
@@ -75,11 +69,7 @@
   max-width: calc(100% - 1.231rem);
   padding: 0.308rem 0.769rem;
   border-radius: 0.462rem;
-  background-color: if(
-    isDarkMode(),
-    rgba($warning-500, 0.15),
-    $bg-warning-primary
-  );
-  color: $warning-700;
+  background-color: var(--status-warning-bg);
+  @include mirrored-ramp-color(color, warning, 700);
   font-size: $font-size-sm;
 }

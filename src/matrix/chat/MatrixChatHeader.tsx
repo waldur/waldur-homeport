@@ -29,7 +29,7 @@ import { useNotify } from '@/store/notify';
 import { ActionsMenu } from '@/table/ActionsDropdown';
 
 import { useMatrixCall } from './call/useMatrixCall';
-import { getChatAvatarColor } from './chatColors';
+import { getChatAvatarClass } from './chatColors';
 import { MatrixMembersList } from './MatrixMembersList';
 import { isRoomMuted, setRoomMuted } from './mute';
 import { useMatrixClient } from './useMatrixClient';
@@ -92,7 +92,6 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
     );
   }, [roomUuid]);
 
-  const color = getChatAvatarColor(roomUuid);
   const inCall = callState === 'connecting' || callState === 'connected';
   const isThisRoomsCall = inCall && callRoomUuid === roomUuid;
   // A call exists, but in a different room — start-call is blocked until the
@@ -219,7 +218,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         name={roomName}
         size={40}
         circle
-        labelClassName={`bg-light-${color} text-${color}`}
+        labelClassName={getChatAvatarClass(roomUuid)}
       />
 
       <div
@@ -231,10 +230,10 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
             state="project.dashboard"
             params={{ uuid: projectUuid }}
             label={roomName}
-            className="fw-semibold text-truncate"
+            className="font-semibold text-truncate"
           />
         ) : (
-          <span className="fw-semibold text-truncate">{roomName}</span>
+          <span className="font-semibold text-truncate">{roomName}</span>
         )}
         {members.length > 0 && (
           <Popover>

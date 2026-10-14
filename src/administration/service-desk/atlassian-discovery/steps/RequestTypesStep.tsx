@@ -142,7 +142,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Select Request Types')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Select which request types should be available for creating support tickets.',
         )}
@@ -182,8 +182,8 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
                   onClick={(e) => e.stopPropagation()}
                 />
               </td>
-              <td className="fw-bold">{rt.name}</td>
-              <td className="text-muted">
+              <td className="font-medium">{rt.name}</td>
+              <td className="text-quaternary">
                 {renderFieldOrDash(rt.description)}
               </td>
               <td>
@@ -195,7 +195,7 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
       </Table>
 
       <div className="d-flex justify-content-between">
-        <span className="text-muted">
+        <span className="text-quaternary">
           {translate('{count} request type(s) selected', {
             count: selectedCount,
           })}

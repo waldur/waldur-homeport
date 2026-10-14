@@ -46,7 +46,7 @@ const SshKeyRestrictionsBanner = () => {
   }
 
   return (
-    <Card className="card-bordered bg-light-info mb-4">
+    <Card className="card-bordered bg-info-subtle mb-4">
       <Card.Body className="d-flex align-items-center gap-3 p-4">
         <FeaturedIcon icon={<InfoIcon weight="bold" />} variant="info" />
         <div>

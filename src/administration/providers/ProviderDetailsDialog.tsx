@@ -31,11 +31,11 @@ export const ProviderDetailsDialog = (props) => {
       url && (
         <ListGroup.Item key={urlKey}>
           <div className="ms-2 me-auto">
-            <div className="fw-bold">{label}</div>
+            <div className="font-medium">{label}</div>
             <div className="copy-to-clipboard-container">
               {url}
               <CopyToClipboardButton
-                className="mx-2 text-hover-primary cursor-pointer d-inline z-index-1"
+                className="mx-2 hover:text-brand cursor-pointer d-inline z-index-1"
                 value={url}
               />
             </div>

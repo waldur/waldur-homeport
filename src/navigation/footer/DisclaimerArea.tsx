@@ -18,8 +18,8 @@ export const DisclaimerArea: FunctionComponent = () => {
   }
 
   return (
-    <div className="border-top py-6">
-      <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-center gap-6 fs-7 text-muted">
+    <div className="border-t-[1px] border-t-secondary py-6">
+      <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-center gap-6 fs-7 text-quaternary">
         {text && <span>{text}</span>}
         {logo && (
           <img

@@ -75,7 +75,7 @@ export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
       showPageSizeSelector={true}
       enableExport={true}
       rowClass={({ row }) =>
-        props.currentOrganization?.uuid === row.uuid ? 'bg-gray-200' : ''
+        props.currentOrganization?.uuid === row.uuid ? 'bg-quaternary' : ''
       }
       expandableRow={OrganizationExpandableRow}
     />

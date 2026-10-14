@@ -42,11 +42,11 @@ export const ProviderDefaultSubnets: FC<ProviderDefaultSubnetsProps> = ({
   }
 
   return (
-    <div className="border-top p-6">
-      <div className="fw-bold mb-1">
+    <div className="border-t-[1px] border-t-secondary p-6">
+      <div className="font-medium mb-1">
         {translate('Also allowed by the service provider')}
       </div>
-      <div className="text-muted mb-4">
+      <div className="text-quaternary mb-4">
         {translate(
           'Published on the offering and applied to your resources of it. These cannot be changed here.',
         )}

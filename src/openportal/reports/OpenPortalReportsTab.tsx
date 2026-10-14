@@ -203,7 +203,7 @@ export const OpenPortalReportsTab: FC = () => {
 
   return (
     <Card className="card-bordered">
-      <Card.Header className="border-bottom">
+      <Card.Header className="border-b-[1px] border-b-secondary">
         <div className="d-flex align-items-center gap-3 flex-wrap w-100">
           <div className="d-flex align-items-center me-2">
             <span className="h3 mb-0">{translate('Usage Report')}</span>
@@ -263,7 +263,7 @@ export const OpenPortalReportsTab: FC = () => {
           )}
 
           {reportsCacheAge && (
-            <span className="text-muted small ms-auto">
+            <span className="text-quaternary small ms-auto">
               {translate('Cached {age}', {
                 age: formatCacheAge(reportsCacheAge),
               })}
@@ -304,7 +304,7 @@ export const OpenPortalReportsTab: FC = () => {
         {/* Usage chart */}
         {activeUsage.length > 0 && nameMaps !== undefined && (
           <div className="mb-6">
-            <h4 className="fw-semibold mb-3">{translate('Usage')}</h4>
+            <h4 className="font-semibold mb-3">{translate('Usage')}</h4>
             <UsageReportVis
               reports={activeUsage}
               height="400px"
@@ -316,7 +316,7 @@ export const OpenPortalReportsTab: FC = () => {
         {/* Storage chart */}
         {activeStorage.length > 0 && nameMaps !== undefined && (
           <div>
-            <h4 className="fw-semibold mb-3">{translate('Storage')}</h4>
+            <h4 className="font-semibold mb-3">{translate('Storage')}</h4>
             <StorageReportVis
               reports={activeStorage}
               height="360px"

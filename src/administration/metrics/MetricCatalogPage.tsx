@@ -76,7 +76,7 @@ export const MetricCatalogPage: FC = () => {
           {
             title: translate('Metric'),
             render: ({ row }) => (
-              <span className="text-dark fw-semibold">{row.name}</span>
+              <span className="text-primary font-semibold">{row.name}</span>
             ),
           },
           {

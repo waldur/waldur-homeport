@@ -73,7 +73,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
         label={translate('Email')}
         required
       />
-      <h6 className="fw-bold mb-4 mt-6">{translate('Roles & Status')}</h6>
+      <h6 className="font-medium mb-4 mt-6">{translate('Roles & Status')}</h6>
       <BooleanGroup
         name="is_active"
         type="checkbox"
@@ -118,7 +118,7 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           'Designates whether the user is allowed to create and use personal access tokens.',
         )}
       />
-      <h6 className="fw-bold mb-4 mt-6">
+      <h6 className="font-medium mb-4 mt-6">
         {translate('Password')}
         {editMode && (
           <span className="ms-2">

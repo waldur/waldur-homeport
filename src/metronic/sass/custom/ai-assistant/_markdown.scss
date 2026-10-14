@@ -12,20 +12,22 @@
 .aui-md h6 {
   scroll-margin-top: 5rem;
   letter-spacing: -0.025em;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   margin-bottom: 1rem;
 }
 
 .aui-md h1 {
   font-size: $h1-font-size;
-  font-weight: 800;
+  font-weight: var(
+    --font-weight-bold
+  ); // was 800: Inter is loaded up to 700, which 800 rendered as
   margin-top: 2rem;
 }
 
 .aui-md h2 {
   font-size: $h2-font-size;
   margin-top: 2rem;
-  border-bottom: 1px solid $border-primary;
+  border-bottom: 1px solid var(--border-primary);
   padding-bottom: 0.5rem;
 }
 
@@ -45,8 +47,8 @@
 }
 
 .aui-md a {
-  font-weight: 500;
-  color: $text-brand-primary;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-brand-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -60,12 +62,12 @@
   display: inline-flex;
   align-items: center;
   padding: 6px 14px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   font-size: 1rem;
   line-height: 1.4;
-  color: $text-brand-primary;
-  background-color: $btn-secondary-bg;
-  border: 1px solid $border-brand;
+  color: var(--text-brand-primary);
+  background-color: var(--btn-secondary-bg);
+  border: 1px solid var(--border-brand);
   border-radius: 6px;
   text-decoration: none;
   white-space: nowrap;
@@ -76,9 +78,9 @@
 
   &:hover,
   &:focus {
-    color: $text-brand-primary;
-    background-color: $btn-secondary-bg_hover;
-    border-color: $border-brand;
+    color: var(--text-brand-primary);
+    background-color: var(--btn-secondary-bg-hover);
+    border-color: var(--border-brand);
     text-decoration: none;
   }
 }
@@ -86,7 +88,7 @@
 .aui-md blockquote {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  border-left: 2px solid $border-primary;
+  border-left: 2px solid var(--border-primary);
   padding-left: 1.5rem;
   font-style: italic;
 }
@@ -114,11 +116,11 @@
 }
 
 .aui-md th {
-  background-color: $bg-tertiary;
+  background-color: var(--bg-tertiary);
   padding: 0.5rem 1rem;
   text-align: left;
-  font-weight: 700;
-  border-bottom: 1px solid $border-primary;
+  font-weight: var(--font-weight-bold);
+  border-bottom: 1px solid var(--border-primary);
 
   &:first-child {
     border-top-left-radius: $border-radius;
@@ -131,11 +133,11 @@
 
 .aui-md td {
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid $border-primary;
-  border-left: 1px solid $border-primary;
+  border-bottom: 1px solid var(--border-primary);
+  border-left: 1px solid var(--border-primary);
 
   &:last-child {
-    border-right: 1px solid $border-primary;
+    border-right: 1px solid var(--border-primary);
   }
 }
 
@@ -156,12 +158,12 @@
 }
 
 .aui-md code {
-  background-color: $bg-tertiary;
+  background-color: var(--bg-tertiary);
   border-radius: $border-radius-xs;
   padding: 0.2rem 0.3rem;
   font-family: ui-monospace, SFMono-Regular, monospace;
   font-size: map-get($font-sizes, 7); // Slightly smaller than base
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .aui-code-block-root {
@@ -185,11 +187,11 @@
   gap: 1rem;
   border-top-left-radius: $border-radius;
   border-top-right-radius: $border-radius;
-  background-color: $bg-tertiary;
+  background-color: var(--bg-tertiary);
   padding: 0.5rem 1rem;
   font-size: map-get($font-sizes, 7);
-  font-weight: 600;
-  border-bottom: 1px solid $border-primary;
+  font-weight: var(--font-weight-semibold);
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .aui-code-language {
@@ -205,12 +207,12 @@
   cursor: pointer;
   background: transparent;
   border: none;
-  color: $text-secondary;
+  color: var(--text-secondary);
   transition: all 0.2s;
 
   &:hover {
-    background-color: $bg-primary_hover;
-    color: $text-primary;
+    background-color: var(--bg-primary-hover);
+    color: var(--text-primary);
   }
 }
 
@@ -220,14 +222,14 @@
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
   padding: 1rem;
-  background-color: $bg-tertiary;
+  background-color: var(--bg-tertiary);
 
   code {
     background-color: transparent;
     padding: 0;
     border-radius: 0;
     color: inherit;
-    font-weight: normal;
+    font-weight: var(--font-weight-normal);
     box-shadow: none;
   }
 }
@@ -247,7 +249,7 @@
 .aui-loading-block {
   min-height: 120px;
   padding: 1rem;
-  background-color: $bg-tertiary;
+  background-color: var(--bg-tertiary);
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
 }
@@ -262,9 +264,9 @@
   height: 1rem;
   background: linear-gradient(
     90deg,
-    $bg-tertiary 0%,
-    $border-primary 50%,
-    $bg-tertiary 100%
+    var(--bg-tertiary) 0%,
+    var(--border-primary) 50%,
+    var(--bg-tertiary) 100%
   );
   background-size: 200% 100%;
   border-radius: $border-radius-xs;
@@ -295,9 +297,9 @@
 .aui-mermaid-block {
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
-  border-left: 1px solid $border-primary;
-  border-right: 1px solid $border-primary;
-  border-bottom: 1px solid $border-primary;
-  background-color: $bg-tertiary;
+  border-left: 1px solid var(--border-primary);
+  border-right: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--border-primary);
+  background-color: var(--bg-tertiary);
   padding: 1rem;
 }

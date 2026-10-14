@@ -103,13 +103,13 @@ export const MatrixAdminSettingsTab = () => {
           <table className="table table-borderless mb-0">
             <tbody>
               <tr>
-                <td className="fw-bold text-nowrap pe-4">
+                <td className="font-medium text-nowrap pe-4">
                   {translate('Bot user ID')}
                 </td>
                 <td>{renderFieldOrDash(status.bot_user_id)}</td>
               </tr>
               <tr>
-                <td className="fw-bold text-nowrap pe-4">
+                <td className="font-medium text-nowrap pe-4">
                   {translate('Webhook path')}
                 </td>
                 <td>
@@ -124,7 +124,7 @@ export const MatrixAdminSettingsTab = () => {
                 </td>
               </tr>
               <tr>
-                <td className="fw-bold text-nowrap pe-4">
+                <td className="font-medium text-nowrap pe-4">
                   {translate('Transactions processed')}
                 </td>
                 <td>{status.transaction_count}</td>

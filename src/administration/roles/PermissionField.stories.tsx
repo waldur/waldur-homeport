@@ -10,7 +10,7 @@ const PermissionFieldHarness = ({ initial = [] as string[] }) => {
       style={{
         maxWidth: '850px',
         padding: '24px',
-        background: 'var(--surface-primary, #fff)',
+        background: 'var(--bg-primary, #fff)',
       }}
     >
       <PermissionField input={{ value, onChange: setValue }} />

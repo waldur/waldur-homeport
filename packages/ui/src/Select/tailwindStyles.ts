@@ -68,7 +68,7 @@ export const getSelectTailwindClassNames = <
         // Gotcha #2: bare `border`/`rounded-md` would collide with
         // Bootstrap. 8px radius matches the old control's $border-radius
         // (Tailwind's `rounded-md` step is 6px).
-        'rounded-[8px] border-[1px] border-solid bg-[var(--waldur-bg-primary)]',
+        'rounded-[8px] border-[1px] border-solid bg-primary',
         // Gotcha #1: `min-h-*!` overrides react-select's forced 38px.
         // Heights below match the old control's measured height per
         // variant; `px-[11px]` doubles as the search-icon-to-border gap
@@ -80,20 +80,18 @@ export const getSelectTailwindClassNames = <
             ? 'min-h-[28px]! px-[8px] py-[4.5px] text-[14px]'
             : 'min-h-[40px]! px-[11px] py-[6px] text-[14.3px]',
         hasError
-          ? 'border-[var(--color-border-danger)] ring-1 ring-[var(--color-border-danger)]'
+          ? 'border-danger-subtle ring-1 ring-[var(--status-danger-border)]'
           : isFocused
-            ? // brand-300 (light) / brand-400 (dark): the old focus color
-              // ($border-brand) picks a different rung of the brand ramp
-              // per theme, since the ramp itself doesn't re-theme at
-              // runtime. No `shadow-sm` — the old focused control has
+            ? // --border-brand: the old focus color ($border-brand),
+              // brand-300 in light and brand-400 in dark. No `shadow-sm` — the old focused control has
               // exactly one box-shadow layer (this ring), and the name
               // collides with Bootstrap's own `.shadow-sm` per gotcha #2.
-              'border-[var(--waldur-brand-300)] dark:border-[var(--waldur-brand-400)] ring-1 ring-[var(--waldur-brand-300)] dark:ring-[var(--waldur-brand-400)]'
-            : 'border-[var(--color-border-secondary)] hover:border-[var(--waldur-brand-500)]',
+              'border-[var(--border-brand)] ring-1 ring-[var(--border-brand)]'
+            : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum
+              'border-secondary hover:border-brand-500',
         // Flat disabled fill, not an opacity wash: matches the old
         // $input-disabled-bg, which dimmed only the placeholder text.
-        isDisabled &&
-          'bg-[var(--waldur-bg-disabled-subtle)] cursor-not-allowed',
+        isDisabled && 'bg-secondary cursor-not-allowed',
       );
     },
 
@@ -110,12 +108,13 @@ export const getSelectTailwindClassNames = <
       ),
 
     multiValue: () =>
-      'bg-[var(--color-gray-200)] dark:bg-[var(--color-gray-dark-700)] rounded-md px-[4px] py-[2px] flex items-center gap-[4px] m-[2px]',
+      'bg-quaternary rounded-md px-[4px] py-[2px] flex items-center gap-[4px] m-[2px]',
 
-    multiValueLabel: () => 'text-[11px] text-[var(--surface-text-primary)]',
+    multiValueLabel: () => 'text-[11px] text-primary',
 
     multiValueRemove: () =>
-      'hover:bg-[var(--color-error-100)] dark:hover:bg-[var(--color-error-900)] hover:text-[var(--color-error-600)] rounded-[4px] px-[2px] cursor-pointer transition-colors',
+      // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- a hover tint one step stronger than -bg (error-100), so it reads on the chip
+      'hover:bg-error-100 dark:hover:bg-error-900 hover:text-danger rounded-[4px] px-[2px] cursor-pointer transition-colors',
 
     singleValue: ({ isDisabled }) =>
       cn(
@@ -124,23 +123,21 @@ export const getSelectTailwindClassNames = <
         // assert against `.metronic-select__single-value` directly to read
         // back a single-select's displayed value.
         'metronic-select__single-value',
-        'text-[var(--surface-text-primary)] leading-normal truncate',
-        isDisabled && 'text-[var(--surface-text-muted)]',
+        'text-primary leading-normal truncate',
+        isDisabled && 'text-quinary',
       ),
 
     placeholder: ({ isDisabled }) =>
       cn(
         'truncate select-none',
-        // `--surface-text-secondary`, not `--surface-text-muted`: the old
+        // `--text-quaternary`, not `--text-quinary`: the old
         // select's placeholder and a plain Bootstrap `.form-control`'s
         // `::placeholder` render in the same color; `-muted` is a step
         // lighter and only matches elsewhere by coincidence.
-        isDisabled
-          ? 'text-[var(--waldur-text-disabled)]'
-          : 'text-[var(--surface-text-secondary)]',
+        isDisabled ? 'text-[var(--text-disabled)]' : 'text-quaternary',
       ),
 
-    input: () => 'text-[var(--surface-text-primary)] m-0 p-0 text-[inherit]',
+    input: () => 'text-primary m-0 p-0 text-[inherit]',
 
     indicatorsContainer: () => 'flex items-center gap-[4px] self-stretch',
 
@@ -148,14 +145,14 @@ export const getSelectTailwindClassNames = <
 
     dropdownIndicator: ({ selectProps: { menuIsOpen } }) =>
       cn(
-        'text-[var(--surface-text-muted)] hover:text-[var(--surface-text-secondary)] transition-transform duration-200 p-[2px]',
+        'text-quinary hover:text-quaternary transition-transform duration-200 p-[2px]',
         menuIsOpen && 'rotate-180',
         isTableFilter && 'hidden',
       ),
 
     clearIndicator: () =>
       cn(
-        'metronic-select__clear-indicator text-[var(--surface-text-muted)] hover:text-[var(--color-error-600)] cursor-pointer transition-colors',
+        'metronic-select__clear-indicator text-quinary hover:text-danger cursor-pointer transition-colors',
         // Filter panels hide the dropdown arrow above, so the clear
         // button needs its own breathing room instead of sharing the
         // indicators gap.
@@ -169,13 +166,9 @@ export const getSelectTailwindClassNames = <
         // match the old menu's own values (a 1px outline plus a soft
         // 4px/11px drop shadow — the old menu has no real `border-width`
         // either, just this shadow).
-        'z-[9999] mt-[8px] overflow-hidden rounded-[8px] border-[1px] border-solid border-[var(--surface-card-border)]',
-        // `--waldur-bg-primary`, not `--surface-card-bg`: the old menu
-        // always matches its own control's background exactly. The two
-        // tokens only coincide in light mode — in dark mode
-        // `--surface-card-bg` is a step lighter, seaming visibly against
-        // the control it drops from.
-        'bg-[var(--waldur-bg-primary)] shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_4px_11px_0_rgba(0,0,0,0.1)]',
+        'z-[9999] mt-[8px] overflow-hidden rounded-[8px] border-[1px] border-solid border-secondary',
+        // `--bg-primary` matches the control's background in both themes.
+        'bg-primary shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_4px_11px_0_rgba(0,0,0,0.1)]',
       ),
 
     menuList: ({ isMulti }) =>
@@ -199,12 +192,11 @@ export const getSelectTailwindClassNames = <
 
       const colorClasses = cn(
         isSelected
-          ? 'bg-[var(--surface-hover-bg)] text-[var(--surface-text-primary)]'
+          ? 'bg-primary-hover text-primary'
           : isFocused
-            ? 'bg-[var(--surface-hover-bg)] text-[var(--surface-text-primary)]'
-            : 'text-[var(--surface-text-primary)]',
-        isDisabled &&
-          'opacity-40 cursor-not-allowed text-[var(--surface-text-muted)]',
+            ? 'bg-primary-hover text-primary'
+            : 'text-primary',
+        isDisabled && 'opacity-40 cursor-not-allowed text-quinary',
       );
 
       // `flex!`/`text-[…]!` are gotcha #1: react-select's Option forces
@@ -243,11 +235,9 @@ export const getSelectTailwindClassNames = <
 
     group: () => 'pt-[6px] pb-[2px]',
     groupHeading: () =>
-      'px-[12px] py-[4px] text-[11px] font-semibold uppercase tracking-wider text-[var(--surface-text-muted)]',
+      'px-[12px] py-[4px] text-[11px] font-semibold uppercase tracking-wider text-quinary',
 
-    noOptionsMessage: () =>
-      'p-[12px] text-center text-[13px] text-[var(--surface-text-muted)]',
-    loadingMessage: () =>
-      'p-[12px] text-center text-[13px] text-[var(--surface-text-muted)]',
+    noOptionsMessage: () => 'p-[12px] text-center text-[13px] text-quinary',
+    loadingMessage: () => 'p-[12px] text-center text-[13px] text-quinary',
   };
 };

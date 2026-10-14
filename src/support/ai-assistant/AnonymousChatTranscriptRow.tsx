@@ -99,7 +99,9 @@ const ReviewVerdict: FunctionComponent<{
           </div>
           <div className="p-3 rounded chat-log-bubble">
             {feedback.llm_summary || (
-              <span className="text-muted">{translate('(no summary)')}</span>
+              <span className="text-quaternary">
+                {translate('(no summary)')}
+              </span>
             )}
           </div>
           {feedback.llm_hallucination_detected &&
@@ -115,7 +117,7 @@ const ReviewVerdict: FunctionComponent<{
       </div>
       {/* Same weight as the hairline between turns, just darker — enough to
           mark where commentary ends and the conversation begins. */}
-      <div className="border-bottom border-gray-500 mx-3" />
+      <div className="border-b-[1px] border-[var(--border-divider-strong)] mx-3" />
     </>
   );
 };
@@ -183,7 +185,7 @@ const InteractionTurns: FunctionComponent<{
           )}
           <div
             className={classNames('p-3 rounded chat-log-bubble', {
-              'border-start border-3 border-danger': interaction.is_flagged,
+              'border-l-[1px] border-3 border-danger': interaction.is_flagged,
             })}
           >
             <div style={{ whiteSpace: 'pre-wrap' }}>
@@ -208,13 +210,15 @@ const InteractionTurns: FunctionComponent<{
         <div className="message-body">
           <div
             className={classNames('p-3 rounded chat-log-bubble', {
-              'border-start border-3': sentiment !== null,
+              'border-l-[1px] border-l-secondary border-3': sentiment !== null,
               'border-success': sentiment === 'positive',
               'border-danger': sentiment === 'negative',
             })}
           >
             {renderable.length === 0 ? (
-              <span className="text-muted">{translate('(no text reply)')}</span>
+              <span className="text-quaternary">
+                {translate('(no text reply)')}
+              </span>
             ) : (
               renderable.map((block) => {
                 const Component = uiRegistry.getComponent(block.key);
@@ -267,7 +271,7 @@ export const AnonymousChatTranscriptRow: FunctionComponent<{
   if (!data || data.length === 0) {
     return (
       <ExpandableContainer>
-        <span className="text-muted">
+        <span className="text-quaternary">
           {translate('No messages in this thread.')}
         </span>
       </ExpandableContainer>
@@ -282,7 +286,7 @@ export const AnonymousChatTranscriptRow: FunctionComponent<{
     <ExpandableContainer>
       <OfflineBlockContext.Provider value={true}>
         <div className="d-flex flex-column">
-          <div className="d-flex align-items-center gap-2 pb-2 border-bottom">
+          <div className="d-flex align-items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
             <strong>{row.user_slug || row.session_id}</strong>
           </div>
           {verdict?.llm_reviewed_at && (

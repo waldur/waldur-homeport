@@ -16,7 +16,7 @@ export const ReviewerInvitationDetails: FC<ReviewerInvitationDetailsProps> = ({
     <div>
       <div>{row.invited_at ? formatDate(row.invited_at) : '-'}</div>
       {row.invitation_expires_at && row.invitation_status === 'pending' && (
-        <small className="text-muted">
+        <small className="text-quaternary">
           <ClockIcon size={12} className="me-1" weight="bold" />
           {translate('Expires')}: {formatDate(row.invitation_expires_at)}
         </small>

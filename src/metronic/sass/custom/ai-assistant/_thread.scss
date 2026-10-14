@@ -1,5 +1,5 @@
 .aui-root {
-  color: $text-primary;
+  color: var(--text-primary);
 }
 
 .aui-root.aui-thread-root,
@@ -46,13 +46,13 @@
   border: 0;
   border-radius: 9999px;
   background-color: transparent;
-  color: $fg-quaternary;
+  color: var(--text-quaternary);
   border-color: transparent;
   box-shadow: none;
   box-sizing: border-box;
 
   &:hover {
-    background-color: $bg-primary_hover;
+    background-color: var(--bg-primary-hover);
   }
 
   svg {
@@ -100,7 +100,7 @@
 .aui-welcome-icon-container {
   width: 3rem;
   height: 3rem;
-  background-color: $btn-primary-bg;
+  background-color: var(--btn-primary-bg);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -134,23 +134,23 @@
 
 .aui-welcome-title-1 {
   font-size: $h2-font-size;
-  font-weight: 600;
-  color: $text-quaternary;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-quaternary);
   margin-bottom: 0.25rem;
   line-height: 1.5;
 }
 
 .aui-welcome-title-2 {
   font-size: $h2-font-size;
-  font-weight: 500;
-  color: $text-primary;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
   margin-bottom: 1rem;
   line-height: 1.5;
 }
 
 .aui-welcome-subtitle {
   font-size: $font-size-lg;
-  color: $text-quaternary;
+  color: var(--text-quaternary);
   max-width: 300px;
   line-height: 1.5;
   margin: 0;
@@ -178,7 +178,7 @@
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    color: $fg-quaternary;
+    color: var(--text-quaternary);
   }
 }
 
@@ -191,9 +191,9 @@
   height: 2.5rem;
   border-radius: 9999px;
 
-  border: 1px solid $border-primary;
-  background-color: $bg-primary;
-  color: $text-primary;
+  border: 1px solid var(--border-primary);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,7 +207,7 @@
   }
 
   &:hover {
-    background-color: $bg-primary_hover;
+    background-color: var(--bg-primary-hover);
     transform: translateX(-50%) translateY(-1px);
   }
 
@@ -222,8 +222,8 @@
   width: 100%;
   margin-top: auto !important;
   padding: 0 16px 16px 16px;
-  background-color: $bg-primary;
-  border: $border-primary;
+  background-color: var(--bg-primary);
+  border: var(--border-primary);
   flex-shrink: 0 !important;
   position: relative;
 }
@@ -242,8 +242,8 @@
   padding: 0;
   margin-top: 1rem;
   border-radius: $border-radius;
-  border: 1px solid $border-primary;
-  background-color: $bg-primary;
+  border: 1px solid var(--border-primary);
+  background-color: var(--bg-primary);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -257,7 +257,7 @@
   padding-top: 0.5rem;
 
   svg {
-    color: $fg-disabled;
+    color: var(--text-quinary);
     flex-shrink: 0;
     margin-top: 4px;
     width: 1.2rem;
@@ -268,9 +268,9 @@
 .aui-composer-usage-row {
   margin-top: 0.5rem;
   padding: 0.4rem 0.75rem;
-  background: $bg-secondary;
+  background: var(--bg-secondary);
   border: none;
-  border-top: 1px solid $border-primary;
+  border-top: 1px solid var(--border-primary);
   width: 100%;
 }
 
@@ -299,14 +299,14 @@
   background: transparent;
   line-height: 1.5;
   padding: 2px 8px;
-  color: $text-primary;
+  color: var(--text-primary);
   outline: none;
   // Composer must only ever grow vertically; never expose a horizontal
   // scrollbar from sub-pixel width rounding of the flex layout.
   overflow-x: hidden;
 
   &::placeholder {
-    color: $text-placeholder;
+    color: var(--text-quaternary);
   }
 
   @include media-breakpoint-down(lg) {
@@ -319,11 +319,11 @@
   display: flex;
   align-items: center;
   width: 100%;
-  border-top: 1px solid $border-primary;
+  border-top: 1px solid var(--border-primary);
   border-bottom-right-radius: $border-radius;
   border-bottom-left-radius: $border-radius;
   padding-right: 1.25rem;
-  background: $bg-secondary;
+  background: var(--bg-secondary);
 }
 
 .aui-composer-action-wrapper {
@@ -342,12 +342,12 @@
   border-color: transparent;
   box-shadow: none;
   padding-left: 1rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   border-radius: $border-radius;
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  color: $text-primary;
+  color: var(--text-primary);
 
   svg {
     width: 1.25rem;
@@ -355,18 +355,18 @@
   }
 
   &.send {
-    color: $brand-700;
+    color: var(--text-brand-secondary);
 
     &:disabled {
-      color: $text-primary;
+      color: var(--text-primary);
     }
   }
 
   &.token {
-    // Inherits $text-primary from above by default
+    // Inherits var(--text-primary) from above by default
 
     &.active {
-      color: $brand-700;
+      color: var(--text-brand-secondary);
     }
   }
 }
@@ -377,12 +377,13 @@
   gap: 0.5rem;
   width: 100%;
   padding: 0.5rem 0.75rem;
-  background-color: rgba($danger, 0.1);
-  border-left: 3px solid $danger;
+  @include mirrored-ramp-color(background-color, error, 600, 0.1);
+  border-left: 3px solid;
+  @include mirrored-ramp-color(border-left-color, error, 600);
   border-radius: $border-radius;
 
   svg {
-    color: $danger;
+    @include mirrored-ramp-color(color, error, 600);
     flex-shrink: 0;
     width: 1.25rem;
     height: 1.25rem;
@@ -390,7 +391,7 @@
 }
 
 .aui-message-error-message {
-  color: $text-error-primary;
+  color: var(--status-danger-fg);
   font-size: 1rem;
   flex: 1;
 }
@@ -399,7 +400,7 @@
   background-color: transparent;
   border-color: transparent;
   box-shadow: none;
-  color: $brand-700;
+  color: var(--text-brand-secondary);
   padding: 0;
   border-radius: 100px;
 
@@ -431,7 +432,7 @@
   max-width: 100%;
   padding: 0.8rem 1rem;
   border-radius: $border-radius-xl;
-  background: $gray-100;
+  background: var(--bg-tertiary);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -439,7 +440,7 @@
   min-height: 3rem;
   gap: 0.5rem;
   position: relative;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .aui-assistant-message-footer {
@@ -457,7 +458,7 @@
   .dot {
     width: 0.5rem;
     height: 0.5rem;
-    background-color: $text-secondary;
+    background-color: var(--text-secondary);
     border-radius: 50%;
     animation: aui-dot-pulse 1.4s ease-in-out infinite;
 
@@ -496,10 +497,10 @@
   border-radius: 100px;
   background-color: transparent;
   border-color: transparent;
-  color: $text-primary;
+  color: var(--text-primary);
 
   &:hover {
-    background-color: $bg-primary_hover;
+    background-color: var(--bg-primary-hover);
     border-color: transparent;
   }
 }
@@ -530,14 +531,14 @@
 .aui-user-message-content {
   padding: 0.8rem 1rem;
   border-radius: $border-radius-xl;
-  border: 1px solid $border-primary;
+  border: 1px solid var(--border-primary);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   word-break: break-word;
   max-width: 100%;
   min-width: 0;
   flex: 0 1 auto;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   position: relative;
 }
 
@@ -557,7 +558,7 @@
   gap: 4px;
   font-size: 1.1rem;
   margin-left: 0;
-  color: $text-secondary;
+  color: var(--text-secondary);
   padding-left: 4px;
 }
 
@@ -568,7 +569,7 @@
 
 .aui-edit-composer-root {
   border-radius: $border-radius-xl;
-  background: $gray-100;
+  background: var(--bg-tertiary);
   padding: 0.8rem 1rem;
   display: flex;
   flex-direction: column;
@@ -581,7 +582,7 @@
   max-height: 150px;
   border: none;
   background: transparent;
-  color: $text-primary;
+  color: var(--text-primary);
   outline: none;
 }
 
@@ -592,27 +593,27 @@
 
   .aui-button-ghost {
     padding: 0.5rem;
-    background-color: $btn-tertiary-bg;
-    border: 1px solid $border-primary;
+    background-color: var(--btn-tertiary-bg);
+    border: 1px solid var(--border-primary);
 
     &:hover {
-      background-color: $btn-tertiary-bg_hover;
+      background-color: var(--btn-tertiary-bg-hover);
     }
   }
 }
 
 .aui-button-update {
-  background-color: $btn-secondary-bg;
+  background-color: var(--btn-secondary-bg);
   border-radius: 100px;
-  border: 1px solid $border-primary;
-  color: $text-primary;
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
   padding: 0.5rem;
 
   &:hover {
-    background-color: $btn-secondary-bg_hover;
+    background-color: var(--btn-secondary-bg-hover);
   }
   &:disabled {
-    color: $text-disabled;
+    color: var(--text-disabled);
   }
 }
 
@@ -624,18 +625,18 @@
 .aui-error-icon {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: $warning;
+  @include mirrored-ramp-color(color, warning, 600);
 }
 
 .aui-error-title {
   margin-bottom: 1rem;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   text-align: center;
 }
 
 .aui-error-details {
-  background-color: $bg-tertiary;
+  background-color: var(--bg-tertiary);
   padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
@@ -644,18 +645,18 @@
 
 .aui-error-summary {
   cursor: pointer;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 
 .aui-error-stack {
   font-size: 0.75rem;
   overflow: auto;
   margin-top: 0.5rem;
-  color: $text-secondary;
+  color: var(--text-secondary);
 }
 
 .aui-error-message {
-  color: $text-secondary;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   margin-bottom: 1rem;
   text-align: center;
@@ -675,12 +676,13 @@
   font-size: 0.875rem;
 
   &--primary {
-    background-color: $primary;
-    color: $primary-inverse;
+    background-color: var(--bg-brand-solid);
+    color: #fff;
   }
 
   &--secondary {
-    background-color: $gray-500;
+    // White text: the same gray in both themes.
+    background-color: var(--color-gray-500);
     color: #fff;
   }
 }
@@ -697,7 +699,7 @@
   align-items: center;
   gap: 0.25rem;
   font-size: 1rem;
-  color: $text-secondary;
+  color: var(--text-secondary);
 }
 
 .aui-version-nav-btn {
@@ -710,17 +712,17 @@
   border: none;
   border-radius: $border-radius-sm;
   background-color: transparent;
-  color: $text-secondary;
+  color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.15s ease;
 
   &:hover:not(:disabled) {
-    background-color: $bg-primary_hover;
-    color: $text-primary;
+    background-color: var(--bg-primary-hover);
+    color: var(--text-primary);
   }
 
   &:disabled {
-    color: $text-disabled;
+    color: var(--text-disabled);
     cursor: not-allowed;
   }
 
@@ -733,11 +735,11 @@
 .aui-version-label {
   min-width: 5rem;
   text-align: center;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   user-select: none;
 
   &--history {
-    color: $text-brand-primary;
+    color: var(--text-brand-primary);
   }
 }
 
@@ -767,8 +769,15 @@
   align-items: center;
   gap: 6px;
   padding: 3px 8px;
-  background-color: $gray-900;
-  border: 1px solid $border-brand-solid;
+  background-color: var(--bg-primary-solid);
+  border: 1px solid var(--border-brand-solid);
+
+  // The dark bar keeps a quiet edge in dark mode, where the brand border
+  // would be a bright green ring.
+  @include dark-theme {
+    border-color: var(--border-primary);
+  }
+
   height: 28px;
   border-radius: $border-radius-lg;
   width: fit-content;
@@ -790,12 +799,12 @@
   border: none;
   background: transparent;
   line-height: 0;
-  color: $gray-500 !important;
+  color: var(--text-quaternary) !important;
   cursor: pointer;
   border-radius: $border-radius-sm;
 
   &:hover {
-    color: $gray-300 !important;
+    color: var(--text-senary) !important;
   }
 
   svg {
@@ -809,12 +818,15 @@
   outline: 1px solid currentColor;
 
   &.is-positive {
-    color: var(--bs-success) !important;
-    background-color: var(--bs-success-bg-subtle);
+    color: var(--status-success-fg) !important;
+    // Was var(--bs-success-bg-subtle), which is never defined, so the pressed
+    // button has always been transparent.
+    background-color: transparent;
   }
 
   &.is-negative {
-    color: var(--bs-danger) !important;
-    background-color: var(--bs-danger-bg-subtle);
+    color: var(--status-danger-fg) !important;
+    // Was var(--bs-danger-bg-subtle), which is never defined.
+    background-color: transparent;
   }
 }

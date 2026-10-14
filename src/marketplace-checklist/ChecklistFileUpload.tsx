@@ -310,7 +310,7 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
       )}
 
       {isProcessing && (
-        <div className="d-flex align-items-center gap-2 mt-2 text-muted">
+        <div className="d-flex align-items-center gap-2 mt-2 text-quaternary">
           <LoadingSpinner />
           <span>{translate('Processing files...')}</span>
         </div>
@@ -325,8 +325,8 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
                   <FileIcon size={22} weight="bold" />
                 </div>
                 <div className="attachment-item__body">
-                  <h6 className="fw-bold text-secondary">{file.name}</h6>
-                  <p className="fs-6 text-muted">
+                  <h6 className="font-medium text-secondary">{file.name}</h6>
+                  <p className="fs-6 text-quaternary">
                     {'stored_file_id' in file
                       ? translate('Uploaded')
                       : translate('Pending upload')}

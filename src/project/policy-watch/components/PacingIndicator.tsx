@@ -161,7 +161,7 @@ export const PacingIndicator: FC<Props> = ({
       >
         {pct0(fraction)}
       </Badge>
-      <span className="text-muted fs-7">{translate('of expected')}</span>
+      <span className="text-quaternary fs-7">{translate('of expected')}</span>
     </>
   );
 
@@ -199,7 +199,7 @@ export const PacingIndicator: FC<Props> = ({
 
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
         <div className="d-flex align-items-center gap-2">
-          <span className="fw-bold">{translate('Pacing')}</span>
+          <span className="font-medium">{translate('Pacing')}</span>
           <Badge
             variant={tone}
             shape="pill"
@@ -210,7 +210,7 @@ export const PacingIndicator: FC<Props> = ({
             {statusLabel}
           </Badge>
         </div>
-        <span className="text-muted">
+        <span className="text-quaternary">
           {translate('{pct} of {amount} expected', {
             pct: pct0(usageFraction),
             amount: defaultCurrency(reference),
@@ -257,7 +257,10 @@ export const PacingIndicator: FC<Props> = ({
             }}
             title={translate('Ideal for today')}
           >
-            <span style={markerLabel(periodFraction)} className="text-muted">
+            <span
+              style={markerLabel(periodFraction)}
+              className="text-quaternary"
+            >
               {translate('today')}
             </span>
           </div>

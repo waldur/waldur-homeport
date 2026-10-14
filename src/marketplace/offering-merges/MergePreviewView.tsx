@@ -105,7 +105,7 @@ export const MergePreviewView: FC<MergePreviewViewProps> = ({
           className="mb-3"
         />
         {warnings.length === 0 ? (
-          <p className="text-muted mb-0">{translate('No warnings.')}</p>
+          <p className="text-quaternary mb-0">{translate('No warnings.')}</p>
         ) : (
           <div className="d-flex flex-column gap-2">
             {warnings.map((warning, index) => (

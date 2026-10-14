@@ -24,10 +24,10 @@ export default meta;
 type Story = StoryObj<typeof Collapsible>;
 
 const Panel = ({ keepMounted }: { keepMounted?: boolean }) => (
-  <div className="max-w-sm bg-[var(--surface-page-bg)] p-6">
+  <div className="max-w-sm bg-[var(--page-bg)] p-6">
     <Collapsible
       keepMounted={keepMounted}
-      className="rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] text-[var(--surface-text-primary)]"
+      className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] text-primary"
     >
       <CollapsibleTrigger className="group flex w-full items-center justify-between px-6 py-5 text-sm font-semibold">
         Advanced settings
@@ -43,7 +43,7 @@ const Panel = ({ keepMounted }: { keepMounted?: boolean }) => (
           <label htmlFor={`note-${keepMounted}`}>Note</label>
           <input
             id={`note-${keepMounted}`}
-            className="rounded-md border border-[var(--surface-card-border)] px-3 py-2"
+            className="rounded-md border-[1px] border-secondary px-3 py-2"
             placeholder="Type, collapse, reopen"
           />
         </div>

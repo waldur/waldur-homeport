@@ -119,7 +119,9 @@ export const ComponentMultiplierField = ({
 
   return (
     <div className="component-multiplier-field">
-      {tooltip && <div className="form-text text-muted mb-3">{tooltip}</div>}
+      {tooltip && (
+        <div className="form-text text-quaternary mb-3">{tooltip}</div>
+      )}
       <div className="form-group">
         <input
           type="number"
@@ -133,7 +135,7 @@ export const ComponentMultiplierField = ({
           max={config?.max_limit}
         />
         {config && (
-          <div className="form-text text-muted mt-1">{getHelpText()}</div>
+          <div className="form-text text-quaternary mt-1">{getHelpText()}</div>
         )}
       </div>
     </div>

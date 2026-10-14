@@ -32,8 +32,8 @@ describe('getCssVar', () => {
 });
 
 describe('getBrandVar', () => {
-  it('reads --waldur-brand-<step> from <html>', () => {
-    root.style.setProperty('--waldur-brand-600', '#1570ef');
+  it('reads --brand-<step> from <html>', () => {
+    root.style.setProperty('--brand-600', '#1570ef');
     expect(getBrandVar(600)).toBe('#1570ef');
   });
 
@@ -43,7 +43,7 @@ describe('getBrandVar', () => {
   });
 
   it('falls back per step, not for the whole ramp', () => {
-    root.style.setProperty('--waldur-brand-600', '#1570ef');
+    root.style.setProperty('--brand-600', '#1570ef');
     expect(getBrandVar(600)).toBe('#1570ef');
     expect(getBrandVar(700)).toBe(DEFAULT_PRIMARY_COLORS[700]);
   });

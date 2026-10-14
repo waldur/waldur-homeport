@@ -23,7 +23,7 @@ export const Step1DownloadTemplate: FC<WizardFormStepProps> = (props) => {
 
   return (
     <WizardForm {...props}>
-      <div className="text-muted">
+      <div className="text-quaternary">
         <p className="mb-6">
           {translate(
             'Fill the template with your organization details, then upload it in the next step.',

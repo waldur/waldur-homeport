@@ -49,7 +49,7 @@ export const NameGroup = ({
           />
         ) : loading ? (
           <div className="mb-2">
-            <small className="text-muted me-2">
+            <small className="text-quaternary me-2">
               {translate('Loading projects')}
             </small>
             <LoadingSpinnerSimple className="mb-2 w-20px h-20px" />

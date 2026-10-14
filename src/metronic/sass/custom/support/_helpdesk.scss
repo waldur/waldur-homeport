@@ -106,7 +106,7 @@
   }
 
   tr.issues-list-row-selected > td {
-    background-color: $bg-secondary;
+    background-color: var(--bg-secondary);
   }
 }
 

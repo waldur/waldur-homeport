@@ -143,8 +143,8 @@ export const BookingResourceListItem = ({
           className={classNames(
             'px-3',
             item.state === 'Creating'
-              ? 'bg-dark text-inverse-dark'
-              : 'bg-light',
+              ? 'bg-[var(--bg-primary-solid)] text-white'
+              : 'bg-tertiary dark:bg-quaternary',
           )}
           style={layout.style}
         >
@@ -173,10 +173,10 @@ export const BookingResourceListItem = ({
                     </Badge>
                   )}
                 </div>
-                <span className="fw-bolder">{state}</span>
+                <span className="font-semibold">{state}</span>
               </div>
             )}
-            <div className="fw-bolder">{item.customer_name}</div>
+            <div className="font-semibold">{item.customer_name}</div>
             {(layout.diffHours > 2.1 ||
               (layout.diffHours > 1.1 &&
                 item.attributes.schedules.length === 1)) && (

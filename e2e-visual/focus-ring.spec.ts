@@ -29,7 +29,7 @@ import { tabTriggerVariants } from '../packages/ui/src/Tabs';
 const STORYBOOK_URL = 'http://localhost:6006';
 
 /** Any story will do — we only need Storybook's compiled stylesheets (Metronic,
- *  Tailwind) and its seeded --waldur-brand-* tokens, then we supply our own markup. */
+ *  Tailwind) and its seeded --brand-* tokens, then we supply our own markup. */
 const STORY =
   '/iframe.html?id=actions-basebutton--playground&viewMode=story&globals=theme:';
 

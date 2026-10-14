@@ -62,7 +62,7 @@ export const CreateOfferingUserDialog = ({
             />
             {providerAccounts ? (
               <p
-                className="text-muted mb-0"
+                className="text-quaternary mb-0"
                 data-testid="provider-account-note"
               >
                 {translate(

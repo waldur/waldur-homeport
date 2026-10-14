@@ -150,7 +150,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
             <Row className="mb-n1">
               {filteredCountries.map((country) => (
                 <Col key={country.value} sm={6} md={4}>
-                  <div className="border-bottom py-5">
+                  <div className="border-b-[1px] border-b-secondary py-5">
                     <BooleanGroup
                       data-testid={`country_${country.value}`}
                       name={`countries.${country.value}`}
@@ -166,7 +166,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                               className="lh-1"
                             />
                           </div>
-                          <span className="text-muted me-2">
+                          <span className="text-quaternary me-2">
                             {country.value}
                           </span>
                           {country.label !== country.value && (

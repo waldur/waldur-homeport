@@ -26,7 +26,7 @@ export const WarningTooltip = () => {
         />
       )}
       {!shouldConcealPrices && (
-        <div className="ms-auto text-muted">
+        <div className="ms-auto text-quaternary">
           <PriceTooltip size={20} />
         </div>
       )}

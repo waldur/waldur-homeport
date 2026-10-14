@@ -6,16 +6,16 @@ import { describe, expect, it } from 'vitest';
 /**
  * The sidebar styles are fixed looks: "dark" always renders dark and "light"
  * always renders light, whatever the app's own light/dark theme is (see the
- * header of sidebarColors.css; the theme only decides *which* style the
+ * header of sidebar.css; the theme only decides *which* style the
  * "auto" setting picks). A theme-scoped rule that sets a style token, or a
  * style block that reads the dark-theme gray ramp, breaks that.
  *
  * It nearly did: `--color-gray-N` used to be overridden per theme, so the
  * style blocks changed with the theme without any rule saying so, and a
- * `--nav-section-label` in surfaceColors.css's dark block silently beat every
+ * `--nav-section-label` in the old surfaceColors.css's dark block silently beat every
  * style's own value.
  *
- * `--surface-sidebar-border` is deliberately not covered: it is the seam
+ * `--sidebar-border` is deliberately not covered: it is the seam
  * between the chrome and the page (TopBar uses it too), so it follows the
  * theme.
  */
@@ -34,12 +34,26 @@ const rulesOf = (file: string) =>
   }));
 
 const isStyleToken = (prop: string) =>
-  prop.startsWith('--nav-') || prop === '--surface-sidebar-bg';
+  prop.startsWith('--nav-') || prop === '--sidebar-bg';
 
 const FILES = [
-  './surfaceColors.css',
-  './buttonColors.css',
-  './sidebarColors.css',
+  './css/index.css',
+  './css/primitives/index.css',
+  './css/semantic/index.css',
+  './css/semantic/background.css',
+  './css/semantic/borders.css',
+  './css/semantic/text.css',
+  './css/semantic/status.css',
+  './css/semantic/elevation.css',
+  './css/semantic/brand.css',
+  './css/components/index.css',
+  './css/components/menu.css',
+  './css/components/card.css',
+  './css/components/table.css',
+  './css/components/dialog.css',
+  './css/components/sheet.css',
+  './css/components/button.css',
+  './css/components/sidebar.css',
 ];
 
 describe('sidebar colours do not depend on the theme', () => {
@@ -65,7 +79,7 @@ describe('sidebar colours do not depend on the theme', () => {
         ),
       ),
     ];
-    const blocks = rulesOf('./sidebarColors.css').filter((rule) =>
+    const blocks = rulesOf('./css/components/sidebar.css').filter((rule) =>
       rule.selector.includes('data-sidebar-style'),
     );
     // dark, light, primary, accent, accent-light

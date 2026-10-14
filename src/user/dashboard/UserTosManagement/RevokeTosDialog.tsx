@@ -78,7 +78,7 @@ export const RevokeTosDialog = ({
       {resourcesLoading ? (
         <div className="text-center py-4">
           <LoadingSpinner />
-          <p className="text-muted mt-2">
+          <p className="text-quaternary mt-2">
             {translate('Loading affected resources...')}
           </p>
         </div>

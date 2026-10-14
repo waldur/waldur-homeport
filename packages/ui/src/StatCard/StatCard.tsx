@@ -36,7 +36,7 @@ import { cn } from '../cn';
  * = 600 from its real `<h1>` tag. The card itself is `.card-bordered`
  * (unconditionally bordered, box-shadow: none in BOTH themes) — a
  * different real variant than Card.tsx's own default (theme-conditional
- * shadow-in-light/border-in-dark, see surfaceColors.css's comment on
+ * shadow-in-light/border-in-dark, see waldur-design-tokens/card.css's comment on
  * --card-shadow/--card-border-color), so those are overridden here too.
  */
 export interface StatCardProps {
@@ -59,19 +59,19 @@ export const StatCard = ({
 }: StatCardProps) => (
   <Card
     className={cn(
-      'shadow-none border-[var(--surface-card-border)]',
-      // dark:bg override, not a change to --surface-card-bg itself: the
+      'shadow-none border-secondary',
+      // dark:bg override, not a change to --card-bg itself: the
       // real bordered card (measured live via
       // e2e-visual/stat-card-parity.spec.ts) sits flush with the page in
       // dark mode (rgb(12,17,29) = --color-gray-950, same as
-      // --surface-page-bg) rather than getting an elevated tint — a
-      // border-only card doesn't need one. --surface-card-bg's dark value
+      // --page-bg) rather than getting an elevated tint — a
+      // border-only card doesn't need one. --card-bg's dark value
       // (--color-gray-900, one step lighter) is correct for Card's default
       // shadow-only/no-border light-mode-style rendering elsewhere, which
       // has no live Metronic source to verify against yet — only this
       // specific bordered variant has been confirmed, so only this
       // instance is overridden.
-      'dark:bg-[var(--surface-page-bg)]',
+      'dark:bg-[var(--page-bg)]',
       className,
     )}
   >
@@ -93,7 +93,7 @@ export const StatCard = ({
           — it's real trailing space on the value itself, present even with
           no footer at all, confirmed via e2e-visual/stat-card-parity.spec.ts:
           without it, this card measured ~0.5rem short. */}
-      <div className="mt-[0.75rem] mb-[0.5rem] text-[32px] leading-[1.2] font-semibold text-[var(--surface-text-primary)]">
+      <div className="mt-[0.75rem] mb-[0.5rem] text-[32px] leading-[1.2] font-semibold text-primary">
         {value}
       </div>
       {(trend || hint) && (
@@ -101,9 +101,7 @@ export const StatCard = ({
           {trend && (
             <Badge variant={trend.tone ?? 'neutral'}>{trend.label}</Badge>
           )}
-          {hint && (
-            <span className="text-[var(--surface-text-muted)]">{hint}</span>
-          )}
+          {hint && <span className="text-quinary">{hint}</span>}
         </div>
       )}
     </CardContent>

@@ -1,0 +1,47 @@
+/**
+ * Neutral borders and lines, strongest first.
+ *
+ *   --border-primary         control borders: inputs, selects, checkboxes
+ *   --border-secondary       card and section borders, the default border
+ *   --border-tertiary        hairlines: table rows, faint separators
+ *
+ *   --border-divider         a drawn line: rules, step connectors
+ *   --border-divider-medium  a line that must show on any surface: timeline
+ *                            and stepper connectors, dashed outlines
+ *   --border-divider-strong  a strong drawn line: drag handles, guides
+ *
+ * The dividers are lines drawn as a fill or a border rather than the edge of
+ * a surface, so a connector or a rule never borrows a background or text
+ * role. They are what Bootstrap's --bs-gray-200 and --bs-gray-400 resolved
+ * to (see docs/design-tokens.md, "Retiring --bs-*").
+ *
+ * The names match the Tailwind utilities (border-primary, border-secondary,
+ * border-tertiary, border-divider; tailwind/theme.css), so a class and a
+ * var() with the same name are the same colour. Brand borders are in
+ * brand.css, state borders (--status-*-border, -solid) in status.css.
+ *
+ * Both themes are defined in this file.
+ */
+@import '../primitives/colors.css';
+
+:root {
+  --border-primary: var(--color-gray-300);
+  --border-secondary: var(--color-gray-200);
+  --border-tertiary: var(--color-gray-100);
+
+  --border-divider: var(--color-gray-200);
+  --border-divider-medium: var(--color-gray-300);
+  --border-divider-strong: var(--color-gray-400);
+}
+
+:root[data-theme='dark'] {
+  --border-primary: var(--color-gray-dark-700);
+  --border-secondary: var(--color-gray-dark-800);
+  /* The same step as --border-secondary in dark: tertiary is only fainter in
+     light. */
+  --border-tertiary: var(--color-gray-dark-800);
+
+  --border-divider: var(--color-gray-dark-700);
+  --border-divider-medium: var(--color-gray-dark-600);
+  --border-divider-strong: var(--color-gray-dark-500);
+}

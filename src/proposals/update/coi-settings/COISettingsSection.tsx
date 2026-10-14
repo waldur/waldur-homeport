@@ -170,7 +170,7 @@ export const COISettingsSection: FC<COISettingsSectionProps> = ({
             )}
             autoWidth
           >
-            <InfoIcon weight="bold" className="text-muted" />
+            <InfoIcon weight="bold" className="text-quaternary" />
           </Tooltip>
         </span>
       }

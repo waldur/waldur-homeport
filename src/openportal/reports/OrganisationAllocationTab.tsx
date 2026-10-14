@@ -528,7 +528,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
               </span>
             }
           />
-          <span className="ms-auto text-muted small">
+          <span className="ms-auto text-quaternary small">
             {translate('{count} of {total} selected', {
               count: draft.size,
               total: projects.length,
@@ -541,7 +541,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
           className="border rounded p-2"
         >
           {visible.length === 0 && (
-            <p className="text-muted small mb-0 p-2">
+            <p className="text-quaternary small mb-0 p-2">
               {translate('No projects match the filters.')}
             </p>
           )}
@@ -553,9 +553,9 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                 onChange={() => toggle(p.uuid)}
                 label={
                   <>
-                    <span className="fw-semibold">{p.name}</span>
+                    <span className="font-semibold">{p.name}</span>
                     {(p.start_date || p.end_date) && (
-                      <span className="text-muted small ms-2">
+                      <span className="text-quaternary small ms-2">
                         {p.start_date ?? '?'} →{' '}
                         {p.end_date ?? translate('ongoing')}
                       </span>
@@ -636,8 +636,8 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
       style={{ minWidth: 180 }}
     >
       <Card.Body className="py-3">
-        <div className="text-muted small mb-1">{label}</div>
-        <div className={`fs-5 fw-bold ${textClass}`}>
+        <div className="text-quaternary small mb-1">{label}</div>
+        <div className={`fs-5 font-medium ${textClass}`}>
           {(variant === 'warning' || variant === 'danger') && (
             <WarningCircleIcon className="me-1" size={18} weight="fill" />
           )}
@@ -1028,7 +1028,7 @@ export const OrganisationAllocationTab: FC = () => {
 
         {projects && projects.length > 0 && (
           <div className="d-flex align-items-center gap-2">
-            <span className="text-muted small">
+            <span className="text-quaternary small">
               {translate('{count} of {total} {project} selected', {
                 count: effectiveSelected.size,
                 total: projects.length,
@@ -1054,7 +1054,7 @@ export const OrganisationAllocationTab: FC = () => {
                 ? getCacheAge(`alloc-summaries-${customer.uuid}`)
                 : null;
               return age ? (
-                <span className="text-muted small">
+                <span className="text-quaternary small">
                   {translate('Cached {age}', { age: formatCacheAge(age) })}
                 </span>
               ) : null;
@@ -1117,10 +1117,10 @@ export const OrganisationAllocationTab: FC = () => {
       {showLoadPrompt && !loadTriggered && (
         <Card className="mb-4">
           <Card.Body>
-            <p className="mb-1 fw-semibold">
+            <p className="mb-1 font-semibold">
               {translate('Allocation data not yet loaded')}
             </p>
-            <p className="mb-3 text-muted small">
+            <p className="mb-3 text-quaternary small">
               {translate(
                 'Loading computes summaries for every project in this organisation and may take 10–15 seconds. You can optionally filter to a subset of projects first to speed things up.',
               )}
@@ -1212,7 +1212,7 @@ export const OrganisationAllocationTab: FC = () => {
         !summariesLoading &&
         !summariesError &&
         summaries.length === 0 && (
-          <p className="text-muted p-4">
+          <p className="text-quaternary p-4">
             {translate(
               'No accounting summaries found for the selected projects.',
             )}
@@ -1267,7 +1267,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="fw-semibold d-flex align-items-center gap-3">
+          <Card.Header className="font-semibold d-flex align-items-center gap-3">
             <span>{translate('Predicted allocation burn-down')}</span>
 
             {chartOptions && (
@@ -1294,13 +1294,13 @@ export const OrganisationAllocationTab: FC = () => {
                   );
                   setExcelProgress(null);
                 }}
-                className="text-btn text-hover-primary"
+                className="text-btn hover:text-brand"
               >
                 <FileXlsIcon size={20} weight="bold" />
               </button>
             </Tooltip>
             {excelProgress && (
-              <span className="text-muted small ms-2">
+              <span className="text-quaternary small ms-2">
                 {translate('Preparing Excel — sheet {current} of {total}…', {
                   current: excelProgress.current,
                   total: excelProgress.total,
@@ -1312,7 +1312,7 @@ export const OrganisationAllocationTab: FC = () => {
             {chartOptions ? (
               <EChart options={chartOptions} height="420px" />
             ) : (
-              <p className="text-muted mb-0">
+              <p className="text-quaternary mb-0">
                 {translate(
                   'No projects with future end dates — nothing to plot.',
                 )}
@@ -1325,7 +1325,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Consumption chart ───────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="fw-semibold d-flex align-items-center gap-3">
+          <Card.Header className="font-semibold d-flex align-items-center gap-3">
             <span>{translate('Predicted daily consumption')}</span>
 
             {consumptionOptions && (
@@ -1355,13 +1355,13 @@ export const OrganisationAllocationTab: FC = () => {
                   );
                   setExcelProgress(null);
                 }}
-                className="text-btn text-hover-primary"
+                className="text-btn hover:text-brand"
               >
                 <FileXlsIcon size={20} weight="bold" />
               </button>
             </Tooltip>
             {excelProgress && (
-              <span className="text-muted small ms-2">
+              <span className="text-quaternary small ms-2">
                 {translate('Preparing Excel — sheet {current} of {total}…', {
                   current: excelProgress.current,
                   total: excelProgress.total,
@@ -1373,7 +1373,7 @@ export const OrganisationAllocationTab: FC = () => {
             {consumptionOptions ? (
               <EChart options={consumptionOptions} height="420px" />
             ) : (
-              <p className="text-muted mb-0">
+              <p className="text-quaternary mb-0">
                 {translate(
                   'No projects with future end dates — nothing to plot.',
                 )}
@@ -1447,7 +1447,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Concerning projects ─────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="fw-semibold d-flex align-items-center gap-2">
+          <Card.Header className="font-semibold d-flex align-items-center gap-2">
             <span>{translate('Concerning Projects')}</span>
             {slowStart.length +
               inactive.length +
@@ -1485,13 +1485,13 @@ export const OrganisationAllocationTab: FC = () => {
           <Card.Body>
             {/* ── Threshold controls ──────────────────────────────────── */}
             {showThresholds && (
-              <div className="p-3 mb-3 bg-light rounded small">
+              <div className="p-3 mb-3 bg-tertiary dark:bg-quaternary rounded small">
                 <Row className="g-2">
                   <Col
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="fw-semibold" style={{ minWidth: 120 }}>
+                    <span className="font-semibold" style={{ minWidth: 120 }}>
                       {translate('Slow start')}:
                     </span>
                     {translate(
@@ -1527,7 +1527,7 @@ export const OrganisationAllocationTab: FC = () => {
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="fw-semibold" style={{ minWidth: 120 }}>
+                    <span className="font-semibold" style={{ minWidth: 120 }}>
                       {translate('Inactive')}:
                     </span>
                     {translate(
@@ -1577,7 +1577,7 @@ export const OrganisationAllocationTab: FC = () => {
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="fw-semibold" style={{ minWidth: 120 }}>
+                    <span className="font-semibold" style={{ minWidth: 120 }}>
                       {translate('Nearly depleted')}:
                     </span>
                     {translate(
@@ -1619,7 +1619,7 @@ export const OrganisationAllocationTab: FC = () => {
                     xs={12}
                     className="d-flex align-items-center gap-2 flex-wrap"
                   >
-                    <span className="fw-semibold" style={{ minWidth: 120 }}>
+                    <span className="font-semibold" style={{ minWidth: 120 }}>
                       {translate('Off track')}:
                     </span>
                     {translate(
@@ -1660,7 +1660,7 @@ export const OrganisationAllocationTab: FC = () => {
               inactive.length === 0 &&
               depleted.length === 0 &&
               offTrack.length === 0 && (
-                <p className="text-muted mb-0">
+                <p className="text-quaternary mb-0">
                   {translate(
                     '✓ No concerning projects found with the current thresholds.',
                   )}
@@ -1734,7 +1734,7 @@ export const OrganisationAllocationTab: FC = () => {
                 <div className="tab-content">
                   <TabsContent value="slowStart">
                     <div>
-                      <p className="text-muted small mb-2">
+                      <p className="text-quaternary small mb-2">
                         {translate(
                           'Started ≥ {months} {month} ago but spent less than {percent}% of their allocation — may not have got going yet.',
                           {
@@ -1748,7 +1748,9 @@ export const OrganisationAllocationTab: FC = () => {
                         )}
                       </p>
                       {slowStart.length === 0 ? (
-                        <p className="text-muted mb-0">{translate('None.')}</p>
+                        <p className="text-quaternary mb-0">
+                          {translate('None.')}
+                        </p>
                       ) : (
                         <ul className="mb-0">
                           {slowStart.map((s: ProjectAccountingSummary) => {
@@ -1788,7 +1790,7 @@ export const OrganisationAllocationTab: FC = () => {
                   </TabsContent>
                   <TabsContent value="inactive">
                     <div>
-                      <p className="text-muted small mb-2">
+                      <p className="text-quaternary small mb-2">
                         {translate(
                           "Started ≥ {months} {month} ago, no spend recorded this month, and more than {percent}% of allocation still remaining. Note: only the current month's activity is visible here.",
                           {
@@ -1802,7 +1804,9 @@ export const OrganisationAllocationTab: FC = () => {
                         )}
                       </p>
                       {inactive.length === 0 ? (
-                        <p className="text-muted mb-0">{translate('None.')}</p>
+                        <p className="text-quaternary mb-0">
+                          {translate('None.')}
+                        </p>
                       ) : (
                         <ul className="mb-0">
                           {inactive.map((s: ProjectAccountingSummary) => {
@@ -1844,7 +1848,7 @@ export const OrganisationAllocationTab: FC = () => {
                   </TabsContent>
                   <TabsContent value="depleted">
                     <div>
-                      <p className="text-muted small mb-2">
+                      <p className="text-quaternary small mb-2">
                         {translate(
                           'At least {percent}% of allocation spent, but still ≥ {days} days until the project ends — may need a top-up.',
                           {
@@ -1854,7 +1858,9 @@ export const OrganisationAllocationTab: FC = () => {
                         )}
                       </p>
                       {depleted.length === 0 ? (
-                        <p className="text-muted mb-0">{translate('None.')}</p>
+                        <p className="text-quaternary mb-0">
+                          {translate('None.')}
+                        </p>
                       ) : (
                         <ul className="mb-0">
                           {depleted.map((s: ProjectAccountingSummary) => {
@@ -1900,7 +1906,7 @@ export const OrganisationAllocationTab: FC = () => {
                   </TabsContent>
                   <TabsContent value="offTrack">
                     <div>
-                      <p className="text-muted small mb-2">
+                      <p className="text-quaternary small mb-2">
                         {translate(
                           'After the {day}th of the month, actual daily average spend differs from predicted by more than {percent}%.',
                           {
@@ -1910,7 +1916,9 @@ export const OrganisationAllocationTab: FC = () => {
                         )}
                       </p>
                       {offTrack.length === 0 ? (
-                        <p className="text-muted mb-0">{translate('None.')}</p>
+                        <p className="text-quaternary mb-0">
+                          {translate('None.')}
+                        </p>
                       ) : (
                         <ul className="mb-0">
                           {offTrack.map((s: ProjectAccountingSummary) => {

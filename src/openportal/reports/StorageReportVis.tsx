@@ -153,7 +153,7 @@ export const StorageReportVis: FC<Props> = ({
 
   if (!report) {
     return (
-      <div className="text-muted p-4">
+      <div className="text-quaternary p-4">
         {translate('No storage data available.')}
       </div>
     );
@@ -173,7 +173,7 @@ export const StorageReportVis: FC<Props> = ({
     <div>
       {/* ── Row 1: summary + downloads ───────────────────────────────── */}
       <div className="d-flex align-items-center gap-3 mb-2 flex-wrap">
-        <span className="text-muted small">
+        <span className="text-quaternary small">
           {translate(
             '{destination} · {numUsers} {user} · {numProjects} {project} · Last generated {date}',
             {
@@ -209,7 +209,7 @@ export const StorageReportVis: FC<Props> = ({
                 );
                 setExcelProgress(null);
               }}
-              className="text-btn text-hover-primary"
+              className="text-btn hover:text-brand"
             >
               <FileXlsIcon size={20} weight="bold" />
             </button>
@@ -223,14 +223,14 @@ export const StorageReportVis: FC<Props> = ({
                   `storage_report.json`,
                 )
               }
-              className="text-btn text-hover-primary"
+              className="text-btn hover:text-brand"
             >
               <FileArrowDownIcon size={20} weight="bold" />
             </button>
           </Tooltip>
         </div>
         {excelProgress && (
-          <span className="text-muted small ms-2">
+          <span className="text-quaternary small ms-2">
             {translate('Preparing Excel — sheet {current} of {total}…', {
               current: excelProgress.current,
               total: excelProgress.total,
@@ -307,7 +307,10 @@ export const StorageReportVis: FC<Props> = ({
       {/* ── Chart ────────────────────────────────────────────────────── */}
       {/* Updating indicator */}
       {isUpdating && (
-        <div className="text-muted small mb-1" style={{ minHeight: '1.2em' }}>
+        <div
+          className="text-quaternary small mb-1"
+          style={{ minHeight: '1.2em' }}
+        >
           <span
             className="spinner-border spinner-border-sm me-1"
             style={{ width: '0.75rem', height: '0.75rem' }}

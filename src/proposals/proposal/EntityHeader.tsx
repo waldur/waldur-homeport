@@ -31,7 +31,7 @@ export const EntityHeader = ({
       <div className="ms-4">{badge}</div>
       {actions && <div className="ms-auto">{actions}</div>}
     </div>
-    <p className="fs-6 text-muted mb-1">
+    <p className="fs-6 text-quaternary mb-1">
       {idLabel ?? translate('ID')}: {slug}{' '}
       <CopyToClipboardButton
         value={slug}
@@ -40,6 +40,6 @@ export const EntityHeader = ({
         buttonClassName="ms-2"
       />
     </p>
-    {helpText && <p className="fs-6 text-muted mb-0">{helpText}</p>}
+    {helpText && <p className="fs-6 text-quaternary mb-0">{helpText}</p>}
   </div>
 );

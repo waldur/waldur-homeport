@@ -360,11 +360,11 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
       title: translate('Question'),
       render: ({ row }) => (
         <div className="d-flex flex-column">
-          <span className="text-gray-800 fw-bold fs-6 mb-1">
+          <span className="text-primary font-medium fs-6 mb-1">
             {row.description}
           </span>
           {row.user_guidance && (
-            <span className="text-gray-600 fs-7">{row.user_guidance}</span>
+            <span className="text-tertiary fs-7">{row.user_guidance}</span>
           )}
         </div>
       ),
@@ -385,7 +385,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
     {
       title: translate('Display order'),
       render: ({ row }) => (
-        <span className="text-gray-800 fw-bold">{row.order}</span>
+        <span className="text-primary font-medium">{row.order}</span>
       ),
     },
     {

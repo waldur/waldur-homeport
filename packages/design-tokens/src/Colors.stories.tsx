@@ -5,6 +5,7 @@ import tokens from '../tokens/colors.json';
 import { DEFAULT_PRIMARY_COLORS } from './brandColors';
 import { readableOn } from './contrast';
 import { useResolvedVar } from './react';
+import { Mono, Prose } from './stories/TokenTable';
 
 const meta: Meta = {
   title: 'Foundations/Colors',
@@ -12,7 +13,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          "Design tokens defining Waldur's color palette. The primitive ramps are split into Neutral, Status, Accent and Brand pages that share one swatch style (step, resolved hex, variable name on hover); Surface Tokens shows the semantic layer that responds to theme and tenant branding. Ramp pages are driven by tokens/colors.json.",
+          'The primitive colour ramps, split into Neutral, Status, Accent and Brand pages that share one swatch style (step, resolved hex, variable name on hover). Ramp pages are driven by tokens/colors.json. Components do not read these directly: the theme-aware roles that do are on Foundations/Semantic Colors.',
       },
     },
   },
@@ -80,32 +81,12 @@ const tokenRamp = (name: string): RampSpec => ({
   description: RAMPS[name].description,
 });
 
-/** Renders `backticked` spans as inline code. */
-function Prose({ text }: { text: string }) {
-  return (
-    <>
-      {text.split('`').map((part, i) =>
-        i % 2 ? (
-          <code
-            key={i}
-            className="rounded bg-[var(--surface-hover-bg)] px-1 font-mono text-[11px]"
-          >
-            {part}
-          </code>
-        ) : (
-          part
-        ),
-      )}
-    </>
-  );
-}
-
 function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
   const value = useResolvedVar(cssVar);
   return (
     <div
       title={cssVar}
-      className="overflow-hidden rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)]"
+      className="overflow-hidden rounded-md border-[1px] border-secondary bg-[var(--card-bg)]"
     >
       <div
         className="flex h-14 items-end px-2 pb-1.5 font-mono text-xs font-semibold"
@@ -116,7 +97,7 @@ function RampTile({ cssVar, step }: { cssVar: string; step: string }) {
       >
         {step}
       </div>
-      <div className="px-2 py-1 font-mono text-[10px] uppercase text-[var(--surface-text-secondary)]">
+      <div className="px-2 py-1 font-mono text-[10px] uppercase text-quaternary">
         {value || '\u00a0'}
       </div>
     </div>
@@ -127,15 +108,11 @@ function RampSection({ title, prefix, steps, description }: RampSpec) {
   return (
     <section className="mb-6">
       <div className="mb-2 flex flex-wrap items-baseline gap-x-3">
-        <h4 className="text-sm font-semibold text-[var(--surface-text-primary)]">
-          {title}
-        </h4>
-        <code className="text-[10px] text-[var(--surface-text-muted)]">
-          {prefix}-N
-        </code>
+        <h4 className="text-sm font-semibold text-primary">{title}</h4>
+        <Mono className="text-[10px] text-quinary">{prefix}-N</Mono>
       </div>
       {description && (
-        <p className="mb-2 max-w-3xl text-xs text-[var(--surface-text-secondary)]">
+        <p className="mb-2 max-w-3xl text-xs text-quaternary">
           <Prose text={description} />
         </p>
       )}
@@ -161,13 +138,9 @@ function RampPage({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="bg-[var(--surface-page-bg)] p-6">
-      <h3 className="mb-1 text-base font-semibold text-[var(--surface-text-primary)]">
-        {title}
-      </h3>
-      <p className="mb-6 max-w-3xl text-xs text-[var(--surface-text-secondary)]">
-        {blurb}
-      </p>
+    <div className="bg-[var(--page-bg)] p-6">
+      <h3 className="mb-1 text-base font-semibold text-primary">{title}</h3>
+      <p className="mb-6 max-w-3xl text-xs text-quaternary">{blurb}</p>
       {ramps.map((ramp) => (
         <RampSection key={ramp.prefix} {...ramp} />
       ))}
@@ -177,14 +150,14 @@ function RampPage({
 }
 
 const PHYSICAL =
-  'Ramps are physical: step 900 is dark in both themes and nothing overrides them per theme, so switching the theme does not change a swatch. The theme is chosen one level up, by the semantic tokens (see Surface Tokens).';
+  'Ramps are physical: step 900 is dark in both themes and nothing overrides them per theme, so switching the theme does not change a swatch. The theme is chosen one level up, by the semantic tokens (see Foundations/Semantic Colors).';
 
 function ComparisonBar({ cssVar }: { cssVar: string }) {
   const value = useResolvedVar(cssVar);
   return (
     <div
       title={cssVar}
-      className="flex h-9 items-center justify-end rounded-md border border-[var(--surface-card-border)] px-2 font-mono text-[10px] uppercase"
+      className="flex h-9 items-center justify-end rounded-md border-[1px] border-secondary px-2 font-mono text-[10px] uppercase"
       style={{
         backgroundColor: `var(${cssVar})`,
         color: readableOn(value) ?? 'inherit',
@@ -200,25 +173,21 @@ function GrayComparison() {
   const steps = Object.keys(RAMPS.gray.steps);
   return (
     <section className="mb-6">
-      <h4 className="mb-2 text-sm font-semibold text-[var(--surface-text-primary)]">
+      <h4 className="mb-2 text-sm font-semibold text-primary">
         Gray vs Gray (dark theme)
       </h4>
-      <p className="mb-3 max-w-3xl text-xs text-[var(--surface-text-secondary)]">
+      <p className="mb-3 max-w-3xl text-xs text-quaternary">
         Dark UI wants neutral grays where gray is blue-tinted (500 is #667085 vs
         #85888e), so dark surfaces (the dark-theme token blocks and the dark
         sidebar style) read gray-dark instead of gray.
       </p>
       <div className="grid max-w-xl grid-cols-[3rem_1fr_1fr] items-center gap-x-3 gap-y-1">
         <div />
-        <code className="text-[10px] text-[var(--surface-text-muted)]">
-          --color-gray-N
-        </code>
-        <code className="text-[10px] text-[var(--surface-text-muted)]">
-          --color-gray-dark-N
-        </code>
+        <Mono className="text-[10px] text-quinary">--color-gray-N</Mono>
+        <Mono className="text-[10px] text-quinary">--color-gray-dark-N</Mono>
         {steps.map((step) => (
           <div key={step} className="contents">
-            <div className="font-mono text-xs font-semibold text-[var(--surface-text-primary)]">
+            <div className="font-mono text-xs font-semibold text-primary">
               {step}
             </div>
             <ComparisonBar cssVar={`--color-gray-${step}`} />
@@ -278,7 +247,7 @@ export const Accent: Story = {
 
 /**
  * The tenant-configurable brand ramp, generated at runtime from
- * `--waldur-brand-color` by `initBrandTokens()`. Step 600 is the configured
+ * `--brand-color` by `initBrandTokens()`. Step 600 is the configured
  * colour; the other steps are generated around it. Storybook seeds Waldur's
  * default green.
  */
@@ -286,100 +255,16 @@ export const Brand: Story = {
   render: () => (
     <RampPage
       title="Brand"
-      blurb="Not part of colors.json: the value is set per tenant at bootstrap and only bridged to Tailwind (bg-brand-600 reads --color-brand-600, which reads --waldur-brand-600). Like the other ramps it is physical."
+      blurb="Not part of colors.json: the value is set per tenant at bootstrap and only bridged to Tailwind (bg-brand-600 reads --color-brand-600, which reads --brand-600). Like the other ramps it is physical."
       ramps={[
         {
           title: 'Brand',
-          prefix: '--waldur-brand',
+          prefix: '--brand',
           steps: Object.keys(DEFAULT_PRIMARY_COLORS),
           description:
-            'Derived at runtime from --waldur-brand-color; 600 is that colour.',
+            'Derived at runtime from --brand-color; 600 is that colour.',
         },
       ]}
     />
-  ),
-};
-
-/**
- * Contextual Surface and Semantic Tokens used by components across light and dark themes.
- */
-export const SurfaceTokens: Story = {
-  render: () => (
-    <div className="p-6 bg-[var(--surface-page-bg)] space-y-6">
-      <div>
-        <h3 className="text-base font-semibold text-[var(--surface-text-primary)] mb-3">
-          Surface & Layout Tokens
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="p-4 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-xs">
-            <div className="text-sm font-semibold text-[var(--surface-text-primary)]">
-              Card Surface
-            </div>
-            <div className="text-xs text-[var(--surface-text-secondary)] mt-1">
-              Primary container background
-            </div>
-            <div className="mt-3 text-xs font-mono text-[var(--surface-text-muted)]">
-              --surface-card-bg
-            </div>
-          </div>
-
-          <div className="p-4 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-page-bg)] shadow-xs">
-            <div className="text-sm font-semibold text-[var(--surface-text-primary)]">
-              Page Background
-            </div>
-            <div className="text-xs text-[var(--surface-text-secondary)] mt-1">
-              App viewport canvas
-            </div>
-            <div className="mt-3 text-xs font-mono text-[var(--surface-text-muted)]">
-              --surface-page-bg
-            </div>
-          </div>
-
-          <div className="p-4 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-hover-bg)] shadow-xs">
-            <div className="text-sm font-semibold text-[var(--surface-text-primary)]">
-              Hover Fill
-            </div>
-            <div className="text-xs text-[var(--surface-text-secondary)] mt-1">
-              Table rows, menu item focus
-            </div>
-            <div className="mt-3 text-xs font-mono text-[var(--surface-text-muted)]">
-              --surface-hover-bg
-            </div>
-          </div>
-
-          <div className="p-4 rounded-md border border-[var(--surface-sidebar-border)] bg-[var(--surface-sidebar-bg)] shadow-xs">
-            <div className="text-sm font-semibold text-[var(--surface-text-primary)]">
-              Sidebar Surface
-            </div>
-            <div className="text-xs text-[var(--surface-text-secondary)] mt-1">
-              Navigation drawer/sidebar
-            </div>
-            <div className="mt-3 text-xs font-mono text-[var(--surface-text-muted)]">
-              --surface-sidebar-bg
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="text-base font-semibold text-[var(--surface-text-primary)] mb-3">
-          Text Tokens
-        </h3>
-        <div className="p-4 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] space-y-2">
-          <div className="text-lg font-bold text-[var(--surface-text-primary)]">
-            Primary Text: Headings and high-contrast labels
-            (--surface-text-primary)
-          </div>
-          <div className="text-sm text-[var(--surface-text-secondary)]">
-            Secondary Text: Body paragraphs and descriptive subtitles
-            (--surface-text-secondary)
-          </div>
-          <div className="text-xs text-[var(--surface-text-muted)]">
-            Muted Text: Captions, timestamps, and placeholder copy
-            (--surface-text-muted)
-          </div>
-        </div>
-      </div>
-    </div>
   ),
 };

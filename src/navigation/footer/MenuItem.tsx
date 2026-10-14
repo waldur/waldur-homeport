@@ -8,11 +8,12 @@ import { Link } from '@/core/Link';
  */
 /**
  * A footer bar link, ported from Metronic's `.menu-brand .menu-link` with
- * the `px-3` every call site used: brand-coloured, 8px x 9.75px. Shared
- * with FooterDropdown's trigger.
+ * the `px-3` every call site used: brand-coloured (Metronic's menu-brand:
+ * brand-600, brand-300 in dark mode), 8px x 9.75px. Shared with
+ * FooterDropdown's trigger.
  */
 export const FOOTER_LINK_CLASSNAME =
-  'flex cursor-pointer items-center px-[9.75px] py-[8px] text-[var(--footer-link-text)] no-underline';
+  'flex cursor-pointer items-center px-[9.75px] py-[8px] text-brand no-underline';
 
 export const MenuItem = ({
   label,

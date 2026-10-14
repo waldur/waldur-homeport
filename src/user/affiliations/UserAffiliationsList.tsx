@@ -218,7 +218,7 @@ export const UserAffiliationsList: FunctionComponent<
                   <MinusCircleIcon
                     size={20}
                     weight="bold"
-                    className="text-gray-500"
+                    className="text-quaternary"
                   />
                 </Tooltip>
               ),

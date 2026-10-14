@@ -48,7 +48,7 @@ export const ManagedFormNodesStep = (props: FormStepProps) => {
         </div>
       }
     >
-      <div className="mb-2 border-bottom">
+      <div className="mb-2 border-b-[1px] border-b-secondary">
         <FormGroup label={translate('Number of nodes')} required={true}>
           <Field
             name="attributes.worker_nodes_count"
@@ -62,7 +62,7 @@ export const ManagedFormNodesStep = (props: FormStepProps) => {
       </div>
       {openstackOffering ? (
         <>
-          <div className="mb-2 border-bottom">
+          <div className="mb-2 border-b-[1px] border-b-secondary">
             <FlavorTable
               offering={openstackOffering}
               query={query}

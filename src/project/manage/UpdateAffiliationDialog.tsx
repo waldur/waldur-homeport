@@ -176,7 +176,7 @@ export const UpdateAffiliationDialog: FunctionComponent<
       ) : (
         <>
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <span className="text-muted">
+            <span className="text-quaternary">
               {isStaff
                 ? translate(
                     'Pick from the full registry. The default list for this organization is highlighted.',

@@ -26,7 +26,7 @@ export const CeleryInfoPage = () => {
     return (
       <div className="text-center py-10">
         <LoadingSpinner />
-        <p className="text-muted mt-4">
+        <p className="text-quaternary mt-4">
           {translate('Fetching Celery statistics, please standby...')}
         </p>
       </div>

@@ -100,14 +100,14 @@ export const PerOfferingBarsWidget = ({
   return (
     <Tabs value={effectiveType} onValueChange={setActiveType}>
       <div className="d-flex align-items-center gap-2 mb-2 flex-wrap">
-        <small id={labelId} className="text-secondary fw-medium">
+        <small id={labelId} className="text-secondary font-medium">
           {translate('Component type')}:
         </small>
         <TabsList aria-labelledby={labelId}>
           {componentTypes.map(({ type, name }) => (
             <TabsTrigger key={type} value={type} title={`type=${type}`}>
               {name}
-              <small className="text-muted ms-1" style={{ fontWeight: 400 }}>
+              <small className="text-quaternary ms-1 font-normal">
                 ({type})
               </small>
             </TabsTrigger>

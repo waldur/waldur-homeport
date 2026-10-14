@@ -23,7 +23,7 @@ export const UserDropdownMenuItems = () => {
           <UISrefActive class="active" key={index}>
             <Menu.Sub>
               <Menu.SubTrigger>{item.title}</Menu.SubTrigger>
-              <Menu.SubContent className="fw-bold w-175px py-2">
+              <Menu.SubContent className="font-medium w-175px py-2">
                 {item.children.map((child, childIndex) => (
                   <UISrefActive class="active" key={childIndex}>
                     <NavMenuLink state={child.to} label={child.title} />

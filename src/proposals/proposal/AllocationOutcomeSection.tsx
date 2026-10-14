@@ -115,7 +115,7 @@ export const AllocationStartBanner: FC<{ proposal: Proposal }> = ({
     <AlertItem
       variant="info"
       type="floating"
-      className="bg-body"
+      className="bg-primary"
       title={translate('Resources are activated on {date}', {
         date: formatDate(project.start_date),
       })}
@@ -291,7 +291,9 @@ const AllocationOutcome: FC<{
         )}
       </Row>
 
-      <h6 className="text-secondary fw-bold mb-3">{translate('Resources:')}</h6>
+      <h6 className="text-secondary font-medium mb-3">
+        {translate('Resources:')}
+      </h6>
       <Table<OutcomeRow>
         {...resources}
         {...tableChrome}
@@ -346,7 +348,7 @@ const AllocationOutcome: FC<{
 
       {!rolesLoading && roles && (
         <>
-          <h6 className="text-secondary fw-bold mt-6 mb-3">
+          <h6 className="text-secondary font-medium mt-6 mb-3">
             {translate('Project access:')}
           </h6>
           <AllocatedTeamTable proposalUuid={proposal.uuid} roles={roles} />

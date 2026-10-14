@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
 }
 
 .layout-stacked-hero {
@@ -28,7 +28,7 @@
 }
 
 .layout-stacked-hero-content h1 {
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -58,5 +58,5 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  border-top: 1px solid var(--bs-border-color);
+  border-top: 1px solid var(--border-secondary);
 }

@@ -191,7 +191,7 @@ const ExtendForm: FC<ExtendFormProps> = ({
             )}
           />
           {newEndPreview && (
-            <BSForm.Text className="text-muted">
+            <BSForm.Text className="text-quaternary">
               {translate('Will be set to: {value}', { value: newEndPreview })}
             </BSForm.Text>
           )}

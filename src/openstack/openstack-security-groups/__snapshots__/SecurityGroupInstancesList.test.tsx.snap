@@ -19,7 +19,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
             class="mb-0"
           >
             <span
-              class="animation-spin text-primary"
+              class="animation-spin text-brand"
               data-testid="SpinnerIcon"
               role="status"
               weight="bold"
@@ -49,7 +49,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
             </colgroup>
             <thead>
               <tr
-                class="text-start text-muted fw-bolder fs-7 gs-0 align-middle"
+                class="text-start text-quaternary font-semibold fs-7 gs-0 align-middle"
               >
                 <th
                   data-pin-key="column-0"
@@ -219,7 +219,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                     >
                       192.168.42.14
                       <div
-                        class="my-1 mx-2 text-hover-primary cursor-pointer d-inline z-index-1 position-relative"
+                        class="my-1 mx-2 hover:text-brand cursor-pointer d-inline z-index-1 position-relative"
                       >
                         <button
                           aria-label="Copy to clipboard"
@@ -237,7 +237,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       </div>
                     </span>
                     <span
-                      class="text-muted ms-1 text-nowrap"
+                      class="text-quaternary ms-1 text-nowrap"
                     >
                       theses-and-papers-on-mach-sub-net (192.168.42.0/24)
                     </span>
@@ -251,7 +251,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   >
                     10.10.10.5
                     <div
-                      class="my-1 mx-2 text-hover-primary cursor-pointer d-inline z-index-1 position-relative"
+                      class="my-1 mx-2 hover:text-brand cursor-pointer d-inline z-index-1 position-relative"
                     >
                       <button
                         aria-label="Copy to clipboard"
@@ -273,7 +273,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                   class="ellipsis"
                 >
                   <span
-                    class="badge inline-flex items-center justify-center border-[1px] text-[1.075rem] leading-[20px] font-medium transition-colors rounded-full py-[1px] px-[9px] bg-brand-50 border-brand-200 text-brand-700 dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
+                    class="badge inline-flex items-center justify-center border-[1px] text-[1.075rem] leading-[20px] font-medium transition-colors rounded-full py-[1px] px-[9px] bg-brand-subtle border-brand-200 text-brand-700 dark:border-brand-700 dark:text-brand-200"
                     data-state="closed"
                     data-testid="default-state-indicator"
                     data-tone="outline"
@@ -291,7 +291,7 @@ exports[`SecurityGroupInstancesList > renders instance with its internal and ext
                       aria-expanded="false"
                       aria-haspopup="menu"
                       aria-label="Actions"
-                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-[transparent] text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-[transparent] active:shadow-none disabled:bg-[transparent] disabled:text-[var(--btn-disabled-text)] data-disabled:bg-[transparent] data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6 p-0 h-[44px] w-[44px]"
+                      class="inline-flex items-center justify-center gap-2 whitespace-nowrap tracking-[0.56px] font-medium transition-[color,background-color,box-shadow] disabled:cursor-not-allowed data-disabled:cursor-not-allowed shadow-[inset_0_0_0_1px_transparent] bg-transparent text-[var(--btn-text-secondary-color)] hover:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:bg-[var(--btn-text-secondary-hover-bg)] focus-visible:[outline:2px_solid_var(--btn-text-secondary-focus-ring)] focus-visible:[outline-offset:0px] active:bg-transparent active:shadow-none disabled:bg-transparent disabled:text-[var(--btn-disabled-text)] data-disabled:bg-transparent data-disabled:text-[var(--btn-disabled-text)] rounded-lg px-[16px] py-[10px] text-base leading-6 p-0 h-[44px] w-[44px]"
                       data-state="closed"
                       data-testid="actions-toggle"
                       id="radix-:r8:"

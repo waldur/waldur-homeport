@@ -67,10 +67,10 @@ Waldur Homeport operates on two active UI component patterns:
 
 | UI Element                    | Standard Component          | Package       | Usage & Styling Notes                                                                                                                                    | Prohibited                                                            |
 | :---------------------------- | :-------------------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
-| **Alert / Banner**            | `AlertItem`                 | `waldur-ui`   | Pure Tailwind, `--surface-card-border`, 5 variants                                                                                                       | `react-bootstrap` `Alert`                                             |
+| **Alert / Banner**            | `AlertItem`                 | `waldur-ui`   | Pure Tailwind, `--border-secondary`, 5 variants                                                                                                          | `react-bootstrap` `Alert`                                             |
 | **Badge / Pill**              | `Badge`                     | `waldur-ui`   | 15 variants × 3 tones, structural `border-[1px]`                                                                                                         | `react-bootstrap` `Badge`                                             |
 | **Tooltip**                   | `Tooltip`                   | `waldur-ui`   | Radix Tooltip (hover/focus) + Popover (click fallback)                                                                                                   | `react-bootstrap` `Tooltip`, `OverlayTrigger`                         |
-| **Popover**                   | `Popover`, `PopoverContent` | `waldur-ui`   | Radix Popover with `--surface-card-*` tokens                                                                                                             | `react-bootstrap` `Popover`                                           |
+| **Popover**                   | `Popover`, `PopoverContent` | `waldur-ui`   | Radix Popover with `--card-bg` / `--border-secondary` tokens                                                                                             | `react-bootstrap` `Popover`                                           |
 | **Button**                    | `BaseButton`                | `waldur-ui`   | 12 variants × 3 sizes, inset `box-shadow` border, outline focus ring, semantic button tokens                                                             | `react-bootstrap` `Button`, hand-written `btn` class markup           |
 | **Link styled as button**     | `Link` with `buttonVariant` | `@/core/Link` | Same classes as `BaseButton` via `buttonVariants()`; keeps anchor semantics and routing                                                                  | `<a className="btn …">`                                               |
 | **Checkbox / radio**          | `Checkbox`, `Radio`         | `waldur-ui`   | Hidden native input + drawn box and SVG mark, `md` 20px / `sm` 16px, `--check-*` tokens; `label` / `description` / `tooltip` props                       | `react-bootstrap` `FormCheck` / `Form.Check`, `form-check*` classes   |
@@ -125,13 +125,18 @@ In production bundles, Vite's CSS minifier removes the explicit `@layer theme, b
 
 CSS Cascade Layers do **not** outrank `!important`. Bootstrap 5's utility API emits utilities with `!important` by default. Because Tailwind and Bootstrap share identical utility names, collisions occur on shared class strings:
 
-| Colliding Class           | Bootstrap Rule (`!important`)                          | Tailwind Expected Rule               | Rendered on App Pages                  |
-| :------------------------ | :----------------------------------------------------- | :----------------------------------- | :------------------------------------- |
-| `.text-white`             | `color: #fff !important;`                              | `color: var(--color-white);`         | **Bootstrap** (breaks `dark:text-...`) |
-| `.bg-transparent`         | `background-color: transparent !important;`            | `background-color: transparent;`     | **Bootstrap**                          |
-| `.border`                 | `border: 1px solid var(--bs-border-color) !important;` | `border-width: 1px;`                 | **Bootstrap**                          |
-| `.p-1` through `.p-5`     | `padding: $spacers[N] !important;`                     | `padding: calc(var(--spacing) * N);` | **Bootstrap**                          |
-| `.gap-1` through `.gap-5` | `gap: $spacers[N] !important;`                         | `gap: calc(var(--spacing) * N);`     | **Bootstrap**                          |
+| Colliding Class           | Bootstrap Rule (`!important`)                          | Tailwind Expected Rule               | Rendered on App Pages |
+| :------------------------ | :----------------------------------------------------- | :----------------------------------- | :-------------------- |
+| `.border`                 | `border: 1px solid var(--bs-border-color) !important;` | `border-width: 1px;`                 | **Bootstrap**         |
+| `.p-1` through `.p-5`     | `padding: $spacers[N] !important;`                     | `padding: calc(var(--spacing) * N);` | **Bootstrap**         |
+| `.gap-1` through `.gap-5` | `gap: $spacers[N] !important;`                         | `gap: calc(var(--spacing) * N);`     | **Bootstrap**         |
+
+No colour class collides any more: Bootstrap emits no `text-`/`bg-`/`border-` colour utility at
+all (nor `.border-top`/`-bottom`/`-start`/`-end`, which set a colour), so every colour class is
+Tailwind's, follows the design tokens and takes `dark:`/`hover:` variants. Bootstrap's old names
+(`text-danger`, `bg-light`, …) paint nothing; `src/tailwindBootstrapColors.test.ts` keeps it that
+way. See
+[design-tokens.md § Bootstrap colour utilities](design-tokens.md).
 
 #### Spacing Anomaly
 
@@ -145,8 +150,11 @@ At Metronic's forced root font size of `13px` (and `12px` on mobile):
 #### Practical Workaround Rules
 
 1. **Exact Pixel Sizing**: For spacing or padding that must match design tokens precisely, use Tailwind arbitrary values: `p-[12px]`, `gap-[8px]`, `px-[16px]`.
-2. **Structural Borders**: Use `border-[1px]` instead of the bare `.border` utility.
-3. **White Text in Inverting Themes**: Use `text-[#fff]` instead of `text-white`. `text-[#fff]` compiles to a unique class name (`text-_fff_`) that avoids Bootstrap's `.text-white { color: #fff !important; }`, allowing dark-mode overrides (`dark:text-brand-300`) to apply correctly.
+2. **Structural Borders**: Use `border-[1px]` instead of the bare `.border` utility. Bootstrap's
+   `.border` also sets the colour with `!important`, so any Tailwind border colour next to it
+   (`border border-brand`, `border border-transparent hover:border-secondary`) never paints.
+   Give every state an explicit colour: `border-[1px] border-secondary`, then `border-brand`
+   when selected. Enforced (with autofix) by `no-bootstrap-border-with-tailwind-color`.
 
 ---
 
@@ -219,31 +227,55 @@ This guarantees `lg` resolves to `992px` identically across Tailwind `lg:` varia
 
 1. **Single Source of Truth**: All color ramps originate in `packages/design-tokens/tokens/colors.json`. Running `yarn tokens:generate` outputs:
    - `src/metronic/sass/_color-ramps.scss` (consumed by Bootstrap & Metronic SCSS)
-   - `packages/design-tokens/src/colorRamps.css` (consumed by Tailwind)
+   - `packages/design-tokens/src/css/primitives/colorRamps.css` (consumed by Tailwind)
 2. **Theme Color Semantics**:
    - In Tailwind CSS: `--color-gray-N` maintains physical lightness across themes (e.g., `gray-900` is always dark). Dark UI uses a dedicated inverted ramp: `--color-gray-dark-N`.
    - In Metronic SCSS: `$gray-N` variables invert automatically in dark mode (`$gray-900` becomes light in dark mode).
-3. **Surface & Component Tokens**:
-   - `surfaceColors.css`: `--surface-card-bg`, `--surface-card-border`, `--surface-text-primary`, `--surface-text-secondary`, `--dropdown-shadow`.
-   - `buttonColors.css`: Per-variant button backgrounds, borders, hover states, and focus rings.
-   - `zIndex.css`: Coordinated stack order across Bootstrap and Radix layers.
+3. **Semantic & Component Tokens** (reference: [design-tokens.md § Semantic roles](design-tokens.md)):
+   - Neutral text and icons: one scale, `--text-primary` … `--text-senary` (gray-900 … 300),
+     plus `--text-disabled`. The former `--fg-*` neutrals, `--text-body`, `--text-subdued` and
+     `--text-muted` were merged into it.
+   - Surfaces `--bg-primary` … `--bg-quaternary`, borders `--border-primary` …
+     `--border-tertiary`, `--border-divider*`, plus `--card-bg`, `--dropdown-shadow`.
+   - States: the status matrix `--status-{success,warning,danger}-{bg,border,solid,fg}` and
+     `--status-neutral-{bg,fg}`, each `-fg` AA-checked against every surface.
+   - Component tokens (`components/button.css`): Per-variant button backgrounds, borders, hover states, and focus rings.
+   - `primitives/zIndex.css`: Coordinated stack order across Bootstrap and Radix layers.
+4. **Semantic utilities**: `packages/design-tokens/src/css/tailwind/theme.css` (imported by the
+   package's `index.css`, so every consumer gets it) exposes the roles through property-scoped theme
+   keys (`--text-color-*`, `--background-color-*`, `--border-color-*`), so `text-tertiary` is
+   `var(--text-tertiary)`, `bg-secondary` is `var(--bg-secondary)`, `border-primary` is
+   `var(--border-primary)`, with no exceptions. Brand is `text-brand` / `border-brand` / `outline-brand`.
 
 ---
 
 ### Brand Color Token Bridge
 
-`src/tailwind.css` bridges runtime brand variables into Tailwind:
+`packages/design-tokens/src/css/tailwind/theme.css` bridges the runtime brand variables into
+Tailwind, next to the semantic roles:
 
 ```css
 @theme {
-  --color-brand-50: var(--waldur-brand-50);
-  --color-brand-500: var(--waldur-brand-500);
-  --color-brand-600: var(--waldur-brand-600);
+  --text-color-brand: var(--text-brand);
+  --border-color-brand: var(--text-brand);
+  --outline-color-brand: var(--text-brand);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-600: var(--brand-600);
   /* ... */
 }
 ```
 
-These CSS variables are initialized at runtime by `afterBootstrap.tsx` (`initCssVariables()`). Storybook decorators and test harnesses must seed `--waldur-brand-*` variables so brand-dependent components render valid colors.
+`text-brand`, `border-brand` and `outline-brand` read `--text-brand` (`semantic/brand.css`), the
+brand border for a selected card or option: the tenant colour in light, `--brand-300` in dark,
+where the tenant colour is too dark to read on the dark surfaces. These three are for text and
+lines; a solid brand fill is `bg-[var(--bg-brand-solid)]`, which stays the tenant colour in both
+themes. A brand-tinted surface is `bg-brand-subtle`, not a raw `bg-brand-50`, which stays pale in
+dark mode. In SCSS, never paint brand with `$primary`: it compiles to a static
+default green. Use the runtime tokens instead (see
+[design-tokens.md § The brand colour in SCSS](design-tokens.md)).
+
+These CSS variables are initialized at runtime by `afterBootstrap.tsx` (`initCssVariables()`). Storybook decorators and test harnesses must seed `--brand-*` variables so brand-dependent components render valid colors.
 
 ---
 
@@ -251,8 +283,9 @@ These CSS variables are initialized at runtime by `afterBootstrap.tsx` (`initCss
 
 Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
-1. `loadTheme()` in `src/theme/utils.ts` swaps the stylesheet `<link>` between `style.css` and `style.dark.css`.
-2. Simultaneously, `loadTheme()` sets the `data-theme="dark"` attribute on `<html>`.
+1. `loadTheme()` in `src/theme/utils.ts` sets the `data-theme="dark"` attribute on `<html>`.
+2. The Metronic stylesheet is one file for both themes: its colours read the design tokens, and
+   its dark-only rules use the same attribute (the `dark-theme` mixin).
 3. Tailwind dark mode is configured via an explicit variant:
 
 ```css
@@ -267,10 +300,10 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 `packages/ui/src/AlertItem/` (exported from `waldur-ui`).
 
-- **Architecture**: Pure Tailwind utilities and CSS design tokens (`--surface-card-border`).
+- **Architecture**: Pure Tailwind utilities and CSS design tokens (`--border-secondary`).
 - **Typography & Proportions**:
   - Title: `text-[1.077rem] font-medium leading-[1.43]` to match Metronic typography across desktop and mobile root font sizes.
-  - Border: `var(--surface-card-border)` (`#E4E7EC` light, `#1F242F` dark).
+  - Border: `var(--border-secondary)` (`#E4E7EC` light, `#1F242F` dark).
   - Slot spacing: `gap-[0.924rem]`.
 - **Enforcement**: `react-bootstrap` `Alert` is prohibited in `RESTRICTED_IMPORTS` (`eslint.config.js`), blocking direct imports and guiding call sites to `AlertItem` from `waldur-ui`.
 
@@ -282,6 +315,10 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 - **Variants & Tones**: 15 semantic variants (`primary`, `secondary`, `success`, `warning`, `danger`, `info`, `neutral`, `purple`, `blue`, `indigo`, `moss`, `pink`, `teal`, `orange`, `rose`) × 3 tones (`solid`, `light`, `outline`) × 4 shapes (`rounded`, `pill`, `circle`, `roundless`).
 - **Structural 1px Border**: Uses `border-[1px]` paired with `border-transparent` on solid/light tones to maintain uniform dimensions without subpixel shift across tones.
+- **Status tones**: `success`/`warning`/`danger` `solid` and `light` read the status matrix
+  (`--status-*-solid`, `--status-*-bg` + `--status-*-fg`), so they match alerts and Progress
+  fills. The `outline` tone keeps its own ramp steps (an `eslint-disable` for
+  `no-raw-status-ramp` records why).
 - **Enforcement**:
   - `react-bootstrap` `Badge` is prohibited in `RESTRICTED_IMPORTS`.
   - `enforce-badge-icon-patterns`: Enforces 12px icons inside badges.
@@ -300,7 +337,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
   - `trigger="click"`: Uses `@radix-ui/react-popover` for click-to-open tooltips (Radix Tooltip lacks click-trigger support). Styled identically as a bubble surface.
 - **Seam-Free Arrow Construction**: Standard Radix SVG arrows leave an anti-aliasing hairline seam between the SVG path and the HTML popup. `Tooltip.tsx` uses a custom polygon that extends 1 viewBox unit (~0.5px) past its box with `overflow: visible` to prevent rasterization seams.
 - **Adaptive Color Inversion**:
-  - `theme="dark"` (default): Dark bubble with `text-[#fff]` in light mode; light bubble with dark text in dark mode.
+  - `theme="dark"` (default): Dark bubble with `text-white` in light mode; light bubble with dark text in dark mode.
   - `theme="light"`: Fixed dark bubble regardless of active mode.
 - **Enforcement**: `Tooltip` and `OverlayTrigger` from `react-bootstrap` are prohibited in `RESTRICTED_IMPORTS`.
 
@@ -314,7 +351,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
   ```tsx
   className =
-    'rounded-lg border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--surface-text-primary)] outline-hidden';
+    'rounded-lg border border-[var(--border-secondary)] bg-[var(--card-bg)] shadow-[var(--dropdown-shadow)] text-[var(--text-primary)] outline-hidden';
   ```
 
 - **Menu vs. Popover**:
@@ -337,18 +374,18 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 - **Unmount vs. `keepMounted`**:
   > [!WARNING]
   > Radix renders `isOpen && children` inside its Content, so a closed panel's children are **unmounted even with `forceMount`**. react-final-form fields inside it unregister and lose their values and validation. For panels holding form fields, use `<Collapsible keepMounted>`: children stay mounted and are only `hidden` while closed. `Accordion` has no such option — none of its intended users hold form fields.
-- **Call sites**: the table filters sidebar (`Accordion type="multiple"`), `AccordionCard` (now in `waldur-ui`; `Collapsible keepMounted`, same props as before; pure Tailwind with rem spacing ported from Metronic's card, and `--card-header-text` / `--card-title-text` / `--card-title-secondary-text` / `--card-header-solid-bg` tokens in `surfaceColors.css` — measured identical to the Metronic card in light and dark), `CategoriesPanel` (`Collapsible`) and a handful of standalone accordions, which add an outer border via `className` (`rounded-md border-[1px] border-solid border-[var(--surface-card-border)]`) — the component itself draws only separators between items.
+- **Call sites**: the table filters sidebar (`Accordion type="multiple"`), `AccordionCard` (now in `waldur-ui`; `Collapsible keepMounted`, same props as before; pure Tailwind with rem spacing ported from Metronic's card, and `--card-header-text` / `--card-title-text` / `--card-title-secondary-text` / `--card-header-solid-bg` tokens in `card.css` — measured identical to the Metronic card in light and dark), `CategoriesPanel` (`Collapsible`) and a handful of standalone accordions, which add an outer border via `className` (`rounded-md border-[1px] border-solid border-[var(--border-secondary)]`) — the component itself draws only separators between items.
 - **Enforcement**: `Accordion`, `AccordionContext` and `useAccordionButton` from `react-bootstrap` (and `react-bootstrap/Accordion`) are prohibited in `RESTRICTED_IMPORTS`.
 
 ---
 
 ### Progress
 
-`packages/ui/src/Progress/` (exported from `waldur-ui`); tokens in `packages/design-tokens/src/progressColors.css`.
+`packages/ui/src/Progress/` (exported from `waldur-ui`); tokens in `packages/design-tokens/src/css/components/progress.css`.
 
 - **Three modes**: `<Progress value max variant />`, `<Progress segments={[{ value, variant, label? }]} max />` for stacked bars, and `<Progress indeterminate />` for an unknown amount (a sweeping bar; a static half-opaque bar under `prefers-reduced-motion`).
 - **No height override**: `size` is `xs` (4px), `sm` (6px), `md` (8px, default) or `lg` (24px, the only size meant for text inside a segment). There is no `style`/`h-*` escape hatch; pick a size.
-- **Neutral track**: the track never takes the variant's colour (a tinted track made an empty meter look full). `variant` is a `BadgeVariant` minus `secondary`, and the fills are Badge's `solid` colours in both themes. `primary` reads `--waldur-brand-600`, so tenant re-branding applies.
+- **Neutral track**: the track never takes the variant's colour (a tinted track made an empty meter look full). `variant` is a `BadgeVariant` minus `secondary`, and the fills are Badge's `solid` colours in both themes. `primary` reads `--brand-600`, so tenant re-branding applies.
 - **Accessibility**: the track carries `role="progressbar"` with `aria-valuenow/min/max`; `label` is its accessible name. A non-finite `value` or a `max <= 0` (a 0/0 quota) reads as 0, never `NaN`. Segments are clamped so they never exceed the track.
 - **`PercentProgress`** (`src/core/PercentProgress.tsx`) is the bar plus its share of `max` printed under it (`unit`, `compact`). Use plain `Progress` when the surrounding markup already prints the figure.
 - **Inner labels**: each variant has its own `--progress-label-{variant}` (white or gray-900, whichever reads better on the fill); a token test keeps every pair at or above 4.4:1.
@@ -358,7 +395,7 @@ Waldur does **not** toggle dark mode via a `.dark` HTML class. Instead:
 
 ### Checkbox, Radio & Switch
 
-`packages/ui/src/Check/`: `Checkbox.tsx`, `Radio.tsx`, `RadioGroup.tsx` and `Switch.tsx` (exported from `waldur-ui` through `Check/index.ts`), plus the internal `CheckLabel.tsx` (label row), `CheckMark.tsx` (the check path, also drawn by the select) and `checkStyles.ts` (class recipes); colours in `waldur-design-tokens/checkColors.css`.
+`packages/ui/src/Check/`: `Checkbox.tsx`, `Radio.tsx`, `RadioGroup.tsx` and `Switch.tsx` (exported from `waldur-ui` through `Check/index.ts`), plus the internal `CheckLabel.tsx` (label row), `CheckMark.tsx` (the check path, also drawn by the select) and `checkStyles.ts` (class recipes); colours in `waldur-design-tokens/check.css`.
 
 - **Hidden input + `peer`**: each control is a box holding a native `<input>` that is invisible (`opacity-0`, not `sr-only`) and on top, so it still takes clicks, focus, keyboard and form state, followed by elements that draw the control and read the input's state with `peer-*`: the box and the check/dash SVGs (`Checkbox`), the circle and dot (`Radio`), the track and knob (`Switch`). No background images or data URIs; marks are `currentColor` (`--check-mark` / `--check-mark-disabled`). Compound states use arbitrary peer variants (`peer-[:checked:disabled]:`, `peer-[:hover:enabled:not(:checked)]:`). `className` and `hidden` go on the box (layout); every other prop, and the `ref`, reach the input. Indeterminate styling is checkbox-only: `:indeterminate` also matches every radio in a group with nothing selected.
 - **Motion** matches the legacy `$form-check-transition`: colours and border fade and the switch knob slides over 0.15s `ease-in-out` (written `ease-[ease-in-out]`; Tailwind's `ease-in-out` is a different curve), and `motion-reduce:transition-none` turns it off, as Bootstrap's `transition` mixin did. The marks appear instantly, as the background images did.
@@ -467,11 +504,11 @@ Bootstrap's spacing utilities are `!important`, so a Bootstrap class on a panel 
 
 The header user menu, the language submenu, page-tab submenus, the footer menus and the filter popovers.
 
-- **Nav look**: Metronic's `.menu-sub-dropdown` panel and `.menu-link` row, measured against the live app. Colours come from the `--menu-*` tokens in `surfaceColors.css`; the shadow is `--dropdown-shadow`.
+- **Nav look**: Metronic's `.menu-sub-dropdown` panel and `.menu-link` row, measured against the live app. Colours come from the `--menu-*` tokens in `menu.css`; the shadow is `--dropdown-shadow`.
 - **Row options instead of theme classes**: `density` (`default` 10×16px, `compact` 8×9.75px, `base` 8×12px) and `tone` (gray-600 or gray-700). Every highlighted row is gray-700 on gray-50. A panel sets them for its rows with `density` / `tone` props, as `data-*` attributes the rows' group variants read (the footer uses `compact`; `MenuPopover.Content` defaults to `base`/gray-700 for the filter rows).
 - **Highlighted rows**: hover, Radix `[data-highlighted]`, an open submenu (`data-[state=open]`), a checked radio row (`data-[state=checked]`, e.g. the current language) and `.active` (what `UISrefActive` adds) share one style (the `menu-row-active:` variant); disabled rows (`data-disabled`) are skipped.
 - **`NavMenuLink`**: a row that is a ui-router `Link`. It wraps its label in a span so `Link` doesn't add `text-anchor`.
-- **Page tabs and footer bar** (`TabsList.tsx`, `footer/MenuItem.tsx`) are plain `<nav><ul>` link lists with their own Tailwind classes and `--page-tab-*` / `--footer-link-text` tokens. The current tab is marked with `aria-current`.
+- **Page tabs and footer bar** (`TabsList.tsx`, `footer/MenuItem.tsx`) are plain `<nav><ul>` link lists with their own Tailwind classes and `--page-tab-*` tokens (the footer links use `text-brand-600 dark:text-brand-300` directly). The current tab is marked with `aria-current`.
 
 ---
 
@@ -525,19 +562,24 @@ Implemented in `packages/eslint-plugin-waldur` and enabled as `waldur-custom/*` 
 
 #### Visual patterns
 
-| Rule Name                          | Severity | Enforced Pattern                                                                                                          |
-| :--------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------ |
-| `enforce-badge-icon-patterns`      | `error`  | Enforces 12px icon sizing inside `Badge` components.                                                                      |
-| `enforce-badge-props-consistency`  | `error`  | Validates `variant`, `tone` and `shape` prop combinations on `Badge`.                                                     |
-| `no-manual-icon-colors-in-badges`  | `error`  | Prevents manual colour classes on icons rendered inside `Badge`.                                                          |
-| `enforce-badge-right-icon-pattern` | `error`  | Standardizes right-side action icon styling in badges.                                                                    |
-| `enforce-featured-icon`            | `error`  | Requires `FeaturedIcon` (with `tone`/`size`) for highlighted icon emblems.                                                |
-| `enforce-phosphor-icon-weight`     | `error`  | Consistent `weight` prop on Phosphor icons.                                                                               |
-| `enforce-border-radius-tokens`     | `error`  | Design-token radius classes instead of hard-coded values.                                                                 |
-| `no-bootstrap-tabs`                | `error`  | `Tabs` / `TabNav` from `waldur-ui`; no react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes.                             |
-| `enforce-breadcrumb-colors`        | `error`  | Breadcrumb links use the `$text-brand-secondary` token.                                                                   |
-| `no-bootstrap-form-check`          | `error`  | `Checkbox` / `Radio` / `Switch` from `waldur-ui`; no `FormCheck`, `Form.Check` or `form-check*` / `form-switch*` classes. |
-| `no-bootstrap-progress`            | `error`  | `Progress` from `waldur-ui`; no react-bootstrap `ProgressBar` or `progress` / `progress-bar*` classes.                    |
+| Rule Name                                 | Severity | Enforced Pattern                                                                                                                                                                              |
+| :---------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enforce-badge-icon-patterns`             | `error`  | Enforces 12px icon sizing inside `Badge` components.                                                                                                                                          |
+| `enforce-badge-props-consistency`         | `error`  | Validates `variant`, `tone` and `shape` prop combinations on `Badge`.                                                                                                                         |
+| `no-manual-icon-colors-in-badges`         | `error`  | Prevents manual colour classes on icons rendered inside `Badge`.                                                                                                                              |
+| `enforce-badge-right-icon-pattern`        | `error`  | Standardizes right-side action icon styling in badges.                                                                                                                                        |
+| `enforce-featured-icon`                   | `error`  | Requires `FeaturedIcon` (with `tone`/`size`) for highlighted icon emblems.                                                                                                                    |
+| `enforce-phosphor-icon-weight`            | `error`  | Consistent `weight` prop on Phosphor icons.                                                                                                                                                   |
+| `enforce-border-radius-tokens`            | `error`  | Design-token radius classes instead of hard-coded values.                                                                                                                                     |
+| `no-bootstrap-tabs`                       | `error`  | `Tabs` / `TabNav` from `waldur-ui`; no react-bootstrap `Tab`/`Tabs`/`Nav` or `nav-*` classes.                                                                                                 |
+| `enforce-breadcrumb-colors`               | `error`  | Breadcrumb links use the `$text-brand-secondary` token.                                                                                                                                       |
+| `no-bootstrap-form-check`                 | `error`  | `Checkbox` / `Radio` / `Switch` from `waldur-ui`; no `FormCheck`, `Form.Check` or `form-check*` / `form-switch*` classes.                                                                     |
+| `no-bootstrap-progress`                   | `error`  | `Progress` from `waldur-ui`; no react-bootstrap `ProgressBar` or `progress` / `progress-bar*` classes.                                                                                        |
+| `no-bootstrap-border-with-tailwind-color` | `error`  | No Bootstrap `border` / `border-top` / … next to a Tailwind border colour (Bootstrap's `!important` colour wins). Autofixes to `border-[1px]` when the same string sets a base colour.        |
+| `no-raw-status-ramp`                      | `error`  | State colours come from `--status-*`, not raw `success-N` / `warning-N` / `error-N` utilities. Deliberate exceptions carry an `eslint-disable` with the reason.                               |
+| `require-weight-scale`                    | `error`  | Font weight is `font-light` … `font-bold`. Reports Bootstrap `fw-*` (autofixed to the same weight: `fw-bold` was 500, so `font-medium`), off-scale steps, `font-[N]` and inline `fontWeight`. |
+| `require-dark-pair`                       | `error`  | A physical colour (ramp step, white/black, hex, raw `var(--brand-N)`) needs a `dark:` counterpart in its class list, or a semantic utility. Solid fills and white text on them pass.          |
+| `no-bootstrap-css-vars`                   | `error`  | No `--bs-*` reads in TS/TSX; use the design token (table in [design-tokens.md](design-tokens.md)).                                                                                            |
 
 #### Code hygiene
 

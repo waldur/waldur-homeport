@@ -67,53 +67,53 @@ export const InvoiceDetails = ({
         setTotalFiltered={setTotalFiltered}
         footer={
           showPrice && (
-            <table className="table bg-gray-50 border-top border-bottom align-middle">
+            <table className="table bg-secondary border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary align-middle">
               <tbody>
-                <tr className="fs-6 fw-bold">
+                <tr className="fs-6 font-medium">
                   {totalFiltered !== null && (
-                    <td className="text-dark">
+                    <td className="text-primary">
                       <span>{translate('Total filtered')}</span>
                       {': '}
-                      <span className="text-end text-dark text-nowrap min-w-125px">
+                      <span className="text-end text-primary text-nowrap min-w-125px">
                         {defaultCurrency(totalFiltered)}
                       </span>
                     </td>
                   )}
 
-                  <td className="text-end text-dark">
+                  <td className="text-end text-primary">
                     <span>{translate('Subtotal')}:</span>
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-dark text-nowrap min-w-150px border-bottom"
+                    className="text-end text-primary text-nowrap min-w-150px border-b-[1px] border-b-secondary"
                   >
                     {defaultCurrency(invoice.price)}
                   </td>
                 </tr>
-                <tr className="fs-6 fw-bold">
+                <tr className="fs-6 font-medium">
                   <td
-                    className="text-end text-dark"
+                    className="text-end text-primary"
                     colSpan={totalFiltered === null ? 1 : 2}
                   >
                     <span>{translate('Tax')}:</span>
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-dark text-nowrap min-w-150px border-bottom"
+                    className="text-end text-primary text-nowrap min-w-150px border-b-[1px] border-b-secondary"
                   >
                     {defaultCurrency(invoice.tax)}
                   </td>
                 </tr>
-                <tr className="fs-6 fw-bold">
+                <tr className="fs-6 font-medium">
                   <td
-                    className="text-end text-dark"
+                    className="text-end text-primary"
                     colSpan={totalFiltered === null ? 1 : 2}
                   >
                     <span>{translate('Total')}:</span>
                   </td>
                   <td
                     width="12%"
-                    className="text-end text-dark text-nowrap min-w-150px"
+                    className="text-end text-primary text-nowrap min-w-150px"
                   >
                     {defaultCurrency(invoice.total)}
                   </td>

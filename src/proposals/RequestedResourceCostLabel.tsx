@@ -46,7 +46,7 @@ export const RequestedResourceCostLabel: FC<
       <span>
         {defaultCurrency(amount)}
         {part === 'monthly' && (
-          <span className="text-muted">{translate(' /mo')}</span>
+          <span className="text-quaternary">{translate(' /mo')}</span>
         )}
       </span>
     );
@@ -54,7 +54,7 @@ export const RequestedResourceCostLabel: FC<
   const monthly = (
     <span>
       {defaultCurrency(cost.monthly)}
-      <span className="text-muted">{translate(' /mo')}</span>
+      <span className="text-quaternary">{translate(' /mo')}</span>
     </span>
   );
   if (!cost.oneTime) {
@@ -72,12 +72,12 @@ export const RequestedResourceCostLabel: FC<
     return (
       <span>
         {defaultCurrency(cost.oneTime)}
-        <span className="text-muted">{oneTimeSuffix}</span>
+        <span className="text-quaternary">{oneTimeSuffix}</span>
       </span>
     );
   }
   const oneTime = (
-    <span className="text-muted fs-7">
+    <span className="text-quaternary fs-7">
       {defaultCurrency(cost.oneTime)}
       {oneTimeSuffix}
     </span>

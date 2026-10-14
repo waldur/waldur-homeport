@@ -7,7 +7,7 @@ import { Tooltip } from 'waldur-ui';
 import Avatar from '@/core/Avatar';
 
 import { RoomCallState } from './call/useAllRoomCallStates';
-import { getChatAvatarColor } from './chatColors';
+import { getChatAvatarClass } from './chatColors';
 
 interface MatrixRoomRailItemProps {
   uuid: string;
@@ -32,7 +32,6 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
   active,
   onClick,
 }) => {
-  const color = getChatAvatarColor(uuid);
   const isUnread = unreadCount > 0;
 
   return (
@@ -46,7 +45,7 @@ export const MatrixRoomRailItem: FC<MatrixRoomRailItemProps> = ({
         <Avatar
           name={name}
           size={32}
-          labelClassName={`bg-light-${color} text-${color}`}
+          labelClassName={getChatAvatarClass(uuid)}
         />
         {activeCall && (
           <span className="tc-rail-call text-success" aria-hidden>

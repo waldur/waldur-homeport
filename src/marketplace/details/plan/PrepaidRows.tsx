@@ -78,7 +78,9 @@ const PrepaidRow = ({
               {translate('Total')}: {cost.total}
             </span>
             {cost.details && (
-              <span className="fw-normal text-muted">{cost.details}</span>
+              <span className="font-normal text-quaternary">
+                {cost.details}
+              </span>
             )}
           </>
         }
@@ -97,7 +99,7 @@ const PrepaidRow = ({
                 })
           }
           value={
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('Usage beyond prepaid amount')}
             </span>
           }

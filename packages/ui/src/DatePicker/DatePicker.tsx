@@ -19,7 +19,7 @@ import { useCalendarLocale } from './useCalendarLocale';
 
 /** The strip under the calendar holding the time inputs, centred. */
 export const timeRowClassName =
-  'flex items-center justify-center gap-[16px] border-t-[1px] border-solid border-[var(--surface-card-border)] px-[16px] py-[8px]';
+  'flex items-center justify-center gap-[16px] border-t-[1px] border-solid border-secondary px-[16px] py-[8px]';
 
 export interface DatePickerProps {
   value: Date | null | undefined;
@@ -149,7 +149,7 @@ export const DatePicker: FC<DatePickerProps> = ({
     return (
       <div
         id={id}
-        className="inline-block rounded-[8px] border-[1px] border-solid border-[var(--surface-card-border)]"
+        className="inline-block rounded-[8px] border-[1px] border-solid border-secondary"
         style={style}
       >
         {body}

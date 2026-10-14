@@ -33,11 +33,11 @@ const ResourceNameColumn = ({ row }: { row: ResourceMissingUsage }) => (
 );
 
 const OfferingColumn = ({ row }: { row: ResourceMissingUsage }) => (
-  <span className="text-muted">{row.offering_name}</span>
+  <span className="text-quaternary">{row.offering_name}</span>
 );
 
 const ProviderColumn = ({ row }: { row: ResourceMissingUsage }) => (
-  <span className="text-muted">{row.provider_name}</span>
+  <span className="text-quaternary">{row.provider_name}</span>
 );
 
 const CustomerColumn = ({ row }: { row: ResourceMissingUsage }) => (

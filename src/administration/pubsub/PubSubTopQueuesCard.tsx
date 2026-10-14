@@ -41,31 +41,35 @@ export const PubSubTopQueuesCard: FC = () => {
         <Table size="sm" borderless className="mb-0">
           <thead>
             <tr>
-              <th className="text-muted">{translate('Vhost')}</th>
-              <th className="text-muted">{translate('Queue name')}</th>
-              <th className="text-muted text-end">{translate('Messages')}</th>
-              <th className="text-muted text-end">{translate('Consumers')}</th>
+              <th className="text-quaternary">{translate('Vhost')}</th>
+              <th className="text-quaternary">{translate('Queue name')}</th>
+              <th className="text-quaternary text-end">
+                {translate('Messages')}
+              </th>
+              <th className="text-quaternary text-end">
+                {translate('Consumers')}
+              </th>
             </tr>
           </thead>
           <tbody>
             {data.top_queues_by_messages.map((queue, index) => (
               <tr key={index}>
-                <td className="text-muted">{queue.vhost}</td>
+                <td className="text-quaternary">{queue.vhost}</td>
                 <td className="text-truncate" style={{ maxWidth: '250px' }}>
                   {queue.name}
                 </td>
                 <td
-                  className={`fw-semibold text-end ${queue.messages > 1000 ? 'text-warning' : ''}`}
+                  className={`font-semibold text-end ${queue.messages > 1000 ? 'text-warning' : ''}`}
                 >
                   {formatNumber(queue.messages)}
                 </td>
-                <td className="fw-semibold text-end">{queue.consumers}</td>
+                <td className="font-semibold text-end">{queue.consumers}</td>
               </tr>
             ))}
           </tbody>
         </Table>
       ) : (
-        <p className="text-muted mb-0">{translate('No queues found.')}</p>
+        <p className="text-quaternary mb-0">{translate('No queues found.')}</p>
       )}
     </AccordionCard>
   );

@@ -49,7 +49,7 @@ export const WithFormControls: Story = {
           <PopoverContent align="start" className="w-72 p-4">
             <div className="flex flex-col gap-[12px]">
               <label
-                className="text-sm font-medium text-[var(--surface-text-primary)]"
+                className="text-sm font-medium text-primary"
                 htmlFor="popover-story-name"
               >
                 Name contains
@@ -58,10 +58,10 @@ export const WithFormControls: Story = {
                 id="popover-story-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] px-[10px] py-[6px] text-sm text-[var(--surface-text-primary)]"
+                className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] px-[10px] py-[6px] text-sm text-primary"
                 placeholder="Type here…"
               />
-              <div className="text-sm text-[var(--surface-text-muted)]">
+              <div className="text-sm text-quinary">
                 Echoed back from React state, to prove the keystrokes actually
                 landed: {name.length} character(s), {name}
               </div>
@@ -107,7 +107,7 @@ export const BaseButtonAsTrigger: Story = {
         >
           <Menu.Item>Edit</Menu.Item>
           <Menu.Item>Duplicate</Menu.Item>
-          <Menu.Item className="text-[var(--pill-danger-text)] menu-row-active:text-[var(--pill-danger-text)]">
+          <Menu.Item className="text-danger menu-row-active:text-danger">
             Delete
           </Menu.Item>
         </Menu.Content>

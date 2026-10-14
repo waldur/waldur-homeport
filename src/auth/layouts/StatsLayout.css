@@ -30,7 +30,7 @@
 
 .layout-stats-hero-content h1 {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   margin-bottom: 1rem;
 }
 
@@ -54,7 +54,7 @@
 
 .layout-stats-value {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   line-height: 1;
   margin-bottom: 0.5rem;
 }
@@ -67,7 +67,7 @@
 }
 
 .layout-stats-login {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   display: flex;
   flex-direction: column;
 }
@@ -93,7 +93,7 @@
 
 .layout-stats-footer {
   padding: 1rem;
-  border-top: 1px solid var(--bs-border-color);
+  border-top: 1px solid var(--border-secondary);
   display: flex;
   justify-content: space-between;
   align-items: center;

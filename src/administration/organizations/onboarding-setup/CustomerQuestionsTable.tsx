@@ -14,12 +14,12 @@ export const CustomerQuestionsTable: FC<TableWithPortal> = ({ portal }) => {
     if (row.maps_to_customer_field) {
       return (
         <div>
-          <span className="text-gray-600 fs-7">{translate('Customer')}: </span>
-          <code className="text-primary">{row.maps_to_customer_field}</code>
+          <span className="text-tertiary fs-7">{translate('Customer')}: </span>
+          <code className="text-brand">{row.maps_to_customer_field}</code>
         </div>
       );
     }
-    return <span className="text-muted">—</span>;
+    return <span className="text-quaternary">—</span>;
   };
 
   return (

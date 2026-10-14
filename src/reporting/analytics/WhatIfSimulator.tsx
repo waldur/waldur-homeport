@@ -87,9 +87,14 @@ const ParamInput: FC<{
           // @ts-ignore
           style={{ '--range-progress': `${percentage}%` }}
         />
-        <span className="text-nowrap fw-semibold" style={{ minWidth: '60px' }}>
+        <span
+          className="text-nowrap font-semibold"
+          style={{ minWidth: '60px' }}
+        >
           {numValue}
-          {param.unit && <span className="text-muted ms-1">{param.unit}</span>}
+          {param.unit && (
+            <span className="text-quaternary ms-1">{param.unit}</span>
+          )}
         </span>
       </div>
     );
@@ -151,17 +156,17 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
     <div className="row align-items-center py-3">
       {/* Column 1: Label */}
       <div className="col-4">
-        <span className="fw-semibold">{result.label}</span>
+        <span className="font-semibold">{result.label}</span>
         {result.unit && (
-          <span className="text-muted ms-1">({result.unit})</span>
+          <span className="text-quaternary ms-1">({result.unit})</span>
         )}
       </div>
 
       {/* Column 2: Values */}
-      <div className="col-5 d-flex align-items-center gap-2 text-muted">
+      <div className="col-5 d-flex align-items-center gap-2 text-quaternary">
         <span>{result.originalValue.toLocaleString()}</span>
         <span>&rarr;</span>
-        <span className="text-dark">
+        <span className="text-primary">
           {result.simulatedValue.toLocaleString()}
         </span>
       </div>
@@ -175,7 +180,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
               result.severity === 'success' && 'bg-success',
               result.severity === 'warning' && 'bg-warning',
               result.severity === 'danger' && 'bg-danger',
-              result.severity === 'neutral' && 'bg-secondary',
+              result.severity === 'neutral' && 'bg-neutral-subtle text-neutral',
             )}
           >
             {isPositive && <TrendUpIcon weight="bold" className="me-1" />}

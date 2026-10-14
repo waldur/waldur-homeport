@@ -7,7 +7,7 @@ export const CheckoutSummary = ({ offering }: CheckoutSummaryProps) => (
   <DeployPageTotalCard
     offering={offering}
     header={
-      <h5 className="fw-normal text-muted mb-0">
+      <h5 className="font-normal text-quaternary mb-0">
         {translate(
           'Charged as part of {name}.',
           {

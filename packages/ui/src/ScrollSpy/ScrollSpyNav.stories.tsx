@@ -55,7 +55,7 @@ const PROGRESS_ITEMS: ScrollSpyItem[] = [
         <span>General information</span>
         <CheckCircleIcon
           weight="bold"
-          className="text-emerald-500 size-5 shrink-0"
+          className="text-success size-5 shrink-0"
         />
       </div>
     ),
@@ -67,7 +67,7 @@ const PROGRESS_ITEMS: ScrollSpyItem[] = [
         <span>Components & limits</span>
         <CheckCircleIcon
           weight="bold"
-          className="text-emerald-500 size-5 shrink-0"
+          className="text-success size-5 shrink-0"
         />
       </div>
     ),
@@ -77,10 +77,7 @@ const PROGRESS_ITEMS: ScrollSpyItem[] = [
     title: (
       <div className="flex justify-between items-center w-full">
         <span>Attributes & settings</span>
-        <CircleIcon
-          weight="bold"
-          className="text-[var(--surface-text-muted)] size-5 shrink-0"
-        />
+        <CircleIcon weight="bold" className="text-quinary size-5 shrink-0" />
       </div>
     ),
   },
@@ -89,10 +86,7 @@ const PROGRESS_ITEMS: ScrollSpyItem[] = [
     title: (
       <div className="flex justify-between items-center w-full">
         <span>Plan & pricing</span>
-        <CircleIcon
-          weight="bold"
-          className="text-[var(--surface-text-muted)] size-5 shrink-0"
-        />
+        <CircleIcon weight="bold" className="text-quinary size-5 shrink-0" />
       </div>
     ),
   },
@@ -116,7 +110,7 @@ export const Default: Story = {
     'aria-label': 'Form steps',
   },
   render: (args) => (
-    <div className="w-72 p-4 bg-[var(--surface-page-bg)] rounded-lg border border-[var(--surface-card-border)]">
+    <div className="w-72 p-4 bg-[var(--page-bg)] rounded-lg border-[1px] border-secondary">
       <ScrollSpyNav {...args} />
     </div>
   ),
@@ -127,7 +121,7 @@ export const Default: Story = {
  */
 export const PartiallyCompleted: Story = {
   render: () => (
-    <div className="w-80 p-4 bg-[var(--surface-page-bg)]">
+    <div className="w-80 p-4 bg-[var(--page-bg)]">
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-semibold">Progress</CardTitle>
@@ -151,13 +145,13 @@ export const WithValidationErrors: Story = {
         key: 'step-components',
         title: (
           <div className="flex justify-between items-center w-full">
-            <span className="text-amber-600 font-semibold">
+            <span className="text-warning font-semibold">
               Components & limits
             </span>
             <Tooltip label="Quota exceeds project limit">
               <WarningCircleIcon
                 weight="bold"
-                className="text-amber-500 size-5 shrink-0 has-error"
+                className="text-warning size-5 shrink-0 has-error"
               />
             </Tooltip>
           </div>
@@ -169,7 +163,7 @@ export const WithValidationErrors: Story = {
     ];
 
     return (
-      <div className="w-80 p-4 bg-[var(--surface-page-bg)]">
+      <div className="w-80 p-4 bg-[var(--page-bg)]">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Progress</CardTitle>
@@ -197,35 +191,35 @@ export const InteractiveScrolling: Story = {
         title: '1. General details',
         description:
           'Name, customer scope, category selection, and offering identity.',
-        color: 'border-l-sky-500',
+        color: 'border-l-sky-500 dark:border-l-sky-400',
       },
       {
         id: 'interactive-step-2',
         title: '2. Components & Quotas',
         description:
           'Hardware allocations, RAM, CPU cores, storage limits, and network interfaces.',
-        color: 'border-l-amber-500',
+        color: 'border-l-amber-500 dark:border-l-amber-400',
       },
       {
         id: 'interactive-step-3',
         title: '3. Attributes & Settings',
         description:
           'Integration credentials, endpoints, management URLs, and advanced toggles.',
-        color: 'border-l-emerald-500',
+        color: 'border-l-emerald-500 dark:border-l-emerald-400',
       },
       {
         id: 'interactive-step-4',
         title: '4. Accounting plan',
         description:
           'Billing units, price models, prepaid packages, and VAT rates.',
-        color: 'border-l-purple-500',
+        color: 'border-l-purple-500 dark:border-l-purple-400',
       },
       {
         id: 'interactive-step-5',
         title: '5. Review & submit',
         description:
           'Final validation checklist and terms of service acceptance.',
-        color: 'border-l-rose-500',
+        color: 'border-l-rose-500 dark:border-l-rose-400',
       },
     ];
 
@@ -235,7 +229,7 @@ export const InteractiveScrolling: Story = {
     }));
 
     return (
-      <div className="flex gap-6 max-w-4xl h-[480px] bg-[var(--surface-page-bg)] p-6 rounded-xl border border-[var(--surface-card-border)]">
+      <div className="flex gap-6 max-w-4xl h-[480px] bg-[var(--page-bg)] p-6 rounded-xl border-[1px] border-secondary">
         {/* Sticky sidebar */}
         <div className="w-64 shrink-0">
           <Card className="h-full">
@@ -264,15 +258,11 @@ export const InteractiveScrolling: Story = {
             <div
               key={sec.id}
               id={sec.id}
-              className={`p-6 bg-[var(--surface-card-bg)] rounded-lg border border-[var(--surface-card-border)] border-l-4 ${sec.color} shadow-xs min-h-[220px]`}
+              className={`p-6 bg-[var(--card-bg)] rounded-lg border-[1px] border-secondary border-l-4 ${sec.color} shadow-xs min-h-[220px]`}
             >
-              <h3 className="text-base font-bold text-[var(--surface-text-primary)]">
-                {sec.title}
-              </h3>
-              <p className="mt-2 text-sm text-[var(--surface-text-secondary)]">
-                {sec.description}
-              </p>
-              <div className="mt-6 p-4 bg-[var(--surface-ground)] rounded border border-dashed border-[var(--surface-card-border)] text-xs text-[var(--surface-text-muted)]">
+              <h3 className="text-base font-bold text-primary">{sec.title}</h3>
+              <p className="mt-2 text-sm text-quaternary">{sec.description}</p>
+              <div className="mt-6 p-4 bg-secondary rounded border-[1px] border-dashed border-secondary text-xs text-quinary">
                 Scroll target anchor:{' '}
                 <code className="font-mono">#{sec.id}</code>
               </div>
@@ -290,10 +280,10 @@ export const InteractiveScrolling: Story = {
  */
 export const InsideCard: Story = {
   render: () => (
-    <div className="w-80 p-4 bg-[var(--surface-page-bg)]">
+    <div className="w-80 p-4 bg-[var(--page-bg)]">
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-bold uppercase tracking-wider text-[var(--surface-text-secondary)]">
+          <CardTitle className="text-sm font-bold uppercase tracking-wider text-quaternary">
             Create Proposal
           </CardTitle>
         </CardHeader>
@@ -319,7 +309,7 @@ export const WizardFormSteps: Story = {
             <span>General information</span>
             <CircleIcon
               weight="bold"
-              className="text-[var(--surface-text-muted)] size-5 shrink-0"
+              className="text-quinary size-5 shrink-0"
             />
           </div>
         ),
@@ -327,12 +317,9 @@ export const WizardFormSteps: Story = {
       {
         key: 'step-plan',
         title: (
-          <div className="flex justify-between items-center w-full text-[var(--surface-text-muted)]">
+          <div className="flex justify-between items-center w-full text-quinary">
             <span>Plan</span>
-            <LockIcon
-              weight="bold"
-              className="text-[var(--surface-text-muted)] size-5 shrink-0"
-            />
+            <LockIcon weight="bold" className="text-quinary size-5 shrink-0" />
           </div>
         ),
         disabled: true,
@@ -340,12 +327,9 @@ export const WizardFormSteps: Story = {
       {
         key: 'step-additional',
         title: (
-          <div className="flex justify-between items-center w-full text-[var(--surface-text-muted)]">
+          <div className="flex justify-between items-center w-full text-quinary">
             <span>Additional configuration</span>
-            <LockIcon
-              weight="bold"
-              className="text-[var(--surface-text-muted)] size-5 shrink-0"
-            />
+            <LockIcon weight="bold" className="text-quinary size-5 shrink-0" />
           </div>
         ),
         disabled: true,
@@ -353,12 +337,9 @@ export const WizardFormSteps: Story = {
       {
         key: 'step-final',
         title: (
-          <div className="flex justify-between items-center w-full text-[var(--surface-text-muted)]">
+          <div className="flex justify-between items-center w-full text-quinary">
             <span>Final confirmation</span>
-            <LockIcon
-              weight="bold"
-              className="text-[var(--surface-text-muted)] size-5 shrink-0"
-            />
+            <LockIcon weight="bold" className="text-quinary size-5 shrink-0" />
           </div>
         ),
         disabled: true,
@@ -366,7 +347,7 @@ export const WizardFormSteps: Story = {
     ];
 
     return (
-      <div className="w-80 p-4 bg-[var(--surface-page-bg)]">
+      <div className="w-80 p-4 bg-[var(--page-bg)]">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">
@@ -395,7 +376,7 @@ export const WithStatusIndicators: Story = {
             <span className="flex items-center gap-2">
               <CheckCircleIcon
                 weight="fill"
-                className="text-emerald-500 size-4 shrink-0"
+                className="text-success size-4 shrink-0"
               />
               <span>General info</span>
             </span>
@@ -412,7 +393,7 @@ export const WithStatusIndicators: Story = {
             <span className="flex items-center gap-2">
               <WarningCircleIcon
                 weight="bold"
-                className="text-amber-500 size-4 shrink-0 has-error"
+                className="text-warning size-4 shrink-0 has-error"
               />
               <span>Quotas & limits</span>
             </span>
@@ -441,7 +422,7 @@ export const WithStatusIndicators: Story = {
     ];
 
     return (
-      <div className="w-80 p-4 bg-[var(--surface-page-bg)]">
+      <div className="w-80 p-4 bg-[var(--page-bg)]">
         <Card>
           <CardContent className="pt-6">
             <ScrollSpyNav items={statusItems} activeKey="step-2" />

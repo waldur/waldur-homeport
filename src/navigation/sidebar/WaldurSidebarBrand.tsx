@@ -152,7 +152,7 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
               {/* Show separator line only if there are multiple items and not the last item */}
               {shortcuts.length > 1 && index < shortcuts.length - 1 && (
                 <div
-                  className="position-absolute bottom-0 start-50 translate-middle-x border-bottom"
+                  className="position-absolute bottom-0 start-50 translate-middle-x border-b-[1px] border-b-secondary"
                   style={{ width: 'calc(100% - 24px)' }}
                 />
               )}
@@ -165,9 +165,9 @@ export const WaldurSidebarBrand = ({ onToggle }: WaldurSidebarBrandProps) => {
                 />
               </div>
               <div className="flex-grow-1 fs-4">
-                <div className="fw-bolder">{shortcut.name}</div>
+                <div className="font-semibold">{shortcut.name}</div>
                 {shortcut.description && (
-                  <div className="fw-normal text-muted mt-3">
+                  <div className="font-normal text-quaternary mt-3">
                     {shortcut.description}
                   </div>
                 )}

@@ -6,7 +6,7 @@ import { translate } from '@/i18n';
 
 export const NameTemplateTooltip = () => (
   <div className="text-start py-1">
-    <p className="fw-bold mb-2">{translate('Available variables')}</p>
+    <p className="font-medium mb-2">{translate('Available variables')}</p>
     <ul className="mb-0 list-unstyled">
       <li>
         {'{full_name} - '} {translate('Full name of the user')}

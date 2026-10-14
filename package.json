@@ -15,14 +15,18 @@
     "devcontainer": "VITE_API_URL=http://localhost:8000/ vite --host 0.0.0.0 --port 8001",
     "build": "NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "build:check": "node scripts/bundle-budget.mjs",
+    "snapshots:theme": "node scripts/theme-snapshots.mjs",
     "preview": "vite preview",
     "format:check": "prettier --check \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
     "format:fix": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
     "tokens:generate": "node packages/design-tokens/scripts/generate-tokens.mjs",
     "tokens:check": "node packages/design-tokens/scripts/generate-tokens.mjs --check",
+    "tokens:audit": "node packages/design-tokens/scripts/audit-tokens.mjs",
+    "tokens:duplicates": "node packages/design-tokens/scripts/audit-tokens.mjs --duplicates",
+    "tokens:metronic-diff": "node scripts/metronic-css-diff.mjs",
     "style:check": "stylelint \"src/**/*.css\" \"src/**/*.scss\" \"packages/**/*.css\"",
-    "lint:check": "eslint src locales/tools",
-    "lint:fix": "eslint --fix src locales/tools",
+    "lint:check": "eslint src locales/tools packages",
+    "lint:fix": "eslint --fix src locales/tools packages",
     "deps:unused": "knip --include files,types,enumMembers,exports",
     "deps:circular": "madge --exclude 'broadcasts/BroadcastFooter' --exclude 'js-client' --circular src/**/*",
     "test": "vitest --project=unit",
@@ -263,16 +267,43 @@
     ],
     "rules": {
       "no-descending-specificity": null,
-      "scss/load-no-partial-leading-underscore": null
+      "scss/load-no-partial-leading-underscore": null,
+      "declaration-property-value-allowed-list": [
+        {
+          "font-weight": [
+            "/^var\\(--font-weight-(light|normal|medium|semibold|bold)\\)$/",
+            "inherit"
+          ]
+        },
+        {
+          "message": "Font weight is one scale: var(--font-weight-light|normal|medium|semibold|bold) (primitives/typography.css)."
+        }
+      ],
+      "declaration-property-value-disallowed-list": {
+        "/.*/": [
+          "/var\\(\\s*--bs-/"
+        ]
+      },
+      "property-disallowed-list": [
+        "/^--/",
+        {
+          "message": "Custom properties (--*) must not be defined outside packages/design-tokens/. Define tokens in packages/design-tokens/src/css/."
+        }
+      ]
     },
     "overrides": [
       {
         "files": [
           "src/tailwind.css",
-          "packages/design-tokens/src/colors.css",
-          "packages/design-tokens/src/colorRamps.css",
-          "packages/design-tokens/src/variants.css",
-          "packages/design-tokens/src/zIndex.css"
+          "apps/*/src/tailwind.css",
+          "packages/design-tokens/src/css/primitives/breakpoints.css",
+          "packages/design-tokens/src/css/primitives/colors.css",
+          "packages/design-tokens/src/css/primitives/colorRamps.css",
+          "packages/design-tokens/src/css/primitives/radius.css",
+          "packages/design-tokens/src/css/primitives/spacing.css",
+          "packages/design-tokens/src/css/primitives/typography.css",
+          "packages/design-tokens/src/css/tailwind/*.css",
+          "packages/design-tokens/src/css/primitives/zIndex.css"
         ],
         "rules": {
           "scss/at-rule-no-unknown": [
@@ -286,9 +317,23 @@
                 "plugin",
                 "reference",
                 "utility",
-                "variant"
+                "variant",
+                "source"
               ]
             }
+          ]
+        }
+      },
+      {
+        "files": [
+          "packages/design-tokens/**/*.css",
+          "src/tailwind.css",
+          "apps/*/src/tailwind.css",
+          "src/form/MarkdownEditor.scss"
+        ],
+        "rules": {
+          "property-disallowed-list": [
+            "/^--bs-/"
           ]
         }
       }

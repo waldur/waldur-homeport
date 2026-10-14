@@ -31,8 +31,8 @@ const CredentialRow: FC<{ label: string; children: ReactNode }> = ({
   children,
 }) => (
   <div className="mb-5">
-    <div className="text-gray-600 fs-7 mb-1">{label}</div>
-    <div className="fw-bold">{children}</div>
+    <div className="text-tertiary fs-7 mb-1">{label}</div>
+    <div className="font-medium">{children}</div>
   </div>
 );
 

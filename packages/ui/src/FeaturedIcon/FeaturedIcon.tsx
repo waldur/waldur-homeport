@@ -30,28 +30,33 @@ const ICON_SVG_SIZES: Record<FeaturedIconSize, string> = {
  * We map the foreground (fg) and solid background (bg).
  * Note: Because the design uses irregular ramp steps for the solid background
  * (e.g., info-50 instead of 100, gray-800 instead of 950), a JS dictionary is best here.
+ * Where a pair equals a semantic role in both themes it reads the role; the
+ * rest wait on the tint and brand-foreground roles, which don't exist yet.
  */
 const VARIANT_STYLES: Record<FeaturedIconVariant, { fg: string; bg: string }> =
   {
     success: {
-      fg: 'text-success-600 dark:text-success-400',
+      fg: 'text-success',
+      // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- icon tile tint, a step stronger than --status-*-bg
       bg: 'bg-success-100 dark:bg-success-950',
     },
     warning: {
-      fg: 'text-warning-600 dark:text-warning-400',
+      fg: 'text-warning',
+      // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- icon tile tint, a step stronger than --status-*-bg
       bg: 'bg-warning-100 dark:bg-warning-950',
     },
     danger: {
-      fg: 'text-error-600 dark:text-error-400',
+      fg: 'text-danger',
+      // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- icon tile tint, a step stronger than --status-*-bg
       bg: 'bg-error-100 dark:bg-error-950',
     },
     info: {
       fg: 'text-info-600 dark:text-info-400',
-      bg: 'bg-info-50 dark:bg-info-900',
+      bg: 'bg-info-subtle',
     },
     neutral: {
-      fg: 'text-gray-500 dark:text-gray-dark-400',
-      bg: 'bg-gray-100 dark:bg-gray-dark-800',
+      fg: 'text-quaternary',
+      bg: 'bg-tertiary',
     },
     primary: {
       fg: 'text-brand-600 dark:text-brand-400',

@@ -1,0 +1,31 @@
+/**
+ * Tokens for waldur-ui's Table and TablePagination. Part of the design-tokens
+ * package (imported by index.css), so every app that renders a
+ * waldur-ui table gets them.
+ *
+ * Each token reads a semantic role, so it needs no dark-mode block: the role
+ * switches with the theme.
+ */
+:root {
+  --table-header-text: var(--text-quaternary);
+  --table-row-border: var(--border-tertiary);
+  --table-row-hover-bg: var(--bg-secondary);
+
+  /* Table pagination (waldur-ui TablePagination). Unlike most surface
+     tokens, these have a real Metronic source: the `.card.card-table
+     .table-pagination` rules in src/metronic/sass/custom/_table.scss,
+     read from the compiled light/dark stylesheets and checked against
+     the running pager with getComputedStyle. Page numbers and the
+     range/label text use --pagination-text; the current page and hover
+     use --pagination-text-current on --pagination-hover-bg. The
+     prev/next carets sat one step lighter than the text
+     (--pagination-icon), which is also the disabled colour. */
+  --pagination-text: var(--text-quaternary);
+  --pagination-text-current: var(--text-secondary);
+  --pagination-text-disabled: var(--text-quinary);
+  --pagination-icon: var(--text-quinary);
+  --pagination-icon-hover: var(--text-quaternary);
+  --pagination-hover-bg: var(--bg-primary-hover);
+  --pagination-border: var(--border-secondary);
+  --pagination-select-text: var(--text-primary);
+}

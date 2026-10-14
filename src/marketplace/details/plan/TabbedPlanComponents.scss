@@ -7,17 +7,17 @@
     }
 
     .title {
-      color: var(--bs-gray-700);
+      color: var(--text-secondary);
     }
     .description {
-      color: var(--bs-gray-600);
+      color: var(--text-tertiary);
     }
     .value {
-      color: var(--bs-gray-500);
+      color: var(--text-quaternary);
     }
     .col-actions {
-      color: var(--bs-gray-500);
-      font-weight: 500;
+      color: var(--text-quaternary);
+      font-weight: var(--font-weight-medium);
     }
     // Every price on one right-hand axis: a row total, the table total and the
     // yearly estimate are the same kind of figure and are read down a column.

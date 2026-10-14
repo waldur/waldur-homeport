@@ -1,0 +1,42 @@
+/**
+ * Typography tokens and Tailwind font family bridge.
+ *
+ * Exposes `--font-sans` to Tailwind utilities (font-sans), bridging onto
+ * the runtime-injected `--font-family` custom property.
+ *
+ * Text scale overrides (xs, sm, base) are pinned to explicit px values to
+ * prevent fractional rem compression at non-standard root font sizes.
+ *
+ * Font weight is one scale, the five weights fonts.css loads:
+ *
+ *   light     300  font-light     display text only
+ *   normal    400  font-normal    body
+ *   medium    500  font-medium    labels, emphasis
+ *   semibold  600  font-semibold  headings, titles
+ *   bold      700  font-bold      strong headings, figures
+ *
+ * Tailwind's other steps (thin, extralight, extrabold, black) are cleared, so
+ * those classes do not exist: Inter is not loaded at those weights, and the
+ * browser would only fall back to the nearest one. Bootstrap's fw-* classes
+ * are retired too (their "bold" was 500); the require-weight-scale lint rule
+ * keeps both out. SCSS reads var(--font-weight-*). `static`, so the variables
+ * exist for SCSS even where no utility uses them.
+ */
+@theme {
+  --font-sans: var(--font-family), Helvetica, sans-serif;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+}
+
+@theme static {
+  --font-weight-*: initial;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}

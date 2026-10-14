@@ -76,7 +76,7 @@ export interface MicroAppBootstrapConfig {
  * client config, font/brand/sidebar-style tokens, i18n, Sentry. Call once,
  * at module scope (not inside a component or effect): the synchronous
  * portion below runs to completion before this function returns, setting
- * CSS custom properties tailwind.css/surfaceColors.css read from first
+ * CSS custom properties tailwind.css and the design-tokens files read from first
  * paint (an app that only set them later, after mount, would flash
  * unstyled in between — mirrors waldur-homeport's own afterBootstrap.tsx
  * sequencing). The rest — fetching runtime config, refining those same

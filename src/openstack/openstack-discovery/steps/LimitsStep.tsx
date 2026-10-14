@@ -43,7 +43,7 @@ export const LimitsStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Limits')}</h4>
-      <p className="text-muted mb-6">
+      <p className="text-quaternary mb-6">
         {translate(
           'Configure resource limits and plugin options. All fields are optional.',
         )}

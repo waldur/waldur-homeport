@@ -16,8 +16,8 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    var(--waldur-bg-primary) 0%,
-    var(--waldur-bg-primary) 50%,
+    var(--bg-primary) 0%,
+    var(--bg-primary) 50%,
     transparent 50%,
     transparent 100%
   );
@@ -27,8 +27,8 @@
   .layout-diagonal-overlay {
     background: linear-gradient(
       180deg,
-      var(--waldur-bg-primary) 0%,
-      var(--waldur-bg-primary) 60%,
+      var(--bg-primary) 0%,
+      var(--bg-primary) 60%,
       transparent 60%,
       transparent 100%
     );
@@ -70,7 +70,7 @@
    hero layout uses over its scrim. */
 .layout-diagonal-hero {
   display: none;
-  color: var(--bs-body-color);
+  color: var(--text-primary);
   max-width: 350px;
 }
 
@@ -82,7 +82,7 @@
 
 .layout-diagonal-hero h1 {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   margin-bottom: 1rem;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .layout-diagonal-card {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   border-radius: 16px;
   padding: 2rem;
   width: 100%;

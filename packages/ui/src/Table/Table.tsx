@@ -11,7 +11,7 @@ import { cn } from '../cn';
  * shadcn's actual Table recipe (a scroll-container div wrapping <table>,
  * plus Header/Body/Row/Head/Cell sub-components — see
  * https://ui.shadcn.com/docs/components/table) — border/hover colors point
- * at waldur-design-tokens/surfaceColors.css's table and surface tokens
+ * at waldur-design-tokens/table.css's table tokens and the shared surface tokens
  * instead of shadcn's own default palette. DataTable.tsx's column-def API
  * builds on these rather than rendering a bare <table> itself.
  */
@@ -74,10 +74,5 @@ export function TableCell({
   className,
   ...props
 }: TdHTMLAttributes<HTMLTableCellElement>) {
-  return (
-    <td
-      className={cn('px-4 py-3 text-[var(--surface-text-primary)]', className)}
-      {...props}
-    />
-  );
+  return <td className={cn('px-4 py-3 text-primary', className)} {...props} />;
 }

@@ -34,14 +34,14 @@ export const AdministrationProfile = ({
       // Health check is still loading
       return {
         label: translate('Checking...'),
-        className: 'border border-warning text-warning',
+        className: 'border-[1px] border-warning text-warning',
       };
     }
     return {
       label: healthy ? translate('Healthy') : translate('Error'),
       className: healthy
-        ? 'border border-success text-[var(--pill-success-text)]'
-        : 'border border-danger text-danger',
+        ? 'border-[1px] border-success text-success'
+        : 'border-[1px] border-danger text-danger',
     };
   };
 
@@ -108,14 +108,14 @@ export const AdministrationProfile = ({
               logoTopLabel={healthStatus.label}
               logoBottomLabel="Operator"
               logoTopClass={healthStatus.className}
-              logoBottomClass="bg-[var(--pill-neutral-bg)] text-[var(--pill-neutral-text)]"
+              logoBottomClass="bg-neutral-subtle text-neutral"
             />
           </Col>
           <Col>
             <Row className="my-6 mt-md-0">
               <Col>
                 <h2>{ENV.plugins.WALDUR_CORE.SITE_NAME}</h2>
-                <Stack direction="horizontal" className="gap-6 text-muted">
+                <Stack direction="horizontal" className="gap-6 text-quaternary">
                   {version?.version && (
                     <span>
                       {translate('Version')}&nbsp;{version.version}

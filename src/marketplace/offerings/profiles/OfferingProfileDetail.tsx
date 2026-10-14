@@ -47,7 +47,7 @@ export const OfferingProfileDetail: FC = () => {
       <Card className="mb-3">
         <Card.Body>
           <h3 className="mb-2">{profile.name}</h3>
-          <p className="text-muted mb-3">
+          <p className="text-quaternary mb-3">
             {renderFieldOrDash(profile.description)}
           </p>
           <p className="mb-0">
@@ -72,13 +72,13 @@ export const OfferingProfileDetail: FC = () => {
           )}
         </Card.Header>
         <Card.Body>
-          <p className="text-muted">
+          <p className="text-quaternary">
             {translate(
               'These roles can be assigned on every offering bound to this profile, at the scope shown. Adding or removing a role updates the bound offerings in the background.',
             )}
           </p>
           {(profile.roles || []).length === 0 ? (
-            <p className="text-muted mb-0">
+            <p className="text-quaternary mb-0">
               {translate('No roles in this catalog yet.')}
             </p>
           ) : (
@@ -206,7 +206,7 @@ const AddRoleToProfileDialog: FC<{
                   >
                     <span>
                       {r.name}
-                      <span className="text-muted ms-2">
+                      <span className="text-quaternary ms-2">
                         ({r.content_type})
                       </span>
                     </span>

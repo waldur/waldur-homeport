@@ -37,8 +37,8 @@ export interface AccordionCardProps extends PropsWithChildren {
  * Tailwind port of the Metronic `.card.card-bordered` it used to render.
  * Spacing is in rem, as Metronic's was (`$card-px` 1.85rem, `$card-py`
  * 1.23rem), so it keeps scaling with the app's responsive root font size;
- * colours come from the `--surface-*` / `--card-*` tokens in
- * waldur-design-tokens/surfaceColors.css.
+ * colours come from the `--card-bg` / `--border-secondary` tokens in
+ * waldur-design-tokens and card.css.
  */
 export const AccordionCard: FC<AccordionCardProps> = (props) => {
   const isControlled = props.isOpen !== undefined;
@@ -59,7 +59,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
         className={cn(
           // min-w-0: as Bootstrap's .card, so a card in a flex/grid row can
           // shrink and let wide content scroll instead of widening it.
-          'flex min-w-0 flex-col rounded-[8px] border border-solid border-[var(--surface-card-border)] bg-bg-primary',
+          'flex min-w-0 flex-col rounded-[8px] border-[1px] border-solid border-secondary bg-primary',
           props.solid && 'overflow-hidden',
           props.secondary && 'pb-[4px]',
           props.size === 'sm' && 'py-[0.307rem]',
@@ -70,7 +70,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
           className={cn(
             'flex flex-nowrap items-center justify-between text-[length:14px] font-bold text-[color:var(--card-header-text)]',
             'mx-[1.85rem] min-h-[70px] pt-[1.85rem] pb-[1.23rem]',
-            open && 'border-b border-solid border-[var(--surface-card-border)]',
+            open && 'border-b border-solid border-secondary',
             props.solid &&
               'mx-0 min-h-[48px] bg-[var(--card-header-solid-bg)] px-[1.85rem] text-[length:1.077rem] text-[color:var(--card-title-text)]',
             props.secondary &&
@@ -96,7 +96,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
               {props.title}
             </span>
             {props.subtitle && (
-              <small className="mt-[0.5rem] block text-[length:1.077rem] font-normal text-[color:var(--surface-text-secondary)]">
+              <small className="mt-[0.5rem] block text-[length:1.077rem] font-normal text-quaternary">
                 {props.subtitle}
               </small>
             )}

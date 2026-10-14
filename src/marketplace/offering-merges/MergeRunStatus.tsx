@@ -63,7 +63,7 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
   const progress = merge.progress;
   return (
     <div className="d-flex flex-column gap-2" data-testid="merge-progress">
-      <span className="fw-semibold">
+      <span className="font-semibold">
         {merge.state === 'undoing'
           ? translate('Undoing the merge…')
           : merge.state === 'queued'
@@ -76,7 +76,7 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
             value={progress.steps_done}
             max={Math.max(progress.steps_total, 1)}
           />
-          <span className="text-muted fs-7">
+          <span className="text-quaternary fs-7">
             {translate(
               'Step {done} of {total}: {step}. Rows {rowsDone} of {rowsTotal}.',
               {
@@ -110,7 +110,7 @@ const VerificationReport: FC<{
       <span className="d-flex align-items-center gap-3">
         {title}
         <PassedBadge passed={report.passed} />
-        <span className="text-muted fs-7 fw-normal">
+        <span className="text-quaternary fs-7 font-normal">
           {formatDateTime(report.checked_at)}
         </span>
       </span>

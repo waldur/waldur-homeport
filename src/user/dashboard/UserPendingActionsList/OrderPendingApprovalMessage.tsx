@@ -16,7 +16,7 @@ export const OrderPendingApprovalMessage: FC<
 > = ({ row }) => {
   return (
     <div>
-      <div className="text-muted small mb-2">
+      <div className="text-quaternary small mb-2">
         {translate('This order requires your approval.')}
         {row.order_type && (
           <Badge variant="secondary" size="sm" className="ms-2">

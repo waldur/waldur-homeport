@@ -52,7 +52,7 @@ export const SendTestEmailDialog: FC = () => {
               </>
             }
           >
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate(
                 'The message goes through the same code path as a real notification, so it fails in the same way a real notification would.',
               )}

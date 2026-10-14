@@ -26,7 +26,7 @@ const NamespaceStats: FunctionComponent<{
   emptyText?: string;
 }> = ({ label, stats, threshold, emptyText }) => (
   <div className="mb-3">
-    <div className="fw-bold mb-1">{label}</div>
+    <div className="font-medium mb-1">{label}</div>
     {stats ? (
       <>
         <PercentProgress

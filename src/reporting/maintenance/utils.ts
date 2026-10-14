@@ -109,7 +109,7 @@ export function formatDelta(overrunMinutes: number | null | undefined): {
   className: string;
 } {
   if (overrunMinutes === null || overrunMinutes === undefined) {
-    return { text: DASH_ESCAPE_CODE, className: 'text-muted' };
+    return { text: DASH_ESCAPE_CODE, className: 'text-quaternary' };
   }
   if (overrunMinutes > 0) {
     return {
@@ -123,7 +123,7 @@ export function formatDelta(overrunMinutes: number | null | undefined): {
       className: 'text-success',
     };
   }
-  return { text: formatSignedDuration(0), className: 'text-muted' };
+  return { text: formatSignedDuration(0), className: 'text-quaternary' };
 }
 
 /**

@@ -1,65 +1,59 @@
 //
-// Root CSS Variables
+// Bootstrap 5.1.3's :root (bootstrap/scss/_root.scss), without
+// --bs-body-color-rgb and --bs-body-bg-rgb: those run to-rgb() on $body-color
+// and $body-bg, which read the design tokens and are not Sass colours, and
+// nothing reads them.
 //
 
 :root {
-  // Theme colors
-  @each $name, $value in $theme-colors {
-    @if (theme-light-color($name)) {
-      --#{$variable-prefix}light-#{$name}: #{theme-light-color($name)};
-      --#{$variable-prefix}active-#{$name}: #{theme-active-color($name)};
-    }
+  // Note: Custom variable values only support SassScript inside `#{}`.
+
+  // Colors
+  //
+  // Generate palettes for full colors, grays, and theme colors.
+
+  @each $color, $value in $colors {
+    --#{$variable-prefix}#{$color}: #{$value};
   }
 
-  // Gray colors
-  @each $name, $value in $grays {
-    --#{$variable-prefix}gray-#{$name}: #{$value};
+  @each $color, $value in $grays {
+    --#{$variable-prefix}gray-#{$color}: #{$value};
   }
 
-  // Breakpoints
-  @each $breakpoint, $value in $grid-breakpoints {
-    --#{$variable-prefix}#{$breakpoint}: #{$value};
+  @each $color, $value in $theme-colors {
+    --#{$variable-prefix}#{$color}: #{$value};
   }
 
-  // Border
-  --#{$variable-prefix}border-color: #{$border-color};
-  --#{$variable-prefix}border-dashed-color: #{$border-dashed-color};
+  @each $color, $value in $theme-colors-rgb {
+    --#{$variable-prefix}#{$color}-rgb: #{$value};
+  }
 
-  --waldur-brand-color: #111a13;
-  --waldur-brand-color-rgb: 0, 0, 0;
+  --#{$variable-prefix}white-rgb: #{to-rgb($white)};
+  --#{$variable-prefix}black-rgb: #{to-rgb($black)};
 
-  --waldur-bg-primary: #{$bg-primary};
-  --waldur-bg-disabled-subtle: #{$bg-disabled_subtle};
-  --waldur-text-disabled: #{$text-disabled};
+  // Fonts
 
-  --waldur-border-primary: #{$border-primary};
-  --waldur-border-secondary: #{$border-secondary};
-  --waldur-border-brand-solid: #{$border-brand-solid};
-  --waldur-border-danger: #{$border-error};
+  // Note: Use `inspect` for lists so that quoted items keep the quotes.
+  // See https://github.com/sass/sass/issues/2383#issuecomment-336349172
+  --#{$variable-prefix}font-sans-serif: #{inspect($font-family-sans-serif)};
+  --#{$variable-prefix}font-monospace: #{inspect($font-family-monospace)};
+  --#{$variable-prefix}gradient: #{$gradient};
 
-  // Utility colors for data visualization
-  --waldur-utility-blue-400: #{$blue-400};
-  --waldur-utility-indigo-400: #{$indigo-400};
-  --waldur-utility-teal-400: #{$teal-400};
-  --waldur-utility-warning-400: #{$warning-400};
-  --waldur-utility-gray-300: #{$gray-300};
-}
-
-// Brand
-:root {
-  --bs-primary: var(--waldur-brand-color);
-  --bs-primary-25: var(--waldur-brand-25);
-  --bs-primary-50: var(--waldur-brand-50);
-  --bs-primary-100: var(--waldur-brand-100);
-  --bs-primary-200: var(--waldur-brand-200);
-  --bs-primary-300: var(--waldur-brand-300);
-  --bs-primary-400: var(--waldur-brand-400);
-  --bs-primary-500: var(--waldur-brand-500);
-  --bs-primary-600: var(--waldur-brand-600);
-  --bs-primary-700: var(--waldur-brand-700);
-  --bs-primary-800: var(--waldur-brand-800);
-  --bs-primary-900: var(--waldur-brand-900);
-  --bs-primary-950: var(--waldur-brand-950);
-
-  --bs-secondary: var(--waldur-brand-50);
+  // Root and body
+  // stylelint-disable custom-property-empty-line-before
+  // scss-docs-start root-body-variables
+  @if $font-size-root != null {
+    --#{$variable-prefix}root-font-size: #{$font-size-root};
+  }
+  --#{$variable-prefix}body-font-family: #{$font-family-base};
+  --#{$variable-prefix}body-font-size: #{$font-size-base};
+  --#{$variable-prefix}body-font-weight: #{$font-weight-base};
+  --#{$variable-prefix}body-line-height: #{$line-height-base};
+  --#{$variable-prefix}body-color: #{$body-color};
+  @if $body-text-align != null {
+    --#{$variable-prefix}body-text-align: #{$body-text-align};
+  }
+  --#{$variable-prefix}body-bg: #{$body-bg};
+  // scss-docs-end root-body-variables
+  // stylelint-enable custom-property-empty-line-before
 }

@@ -135,16 +135,16 @@ export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
               }
             >
               {/* Fixed offering info */}
-              <div className="bg-light-primary rounded p-3 mb-4">
-                <div className="text-gray-700 small mb-1">
+              <div className="bg-brand-subtle rounded p-3 mb-4">
+                <div className="text-secondary small mb-1">
                   {translate('Generating configuration for:')}
                 </div>
-                <div className="fw-bold">{offering.name}</div>
+                <div className="font-medium">{offering.name}</div>
               </div>
 
               {/* Waldur connection settings */}
               <div className="mb-4">
-                <h6 className="fw-bold mb-3">
+                <h6 className="font-medium mb-3">
                   {translate('Waldur Connection')}
                 </h6>
 
@@ -182,7 +182,7 @@ export const LdapAgentEnvDialog: FC<LdapAgentEnvDialogProps> = ({
 
               {/* LDAP admin credentials */}
               <div>
-                <h6 className="fw-bold mb-3">
+                <h6 className="font-medium mb-3">
                   {translate('LDAP Admin Credentials')}
                 </h6>
 

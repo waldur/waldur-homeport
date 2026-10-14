@@ -154,7 +154,7 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
         await confirm(
           translate('Delete queues by pattern'),
           <>
-            <p className="text-danger fw-bold">
+            <p className="text-danger font-medium">
               {translate(
                 'Are you sure you want to DELETE queues matching pattern?',
               )}
@@ -213,7 +213,7 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
             disabled={count === 0}
           >
             {translate('Purge {label}', { label: preset.label })}{' '}
-            <span className="text-muted">({count})</span>
+            <span className="text-quaternary">({count})</span>
           </Menu.Item>
         );
       })}
@@ -230,7 +230,7 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
             className="text-danger"
           >
             {translate('Delete {label}', { label: preset.label })}{' '}
-            <span className="text-muted">({count})</span>
+            <span className="text-quaternary">({count})</span>
           </Menu.Item>
         );
       })}

@@ -62,7 +62,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
 
   if (!customer.is_service_provider && !canRegisterServiceProvider) {
     return (
-      <p className="my-3 text-muted fs-6 text-center">
+      <p className="my-3 text-quaternary fs-6 text-center">
         {translate('You can not register organization as a service provider')}
       </p>
     );
@@ -85,7 +85,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
         }
       >
         {!serviceProvider && canRegisterServiceProvider ? (
-          <p className="my-3 text-muted fs-6">
+          <p className="my-3 text-quaternary fs-6">
             {translate(
               'You can register organization as a service provider by pressing the button',
             )}

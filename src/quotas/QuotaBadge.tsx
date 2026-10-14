@@ -21,7 +21,7 @@ export const QuotaBadge = ({
     <Badge
       variant="neutral"
       tone="outline"
-      className={classNames('fw-normal', className)}
+      className={classNames('font-normal', className)}
     >
       {Boolean(image) && (
         <img src={image} alt="quota" width={15} className="me-2" />

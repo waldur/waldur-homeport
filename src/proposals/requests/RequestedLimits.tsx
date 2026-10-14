@@ -17,7 +17,9 @@ export const RequestedLimits: FC<{
   );
 
   if (!entries.length) {
-    return <span className="text-muted">{translate('Not specified')}</span>;
+    return (
+      <span className="text-quaternary">{translate('Not specified')}</span>
+    );
   }
 
   return (
@@ -25,7 +27,7 @@ export const RequestedLimits: FC<{
       {entries.map(([key, value]) => (
         <span key={key} className="text-nowrap">
           {/* Component types are snake_case: cpu_hours -> Cpu hours. */}
-          <span className="text-muted">
+          <span className="text-quaternary">
             {titleCase(key.replace(/_/g, ' '))}:{' '}
           </span>
           {value.toLocaleString()}

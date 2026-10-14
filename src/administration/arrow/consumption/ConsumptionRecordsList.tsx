@@ -71,7 +71,7 @@ export const ConsumptionRecordsList: FunctionComponent<
         {
           title: translate('Resource'),
           render: ({ row }) => (
-            <span className="text-dark">
+            <span className="text-primary">
               {row.resource_name || DASH_ESCAPE_CODE}
             </span>
           ),
@@ -168,17 +168,19 @@ const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (
         <table className="table table-sm table-borderless mb-0">
           <tbody>
             <tr>
-              <td className="text-muted" style={{ width: '40%' }}>
+              <td className="text-quaternary" style={{ width: '40%' }}>
                 {translate('UUID')}
               </td>
               <td>{row.uuid}</td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('License Reference')}</td>
+              <td className="text-quaternary">
+                {translate('License Reference')}
+              </td>
               <td>{row.license_reference}</td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Resource')}</td>
+              <td className="text-quaternary">{translate('Resource')}</td>
               <td>{row.resource_name || DASH_ESCAPE_CODE}</td>
             </tr>
           </tbody>
@@ -188,22 +190,24 @@ const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (
         <table className="table table-sm table-borderless mb-0">
           <tbody>
             <tr>
-              <td className="text-muted" style={{ width: '40%' }}>
+              <td className="text-quaternary" style={{ width: '40%' }}>
                 {translate('Created')}
               </td>
               <td>{formatDateTime(row.created)}</td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Billing Period')}</td>
+              <td className="text-quaternary">{translate('Billing Period')}</td>
               <td>{row.billing_period}</td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Consumed (Sell)')}</td>
+              <td className="text-quaternary">
+                {translate('Consumed (Sell)')}
+              </td>
               <td>{defaultCurrency(row.consumed_sell)}</td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Final (Sell)')}</td>
-              <td className="fw-bold">
+              <td className="text-quaternary">{translate('Final (Sell)')}</td>
+              <td className="font-medium">
                 {row.final_sell
                   ? defaultCurrency(row.final_sell)
                   : DASH_ESCAPE_CODE}

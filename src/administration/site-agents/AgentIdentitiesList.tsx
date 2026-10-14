@@ -40,14 +40,14 @@ export const AgentIdentitiesList: FC<TableWithPortal> = ({ portal }) => {
   const columns: Column<AgentIdentity>[] = [
     {
       title: translate('Name'),
-      render: ({ row }) => <span className="fw-bold">{row.name}</span>,
+      render: ({ row }) => <span className="font-medium">{row.name}</span>,
       keys: ['name'],
       id: 'name',
     },
     {
       title: translate('Offering'),
       render: ({ row }) => (
-        <code className="text-muted">
+        <code className="text-quaternary">
           {row.offering
             ? `${row.offering.substring(0, 8)}...`
             : DASH_ESCAPE_CODE}
@@ -66,7 +66,7 @@ export const AgentIdentitiesList: FC<TableWithPortal> = ({ portal }) => {
     {
       title: translate('Config path'),
       render: ({ row }) => (
-        <code className="text-muted">
+        <code className="text-quaternary">
           {row.config_file_path || DASH_ESCAPE_CODE}
         </code>
       ),

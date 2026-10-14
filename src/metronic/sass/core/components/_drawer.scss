@@ -27,6 +27,10 @@
     transform: none;
     box-shadow: get($drawer, box-shadow);
     transition: transform get($drawer, transition-speed) ease-in-out;
+
+    @include dark-theme {
+      box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    }
   }
 }
 
@@ -40,6 +44,10 @@
   overflow: hidden;
   z-index: get($drawer, z-index) - 1;
   background-color: get($drawer, overlay-bg-color);
+
+  @include dark-theme {
+    background-color: rgba($black, 0.4);
+  }
   animation: animation-drawer-fade-in get($drawer, overlay-animation-speed)
     ease-in-out 1;
 }

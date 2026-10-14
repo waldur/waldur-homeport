@@ -69,7 +69,7 @@ const FieldRows: FC<{
     {({ fields }) => (
       <div className="mb-6">
         <div className="d-flex justify-content-between align-items-center mb-2">
-          <span className="fw-bold">{title}</span>
+          <span className="font-medium">{title}</span>
           <BaseButton
             label={addTitle}
             onClick={() => fields.push({})}
@@ -124,7 +124,7 @@ const FieldRows: FC<{
             </tbody>
           </Table>
         ) : (
-          <p className="text-muted mb-0">{translate('None yet.')}</p>
+          <p className="text-quaternary mb-0">{translate('None yet.')}</p>
         )}
       </div>
     )}

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { expect, within } from 'storybook/test';
 
 import { ProgressStep } from './ProgressSteps';
 import { VerticalProgressSteps } from './VerticalProgressSteps';
@@ -17,7 +18,7 @@ const meta: Meta<typeof VerticalProgressSteps> = {
   },
   decorators: [
     (Story) => (
-      <div className="p-6 bg-body" style={{ maxWidth: 360 }}>
+      <div className="p-6 bg-primary" style={{ maxWidth: 360 }}>
         <Story />
       </div>
     ),
@@ -55,6 +56,19 @@ const sampleSteps: ProgressStep[] = [
   },
 ];
 
+// What a CSS colour expression resolves to on this page, e.g. 'var(--brand-color)'.
+const resolve = (canvasElement: HTMLElement, colour: string) => {
+  const probe = document.createElement('div');
+  probe.style.backgroundColor = colour;
+  canvasElement.appendChild(probe);
+  const value = getComputedStyle(probe).backgroundColor;
+  probe.remove();
+  return value;
+};
+
+const fillOf = (marker: HTMLElement) =>
+  getComputedStyle(marker).backgroundColor;
+
 export const Default: Story = {
   args: {
     steps: sampleSteps,
@@ -67,6 +81,19 @@ export const ExplicitCurrentStep: Story = {
     // the steps array (the first step after the last completed one), so
     // marking index 0-1 completed makes index 2 ('result') the current one.
     steps: sampleSteps.map((s, idx) => ({ ...s, completed: idx < 2 })),
+  },
+  // The rendered colours, not the class names: the regression this guards
+  // was a correct class losing to a component stylesheet in the cascade,
+  // which left the current step a white icon on a light-gray circle.
+  play: async ({ canvasElement }) => {
+    const markers = within(canvasElement).getAllByTestId('step-marker');
+    const brand = resolve(canvasElement, 'var(--brand-color)');
+    await expect(fillOf(markers[0])).toBe(brand);
+    await expect(fillOf(markers[1])).toBe(brand);
+    await expect(fillOf(markers[2])).toBe(brand);
+    await expect(fillOf(markers[3])).toBe(
+      resolve(canvasElement, 'var(--bg-tertiary)'),
+    );
   },
 };
 
@@ -132,6 +159,12 @@ export const VariantDanger: Story = {
       },
     ],
   },
+  play: async ({ canvasElement }) => {
+    const markers = within(canvasElement).getAllByTestId('step-marker');
+    await expect(fillOf(markers[1])).toBe(
+      resolve(canvasElement, 'var(--status-danger-solid)'),
+    );
+  },
 };
 
 export const Interactive: Story = {
@@ -148,7 +181,7 @@ export const Interactive: Story = {
           steps={steps}
           onClick={(_, idx) => setActiveIdx(idx)}
         />
-        <div className="text-muted small">
+        <div className="text-quaternary small">
           Click completed steps or current step to navigate
         </div>
       </div>

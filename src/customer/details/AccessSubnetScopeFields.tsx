@@ -81,7 +81,7 @@ export const AccessSubnetScopeFields = ({
       {isLoading ? (
         <LoadingSpinner />
       ) : available.length === 0 ? (
-        <Form.Text className="d-block text-muted">
+        <Form.Text className="d-block text-quaternary">
           {translate(
             'This organization has no resources of an offering that supports access subnets.',
           )}

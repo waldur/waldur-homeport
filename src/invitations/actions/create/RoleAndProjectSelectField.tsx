@@ -90,11 +90,7 @@ const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
       return (
         <>
           {getRoleTitle(role)}
-          {reason && (
-            <div className="text-xs text-[var(--surface-text-muted)]">
-              {reason}
-            </div>
-          )}
+          {reason && <div className="text-xs text-quinary">{reason}</div>}
         </>
       );
     },

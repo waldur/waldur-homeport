@@ -161,11 +161,11 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
       {fixedOffering ? (
         <>
           {/* Show fixed offering info */}
-          <div className="bg-light-primary rounded p-3 mb-4">
-            <div className="text-gray-700 small mb-1">
+          <div className="bg-brand-subtle rounded p-3 mb-4">
+            <div className="text-secondary small mb-1">
               {translate('Generating configuration for:')}
             </div>
-            <div className="fw-bold">{fixedOffering.name}</div>
+            <div className="font-medium">{fixedOffering.name}</div>
           </div>
         </>
       ) : offeringsLoading ? (
@@ -180,13 +180,13 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
         />
       ) : (
         <Form.Group className="mb-4">
-          <Form.Label className="fw-bold">
+          <Form.Label className="font-medium">
             {translate('Select SLURM Offerings')}
           </Form.Label>
           <div className="mb-2">
             <button
               type="button"
-              className="text-btn text-primary"
+              className="text-btn text-brand"
               onClick={handleSelectAll}
             >
               {selectedOfferings.length === offerings.length
@@ -208,7 +208,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
                 label={
                   <span>
                     {offering.name}
-                    <span className="text-muted ms-2">
+                    <span className="text-quaternary ms-2">
                       ({offering.uuid.slice(0, 8)}...)
                     </span>
                   </span>
@@ -216,7 +216,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
               />
             ))}
           </div>
-          <Form.Text className="text-muted">
+          <Form.Text className="text-quaternary">
             {translate('{count} offering(s) selected', {
               count: selectedOfferings.length,
             })}
@@ -234,7 +234,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
               onChange={(e) => setIncludePolicySettings(e.target.checked)}
               label={translate('Include SLURM policy settings')}
             />
-            <Form.Text className="text-muted">
+            <Form.Text className="text-quaternary">
               {translate(
                 'When enabled, includes SLURM periodic usage policy configuration if available.',
               )}
@@ -249,7 +249,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
               value={apiUrl}
               onChange={(e) => setApiUrl(e.target.value)}
             />
-            <Form.Text className="text-muted">
+            <Form.Text className="text-quaternary">
               {translate(
                 'Override the Waldur API URL. Leave empty to use the current server URL.',
               )}
@@ -268,7 +268,7 @@ export const SiteAgentConfigDialog: FC<SiteAgentConfigDialogProps> = ({
                 </option>
               ))}
             </Form.Select>
-            <Form.Text className="text-muted">
+            <Form.Text className="text-quaternary">
               {translate('Timezone for the site agent scheduler.')}
             </Form.Text>
           </Form.Group>

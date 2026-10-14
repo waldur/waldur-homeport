@@ -5,7 +5,7 @@ import { cn } from '../cn';
 
 /**
  * shadcn's Popover recipe (https://ui.shadcn.com/docs/components/popover),
- * ported the same way DropdownMenu.tsx was — surfaceColors.css tokens
+ * ported the same way DropdownMenu.tsx was — design tokens
  * instead of shadcn's --popover palette, and plain data-state-keyed
  * transitions rather than the tailwindcss-animate utilities (that plugin
  * isn't installed and isn't Tailwind v4-native, so animate-in/fade-in-0
@@ -80,8 +80,8 @@ export const PopoverContent = forwardRef<
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          'z-popover rounded-lg border shadow-[var(--dropdown-shadow)] outline-hidden',
-          'border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] text-[var(--surface-text-primary)]',
+          'z-popover rounded-lg border-[1px] shadow-[var(--dropdown-shadow)] outline-hidden',
+          'border-secondary bg-[var(--card-bg)] text-primary',
           className,
         )}
         {...props}

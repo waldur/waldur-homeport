@@ -76,15 +76,15 @@ const columns: Column<ReviewProgressStat>[] = [
     title: translate('Reviewer'),
     render: ({ row }) => (
       <div className="d-flex flex-column">
-        <span className="fw-semibold">{row.reviewer_name}</span>
-        <span className="text-muted fs-8">{row.reviewer_email}</span>
+        <span className="font-semibold">{row.reviewer_name}</span>
+        <span className="text-quaternary fs-8">{row.reviewer_email}</span>
       </div>
     ),
   },
   {
     title: translate('Assigned'),
     render: ({ row }) => (
-      <span className="fw-semibold">{row.total_assigned}</span>
+      <span className="font-semibold">{row.total_assigned}</span>
     ),
   },
   {
@@ -94,7 +94,7 @@ const columns: Column<ReviewProgressStat>[] = [
   {
     title: translate('Avg score'),
     render: ({ row }) => (
-      <span className={row.average_score !== null ? '' : 'text-muted'}>
+      <span className={row.average_score !== null ? '' : 'text-quaternary'}>
         {row.average_score !== null ? row.average_score.toFixed(1) : '—'}
       </span>
     ),
@@ -103,7 +103,9 @@ const columns: Column<ReviewProgressStat>[] = [
     title: translate('Avg days/review'),
     render: ({ row }) => (
       <span
-        className={row.average_review_time_days !== null ? '' : 'text-muted'}
+        className={
+          row.average_review_time_days !== null ? '' : 'text-quaternary'
+        }
       >
         {row.average_review_time_days !== null
           ? row.average_review_time_days.toFixed(1)

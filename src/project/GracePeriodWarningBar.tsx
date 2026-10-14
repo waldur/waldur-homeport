@@ -1,11 +1,9 @@
-import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { FeaturedIcon } from 'waldur-ui';
-
 import { formatDate } from '@/core/dateUtils';
 import { translate } from '@/i18n';
+import { LayoutWarningBar } from '@/navigation/LayoutWarningBar';
 import { useProject } from '@/workspace/hooks';
 
 export const GracePeriodWarningBar: FC = () => {
@@ -32,34 +30,28 @@ export const GracePeriodWarningBar: FC = () => {
   const effectiveEndDate = formatDate(project.effective_end_date);
 
   return (
-    <div className="layout-warning-bar bar-warning">
-      <div className="container-fluid w-100 d-flex align-items-center gap-2">
-        <FeaturedIcon
-          icon={<WarningCircleIcon weight="bold" />}
-          variant="warning"
-          size="sm"
+    <LayoutWarningBar
+      title={
+        isExpired ? (
+          <span className="text-danger">{translate('Project expired')}:</span>
+        ) : (
+          `${translate('Grace period active')}:`
+        )
+      }
+    >
+      {isExpired ? (
+        translate(
+          'This project expired on {effectiveEndDate}. Active resources are scheduled for termination.',
+          { effectiveEndDate },
+        )
+      ) : (
+        <GracePeriodMessage
+          endDate={endDate}
+          effectiveEndDate={effectiveEndDate}
+          effectiveEndDateObj={effectiveEndDateObj}
         />
-        <p className="text-start fs-6 mb-0">
-          {isExpired ? (
-            <>
-              <strong className="fw-bold text-danger">
-                {translate('Project expired')}:{' '}
-              </strong>
-              {translate(
-                'This project expired on {effectiveEndDate}. Active resources are scheduled for termination.',
-                { effectiveEndDate },
-              )}
-            </>
-          ) : (
-            <GracePeriodMessage
-              endDate={endDate}
-              effectiveEndDate={effectiveEndDate}
-              effectiveEndDateObj={effectiveEndDateObj}
-            />
-          )}
-        </p>
-      </div>
-    </div>
+      )}
+    </LayoutWarningBar>
   );
 };
 
@@ -77,14 +69,13 @@ const GracePeriodMessage: FC<{
   );
   const urgencyClass =
     daysRemaining <= 3
-      ? 'text-danger fw-bold'
+      ? 'text-danger font-medium'
       : daysRemaining <= 7
-        ? 'text-warning fw-bold'
-        : 'fw-bold';
+        ? 'text-warning font-medium'
+        : 'font-medium';
 
   return (
     <>
-      <strong className="fw-bold">{translate('Grace period active')}: </strong>
       {translate(
         'This project ended on {endDate}. Resources will remain active until {effectiveEndDate}.',
         { endDate, effectiveEndDate },

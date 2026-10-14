@@ -109,7 +109,7 @@ export const TruncatedMarkdown: FC<TruncatedMarkdownProps> = ({
               left: 0,
               right: 0,
               height: '40px',
-              background: 'linear-gradient(transparent, var(--bs-body-bg))',
+              background: 'linear-gradient(transparent, var(--bg-primary))',
               display: 'flex',
               alignItems: 'flex-end',
               justifyContent: 'center',

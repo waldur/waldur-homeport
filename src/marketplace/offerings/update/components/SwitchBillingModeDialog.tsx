@@ -70,8 +70,8 @@ const ImpactPreview: FC<{
     BILLING_MODES.find((m) => m.value === targetMode)?.label || targetMode;
 
   return (
-    <div className="mt-4 p-3 bg-light rounded">
-      <div className="fw-bold mb-2">
+    <div className="mt-4 p-3 bg-tertiary dark:bg-quaternary rounded">
+      <div className="font-medium mb-2">
         {translate('Impact: {count} components will be changed', {
           count: affected.length,
         })}
@@ -79,12 +79,16 @@ const ImpactPreview: FC<{
       <div className="d-flex flex-column gap-1">
         {affected.map((c: any) => (
           <div key={c.uuid} className="d-flex align-items-center gap-2 fs-7">
-            <span className="fw-semibold">{c.name}</span>
-            <span className="text-muted">
+            <span className="font-semibold">{c.name}</span>
+            <span className="text-quaternary">
               {getBillingTypeLabel(c.billing_type)}
             </span>
-            <ArrowRightIcon size={14} weight="bold" className="text-muted" />
-            <span className="text-primary">{targetLabel}</span>
+            <ArrowRightIcon
+              size={14}
+              weight="bold"
+              className="text-quaternary"
+            />
+            <span className="text-brand">{targetLabel}</span>
           </div>
         ))}
       </div>
@@ -144,12 +148,12 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
               </>
             }
           >
-            <p className="text-muted mb-4">
+            <p className="text-quaternary mb-4">
               {translate(
                 'Switch all infrastructure components between monthly, prepaid, and usage-based billing.',
               )}
             </p>
-            <p className="text-muted mb-4">
+            <p className="text-quaternary mb-4">
               {explicitPlans.length
                 ? translate(
                     'Plans with their own billing mode are not affected: {plans}.',
@@ -165,10 +169,12 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
                   {availableModes.map((mode) => (
                     <label
                       key={mode.value}
-                      className={`d-flex align-items-start gap-3 p-3 border rounded cursor-pointer ${
+                      // border-[1px], not Bootstrap's .border: its !important
+                      // colour would override the selected border-brand.
+                      className={`d-flex align-items-start gap-3 p-3 rounded border-[1px] cursor-pointer ${
                         input.value === mode.value
-                          ? 'border-primary bg-light-primary'
-                          : ''
+                          ? 'border-brand bg-brand-subtle'
+                          : 'border-secondary'
                       }`}
                     >
                       <Radio
@@ -179,8 +185,8 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
                         className="mt-[2px]"
                       />
                       <div>
-                        <div className="fw-bold">{mode.label}</div>
-                        <div className="text-muted fs-7">
+                        <div className="font-medium">{mode.label}</div>
+                        <div className="text-quaternary fs-7">
                           {mode.description}
                         </div>
                       </div>

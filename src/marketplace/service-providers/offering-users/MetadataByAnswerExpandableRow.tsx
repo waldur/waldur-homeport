@@ -106,8 +106,8 @@ export const MetadataByAnswerExpandableRow: FC<{
             title: translate('User'),
             render: ({ row }) => (
               <div>
-                <span className="d-block text-dark">{row.answered_by}</span>
-                <span className="d-block text-muted">
+                <span className="d-block text-primary">{row.answered_by}</span>
+                <span className="d-block text-quaternary">
                   {row.answered_by_email}
                 </span>
               </div>

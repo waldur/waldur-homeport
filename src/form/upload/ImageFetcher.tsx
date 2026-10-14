@@ -39,7 +39,13 @@ export const ImageFetcher = ({ url, name, thumb = false, iconSize = 20 }) => {
   }, []);
 
   return (
-    <div className={!thumb && imageUrl ? 'text-center bg-light' : undefined}>
+    <div
+      className={
+        !thumb && imageUrl
+          ? 'text-center bg-tertiary dark:bg-quaternary'
+          : undefined
+      }
+    >
       {loading ? (
         <LoadingSpinner />
       ) : error ? (

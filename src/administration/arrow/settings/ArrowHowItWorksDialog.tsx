@@ -549,24 +549,24 @@ const FieldMappingTable: FC<FieldMappingTableProps> = ({
   <div className="table-responsive">
     <table className="table align-middle table-row-bordered fs-7 gy-3 gx-4 mb-0">
       <thead>
-        <tr className="text-start text-muted fw-bold fs-8 text-uppercase gs-0">
+        <tr className="text-start text-quaternary font-medium fs-8 text-uppercase gs-0">
           <th>{sourceLabel}</th>
           <th>{targetLabel || translate('Waldur Model.Field')}</th>
           <th>{translate('Description')}</th>
         </tr>
       </thead>
-      <tbody className="text-gray-600">
+      <tbody className="text-tertiary">
         {fields.map((field, idx) => (
           <tr key={idx}>
             <td>
-              <span className="text-primary fw-semibold">
+              <span className="text-brand font-semibold">
                 {field.arrowField}
               </span>
             </td>
             <td>
-              <span className="fw-semibold">{field.waldurField}</span>
+              <span className="font-semibold">{field.waldurField}</span>
             </td>
-            <td className="text-muted">{field.description}</td>
+            <td className="text-quaternary">{field.description}</td>
           </tr>
         ))}
       </tbody>
@@ -629,7 +629,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Data Flow Diagram */}
         <section>
           <h4 className="mb-4">{translate('Data flow overview')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Arrow API data is mapped to Waldur models and linked to existing resources, customers, and invoices.',
             )}
@@ -642,7 +642,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Setup Flow */}
         <section>
           <h4 className="mb-4">{translate('Initial setup flow')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'The setup wizard guides you through connecting to Arrow and mapping customers to Waldur organizations.',
             )}
@@ -655,7 +655,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Field Mappings Section */}
         <section>
           <h4 className="mb-4">{translate('Field mappings')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'The following tables show how Arrow API fields map to Waldur database models.',
             )}
@@ -664,7 +664,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           {/* Settings Fields */}
           <div className="mb-6">
             <h5 className="mb-3">{translate('ArrowSettings')}</h5>
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'Stores API configuration and partner info. Only one active settings record per deployment.',
               )}
@@ -679,7 +679,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           {/* Customer Mapping Fields */}
           <div className="mb-6">
             <h5 className="mb-3">{translate('ArrowCustomerMapping')}</h5>
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'Maps Arrow customer references (XSP...) to Waldur organizations.',
               )}
@@ -694,7 +694,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           {/* Billing Sync Item Fields */}
           <div className="mb-6">
             <h5 className="mb-3">{translate('ArrowBillingSyncItem')}</h5>
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'Links Arrow billing export lines to Waldur InvoiceItems.',
               )}
@@ -709,7 +709,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           {/* Consumption Record Fields */}
           <div className="mb-6">
             <h5 className="mb-3">{translate('ArrowConsumptionRecord')}</h5>
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'Tracks real-time consumption and final billing amounts for reconciliation.',
               )}
@@ -724,7 +724,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           {/* Resource Attribute Fields */}
           <div className="mb-6">
             <h5 className="mb-3">{translate('Resource attributes')}</h5>
-            <p className="text-muted small mb-3">
+            <p className="text-quaternary small mb-3">
               {translate(
                 'Waldur Resources must have these attributes set to be matched with Arrow data.',
               )}
@@ -740,7 +740,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Billing Sync Flow */}
         <section>
           <h4 className="mb-4">{translate('Billing synchronization')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Billing sync fetches monthly billing reports from Arrow and creates corresponding records in Waldur.',
             )}
@@ -753,7 +753,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Reconciliation Flow */}
         <section>
           <h4 className="mb-4">{translate('Reconciliation process')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'After syncing, reconciliation compares Arrow amounts with Waldur invoices. Discrepancies create compensation items.',
             )}
@@ -786,7 +786,7 @@ export const ArrowHowItWorksDialog: FC = () => {
                     'Compensation items are created for any discrepancies',
                   )}{' '}
                   (
-                  <span className="fw-semibold">
+                  <span className="font-semibold">
                     adjustment = final_{priceSource} - consumed_{priceSource}
                   </span>
                   )
@@ -799,7 +799,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Invoice Item Creation */}
         <section>
           <h4 className="mb-4">{translate('Invoice item creation')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Arrow integration creates two types of invoice items depending on the sync stage.',
             )}
@@ -807,7 +807,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-7 gy-4 gx-4">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-8 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-8 text-uppercase gs-0">
                   <th style={{ width: '15%' }}>{translate('Type')}</th>
                   <th style={{ width: '25%' }}>{translate('Trigger')}</th>
                   <th style={{ width: '25%' }}>{translate('Name format')}</th>
@@ -817,18 +817,20 @@ export const ArrowHowItWorksDialog: FC = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {invoiceItemTypes.map((item) => (
                   <tr key={item.source}>
-                    <td className="fw-bold">
+                    <td className="font-medium">
                       <span className="d-block">{item.type}</span>
-                      <span className="text-muted small">{item.source}</span>
+                      <span className="text-quaternary small">
+                        {item.source}
+                      </span>
                     </td>
                     <td>{item.trigger}</td>
                     <td>{item.nameFormat}</td>
                     <td>
                       {item.unitPrice}
-                      <div className="text-muted small mt-1">
+                      <div className="text-quaternary small mt-1">
                         {translate('qty')}: {item.quantity}
                       </div>
                     </td>
@@ -836,7 +838,7 @@ export const ArrowHowItWorksDialog: FC = () => {
                       <ul className="list-unstyled small mb-0">
                         {item.details.map((detail, idx) => (
                           <li key={idx}>
-                            <span className="text-muted">{detail}</span>
+                            <span className="text-quaternary">{detail}</span>
                           </li>
                         ))}
                       </ul>
@@ -860,7 +862,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Consumption Records Flow */}
         <section>
           <h4 className="mb-4">{translate('Consumption records')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Consumption records track individual usage items from Arrow and can be mapped to Waldur resources for detailed reporting.',
             )}
@@ -876,7 +878,7 @@ export const ArrowHowItWorksDialog: FC = () => {
         {/* Resource Import Flow */}
         <section>
           <h4 className="mb-4">{translate('Importing Arrow licenses')}</h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'Arrow licenses can be imported as Waldur marketplace resources. The import wizard guides you through selecting a customer, offering, project, and licenses.',
             )}
@@ -903,7 +905,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-4">
             {translate('Syncing historical consumption')}
           </h4>
-          <p className="text-muted mb-4">
+          <p className="text-quaternary mb-4">
             {translate(
               'After importing a license or linking a resource to Arrow, you can backport historical consumption data. This creates usage records for billing.',
             )}
@@ -952,16 +954,16 @@ export const ArrowHowItWorksDialog: FC = () => {
           <div className="table-responsive">
             <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
               <thead>
-                <tr className="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
                   <th style={{ width: '20%' }}>{translate('State')}</th>
                   <th>{translate('Description')}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-600">
+              <tbody className="text-tertiary">
                 {SYNC_STATES.map((item) => (
                   <tr key={item.state}>
-                    <td className="fw-bold text-gray-800">
-                      <span className="fw-semibold">{item.state}</span>
+                    <td className="font-medium text-primary">
+                      <span className="font-semibold">{item.state}</span>
                     </td>
                     <td>{item.description}</td>
                   </tr>
@@ -976,8 +978,8 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-4">{translate('Key concepts')}</h4>
           {KEY_CONCEPTS.map((concept) => (
             <div key={concept.term} className="mb-4">
-              <h6 className="fw-bold">{concept.term}</h6>
-              <p className="text-muted mb-0">{concept.description}</p>
+              <h6 className="font-medium">{concept.term}</h6>
+              <p className="text-quaternary mb-0">{concept.description}</p>
             </div>
           ))}
         </section>

@@ -97,7 +97,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
   if (!batch) {
     return (
       <ExpandableContainer>
-        <p className="text-muted">{translate('No data available.')}</p>
+        <p className="text-quaternary">{translate('No data available.')}</p>
       </ExpandableContainer>
     );
   }
@@ -105,7 +105,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
   return (
     <ExpandableContainer>
       {batch.manager_notes && (
-        <div className="mb-3 p-3 bg-light rounded">
+        <div className="mb-3 p-3 bg-tertiary dark:bg-quaternary rounded">
           <strong>{translate('Notes from manager')}:</strong>
           <p className="mb-0 mt-1">{batch.manager_notes}</p>
         </div>
@@ -126,10 +126,12 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
             {batch.items.map((item) => (
               <tr key={item.uuid}>
                 <td>
-                  <div className="fw-bold">{item.proposal_name}</div>
-                  <small className="text-muted">{item.proposal_slug}</small>
+                  <div className="font-medium">{item.proposal_name}</div>
+                  <small className="text-quaternary">
+                    {item.proposal_slug}
+                  </small>
                   {item.proposal_summary && (
-                    <p className="text-muted small mt-1 mb-0">
+                    <p className="text-quaternary small mt-1 mb-0">
                       {item.proposal_summary}
                     </p>
                   )}
@@ -159,7 +161,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
                       />
                     </span>
                   ) : (
-                    <span className="text-muted">-</span>
+                    <span className="text-quaternary">-</span>
                   )}
                 </td>
                 <td>
@@ -233,7 +235,7 @@ export const MyAssignmentsPage: FC = () => {
             id: 'call',
             title: translate('Call'),
             render: ({ row }) => (
-              <span className="fw-bold">{row.call_name}</span>
+              <span className="font-medium">{row.call_name}</span>
             ),
             keys: ['call_name'],
           },
@@ -253,11 +255,11 @@ export const MyAssignmentsPage: FC = () => {
             title: translate('Proposals'),
             render: ({ row }) => (
               <div>
-                <span className="text-warning fw-bold">
+                <span className="text-warning font-medium">
                   {row.items_pending_count}
                 </span>
-                <span className="text-muted"> / {row.items_count}</span>
-                <small className="text-muted ms-1">
+                <span className="text-quaternary"> / {row.items_count}</span>
+                <small className="text-quaternary ms-1">
                   {translate('pending')}
                 </small>
               </div>

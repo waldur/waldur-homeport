@@ -28,13 +28,13 @@ export const ComponentTotalRow: FC<ComponentTotalRowProps> = ({
 
   return (
     <tr>
-      <td colSpan={4} className="text-end fw-bold">
+      <td colSpan={4} className="text-end font-medium">
         {translate('Total:')}
       </td>
-      <td className="fw-bold">
+      <td className="font-medium">
         {ENV.plugins.WALDUR_CORE.CURRENCY_NAME} {total.toFixed(2)}
       </td>
-      <td className="fw-bold">
+      <td className="font-medium">
         {ENV.plugins.WALDUR_CORE.CURRENCY_NAME}{' '}
         {(total * secondaryMultiplier).toFixed(2)}
       </td>

@@ -32,12 +32,12 @@ export const IntentQuestionsTable: FC<TableWithPortal> = ({ portal }) => {
     if (row.intent_field) {
       return (
         <div>
-          <span className="text-gray-600 fs-7">{translate('Intent')}: </span>
-          <code className="text-primary">{row.intent_field}</code>
+          <span className="text-tertiary fs-7">{translate('Intent')}: </span>
+          <code className="text-brand">{row.intent_field}</code>
         </div>
       );
     }
-    return <span className="text-muted">—</span>;
+    return <span className="text-quaternary">—</span>;
   };
 
   return (

@@ -85,7 +85,9 @@ const LoadPresetDialog = ({ resolve }) => {
               placeholder={translate('Select a preset...')}
             />
             {values.preset && (
-              <p className="text-muted mb-0">{values.preset.description}</p>
+              <p className="text-quaternary mb-0">
+                {values.preset.description}
+              </p>
             )}
           </ModalDialog>
         </form>

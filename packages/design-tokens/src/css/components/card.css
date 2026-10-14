@@ -1,0 +1,38 @@
+/**
+ * Tokens for waldur-ui's Card, AccordionCard and StatCard. Part of the design-tokens
+ * package (imported by index.css), so every app that renders
+ * these components gets them.
+ *
+ * Both themes are defined in this file.
+ */
+:root {
+  /* Collapsible card header (waldur-ui AccordionCard), matching the
+     Metronic card it replaced: header text/caret ($gray-700), title
+     ($headings-color), the compact variant's title (.text-secondary) and
+     the solid header strip ($gray-50). */
+  --card-header-text: var(--color-gray-700);
+  --card-title-text: var(--color-gray-900);
+  --card-title-secondary-text: var(--color-gray-700);
+  --card-header-solid-bg: var(--color-gray-50);
+
+  /* Real Metronic source, from
+     src/metronic/sass/core/components/_card.scss's .card rule:
+     `box-shadow: $card-box-shadow` unconditionally, `border` only
+     `@if ($card-border-enabled)` — which is itself `if(isDarkMode(),
+     true, false)`. Metronic's real card relies on the shadow alone in
+     light mode (no border at all) and flips to a border with no shadow
+     in dark mode — the opposite of what Card.tsx did before this
+     token existed (always bordered, never shadowed, in both themes). */
+  --card-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
+  --card-border-color: transparent;
+}
+
+:root[data-theme='dark'] {
+  --card-header-text: var(--color-gray-dark-200);
+  --card-title-text: var(--color-gray-dark-50);
+  --card-title-secondary-text: var(--color-gray-dark-300);
+  --card-header-solid-bg: var(--color-gray-dark-900);
+
+  --card-shadow: none;
+  --card-border-color: var(--color-gray-dark-800);
+}

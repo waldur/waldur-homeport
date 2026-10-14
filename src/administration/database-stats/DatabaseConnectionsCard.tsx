@@ -37,37 +37,37 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Connection breakdown')}
           </h6>
           <Table size="sm" borderless className="mb-0">
             <tbody>
               <tr>
-                <td className="text-muted">{translate('Active')}</td>
-                <td className="fw-semibold text-end">
+                <td className="text-quaternary">{translate('Active')}</td>
+                <td className="font-semibold text-end">
                   {data.active.toLocaleString()}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Idle')}</td>
-                <td className="fw-semibold text-end">
+                <td className="text-quaternary">{translate('Idle')}</td>
+                <td className="font-semibold text-end">
                   {data.idle.toLocaleString()}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Idle in transaction')}
                 </td>
                 <td
-                  className={`fw-semibold text-end ${data.idle_in_transaction > 5 ? 'text-warning' : ''}`}
+                  className={`font-semibold text-end ${data.idle_in_transaction > 5 ? 'text-warning' : ''}`}
                 >
                   {data.idle_in_transaction.toLocaleString()}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Waiting')}</td>
+                <td className="text-quaternary">{translate('Waiting')}</td>
                 <td
-                  className={`fw-semibold text-end ${data.waiting > 0 ? 'text-danger' : ''}`}
+                  className={`font-semibold text-end ${data.waiting > 0 ? 'text-danger' : ''}`}
                 >
                   {data.waiting.toLocaleString()}
                 </td>
@@ -76,7 +76,7 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
           </Table>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Utilization')}
           </h6>
           <Progress
@@ -91,7 +91,7 @@ export const DatabaseConnectionsCard: FC<DatabaseConnectionsCardProps> = ({
               },
             ]}
           />
-          <small className="text-muted">
+          <small className="text-quaternary">
             {translate('Max connections: {max}', { max: data.max_connections })}
           </small>
         </Col>

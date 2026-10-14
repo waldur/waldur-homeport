@@ -21,51 +21,51 @@
   }
 
   th {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   thead > tr {
-    background-color: $bg-secondary;
+    background-color: var(--bg-secondary);
 
     > th {
       font-size: 12px;
-      color: $gray-500;
-      font-weight: 500;
+      color: var(--text-quaternary);
+      font-weight: var(--font-weight-medium);
       white-space: nowrap;
 
       svg {
-        color: $gray-400;
+        color: var(--text-quinary);
       }
       &.sorting-column .sort-toggle {
         &:hover svg {
-          color: $gray-500;
+          color: var(--text-quaternary);
         }
         svg.active {
-          color: $brand;
+          color: var(--fg-brand-primary);
         }
       }
       &.filter-column .th-main > button,
       &.filter-column .th-main > .th-wrapper > button {
         &:hover svg {
-          color: $gray-500;
+          color: var(--text-quaternary);
         }
         &.show svg {
-          color: $brand;
+          color: var(--fg-brand-primary);
         }
       }
       .pin-toggle {
         &:hover svg {
-          color: $gray-500;
+          color: var(--text-quaternary);
         }
         &.active svg {
-          color: $brand;
+          color: var(--fg-brand-primary);
         }
       }
     }
   }
 
   tbody > tr > td {
-    color: $gray-500;
+    color: var(--text-quaternary);
   }
 
   &:not(.px-0) {
@@ -83,11 +83,11 @@
   &.table-expandable tr {
     &.expanded,
     &.expanded + tr {
-      background-color: $bg-secondary;
+      background-color: var(--bg-secondary);
 
       th.pinned,
       td.pinned {
-        background-color: $bg-secondary;
+        background-color: var(--bg-secondary);
       }
     }
     &.expanded + tr {
@@ -139,9 +139,13 @@
         left: 0;
         line-height: 1;
 
-        i,
         svg {
-          color: if(isDarkMode(), $danger, $warning);
+          // Warning orange in light, danger red in dark, as before.
+          color: var(--color-warning-600);
+
+          @include dark-theme {
+            color: var(--color-error-300);
+          }
         }
       }
     }
@@ -170,7 +174,7 @@
         top: 50%;
         transform: translateY(-50%);
         transition: opacity 0.15s linear;
-        background: $gray-50;
+        background: var(--bg-secondary);
         width: 32px;
         height: 32px;
         display: flex;
@@ -179,10 +183,10 @@
       }
 
       .inline-filter svg {
-        color: $gray-600;
+        color: var(--text-tertiary);
       }
       .inline-filter:hover svg {
-        color: $gray-700;
+        color: var(--text-secondary);
       }
     }
 
@@ -244,8 +248,8 @@
   }
 
   tfoot > tr {
-    background-color: $bg-secondary;
-    border-top: 1px solid $border-secondary;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-secondary);
   }
 
   // Pinned columns + Shadow
@@ -253,7 +257,7 @@
   td.pinned {
     position: sticky;
     z-index: 2;
-    background-color: $bg-secondary;
+    background-color: var(--bg-secondary);
   }
   // `td.has-filter` sets position: relative with a higher-specificity
   // selector, which would turn the sticky insets into a literal offset from
@@ -303,24 +307,24 @@
 // Shadow hover
 .table-container {
   &.table-hover-shadow > table > tbody > tr:not(.expanded + tr):hover {
-    border-top: 1px solid $border-secondary;
-    border-bottom: 1px solid $border-secondary;
+    border-top: 1px solid var(--border-secondary);
+    border-bottom: 1px solid var(--border-secondary);
     border-radius: $border-radius-lg;
-    box-shadow: if(
-      isDarkMode(),
-      0 0.1rem 1rem 0.25rem rgba($white, 0.05),
-      $box-shadow-sm
-    );
+    box-shadow: $box-shadow-sm;
+
+    @include dark-theme {
+      box-shadow: 0 0.1rem 1rem 0.25rem rgba($white, 0.05);
+    }
     transition: $transition-base;
   }
 
   // On grid view
   &.grid-hover-shadow .card:not(.card-table):hover {
-    box-shadow: if(
-      isDarkMode(),
-      0 0.1rem 1rem 0.25rem rgba($white, 0.05),
-      $box-shadow-sm
-    );
+    box-shadow: $box-shadow-sm;
+
+    @include dark-theme {
+      box-shadow: 0 0.1rem 1rem 0.25rem rgba($white, 0.05);
+    }
     transition: $transition-base;
   }
 }
@@ -450,19 +454,20 @@
     }
     tr.checked,
     tr.checked:hover {
-      background-color: $gray-50 !important;
+      background-color: var(--bg-secondary) !important;
 
       > * {
         border: unset;
-        --bs-table-accent-bg: $gray-50;
+        --bs-table-accent-bg: var(--bg-secondary);
       }
     }
   }
 
-  &.bg-gray-50 .table {
+  &.bg-gray-50 .table,
+  &.bg-secondary .table {
     th.pinned,
     td.pinned {
-      background-color: $gray-50;
+      background-color: var(--bg-secondary);
     }
   }
 }
@@ -509,7 +514,7 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 // Tables inside modals — add outer border
 .modal {
   .table-responsive {
-    border: 1px solid $border-secondary;
+    border: 1px solid var(--border-secondary);
     // Rounded like every other box in a dialog. No `overflow: hidden` with it:
     // that would override .table-responsive's own overflow-x and take the
     // horizontal scroll away from every wide table in a modal. The scroll
@@ -524,7 +529,7 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 
 // Chat log message bubble inside expanded row
 .chat-log-bubble {
-  background-color: $bg-tertiary;
+  background-color: var(--bg-tertiary);
 }
 
 // Conversation log turn: fixed left gutter for metadata, body on the right.
@@ -537,7 +542,7 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
   padding: 1rem;
 
   & + & {
-    border-top: 1px solid $border-secondary;
+    border-top: 1px solid var(--border-secondary);
   }
 
   // Override the 14px inherited from `.table td` — gutter text is 1rem (13px).
@@ -643,15 +648,16 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
   }
 }
 
-// Dark mode
-@if (isDarkMode()) {
-  // Another table inside expanded view
-  .table.table-expandable tr {
-    .expandable-container .card-table {
-      border-color: $border-secondary !important;
+// Another table inside expanded view: in dark mode, the card's border.
+.table.table-expandable tr {
+  .expandable-container .card-table {
+    @include dark-theme {
+      border-color: var(--border-secondary) !important;
+    }
 
-      .card-header {
-        border-color: $border-secondary !important;
+    .card-header {
+      @include dark-theme {
+        border-color: var(--border-secondary) !important;
       }
     }
   }

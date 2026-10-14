@@ -57,7 +57,7 @@ const AddressList = ({ row }: { row: AccessSubnetImpactResource }) => {
         ))}
       </div>
       {merged && (
-        <small className="text-muted">
+        <small className="text-quaternary">
           {translate('Sent to the firewall as {packed}', {
             packed: row.packed.join(', '),
           })}
@@ -148,7 +148,7 @@ export const AccessSubnetImpactDialog: FC<AccessSubnetImpactDialogProps> = ({
             render: ({ row }) => (
               <>
                 <div>{row.resource_name}</div>
-                <small className="text-muted">{row.project_name}</small>
+                <small className="text-quaternary">{row.project_name}</small>
               </>
             ),
           },

@@ -112,7 +112,7 @@ const EvaluationHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
   if (isLoading) return <LoadingSpinner />;
   if (!data || data.length === 0) {
     return (
-      <div className="text-muted text-center py-4">
+      <div className="text-quaternary text-center py-4">
         {translate('No evaluation history available.')}
       </div>
     );
@@ -206,7 +206,7 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
   if (isLoading) return <LoadingSpinner />;
   if (!data || data.length === 0) {
     return (
-      <div className="text-muted text-center py-4">
+      <div className="text-quaternary text-center py-4">
         {translate('No command history available.')}
       </div>
     );

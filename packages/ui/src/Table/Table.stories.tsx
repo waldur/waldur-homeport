@@ -29,8 +29,8 @@ type Story = StoryObj<typeof Table>;
 
 export const Default: Story = {
   render: () => (
-    <div className="p-6 bg-[var(--surface-page-bg)]">
-      <div className="rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)] overflow-hidden">
+    <div className="p-6 bg-[var(--page-bg)]">
+      <div className="rounded-md border-[1px] border-secondary bg-[var(--card-bg)] overflow-hidden">
         <Table>
           <TableHeader>
             <TableRow>

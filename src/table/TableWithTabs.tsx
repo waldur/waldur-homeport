@@ -49,7 +49,7 @@ export const TableWithTabs: FC<
               <div className="me-2">
                 <h3>{title}</h3>
                 {Boolean(subtitle) && (
-                  <small className="fs-6 fw-normal d-block mt-2">
+                  <small className="fs-6 font-normal d-block mt-2">
                     {subtitle}
                   </small>
                 )}
@@ -88,7 +88,7 @@ export const TableWithTabs: FC<
             </TabsList>
             {actions ? (
               Array.isArray(actions) && actions.length ? (
-                <div className="d-flex align-items-center border-bottom gap-2">
+                <div className="d-flex align-items-center border-b-[1px] border-b-secondary gap-2">
                   {actions.map((action, index) => (
                     <Fragment key={index}>
                       {action.activeKeys.includes(activeKey)
@@ -98,7 +98,9 @@ export const TableWithTabs: FC<
                   ))}
                 </div>
               ) : (
-                <div className="border-bottom">{actions as ReactNode}</div>
+                <div className="border-b-[1px] border-b-secondary">
+                  {actions as ReactNode}
+                </div>
               )
             ) : null}
           </div>

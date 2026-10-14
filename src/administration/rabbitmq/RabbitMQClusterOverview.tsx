@@ -22,8 +22,8 @@ interface ClusterInfoRowProps {
 
 const ClusterInfoRow: FC<ClusterInfoRowProps> = ({ label, value }) => (
   <div className="d-flex justify-content-between py-1">
-    <span className="text-muted">{label}</span>
-    <span className="fw-semibold">{value}</span>
+    <span className="text-quaternary">{label}</span>
+    <span className="font-semibold">{value}</span>
   </div>
 );
 
@@ -40,7 +40,7 @@ const RabbitMQClusterOverviewContent: FC<
   return (
     <Row>
       <Col md={4}>
-        <h6 className="text-uppercase text-muted mb-3">
+        <h6 className="text-uppercase text-quaternary mb-3">
           {translate('Cluster info')}
         </h6>
         <ClusterInfoRow
@@ -62,38 +62,38 @@ const RabbitMQClusterOverviewContent: FC<
       </Col>
 
       <Col md={4}>
-        <h6 className="text-uppercase text-muted mb-3">
+        <h6 className="text-uppercase text-quaternary mb-3">
           {translate('Object totals')}
         </h6>
         <Table size="sm" borderless className="mb-0">
           <tbody>
             <tr>
-              <td className="text-muted">{translate('Connections')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Connections')}</td>
+              <td className="font-semibold text-end">
                 {(objectTotals.connections ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Channels')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Channels')}</td>
+              <td className="font-semibold text-end">
                 {(objectTotals.channels ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Exchanges')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Exchanges')}</td>
+              <td className="font-semibold text-end">
                 {(objectTotals.exchanges ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Queues')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Queues')}</td>
+              <td className="font-semibold text-end">
                 {(objectTotals.queues ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Consumers')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Consumers')}</td>
+              <td className="font-semibold text-end">
                 {(objectTotals.consumers ?? 0).toLocaleString()}
               </td>
             </tr>
@@ -102,26 +102,26 @@ const RabbitMQClusterOverviewContent: FC<
       </Col>
 
       <Col md={4}>
-        <h6 className="text-uppercase text-muted mb-3">
+        <h6 className="text-uppercase text-quaternary mb-3">
           {translate('Queue totals')}
         </h6>
         <Table size="sm" borderless className="mb-0">
           <tbody>
             <tr>
-              <td className="text-muted">{translate('Total messages')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Total messages')}</td>
+              <td className="font-semibold text-end">
                 {(queueTotals.messages ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Ready')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Ready')}</td>
+              <td className="font-semibold text-end">
                 {(queueTotals.messages_ready ?? 0).toLocaleString()}
               </td>
             </tr>
             <tr>
-              <td className="text-muted">{translate('Unacknowledged')}</td>
-              <td className="fw-semibold text-end">
+              <td className="text-quaternary">{translate('Unacknowledged')}</td>
+              <td className="font-semibold text-end">
                 {(queueTotals.messages_unacknowledged ?? 0).toLocaleString()}
               </td>
             </tr>
@@ -130,7 +130,7 @@ const RabbitMQClusterOverviewContent: FC<
 
         {data.listeners && data.listeners.length > 0 && (
           <>
-            <h6 className="text-uppercase text-muted mb-3 mt-4">
+            <h6 className="text-uppercase text-quaternary mb-3 mt-4">
               {translate('Listeners')}
             </h6>
             <div className="d-flex flex-wrap gap-2">

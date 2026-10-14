@@ -1,11 +1,11 @@
 .icon-square {
-  border: 1px solid $border-secondary;
+  border: 1px solid var(--border-secondary);
   padding: 9px;
   border-radius: 8px;
   background-color: transparent;
   line-height: 0.9;
 
-  @include svg-icon-color($fg-secondary);
+  @include svg-icon-color(var(--text-secondary));
   @include svg-icon-size(20px);
 
   &.icon-lg {

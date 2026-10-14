@@ -42,7 +42,7 @@ export const SupportDataAccessLogsExpandableRow: FC<
             {context.endpoint && (
               <div>
                 <strong>{translate('Endpoint')}:</strong>{' '}
-                <code className="text-muted">
+                <code className="text-quaternary">
                   {context.method && `${context.method} `}
                   {String(context.endpoint)}
                 </code>
@@ -53,7 +53,7 @@ export const SupportDataAccessLogsExpandableRow: FC<
               .map(([key, value]) => (
                 <div key={key}>
                   <strong>{key}:</strong>{' '}
-                  <code className="text-muted">
+                  <code className="text-quaternary">
                     {typeof value === 'object'
                       ? JSON.stringify(value)
                       : String(value)}
@@ -65,7 +65,7 @@ export const SupportDataAccessLogsExpandableRow: FC<
 
         {(!context || Object.keys(context).length === 0) &&
           row.accessed_fields.length === 0 && (
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('No additional details available')}
             </span>
           )}

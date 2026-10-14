@@ -1,0 +1,11 @@
+/**
+ * Layer 1: Primitives & Shared Scales
+ *
+ * Foundational scales: raw ramps, the brand bridge, typography, spacing, radius, breakpoints and z-index.
+ */
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+@import './radius.css';
+@import './breakpoints.css';
+@import './zIndex.css';

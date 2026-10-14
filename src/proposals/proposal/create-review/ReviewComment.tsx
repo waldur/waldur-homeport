@@ -4,7 +4,6 @@ import { FormLabel } from 'react-bootstrap';
 
 import Avatar from '@/core/Avatar';
 import { translate } from '@/i18n';
-import { useTheme } from '@/theme/useTheme';
 
 import { RateStars } from './RateStars';
 
@@ -19,12 +18,11 @@ interface ReviewCommentProps {
 export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
   props,
 ) => {
-  const { theme } = useTheme();
   return (
     <div
       className={classNames(
         'review-comment d-flex p-5 gap-4',
-        theme === 'dark' ? 'bg-gray-50' : 'bg-primary-50',
+        'bg-brand-subtle',
         props.className,
       )}
     >
@@ -36,19 +34,24 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
         circle
       />
 
-      <div className="fw-semibold">
+      <div className="font-semibold">
         <FormLabel className="mb-0">
           {props.title}
           {Boolean(props.time) && (
-            <small className="text-muted ms-2 fw-normal">{props.time}</small>
+            <small className="text-quaternary ms-2 font-normal">
+              {props.time}
+            </small>
           )}
         </FormLabel>
         {props.children ? (
-          <p className="text-muted mb-0" style={{ whiteSpace: 'pre-line' }}>
+          <p
+            className="text-quaternary mb-0"
+            style={{ whiteSpace: 'pre-line' }}
+          >
             {props.children}
           </p>
         ) : (
-          <p className="text-muted fst-italic mb-0">
+          <p className="text-quaternary fst-italic mb-0">
             {translate('No explanation')}
           </p>
         )}

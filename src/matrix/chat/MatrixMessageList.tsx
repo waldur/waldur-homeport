@@ -291,7 +291,7 @@ const MatrixMessageListInner: FC<MatrixMessageListProps> = ({
         </div>
       )}
       {showEmptyState ? (
-        <div className="d-flex justify-content-center align-items-center flex-grow-1 text-muted">
+        <div className="d-flex justify-content-center align-items-center flex-grow-1 text-quaternary">
           {translate('No messages yet. Start the conversation!')}
         </div>
       ) : (

@@ -53,7 +53,7 @@ export const LocationContainer = ({ input: { value, onChange }, ...props }) => {
           }}
         />
       </MapContainer>
-      <div className="text-muted mt-3">
+      <div className="text-quaternary mt-3">
         {coordinates
           ? translate('Coordinates: {coordinates}', { coordinates })
           : translate('No coordinates selected yet.')}

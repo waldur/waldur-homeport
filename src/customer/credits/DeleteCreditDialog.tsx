@@ -120,7 +120,7 @@ export const DeleteCreditDialog: FC<DeleteCreditDialogProps> = ({
       )}
 
       {!isLoading && !error && projectCredits.length === 0 && (
-        <p className="text-muted">
+        <p className="text-quaternary">
           {translate('No project allocations are funded by this credit.')}
         </p>
       )}

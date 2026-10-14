@@ -192,7 +192,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Preview Configuration')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Review the configuration below before applying it to the offering.',
         )}
@@ -206,7 +206,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('Auth URL')}
                 </td>
                 <td>
@@ -214,15 +214,15 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Username')}</td>
+                <td className="text-quaternary">{translate('Username')}</td>
                 <td>{values.username}</td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('User domain')}</td>
+                <td className="text-quaternary">{translate('User domain')}</td>
                 <td>{values.user_domain_name}</td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Project')}</td>
+                <td className="text-quaternary">{translate('Project')}</td>
                 <td>{values.project_name}</td>
               </tr>
             </tbody>
@@ -238,19 +238,19 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('External network')}
                 </td>
                 <td>{renderFieldOrDash(selectedNetwork?.name)}</td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Instance availability zone')}
                 </td>
                 <td>{renderFieldOrDash(values.selectedInstanceAZ)}</td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Volume availability zone')}
                 </td>
                 <td>{renderFieldOrDash(values.selectedVolumeAZ)}</td>
@@ -279,7 +279,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
               <tbody>
                 {values.flavor_exclude_regex && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Flavor exclude regex')}
                     </td>
                     <td>
@@ -289,7 +289,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.volume_type_blacklist && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Blacklisted volume types')}
                     </td>
                     <td>{values.volume_type_blacklist}</td>
@@ -297,7 +297,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.console_type && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Console type')}
                     </td>
                     <td>{values.console_type}</td>
@@ -305,7 +305,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.console_domain_override && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Console domain override')}
                     </td>
                     <td>{values.console_domain_override}</td>
@@ -313,7 +313,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.dns_nameservers?.length > 0 && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('DNS nameservers')}
                     </td>
                     <td>{values.dns_nameservers.join(', ')}</td>
@@ -321,7 +321,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.create_ha_routers && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('HA routers')}
                     </td>
                     <td>{translate('Enabled')}</td>
@@ -329,7 +329,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.live_resize_of_volumes_enabled && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Live volume resize')}
                     </td>
                     <td>{translate('Enabled')}</td>
@@ -337,7 +337,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.max_concurrent_provision_instance != null && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Max concurrent (instances)')}
                     </td>
                     <td>{values.max_concurrent_provision_instance}</td>
@@ -345,7 +345,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.max_concurrent_provision_volume != null && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Max concurrent (volumes)')}
                     </td>
                     <td>{values.max_concurrent_provision_volume}</td>
@@ -353,7 +353,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.max_concurrent_provision_snapshot != null && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Max concurrent (snapshots)')}
                     </td>
                     <td>{values.max_concurrent_provision_snapshot}</td>
@@ -378,7 +378,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
               <tbody>
                 {values.default_internal_network_mtu != null && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Default internal network MTU')}
                     </td>
                     <td>{values.default_internal_network_mtu}</td>
@@ -386,7 +386,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.snapshot_size_limit_gb != null && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Snapshot size limit')}
                     </td>
                     <td>{values.snapshot_size_limit_gb} GB</td>
@@ -394,7 +394,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.max_instances != null && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Max instances per tenant')}
                     </td>
                     <td>{values.max_instances}</td>
@@ -402,7 +402,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 )}
                 {values.max_volumes != null && (
                   <tr>
-                    <td className="text-muted" style={{ width: '40%' }}>
+                    <td className="text-quaternary" style={{ width: '40%' }}>
                       {translate('Max volumes per tenant')}
                     </td>
                     <td>{values.max_volumes}</td>
@@ -426,7 +426,10 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                   {Object.entries(values.previewResult.service_attributes).map(
                     ([key, value]) => (
                       <tr key={key}>
-                        <td className="text-muted" style={{ width: '40%' }}>
+                        <td
+                          className="text-quaternary"
+                          style={{ width: '40%' }}
+                        >
                           <code>{key}</code>
                         </td>
                         <td>
@@ -455,7 +458,10 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                     {Object.entries(values.previewResult.plugin_options).map(
                       ([key, value]) => (
                         <tr key={key}>
-                          <td className="text-muted" style={{ width: '40%' }}>
+                          <td
+                            className="text-quaternary"
+                            style={{ width: '40%' }}
+                          >
                             <code>{key}</code>
                           </td>
                           <td>
@@ -474,7 +480,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                   </tbody>
                 </Table>
               ) : (
-                <span className="text-muted">
+                <span className="text-quaternary">
                   {translate('No plugin options')}
                 </span>
               )}

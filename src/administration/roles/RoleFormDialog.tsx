@@ -192,7 +192,7 @@ export const RoleFormDialog: FC<RoleFormDialogProps> = (props) => {
             footer={
               <>
                 {/* The whole role at a glance, beside the actions. */}
-                <span className="text-muted me-auto role-form__summary">
+                <span className="text-quaternary me-auto role-form__summary">
                   {getPermissionSummary(
                     Array.isArray(values.permissions) ? values.permissions : [],
                   )}

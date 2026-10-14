@@ -1,5 +1,3 @@
-$mode: default;
-
 // Config is imported at the top level on purpose: variables declared inside a
 // block become block-locals, and Metronic partials assign to shared names
 // (notably `$border-color`) from within rules, which would then wipe the value

@@ -61,7 +61,7 @@ export const RequestEndDateChangeDialog: React.FC<
               </>
             }
           >
-            <p className="text-gray-700">
+            <p className="text-secondary">
               {translate(
                 'Ask for the end date of this resource to be changed. Someone who can change it will review your request.',
               )}

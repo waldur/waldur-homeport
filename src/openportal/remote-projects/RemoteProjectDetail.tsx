@@ -188,7 +188,7 @@ export const RemoteProjectDetail = () => {
         <Card className="mb-4">
           <Card.Body>
             <details>
-              <summary className="fw-semibold cursor-pointer">
+              <summary className="font-semibold cursor-pointer">
                 {translate('Sync details')}
                 {!row.last_confirmed_details && (
                   <Badge
@@ -218,7 +218,7 @@ export const RemoteProjectDetail = () => {
         <Card className="mb-4">
           <Card.Body>
             <details>
-              <summary className="fw-semibold cursor-pointer">
+              <summary className="font-semibold cursor-pointer">
                 {translate('Pending sync')}
               </summary>
               <div className="mt-3">
@@ -250,8 +250,11 @@ export const RemoteProjectDetail = () => {
           {row.notes && row.notes.length > 0 ? (
             <div className="d-flex flex-column gap-2">
               {row.notes.map((note, index) => (
-                <div key={index} className="border-bottom pb-2">
-                  <div className="text-muted small">
+                <div
+                  key={index}
+                  className="border-b-[1px] border-b-secondary pb-2"
+                >
+                  <div className="text-quaternary small">
                     {note.author} &middot; {formatDateTime(note.timestamp)}
                   </div>
                   <div>{note.text}</div>
@@ -259,7 +262,9 @@ export const RemoteProjectDetail = () => {
               ))}
             </div>
           ) : (
-            <span className="text-muted">{translate('No notes yet.')}</span>
+            <span className="text-quaternary">
+              {translate('No notes yet.')}
+            </span>
           )}
         </Card.Body>
       </Card>

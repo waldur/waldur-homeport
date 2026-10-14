@@ -28,11 +28,11 @@ export const AccountSettingValue: FC<AccountSettingValueProps> = ({
   <div className="d-flex flex-column align-items-start">
     <span>{label ?? setting.value}</span>
     {setting.source === 'provider' ? (
-      <small className="text-muted">
+      <small className="text-quaternary">
         {translate('Inherited from service provider')}
       </small>
     ) : setting.source === 'default' ? (
-      <small className="text-muted">{translate('Default')}</small>
+      <small className="text-quaternary">{translate('Default')}</small>
     ) : onReset ? (
       <BaseButton
         variant="text-primary"

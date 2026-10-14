@@ -28,7 +28,7 @@ export const AffectedOfferingsTable: FC<AffectedOfferingsTableProps> = ({
 
   if (!selectedOfferings?.length) {
     return (
-      <p className="text-muted text-center">
+      <p className="text-quaternary text-center">
         {translate('No offering is affected')}
       </p>
     );

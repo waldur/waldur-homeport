@@ -37,7 +37,7 @@ export const K8sOptionCard: FC<PropsWithChildren<K8sOptionCardProps>> = ({
             {label}
             {required && <span className="text-danger ms-1">*</span>}
           </h5>
-          {helpText && <p className="text-muted mb-0">{helpText}</p>}
+          {helpText && <p className="text-quaternary mb-0">{helpText}</p>}
         </div>
       )}
       {error && (

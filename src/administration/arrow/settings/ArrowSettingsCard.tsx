@@ -72,7 +72,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
           <h4 className="mb-4">
             {translate('Arrow Integration Not Configured')}
           </h4>
-          <p className="text-muted mb-6">
+          <p className="text-quaternary mb-6">
             {translate(
               'Connect your Arrow (ArrowSphere) account to synchronize billing data with Waldur.',
             )}
@@ -102,7 +102,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '30%' }}>
+                <td className="text-quaternary" style={{ width: '30%' }}>
                   {translate('API URL')}
                 </td>
                 <td>
@@ -113,11 +113,13 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Partner Name')}</td>
+                <td className="text-quaternary">{translate('Partner Name')}</td>
                 <td>{currentSettings.partner_name || DASH_ESCAPE_CODE}</td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Partner Reference')}</td>
+                <td className="text-quaternary">
+                  {translate('Partner Reference')}
+                </td>
                 <td>
                   {currentSettings.partner_reference ? (
                     <span className="d-flex align-items-center gap-2">
@@ -133,7 +135,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Export Type Reference')}
                 </td>
                 <td>
@@ -151,7 +153,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Invoice Price Source')}
                 </td>
                 <td>
@@ -161,14 +163,14 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Invoice Item Prefix')}
                 </td>
                 <td>
                   <div>
                     {currentSettings.invoice_item_prefix || 'Arrow consumption'}
                   </div>
-                  <div className="text-muted small mt-1">
+                  <div className="text-quaternary small mt-1">
                     {translate(
                       'Consumption items appear as "{prefix}: {resource name}" and adjustments as "{prefix} adjustment: {resource name} (additional charge|credit)".',
                       {
@@ -181,7 +183,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Sync Enabled')}</td>
+                <td className="text-quaternary">{translate('Sync Enabled')}</td>
                 <td>
                   <Badge
                     variant={
@@ -197,7 +199,7 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Created')}</td>
+                <td className="text-quaternary">{translate('Created')}</td>
                 <td>{formatDateTime(currentSettings.created)}</td>
               </tr>
             </tbody>

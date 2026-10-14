@@ -31,8 +31,8 @@ const GridField: FunctionComponent<{ label: string; children: ReactNode }> = ({
   children,
 }) => (
   <>
-    <div className="text-gray-700 fw-bold">{label}:</div>
-    <div className="text-gray-500">{children}</div>
+    <div className="text-secondary font-medium">{label}:</div>
+    <div className="text-quaternary">{children}</div>
   </>
 );
 

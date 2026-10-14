@@ -74,7 +74,7 @@ const ResourceField = ({ row }) => {
     <div className="d-flex align-items-center gap-1">
       <BaseButton
         variant="tertiary-ghost"
-        className="text-anchor fw-normal"
+        className="text-anchor font-normal"
         onClick={callback}
         label={row.name || row.offering_name}
         size="lg"

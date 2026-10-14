@@ -31,9 +31,9 @@ const FieldsListMapping = ({
 }) => {
   return (
     <Form.Group>
-      <table className="table align-middle table-row-bordered border-bottom mb-3">
+      <table className="table align-middle table-row-bordered border-b-[1px] border-b-secondary mb-3">
         <thead>
-          <tr className="text-muted fs-7 fw-bold">
+          <tr className="text-quaternary fs-7 font-medium">
             <td className="w-50">{translate('Remote category')}</td>
             <td className="w-50">{translate('Local category')}</td>
           </tr>
@@ -42,12 +42,12 @@ const FieldsListMapping = ({
           {fields.map((component, i) =>
             component ? (
               <tr key={component}>
-                <td className="text-dark">
+                <td className="text-primary">
                   {fields.value[i].remote_category}
                   <HelpIcon
                     label={
                       <>
-                        <p className="fw-bold text-start mb-1">
+                        <p className="font-medium text-start mb-1">
                           {translate('Offerings')}
                         </p>
                         <ul className="mb-0">

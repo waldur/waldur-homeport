@@ -52,7 +52,7 @@ export const RequestEndDateChangePendingDialog: FC<Props> = ({
         </>
       }
     >
-      <p className="text-gray-700">
+      <p className="text-secondary">
         {translate(
           'You already have a pending request to change the end date of resource {name} to {date}.',
           {

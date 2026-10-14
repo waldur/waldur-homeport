@@ -23,7 +23,7 @@ vi.mock('waldur-design-tokens', async () => {
       if (gray) {
         return ramp(gray[1] ? 'gray-dark' : 'gray', gray[2]) ?? fallback;
       }
-      if (name === '--surface-card-bg') {
+      if (name === '--card-bg') {
         return state.dark ? ramp('gray-dark', '900') : '#ffffff';
       }
       return fallback;

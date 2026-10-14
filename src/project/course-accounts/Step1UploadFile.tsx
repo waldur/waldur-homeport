@@ -20,7 +20,7 @@ export const Step1UploadFile: FC = () => {
       component={TemplateUploaderField}
       description={
         <div className="mb-6">
-          <p className="text-muted mb-2">
+          <p className="text-quaternary mb-2">
             {translate('CSV should include headers: {headers}', {
               headers: 'email, description',
             })}

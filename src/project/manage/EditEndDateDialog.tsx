@@ -63,7 +63,7 @@ const ResourcesTable: FC<TableProps & { projectDate }> = ({
     columns={[
       {
         title: translate('Resource name'),
-        render: ({ row }) => <span className="text-dark">{row.name}</span>,
+        render: ({ row }) => <span className="text-primary">{row.name}</span>,
       },
       {
         title: translate('Termination date'),
@@ -73,7 +73,7 @@ const ResourcesTable: FC<TableProps & { projectDate }> = ({
         title: translate('Offering / Category'),
         render: ({ row }) => (
           <>
-            <span className="d-block text-dark">{row.offering_name}</span>
+            <span className="d-block text-primary">{row.offering_name}</span>
             <span className="d-block">{row.category_title}</span>
           </>
         ),
@@ -220,7 +220,7 @@ const FormModalComponent: FC<
             spaceless
             minDate={DateTime.now().plus({ days: 1 }).toISO()}
             description={
-              <span className="text-gray-700">
+              <span className="text-secondary">
                 {translate(
                   'Project end date supersedes resource termination date if resource termination date is after the project end date.',
                 )}
@@ -234,7 +234,7 @@ const FormModalComponent: FC<
             <LoadingErred loadData={refetch} />
           ) : resources?.length && value.meta.dirty ? (
             <>
-              <p className="text-gray-700 fw-bold mt-4">
+              <p className="text-secondary font-medium mt-4">
                 {translate(
                   "You've changed the project end date. Some resources now conflict with this date. Review the list below to align or confirm resource termination dates.",
                 )}
@@ -270,7 +270,7 @@ const FormModalComponent: FC<
             className="d-flex flex-column flex-grow-1"
             style={{ minHeight: 0 }}
           >
-            <p className="text-gray-700 mb-4">
+            <p className="text-secondary mb-4">
               {translate(
                 'The following resources were not selected and will be forcibly terminated on the project end date:',
               )}

@@ -97,7 +97,7 @@ export const FeedbackForm: FC<Props> = ({
             {({ values: v }) => (
               <div
                 id={COUNTER_ID}
-                className="text-muted small text-end mt-1"
+                className="text-quaternary small text-end mt-1"
                 aria-live="polite"
                 aria-atomic="true"
               >

@@ -90,9 +90,9 @@ const InvoiceItemLine: FC<{
     <tr
       className={
         isDiscount
-          ? 'bg-light-success'
+          ? 'bg-success-subtle'
           : isCompensation
-            ? 'bg-light'
+            ? 'bg-tertiary dark:bg-quaternary'
             : undefined
       }
     >
@@ -102,7 +102,7 @@ const InvoiceItemLine: FC<{
             autoWidth={true}
             label={
               <>
-                <div className="mb-1 fw-bold">
+                <div className="mb-1 font-medium">
                   {translate('Volume discount')}
                   {componentLabel ? ` — ${componentLabel}` : ''}
                   {dd.discount_percent != null
@@ -110,13 +110,13 @@ const InvoiceItemLine: FC<{
                     : ''}
                 </div>
                 {dd.aggregated_usage != null && (
-                  <div className="text-muted">
+                  <div className="text-quaternary">
                     {translate('Organization-aggregated usage')}:{' '}
                     {dd.aggregated_usage}
                   </div>
                 )}
                 {dd.discount_formula && (
-                  <div className="text-muted">
+                  <div className="text-quaternary">
                     {translate('Formula')}: {dd.discount_formula}
                   </div>
                 )}
@@ -132,12 +132,12 @@ const InvoiceItemLine: FC<{
               <WarningCircleIcon
                 weight="bold"
                 size={16}
-                className="text-gray-400"
+                className="text-quinary"
               />
             </span>
           </Tooltip>
         ) : isCompensation ? (
-          <span className="text-muted ps-5">
+          <span className="text-quaternary ps-5">
             ↳ {translate('Credit compensation')}
             {componentLabel ? ` — ${componentLabel}` : ''}
           </span>
@@ -160,7 +160,10 @@ const InvoiceItemLine: FC<{
       <td className="text-nowrap">
         {item.measured_unit}
         {getBillingUnitSuffix(item.unit) && (
-          <span className="text-muted"> {getBillingUnitSuffix(item.unit)}</span>
+          <span className="text-quaternary">
+            {' '}
+            {getBillingUnitSuffix(item.unit)}
+          </span>
         )}
       </td>
       {item.details.resource_limit_periods ? (
@@ -178,7 +181,7 @@ const InvoiceItemLine: FC<{
             <WarningCircleIcon
               weight="bold"
               size={16}
-              className="text-gray-400"
+              className="text-quinary"
             />
           </td>
         </Tooltip>
@@ -221,19 +224,19 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
     4 + (props.showPrice ? 2 + (props.showVat ? 1 : 0) : 0) + 1;
 
   const renderPlanHeader = (group: InvoicePlanGroup) => (
-    <tr className="bg-light">
+    <tr className="bg-tertiary dark:bg-quaternary">
       <td colSpan={props.showPrice ? columnCount - 2 : columnCount}>
-        <span className="fw-bold">{translate('Plan')}: </span>
+        <span className="font-medium">{translate('Plan')}: </span>
         {group.plan_name || translate('No plan')}
         {group.start && group.end && (
-          <span className="text-muted ms-3">
+          <span className="text-quaternary ms-3">
             {formatDate(group.start)} – {formatDate(group.end)}
           </span>
         )}
       </td>
       {props.showPrice && (
         <>
-          <td className="fw-bold">
+          <td className="font-medium">
             {defaultCurrency(props.showVat ? group.total : group.price)}
           </td>
           <td />

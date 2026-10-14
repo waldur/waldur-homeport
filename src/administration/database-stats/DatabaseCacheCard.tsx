@@ -34,13 +34,13 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
     >
       <Row>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Hit ratios')}
           </h6>
           <div className="mb-4">
             <div className="d-flex justify-content-between mb-1">
               <span>{translate('Buffer cache')}</span>
-              <span className="fw-semibold">
+              <span className="font-semibold">
                 {formatPercent(data.buffer_cache_hit_ratio)}
               </span>
             </div>
@@ -53,7 +53,7 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           <div>
             <div className="d-flex justify-content-between mb-1">
               <span>{translate('Index cache')}</span>
-              <span className="fw-semibold">
+              <span className="font-semibold">
                 {formatPercent(data.index_hit_ratio)}
               </span>
             </div>
@@ -65,28 +65,30 @@ export const DatabaseCacheCard: FC<DatabaseCacheCardProps> = ({ data }) => {
           </div>
         </Col>
         <Col lg={6}>
-          <h6 className="text-uppercase text-muted mb-3">
+          <h6 className="text-uppercase text-quaternary mb-3">
             {translate('Memory settings')}
           </h6>
           <Table size="sm" borderless className="mb-0">
             <tbody>
               <tr>
-                <td className="text-muted">{translate('Shared buffers')}</td>
-                <td className="fw-semibold text-end">
+                <td className="text-quaternary">
+                  {translate('Shared buffers')}
+                </td>
+                <td className="font-semibold text-end">
                   <code>{data.shared_buffers}</code>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Effective cache size')}
                 </td>
-                <td className="fw-semibold text-end">
+                <td className="font-semibold text-end">
                   <code>{data.effective_cache_size}</code>
                 </td>
               </tr>
             </tbody>
           </Table>
-          <small className="text-muted mt-3 d-block">
+          <small className="text-quaternary mt-3 d-block">
             {translate('Values are in 8KB pages')}
           </small>
         </Col>

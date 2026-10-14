@@ -88,7 +88,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Preview Settings')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Review the settings below before saving. These will be stored in the system configuration.',
         )}
@@ -102,7 +102,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('API URL')}
                 </td>
                 <td>
@@ -110,14 +110,14 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Authentication Method')}
                 </td>
                 <td>{getAtlassianAuthMethodLabel(values.auth_method)}</td>
               </tr>
               {values.auth_method === 'oauth2_client_credentials' && (
                 <tr>
-                  <td className="text-muted">{translate('Client ID')}</td>
+                  <td className="text-quaternary">{translate('Client ID')}</td>
                   <td>
                     <code>{values.client_id}</code>
                   </td>
@@ -136,16 +136,18 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('Selected Project')}
                 </td>
                 <td>
                   <strong>{selectedProject?.name}</strong>{' '}
-                  <span className="text-muted">({selectedProject?.key})</span>
+                  <span className="text-quaternary">
+                    ({selectedProject?.key})
+                  </span>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Project ID')}</td>
+                <td className="text-quaternary">{translate('Project ID')}</td>
                 <td>
                   <code>{selectedProject?.id}</code>
                 </td>
@@ -180,7 +182,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
               </tbody>
             </Table>
           ) : (
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('No request types selected')}
             </span>
           )}
@@ -195,111 +197,117 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('Reporter Field')}
                 </td>
                 <td>
                   {values.fieldMappings?.reporter_field ? (
                     <code>{values.fieldMappings.reporter_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Impact Field')}</td>
+                <td className="text-quaternary">{translate('Impact Field')}</td>
                 <td>
                   {values.fieldMappings?.impact_field ? (
                     <code>{values.fieldMappings.impact_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Organisation Field')}
                 </td>
                 <td>
                   {values.fieldMappings?.organisation_field ? (
                     <code>{values.fieldMappings.organisation_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Project Field')}</td>
+                <td className="text-quaternary">
+                  {translate('Project Field')}
+                </td>
                 <td>
                   {values.fieldMappings?.project_field ? (
                     <code>{values.fieldMappings.project_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Affected Resource Field')}
                 </td>
                 <td>
                   {values.fieldMappings?.affected_resource_field ? (
                     <code>{values.fieldMappings.affected_resource_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Caller Field')}</td>
+                <td className="text-quaternary">{translate('Caller Field')}</td>
                 <td>
                   {values.fieldMappings?.caller_field ? (
                     <code>{values.fieldMappings.caller_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Template Field')}</td>
+                <td className="text-quaternary">
+                  {translate('Template Field')}
+                </td>
                 <td>
                   {values.fieldMappings?.template_field ? (
                     <code>{values.fieldMappings.template_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Waldur Backend ID Field')}
                 </td>
                 <td>
                   {values.fieldMappings?.waldur_backend_id_field ? (
                     <code>{values.fieldMappings.waldur_backend_id_field}</code>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Not mapped')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Default Priority')}</td>
+                <td className="text-quaternary">
+                  {translate('Default Priority')}
+                </td>
                 <td>
                   {values.fieldMappings?.default_priority ? (
                     <>
@@ -308,19 +316,23 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                       )?.name || values.fieldMappings.default_priority}
                     </>
                   ) : (
-                    <span className="text-muted">{translate('Not set')}</span>
+                    <span className="text-quaternary">
+                      {translate('Not set')}
+                    </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Default Offering Issue Type')}
                 </td>
                 <td>
                   {values.fieldMappings?.default_offering_issue_type ? (
                     <>{values.fieldMappings.default_offering_issue_type}</>
                   ) : (
-                    <span className="text-muted">{translate('Not set')}</span>
+                    <span className="text-quaternary">
+                      {translate('Not set')}
+                    </span>
                   )}
                 </td>
               </tr>

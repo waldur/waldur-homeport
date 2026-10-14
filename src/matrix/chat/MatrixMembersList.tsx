@@ -6,7 +6,7 @@ import { Badge } from 'waldur-ui';
 import Avatar from '@/core/Avatar';
 import { translate } from '@/i18n';
 
-import { getChatAvatarColor } from './chatColors';
+import { getChatAvatarClass } from './chatColors';
 import { useRoomMembers } from './useRoomMembers';
 
 function getRoleBadge(powerLevel: number) {
@@ -22,14 +22,13 @@ export const MatrixMembersList: FC = () => {
 
   return (
     <div className="tc-members p-3">
-      <div className="fw-semibold mb-2">
+      <div className="font-semibold mb-2">
         {translate('Members')} ({members.length})
       </div>
       <div className="d-flex flex-column gap-1">
         {members.map((m) => {
           const roleBadge = getRoleBadge(m.powerLevel);
           const invited = m.membership === 'invite';
-          const color = getChatAvatarColor(m.userId);
           return (
             <div
               key={m.userId}
@@ -44,7 +43,7 @@ export const MatrixMembersList: FC = () => {
                 size={24}
                 circle
                 className="flex-shrink-0"
-                labelClassName={`bg-light-${color} text-${color}`}
+                labelClassName={getChatAvatarClass(m.userId)}
               />
               <span className="text-truncate flex-grow-1">{m.name}</span>
               {roleBadge && (

@@ -36,20 +36,11 @@ describe('generator', () => {
       gray: { steps, ...extra },
     },
   });
-  it('emits a plain value when a step is the same in both themes', () => {
+  it('emits each step as its value: the SCSS ramps are not themed', () => {
     const scss = generateScss({
       ramps: { pink: { steps: { '950': { light: '#4e0d30' } } } },
     });
     expect(scss).toContain('$pink-950: #4e0d30 !default;');
-  });
-
-  it('emits if(isDarkMode()) with dark first for a themed step', () => {
-    const scss = generateScss(
-      tokens({ '50': { light: '#f9fafb', dark: '#161b26' } }),
-    );
-    expect(scss).toContain(
-      '$gray-50: if(isDarkMode(), #161b26, #f9fafb) !default;',
-    );
   });
 
   it('honours scssName, scssDefault and css: false', () => {
@@ -57,21 +48,17 @@ describe('generator', () => {
       ramps: {
         error: {
           scssName: 'danger',
-          steps: { '50': { light: '#fef3f2', dark: '#7a271a' } },
+          steps: { '50': { light: '#fef3f2' } },
         },
         primary: {
           css: false,
           scssDefault: false,
-          steps: { '50': { light: '#f1f7ef', dark: '#174000' } },
+          steps: { '50': { light: '#f1f7ef' } },
         },
       },
     };
-    expect(generateScss(t)).toContain(
-      '$danger-50: if(isDarkMode(), #7a271a, #fef3f2) !default;',
-    );
-    expect(generateScss(t)).toContain(
-      '$primary-50: if(isDarkMode(), #174000, #f1f7ef);',
-    );
+    expect(generateScss(t)).toContain('$danger-50: #fef3f2 !default;');
+    expect(generateScss(t)).toContain('$primary-50: #f1f7ef;');
     expect(generateCss(t)).toContain('--color-error-50: #fef3f2;');
     expect(generateCss(t)).not.toContain('--color-primary');
   });
@@ -95,7 +82,9 @@ describe('generator', () => {
         },
       },
     };
-    expect(generateScss(t)).not.toContain('gray-dark');
+    // No $gray-dark-N variable; only the theme-invariant css-color() map.
+    expect(generateScss(t)).not.toContain('$gray-dark');
+    expect(generateScss(t)).toContain("'gray-dark': (\n    900: #161b26,");
     expect(generateCss(t)).toContain('--color-gray-dark-900: #161b26;');
   });
 
@@ -103,10 +92,12 @@ describe('generator', () => {
     expect(generateCss(readTokens())).not.toMatch(/data-theme/);
   });
 
-  it('rejects a redundant dark value and non-canonical colours', () => {
+  // One stylesheet serves both themes: dark UI picks other steps through the
+  // semantic tokens, so a ramp step has a single value.
+  it('rejects a dark value and non-canonical colours', () => {
     expect(() =>
-      generateScss(tokens({ '50': { light: '#f9fafb', dark: '#f9fafb' } })),
-    ).toThrow(/drop "dark"/);
+      generateScss(tokens({ '50': { light: '#f9fafb', dark: '#161b26' } })),
+    ).toThrow(/no "dark" value/);
     expect(() => generateScss(tokens({ '50': { light: '#F9FAFB' } }))).toThrow(
       /lower-case #rrggbb/,
     );

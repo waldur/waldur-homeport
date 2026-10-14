@@ -15,9 +15,9 @@ export interface ModeOption {
   title: string;
   description: string;
   icon?: ReactNode;
-  /** Tints the icon tile, reusing badgeColors.css's own light-tone pair
-   * (--badge-<variant>-light-bg/-text) rather than a second set of pastel
-   * swatches — same colors Badge's light tone already ships. */
+  /** Tints the icon tile, reusing Badge's light tone
+   * (BADGE_STYLES[variant].light) rather than a second set of pastel
+   * swatches. */
   variant?: BadgeVariant;
 }
 
@@ -93,10 +93,10 @@ const ModePickerOption = ({
     aria-pressed={selected}
     onClick={() => onSelect(mode.key)}
     className={cn(
-      'flex items-start gap-3 rounded-xl border p-4 text-left transition-colors',
+      'flex items-start gap-3 rounded-xl border-[1px] p-4 text-left transition-colors',
       selected
-        ? 'border-[var(--waldur-brand-600)] ring-2 ring-[var(--waldur-brand-100)]'
-        : 'border-[var(--surface-card-border)] hover:bg-[var(--surface-hover-bg)]',
+        ? 'border-brand ring-2 ring-[var(--bg-brand-subtle)]'
+        : 'border-secondary hover:bg-primary-hover',
     )}
   >
     {mode.icon && (
@@ -110,12 +110,8 @@ const ModePickerOption = ({
       </span>
     )}
     <span className="flex min-w-0 flex-col gap-1">
-      <span className="font-semibold text-[var(--surface-text-primary)]">
-        {mode.title}
-      </span>
-      <span className="text-sm text-[var(--surface-text-secondary)]">
-        {mode.description}
-      </span>
+      <span className="font-semibold text-primary">{mode.title}</span>
+      <span className="text-sm text-quaternary">{mode.description}</span>
     </span>
   </button>
 );

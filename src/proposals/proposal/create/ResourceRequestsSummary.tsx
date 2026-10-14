@@ -57,7 +57,7 @@ const offeringWithAwardColumn = (
         <span>{row.requested_offering.offering_name}</span>
         {match && <AwardChangeBadge change={match.change} />}
         {match?.change === 'moved' && (
-          <span className="text-muted fs-7">
+          <span className="text-quaternary fs-7">
             {translate('To {offering}', {
               offering: match.awarded.requested_offering.offering_name,
             })}
@@ -120,7 +120,7 @@ export const ResourceRequestsSummary = ({
       title={translate('Resource requests')}
       actions={
         chosen ? (
-          <span className="text-muted fw-semibold fs-7">{chosen}</span>
+          <span className="text-quaternary font-semibold fs-7">{chosen}</span>
         ) : undefined
       }
       subtitle={

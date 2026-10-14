@@ -143,18 +143,18 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
         totalRow={(columnCount) =>
           shouldConcealPrices ? null : (
             <>
-              <tr className="fw-bolder">
-                <td colSpan={columnCount - 1} className="text-dark text-end">
+              <tr className="font-semibold">
+                <td colSpan={columnCount - 1} className="text-primary text-end">
                   {translate('Total cost')}
                 </td>
-                <td className="text-dark">
+                <td className="text-primary">
                   {defaultCurrency(data.changedTotalPeriods[0], false, true)}
                   {getPlanUnitAbbr(order.plan_unit)}
                 </td>
               </tr>
               {data.hasUsageSide && (
                 <tr>
-                  <td colSpan={columnCount} className="text-muted fs-7">
+                  <td colSpan={columnCount} className="text-quaternary fs-7">
                     {translate(
                       'Usage-based components are billed on consumption and are not included in the total.',
                     )}

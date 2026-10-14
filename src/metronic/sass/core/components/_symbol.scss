@@ -12,7 +12,11 @@
 
   // Darkmode background in lists
   .list-group-item & {
-    background-color: if(isDarkMode(), #ffffff, inherit);
+    background-color: inherit;
+
+    @include dark-theme {
+      background-color: #ffffff;
+    }
   }
 
   // Label
@@ -21,10 +25,10 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     line-height: 1;
-    color: $text-quaternary;
-    background-color: $bg-tertiary;
+    color: var(--text-quaternary);
+    background-color: var(--bg-tertiary);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

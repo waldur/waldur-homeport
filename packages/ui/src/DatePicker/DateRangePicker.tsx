@@ -205,7 +205,7 @@ export const DateRangePicker = forwardRef<
             disabled={!value}
             minuteStep={minuteStep}
           />
-          <span className="text-[var(--surface-text-muted)]">–</span>
+          <span className="text-quinary">–</span>
           <TimeInput
             label={translate('End time')}
             value={value ? DateTime.fromJSDate(value[1]) : undefined}

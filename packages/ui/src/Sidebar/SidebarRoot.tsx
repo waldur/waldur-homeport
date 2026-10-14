@@ -56,7 +56,7 @@ export function Sidebar({
     return (
       <div
         className={cn(
-          'flex h-full w-(--sidebar-width) flex-col border-[color:var(--surface-sidebar-border)] bg-[var(--surface-sidebar-bg)]',
+          'flex h-full w-(--sidebar-width) flex-col border-[color:var(--sidebar-border)] bg-[var(--sidebar-bg)]',
           className,
         )}
         {...props}
@@ -109,8 +109,8 @@ export function Sidebar({
           collapsible === 'icon' &&
             'data-[collapsible=icon]:w-(--sidebar-width-icon)!',
           side === 'left'
-            ? 'border-r border-[color:var(--surface-sidebar-border)]'
-            : 'border-l border-[color:var(--surface-sidebar-border)]',
+            ? 'border-r border-[color:var(--sidebar-border)]'
+            : 'border-l border-[color:var(--sidebar-border)]',
           // Hover-expanded rail styling with subtle drop shadow
           canHoverExpand &&
             isHoverExpanded &&
@@ -124,7 +124,7 @@ export function Sidebar({
         onMouseLeave={() => setIsHoverExpanded(false)}
         {...props}
       >
-        <div className="flex h-full w-full flex-col bg-[var(--surface-sidebar-bg)]">
+        <div className="flex h-full w-full flex-col bg-[var(--sidebar-bg)]">
           {children}
         </div>
       </div>

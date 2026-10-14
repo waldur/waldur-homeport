@@ -129,8 +129,8 @@ function AppShellContent({
           toast stack for free, matching ShellErrorBoundary below. */}
       <NotificationProvider />
       <SidebarProvider
-        className="h-svh w-full text-[var(--surface-text-primary)]"
-        style={{ backgroundColor: 'var(--surface-page-bg)' }}
+        className="h-svh w-full text-primary"
+        style={{ backgroundColor: 'var(--page-bg)' }}
       >
         <Sidebar>
           <SidebarHeader className="gap-4">

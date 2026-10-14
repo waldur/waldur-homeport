@@ -25,7 +25,7 @@ export const ServiceProviderAccessSection: FC<
         defaultOpen={false}
         className="mb-4"
       >
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {isViewerStaffOrSupport
             ? translate(
                 'No service provider access. This user has not consented to share data with any service providers.',
@@ -70,7 +70,7 @@ export const ServiceProviderAccessSection: FC<
           secondary
         >
           <div className="mb-3">
-            <div className="fw-semibold mb-2">
+            <div className="font-semibold mb-2">
               {translate('Exposed fields')}
             </div>
             <div className="d-flex flex-wrap gap-1">
@@ -88,7 +88,7 @@ export const ServiceProviderAccessSection: FC<
           </div>
 
           {(provider.consent_date || provider.consent_version) && (
-            <div className="d-flex gap-4 text-muted small">
+            <div className="d-flex gap-4 text-quaternary small">
               {provider.consent_date && (
                 <span>
                   {translate('Consent given')}:{' '}
@@ -107,7 +107,7 @@ export const ServiceProviderAccessSection: FC<
             provider.provider_team &&
             provider.provider_team.length > 0 && (
               <div className="mt-4">
-                <div className="fw-semibold mb-2">
+                <div className="font-semibold mb-2">
                   {translate('Provider team members')}
                 </div>
                 <Table responsive hover size="sm" className="mb-0">
@@ -134,7 +134,7 @@ export const ServiceProviderAccessSection: FC<
                               {user.role}
                             </Badge>
                           ) : (
-                            <span className="text-muted">-</span>
+                            <span className="text-quaternary">-</span>
                           )}
                         </td>
                       </tr>

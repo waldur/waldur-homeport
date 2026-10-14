@@ -337,7 +337,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
             )}
           />
         ) : (
-          <span className="text-muted">{row.limitDisplay}</span>
+          <span className="text-quaternary">{row.limitDisplay}</span>
         )}
       </td>
       <td>
@@ -352,7 +352,7 @@ const QuotaTableRow: FC<QuotaTableRowProps> = ({ row }) => {
             showSign
           />
         ) : (
-          <span className="text-muted">—</span>
+          <span className="text-quaternary">—</span>
         )}
       </td>
     </tr>
@@ -465,7 +465,7 @@ export const SetQuotasDialog: FC<SetQuotasDialogProps> = ({
                             <tr className="table-active">
                               <td
                                 colSpan={5}
-                                className="fw-bold text-muted fs-7"
+                                className="font-medium text-quaternary fs-7"
                               >
                                 {categoryLabel}
                               </td>

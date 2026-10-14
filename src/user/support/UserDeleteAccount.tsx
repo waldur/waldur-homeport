@@ -11,7 +11,7 @@ export const UserDeleteAccount: FC<{ user: User }> = ({ user }) => (
     panelTitle={translate('Delete account')}
     buttonTitle={translate('Request deletion')}
     panelDescription={
-      <ul className="text-gray-500 mb-7">
+      <ul className="text-quaternary mb-7">
         <li>{translate('Permanently delete your account.')}</li>
         <li>{translate('This action cannot be undone.')}</li>
       </ul>

@@ -116,7 +116,7 @@ export const LimitsSection = ({
         </Card.Title>
         {editable && hasSelection && (
           <div className="card-toolbar d-flex align-items-center gap-3">
-            <Stack direction="horizontal" className="fw-normal text-dark">
+            <Stack direction="horizontal" className="font-normal text-primary">
               <BaseButton
                 iconNode={<XIcon weight="bold" />}
                 tooltip={translate('Clear selection')}

@@ -7,8 +7,8 @@
   line-height: 1.555;
 }
 .modal-subtitle {
-  color: $text-quaternary;
-  font-weight: 400;
+  color: var(--text-quaternary);
+  font-weight: var(--font-weight-normal);
   margin-top: 8px;
   line-height: 20px;
 }
@@ -18,9 +18,11 @@
 }
 
 .btn-close {
-  background-image: url(escape-svg(
-    "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='#{$fg-quinary}' d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414'/%3E%3C/svg%3E"
-  ));
+  background-image: escape-svg(svg-close(css-color(gray, 400)));
+
+  @include dark-theme {
+    background-image: escape-svg(svg-close(css-color(gray-dark, 500)));
+  }
 }
 
 .modal-body {
@@ -53,4 +55,12 @@
 
 .modal-md {
   max-width: $modal-md;
+}
+
+// In dark mode the veil is the darkest surface at half strength, not the
+// light one the waldur-ui Dialog uses.
+.modal-backdrop {
+  @include dark-theme {
+    background-color: rgba(css-color(gray-dark, 900), 0.5);
+  }
 }

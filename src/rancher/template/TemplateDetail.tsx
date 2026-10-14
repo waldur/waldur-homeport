@@ -75,7 +75,7 @@ export const TemplateDetail: FunctionComponent = () => {
           {/* Always-expanded sections in one bordered box, split by a rule. */}
           <div
             id="application-template-form"
-            className="border rounded bg-body"
+            className="border rounded bg-primary"
           >
             {state.data!.version.readme && (
               <div>
@@ -88,7 +88,11 @@ export const TemplateDetail: FunctionComponent = () => {
               </div>
             )}
             <div
-              className={state.data!.version.readme ? 'border-top' : undefined}
+              className={
+                state.data!.version.readme
+                  ? 'border-t-[1px] border-t-secondary'
+                  : undefined
+              }
             >
               <Card.Header>
                 <Card.Title>{translate('Configuration')}</Card.Title>

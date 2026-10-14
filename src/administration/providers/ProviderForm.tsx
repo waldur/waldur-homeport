@@ -107,7 +107,7 @@ const AllowedRedirectsField = () => {
             />
 
             {currentHomeportUrl && (
-              <small className="d-block mt-2 text-muted">
+              <small className="d-block mt-2 text-quaternary">
                 {translate('Current application origin: {url}', {
                   url: currentHomeportUrl,
                 })}

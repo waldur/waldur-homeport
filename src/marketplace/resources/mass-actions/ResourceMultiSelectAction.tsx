@@ -46,11 +46,11 @@ export const ResourceMultiSelectAction = ({
         <MultiRestartAction rows={rows} refetch={refetch} />
         <MultiPullAction rows={rows} refetch={refetch} />
         <MultiMoveAction rows={rows} refetch={refetch} />
-        <Menu.Separator className="border-top m-0" />
+        <Menu.Separator className="border-t-[1px] border-t-secondary m-0" />
         <MultiTerminateAction rows={rows} refetch={refetch} />
         {user.is_staff && (
           <>
-            <Menu.Separator className="border-top m-0" />
+            <Menu.Separator className="border-t-[1px] border-t-secondary m-0" />
             <MultiPlacementMapAction rows={rows} />
             <MultiSetDownscaledAction rows={rows} refetch={refetch} />
             <MultiSetPausedAction rows={rows} refetch={refetch} />

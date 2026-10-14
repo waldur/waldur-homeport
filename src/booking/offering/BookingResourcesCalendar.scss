@@ -22,7 +22,7 @@
       hr {
         margin-top: 0;
         margin-bottom: 39px;
-        background-color: var(--bs-gray-400);
+        background-color: var(--border-divider-strong);
       }
     }
 
@@ -48,14 +48,22 @@
 
       &::before {
         top: 0;
-        border-top-color: var(--bs-dark);
+        border-top-color: var(--color-gray-900);
         border-bottom-color: transparent;
+
+        [data-theme='dark'] & {
+          border-top-color: var(--color-gray-dark-50);
+        }
       }
 
       &::after {
         bottom: 0;
         border-top-color: transparent;
-        border-bottom-color: var(--bs-dark);
+        border-bottom-color: var(--color-gray-900);
+
+        [data-theme='dark'] & {
+          border-bottom-color: var(--color-gray-dark-50);
+        }
       }
     }
   }

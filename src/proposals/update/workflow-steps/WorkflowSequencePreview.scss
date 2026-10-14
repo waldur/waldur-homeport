@@ -21,7 +21,7 @@
     left: calc(50% + 12px);
     right: calc(-50% + 12px);
     height: 2px;
-    background: var(--bs-gray-200);
+    background: var(--border-divider);
     z-index: 0;
   }
 
@@ -32,8 +32,8 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    border: 2px solid var(--bs-gray-200);
-    background: var(--bs-body-bg);
+    border: 2px solid var(--border-divider);
+    background: var(--bg-primary);
     z-index: 1;
     line-height: 0;
   }

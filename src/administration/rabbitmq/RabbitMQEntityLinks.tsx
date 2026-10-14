@@ -11,7 +11,7 @@ interface UserLinkProps {
 
 export const UserLink: FC<UserLinkProps> = ({ user }) => {
   if (!user) {
-    return <span className="text-muted">{translate('Unknown user')}</span>;
+    return <span className="text-quaternary">{translate('Unknown user')}</span>;
   }
 
   return (

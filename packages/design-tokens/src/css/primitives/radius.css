@@ -1,0 +1,14 @@
+/**
+ * Border radius tokens and Tailwind theme overrides.
+ *
+ * --radius-md and --radius-lg are pinned to 6px/8px to prevent fractional rem
+ * compression at non-standard root font sizes.
+ *
+ * --radius-modal (20px) is Dialog content and Sidebar mode-switcher card radius
+ * (both pair with bg-[var(--card-bg)]).
+ */
+@theme {
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-modal: 20px;
+}

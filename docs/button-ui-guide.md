@@ -176,12 +176,12 @@ Text variants render with a transparent background and no border in their idle s
 
 ### Design Token Architecture & Dark Theme Inversion
 
-All button colors are defined in [`packages/design-tokens/src/buttonColors.css`](../packages/design-tokens/src/buttonColors.css). Zero button styling relies on Metronic SCSS or runtime Bootstrap mixins.
+All button colors are defined in [`packages/design-tokens/src/css/components/button.css`](../packages/design-tokens/src/css/components/button.css). Zero button styling relies on Metronic SCSS or runtime Bootstrap mixins.
 
 1. **Brand-Reactive vs. Fixed Ramps**:
-   - `primary`, `secondary`, and `text-primary` derive directly from the runtime `--waldur-brand-*` palette (customizable per tenant/deployment).
+   - `primary`, `secondary`, and `text-primary` derive directly from the runtime `--brand-*` palette (customizable per tenant/deployment).
    - `danger`, `warning`, and `success` derive from static error/warning/success ramps.
-   - `tertiary` combines a neutral gray surface with a `--waldur-brand-600` focus ring to ensure WCAG 2.1 compliance on white surfaces.
+   - `tertiary` combines a neutral gray surface with a `--brand-600` focus ring to ensure WCAG 2.1 compliance on white surfaces.
 2. **Dark Mode Mechanics (`:root[data-theme='dark']`)**:
    - In dark mode, buttons automatically map to inverted dark surfaces (`--color-gray-dark-*` and dark brand ramps).
    - Solid buttons (`tertiary`, `secondary`) adopt deep dark surface colors (`gray-dark-950`, `brand-900`) with high-contrast text (`gray-dark-300`, `gray-dark-50`).
@@ -190,28 +190,28 @@ All button colors are defined in [`packages/design-tokens/src/buttonColors.css`]
 ### Complete Token Mapping Reference
 
 ```css
-/* Core button token definitions from buttonColors.css */
+/* Core button token definitions from button.css */
 :root {
-  --btn-primary-bg: var(--waldur-brand-600);
-  --btn-primary-bg-hover: var(--waldur-brand-700);
-  --btn-primary-bg-pressed: var(--waldur-brand-800);
+  --btn-primary-bg: var(--brand-600);
+  --btn-primary-bg-hover: var(--brand-700);
+  --btn-primary-bg-pressed: var(--brand-800);
   --btn-primary-text: #ffffff;
-  --btn-primary-focus-ring: var(--waldur-brand-600);
+  --btn-primary-focus-ring: var(--brand-600);
 
-  --btn-secondary-bg: var(--waldur-brand-50);
-  --btn-secondary-bg-hover: var(--waldur-brand-200);
-  --btn-secondary-bg-pressed: var(--waldur-brand-300);
-  --btn-secondary-border: var(--waldur-brand-300);
-  --btn-secondary-text: var(--waldur-brand-900);
-  --btn-secondary-icon: var(--waldur-brand-500);
-  --btn-secondary-focus-ring: var(--waldur-brand-600);
+  --btn-secondary-bg: var(--brand-50);
+  --btn-secondary-bg-hover: var(--brand-200);
+  --btn-secondary-bg-pressed: var(--brand-300);
+  --btn-secondary-border: var(--brand-300);
+  --btn-secondary-text: var(--brand-900);
+  --btn-secondary-icon: var(--brand-500);
+  --btn-secondary-focus-ring: var(--brand-600);
 
   --btn-tertiary-bg: #ffffff;
   --btn-tertiary-bg-hover: var(--color-gray-50);
   --btn-tertiary-bg-pressed: var(--color-gray-100);
   --btn-tertiary-border: var(--color-gray-300);
   --btn-tertiary-text: var(--color-gray-700);
-  --btn-tertiary-focus-ring: var(--waldur-brand-600);
+  --btn-tertiary-focus-ring: var(--brand-600);
 
   --btn-disabled-bg: var(--color-gray-100);
   --btn-disabled-text: var(--color-gray-400);
@@ -219,22 +219,22 @@ All button colors are defined in [`packages/design-tokens/src/buttonColors.css`]
 }
 
 :root[data-theme='dark'] {
-  --btn-primary-focus-ring: var(--waldur-brand-500);
+  --btn-primary-focus-ring: var(--brand-500);
 
-  --btn-secondary-bg: var(--waldur-brand-900);
-  --btn-secondary-bg-hover: var(--waldur-brand-700);
-  --btn-secondary-bg-pressed: var(--waldur-brand-600);
-  --btn-secondary-border: var(--waldur-brand-400);
+  --btn-secondary-bg: var(--brand-900);
+  --btn-secondary-bg-hover: var(--brand-700);
+  --btn-secondary-bg-pressed: var(--brand-600);
+  --btn-secondary-border: var(--brand-400);
   --btn-secondary-text: var(--color-gray-dark-50);
-  --btn-secondary-icon: var(--waldur-brand-400);
-  --btn-secondary-focus-ring: var(--waldur-brand-500);
+  --btn-secondary-icon: var(--brand-400);
+  --btn-secondary-focus-ring: var(--brand-500);
 
   --btn-tertiary-bg: var(--color-gray-dark-950);
   --btn-tertiary-bg-hover: var(--color-gray-dark-900);
   --btn-tertiary-bg-pressed: var(--color-gray-dark-700);
   --btn-tertiary-border: var(--color-gray-dark-700);
   --btn-tertiary-text: var(--color-gray-dark-300);
-  --btn-tertiary-focus-ring: var(--waldur-brand-500);
+  --btn-tertiary-focus-ring: var(--brand-500);
 
   --btn-disabled-bg: var(--color-gray-dark-800);
   --btn-disabled-text: var(--color-gray-dark-500);

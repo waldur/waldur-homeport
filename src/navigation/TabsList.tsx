@@ -175,7 +175,7 @@ const TabWithChildren: FC<{ parentTab; active: boolean }> = ({
       </li>
       <Menu.Content
         align="start"
-        className="fw-bolder fs-6 py-2 w-200px"
+        className="font-semibold fs-6 py-2 w-200px"
         onKeyDown={handleContentKeyDown}
         onCloseAutoFocus={handleCloseAutoFocus}
       >

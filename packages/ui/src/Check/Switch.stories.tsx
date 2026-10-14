@@ -35,7 +35,7 @@ export const Interactive: Story = {
     return (
       <div className="p-6 flex items-center gap-4">
         <Switch checked={enabled} onCheckedChange={setEnabled} />
-        <span className="text-sm font-medium text-[var(--surface-text-primary)]">
+        <span className="text-sm font-medium text-primary">
           {enabled ? 'Enabled' : 'Disabled'}
         </span>
       </div>
@@ -49,25 +49,25 @@ export const InSettingsRow: Story = {
     const [twoFactor, setTwoFactor] = useState(false);
 
     return (
-      <div className="p-6 bg-[var(--surface-page-bg)] max-w-md space-y-4">
-        <div className="flex items-center justify-between p-3 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)]">
+      <div className="p-6 bg-[var(--page-bg)] max-w-md space-y-4">
+        <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
           <div>
-            <div className="text-sm font-semibold text-[var(--surface-text-primary)]">
+            <div className="text-sm font-semibold text-primary">
               Email Notifications
             </div>
-            <div className="text-xs text-[var(--surface-text-secondary)]">
+            <div className="text-xs text-quaternary">
               Receive alert summaries on resource threshold breaches
             </div>
           </div>
           <Switch checked={emailNotifs} onCheckedChange={setEmailNotifs} />
         </div>
 
-        <div className="flex items-center justify-between p-3 rounded-md border border-[var(--surface-card-border)] bg-[var(--surface-card-bg)]">
+        <div className="flex items-center justify-between p-3 rounded-md border-[1px] border-secondary bg-[var(--card-bg)]">
           <div>
-            <div className="text-sm font-semibold text-[var(--surface-text-primary)]">
+            <div className="text-sm font-semibold text-primary">
               Two-Factor Authentication
             </div>
-            <div className="text-xs text-[var(--surface-text-secondary)]">
+            <div className="text-xs text-quaternary">
               Require OTP verification for administrative changes
             </div>
           </div>

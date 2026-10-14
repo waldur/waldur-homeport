@@ -78,7 +78,7 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
       />
 
       {props.description && (
-        <FormText className="text-muted">{props.description}</FormText>
+        <FormText className="text-quaternary">{props.description}</FormText>
       )}
       {props.showError && fieldProps.meta.touched && (
         <FieldError error={fieldProps.meta.error} />

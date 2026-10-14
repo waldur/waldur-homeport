@@ -63,7 +63,7 @@ const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
       {isLoading ? (
         <LoadingSpinner />
       ) : isError ? (
-        <p className="text-muted">
+        <p className="text-quaternary">
           {translate('Unable to load connection data')}
         </p>
       ) : queues.length > 0 ? (
@@ -75,7 +75,7 @@ const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
           queues={queues}
         />
       ) : (
-        <p className="text-muted">
+        <p className="text-quaternary">
           {translate(
             'No event queue for this agent was found in RabbitMQ. Either the agent has not registered one, or the broker statistics could not be read.',
           )}
@@ -100,13 +100,13 @@ export const AgentIdentityExpandableRow: FC<
           <h6 className="mb-3">{translate('Configuration')}</h6>
           {row.config_file_content ? (
             <pre
-              className="bg-light p-3 rounded"
+              className="bg-tertiary dark:bg-quaternary p-3 rounded"
               style={{ maxHeight: '200px', overflow: 'auto' }}
             >
               {row.config_file_content}
             </pre>
           ) : (
-            <p className="text-muted">
+            <p className="text-quaternary">
               {translate('No configuration content available')}
             </p>
           )}
@@ -115,7 +115,7 @@ export const AgentIdentityExpandableRow: FC<
             row.dependencies.length > 0 && (
               <>
                 <h6 className="mt-4 mb-2">{translate('Dependencies')}</h6>
-                <ul className="list-unstyled text-muted mb-0">
+                <ul className="list-unstyled text-quaternary mb-0">
                   {row.dependencies.map(
                     (
                       dep: { package?: string; version?: string } | string,
@@ -168,7 +168,9 @@ export const AgentIdentityExpandableRow: FC<
               </table>
             </div>
           ) : (
-            <p className="text-muted">{translate('No services registered')}</p>
+            <p className="text-quaternary">
+              {translate('No services registered')}
+            </p>
           )}
         </div>
       </div>

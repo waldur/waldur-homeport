@@ -19,7 +19,7 @@ export const PersonalInfoStep: FC<WizardStepProps> = (props) => {
       {isProfileAttributeEnabled('native_name') && (
         <StringGroup name="native_name" label={translate('Native name')} />
       )}
-      <h6 className="fw-bold mb-4 mt-6">
+      <h6 className="font-medium mb-4 mt-6">
         {translate('Organization & Contact')}
       </h6>
       <StringGroup name="organization" label={translate('Organization name')} />

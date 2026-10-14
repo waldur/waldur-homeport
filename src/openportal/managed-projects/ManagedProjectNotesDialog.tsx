@@ -57,8 +57,11 @@ export const ManagedProjectNotesDialog: React.FC<
             {notes.length > 0 ? (
               <div className="d-flex flex-column gap-2 mb-3">
                 {notes.map((note, index) => (
-                  <div key={index} className="border-bottom pb-2">
-                    <div className="text-muted small">
+                  <div
+                    key={index}
+                    className="border-b-[1px] border-b-secondary pb-2"
+                  >
+                    <div className="text-quaternary small">
                       {note.author} &middot; {formatDateTime(note.timestamp)}
                     </div>
                     <div>{note.text}</div>
@@ -66,7 +69,7 @@ export const ManagedProjectNotesDialog: React.FC<
                 ))}
               </div>
             ) : (
-              <span className="text-muted d-block mb-3">
+              <span className="text-quaternary d-block mb-3">
                 {translate('No notes yet.')}
               </span>
             )}

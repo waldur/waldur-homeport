@@ -24,7 +24,7 @@ const StatCard: FC<{
         <strong className={`fs-1 ${valueClass}`}>{value}</strong>
         {extra}
       </div>
-      <strong className="d-block text-muted">{label}</strong>
+      <strong className="d-block text-quaternary">{label}</strong>
     </Card.Body>
   </Card>
 );

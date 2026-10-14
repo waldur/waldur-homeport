@@ -94,7 +94,7 @@ export const TosViewDialog = ({
               href={tos.terms_of_service_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary"
+              className="text-brand"
             >
               {tos.terms_of_service_link}
             </a>

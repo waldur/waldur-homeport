@@ -48,7 +48,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
           >
             <tbody>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Total DLQ messages')}
                 </td>
                 <td className="text-end">
@@ -61,30 +61,32 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                       {formatNumber(data.total_dlq_messages)}
                     </Badge>
                   ) : (
-                    <span className="fw-semibold text-success">0</span>
+                    <span className="font-semibold text-success">0</span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('DLQ count')}</td>
-                <td className="fw-semibold text-end">{data.dlq_count}</td>
+                <td className="text-quaternary">{translate('DLQ count')}</td>
+                <td className="font-semibold text-end">{data.dlq_count}</td>
               </tr>
             </tbody>
           </Table>
           {data.dlq_queues && data.dlq_queues.length > 0 && (
             <>
-              <h6 className="text-uppercase text-muted mt-4 mb-3">
+              <h6 className="text-uppercase text-quaternary mt-4 mb-3">
                 {translate('DLQ queues')}
               </h6>
               <Table size="sm" borderless className="mb-0">
                 <thead>
                   <tr>
-                    <th className="text-muted">{translate('Vhost')}</th>
-                    <th className="text-muted">{translate('Queue name')}</th>
-                    <th className="text-muted text-end">
+                    <th className="text-quaternary">{translate('Vhost')}</th>
+                    <th className="text-quaternary">
+                      {translate('Queue name')}
+                    </th>
+                    <th className="text-quaternary text-end">
                       {translate('Messages')}
                     </th>
-                    <th className="text-muted text-end">
+                    <th className="text-quaternary text-end">
                       {translate('Consumers')}
                     </th>
                   </tr>
@@ -92,17 +94,17 @@ export const PubSubDeadLetterQueueCard: FC = () => {
                 <tbody>
                   {data.dlq_queues.map((queue, index) => (
                     <tr key={index}>
-                      <td className="text-muted">{queue.vhost}</td>
+                      <td className="text-quaternary">{queue.vhost}</td>
                       <td
                         className="text-truncate"
                         style={{ maxWidth: '250px' }}
                       >
                         {queue.queue_name}
                       </td>
-                      <td className="fw-semibold text-end text-warning">
+                      <td className="font-semibold text-end text-warning">
                         {formatNumber(queue.messages)}
                       </td>
-                      <td className="fw-semibold text-end">
+                      <td className="font-semibold text-end">
                         {queue.consumers}
                       </td>
                     </tr>
@@ -112,7 +114,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
             </>
           )}
           {data.note && (
-            <small className="text-muted mt-3 d-block">{data.note}</small>
+            <small className="text-quaternary mt-3 d-block">{data.note}</small>
           )}
           {hasMessages && (
             <small className="text-warning mt-3 d-block">
@@ -123,7 +125,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
           )}
         </>
       ) : (
-        <p className="text-muted mb-0">
+        <p className="text-quaternary mb-0">
           {translate('Failed to load dead letter queue stats.')}
         </p>
       )}

@@ -88,10 +88,14 @@ export const MatrixCallDockSlot: FC<MatrixCallDockSlotProps> = ({ roomId }) => {
     return (
       <div
         data-testid="dock-slot-pip-placeholder"
-        className="overflow-hidden d-flex flex-column align-items-center justify-content-center gap-2 h-100 w-100 bg-light-secondary"
+        className="overflow-hidden d-flex flex-column align-items-center justify-content-center gap-2 h-100 w-100 bg-brand-subtle"
       >
-        <PictureInPictureIcon size={32} className="text-muted" weight="thin" />
-        <div className="text-muted text-center px-3">
+        <PictureInPictureIcon
+          size={32}
+          className="text-quaternary"
+          weight="thin"
+        />
+        <div className="text-quaternary text-center px-3">
           {translate('Call is playing in Picture-in-Picture')}
         </div>
         <BaseButton

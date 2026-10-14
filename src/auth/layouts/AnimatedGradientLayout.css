@@ -55,7 +55,7 @@
 }
 
 .layout-animated-gradient-card {
-  background: var(--waldur-bg-primary);
+  background: var(--bg-primary);
   border-radius: 16px;
   padding: 2.5rem;
   width: 100%;

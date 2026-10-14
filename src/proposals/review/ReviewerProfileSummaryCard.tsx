@@ -60,18 +60,18 @@ export const ReviewerProfileSummaryCard: FC<
   // No profile exists - show create prompt
   if (!profile) {
     return (
-      <Card className="card-bordered bg-light-warning">
+      <Card className="card-bordered bg-warning-subtle">
         <Card.Body>
           <div className="d-flex align-items-center gap-4">
             <div
-              className="d-flex align-items-center justify-content-center rounded-circle bg-warning text-white"
+              className="d-flex align-items-center justify-content-center rounded-full bg-warning text-white"
               style={{ width: 56, height: 56, minWidth: 56 }}
             >
               <UserIcon size={28} weight="regular" />
             </div>
             <div className="flex-grow-1">
               <h4 className="mb-1">{translate('Reviewer profile required')}</h4>
-              <p className="text-muted mb-0">
+              <p className="text-quaternary mb-0">
                 {translate(
                   'To receive review invitations and participate in proposal reviews, you need to create and publish your reviewer profile.',
                 )}
@@ -118,7 +118,7 @@ export const ReviewerProfileSummaryCard: FC<
               )}
             </div>
 
-            <div className="d-flex flex-wrap align-items-center gap-3 text-muted small">
+            <div className="d-flex flex-wrap align-items-center gap-3 text-quaternary small">
               {profile.orcid_id && (
                 <a
                   href={`https://orcid.org/${profile.orcid_id}`}

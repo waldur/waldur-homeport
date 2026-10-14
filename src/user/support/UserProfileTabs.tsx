@@ -145,7 +145,9 @@ const FieldList = ({
 }) => {
   const visible = fields.filter((f) => f.enabled);
   if (visible.length === 0 && emptyMessage) {
-    return <div className="text-muted text-center py-6">{emptyMessage}</div>;
+    return (
+      <div className="text-quaternary text-center py-6">{emptyMessage}</div>
+    );
   }
   return (
     <>
@@ -949,8 +951,8 @@ const buildStaffFields = ({
             <div className="d-flex flex-column gap-1">
               {claims.map(([claim, value]) => (
                 <div key={claim}>
-                  <span className="fw-semibold me-2">{claim}</span>
-                  <span className="text-muted">
+                  <span className="font-semibold me-2">{claim}</span>
+                  <span className="text-quaternary">
                     {Array.isArray(value) ? value.join(', ') : String(value)}
                   </span>
                 </div>

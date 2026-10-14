@@ -59,7 +59,7 @@ const IssueLogDialog = ({ issue }: { issue: Issue }) => {
           </tbody>
         </Table>
       ) : (
-        <div className="p-6 text-muted text-center">
+        <div className="p-6 text-quaternary text-center">
           {translate('No processing log entries.')}
         </div>
       )}

@@ -48,7 +48,7 @@ const MultilingualImageField = ({
         </Badge>
       ))
     ) : (
-      <span className="text-muted">
+      <span className="text-quaternary">
         {translate('No language-specific logos configured')}
       </span>
     )}
@@ -67,7 +67,9 @@ const LoginPageListField = ({
   value: any[];
 }) => {
   if (!value || !Array.isArray(value) || value.length === 0) {
-    return <span className="text-muted">{translate('Not configured')}</span>;
+    return (
+      <span className="text-quaternary">{translate('Not configured')}</span>
+    );
   }
 
   if (itemKey === 'LOGIN_PAGE_STATS') {
@@ -84,7 +86,7 @@ const LoginPageListField = ({
 
   if (itemKey === 'LOGIN_PAGE_CAROUSEL_SLIDES') {
     return (
-      <span className="text-muted">
+      <span className="text-quaternary">
         {translate('{count} slides configured', { count: value.length })}
       </span>
     );
@@ -92,7 +94,7 @@ const LoginPageListField = ({
 
   if (itemKey === 'LOGIN_PAGE_NEWS') {
     return (
-      <span className="text-muted">
+      <span className="text-quaternary">
         {translate('{count} news items configured', { count: value.length })}
       </span>
     );
@@ -137,7 +139,7 @@ export const FieldRow = ({
       key={item.key}
       label={getKeyTitle(item.key)}
       description={item.description}
-      descriptionClassName="text-gray-600"
+      descriptionClassName="text-tertiary"
       value={
         item.type === 'secret_field' ? (
           <SecretField value={value} />
@@ -167,7 +169,9 @@ export const FieldRow = ({
           value?.trim() ? (
             <TruncatedMarkdown text={value} title={getKeyTitle(item.key)} />
           ) : (
-            <span className="text-muted">{translate('Not configured')}</span>
+            <span className="text-quaternary">
+              {translate('Not configured')}
+            </span>
           )
         ) : item.type === 'multilingual_image_field' ? (
           <MultilingualImageField value={value} />

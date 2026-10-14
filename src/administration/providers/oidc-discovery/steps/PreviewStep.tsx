@@ -33,7 +33,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
   return (
     <WizardModal {...props}>
       <h4 className="mb-4">{translate('Preview Settings')}</h4>
-      <p className="text-muted mb-4">
+      <p className="text-quaternary mb-4">
         {translate(
           'Review the settings below before saving. These will configure the identity provider.',
         )}
@@ -48,7 +48,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('Provider Type')}
                 </td>
                 <td>
@@ -58,19 +58,21 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Discovery URL')}</td>
+                <td className="text-quaternary">
+                  {translate('Discovery URL')}
+                </td>
                 <td>
                   <code className="text-break">{values.discovery_url}</code>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Client ID')}</td>
+                <td className="text-quaternary">{translate('Client ID')}</td>
                 <td>
                   <code>{values.client_id}</code>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Verify SSL')}</td>
+                <td className="text-quaternary">{translate('Verify SSL')}</td>
                 <td>
                   {values.verify_ssl ? translate('Yes') : translate('No')}
                 </td>
@@ -108,7 +110,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
               </tbody>
             </Table>
           ) : (
-            <span className="text-muted">
+            <span className="text-quaternary">
               {translate('No attribute mappings configured')}
             </span>
           )}
@@ -124,7 +126,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
           <Table borderless size="sm">
             <tbody>
               <tr>
-                <td className="text-muted" style={{ width: '40%' }}>
+                <td className="text-quaternary" style={{ width: '40%' }}>
                   {translate('Label')}
                 </td>
                 <td>
@@ -132,49 +134,55 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Extra Scopes')}</td>
+                <td className="text-quaternary">{translate('Extra Scopes')}</td>
                 <td>
                   {values.extra_scope ? (
                     <code>{values.extra_scope}</code>
                   ) : (
-                    <span className="text-muted">{translate('None')}</span>
+                    <span className="text-quaternary">{translate('None')}</span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('User Field')}</td>
+                <td className="text-quaternary">{translate('User Field')}</td>
                 <td>
                   <code>{values.user_field || 'username'}</code>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('User Claim')}</td>
+                <td className="text-quaternary">{translate('User Claim')}</td>
                 <td>
                   <code>{values.user_claim || 'sub'}</code>
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Protected Fields')}</td>
+                <td className="text-quaternary">
+                  {translate('Protected Fields')}
+                </td>
                 <td>
                   {values.protected_fields ? (
                     <code>{values.protected_fields}</code>
                   ) : (
-                    <span className="text-muted">{translate('None')}</span>
+                    <span className="text-quaternary">{translate('None')}</span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Management URL')}</td>
+                <td className="text-quaternary">
+                  {translate('Management URL')}
+                </td>
                 <td>
                   {values.management_url ? (
                     <code>{values.management_url}</code>
                   ) : (
-                    <span className="text-muted">{translate('Not set')}</span>
+                    <span className="text-quaternary">
+                      {translate('Not set')}
+                    </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Allowed Redirect URIs')}
                 </td>
                 <td>
@@ -187,14 +195,14 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                       ))}
                     </ul>
                   ) : (
-                    <span className="text-muted">
+                    <span className="text-quaternary">
                       {translate('Any (fallback to HOMEPORT_URL)')}
                     </span>
                   )}
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('PKCE')}</td>
+                <td className="text-quaternary">{translate('PKCE')}</td>
                 <td>
                   {values.enable_pkce ? (
                     <Badge variant="success" tone="outline">
@@ -208,7 +216,7 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">
+                <td className="text-quaternary">
                   {translate('Post-Logout Redirect')}
                 </td>
                 <td>
@@ -224,7 +232,9 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
                 </td>
               </tr>
               <tr>
-                <td className="text-muted">{translate('Provider Status')}</td>
+                <td className="text-quaternary">
+                  {translate('Provider Status')}
+                </td>
                 <td>
                   {values.is_active ? (
                     <Badge variant="success" tone="outline">

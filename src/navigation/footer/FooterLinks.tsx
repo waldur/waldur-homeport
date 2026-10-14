@@ -12,7 +12,7 @@ export const FooterLinks = () => {
 
   return (
     <ul
-      className={`footer-links m-0 flex list-none p-0 fw-bold order-1 ${
+      className={`footer-links m-0 flex list-none p-0 font-medium order-1 ${
         isMd ? 'justify-content-between w-100' : 'gap-[8px]'
       }`}
     >
