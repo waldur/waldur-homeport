@@ -130,7 +130,7 @@ const TabNavList = ({
     <ul
       className={cn(
         'm-0 p-0 list-none',
-        tabListVariants({ bordered, className }),
+        tabListVariants({ bordered, scrollable, className }),
       )}
       {...props}
     >

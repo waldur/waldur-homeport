@@ -13,12 +13,20 @@ export interface TabStyleProps {
   className?: string;
 }
 
+/**
+ * A strip that is not `scrollable` wraps onto more rows instead of overflowing:
+ * its triggers never shrink (`whitespace-nowrap`), so a long strip would
+ * otherwise widen its container, e.g. push a dialog body into sideways scroll.
+ * A `scrollable` strip stays on one row inside its scroll frame.
+ */
 export const tabListVariants = ({
   bordered = true,
+  scrollable = false,
   className,
-}: TabStyleProps & { bordered?: boolean } = {}) =>
+}: TabStyleProps & { bordered?: boolean; scrollable?: boolean } = {}) =>
   cn(
     'flex items-end gap-[1.23rem] border-b border-[var(--tabs-border)]',
+    !scrollable && 'flex-wrap',
     !bordered && 'border-b-0',
     className,
   );

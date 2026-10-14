@@ -263,7 +263,7 @@ export const TabsList = forwardRef<
           className={
             variant === 'segmented'
               ? segmentedListClassName({ fullWidth, className })
-              : tabListVariants({ bordered, className })
+              : tabListVariants({ bordered, scrollable, className })
           }
           {...props}
         />

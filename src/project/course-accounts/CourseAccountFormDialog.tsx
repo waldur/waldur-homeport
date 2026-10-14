@@ -292,7 +292,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                 value={activeTab}
                 onValueChange={goToTab}
               >
-                <TabsList className="flex-wrap mb-4">
+                <TabsList className="mb-4">
                   <TabsTrigger value="single">
                     {translate('Single account')}
                   </TabsTrigger>
