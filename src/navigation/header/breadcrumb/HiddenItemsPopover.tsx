@@ -17,7 +17,7 @@ export const HiddenItemsPopover: FC<HiddenItemsPopoverProps> = ({ items }) => {
               <Link
                 state={item.to}
                 params={item.params}
-                className="d-block text-primary hover:text-brand hover:bg-[var(--bg-brand-primary-alt)] py-2 px-5"
+                className="d-block text-brand hover:bg-[var(--bg-brand-primary-alt)] py-2 px-5"
                 onClick={item.onClick}
               >
                 <span className="fs-6">{item.text}</span>

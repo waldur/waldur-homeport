@@ -78,7 +78,7 @@ export const OfferingSearchResult = ({
         // Focus stays in the search box; the option is highlighted through
         // aria-activedescendant, not focused.
         tabIndex={-1}
-        className="d-flex flex-grow-1 min-w-0 align-items-center text-primary hover:text-brand ps-4 pe-2 py-2"
+        className="d-flex flex-grow-1 min-w-0 align-items-center text-brand ps-4 pe-2 py-2"
       >
         {/* Decorative: the name follows. */}
         <span aria-hidden="true" className="flex-shrink-0 me-4">
