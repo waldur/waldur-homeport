@@ -100,7 +100,7 @@ $bg-height: 232px;
       align-items: center;
     }
 
-    #search-box-wrapper {
+    .landing-hero__search-box {
       input {
         color: var(--brand-500);
         @include placeholder(var(--brand-500));
@@ -114,11 +114,13 @@ $bg-height: 232px;
           border-color: var(--color-gray-dark-600);
         }
       }
-      svg path {
-        fill: var(--brand-500);
+      // Through the mixin FilterBox's own icon colour comes from
+      // (_forms.scss), scoped deeper so that it wins.
+      .input-group-icon {
+        @include svg-icon-color(var(--brand-500));
 
         @include dark-theme {
-          fill: var(--color-gray-dark-500);
+          @include svg-icon-color(var(--color-gray-dark-500));
         }
       }
 
@@ -131,8 +133,8 @@ $bg-height: 232px;
             background-color: white;
             border-color: var(--border-primary);
           }
-          svg path {
-            fill: var(--text-quaternary);
+          .input-group-icon {
+            @include svg-icon-color(var(--text-quaternary));
           }
         }
       }

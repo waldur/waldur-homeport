@@ -1,127 +1,191 @@
-import {
-  InfiniteData,
-  QueryFunction,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
-import { debounce } from 'lodash-es';
-import { useCallback, useState } from 'react';
+import classNames from 'classnames';
+import { Fragment, ReactNode, useState } from 'react';
 
 import { Popover, PopoverAnchor, PopoverContent } from 'waldur-ui';
 
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
-import { DataPage, processApiResponse, SdkFunction } from '@/table/api';
+import { SdkFunction } from '@/table/api';
 
-import { InfiniteList } from './InfiniteList';
 import { BaseAsyncListProps, RowData } from './types';
+import {
+  ComboboxLinkItem,
+  ComboboxRow,
+  useAsyncCombobox,
+} from './useAsyncCombobox';
+
+export interface AsyncSearchBoxItemProps<Item extends ComboboxLinkItem> {
+  item: ComboboxRow<Item>;
+  /** Whether the row is the combobox's highlighted option. */
+  highlighted: boolean;
+  /** Downshift's getItemProps, for the row's link: the option. */
+  itemProps: Record<string, any>;
+  /** Closes the results, for a control beside the option. */
+  close: () => void;
+}
 
 interface AsyncSearchBoxProps<
   Fetcher extends SdkFunction,
+  Item extends ComboboxLinkItem,
 > extends BaseAsyncListProps<Fetcher> {
+  /** What a row of the results links to and shows. */
+  getItem: (row: RowData<Fetcher>) => Item;
+  /** The option's text, for downshift. */
+  itemToString: (item: Item) => string;
+  /**
+   * Draws a row: a link carrying `itemProps` (the option, with `tabIndex={-1}`),
+   * and beside it, if anything, controls for the pointer only.
+   */
+  renderItem: (props: AsyncSearchBoxItemProps<Item>) => ReactNode;
+  /** For the search box. */
   className?: string;
   wrapperClassName?: string;
 }
 
-export const AsyncSearchBox = <Fetcher extends SdkFunction>({
-  fetcher,
-  queryKey,
-  queryField,
-  RowComponent,
-  path,
-  params = {},
+/**
+ * A search box whose results drop down below it: a downshift combobox
+ * (useAsyncCombobox). Focus stays in the box while ArrowUp/ArrowDown move a
+ * highlight through the results and Enter opens one; Escape, Tab and a click
+ * elsewhere close them.
+ *
+ * Downshift alone decides when the results show; the Radix Popover only
+ * places them, portaled so the hero's overflow can't clip them. Given no
+ * onOpenChange, Radix can't dismiss them on its own -- it took focus in the
+ * box, which sits in the Anchor, outside the panel, for leaving it.
+ */
+export const AsyncSearchBox = <
+  Fetcher extends SdkFunction,
+  Item extends ComboboxLinkItem,
+>({
+  getItem,
+  itemToString,
+  renderItem,
   emptyMessage = translate('There are no results for this keyword.'),
   placeholder = translate('Search...'),
   className,
   wrapperClassName,
-}: AsyncSearchBoxProps<Fetcher>): JSX.Element => {
-  const [query, setQuery] = useState('');
-
-  const applyQuery = useCallback(
-    debounce((value) => {
-      setQuery(String(value).trim());
-    }, 1000),
-    [setQuery],
-  );
-
+  ...listProps
+}: AsyncSearchBoxProps<Fetcher, Item>): JSX.Element => {
   const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
 
-  type TypedPage = DataPage<RowData<Fetcher>>;
-
-  const queryFn: QueryFunction<TypedPage, unknown[], number> = async ({
-    pageParam = 1,
-    signal,
-  }) => {
-    const result = await fetcher({
-      query: {
-        page: pageParam,
-        ...params,
-        [queryField]: query,
-      },
-      path,
-      signal,
-    });
-    return processApiResponse(result);
-  };
-
-  const context = useInfiniteQuery<TypedPage, Error, InfiniteData<TypedPage>>({
-    queryKey: ['SearchBoxResults', queryKey, params, query],
-    queryFn,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.nextPage,
-    refetchOnWindowFocus: false,
-    // Mirrors `open`, not a separately-driven flag: this popover uses
-    // `Popover.Anchor`, not `Popover.Trigger`, so it opens via direct
-    // `setOpen(true)` calls from the search input's own onFocus/onChange
-    // below, never through Radix's own interaction handling — Anchor has
-    // none. `onOpenChange` only fires for changes Radix itself initiates
-    // (Trigger clicks, Escape, outside-click), so a query gated on a
-    // separate `enabled` state set inside `onOpenChange` never actually
-    // turned on: reported live as the search dropdown showing "Loading"
-    // forever, because no request was ever sent (React Query v5 has no
-    // `idle` status — a permanently-disabled query reports `pending`,
-    // rendering the same as a real in-flight one, indistinguishable in
-    // the UI). Enabling directly off `open` removes the indirection.
-    enabled: open,
+  const {
+    isOpen,
+    context,
+    rows,
+    search,
+    changeSearch,
+    highlightedIndex,
+    getInputProps,
+    getMenuProps,
+    getItemProps,
+    menuRef,
+    sentinelRef,
+    status,
+  } = useAsyncCombobox({
+    ...listProps,
+    getItem,
+    itemToString,
+    emptyMessage,
+    isOpen: open,
+    onIsOpenChange: setOpen,
+    debounceMs: 500,
   });
 
   return (
-    <div id="search-box-wrapper" className={wrapperClassName}>
-      <Popover open={open} onOpenChange={setOpen} modal={false}>
+    <div className={wrapperClassName}>
+      <Popover open={isOpen} modal={false}>
         <PopoverAnchor asChild>
-          {/* Positions the popover only; aria-hidden here hid the input. */}
           <div>
             <FilterBox
-              type="search"
-              placeholder={placeholder}
-              aria-label={placeholder}
-              onFocus={() => setOpen(true)}
-              onChange={(e) => {
-                applyQuery(e.target.value);
-                setOpen(true);
-              }}
-              className={className}
+              {...getInputProps({
+                type: 'search',
+                'aria-label': placeholder,
+                placeholder,
+                autoComplete: 'off',
+                spellCheck: false,
+                value: search,
+                onChange: (event: any) => changeSearch(event.target.value),
+                // The results show as the box takes focus, by Tab too.
+                onFocus: () => setOpen(true),
+                preventEnterSubmit: false,
+                className,
+              })}
             />
           </div>
         </PopoverAnchor>
         <PopoverContent
-          // Keeps focus in the search input instead of Radix's default
-          // of moving it into the panel on open — the user is mid-typing.
+          // Focus stays in the search box; the results are pointed at.
           onOpenAutoFocus={(e) => e.preventDefault()}
+          onCloseAutoFocus={(e) => e.preventDefault()}
           align="start"
           sideOffset={2}
-          // Search results, not menu rows: a plain popover, kept on the nav
-          // menus' layer with their background and entrance.
-          className="search-results-dropdown z-nav-menu flex flex-col bg-[var(--menu-bg)] mw-400px mh-300px py-2 animate-[waldur-menu-enter-up_0.3s_ease] data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease] motion-reduce:animate-none"
+          // As wide as the box, but not narrower than a row needs.
+          className="search-results-dropdown z-nav-menu flex flex-col bg-[var(--menu-bg)] w-(--radix-popover-trigger-width) min-w-[280px] animate-[waldur-menu-enter-up_0.3s_ease] data-[side=top]:animate-[waldur-menu-enter-down_0.3s_ease] motion-reduce:animate-none"
         >
-          <div className="overflow-auto">
-            <InfiniteList
-              RowComponent={RowComponent}
-              context={context}
-              emptyMessage={emptyMessage}
-            />
+          {/* What the list holds instead of rows sits beside it: a
+              listbox takes only options. */}
+          {context.status === 'pending' ? (
+            <div
+              role="progressbar"
+              aria-label={translate('Loading')}
+              className="py-2"
+            >
+              <p className="text-center text-primary mb-0">
+                {translate('Loading')}
+              </p>
+            </div>
+          ) : context.status === 'error' ? (
+            <p className="text-center text-primary mb-0 py-2">
+              {translate('Error')}
+            </p>
+          ) : rows.length === 0 ? (
+            <p className="text-center text-primary mb-0 px-4 py-2">
+              {emptyMessage}
+            </p>
+          ) : null}
+          <div
+            {...getMenuProps(
+              {
+                ref: menuRef,
+                'aria-label': translate('Search results'),
+                className: classNames(
+                  'max-h-[min(300px,var(--radix-popover-content-available-height))] overflow-auto',
+                  rows.length > 0 && 'py-2',
+                ),
+              },
+              // The list mounts only while the results show.
+              { suppressRefError: true },
+            )}
+          >
+            {context.status === 'success' &&
+              rows.map((item, index) => (
+                <Fragment key={item.value}>
+                  {renderItem({
+                    item,
+                    highlighted: highlightedIndex === index,
+                    itemProps: getItemProps({ item, index }),
+                    close,
+                  })}
+                </Fragment>
+              ))}
+            {context.status === 'success' && context.hasNextPage && (
+              <div
+                ref={sentinelRef}
+                className="text-center py-2 text-quaternary fs-7"
+              >
+                {context.isFetchingNextPage
+                  ? translate('Loading more...')
+                  : null}
+              </div>
+            )}
           </div>
         </PopoverContent>
       </Popover>
+      {/* Announces what the search found. */}
+      <div role="status" className="sr-only">
+        {isOpen ? status : ''}
+      </div>
     </div>
   );
 };

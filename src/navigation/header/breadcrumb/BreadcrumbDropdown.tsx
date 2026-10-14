@@ -1,18 +1,8 @@
 import { FunnelSimpleIcon } from '@phosphor-icons/react';
-import {
-  InfiniteData,
-  keepPreviousData,
-  QueryFunction,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
-import { useRouter } from '@uirouter/react';
-import { useCombobox } from 'downshift';
-import { debounce, isEqual } from 'lodash-es';
+import { isEqual } from 'lodash-es';
 import {
   KeyboardEvent,
   MouseEvent,
-  useCallback,
-  useEffect,
   useId,
   useMemo,
   useRef,
@@ -24,11 +14,12 @@ import { useBoolean } from 'react-use';
 import { BaseButton } from 'waldur-ui';
 
 import { BaseAsyncListProps, RowData } from '@/core/async/types';
+import { useAsyncCombobox } from '@/core/async/useAsyncCombobox';
 import { isEmpty } from '@/core/utils';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
 import { useOrganizationAndProjectAutocompletesForResources } from '@/navigation/sidebar/resources-filter/utils';
-import { DataPage, processApiResponse, SdkFunction } from '@/table/api';
+import { SdkFunction } from '@/table/api';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 import { HeaderButtonBullet } from '../HeaderButtonBullet';
@@ -37,10 +28,9 @@ import { getResourceFilterFromSearchItem } from '../search/utils';
 import { BreadcrumbItem, BreadcrumbSearchItem } from './BreadcrumbSearchItem';
 import { FilterSelect } from './FilterSelect';
 
-interface BreadcrumbDropdownProps<Fetcher extends SdkFunction> extends Omit<
-  BaseAsyncListProps<Fetcher>,
-  'RowComponent'
-> {
+interface BreadcrumbDropdownProps<
+  Fetcher extends SdkFunction,
+> extends BaseAsyncListProps<Fetcher> {
   /** What a row of the results links to and shows. */
   getItem: (row: RowData<Fetcher>) => BreadcrumbItem;
   filters?: Array<{
@@ -59,31 +49,20 @@ const FAVORITE_SHORTCUT =
     ? '⌘D'
     : 'Ctrl+D';
 
-/** A row's unique value: the page it links to. */
-const getItemValue = ({ to, params }: BreadcrumbItem) =>
-  `${to}:${JSON.stringify(params ?? {})}`;
+const itemToString = (item: BreadcrumbItem) =>
+  `${item.title} ${item.subtitle || ''}`.trim();
 
 const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
-  fetcher,
-  queryKey,
-  queryField,
   getItem,
-  path,
-  params = {},
   filters,
   emptyMessage = translate('There are no results for this keyword.'),
   placeholder = translate('Search'),
   close,
+  ...listProps
 }: BreadcrumbDropdownProps<Fetcher>) => {
-  const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
   const [favoriteMessage, setFavoriteMessage] = useState('');
   const hintId = useId();
-  // The ids the combobox points at: the listbox's and each option's.
-  const idPrefix = useId();
-  const listboxId = `${idPrefix}-listbox`;
   const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
-  const router = useRouter();
   const { syncResourceFilters } =
     useOrganizationAndProjectAutocompletesForResources();
   const [filterOpen, setFilterOpen] = useBoolean(false);
@@ -111,90 +90,29 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
     return transformed;
   }, [rawFormValues]);
 
-  const applyQuery = useCallback(
-    debounce((value) => {
-      setQuery(String(value).trim());
-    }, 300),
-    [setQuery],
-  );
-
-  type TypedPage = DataPage<RowData<Fetcher>>;
-
-  const queryFn: QueryFunction<TypedPage, unknown[], number> = async ({
-    pageParam = 1,
-    signal,
-  }) => {
-    const result = await fetcher({
-      query: {
-        page: pageParam,
-        ...params,
-        ...formValues,
-        [queryField]: query,
-      },
-      path,
-      signal,
-    });
-    return processApiResponse(result);
-  };
-
-  const context = useInfiniteQuery<TypedPage, Error, InfiniteData<TypedPage>>({
-    queryKey: ['SearchBoxResults', queryKey, path, params, query, formValues],
-    queryFn,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.nextPage,
-    refetchOnWindowFocus: false,
-    throwOnError: false,
-    retry: false,
-    // A new search keeps the current rows until its results arrive, so the
-    // list stays mounted and the highlight stays on a row still there
-    // (activeValue below moves it to the first row when that one is gone).
-    placeholderData: keepPreviousData,
+  const {
+    context,
+    rows,
+    search,
+    changeSearch,
+    highlightedIndex,
+    getInputProps,
+    getMenuProps,
+    getItemProps,
+    menuRef,
+    sentinelRef,
+    status,
+  } = useAsyncCombobox({
+    ...listProps,
+    filterValues: formValues,
+    getItem,
+    itemToString,
+    emptyMessage,
+    onOpenItem: (item) => {
+      syncResourceFilters(getResourceFilterFromSearchItem(item));
+      close?.();
+    },
   });
-
-  const rows = useMemo(
-    () =>
-      (context.data?.pages.flatMap((page) => page.rows) ?? []).map(
-        (row, index) => {
-          const item = getItem(row);
-          return {
-            ...item,
-            value: getItemValue(item),
-            id: `${idPrefix}-option-${index}`,
-          };
-        },
-      ),
-    [context.data, getItem, idPrefix],
-  );
-
-  // Track the highlighted item's key so that when search results change,
-  // the highlight stays on the row if still present, or falls back to the
-  // first result.
-  const [highlightedKey, setHighlightedKey] = useState<string>('');
-
-  const targetIndex = useMemo(() => {
-    if (rows.length === 0) return -1;
-    const foundIndex = rows.findIndex((it) => it.value === highlightedKey);
-    return foundIndex !== -1 ? foundIndex : 0;
-  }, [rows, highlightedKey]);
-
-  const [highlightedIndex, setHighlightedIndex] = useState(0);
-
-  useEffect(() => {
-    if (rows.length === 0) {
-      setHighlightedIndex(-1);
-    } else {
-      setHighlightedIndex(targetIndex);
-    }
-  }, [targetIndex, rows.length]);
-
-  /** Opens a row; Enter navigates here, a click through the row's link. */
-  const openItem = (item: BreadcrumbItem, navigate: boolean) => {
-    if (navigate) {
-      router.stateService.go(item.to, item.params);
-    }
-    syncResourceFilters(getResourceFilterFromSearchItem(item));
-    close?.();
-  };
 
   /** Adds a row to the favourites or removes it; returns what to announce. */
   const toggleFavorite = (item: BreadcrumbItem, event?: MouseEvent) => {
@@ -229,116 +147,6 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
     setFavoriteMessage(toggleFavorite(currentItem));
   };
 
-  const { getInputProps, getMenuProps, getItemProps } = useCombobox({
-    items: rows,
-    isOpen: true,
-    highlightedIndex,
-    menuId: listboxId,
-    getItemId: (index) => `${idPrefix}-option-${index}`,
-    itemToString: (item) => {
-      if (!item) return '';
-      return `${item.title} ${item.subtitle || ''}`.trim();
-    },
-    getA11yStatusMessage: () => '',
-    onHighlightedIndexChange: ({ highlightedIndex: nextIndex }) => {
-      if (
-        typeof nextIndex === 'number' &&
-        nextIndex >= 0 &&
-        nextIndex < rows.length
-      ) {
-        setHighlightedIndex(nextIndex);
-        setHighlightedKey(rows[nextIndex]?.value ?? '');
-      }
-    },
-    onSelectedItemChange: ({ selectedItem, type }) => {
-      if (!selectedItem) return;
-      openItem(
-        selectedItem,
-        type === useCombobox.stateChangeTypes.InputKeyDownEnter,
-      );
-    },
-    stateReducer: (state, actionAndChanges) => {
-      const { type, changes } = actionAndChanges;
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownArrowUp:
-          // No wrapping: ArrowUp on the first row stays there.
-          if (state.highlightedIndex === 0) {
-            return { ...changes, highlightedIndex: 0 };
-          }
-          return changes;
-        case useCombobox.stateChangeTypes.InputKeyDownArrowDown:
-          // No wrapping: ArrowDown on the last item stays there.
-          if (state.highlightedIndex === rows.length - 1) {
-            return { ...changes, highlightedIndex: rows.length - 1 };
-          }
-          return changes;
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-          return {
-            ...changes,
-            inputValue: state.inputValue, // preserve the search input
-          };
-        case useCombobox.stateChangeTypes.InputKeyDownEscape:
-          return {
-            ...changes,
-            isOpen: true,
-          };
-        default:
-          return changes;
-      }
-    },
-  });
-
-  const sentinelRef = useRef<HTMLDivElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (
-      typeof IntersectionObserver === 'undefined' ||
-      !sentinelRef.current ||
-      !context.hasNextPage
-    ) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (
-          entries[0]?.isIntersecting &&
-          context.hasNextPage &&
-          !context.isFetchingNextPage
-        ) {
-          context.fetchNextPage();
-        }
-      },
-      {
-        root: menuRef.current,
-        rootMargin: '0px',
-      },
-    );
-
-    observer.observe(sentinelRef.current);
-    return () => observer.disconnect();
-  }, [context.hasNextPage, context.isFetchingNextPage, context.fetchNextPage]);
-
-  const resultCount = context.data?.pages[0]?.resultCount;
-  const status =
-    context.status === 'pending'
-      ? ''
-      : context.status === 'error'
-        ? translate('Error')
-        : rows.length === 0
-          ? typeof emptyMessage === 'string'
-            ? emptyMessage
-            : ''
-          : context.isPlaceholderData
-            ? ''
-            : query
-              ? translate('Results: {count}', {
-                  count: resultCount ?? rows.length,
-                })
-              : '';
-
   return (
     // A combobox: focus stays in the search box while the arrow keys move
     // the highlight through the rows (options) and Enter opens one. The
@@ -354,9 +162,8 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
             placeholder,
             value: search,
             onChange: (event: any) => {
-              setSearch(event.target.value);
+              changeSearch(event.target.value);
               setFavoriteMessage('');
-              applyQuery(event.target.value);
             },
             onKeyDown: (event: any) => {
               toggleHighlightedFavorite(event);

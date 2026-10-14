@@ -1,5 +1,3 @@
-import { ComponentType } from 'react';
-
 import { SdkFunction } from '@/table/api';
 
 /**
@@ -27,8 +25,6 @@ export interface BaseAsyncListProps<Fetcher extends SdkFunction> {
   fetcher: Fetcher;
   /** A unique key for react-query to cache the results. */
   queryKey: string;
-  /** The component used to render a single row of data. */
-  RowComponent: ComponentType<{ row: RowData<Fetcher> }>;
   /** The field in the API query used for text-based searching (e.g., 'name', 'query'). */
   queryField: keyof QueryParams<Fetcher>;
   /** Additional static query parameters to send with every request. */
