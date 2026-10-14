@@ -199,7 +199,6 @@ const TableTh = ({
                 isFirstDataColumn && expandableRow
                   ? {
                       paddingLeft: hasLeadingCheckbox ? 12 : 16,
-                      paddingRight: 16,
                     }
                   : undefined
               }
