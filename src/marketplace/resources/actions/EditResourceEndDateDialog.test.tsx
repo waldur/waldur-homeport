@@ -34,6 +34,26 @@ describe('EditResourceEndDateDialog', () => {
     expect(screen.getByRole('textbox')).toHaveValue('2026-10-01');
   });
 
+  it('warns and blocks saving a date when the project has ended', () => {
+    renderWithProviders(
+      <EditResourceEndDateDialog
+        resolve={{
+          ...resolve,
+          resource: {
+            ...resource,
+            end_date: '2026-10-15',
+            project_end_date: '2020-01-01',
+          } as any,
+        }}
+      />,
+    );
+    expect(
+      screen.getByText('No termination date available'),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled();
+    expect(screen.queryByText('Date conflict')).not.toBeInTheDocument();
+  });
+
   it('handles date conflicts and resolution', async () => {
     const user = userEvent.setup();
     renderComponent();

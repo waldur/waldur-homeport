@@ -1,5 +1,4 @@
-import { DateTime } from 'luxon';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { marketplaceResourceEndDateChangeRequestsCreate } from 'waldur-js-client';
 
@@ -7,6 +6,7 @@ import { formatISODate } from '@/core/dateUtils';
 import { required } from '@/core/validators';
 import { DateGroup, SubmitButton, TextGroup } from '@/form';
 import { translate } from '@/i18n';
+import { getTerminationDateProps } from '@/marketplace/deploy/steps/TerminationDateField';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
@@ -27,6 +27,14 @@ export const RequestEndDateChangeDialog: React.FC<
   RequestEndDateChangeDialogProps
 > = (props) => {
   const { resource, refetch } = props.resolve;
+
+  const terminationDateBounds = useMemo(
+    () =>
+      getTerminationDateProps(undefined, {
+        projectEndDate: resource.project_end_date,
+      }),
+    [resource.project_end_date],
+  );
 
   const mutation = useManagedMutation({
     mutationFn: (formData: any) =>
@@ -71,8 +79,8 @@ export const RequestEndDateChangeDialog: React.FC<
               label={translate('Requested end date')}
               required
               validate={required}
-              minDate={DateTime.now().plus({ days: 1 }).toISO()}
-              maxDate={resource.project_end_date}
+              minDate={terminationDateBounds.minDate}
+              maxDate={terminationDateBounds.maxDate}
             />
             <TextGroup
               name="comment"

@@ -56,6 +56,7 @@ export const EditResourceEndDateByProviderAction = ({
     openDialog(EditResourceEndDateDialog, {
       resolve: {
         resource,
+        pluginOptions: offering?.plugin_options,
         refetch,
         updateEndDate: (uuid, end_date) =>
           marketplaceProviderResourcesSetEndDate({
