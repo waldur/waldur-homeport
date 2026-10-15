@@ -1,8 +1,12 @@
 import { createSelector } from 'reselect';
 
+import { ENV } from '@/core/config';
 import { AtLeast } from '@/core/types';
 import { PermissionEnum, RoleEnum } from '@/permissions/enums';
-import { hasPermission } from '@/permissions/hasPermission';
+import {
+  hasConsumerPermission,
+  hasPermission,
+} from '@/permissions/hasPermission';
 import { type RootState } from '@/store/reducers';
 
 import { Customer, Project, User } from './types';
@@ -29,6 +33,17 @@ export const checkIsStaffOrSupport = (user: User): boolean =>
 export const isStaffOrSupport = (state: RootState): boolean =>
   checkIsStaffOrSupport(getUser(state));
 
+/**
+ * Is the role this system role, or a clone of it? A clone bound to one
+ * organization (CUSTOMER.<slug>.OWNER) carries its own name, and /api/roles/
+ * names the role it was copied from. Mastermind resolves clones the same way
+ * (`has_user`), so a clone of the owner is an owner there too.
+ */
+export const isRoleOrClone = (roleName: string, systemRole: string): boolean =>
+  roleName === systemRole ||
+  ENV.roles?.find(({ name }) => name === roleName)?.template_name ===
+    systemRole;
+
 export const checkIsOwner = (
   customer: AtLeast<Customer, 'uuid'>,
   user: User,
@@ -37,7 +52,7 @@ export const checkIsOwner = (
     (permission) =>
       permission.scope_type === 'customer' &&
       permission.scope_uuid === customer?.uuid &&
-      permission.role_name === RoleEnum.CUSTOMER_OWNER,
+      isRoleOrClone(permission.role_name, RoleEnum.CUSTOMER_OWNER),
   );
 
 /**
@@ -55,7 +70,7 @@ export const checkIsServiceManager = (
   !!customer?.uuid &&
   !!user?.permissions?.find(
     (permission) =>
-      permission.role_name === RoleEnum.CUSTOMER_MANAGER &&
+      isRoleOrClone(permission.role_name, RoleEnum.CUSTOMER_MANAGER) &&
       permission.customer_uuid === customer.uuid,
   );
 
@@ -209,15 +224,37 @@ const checkIsReader = (
     (permission) =>
       permission.scope_type === 'customer' &&
       permission.scope_uuid === customer?.uuid &&
-      permission.role_name === RoleEnum.CUSTOMER_READER,
+      isRoleOrClone(permission.role_name, RoleEnum.CUSTOMER_READER),
   );
-
-export const isOwner = createSelector(getCustomer, getUser, checkIsOwner);
 
 export const isOwnerOrStaff = createSelector(
   getCustomer,
   getUser,
   checkIsOwnerOrStaff,
+);
+
+/**
+ * May the user see the organization's Accounting pages: invoices, payments,
+ * payment profiles, credits and cost charts? It is decided by
+ * CUSTOMER.VIEW_ACCOUNTING, not by the owner role, so a role that copies the
+ * owner minus ORDER.* keeps them. Accounting belongs to the consumer side, so a
+ * role on the organization's service provider does not count.
+ */
+export const checkCanViewAccounting = (
+  customer: AtLeast<Customer, 'uuid'>,
+  user: User,
+): boolean =>
+  !!user?.is_staff ||
+  (!!customer?.uuid &&
+    hasConsumerPermission(user, {
+      permission: PermissionEnum.VIEW_CUSTOMER_ACCOUNTING,
+      customerId: customer.uuid,
+    }));
+
+export const canViewAccounting = createSelector(
+  getCustomer,
+  getUser,
+  checkCanViewAccounting,
 );
 
 /**
@@ -266,9 +303,9 @@ export const isServiceProviderManager = (state: RootState): boolean => {
       (p) =>
         // CUSTOMER.MANAGER is scoped to a ServiceProvider, never to a customer
         // — see checkIsServiceManager.
-        p.role_name === RoleEnum.CUSTOMER_MANAGER ||
+        isRoleOrClone(p.role_name, RoleEnum.CUSTOMER_MANAGER) ||
         (p.scope_type === 'customer' &&
-          p.role_name === RoleEnum.CUSTOMER_OWNER),
+          isRoleOrClone(p.role_name, RoleEnum.CUSTOMER_OWNER)),
     ) ?? false
   );
 };

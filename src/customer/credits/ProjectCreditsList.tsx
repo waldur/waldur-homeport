@@ -7,15 +7,23 @@ import { ProjectLink } from '@/project/ProjectLink';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
-import { useCustomer } from '@/workspace/hooks';
+import { useCustomer, useUser } from '@/workspace/hooks';
+import { checkIsOwnerOrStaff } from '@/workspace/selectors';
 
 import { COMMON_CREDIT_COLUMNS } from './constants';
 import { CreditExpandableRow } from './CreditExpandableRow';
 import { ProjectCreateCreditButton } from './ProjectCreateCreditButton';
-import { ProjectCreditActions } from './ProjectCreditActions';
+import {
+  ProjectCreditActions,
+  ProjectCreditReadOnlyActions,
+} from './ProjectCreditActions';
 
 export const ProjectCreditsList: FC = () => {
   const customer = useCustomer();
+  const user = useUser();
+  // The page is open to anyone who may view accounting; creating, editing and
+  // deleting a credit stays with owners, as Mastermind checks.
+  const canManage = checkIsOwnerOrStaff(customer, user);
   const filter = useMemo(
     () => ({ customer_uuid: customer.uuid }),
     [customer.uuid],
@@ -51,7 +59,9 @@ export const ProjectCreditsList: FC = () => {
       hasQuery
       enableExport
       showPageSizeSelector
-      rowActions={ProjectCreditActions}
+      rowActions={
+        canManage ? ProjectCreditActions : ProjectCreditReadOnlyActions
+      }
       expandableRow={CreditExpandableRow}
       tableActions={
         <>
@@ -59,7 +69,9 @@ export const ProjectCreditsList: FC = () => {
             filter={{ feature: 'credits', customer_uuid: customer.uuid }}
           />
 
-          <ProjectCreateCreditButton refetch={tableProps.fetch} />
+          {canManage && (
+            <ProjectCreateCreditButton refetch={tableProps.fetch} />
+          )}
         </>
       }
     />

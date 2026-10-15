@@ -110,6 +110,34 @@ describe('reporting access', () => {
     reportStates.forEach((name) => expect(canEnter(name, staff)).toBe(true));
   });
 
+  it('treats a clone of the owner as an owner', () => {
+    const roles = ENV.roles;
+    ENV.roles = [
+      { name: 'CUSTOMER.org.OWNER', template_name: 'CUSTOMER.OWNER' },
+      { name: 'CUSTOMER.org.READER', template_name: 'CUSTOMER.READER' },
+    ] as any;
+    const withRole = (role_name: string) => ({
+      ...owner,
+      permissions: [{ ...owner.permissions[0], role_name }],
+    });
+    try {
+      expect(
+        canEnter(
+          'reporting-organization-summary',
+          withRole('CUSTOMER.org.OWNER'),
+        ),
+      ).toBe(true);
+      expect(
+        canEnter(
+          'reporting-organization-summary',
+          withRole('CUSTOMER.org.READER'),
+        ),
+      ).toBe(false);
+    } finally {
+      ENV.roles = roles;
+    }
+  });
+
   it('keeps owners out when no scoped report is enabled', () => {
     (ENV.plugins as any).WALDUR_CORE.ENABLED_REPORTING_SCREENS = ['growth'];
     expect(canEnter('reporting-dashboard', owner)).toBe(false);

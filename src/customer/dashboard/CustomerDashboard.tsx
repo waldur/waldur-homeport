@@ -18,8 +18,8 @@ import {
 import { ProjectsList } from '@/project/ProjectsList';
 import { useUser, useCustomer } from '@/workspace/hooks';
 import {
+  checkCanViewAccounting,
   checkIsServiceManager,
-  checkIsOwnerOrStaff,
 } from '@/workspace/selectors';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
@@ -35,7 +35,7 @@ export const CustomerDashboard: FunctionComponent = () => {
     [customer, user],
   );
   const canSeeCharts = useMemo(
-    () => checkIsOwnerOrStaff(customer, user),
+    () => checkCanViewAccounting(customer, user),
     [customer, user],
   );
   const [includeTerminated, setIncludeTerminated] = useState(false);

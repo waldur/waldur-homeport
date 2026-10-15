@@ -16,11 +16,11 @@ import { hasSupport } from '@/issues/hooks';
 import { PermissionEnum } from '@/permissions/enums';
 import { canViewCustomerTeam } from '@/permissions/teamVisibility';
 import {
+  canViewAccounting,
   getCustomer,
   isOwnerOrStaff,
   isStaff,
   isStaffOrSupport,
-  isOwner,
 } from '@/workspace/selectors';
 
 import { canAccessOrganization, userHasCustomerPermission } from './utils';
@@ -29,7 +29,8 @@ import { fetchCustomer } from './workspace/fetchCustomer';
 function canAccessPaymentProfiles(state) {
   const customer = getCustomer(state);
   if (isStaff(state)) return true;
-  if (isOwner(state) && customer.payment_profiles?.length > 0) return true;
+  if (canViewAccounting(state) && customer.payment_profiles?.length > 0)
+    return true;
   return false;
 }
 
@@ -306,7 +307,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Accounting'),
       priority: 140,
-      permissions: [isOwnerOrStaff],
+      permissions: [canViewAccounting],
     },
   },
 
@@ -375,7 +376,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Credit management'),
       permissions: [
-        isOwnerOrStaff,
+        canViewAccounting,
         (state) => Boolean(state.workspace.customer?.credit),
       ],
       priority: 137,
@@ -395,7 +396,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Affiliate earnings'),
       feature: ResellerFeatures.affiliates,
       permissions: [
-        isOwnerOrStaff,
+        canViewAccounting,
         () => Boolean(ENV.plugins.WALDUR_CORE?.AFFILIATES_ENABLED),
         (state) => Boolean(state.workspace.customer?.has_affiliate_links),
       ],

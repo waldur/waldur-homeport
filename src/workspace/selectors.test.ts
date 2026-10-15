@@ -14,7 +14,10 @@ import {
   hasServiceProviderPermission,
   checkIsServiceManagerOnly,
   hasAnyOrganizationAccess,
+  canViewAccounting,
+  checkIsOwner,
   isOwnerOrStaff,
+  isOwnerOrStaffOrReader,
   isServiceProviderManager,
 } from './selectors';
 
@@ -589,5 +592,118 @@ describe('canAccessProviderOffering', () => {
         transition('offering-c', 'provider_b'),
       ),
     ).toBe(false);
+  });
+});
+
+describe('organization role clones and accounting', () => {
+  const OWNER_CLONE = 'CUSTOMER.acme.OWNER';
+  const NO_ORDER_CLONE = 'CUSTOMER.acme.OWNER_NO_ORDER';
+  const READER_CLONE = 'CUSTOMER.acme.READER';
+  const ACCOUNTANT = 'CUSTOMER.ACCOUNTANT';
+  const PROVIDER_ROLE = 'CUSTOMER.PROVIDER_ACCOUNTANT';
+  let originalRoles;
+
+  beforeEach(() => {
+    originalRoles = ENV.roles;
+    ENV.roles = [
+      ...originalRoles,
+      {
+        name: RoleEnum.CUSTOMER_OWNER,
+        template_name: null,
+        permissions: [
+          PermissionEnum.CREATE_ORDER,
+          PermissionEnum.VIEW_CUSTOMER_ACCOUNTING,
+        ],
+      },
+      {
+        name: OWNER_CLONE,
+        template_name: RoleEnum.CUSTOMER_OWNER,
+        permissions: [PermissionEnum.CREATE_ORDER],
+      },
+      {
+        name: NO_ORDER_CLONE,
+        template_name: RoleEnum.CUSTOMER_OWNER,
+        permissions: [PermissionEnum.VIEW_CUSTOMER_ACCOUNTING],
+      },
+      {
+        name: READER_CLONE,
+        template_name: RoleEnum.CUSTOMER_READER,
+        permissions: [PermissionEnum.VIEW_CUSTOMER_TEAM],
+      },
+      {
+        name: ACCOUNTANT,
+        template_name: null,
+        permissions: [PermissionEnum.VIEW_CUSTOMER_ACCOUNTING],
+      },
+      {
+        name: PROVIDER_ROLE,
+        template_name: null,
+        permissions: [PermissionEnum.VIEW_CUSTOMER_ACCOUNTING],
+      },
+    ] as any;
+  });
+
+  afterEach(() => {
+    ENV.roles = originalRoles;
+  });
+
+  const customer = { uuid: 'acme' };
+  const userWith = (role_name: string, scope_uuid = 'acme') => ({
+    is_staff: false,
+    is_support: false,
+    uuid: 'user_uuid',
+    permissions: [{ scope_type: 'customer', scope_uuid, role_name }],
+  });
+  const state = (user) => ({ workspace: { user, customer } }) as RootState;
+
+  it('treats a clone of the owner as an owner of its organization', () => {
+    expect(checkIsOwner(customer, userWith(OWNER_CLONE) as any)).toBe(true);
+    expect(checkIsOwner(customer, userWith(NO_ORDER_CLONE) as any)).toBe(true);
+    expect(isOwnerOrStaff(state(userWith(NO_ORDER_CLONE)))).toBe(true);
+  });
+
+  it('does not treat other clones or custom roles as owners', () => {
+    expect(checkIsOwner(customer, userWith(READER_CLONE) as any)).toBe(false);
+    expect(checkIsOwner(customer, userWith(ACCOUNTANT) as any)).toBe(false);
+    expect(checkIsOwner(customer, userWith(OWNER_CLONE, 'other') as any)).toBe(
+      false,
+    );
+  });
+
+  it('treats a clone of the reader as a reader', () => {
+    expect(isOwnerOrStaffOrReader(state(userWith(READER_CLONE)))).toBe(true);
+  });
+
+  it('shows accounting to roles granting CUSTOMER.VIEW_ACCOUNTING', () => {
+    expect(canViewAccounting(state(userWith(RoleEnum.CUSTOMER_OWNER)))).toBe(
+      true,
+    );
+    expect(canViewAccounting(state(userWith(NO_ORDER_CLONE)))).toBe(true);
+    expect(canViewAccounting(state(userWith(ACCOUNTANT)))).toBe(true);
+    expect(canViewAccounting(state({ is_staff: true, permissions: [] }))).toBe(
+      true,
+    );
+  });
+
+  it('hides accounting from roles without the permission', () => {
+    // An existing owner clone that nobody has granted the permission to.
+    expect(canViewAccounting(state(userWith(OWNER_CLONE)))).toBe(false);
+    expect(canViewAccounting(state(userWith(READER_CLONE)))).toBe(false);
+    expect(canViewAccounting(state(userWith(ACCOUNTANT, 'other')))).toBe(false);
+  });
+
+  it('ignores the permission held on the service provider', () => {
+    const user = {
+      is_staff: false,
+      permissions: [
+        {
+          scope_type: 'service_provider',
+          scope_uuid: 'provider_uuid',
+          customer_uuid: 'acme',
+          role_name: PROVIDER_ROLE,
+        },
+      ],
+    };
+    expect(canViewAccounting(state(user))).toBe(false);
   });
 });

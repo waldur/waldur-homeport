@@ -14,17 +14,19 @@ import { renderFieldOrDash } from '@/table/utils';
 export const COMMON_CREDIT_COLUMNS: Column[] = [
   {
     title: translate('Eligible offerings'),
+    // A project credit omits `offerings` for roles that may not view the
+    // organization's accounting (Mastermind's ORGANIZATION_SCOPED_FIELDS).
     render: ({ row }) => (
       <>
         {renderFieldOrDash(
-          row.offerings.map((offering) => offering.name).join(', '),
+          (row.offerings ?? []).map((offering) => offering.name).join(', '),
         )}
       </>
     ),
 
     export: (row) =>
       renderFieldOrDash(
-        row.offerings.map((offering) => offering.name).join(', '),
+        (row.offerings ?? []).map((offering) => offering.name).join(', '),
       ),
   },
   {
