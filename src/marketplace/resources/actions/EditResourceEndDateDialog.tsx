@@ -8,6 +8,10 @@ import { AlertItem } from 'waldur-ui';
 import { formatISODate, parseDate } from '@/core/dateUtils';
 import { SubmitButton, DateGroup } from '@/form';
 import { translate } from '@/i18n';
+import {
+  getTerminationDateProps,
+  ResourceTerminationPluginOptions,
+} from '@/marketplace/deploy/steps/TerminationDateField';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
@@ -20,6 +24,7 @@ interface FormData {
 interface EditResourceEndDateDialogProps {
   resolve: {
     resource: Resource;
+    pluginOptions?: ResourceTerminationPluginOptions;
     refetch?(): void;
     updateEndDate?(uuid: string, date: string);
   };
@@ -49,14 +54,31 @@ export const EditResourceEndDateDialog: FunctionComponent<
       onSubmit={(values) => updateMutation.mutateAsync(values).catch(() => {})}
       initialValues={{ end_date: props.resolve.resource.end_date }}
       render={({ handleSubmit, submitting, invalid, values, form }) => {
+        const terminationDateBounds = useMemo(
+          () =>
+            getTerminationDateProps(props.resolve.pluginOptions, {
+              startDate: props.resolve.resource.creation_order?.start_date,
+              projectEndDate: props.resolve.resource.project_end_date,
+              createdDate: props.resolve.resource.created,
+            }),
+          [props.resolve.pluginOptions, props.resolve.resource],
+        );
+        const noValidDate = !terminationDateBounds.hasValidRange;
+
         const exceedsProjectEndDate = useMemo(() => {
-          if (!values.end_date || !props.resolve.resource?.project_end_date)
+          // When no date is valid at all, the alert below covers it and
+          // "Use project date" would offer a date the API rejects.
+          if (
+            noValidDate ||
+            !values.end_date ||
+            !props.resolve.resource?.project_end_date
+          )
             return false;
           return (
             parseDate(values.end_date) >
             parseDate(props.resolve.resource?.project_end_date)
           );
-        }, [values.end_date, props.resolve.resource]);
+        }, [noValidDate, values.end_date, props.resolve.resource]);
 
         return (
           <form onSubmit={handleSubmit}>
@@ -74,7 +96,18 @@ export const EditResourceEndDateDialog: FunctionComponent<
                   <SubmitButton
                     submitting={submitting}
                     label={translate('Save')}
-                    disabled={invalid || exceedsProjectEndDate}
+                    disabled={
+                      invalid ||
+                      exceedsProjectEndDate ||
+                      (noValidDate && Boolean(values.end_date))
+                    }
+                    disabledReason={
+                      noValidDate && values.end_date
+                        ? translate(
+                            'No termination date can be set. Clear the date to remove it.',
+                          )
+                        : undefined
+                    }
                     variant="primary"
                     className="min-w-125px"
                   />
@@ -97,15 +130,21 @@ export const EditResourceEndDateDialog: FunctionComponent<
                           'The date is inclusive. Once reached, resource will be scheduled for termination.',
                         )
                   }
-                  minDate={DateTime.now().plus({ weeks: 1 }).toISO()}
-                  maxDate={
-                    props.resolve.resource?.project_end_date
-                      ? parseDate(
-                          props.resolve.resource.project_end_date,
-                        ).toISO()
-                      : undefined
-                  }
+                  minDate={terminationDateBounds.minDate}
+                  maxDate={terminationDateBounds.maxDate}
                 />
+
+                {noValidDate && (
+                  <AlertItem
+                    type="floating"
+                    variant="warning"
+                    role="alert"
+                    title={translate('No termination date available')}
+                    body={translate(
+                      'The project has ended or the offering no longer allows a termination date for this resource. The date can only be cleared.',
+                    )}
+                  />
+                )}
 
                 {exceedsProjectEndDate && (
                   <AlertItem

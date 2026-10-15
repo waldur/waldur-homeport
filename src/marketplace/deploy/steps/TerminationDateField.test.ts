@@ -1,7 +1,10 @@
 import { DateTime } from 'luxon';
 import { describe, expect, it } from 'vitest';
 
-import { getTerminationDateProps } from './TerminationDateField';
+import {
+  getTerminationDateProps,
+  intersectTerminationDateBounds,
+} from './TerminationDateField';
 
 const NOW = DateTime.fromISO('2026-07-24');
 
@@ -207,5 +210,110 @@ describe('getTerminationDateProps', () => {
       );
       expect(result.maxDate).toBeUndefined();
     });
+  });
+
+  it('allows a project end date within the next week', () => {
+    const result = getTerminationDateProps(undefined, {
+      now: NOW,
+      projectEndDate: '2026-07-27',
+    });
+    expect(result.minDate).toBe('2026-07-24');
+    expect(result.maxDate).toBe('2026-07-27');
+    expect(result.hasValidRange).toBe(true);
+  });
+
+  describe('for an existing resource', () => {
+    const options = { max_resource_termination_offset_in_days: 365 };
+
+    it('measures the max offset from the creation date, not today', () => {
+      const result = getTerminationDateProps(options, {
+        now: NOW,
+        createdDate: '2026-01-05T10:30:00.123456Z',
+      });
+      expect(result.minDate).toBe('2026-07-24');
+      expect(result.maxDate).toBe('2027-01-05');
+    });
+
+    it('uses the UTC calendar date of the creation timestamp', () => {
+      const result = getTerminationDateProps(options, {
+        now: NOW,
+        createdDate: '2026-01-05T23:30:00+00:00',
+      });
+      expect(result.maxDate).toBe('2027-01-05');
+    });
+
+    it('measures from the order start when it is after creation', () => {
+      const result = getTerminationDateProps(options, {
+        now: NOW,
+        createdDate: '2026-01-05T10:30:00Z',
+        startDate: '2026-03-01',
+      });
+      expect(result.maxDate).toBe('2027-03-01');
+    });
+
+    it('reports no valid range when the offset window has passed', () => {
+      const result = getTerminationDateProps(options, {
+        now: NOW,
+        createdDate: '2025-01-05T10:30:00Z',
+      });
+      expect(result.hasValidRange).toBe(false);
+    });
+  });
+
+  it('reports no valid range when the project has ended', () => {
+    const result = getTerminationDateProps(undefined, {
+      now: NOW,
+      projectEndDate: '2026-07-01',
+    });
+    expect(result.hasValidRange).toBe(false);
+    // The picker is still clamped to something renderable.
+    expect(result.maxDate).toBe('2026-07-24');
+  });
+
+  it('reports a valid range when the project ends today', () => {
+    const result = getTerminationDateProps(undefined, {
+      now: NOW.set({ hour: 15 }),
+      projectEndDate: '2026-07-24',
+    });
+    expect(result.hasValidRange).toBe(true);
+  });
+});
+
+describe('intersectTerminationDateBounds', () => {
+  it('takes the latest min and the earliest max', () => {
+    const result = intersectTerminationDateBounds([
+      { minDate: '2026-07-24', maxDate: '2026-12-01', hasValidRange: true },
+      { minDate: '2026-08-01', maxDate: '2026-10-01', hasValidRange: true },
+      { minDate: '2026-07-24', hasValidRange: true },
+    ]);
+    expect(result).toEqual({
+      minDate: '2026-08-01',
+      maxDate: '2026-10-01',
+      hasValidRange: true,
+    });
+  });
+
+  it('leaves max open when no resource has one', () => {
+    const result = intersectTerminationDateBounds([
+      { minDate: '2026-07-24', hasValidRange: true },
+    ]);
+    expect(result.maxDate).toBeUndefined();
+    expect(result.hasValidRange).toBe(true);
+  });
+
+  it('reports no valid range when the ranges do not overlap', () => {
+    const result = intersectTerminationDateBounds([
+      { minDate: '2026-12-01', hasValidRange: true },
+      { minDate: '2026-07-24', maxDate: '2026-10-01', hasValidRange: true },
+    ]);
+    expect(result.hasValidRange).toBe(false);
+  });
+
+  it('reports no valid range when any resource has none', () => {
+    const result = intersectTerminationDateBounds([
+      { minDate: '2026-07-24', maxDate: '2026-07-24', hasValidRange: false },
+      { minDate: '2026-07-24', hasValidRange: true },
+    ]);
+    expect(result.hasValidRange).toBe(false);
   });
 });

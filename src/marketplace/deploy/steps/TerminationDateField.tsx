@@ -7,7 +7,7 @@ import { translate } from '@/i18n';
 
 import { useOrderFormData } from '../selectors';
 
-interface PluginOptions {
+export interface ResourceTerminationPluginOptions {
   default_resource_termination_offset_in_days?: number;
   max_resource_termination_offset_in_days?: number;
   latest_date_for_resource_termination?: string;
@@ -20,6 +20,19 @@ export interface TerminationDateBoundsOptions {
   startDate?: string | null;
   /** Project end date — hard ceiling for selectable termination date. */
   projectEndDate?: string | null;
+  /**
+   * Creation timestamp of an existing resource. When set, offsets are measured
+   * from it (or a later order start), as the set_end_date API does, rather
+   * than from today.
+   */
+  createdDate?: string | null;
+}
+
+export interface TerminationDateBounds {
+  minDate: string;
+  maxDate?: string;
+  /** False when no date satisfies every constraint (e.g. project has ended). */
+  hasValidRange: boolean;
 }
 
 function earliestDate(
@@ -39,7 +52,7 @@ function latestDateTime(
 }
 
 export function getTerminationDateProps(
-  pluginOptions: PluginOptions | undefined,
+  pluginOptions: ResourceTerminationPluginOptions | undefined,
   options: TerminationDateBoundsOptions = {},
 ) {
   const now = options.now ?? DateTime.local();
@@ -50,7 +63,20 @@ export function getTerminationDateProps(
     ? DateTime.fromISO(options.projectEndDate)
     : undefined;
 
-  const offsetBase = orderStart?.isValid && orderStart > now ? orderStart : now;
+  // The API takes the calendar date of the UTC creation timestamp.
+  const created = options.createdDate
+    ? DateTime.fromISO(
+        DateTime.fromISO(options.createdDate, { zone: 'utc' }).toISODate(),
+      )
+    : undefined;
+
+  let offsetBase: DateTime;
+  if (created?.isValid) {
+    offsetBase =
+      orderStart?.isValid && orderStart > created ? orderStart : created;
+  } else {
+    offsetBase = orderStart?.isValid && orderStart > now ? orderStart : now;
+  }
 
   const minDate = latestDateTime(now, orderStart) ?? now;
 
@@ -68,8 +94,10 @@ export function getTerminationDateProps(
     maxDate?: string;
     defaultDate?: string;
     isClearable?: boolean;
+    hasValidRange: boolean;
   } = {
     minDate: minDate.toISODate(),
+    hasValidRange: true,
   };
 
   let maxDate: DateTime | undefined;
@@ -88,6 +116,7 @@ export function getTerminationDateProps(
   }
 
   if (maxDate) {
+    props.hasValidRange = maxDate.toISODate() >= props.minDate;
     // Keep the picker usable if constraints somehow invert.
     props.maxDate =
       maxDate < minDate ? minDate.toISODate() : maxDate.toISODate();
@@ -111,19 +140,44 @@ export function getTerminationDateProps(
   return props;
 }
 
+/**
+ * Narrows several resources' bounds to the dates valid for all of them:
+ * latest minimum, earliest maximum.
+ */
+export function intersectTerminationDateBounds(
+  bounds: TerminationDateBounds[],
+): TerminationDateBounds {
+  const minDate = bounds.reduce(
+    (latest, b) => (b.minDate > latest ? b.minDate : latest),
+    bounds[0]?.minDate ?? getTerminationDateProps(undefined).minDate,
+  );
+  const maxDate = bounds.reduce<string | undefined>(
+    (earliest, b) =>
+      b.maxDate && (!earliest || b.maxDate < earliest) ? b.maxDate : earliest,
+    undefined,
+  );
+  return {
+    minDate,
+    maxDate,
+    hasValidRange:
+      bounds.every((b) => b.hasValidRange) && (!maxDate || maxDate >= minDate),
+  };
+}
+
 export const TerminationDateField = ({
   offering,
 }: {
-  offering: { plugin_options?: PluginOptions };
+  offering: { plugin_options?: ResourceTerminationPluginOptions };
 }) => {
   const form = useForm();
   const { project, start_date: startDate, attributes } = useOrderFormData();
   const projectEndDate = project?.end_date;
 
-  const dateFieldProps = getTerminationDateProps(offering.plugin_options, {
-    startDate,
-    projectEndDate,
-  });
+  const { hasValidRange: _hasValidRange, ...dateFieldProps } =
+    getTerminationDateProps(offering.plugin_options, {
+      startDate,
+      projectEndDate,
+    });
 
   // When start date / project bounds change, clamp an out-of-range value so
   // the form stays submittable and matches what the picker allows.
