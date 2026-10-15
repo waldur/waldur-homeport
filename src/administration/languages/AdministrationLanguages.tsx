@@ -108,7 +108,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
       bodyClassName="py-0 overflow-hidden"
       actions={
         <div className="d-flex align-items-center">
-          <TableQuery query={query} setQuery={setQuery} />
+          <TableQuery query={query} setQuery={setQuery} inputClassName="h-11" />
           {canEdit && (
             <SaveButton
               className="ms-4"
