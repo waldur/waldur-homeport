@@ -20,9 +20,7 @@ export const UserActions = ({ user }: UserActionsProps) => {
     <div className="d-flex gap-2">
       {showIssues && (
         <Link state="profile.issues" buttonVariant="tertiary" buttonSize="lg">
-          <span className="svg-icon svg-icon-2">
-            <HeadsetIcon weight="bold" />
-          </span>
+          <HeadsetIcon weight="bold" size={20} />
           {translate('Support')}
         </Link>
       )}

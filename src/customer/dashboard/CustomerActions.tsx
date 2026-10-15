@@ -18,10 +18,9 @@ export const CustomerActions = ({ customer }: CustomerActionsProps) => {
           state="organization.issues"
           params={{ uuid: customer.uuid }}
           buttonVariant="tertiary"
+          buttonSize="lg"
         >
-          <span className="svg-icon svg-icon-2">
-            <HeadsetIcon weight="bold" />
-          </span>
+          <HeadsetIcon weight="bold" size={20} />
           {translate('Support')}
         </Link>
       )}
