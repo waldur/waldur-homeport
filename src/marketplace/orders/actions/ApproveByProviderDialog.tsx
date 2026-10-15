@@ -21,6 +21,7 @@ import {
   getComponentAndParams,
   OptionsForm,
 } from '@/marketplace/common/OptionsForm';
+import { OptionTransformPreview } from '@/marketplace/common/OptionTransformPreview';
 import {
   getHiddenOptionKeys,
   omitHiddenOptionValues,
@@ -85,6 +86,10 @@ const OptionRow: FC<{
           />
         </div>
         <FormFieldError name={`attributes.${optionKey}`} />
+        <OptionTransformPreview
+          option={option}
+          name={`attributes.${optionKey}`}
+        />
       </td>
     </tr>
   );

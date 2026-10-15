@@ -2604,6 +2604,16 @@
       "feature_area": "roles"
     }
   },
+  "Added after the value when it is saved.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Added before the value when it is saved. A value that already starts with it does not get it twice.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Added by staff. It cannot be changed here.": {
     "context": {
       "feature_area": "details"
@@ -9778,6 +9788,11 @@
   },
   "Change all quota limits by percentage": {},
   "Change capacity limits by percentage": {},
+  "Change case": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Change comment": {
     "context": {
       "feature_area": "comments"
@@ -12474,6 +12489,11 @@
     }
   },
   "Controls which user roles can access the AI Assistant. 'disabled': No role-based access. 'staff': Staff users only. 'staff_and_support': Staff and support users. 'all': All authenticated users. 'anonymous': All users including anonymous (enables the public anonymous chat endpoint).": {},
+  "Converts what the user types; the prefix and suffix are kept as written. The validation pattern is checked before the prefix and suffix are added.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Cookie settings": {
     "context": {
       "feature_area": "cookies"
@@ -19357,6 +19377,7 @@
     }
   },
   "Enter a valid CIDR address.": {},
+  "Enter a value besides the prefix and suffix.": {},
   "Enter a whole number of days, 1 or more.": {},
   "Enter a whole number.": {
     "context": {
@@ -28984,6 +29005,11 @@
   "Low end label": {
     "context": {
       "feature_area": "questions"
+    }
+  },
+  "Lower case": {
+    "context": {
+      "primary_ui_type": "label"
     }
   },
   "Lower is better": {
@@ -40776,7 +40802,8 @@
   },
   "Prefix": {
     "context": {
-      "primary_ui_type": "label"
+      "primary_ui_type": "label",
+      "feature_area": "options"
     }
   },
   "Prefix for invoice item names (e.g., \"Arrow consumption\"). Used in both provisional and compensation items.": {},
@@ -44678,7 +44705,7 @@
       "feature_area": "integration"
     }
   },
-  "Regular expression the whole value must match, for example [a-z][a-z0-9-]+. Use syntax common to Python and JavaScript.": {
+  "Regular expression the whole value must match, for example [a-z][a-z0-9-]+. With a prefix or suffix set, it checks only the part the user types. Use syntax common to Python and JavaScript.": {
     "context": {
       "feature_area": "options"
     }
@@ -54805,6 +54832,11 @@
         }
       },
       "feature_area": "mass-actions"
+    }
+  },
+  "Suffix": {
+    "context": {
+      "feature_area": "options"
     }
   },
   "Suggest an identifier to include into the generated username of the service account.": {
@@ -66436,6 +66468,11 @@
       "feature_area": "chat"
     }
   },
+  "Upper case": {
+    "context": {
+      "primary_ui_type": "label"
+    }
+  },
   "Upstream / gateway connection.": {},
   "Upstream catalog versions": {
     "context": {
@@ -69974,6 +70011,16 @@
   "Will be removed": {
     "context": {
       "feature_area": "create-user-steps"
+    }
+  },
+  "Will be saved as {value}": {
+    "context": {
+      "variables": {
+        "value": {
+          "type": "unknown"
+        }
+      },
+      "feature_area": "common"
     }
   },
   "Will be set": {

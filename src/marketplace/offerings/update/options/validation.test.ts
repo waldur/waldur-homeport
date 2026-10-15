@@ -277,6 +277,16 @@ describe('Option form validation', () => {
       expect(withPattern({ pattern: '[a-z]+', default: 'abc' })).toEqual({});
     });
 
+    it('checks a default without the prefix and suffix it carries', () => {
+      const transform = { prefix: 'acme-', suffix: '-prod' };
+      expect(
+        withPattern({ pattern: '[a-z]+', default: 'acme-abc-prod', transform }),
+      ).toEqual({});
+      expect(
+        withPattern({ pattern: '[a-z]+', default: 'acme-a-c-prod', transform }),
+      ).toHaveProperty('default');
+    });
+
     it('ignores pattern fields left on other types', () => {
       expect(
         validateOptionForm({

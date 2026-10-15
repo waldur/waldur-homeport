@@ -26,6 +26,7 @@ import { OptionTypeGroup } from './OptionTypeGroup';
 import { PatternConfiguration } from './PatternConfiguration';
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 import { StringOptionConfig } from './StringOptionConfig';
+import { TransformConfiguration } from './TransformConfiguration';
 import { VisibleIfConfiguration } from './VisibleIfConfiguration';
 
 // A formula resource option takes its formulas from the order option it pairs
@@ -37,11 +38,19 @@ export const hasOptionSettings = (
   Boolean(type && type in OPTION_COMPONENTS) &&
   !(resourceType === 'resource_options' && type === 'component_formula');
 
-// The default value and the pattern it must match belong on the same step.
+// The pattern checks what the user types and the transform rewrites it, so
+// they sit together; the default value belongs with the pattern it must match.
+const TextSettings = () => (
+  <>
+    <PatternConfiguration />
+    <TransformConfiguration />
+  </>
+);
+
 const StringSettings = () => (
   <>
     <StringOptionConfig />
-    <PatternConfiguration />
+    <TextSettings />
   </>
 );
 
@@ -51,7 +60,7 @@ const OPTION_COMPONENTS = {
   select_string: ChoicesOptionConfig,
   select_string_multi: ChoicesOptionConfig,
   string: StringSettings,
-  text: PatternConfiguration,
+  text: TextSettings,
   conditional_cascade: ConditionalCascadeConfiguration,
   component_multiplier: ComponentMultiplierConfiguration,
   component_formula: ComponentFormulaConfiguration,
