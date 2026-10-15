@@ -9,6 +9,7 @@ import * as sass from 'sass';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 import { RETIRED_BOOTSTRAP_COLORS } from '../packages/eslint-plugin-waldur/rules/no-bootstrap-color-utility.js';
+import { RETIRED_UTILITY_PATTERNS } from '../packages/eslint-plugin-waldur/rules/no-retired-bootstrap-utility.js';
 
 /**
  * Bootstrap used to emit `.text-*`, `.bg-*` and `.border-*` colour classes
@@ -199,5 +200,52 @@ describe('Font weight', () => {
       'font-extrabold': null,
       'font-black': null,
     });
+  }, 60_000);
+});
+
+describe('Retired Bootstrap utilities', () => {
+  it('Metronic generates none of them', () => {
+    const emitted = new Set<string>();
+    postcss.parse(compileMetronic()).walkRules((rule) => {
+      for (const m of rule.selector.matchAll(/\.((?:\\.|[\w-])+)/g)) {
+        emitted.add(m[1].replace(/\\/g, ''));
+      }
+    });
+    const still = [...emitted].filter((name) =>
+      RETIRED_UTILITY_PATTERNS.some(([pattern]) => pattern.test(name)),
+    );
+    expect(
+      still.sort(),
+      'Retired in no-retired-bootstrap-utility but still generated',
+    ).toEqual([]);
+  });
+
+  it('retires no name Tailwind defines', async () => {
+    const samples = [
+      'vw-100',
+      'min-vw-100',
+      'vh-100',
+      'min-vh-100',
+      'align-content-center',
+      'mx-n2',
+      'my-n2',
+      'ls-1',
+      'h-lg-100px',
+      'min-h-md-100px',
+      'px-lg-3',
+      'fs-md-6',
+      'mt-lg-n1',
+      'flex-md-fill',
+      'flex-lg-shrink-0',
+      'svg-icon-lg-3',
+      'svg-icon-md-2x',
+    ];
+    for (const name of samples) {
+      expect(
+        RETIRED_UTILITY_PATTERNS.some(([pattern]) => pattern.test(name)),
+        name,
+      ).toBe(true);
+    }
+    expect([...(await tailwindClasses(samples))]).toEqual([]);
   }, 60_000);
 });

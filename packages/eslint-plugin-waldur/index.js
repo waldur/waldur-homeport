@@ -29,6 +29,7 @@ import noManualIconColorsInBadges from './rules/no-manual-icon-colors-in-badges.
 import noNativeDateInput from './rules/no-native-date-input.js';
 import noRawStatusRamp from './rules/no-raw-status-ramp.js';
 import noRedundantViMock from './rules/no-redundant-vi-mock.js';
+import noRetiredBootstrapUtility from './rules/no-retired-bootstrap-utility.js';
 import noTemplateInTranslate from './rules/no-template-in-translate.js';
 import noTooltipOnBareIcon from './rules/no-tooltip-on-bare-icon.js';
 import noUndefinedInMutationBody from './rules/no-undefined-in-mutation-body.js';
@@ -58,6 +59,7 @@ export default {
     'no-bootstrap-border-with-tailwind-color':
       noBootstrapBorderWithTailwindColor,
     'no-raw-status-ramp': noRawStatusRamp,
+    'no-retired-bootstrap-utility': noRetiredBootstrapUtility,
     'require-dark-pair': requireDarkPair,
     'require-weight-scale': requireWeightScale,
     'no-bootstrap-color-utility': noBootstrapColorUtility,

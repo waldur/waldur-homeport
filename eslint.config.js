@@ -224,6 +224,9 @@ export default tseslint
         // Bootstrap emits no colour utility any more: its old class names
         // (text-danger, bg-light, border-bottom, …) paint nothing.
         'waldur-custom/no-bootstrap-color-utility': 'error',
+        // Bootstrap utilities _utilities.scss no longer generates (unused, or
+        // only ever used at the base size) compile to nothing.
+        'waldur-custom/no-retired-bootstrap-utility': 'error',
         // Zero instances remain: every --bs-* read in TS/TSX is a design token.
         'waldur-custom/no-bootstrap-css-vars': 'error',
         'waldur-custom/no-interactive-in-tab-trigger': 'error',
@@ -410,6 +413,7 @@ export default tseslint
       rules: {
         'waldur-custom/require-dark-pair': 'off',
         'waldur-custom/require-weight-scale': 'off',
+        'waldur-custom/no-retired-bootstrap-utility': 'off',
       },
     },
     {
