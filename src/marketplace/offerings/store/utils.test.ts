@@ -136,6 +136,44 @@ describe('formatOption pattern', () => {
   });
 });
 
+describe('formatOption transform', () => {
+  const base = {
+    name: 'bucket',
+    label: 'Bucket',
+    type: { value: 'string', label: 'String' },
+  } as any;
+
+  it('keeps the set fields and drops cleared ones', () => {
+    const item = formatOption({
+      ...base,
+      transform: { prefix: 'acme-', suffix: '', case: null },
+    });
+    expect(item.transform).toEqual({ prefix: 'acme-' });
+  });
+
+  it('keeps whitespace in the prefix', () => {
+    const item = formatOption({ ...base, transform: { prefix: 'a ' } });
+    expect(item.transform).toEqual({ prefix: 'a ' });
+  });
+
+  it('drops a transform with nothing set', () => {
+    const item = formatOption({
+      ...base,
+      transform: { prefix: '', suffix: undefined },
+    });
+    expect(item).not.toHaveProperty('transform');
+  });
+
+  it('drops a transform left behind by a type change', () => {
+    const item = formatOption({
+      ...base,
+      type: { value: 'integer', label: 'Integer' },
+      transform: { prefix: 'acme-' },
+    });
+    expect(item).not.toHaveProperty('transform');
+  });
+});
+
 describe('formatOption display_limit_config', () => {
   const base = {
     name: 'inode_quota',

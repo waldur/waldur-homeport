@@ -154,9 +154,12 @@ const validatePattern = (values) => {
     return { pattern: translate('Invalid regular expression.') };
   }
   if (values.default) {
+    // The pattern describes the part the user types, so a prefix or suffix
+    // already in the default is left out of the match.
     const error = getOptionPatternValidator({
       type: values.type.value,
       pattern,
+      transform: values.transform,
     })(values.default);
     if (error) {
       return {

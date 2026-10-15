@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { K8sDefaultConfiguration } from '@/marketplace/common/multi-datacenter-k8s-types';
+import { OptionTransform } from '@/marketplace/common/optionTransform';
 import { Option } from '@/marketplace/common/registry';
 
 export interface PlanFormData {
@@ -42,6 +43,7 @@ export interface OptionFormData {
   unique?: boolean;
   pattern?: string;
   pattern_error?: string;
+  transform?: OptionTransform | null;
   display_limit_config?: {
     component_type?: string | null;
   };

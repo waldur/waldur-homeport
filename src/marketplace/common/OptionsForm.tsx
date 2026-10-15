@@ -46,6 +46,8 @@ import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { K8sClusterConfigurationForm } from './K8sClusterConfigurationForm';
 import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
 import { getOptionPatternValidator } from './optionPattern';
+import { getOptionTransformValidator } from './optionTransform';
+import { OptionTransformPreview } from './OptionTransformPreview';
 import { getHiddenOptionKeys } from './optionVisibility';
 import { StorageFolderManagerField } from './StorageFolderManagerField';
 import { DeployFormData } from './types';
@@ -165,6 +167,11 @@ export const buildOptionValidator = (
   const patternValidator = getOptionPatternValidator(option);
   if (patternValidator) {
     validators.push(patternValidator);
+  }
+
+  const transformValidator = getOptionTransformValidator(option);
+  if (transformValidator) {
+    validators.push(transformValidator);
   }
 
   // Add cross-field validators
@@ -443,6 +450,10 @@ export const OptionsForm = ({
               {!params.hideError && (
                 <FormFieldError name={`attributes.${key}`} />
               )}
+              <OptionTransformPreview
+                option={option}
+                name={`attributes.${key}`}
+              />
             </FormGroup>
           );
         })}

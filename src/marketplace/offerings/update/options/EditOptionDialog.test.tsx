@@ -143,4 +143,26 @@ describe('EditOptionDialog', () => {
     expect(screen.getByDisplayValue('[^<>]*')).toBeInTheDocument();
     expect(screen.getByText('Validation error message')).toBeInTheDocument();
   });
+
+  it('loads the saved transform on the settings step', async () => {
+    renderWithProviders(
+      <EditOptionDialog
+        resolve={{
+          offering,
+          type: 'options',
+          refetch: vi.fn(),
+          option: {
+            type: 'string',
+            label: 'Bucket',
+            name: 'bucket',
+            transform: { prefix: 'acme-', suffix: '-prod', case: 'lower' },
+          },
+        }}
+      />,
+    );
+    await userEvent.click(screen.getByTestId('wizard-submit-btn'));
+    expect(screen.getByDisplayValue('acme-')).toBeInTheDocument();
+    expect(screen.getByDisplayValue('-prod')).toBeInTheDocument();
+    expect(screen.getByText('Lower case')).toBeInTheDocument();
+  });
 });

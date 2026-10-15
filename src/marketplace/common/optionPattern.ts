@@ -1,5 +1,11 @@
 import { translate } from '@/i18n';
 
+import {
+  getOptionTransform,
+  OptionTransform,
+  stripOptionAffixes,
+} from './optionTransform';
+
 /**
  * String and text offering options can carry a `pattern`: a regular
  * expression the whole value must match, with an optional `pattern_error`
@@ -43,11 +49,15 @@ export const isValidOptionPattern = (pattern: string) =>
 /**
  * Validator for an option with a pattern, or undefined when the option has
  * none. Empty values pass: `required` decides whether a value must be given.
+ * With a transform, the pattern describes the part the user types, so a
+ * prefix or suffix already in the value is left out of the match, as
+ * mastermind does.
  */
 export const getOptionPatternValidator = (option: {
   type?: string;
   pattern?: string;
   pattern_error?: string;
+  transform?: OptionTransform | null;
 }) => {
   if (!isPatternFieldType(option?.type)) {
     return undefined;
@@ -56,11 +66,16 @@ export const getOptionPatternValidator = (option: {
   if (!regexp) {
     return undefined;
   }
+  const transform = getOptionTransform(option);
   return (value: unknown) => {
     if (value === undefined || value === null || value === '') {
       return undefined;
     }
-    if (regexp.test(String(value))) {
+    const typed = transform
+      ? stripOptionAffixes(transform, String(value))
+      : String(value);
+    // Nothing left after the affixes is reported by the transform validator.
+    if (typed === '' || regexp.test(typed)) {
       return undefined;
     }
     return (

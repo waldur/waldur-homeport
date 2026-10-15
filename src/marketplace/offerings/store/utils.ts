@@ -7,6 +7,7 @@ import {
 
 import { isUniqueOptionFieldType } from '@/marketplace/common/optionErrors';
 import { isPatternFieldType } from '@/marketplace/common/optionPattern';
+import { isTransformFieldType } from '@/marketplace/common/optionTransform';
 import { getFormLimitSerializer } from '@/marketplace/common/registry';
 
 import { PlanFormData, OptionFormData } from './types';
@@ -38,6 +39,7 @@ export const formatOption = (option: OptionFormData) => {
     unique,
     pattern,
     pattern_error,
+    transform,
     display_limit_config,
     ...rest
   } = option;
@@ -132,6 +134,16 @@ export const formatOption = (option: OptionFormData) => {
     item.pattern = pattern;
     if (pattern_error) {
       item.pattern_error = pattern_error;
+    }
+  }
+
+  // Mastermind rejects a transform on other types. Cleared fields are left
+  // out, and a transform with nothing set is not sent at all, so an option
+  // whose transform was cleared loses it.
+  if (transform && isTransformFieldType(item.type)) {
+    const kept = omitBy(transform, (value) => isNil(value) || value === '');
+    if (Object.keys(kept).length) {
+      item.transform = kept;
     }
   }
 

@@ -9,7 +9,7 @@ export const PatternConfiguration = () => (
       name="pattern"
       maxLength={MAX_PATTERN_LENGTH}
       description={translate(
-        'Regular expression the whole value must match, for example [a-z][a-z0-9-]+. Use syntax common to Python and JavaScript.',
+        'Regular expression the whole value must match, for example [a-z][a-z0-9-]+. With a prefix or suffix set, it checks only the part the user types. Use syntax common to Python and JavaScript.',
       )}
     />
     <StringGroup

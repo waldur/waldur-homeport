@@ -111,6 +111,82 @@ describe('OptionsForm Integration', () => {
     });
   });
 
+  describe('transform', () => {
+    const bucketOptions = {
+      order: ['bucket'],
+      options: {
+        bucket: {
+          type: 'string',
+          label: 'Bucket',
+          pattern: '[A-Za-z]+',
+          transform: { prefix: 'acme-', suffix: '-prod', case: 'lower' },
+        },
+      },
+    };
+
+    const renderWithSubmit = (initialValues = {}) => {
+      const onSubmit = vi.fn();
+      renderWithProviders(
+        <Form
+          onSubmit={onSubmit}
+          initialValues={initialValues}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <OptionsForm options={bucketOptions as any} />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        />,
+      );
+      return onSubmit;
+    };
+
+    it('previews the value that will be saved', async () => {
+      renderWithSubmit();
+      expect(
+        screen.queryByTestId('option-transform-preview'),
+      ).not.toBeInTheDocument();
+      await userEvent.type(screen.getByRole('textbox'), 'Backups');
+      expect(screen.getByTestId('option-transform-preview')).toHaveTextContent(
+        'Will be saved as acme-backups-prod',
+      );
+    });
+
+    it('submits what the user typed; mastermind applies the transform', async () => {
+      const onSubmit = renderWithSubmit();
+      await userEvent.type(screen.getByRole('textbox'), 'Backups');
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit.mock.calls[0][0].attributes).toEqual({
+        bucket: 'Backups',
+      });
+    });
+
+    it('accepts a stored value, checking the pattern without the affixes', async () => {
+      const onSubmit = renderWithSubmit({
+        attributes: { bucket: 'acme-archive-prod' },
+      });
+      expect(screen.getByTestId('option-transform-preview')).toHaveTextContent(
+        'Will be saved as acme-archive-prod',
+      );
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
+
+    it('blocks a value made only of the prefix', async () => {
+      const onSubmit = renderWithSubmit();
+      await userEvent.type(screen.getByRole('textbox'), 'acme-');
+      await userEvent.click(screen.getByRole('button', { name: 'Submit' }));
+      expect(onSubmit).not.toHaveBeenCalled();
+      expect(
+        await screen.findByText('Enter a value besides the prefix and suffix.'),
+      ).toBeInTheDocument();
+      // An invalid value would not be saved, so it is not previewed.
+      expect(
+        screen.queryByTestId('option-transform-preview'),
+      ).not.toBeInTheDocument();
+    });
+  });
+
   describe('pattern', () => {
     const slugOptions = {
       order: ['slug'],
