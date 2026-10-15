@@ -27,9 +27,11 @@ export const isRoleCode = isMatchPattern(
 // in @/permissions, role-name/description lookups, autocompletes). `permissions`
 // must stay — hasPermission() relies on it. `is_system_role` must stay — the
 // clone-role and auto-provisioning pickers filter on it, and dropping it makes
-// them silently empty. The 14 description_<lang> translations are dropped here
-// since no ENV.roles consumer reads them.
-const ROLES_CACHE_FIELDS = [
+// them silently empty. `template_name` must stay — isRoleOrClone() reads it to
+// treat an organization clone as the role it copies, and without it a clone of
+// the owner loses every owner screen. The 14 description_<lang> translations are
+// dropped here since no ENV.roles consumer reads them.
+export const ROLES_CACHE_FIELDS = [
   'uuid',
   'name',
   'content_type',
@@ -37,6 +39,7 @@ const ROLES_CACHE_FIELDS = [
   'is_active',
   'is_system_role',
   'permissions',
+  'template_name',
 ] as const;
 
 export const getRoles = (options?: Parameters<typeof rolesList>[0]) =>

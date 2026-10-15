@@ -7,7 +7,7 @@ import { PaymentsList } from '@/customer/payments/PaymentsList';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { getActivePaymentProfile } from '@/invoices/details/utils';
 import { useCustomer, useUser } from '@/workspace/hooks';
-import { checkIsOwner } from '@/workspace/selectors';
+import { checkCanViewAccounting } from '@/workspace/selectors';
 
 export const PaymentsPanel: FunctionComponent = () => {
   const customer = useCustomer();
@@ -17,14 +17,16 @@ export const PaymentsPanel: FunctionComponent = () => {
   const user = useUser();
   const isStaff = user?.is_staff;
   const isSupport = user?.is_support;
-  const isOwner = checkIsOwner(customer, user);
+  const canViewAccounting = checkCanViewAccounting(customer, user);
 
   useEffect(() => {
     setActivePaymentProfile(getActivePaymentProfile(customer.payment_profiles));
   }, [customer]);
 
   if (
-    (isStaff || isSupport || (isOwner && customer.payment_profiles?.length)) &&
+    (isStaff ||
+      isSupport ||
+      (canViewAccounting && customer.payment_profiles?.length)) &&
     activePaymentProfile
   ) {
     return isStaff || isSupport ? <PaymentsList /> : null;

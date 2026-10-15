@@ -2,7 +2,11 @@ import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
 import { RoleEnum } from '@/permissions/enums';
 import { type RootState } from '@/store/reducers';
-import { getUser, isStaffOrSupport } from '@/workspace/selectors';
+import {
+  getUser,
+  isRoleOrClone,
+  isStaffOrSupport,
+} from '@/workspace/selectors';
 import { User } from '@/workspace/types';
 
 import { isReportingScreenEnabled } from './screens';
@@ -35,7 +39,8 @@ export const getReportingOrganizations = (
     // consistently across the report endpoints yet.
     .filter(
       (p) =>
-        p.scope_type === 'customer' && p.role_name === RoleEnum.CUSTOMER_OWNER,
+        p.scope_type === 'customer' &&
+        isRoleOrClone(p.role_name, RoleEnum.CUSTOMER_OWNER),
     )
     .map((p) => ({ uuid: p.scope_uuid, name: p.scope_name }));
 

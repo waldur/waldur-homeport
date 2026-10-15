@@ -2,7 +2,7 @@ import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { StateDeclaration } from '@/core/types';
 import { translate } from '@/i18n';
-import { isOwnerOrStaff } from '@/workspace/selectors';
+import { canViewAccounting } from '@/workspace/selectors';
 
 export const states: StateDeclaration[] = [
   {
@@ -15,7 +15,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Invoices'),
-      permissions: [isOwnerOrStaff],
+      permissions: [canViewAccounting],
       priority: 130,
     },
   },
