@@ -55,7 +55,10 @@ const OptionStep: FC<WizardStepProps> = (props) => {
 const SettingsStep: FC<WizardStepProps> = (props) => (
   <WizardModal {...props}>
     <div className={STEP_HEIGHT}>
-      <OptionSettingsForm offering={props.data.offering} />
+      <OptionSettingsForm
+        offering={props.data.offering}
+        resourceType={props.data.resourceType}
+      />
     </div>
   </WizardModal>
 );

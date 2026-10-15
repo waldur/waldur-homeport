@@ -49,6 +49,7 @@ const mandatoryFields = resourcesListRequiredFields(false).concat([
   'offering_name',
   'limit_usage',
   'limits',
+  'display_limits',
   'current_usages',
   'state',
   'renewal_date',

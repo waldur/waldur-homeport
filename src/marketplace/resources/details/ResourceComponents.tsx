@@ -1,6 +1,8 @@
 import { Col, Row } from 'react-bootstrap';
 import { Resource, OfferingComponent } from 'waldur-js-client';
 
+import { ResourceDisplayLimits } from '../types';
+
 import { ResourceComponentItem } from './ResourceComponentItem';
 import { ResourceShowMoreComponents } from './ResourceShowMoreComponents';
 
@@ -11,7 +13,8 @@ export const ResourceComponents = ({
   resource: Pick<
     Resource,
     'name' | 'current_usages' | 'limits' | 'limit_usage'
-  >;
+  > &
+    ResourceDisplayLimits;
   components: OfferingComponent[];
 }) => {
   if (components.length <= 2) {

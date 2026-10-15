@@ -258,4 +258,54 @@ describe('getQuotaCellProps', () => {
     expect(props.displayUnit).toBe('GB');
     expect(props.units).toBe('GB');
   });
+
+  describe('usage-based component limit', () => {
+    const usageComponent = makeComponent({
+      type: 'inodes',
+      billing_type: 'usage',
+    });
+
+    it('takes the limit from display_limits when none is stored', () => {
+      const props = getQuotaCellProps(
+        usageComponent,
+        makeResource({
+          limits: { storage: 10 },
+          display_limits: { inodes: 2000 },
+          current_usages: { inodes: 1500 },
+        }),
+      );
+      expect(props.usage).toBe('1500');
+      expect(props.limit).toBe('2000');
+    });
+
+    it('prefers a stored limit over display_limits', () => {
+      const props = getQuotaCellProps(
+        usageComponent,
+        makeResource({
+          limits: { inodes: 5 },
+          display_limits: { inodes: 2000 },
+        }),
+      );
+      expect(props.limit).toBe('5');
+    });
+
+    it('shows no limit without a stored or displayed one', () => {
+      const props = getQuotaCellProps(
+        usageComponent,
+        makeResource({ limits: { storage: 10 } }),
+      );
+      expect(props.limit).toBeNull();
+    });
+
+    it('ignores display_limits for a limit-based component', () => {
+      const props = getQuotaCellProps(
+        makeComponent({ type: 'storage' }),
+        makeResource({
+          limits: { storage: 10 },
+          display_limits: { storage: 99 },
+        }),
+      );
+      expect(props.limit).toBe('10');
+    });
+  });
 });

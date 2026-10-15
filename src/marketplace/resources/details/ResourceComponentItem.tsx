@@ -4,6 +4,7 @@ import { translate } from '@/i18n';
 import { TENANT_TYPE } from '@/openstack/constants';
 import { VMWARE_VM } from '@/vmware/constants';
 
+import { ResourceDisplayLimits } from '../types';
 import { getBillingTypeLabelOrDash } from '../usage/utils';
 
 import { QuotaCell } from './QuotaCell';
@@ -51,7 +52,8 @@ export const getQuotaCellProps = (
   resource: Pick<
     Resource,
     'current_usages' | 'limits' | 'limit_usage' | 'offering_type'
-  >,
+  > &
+    ResourceDisplayLimits,
 ) => {
   if (!component) {
     return { usage: '', limit: '', title: '', units: '', displayUnit: '' };
@@ -67,6 +69,13 @@ export const getQuotaCellProps = (
   // that can only grow within a billing period — correct for other limit-based
   // offerings, misleading here. Fall back to the live current_usages instead.
   const isTenant = resource.offering_type === TENANT_TYPE;
+  // A usage-based component has a limit only when the resource stores one or
+  // a resource option is shown as one (display_limits).
+  const usageLimit =
+    component.billing_type === 'usage'
+      ? (resource.limits?.[component.type] ??
+        resource.display_limits?.[component.type])
+      : undefined;
   return {
     usage:
       !isTenant &&
@@ -78,11 +87,14 @@ export const getQuotaCellProps = (
             component.factor,
           ),
     limit:
-      (component.billing_type === 'usage' && resource.limits[component.type]) ||
-      component.billing_type === 'limit' ||
-      (component.billing_type === 'one' && component.is_prepaid)
-        ? normalize(resource.limits[component.type], component.factor)
-        : null,
+      component.billing_type === 'usage'
+        ? usageLimit
+          ? normalize(usageLimit, component.factor)
+          : null
+        : component.billing_type === 'limit' ||
+            (component.billing_type === 'one' && component.is_prepaid)
+          ? normalize(resource.limits?.[component.type], component.factor)
+          : null,
     title: component.name,
     displayUnit,
     units: displayUnit,

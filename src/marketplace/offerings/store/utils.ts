@@ -38,6 +38,7 @@ export const formatOption = (option: OptionFormData) => {
     unique,
     pattern,
     pattern_error,
+    display_limit_config,
     ...rest
   } = option;
   const item: any = {
@@ -62,6 +63,14 @@ export const formatOption = (option: OptionFormData) => {
   // Handle component_multiplier_config for component_multiplier type
   if (component_multiplier_config && item.type === 'component_multiplier') {
     item.component_multiplier_config = component_multiplier_config;
+  }
+
+  // Only an integer option can be shown as a component's limit; a cleared
+  // component, or one left behind by a type change, must not be sent.
+  if (item.type === 'integer' && display_limit_config?.component_type) {
+    item.display_limit_config = {
+      component_type: display_limit_config.component_type,
+    };
   }
 
   if (component_formula_config && item.type === 'component_formula') {
