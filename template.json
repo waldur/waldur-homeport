@@ -8958,6 +8958,7 @@
       "feature_area": "rounds"
     }
   },
+  "Calculate invoice VAT from EU VAT rules and rates instead of the organization's default tax percent.": {},
   "Calculate price": {
     "context": {
       "feature_area": "plan"
@@ -8984,6 +8985,11 @@
   "Calculated components": {
     "context": {
       "feature_area": "options"
+    }
+  },
+  "Calculated from EU VAT rules using the country, VAT code and private person setting. It cannot be changed manually.": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Calculated from the order options": {
@@ -9895,6 +9901,7 @@
       "feature_area": "plans"
     }
   },
+  "Charge EU private persons the VAT rate of their own country (One-Stop Shop). When disabled, the operator's country rate is used, which is only allowed while the operator's cross-border sales to EU private persons stay under EUR 10,000 a year.": {},
   "Charged as part of {name}.": {
     "context": {
       "variables": {
@@ -17575,6 +17582,11 @@
     }
   },
   "EESSI catalog version to load (auto-detect if empty)": {},
+  "EU VAT numbers are checked in the EU VIES system. Only a verified number is invoiced without VAT.": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Each component is set to its formula. A formula may use input (the value entered), numbers, + - * / and parentheses, for example input * 2 * 0.25. Results are rounded up to the precision of the component.": {
     "context": {
       "feature_area": "options"
@@ -21639,7 +21651,7 @@
   },
   "Fetching...": {
     "context": {
-      "feature_area": "async"
+      "feature_area": "steps"
     }
   },
   "Field": {
@@ -28523,7 +28535,7 @@
   },
   "Load more": {
     "context": {
-      "feature_area": "async"
+      "feature_area": "steps"
     }
   },
   "Load new data…": {
@@ -28548,7 +28560,7 @@
   },
   "Loading": {
     "context": {
-      "feature_area": "steps"
+      "feature_area": "async"
     }
   },
   "Loading Arrow customers...": {
@@ -34886,6 +34898,11 @@
   "Not used": {
     "context": {
       "feature_area": "plans"
+    }
+  },
+  "Not verified": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Not yet confirmed": {
@@ -41367,6 +41384,11 @@
       "feature_area": "review"
     }
   },
+  "Private person": {
+    "context": {
+      "feature_area": "details"
+    }
+  },
   "Private registry URL": {
     "context": {
       "feature_area": "create"
@@ -47725,7 +47747,7 @@
           "type": "number"
         }
       },
-      "feature_area": "breadcrumb"
+      "feature_area": "async"
     }
   },
   "Resume": {
@@ -50072,7 +50094,7 @@
   },
   "Search results": {
     "context": {
-      "feature_area": "breadcrumb"
+      "feature_area": "async"
     }
   },
   "Search...": {
@@ -57249,6 +57271,11 @@
     "context": {
       "primary_ui_type": "success_message",
       "feature_area": "organizations"
+    }
+  },
+  "The organization is a private person rather than a company. Used for EU VAT calculation.": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "The organization is matched by exact name against the user.organization claim from the identity provider. The user must also be registered through a method listed in PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS.": {
@@ -68021,6 +68048,7 @@
   "Utilization rate": {},
   "VAT": {
     "context": {
+      "primary_ui_type": "title",
       "feature_area": "details"
     }
   },
@@ -68467,6 +68495,11 @@
   "Verified": {
     "context": {
       "feature_area": "offering-merges"
+    }
+  },
+  "Verified in VIES": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Verify Danish companies via Dun & Bradstreet's Nordic Right to Sign service by checking your name against the company's listed signatories. Matches that can't be confirmed automatically are reviewed by our team.": {},
