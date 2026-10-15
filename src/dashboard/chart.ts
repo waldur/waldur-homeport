@@ -28,28 +28,22 @@ const generateMarkLines = (
   !hLines?.length
     ? undefined
     : {
-        data: hLines.map((line) => [
-          {
-            label: {
-              show: false,
-              position:
-                values && line.value > Math.max(...values.map((v) => Number(v)))
-                  ? 'insideMiddleBottom'
-                  : 'insideMiddleTop',
-              formatter: line.label,
-            },
-            emphasis: { label: { show: true } },
-            lineStyle: { type: 'solid', color: getNeutralLineColor() },
-            yAxis: line.value,
-            x: '0%',
-            symbol: 'none',
+        // A lone yAxis point spans the plot area; the two-point form measured
+        // x from the chart edge, so the line ran out over the axis labels.
+        data: hLines.map((line) => ({
+          label: {
+            show: false,
+            position:
+              values && line.value > Math.max(...values.map((v) => Number(v)))
+                ? 'insideMiddleBottom'
+                : 'insideMiddleTop',
+            formatter: line.label,
           },
-          {
-            yAxis: line.value,
-            x: '100%',
-            symbol: 'none',
-          },
-        ]),
+          emphasis: { label: { show: true } },
+          lineStyle: { type: 'solid', color: getNeutralLineColor() },
+          yAxis: line.value,
+        })),
+        symbol: ['none', 'none'],
       };
 
 export const getScopeChartOptions = (
