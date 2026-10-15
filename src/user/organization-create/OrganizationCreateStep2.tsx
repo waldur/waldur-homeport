@@ -23,7 +23,10 @@ import { useUser } from '@/workspace/hooks';
 
 import { ChecklistQuestionField } from './ChecklistQuestionField';
 import { getAuthMethodInfo } from './constants';
-import { PersonIdentifierFieldsRenderer } from './PersonIdentifierFieldsRenderer';
+import {
+  PersonIdentifierFieldConfig,
+  PersonIdentifierFieldsRenderer,
+} from './PersonIdentifierFieldsRenderer';
 import { OrganizationCreateFormValues } from './types';
 import { QuestionWithMetadata } from './utils';
 
@@ -78,33 +81,44 @@ export const OrganizationCreateStep2: FunctionComponent<
     return false;
   };
 
-  // D&B (Dun & Bradstreet) methods source the person's identity — name, date
-  // of birth, personnummer — from the user's account (populated by the eID
-  // login / profile), never from a form field the applicant types. So instead
-  // of the editable fallback, an incomplete profile must be completed first.
+  // D&B (Dun & Bradstreet) methods read the person's identity from the
+  // account. A missing name is completed on the profile, where names are
+  // always editable (and D&B Denmark only reads them from the account). Any
+  // other missing field — e.g. date of birth, which the profile may hide — is
+  // asked for here; the rest of the identity is filled from the account when
+  // the validation runs.
   const isDnb = validationMethod.startsWith('dnb_');
+  const pif = fieldConfig?.person_identifier_fields;
+  const missingNameLabels =
+    isDnb && pif?.type === 'object' && user
+      ? Object.entries(pif.fields)
+          .filter(
+            ([fieldName]) =>
+              ['first_name', 'last_name'].includes(fieldName) &&
+              !user[fieldName],
+          )
+          .map(([, spec]) => spec.label)
+      : [];
+  const missingProfileLabels = missingNameLabels.join(', ');
 
-  // Labels of the account fields the current method needs but the profile is
-  // missing — shown so the user knows exactly what to add to their profile.
-  const getMissingProfileLabels = (): string[] => {
-    const pif = fieldConfig?.person_identifier_fields;
-    if (!pif || !user) return [];
-    if (pif.type === 'string') {
-      return user[pif.field] ? [] : [pif.label];
-    }
-    if (pif.type === 'object') {
-      return Object.entries(pif.fields)
-        .filter(([fieldName]) => !user[fieldName])
-        .map(([, spec]) => spec.label);
-    }
-    return [];
-  };
-  const missingProfileLabels = getMissingProfileLabels().join(', ');
+  const getMissingFieldsConfig = (): PersonIdentifierFieldConfig | null =>
+    isDnb && pif?.type === 'object'
+      ? {
+          ...fieldConfig,
+          person_identifier_fields: {
+            ...pif,
+            fields: Object.fromEntries(
+              Object.entries(pif.fields).filter(
+                ([fieldName]) => !user?.[fieldName],
+              ),
+            ),
+          },
+        }
+      : fieldConfig;
 
-  // Block advancing while a D&B profile is incomplete: the account can't yet
-  // supply the required identity, and there is no form field to fall back on.
+  // Block advancing while a D&B name is missing from the profile.
   // The reason travels to the footer button so the disabled Next explains why.
-  const blockForIncompleteProfile = isDnb && !hasRequiredFields();
+  const blockForIncompleteProfile = missingNameLabels.length > 0;
   useEffect(() => {
     onSubmitDisabledChange?.(
       blockForIncompleteProfile,
@@ -246,7 +260,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                         </div>
                       </Card.Body>
                     </Card>
-                  ) : isDnb ? (
+                  ) : blockForIncompleteProfile ? (
                     <Card className="card-bordered mb-4">
                       <Card.Body className="d-flex gap-3">
                         <div className="flex-shrink-0">
@@ -297,7 +311,7 @@ export const OrganizationCreateStep2: FunctionComponent<
 
                       {fieldConfig && (
                         <PersonIdentifierFieldsRenderer
-                          fieldConfig={fieldConfig}
+                          fieldConfig={getMissingFieldsConfig()}
                           loading={false}
                         />
                       )}

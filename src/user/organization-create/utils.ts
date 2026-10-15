@@ -10,6 +10,7 @@ import {
   OnboardingQuestionMetadata,
   OnboardingVerification,
   OnboardingCompanyValidationRequestRequest,
+  OnboardingRunValidationRequestRequest,
   QuestionWithAnswer,
   ValidationMethodEnum,
   BlankEnum,
@@ -153,6 +154,29 @@ export const createAnswersFromFormData = (questions: any[], formData: any) => {
   });
 
   return answers;
+};
+
+// Fields are prefixed with 'person_identifier_' by PersonIdentifierFieldsRenderer.
+// D&B object identifiers are sent whole: the form asks only for what the
+// profile lacks, and MasterMind checks the account unless the request carries
+// the full identity, so the rest is filled from the current user.
+export const createRunValidationBody = (
+  formData: any,
+  user: Record<string, any> | null,
+): OnboardingRunValidationRequestRequest => {
+  const body: OnboardingRunValidationRequestRequest = {};
+  const pif = formData.personIdentifierFieldConfig?.person_identifier_fields;
+  if (formData.validationMethod?.startsWith('dnb_') && pif?.type === 'object') {
+    Object.keys(pif.fields).forEach((fieldName) => {
+      if (user?.[fieldName]) body[fieldName] = user[fieldName];
+    });
+  }
+  Object.keys(formData).forEach((key) => {
+    if (key.startsWith('person_identifier_')) {
+      body[key.replace('person_identifier_', '')] = formData[key];
+    }
+  });
+  return body;
 };
 
 export const createVerificationRequestBody = (

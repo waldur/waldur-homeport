@@ -4,14 +4,15 @@ import {
   onboardingVerificationsStartVerification,
   onboardingVerificationsSubmitAnswers,
   OnboardingVerification,
-  OnboardingRunValidationRequestRequest,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import {
   createAnswersFromFormData,
+  createRunValidationBody,
   createVerificationRequestBody,
   fetchChecklistWithMetadata,
 } from './utils';
@@ -45,6 +46,7 @@ export const useChecklistCache = () => {
 
 export const useAutoValidation = (getChecklistData: () => Promise<any>) => {
   const { showSuccess, showErrorResponse } = useNotify();
+  const user = useUser();
   const [validationLoading, setValidationLoading] = useState(false);
   const [validationResult, setValidationResult] =
     useState<OnboardingVerification | null>(null);
@@ -86,20 +88,9 @@ export const useAutoValidation = (getChecklistData: () => Promise<any>) => {
         }
 
         // Step 3: Run validation with user identification
-        const runValidationBody: OnboardingRunValidationRequestRequest = {};
-
-        // Extract person identifier fields dynamically from form data
-        // Fields are prefixed with 'person_identifier_' by PersonIdentifierFieldsRenderer
-        Object.keys(formData).forEach((key) => {
-          if (key.startsWith('person_identifier_')) {
-            const fieldName = key.replace('person_identifier_', '');
-            runValidationBody[fieldName] = formData[key];
-          }
-        });
-
         const validationResponse = await onboardingVerificationsRunValidation({
           path: { uuid: verification.uuid },
-          body: runValidationBody,
+          body: createRunValidationBody(formData, user),
         });
 
         const validation = validationResponse.data;
@@ -115,7 +106,7 @@ export const useAutoValidation = (getChecklistData: () => Promise<any>) => {
         setValidationLoading(false);
       }
     },
-    [showSuccess, showErrorResponse, getChecklistData],
+    [showSuccess, showErrorResponse, getChecklistData, user],
   );
 
   return {
