@@ -34875,6 +34875,11 @@
       "feature_area": "integration"
     }
   },
+  "Not shown as a limit": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Not shown, not end-to-end encrypted: {names}": {
     "context": {
       "variables": {
@@ -52735,6 +52740,11 @@
       "feature_area": "reports"
     }
   },
+  "Show as limit of": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
   "Show available bot commands": {},
   "Show call management: the call-managing organization's workspace, providers' requests for offerings, and proposal reports. Independent of SERVICE_ACCESS_MODE, which governs how applicants reach services.": {
     "context": {
@@ -52972,6 +52982,11 @@
     }
   },
   "Show this option only for certain answers to an earlier option.": {
+    "context": {
+      "feature_area": "options"
+    }
+  },
+  "Show this option's value as the limit of a usage-based component on the resource page. The value is not billed or enforced.": {
     "context": {
       "feature_area": "options"
     }

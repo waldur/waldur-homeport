@@ -83,6 +83,7 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'is_limit_based', // Expandable view, ChangeLimitsAction
     'is_usage_based', // Expandable view, ShowUsageAction, ReportUsageAction
     hasExpandableView ? 'limits' : null, // Expandable view
+    hasExpandableView ? 'display_limits' : null, // Expandable view
     hasExpandableView ? 'limit_usage' : null, // Expandable view
     hasExpandableView ? 'current_usages' : null, // Expandable view
     hasExpandableView ? 'parent_uuid' : null, // Expandable view

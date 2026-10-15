@@ -135,3 +135,39 @@ describe('formatOption pattern', () => {
     expect(item).not.toHaveProperty('pattern');
   });
 });
+
+describe('formatOption display_limit_config', () => {
+  const base = {
+    name: 'inode_quota',
+    label: 'Inode quota',
+    type: { value: 'integer', label: 'Integer' },
+  } as any;
+
+  it('keeps the component an integer option is shown as the limit of', () => {
+    expect(
+      formatOption({
+        ...base,
+        display_limit_config: { component_type: 'inodes' },
+      }).display_limit_config,
+    ).toEqual({ component_type: 'inodes' });
+  });
+
+  it.each([undefined, {}, { component_type: null }, { component_type: '' }])(
+    'leaves out a cleared component (%j)',
+    (display_limit_config) => {
+      expect(
+        formatOption({ ...base, display_limit_config }),
+      ).not.toHaveProperty('display_limit_config');
+    },
+  );
+
+  it('drops a component left behind by a type change', () => {
+    expect(
+      formatOption({
+        ...base,
+        type: { value: 'string', label: 'String' },
+        display_limit_config: { component_type: 'inodes' },
+      }),
+    ).not.toHaveProperty('display_limit_config');
+  });
+});

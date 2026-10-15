@@ -17,6 +17,7 @@ import {
   ComponentFormulaConfiguration,
   ComponentSumConfiguration,
 } from './DerivedLimitConfiguration';
+import { DisplayLimitConfiguration } from './DisplayLimitConfiguration';
 import { DisplayNameField } from './DisplayNameField';
 import { InternalNameField } from './InternalNameField';
 import { K8sDefaultsConfiguration } from './K8sDefaultsConfiguration';
@@ -194,7 +195,13 @@ export const OptionBasicsForm = ({
  * Second step: the settings of the chosen type. The wizard only adds this step
  * for types that have settings (see `hasOptionSettings`).
  */
-export const OptionSettingsForm = ({ offering }: { offering }) => {
+export const OptionSettingsForm = ({
+  offering,
+  resourceType,
+}: {
+  offering;
+  resourceType?: 'options' | 'resource_options';
+}) => {
   const { values } = useFormState({ subscription: { values: true } });
   const OptionComponent = OPTION_COMPONENTS[values.type?.value];
 
@@ -205,6 +212,11 @@ export const OptionSettingsForm = ({ offering }: { offering }) => {
   return (
     <>
       <OptionComponent offering={offering} />
+      {/* Read from the resource, so an order option cannot hold one. */}
+      {resourceType === 'resource_options' &&
+      values.type?.value === 'integer' ? (
+        <DisplayLimitConfiguration offering={offering} />
+      ) : null}
       <DependentsError />
     </>
   );

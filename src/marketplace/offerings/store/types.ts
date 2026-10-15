@@ -42,6 +42,9 @@ export interface OptionFormData {
   unique?: boolean;
   pattern?: string;
   pattern_error?: string;
+  display_limit_config?: {
+    component_type?: string | null;
+  };
 }
 
 export type OfferingLimits = Record<string, { min: number; max: number }>;

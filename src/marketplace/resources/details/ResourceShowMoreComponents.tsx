@@ -4,6 +4,8 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { useModal } from '@/modal/actions';
 
+import { ResourceDisplayLimits } from '../types';
+
 const ResourceComponentsDialog = lazyComponent(() =>
   import('./ResourceComponentsDialog').then((module) => ({
     default: module.ResourceComponentsDialog,
@@ -17,7 +19,8 @@ export const ResourceShowMoreComponents = ({
   resource: Pick<
     Resource,
     'name' | 'current_usages' | 'limits' | 'limit_usage'
-  >;
+  > &
+    ResourceDisplayLimits;
   components: OfferingComponent[];
 }) => {
   const { openDialog } = useModal();

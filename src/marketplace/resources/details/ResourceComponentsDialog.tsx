@@ -6,6 +6,8 @@ import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ScopeSubtitle } from '@/modal/ScopeSubtitle';
 
+import { ResourceDisplayLimits } from '../types';
+
 import { ResourceComponentItem } from './ResourceComponentItem';
 
 interface ResourceComponentsDialogProps {
@@ -13,7 +15,8 @@ interface ResourceComponentsDialogProps {
     resource: Pick<
       Resource,
       'name' | 'current_usages' | 'limits' | 'limit_usage'
-    >;
+    > &
+      ResourceDisplayLimits;
     components: OfferingComponent[];
   };
 }
