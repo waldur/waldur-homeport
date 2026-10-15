@@ -1,4 +1,4 @@
-import { ChatCircleTextIcon, WarningIcon } from '@phosphor-icons/react';
+import { ChatCircleTextIcon, HeadsetIcon } from '@phosphor-icons/react';
 import { User } from 'waldur-js-client';
 
 import { BaseButton } from 'waldur-ui';
@@ -19,9 +19,9 @@ export const UserActions = ({ user }: UserActionsProps) => {
   return (
     <div className="d-flex gap-2">
       {showIssues && (
-        <Link state="profile.issues" buttonVariant="secondary" buttonSize="lg">
+        <Link state="profile.issues" buttonVariant="tertiary" buttonSize="lg">
           <span className="svg-icon svg-icon-2">
-            <WarningIcon weight="bold" />
+            <HeadsetIcon weight="bold" />
           </span>
           {translate('Support')}
         </Link>

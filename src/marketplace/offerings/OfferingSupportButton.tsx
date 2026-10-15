@@ -82,7 +82,7 @@ export const OfferingSupportButton: FC<{ offering: Offering }> = ({
     <BaseButton
       label={translate('Support')}
       iconNode={<HeadsetIcon weight="bold" />}
-      variant="secondary"
+      variant="tertiary"
       onClick={handleClick}
       size="lg"
     />

@@ -1,4 +1,4 @@
-import { HeadsetIcon, WarningIcon } from '@phosphor-icons/react';
+import { HeadsetIcon } from '@phosphor-icons/react';
 import { Project } from 'waldur-js-client';
 
 import { Tooltip } from 'waldur-ui';
@@ -30,11 +30,7 @@ export const ProjectActions = ({ project }: ProjectActionsProps) => {
           ActionsDropdown.tsx's TableDropdownToggle for the full
           explanation) -- letting the icon's own fill="currentColor"
           inherit the button's actual text color instead. */}
-      {isCourseProject ? (
-        <HeadsetIcon weight="bold" size={20} />
-      ) : (
-        <WarningIcon weight="bold" size={20} />
-      )}
+      <HeadsetIcon weight="bold" size={20} />
       {!isCourseProject && translate('Support')}
     </Link>
   );
