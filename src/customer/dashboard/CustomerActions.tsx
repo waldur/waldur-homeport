@@ -1,4 +1,4 @@
-import { WarningIcon } from '@phosphor-icons/react';
+import { HeadsetIcon } from '@phosphor-icons/react';
 import { Customer } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -17,11 +17,10 @@ export const CustomerActions = ({ customer }: CustomerActionsProps) => {
         <Link
           state="organization.issues"
           params={{ uuid: customer.uuid }}
-          buttonVariant="secondary"
+          buttonVariant="tertiary"
+          buttonSize="lg"
         >
-          <span className="svg-icon svg-icon-2">
-            <WarningIcon weight="bold" />
-          </span>
+          <HeadsetIcon weight="bold" size={20} />
           {translate('Support')}
         </Link>
       )}
