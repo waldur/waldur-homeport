@@ -7,6 +7,7 @@ import { translate } from '@/i18n';
 interface TableQueryProps {
   query: string;
   setQuery: (query: string) => void;
+  inputClassName?: string;
 }
 
 interface State {
@@ -38,6 +39,7 @@ export class TableQuery extends Component<TableQueryProps, State> {
         value={this.state.query}
         onChange={this.setQuery}
         className="min-w-125px"
+        inputClassName={this.props.inputClassName}
       />
     );
   }

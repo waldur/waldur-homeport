@@ -259,7 +259,11 @@ export const FeaturesList = () => {
                 </Card.Title>
               </div>
               <div className="card-toolbar d-flex align-items-center gap-4 flex-nowrap">
-                <TableQuery query={query} setQuery={setQuery} />
+                <TableQuery
+                  query={query}
+                  setQuery={setQuery}
+                  inputClassName="h-11"
+                />
                 {canEdit && (
                   <SaveButton
                     type="submit"

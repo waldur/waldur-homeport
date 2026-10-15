@@ -134,7 +134,11 @@ export function TableToolbarActions() {
           {config.hasQuery && (
             <div className="d-flex align-items-center gap-4">
               <div className="table-toolbar-search">
-                <TableQuery query={query} setQuery={actions.setQuery} />
+                <TableQuery
+                  query={query}
+                  setQuery={actions.setQuery}
+                  inputClassName="h-11"
+                />
               </div>
               {config.hideTitle && !config.hideRefresh && !portal?.refresh && (
                 <TableRefreshButton fetch={actions.fetch} loading={loading} />
