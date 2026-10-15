@@ -26,17 +26,11 @@ $svg-icon-colors: (
     }
   }
 
-  // Responsive icon sizes
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-      // Sizes
-      @each $name, $value in $font-sizes {
-        &.svg-icon#{$infix}-#{$name} {
-          @include svg-icon-size($value, true);
-        }
-      }
+  // Sizes, at the base size only: nothing uses a breakpoint variant
+  // (svg-icon-lg-3); a Tailwind lg:size-* covers one if it is ever needed.
+  @each $name, $value in $font-sizes {
+    &.svg-icon-#{$name} {
+      @include svg-icon-size($value, true);
     }
   }
 }

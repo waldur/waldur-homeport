@@ -182,61 +182,43 @@
   }
 }
 
-// Cell gutters
-@each $breakpoint in map-keys($grid-breakpoints) {
-  @include media-breakpoint-up($breakpoint) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+// Cell gutters, at the base size only: Metronic generated every $gutters value
+// at every breakpoint, and tables only ever use the base classes
+// (.table.gy-4.gx-5). A Bootstrap grid .row keeps its own responsive gutters.
+// No DataTables fixes either: DataTables is not a dependency.
+@each $name, $value in $gutters {
+  .table.g-#{$name} {
+    th,
+    td {
+      padding: $value;
+    }
+  }
 
-    @each $name, $value in $gutters {
-      .table.g#{$infix}-#{$name} {
-        th,
-        td {
-          padding: $value;
+  .table.gy-#{$name} {
+    th,
+    td {
+      padding-top: $value;
+      padding-bottom: $value;
+    }
+  }
 
-          // Datatables responsive mode fix
-          &.dtr-control {
-            padding-left: $value !important;
-          }
-        }
+  .table.gx-#{$name} {
+    th,
+    td {
+      padding-left: $value;
+      padding-right: $value;
+    }
+  }
+
+  .table.gs-#{$name} {
+    th,
+    td {
+      &:first-child {
+        padding-left: $value;
       }
 
-      .table.gy#{$infix}-#{$name} {
-        th,
-        td {
-          padding-top: $value;
-          padding-bottom: $value;
-        }
-      }
-
-      .table.gx#{$infix}-#{$name} {
-        th,
-        td {
-          padding-left: $value;
-          padding-right: $value;
-
-          // Datatables responsive mode fix
-          &.dtr-control {
-            padding-left: $value !important;
-          }
-        }
-      }
-
-      .table.gs#{$infix}-#{$name} {
-        th,
-        td {
-          &:first-child {
-            padding-left: $value;
-          }
-
-          &:last-child {
-            padding-right: $value;
-          }
-
-          // Datatables responsive mode fix
-          &.dtr-control:first-child {
-            padding-left: $value !important;
-          }
-        }
+      &:last-child {
+        padding-right: $value;
       }
     }
   }

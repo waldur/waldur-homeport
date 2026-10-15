@@ -134,6 +134,59 @@ $utilities: map-remove(
 // same word painted two weights depending on the prefix.
 $utilities: map-remove($utilities, 'font-weight');
 
+// Utilities nothing in the app uses, so Bootstrap stops generating them
+// (no-retired-bootstrap-utility reports the names, with the Tailwind class to
+// use instead; Tailwind defines its own float-*).
+$utilities: map-remove(
+  $utilities,
+  'float',
+  'viewport-width',
+  'min-viewport-width',
+  'viewport-height',
+  'min-viewport-height',
+  'align-content',
+  'negative-margin-x',
+  'negative-margin-y',
+  'letter-spacing'
+);
+
+// Used only at the base size: no breakpoint variant (`.p-lg-3`, `.min-h-md-
+// 100px`) of these was ever used, and the size scales alone generated 64
+// values at each of five breakpoints. A responsive need is a Tailwind
+// variant (`lg:p-3`) instead.
+@each $key
+  in (
+    'height',
+    'max-height',
+    'min-width',
+    'min-height',
+    'flex',
+    'flex-shrink',
+    'margin-x',
+    'negative-margin-top',
+    'negative-margin-end',
+    'negative-margin-start',
+    'padding-x',
+    'padding-y',
+    'padding-top',
+    'padding-end',
+    'padding-bottom',
+    'font-size'
+  )
+{
+  $utilities: map-merge(
+    $utilities,
+    (
+      $key: map-merge(
+          map-get($utilities, $key),
+          (
+            'responsive': false,
+          )
+        ),
+    )
+  );
+}
+
 // `.border-0` too: Tailwind's sets the same zero width, and Bootstrap's
 // `border: 0 !important` would beat any responsive or state variant beside it.
 $utilities: map-merge(
