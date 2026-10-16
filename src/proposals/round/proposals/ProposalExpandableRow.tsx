@@ -103,6 +103,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
 
   const reviewsCount = tableProps.pagination.resultCount ?? 0;
   const questionsCount = checklistData?.questions?.length ?? 0;
+  const hideReviews = !tableProps.loading && reviewsCount === 0;
 
   const columns = [
     {
@@ -135,42 +136,45 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
         <Field
           label={translate('Project summary')}
           value={row.project_summary}
-          className="col-md-12 mb-5"
+          className="col-md-12 mb-3"
         />
       )}
 
-      <EmbeddedTabs
-        defaultValue="reviews"
-        listClassName="mb-4"
-        tabs={[
-          {
-            key: 'reviews',
-            title: translate('Reviews'),
-            count: reviewsCount,
-            content: (
-              <Table
-                {...tableProps}
-                columns={columns}
-                minHeight="auto"
-                hideRefresh
-                verboseName={translate('Reviews')}
-                equalColWidth
-                hasActionBar={false}
-                rowActions={ProposalReviewsRowActions}
-                showPageSizeSelector
-                initialPageSize={5}
-              />
-            ),
-          },
-          {
-            key: 'compliance',
-            title: translate('Compliance'),
-            count: questionsCount,
-            hidden: !checklistData,
-            content: <ComplianceContent data={checklistData} />,
-          },
-        ]}
-      />
+      {!(hideReviews && !checklistData) && (
+        <EmbeddedTabs
+          defaultValue="reviews"
+          listClassName="mb-4"
+          tabs={[
+            {
+              key: 'reviews',
+              title: translate('Reviews'),
+              count: reviewsCount,
+              hidden: hideReviews,
+              content: (
+                <Table
+                  {...tableProps}
+                  columns={columns}
+                  minHeight="auto"
+                  hideRefresh
+                  verboseName={translate('Reviews')}
+                  equalColWidth
+                  hasActionBar={false}
+                  rowActions={ProposalReviewsRowActions}
+                  showPageSizeSelector
+                  initialPageSize={5}
+                />
+              ),
+            },
+            {
+              key: 'compliance',
+              title: translate('Compliance'),
+              count: questionsCount,
+              hidden: !checklistData,
+              content: <ComplianceContent data={checklistData} />,
+            },
+          ]}
+        />
+      )}
     </ExpandableContainer>
   );
 };
