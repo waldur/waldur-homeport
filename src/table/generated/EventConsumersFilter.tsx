@@ -1,11 +1,31 @@
 // This file is auto-generated. Do not edit manually.
 
 import { FunctionComponent } from 'react';
-import { EventConsumersListData, User, usersList } from 'waldur-js-client';
+import {
+  DeliveryEnum,
+  EventConsumersListData,
+  User,
+  usersList,
+} from 'waldur-js-client';
 
 import { createLoadOptions } from '@/form/select/createLoadOptions';
 import { translate } from '@/i18n';
 import { AsyncSelectFilter, SelectFilter } from '@/table';
+
+export const DeliveryOptions: DeliveryOption[] = [
+  {
+    label: translate('RabbitMQ queue'),
+    value: 'rmq',
+  },
+  {
+    label: translate('HTTP webhook'),
+    value: 'webhook',
+  },
+];
+export interface DeliveryOption {
+  label: string;
+  value: DeliveryEnum;
+}
 
 export const IsGlobalOptions: IsGlobalOption[] = [
   {
@@ -38,6 +58,16 @@ export const EventConsumersFilter: FunctionComponent<{}> = () => (
       isClearable={true}
       placeholder={translate('Any scope')}
     />
+    <SelectFilter
+      title={translate('Delivery')}
+      name="delivery"
+      getValueLabel={(value: DeliveryOption) => value?.label}
+      options={DeliveryOptions}
+      getOptionValue={(option: DeliveryOption) => String(option.value)}
+      getOptionLabel={(option: DeliveryOption) => option.label}
+      isClearable={true}
+      placeholder={translate('Any delivery')}
+    />
     <AsyncSelectFilter
       title={translate('Owner')}
       name="user"
@@ -60,6 +90,7 @@ export const EventConsumersFilterFormId = 'EventConsumersFilter';
 
 export interface EventConsumersFilterFormData {
   is_global: IsGlobalOption;
+  delivery: DeliveryOption;
   user: User;
 }
 
@@ -72,6 +103,9 @@ export const selectEventConsumersFilter = (
   if (values) {
     if (values.is_global) {
       filter.is_global = values.is_global.value;
+    }
+    if (values.delivery) {
+      filter.delivery = values.delivery.value;
     }
     if (values.user) {
       filter.user_uuid = values.user.uuid;
