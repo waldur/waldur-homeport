@@ -103,7 +103,8 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
 
   const reviewsCount = tableProps.pagination.resultCount ?? 0;
   const questionsCount = checklistData?.questions?.length ?? 0;
-  const hideReviews = !tableProps.loading && reviewsCount === 0;
+  const hideReviews =
+    !tableProps.loading && !tableProps.error && reviewsCount === 0;
 
   const columns = [
     {
