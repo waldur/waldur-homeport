@@ -6,30 +6,10 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { Badge } from 'waldur-ui';
-
 import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
 import { TableTab } from '@/table/types';
 import { useUser } from '@/workspace/hooks';
-
-interface TabLabelWithCountProps {
-  label: string;
-  count?: number;
-}
-
-// One neutral counter per tab, as the call state tabs do (see call-tabs.tsx):
-// a colour per tab reads as a status, which a count is not.
-const TabLabelWithCount = ({ label, count }: TabLabelWithCountProps) => (
-  <span className="d-flex align-items-center gap-2">
-    {label}
-    {count !== undefined && count > 0 && (
-      <Badge variant="neutral" size="sm" shape="pill" tone="outline">
-        {count}
-      </Badge>
-    )}
-  </span>
-);
 
 export const useMyReviewsTabs = (): TableTab[] => {
   const user = useUser();
@@ -94,39 +74,26 @@ export const useMyReviewsTabs = (): TableTab[] => {
     () => [
       {
         key: 'reviews',
-        title: (
-          <TabLabelWithCount
-            label={translate('Reviews')}
-            count={reviewsCount}
-          />
-        ),
+        title: translate('Reviews'),
+        count: reviewsCount || undefined,
         state: 'reviews-all-reviews',
       },
       {
         key: 'assignments',
-        title: (
-          <TabLabelWithCount
-            label={translate('Assignments')}
-            count={assignmentsCount}
-          />
-        ),
+        title: translate('Assignments'),
+        count: assignmentsCount || undefined,
         state: 'reviews-assignments',
       },
       {
         key: 'invitations',
-        title: (
-          <TabLabelWithCount
-            label={translate('Invitations')}
-            count={invitationsCount}
-          />
-        ),
+        title: translate('Invitations'),
+        count: invitationsCount || undefined,
         state: 'reviews-invitations',
       },
       {
         key: 'calls',
-        title: (
-          <TabLabelWithCount label={translate('Calls')} count={callsCount} />
-        ),
+        title: translate('Calls'),
+        count: callsCount || undefined,
         state: 'reviews-calls',
       },
     ],

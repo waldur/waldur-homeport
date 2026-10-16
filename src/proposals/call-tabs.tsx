@@ -1,8 +1,6 @@
-import { FC } from 'react';
 import { CallStates } from 'waldur-js-client';
 
 import { BadgeVariant } from 'waldur-ui';
-import { Badge } from 'waldur-ui';
 
 import { fetchResultCount } from '@/core/api';
 import { translate } from '@/i18n';
@@ -62,17 +60,6 @@ export const fetchAllCallCounts = async <Q extends CallCountQueryBase>(
   return { all, active, draft, archived };
 };
 
-const TabTitle: FC<{ label: string; count?: number }> = ({ label, count }) => (
-  <span className="d-flex align-items-center gap-2">
-    {label}
-    {typeof count === 'number' && (
-      <Badge variant="neutral" size="sm" shape="pill" tone="outline">
-        {count}
-      </Badge>
-    )}
-  </span>
-);
-
 /**
  * The call states a list should be filtered by, from either writer of `?state`.
  *
@@ -104,23 +91,27 @@ export const resolveCallStateFilter = (
 export const buildCallTabs = (counts?: CallCounts): TableTab[] => [
   {
     key: 'all',
-    title: <TabTitle label={translate('All')} count={counts?.all} />,
+    title: translate('All'),
+    count: counts?.all,
     params: { state: undefined },
     default: true,
   },
   {
     key: 'active',
-    title: <TabTitle label={translate('Active')} count={counts?.active} />,
+    title: translate('Active'),
+    count: counts?.active,
     params: { state: 'active' },
   },
   {
     key: 'draft',
-    title: <TabTitle label={translate('Draft')} count={counts?.draft} />,
+    title: translate('Draft'),
+    count: counts?.draft,
     params: { state: 'draft' },
   },
   {
     key: 'archived',
-    title: <TabTitle label={translate('Archived')} count={counts?.archived} />,
+    title: translate('Archived'),
+    count: counts?.archived,
     params: { state: 'archived' },
   },
 ];
