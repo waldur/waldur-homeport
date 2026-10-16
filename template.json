@@ -33094,6 +33094,11 @@
       "feature_area": "mass-actions"
     }
   },
+  "No common termination date": {
+    "context": {
+      "feature_area": "mass-actions"
+    }
+  },
   "No compliance questions.": {
     "context": {
       "feature_area": "proposals"
@@ -34316,6 +34321,11 @@
       "feature_area": "site-agents"
     }
   },
+  "No single date is valid for all selected resources, for example because a project has ended or a resource starts after another project ends. Select fewer resources or clear the termination date.": {
+    "context": {
+      "feature_area": "mass-actions"
+    }
+  },
   "No special import options enabled": {
     "context": {
       "feature_area": "single-import"
@@ -34392,6 +34402,18 @@
   "No templates found": {
     "context": {
       "feature_area": "steps"
+    }
+  },
+  "No termination date available": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
+  "No termination date can be set. Clear the date to remove it.": {
+    "context": {
+      "primary_ui_type": "submit_button",
+      "feature_area": "actions",
+      "action_type": "create"
     }
   },
   "No threads have been judged yet.": {
@@ -57396,6 +57418,11 @@
       "feature_area": "projects"
     }
   },
+  "The project has ended or the offering no longer allows a termination date for this resource. The date can only be cleared.": {
+    "context": {
+      "feature_area": "actions"
+    }
+  },
   "The project starts on a future date, so the allocated resources stay in \"Creating\" until then.": {
     "context": {
       "feature_area": "proposal"
@@ -57610,6 +57637,11 @@
   "The selected provider will receive a new ticket and be notified.": {
     "context": {
       "feature_area": "issues"
+    }
+  },
+  "The selected resources have no common termination date.": {
+    "context": {
+      "feature_area": "mass-actions"
     }
   },
   "The selected termination date ({terminationDate}) is after the project end date ({endDate}). The resource will be terminated on the project end date regardless of this setting.": {
@@ -68728,6 +68760,12 @@
   "View access request": {
     "context": {
       "feature_area": "create"
+    }
+  },
+  "View accounting": {
+    "context": {
+      "primary_ui_type": "label",
+      "feature_area": "roles"
     }
   },
   "View accounts": {
