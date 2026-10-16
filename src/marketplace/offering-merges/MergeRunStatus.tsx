@@ -43,7 +43,7 @@ const CheckDetails: FC<{ check: OfferingMergeCheck }> = ({ check }) => {
     <BaseButton
       variant="text-primary"
       size="sm"
-      className="p-0 text-start text-truncate mw-100"
+      className="p-0 text-start truncate max-w-full"
       label={summary}
       tooltip={translate('Show the check details')}
       onClick={() =>
@@ -62,7 +62,7 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
   }
   const progress = merge.progress;
   return (
-    <div className="d-flex flex-column gap-2" data-testid="merge-progress">
+    <div className="flex flex-col gap-2" data-testid="merge-progress">
       <span>
         {merge.state === 'undoing'
           ? translate('Undoing the merge…')
@@ -76,7 +76,7 @@ export const MergeProgress: FC<{ merge: OfferingMerge }> = ({ merge }) => {
             value={progress.steps_done}
             max={Math.max(progress.steps_total, 1)}
           />
-          <span className="text-quaternary fs-7">
+          <span className="text-quaternary text-xs">
             {translate(
               'Step {done} of {total}: {step}. Rows {rowsDone} of {rowsTotal}.',
               {
@@ -107,10 +107,10 @@ const VerificationReport: FC<{
       'Checks run automatically right after the operation, in the same transaction. A failed check rolls nothing back: it tells you to undo.',
     )}
     title={
-      <span className="d-flex align-items-center gap-3">
+      <span className="flex items-center gap-3">
         {title}
         <PassedBadge passed={report.passed} />
-        <span className="text-quaternary fs-7 font-normal">
+        <span className="text-quaternary text-xs font-normal">
           {formatDateTime(report.checked_at)}
         </span>
       </span>
@@ -120,7 +120,7 @@ const VerificationReport: FC<{
     columns={[
       {
         title: translate('Check'),
-        render: ({ row }) => <code className="fs-7">{row.code}</code>,
+        render: ({ row }) => <code className="text-xs">{row.code}</code>,
       },
       {
         title: translate('Result'),
@@ -138,7 +138,7 @@ const VerificationReport: FC<{
 export const MergeVerification: FC<{ merge: OfferingMerge }> = ({ merge }) => {
   const verification = merge.verification;
   return (
-    <div className="d-flex flex-column gap-4">
+    <div className="flex flex-col gap-4">
       {merge.error_message ? (
         <AlertItem
           variant="error"

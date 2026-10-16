@@ -40,7 +40,7 @@ export const ReportingLayout: FC = () => {
 
   return (
     <div className="container-fluid py-9">
-      <div className="d-flex justify-content-between align-items-center gap-4 mb-5">
+      <div className="flex justify-between items-center gap-4 mb-5">
         <h1>{translate('Reporting')}</h1>
         {isDashboard && (
           <SegmentedControl<number>

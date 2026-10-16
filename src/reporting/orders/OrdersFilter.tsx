@@ -77,13 +77,13 @@ export const OrdersFilter: FC<OrdersFilterProps> = ({
   );
 
   return (
-    <div className="d-flex align-items-center gap-6">
+    <div className="flex items-center gap-6">
       {extraFilters}
-      <div className="d-flex align-items-center gap-4">
+      <div className="flex items-center gap-4">
         <label
           className={classNames(
             'text-quaternary whitespace-nowrap',
-            inCardHeader ? 'fs-6' : 'fs-7',
+            inCardHeader ? 'text-sm' : 'text-xs',
           )}
         >
           {translate('Time period')}:

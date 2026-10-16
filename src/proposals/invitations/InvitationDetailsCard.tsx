@@ -9,7 +9,7 @@ const DetailRow: FC<PropsWithChildren<{ label: string }>> = ({
   label,
   children,
 }) => (
-  <div className="d-flex gap-4">
+  <div className="flex gap-4">
     <div className="min-w-125px">{label}</div>
     <div className="text-quaternary">{children}</div>
   </div>
@@ -26,7 +26,7 @@ export const InvitationDetailsCard: FC<{ invitation: PublicInvitation }> = ({
     </Card.Header>
     <Card.Body>
       <Row className="gy-3">
-        <Col md={6} className="d-flex flex-column gap-3">
+        <Col md={6} className="flex flex-col gap-3">
           <DetailRow label={translate('Call name:')}>
             {invitation.call_name}
           </DetailRow>
@@ -41,7 +41,7 @@ export const InvitationDetailsCard: FC<{ invitation: PublicInvitation }> = ({
             </DetailRow>
           )}
         </Col>
-        <Col md={6} className="d-flex flex-column gap-3">
+        <Col md={6} className="flex flex-col gap-3">
           {invitation.invited_at && (
             <DetailRow label={translate('Invited on:')}>
               {formatDateTime(invitation.invited_at)}

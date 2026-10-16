@@ -81,13 +81,10 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
 
   return (
     <div
-      className={classNames(
-        'image-input d-flex flex-column flex-sm-row gap-8',
-        {
-          'image-input-empty': !input.value,
-          'image-input-changed': isChanged,
-        },
-      )}
+      className={classNames('image-input flex flex-col sm:flex-row gap-8', {
+        'image-input-empty': !input.value,
+        'image-input-changed': isChanged,
+      })}
     >
       <div>
         <div className={`symbol symbol-${size}px symbol-circle`}>
@@ -95,7 +92,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             <div ref={previewRef} className="symbol-label" />
           ) : (
             <ImagePlaceholder width={`${size}px`} height={`${size}px`} circle>
-              <div className="symbol-label fs-2 font-medium w-100 h-100">
+              <div className="symbol-label text-xl font-medium w-full h-full">
                 {props.alt}
               </div>
             </ImagePlaceholder>
@@ -103,14 +100,14 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
         </div>
       </div>
       <div>
-        <p className="text-secondary fs-6">
+        <p className="text-secondary text-sm">
           {max !== Infinity
             ? translate('Upload an image JPG or PNG, under {maxSize}', {
                 maxSize: formatFilesize(max, 'B'),
               })
             : translate('Upload an image JPG or PNG')}
         </p>
-        <div className="d-flex gap-2 mb-4">
+        <div className="flex gap-2 mb-4">
           <BaseButton
             variant="tertiary"
             size="sm"
@@ -127,7 +124,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             name={input.name}
             accept=".png, .jpg, .jpeg"
             onChange={(event) => changeImage(event.target.files[0])}
-            className="d-none"
+            className="hidden"
             disabled={props.disabled}
           />
           <BaseButton

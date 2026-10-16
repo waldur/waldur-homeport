@@ -150,7 +150,7 @@ const ExtendForm: FC<ExtendFormProps> = ({
           <div
             role="group"
             aria-label={translate('Quick extend options')}
-            className="d-flex flex-wrap gap-2"
+            className="flex flex-wrap gap-2"
           >
             {QUICK_OFFSETS.map((offset) => {
               const isSelected = activeQuickKey === offset.key;

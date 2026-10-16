@@ -179,14 +179,13 @@ function Row({
       ))}
       <div className="py-2">
         <Mono
-          className="text-[11px] text-quaternary"
+          className="text-[11px] text-quaternary rounded-sm"
           style={
             parseColor(value) && !isShadow(token.name)
               ? {
                   background: value,
                   color: readableOn(value) ?? undefined,
                   padding: '1px 4px',
-                  borderRadius: 4,
                 }
               : undefined
           }

@@ -34,7 +34,7 @@ export const TagBadges: FC<TagBadgesProps> = ({
   };
 
   return (
-    <div className={`d-flex flex-wrap gap-1 ${className}`}>
+    <div className={`flex flex-wrap gap-1 ${className}`}>
       {visibleTags.map((tag) => (
         <Tag
           key={tag.uuid}

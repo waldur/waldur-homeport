@@ -32,7 +32,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
   const isOwnerOrStaff = checkIsOwnerOrStaff(customer, user);
   return (
     <div>
-      <h3 className="mb-1 d-flex align-items-center flex-wrap">
+      <h3 className="mb-1 flex items-center flex-wrap">
         {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
           project.is_industry && (
             <span className="svg-icon svg-icon-3 me-3">
@@ -76,8 +76,8 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
 
 const ProjectKindCard = ({ project }: ProjectProfileProps) => {
   return (
-    <div className="d-flex gap-7 ms-n2">
-      <div className="border rounded w-40px h-40px d-flex flex-center flex-shrink-0">
+    <div className="flex gap-7 ms-n2">
+      <div className="border rounded w-40px h-40px flex flex-center shrink-0">
         <span className="svg-icon svg-icon-2 svg-icon-gray-600">
           {project.kind === 'course' ? (
             <GraduationCapIcon weight="bold" />
@@ -96,7 +96,7 @@ const ProjectKindCard = ({ project }: ProjectProfileProps) => {
               ? translate('This is project public type')
               : 'N/A'}
         </h6>
-        <p className="fs-6 text-quaternary">
+        <p className="text-sm text-quaternary">
           {project.kind === 'course'
             ? translate(
                 'This course project enables creation of short-lived course accounts.',

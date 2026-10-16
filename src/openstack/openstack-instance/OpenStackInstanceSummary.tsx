@@ -31,7 +31,7 @@ const VolumeBadges = ({
   resource?: OpenStackInstance;
 }) => {
   return (
-    <div className="d-flex flex-wrap-wrap">
+    <div className="flex flex-wrap-wrap">
       {volumes.map((volume) => (
         <OpenStackInstanceVolumeBadge
           key={volume.uuid}

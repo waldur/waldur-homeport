@@ -52,7 +52,7 @@ const HealthInfoItem = ({
 
   const statusContent = (
     <div className="text-center">
-      <div className="d-flex justify-content-center align-items-center mb-2">
+      <div className="flex justify-center items-center mb-2">
         {getStatusIcon(isWorking, hasError)}
         <span className={`ms-2 font-medium ${getStatusColorClass(isWorking)}`}>
           {message}
@@ -72,7 +72,7 @@ const HealthInfoItem = ({
             </>
           }
         >
-          <div className="p-3 border rounded bg-danger-subtle cursor-pointer h-100">
+          <div className="p-3 border rounded bg-danger-subtle cursor-pointer h-full">
             {statusContent}
           </div>
         </Tooltip>
@@ -82,7 +82,7 @@ const HealthInfoItem = ({
 
   return (
     <Col xs={12} md={6} lg={4} xl={3} className="mb-4">
-      <div className="p-3 border rounded bg-success-subtle h-100">
+      <div className="p-3 border rounded bg-success-subtle h-full">
         {statusContent}
       </div>
     </Col>
@@ -104,9 +104,9 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
   return (
     <Card className="card-bordered mb-5">
       <Card.Body>
-        <div className="d-flex justify-content-between align-items-center mb-4">
+        <div className="flex justify-between items-center mb-4">
           <h3 className="mb-0">{translate('Health checks')}</h3>
-          <div className="d-flex align-items-center">
+          <div className="flex items-center">
             {allWorking ? (
               <CheckCircleIcon
                 size={20}

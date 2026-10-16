@@ -86,7 +86,9 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
         );
       }
       return (
-        <span className={classNames(textColorClass, 'fs-4')}>{arrowIcon}</span>
+        <span className={classNames(textColorClass, 'text-base')}>
+          {arrowIcon}
+        </span>
       );
     }
 
@@ -114,7 +116,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
 
     return (
       <span className={textColorClass}>
-        <span className="fs-4 me-1">{arrowIcon}</span>
+        <span className="text-base me-1">{arrowIcon}</span>
         {content}
       </span>
     );

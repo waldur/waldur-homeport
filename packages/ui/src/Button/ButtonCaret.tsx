@@ -38,7 +38,7 @@ export const ButtonCaret: FC<ButtonCaretProps> = ({
     size={getButtonIconSize(size)}
     style={isOpen ? { transform: 'rotateZ(180deg)' } : undefined}
     className={cn(
-      'flex-shrink-0 rotate-toggle-180 transition-[transform,rotate] duration-300 ease-[ease] group-data-[state=open]/toggle:rotate-180',
+      'shrink-0 rotate-toggle-180 transition-[transform,rotate] duration-300 ease-[ease] group-data-[state=open]/toggle:rotate-180',
       className,
     )}
   />

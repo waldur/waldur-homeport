@@ -66,9 +66,9 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
         <Form.Label className="font-medium">
           {translate('Your token')}
         </Form.Label>
-        <div className="d-flex align-items-center gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
+        <div className="flex items-center gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
           <button
-            className="text-btn flex-shrink-0"
+            className="text-btn shrink-0"
             type="button"
             onClick={toggleSecret}
           >
@@ -78,7 +78,7 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
               <EyeIcon size={20} weight="bold" />
             )}
           </button>
-          <code className="flex-grow-1 text-break">
+          <code className="grow text-break">
             {showSecret ? token : maskedToken}
           </code>
           <CopyToClipboardButton value={token} />
@@ -89,8 +89,8 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
         <Form.Label className="font-medium">
           {translate('Example usage')}
         </Form.Label>
-        <div className="d-flex align-items-start gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
-          <code className="flex-grow-1 text-break">
+        <div className="flex items-start gap-2 p-3 bg-tertiary dark:bg-quaternary rounded">
+          <code className="grow text-break">
             {showSecret ? curlExample : maskedCurlExample}
           </code>
           <CopyToClipboardButton value={curlExample} />

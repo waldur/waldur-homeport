@@ -11,7 +11,7 @@
 
   // Section heading
   .aui-vm-order-heading {
-    font-size: 1rem;
+    font-size: var(--text-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
     margin-bottom: 0.75rem;
@@ -43,7 +43,7 @@
       color: var(--text-secondary);
       border-radius: 50%;
       font-weight: var(--font-weight-semibold);
-      font-size: 0.875rem;
+      font-size: var(--text-xs);
       flex-shrink: 0;
     }
 
@@ -53,14 +53,14 @@
       min-width: 0; // Allow text truncation
 
       .aui-vm-order-preview-name {
-        font-size: 1.1rem;
+        font-size: var(--text-lg);
         font-weight: var(--font-weight-medium);
         color: var(--text-primary);
         margin-bottom: 0.25rem;
       }
 
       .aui-vm-order-preview-project {
-        font-size: 1.1rem;
+        font-size: var(--text-lg);
         color: var(--text-tertiary);
       }
     }
@@ -78,7 +78,7 @@
       @include mirrored-ramp-color(border-color, blue, 200);
       border-radius: 0.5rem;
       padding: 1rem 1.25rem;
-      font-size: 1rem;
+      font-size: var(--text-sm);
       flex-shrink: 0;
     }
 
@@ -125,13 +125,13 @@
     border: 1px solid var(--border-primary);
 
     .aui-vm-order-id-label {
-      font-size: 0.875rem;
+      font-size: var(--text-xs);
       font-weight: var(--font-weight-semibold);
       color: var(--text-secondary);
     }
 
     code {
-      font-size: 0.875rem;
+      font-size: var(--text-xs);
       padding: 0.25rem 0.5rem;
       background-color: var(--bg-primary);
       border-radius: 0.25rem;
@@ -160,7 +160,7 @@
 
       .aui-vm-order-form-label {
         display: block;
-        font-size: 1rem;
+        font-size: var(--text-sm);
         font-weight: var(--font-weight-semibold);
         color: var(--text-primary);
         margin-bottom: 0.5rem;
@@ -203,7 +203,7 @@
       }
 
       .aui-vm-order-result-message {
-        font-size: 1rem;
+        font-size: var(--text-sm);
         font-weight: var(--font-weight-semibold);
         color: var(--text-primary);
       }
@@ -218,7 +218,7 @@
       @include mirrored-ramp-color(background-color, error, 100);
       border-radius: 0.375rem;
       @include mirrored-ramp-color(color, error, 600);
-      font-size: 0.875rem;
+      font-size: var(--text-xs);
 
       svg {
         flex-shrink: 0;

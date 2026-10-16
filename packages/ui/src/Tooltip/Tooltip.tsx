@@ -83,7 +83,7 @@ const contentClassName = ({
   className: string | undefined;
 }) =>
   cn(
-    'rounded-lg text-[12px] leading-[17px] drop-shadow-[0_12px_16px_rgba(16,24,40,0.1)]',
+    'rounded-lg text-xs leading-[17px] drop-shadow-[0_12px_16px_rgba(16,24,40,0.1)]',
     autoWidth ? 'max-w-none' : 'max-w-[200px]',
     hasBody ? 'p-[12px] text-left' : 'px-[12px] py-[8px] text-center',
     theme === 'dark'

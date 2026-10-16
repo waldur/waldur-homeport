@@ -52,7 +52,7 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
           getOptionValue={(opt) => opt.uuid}
           getOptionLabel={(opt) => opt.name}
           onChange={setAgentIdentity}
-          className="flex-grow-1 w-175px mw-sm-350px"
+          className="grow w-175px mw-sm-350px"
         />
       }
     >

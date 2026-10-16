@@ -2,7 +2,7 @@ import { Link } from '@/core/Link';
 import { formatJsx, translate } from '@/i18n';
 
 export const TosNotification = ({
-  className = 'text-center text-quinary fs-6 mt-2 mb-0',
+  className = 'text-center text-quinary text-sm mt-2 mb-0',
 }) => (
   <p className={className}>
     {translate(

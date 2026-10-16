@@ -32,7 +32,7 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
   return (
     <ModalDialog
       title={resource.name}
-      footerClassName="justify-content-between"
+      footerClassName="justify-between"
       footer={
         <>
           <div>
@@ -54,10 +54,10 @@ export const BookingResourceDetailsDialog: FC<OwnProps> = (props) => {
         </>
       }
     >
-      <div className="d-flex justify-content-between mb-8">
+      <div className="flex justify-between mb-8">
         <div>
           {resource.attributes.schedules.map((sch, i) => (
-            <span key={i} className="d-block font-medium">
+            <span key={i} className="block font-medium">
               {parseDate(sch.start).toFormat("dd'.'MM'.'yyyy HH:mm")}
               {' - '}
               {parseDate(sch.end).toFormat("dd'.'MM'.'yyyy HH:mm")}

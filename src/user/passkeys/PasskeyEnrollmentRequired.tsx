@@ -109,7 +109,7 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
 
   return (
     <Container className="py-10">
-      <Row className="justify-content-center">
+      <Row className="justify-center">
         <Col md={7} lg={6}>
           <Card>
             <Card.Body className="text-center p-10">
@@ -128,7 +128,7 @@ export const PasskeyEnrollmentRequired: FunctionComponent = () => {
                 pending={resuming}
                 onClick={enrol}
                 label={translate('Add passkey')}
-                className="w-100"
+                className="w-full"
                 data-testid="passkey-enrollment-required-add"
                 variant="primary"
                 size="lg"

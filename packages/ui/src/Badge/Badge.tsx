@@ -144,7 +144,7 @@ export const BADGE_STYLES: Record<BadgeVariant, Record<BadgeTone, string>> = {
 
 // CVA only handles structural layout variants now.
 const badgeVariants = cva(
-  'badge inline-flex items-center justify-center border-[1px] text-[1.075rem] leading-[20px] font-medium transition-colors',
+  'badge inline-flex items-center justify-center border-[1px] text-sm leading-[20px] font-medium transition-colors',
   {
     variants: {
       size: {
@@ -153,8 +153,8 @@ const badgeVariants = cva(
         // Tailwind rewrite dropped it and left the base `leading-[20px]` in
         // place, which made the *small* badge 26px — 2px taller than the
         // default it is supposed to be smaller than.
-        sm: 'text-[0.85rem] leading-[18px]',
-        lg: 'text-[1rem]',
+        sm: 'text-xs leading-[18px]',
+        lg: 'text-sm',
       },
       shape: {
         rounded: 'rounded-lg',
@@ -185,22 +185,22 @@ const badgeVariants = cva(
       {
         shape: 'circle',
         size: 'sm',
-        class: 'size-5 min-w-5 text-[0.75rem] p-0',
+        class: 'size-5 min-w-5 text-xs p-0',
       },
       {
         shape: 'circle',
         size: 'lg',
-        class: 'size-7 min-w-7 text-[0.95rem] p-0',
+        class: 'size-7 min-w-7 text-xs p-0',
       },
       {
         onlyIcon: true,
         size: 'sm',
-        class: 'size-5 min-w-5 text-[0.75rem] p-0',
+        class: 'size-5 min-w-5 text-xs p-0',
       },
       {
         onlyIcon: true,
         size: 'lg',
-        class: 'size-7 min-w-7 text-[0.95rem] p-0',
+        class: 'size-7 min-w-7 text-xs p-0',
       },
     ],
   },

@@ -87,7 +87,7 @@ export const EmailHealthPage: FC = () => {
     <Panel
       title={title}
       actions={
-        <div className="d-flex align-items-center gap-4">
+        <div className="flex items-center gap-4">
           <RefreshButton refetch={reload} isLoading={isRefetching} />
           <BaseButton
             pending={probe.isPending}

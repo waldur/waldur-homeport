@@ -96,11 +96,11 @@ export const VerticalProgressSteps: FC<VerticalProgressStepsProps> = ({
               )}
             </div>
             <div className="flex-1 pt-[0.25rem]">
-              <div className="mb-[0.25rem] text-[14px] font-medium text-secondary group-enabled:group-hover:text-brand">
+              <div className="mb-[0.25rem] text-sm font-medium text-secondary group-enabled:group-hover:text-brand">
                 {step.label}
               </div>
               {step.description && (
-                <div className="text-[14px] leading-[1.4] text-quaternary">
+                <div className="text-sm leading-5 text-quaternary">
                   {Array.isArray(step.description)
                     ? step.description.map((line, i) => (
                         <div key={i}>{line}</div>

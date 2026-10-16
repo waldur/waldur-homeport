@@ -306,11 +306,11 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
         disabled={isProcessing}
       />
       {rejectionError && (
-        <div className="text-danger fs-7 mt-1">{rejectionError}</div>
+        <div className="text-danger text-xs mt-1">{rejectionError}</div>
       )}
 
       {isProcessing && (
-        <div className="d-flex align-items-center gap-2 mt-2 text-quaternary">
+        <div className="flex items-center gap-2 mt-2 text-quaternary">
           <LoadingSpinner />
           <span>{translate('Processing files...')}</span>
         </div>
@@ -326,7 +326,7 @@ export const ChecklistFileUpload: FC<ChecklistFileUploadProps> = ({
                 </div>
                 <div className="attachment-item__body">
                   <h6 className="font-medium text-secondary">{file.name}</h6>
-                  <p className="fs-6 text-quaternary">
+                  <p className="text-sm text-quaternary">
                     {'stored_file_id' in file
                       ? translate('Uploaded')
                       : translate('Pending upload')}

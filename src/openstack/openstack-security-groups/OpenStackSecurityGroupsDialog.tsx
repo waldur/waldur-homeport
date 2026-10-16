@@ -59,7 +59,7 @@ export const OpenStackSecurityGroupsTable: FunctionComponent<{
                       )}
                     </td>
                   ) : (
-                    <td className="d-none" />
+                    <td className="hidden" />
                   )}
                   <SecurityGroupRuleCell rule={rule as any} />
                 </tr>

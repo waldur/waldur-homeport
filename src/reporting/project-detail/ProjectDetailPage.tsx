@@ -293,11 +293,8 @@ export const ProjectDetailPage: FC = () => {
         <ReportingOrganizationSelect onChange={handleOrganizationChange} />
       </ReportingTitle>
       {/* Filters */}
-      <div className="d-flex flex-wrap gap-6 mb-6">
-        <FormGroup
-          label={translate('Project')}
-          className="flex-grow-1 mw-400px"
-        >
+      <div className="flex flex-wrap gap-6 mb-6">
+        <FormGroup label={translate('Project')} className="grow mw-400px">
           <AsyncSelect
             key={selectedOrganization?.uuid || 'no-org'}
             placeholder={translate('Select project...')}
@@ -314,10 +311,7 @@ export const ProjectDetailPage: FC = () => {
           />
         </FormGroup>
 
-        <FormGroup
-          label={translate('Resource')}
-          className="flex-grow-1 mw-400px"
-        >
+        <FormGroup label={translate('Resource')} className="grow mw-400px">
           <Select
             placeholder={translate('Select resource...')}
             options={resourceOptions}
@@ -335,7 +329,7 @@ export const ProjectDetailPage: FC = () => {
 
         <FormGroup
           label={translate('Component type')}
-          className="flex-grow-1 mw-300px"
+          className="grow mw-300px"
         >
           <Select
             placeholder={translate('All types')}

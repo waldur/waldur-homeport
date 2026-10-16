@@ -65,7 +65,7 @@ const AssignmentItemActions: FC<AssignmentItemActionsProps> = ({
   }
 
   return (
-    <div className="d-flex gap-2">
+    <div className="flex gap-2">
       <AcceptAssignmentAction item={item} batchUuid={batchUuid} />
       <DeclineAssignmentAction item={item} batchUuid={batchUuid} />
     </div>
@@ -149,7 +149,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
                 </td>
                 <td>
                   {item.has_coi ? (
-                    <span className="d-inline-flex align-items-center gap-1">
+                    <span className="inline-flex items-center gap-1">
                       <Badge variant="danger" size="sm" tone="outline">
                         {translate('COI detected')}
                       </Badge>
@@ -222,7 +222,7 @@ export const MyAssignmentsPage: FC = () => {
   });
 
   return (
-    <div className="d-flex flex-column" style={{ gap: 16 }}>
+    <div className="flex flex-col" style={{ gap: 16 }}>
       <ReviewerProfileSummaryCard />
       <ReviewStatsWidgets />
 
@@ -279,7 +279,7 @@ export const MyAssignmentsPage: FC = () => {
               <>
                 {row.expires_at ? formatDateTime(row.expires_at) : '-'}
                 {row.is_expired && (
-                  <span className="d-inline-flex align-items-center gap-1 ms-1">
+                  <span className="inline-flex items-center gap-1 ms-1">
                     <Badge variant="danger" size="sm" tone="outline">
                       {translate('Expired')}
                     </Badge>

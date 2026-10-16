@@ -17,7 +17,7 @@ export const UserActions = ({ user }: UserActionsProps) => {
   const showIssues = hasSupport();
   const staffRequest = useStaffRequest(user);
   return (
-    <div className="d-flex gap-2">
+    <div className="flex gap-2">
       {showIssues && (
         <Link state="profile.issues" buttonVariant="tertiary" buttonSize="lg">
           <HeadsetIcon weight="bold" size={20} />

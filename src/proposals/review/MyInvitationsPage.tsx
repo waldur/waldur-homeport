@@ -80,7 +80,7 @@ export const MyInvitationsPage: FC = () => {
   });
 
   return (
-    <div className="d-flex flex-column" style={{ gap: 16 }}>
+    <div className="flex flex-col" style={{ gap: 16 }}>
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard />
       {/* Stats widgets */}

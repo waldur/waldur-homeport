@@ -74,7 +74,7 @@ const PrepaidRow = ({
         }
         actions={
           <>
-            <span className="d-block">
+            <span className="block">
               {translate('Total')}: {cost.total}
             </span>
             {cost.details && (

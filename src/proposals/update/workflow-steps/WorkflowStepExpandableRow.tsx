@@ -55,7 +55,7 @@ const renderEvaluators = (row: CallWorkflowStep) => {
   const users = row.responsible_users ?? [];
   if (users.length === 0) {
     return (
-      <span className="text-warning d-inline-flex align-items-center gap-1">
+      <span className="text-warning inline-flex items-center gap-1">
         {}
         <WarningCircleIcon weight="bold" />
         {translate('Nobody holds this role yet.')}{' '}
@@ -70,7 +70,7 @@ const renderEvaluators = (row: CallWorkflowStep) => {
   return (
     <ul className="list-unstyled mb-0">
       {users.map((user) => (
-        <li key={user.uuid} className="d-flex align-items-center gap-2">
+        <li key={user.uuid} className="flex items-center gap-2">
           <span>{user.full_name || user.username}</span>
           <span className="text-quaternary">
             {user.username} · {user.email}

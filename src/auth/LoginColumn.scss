@@ -32,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   padding: 12px 24px;
-  font-size: 1rem;
+  font-size: var(--text-sm);
   font-weight: var(--font-weight-medium);
   border-top: 1px solid var(--border-secondary);
   margin: 0 -10px;
@@ -86,7 +86,7 @@
 
   .login-footer {
     padding: 8px 16px;
-    font-size: 0.875rem;
+    font-size: var(--text-xs);
   }
 
   .powered-by {

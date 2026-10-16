@@ -116,7 +116,7 @@ const PreviewUsersTable: FC<{ row: PreviewRow }> = ({ row }) => {
 
 const PreviewExpandableRow: FC<{ row: PreviewRow }> = ({ row }) => (
   <ExpandableContainer>
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <PreviewProjectsTable row={row} />
       <PreviewUsersTable row={row} />
     </div>
@@ -156,7 +156,7 @@ export const SramRulePreviewDialog: FC<SramRulePreviewDialogProps> = ({
       title: translate('SRAM group'),
       render: ({ row }) => (
         <div>
-          <div className="d-flex align-items-center gap-2">
+          <div className="flex items-center gap-2">
             {row.group.display_name}
             <SramGroupKindBadge kind={row.group.kind} />
           </div>

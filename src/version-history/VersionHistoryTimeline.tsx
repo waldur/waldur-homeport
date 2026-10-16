@@ -18,7 +18,7 @@ export const VersionHistoryTimeline: FunctionComponent<
   if (isLoading) {
     return (
       <div
-        className="d-flex justify-content-center align-items-center py-10 text-quaternary fs-6"
+        className="flex justify-center items-center py-10 text-quaternary text-sm"
         role="status"
       >
         <span
@@ -32,7 +32,7 @@ export const VersionHistoryTimeline: FunctionComponent<
 
   if (versions.length === 0) {
     return (
-      <div className="text-center text-quaternary py-10 fs-6">
+      <div className="text-center text-quaternary py-10 text-sm">
         {translate('No version history available.')}
       </div>
     );

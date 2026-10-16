@@ -74,8 +74,8 @@ export const MergeCheckDetailsDialog: FC<MergeCheckDetailsDialogProps> = ({
   <ModalDialog
     title={translate('Verification check')}
     subtitle={
-      <span className="d-flex flex-wrap align-items-center gap-2">
-        <code className="fs-8">{check.code}</code>
+      <span className="flex flex-wrap items-center gap-2">
+        <code className="text-xs">{check.code}</code>
         <StateIndicator
           label={check.passed ? translate('Passed') : translate('Failed')}
           variant={check.passed ? 'success' : 'danger'}
@@ -89,7 +89,7 @@ export const MergeCheckDetailsDialog: FC<MergeCheckDetailsDialogProps> = ({
     <DetailsValue value={check.details ?? null} />
     <details className="mt-5" data-testid="merge-check-raw">
       <summary className="text-quaternary">{translate('Raw payload')}</summary>
-      <pre className="fs-8 mb-0 mt-2 overflow-auto">
+      <pre className="text-xs mb-0 mt-2 overflow-auto">
         {JSON.stringify(check.details ?? null, null, 2)}
       </pre>
     </details>

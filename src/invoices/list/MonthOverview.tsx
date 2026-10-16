@@ -35,7 +35,7 @@ interface MonthOverviewProps {
 const OverviewItemTr = ({ title, value }) => {
   return (
     <tr>
-      <td className="text-decoration-underline w-100 py-3">{title}</td>
+      <td className="text-decoration-underline w-full py-3">{title}</td>
       <td className="text-quaternary text-nowrap">{value}</td>
     </tr>
   );
@@ -79,12 +79,12 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
   }
 
   return (
-    <Card className="card-bordered h-100">
+    <Card className="card-bordered h-full">
       <Card.Body>
-        <Row className="h-100">
+        <Row className="h-full">
           <Col xs={6}>
             {isCurrentMonth && !isAccountingMode ? (
-              <div className="d-flex align-items-center">
+              <div className="flex items-center">
                 <div className="text-start">
                   <EstimatedCost />
                   <h4 className="mb-4">{date}</h4>
@@ -102,7 +102,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             ) : (
               <h2 className="mb-6">{date}</h2>
             )}
-            <table className="fs-8">
+            <table className="text-xs">
               <tbody>
                 {projects.slice(0, maxProjectsShowCount).map((project) => (
                   <OverviewItemTr
@@ -115,10 +115,10 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
             </table>
           </Col>
           <Col xs={6}>
-            <div className="d-flex flex-column justify-content-between align-items-end h-100">
+            <div className="flex flex-col justify-between items-end h-full">
               <div>
                 {showTotalSection && (
-                  <table className="font-medium fs-8 w-75">
+                  <table className="font-medium text-xs w-75">
                     <tbody>
                       {!isAccountingMode && (
                         <OverviewItemTr

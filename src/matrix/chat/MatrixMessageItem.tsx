@@ -188,15 +188,13 @@ const MediaContent: FC<{
   if (!httpUrl) {
     // Still loading the blob
     return (
-      <div className="text-quaternary" style={{ fontSize: '0.8rem' }}>
-        Loading {message.body}...
-      </div>
+      <div className="text-quaternary text-xs">Loading {message.body}...</div>
     );
   }
 
   if (httpUrl === MEDIA_UNVERIFIED) {
     return (
-      <div className="text-danger" style={{ fontSize: '0.8rem' }}>
+      <div className="text-danger text-xs">
         {translate('This attachment could not be decrypted.')} ({message.body})
       </div>
     );
@@ -204,7 +202,7 @@ const MediaContent: FC<{
 
   if (httpUrl === MEDIA_UNAVAILABLE) {
     return (
-      <div className="text-quaternary" style={{ fontSize: '0.8rem' }}>
+      <div className="text-quaternary text-xs">
         {translate('Attachment unavailable')} ({message.body})
       </div>
     );
@@ -218,22 +216,14 @@ const MediaContent: FC<{
           <img
             src={httpUrl}
             alt={message.body}
-            style={{
-              maxWidth: '100%',
-              maxHeight: 300,
-              borderRadius: 4,
-              display: 'block',
-            }}
+            className="rounded-sm block max-w-full max-h-[300px]"
           />
         </a>
       );
     case 'm.video':
       return (
         // eslint-disable-next-line jsx-a11y/media-has-caption
-        <video
-          controls
-          style={{ maxWidth: '100%', maxHeight: 300, borderRadius: 4 }}
-        >
+        <video controls className="rounded-sm max-w-full max-h-[300px]">
           <source src={httpUrl} type={message.info?.mimetype} />
           {message.body}
         </video>
@@ -256,9 +246,7 @@ const MediaContent: FC<{
           <audio controls style={{ maxWidth: '100%' }}>
             <source src={httpUrl} type={message.info?.mimetype} />
           </audio>
-          <div className="text-quaternary" style={{ fontSize: '0.75rem' }}>
-            {message.body}
-          </div>
+          <div className="text-quaternary text-xs">{message.body}</div>
         </div>
       );
     case 'm.file':

@@ -23,7 +23,7 @@ import './DetailsOverviewDialog.scss';
 
 const withCopy = (value) => {
   return (
-    <div className="d-flex justify-content-between">
+    <div className="flex justify-between">
       {renderFieldOrDash(value)}
       {value && (
         <CopyToClipboardButton

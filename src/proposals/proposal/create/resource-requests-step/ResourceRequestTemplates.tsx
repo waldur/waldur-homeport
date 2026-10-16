@@ -55,7 +55,7 @@ const ExpandableRow = ({ row }: { row: CallResourceTemplate }) => {
       {/* Off the table: the plan is a property of the template rather than
           something to compare rows by, and the column it held was pushing the
           cost and the purchase order behind a sideways scroll. */}
-      <Row className="fs-6 mb-4">
+      <Row className="text-sm mb-4">
         <Col sm={6}>
           <Field
             label={translate('Plan')}
@@ -129,7 +129,7 @@ const TableTitle = () => (
         autoWidth
         contentClassName="mw-350px"
       >
-        <QuestionIcon weight="bold" size={16} className="w-100" />
+        <QuestionIcon weight="bold" size={16} className="w-full" />
       </Tooltip>
     }
     shape="pill"

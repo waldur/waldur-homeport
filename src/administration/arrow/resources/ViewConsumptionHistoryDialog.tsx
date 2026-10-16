@@ -71,7 +71,7 @@ export const ViewConsumptionHistoryDialog = ({
                       : DASH_ESCAPE_CODE}
                   </td>
                   <td>
-                    <div className="d-flex flex-column gap-1">
+                    <div className="flex flex-col gap-1">
                       <Badge
                         variant={record.is_finalized ? 'success' : 'warning'}
                         shape="pill"

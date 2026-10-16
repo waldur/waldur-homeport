@@ -52,7 +52,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = ({
   const renderRoundState = (row: ProtectedRound) => {
     const roundState = getRoundStatus(row);
     return (
-      <div className="d-flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         <StateIndicator
           label={roundState.label}
           variant={roundState.color}

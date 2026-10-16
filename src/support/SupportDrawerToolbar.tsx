@@ -13,7 +13,7 @@ export const SupportDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   return (
     <>
       {/* Desktop: expand/collapse */}
-      <span className="d-none d-lg-inline-flex">
+      <span className="hidden lg:inline-flex">
         <BaseButton
           iconNode={
             expanded ? (

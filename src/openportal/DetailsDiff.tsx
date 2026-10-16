@@ -27,7 +27,7 @@ const renderValue = (value: unknown): ReactNode => {
     return String(value);
   }
   return (
-    <pre className="mb-0 fs-8" style={{ whiteSpace: 'pre-wrap' }}>
+    <pre className="mb-0 text-xs" style={{ whiteSpace: 'pre-wrap' }}>
       {JSON.stringify(value, null, 2)}
     </pre>
   );
@@ -65,7 +65,7 @@ export const DetailsDiff: FC<DetailsDiffProps> = ({
       <Table
         bordered
         size="sm"
-        className="mb-0 fs-8 align-middle"
+        className="mb-0 text-xs align-middle"
         data-testid="details-diff-table"
       >
         <thead>

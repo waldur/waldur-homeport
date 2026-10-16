@@ -21,7 +21,7 @@ export const ReviewerReviews: FC<ReviewerReviewsProps> = ({ row }) => {
   }
 
   return (
-    <div className="d-flex gap-1">
+    <div className="flex gap-1">
       {inProgress > 0 && (
         <Tooltip label={translate('In progress')}>
           <Badge variant="warning" shape="pill" tone="outline">

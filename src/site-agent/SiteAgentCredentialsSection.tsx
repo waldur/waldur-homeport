@@ -20,7 +20,7 @@ export const SiteAgentCredentialsSection: FC<OfferingEditPanelProps> = (
       <FormTable.Item
         label={translate('Waldur API URL')}
         value={
-          <div className="d-flex align-items-center gap-2">
+          <div className="flex items-center gap-2">
             {ENV.apiEndpoint}
             <CopyToClipboardButton value={ENV.apiEndpoint} />
           </div>
@@ -30,7 +30,7 @@ export const SiteAgentCredentialsSection: FC<OfferingEditPanelProps> = (
       <FormTable.Item
         label={translate('Offering UUID')}
         value={
-          <div className="d-flex align-items-center gap-2">
+          <div className="flex items-center gap-2">
             {props.offering.uuid}
             <CopyToClipboardButton value={props.offering.uuid} />
           </div>

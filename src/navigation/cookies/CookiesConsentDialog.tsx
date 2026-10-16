@@ -77,7 +77,7 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
         ) : (
           <BaseButton
             onClick={resolve.acceptAll}
-            className="w-100"
+            className="w-full"
             label={translate('Accept & continue')}
             variant="primary"
             size="lg"

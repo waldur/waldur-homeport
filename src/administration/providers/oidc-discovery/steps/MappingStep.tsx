@@ -73,10 +73,10 @@ const FieldMappingRow: FC<FieldMappingRowProps> = ({
   const availableSet = new Set(field.available_claims);
 
   return (
-    <div className="row mb-4 align-items-start">
+    <div className="row mb-4 items-start">
       <div className="col-md-4">
         <Form.Label>{field.field}</Form.Label>
-        <small className="d-block text-quaternary">{field.description}</small>
+        <small className="block text-quaternary">{field.description}</small>
       </div>
       <div className="col-md-8">
         <Form.Select
@@ -250,7 +250,7 @@ export const MappingStep: FC<WizardStepProps> = (props) => {
         )}
       </p>
 
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="flex justify-between items-center mb-4">
         <Badge variant="primary" tone="outline">
           {translate('{count} of {total} fields mapped', {
             count: mappedCount,

@@ -239,7 +239,7 @@ export const SramRuleFormDialog: FC<SramRuleFormDialogProps> = ({
                 'An inactive rule grants nothing and revokes the roles it granted.',
               )}
               align="center"
-              className="w-100"
+              className="w-full"
             />
 
             <h6 className="mt-6 mb-4">{translate('Which SRAM groups')}</h6>

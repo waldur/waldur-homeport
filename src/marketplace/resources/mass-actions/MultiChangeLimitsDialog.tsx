@@ -392,7 +392,7 @@ export const MultiChangeLimitsDialog: FC<MultiChangeLimitsDialogProps> = (
                                   key={component.type}
                                   className="text-nowrap"
                                 >
-                                  <span className="d-inline-flex align-items-center gap-2">
+                                  <span className="inline-flex items-center gap-2">
                                     <span>
                                       {changed !== 0
                                         ? `${beforeNum} → ${afterNum}`

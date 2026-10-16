@@ -6,6 +6,6 @@ export const IssueTypeRenderer: FunctionComponent<IssueTypeOption> = (
   option,
 ) => (
   <div>
-    <div className="svg-icon d-inline">{option.iconNode}</div> {option.label}
+    <div className="svg-icon inline">{option.iconNode}</div> {option.label}
   </div>
 );

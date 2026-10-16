@@ -28,10 +28,10 @@ import { getSavedFiltersKey } from './utils';
 import './SavedFilterSelect.scss';
 
 const Control = (props) => (
-  <div className="d-flex align-items-center gap-2">
+  <div className="flex items-center gap-2">
     <components.Control
       {...props}
-      className={classNames('flex-grow-1', props.className)}
+      className={classNames('grow', props.className)}
     >
       <span className="svg-icon svg-icon-2 svg-icon-gray-700 ms-3 me-2">
         <FunnelIcon weight="bold" />
@@ -53,7 +53,7 @@ const Control = (props) => (
 
 const ListOption: FC<OptionProps & { remove }> = (props) => (
   <SelectOption {...props}>
-    <div className="d-flex justify-content-between align-items-center">
+    <div className="flex justify-between items-center">
       {props.children}
       <BaseButton
         iconNode={<TrashIcon weight="bold" />}

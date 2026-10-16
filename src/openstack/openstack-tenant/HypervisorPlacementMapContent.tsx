@@ -80,7 +80,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
 
   return (
     <div
-      className="d-flex flex-column gap-4"
+      className="flex flex-col gap-4"
       style={{ overflow: 'auto', maxHeight: '70vh' }}
     >
       {groups.map((group) => {
@@ -99,14 +99,14 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
         return (
           <div key={group.hostname} className="border rounded">
             {/* Hypervisor header */}
-            <div className="d-flex align-items-center gap-2 px-4 py-3 border-b-[1px] border-b-secondary bg-brand-subtle">
+            <div className="flex items-center gap-2 px-4 py-3 border-b-[1px] border-b-secondary bg-brand-subtle">
               {isUnassigned ? (
                 <QuestionIcon className="text-warning" weight="bold" />
               ) : (
                 <CpuIcon className="text-brand" weight="bold" />
               )}
               <span className="font-medium">{group.hostname}</span>
-              <span className="text-quaternary ms-auto fs-7">
+              <span className="text-quaternary ms-auto text-xs">
                 {group.instances.length === 1
                   ? translate('1 VM')
                   : translate('{count} VMs', {
@@ -120,9 +120,9 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
 
             {/* Table of instances */}
             <div className="table-responsive">
-              <table className="table table-row-bordered align-middle fs-7 mb-0">
+              <table className="table table-row-bordered align-middle text-xs mb-0">
                 <thead>
-                  <tr className="text-quaternary font-medium fs-8 text-uppercase">
+                  <tr className="text-quaternary font-medium text-xs text-uppercase">
                     <th className="ps-4">{translate('Instance')}</th>
                     <th>{translate('vCPU')}</th>
                     <th>{translate('RAM')}</th>
@@ -142,10 +142,10 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
                             weight="bold"
                             size={16}
                           />
-                          <span className="font-medium text-info fs-8">
+                          <span className="font-medium text-info text-xs">
                             {sg.name}
                           </span>
-                          <span className="text-quaternary fs-8 ms-2">
+                          <span className="text-quaternary text-xs ms-2">
                             {sg.policy}
                           </span>
                         </td>
@@ -167,7 +167,7 @@ export const HypervisorPlacementMapContent: FC<Props> = ({ instances }) => {
                         colSpan={6}
                         className="ps-4 py-2 bg-tertiary dark:bg-quaternary"
                       >
-                        <span className="text-quaternary fs-8 font-medium">
+                        <span className="text-quaternary text-xs font-medium">
                           {translate('No server group')}
                         </span>
                       </td>

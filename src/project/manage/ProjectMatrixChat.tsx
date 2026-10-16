@@ -83,7 +83,7 @@ const RoomActions: FC<{
   if (!PromotedAction && groups.length === 0) return null;
 
   return (
-    <div className="d-flex align-items-center gap-2">
+    <div className="flex items-center gap-2">
       {PromotedAction && (
         <PromotedAction
           row={room}
@@ -132,9 +132,9 @@ const HistoryExportsCard: FC<{
       title={translate('History exports')}
       className="card-bordered"
       actions={
-        <div className="d-flex align-items-center gap-2">
+        <div className="flex items-center gap-2">
           {isActive ? (
-            <div ref={setRefreshSlot} className="d-flex align-items-center" />
+            <div ref={setRefreshSlot} className="flex items-center" />
           ) : (
             <BaseButton
               iconNode={<ArrowsClockwiseIcon weight="bold" />}

@@ -57,10 +57,10 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
         title: translate('Scheduled'),
         render: ({ row }) => (
           <>
-            <span className="d-block text-nowrap">
+            <span className="block text-nowrap">
               {formatMediumDateTime(row.scheduled_start)}
             </span>
-            <span className="d-block text-nowrap">
+            <span className="block text-nowrap">
               {formatMediumDateTime(row.scheduled_end)}
             </span>
           </>

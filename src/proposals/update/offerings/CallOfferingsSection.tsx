@@ -41,7 +41,7 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
         {
           title: translate('Offering name'),
           render: ({ row }) => (
-            <span className="d-inline-flex align-items-center gap-2">
+            <span className="inline-flex items-center gap-2">
               {row.offering_name}
               <UnpreviewableDiscountWarning
                 planComponents={(row.plan_details as any)?.components}

@@ -153,8 +153,8 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
           )}
           {typeof plan === 'object' && (
             <>
-              <div className="d-flex gap-6 border-b-[1px] border-b-secondary mb-5">
-                <div className="flex-grow-1">
+              <div className="flex gap-6 border-b-[1px] border-b-secondary mb-5">
+                <div className="grow">
                   {!isAward && (
                     <p className="mb-0">
                       <strong>{translate('Plan')}: </strong>

@@ -15,7 +15,7 @@ export const ServerErrorPage: FunctionComponent = () => {
 
   return (
     <ErrorPageView code="500" hideActions>
-      <div className="d-flex gap-3 justify-content-center">
+      <div className="flex gap-3 justify-center">
         <BaseButton
           onClick={goBack}
           variant="secondary"

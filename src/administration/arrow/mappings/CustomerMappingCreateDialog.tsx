@@ -113,7 +113,7 @@ export const CustomerMappingCreateDialog = ({
   if (isLoadingSettings || isLoadingAvailable) {
     return (
       <ModalDialog title={translate('Create Customer Mapping')}>
-        <div className="d-flex align-items-center justify-content-center py-10">
+        <div className="flex items-center justify-center py-10">
           <LoadingSpinnerSimple className="me-2" />
           {translate('Loading Arrow customers...')}
         </div>
@@ -232,7 +232,7 @@ export const CustomerMappingCreateDialog = ({
               render={({ input }) =>
                 input.value ? (
                   <div className="mb-4 p-3 border rounded">
-                    <small className="text-quaternary d-block mb-1">
+                    <small className="text-quaternary block mb-1">
                       {translate('Selected Arrow Customer')}
                     </small>
                     <div>

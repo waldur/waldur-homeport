@@ -63,12 +63,12 @@
   align-items: center;
   padding: 6px 14px;
   font-weight: var(--font-weight-medium);
-  font-size: 1rem;
+  font-size: var(--text-sm);
   line-height: 1.4;
   color: var(--text-brand-primary);
   background-color: var(--btn-secondary-bg);
   border: 1px solid var(--border-brand);
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   text-decoration: none;
   white-space: nowrap;
   transition:
@@ -162,7 +162,7 @@
   border-radius: $border-radius-xs;
   padding: 0.2rem 0.3rem;
   font-family: ui-monospace, SFMono-Regular, monospace;
-  font-size: map-get($font-sizes, 7); // Slightly smaller than base
+  font-size: var(--text-xs);
   font-weight: var(--font-weight-semibold);
 }
 
@@ -189,7 +189,7 @@
   border-top-right-radius: $border-radius;
   background-color: var(--bg-tertiary);
   padding: 0.5rem 1rem;
-  font-size: map-get($font-sizes, 7);
+  font-size: var(--text-xs);
   font-weight: var(--font-weight-semibold);
   border-bottom: 1px solid var(--border-primary);
 }

@@ -33,9 +33,9 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center">
+            <div className="flex items-center">
               <strong
-                className={`d-block display-4 ${isHighMessageCount ? 'text-danger' : 'text-success'}`}
+                className={`block display-4 ${isHighMessageCount ? 'text-danger' : 'text-success'}`}
               >
                 {data.total_messages.toLocaleString()}
               </strong>
@@ -47,7 +47,7 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
                 />
               )}
             </div>
-            <strong className="d-block mb-2">
+            <strong className="block mb-2">
               {translate('Total messages')}
             </strong>
             {isHighMessageCount && (
@@ -63,12 +63,10 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <strong className="d-block display-4 text-success">
+            <strong className="block display-4 text-success">
               {data.total_queues.toLocaleString()}
             </strong>
-            <strong className="d-block mb-2">
-              {translate('Total queues')}
-            </strong>
+            <strong className="block mb-2">{translate('Total queues')}</strong>
           </Card.Body>
         </Card>
       </Col>
@@ -76,11 +74,11 @@ export const RabbitMQOverviewCards: FC<RabbitMQOverviewCardsProps> = ({
         <Card className="card-bordered mb-5">
           <Card.Body>
             <strong
-              className={`d-block display-4 ${vhostsWithIssues > 0 ? 'text-warning' : 'text-success'}`}
+              className={`block display-4 ${vhostsWithIssues > 0 ? 'text-warning' : 'text-success'}`}
             >
               {vhostsWithIssues}
             </strong>
-            <strong className="d-block mb-2">
+            <strong className="block mb-2">
               {translate('Vhosts needing attention')}
             </strong>
           </Card.Body>

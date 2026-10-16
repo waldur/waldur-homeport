@@ -75,7 +75,7 @@ export const SuggestionExpandableRow: FC<SuggestionExpandableRowProps> = ({
           <h6 className="font-medium mb-3">
             {translate('Matched expertise keywords')}
           </h6>
-          <div className="d-flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {matchedKeywords.map((keyword, index) => (
               <Badge key={index} variant="primary" shape="pill" tone="outline">
                 {keyword}

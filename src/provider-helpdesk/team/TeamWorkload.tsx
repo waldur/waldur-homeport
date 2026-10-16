@@ -17,12 +17,10 @@ export const TeamWorkload: FC<{ helpdeskUuid: string }> = ({
     <div className="row g-3 mb-4">
       {workload.map((member) => (
         <div className="col-sm-6 col-lg-3" key={member.uuid}>
-          <div className="card card-bordered h-100">
+          <div className="card card-bordered h-full">
             <div className="card-body">
-              <div className="d-flex justify-content-between align-items-center mb-2">
-                <strong className="text-truncate">
-                  {member.user_full_name}
-                </strong>
+              <div className="flex justify-between items-center mb-2">
+                <strong className="truncate">{member.user_full_name}</strong>
                 {!member.has_capacity && (
                   <Badge variant="danger" shape="pill" tone="outline">
                     {translate('At capacity')}

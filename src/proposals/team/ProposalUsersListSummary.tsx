@@ -56,7 +56,7 @@ export const ProposalUsersListSummary: FC<{
   const usersList = (
     <>
       {rules.dropdown ? (
-        <div className="d-flex justify-content-end pt-3">
+        <div className="flex justify-end pt-3">
           <TeamDropdownActions
             scope={props.scope}
             roleTypes={['proposal']}

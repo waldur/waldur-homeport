@@ -47,11 +47,11 @@ export const SearchItem = (props: SearchItemProps) => {
     useOrganizationAndProjectAutocompletesForResources();
 
   return (
-    <div className="search-result-item d-flex align-items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)] cursor-pointer">
+    <div className="search-result-item flex items-center py-2 px-5 hover:bg-[var(--bg-brand-primary-alt)] cursor-pointer">
       <Link
         state={props.to}
         params={props.params}
-        className="search-result-item__link d-flex text-brand align-items-center me-4"
+        className="search-result-item__link flex text-brand items-center me-4"
         onClick={(e) => {
           if (props.onClick) {
             props.onClick(props);
@@ -65,10 +65,10 @@ export const SearchItem = (props: SearchItemProps) => {
           circle
         />
 
-        <div className="d-flex flex-column justify-content-start">
-          <span className="fs-6">{props.title}</span>
+        <div className="flex flex-col justify-start">
+          <span className="text-sm">{props.title}</span>
           {Boolean(props.subtitle) && (
-            <span className="fs-7 text-quaternary">{props.subtitle}</span>
+            <span className="text-xs text-quaternary">{props.subtitle}</span>
           )}
         </div>
       </Link>
@@ -79,7 +79,7 @@ export const SearchItem = (props: SearchItemProps) => {
         here: the controls are lifted above the link's stretched overlay, so
         their padding would be a strip of the row that no longer opens it.
       */}
-      <div className="search-result-item__controls ms-auto d-flex gap-2">
+      <div className="search-result-item__controls ms-auto flex gap-2">
         {props.badge && <div>{props.badge}</div>}
         {props.actions}
         {props.addFavoritePage && (

@@ -461,14 +461,14 @@ export const OfferingMergeWizard: FC = () => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="wizard wizard-vertical d-flex flex-column flex-lg-row gap-7">
-          <div className="flex-shrink-0" style={{ width: '280px' }}>
+        <div className="wizard wizard-vertical flex flex-col lg:flex-row gap-7">
+          <div className="shrink-0" style={{ width: '280px' }}>
             <VerticalProgressSteps
               steps={steps}
               onClick={(_item, index) => goToStep(index)}
             />
           </div>
-          <div className="flex-grow-1 min-w-0">
+          <div className="grow min-w-0">
             {!editable && step > STEP_SELECT && step < STEP_RUN && (
               <p className="text-quaternary">
                 {translate(
@@ -478,7 +478,7 @@ export const OfferingMergeWizard: FC = () => {
               </p>
             )}
             <div className="wizard-body-vertical">{renderStep()}</div>
-            <div className="d-flex justify-content-between mt-5 pt-5 border-t-[1px] border-t-secondary">
+            <div className="flex justify-between mt-5 pt-5 border-t-[1px] border-t-secondary">
               <BaseButton
                 label={translate('Back')}
                 variant="tertiary"
@@ -491,7 +491,7 @@ export const OfferingMergeWizard: FC = () => {
                     : undefined
                 }
               />
-              <div className="d-flex gap-3">
+              <div className="flex gap-3">
                 <BaseButton
                   label={translate('Close')}
                   variant="tertiary"

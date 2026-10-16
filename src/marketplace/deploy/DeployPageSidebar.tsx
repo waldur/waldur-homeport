@@ -25,7 +25,7 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
 
   return (
     <>
-      <Card className="card-bordered w-100 mb-5 mb-lg-7">
+      <Card className="card-bordered w-full mb-5 mb-lg-7">
         <Card.Header>
           <h3 className="mb-0">{translate('Progress')}</h3>
         </Card.Header>

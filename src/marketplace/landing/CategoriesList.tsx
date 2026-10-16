@@ -45,7 +45,7 @@ export const CategoriesList: FC = () => {
 
   return (
     <div className={!showMoreButton ? 'my-10' : 'mt-10'}>
-      <Row className="justify-content-center g-5">
+      <Row className="justify-center g-5">
         {items.map((item, index) => (
           <Col key={index} xl={showAll ? 2 : true} lg={4} md={4} sm={6}>
             <CategoryCard

@@ -60,7 +60,7 @@ export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
       tableActions={
-        <div className="d-flex gap-2">
+        <div className="flex gap-2">
           <PullServerGroupsAction
             resource={resourceScope}
             refetch={props.fetch}

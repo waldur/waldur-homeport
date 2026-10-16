@@ -44,7 +44,7 @@ export const SelectStep: FC<SelectStepProps> = ({
     // Once the record exists its offerings are fixed: the mappings refer to
     // them. Start a new merge to pick others.
     return (
-      <div className="d-flex flex-column gap-4">
+      <div className="flex flex-col gap-4">
         <p className="text-quaternary mb-0">
           {translate(
             'The offerings are fixed once the draft exists. Delete the draft and start a new merge to pick others.',
@@ -75,7 +75,7 @@ export const SelectStep: FC<SelectStepProps> = ({
   const sourceUuids = selection.sources.map((source) => source.uuid);
 
   return (
-    <div className="d-flex flex-column gap-4">
+    <div className="flex flex-col gap-4">
       <p className="text-quaternary mb-0">
         {translate(
           'Resources, orders, usage and history of the sources move to the target; the sources are archived. Basic, Support and site agent offerings merge between themselves; any other type only into an offering of the same type.',

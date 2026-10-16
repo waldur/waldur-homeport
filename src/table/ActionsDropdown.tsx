@@ -95,7 +95,7 @@ export const TableDropdownToggle = forwardRef<
       disabled = false,
       labeled = false,
       variant = 'tertiary',
-      className = 'min-w-100px w-100',
+      className = 'min-w-100px w-full',
       size = 'lg',
       tooltip,
       ...rest
@@ -189,7 +189,7 @@ const AddDropdownToggle = forwardRef<
     <PlusCircleIcon
       weight="bold"
       size={getButtonIconSize(size)}
-      className="flex-shrink-0"
+      className="shrink-0"
     />
     {translate('Add')}
     <ButtonCaret size={size} />

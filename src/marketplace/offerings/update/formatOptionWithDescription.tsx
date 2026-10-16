@@ -5,7 +5,7 @@ export const formatOptionWithDescription = (
   meta: { context: 'menu' | 'value' },
 ) =>
   meta.context === 'menu' && option.description ? (
-    <div className="d-flex flex-column">
+    <div className="flex flex-col">
       <span>{option.label}</span>
       <small className="text-quaternary">{option.description}</small>
     </div>

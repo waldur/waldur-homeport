@@ -54,7 +54,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
             {translate('Go to order')}
           </OrderDetailsLink>
           {order.state === 'pending-consumer' ? (
-            <div className="d-flex flex-row-reverse gap-4">
+            <div className="flex flex-row-reverse gap-4">
               <OrderConsumerActions
                 order={order}
                 offering={offering}
@@ -63,7 +63,7 @@ export const ResourceViewChangeDialog: FC<ResourceViewChangeDialogProps> = ({
               />
             </div>
           ) : order.state === 'pending-provider' ? (
-            <div className="d-flex flex-row-reverse gap-4">
+            <div className="flex flex-row-reverse gap-4">
               <OrderProviderActions
                 order={order}
                 refetch={refetch}

@@ -19,7 +19,7 @@ import { useCustomer } from '@/workspace/hooks';
 const FlatStatistics = ({ count, title }) => {
   return (
     <Col className="text-md-center mb-4">
-      <strong className="d-block fs-2">{count}</strong>
+      <strong className="block text-xl">{count}</strong>
       <strong className="health-title">{title}</strong>
     </Col>
   );
@@ -116,7 +116,7 @@ export const CallManagementDashboard = () => {
           <Col>
             <Card className="card-bordered mb-6">
               <Card.Body>
-                <div className="d-flex justify-content-start justify-content-lg-between flex-wrap">
+                <div className="flex justify-start lg:justify-between flex-wrap">
                   <FlatStatistics
                     title={translate('Active rounds')}
                     count={data.active_rounds}

@@ -18,11 +18,11 @@ export const SupportDataAccessLogsExpandableRow: FC<
 
   return (
     <ExpandableContainer>
-      <div className="d-flex flex-column gap-3">
+      <div className="flex flex-col gap-3">
         {/* Accessed fields */}
         <div>
           <strong>{translate('Accessed fields')}:</strong>
-          <div className="d-flex flex-wrap gap-1 mt-1">
+          <div className="flex flex-wrap gap-1 mt-1">
             {row.accessed_fields.map((field) => (
               <Badge
                 key={field}

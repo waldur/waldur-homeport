@@ -36,8 +36,8 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
             'To accept this invitation, you need to complete the following steps:',
           )}
         </p>
-        <div className="d-flex flex-column align-items-center gap-4">
-          <div className="d-flex align-items-center gap-3">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex items-center gap-3">
             <Badge
               variant={hasProfile ? 'success' : 'secondary'}
               shape="circle"
@@ -50,7 +50,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
               {translate('Create your reviewer profile')}
             </span>
           </div>
-          <div className="d-flex align-items-center gap-3">
+          <div className="flex items-center gap-3">
             <Badge
               variant={isPublished ? 'success' : 'secondary'}
               shape="circle"

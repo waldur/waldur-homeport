@@ -27,6 +27,8 @@ export function loadTheme(theme: ThemeName) {
   document.documentElement.setAttribute('data-theme', theme);
 }
 
+export const applyTheme = loadTheme;
+
 /** Get initial theme from local storage or user preference */
 export const getInitialTheme = () => {
   if (ENV.plugins?.WALDUR_CORE.DISABLE_DARK_THEME) {

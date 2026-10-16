@@ -94,6 +94,7 @@ export const ModalShell: FC<ModalShellProps> = ({
         )}
         <Dialog.Overlay
           className={classNames(
+            // eslint-disable-next-line waldur-custom/no-bootstrap-layout-utility
             'modal fade show d-block',
             noAnim && 'modal-no-animation',
             className,

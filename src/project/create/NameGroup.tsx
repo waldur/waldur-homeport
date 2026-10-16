@@ -45,7 +45,7 @@ export const NameGroup = ({
         error ? (
           <LoadingErred
             loadData={refetch}
-            className="d-flex align-items-center gap-2 mb-1"
+            className="flex items-center gap-2 mb-1"
           />
         ) : loading ? (
           <div className="mb-2">

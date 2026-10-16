@@ -97,7 +97,7 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
       {
         title: translate('Fields accessed'),
         render: ({ row }: { row: DataAccessHistoryEntry }) => (
-          <div className="d-flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1">
             {row.accessed_fields.map((field) => (
               <Badge
                 key={field}

@@ -94,7 +94,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
         <div className="separator my-4" />
       )}
       {showsFigures && (
-        <div className="d-flex justify-content-between align-items-center fs-3">
+        <div className="flex justify-between items-center text-lg">
           <span className="font-normal text-secondary">
             {translate('Total')}:
           </span>
@@ -118,7 +118,7 @@ export const ProposalCostTotal: FC<ProposalCostTotalProps> = ({
     );
   }
   return (
-    <div className="d-flex justify-content-end mt-4">
+    <div className="flex justify-end mt-4">
       <div
         className="border-t-[1px] border-t-secondary pt-3"
         style={{ minWidth: 320 }}

@@ -75,7 +75,7 @@ const AllResultsTabContent = ({
       <Col md={12} lg={6} className="py-5 px-0">
         {Boolean(recentSearchItems?.length) && (
           <div className="mb-3">
-            <div className="d-flex align-items-center justify-content-between mx-5 mb-3">
+            <div className="flex items-center justify-between mx-5 mb-3">
               <h6 className="text-secondary font-medium mb-0">
                 {translate('Recent')}
               </h6>

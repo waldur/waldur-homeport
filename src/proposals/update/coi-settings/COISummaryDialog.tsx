@@ -241,7 +241,7 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
       title={translate('How Conflict of Interest detection works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="d-flex flex-column gap-8">
+      <div className="flex flex-col gap-8">
         {/* Detection Flow */}
         <section>
           <h4 className="mb-4">{translate('Detection flow')}</h4>
@@ -267,9 +267,9 @@ export const COISummaryDialog: FC<Props> = ({ resolve }) => {
             )}
           </p>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th>{translate('Type')}</th>
                   <th>{translate('Description')}</th>
                   <th>{translate('Severity')}</th>

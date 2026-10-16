@@ -54,7 +54,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
       clickable
       onClick={handleCardClick}
       body={
-        <div className="fs-6">
+        <div className="text-sm">
           <Field
             label={translate('Email')}
             value={renderFieldOrDash(organization.email)}
@@ -112,7 +112,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
       footer={
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
-          className="d-flex justify-content-end align-items-center gap-2"
+          className="flex justify-end items-center gap-2"
           onClick={stopPropagation}
         >
           {canEditCustomer && (

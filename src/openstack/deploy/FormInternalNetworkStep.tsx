@@ -26,7 +26,7 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
             checked={advancedEnabled}
             onCheckedChange={setAdvancedEnabled}
             size="sm"
-            className="align-self-center"
+            className="self-center"
             label={translate('Advanced configuration')}
           />
         </div>

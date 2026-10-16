@@ -140,7 +140,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   if (isLoading) {
     return (
-      <div className="d-flex justify-content-center align-items-center p-10">
+      <div className="flex justify-center items-center p-10">
         <LoadingSpinner />
       </div>
     );

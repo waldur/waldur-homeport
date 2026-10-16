@@ -56,10 +56,7 @@ const ColumnsPopover: FC<{
       <button
         key={column.id}
         type="button"
-        className={cn(
-          menuItem({ look: 'actions' }),
-          'd-flex align-items-center gap-2',
-        )}
+        className={cn(menuItem({ look: 'actions' }), 'flex items-center gap-2')}
         aria-pressed={Boolean(activeColumns[column.id])}
         onClick={() => onToggle(column)}
       >
@@ -125,7 +122,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
   const hasSettings = Boolean(optionalColumns && optionalColumns.length > 0);
 
   return (
-    <div className="d-flex flex-wrap align-items-center gap-2 px-3 py-2">
+    <div className="flex flex-wrap items-center gap-2 px-3 py-2">
       {activeTableKey && (
         <div className="table-toolbar-search expandable-row-search">
           <TableQuery
@@ -135,9 +132,9 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
           />
         </div>
       )}
-      <div className="ms-sm-auto d-flex align-items-center gap-3">
+      <div className="ms-sm-auto flex items-center gap-3">
         {hasSelection && (
-          <div className="d-flex align-items-center font-normal text-primary gap-2">
+          <div className="flex items-center font-normal text-primary gap-2">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
@@ -145,7 +142,7 @@ export const ExpandableRowToolbar: FC<ExpandableRowToolbarProps> = ({
               variant="text-secondary"
               size="sm"
             />
-            <span className="fs-7">
+            <span className="text-xs">
               ({selectedRows.length}) {translate('Selected')}
             </span>
           </div>

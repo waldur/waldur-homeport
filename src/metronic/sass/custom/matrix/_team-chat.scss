@@ -393,7 +393,7 @@
     color: var(--text-primary);
 
     .tc-msg-when {
-      font-size: 0.808rem;
+      font-size: var(--text-xs);
       font-weight: var(--font-weight-medium);
       color: var(--text-quinary);
       font-variant-numeric: tabular-nums;
@@ -701,7 +701,7 @@
     background: var(--bg-primary);
     color: var(--text-primary);
     border: 1px solid var(--border-primary);
-    font-size: 0.923rem;
+    font-size: var(--text-xs);
     line-height: 1.6;
     cursor: pointer;
     transition:
@@ -833,7 +833,7 @@
     color: var(--text-primary);
     cursor: pointer;
     border-radius: 99px;
-    font-size: 1.154rem;
+    font-size: var(--text-base);
     line-height: 1;
     transition:
       background 0.12s ease,

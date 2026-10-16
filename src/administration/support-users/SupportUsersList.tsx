@@ -59,12 +59,12 @@ const ConnectionCounts = ({ row }: { row: SupportUser }) => {
     },
   ];
   return (
-    <div className="d-flex gap-3 text-nowrap">
+    <div className="flex gap-3 text-nowrap">
       {counts.map((item) => (
         <Tooltip key={item.key} label={item.label}>
           <span
             className={classNames(
-              'd-inline-flex align-items-center gap-1',
+              'inline-flex items-center gap-1',
               !item.value && 'text-quaternary',
             )}
           >

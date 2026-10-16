@@ -17,7 +17,7 @@ export const RemoveFilterBadgeButton: React.FC<
     type="button"
     aria-label={label}
     className={classNames(
-      'text-btn text-quinary hover:text-quaternary lh-0',
+      'text-btn text-quinary hover:text-quaternary leading-none',
       className,
     )}
     onClick={onClick}

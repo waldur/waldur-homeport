@@ -244,7 +244,7 @@ const TableCell = memo(
     const content =
       column.copyField && valueToCopy !== '' && valueToCopy != null ? (
         <>
-          <div className="with-copy d-flex align-items-center gap-1">
+          <div className="with-copy flex items-center gap-1">
             <div className="td-data">{renderedContent}</div>
             <CopyToClipboardButton value={valueToCopy} />
           </div>

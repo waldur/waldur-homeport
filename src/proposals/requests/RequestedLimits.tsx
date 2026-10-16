@@ -23,7 +23,7 @@ export const RequestedLimits: FC<{
   }
 
   return (
-    <span className="d-flex flex-column">
+    <span className="flex flex-col">
       {entries.map(([key, value]) => (
         <span key={key} className="text-nowrap">
           {/* Component types are snake_case: cpu_hours -> Cpu hours. */}

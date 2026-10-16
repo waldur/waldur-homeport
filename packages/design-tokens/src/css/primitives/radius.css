@@ -1,14 +1,24 @@
 /**
  * Border radius tokens and Tailwind theme overrides.
  *
- * --radius-md and --radius-lg are pinned to 6px/8px to prevent fractional rem
- * compression at non-standard root font sizes.
+ * All steps are pinned to physical pixels in @theme static to prevent fractional
+ * rem compression under Waldur's forced 13px root font-size.
  *
- * --radius-modal (20px) is Dialog content and Sidebar mode-switcher card radius
- * (both pair with bg-[var(--card-bg)]).
+ * Scale:
+ *   --radius-xs: 2px
+ *   --radius-sm: 4px
+ *   --radius-md: 6px
+ *   --radius-lg: 8px
+ *   --radius-xl: 12px
+ *   --radius-2xl: 16px
+ *   --radius-modal: 20px (Dialog content and Sidebar mode-switcher card radius)
  */
-@theme {
+@theme static {
+  --radius-xs: 2px;
+  --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-modal: 20px;
 }

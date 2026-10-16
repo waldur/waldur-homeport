@@ -87,7 +87,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
   };
 
   return (
-    <div className="d-flex align-items-center ms-1">
+    <div className="flex items-center ms-1">
       <Tooltip label={translate('Pending tasks')} side="bottom">
         <button
           id="pending-confirmations-toggle"

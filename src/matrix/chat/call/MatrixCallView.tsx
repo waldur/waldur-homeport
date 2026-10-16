@@ -299,8 +299,8 @@ const CallStage: FC<{
     : undefined;
 
   return (
-    <div className="d-flex flex-column h-100">
-      <div className="position-relative flex-grow-1 overflow-hidden">
+    <div className="flex flex-col h-full">
+      <div className="position-relative grow overflow-hidden">
         {compact ? (
           compactTrack ? (
             <FocusLayout trackRef={compactTrack} style={{ height: '100%' }} />
@@ -506,7 +506,7 @@ const MatrixCallView: FC<{
   return (
     <div
       ref={containerRef}
-      className={`matrix-call-view flex-grow-1 overflow-hidden${compact ? ' matrix-call-view--compact' : ''}`}
+      className={`matrix-call-view grow overflow-hidden${compact ? ' matrix-call-view--compact' : ''}`}
       data-lk-theme="default"
     >
       {credentials && roomReady && (

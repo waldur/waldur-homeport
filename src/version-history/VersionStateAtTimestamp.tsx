@@ -42,8 +42,8 @@ export const VersionStateAtTimestamp: FunctionComponent<
   }
 
   return (
-    <div className="d-flex align-items-center gap-3">
-      <Form.Label className="mb-0 text-nowrap text-quaternary fs-7">
+    <div className="flex items-center gap-3">
+      <Form.Label className="mb-0 text-nowrap text-quaternary text-xs">
         {translate('State at:')}
       </Form.Label>
       <DatePicker
@@ -66,7 +66,7 @@ export const VersionStateAtTimestamp: FunctionComponent<
         label={translate('Load')}
       />
       {error && (
-        <span className="text-danger fs-7">
+        <span className="text-danger text-xs">
           {translate('No version found at this time')}
         </span>
       )}

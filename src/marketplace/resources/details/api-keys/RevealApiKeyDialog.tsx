@@ -82,7 +82,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
             {/* readOnly, not disabled: a disabled input renders its text muted
                 and cannot be selected, so the key is both hard to read and
                 impossible to copy by hand. */}
-            <BaseSecretField value={value} readOnly className="flex-grow-1" />
+            <BaseSecretField value={value} readOnly className="grow" />
             <CopyToClipboardButton
               value={value}
               size={20}
@@ -95,7 +95,7 @@ export const RevealApiKeyDialog = ({ resolve }: OwnProps) => {
             {translate('Unable to reveal the API key.')}
           </div>
         ) : (
-          <div className="d-flex align-items-center gap-2 text-quaternary">
+          <div className="flex items-center gap-2 text-quaternary">
             <LoadingSpinnerSimple /> {translate('Revealing…')}
           </div>
         )}

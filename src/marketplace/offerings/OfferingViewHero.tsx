@@ -198,9 +198,9 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         logoTooltip={offering.category_title}
         logoCircle
         title={
-          <div className="d-flex flex-column">
-            <div className="d-flex flex-wrap align-items-center gap-2">
-              <h3 className="mb-0 lh-1">{offering.name}</h3>
+          <div className="flex flex-col">
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="mb-0 leading-none">{offering.name}</h3>
               <CopyToClipboardButton
                 value={offering.name}
                 className="hover:text-brand cursor-pointer"
@@ -209,7 +209,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
 
               <OfferingStateField offering={offering} hasBullet />
             </div>
-            <p className="text-quaternary fs-7 mb-0">
+            <p className="text-quaternary text-xs mb-0">
               {translate('By {organization}', {
                 organization: offering.customer_name,
               })}
@@ -228,7 +228,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 backend the offering is wired to, not anything a prospective
                 customer can act on. Keep it to the provider/staff view. */}
             {!props.isPublic && (
-              <Table className="mb-0 px-0 h-auto fs-7 w-auto mt-1">
+              <Table className="mb-0 px-0 h-auto text-xs w-auto mt-1">
                 <tbody>
                   <tr>
                     <th className="font-medium w-150px p-0 pe-3">
@@ -283,7 +283,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 />
               </div>
             )}
-            <div className="order-first align-self-center">
+            <div className="order-first self-center">
               <TableRefreshButton
                 fetch={() => props.refetch?.()}
                 loading={props.isRefetching}

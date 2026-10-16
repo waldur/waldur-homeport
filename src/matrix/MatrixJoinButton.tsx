@@ -35,9 +35,9 @@ interface MatrixCredentialsDialogProps {
 const MaskedSecret: FC<{ value: string }> = ({ value }) => {
   const [revealed, setRevealed] = useState(false);
   return (
-    <div className="d-flex justify-content-between align-items-center">
+    <div className="flex justify-between items-center">
       <span className="text-break">{revealed ? value : '•'.repeat(12)}</span>
-      <div className="d-flex align-items-center flex-shrink-0">
+      <div className="flex items-center shrink-0">
         <BaseButton
           iconNode={
             revealed ? (
@@ -89,7 +89,7 @@ const GeneratedPassword: FC = () => {
         {password && (
           <>
             <MaskedSecret key={generation} value={password} />
-            <small className="text-quaternary d-block">
+            <small className="text-quaternary block">
               {translate('Copy it now: it will not be shown again.')}
             </small>
           </>
@@ -109,7 +109,7 @@ const GeneratedPassword: FC = () => {
         className={password ? 'mt-2' : undefined}
       />
       {!password && (
-        <small className="text-quaternary d-block mt-2">
+        <small className="text-quaternary block mt-2">
           {translate(
             'Generating a password replaces any Matrix password set before.',
           )}
@@ -142,7 +142,7 @@ const RecoveryKey: FC = () => {
           variant="secondary"
           size="sm"
         />
-        <small className="text-quaternary d-block mt-2">
+        <small className="text-quaternary block mt-2">
           {translate(
             'Your Matrix client asks for it to read your encrypted messages.',
           )}
@@ -162,7 +162,7 @@ const RecoveryKey: FC = () => {
   return (
     <>
       <MaskedSecret value={recoveryKey} />
-      <small className="text-quaternary d-block">
+      <small className="text-quaternary block">
         {translate(
           'Enter it when your Matrix client asks for a recovery key or security key. Anyone who has it can read your encrypted messages, so do not share it.',
         )}

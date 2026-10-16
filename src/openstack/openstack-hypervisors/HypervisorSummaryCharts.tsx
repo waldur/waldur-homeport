@@ -47,7 +47,7 @@ const DonutChart: FC<{ data: PieSeriesOption['data'] }> = ({ data }) => {
     [data],
   );
   return (
-    <div className="flex-shrink-0" style={{ width: 80, height: 80 }}>
+    <div className="shrink-0" style={{ width: 80, height: 80 }}>
       <EChart options={options} height="80px" width="80px" />
     </div>
   );
@@ -106,34 +106,34 @@ const ChartItem: FC<ChartItemProps> = ({
   return (
     <Stack direction="horizontal" gap={4}>
       <DonutChart data={data} />
-      <div className="d-flex flex-column gap-1">
-        <span className="d-flex align-items-center gap-2 fs-7">
+      <div className="flex flex-col gap-1">
+        <span className="flex items-center gap-2 text-xs">
           <span
-            className="rounded-full d-inline-block"
+            className="rounded-full inline-block"
             style={{ width: 8, height: 8, backgroundColor: usedColor }}
           />
           {usedLabel}
         </span>
         {isOvercommitted && overcommittedLabel ? (
-          <span className="d-flex align-items-center gap-2 fs-7 text-warning">
+          <span className="flex items-center gap-2 text-xs text-warning">
             <span
-              className="rounded-full d-inline-block"
+              className="rounded-full inline-block"
               style={{ width: 8, height: 8, backgroundColor: warningColor }}
             />
             {overcommittedLabel}
           </span>
         ) : (
-          <span className="d-flex align-items-center gap-2 fs-7">
+          <span className="flex items-center gap-2 text-xs">
             <span
-              className="rounded-full d-inline-block"
+              className="rounded-full inline-block"
               style={{ width: 8, height: 8, backgroundColor: availableColor }}
             />
             {availableLabel}
           </span>
         )}
-        <span className="d-flex align-items-center gap-2 fs-7">
+        <span className="flex items-center gap-2 text-xs">
           <span
-            className="rounded-full d-inline-block"
+            className="rounded-full inline-block"
             style={{ width: 8, height: 8, backgroundColor: totalColor }}
           />
           {totalLabel}

@@ -38,7 +38,7 @@ const EventDeliverySection: FC<{ agentUuid: string }> = ({ agentUuid }) => {
 
   return (
     <>
-      <h6 className="mb-3 d-flex align-items-center gap-2">
+      <h6 className="mb-3 flex items-center gap-2">
         {translate('Event delivery')}
         {!isLoading && !isError && (
           <Badge

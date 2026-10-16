@@ -275,12 +275,12 @@ export const EditScriptDialog = ({
                 )
               }
               footer={
-                <div className="flex-grow-1">
+                <div className="grow">
                   <AccordionCard
                     title={translate('Console output')}
                     solid
                     className="mb-5"
-                    titleClassName="fs-6"
+                    titleClassName="text-sm"
                   >
                     {scriptExecutionResult ? (
                       <pre className="text-brand mb-0">
@@ -292,7 +292,7 @@ export const EditScriptDialog = ({
                       </i>
                     )}
                   </AccordionCard>
-                  <div className="d-flex justify-content-end gap-4">
+                  <div className="flex justify-end gap-4">
                     <BaseButton
                       variant="tertiary"
                       onClick={closeDialog}

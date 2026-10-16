@@ -27,14 +27,10 @@ export const TypeScale: Story = {
           Headings
         </h3>
         <p className="text-[11px] text-quaternary -mt-2">
-          Only <strong>xs</strong>/<strong>sm</strong>/<strong>base</strong> are
-          pinned to an exact px value in primitives/typography.css's{' '}
-          <Mono className="">--text-*</Mono> theme block. <strong>lg</strong>/
-          <strong>xl</strong>/<strong>2xl</strong>/<strong>3xl</strong> below
-          are Tailwind's own un-overridden rem values (correct at a 16px root) —
-          this app forces a 13px root font-size in production, which renders
-          these four smaller than the px figure shown (e.g. text-lg's 1.125rem
-          is 18px at a 16px root, but 14.625px in the real app).
+          All typographic steps (<strong>xs</strong> through{' '}
+          <strong>4xl</strong>) are pinned to exact pixel values in
+          primitives/typography.css's <Mono className="">--text-*</Mono> theme
+          block, ensuring consistent rendering at non-standard root font sizes.
         </p>
 
         <div className="flex items-baseline justify-between border-b border-secondary pb-3">
@@ -44,9 +40,7 @@ export const TypeScale: Story = {
           <h1 className="m-0 text-3xl font-bold text-primary flex-1">
             Cloud Resource Management
           </h1>
-          <span className="font-mono text-xs text-quinary">
-            1.875rem (30px @16px root)
-          </span>
+          <span className="font-mono text-xs text-quinary">30px, pinned</span>
         </div>
 
         <div className="flex items-baseline justify-between border-b border-secondary pb-3">
@@ -54,9 +48,7 @@ export const TypeScale: Story = {
           <h1 className="m-0 text-2xl font-bold text-primary flex-1">
             Projects and Allocations
           </h1>
-          <span className="font-mono text-xs text-quinary">
-            1.5rem (24px @16px root)
-          </span>
+          <span className="font-mono text-xs text-quinary">24px, pinned</span>
         </div>
 
         <div className="flex items-baseline justify-between border-b border-secondary pb-3">
@@ -64,9 +56,7 @@ export const TypeScale: Story = {
           <h2 className="m-0 text-xl font-semibold text-primary flex-1">
             Virtual Machines Overview
           </h2>
-          <span className="font-mono text-xs text-quinary">
-            1.25rem (20px @16px root)
-          </span>
+          <span className="font-mono text-xs text-quinary">20px, pinned</span>
         </div>
 
         <div className="flex items-baseline justify-between border-b border-secondary pb-3">
@@ -74,9 +64,7 @@ export const TypeScale: Story = {
           <h3 className="m-0 text-lg font-semibold text-primary flex-1">
             Resource Details & Quotas
           </h3>
-          <span className="font-mono text-xs text-quinary">
-            1.125rem (18px @16px root)
-          </span>
+          <span className="font-mono text-xs text-quinary">18px, pinned</span>
         </div>
 
         <div className="flex items-baseline justify-between border-b border-secondary pb-3">
@@ -170,6 +158,7 @@ export const Tokens: Story = {
             <span
               className="text-primary"
               style={{
+                // eslint-disable-next-line waldur-custom/require-font-size-scale
                 fontSize: `var(--text-${size})`,
                 lineHeight: `var(--text-${size}--line-height)`,
               }}

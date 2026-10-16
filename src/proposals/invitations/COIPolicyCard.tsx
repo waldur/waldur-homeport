@@ -26,12 +26,12 @@ export const COIPolicyCard: FC<COIPolicyCardProps> = ({ config }) => {
 
   return (
     <Card className="card-bordered mb-6">
-      <Card.Body className="d-flex gap-4">
+      <Card.Body className="flex gap-4">
         <FeaturedIcon
           icon={<InfoIcon weight="bold" />}
           variant="neutral"
           size="sm"
-          className="flex-shrink-0"
+          className="shrink-0"
         />
         <div>
           <h4 className="mb-1">{translate('Conflict of interest policy')}</h4>

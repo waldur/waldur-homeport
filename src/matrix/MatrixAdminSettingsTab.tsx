@@ -114,7 +114,7 @@ export const MatrixAdminSettingsTab = () => {
                 </td>
                 <td>
                   {status.webhook_path ? (
-                    <div className="d-flex align-items-center gap-2">
+                    <div className="flex items-center gap-2">
                       <code>{status.webhook_path}</code>
                       <CopyToClipboardButton value={status.webhook_path} />
                     </div>

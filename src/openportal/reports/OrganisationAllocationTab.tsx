@@ -513,7 +513,7 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
           </Col>
         </Row>
 
-        <div className="d-flex align-items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-2">
           <Checkbox
             id="alloc-select-all"
             checked={allVisibleSelected && visible.length > 0}
@@ -563,9 +563,9 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                     {p.is_in_grace_period && (
                       <Badge
                         variant="warning"
+                        size="sm"
                         tone="outline"
                         className="ms-2"
-                        style={{ fontSize: '0.7em' }}
                       >
                         {translate('In grace')}
                       </Badge>
@@ -573,9 +573,9 @@ const ProjectAutocompleteDialog: FC<ProjectAutocompleteDialogProps> = ({
                     {p.is_expired && !p.is_in_grace_period && (
                       <Badge
                         variant="neutral"
+                        size="sm"
                         tone="outline"
                         className="ms-2"
-                        style={{ fontSize: '0.7em' }}
                       >
                         {translate('Finished')}
                       </Badge>
@@ -631,13 +631,13 @@ const StatCard: FC<StatCardProps> = ({ label, value, variant = 'default' }) => {
 
   return (
     <Card
-      className="flex-fill"
+      className="flex-1"
       border={variant !== 'default' ? variant : undefined}
       style={{ minWidth: 180 }}
     >
       <Card.Body className="py-3">
         <div className="text-quaternary small mb-1">{label}</div>
-        <div className={`fs-5 font-medium ${textClass}`}>
+        <div className={`text-base font-medium ${textClass}`}>
           {(variant === 'warning' || variant === 'danger') && (
             <WarningCircleIcon className="me-1" size={18} weight="fill" />
           )}
@@ -1023,11 +1023,11 @@ export const OrganisationAllocationTab: FC = () => {
   return (
     <Container fluid className="py-4">
       {/* ── Toolbar ────────────────────────────────────────────────────── */}
-      <div className="d-flex align-items-center gap-3 mb-4 flex-wrap">
+      <div className="flex items-center gap-3 mb-4 flex-wrap">
         <h4 className="mb-0">{translate('Allocation Summary')}</h4>
 
         {projects && projects.length > 0 && (
-          <div className="d-flex align-items-center gap-2">
+          <div className="flex items-center gap-2">
             <span className="text-quaternary small">
               {translate('{count} of {total} {project} selected', {
                 count: effectiveSelected.size,
@@ -1048,7 +1048,7 @@ export const OrganisationAllocationTab: FC = () => {
         )}
 
         {loadTriggered && (
-          <div className="ms-auto d-flex align-items-center gap-2">
+          <div className="ms-auto flex items-center gap-2">
             {(() => {
               const age = customer
                 ? getCacheAge(`alloc-summaries-${customer.uuid}`)
@@ -1221,7 +1221,7 @@ export const OrganisationAllocationTab: FC = () => {
 
       {/* ── Summary stats ───────────────────────────────────────────────── */}
       {summaries.length > 0 && (
-        <div className="d-flex flex-wrap gap-3 mb-4">
+        <div className="flex flex-wrap gap-3 mb-4">
           <StatCard
             label={translate('Total {currencyName} awarded', { currencyName })}
             value={fmtCredits(stats.totalCredits)}
@@ -1267,7 +1267,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Burn-down chart ─────────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="d-flex align-items-center gap-3">
+          <Card.Header className="flex items-center gap-3">
             <span>{translate('Predicted allocation burn-down')}</span>
 
             {chartOptions && (
@@ -1325,7 +1325,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Consumption chart ───────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="d-flex align-items-center gap-3">
+          <Card.Header className="flex items-center gap-3">
             <span>{translate('Predicted daily consumption')}</span>
 
             {consumptionOptions && (
@@ -1447,7 +1447,7 @@ export const OrganisationAllocationTab: FC = () => {
       {/* ── Concerning projects ─────────────────────────────────────────── */}
       {summaries.length > 0 && (
         <Card className="mb-4">
-          <Card.Header className="d-flex align-items-center gap-2">
+          <Card.Header className="flex items-center gap-2">
             <span>{translate('Concerning Projects')}</span>
             {slowStart.length +
               inactive.length +
@@ -1487,10 +1487,7 @@ export const OrganisationAllocationTab: FC = () => {
             {showThresholds && (
               <div className="p-3 mb-3 bg-tertiary dark:bg-quaternary rounded small">
                 <Row className="g-2">
-                  <Col
-                    xs={12}
-                    className="d-flex align-items-center gap-2 flex-wrap"
-                  >
+                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Slow start')}:
                     </span>
@@ -1523,10 +1520,7 @@ export const OrganisationAllocationTab: FC = () => {
                       formatJsxTemplate,
                     )}
                   </Col>
-                  <Col
-                    xs={12}
-                    className="d-flex align-items-center gap-2 flex-wrap"
-                  >
+                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Inactive')}:
                     </span>
@@ -1573,10 +1567,7 @@ export const OrganisationAllocationTab: FC = () => {
                       formatJsxTemplate,
                     )}
                   </Col>
-                  <Col
-                    xs={12}
-                    className="d-flex align-items-center gap-2 flex-wrap"
-                  >
+                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Nearly depleted')}:
                     </span>
@@ -1615,10 +1606,7 @@ export const OrganisationAllocationTab: FC = () => {
                       formatJsxTemplate,
                     )}
                   </Col>
-                  <Col
-                    xs={12}
-                    className="d-flex align-items-center gap-2 flex-wrap"
-                  >
+                  <Col xs={12} className="flex items-center gap-2 flex-wrap">
                     <span style={{ minWidth: 120 }}>
                       {translate('Off track')}:
                     </span>

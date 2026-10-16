@@ -219,7 +219,7 @@ const ProjectGroupsTable: FC<{ provider: ServiceProvider }> = ({
         title: translate('GID'),
         render: ({ row }: { row: ServiceProviderProjectGroup }) =>
           row.gid == null ? (
-            <span className="d-inline-flex align-items-center gap-1 text-quaternary">
+            <span className="inline-flex items-center gap-1 text-quaternary">
               {translate('Not assigned')}
               <HelpIcon label={NO_GID_EXPLANATION()} size={14} />
             </span>

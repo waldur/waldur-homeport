@@ -71,7 +71,7 @@ export const AccessSubnetScopeFields = ({
         label={ENV.plugins.WALDUR_CORE.SITE_NAME}
       />
       {appliesToPortal && (
-        <Form.Text className="d-block text-warning mb-2">
+        <Form.Text className="block text-warning mb-2">
           {translate(
             'Once any address is listed for sign-in, only listed addresses can sign in on behalf of this organization.',
           )}
@@ -81,7 +81,7 @@ export const AccessSubnetScopeFields = ({
       {isLoading ? (
         <LoadingSpinner />
       ) : available.length === 0 ? (
-        <Form.Text className="d-block text-quaternary">
+        <Form.Text className="block text-quaternary">
           {translate(
             'This organization has no resources of an offering that supports access subnets.',
           )}

@@ -36,7 +36,7 @@ const AccordionSection: FC<AccordionSectionProps> = ({
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
       <div
-        className="d-flex align-items-center justify-content-between px-5 py-4 cursor-pointer"
+        className="flex items-center justify-between px-5 py-4 cursor-pointer"
         onClick={() => setOpen((v) => !v)}
         role="button"
         tabIndex={0}
@@ -47,9 +47,9 @@ const AccordionSection: FC<AccordionSectionProps> = ({
           }
         }}
       >
-        <div className="d-flex align-items-center gap-3">
+        <div className="flex items-center gap-3">
           <span className="text-brand">{icon}</span>
-          <span className="font-medium fs-6">{title}</span>
+          <span className="font-medium text-sm">{title}</span>
         </div>
         {open ? (
           <CaretUpIcon size={16} weight="bold" className="text-quaternary" />
@@ -59,7 +59,7 @@ const AccordionSection: FC<AccordionSectionProps> = ({
       </div>
       {open && (
         <div className="px-5 pb-5 pt-0">
-          <div className="text-quaternary lh-lg">{children}</div>
+          <div className="text-quaternary leading-relaxed">{children}</div>
         </div>
       )}
     </div>
@@ -70,15 +70,15 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
   onAcknowledge,
 }) => {
   return (
-    <div className="d-flex flex-column align-items-center flex-grow-1 overflow-auto py-8 px-5">
+    <div className="flex flex-col items-center grow overflow-auto py-8 px-5">
       <div className="text-center mb-8">
         <div className="mb-4">
           <SparkleIcon size={32} weight="duotone" className="text-brand" />
         </div>
-        <h2 className="font-medium fs-3 mb-2">
+        <h2 className="font-medium text-lg mb-2">
           {translate('Before you begin')}
         </h2>
-        <p className="text-quaternary fs-6 mb-0">
+        <p className="text-quaternary text-sm mb-0">
           {translate(
             'Please review the following information about the AI Assistant.',
           )}
@@ -86,7 +86,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
       </div>
 
       <div
-        className="d-flex flex-column gap-3 w-100 mb-8"
+        className="flex flex-col gap-3 w-full mb-8"
         style={{ maxWidth: 520 }}
       >
         <AccordionSection
@@ -149,10 +149,10 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
         </AccordionSection>
       </div>
 
-      <div className="w-100" style={{ maxWidth: 520 }}>
+      <div className="w-full" style={{ maxWidth: 520 }}>
         <BaseButton
           variant="primary"
-          className="w-100 py-3 font-medium fs-6"
+          className="w-full py-3 font-medium text-sm"
           onClick={onAcknowledge}
           label={translate('I understand')}
         />

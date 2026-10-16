@@ -76,9 +76,9 @@ const ImpactPreview: FC<{
           count: affected.length,
         })}
       </div>
-      <div className="d-flex flex-column gap-1">
+      <div className="flex flex-col gap-1">
         {affected.map((c: any) => (
-          <div key={c.uuid} className="d-flex align-items-center gap-2 fs-7">
+          <div key={c.uuid} className="flex items-center gap-2 text-xs">
             <span>{c.name}</span>
             <span className="text-quaternary">
               {getBillingTypeLabel(c.billing_type)}
@@ -165,13 +165,13 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
             </p>
             <Field name="billing_mode">
               {({ input }) => (
-                <div className="d-flex flex-column gap-3">
+                <div className="flex flex-col gap-3">
                   {availableModes.map((mode) => (
                     <label
                       key={mode.value}
                       // border-[1px], not Bootstrap's .border: its !important
                       // colour would override the selected border-brand.
-                      className={`d-flex align-items-start gap-3 p-3 rounded border-[1px] cursor-pointer ${
+                      className={`flex items-start gap-3 p-3 rounded border-[1px] cursor-pointer ${
                         input.value === mode.value
                           ? 'border-brand bg-brand-subtle'
                           : 'border-secondary'
@@ -186,7 +186,7 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
                       />
                       <div>
                         <div className="font-medium">{mode.label}</div>
-                        <div className="text-quaternary fs-7">
+                        <div className="text-quaternary text-xs">
                           {mode.description}
                         </div>
                       </div>

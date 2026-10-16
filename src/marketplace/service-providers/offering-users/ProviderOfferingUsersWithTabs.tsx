@@ -42,7 +42,7 @@ const ProviderOfferingUsersListTab = ({ portal, provider }) => {
 // The difference between the tabs is told on the tabs themselves, so the card
 // header stays free for the toolbar.
 const tabTitle = (title: string, help: string) => (
-  <span className="d-inline-flex align-items-center gap-1">
+  <span className="inline-flex items-center gap-1">
     {title}
     <HelpIcon label={help} size={14} />
   </span>

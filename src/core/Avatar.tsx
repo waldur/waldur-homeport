@@ -40,6 +40,7 @@ const Avatar: FC<AvatarProps> = ({
         circle && 'symbol-circle',
         className,
       )}
+      // eslint-disable-next-line waldur-custom/require-font-size-scale -- Dynamic font-size calculated proportionally to avatar size
       style={{ fontSize: getPlaceholderFontSize(size) + 'px' }}
     >
       <div className={classNames('symbol-label', labelClassName)}>

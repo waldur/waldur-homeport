@@ -43,7 +43,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
         label={translate('Plan old')}
         labelWidth={200}
         value={
-          <span className="d-inline-flex align-items-center gap-2">
+          <span className="inline-flex items-center gap-2">
             <Badge variant="neutral" shape="pill" tone="outline">
               {order.old_plan_name}
             </Badge>
@@ -57,7 +57,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
         label={translate('Plan new')}
         labelWidth={200}
         value={
-          <span className="d-inline-flex align-items-center gap-2">
+          <span className="inline-flex items-center gap-2">
             <Badge variant="moss" shape="pill" tone="outline">
               {order.new_plan_name}
             </Badge>
@@ -154,7 +154,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
               </tr>
               {data.hasUsageSide && (
                 <tr>
-                  <td colSpan={columnCount} className="text-quaternary fs-7">
+                  <td colSpan={columnCount} className="text-quaternary text-xs">
                     {translate(
                       'Usage-based components are billed on consumption and are not included in the total.',
                     )}

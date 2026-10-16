@@ -23,7 +23,7 @@ export const IssueStatus = ({ status }) => {
       size="sm"
       shape="pill"
       tone="outline"
-      className="flex-shrink-0"
+      className="shrink-0"
     >
       {status}
     </Badge>

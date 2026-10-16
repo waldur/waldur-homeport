@@ -359,12 +359,12 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
     {
       title: translate('Question'),
       render: ({ row }) => (
-        <div className="d-flex flex-column">
-          <span className="text-primary font-medium fs-6 mb-1">
+        <div className="flex flex-col">
+          <span className="text-primary font-medium text-sm mb-1">
             {row.description}
           </span>
           {row.user_guidance && (
-            <span className="text-tertiary fs-7">{row.user_guidance}</span>
+            <span className="text-tertiary text-xs">{row.user_guidance}</span>
           )}
         </div>
       ),

@@ -25,7 +25,7 @@ export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => (
           size={40}
         />
       </div>
-      <h3 className="text-primary text-center font-medium fs-6 mb-0 category-title">
+      <h3 className="text-primary text-center font-medium text-sm mb-0 category-title">
         <span className="ellipsis" title={props.item.title}>
           {props.item.title}
         </span>

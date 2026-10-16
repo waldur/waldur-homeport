@@ -152,7 +152,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
     // the highlight through the rows (options) and Enter opens one. The
     // backend filters, so downshift doesn't filter locally.
     <div>
-      <div className="d-flex border-b-[1px] border-b-secondary py-2 pe-3">
+      <div className="flex border-b-[1px] border-b-secondary py-2 pe-3">
         <FilterBox
           {...getInputProps({
             type: 'search',
@@ -171,7 +171,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
             'aria-describedby': hintId,
             preventEnterSubmit: false,
             inputClassName: 'border-0 shadow-none',
-            className: 'flex-grow-1',
+            className: 'grow',
             autoFocus: true,
           })}
         />
@@ -199,7 +199,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
         )}
       </div>
       {filterOpen && (
-        <div className="d-flex border-b-[1px] border-b-secondary py-1 px-5">
+        <div className="flex border-b-[1px] border-b-secondary py-1 px-5">
           {filters.map((filter) => (
             <Field
               key={filter.field}
@@ -256,7 +256,7 @@ const BreadcrumbDropdownContent = <Fetcher extends SdkFunction>({
             {context.hasNextPage && (
               <div
                 ref={sentinelRef}
-                className="text-center py-2 text-quaternary fs-7"
+                className="text-center py-2 text-quaternary text-xs"
               >
                 {context.isFetchingNextPage
                   ? translate('Loading more...')

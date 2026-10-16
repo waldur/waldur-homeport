@@ -29,11 +29,11 @@ const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
         ]}
       />
       <div>
-        <span className="d-block text-quaternary mb-1">{title}</span>
-        <span className="d-block text-quaternary mb-1">
+        <span className="block text-quaternary mb-1">{title}</span>
+        <span className="block text-quaternary mb-1">
           {value}/{total} {unit}
         </span>
-        <span className="d-block font-medium">
+        <span className="block font-medium">
           {total ? Number((value / total) * 100).toFixed(1) : 0}%
         </span>
       </div>

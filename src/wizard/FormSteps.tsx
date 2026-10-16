@@ -108,7 +108,7 @@ export const FormSteps: FC<{
       title: (
         <div
           className={classNames(
-            'd-flex justify-content-between align-items-center w-100',
+            'flex justify-between items-center w-full',
             (hasCriticalErrors || hasNormalErrors) && 'has-error',
             isDisabled && 'text-quaternary',
           )}

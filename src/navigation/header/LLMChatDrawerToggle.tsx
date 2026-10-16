@@ -148,7 +148,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
   // The marker is positioned against this wrapper, not the button, so it must
   // not stretch with the app header's row or `top-0` lands on the header edge.
   return (
-    <div className="d-flex align-items-center align-self-center ms-1 position-relative">
+    <div className="flex items-center self-center ms-1 position-relative">
       {control}
       {marker}
     </div>

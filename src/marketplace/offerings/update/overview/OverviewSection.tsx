@@ -272,7 +272,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
                   ) : checklistQuery.error ? (
                     <LoadingErred
                       loadData={checklistQuery.refetch}
-                      className="d-inline-flex flex-center gap-4 ms-4"
+                      className="inline-flex flex-center gap-4 ms-4"
                     />
                   ) : checklistQuery.data ? (
                     <>

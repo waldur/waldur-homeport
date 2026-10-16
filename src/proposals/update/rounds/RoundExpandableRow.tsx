@@ -126,7 +126,7 @@ const RoundResultsSection: FunctionComponent<RoundExpandableRowProps> = ({
                 <FileDownloader
                   url={row.adoption_document}
                   name={adoptionDocumentName(row.adoption_document)}
-                  className="text-btn hover:text-brand d-inline-flex align-items-center"
+                  className="text-btn hover:text-brand inline-flex items-center"
                 >
                   <DownloadSimpleIcon weight="bold" className="me-1" />
                   {translate('Download document')}

@@ -207,7 +207,7 @@ export const PlanComparison: FC<PlanComparisonProps> = ({ offering }) => {
         // one allowed a second line.
         title: translate('Component'),
         render: ({ row }) => (
-          <div className="d-flex flex-column">
+          <div className="flex flex-col">
             <span className="title">{row.label}</span>
             {row.unit && <span className="description">{row.unit}</span>}
           </div>

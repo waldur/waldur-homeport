@@ -35,8 +35,8 @@ const ResourceNameField = (props) => {
   });
 
   return (
-    <div className="d-flex justify-content-between">
-      <div className="flex-grow-1 me-3 ">
+    <div className="flex justify-between">
+      <div className="grow me-3 ">
         <StringField input={props.input} meta={props.meta} id={props.id} />
       </div>
       {project ? (

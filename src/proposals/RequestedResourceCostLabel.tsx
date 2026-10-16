@@ -77,13 +77,13 @@ export const RequestedResourceCostLabel: FC<
     );
   }
   const oneTime = (
-    <span className="text-quaternary fs-7">
+    <span className="text-quaternary text-xs">
       {defaultCurrency(cost.oneTime)}
       {oneTimeSuffix}
     </span>
   );
   return stacked ? (
-    <span className="d-flex flex-column">
+    <span className="flex flex-col">
       {monthly}
       {oneTime}
     </span>

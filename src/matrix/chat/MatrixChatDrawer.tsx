@@ -186,7 +186,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
         {({ getRootProps, getInputProps, isDragActive }) => (
           <div
             {...getRootProps({
-              className: 'team-chat h-100 d-flex flex-column position-relative',
+              className: 'team-chat h-full flex flex-col position-relative',
             })}
           >
             <input {...getInputProps()} />
@@ -217,9 +217,9 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
             <CallInProgressBanner />
 
             {showCrossRoomBanner && (
-              <div className="d-flex align-items-center gap-2 px-4 py-2 bg-success-subtle border-b-[1px] border-b-secondary">
+              <div className="flex items-center gap-2 px-4 py-2 bg-success-subtle border-b-[1px] border-b-secondary">
                 <PhoneIcon size={16} className="text-success" weight="fill" />
-                <span className="text-sm flex-grow-1">
+                <span className="text-sm grow">
                   {translate('Call in progress in {room}', {
                     room:
                       (callRoom as any)?.room_name ?? translate('another room'),
@@ -234,9 +234,9 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
               </div>
             )}
 
-            <div className="flex-grow-1 overflow-hidden d-flex flex-column">
+            <div className="grow overflow-hidden flex flex-col">
               {showConnectionError && (
-                <div className="flex-grow-1 d-flex align-items-center justify-content-center p-4">
+                <div className="grow flex items-center justify-center p-4">
                   <LoadingErred
                     loadData={() => connect(roomUuid)}
                     message={
@@ -293,7 +293,7 @@ export const MatrixChatDrawer: FC<MatrixChatDrawerProps> = ({
                 </div>
               )}
               {showChat && !showConnectionError && (
-                <div className="flex-grow-1 overflow-hidden d-flex flex-column">
+                <div className="grow overflow-hidden flex flex-col">
                   <MatrixMessageList
                     messages={messages}
                     userId={userId}

@@ -42,7 +42,7 @@ const colorPalette = [
 ];
 
 const ColorField = (props) => (
-  <div className="d-flex flex-wrap">
+  <div className="flex flex-wrap">
     {colorPalette.map((color, index) => (
       <div
         key={color}

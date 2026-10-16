@@ -28,7 +28,7 @@
     background-color: var(--bg-secondary);
 
     > th {
-      font-size: 12px;
+      font-size: var(--text-xs);
       color: var(--text-quaternary);
       font-weight: var(--font-weight-medium);
       white-space: nowrap;
@@ -547,7 +547,7 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 
   // Override the 14px inherited from `.table td` — gutter text is 1rem (13px).
   .message-gutter {
-    font-size: 1rem;
+    font-size: var(--text-xs);
   }
 
   .message-actions {

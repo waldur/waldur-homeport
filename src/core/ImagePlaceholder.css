@@ -2,9 +2,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 7px;
+  border-radius: var(--radius-lg);
   flex-shrink: 0;
-  font-size: 18px;
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-medium);
 }
 .image-placeholder.circle {

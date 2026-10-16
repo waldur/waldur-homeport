@@ -20,7 +20,7 @@ export const MessageDataInspector: FC<MessageDataInspectorProps> = ({
   if (toolBlocks.length === 0 && uiBlocks.length === 0) return null;
 
   return (
-    <div className="d-flex flex-column gap-1 mt-2">
+    <div className="flex flex-col gap-1 mt-2">
       {toolBlocks.length > 0 && (
         <InspectorSection
           label={translate('tool call data')}
@@ -56,7 +56,7 @@ const InspectorSection: FC<InspectorSectionProps> = ({
 
   return (
     <div>
-      <div className="d-flex align-items-center gap-2">
+      <div className="flex items-center gap-2">
         <BaseButton
           variant="tertiary-ghost"
           size="sm"

@@ -207,7 +207,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                   )
                 }
                 cardBordered
-                className="h-100"
+                className="h-full"
               >
                 <TruncatedMarkdown
                   text={project.description}
@@ -246,7 +246,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                   )
                 }
                 cardBordered
-                className="h-100"
+                className="h-full"
               >
                 <TruncatedMarkdown
                   text={project.staff_notes}
@@ -296,7 +296,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
               onAddClick={isProjectRemoved ? undefined : callback}
               showAdd={canInvite && !isProjectRemoved}
               loadingAdd={loadingProjects}
-              className="h-100"
+              className="h-full"
               nameKey="user_full_name"
               emailKey="user_email"
               imageKey="user_image"

@@ -15,15 +15,15 @@ interface OwnProps {
 export const CriteriaListField: FC<OwnProps> = ({ name }) => (
   <FieldArray name={name}>
     {({ fields }) => (
-      <div className="d-flex flex-column gap-2">
+      <div className="flex flex-col gap-2">
         {fields.length === 0 && (
           <div className="text-quaternary small">
             {translate('No criteria defined yet.')}
           </div>
         )}
         {fields.map((fieldName, index) => (
-          <div key={fieldName} className="d-flex gap-2 align-items-center">
-            <div className="flex-grow-1">
+          <div key={fieldName} className="flex gap-2 items-center">
+            <div className="grow">
               <Field
                 name={`${fieldName}.name`}
                 render={({ input, meta }) => (

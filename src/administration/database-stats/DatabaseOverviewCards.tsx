@@ -54,8 +54,8 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <strong
                   className={`display-4 ${getTextClass(connectionHealth)}`}
                 >
@@ -74,7 +74,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 {data.connections.max_connections}
               </span>
             </div>
-            <strong className="d-block">
+            <strong className="block">
               {translate('Connection utilization')}
             </strong>
           </Card.Body>
@@ -84,7 +84,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center">
+            <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(cacheHealth)}`}>
                 {formatPercent(data.cache_performance.buffer_cache_hit_ratio)}
               </strong>
@@ -96,7 +96,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 />
               )}
             </div>
-            <strong className="d-block">{translate('Cache hit ratio')}</strong>
+            <strong className="block">{translate('Cache hit ratio')}</strong>
           </Card.Body>
         </Card>
       </Col>
@@ -104,8 +104,8 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <strong
                   className={`display-4 ${getTextClass(deadTupleHealth)}`}
                 >
@@ -127,7 +127,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 </span>
               )}
             </div>
-            <strong className="d-block">{translate('Dead tuple ratio')}</strong>
+            <strong className="block">{translate('Dead tuple ratio')}</strong>
           </Card.Body>
         </Card>
       </Col>
@@ -135,7 +135,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center">
+            <div className="flex items-center">
               <strong className={`display-4 ${getTextClass(locksHealth)}`}>
                 {data.locks.waiting_locks}
               </strong>
@@ -147,7 +147,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 />
               )}
             </div>
-            <strong className="d-block">{translate('Waiting locks')}</strong>
+            <strong className="block">{translate('Waiting locks')}</strong>
           </Card.Body>
         </Card>
       </Col>
@@ -155,8 +155,8 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
-              <div className="d-flex align-items-center">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <strong className={`display-4 ${getTextClass(queryHealth)}`}>
                   {data.active_queries.count}
                 </strong>
@@ -178,7 +178,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 </span>
               )}
             </div>
-            <strong className="d-block">{translate('Active queries')}</strong>
+            <strong className="block">{translate('Active queries')}</strong>
           </Card.Body>
         </Card>
       </Col>
@@ -186,7 +186,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
       <Col md={6} lg={4}>
         <Card className="card-bordered mb-5">
           <Card.Body>
-            <div className="d-flex align-items-center justify-content-between">
+            <div className="flex items-center justify-between">
               <strong className="display-4 text-info">
                 {formatFilesize(data.database_size.total_size_bytes, 'B')}
               </strong>
@@ -194,7 +194,7 @@ export const DatabaseOverviewCards: FC<DatabaseOverviewCardsProps> = ({
                 {data.database_size.database_name}
               </span>
             </div>
-            <strong className="d-block">{translate('Database size')}</strong>
+            <strong className="block">{translate('Database size')}</strong>
           </Card.Body>
         </Card>
       </Col>

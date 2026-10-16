@@ -62,7 +62,7 @@ export const CustomerMappingExpandableRow: FC<
     <ExpandableContainer>
       <div className="p-4">
         {/* Summary stats */}
-        <div className="d-flex gap-4 mb-4 flex-wrap">
+        <div className="flex gap-4 mb-4 flex-wrap">
           <div>
             <span className="text-quaternary">
               {translate('Total resources:')}

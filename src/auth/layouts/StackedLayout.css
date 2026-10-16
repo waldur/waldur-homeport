@@ -30,13 +30,13 @@
 .layout-stacked-hero-content h1 {
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: var(--text-2xl);
   margin-bottom: 1rem;
 }
 
 @media (width >= 768px) {
   .layout-stacked-hero-content h1 {
-    font-size: 2rem;
+    font-size: var(--text-3xl);
   }
 }
 

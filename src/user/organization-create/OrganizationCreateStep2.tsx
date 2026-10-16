@@ -227,7 +227,7 @@ export const OrganizationCreateStep2: FunctionComponent<
   }, [checklistFetched, isManual]);
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <Card className="border-0 shadow-sm">
         <Card.Body className="p-8">
           {!isManual &&
@@ -239,15 +239,15 @@ export const OrganizationCreateStep2: FunctionComponent<
                   <p className="mb-3">{methodInfo.title}</p>
                   {hasRequiredFields() ? (
                     <Card className="card-bordered mb-6">
-                      <Card.Body className="d-flex gap-3">
-                        <div className="flex-shrink-0">
+                      <Card.Body className="flex gap-3">
+                        <div className="shrink-0">
                           <CheckCircleIcon
                             size={24}
                             weight="duotone"
                             className="text-success"
                           />
                         </div>
-                        <div className="flex-grow-1">
+                        <div className="grow">
                           <div className="text-primary mb-1">
                             {translate('Personal identity received')}
                             {user?.civil_number && `: ${user.civil_number}`}
@@ -262,11 +262,11 @@ export const OrganizationCreateStep2: FunctionComponent<
                     </Card>
                   ) : blockForIncompleteProfile ? (
                     <Card className="card-bordered mb-4">
-                      <Card.Body className="d-flex gap-3">
-                        <div className="flex-shrink-0">
+                      <Card.Body className="flex gap-3">
+                        <div className="shrink-0">
                           <InfoIcon size={24} weight="duotone" />
                         </div>
-                        <div className="flex-grow-1">
+                        <div className="grow">
                           <div className="text-primary mb-1">
                             {translate('Complete your profile to continue')}
                           </div>
@@ -294,11 +294,11 @@ export const OrganizationCreateStep2: FunctionComponent<
                   ) : (
                     <>
                       <Card className="card-bordered mb-4">
-                        <Card.Body className="d-flex gap-3">
-                          <div className="flex-shrink-0">
+                        <Card.Body className="flex gap-3">
+                          <div className="shrink-0">
                             <InfoIcon size={24} weight="duotone" />
                           </div>
-                          <div className="flex-grow-1">
+                          <div className="grow">
                             <div className="text-primary mb-1">
                               {translate('Why do we need this?')}
                             </div>
@@ -368,7 +368,7 @@ export const OrganizationCreateStep2: FunctionComponent<
               {/* Documentation Upload Section */}
               <div className="mt-8">
                 <BootstrapForm.Group>
-                  <BootstrapForm.Label className="fs-6 mb-2">
+                  <BootstrapForm.Label className="text-sm mb-2">
                     {translate('Optional information and supporting documents')}
                   </BootstrapForm.Label>
                   <UploadContainer

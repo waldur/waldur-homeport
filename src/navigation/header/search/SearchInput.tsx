@@ -53,7 +53,7 @@ export const SearchInput = ({
     <div className={className}>
       {/* A lone text field submits its form on Enter, which would reload the page. */}
       <form
-        className="w-100 position-relative"
+        className="w-full position-relative"
         autoComplete="off"
         onSubmit={(event) => event.preventDefault()}
       >
@@ -72,14 +72,14 @@ export const SearchInput = ({
 
         {/* Keyboard shortcut hint */}
         {showShortcut && !query && (
-          <span className="position-absolute top-50 end-0 translate-middle-y me-4 z-index-5 text-secondary fs-8 bg-quaternary px-2 py-1 rounded">
+          <span className="position-absolute top-50 end-0 translate-middle-y me-4 z-index-5 text-secondary text-xs bg-quaternary px-2 py-1 rounded">
             {shortcutHint}
           </span>
         )}
 
         {/* Loading */}
         {show && isLoading ? (
-          <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-4 z-index-5">
+          <span className="position-absolute top-50 end-0 translate-middle-y leading-none me-4 z-index-5">
             <span className="spinner-border h-15px w-15px align-middle text-quinary" />
           </span>
         ) : null}

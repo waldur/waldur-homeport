@@ -202,7 +202,7 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
   return (
     <div className="tc-header">
       {onBack && (
-        <div className="position-relative d-inline-flex">
+        <div className="position-relative inline-flex">
           <BaseButton
             variant="text-secondary"
             size="sm"
@@ -221,19 +221,16 @@ export const MatrixChatHeader: FC<MatrixChatHeaderProps> = ({
         labelClassName={getChatAvatarClass(roomUuid)}
       />
 
-      <div
-        className="d-flex align-items-baseline gap-1 flex-grow-1"
-        style={{ minWidth: 0 }}
-      >
+      <div className="flex items-baseline gap-1 grow" style={{ minWidth: 0 }}>
         {projectUuid ? (
           <Link
             state="project.dashboard"
             params={{ uuid: projectUuid }}
             label={roomName}
-            className="text-truncate"
+            className="truncate"
           />
         ) : (
-          <span className="text-truncate">{roomName}</span>
+          <span className="truncate">{roomName}</span>
         )}
         {members.length > 0 && (
           <Popover>

@@ -77,7 +77,7 @@ export const DatabaseQueryPerformanceCard: FC<
             </tbody>
           </Table>
           {hasHighSeqScans && (
-            <small className="text-warning mt-2 d-block">
+            <small className="text-warning mt-2 block">
               {translate(
                 'High sequential scan ratio ({ratio}%). Consider adding indexes.',
                 { ratio: seqScanRatio.toFixed(1) },
@@ -93,7 +93,7 @@ export const DatabaseQueryPerformanceCard: FC<
             <tbody>
               <tr>
                 <td className="text-quaternary">
-                  <div className="d-flex align-items-center">
+                  <div className="flex items-center">
                     {translate('Files created')}
                     {data.temp_files_count > 0 && (
                       <WarningCircleIcon
@@ -121,7 +121,7 @@ export const DatabaseQueryPerformanceCard: FC<
             </tbody>
           </Table>
           {hasTempFilesWarning && (
-            <small className="text-danger mt-2 d-block">
+            <small className="text-danger mt-2 block">
               {translate(
                 'Large temp files indicate queries exceeding work_mem. Consider increasing it.',
               )}

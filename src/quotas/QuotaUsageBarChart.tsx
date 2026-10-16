@@ -55,7 +55,7 @@ export const ProgressTooltipMessage = ({ quota }) => (
 );
 
 export const QuotaUsageBarChartDescription = ({ quota, hideLabel = false }) => (
-  <div className="quota-info d-flex justify-content-between gap-4 text-quaternary mb-2">
+  <div className="quota-info flex justify-between gap-4 text-quaternary mb-2">
     <p className="mb-0">
       {!hideLabel && formatQuotaName(quota.name)}
       {exceeds(quota) && (

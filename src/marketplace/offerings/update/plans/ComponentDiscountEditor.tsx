@@ -103,7 +103,7 @@ export const ComponentDiscountEditor: FunctionComponent<
             </p>
           )}
           {tiers.map((tier, index) => (
-            <div className="d-flex align-items-center gap-2 mb-2" key={index}>
+            <div className="flex items-center gap-2 mb-2" key={index}>
               <span className="text-quaternary">
                 {translate('when usage ≥')}
               </span>
@@ -134,7 +134,7 @@ export const ComponentDiscountEditor: FunctionComponent<
               />
             </div>
           ))}
-          <div className="d-flex align-items-center gap-4 mt-3">
+          <div className="flex items-center gap-4 mt-3">
             <BaseButton
               type="button"
               variant="tertiary"
@@ -154,7 +154,7 @@ export const ComponentDiscountEditor: FunctionComponent<
             />
           </div>
           {tiers.length > 0 && (
-            <div className="d-flex align-items-center gap-2 mt-4 text-quaternary">
+            <div className="flex items-center gap-2 mt-4 text-quaternary">
               {translate('Preview: at usage')}
               <input
                 type="number"

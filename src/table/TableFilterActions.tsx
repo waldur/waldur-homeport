@@ -68,7 +68,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
   };
 
   return (
-    <div className="d-flex align-items-center gap-2">
+    <div className="flex items-center gap-2">
       <BaseButton
         size="sm"
         variant="text-primary"

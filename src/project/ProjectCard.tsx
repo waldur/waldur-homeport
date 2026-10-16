@@ -65,7 +65,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
       clickable
       onClick={handleCardClick}
       body={
-        <div className="fs-6">
+        <div className="text-sm">
           <Field
             label={translate('Organization')}
             value={project.customer_name}
@@ -95,7 +95,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               <>
                 {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
                 <span
-                  className="d-inline-flex align-items-center flex-wrap gap-1"
+                  className="inline-flex items-center flex-wrap gap-1"
                   onClick={stopPropagation}
                 >
                   {[
@@ -166,7 +166,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
       footer={
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
-          className="d-flex justify-content-end align-items-center gap-2"
+          className="flex justify-end items-center gap-2"
           onClick={stopPropagation}
         >
           {canEdit && (

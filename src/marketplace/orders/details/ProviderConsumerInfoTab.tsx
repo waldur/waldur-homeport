@@ -59,7 +59,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
   };
 
   return (
-    <div className="d-flex flex-column gap-6">
+    <div className="flex flex-col gap-6">
       <FormTable.Card
         title={translate('Provider message')}
         actions={
@@ -102,7 +102,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
                 <FileDownloader
                   url={order.provider_message_attachment}
                   name={translate('PDF file')}
-                  className="text-btn hover:text-brand d-inline-flex align-items-center"
+                  className="text-btn hover:text-brand inline-flex items-center"
                 >
                   <DownloadSimpleIcon weight="bold" className="me-1" />
                   {translate('Download PDF')}
@@ -129,7 +129,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
                   <FileDownloader
                     url={order.consumer_message_attachment}
                     name={translate('PDF file')}
-                    className="text-btn hover:text-brand d-inline-flex align-items-center"
+                    className="text-btn hover:text-brand inline-flex items-center"
                   >
                     <DownloadSimpleIcon weight="bold" className="me-1" />
                     {translate('Download PDF')}

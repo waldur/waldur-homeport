@@ -39,18 +39,18 @@ export const NoResult: FC<NoResultProps> = ({
     <div
       className={classNames(
         'search-no-result',
-        !isVisible && 'd-none',
+        !isVisible && 'hidden',
         className,
       )}
       style={style}
     >
       <RadialBg className="background" />
-      <div className="text-center d-flex flex-column align-items-center pb-10 position-relative z-index-1">
+      <div className="text-center flex flex-col items-center pb-10 position-relative z-index-1">
         <div className="icon-square icon-lg search-icon">{icon}</div>
 
         <div>
           <h4>{title}</h4>
-          <div className="d-flex flex-column align-items-center text-quaternary fs-6">
+          <div className="flex flex-col items-center text-quaternary text-sm">
             {message !== null &&
               (message || (
                 <p className="mb-0">
@@ -62,7 +62,7 @@ export const NoResult: FC<NoResultProps> = ({
           </div>
         </div>
         {(actions || callback) && (
-          <div className="actions d-flex justify-content-center gap-4 w-100">
+          <div className="actions flex justify-center gap-4 w-full">
             {Boolean(callback) && (
               <BaseButton
                 variant="tertiary"

@@ -29,11 +29,11 @@ export const InvoiceDetails = ({
   return (
     <>
       <Card className="card-bordered mb-5">
-        <Card.Body className="d-flex">
+        <Card.Body className="flex">
           <Row>
             {invoice.customer_details && (
               <Col>
-                <div className="fs-5 mb-3 text-uppercase">
+                <div className="text-base mb-3 text-uppercase">
                   {translate('Invoice to')}
                 </div>
                 <CustomerDetails customer={invoice.customer_details} />
@@ -41,7 +41,7 @@ export const InvoiceDetails = ({
             )}
             {invoice.issuer_details && (
               <Col>
-                <div className="fs-5 mb-3 text-uppercase">
+                <div className="text-base mb-3 text-uppercase">
                   {translate('Invoice from')}
                 </div>
                 <CustomerDetails customer={invoice.issuer_details} />
@@ -69,7 +69,7 @@ export const InvoiceDetails = ({
           showPrice && (
             <table className="table bg-secondary border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary align-middle">
               <tbody>
-                <tr className="fs-6 font-medium">
+                <tr className="text-sm font-medium">
                   {totalFiltered !== null && (
                     <td className="text-primary">
                       <span>{translate('Total filtered')}</span>
@@ -90,7 +90,7 @@ export const InvoiceDetails = ({
                     {defaultCurrency(invoice.price)}
                   </td>
                 </tr>
-                <tr className="fs-6 font-medium">
+                <tr className="text-sm font-medium">
                   <td
                     className="text-end text-primary"
                     colSpan={totalFiltered === null ? 1 : 2}
@@ -104,7 +104,7 @@ export const InvoiceDetails = ({
                     {defaultCurrency(invoice.tax)}
                   </td>
                 </tr>
-                <tr className="fs-6 font-medium">
+                <tr className="text-sm font-medium">
                   <td
                     className="text-end text-primary"
                     colSpan={totalFiltered === null ? 1 : 2}

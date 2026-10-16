@@ -109,11 +109,13 @@ export const VersionHistoryDialog: FunctionComponent<
       footer={<CloseDialogButton label={translate('Close')} />}
       bodyClassName="p-0"
     >
-      <div className="d-flex flex-column" style={{ height: '70vh' }}>
+      <div className="flex flex-col" style={{ height: '70vh' }}>
         {/* Toolbar: wraps onto two rows on a phone. */}
-        <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
-          <div className="d-flex align-items-center gap-2 text-nowrap">
-            <span className="text-quaternary fs-7">{translate('Total')}:</span>
+        <div className="flex flex-wrap justify-between items-center gap-3 px-5 py-4 border-b-[1px] border-b-secondary">
+          <div className="flex items-center gap-2 text-nowrap">
+            <span className="text-quaternary text-xs">
+              {translate('Total')}:
+            </span>
             <StateIndicator
               label={`${versions.length} ${translate('versions')}`}
               variant="info"
@@ -128,7 +130,7 @@ export const VersionHistoryDialog: FunctionComponent<
         </div>
 
         {/* Main content */}
-        <div className="d-flex flex-grow-1 overflow-hidden">
+        <div className="flex grow overflow-hidden">
           {showList && (
             <div
               ref={listRef}
@@ -138,7 +140,7 @@ export const VersionHistoryDialog: FunctionComponent<
                   : 'overflow-auto w-full'
               }
             >
-              <div className="font-medium fs-6 px-5 py-4 border-b-[1px] border-b-secondary">
+              <div className="font-medium text-sm px-5 py-4 border-b-[1px] border-b-secondary">
                 {translate('Revisions')}
               </div>
               <VersionHistoryTimeline
@@ -151,7 +153,7 @@ export const VersionHistoryDialog: FunctionComponent<
           )}
 
           {showDiff && (
-            <div className="flex-grow-1 overflow-hidden d-flex flex-column min-w-0">
+            <div className="grow overflow-hidden flex flex-col min-w-0">
               {!isWide && (
                 <div className="px-3 py-2 border-b-[1px] border-b-secondary">
                   <BaseButton

@@ -21,7 +21,7 @@ export const EndDateField = ({ resource }) => {
   const isPastDate = new Date(effectiveDate) < new Date();
 
   const tooltipContent = (
-    <div className="flex-grow-1">
+    <div className="grow">
       {ownEndDate && (
         <div>
           {translate('Resource termination date')}: {ownEndDate} (

@@ -222,12 +222,12 @@ export const K8sFlavorSelectionTable: React.FC<
     });
 
   return (
-    <div className="d-grid">
+    <div className="grid">
       <button
         type="button"
         className={cn(
           buttonVariants({ variant: 'text-primary', size: 'lg' }),
-          'ellipsis justify-content-start gap-2',
+          'ellipsis justify-start gap-2',
         )}
         onClick={openModal}
         disabled={!offeringUuid}
@@ -239,7 +239,7 @@ export const K8sFlavorSelectionTable: React.FC<
           <HelpIcon
             label={
               <div className="text-start">
-                <span className="d-block">vCPUs: {selectedFlavor.vcpus}</span>
+                <span className="block">vCPUs: {selectedFlavor.vcpus}</span>
                 <span>RAM: {formatFilesize(selectedFlavor.ram)}</span>
               </div>
             }

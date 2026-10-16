@@ -48,8 +48,8 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
           })}
           disabled={!isAllowed}
         >
-          <Card className="card-bordered h-100 cursor-pointer border-hover-brand">
-            <Card.Body className="p-4 d-flex align-items-center gap-3">
+          <Card className="card-bordered h-full cursor-pointer border-hover-brand">
+            <Card.Body className="p-4 flex items-center gap-3">
               {offering.thumbnail ? (
                 <Image src={offering.thumbnail} size={48} isContain circle />
               ) : (
@@ -57,14 +57,9 @@ export const CompactCard: FC<OfferingCardVariantProps> = ({
                   {getAbbreviation(offering.name, 2)}
                 </ImagePlaceholder>
               )}
-              <div className="flex-grow-1 overflow-hidden">
-                <div className="ellipsis" style={{ fontSize: 16 }}>
-                  {offering.name}
-                </div>
-                <div
-                  className="text-quaternary ellipsis"
-                  style={{ fontSize: 14 }}
-                >
+              <div className="grow overflow-hidden">
+                <div className="ellipsis text-base">{offering.name}</div>
+                <div className="text-quaternary ellipsis text-sm">
                   {offering.customer_name}
                 </div>
               </div>

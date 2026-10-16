@@ -241,7 +241,7 @@ export const ForceImportConsumptionDialog = ({
                   </td>
                   <td>
                     {item.has_existing ? (
-                      <div className="d-flex flex-column gap-1">
+                      <div className="flex flex-col gap-1">
                         {item.is_finalized ? (
                           <Badge variant="danger" shape="pill" tone="outline">
                             {translate('Finalized — will overwrite')}

@@ -24,7 +24,7 @@ export const RoleHygieneSummary = ({
       {
         label: translate('Roles checked'),
         value: (
-          <div className="d-flex align-items-baseline justify-content-between">
+          <div className="flex items-baseline justify-between">
             <span>{report.roles_checked.toLocaleString()}</span>
             <Badge variant="neutral" shape="pill" tone="outline">
               {translate('{count} with findings', {

@@ -88,27 +88,27 @@
 }
 
 .layout-news-date {
-  font-size: 0.85rem;
+  font-size: var(--text-xs);
   color: var(--text-quaternary);
 }
 
 .layout-news-tag {
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   padding: 0.25rem 0.75rem;
-  border-radius: 20px;
+  border-radius: 9999px;
   background: var(--brand-color);
   color: white;
   font-weight: var(--font-weight-medium);
 }
 
 .layout-news-item h3 {
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-semibold);
   margin-bottom: 0.5rem;
 }
 
 .layout-news-item p {
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   color: var(--text-tertiary);
   margin: 0;
 }

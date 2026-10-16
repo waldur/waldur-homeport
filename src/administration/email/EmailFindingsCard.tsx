@@ -20,10 +20,8 @@ const ICONS = {
 };
 
 const FindingRow: FC<{ finding: EmailFinding }> = ({ finding }) => (
-  <li className="d-flex gap-3 py-3 border-b-[1px] border-b-secondary">
-    <div className="flex-shrink-0 pt-1">
-      {ICONS[finding.level] ?? ICONS.WARNING}
-    </div>
+  <li className="flex gap-3 py-3 border-b-[1px] border-b-secondary">
+    <div className="shrink-0 pt-1">{ICONS[finding.level] ?? ICONS.WARNING}</div>
     <div>
       <div>{finding.title}</div>
       {finding.detail && (

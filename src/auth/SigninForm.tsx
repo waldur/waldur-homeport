@@ -134,7 +134,7 @@ const PasskeyStep = ({ ceremony, onCancel }) => {
           !prepared ? translate('Preparing the passkey challenge.') : undefined
         }
         label={translate('Confirm with passkey')}
-        className="w-100 mb-3"
+        className="w-full mb-3"
         data-testid="passkey-mfa-confirm"
         variant="primary"
         size="lg"
@@ -216,7 +216,7 @@ export const SigninForm = () => {
                 <Tabs
                   value={input.value}
                   onValueChange={input.onChange}
-                  className="w-100 mb-5"
+                  className="w-full mb-5"
                 >
                   <TabsList
                     variant="segmented"

@@ -36,15 +36,15 @@ const getStaysHelp = () =>
  * that wraps is not.
  */
 const ValueChange: FC<{ row: OfferingMergeAffectedRow }> = ({ row }) => (
-  <div className="d-flex flex-column gap-1">
+  <div className="flex flex-col gap-1">
     <span>{renderFieldOrDash(row.old_value)}</span>
     {row.kept_on_source ? (
-      <span className="text-quaternary fs-8">
+      <span className="text-quaternary text-xs">
         {translate('Unchanged: it stays on the archived source.')}
       </span>
     ) : (
-      <span className="d-flex align-items-start gap-2">
-        <span className="text-quaternary fs-8 text-nowrap pt-1">
+      <span className="flex items-start gap-2">
+        <span className="text-quaternary text-xs text-nowrap pt-1">
           {translate('becomes')}
         </span>
         <span>{renderFieldOrDash(row.new_value)}</span>
@@ -78,7 +78,7 @@ export const MergeAffectedRowsDialog: FC<MergeAffectedRowsDialogProps> = ({
   return (
     <ModalDialog
       title={
-        <span className="d-flex align-items-center gap-2">
+        <span className="flex items-center gap-2">
           {entry.title}
           <HelpTip
             label={translate(
@@ -88,9 +88,9 @@ export const MergeAffectedRowsDialog: FC<MergeAffectedRowsDialogProps> = ({
         </span>
       }
       subtitle={
-        <span className="d-flex flex-wrap align-items-center gap-2">
+        <span className="flex flex-wrap items-center gap-2">
           {entry.effectTitle}
-          <code className="fs-8">{entry.label}</code>
+          <code className="text-xs">{entry.label}</code>
         </span>
       }
       footer={<CloseDialogButton label={translate('Close')} />}
@@ -115,7 +115,7 @@ export const MergeAffectedRowsDialog: FC<MergeAffectedRowsDialogProps> = ({
           },
           {
             title: (
-              <span className="d-inline-flex align-items-center gap-2">
+              <span className="inline-flex items-center gap-2">
                 {translate('Stays on the source')}
                 <HelpTip label={getStaysHelp()} />
               </span>

@@ -36,7 +36,7 @@ export const FloatingSubmitButton: FC<OwnProps> = ({
           variant={variant}
           disabled={disabled || errorsExist}
           label={label || translate('Submit')}
-          className="w-100 w-100"
+          className="w-full w-full"
         />
       </Tooltip>
     </FloatingButton>

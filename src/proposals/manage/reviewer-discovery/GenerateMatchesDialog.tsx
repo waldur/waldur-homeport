@@ -341,7 +341,7 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
                       step={5}
                       className="form-range"
                     />
-                    <div className="d-flex justify-content-between">
+                    <div className="flex justify-between">
                       <small className="text-quaternary">0%</small>
                       <strong>{values.min_threshold || 0}%</strong>
                       <small className="text-quaternary">100%</small>

@@ -42,7 +42,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
   if (categories.isLoading) {
     return (
       <Card className={cardClassName}>
-        <Card.Body className="d-flex justify-content-center align-items-center py-10">
+        <Card.Body className="flex justify-center items-center py-10">
           <LoadingSpinner />
         </Card.Body>
       </Card>
@@ -69,9 +69,9 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
         action
         active={isActive}
         onClick={() => onCategorySelect(isActive ? null : { uuid, isGroup })}
-        className="d-flex align-items-center gap-3"
+        className="flex items-center gap-3"
       >
-        <div className="category-icon flex-shrink-0">
+        <div className="category-icon shrink-0">
           <CategoryThumbnail
             title={item.title}
             icon={item.icon}
@@ -79,7 +79,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
             size={24}
           />
         </div>
-        <span className={classNames('flex-grow-1', { 'font-medium': isGroup })}>
+        <span className={classNames('grow', { 'font-medium': isGroup })}>
           {item.title}
         </span>
         {'offering_count' in item && item.offering_count !== undefined && (
@@ -103,12 +103,12 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
           action
           active={!selectedCategory}
           onClick={() => onCategorySelect(null)}
-          className="d-flex align-items-center gap-3"
+          className="flex items-center gap-3"
         >
-          <div className="category-icon flex-shrink-0">
+          <div className="category-icon shrink-0">
             <CategoryThumbnail title="" size={24} />
           </div>
-          <span className="flex-grow-1">{translate('All categories')}</span>
+          <span className="grow">{translate('All categories')}</span>
         </ListGroup.Item>
         {categories.data.map((item) => {
           if ('categories' in item && item.categories) {
@@ -127,9 +127,9 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
                           : { uuid: cat.uuid, isGroup: false },
                       )
                     }
-                    className="d-flex align-items-center gap-3 ps-5"
+                    className="flex items-center gap-3 ps-5"
                   >
-                    <div className="category-icon flex-shrink-0">
+                    <div className="category-icon shrink-0">
                       <CategoryThumbnail
                         title={cat.title}
                         icon={cat.icon}
@@ -137,7 +137,7 @@ export const CategorySidebar: FC<CategorySidebarProps> = ({
                         size={24}
                       />
                     </div>
-                    <span className="flex-grow-1">{cat.title}</span>
+                    <span className="grow">{cat.title}</span>
                     {cat.offering_count !== undefined && (
                       <Badge variant="secondary" shape="pill" tone="solid">
                         {cat.offering_count}

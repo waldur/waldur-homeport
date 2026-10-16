@@ -28,7 +28,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
             : 'warning'
         }
         title={
-          <span className="d-flex align-items-center gap-2">
+          <span className="flex items-center gap-2">
             {translate('Security')}
             <StateIndicator
               variant={
@@ -67,7 +67,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                 href={row.security.advisory_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 d-inline-block"
+                className="mt-1 inline-block"
               >
                 {translate('View advisory')}
               </a>
@@ -103,17 +103,17 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
       (row.settings_analysis &&
         Object.keys(row.settings_analysis).length > 0) ||
       (row.plugin_analysis && Object.keys(row.plugin_analysis).length > 0)) && (
-      <div className="d-flex flex-wrap gap-3 mb-3">
+      <div className="flex flex-wrap gap-3 mb-3">
         {/* Affected counts */}
         {(row.affected_resources_count !== undefined ||
           row.affected_users_count !== undefined) && (
-          <Card className="flex-fill">
+          <Card className="flex-1">
             <CardContent className="py-2 px-3">
-              <strong className="small d-block mb-2">
+              <strong className="small block mb-2">
                 {translate('Impact analysis')}
               </strong>
               {row.affected_resources_count !== undefined && (
-                <div className="d-flex justify-content-between small mb-1">
+                <div className="flex justify-between small mb-1">
                   <span className="text-quaternary">
                     {translate('Affected resources')}
                   </span>
@@ -123,7 +123,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
                 </div>
               )}
               {row.affected_users_count !== undefined && (
-                <div className="d-flex justify-content-between small mb-1">
+                <div className="flex justify-between small mb-1">
                   <span className="text-quaternary">
                     {translate('Affected users')}
                   </span>
@@ -137,9 +137,9 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
         {/* Settings diffs */}
         {row.settings_analysis &&
           Object.keys(row.settings_analysis).length > 0 && (
-            <Card className="flex-fill">
+            <Card className="flex-1">
               <CardContent className="py-2 px-3">
-                <strong className="small d-block mb-2">
+                <strong className="small block mb-2">
                   {translate('Settings impact')}
                 </strong>
                 {Object.entries(
@@ -179,18 +179,15 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
 
         {/* Plugin analysis */}
         {row.plugin_analysis && Object.keys(row.plugin_analysis).length > 0 && (
-          <Card className="flex-fill">
+          <Card className="flex-1">
             <CardContent className="py-2 px-3">
-              <strong className="small d-block mb-2">
+              <strong className="small block mb-2">
                 {translate('Plugin status')}
               </strong>
               {Object.entries(
                 row.plugin_analysis as Record<string, { installed?: boolean }>,
               ).map(([plugin, status]) => (
-                <div
-                  key={plugin}
-                  className="d-flex justify-content-between small mb-1"
-                >
+                <div key={plugin} className="flex justify-between small mb-1">
                   <code>{plugin}</code>
                   <StateIndicator
                     variant={status.installed ? 'success' : 'neutral'}
@@ -210,7 +207,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
     )}
 
     {/* Relevance reasons + Components */}
-    <div className="d-flex align-items-center justify-content-between">
+    <div className="flex items-center justify-between">
       {row.relevance_reasons && row.relevance_reasons.length > 0 && (
         <div className="small text-quaternary">
           <strong>{translate('Why relevant')}:</strong>{' '}
@@ -218,7 +215,7 @@ export const ChangelogExpandableRow: FC<ChangelogExpandableRowProps> = ({
         </div>
       )}
       {row.component && row.component.length > 0 && (
-        <div className="d-flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1">
           {row.component.map((c) => (
             <Badge key={c} variant="neutral" shape="pill" tone="outline">
               {c}

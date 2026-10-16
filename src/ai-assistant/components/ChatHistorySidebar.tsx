@@ -84,7 +84,7 @@ export const ChatHistorySidebar: FC = () => {
       <div className="aui-history-button-section">
         <div className="aui-history-header">
           {/* Desktop only: collapse toggle (mobile never minimizes) */}
-          <span className="d-none d-md-inline-flex">
+          <span className="hidden md:inline-flex">
             <BaseButton
               iconNode={
                 <span className={collapsed ? 'aui-icon-rotate-180' : ''}>
@@ -108,7 +108,7 @@ export const ChatHistorySidebar: FC = () => {
           )}
         </div>
         {collapsed ? (
-          <span className="d-none d-md-inline-flex">
+          <span className="hidden md:inline-flex">
             <BaseButton
               iconNode={<PlusIcon weight="bold" />}
               tooltip={translate('New chat')}
@@ -120,7 +120,7 @@ export const ChatHistorySidebar: FC = () => {
         ) : null}
       </div>
       {!collapsed && (
-        <div className="d-flex flex-column gap-2">
+        <div className="flex flex-col gap-2">
           <FilterBox
             type="search"
             placeholder={translate('Search chats...')}
@@ -142,7 +142,7 @@ export const ChatHistorySidebar: FC = () => {
           onValueChange={(value) => setShowArchived(value === 'archived')}
           className="contents"
         >
-          <TabsList className="w-100">
+          <TabsList className="w-full">
             <TabsTrigger value="active" className="flex-1">
               {translate('Active')}
             </TabsTrigger>
@@ -167,7 +167,7 @@ export const ChatHistorySidebar: FC = () => {
             ) : (
               groups.map((group) => (
                 <div key={group.label} className="aui-history-group">
-                  <div className="font-medium fs-7 text-quaternary">
+                  <div className="font-medium text-xs text-quaternary">
                     {group.label}
                   </div>
                   {group.threads.map((thread) => {

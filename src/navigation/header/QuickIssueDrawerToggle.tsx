@@ -27,7 +27,7 @@ export const QuickIssueDrawerToggle: React.FC = () => {
   };
 
   return (
-    <div className="d-flex align-items-center ms-1">
+    <div className="flex items-center ms-1">
       <Tooltip label={translate('Support')} side="bottom">
         <button
           id="quick-issue-toggle"

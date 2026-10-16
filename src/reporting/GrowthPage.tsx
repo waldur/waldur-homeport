@@ -56,7 +56,7 @@ export const GrowthPage: FC = () => {
     // reads as "nothing was added", not as "we could not ask".
     if (addedErred)
       return (
-        <span className="text-quaternary fs-7">
+        <span className="text-quaternary text-xs">
           {translate('Growth data unavailable')}
         </span>
       );
@@ -77,7 +77,7 @@ export const GrowthPage: FC = () => {
         </Badge>
         {/* Captioned with the window the counts came from, not the live
             toggle: the two differ while the next period is still loading. */}
-        <span className="text-quaternary fs-7">
+        <span className="text-quaternary text-xs">
           {translate('in the last {months} months', { months: added.months })}
         </span>
       </>

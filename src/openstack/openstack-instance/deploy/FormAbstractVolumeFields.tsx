@@ -283,7 +283,7 @@ export const FormAbstractVolumeFields = (
                   checked={fieldsEnabled}
                   onCheckedChange={toggleFields}
                   size="sm"
-                  className="align-self-center"
+                  className="self-center"
                 />
               )
             }
@@ -307,7 +307,7 @@ export const FormAbstractVolumeFields = (
                   checked={fieldsEnabled}
                   onCheckedChange={toggleFields}
                   size="sm"
-                  className="align-self-center ms-auto"
+                  className="self-center ms-auto"
                 />
               )}
               {!props.hideQuotas && quota && (

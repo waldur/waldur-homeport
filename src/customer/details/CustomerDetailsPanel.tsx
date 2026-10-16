@@ -98,7 +98,7 @@ const ProjectMetadataSchemaValue: FC<{ customer }> = ({ customer }) => {
   }
   if (error) {
     return (
-      <LoadingErred loadData={refetch} className="d-flex flex-center gap-4" />
+      <LoadingErred loadData={refetch} className="flex flex-center gap-4" />
     );
   }
   if (!data) return <>—</>;

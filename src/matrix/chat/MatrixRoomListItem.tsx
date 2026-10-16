@@ -166,7 +166,7 @@ export const MatrixRoomListItem: FC<MatrixRoomListItemProps> = ({
         <div className="tc-row-bottom">
           <div className="tc-row-preview">
             {activeCall ? (
-              <span className="text-success d-inline-flex align-items-center gap-1">
+              <span className="text-success inline-flex items-center gap-1">
                 <PhoneIcon size={14} weight="fill" />
                 {activeCall.participantCount === 1
                   ? translate('Call in progress · 1 participant')

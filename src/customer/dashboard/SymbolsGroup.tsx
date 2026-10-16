@@ -54,7 +54,7 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
             />
           ) : (
             <div className={`symbol symbol-circle symbol-${size}px`}>
-              <div className="symbol-label fs-4 font-medium bg-tertiary text-quaternary">
+              <div className="symbol-label text-base font-medium bg-tertiary text-quaternary">
                 {item[emailKey] ? item[emailKey][0].toUpperCase() : '?'}
               </div>
             </div>
@@ -64,7 +64,7 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
     ))}
     {(length ?? items.length) > max && (
       <div className={`symbol symbol-circle symbol-${size}px`}>
-        <div className="symbol-label fs-3 font-medium bg-tertiary text-quaternary">
+        <div className="symbol-label text-lg font-medium bg-tertiary text-quaternary">
           +{length ? Math.max(length - max, 0) : items.slice(max).length}
         </div>
       </div>

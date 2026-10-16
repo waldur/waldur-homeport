@@ -51,12 +51,12 @@ export const K8sTotalResourcesCard: React.FC<K8sTotalResourcesCardProps> = ({
   return (
     <Card className="card-bordered card-sm bg-secondary">
       <Card.Header>
-        <Card.Title as="h6" className="fs-6 text-secondary">
+        <Card.Title as="h6" className="text-sm text-secondary">
           {translate('Total cluster resources')}
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="d-flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4">
           <TotalClusterResourceItem
             label={translate('Controllers')}
             value={totalResources.totalControllerNodes}

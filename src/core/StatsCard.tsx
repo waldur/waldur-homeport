@@ -15,19 +15,17 @@ export const StatsCard: FC<StatsCardProps> = ({
   icon,
   footer,
 }) => (
-  <div className="card card-flush card-bordered h-100">
-    <div className="card-body d-flex py-5 flex-column">
-      <div className="d-flex justify-content-between align-items-start gap-2">
-        <div className="fs-6 font-medium text-quaternary">{label}</div>
+  <div className="card card-flush card-bordered h-full">
+    <div className="card-body flex py-5 flex-col">
+      <div className="flex justify-between items-start gap-2">
+        <div className="text-sm font-medium text-quaternary">{label}</div>
         {icon}
       </div>
-      <div className="flex-grow-1 mt-3">
-        <h1 style={{ fontSize: '32px' }}>{value}</h1>
+      <div className="grow mt-3">
+        <h1 className="text-3xl font-bold">{value}</h1>
       </div>
       {footer && (
-        <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
-          {footer}
-        </div>
+        <div className="flex flex-wrap items-center gap-2 mt-2">{footer}</div>
       )}
     </div>
   </div>

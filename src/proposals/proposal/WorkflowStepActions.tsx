@@ -149,7 +149,7 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
               resolve: { proposal, refetch },
             })
           }
-          className="w-100 mt-2"
+          className="w-full mt-2"
           iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
           label={translate('Reopen decision')}
           size="lg"
@@ -160,7 +160,7 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
           variant="primary"
           onClick={() => advanceStep.mutate()}
           pending={advanceStep.isPending}
-          className="w-100 mt-2"
+          className="w-full mt-2"
           iconNode={<ArrowRightIcon weight="bold" />}
           label={translate('Advance workflow')}
           size="lg"
@@ -183,7 +183,7 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
                 resolve: { proposal, step: activeStep, refetch },
               })
             }
-            className="w-100 mt-2"
+            className="w-full mt-2"
             iconNode={<CheckCircleIcon weight="bold" />}
             label={translate('Complete step')}
             size="lg"
@@ -191,7 +191,7 @@ export const WorkflowStepActions: FC<WorkflowStepActionsProps> = ({
           <BaseButton
             variant="danger"
             onClick={() => rejectStep.mutate()}
-            className="w-100 mt-2"
+            className="w-full mt-2"
             iconNode={<XCircleIcon weight="bold" />}
             label={translate('Reject at step')}
             size="lg"

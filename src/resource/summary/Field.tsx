@@ -78,7 +78,7 @@ export const Field: FunctionComponent<FieldProps> = ({
           <CopyToClipboardButton
             value={props.value}
             size={17}
-            className="mx-2 hover:text-brand cursor-pointer d-inline z-index-1"
+            className="mx-2 hover:text-brand cursor-pointer inline z-index-1"
           />
         )}
       </Col>

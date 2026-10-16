@@ -216,7 +216,7 @@ export const UsageReportVis: FC<Props> = ({
   return (
     <div>
       {/* ── Row 1: summary + downloads ───────────────────────────────── */}
-      <div className="d-flex align-items-center gap-3 mb-2 flex-wrap">
+      <div className="flex items-center gap-3 mb-2 flex-wrap">
         <span className="text-quaternary small">
           {translate(
             '{destination} · {hours} h across {numUsers} {user} and {numProjects} {project}',
@@ -239,7 +239,7 @@ export const UsageReportVis: FC<Props> = ({
           )}
         </span>
 
-        <div className="d-flex gap-2 ms-auto">
+        <div className="flex gap-2 ms-auto">
           <Tooltip label={translate('Download Excel')}>
             <button
               type="button"
@@ -284,7 +284,7 @@ export const UsageReportVis: FC<Props> = ({
       </div>
 
       {/* ── Row 2: toggle controls ────────────────────────────────────── */}
-      <div className="d-flex align-items-center gap-2 mb-3 flex-wrap">
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
         {/* Metric selector */}
         <SegmentedControl<UsageMetric>
           aria-label={translate('Metric')}

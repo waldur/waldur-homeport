@@ -92,8 +92,8 @@ export function TableToolbarActions() {
     <>
       {/* Multi-select actions */}
       {selectedRows?.length > 0 && slots.multiSelectActions && (
-        <div className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-4">
-          <div className="d-flex align-items-center font-normal text-primary me-2">
+        <div className="order-1 order-sm-1 flex justify-start flex-wrap text-nowrap gap-4">
+          <div className="flex items-center font-normal text-primary me-2">
             <BaseButton
               iconNode={<XIcon weight="bold" />}
               tooltip={translate('Clear selection')}
@@ -120,19 +120,17 @@ export function TableToolbarActions() {
       {(config.hasQuery || showActionsColumn) && (
         <div
           className={classNames(
-            'flex-grow-1 order-2 order-sm-2 d-flex align-items-center flex-wrap',
+            'grow order-2 order-sm-2 flex items-center flex-wrap',
             // In a tabbed card's header the toolbar shares the width with the
             // card title; let search and buttons wrap instead of overflowing.
             // Kept in place so a standalone table's classes are unchanged.
-            !portal?.toolbar && 'flex-sm-nowrap',
+            !portal?.toolbar && 'sm:flex-nowrap',
             'text-nowrap gap-4',
-            showTitle
-              ? 'ms-auto justify-content-end'
-              : 'justify-content-between',
+            showTitle ? 'ms-auto justify-end' : 'justify-between',
           )}
         >
           {config.hasQuery && (
-            <div className="d-flex align-items-center gap-4">
+            <div className="flex items-center gap-4">
               <div className="table-toolbar-search">
                 <TableQuery
                   query={query}
@@ -155,7 +153,7 @@ export function TableToolbarActions() {
           )}
 
           {showActionsColumn && (
-            <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4">
+            <div className="flex sm:justify-end flex-wrap sm:flex-nowrap text-nowrap gap-4">
               <TableButtons
                 table={config.table}
                 rows={rows}
@@ -214,10 +212,7 @@ export function TableToolbarTitle() {
   }
 
   return (
-    <div
-      className="flex-grow-1 order-0"
-      data-testid="table-toolbar-title-container"
-    >
+    <div className="grow order-0" data-testid="table-toolbar-title-container">
       <Card.Title>
         {!config.hideTitle && (
           <div className="me-2">
@@ -227,7 +222,7 @@ export function TableToolbarTitle() {
                 (display.verboseName && titleCase(display.verboseName))}
             </span>
             {Boolean(display.subtitle) && (
-              <small className="fs-6 font-normal d-block mt-4px">
+              <small className="text-sm font-normal block mt-4px">
                 {display.subtitle}
               </small>
             )}
@@ -262,7 +257,7 @@ export function TableToolbar() {
       )}
       data-testid="table-toolbar"
     >
-      <div className="card-toolbar d-flex flex-wrap align-items-center gap-4 w-100">
+      <div className="card-toolbar flex flex-wrap items-center gap-4 w-full">
         <TableToolbarTitle />
         {!portal?.toolbar && <TableToolbarActions />}
       </div>

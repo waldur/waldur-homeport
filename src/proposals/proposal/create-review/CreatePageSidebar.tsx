@@ -81,14 +81,14 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
             }
             label={translate('Submit review')}
             variant="primary"
-            className="w-100 mt-2"
+            className="w-full mt-2"
             size="lg"
           />
           <BaseButton
             onClick={() => rejectMutation.mutate()}
             label={translate('Send back')}
             variant="danger"
-            className="w-100 mt-2"
+            className="w-full mt-2"
             pending={rejectMutation.isPending}
             size="lg"
           />

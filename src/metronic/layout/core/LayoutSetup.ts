@@ -208,10 +208,10 @@ export class LayoutSetup {
     }
 
     if (config.direction === 'column') {
-      this.classes.pageTitle.push('flex-column');
-      this.classes.pageTitle.push('align-items-start');
+      this.classes.pageTitle.push('flex-col');
+      this.classes.pageTitle.push('items-start');
     } else {
-      this.classes.pageTitle.push('align-items-center');
+      this.classes.pageTitle.push('items-center');
       this.classes.pageTitle.push('flex-wrap');
     }
     this.classes.pageTitle.push('me-3');

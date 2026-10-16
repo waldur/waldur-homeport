@@ -3,11 +3,11 @@
 .dropzone {
   border: 3px dashed var(--border-divider-medium);
   padding: 16px 24px;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
 }
 
 .dropzone-message {
-  font-size: 14px;
+  font-size: var(--text-sm);
   text-align: center;
 
   span {

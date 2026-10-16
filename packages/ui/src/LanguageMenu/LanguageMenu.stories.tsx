@@ -39,7 +39,7 @@ export const Default: Story = {
           <Menu.Trigger asChild>
             <BaseButton variant="secondary" label="Preferences" />
           </Menu.Trigger>
-          <Menu.Content className="py-[12px] text-[14px] font-medium w-56">
+          <Menu.Content className="py-[12px] text-sm font-medium w-56">
             <LanguageMenu
               currentLanguage={current}
               languageChoices={LANGUAGES}

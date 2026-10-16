@@ -60,7 +60,7 @@ export const IdentityBridgeTab: FC = () => {
   if (!stats) return null;
 
   return (
-    <div className="d-flex flex-column gap-6 mt-6">
+    <div className="flex flex-col gap-6 mt-6">
       {/* Per-ISD Health Table */}
       {stats.users_per_isd?.length > 0 && (
         <div>

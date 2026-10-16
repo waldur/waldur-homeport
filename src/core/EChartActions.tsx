@@ -120,7 +120,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
   if (!hasExport) return null;
 
   return (
-    <div className="d-flex justify-content-end w-100 px-1 pt-2">
+    <div className="flex justify-end w-full px-1 pt-2">
       <ChartExportDropdown
         size="sm"
         disabled={!chartInstance}

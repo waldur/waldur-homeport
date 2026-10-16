@@ -46,7 +46,7 @@ export const tabListVariants = ({
 // showed it because the Tailwind base layer zeroes their borders.
 export const tabTriggerVariants = ({ className }: TabStyleProps = {}) =>
   cn(
-    'relative z-[1] -mb-px inline-flex items-center justify-center border-b-2 border-solid border-b-transparent border-t-0 border-x-0 px-[4px] pt-[4px] pb-[10px] text-[1.077rem] leading-5 font-semibold text-[var(--tabs-text)] transition-colors cursor-pointer whitespace-nowrap',
+    'relative z-[1] -mb-px inline-flex items-center justify-center border-b-2 border-solid border-b-transparent border-t-0 border-x-0 px-[4px] pt-[4px] pb-[10px] text-sm leading-5 font-semibold text-[var(--tabs-text)] transition-colors cursor-pointer whitespace-nowrap',
     // Written out in full (no template string) so Tailwind's scanner sees it.
     '[&:not([aria-selected=true]):not([aria-current]):not([aria-disabled=true]):hover]:text-[var(--tabs-text-hover)] [&:not([aria-selected=true]):not([aria-current]):not([aria-disabled=true]):hover]:border-b-[var(--tabs-indicator-hover)]',
     'aria-selected:border-b-[var(--tabs-indicator)] aria-selected:text-[var(--tabs-text-active)] [&[aria-current]]:border-b-[var(--tabs-indicator)] [&[aria-current]]:text-[var(--tabs-text-active)]',

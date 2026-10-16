@@ -55,12 +55,8 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
             <h3>{translate('Access control')}</h3>
           </Card.Title>
         </Card.Header>
-        <Card.Header className="border-b-[1px] border-b-secondary align-items-stretch py-0 min-h-auto">
-          <TabsList
-            scrollable
-            scrollClassName="flex-grow-1 pt-4"
-            bordered={false}
-          >
+        <Card.Header className="border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
+          <TabsList scrollable scrollClassName="grow pt-4" bordered={false}>
             {getSubTabs().map((tab) => (
               <TabsTrigger key={tab.key} value={tab.key} hint={tab.tooltip}>
                 {tab.title}

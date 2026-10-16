@@ -138,7 +138,7 @@ export const MaintenanceWindowPicker: FC<FieldRenderProps<WindowValue>> = (
         meta={props.meta}
         onPartialStartChange={setPartialStart}
       />
-      <div className="d-flex flex-wrap gap-2 mt-2">
+      <div className="flex flex-wrap gap-2 mt-2">
         {chips.map((chip) => {
           const disabled = chip.requiresStart && !start;
           return (

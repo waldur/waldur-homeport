@@ -95,7 +95,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
         {
           title: translate('State'),
           render: ({ row }) => (
-            <div className="d-flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               <StateIndicator
                 label={row.status.label}
                 variant={row.status.color}

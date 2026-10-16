@@ -44,7 +44,7 @@ export const RabbitMQVhostList: FC<RabbitMQVhostListProps> = ({ data }) => {
         title: translate('Vhost'),
         render: ({ row }: { row: RmqVhostStats }) => (
           <Tooltip label={row.name}>
-            <code className="fs-8">
+            <code className="text-xs">
               {row.name.length > 20
                 ? `${row.name.substring(0, 20)}...`
                 : row.name}

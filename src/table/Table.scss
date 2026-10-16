@@ -49,14 +49,16 @@
       box-sizing: border-box;
     }
 
-    > .d-flex {
+    > .d-flex,
+    > .flex {
       width: 100%;
       max-width: 100%;
       min-width: 0;
       flex-shrink: 1;
     }
 
-    > .d-flex > a {
+    > .d-flex > a,
+    > .flex > a {
       width: 100%;
       max-width: 100%;
       min-width: 0;
@@ -85,14 +87,16 @@
       }
     }
 
-    .d-flex {
+    .d-flex,
+    .flex {
       min-width: 0;
       max-width: 100%;
       overflow: hidden;
       overflow-wrap: break-word;
     }
 
-    .card-body .d-flex {
+    .card-body .d-flex,
+    .card-body .flex {
       overflow-wrap: break-word;
     }
 

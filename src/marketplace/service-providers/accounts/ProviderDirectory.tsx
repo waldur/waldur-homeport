@@ -70,7 +70,7 @@ export const ProviderDirectory: FC<ProviderDirectoryProps> = ({ provider }) => {
           <h3>{translate('GLAuth directory')}</h3>
         </Card.Title>
         {view === 'toml' && config && (
-          <div className="card-toolbar flex-grow-1 justify-content-end">
+          <div className="card-toolbar grow justify-end">
             <CopyToClipboard
               value={config}
               label={translate('Copy')}

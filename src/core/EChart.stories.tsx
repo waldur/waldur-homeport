@@ -127,11 +127,11 @@ export const ActionsToolbarStandalone: Story = {
     };
 
     return (
-      <div className="d-flex flex-column gap-4 p-4">
-        <div className="text-quaternary fs-7">
+      <div className="flex flex-col gap-4 p-4">
+        <div className="text-quaternary text-xs">
           Export toolbar actions rendered via <code>EChartActions</code>:
         </div>
-        <div className="d-flex align-items-center justify-content-between p-3 border rounded bg-tertiary dark:bg-quaternary">
+        <div className="flex items-center justify-between p-3 border rounded bg-tertiary dark:bg-quaternary">
           <span>Monthly Cloud Analytics</span>
           <EChartActions
             chartInstance={mockChartInstance}

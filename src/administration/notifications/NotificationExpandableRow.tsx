@@ -24,7 +24,7 @@ export const NotificationExpandableRow: FunctionComponent<{
           tabs={row.templates.map((template) => ({
             key: template.path,
             title: template.is_content_overridden ? (
-              <span className="d-inline-flex align-items-center">
+              <span className="inline-flex items-center">
                 {formatHeader(template.path)}
                 <Tooltip label={translate('Content is overridden')}>
                   <PencilSimpleIcon
@@ -51,7 +51,7 @@ export const NotificationExpandableRow: FunctionComponent<{
                   />
                 </Card.Header>
                 <Card.Body className="p-8">
-                  <pre className="text-secondary fs-6 mb-0">
+                  <pre className="text-secondary text-sm mb-0">
                     {template.content}
                   </pre>
                 </Card.Body>

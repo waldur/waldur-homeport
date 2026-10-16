@@ -84,10 +84,10 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
             </>
           ),
           render: ({ row }) => (
-            <div className="d-flex align-items-center gap-2">
+            <div className="flex items-center gap-2">
               <BooleanBadge value={row.has_fired} />
               {row.has_fired && row.affected_resources_count > 0 && (
-                <span className="text-quaternary fs-7">
+                <span className="text-quaternary text-xs">
                   {translate('{count} resources', {
                     count: row.affected_resources_count,
                   })}

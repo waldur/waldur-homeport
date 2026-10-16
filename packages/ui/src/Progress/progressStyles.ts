@@ -27,7 +27,7 @@ export const PROGRESS_SIZE: Record<ProgressSize, string> = {
   xs: 'h-[var(--progress-height-xs)] rounded-[var(--progress-radius)]',
   sm: 'h-[var(--progress-height-sm)] rounded-[var(--progress-radius)]',
   md: 'h-[var(--progress-height-md)] rounded-[var(--progress-radius)]',
-  lg: 'h-[var(--progress-height-lg)] rounded-[var(--progress-radius-lg)] text-[0.85rem] font-medium',
+  lg: 'h-[var(--progress-height-lg)] rounded-[var(--progress-radius-lg)] text-xs font-medium',
 };
 
 // Text colour for a label drawn inside a segment (see progress.css).

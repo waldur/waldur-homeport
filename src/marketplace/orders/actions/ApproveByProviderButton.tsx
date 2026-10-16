@@ -40,7 +40,7 @@ export const ApproveByProviderButton: FunctionComponent<
   return (
     <ActionItem
       as={props.as}
-      className={props.as === BaseButton ? 'w-100' : undefined}
+      className={props.as === BaseButton ? 'w-full' : undefined}
       title={translate('Approve')}
       action={openApprovalDialog}
       variant="primary"

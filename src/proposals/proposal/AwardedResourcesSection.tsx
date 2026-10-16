@@ -255,7 +255,7 @@ export const AwardedResourcesSection: FC<AwardedResourcesSectionProps> = ({
             variant="tertiary"
           />
         ) : differs ? (
-          <span className="text-warning fs-7">
+          <span className="text-warning text-xs">
             {translate('Differs from the request')}
           </span>
         ) : undefined

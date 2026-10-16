@@ -74,7 +74,7 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
       id={props.id}
       title={translate('Details overview')}
       actions={
-        <div className="d-flex gap-2">
+        <div className="flex gap-2">
           {canViewReviews && <ReviewsButton proposal={proposal} />}
           {/* Without call context the dialog holds only review tabs; with no
               reviews either it opens empty, so don't offer it. */}
@@ -87,7 +87,7 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
         </div>
       }
     >
-      <Row className="fs-6">
+      <Row className="text-sm">
         {showsCallContext() && (
           <Col sm={6}>
             <Field

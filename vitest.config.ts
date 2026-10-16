@@ -45,6 +45,7 @@ export default mergeConfig(
           test: {
             name: 'unit',
             include: ['**/*.test.ts', '**/*.test.tsx', 'test/**/*.test.ts'],
+            exclude: ['**/node_modules/**', '**/.claude/**', 'dist/**'],
             globals: true,
             environment: 'jsdom',
             setupFiles: ['./test/setupTests.js'],

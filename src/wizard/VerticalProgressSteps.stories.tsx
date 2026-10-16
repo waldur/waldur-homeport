@@ -176,7 +176,7 @@ export const Interactive: Story = {
     }));
 
     return (
-      <div className="d-flex flex-column gap-4">
+      <div className="flex flex-col gap-4">
         <VerticalProgressSteps
           steps={steps}
           onClick={(_, idx) => setActiveIdx(idx)}

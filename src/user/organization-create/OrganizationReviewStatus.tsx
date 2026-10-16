@@ -46,7 +46,7 @@ export const OrganizationReviewStatus: FunctionComponent<
         <h3 className="mb-3 font-medium">{translate('Review in progress')}</h3>
 
         <p
-          className="text-quaternary mb-6 fs-5"
+          className="text-quaternary mb-6 text-base"
           style={{ maxWidth: '600px', margin: '0 auto' }}
         >
           {translate(
@@ -77,7 +77,7 @@ export const OrganizationReviewStatus: FunctionComponent<
           {translate('Data storage information')}
         </h4>
         <p
-          className="text-quaternary mb-6 fs-5"
+          className="text-quaternary mb-6 text-base"
           style={{ maxWidth: '600px', margin: '0 auto' }}
         >
           {translate(

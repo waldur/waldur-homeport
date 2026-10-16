@@ -40,7 +40,7 @@ const UserInfoCard: FunctionComponent<UserInfoCardProps> = ({
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="fs-6">
+        <div className="text-sm">
           <Field
             label={translate('Email')}
             value={userData.email}
@@ -130,7 +130,7 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="d-flex flex-column gap-4">
+        <div className="flex flex-col gap-4">
           {Object.entries(projects).map(([projectId, project]) => (
             <div key={projectId} className="border rounded p-3">
               <div className="mb-3">
@@ -151,20 +151,20 @@ const ProjectsCard: FunctionComponent<ProjectsCardProps> = ({ projects }) => {
                         count: project.resources.length,
                       })}
                     </h6>
-                    <div className="d-flex flex-column gap-2">
+                    <div className="flex flex-col gap-2">
                       {project.resources.map((resource, index) => (
                         <div
                           key={index}
                           className="bg-tertiary dark:bg-quaternary rounded p-3"
                         >
-                          <div className="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                            <div className="flex-grow-1">
+                          <div className="flex justify-between items-start flex-wrap gap-2">
+                            <div className="grow">
                               <div className="text-primary">
                                 {resource.name}
                               </div>
                             </div>
                             <div className="text-end">
-                              <small className="text-quaternary d-block">
+                              <small className="text-quaternary block">
                                 {translate('Username')}
                               </small>
                               <code className="bg-tertiary dark:bg-gray-800 px-2 py-1 rounded">
@@ -230,7 +230,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
         </div>
 
         <div className="mb-3">
-          <div className="d-flex gap-2">
+          <div className="flex gap-2">
             <FilterBox
               type="search"
               placeholder={translate(
@@ -287,7 +287,7 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
               </div>
             )}
 
-            <div className="d-flex flex-column gap-3">
+            <div className="flex flex-col gap-3">
               {data.map((userData, index) => (
                 <div key={index}>
                   <UserInfoCard

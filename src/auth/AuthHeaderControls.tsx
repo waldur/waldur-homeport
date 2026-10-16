@@ -12,7 +12,7 @@ import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
  * app header (see drawer/_shell.scss).
  */
 export const AuthHeaderControls: FC = () => (
-  <div className="auth-header-controls d-flex align-items-center gap-2">
+  <div className="auth-header-controls flex items-center gap-2">
     <LLMChatDrawerToggle />
     <ThemeSwitcherButton />
   </div>

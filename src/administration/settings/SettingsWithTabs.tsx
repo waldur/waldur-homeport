@@ -107,7 +107,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
     <Card className={classNames('card-bordered', className)}>
       {title && (
         <Card.Header>
-          <div className="d-flex flex-column">
+          <div className="flex flex-col">
             <Card.Title className="mb-0">
               <h3>{title}</h3>
             </Card.Title>

@@ -38,10 +38,10 @@ const ReportDropdownItem: FC<{
   <div className={classNames(isCurrent && 'bg-brand-subtle')}>
     <Link
       state={report.state}
-      className="d-flex text-brand align-items-center py-2 px-5 hover:bg-primary-hover"
+      className="flex text-brand items-center py-2 px-5 hover:bg-primary-hover"
       onClick={close}
     >
-      <span className="fs-6">{report.title}</span>
+      <span className="text-sm">{report.title}</span>
     </Link>
   </div>
 );

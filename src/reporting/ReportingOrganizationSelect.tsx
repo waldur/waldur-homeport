@@ -95,7 +95,7 @@ export const ReportingOrganizationSelect: FC<
   }, [canSelectAny, organizations]);
 
   return (
-    <div className="w-100 mw-300px min-w-200px">
+    <div className="w-full mw-300px min-w-200px">
       <AsyncSelect
         placeholder={translate('Select organization...')}
         loadOptions={loadOptions}

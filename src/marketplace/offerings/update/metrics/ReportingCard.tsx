@@ -58,7 +58,7 @@ const Item: FC<{ label: string; description: string; value: string }> = ({
     label={label}
     description={description}
     value={
-      <pre className="fs-7 mb-0" style={{ whiteSpace: 'pre-wrap' }}>
+      <pre className="text-xs mb-0" style={{ whiteSpace: 'pre-wrap' }}>
         {value}
       </pre>
     }

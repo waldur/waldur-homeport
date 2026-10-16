@@ -60,7 +60,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
           'If enabled, the customer name will be taken from the user’s organization provided by IdP.',
         )}
         align="center"
-        className="w-100"
+        className="w-full"
         onChange={() => change('customer', null)}
       />
       {values.use_user_organization_as_customer_name && (
@@ -129,7 +129,7 @@ export const RuleStepGrants: FC<WizardFormStepProps> = (props) => {
           'Create (or join) a project for each matched user. Disable for a rule that only grants an organization role.',
         )}
         align="center"
-        className="w-100"
+        className="w-full"
       />
       {values.create_project !== false && (
         <>

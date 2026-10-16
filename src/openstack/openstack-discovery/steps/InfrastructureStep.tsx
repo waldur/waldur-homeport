@@ -174,7 +174,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
             {values.externalNetworks.map((network) => (
               <div key={network.id} className="col-md-6">
                 <Card
-                  className={`cursor-pointer h-100 ${
+                  className={`cursor-pointer h-full ${
                     values.selectedExternalNetworkId === network.id
                       ? 'border-brand border-2'
                       : 'border-secondary'
@@ -184,7 +184,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                   }
                 >
                   <Card.Body>
-                    <div className="d-flex align-items-start">
+                    <div className="flex items-start">
                       <Radio
                         className="me-3"
                         aria-label={network.name}
@@ -204,7 +204,7 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
                             </Badge>
                           )}
                         </h5>
-                        <div className="d-flex align-items-center text-quaternary small mb-1">
+                        <div className="flex items-center text-quaternary small mb-1">
                           <code>{network.id}</code>
                           <CopyToClipboardButton
                             value={network.id}

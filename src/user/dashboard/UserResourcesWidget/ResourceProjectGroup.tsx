@@ -82,7 +82,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
   const title = (
     <span>
       {translate('Project')}: {project.name}
-      <span className="text-quaternary ms-2 font-normal fs-7">
+      <span className="text-quaternary ms-2 font-normal text-xs">
         ({translate('Organization')}: {project.customerName})
       </span>
     </span>
@@ -102,7 +102,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
       className="mb-4"
     >
       {isLoading ? (
-        <div className="d-flex align-items-center justify-content-center py-4">
+        <div className="flex items-center justify-center py-4">
           {}
           <LoadingSpinnerSimple />
           <span className="ms-2 text-quaternary">
@@ -120,8 +120,8 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
                 </p>
               )}
               {hasTeamMembers && (
-                <div className="d-flex align-items-center justify-content-between">
-                  <div className="d-flex align-items-center gap-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
                     <SymbolsGroup
                       items={teamData.members}
                       max={MAX_TEAM_MEMBERS_DISPLAY}
@@ -131,7 +131,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
                       emailKey="user_email"
                       imageKey="user_image"
                     />
-                    <span className="text-quaternary fs-7">
+                    <span className="text-quaternary text-xs">
                       {translate('{count} team members', {
                         count: teamData.totalCount,
                       })}

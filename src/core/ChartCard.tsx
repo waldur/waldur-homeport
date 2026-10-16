@@ -57,15 +57,17 @@ export const ChartCard: React.FC<ChartCardProps> = ({
   );
 
   return (
-    <Card className="h-100 card-bordered">
-      <Card.Header className="align-items-center border-0 pt-5 pb-2 min-h-60px">
-        <Card.Title className="align-items-start flex-column m-0">
+    <Card className="h-full card-bordered">
+      <Card.Header className="items-center border-0 pt-5 pb-2 min-h-60px">
+        <Card.Title className="items-start flex-col m-0">
           <span className="card-label font-medium text-primary">{title}</span>
           {summary && (
-            <span className="text-quaternary fs-7 font-normal">{summary}</span>
+            <span className="text-quaternary text-xs font-normal">
+              {summary}
+            </span>
           )}
         </Card.Title>
-        <div className="card-toolbar d-flex gap-4 m-0">
+        <div className="card-toolbar flex gap-4 m-0">
           {actions}
           <ChartExportDropdown
             disabled={isEmpty}
@@ -89,7 +91,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
             message={translate(
               'This chart will populate once data is available.',
             )}
-            className="d-flex flex-column justify-content-center"
+            className="flex flex-col justify-center"
             style={chartHeight ? { minHeight: chartHeight } : undefined}
             noAction
           />

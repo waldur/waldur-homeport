@@ -254,7 +254,7 @@ export const WorkflowTimeline: FC<WorkflowTimelineProps> = ({
         );
       } else if (isFailure && hasReason) {
         label = (
-          <span className="d-inline-flex align-items-center gap-1">
+          <span className="inline-flex items-center gap-1">
             {s.step_name}
             <Tooltip
               label={translate('Proposal was rejected')}

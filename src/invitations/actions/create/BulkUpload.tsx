@@ -92,7 +92,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
 
   return file ? (
     <div className="border rounded px-2 mb-7">
-      <Row className="h-60px align-items-center gx-5 fs-6">
+      <Row className="h-60px items-center gx-5 text-sm">
         <Col xs="auto" className="ps-6">
           <FileIcon weight="bold" size={22} className="text-quaternary" />
         </Col>
@@ -100,7 +100,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
           <Stack
             direction="horizontal"
             gap={2}
-            className="align-items-center font-medium"
+            className="items-center font-medium"
           >
             <span className="font-medium">{file.name}</span>
             <CheckCircleIcon size={16} weight="fill" className="text-success" />
@@ -122,9 +122,9 @@ export const BulkUpload: FC<OwnProps> = (props) => {
       </Row>
     </div>
   ) : (
-    <Row className="border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary h-60px align-items-center mb-7 fs-6">
+    <Row className="border-t-[1px] border-t-secondary border-b-[1px] border-b-secondary h-60px items-center mb-7 text-sm">
       <Col>
-        <p className="fs-6 font-medium text-secondary mb-0">
+        <p className="text-sm font-medium text-secondary mb-0">
           {translate('Bulk import contacts')}
         </p>
         <p className="text-quaternary mb-0">

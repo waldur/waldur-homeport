@@ -69,7 +69,7 @@ const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
           props.order.type === 'Update' &&
           (props.order.attributes as any)?.action === 'renew';
         return isRenewal ? (
-          <div className="d-flex flex-column gap-3">
+          <div className="flex flex-col gap-3">
             <ResourceRenewal order={props.order} offering={props.offering} />
           </div>
         ) : (

@@ -43,7 +43,7 @@ export const LoadingScreen: FunctionComponent<{
                     <ErrorTraceDialog error={error} />
                   </Modal>
                 )}
-                <div className="d-flex gap-4 mt-2">
+                <div className="flex gap-4 mt-2">
                   {/* Not gated on error.stack: the actionable detail lives on
                       error.cause, which is often not an Error and so has no
                       stack of its own. Gating on it hid the trace in exactly

@@ -10,7 +10,7 @@ exports[`menu looks > keeps the action menu panel and rows 1`] = `
   "py-[6.5px]",
   "rounded-lg",
   "shadow-[var(--dropdown-shadow)]",
-  "text-[13px]",
+  "text-sm",
   "text-start",
   "z-dropdown-menu",
 ]
@@ -41,8 +41,8 @@ exports[`menu looks > keeps the action menu panel and rows 2`] = `
   "no-underline",
   "px-[16px]",
   "py-[10px]",
-  "text-[14px]",
   "text-[var(--menu-item-strong-text)]",
+  "text-sm",
   "text-start",
   "w-full",
   "whitespace-nowrap",
@@ -55,8 +55,8 @@ exports[`menu looks > keeps the action menu panel and rows 3`] = `
   "m-0",
   "px-[16px]",
   "py-[6.5px]",
-  "text-[12.025px]",
   "text-[var(--menu-item-text)]",
+  "text-xs",
   "whitespace-nowrap",
 ]
 `;

@@ -71,14 +71,14 @@ export const OrderReviewDialog = ({ order, loadData }) => {
           <BaseButton
             size="sm"
             variant="danger"
-            className="w-100"
+            className="w-full"
             onClick={() => rejectOrder()}
             label={translate('Reject')}
           />
           <BaseButton
             size="sm"
             variant="success"
-            className="w-100"
+            className="w-full"
             onClick={() => approveOrder()}
             label={translate('Approve')}
           />

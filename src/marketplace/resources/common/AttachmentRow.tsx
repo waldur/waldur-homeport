@@ -22,7 +22,7 @@ export const AttachmentRow: FC<AttachmentRowProps> = ({
   buttonLabel,
   emptyLabel,
 }) => (
-  <div className="d-flex justify-content-between">
+  <div className="flex justify-between">
     <FileUploadField
       iconNode={<PaperclipIcon weight="bold" />}
       input={{ value, onChange } as any}
@@ -31,8 +31,8 @@ export const AttachmentRow: FC<AttachmentRowProps> = ({
       variant="tertiary"
       size="md"
     />
-    <div className="flex-grow-1 ms-3 align-items-center d-flex">
-      <span className="text-quaternary fs-5">
+    <div className="grow ms-3 items-center flex">
+      <span className="text-quaternary text-base">
         {value ? (
           <>
             {value.name} ({formatFilesize(value.size, 'B')})

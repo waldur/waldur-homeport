@@ -24,7 +24,7 @@ export const PubSubIssuesCard: FC<PubSubIssuesCardProps> = ({ issues }) => {
       className="mb-6"
     >
       {hasIssues ? (
-        <div className="d-flex flex-column gap-2">
+        <div className="flex flex-col gap-2">
           {issues.map((issue, index) => (
             <AlertItem
               key={index}

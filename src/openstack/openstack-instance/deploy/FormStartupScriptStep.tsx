@@ -20,7 +20,7 @@ export const FormStartupScriptStep = (props: FormStepProps) => {
       checked={scriptEnabled}
       size="sm"
       onCheckedChange={setScriptEnabled}
-      className="align-self-center"
+      className="self-center"
     />
   );
 

@@ -17,16 +17,16 @@ export const HiddenItemsPopover: FC<HiddenItemsPopoverProps> = ({ items }) => {
               <Link
                 state={item.to}
                 params={item.params}
-                className="d-block text-brand hover:bg-[var(--bg-brand-primary-alt)] py-2 px-5"
+                className="block text-brand hover:bg-[var(--bg-brand-primary-alt)] py-2 px-5"
                 onClick={item.onClick}
               >
-                <span className="fs-6">{item.text}</span>
+                <span className="text-sm">{item.text}</span>
               </Link>
             ) : (
               // Non-navigable crumb (e.g. an organization the user can't open):
               // render as plain text instead of a link to nowhere (which would
               // otherwise fall back to the 404 route on click).
-              <span className="d-block text-quaternary py-2 px-5 fs-6">
+              <span className="block text-quaternary py-2 px-5 text-sm">
                 {item.text}
               </span>
             )}

@@ -15,7 +15,7 @@ const FieldWithCopy = ({ value }) => {
   return (
     <>
       {value}
-      <CopyToClipboardButton value={value} className="ms-2 d-inline-block" />
+      <CopyToClipboardButton value={value} className="ms-2 inline-block" />
     </>
   );
 };

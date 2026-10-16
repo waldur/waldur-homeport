@@ -516,7 +516,7 @@ export const MatrixMessageInput: FC<MatrixMessageInputProps> = ({
           ref={fileInputRef}
           type="file"
           multiple
-          className="d-none"
+          className="hidden"
           accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.zip,.tar.gz"
           onChange={handleFileSelect}
         />

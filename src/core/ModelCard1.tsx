@@ -27,13 +27,13 @@ export const ModelCard1: FC<ModelCard1Props> = ({
 }) => (
   <Card
     className={classNames(
-      'model-card-1 card-bordered h-100 overflow-hidden',
+      'model-card-1 card-bordered h-full overflow-hidden',
       props.clickable && 'cursor-pointer border-hover-brand',
     )}
     onClick={props.onClick}
   >
     {(props.image || props.placeholder) && (
-      <div className="h-85px d-flex flex-center border-b-[1px] border-b-secondary">
+      <div className="h-85px flex flex-center border-b-[1px] border-b-secondary">
         {props.image ? (
           <img
             alt="model-card"
@@ -42,19 +42,16 @@ export const ModelCard1: FC<ModelCard1Props> = ({
             style={
               props.imageCover ? { objectFit: 'cover' } : { padding: '10px' }
             }
-            className={props.imageCover ? 'w-100 h-100' : 'm-auto'}
+            className={props.imageCover ? 'w-full h-full' : 'm-auto'}
           />
         ) : (
           props.placeholder
         )}
       </div>
     )}
-    <Card.Body className="p-5 d-flex flex-column">
+    <Card.Body className="p-5 flex flex-col">
       <div
-        className={classNames(
-          'd-flex align-items-center gap-4',
-          props.body && 'mb-6',
-        )}
+        className={classNames('flex items-center gap-4', props.body && 'mb-6')}
       >
         {props.logo ? (
           <Image src={props.logo} size={48} isContain circle />
@@ -66,13 +63,13 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         <div
           className={classNames(
             'ellipsis-lines-' + ellipsisLines,
-            'flex-grow-1',
+            'grow',
             'model-card-title-container',
           )}
         >
           <Card.Title
             className={classNames(
-              'fs-4 font-medium',
+              'text-base font-medium',
               'ellipsis-lines-' + ellipsisLines,
               'model-card-title',
               !props.subtitle && 'mb-0',
@@ -91,7 +88,7 @@ export const ModelCard1: FC<ModelCard1Props> = ({
         (typeof props.body === 'object' ? (
           props.body
         ) : (
-          <Card.Text className="text-quaternary fs-6 flex-grow-1 flex-shrink-0 ellipsis-lines-3">
+          <Card.Text className="text-quaternary text-sm grow shrink-0 ellipsis-lines-3">
             {props.body}
           </Card.Text>
         ))}

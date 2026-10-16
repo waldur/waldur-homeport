@@ -162,7 +162,7 @@ export const UsageExpandableRow = ({
         <Col sm={6} className="border-sm-start ps-md-9">
           <Card className="card-bordered">
             <Card.Body className="p-4">
-              <div className="d-flex align-items-center justify-content-between gap-2 text-nowrap flex-wrap">
+              <div className="flex items-center justify-between gap-2 text-nowrap flex-wrap">
                 <div>
                   {periodOptions.length > 1 && (
                     <SegmentedControl<number>
@@ -183,17 +183,17 @@ export const UsageExpandableRow = ({
                   </span>
                 )}
               </div>
-              <div className="d-flex min-h-70px">
+              <div className="flex min-h-70px">
                 {isLoading || isLoadingResource ? (
-                  <LoadingSpinner className="flex-grow-1" />
+                  <LoadingSpinner className="grow" />
                 ) : error || errorResource ? (
                   <LoadingErred
                     loadData={() => (error ? refetch() : refetchResource())}
-                    className="flex-grow-1"
+                    className="grow"
                   />
                 ) : chartData.length ? (
                   <>
-                    <div className="d-flex flex-column justify-content-between fs-7 text-nowrap pt-2">
+                    <div className="flex flex-col justify-between text-xs text-nowrap pt-2">
                       <span>
                         {translate('Max')}
                         {': '}
@@ -208,7 +208,7 @@ export const UsageExpandableRow = ({
                     <EChart options={chartOptions} height="70px" />
                   </>
                 ) : (
-                  <p className="align-self-center text-center mb-0 w-100">
+                  <p className="self-center text-center mb-0 w-full">
                     {translate('There are no statistics.')}
                   </p>
                 )}

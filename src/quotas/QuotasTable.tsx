@@ -66,7 +66,7 @@ const ResourceQuotaChart = ({ value, max }) => {
         height="65px"
         backgroundColor="transparent"
       >
-        <div className="symbol-label fs-1 font-semibold text-quaternary w-100 h-100">
+        <div className="symbol-label text-2xl font-semibold text-quaternary w-full h-full">
           {value}
         </div>
       </ImagePlaceholder>
@@ -80,14 +80,14 @@ const ResourceQuotaItem = ({ quota }: { quota: Quota }) => {
   const data = useMemo(() => formatQuota(quota), [quota]);
 
   return (
-    <div className="resource-quota-item font-medium d-flex mb-6">
+    <div className="resource-quota-item font-medium flex mb-6">
       <ResourceQuotaChart value={data.usageValue} max={data.limitValue} />
       <div className="ms-3">
-        <span className="d-block">
-          <span className="fs-4">{data.usage}</span>
-          <span className="fs-7">/{data.limit}</span>
+        <span className="block">
+          <span className="text-base">{data.usage}</span>
+          <span className="text-xs">/{data.limit}</span>
         </span>
-        <span className="d-block fs-7">{formatQuotaName(quota.name)}</span>
+        <span className="block text-xs">{formatQuotaName(quota.name)}</span>
       </div>
     </div>
   );

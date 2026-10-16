@@ -67,8 +67,8 @@ export const CHECKBOX_VISUAL =
   'peer-indeterminate:border-[var(--check-checked-bg)] peer-indeterminate:bg-[var(--check-checked-bg)]';
 
 export const BOX_RADIUS: Record<CheckSize, string> = {
-  sm: 'rounded-[4px]',
-  md: 'rounded-[6px]',
+  sm: 'rounded-sm',
+  md: 'rounded-md',
 };
 
 /**

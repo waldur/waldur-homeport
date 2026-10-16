@@ -13,7 +13,7 @@ const Line: FC<{ label: string; value?: string | null }> = ({
   value,
 }) =>
   value ? (
-    <div className="d-flex gap-2">
+    <div className="flex gap-2">
       <span className="text-quaternary" style={{ minWidth: 160 }}>
         {label}
       </span>
@@ -44,7 +44,7 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
       : undefined;
 
   return (
-    <div className="d-flex flex-column gap-2 p-4 fs-7">
+    <div className="flex flex-col gap-2 p-4 text-xs">
       {/* Who is behind the deadline. The row itself only names the call when
           several are in play, so without this the organisation awarding the
           access is nowhere on screen. */}
@@ -78,7 +78,7 @@ export const RoundExpandableRow: FC<{ row: SubmittableRound }> = ({ row }) => {
       {/* Worth surfacing before the applicant writes anything: it is the one
           field that can mean "do not bother". */}
       {call.has_eligibility_restrictions ? (
-        <div className="d-flex align-items-center gap-2 text-warning">
+        <div className="flex items-center gap-2 text-warning">
           <WarningCircleIcon weight="bold" />
           {usesCallVocabulary()
             ? translate(

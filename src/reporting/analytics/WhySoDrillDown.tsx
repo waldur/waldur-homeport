@@ -60,7 +60,7 @@ const DrillDownChange: FC<{ change?: DrillDownDataItem['change'] }> = ({
       shape="pill"
       tone="outline"
       className={classNames(
-        'd-inline-flex align-items-center gap-1',
+        'inline-flex items-center gap-1',
         changeDirection === 'stable' && 'text-quaternary',
       )}
     >
@@ -118,11 +118,8 @@ const DrillDownRow: FC<{
         )}
         onClick={toggleExpand}
       >
-        <td className={classNames('d-flex align-items-center gap-2')}>
-          <div
-            style={{ width: '20px' }}
-            className="d-flex justify-content-center"
-          >
+        <td className={classNames('flex items-center gap-2')}>
+          <div style={{ width: '20px' }} className="flex justify-center">
             {item.canDrillDown && (
               <CaretDownIcon
                 weight="bold"
@@ -277,11 +274,11 @@ const WhySoDrillDownTable: FC<{
         responsive={isRoot}
         className={classNames(
           'table-row-bordered table-rounded border mb-0',
-          !isRoot && 'fs-7',
+          !isRoot && 'text-xs',
         )}
       >
         <thead>
-          <tr className="text-quaternary fs-8 text-uppercase font-medium border-b-[1px] border-b-secondary">
+          <tr className="text-quaternary text-xs text-uppercase font-medium border-b-[1px] border-b-secondary">
             <th
               className={classNames(
                 'border-0 cursor-pointer user-select-none hover:text-brand text-nowrap',
@@ -346,7 +343,7 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
   return (
     <div className="why-so-drill-down">
       {/* Header with data source */}
-      <div className="d-flex justify-content-between align-items-center mb-4" />
+      <div className="flex justify-between items-center mb-4" />
 
       <div className="mb-4">
         <Card className="card-bordered overflow-hidden">

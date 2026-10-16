@@ -20,8 +20,8 @@ export const PageBarFilters = () => {
 
   return (
     <div className="container-fluid bg-primary">
-      <div className="d-flex overflow-auto py-2">
-        <div className="d-flex align-items-center gap-4 text-nowrap w-100">
+      <div className="flex overflow-auto py-2">
+        <div className="flex items-center gap-4 text-nowrap w-full">
           <span className="font-medium">{translate('Filtered by')}:</span>
           {filters.map((item) => (
             <Stack

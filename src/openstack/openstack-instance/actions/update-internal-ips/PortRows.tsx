@@ -61,7 +61,7 @@ export const PortRows = ({ fields, subnets, hasCustomIp }: any) => {
                   }}
                 />
               </Col>
-              <Col xs="auto" className="align-self-end">
+              <Col xs="auto" className="self-end">
                 <BaseButton
                   onClick={() => fields.remove(index)}
                   iconNode={<TrashIcon weight="bold" />}

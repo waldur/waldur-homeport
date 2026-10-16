@@ -90,7 +90,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
               {Object.entries(currentMappings).map(([key, value]) => (
                 <li
                   key={key}
-                  className="list-group-item d-flex justify-content-between align-items-center"
+                  className="list-group-item flex justify-between items-center"
                 >
                   <span>
                     <strong>{key}</strong> →{' '}
@@ -119,7 +119,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
           {translate('Add a new mapping:')}
         </div>
 
-        <div className="row mb-3 align-items-end">
+        <div className="row mb-3 items-end">
           <div className="col-md-5">
             <Form.Label className="sr-only">
               {translate('Remote Role Name')}
@@ -176,9 +176,7 @@ export const RoleMappingField: FunctionComponent<RoleMappingFieldProps> = ({
         </div>
 
         {/* Display validation errors */}
-        {hasError && (
-          <div className="invalid-feedback d-block">{meta.error}</div>
-        )}
+        {hasError && <div className="invalid-feedback block">{meta.error}</div>}
       </div>
     </div>
   );

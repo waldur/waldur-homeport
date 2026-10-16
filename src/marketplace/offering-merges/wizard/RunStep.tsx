@@ -39,7 +39,7 @@ export const RunStep: FC<RunStepProps> = ({
   const previewKey = JSON.stringify(merge.preview ?? null);
   useEffect(() => setRefusal(null), [merge.state, previewKey]);
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <FormTable.Card>
         <FormTable>
           <FormTable.Item
@@ -75,7 +75,7 @@ export const RunStep: FC<RunStepProps> = ({
       </FormTable.Card>
 
       {!settled && (
-        <div className="d-flex flex-column gap-3 align-items-start">
+        <div className="flex flex-col gap-3 items-start">
           <p className="text-quaternary mb-0">
             {translate(
               'The merge runs in the background. This page follows its progress and can be reloaded or left at any time.',

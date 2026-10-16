@@ -39,7 +39,7 @@ export const TableNav = ({ tabs }: { tabs: TableTab[] }) => {
   return (
     <TabNav
       activeKey={activeKey}
-      className="min-w-0 flex-grow-1 pt-4"
+      className="min-w-0 grow pt-4"
       scrollable
       bordered={false}
       items={tabs.map((tab) =>

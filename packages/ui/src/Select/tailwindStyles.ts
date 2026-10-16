@@ -51,7 +51,7 @@ export const getSelectTailwindClassNames = <
     // the E2E test helpers (waldur-integration-testing's
     // tests/components/select.py) all still hook into these names
     // directly, the same way `classNamePrefix` used to let them.
-    container: () => 'metronic-select-container w-full text-[13px] relative',
+    container: () => 'metronic-select-container w-full text-sm relative',
 
     control: ({ isFocused, isDisabled }) => {
       const stateClasses = cn(
@@ -68,17 +68,17 @@ export const getSelectTailwindClassNames = <
         // Gotcha #2: bare `border`/`rounded-md` would collide with
         // Bootstrap. 8px radius matches the old control's $border-radius
         // (Tailwind's `rounded-md` step is 6px).
-        'rounded-[8px] border-[1px] border-solid bg-primary',
+        'rounded-lg border-[1px] border-solid bg-primary',
         // Gotcha #1: `min-h-*!` overrides react-select's forced 38px.
         // Heights below match the old control's measured height per
         // variant; `px-[11px]` doubles as the search-icon-to-border gap
         // for `isTableFilter` (FilterSelectControl's icon only supplies
         // the icon-to-text gap, not icon-to-border — see components.tsx).
         isTableCell
-          ? 'min-h-[35px]! m-[1px] px-[11px] py-[6px] text-[14.3px]'
+          ? 'min-h-[35px]! m-[1px] px-[11px] py-[6px] text-sm'
           : isSm
-            ? 'min-h-[28px]! px-[8px] py-[4.5px] text-[14px]'
-            : 'min-h-[40px]! px-[11px] py-[6px] text-[14.3px]',
+            ? 'min-h-[28px]! px-[8px] py-[4.5px] text-sm'
+            : 'min-h-[40px]! px-[11px] py-[6px] text-sm',
         hasError
           ? 'border-danger-subtle ring-1 ring-[var(--status-danger-border)]'
           : isFocused
@@ -114,7 +114,7 @@ export const getSelectTailwindClassNames = <
 
     multiValueRemove: () =>
       // eslint-disable-next-line waldur-custom/no-raw-status-ramp -- a hover tint one step stronger than -bg (error-100), so it reads on the chip
-      'hover:bg-error-100 dark:hover:bg-error-900 hover:text-danger rounded-[4px] px-[2px] cursor-pointer transition-colors',
+      'hover:bg-error-100 dark:hover:bg-error-900 hover:text-danger rounded-sm px-[2px] cursor-pointer transition-colors',
 
     singleValue: ({ isDisabled }) =>
       cn(
@@ -166,7 +166,7 @@ export const getSelectTailwindClassNames = <
         // match the old menu's own values (a 1px outline plus a soft
         // 4px/11px drop shadow — the old menu has no real `border-width`
         // either, just this shadow).
-        'z-[9999] mt-[8px] overflow-hidden rounded-[8px] border-[1px] border-solid border-secondary',
+        'z-[9999] mt-[8px] overflow-hidden rounded-lg border-[1px] border-solid border-secondary',
         // `--bg-primary` matches the control's background in both themes.
         'bg-primary shadow-[0_0_0_1px_rgba(0,0,0,0.1),0_4px_11px_0_rgba(0,0,0,0.1)]',
       ),
@@ -219,14 +219,14 @@ export const getSelectTailwindClassNames = <
           !isMulti
             ? 'justify-between [&>*:not([data-select-check])]:grow [&>*:not([data-select-check])]:line-clamp-2'
             : '[&>label]:line-clamp-2',
-          'cursor-pointer select-none transition-colors text-[14px]!',
+          'cursor-pointer select-none transition-colors text-sm!',
           colorClasses,
         );
       }
 
       return cn(
         stateClasses,
-        'flex! items-center gap-[8px] px-[16px] py-[10px] cursor-pointer select-none transition-colors text-[14.3px]!',
+        'flex! items-center gap-[8px] px-[16px] py-[10px] cursor-pointer select-none transition-colors text-sm!',
         // `gap-[8px]` keeps the content clear of the selected row's check.
         !isMulti && 'justify-between [&>*:not([data-select-check])]:grow',
         colorClasses,
@@ -237,7 +237,7 @@ export const getSelectTailwindClassNames = <
     groupHeading: () =>
       'px-[12px] py-[4px] text-[11px] font-semibold uppercase tracking-wider text-quinary',
 
-    noOptionsMessage: () => 'p-[12px] text-center text-[13px] text-quinary',
-    loadingMessage: () => 'p-[12px] text-center text-[13px] text-quinary',
+    noOptionsMessage: () => 'p-[12px] text-center text-sm text-quinary',
+    loadingMessage: () => 'p-[12px] text-center text-sm text-quinary',
   };
 };

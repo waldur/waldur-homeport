@@ -19,7 +19,7 @@ describe('ButtonCaret and buttonIconSizes', () => {
     expect(icon).toBeInTheDocument();
     expect(icon).toHaveAttribute('size', '16');
     expect(icon).toHaveAttribute('weight', 'bold');
-    expect(icon).toHaveClass('flex-shrink-0', 'rotate-toggle-180');
+    expect(icon).toHaveClass('shrink-0', 'rotate-toggle-180');
   });
 
   it('renders CaretDownIcon with default/lg dimensions', () => {

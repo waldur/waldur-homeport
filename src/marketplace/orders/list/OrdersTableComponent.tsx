@@ -220,7 +220,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
           row.consumer_reviewed_by_username ||
           DASH_ESCAPE_CODE;
         return (
-          <span className="d-inline-flex align-items-center gap-2">
+          <span className="inline-flex items-center gap-2">
             {name}
             {row.auto_approved ? (
               <Badge variant="purple" shape="pill" tone="outline">

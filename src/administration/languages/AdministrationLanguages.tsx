@@ -107,7 +107,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
       className="pb-1"
       bodyClassName="py-0 overflow-hidden"
       actions={
-        <div className="d-flex align-items-center">
+        <div className="flex items-center">
           <TableQuery query={query} setQuery={setQuery} inputClassName="h-11" />
           {canEdit && (
             <SaveButton
@@ -127,12 +127,12 @@ export const AdministrationLanguages: FunctionComponent = () => {
               {canEdit ? (
                 <Switch
                   data-testid={`language_${language.code}`}
-                  className="d-flex justify-content-between flex-row-reverse align-items-center"
+                  className="flex justify-between flex-row-reverse items-center"
                   size="sm"
                   checked={selectedLanguages.includes(language.code)}
                   onCheckedChange={() => handleLanguageChange(language.code)}
                   label={
-                    <div className="d-flex align-items-center">
+                    <div className="flex items-center">
                       <CountryFlagIcon
                         countryCode={
                           LanguageCountry[language.code] || language.code
@@ -144,8 +144,8 @@ export const AdministrationLanguages: FunctionComponent = () => {
                   }
                 />
               ) : (
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="d-flex align-items-center">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
                     <CountryFlagIcon
                       countryCode={
                         LanguageCountry[language.code] || language.code

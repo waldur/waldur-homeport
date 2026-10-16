@@ -201,7 +201,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
           label={translate('Total')}
           value={totalLabel}
           total
-          className="fs-3"
+          className="text-lg"
         />
       )}
     </>

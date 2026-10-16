@@ -18,7 +18,7 @@ import { MermaidChart } from './MermaidChart';
 
 const setTheme = (name: 'light' | 'dark') => {
   theme.current = name;
-  // ThemeProvider's loadTheme() sets this synchronously, before the re-render.
+  // ThemeProvider's applyTheme() sets this synchronously, before the re-render.
   document.documentElement.setAttribute('data-theme', name);
 };
 

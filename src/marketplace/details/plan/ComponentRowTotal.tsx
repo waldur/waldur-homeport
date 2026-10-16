@@ -33,9 +33,11 @@ export const ComponentRowTotal = (props: {
     <tr className="total">
       {/* `!`: FormTable.scss's unlayered `.form-table th` sets 500, which
           outranks a plain utility; the total row is regular weight. */}
-      <th className="col-md title fs-4 font-normal!">{translate('Total')}</th>
+      <th className="col-md title text-base font-normal!">
+        {translate('Total')}
+      </th>
       <td colSpan={2} className="col-md-auto col-actions">
-        <div className="d-flex align-items-center justify-content-end gap-4">
+        <div className="flex items-center justify-end gap-4">
           {props.period && props.setPeriod && (
             <Switch
               label={translate('Yearly estimate')}
@@ -46,7 +48,7 @@ export const ComponentRowTotal = (props: {
               }
             />
           )}
-          <span className="fs-4 text-secondary min-w-150px text-end">
+          <span className="text-base text-secondary min-w-150px text-end">
             {usageAmount
               ? usageAmount
               : !props.isFloor

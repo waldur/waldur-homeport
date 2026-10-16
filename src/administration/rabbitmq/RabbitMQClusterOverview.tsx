@@ -21,7 +21,7 @@ interface ClusterInfoRowProps {
 }
 
 const ClusterInfoRow: FC<ClusterInfoRowProps> = ({ label, value }) => (
-  <div className="d-flex justify-content-between py-1">
+  <div className="flex justify-between py-1">
     <span className="text-quaternary">{label}</span>
     <span>{value}</span>
   </div>
@@ -133,7 +133,7 @@ const RabbitMQClusterOverviewContent: FC<
             <h6 className="text-uppercase text-quaternary mb-3 mt-4">
               {translate('Listeners')}
             </h6>
-            <div className="d-flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               {data.listeners.map((listener, index) => (
                 <Badge key={index} variant="neutral" tone="light">
                   {listener.protocol}:{listener.port}

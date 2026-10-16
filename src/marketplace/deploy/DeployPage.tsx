@@ -333,7 +333,7 @@ export const BaseDeployPage = ({
   if (props.previewMode) {
     return (
       <form className="form">
-        <div className="deploy-preview-steps d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
+        <div className="deploy-preview-steps flex flex-col flex-lg-row-fluid gap-5 gap-lg-7">
           {formSteps.map((step, i) => (
             <div ref={stepRefs.current[i]} key={step.id}>
               <step.component
@@ -355,8 +355,8 @@ export const BaseDeployPage = ({
   return (
     <>
       <SidebarLayout.Header>
-        <div className="d-flex justify-content-between align-items-center w-100">
-          <h1 className="mb-0 flex-grow-1">
+        <div className="flex justify-between items-center w-full">
+          <h1 className="mb-0 grow">
             {isEdit ? translate('Edit') : translate('Add')}{' '}
             {selectedOffering.name}
           </h1>

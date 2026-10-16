@@ -105,7 +105,7 @@ export const OrganizationCreateStep1: FunctionComponent<
   }, [validationMethod]);
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <Card className="border-0 shadow-sm">
         <Card.Body className="p-8">
           <h4 className="mb-4">{translate('Select verification method')}</h4>
@@ -145,11 +145,11 @@ export const OrganizationCreateStep1: FunctionComponent<
 
               return (
                 <Card className="card-bordered">
-                  <Card.Body className="d-flex gap-3">
-                    <div className="flex-shrink-0">
+                  <Card.Body className="flex gap-3">
+                    <div className="shrink-0">
                       <InfoIcon size={24} weight="duotone" />
                     </div>
-                    <div className="flex-grow-1">
+                    <div className="grow">
                       <div className="text-primary mb-1">
                         {methodInfo.title}
                       </div>

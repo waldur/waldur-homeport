@@ -46,21 +46,16 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
         className,
       )}
     >
-      <Card.Body className="d-flex">
-        {left && <div className="me-4 flex-shrink-0">{left}</div>}
-        <div className="d-flex flex-column flex-grow-1">
+      <Card.Body className="flex">
+        {left && <div className="me-4 shrink-0">{left}</div>}
+        <div className="flex flex-col grow">
           <div
-            className={classNames(
-              'd-flex align-items-center gap-3 ',
-              actions?.length,
-            )}
+            className={classNames('flex items-center gap-3 ', actions?.length)}
           >
-            <Card.Title as="div" className="font-medium flex-grow-1 h4 mb-0">
+            <Card.Title as="div" className="font-medium grow h4 mb-0">
               {cardTitle}
             </Card.Title>
-            {cardAction && (
-              <div className="p-0 m-0 flex-shrink-0">{cardAction}</div>
-            )}
+            {cardAction && <div className="p-0 m-0 shrink-0">{cardAction}</div>}
             {actions?.length && (
               <ActionsMenu
                 side="bottom"
@@ -93,17 +88,17 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
             )}
           </div>
           {(title || meta || right) && (
-            <Row className="align-items-end justify-content-between mt-auto gap-4 g-2">
+            <Row className="items-end justify-between mt-auto gap-4 g-2">
               {(title || meta) && (
                 <Col>
-                  <Row className="align-items-center gap-4 mb-2">
-                    <h1 className="mb-0 text-nowrap fs-1x col col-sm-12 col-md col-xxl-12">
+                  <Row className="items-center gap-4 mb-2">
+                    <h1 className="mb-0 text-nowrap text-2xl col col-sm-12 col-md col-xxl-12">
                       {title}
                     </h1>
                     {meta && (
                       <Col
                         xs="auto"
-                        className="text-secondary text-nowrap fs-6"
+                        className="text-secondary text-nowrap text-sm"
                       >
                         {meta}
                       </Col>

@@ -39,7 +39,7 @@ export const PurchaseOrderCell: FC<PurchaseOrderCellProps> = ({ row }) => {
               )
         }
       >
-        <span className="d-inline-flex align-items-center gap-2 text-warning">
+        <span className="inline-flex items-center gap-2 text-warning">
           <WarningCircleIcon weight="bold" />
           {translate('Required')}
         </span>
@@ -47,7 +47,7 @@ export const PurchaseOrderCell: FC<PurchaseOrderCellProps> = ({ row }) => {
     );
   }
   return (
-    <span className="d-inline-flex align-items-center gap-2">
+    <span className="inline-flex items-center gap-2">
       <CheckCircleIcon weight="bold" className="text-success" />
       {row.purchase_order_reference || translate('Attached')}
     </span>

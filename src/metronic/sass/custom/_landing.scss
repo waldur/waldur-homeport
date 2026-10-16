@@ -85,12 +85,12 @@ $bg-height: 232px;
     }
 
     h2 {
-      font-size: 28px;
+      font-size: var(--text-3xl);
       margin-bottom: 0;
     }
 
     h1 {
-      font-size: 38px;
+      font-size: var(--text-4xl);
       margin-bottom: 20px;
     }
 

@@ -101,7 +101,7 @@ export const AssistantComposer: FC<Props> = ({
         </div>
       </ComposerPrimitive.Root>
       {!isEmpty && !hideDisclaimer && (
-        <p className="text-quaternary fs-8 text-center mb-0 mt-1">
+        <p className="text-quaternary text-xs text-center mb-0 mt-1">
           {translate(
             'AI may produce inaccurate responses. Do not share sensitive credentials.',
           )}

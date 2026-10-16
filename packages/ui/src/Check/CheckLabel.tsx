@@ -84,7 +84,7 @@ export function CheckLabel({
               <label
                 htmlFor={inputId}
                 className={cn(
-                  'm-0 text-[14px] leading-[20px]',
+                  'm-0 text-sm leading-5',
                   disabled
                     ? 'cursor-not-allowed text-[var(--check-label-disabled)]'
                     : 'cursor-pointer text-[var(--check-label)]',
@@ -100,7 +100,7 @@ export function CheckLabel({
           <div
             id={descriptionId}
             className={cn(
-              'text-[14px] leading-[20px]',
+              'text-sm leading-5',
               disabled
                 ? 'text-[var(--check-label-disabled)]'
                 : 'text-[var(--check-description)]',

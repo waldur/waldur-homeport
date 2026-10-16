@@ -161,7 +161,9 @@ export const PacingIndicator: FC<Props> = ({
       >
         {pct0(fraction)}
       </Badge>
-      <span className="text-quaternary fs-7">{translate('of expected')}</span>
+      <span className="text-quaternary text-xs">
+        {translate('of expected')}
+      </span>
     </>
   );
 
@@ -197,8 +199,8 @@ export const PacingIndicator: FC<Props> = ({
         </Col>
       </Row>
 
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
-        <div className="d-flex align-items-center gap-2">
+      <div className="flex flex-wrap justify-between items-center gap-2 mb-2">
+        <div className="flex items-center gap-2">
           <span className="font-medium">{translate('Pacing')}</span>
           <Badge
             variant={tone}
@@ -283,7 +285,7 @@ export const PacingIndicator: FC<Props> = ({
         </div>
       </div>
 
-      <div className="d-flex flex-wrap gap-2 mt-4">
+      <div className="flex flex-wrap gap-2 mt-4">
         {isOver && (
           <Badge
             variant="danger"

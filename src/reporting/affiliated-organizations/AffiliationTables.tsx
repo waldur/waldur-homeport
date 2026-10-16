@@ -18,7 +18,7 @@ const hero = (content: ReactNode) => (
  * so on the text baseline it hangs low. */
 const countryCell = (country: string | null) =>
   country ? (
-    <span className="d-flex align-items-center">
+    <span className="flex items-center">
       <CountryFlagIcon countryCode={country} size="sm" className="me-2" />
       {country}
     </span>

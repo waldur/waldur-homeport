@@ -152,13 +152,13 @@ export const BookingResourceListItem = ({
             className={
               layout.diffHours > 2
                 ? 'min-h-100px position-sticky top-0 py-3'
-                : 'h-100 position-relative py-2'
+                : 'h-full position-relative py-2'
             }
           >
             {layout.diffHours > 1.1 && (
-              <div className="d-flex justify-content-between">
+              <div className="flex justify-between">
                 <div>
-                  <span className="d-block fst-italic">
+                  <span className="block fst-italic">
                     {parseDate(layout.schedule.start).toFormat(
                       "LLL dd',' HH:mm",
                     )}

@@ -288,7 +288,7 @@ export const ProposalDetails = ({
             onClick={() =>
               openDialog(SubmitReviewDialog, { resolve: { review, refetch } })
             }
-            className="w-100 mt-2"
+            className="w-full mt-2"
             iconNode={<PaperPlaneTiltIcon weight="bold" />}
             label={translate('Submit review')}
             size="lg"
@@ -307,7 +307,7 @@ export const ProposalDetails = ({
                 size: 'md',
               })
             }
-            className="w-100 mt-2"
+            className="w-full mt-2"
             iconNode={<ChatTextIcon weight="bold" />}
             label={translate('Create review')}
             size="lg"

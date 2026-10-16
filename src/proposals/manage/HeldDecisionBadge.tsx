@@ -36,11 +36,11 @@ export const HeldDecisionBadge: FC<{ proposalUuid: string }> = ({
     // tentative outcome a moment later.
     return (
       <span
-        className="placeholder-glow d-inline-block"
+        className="placeholder-glow inline-block"
         aria-busy="true"
         data-testid="held-decision-badge-loading"
       >
-        <span className="placeholder rounded-pill" style={{ width: '7rem' }} />
+        <span className="placeholder rounded-full" style={{ width: '7rem' }} />
       </span>
     );
   }

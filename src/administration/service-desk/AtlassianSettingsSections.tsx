@@ -92,7 +92,7 @@ export const AtlassianSettingsSections = ({ fields }) => {
     .filter((key) => !placed.has(key));
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <AccordionCard title={translate('Connection and sign-in')} defaultOpen>
         {renderSettings(['ATLASSIAN_API_URL'])}
         <SelectGroup

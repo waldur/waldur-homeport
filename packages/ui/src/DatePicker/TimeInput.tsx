@@ -40,7 +40,7 @@ export const TimeInput: FC<TimeInputProps> = ({
       role="group"
       aria-label={label}
       className={cn(
-        'flex items-center justify-center gap-[2px] text-[16px] text-primary',
+        'flex items-center justify-center gap-[2px] text-base text-primary',
         disabled && 'text-quinary',
       )}
     >
@@ -133,7 +133,7 @@ const TimeSegment: FC<TimeSegmentProps> = ({
       onBlur={commit}
       onKeyDown={handleKeyDown}
       className={cn(
-        'w-[2.5em] rounded-[6px] bg-transparent py-[6px] text-center tabular-nums outline-none',
+        'w-[2.5em] rounded-md bg-transparent py-[6px] text-center tabular-nums outline-none',
         'hover:bg-primary-hover focus:bg-primary-hover',
         'focus-visible:[outline:2px_solid_var(--focus-ring-color)]',
         'disabled:cursor-not-allowed disabled:hover:bg-transparent',

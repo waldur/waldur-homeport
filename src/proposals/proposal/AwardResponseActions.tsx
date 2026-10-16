@@ -156,7 +156,7 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
         variant="primary"
         onClick={() => acceptAward.mutate()}
         pending={acceptAward.isPending}
-        className="w-100 mt-2"
+        className="w-full mt-2"
         iconNode={<CheckCircleIcon weight="bold" />}
         label={
           usesCallVocabulary() ? translate('Accept award') : translate('Accept')
@@ -167,7 +167,7 @@ export const AwardResponseActions: FC<AwardResponseActionsProps> = ({
         variant="danger"
         onClick={() => declineAward.mutate()}
         pending={declineAward.isPending}
-        className="w-100 mt-2"
+        className="w-full mt-2"
         iconNode={<XCircleIcon weight="bold" />}
         label={
           usesCallVocabulary()

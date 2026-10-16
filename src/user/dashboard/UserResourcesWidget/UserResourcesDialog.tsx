@@ -52,7 +52,7 @@ export const UserResourcesDialog: FC = () => {
       iconNode={<RocketLaunchIcon weight="bold" />}
       iconColor="info"
       footer={
-        <div className="d-flex justify-content-end w-100">
+        <div className="flex justify-end w-full">
           <BaseButton
             onClick={handleViewAllResources}
             label={translate('View all resources')}

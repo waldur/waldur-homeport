@@ -50,7 +50,7 @@ export const GroupInvitationCard: FC<{ row: GroupInvitation }> = ({
               metadata: (
                 <div
                   className={classNames(
-                    'fs-6 text-quaternary h-80px',
+                    'text-sm text-quaternary h-80px',
                     !description && 'fst-italic',
                   )}
                 >

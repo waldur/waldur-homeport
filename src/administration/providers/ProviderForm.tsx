@@ -90,9 +90,7 @@ const AllowedRedirectsField = () => {
                     />
                   </div>
                   {hasError && (
-                    <small className="d-block text-danger mb-3">
-                      {urlError}
-                    </small>
+                    <small className="block text-danger mb-3">{urlError}</small>
                   )}
                 </div>
               );
@@ -107,7 +105,7 @@ const AllowedRedirectsField = () => {
             />
 
             {currentHomeportUrl && (
-              <small className="d-block mt-2 text-quaternary">
+              <small className="block mt-2 text-quaternary">
                 {translate('Current application origin: {url}', {
                   url: currentHomeportUrl,
                 })}

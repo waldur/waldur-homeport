@@ -158,7 +158,7 @@ export const MessageGutter: FunctionComponent<
   const formatDate = isDesktop ? formatDateTime : formatShortDateTime;
 
   return (
-    <div className="message-gutter d-flex flex-column gap-2 text-quaternary">
+    <div className="message-gutter flex flex-col gap-2 text-quaternary">
       <div>
         <Badge variant={SENDER_BADGES[sender].variant} size="sm" tone="outline">
           {SENDER_BADGES[sender].label}

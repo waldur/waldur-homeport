@@ -20,8 +20,8 @@ export const CompleteYourProfileBanner = ({
     className="h-60px bg-primary border-b-[1px] border-b-secondary"
     role="status"
   >
-    <div className="container-fluid d-flex align-items-center h-100">
-      <div className="d-flex align-items-center">
+    <div className="container-fluid flex items-center h-full">
+      <div className="flex items-center">
         <FeaturedIcon
           icon={<WarningCircleIcon weight="bold" />}
           variant="warning"

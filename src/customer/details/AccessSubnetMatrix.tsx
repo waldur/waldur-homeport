@@ -259,7 +259,7 @@ export const AccessSubnetMatrix: FC<AccessSubnetMatrixProps> = ({
             ? 'applies_to_portal'
             : `offering:${target.key}`,
         render: ({ row }) => (
-          <div className="d-flex justify-content-center">
+          <div className="flex justify-center">
             <Checkbox
               aria-label={`${row.inet} — ${target.label}`}
               checked={isChecked(row, target.key)}

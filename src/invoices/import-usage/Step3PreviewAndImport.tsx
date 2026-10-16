@@ -185,10 +185,10 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
       }
     >
       <div>
-        <div className="d-flex justify-content-start mb-3">
+        <div className="flex justify-start mb-3">
           <div ref={refToolbar}>{/* Portal destination */}</div>
         </div>
-        <div className="d-flex justify-content-between text-quaternary mb-3">
+        <div className="flex justify-between text-quaternary mb-3">
           <span>
             {summary.errors === 0 && summary.skipped === 0
               ? translate('{n} ready to import', { n: summary.ready })

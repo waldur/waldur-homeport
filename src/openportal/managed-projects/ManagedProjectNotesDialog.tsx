@@ -55,7 +55,7 @@ export const ManagedProjectNotesDialog: React.FC<
             }
           >
             {notes.length > 0 ? (
-              <div className="d-flex flex-column gap-2 mb-3">
+              <div className="flex flex-col gap-2 mb-3">
                 {notes.map((note, index) => (
                   <div
                     key={index}
@@ -69,7 +69,7 @@ export const ManagedProjectNotesDialog: React.FC<
                 ))}
               </div>
             ) : (
-              <span className="text-quaternary d-block mb-3">
+              <span className="text-quaternary block mb-3">
                 {translate('No notes yet.')}
               </span>
             )}

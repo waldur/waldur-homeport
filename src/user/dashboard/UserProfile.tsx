@@ -40,7 +40,7 @@ export const UserProfile = ({
       cardBordered
       className={className}
       title={
-        <div className="d-flex flex-wrap gap-4 mb-3">
+        <div className="flex flex-wrap gap-4 mb-3">
           <h3 className="mb-0">{user.full_name}</h3>
           {(showStatus || user.is_staff || user.is_support) && (
             <div>
@@ -59,7 +59,7 @@ export const UserProfile = ({
     >
       <Stack
         direction="horizontal"
-        className="flex-wrap text-quaternary lh-1"
+        className="flex-wrap text-quaternary leading-none"
         gap={5}
       >
         {user.job_title && (

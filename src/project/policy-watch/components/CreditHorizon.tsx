@@ -75,21 +75,21 @@ export const CreditHorizon: FC<Props> = ({ events }) => (
           // is dated today, so a project with both a project cap and an
           // organization cap at their thresholds produced two identical keys.
           <div
-            className="d-flex gap-4"
+            className="flex gap-4"
             key={`${event.kind}-${event.date}-${index}`}
           >
-            <div className="d-flex flex-column align-items-center">
+            <div className="flex flex-col items-center">
               <FeaturedIcon
                 icon={TONE_ICON[event.tone]}
                 variant={TONE_VARIANT[event.tone]}
                 size="sm"
               />
               {!isLast && (
-                <div className="border-l-[1px] border-l-secondary flex-grow-1 my-2" />
+                <div className="border-l-[1px] border-l-secondary grow my-2" />
               )}
             </div>
             <div className={isLast ? 'mb-0' : 'mb-5'}>
-              <div className="d-flex flex-wrap align-items-baseline gap-2">
+              <div className="flex flex-wrap items-baseline gap-2">
                 <span className="font-medium">{event.title}</span>
                 <small className="text-quaternary">{metaLabel(event)}</small>
               </div>

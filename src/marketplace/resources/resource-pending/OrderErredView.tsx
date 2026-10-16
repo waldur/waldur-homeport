@@ -167,14 +167,10 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
   return (
     <div className="container-fluid mt-6">
       <Card className="card-bordered overflow-hidden">
-        <Card.Body className="d-flex flex-column flex-sm-row align-items-center gap-4">
-          <ProgressSteps
-            steps={steps}
-            bgClass="bg-primary"
-            className="flex-grow-1"
-          />
+        <Card.Body className="flex flex-col sm:flex-row items-center gap-4">
+          <ProgressSteps steps={steps} bgClass="bg-primary" className="grow" />
 
-          <div className="d-flex flex-sm-column gap-3 text-nowrap">
+          <div className="flex sm:flex-col gap-3 text-nowrap">
             {canCreateOrder && (
               <BaseButton
                 variant="tertiary"

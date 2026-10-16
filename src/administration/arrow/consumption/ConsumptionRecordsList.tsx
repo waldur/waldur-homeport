@@ -129,7 +129,7 @@ export const ConsumptionRecordsList: FunctionComponent<
             </>
           ),
           render: ({ row }) => (
-            <div className="d-flex flex-column gap-1">
+            <div className="flex flex-col gap-1">
               <Badge
                 variant={row.is_finalized ? 'success' : 'warning'}
                 shape="pill"

@@ -55,10 +55,10 @@ export const ValidatorConfiguration = ({
     >
       <FieldArray name="validators">
         {({ fields }) => (
-          <div className="d-flex flex-column gap-3">
+          <div className="flex flex-col gap-3">
             {fields.map((name, index) => (
-              <div key={name} className="d-flex gap-2 align-items-center">
-                <div className="flex-grow-1">
+              <div key={name} className="flex gap-2 items-center">
+                <div className="grow">
                   <Field
                     name={`${name}.type`}
                     render={(fieldProps) => (
@@ -77,7 +77,7 @@ export const ValidatorConfiguration = ({
                     )}
                   />
                 </div>
-                <div className="flex-grow-1">
+                <div className="grow">
                   <Field
                     name={`${name}.target_field`}
                     render={(fieldProps) => (
@@ -112,7 +112,7 @@ export const ValidatorConfiguration = ({
               // exists in the new system).
               variant="secondary"
               size="sm"
-              className="align-self-start"
+              className="self-start"
               onClick={() =>
                 fields.push({ type: VALIDATOR_TYPES[0], target_field: null })
               }

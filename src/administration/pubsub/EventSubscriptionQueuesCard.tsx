@@ -49,12 +49,12 @@ export const EventSubscriptionQueuesCard: FC = () => {
             {data.map((queue) => (
               <tr key={queue.uuid}>
                 <td>{queue.object_type}</td>
-                <td className="text-truncate" style={{ maxWidth: '250px' }}>
+                <td className="truncate" style={{ maxWidth: '250px' }}>
                   {queue.queue_name}
                 </td>
                 <td className="text-quaternary">{queue.vhost}</td>
                 <td
-                  className="text-truncate text-quaternary"
+                  className="truncate text-quaternary"
                   style={{ maxWidth: '150px' }}
                   title={queue.offering_uuid}
                 >

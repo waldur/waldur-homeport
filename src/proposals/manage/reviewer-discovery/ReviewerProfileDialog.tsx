@@ -26,13 +26,10 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
       title={translate('Reviewer profile')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="d-flex flex-column gap-4">
+      <div className="flex flex-col gap-4">
         {/* Header with name and email */}
-        <div className="d-flex align-items-start gap-3">
-          <div
-            className="d-flex align-items-center justify-content-center rounded-full bg-brand-subtle text-brand"
-            style={{ width: 64, height: 64, fontSize: 24 }}
-          >
+        <div className="flex items-start gap-3">
+          <div className="flex items-center justify-center rounded-full bg-brand-subtle text-brand size-16 text-2xl">
             {suggestion.reviewer_name
               .split(' ')
               .map((n) => n[0])
@@ -57,12 +54,12 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
         {/* Affinity Scores */}
         <div>
           <h6 className="text-quaternary mb-2">{translate('Match scores')}</h6>
-          <div className="d-flex gap-4">
+          <div className="flex gap-4">
             <div>
               <div className="text-quaternary small">
                 {translate('Affinity')}
               </div>
-              <div className="fs-4 font-medium text-success">
+              <div className="text-base font-medium text-success">
                 {formatScore(suggestion.affinity_score)}
               </div>
             </div>
@@ -70,13 +67,13 @@ export const ReviewerProfileDialog: FC<ReviewerProfileDialogProps> = ({
               <div className="text-quaternary small">
                 {translate('Keywords')}
               </div>
-              <div className="fs-4 font-medium">
+              <div className="text-base font-medium">
                 {formatScore(suggestion.keyword_score)}
               </div>
             </div>
             <div>
               <div className="text-quaternary small">{translate('Text')}</div>
-              <div className="fs-4 font-medium">
+              <div className="text-base font-medium">
                 {formatScore(suggestion.text_score)}
               </div>
             </div>

@@ -77,7 +77,7 @@ export const PosixIdPoolSummary: FC<PosixIdPoolSummaryProps> = ({
     formatRange(translate('GIDs'), pool.min_gid, pool.max_gid, pool.gid_used),
   ].filter(Boolean);
   return (
-    <div className="d-flex flex-column align-items-start">
+    <div className="flex flex-col items-start">
       <span>{ranges.join(' · ')}</span>
       <small className="text-quaternary">
         {pool.offering === offeringUuid

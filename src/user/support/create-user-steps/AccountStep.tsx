@@ -161,8 +161,8 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
               'Leave empty to keep the current password unchanged.',
             )}
           >
-            <div className="d-flex gap-2">
-              <div className="flex-grow-1">
+            <div className="flex gap-2">
+              <div className="grow">
                 <Field name="password">
                   {({ input, meta }) => (
                     <SecretField

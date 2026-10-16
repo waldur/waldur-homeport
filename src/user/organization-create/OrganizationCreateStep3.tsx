@@ -112,7 +112,7 @@ export const OrganizationCreateStep3: FunctionComponent<
   };
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       <Card className="border-0 shadow-sm">
         <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">
           <RadialBg className="icon-background" />
@@ -133,7 +133,7 @@ export const OrganizationCreateStep3: FunctionComponent<
               {getStatusIcon()}
               <h3 className="mb-3 font-medium">{getStatusTitle()}</h3>
               <p
-                className="text-quaternary mb-0 fs-5 mb-20"
+                className="text-quaternary mb-0 text-base mb-20"
                 style={{ maxWidth: '500px', margin: '0 auto' }}
               >
                 {getStatusMessage()}

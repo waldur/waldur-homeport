@@ -331,8 +331,8 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
       </div>
       {props.components.length > 0 && (
         <Tabs mount="all" value={activeTab} onValueChange={selectTab}>
-          <div className="d-flex">
-            <TabsList ref={refNav} className="flex-grow-1 mb-4">
+          <div className="flex">
+            <TabsList ref={refNav} className="grow mb-4">
               {orderedComponents.map((component) => {
                 const isHidden = wrappedComponents.some(
                   (c) => component.uuid === c.uuid,
@@ -376,10 +376,10 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
               })}
             </TabsList>
             {wrappedComponents.length > 0 ? (
-              <div className="d-flex align-items-end border-b-[1px] border-b-secondary mb-4">
+              <div className="flex items-end border-b-[1px] border-b-secondary mb-4">
                 <div>
                   <Menu>
-                    <div className="position-relative d-inline-flex">
+                    <div className="position-relative inline-flex">
                       <Menu.Trigger asChild>
                         <BaseButton
                           variant="text-secondary"
@@ -403,7 +403,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                         {wrappedComponents.map((component) => (
                           <Menu.Item
                             key={component.uuid}
-                            className="d-flex justify-content-between"
+                            className="flex justify-between"
                             onClick={() => selectTab(component.uuid)}
                           >
                             {Boolean(errors.components?.[component.type]) && (

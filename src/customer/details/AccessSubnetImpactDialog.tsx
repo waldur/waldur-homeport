@@ -38,7 +38,7 @@ const AddressList = ({ row }: { row: AccessSubnetImpactResource }) => {
 
   return (
     <>
-      <div className="d-flex flex-wrap gap-1">
+      <div className="flex flex-wrap gap-1">
         {row.addresses.map((address) => (
           <Badge
             key={`${address.source}-${address.inet}`}

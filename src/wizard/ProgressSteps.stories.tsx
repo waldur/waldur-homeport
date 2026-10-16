@@ -156,7 +156,7 @@ export const Interactive: Story = {
     }));
 
     return (
-      <div className="d-flex flex-column gap-6">
+      <div className="flex flex-col gap-6">
         <ProgressSteps
           steps={steps}
           onClick={(_, idx) => setCurrentIndex(idx)}

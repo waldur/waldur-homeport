@@ -147,7 +147,7 @@ const ButtonGroupQuestion: FC<{
 
   return (
     <div role={isMulti ? 'group' : 'radiogroup'}>
-      <div className="d-flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {question.options!.map((opt) => {
           const picked = isPicked(opt);
           const dimmed = hasSingleSelectPick && !picked;
@@ -263,7 +263,7 @@ const SearchableListQuestion: FC<{
         options={selectOptions}
         placeholder={translate('Search…')}
         formatOptionLabel={(opt: SelectOption) => (
-          <div className="d-flex flex-column" style={{ minWidth: 0 }}>
+          <div className="flex flex-col" style={{ minWidth: 0 }}>
             <span>{opt.label}</span>
             {opt.description && (
               <small className="text-quaternary">{opt.description}</small>

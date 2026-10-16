@@ -30,7 +30,7 @@ const CellDescription = ({
   description,
 }: QuotaCellProps) => (
   <>
-    <span className="font-semibold fs-7 text-primary text-nowrap ellipsis">
+    <span className="font-semibold text-xs text-primary text-nowrap ellipsis">
       {title}
       {description && (
         <>
@@ -39,7 +39,7 @@ const CellDescription = ({
         </>
       )}
     </span>
-    <span className="font-semibold fs-7 text-primary text-nowrap ellipsis">
+    <span className="font-semibold text-xs text-primary text-nowrap ellipsis">
       {limit
         ? `${formatUsageValue(usage)}/${formatUsageValue(limit)}`
         : formatUsageValue(usage)}
@@ -58,7 +58,7 @@ export const QuotaCell = ({
   const percent = getUsagePercentOfLimitComponent(limit, usage);
 
   return (
-    <div className="d-flex flex-column mb-3">
+    <div className="flex flex-col mb-3">
       <CellDescription
         title={title}
         usage={usage}

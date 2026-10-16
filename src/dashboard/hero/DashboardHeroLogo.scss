@@ -32,7 +32,7 @@
 }
 
 .health-title {
-  font-size: 12px;
+  font-size: var(--text-xs);
 
   @media (width <= 480px) {
     font-size: 11px;

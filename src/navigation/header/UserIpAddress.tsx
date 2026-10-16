@@ -25,9 +25,9 @@ export const UserIpAddress = ({ ip }: { ip: string }) => {
       }
     >
       <div className="flex grow items-center me-2 text-nowrap">
-        <div className="flex-grow-1">
-          <span className="d-block mb-2">{translate('IP address')}:</span>
-          <div className="d-flex justify-content-between text-quaternary">
+        <div className="grow">
+          <span className="block mb-2">{translate('IP address')}:</span>
+          <div className="flex justify-between text-quaternary">
             <span>{ip}</span>
             <span className="text-btn" aria-hidden="true">
               <CopyIcon weight="bold" size={20} />

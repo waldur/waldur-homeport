@@ -95,10 +95,10 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
       actions={
         !props.hidePrices &&
         (props.hideTotal ? (
-          <span className="d-block">{DASH_ESCAPE_CODE}</span>
+          <span className="block">{DASH_ESCAPE_CODE}</span>
         ) : (
           <>
-            <span className="d-block">
+            <span className="block">
               {translate('Total')}
               {': '}
               {formatCurrency(
@@ -111,7 +111,7 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
               {perLimitPeriod || perPeriod}
             </span>
             {perLimitPeriod ? (
-              <span className="fs-7">
+              <span className="text-xs">
                 {formatCurrency(
                   componentTotalPrice,
                   ENV.plugins.WALDUR_CORE.CURRENCY_NAME,

@@ -204,8 +204,8 @@ export const OpenPortalReportsTab: FC = () => {
   return (
     <Card className="card-bordered">
       <Card.Header className="border-b-[1px] border-b-secondary">
-        <div className="d-flex align-items-center gap-3 flex-wrap w-100">
-          <div className="d-flex align-items-center me-2">
+        <div className="flex items-center gap-3 flex-wrap w-full">
+          <div className="flex items-center me-2">
             <span className="h3 mb-0">{translate('Usage Report')}</span>
             <BaseButton
               iconNode={<ArrowsClockwiseIcon weight="bold" />}

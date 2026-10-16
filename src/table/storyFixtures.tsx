@@ -99,7 +99,7 @@ export const TableStoryGridItem = ({ row }: { row: TableStoryRow }) => (
   <ModelCard1
     title={row.name}
     body={
-      <div className="fs-6">
+      <div className="text-sm">
         <Field
           label="Status"
           value={
@@ -128,7 +128,7 @@ export const TableStoryGridItem = ({ row }: { row: TableStoryRow }) => (
       </div>
     }
     footer={
-      <div className="d-flex justify-content-end">
+      <div className="flex justify-end">
         <BaseButton label="Details" variant="text-primary" size="sm" />
       </div>
     }
@@ -243,7 +243,7 @@ export const TableStoryBulkDeleteButton = ({
  * it's a real, documented, working code path, not a hypothetical one.
  */
 export const TableStoryInlineRowActions = () => (
-  <div className="d-flex gap-2">
+  <div className="flex gap-2">
     <BaseButton
       onClick={() => undefined}
       label="Edit"

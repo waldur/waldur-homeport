@@ -115,7 +115,7 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
               isInvalid={Boolean(failure)}
               aria-describedby="matrix-recovery-key-help"
               disabled={pending}
-              className="flex-grow-1"
+              className="grow"
               autoFocus
             />
             <BaseButton
@@ -141,7 +141,7 @@ export const MatrixRecoveryKeyDialog: FC<MatrixRecoveryKeyDialogProps> = ({
             />
           </Stack>
           {failure && (
-            <Form.Text className="text-danger d-block" role="alert">
+            <Form.Text className="text-danger block" role="alert">
               {failure}
             </Form.Text>
           )}

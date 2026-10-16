@@ -34,7 +34,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
       })}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <table className="w-100">
+      <table className="w-full">
         <tbody>
           <tr>
             <th>

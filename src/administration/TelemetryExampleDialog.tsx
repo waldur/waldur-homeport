@@ -8,7 +8,7 @@ export const TelemetryExampleDialog: FunctionComponent = () => (
   <ModalDialog
     title={translate('Example telemetry metrics')}
     footer={
-      <div className="flex-grow-1 d-flex justify-content-between">
+      <div className="grow flex justify-between">
         <CloseDialogButton label={translate('Close')} />
       </div>
     }

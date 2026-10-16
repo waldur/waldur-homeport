@@ -41,8 +41,8 @@ export const FormPlanStep = (props: FormStepProps) => {
         )
       }
     >
-      <div className="d-flex gap-6 mb-5">
-        <div className="flex-grow-1">
+      <div className="flex gap-6 mb-5">
+        <div className="grow">
           <PlanSelectField plans={plans} offering={props.offering} />
         </div>
         <PlanDescriptionButton size="md" />

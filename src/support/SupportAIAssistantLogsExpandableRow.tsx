@@ -114,7 +114,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
       />
       <div className="message-body">
         {hasTopRowItems && (
-          <div className="d-flex align-items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1">
             {selectedMessage.is_flagged && (
               <Tooltip
                 label={formatDetectionCategories(
@@ -164,7 +164,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
                 {translate('Past version')}
               </Badge>
             )}
-            <div className="d-flex align-items-center gap-2 ms-auto">
+            <div className="flex items-center gap-2 ms-auto">
               {hasVersions && (
                 <VersionSelector
                   displayLabel={translate('Version {current} / {total}', {
@@ -315,8 +315,8 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
       return (
         <ExpandableContainer>
           <OfflineBlockContext.Provider value={true}>
-            <div className="d-flex flex-column">
-              <div className="d-flex align-items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 pb-2 border-b-[1px] border-b-secondary">
                 <strong>{row.name}</strong>
                 <TokenUsageBadge
                   id={`title-gen-tokens-${row.uuid}`}

@@ -71,7 +71,7 @@ $modal-pad: 1.85rem;
   }
 
   &__summary {
-    font-size: 12px;
+    font-size: var(--text-xs);
     line-height: 18px;
   }
 }

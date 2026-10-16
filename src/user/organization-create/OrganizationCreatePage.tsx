@@ -297,7 +297,7 @@ export const OrganizationCreatePage: FC = () => {
   return (
     <>
       <SidebarLayout.Header>
-        <div className="w-100">
+        <div className="w-full">
           <h1 className="mb-2">{translate('Create organization')}</h1>
           <p className="text-quaternary mb-0">
             {translate(
@@ -308,13 +308,13 @@ export const OrganizationCreatePage: FC = () => {
       </SidebarLayout.Header>
       <div className="container-xxl">
         {submissionComplete ? (
-          <div className="d-flex gap-7">
-            <div className="flex-shrink-0" style={{ width: '300px' }}>
+          <div className="flex gap-7">
+            <div className="shrink-0" style={{ width: '300px' }}>
               <VerticalProgressSteps
                 steps={steps.map((s) => ({ ...s, completed: true }))}
               />
             </div>
-            <div className="flex-grow-1">
+            <div className="grow">
               <OrganizationReviewStatus
                 onGoToDashboard={() =>
                   router.stateService.go('profile.details')
@@ -339,9 +339,9 @@ export const OrganizationCreatePage: FC = () => {
                   }}
                 />
 
-                <div className="d-flex gap-7">
+                <div className="flex gap-7">
                   {/* Left Sidebar with Stepper */}
-                  <div className="flex-shrink-0" style={{ width: '300px' }}>
+                  <div className="shrink-0" style={{ width: '300px' }}>
                     <VerticalProgressSteps
                       steps={stepsWithCompletion}
                       onClick={handleStepClick}
@@ -349,7 +349,7 @@ export const OrganizationCreatePage: FC = () => {
                   </div>
 
                   {/* Main Content */}
-                  <div className="flex-grow-1">
+                  <div className="grow">
                     <div className="wizard-body-vertical">
                       {step === 0 && <OrganizationCreateStep1 />}
                       {step === 1 && (
@@ -374,7 +374,7 @@ export const OrganizationCreatePage: FC = () => {
                     </div>
 
                     {/* Footer buttons */}
-                    <div className="d-flex justify-content-between mt-5 pt-5 border-t-[1px] border-t-secondary">
+                    <div className="flex justify-between mt-5 pt-5 border-t-[1px] border-t-secondary">
                       <BaseButton
                         variant="secondary"
                         onClick={prevStep}
@@ -389,7 +389,7 @@ export const OrganizationCreatePage: FC = () => {
                         iconNode={<CaretLeftIcon weight="bold" />}
                         size="lg"
                       />
-                      <div className="d-flex gap-3">
+                      <div className="flex gap-3">
                         <BaseButton
                           variant="tertiary"
                           className="min-w-125px"

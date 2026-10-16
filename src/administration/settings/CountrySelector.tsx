@@ -155,24 +155,22 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                       data-testid={`country_${country.value}`}
                       name={`countries.${country.value}`}
                       align="center"
-                      className="d-flex justify-content-between flex-row-reverse w-100"
+                      className="flex justify-between flex-row-reverse w-full"
                       size="sm"
                       label={
-                        <div className="d-flex align-items-center">
+                        <div className="flex items-center">
                           <div className="symbol symbol-20px me-2">
                             <CountryFlag
                               countryCode={country.value}
                               fontSize={16}
-                              className="lh-1"
+                              className="leading-none"
                             />
                           </div>
                           <span className="text-quaternary me-2">
                             {country.value}
                           </span>
                           {country.label !== country.value && (
-                            <span className="text-truncate">
-                              {country.label}
-                            </span>
+                            <span className="truncate">{country.label}</span>
                           )}
                         </div>
                       }

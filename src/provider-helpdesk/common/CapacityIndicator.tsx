@@ -20,7 +20,7 @@ export const CapacityIndicator: FC<CapacityIndicatorProps> = ({
   const ratio = open / max;
   const variant = ratio >= 1 ? 'danger' : ratio >= 0.75 ? 'warning' : 'success';
   return (
-    <div className="d-flex align-items-center gap-2" style={{ minWidth: 90 }}>
+    <div className="flex items-center gap-2" style={{ minWidth: 90 }}>
       <Progress
         size="sm"
         value={Math.min(open, max)}

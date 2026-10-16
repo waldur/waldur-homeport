@@ -34,7 +34,7 @@ export const CarouselSection: FC<CarouselSectionProps> = ({
     <Card className="card-bordered carousel-section mb-6">
       <Card.Header className="gap-2">
         <h4 className="mb-0">{title}</h4>
-        <div className="d-flex align-items-stretch gap-2">
+        <div className="flex items-stretch gap-2">
           <BaseButton
             iconNode={<CaretLeftIcon weight="bold" />}
             tooltip={translate('Scroll left')}
@@ -54,7 +54,7 @@ export const CarouselSection: FC<CarouselSectionProps> = ({
               {...linkProps}
               buttonVariant="tertiary"
               buttonSize="sm"
-              className="d-inline-flex align-items-center"
+              className="inline-flex items-center"
             >
               {translate('View all')}
               <CaretRightIcon size={16} className="ms-1" weight="bold" />

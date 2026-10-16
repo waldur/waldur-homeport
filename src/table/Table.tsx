@@ -350,10 +350,10 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
       >
         {/* Standalone header */}
         {props.standalone && (
-          <div className="table-standalone-header d-flex justify-content-between gap-4">
+          <div className="table-standalone-header flex justify-between gap-4">
             <div>
               <Stack direction="horizontal" gap={2}>
-                <h1 className="mb-0 fs-1x">
+                <h1 className="mb-0 text-2xl">
                   {props.title || props.alterTitle}
                 </h1>
                 {!props.hideRefresh && (
@@ -366,7 +366,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               {Boolean(props.subtitle) && (
                 <p
                   className={classNames(
-                    'fs-4 font-normal d-block text-quaternary mb-0',
+                    'text-base font-normal block text-quaternary mb-0',
                     props.hideRefresh && 'mt-2',
                   )}
                 >
@@ -375,7 +375,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
               )}
             </div>
             {!props.standaloneActionsInTable && (
-              <div className="d-none d-sm-flex gap-4">{props.tableActions}</div>
+              <div className="hidden sm:flex gap-4">{props.tableActions}</div>
             )}
           </div>
         )}
@@ -409,7 +409,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
 
           {/* Tabs */}
           {props.tabs?.length ? (
-            <Card.Header className="table-tabs border-b-[1px] border-b-secondary align-items-stretch py-0 min-h-auto">
+            <Card.Header className="table-tabs border-b-[1px] border-b-secondary items-stretch py-0 min-h-auto">
               <TableNav tabs={props.tabs} />
             </Card.Header>
           ) : null}
@@ -423,7 +423,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                   className={classNames(
                     'border-b-[1px] border-b-secondary min-h-auto py-2',
                     {
-                      'd-none':
+                      hidden:
                         !showFilterMenuToggle &&
                         props.filterPosition === 'menu',
                     },

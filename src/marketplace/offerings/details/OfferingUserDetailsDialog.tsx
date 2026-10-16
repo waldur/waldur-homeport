@@ -234,7 +234,7 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
               value={
                 <>
                   <ProviderAccountButton row={offeringUser} />
-                  <div className="text-quaternary fs-7 mt-1">
+                  <div className="text-quaternary text-xs mt-1">
                     {translate(
                       'The username and POSIX attributes are managed on the provider account and shared with the provider’s other offerings.',
                     )}

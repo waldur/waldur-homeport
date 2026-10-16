@@ -80,10 +80,10 @@ export const DatePickerPopover: FC<DatePickerPopoverProps> = ({
             className={cn(
               // min-h keeps the height when there is no value or placeholder.
               'flex w-full items-center text-start font-normal transition-colors',
-              'rounded-[8px] border-[1px] border-solid',
+              'rounded-lg border-[1px] border-solid',
               size === 'sm'
-                ? 'min-h-[28px] py-[4.5px] ps-[8px] pe-[32px] text-[14px]'
-                : 'min-h-[40px] py-[6px] ps-[11px] pe-[40px] text-[14.3px]',
+                ? 'min-h-[28px] py-[4.5px] ps-[8px] pe-[32px] text-sm'
+                : 'min-h-[40px] py-[6px] ps-[11px] pe-[40px] text-sm',
               solid
                 ? 'border-transparent bg-tertiary'
                 : // eslint-disable-next-line waldur-custom/require-dark-pair -- a hover edge: brand-500 is 3.6:1 on the dark field, over the 3:1 non-text minimum

@@ -119,7 +119,7 @@ export const PoolSummaryDialog: FC = () => {
       title={translate('How the Reviewer Pool Works')}
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="d-flex flex-column gap-8">
+      <div className="flex flex-col gap-8">
         {/* Overview */}
         <section>
           <AlertItem
@@ -161,9 +161,9 @@ export const PoolSummaryDialog: FC = () => {
             />
           </div>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th>{translate('Status')}</th>
                   <th>{translate('Description')}</th>
                 </tr>
@@ -193,9 +193,9 @@ export const PoolSummaryDialog: FC = () => {
             )}
           </p>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th>{translate('Tab')}</th>
                   <th>{translate('Purpose')}</th>
                 </tr>
@@ -220,7 +220,7 @@ export const PoolSummaryDialog: FC = () => {
           </p>
           <div className="row g-4">
             <div className="col-md-6">
-              <div className="card card-bordered h-100">
+              <div className="card card-bordered h-full">
                 <div className="card-body">
                   <h5 className="card-title">
                     {translate('Discovery (recommended)')}
@@ -239,7 +239,7 @@ export const PoolSummaryDialog: FC = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="card card-bordered h-100">
+              <div className="card card-bordered h-full">
                 <div className="card-body">
                   <h5 className="card-title">{translate('Direct invite')}</h5>
                   <p className="card-text text-quaternary">

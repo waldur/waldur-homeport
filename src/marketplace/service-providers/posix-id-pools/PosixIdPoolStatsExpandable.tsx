@@ -34,7 +34,7 @@ const NamespaceStats: FunctionComponent<{
           compact
           variant={utilizationVariant(stats.utilization, threshold)}
         />
-        <div className="text-secondary fs-7 mt-1">
+        <div className="text-secondary text-xs mt-1">
           {translate(
             '{used} of {capacity} ids in use; range [{min}–{max}], next {next}.',
             {
@@ -48,7 +48,7 @@ const NamespaceStats: FunctionComponent<{
         </div>
       </>
     ) : (
-      <div className="text-secondary fs-7">
+      <div className="text-secondary text-xs">
         {emptyText ??
           translate('Not managed by this pool — sourced externally.')}
       </div>

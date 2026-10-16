@@ -219,7 +219,7 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
         </div>
       )}
 
-      <div className="d-flex align-items-center">
+      <div className="flex items-center">
         <span className="text-quaternary">
           {translate('{count} mappings selected', { count: mappingCount })}
         </span>

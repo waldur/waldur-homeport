@@ -12,10 +12,10 @@ export const menuLabel = cva('', {
   variants: {
     look: {
       // gray-500, 11px, weight 600, uppercase.
-      nav: 'px-[16px] pt-[10px] pb-[6.5px] text-[11.05px] leading-[1.432] font-semibold uppercase text-[var(--menu-item-muted-text)]',
+      nav: 'px-[16px] pt-[10px] pb-[6.5px] text-xs leading-[1.432] font-semibold uppercase text-[var(--menu-item-muted-text)]',
       // gray-600, 12px.
       actions:
-        'm-0 block whitespace-nowrap px-[16px] py-[6.5px] text-[12.025px] text-[var(--menu-item-text)]',
+        'm-0 block whitespace-nowrap px-[16px] py-[6.5px] text-xs text-[var(--menu-item-text)]',
     },
   },
   defaultVariants: { look: 'actions' },

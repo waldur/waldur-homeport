@@ -25,8 +25,8 @@ export const UserGroupInvitation: FunctionComponent = () => {
   });
 
   return (
-    <div className="d-flex flex-column flex-root">
-      <div className="d-flex flex-column flex-center flex-column-fluid p-10">
+    <div className="flex flex-col flex-root">
+      <div className="flex flex-col flex-center flex-column-fluid p-10">
         <LoadingSpinner />
         <p>{translate('Your request is being processed.')}</p>
         <p>{translate('You will be redirected in a moment.')}</p>

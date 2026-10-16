@@ -19,7 +19,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       title={translate('Advanced settings')}
       size="sm"
       className="mb-5 bg-secondary"
-      titleClassName="fs-6"
+      titleClassName="text-sm"
     >
       <BooleanGroup
         name="auto_approve"

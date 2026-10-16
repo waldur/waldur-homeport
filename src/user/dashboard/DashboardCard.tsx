@@ -33,17 +33,17 @@ export const DashboardCard: FC<DashboardCardProps> = ({
         minHeight: '120px',
       }}
     >
-      <Card.Body className="d-flex align-items-center">
-        <div className="symbol symbol-50px me-4 flex-shrink-0">
+      <Card.Body className="flex items-center">
+        <div className="symbol symbol-50px me-4 shrink-0">
           <div
             className={`symbol-label ${isClickable ? backgroundColor : 'bg-gray-300 dark:bg-gray-dark-600'}`}
           >
             {icon}
           </div>
         </div>
-        <div className="flex-grow-1">
+        <div className="grow">
           <Card.Title className="mb-1 h5">{title}</Card.Title>
-          <p className="text-quaternary mb-0 fs-7">{message}</p>
+          <p className="text-quaternary mb-0 text-xs">{message}</p>
         </div>
       </Card.Body>
     </Card>

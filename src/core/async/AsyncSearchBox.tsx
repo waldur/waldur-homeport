@@ -172,7 +172,7 @@ export const AsyncSearchBox = <
             {context.status === 'success' && context.hasNextPage && (
               <div
                 ref={sentinelRef}
-                className="text-center py-2 text-quaternary fs-7"
+                className="text-center py-2 text-quaternary text-xs"
               >
                 {context.isFetchingNextPage
                   ? translate('Loading more...')

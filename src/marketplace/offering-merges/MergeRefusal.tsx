@@ -52,7 +52,7 @@ export const MergeRefusalAlert: FC<{
       variant="error"
       title={title}
       body={
-        <div className="d-flex flex-column gap-2" data-testid="merge-refusal">
+        <div className="flex flex-col gap-2" data-testid="merge-refusal">
           {refusal.detail && <span>{refusal.detail}</span>}
           {blockers.length > 0 && (
             <div>
@@ -61,7 +61,7 @@ export const MergeRefusalAlert: FC<{
                 {blockers.map((blocker, index) => (
                   <li key={`${blocker.code}-${index}`}>
                     {blocker.message}{' '}
-                    <code className="fs-8">{blocker.code}</code>
+                    <code className="text-xs">{blocker.code}</code>
                   </li>
                 ))}
               </ul>
@@ -73,7 +73,7 @@ export const MergeRefusalAlert: FC<{
               <ul className="mb-0">
                 {missing.map((code) => (
                   <li key={code}>
-                    <code className="fs-8">{code}</code>
+                    <code className="text-xs">{code}</code>
                   </li>
                 ))}
               </ul>

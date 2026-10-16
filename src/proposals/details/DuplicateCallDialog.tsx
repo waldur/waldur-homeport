@@ -87,7 +87,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                 <div className="min-w-150px">
                   <CloseDialogButton
                     label={translate('Cancel')}
-                    className="w-100"
+                    className="w-full"
                   />
                 </div>
                 <div className="min-w-150px">
@@ -95,7 +95,7 @@ export const DuplicateCallDialog: FC<DuplicateCallDialogProps> = ({
                     submitting={submitting || mutation.isPending}
                     label={translate('Confirm')}
                     invalid={invalid}
-                    className="w-100"
+                    className="w-full"
                   />
                 </div>
               </>

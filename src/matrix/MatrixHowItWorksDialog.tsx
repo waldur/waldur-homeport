@@ -193,7 +193,7 @@ export const MatrixHowItWorksDialog: FC = () => {
       closeButton
       footer={<CloseDialogButton label={translate('Close')} />}
     >
-      <div className="d-flex flex-column gap-8">
+      <div className="flex flex-col gap-8">
         {/* Overview */}
         <section>
           <AlertItem
@@ -289,9 +289,9 @@ export const MatrixHowItWorksDialog: FC = () => {
             )}
           </p>
           <div className="table-responsive">
-            <table className="table align-middle table-row-bordered fs-6 gy-4 gx-5">
+            <table className="table align-middle table-row-bordered text-sm gy-4 gx-5">
               <thead>
-                <tr className="text-start text-quaternary font-medium fs-7 text-uppercase gs-0">
+                <tr className="text-start text-quaternary font-medium text-xs text-uppercase gs-0">
                   <th style={{ width: '20%' }}>{translate('Command')}</th>
                   <th>{translate('Description')}</th>
                 </tr>

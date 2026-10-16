@@ -12,13 +12,13 @@ export const ResourceEndDateConflictBar = () => {
 
   return (
     <div className="bar bg-primary border-b-[1px] border-b-secondary h-60px">
-      <div className="container-fluid w-100 d-flex align-items-center gap-2">
+      <div className="container-fluid w-full flex items-center gap-2">
         <FeaturedIcon
           icon={<WarningCircleIcon weight="bold" />}
           variant="warning"
           size="sm"
         />
-        <p className="text-start fs-7">
+        <p className="text-start text-xs">
           <strong className="font-medium">
             {translate('Date conflict.')}&nbsp;
           </strong>

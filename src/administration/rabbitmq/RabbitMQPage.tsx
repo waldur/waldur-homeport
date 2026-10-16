@@ -67,7 +67,7 @@ export const RabbitMQPage: FC<Partial<TableWithPortal>> = ({ portal }) => {
   }
 
   const panelActions = (
-    <div className="d-flex align-items-center gap-4">
+    <div className="flex items-center gap-4">
       <RefreshButton refetch={refetch} isLoading={isRefetching} />
       {isStaff && (
         <>

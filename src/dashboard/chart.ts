@@ -120,7 +120,7 @@ export const getCostWidgetChartOptions = (
         let tooltipText = `${xLabel}<br/>`;
         params.forEach((param) => {
           tooltipText += `
-            <div class="d-flex justify-content-between gap-6">
+            <div class="flex justify-between gap-6">
               <span>${param.marker} ${escapeHtml(param.seriesName)}</span>
               <strong class="text-end">${param.value}</strong>
             </div>

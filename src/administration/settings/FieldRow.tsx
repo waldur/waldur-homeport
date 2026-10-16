@@ -40,7 +40,7 @@ const MultilingualImageField = ({
 }: {
   value: Record<string, string>;
 }) => (
-  <div className="d-flex flex-wrap gap-2">
+  <div className="flex flex-wrap gap-2">
     {value && typeof value === 'object' && Object.keys(value).length > 0 ? (
       Object.entries(value).map(([lang]) => (
         <Badge key={lang} variant="primary" tone="light">
@@ -74,7 +74,7 @@ const LoginPageListField = ({
 
   if (itemKey === 'LOGIN_PAGE_STATS') {
     return (
-      <div className="d-flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {value.map((stat, i) => (
           <Badge key={i} variant="primary" tone="light">
             {stat.value} {stat.label}
@@ -160,7 +160,7 @@ export const FieldRow = ({
             <CountryListField value={value} />
           )
         ) : item.type === 'dict_field' ? (
-          <pre style={{ fontSize: '12px', margin: 0, whiteSpace: 'pre-wrap' }}>
+          <pre className="text-xs m-0 whitespace-pre-wrap">
             {typeof value === 'object' && value !== null
               ? JSON.stringify(value, null, 2)
               : value || ''}
@@ -185,7 +185,7 @@ export const FieldRow = ({
         ) : item.type === 'multiple_choice_field' &&
           item.options &&
           Array.isArray(value) ? (
-          <div className="d-flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1">
             {value.map((v) => {
               const label =
                 item.options.find((option) => option.value === v)?.label || v;

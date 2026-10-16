@@ -94,8 +94,10 @@ export const CeleryTaskTable = ({
         {
           title: translate('Task ID'),
           render: ({ row }) => (
-            <div className="d-flex align-items-center">
-              <code className="text-quaternary fs-7">{row.id.slice(0, 8)}</code>
+            <div className="flex items-center">
+              <code className="text-quaternary text-xs">
+                {row.id.slice(0, 8)}
+              </code>
               <CopyButton value={row.id} />
             </div>
           ),
@@ -104,7 +106,7 @@ export const CeleryTaskTable = ({
           title: translate('Args'),
           render: ({ row }) => (
             <Tooltip label={JSON.stringify(row.args)}>
-              <code className="fs-7">{formatArgs(row.args)}</code>
+              <code className="text-xs">{formatArgs(row.args)}</code>
             </Tooltip>
           ),
         },

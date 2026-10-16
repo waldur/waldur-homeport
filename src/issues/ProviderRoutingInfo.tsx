@@ -64,7 +64,7 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
         <Card.Title>{translate('Provider routing')}</Card.Title>
       </Card.Header>
       <Card.Body>
-        <div className="d-flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-2 mb-3">
           <Badge variant="info" shape="pill" tone="outline">
             {translate('Routed')}
           </Badge>
@@ -82,7 +82,7 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
             value={issue.escalation_reason}
             isStuck
             labelClass="min-w-150px"
-            className="fs-6"
+            className="text-sm"
           />
         )}
         {rows
@@ -94,7 +94,7 @@ export const ProviderRoutingInfo: FC<{ issue: Issue }> = ({ issue }) => {
               value={v}
               isStuck
               labelClass="min-w-150px"
-              className="fs-6"
+              className="text-sm"
             />
           ))}
       </Card.Body>

@@ -90,7 +90,7 @@ export const getId = (row, index) => {
 export const formatLongText = (value) =>
   value && value.length > 100 ? (
     <Tooltip label={value}>
-      <span style={{ width: 150 }} className="ellipsis d-inline-block">
+      <span style={{ width: 150 }} className="ellipsis inline-block">
         {value}
       </span>
     </Tooltip>

@@ -50,7 +50,7 @@ export const ReportPreFilters: FC<ReportPreFiltersProps> = ({
   };
 
   return (
-    <div className="d-flex align-items-center gap-3 mb-3 flex-wrap">
+    <div className="flex items-center gap-3 mb-3 flex-wrap">
       <div>
         <Form.Label className="small mb-1" htmlFor="filterMonth">
           {translate('Month')}

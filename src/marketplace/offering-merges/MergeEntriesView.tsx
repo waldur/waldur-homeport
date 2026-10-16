@@ -76,10 +76,10 @@ const EntryEffect: FC<{ row: MergeEntryRow; fromJournal: boolean }> = ({
   row,
   fromJournal,
 }) => (
-  <div className="d-flex flex-column">
+  <div className="flex flex-col">
     <span>{renderFieldOrDash(row.effectTitle)}</span>
     {row.leftOnSource > 0 && (
-      <span className="text-quaternary fs-8">
+      <span className="text-quaternary text-xs">
         {fromJournal
           ? translate(
               '{count} of them stayed on the source; they are not in the list.',
@@ -144,7 +144,7 @@ export const MergeEntriesView: FC<MergeEntriesViewProps> = ({
   }
 
   return (
-    <div className="d-flex flex-column gap-5">
+    <div className="flex flex-col gap-5">
       {areas.map((area) => (
         <section key={area.key}>
           <SectionHeading
@@ -188,7 +188,7 @@ export const MergeEntriesView: FC<MergeEntriesViewProps> = ({
             }
             className="mb-1"
           />
-          <p className="text-quaternary fs-7">
+          <p className="text-quaternary text-xs">
             {legacy
               ? translate(
                   'These rows would have moved, but the target has an equivalent already, so they stay where they are.',

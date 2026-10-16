@@ -11,9 +11,9 @@
 
     button {
       border: 1px solid var(--color-gray-300);
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       padding: 8px 12px;
-      font-size: 14px;
+      font-size: var(--text-sm);
     }
   }
 }

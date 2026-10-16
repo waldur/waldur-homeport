@@ -254,7 +254,7 @@ export const MatrixChatPanel: FC<MatrixChatPanelProps> = ({
       {!hideRoomList && (
         <div
           className={classNames('team-chat-dock-list', {
-            'd-none': !showDock,
+            hidden: !showDock,
           })}
         >
           <MatrixRoomList

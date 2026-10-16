@@ -19,7 +19,7 @@ export const IdentityProviderIndicator = ({
   hasLabel = false,
   showManagementLink = true,
 }: IdentityProviderIndicatorProps) => (
-  <div className="d-flex align-items-center">
+  <div className="flex items-center">
     <Tooltip label={user.registration_method}>
       <div className="symbol symbol-circle symbol-40px img-wrapper">
         <div className="symbol-label overflow-hidden">
@@ -27,7 +27,7 @@ export const IdentityProviderIndicator = ({
         </div>
       </div>
     </Tooltip>
-    <div className="ms-5 d-flex flex-column">
+    <div className="ms-5 flex flex-col">
       <span className="text-quaternary hover:text-brand font-medium">
         {user.identity_provider_label}
       </span>

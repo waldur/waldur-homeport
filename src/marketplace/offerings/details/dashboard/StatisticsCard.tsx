@@ -32,11 +32,11 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
   return (
     <Card className="card-bordered mb-5">
       <Card.Body>
-        <p className="fs-6 font-medium text-quaternary mb-1">{title}</p>
-        <div className="d-flex justify-content-between align-items-end">
+        <p className="text-sm font-medium text-quaternary mb-1">{title}</p>
+        <div className="flex justify-between items-end">
           <h1 className="display-6 mb-0">
             {formatUsageValue(value, true)}
-            <span className="ms-1 fs-2 font-medium">{unit}</span>
+            <span className="ms-1 text-xl font-medium">{unit}</span>
           </h1>
           {changes ? (
             <Tooltip label={translate('Changes in the last month')}>
@@ -51,7 +51,7 @@ export const StatisticsCard: FC<StatisticsCardProps> = ({
               </span>
             </Tooltip>
           ) : max ? (
-            <div className="flex-grow-1 mw-80px mb-3">
+            <div className="grow mw-80px mb-3">
               <Progress
                 value={value}
                 max={max}

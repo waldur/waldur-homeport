@@ -14,7 +14,7 @@ import { MermaidChart } from './MermaidChart';
  * theme, and set data-theme first: the preview's own decorator sets it in an
  * effect that runs after this story's children, and Mermaid reads it (and the
  * CSS variables that follow it) when it is configured. In the real app
- * loadTheme() sets it synchronously, before the re-render.
+ * applyTheme() sets it synchronously, before the re-render.
  */
 const withStoryTheme: Decorator = (Story, context) => {
   const theme = (context.globals.theme ?? 'light') as ThemeName;

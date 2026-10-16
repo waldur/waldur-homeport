@@ -29,13 +29,13 @@
 }
 
 .layout-stats-hero-content h1 {
-  font-size: 2.5rem;
+  font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
   margin-bottom: 1rem;
 }
 
 .layout-stats-hero-content > p {
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   opacity: 0.9;
   margin-bottom: 3rem;
 }
@@ -49,18 +49,18 @@
 .layout-stats-item {
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
 }
 
 .layout-stats-value {
-  font-size: 2.5rem;
+  font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
   line-height: 1;
   margin-bottom: 0.5rem;
 }
 
 .layout-stats-label {
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   opacity: 0.8;
   text-transform: uppercase;
   letter-spacing: 1px;

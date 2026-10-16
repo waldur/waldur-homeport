@@ -131,12 +131,12 @@ export const TeamTableComponent = <
           // contexts only provide the scalar role_name.
           const roles = (row as any).roles;
           return (
-            <span className="d-inline-flex align-items-center gap-2 flex-wrap">
+            <span className="inline-flex items-center gap-2 flex-wrap">
               {Array.isArray(roles) && roles.length > 0 ? (
                 roles.map((grant) => (
                   <span
                     key={grant.role_uuid}
-                    className="d-inline-flex align-items-center gap-1"
+                    className="inline-flex items-center gap-1"
                   >
                     <RoleField row={grant} />
                     <MemberSyncStateIndicator grant={grant} />

@@ -121,7 +121,7 @@ export const OfferViaCallWorkflowStep: FC<WizardStepProps> = (props) => {
       </p>
       <WorkflowStepsField disabled={busy} />
       {chainStep && busy ? (
-        <p className="text-quaternary fs-7 mt-4 mb-0">
+        <p className="text-quaternary text-xs mt-4 mb-0">
           {chainStepLabel(chainStep)}…
         </p>
       ) : null}

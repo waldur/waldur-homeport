@@ -73,7 +73,7 @@ export const Breadcrumbs = () => {
     return null;
   }
   return (
-    <Breadcrumb className="flex-grow-1" ref={navRef}>
+    <Breadcrumb className="grow" ref={navRef}>
       {breadcrumbItems.map((item) =>
         item.dropdown ? (
           <DropdownBreadcrumbItem key={item.key} item={item} />

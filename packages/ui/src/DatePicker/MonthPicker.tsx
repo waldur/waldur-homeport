@@ -98,7 +98,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
     >
       <div
         data-slot="month-calendar"
-        className="w-[328px] px-[24px] py-[20px] text-[14px] text-secondary"
+        className="w-[328px] px-[24px] py-[20px] text-sm text-secondary"
       >
         <div className="mb-[12px] flex h-[40px] items-center justify-between">
           <button
@@ -112,7 +112,7 @@ export const MonthPicker: FC<MonthPickerProps> = ({
           </button>
           <span
             data-slot="month-calendar-year"
-            className="text-[16px] font-medium select-none"
+            className="text-base font-medium select-none"
           >
             {year}
           </span>

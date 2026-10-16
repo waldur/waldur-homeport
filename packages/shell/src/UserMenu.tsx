@@ -152,7 +152,7 @@ export function UserMenu() {
           token/IP rows, split by separators. */}
       <Menu.Content
         align="end"
-        className="py-[12px] text-[14px] font-medium w-[275px]"
+        className="py-[12px] text-sm font-medium w-[275px]"
       >
         {currentUser && (
           <>
@@ -164,11 +164,11 @@ export function UserMenu() {
               />
               <div className="flex min-w-0 flex-col">
                 {/* .fw-bolder fs-5 there: 15px, weight 600. */}
-                <span className="truncate text-[14.95px] font-semibold text-primary">
+                <span className="truncate text-base font-semibold text-primary">
                   {currentUser.fullName}
                 </span>
                 {/* .text-muted fs-7 there: 12px, gray-500. */}
-                <span className="truncate text-[12.35px] text-[var(--menu-item-muted-text)]">
+                <span className="truncate text-xs text-[var(--menu-item-muted-text)]">
                   {currentUser.email}
                 </span>
               </div>
@@ -212,7 +212,7 @@ export function UserMenu() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className="flex h-[30px] min-w-0 flex-1 items-center overflow-hidden whitespace-nowrap [contain:inline-size] rounded-md bg-[var(--menu-item-light-bg)] px-[9.75px] text-[12.025px] text-[var(--menu-item-strong-text)]"
+                  className="flex h-[30px] min-w-0 flex-1 items-center overflow-hidden whitespace-nowrap [contain:inline-size] rounded-md bg-[var(--menu-item-light-bg)] px-[9.75px] text-xs text-[var(--menu-item-strong-text)]"
                 >
                   {'•'.repeat(currentUser.token.length)}
                 </span>

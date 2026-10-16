@@ -145,7 +145,7 @@ const InvoiceItemLine: FC<{
           <>
             {item.details.offering_component_name}
             {item.article_code && (
-              <small className="d-block">
+              <small className="block">
                 {translate('Article code')}: {item.article_code}
               </small>
             )}

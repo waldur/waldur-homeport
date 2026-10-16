@@ -326,7 +326,7 @@ export const AnonymousChatPanel: FunctionComponent = () => {
       {
         title: translate('Offerings shown'),
         render: ({ row }) => (
-          <div className="d-flex align-items-center gap-2">
+          <div className="flex items-center gap-2">
             <span>{row.offerings_shown ?? 0}</span>
             {Boolean(row.offerings_clicked) && (
               <Badge variant="success" size="sm" tone="outline">

@@ -10,9 +10,9 @@ const StatCard: FC<{ label: string; value: ReactNode }> = ({
   value,
 }) => (
   <div className="col-6 col-md">
-    <div className="card card-bordered h-100">
+    <div className="card card-bordered h-full">
       <div className="card-body py-3 text-center">
-        <div className="fs-3 font-medium">{value}</div>
+        <div className="text-lg font-medium">{value}</div>
         <div className="text-quaternary small">{label}</div>
       </div>
     </div>

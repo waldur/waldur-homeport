@@ -73,8 +73,8 @@ const ResourcesTable: FC<TableProps & { projectDate }> = ({
         title: translate('Offering / Category'),
         render: ({ row }) => (
           <>
-            <span className="d-block text-primary">{row.offering_name}</span>
-            <span className="d-block">{row.category_title}</span>
+            <span className="block text-primary">{row.offering_name}</span>
+            <span className="block">{row.category_title}</span>
           </>
         ),
       },
@@ -180,9 +180,7 @@ const FormModalComponent: FC<
               })
             : translate('Some conflicting resources are unselected')
         }
-        bodyClassName={
-          adjustModalHeight ? 'd-flex flex-column h-400px' : 'h-200px'
-        }
+        bodyClassName={adjustModalHeight ? 'flex flex-col h-400px' : 'h-200px'}
         footer={
           <>
             {step === 1 ? (
@@ -214,7 +212,7 @@ const FormModalComponent: FC<
           </>
         }
       >
-        <div className={step === 2 ? 'd-none' : 'd-flex flex-column h-100'}>
+        <div className={step === 2 ? 'hidden' : 'flex flex-col h-full'}>
           <DateGroup
             name="end_date"
             spaceless
@@ -239,10 +237,7 @@ const FormModalComponent: FC<
                   "You've changed the project end date. Some resources now conflict with this date. Review the list below to align or confirm resource termination dates.",
                 )}
               </p>
-              <div
-                className="flex-grow-1 overflow-auto"
-                style={{ minHeight: 0 }}
-              >
+              <div className="grow overflow-auto" style={{ minHeight: 0 }}>
                 <ResourcesTable
                   {...tableProps}
                   rows={resources || []}
@@ -266,16 +261,13 @@ const FormModalComponent: FC<
         </div>
 
         {step === 2 && (
-          <div
-            className="d-flex flex-column flex-grow-1"
-            style={{ minHeight: 0 }}
-          >
+          <div className="flex flex-col grow" style={{ minHeight: 0 }}>
             <p className="text-secondary mb-4">
               {translate(
                 'The following resources were not selected and will be forcibly terminated on the project end date:',
               )}
             </p>
-            <div className="flex-grow-1 overflow-auto" style={{ minHeight: 0 }}>
+            <div className="grow overflow-auto" style={{ minHeight: 0 }}>
               <ResourcesTable
                 {...tablePropsUnselected}
                 rows={ignoredResources}

@@ -14,7 +14,7 @@ import { translate } from '@/i18n';
  */
 export const DrawerCloseButton: FC<{ close: () => void }> = ({ close }) => (
   <>
-    <span className="d-none d-md-inline-flex">
+    <span className="hidden md:inline-flex">
       <BaseButton
         iconNode={<XIcon weight="bold" />}
         tooltip={translate('Close')}
@@ -24,7 +24,7 @@ export const DrawerCloseButton: FC<{ close: () => void }> = ({ close }) => (
         size="md"
       />
     </span>
-    <span className="d-inline-flex d-md-none">
+    <span className="inline-flex md:hidden">
       <BaseButton
         iconNode={<XIcon weight="bold" />}
         tooltip={translate('Close')}

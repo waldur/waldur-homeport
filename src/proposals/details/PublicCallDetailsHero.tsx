@@ -33,8 +33,8 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       cardBordered
       title={
         <>
-          <div className="d-flex flex-wrap gap-2 align-items-center">
-            <h3 className="mb-0 lh-1">{call.name}</h3>
+          <div className="flex flex-wrap gap-2 items-center">
+            <h3 className="mb-0 leading-none">{call.name}</h3>
             <StateIndicator
               variant={status.color}
               label={status.label}
@@ -42,14 +42,14 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
               shape="pill"
             />
           </div>
-          <p className="text-quaternary fs-7 mb-0">{call.customer_name}</p>
+          <p className="text-quaternary text-xs mb-0">{call.customer_name}</p>
         </>
       }
       quickBody={
         call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />
       }
       quickActions={
-        <div className="d-flex flex-column flex-wrap gap-2">
+        <div className="flex flex-col flex-wrap gap-2">
           <PublicCallApplyButton call={call} size="lg" />
           <CallProposalsButton call={call} />
         </div>
@@ -69,7 +69,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
           />
         )
       }
-      quickFooterClassName="justify-content-center"
+      quickFooterClassName="justify-center"
     />
   );
 };

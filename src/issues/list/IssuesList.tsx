@@ -152,7 +152,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = ({
           title: translate('Provider'),
           render: ({ row }) =>
             row.is_routed ? (
-              <div className="d-flex align-items-center gap-2">
+              <div className="flex items-center gap-2">
                 <Badge variant="info" shape="pill" tone="outline">
                   {translate('Routed')}
                 </Badge>

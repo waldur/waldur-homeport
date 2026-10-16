@@ -172,12 +172,12 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
       }
     >
       {!compact && <h6 className="mb-3">{translate('Estimated impact')}</h6>}
-      <div className="d-flex gap-4 flex-wrap mb-3">
+      <div className="flex gap-4 flex-wrap mb-3">
         <div>
           <div className="text-quaternary small">
             {translate('Distinct customers')}
           </div>
-          <div className="fs-2 font-medium">
+          <div className="text-xl font-medium">
             {loading ? '…' : stats.customerCount}
           </div>
         </div>
@@ -185,14 +185,14 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
           <div className="text-quaternary small">
             {translate('Total affected resources')}
           </div>
-          <div className="fs-2 font-medium">
+          <div className="text-xl font-medium">
             {loading ? '…' : stats.totalResources}
           </div>
         </div>
       </div>
 
       {impactBreakdown.length > 0 && (
-        <div className="d-flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-2 mb-3">
           {impactBreakdown.map((item) => (
             <Badge
               key={item.level}
@@ -213,27 +213,11 @@ export const ImpactSummary: FC<ImpactSummaryProps> = ({
           </div>
           <ul className="list-unstyled mb-0">
             {stats.topCustomers.map((customer) => (
-              <li
-                key={customer.uuid}
-                className="d-flex align-items-center gap-2 mb-2"
-              >
-                <span
-                  className="symbol symbol-30px font-semibold"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 30,
-                    height: 30,
-                    borderRadius: '50%',
-                    backgroundColor: '#e4e6ef',
-                  }}
-                >
+              <li key={customer.uuid} className="flex items-center gap-2 mb-2">
+                <span className="symbol symbol-30px font-semibold inline-flex items-center justify-center size-[30px] rounded-full bg-secondary">
                   {getInitials(customer.name)}
                 </span>
-                <span className="flex-grow-1 text-truncate">
-                  {customer.name}
-                </span>
+                <span className="grow truncate">{customer.name}</span>
                 <span className="text-quaternary small">
                   {translate('{count} resources', {
                     count: customer.resourceCount,

@@ -55,8 +55,8 @@ export const CarouselLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
     <div className="carousel-layout">
       <div className="container-fluid py-6">
         {/* Page title */}
-        <div className="d-flex justify-content-between align-items-center mb-6">
-          <h1 className="mb-0 fs-1x">{title}</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="mb-0 text-2xl">{title}</h1>
           <Link
             state="public.offerings"
             buttonVariant="tertiary"

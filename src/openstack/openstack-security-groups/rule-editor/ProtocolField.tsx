@@ -51,7 +51,7 @@ export const ProtocolField: FC<{ name: string }> = ({ name }) => {
 
   return (
     <BootstrapForm.Group as="td">
-      <div className="d-flex gap-1">
+      <div className="flex gap-1">
         <BootstrapForm.Select
           value={mode}
           onChange={handleModeChange}
@@ -78,7 +78,7 @@ export const ProtocolField: FC<{ name: string }> = ({ name }) => {
           />
         )}
       </div>
-      {invalid && <div className="invalid-feedback d-block">{meta.error}</div>}
+      {invalid && <div className="invalid-feedback block">{meta.error}</div>}
     </BootstrapForm.Group>
   );
 };

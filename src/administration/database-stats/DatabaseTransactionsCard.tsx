@@ -57,7 +57,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
           </tr>
           <tr>
             <td className="text-quaternary">
-              <div className="d-flex align-items-center">
+              <div className="flex items-center">
                 {translate('Deadlocks')}
                 {hasDeadlocks && (
                   <WarningCircleIcon
@@ -75,7 +75,7 @@ export const DatabaseTransactionsCard: FC<DatabaseTransactionsCardProps> = ({
         </tbody>
       </Table>
       {hasDeadlocks && (
-        <small className="text-danger mt-3 d-block">
+        <small className="text-danger mt-3 block">
           {translate(
             'Deadlocks detected! Review concurrent transaction patterns.',
           )}

@@ -76,16 +76,16 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   };
 
   return (
-    <div className="header align-items-stretch">
-      <div className="container-fluid d-flex align-items-stretch justify-content-between">
-        <div className="d-flex align-items-center d-lg-none ms-n2 me-2">
+    <div className="header items-stretch">
+      <div className="container-fluid flex items-stretch justify-between">
+        <div className="flex items-center lg:hidden ms-n2 me-2">
           {Boolean(user) && <AsideMobileToggle />}
 
           {!errorImg && (
-            <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+            <div className="flex items-center grow lg:grow-0">
               <Link
                 state={user ? 'profile.details' : null}
-                className="d-lg-none text-primary"
+                className="lg:hidden text-primary"
               >
                 {imageUrl ? (
                   <img
@@ -100,11 +100,11 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           )}
         </div>
         <div
-          className="d-flex align-items-stretch justify-content-between flex-grow-1"
+          className="flex items-stretch justify-between grow"
           style={{ minWidth: 0 }}
         >
           <div
-            className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1"
+            className="flex items-stretch justify-between grow shrink"
             // flex-basis: 0 makes this breadcrumb area's width the grown share
             // of free space — independent of its (long) content width — and
             // overflow: hidden clips the trail. Together these guarantee it can
@@ -116,7 +116,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             {Boolean(user) && showGoBack && (
               <BaseButton
                 variant="text-primary"
-                className="me-3 py-0 align-self-center fs-5"
+                className="me-3 py-0 self-center text-base"
                 onClick={onGoBack}
                 tooltip={translate('Go back')}
                 style={{ width: '108px', height: '36px' }}
@@ -126,7 +126,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             )}
             {hasBreadcrumbs && <BreadcrumbMain />}
           </div>
-          <div className="d-flex align-items-stretch flex-shrink-0 ms-3">
+          <div className="flex items-stretch shrink-0 ms-3">
             {Boolean(user) && (
               <SearchToggle compact={Boolean(hasBreadcrumbs || isSmallScr)} />
             )}
@@ -134,9 +134,9 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             {Boolean(user) && <ConfirmationDrawerToggle />}
             {isAssistantEnabled(user) && <LLMChatDrawerToggle />}
             {Boolean(user) && isSmallScr && (
-              <span className="h-40px border-r-[1px] border-r-secondary align-self-center ms-1" />
+              <span className="h-40px border-r-[1px] border-r-secondary self-center ms-1" />
             )}
-            <div className="d-flex align-items-center ms-3">
+            <div className="flex items-center ms-3">
               <UserDropdownMenu />
             </div>
           </div>

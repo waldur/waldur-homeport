@@ -53,15 +53,15 @@ export const ProposalStepCell: FC<{
   }
 
   return (
-    <div className="d-flex flex-column">
+    <div className="flex flex-col">
       <span>{stepLabel(step)}</span>
       {decisionHeld ? (
         // Nobody owes a move on the proposal: it waits for the round.
-        <span className="text-quaternary fs-7">
+        <span className="text-quaternary text-xs">
           {translate('Held until the round publishes results')}
         </span>
       ) : role ? (
-        <span className="text-quaternary fs-7">
+        <span className="text-quaternary text-xs">
           {responsibleRoleLabel(role)}
         </span>
       ) : null}

@@ -15,15 +15,15 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
       <div className="attachment-item__thumb">
         <FileCsvIcon size={20} weight="bold" className="text-quaternary" />
       </div>
-      <div className="attachment-item__body fs-6">
+      <div className="attachment-item__body text-sm">
         <button
           type="button"
-          className="font-medium text-secondary lh-1 text-anchor"
+          className="font-medium text-secondary leading-none text-anchor"
           onClick={props.onClick}
         >
           {props.name}.csv
         </button>
-        <p className="fs-6 text-quaternary mb-0">{props.size}</p>
+        <p className="text-sm text-quaternary mb-0">{props.size}</p>
       </div>
       <div>
         <BaseButton

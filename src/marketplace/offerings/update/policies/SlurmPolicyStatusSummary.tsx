@@ -89,7 +89,7 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
   return (
     <Card className="mb-4">
       <Card.Body className="py-3">
-        <div className="d-flex flex-wrap gap-4 align-items-center">
+        <div className="flex flex-wrap gap-4 items-center">
           <div>
             <span className="text-quaternary small">
               {translate('Last evaluation')}

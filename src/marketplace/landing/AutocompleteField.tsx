@@ -36,7 +36,7 @@ export const Option = (props) => {
   const img = renderIcon(props.data.thumbnail, { width: 19 });
   return (
     <SelectOption {...props}>
-      <div className="d-flex align-items-center">
+      <div className="flex items-center">
         {img}
         <span className="ellipsis-lines ellipsis-lines-2">
           {`${props.data.category_title} / ${props.data.name}`}

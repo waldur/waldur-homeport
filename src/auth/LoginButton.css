@@ -26,7 +26,7 @@
 }
 
 .login-button-text {
-  font-size: 14px;
+  font-size: var(--text-sm);
   display: flex;
   align-items: center;
   text-align: center;

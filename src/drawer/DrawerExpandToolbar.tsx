@@ -17,7 +17,7 @@ export const DrawerExpandToolbar: FC<{ close: () => void }> = ({ close }) => {
 
   return (
     <>
-      <span className="d-none d-lg-inline-flex">
+      <span className="hidden lg:inline-flex">
         <BaseButton
           iconNode={
             expanded ? (

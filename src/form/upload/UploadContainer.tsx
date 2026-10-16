@@ -85,7 +85,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
                 },
                 formatJsx,
               )}
-              <div className="fs-7 mt-1">{message}</div>
+              <div className="text-xs mt-1">{message}</div>
             </div>
           </div>
         </div>
