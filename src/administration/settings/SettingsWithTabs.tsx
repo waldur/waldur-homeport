@@ -132,7 +132,7 @@ export const SettingsWithTabs: FC<SettingsWithTabsProps> = ({
                   {tab.title}
                   {query && (
                     <Badge
-                      variant={hasMatches ? 'primary' : 'neutral'}
+                      variant="neutral"
                       shape="pill"
                       tone="light"
                       className="ms-2"

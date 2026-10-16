@@ -129,7 +129,7 @@ export const TabbedSection: FC<TabbedSectionProps> & { Tab: FC<TabProps> } = ({
                   {tab.title}
                   {enableSearch && hasQuery && (
                     <Badge
-                      variant="secondary"
+                      variant="neutral"
                       size="sm"
                       tone="light"
                       className="ms-2"

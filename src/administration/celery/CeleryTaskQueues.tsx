@@ -56,19 +56,16 @@ export const CeleryTaskQueues = ({
       key: 'active',
       title: translate('Active'),
       count: activeTasks.length,
-      variant: 'success' as const,
     },
     {
       key: 'reserved',
       title: translate('Reserved'),
       count: reservedTasks.length,
-      variant: 'warning' as const,
     },
     {
       key: 'scheduled',
       title: translate('Scheduled'),
       count: scheduledTasks.length,
-      variant: 'info' as const,
     },
   ];
 
@@ -87,12 +84,7 @@ export const CeleryTaskQueues = ({
           {tabs.map((tab) => (
             <TabsTrigger key={tab.key} value={tab.key} className="py-4">
               {tab.title}
-              <Badge
-                variant={tab.variant}
-                size="sm"
-                tone="light"
-                className="ms-2"
-              >
+              <Badge variant="neutral" size="sm" tone="light" className="ms-2">
                 {tab.count}
               </Badge>
             </TabsTrigger>

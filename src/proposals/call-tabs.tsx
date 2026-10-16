@@ -66,7 +66,7 @@ const TabTitle: FC<{ label: string; count?: number }> = ({ label, count }) => (
   <span className="d-flex align-items-center gap-2">
     {label}
     {typeof count === 'number' && (
-      <Badge variant="secondary" size="sm" shape="pill" tone="outline">
+      <Badge variant="neutral" size="sm" shape="pill" tone="outline">
         {count}
       </Badge>
     )}
