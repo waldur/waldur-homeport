@@ -103,8 +103,6 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
 
   const reviewsCount = tableProps.pagination.resultCount ?? 0;
   const questionsCount = checklistData?.questions?.length ?? 0;
-  const hideReviews =
-    !tableProps.loading && !tableProps.error && reviewsCount === 0;
 
   const columns = [
     {
@@ -131,6 +129,21 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     },
   ];
 
+  const reviewsTable = (
+    <Table
+      {...tableProps}
+      columns={columns}
+      minHeight="auto"
+      hideRefresh
+      verboseName={translate('Reviews')}
+      equalColWidth
+      hasActionBar={false}
+      rowActions={ProposalReviewsRowActions}
+      showPageSizeSelector
+      initialPageSize={5}
+    />
+  );
+
   return (
     <ExpandableContainer>
       {row.project_summary && (
@@ -141,7 +154,9 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
         />
       )}
 
-      {!(hideReviews && !checklistData) && (
+      {reviewsCount === 0 && !checklistData ? (
+        reviewsTable
+      ) : (
         <EmbeddedTabs
           defaultValue="reviews"
           listClassName="mb-4"
@@ -150,21 +165,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
               key: 'reviews',
               title: translate('Reviews'),
               count: reviewsCount,
-              hidden: hideReviews,
-              content: (
-                <Table
-                  {...tableProps}
-                  columns={columns}
-                  minHeight="auto"
-                  hideRefresh
-                  verboseName={translate('Reviews')}
-                  equalColWidth
-                  hasActionBar={false}
-                  rowActions={ProposalReviewsRowActions}
-                  showPageSizeSelector
-                  initialPageSize={5}
-                />
-              ),
+              content: reviewsTable,
             },
             {
               key: 'compliance',
