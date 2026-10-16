@@ -22,6 +22,7 @@ interface EmbeddedTabsProps {
   framed?: boolean;
   className?: string;
   listClassName?: string;
+  panelsClassName?: string;
 }
 
 /**
@@ -39,6 +40,7 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
   framed,
   className,
   listClassName,
+  panelsClassName,
 }) => {
   // Re-key only when `tabs` changes. Callers that build `tabs` inline get a
   // new array each render anyway; a stable (memoised) `tabs` skips the work.
@@ -55,6 +57,14 @@ export const EmbeddedTabs: FC<EmbeddedTabsProps> = ({
       onValueChange={onValueChange}
       className={className}
       items={items}
+      panelsClassName={cn(
+        framed &&
+          !header &&
+          // The strip draws the top of the frame; the panel closes it, so a
+          // table inside drops its own border and corners instead of doubling them.
+          'overflow-hidden rounded-b-[0.475rem] border-[1px] border-t-[0px] border-[color:var(--border-secondary)] [&>*>.card-table]:rounded-none [&>*>.card-table]:border-0!',
+        panelsClassName,
+      )}
       listProps={{
         scrollable: true,
         // These lists keep their own bottom border, which already holds the

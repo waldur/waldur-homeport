@@ -90,4 +90,28 @@ describe('EmbeddedTabs', () => {
 
     expect(screen.getByRole('heading', { name: 'Team' })).toBeInTheDocument();
   });
+
+  it('closes the frame below the strip only when framed without a header', () => {
+    const { rerender } = render(
+      <EmbeddedTabs tabs={tabs} defaultValue="one" framed />,
+    );
+    // The frame sits on the wrapper around the panels, which has no role.
+    // eslint-disable-next-line testing-library/no-node-access
+    const panels = () => screen.getByRole('tabpanel').parentElement;
+    expect(panels()).toHaveClass(
+      'border-[1px]',
+      'border-t-[0px]',
+      '[&>*>.card-table]:rounded-none',
+    );
+
+    rerender(
+      <EmbeddedTabs
+        tabs={tabs}
+        defaultValue="one"
+        framed
+        header={<h3>Team</h3>}
+      />,
+    );
+    expect(panels()).not.toHaveClass('border-[1px]');
+  });
 });
