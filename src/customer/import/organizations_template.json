@@ -14,7 +14,8 @@
     "bank_account",
     "vat_code",
     "default_tax_percent",
-    "notification_emails"
+    "notification_emails",
+    "invoice_emails"
   ],
   "data": []
 }

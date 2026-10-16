@@ -31,6 +31,7 @@ const allCustomerOptionalFields = [
   { title: translate('VAT code'), key: 'vat_code' },
   { title: translate('Default tax percent'), key: 'default_tax_percent' },
   { title: translate('Notification emails'), key: 'notification_emails' },
+  { title: translate('Invoice emails'), key: 'invoice_emails' },
 ];
 
 export const getCustomerOptionalFields = () =>

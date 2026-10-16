@@ -26482,6 +26482,12 @@
       "feature_area": "details"
     }
   },
+  "Invoice emails": {
+    "context": {
+      "primary_ui_type": "title",
+      "feature_area": "details"
+    }
+  },
   "Invoice events": {
     "context": {
       "primary_ui_type": "title"
@@ -44319,6 +44325,11 @@
   "Receive assignments": {
     "context": {
       "feature_area": "invitations"
+    }
+  },
+  "Receive invoices instead of the owners when set": {
+    "context": {
+      "feature_area": "details"
     }
   },
   "Recent": {
